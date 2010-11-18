@@ -142,19 +142,14 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
             		
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-            	            associateNodeWithAstElement(currentNode, current);
+            	            current = createModelElement(grammarAccess.getModelRule());
             	        }
-            	        try {
-            	       		set(
-            	       			current, 
-            	       			"name",
-            	        		lv_name_0_0, 
-            	        		"ID", 
-            	        		lastConsumedNode);
-            	        } catch (ValueConverterException vce) {
-            				handleValueConverterException(vce);
-            	        }
+                   		set(
+                   			current, 
+                   			"name",
+                    		lv_name_0_0, 
+                    		"ID", 
+                    		lastConsumedNode);
             	    
 
             }
@@ -162,7 +157,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:110:2: ( (lv_enabled_1_0= ruleUnassignedAction ) )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:105:2: ( (lv_enabled_1_0= ruleUnassignedAction ) )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -171,10 +166,10 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:111:1: (lv_enabled_1_0= ruleUnassignedAction )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:106:1: (lv_enabled_1_0= ruleUnassignedAction )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:111:1: (lv_enabled_1_0= ruleUnassignedAction )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:112:3: lv_enabled_1_0= ruleUnassignedAction
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:106:1: (lv_enabled_1_0= ruleUnassignedAction )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:107:3: lv_enabled_1_0= ruleUnassignedAction
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getEnabledUnassignedActionParserRuleCall_1_0(), currentNode); 
@@ -186,20 +181,15 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	            associateNodeWithAstElement(currentNode.getParent(), current);
+                    	            current = createModelElementForParent(grammarAccess.getModelRule());
                     	        }
-                    	        try {
-                    	       		set(
-                    	       			current, 
-                    	       			"enabled",
-                    	        		lv_enabled_1_0, 
-                    	        		"UnassignedAction", 
-                    	        		currentNode);
-                    	        } catch (ValueConverterException vce) {
-                    				handleValueConverterException(vce);
-                    	        }
-                    	        currentNode = currentNode.getParent();
+                           		set(
+                           			current, 
+                           			"enabled",
+                            		lv_enabled_1_0, 
+                            		"UnassignedAction", 
+                            		currentNode);
+                    	        afterParserOrEnumRuleCall();
                     	    
 
                     }
@@ -210,7 +200,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:134:3: ( (otherlv_2= RULE_ID ) )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:124:3: ( (otherlv_2= RULE_ID ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -219,15 +209,14 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:135:1: (otherlv_2= RULE_ID )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:125:1: (otherlv_2= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:135:1: (otherlv_2= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:136:3: otherlv_2= RULE_ID
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:125:1: (otherlv_2= RULE_ID )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:126:3: otherlv_2= RULE_ID
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	            associateNodeWithAstElement(currentNode, current);
+                    	            current = createModelElement(grammarAccess.getModelRule());
                     	        }
                             
                     otherlv_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleModel174); 
@@ -266,7 +255,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleUnassignedAction"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:156:1: entryRuleUnassignedAction returns [EObject current=null] : iv_ruleUnassignedAction= ruleUnassignedAction EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:145:1: entryRuleUnassignedAction returns [EObject current=null] : iv_ruleUnassignedAction= ruleUnassignedAction EOF ;
     public final EObject entryRuleUnassignedAction() throws RecognitionException {
         EObject current = null;
 
@@ -274,8 +263,8 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:157:2: (iv_ruleUnassignedAction= ruleUnassignedAction EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:158:2: iv_ruleUnassignedAction= ruleUnassignedAction EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:146:2: (iv_ruleUnassignedAction= ruleUnassignedAction EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:147:2: iv_ruleUnassignedAction= ruleUnassignedAction EOF
             {
              currentNode = createCompositeNode(grammarAccess.getUnassignedActionRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleUnassignedAction_in_entryRuleUnassignedAction211);
@@ -302,7 +291,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleUnassignedAction"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:165:1: ruleUnassignedAction returns [EObject current=null] : ( () otherlv_1= 'enabled' ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:154:1: ruleUnassignedAction returns [EObject current=null] : ( () otherlv_1= 'enabled' ) ;
     public final EObject ruleUnassignedAction() throws RecognitionException {
         EObject current = null;
 
@@ -311,24 +300,19 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:170:6: ( ( () otherlv_1= 'enabled' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:171:1: ( () otherlv_1= 'enabled' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:159:6: ( ( () otherlv_1= 'enabled' ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:160:1: ( () otherlv_1= 'enabled' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:171:1: ( () otherlv_1= 'enabled' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:171:2: () otherlv_1= 'enabled'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:160:1: ( () otherlv_1= 'enabled' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:160:2: () otherlv_1= 'enabled'
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:171:2: ()
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:172:5: 
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:160:2: ()
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:161:5: 
             {
-             
-                    temp=factory.create(grammarAccess.getUnassignedActionAccess().getUnassignedActionAction_0().getType().getClassifier());
-                    current = temp; 
-                    temp = null;
-                    CompositeNode newNode = createCompositeNode(grammarAccess.getUnassignedActionAccess().getUnassignedActionAction_0(), currentNode.getParent());
-                newNode.getChildren().add(currentNode);
-                moveLookaheadInfo(currentNode, newNode);
-                currentNode = newNode; 
-                    associateNodeWithAstElement(currentNode, current); 
+
+                    current = forceCreateModelElement(
+                        grammarAccess.getUnassignedActionAccess().getUnassignedActionAction_0(),
+                        current);
                 
 
             }

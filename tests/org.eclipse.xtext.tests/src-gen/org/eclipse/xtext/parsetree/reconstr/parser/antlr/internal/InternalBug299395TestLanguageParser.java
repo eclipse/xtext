@@ -145,20 +145,15 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:86:2: ()
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:87:5: 
             {
-             
-                    temp=factory.create(grammarAccess.getModelAccess().getModelAction_0().getType().getClassifier());
-                    current = temp; 
-                    temp = null;
-                    CompositeNode newNode = createCompositeNode(grammarAccess.getModelAccess().getModelAction_0(), currentNode.getParent());
-                newNode.getChildren().add(currentNode);
-                moveLookaheadInfo(currentNode, newNode);
-                currentNode = newNode; 
-                    associateNodeWithAstElement(currentNode, current); 
+
+                    current = forceCreateModelElement(
+                        grammarAccess.getModelAccess().getModelAction_0(),
+                        current);
                 
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:97:2: (otherlv_1= '{' ( (lv_strings_2_0= RULE_STRING ) )? otherlv_3= '}' )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:92:2: (otherlv_1= '{' ( (lv_strings_2_0= RULE_STRING ) )? otherlv_3= '}' )*
             loop2:
             do {
                 int alt2=2;
@@ -171,13 +166,13 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:97:4: otherlv_1= '{' ( (lv_strings_2_0= RULE_STRING ) )? otherlv_3= '}'
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:92:4: otherlv_1= '{' ( (lv_strings_2_0= RULE_STRING ) )? otherlv_3= '}'
             	    {
             	    otherlv_1=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleModel132); 
 
             	        	createLeafNode(otherlv_1, grammarAccess.getModelAccess().getLeftCurlyBracketKeyword_1_0(), null);
             	        
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:101:1: ( (lv_strings_2_0= RULE_STRING ) )?
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:96:1: ( (lv_strings_2_0= RULE_STRING ) )?
             	    int alt1=2;
             	    int LA1_0 = input.LA(1);
 
@@ -186,10 +181,10 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    switch (alt1) {
             	        case 1 :
-            	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:102:1: (lv_strings_2_0= RULE_STRING )
+            	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:97:1: (lv_strings_2_0= RULE_STRING )
             	            {
-            	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:102:1: (lv_strings_2_0= RULE_STRING )
-            	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:103:3: lv_strings_2_0= RULE_STRING
+            	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:97:1: (lv_strings_2_0= RULE_STRING )
+            	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:98:3: lv_strings_2_0= RULE_STRING
             	            {
             	            lv_strings_2_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleModel149); 
 
@@ -197,19 +192,14 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
             	            		
 
             	            	        if (current==null) {
-            	            	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-            	            	            associateNodeWithAstElement(currentNode, current);
+            	            	            current = createModelElement(grammarAccess.getModelRule());
             	            	        }
-            	            	        try {
-            	            	       		add(
-            	            	       			current, 
-            	            	       			"strings",
-            	            	        		lv_strings_2_0, 
-            	            	        		"STRING", 
-            	            	        		lastConsumedNode);
-            	            	        } catch (ValueConverterException vce) {
-            	            				handleValueConverterException(vce);
-            	            	        }
+            	                   		add(
+            	                   			current, 
+            	                   			"strings",
+            	                    		lv_strings_2_0, 
+            	                    		"STRING", 
+            	                    		lastConsumedNode);
             	            	    
 
             	            }
@@ -233,7 +223,7 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:129:3: (otherlv_4= '[' ( ( (lv_keys_5_0= RULE_STRING ) ) ( (lv_values_6_0= RULE_STRING ) ) )* otherlv_7= ']' )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:119:3: (otherlv_4= '[' ( ( (lv_keys_5_0= RULE_STRING ) ) ( (lv_values_6_0= RULE_STRING ) ) )* otherlv_7= ']' )*
             loop4:
             do {
                 int alt4=2;
@@ -246,13 +236,13 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:129:5: otherlv_4= '[' ( ( (lv_keys_5_0= RULE_STRING ) ) ( (lv_values_6_0= RULE_STRING ) ) )* otherlv_7= ']'
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:119:5: otherlv_4= '[' ( ( (lv_keys_5_0= RULE_STRING ) ) ( (lv_values_6_0= RULE_STRING ) ) )* otherlv_7= ']'
             	    {
             	    otherlv_4=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleModel182); 
 
             	        	createLeafNode(otherlv_4, grammarAccess.getModelAccess().getLeftSquareBracketKeyword_2_0(), null);
             	        
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:133:1: ( ( (lv_keys_5_0= RULE_STRING ) ) ( (lv_values_6_0= RULE_STRING ) ) )*
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:123:1: ( ( (lv_keys_5_0= RULE_STRING ) ) ( (lv_values_6_0= RULE_STRING ) ) )*
             	    loop3:
             	    do {
             	        int alt3=2;
@@ -265,13 +255,13 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
 
             	        switch (alt3) {
             	    	case 1 :
-            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:133:2: ( (lv_keys_5_0= RULE_STRING ) ) ( (lv_values_6_0= RULE_STRING ) )
+            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:123:2: ( (lv_keys_5_0= RULE_STRING ) ) ( (lv_values_6_0= RULE_STRING ) )
             	    	    {
-            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:133:2: ( (lv_keys_5_0= RULE_STRING ) )
-            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:134:1: (lv_keys_5_0= RULE_STRING )
+            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:123:2: ( (lv_keys_5_0= RULE_STRING ) )
+            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:124:1: (lv_keys_5_0= RULE_STRING )
             	    	    {
-            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:134:1: (lv_keys_5_0= RULE_STRING )
-            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:135:3: lv_keys_5_0= RULE_STRING
+            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:124:1: (lv_keys_5_0= RULE_STRING )
+            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:125:3: lv_keys_5_0= RULE_STRING
             	    	    {
             	    	    lv_keys_5_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleModel200); 
 
@@ -279,19 +269,14 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
             	    	    		
 
             	    	    	        if (current==null) {
-            	    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-            	    	    	            associateNodeWithAstElement(currentNode, current);
+            	    	    	            current = createModelElement(grammarAccess.getModelRule());
             	    	    	        }
-            	    	    	        try {
-            	    	    	       		add(
-            	    	    	       			current, 
-            	    	    	       			"keys",
-            	    	    	        		lv_keys_5_0, 
-            	    	    	        		"STRING", 
-            	    	    	        		lastConsumedNode);
-            	    	    	        } catch (ValueConverterException vce) {
-            	    	    				handleValueConverterException(vce);
-            	    	    	        }
+            	    	           		add(
+            	    	           			current, 
+            	    	           			"keys",
+            	    	            		lv_keys_5_0, 
+            	    	            		"STRING", 
+            	    	            		lastConsumedNode);
             	    	    	    
 
             	    	    }
@@ -299,11 +284,11 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
 
             	    	    }
 
-            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:157:2: ( (lv_values_6_0= RULE_STRING ) )
-            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:158:1: (lv_values_6_0= RULE_STRING )
+            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:142:2: ( (lv_values_6_0= RULE_STRING ) )
+            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:143:1: (lv_values_6_0= RULE_STRING )
             	    	    {
-            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:158:1: (lv_values_6_0= RULE_STRING )
-            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:159:3: lv_values_6_0= RULE_STRING
+            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:143:1: (lv_values_6_0= RULE_STRING )
+            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:144:3: lv_values_6_0= RULE_STRING
             	    	    {
             	    	    lv_values_6_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleModel222); 
 
@@ -311,19 +296,14 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
             	    	    		
 
             	    	    	        if (current==null) {
-            	    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-            	    	    	            associateNodeWithAstElement(currentNode, current);
+            	    	    	            current = createModelElement(grammarAccess.getModelRule());
             	    	    	        }
-            	    	    	        try {
-            	    	    	       		add(
-            	    	    	       			current, 
-            	    	    	       			"values",
-            	    	    	        		lv_values_6_0, 
-            	    	    	        		"STRING", 
-            	    	    	        		lastConsumedNode);
-            	    	    	        } catch (ValueConverterException vce) {
-            	    	    				handleValueConverterException(vce);
-            	    	    	        }
+            	    	           		add(
+            	    	           			current, 
+            	    	           			"values",
+            	    	            		lv_values_6_0, 
+            	    	            		"STRING", 
+            	    	            		lastConsumedNode);
             	    	    	    
 
             	    	    }
@@ -353,7 +333,7 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:185:3: (otherlv_8= 'subModel' ( (lv_subModel_9_0= ruleSubModel ) ) )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:165:3: (otherlv_8= 'subModel' ( (lv_subModel_9_0= ruleSubModel ) ) )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -362,17 +342,17 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt5) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:185:5: otherlv_8= 'subModel' ( (lv_subModel_9_0= ruleSubModel ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:165:5: otherlv_8= 'subModel' ( (lv_subModel_9_0= ruleSubModel ) )
                     {
                     otherlv_8=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleModel256); 
 
                         	createLeafNode(otherlv_8, grammarAccess.getModelAccess().getSubModelKeyword_3_0(), null);
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:189:1: ( (lv_subModel_9_0= ruleSubModel ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:190:1: (lv_subModel_9_0= ruleSubModel )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:169:1: ( (lv_subModel_9_0= ruleSubModel ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:170:1: (lv_subModel_9_0= ruleSubModel )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:190:1: (lv_subModel_9_0= ruleSubModel )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:191:3: lv_subModel_9_0= ruleSubModel
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:170:1: (lv_subModel_9_0= ruleSubModel )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:171:3: lv_subModel_9_0= ruleSubModel
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getSubModelSubModelParserRuleCall_3_1_0(), currentNode); 
@@ -384,20 +364,15 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	            associateNodeWithAstElement(currentNode.getParent(), current);
+                    	            current = createModelElementForParent(grammarAccess.getModelRule());
                     	        }
-                    	        try {
-                    	       		set(
-                    	       			current, 
-                    	       			"subModel",
-                    	        		lv_subModel_9_0, 
-                    	        		"SubModel", 
-                    	        		currentNode);
-                    	        } catch (ValueConverterException vce) {
-                    				handleValueConverterException(vce);
-                    	        }
-                    	        currentNode = currentNode.getParent();
+                           		set(
+                           			current, 
+                           			"subModel",
+                            		lv_subModel_9_0, 
+                            		"SubModel", 
+                            		currentNode);
+                    	        afterParserOrEnumRuleCall();
                     	    
 
                     }
@@ -434,7 +409,7 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleSubModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:221:1: entryRuleSubModel returns [EObject current=null] : iv_ruleSubModel= ruleSubModel EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:196:1: entryRuleSubModel returns [EObject current=null] : iv_ruleSubModel= ruleSubModel EOF ;
     public final EObject entryRuleSubModel() throws RecognitionException {
         EObject current = null;
 
@@ -442,8 +417,8 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:222:2: (iv_ruleSubModel= ruleSubModel EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:223:2: iv_ruleSubModel= ruleSubModel EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:197:2: (iv_ruleSubModel= ruleSubModel EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:198:2: iv_ruleSubModel= ruleSubModel EOF
             {
              currentNode = createCompositeNode(grammarAccess.getSubModelRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleSubModel_in_entryRuleSubModel315);
@@ -470,7 +445,7 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleSubModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:230:1: ruleSubModel returns [EObject current=null] : ( () (otherlv_1= '1' otherlv_2= '2' ( (lv_strings_3_0= RULE_STRING ) )? )* ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:205:1: ruleSubModel returns [EObject current=null] : ( () (otherlv_1= '1' otherlv_2= '2' ( (lv_strings_3_0= RULE_STRING ) )? )* ) ;
     public final EObject ruleSubModel() throws RecognitionException {
         EObject current = null;
 
@@ -481,29 +456,24 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:235:6: ( ( () (otherlv_1= '1' otherlv_2= '2' ( (lv_strings_3_0= RULE_STRING ) )? )* ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:236:1: ( () (otherlv_1= '1' otherlv_2= '2' ( (lv_strings_3_0= RULE_STRING ) )? )* )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:210:6: ( ( () (otherlv_1= '1' otherlv_2= '2' ( (lv_strings_3_0= RULE_STRING ) )? )* ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:211:1: ( () (otherlv_1= '1' otherlv_2= '2' ( (lv_strings_3_0= RULE_STRING ) )? )* )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:236:1: ( () (otherlv_1= '1' otherlv_2= '2' ( (lv_strings_3_0= RULE_STRING ) )? )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:236:2: () (otherlv_1= '1' otherlv_2= '2' ( (lv_strings_3_0= RULE_STRING ) )? )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:211:1: ( () (otherlv_1= '1' otherlv_2= '2' ( (lv_strings_3_0= RULE_STRING ) )? )* )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:211:2: () (otherlv_1= '1' otherlv_2= '2' ( (lv_strings_3_0= RULE_STRING ) )? )*
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:236:2: ()
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:237:5: 
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:211:2: ()
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:212:5: 
             {
-             
-                    temp=factory.create(grammarAccess.getSubModelAccess().getSubModelAction_0().getType().getClassifier());
-                    current = temp; 
-                    temp = null;
-                    CompositeNode newNode = createCompositeNode(grammarAccess.getSubModelAccess().getSubModelAction_0(), currentNode.getParent());
-                newNode.getChildren().add(currentNode);
-                moveLookaheadInfo(currentNode, newNode);
-                currentNode = newNode; 
-                    associateNodeWithAstElement(currentNode, current); 
+
+                    current = forceCreateModelElement(
+                        grammarAccess.getSubModelAccess().getSubModelAction_0(),
+                        current);
                 
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:247:2: (otherlv_1= '1' otherlv_2= '2' ( (lv_strings_3_0= RULE_STRING ) )? )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:217:2: (otherlv_1= '1' otherlv_2= '2' ( (lv_strings_3_0= RULE_STRING ) )? )*
             loop7:
             do {
                 int alt7=2;
@@ -516,7 +486,7 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:247:4: otherlv_1= '1' otherlv_2= '2' ( (lv_strings_3_0= RULE_STRING ) )?
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:217:4: otherlv_1= '1' otherlv_2= '2' ( (lv_strings_3_0= RULE_STRING ) )?
             	    {
             	    otherlv_1=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleSubModel372); 
 
@@ -526,7 +496,7 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
 
             	        	createLeafNode(otherlv_2, grammarAccess.getSubModelAccess().getDigitTwoKeyword_1_1(), null);
             	        
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:255:1: ( (lv_strings_3_0= RULE_STRING ) )?
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:225:1: ( (lv_strings_3_0= RULE_STRING ) )?
             	    int alt6=2;
             	    int LA6_0 = input.LA(1);
 
@@ -535,10 +505,10 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    switch (alt6) {
             	        case 1 :
-            	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:256:1: (lv_strings_3_0= RULE_STRING )
+            	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:226:1: (lv_strings_3_0= RULE_STRING )
             	            {
-            	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:256:1: (lv_strings_3_0= RULE_STRING )
-            	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:257:3: lv_strings_3_0= RULE_STRING
+            	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:226:1: (lv_strings_3_0= RULE_STRING )
+            	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:227:3: lv_strings_3_0= RULE_STRING
             	            {
             	            lv_strings_3_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleSubModel401); 
 
@@ -546,19 +516,14 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
             	            		
 
             	            	        if (current==null) {
-            	            	            current = factory.create(grammarAccess.getSubModelRule().getType().getClassifier());
-            	            	            associateNodeWithAstElement(currentNode, current);
+            	            	            current = createModelElement(grammarAccess.getSubModelRule());
             	            	        }
-            	            	        try {
-            	            	       		add(
-            	            	       			current, 
-            	            	       			"strings",
-            	            	        		lv_strings_3_0, 
-            	            	        		"STRING", 
-            	            	        		lastConsumedNode);
-            	            	        } catch (ValueConverterException vce) {
-            	            				handleValueConverterException(vce);
-            	            	        }
+            	                   		add(
+            	                   			current, 
+            	                   			"strings",
+            	                    		lv_strings_3_0, 
+            	                    		"STRING", 
+            	                    		lastConsumedNode);
             	            	    
 
             	            }

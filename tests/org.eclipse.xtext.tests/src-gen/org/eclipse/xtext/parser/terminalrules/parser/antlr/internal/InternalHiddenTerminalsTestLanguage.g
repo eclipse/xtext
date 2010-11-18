@@ -90,7 +90,8 @@ ruleModel returns [EObject current=null]
     this_WithoutHiddens_0=ruleWithoutHiddens
     { 
         $current = $this_WithoutHiddens_0.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 
     |
@@ -100,7 +101,8 @@ ruleModel returns [EObject current=null]
     this_WithHiddens_1=ruleWithHiddens
     { 
         $current = $this_WithHiddens_1.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 
     |
@@ -110,7 +112,8 @@ ruleModel returns [EObject current=null]
     this_OverridingHiddens_2=ruleOverridingHiddens
     { 
         $current = $this_OverridingHiddens_2.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 
     |
@@ -120,7 +123,8 @@ ruleModel returns [EObject current=null]
     this_InheritingHiddens_3=ruleInheritingHiddens
     { 
         $current = $this_InheritingHiddens_3.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 
     |
@@ -130,7 +134,8 @@ ruleModel returns [EObject current=null]
     this_DatatypeHiddens_4=ruleDatatypeHiddens
     { 
         $current = $this_DatatypeHiddens_4.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 )
 ;
@@ -167,19 +172,14 @@ ruleWithoutHiddens returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getWithoutHiddensRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getWithoutHiddensRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"spaces",
-	        		lv_spaces_1_0, 
-	        		"WS", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		add(
+       			$current, 
+       			"spaces",
+        		lv_spaces_1_0, 
+        		"WS", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -195,19 +195,14 @@ ruleWithoutHiddens returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getWithoutHiddensRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getWithoutHiddensRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"spaces",
-	        		lv_spaces_3_0, 
-	        		"WS", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		add(
+       			$current, 
+       			"spaces",
+        		lv_spaces_3_0, 
+        		"WS", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -220,15 +215,9 @@ ruleWithoutHiddens returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getWithoutHiddensRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getWithoutHiddensRule());
 	        }
-	        
-	        try {
-	       		set($current, "valid", true, ";", lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set($current, "valid", true, ";", lastConsumedNode);
 	    }
 
 )
@@ -279,15 +268,9 @@ ruleWithHiddens returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getWithHiddensRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getWithHiddensRule());
 	        }
-	        
-	        try {
-	       		set($current, "valid", true, ";", lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set($current, "valid", true, ";", lastConsumedNode);
 	    }
 
 )
@@ -343,20 +326,15 @@ ruleOverridingHiddens returns [EObject current=null]
 	    }
 		lv_called_3_0=ruleOverridingHiddensCall		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getOverridingHiddensRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getOverridingHiddensRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"called",
-	        		lv_called_3_0, 
-	        		"OverridingHiddensCall", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"called",
+        		lv_called_3_0, 
+        		"OverridingHiddensCall", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -373,15 +351,9 @@ ruleOverridingHiddens returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getOverridingHiddensRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getOverridingHiddensRule());
 	        }
-	        
-	        try {
-	       		set($current, "valid", true, ";", lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set($current, "valid", true, ";", lastConsumedNode);
 	    }
 
 )
@@ -430,19 +402,14 @@ ruleOverridingHiddensCall returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getOverridingHiddensCallRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getOverridingHiddensCallRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"spaces",
-	        		lv_spaces_1_0, 
-	        		"WS", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		add(
+       			$current, 
+       			"spaces",
+        		lv_spaces_1_0, 
+        		"WS", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -455,15 +422,9 @@ ruleOverridingHiddensCall returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getOverridingHiddensCallRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getOverridingHiddensCallRule());
 	        }
-	        
-	        try {
-	       		set($current, "valid", true, ";", lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set($current, "valid", true, ";", lastConsumedNode);
 	    }
 
 )
@@ -519,20 +480,15 @@ ruleInheritingHiddens returns [EObject current=null]
 	    }
 		lv_called_3_0=ruleInheritingHiddensCall		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getInheritingHiddensRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getInheritingHiddensRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"called",
-	        		lv_called_3_0, 
-	        		"InheritingHiddensCall", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"called",
+        		lv_called_3_0, 
+        		"InheritingHiddensCall", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -544,20 +500,15 @@ ruleInheritingHiddens returns [EObject current=null]
 	    }
 		lv_hidingCalled_4_0=ruleHidingHiddens		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getInheritingHiddensRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getInheritingHiddensRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"hidingCalled",
-	        		lv_hidingCalled_4_0, 
-	        		"HidingHiddens", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"hidingCalled",
+        		lv_hidingCalled_4_0, 
+        		"HidingHiddens", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -574,15 +525,9 @@ ruleInheritingHiddens returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getInheritingHiddensRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getInheritingHiddensRule());
 	        }
-	        
-	        try {
-	       		set($current, "valid", true, ";", lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set($current, "valid", true, ";", lastConsumedNode);
 	    }
 
 )
@@ -623,20 +568,15 @@ ruleDatatypeHiddens returns [EObject current=null]
 	    }
 		lv_valid_1_0=ruleDatatypeRule		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getDatatypeHiddensRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getDatatypeHiddensRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"valid",
-	        		true, 
-	        		"DatatypeRule", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"valid",
+        		true, 
+        		"DatatypeRule", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -727,19 +667,14 @@ ruleHidingHiddens returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getHidingHiddensRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getHidingHiddensRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"space",
-	        		lv_space_1_0, 
-	        		"WS", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"space",
+        		lv_space_1_0, 
+        		"WS", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -750,20 +685,15 @@ ruleHidingHiddens returns [EObject current=null]
 	    }
 		lv_called_2_0=ruleInheritingHiddensCall		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getHidingHiddensRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getHidingHiddensRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"called",
-	        		lv_called_2_0, 
-	        		"InheritingHiddensCall", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"called",
+        		lv_called_2_0, 
+        		"InheritingHiddensCall", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -806,15 +736,9 @@ ruleInheritingHiddensCall returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getInheritingHiddensCallRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getInheritingHiddensCallRule());
 	        }
-	        
-	        try {
-	       		set($current, "valid", true, ";", lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set($current, "valid", true, ";", lastConsumedNode);
 	    }
 
 )

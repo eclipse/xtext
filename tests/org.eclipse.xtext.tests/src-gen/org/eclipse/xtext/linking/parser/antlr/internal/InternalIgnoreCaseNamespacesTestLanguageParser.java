@@ -159,20 +159,15 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
+            	    	            current = createModelElementForParent(grammarAccess.getModelRule());
             	    	        }
-            	    	        try {
-            	    	       		add(
-            	    	       			current, 
-            	    	       			"imports",
-            	    	        		lv_imports_0_0, 
-            	    	        		"Import", 
-            	    	        		currentNode);
-            	    	        } catch (ValueConverterException vce) {
-            	    				handleValueConverterException(vce);
-            	    	        }
-            	    	        currentNode = currentNode.getParent();
+            	           		add(
+            	           			current, 
+            	           			"imports",
+            	            		lv_imports_0_0, 
+            	            		"Import", 
+            	            		currentNode);
+            	    	        afterParserOrEnumRuleCall();
             	    	    
 
             	    }
@@ -186,7 +181,7 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:110:3: ( (lv_elements_1_0= ruleElement ) )+
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:105:3: ( (lv_elements_1_0= ruleElement ) )+
             int cnt2=0;
             loop2:
             do {
@@ -200,10 +195,10 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:111:1: (lv_elements_1_0= ruleElement )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:106:1: (lv_elements_1_0= ruleElement )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:111:1: (lv_elements_1_0= ruleElement )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:112:3: lv_elements_1_0= ruleElement
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:106:1: (lv_elements_1_0= ruleElement )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:107:3: lv_elements_1_0= ruleElement
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_1_0(), currentNode); 
@@ -215,20 +210,15 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
+            	    	            current = createModelElementForParent(grammarAccess.getModelRule());
             	    	        }
-            	    	        try {
-            	    	       		add(
-            	    	       			current, 
-            	    	       			"elements",
-            	    	        		lv_elements_1_0, 
-            	    	        		"Element", 
-            	    	        		currentNode);
-            	    	        } catch (ValueConverterException vce) {
-            	    				handleValueConverterException(vce);
-            	    	        }
-            	    	        currentNode = currentNode.getParent();
+            	           		add(
+            	           			current, 
+            	           			"elements",
+            	            		lv_elements_1_0, 
+            	            		"Element", 
+            	            		currentNode);
+            	    	        afterParserOrEnumRuleCall();
             	    	    
 
             	    }
@@ -269,7 +259,7 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleImport"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:142:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:132:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
     public final EObject entryRuleImport() throws RecognitionException {
         EObject current = null;
 
@@ -277,8 +267,8 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:143:2: (iv_ruleImport= ruleImport EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:144:2: iv_ruleImport= ruleImport EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:133:2: (iv_ruleImport= ruleImport EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:134:2: iv_ruleImport= ruleImport EOF
             {
              currentNode = createCompositeNode(grammarAccess.getImportRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleImport_in_entryRuleImport190);
@@ -305,7 +295,7 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleImport"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:151:1: ruleImport returns [EObject current=null] : ( (lv_importedNamespace_0_0= RULE_STRING ) ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:141:1: ruleImport returns [EObject current=null] : ( (lv_importedNamespace_0_0= RULE_STRING ) ) ;
     public final EObject ruleImport() throws RecognitionException {
         EObject current = null;
 
@@ -314,14 +304,14 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:156:6: ( ( (lv_importedNamespace_0_0= RULE_STRING ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:157:1: ( (lv_importedNamespace_0_0= RULE_STRING ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:146:6: ( ( (lv_importedNamespace_0_0= RULE_STRING ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:147:1: ( (lv_importedNamespace_0_0= RULE_STRING ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:157:1: ( (lv_importedNamespace_0_0= RULE_STRING ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:158:1: (lv_importedNamespace_0_0= RULE_STRING )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:147:1: ( (lv_importedNamespace_0_0= RULE_STRING ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:148:1: (lv_importedNamespace_0_0= RULE_STRING )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:158:1: (lv_importedNamespace_0_0= RULE_STRING )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:159:3: lv_importedNamespace_0_0= RULE_STRING
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:148:1: (lv_importedNamespace_0_0= RULE_STRING )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:149:3: lv_importedNamespace_0_0= RULE_STRING
             {
             lv_importedNamespace_0_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleImport241); 
 
@@ -329,19 +319,14 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
             		
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.getImportRule().getType().getClassifier());
-            	            associateNodeWithAstElement(currentNode, current);
+            	            current = createModelElement(grammarAccess.getImportRule());
             	        }
-            	        try {
-            	       		set(
-            	       			current, 
-            	       			"importedNamespace",
-            	        		lv_importedNamespace_0_0, 
-            	        		"STRING", 
-            	        		lastConsumedNode);
-            	        } catch (ValueConverterException vce) {
-            				handleValueConverterException(vce);
-            	        }
+                   		set(
+                   			current, 
+                   			"importedNamespace",
+                    		lv_importedNamespace_0_0, 
+                    		"STRING", 
+                    		lastConsumedNode);
             	    
 
             }
@@ -369,7 +354,7 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleElement"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:189:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:174:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
     public final EObject entryRuleElement() throws RecognitionException {
         EObject current = null;
 
@@ -377,8 +362,8 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:190:2: (iv_ruleElement= ruleElement EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:191:2: iv_ruleElement= ruleElement EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:175:2: (iv_ruleElement= ruleElement EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:176:2: iv_ruleElement= ruleElement EOF
             {
              currentNode = createCompositeNode(grammarAccess.getElementRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleElement_in_entryRuleElement281);
@@ -405,7 +390,7 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleElement"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:198:1: ruleElement returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:183:1: ruleElement returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) ;
     public final EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
@@ -419,17 +404,17 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:203:6: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:204:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:188:6: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:189:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:204:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:204:2: ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:189:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:189:2: ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}'
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:204:2: ( (lv_name_0_0= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:205:1: (lv_name_0_0= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:189:2: ( (lv_name_0_0= RULE_ID ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:190:1: (lv_name_0_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:205:1: (lv_name_0_0= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:206:3: lv_name_0_0= RULE_ID
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:190:1: (lv_name_0_0= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:191:3: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleElement333); 
 
@@ -437,19 +422,14 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
             		
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.getElementRule().getType().getClassifier());
-            	            associateNodeWithAstElement(currentNode, current);
+            	            current = createModelElement(grammarAccess.getElementRule());
             	        }
-            	        try {
-            	       		set(
-            	       			current, 
-            	       			"name",
-            	        		lv_name_0_0, 
-            	        		"ID", 
-            	        		lastConsumedNode);
-            	        } catch (ValueConverterException vce) {
-            				handleValueConverterException(vce);
-            	        }
+                   		set(
+                   			current, 
+                   			"name",
+                    		lv_name_0_0, 
+                    		"ID", 
+                    		lastConsumedNode);
             	    
 
             }
@@ -457,7 +437,7 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:228:2: ( (otherlv_1= RULE_ID ) )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:208:2: ( (otherlv_1= RULE_ID ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -466,15 +446,14 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:229:1: (otherlv_1= RULE_ID )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:209:1: (otherlv_1= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:229:1: (otherlv_1= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:230:3: otherlv_1= RULE_ID
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:209:1: (otherlv_1= RULE_ID )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:210:3: otherlv_1= RULE_ID
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.getElementRule().getType().getClassifier());
-                    	            associateNodeWithAstElement(currentNode, current);
+                    	            current = createModelElement(grammarAccess.getElementRule());
                     	        }
                             
                     otherlv_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleElement358); 
@@ -494,7 +473,7 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
 
                 	createLeafNode(otherlv_2, grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_2(), null);
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:246:1: ( (lv_elements_3_0= ruleElement ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:225:1: ( (lv_elements_3_0= ruleElement ) )*
             loop4:
             do {
                 int alt4=2;
@@ -507,10 +486,10 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:247:1: (lv_elements_3_0= ruleElement )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:226:1: (lv_elements_3_0= ruleElement )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:247:1: (lv_elements_3_0= ruleElement )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:248:3: lv_elements_3_0= ruleElement
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:226:1: (lv_elements_3_0= ruleElement )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseNamespacesTestLanguage.g:227:3: lv_elements_3_0= ruleElement
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getElementAccess().getElementsElementParserRuleCall_3_0(), currentNode); 
@@ -522,20 +501,15 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.getElementRule().getType().getClassifier());
-            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
+            	    	            current = createModelElementForParent(grammarAccess.getElementRule());
             	    	        }
-            	    	        try {
-            	    	       		add(
-            	    	       			current, 
-            	    	       			"elements",
-            	    	        		lv_elements_3_0, 
-            	    	        		"Element", 
-            	    	        		currentNode);
-            	    	        } catch (ValueConverterException vce) {
-            	    				handleValueConverterException(vce);
-            	    	        }
-            	    	        currentNode = currentNode.getParent();
+            	           		add(
+            	           			current, 
+            	           			"elements",
+            	            		lv_elements_3_0, 
+            	            		"Element", 
+            	            		currentNode);
+            	    	        afterParserOrEnumRuleCall();
             	    	    
 
             	    }

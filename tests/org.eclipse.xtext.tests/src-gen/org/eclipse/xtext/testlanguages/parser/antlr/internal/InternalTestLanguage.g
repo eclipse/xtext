@@ -90,20 +90,15 @@ ruleEntryRule returns [EObject current=null]
 	    }
 		lv_multiFeature_0_0=ruleAbstractRule		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getEntryRuleRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getEntryRuleRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"multiFeature",
-	        		lv_multiFeature_0_0, 
-	        		"AbstractRule", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"multiFeature",
+        		lv_multiFeature_0_0, 
+        		"AbstractRule", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -137,7 +132,8 @@ ruleAbstractRule returns [EObject current=null]
     this_ChoiceRule_0=ruleChoiceRule
     { 
         $current = $this_ChoiceRule_0.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 
     |
@@ -147,7 +143,8 @@ ruleAbstractRule returns [EObject current=null]
     this_ReducibleRule_1=ruleReducibleRule
     { 
         $current = $this_ReducibleRule_1.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 )
 ;
@@ -185,15 +182,9 @@ ruleChoiceRule returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getChoiceRuleRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getChoiceRuleRule());
 	        }
-	        
-	        try {
-	       		set($current, "optionalKeyword", true, "optional", lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set($current, "optionalKeyword", true, "optional", lastConsumedNode);
 	    }
 
 )
@@ -205,19 +196,14 @@ ruleChoiceRule returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getChoiceRuleRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getChoiceRuleRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"name",
-	        		lv_name_2_0, 
-	        		"ID", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"name",
+        		lv_name_2_0, 
+        		"ID", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -255,23 +241,14 @@ ruleReducibleRule returns [EObject current=null]
     this_TerminalRule_1=ruleTerminalRule
     { 
         $current = $this_TerminalRule_1.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 ((
-    { 
-        temp=factory.create(grammarAccess.getReducibleRuleAccess().getReducibleCompositeActionFeatureAction_2_0().getType().getClassifier());
-        try {
-        	factory.add(temp, "actionFeature", $current, null /*ParserRule*/, currentNode);
-        } catch(ValueConverterException vce) {
-        	handleValueConverterException(vce);
-        }
-        $current = temp; 
-        temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getReducibleRuleAccess().getReducibleCompositeActionFeatureAction_2_0(), currentNode.getParent());
-    newNode.getChildren().add(currentNode);
-    moveLookaheadInfo(currentNode, newNode);
-    currentNode = newNode; 
-        associateNodeWithAstElement(currentNode, $current); 
+    {
+        $current = forceCreateModelElementAndAdd(
+            grammarAccess.getReducibleRuleAccess().getReducibleCompositeActionFeatureAction_2_0(),
+            $current);
     }
 )(
 (
@@ -280,20 +257,15 @@ ruleReducibleRule returns [EObject current=null]
 	    }
 		lv_actionFeature_3_0=ruleTerminalRule		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getReducibleRuleRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getReducibleRuleRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"actionFeature",
-	        		lv_actionFeature_3_0, 
-	        		"TerminalRule", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"actionFeature",
+        		lv_actionFeature_3_0, 
+        		"TerminalRule", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -328,19 +300,14 @@ ruleTerminalRule returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getTerminalRuleRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getTerminalRuleRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"stringFeature",
-	        		lv_stringFeature_0_0, 
-	        		"STRING", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"stringFeature",
+        		lv_stringFeature_0_0, 
+        		"STRING", 
+        		lastConsumedNode);
 	    }
 
 )

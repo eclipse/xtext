@@ -154,20 +154,15 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.getRootRule().getType().getClassifier());
-            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
+            	    	            current = createModelElementForParent(grammarAccess.getRootRule());
             	    	        }
-            	    	        try {
-            	    	       		add(
-            	    	       			current, 
-            	    	       			"elements",
-            	    	        		lv_elements_0_0, 
-            	    	        		"Type", 
-            	    	        		currentNode);
-            	    	        } catch (ValueConverterException vce) {
-            	    				handleValueConverterException(vce);
-            	    	        }
-            	    	        currentNode = currentNode.getParent();
+            	           		add(
+            	           			current, 
+            	           			"elements",
+            	            		lv_elements_0_0, 
+            	            		"Type", 
+            	            		currentNode);
+            	    	        afterParserOrEnumRuleCall();
             	    	    
 
             	    }
@@ -201,7 +196,7 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleType"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:118:1: entryRuleType returns [EObject current=null] : iv_ruleType= ruleType EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:113:1: entryRuleType returns [EObject current=null] : iv_ruleType= ruleType EOF ;
     public final EObject entryRuleType() throws RecognitionException {
         EObject current = null;
 
@@ -209,8 +204,8 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:119:2: (iv_ruleType= ruleType EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:120:2: iv_ruleType= ruleType EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:114:2: (iv_ruleType= ruleType EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:115:2: iv_ruleType= ruleType EOF
             {
              currentNode = createCompositeNode(grammarAccess.getTypeRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleType_in_entryRuleType166);
@@ -237,7 +232,7 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleType"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:127:1: ruleType returns [EObject current=null] : (this_AType_0= ruleAType | this_AnotherType_1= ruleAnotherType ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:122:1: ruleType returns [EObject current=null] : (this_AType_0= ruleAType | this_AnotherType_1= ruleAnotherType ) ;
     public final EObject ruleType() throws RecognitionException {
         EObject current = null;
 
@@ -249,10 +244,10 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:132:6: ( (this_AType_0= ruleAType | this_AnotherType_1= ruleAnotherType ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:133:1: (this_AType_0= ruleAType | this_AnotherType_1= ruleAnotherType )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:127:6: ( (this_AType_0= ruleAType | this_AnotherType_1= ruleAnotherType ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:128:1: (this_AType_0= ruleAType | this_AnotherType_1= ruleAnotherType )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:133:1: (this_AType_0= ruleAType | this_AnotherType_1= ruleAnotherType )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:128:1: (this_AType_0= ruleAType | this_AnotherType_1= ruleAnotherType )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -270,7 +265,7 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:134:5: this_AType_0= ruleAType
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:129:5: this_AType_0= ruleAType
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getTypeAccess().getATypeParserRuleCall_0(), currentNode); 
@@ -282,13 +277,14 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
                      
                             current = this_AType_0; 
-                            currentNode = currentNode.getParent();
+                            // currentNode = currentNode.getParent();
+                            afterParserOrEnumRuleCall();
                         
 
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:144:5: this_AnotherType_1= ruleAnotherType
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:140:5: this_AnotherType_1= ruleAnotherType
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getTypeAccess().getAnotherTypeParserRuleCall_1(), currentNode); 
@@ -300,7 +296,8 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
                      
                             current = this_AnotherType_1; 
-                            currentNode = currentNode.getParent();
+                            // currentNode = currentNode.getParent();
+                            afterParserOrEnumRuleCall();
                         
 
                     }
@@ -328,7 +325,7 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleAType"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:160:1: entryRuleAType returns [EObject current=null] : iv_ruleAType= ruleAType EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:157:1: entryRuleAType returns [EObject current=null] : iv_ruleAType= ruleAType EOF ;
     public final EObject entryRuleAType() throws RecognitionException {
         EObject current = null;
 
@@ -336,8 +333,8 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:161:2: (iv_ruleAType= ruleAType EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:162:2: iv_ruleAType= ruleAType EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:158:2: (iv_ruleAType= ruleAType EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:159:2: iv_ruleAType= ruleAType EOF
             {
              currentNode = createCompositeNode(grammarAccess.getATypeRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleAType_in_entryRuleAType285);
@@ -364,7 +361,7 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleAType"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:169:1: ruleAType returns [EObject current=null] : (otherlv_0= 'foo' () ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:166:1: ruleAType returns [EObject current=null] : (otherlv_0= 'foo' () ) ;
     public final EObject ruleAType() throws RecognitionException {
         EObject current = null;
 
@@ -373,28 +370,23 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:174:6: ( (otherlv_0= 'foo' () ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:175:1: (otherlv_0= 'foo' () )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:171:6: ( (otherlv_0= 'foo' () ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:172:1: (otherlv_0= 'foo' () )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:175:1: (otherlv_0= 'foo' () )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:175:3: otherlv_0= 'foo' ()
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:172:1: (otherlv_0= 'foo' () )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:172:3: otherlv_0= 'foo' ()
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleAType332); 
 
                 	createLeafNode(otherlv_0, grammarAccess.getATypeAccess().getFooKeyword_0(), null);
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:179:1: ()
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:180:5: 
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:176:1: ()
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:177:5: 
             {
-             
-                    temp=factory.create(grammarAccess.getATypeAccess().getATypeAction_1().getType().getClassifier());
-                    current = temp; 
-                    temp = null;
-                    CompositeNode newNode = createCompositeNode(grammarAccess.getATypeAccess().getATypeAction_1(), currentNode.getParent());
-                newNode.getChildren().add(currentNode);
-                moveLookaheadInfo(currentNode, newNode);
-                currentNode = newNode; 
-                    associateNodeWithAstElement(currentNode, current); 
+
+                    current = forceCreateModelElement(
+                        grammarAccess.getATypeAccess().getATypeAction_1(),
+                        current);
                 
 
             }
@@ -422,7 +414,7 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleAnotherType"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:198:1: entryRuleAnotherType returns [EObject current=null] : iv_ruleAnotherType= ruleAnotherType EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:190:1: entryRuleAnotherType returns [EObject current=null] : iv_ruleAnotherType= ruleAnotherType EOF ;
     public final EObject entryRuleAnotherType() throws RecognitionException {
         EObject current = null;
 
@@ -430,8 +422,8 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:199:2: (iv_ruleAnotherType= ruleAnotherType EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:200:2: iv_ruleAnotherType= ruleAnotherType EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:191:2: (iv_ruleAnotherType= ruleAnotherType EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:192:2: iv_ruleAnotherType= ruleAnotherType EOF
             {
              currentNode = createCompositeNode(grammarAccess.getAnotherTypeRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleAnotherType_in_entryRuleAnotherType377);
@@ -458,7 +450,7 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleAnotherType"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:207:1: ruleAnotherType returns [EObject current=null] : (otherlv_0= 'bar' () ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:199:1: ruleAnotherType returns [EObject current=null] : (otherlv_0= 'bar' () ) ;
     public final EObject ruleAnotherType() throws RecognitionException {
         EObject current = null;
 
@@ -467,28 +459,23 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:212:6: ( (otherlv_0= 'bar' () ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:213:1: (otherlv_0= 'bar' () )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:204:6: ( (otherlv_0= 'bar' () ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:205:1: (otherlv_0= 'bar' () )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:213:1: (otherlv_0= 'bar' () )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:213:3: otherlv_0= 'bar' ()
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:205:1: (otherlv_0= 'bar' () )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:205:3: otherlv_0= 'bar' ()
             {
             otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleAnotherType424); 
 
                 	createLeafNode(otherlv_0, grammarAccess.getAnotherTypeAccess().getBarKeyword_0(), null);
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:217:1: ()
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:218:5: 
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:209:1: ()
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:210:5: 
             {
-             
-                    temp=factory.create(grammarAccess.getAnotherTypeAccess().getAnotherTypeAction_1().getType().getClassifier());
-                    current = temp; 
-                    temp = null;
-                    CompositeNode newNode = createCompositeNode(grammarAccess.getAnotherTypeAccess().getAnotherTypeAction_1(), currentNode.getParent());
-                newNode.getChildren().add(currentNode);
-                moveLookaheadInfo(currentNode, newNode);
-                currentNode = newNode; 
-                    associateNodeWithAstElement(currentNode, current); 
+
+                    current = forceCreateModelElement(
+                        grammarAccess.getAnotherTypeAccess().getAnotherTypeAction_1(),
+                        current);
                 
 
             }

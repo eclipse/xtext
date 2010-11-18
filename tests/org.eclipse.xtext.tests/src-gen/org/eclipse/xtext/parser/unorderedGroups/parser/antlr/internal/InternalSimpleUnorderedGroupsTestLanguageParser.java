@@ -156,7 +156,8 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
              
                     current = this_Model_0; 
-                    currentNode = currentNode.getParent();
+                    // currentNode = currentNode.getParent();
+                    afterParserOrEnumRuleCall();
                 
 
             }
@@ -178,7 +179,7 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
 
     // $ANTLR start "entryRuleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:103:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:104:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -186,8 +187,8 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:104:2: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:105:2: iv_ruleModel= ruleModel EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:105:2: (iv_ruleModel= ruleModel EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:106:2: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel165);
@@ -214,7 +215,7 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:112:1: ruleModel returns [EObject current=null] : ( () ( (otherlv_1= '1' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_5= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) ) ) ) | (otherlv_15= '4' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_19= '5' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_23= '6' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_27= '7' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_31= '8' ( ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_39= '9' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_43= '10' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_47= '11' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ) | (otherlv_51= '12' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_58= '13' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ( (lv_firstAsList_62_0= 'a' ) ) ( (lv_secondAsList_63_0= 'b' ) ) ) | (otherlv_64= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_72= 'datatypes' ( (lv_value_73_0= ruleUnorderedDatatype ) ) ) | (otherlv_74= 'serialization' ( (lv_serialized_75_0= ruleUnorderedSerialization ) ) ) | (otherlv_76= 'bug302585' ( (lv_nestedModel_77_0= ruleNestedModel ) )* ) ) ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:113:1: ruleModel returns [EObject current=null] : ( () ( (otherlv_1= '1' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_5= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) ) ) ) | (otherlv_15= '4' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_19= '5' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_23= '6' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_27= '7' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_31= '8' ( ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_39= '9' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_43= '10' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_47= '11' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ) | (otherlv_51= '12' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_58= '13' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ( (lv_firstAsList_62_0= 'a' ) ) ( (lv_secondAsList_63_0= 'b' ) ) ) | (otherlv_64= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_72= 'datatypes' ( (lv_value_73_0= ruleUnorderedDatatype ) ) ) | (otherlv_74= 'serialization' ( (lv_serialized_75_0= ruleUnorderedSerialization ) ) ) | (otherlv_76= 'bug302585' ( (lv_nestedModel_77_0= ruleNestedModel ) )* ) ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -285,29 +286,24 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:117:6: ( ( () ( (otherlv_1= '1' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_5= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) ) ) ) | (otherlv_15= '4' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_19= '5' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_23= '6' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_27= '7' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_31= '8' ( ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_39= '9' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_43= '10' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_47= '11' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ) | (otherlv_51= '12' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_58= '13' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ( (lv_firstAsList_62_0= 'a' ) ) ( (lv_secondAsList_63_0= 'b' ) ) ) | (otherlv_64= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_72= 'datatypes' ( (lv_value_73_0= ruleUnorderedDatatype ) ) ) | (otherlv_74= 'serialization' ( (lv_serialized_75_0= ruleUnorderedSerialization ) ) ) | (otherlv_76= 'bug302585' ( (lv_nestedModel_77_0= ruleNestedModel ) )* ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:118:1: ( () ( (otherlv_1= '1' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_5= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) ) ) ) | (otherlv_15= '4' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_19= '5' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_23= '6' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_27= '7' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_31= '8' ( ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_39= '9' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_43= '10' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_47= '11' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ) | (otherlv_51= '12' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_58= '13' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ( (lv_firstAsList_62_0= 'a' ) ) ( (lv_secondAsList_63_0= 'b' ) ) ) | (otherlv_64= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_72= 'datatypes' ( (lv_value_73_0= ruleUnorderedDatatype ) ) ) | (otherlv_74= 'serialization' ( (lv_serialized_75_0= ruleUnorderedSerialization ) ) ) | (otherlv_76= 'bug302585' ( (lv_nestedModel_77_0= ruleNestedModel ) )* ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:118:6: ( ( () ( (otherlv_1= '1' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_5= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) ) ) ) | (otherlv_15= '4' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_19= '5' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_23= '6' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_27= '7' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_31= '8' ( ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_39= '9' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_43= '10' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_47= '11' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ) | (otherlv_51= '12' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_58= '13' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ( (lv_firstAsList_62_0= 'a' ) ) ( (lv_secondAsList_63_0= 'b' ) ) ) | (otherlv_64= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_72= 'datatypes' ( (lv_value_73_0= ruleUnorderedDatatype ) ) ) | (otherlv_74= 'serialization' ( (lv_serialized_75_0= ruleUnorderedSerialization ) ) ) | (otherlv_76= 'bug302585' ( (lv_nestedModel_77_0= ruleNestedModel ) )* ) ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:119:1: ( () ( (otherlv_1= '1' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_5= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) ) ) ) | (otherlv_15= '4' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_19= '5' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_23= '6' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_27= '7' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_31= '8' ( ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_39= '9' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_43= '10' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_47= '11' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ) | (otherlv_51= '12' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_58= '13' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ( (lv_firstAsList_62_0= 'a' ) ) ( (lv_secondAsList_63_0= 'b' ) ) ) | (otherlv_64= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_72= 'datatypes' ( (lv_value_73_0= ruleUnorderedDatatype ) ) ) | (otherlv_74= 'serialization' ( (lv_serialized_75_0= ruleUnorderedSerialization ) ) ) | (otherlv_76= 'bug302585' ( (lv_nestedModel_77_0= ruleNestedModel ) )* ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:118:1: ( () ( (otherlv_1= '1' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_5= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) ) ) ) | (otherlv_15= '4' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_19= '5' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_23= '6' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_27= '7' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_31= '8' ( ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_39= '9' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_43= '10' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_47= '11' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ) | (otherlv_51= '12' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_58= '13' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ( (lv_firstAsList_62_0= 'a' ) ) ( (lv_secondAsList_63_0= 'b' ) ) ) | (otherlv_64= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_72= 'datatypes' ( (lv_value_73_0= ruleUnorderedDatatype ) ) ) | (otherlv_74= 'serialization' ( (lv_serialized_75_0= ruleUnorderedSerialization ) ) ) | (otherlv_76= 'bug302585' ( (lv_nestedModel_77_0= ruleNestedModel ) )* ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:118:2: () ( (otherlv_1= '1' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_5= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) ) ) ) | (otherlv_15= '4' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_19= '5' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_23= '6' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_27= '7' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_31= '8' ( ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_39= '9' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_43= '10' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_47= '11' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ) | (otherlv_51= '12' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_58= '13' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ( (lv_firstAsList_62_0= 'a' ) ) ( (lv_secondAsList_63_0= 'b' ) ) ) | (otherlv_64= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_72= 'datatypes' ( (lv_value_73_0= ruleUnorderedDatatype ) ) ) | (otherlv_74= 'serialization' ( (lv_serialized_75_0= ruleUnorderedSerialization ) ) ) | (otherlv_76= 'bug302585' ( (lv_nestedModel_77_0= ruleNestedModel ) )* ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:119:1: ( () ( (otherlv_1= '1' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_5= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) ) ) ) | (otherlv_15= '4' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_19= '5' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_23= '6' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_27= '7' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_31= '8' ( ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_39= '9' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_43= '10' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_47= '11' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ) | (otherlv_51= '12' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_58= '13' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ( (lv_firstAsList_62_0= 'a' ) ) ( (lv_secondAsList_63_0= 'b' ) ) ) | (otherlv_64= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_72= 'datatypes' ( (lv_value_73_0= ruleUnorderedDatatype ) ) ) | (otherlv_74= 'serialization' ( (lv_serialized_75_0= ruleUnorderedSerialization ) ) ) | (otherlv_76= 'bug302585' ( (lv_nestedModel_77_0= ruleNestedModel ) )* ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:119:2: () ( (otherlv_1= '1' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_5= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) ) ) ) | (otherlv_15= '4' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_19= '5' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_23= '6' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_27= '7' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_31= '8' ( ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_39= '9' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_43= '10' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_47= '11' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ) | (otherlv_51= '12' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_58= '13' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ( (lv_firstAsList_62_0= 'a' ) ) ( (lv_secondAsList_63_0= 'b' ) ) ) | (otherlv_64= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_72= 'datatypes' ( (lv_value_73_0= ruleUnorderedDatatype ) ) ) | (otherlv_74= 'serialization' ( (lv_serialized_75_0= ruleUnorderedSerialization ) ) ) | (otherlv_76= 'bug302585' ( (lv_nestedModel_77_0= ruleNestedModel ) )* ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:118:2: ()
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:119:5: 
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:119:2: ()
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:120:5: 
             {
-             
-                    temp=factory.create(grammarAccess.getModelAccess().getModelAction_0().getType().getClassifier());
-                    current = temp; 
-                    temp = null;
-                    CompositeNode newNode = createCompositeNode(grammarAccess.getModelAccess().getModelAction_0(), currentNode.getParent());
-                newNode.getChildren().add(currentNode);
-                moveLookaheadInfo(currentNode, newNode);
-                currentNode = newNode; 
-                    associateNodeWithAstElement(currentNode, current); 
+
+                    current = forceCreateModelElement(
+                        grammarAccess.getModelAccess().getModelAction_0(),
+                        current);
                 
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:129:2: ( (otherlv_1= '1' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_5= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) ) ) ) | (otherlv_15= '4' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_19= '5' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_23= '6' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_27= '7' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_31= '8' ( ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_39= '9' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_43= '10' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_47= '11' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ) | (otherlv_51= '12' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_58= '13' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ( (lv_firstAsList_62_0= 'a' ) ) ( (lv_secondAsList_63_0= 'b' ) ) ) | (otherlv_64= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_72= 'datatypes' ( (lv_value_73_0= ruleUnorderedDatatype ) ) ) | (otherlv_74= 'serialization' ( (lv_serialized_75_0= ruleUnorderedSerialization ) ) ) | (otherlv_76= 'bug302585' ( (lv_nestedModel_77_0= ruleNestedModel ) )* ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:125:2: ( (otherlv_1= '1' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_5= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) ) ) ) | (otherlv_15= '4' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_19= '5' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_23= '6' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_27= '7' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) ) | (otherlv_31= '8' ( ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_39= '9' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_43= '10' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_47= '11' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ) | (otherlv_51= '12' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) | (otherlv_58= '13' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ( (lv_firstAsList_62_0= 'a' ) ) ( (lv_secondAsList_63_0= 'b' ) ) ) | (otherlv_64= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ ) | (otherlv_72= 'datatypes' ( (lv_value_73_0= ruleUnorderedDatatype ) ) ) | (otherlv_74= 'serialization' ( (lv_serialized_75_0= ruleUnorderedSerialization ) ) ) | (otherlv_76= 'bug302585' ( (lv_nestedModel_77_0= ruleNestedModel ) )* ) )
             int alt28=17;
             switch ( input.LA(1) ) {
             case 11:
@@ -404,28 +400,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
             switch (alt28) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:129:3: (otherlv_1= '1' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:125:3: (otherlv_1= '1' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:129:3: (otherlv_1= '1' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:129:5: otherlv_1= '1' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:125:3: (otherlv_1= '1' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:125:5: otherlv_1= '1' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) ) )
                     {
                     otherlv_1=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleModel223); 
 
                         	createLeafNode(otherlv_1, grammarAccess.getModelAccess().getDigitOneKeyword_1_0_0(), null);
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:133:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:135:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:129:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:131:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:135:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:136:2: ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:131:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:132:2: ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?)
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getModelAccess().getUnorderedGroup_1_0_1());
                     	
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:139:2: ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?)
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:140:3: ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:135:2: ( ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:136:3: ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+ {...}?
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:140:3: ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:136:3: ( ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) )+
                     int cnt1=0;
                     loop1:
                     do {
@@ -442,31 +438,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt1) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:142:4: ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:138:4: ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:142:4: ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:143:5: {...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:138:4: ({...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:139:5: {...}? => ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_0_1(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_0_1(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:143:106: ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:144:6: ({...}? => ( (lv_first_3_0= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:139:106: ( ({...}? => ( (lv_first_3_0= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:140:6: ({...}? => ( (lv_first_3_0= 'a' ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_0_1(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:147:6: ({...}? => ( (lv_first_3_0= 'a' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:147:7: {...}? => ( (lv_first_3_0= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:143:6: ({...}? => ( (lv_first_3_0= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:143:7: {...}? => ( (lv_first_3_0= 'a' ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:147:16: ( (lv_first_3_0= 'a' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:148:1: (lv_first_3_0= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:143:16: ( (lv_first_3_0= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:144:1: (lv_first_3_0= 'a' )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:148:1: (lv_first_3_0= 'a' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:149:3: lv_first_3_0= 'a'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:144:1: (lv_first_3_0= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:145:3: lv_first_3_0= 'a'
                     	    {
                     	    lv_first_3_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel286); 
 
@@ -474,15 +470,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	        
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	        }
-                    	    	        
-                    	    	        try {
-                    	    	       		set(current, "first", true, "a", lastConsumedNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
+                    	           		set(current, "first", true, "a", lastConsumedNode);
                     	    	    
 
                     	    }
@@ -506,31 +496,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:175:4: ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:165:4: ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:175:4: ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:176:5: {...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:165:4: ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:166:5: {...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_0_1(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_0_1(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:176:106: ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:177:6: ({...}? => ( (lv_second_4_0= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:166:106: ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:167:6: ({...}? => ( (lv_second_4_0= 'b' ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_0_1(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:180:6: ({...}? => ( (lv_second_4_0= 'b' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:180:7: {...}? => ( (lv_second_4_0= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:170:6: ({...}? => ( (lv_second_4_0= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:170:7: {...}? => ( (lv_second_4_0= 'b' ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:180:16: ( (lv_second_4_0= 'b' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:181:1: (lv_second_4_0= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:170:16: ( (lv_second_4_0= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:171:1: (lv_second_4_0= 'b' )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:181:1: (lv_second_4_0= 'b' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:182:3: lv_second_4_0= 'b'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:171:1: (lv_second_4_0= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:172:3: lv_second_4_0= 'b'
                     	    {
                     	    lv_second_4_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleModel371); 
 
@@ -538,15 +528,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	        
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	        }
-                    	    	        
-                    	    	        try {
-                    	    	       		set(current, "second", true, "b", lastConsumedNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
+                    	           		set(current, "second", true, "b", lastConsumedNode);
                     	    	    
 
                     	    }
@@ -601,28 +585,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:217:6: (otherlv_5= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:201:6: (otherlv_5= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:217:6: (otherlv_5= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:217:8: otherlv_5= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:201:6: (otherlv_5= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:201:8: otherlv_5= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) ) )
                     {
                     otherlv_5=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleModel450); 
 
                         	createLeafNode(otherlv_5, grammarAccess.getModelAccess().getDigitTwoKeyword_1_1_0(), null);
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:221:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:223:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:205:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:207:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:223:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:224:2: ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:207:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:208:2: ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?)
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getModelAccess().getUnorderedGroup_1_1_1());
                     	
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:227:2: ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?)
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:228:3: ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:211:2: ( ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:212:3: ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+ {...}?
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:228:3: ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:212:3: ( ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) ) )+
                     int cnt2=0;
                     loop2:
                     do {
@@ -645,31 +629,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt2) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:230:4: ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:214:4: ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:230:4: ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:231:5: {...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:214:4: ({...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:215:5: {...}? => ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_1_1(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_1_1(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:231:106: ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:232:6: ({...}? => ( (lv_first_7_0= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:215:106: ( ({...}? => ( (lv_first_7_0= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:216:6: ({...}? => ( (lv_first_7_0= 'a' ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_1_1(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:235:6: ({...}? => ( (lv_first_7_0= 'a' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:235:7: {...}? => ( (lv_first_7_0= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:219:6: ({...}? => ( (lv_first_7_0= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:219:7: {...}? => ( (lv_first_7_0= 'a' ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:235:16: ( (lv_first_7_0= 'a' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:236:1: (lv_first_7_0= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:219:16: ( (lv_first_7_0= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:220:1: (lv_first_7_0= 'a' )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:236:1: (lv_first_7_0= 'a' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:237:3: lv_first_7_0= 'a'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:220:1: (lv_first_7_0= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:221:3: lv_first_7_0= 'a'
                     	    {
                     	    lv_first_7_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel513); 
 
@@ -677,15 +661,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	        
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	        }
-                    	    	        
-                    	    	        try {
-                    	    	       		set(current, "first", true, "a", lastConsumedNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
+                    	           		set(current, "first", true, "a", lastConsumedNode);
                     	    	    
 
                     	    }
@@ -709,31 +687,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:263:4: ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:241:4: ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:263:4: ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:264:5: {...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:241:4: ({...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:242:5: {...}? => ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_1_1(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_1_1(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:264:106: ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:265:6: ({...}? => ( (lv_second_8_0= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:242:106: ( ({...}? => ( (lv_second_8_0= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:243:6: ({...}? => ( (lv_second_8_0= 'b' ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_1_1(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:268:6: ({...}? => ( (lv_second_8_0= 'b' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:268:7: {...}? => ( (lv_second_8_0= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:246:6: ({...}? => ( (lv_second_8_0= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:246:7: {...}? => ( (lv_second_8_0= 'b' ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:268:16: ( (lv_second_8_0= 'b' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:269:1: (lv_second_8_0= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:246:16: ( (lv_second_8_0= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:247:1: (lv_second_8_0= 'b' )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:269:1: (lv_second_8_0= 'b' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:270:3: lv_second_8_0= 'b'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:247:1: (lv_second_8_0= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:248:3: lv_second_8_0= 'b'
                     	    {
                     	    lv_second_8_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleModel598); 
 
@@ -741,15 +719,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	        
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	        }
-                    	    	        
-                    	    	        try {
-                    	    	       		set(current, "second", true, "b", lastConsumedNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
+                    	           		set(current, "second", true, "b", lastConsumedNode);
                     	    	    
 
                     	    }
@@ -773,31 +745,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 3 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:296:4: ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:268:4: ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:296:4: ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:297:5: {...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:268:4: ({...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:269:5: {...}? => ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_1_1(), 2) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_1_1(), 2)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:297:106: ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:298:6: ({...}? => ( (lv_third_9_0= 'c' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:269:106: ( ({...}? => ( (lv_third_9_0= 'c' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:270:6: ({...}? => ( (lv_third_9_0= 'c' ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_1_1(), 2);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:301:6: ({...}? => ( (lv_third_9_0= 'c' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:301:7: {...}? => ( (lv_third_9_0= 'c' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:273:6: ({...}? => ( (lv_third_9_0= 'c' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:273:7: {...}? => ( (lv_third_9_0= 'c' ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:301:16: ( (lv_third_9_0= 'c' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:302:1: (lv_third_9_0= 'c' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:273:16: ( (lv_third_9_0= 'c' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:274:1: (lv_third_9_0= 'c' )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:302:1: (lv_third_9_0= 'c' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:303:3: lv_third_9_0= 'c'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:274:1: (lv_third_9_0= 'c' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:275:3: lv_third_9_0= 'c'
                     	    {
                     	    lv_third_9_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleModel683); 
 
@@ -805,15 +777,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	        
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	        }
-                    	    	        
-                    	    	        try {
-                    	    	       		set(current, "third", true, "c", lastConsumedNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
+                    	           		set(current, "third", true, "c", lastConsumedNode);
                     	    	    
 
                     	    }
@@ -837,31 +803,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 4 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:329:4: ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:295:4: ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:329:4: ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:330:5: {...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:295:4: ({...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:296:5: {...}? => ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_1_1(), 3) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_1_1(), 3)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:330:106: ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:331:6: ({...}? => ( (lv_forth_10_0= 'd' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:296:106: ( ({...}? => ( (lv_forth_10_0= 'd' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:297:6: ({...}? => ( (lv_forth_10_0= 'd' ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_1_1(), 3);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:334:6: ({...}? => ( (lv_forth_10_0= 'd' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:334:7: {...}? => ( (lv_forth_10_0= 'd' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:300:6: ({...}? => ( (lv_forth_10_0= 'd' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:300:7: {...}? => ( (lv_forth_10_0= 'd' ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:334:16: ( (lv_forth_10_0= 'd' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:335:1: (lv_forth_10_0= 'd' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:300:16: ( (lv_forth_10_0= 'd' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:301:1: (lv_forth_10_0= 'd' )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:335:1: (lv_forth_10_0= 'd' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:336:3: lv_forth_10_0= 'd'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:301:1: (lv_forth_10_0= 'd' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:302:3: lv_forth_10_0= 'd'
                     	    {
                     	    lv_forth_10_0=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleModel768); 
 
@@ -869,15 +835,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	        
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	        }
-                    	    	        
-                    	    	        try {
-                    	    	       		set(current, "forth", true, "d", lastConsumedNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
+                    	           		set(current, "forth", true, "d", lastConsumedNode);
                     	    	    
 
                     	    }
@@ -932,28 +892,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:371:6: (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:331:6: (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:371:6: (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:371:8: otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:331:6: (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:331:8: otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) ) )
                     {
                     otherlv_11=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleModel847); 
 
                         	createLeafNode(otherlv_11, grammarAccess.getModelAccess().getDigitThreeKeyword_1_2_0(), null);
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:375:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:377:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:335:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:337:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:377:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:378:2: ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:337:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:338:2: ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* )
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getModelAccess().getUnorderedGroup_1_2_1());
                     	
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:381:2: ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:382:3: ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:341:2: ( ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )* )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:342:3: ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )*
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:382:3: ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:342:3: ( ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )*
                     loop3:
                     do {
                         int alt3=3;
@@ -969,31 +929,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt3) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:384:4: ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:344:4: ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:384:4: ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:385:5: {...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:344:4: ({...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:345:5: {...}? => ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_2_1(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_2_1(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:385:106: ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:386:6: ({...}? => ( (lv_first_13_0= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:345:106: ( ({...}? => ( (lv_first_13_0= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:346:6: ({...}? => ( (lv_first_13_0= 'a' ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_2_1(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:389:6: ({...}? => ( (lv_first_13_0= 'a' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:389:7: {...}? => ( (lv_first_13_0= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:349:6: ({...}? => ( (lv_first_13_0= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:349:7: {...}? => ( (lv_first_13_0= 'a' ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:389:16: ( (lv_first_13_0= 'a' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:390:1: (lv_first_13_0= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:349:16: ( (lv_first_13_0= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:350:1: (lv_first_13_0= 'a' )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:390:1: (lv_first_13_0= 'a' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:391:3: lv_first_13_0= 'a'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:350:1: (lv_first_13_0= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:351:3: lv_first_13_0= 'a'
                     	    {
                     	    lv_first_13_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel910); 
 
@@ -1001,15 +961,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	        
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	        }
-                    	    	        
-                    	    	        try {
-                    	    	       		set(current, "first", true, "a", lastConsumedNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
+                    	           		set(current, "first", true, "a", lastConsumedNode);
                     	    	    
 
                     	    }
@@ -1033,31 +987,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:417:4: ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:371:4: ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:417:4: ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:418:5: {...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:371:4: ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:372:5: {...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_2_1(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_2_1(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:418:106: ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:419:6: ({...}? => ( (lv_second_14_0= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:372:106: ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:373:6: ({...}? => ( (lv_second_14_0= 'b' ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_2_1(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:422:6: ({...}? => ( (lv_second_14_0= 'b' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:422:7: {...}? => ( (lv_second_14_0= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:376:6: ({...}? => ( (lv_second_14_0= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:376:7: {...}? => ( (lv_second_14_0= 'b' ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:422:16: ( (lv_second_14_0= 'b' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:423:1: (lv_second_14_0= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:376:16: ( (lv_second_14_0= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:377:1: (lv_second_14_0= 'b' )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:423:1: (lv_second_14_0= 'b' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:424:3: lv_second_14_0= 'b'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:377:1: (lv_second_14_0= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:378:3: lv_second_14_0= 'b'
                     	    {
                     	    lv_second_14_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleModel995); 
 
@@ -1065,15 +1019,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	        
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	        }
-                    	    	        
-                    	    	        try {
-                    	    	       		set(current, "second", true, "b", lastConsumedNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
+                    	           		set(current, "second", true, "b", lastConsumedNode);
                     	    	    
 
                     	    }
@@ -1121,28 +1069,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:458:6: (otherlv_15= '4' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:406:6: (otherlv_15= '4' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:458:6: (otherlv_15= '4' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:458:8: otherlv_15= '4' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:406:6: (otherlv_15= '4' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:406:8: otherlv_15= '4' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) ) )
                     {
                     otherlv_15=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleModel1068); 
 
                         	createLeafNode(otherlv_15, grammarAccess.getModelAccess().getDigitFourKeyword_1_3_0(), null);
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:462:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:464:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:410:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:412:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:464:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:465:2: ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:412:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:413:2: ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?)
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getModelAccess().getUnorderedGroup_1_3_1());
                     	
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:468:2: ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?)
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:469:3: ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:416:2: ( ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:417:3: ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+ {...}?
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:469:3: ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:417:3: ( ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) ) )+
                     int cnt4=0;
                     loop4:
                     do {
@@ -1159,31 +1107,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:471:4: ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:419:4: ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:471:4: ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:472:5: {...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:419:4: ({...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:420:5: {...}? => ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_3_1(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_3_1(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:472:106: ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:473:6: ({...}? => ( (lv_first_17_0= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:420:106: ( ({...}? => ( (lv_first_17_0= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:421:6: ({...}? => ( (lv_first_17_0= 'a' ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_3_1(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:476:6: ({...}? => ( (lv_first_17_0= 'a' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:476:7: {...}? => ( (lv_first_17_0= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:424:6: ({...}? => ( (lv_first_17_0= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:424:7: {...}? => ( (lv_first_17_0= 'a' ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:476:16: ( (lv_first_17_0= 'a' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:477:1: (lv_first_17_0= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:424:16: ( (lv_first_17_0= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:425:1: (lv_first_17_0= 'a' )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:477:1: (lv_first_17_0= 'a' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:478:3: lv_first_17_0= 'a'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:425:1: (lv_first_17_0= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:426:3: lv_first_17_0= 'a'
                     	    {
                     	    lv_first_17_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel1131); 
 
@@ -1191,15 +1139,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	        
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	        }
-                    	    	        
-                    	    	        try {
-                    	    	       		set(current, "first", true, "a", lastConsumedNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
+                    	           		set(current, "first", true, "a", lastConsumedNode);
                     	    	    
 
                     	    }
@@ -1223,31 +1165,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:504:4: ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:446:4: ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:504:4: ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:505:5: {...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:446:4: ({...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:447:5: {...}? => ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_3_1(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_3_1(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:505:106: ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:506:6: ({...}? => ( (lv_second_18_0= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:447:106: ( ({...}? => ( (lv_second_18_0= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:448:6: ({...}? => ( (lv_second_18_0= 'b' ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_3_1(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:509:6: ({...}? => ( (lv_second_18_0= 'b' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:509:7: {...}? => ( (lv_second_18_0= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:451:6: ({...}? => ( (lv_second_18_0= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:451:7: {...}? => ( (lv_second_18_0= 'b' ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:509:16: ( (lv_second_18_0= 'b' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:510:1: (lv_second_18_0= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:451:16: ( (lv_second_18_0= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:452:1: (lv_second_18_0= 'b' )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:510:1: (lv_second_18_0= 'b' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:511:3: lv_second_18_0= 'b'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:452:1: (lv_second_18_0= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:453:3: lv_second_18_0= 'b'
                     	    {
                     	    lv_second_18_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleModel1216); 
 
@@ -1255,15 +1197,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	        
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	        }
-                    	    	        
-                    	    	        try {
-                    	    	       		set(current, "second", true, "b", lastConsumedNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
+                    	           		set(current, "second", true, "b", lastConsumedNode);
                     	    	    
 
                     	    }
@@ -1318,28 +1254,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 5 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:546:6: (otherlv_19= '5' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:482:6: (otherlv_19= '5' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:546:6: (otherlv_19= '5' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:546:8: otherlv_19= '5' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:482:6: (otherlv_19= '5' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:482:8: otherlv_19= '5' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) ) )
                     {
                     otherlv_19=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleModel1295); 
 
                         	createLeafNode(otherlv_19, grammarAccess.getModelAccess().getDigitFiveKeyword_1_4_0(), null);
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:550:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:552:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:486:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:488:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:552:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:553:2: ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:488:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:489:2: ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?)
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getModelAccess().getUnorderedGroup_1_4_1());
                     	
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:556:2: ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?)
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:557:3: ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:492:2: ( ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:493:3: ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+ {...}?
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:557:3: ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:493:3: ( ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) ) )+
                     int cnt5=0;
                     loop5:
                     do {
@@ -1356,31 +1292,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:559:4: ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:495:4: ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:559:4: ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:560:5: {...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:495:4: ({...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:496:5: {...}? => ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_4_1(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_4_1(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:560:106: ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:561:6: ({...}? => ( (lv_first_21_0= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:496:106: ( ({...}? => ( (lv_first_21_0= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:497:6: ({...}? => ( (lv_first_21_0= 'a' ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_4_1(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:564:6: ({...}? => ( (lv_first_21_0= 'a' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:564:7: {...}? => ( (lv_first_21_0= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:500:6: ({...}? => ( (lv_first_21_0= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:500:7: {...}? => ( (lv_first_21_0= 'a' ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:564:16: ( (lv_first_21_0= 'a' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:565:1: (lv_first_21_0= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:500:16: ( (lv_first_21_0= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:501:1: (lv_first_21_0= 'a' )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:565:1: (lv_first_21_0= 'a' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:566:3: lv_first_21_0= 'a'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:501:1: (lv_first_21_0= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:502:3: lv_first_21_0= 'a'
                     	    {
                     	    lv_first_21_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel1358); 
 
@@ -1388,15 +1324,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	        
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	        }
-                    	    	        
-                    	    	        try {
-                    	    	       		set(current, "first", true, "a", lastConsumedNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
+                    	           		set(current, "first", true, "a", lastConsumedNode);
                     	    	    
 
                     	    }
@@ -1420,31 +1350,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:592:4: ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:522:4: ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:592:4: ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:593:5: {...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:522:4: ({...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:523:5: {...}? => ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_4_1(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_4_1(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:593:106: ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:594:6: ({...}? => ( (lv_second_22_0= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:523:106: ( ({...}? => ( (lv_second_22_0= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:524:6: ({...}? => ( (lv_second_22_0= 'b' ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_4_1(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:597:6: ({...}? => ( (lv_second_22_0= 'b' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:597:7: {...}? => ( (lv_second_22_0= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:527:6: ({...}? => ( (lv_second_22_0= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:527:7: {...}? => ( (lv_second_22_0= 'b' ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:597:16: ( (lv_second_22_0= 'b' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:598:1: (lv_second_22_0= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:527:16: ( (lv_second_22_0= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:528:1: (lv_second_22_0= 'b' )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:598:1: (lv_second_22_0= 'b' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:599:3: lv_second_22_0= 'b'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:528:1: (lv_second_22_0= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:529:3: lv_second_22_0= 'b'
                     	    {
                     	    lv_second_22_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleModel1443); 
 
@@ -1452,15 +1382,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	        
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	        }
-                    	    	        
-                    	    	        try {
-                    	    	       		set(current, "second", true, "b", lastConsumedNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
+                    	           		set(current, "second", true, "b", lastConsumedNode);
                     	    	    
 
                     	    }
@@ -1515,28 +1439,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 6 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:634:6: (otherlv_23= '6' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:558:6: (otherlv_23= '6' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:634:6: (otherlv_23= '6' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:634:8: otherlv_23= '6' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:558:6: (otherlv_23= '6' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:558:8: otherlv_23= '6' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) ) )
                     {
                     otherlv_23=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleModel1522); 
 
                         	createLeafNode(otherlv_23, grammarAccess.getModelAccess().getDigitSixKeyword_1_5_0(), null);
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:638:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:640:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:562:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:564:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:640:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:641:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:564:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:565:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?)
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getModelAccess().getUnorderedGroup_1_5_1());
                     	
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:644:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?)
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:645:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:568:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:569:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+ {...}?
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:645:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:569:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) ) )+
                     int cnt8=0;
                     loop8:
                     do {
@@ -1553,21 +1477,21 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt8) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:647:4: ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:571:4: ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:647:4: ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:648:5: {...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:571:4: ({...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:572:5: {...}? => ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_5_1(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_5_1(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:648:106: ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:649:6: ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:572:106: ( ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+ )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:573:6: ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_5_1(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:652:6: ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:576:6: ({...}? => ( (lv_firstAsList_25_0= 'a' ) ) )+
                     	    int cnt6=0;
                     	    loop6:
                     	    do {
@@ -1587,16 +1511,16 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     	        switch (alt6) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:652:7: {...}? => ( (lv_firstAsList_25_0= 'a' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:576:7: {...}? => ( (lv_firstAsList_25_0= 'a' ) )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:652:16: ( (lv_firstAsList_25_0= 'a' ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:653:1: (lv_firstAsList_25_0= 'a' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:576:16: ( (lv_firstAsList_25_0= 'a' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:577:1: (lv_firstAsList_25_0= 'a' )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:653:1: (lv_firstAsList_25_0= 'a' )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:654:3: lv_firstAsList_25_0= 'a'
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:577:1: (lv_firstAsList_25_0= 'a' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:578:3: lv_firstAsList_25_0= 'a'
                     	    	    {
                     	    	    lv_firstAsList_25_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel1585); 
 
@@ -1604,15 +1528,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	        
 
                     	    	    	        if (current==null) {
-                    	    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	    	        }
-                    	    	    	        
-                    	    	    	        try {
-                    	    	    	       		add(current, "firstAsList", lv_firstAsList_25_0, "a", lastConsumedNode);
-                    	    	    	        } catch (ValueConverterException vce) {
-                    	    	    				handleValueConverterException(vce);
-                    	    	    	        }
+                    	    	           		add(current, "firstAsList", lv_firstAsList_25_0, "a", lastConsumedNode);
                     	    	    	    
 
                     	    	    }
@@ -1646,21 +1564,21 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:680:4: ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:598:4: ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:680:4: ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:681:5: {...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:598:4: ({...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:599:5: {...}? => ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_5_1(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_5_1(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:681:106: ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:682:6: ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:599:106: ( ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+ )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:600:6: ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_5_1(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:685:6: ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:603:6: ({...}? => ( (lv_secondAsList_26_0= 'b' ) ) )+
                     	    int cnt7=0;
                     	    loop7:
                     	    do {
@@ -1680,16 +1598,16 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     	        switch (alt7) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:685:7: {...}? => ( (lv_secondAsList_26_0= 'b' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:603:7: {...}? => ( (lv_secondAsList_26_0= 'b' ) )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:685:16: ( (lv_secondAsList_26_0= 'b' ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:686:1: (lv_secondAsList_26_0= 'b' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:603:16: ( (lv_secondAsList_26_0= 'b' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:604:1: (lv_secondAsList_26_0= 'b' )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:686:1: (lv_secondAsList_26_0= 'b' )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:687:3: lv_secondAsList_26_0= 'b'
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:604:1: (lv_secondAsList_26_0= 'b' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:605:3: lv_secondAsList_26_0= 'b'
                     	    	    {
                     	    	    lv_secondAsList_26_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleModel1671); 
 
@@ -1697,15 +1615,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	        
 
                     	    	    	        if (current==null) {
-                    	    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	    	        }
-                    	    	    	        
-                    	    	    	        try {
-                    	    	    	       		add(current, "secondAsList", lv_secondAsList_26_0, "b", lastConsumedNode);
-                    	    	    	        } catch (ValueConverterException vce) {
-                    	    	    				handleValueConverterException(vce);
-                    	    	    	        }
+                    	    	           		add(current, "secondAsList", lv_secondAsList_26_0, "b", lastConsumedNode);
                     	    	    	    
 
                     	    	    }
@@ -1770,28 +1682,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 7 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:722:6: (otherlv_27= '7' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:634:6: (otherlv_27= '7' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:722:6: (otherlv_27= '7' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:722:8: otherlv_27= '7' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:634:6: (otherlv_27= '7' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:634:8: otherlv_27= '7' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) ) )
                     {
                     otherlv_27=(Token)match(input,21,FollowSets000.FOLLOW_21_in_ruleModel1751); 
 
                         	createLeafNode(otherlv_27, grammarAccess.getModelAccess().getDigitSevenKeyword_1_6_0(), null);
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:726:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:728:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:638:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:640:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:728:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:729:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:640:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:641:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?)
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getModelAccess().getUnorderedGroup_1_6_1());
                     	
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:732:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?)
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:733:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:644:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:645:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+ {...}?
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:733:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:645:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) ) )+
                     int cnt11=0;
                     loop11:
                     do {
@@ -1808,21 +1720,21 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt11) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:735:4: ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:647:4: ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:735:4: ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:736:5: {...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:647:4: ({...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:648:5: {...}? => ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_6_1(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_6_1(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:736:106: ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:737:6: ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:648:106: ( ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+ )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:649:6: ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_6_1(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:740:6: ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:652:6: ({...}? => ( (lv_firstAsList_29_0= 'a' ) ) )+
                     	    int cnt9=0;
                     	    loop9:
                     	    do {
@@ -1842,16 +1754,16 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     	        switch (alt9) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:740:7: {...}? => ( (lv_firstAsList_29_0= 'a' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:652:7: {...}? => ( (lv_firstAsList_29_0= 'a' ) )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:740:16: ( (lv_firstAsList_29_0= 'a' ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:741:1: (lv_firstAsList_29_0= 'a' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:652:16: ( (lv_firstAsList_29_0= 'a' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:653:1: (lv_firstAsList_29_0= 'a' )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:741:1: (lv_firstAsList_29_0= 'a' )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:742:3: lv_firstAsList_29_0= 'a'
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:653:1: (lv_firstAsList_29_0= 'a' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:654:3: lv_firstAsList_29_0= 'a'
                     	    	    {
                     	    	    lv_firstAsList_29_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel1814); 
 
@@ -1859,15 +1771,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	        
 
                     	    	    	        if (current==null) {
-                    	    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	    	        }
-                    	    	    	        
-                    	    	    	        try {
-                    	    	    	       		add(current, "firstAsList", lv_firstAsList_29_0, "a", lastConsumedNode);
-                    	    	    	        } catch (ValueConverterException vce) {
-                    	    	    				handleValueConverterException(vce);
-                    	    	    	        }
+                    	    	           		add(current, "firstAsList", lv_firstAsList_29_0, "a", lastConsumedNode);
                     	    	    	    
 
                     	    	    }
@@ -1901,21 +1807,21 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:768:4: ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:674:4: ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:768:4: ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:769:5: {...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:674:4: ({...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:675:5: {...}? => ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_6_1(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_6_1(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:769:106: ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:770:6: ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:675:106: ( ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+ )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:676:6: ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_6_1(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:773:6: ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:679:6: ({...}? => ( (lv_secondAsList_30_0= 'b' ) ) )+
                     	    int cnt10=0;
                     	    loop10:
                     	    do {
@@ -1935,16 +1841,16 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     	        switch (alt10) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:773:7: {...}? => ( (lv_secondAsList_30_0= 'b' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:679:7: {...}? => ( (lv_secondAsList_30_0= 'b' ) )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:773:16: ( (lv_secondAsList_30_0= 'b' ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:774:1: (lv_secondAsList_30_0= 'b' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:679:16: ( (lv_secondAsList_30_0= 'b' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:680:1: (lv_secondAsList_30_0= 'b' )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:774:1: (lv_secondAsList_30_0= 'b' )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:775:3: lv_secondAsList_30_0= 'b'
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:680:1: (lv_secondAsList_30_0= 'b' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:681:3: lv_secondAsList_30_0= 'b'
                     	    	    {
                     	    	    lv_secondAsList_30_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleModel1900); 
 
@@ -1952,15 +1858,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	        
 
                     	    	    	        if (current==null) {
-                    	    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	    	        }
-                    	    	    	        
-                    	    	    	        try {
-                    	    	    	       		add(current, "secondAsList", lv_secondAsList_30_0, "b", lastConsumedNode);
-                    	    	    	        } catch (ValueConverterException vce) {
-                    	    	    				handleValueConverterException(vce);
-                    	    	    	        }
+                    	    	           		add(current, "secondAsList", lv_secondAsList_30_0, "b", lastConsumedNode);
                     	    	    	    
 
                     	    	    }
@@ -2025,28 +1925,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 8 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:810:6: (otherlv_31= '8' ( ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:710:6: (otherlv_31= '8' ( ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:810:6: (otherlv_31= '8' ( ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:810:8: otherlv_31= '8' ( ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:710:6: (otherlv_31= '8' ( ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:710:8: otherlv_31= '8' ( ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) ) )
                     {
                     otherlv_31=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleModel1980); 
 
                         	createLeafNode(otherlv_31, grammarAccess.getModelAccess().getDigitEightKeyword_1_7_0(), null);
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:814:1: ( ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:816:1: ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:714:1: ( ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:716:1: ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:816:1: ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:817:2: ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:716:1: ( ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:717:2: ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?)
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getModelAccess().getUnorderedGroup_1_7_1());
                     	
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:820:2: ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?)
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:821:3: ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:720:2: ( ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:721:3: ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+ {...}?
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:821:3: ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:721:3: ( ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) ) )+
                     int cnt12=0;
                     loop12:
                     do {
@@ -2075,28 +1975,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt12) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:823:4: ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:723:4: ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:823:4: ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:824:5: {...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:723:4: ({...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:724:5: {...}? => ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_7_1(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_7_1(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:824:106: ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:825:6: ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:724:106: ( ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:725:6: ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_7_1(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:828:6: ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:828:7: {...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:728:6: ({...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:728:7: {...}? => (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:828:16: (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:828:18: otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:728:16: (otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:728:18: otherlv_33= 'a' otherlv_34= 'b' ( (lv_first_35_0= 'c' ) )
                     	    {
                     	    otherlv_33=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel2038); 
 
@@ -2106,11 +2006,11 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     	        	createLeafNode(otherlv_34, grammarAccess.getModelAccess().getBKeyword_1_7_1_0_1(), null);
                     	        
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:836:1: ( (lv_first_35_0= 'c' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:837:1: (lv_first_35_0= 'c' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:736:1: ( (lv_first_35_0= 'c' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:737:1: (lv_first_35_0= 'c' )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:837:1: (lv_first_35_0= 'c' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:838:3: lv_first_35_0= 'c'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:737:1: (lv_first_35_0= 'c' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:738:3: lv_first_35_0= 'c'
                     	    {
                     	    lv_first_35_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleModel2068); 
 
@@ -2118,15 +2018,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	        
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	        }
-                    	    	        
-                    	    	        try {
-                    	    	       		set(current, "first", true, "c", lastConsumedNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
+                    	           		set(current, "first", true, "c", lastConsumedNode);
                     	    	    
 
                     	    }
@@ -2153,28 +2047,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:864:4: ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:758:4: ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:864:4: ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:865:5: {...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:758:4: ({...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:759:5: {...}? => ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_7_1(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_7_1(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:865:106: ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:866:6: ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:759:106: ( ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:760:6: ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_7_1(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:869:6: ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:869:7: {...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:763:6: ({...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:763:7: {...}? => (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:869:16: (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:869:18: otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:763:16: (otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:763:18: otherlv_36= 'a' otherlv_37= 'b' ( (lv_second_38_0= 'd' ) )
                     	    {
                     	    otherlv_36=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel2149); 
 
@@ -2184,11 +2078,11 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     	        	createLeafNode(otherlv_37, grammarAccess.getModelAccess().getBKeyword_1_7_1_1_1(), null);
                     	        
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:877:1: ( (lv_second_38_0= 'd' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:878:1: (lv_second_38_0= 'd' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:771:1: ( (lv_second_38_0= 'd' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:772:1: (lv_second_38_0= 'd' )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:878:1: (lv_second_38_0= 'd' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:879:3: lv_second_38_0= 'd'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:772:1: (lv_second_38_0= 'd' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:773:3: lv_second_38_0= 'd'
                     	    {
                     	    lv_second_38_0=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleModel2179); 
 
@@ -2196,15 +2090,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	        
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	        }
-                    	    	        
-                    	    	        try {
-                    	    	       		set(current, "second", true, "d", lastConsumedNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
+                    	           		set(current, "second", true, "d", lastConsumedNode);
                     	    	    
 
                     	    }
@@ -2262,16 +2150,16 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 9 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:914:6: (otherlv_39= '9' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) ) )+ )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:802:6: (otherlv_39= '9' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) ) )+ )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:914:6: (otherlv_39= '9' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) ) )+ )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:914:8: otherlv_39= '9' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:802:6: (otherlv_39= '9' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) ) )+ )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:802:8: otherlv_39= '9' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) ) )+
                     {
                     otherlv_39=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleModel2259); 
 
                         	createLeafNode(otherlv_39, grammarAccess.getModelAccess().getDigitNineKeyword_1_8_0(), null);
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:918:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:806:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) ) )+
                     int cnt14=0;
                     loop14:
                     do {
@@ -2285,18 +2173,18 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt14) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:920:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:808:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:920:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:921:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?)
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:808:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:809:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?)
                     	    {
                     	     
                     	    	  getUnorderedGroupHelper().enter(grammarAccess.getModelAccess().getUnorderedGroup_1_8_1());
                     	    	
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:924:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?)
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:925:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:812:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?)
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:813:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+ {...}?
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:925:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:813:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) ) )+
                     	    int cnt13=0;
                     	    loop13:
                     	    do {
@@ -2325,31 +2213,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     	        switch (alt13) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:927:4: ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:815:4: ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:927:4: ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:928:5: {...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:815:4: ({...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:816:5: {...}? => ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) )
                     	    	    {
                     	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_8_1(), 0) ) {
                     	    	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_8_1(), 0)");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:928:106: ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:929:6: ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:816:106: ( ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:817:6: ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) )
                     	    	    {
                     	    	     
                     	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_8_1(), 0);
                     	    	    	 				
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:932:6: ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:932:7: {...}? => ( (lv_firstAsList_41_0= 'a' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:820:6: ({...}? => ( (lv_firstAsList_41_0= 'a' ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:820:7: {...}? => ( (lv_firstAsList_41_0= 'a' ) )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:932:16: ( (lv_firstAsList_41_0= 'a' ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:933:1: (lv_firstAsList_41_0= 'a' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:820:16: ( (lv_firstAsList_41_0= 'a' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:821:1: (lv_firstAsList_41_0= 'a' )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:933:1: (lv_firstAsList_41_0= 'a' )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:934:3: lv_firstAsList_41_0= 'a'
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:821:1: (lv_firstAsList_41_0= 'a' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:822:3: lv_firstAsList_41_0= 'a'
                     	    	    {
                     	    	    lv_firstAsList_41_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel2322); 
 
@@ -2357,15 +2245,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	        
 
                     	    	    	        if (current==null) {
-                    	    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	    	        }
-                    	    	    	        
-                    	    	    	        try {
-                    	    	    	       		add(current, "firstAsList", lv_firstAsList_41_0, "a", lastConsumedNode);
-                    	    	    	        } catch (ValueConverterException vce) {
-                    	    	    				handleValueConverterException(vce);
-                    	    	    	        }
+                    	    	           		add(current, "firstAsList", lv_firstAsList_41_0, "a", lastConsumedNode);
                     	    	    	    
 
                     	    	    }
@@ -2389,31 +2271,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	    }
                     	    	    break;
                     	    	case 2 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:960:4: ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:842:4: ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:960:4: ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:961:5: {...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:842:4: ({...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:843:5: {...}? => ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) )
                     	    	    {
                     	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_8_1(), 1) ) {
                     	    	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_8_1(), 1)");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:961:106: ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:962:6: ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:843:106: ( ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:844:6: ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) )
                     	    	    {
                     	    	     
                     	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_8_1(), 1);
                     	    	    	 				
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:965:6: ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:965:7: {...}? => ( (lv_secondAsList_42_0= 'b' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:847:6: ({...}? => ( (lv_secondAsList_42_0= 'b' ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:847:7: {...}? => ( (lv_secondAsList_42_0= 'b' ) )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:965:16: ( (lv_secondAsList_42_0= 'b' ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:966:1: (lv_secondAsList_42_0= 'b' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:847:16: ( (lv_secondAsList_42_0= 'b' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:848:1: (lv_secondAsList_42_0= 'b' )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:966:1: (lv_secondAsList_42_0= 'b' )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:967:3: lv_secondAsList_42_0= 'b'
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:848:1: (lv_secondAsList_42_0= 'b' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:849:3: lv_secondAsList_42_0= 'b'
                     	    	    {
                     	    	    lv_secondAsList_42_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleModel2407); 
 
@@ -2421,15 +2303,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	        
 
                     	    	    	        if (current==null) {
-                    	    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	    	        }
-                    	    	    	        
-                    	    	    	        try {
-                    	    	    	       		add(current, "secondAsList", lv_secondAsList_42_0, "b", lastConsumedNode);
-                    	    	    	        } catch (ValueConverterException vce) {
-                    	    	    				handleValueConverterException(vce);
-                    	    	    	        }
+                    	    	           		add(current, "secondAsList", lv_secondAsList_42_0, "b", lastConsumedNode);
                     	    	    	    
 
                     	    	    }
@@ -2494,16 +2370,16 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 10 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1002:6: (otherlv_43= '10' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) ) )* )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:878:6: (otherlv_43= '10' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) ) )* )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1002:6: (otherlv_43= '10' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) ) )* )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1002:8: otherlv_43= '10' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:878:6: (otherlv_43= '10' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) ) )* )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:878:8: otherlv_43= '10' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) ) )*
                     {
                     otherlv_43=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleModel2487); 
 
                         	createLeafNode(otherlv_43, grammarAccess.getModelAccess().getDigitOneDigitZeroKeyword_1_9_0(), null);
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1006:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:882:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) ) )*
                     loop16:
                     do {
                         int alt16=2;
@@ -2516,18 +2392,18 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt16) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1008:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:884:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1008:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1009:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?)
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:884:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:885:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?)
                     	    {
                     	     
                     	    	  getUnorderedGroupHelper().enter(grammarAccess.getModelAccess().getUnorderedGroup_1_9_1());
                     	    	
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1012:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?)
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1013:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:888:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?)
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:889:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+ {...}?
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1013:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:889:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) ) )+
                     	    int cnt15=0;
                     	    loop15:
                     	    do {
@@ -2556,31 +2432,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     	        switch (alt15) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1015:4: ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:891:4: ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1015:4: ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1016:5: {...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:891:4: ({...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:892:5: {...}? => ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) )
                     	    	    {
                     	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_9_1(), 0) ) {
                     	    	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_9_1(), 0)");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1016:106: ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1017:6: ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:892:106: ( ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:893:6: ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) )
                     	    	    {
                     	    	     
                     	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_9_1(), 0);
                     	    	    	 				
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1020:6: ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1020:7: {...}? => ( (lv_firstAsList_45_0= 'a' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:896:6: ({...}? => ( (lv_firstAsList_45_0= 'a' ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:896:7: {...}? => ( (lv_firstAsList_45_0= 'a' ) )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1020:16: ( (lv_firstAsList_45_0= 'a' ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1021:1: (lv_firstAsList_45_0= 'a' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:896:16: ( (lv_firstAsList_45_0= 'a' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:897:1: (lv_firstAsList_45_0= 'a' )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1021:1: (lv_firstAsList_45_0= 'a' )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1022:3: lv_firstAsList_45_0= 'a'
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:897:1: (lv_firstAsList_45_0= 'a' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:898:3: lv_firstAsList_45_0= 'a'
                     	    	    {
                     	    	    lv_firstAsList_45_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel2550); 
 
@@ -2588,15 +2464,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	        
 
                     	    	    	        if (current==null) {
-                    	    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	    	        }
-                    	    	    	        
-                    	    	    	        try {
-                    	    	    	       		add(current, "firstAsList", lv_firstAsList_45_0, "a", lastConsumedNode);
-                    	    	    	        } catch (ValueConverterException vce) {
-                    	    	    				handleValueConverterException(vce);
-                    	    	    	        }
+                    	    	           		add(current, "firstAsList", lv_firstAsList_45_0, "a", lastConsumedNode);
                     	    	    	    
 
                     	    	    }
@@ -2620,31 +2490,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	    }
                     	    	    break;
                     	    	case 2 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1048:4: ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:918:4: ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1048:4: ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1049:5: {...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:918:4: ({...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:919:5: {...}? => ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) )
                     	    	    {
                     	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_9_1(), 1) ) {
                     	    	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_9_1(), 1)");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1049:106: ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1050:6: ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:919:106: ( ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:920:6: ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) )
                     	    	    {
                     	    	     
                     	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_9_1(), 1);
                     	    	    	 				
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1053:6: ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1053:7: {...}? => ( (lv_secondAsList_46_0= 'b' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:923:6: ({...}? => ( (lv_secondAsList_46_0= 'b' ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:923:7: {...}? => ( (lv_secondAsList_46_0= 'b' ) )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1053:16: ( (lv_secondAsList_46_0= 'b' ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1054:1: (lv_secondAsList_46_0= 'b' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:923:16: ( (lv_secondAsList_46_0= 'b' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:924:1: (lv_secondAsList_46_0= 'b' )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1054:1: (lv_secondAsList_46_0= 'b' )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1055:3: lv_secondAsList_46_0= 'b'
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:924:1: (lv_secondAsList_46_0= 'b' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:925:3: lv_secondAsList_46_0= 'b'
                     	    	    {
                     	    	    lv_secondAsList_46_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleModel2635); 
 
@@ -2652,15 +2522,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	        
 
                     	    	    	        if (current==null) {
-                    	    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	    	        }
-                    	    	    	        
-                    	    	    	        try {
-                    	    	    	       		add(current, "secondAsList", lv_secondAsList_46_0, "b", lastConsumedNode);
-                    	    	    	        } catch (ValueConverterException vce) {
-                    	    	    				handleValueConverterException(vce);
-                    	    	    	        }
+                    	    	           		add(current, "secondAsList", lv_secondAsList_46_0, "b", lastConsumedNode);
                     	    	    	    
 
                     	    	    }
@@ -2721,16 +2585,16 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 11 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1090:6: (otherlv_47= '11' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) ) )? )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:954:6: (otherlv_47= '11' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) ) )? )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1090:6: (otherlv_47= '11' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) ) )? )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1090:8: otherlv_47= '11' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) ) )?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:954:6: (otherlv_47= '11' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) ) )? )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:954:8: otherlv_47= '11' ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) ) )?
                     {
                     otherlv_47=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleModel2715); 
 
                         	createLeafNode(otherlv_47, grammarAccess.getModelAccess().getDigitOneDigitOneKeyword_1_10_0(), null);
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1094:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) ) )?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:958:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) ) )?
                     int alt18=2;
                     int LA18_0 = input.LA(1);
 
@@ -2739,18 +2603,18 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     switch (alt18) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1096:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) )
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:960:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1096:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1097:2: ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?)
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:960:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?) )
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:961:2: ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?)
                             {
                              
                             	  getUnorderedGroupHelper().enter(grammarAccess.getModelAccess().getUnorderedGroup_1_10_1());
                             	
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1100:2: ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?)
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1101:3: ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:964:2: ( ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?)
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:965:3: ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+ {...}?
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1101:3: ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:965:3: ( ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) ) )+
                             int cnt17=0;
                             loop17:
                             do {
@@ -2767,31 +2631,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                                 switch (alt17) {
                             	case 1 :
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1103:4: ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:967:4: ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) )
                             	    {
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1103:4: ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1104:5: {...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:967:4: ({...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:968:5: {...}? => ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) )
                             	    {
                             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_10_1(), 0) ) {
                             	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_10_1(), 0)");
                             	    }
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1104:107: ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1105:6: ({...}? => ( (lv_first_49_0= 'a' ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:968:107: ( ({...}? => ( (lv_first_49_0= 'a' ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:969:6: ({...}? => ( (lv_first_49_0= 'a' ) ) )
                             	    {
                             	     
                             	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_10_1(), 0);
                             	    	 				
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1108:6: ({...}? => ( (lv_first_49_0= 'a' ) ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1108:7: {...}? => ( (lv_first_49_0= 'a' ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:972:6: ({...}? => ( (lv_first_49_0= 'a' ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:972:7: {...}? => ( (lv_first_49_0= 'a' ) )
                             	    {
                             	    if ( !((true)) ) {
                             	        throw new FailedPredicateException(input, "ruleModel", "true");
                             	    }
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1108:16: ( (lv_first_49_0= 'a' ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1109:1: (lv_first_49_0= 'a' )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:972:16: ( (lv_first_49_0= 'a' ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:973:1: (lv_first_49_0= 'a' )
                             	    {
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1109:1: (lv_first_49_0= 'a' )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1110:3: lv_first_49_0= 'a'
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:973:1: (lv_first_49_0= 'a' )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:974:3: lv_first_49_0= 'a'
                             	    {
                             	    lv_first_49_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel2778); 
 
@@ -2799,15 +2663,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                             	        
 
                             	    	        if (current==null) {
-                            	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                            	    	            associateNodeWithAstElement(currentNode, current);
+                            	    	            current = createModelElement(grammarAccess.getModelRule());
                             	    	        }
-                            	    	        
-                            	    	        try {
-                            	    	       		set(current, "first", true, "a", lastConsumedNode);
-                            	    	        } catch (ValueConverterException vce) {
-                            	    				handleValueConverterException(vce);
-                            	    	        }
+                            	           		set(current, "first", true, "a", lastConsumedNode);
                             	    	    
 
                             	    }
@@ -2831,31 +2689,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                             	    }
                             	    break;
                             	case 2 :
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1136:4: ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:994:4: ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) )
                             	    {
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1136:4: ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1137:5: {...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:994:4: ({...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:995:5: {...}? => ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) )
                             	    {
                             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_10_1(), 1) ) {
                             	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_10_1(), 1)");
                             	    }
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1137:107: ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1138:6: ({...}? => ( (lv_second_50_0= 'b' ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:995:107: ( ({...}? => ( (lv_second_50_0= 'b' ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:996:6: ({...}? => ( (lv_second_50_0= 'b' ) ) )
                             	    {
                             	     
                             	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_10_1(), 1);
                             	    	 				
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1141:6: ({...}? => ( (lv_second_50_0= 'b' ) ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1141:7: {...}? => ( (lv_second_50_0= 'b' ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:999:6: ({...}? => ( (lv_second_50_0= 'b' ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:999:7: {...}? => ( (lv_second_50_0= 'b' ) )
                             	    {
                             	    if ( !((true)) ) {
                             	        throw new FailedPredicateException(input, "ruleModel", "true");
                             	    }
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1141:16: ( (lv_second_50_0= 'b' ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1142:1: (lv_second_50_0= 'b' )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:999:16: ( (lv_second_50_0= 'b' ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1000:1: (lv_second_50_0= 'b' )
                             	    {
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1142:1: (lv_second_50_0= 'b' )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1143:3: lv_second_50_0= 'b'
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1000:1: (lv_second_50_0= 'b' )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1001:3: lv_second_50_0= 'b'
                             	    {
                             	    lv_second_50_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleModel2863); 
 
@@ -2863,15 +2721,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                             	        
 
                             	    	        if (current==null) {
-                            	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                            	    	            associateNodeWithAstElement(currentNode, current);
+                            	    	            current = createModelElement(grammarAccess.getModelRule());
                             	    	        }
-                            	    	        
-                            	    	        try {
-                            	    	       		set(current, "second", true, "b", lastConsumedNode);
-                            	    	        } catch (ValueConverterException vce) {
-                            	    				handleValueConverterException(vce);
-                            	    	        }
+                            	           		set(current, "second", true, "b", lastConsumedNode);
                             	    	    
 
                             	    }
@@ -2929,28 +2781,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 12 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1178:6: (otherlv_51= '12' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1030:6: (otherlv_51= '12' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1178:6: (otherlv_51= '12' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1178:8: otherlv_51= '12' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1030:6: (otherlv_51= '12' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1030:8: otherlv_51= '12' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) ) )
                     {
                     otherlv_51=(Token)match(input,26,FollowSets000.FOLLOW_26_in_ruleModel2943); 
 
                         	createLeafNode(otherlv_51, grammarAccess.getModelAccess().getDigitOneDigitTwoKeyword_1_11_0(), null);
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1182:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1184:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1034:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1036:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1184:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1185:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1036:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1037:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?)
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getModelAccess().getUnorderedGroup_1_11_1());
                     	
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1188:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?)
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1189:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1040:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1041:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+ {...}?
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1189:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1041:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) ) )+
                     int cnt19=0;
                     loop19:
                     do {
@@ -2979,31 +2831,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt19) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1191:4: ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1043:4: ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1191:4: ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1192:5: {...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1043:4: ({...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1044:5: {...}? => ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_11_1(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_11_1(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1192:107: ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1193:6: ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1044:107: ( ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1045:6: ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_11_1(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1196:6: ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1196:7: {...}? => ( (lv_firstAsList_53_0= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1048:6: ({...}? => ( (lv_firstAsList_53_0= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1048:7: {...}? => ( (lv_firstAsList_53_0= 'a' ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1196:16: ( (lv_firstAsList_53_0= 'a' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1197:1: (lv_firstAsList_53_0= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1048:16: ( (lv_firstAsList_53_0= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1049:1: (lv_firstAsList_53_0= 'a' )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1197:1: (lv_firstAsList_53_0= 'a' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1198:3: lv_firstAsList_53_0= 'a'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1049:1: (lv_firstAsList_53_0= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1050:3: lv_firstAsList_53_0= 'a'
                     	    {
                     	    lv_firstAsList_53_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel3006); 
 
@@ -3011,15 +2863,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	        
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	        }
-                    	    	        
-                    	    	        try {
-                    	    	       		add(current, "firstAsList", lv_firstAsList_53_0, "a", lastConsumedNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
+                    	           		add(current, "firstAsList", lv_firstAsList_53_0, "a", lastConsumedNode);
                     	    	    
 
                     	    }
@@ -3043,31 +2889,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1224:4: ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1070:4: ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1224:4: ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1225:5: {...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1070:4: ({...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1071:5: {...}? => ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_11_1(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_11_1(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1225:107: ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1226:6: ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1071:107: ( ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1072:6: ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_11_1(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1229:6: ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1229:7: {...}? => ( (lv_secondAsList_54_0= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1075:6: ({...}? => ( (lv_secondAsList_54_0= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1075:7: {...}? => ( (lv_secondAsList_54_0= 'b' ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1229:16: ( (lv_secondAsList_54_0= 'b' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1230:1: (lv_secondAsList_54_0= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1075:16: ( (lv_secondAsList_54_0= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1076:1: (lv_secondAsList_54_0= 'b' )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1230:1: (lv_secondAsList_54_0= 'b' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1231:3: lv_secondAsList_54_0= 'b'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1076:1: (lv_secondAsList_54_0= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1077:3: lv_secondAsList_54_0= 'b'
                     	    {
                     	    lv_secondAsList_54_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleModel3091); 
 
@@ -3075,15 +2921,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	        
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	        }
-                    	    	        
-                    	    	        try {
-                    	    	       		add(current, "secondAsList", lv_secondAsList_54_0, "b", lastConsumedNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
+                    	           		add(current, "secondAsList", lv_secondAsList_54_0, "b", lastConsumedNode);
                     	    	    
 
                     	    }
@@ -3131,19 +2971,19 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1265:2: ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1267:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1105:2: ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1107:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1267:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1268:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1107:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1108:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?)
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getModelAccess().getUnorderedGroup_1_11_2());
                     	
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1271:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?)
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1272:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1111:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1112:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+ {...}?
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1272:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1112:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) ) )+
                     int cnt20=0;
                     loop20:
                     do {
@@ -3160,31 +3000,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt20) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1274:4: ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1114:4: ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1274:4: ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1275:5: {...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1114:4: ({...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1115:5: {...}? => ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_11_2(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_11_2(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1275:107: ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1276:6: ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1115:107: ( ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1116:6: ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_11_2(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1279:6: ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1279:7: {...}? => ( (lv_firstAsList_56_0= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1119:6: ({...}? => ( (lv_firstAsList_56_0= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1119:7: {...}? => ( (lv_firstAsList_56_0= 'a' ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1279:16: ( (lv_firstAsList_56_0= 'a' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1280:1: (lv_firstAsList_56_0= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1119:16: ( (lv_firstAsList_56_0= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1120:1: (lv_firstAsList_56_0= 'a' )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1280:1: (lv_firstAsList_56_0= 'a' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1281:3: lv_firstAsList_56_0= 'a'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1120:1: (lv_firstAsList_56_0= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1121:3: lv_firstAsList_56_0= 'a'
                     	    {
                     	    lv_firstAsList_56_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel3213); 
 
@@ -3192,15 +3032,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	        
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	        }
-                    	    	        
-                    	    	        try {
-                    	    	       		add(current, "firstAsList", lv_firstAsList_56_0, "a", lastConsumedNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
+                    	           		add(current, "firstAsList", lv_firstAsList_56_0, "a", lastConsumedNode);
                     	    	    
 
                     	    }
@@ -3224,31 +3058,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1307:4: ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1141:4: ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1307:4: ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1308:5: {...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1141:4: ({...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1142:5: {...}? => ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_11_2(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_11_2(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1308:107: ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1309:6: ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1142:107: ( ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1143:6: ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_11_2(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1312:6: ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1312:7: {...}? => ( (lv_secondAsList_57_0= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1146:6: ({...}? => ( (lv_secondAsList_57_0= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1146:7: {...}? => ( (lv_secondAsList_57_0= 'b' ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1312:16: ( (lv_secondAsList_57_0= 'b' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1313:1: (lv_secondAsList_57_0= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1146:16: ( (lv_secondAsList_57_0= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1147:1: (lv_secondAsList_57_0= 'b' )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1313:1: (lv_secondAsList_57_0= 'b' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1314:3: lv_secondAsList_57_0= 'b'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1147:1: (lv_secondAsList_57_0= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1148:3: lv_secondAsList_57_0= 'b'
                     	    {
                     	    lv_secondAsList_57_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleModel3298); 
 
@@ -3256,15 +3090,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	        
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	        }
-                    	    	        
-                    	    	        try {
-                    	    	       		add(current, "secondAsList", lv_secondAsList_57_0, "b", lastConsumedNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
+                    	           		add(current, "secondAsList", lv_secondAsList_57_0, "b", lastConsumedNode);
                     	    	    
 
                     	    }
@@ -3319,16 +3147,16 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 13 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1349:6: (otherlv_58= '13' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ( (lv_firstAsList_62_0= 'a' ) ) ( (lv_secondAsList_63_0= 'b' ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1177:6: (otherlv_58= '13' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ( (lv_firstAsList_62_0= 'a' ) ) ( (lv_secondAsList_63_0= 'b' ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1349:6: (otherlv_58= '13' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ( (lv_firstAsList_62_0= 'a' ) ) ( (lv_secondAsList_63_0= 'b' ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1349:8: otherlv_58= '13' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ( (lv_firstAsList_62_0= 'a' ) ) ( (lv_secondAsList_63_0= 'b' ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1177:6: (otherlv_58= '13' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ( (lv_firstAsList_62_0= 'a' ) ) ( (lv_secondAsList_63_0= 'b' ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1177:8: otherlv_58= '13' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) ) )? ( (lv_firstAsList_62_0= 'a' ) ) ( (lv_secondAsList_63_0= 'b' ) )
                     {
                     otherlv_58=(Token)match(input,27,FollowSets000.FOLLOW_27_in_ruleModel3377); 
 
                         	createLeafNode(otherlv_58, grammarAccess.getModelAccess().getDigitOneDigitThreeKeyword_1_12_0(), null);
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1353:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) ) )?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1181:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) ) )?
                     int alt22=2;
                     int LA22_0 = input.LA(1);
 
@@ -3351,18 +3179,18 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     switch (alt22) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1355:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) )
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1183:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1355:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1356:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?)
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1183:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?) )
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1184:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?)
                             {
                              
                             	  getUnorderedGroupHelper().enter(grammarAccess.getModelAccess().getUnorderedGroup_1_12_1());
                             	
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1359:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?)
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1360:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1187:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?)
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1188:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+ {...}?
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1360:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1188:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) ) )+
                             int cnt21=0;
                             loop21:
                             do {
@@ -3394,31 +3222,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                                 switch (alt21) {
                             	case 1 :
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1362:4: ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1190:4: ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) )
                             	    {
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1362:4: ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1363:5: {...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1190:4: ({...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1191:5: {...}? => ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) )
                             	    {
                             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_12_1(), 0) ) {
                             	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_12_1(), 0)");
                             	    }
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1363:107: ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1364:6: ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1191:107: ( ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1192:6: ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) )
                             	    {
                             	     
                             	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_12_1(), 0);
                             	    	 				
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1367:6: ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1367:7: {...}? => ( (lv_firstAsList_60_0= 'a' ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1195:6: ({...}? => ( (lv_firstAsList_60_0= 'a' ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1195:7: {...}? => ( (lv_firstAsList_60_0= 'a' ) )
                             	    {
                             	    if ( !((true)) ) {
                             	        throw new FailedPredicateException(input, "ruleModel", "true");
                             	    }
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1367:16: ( (lv_firstAsList_60_0= 'a' ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1368:1: (lv_firstAsList_60_0= 'a' )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1195:16: ( (lv_firstAsList_60_0= 'a' ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1196:1: (lv_firstAsList_60_0= 'a' )
                             	    {
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1368:1: (lv_firstAsList_60_0= 'a' )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1369:3: lv_firstAsList_60_0= 'a'
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1196:1: (lv_firstAsList_60_0= 'a' )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1197:3: lv_firstAsList_60_0= 'a'
                             	    {
                             	    lv_firstAsList_60_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel3440); 
 
@@ -3426,15 +3254,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                             	        
 
                             	    	        if (current==null) {
-                            	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                            	    	            associateNodeWithAstElement(currentNode, current);
+                            	    	            current = createModelElement(grammarAccess.getModelRule());
                             	    	        }
-                            	    	        
-                            	    	        try {
-                            	    	       		add(current, "firstAsList", lv_firstAsList_60_0, "a", lastConsumedNode);
-                            	    	        } catch (ValueConverterException vce) {
-                            	    				handleValueConverterException(vce);
-                            	    	        }
+                            	           		add(current, "firstAsList", lv_firstAsList_60_0, "a", lastConsumedNode);
                             	    	    
 
                             	    }
@@ -3458,31 +3280,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                             	    }
                             	    break;
                             	case 2 :
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1395:4: ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1217:4: ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) )
                             	    {
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1395:4: ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1396:5: {...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1217:4: ({...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1218:5: {...}? => ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) )
                             	    {
                             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_12_1(), 1) ) {
                             	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_12_1(), 1)");
                             	    }
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1396:107: ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1397:6: ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1218:107: ( ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1219:6: ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) )
                             	    {
                             	     
                             	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_12_1(), 1);
                             	    	 				
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1400:6: ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1400:7: {...}? => ( (lv_secondAsList_61_0= 'b' ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1222:6: ({...}? => ( (lv_secondAsList_61_0= 'b' ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1222:7: {...}? => ( (lv_secondAsList_61_0= 'b' ) )
                             	    {
                             	    if ( !((true)) ) {
                             	        throw new FailedPredicateException(input, "ruleModel", "true");
                             	    }
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1400:16: ( (lv_secondAsList_61_0= 'b' ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1401:1: (lv_secondAsList_61_0= 'b' )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1222:16: ( (lv_secondAsList_61_0= 'b' ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1223:1: (lv_secondAsList_61_0= 'b' )
                             	    {
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1401:1: (lv_secondAsList_61_0= 'b' )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1402:3: lv_secondAsList_61_0= 'b'
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1223:1: (lv_secondAsList_61_0= 'b' )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1224:3: lv_secondAsList_61_0= 'b'
                             	    {
                             	    lv_secondAsList_61_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleModel3525); 
 
@@ -3490,15 +3312,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                             	        
 
                             	    	        if (current==null) {
-                            	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                            	    	            associateNodeWithAstElement(currentNode, current);
+                            	    	            current = createModelElement(grammarAccess.getModelRule());
                             	    	        }
-                            	    	        
-                            	    	        try {
-                            	    	       		add(current, "secondAsList", lv_secondAsList_61_0, "b", lastConsumedNode);
-                            	    	        } catch (ValueConverterException vce) {
-                            	    				handleValueConverterException(vce);
-                            	    	        }
+                            	           		add(current, "secondAsList", lv_secondAsList_61_0, "b", lastConsumedNode);
                             	    	    
 
                             	    }
@@ -3549,11 +3365,11 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1436:3: ( (lv_firstAsList_62_0= 'a' ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1437:1: (lv_firstAsList_62_0= 'a' )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1252:3: ( (lv_firstAsList_62_0= 'a' ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1253:1: (lv_firstAsList_62_0= 'a' )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1437:1: (lv_firstAsList_62_0= 'a' )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1438:3: lv_firstAsList_62_0= 'a'
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1253:1: (lv_firstAsList_62_0= 'a' )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1254:3: lv_firstAsList_62_0= 'a'
                     {
                     lv_firstAsList_62_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel3603); 
 
@@ -3561,15 +3377,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	            associateNodeWithAstElement(currentNode, current);
+                    	            current = createModelElement(grammarAccess.getModelRule());
                     	        }
-                    	        
-                    	        try {
-                    	       		add(current, "firstAsList", lv_firstAsList_62_0, "a", lastConsumedNode);
-                    	        } catch (ValueConverterException vce) {
-                    				handleValueConverterException(vce);
-                    	        }
+                           		add(current, "firstAsList", lv_firstAsList_62_0, "a", lastConsumedNode);
                     	    
 
                     }
@@ -3577,11 +3387,11 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1457:2: ( (lv_secondAsList_63_0= 'b' ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1458:1: (lv_secondAsList_63_0= 'b' )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1267:2: ( (lv_secondAsList_63_0= 'b' ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1268:1: (lv_secondAsList_63_0= 'b' )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1458:1: (lv_secondAsList_63_0= 'b' )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1459:3: lv_secondAsList_63_0= 'b'
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1268:1: (lv_secondAsList_63_0= 'b' )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1269:3: lv_secondAsList_63_0= 'b'
                     {
                     lv_secondAsList_63_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleModel3634); 
 
@@ -3589,15 +3399,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	            associateNodeWithAstElement(currentNode, current);
+                    	            current = createModelElement(grammarAccess.getModelRule());
                     	        }
-                    	        
-                    	        try {
-                    	       		add(current, "secondAsList", lv_secondAsList_63_0, "b", lastConsumedNode);
-                    	        } catch (ValueConverterException vce) {
-                    				handleValueConverterException(vce);
-                    	        }
+                           		add(current, "secondAsList", lv_secondAsList_63_0, "b", lastConsumedNode);
                     	    
 
                     }
@@ -3612,16 +3416,16 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 14 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1479:6: (otherlv_64= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1283:6: (otherlv_64= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1479:6: (otherlv_64= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1479:8: otherlv_64= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1283:6: (otherlv_64= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1283:8: otherlv_64= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+
                     {
                     otherlv_64=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleModel3667); 
 
                         	createLeafNode(otherlv_64, grammarAccess.getModelAccess().getDigitOneDigitFourKeyword_1_13_0(), null);
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1483:1: ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1287:1: ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+
                     int cnt26=0;
                     loop26:
                     do {
@@ -3635,18 +3439,18 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt26) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1485:1: ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1289:1: ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1485:1: ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1486:2: ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?)
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1289:1: ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1290:2: ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?)
                     	    {
                     	     
                     	    	  getUnorderedGroupHelper().enter(grammarAccess.getModelAccess().getUnorderedGroup_1_13_1());
                     	    	
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1489:2: ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?)
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1490:3: ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1293:2: ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?)
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1294:3: ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1490:3: ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1294:3: ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) ) )+
                     	    int cnt25=0;
                     	    loop25:
                     	    do {
@@ -3701,39 +3505,39 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     	        switch (alt25) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1492:4: ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1296:4: ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1492:4: ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1493:5: {...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1296:4: ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1297:5: {...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) )
                     	    	    {
                     	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_13_1(), 0) ) {
                     	    	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_13_1(), 0)");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1493:107: ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1494:6: ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1297:107: ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1298:6: ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) )
                     	    	    {
                     	    	     
                     	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_13_1(), 0);
                     	    	    	 				
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1497:6: ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1497:7: {...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1301:6: ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1301:7: {...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1497:16: ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1499:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1301:16: ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1303:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1499:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1500:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?)
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1303:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1304:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?)
                     	    	    {
                     	    	     
                     	    	    	  getUnorderedGroupHelper().enter(grammarAccess.getModelAccess().getUnorderedGroup_1_13_1_0());
                     	    	    	
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1503:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?)
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1504:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1307:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?)
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1308:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+ {...}?
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1504:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1308:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) ) )+
                     	    	    int cnt23=0;
                     	    	    loop23:
                     	    	    do {
@@ -3762,31 +3566,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     	    	        switch (alt23) {
                     	    	    	case 1 :
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1506:4: ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1310:4: ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) )
                     	    	    	    {
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1506:4: ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1507:5: {...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1310:4: ({...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1311:5: {...}? => ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) )
                     	    	    	    {
                     	    	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_13_1_0(), 0) ) {
                     	    	    	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_13_1_0(), 0)");
                     	    	    	    }
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1507:109: ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1508:6: ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1311:109: ( ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1312:6: ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) )
                     	    	    	    {
                     	    	    	     
                     	    	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_13_1_0(), 0);
                     	    	    	    	 				
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1511:6: ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1511:7: {...}? => ( (lv_firstAsList_67_0= 'a' ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1315:6: ({...}? => ( (lv_firstAsList_67_0= 'a' ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1315:7: {...}? => ( (lv_firstAsList_67_0= 'a' ) )
                     	    	    	    {
                     	    	    	    if ( !((true)) ) {
                     	    	    	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    	    	    }
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1511:16: ( (lv_firstAsList_67_0= 'a' ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1512:1: (lv_firstAsList_67_0= 'a' )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1315:16: ( (lv_firstAsList_67_0= 'a' ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1316:1: (lv_firstAsList_67_0= 'a' )
                     	    	    	    {
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1512:1: (lv_firstAsList_67_0= 'a' )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1513:3: lv_firstAsList_67_0= 'a'
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1316:1: (lv_firstAsList_67_0= 'a' )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1317:3: lv_firstAsList_67_0= 'a'
                     	    	    	    {
                     	    	    	    lv_firstAsList_67_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel3775); 
 
@@ -3794,15 +3598,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	    	        
 
                     	    	    	    	        if (current==null) {
-                    	    	    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	    	    	        }
-                    	    	    	    	        
-                    	    	    	    	        try {
-                    	    	    	    	       		add(current, "firstAsList", lv_firstAsList_67_0, "a", lastConsumedNode);
-                    	    	    	    	        } catch (ValueConverterException vce) {
-                    	    	    	    				handleValueConverterException(vce);
-                    	    	    	    	        }
+                    	    	    	           		add(current, "firstAsList", lv_firstAsList_67_0, "a", lastConsumedNode);
                     	    	    	    	    
 
                     	    	    	    }
@@ -3826,31 +3624,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	    	    }
                     	    	    	    break;
                     	    	    	case 2 :
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1539:4: ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1337:4: ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) )
                     	    	    	    {
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1539:4: ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1540:5: {...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1337:4: ({...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1338:5: {...}? => ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) )
                     	    	    	    {
                     	    	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_13_1_0(), 1) ) {
                     	    	    	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_13_1_0(), 1)");
                     	    	    	    }
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1540:109: ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1541:6: ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1338:109: ( ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1339:6: ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) )
                     	    	    	    {
                     	    	    	     
                     	    	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_13_1_0(), 1);
                     	    	    	    	 				
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1544:6: ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1544:7: {...}? => ( (lv_secondAsList_68_0= 'b' ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1342:6: ({...}? => ( (lv_secondAsList_68_0= 'b' ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1342:7: {...}? => ( (lv_secondAsList_68_0= 'b' ) )
                     	    	    	    {
                     	    	    	    if ( !((true)) ) {
                     	    	    	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    	    	    }
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1544:16: ( (lv_secondAsList_68_0= 'b' ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1545:1: (lv_secondAsList_68_0= 'b' )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1342:16: ( (lv_secondAsList_68_0= 'b' ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1343:1: (lv_secondAsList_68_0= 'b' )
                     	    	    	    {
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1545:1: (lv_secondAsList_68_0= 'b' )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1546:3: lv_secondAsList_68_0= 'b'
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1343:1: (lv_secondAsList_68_0= 'b' )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1344:3: lv_secondAsList_68_0= 'b'
                     	    	    	    {
                     	    	    	    lv_secondAsList_68_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleModel3860); 
 
@@ -3858,15 +3656,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	    	        
 
                     	    	    	    	        if (current==null) {
-                    	    	    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	    	    	        }
-                    	    	    	    	        
-                    	    	    	    	        try {
-                    	    	    	    	       		add(current, "secondAsList", lv_secondAsList_68_0, "b", lastConsumedNode);
-                    	    	    	    	        } catch (ValueConverterException vce) {
-                    	    	    	    				handleValueConverterException(vce);
-                    	    	    	    	        }
+                    	    	    	           		add(current, "secondAsList", lv_secondAsList_68_0, "b", lastConsumedNode);
                     	    	    	    	    
 
                     	    	    	    }
@@ -3930,39 +3722,39 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	    }
                     	    	    break;
                     	    	case 2 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1587:4: ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1379:4: ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1587:4: ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1588:5: {...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1379:4: ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1380:5: {...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) )
                     	    	    {
                     	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_13_1(), 1) ) {
                     	    	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_13_1(), 1)");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1588:107: ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1589:6: ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1380:107: ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1381:6: ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) )
                     	    	    {
                     	    	     
                     	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_13_1(), 1);
                     	    	    	 				
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1592:6: ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1592:7: {...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1384:6: ({...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1384:7: {...}? => ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1592:16: ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1594:1: ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1384:16: ( ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1386:1: ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1594:1: ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1595:2: ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?)
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1386:1: ( ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1387:2: ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?)
                     	    	    {
                     	    	     
                     	    	    	  getUnorderedGroupHelper().enter(grammarAccess.getModelAccess().getUnorderedGroup_1_13_1_1());
                     	    	    	
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1598:2: ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?)
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1599:3: ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1390:2: ( ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?)
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1391:3: ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+ {...}?
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1599:3: ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1391:3: ( ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) ) )+
                     	    	    int cnt24=0;
                     	    	    loop24:
                     	    	    do {
@@ -3991,31 +3783,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     	    	        switch (alt24) {
                     	    	    	case 1 :
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1601:4: ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1393:4: ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) )
                     	    	    	    {
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1601:4: ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1602:5: {...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1393:4: ({...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1394:5: {...}? => ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) )
                     	    	    	    {
                     	    	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_13_1_1(), 0) ) {
                     	    	    	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_13_1_1(), 0)");
                     	    	    	    }
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1602:109: ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1603:6: ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1394:109: ( ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1395:6: ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) )
                     	    	    	    {
                     	    	    	     
                     	    	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_13_1_1(), 0);
                     	    	    	    	 				
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1606:6: ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1606:7: {...}? => ( (lv_thirdAsList_70_0= 'c' ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1398:6: ({...}? => ( (lv_thirdAsList_70_0= 'c' ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1398:7: {...}? => ( (lv_thirdAsList_70_0= 'c' ) )
                     	    	    	    {
                     	    	    	    if ( !((true)) ) {
                     	    	    	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    	    	    }
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1606:16: ( (lv_thirdAsList_70_0= 'c' ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1607:1: (lv_thirdAsList_70_0= 'c' )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1398:16: ( (lv_thirdAsList_70_0= 'c' ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1399:1: (lv_thirdAsList_70_0= 'c' )
                     	    	    	    {
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1607:1: (lv_thirdAsList_70_0= 'c' )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1608:3: lv_thirdAsList_70_0= 'c'
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1399:1: (lv_thirdAsList_70_0= 'c' )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1400:3: lv_thirdAsList_70_0= 'c'
                     	    	    	    {
                     	    	    	    lv_thirdAsList_70_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleModel4036); 
 
@@ -4023,15 +3815,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	    	        
 
                     	    	    	    	        if (current==null) {
-                    	    	    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	    	    	        }
-                    	    	    	    	        
-                    	    	    	    	        try {
-                    	    	    	    	       		add(current, "thirdAsList", lv_thirdAsList_70_0, "c", lastConsumedNode);
-                    	    	    	    	        } catch (ValueConverterException vce) {
-                    	    	    	    				handleValueConverterException(vce);
-                    	    	    	    	        }
+                    	    	    	           		add(current, "thirdAsList", lv_thirdAsList_70_0, "c", lastConsumedNode);
                     	    	    	    	    
 
                     	    	    	    }
@@ -4055,31 +3841,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	    	    }
                     	    	    	    break;
                     	    	    	case 2 :
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1634:4: ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1420:4: ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) )
                     	    	    	    {
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1634:4: ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1635:5: {...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1420:4: ({...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1421:5: {...}? => ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) )
                     	    	    	    {
                     	    	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_13_1_1(), 1) ) {
                     	    	    	        throw new FailedPredicateException(input, "ruleModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_13_1_1(), 1)");
                     	    	    	    }
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1635:109: ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1636:6: ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1421:109: ( ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1422:6: ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) )
                     	    	    	    {
                     	    	    	     
                     	    	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_13_1_1(), 1);
                     	    	    	    	 				
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1639:6: ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1639:7: {...}? => ( (lv_forthAsList_71_0= 'd' ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1425:6: ({...}? => ( (lv_forthAsList_71_0= 'd' ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1425:7: {...}? => ( (lv_forthAsList_71_0= 'd' ) )
                     	    	    	    {
                     	    	    	    if ( !((true)) ) {
                     	    	    	        throw new FailedPredicateException(input, "ruleModel", "true");
                     	    	    	    }
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1639:16: ( (lv_forthAsList_71_0= 'd' ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1640:1: (lv_forthAsList_71_0= 'd' )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1425:16: ( (lv_forthAsList_71_0= 'd' ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1426:1: (lv_forthAsList_71_0= 'd' )
                     	    	    	    {
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1640:1: (lv_forthAsList_71_0= 'd' )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1641:3: lv_forthAsList_71_0= 'd'
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1426:1: (lv_forthAsList_71_0= 'd' )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1427:3: lv_forthAsList_71_0= 'd'
                     	    	    	    {
                     	    	    	    lv_forthAsList_71_0=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleModel4121); 
 
@@ -4087,15 +3873,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	    	        
 
                     	    	    	    	        if (current==null) {
-                    	    	    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	    	    	            current = createModelElement(grammarAccess.getModelRule());
                     	    	    	    	        }
-                    	    	    	    	        
-                    	    	    	    	        try {
-                    	    	    	    	       		add(current, "forthAsList", lv_forthAsList_71_0, "d", lastConsumedNode);
-                    	    	    	    	        } catch (ValueConverterException vce) {
-                    	    	    	    				handleValueConverterException(vce);
-                    	    	    	    	        }
+                    	    	    	           		add(current, "forthAsList", lv_forthAsList_71_0, "d", lastConsumedNode);
                     	    	    	    	    
 
                     	    	    	    }
@@ -4200,20 +3980,20 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 15 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1691:6: (otherlv_72= 'datatypes' ( (lv_value_73_0= ruleUnorderedDatatype ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1471:6: (otherlv_72= 'datatypes' ( (lv_value_73_0= ruleUnorderedDatatype ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1691:6: (otherlv_72= 'datatypes' ( (lv_value_73_0= ruleUnorderedDatatype ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1691:8: otherlv_72= 'datatypes' ( (lv_value_73_0= ruleUnorderedDatatype ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1471:6: (otherlv_72= 'datatypes' ( (lv_value_73_0= ruleUnorderedDatatype ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1471:8: otherlv_72= 'datatypes' ( (lv_value_73_0= ruleUnorderedDatatype ) )
                     {
                     otherlv_72=(Token)match(input,29,FollowSets000.FOLLOW_29_in_ruleModel4247); 
 
                         	createLeafNode(otherlv_72, grammarAccess.getModelAccess().getDatatypesKeyword_1_14_0(), null);
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1695:1: ( (lv_value_73_0= ruleUnorderedDatatype ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1696:1: (lv_value_73_0= ruleUnorderedDatatype )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1475:1: ( (lv_value_73_0= ruleUnorderedDatatype ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1476:1: (lv_value_73_0= ruleUnorderedDatatype )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1696:1: (lv_value_73_0= ruleUnorderedDatatype )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1697:3: lv_value_73_0= ruleUnorderedDatatype
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1476:1: (lv_value_73_0= ruleUnorderedDatatype )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1477:3: lv_value_73_0= ruleUnorderedDatatype
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getValueUnorderedDatatypeParserRuleCall_1_14_1_0(), currentNode); 
@@ -4225,20 +4005,15 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	            associateNodeWithAstElement(currentNode.getParent(), current);
+                    	            current = createModelElementForParent(grammarAccess.getModelRule());
                     	        }
-                    	        try {
-                    	       		set(
-                    	       			current, 
-                    	       			"value",
-                    	        		lv_value_73_0, 
-                    	        		"UnorderedDatatype", 
-                    	        		currentNode);
-                    	        } catch (ValueConverterException vce) {
-                    				handleValueConverterException(vce);
-                    	        }
-                    	        currentNode = currentNode.getParent();
+                           		set(
+                           			current, 
+                           			"value",
+                            		lv_value_73_0, 
+                            		"UnorderedDatatype", 
+                            		currentNode);
+                    	        afterParserOrEnumRuleCall();
                     	    
 
                     }
@@ -4253,20 +4028,20 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 16 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1720:6: (otherlv_74= 'serialization' ( (lv_serialized_75_0= ruleUnorderedSerialization ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1495:6: (otherlv_74= 'serialization' ( (lv_serialized_75_0= ruleUnorderedSerialization ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1720:6: (otherlv_74= 'serialization' ( (lv_serialized_75_0= ruleUnorderedSerialization ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1720:8: otherlv_74= 'serialization' ( (lv_serialized_75_0= ruleUnorderedSerialization ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1495:6: (otherlv_74= 'serialization' ( (lv_serialized_75_0= ruleUnorderedSerialization ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1495:8: otherlv_74= 'serialization' ( (lv_serialized_75_0= ruleUnorderedSerialization ) )
                     {
                     otherlv_74=(Token)match(input,30,FollowSets000.FOLLOW_30_in_ruleModel4288); 
 
                         	createLeafNode(otherlv_74, grammarAccess.getModelAccess().getSerializationKeyword_1_15_0(), null);
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1724:1: ( (lv_serialized_75_0= ruleUnorderedSerialization ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1725:1: (lv_serialized_75_0= ruleUnorderedSerialization )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1499:1: ( (lv_serialized_75_0= ruleUnorderedSerialization ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1500:1: (lv_serialized_75_0= ruleUnorderedSerialization )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1725:1: (lv_serialized_75_0= ruleUnorderedSerialization )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1726:3: lv_serialized_75_0= ruleUnorderedSerialization
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1500:1: (lv_serialized_75_0= ruleUnorderedSerialization )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1501:3: lv_serialized_75_0= ruleUnorderedSerialization
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getSerializedUnorderedSerializationParserRuleCall_1_15_1_0(), currentNode); 
@@ -4278,20 +4053,15 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	            associateNodeWithAstElement(currentNode.getParent(), current);
+                    	            current = createModelElementForParent(grammarAccess.getModelRule());
                     	        }
-                    	        try {
-                    	       		set(
-                    	       			current, 
-                    	       			"serialized",
-                    	        		lv_serialized_75_0, 
-                    	        		"UnorderedSerialization", 
-                    	        		currentNode);
-                    	        } catch (ValueConverterException vce) {
-                    				handleValueConverterException(vce);
-                    	        }
-                    	        currentNode = currentNode.getParent();
+                           		set(
+                           			current, 
+                           			"serialized",
+                            		lv_serialized_75_0, 
+                            		"UnorderedSerialization", 
+                            		currentNode);
+                    	        afterParserOrEnumRuleCall();
                     	    
 
                     }
@@ -4306,16 +4076,16 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 17 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1749:6: (otherlv_76= 'bug302585' ( (lv_nestedModel_77_0= ruleNestedModel ) )* )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1519:6: (otherlv_76= 'bug302585' ( (lv_nestedModel_77_0= ruleNestedModel ) )* )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1749:6: (otherlv_76= 'bug302585' ( (lv_nestedModel_77_0= ruleNestedModel ) )* )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1749:8: otherlv_76= 'bug302585' ( (lv_nestedModel_77_0= ruleNestedModel ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1519:6: (otherlv_76= 'bug302585' ( (lv_nestedModel_77_0= ruleNestedModel ) )* )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1519:8: otherlv_76= 'bug302585' ( (lv_nestedModel_77_0= ruleNestedModel ) )*
                     {
                     otherlv_76=(Token)match(input,31,FollowSets000.FOLLOW_31_in_ruleModel4329); 
 
                         	createLeafNode(otherlv_76, grammarAccess.getModelAccess().getBug302585Keyword_1_16_0(), null);
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1753:1: ( (lv_nestedModel_77_0= ruleNestedModel ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1523:1: ( (lv_nestedModel_77_0= ruleNestedModel ) )*
                     loop27:
                     do {
                         int alt27=2;
@@ -4328,10 +4098,10 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt27) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1754:1: (lv_nestedModel_77_0= ruleNestedModel )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1524:1: (lv_nestedModel_77_0= ruleNestedModel )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1754:1: (lv_nestedModel_77_0= ruleNestedModel )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1755:3: lv_nestedModel_77_0= ruleNestedModel
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1524:1: (lv_nestedModel_77_0= ruleNestedModel )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1525:3: lv_nestedModel_77_0= ruleNestedModel
                     	    {
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getNestedModelNestedModelParserRuleCall_1_16_1_0(), currentNode); 
@@ -4343,20 +4113,15 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode.getParent(), current);
+                    	    	            current = createModelElementForParent(grammarAccess.getModelRule());
                     	    	        }
-                    	    	        try {
-                    	    	       		add(
-                    	    	       			current, 
-                    	    	       			"nestedModel",
-                    	    	        		lv_nestedModel_77_0, 
-                    	    	        		"NestedModel", 
-                    	    	        		currentNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
-                    	    	        currentNode = currentNode.getParent();
+                    	           		add(
+                    	           			current, 
+                    	           			"nestedModel",
+                    	            		lv_nestedModel_77_0, 
+                    	            		"NestedModel", 
+                    	            		currentNode);
+                    	    	        afterParserOrEnumRuleCall();
                     	    	    
 
                     	    }
@@ -4402,7 +4167,7 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
 
     // $ANTLR start "entryRuleNestedModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1785:1: entryRuleNestedModel returns [EObject current=null] : iv_ruleNestedModel= ruleNestedModel EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1550:1: entryRuleNestedModel returns [EObject current=null] : iv_ruleNestedModel= ruleNestedModel EOF ;
     public final EObject entryRuleNestedModel() throws RecognitionException {
         EObject current = null;
 
@@ -4410,8 +4175,8 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1786:2: (iv_ruleNestedModel= ruleNestedModel EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1787:2: iv_ruleNestedModel= ruleNestedModel EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1551:2: (iv_ruleNestedModel= ruleNestedModel EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1552:2: iv_ruleNestedModel= ruleNestedModel EOF
             {
              currentNode = createCompositeNode(grammarAccess.getNestedModelRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleNestedModel_in_entryRuleNestedModel4389);
@@ -4438,7 +4203,7 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
 
     // $ANTLR start "ruleNestedModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1794:1: ruleNestedModel returns [EObject current=null] : ( () ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+ {...}?) ) )? otherlv_4= 'nested' ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1559:1: ruleNestedModel returns [EObject current=null] : ( () ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+ {...}?) ) )? otherlv_4= 'nested' ) ;
     public final EObject ruleNestedModel() throws RecognitionException {
         EObject current = null;
 
@@ -4449,29 +4214,24 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1799:6: ( ( () ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+ {...}?) ) )? otherlv_4= 'nested' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1800:1: ( () ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+ {...}?) ) )? otherlv_4= 'nested' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1564:6: ( ( () ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+ {...}?) ) )? otherlv_4= 'nested' ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1565:1: ( () ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+ {...}?) ) )? otherlv_4= 'nested' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1800:1: ( () ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+ {...}?) ) )? otherlv_4= 'nested' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1800:2: () ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+ {...}?) ) )? otherlv_4= 'nested'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1565:1: ( () ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+ {...}?) ) )? otherlv_4= 'nested' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1565:2: () ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+ {...}?) ) )? otherlv_4= 'nested'
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1800:2: ()
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1801:5: 
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1565:2: ()
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1566:5: 
             {
-             
-                    temp=factory.create(grammarAccess.getNestedModelAccess().getNestedModelAction_0().getType().getClassifier());
-                    current = temp; 
-                    temp = null;
-                    CompositeNode newNode = createCompositeNode(grammarAccess.getNestedModelAccess().getNestedModelAction_0(), currentNode.getParent());
-                newNode.getChildren().add(currentNode);
-                moveLookaheadInfo(currentNode, newNode);
-                currentNode = newNode; 
-                    associateNodeWithAstElement(currentNode, current); 
+
+                    current = forceCreateModelElement(
+                        grammarAccess.getNestedModelAccess().getNestedModelAction_0(),
+                        current);
                 
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1811:2: ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+ {...}?) ) )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1571:2: ( ( ( ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+ {...}?) ) )?
             int alt30=2;
             int LA30_0 = input.LA(1);
 
@@ -4480,18 +4240,18 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
             }
             switch (alt30) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1813:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1573:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+ {...}?) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1813:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+ {...}?) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1814:2: ( ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1573:1: ( ( ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1574:2: ( ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+ {...}?)
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getNestedModelAccess().getUnorderedGroup_1());
                     	
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1817:2: ( ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+ {...}?)
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1818:3: ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+ {...}?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1577:2: ( ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1578:3: ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+ {...}?
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1818:3: ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1578:3: ( ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) ) )+
                     int cnt29=0;
                     loop29:
                     do {
@@ -4508,31 +4268,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt29) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1820:4: ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1580:4: ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1820:4: ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1821:5: {...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1580:4: ({...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1581:5: {...}? => ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getNestedModelAccess().getUnorderedGroup_1(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleNestedModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getNestedModelAccess().getUnorderedGroup_1(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1821:108: ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1822:6: ({...}? => ( (lv_first_2_0= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1581:108: ( ({...}? => ( (lv_first_2_0= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1582:6: ({...}? => ( (lv_first_2_0= 'a' ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getNestedModelAccess().getUnorderedGroup_1(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1825:6: ({...}? => ( (lv_first_2_0= 'a' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1825:7: {...}? => ( (lv_first_2_0= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1585:6: ({...}? => ( (lv_first_2_0= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1585:7: {...}? => ( (lv_first_2_0= 'a' ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleNestedModel", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1825:16: ( (lv_first_2_0= 'a' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1826:1: (lv_first_2_0= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1585:16: ( (lv_first_2_0= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1586:1: (lv_first_2_0= 'a' )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1826:1: (lv_first_2_0= 'a' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1827:3: lv_first_2_0= 'a'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1586:1: (lv_first_2_0= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1587:3: lv_first_2_0= 'a'
                     	    {
                     	    lv_first_2_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleNestedModel4496); 
 
@@ -4540,15 +4300,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	        
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getNestedModelRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            current = createModelElement(grammarAccess.getNestedModelRule());
                     	    	        }
-                    	    	        
-                    	    	        try {
-                    	    	       		set(current, "first", true, "a", lastConsumedNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
+                    	           		set(current, "first", true, "a", lastConsumedNode);
                     	    	    
 
                     	    }
@@ -4572,31 +4326,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1853:4: ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1607:4: ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1853:4: ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1854:5: {...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1607:4: ({...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1608:5: {...}? => ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getNestedModelAccess().getUnorderedGroup_1(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleNestedModel", "getUnorderedGroupHelper().canSelect(grammarAccess.getNestedModelAccess().getUnorderedGroup_1(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1854:108: ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1855:6: ({...}? => ( (lv_second_3_0= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1608:108: ( ({...}? => ( (lv_second_3_0= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1609:6: ({...}? => ( (lv_second_3_0= 'b' ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getNestedModelAccess().getUnorderedGroup_1(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1858:6: ({...}? => ( (lv_second_3_0= 'b' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1858:7: {...}? => ( (lv_second_3_0= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1612:6: ({...}? => ( (lv_second_3_0= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1612:7: {...}? => ( (lv_second_3_0= 'b' ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleNestedModel", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1858:16: ( (lv_second_3_0= 'b' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1859:1: (lv_second_3_0= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1612:16: ( (lv_second_3_0= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1613:1: (lv_second_3_0= 'b' )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1859:1: (lv_second_3_0= 'b' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1860:3: lv_second_3_0= 'b'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1613:1: (lv_second_3_0= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1614:3: lv_second_3_0= 'b'
                     	    {
                     	    lv_second_3_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleNestedModel4581); 
 
@@ -4604,15 +4358,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	        
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getNestedModelRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            current = createModelElement(grammarAccess.getNestedModelRule());
                     	    	        }
-                    	    	        
-                    	    	        try {
-                    	    	       		set(current, "second", true, "b", lastConsumedNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
+                    	           		set(current, "second", true, "b", lastConsumedNode);
                     	    	    
 
                     	    }
@@ -4690,7 +4438,7 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
 
     // $ANTLR start "entryRuleUnorderedDatatype"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1906:1: entryRuleUnorderedDatatype returns [String current=null] : iv_ruleUnorderedDatatype= ruleUnorderedDatatype EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1654:1: entryRuleUnorderedDatatype returns [String current=null] : iv_ruleUnorderedDatatype= ruleUnorderedDatatype EOF ;
     public final String entryRuleUnorderedDatatype() throws RecognitionException {
         String current = null;
 
@@ -4698,8 +4446,8 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1907:2: (iv_ruleUnorderedDatatype= ruleUnorderedDatatype EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1908:2: iv_ruleUnorderedDatatype= ruleUnorderedDatatype EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1655:2: (iv_ruleUnorderedDatatype= ruleUnorderedDatatype EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1656:2: iv_ruleUnorderedDatatype= ruleUnorderedDatatype EOF
             {
              currentNode = createCompositeNode(grammarAccess.getUnorderedDatatypeRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleUnorderedDatatype_in_entryRuleUnorderedDatatype4690);
@@ -4726,7 +4474,7 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
 
     // $ANTLR start "ruleUnorderedDatatype"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1915:1: ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '1' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '2' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) | (kw= '3' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* ) ) ) ) | (kw= '4' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '5' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '6' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) ) | (kw= '7' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) ) | (kw= '8' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?) ) ) ) | (kw= '9' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )+ ) | (kw= '10' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )* ) | (kw= '11' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? ) | (kw= '12' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '13' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? kw= 'a' kw= 'b' ) | (kw= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ ) ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1663:1: ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '1' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '2' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) | (kw= '3' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* ) ) ) ) | (kw= '4' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '5' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '6' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) ) | (kw= '7' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) ) | (kw= '8' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?) ) ) ) | (kw= '9' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )+ ) | (kw= '10' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )* ) | (kw= '11' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? ) | (kw= '12' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '13' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? kw= 'a' kw= 'b' ) | (kw= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ ) ) ;
     public final AntlrDatatypeRuleToken ruleUnorderedDatatype() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -4735,10 +4483,10 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
          setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1920:6: ( ( (kw= '1' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '2' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) | (kw= '3' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* ) ) ) ) | (kw= '4' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '5' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '6' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) ) | (kw= '7' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) ) | (kw= '8' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?) ) ) ) | (kw= '9' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )+ ) | (kw= '10' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )* ) | (kw= '11' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? ) | (kw= '12' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '13' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? kw= 'a' kw= 'b' ) | (kw= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1921:1: ( (kw= '1' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '2' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) | (kw= '3' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* ) ) ) ) | (kw= '4' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '5' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '6' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) ) | (kw= '7' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) ) | (kw= '8' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?) ) ) ) | (kw= '9' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )+ ) | (kw= '10' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )* ) | (kw= '11' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? ) | (kw= '12' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '13' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? kw= 'a' kw= 'b' ) | (kw= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1668:6: ( ( (kw= '1' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '2' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) | (kw= '3' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* ) ) ) ) | (kw= '4' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '5' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '6' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) ) | (kw= '7' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) ) | (kw= '8' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?) ) ) ) | (kw= '9' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )+ ) | (kw= '10' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )* ) | (kw= '11' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? ) | (kw= '12' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '13' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? kw= 'a' kw= 'b' ) | (kw= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1669:1: ( (kw= '1' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '2' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) | (kw= '3' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* ) ) ) ) | (kw= '4' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '5' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '6' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) ) | (kw= '7' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) ) | (kw= '8' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?) ) ) ) | (kw= '9' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )+ ) | (kw= '10' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )* ) | (kw= '11' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? ) | (kw= '12' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '13' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? kw= 'a' kw= 'b' ) | (kw= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1921:1: ( (kw= '1' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '2' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) | (kw= '3' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* ) ) ) ) | (kw= '4' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '5' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '6' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) ) | (kw= '7' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) ) | (kw= '8' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?) ) ) ) | (kw= '9' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )+ ) | (kw= '10' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )* ) | (kw= '11' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? ) | (kw= '12' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '13' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? kw= 'a' kw= 'b' ) | (kw= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1669:1: ( (kw= '1' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '2' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) | (kw= '3' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* ) ) ) ) | (kw= '4' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '5' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '6' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) ) | (kw= '7' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) ) | (kw= '8' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?) ) ) ) | (kw= '9' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )+ ) | (kw= '10' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )* ) | (kw= '11' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? ) | (kw= '12' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) | (kw= '13' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? kw= 'a' kw= 'b' ) | (kw= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ ) )
             int alt57=14;
             switch ( input.LA(1) ) {
             case 11:
@@ -4820,29 +4568,29 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
             switch (alt57) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1921:2: (kw= '1' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1669:2: (kw= '1' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1921:2: (kw= '1' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1922:2: kw= '1' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1669:2: (kw= '1' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1670:2: kw= '1' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )
                     {
                     kw=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleUnorderedDatatype4740); 
 
                             current.merge(kw);
                             createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneKeyword_0_0(), null); 
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1927:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1929:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1675:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1677:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1929:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1930:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1677:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1678:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_0_1());
                     	
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1933:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1934:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1681:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1682:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1934:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1682:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+
                     int cnt31=0;
                     loop31:
                     do {
@@ -4859,28 +4607,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt31) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1936:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1684:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1936:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1937:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1684:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1685:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_0_1(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_0_1(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1937:116: ( ({...}? => (kw= 'a' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1938:6: ({...}? => (kw= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1685:116: ( ({...}? => (kw= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1686:6: ({...}? => (kw= 'a' ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_0_1(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1941:6: ({...}? => (kw= 'a' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1941:7: {...}? => (kw= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1689:6: ({...}? => (kw= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1689:7: {...}? => (kw= 'a' )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1941:16: (kw= 'a' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1942:2: kw= 'a'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1689:16: (kw= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1690:2: kw= 'a'
                     	    {
                     	    kw=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleUnorderedDatatype4799); 
 
@@ -4906,28 +4654,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1954:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1702:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1954:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1955:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1702:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1703:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_0_1(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_0_1(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1955:116: ( ({...}? => (kw= 'b' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1956:6: ({...}? => (kw= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1703:116: ( ({...}? => (kw= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1704:6: ({...}? => (kw= 'b' ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_0_1(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1959:6: ({...}? => (kw= 'b' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1959:7: {...}? => (kw= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1707:6: ({...}? => (kw= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1707:7: {...}? => (kw= 'b' )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1959:16: (kw= 'b' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1960:2: kw= 'b'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1707:16: (kw= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1708:2: kw= 'b'
                     	    {
                     	    kw=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleUnorderedDatatype4868); 
 
@@ -4984,29 +4732,29 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1981:6: (kw= '2' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1729:6: (kw= '2' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1981:6: (kw= '2' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1982:2: kw= '2' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1729:6: (kw= '2' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1730:2: kw= '2' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) )
                     {
                     kw=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleUnorderedDatatype4936); 
 
                             current.merge(kw);
                             createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitTwoKeyword_1_0(), null); 
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1987:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1989:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1735:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1737:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1989:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1990:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1737:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1738:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?)
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_1_1());
                     	
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1993:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?)
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1994:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1741:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1742:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1994:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1742:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+
                     int cnt32=0;
                     loop32:
                     do {
@@ -5029,28 +4777,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt32) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1996:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1744:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1996:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1997:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1744:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1745:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_1_1(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_1_1(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1997:116: ( ({...}? => (kw= 'a' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1998:6: ({...}? => (kw= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1745:116: ( ({...}? => (kw= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1746:6: ({...}? => (kw= 'a' ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_1_1(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2001:6: ({...}? => (kw= 'a' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2001:7: {...}? => (kw= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1749:6: ({...}? => (kw= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1749:7: {...}? => (kw= 'a' )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2001:16: (kw= 'a' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2002:2: kw= 'a'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1749:16: (kw= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1750:2: kw= 'a'
                     	    {
                     	    kw=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleUnorderedDatatype4995); 
 
@@ -5076,28 +4824,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2014:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1762:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2014:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2015:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1762:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1763:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_1_1(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_1_1(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2015:116: ( ({...}? => (kw= 'b' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2016:6: ({...}? => (kw= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1763:116: ( ({...}? => (kw= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1764:6: ({...}? => (kw= 'b' ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_1_1(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2019:6: ({...}? => (kw= 'b' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2019:7: {...}? => (kw= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1767:6: ({...}? => (kw= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1767:7: {...}? => (kw= 'b' )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2019:16: (kw= 'b' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2020:2: kw= 'b'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1767:16: (kw= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1768:2: kw= 'b'
                     	    {
                     	    kw=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleUnorderedDatatype5064); 
 
@@ -5123,28 +4871,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 3 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2032:4: ({...}? => ( ({...}? => (kw= 'c' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1780:4: ({...}? => ( ({...}? => (kw= 'c' ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2032:4: ({...}? => ( ({...}? => (kw= 'c' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2033:5: {...}? => ( ({...}? => (kw= 'c' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1780:4: ({...}? => ( ({...}? => (kw= 'c' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1781:5: {...}? => ( ({...}? => (kw= 'c' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_1_1(), 2) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_1_1(), 2)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2033:116: ( ({...}? => (kw= 'c' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2034:6: ({...}? => (kw= 'c' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1781:116: ( ({...}? => (kw= 'c' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1782:6: ({...}? => (kw= 'c' ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_1_1(), 2);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2037:6: ({...}? => (kw= 'c' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2037:7: {...}? => (kw= 'c' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1785:6: ({...}? => (kw= 'c' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1785:7: {...}? => (kw= 'c' )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2037:16: (kw= 'c' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2038:2: kw= 'c'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1785:16: (kw= 'c' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1786:2: kw= 'c'
                     	    {
                     	    kw=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleUnorderedDatatype5133); 
 
@@ -5170,28 +4918,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 4 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2050:4: ({...}? => ( ({...}? => (kw= 'd' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1798:4: ({...}? => ( ({...}? => (kw= 'd' ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2050:4: ({...}? => ( ({...}? => (kw= 'd' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2051:5: {...}? => ( ({...}? => (kw= 'd' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1798:4: ({...}? => ( ({...}? => (kw= 'd' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1799:5: {...}? => ( ({...}? => (kw= 'd' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_1_1(), 3) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_1_1(), 3)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2051:116: ( ({...}? => (kw= 'd' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2052:6: ({...}? => (kw= 'd' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1799:116: ( ({...}? => (kw= 'd' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1800:6: ({...}? => (kw= 'd' ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_1_1(), 3);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2055:6: ({...}? => (kw= 'd' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2055:7: {...}? => (kw= 'd' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1803:6: ({...}? => (kw= 'd' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1803:7: {...}? => (kw= 'd' )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2055:16: (kw= 'd' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2056:2: kw= 'd'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1803:16: (kw= 'd' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1804:2: kw= 'd'
                     	    {
                     	    kw=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleUnorderedDatatype5202); 
 
@@ -5248,29 +4996,29 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2077:6: (kw= '3' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* ) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1825:6: (kw= '3' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* ) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2077:6: (kw= '3' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* ) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2078:2: kw= '3' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1825:6: (kw= '3' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* ) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1826:2: kw= '3' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* ) ) )
                     {
                     kw=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleUnorderedDatatype5270); 
 
                             current.merge(kw);
                             createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitThreeKeyword_2_0(), null); 
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2083:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2085:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1831:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1833:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2085:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2086:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1833:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1834:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* )
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_2_1());
                     	
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2089:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2090:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1837:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )* )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1838:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )*
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2090:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1838:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )*
                     loop33:
                     do {
                         int alt33=3;
@@ -5286,28 +5034,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt33) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2092:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1840:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2092:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2093:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1840:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1841:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_2_1(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_2_1(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2093:116: ( ({...}? => (kw= 'a' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2094:6: ({...}? => (kw= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1841:116: ( ({...}? => (kw= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1842:6: ({...}? => (kw= 'a' ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_2_1(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2097:6: ({...}? => (kw= 'a' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2097:7: {...}? => (kw= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1845:6: ({...}? => (kw= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1845:7: {...}? => (kw= 'a' )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2097:16: (kw= 'a' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2098:2: kw= 'a'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1845:16: (kw= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1846:2: kw= 'a'
                     	    {
                     	    kw=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleUnorderedDatatype5329); 
 
@@ -5333,28 +5081,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2110:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1858:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2110:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2111:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1858:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1859:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_2_1(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_2_1(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2111:116: ( ({...}? => (kw= 'b' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2112:6: ({...}? => (kw= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1859:116: ( ({...}? => (kw= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1860:6: ({...}? => (kw= 'b' ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_2_1(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2115:6: ({...}? => (kw= 'b' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2115:7: {...}? => (kw= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1863:6: ({...}? => (kw= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1863:7: {...}? => (kw= 'b' )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2115:16: (kw= 'b' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2116:2: kw= 'b'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1863:16: (kw= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1864:2: kw= 'b'
                     	    {
                     	    kw=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleUnorderedDatatype5398); 
 
@@ -5404,29 +5152,29 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2136:6: (kw= '4' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1884:6: (kw= '4' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2136:6: (kw= '4' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2137:2: kw= '4' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1884:6: (kw= '4' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1885:2: kw= '4' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )
                     {
                     kw=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleUnorderedDatatype5460); 
 
                             current.merge(kw);
                             createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitFourKeyword_3_0(), null); 
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2142:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2144:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1890:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1892:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2144:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2145:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1892:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1893:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_3_1());
                     	
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2148:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2149:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1896:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1897:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2149:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1897:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+
                     int cnt34=0;
                     loop34:
                     do {
@@ -5443,28 +5191,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt34) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2151:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1899:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2151:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2152:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1899:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1900:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_3_1(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_3_1(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2152:116: ( ({...}? => (kw= 'a' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2153:6: ({...}? => (kw= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1900:116: ( ({...}? => (kw= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1901:6: ({...}? => (kw= 'a' ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_3_1(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2156:6: ({...}? => (kw= 'a' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2156:7: {...}? => (kw= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1904:6: ({...}? => (kw= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1904:7: {...}? => (kw= 'a' )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2156:16: (kw= 'a' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2157:2: kw= 'a'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1904:16: (kw= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1905:2: kw= 'a'
                     	    {
                     	    kw=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleUnorderedDatatype5519); 
 
@@ -5490,28 +5238,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2169:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1917:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2169:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2170:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1917:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1918:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_3_1(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_3_1(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2170:116: ( ({...}? => (kw= 'b' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2171:6: ({...}? => (kw= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1918:116: ( ({...}? => (kw= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1919:6: ({...}? => (kw= 'b' ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_3_1(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2174:6: ({...}? => (kw= 'b' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2174:7: {...}? => (kw= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1922:6: ({...}? => (kw= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1922:7: {...}? => (kw= 'b' )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2174:16: (kw= 'b' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2175:2: kw= 'b'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1922:16: (kw= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1923:2: kw= 'b'
                     	    {
                     	    kw=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleUnorderedDatatype5588); 
 
@@ -5568,29 +5316,29 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 5 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2196:6: (kw= '5' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1944:6: (kw= '5' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2196:6: (kw= '5' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2197:2: kw= '5' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1944:6: (kw= '5' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1945:2: kw= '5' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )
                     {
                     kw=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleUnorderedDatatype5656); 
 
                             current.merge(kw);
                             createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitFiveKeyword_4_0(), null); 
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2202:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2204:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1950:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1952:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2204:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2205:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1952:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1953:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_4_1());
                     	
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2208:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2209:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1956:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1957:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2209:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1957:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+
                     int cnt35=0;
                     loop35:
                     do {
@@ -5607,28 +5355,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt35) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2211:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1959:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2211:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2212:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1959:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1960:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_4_1(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_4_1(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2212:116: ( ({...}? => (kw= 'a' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2213:6: ({...}? => (kw= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1960:116: ( ({...}? => (kw= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1961:6: ({...}? => (kw= 'a' ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_4_1(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2216:6: ({...}? => (kw= 'a' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2216:7: {...}? => (kw= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1964:6: ({...}? => (kw= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1964:7: {...}? => (kw= 'a' )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2216:16: (kw= 'a' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2217:2: kw= 'a'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1964:16: (kw= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1965:2: kw= 'a'
                     	    {
                     	    kw=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleUnorderedDatatype5715); 
 
@@ -5654,28 +5402,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2229:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1977:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2229:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2230:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1977:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1978:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_4_1(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_4_1(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2230:116: ( ({...}? => (kw= 'b' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2231:6: ({...}? => (kw= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1978:116: ( ({...}? => (kw= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1979:6: ({...}? => (kw= 'b' ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_4_1(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2234:6: ({...}? => (kw= 'b' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2234:7: {...}? => (kw= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1982:6: ({...}? => (kw= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1982:7: {...}? => (kw= 'b' )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2234:16: (kw= 'b' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2235:2: kw= 'b'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1982:16: (kw= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:1983:2: kw= 'b'
                     	    {
                     	    kw=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleUnorderedDatatype5784); 
 
@@ -5732,29 +5480,29 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 6 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2256:6: (kw= '6' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2004:6: (kw= '6' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2256:6: (kw= '6' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2257:2: kw= '6' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2004:6: (kw= '6' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2005:2: kw= '6' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) )
                     {
                     kw=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleUnorderedDatatype5852); 
 
                             current.merge(kw);
                             createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitSixKeyword_5_0(), null); 
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2262:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2264:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2010:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2012:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2264:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2265:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2012:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2013:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?)
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_5_1());
                     	
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2268:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?)
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2269:3: ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2016:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2017:3: ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2269:3: ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2017:3: ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+
                     int cnt38=0;
                     loop38:
                     do {
@@ -5771,21 +5519,21 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt38) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2271:4: ({...}? => ( ({...}? => (kw= 'a' ) )+ ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2019:4: ({...}? => ( ({...}? => (kw= 'a' ) )+ ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2271:4: ({...}? => ( ({...}? => (kw= 'a' ) )+ ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2272:5: {...}? => ( ({...}? => (kw= 'a' ) )+ )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2019:4: ({...}? => ( ({...}? => (kw= 'a' ) )+ ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2020:5: {...}? => ( ({...}? => (kw= 'a' ) )+ )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_5_1(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_5_1(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2272:116: ( ({...}? => (kw= 'a' ) )+ )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2273:6: ({...}? => (kw= 'a' ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2020:116: ( ({...}? => (kw= 'a' ) )+ )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2021:6: ({...}? => (kw= 'a' ) )+
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_5_1(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2276:6: ({...}? => (kw= 'a' ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2024:6: ({...}? => (kw= 'a' ) )+
                     	    int cnt36=0;
                     	    loop36:
                     	    do {
@@ -5805,13 +5553,13 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     	        switch (alt36) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2276:7: {...}? => (kw= 'a' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2024:7: {...}? => (kw= 'a' )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2276:16: (kw= 'a' )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2277:2: kw= 'a'
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2024:16: (kw= 'a' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2025:2: kw= 'a'
                     	    	    {
                     	    	    kw=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleUnorderedDatatype5911); 
 
@@ -5847,21 +5595,21 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2289:4: ({...}? => ( ({...}? => (kw= 'b' ) )+ ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2037:4: ({...}? => ( ({...}? => (kw= 'b' ) )+ ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2289:4: ({...}? => ( ({...}? => (kw= 'b' ) )+ ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2290:5: {...}? => ( ({...}? => (kw= 'b' ) )+ )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2037:4: ({...}? => ( ({...}? => (kw= 'b' ) )+ ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2038:5: {...}? => ( ({...}? => (kw= 'b' ) )+ )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_5_1(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_5_1(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2290:116: ( ({...}? => (kw= 'b' ) )+ )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2291:6: ({...}? => (kw= 'b' ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2038:116: ( ({...}? => (kw= 'b' ) )+ )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2039:6: ({...}? => (kw= 'b' ) )+
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_5_1(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2294:6: ({...}? => (kw= 'b' ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2042:6: ({...}? => (kw= 'b' ) )+
                     	    int cnt37=0;
                     	    loop37:
                     	    do {
@@ -5881,13 +5629,13 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     	        switch (alt37) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2294:7: {...}? => (kw= 'b' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2042:7: {...}? => (kw= 'b' )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2294:16: (kw= 'b' )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2295:2: kw= 'b'
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2042:16: (kw= 'b' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2043:2: kw= 'b'
                     	    	    {
                     	    	    kw=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleUnorderedDatatype5981); 
 
@@ -5954,29 +5702,29 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 7 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2316:6: (kw= '7' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2064:6: (kw= '7' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2316:6: (kw= '7' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2317:2: kw= '7' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2064:6: (kw= '7' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2065:2: kw= '7' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) )
                     {
                     kw=(Token)match(input,21,FollowSets000.FOLLOW_21_in_ruleUnorderedDatatype6050); 
 
                             current.merge(kw);
                             createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitSevenKeyword_6_0(), null); 
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2322:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2324:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2070:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2072:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2324:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2325:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2072:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2073:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?)
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_6_1());
                     	
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2328:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?)
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2329:3: ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2076:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2077:3: ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+ {...}?
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2329:3: ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2077:3: ( ({...}? => ( ({...}? => (kw= 'a' ) )+ ) ) | ({...}? => ( ({...}? => (kw= 'b' ) )+ ) ) )+
                     int cnt41=0;
                     loop41:
                     do {
@@ -5993,21 +5741,21 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt41) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2331:4: ({...}? => ( ({...}? => (kw= 'a' ) )+ ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2079:4: ({...}? => ( ({...}? => (kw= 'a' ) )+ ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2331:4: ({...}? => ( ({...}? => (kw= 'a' ) )+ ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2332:5: {...}? => ( ({...}? => (kw= 'a' ) )+ )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2079:4: ({...}? => ( ({...}? => (kw= 'a' ) )+ ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2080:5: {...}? => ( ({...}? => (kw= 'a' ) )+ )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_6_1(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_6_1(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2332:116: ( ({...}? => (kw= 'a' ) )+ )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2333:6: ({...}? => (kw= 'a' ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2080:116: ( ({...}? => (kw= 'a' ) )+ )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2081:6: ({...}? => (kw= 'a' ) )+
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_6_1(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2336:6: ({...}? => (kw= 'a' ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2084:6: ({...}? => (kw= 'a' ) )+
                     	    int cnt39=0;
                     	    loop39:
                     	    do {
@@ -6027,13 +5775,13 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     	        switch (alt39) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2336:7: {...}? => (kw= 'a' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2084:7: {...}? => (kw= 'a' )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2336:16: (kw= 'a' )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2337:2: kw= 'a'
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2084:16: (kw= 'a' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2085:2: kw= 'a'
                     	    	    {
                     	    	    kw=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleUnorderedDatatype6109); 
 
@@ -6069,21 +5817,21 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2349:4: ({...}? => ( ({...}? => (kw= 'b' ) )+ ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2097:4: ({...}? => ( ({...}? => (kw= 'b' ) )+ ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2349:4: ({...}? => ( ({...}? => (kw= 'b' ) )+ ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2350:5: {...}? => ( ({...}? => (kw= 'b' ) )+ )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2097:4: ({...}? => ( ({...}? => (kw= 'b' ) )+ ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2098:5: {...}? => ( ({...}? => (kw= 'b' ) )+ )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_6_1(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_6_1(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2350:116: ( ({...}? => (kw= 'b' ) )+ )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2351:6: ({...}? => (kw= 'b' ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2098:116: ( ({...}? => (kw= 'b' ) )+ )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2099:6: ({...}? => (kw= 'b' ) )+
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_6_1(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2354:6: ({...}? => (kw= 'b' ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2102:6: ({...}? => (kw= 'b' ) )+
                     	    int cnt40=0;
                     	    loop40:
                     	    do {
@@ -6103,13 +5851,13 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     	        switch (alt40) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2354:7: {...}? => (kw= 'b' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2102:7: {...}? => (kw= 'b' )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2354:16: (kw= 'b' )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2355:2: kw= 'b'
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2102:16: (kw= 'b' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2103:2: kw= 'b'
                     	    	    {
                     	    	    kw=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleUnorderedDatatype6179); 
 
@@ -6176,29 +5924,29 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 8 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2376:6: (kw= '8' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2124:6: (kw= '8' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2376:6: (kw= '8' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2377:2: kw= '8' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2124:6: (kw= '8' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2125:2: kw= '8' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?) ) )
                     {
                     kw=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleUnorderedDatatype6248); 
 
                             current.merge(kw);
                             createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitEightKeyword_7_0(), null); 
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2382:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2384:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2130:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2132:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2384:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2385:2: ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2132:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2133:2: ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?)
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1());
                     	
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2388:2: ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?)
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2389:3: ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2136:2: ( ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2137:3: ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+ {...}?
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2389:3: ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2137:3: ( ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) ) )+
                     int cnt42=0;
                     loop42:
                     do {
@@ -6227,28 +5975,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt42) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2391:4: ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2139:4: ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2391:4: ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2392:5: {...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2139:4: ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2140:5: {...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2392:116: ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2393:6: ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2140:116: ( ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2141:6: ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2396:6: ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2396:7: {...}? => (kw= 'a' kw= 'b' kw= 'c' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2144:6: ({...}? => (kw= 'a' kw= 'b' kw= 'c' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2144:7: {...}? => (kw= 'a' kw= 'b' kw= 'c' )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2396:16: (kw= 'a' kw= 'b' kw= 'c' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2397:2: kw= 'a' kw= 'b' kw= 'c'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2144:16: (kw= 'a' kw= 'b' kw= 'c' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2145:2: kw= 'a' kw= 'b' kw= 'c'
                     	    {
                     	    kw=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleUnorderedDatatype6307); 
 
@@ -6284,28 +6032,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2421:4: ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2169:4: ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2421:4: ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2422:5: {...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2169:4: ({...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2170:5: {...}? => ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2422:116: ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2423:6: ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2170:116: ( ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2171:6: ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2426:6: ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2426:7: {...}? => (kw= 'a' kw= 'b' kw= 'd' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2174:6: ({...}? => (kw= 'a' kw= 'b' kw= 'd' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2174:7: {...}? => (kw= 'a' kw= 'b' kw= 'd' )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2426:16: (kw= 'a' kw= 'b' kw= 'd' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2427:2: kw= 'a' kw= 'b' kw= 'd'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2174:16: (kw= 'a' kw= 'b' kw= 'd' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2175:2: kw= 'a' kw= 'b' kw= 'd'
                     	    {
                     	    kw=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleUnorderedDatatype6402); 
 
@@ -6372,17 +6120,17 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 9 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2460:6: (kw= '9' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )+ )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2208:6: (kw= '9' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )+ )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2460:6: (kw= '9' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )+ )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2461:2: kw= '9' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2208:6: (kw= '9' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )+ )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2209:2: kw= '9' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )+
                     {
                     kw=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleUnorderedDatatype6496); 
 
                             current.merge(kw);
                             createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitNineKeyword_8_0(), null); 
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2466:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2214:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )+
                     int cnt44=0;
                     loop44:
                     do {
@@ -6396,18 +6144,18 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt44) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2468:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2216:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2468:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2469:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2216:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2217:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
                     	    {
                     	     
                     	    	  getUnorderedGroupHelper().enter(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_8_1());
                     	    	
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2472:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2473:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2220:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2221:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2473:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2221:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+
                     	    int cnt43=0;
                     	    loop43:
                     	    do {
@@ -6436,28 +6184,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     	        switch (alt43) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2475:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2223:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2475:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2476:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2223:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2224:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
                     	    	    {
                     	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_8_1(), 0) ) {
                     	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_8_1(), 0)");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2476:116: ( ({...}? => (kw= 'a' ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2477:6: ({...}? => (kw= 'a' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2224:116: ( ({...}? => (kw= 'a' ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2225:6: ({...}? => (kw= 'a' ) )
                     	    	    {
                     	    	     
                     	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_8_1(), 0);
                     	    	    	 				
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2480:6: ({...}? => (kw= 'a' ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2480:7: {...}? => (kw= 'a' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2228:6: ({...}? => (kw= 'a' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2228:7: {...}? => (kw= 'a' )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2480:16: (kw= 'a' )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2481:2: kw= 'a'
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2228:16: (kw= 'a' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2229:2: kw= 'a'
                     	    	    {
                     	    	    kw=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleUnorderedDatatype6555); 
 
@@ -6483,28 +6231,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	    }
                     	    	    break;
                     	    	case 2 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2493:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2241:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2493:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2494:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2241:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2242:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
                     	    	    {
                     	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_8_1(), 1) ) {
                     	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_8_1(), 1)");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2494:116: ( ({...}? => (kw= 'b' ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2495:6: ({...}? => (kw= 'b' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2242:116: ( ({...}? => (kw= 'b' ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2243:6: ({...}? => (kw= 'b' ) )
                     	    	    {
                     	    	     
                     	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_8_1(), 1);
                     	    	    	 				
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2498:6: ({...}? => (kw= 'b' ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2498:7: {...}? => (kw= 'b' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2246:6: ({...}? => (kw= 'b' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2246:7: {...}? => (kw= 'b' )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2498:16: (kw= 'b' )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2499:2: kw= 'b'
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2246:16: (kw= 'b' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2247:2: kw= 'b'
                     	    	    {
                     	    	    kw=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleUnorderedDatatype6624); 
 
@@ -6571,17 +6319,17 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 10 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2520:6: (kw= '10' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )* )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2268:6: (kw= '10' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )* )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2520:6: (kw= '10' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )* )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2521:2: kw= '10' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2268:6: (kw= '10' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )* )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2269:2: kw= '10' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )*
                     {
                     kw=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleUnorderedDatatype6693); 
 
                             current.merge(kw);
                             createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneDigitZeroKeyword_9_0(), null); 
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2526:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2274:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )*
                     loop46:
                     do {
                         int alt46=2;
@@ -6594,18 +6342,18 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt46) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2528:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2276:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2528:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2529:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2276:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2277:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
                     	    {
                     	     
                     	    	  getUnorderedGroupHelper().enter(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_9_1());
                     	    	
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2532:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2533:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2280:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2281:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2533:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2281:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+
                     	    int cnt45=0;
                     	    loop45:
                     	    do {
@@ -6634,28 +6382,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     	        switch (alt45) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2535:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2283:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2535:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2536:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2283:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2284:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
                     	    	    {
                     	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_9_1(), 0) ) {
                     	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_9_1(), 0)");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2536:116: ( ({...}? => (kw= 'a' ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2537:6: ({...}? => (kw= 'a' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2284:116: ( ({...}? => (kw= 'a' ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2285:6: ({...}? => (kw= 'a' ) )
                     	    	    {
                     	    	     
                     	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_9_1(), 0);
                     	    	    	 				
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2540:6: ({...}? => (kw= 'a' ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2540:7: {...}? => (kw= 'a' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2288:6: ({...}? => (kw= 'a' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2288:7: {...}? => (kw= 'a' )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2540:16: (kw= 'a' )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2541:2: kw= 'a'
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2288:16: (kw= 'a' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2289:2: kw= 'a'
                     	    	    {
                     	    	    kw=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleUnorderedDatatype6752); 
 
@@ -6681,28 +6429,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	    }
                     	    	    break;
                     	    	case 2 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2553:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2301:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2553:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2554:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2301:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2302:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
                     	    	    {
                     	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_9_1(), 1) ) {
                     	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_9_1(), 1)");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2554:116: ( ({...}? => (kw= 'b' ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2555:6: ({...}? => (kw= 'b' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2302:116: ( ({...}? => (kw= 'b' ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2303:6: ({...}? => (kw= 'b' ) )
                     	    	    {
                     	    	     
                     	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_9_1(), 1);
                     	    	    	 				
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2558:6: ({...}? => (kw= 'b' ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2558:7: {...}? => (kw= 'b' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2306:6: ({...}? => (kw= 'b' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2306:7: {...}? => (kw= 'b' )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2558:16: (kw= 'b' )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2559:2: kw= 'b'
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2306:16: (kw= 'b' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2307:2: kw= 'b'
                     	    	    {
                     	    	    kw=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleUnorderedDatatype6821); 
 
@@ -6765,17 +6513,17 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 11 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2580:6: (kw= '11' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2328:6: (kw= '11' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2580:6: (kw= '11' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2581:2: kw= '11' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2328:6: (kw= '11' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2329:2: kw= '11' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )?
                     {
                     kw=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleUnorderedDatatype6890); 
 
                             current.merge(kw);
                             createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneDigitOneKeyword_10_0(), null); 
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2586:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2334:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )?
                     int alt48=2;
                     int LA48_0 = input.LA(1);
 
@@ -6784,18 +6532,18 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     switch (alt48) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2588:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2336:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2588:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2589:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2336:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2337:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
                             {
                              
                             	  getUnorderedGroupHelper().enter(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_10_1());
                             	
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2592:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2593:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2340:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2341:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2593:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2341:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+
                             int cnt47=0;
                             loop47:
                             do {
@@ -6812,28 +6560,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                                 switch (alt47) {
                             	case 1 :
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2595:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2343:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
                             	    {
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2595:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2596:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2343:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2344:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
                             	    {
                             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_10_1(), 0) ) {
                             	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_10_1(), 0)");
                             	    }
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2596:117: ( ({...}? => (kw= 'a' ) ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2597:6: ({...}? => (kw= 'a' ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2344:117: ( ({...}? => (kw= 'a' ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2345:6: ({...}? => (kw= 'a' ) )
                             	    {
                             	     
                             	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_10_1(), 0);
                             	    	 				
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2600:6: ({...}? => (kw= 'a' ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2600:7: {...}? => (kw= 'a' )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2348:6: ({...}? => (kw= 'a' ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2348:7: {...}? => (kw= 'a' )
                             	    {
                             	    if ( !((true)) ) {
                             	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                             	    }
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2600:16: (kw= 'a' )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2601:2: kw= 'a'
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2348:16: (kw= 'a' )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2349:2: kw= 'a'
                             	    {
                             	    kw=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleUnorderedDatatype6949); 
 
@@ -6859,28 +6607,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                             	    }
                             	    break;
                             	case 2 :
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2613:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2361:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
                             	    {
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2613:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2614:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2361:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2362:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
                             	    {
                             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_10_1(), 1) ) {
                             	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_10_1(), 1)");
                             	    }
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2614:117: ( ({...}? => (kw= 'b' ) ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2615:6: ({...}? => (kw= 'b' ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2362:117: ( ({...}? => (kw= 'b' ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2363:6: ({...}? => (kw= 'b' ) )
                             	    {
                             	     
                             	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_10_1(), 1);
                             	    	 				
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2618:6: ({...}? => (kw= 'b' ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2618:7: {...}? => (kw= 'b' )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2366:6: ({...}? => (kw= 'b' ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2366:7: {...}? => (kw= 'b' )
                             	    {
                             	    if ( !((true)) ) {
                             	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                             	    }
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2618:16: (kw= 'b' )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2619:2: kw= 'b'
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2366:16: (kw= 'b' )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2367:2: kw= 'b'
                             	    {
                             	    kw=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleUnorderedDatatype7018); 
 
@@ -6940,29 +6688,29 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 12 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2640:6: (kw= '12' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2388:6: (kw= '12' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2640:6: (kw= '12' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2641:2: kw= '12' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2388:6: (kw= '12' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2389:2: kw= '12' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )
                     {
                     kw=(Token)match(input,26,FollowSets000.FOLLOW_26_in_ruleUnorderedDatatype7087); 
 
                             current.merge(kw);
                             createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneDigitTwoKeyword_11_0(), null); 
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2646:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2648:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2394:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2396:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2648:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2649:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2396:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2397:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_11_1());
                     	
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2652:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2653:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2400:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2401:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2653:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2401:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+
                     int cnt49=0;
                     loop49:
                     do {
@@ -6991,28 +6739,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt49) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2655:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2403:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2655:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2656:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2403:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2404:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_11_1(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_11_1(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2656:117: ( ({...}? => (kw= 'a' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2657:6: ({...}? => (kw= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2404:117: ( ({...}? => (kw= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2405:6: ({...}? => (kw= 'a' ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_11_1(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2660:6: ({...}? => (kw= 'a' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2660:7: {...}? => (kw= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2408:6: ({...}? => (kw= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2408:7: {...}? => (kw= 'a' )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2660:16: (kw= 'a' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2661:2: kw= 'a'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2408:16: (kw= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2409:2: kw= 'a'
                     	    {
                     	    kw=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleUnorderedDatatype7146); 
 
@@ -7038,28 +6786,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2673:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2421:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2673:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2674:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2421:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2422:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_11_1(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_11_1(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2674:117: ( ({...}? => (kw= 'b' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2675:6: ({...}? => (kw= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2422:117: ( ({...}? => (kw= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2423:6: ({...}? => (kw= 'b' ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_11_1(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2678:6: ({...}? => (kw= 'b' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2678:7: {...}? => (kw= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2426:6: ({...}? => (kw= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2426:7: {...}? => (kw= 'b' )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2678:16: (kw= 'b' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2679:2: kw= 'b'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2426:16: (kw= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2427:2: kw= 'b'
                     	    {
                     	    kw=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleUnorderedDatatype7215); 
 
@@ -7109,19 +6857,19 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2699:2: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2701:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2447:2: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2449:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2701:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2702:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2449:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2450:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_11_2());
                     	
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2705:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2706:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2453:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2454:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2706:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2454:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+
                     int cnt50=0;
                     loop50:
                     do {
@@ -7138,28 +6886,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt50) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2708:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2456:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2708:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2709:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2456:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2457:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_11_2(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_11_2(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2709:117: ( ({...}? => (kw= 'a' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2710:6: ({...}? => (kw= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2457:117: ( ({...}? => (kw= 'a' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2458:6: ({...}? => (kw= 'a' ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_11_2(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2713:6: ({...}? => (kw= 'a' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2713:7: {...}? => (kw= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2461:6: ({...}? => (kw= 'a' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2461:7: {...}? => (kw= 'a' )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2713:16: (kw= 'a' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2714:2: kw= 'a'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2461:16: (kw= 'a' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2462:2: kw= 'a'
                     	    {
                     	    kw=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleUnorderedDatatype7321); 
 
@@ -7185,28 +6933,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2726:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2474:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2726:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2727:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2474:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2475:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_11_2(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_11_2(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2727:117: ( ({...}? => (kw= 'b' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2728:6: ({...}? => (kw= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2475:117: ( ({...}? => (kw= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2476:6: ({...}? => (kw= 'b' ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_11_2(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2731:6: ({...}? => (kw= 'b' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2731:7: {...}? => (kw= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2479:6: ({...}? => (kw= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2479:7: {...}? => (kw= 'b' )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2731:16: (kw= 'b' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2732:2: kw= 'b'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2479:16: (kw= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2480:2: kw= 'b'
                     	    {
                     	    kw=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleUnorderedDatatype7390); 
 
@@ -7263,17 +7011,17 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 13 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2753:6: (kw= '13' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? kw= 'a' kw= 'b' )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2501:6: (kw= '13' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? kw= 'a' kw= 'b' )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2753:6: (kw= '13' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? kw= 'a' kw= 'b' )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2754:2: kw= '13' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? kw= 'a' kw= 'b'
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2501:6: (kw= '13' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? kw= 'a' kw= 'b' )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2502:2: kw= '13' ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )? kw= 'a' kw= 'b'
                     {
                     kw=(Token)match(input,27,FollowSets000.FOLLOW_27_in_ruleUnorderedDatatype7458); 
 
                             current.merge(kw);
                             createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneDigitThreeKeyword_12_0(), null); 
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2759:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2507:1: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )?
                     int alt52=2;
                     int LA52_0 = input.LA(1);
 
@@ -7296,18 +7044,18 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     switch (alt52) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2761:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2509:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2761:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2762:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2509:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2510:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
                             {
                              
                             	  getUnorderedGroupHelper().enter(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_12_1());
                             	
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2765:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2766:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2513:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2514:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2766:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2514:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+
                             int cnt51=0;
                             loop51:
                             do {
@@ -7339,28 +7087,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                                 switch (alt51) {
                             	case 1 :
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2768:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2516:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
                             	    {
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2768:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2769:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2516:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2517:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
                             	    {
                             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_12_1(), 0) ) {
                             	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_12_1(), 0)");
                             	    }
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2769:117: ( ({...}? => (kw= 'a' ) ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2770:6: ({...}? => (kw= 'a' ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2517:117: ( ({...}? => (kw= 'a' ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2518:6: ({...}? => (kw= 'a' ) )
                             	    {
                             	     
                             	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_12_1(), 0);
                             	    	 				
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2773:6: ({...}? => (kw= 'a' ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2773:7: {...}? => (kw= 'a' )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2521:6: ({...}? => (kw= 'a' ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2521:7: {...}? => (kw= 'a' )
                             	    {
                             	    if ( !((true)) ) {
                             	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                             	    }
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2773:16: (kw= 'a' )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2774:2: kw= 'a'
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2521:16: (kw= 'a' )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2522:2: kw= 'a'
                             	    {
                             	    kw=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleUnorderedDatatype7517); 
 
@@ -7386,28 +7134,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                             	    }
                             	    break;
                             	case 2 :
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2786:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2534:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
                             	    {
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2786:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2787:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2534:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2535:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
                             	    {
                             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_12_1(), 1) ) {
                             	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_12_1(), 1)");
                             	    }
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2787:117: ( ({...}? => (kw= 'b' ) ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2788:6: ({...}? => (kw= 'b' ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2535:117: ( ({...}? => (kw= 'b' ) ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2536:6: ({...}? => (kw= 'b' ) )
                             	    {
                             	     
                             	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_12_1(), 1);
                             	    	 				
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2791:6: ({...}? => (kw= 'b' ) )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2791:7: {...}? => (kw= 'b' )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2539:6: ({...}? => (kw= 'b' ) )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2539:7: {...}? => (kw= 'b' )
                             	    {
                             	    if ( !((true)) ) {
                             	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                             	    }
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2791:16: (kw= 'b' )
-                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2792:2: kw= 'b'
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2539:16: (kw= 'b' )
+                            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2540:2: kw= 'b'
                             	    {
                             	    kw=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleUnorderedDatatype7586); 
 
@@ -7477,17 +7225,17 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 14 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2825:6: (kw= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2573:6: (kw= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2825:6: (kw= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2826:2: kw= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2573:6: (kw= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+ )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2574:2: kw= '14' ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+
                     {
                     kw=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleUnorderedDatatype7681); 
 
                             current.merge(kw);
                             createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneDigitFourKeyword_13_0(), null); 
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2831:1: ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2579:1: ( ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) ) )+
                     int cnt56=0;
                     loop56:
                     do {
@@ -7501,18 +7249,18 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt56) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2833:1: ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2581:1: ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2833:1: ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2834:2: ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?)
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2581:1: ( ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2582:2: ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?)
                     	    {
                     	     
                     	    	  getUnorderedGroupHelper().enter(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1());
                     	    	
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2837:2: ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?)
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2838:3: ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2585:2: ( ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?)
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2586:3: ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+ {...}?
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2838:3: ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2586:3: ( ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) ) | ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) ) )+
                     	    int cnt55=0;
                     	    loop55:
                     	    do {
@@ -7567,39 +7315,39 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     	        switch (alt55) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2840:4: ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2588:4: ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2840:4: ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2841:5: {...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2588:4: ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2589:5: {...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) )
                     	    	    {
                     	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1(), 0) ) {
                     	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1(), 0)");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2841:117: ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2842:6: ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2589:117: ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2590:6: ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) )
                     	    	    {
                     	    	     
                     	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1(), 0);
                     	    	    	 				
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2845:6: ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2845:7: {...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2593:6: ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2593:7: {...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2845:16: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2847:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2593:16: ( ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2595:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2847:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2848:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2595:1: ( ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2596:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
                     	    	    {
                     	    	     
                     	    	    	  getUnorderedGroupHelper().enter(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1_0());
                     	    	    	
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2851:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2852:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2599:2: ( ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?)
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2600:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+ {...}?
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2852:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2600:3: ( ({...}? => ( ({...}? => (kw= 'a' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'b' ) ) ) ) )+
                     	    	    int cnt53=0;
                     	    	    loop53:
                     	    	    do {
@@ -7628,28 +7376,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     	    	        switch (alt53) {
                     	    	    	case 1 :
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2854:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2602:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
                     	    	    	    {
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2854:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2855:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2602:4: ({...}? => ( ({...}? => (kw= 'a' ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2603:5: {...}? => ( ({...}? => (kw= 'a' ) ) )
                     	    	    	    {
                     	    	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1_0(), 0) ) {
                     	    	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1_0(), 0)");
                     	    	    	    }
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2855:119: ( ({...}? => (kw= 'a' ) ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2856:6: ({...}? => (kw= 'a' ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2603:119: ( ({...}? => (kw= 'a' ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2604:6: ({...}? => (kw= 'a' ) )
                     	    	    	    {
                     	    	    	     
                     	    	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1_0(), 0);
                     	    	    	    	 				
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2859:6: ({...}? => (kw= 'a' ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2859:7: {...}? => (kw= 'a' )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2607:6: ({...}? => (kw= 'a' ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2607:7: {...}? => (kw= 'a' )
                     	    	    	    {
                     	    	    	    if ( !((true)) ) {
                     	    	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    	    	    }
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2859:16: (kw= 'a' )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2860:2: kw= 'a'
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2607:16: (kw= 'a' )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2608:2: kw= 'a'
                     	    	    	    {
                     	    	    	    kw=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleUnorderedDatatype7785); 
 
@@ -7675,28 +7423,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	    	    }
                     	    	    	    break;
                     	    	    	case 2 :
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2872:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2620:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
                     	    	    	    {
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2872:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2873:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2620:4: ({...}? => ( ({...}? => (kw= 'b' ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2621:5: {...}? => ( ({...}? => (kw= 'b' ) ) )
                     	    	    	    {
                     	    	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1_0(), 1) ) {
                     	    	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1_0(), 1)");
                     	    	    	    }
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2873:119: ( ({...}? => (kw= 'b' ) ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2874:6: ({...}? => (kw= 'b' ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2621:119: ( ({...}? => (kw= 'b' ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2622:6: ({...}? => (kw= 'b' ) )
                     	    	    	    {
                     	    	    	     
                     	    	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1_0(), 1);
                     	    	    	    	 				
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2877:6: ({...}? => (kw= 'b' ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2877:7: {...}? => (kw= 'b' )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2625:6: ({...}? => (kw= 'b' ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2625:7: {...}? => (kw= 'b' )
                     	    	    	    {
                     	    	    	    if ( !((true)) ) {
                     	    	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    	    	    }
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2877:16: (kw= 'b' )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2878:2: kw= 'b'
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2625:16: (kw= 'b' )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2626:2: kw= 'b'
                     	    	    	    {
                     	    	    	    kw=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleUnorderedDatatype7854); 
 
@@ -7762,39 +7510,39 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	    }
                     	    	    break;
                     	    	case 2 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2905:4: ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2653:4: ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2905:4: ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2906:5: {...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2653:4: ({...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2654:5: {...}? => ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) )
                     	    	    {
                     	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1(), 1) ) {
                     	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1(), 1)");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2906:117: ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2907:6: ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2654:117: ( ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2655:6: ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) )
                     	    	    {
                     	    	     
                     	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1(), 1);
                     	    	    	 				
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2910:6: ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2910:7: {...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2658:6: ({...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2658:7: {...}? => ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2910:16: ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2912:1: ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2658:16: ( ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2660:1: ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2912:1: ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2913:2: ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?)
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2660:1: ( ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2661:2: ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?)
                     	    	    {
                     	    	     
                     	    	    	  getUnorderedGroupHelper().enter(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1_1());
                     	    	    	
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2916:2: ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?)
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2917:3: ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2664:2: ( ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?)
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2665:3: ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+ {...}?
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2917:3: ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2665:3: ( ({...}? => ( ({...}? => (kw= 'c' ) ) ) ) | ({...}? => ( ({...}? => (kw= 'd' ) ) ) ) )+
                     	    	    int cnt54=0;
                     	    	    loop54:
                     	    	    do {
@@ -7823,28 +7571,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     	    	        switch (alt54) {
                     	    	    	case 1 :
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2919:4: ({...}? => ( ({...}? => (kw= 'c' ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2667:4: ({...}? => ( ({...}? => (kw= 'c' ) ) ) )
                     	    	    	    {
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2919:4: ({...}? => ( ({...}? => (kw= 'c' ) ) ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2920:5: {...}? => ( ({...}? => (kw= 'c' ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2667:4: ({...}? => ( ({...}? => (kw= 'c' ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2668:5: {...}? => ( ({...}? => (kw= 'c' ) ) )
                     	    	    	    {
                     	    	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1_1(), 0) ) {
                     	    	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1_1(), 0)");
                     	    	    	    }
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2920:119: ( ({...}? => (kw= 'c' ) ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2921:6: ({...}? => (kw= 'c' ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2668:119: ( ({...}? => (kw= 'c' ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2669:6: ({...}? => (kw= 'c' ) )
                     	    	    	    {
                     	    	    	     
                     	    	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1_1(), 0);
                     	    	    	    	 				
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2924:6: ({...}? => (kw= 'c' ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2924:7: {...}? => (kw= 'c' )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2672:6: ({...}? => (kw= 'c' ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2672:7: {...}? => (kw= 'c' )
                     	    	    	    {
                     	    	    	    if ( !((true)) ) {
                     	    	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    	    	    }
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2924:16: (kw= 'c' )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2925:2: kw= 'c'
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2672:16: (kw= 'c' )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2673:2: kw= 'c'
                     	    	    	    {
                     	    	    	    kw=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleUnorderedDatatype8014); 
 
@@ -7870,28 +7618,28 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	    	    }
                     	    	    	    break;
                     	    	    	case 2 :
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2937:4: ({...}? => ( ({...}? => (kw= 'd' ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2685:4: ({...}? => ( ({...}? => (kw= 'd' ) ) ) )
                     	    	    	    {
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2937:4: ({...}? => ( ({...}? => (kw= 'd' ) ) ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2938:5: {...}? => ( ({...}? => (kw= 'd' ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2685:4: ({...}? => ( ({...}? => (kw= 'd' ) ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2686:5: {...}? => ( ({...}? => (kw= 'd' ) ) )
                     	    	    	    {
                     	    	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1_1(), 1) ) {
                     	    	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1_1(), 1)");
                     	    	    	    }
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2938:119: ( ({...}? => (kw= 'd' ) ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2939:6: ({...}? => (kw= 'd' ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2686:119: ( ({...}? => (kw= 'd' ) ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2687:6: ({...}? => (kw= 'd' ) )
                     	    	    	    {
                     	    	    	     
                     	    	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1_1(), 1);
                     	    	    	    	 				
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2942:6: ({...}? => (kw= 'd' ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2942:7: {...}? => (kw= 'd' )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2690:6: ({...}? => (kw= 'd' ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2690:7: {...}? => (kw= 'd' )
                     	    	    	    {
                     	    	    	    if ( !((true)) ) {
                     	    	    	        throw new FailedPredicateException(input, "ruleUnorderedDatatype", "true");
                     	    	    	    }
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2942:16: (kw= 'd' )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2943:2: kw= 'd'
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2690:16: (kw= 'd' )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2691:2: kw= 'd'
                     	    	    	    {
                     	    	    	    kw=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleUnorderedDatatype8083); 
 
@@ -8020,7 +7768,7 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
 
     // $ANTLR start "entryRuleUnorderedSerialization"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2986:1: entryRuleUnorderedSerialization returns [EObject current=null] : iv_ruleUnorderedSerialization= ruleUnorderedSerialization EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2734:1: entryRuleUnorderedSerialization returns [EObject current=null] : iv_ruleUnorderedSerialization= ruleUnorderedSerialization EOF ;
     public final EObject entryRuleUnorderedSerialization() throws RecognitionException {
         EObject current = null;
 
@@ -8028,8 +7776,8 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2987:2: (iv_ruleUnorderedSerialization= ruleUnorderedSerialization EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2988:2: iv_ruleUnorderedSerialization= ruleUnorderedSerialization EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2735:2: (iv_ruleUnorderedSerialization= ruleUnorderedSerialization EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2736:2: iv_ruleUnorderedSerialization= ruleUnorderedSerialization EOF
             {
              currentNode = createCompositeNode(grammarAccess.getUnorderedSerializationRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleUnorderedSerialization_in_entryRuleUnorderedSerialization8218);
@@ -8056,7 +7804,7 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
 
     // $ANTLR start "ruleUnorderedSerialization"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2995:1: ruleUnorderedSerialization returns [EObject current=null] : ( () ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?) ) ) | (otherlv_7= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) ) ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2743:1: ruleUnorderedSerialization returns [EObject current=null] : ( () ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?) ) ) | (otherlv_7= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) ) ) ;
     public final EObject ruleUnorderedSerialization() throws RecognitionException {
         EObject current = null;
 
@@ -8075,29 +7823,24 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3000:6: ( ( () ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?) ) ) | (otherlv_7= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3001:1: ( () ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?) ) ) | (otherlv_7= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2748:6: ( ( () ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?) ) ) | (otherlv_7= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2749:1: ( () ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?) ) ) | (otherlv_7= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3001:1: ( () ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?) ) ) | (otherlv_7= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3001:2: () ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?) ) ) | (otherlv_7= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2749:1: ( () ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?) ) ) | (otherlv_7= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2749:2: () ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?) ) ) | (otherlv_7= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3001:2: ()
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3002:5: 
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2749:2: ()
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2750:5: 
             {
-             
-                    temp=factory.create(grammarAccess.getUnorderedSerializationAccess().getUnorderedSerializationAction_0().getType().getClassifier());
-                    current = temp; 
-                    temp = null;
-                    CompositeNode newNode = createCompositeNode(grammarAccess.getUnorderedSerializationAccess().getUnorderedSerializationAction_0(), currentNode.getParent());
-                newNode.getChildren().add(currentNode);
-                moveLookaheadInfo(currentNode, newNode);
-                currentNode = newNode; 
-                    associateNodeWithAstElement(currentNode, current); 
+
+                    current = forceCreateModelElement(
+                        grammarAccess.getUnorderedSerializationAccess().getUnorderedSerializationAction_0(),
+                        current);
                 
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3012:2: ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?) ) ) | (otherlv_7= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2755:2: ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?) ) ) | (otherlv_7= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) | (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) ) )* ) )
             int alt65=3;
             switch ( input.LA(1) ) {
             case 11:
@@ -8127,21 +7870,21 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
             switch (alt65) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3012:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2755:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3012:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3014:1: ( ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2755:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2757:1: ( ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3014:1: ( ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3015:2: ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2757:1: ( ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2758:2: ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?)
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_0());
                     	
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3018:2: ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?)
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3019:3: ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2761:2: ( ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2762:3: ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+ {...}?
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3019:3: ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2762:3: ( ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) ) | ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) ) )+
                     int cnt59=0;
                     loop59:
                     do {
@@ -8164,34 +7907,34 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt59) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3021:4: ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2764:4: ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3021:4: ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3022:5: {...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2764:4: ({...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2765:5: {...}? => ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_0(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedSerialization", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_0(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3022:121: ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3023:6: ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2765:121: ( ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2766:6: ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_0(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3026:6: ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3026:7: {...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2769:6: ({...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2769:7: {...}? => (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedSerialization", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3026:16: (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3026:18: otherlv_2= '1' ( (lv_first_3_0= 'a' ) )?
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2769:16: (otherlv_2= '1' ( (lv_first_3_0= 'a' ) )? )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2769:18: otherlv_2= '1' ( (lv_first_3_0= 'a' ) )?
                     	    {
                     	    otherlv_2=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleUnorderedSerialization8321); 
 
                     	        	createLeafNode(otherlv_2, grammarAccess.getUnorderedSerializationAccess().getDigitOneKeyword_1_0_0_0(), null);
                     	        
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3030:1: ( (lv_first_3_0= 'a' ) )?
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2773:1: ( (lv_first_3_0= 'a' ) )?
                     	    int alt58=2;
                     	    int LA58_0 = input.LA(1);
 
@@ -8200,10 +7943,10 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    switch (alt58) {
                     	        case 1 :
-                    	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3031:1: (lv_first_3_0= 'a' )
+                    	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2774:1: (lv_first_3_0= 'a' )
                     	            {
-                    	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3031:1: (lv_first_3_0= 'a' )
-                    	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3032:3: lv_first_3_0= 'a'
+                    	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2774:1: (lv_first_3_0= 'a' )
+                    	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2775:3: lv_first_3_0= 'a'
                     	            {
                     	            lv_first_3_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleUnorderedSerialization8339); 
 
@@ -8211,15 +7954,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	                
 
                     	            	        if (current==null) {
-                    	            	            current = factory.create(grammarAccess.getUnorderedSerializationRule().getType().getClassifier());
-                    	            	            associateNodeWithAstElement(currentNode, current);
+                    	            	            current = createModelElement(grammarAccess.getUnorderedSerializationRule());
                     	            	        }
-                    	            	        
-                    	            	        try {
-                    	            	       		set(current, "first", true, "a", lastConsumedNode);
-                    	            	        } catch (ValueConverterException vce) {
-                    	            				handleValueConverterException(vce);
-                    	            	        }
+                    	                   		set(current, "first", true, "a", lastConsumedNode);
                     	            	    
 
                     	            }
@@ -8249,31 +7986,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3058:4: ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2795:4: ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3058:4: ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3059:5: {...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2795:4: ({...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2796:5: {...}? => ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_0(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedSerialization", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_0(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3059:121: ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3060:6: ({...}? => ( (lv_second_4_0= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2796:121: ( ({...}? => ( (lv_second_4_0= 'b' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2797:6: ({...}? => ( (lv_second_4_0= 'b' ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_0(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3063:6: ({...}? => ( (lv_second_4_0= 'b' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3063:7: {...}? => ( (lv_second_4_0= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2800:6: ({...}? => ( (lv_second_4_0= 'b' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2800:7: {...}? => ( (lv_second_4_0= 'b' ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedSerialization", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3063:16: ( (lv_second_4_0= 'b' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3064:1: (lv_second_4_0= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2800:16: ( (lv_second_4_0= 'b' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2801:1: (lv_second_4_0= 'b' )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3064:1: (lv_second_4_0= 'b' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3065:3: lv_second_4_0= 'b'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2801:1: (lv_second_4_0= 'b' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2802:3: lv_second_4_0= 'b'
                     	    {
                     	    lv_second_4_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleUnorderedSerialization8426); 
 
@@ -8281,15 +8018,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	        
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getUnorderedSerializationRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            current = createModelElement(grammarAccess.getUnorderedSerializationRule());
                     	    	        }
-                    	    	        
-                    	    	        try {
-                    	    	       		set(current, "second", true, "b", lastConsumedNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
+                    	           		set(current, "second", true, "b", lastConsumedNode);
                     	    	    
 
                     	    }
@@ -8313,31 +8044,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 3 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3091:4: ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2822:4: ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3091:4: ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3092:5: {...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2822:4: ({...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2823:5: {...}? => ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_0(), 2) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedSerialization", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_0(), 2)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3092:121: ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3093:6: ({...}? => ( (lv_third_5_0= 'c' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2823:121: ( ({...}? => ( (lv_third_5_0= 'c' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2824:6: ({...}? => ( (lv_third_5_0= 'c' ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_0(), 2);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3096:6: ({...}? => ( (lv_third_5_0= 'c' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3096:7: {...}? => ( (lv_third_5_0= 'c' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2827:6: ({...}? => ( (lv_third_5_0= 'c' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2827:7: {...}? => ( (lv_third_5_0= 'c' ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedSerialization", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3096:16: ( (lv_third_5_0= 'c' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3097:1: (lv_third_5_0= 'c' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2827:16: ( (lv_third_5_0= 'c' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2828:1: (lv_third_5_0= 'c' )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3097:1: (lv_third_5_0= 'c' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3098:3: lv_third_5_0= 'c'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2828:1: (lv_third_5_0= 'c' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2829:3: lv_third_5_0= 'c'
                     	    {
                     	    lv_third_5_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleUnorderedSerialization8511); 
 
@@ -8345,15 +8076,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	        
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getUnorderedSerializationRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            current = createModelElement(grammarAccess.getUnorderedSerializationRule());
                     	    	        }
-                    	    	        
-                    	    	        try {
-                    	    	       		set(current, "third", true, "c", lastConsumedNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
+                    	           		set(current, "third", true, "c", lastConsumedNode);
                     	    	    
 
                     	    }
@@ -8377,31 +8102,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    }
                     	    break;
                     	case 4 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3124:4: ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2849:4: ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3124:4: ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3125:5: {...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2849:4: ({...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2850:5: {...}? => ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_0(), 3) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedSerialization", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_0(), 3)");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3125:121: ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3126:6: ({...}? => ( (lv_forth_6_0= 'd' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2850:121: ( ({...}? => ( (lv_forth_6_0= 'd' ) ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2851:6: ({...}? => ( (lv_forth_6_0= 'd' ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_0(), 3);
                     	    	 				
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3129:6: ({...}? => ( (lv_forth_6_0= 'd' ) ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3129:7: {...}? => ( (lv_forth_6_0= 'd' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2854:6: ({...}? => ( (lv_forth_6_0= 'd' ) ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2854:7: {...}? => ( (lv_forth_6_0= 'd' ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleUnorderedSerialization", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3129:16: ( (lv_forth_6_0= 'd' ) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3130:1: (lv_forth_6_0= 'd' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2854:16: ( (lv_forth_6_0= 'd' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2855:1: (lv_forth_6_0= 'd' )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3130:1: (lv_forth_6_0= 'd' )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3131:3: lv_forth_6_0= 'd'
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2855:1: (lv_forth_6_0= 'd' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2856:3: lv_forth_6_0= 'd'
                     	    {
                     	    lv_forth_6_0=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleUnorderedSerialization8596); 
 
@@ -8409,15 +8134,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	        
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getUnorderedSerializationRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            current = createModelElement(grammarAccess.getUnorderedSerializationRule());
                     	    	        }
-                    	    	        
-                    	    	        try {
-                    	    	       		set(current, "forth", true, "d", lastConsumedNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
+                    	           		set(current, "forth", true, "d", lastConsumedNode);
                     	    	    
 
                     	    }
@@ -8469,16 +8188,16 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3166:6: (otherlv_7= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) ) )* )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2885:6: (otherlv_7= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) ) )* )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3166:6: (otherlv_7= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) ) )* )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3166:8: otherlv_7= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2885:6: (otherlv_7= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) ) )* )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2885:8: otherlv_7= '2' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) ) )*
                     {
                     otherlv_7=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleUnorderedSerialization8674); 
 
                         	createLeafNode(otherlv_7, grammarAccess.getUnorderedSerializationAccess().getDigitTwoKeyword_1_1_0(), null);
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3170:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2889:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) ) )*
                     loop61:
                     do {
                         int alt61=2;
@@ -8491,18 +8210,18 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt61) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3172:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2891:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3172:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3173:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?)
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2891:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2892:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?)
                     	    {
                     	     
                     	    	  getUnorderedGroupHelper().enter(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_1_1());
                     	    	
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3176:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?)
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3177:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2895:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?)
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2896:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+ {...}?
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3177:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2896:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) ) )+
                     	    int cnt60=0;
                     	    loop60:
                     	    do {
@@ -8531,31 +8250,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     	        switch (alt60) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3179:4: ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2898:4: ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3179:4: ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3180:5: {...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2898:4: ({...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2899:5: {...}? => ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) )
                     	    	    {
                     	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_1_1(), 0) ) {
                     	    	        throw new FailedPredicateException(input, "ruleUnorderedSerialization", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_1_1(), 0)");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3180:123: ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3181:6: ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2899:123: ( ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2900:6: ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) )
                     	    	    {
                     	    	     
                     	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_1_1(), 0);
                     	    	    	 				
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3184:6: ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3184:7: {...}? => ( (lv_firstAsList_9_0= 'a' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2903:6: ({...}? => ( (lv_firstAsList_9_0= 'a' ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2903:7: {...}? => ( (lv_firstAsList_9_0= 'a' ) )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        throw new FailedPredicateException(input, "ruleUnorderedSerialization", "true");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3184:16: ( (lv_firstAsList_9_0= 'a' ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3185:1: (lv_firstAsList_9_0= 'a' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2903:16: ( (lv_firstAsList_9_0= 'a' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2904:1: (lv_firstAsList_9_0= 'a' )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3185:1: (lv_firstAsList_9_0= 'a' )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3186:3: lv_firstAsList_9_0= 'a'
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2904:1: (lv_firstAsList_9_0= 'a' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2905:3: lv_firstAsList_9_0= 'a'
                     	    	    {
                     	    	    lv_firstAsList_9_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleUnorderedSerialization8737); 
 
@@ -8563,15 +8282,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	        
 
                     	    	    	        if (current==null) {
-                    	    	    	            current = factory.create(grammarAccess.getUnorderedSerializationRule().getType().getClassifier());
-                    	    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	    	            current = createModelElement(grammarAccess.getUnorderedSerializationRule());
                     	    	    	        }
-                    	    	    	        
-                    	    	    	        try {
-                    	    	    	       		add(current, "firstAsList", lv_firstAsList_9_0, "a", lastConsumedNode);
-                    	    	    	        } catch (ValueConverterException vce) {
-                    	    	    				handleValueConverterException(vce);
-                    	    	    	        }
+                    	    	           		add(current, "firstAsList", lv_firstAsList_9_0, "a", lastConsumedNode);
                     	    	    	    
 
                     	    	    }
@@ -8595,31 +8308,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	    }
                     	    	    break;
                     	    	case 2 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3212:4: ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2925:4: ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3212:4: ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3213:5: {...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2925:4: ({...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2926:5: {...}? => ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) )
                     	    	    {
                     	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_1_1(), 1) ) {
                     	    	        throw new FailedPredicateException(input, "ruleUnorderedSerialization", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_1_1(), 1)");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3213:123: ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3214:6: ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2926:123: ( ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2927:6: ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) )
                     	    	    {
                     	    	     
                     	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_1_1(), 1);
                     	    	    	 				
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3217:6: ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3217:7: {...}? => ( (lv_secondAsList_10_0= 'b' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2930:6: ({...}? => ( (lv_secondAsList_10_0= 'b' ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2930:7: {...}? => ( (lv_secondAsList_10_0= 'b' ) )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        throw new FailedPredicateException(input, "ruleUnorderedSerialization", "true");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3217:16: ( (lv_secondAsList_10_0= 'b' ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3218:1: (lv_secondAsList_10_0= 'b' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2930:16: ( (lv_secondAsList_10_0= 'b' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2931:1: (lv_secondAsList_10_0= 'b' )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3218:1: (lv_secondAsList_10_0= 'b' )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3219:3: lv_secondAsList_10_0= 'b'
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2931:1: (lv_secondAsList_10_0= 'b' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2932:3: lv_secondAsList_10_0= 'b'
                     	    	    {
                     	    	    lv_secondAsList_10_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleUnorderedSerialization8822); 
 
@@ -8627,15 +8340,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	        
 
                     	    	    	        if (current==null) {
-                    	    	    	            current = factory.create(grammarAccess.getUnorderedSerializationRule().getType().getClassifier());
-                    	    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	    	            current = createModelElement(grammarAccess.getUnorderedSerializationRule());
                     	    	    	        }
-                    	    	    	        
-                    	    	    	        try {
-                    	    	    	       		add(current, "secondAsList", lv_secondAsList_10_0, "b", lastConsumedNode);
-                    	    	    	        } catch (ValueConverterException vce) {
-                    	    	    				handleValueConverterException(vce);
-                    	    	    	        }
+                    	    	           		add(current, "secondAsList", lv_secondAsList_10_0, "b", lastConsumedNode);
                     	    	    	    
 
                     	    	    }
@@ -8696,16 +8403,16 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3254:6: (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) ) )* )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2961:6: (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) ) )* )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3254:6: (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) ) )* )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3254:8: otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2961:6: (otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) ) )* )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2961:8: otherlv_11= '3' ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) ) )*
                     {
                     otherlv_11=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleUnorderedSerialization8902); 
 
                         	createLeafNode(otherlv_11, grammarAccess.getUnorderedSerializationAccess().getDigitThreeKeyword_1_2_0(), null);
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3258:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2965:1: ( ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) ) )*
                     loop64:
                     do {
                         int alt64=2;
@@ -8718,18 +8425,18 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                         switch (alt64) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3260:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2967:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3260:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3261:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?)
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2967:1: ( ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2968:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?)
                     	    {
                     	     
                     	    	  getUnorderedGroupHelper().enter(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_2_1());
                     	    	
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3264:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?)
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3265:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2971:2: ( ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?)
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2972:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+ {...}?
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3265:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2972:3: ( ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) ) )+
                     	    int cnt63=0;
                     	    loop63:
                     	    do {
@@ -8758,21 +8465,21 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     	        switch (alt63) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3267:4: ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2974:4: ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3267:4: ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3268:5: {...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2974:4: ({...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2975:5: {...}? => ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ )
                     	    	    {
                     	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_2_1(), 0) ) {
                     	    	        throw new FailedPredicateException(input, "ruleUnorderedSerialization", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_2_1(), 0)");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3268:123: ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3269:6: ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2975:123: ( ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+ )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2976:6: ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+
                     	    	    {
                     	    	     
                     	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_2_1(), 0);
                     	    	    	 				
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3272:6: ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2979:6: ({...}? => ( (lv_firstAsList_13_0= 'a' ) ) )+
                     	    	    int cnt62=0;
                     	    	    loop62:
                     	    	    do {
@@ -8792,16 +8499,16 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
                     	    	        switch (alt62) {
                     	    	    	case 1 :
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3272:7: {...}? => ( (lv_firstAsList_13_0= 'a' ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2979:7: {...}? => ( (lv_firstAsList_13_0= 'a' ) )
                     	    	    	    {
                     	    	    	    if ( !((true)) ) {
                     	    	    	        throw new FailedPredicateException(input, "ruleUnorderedSerialization", "true");
                     	    	    	    }
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3272:16: ( (lv_firstAsList_13_0= 'a' ) )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3273:1: (lv_firstAsList_13_0= 'a' )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2979:16: ( (lv_firstAsList_13_0= 'a' ) )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2980:1: (lv_firstAsList_13_0= 'a' )
                     	    	    	    {
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3273:1: (lv_firstAsList_13_0= 'a' )
-                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3274:3: lv_firstAsList_13_0= 'a'
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2980:1: (lv_firstAsList_13_0= 'a' )
+                    	    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:2981:3: lv_firstAsList_13_0= 'a'
                     	    	    	    {
                     	    	    	    lv_firstAsList_13_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleUnorderedSerialization8965); 
 
@@ -8809,15 +8516,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	    	        
 
                     	    	    	    	        if (current==null) {
-                    	    	    	    	            current = factory.create(grammarAccess.getUnorderedSerializationRule().getType().getClassifier());
-                    	    	    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	    	    	            current = createModelElement(grammarAccess.getUnorderedSerializationRule());
                     	    	    	    	        }
-                    	    	    	    	        
-                    	    	    	    	        try {
-                    	    	    	    	       		add(current, "firstAsList", lv_firstAsList_13_0, "a", lastConsumedNode);
-                    	    	    	    	        } catch (ValueConverterException vce) {
-                    	    	    	    				handleValueConverterException(vce);
-                    	    	    	    	        }
+                    	    	    	           		add(current, "firstAsList", lv_firstAsList_13_0, "a", lastConsumedNode);
                     	    	    	    	    
 
                     	    	    	    }
@@ -8851,31 +8552,31 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	    }
                     	    	    break;
                     	    	case 2 :
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3300:4: ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3001:4: ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3300:4: ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3301:5: {...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3001:4: ({...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3002:5: {...}? => ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) )
                     	    	    {
                     	    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_2_1(), 1) ) {
                     	    	        throw new FailedPredicateException(input, "ruleUnorderedSerialization", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_2_1(), 1)");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3301:123: ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3302:6: ({...}? => ( (lv_second_14_0= 'b' ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3002:123: ( ({...}? => ( (lv_second_14_0= 'b' ) ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3003:6: ({...}? => ( (lv_second_14_0= 'b' ) ) )
                     	    	    {
                     	    	     
                     	    	    	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_2_1(), 1);
                     	    	    	 				
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3305:6: ({...}? => ( (lv_second_14_0= 'b' ) ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3305:7: {...}? => ( (lv_second_14_0= 'b' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3006:6: ({...}? => ( (lv_second_14_0= 'b' ) ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3006:7: {...}? => ( (lv_second_14_0= 'b' ) )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        throw new FailedPredicateException(input, "ruleUnorderedSerialization", "true");
                     	    	    }
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3305:16: ( (lv_second_14_0= 'b' ) )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3306:1: (lv_second_14_0= 'b' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3006:16: ( (lv_second_14_0= 'b' ) )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3007:1: (lv_second_14_0= 'b' )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3306:1: (lv_second_14_0= 'b' )
-                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3307:3: lv_second_14_0= 'b'
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3007:1: (lv_second_14_0= 'b' )
+                    	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalSimpleUnorderedGroupsTestLanguage.g:3008:3: lv_second_14_0= 'b'
                     	    	    {
                     	    	    lv_second_14_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleUnorderedSerialization9051); 
 
@@ -8883,15 +8584,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                     	    	        
 
                     	    	    	        if (current==null) {
-                    	    	    	            current = factory.create(grammarAccess.getUnorderedSerializationRule().getType().getClassifier());
-                    	    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	    	            current = createModelElement(grammarAccess.getUnorderedSerializationRule());
                     	    	    	        }
-                    	    	    	        
-                    	    	    	        try {
-                    	    	    	       		set(current, "second", true, "b", lastConsumedNode);
-                    	    	    	        } catch (ValueConverterException vce) {
-                    	    	    				handleValueConverterException(vce);
-                    	    	    	        }
+                    	    	           		set(current, "second", true, "b", lastConsumedNode);
                     	    	    	    
 
                     	    	    }

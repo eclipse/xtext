@@ -94,7 +94,8 @@ ruleRoot returns [EObject current=null]
     this_TestRequired_1=ruleTestRequired
     { 
         $current = $this_TestRequired_1.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 
     |
@@ -104,7 +105,8 @@ ruleRoot returns [EObject current=null]
     this_TestOptional_2=ruleTestOptional
     { 
         $current = $this_TestOptional_2.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 
     |
@@ -114,7 +116,8 @@ ruleRoot returns [EObject current=null]
     this_TestList_3=ruleTestList
     { 
         $current = $this_TestList_3.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 ))
 ;
@@ -151,19 +154,14 @@ ruleTestRequired returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getTestRequiredRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getTestRequiredRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"required1",
-	        		lv_required1_1_0, 
-	        		"INT", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"required1",
+        		lv_required1_1_0, 
+        		"INT", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -175,19 +173,14 @@ ruleTestRequired returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getTestRequiredRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getTestRequiredRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"required2",
-	        		lv_required2_2_0, 
-	        		"INT", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"required2",
+        		lv_required2_2_0, 
+        		"INT", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -226,19 +219,14 @@ ruleTestOptional returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getTestOptionalRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getTestOptionalRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"opt1",
-	        		lv_opt1_1_0, 
-	        		"INT", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"opt1",
+        		lv_opt1_1_0, 
+        		"INT", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -254,19 +242,14 @@ ruleTestOptional returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getTestOptionalRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getTestOptionalRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"opt2",
-	        		lv_opt2_3_0, 
-	        		"INT", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"opt2",
+        		lv_opt2_3_0, 
+        		"INT", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -305,19 +288,14 @@ ruleTestList returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getTestListRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getTestListRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"item",
-	        		lv_item_1_0, 
-	        		"INT", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		add(
+       			$current, 
+       			"item",
+        		lv_item_1_0, 
+        		"INT", 
+        		lastConsumedNode);
 	    }
 
 )

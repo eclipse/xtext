@@ -90,7 +90,8 @@ ruleModel returns [EObject current=null]
     this_CaseInsensitiveKeywordRule_0=ruleCaseInsensitiveKeywordRule
     { 
         $current = $this_CaseInsensitiveKeywordRule_0.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 
     |
@@ -100,7 +101,8 @@ ruleModel returns [EObject current=null]
     this_PluralRule_1=rulePluralRule
     { 
         $current = $this_PluralRule_1.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 
     |
@@ -110,7 +112,8 @@ ruleModel returns [EObject current=null]
     this_MultiRule_2=ruleMultiRule
     { 
         $current = $this_MultiRule_2.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 
     |
@@ -120,7 +123,8 @@ ruleModel returns [EObject current=null]
     this_DatatypeRule_3=ruleDatatypeRule
     { 
         $current = $this_DatatypeRule_3.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 
     |
@@ -130,7 +134,8 @@ ruleModel returns [EObject current=null]
     this_CommonTerminalsRule_4=ruleCommonTerminalsRule
     { 
         $current = $this_CommonTerminalsRule_4.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 )
 ;
@@ -167,19 +172,14 @@ ruleCaseInsensitiveKeywordRule returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getCaseInsensitiveKeywordRuleRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getCaseInsensitiveKeywordRuleRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"val",
-	        		lv_val_1_0, 
-	        		"INT", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"val",
+        		lv_val_1_0, 
+        		"INT", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -218,19 +218,14 @@ rulePluralRule returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getPluralRuleRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getPluralRuleRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"count",
-	        		lv_count_1_0, 
-	        		"INT", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"count",
+        		lv_count_1_0, 
+        		"INT", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -273,19 +268,14 @@ ruleMultiRule returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getMultiRuleRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getMultiRuleRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"val",
-	        		lv_val_1_0, 
-	        		"INT", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"val",
+        		lv_val_1_0, 
+        		"INT", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -336,19 +326,14 @@ ruleDatatypeRule returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getDatatypeRuleRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getDatatypeRuleRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"val",
-	        		lv_val_1_0, 
-	        		"INT", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"val",
+        		lv_val_1_0, 
+        		"INT", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -358,7 +343,8 @@ ruleDatatypeRule returns [EObject current=null]
     }
 ruleDatatype
     { 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 )
 ;
@@ -407,7 +393,8 @@ ruleDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
     }
 
     { 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 )
     ;
@@ -486,19 +473,14 @@ this_STRING_3=RULE_STRING
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getCommonTerminalsRuleRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getCommonTerminalsRuleRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"val",
-	        		lv_val_4_0, 
-	        		"ID", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"val",
+        		lv_val_4_0, 
+        		"ID", 
+        		lastConsumedNode);
 	    }
 
 )

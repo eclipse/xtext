@@ -94,20 +94,15 @@ ruleSubMain returns [EObject current=null]
 	    }
 		lv_superMains_1_0=ruleSuperMain		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getSubMainRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getSubMainRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"superMains",
-	        		lv_superMains_1_0, 
-	        		"SuperMain", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"superMains",
+        		lv_superMains_1_0, 
+        		"SuperMain", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -122,20 +117,15 @@ ruleSubMain returns [EObject current=null]
 	    }
 		lv_another_3_0=ruleAnotherSuperMain		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getSubMainRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getSubMainRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"another",
-	        		lv_another_3_0, 
-	        		"AnotherSuperMain", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"another",
+        		lv_another_3_0, 
+        		"AnotherSuperMain", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -174,19 +164,14 @@ ruleAnotherSuperMain returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getAnotherSuperMainRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getAnotherSuperMainRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"name",
-	        		lv_name_1_0, 
-	        		"ID", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"name",
+        		lv_name_1_0, 
+        		"ID", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -225,19 +210,14 @@ ruleSuperMain returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getSuperMainRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getSuperMainRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"name",
-	        		lv_name_1_0, 
-	        		"ID", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"name",
+        		lv_name_1_0, 
+        		"ID", 
+        		lastConsumedNode);
 	    }
 
 )

@@ -91,20 +91,15 @@ ruleModel returns [EObject current=null]
 	    }
 		lv_e1_0_0=ruleElem1		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"e1",
-	        		lv_e1_0_0, 
-	        		"Elem1", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"e1",
+        		lv_e1_0_0, 
+        		"Elem1", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -116,20 +111,15 @@ ruleModel returns [EObject current=null]
 	    }
 		lv_e2_1_0=ruleElem2		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"e2",
-	        		lv_e2_1_0, 
-	        		"Elem2", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"e2",
+        		lv_e2_1_0, 
+        		"Elem2", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -163,20 +153,15 @@ ruleElem1 returns [EObject current=null]
 	    }
 		lv_value_0_0=ruleEnumT		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getElem1Rule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getElem1Rule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"value",
-	        		lv_value_0_0, 
-	        		"EnumT", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"value",
+        		lv_value_0_0, 
+        		"EnumT", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -210,20 +195,15 @@ ruleElem2 returns [EObject current=null]
 	    }
 		lv_value_0_0=ruleEnumT		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getElem2Rule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getElem2Rule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"value",
-	        		lv_value_0_0, 
-	        		"EnumT", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"value",
+        		lv_value_0_0, 
+        		"EnumT", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )

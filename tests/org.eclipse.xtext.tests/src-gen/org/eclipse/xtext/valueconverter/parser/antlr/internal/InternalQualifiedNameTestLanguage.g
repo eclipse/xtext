@@ -94,20 +94,15 @@ ruleElement returns [EObject current=null]
 	    }
 		lv_qualifiedName_1_0=ruleQualifiedName		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getElementRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getElementRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"qualifiedName",
-	        		lv_qualifiedName_1_0, 
-	        		"QualifiedName", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"qualifiedName",
+        		lv_qualifiedName_1_0, 
+        		"QualifiedName", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )

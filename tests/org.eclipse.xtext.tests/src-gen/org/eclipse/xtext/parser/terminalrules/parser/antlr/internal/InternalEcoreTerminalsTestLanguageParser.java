@@ -174,19 +174,14 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
             	    		
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            current = createModelElement(grammarAccess.getModelRule());
             	    	        }
-            	    	        try {
-            	    	       		add(
-            	    	       			current, 
-            	    	       			"intValues",
-            	    	        		lv_intValues_1_0, 
-            	    	        		"EINT", 
-            	    	        		lastConsumedNode);
-            	    	        } catch (ValueConverterException vce) {
-            	    				handleValueConverterException(vce);
-            	    	        }
+            	           		add(
+            	           			current, 
+            	           			"intValues",
+            	            		lv_intValues_1_0, 
+            	            		"EINT", 
+            	            		lastConsumedNode);
             	    	    
 
             	    }
@@ -201,20 +196,20 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:115:6: (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:110:6: (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:115:6: (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:115:8: otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:110:6: (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:110:8: otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) )
             	    {
             	    otherlv_2=(Token)match(input,9,FollowSets000.FOLLOW_9_in_ruleModel165); 
 
             	        	createLeafNode(otherlv_2, grammarAccess.getModelAccess().getDoubleKeyword_1_0(), null);
             	        
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:119:1: ( (lv_doubleValues_3_0= RULE_EDOUBLE ) )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:120:1: (lv_doubleValues_3_0= RULE_EDOUBLE )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:114:1: ( (lv_doubleValues_3_0= RULE_EDOUBLE ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:115:1: (lv_doubleValues_3_0= RULE_EDOUBLE )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:120:1: (lv_doubleValues_3_0= RULE_EDOUBLE )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:121:3: lv_doubleValues_3_0= RULE_EDOUBLE
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:115:1: (lv_doubleValues_3_0= RULE_EDOUBLE )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:116:3: lv_doubleValues_3_0= RULE_EDOUBLE
             	    {
             	    lv_doubleValues_3_0=(Token)match(input,RULE_EDOUBLE,FollowSets000.FOLLOW_RULE_EDOUBLE_in_ruleModel182); 
 
@@ -222,19 +217,14 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
             	    		
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            current = createModelElement(grammarAccess.getModelRule());
             	    	        }
-            	    	        try {
-            	    	       		add(
-            	    	       			current, 
-            	    	       			"doubleValues",
-            	    	        		lv_doubleValues_3_0, 
-            	    	        		"EDOUBLE", 
-            	    	        		lastConsumedNode);
-            	    	        } catch (ValueConverterException vce) {
-            	    				handleValueConverterException(vce);
-            	    	        }
+            	           		add(
+            	           			current, 
+            	           			"doubleValues",
+            	            		lv_doubleValues_3_0, 
+            	            		"EDOUBLE", 
+            	            		lastConsumedNode);
             	    	    
 
             	    }
@@ -249,20 +239,20 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
             	    }
             	    break;
             	case 3 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:144:6: (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:134:6: (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:144:6: (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:144:8: otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:134:6: (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:134:8: otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) )
             	    {
             	    otherlv_4=(Token)match(input,10,FollowSets000.FOLLOW_10_in_ruleModel207); 
 
             	        	createLeafNode(otherlv_4, grammarAccess.getModelAccess().getDateKeyword_2_0(), null);
             	        
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:148:1: ( (lv_dateValues_5_0= RULE_EDATE ) )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:149:1: (lv_dateValues_5_0= RULE_EDATE )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:138:1: ( (lv_dateValues_5_0= RULE_EDATE ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:139:1: (lv_dateValues_5_0= RULE_EDATE )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:149:1: (lv_dateValues_5_0= RULE_EDATE )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:150:3: lv_dateValues_5_0= RULE_EDATE
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:139:1: (lv_dateValues_5_0= RULE_EDATE )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:140:3: lv_dateValues_5_0= RULE_EDATE
             	    {
             	    lv_dateValues_5_0=(Token)match(input,RULE_EDATE,FollowSets000.FOLLOW_RULE_EDATE_in_ruleModel224); 
 
@@ -270,19 +260,14 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
             	    		
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            current = createModelElement(grammarAccess.getModelRule());
             	    	        }
-            	    	        try {
-            	    	       		add(
-            	    	       			current, 
-            	    	       			"dateValues",
-            	    	        		lv_dateValues_5_0, 
-            	    	        		"EDATE", 
-            	    	        		lastConsumedNode);
-            	    	        } catch (ValueConverterException vce) {
-            	    				handleValueConverterException(vce);
-            	    	        }
+            	           		add(
+            	           			current, 
+            	           			"dateValues",
+            	            		lv_dateValues_5_0, 
+            	            		"EDATE", 
+            	            		lastConsumedNode);
             	    	    
 
             	    }

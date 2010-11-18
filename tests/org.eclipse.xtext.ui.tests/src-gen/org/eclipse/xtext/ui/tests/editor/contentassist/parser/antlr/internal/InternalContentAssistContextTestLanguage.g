@@ -90,20 +90,15 @@ ruleFirstLevel returns [EObject current=null]
 	    }
 		lv_secondLevelA_0_0=ruleSecondLevelA		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getFirstLevelRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getFirstLevelRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"secondLevelA",
-	        		lv_secondLevelA_0_0, 
-	        		"SecondLevelA", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"secondLevelA",
+        		lv_secondLevelA_0_0, 
+        		"SecondLevelA", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -114,20 +109,15 @@ ruleFirstLevel returns [EObject current=null]
 	    }
 		lv_secondLevelB_1_0=ruleSecondLevelB		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getFirstLevelRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getFirstLevelRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"secondLevelB",
-	        		lv_secondLevelB_1_0, 
-	        		"SecondLevelB", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"secondLevelB",
+        		lv_secondLevelB_1_0, 
+        		"SecondLevelB", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -161,20 +151,15 @@ ruleSecondLevelA returns [EObject current=null]
 	    }
 		lv_thirdLevelA1_0_0=ruleThirdLevelA1		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getSecondLevelARule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getSecondLevelARule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"thirdLevelA1",
-	        		lv_thirdLevelA1_0_0, 
-	        		"ThirdLevelA1", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"thirdLevelA1",
+        		lv_thirdLevelA1_0_0, 
+        		"ThirdLevelA1", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -185,20 +170,15 @@ ruleSecondLevelA returns [EObject current=null]
 	    }
 		lv_thirdLevelA2_1_0=ruleThirdLevelA2		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getSecondLevelARule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getSecondLevelARule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"thirdLevelA2",
-	        		lv_thirdLevelA2_1_0, 
-	        		"ThirdLevelA2", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"thirdLevelA2",
+        		lv_thirdLevelA2_1_0, 
+        		"ThirdLevelA2", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -232,20 +212,15 @@ ruleSecondLevelB returns [EObject current=null]
 	    }
 		lv_thirdLevelB1_0_0=ruleThirdLevelB1		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getSecondLevelBRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getSecondLevelBRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"thirdLevelB1",
-	        		lv_thirdLevelB1_0_0, 
-	        		"ThirdLevelB1", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"thirdLevelB1",
+        		lv_thirdLevelB1_0_0, 
+        		"ThirdLevelB1", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -256,20 +231,15 @@ ruleSecondLevelB returns [EObject current=null]
 	    }
 		lv_thirdLevelB2_1_0=ruleThirdLevelB2		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getSecondLevelBRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getSecondLevelBRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"thirdLevelB2",
-	        		lv_thirdLevelB2_1_0, 
-	        		"ThirdLevelB2", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"thirdLevelB2",
+        		lv_thirdLevelB2_1_0, 
+        		"ThirdLevelB2", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -301,15 +271,10 @@ ruleThirdLevelA1 returns [EObject current=null]
     	createLeafNode(otherlv_0, grammarAccess.getThirdLevelA1Access().getA1Keyword_0(), null);
     }
 (
-    { 
-        temp=factory.create(grammarAccess.getThirdLevelA1Access().getThirdLevelA1Action_1().getType().getClassifier());
-        $current = temp; 
-        temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getThirdLevelA1Access().getThirdLevelA1Action_1(), currentNode.getParent());
-    newNode.getChildren().add(currentNode);
-    moveLookaheadInfo(currentNode, newNode);
-    currentNode = newNode; 
-        associateNodeWithAstElement(currentNode, $current); 
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getThirdLevelA1Access().getThirdLevelA1Action_1(),
+            $current);
     }
 )(
 (
@@ -319,19 +284,14 @@ ruleThirdLevelA1 returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getThirdLevelA1Rule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getThirdLevelA1Rule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"name",
-	        		lv_name_2_0, 
-	        		"ID", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"name",
+        		lv_name_2_0, 
+        		"ID", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -363,15 +323,10 @@ ruleThirdLevelA2 returns [EObject current=null]
     	createLeafNode(otherlv_0, grammarAccess.getThirdLevelA2Access().getA2Keyword_0(), null);
     }
 (
-    { 
-        temp=factory.create(grammarAccess.getThirdLevelA2Access().getThirdLevelA2Action_1().getType().getClassifier());
-        $current = temp; 
-        temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getThirdLevelA2Access().getThirdLevelA2Action_1(), currentNode.getParent());
-    newNode.getChildren().add(currentNode);
-    moveLookaheadInfo(currentNode, newNode);
-    currentNode = newNode; 
-        associateNodeWithAstElement(currentNode, $current); 
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getThirdLevelA2Access().getThirdLevelA2Action_1(),
+            $current);
     }
 )(
 (
@@ -381,19 +336,14 @@ ruleThirdLevelA2 returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getThirdLevelA2Rule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getThirdLevelA2Rule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"name",
-	        		lv_name_2_0, 
-	        		"ID", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"name",
+        		lv_name_2_0, 
+        		"ID", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -425,15 +375,10 @@ ruleThirdLevelB1 returns [EObject current=null]
     	createLeafNode(otherlv_0, grammarAccess.getThirdLevelB1Access().getB1Keyword_0(), null);
     }
 (
-    { 
-        temp=factory.create(grammarAccess.getThirdLevelB1Access().getThirdLevelB1Action_1().getType().getClassifier());
-        $current = temp; 
-        temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getThirdLevelB1Access().getThirdLevelB1Action_1(), currentNode.getParent());
-    newNode.getChildren().add(currentNode);
-    moveLookaheadInfo(currentNode, newNode);
-    currentNode = newNode; 
-        associateNodeWithAstElement(currentNode, $current); 
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getThirdLevelB1Access().getThirdLevelB1Action_1(),
+            $current);
     }
 )(
 (
@@ -443,19 +388,14 @@ ruleThirdLevelB1 returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getThirdLevelB1Rule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getThirdLevelB1Rule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"name",
-	        		lv_name_2_0, 
-	        		"ID", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"name",
+        		lv_name_2_0, 
+        		"ID", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -487,15 +427,10 @@ ruleThirdLevelB2 returns [EObject current=null]
     	createLeafNode(otherlv_0, grammarAccess.getThirdLevelB2Access().getB2Keyword_0(), null);
     }
 (
-    { 
-        temp=factory.create(grammarAccess.getThirdLevelB2Access().getThirdLevelB2Action_1().getType().getClassifier());
-        $current = temp; 
-        temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getThirdLevelB2Access().getThirdLevelB2Action_1(), currentNode.getParent());
-    newNode.getChildren().add(currentNode);
-    moveLookaheadInfo(currentNode, newNode);
-    currentNode = newNode; 
-        associateNodeWithAstElement(currentNode, $current); 
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getThirdLevelB2Access().getThirdLevelB2Action_1(),
+            $current);
     }
 )(
 (
@@ -505,19 +440,14 @@ ruleThirdLevelB2 returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getThirdLevelB2Rule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getThirdLevelB2Rule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"name",
-	        		lv_name_2_0, 
-	        		"ID", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"name",
+        		lv_name_2_0, 
+        		"ID", 
+        		lastConsumedNode);
 	    }
 
 )

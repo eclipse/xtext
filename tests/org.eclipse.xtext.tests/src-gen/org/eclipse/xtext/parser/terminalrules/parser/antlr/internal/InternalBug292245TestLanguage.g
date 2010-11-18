@@ -101,20 +101,15 @@ ruleModel returns [EObject current=null]
 	    }
 		lv_fix_1_0=ruleFix		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"fix",
-	        		lv_fix_1_0, 
-	        		"Fix", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"fix",
+        		lv_fix_1_0, 
+        		"Fix", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -130,20 +125,15 @@ ruleModel returns [EObject current=null]
 	    }
 		lv_error_3_0=ruleError		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"error",
-	        		lv_error_3_0, 
-	        		"Error", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"error",
+        		lv_error_3_0, 
+        		"Error", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -159,20 +149,15 @@ ruleModel returns [EObject current=null]
 	    }
 		lv_tick_5_0=ruleApostrophe		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"tick",
-	        		lv_tick_5_0, 
-	        		"Apostrophe", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"tick",
+        		lv_tick_5_0, 
+        		"Apostrophe", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -225,7 +210,8 @@ ruleError returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
     this_APOSTROPHE_CHAR_2=RULE_APOSTROPHE_CHAR    {
 		$current.merge(this_APOSTROPHE_CHAR_2);
@@ -283,7 +269,8 @@ ruleFix returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
     this_APOSTROPHE_CHAR_2=RULE_APOSTROPHE_CHAR    {
 		$current.merge(this_APOSTROPHE_CHAR_2);
@@ -301,7 +288,8 @@ ruleFix returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 )
     ;

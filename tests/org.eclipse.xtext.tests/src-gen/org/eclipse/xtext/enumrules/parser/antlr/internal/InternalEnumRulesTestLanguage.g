@@ -95,20 +95,15 @@ ruleModel returns [EObject current=null]
 	    }
 		lv_existing_1_0=ruleExistingEnum		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"existing",
-	        		lv_existing_1_0, 
-	        		"ExistingEnum", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"existing",
+        		lv_existing_1_0, 
+        		"ExistingEnum", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -123,20 +118,15 @@ ruleModel returns [EObject current=null]
 	    }
 		lv_generated_3_0=ruleGeneratedEnum		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"generated",
-	        		lv_generated_3_0, 
-	        		"GeneratedEnum", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"generated",
+        		lv_generated_3_0, 
+        		"GeneratedEnum", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -152,20 +142,15 @@ ruleModel returns [EObject current=null]
 	    }
 		lv_generated_5_0=ruleGeneratedEnum		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"generated",
-	        		lv_generated_5_0, 
-	        		"GeneratedEnum", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"generated",
+        		lv_generated_5_0, 
+        		"GeneratedEnum", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )

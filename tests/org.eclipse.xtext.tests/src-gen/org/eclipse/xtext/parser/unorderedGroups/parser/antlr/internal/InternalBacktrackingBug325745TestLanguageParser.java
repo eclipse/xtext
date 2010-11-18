@@ -153,21 +153,16 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
               	
             }
             if ( state.backtracking==0 ) {
-               
-                      temp=factory.create(grammarAccess.getModelAccess().getModelAction_0().getType().getClassifier());
-                      current = temp; 
-                      temp = null;
-                      CompositeNode newNode = createCompositeNode(grammarAccess.getModelAccess().getModelAction_0(), currentNode.getParent());
-                  newNode.getChildren().add(currentNode);
-                  moveLookaheadInfo(currentNode, newNode);
-                  currentNode = newNode; 
-                      associateNodeWithAstElement(currentNode, current); 
+
+                      current = forceCreateModelElement(
+                          grammarAccess.getModelAccess().getModelAction_0(),
+                          current);
                   
             }
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:107:2: ( (lv_fields_1_0= ruleElement ) )+
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:102:2: ( (lv_fields_1_0= ruleElement ) )+
             int cnt1=0;
             loop1:
             do {
@@ -181,10 +176,10 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:108:1: (lv_fields_1_0= ruleElement )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:103:1: (lv_fields_1_0= ruleElement )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:108:1: (lv_fields_1_0= ruleElement )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:109:3: lv_fields_1_0= ruleElement
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:103:1: (lv_fields_1_0= ruleElement )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:104:3: lv_fields_1_0= ruleElement
             	    {
             	    if ( state.backtracking==0 ) {
             	       
@@ -199,20 +194,15 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
             	    if ( state.backtracking==0 ) {
 
             	      	        if (current==null) {
-            	      	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-            	      	            associateNodeWithAstElement(currentNode.getParent(), current);
+            	      	            current = createModelElementForParent(grammarAccess.getModelRule());
             	      	        }
-            	      	        try {
-            	      	       		add(
-            	      	       			current, 
-            	      	       			"fields",
-            	      	        		lv_fields_1_0, 
-            	      	        		"Element", 
-            	      	        		currentNode);
-            	      	        } catch (ValueConverterException vce) {
-            	      				handleValueConverterException(vce);
-            	      	        }
-            	      	        currentNode = currentNode.getParent();
+            	             		add(
+            	             			current, 
+            	             			"fields",
+            	              		lv_fields_1_0, 
+            	              		"Element", 
+            	              		currentNode);
+            	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
 
@@ -257,7 +247,7 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
 
     // $ANTLR start "entryRuleElement"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:139:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:129:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
     public final EObject entryRuleElement() throws RecognitionException {
         EObject current = null;
 
@@ -265,8 +255,8 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:140:2: (iv_ruleElement= ruleElement EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:141:2: iv_ruleElement= ruleElement EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:130:2: (iv_ruleElement= ruleElement EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:131:2: iv_ruleElement= ruleElement EOF
             {
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getElementRule(), currentNode); 
@@ -297,7 +287,7 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
 
     // $ANTLR start "ruleElement"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:148:1: ruleElement returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:138:1: ruleElement returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' ) ;
     public final EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
@@ -311,17 +301,17 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:153:6: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:154:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:143:6: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:144:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:154:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:154:2: ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:144:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:144:2: ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.'
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:154:2: ( (lv_name_0_0= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:155:1: (lv_name_0_0= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:144:2: ( (lv_name_0_0= RULE_ID ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:145:1: (lv_name_0_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:155:1: (lv_name_0_0= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:156:3: lv_name_0_0= RULE_ID
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:145:1: (lv_name_0_0= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:146:3: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleElement238); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -332,19 +322,14 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
             if ( state.backtracking==0 ) {
 
               	        if (current==null) {
-              	            current = factory.create(grammarAccess.getElementRule().getType().getClassifier());
-              	            associateNodeWithAstElement(currentNode, current);
+              	            current = createModelElement(grammarAccess.getElementRule());
               	        }
-              	        try {
-              	       		set(
-              	       			current, 
-              	       			"name",
-              	        		lv_name_0_0, 
-              	        		"ID", 
-              	        		lastConsumedNode);
-              	        } catch (ValueConverterException vce) {
-              				handleValueConverterException(vce);
-              	        }
+                     		set(
+                     			current, 
+                     			"name",
+                      		lv_name_0_0, 
+                      		"ID", 
+                      		lastConsumedNode);
               	    
             }
 
@@ -353,7 +338,7 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:178:2: ( (lv_dataType_1_0= ruleDataType ) )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:163:2: ( (lv_dataType_1_0= ruleDataType ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -366,10 +351,10 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:179:1: (lv_dataType_1_0= ruleDataType )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:164:1: (lv_dataType_1_0= ruleDataType )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:179:1: (lv_dataType_1_0= ruleDataType )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:180:3: lv_dataType_1_0= ruleDataType
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:164:1: (lv_dataType_1_0= ruleDataType )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:165:3: lv_dataType_1_0= ruleDataType
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -384,20 +369,15 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
                     if ( state.backtracking==0 ) {
 
                       	        if (current==null) {
-                      	            current = factory.create(grammarAccess.getElementRule().getType().getClassifier());
-                      	            associateNodeWithAstElement(currentNode.getParent(), current);
+                      	            current = createModelElementForParent(grammarAccess.getElementRule());
                       	        }
-                      	        try {
-                      	       		set(
-                      	       			current, 
-                      	       			"dataType",
-                      	        		lv_dataType_1_0, 
-                      	        		"DataType", 
-                      	        		currentNode);
-                      	        } catch (ValueConverterException vce) {
-                      				handleValueConverterException(vce);
-                      	        }
-                      	        currentNode = currentNode.getParent();
+                             		set(
+                             			current, 
+                             			"dataType",
+                              		lv_dataType_1_0, 
+                              		"DataType", 
+                              		currentNode);
+                      	        afterParserOrEnumRuleCall();
                       	    
                     }
 
@@ -409,11 +389,11 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:202:3: ( (lv_expression_2_0= ruleExpression ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:203:1: (lv_expression_2_0= ruleExpression )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:182:3: ( (lv_expression_2_0= ruleExpression ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:183:1: (lv_expression_2_0= ruleExpression )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:203:1: (lv_expression_2_0= ruleExpression )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:204:3: lv_expression_2_0= ruleExpression
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:183:1: (lv_expression_2_0= ruleExpression )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:184:3: lv_expression_2_0= ruleExpression
             {
             if ( state.backtracking==0 ) {
                
@@ -428,20 +408,15 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
             if ( state.backtracking==0 ) {
 
               	        if (current==null) {
-              	            current = factory.create(grammarAccess.getElementRule().getType().getClassifier());
-              	            associateNodeWithAstElement(currentNode.getParent(), current);
+              	            current = createModelElementForParent(grammarAccess.getElementRule());
               	        }
-              	        try {
-              	       		set(
-              	       			current, 
-              	       			"expression",
-              	        		lv_expression_2_0, 
-              	        		"Expression", 
-              	        		currentNode);
-              	        } catch (ValueConverterException vce) {
-              				handleValueConverterException(vce);
-              	        }
-              	        currentNode = currentNode.getParent();
+                     		set(
+                     			current, 
+                     			"expression",
+                      		lv_expression_2_0, 
+                      		"Expression", 
+                      		currentNode);
+              	        afterParserOrEnumRuleCall();
               	    
             }
 
@@ -481,7 +456,7 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
 
     // $ANTLR start "entryRuleDataType"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:238:1: entryRuleDataType returns [EObject current=null] : iv_ruleDataType= ruleDataType EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:213:1: entryRuleDataType returns [EObject current=null] : iv_ruleDataType= ruleDataType EOF ;
     public final EObject entryRuleDataType() throws RecognitionException {
         EObject current = null;
 
@@ -489,8 +464,8 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:239:2: (iv_ruleDataType= ruleDataType EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:240:2: iv_ruleDataType= ruleDataType EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:214:2: (iv_ruleDataType= ruleDataType EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:215:2: iv_ruleDataType= ruleDataType EOF
             {
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getDataTypeRule(), currentNode); 
@@ -521,7 +496,7 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
 
     // $ANTLR start "ruleDataType"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:247:1: ruleDataType returns [EObject current=null] : ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:222:1: ruleDataType returns [EObject current=null] : ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? ) ;
     public final EObject ruleDataType() throws RecognitionException {
         EObject current = null;
 
@@ -532,17 +507,17 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:252:6: ( ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:253:1: ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:227:6: ( ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:228:1: ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:253:1: ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:253:2: ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:228:1: ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:228:2: ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )?
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:253:2: ( (lv_baseType_0_0= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:254:1: (lv_baseType_0_0= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:228:2: ( (lv_baseType_0_0= RULE_ID ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:229:1: (lv_baseType_0_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:254:1: (lv_baseType_0_0= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:255:3: lv_baseType_0_0= RULE_ID
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:229:1: (lv_baseType_0_0= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:230:3: lv_baseType_0_0= RULE_ID
             {
             lv_baseType_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleDataType386); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -553,19 +528,14 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
             if ( state.backtracking==0 ) {
 
               	        if (current==null) {
-              	            current = factory.create(grammarAccess.getDataTypeRule().getType().getClassifier());
-              	            associateNodeWithAstElement(currentNode, current);
+              	            current = createModelElement(grammarAccess.getDataTypeRule());
               	        }
-              	        try {
-              	       		set(
-              	       			current, 
-              	       			"baseType",
-              	        		lv_baseType_0_0, 
-              	        		"ID", 
-              	        		lastConsumedNode);
-              	        } catch (ValueConverterException vce) {
-              				handleValueConverterException(vce);
-              	        }
+                     		set(
+                     			current, 
+                     			"baseType",
+                      		lv_baseType_0_0, 
+                      		"ID", 
+                      		lastConsumedNode);
               	    
             }
 
@@ -574,7 +544,7 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:277:2: (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:247:2: (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -583,7 +553,7 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:277:4: otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:247:4: otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) )
                     {
                     otherlv_1=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleDataType404); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -591,11 +561,11 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
                           	createLeafNode(otherlv_1, grammarAccess.getDataTypeAccess().getColonEqualsSignKeyword_1_0(), null);
                           
                     }
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:281:1: ( (lv_defaultValue_2_0= RULE_STRING ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:282:1: (lv_defaultValue_2_0= RULE_STRING )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:251:1: ( (lv_defaultValue_2_0= RULE_STRING ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:252:1: (lv_defaultValue_2_0= RULE_STRING )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:282:1: (lv_defaultValue_2_0= RULE_STRING )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:283:3: lv_defaultValue_2_0= RULE_STRING
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:252:1: (lv_defaultValue_2_0= RULE_STRING )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:253:3: lv_defaultValue_2_0= RULE_STRING
                     {
                     lv_defaultValue_2_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleDataType421); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -606,19 +576,14 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
                     if ( state.backtracking==0 ) {
 
                       	        if (current==null) {
-                      	            current = factory.create(grammarAccess.getDataTypeRule().getType().getClassifier());
-                      	            associateNodeWithAstElement(currentNode, current);
+                      	            current = createModelElement(grammarAccess.getDataTypeRule());
                       	        }
-                      	        try {
-                      	       		set(
-                      	       			current, 
-                      	       			"defaultValue",
-                      	        		lv_defaultValue_2_0, 
-                      	        		"STRING", 
-                      	        		lastConsumedNode);
-                      	        } catch (ValueConverterException vce) {
-                      				handleValueConverterException(vce);
-                      	        }
+                             		set(
+                             			current, 
+                             			"defaultValue",
+                              		lv_defaultValue_2_0, 
+                              		"STRING", 
+                              		lastConsumedNode);
                       	    
                     }
 
@@ -658,7 +623,7 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
 
     // $ANTLR start "entryRuleExpression"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:313:1: entryRuleExpression returns [EObject current=null] : iv_ruleExpression= ruleExpression EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:278:1: entryRuleExpression returns [EObject current=null] : iv_ruleExpression= ruleExpression EOF ;
     public final EObject entryRuleExpression() throws RecognitionException {
         EObject current = null;
 
@@ -672,8 +637,8 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
         		);
         	
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:320:2: (iv_ruleExpression= ruleExpression EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:321:2: iv_ruleExpression= ruleExpression EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:285:2: (iv_ruleExpression= ruleExpression EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:286:2: iv_ruleExpression= ruleExpression EOF
             {
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getExpressionRule(), currentNode); 
@@ -707,7 +672,7 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
 
     // $ANTLR start "ruleExpression"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:331:1: ruleExpression returns [EObject current=null] : ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:296:1: ruleExpression returns [EObject current=null] : ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) ) ;
     public final EObject ruleExpression() throws RecognitionException {
         EObject current = null;
 
@@ -727,14 +692,14 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
         		);
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:340:6: ( ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:341:1: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:305:6: ( ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:306:1: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:341:1: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:341:2: () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:306:1: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:306:2: () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:341:2: ()
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:342:2: 
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:306:2: ()
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:307:2: 
             {
             if ( state.backtracking==0 ) {
                
@@ -742,31 +707,26 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
               	
             }
             if ( state.backtracking==0 ) {
-               
-                      temp=factory.create(grammarAccess.getExpressionAccess().getExpressionAction_0().getType().getClassifier());
-                      current = temp; 
-                      temp = null;
-                      CompositeNode newNode = createCompositeNode(grammarAccess.getExpressionAccess().getExpressionAction_0(), currentNode.getParent());
-                  newNode.getChildren().add(currentNode);
-                  moveLookaheadInfo(currentNode, newNode);
-                  currentNode = newNode; 
-                      associateNodeWithAstElement(currentNode, current); 
+
+                      current = forceCreateModelElement(
+                          grammarAccess.getExpressionAccess().getExpressionAction_0(),
+                          current);
                   
             }
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:355:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:357:1: ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:315:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:317:1: ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:357:1: ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:358:2: ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:317:1: ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:318:2: ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* )
             {
             getUnorderedGroupHelper().enter(grammarAccess.getExpressionAccess().getUnorderedGroup_1());
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:361:2: ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:362:3: ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:321:2: ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:322:3: ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )*
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:362:3: ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:322:3: ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )*
             loop4:
             do {
                 int alt4=3;
@@ -794,28 +754,28 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:364:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:324:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:364:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:365:5: {...}? => ( ({...}? => (otherlv_2= '[' ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:324:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:325:5: {...}? => ( ({...}? => (otherlv_2= '[' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 0) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleExpression", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 0)");
             	    }
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:365:107: ( ({...}? => (otherlv_2= '[' ) ) )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:366:6: ({...}? => (otherlv_2= '[' ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:325:107: ( ({...}? => (otherlv_2= '[' ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:326:6: ({...}? => (otherlv_2= '[' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 0);
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:369:6: ({...}? => (otherlv_2= '[' ) )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:369:7: {...}? => (otherlv_2= '[' )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:329:6: ({...}? => (otherlv_2= '[' ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:329:7: {...}? => (otherlv_2= '[' )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleExpression", "true");
             	    }
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:369:16: (otherlv_2= '[' )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:369:18: otherlv_2= '['
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:329:16: (otherlv_2= '[' )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:329:18: otherlv_2= '['
             	    {
             	    otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleExpression579); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -840,31 +800,31 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:380:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:340:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:380:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:381:5: {...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:340:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:341:5: {...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 1) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleExpression", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 1)");
             	    }
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:381:107: ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:382:6: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:341:107: ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:342:6: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 1);
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:385:6: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:385:7: {...}? => ( (lv_prefix_3_0= RULE_STRING ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:345:6: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:345:7: {...}? => ( (lv_prefix_3_0= RULE_STRING ) )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleExpression", "true");
             	    }
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:385:16: ( (lv_prefix_3_0= RULE_STRING ) )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:386:1: (lv_prefix_3_0= RULE_STRING )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:345:16: ( (lv_prefix_3_0= RULE_STRING ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:346:1: (lv_prefix_3_0= RULE_STRING )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:386:1: (lv_prefix_3_0= RULE_STRING )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:387:3: lv_prefix_3_0= RULE_STRING
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:346:1: (lv_prefix_3_0= RULE_STRING )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:347:3: lv_prefix_3_0= RULE_STRING
             	    {
             	    lv_prefix_3_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleExpression651); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -875,19 +835,14 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
             	    if ( state.backtracking==0 ) {
 
             	      	        if (current==null) {
-            	      	            current = factory.create(grammarAccess.getExpressionRule().getType().getClassifier());
-            	      	            associateNodeWithAstElement(currentNode, current);
+            	      	            current = createModelElement(grammarAccess.getExpressionRule());
             	      	        }
-            	      	        try {
-            	      	       		set(
-            	      	       			current, 
-            	      	       			"prefix",
-            	      	        		lv_prefix_3_0, 
-            	      	        		"STRING", 
-            	      	        		lastConsumedNode);
-            	      	        } catch (ValueConverterException vce) {
-            	      				handleValueConverterException(vce);
-            	      	        }
+            	             		set(
+            	             			current, 
+            	             			"prefix",
+            	              		lv_prefix_3_0, 
+            	              		"STRING", 
+            	              		lastConsumedNode);
             	      	    
             	    }
 
@@ -925,7 +880,7 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:423:2: ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:378:2: ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )*
             loop7:
             do {
                 int alt7=2;
@@ -938,9 +893,9 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:423:3: (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )?
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:378:3: (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )?
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:423:3: (otherlv_4= '[' )?
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:378:3: (otherlv_4= '[' )?
             	    int alt5=2;
             	    int LA5_0 = input.LA(1);
 
@@ -949,7 +904,7 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
             	    }
             	    switch (alt5) {
             	        case 1 :
-            	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:423:5: otherlv_4= '['
+            	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:378:5: otherlv_4= '['
             	            {
             	            otherlv_4=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleExpression710); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -963,11 +918,11 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
             	    }
 
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:427:3: ( (lv_terms_5_0= ruleSimpleTerm ) )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:428:1: (lv_terms_5_0= ruleSimpleTerm )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:382:3: ( (lv_terms_5_0= ruleSimpleTerm ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:383:1: (lv_terms_5_0= ruleSimpleTerm )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:428:1: (lv_terms_5_0= ruleSimpleTerm )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:429:3: lv_terms_5_0= ruleSimpleTerm
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:383:1: (lv_terms_5_0= ruleSimpleTerm )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:384:3: lv_terms_5_0= ruleSimpleTerm
             	    {
             	    if ( state.backtracking==0 ) {
             	       
@@ -982,20 +937,15 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
             	    if ( state.backtracking==0 ) {
 
             	      	        if (current==null) {
-            	      	            current = factory.create(grammarAccess.getExpressionRule().getType().getClassifier());
-            	      	            associateNodeWithAstElement(currentNode.getParent(), current);
+            	      	            current = createModelElementForParent(grammarAccess.getExpressionRule());
             	      	        }
-            	      	        try {
-            	      	       		add(
-            	      	       			current, 
-            	      	       			"terms",
-            	      	        		lv_terms_5_0, 
-            	      	        		"SimpleTerm", 
-            	      	        		currentNode);
-            	      	        } catch (ValueConverterException vce) {
-            	      				handleValueConverterException(vce);
-            	      	        }
-            	      	        currentNode = currentNode.getParent();
+            	             		add(
+            	             			current, 
+            	             			"terms",
+            	              		lv_terms_5_0, 
+            	              		"SimpleTerm", 
+            	              		currentNode);
+            	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
 
@@ -1004,7 +954,7 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
             	    }
 
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:451:2: (otherlv_6= ']' )?
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:401:2: (otherlv_6= ']' )?
             	    int alt6=2;
             	    int LA6_0 = input.LA(1);
 
@@ -1017,7 +967,7 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
             	    }
             	    switch (alt6) {
             	        case 1 :
-            	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:451:4: otherlv_6= ']'
+            	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:401:4: otherlv_6= ']'
             	            {
             	            otherlv_6=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleExpression746); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -1040,17 +990,17 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:455:5: ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:457:1: ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:405:5: ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:407:1: ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:457:1: ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:458:2: ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:407:1: ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:408:2: ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* )
             {
             getUnorderedGroupHelper().enter(grammarAccess.getExpressionAccess().getUnorderedGroup_3());
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:461:2: ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:462:3: ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:411:2: ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:412:3: ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )*
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:462:3: ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:412:3: ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )*
             loop8:
             do {
                 int alt8=3;
@@ -1066,28 +1016,28 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:464:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:414:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:464:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:465:5: {...}? => ( ({...}? => (otherlv_8= ']' ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:414:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:415:5: {...}? => ( ({...}? => (otherlv_8= ']' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 0) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleExpression", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 0)");
             	    }
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:465:107: ( ({...}? => (otherlv_8= ']' ) ) )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:466:6: ({...}? => (otherlv_8= ']' ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:415:107: ( ({...}? => (otherlv_8= ']' ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:416:6: ({...}? => (otherlv_8= ']' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 0);
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:469:6: ({...}? => (otherlv_8= ']' ) )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:469:7: {...}? => (otherlv_8= ']' )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:419:6: ({...}? => (otherlv_8= ']' ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:419:7: {...}? => (otherlv_8= ']' )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleExpression", "true");
             	    }
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:469:16: (otherlv_8= ']' )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:469:18: otherlv_8= ']'
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:419:16: (otherlv_8= ']' )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:419:18: otherlv_8= ']'
             	    {
             	    otherlv_8=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleExpression808); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -1112,31 +1062,31 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:480:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:430:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:480:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:481:5: {...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:430:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:431:5: {...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 1) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleExpression", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 1)");
             	    }
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:481:107: ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:482:6: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:431:107: ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:432:6: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 1);
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:485:6: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:485:7: {...}? => ( (lv_postfix_9_0= RULE_STRING ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:435:6: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:435:7: {...}? => ( (lv_postfix_9_0= RULE_STRING ) )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleExpression", "true");
             	    }
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:485:16: ( (lv_postfix_9_0= RULE_STRING ) )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:486:1: (lv_postfix_9_0= RULE_STRING )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:435:16: ( (lv_postfix_9_0= RULE_STRING ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:436:1: (lv_postfix_9_0= RULE_STRING )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:486:1: (lv_postfix_9_0= RULE_STRING )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:487:3: lv_postfix_9_0= RULE_STRING
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:436:1: (lv_postfix_9_0= RULE_STRING )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:437:3: lv_postfix_9_0= RULE_STRING
             	    {
             	    lv_postfix_9_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleExpression880); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -1147,19 +1097,14 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
             	    if ( state.backtracking==0 ) {
 
             	      	        if (current==null) {
-            	      	            current = factory.create(grammarAccess.getExpressionRule().getType().getClassifier());
-            	      	            associateNodeWithAstElement(currentNode, current);
+            	      	            current = createModelElement(grammarAccess.getExpressionRule());
             	      	        }
-            	      	        try {
-            	      	       		set(
-            	      	       			current, 
-            	      	       			"postfix",
-            	      	        		lv_postfix_9_0, 
-            	      	        		"STRING", 
-            	      	        		lastConsumedNode);
-            	      	        } catch (ValueConverterException vce) {
-            	      				handleValueConverterException(vce);
-            	      	        }
+            	             		set(
+            	             			current, 
+            	             			"postfix",
+            	              		lv_postfix_9_0, 
+            	              		"STRING", 
+            	              		lastConsumedNode);
             	      	    
             	    }
 
@@ -1225,7 +1170,7 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
 
     // $ANTLR start "entryRuleSimpleTerm"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:534:1: entryRuleSimpleTerm returns [EObject current=null] : iv_ruleSimpleTerm= ruleSimpleTerm EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:479:1: entryRuleSimpleTerm returns [EObject current=null] : iv_ruleSimpleTerm= ruleSimpleTerm EOF ;
     public final EObject entryRuleSimpleTerm() throws RecognitionException {
         EObject current = null;
 
@@ -1233,8 +1178,8 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:535:2: (iv_ruleSimpleTerm= ruleSimpleTerm EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:536:2: iv_ruleSimpleTerm= ruleSimpleTerm EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:480:2: (iv_ruleSimpleTerm= ruleSimpleTerm EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:481:2: iv_ruleSimpleTerm= ruleSimpleTerm EOF
             {
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getSimpleTermRule(), currentNode); 
@@ -1265,7 +1210,7 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
 
     // $ANTLR start "ruleSimpleTerm"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:543:1: ruleSimpleTerm returns [EObject current=null] : ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:488:1: ruleSimpleTerm returns [EObject current=null] : ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) ) ;
     public final EObject ruleSimpleTerm() throws RecognitionException {
         EObject current = null;
 
@@ -1279,10 +1224,10 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:548:6: ( ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:549:1: ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:493:6: ( ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:494:1: ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:549:1: ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:494:1: ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) )
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -1301,16 +1246,16 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
             }
             switch (alt13) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:549:2: ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:494:2: ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:549:2: ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:549:3: ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:494:2: ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:494:3: ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )?
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:549:3: ( (lv_lineCount_0_0= RULE_INT ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:550:1: (lv_lineCount_0_0= RULE_INT )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:494:3: ( (lv_lineCount_0_0= RULE_INT ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:495:1: (lv_lineCount_0_0= RULE_INT )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:550:1: (lv_lineCount_0_0= RULE_INT )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:551:3: lv_lineCount_0_0= RULE_INT
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:495:1: (lv_lineCount_0_0= RULE_INT )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:496:3: lv_lineCount_0_0= RULE_INT
                     {
                     lv_lineCount_0_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleSimpleTerm1018); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -1321,19 +1266,14 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
                     if ( state.backtracking==0 ) {
 
                       	        if (current==null) {
-                      	            current = factory.create(grammarAccess.getSimpleTermRule().getType().getClassifier());
-                      	            associateNodeWithAstElement(currentNode, current);
+                      	            current = createModelElement(grammarAccess.getSimpleTermRule());
                       	        }
-                      	        try {
-                      	       		set(
-                      	       			current, 
-                      	       			"lineCount",
-                      	        		lv_lineCount_0_0, 
-                      	        		"INT", 
-                      	        		lastConsumedNode);
-                      	        } catch (ValueConverterException vce) {
-                      				handleValueConverterException(vce);
-                      	        }
+                             		set(
+                             			current, 
+                             			"lineCount",
+                              		lv_lineCount_0_0, 
+                              		"INT", 
+                              		lastConsumedNode);
                       	    
                     }
 
@@ -1342,7 +1282,7 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:573:2: (otherlv_1= '*' )?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:513:2: (otherlv_1= '*' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1351,7 +1291,7 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:573:4: otherlv_1= '*'
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:513:4: otherlv_1= '*'
                             {
                             otherlv_1=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleSimpleTerm1036); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -1365,7 +1305,7 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:577:3: ( (lv_charCount_2_0= RULE_INT ) )?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:517:3: ( (lv_charCount_2_0= RULE_INT ) )?
                     int alt10=2;
                     int LA10_0 = input.LA(1);
 
@@ -1378,10 +1318,10 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
                     }
                     switch (alt10) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:578:1: (lv_charCount_2_0= RULE_INT )
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:518:1: (lv_charCount_2_0= RULE_INT )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:578:1: (lv_charCount_2_0= RULE_INT )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:579:3: lv_charCount_2_0= RULE_INT
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:518:1: (lv_charCount_2_0= RULE_INT )
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:519:3: lv_charCount_2_0= RULE_INT
                             {
                             lv_charCount_2_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleSimpleTerm1055); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -1392,19 +1332,14 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
                             if ( state.backtracking==0 ) {
 
                               	        if (current==null) {
-                              	            current = factory.create(grammarAccess.getSimpleTermRule().getType().getClassifier());
-                              	            associateNodeWithAstElement(currentNode, current);
+                              	            current = createModelElement(grammarAccess.getSimpleTermRule());
                               	        }
-                              	        try {
-                              	       		set(
-                              	       			current, 
-                              	       			"charCount",
-                              	        		lv_charCount_2_0, 
-                              	        		"INT", 
-                              	        		lastConsumedNode);
-                              	        } catch (ValueConverterException vce) {
-                              				handleValueConverterException(vce);
-                              	        }
+                                     		set(
+                                     			current, 
+                                     			"charCount",
+                                      		lv_charCount_2_0, 
+                                      		"INT", 
+                                      		lastConsumedNode);
                               	    
                             }
 
@@ -1416,7 +1351,7 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:601:3: (otherlv_3= '!' )?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:536:3: (otherlv_3= '!' )?
                     int alt11=2;
                     int LA11_0 = input.LA(1);
 
@@ -1425,7 +1360,7 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
                     }
                     switch (alt11) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:601:5: otherlv_3= '!'
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:536:5: otherlv_3= '!'
                             {
                             otherlv_3=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleSimpleTerm1074); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -1439,7 +1374,7 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:605:3: ( (lv_charSet_4_0= RULE_ID ) )?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:540:3: ( (lv_charSet_4_0= RULE_ID ) )?
                     int alt12=2;
                     int LA12_0 = input.LA(1);
 
@@ -1452,10 +1387,10 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
                     }
                     switch (alt12) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:606:1: (lv_charSet_4_0= RULE_ID )
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:541:1: (lv_charSet_4_0= RULE_ID )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:606:1: (lv_charSet_4_0= RULE_ID )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:607:3: lv_charSet_4_0= RULE_ID
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:541:1: (lv_charSet_4_0= RULE_ID )
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:542:3: lv_charSet_4_0= RULE_ID
                             {
                             lv_charSet_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSimpleTerm1093); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -1466,19 +1401,14 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
                             if ( state.backtracking==0 ) {
 
                               	        if (current==null) {
-                              	            current = factory.create(grammarAccess.getSimpleTermRule().getType().getClassifier());
-                              	            associateNodeWithAstElement(currentNode, current);
+                              	            current = createModelElement(grammarAccess.getSimpleTermRule());
                               	        }
-                              	        try {
-                              	       		set(
-                              	       			current, 
-                              	       			"charSet",
-                              	        		lv_charSet_4_0, 
-                              	        		"ID", 
-                              	        		lastConsumedNode);
-                              	        } catch (ValueConverterException vce) {
-                              				handleValueConverterException(vce);
-                              	        }
+                                     		set(
+                                     			current, 
+                                     			"charSet",
+                                      		lv_charSet_4_0, 
+                                      		"ID", 
+                                      		lastConsumedNode);
                               	    
                             }
 
@@ -1497,13 +1427,13 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:630:6: ( (lv_refChar_5_0= RULE_ID ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:560:6: ( (lv_refChar_5_0= RULE_ID ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:630:6: ( (lv_refChar_5_0= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:631:1: (lv_refChar_5_0= RULE_ID )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:560:6: ( (lv_refChar_5_0= RULE_ID ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:561:1: (lv_refChar_5_0= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:631:1: (lv_refChar_5_0= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:632:3: lv_refChar_5_0= RULE_ID
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:561:1: (lv_refChar_5_0= RULE_ID )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:562:3: lv_refChar_5_0= RULE_ID
                     {
                     lv_refChar_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSimpleTerm1123); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -1514,19 +1444,14 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
                     if ( state.backtracking==0 ) {
 
                       	        if (current==null) {
-                      	            current = factory.create(grammarAccess.getSimpleTermRule().getType().getClassifier());
-                      	            associateNodeWithAstElement(currentNode, current);
+                      	            current = createModelElement(grammarAccess.getSimpleTermRule());
                       	        }
-                      	        try {
-                      	       		set(
-                      	       			current, 
-                      	       			"refChar",
-                      	        		lv_refChar_5_0, 
-                      	        		"ID", 
-                      	        		lastConsumedNode);
-                      	        } catch (ValueConverterException vce) {
-                      				handleValueConverterException(vce);
-                      	        }
+                             		set(
+                             			current, 
+                             			"refChar",
+                              		lv_refChar_5_0, 
+                              		"ID", 
+                              		lastConsumedNode);
                       	    
                     }
 
@@ -1566,11 +1491,11 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
         EObject lv_dataType_1_0 = null;
 
 
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:179:1: ( (lv_dataType_1_0= ruleDataType ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:179:1: (lv_dataType_1_0= ruleDataType )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:164:1: ( (lv_dataType_1_0= ruleDataType ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:164:1: (lv_dataType_1_0= ruleDataType )
         {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:179:1: (lv_dataType_1_0= ruleDataType )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:180:3: lv_dataType_1_0= ruleDataType
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:164:1: (lv_dataType_1_0= ruleDataType )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:165:3: lv_dataType_1_0= ruleDataType
         {
         if ( state.backtracking==0 ) {
            
@@ -1594,29 +1519,29 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
     public final void synpred4_InternalBacktrackingBug325745TestLanguage_fragment() throws RecognitionException {   
         Token otherlv_2=null;
 
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:364:4: ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:364:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:324:4: ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:324:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
         {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:364:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:365:5: {...}? => ( ({...}? => (otherlv_2= '[' ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:324:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:325:5: {...}? => ( ({...}? => (otherlv_2= '[' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 0) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred4_InternalBacktrackingBug325745TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 0)");
         }
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:365:107: ( ({...}? => (otherlv_2= '[' ) ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:366:6: ({...}? => (otherlv_2= '[' ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:325:107: ( ({...}? => (otherlv_2= '[' ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:326:6: ({...}? => (otherlv_2= '[' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 0);
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:369:6: ({...}? => (otherlv_2= '[' ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:369:7: {...}? => (otherlv_2= '[' )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:329:6: ({...}? => (otherlv_2= '[' ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:329:7: {...}? => (otherlv_2= '[' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred4_InternalBacktrackingBug325745TestLanguage", "true");
         }
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:369:16: (otherlv_2= '[' )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:369:18: otherlv_2= '['
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:329:16: (otherlv_2= '[' )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:329:18: otherlv_2= '['
         {
         otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_13_in_synpred4_InternalBacktrackingBug325745TestLanguage579); if (state.failed) return ;
 
@@ -1640,32 +1565,32 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
     public final void synpred5_InternalBacktrackingBug325745TestLanguage_fragment() throws RecognitionException {   
         Token lv_prefix_3_0=null;
 
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:380:4: ( ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:380:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:340:4: ( ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:340:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
         {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:380:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:381:5: {...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:340:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:341:5: {...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 1) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred5_InternalBacktrackingBug325745TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 1)");
         }
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:381:107: ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:382:6: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:341:107: ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:342:6: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 1);
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:385:6: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:385:7: {...}? => ( (lv_prefix_3_0= RULE_STRING ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:345:6: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:345:7: {...}? => ( (lv_prefix_3_0= RULE_STRING ) )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred5_InternalBacktrackingBug325745TestLanguage", "true");
         }
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:385:16: ( (lv_prefix_3_0= RULE_STRING ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:386:1: (lv_prefix_3_0= RULE_STRING )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:345:16: ( (lv_prefix_3_0= RULE_STRING ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:346:1: (lv_prefix_3_0= RULE_STRING )
         {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:386:1: (lv_prefix_3_0= RULE_STRING )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:387:3: lv_prefix_3_0= RULE_STRING
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:346:1: (lv_prefix_3_0= RULE_STRING )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:347:3: lv_prefix_3_0= RULE_STRING
         {
         lv_prefix_3_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_synpred5_InternalBacktrackingBug325745TestLanguage651); if (state.failed) return ;
 
@@ -1692,8 +1617,8 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
     public final void synpred7_InternalBacktrackingBug325745TestLanguage_fragment() throws RecognitionException {   
         Token otherlv_6=null;
 
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:451:4: (otherlv_6= ']' )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:451:4: otherlv_6= ']'
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:401:4: (otherlv_6= ']' )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:401:4: otherlv_6= ']'
         {
         otherlv_6=(Token)match(input,14,FollowSets000.FOLLOW_14_in_synpred7_InternalBacktrackingBug325745TestLanguage746); if (state.failed) return ;
 
@@ -1705,29 +1630,29 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
     public final void synpred9_InternalBacktrackingBug325745TestLanguage_fragment() throws RecognitionException {   
         Token otherlv_8=null;
 
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:464:4: ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:464:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:414:4: ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:414:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
         {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:464:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:465:5: {...}? => ( ({...}? => (otherlv_8= ']' ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:414:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:415:5: {...}? => ( ({...}? => (otherlv_8= ']' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 0) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred9_InternalBacktrackingBug325745TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 0)");
         }
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:465:107: ( ({...}? => (otherlv_8= ']' ) ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:466:6: ({...}? => (otherlv_8= ']' ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:415:107: ( ({...}? => (otherlv_8= ']' ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:416:6: ({...}? => (otherlv_8= ']' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 0);
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:469:6: ({...}? => (otherlv_8= ']' ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:469:7: {...}? => (otherlv_8= ']' )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:419:6: ({...}? => (otherlv_8= ']' ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:419:7: {...}? => (otherlv_8= ']' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred9_InternalBacktrackingBug325745TestLanguage", "true");
         }
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:469:16: (otherlv_8= ']' )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:469:18: otherlv_8= ']'
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:419:16: (otherlv_8= ']' )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:419:18: otherlv_8= ']'
         {
         otherlv_8=(Token)match(input,14,FollowSets000.FOLLOW_14_in_synpred9_InternalBacktrackingBug325745TestLanguage808); if (state.failed) return ;
 
@@ -1751,32 +1676,32 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
     public final void synpred10_InternalBacktrackingBug325745TestLanguage_fragment() throws RecognitionException {   
         Token lv_postfix_9_0=null;
 
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:480:4: ( ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:480:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:430:4: ( ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:430:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
         {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:480:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:481:5: {...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:430:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:431:5: {...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 1) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred10_InternalBacktrackingBug325745TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 1)");
         }
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:481:107: ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:482:6: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:431:107: ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:432:6: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 1);
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:485:6: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:485:7: {...}? => ( (lv_postfix_9_0= RULE_STRING ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:435:6: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:435:7: {...}? => ( (lv_postfix_9_0= RULE_STRING ) )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred10_InternalBacktrackingBug325745TestLanguage", "true");
         }
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:485:16: ( (lv_postfix_9_0= RULE_STRING ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:486:1: (lv_postfix_9_0= RULE_STRING )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:435:16: ( (lv_postfix_9_0= RULE_STRING ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:436:1: (lv_postfix_9_0= RULE_STRING )
         {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:486:1: (lv_postfix_9_0= RULE_STRING )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:487:3: lv_postfix_9_0= RULE_STRING
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:436:1: (lv_postfix_9_0= RULE_STRING )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:437:3: lv_postfix_9_0= RULE_STRING
         {
         lv_postfix_9_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_synpred10_InternalBacktrackingBug325745TestLanguage880); if (state.failed) return ;
 
@@ -1803,11 +1728,11 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
     public final void synpred12_InternalBacktrackingBug325745TestLanguage_fragment() throws RecognitionException {   
         Token lv_charCount_2_0=null;
 
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:578:1: ( (lv_charCount_2_0= RULE_INT ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:578:1: (lv_charCount_2_0= RULE_INT )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:518:1: ( (lv_charCount_2_0= RULE_INT ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:518:1: (lv_charCount_2_0= RULE_INT )
         {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:578:1: (lv_charCount_2_0= RULE_INT )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:579:3: lv_charCount_2_0= RULE_INT
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:518:1: (lv_charCount_2_0= RULE_INT )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:519:3: lv_charCount_2_0= RULE_INT
         {
         lv_charCount_2_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_synpred12_InternalBacktrackingBug325745TestLanguage1055); if (state.failed) return ;
 
@@ -1822,11 +1747,11 @@ public class InternalBacktrackingBug325745TestLanguageParser extends AbstractInt
     public final void synpred14_InternalBacktrackingBug325745TestLanguage_fragment() throws RecognitionException {   
         Token lv_charSet_4_0=null;
 
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:606:1: ( (lv_charSet_4_0= RULE_ID ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:606:1: (lv_charSet_4_0= RULE_ID )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:541:1: ( (lv_charSet_4_0= RULE_ID ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:541:1: (lv_charSet_4_0= RULE_ID )
         {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:606:1: (lv_charSet_4_0= RULE_ID )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:607:3: lv_charSet_4_0= RULE_ID
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:541:1: (lv_charSet_4_0= RULE_ID )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalBacktrackingBug325745TestLanguage.g:542:3: lv_charSet_4_0= RULE_ID
         {
         lv_charSet_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_synpred14_InternalBacktrackingBug325745TestLanguage1093); if (state.failed) return ;
 

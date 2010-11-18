@@ -97,15 +97,9 @@ ruleModel returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-	        
-	        try {
-	       		set($current, "value", lv_value_2_0, "CaSe", lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set($current, "value", lv_value_2_0, "CaSe", lastConsumedNode);
 	    }
 
 )

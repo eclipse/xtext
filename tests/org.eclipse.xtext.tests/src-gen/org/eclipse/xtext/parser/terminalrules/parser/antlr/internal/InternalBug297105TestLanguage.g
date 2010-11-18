@@ -96,20 +96,15 @@ ruleModel returns [EObject current=null]
 	    }
 		lv_expressions_0_0=ruleExpression		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"expressions",
-	        		lv_expressions_0_0, 
-	        		"Expression", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"expressions",
+        		lv_expressions_0_0, 
+        		"Expression", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -143,20 +138,15 @@ ruleExpression returns [EObject current=null]
 	    }
 		lv_left_0_0=ruleLiteral		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getExpressionRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getExpressionRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"left",
-	        		lv_left_0_0, 
-	        		"Literal", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"left",
+        		lv_left_0_0, 
+        		"Literal", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -171,20 +161,15 @@ ruleExpression returns [EObject current=null]
 	    }
 		lv_right_2_0=ruleLiteral		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getExpressionRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getExpressionRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"right",
-	        		lv_right_2_0, 
-	        		"Literal", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"right",
+        		lv_right_2_0, 
+        		"Literal", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -221,7 +206,8 @@ ruleLiteral returns [EObject current=null]
     this_RealLiteral_0=ruleRealLiteral
     { 
         $current = $this_RealLiteral_0.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 
     |
@@ -234,7 +220,8 @@ ruleLiteral returns [EObject current=null]
     this_IntLiteral_1=ruleIntLiteral
     { 
         $current = $this_IntLiteral_1.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 )
 ;
@@ -266,20 +253,15 @@ ruleIntLiteral returns [EObject current=null]
 	    }
 		lv_value_0_0=ruleIntValue		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getIntLiteralRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getIntLiteralRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"value",
-	        		lv_value_0_0, 
-	        		"IntValue", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"value",
+        		lv_value_0_0, 
+        		"IntValue", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -313,20 +295,15 @@ ruleRealLiteral returns [EObject current=null]
 	    }
 		lv_value_0_0=ruleRealValue		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getRealLiteralRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getRealLiteralRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"value",
-	        		lv_value_0_0, 
-	        		"RealValue", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"value",
+        		lv_value_0_0, 
+        		"RealValue", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -392,7 +369,8 @@ ruleRealValue returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken
     }
 
     { 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 
     ;

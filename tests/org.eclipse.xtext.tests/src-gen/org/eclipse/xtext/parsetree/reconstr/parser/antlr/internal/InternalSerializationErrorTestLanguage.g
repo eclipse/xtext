@@ -90,20 +90,15 @@ ruleModel returns [EObject current=null]
 	    }
 		lv_test_0_0=ruleTest		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"test",
-	        		lv_test_0_0, 
-	        		"Test", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"test",
+        		lv_test_0_0, 
+        		"Test", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -115,20 +110,15 @@ ruleModel returns [EObject current=null]
 	    }
 		lv_test_1_0=ruleParenthesis		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"test",
-	        		lv_test_1_0, 
-	        		"Parenthesis", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"test",
+        		lv_test_1_0, 
+        		"Parenthesis", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -166,7 +156,8 @@ ruleParenthesis returns [EObject current=null]
     this_Test_1=ruleTest
     { 
         $current = $this_Test_1.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 	otherlv_2=')' 
     {
@@ -202,7 +193,8 @@ ruleTest returns [EObject current=null]
     this_TwoRequired_0=ruleTwoRequired
     { 
         $current = $this_TwoRequired_0.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 
     |
@@ -212,7 +204,8 @@ ruleTest returns [EObject current=null]
     this_TwoOptions_1=ruleTwoOptions
     { 
         $current = $this_TwoOptions_1.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 
     |
@@ -222,7 +215,8 @@ ruleTest returns [EObject current=null]
     this_Indent_2=ruleIndent
     { 
         $current = $this_Indent_2.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 )
 ;
@@ -259,19 +253,14 @@ ruleTwoRequired returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getTwoRequiredRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getTwoRequiredRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"one",
-	        		lv_one_1_0, 
-	        		"ID", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"one",
+        		lv_one_1_0, 
+        		"ID", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -283,19 +272,14 @@ ruleTwoRequired returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getTwoRequiredRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getTwoRequiredRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"two",
-	        		lv_two_2_0, 
-	        		"ID", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"two",
+        		lv_two_2_0, 
+        		"ID", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -338,19 +322,14 @@ ruleTwoOptions returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getTwoOptionsRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getTwoOptionsRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"one",
-	        		lv_one_2_0, 
-	        		"ID", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"one",
+        		lv_one_2_0, 
+        		"ID", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -367,19 +346,14 @@ ruleTwoOptions returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getTwoOptionsRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getTwoOptionsRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"two",
-	        		lv_two_4_0, 
-	        		"ID", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"two",
+        		lv_two_4_0, 
+        		"ID", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -417,20 +391,15 @@ ruleIndent returns [EObject current=null]
 	    }
 		lv_req_1_0=ruleTwoRequired		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getIndentRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getIndentRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"req",
-	        		lv_req_1_0, 
-	        		"TwoRequired", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"req",
+        		lv_req_1_0, 
+        		"TwoRequired", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -441,20 +410,15 @@ ruleIndent returns [EObject current=null]
 	    }
 		lv_opt_2_0=ruleTwoOptions		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getIndentRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getIndentRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"opt",
-	        		lv_opt_2_0, 
-	        		"TwoOptions", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"opt",
+        		lv_opt_2_0, 
+        		"TwoOptions", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -465,20 +429,15 @@ ruleIndent returns [EObject current=null]
 	    }
 		lv_indent_3_0=ruleIndent		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getIndentRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getIndentRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"indent",
-	        		lv_indent_3_0, 
-	        		"Indent", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"indent",
+        		lv_indent_3_0, 
+        		"Indent", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )

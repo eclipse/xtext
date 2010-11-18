@@ -90,20 +90,15 @@ ruleModel returns [EObject current=null]
 	    }
 		lv_constants_0_0=ruleTConstant		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"constants",
-	        		lv_constants_0_0, 
-	        		"TConstant", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"constants",
+        		lv_constants_0_0, 
+        		"TConstant", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -137,7 +132,8 @@ ruleTConstant returns [EObject current=null]
     this_TStringConstant_0=ruleTStringConstant
     { 
         $current = $this_TStringConstant_0.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 
     |
@@ -147,7 +143,8 @@ ruleTConstant returns [EObject current=null]
     this_TIntegerConstant_1=ruleTIntegerConstant
     { 
         $current = $this_TIntegerConstant_1.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 
     |
@@ -157,7 +154,8 @@ ruleTConstant returns [EObject current=null]
     this_TBooleanConstant_2=ruleTBooleanConstant
     { 
         $current = $this_TBooleanConstant_2.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 )
 ;
@@ -189,20 +187,15 @@ ruleTStringConstant returns [EObject current=null]
 	    }
 		lv_annotations_0_0=ruleTAnnotation		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getTStringConstantRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getTStringConstantRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"annotations",
-	        		lv_annotations_0_0, 
-	        		"TAnnotation", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"annotations",
+        		lv_annotations_0_0, 
+        		"TAnnotation", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -222,19 +215,14 @@ ruleTStringConstant returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getTStringConstantRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getTStringConstantRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"name",
-	        		lv_name_3_0, 
-	        		"ID", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"name",
+        		lv_name_3_0, 
+        		"ID", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -268,20 +256,15 @@ ruleTIntegerConstant returns [EObject current=null]
 	    }
 		lv_annotations_0_0=ruleTAnnotation		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getTIntegerConstantRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getTIntegerConstantRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"annotations",
-	        		lv_annotations_0_0, 
-	        		"TAnnotation", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"annotations",
+        		lv_annotations_0_0, 
+        		"TAnnotation", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -301,19 +284,14 @@ ruleTIntegerConstant returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getTIntegerConstantRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getTIntegerConstantRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"name",
-	        		lv_name_3_0, 
-	        		"ID", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"name",
+        		lv_name_3_0, 
+        		"ID", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -347,20 +325,15 @@ ruleTBooleanConstant returns [EObject current=null]
 	    }
 		lv_annotations_0_0=ruleTAnnotation		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getTBooleanConstantRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getTBooleanConstantRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"annotations",
-	        		lv_annotations_0_0, 
-	        		"TAnnotation", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"annotations",
+        		lv_annotations_0_0, 
+        		"TAnnotation", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -380,19 +353,14 @@ ruleTBooleanConstant returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getTBooleanConstantRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getTBooleanConstantRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"name",
-	        		lv_name_3_0, 
-	        		"ID", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"name",
+        		lv_name_3_0, 
+        		"ID", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -431,19 +399,14 @@ ruleTAnnotation returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getTAnnotationRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getTAnnotationRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"description",
-	        		lv_description_1_0, 
-	        		"STRING", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"description",
+        		lv_description_1_0, 
+        		"STRING", 
+        		lastConsumedNode);
 	    }
 
 )

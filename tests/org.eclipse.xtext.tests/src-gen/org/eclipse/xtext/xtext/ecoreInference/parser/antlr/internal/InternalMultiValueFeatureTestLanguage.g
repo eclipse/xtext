@@ -91,19 +91,14 @@ ruleStart returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getStartRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getStartRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"featureA",
-	        		lv_featureA_0_0, 
-	        		"ID", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		add(
+       			$current, 
+       			"featureA",
+        		lv_featureA_0_0, 
+        		"ID", 
+        		lastConsumedNode);
 	    }
 
 )

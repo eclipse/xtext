@@ -90,20 +90,15 @@ ruleRoot returns [EObject current=null]
 	    }
 		lv_elements_0_0=ruleType		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getRootRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getRootRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"elements",
-	        		lv_elements_0_0, 
-	        		"Type", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"elements",
+        		lv_elements_0_0, 
+        		"Type", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -137,7 +132,8 @@ ruleType returns [EObject current=null]
     this_AType_0=ruleAType
     { 
         $current = $this_AType_0.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 
     |
@@ -147,7 +143,8 @@ ruleType returns [EObject current=null]
     this_AnotherType_1=ruleAnotherType
     { 
         $current = $this_AnotherType_1.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 )
 ;
@@ -177,15 +174,10 @@ ruleAType returns [EObject current=null]
     	createLeafNode(otherlv_0, grammarAccess.getATypeAccess().getFooKeyword_0(), null);
     }
 (
-    { 
-        temp=factory.create(grammarAccess.getATypeAccess().getATypeAction_1().getType().getClassifier());
-        $current = temp; 
-        temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getATypeAccess().getATypeAction_1(), currentNode.getParent());
-    newNode.getChildren().add(currentNode);
-    moveLookaheadInfo(currentNode, newNode);
-    currentNode = newNode; 
-        associateNodeWithAstElement(currentNode, $current); 
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getATypeAccess().getATypeAction_1(),
+            $current);
     }
 ))
 ;
@@ -215,15 +207,10 @@ ruleAnotherType returns [EObject current=null]
     	createLeafNode(otherlv_0, grammarAccess.getAnotherTypeAccess().getBarKeyword_0(), null);
     }
 (
-    { 
-        temp=factory.create(grammarAccess.getAnotherTypeAccess().getAnotherTypeAction_1().getType().getClassifier());
-        $current = temp; 
-        temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getAnotherTypeAccess().getAnotherTypeAction_1(), currentNode.getParent());
-    newNode.getChildren().add(currentNode);
-    moveLookaheadInfo(currentNode, newNode);
-    currentNode = newNode; 
-        associateNodeWithAstElement(currentNode, $current); 
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getAnotherTypeAccess().getAnotherTypeAction_1(),
+            $current);
     }
 ))
 ;

@@ -94,20 +94,15 @@ ruleModel returns [EObject current=null]
 	    }
 		lv_name_1_0=ruleFQN		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"name",
-	        		lv_name_1_0, 
-	        		"FQN", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"name",
+        		lv_name_1_0, 
+        		"FQN", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -119,20 +114,15 @@ ruleModel returns [EObject current=null]
 	    }
 		lv_detail_2_1=ruleDetail		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"detail",
-	        		lv_detail_2_1, 
-	        		"Detail", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"detail",
+        		lv_detail_2_1, 
+        		"Detail", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
     |		{ 
@@ -140,20 +130,15 @@ ruleModel returns [EObject current=null]
 	    }
 		lv_detail_2_2=ruleAssociatedDetail		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"detail",
-	        		lv_detail_2_2, 
-	        		"AssociatedDetail", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"detail",
+        		lv_detail_2_2, 
+        		"AssociatedDetail", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -198,15 +183,9 @@ ruleDetail returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getDetailRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getDetailRule());
 	        }
-	        
-	        try {
-	       		set($current, "visibility", lv_visibility_1_1, null, lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set($current, "visibility", lv_visibility_1_1, null, lastConsumedNode);
 	    }
 
     |		lv_visibility_1_2=	'protected' 
@@ -216,15 +195,9 @@ ruleDetail returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getDetailRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getDetailRule());
 	        }
-	        
-	        try {
-	       		set($current, "visibility", lv_visibility_1_2, null, lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set($current, "visibility", lv_visibility_1_2, null, lastConsumedNode);
 	    }
 
     |		lv_visibility_1_3=	'public' 
@@ -234,15 +207,9 @@ ruleDetail returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getDetailRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getDetailRule());
 	        }
-	        
-	        try {
-	       		set($current, "visibility", lv_visibility_1_3, null, lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set($current, "visibility", lv_visibility_1_3, null, lastConsumedNode);
 	    }
 
 )
@@ -252,15 +219,15 @@ ruleDetail returns [EObject current=null]
 (
 		{
 			if ($current==null) {
-	            $current = factory.create(grammarAccess.getDetailRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getDetailRule());
 	        }
         }
 		{ 
 	        currentNode=createCompositeNode(grammarAccess.getDetailAccess().getDetailClassModelCrossReference_2_0(), currentNode); 
 	    }
 		ruleFQN		{ 
-	        currentNode = currentNode.getParent();
+	        // currentNode = currentNode.getParent();
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -295,15 +262,15 @@ ruleAssociatedDetail returns [EObject current=null]
 (
 		{
 			if ($current==null) {
-	            $current = factory.create(grammarAccess.getAssociatedDetailRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getAssociatedDetailRule());
 	        }
         }
 		{ 
 	        currentNode=createCompositeNode(grammarAccess.getAssociatedDetailAccess().getDetailClassModelCrossReference_1_0(), currentNode); 
 	    }
 		ruleFQN		{ 
-	        currentNode = currentNode.getParent();
+	        // currentNode = currentNode.getParent();
+	        afterParserOrEnumRuleCall();
 	    }
 
 )

@@ -94,20 +94,15 @@ ruleBody returns [EObject current=null]
 	    }
 		lv_parameter_1_0=ruleParameter		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getBodyRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getBodyRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"parameter",
-	        		lv_parameter_1_0, 
-	        		"Parameter", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"parameter",
+        		lv_parameter_1_0, 
+        		"Parameter", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -122,20 +117,15 @@ ruleBody returns [EObject current=null]
 	    }
 		lv_parameter_3_0=ruleParameter		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getBodyRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getBodyRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"parameter",
-	        		lv_parameter_3_0, 
-	        		"Parameter", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"parameter",
+        		lv_parameter_3_0, 
+        		"Parameter", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -155,20 +145,15 @@ ruleBody returns [EObject current=null]
 	    }
 		lv_content_6_1=ruleContent		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getBodyRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getBodyRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"content",
-	        		lv_content_6_1, 
-	        		"Content", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"content",
+        		lv_content_6_1, 
+        		"Content", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
     |		{ 
@@ -176,20 +161,15 @@ ruleBody returns [EObject current=null]
 	    }
 		lv_content_6_2=ruleParameterRef		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getBodyRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getBodyRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"content",
-	        		lv_content_6_2, 
-	        		"ParameterRef", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"content",
+        		lv_content_6_2, 
+        		"ParameterRef", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -202,20 +182,15 @@ ruleBody returns [EObject current=null]
 	    }
 		lv_foo_7_0=ruleFoo		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getBodyRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getBodyRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"foo",
-	        		lv_foo_7_0, 
-	        		"Foo", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		add(
+       			$current, 
+       			"foo",
+        		lv_foo_7_0, 
+        		"Foo", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -254,19 +229,14 @@ ruleFoo returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getFooRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getFooRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"fooValue",
-	        		lv_fooValue_0_0, 
-	        		"STRING", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"fooValue",
+        		lv_fooValue_0_0, 
+        		"STRING", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -304,7 +274,8 @@ ruleContent returns [EObject current=null]
     this_MyElement_1=ruleMyElement
     { 
         $current = $this_MyElement_1.current; 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 	otherlv_2='end content' 
     {
@@ -345,20 +316,15 @@ ruleMyElement returns [EObject current=null]
 	    }
 		lv_bar_1_1=ruleMyInt		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getMyElementRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getMyElementRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"bar",
-	        		lv_bar_1_1, 
-	        		"MyInt", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"bar",
+        		lv_bar_1_1, 
+        		"MyInt", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
     |		{ 
@@ -366,20 +332,15 @@ ruleMyElement returns [EObject current=null]
 	    }
 		lv_bar_1_2=ruleParameterRef		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getMyElementRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.getMyElementRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"bar",
-	        		lv_bar_1_2, 
-	        		"ParameterRef", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		set(
+       			$current, 
+       			"bar",
+        		lv_bar_1_2, 
+        		"ParameterRef", 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -418,19 +379,14 @@ ruleParameter returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getParameterRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getParameterRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"name",
-	        		lv_name_0_0, 
-	        		"ID", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"name",
+        		lv_name_0_0, 
+        		"ID", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -438,8 +394,7 @@ ruleParameter returns [EObject current=null]
 (
 		{
 			if ($current==null) {
-	            $current = factory.create(grammarAccess.getParameterRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getParameterRule());
 	        }
         }
 	otherlv_1=RULE_ID
@@ -475,8 +430,7 @@ ruleParameterRef returns [EObject current=null]
 (
 		{
 			if ($current==null) {
-	            $current = factory.create(grammarAccess.getParameterRefRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getParameterRefRule());
 	        }
         }
 	otherlv_0=RULE_ID
@@ -516,19 +470,14 @@ ruleMyInt returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getMyIntRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getMyIntRule());
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"int",
-	        		lv_int_0_0, 
-	        		"INT", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		set(
+       			$current, 
+       			"int",
+        		lv_int_0_0, 
+        		"INT", 
+        		lastConsumedNode);
 	    }
 
 )

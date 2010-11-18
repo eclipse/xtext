@@ -95,19 +95,14 @@ ruleModel returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"intValues",
-	        		lv_intValues_1_0, 
-	        		"EINT", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		add(
+       			$current, 
+       			"intValues",
+        		lv_intValues_1_0, 
+        		"EINT", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -124,19 +119,14 @@ ruleModel returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"doubleValues",
-	        		lv_doubleValues_3_0, 
-	        		"EDOUBLE", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		add(
+       			$current, 
+       			"doubleValues",
+        		lv_doubleValues_3_0, 
+        		"EDOUBLE", 
+        		lastConsumedNode);
 	    }
 
 )
@@ -153,19 +143,14 @@ ruleModel returns [EObject current=null]
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"dateValues",
-	        		lv_dateValues_5_0, 
-	        		"EDATE", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		add(
+       			$current, 
+       			"dateValues",
+        		lv_dateValues_5_0, 
+        		"EDATE", 
+        		lastConsumedNode);
 	    }
 
 )
