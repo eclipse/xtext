@@ -7,20 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel;
 
-import junit.framework.TestCase;
-
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 import org.eclipse.xtext.nodemodel.impl.LeafNode;
 import org.eclipse.xtext.nodemodel.impl.RootNode;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class RootNodeTest extends TestCase {
+public class RootNodeTest extends AbstractCompositeNodeTest {
 
+	@Override
 	public void testTextOffsetLength() {
-		RootNode rootNode = new RootNode();
+		RootNode rootNode = createCompositeNode();
 		String completeContent = "completeContent";
 		rootNode.setCompleteContent(completeContent);
 		assertEquals(completeContent, rootNode.getText());
@@ -28,69 +26,18 @@ public class RootNodeTest extends TestCase {
 		assertEquals(completeContent.length(), rootNode.getTotalLength());
 	}
 	
-	public void testSetFirstChild() {
-		RootNode rootNode = new RootNode();
-		LeafNode leaf = new LeafNode();
-		rootNode.setFirstChild(leaf);
-		assertSame(leaf, rootNode.getFirstChild());
-		assertSame(rootNode, leaf.getParent());
-		rootNode.setFirstChild(null);
-		assertNull(leaf.getParent());
-		assertNull(rootNode.getFirstChild());
+	@Override
+	protected void addChild(ICompositeNode composite, LeafNode leaf) {
+		((RootNode) composite).addChild(leaf);
 	}
 	
-	public void testAddChild_00() {
-		RootNode rootNode = new RootNode();
-		LeafNode first = new LeafNode();
-		rootNode.addChild(first);
-		assertSame(first, rootNode.getFirstChild());
-		assertSame(first, first.getNext());
-		assertSame(first, first.getPrevious());
+	@Override
+	protected AbstractNode getFirstChild(ICompositeNode node) {
+		return ((RootNode) node).getFirstChild();
 	}
 	
-	public void testAddChild_01() {
-		RootNode rootNode = new RootNode();
-		LeafNode first = new LeafNode();
-		LeafNode second = new LeafNode();
-		rootNode.addChild(first);
-		rootNode.addChild(second);
-		assertSame(first, rootNode.getFirstChild());
-		assertSame(second, first.getNext());
-		assertSame(second, first.getPrevious());
-		assertSame(first, second.getPrevious());
-		assertSame(first, second.getNext());
-		assertSame(rootNode, first.getParent());
-		assertSame(rootNode, second.getParent());
+	@Override
+	protected RootNode createCompositeNode() {
+		return new RootNode();
 	}
-	
-	public void testAddChild_02() {
-		RootNode rootNode = new RootNode();
-		LeafNode first = new LeafNode();
-		LeafNode second = new LeafNode();
-		LeafNode third = new LeafNode();
-		rootNode.addChild(first);
-		rootNode.addChild(second);
-		rootNode.addChild(third);
-		assertSame(first, rootNode.getFirstChild());
-		assertSame(second, first.getNext());
-		assertSame(third, second.getNext());
-		assertSame(first, third.getNext());
-		assertSame(third, first.getPrevious());
-		assertSame(second, third.getPrevious());
-		assertSame(first, second.getPrevious());
-		assertSame(rootNode, first.getParent());
-		assertSame(rootNode, second.getParent());
-		assertSame(rootNode, third.getParent());
-	}
-	
-	public void testActsAsAdapter() {
-		EObject object = EcoreFactory.eINSTANCE.createEObject();
-		RootNode rootNode = new RootNode();
-		object.eAdapters().add(rootNode);
-		assertSame(object, rootNode.getSemanticElement());
-		assertSame(object, rootNode.getTarget());
-		object.eAdapters().clear();
-		assertNull(rootNode.getSemanticElement());
-	}
-	
 }
