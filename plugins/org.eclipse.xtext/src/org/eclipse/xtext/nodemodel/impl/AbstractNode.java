@@ -80,38 +80,42 @@ public abstract class AbstractNode implements INode {
 	}
 	
 	public void addPrevious(AbstractNode prev) {
-		if (prev != null) {
-			prev.prev = this.prev;
-			prev.parent = parent;
-			prev.next = this;
-			if (this.prev != null) {
-				this.prev.next = prev;
-			}
+		if (prev == null)
+			throw new IllegalArgumentException("prev may not be null");
+		if (prev.getNext() != null || prev.getPrevious() != null)
+			throw new IllegalStateException("prev has already a next or prev");
+		prev.prev = this.prev;
+		prev.parent = parent;
+		prev.next = this;
+		if (this.prev != null) {
+			this.prev.next = prev;
 		}
-		this.prev = prev;
-	}
-	
-	public void setPrevious(AbstractNode prev) {
 		this.prev = prev;
 	}
 	
 	public void addNext(AbstractNode next) {
-		if (next != null) {
-			next.next = this.next;
-			next.parent = parent;
-			next.prev = this;
-			if (this.next != null) {
-				this.next.prev = next;
-			}
+		if (next == null)
+			throw new IllegalArgumentException("next may not be null");
+		if (next.getNext() != null || next.getPrevious() != null)
+			throw new IllegalStateException("next has already a next or prev");
+		next.next = this.next;
+		next.parent = parent;
+		next.prev = this;
+		if (this.next != null) {
+			this.next.prev = next;
 		}
 		this.next = next;
 	}
 	
-	public void setNext(AbstractNode next) {
+	public void basicSetPrevious(AbstractNode prev) {
+		this.prev = prev;
+	}
+	
+	public void basicSetNext(AbstractNode next) {
 		this.next = next;
 	}
 	
-	public void setParent(ICompositeNode parent) {
+	public void basicSetParent(ICompositeNode parent) {
 		this.parent = parent;
 	}
 	
