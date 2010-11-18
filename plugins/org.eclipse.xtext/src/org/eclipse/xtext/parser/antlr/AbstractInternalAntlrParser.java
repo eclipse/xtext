@@ -717,7 +717,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
     	return result;
     }
     
-    protected EObject forceCreateModel(Action action, EObject value) {
+    protected EObject forceCreateModelElement(Action action, EObject value) {
     	EObject result = factory.create(action.getType().getClassifier());
     	insertCompositeNode(action);
     	associateNodeWithAstElement(currentNode, result);
