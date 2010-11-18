@@ -11,6 +11,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameElementStrategy;
+import org.eclipse.xtext.ui.refactoring.impl.ElementRenameInfo;
 
 import com.google.inject.ImplementedBy;
 
@@ -25,7 +26,7 @@ public interface IRenameElementStrategy {
 
 	RefactoringStatus validateNewName(String newName);
 
-	Iterable<URI> getDependentElements(URI targetElementURI);
+	ElementRenameInfo.Table getRenamedElementInfos();
 	
 	@ImplementedBy(DefaultRenameElementStrategy.Provider.class)
 	interface Provider {
