@@ -16,7 +16,6 @@ import org.eclipse.xtext.testlanguages.TreeTestLanguageStandaloneSetup;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
- *
  */
 public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 
@@ -63,7 +62,7 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 		CompositeNode rootNode = getRootNode(model);
 		IParseResult reparse = partialParser.reparse(getParser(), rootNode, model.indexOf("Sven"), 4, "Peter");
 		if(reparse.getParseErrors() != null && !reparse.getParseErrors().isEmpty()) {
-			fail("Unexpected parse error " + reparse.getParseErrors().get(0).getMessage()) ;
+			fail("Unexpected parse error " + reparse.getParseErrors().get(0).getSyntaxError().getMessage()) ;
 		}
 	}
 	

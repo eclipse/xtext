@@ -59,6 +59,15 @@ public abstract class AbstractNode implements INode {
 		return candidate;
 	}
 	
+	public EObject getSemanticElement() {
+		if (parent == null)
+			return null;
+		INode candidate = this;
+		while(candidate.getSemanticElement() == null && candidate.getParent() != null)
+			candidate = candidate.getParent();
+		return candidate.getSemanticElement();
+	}
+	
 	public EObject getGrammarElement() {
 		return grammarElement;
 	}

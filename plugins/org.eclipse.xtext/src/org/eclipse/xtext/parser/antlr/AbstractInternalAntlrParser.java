@@ -27,7 +27,6 @@ import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenStream;
 import org.antlr.runtime.UnwantedTokenException;
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
@@ -39,6 +38,8 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
@@ -68,14 +69,20 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 
 	protected class ErrorContext {
 		public EObject getCurrentContext() {
+			if (currentNode2 != null)
+				return currentNode2.getSemanticElement();
 			if (currentNode != null)
 				return NodeUtil.getNearestSemanticObject(currentNode);
 			return null;
 		}
 		
+		public INode getCurrentNode2() {
+			return currentNode2;
+		}	
+		
 		public AbstractNode getCurrentNode() {
 			return currentNode;
-		}	
+		}
 	}
 	
 	protected class ParserErrorContext extends ErrorContext implements IParserErrorContext {
@@ -172,8 +179,8 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	
 	protected CompositeNode currentNode;
 	
-	private List<Notifier> allParseTreeElements = Lists.newArrayListWithExpectedSize(50);
-
+	protected ICompositeNode currentNode2;
+	
 	protected IAstFactory factory;
 	
 	protected int lastConsumedIndex = -1;
@@ -207,10 +214,6 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 
 	public TokenStream getInput() {
 		return input;
-	}
-
-	protected CompositeNode getCurrentNode() {
-		return currentNode;
 	}
 
 	protected abstract IGrammarAccess getGrammarAccess();
@@ -299,8 +302,6 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	
 	protected CompositeNode createCompositeNode(EObject grammarElement, CompositeNode parentNode) {
 		CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
-		compositeNode.eSetDeliver(false);
-		allParseTreeElements.add(compositeNode);
 		if (parentNode != null)
 			((InternalEList<AbstractNode>) parentNode.getChildren()).addUnique(compositeNode);
 		compositeNode.setGrammarElement(grammarElement);
@@ -310,8 +311,6 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	private void appendError(AbstractNode node) {
 		if (currentError != null) {
 			SyntaxError error = ParsetreeFactory.eINSTANCE.createSyntaxError();
-			error.eSetDeliver(false);
-			allParseTreeElements.add(error);
 			error.setMessage(currentError.getMessage());
 			error.setIssueCode(currentError.getIssueCode());
 			node.setSyntaxError(error);
@@ -321,16 +320,12 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 
 	private LeafNode createLeafNode(Token token, boolean isHidden) {
 		LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-		leafNode.eSetDeliver(false);
-		allParseTreeElements.add(leafNode);
 		leafNode.setText(token.getText());
 		leafNode.setHidden(isHidden);
 		if (isSemanticChannel(token))
 			appendError(leafNode);
 		if (token.getType() == Token.INVALID_TOKEN_TYPE) {
 			SyntaxError error = ParsetreeFactory.eINSTANCE.createSyntaxError();
-			error.eSetDeliver(false);
-			allParseTreeElements.add(error);
 			String lexerErrorMessage = ((XtextTokenStream) input).getLexerErrorMessage(token);
 			error.setMessage(lexerErrorMessage);
 			leafNode.setSyntaxError(error);
@@ -541,10 +536,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			try {
 				appendAllTokens();
 			} finally {
-				for(Notifier notifier: allParseTreeElements)
-					notifier.eSetDeliver(true);
-				allParseTreeElements = Lists.newArrayListWithExpectedSize(50);
-				result = new ParseResult(current, currentNode);
+				result = new ParseResult(current, currentNode, currentNode2);
 			}
 		}
 		return result;

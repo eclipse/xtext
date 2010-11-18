@@ -12,8 +12,16 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.SyntaxError;
+
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 /**
  * The result of a parsing operation.
@@ -24,10 +32,12 @@ public class ParseResult implements IParseResult {
 
     private EObject rootAstElement;
     private CompositeNode rootNode;
+    private ICompositeNode rootNode2;
     
-    public ParseResult(EObject rootAstElement, CompositeNode rootNode) {
+    public ParseResult(EObject rootAstElement, CompositeNode rootNode, ICompositeNode rootNode2) {
         this.rootAstElement = rootAstElement;
         this.rootNode = rootNode;
+        this.rootNode2 = rootNode2;
     }
     
     public ParseResult() {
@@ -45,13 +55,35 @@ public class ParseResult implements IParseResult {
         return rootAstElement;
     }
 
-    public CompositeNode getRootNode() {
+    @Deprecated
+	public CompositeNode getRootNode() {
         return rootNode;
     }
 
-	public List<SyntaxError> getParseErrors() {
-		//TODO performance?
-		return rootNode != null ? rootNode.allSyntaxErrors() : Collections.<SyntaxError>emptyList();
+	@Deprecated
+	public List<AbstractNode> getParseErrors() {
+		List<SyntaxError> result = rootNode != null ? rootNode.allSyntaxErrors() : Collections.<SyntaxError>emptyList();
+		return Lists.transform(result, new Function<SyntaxError, AbstractNode>() {
+
+			public AbstractNode apply(SyntaxError from) {
+				return from.getNode();
+			}
+			
+		});
+	}
+	
+	public Iterable<INode> getParseErrors2() {
+		if (rootNode2 == null)
+			return Collections.emptyList();
+		return Iterables.filter(rootNode2, new Predicate<INode>() {
+			public boolean apply(INode input) {
+				return input.getSyntaxErrorMessage() != null;
+			}
+		});
+	}
+	
+	public ICompositeNode getRootNode2() {
+		return rootNode2;
 	}
     
 }

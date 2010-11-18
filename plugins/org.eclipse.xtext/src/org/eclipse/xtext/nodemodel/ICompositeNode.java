@@ -8,7 +8,6 @@
 package org.eclipse.xtext.nodemodel;
 
 import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -18,8 +17,6 @@ public interface ICompositeNode extends INode {
 	Iterable<INode> getChildren();
 
 	TreeIterator<INode> treeIterator();
-
-	EObject getSemanticElement();
 
 	int getLookAhead();
 
