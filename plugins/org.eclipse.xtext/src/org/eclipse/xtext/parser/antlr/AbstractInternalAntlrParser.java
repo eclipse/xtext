@@ -35,10 +35,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.UnorderedGroup;
+import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -301,6 +303,14 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			handleValueConverterException(vce);
 		}
 	}
+	
+	protected void set(EObject _this, String feature, Object value, String lexerRule) {
+		set(_this, feature, value, lexerRule, currentNode);
+	}
+	
+	protected void setWithLastConsumed(EObject _this, String feature, Object value, String lexerRule) {
+		set(_this, feature, value, lexerRule, lastConsumedNode);
+	}
 
 	protected void add(EObject _this, String feature, Object value, String lexerRule, AbstractNode node) {
 		try {
@@ -308,6 +318,14 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		} catch(ValueConverterException vce) {
 			handleValueConverterException(vce);
 		}
+	}
+	
+	protected void add(EObject _this, String feature, Object value, String lexerRule) {
+		add(_this, feature, value, lexerRule, currentNode);
+	}
+	
+	protected void addWithLastConsumed(EObject _this, String feature, Object value, String lexerRule) {
+		add(_this, feature, value, lexerRule, lastConsumedNode);
 	}
 	
 	protected CompositeNode createCompositeNode(EObject grammarElement, CompositeNode parentNode) {
@@ -730,5 +748,33 @@ public abstract class AbstractInternalAntlrParser extends Parser {
     	moveLookaheadInfo(currentNode, newNode);
     	currentNode = newNode;
 	}
+	
+	protected void enterRule() {
+		setCurrentLookahead(); 
+		resetLookahead();
+	}
+	
+	protected void leaveRule() {
+		resetLookahead(); 
+    	lastConsumedNode = currentNode;
+	}
     
+	// currentNode = createCompositeNode()
+	protected void newCompositeNode(EObject grammarElement) {
+		currentNode = createCompositeNode(grammarElement, currentNode);
+	}
+	
+	// createLeafNode(token, grammarElement, featureName)
+	protected void newLeafNode(Token token, EObject grammarElement) {
+		createLeafNode(token, grammarElement, getFeatureName(grammarElement));
+	}
+
+	private String getFeatureName(EObject grammarElement) {
+		while(grammarElement.eClass() == XtextPackage.Literals.RULE_CALL && grammarElement.eClass() == XtextPackage.Literals.ALTERNATIVES) {
+			grammarElement = grammarElement.eContainer();
+		}
+		if (grammarElement.eClass() == XtextPackage.Literals.ASSIGNMENT)
+			return ((Assignment) grammarElement).getFeature();
+		return null;
+	}
 }
