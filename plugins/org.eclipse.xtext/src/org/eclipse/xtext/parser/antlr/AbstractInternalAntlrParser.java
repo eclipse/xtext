@@ -29,10 +29,12 @@ import org.antlr.runtime.UnwantedTokenException;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
@@ -292,12 +294,20 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		return syntaxErrorProvider;
 	}
 
-	protected void set(EObject _this, String feature, Object value, String lexerRule, AbstractNode node) throws ValueConverterException {
-		factory.set(_this, feature, value, lexerRule, node);
+	protected void set(EObject _this, String feature, Object value, String lexerRule, AbstractNode node) {
+		try {
+			factory.set(_this, feature, value, lexerRule, node);
+		} catch(ValueConverterException vce) {
+			handleValueConverterException(vce);
+		}
 	}
 
-	protected void add(EObject _this, String feature, Object value, String lexerRule, AbstractNode node) throws ValueConverterException {
-		factory.add(_this, feature, value, lexerRule, node);
+	protected void add(EObject _this, String feature, Object value, String lexerRule, AbstractNode node) {
+		try {
+			factory.add(_this, feature, value, lexerRule, node);
+		} catch(ValueConverterException vce) {
+			handleValueConverterException(vce);
+		}
 	}
 	
 	protected CompositeNode createCompositeNode(EObject grammarElement, CompositeNode parentNode) {
@@ -655,4 +665,70 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		return unorderedGroupHelper;
 	}
 
+	// externalized usage patterns from generated sources
+	
+	// currentNode = currentNode.getParent();
+    protected void afterParserOrEnumRuleCall() {
+    	currentNode = currentNode.getParent();
+    }
+	
+    // if (current==null) {
+    //========
+	//    current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
+	//    associateNodeWithAstElement(currentNode.getParent(), current);
+    //========
+	//}
+    protected EObject createModelElementForParent(AbstractRule rule) {
+    	return createModelElement(rule.getType().getClassifier(), currentNode.getParent());
+    }
+
+    protected EObject createModelElement(AbstractRule rule) {
+    	return createModelElement(rule.getType().getClassifier(), currentNode);
+    }
+    
+    protected EObject createModelElementForParent(EClassifier classifier) {
+    	return createModelElement(classifier, currentNode.getParent());
+    }
+
+    protected EObject createModelElement(EClassifier classifier) {
+    	return createModelElement(classifier, currentNode);
+    }
+    
+    protected EObject createModelElement(EClassifier classifier, CompositeNode compositeNode) {
+    	EObject result = factory.create(classifier);
+    	associateNodeWithAstElement(compositeNode, result);
+    	return result;
+    }
+    
+    // Assigned action code
+    protected EObject forceCreateModelElementAndSet(Action action, EObject value) {
+    	EObject result = factory.create(action.getType().getClassifier());
+    	factory.set(result, action.getFeature(), value, null /* ParserRule */, currentNode);
+    	insertCompositeNode(action);
+    	associateNodeWithAstElement(currentNode, result);
+    	return result;
+    }
+    
+    protected EObject forceCreateModelElementAndAdd(Action action, EObject value) {
+    	EObject result = factory.create(action.getType().getClassifier());
+    	factory.add(result, action.getFeature(), value, null /* ParserRule */, currentNode);
+    	insertCompositeNode(action);
+    	associateNodeWithAstElement(currentNode, result);
+    	return result;
+    }
+    
+    protected EObject forceCreateModel(Action action, EObject value) {
+    	EObject result = factory.create(action.getType().getClassifier());
+    	insertCompositeNode(action);
+    	associateNodeWithAstElement(currentNode, result);
+    	return result;
+    }
+
+	protected void insertCompositeNode(Action action) {
+		CompositeNode newNode = createCompositeNode(action, currentNode.getParent());
+    	newNode.getChildren().add(currentNode);
+    	moveLookaheadInfo(currentNode, newNode);
+    	currentNode = newNode;
+	}
+    
 }
