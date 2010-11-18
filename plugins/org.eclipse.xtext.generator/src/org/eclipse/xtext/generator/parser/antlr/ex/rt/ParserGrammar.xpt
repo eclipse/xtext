@@ -47,7 +47,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 «IF !allEnumRules().isEmpty-»
@@ -130,7 +129,7 @@ import «gaFQName()»;
 	}
 «ENDIF-»
 	:
-	{ currentNode = «EXPAND createCompositeNode» }
+	{ «EXPAND newCompositeNode» }
 	 iv_«ruleName()»=«ruleName()» 
 	 { $current=$iv_«ruleName()».current; } 
 	 EOF 
@@ -148,7 +147,7 @@ finally {
 
 // Rule «name»
 «ruleName()» returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
 «IF definesHiddenTokens-»
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(«FOREACH hiddenTokens AS hidden SEPARATOR ", "»"«hidden.ruleName()»"«ENDFOREACH-»);
 «ENDIF-»
@@ -160,9 +159,7 @@ finally {
 		);
 «ENDIF-»
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
     «EXPAND ebnf(original, options) FOR this.alternatives»
 ;
 «IF definesHiddenTokens || (options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty)-»
@@ -193,7 +190,7 @@ finally {
 	}
 «ENDIF-»
 :
-	{ currentNode = «EXPAND createCompositeNode» } 
+	{ «EXPAND newCompositeNode» } 
 	 iv_«ruleName()»=«ruleName()» 
 	 { $current=$iv_«ruleName()».current.getText(); }  
 	 EOF 
@@ -211,7 +208,7 @@ finally {
 
 // Rule «name»
 «ruleName()» returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
 «IF definesHiddenTokens-»
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(«FOREACH hiddenTokens AS hidden SEPARATOR ", "»"«hidden.ruleName()»"«ENDFOREACH-»);
 «ENDIF-»
@@ -223,8 +220,7 @@ finally {
 		);
 «ENDIF-»
     }
-    @after { resetLookahead(); 
-	    lastConsumedNode = currentNode;
+    @after { leaveRule();
     }:
    «EXPAND dataTypeEbnf(original) FOR this.alternatives»
     ;
@@ -246,10 +242,8 @@ finally {
 «IF isCalled(original,this)»
 // Rule «name»
 «ruleName()» returns [Enumerator current=null] 
-    @init { setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @init { enterRule(); }
+    @after { leaveRule(); }:
     «EXPAND ebnf(original, options) FOR this.alternatives»;
 «ENDIF»
 «ENDDEFINE»
@@ -258,7 +252,7 @@ finally {
     «localVar()»=«grammar.getKeywordRuleName(literal.value)»
 	{
         $current = grammarAccess.«grammarElementAccess(this)».getEnumLiteral().getInstance();
-        «EXPAND createLeafNode(localVar())» 
+        «EXPAND newLeafNode(localVar())» 
     }
 «ENDDEFINE»
 
@@ -312,14 +306,14 @@ finally {
 	kw=«grammar.getKeywordRuleName(value)» 
     {
         $current.merge(kw);
-        «EXPAND createLeafNode("kw")» 
+        «EXPAND newLeafNode("kw")» 
     }
 «ENDDEFINE»
 
 «DEFINE dataTypeEbnf2(Grammar grammar) FOR RuleCall-»
 «IF (ParserRule.isInstance(rule) || EnumRule.isInstance(rule)) && !isAssigned()»
     { 
-        currentNode=«EXPAND createCompositeNode» 
+        «EXPAND newCompositeNode» 
     }
 «ENDIF-»
     «localVar()»=«rule.ruleName()-»
@@ -333,7 +327,7 @@ finally {
 «ENDIF-»
 «IF TerminalRule.isInstance(rule)»
     { 
-    «EXPAND createLeafNode(localVar())» 
+    «EXPAND newLeafNode(localVar())» 
     }
 «ENDIF-»
 «ENDDEFINE»
@@ -397,7 +391,7 @@ finally {
 «ERROR "crossrefEbnf is not supported for ParserRule that is not a datatype rule"»
 «ELSE-»
 		{ 
-	        currentNode=«EXPAND createCompositeNode FOR ref» 
+	        «EXPAND newCompositeNode FOR ref» 
 	    }
 		«ruleName()-»
 		{ 
@@ -408,7 +402,7 @@ finally {
 
 «DEFINE crossrefEbnf(Grammar grammar, CrossReference ref) FOR EnumRule-»
 		{ 
-	        currentNode=«EXPAND createCompositeNode FOR ref» 
+	        «EXPAND newCompositeNode FOR ref» 
 	    }
 		«ruleName()-»
 		{ 
@@ -419,7 +413,7 @@ finally {
 «DEFINE crossrefEbnf(Grammar grammar, CrossReference ref) FOR TerminalRule-»
 	«ref.containingAssignment().localVar()»=«ruleName()»
 	{
-		«EXPAND createLeafNode(ref.containingAssignment().localVar()) FOR ref» 
+		«EXPAND newLeafNode(ref.containingAssignment().localVar()) FOR ref» 
 	}
 «ENDDEFINE»
 
@@ -464,7 +458,7 @@ finally {
 
 «DEFINE assignmentEbnf(Assignment assignment, RuleCall call) FOR ParserRule-»
 		{ 
-	        currentNode=«EXPAND createCompositeNode FOR call» 
+	        «EXPAND newCompositeNode FOR call» 
 	    }
 		«assignment.localVar(call)»=«ruleName()-»
 		{
@@ -475,15 +469,14 @@ finally {
        			$current, 
        			"«assignment.feature»",
         		«IF assignment.isBoolean()»true«ELSE»«assignment.localVar(call)»«ENDIF», 
-        		«call.toStringLiteral()», 
-        		currentNode);
+        		«call.toStringLiteral()»);
 	        afterParserOrEnumRuleCall();
 	    }
 «ENDDEFINE»
 
 «DEFINE assignmentEbnf(Assignment assignment, RuleCall call) FOR EnumRule-»
 		{ 
-	        currentNode=«EXPAND createCompositeNode FOR call» 
+	        «EXPAND newCompositeNode FOR call» 
 	    }
 		«assignment.localVar(call)»=«ruleName()-»
 		{
@@ -494,8 +487,7 @@ finally {
        			$current, 
        			"«assignment.feature»",
         		«IF assignment.isBoolean()»true«ELSE»«assignment.localVar(call)»«ENDIF», 
-        		«call.toStringLiteral()», 
-        		currentNode);
+        		«call.toStringLiteral()»);
 	        afterParserOrEnumRuleCall();
 	    }
 «ENDDEFINE»
@@ -503,7 +495,7 @@ finally {
 «DEFINE assignmentEbnf(Assignment assignment, RuleCall call) FOR TerminalRule-»
 		«assignment.localVar(call)»=«ruleName()»
 		{
-			«EXPAND createLeafNode(assignment.localVar(call)) FOR call» 
+			«EXPAND newLeafNode(assignment.localVar(call)) FOR call» 
 		}
 		{
 	        if ($current==null) {
@@ -559,9 +551,9 @@ finally {
 	«IF !isAssigned()»«localVar()»=«ENDIF»«grammar.getKeywordRuleName(value)» 
     {
     	«IF !isAssigned()-»
-    	«EXPAND createLeafNode(localVar())»
+    	«EXPAND newLeafNode(localVar())»
     	«ELSE-»
-        «EXPAND createLeafNode(containingAssignment().localVar(this))»
+        «EXPAND newLeafNode(containingAssignment().localVar(this))»
         «ENDIF-»  
     }
 «ENDDEFINE»
@@ -574,7 +566,7 @@ finally {
 	}
 «ENDIF-»
     { 
-        currentNode=«EXPAND createCompositeNode» 
+        «EXPAND newCompositeNode» 
     }
 «IF (ParserRule.isInstance(rule) && !isDatatypeRule((ParserRule)rule) && !EnumRule.isInstance(rule))-»
     «localVar()»=«ENDIF-»«ENDIF-»«IF TerminalRule.isInstance(rule)-»«localVar()»=«ENDIF-»
@@ -589,28 +581,16 @@ finally {
 «ENDIF-»
 «IF TerminalRule.isInstance(rule)»
     { 
-    «EXPAND createLeafNode(localVar())» 
+    «EXPAND newLeafNode(localVar())» 
     }
 «ENDIF-»
 «ENDDEFINE»
 
-«DEFINE createCompositeNode FOR EObject
-    »createCompositeNode(grammarAccess.«
-    grammarElementAccess(this)
-    », currentNode);«
+«DEFINE newCompositeNode FOR EObject
+    »newCompositeNode(grammarAccess.«grammarElementAccess(this)»);«
 ENDDEFINE»
 
-«DEFINE createLeafNode(String token) FOR EObject
-    »createLeafNode(«token», grammarAccess.«
-    grammarElementAccess(this)
-    », «
-    IF isAssigned()
-        »"«
-        containingAssignment().feature
-        »"«
-    ELSE
-        »null«
-    ENDIF
-    »);«
+«DEFINE newLeafNode(String token) FOR EObject
+    »newLeafNode(«token», grammarAccess.«grammarElementAccess(this)»);«
 ENDDEFINE»
 
