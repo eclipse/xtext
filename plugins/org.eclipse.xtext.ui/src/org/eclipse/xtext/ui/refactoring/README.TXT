@@ -23,3 +23,6 @@ TODO
 - dependent elements
 - tests
 - handle xrefs form unsaved resources
+
+- lazily load/ realease files
+- cache IRefactoringDocuments

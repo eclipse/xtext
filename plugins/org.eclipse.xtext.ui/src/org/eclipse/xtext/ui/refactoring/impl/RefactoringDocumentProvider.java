@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspace;
@@ -35,6 +37,7 @@ import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
+import com.google.inject.internal.Maps;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -50,10 +53,17 @@ public class RefactoringDocumentProvider implements IRefactoringDocument.Provide
 	@Inject
 	private XtextDocumentProvider xtextDocumentProvider;
 
+	private Map<URI, IRefactoringDocument> cache = Maps.newHashMap();
+
 	private static final Logger LOG = Logger.getLogger(RefactoringDocumentProvider.class);
 
 	public IRefactoringDocument get(final URI uri, final RefactoringStatus status) {
-		final IFileEditorInput fileEditorInput = getEditorInput(uri, status);
+		URI resourceURI = uri.trimFragment();
+		if (cache.containsKey(resourceURI)) {
+			return cache.get(resourceURI);
+		}
+		IRefactoringDocument result = null;
+		final IFileEditorInput fileEditorInput = getEditorInput(resourceURI, status);
 		IXtextDocument openDocument = new DisplayRunnableWithResult<IXtextDocument>() {
 			@Override
 			protected IXtextDocument run() throws Exception {
@@ -68,21 +78,24 @@ public class RefactoringDocumentProvider implements IRefactoringDocument.Provide
 				return null;
 			}
 		}.syncExec();
-		if (openDocument != null)
-			return new EditorDocument(openDocument);
-		try {
-			xtextDocumentProvider.connect(fileEditorInput);
-			IXtextDocument document = (IXtextDocument) xtextDocumentProvider.getDocument(fileEditorInput);
-			if (!(document instanceof XtextDocument)) {
-				status.addError("Could not get an XtextDocument for " + fileEditorInput.getName());
-			} else {
-				return new FileDocument(fileEditorInput.getFile(), (XtextDocument) document);
+		if (openDocument != null) {
+			result = new EditorDocument(openDocument);
+		} else {
+			try {
+				xtextDocumentProvider.connect(fileEditorInput);
+				IXtextDocument document = (IXtextDocument) xtextDocumentProvider.getDocument(fileEditorInput);
+				if (!(document instanceof XtextDocument)) {
+					status.addError("Could not get an XtextDocument for " + fileEditorInput.getName());
+				} else {
+					result = new FileDocument(fileEditorInput.getFile(), (XtextDocument) document);
+				}
+			} catch (CoreException e) {
+				status.addError("Error getting XtextDocument for " + fileEditorInput.getName() + ": " + e.getMessage());
+				LOG.error(e);
 			}
-		} catch (CoreException e) {
-			status.addError("Error getting XtextDocument for " + fileEditorInput.getName() + ": " + e.getMessage());
-			LOG.error(e);
 		}
-		return null;
+		cache.put(resourceURI, result);
+		return result;
 	}
 
 	protected IFileEditorInput getEditorInput(URI resourceURI, RefactoringStatus status) {
@@ -131,12 +144,13 @@ public class RefactoringDocumentProvider implements IRefactoringDocument.Provide
 			documentChange.setEdit(textEdit);
 			return new DisplayChangeWrapper(documentChange);
 		}
-		
+
 		public IXtextDocument getXtextDocument() {
 			return document;
 		}
 	}
 
+	// TODO: lazily load and release document
 	public static class FileDocument implements IRefactoringDocument {
 
 		private IFile file;
@@ -169,7 +183,7 @@ public class RefactoringDocumentProvider implements IRefactoringDocument.Provide
 			textChange.setEdit(textEdit);
 			return textChange;
 		}
-		
+
 		public IFile getFile() {
 			return file;
 		}

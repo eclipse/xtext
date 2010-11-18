@@ -7,12 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
-import java.util.Collections;
+import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.RefactoringStatusEntry;
 import org.eclipse.text.edits.ReplaceEdit;
@@ -71,9 +72,11 @@ public class DefaultRenameElementStrategy implements IRenameElementStrategy {
 
 	protected ITextRegion currentNameTextRegion;
 	protected String currentName;
+	protected ElementRenameInfo.Table renamedElementsTable;
 
 	protected DefaultRenameElementStrategy(final URI targetElementURI, final IRefactoringDocument targetDocument,
 			final ILocationInFileProvider locationInFileProvider) {
+		renamedElementsTable = new ElementRenameInfo.Table();
 		targetDocument.readOnly(new IUnitOfWork.Void<XtextResource>() {
 			@Override
 			public void process(XtextResource resource) {
@@ -85,6 +88,8 @@ public class DefaultRenameElementStrategy implements IRenameElementStrategy {
 				currentName = eObject.eGet(nameAttribute).toString();
 				if (Strings.isEmpty(currentName))
 					throw new RefactoringStatusException("Target element does not have a name", false);
+				renamedElementsTable.add(new ElementRenameInfo(targetDocument, targetElementURI, currentNameTextRegion.getOffset()));
+				addContentsToBeRenamed(targetDocument, eObject, locationInFileProvider);
 			}
 		});
 	}
@@ -110,8 +115,20 @@ public class DefaultRenameElementStrategy implements IRenameElementStrategy {
 		return SimpleAttributeResolver.NAME_RESOLVER.getAttribute(eObject);
 	}
 
-	public Iterable<URI> getDependentElements(URI targetElementURI) {
-		return Collections.emptyList();
+	protected void addContentsToBeRenamed(final IRefactoringDocument targetDocument, EObject eObject,
+			final ILocationInFileProvider locationInFileProvider) {
+		for(Iterator<EObject> i = EcoreUtil.getAllProperContents(eObject, false); i.hasNext();) {
+			EObject childElement = i.next();
+			URI childURI = EcoreUtil.getURI(childElement);
+			ITextRegion childTextRegion = locationInFileProvider.getSignificantTextRegion(childElement);
+			if(childURI != null && childTextRegion != null) {
+				renamedElementsTable.add(new ElementRenameInfo(targetDocument, childURI, childTextRegion.getOffset()));
+			}
+		}
+	}
+
+	public ElementRenameInfo.Table getRenamedElementInfos() {
+		return renamedElementsTable;
 	}
 
 }

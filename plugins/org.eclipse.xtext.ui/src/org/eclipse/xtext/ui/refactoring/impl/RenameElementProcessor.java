@@ -12,7 +12,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.participants.CheckConditionsContext;
@@ -20,17 +19,11 @@ import org.eclipse.ltk.core.refactoring.participants.RefactoringParticipant;
 import org.eclipse.ltk.core.refactoring.participants.SharableParticipants;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
-import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
-import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.refactoring.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.IRenameElementStrategy;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
 /**
@@ -44,13 +37,10 @@ public class RenameElementProcessor extends AbstractRenameElementProcessor {
 	private IRefactoringDocument.Provider documentProvider;
 
 	@Inject
+	private ReferenceFinder referenceFinder;
+
+	@Inject
 	private ReferenceUpdater referenceUpdater;
-
-	@Inject
-	private IResourceDescriptions index;
-
-	@Inject
-	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
 
 	private RefactoringStatus status;
 	private URI targetElementURI;
@@ -58,7 +48,7 @@ public class RenameElementProcessor extends AbstractRenameElementProcessor {
 	private IRenameElementStrategy strategy;
 	private String newName;
 
-	private TextEditAcceptor acceptor;
+	private TextEditAcceptor textEditAcceptor;
 
 	@Override
 	public void initialize(final URI targetElementURI, IRenameElementStrategy strategy) {
@@ -111,23 +101,21 @@ public class RenameElementProcessor extends AbstractRenameElementProcessor {
 	@Override
 	public RefactoringStatus checkFinalConditions(IProgressMonitor pm, CheckConditionsContext context)
 			throws CoreException, OperationCanceledException {
-		acceptor = new TextEditAcceptor();
+		textEditAcceptor = new TextEditAcceptor();
 		try {
 			final ReplaceEdit declarationEdit = strategy.getRenameEdit(newName);
 			if (declarationEdit == null)
 				throw new RefactoringStatusException("Could not create a text edit", true);
-			acceptor.accept(targetDocument, declarationEdit);
-			final Multimap<IResourceDescription, IReferenceDescription> referenceMap = findReferencesInIndex(targetElementURI);
+			textEditAcceptor.accept(targetDocument, declarationEdit);
+			ElementRenameInfo.Table elementRenameInfos = strategy.getRenamedElementInfos();
+			final CrossRefRenameInfo.Table crossRefInfos = referenceFinder.findReferences(elementRenameInfos, targetElementURI, targetDocument, status);
 			TextEdit undoDeclarationEdit = null;
 			try {
 				undoDeclarationEdit = targetDocument.apply(declarationEdit);
 				targetDocument.readOnly(new IUnitOfWork.Void<XtextResource>() {
 					@Override
 					public void process(XtextResource resource) throws Exception {
-						// eObjectURI might have changed with the declaration so we use the offset 
-						EObject newTargetEObject = eObjectAtOffsetHelper.resolveElementAt(resource,
-								declarationEdit.getOffset());
-						createReferenceUpdates(referenceMap, acceptor, status, newTargetEObject, declarationEdit);
+						referenceUpdater.createReferenceUpdates(crossRefInfos, targetDocument, declarationEdit, textEditAcceptor, status);
 					}
 				});
 			} finally {
@@ -142,34 +130,7 @@ public class RenameElementProcessor extends AbstractRenameElementProcessor {
 
 	@Override
 	public Change createChange(IProgressMonitor pm) throws CoreException, OperationCanceledException {
-		return acceptor.getCompositeChange(getProcessorName());
-	}
-
-	protected Multimap<IResourceDescription, IReferenceDescription> findReferencesInIndex(
-			URI targetElementURI) {
-		Multimap<IResourceDescription, IReferenceDescription> resource2References = HashMultimap.create();
-		for (IResourceDescription resourceDescription : index.getAllResourceDescriptions()) {
-			for (IReferenceDescription referenceDescription : resourceDescription.getReferenceDescriptions()) {
-				if (referenceDescription.getTargetEObjectUri().equals(targetElementURI)) {
-					resource2References.put(resourceDescription, referenceDescription);
-				}
-			}
-		}
-		return resource2References;
-	}
-
-	protected void createReferenceUpdates(Multimap<IResourceDescription, IReferenceDescription> referenceMap,
-			TextEditAcceptor acceptor, RefactoringStatus status, EObject newTargetEObject, ReplaceEdit declarationEdit) {
-		for (IResourceDescription referringResourceDesc : referenceMap.keySet()) {
-			if (referringResourceDesc.getURI().equals(targetElementURI.trimFragment())) {
-				referenceUpdater.createReferenceUpdates(targetDocument, referenceMap.get(referringResourceDesc),
-						newTargetEObject, acceptor, declarationEdit, status);
-			} else {
-				IRefactoringDocument referringDocument = documentProvider.get(referringResourceDesc.getURI(), status);
-				referenceUpdater.createReferenceUpdates(referringDocument, referenceMap.get(referringResourceDesc),
-						newTargetEObject, acceptor, null, status);
-			}
-		}
+		return textEditAcceptor.getCompositeChange(getProcessorName());
 	}
 
 	@Override
