@@ -7,7 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping;
 
-import static org.eclipse.xtext.naming.QualifiedName.create;
+import static org.eclipse.xtext.naming.QualifiedName.*;
+
 import org.eclipse.xtext.naming.QualifiedName;
 
 import com.google.common.collect.BiMap;

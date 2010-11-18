@@ -23,10 +23,9 @@ import org.eclipse.xtext.example.css.xcss.XcssPackage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.impl.SingletonScope;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
-import org.eclipse.xtext.xbase.scoping.newapi.INewScope;
-import org.eclipse.xtext.xbase.scoping.newapi.SingletonScope;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -75,20 +74,20 @@ public class XcssScopeProvider extends XbaseScopeProvider {
 	}
 	
 	@Override
-	protected INewScope createLocalVarScope(EObject context,
-			EReference reference, INewScope parentScope) {
+	protected IScope createLocalVarScope(EObject context,
+			EReference reference, IScope parentScope) {
 		if (context instanceof StyleRule) {
 			List<Selector> selectors = ((StyleRule) context).getSelectors();
 			if (!selectors.isEmpty()) {
 				Selector selector = selectors.get(0);
 				return new SingletonScope(EObjectDescription.create(THIS, selector), parentScope);
 			}
-			return INewScope.NULL_SCOPE;
+			return IScope.NULLSCOPE;
 		}
 		return super.createLocalVarScope(context, reference, parentScope);
 	}
 
-	protected INewScope createFeatureScopeForTypeRef(JvmTypeReference type, INewScope parent,
+	protected IScope createFeatureScopeForTypeRef(JvmTypeReference type, IScope parent,
 			Predicate<JvmMember> isAccept) {
 		if (type instanceof JvmWildcardTypeReference) {
 			JvmWildcardTypeReference wildcard = (JvmWildcardTypeReference) type;

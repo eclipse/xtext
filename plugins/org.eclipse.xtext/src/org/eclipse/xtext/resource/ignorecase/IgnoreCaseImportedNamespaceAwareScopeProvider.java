@@ -7,23 +7,32 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.ignorecase;
 
-import java.util.Map;
-
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 
-import com.google.common.collect.Maps;
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Multimap;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge
  */
 public class IgnoreCaseImportedNamespaceAwareScopeProvider extends ImportedNamespaceAwareLocalScopeProvider {
+	
+	@Override
+	public IScope getScope(EObject context, EReference reference) {
+		final IScope scope = super.getScope(context, reference);
+		return new IgnoreCaseSelectorScope(scope);
+	}
 
 	@Override
-	protected Map<QualifiedName, IEObjectDescription> toMap(Iterable<IEObjectDescription> scopedElementsFor) {
-		Map<QualifiedName, IEObjectDescription> result = Maps.newHashMap();
+	protected Multimap<QualifiedName, IEObjectDescription> toMap(Iterable<IEObjectDescription> scopedElementsFor) {
+		Multimap<QualifiedName, IEObjectDescription> result = LinkedHashMultimap.create();
 		for (IEObjectDescription ieObjectDescription : scopedElementsFor) {
 			QualifiedName key = ieObjectDescription.getName().toLowerCase();
 			if (!result.containsKey(key))
@@ -33,8 +42,7 @@ public class IgnoreCaseImportedNamespaceAwareScopeProvider extends ImportedNames
 	}
 	
 	@Override
-	protected IScope createMapBasedScope(IScope parentScope, Map<QualifiedName, IEObjectDescription> map) {
-		return new IgnoreCaseMapBasedScope(parentScope, map);
+	protected ImportNormalizer createImportedNamespaceResolver(String namespace) {
+		return super.createImportedNamespaceResolver(namespace.toLowerCase());
 	}
-	
 }

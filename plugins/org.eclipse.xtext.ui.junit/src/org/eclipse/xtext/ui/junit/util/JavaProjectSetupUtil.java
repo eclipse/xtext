@@ -39,7 +39,6 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.core.JavaModelManager;
-import org.eclipse.jdt.launching.JavaRuntime;
 
 import com.google.common.collect.Lists;
 
@@ -48,6 +47,8 @@ import com.google.common.collect.Lists;
  */
 @SuppressWarnings("restriction")
 public class JavaProjectSetupUtil {
+
+	private static final String JRE_CONTAINER_1_5 = "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5";
 
 	public static class TextFile {
 		public TextFile(String path, String content) {
@@ -230,8 +231,7 @@ public class JavaProjectSetupUtil {
 	private static void addJreClasspathEntry(IJavaProject javaProject) throws JavaModelException {
 		IClasspathEntry existingJreContainerClasspathEntry = getJreContainerClasspathEntry(javaProject);
 		if (existingJreContainerClasspathEntry == null) {
-			IClasspathEntry defaultJREContainerEntry = JavaRuntime.getDefaultJREContainerEntry();
-			addToClasspath(javaProject, defaultJREContainerEntry);
+			addToClasspath(javaProject, JavaCore.newContainerEntry(new Path(JRE_CONTAINER_1_5)));
 		}
 	}
 
@@ -242,7 +242,7 @@ public class JavaProjectSetupUtil {
 			if (entryKind == IClasspathEntry.CPE_CONTAINER) {
 				IPath path = classpathEntry.getPath();
 				String pathAsString = path.toString();
-				if (pathAsString.startsWith(JavaRuntime.JRE_CONTAINER)) {
+				if (pathAsString.startsWith(JRE_CONTAINER_1_5)) {
 					return classpathEntry;
 				}
 			}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,82 +9,54 @@ package org.eclipse.xtext.scoping;
 
 import java.util.Collections;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
 /**
+ * A scope defines which elements {@link IEObjectDescription} can be seen in a certain area within a model/program.
+ * Scopes are used to resolve cross references during linking, content assist , serialization of cross references, etc.
  * 
- * A scope represents a hierarchical container containing
- * {@link IEObjectDescription}s.
+ * Scopes are constructed and provided by an {@link IScopeProvider}.
+ * 
+ * Clients pass in an {@link ISelector} to select from the elements of each scope, only those which are
+ * valid/interesting depending on the actual client (i.e. linker, content assist, etc.).
+ * 
+ * Scopes are usually nested and descriptions ({@link IEObjectDescription}) from nested scopes can shadow descriptions
+ * from outer scopes. Usually the attribute {@link IEObjectDescription#getKey()} is used for that.
  * 
  * @author Sven Efftinge - Initial contribution and API
- * @author Holger Schill - Contribution to Bug 309764
- * @author Jan Koehnlein - introduced QualifiedName
  */
 public interface IScope {
-	
-    /**
-     * The <code>NULLSCOPE</code> to be returned by the most outer scope
-     */
-    final IScope NULLSCOPE = new IScope() {
-		
-    	public Iterable<IEObjectDescription> getAllContents() {
-    		return Collections.emptyList();
-    	}
 
-		public Iterable<IEObjectDescription> getContents() {
-			return Collections.emptyList();
-		}
+	/**
+	 * An implementation might use any strategy to find a single element, if multiple elements fulfill the given
+	 * selector.
+	 * 
+	 * @return a single element given the {@link ISelector}.
+	 */
+	IEObjectDescription getSingleElement(ISelector selector);
 
-		public IScope getOuterScope() {
-			return NULLSCOPE;
-		}
+	/**
+	 * @return all elements which pass the given {@link ISelector}
+	 */
+	Iterable<IEObjectDescription> getElements(ISelector selector);
 
-		public IEObjectDescription getContentByEObject(EObject object) {
+	/**
+	 * a NO-OP implementation.
+	 */
+	public final static IScope NULLSCOPE = new IScope() {
+
+		public IEObjectDescription getSingleElement(ISelector selector) {
 			return null;
 		}
-		
-		public Iterable<IEObjectDescription> getAllContentsByEObject(EObject object) {
-			return Collections.emptyList();
+
+		public Iterable<IEObjectDescription> getElements(ISelector selector) {
+			return Collections.emptySet();
 		}
 
-		public IEObjectDescription getContentByName(QualifiedName qualifiedName) {
-			return null;
+		@Override
+		public String toString() {
+			return "NULLSCOPE";
 		}
-    };
-    
-    /**
-     * @return the outer scope, returns {@link IScope#NULLSCOPE} if this scope is the most outer scope.
-     */
-    IScope getOuterScope();
+	};
 
-    /**
-     * @return an {@link Iterable} of {@link IEObjectDescription}s directly contained in this scope.
-     * @throws UnsupportedOperationException if the scope cannot be enumerated.
-     */
-    Iterable<IEObjectDescription> getContents();
-    
-    /**
-     * @return an {@link Iterable} of {@link IEObjectDescription}s contained in this scope and it's outer scope
-     * @throws UnsupportedOperationException if the scope or an outer scope cannot be enumerated.
-     */
-    Iterable<IEObjectDescription> getAllContents();
-    
-    /**
-     * a deep search for the element with the given name
-     */
-    IEObjectDescription getContentByName(QualifiedName qualifiedName);
-    
-    /**
-     * @return an {@link IEObjectDescription} that represents the first element from {@link IScope#getAllContentsByEObject(EObject)} or null
-     */
-    IEObjectDescription getContentByEObject(EObject object);
-    
-    /**
-     * A deep search for the elements pointing to the given object.
-     * @return an {@link Iterable} of {@link IEObjectDescription}s that matches the given object ordered by the occurrence in this scope and it's following outer scope 
-     */
-    Iterable<IEObjectDescription> getAllContentsByEObject(EObject object);
-    
 }

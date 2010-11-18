@@ -11,8 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 
 /**
- * An IScopeProvider can be used, to get access to a set of visible elements. Basically the are retrieved by type, but
- * the API allows for more sophisticated implementations as it is possible to ask for a scope for a given reference.
+ * An IScopeProvider can be used, to get access to a set of visible elements ({@link org.eclipse.xtext.resource.IEObjectDescription}). 
  * 
  * Implementations should inherit from {@link org.eclipse.xtext.scoping.impl.AbstractScopeProvider}.
  * 
@@ -26,8 +25,9 @@ public interface IScopeProvider {
 	 * Returns a scope for the given context. The scope provides access to the compatible
 	 * visible EObjects for a given reference.
 	 *
-	 * @param context the element from which an element shall be referenced
-	 * @param reference the reference to be used to filter the elements.
+	 * @param context the element from which an element shall be referenced. It doesn't need to be the element
+	 * 		  containing the reference, it is just used to find the most inner scope for given {@link EReference}.
+	 * @param reference the reference for which to get the scope.
 	 * @return {@link IScope} representing the inner most {@link IScope} for the
 	 *         passed context and reference. Note for implementors: The result may not be <code>null</code>.
 	 *         Return <code>IScope.NULLSCOPE</code> instead.

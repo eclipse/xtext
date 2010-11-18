@@ -11,6 +11,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -18,19 +20,19 @@ import com.google.common.collect.Iterables;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class CompositeScope implements INewScope {
+public class CompositeScope implements IScope {
 	
-	private List<INewScope> scopes;
+	private List<IScope> scopes;
 	
-	public CompositeScope(INewScope ...scopes) {
+	public CompositeScope(IScope ...scopes) {
 		this.scopes = Arrays.asList(scopes);
 	}
-	public CompositeScope(List<INewScope> scopes) {
+	public CompositeScope(List<IScope> scopes) {
 		this.scopes = scopes;
 	}
 
 	public IEObjectDescription getSingleElement(ISelector selector) {
-		for (INewScope scope : scopes) {
+		for (IScope scope : scopes) {
 			IEObjectDescription element = scope.getSingleElement(selector);
 			if (element!=null)
 				return element;
@@ -38,9 +40,9 @@ public class CompositeScope implements INewScope {
 		return null;
 	}
 
-	public Iterable<? extends IEObjectDescription> getElements(final ISelector selector) {
-		return Iterables.concat(Iterables.transform(scopes, new Function<INewScope, Iterable<? extends IEObjectDescription>>() {
-			public Iterable<? extends IEObjectDescription> apply(INewScope from) {
+	public Iterable<IEObjectDescription> getElements(final ISelector selector) {
+		return Iterables.concat(Iterables.transform(scopes, new Function<IScope, Iterable<IEObjectDescription>>() {
+			public Iterable<IEObjectDescription> apply(IScope from) {
 				return from.getElements(selector);
 			}
 		}));

@@ -14,9 +14,8 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.xbase.scoping.newapi.DelegatingScope;
-import org.eclipse.xtext.xbase.scoping.newapi.INewScope;
-import org.eclipse.xtext.xbase.scoping.newapi.ISelector;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.ISelector;
 
 /**
  * 
@@ -25,27 +24,40 @@ import org.eclipse.xtext.xbase.scoping.newapi.ISelector;
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class BestMatchingJvmFeatureScope extends DelegatingScope {
+public class BestMatchingJvmFeatureScope implements IScope {
 
 	protected final EObject context;
 	protected final EReference reference;
 	private IJvmTypeConformanceComputer computer;
+	private IScope delegate;
+	private ISelector selector;
 
 	public BestMatchingJvmFeatureScope(IJvmTypeConformanceComputer computer, EObject context, EReference ref,
-			INewScope delegate) {
+			IScope delegate, ISelector selector) {
 		this.computer = computer;
 		this.context = context;
 		this.reference = ref;
-		this.setDelegate(delegate);
+		this.delegate = delegate;
+		this.selector = selector;
 	}
 
-	@Override
 	public IEObjectDescription getSingleElement(ISelector selector) {
-		Iterable<? extends IEObjectDescription> iterable = getElements(selector);
+		Iterable<IEObjectDescription> iterable = delegate.getElements(enhance(selector));
 		return getBestMatch(iterable);
 	}
+	
+	protected ISelector enhance(ISelector selector2) {
+		if (selector2 instanceof ISelector.DelegatingSelector) {
+			((ISelector.DelegatingSelector) selector2).addDelegate(selector);
+		}
+		return selector2;
+	}
 
-	protected IEObjectDescription getBestMatch(Iterable<? extends IEObjectDescription> iterable) {
+	public Iterable<IEObjectDescription> getElements(ISelector selector) {
+		return delegate.getElements(enhance(selector));
+	}
+
+	protected IEObjectDescription getBestMatch(Iterable<IEObjectDescription> iterable) {
 		IEObjectDescription bestMatch = null;
 		for (IEObjectDescription description : iterable) {
 			if (bestMatch == null) {
@@ -78,5 +90,10 @@ public class BestMatchingJvmFeatureScope extends DelegatingScope {
 			}
 		}
 		return a;
+	}
+	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName()+" -> "+delegate;
 	}
 }

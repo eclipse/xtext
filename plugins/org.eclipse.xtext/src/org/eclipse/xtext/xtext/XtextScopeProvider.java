@@ -33,8 +33,8 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractExportedObjectsAwareScopeProvider;
-import org.eclipse.xtext.scoping.impl.ResourceDescriptionBasedScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
+import org.eclipse.xtext.scoping.impl.ResourceDescriptionBasedScope;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -73,18 +73,17 @@ public class XtextScopeProvider extends AbstractExportedObjectsAwareScopeProvide
 		return createScope(context.eResource(), reference.getEReferenceType());
 	}
 
-	private IScope createEnumLiteralsScope(EEnum eEnum) {
-		return new SimpleScope(IScope.NULLSCOPE,
-				Iterables.transform(eEnum.getELiterals(), new Function<EEnumLiteral, IEObjectDescription>() {
-					public IEObjectDescription apply(EEnumLiteral param) {
-						return EObjectDescription.create(QualifiedName.create(param.getName()), param);
-					}
-				}));
+	protected IScope createEnumLiteralsScope(EEnum eEnum) {
+		return new SimpleScope(IScope.NULLSCOPE,Iterables.transform(eEnum.getELiterals(), new Function<EEnumLiteral, IEObjectDescription>() {
+							public IEObjectDescription apply(EEnumLiteral param) {
+								return EObjectDescription.create(QualifiedName.create(param.getName()), param);
+							}
+						}));
 	}
 
-	private SimpleScope createClassifierScope(Iterable<EClassifier> classifiers) {
-		return new SimpleScope(IScope.NULLSCOPE,
-				Iterables.transform(classifiers, new Function<EClassifier, IEObjectDescription>() {
+	protected IScope createClassifierScope(Iterable<EClassifier> classifiers) {
+		return new SimpleScope(
+				IScope.NULLSCOPE,Iterables.transform(classifiers, new Function<EClassifier, IEObjectDescription>() {
 					public IEObjectDescription apply(EClassifier param) {
 						return EObjectDescription.create(QualifiedName.create(param.getName()), param);
 					}
@@ -114,13 +113,13 @@ public class XtextScopeProvider extends AbstractExportedObjectsAwareScopeProvide
 		if (EcorePackage.Literals.EPACKAGE == type) {
 			return createEPackageScope(grammar);
 		} else if (AbstractMetamodelDeclaration.class.isAssignableFrom(type.getInstanceClass())) {
-			return new SimpleScope(IScope.NULLSCOPE, Iterables.transform(grammar.getMetamodelDeclarations(),
-					new Function<AbstractMetamodelDeclaration,IEObjectDescription>(){
-						public IEObjectDescription apply(AbstractMetamodelDeclaration from) {
-							String name = from.getAlias() != null ? from.getAlias() : "";
-							return EObjectDescription.create(QualifiedName.create(name), from);
-						}
-					}));
+			return new SimpleScope(IScope.NULLSCOPE,Iterables.transform(grammar.getMetamodelDeclarations(),
+							new Function<AbstractMetamodelDeclaration,IEObjectDescription>(){
+								public IEObjectDescription apply(AbstractMetamodelDeclaration from) {
+									String name = from.getAlias() != null ? from.getAlias() : "";
+									return EObjectDescription.create(QualifiedName.create(name), from);
+								}
+							}));
 		}
 		final List<Grammar> allGrammars = getAllGrammars(grammar);
 		IScope current = IScope.NULLSCOPE;
@@ -137,13 +136,13 @@ public class XtextScopeProvider extends AbstractExportedObjectsAwareScopeProvide
 		return new ResourceDescriptionBasedScope(parent, resourceDescription, type);
 	}
 
-	private List<Grammar> getAllGrammars(Grammar grammar) {
+	protected List<Grammar> getAllGrammars(Grammar grammar) {
 		Collection<Grammar> visitedGrammars = new LinkedHashSet<Grammar>();
 		collectAllUsedGrammars(grammar, visitedGrammars);
 		return new ArrayList<Grammar>(visitedGrammars);
 	}
 
-	private void collectAllUsedGrammars(Grammar grammar, Collection<Grammar> visited) {
+	protected void collectAllUsedGrammars(Grammar grammar, Collection<Grammar> visited) {
 		if (!visited.add(grammar))
 			return;
 		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
@@ -151,8 +150,8 @@ public class XtextScopeProvider extends AbstractExportedObjectsAwareScopeProvide
 		}
 	}
 
-	private IScope createEPackageScope(final Grammar grammar, IScope parent) {
-		return new SimpleScope(parent, Iterables.transform(Iterables.filter(grammar.getMetamodelDeclarations(),
+	protected IScope createEPackageScope(final Grammar grammar, IScope parent) {
+		return new SimpleScope(parent,Iterables.transform(Iterables.filter(grammar.getMetamodelDeclarations(),
 				new Predicate<AbstractMetamodelDeclaration>() {
 					public boolean apply(AbstractMetamodelDeclaration input) {
 						return input.getEPackage() != null;
@@ -164,9 +163,9 @@ public class XtextScopeProvider extends AbstractExportedObjectsAwareScopeProvide
 		}));
 	}
 
-	private IScope createEPackageScope(final Grammar grammar) {
+	protected IScope createEPackageScope(final Grammar grammar) {
 		final List<Grammar> allGrammars = getAllGrammars(grammar);
-		IScope current = new SimpleScope(Iterables.transform(EPackage.Registry.INSTANCE.keySet(), new Function<String, IEObjectDescription>() {
+		IScope current = new SimpleScope(IScope.NULLSCOPE, Iterables.transform(EPackage.Registry.INSTANCE.keySet(), new Function<String, IEObjectDescription>() {
 			public IEObjectDescription apply(String from) {
 				return EObjectDescription.create(QualifiedName.create(from), null);
 			}

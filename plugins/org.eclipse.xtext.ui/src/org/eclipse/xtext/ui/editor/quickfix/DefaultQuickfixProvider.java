@@ -24,6 +24,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext;
@@ -89,7 +90,7 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 				List<IEObjectDescription> discardedDescriptions = Lists.newArrayList();
 				Set<String> qualifiedNames = Sets.newHashSet();
 				int addedDescriptions = 0;
-				for (IEObjectDescription referableElement : scope.getAllContents()) {
+				for (IEObjectDescription referableElement : scope.getElements(getSelector())) {
 					String referableElementQualifiedName = qualifiedNameConverter.toString(referableElement.getQualifiedName());
 					if (similarityMatcher.isSimilar(issueString, qualifiedNameConverter.toString(referableElement.getName()))) {
 						addedDescriptions++;
@@ -115,6 +116,10 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 			}
 
 		});
+	}
+
+	protected ISelector getSelector() {
+		return ISelector.SELECT_ALL;
 	}
 
 	protected EReference getUnresolvedEReference(final Issue issue, EObject target) {

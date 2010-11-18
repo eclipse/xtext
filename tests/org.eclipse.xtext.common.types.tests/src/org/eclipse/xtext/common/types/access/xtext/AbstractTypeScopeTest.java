@@ -15,6 +15,8 @@ import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.ISelector;
+import org.eclipse.xtext.scoping.impl.AbstractScope;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -22,23 +24,23 @@ import org.eclipse.xtext.scoping.IScope;
 public abstract class AbstractTypeScopeTest extends TestCase {
 
 	public void testGetOuterScope_01() {
-		assertSame(IScope.NULLSCOPE, getTypeScope().getOuterScope());
+		assertSame(IScope.NULLSCOPE, ((AbstractScope)getTypeScope()).getParent());
 	}
 	
 	public void testGetElementByName_01() {
-		IEObjectDescription objectElement = getTypeScope().getContentByName(QualifiedName.create(Object.class.getName()));
+		IEObjectDescription objectElement = getTypeScope().getSingleElement(new ISelector.SelectByName(QualifiedName.create(Object.class.getName())));
 		assertNotNull(objectElement);
 		assertFalse(objectElement.getEObjectOrProxy().eIsProxy());
 		assertEquals("java.lang.Object", objectElement.getName().toString());
 	}
 	
 	public void testGetElementByName_02() {
-		IEObjectDescription objectElement = getTypeScope().getContentByName(QualifiedName.create(Object.class.getName() + "Foo"));
+		IEObjectDescription objectElement = getTypeScope().getSingleElement(new ISelector.SelectByName(QualifiedName.create(Object.class.getName() + "Foo")));
 		assertNull(objectElement);
 	}
 	
 	public void testGetElementByName_03() {
-		IEObjectDescription objectElement = getTypeScope().getContentByName(QualifiedName.create(int.class.getName()));
+		IEObjectDescription objectElement = getTypeScope().getSingleElement(new ISelector.SelectByName(QualifiedName.create(int.class.getName())));
 		assertNotNull(objectElement);
 		assertFalse(objectElement.getEObjectOrProxy().eIsProxy());
 		assertEquals(QualifiedName.create("int"), objectElement.getName());
@@ -46,14 +48,14 @@ public abstract class AbstractTypeScopeTest extends TestCase {
 	
 	public void testGetElementByInstance_01() {
 		JvmVoid voidType = TypesFactory.eINSTANCE.createJvmVoid();
-		IEObjectDescription element = getTypeScope().getContentByEObject(voidType);
+		IEObjectDescription element = getTypeScope().getSingleElement(new ISelector.SelectByEObject(voidType));
 		assertNotNull(element);
 		assertEquals(voidType.getCanonicalName(), element.getName().toString());
 	}
 	
 	public void testGetElementByInstance_02() {
 		JvmAnnotationReference annotationReference = TypesFactory.eINSTANCE.createJvmAnnotationReference();
-		IEObjectDescription element = getTypeScope().getContentByEObject(annotationReference);
+		IEObjectDescription element = getTypeScope().getSingleElement(new ISelector.SelectByEObject(annotationReference));
 		assertNull(element);
 	}
 	

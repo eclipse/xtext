@@ -8,16 +8,17 @@
 package org.eclipse.xtext.linking.impl;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.scoping.impl.IScopeWrapper;
 
 /**
@@ -47,35 +48,35 @@ public class ImportedNamesAdapter extends AdapterImpl implements IScopeWrapper {
 		public WrappingScope(IScope scope) {
 			this.delegate = scope;
 		}
+		
+		public Iterable<IEObjectDescription> getElements(final ISelector selector) {
+			if (selector instanceof ISelector.SelectByName) {
+				final QualifiedName name = ((ISelector.SelectByName) selector).getName();
+				final Iterable<IEObjectDescription> elements = delegate.getElements(selector);
+				return new Iterable<IEObjectDescription>() {
+					public Iterator<IEObjectDescription> iterator() {
+						importedNames.add(name);
+						return elements.iterator();
+					}
+				};
+			} else {
+				handleNoSelectNameQuery(selector);
+			}
+			return delegate.getElements(selector);
+		}
 
-		public IEObjectDescription getContentByName(QualifiedName qualifiedName) {
-			importedNames.add(qualifiedName);
-			return delegate.getContentByName(qualifiedName);
+		protected void handleNoSelectNameQuery(ISelector selector) {
+			log.error("getElements shouldn't be called without a SelectByName selector during linking.", new IllegalStateException());
 		}
 		
-		public IScope getOuterScope() {
-			return delegate.getOuterScope();
-		}
-
-		public Iterable<IEObjectDescription> getAllContents() {
-			log.error("getAllContents shouldn't be called on a global scope during linking.", new IllegalStateException());
-			return delegate.getAllContents();
-		}
-
-		public IEObjectDescription getContentByEObject(EObject object) {
-			log.error("getContentByEObject shouldn't be called on a global scope during linking.", new IllegalStateException());
-			return delegate.getContentByEObject(object);
-		}
-		
-		public Iterable<IEObjectDescription> getAllContentsByEObject(EObject object){
-			log.error("getAllContentsByEObject shouldn't be called on a global scope during linking.", new IllegalStateException());
-			return delegate.getAllContentsByEObject(object);
-			
-		}
-
-		public Iterable<IEObjectDescription> getContents() {
-			log.error("getContents shouldn't be called on a global scope during linking.", new IllegalStateException());
-			return delegate.getContents();
+		public IEObjectDescription getSingleElement(ISelector selector) {
+			if (selector instanceof ISelector.SelectByName) {
+				final QualifiedName name = ((ISelector.SelectByName) selector).getName();
+				importedNames.add(name);
+			} else {
+				handleNoSelectNameQuery(selector);
+			}
+			return delegate.getSingleElement(selector);
 		}
 
 	}

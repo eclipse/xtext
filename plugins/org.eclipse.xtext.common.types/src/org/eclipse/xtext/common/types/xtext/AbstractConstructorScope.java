@@ -7,18 +7,25 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.xtext;
 
+import static com.google.common.collect.Iterables.*;
+import static java.util.Collections.*;
+
 import java.util.Iterator;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
+
+import com.google.common.base.Function;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -32,39 +39,44 @@ public abstract class AbstractConstructorScope extends AbstractScope {
 	}
 	
 	@Override
-	public IEObjectDescription getContentByName(QualifiedName name) {
-		IEObjectDescription typeDescription = typeScope.getContentByName(name);
-		if (typeDescription == null)
-			return null;
-		JvmType type = (JvmType) typeDescription.getEObjectOrProxy();
-		if (type.eIsProxy() || !(type instanceof JvmGenericType)) {
-			return null;
+	public Iterable<IEObjectDescription> getLocalElements(ISelector selector) {
+		if (selector instanceof ISelector.SelectByName) {
+			final QualifiedName qualifiedName = ((ISelector.SelectByName) selector).getName();
+			IEObjectDescription typeDescription = typeScope.getSingleElement(selector);
+			if (typeDescription == null)
+				return emptySet();
+			JvmType type = (JvmType) typeDescription.getEObjectOrProxy();
+			if (type.eIsProxy() || !(type instanceof JvmGenericType)) {
+				return emptySet();
+			}
+			final JvmGenericType castedType = (JvmGenericType) type;
+			if (castedType.isInterface()) {
+				return emptySet();
+			}
+			Iterable<JvmConstructor> constructors = new Iterable<JvmConstructor>() {
+				public Iterator<JvmConstructor> iterator() {
+					return castedType.getDeclaredConstructors().iterator();
+				}
+			};
+			return transform(constructors, new Function<JvmConstructor,IEObjectDescription>(){
+				public IEObjectDescription apply(JvmConstructor from) {
+					return EObjectDescription.create(qualifiedName, from);
+				}});
+		} else if (selector instanceof ISelector.SelectByEObject) {
+			EObject object = ((ISelector.SelectByEObject) selector).getEObject();
+				if (object instanceof JvmConstructor) {
+				final Set<IEObjectDescription> result = singleton(EObjectDescription.create(getQualifiedNameConverter().toQualifiedName(((JvmIdentifyableElement) object).getCanonicalName()), object));
+				return selector.applySelector(result);
+			}
+			return emptySet();
 		}
-		JvmGenericType castedType = (JvmGenericType) type;
-		if (castedType.isInterface()) {
-			return null;
-		}
-		Iterator<JvmConstructor> constructors = castedType.getDeclaredConstructors().iterator();
-		if (constructors.hasNext()) {
-			JvmConstructor constructor = constructors.next();
-			return EObjectDescription.create(name, constructor);
-		}
-		return null;
-	}
-	
-	@Override
-	public IEObjectDescription getContentByEObject(EObject object) {
-		if (object instanceof JvmConstructor) {
-			return EObjectDescription.create(getQualifiedNameConverter().toQualifiedName(((JvmConstructor) object).getCanonicalName()), object);
-		}
-		return null;
-	}
-	
-	@Override
-	protected Iterable<IEObjectDescription> internalGetContents() {
-		throw new UnsupportedOperationException();
+		return internalGetAllLocalElements(selector);
 	}
 
+	protected Iterable<IEObjectDescription> internalGetAllLocalElements(ISelector selector) {
+		throw new UnsupportedOperationException();
+	}
+	
 	public AbstractTypeScope getTypeScope() {
 		return typeScope;
 	}
@@ -73,7 +85,4 @@ public abstract class AbstractConstructorScope extends AbstractScope {
 		return getTypeScope().getQualifiedNameConverter();
 	}
 	
-	public IScope getOuterScope() {
-		return IScope.NULLSCOPE;
-	}
 }

@@ -7,25 +7,28 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.ignorecase;
 
-import java.util.Map;
-
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.impl.MapBasedScope;
+import org.eclipse.xtext.scoping.impl.MultimapBasedScope;
+
+import com.google.common.collect.Multimap;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * 
+ * it is assumed, that the keys of the given map are all lower case qualifiedNames.
+ * 
  */
-public class IgnoreCaseMapBasedScope extends MapBasedScope {
+public class IgnoreCaseMapBasedScope extends MultimapBasedScope {
 
-	public IgnoreCaseMapBasedScope(IScope parent, Map<QualifiedName, IEObjectDescription> descriptions) {
+	public IgnoreCaseMapBasedScope(IScope parent, Multimap<QualifiedName, IEObjectDescription> descriptions) {
 		super(parent, descriptions);
 	}
 	
 	@Override
-	protected IEObjectDescription getContentByNameImpl(QualifiedName qualifiedName) {
-		return super.getContentByNameImpl(qualifiedName.toLowerCase());
+	protected Object getKey(IEObjectDescription description) {
+		return description.getName().toLowerCase();
 	}
 
 }

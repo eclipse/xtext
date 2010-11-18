@@ -18,7 +18,7 @@ public class ImportNormalizerTest extends TestCase {
 
 	public void testNull() throws Exception {
 		try {
-			new ImportNormalizer(null, null);
+			new ImportNormalizer(null, true);
 			fail("Expected exception");
 		} catch (Exception e) {
 			assertTrue(e instanceof IllegalArgumentException);
@@ -31,18 +31,17 @@ public class ImportNormalizerTest extends TestCase {
 		QualifiedName xytextRelativeName = QualifiedName.create("xtext","ytext");
 
 		QualifiedName namespace = QualifiedName.create("org", "eclipse", "xtext");
-		ImportNormalizer importNormalizer = new ImportNormalizer(namespace, "*");
+		ImportNormalizer importNormalizer = new ImportNormalizer(namespace, false);
 		assertEquals(namespace, importNormalizer.resolve(xtextRelativeName));
 		assertEquals(null, importNormalizer.resolve(ytextRelativeName));
 		assertEquals(namespace.append(ytextRelativeName), importNormalizer.resolve(xytextRelativeName));
 		
-		QualifiedName namespaceWildCard = namespace.append("*");
-		ImportNormalizer wildCardImportNormalizer = new ImportNormalizer(namespaceWildCard, "*");
+		ImportNormalizer wildCardImportNormalizer = new ImportNormalizer(namespace, true);
 		assertEquals(namespace.append(xtextRelativeName), wildCardImportNormalizer.resolve(xtextRelativeName));
 		assertEquals(namespace.append(ytextRelativeName), wildCardImportNormalizer.resolve(ytextRelativeName));
 		assertEquals(namespace.append(ytextRelativeName), importNormalizer.resolve(xytextRelativeName));
 
-		ImportNormalizer xtextImportNormalizer = new ImportNormalizer(xtextRelativeName, "");
+		ImportNormalizer xtextImportNormalizer = new ImportNormalizer(xtextRelativeName, false);
 		assertEquals(xtextRelativeName, xtextImportNormalizer.resolve(xtextRelativeName));
 	}
 	
@@ -52,12 +51,12 @@ public class ImportNormalizerTest extends TestCase {
 		QualifiedName ytextFQN = namespace.skipLast(1).append("ytext");
 		QualifiedName xytextFQN = namespace.append("ytext");
 
-		ImportNormalizer importNormalizer = new ImportNormalizer(namespace, "*");
+		ImportNormalizer importNormalizer = new ImportNormalizer(namespace, false);
 		assertEquals(QualifiedName.create("Xtext"), importNormalizer.deresolve(xtextFQN));
 		assertEquals(null, importNormalizer.deresolve(ytextFQN));
 		assertEquals(QualifiedName.create("ytext"), importNormalizer.deresolve(xytextFQN));
 
-		ImportNormalizer wildCardImportNormalizer = new ImportNormalizer(namespace.append("*"), "*");
+		ImportNormalizer wildCardImportNormalizer = new ImportNormalizer(namespace, true);
 		assertEquals(QualifiedName.create("Xtext"), wildCardImportNormalizer.deresolve(xtextFQN));
 		assertEquals(null, wildCardImportNormalizer.deresolve(ytextFQN));
 		assertEquals(QualifiedName.create("ytext"), wildCardImportNormalizer.deresolve(xytextFQN));

@@ -23,6 +23,7 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSeri
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.util.EmfFormatter;
 
 import com.google.inject.Inject;
@@ -60,7 +61,7 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 	protected String getConvertedValue(String unconverted, CrossReference grammarElement) {
 		String ruleName = linkingHelper.getRuleNameFrom(grammarElement);
 		if (ruleName == null)
-			throw new IllegalStateException("Cound not determine targeted rule name for "
+			throw new IllegalStateException("Could not determine targeted rule name for "
 					+ EmfFormatter.objPath(grammarElement));
 		return valueConverter.toString(unconverted, ruleName);
 	}
@@ -69,10 +70,17 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 		IScope scope = scopeProvider.getScope(context, reference);
 		if (scope == null)
 			return null;
-		IEObjectDescription eObjectDescription = scope.getContentByEObject(object);
-		if (eObjectDescription != null)
-			return qualifiedNameConverter.toString(eObjectDescription.getName());
+		IEObjectDescription eObjectDescription = scope.getSingleElement(getSelector(object));
+		if (eObjectDescription != null) {
+			IEObjectDescription singleElement = scope.getSingleElement(new ISelector.SelectByName(eObjectDescription.getName()));
+			if (singleElement!=null && singleElement.getEObjectURI().equals(eObjectDescription.getEObjectURI()))
+				return qualifiedNameConverter.toString(eObjectDescription.getName());
+		}
 		return null;
+	}
+
+	protected ISelector getSelector(EObject object) {
+		return new ISelector.SelectByEObject(object);
 	}
 
 	public String serializeCrossRef(EObject context, CrossReference grammarElement, EObject target, AbstractNode node) {

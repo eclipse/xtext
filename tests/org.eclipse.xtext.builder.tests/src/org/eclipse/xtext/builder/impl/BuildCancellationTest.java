@@ -13,6 +13,7 @@ import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
@@ -50,7 +51,7 @@ public class BuildCancellationTest extends AbstractBuilderTest {
 	public void testCancellationTriggersFullBuild() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
-		IFolder folder = addSourceFolder(project, "src");
+		IFolder folder = project.getProject().getFolder("src");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
 		waitForAutoBuild();
@@ -67,7 +68,8 @@ public class BuildCancellationTest extends AbstractBuilderTest {
 			fail("Expected OperationCanceledException");
 		}
 		participant.reset();
-
+		ResourcesPlugin.getWorkspace().build(
+				IncrementalProjectBuilder.AUTO_BUILD, monitor());
 		waitForAutoBuild();
 		assertEquals(1, participant.getInvocationCount());
 		assertSame(BuildType.FULL, participant.getContext().getBuildType());

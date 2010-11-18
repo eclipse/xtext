@@ -1,0 +1,82 @@
+
+
+
+class Foo {
+  @Inject JavaBindings javaBindings;
+  
+  toString(EObject this) :
+  	switch(this) {
+  		case Entity : 'entity ${name}';
+  		case Datatype : 'datatype ${name}';
+  		case Service : 'service ${name} ${if (!superTypes.isEmpty)} extends ${superTypes.name} ${endif}';
+  		case Entity : 'entity ${name}';
+  	}
+  ; 
+  
+  private String x;
+  <<if foo>> 
+  	private String foo;
+  <<else>> 
+  	pivate String bar;
+  <<end>>
+  
+  "foobar <<
+  		if foo>> bar <<else>> zonk <<end>> 
+  fasdf a "
+}
+
+
+foo(String x) :
+	if (x==null)
+		1
+	else 
+		2
+;
+
+foobar
+  	bar 
+  fasdf a 
+
+"  <<
+>>  <<
+>>  "
+
+" <<23>> foo"
+
+generateFoo(Entity this)"
+package org.eclipse.xtext.xtend2;
+
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
+import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
+
+import com.google.inject.Injector;
+
+/**
+ * Initialization support for running Xtext languages 
+ * without equinox extension registry
+ */
+public class <<this.name>> extends Xtend2StandaloneSetupGenerated{
+	
+	@Override
+	public Injector createInjectorAndDoEMFRegistration() {
+		new XbaseStandaloneSetup().createInjectorAndDoEMFRegistration();
+		EPackage.Registry.INSTANCE.put(Xtend2Package.eINSTANCE.getNsURI(),Xtend2Package.eINSTANCE);
+		return super.createInjectorAndDoEMFRegistration();
+	}
+	<<IF foo>>
+		public static void doSetup() {
+			<<FOREACH ccc>>
+				new Xtend2StandaloneSetup().createInjectorAndDoEMFRegistration();
+				<<fields.collect(e|varDeclaration(e)).toString('\n')>>
+			<<ENDFOREACH>>
+			new Xtend2StandaloneSetup().createInjectorAndDoEMFRegistration();
+			new Foo(<<fields.collect(e|varDeclaration(e)).toString('\n')>>
+			<<complizierteVar()>>
+		}
+	<<ENDIF>>
+}
+<<end
+
+
+

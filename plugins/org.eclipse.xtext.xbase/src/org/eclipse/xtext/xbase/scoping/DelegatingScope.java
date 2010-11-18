@@ -5,18 +5,20 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.scoping.newapi;
+package org.eclipse.xtext.xbase.scoping;
 
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.ISelector;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class DelegatingScope implements INewScope {
+public class DelegatingScope implements IScope {
 	
-	private INewScope delegate = INewScope.NULL_SCOPE;
+	private IScope delegate = IScope.NULLSCOPE;
 	
-	public void setDelegate(INewScope delegate) {
+	public void setDelegate(IScope delegate) {
 		this.delegate = delegate;
 	}
 
@@ -24,13 +26,12 @@ public class DelegatingScope implements INewScope {
 		return delegate.getSingleElement(selector);
 	}
 
-	public Iterable<? extends IEObjectDescription> getElements(ISelector selector) {
+	public Iterable<IEObjectDescription> getElements(ISelector selector) {
 		return delegate.getElements(selector);
 	}
-	
+
 	@Override
 	public String toString() {
-		return getClass().getSimpleName()+" -> "+(delegate!=null?delegate.toString():"<no delegate>");
+		return getClass().getSimpleName()+" -> "+delegate;
 	}
-
 }

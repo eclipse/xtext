@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
-import java.util.Iterator;
+import static com.google.common.collect.Iterables.*;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -19,6 +19,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.ResourceSetReferencingResourceSet;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
@@ -54,6 +55,8 @@ public class ResourceSetGlobalScopeProvider extends AbstractExportedObjectsAware
 			}
 		});
 		final Iterable<IResourceDescription> filteredDescriptions = Iterables.filter(descriptions, Predicates.notNull());
+		
+		
 		Iterable<Iterable<IEObjectDescription>> objectDescriptionsIter = Iterables.transform(filteredDescriptions, new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
 			public Iterable<IEObjectDescription> apply(IResourceDescription from) {
 				return from.getExportedObjects(reference.getEReferenceType());
@@ -61,23 +64,19 @@ public class ResourceSetGlobalScopeProvider extends AbstractExportedObjectsAware
 		});
 		Iterable<IEObjectDescription> objectDescriptions = Iterables.concat(objectDescriptionsIter);
 		return new SimpleScope(parent, objectDescriptions) {
+			
 			@Override
-			public IEObjectDescription getContentByName(QualifiedName qualifiedName) {
-				IEObjectDescription result = null;
-				for(IResourceDescription description: filteredDescriptions) {
-					Iterable<IEObjectDescription> objects = description.getExportedObjects(reference.getEReferenceType(), qualifiedName);
-					Iterator<IEObjectDescription> iter = objects.iterator();
-					if (iter.hasNext()) {
-						if (result != null)
-							return getOuterScope().getContentByName(qualifiedName);
-						result = iter.next();
-						if (iter.hasNext())
-							return getOuterScope().getContentByName(qualifiedName);
-					}
+			public Iterable<IEObjectDescription> getLocalElements(ISelector selector) {
+				if (selector instanceof ISelector.SelectByName) {
+					final QualifiedName name = ((ISelector.SelectByName) selector).getName();
+					Iterable<Iterable<IEObjectDescription>> objectDescriptionsIter = transform(filteredDescriptions, new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
+						public Iterable<IEObjectDescription> apply(IResourceDescription from) {
+							return from.getExportedObjects(reference.getEReferenceType(), name);
+						}
+					});
+					return concat(objectDescriptionsIter);
 				}
-				if (result != null)
-					return result;
-				return getOuterScope().getContentByName(qualifiedName);
+				return super.getLocalElements(selector);
 			}
 		};
 	}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,34 +7,55 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
+import static com.google.common.collect.Iterables.*;
+
+import java.util.Set;
+
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.ISelector;
+
+import com.google.common.base.Function;
+import com.google.common.collect.Sets;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class SimpleScope extends AbstractScope {
+public class SimpleScope extends AbstractScope implements Function<IEObjectDescription, IEObjectDescription> {
 	
-	private final IScope outer;
-
-	private final Iterable<IEObjectDescription> elements;
-
-	public SimpleScope(final IScope outer, final Iterable<IEObjectDescription> elements) {
-		this.outer = outer;
-		this.elements = elements;
+	protected Iterable<IEObjectDescription> descriptions;
+	
+	public SimpleScope(IScope parent, Iterable<IEObjectDescription> descriptions) {
+		super(parent);
+		this.descriptions = descriptions;
+	}
+	public SimpleScope(Iterable<IEObjectDescription> descriptions) {
+		this(IScope.NULLSCOPE,descriptions);
 	}
 	
-	public SimpleScope(final Iterable<IEObjectDescription> elements) {
-		this(IScope.NULLSCOPE, elements);
+	protected Set<Object> shadowingIndex = null;
+	
+	@Override
+	protected Iterable<IEObjectDescription> trackKeys(Iterable<IEObjectDescription> localElements) {
+		shadowingIndex = Sets.newHashSet();
+		return transform(localElements, this);
 	}
-
-	public IScope getOuterScope() {
-		return outer;
+	
+	@Override
+	protected boolean isShadowed(IEObjectDescription fromParent) {
+		boolean filtered = shadowingIndex.contains(getKey(fromParent));
+		return filtered;
 	}
 
 	@Override
-	public Iterable<IEObjectDescription> internalGetContents() {
-		return elements;
+	public Iterable<IEObjectDescription> getLocalElements(final ISelector selector) {
+		return selector.applySelector(descriptions);
 	}
+	
+	public IEObjectDescription apply(IEObjectDescription from) {
+		shadowingIndex.add(getKey(from));
+		return from;
+	}
+
 
 }

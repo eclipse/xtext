@@ -16,8 +16,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.index.IndexTestLanguageStandaloneSetup;
@@ -39,6 +37,7 @@ import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.collect.Iterables;
@@ -91,7 +90,7 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 
 		IScope scope = scopeProvider.getScope(resource.getContents().get(0), IndexTestLanguagePackage.eINSTANCE
 				.getFile_Elements());
-		List<QualifiedName> names = toListOfNames(scope.getAllContents());
+		List<QualifiedName> names = toListOfNames(scope.getElements(ISelector.SELECT_ALL));
 		assertEquals(names.toString(), 5, names.size());
 		assertTrue(names.contains(nameConverter.toQualifiedName("Person")));
 		assertTrue(names.contains(nameConverter.toQualifiedName("String")));
@@ -101,8 +100,13 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 	}
 
 	public void testRelativeContext() throws Exception {
-		final XtextResource resource = getResource(new StringInputStream("stuff { " + "  baz { "
-				+ "    datatype String " + "  } " + "  entity Person {}" + "}"), URI
+		final XtextResource resource = getResource(new StringInputStream(
+				  "stuff { " 
+				+ "  baz { "
+				+ "    datatype String " 
+				+ "  } " 
+				+ "  entity Person {}" 
+				+ "}"), URI
 				.createURI("relative.indextestlanguage"));
 		Iterable<EObject> allContents = new Iterable<EObject>() {
 			public Iterator<EObject> iterator() {
@@ -112,13 +116,20 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 		Entity entity = filter(allContents, Entity.class).iterator().next();
 
 		IScope scope = scopeProvider.getScope(entity, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("baz.String")));
-		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("stuff.baz.String")));
+		assertNotNull(scope.getSingleElement(new ISelector.SelectByName(nameConverter.toQualifiedName("baz.String"))));
+		assertNotNull(scope.getSingleElement(new ISelector.SelectByName(nameConverter.toQualifiedName("stuff.baz.String"))));
 	}
 
 	public void testRelativePath() throws Exception {
-		final XtextResource resource = getResource(new StringInputStream("stuff { " + "  import baz.*" + "  baz { "
-				+ "    datatype String " + "  } " + "  entity Person {" + "  }" + "}"), URI
+		final XtextResource resource = getResource(new StringInputStream(
+				  "stuff { " 
+				+ "  import baz.*" 
+				+ "  baz { "
+				+ "    datatype String " 
+				+ "  } " 
+				+ "  entity Person {" 
+				+ "  }" 
+				+ "}"), URI
 				.createURI("relative.indextestlanguage"));
 		Iterable<EObject> allContents = new Iterable<EObject>() {
 			public Iterator<EObject> iterator() {
@@ -128,59 +139,9 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 		Entity entity = filter(allContents, Entity.class).iterator().next();
 
 		IScope scope = scopeProvider.getScope(entity, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("String")));
-		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("baz.String")));
-		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("stuff.baz.String")));
-	}
-
-	public void testReexports() throws Exception {
-		final XtextResource resource = getResource(new StringInputStream(
-				"stuff { " 
-				+ "  import baz.*" 
-				+ "  baz { "
-				+ "    stuff {" 
-				+ "      import stuff.*" 
-				+ "      datatype String "
-				+ "    }"
-				+ "    entity Person {}"
-				+ "  }"
-				+ "}"), URI.createURI("relative.indextestlanguage"));
-		Iterable<EObject> allContents = new Iterable<EObject>() {
-			public Iterator<EObject> iterator() {
-				return resource.getAllContents();
-			}
-		};
-		Datatype datatype = filter(allContents, Datatype.class).iterator().next();
-
-		EReference propertyType = EcoreFactory.eINSTANCE.createEReference();
-		propertyType.setEType(IndexTestLanguagePackage.eINSTANCE.getEntity());
-
-		IScope scope = scopeProvider.getScope(datatype, propertyType);
-		List<QualifiedName> names = toListOfNames(scope.getContents());
-
-		assertEquals(names.toString(), 1, names.size());
-		assertTrue(names.toString(), names.contains(nameConverter.toQualifiedName("baz.Person")));
-
-		scope = scope.getOuterScope(); // baz {
-		names = toListOfNames(scope.getContents());
-		assertEquals(names.toString(), 1, names.size());
-		assertTrue(names.toString(), names.contains(nameConverter.toQualifiedName("Person")));
-
-		scope = scope.getOuterScope(); // stuff {
-		names = toListOfNames(scope.getContents());
-		assertEquals(names.toString(), 1, names.size());
-		assertTrue(names.contains(nameConverter.toQualifiedName("baz.Person")));
-
-		scope = scope.getOuterScope(); // import baz.*
-		names = toListOfNames(scope.getContents());
-		assertEquals(names.toString(), 1, names.size());
-		assertTrue(names.contains(nameConverter.toQualifiedName("Person")));
-
-		scope = scope.getOuterScope(); // global scope
-		names = toListOfNames(scope.getContents());
-		assertEquals(names.toString(), 1, names.size());
-		assertTrue(names.contains(nameConverter.toQualifiedName("stuff.baz.Person")));
-
+		assertNotNull(scope.getSingleElement(new ISelector.SelectByName(nameConverter.toQualifiedName("String"))));
+		assertNotNull(scope.getSingleElement(new ISelector.SelectByName(nameConverter.toQualifiedName("baz.String"))));
+		assertNotNull(scope.getSingleElement(new ISelector.SelectByName(nameConverter.toQualifiedName("stuff.baz.String"))));
 	}
 
 	public void testReexports2() throws Exception {
@@ -195,9 +156,9 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 		Datatype datatype = filter(allContents, Datatype.class).iterator().next();
 
 		IScope scope = scopeProvider.getScope(datatype, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("D")));
-		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("E.D")));
-		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("A.B.D")));
+		assertNotNull(scope.getSingleElement(new ISelector.SelectByName(nameConverter.toQualifiedName("D"))));
+		assertNotNull(scope.getSingleElement(new ISelector.SelectByName(nameConverter.toQualifiedName("E.D"))));
+		assertNotNull(scope.getSingleElement(new ISelector.SelectByName(nameConverter.toQualifiedName("A.B.D"))));
 	}
 
 	public void testLocalElementsNotFromIndex() throws Exception {
@@ -210,12 +171,19 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 		};
 		Datatype datatype = filter(allContents, Datatype.class).iterator().next();
 		IScope scope = scopeProvider.getScope(datatype, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("A.B.D")));
+		assertNotNull(scope.getSingleElement(new ISelector.SelectByName(nameConverter.toQualifiedName("A.B.D"))));
 	}
 
 	public void testImportsWithoutWildcard() throws Exception {
-		final XtextResource resource = getResource(new StringInputStream("foo { " + "  import bar.Bar"
-				+ "  entity Foo {" + "  }" + "}" + "bar {" + "  entity Bar{}" + "}"), URI
+		final XtextResource resource = getResource(new StringInputStream(
+				  "foo { " 
+				+ "  import bar.Bar"
+				+ "  entity Foo {" 
+				+ "  }" 
+				+ "}" 
+				+ "bar {" 
+				+ "  entity Bar{}" 
+				+ "}"), URI
 				.createURI("withoutwildcard.indextestlanguage"));
 		Iterable<EObject> allContents = new Iterable<EObject>() {
 			public Iterator<EObject> iterator() {
@@ -227,7 +195,7 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 		assertEquals("Foo", foo.getName());
 
 		IScope scope = scopeProvider.getScope(foo, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("Bar")));
+		assertNotNull(scope.getSingleElement(new ISelector.SelectByName(nameConverter.toQualifiedName("Bar"))));
 	}
 
 	public void testMultipleFiles() throws Exception {
@@ -247,7 +215,7 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 		assertEquals("Foo", foo.getName());
 
 		IScope scope = scopeProvider.getScope(foo, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("Bar")));
+		assertNotNull(scope.getSingleElement(new ISelector.SelectByName(nameConverter.toQualifiedName("Bar"))));
 	}
 
 	public void testResourceSetReferencingResourceSet() throws Exception {
@@ -270,8 +238,8 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 		assertEquals("Foo", foo.getName());
 
 		IScope scope = scopeProvider.getScope(foo, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("Bar")));
-		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("bar.Bar")));
+		assertNotNull(scope.getSingleElement(new ISelector.SelectByName(nameConverter.toQualifiedName("Bar"))));
+		assertNotNull(scope.getSingleElement(new ISelector.SelectByName(nameConverter.toQualifiedName("bar.Bar"))));
 	}
 
 	public void testResourceSetReferencingResourceSet2() throws Exception {
@@ -292,8 +260,8 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 		Entity baz = getEntityByName(res2,"Baz");
 
 		IScope scope = scopeProvider.getScope(baz, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("foo.Foo")));
-		assertNull(scope.getContentByName(nameConverter.toQualifiedName("bar.Bar")));
+		assertNotNull(scope.getSingleElement(new ISelector.SelectByName(nameConverter.toQualifiedName("foo.Foo"))));
+		assertNull(scope.getSingleElement(new ISelector.SelectByName(nameConverter.toQualifiedName("bar.Bar"))));
 	}
 
 	protected Entity getEntityByName(final Resource res2, String name) {
@@ -310,40 +278,7 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 		return null;
 	}
 	
-	/**
-	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=317971
-	 */
-	public void testBug317971() throws Exception {
-		ResourceSetReferencingResourceSetImpl rs = new ResourceSetReferencingResourceSetImpl();
-		Resource res = rs.createResource(URI.createURI("file2.indextestlanguage"));
-		res.load(new StringInputStream(
-				"bar { " +
-				"  import bar.x.* " +
-				"  import bar.x.y.* " +
-				"  x { " +
-				"    y {" +
-				"      entity Z{}" +
-				"    } " +
-				"  } " +
-				"  entity Bar{}" +
-				"}"), null);
-		assertTrue(res.getErrors().toString(), res.getErrors().isEmpty());
-		
-		Entity baz = getEntityByName(res,"Bar");
-		IScope scope = scopeProvider.getScope(baz, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		Iterator<IEObjectDescription> contents = scope.getAllContents().iterator();
-		// local block
-		assertEquals("x.y.Z",contents.next().getName().toString());
-		assertEquals("Bar",contents.next().getName().toString());
-		// imports
-		assertEquals("Z",contents.next().getName().toString());
-		assertEquals("y.Z",contents.next().getName().toString());
-		// global scope
-		assertEquals("bar.x.y.Z",contents.next().getName().toString());
-		assertEquals("bar.Bar",contents.next().getName().toString());
-	}
-
-	private List<QualifiedName> toListOfNames(Iterable<IEObjectDescription> elements) {
+	protected List<QualifiedName> toListOfNames(Iterable<IEObjectDescription> elements) {
 		List<QualifiedName> result = Lists.newArrayList();
 		for (IEObjectDescription e : elements) {
 			if (!result.contains(e.getName()))
