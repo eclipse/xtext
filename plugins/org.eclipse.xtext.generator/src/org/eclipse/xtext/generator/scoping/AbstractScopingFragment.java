@@ -15,10 +15,9 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Naming;
-import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.ignorecase.IgnoreCaseResourceDescriptionManager;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.IgnoreCaseLinking;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 
 /**
@@ -55,10 +54,10 @@ public abstract class AbstractScopingFragment extends AbstractGeneratorFragment 
 					AbstractDeclarativeScopeProvider.class.getName() + ".NAMED_DELEGATE" +
 					")).to("+ getLocalScopeProvider().getName() + ".class)")
 			.addTypeToType(IGlobalScopeProvider.class.getName(), getGlobalScopeProvider().getName());
-		if (isIgnoreCase()) {
-			factory = factory
-				.addTypeToType(IResourceDescription.Manager.class.getName(), IgnoreCaseResourceDescriptionManager.class.getName());
-		}
+		factory.addConfiguredBinding("Boolean.TYPE", 
+					"binder.bind(Boolean.TYPE)" +
+					".annotatedWith("+IgnoreCaseLinking.class.getName()+".class)" +
+					".to(" + isIgnoreCase() + ")");
 		return factory.getBindings();
 	}
 	

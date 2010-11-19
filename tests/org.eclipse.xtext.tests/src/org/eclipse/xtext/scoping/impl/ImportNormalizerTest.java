@@ -51,8 +51,13 @@ public class ImportNormalizerTest extends TestCase {
 		QualifiedName ytextFQN = namespace.skipLast(1).append("ytext");
 		QualifiedName xytextFQN = namespace.append("ytext");
 
-		ImportNormalizer importNormalizer = new ImportNormalizer(namespace, false);
+		ImportNormalizer importNormalizer = new ImportNormalizer(xtextFQN, false);
 		assertEquals(QualifiedName.create("Xtext"), importNormalizer.deresolve(xtextFQN));
+		assertEquals(null, importNormalizer.deresolve(ytextFQN));
+		assertEquals(null, importNormalizer.deresolve(xytextFQN));
+		
+		importNormalizer = new ImportNormalizer(xytextFQN, false);
+		assertEquals(null, importNormalizer.deresolve(xtextFQN));
 		assertEquals(null, importNormalizer.deresolve(ytextFQN));
 		assertEquals(QualifiedName.create("ytext"), importNormalizer.deresolve(xytextFQN));
 

@@ -47,7 +47,7 @@ import com.google.inject.internal.Lists;
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
+public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextTests {
 
 	private ImportedNamespaceAwareLocalScopeProvider scopeProvider;
 	private ResourceSetGlobalScopeProvider globalScopeProvider;

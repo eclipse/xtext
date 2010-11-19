@@ -23,7 +23,7 @@ public class JvmFeatureDescription extends EObjectDescription {
 	private String shadowingString;
 
 	public JvmFeatureDescription(QualifiedName qualifiedName, JvmFeature element, TypeArgumentContext context, String shadowingString) {
-		super(qualifiedName, element, Collections.<String,String>emptyMap());
+		super(qualifiedName, element, Collections.<String,String>emptyMap(),false);
 		this.context = context;
 		this.shadowingString = shadowingString;
 	}

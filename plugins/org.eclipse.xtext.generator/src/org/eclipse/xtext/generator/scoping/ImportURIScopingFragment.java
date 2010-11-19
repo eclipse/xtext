@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.scoping;
 
-import org.eclipse.xtext.resource.ignorecase.IgnoreCaseImportUriGlobalScopeProvider;
-import org.eclipse.xtext.resource.ignorecase.IgnoreCaseSimpleLocalScopeProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
@@ -21,15 +19,11 @@ public class ImportURIScopingFragment extends AbstractScopingFragment {
 
 	@Override
 	protected Class<? extends IScopeProvider> getLocalScopeProvider() {
-		return isIgnoreCase() 
-			? IgnoreCaseSimpleLocalScopeProvider.class
-			: SimpleLocalScopeProvider.class;
+		return SimpleLocalScopeProvider.class;
 	}
 	
 	@Override
 	protected Class<? extends IGlobalScopeProvider> getGlobalScopeProvider() {
-		return isIgnoreCase() 
-			? IgnoreCaseImportUriGlobalScopeProvider.class
-			: ImportUriGlobalScopeProvider.class;
+		return ImportUriGlobalScopeProvider.class;
 	}
 }
