@@ -110,12 +110,11 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add(
+       		addWithLastConsumed(
        			$current, 
        			"ycs",
         		lv_ycs_1_0, 
-        		"Yc", 
-        		lastConsumedNode);
+        		"Yc");
 	    }
 
 )
@@ -165,12 +164,11 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add(
+       		addWithLastConsumed(
        			$current, 
        			"ys",
         		lv_ys_4_0, 
-        		"CharY", 
-        		lastConsumedNode);
+        		"CharY");
 	    }
 
 )
@@ -184,12 +182,11 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add(
+       		addWithLastConsumed(
        			$current, 
        			"as",
         		lv_as_5_0, 
-        		"CharA", 
-        		lastConsumedNode);
+        		"CharA");
 	    }
 
 )
@@ -224,12 +221,11 @@ ruleAb returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getAbRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"x",
         		lv_x_0_0, 
-        		"CharA", 
-        		lastConsumedNode);
+        		"CharA");
 	    }
 
 )
@@ -243,12 +239,11 @@ ruleAb returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getAbRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"y",
         		lv_y_1_0, 
-        		"Charb", 
-        		lastConsumedNode);
+        		"Charb");
 	    }
 
 )
@@ -283,12 +278,11 @@ ruleXb returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getXbRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"x",
         		lv_x_0_0, 
-        		"CharX", 
-        		lastConsumedNode);
+        		"CharX");
 	    }
 
 )
@@ -302,12 +296,11 @@ ruleXb returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getXbRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"y",
         		lv_y_1_0, 
-        		"Charb", 
-        		lastConsumedNode);
+        		"Charb");
 	    }
 
 )

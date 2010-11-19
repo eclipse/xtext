@@ -141,7 +141,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "first", true, "a", lastConsumedNode);
+       		setWithLastConsumed($current, "first", true, "a");
 	    }
 
 )
@@ -169,7 +169,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "second", true, "b", lastConsumedNode);
+       		setWithLastConsumed($current, "second", true, "b");
 	    }
 
 )
@@ -220,7 +220,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "first", true, "a", lastConsumedNode);
+       		setWithLastConsumed($current, "first", true, "a");
 	    }
 
 )
@@ -248,7 +248,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "second", true, "b", lastConsumedNode);
+       		setWithLastConsumed($current, "second", true, "b");
 	    }
 
 )
@@ -276,7 +276,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "third", true, "c", lastConsumedNode);
+       		setWithLastConsumed($current, "third", true, "c");
 	    }
 
 )
@@ -304,7 +304,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "forth", true, "d", lastConsumedNode);
+       		setWithLastConsumed($current, "forth", true, "d");
 	    }
 
 )
@@ -355,7 +355,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "first", true, "a", lastConsumedNode);
+       		setWithLastConsumed($current, "first", true, "a");
 	    }
 
 )
@@ -383,7 +383,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "second", true, "b", lastConsumedNode);
+       		setWithLastConsumed($current, "second", true, "b");
 	    }
 
 )
@@ -433,7 +433,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "first", true, "a", lastConsumedNode);
+       		setWithLastConsumed($current, "first", true, "a");
 	    }
 
 )
@@ -461,7 +461,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "second", true, "b", lastConsumedNode);
+       		setWithLastConsumed($current, "second", true, "b");
 	    }
 
 )
@@ -512,7 +512,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "first", true, "a", lastConsumedNode);
+       		setWithLastConsumed($current, "first", true, "a");
 	    }
 
 )
@@ -540,7 +540,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "second", true, "b", lastConsumedNode);
+       		setWithLastConsumed($current, "second", true, "b");
 	    }
 
 )
@@ -591,7 +591,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "firstAsList", lv_firstAsList_25_0, "a", lastConsumedNode);
+       		addWithLastConsumed($current, "firstAsList", lv_firstAsList_25_0, "a");
 	    }
 
 )
@@ -619,7 +619,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "secondAsList", lv_secondAsList_26_0, "b", lastConsumedNode);
+       		addWithLastConsumed($current, "secondAsList", lv_secondAsList_26_0, "b");
 	    }
 
 )
@@ -670,7 +670,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "firstAsList", lv_firstAsList_29_0, "a", lastConsumedNode);
+       		addWithLastConsumed($current, "firstAsList", lv_firstAsList_29_0, "a");
 	    }
 
 )
@@ -698,7 +698,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "secondAsList", lv_secondAsList_30_0, "b", lastConsumedNode);
+       		addWithLastConsumed($current, "secondAsList", lv_secondAsList_30_0, "b");
 	    }
 
 )
@@ -759,7 +759,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "first", true, "c", lastConsumedNode);
+       		setWithLastConsumed($current, "first", true, "c");
 	    }
 
 )
@@ -797,7 +797,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "second", true, "d", lastConsumedNode);
+       		setWithLastConsumed($current, "second", true, "d");
 	    }
 
 )
@@ -848,7 +848,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "firstAsList", lv_firstAsList_41_0, "a", lastConsumedNode);
+       		addWithLastConsumed($current, "firstAsList", lv_firstAsList_41_0, "a");
 	    }
 
 )
@@ -876,7 +876,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "secondAsList", lv_secondAsList_42_0, "b", lastConsumedNode);
+       		addWithLastConsumed($current, "secondAsList", lv_secondAsList_42_0, "b");
 	    }
 
 )
@@ -927,7 +927,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "firstAsList", lv_firstAsList_45_0, "a", lastConsumedNode);
+       		addWithLastConsumed($current, "firstAsList", lv_firstAsList_45_0, "a");
 	    }
 
 )
@@ -955,7 +955,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "secondAsList", lv_secondAsList_46_0, "b", lastConsumedNode);
+       		addWithLastConsumed($current, "secondAsList", lv_secondAsList_46_0, "b");
 	    }
 
 )
@@ -1006,7 +1006,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "first", true, "a", lastConsumedNode);
+       		setWithLastConsumed($current, "first", true, "a");
 	    }
 
 )
@@ -1034,7 +1034,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "second", true, "b", lastConsumedNode);
+       		setWithLastConsumed($current, "second", true, "b");
 	    }
 
 )
@@ -1085,7 +1085,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "firstAsList", lv_firstAsList_53_0, "a", lastConsumedNode);
+       		addWithLastConsumed($current, "firstAsList", lv_firstAsList_53_0, "a");
 	    }
 
 )
@@ -1113,7 +1113,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "secondAsList", lv_secondAsList_54_0, "b", lastConsumedNode);
+       		addWithLastConsumed($current, "secondAsList", lv_secondAsList_54_0, "b");
 	    }
 
 )
@@ -1158,7 +1158,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "firstAsList", lv_firstAsList_56_0, "a", lastConsumedNode);
+       		addWithLastConsumed($current, "firstAsList", lv_firstAsList_56_0, "a");
 	    }
 
 )
@@ -1186,7 +1186,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "secondAsList", lv_secondAsList_57_0, "b", lastConsumedNode);
+       		addWithLastConsumed($current, "secondAsList", lv_secondAsList_57_0, "b");
 	    }
 
 )
@@ -1237,7 +1237,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "firstAsList", lv_firstAsList_60_0, "a", lastConsumedNode);
+       		addWithLastConsumed($current, "firstAsList", lv_firstAsList_60_0, "a");
 	    }
 
 )
@@ -1265,7 +1265,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "secondAsList", lv_secondAsList_61_0, "b", lastConsumedNode);
+       		addWithLastConsumed($current, "secondAsList", lv_secondAsList_61_0, "b");
 	    }
 
 )
@@ -1296,7 +1296,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "firstAsList", lv_firstAsList_62_0, "a", lastConsumedNode);
+       		addWithLastConsumed($current, "firstAsList", lv_firstAsList_62_0, "a");
 	    }
 
 )
@@ -1312,7 +1312,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "secondAsList", lv_secondAsList_63_0, "b", lastConsumedNode);
+       		addWithLastConsumed($current, "secondAsList", lv_secondAsList_63_0, "b");
 	    }
 
 )
@@ -1362,7 +1362,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "firstAsList", lv_firstAsList_67_0, "a", lastConsumedNode);
+       		addWithLastConsumed($current, "firstAsList", lv_firstAsList_67_0, "a");
 	    }
 
 )
@@ -1390,7 +1390,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "secondAsList", lv_secondAsList_68_0, "b", lastConsumedNode);
+       		addWithLastConsumed($current, "secondAsList", lv_secondAsList_68_0, "b");
 	    }
 
 )
@@ -1447,7 +1447,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "thirdAsList", lv_thirdAsList_70_0, "c", lastConsumedNode);
+       		addWithLastConsumed($current, "thirdAsList", lv_thirdAsList_70_0, "c");
 	    }
 
 )
@@ -1475,7 +1475,7 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "forthAsList", lv_forthAsList_71_0, "d", lastConsumedNode);
+       		addWithLastConsumed($current, "forthAsList", lv_forthAsList_71_0, "d");
 	    }
 
 )
@@ -1634,7 +1634,7 @@ ruleNestedModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getNestedModelRule());
 	        }
-       		set($current, "first", true, "a", lastConsumedNode);
+       		setWithLastConsumed($current, "first", true, "a");
 	    }
 
 )
@@ -1662,7 +1662,7 @@ ruleNestedModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getNestedModelRule());
 	        }
-       		set($current, "second", true, "b", lastConsumedNode);
+       		setWithLastConsumed($current, "second", true, "b");
 	    }
 
 )
@@ -2823,7 +2823,7 @@ ruleUnorderedSerialization returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getUnorderedSerializationRule());
 	        }
-       		set($current, "first", true, "a", lastConsumedNode);
+       		setWithLastConsumed($current, "first", true, "a");
 	    }
 
 )
@@ -2851,7 +2851,7 @@ ruleUnorderedSerialization returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getUnorderedSerializationRule());
 	        }
-       		set($current, "second", true, "b", lastConsumedNode);
+       		setWithLastConsumed($current, "second", true, "b");
 	    }
 
 )
@@ -2879,7 +2879,7 @@ ruleUnorderedSerialization returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getUnorderedSerializationRule());
 	        }
-       		set($current, "third", true, "c", lastConsumedNode);
+       		setWithLastConsumed($current, "third", true, "c");
 	    }
 
 )
@@ -2907,7 +2907,7 @@ ruleUnorderedSerialization returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getUnorderedSerializationRule());
 	        }
-       		set($current, "forth", true, "d", lastConsumedNode);
+       		setWithLastConsumed($current, "forth", true, "d");
 	    }
 
 )
@@ -2958,7 +2958,7 @@ ruleUnorderedSerialization returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getUnorderedSerializationRule());
 	        }
-       		add($current, "firstAsList", lv_firstAsList_9_0, "a", lastConsumedNode);
+       		addWithLastConsumed($current, "firstAsList", lv_firstAsList_9_0, "a");
 	    }
 
 )
@@ -2986,7 +2986,7 @@ ruleUnorderedSerialization returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getUnorderedSerializationRule());
 	        }
-       		add($current, "secondAsList", lv_secondAsList_10_0, "b", lastConsumedNode);
+       		addWithLastConsumed($current, "secondAsList", lv_secondAsList_10_0, "b");
 	    }
 
 )
@@ -3037,7 +3037,7 @@ ruleUnorderedSerialization returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getUnorderedSerializationRule());
 	        }
-       		add($current, "firstAsList", lv_firstAsList_13_0, "a", lastConsumedNode);
+       		addWithLastConsumed($current, "firstAsList", lv_firstAsList_13_0, "a");
 	    }
 
 )
@@ -3065,7 +3065,7 @@ ruleUnorderedSerialization returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getUnorderedSerializationRule());
 	        }
-       		set($current, "second", true, "b", lastConsumedNode);
+       		setWithLastConsumed($current, "second", true, "b");
 	    }
 
 )

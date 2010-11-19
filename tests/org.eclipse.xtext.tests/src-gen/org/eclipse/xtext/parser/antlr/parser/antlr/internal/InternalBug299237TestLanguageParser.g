@@ -89,12 +89,11 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )

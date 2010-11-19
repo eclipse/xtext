@@ -4,7 +4,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -89,7 +88,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleModule"
-    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:71:1: entryRuleModule returns [EObject current=null] : iv_ruleModule= ruleModule EOF ;
+    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:70:1: entryRuleModule returns [EObject current=null] : iv_ruleModule= ruleModule EOF ;
     public final EObject entryRuleModule() throws RecognitionException {
         EObject current = null;
 
@@ -97,10 +96,10 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:72:2: (iv_ruleModule= ruleModule EOF )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:73:2: iv_ruleModule= ruleModule EOF
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:71:2: (iv_ruleModule= ruleModule EOF )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:72:2: iv_ruleModule= ruleModule EOF
             {
-             currentNode = createCompositeNode(grammarAccess.getModuleRule(), currentNode); 
+             newCompositeNode(grammarAccess.getModuleRule()); 
             pushFollow(FOLLOW_ruleModule_in_entryRuleModule75);
             iv_ruleModule=ruleModule();
 
@@ -125,7 +124,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleModule"
-    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:80:1: ruleModule returns [EObject current=null] : (otherlv_0= 'module' ( (lv_name_1_0= RULE_ID ) ) ( (lv_imports_2_0= ruleImport ) )* ( (lv_statements_3_0= ruleStatement ) )* ) ;
+    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:79:1: ruleModule returns [EObject current=null] : (otherlv_0= 'module' ( (lv_name_1_0= RULE_ID ) ) ( (lv_imports_2_0= ruleImport ) )* ( (lv_statements_3_0= ruleStatement ) )* ) ;
     public final EObject ruleModule() throws RecognitionException {
         EObject current = null;
 
@@ -136,44 +135,38 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
         EObject lv_statements_3_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:85:6: ( (otherlv_0= 'module' ( (lv_name_1_0= RULE_ID ) ) ( (lv_imports_2_0= ruleImport ) )* ( (lv_statements_3_0= ruleStatement ) )* ) )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:86:1: (otherlv_0= 'module' ( (lv_name_1_0= RULE_ID ) ) ( (lv_imports_2_0= ruleImport ) )* ( (lv_statements_3_0= ruleStatement ) )* )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:82:28: ( (otherlv_0= 'module' ( (lv_name_1_0= RULE_ID ) ) ( (lv_imports_2_0= ruleImport ) )* ( (lv_statements_3_0= ruleStatement ) )* ) )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:83:1: (otherlv_0= 'module' ( (lv_name_1_0= RULE_ID ) ) ( (lv_imports_2_0= ruleImport ) )* ( (lv_statements_3_0= ruleStatement ) )* )
             {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:86:1: (otherlv_0= 'module' ( (lv_name_1_0= RULE_ID ) ) ( (lv_imports_2_0= ruleImport ) )* ( (lv_statements_3_0= ruleStatement ) )* )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:86:3: otherlv_0= 'module' ( (lv_name_1_0= RULE_ID ) ) ( (lv_imports_2_0= ruleImport ) )* ( (lv_statements_3_0= ruleStatement ) )*
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:83:1: (otherlv_0= 'module' ( (lv_name_1_0= RULE_ID ) ) ( (lv_imports_2_0= ruleImport ) )* ( (lv_statements_3_0= ruleStatement ) )* )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:83:3: otherlv_0= 'module' ( (lv_name_1_0= RULE_ID ) ) ( (lv_imports_2_0= ruleImport ) )* ( (lv_statements_3_0= ruleStatement ) )*
             {
             otherlv_0=(Token)match(input,12,FOLLOW_12_in_ruleModule122); 
 
-                	createLeafNode(otherlv_0, grammarAccess.getModuleAccess().getModuleKeyword_0(), null);
+                	newLeafNode(otherlv_0, grammarAccess.getModuleAccess().getModuleKeyword_0());
                 
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:90:1: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:91:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:87:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:88:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:91:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:92:3: lv_name_1_0= RULE_ID
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:88:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:89:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModule139); 
 
-            			createLeafNode(lv_name_1_0, grammarAccess.getModuleAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+            			newLeafNode(lv_name_1_0, grammarAccess.getModuleAccess().getNameIDTerminalRuleCall_1_0()); 
             		
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.getModuleRule().getType().getClassifier());
-            	            associateNodeWithAstElement(currentNode, current);
+            	            current = createModelElement(grammarAccess.getModuleRule());
             	        }
-            	        try {
-            	       		set(
-            	       			current, 
-            	       			"name",
-            	        		lv_name_1_0, 
-            	        		"ID", 
-            	        		lastConsumedNode);
-            	        } catch (ValueConverterException vce) {
-            				handleValueConverterException(vce);
-            	        }
+                   		setWithLastConsumed(
+                   			current, 
+                   			"name",
+                    		lv_name_1_0, 
+                    		"ID");
             	    
 
             }
@@ -181,7 +174,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:114:2: ( (lv_imports_2_0= ruleImport ) )*
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:105:2: ( (lv_imports_2_0= ruleImport ) )*
             loop1:
             do {
                 int alt1=2;
@@ -194,13 +187,13 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:115:1: (lv_imports_2_0= ruleImport )
+            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:106:1: (lv_imports_2_0= ruleImport )
             	    {
-            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:115:1: (lv_imports_2_0= ruleImport )
-            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:116:3: lv_imports_2_0= ruleImport
+            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:106:1: (lv_imports_2_0= ruleImport )
+            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:107:3: lv_imports_2_0= ruleImport
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.getModuleAccess().getImportsImportParserRuleCall_2_0(), currentNode); 
+            	    	        newCompositeNode(grammarAccess.getModuleAccess().getImportsImportParserRuleCall_2_0()); 
             	    	    
             	    pushFollow(FOLLOW_ruleImport_in_ruleModule165);
             	    lv_imports_2_0=ruleImport();
@@ -209,20 +202,14 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.getModuleRule().getType().getClassifier());
-            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
+            	    	            current = createModelElementForParent(grammarAccess.getModuleRule());
             	    	        }
-            	    	        try {
-            	    	       		add(
-            	    	       			current, 
-            	    	       			"imports",
-            	    	        		lv_imports_2_0, 
-            	    	        		"Import", 
-            	    	        		currentNode);
-            	    	        } catch (ValueConverterException vce) {
-            	    				handleValueConverterException(vce);
-            	    	        }
-            	    	        currentNode = currentNode.getParent();
+            	           		add(
+            	           			current, 
+            	           			"imports",
+            	            		lv_imports_2_0, 
+            	            		"Import");
+            	    	        afterParserOrEnumRuleCall();
             	    	    
 
             	    }
@@ -236,7 +223,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:138:3: ( (lv_statements_3_0= ruleStatement ) )*
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:123:3: ( (lv_statements_3_0= ruleStatement ) )*
             loop2:
             do {
                 int alt2=2;
@@ -249,13 +236,13 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:139:1: (lv_statements_3_0= ruleStatement )
+            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:124:1: (lv_statements_3_0= ruleStatement )
             	    {
-            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:139:1: (lv_statements_3_0= ruleStatement )
-            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:140:3: lv_statements_3_0= ruleStatement
+            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:124:1: (lv_statements_3_0= ruleStatement )
+            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:125:3: lv_statements_3_0= ruleStatement
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.getModuleAccess().getStatementsStatementParserRuleCall_3_0(), currentNode); 
+            	    	        newCompositeNode(grammarAccess.getModuleAccess().getStatementsStatementParserRuleCall_3_0()); 
             	    	    
             	    pushFollow(FOLLOW_ruleStatement_in_ruleModule187);
             	    lv_statements_3_0=ruleStatement();
@@ -264,20 +251,14 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.getModuleRule().getType().getClassifier());
-            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
+            	    	            current = createModelElementForParent(grammarAccess.getModuleRule());
             	    	        }
-            	    	        try {
-            	    	       		add(
-            	    	       			current, 
-            	    	       			"statements",
-            	    	        		lv_statements_3_0, 
-            	    	        		"Statement", 
-            	    	        		currentNode);
-            	    	        } catch (ValueConverterException vce) {
-            	    				handleValueConverterException(vce);
-            	    	        }
-            	    	        currentNode = currentNode.getParent();
+            	           		add(
+            	           			current, 
+            	           			"statements",
+            	            		lv_statements_3_0, 
+            	            		"Statement");
+            	    	        afterParserOrEnumRuleCall();
             	    	    
 
             	    }
@@ -297,9 +278,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
             }
 
-             resetLookahead(); 
-                	lastConsumedNode = currentNode;
-                
+             leaveRule(); 
         }
          
             catch (RecognitionException re) { 
@@ -314,7 +293,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleImport"
-    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:170:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
+    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:149:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
     public final EObject entryRuleImport() throws RecognitionException {
         EObject current = null;
 
@@ -322,10 +301,10 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:171:2: (iv_ruleImport= ruleImport EOF )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:172:2: iv_ruleImport= ruleImport EOF
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:150:2: (iv_ruleImport= ruleImport EOF )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:151:2: iv_ruleImport= ruleImport EOF
             {
-             currentNode = createCompositeNode(grammarAccess.getImportRule(), currentNode); 
+             newCompositeNode(grammarAccess.getImportRule()); 
             pushFollow(FOLLOW_ruleImport_in_entryRuleImport224);
             iv_ruleImport=ruleImport();
 
@@ -350,7 +329,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleImport"
-    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:179:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportName ) ) ) ;
+    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:158:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportName ) ) ) ;
     public final EObject ruleImport() throws RecognitionException {
         EObject current = null;
 
@@ -358,27 +337,27 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
         AntlrDatatypeRuleToken lv_importedNamespace_1_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:184:6: ( (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportName ) ) ) )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:185:1: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportName ) ) )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:161:28: ( (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportName ) ) ) )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:162:1: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportName ) ) )
             {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:185:1: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportName ) ) )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:185:3: otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportName ) )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:162:1: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportName ) ) )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:162:3: otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportName ) )
             {
             otherlv_0=(Token)match(input,13,FOLLOW_13_in_ruleImport271); 
 
-                	createLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0(), null);
+                	newLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0());
                 
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:189:1: ( (lv_importedNamespace_1_0= ruleImportName ) )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:190:1: (lv_importedNamespace_1_0= ruleImportName )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:166:1: ( (lv_importedNamespace_1_0= ruleImportName ) )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:167:1: (lv_importedNamespace_1_0= ruleImportName )
             {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:190:1: (lv_importedNamespace_1_0= ruleImportName )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:191:3: lv_importedNamespace_1_0= ruleImportName
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:167:1: (lv_importedNamespace_1_0= ruleImportName )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:168:3: lv_importedNamespace_1_0= ruleImportName
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.getImportAccess().getImportedNamespaceImportNameParserRuleCall_1_0(), currentNode); 
+            	        newCompositeNode(grammarAccess.getImportAccess().getImportedNamespaceImportNameParserRuleCall_1_0()); 
             	    
             pushFollow(FOLLOW_ruleImportName_in_ruleImport292);
             lv_importedNamespace_1_0=ruleImportName();
@@ -387,20 +366,14 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.getImportRule().getType().getClassifier());
-            	            associateNodeWithAstElement(currentNode.getParent(), current);
+            	            current = createModelElementForParent(grammarAccess.getImportRule());
             	        }
-            	        try {
-            	       		set(
-            	       			current, 
-            	       			"importedNamespace",
-            	        		lv_importedNamespace_1_0, 
-            	        		"ImportName", 
-            	        		currentNode);
-            	        } catch (ValueConverterException vce) {
-            				handleValueConverterException(vce);
-            	        }
-            	        currentNode = currentNode.getParent();
+                   		set(
+                   			current, 
+                   			"importedNamespace",
+                    		lv_importedNamespace_1_0, 
+                    		"ImportName");
+            	        afterParserOrEnumRuleCall();
             	    
 
             }
@@ -414,9 +387,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
             }
 
-             resetLookahead(); 
-                	lastConsumedNode = currentNode;
-                
+             leaveRule(); 
         }
          
             catch (RecognitionException re) { 
@@ -431,7 +402,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleImportName"
-    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:221:1: entryRuleImportName returns [String current=null] : iv_ruleImportName= ruleImportName EOF ;
+    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:192:1: entryRuleImportName returns [String current=null] : iv_ruleImportName= ruleImportName EOF ;
     public final String entryRuleImportName() throws RecognitionException {
         String current = null;
 
@@ -439,10 +410,10 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:222:2: (iv_ruleImportName= ruleImportName EOF )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:223:2: iv_ruleImportName= ruleImportName EOF
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:193:2: (iv_ruleImportName= ruleImportName EOF )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:194:2: iv_ruleImportName= ruleImportName EOF
             {
-             currentNode = createCompositeNode(grammarAccess.getImportNameRule(), currentNode); 
+             newCompositeNode(grammarAccess.getImportNameRule()); 
             pushFollow(FOLLOW_ruleImportName_in_entryRuleImportName329);
             iv_ruleImportName=ruleImportName();
 
@@ -467,30 +438,30 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleImportName"
-    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:230:1: ruleImportName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' kw= '*' )? ) ;
+    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:201:1: ruleImportName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' kw= '*' )? ) ;
     public final AntlrDatatypeRuleToken ruleImportName() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
         Token this_ID_0=null;
         Token kw=null;
 
-         setCurrentLookahead(); resetLookahead(); 
+         enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:235:6: ( (this_ID_0= RULE_ID (kw= '.' kw= '*' )? ) )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:236:1: (this_ID_0= RULE_ID (kw= '.' kw= '*' )? )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:204:28: ( (this_ID_0= RULE_ID (kw= '.' kw= '*' )? ) )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:205:1: (this_ID_0= RULE_ID (kw= '.' kw= '*' )? )
             {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:236:1: (this_ID_0= RULE_ID (kw= '.' kw= '*' )? )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:236:6: this_ID_0= RULE_ID (kw= '.' kw= '*' )?
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:205:1: (this_ID_0= RULE_ID (kw= '.' kw= '*' )? )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:205:6: this_ID_0= RULE_ID (kw= '.' kw= '*' )?
             {
             this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleImportName380); 
 
             		current.merge(this_ID_0);
                 
              
-                createLeafNode(this_ID_0, grammarAccess.getImportNameAccess().getIDTerminalRuleCall_0(), null); 
+                newLeafNode(this_ID_0, grammarAccess.getImportNameAccess().getIDTerminalRuleCall_0()); 
                 
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:243:1: (kw= '.' kw= '*' )?
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:212:1: (kw= '.' kw= '*' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -499,17 +470,17 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:244:2: kw= '.' kw= '*'
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:213:2: kw= '.' kw= '*'
                     {
                     kw=(Token)match(input,14,FOLLOW_14_in_ruleImportName399); 
 
                             current.merge(kw);
-                            createLeafNode(kw, grammarAccess.getImportNameAccess().getFullStopKeyword_1_0(), null); 
+                            newLeafNode(kw, grammarAccess.getImportNameAccess().getFullStopKeyword_1_0()); 
                         
                     kw=(Token)match(input,15,FOLLOW_15_in_ruleImportName412); 
 
                             current.merge(kw);
-                            createLeafNode(kw, grammarAccess.getImportNameAccess().getAsteriskKeyword_1_1(), null); 
+                            newLeafNode(kw, grammarAccess.getImportNameAccess().getAsteriskKeyword_1_1()); 
                         
 
                     }
@@ -523,9 +494,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
             }
 
-             resetLookahead(); 
-            	    lastConsumedNode = currentNode;
-                
+             leaveRule(); 
         }
          
             catch (RecognitionException re) { 
@@ -540,7 +509,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleStatement"
-    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:263:1: entryRuleStatement returns [EObject current=null] : iv_ruleStatement= ruleStatement EOF ;
+    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:232:1: entryRuleStatement returns [EObject current=null] : iv_ruleStatement= ruleStatement EOF ;
     public final EObject entryRuleStatement() throws RecognitionException {
         EObject current = null;
 
@@ -548,10 +517,10 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:264:2: (iv_ruleStatement= ruleStatement EOF )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:265:2: iv_ruleStatement= ruleStatement EOF
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:233:2: (iv_ruleStatement= ruleStatement EOF )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:234:2: iv_ruleStatement= ruleStatement EOF
             {
-             currentNode = createCompositeNode(grammarAccess.getStatementRule(), currentNode); 
+             newCompositeNode(grammarAccess.getStatementRule()); 
             pushFollow(FOLLOW_ruleStatement_in_entryRuleStatement454);
             iv_ruleStatement=ruleStatement();
 
@@ -576,7 +545,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleStatement"
-    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:272:1: ruleStatement returns [EObject current=null] : (this_Definition_0= ruleDefinition | this_Evaluation_1= ruleEvaluation ) ;
+    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:241:1: ruleStatement returns [EObject current=null] : (this_Definition_0= ruleDefinition | this_Evaluation_1= ruleEvaluation ) ;
     public final EObject ruleStatement() throws RecognitionException {
         EObject current = null;
 
@@ -585,13 +554,13 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
         EObject this_Evaluation_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:277:6: ( (this_Definition_0= ruleDefinition | this_Evaluation_1= ruleEvaluation ) )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:278:1: (this_Definition_0= ruleDefinition | this_Evaluation_1= ruleEvaluation )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:244:28: ( (this_Definition_0= ruleDefinition | this_Evaluation_1= ruleEvaluation ) )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:245:1: (this_Definition_0= ruleDefinition | this_Evaluation_1= ruleEvaluation )
             {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:278:1: (this_Definition_0= ruleDefinition | this_Evaluation_1= ruleEvaluation )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:245:1: (this_Definition_0= ruleDefinition | this_Evaluation_1= ruleEvaluation )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -609,10 +578,10 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:279:5: this_Definition_0= ruleDefinition
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:246:5: this_Definition_0= ruleDefinition
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.getStatementAccess().getDefinitionParserRuleCall_0(), currentNode); 
+                            newCompositeNode(grammarAccess.getStatementAccess().getDefinitionParserRuleCall_0()); 
                         
                     pushFollow(FOLLOW_ruleDefinition_in_ruleStatement511);
                     this_Definition_0=ruleDefinition();
@@ -621,16 +590,16 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
                      
                             current = this_Definition_0; 
-                            currentNode = currentNode.getParent();
+                            afterParserOrEnumRuleCall();
                         
 
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:289:5: this_Evaluation_1= ruleEvaluation
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:256:5: this_Evaluation_1= ruleEvaluation
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.getStatementAccess().getEvaluationParserRuleCall_1(), currentNode); 
+                            newCompositeNode(grammarAccess.getStatementAccess().getEvaluationParserRuleCall_1()); 
                         
                     pushFollow(FOLLOW_ruleEvaluation_in_ruleStatement538);
                     this_Evaluation_1=ruleEvaluation();
@@ -639,7 +608,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
                      
                             current = this_Evaluation_1; 
-                            currentNode = currentNode.getParent();
+                            afterParserOrEnumRuleCall();
                         
 
                     }
@@ -650,9 +619,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
             }
 
-             resetLookahead(); 
-                	lastConsumedNode = currentNode;
-                
+             leaveRule(); 
         }
          
             catch (RecognitionException re) { 
@@ -667,7 +634,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDefinition"
-    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:305:1: entryRuleDefinition returns [EObject current=null] : iv_ruleDefinition= ruleDefinition EOF ;
+    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:272:1: entryRuleDefinition returns [EObject current=null] : iv_ruleDefinition= ruleDefinition EOF ;
     public final EObject entryRuleDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -675,10 +642,10 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:306:2: (iv_ruleDefinition= ruleDefinition EOF )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:307:2: iv_ruleDefinition= ruleDefinition EOF
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:273:2: (iv_ruleDefinition= ruleDefinition EOF )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:274:2: iv_ruleDefinition= ruleDefinition EOF
             {
-             currentNode = createCompositeNode(grammarAccess.getDefinitionRule(), currentNode); 
+             newCompositeNode(grammarAccess.getDefinitionRule()); 
             pushFollow(FOLLOW_ruleDefinition_in_entryRuleDefinition573);
             iv_ruleDefinition=ruleDefinition();
 
@@ -703,7 +670,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDefinition"
-    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:314:1: ruleDefinition returns [EObject current=null] : (otherlv_0= 'def' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_args_3_0= ruleDeclaredParameter ) ) (otherlv_4= ',' ( (lv_args_5_0= ruleDeclaredParameter ) ) )* otherlv_6= ')' )? otherlv_7= ':' ( (lv_expr_8_0= ruleExpression ) ) otherlv_9= ';' ) ;
+    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:281:1: ruleDefinition returns [EObject current=null] : (otherlv_0= 'def' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_args_3_0= ruleDeclaredParameter ) ) (otherlv_4= ',' ( (lv_args_5_0= ruleDeclaredParameter ) ) )* otherlv_6= ')' )? otherlv_7= ':' ( (lv_expr_8_0= ruleExpression ) ) otherlv_9= ';' ) ;
     public final EObject ruleDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -721,44 +688,38 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
         EObject lv_expr_8_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:319:6: ( (otherlv_0= 'def' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_args_3_0= ruleDeclaredParameter ) ) (otherlv_4= ',' ( (lv_args_5_0= ruleDeclaredParameter ) ) )* otherlv_6= ')' )? otherlv_7= ':' ( (lv_expr_8_0= ruleExpression ) ) otherlv_9= ';' ) )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:320:1: (otherlv_0= 'def' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_args_3_0= ruleDeclaredParameter ) ) (otherlv_4= ',' ( (lv_args_5_0= ruleDeclaredParameter ) ) )* otherlv_6= ')' )? otherlv_7= ':' ( (lv_expr_8_0= ruleExpression ) ) otherlv_9= ';' )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:284:28: ( (otherlv_0= 'def' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_args_3_0= ruleDeclaredParameter ) ) (otherlv_4= ',' ( (lv_args_5_0= ruleDeclaredParameter ) ) )* otherlv_6= ')' )? otherlv_7= ':' ( (lv_expr_8_0= ruleExpression ) ) otherlv_9= ';' ) )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:285:1: (otherlv_0= 'def' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_args_3_0= ruleDeclaredParameter ) ) (otherlv_4= ',' ( (lv_args_5_0= ruleDeclaredParameter ) ) )* otherlv_6= ')' )? otherlv_7= ':' ( (lv_expr_8_0= ruleExpression ) ) otherlv_9= ';' )
             {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:320:1: (otherlv_0= 'def' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_args_3_0= ruleDeclaredParameter ) ) (otherlv_4= ',' ( (lv_args_5_0= ruleDeclaredParameter ) ) )* otherlv_6= ')' )? otherlv_7= ':' ( (lv_expr_8_0= ruleExpression ) ) otherlv_9= ';' )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:320:3: otherlv_0= 'def' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_args_3_0= ruleDeclaredParameter ) ) (otherlv_4= ',' ( (lv_args_5_0= ruleDeclaredParameter ) ) )* otherlv_6= ')' )? otherlv_7= ':' ( (lv_expr_8_0= ruleExpression ) ) otherlv_9= ';'
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:285:1: (otherlv_0= 'def' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_args_3_0= ruleDeclaredParameter ) ) (otherlv_4= ',' ( (lv_args_5_0= ruleDeclaredParameter ) ) )* otherlv_6= ')' )? otherlv_7= ':' ( (lv_expr_8_0= ruleExpression ) ) otherlv_9= ';' )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:285:3: otherlv_0= 'def' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_args_3_0= ruleDeclaredParameter ) ) (otherlv_4= ',' ( (lv_args_5_0= ruleDeclaredParameter ) ) )* otherlv_6= ')' )? otherlv_7= ':' ( (lv_expr_8_0= ruleExpression ) ) otherlv_9= ';'
             {
             otherlv_0=(Token)match(input,16,FOLLOW_16_in_ruleDefinition620); 
 
-                	createLeafNode(otherlv_0, grammarAccess.getDefinitionAccess().getDefKeyword_0(), null);
+                	newLeafNode(otherlv_0, grammarAccess.getDefinitionAccess().getDefKeyword_0());
                 
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:324:1: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:325:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:289:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:290:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:325:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:326:3: lv_name_1_0= RULE_ID
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:290:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:291:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleDefinition637); 
 
-            			createLeafNode(lv_name_1_0, grammarAccess.getDefinitionAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+            			newLeafNode(lv_name_1_0, grammarAccess.getDefinitionAccess().getNameIDTerminalRuleCall_1_0()); 
             		
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.getDefinitionRule().getType().getClassifier());
-            	            associateNodeWithAstElement(currentNode, current);
+            	            current = createModelElement(grammarAccess.getDefinitionRule());
             	        }
-            	        try {
-            	       		set(
-            	       			current, 
-            	       			"name",
-            	        		lv_name_1_0, 
-            	        		"ID", 
-            	        		lastConsumedNode);
-            	        } catch (ValueConverterException vce) {
-            				handleValueConverterException(vce);
-            	        }
+                   		setWithLastConsumed(
+                   			current, 
+                   			"name",
+                    		lv_name_1_0, 
+                    		"ID");
             	    
 
             }
@@ -766,7 +727,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:348:2: (otherlv_2= '(' ( (lv_args_3_0= ruleDeclaredParameter ) ) (otherlv_4= ',' ( (lv_args_5_0= ruleDeclaredParameter ) ) )* otherlv_6= ')' )?
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:307:2: (otherlv_2= '(' ( (lv_args_3_0= ruleDeclaredParameter ) ) (otherlv_4= ',' ( (lv_args_5_0= ruleDeclaredParameter ) ) )* otherlv_6= ')' )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -775,20 +736,20 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:348:4: otherlv_2= '(' ( (lv_args_3_0= ruleDeclaredParameter ) ) (otherlv_4= ',' ( (lv_args_5_0= ruleDeclaredParameter ) ) )* otherlv_6= ')'
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:307:4: otherlv_2= '(' ( (lv_args_3_0= ruleDeclaredParameter ) ) (otherlv_4= ',' ( (lv_args_5_0= ruleDeclaredParameter ) ) )* otherlv_6= ')'
                     {
                     otherlv_2=(Token)match(input,17,FOLLOW_17_in_ruleDefinition655); 
 
-                        	createLeafNode(otherlv_2, grammarAccess.getDefinitionAccess().getLeftParenthesisKeyword_2_0(), null);
+                        	newLeafNode(otherlv_2, grammarAccess.getDefinitionAccess().getLeftParenthesisKeyword_2_0());
                         
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:352:1: ( (lv_args_3_0= ruleDeclaredParameter ) )
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:353:1: (lv_args_3_0= ruleDeclaredParameter )
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:311:1: ( (lv_args_3_0= ruleDeclaredParameter ) )
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:312:1: (lv_args_3_0= ruleDeclaredParameter )
                     {
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:353:1: (lv_args_3_0= ruleDeclaredParameter )
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:354:3: lv_args_3_0= ruleDeclaredParameter
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:312:1: (lv_args_3_0= ruleDeclaredParameter )
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:313:3: lv_args_3_0= ruleDeclaredParameter
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.getDefinitionAccess().getArgsDeclaredParameterParserRuleCall_2_1_0(), currentNode); 
+                    	        newCompositeNode(grammarAccess.getDefinitionAccess().getArgsDeclaredParameterParserRuleCall_2_1_0()); 
                     	    
                     pushFollow(FOLLOW_ruleDeclaredParameter_in_ruleDefinition676);
                     lv_args_3_0=ruleDeclaredParameter();
@@ -797,20 +758,14 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.getDefinitionRule().getType().getClassifier());
-                    	            associateNodeWithAstElement(currentNode.getParent(), current);
+                    	            current = createModelElementForParent(grammarAccess.getDefinitionRule());
                     	        }
-                    	        try {
-                    	       		add(
-                    	       			current, 
-                    	       			"args",
-                    	        		lv_args_3_0, 
-                    	        		"DeclaredParameter", 
-                    	        		currentNode);
-                    	        } catch (ValueConverterException vce) {
-                    				handleValueConverterException(vce);
-                    	        }
-                    	        currentNode = currentNode.getParent();
+                           		add(
+                           			current, 
+                           			"args",
+                            		lv_args_3_0, 
+                            		"DeclaredParameter");
+                    	        afterParserOrEnumRuleCall();
                     	    
 
                     }
@@ -818,7 +773,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:376:2: (otherlv_4= ',' ( (lv_args_5_0= ruleDeclaredParameter ) ) )*
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:329:2: (otherlv_4= ',' ( (lv_args_5_0= ruleDeclaredParameter ) ) )*
                     loop5:
                     do {
                         int alt5=2;
@@ -831,20 +786,20 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:376:4: otherlv_4= ',' ( (lv_args_5_0= ruleDeclaredParameter ) )
+                    	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:329:4: otherlv_4= ',' ( (lv_args_5_0= ruleDeclaredParameter ) )
                     	    {
                     	    otherlv_4=(Token)match(input,18,FOLLOW_18_in_ruleDefinition689); 
 
-                    	        	createLeafNode(otherlv_4, grammarAccess.getDefinitionAccess().getCommaKeyword_2_2_0(), null);
+                    	        	newLeafNode(otherlv_4, grammarAccess.getDefinitionAccess().getCommaKeyword_2_2_0());
                     	        
-                    	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:380:1: ( (lv_args_5_0= ruleDeclaredParameter ) )
-                    	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:381:1: (lv_args_5_0= ruleDeclaredParameter )
+                    	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:333:1: ( (lv_args_5_0= ruleDeclaredParameter ) )
+                    	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:334:1: (lv_args_5_0= ruleDeclaredParameter )
                     	    {
-                    	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:381:1: (lv_args_5_0= ruleDeclaredParameter )
-                    	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:382:3: lv_args_5_0= ruleDeclaredParameter
+                    	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:334:1: (lv_args_5_0= ruleDeclaredParameter )
+                    	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:335:3: lv_args_5_0= ruleDeclaredParameter
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.getDefinitionAccess().getArgsDeclaredParameterParserRuleCall_2_2_1_0(), currentNode); 
+                    	    	        newCompositeNode(grammarAccess.getDefinitionAccess().getArgsDeclaredParameterParserRuleCall_2_2_1_0()); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleDeclaredParameter_in_ruleDefinition710);
                     	    lv_args_5_0=ruleDeclaredParameter();
@@ -853,20 +808,14 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getDefinitionRule().getType().getClassifier());
-                    	    	            associateNodeWithAstElement(currentNode.getParent(), current);
+                    	    	            current = createModelElementForParent(grammarAccess.getDefinitionRule());
                     	    	        }
-                    	    	        try {
-                    	    	       		add(
-                    	    	       			current, 
-                    	    	       			"args",
-                    	    	        		lv_args_5_0, 
-                    	    	        		"DeclaredParameter", 
-                    	    	        		currentNode);
-                    	    	        } catch (ValueConverterException vce) {
-                    	    				handleValueConverterException(vce);
-                    	    	        }
-                    	    	        currentNode = currentNode.getParent();
+                    	           		add(
+                    	           			current, 
+                    	           			"args",
+                    	            		lv_args_5_0, 
+                    	            		"DeclaredParameter");
+                    	    	        afterParserOrEnumRuleCall();
                     	    	    
 
                     	    }
@@ -885,7 +834,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
                     otherlv_6=(Token)match(input,19,FOLLOW_19_in_ruleDefinition724); 
 
-                        	createLeafNode(otherlv_6, grammarAccess.getDefinitionAccess().getRightParenthesisKeyword_2_3(), null);
+                        	newLeafNode(otherlv_6, grammarAccess.getDefinitionAccess().getRightParenthesisKeyword_2_3());
                         
 
                     }
@@ -895,16 +844,16 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
             otherlv_7=(Token)match(input,20,FOLLOW_20_in_ruleDefinition738); 
 
-                	createLeafNode(otherlv_7, grammarAccess.getDefinitionAccess().getColonKeyword_3(), null);
+                	newLeafNode(otherlv_7, grammarAccess.getDefinitionAccess().getColonKeyword_3());
                 
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:412:1: ( (lv_expr_8_0= ruleExpression ) )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:413:1: (lv_expr_8_0= ruleExpression )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:359:1: ( (lv_expr_8_0= ruleExpression ) )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:360:1: (lv_expr_8_0= ruleExpression )
             {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:413:1: (lv_expr_8_0= ruleExpression )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:414:3: lv_expr_8_0= ruleExpression
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:360:1: (lv_expr_8_0= ruleExpression )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:361:3: lv_expr_8_0= ruleExpression
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.getDefinitionAccess().getExprExpressionParserRuleCall_4_0(), currentNode); 
+            	        newCompositeNode(grammarAccess.getDefinitionAccess().getExprExpressionParserRuleCall_4_0()); 
             	    
             pushFollow(FOLLOW_ruleExpression_in_ruleDefinition759);
             lv_expr_8_0=ruleExpression();
@@ -913,20 +862,14 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.getDefinitionRule().getType().getClassifier());
-            	            associateNodeWithAstElement(currentNode.getParent(), current);
+            	            current = createModelElementForParent(grammarAccess.getDefinitionRule());
             	        }
-            	        try {
-            	       		set(
-            	       			current, 
-            	       			"expr",
-            	        		lv_expr_8_0, 
-            	        		"Expression", 
-            	        		currentNode);
-            	        } catch (ValueConverterException vce) {
-            				handleValueConverterException(vce);
-            	        }
-            	        currentNode = currentNode.getParent();
+                   		set(
+                   			current, 
+                   			"expr",
+                    		lv_expr_8_0, 
+                    		"Expression");
+            	        afterParserOrEnumRuleCall();
             	    
 
             }
@@ -936,7 +879,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
             otherlv_9=(Token)match(input,21,FOLLOW_21_in_ruleDefinition771); 
 
-                	createLeafNode(otherlv_9, grammarAccess.getDefinitionAccess().getSemicolonKeyword_5(), null);
+                	newLeafNode(otherlv_9, grammarAccess.getDefinitionAccess().getSemicolonKeyword_5());
                 
 
             }
@@ -944,9 +887,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
             }
 
-             resetLookahead(); 
-                	lastConsumedNode = currentNode;
-                
+             leaveRule(); 
         }
          
             catch (RecognitionException re) { 
@@ -961,7 +902,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDeclaredParameter"
-    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:448:1: entryRuleDeclaredParameter returns [EObject current=null] : iv_ruleDeclaredParameter= ruleDeclaredParameter EOF ;
+    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:389:1: entryRuleDeclaredParameter returns [EObject current=null] : iv_ruleDeclaredParameter= ruleDeclaredParameter EOF ;
     public final EObject entryRuleDeclaredParameter() throws RecognitionException {
         EObject current = null;
 
@@ -969,10 +910,10 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:449:2: (iv_ruleDeclaredParameter= ruleDeclaredParameter EOF )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:450:2: iv_ruleDeclaredParameter= ruleDeclaredParameter EOF
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:390:2: (iv_ruleDeclaredParameter= ruleDeclaredParameter EOF )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:391:2: iv_ruleDeclaredParameter= ruleDeclaredParameter EOF
             {
-             currentNode = createCompositeNode(grammarAccess.getDeclaredParameterRule(), currentNode); 
+             newCompositeNode(grammarAccess.getDeclaredParameterRule()); 
             pushFollow(FOLLOW_ruleDeclaredParameter_in_entryRuleDeclaredParameter807);
             iv_ruleDeclaredParameter=ruleDeclaredParameter();
 
@@ -997,43 +938,37 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDeclaredParameter"
-    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:457:1: ruleDeclaredParameter returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
+    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:398:1: ruleDeclaredParameter returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
     public final EObject ruleDeclaredParameter() throws RecognitionException {
         EObject current = null;
 
         Token lv_name_0_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:462:6: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:463:1: ( (lv_name_0_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:401:28: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:402:1: ( (lv_name_0_0= RULE_ID ) )
             {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:463:1: ( (lv_name_0_0= RULE_ID ) )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:464:1: (lv_name_0_0= RULE_ID )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:402:1: ( (lv_name_0_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:403:1: (lv_name_0_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:464:1: (lv_name_0_0= RULE_ID )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:465:3: lv_name_0_0= RULE_ID
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:403:1: (lv_name_0_0= RULE_ID )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:404:3: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleDeclaredParameter858); 
 
-            			createLeafNode(lv_name_0_0, grammarAccess.getDeclaredParameterAccess().getNameIDTerminalRuleCall_0(), "name"); 
+            			newLeafNode(lv_name_0_0, grammarAccess.getDeclaredParameterAccess().getNameIDTerminalRuleCall_0()); 
             		
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.getDeclaredParameterRule().getType().getClassifier());
-            	            associateNodeWithAstElement(currentNode, current);
+            	            current = createModelElement(grammarAccess.getDeclaredParameterRule());
             	        }
-            	        try {
-            	       		set(
-            	       			current, 
-            	       			"name",
-            	        		lv_name_0_0, 
-            	        		"ID", 
-            	        		lastConsumedNode);
-            	        } catch (ValueConverterException vce) {
-            				handleValueConverterException(vce);
-            	        }
+                   		setWithLastConsumed(
+                   			current, 
+                   			"name",
+                    		lv_name_0_0, 
+                    		"ID");
             	    
 
             }
@@ -1044,9 +979,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
             }
 
-             resetLookahead(); 
-                	lastConsumedNode = currentNode;
-                
+             leaveRule(); 
         }
          
             catch (RecognitionException re) { 
@@ -1061,7 +994,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEvaluation"
-    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:497:1: entryRuleEvaluation returns [EObject current=null] : iv_ruleEvaluation= ruleEvaluation EOF ;
+    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:430:1: entryRuleEvaluation returns [EObject current=null] : iv_ruleEvaluation= ruleEvaluation EOF ;
     public final EObject entryRuleEvaluation() throws RecognitionException {
         EObject current = null;
 
@@ -1069,10 +1002,10 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:498:2: (iv_ruleEvaluation= ruleEvaluation EOF )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:499:2: iv_ruleEvaluation= ruleEvaluation EOF
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:431:2: (iv_ruleEvaluation= ruleEvaluation EOF )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:432:2: iv_ruleEvaluation= ruleEvaluation EOF
             {
-             currentNode = createCompositeNode(grammarAccess.getEvaluationRule(), currentNode); 
+             newCompositeNode(grammarAccess.getEvaluationRule()); 
             pushFollow(FOLLOW_ruleEvaluation_in_entryRuleEvaluation900);
             iv_ruleEvaluation=ruleEvaluation();
 
@@ -1097,7 +1030,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEvaluation"
-    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:506:1: ruleEvaluation returns [EObject current=null] : ( ( (lv_expression_0_0= ruleExpression ) ) otherlv_1= ';' ) ;
+    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:439:1: ruleEvaluation returns [EObject current=null] : ( ( (lv_expression_0_0= ruleExpression ) ) otherlv_1= ';' ) ;
     public final EObject ruleEvaluation() throws RecognitionException {
         EObject current = null;
 
@@ -1105,23 +1038,23 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
         EObject lv_expression_0_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:511:6: ( ( ( (lv_expression_0_0= ruleExpression ) ) otherlv_1= ';' ) )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:512:1: ( ( (lv_expression_0_0= ruleExpression ) ) otherlv_1= ';' )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:442:28: ( ( ( (lv_expression_0_0= ruleExpression ) ) otherlv_1= ';' ) )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:443:1: ( ( (lv_expression_0_0= ruleExpression ) ) otherlv_1= ';' )
             {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:512:1: ( ( (lv_expression_0_0= ruleExpression ) ) otherlv_1= ';' )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:512:2: ( (lv_expression_0_0= ruleExpression ) ) otherlv_1= ';'
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:443:1: ( ( (lv_expression_0_0= ruleExpression ) ) otherlv_1= ';' )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:443:2: ( (lv_expression_0_0= ruleExpression ) ) otherlv_1= ';'
             {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:512:2: ( (lv_expression_0_0= ruleExpression ) )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:513:1: (lv_expression_0_0= ruleExpression )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:443:2: ( (lv_expression_0_0= ruleExpression ) )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:444:1: (lv_expression_0_0= ruleExpression )
             {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:513:1: (lv_expression_0_0= ruleExpression )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:514:3: lv_expression_0_0= ruleExpression
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:444:1: (lv_expression_0_0= ruleExpression )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:445:3: lv_expression_0_0= ruleExpression
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.getEvaluationAccess().getExpressionExpressionParserRuleCall_0_0(), currentNode); 
+            	        newCompositeNode(grammarAccess.getEvaluationAccess().getExpressionExpressionParserRuleCall_0_0()); 
             	    
             pushFollow(FOLLOW_ruleExpression_in_ruleEvaluation956);
             lv_expression_0_0=ruleExpression();
@@ -1130,20 +1063,14 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.getEvaluationRule().getType().getClassifier());
-            	            associateNodeWithAstElement(currentNode.getParent(), current);
+            	            current = createModelElementForParent(grammarAccess.getEvaluationRule());
             	        }
-            	        try {
-            	       		set(
-            	       			current, 
-            	       			"expression",
-            	        		lv_expression_0_0, 
-            	        		"Expression", 
-            	        		currentNode);
-            	        } catch (ValueConverterException vce) {
-            				handleValueConverterException(vce);
-            	        }
-            	        currentNode = currentNode.getParent();
+                   		set(
+                   			current, 
+                   			"expression",
+                    		lv_expression_0_0, 
+                    		"Expression");
+            	        afterParserOrEnumRuleCall();
             	    
 
             }
@@ -1153,7 +1080,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
             otherlv_1=(Token)match(input,21,FOLLOW_21_in_ruleEvaluation968); 
 
-                	createLeafNode(otherlv_1, grammarAccess.getEvaluationAccess().getSemicolonKeyword_1(), null);
+                	newLeafNode(otherlv_1, grammarAccess.getEvaluationAccess().getSemicolonKeyword_1());
                 
 
             }
@@ -1161,9 +1088,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
             }
 
-             resetLookahead(); 
-                	lastConsumedNode = currentNode;
-                
+             leaveRule(); 
         }
          
             catch (RecognitionException re) { 
@@ -1178,7 +1103,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleExpression"
-    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:548:1: entryRuleExpression returns [EObject current=null] : iv_ruleExpression= ruleExpression EOF ;
+    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:473:1: entryRuleExpression returns [EObject current=null] : iv_ruleExpression= ruleExpression EOF ;
     public final EObject entryRuleExpression() throws RecognitionException {
         EObject current = null;
 
@@ -1186,10 +1111,10 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:549:2: (iv_ruleExpression= ruleExpression EOF )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:550:2: iv_ruleExpression= ruleExpression EOF
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:474:2: (iv_ruleExpression= ruleExpression EOF )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:475:2: iv_ruleExpression= ruleExpression EOF
             {
-             currentNode = createCompositeNode(grammarAccess.getExpressionRule(), currentNode); 
+             newCompositeNode(grammarAccess.getExpressionRule()); 
             pushFollow(FOLLOW_ruleExpression_in_entryRuleExpression1004);
             iv_ruleExpression=ruleExpression();
 
@@ -1214,21 +1139,21 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleExpression"
-    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:557:1: ruleExpression returns [EObject current=null] : this_Addition_0= ruleAddition ;
+    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:482:1: ruleExpression returns [EObject current=null] : this_Addition_0= ruleAddition ;
     public final EObject ruleExpression() throws RecognitionException {
         EObject current = null;
 
         EObject this_Addition_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:562:6: (this_Addition_0= ruleAddition )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:564:5: this_Addition_0= ruleAddition
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:485:28: (this_Addition_0= ruleAddition )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:487:5: this_Addition_0= ruleAddition
             {
              
-                    currentNode=createCompositeNode(grammarAccess.getExpressionAccess().getAdditionParserRuleCall(), currentNode); 
+                    newCompositeNode(grammarAccess.getExpressionAccess().getAdditionParserRuleCall()); 
                 
             pushFollow(FOLLOW_ruleAddition_in_ruleExpression1060);
             this_Addition_0=ruleAddition();
@@ -1237,14 +1162,12 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
              
                     current = this_Addition_0; 
-                    currentNode = currentNode.getParent();
+                    afterParserOrEnumRuleCall();
                 
 
             }
 
-             resetLookahead(); 
-                	lastConsumedNode = currentNode;
-                
+             leaveRule(); 
         }
          
             catch (RecognitionException re) { 
@@ -1259,7 +1182,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleAddition"
-    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:580:1: entryRuleAddition returns [EObject current=null] : iv_ruleAddition= ruleAddition EOF ;
+    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:503:1: entryRuleAddition returns [EObject current=null] : iv_ruleAddition= ruleAddition EOF ;
     public final EObject entryRuleAddition() throws RecognitionException {
         EObject current = null;
 
@@ -1267,10 +1190,10 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:581:2: (iv_ruleAddition= ruleAddition EOF )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:582:2: iv_ruleAddition= ruleAddition EOF
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:504:2: (iv_ruleAddition= ruleAddition EOF )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:505:2: iv_ruleAddition= ruleAddition EOF
             {
-             currentNode = createCompositeNode(grammarAccess.getAdditionRule(), currentNode); 
+             newCompositeNode(grammarAccess.getAdditionRule()); 
             pushFollow(FOLLOW_ruleAddition_in_entryRuleAddition1094);
             iv_ruleAddition=ruleAddition();
 
@@ -1295,7 +1218,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAddition"
-    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:589:1: ruleAddition returns [EObject current=null] : (this_Multiplication_0= ruleMultiplication ( ( ( () otherlv_2= '+' ) | ( () otherlv_4= '-' ) ) ( (lv_right_5_0= ruleMultiplication ) ) )* ) ;
+    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:512:1: ruleAddition returns [EObject current=null] : (this_Multiplication_0= ruleMultiplication ( ( ( () otherlv_2= '+' ) | ( () otherlv_4= '-' ) ) ( (lv_right_5_0= ruleMultiplication ) ) )* ) ;
     public final EObject ruleAddition() throws RecognitionException {
         EObject current = null;
 
@@ -1306,17 +1229,17 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
         EObject lv_right_5_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:594:6: ( (this_Multiplication_0= ruleMultiplication ( ( ( () otherlv_2= '+' ) | ( () otherlv_4= '-' ) ) ( (lv_right_5_0= ruleMultiplication ) ) )* ) )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:595:1: (this_Multiplication_0= ruleMultiplication ( ( ( () otherlv_2= '+' ) | ( () otherlv_4= '-' ) ) ( (lv_right_5_0= ruleMultiplication ) ) )* )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:515:28: ( (this_Multiplication_0= ruleMultiplication ( ( ( () otherlv_2= '+' ) | ( () otherlv_4= '-' ) ) ( (lv_right_5_0= ruleMultiplication ) ) )* ) )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:516:1: (this_Multiplication_0= ruleMultiplication ( ( ( () otherlv_2= '+' ) | ( () otherlv_4= '-' ) ) ( (lv_right_5_0= ruleMultiplication ) ) )* )
             {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:595:1: (this_Multiplication_0= ruleMultiplication ( ( ( () otherlv_2= '+' ) | ( () otherlv_4= '-' ) ) ( (lv_right_5_0= ruleMultiplication ) ) )* )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:596:5: this_Multiplication_0= ruleMultiplication ( ( ( () otherlv_2= '+' ) | ( () otherlv_4= '-' ) ) ( (lv_right_5_0= ruleMultiplication ) ) )*
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:516:1: (this_Multiplication_0= ruleMultiplication ( ( ( () otherlv_2= '+' ) | ( () otherlv_4= '-' ) ) ( (lv_right_5_0= ruleMultiplication ) ) )* )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:517:5: this_Multiplication_0= ruleMultiplication ( ( ( () otherlv_2= '+' ) | ( () otherlv_4= '-' ) ) ( (lv_right_5_0= ruleMultiplication ) ) )*
             {
              
-                    currentNode=createCompositeNode(grammarAccess.getAdditionAccess().getMultiplicationParserRuleCall_0(), currentNode); 
+                    newCompositeNode(grammarAccess.getAdditionAccess().getMultiplicationParserRuleCall_0()); 
                 
             pushFollow(FOLLOW_ruleMultiplication_in_ruleAddition1151);
             this_Multiplication_0=ruleMultiplication();
@@ -1325,9 +1248,9 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
              
                     current = this_Multiplication_0; 
-                    currentNode = currentNode.getParent();
+                    afterParserOrEnumRuleCall();
                 
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:604:1: ( ( ( () otherlv_2= '+' ) | ( () otherlv_4= '-' ) ) ( (lv_right_5_0= ruleMultiplication ) ) )*
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:525:1: ( ( ( () otherlv_2= '+' ) | ( () otherlv_4= '-' ) ) ( (lv_right_5_0= ruleMultiplication ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -1340,9 +1263,9 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:604:2: ( ( () otherlv_2= '+' ) | ( () otherlv_4= '-' ) ) ( (lv_right_5_0= ruleMultiplication ) )
+            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:525:2: ( ( () otherlv_2= '+' ) | ( () otherlv_4= '-' ) ) ( (lv_right_5_0= ruleMultiplication ) )
             	    {
-            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:604:2: ( ( () otherlv_2= '+' ) | ( () otherlv_4= '-' ) )
+            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:525:2: ( ( () otherlv_2= '+' ) | ( () otherlv_4= '-' ) )
             	    int alt7=2;
             	    int LA7_0 = input.LA(1);
 
@@ -1360,35 +1283,25 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
             	    }
             	    switch (alt7) {
             	        case 1 :
-            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:604:3: ( () otherlv_2= '+' )
+            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:525:3: ( () otherlv_2= '+' )
             	            {
-            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:604:3: ( () otherlv_2= '+' )
-            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:604:4: () otherlv_2= '+'
+            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:525:3: ( () otherlv_2= '+' )
+            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:525:4: () otherlv_2= '+'
             	            {
-            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:604:4: ()
-            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:605:5: 
+            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:525:4: ()
+            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:526:5: 
             	            {
-            	             
-            	                    temp=factory.create(grammarAccess.getAdditionAccess().getPlusLeftAction_1_0_0_0().getType().getClassifier());
-            	                    try {
-            	                    	factory.set(temp, "left", current, null /*ParserRule*/, currentNode);
-            	                    } catch(ValueConverterException vce) {
-            	                    	handleValueConverterException(vce);
-            	                    }
-            	                    current = temp; 
-            	                    temp = null;
-            	                    CompositeNode newNode = createCompositeNode(grammarAccess.getAdditionAccess().getPlusLeftAction_1_0_0_0(), currentNode.getParent());
-            	                newNode.getChildren().add(currentNode);
-            	                moveLookaheadInfo(currentNode, newNode);
-            	                currentNode = newNode; 
-            	                    associateNodeWithAstElement(currentNode, current); 
+
+            	                    current = forceCreateModelElementAndSet(
+            	                        grammarAccess.getAdditionAccess().getPlusLeftAction_1_0_0_0(),
+            	                        current);
             	                
 
             	            }
 
             	            otherlv_2=(Token)match(input,22,FOLLOW_22_in_ruleAddition1174); 
 
-            	                	createLeafNode(otherlv_2, grammarAccess.getAdditionAccess().getPlusSignKeyword_1_0_0_1(), null);
+            	                	newLeafNode(otherlv_2, grammarAccess.getAdditionAccess().getPlusSignKeyword_1_0_0_1());
             	                
 
             	            }
@@ -1397,35 +1310,25 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
             	            }
             	            break;
             	        case 2 :
-            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:625:6: ( () otherlv_4= '-' )
+            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:536:6: ( () otherlv_4= '-' )
             	            {
-            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:625:6: ( () otherlv_4= '-' )
-            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:625:7: () otherlv_4= '-'
+            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:536:6: ( () otherlv_4= '-' )
+            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:536:7: () otherlv_4= '-'
             	            {
-            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:625:7: ()
-            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:626:5: 
+            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:536:7: ()
+            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:537:5: 
             	            {
-            	             
-            	                    temp=factory.create(grammarAccess.getAdditionAccess().getMinusLeftAction_1_0_1_0().getType().getClassifier());
-            	                    try {
-            	                    	factory.set(temp, "left", current, null /*ParserRule*/, currentNode);
-            	                    } catch(ValueConverterException vce) {
-            	                    	handleValueConverterException(vce);
-            	                    }
-            	                    current = temp; 
-            	                    temp = null;
-            	                    CompositeNode newNode = createCompositeNode(grammarAccess.getAdditionAccess().getMinusLeftAction_1_0_1_0(), currentNode.getParent());
-            	                newNode.getChildren().add(currentNode);
-            	                moveLookaheadInfo(currentNode, newNode);
-            	                currentNode = newNode; 
-            	                    associateNodeWithAstElement(currentNode, current); 
+
+            	                    current = forceCreateModelElementAndSet(
+            	                        grammarAccess.getAdditionAccess().getMinusLeftAction_1_0_1_0(),
+            	                        current);
             	                
 
             	            }
 
             	            otherlv_4=(Token)match(input,23,FOLLOW_23_in_ruleAddition1203); 
 
-            	                	createLeafNode(otherlv_4, grammarAccess.getAdditionAccess().getHyphenMinusKeyword_1_0_1_1(), null);
+            	                	newLeafNode(otherlv_4, grammarAccess.getAdditionAccess().getHyphenMinusKeyword_1_0_1_1());
             	                
 
             	            }
@@ -1436,14 +1339,14 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:645:3: ( (lv_right_5_0= ruleMultiplication ) )
-            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:646:1: (lv_right_5_0= ruleMultiplication )
+            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:546:3: ( (lv_right_5_0= ruleMultiplication ) )
+            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:547:1: (lv_right_5_0= ruleMultiplication )
             	    {
-            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:646:1: (lv_right_5_0= ruleMultiplication )
-            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:647:3: lv_right_5_0= ruleMultiplication
+            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:547:1: (lv_right_5_0= ruleMultiplication )
+            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:548:3: lv_right_5_0= ruleMultiplication
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.getAdditionAccess().getRightMultiplicationParserRuleCall_1_1_0(), currentNode); 
+            	    	        newCompositeNode(grammarAccess.getAdditionAccess().getRightMultiplicationParserRuleCall_1_1_0()); 
             	    	    
             	    pushFollow(FOLLOW_ruleMultiplication_in_ruleAddition1226);
             	    lv_right_5_0=ruleMultiplication();
@@ -1452,20 +1355,14 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.getAdditionRule().getType().getClassifier());
-            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
+            	    	            current = createModelElementForParent(grammarAccess.getAdditionRule());
             	    	        }
-            	    	        try {
-            	    	       		set(
-            	    	       			current, 
-            	    	       			"right",
-            	    	        		lv_right_5_0, 
-            	    	        		"Multiplication", 
-            	    	        		currentNode);
-            	    	        } catch (ValueConverterException vce) {
-            	    				handleValueConverterException(vce);
-            	    	        }
-            	    	        currentNode = currentNode.getParent();
+            	           		set(
+            	           			current, 
+            	           			"right",
+            	            		lv_right_5_0, 
+            	            		"Multiplication");
+            	    	        afterParserOrEnumRuleCall();
             	    	    
 
             	    }
@@ -1488,9 +1385,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
             }
 
-             resetLookahead(); 
-                	lastConsumedNode = currentNode;
-                
+             leaveRule(); 
         }
          
             catch (RecognitionException re) { 
@@ -1505,7 +1400,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleMultiplication"
-    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:677:1: entryRuleMultiplication returns [EObject current=null] : iv_ruleMultiplication= ruleMultiplication EOF ;
+    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:572:1: entryRuleMultiplication returns [EObject current=null] : iv_ruleMultiplication= ruleMultiplication EOF ;
     public final EObject entryRuleMultiplication() throws RecognitionException {
         EObject current = null;
 
@@ -1513,10 +1408,10 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:678:2: (iv_ruleMultiplication= ruleMultiplication EOF )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:679:2: iv_ruleMultiplication= ruleMultiplication EOF
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:573:2: (iv_ruleMultiplication= ruleMultiplication EOF )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:574:2: iv_ruleMultiplication= ruleMultiplication EOF
             {
-             currentNode = createCompositeNode(grammarAccess.getMultiplicationRule(), currentNode); 
+             newCompositeNode(grammarAccess.getMultiplicationRule()); 
             pushFollow(FOLLOW_ruleMultiplication_in_entryRuleMultiplication1264);
             iv_ruleMultiplication=ruleMultiplication();
 
@@ -1541,7 +1436,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleMultiplication"
-    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:686:1: ruleMultiplication returns [EObject current=null] : (this_PrimaryExpression_0= rulePrimaryExpression ( ( ( () otherlv_2= '*' ) | ( () otherlv_4= '/' ) ) ( (lv_right_5_0= rulePrimaryExpression ) ) )* ) ;
+    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:581:1: ruleMultiplication returns [EObject current=null] : (this_PrimaryExpression_0= rulePrimaryExpression ( ( ( () otherlv_2= '*' ) | ( () otherlv_4= '/' ) ) ( (lv_right_5_0= rulePrimaryExpression ) ) )* ) ;
     public final EObject ruleMultiplication() throws RecognitionException {
         EObject current = null;
 
@@ -1552,17 +1447,17 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
         EObject lv_right_5_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:691:6: ( (this_PrimaryExpression_0= rulePrimaryExpression ( ( ( () otherlv_2= '*' ) | ( () otherlv_4= '/' ) ) ( (lv_right_5_0= rulePrimaryExpression ) ) )* ) )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:692:1: (this_PrimaryExpression_0= rulePrimaryExpression ( ( ( () otherlv_2= '*' ) | ( () otherlv_4= '/' ) ) ( (lv_right_5_0= rulePrimaryExpression ) ) )* )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:584:28: ( (this_PrimaryExpression_0= rulePrimaryExpression ( ( ( () otherlv_2= '*' ) | ( () otherlv_4= '/' ) ) ( (lv_right_5_0= rulePrimaryExpression ) ) )* ) )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:585:1: (this_PrimaryExpression_0= rulePrimaryExpression ( ( ( () otherlv_2= '*' ) | ( () otherlv_4= '/' ) ) ( (lv_right_5_0= rulePrimaryExpression ) ) )* )
             {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:692:1: (this_PrimaryExpression_0= rulePrimaryExpression ( ( ( () otherlv_2= '*' ) | ( () otherlv_4= '/' ) ) ( (lv_right_5_0= rulePrimaryExpression ) ) )* )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:693:5: this_PrimaryExpression_0= rulePrimaryExpression ( ( ( () otherlv_2= '*' ) | ( () otherlv_4= '/' ) ) ( (lv_right_5_0= rulePrimaryExpression ) ) )*
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:585:1: (this_PrimaryExpression_0= rulePrimaryExpression ( ( ( () otherlv_2= '*' ) | ( () otherlv_4= '/' ) ) ( (lv_right_5_0= rulePrimaryExpression ) ) )* )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:586:5: this_PrimaryExpression_0= rulePrimaryExpression ( ( ( () otherlv_2= '*' ) | ( () otherlv_4= '/' ) ) ( (lv_right_5_0= rulePrimaryExpression ) ) )*
             {
              
-                    currentNode=createCompositeNode(grammarAccess.getMultiplicationAccess().getPrimaryExpressionParserRuleCall_0(), currentNode); 
+                    newCompositeNode(grammarAccess.getMultiplicationAccess().getPrimaryExpressionParserRuleCall_0()); 
                 
             pushFollow(FOLLOW_rulePrimaryExpression_in_ruleMultiplication1321);
             this_PrimaryExpression_0=rulePrimaryExpression();
@@ -1571,9 +1466,9 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
              
                     current = this_PrimaryExpression_0; 
-                    currentNode = currentNode.getParent();
+                    afterParserOrEnumRuleCall();
                 
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:701:1: ( ( ( () otherlv_2= '*' ) | ( () otherlv_4= '/' ) ) ( (lv_right_5_0= rulePrimaryExpression ) ) )*
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:594:1: ( ( ( () otherlv_2= '*' ) | ( () otherlv_4= '/' ) ) ( (lv_right_5_0= rulePrimaryExpression ) ) )*
             loop10:
             do {
                 int alt10=2;
@@ -1586,9 +1481,9 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
                 switch (alt10) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:701:2: ( ( () otherlv_2= '*' ) | ( () otherlv_4= '/' ) ) ( (lv_right_5_0= rulePrimaryExpression ) )
+            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:594:2: ( ( () otherlv_2= '*' ) | ( () otherlv_4= '/' ) ) ( (lv_right_5_0= rulePrimaryExpression ) )
             	    {
-            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:701:2: ( ( () otherlv_2= '*' ) | ( () otherlv_4= '/' ) )
+            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:594:2: ( ( () otherlv_2= '*' ) | ( () otherlv_4= '/' ) )
             	    int alt9=2;
             	    int LA9_0 = input.LA(1);
 
@@ -1606,35 +1501,25 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
             	    }
             	    switch (alt9) {
             	        case 1 :
-            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:701:3: ( () otherlv_2= '*' )
+            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:594:3: ( () otherlv_2= '*' )
             	            {
-            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:701:3: ( () otherlv_2= '*' )
-            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:701:4: () otherlv_2= '*'
+            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:594:3: ( () otherlv_2= '*' )
+            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:594:4: () otherlv_2= '*'
             	            {
-            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:701:4: ()
-            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:702:5: 
+            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:594:4: ()
+            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:595:5: 
             	            {
-            	             
-            	                    temp=factory.create(grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0_0_0().getType().getClassifier());
-            	                    try {
-            	                    	factory.set(temp, "left", current, null /*ParserRule*/, currentNode);
-            	                    } catch(ValueConverterException vce) {
-            	                    	handleValueConverterException(vce);
-            	                    }
-            	                    current = temp; 
-            	                    temp = null;
-            	                    CompositeNode newNode = createCompositeNode(grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0_0_0(), currentNode.getParent());
-            	                newNode.getChildren().add(currentNode);
-            	                moveLookaheadInfo(currentNode, newNode);
-            	                currentNode = newNode; 
-            	                    associateNodeWithAstElement(currentNode, current); 
+
+            	                    current = forceCreateModelElementAndSet(
+            	                        grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0_0_0(),
+            	                        current);
             	                
 
             	            }
 
             	            otherlv_2=(Token)match(input,15,FOLLOW_15_in_ruleMultiplication1344); 
 
-            	                	createLeafNode(otherlv_2, grammarAccess.getMultiplicationAccess().getAsteriskKeyword_1_0_0_1(), null);
+            	                	newLeafNode(otherlv_2, grammarAccess.getMultiplicationAccess().getAsteriskKeyword_1_0_0_1());
             	                
 
             	            }
@@ -1643,35 +1528,25 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
             	            }
             	            break;
             	        case 2 :
-            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:722:6: ( () otherlv_4= '/' )
+            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:605:6: ( () otherlv_4= '/' )
             	            {
-            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:722:6: ( () otherlv_4= '/' )
-            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:722:7: () otherlv_4= '/'
+            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:605:6: ( () otherlv_4= '/' )
+            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:605:7: () otherlv_4= '/'
             	            {
-            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:722:7: ()
-            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:723:5: 
+            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:605:7: ()
+            	            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:606:5: 
             	            {
-            	             
-            	                    temp=factory.create(grammarAccess.getMultiplicationAccess().getDivLeftAction_1_0_1_0().getType().getClassifier());
-            	                    try {
-            	                    	factory.set(temp, "left", current, null /*ParserRule*/, currentNode);
-            	                    } catch(ValueConverterException vce) {
-            	                    	handleValueConverterException(vce);
-            	                    }
-            	                    current = temp; 
-            	                    temp = null;
-            	                    CompositeNode newNode = createCompositeNode(grammarAccess.getMultiplicationAccess().getDivLeftAction_1_0_1_0(), currentNode.getParent());
-            	                newNode.getChildren().add(currentNode);
-            	                moveLookaheadInfo(currentNode, newNode);
-            	                currentNode = newNode; 
-            	                    associateNodeWithAstElement(currentNode, current); 
+
+            	                    current = forceCreateModelElementAndSet(
+            	                        grammarAccess.getMultiplicationAccess().getDivLeftAction_1_0_1_0(),
+            	                        current);
             	                
 
             	            }
 
             	            otherlv_4=(Token)match(input,24,FOLLOW_24_in_ruleMultiplication1373); 
 
-            	                	createLeafNode(otherlv_4, grammarAccess.getMultiplicationAccess().getSolidusKeyword_1_0_1_1(), null);
+            	                	newLeafNode(otherlv_4, grammarAccess.getMultiplicationAccess().getSolidusKeyword_1_0_1_1());
             	                
 
             	            }
@@ -1682,14 +1557,14 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:742:3: ( (lv_right_5_0= rulePrimaryExpression ) )
-            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:743:1: (lv_right_5_0= rulePrimaryExpression )
+            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:615:3: ( (lv_right_5_0= rulePrimaryExpression ) )
+            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:616:1: (lv_right_5_0= rulePrimaryExpression )
             	    {
-            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:743:1: (lv_right_5_0= rulePrimaryExpression )
-            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:744:3: lv_right_5_0= rulePrimaryExpression
+            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:616:1: (lv_right_5_0= rulePrimaryExpression )
+            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:617:3: lv_right_5_0= rulePrimaryExpression
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.getMultiplicationAccess().getRightPrimaryExpressionParserRuleCall_1_1_0(), currentNode); 
+            	    	        newCompositeNode(grammarAccess.getMultiplicationAccess().getRightPrimaryExpressionParserRuleCall_1_1_0()); 
             	    	    
             	    pushFollow(FOLLOW_rulePrimaryExpression_in_ruleMultiplication1396);
             	    lv_right_5_0=rulePrimaryExpression();
@@ -1698,20 +1573,14 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.getMultiplicationRule().getType().getClassifier());
-            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
+            	    	            current = createModelElementForParent(grammarAccess.getMultiplicationRule());
             	    	        }
-            	    	        try {
-            	    	       		set(
-            	    	       			current, 
-            	    	       			"right",
-            	    	        		lv_right_5_0, 
-            	    	        		"PrimaryExpression", 
-            	    	        		currentNode);
-            	    	        } catch (ValueConverterException vce) {
-            	    				handleValueConverterException(vce);
-            	    	        }
-            	    	        currentNode = currentNode.getParent();
+            	           		set(
+            	           			current, 
+            	           			"right",
+            	            		lv_right_5_0, 
+            	            		"PrimaryExpression");
+            	    	        afterParserOrEnumRuleCall();
             	    	    
 
             	    }
@@ -1734,9 +1603,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
             }
 
-             resetLookahead(); 
-                	lastConsumedNode = currentNode;
-                
+             leaveRule(); 
         }
          
             catch (RecognitionException re) { 
@@ -1751,7 +1618,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRulePrimaryExpression"
-    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:774:1: entryRulePrimaryExpression returns [EObject current=null] : iv_rulePrimaryExpression= rulePrimaryExpression EOF ;
+    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:641:1: entryRulePrimaryExpression returns [EObject current=null] : iv_rulePrimaryExpression= rulePrimaryExpression EOF ;
     public final EObject entryRulePrimaryExpression() throws RecognitionException {
         EObject current = null;
 
@@ -1759,10 +1626,10 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:775:2: (iv_rulePrimaryExpression= rulePrimaryExpression EOF )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:776:2: iv_rulePrimaryExpression= rulePrimaryExpression EOF
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:642:2: (iv_rulePrimaryExpression= rulePrimaryExpression EOF )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:643:2: iv_rulePrimaryExpression= rulePrimaryExpression EOF
             {
-             currentNode = createCompositeNode(grammarAccess.getPrimaryExpressionRule(), currentNode); 
+             newCompositeNode(grammarAccess.getPrimaryExpressionRule()); 
             pushFollow(FOLLOW_rulePrimaryExpression_in_entryRulePrimaryExpression1434);
             iv_rulePrimaryExpression=rulePrimaryExpression();
 
@@ -1787,7 +1654,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "rulePrimaryExpression"
-    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:783:1: rulePrimaryExpression returns [EObject current=null] : ( (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' ) | ( () ( (lv_value_4_0= RULE_NUMBER ) ) ) | ( () ( (otherlv_6= RULE_ID ) ) (otherlv_7= '(' ( (lv_args_8_0= ruleExpression ) ) (otherlv_9= ',' ( (lv_args_10_0= ruleExpression ) ) )* otherlv_11= ')' )? ) ) ;
+    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:650:1: rulePrimaryExpression returns [EObject current=null] : ( (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' ) | ( () ( (lv_value_4_0= RULE_NUMBER ) ) ) | ( () ( (otherlv_6= RULE_ID ) ) (otherlv_7= '(' ( (lv_args_8_0= ruleExpression ) ) (otherlv_9= ',' ( (lv_args_10_0= ruleExpression ) ) )* otherlv_11= ')' )? ) ) ;
     public final EObject rulePrimaryExpression() throws RecognitionException {
         EObject current = null;
 
@@ -1805,13 +1672,13 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
         EObject lv_args_10_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:788:6: ( ( (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' ) | ( () ( (lv_value_4_0= RULE_NUMBER ) ) ) | ( () ( (otherlv_6= RULE_ID ) ) (otherlv_7= '(' ( (lv_args_8_0= ruleExpression ) ) (otherlv_9= ',' ( (lv_args_10_0= ruleExpression ) ) )* otherlv_11= ')' )? ) ) )
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:789:1: ( (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' ) | ( () ( (lv_value_4_0= RULE_NUMBER ) ) ) | ( () ( (otherlv_6= RULE_ID ) ) (otherlv_7= '(' ( (lv_args_8_0= ruleExpression ) ) (otherlv_9= ',' ( (lv_args_10_0= ruleExpression ) ) )* otherlv_11= ')' )? ) )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:653:28: ( ( (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' ) | ( () ( (lv_value_4_0= RULE_NUMBER ) ) ) | ( () ( (otherlv_6= RULE_ID ) ) (otherlv_7= '(' ( (lv_args_8_0= ruleExpression ) ) (otherlv_9= ',' ( (lv_args_10_0= ruleExpression ) ) )* otherlv_11= ')' )? ) ) )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:654:1: ( (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' ) | ( () ( (lv_value_4_0= RULE_NUMBER ) ) ) | ( () ( (otherlv_6= RULE_ID ) ) (otherlv_7= '(' ( (lv_args_8_0= ruleExpression ) ) (otherlv_9= ',' ( (lv_args_10_0= ruleExpression ) ) )* otherlv_11= ')' )? ) )
             {
-            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:789:1: ( (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' ) | ( () ( (lv_value_4_0= RULE_NUMBER ) ) ) | ( () ( (otherlv_6= RULE_ID ) ) (otherlv_7= '(' ( (lv_args_8_0= ruleExpression ) ) (otherlv_9= ',' ( (lv_args_10_0= ruleExpression ) ) )* otherlv_11= ')' )? ) )
+            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:654:1: ( (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' ) | ( () ( (lv_value_4_0= RULE_NUMBER ) ) ) | ( () ( (otherlv_6= RULE_ID ) ) (otherlv_7= '(' ( (lv_args_8_0= ruleExpression ) ) (otherlv_9= ',' ( (lv_args_10_0= ruleExpression ) ) )* otherlv_11= ')' )? ) )
             int alt13=3;
             switch ( input.LA(1) ) {
             case 17:
@@ -1838,17 +1705,17 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
             switch (alt13) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:789:2: (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' )
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:654:2: (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' )
                     {
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:789:2: (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' )
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:789:4: otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')'
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:654:2: (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' )
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:654:4: otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')'
                     {
                     otherlv_0=(Token)match(input,17,FOLLOW_17_in_rulePrimaryExpression1482); 
 
-                        	createLeafNode(otherlv_0, grammarAccess.getPrimaryExpressionAccess().getLeftParenthesisKeyword_0_0(), null);
+                        	newLeafNode(otherlv_0, grammarAccess.getPrimaryExpressionAccess().getLeftParenthesisKeyword_0_0());
                         
                      
-                            currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getExpressionParserRuleCall_0_1(), currentNode); 
+                            newCompositeNode(grammarAccess.getPrimaryExpressionAccess().getExpressionParserRuleCall_0_1()); 
                         
                     pushFollow(FOLLOW_ruleExpression_in_rulePrimaryExpression1504);
                     this_Expression_1=ruleExpression();
@@ -1857,11 +1724,11 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
                      
                             current = this_Expression_1; 
-                            currentNode = currentNode.getParent();
+                            afterParserOrEnumRuleCall();
                         
                     otherlv_2=(Token)match(input,19,FOLLOW_19_in_rulePrimaryExpression1515); 
 
-                        	createLeafNode(otherlv_2, grammarAccess.getPrimaryExpressionAccess().getRightParenthesisKeyword_0_2(), null);
+                        	newLeafNode(otherlv_2, grammarAccess.getPrimaryExpressionAccess().getRightParenthesisKeyword_0_2());
                         
 
                     }
@@ -1870,52 +1737,41 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:807:6: ( () ( (lv_value_4_0= RULE_NUMBER ) ) )
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:672:6: ( () ( (lv_value_4_0= RULE_NUMBER ) ) )
                     {
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:807:6: ( () ( (lv_value_4_0= RULE_NUMBER ) ) )
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:807:7: () ( (lv_value_4_0= RULE_NUMBER ) )
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:672:6: ( () ( (lv_value_4_0= RULE_NUMBER ) ) )
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:672:7: () ( (lv_value_4_0= RULE_NUMBER ) )
                     {
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:807:7: ()
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:808:5: 
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:672:7: ()
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:673:5: 
                     {
-                     
-                            temp=factory.create(grammarAccess.getPrimaryExpressionAccess().getNumberLiteralAction_1_0().getType().getClassifier());
-                            current = temp; 
-                            temp = null;
-                            CompositeNode newNode = createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getNumberLiteralAction_1_0(), currentNode.getParent());
-                        newNode.getChildren().add(currentNode);
-                        moveLookaheadInfo(currentNode, newNode);
-                        currentNode = newNode; 
-                            associateNodeWithAstElement(currentNode, current); 
+
+                            current = forceCreateModelElement(
+                                grammarAccess.getPrimaryExpressionAccess().getNumberLiteralAction_1_0(),
+                                current);
                         
 
                     }
 
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:818:2: ( (lv_value_4_0= RULE_NUMBER ) )
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:819:1: (lv_value_4_0= RULE_NUMBER )
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:678:2: ( (lv_value_4_0= RULE_NUMBER ) )
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:679:1: (lv_value_4_0= RULE_NUMBER )
                     {
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:819:1: (lv_value_4_0= RULE_NUMBER )
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:820:3: lv_value_4_0= RULE_NUMBER
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:679:1: (lv_value_4_0= RULE_NUMBER )
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:680:3: lv_value_4_0= RULE_NUMBER
                     {
                     lv_value_4_0=(Token)match(input,RULE_NUMBER,FOLLOW_RULE_NUMBER_in_rulePrimaryExpression1549); 
 
-                    			createLeafNode(lv_value_4_0, grammarAccess.getPrimaryExpressionAccess().getValueNUMBERTerminalRuleCall_1_1_0(), "value"); 
+                    			newLeafNode(lv_value_4_0, grammarAccess.getPrimaryExpressionAccess().getValueNUMBERTerminalRuleCall_1_1_0()); 
                     		
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.getPrimaryExpressionRule().getType().getClassifier());
-                    	            associateNodeWithAstElement(currentNode, current);
+                    	            current = createModelElement(grammarAccess.getPrimaryExpressionRule());
                     	        }
-                    	        try {
-                    	       		set(
-                    	       			current, 
-                    	       			"value",
-                    	        		lv_value_4_0, 
-                    	        		"NUMBER", 
-                    	        		lastConsumedNode);
-                    	        } catch (ValueConverterException vce) {
-                    				handleValueConverterException(vce);
-                    	        }
+                           		setWithLastConsumed(
+                           			current, 
+                           			"value",
+                            		lv_value_4_0, 
+                            		"NUMBER");
                     	    
 
                     }
@@ -1930,42 +1786,36 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:843:6: ( () ( (otherlv_6= RULE_ID ) ) (otherlv_7= '(' ( (lv_args_8_0= ruleExpression ) ) (otherlv_9= ',' ( (lv_args_10_0= ruleExpression ) ) )* otherlv_11= ')' )? )
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:697:6: ( () ( (otherlv_6= RULE_ID ) ) (otherlv_7= '(' ( (lv_args_8_0= ruleExpression ) ) (otherlv_9= ',' ( (lv_args_10_0= ruleExpression ) ) )* otherlv_11= ')' )? )
                     {
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:843:6: ( () ( (otherlv_6= RULE_ID ) ) (otherlv_7= '(' ( (lv_args_8_0= ruleExpression ) ) (otherlv_9= ',' ( (lv_args_10_0= ruleExpression ) ) )* otherlv_11= ')' )? )
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:843:7: () ( (otherlv_6= RULE_ID ) ) (otherlv_7= '(' ( (lv_args_8_0= ruleExpression ) ) (otherlv_9= ',' ( (lv_args_10_0= ruleExpression ) ) )* otherlv_11= ')' )?
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:697:6: ( () ( (otherlv_6= RULE_ID ) ) (otherlv_7= '(' ( (lv_args_8_0= ruleExpression ) ) (otherlv_9= ',' ( (lv_args_10_0= ruleExpression ) ) )* otherlv_11= ')' )? )
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:697:7: () ( (otherlv_6= RULE_ID ) ) (otherlv_7= '(' ( (lv_args_8_0= ruleExpression ) ) (otherlv_9= ',' ( (lv_args_10_0= ruleExpression ) ) )* otherlv_11= ')' )?
                     {
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:843:7: ()
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:844:5: 
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:697:7: ()
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:698:5: 
                     {
-                     
-                            temp=factory.create(grammarAccess.getPrimaryExpressionAccess().getFunctionCallAction_2_0().getType().getClassifier());
-                            current = temp; 
-                            temp = null;
-                            CompositeNode newNode = createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getFunctionCallAction_2_0(), currentNode.getParent());
-                        newNode.getChildren().add(currentNode);
-                        moveLookaheadInfo(currentNode, newNode);
-                        currentNode = newNode; 
-                            associateNodeWithAstElement(currentNode, current); 
+
+                            current = forceCreateModelElement(
+                                grammarAccess.getPrimaryExpressionAccess().getFunctionCallAction_2_0(),
+                                current);
                         
 
                     }
 
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:854:2: ( (otherlv_6= RULE_ID ) )
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:855:1: (otherlv_6= RULE_ID )
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:703:2: ( (otherlv_6= RULE_ID ) )
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:704:1: (otherlv_6= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:855:1: (otherlv_6= RULE_ID )
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:856:3: otherlv_6= RULE_ID
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:704:1: (otherlv_6= RULE_ID )
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:705:3: otherlv_6= RULE_ID
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.getPrimaryExpressionRule().getType().getClassifier());
-                    	            associateNodeWithAstElement(currentNode, current);
+                    	            current = createModelElement(grammarAccess.getPrimaryExpressionRule());
                     	        }
                             
                     otherlv_6=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_rulePrimaryExpression1591); 
 
-                    		createLeafNode(otherlv_6, grammarAccess.getPrimaryExpressionAccess().getFuncAbstractDefinitionCrossReference_2_1_0(), "func"); 
+                    		newLeafNode(otherlv_6, grammarAccess.getPrimaryExpressionAccess().getFuncAbstractDefinitionCrossReference_2_1_0()); 
                     	
 
                     }
@@ -1973,7 +1823,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:868:2: (otherlv_7= '(' ( (lv_args_8_0= ruleExpression ) ) (otherlv_9= ',' ( (lv_args_10_0= ruleExpression ) ) )* otherlv_11= ')' )?
+                    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:716:2: (otherlv_7= '(' ( (lv_args_8_0= ruleExpression ) ) (otherlv_9= ',' ( (lv_args_10_0= ruleExpression ) ) )* otherlv_11= ')' )?
                     int alt12=2;
                     int LA12_0 = input.LA(1);
 
@@ -1982,20 +1832,20 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt12) {
                         case 1 :
-                            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:868:4: otherlv_7= '(' ( (lv_args_8_0= ruleExpression ) ) (otherlv_9= ',' ( (lv_args_10_0= ruleExpression ) ) )* otherlv_11= ')'
+                            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:716:4: otherlv_7= '(' ( (lv_args_8_0= ruleExpression ) ) (otherlv_9= ',' ( (lv_args_10_0= ruleExpression ) ) )* otherlv_11= ')'
                             {
                             otherlv_7=(Token)match(input,17,FOLLOW_17_in_rulePrimaryExpression1604); 
 
-                                	createLeafNode(otherlv_7, grammarAccess.getPrimaryExpressionAccess().getLeftParenthesisKeyword_2_2_0(), null);
+                                	newLeafNode(otherlv_7, grammarAccess.getPrimaryExpressionAccess().getLeftParenthesisKeyword_2_2_0());
                                 
-                            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:872:1: ( (lv_args_8_0= ruleExpression ) )
-                            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:873:1: (lv_args_8_0= ruleExpression )
+                            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:720:1: ( (lv_args_8_0= ruleExpression ) )
+                            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:721:1: (lv_args_8_0= ruleExpression )
                             {
-                            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:873:1: (lv_args_8_0= ruleExpression )
-                            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:874:3: lv_args_8_0= ruleExpression
+                            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:721:1: (lv_args_8_0= ruleExpression )
+                            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:722:3: lv_args_8_0= ruleExpression
                             {
                              
-                            	        currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getArgsExpressionParserRuleCall_2_2_1_0(), currentNode); 
+                            	        newCompositeNode(grammarAccess.getPrimaryExpressionAccess().getArgsExpressionParserRuleCall_2_2_1_0()); 
                             	    
                             pushFollow(FOLLOW_ruleExpression_in_rulePrimaryExpression1625);
                             lv_args_8_0=ruleExpression();
@@ -2004,20 +1854,14 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.getPrimaryExpressionRule().getType().getClassifier());
-                            	            associateNodeWithAstElement(currentNode.getParent(), current);
+                            	            current = createModelElementForParent(grammarAccess.getPrimaryExpressionRule());
                             	        }
-                            	        try {
-                            	       		add(
-                            	       			current, 
-                            	       			"args",
-                            	        		lv_args_8_0, 
-                            	        		"Expression", 
-                            	        		currentNode);
-                            	        } catch (ValueConverterException vce) {
-                            				handleValueConverterException(vce);
-                            	        }
-                            	        currentNode = currentNode.getParent();
+                                   		add(
+                                   			current, 
+                                   			"args",
+                                    		lv_args_8_0, 
+                                    		"Expression");
+                            	        afterParserOrEnumRuleCall();
                             	    
 
                             }
@@ -2025,7 +1869,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
                             }
 
-                            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:896:2: (otherlv_9= ',' ( (lv_args_10_0= ruleExpression ) ) )*
+                            // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:738:2: (otherlv_9= ',' ( (lv_args_10_0= ruleExpression ) ) )*
                             loop11:
                             do {
                                 int alt11=2;
@@ -2038,20 +1882,20 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
                                 switch (alt11) {
                             	case 1 :
-                            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:896:4: otherlv_9= ',' ( (lv_args_10_0= ruleExpression ) )
+                            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:738:4: otherlv_9= ',' ( (lv_args_10_0= ruleExpression ) )
                             	    {
                             	    otherlv_9=(Token)match(input,18,FOLLOW_18_in_rulePrimaryExpression1638); 
 
-                            	        	createLeafNode(otherlv_9, grammarAccess.getPrimaryExpressionAccess().getCommaKeyword_2_2_2_0(), null);
+                            	        	newLeafNode(otherlv_9, grammarAccess.getPrimaryExpressionAccess().getCommaKeyword_2_2_2_0());
                             	        
-                            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:900:1: ( (lv_args_10_0= ruleExpression ) )
-                            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:901:1: (lv_args_10_0= ruleExpression )
+                            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:742:1: ( (lv_args_10_0= ruleExpression ) )
+                            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:743:1: (lv_args_10_0= ruleExpression )
                             	    {
-                            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:901:1: (lv_args_10_0= ruleExpression )
-                            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:902:3: lv_args_10_0= ruleExpression
+                            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:743:1: (lv_args_10_0= ruleExpression )
+                            	    // ../org.eclipse.xtext.example.arithmetics/src-gen/org/eclipse/xtext/example/arithmetics/parser/antlr/internal/InternalArithmetics.g:744:3: lv_args_10_0= ruleExpression
                             	    {
                             	     
-                            	    	        currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getArgsExpressionParserRuleCall_2_2_2_1_0(), currentNode); 
+                            	    	        newCompositeNode(grammarAccess.getPrimaryExpressionAccess().getArgsExpressionParserRuleCall_2_2_2_1_0()); 
                             	    	    
                             	    pushFollow(FOLLOW_ruleExpression_in_rulePrimaryExpression1659);
                             	    lv_args_10_0=ruleExpression();
@@ -2060,20 +1904,14 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
 
                             	    	        if (current==null) {
-                            	    	            current = factory.create(grammarAccess.getPrimaryExpressionRule().getType().getClassifier());
-                            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
+                            	    	            current = createModelElementForParent(grammarAccess.getPrimaryExpressionRule());
                             	    	        }
-                            	    	        try {
-                            	    	       		add(
-                            	    	       			current, 
-                            	    	       			"args",
-                            	    	        		lv_args_10_0, 
-                            	    	        		"Expression", 
-                            	    	        		currentNode);
-                            	    	        } catch (ValueConverterException vce) {
-                            	    				handleValueConverterException(vce);
-                            	    	        }
-                            	    	        currentNode = currentNode.getParent();
+                            	           		add(
+                            	           			current, 
+                            	           			"args",
+                            	            		lv_args_10_0, 
+                            	            		"Expression");
+                            	    	        afterParserOrEnumRuleCall();
                             	    	    
 
                             	    }
@@ -2092,7 +1930,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
                             otherlv_11=(Token)match(input,19,FOLLOW_19_in_rulePrimaryExpression1673); 
 
-                                	createLeafNode(otherlv_11, grammarAccess.getPrimaryExpressionAccess().getRightParenthesisKeyword_2_2_3(), null);
+                                	newLeafNode(otherlv_11, grammarAccess.getPrimaryExpressionAccess().getRightParenthesisKeyword_2_2_3());
                                 
 
                             }
@@ -2112,9 +1950,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
 
             }
 
-             resetLookahead(); 
-                	lastConsumedNode = currentNode;
-                
+             leaveRule(); 
         }
          
             catch (RecognitionException re) { 

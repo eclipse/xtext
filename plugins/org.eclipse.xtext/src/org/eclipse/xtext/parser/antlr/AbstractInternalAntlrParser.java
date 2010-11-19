@@ -181,15 +181,15 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	
 	private static final Logger logger = Logger.getLogger(AbstractInternalAntlrParser.class);
 	
-	protected CompositeNode currentNode;
+	private CompositeNode currentNode;
 	
-	protected ICompositeNode currentNode2;
+	private ICompositeNode currentNode2;
 	
 	protected IAstFactory factory;
 	
-	protected int lastConsumedIndex = -1;
+	private int lastConsumedIndex = -1;
 
-	protected AbstractNode lastConsumedNode;
+	private AbstractNode lastConsumedNode;
 
 	private final Map<String, AbstractRule> allRules;
 	

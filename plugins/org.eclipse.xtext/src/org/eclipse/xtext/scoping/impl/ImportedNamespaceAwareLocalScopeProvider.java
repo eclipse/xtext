@@ -167,10 +167,11 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 	protected IScope getLocalElementsScope(IScope parent, final EObject context,
 			final EReference reference) {
 		final List<ImportNormalizer> namespaceResolvers = getImportedNamespaceResolvers(context);
+		final IScope fqnScope = parent;
 		if (isRelativeImport())
 			parent = getImplicitImportOfLocalElements(context, parent);
 		for (ImportNormalizer normalizer : namespaceResolvers) {
-			parent = new ImportScope(normalizer, parent);
+			parent = new ImportScope(normalizer, parent, fqnScope);
 		}
 		return getImplicitImportOfLocalElements(context, parent);
 	}
@@ -184,7 +185,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		if (qualifiedName==null)
 			return parent;
 		final ImportNormalizer localNamespaceResolver = new ImportNormalizer(qualifiedName,true);
-		return new ImportScope(localNamespaceResolver, parent);
+		return new ImportScope(localNamespaceResolver, parent, parent);
 	}
 
 	protected IScope getScope(Object cacheKey, EObject eobject, IScope parentScope,

@@ -423,10 +423,10 @@ finally {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.«assignment.containingParserRule().grammarElementAccess()»);
 	        }
-       		«assignment.setOrAdd()»($current, "«assignment.feature»", «
+       		«assignment.setOrAdd()»WithLastConsumed($current, "«assignment.feature»", «
         		IF assignment.isBoolean()»true«
         		ELSE»«assignment.localVar(this)»«
-        		ENDIF», «assignment.terminal.toStringLiteral()», lastConsumedNode);
+        		ENDIF», «assignment.terminal.toStringLiteral()»);
 	    }
 «ENDDEFINE»
 
@@ -501,12 +501,11 @@ finally {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.«assignment.containingParserRule().grammarElementAccess()»);
 	        }
-       		«assignment.setOrAdd()»(
+       		«assignment.setOrAdd()»WithLastConsumed(
        			$current, 
        			"«assignment.feature»",
         		«IF assignment.isBoolean()»true«ELSE»«assignment.localVar(call)»«ENDIF», 
-        		«call.toStringLiteral()», 
-        		lastConsumedNode);
+        		«call.toStringLiteral()»);
 	    }
 «ENDDEFINE»
 

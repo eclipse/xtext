@@ -215,7 +215,7 @@ rulePreop returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getPreopRule());
 	        }
-       		set($current, "functionName", lv_functionName_1_0, "--", lastConsumedNode);
+       		setWithLastConsumed($current, "functionName", lv_functionName_1_0, "--");
 	    }
 
 )
@@ -291,7 +291,7 @@ rulePostop returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getPostopRule());
 	        }
-       		set($current, "functionName", lv_functionName_2_0, "--", lastConsumedNode);
+       		setWithLastConsumed($current, "functionName", lv_functionName_2_0, "--");
 	    }
 
 )
@@ -335,12 +335,11 @@ ruleVariable returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getVariableRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )

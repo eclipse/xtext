@@ -172,12 +172,11 @@ ruleElement returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getElementRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
@@ -253,12 +252,11 @@ ruleDataType returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getDataTypeRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"baseType",
         		lv_baseType_0_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
@@ -277,12 +275,11 @@ ruleDataType returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getDataTypeRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"defaultValue",
         		lv_defaultValue_2_0, 
-        		"STRING", 
-        		lastConsumedNode);
+        		"STRING");
 	    }
 
 )
@@ -370,12 +367,11 @@ ruleExpression returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getExpressionRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"prefix",
         		lv_prefix_3_0, 
-        		"STRING", 
-        		lastConsumedNode);
+        		"STRING");
 	    }
 
 )
@@ -462,12 +458,11 @@ ruleExpression returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getExpressionRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"postfix",
         		lv_postfix_9_0, 
-        		"STRING", 
-        		lastConsumedNode);
+        		"STRING");
 	    }
 
 )
@@ -519,12 +514,11 @@ ruleSimpleTerm returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getSimpleTermRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"lineCount",
         		lv_lineCount_0_0, 
-        		"INT", 
-        		lastConsumedNode);
+        		"INT");
 	    }
 
 )
@@ -543,12 +537,11 @@ ruleSimpleTerm returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getSimpleTermRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"charCount",
         		lv_charCount_2_0, 
-        		"INT", 
-        		lastConsumedNode);
+        		"INT");
 	    }
 
 )
@@ -567,12 +560,11 @@ ruleSimpleTerm returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getSimpleTermRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"charSet",
         		lv_charSet_4_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
@@ -587,12 +579,11 @@ ruleSimpleTerm returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getSimpleTermRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"refChar",
         		lv_refChar_5_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )

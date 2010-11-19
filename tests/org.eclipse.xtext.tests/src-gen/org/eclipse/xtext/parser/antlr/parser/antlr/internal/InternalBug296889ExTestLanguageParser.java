@@ -566,7 +566,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
               	        if (current==null) {
               	            current = createModelElement(grammarAccess.getPreopRule());
               	        }
-                     		set(current, "functionName", lv_functionName_1_0, "--", lastConsumedNode);
+                     		setWithLastConsumed(current, "functionName", lv_functionName_1_0, "--");
               	    
             }
 
@@ -768,7 +768,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
                       	        if (current==null) {
                       	            current = createModelElement(grammarAccess.getPostopRule());
                       	        }
-                             		set(current, "functionName", lv_functionName_2_0, "--", lastConsumedNode);
+                             		setWithLastConsumed(current, "functionName", lv_functionName_2_0, "--");
                       	    
                     }
 
@@ -896,12 +896,11 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
               	        if (current==null) {
               	            current = createModelElement(grammarAccess.getVariableRule());
               	        }
-                     		set(
+                     		setWithLastConsumed(
                      			current, 
                      			"name",
                       		lv_name_1_0, 
-                      		"ID", 
-                      		lastConsumedNode);
+                      		"ID");
               	    
             }
 
@@ -933,7 +932,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleDataTypeExpression"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:355:1: entryRuleDataTypeExpression returns [String current=null] : iv_ruleDataTypeExpression= ruleDataTypeExpression EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:354:1: entryRuleDataTypeExpression returns [String current=null] : iv_ruleDataTypeExpression= ruleDataTypeExpression EOF ;
     public final String entryRuleDataTypeExpression() throws RecognitionException {
         String current = null;
 
@@ -941,8 +940,8 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:356:1: (iv_ruleDataTypeExpression= ruleDataTypeExpression EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:357:2: iv_ruleDataTypeExpression= ruleDataTypeExpression EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:355:1: (iv_ruleDataTypeExpression= ruleDataTypeExpression EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:356:2: iv_ruleDataTypeExpression= ruleDataTypeExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getDataTypeExpressionRule()); 
@@ -973,7 +972,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleDataTypeExpression"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:364:1: ruleDataTypeExpression returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_DataTypePostop_0= ruleDataTypePostop | this_DataTypePreop_1= ruleDataTypePreop ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:363:1: ruleDataTypeExpression returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_DataTypePostop_0= ruleDataTypePostop | this_DataTypePreop_1= ruleDataTypePreop ) ;
     public final AntlrDatatypeRuleToken ruleDataTypeExpression() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -985,10 +984,10 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:368:6: ( (this_DataTypePostop_0= ruleDataTypePostop | this_DataTypePreop_1= ruleDataTypePreop ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:369:1: (this_DataTypePostop_0= ruleDataTypePostop | this_DataTypePreop_1= ruleDataTypePreop )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:367:6: ( (this_DataTypePostop_0= ruleDataTypePostop | this_DataTypePreop_1= ruleDataTypePreop ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:368:1: (this_DataTypePostop_0= ruleDataTypePostop | this_DataTypePreop_1= ruleDataTypePreop )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:369:1: (this_DataTypePostop_0= ruleDataTypePostop | this_DataTypePreop_1= ruleDataTypePreop )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:368:1: (this_DataTypePostop_0= ruleDataTypePostop | this_DataTypePreop_1= ruleDataTypePreop )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1007,7 +1006,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:370:5: this_DataTypePostop_0= ruleDataTypePostop
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:369:5: this_DataTypePostop_0= ruleDataTypePostop
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -1033,7 +1032,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:382:5: this_DataTypePreop_1= ruleDataTypePreop
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:381:5: this_DataTypePreop_1= ruleDataTypePreop
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -1082,7 +1081,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleDataTypePreop"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:400:1: entryRuleDataTypePreop returns [String current=null] : iv_ruleDataTypePreop= ruleDataTypePreop EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:399:1: entryRuleDataTypePreop returns [String current=null] : iv_ruleDataTypePreop= ruleDataTypePreop EOF ;
     public final String entryRuleDataTypePreop() throws RecognitionException {
         String current = null;
 
@@ -1090,8 +1089,8 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:401:1: (iv_ruleDataTypePreop= ruleDataTypePreop EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:402:2: iv_ruleDataTypePreop= ruleDataTypePreop EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:400:1: (iv_ruleDataTypePreop= ruleDataTypePreop EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:401:2: iv_ruleDataTypePreop= ruleDataTypePreop EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getDataTypePreopRule()); 
@@ -1122,7 +1121,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleDataTypePreop"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:409:1: ruleDataTypePreop returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= KEYWORD_1 this_DataTypeVariable_1= ruleDataTypeVariable ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:408:1: ruleDataTypePreop returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= KEYWORD_1 this_DataTypeVariable_1= ruleDataTypeVariable ) ;
     public final AntlrDatatypeRuleToken ruleDataTypePreop() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1133,11 +1132,11 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:413:6: ( (kw= KEYWORD_1 this_DataTypeVariable_1= ruleDataTypeVariable ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:414:1: (kw= KEYWORD_1 this_DataTypeVariable_1= ruleDataTypeVariable )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:412:6: ( (kw= KEYWORD_1 this_DataTypeVariable_1= ruleDataTypeVariable ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:413:1: (kw= KEYWORD_1 this_DataTypeVariable_1= ruleDataTypeVariable )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:414:1: (kw= KEYWORD_1 this_DataTypeVariable_1= ruleDataTypeVariable )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:415:2: kw= KEYWORD_1 this_DataTypeVariable_1= ruleDataTypeVariable
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:413:1: (kw= KEYWORD_1 this_DataTypeVariable_1= ruleDataTypeVariable )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:414:2: kw= KEYWORD_1 this_DataTypeVariable_1= ruleDataTypeVariable
             {
             kw=(Token)match(input,KEYWORD_1,FollowSets000.FOLLOW_KEYWORD_1_in_ruleDataTypePreop913); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -1190,7 +1189,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleDataTypePostop"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:439:1: entryRuleDataTypePostop returns [String current=null] : iv_ruleDataTypePostop= ruleDataTypePostop EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:438:1: entryRuleDataTypePostop returns [String current=null] : iv_ruleDataTypePostop= ruleDataTypePostop EOF ;
     public final String entryRuleDataTypePostop() throws RecognitionException {
         String current = null;
 
@@ -1198,8 +1197,8 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:440:1: (iv_ruleDataTypePostop= ruleDataTypePostop EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:441:2: iv_ruleDataTypePostop= ruleDataTypePostop EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:439:1: (iv_ruleDataTypePostop= ruleDataTypePostop EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:440:2: iv_ruleDataTypePostop= ruleDataTypePostop EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getDataTypePostopRule()); 
@@ -1230,7 +1229,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleDataTypePostop"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:448:1: ruleDataTypePostop returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_DataTypeVariable_0= ruleDataTypeVariable (kw= KEYWORD_1 )? ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:447:1: ruleDataTypePostop returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_DataTypeVariable_0= ruleDataTypeVariable (kw= KEYWORD_1 )? ) ;
     public final AntlrDatatypeRuleToken ruleDataTypePostop() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1241,11 +1240,11 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:452:6: ( (this_DataTypeVariable_0= ruleDataTypeVariable (kw= KEYWORD_1 )? ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:453:1: (this_DataTypeVariable_0= ruleDataTypeVariable (kw= KEYWORD_1 )? )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:451:6: ( (this_DataTypeVariable_0= ruleDataTypeVariable (kw= KEYWORD_1 )? ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:452:1: (this_DataTypeVariable_0= ruleDataTypeVariable (kw= KEYWORD_1 )? )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:453:1: (this_DataTypeVariable_0= ruleDataTypeVariable (kw= KEYWORD_1 )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:454:5: this_DataTypeVariable_0= ruleDataTypeVariable (kw= KEYWORD_1 )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:452:1: (this_DataTypeVariable_0= ruleDataTypeVariable (kw= KEYWORD_1 )? )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:453:5: this_DataTypeVariable_0= ruleDataTypeVariable (kw= KEYWORD_1 )?
             {
             if ( state.backtracking==0 ) {
                
@@ -1267,7 +1266,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
                       afterParserOrEnumRuleCall();
                   
             }
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:464:1: (kw= KEYWORD_1 )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:463:1: (kw= KEYWORD_1 )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1287,7 +1286,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:465:2: kw= KEYWORD_1
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:464:2: kw= KEYWORD_1
                     {
                     kw=(Token)match(input,KEYWORD_1,FollowSets000.FOLLOW_KEYWORD_1_in_ruleDataTypePostop1057); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -1326,7 +1325,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleDataTypeVariable"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:478:1: entryRuleDataTypeVariable returns [String current=null] : iv_ruleDataTypeVariable= ruleDataTypeVariable EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:477:1: entryRuleDataTypeVariable returns [String current=null] : iv_ruleDataTypeVariable= ruleDataTypeVariable EOF ;
     public final String entryRuleDataTypeVariable() throws RecognitionException {
         String current = null;
 
@@ -1334,8 +1333,8 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:479:1: (iv_ruleDataTypeVariable= ruleDataTypeVariable EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:480:2: iv_ruleDataTypeVariable= ruleDataTypeVariable EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:478:1: (iv_ruleDataTypeVariable= ruleDataTypeVariable EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:479:2: iv_ruleDataTypeVariable= ruleDataTypeVariable EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getDataTypeVariableRule()); 
@@ -1366,7 +1365,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleDataTypeVariable"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:487:1: ruleDataTypeVariable returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= RULE_ID ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:486:1: ruleDataTypeVariable returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= RULE_ID ;
     public final AntlrDatatypeRuleToken ruleDataTypeVariable() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1375,8 +1374,8 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:491:6: (this_ID_0= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:492:5: this_ID_0= RULE_ID
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:490:6: (this_ID_0= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:491:5: this_ID_0= RULE_ID
             {
             this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleDataTypeVariable1149); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -1448,8 +1447,8 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
     public final void synpred7_InternalBug296889ExTestLanguageParser_fragment() throws RecognitionException {   
         Token kw=null;
 
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:465:2: (kw= KEYWORD_1 )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:465:2: kw= KEYWORD_1
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:464:2: (kw= KEYWORD_1 )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:464:2: kw= KEYWORD_1
         {
         kw=(Token)match(input,KEYWORD_1,FollowSets000.FOLLOW_KEYWORD_1_in_synpred7_InternalBug296889ExTestLanguageParser1057); if (state.failed) return ;
 

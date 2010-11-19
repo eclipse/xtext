@@ -164,7 +164,7 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
             	        if (current==null) {
             	            current = createModelElement(grammarAccess.getModelRule());
             	        }
-                   		set(current, "value", lv_value_2_0, "CaSe", lastConsumedNode);
+                   		setWithLastConsumed(current, "value", lv_value_2_0, "CaSe");
             	    
 
             }

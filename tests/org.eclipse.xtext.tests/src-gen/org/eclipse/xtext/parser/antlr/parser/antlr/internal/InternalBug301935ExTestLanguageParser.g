@@ -114,12 +114,11 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
@@ -137,12 +136,11 @@ ruleModel returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"value",
         		lv_value_2_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
@@ -164,12 +162,11 @@ ruleNL
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"value2",
         		lv_value2_4_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )

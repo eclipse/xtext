@@ -12,24 +12,24 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalEntitiesLexer extends Lexer {
-    public static final int RULE_ID=5;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int T__20=20;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int EOF=-1;
     public static final int RULE_ML_COMMENT=7;
-    public static final int T__19=19;
-    public static final int RULE_STRING=4;
-    public static final int T__16=16;
-    public static final int T__15=15;
-    public static final int T__18=18;
-    public static final int T__17=17;
+    public static final int RULE_ID=5;
     public static final int T__12=12;
-    public static final int T__11=11;
-    public static final int T__14=14;
+    public static final int T__20=20;
     public static final int T__13=13;
-    public static final int RULE_INT=6;
+    public static final int RULE_STRING=4;
+    public static final int T__19=19;
+    public static final int T__14=14;
+    public static final int T__11=11;
     public static final int RULE_WS=9;
+    public static final int T__17=17;
+    public static final int EOF=-1;
+    public static final int RULE_INT=6;
+    public static final int T__16=16;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int T__18=18;
+    public static final int T__15=15;
 
     // delegates
     // delegators
@@ -923,7 +923,7 @@ public class InternalEntitiesLexer extends Lexer {
         "\1\16\1\17\1\20\15\uffff\1\2\11\uffff\1\1\1\3\3\uffff\1\6\2\uffff"+
         "\1\7\1\uffff\1\11";
     static final String DFA12_specialS =
-        "\1\2\14\uffff\1\0\1\1\65\uffff}>";
+        "\1\0\14\uffff\1\1\1\2\65\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\21\2\20\2\21\1\20\22\21\1\20\1\21\1\15\4\21\1\16\7\21\1"+
             "\17\12\14\1\7\6\21\32\13\1\11\2\21\1\12\1\13\1\21\4\13\1\3\3"+
@@ -1035,26 +1035,6 @@ public class InternalEntitiesLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA12_13 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_13>='\u0000' && LA12_13<='\uFFFF')) ) {s = 30;}
-
-                        else s = 17;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA12_14 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_14>='\u0000' && LA12_14<='\uFFFF')) ) {s = 30;}
-
-                        else s = 17;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -1091,6 +1071,26 @@ public class InternalEntitiesLexer extends Lexer {
                         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 16;}
 
                         else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='.')||(LA12_0>=';' && LA12_0<='@')||(LA12_0>='\\' && LA12_0<=']')||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 17;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
+                        int LA12_13 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_13>='\u0000' && LA12_13<='\uFFFF')) ) {s = 30;}
+
+                        else s = 17;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA12_14 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_14>='\u0000' && LA12_14<='\uFFFF')) ) {s = 30;}
+
+                        else s = 17;
 
                         if ( s>=0 ) return s;
                         break;

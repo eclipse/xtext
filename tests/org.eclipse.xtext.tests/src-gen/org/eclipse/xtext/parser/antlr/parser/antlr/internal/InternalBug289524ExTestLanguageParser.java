@@ -610,12 +610,11 @@ public class InternalBug289524ExTestLanguageParser extends AbstractInternalAntlr
               	        if (current==null) {
               	            current = createModelElement(grammarAccess.getContainedRule());
               	        }
-                     		set(
+                     		setWithLastConsumed(
                      			current, 
                      			"name",
                       		lv_name_1_0, 
-                      		"ID", 
-                      		lastConsumedNode);
+                      		"ID");
               	    
             }
 
