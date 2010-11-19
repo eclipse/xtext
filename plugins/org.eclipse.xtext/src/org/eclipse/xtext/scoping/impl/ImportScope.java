@@ -26,10 +26,12 @@ import com.google.common.base.Predicates;
  */
 public class ImportScope extends AbstractScope {
 	private ImportNormalizer normalizer;
+	private final IScope fqnScope;
 
-	public ImportScope(ImportNormalizer normalizer, IScope parent) {
+	public ImportScope(ImportNormalizer normalizer, IScope parent, IScope fqnScope) {
 		super(parent);
 		this.normalizer = normalizer;
+		this.fqnScope = fqnScope;
 	}
 
 	@Override
@@ -42,7 +44,7 @@ public class ImportScope extends AbstractScope {
 				return Collections.emptySet();
 			final ISelector.SelectByName selector2 = new ISelector.SelectByName(resolved);
 			selector2.getDelegateSelectors().addAll(selectByName.getDelegateSelectors());
-			Iterable<IEObjectDescription> elements = getParent().getElements(selector2);
+			Iterable<IEObjectDescription> elements = fqnScope.getElements(selector2);
 			Function<IEObjectDescription, IEObjectDescription> aliaser = new Function<IEObjectDescription, IEObjectDescription>() {
 				public IEObjectDescription apply(IEObjectDescription from) {
 					return new AliasedEObjectDescription(resolved, from);
@@ -51,7 +53,7 @@ public class ImportScope extends AbstractScope {
 			return transform(elements, aliaser);
 
 		}
-		Iterable<IEObjectDescription> candidates = getParent().getElements(selector);
+		Iterable<IEObjectDescription> candidates = fqnScope.getElements(selector);
 		final Iterable<IEObjectDescription> aliased = transform(candidates,
 				new Function<IEObjectDescription, IEObjectDescription>() {
 					public IEObjectDescription apply(IEObjectDescription from) {
