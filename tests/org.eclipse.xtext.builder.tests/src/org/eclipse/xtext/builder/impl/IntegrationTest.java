@@ -53,7 +53,6 @@ public class IntegrationTest extends AbstractBuilderTest {
 	private IJavaProject createJavaProjectWithRootSrc(String string) throws CoreException {
 		IJavaProject project = createJavaProject(string);
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
-		addSourceFolder(project, "src");
 		return project;
 	}
 
@@ -296,7 +295,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 	public void testUpdateOfReferencedFile() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
-		IFolder folder = addSourceFolder(project, "src");
+		IFolder folder = project.getProject().getFolder("src");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
 		IFile fileB = folder.getFile("Boo" + F_EXT);
@@ -333,7 +332,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 	public void testDeleteFile() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
-		IFolder folder = addSourceFolder(project, "src");
+		IFolder folder = project.getProject().getFolder("src");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
 		waitForAutoBuild();
@@ -351,7 +350,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 	public void testCleanBuild() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
-		IFolder folder = addSourceFolder(project, "src");
+		IFolder folder = project.getProject().getFolder("src");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
 		waitForAutoBuild();
@@ -434,7 +433,6 @@ public class IntegrationTest extends AbstractBuilderTest {
 		addToClasspath(foo, newLibraryEntry);
 		addToClasspath(bar, JavaCore.newProjectEntry(foo.getPath(), true));
 		addToClasspath(baz, JavaCore.newProjectEntry(bar.getPath(), false));
-		addSourceFolder(baz, "src");
 		IFile bazFile = createFile("baz/src/Baz"+F_EXT, "object Baz references Foo");
 		waitForAutoBuild();
 		assertEquals(0,countMarkers(bazFile));

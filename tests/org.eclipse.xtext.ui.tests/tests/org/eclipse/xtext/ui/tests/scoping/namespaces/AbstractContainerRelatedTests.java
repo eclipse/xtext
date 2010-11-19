@@ -45,8 +45,8 @@ public abstract class AbstractContainerRelatedTests extends TestCase implements 
 		assertEquals(0, root().getProjects().length);
 		project1 = createProject("someProject1");
 		project2 = createProject("someProject2");
-		addProjectNature(project1, XtextProjectHelper.NATURE_ID);
-		addProjectNature(project2, XtextProjectHelper.NATURE_ID);
+		IResourcesSetupUtil.addNature(project1, XtextProjectHelper.NATURE_ID);
+		IResourcesSetupUtil.addNature(project2, XtextProjectHelper.NATURE_ID);
 		uriToResourceDescription = Maps.newHashMap();
 	}
 	

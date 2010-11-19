@@ -106,7 +106,7 @@ public class ResourceDescriptionUpdaterTest extends AbstractBuilderTest {
 	private IFolder createProject(String projectName) throws CoreException, JavaModelException {
 		IJavaProject project = createJavaProject(projectName);
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
-		IFolder folder = addSourceFolder(project, SRC_FOLDER);
+		IFolder folder = project.getProject().getFolder(SRC_FOLDER);
 		return folder;
 	}
 }

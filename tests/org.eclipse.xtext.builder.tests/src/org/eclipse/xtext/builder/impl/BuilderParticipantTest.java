@@ -47,7 +47,7 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 	public void testParticipantInvoked() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
-		IFolder folder = addSourceFolder(project, "src");
+		IFolder folder = project.getProject().getFolder("src");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
 		waitForAutoBuild();
