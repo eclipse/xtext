@@ -21,7 +21,7 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(RenameElementProcessor.class)
 public abstract class AbstractRenameElementProcessor extends RenameProcessor {
 
-	public abstract void initialize(URI targetElementURI, IRenameElementStrategy stategy);
+	public abstract void initialize(URI targetElementURI);
 
 	public abstract IRenameElementStrategy getRenameElementStrategy();
 

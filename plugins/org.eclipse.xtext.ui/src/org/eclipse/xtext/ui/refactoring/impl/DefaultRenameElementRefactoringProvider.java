@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.refactoring.impl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.ltk.core.refactoring.participants.RenameRefactoring;
 import org.eclipse.xtext.ui.refactoring.IRenameElementRefactoringProvider;
-import org.eclipse.xtext.ui.refactoring.IRenameElementStrategy;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -19,14 +18,10 @@ public class DefaultRenameElementRefactoringProvider implements IRenameElementRe
 	@Inject
 	private Provider<AbstractRenameElementProcessor> processorProvider;
 
-	@Inject 
-	private IRenameElementStrategy.Provider strategyProvider;
-	
 	public RenameRefactoring getRenameRefactoring(URI targetElementURI) {
 		AbstractRenameElementProcessor processor = processorProvider.get();
 		if (processor != null) {
-			IRenameElementStrategy strategy = strategyProvider.get(targetElementURI);
-			processor.initialize(targetElementURI, strategy);
+			processor.initialize(targetElementURI);
 			return new RenameRefactoring(processor);
 		}
 		return null;

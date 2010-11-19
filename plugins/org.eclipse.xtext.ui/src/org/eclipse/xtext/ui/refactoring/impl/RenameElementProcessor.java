@@ -41,6 +41,9 @@ public class RenameElementProcessor extends AbstractRenameElementProcessor {
 
 	@Inject
 	private ReferenceUpdater referenceUpdater;
+	
+	@Inject 
+	private IRenameElementStrategy.Provider strategyProvider;
 
 	private RefactoringStatus status;
 	private URI targetElementURI;
@@ -51,12 +54,12 @@ public class RenameElementProcessor extends AbstractRenameElementProcessor {
 	private TextEditAcceptor textEditAcceptor;
 
 	@Override
-	public void initialize(final URI targetElementURI, IRenameElementStrategy strategy) {
+	public void initialize(final URI targetElementURI) {
 		status = new RefactoringStatus();
 		try {
 			this.targetElementURI = targetElementURI;
-			this.strategy = strategy;
 			targetDocument = documentProvider.get(targetElementURI, status);
+			this.strategy = strategyProvider.get(targetElementURI, targetDocument);
 		} catch (Exception e) {
 			handleException(e);
 		}

@@ -40,17 +40,11 @@ public class DefaultRenameElementStrategy implements IRenameElementStrategy {
 		@Inject
 		private ILocationInFileProvider locationInFileProvider;
 
-		@Inject
-		private IRefactoringDocument.Provider documentProvider;
-
-		public IRenameElementStrategy get(final URI targetElementURI) {
-			RefactoringStatus status = new RefactoringStatus();
-			IRefactoringDocument document = documentProvider.get(targetElementURI, status);
-			if(document == null || status.hasError()) {
-				logStatus(status);
+		public IRenameElementStrategy get(final URI targetElementURI, IRefactoringDocument targetDocument) {
+			if(targetDocument == null) {
 				return null;
 			}
-			return new DefaultRenameElementStrategy(targetElementURI, document, locationInFileProvider);
+			return new DefaultRenameElementStrategy(targetElementURI, targetDocument, locationInFileProvider);
 		}
 
 		protected void logStatus(RefactoringStatus status) {

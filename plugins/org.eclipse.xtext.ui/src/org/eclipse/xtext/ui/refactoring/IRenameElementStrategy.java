@@ -30,6 +30,6 @@ public interface IRenameElementStrategy {
 	
 	@ImplementedBy(DefaultRenameElementStrategy.Provider.class)
 	interface Provider {
-		IRenameElementStrategy get(URI targetElementURI);
+		IRenameElementStrategy get(URI targetElementURI, IRefactoringDocument document);
 	}
 }
