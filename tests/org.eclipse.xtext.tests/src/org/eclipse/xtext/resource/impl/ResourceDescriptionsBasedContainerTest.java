@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.impl;
 
+import static org.eclipse.xtext.scoping.Selectors.*;
+
 import java.util.Collections;
 
 import junit.framework.TestCase;
@@ -16,14 +18,13 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription;
+import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.common.collect.Iterables;
 
@@ -38,37 +39,16 @@ public class ResourceDescriptionsBasedContainerTest extends TestCase implements 
 	private URI uri;
 	private ResourceDescription resourceDescription;
 	
-	private class ResourceDescription implements IIgnoreCaseResourceDescription {
+	private class ResourceDescription implements IResourceDescription {
 
 		public Iterable<IEObjectDescription> getExportedObjects() {
 			if (eClass != null)
 				return Collections.singleton(EObjectDescription.create(QualifiedName.create(eClass.getName()), eClass));
 			return Collections.emptyList();
 		}
-
-		public Iterable<IEObjectDescription> getExportedObjects(EClass clazz, QualifiedName qualifiedName) {
-			if (eClass != null && EcoreUtil2.isAssignableFrom(clazz,eClass.eClass()) 
-					&& eClass.getName().equals(qualifiedName.getFirstSegment()))
-				return Collections.singleton(EObjectDescription.create(QualifiedName.create(eClass.getName()), eClass));
-			return Collections.emptyList();
-		}
-		
-		public Iterable<IEObjectDescription> getExportedObjectsIgnoreCase(EClass clazz, QualifiedName qualifiedName) {
-			if (eClass != null && EcoreUtil2.isAssignableFrom(clazz,eClass.eClass())
-					&& eClass.getName().equalsIgnoreCase(qualifiedName.getFirstSegment()))
-				return Collections.singleton(EObjectDescription.create(QualifiedName.create(eClass.getName()), eClass));
-			return Collections.emptyList();
-		}
-
-		public Iterable<IEObjectDescription> getExportedObjects(EClass clazz) {
-			if (eClass != null && EcoreUtil2.isAssignableFrom(clazz,eClass.eClass()))
-				return Collections.singleton(EObjectDescription.create(QualifiedName.create(eClass.getName()), eClass));
-			return Collections.emptyList();
-		}
-
-		public Iterable<IEObjectDescription> getExportedObjectsForEObject(EObject object) {
-			if (eClass != null && object == eClass)
-				return Collections.singleton(EObjectDescription.create(QualifiedName.create(eClass.getName()), eClass));
+		public Iterable<IEObjectDescription> getExportedObjects(ISelector selector) {
+			if (eClass != null)
+				return selector.applySelector(getExportedObjects());
 			return Collections.emptyList();
 		}
 
@@ -97,44 +77,44 @@ public class ResourceDescriptionsBasedContainerTest extends TestCase implements 
 	}
 	
 	public void testFindAllEObjectsByType_01() {
-		Iterable<IEObjectDescription> iterable = container.findAllEObjects(EcorePackage.Literals.ECLASSIFIER);
+		Iterable<IEObjectDescription> iterable = container.getElements(selectByType(EcorePackage.Literals.ECLASSIFIER));
 		EObject eObject = Iterables.getOnlyElement(iterable).getEObjectOrProxy();
 		assertSame(eClass, eObject);
 	}
 	
 	public void testFindAllEObjectsByType_02() {
 		eClass = null;
-		Iterable<IEObjectDescription> iterable = container.findAllEObjects(EcorePackage.Literals.ECLASSIFIER);
+		Iterable<IEObjectDescription> iterable = container.getElements(selectByType(EcorePackage.Literals.ECLASSIFIER));
 		assertTrue(Iterables.isEmpty(iterable));
 	}
 	
 	public void testFindAllEObjectsByName_01() {
-		Iterable<IEObjectDescription> iterable = container.findAllEObjects(EcorePackage.Literals.ECLASSIFIER, SOME_NAME);
+		Iterable<IEObjectDescription> iterable = container.getElements(selectByTypeAndName(EcorePackage.Literals.ECLASSIFIER, SOME_NAME));
 		EObject eObject = Iterables.getOnlyElement(iterable).getEObjectOrProxy();
 		assertSame(eClass, eObject);
 	}
 	
 	public void testFindAllEObjectsByName_02() {
 		eClass = null;
-		Iterable<IEObjectDescription> iterable = container.findAllEObjects(EcorePackage.Literals.ECLASSIFIER, SOME_NAME);
+		Iterable<IEObjectDescription> iterable = container.getElements(selectByTypeAndName(EcorePackage.Literals.ECLASSIFIER, SOME_NAME));
 		assertTrue(Iterables.isEmpty(iterable));
 	}
 	
 	public void testFindAllEObjectsByNameIgnoreCase_01() {
-		Iterable<IEObjectDescription> iterable = container.findAllEObjectsIgnoreCase(EcorePackage.Literals.ECLASSIFIER, SOME_NAME.toUpperCase());
+		Iterable<IEObjectDescription> iterable = container.getElements(selectByTypeAndNameIgnoreCase(EcorePackage.Literals.ECLASSIFIER, SOME_NAME.toUpperCase()));
 		EObject eObject = Iterables.getOnlyElement(iterable).getEObjectOrProxy();
 		assertSame(eClass, eObject);
 	}
 	
 	public void testFindAllEObjectsByNameIgnoreCase_02() {
-		Iterable<IEObjectDescription> iterable = container.findAllEObjectsIgnoreCase(EcorePackage.Literals.ECLASSIFIER, SOME_NAME.toLowerCase());
+		Iterable<IEObjectDescription> iterable = container.getElements(selectByTypeAndNameIgnoreCase(EcorePackage.Literals.ECLASSIFIER, SOME_NAME.toLowerCase()));
 		EObject eObject = Iterables.getOnlyElement(iterable).getEObjectOrProxy();
 		assertSame(eClass, eObject);
 	}
 	
 	public void testFindAllEObjectsByNameIgnoreCase_03() {
 		eClass = null;
-		Iterable<IEObjectDescription> iterable = container.findAllEObjectsIgnoreCase(EcorePackage.Literals.ECLASSIFIER, SOME_NAME);
+		Iterable<IEObjectDescription> iterable = container.getElements(selectByTypeAndNameIgnoreCase(EcorePackage.Literals.ECLASSIFIER, SOME_NAME));
 		assertTrue(Iterables.isEmpty(iterable));
 	}
 

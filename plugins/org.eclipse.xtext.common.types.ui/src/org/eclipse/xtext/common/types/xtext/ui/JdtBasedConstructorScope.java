@@ -106,6 +106,7 @@ public class JdtBasedConstructorScope extends AbstractConstructorScope {
 		private URI uri = null;
 
 		protected LazyConstructorDescription(IMethod constructor, TypeURIHelper uriHelper, IQualifiedNameConverter converter) {
+			super(false);
 			this.constructor = constructor;
 			this.uriHelper = uriHelper;
 			this.converter = converter;

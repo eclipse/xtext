@@ -109,7 +109,11 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 	
 	public void testMap_02() throws Exception {
 		newBuilder().append("import javax.swing.text.html.* import java.util.* custom java.util.Map").assertText(
-				"Map");
+				"java.util.Map");
+	}
+	
+	public void testMap_03() throws Exception {
+		newBuilder().append("import java.util.* custom java.util.Map").assertText("Map");
 	}
 	
 	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
