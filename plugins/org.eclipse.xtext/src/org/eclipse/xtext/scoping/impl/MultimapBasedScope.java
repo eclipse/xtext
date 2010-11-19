@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
+import java.util.Collection;
 import java.util.Collections;
 
 import org.eclipse.xtext.naming.QualifiedName;
@@ -40,7 +41,7 @@ public class MultimapBasedScope extends AbstractScope {
 	@Override
 	public Iterable<IEObjectDescription> getLocalElements(ISelector selector) {
 		if (selector instanceof ISelector.SelectByName) {
-			QualifiedName name = ((ISelector.SelectByName) selector).getName();
+			QualifiedName name = ((ISelector.SelectByName) selector).getName().toLowerCase();
 			if (elements.containsKey(name)) {
 				return selector.applySelector(elements.get(name));
 			} else {
@@ -52,7 +53,15 @@ public class MultimapBasedScope extends AbstractScope {
 	
 	@Override
 	protected boolean isShadowed(IEObjectDescription fromParent) {
-		return elements.containsKey(getKey(fromParent));
+		final QualifiedName lowerCase = fromParent.getName().toLowerCase();
+		if (elements.containsKey(lowerCase)) {
+			Collection<IEObjectDescription> shadowing = elements.get(lowerCase);
+			for (IEObjectDescription ieObjectDescription : shadowing) {
+				if (ieObjectDescription.getKey().equals(fromParent.getKey()))
+					return true;
+			}
+		}
+		return false;
 	}
-
+	
 }

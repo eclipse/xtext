@@ -5,18 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.resource.ignorecase;
+package org.eclipse.xtext.scoping;
 
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+import com.google.inject.BindingAnnotation;
 
 /**
- * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
-public interface IIgnoreCaseResourceDescription extends IResourceDescription {
+@Retention(RetentionPolicy.RUNTIME)
+@BindingAnnotation
+public @interface IgnoreCaseLinking {
 
-	Iterable<IEObjectDescription> getExportedObjectsIgnoreCase(EClass clazz, QualifiedName qualifiedName);
-	
 }

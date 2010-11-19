@@ -10,22 +10,17 @@ package org.eclipse.xtext.resource.impl;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge
  */
 public class EObjectDescriptionLookUp {
 	
@@ -37,53 +32,17 @@ public class EObjectDescriptionLookUp {
 		setExportedObjects(allDescriptions);
 	}
 	
-	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz, final QualifiedName qualifiedName) {
+	public Iterable<IEObjectDescription> getExportedObjects(ISelector selector) {
 		if (allDescriptions.isEmpty())
 			return Collections.emptyList();
-		QualifiedName lowerCase = qualifiedName.toLowerCase();
-		if (getNameToObjects().containsKey(lowerCase))
-			return Iterables.filter(getNameToObjects().get(lowerCase), new Predicate<IEObjectDescription>() {
-				public boolean apply(IEObjectDescription input) {
-					return qualifiedName.equals(input.getName()) && EcoreUtil2.isAssignableFrom(clazz, input.getEClass());
-				}
-			});
-		else
-			return Collections.emptyList();
-	}
-	
-	public Iterable<IEObjectDescription> getExportedObjectsIgnoreCase(final EClass clazz, final QualifiedName qualifiedName) {
-		if (allDescriptions.isEmpty())
-			return Collections.emptyList();
-		QualifiedName lowerCase = qualifiedName.toLowerCase();
-		if (getNameToObjects().containsKey(lowerCase))
-			return Iterables.filter(getNameToObjects().get(lowerCase), new Predicate<IEObjectDescription>() {
-				public boolean apply(IEObjectDescription input) {
-					return EcoreUtil2.isAssignableFrom(clazz,input.getEClass());
-				}
-			});
-		else
-			return Collections.emptyList();
-	}
-
-	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz) {
-		if (allDescriptions.isEmpty())
-			return Collections.emptyList();
-		return Iterables.filter(allDescriptions, new Predicate<IEObjectDescription>() {
-			public boolean apply(IEObjectDescription input) {
-				return EcoreUtil2.isAssignableFrom(clazz,input.getEClass());
-			}
-		});
-	}
-
-	public Iterable<IEObjectDescription> getExportedObjectsForEObject(EObject object) {
-		if (allDescriptions.isEmpty())
-			return Collections.emptyList();
-		final URI uri = EcoreUtil.getURI(object);
-		return Iterables.filter(allDescriptions, new Predicate<IEObjectDescription>() {
-			public boolean apply(IEObjectDescription input) {
-				return uri.equals(input.getEObjectURI());
-			}
-		});
+		if (selector instanceof ISelector.SelectByName) {
+			final QualifiedName qualifiedName = ((ISelector.SelectByName) selector).getName().toLowerCase();
+			if (getNameToObjects().containsKey(qualifiedName))
+				return selector.applySelector(getNameToObjects().get(qualifiedName));
+			else
+				return Collections.emptyList();
+		}
+		return selector.applySelector(getExportedObjects());
 	}
 
 	public Iterable<IEObjectDescription> getExportedObjects() {

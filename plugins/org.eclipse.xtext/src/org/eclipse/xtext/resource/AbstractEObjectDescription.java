@@ -8,10 +8,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
+import org.eclipse.xtext.naming.QualifiedName;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public abstract class AbstractEObjectDescription implements IEObjectDescription {
+	
+	private boolean ignoreCase;
+
+	public AbstractEObjectDescription(boolean isIgnoreCase) {
+		this.ignoreCase =isIgnoreCase;
+	}
+	
 	@Override
 	public String toString() {
 		return getName().toString();
@@ -26,6 +35,10 @@ public abstract class AbstractEObjectDescription implements IEObjectDescription 
 	}
 	
 	public Object getKey() {
-		return getName();
+		return ignoreCase? getIgnoreCaseName() :getName();
+	}
+
+	protected QualifiedName getIgnoreCaseName() {
+		return getName().toLowerCase();
 	}
 }

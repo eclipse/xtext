@@ -10,11 +10,10 @@ package org.eclipse.xtext.resource;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
+import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.common.collect.ImmutableList;
 import com.google.inject.ImplementedBy;
@@ -36,21 +35,9 @@ public interface IResourceDescription {
 	Iterable<IEObjectDescription> getExportedObjects();
 
 	/**
-	 * @return all {@link IEObjectDescription} from {@link #getExportedObjects()} which are instances of the given
-	 *         {@link EClass} and match the given name.
+	 * @return all {@link IEObjectDescription} from {@link #getExportedObjects()} which pass the given {@link ISelector}.
 	 */
-	Iterable<IEObjectDescription> getExportedObjects(EClass clazz, QualifiedName qualifiedName);
-
-	/**
-	 * @return all {@link IEObjectDescription} from {@link #getExportedObjects()} which are instances of the given
-	 *         {@link EClass}.
-	 */
-	Iterable<IEObjectDescription> getExportedObjects(EClass clazz);
-
-	/**
-	 * @return the all {@link IEObjectDescription} from {@link #getExportedObjects()} which describe the given EObject.
-	 */
-	Iterable<IEObjectDescription> getExportedObjectsForEObject(EObject object);
+	Iterable<IEObjectDescription> getExportedObjects(ISelector selector);
 
 	/**
 	 * @return the list of names the described resource depends depends on.
@@ -113,7 +100,6 @@ public interface IResourceDescription {
 	 * <code>getNew()!=getOld()</code>
 	 * </p>
 	 * 
-	 * @author Sven Efftinge - Initial contribution and API
 	 */
 	interface Delta {
 		/**

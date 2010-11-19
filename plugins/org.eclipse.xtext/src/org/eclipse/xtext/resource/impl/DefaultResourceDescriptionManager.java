@@ -103,7 +103,7 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 			return;
 		Iterable<IEObjectDescription> iterable = resourceDescriptor.getExportedObjects();
 		for (IEObjectDescription ieObjectDescription : iterable) {
-			names.add(ieObjectDescription.getName());
+			names.add(ieObjectDescription.getName().toLowerCase());
 		}
 	}
 

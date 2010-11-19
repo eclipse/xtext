@@ -22,15 +22,16 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class IgnoreCaseResourceDescriptionManagerTest extends TestCase {
+public class DefaultResourceDescriptionManagerTest extends TestCase {
 
 	private Resource resource;
 	private DefaultResourceDescription resourceDescription;
-	private IgnoreCaseResourceDescriptionManager manager;
+	private DefaultResourceDescriptionManager manager;
 	private Collection<QualifiedName> importedNames;
 
 	@Override
@@ -52,7 +53,7 @@ public class IgnoreCaseResourceDescriptionManagerTest extends TestCase {
 				return importedNames;
 			}
 		};
-		manager = new IgnoreCaseResourceDescriptionManager();
+		manager = new DefaultResourceDescriptionManager();
 		importedNames = Collections.emptySet();
 	}
 	
@@ -62,7 +63,7 @@ public class IgnoreCaseResourceDescriptionManagerTest extends TestCase {
 		importedNames = Collections.singleton(QualifiedName.create("eclass"));
 		assertTrue(manager.isAffected(delta, resourceDescription));
 		importedNames = Collections.singleton(QualifiedName.create("ECLASS"));
-		assertTrue(manager.isAffected(delta, resourceDescription));
+		assertFalse(manager.isAffected(delta, resourceDescription));
 	}
 	
 }

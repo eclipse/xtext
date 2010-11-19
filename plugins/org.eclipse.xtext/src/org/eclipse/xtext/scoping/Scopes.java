@@ -83,17 +83,26 @@ public class Scopes {
 	 * filtered out.
 	 */
 	public static <T extends EObject> Iterable<IEObjectDescription> scopedElementsFor(Iterable<? extends T> elements,
-			final Function<T, QualifiedName> nameComputation) {
+			final Function<T, QualifiedName> nameComputation, final boolean ignoreCase) {
 		Iterable<IEObjectDescription> transformed = Iterables.transform(elements,
 				new Function<T, IEObjectDescription>() {
 					public IEObjectDescription apply(T from) {
-						QualifiedName qualifiedName = nameComputation.apply(from);
+						final QualifiedName qualifiedName = nameComputation.apply(from);
 						if (qualifiedName != null)
-							return EObjectDescription.create(qualifiedName, from);
+							return new EObjectDescription(qualifiedName, from, null, ignoreCase);
 						return null;
 					}
 				});
 		return Iterables.filter(transformed, Predicates.notNull());
+	}
+	/**
+	 * transforms an {@link Iterable} of {@link EObject}s into an {@link Iterable} of {@link IScopedElement}s computing
+	 * the name of the elements using the passed {@link Function} If the passed function returns null the object is
+	 * filtered out.
+	 */
+	public static <T extends EObject> Iterable<IEObjectDescription> scopedElementsFor(Iterable<? extends T> elements,
+			final Function<T, QualifiedName> nameComputation) {
+		return scopedElementsFor(elements, nameComputation, false);
 	}
 	
 	/**
@@ -114,7 +123,7 @@ public class Scopes {
 	public static Multimap<QualifiedName,IEObjectDescription> index(Iterable<IEObjectDescription> descriptions) {
 		return index(descriptions, new Function<IEObjectDescription, QualifiedName>() {
 			public QualifiedName apply(IEObjectDescription from) {
-				return from.getName();
+				return from.getName().toLowerCase();
 			}
 		});
 	}

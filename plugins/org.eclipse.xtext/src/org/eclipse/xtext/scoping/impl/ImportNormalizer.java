@@ -27,9 +27,13 @@ public class ImportNormalizer {
 	}
 
 	public QualifiedName deresolve(QualifiedName fullyQualifiedName) {
-		if (fullyQualifiedName.startsWith(importedNamespacePrefix)
-				&& fullyQualifiedName.getSegmentCount() != importedNamespacePrefix.getSegmentCount()) {
-			return fullyQualifiedName.skipFirst(importedNamespacePrefix.getSegmentCount());
+		if (hasWildCard) {
+			if (fullyQualifiedName.startsWith(importedNamespacePrefix)
+					&& fullyQualifiedName.getSegmentCount() != importedNamespacePrefix.getSegmentCount())
+				return fullyQualifiedName.skipFirst(importedNamespacePrefix.getSegmentCount());
+		} else {
+			if (fullyQualifiedName.equals(importedNamespacePrefix))
+				return QualifiedName.create(fullyQualifiedName.getLastSegment());
 		}
 		return null;
 	}
@@ -46,10 +50,10 @@ public class ImportNormalizer {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public String toString() {
-		return importedNamespacePrefix.toString()+(hasWildCard?".*":"");
+		return importedNamespacePrefix.toString() + (hasWildCard ? ".*" : "");
 	}
 
 }

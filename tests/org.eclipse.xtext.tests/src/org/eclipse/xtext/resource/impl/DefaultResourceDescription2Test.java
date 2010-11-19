@@ -43,7 +43,7 @@ public class DefaultResourceDescription2Test extends AbstractXtextTests {
 		
 		EcoreUtil.resolveAll(res2);
 		Iterable<QualifiedName> names = res2.getResourceServiceProvider().getResourceDescriptionManager().getResourceDescription(res2).getImportedNames();
-		assertEquals(QualifiedName.create("Foo"),names.iterator().next());
+		assertEquals(QualifiedName.create("foo"),names.iterator().next());
 	}
 	
 	public void testValidLocalLink() throws Exception {
@@ -71,6 +71,6 @@ public class DefaultResourceDescription2Test extends AbstractXtextTests {
 		
 		EcoreUtil.resolveAll(res2);
 		Iterable<QualifiedName> names = res2.getResourceServiceProvider().getResourceDescriptionManager().getResourceDescription(res2).getImportedNames();
-		assertEquals(QualifiedName.create("Baz"),names.iterator().next());
+		assertEquals(QualifiedName.create("baz"),names.iterator().next());
 	}
 }

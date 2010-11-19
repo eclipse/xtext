@@ -20,6 +20,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.ISelector;
+import org.eclipse.xtext.scoping.IgnoreCaseLinking;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeDelegatingScopeProvider;
 
@@ -116,9 +117,13 @@ public class DefaultLinkingService extends AbstractLinkingService {
 		}
 		return Collections.emptyList();
 	}
+	
+	@Inject(optional=true)
+	@IgnoreCaseLinking
+	private boolean isIgnoreCase = false;
 
 	protected ISelector getSelector(QualifiedName qn) {
-		return new ISelector.SelectByName(qn);
+		return new ISelector.SelectByName(qn, isIgnoreCase);
 	}
 
 	public String getCrossRefNodeAsString(AbstractNode node) throws IllegalNodeException {

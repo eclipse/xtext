@@ -10,38 +10,24 @@ package org.eclipse.xtext.resource.impl;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.scoping.ISelector;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public abstract class AbstractResourceDescription implements IIgnoreCaseResourceDescription {
+public abstract class AbstractResourceDescription implements IResourceDescription {
 	
 	private EObjectDescriptionLookUp lookup;
 	
-	public Iterable<IEObjectDescription> getExportedObjects(EClass clazz, QualifiedName qualifiedName) {
-		return getLookUp().getExportedObjects(clazz, qualifiedName);
-	}
-
-	public Iterable<IEObjectDescription> getExportedObjectsIgnoreCase(EClass clazz, QualifiedName qualifiedName) {
-		return getLookUp().getExportedObjectsIgnoreCase(clazz, qualifiedName);
-	}
-	
-	public Iterable<IEObjectDescription> getExportedObjects(EClass clazz) {
-		return getLookUp().getExportedObjects(clazz);
-	}
-
-	public Iterable<IEObjectDescription> getExportedObjectsForEObject(EObject object) {
-		return getLookUp().getExportedObjectsForEObject(object);
-	}
-	
 	public Iterable<IEObjectDescription> getExportedObjects() {
 		return getLookUp().getExportedObjects();
+	}
+	
+	public Iterable<IEObjectDescription> getExportedObjects(ISelector selector) {
+		return selector.applySelector(getLookUp().getExportedObjects());
 	}
 	
 	protected abstract List<IEObjectDescription> computeExportedObjects();

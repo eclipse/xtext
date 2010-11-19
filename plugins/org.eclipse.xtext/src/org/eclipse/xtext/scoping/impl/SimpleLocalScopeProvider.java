@@ -18,6 +18,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IgnoreCaseLinking;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.Tuples;
@@ -42,6 +43,10 @@ public class SimpleLocalScopeProvider extends AbstractGlobalScopeDelegatingScope
 
 	@Inject
 	private IResourceScopeCache cache;
+	
+	@Inject(optional=true)
+	@IgnoreCaseLinking
+	private boolean isIgnoreCase = false;
 
 	public void setCache(IResourceScopeCache cache) {
 		this.cache = cache;
@@ -73,7 +78,7 @@ public class SimpleLocalScopeProvider extends AbstractGlobalScopeDelegatingScope
 	}
 
 	protected IEObjectDescription createEObjectDescription(EObject next, QualifiedName qualifiedName) {
-		return EObjectDescription.create(qualifiedName, next, null);
+		return new EObjectDescription(qualifiedName, next, null, isIgnoreCase);
 	}
 
 	protected Multimap<QualifiedName, IEObjectDescription> toMap(final EObject context, final EReference reference) {
