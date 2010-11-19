@@ -136,13 +136,13 @@
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
 			class="org.eclipse.xtext.common.types.xtext.ui.ui.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-			type="typesAssistTest">
+			type="contentassisttestlanguage">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
             class="org.eclipse.xtext.common.types.xtext.ui.ui.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-            uriExtension="typesAssistTest">
+            uriExtension="contentassisttestlanguage">
         </resourceServiceProvider>
     </extension>
 
