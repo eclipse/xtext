@@ -30,6 +30,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
+import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.Modules2;
@@ -136,7 +137,7 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 	protected XtextEditor newXtextEditor(String projectName, String modelFile, String model) throws CoreException,
 			PartInitException {
 		IProject project = JavaProjectSetupUtil.createSimpleProject(PROJECT_NAME);
-		JavaProjectSetupUtil.addProjectNature(project, XtextProjectHelper.NATURE_ID);
+		IResourcesSetupUtil.addNature(project, XtextProjectHelper.NATURE_ID);
 		IFile file = project.getProject().getFile(modelFile);
 		if (file.exists()) {
 			file.delete(true, null);

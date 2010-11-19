@@ -57,7 +57,7 @@ public class ProfilerAbstractBuilderTest extends TestCase implements IResourceDe
 	public void testFullBuildBigProject() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
-		IFolder folder = addSourceFolder(project, "src");
+		IFolder folder = project.getProject().getFolder("src");
 		int NUM_FILES = 200;
 		IFile[] files = new IFile[NUM_FILES];
 		StopWatch timer = new StopWatch();
@@ -77,7 +77,7 @@ public class ProfilerAbstractBuilderTest extends TestCase implements IResourceDe
 	public void testFullBuildBigProjectWithRefeernceToJar() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
-		IFolder folder = addSourceFolder(project, "src");
+		IFolder folder = project.getProject().getFolder("src");
 		IFile jarFile = project.getProject().getFile("my.jar");
 		jarFile.create(jarInputStream(new TextFile("my/element"+F_EXT,"object ReferenceMe")), true, monitor());
 		addJarToClasspath(project, jarFile);
@@ -104,7 +104,7 @@ public class ProfilerAbstractBuilderTest extends TestCase implements IResourceDe
 	public void testFullBuildBigProjectWithLinkingErrors() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
-		IFolder folder = addSourceFolder(project, "src");
+		IFolder folder = project.getProject().getFolder("src");
 		int NUM_FILES = 200;
 		IFile[] files = new IFile[NUM_FILES];
 		StopWatch timer = new StopWatch();
@@ -126,7 +126,7 @@ public class ProfilerAbstractBuilderTest extends TestCase implements IResourceDe
 	public void testFullBuildBigProjectWithSyntaxErrors() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
-		IFolder folder = addSourceFolder(project, "src");
+		IFolder folder = project.getProject().getFolder("src");
 		int NUM_FILES = 500;
 		IFile[] files = new IFile[NUM_FILES];
 		StopWatch timer = new StopWatch();
@@ -148,7 +148,7 @@ public class ProfilerAbstractBuilderTest extends TestCase implements IResourceDe
 	public void testLotsOfFiles() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
-		IFolder folder = addSourceFolder(project, "src");
+		IFolder folder = project.getProject().getFolder("src");
 		int NUM_FILES = 10;
 		IFile[] files = new IFile[NUM_FILES];
 		StopWatch timer = new StopWatch();

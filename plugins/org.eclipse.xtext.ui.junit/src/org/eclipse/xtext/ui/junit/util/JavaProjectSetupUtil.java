@@ -25,8 +25,6 @@ import java.util.jar.JarOutputStream;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IProjectDescription;
-import org.eclipse.core.resources.IProjectNature;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -157,23 +155,10 @@ public class JavaProjectSetupUtil {
 	public static IJavaProject makeJavaProject(IProject project) throws CoreException {
 		IJavaProject javaProject = JavaCore.create(project);
 		javaProject.save(null, true);
-		addProjectNature(project, JavaCore.NATURE_ID);
+		addNature(project, JavaCore.NATURE_ID);
 		addSourceFolder(javaProject, "src");
 		addJreClasspathEntry(javaProject);
 		return javaProject;
-	}
-
-	public static void addProjectNature(IProject project, String natureId) throws CoreException {
-		IProjectNature existingNature = project.getNature(natureId);
-		if (existingNature == null) {
-			IProjectDescription projectDescription = project.getDescription();
-			String[] natureIds = projectDescription.getNatureIds();
-			String[] newNatureIds = new String[natureIds.length + 1];
-			System.arraycopy(natureIds, 0, newNatureIds, 0, natureIds.length);
-			newNatureIds[natureIds.length] = natureId;
-			projectDescription.setNatureIds(newNatureIds);
-			project.setDescription(projectDescription, null);
-		}
 	}
 
 	public static IFolder addSourceFolder(IJavaProject javaProject, String folderName) throws CoreException,

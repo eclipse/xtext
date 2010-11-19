@@ -31,7 +31,6 @@ public class IntegrationTest extends TestCase {
 	private IJavaProject createJavaProjectWithRootSrc(String string) throws CoreException {
 		IJavaProject project = createJavaProject(string);
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
-		addSourceFolder(project, "src");
 		return project;
 	}
 

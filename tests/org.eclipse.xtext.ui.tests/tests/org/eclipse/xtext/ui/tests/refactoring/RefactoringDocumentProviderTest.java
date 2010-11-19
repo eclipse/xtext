@@ -64,7 +64,6 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		project = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT);
-		addSourceFolder(project, "src");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		Injector injector = Activator.getInstance().getInjector(getEditorId());
 		documentFactory = injector.getInstance(IRefactoringDocument.Provider.class);
