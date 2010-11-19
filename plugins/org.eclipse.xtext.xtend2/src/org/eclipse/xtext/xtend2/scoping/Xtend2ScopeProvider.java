@@ -40,7 +40,7 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 				Map<QualifiedName, IEObjectDescription> map = Maps.newHashMap();
 				for (JvmTypeParameter param : type.getTypeParameters()) {
 					QualifiedName qn = QualifiedName.create(param.getName());
-					map.put(qn, EObjectDescription.create(qn, param));
+					map.put(qn.toLowerCase(), EObjectDescription.create(qn, param));
 				}
 				return new MapBasedScope(parent,map);
 			}
@@ -59,7 +59,7 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 			Map<QualifiedName,IEObjectDescription> map = Maps.newHashMap();
 			for (JvmFormalParameter jvmFormalParameter : list) {
 				IEObjectDescription desc = createIEObjectDescription(jvmFormalParameter);
-				map.put(desc.getName(),desc);
+				map.put(desc.getName().toLowerCase(),desc);
 			}
 			return new MapBasedScope(super.createLocalVarScope(context, reference, parent),map);
 		}
