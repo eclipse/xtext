@@ -6,6 +6,8 @@ package org.eclipse.xtext.linking;
 import java.util.Properties;
 
 import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.scoping.IgnoreCaseLinking;
+import org.eclipse.xtext.scoping.impl.SimpleLocalScopeProvider;
 import org.eclipse.xtext.service.DefaultRuntimeModule;
 
 import com.google.inject.Binder;
@@ -86,17 +88,16 @@ public abstract class AbstractIgnoreCaseImportsTestLanguageRuntimeModule extends
 
 	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
 	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(org.eclipse.xtext.resource.ignorecase.IgnoreCaseSimpleLocalScopeProvider.class);
+		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(SimpleLocalScopeProvider.class);
+	}
+	
+	public void configureIgnoreCaseLinking(Binder binder) {
+		binder.bind(Boolean.TYPE).annotatedWith(IgnoreCaseLinking.class).toInstance(true);
 	}
 
 	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
 	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		return org.eclipse.xtext.resource.ignorecase.IgnoreCaseImportUriGlobalScopeProvider.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
-	public Class<? extends org.eclipse.xtext.resource.IResourceDescription.Manager> bindIResourceDescription$Manager() {
-		return org.eclipse.xtext.resource.ignorecase.IgnoreCaseResourceDescriptionManager.class;
+		return org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider.class;
 	}
 
 }

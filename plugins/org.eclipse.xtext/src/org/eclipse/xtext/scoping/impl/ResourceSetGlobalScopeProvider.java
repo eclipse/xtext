@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.ResourceSetReferencingResourceSet;
@@ -22,7 +22,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicates;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 /**
@@ -49,34 +49,25 @@ public class ResourceSetGlobalScopeProvider extends AbstractExportedObjectsAware
 
 	protected IScope createScopeWithQualifiedNames(final IScope parent, final EObject context,
 			final EReference reference, ResourceSet resourceSet) {
-		Iterable<IResourceDescription> descriptions = Iterables.transform(resourceSet.getResources(), new Function<Resource, IResourceDescription>() {
+		final Iterable<IResourceDescription> resourceDescriptions = Iterables.transform(resourceSet.getResources(), new Function<Resource, IResourceDescription>() {
 			public IResourceDescription apply(Resource from) {
 				return getResourceDescription(from);
 			}
 		});
-		final Iterable<IResourceDescription> filteredDescriptions = Iterables.filter(descriptions, Predicates.notNull());
-		
-		
-		Iterable<Iterable<IEObjectDescription>> objectDescriptionsIter = Iterables.transform(filteredDescriptions, new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
-			public Iterable<IEObjectDescription> apply(IResourceDescription from) {
-				return from.getExportedObjects(reference.getEReferenceType());
-			}
-		});
-		Iterable<IEObjectDescription> objectDescriptions = Iterables.concat(objectDescriptionsIter);
-		return new SimpleScope(parent, objectDescriptions) {
+		return new AbstractScope(parent) {
 			
 			@Override
-			public Iterable<IEObjectDescription> getLocalElements(ISelector selector) {
-				if (selector instanceof ISelector.SelectByName) {
-					final QualifiedName name = ((ISelector.SelectByName) selector).getName();
-					Iterable<Iterable<IEObjectDescription>> objectDescriptionsIter = transform(filteredDescriptions, new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
-						public Iterable<IEObjectDescription> apply(IResourceDescription from) {
-							return from.getExportedObjects(reference.getEReferenceType(), name);
-						}
-					});
-					return concat(objectDescriptionsIter);
-				}
-				return super.getLocalElements(selector);
+			public Iterable<IEObjectDescription> getLocalElements(final ISelector selector) {
+				Iterable<Iterable<IEObjectDescription>> result = transform(resourceDescriptions, new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
+					public Iterable<IEObjectDescription> apply(IResourceDescription from) {
+						return from.getExportedObjects(selector);
+					}
+				});
+				return filter(concat(result), new Predicate<IEObjectDescription>() {
+					public boolean apply(IEObjectDescription input) {
+						return EcoreUtil2.isAssignableFrom(reference.getEReferenceType(), input.getEObjectOrProxy().eClass());
+					}
+				});
 			}
 		};
 	}

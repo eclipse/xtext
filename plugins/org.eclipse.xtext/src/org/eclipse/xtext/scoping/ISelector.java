@@ -51,12 +51,15 @@ public interface ISelector {
 	
 	/**
 	 * Scopes might check for this type in order to perform optimized filtering.
+	 * Note that the contract for indexes based on the name is, that they are indexed
+	 * using the lower case version of names, in order to support both case sensitive as well as case insensitive languages.
 	 * 
 	 * @author Sven Efftinge - Initial contribution and API
 	 */
 	class SelectByName extends DelegatingSelector implements Predicate<IEObjectDescription> {
 
 		private QualifiedName qualifiedName;
+		private boolean ignoreCase = false;
 
 		@Override
 		public Iterable<IEObjectDescription> applySelector(Iterable<IEObjectDescription> elements) {
@@ -64,7 +67,12 @@ public interface ISelector {
 		}
 		
 		public SelectByName(QualifiedName qualifiedName) {
+			this(qualifiedName,false);
+		}
+		
+		public SelectByName(QualifiedName qualifiedName, boolean ignoreCase) {
 			this.qualifiedName = qualifiedName;
+			this.ignoreCase  = ignoreCase;
 		}
 		
 		public QualifiedName getName() {
@@ -72,12 +80,16 @@ public interface ISelector {
 		}
 
 		public boolean apply(IEObjectDescription input) {
-			return qualifiedName.equals(input.getName());
+			if (ignoreCase) {
+				return qualifiedName.equalsIgnoreCase(input.getName()); 
+			} else {
+				return qualifiedName.equals(input.getName());
+			}
 		}
 		
 		@Override
 		public String toString() {
-			return "by name '"+qualifiedName+"'"+getDelegateSelectors();
+			return "by name '"+qualifiedName+"'"+(ignoreCase?" ignorecase ":"")+getDelegateSelectors();
 		}
 	}
 	

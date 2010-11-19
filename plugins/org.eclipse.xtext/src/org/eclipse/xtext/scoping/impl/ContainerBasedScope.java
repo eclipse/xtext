@@ -7,17 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
-import java.util.Collections;
+import static com.google.common.collect.Iterables.*;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.ISelector;
-import org.eclipse.xtext.scoping.ISelector.SelectByEObject;
+
+import com.google.common.base.Predicate;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -35,19 +34,11 @@ public class ContainerBasedScope extends AbstractScope {
 	
 	@Override
 	public Iterable<IEObjectDescription> getLocalElements(ISelector selector) {
-		if (selector instanceof ISelector.SelectByName) {
-			QualifiedName name = ((ISelector.SelectByName) selector).getName();
-			return container.findAllEObjects(reference.getEReferenceType(), name);
-		} else if (selector instanceof ISelector.SelectByEObject) {
-			SelectByEObject eObjectSelector = (ISelector.SelectByEObject) selector;
-			URI uri = eObjectSelector.getUri();
-			IResourceDescription description = container.getResourceDescription(uri.trimFragment());
-			if (description != null) {
-				return description.getExportedObjectsForEObject(eObjectSelector.getEObject());
+		return filter(container.getElements(selector), new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				return EcoreUtil2.isAssignableFrom(reference.getEReferenceType(), input.getEObjectOrProxy().eClass());
 			}
-			return Collections.emptySet();
-		}
-		return container.findAllEObjects(reference.getEReferenceType());
+		});
 	}
 	
 	protected IContainer getContainer() {

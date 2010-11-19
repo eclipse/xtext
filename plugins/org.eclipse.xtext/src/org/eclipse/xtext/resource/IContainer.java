@@ -7,12 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
+import static java.util.Collections.*;
+
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.inject.ImplementedBy;
 
@@ -20,7 +22,7 @@ import com.google.inject.ImplementedBy;
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein - introduced QualifiedName
  */
-public interface IContainer {
+public interface IContainer extends IScope {
 
 	/**
 	 * @return the {@link IResourceDescription} contained in this container. The result is never
@@ -30,20 +32,31 @@ public interface IContainer {
 
 	/**
 	 * @return the {@link IResourceDescription} for the given URI, or null is this container does 
-	 * not contain such an {@link IResourceDescription}. The result may be a cached view on the actual content of the underlying resource.
+	 * not contain such an {@link IResourceDescription}. 
+	 * The result may be a cached view on the actual content of the underlying resource.
 	 */
 	IResourceDescription getResourceDescription(URI uri);
 	
 	/**
-	 * @return all matching {@link IEObjectDescription} in this container. Returns never <code>null</code>.
+	 * a no-op implementation
 	 */
-	Iterable<IEObjectDescription> findAllEObjects(EClass type);
+	static IContainer NULL_CONTAINER = new IContainer(){
 
-	/**
-	 * @return all matching {@link IEObjectDescription} in this container. Returns never <code>null</code>.
-	 */
-	Iterable<IEObjectDescription> findAllEObjects(EClass type, QualifiedName qualifiedName);
+		public IEObjectDescription getSingleElement(ISelector selector) {
+			return null;
+		}
 
+		public Iterable<IEObjectDescription> getElements(ISelector selector) {
+			return emptySet();
+		}
+
+		public Iterable<IResourceDescription> getResourceDescriptions() {
+			return emptySet();
+		}
+
+		public IResourceDescription getResourceDescription(URI uri) {
+			return null;
+		}};
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
 	 */

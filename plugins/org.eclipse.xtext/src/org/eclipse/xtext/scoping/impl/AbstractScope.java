@@ -7,7 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
-import java.util.HashSet;
+import static com.google.common.collect.Iterables.*;
+
 import java.util.Iterator;
 import java.util.Set;
 
@@ -15,6 +16,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.ISelector;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
@@ -67,12 +69,13 @@ public abstract class AbstractScope implements IScope {
 	 * the parent scope 
 	 */
 	protected Iterable<IEObjectDescription> trackKeys(Iterable<IEObjectDescription> localElements) {
-		HashSet<IEObjectDescription> set = Sets.newHashSet(localElements);
 		shadowingIndex = Sets.newHashSet();
-		for (IEObjectDescription description : set) {
-			shadowingIndex.add(getKey(description));
-		}
-		return set;
+		return transform(localElements, new Function<IEObjectDescription, IEObjectDescription>() {
+			public IEObjectDescription apply(IEObjectDescription description) {
+				shadowingIndex.add(getKey(description));
+				return description;
+			}
+		});
 	}
 	
 	/**
@@ -94,7 +97,14 @@ public abstract class AbstractScope implements IScope {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName()+getLocalElements(ISelector.SELECT_ALL)+" -> "+getParent();
+		String parentString = null;
+		try {
+			final IScope parent2 = getParent();
+			parentString = parent2.toString();
+		} catch (Throwable t) {
+			parentString = t.getClass().getSimpleName()+" : "+t.getMessage();
+		}
+		return getClass().getSimpleName()+getLocalElements(ISelector.SELECT_ALL)+" -> "+parentString;
 	}
 
 }

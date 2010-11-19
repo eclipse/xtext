@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.scoping;
 
-import org.eclipse.xtext.resource.ignorecase.IgnoreCaseDefaultGlobalScopeProvider;
-import org.eclipse.xtext.resource.ignorecase.IgnoreCaseImportedNamespaceAwareScopeProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
@@ -21,16 +19,12 @@ public class ImportNamespacesScopingFragment extends AbstractScopingFragment {
 
 	@Override
 	protected Class<? extends IScopeProvider> getLocalScopeProvider() {
-		return isIgnoreCase() 
-			? IgnoreCaseImportedNamespaceAwareScopeProvider.class
-			: ImportedNamespaceAwareLocalScopeProvider.class;
+		return ImportedNamespaceAwareLocalScopeProvider.class;
 	}
 	
 	@Override
 	protected Class<? extends IGlobalScopeProvider> getGlobalScopeProvider() {
-		return isIgnoreCase() 
-			? IgnoreCaseDefaultGlobalScopeProvider.class
-			: DefaultGlobalScopeProvider.class;
+		return DefaultGlobalScopeProvider.class;
 	}
 
 }

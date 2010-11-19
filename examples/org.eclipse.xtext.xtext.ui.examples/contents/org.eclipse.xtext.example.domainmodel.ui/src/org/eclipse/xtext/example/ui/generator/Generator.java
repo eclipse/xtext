@@ -1,5 +1,7 @@
 package org.eclipse.xtext.example.ui.generator;
 
+import static org.eclipse.xtext.scoping.Selectors.*;
+
 import java.util.Collections;
 import java.util.Set;
 
@@ -67,8 +69,7 @@ public class Generator implements IXtextBuilderParticipant {
 		for (IResourceDescription.Delta delta : context.getDeltas()) {
 			// handle deletion
 			if (delta.getNew() == null) {
-				Iterable<IEObjectDescription> iterable = delta.getOld().getExportedObjects(
-						DomainmodelPackage.Literals.ENTITY);
+				Iterable<IEObjectDescription> iterable = delta.getOld().getExportedObjects(selectByType(DomainmodelPackage.Literals.ENTITY));
 				for (IEObjectDescription ieObjectDescription : iterable) {
 					String qualifiedJavaName = qualifiedNameConverter.toString(ieObjectDescription.getQualifiedName());
 					IFile file = createFile(folder, qualifiedJavaName);
@@ -78,11 +79,11 @@ public class Generator implements IXtextBuilderParticipant {
 					}
 				}
 			} else {
-				Iterable<IEObjectDescription> newOnes = delta.getNew().getExportedObjects(
-						DomainmodelPackage.Literals.ENTITY);
+				Iterable<IEObjectDescription> newOnes = delta.getNew().getExportedObjects(selectByType(
+						DomainmodelPackage.Literals.ENTITY));
 				if (delta.getOld() != null) {
-					Iterable<IEObjectDescription> oldOnes = delta.getOld().getExportedObjects(
-							DomainmodelPackage.Literals.ENTITY);
+					Iterable<IEObjectDescription> oldOnes = delta.getOld().getExportedObjects(selectByType(
+							DomainmodelPackage.Literals.ENTITY));
 					Set<String> qualifiedJavaNames = Sets.newHashSet(Iterables.transform(newOnes,
 							new Function<IEObjectDescription, String>() {
 								public String apply(IEObjectDescription from) {

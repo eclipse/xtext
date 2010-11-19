@@ -313,55 +313,66 @@ public interface BuilderStatePackage extends EPackage {
 
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription <em>Resource Description</em>}'.
+	 * The meta object id for the '<em>ISelector</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.scoping.ISelector
+	 * @see org.eclipse.xtext.builder.builderState.impl.BuilderStatePackageImpl#getISelector()
+	 * @generated
+	 */
+	int ISELECTOR = 7;
+
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.resource.IResourceDescription <em>Resource Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Resource Description</em>'.
-	 * @see org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription
-	 * @model instanceClass="org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription"
+	 * @see org.eclipse.xtext.resource.IResourceDescription
+	 * @model instanceClass="org.eclipse.xtext.resource.IResourceDescription"
 	 * @generated
 	 */
 	EClass getResourceDescription();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription#getURI <em>URI</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.resource.IResourceDescription#getURI <em>URI</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>URI</em>'.
-	 * @see org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription#getURI()
+	 * @see org.eclipse.xtext.resource.IResourceDescription#getURI()
 	 * @see #getResourceDescription()
 	 * @generated
 	 */
 	EAttribute getResourceDescription_URI();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription#getExportedObjects <em>Exported Objects</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.resource.IResourceDescription#getExportedObjects <em>Exported Objects</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Exported Objects</em>'.
-	 * @see org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription#getExportedObjects()
+	 * @see org.eclipse.xtext.resource.IResourceDescription#getExportedObjects()
 	 * @see #getResourceDescription()
 	 * @generated
 	 */
 	EReference getResourceDescription_ExportedObjects();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription#getImportedNames <em>Imported Names</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.eclipse.xtext.resource.IResourceDescription#getImportedNames <em>Imported Names</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Imported Names</em>'.
-	 * @see org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription#getImportedNames()
+	 * @see org.eclipse.xtext.resource.IResourceDescription#getImportedNames()
 	 * @see #getResourceDescription()
 	 * @generated
 	 */
 	EAttribute getResourceDescription_ImportedNames();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription#getReferenceDescriptions <em>Reference Descriptions</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.resource.IResourceDescription#getReferenceDescriptions <em>Reference Descriptions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Reference Descriptions</em>'.
-	 * @see org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription#getReferenceDescriptions()
+	 * @see org.eclipse.xtext.resource.IResourceDescription#getReferenceDescriptions()
 	 * @see #getResourceDescription()
 	 * @generated
 	 */
@@ -564,6 +575,17 @@ public interface BuilderStatePackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getQualifiedName();
+
+	/**
+	 * Returns the meta object for data type '{@link org.eclipse.xtext.scoping.ISelector <em>ISelector</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>ISelector</em>'.
+	 * @see org.eclipse.xtext.scoping.ISelector
+	 * @model instanceClass="org.eclipse.xtext.scoping.ISelector"
+	 * @generated
+	 */
+	EDataType getISelector();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -783,6 +805,16 @@ public interface BuilderStatePackage extends EPackage {
 		 * @generated
 		 */
 		EDataType QUALIFIED_NAME = eINSTANCE.getQualifiedName();
+
+		/**
+		 * The meta object literal for the '<em>ISelector</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.scoping.ISelector
+		 * @see org.eclipse.xtext.builder.builderState.impl.BuilderStatePackageImpl#getISelector()
+		 * @generated
+		 */
+		EDataType ISELECTOR = eINSTANCE.getISelector();
 
 	}
 

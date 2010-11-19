@@ -51,7 +51,7 @@ public class ImportedNamesAdapter extends AdapterImpl implements IScopeWrapper {
 		
 		public Iterable<IEObjectDescription> getElements(final ISelector selector) {
 			if (selector instanceof ISelector.SelectByName) {
-				final QualifiedName name = ((ISelector.SelectByName) selector).getName();
+				final QualifiedName name = ((ISelector.SelectByName) selector).getName().toLowerCase();
 				final Iterable<IEObjectDescription> elements = delegate.getElements(selector);
 				return new Iterable<IEObjectDescription>() {
 					public Iterator<IEObjectDescription> iterator() {
@@ -66,12 +66,13 @@ public class ImportedNamesAdapter extends AdapterImpl implements IScopeWrapper {
 		}
 
 		protected void handleNoSelectNameQuery(ISelector selector) {
-			log.error("getElements shouldn't be called without a SelectByName selector during linking.", new IllegalStateException());
+			if (log.isInfoEnabled())
+				log.info("getElements should be called without a SelectByName selector during linking.");
 		}
 		
 		public IEObjectDescription getSingleElement(ISelector selector) {
 			if (selector instanceof ISelector.SelectByName) {
-				final QualifiedName name = ((ISelector.SelectByName) selector).getName();
+				final QualifiedName name = ((ISelector.SelectByName) selector).getName().toLowerCase();
 				importedNames.add(name);
 			} else {
 				handleNoSelectNameQuery(selector);
@@ -79,6 +80,10 @@ public class ImportedNamesAdapter extends AdapterImpl implements IScopeWrapper {
 			return delegate.getSingleElement(selector);
 		}
 
+		@Override
+		public String toString() {
+			return getClass().getSimpleName()+" -> "+delegate;
+		}
 	}
 
 	private Set<QualifiedName> importedNames = new HashSet<QualifiedName>();

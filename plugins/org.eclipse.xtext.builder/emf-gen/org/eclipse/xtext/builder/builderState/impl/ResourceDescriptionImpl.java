@@ -13,7 +13,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container;
@@ -25,8 +24,9 @@ import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.EObjectDescriptionLookUp;
+import org.eclipse.xtext.scoping.ISelector;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,7 +44,7 @@ import org.eclipse.xtext.resource.impl.EObjectDescriptionLookUp;
  *
  * @generated
  */
-public class ResourceDescriptionImpl extends Container implements IIgnoreCaseResourceDescription {
+public class ResourceDescriptionImpl extends Container implements IResourceDescription {
 	/**
 	 * The default value of the '{@link #getURI() <em>URI</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -168,6 +168,10 @@ public class ResourceDescriptionImpl extends Container implements IIgnoreCaseRes
 		return importedNames;
 	}
 
+	public Iterable<IEObjectDescription> getExportedObjects(ISelector selector) {
+		return getLookUp().getExportedObjects(selector);
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -180,38 +184,11 @@ public class ResourceDescriptionImpl extends Container implements IIgnoreCaseRes
 		return referenceDescriptions;
 	}
 	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<IEObjectDescription> getExportedObjects(EClass type, String name) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
 	private EObjectDescriptionLookUp getLookUp() {
 		if (lookUp == null) {
 			lookUp = new EObjectDescriptionLookUp(getExportedObjects());
 		}
 		return lookUp;
-	}
-
-	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz, final QualifiedName qualifiedName) {
-		return getLookUp().getExportedObjects(clazz, qualifiedName);
-	}
-	
-	public Iterable<IEObjectDescription> getExportedObjectsIgnoreCase(final EClass clazz, final QualifiedName qualifiedName) {
-		return getLookUp().getExportedObjectsIgnoreCase(clazz, qualifiedName);
-	}
-
-	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz) {
-		return getLookUp().getExportedObjects(clazz);
-	}
-
-	public Iterable<IEObjectDescription> getExportedObjectsForEObject(EObject object) {
-		return getLookUp().getExportedObjectsForEObject(object);
 	}
 
 	/**

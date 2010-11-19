@@ -264,8 +264,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			if (expression instanceof XVariableDeclaration) {
 				XVariableDeclaration varDecl = (XVariableDeclaration) expression;
 				IEObjectDescription desc = createEObjectDescription(varDecl);
-				vars.put(desc.getName(), desc);
-
+				vars.put(desc.getName().toLowerCase(), desc);
 			}
 		}
 		if (vars.isEmpty())
@@ -278,8 +277,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		Map<QualifiedName, IEObjectDescription> descriptions = Maps.newHashMap();
 		for (JvmFormalParameter p : params) {
 			IEObjectDescription desc = createEObjectDescription(p);
-			descriptions.put(desc.getName(), desc);
-
+			descriptions.put(desc.getName().toLowerCase(), desc);
 		}
 		return new MapBasedScope(parentScope, descriptions);
 	}

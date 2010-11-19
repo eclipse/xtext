@@ -9,7 +9,7 @@ package org.eclipse.xtext.builder.builderState;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,7 +35,7 @@ public interface BuilderStateFactory extends EFactory {
 	 * @return a new object of class '<em>Resource Description</em>'.
 	 * @generated
 	 */
-	IIgnoreCaseResourceDescription createResourceDescription();
+	IResourceDescription createResourceDescription();
 
 	/**
 	 * Returns a new object of class '<em>EObject Description</em>'.

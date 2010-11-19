@@ -7,58 +7,33 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.impl;
 
-import java.util.Collections;
+import static com.google.common.collect.Iterables.*;
 
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.xtext.naming.QualifiedName;
+import java.util.Iterator;
+
+import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.ignorecase.IIgnoreCaseContainer;
-import org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription;
+import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractContainer implements IIgnoreCaseContainer {
-
-	public Iterable<IEObjectDescription> findAllEObjects(final EClass type) {
-		return Iterables.concat(Iterables.transform(getResourceDescriptions(), new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
+public abstract class AbstractContainer implements IContainer {
+	
+	public Iterable<IEObjectDescription> getElements(final ISelector selector) {
+		return concat(transform(getResourceDescriptions(),new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
 			public Iterable<IEObjectDescription> apply(IResourceDescription from) {
-				if (from != null)
-					return from.getExportedObjects(type);
-				return Collections.emptyList();
-			}
-		}));
-	}
-
-	public Iterable<IEObjectDescription> findAllEObjects(final EClass type, final QualifiedName qualifiedName) {
-		return Iterables.concat(Iterables.transform(getResourceDescriptions(), new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
-			public Iterable<IEObjectDescription> apply(IResourceDescription from) {
-				if (from != null)
-					return from.getExportedObjects(type, qualifiedName);
-				return Collections.emptyList();
+				return selector.applySelector(from.getExportedObjects());
 			}
 		}));
 	}
 	
-	public Iterable<IEObjectDescription> findAllEObjectsIgnoreCase(final EClass type, final QualifiedName qualifiedName) {
-		return Iterables.concat(Iterables.transform(getResourceDescriptions(), new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
-			public Iterable<IEObjectDescription> apply(IResourceDescription from) {
-				if (from == null)
-					return Collections.emptyList();
-				if (from instanceof IIgnoreCaseResourceDescription)
-					return ((IIgnoreCaseResourceDescription) from).getExportedObjectsIgnoreCase(type, qualifiedName);
-				return Iterables.filter(from.getExportedObjects(type), new Predicate<IEObjectDescription>() {
-					public boolean apply(IEObjectDescription input) {
-						return qualifiedName.equalsIgnoreCase(input.getName());
-					}
-				});
-			}
-		}));
+	public IEObjectDescription getSingleElement(ISelector selector) {
+		Iterator<IEObjectDescription> iterator = getElements(selector).iterator();
+		return iterator.hasNext() ? iterator.next() : null;
 	}
 	
 }

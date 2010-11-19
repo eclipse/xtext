@@ -152,8 +152,15 @@ public class QualifiedName implements Comparable<QualifiedName> {
 
 	@Override
 	public boolean equals(Object obj) {
-		return obj instanceof QualifiedName && ((QualifiedName) obj).getSegmentCount() == getSegmentCount()
-				&& startsWith((QualifiedName) obj, false);
+		if (obj==this)
+			return true;
+		if (obj instanceof QualifiedName) {
+			QualifiedName other = (QualifiedName) obj;
+			return this.segments.equals(other.segments);
+		}
+		return false;
+//		return obj instanceof QualifiedName && ((QualifiedName) obj).getSegmentCount() == getSegmentCount()
+//				&& startsWith((QualifiedName) obj, false);
 	}
 
 	public boolean equalsIgnoreCase(Object obj) {

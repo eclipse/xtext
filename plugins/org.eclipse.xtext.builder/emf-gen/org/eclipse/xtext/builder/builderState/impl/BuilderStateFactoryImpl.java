@@ -20,7 +20,8 @@ import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Iterables;
@@ -92,6 +93,8 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 				return createEStringArrayFromString(eDataType, initialValue);
 			case BuilderStatePackage.QUALIFIED_NAME:
 				return createQualifiedNameFromString(eDataType, initialValue);
+			case BuilderStatePackage.ISELECTOR:
+				return createISelectorFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -111,6 +114,8 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 				return convertEStringArrayToString(eDataType, instanceValue);
 			case BuilderStatePackage.QUALIFIED_NAME:
 				return convertQualifiedNameToString(eDataType, instanceValue);
+			case BuilderStatePackage.ISELECTOR:
+				return convertISelectorToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -121,7 +126,7 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IIgnoreCaseResourceDescription createResourceDescription() {
+	public IResourceDescription createResourceDescription() {
 		ResourceDescriptionImpl resourceDescription = new ResourceDescriptionImpl();
 		return resourceDescription;
 	}
@@ -209,6 +214,24 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	 */
 	public String convertQualifiedNameToString(EDataType eDataType, Object instanceValue) {
 		return Strings.pack(Iterables.toArray(((QualifiedName) instanceValue).getSegments(), String.class)); 
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ISelector createISelectorFromString(EDataType eDataType, String initialValue) {
+		return (ISelector)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertISelectorToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**

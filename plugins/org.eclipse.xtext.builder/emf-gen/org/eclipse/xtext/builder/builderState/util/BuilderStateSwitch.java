@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
 
 /**
  * <!-- begin-user-doc -->
@@ -111,7 +111,7 @@ public class BuilderStateSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseResourceDescription(IIgnoreCaseResourceDescription object) {
+	public T caseResourceDescription(IResourceDescription object) {
 		return null;
 	}
 

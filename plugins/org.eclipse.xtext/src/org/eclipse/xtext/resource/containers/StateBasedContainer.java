@@ -7,16 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.containers;
 
+import static java.util.Collections.*;
+
 import java.util.Collections;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsBasedContainer;
+import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.common.collect.Maps;
 
@@ -63,24 +64,17 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 	}
 	
 	@Override
-	public Iterable<IEObjectDescription> findAllEObjects(EClass type) {
+	public Iterable<IEObjectDescription> getElements(ISelector selector) {
 		if (state.getContents().isEmpty())
-			return Collections.emptyList();
-		return super.findAllEObjects(type);
+			return emptyList();
+		return super.getElements(selector);
 	}
 	
 	@Override
-	public Iterable<IEObjectDescription> findAllEObjects(EClass type, QualifiedName qualifiedName) {
+	public IEObjectDescription getSingleElement(ISelector selector) {
 		if (state.getContents().isEmpty())
-			return Collections.emptyList();
-		return super.findAllEObjects(type, qualifiedName);
+			return null;
+		return super.getSingleElement(selector);
 	}
 	
-	@Override
-	public Iterable<IEObjectDescription> findAllEObjectsIgnoreCase(EClass type, QualifiedName qualifiedName) {
-		if (state.getContents().isEmpty())
-			return Collections.emptyList();
-		return super.findAllEObjectsIgnoreCase(type, qualifiedName);
-	}
-
 }

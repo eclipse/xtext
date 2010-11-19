@@ -24,8 +24,8 @@ public class AliasedEObjectDescription extends AbstractEObjectDescription {
 	private IEObjectDescription delegate;
 	private QualifiedName alias;
 
-	public AliasedEObjectDescription(QualifiedName alias, IEObjectDescription delegate) {
-		super();
+	public AliasedEObjectDescription(QualifiedName alias, IEObjectDescription delegate, boolean ignoreCase) {
+		super(ignoreCase);
 		this.alias = alias;
 		this.delegate = delegate;
 	}
@@ -59,5 +59,5 @@ public class AliasedEObjectDescription extends AbstractEObjectDescription {
 	public EClass getEClass() {
 		return delegate.getEClass();
 	}
-
+	
 }

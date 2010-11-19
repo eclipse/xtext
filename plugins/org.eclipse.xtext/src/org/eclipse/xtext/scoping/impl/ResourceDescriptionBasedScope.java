@@ -7,12 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
+import static com.google.common.collect.Iterables.*;
+
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.ISelector;
+
+import com.google.common.base.Predicate;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -56,13 +60,11 @@ public class ResourceDescriptionBasedScope extends AbstractScope {
 	
 	@Override
 	public Iterable<IEObjectDescription> getLocalElements(ISelector selector) {
-		if (selector instanceof ISelector.SelectByName) {
-			QualifiedName name = ((ISelector.SelectByName) selector).getName();
-			final Iterable<IEObjectDescription> exportedObjects = description.getExportedObjects(type, name);
-			return selector.applySelector(exportedObjects);
-		} 
-		Iterable<IEObjectDescription> objects = description.getExportedObjects(type);
-		return selector.applySelector(objects);
+		return filter(description.getExportedObjects(selector), new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				return EcoreUtil2.isAssignableFrom(type, input.getEObjectOrProxy().eClass());
+			}
+		});
 	}
 
 }
