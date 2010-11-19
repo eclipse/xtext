@@ -36,7 +36,7 @@ public class ReferenceFinder {
 	private IResourceDescriptions index;
 	
 	@Inject
-	private RefactoringDocumentProvider documentProvider; 
+	private IRefactoringDocument.Provider documentProvider; 
 
 	public CrossRefRenameInfo.Table findReferences(final ElementRenameInfo.Table renamedElements,
 			URI targetElementURI, final IRefactoringDocument targetDocument, RefactoringStatus status) {

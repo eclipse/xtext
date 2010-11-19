@@ -18,14 +18,13 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-import org.eclipse.text.edits.ReplaceEdit;
-import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil;
-import org.eclipse.xtext.ui.refactoring.IRenameElementStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.editor.AbstractEditorTest;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -33,28 +32,27 @@ import com.google.inject.Injector;
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class DefaultRenameElementProcessorTest extends AbstractXtextTests {
+public class DefaultRenameElementProcessorTest extends AbstractEditorTest {
 
 	private IJavaProject project;
 
 	@Inject
 	private RenameElementProcessor processor;
-
-	@Inject
-	private IRenameElementStrategy.Provider strategyProvider;
-
+	
 	private static final String TEST_PROJECT = "refactoring.test";
 	private static final String TEST_FILE_NAME = TEST_PROJECT + "/" + "File.refactoringtestlanguage";
 
 	@Override
 	protected void setUp() throws Exception {
-		super.setUp();
+		super.setUp();		
 		project = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT);
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+		addSourceFolder(project, "src");
 		Injector injector = Activator.getInstance().getInjector(getEditorId());
 		injector.injectMembers(this);
 	}
 
+	@Override
 	protected String getEditorId() {
 		return "org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage";
 	}
@@ -66,40 +64,36 @@ public class DefaultRenameElementProcessorTest extends AbstractXtextTests {
 			JavaProjectSetupUtil.deleteJavaProject(project);
 	}
 
-	public void testSimpleRename() throws Exception {
+	public void testFileRename() throws Exception {
 		String initialModel = "B A { ref B }";
 		IFile testFile = IResourcesSetupUtil.createFile(TEST_FILE_NAME, initialModel);
-		IResourcesSetupUtil.waitForAutoBuild();
 		URI targetElementURI = URI.createPlatformResourceURI(testFile.getFullPath().toString(), true).appendFragment("//@elements.0");
-//		project.getProject().build(IncrementalProjectBuilder.CLEAN_BUILD, new NullProgressMonitor());
 		rename(testFile, targetElementURI, "B", "C");
 		String model = readFile(testFile);
 		assertEquals(initialModel.replaceAll("B", "C"), model);
 	}
 
-	protected void rename(IFile testFile, URI targetElementURI, String oldName, String newName) throws CoreException, Exception {
-		IRenameElementStrategy renameElementStrategy = createRenameElementStrategy(targetElementURI, oldName, newName);
-		refactor(targetElementURI, newName, renameElementStrategy);
+	public void testEditorRename() throws Exception {
+		String initialModel = "B A { ref B }";
+		IFile testFile = IResourcesSetupUtil.createFile(TEST_FILE_NAME, initialModel);
+		XtextEditor editor = openEditor(testFile);
+		assertFalse(editor.isDirty());
+		URI targetElementURI = URI.createPlatformResourceURI(testFile.getFullPath().toString(), true).appendFragment("//@elements.0");
+		rename(testFile, targetElementURI, "B", "C");
+		assertTrue(editor.isDirty());
+		assertEquals(initialModel.replaceAll("B", "C"), editor.getDocument().get());	
+		rename(testFile, targetElementURI, "C", "B");
+		assertTrue(editor.isDirty());
+		assertEquals(initialModel, editor.getDocument().get());
 	}
 	
-	protected IRenameElementStrategy createRenameElementStrategy(URI targetElementURI, String oldName, String newName) {
-		IRenameElementStrategy renameElementStrategy = strategyProvider.get(targetElementURI);
-		assertNotNull(renameElementStrategy);
-		assertEquals(oldName, renameElementStrategy.getCurrentName());
-		RefactoringStatus validateNewNameStatus = renameElementStrategy.validateNewName(oldName);
-		assertTrue(validateNewNameStatus.hasWarning());
-		assertFalse(validateNewNameStatus.hasError());
-		validateNewNameStatus = renameElementStrategy.validateNewName(newName);
-		assertTrue(validateNewNameStatus.isOK());
-		ReplaceEdit renameEdit = renameElementStrategy.getRenameEdit(newName);
-		assertEquals(0, renameEdit.getOffset());
-		assertEquals(1, renameEdit.getLength());
-		assertEquals(newName, renameEdit.getText());
-		return renameElementStrategy;
+	protected void rename(IFile testFile, URI targetElementURI, String oldName, String newName) throws CoreException, Exception {
+		refactor(targetElementURI, newName);
 	}
+	
 
-	protected void refactor(URI targetElementURI, String newName, IRenameElementStrategy renameElementStrategy) throws CoreException {
-		processor.initialize(targetElementURI, renameElementStrategy);
+	protected void refactor(URI targetElementURI, String newName) throws CoreException {
+		processor.initialize(targetElementURI);
 		RefactoringStatus initialStatus = processor.checkInitialConditions(new NullProgressMonitor());
 		assertTrue(initialStatus.isOK());
 		processor.setNewName(newName);

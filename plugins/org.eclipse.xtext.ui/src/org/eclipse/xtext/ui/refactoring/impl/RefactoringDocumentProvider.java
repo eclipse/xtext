@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
-import java.util.Map;
-
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspace;
@@ -37,7 +35,6 @@ import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
-import com.google.inject.internal.Maps;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -53,15 +50,10 @@ public class RefactoringDocumentProvider implements IRefactoringDocument.Provide
 	@Inject
 	private XtextDocumentProvider xtextDocumentProvider;
 
-	private Map<URI, IRefactoringDocument> cache = Maps.newHashMap();
-
 	private static final Logger LOG = Logger.getLogger(RefactoringDocumentProvider.class);
 
 	public IRefactoringDocument get(final URI uri, final RefactoringStatus status) {
 		URI resourceURI = uri.trimFragment();
-		if (cache.containsKey(resourceURI)) {
-			return cache.get(resourceURI);
-		}
 		IRefactoringDocument result = null;
 		final IFileEditorInput fileEditorInput = getEditorInput(resourceURI, status);
 		IXtextDocument openDocument = new DisplayRunnableWithResult<IXtextDocument>() {
@@ -94,7 +86,6 @@ public class RefactoringDocumentProvider implements IRefactoringDocument.Provide
 				LOG.error(e);
 			}
 		}
-		cache.put(resourceURI, result);
 		return result;
 	}
 
@@ -148,6 +139,16 @@ public class RefactoringDocumentProvider implements IRefactoringDocument.Provide
 		public IXtextDocument getXtextDocument() {
 			return document;
 		}
+		
+		@Override
+		public boolean equals(Object other) {
+			return other instanceof EditorDocument && ((EditorDocument)other).getXtextDocument().equals(document);
+		}
+		
+		@Override
+		public int hashCode() {
+			return document == null ? 0 : document.hashCode();
+		}
 	}
 
 	// TODO: lazily load and release document
@@ -186,6 +187,16 @@ public class RefactoringDocumentProvider implements IRefactoringDocument.Provide
 
 		public IFile getFile() {
 			return file;
+		}
+		
+		@Override
+		public boolean equals(Object other) {
+			return other instanceof FileDocument && ((FileDocument)other).getFile().equals(file);
+		}
+		
+		@Override
+		public int hashCode() {
+			return file == null ? 0 : file.hashCode();
 		}
 	}
 }
