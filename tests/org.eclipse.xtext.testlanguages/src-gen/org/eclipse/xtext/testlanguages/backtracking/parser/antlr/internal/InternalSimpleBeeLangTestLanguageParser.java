@@ -132,7 +132,7 @@ public class InternalSimpleBeeLangTestLanguageParser extends AbstractInternalAnt
      	
         public InternalSimpleBeeLangTestLanguageParser(TokenStream input, IAstFactory factory, SimpleBeeLangTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

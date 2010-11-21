@@ -58,7 +58,7 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
      	
         public InternalGrammarAccessTestLanguageParser(TokenStream input, IAstFactory factory, GrammarAccessTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

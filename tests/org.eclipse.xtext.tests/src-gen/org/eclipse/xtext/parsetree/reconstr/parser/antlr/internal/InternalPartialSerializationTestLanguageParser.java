@@ -60,7 +60,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
      	
         public InternalPartialSerializationTestLanguageParser(TokenStream input, IAstFactory factory, PartialSerializationTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

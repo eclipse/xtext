@@ -87,7 +87,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
      	
         public InternalXtextGrammarTestLanguageParser(TokenStream input, IAstFactory factory, XtextGrammarTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

@@ -120,7 +120,7 @@ public class InternalXtend2Parser extends AbstractInternalAntlrParser {
      	
         public InternalXtend2Parser(TokenStream input, IAstFactory factory, Xtend2GrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

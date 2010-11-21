@@ -70,7 +70,7 @@ public class InternalArithmeticsParser extends AbstractInternalAntlrParser {
      	
         public InternalArithmeticsParser(TokenStream input, IAstFactory factory, ArithmeticsGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

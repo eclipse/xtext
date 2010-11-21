@@ -57,7 +57,7 @@ public class InternalBaseInheritanceTestLanguageParser extends AbstractInternalA
      	
         public InternalBaseInheritanceTestLanguageParser(TokenStream input, IAstFactory factory, BaseInheritanceTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

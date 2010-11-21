@@ -58,7 +58,7 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
      	
         public InternalIgnoreCaseNamespacesTestLanguageParser(TokenStream input, IAstFactory factory, IgnoreCaseNamespacesTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

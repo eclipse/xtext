@@ -69,7 +69,7 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
      	
         public InternalSimpleBacktrackingBug325745TestLanguageParser(TokenStream input, IAstFactory factory, SimpleBacktrackingBug325745TestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

@@ -59,7 +59,7 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalAntlr
      	
         public InternalImportUriUiTestLanguageParser(TokenStream input, IAstFactory factory, ImportUriUiTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

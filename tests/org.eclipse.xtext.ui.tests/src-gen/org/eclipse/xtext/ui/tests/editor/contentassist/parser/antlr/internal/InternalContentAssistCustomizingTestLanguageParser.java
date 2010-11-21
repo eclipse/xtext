@@ -59,7 +59,7 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
      	
         public InternalContentAssistCustomizingTestLanguageParser(TokenStream input, IAstFactory factory, ContentAssistCustomizingTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

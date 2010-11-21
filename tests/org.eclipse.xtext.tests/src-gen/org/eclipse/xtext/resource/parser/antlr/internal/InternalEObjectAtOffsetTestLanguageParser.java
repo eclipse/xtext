@@ -60,7 +60,7 @@ public class InternalEObjectAtOffsetTestLanguageParser extends AbstractInternalA
      	
         public InternalEObjectAtOffsetTestLanguageParser(TokenStream input, IAstFactory factory, EObjectAtOffsetTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

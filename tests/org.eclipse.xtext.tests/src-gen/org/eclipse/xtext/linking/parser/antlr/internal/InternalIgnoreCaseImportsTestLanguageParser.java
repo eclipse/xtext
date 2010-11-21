@@ -58,7 +58,7 @@ public class InternalIgnoreCaseImportsTestLanguageParser extends AbstractInterna
      	
         public InternalIgnoreCaseImportsTestLanguageParser(TokenStream input, IAstFactory factory, IgnoreCaseImportsTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

@@ -62,7 +62,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
      	
         public InternalBmTestLanguageParser(TokenStream input, IAstFactory factory, BmTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

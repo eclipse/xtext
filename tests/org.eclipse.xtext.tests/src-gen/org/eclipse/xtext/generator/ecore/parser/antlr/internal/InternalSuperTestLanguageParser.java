@@ -57,7 +57,7 @@ public class InternalSuperTestLanguageParser extends AbstractInternalAntlrParser
      	
         public InternalSuperTestLanguageParser(TokenStream input, IAstFactory factory, SuperTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

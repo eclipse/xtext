@@ -66,7 +66,7 @@ public class InternalSingleCodetemplateParser extends AbstractInternalAntlrParse
      	
         public InternalSingleCodetemplateParser(TokenStream input, IAstFactory factory, SingleCodetemplateGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

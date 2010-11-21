@@ -60,7 +60,7 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalAntlrPars
      	
         public InternalOutlineTestLanguageParser(TokenStream input, IAstFactory factory, OutlineTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

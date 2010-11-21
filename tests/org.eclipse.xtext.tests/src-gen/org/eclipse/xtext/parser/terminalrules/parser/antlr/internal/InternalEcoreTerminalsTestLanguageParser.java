@@ -56,7 +56,7 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
      	
         public InternalEcoreTerminalsTestLanguageParser(TokenStream input, IAstFactory factory, EcoreTerminalsTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

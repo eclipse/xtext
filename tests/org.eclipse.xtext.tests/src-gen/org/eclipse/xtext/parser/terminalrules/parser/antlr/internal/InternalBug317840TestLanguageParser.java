@@ -58,7 +58,7 @@ public class InternalBug317840TestLanguageParser extends AbstractInternalAntlrPa
      	
         public InternalBug317840TestLanguageParser(TokenStream input, IAstFactory factory, Bug317840TestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

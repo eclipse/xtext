@@ -79,7 +79,7 @@ public class InternalExUnorderedGroupsTestLanguageParser extends AbstractInterna
      	
         public InternalExUnorderedGroupsTestLanguageParser(TokenStream input, IAstFactory factory, ExUnorderedGroupsTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

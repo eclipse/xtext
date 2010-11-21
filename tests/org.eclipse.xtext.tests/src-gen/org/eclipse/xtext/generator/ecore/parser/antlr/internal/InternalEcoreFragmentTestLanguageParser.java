@@ -57,7 +57,7 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
      	
         public InternalEcoreFragmentTestLanguageParser(TokenStream input, IAstFactory factory, EcoreFragmentTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

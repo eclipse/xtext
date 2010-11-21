@@ -71,7 +71,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
      	
         public InternalReferenceGrammarUiTestLanguageParser(TokenStream input, IAstFactory factory, ReferenceGrammarUiTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

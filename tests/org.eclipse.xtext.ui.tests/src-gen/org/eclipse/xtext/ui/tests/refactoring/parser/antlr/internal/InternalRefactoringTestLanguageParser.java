@@ -62,7 +62,7 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
      	
         public InternalRefactoringTestLanguageParser(TokenStream input, IAstFactory factory, RefactoringTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

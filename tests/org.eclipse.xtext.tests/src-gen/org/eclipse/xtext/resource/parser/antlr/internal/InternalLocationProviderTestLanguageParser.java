@@ -59,7 +59,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
      	
         public InternalLocationProviderTestLanguageParser(TokenStream input, IAstFactory factory, LocationProviderTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

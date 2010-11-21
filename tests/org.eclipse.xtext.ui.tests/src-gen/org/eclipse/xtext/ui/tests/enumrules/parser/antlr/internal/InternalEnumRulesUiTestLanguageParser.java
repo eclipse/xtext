@@ -62,7 +62,7 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalAntlr
      	
         public InternalEnumRulesUiTestLanguageParser(TokenStream input, IAstFactory factory, EnumRulesUiTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

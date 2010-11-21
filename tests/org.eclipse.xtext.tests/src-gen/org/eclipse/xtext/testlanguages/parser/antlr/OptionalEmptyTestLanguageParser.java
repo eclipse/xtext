@@ -34,11 +34,12 @@ public class OptionalEmptyTestLanguageParser extends org.eclipse.xtext.parser.an
 			if(ruleName != null)
 				return parser.parse(ruleName);
 			return parser.parse();
-		} catch (Exception re) {
+		} catch (Exception re) { 
 			throw new ParseException(re.getMessage(),re);
 		}
 	}
 	
+	@Override
 	protected org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalOptionalEmptyTestLanguageParser createParser(XtextTokenStream stream) {
 		return new org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalOptionalEmptyTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}

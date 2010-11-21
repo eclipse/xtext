@@ -59,7 +59,7 @@ public class InternalBug305397Parser extends AbstractInternalAntlrParser {
      	
         public InternalBug305397Parser(TokenStream input, IAstFactory factory, Bug305397GrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

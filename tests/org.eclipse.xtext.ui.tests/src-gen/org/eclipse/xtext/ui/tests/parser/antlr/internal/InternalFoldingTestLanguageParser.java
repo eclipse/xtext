@@ -58,7 +58,7 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
      	
         public InternalFoldingTestLanguageParser(TokenStream input, IAstFactory factory, FoldingTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }

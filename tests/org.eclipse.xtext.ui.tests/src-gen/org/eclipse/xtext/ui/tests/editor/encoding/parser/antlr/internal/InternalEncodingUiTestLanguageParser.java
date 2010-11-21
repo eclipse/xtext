@@ -52,7 +52,7 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalAntlrP
      	
         public InternalEncodingUiTestLanguageParser(TokenStream input, IAstFactory factory, EncodingUiTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.factory = factory;
+            this.semanticModelBuilder = factory;
             registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }
