@@ -7,105 +7,44 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel.impl;
 
-import java.util.Collections;
-import java.util.Iterator;
-
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class RootNode implements ICompositeNode, Adapter {
+public class RootNode extends CompositeNodeWithSemanticElement {
 
 	private String completeContent;
-	
-	private EObject rootSemanticObject;
-	
-	private EObject grammarElement;
-	
-	private AbstractNode firstChild;
-	
-	private int lookAhead;
 	
 	/**
 	 * @return <code>null</code> the root node does not have any parent.
 	 */
-	public ICompositeNode getParent() {
+	@Override
+	public CompositeNode getParent() {
 		return null;
 	}
 
-	public TreeIterator<INode> treeIterator() {
-		throw new UnsupportedOperationException();
+	@Override
+	public BidiIterator<INode> iterator() {
+		return SingletonBidiIterator.<INode>create(this);
 	}
 
+	@Override
 	public int getTotalOffset() {
 		return 0;
 	}
 
+	@Override
 	public int getTotalLength() {
 		return getCompleteContent().length();
 	}
 
+	@Override
 	public String getText() {
 		return getCompleteContent();
 	}
 
-	public EObject getGrammarElement() {
-		return grammarElement;
-	}
-
-	public SyntaxErrorMessage getSyntaxErrorMessage() {
-		return null;
-	}
-
-	public int getNodeType() {
-		return ROOT | COMPOSITE | SEMANTIC_MODEL_REFERENCE;
-	}
-
-	public Iterator<INode> iterator() {
-		throw new UnsupportedOperationException();
-	}
-
-	public void notifyChanged(Notification notification) {
-		// ignore
-	}
-
-	public Notifier getTarget() {
-		return getSemanticElement();
-	}
-
-	public void setTarget(Notifier newTarget) {
-		if (newTarget == null || newTarget instanceof EObject)
-			rootSemanticObject = (EObject) newTarget;
-		else
-			throw new IllegalArgumentException("Notifier must be an Eobject");
-	}
-
-	public boolean isAdapterForType(Object type) {
-		return INode.class.isAssignableFrom((Class<?>)type);
-	}
-
-	public Iterable<INode> getChildren() {
-		if (firstChild != null)
-			return firstChild;
-		return Collections.emptyList();
-	}
-
-	public EObject getSemanticElement() {
-		return rootSemanticObject;
-	}
-
-	public int getLookAhead() {
-		return lookAhead;
-	}
-	
 	public int getIndex() {
 		return 0;
 	}
@@ -117,21 +56,20 @@ public class RootNode implements ICompositeNode, Adapter {
 	public String getCompleteContent() {
 		return completeContent;
 	}
-
-	public void setGrammarElement(EObject grammarElement) {
-		this.grammarElement = grammarElement;
-	}
-
-	public AbstractNode getFirstChild() {
-		return firstChild;
+	
+	@Override
+	public void basicSetNext(AbstractNode next) {
+		throw new UnsupportedOperationException();
 	}
 	
-	public void basicSetFirstChild(AbstractNode firstChild) {
-		this.firstChild = firstChild;
+	@Override
+	public void basicSetPrevious(AbstractNode prev) {
+		throw new UnsupportedOperationException();
 	}
 	
-	public void setSemanticElement(EObject element) {
-		this.rootSemanticObject = element;
+	@Override
+	public void basicSetParent(CompositeNode parent) {
+		throw new UnsupportedOperationException();
 	}
 
 }

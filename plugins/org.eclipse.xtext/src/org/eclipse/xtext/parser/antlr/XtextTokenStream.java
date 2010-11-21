@@ -28,6 +28,8 @@ import com.google.common.collect.Sets;
  */
 public class XtextTokenStream extends CommonTokenStream {
 
+	private int currentLookAhead;
+	
 	private final List<Token> lookaheadTokens;
 	
 	private final Set<Token> lookaheadTokenSet;
@@ -149,10 +151,46 @@ public class XtextTokenStream extends CommonTokenStream {
 		if (lookaheadTokenSet.add(lookaheadToken)) {
 			lookaheadTokens.add(lookaheadToken);
 		}
+		if (firstMarker != -1) {
+			int currentLookAheadIsRelativeTo = Math.min(firstMarker, p);
+			int totalLA = p + i - currentLookAheadIsRelativeTo;
+			currentLookAhead = Math.max(totalLA, currentLookAhead);
+		} else {
+			currentLookAhead = Math.max(i, currentLookAhead);
+		}
 		// return super.LA(i); // inlined
 		return lookaheadToken.getType();
 	}
-
+	
+	private int firstMarker = -1;
+	
+	@Override
+	public void consume() {
+		if (firstMarker != -1) { // predicting
+			int currentLookAheadIsRelativeTo = Math.min(firstMarker, p);
+			currentLookAhead = Math.max(currentLookAhead, p - currentLookAheadIsRelativeTo);
+			super.consume();
+		} else { // producing
+			super.consume();
+			currentLookAhead--;
+		}
+	}
+	
+	@Override
+	public int mark() {
+		int result = super.mark();
+		if (firstMarker == -1)
+			firstMarker = result;
+		return result;
+	}
+	
+	@Override
+	public void seek(int index) {
+		if (index == firstMarker)
+			firstMarker = -1;
+		super.seek(index);
+	}
+	
 	/**
 	 * Same as {@link CommonTokenStream#LT(int)} except that we skip
 	 * hidden tokens even for <code>k == 1<code>.
@@ -191,6 +229,10 @@ public class XtextTokenStream extends CommonTokenStream {
 	 */
 	public List<Token> getLookaheadTokens() {
 		return lookaheadTokens;
+	}
+	
+	public int getCurrentLookAhead() {
+		return currentLookAhead;  
 	}
 
 	public void removeLastLookaheadToken() {

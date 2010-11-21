@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.conversion;
 
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.AbstractNode;
 
 /**
@@ -17,12 +18,19 @@ public class ValueConverterException extends RuntimeException {
 
 	private final AbstractNode node;
 	
+	private final INode lwNode;
+	
 	public ValueConverterException(String message, AbstractNode node, Exception cause) {
 		super(message == null && cause != null ? cause.getMessage() : message, cause);
 		this.node = node;
+		this.lwNode = null;
 	}
 
 	public AbstractNode getNode() {
 		return node;
+	}
+	
+	public INode getNode2() {
+		return lwNode;
 	}
 }

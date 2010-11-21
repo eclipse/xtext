@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.antlr.runtime.BitSet;
+import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.FailedPredicateException;
 import org.antlr.runtime.IntStream;
 import org.antlr.runtime.MismatchedTokenException;
@@ -45,6 +46,9 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
+import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
+import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
+import org.eclipse.xtext.nodemodel.impl.RootNode;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
@@ -73,15 +77,15 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 
 	protected class ErrorContext {
 		public EObject getCurrentContext() {
-			if (currentNode2 != null)
-				return currentNode2.getSemanticElement();
+			if (lwCurrentNode != null)
+				return lwCurrentNode.getSemanticElement();
 			if (currentNode != null)
 				return NodeUtil.getNearestSemanticObject(currentNode);
 			return null;
 		}
 		
 		public INode getCurrentNode2() {
-			return currentNode2;
+			return lwCurrentNode;
 		}	
 		
 		public AbstractNode getCurrentNode() {
@@ -183,9 +187,9 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	
 	private CompositeNode currentNode;
 	
-	private ICompositeNode currentNode2;
+	private INode lwLastConsumedNode;
 	
-	protected IAstFactory factory;
+	protected IAstFactory semanticModelBuilder;
 	
 	private int lastConsumedIndex = -1;
 
@@ -196,6 +200,9 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	private ISyntaxErrorMessageProvider syntaxErrorProvider;
 	
 	private IUnorderedGroupHelper unorderedGroupHelper;
+	
+	private NodeModelBuilder lwNodeBuilder = new NodeModelBuilder();
+	private ICompositeNode lwCurrentNode;
 	
 	private final Map<Token, List<CompositeNode>> deferredLookaheadMap = Maps.newHashMap();
 	private final Map<Token, LeafNode> token2NodeMap = Maps.newHashMap();
@@ -236,8 +243,16 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			adapter.setParserNode(node);
 		}
 	}
+	
+	protected void associateNodeWithAstElement(ICompositeNode node, EObject astElement) {
+		if (astElement == null)
+			throw new NullPointerException("passed astElement was null");
+		if (node == null)
+			throw new NullPointerException("passed node was null");
+		lwNodeBuilder.associateWithSemanticElement(node, astElement);
+	}
 
-	protected Object createLeafNode(Token token, EObject grammarElement, String feature) {
+	protected void createLeafNode(Token token, EObject grammarElement, String feature) {
 		if (token != null && token.getTokenIndex() > lastConsumedIndex) {
 			int indexOfTokenBefore = lastConsumedIndex;
 			if (indexOfTokenBefore + 1 < token.getTokenIndex()) {
@@ -245,6 +260,8 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 					Token hidden = input.get(x);
 					LeafNode leafNode = createLeafNode(hidden, hidden.getChannel() == HIDDEN);
 					setLexerRule(leafNode, hidden);
+					
+					createLWLeafNode(hidden, leafNode.getSyntaxError(), null);
 				}
 			}
 			LeafNode leafNode = createLeafNode(token, false);
@@ -253,9 +270,34 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			lastConsumedIndex = token.getTokenIndex();
 			lastConsumedNode = leafNode;
 			tokenConsumed(token, leafNode);
-			return leafNode;
+			
+			createLWLeafNode(token, leafNode.getSyntaxError(), grammarElement);
 		}
-		return null;
+	}
+	
+	private INode createLWLeafNode(Token token, SyntaxError error, EObject grammarElement) {
+		boolean isHidden = token.getChannel() == HIDDEN;
+		String errorMessage = null;
+		if (error != null)
+			errorMessage = error.getMessage();
+		if (token.getType() == Token.INVALID_TOKEN_TYPE) {
+			if (errorMessage != null) {
+				String lexerErrorMessage = ((XtextTokenStream) input).getLexerErrorMessage(token);
+				errorMessage = errorMessage + "; " + lexerErrorMessage;
+			}
+		}
+		if (grammarElement == null) {
+			String ruleName = antlrTypeToLexerName.get(token.getType());
+			grammarElement = allRules.get(ruleName);
+		}
+		CommonToken commonToken = (CommonToken) token;
+		return lwNodeBuilder.newLeafNode(
+				commonToken.getStartIndex(), 
+				commonToken.getStopIndex() - commonToken.getStartIndex() + 1, 
+				grammarElement, 
+				isHidden, 
+				errorMessage, 
+				lwCurrentNode);
 	}
 	
 	private Map<Integer, String> antlrTypeToLexerName = null;
@@ -298,7 +340,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 
 	protected void set(EObject _this, String feature, Object value, String lexerRule, AbstractNode node) {
 		try {
-			factory.set(_this, feature, value, lexerRule, node);
+			semanticModelBuilder.set(_this, feature, value, lexerRule, node);
 		} catch(ValueConverterException vce) {
 			handleValueConverterException(vce);
 		}
@@ -314,7 +356,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 
 	protected void add(EObject _this, String feature, Object value, String lexerRule, AbstractNode node) {
 		try {
-			factory.add(_this, feature, value, lexerRule, node);
+			semanticModelBuilder.add(_this, feature, value, lexerRule, node);
 		} catch(ValueConverterException vce) {
 			handleValueConverterException(vce);
 		}
@@ -336,12 +378,17 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		return compositeNode;
 	}
 
-	private void appendError(AbstractNode node) {
+	private void appendError(AbstractNode node, INode lwNode) {
 		if (currentError != null) {
 			SyntaxError error = ParsetreeFactory.eINSTANCE.createSyntaxError();
 			error.setMessage(currentError.getMessage());
 			error.setIssueCode(currentError.getIssueCode());
 			node.setSyntaxError(error);
+			if (lwNode != null) {
+				INode newNode = lwNodeBuilder.setSyntaxError(lwNode, currentError);
+				if (lwNode == currentNode)
+					currentNode = (CompositeNode) newNode;
+			}
 			currentError = null;
 		}
 	}
@@ -350,8 +397,8 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
 		leafNode.setText(token.getText());
 		leafNode.setHidden(isHidden);
-		if (isSemanticChannel(token))
-			appendError(leafNode);
+		if (token.getChannel() != HIDDEN)
+			appendError(leafNode, null);
 		if (token.getType() == Token.INVALID_TOKEN_TYPE) {
 			SyntaxError error = ParsetreeFactory.eINSTANCE.createSyntaxError();
 			String lexerErrorMessage = ((XtextTokenStream) input).getLexerErrorMessage(token);
@@ -367,19 +414,17 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			Token hidden = input.get(x);
 			LeafNode leafNode = createLeafNode(hidden, hidden.getChannel() == HIDDEN);
 			setLexerRule(leafNode, hidden);
+			
+			createLWLeafNode(hidden, leafNode.getSyntaxError(), null);
 		}
 		if (currentError != null) {
 			EList<LeafNode> leafNodes = currentNode.getLeafNodes();
 			if (leafNodes.isEmpty()) {
-				appendError(currentNode);
+				appendError(currentNode, lwCurrentNode);
 			} else {
-				appendError(leafNodes.get(leafNodes.size() - 1));
+				appendError(leafNodes.get(leafNodes.size() - 1), lwCurrentNode.getLastChild());
 			}
 		}
-	}
-
-	private boolean isSemanticChannel(Token hidden) {
-		return hidden.getChannel() != HIDDEN;
 	}
 
 	protected List<LeafNode> appendSkippedTokens() {
@@ -394,12 +439,17 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 				LeafNode leafNode = createLeafNode(hidden, hidden.getChannel() == HIDDEN);
 				setLexerRule(leafNode, hidden);
 				skipped.add(leafNode);
+				
+				createLWLeafNode(hidden, leafNode.getSyntaxError(), null);
 			}
 		}
 		if (lastConsumedIndex < currentTokenIndex && currentToken != null) {
 			LeafNode leafNode = createLeafNode(currentToken, currentToken.getChannel() == HIDDEN);
 			setLexerRule(leafNode, currentToken);
 			skipped.add(leafNode);
+			
+			createLWLeafNode(currentToken, leafNode.getSyntaxError(), null);
+			
 			lastConsumedIndex = currentToken.getTokenIndex();
 		}
 		return skipped;
@@ -413,6 +463,9 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 				Token hidden = input.get(x);
 				LeafNode leafNode = createLeafNode(hidden, hidden.getChannel() == HIDDEN);
 				setLexerRule(leafNode, hidden);
+				
+				createLWLeafNode(hidden, leafNode.getSyntaxError(), null);
+				
 				lastConsumedIndex = hidden.getTokenIndex();
 			}
 		}
@@ -442,15 +495,15 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		if (vce != cause) {
 			IValueConverterErrorContext errorContext = createValueConverterErrorContext(vce);
 			currentError = syntaxErrorProvider.getSyntaxErrorMessage(errorContext);
-			if (vce.getNode() == null) {
+			if (vce.getNode() == null && vce.getNode2() == null) {
 				final List<AbstractNode> children = currentNode.getChildren();
 				if (children.isEmpty()) {
-					appendError(currentNode);
+					appendError(currentNode, lwCurrentNode);
 				} else {
-					appendError(children.get(children.size() - 1));
+					appendError(children.get(children.size() - 1), lwCurrentNode.getLastChild());
 				}
 			} else {
-				appendError(vce.getNode());
+				appendError(vce.getNode(), vce.getNode2());
 			}
 		} else {
 			throw new RuntimeException(vce);
@@ -483,39 +536,37 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	}
 
 	@Override
-	protected Object recoverFromMismatchedToken(IntStream input, int ttype, BitSet follow)
-	throws RecognitionException
-{
-	RecognitionException e = null;
-	// if next token is what we are looking for then "delete" this token
-	if ( mismatchIsUnwantedToken(input, ttype) ) {
-		e = new UnwantedTokenException(ttype, input);
-		/*
-		System.err.println("recoverFromMismatchedToken deleting "+
-						   ((TokenStream)input).LT(1)+
-						   " since "+((TokenStream)input).LT(2)+" is what we want");
-		 */
-		beginResync();
-		input.consume(); // simply delete extra token
-		endResync();
-		reportError(e);  // report after consuming so AW sees the token in the exception
-		// we want to return the token we're actually matching
-		Object matchedSymbol = getCurrentInputSymbol(input);
-		input.consume(); // move past ttype token as if all were ok
-		return matchedSymbol;
+	protected Object recoverFromMismatchedToken(IntStream input, int ttype, BitSet follow) throws RecognitionException {
+		RecognitionException e = null;
+		// if next token is what we are looking for then "delete" this token
+		if ( mismatchIsUnwantedToken(input, ttype) ) {
+			e = new UnwantedTokenException(ttype, input);
+			/*
+			System.err.println("recoverFromMismatchedToken deleting "+
+							   ((TokenStream)input).LT(1)+
+							   " since "+((TokenStream)input).LT(2)+" is what we want");
+			 */
+			beginResync();
+			input.consume(); // simply delete extra token
+			endResync();
+			reportError(e);  // report after consuming so AW sees the token in the exception
+			// we want to return the token we're actually matching
+			Object matchedSymbol = getCurrentInputSymbol(input);
+			input.consume(); // move past ttype token as if all were ok
+			return matchedSymbol;
+		}
+		// can't recover with single token deletion, try insertion
+		if ( mismatchIsMissingToken(input, follow) ) {
+			Object inserted = getMissingSymbol(input, e, ttype, follow);
+			e = new MissingTokenException(ttype, input, inserted);
+			reportError(e);  // report after inserting so AW sees the token in the exception
+			return null;
+	//		throw e;
+		}
+		// even that didn't work; must throw the exception
+		e = new MismatchedTokenException(ttype, input);
+		throw e;
 	}
-	// can't recover with single token deletion, try insertion
-	if ( mismatchIsMissingToken(input, follow) ) {
-		Object inserted = getMissingSymbol(input, e, ttype, follow);
-		e = new MissingTokenException(ttype, input, inserted);
-		reportError(e);  // report after inserting so AW sees the token in the exception
-		return null;
-//		throw e;
-	}
-	// even that didn't work; must throw the exception
-	e = new MismatchedTokenException(ttype, input);
-	throw e;
-}
 	
 	public SyntaxErrorMessage getSyntaxErrorMessage(RecognitionException e, String[] tokenNames) {
 		IParserErrorContext parseErrorContext = createErrorContext(e);
@@ -540,6 +591,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		IParseResult result = null;
 		EObject current = null;
 		try {
+			lwCurrentNode = lwNodeBuilder.newCompositeNode(null, 0, null);
 			String antlrEntryRuleName = normalizeEntryRuleName(entryRuleName);
 			try {
 				Method method = this.getClass().getMethod(antlrEntryRuleName);
@@ -564,7 +616,12 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			try {
 				appendAllTokens();
 			} finally {
-				result = new ParseResult(current, currentNode, currentNode2);
+				String completeContent = input.toString();
+				if (completeContent == null) // who had the crazy idea to return null from toString() ...
+					completeContent = "";
+				((RootNode)lwCurrentNode.getParent()).setCompleteContent(completeContent);
+				new InvariantChecker().checkInvariant(lwCurrentNode);
+				result = new ParseResult(current, currentNode, lwCurrentNode.getParent());
 			}
 		}
 		return result;
@@ -671,7 +728,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	}
 
 	/**
-	 * @return
+	 * @return the name of the entry rule.
 	 */
 	protected abstract String getFirstRuleName();
 
@@ -688,6 +745,9 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	// currentNode = currentNode.getParent();
     protected void afterParserOrEnumRuleCall() {
     	currentNode = currentNode.getParent();
+    	
+    	lwNodeBuilder.compress(lwCurrentNode);
+    	lwCurrentNode = lwCurrentNode.getParent();
     }
 	
     // if (current==null) {
@@ -697,48 +757,52 @@ public abstract class AbstractInternalAntlrParser extends Parser {
     //========
 	//}
     protected EObject createModelElementForParent(AbstractRule rule) {
-    	return createModelElement(rule.getType().getClassifier(), currentNode.getParent());
+    	return createModelElement(rule.getType().getClassifier(), currentNode.getParent(), lwCurrentNode.getParent());
     }
 
     protected EObject createModelElement(AbstractRule rule) {
-    	return createModelElement(rule.getType().getClassifier(), currentNode);
+    	return createModelElement(rule.getType().getClassifier(), currentNode, lwCurrentNode);
     }
     
     protected EObject createModelElementForParent(EClassifier classifier) {
-    	return createModelElement(classifier, currentNode.getParent());
+    	return createModelElement(classifier, currentNode.getParent(), lwCurrentNode.getParent());
     }
 
     protected EObject createModelElement(EClassifier classifier) {
-    	return createModelElement(classifier, currentNode);
+    	return createModelElement(classifier, currentNode, lwCurrentNode);
     }
     
-    protected EObject createModelElement(EClassifier classifier, CompositeNode compositeNode) {
-    	EObject result = factory.create(classifier);
+    protected EObject createModelElement(EClassifier classifier, CompositeNode compositeNode, ICompositeNode lwCompositeNode) {
+    	EObject result = semanticModelBuilder.create(classifier);
     	associateNodeWithAstElement(compositeNode, result);
+    	associateNodeWithAstElement(lwCompositeNode, result);
     	return result;
     }
     
     // Assigned action code
     protected EObject forceCreateModelElementAndSet(Action action, EObject value) {
-    	EObject result = factory.create(action.getType().getClassifier());
-    	factory.set(result, action.getFeature(), value, null /* ParserRule */, currentNode);
+    	EObject result = semanticModelBuilder.create(action.getType().getClassifier());
+    	semanticModelBuilder.set(result, action.getFeature(), value, null /* ParserRule */, currentNode);
     	insertCompositeNode(action);
     	associateNodeWithAstElement(currentNode, result);
+    	associateNodeWithAstElement(lwCurrentNode, result);
     	return result;
     }
     
     protected EObject forceCreateModelElementAndAdd(Action action, EObject value) {
-    	EObject result = factory.create(action.getType().getClassifier());
-    	factory.add(result, action.getFeature(), value, null /* ParserRule */, currentNode);
+    	EObject result = semanticModelBuilder.create(action.getType().getClassifier());
+    	semanticModelBuilder.add(result, action.getFeature(), value, null /* ParserRule */, currentNode);
     	insertCompositeNode(action);
     	associateNodeWithAstElement(currentNode, result);
+    	associateNodeWithAstElement(lwCurrentNode, result);
     	return result;
     }
     
     protected EObject forceCreateModelElement(Action action, EObject value) {
-    	EObject result = factory.create(action.getType().getClassifier());
+    	EObject result = semanticModelBuilder.create(action.getType().getClassifier());
     	insertCompositeNode(action);
     	associateNodeWithAstElement(currentNode, result);
+    	associateNodeWithAstElement(lwCurrentNode, result);
     	return result;
     }
 
@@ -747,6 +811,9 @@ public abstract class AbstractInternalAntlrParser extends Parser {
     	newNode.getChildren().add(currentNode);
     	moveLookaheadInfo(currentNode, newNode);
     	currentNode = newNode;
+    	
+    	ICompositeNode newLwCurrentNode = lwNodeBuilder.newCompositeNodeAsParentOf(action, lwCurrentNode.getLookAhead(), lwCurrentNode);
+    	lwCurrentNode = newLwCurrentNode;
 	}
 	
 	protected void enterRule() {
@@ -757,11 +824,15 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	protected void leaveRule() {
 		resetLookahead(); 
     	lastConsumedNode = currentNode;
+    	lwLastConsumedNode = lwCurrentNode;
 	}
     
 	// currentNode = createCompositeNode()
 	protected void newCompositeNode(EObject grammarElement) {
 		currentNode = createCompositeNode(grammarElement, currentNode);
+		XtextTokenStream input = (XtextTokenStream) this.input;
+		int lookAhead = input.getCurrentLookAhead();
+		lwCurrentNode = lwNodeBuilder.newCompositeNode(grammarElement, lookAhead, lwCurrentNode);
 	}
 	
 	// createLeafNode(token, grammarElement, featureName)
@@ -776,5 +847,21 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		if (grammarElement.eClass() == XtextPackage.Literals.ASSIGNMENT)
 			return ((Assignment) grammarElement).getFeature();
 		return null;
+	}
+
+	public void setNodeModelBuilder(NodeModelBuilder nodeModelBuilder) {
+		this.lwNodeBuilder = nodeModelBuilder;
+	}
+
+	public NodeModelBuilder getNodeModelBuilder() {
+		return lwNodeBuilder;
+	}
+	
+	public void setSemanticModelBuilder(IAstFactory semanticModelBuilder) {
+		this.semanticModelBuilder = semanticModelBuilder;
+	}
+	
+	public IAstFactory getSemanticModelBuilder() {
+		return semanticModelBuilder;
 	}
 }

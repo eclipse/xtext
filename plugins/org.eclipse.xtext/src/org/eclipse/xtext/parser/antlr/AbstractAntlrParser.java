@@ -15,9 +15,11 @@ import org.antlr.runtime.ANTLRReaderStream;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.parser.AbstractParser;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parsetree.CompositeNode;
 
 import com.google.inject.Inject;
@@ -44,6 +46,9 @@ public abstract class AbstractAntlrParser extends AbstractParser {
 
 	@Inject
 	private Provider<IUnorderedGroupHelper> unorderedGroupHelper;
+	
+	@Inject
+	private Provider<NodeModelBuilder> nodeModelBuilder;
 
 	@Inject
 	@Named(LexerBindings.RUNTIME)
@@ -73,7 +78,31 @@ public abstract class AbstractAntlrParser extends AbstractParser {
 
 	protected abstract String getDefaultRuleName();
 
-	protected abstract IParseResult parse(String ruleName, CharStream in);
+	protected IParseResult parse(String ruleName, CharStream in) {
+		TokenSource tokenSource = createLexer(in);
+		XtextTokenStream tokenStream = createTokenStream(tokenSource);
+		setInitialHiddenTokens(tokenStream);
+		AbstractInternalAntlrParser parser = createParser(tokenStream);
+		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
+		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setNodeModelBuilder(nodeModelBuilder.get());
+		parser.setSemanticModelBuilder(getElementFactory());
+		IUnorderedGroupHelper helper = getUnorderedGroupHelper().get();
+		parser.setUnorderedGroupHelper(helper);
+		helper.initializeWith(parser);
+		try {
+			if(ruleName != null)
+				return parser.parse(ruleName);
+			return parser.parse();
+		} catch (Exception re) {
+			throw new ParseException(re.getMessage(),re);
+		}
+	}
+	
+	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
+	}
+	
+	protected abstract AbstractInternalAntlrParser createParser(XtextTokenStream stream);
 
 	public IParseResult parse(String ruleName, Reader reader) {
 		try {

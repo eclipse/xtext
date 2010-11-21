@@ -17,9 +17,4 @@ public class HiddenLeafNode extends LeafNode {
 		return true;
 	}
 	
-	@Override
-	public int getNodeType() {
-		return super.getNodeType() | HIDDEN;
-	}
-	
 }

@@ -17,11 +17,6 @@ public class HiddenLeafNodeWithSyntaxError extends HiddenLeafNode {
 	private SyntaxErrorMessage syntaxErrorMessage;
 	
 	@Override
-	public int getNodeType() {
-		return super.getNodeType() | SYNTAX_ERROR;
-	}
-	
-	@Override
 	public SyntaxErrorMessage getSyntaxErrorMessage() {
 		return syntaxErrorMessage;
 	}
