@@ -23,15 +23,9 @@
 */
 package «getParserClassName().toJavaPackage()»;
 
-import org.antlr.runtime.CharStream;
-import org.antlr.runtime.TokenSource;
-import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parser.ParseException;
-import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
-
 import com.google.inject.Inject;
 
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import «gaFQName()»;
 
 public class «getParserClassName().toSimpleName()» extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
@@ -40,27 +34,13 @@ public class «getParserClassName().toSimpleName()» extends org.eclipse.xtext.par
 	private «gaSimpleName()» grammarAccess;
 	
 	@Override
-	protected IParseResult parse(String ruleName, CharStream in) {
-		TokenSource tokenSource = createLexer(in);
-		XtextTokenStream tokenStream = createTokenStream(tokenSource);
+	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens(«FOREACH initialHiddenTokens() AS hidden SEPARATOR ", "»"«hidden»"«ENDFOREACH-»);
-		«getInternalParserClassName()» parser = createParser(tokenStream);
-		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
-		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
-		IUnorderedGroupHelper helper = getUnorderedGroupHelper().get();
-		parser.setUnorderedGroupHelper(helper);
-		helper.initializeWith(parser);
-		try {
-			if(ruleName != null)
-				return parser.parse(ruleName);
-			return parser.parse();
-		} catch (Exception re) {
-			throw new ParseException(re.getMessage(),re);
-		}
 	}
 	
+	@Override
 	protected «getInternalParserClassName()» createParser(XtextTokenStream stream) {
-		return new «getInternalParserClassName()»(stream, getElementFactory(), getGrammarAccess());
+		return new «getInternalParserClassName()»(stream, getGrammarAccess());
 	}
 	
 	@Override 
