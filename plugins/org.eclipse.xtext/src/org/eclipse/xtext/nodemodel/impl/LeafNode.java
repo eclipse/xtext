@@ -18,10 +18,6 @@ public class LeafNode extends AbstractNode implements ILeafNode {
 	
 	private int totalLength;
 	
-	public int getNodeType() {
-		return LEAF;
-	}
-	
 	public boolean isHidden() {
 		return false;
 	}

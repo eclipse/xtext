@@ -22,14 +22,16 @@ public class CompositeNodeWithSemanticElement extends CompositeNode implements A
 	
 	@Override
 	public EObject getSemanticElement() {
-		return semanticElement;
+		if (semanticElement != null)
+			return semanticElement;
+		return super.getSemanticElement();
 	}
 	
 	@Override
-	public int getNodeType() {
-		return super.getNodeType() | SEMANTIC_MODEL_REFERENCE;
+	protected EObject basicGetSemanticElement() {
+		return semanticElement;
 	}
-
+	
 	public void setSemanticElement(EObject element) {
 		this.semanticElement = element;
 	}

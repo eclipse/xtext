@@ -7,23 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel;
 
-import org.eclipse.emf.common.util.TreeIterator;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface ICompositeNode extends INode {
+public interface BidiIterable<T> extends Iterable<T> {
 
-	BidiIterable<INode> getChildren();
+	BidiIterator<T> iterator();
 	
-	boolean hasChildren();
-	
-	INode getFirstChild();
-	
-	INode getLastChild();
-
-	TreeIterator<INode> treeIterator();
-
-	int getLookAhead();
-
 }

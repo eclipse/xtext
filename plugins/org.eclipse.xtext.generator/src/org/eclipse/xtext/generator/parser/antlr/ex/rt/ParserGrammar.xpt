@@ -43,7 +43,6 @@ options {
 @header {
 package «helper.getParserGrammarFileName(this).toJavaPackage()»; 
 
-import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
@@ -59,7 +58,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;
 «ENDIF-»
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
-import org.eclipse.xtext.conversion.ValueConverterException;
 import «gaFQName()»;
 
 }
@@ -73,31 +71,30 @@ import «gaFQName()»;
 */
  
 «ENDIF»
- 	private «gaSimpleName()» grammarAccess;
- 	
-    public «helper.getInternalParserClassName(this).toSimpleName()»(TokenStream input, IAstFactory factory, «gaSimpleName()» grammarAccess) {
-        this(input);
-        this.factory = factory;
-        registerRules(grammarAccess.getGrammar());
-        this.grammarAccess = grammarAccess;
-    }
-    
-    @Override
-    protected String getFirstRuleName() {
-    	return "«allParserRules().first().name»";	
-   	} 
-   	   	
-   	@Override
-   	protected «gaSimpleName()» getGrammarAccess() {
-   		return grammarAccess;
-   	}
+	private «gaSimpleName()» grammarAccess;
+	 	
+	public «helper.getInternalParserClassName(this).toSimpleName()»(TokenStream input, «gaSimpleName()» grammarAccess) {
+		this(input);
+		this.grammarAccess = grammarAccess;
+		registerRules(grammarAccess.getGrammar());
+	}
+	
+	@Override
+	protected String getFirstRuleName() {
+		return "«allParserRules().first().name»";	
+	} 
+	   	   	
+	@Override
+	protected «gaSimpleName()» getGrammarAccess() {
+		return grammarAccess;
+	}
 }
 
 @rulecatch { 
-    catch (RecognitionException re) { 
-        recover(input,re); 
-        appendSkippedTokens();
-    } 
+	catch (RecognitionException re) { 
+	    recover(input,re); 
+	    appendSkippedTokens();
+	}
 }
 «EXPAND antlrRules(options)»
 «ENDFILE»

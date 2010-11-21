@@ -7,11 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel.impl;
 
-import java.util.Iterator;
-
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 
@@ -20,7 +18,7 @@ import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
  */
 public abstract class AbstractNode implements INode {
 	
-	private ICompositeNode parent;
+	private CompositeNode parent;
 
 	private AbstractNode prev;
 	
@@ -28,12 +26,12 @@ public abstract class AbstractNode implements INode {
 	
 	private EObject grammarElement;
 	
-	public ICompositeNode getParent() {
+	public CompositeNode getParent() {
 		return parent;
 	}
 
-	public Iterator<INode> iterator() {
-		throw new UnsupportedOperationException();
+	public BidiIterator<INode> iterator() {
+		return new NodeListIterator(this);
 	}
 	
 	public TreeIterator<INode> treeIterator() {
@@ -49,6 +47,10 @@ public abstract class AbstractNode implements INode {
 		}
 		return null;
 	}
+	
+	public int getTotalEndOffset() {
+		return getTotalOffset() + getTotalLength();
+	}
 
 	protected INode getRootNode() {
 		if (parent == null)
@@ -62,17 +64,14 @@ public abstract class AbstractNode implements INode {
 	public EObject getSemanticElement() {
 		if (parent == null)
 			return null;
-		INode candidate = this;
-		while(candidate.getSemanticElement() == null && candidate.getParent() != null)
-			candidate = candidate.getParent();
-		return candidate.getSemanticElement();
+		return parent.getSemanticElement();
 	}
 	
 	public EObject getGrammarElement() {
 		return grammarElement;
 	}
 	
-	protected void setGrammarElement(EObject grammarElement) {
+	public void setGrammarElement(EObject grammarElement) {
 		this.grammarElement = grammarElement;
 	}
 
@@ -96,7 +95,7 @@ public abstract class AbstractNode implements INode {
 		this.next = next;
 	}
 	
-	public void basicSetParent(ICompositeNode parent) {
+	public void basicSetParent(CompositeNode parent) {
 		this.parent = parent;
 	}
 	

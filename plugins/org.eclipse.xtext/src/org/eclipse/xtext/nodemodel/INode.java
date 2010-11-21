@@ -12,21 +12,15 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface INode extends TreeIterable<INode> {
-
-	int ROOT = 1 << 0;
-	int COMPOSITE = 1 << 1;
-	int LEAF = 1 << 2;
-	int SYNTAX_ERROR = 1 << 3;
-	int SEMANTIC_MODEL_REFERENCE = 1 << 4;
-	int HIDDEN = 1 << 5;
-	int SYNTHETIC_COMPOSITE = 1 << 6;
+public interface INode extends TreeIterable<INode>, BidiIterable<INode> {
 
 	ICompositeNode getParent();
 
 	int getTotalOffset();
 
 	int getTotalLength();
+	
+	int getTotalEndOffset();
 
 	String getText();
 
@@ -35,7 +29,5 @@ public interface INode extends TreeIterable<INode> {
 	EObject getSemanticElement();
 
 	SyntaxErrorMessage getSyntaxErrorMessage();
-
-	int getNodeType();
 
 }

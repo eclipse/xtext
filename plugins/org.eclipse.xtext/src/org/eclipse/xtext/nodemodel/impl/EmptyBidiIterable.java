@@ -5,25 +5,27 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.nodemodel;
+package org.eclipse.xtext.nodemodel.impl;
 
-import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.xtext.nodemodel.BidiIterable;
+import org.eclipse.xtext.nodemodel.BidiIterator;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface ICompositeNode extends INode {
+public class EmptyBidiIterable<T> implements BidiIterable<T> {
 
-	BidiIterable<INode> getChildren();
+	private static EmptyBidiIterable<?> INSTANCE = new EmptyBidiIterable<Object>();
 	
-	boolean hasChildren();
-	
-	INode getFirstChild();
-	
-	INode getLastChild();
+	@SuppressWarnings("unchecked")
+	public static <T> EmptyBidiIterable<T> instance() {
+		return (EmptyBidiIterable<T>) INSTANCE;
+	}
 
-	TreeIterator<INode> treeIterator();
-
-	int getLookAhead();
+	public BidiIterator<T> iterator() {
+		return EmptyBidiIterator.instance();
+	}
+	
+	
 
 }

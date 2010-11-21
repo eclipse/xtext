@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel.impl;
 
-import java.util.Collections;
-
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.nodemodel.BidiIterable;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 
@@ -24,14 +24,14 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 	public CompositeNode() {
 	}
 	
-	public int getNodeType() {
-		return COMPOSITE;
-	}
-
-	public Iterable<INode> getChildren() {
+	public BidiIterable<INode> getChildren() {
 		if (firstChild != null)
 			return firstChild;
-		return Collections.emptyList();
+		return EmptyBidiIterable.instance();
+	}
+	
+	public boolean hasChildren() {
+		return firstChild != null;
 	}
 
 	public int getLookAhead() {
@@ -44,13 +44,35 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 			AbstractNode lastChild = firstChild.getPrevious();
 			return lastChild.getTotalOffset() + lastChild.getTotalLength() - offset;
 		}
-		throw new IllegalStateException();
+		return 0;
 	}
 	
 	public int getTotalOffset() {
 		if (firstChild != null)
 			return firstChild.getTotalOffset();
-		throw new IllegalStateException();
+		CompositeNode composite = this;
+		while(composite.getNext() == composite) {
+			composite = composite.getParent();
+		}
+		if (composite.getParent() != null) {
+			if (composite.getParent().getLastChild() != composite) {
+				CompositeNode composite2 = composite;
+				while(composite2.getParent() != null) {
+					if (composite2 != composite2.getParent().getLastChild())
+						return composite2.getNext().getTotalOffset();
+					composite2 = composite.getParent();
+				}
+			}
+			if (composite.getParent().getFirstChild() != composite) {
+				CompositeNode composite2 = composite;
+				while(composite2.getParent() != null) {
+					if (composite2 != composite2.getParent().getFirstChild())
+						return composite2.getPrevious().getTotalEndOffset();
+					composite2 = composite.getParent();
+				}
+			}
+		}
+		return 0;
 	}
 
 	protected void setLookAhead(int lookAhead) {
@@ -61,8 +83,18 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 		return firstChild;
 	}
 	
+	public AbstractNode getLastChild() {
+		if (firstChild == null)
+			return null;
+		return firstChild.getPrevious();
+	}
+	
 	protected void basicSetFirstChild(AbstractNode firstChild) {
 		this.firstChild = firstChild;
+	}
+	
+	protected EObject basicGetSemanticElement() {
+		return null;
 	}
 	
 }
