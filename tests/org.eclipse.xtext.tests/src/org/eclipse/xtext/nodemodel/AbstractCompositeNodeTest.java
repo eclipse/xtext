@@ -14,14 +14,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 import org.eclipse.xtext.nodemodel.impl.LeafNode;
-import org.eclipse.xtext.nodemodel.impl.NodeModelMutator;
+import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractCompositeNodeTest extends TestCase {
 
-	private NodeModelMutator mutator;
+	private NodeModelBuilder mutator;
 
 	public abstract void testTextOffsetLength();
 
@@ -36,7 +36,7 @@ public abstract class AbstractCompositeNodeTest extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		this.mutator = new NodeModelMutator();
+		this.mutator = new NodeModelBuilder();
 	}
 	
 	@Override
