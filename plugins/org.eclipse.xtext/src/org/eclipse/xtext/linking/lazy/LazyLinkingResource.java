@@ -36,6 +36,7 @@ import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.Triple;
 
 import com.google.common.collect.Sets;
@@ -61,6 +62,9 @@ public class LazyLinkingResource extends XtextResource {
 	@Inject
 	private LinkingHelper linkingHelper;
 
+	@Inject
+	private OnChangeEvictingCache cache;
+
 	private boolean eagerLinking = false;
 
 	@Override
@@ -84,49 +88,56 @@ public class LazyLinkingResource extends XtextResource {
 	 * 
 	 * @param replaceResolvedElements
 	 *            whether resolved elements should be replaced by the lazy linking proxy objects. Note that this fires
-	 *            common set notifications {@link org.eclipse.emf.common.notify.Notification#SET} instead of resolve notifications {@link org.eclipse.emf.common.notify.Notification#RESOLVE}.
-	 *            Also note, that the lazy linking proxies might be replaced by other proxies which won't 
-	 *            be resolved by this method. Use the standard EMF resolution (i.e. navigating the reference or calling {@link EcoreUtil#resolveAll(EObject)} to have everything resolved.
+	 *            common set notifications {@link org.eclipse.emf.common.notify.Notification#SET} instead of resolve
+	 *            notifications {@link org.eclipse.emf.common.notify.Notification#RESOLVE}. Also note, that the lazy
+	 *            linking proxies might be replaced by other proxies which won't be resolved by this method. Use the
+	 *            standard EMF resolution (i.e. navigating the reference or calling
+	 *            {@link EcoreUtil#resolveAll(EObject)} to have everything resolved.
 	 */
 	public synchronized void resolveLazyCrossReferences(boolean replaceResolvedElements) {
-		TreeIterator<Object> iterator = EcoreUtil.getAllContents(this, true);
-		while (iterator.hasNext()) {
-			EObject source = (EObject) iterator.next();
-			EStructuralFeature[] eStructuralFeatures = ((EClassImpl.FeatureSubsetSupplier) source.eClass()
-					.getEAllStructuralFeatures()).crossReferences();
-			if (eStructuralFeatures != null) {
-				for (EStructuralFeature crossRef : eStructuralFeatures) {
-					if (crossRef.isMany()) {
-						@SuppressWarnings("unchecked")
-						EList<EObject> list = (EList<EObject>) source.eGet(crossRef, false);
-						for (int i = 0; i < list.size(); i++) {
-							EObject proxy = list.get(i);
-							if (proxy.eIsProxy()) {
+		try {
+			cache.getOrCreate(this).setIgnoreNotifications(true);
+			TreeIterator<Object> iterator = EcoreUtil.getAllContents(this, true);
+			while (iterator.hasNext()) {
+				EObject source = (EObject) iterator.next();
+				EStructuralFeature[] eStructuralFeatures = ((EClassImpl.FeatureSubsetSupplier) source.eClass()
+						.getEAllStructuralFeatures()).crossReferences();
+				if (eStructuralFeatures != null) {
+					for (EStructuralFeature crossRef : eStructuralFeatures) {
+						if (crossRef.isMany()) {
+							@SuppressWarnings("unchecked")
+							EList<EObject> list = (EList<EObject>) source.eGet(crossRef, false);
+							for (int i = 0; i < list.size(); i++) {
+								EObject proxy = list.get(i);
+								if (proxy.eIsProxy()) {
+									URI proxyURI = ((InternalEObject) proxy).eProxyURI();
+									final String fragment = proxyURI.fragment();
+									if (getEncoder().isCrossLinkFragment(this, fragment)) {
+										EObject target = getEObject(fragment);
+										if (target != null) {
+											list.set(i, target);
+										}
+									}
+								}
+							}
+						} else {
+							EObject proxy = (EObject) source.eGet(crossRef, false);
+							if (proxy != null && proxy.eIsProxy()) {
 								URI proxyURI = ((InternalEObject) proxy).eProxyURI();
 								final String fragment = proxyURI.fragment();
 								if (getEncoder().isCrossLinkFragment(this, fragment)) {
 									EObject target = getEObject(fragment);
 									if (target != null) {
-										list.set(i, target);
+										source.eSet(crossRef, target);
 									}
-								}
-							}
-						}
-					} else {
-						EObject proxy = (EObject) source.eGet(crossRef, false);
-						if (proxy != null && proxy.eIsProxy()) {
-							URI proxyURI = ((InternalEObject) proxy).eProxyURI();
-							final String fragment = proxyURI.fragment();
-							if (getEncoder().isCrossLinkFragment(this, fragment)) {
-								EObject target = getEObject(fragment);
-								if (target != null) {
-									source.eSet(crossRef, target);
 								}
 							}
 						}
 					}
 				}
 			}
+		} finally {
+			cache.getOrCreate(this).setIgnoreNotifications(false);
 		}
 	}
 
