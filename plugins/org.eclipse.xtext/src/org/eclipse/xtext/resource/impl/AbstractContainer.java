@@ -26,7 +26,7 @@ public abstract class AbstractContainer implements IContainer {
 	public Iterable<IEObjectDescription> getElements(final ISelector selector) {
 		return concat(transform(getResourceDescriptions(),new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
 			public Iterable<IEObjectDescription> apply(IResourceDescription from) {
-				return selector.applySelector(from.getExportedObjects());
+				return from.getExportedObjects(selector);
 			}
 		}));
 	}

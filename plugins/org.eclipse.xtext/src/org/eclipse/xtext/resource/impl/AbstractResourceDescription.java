@@ -27,7 +27,7 @@ public abstract class AbstractResourceDescription implements IResourceDescriptio
 	}
 	
 	public Iterable<IEObjectDescription> getExportedObjects(ISelector selector) {
-		return selector.applySelector(getLookUp().getExportedObjects());
+		return getLookUp().getExportedObjects(selector);
 	}
 	
 	protected abstract List<IEObjectDescription> computeExportedObjects();

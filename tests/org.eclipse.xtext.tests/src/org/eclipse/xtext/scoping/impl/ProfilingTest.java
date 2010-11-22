@@ -8,10 +8,13 @@
 package org.eclipse.xtext.scoping.impl;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.index.IndexTestLanguageStandaloneSetup;
+import org.eclipse.xtext.index.indexTestLanguage.Namespace;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -19,6 +22,8 @@ import org.eclipse.xtext.util.StopWatch;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.collect.Sets;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -28,8 +33,30 @@ public class ProfilingTest extends AbstractXtextTests {
 	private static final int ELEMENTS = 600;
 //	private static final int ELEMENTS = 6000;
 	
+	static class OptimizedScopeProvider extends ImportedNamespaceAwareLocalScopeProvider {
+		
+		@Override
+		protected QualifiedName getQualifiedNameOfLocalElement(EObject context) {
+			if (context instanceof Namespace) {
+				return super.getQualifiedNameOfLocalElement(context); 
+			}
+			return null;
+		}
+	}
+	
 	public void testSimple() throws Exception {
-		with(new IndexTestLanguageStandaloneSetup());
+		with(new IndexTestLanguageStandaloneSetup(){
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(new org.eclipse.xtext.index.IndexTestLanguageRuntimeModule(){
+					@Override
+					public java.lang.Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
+						return OptimizedScopeProvider.class;
+					}
+				}
+				);
+			}
+		});
 		XtextResourceSet rs = get(XtextResourceSet.class);
 		Resource outer = rs.createResource(URI.createURI("outer."+getCurrentFileExtension()));
 		outer.load(new StringInputStream(outerFile(ELEMENTS)), null);

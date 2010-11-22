@@ -54,10 +54,10 @@ public abstract class AbstractScopingFragment extends AbstractGeneratorFragment 
 					AbstractDeclarativeScopeProvider.class.getName() + ".NAMED_DELEGATE" +
 					")).to("+ getLocalScopeProvider().getName() + ".class)")
 			.addTypeToType(IGlobalScopeProvider.class.getName(), getGlobalScopeProvider().getName());
-		factory.addConfiguredBinding("Boolean.TYPE", 
+		factory.addConfiguredBinding(IgnoreCaseLinking.class.getSimpleName(), 
 					"binder.bind(Boolean.TYPE)" +
 					".annotatedWith("+IgnoreCaseLinking.class.getName()+".class)" +
-					".to(" + isIgnoreCase() + ")");
+					".toInstance(" + isIgnoreCase() + ")");
 		return factory.getBindings();
 	}
 	
