@@ -167,7 +167,7 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
 		
 		assertTrue(((EObject)e.getProperties().get(0).eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false)).eIsProxy());
 		assertTrue(((EObject)e.getProperties().get(1).eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false)).eIsProxy());
-		((LazyLinkingResource)res1).resolveLazyCrossReferences();
+		((LazyLinkingResource)res1).resolveLazyCrossReferences(true);
 		assertTrue(((EObject)e.getProperties().get(0).eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false)).eIsProxy());
 		assertFalse(((EObject)e.getProperties().get(1).eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false)).eIsProxy());
 		EcoreUtil.resolveAll(res1);
@@ -203,7 +203,7 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
     	assertTrue(((EObject)e.getProperties().get(0).eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false)).eIsProxy());
     	assertTrue(((EObject)e.getProperties().get(1).eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false)).eIsProxy());
     	assertTrue(((EObject)e.getProperties().get(2).eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false)).eIsProxy());
-    	((LazyLinkingResource)res1).resolveLazyCrossReferences();
+    	((LazyLinkingResource)res1).resolveLazyCrossReferences(true);
     	assertEquals(1,res1.getErrors().size());
     	assertTrue(((EObject)e.getProperties().get(0).eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false)).eIsProxy());
     	assertFalse(((EObject)e.getProperties().get(1).eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false)).eIsProxy());
