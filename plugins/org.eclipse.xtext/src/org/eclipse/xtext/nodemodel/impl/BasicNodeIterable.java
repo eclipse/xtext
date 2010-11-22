@@ -9,7 +9,7 @@ import org.eclipse.xtext.nodemodel.BidiIterator;
 public class BasicNodeIterable implements BidiIterable<AbstractNode> {
 	private final AbstractNode startWith;
 
-	public BasicNodeIterable(AbstractNode startWith) {
+	protected BasicNodeIterable(AbstractNode startWith) {
 		this.startWith = startWith;
 	}
 

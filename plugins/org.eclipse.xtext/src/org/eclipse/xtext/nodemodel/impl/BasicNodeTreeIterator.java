@@ -26,7 +26,7 @@ public class BasicNodeTreeIterator extends UnmodifiableIterator<AbstractNode> im
 	private AbstractNode previous;
 	private boolean previousComputed = false;
 	
-	public BasicNodeTreeIterator(AbstractNode root) {
+	protected BasicNodeTreeIterator(AbstractNode root) {
 		this.root = root;
 	}
 

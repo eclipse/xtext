@@ -102,8 +102,7 @@ public class NodeModelBuilder {
 		CompositeNodeWithSemanticElement result = new CompositeNodeWithSemanticElement();
 		result.basicSetGrammarElement(grammarElement);
 		result.setLookAhead(lookahead);
-		if (parent != null)
-			addChild(parent, result);
+		addChild(parent, result);
 		return result;
 	}
 	

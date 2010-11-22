@@ -18,7 +18,8 @@ import com.google.common.collect.UnmodifiableIterator;
  */
 public class SingletonBidiIterator<T> extends UnmodifiableIterator<T> implements BidiIterator<T> {
 
-	private boolean done;
+	private boolean doneNext;
+	private boolean donePrevious;
 	private final T value;
 
 	public static <T> BidiIterator<T> create(T t) {
@@ -27,26 +28,33 @@ public class SingletonBidiIterator<T> extends UnmodifiableIterator<T> implements
 	
 	private SingletonBidiIterator(T value) {
 		this.value = value;
-		done = false;
+		doneNext = false;
+		donePrevious = false;
 	}
 
 	public boolean hasNext() {
-		return !done;
+		return !doneNext;
 	}
 
 	public T next() {
-		if (done) {
+		if (doneNext) {
 			throw new NoSuchElementException();
 		}
-		done = true;
+		doneNext = true;
+		donePrevious = false;
 		return value;
 	}
 
 	public boolean hasPrevious() {
-		return hasNext();
+		return !donePrevious;
 	}
 
 	public T previous() {
-		return next();
+		if (donePrevious) {
+			throw new NoSuchElementException();
+		}
+		donePrevious = true;
+		doneNext = false;
+		return value;
 	}
 }

@@ -21,7 +21,8 @@ import com.google.common.collect.UnmodifiableIterator;
 public class NodeTreeIterator extends UnmodifiableIterator<INode> implements BidiTreeIterator<INode>{
 
 	private final INode root;
-	private INode lastReturned;
+	private INode lastNextReturned;
+	private INode lastPreviousReturned;
 	private INode next;
 	private boolean nextComputed = false;
 	private boolean pruned = false;
@@ -35,15 +36,18 @@ public class NodeTreeIterator extends UnmodifiableIterator<INode> implements Bid
 	public boolean hasNext() {
 		if (nextComputed)
 			return next != null;
-		if (lastReturned == null) {
-			next = root;
-		} else if (!pruned && lastReturned instanceof ICompositeNode && ((ICompositeNode) lastReturned).hasChildren()) {
-			next = ((ICompositeNode) lastReturned).getFirstChild();
-		} else if (lastReturned.hasNextSibling()) {
-			next = lastReturned.getNextSibling();
+		if (lastNextReturned == null) {
+			if (lastPreviousReturned != null)
+				next = lastPreviousReturned;
+			else
+				next = root;
+		} else if (!pruned && lastNextReturned instanceof ICompositeNode && ((ICompositeNode) lastNextReturned).hasChildren()) {
+			next = ((ICompositeNode) lastNextReturned).getFirstChild();
+		} else if (lastNextReturned.hasNextSibling()) {
+			next = lastNextReturned.getNextSibling();
 		} else {
-			ICompositeNode parent = lastReturned.getParent();
-			while (next == null && parent != root && parent.getParent() != null) {
+			ICompositeNode parent = lastNextReturned.getParent();
+			while (next == null && parent != root && parent != null && parent.getParent() != null) {
 				if (parent.hasNextSibling()) {
 					next = parent.getNextSibling();
 				} else {
@@ -58,9 +62,10 @@ public class NodeTreeIterator extends UnmodifiableIterator<INode> implements Bid
 	public INode next() {
 		if (!hasNext())
 			throw new NoSuchElementException();
-		lastReturned = next;
+		lastNextReturned = next;
+		lastPreviousReturned = null;
 		afterAdvance();
-		return lastReturned;
+		return lastNextReturned;
 	}
 
 	protected void afterAdvance() {
@@ -74,15 +79,18 @@ public class NodeTreeIterator extends UnmodifiableIterator<INode> implements Bid
 	public boolean hasPrevious() {
 		if (previousComputed)
 			return previous != null;
-		if (lastReturned == null) {
-			previous = root;
-		} else if (!pruned && lastReturned instanceof ICompositeNode && ((ICompositeNode) lastReturned).hasChildren()) {
-			previous = ((ICompositeNode) lastReturned).getLastChild();
-		} else if (lastReturned.hasPreviousSibling()) {
-			previous = lastReturned.getPreviousSibling();
+		if (lastPreviousReturned == null) {
+			if (lastNextReturned != null)
+				previous = lastNextReturned;
+			else
+				previous = root;
+		} else if (!pruned && lastPreviousReturned instanceof ICompositeNode && ((ICompositeNode) lastPreviousReturned).hasChildren()) {
+			previous = ((ICompositeNode) lastPreviousReturned).getLastChild();
+		} else if (lastPreviousReturned.hasPreviousSibling()) {
+			previous = lastPreviousReturned.getPreviousSibling();
 		} else {
-			ICompositeNode parent = lastReturned.getParent();
-			while (previous == null && parent != root && parent.getParent() != null) {
+			ICompositeNode parent = lastPreviousReturned.getParent();
+			while (previous == null && parent != root && parent != null && parent.getParent() != null) {
 				if (parent.hasPreviousSibling()) {
 					previous = parent.getPreviousSibling();
 				} else {
@@ -97,13 +105,14 @@ public class NodeTreeIterator extends UnmodifiableIterator<INode> implements Bid
 	public INode previous() {
 		if (!hasPrevious())
 			throw new NoSuchElementException();
-		lastReturned = previous;
+		lastPreviousReturned = previous;
+		lastNextReturned = null;
 		afterAdvance();
-		return lastReturned;
+		return lastPreviousReturned;
 	}
 	
 	public void prune() {
-		if (lastReturned == null)
+		if (lastPreviousReturned == null && lastNextReturned == null)
 			throw new IllegalStateException("Cannot prune before #next or #previous");
 		pruned = true;
 	}
