@@ -8,8 +8,6 @@
 package org.eclipse.xtext.ui.tests.scoping.namespaces;
 
 import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
