@@ -16,9 +16,15 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.EClassImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
@@ -73,6 +79,57 @@ public class LazyLinkingResource extends XtextResource {
 
 	private LinkedHashSet<Triple<EObject, EReference, AbstractNode>> resolving = Sets.newLinkedHashSet();
 
+	/**
+	 * resolves any lazy cross references in this resource, adding Issues for unresolvable elements to this resource.
+	 * 
+	 * @param replaceResolvedElements
+	 *            whether resolved elements should be replaced by the lazy linking proxy objects. Note that this fires
+	 *            common set notifications {@link org.eclipse.emf.common.notify.Notification#SET} instead of resolve notifications {@link org.eclipse.emf.common.notify.Notification#RESOLVE}.
+	 *            Also note, that the lazy linking proxies might be replaced by other proxies which won't 
+	 *            be resolved by this method. Use the standard EMF resolution (i.e. navigating the reference or calling {@link EcoreUtil#resolveAll(EObject)} to have everything resolved.
+	 */
+	public synchronized void resolveLazyCrossReferences(boolean replaceResolvedElements) {
+		TreeIterator<Object> iterator = EcoreUtil.getAllContents(this, true);
+		while (iterator.hasNext()) {
+			EObject source = (EObject) iterator.next();
+			EStructuralFeature[] eStructuralFeatures = ((EClassImpl.FeatureSubsetSupplier) source.eClass()
+					.getEAllStructuralFeatures()).crossReferences();
+			if (eStructuralFeatures != null) {
+				for (EStructuralFeature crossRef : eStructuralFeatures) {
+					if (crossRef.isMany()) {
+						@SuppressWarnings("unchecked")
+						EList<EObject> list = (EList<EObject>) source.eGet(crossRef, false);
+						for (int i = 0; i < list.size(); i++) {
+							EObject proxy = list.get(i);
+							if (proxy.eIsProxy()) {
+								URI proxyURI = ((InternalEObject) proxy).eProxyURI();
+								final String fragment = proxyURI.fragment();
+								if (getEncoder().isCrossLinkFragment(this, fragment)) {
+									EObject target = getEObject(fragment);
+									if (target != null) {
+										list.set(i, target);
+									}
+								}
+							}
+						}
+					} else {
+						EObject proxy = (EObject) source.eGet(crossRef, false);
+						if (proxy != null && proxy.eIsProxy()) {
+							URI proxyURI = ((InternalEObject) proxy).eProxyURI();
+							final String fragment = proxyURI.fragment();
+							if (getEncoder().isCrossLinkFragment(this, fragment)) {
+								EObject target = getEObject(fragment);
+								if (target != null) {
+									source.eSet(crossRef, target);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
 	@Override
 	public synchronized EObject getEObject(String uriFragment) {
 		try {
@@ -103,7 +160,9 @@ public class LazyLinkingResource extends XtextResource {
 								+ uriFragment);
 					EObject result = linkedObjects.get(0);
 					if (!EcoreUtil2.isAssignableFrom(reference.getEReferenceType(), result.eClass())) {
-						log.error("An element of type "+result.getClass().getName()+" is not assignable to the reference "+reference.getEContainingClass().getName()+"."+reference.getName());
+						log.error("An element of type " + result.getClass().getName()
+								+ " is not assignable to the reference " + reference.getEContainingClass().getName()
+								+ "." + reference.getName());
 						unresolveableProxies.add(uriFragment);
 						createAndAddDiagnostic(triple);
 						return null;

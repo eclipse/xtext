@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxEValidator;
 
@@ -119,7 +120,11 @@ public class ResourceValidatorImpl implements IResourceValidator {
 	}
 
 	protected void resolveProxies(final Resource resource, final CancelIndicator monitor) {
-		EcoreUtil2.resolveAll(resource, monitor);
+		if (resource instanceof LazyLinkingResource) {
+			((LazyLinkingResource) resource).resolveLazyCrossReferences(true);
+		} else {
+			EcoreUtil2.resolveAll(resource, monitor);
+		}
 	}
 
 	protected IDiagnosticConverter.Acceptor createAcceptor(final List<Issue> result) {
