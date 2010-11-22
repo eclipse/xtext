@@ -8,8 +8,6 @@
 package org.eclipse.xtext.ui.tests.refactoring;
 
 import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
