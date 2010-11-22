@@ -187,6 +187,14 @@ public class EcoreUtil2 extends EcoreUtil {
 			}
 		};
 	}
+	
+	public static Iterable<EObject> eAllContents(final EObject n) {
+		return new Iterable<EObject>() {
+			public Iterator<EObject> iterator() {
+				return eAll(n);
+			}
+		};
+	}
 
 	public static List<EObject> eAllContentsAsList(EObject ele) {
 		List<EObject> result = new ArrayList<EObject>();

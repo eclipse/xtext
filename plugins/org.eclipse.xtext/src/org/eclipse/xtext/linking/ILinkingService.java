@@ -23,7 +23,7 @@ public interface ILinkingService {
 	/**
 	 * Returns all {@link EObject}s referenced by the given link text in the
 	 * given context. But does not set the references or modifies the passed
-	 * information somehow
+	 * information somehow. The returned list might contain proxy instances.
 	 */
 	List<EObject> getLinkedObjects(EObject context, EReference reference, AbstractNode node)
 			throws IllegalNodeException;
