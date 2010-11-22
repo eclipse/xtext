@@ -10,34 +10,89 @@ package org.eclipse.xtext.nodemodel;
 import org.eclipse.emf.ecore.EObject;
 
 /**
+ * <p>A node in the parse tree. Clients will usually deal with fully initialized
+ * nodes thus the expected behavior and described contracts are only valid if
+ * the invariant is fulfilled.</p> 
+ * <p>Nodes may be considered immutable from a clients perspective. However, clients
+ * should never keep a reference to a node as it may be invalidated at any time and
+ * the very same object could be reused in another subtree of the full parse tree.</p> 
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface INode extends BidiTreeIterable<INode> {
 
+	/**
+	 * Returns the parent of the node or <code>null</code> if and only if this is the root node.
+	 * @return the parent of this node or <code>null</code>.
+	 */
 	ICompositeNode getParent();
 	
+	/**
+	 * Returns <code>true</code> if this is not the first child of its parent.
+	 * @returns <code>true</code> if this node has a previous sibling thus {@link #getPreviousSibling()} will
+	 *   not return <code>null</code>.
+	 */
 	boolean hasPreviousSibling();
 	
+	/**
+	 * Returns <code>true</code> if this is not the last child of its parent.
+	 * @returns <code>true</code> if this node has a next sibling thus {@link #getNextSibling()} will
+	 *   not return <code>null</code>.
+	 */
 	boolean hasNextSibling();
 	
+	/**
+	 * @return the previous sibling or <code>null</code>.
+	 */
 	INode getPreviousSibling();
 	
+	/**
+	 * @return the next sibling or <code>null</code>.
+	 */
 	INode getNextSibling();
 	
+	/**
+	 * @return the root node of this parse tree. Will not return <code>null</code> in a consistent tree.
+	 */
 	ICompositeNode getRootNode();
 
+	/**
+	 * @return the offset of this node including hidden tokens.
+	 */
 	int getTotalOffset();
 
+	/**
+	 * @return the length of this node including hidden tokens.
+	 */
 	int getTotalLength();
 	
+	/**
+	 * @return the end offset (exclusive) of this node including hidden tokens. 
+	 *   Yields the same result as {@link #getTotalOffset() offset} <code>+</code> {@link #getTotalLength() length}
+	 *   but may be more efficient.
+	 */
 	int getTotalEndOffset();
 
+	/**
+	 * @return the parsed text that is covered by this node (including hidden tokens). Never <code>null</code>.
+	 */
 	String getText();
 
+	/**
+	 * @return the grammar element that created this node. May return <code>null</code> in case of unrecoverable syntax
+	 *   errors. This happens usually when a keyword occurred at an unexpected offset.
+	 */
 	EObject getGrammarElement();
 	
+	/**
+	 * @return the nearest semantic object that is associated with the subtree of this node. May return <code>null</code> whenever
+	 *   the parser refused to create an object due to unrecoverable errors.
+	 */
 	EObject getSemanticElement();
 
+	/**
+	 * @return the directly associated syntax error message. May return <code>null</code>.
+	 */
 	SyntaxErrorMessage getSyntaxErrorMessage();
 	
 	/**

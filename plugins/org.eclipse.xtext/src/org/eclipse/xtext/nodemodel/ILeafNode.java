@@ -8,10 +8,14 @@
 package org.eclipse.xtext.nodemodel;
 
 /**
+ * A leaf node in the parse tree.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface ILeafNode extends INode {
 
+	/**
+	 * @return <code>true</code> if the node was produced by a hidden token.
+	 */
 	boolean isHidden();
 
 }

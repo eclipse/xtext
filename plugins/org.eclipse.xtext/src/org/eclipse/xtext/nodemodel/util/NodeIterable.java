@@ -8,6 +8,7 @@ import org.eclipse.xtext.nodemodel.INode;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class NodeIterable implements BidiIterable<INode> {
+	
 	private final INode startWith;
 
 	public NodeIterable(INode startWith) {
