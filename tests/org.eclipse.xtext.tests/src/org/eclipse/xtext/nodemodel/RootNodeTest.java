@@ -8,7 +8,6 @@
 package org.eclipse.xtext.nodemodel;
 
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
-import org.eclipse.xtext.nodemodel.impl.RootNode;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -19,7 +18,7 @@ public class RootNodeTest extends AbstractCompositeNodeTest {
 	public void testTextOffsetLength() {
 		RootNode rootNode = createCompositeNode();
 		String completeContent = "completeContent";
-		rootNode.setCompleteContent(completeContent);
+		rootNode.basicSetCompleteContent(completeContent);
 		assertEquals(completeContent, rootNode.getText());
 		assertEquals(0, rootNode.getTotalOffset());
 		assertEquals(completeContent.length(), rootNode.getTotalLength());
@@ -27,7 +26,7 @@ public class RootNodeTest extends AbstractCompositeNodeTest {
 	
 	@Override
 	protected AbstractNode getFirstChild(ICompositeNode node) {
-		return ((RootNode) node).getFirstChild();
+		return ((RootNode) node).basicGetFirstChild();
 	}
 	
 	@Override

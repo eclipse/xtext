@@ -9,8 +9,6 @@ package org.eclipse.xtext.nodemodel;
 
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
-import org.eclipse.xtext.nodemodel.impl.LeafNode;
-import org.eclipse.xtext.nodemodel.impl.RootNode;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -21,20 +19,20 @@ public class CompositeNodeTest extends AbstractCompositeNodeTest {
 	public void testTextOffsetLength() {
 		RootNode root = new RootNode();
 		String completeContent = " completeContent ";
-		root.setCompleteContent(completeContent);
+		root.basicSetCompleteContent(completeContent);
 		LeafNode firstChild = new LeafNode();
-		firstChild.setTotalLength(1);
-		firstChild.setTotalOffset(0);
+		firstChild.basicSetTotalLength(1);
+		firstChild.basicSetTotalOffset(0);
 		addChild(root, firstChild);
 		CompositeNodeWithSemanticElement composite = createCompositeNode();
 		LeafNode child = new LeafNode();
-		child.setTotalOffset(1);
-		child.setTotalLength(completeContent.trim().length());
+		child.basicSetTotalOffset(1);
+		child.basicSetTotalLength(completeContent.trim().length());
 		addChild(composite, child);
 		addChild(root, composite);
 		LeafNode lastChild = new LeafNode();
-		lastChild.setTotalLength(1);
-		lastChild.setTotalOffset(completeContent.length() - 2);
+		lastChild.basicSetTotalLength(1);
+		lastChild.basicSetTotalOffset(completeContent.length() - 2);
 		addChild(root, lastChild);
 		assertEquals(completeContent.trim(), composite.getText());
 		assertEquals(1, composite.getTotalOffset());
@@ -43,7 +41,7 @@ public class CompositeNodeTest extends AbstractCompositeNodeTest {
 	
 	@Override
 	protected AbstractNode getFirstChild(ICompositeNode node) {
-		return ((CompositeNodeWithSemanticElement) node).getFirstChild();
+		return ((CompositeNodeWithSemanticElement) node).basicGetFirstChild();
 	}
 	
 	@Override

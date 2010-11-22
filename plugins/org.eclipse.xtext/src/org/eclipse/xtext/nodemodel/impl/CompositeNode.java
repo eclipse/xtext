@@ -7,10 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel.impl;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.BidiIterable;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.EmptyBidiIterable;
+import org.eclipse.xtext.nodemodel.util.NodeIterable;
+import org.eclipse.xtext.nodemodel.util.SingletonBidiIterable;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -21,12 +23,25 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 	
 	private int lookAhead;
 	
-	public CompositeNode() {
+	public BidiIterable<INode> getChildren() {
+		if (firstChild != null) {
+			if (firstChild.hasSiblings()) {
+				return new NodeIterable(getFirstChild());
+			} else {
+				return SingletonBidiIterable.<INode>create(getFirstChild());
+			}
+		}
+		return EmptyBidiIterable.instance();
 	}
 	
-	public BidiIterable<INode> getChildren() {
-		if (firstChild != null)
-			return firstChild;
+	public BidiIterable<AbstractNode> basicGetChildren() {
+		if (firstChild != null) {
+			if (firstChild.hasSiblings()) {
+				return new BasicNodeIterable(firstChild);
+			} else {
+				return SingletonBidiIterable.create(basicGetFirstChild());
+			}
+		}
 		return EmptyBidiIterable.instance();
 	}
 	
@@ -41,7 +56,7 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 	public int getTotalLength() {
 		if (firstChild != null) {
 			int offset = firstChild.getTotalOffset();
-			AbstractNode lastChild = firstChild.getPrevious();
+			AbstractNode lastChild = firstChild.basicGetPreviousSibling();
 			return lastChild.getTotalOffset() + lastChild.getTotalLength() - offset;
 		}
 		return 0;
@@ -51,24 +66,24 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 		if (firstChild != null)
 			return firstChild.getTotalOffset();
 		CompositeNode composite = this;
-		while(composite.getNext() == composite) {
-			composite = composite.getParent();
+		while(!composite.hasSiblings() && composite.basicGetParent() != null) {
+			composite = composite.basicGetParent();
 		}
-		if (composite.getParent() != null) {
-			if (composite.getParent().getLastChild() != composite) {
+		if (composite.basicGetParent() != null) {
+			if (composite.hasNextSibling()) {
 				CompositeNode composite2 = composite;
-				while(composite2.getParent() != null) {
-					if (composite2 != composite2.getParent().getLastChild())
-						return composite2.getNext().getTotalOffset();
-					composite2 = composite.getParent();
+				while(composite2.basicGetParent() != null) {
+					if (composite2.hasNextSibling())
+						return composite2.basicGetNextSibling().getTotalOffset();
+					composite2 = composite.basicGetParent();
 				}
 			}
-			if (composite.getParent().getFirstChild() != composite) {
+			if (composite.hasPreviousSibling()) {
 				CompositeNode composite2 = composite;
-				while(composite2.getParent() != null) {
-					if (composite2 != composite2.getParent().getFirstChild())
-						return composite2.getPrevious().getTotalEndOffset();
-					composite2 = composite.getParent();
+				while(composite2.basicGetParent() != null) {
+					if (composite2.hasPreviousSibling())
+						return composite2.basicGetPreviousSibling().getTotalEndOffset();
+					composite2 = composite.basicGetParent();
 				}
 			}
 		}
@@ -79,22 +94,28 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 		this.lookAhead = lookAhead;
 	}
 	
-	public AbstractNode getFirstChild() {
+	public INode getFirstChild() {
 		return firstChild;
 	}
 	
-	public AbstractNode getLastChild() {
-		if (firstChild == null)
-			return null;
-		return firstChild.getPrevious();
+	public AbstractNode basicGetFirstChild() {
+		return firstChild;
 	}
 	
 	protected void basicSetFirstChild(AbstractNode firstChild) {
 		this.firstChild = firstChild;
 	}
 	
-	protected EObject basicGetSemanticElement() {
-		return null;
+	public INode getLastChild() {
+		if (firstChild == null)
+			return null;
+		return firstChild.basicGetPreviousSibling();
+	}
+	
+	public AbstractNode basicGetLastChild() {
+		if (firstChild == null)
+			return null;
+		return firstChild.basicGetPreviousSibling();
 	}
 	
 }

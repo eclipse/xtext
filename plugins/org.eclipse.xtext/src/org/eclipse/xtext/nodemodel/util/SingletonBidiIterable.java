@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.nodemodel.impl;
+package org.eclipse.xtext.nodemodel.util;
 
 import org.eclipse.xtext.nodemodel.BidiIterable;
 import org.eclipse.xtext.nodemodel.BidiIterator;
@@ -13,17 +13,20 @@ import org.eclipse.xtext.nodemodel.BidiIterator;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class EmptyBidiIterable<T> implements BidiIterable<T> {
+public class SingletonBidiIterable<T> implements BidiIterable<T> {
 
-	private static EmptyBidiIterable<?> INSTANCE = new EmptyBidiIterable<Object>();
+	public static <T> SingletonBidiIterable<T> create(T value) {
+		return new SingletonBidiIterable<T>(value);
+	}
 	
-	@SuppressWarnings("unchecked")
-	public static <T> EmptyBidiIterable<T> instance() {
-		return (EmptyBidiIterable<T>) INSTANCE;
+	private final T value;
+	
+	public SingletonBidiIterable(T value) {
+		this.value = value;
 	}
 
 	public BidiIterator<T> iterator() {
-		return EmptyBidiIterator.instance();
+		return SingletonBidiIterator.<T>create(value);
 	}
 	
 	

@@ -32,7 +32,7 @@ public class CompositeNodeWithSemanticElement extends CompositeNode implements A
 		return semanticElement;
 	}
 	
-	public void setSemanticElement(EObject element) {
+	protected void basicSetSemanticElement(EObject element) {
 		this.semanticElement = element;
 	}
 

@@ -5,24 +5,27 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.nodemodel.impl;
+package org.eclipse.xtext.nodemodel.util;
 
-import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
+import org.eclipse.xtext.nodemodel.BidiIterable;
+import org.eclipse.xtext.nodemodel.BidiIterator;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class HiddenLeafNodeWithSyntaxError extends HiddenLeafNode {
+public class EmptyBidiIterable<T> implements BidiIterable<T> {
 
-	private SyntaxErrorMessage syntaxErrorMessage;
+	private static EmptyBidiIterable<?> INSTANCE = new EmptyBidiIterable<Object>();
 	
-	@Override
-	public SyntaxErrorMessage getSyntaxErrorMessage() {
-		return syntaxErrorMessage;
+	@SuppressWarnings("unchecked")
+	public static <T> EmptyBidiIterable<T> instance() {
+		return (EmptyBidiIterable<T>) INSTANCE;
 	}
 
-	protected void basicSetSyntaxErrorMessage(SyntaxErrorMessage syntaxErrorMessage) {
-		this.syntaxErrorMessage = syntaxErrorMessage;
+	public BidiIterator<T> iterator() {
+		return EmptyBidiIterator.instance();
 	}
 	
+	
+
 }

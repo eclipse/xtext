@@ -50,7 +50,6 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
-import org.eclipse.xtext.nodemodel.impl.RootNode;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
@@ -605,7 +604,10 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		IParseResult result = null;
 		EObject current = null;
 		try {
-			lwCurrentNode = lwNodeBuilder.newCompositeNode(null, 0, null);
+			String completeContent = input.toString();
+			if (completeContent == null) // who had the crazy idea to return null from toString() ...
+				completeContent = "";
+			lwCurrentNode = lwNodeBuilder.newRootNode(completeContent);
 			String antlrEntryRuleName = normalizeEntryRuleName(entryRuleName);
 			try {
 				Method method = this.getClass().getMethod(antlrEntryRuleName);
@@ -630,12 +632,8 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			try {
 				appendAllTokens();
 			} finally {
-				String completeContent = input.toString();
-				if (completeContent == null) // who had the crazy idea to return null from toString() ...
-					completeContent = "";
-				((RootNode)lwCurrentNode.getParent()).setCompleteContent(completeContent);
 				new InvariantChecker().checkInvariant(lwCurrentNode);
-				result = new ParseResult(current, currentNode, lwCurrentNode.getParent());
+				result = new ParseResult(current, currentNode, lwCurrentNode.getRootNode());
 			}
 		}
 		return result;
@@ -760,8 +758,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
     protected void afterParserOrEnumRuleCall() {
     	currentNode = currentNode.getParent();
     	
-    	lwNodeBuilder.compress(lwCurrentNode);
-    	lwCurrentNode = lwCurrentNode.getParent();
+    	lwCurrentNode = lwNodeBuilder.compressAndReturnParent(lwCurrentNode);
     }
 	
     // if (current==null) {

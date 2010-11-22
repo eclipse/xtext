@@ -10,48 +10,47 @@ package org.eclipse.xtext.nodemodel.impl;
 import java.util.NoSuchElementException;
 
 import org.eclipse.xtext.nodemodel.BidiIterator;
-import org.eclipse.xtext.nodemodel.INode;
 
 import com.google.common.collect.UnmodifiableIterator;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class NodeListIterator extends UnmodifiableIterator<INode> implements BidiIterator<INode>{
+public class BasicNodeIterator extends UnmodifiableIterator<AbstractNode> implements BidiIterator<AbstractNode>{
 
 	private final AbstractNode startWith;
 	private AbstractNode lastReturned;
 
-	protected NodeListIterator(AbstractNode startWith) {
+	public BasicNodeIterator(AbstractNode startWith) {
 		this.startWith = startWith;
 	}
 
 	public boolean hasNext() {
-		return lastReturned == null || lastReturned.getNext() != lastReturned.getParent().getFirstChild();
+		return lastReturned == null || lastReturned.hasNextSibling();
 	}
 
-	public INode next() {
+	public AbstractNode next() {
 		if (!hasNext())
 			throw new NoSuchElementException();
 		if (lastReturned == null) {
 			lastReturned = startWith;
 		} else {
-			lastReturned = lastReturned.getNext();
+			lastReturned = lastReturned.basicGetNextSibling();
 		}
 		return lastReturned;
 	}
 
 	public boolean hasPrevious() {
-		return lastReturned == null || lastReturned != lastReturned.getParent().getFirstChild();
+		return lastReturned == null || lastReturned.hasPreviousSibling();
 	}
 
-	public INode previous() {
+	public AbstractNode previous() {
 		if (!hasPrevious())
 			throw new NoSuchElementException();
 		if (lastReturned == null) {
-			lastReturned = startWith.getPrevious();
+			lastReturned = startWith.basicGetPreviousSibling();
 		} else {
-			lastReturned = lastReturned.getPrevious();
+			lastReturned = lastReturned.basicGetPreviousSibling();
 		}
 		return lastReturned;
 	}

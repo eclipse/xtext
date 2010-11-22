@@ -20,12 +20,12 @@ public class NodeModelBuilder {
 
 	public void addChild(ICompositeNode node, AbstractNode child) {
 		CompositeNode composite = (CompositeNode) node;
-		if (composite.getFirstChild() == null) {
+		if (composite.basicGetFirstChild() == null) {
 			checkValidNewChild(child);
 			composite.basicSetFirstChild(child);
 			initializeFirstChildInvariant(composite, child);
 		} else {
-			addPrevious(composite.getFirstChild(), child);
+			addPrevious(composite.basicGetFirstChild(), child);
 		}
 	}
 	
@@ -37,70 +37,75 @@ public class NodeModelBuilder {
 	public ICompositeNode newCompositeNodeAsParentOf(EObject grammarElement, int lookahead, ICompositeNode existing) {
 		CompositeNodeWithSemanticElement newComposite = new CompositeNodeWithSemanticElement();
 		AbstractNode castedExisting = (AbstractNode) existing;
-		newComposite.setGrammarElement(grammarElement);
+		newComposite.basicSetGrammarElement(grammarElement);
 		newComposite.setLookAhead(lookahead);
-		newComposite.basicSetParent(castedExisting.getParent());
-		if (newComposite.getParent().getFirstChild() == castedExisting) {
-			newComposite.getParent().basicSetFirstChild(newComposite);
+		newComposite.basicSetParent(castedExisting.basicGetParent());
+		if (newComposite.basicGetParent().basicGetFirstChild() == castedExisting) {
+			newComposite.basicGetParent().basicSetFirstChild(newComposite);
 		}
-		if (castedExisting.getNext() == castedExisting) {
-			newComposite.basicSetNext(newComposite);
-			newComposite.basicSetPrevious(newComposite);
+		if (castedExisting.basicGetNextSibling() == castedExisting) {
+			newComposite.basicSetNextSibling(newComposite);
+			newComposite.basicSetPreviousSibling(newComposite);
 		} else {
-			newComposite.basicSetNext(castedExisting.getNext());
-			newComposite.getNext().basicSetPrevious(newComposite);
-			newComposite.basicSetPrevious(castedExisting.getPrevious());
-			newComposite.getPrevious().basicSetNext(newComposite);
+			newComposite.basicSetNextSibling(castedExisting.basicGetNextSibling());
+			newComposite.basicGetNextSibling().basicSetPreviousSibling(newComposite);
+			newComposite.basicSetPreviousSibling(castedExisting.basicGetPreviousSibling());
+			newComposite.basicGetPreviousSibling().basicSetNextSibling(newComposite);
 		}
 		newComposite.basicSetFirstChild(castedExisting);
 		castedExisting.basicSetParent(newComposite);
-		castedExisting.basicSetNext(castedExisting);
-		castedExisting.basicSetPrevious(castedExisting);
-		compress(existing);
-		return newComposite;
+		castedExisting.basicSetNextSibling(castedExisting);
+		castedExisting.basicSetPreviousSibling(castedExisting);
+		return compressAndReturnParent(existing);
 	}
 
 	protected void initializeFirstChildInvariant(CompositeNode node, AbstractNode child) {
 		child.basicSetParent(node);
-		child.basicSetNext(child);
-		child.basicSetPrevious(child);
+		child.basicSetNextSibling(child);
+		child.basicSetPreviousSibling(child);
 	}
 
 	protected void checkValidNewChild(AbstractNode child) {
 		if (child == null)
 			throw new IllegalArgumentException("child may not be null");
-		if (child.getNext() != null || child.getPrevious() != null)
+		if (child.basicGetNextSibling() != null || child.basicGetPreviousSibling() != null)
 			throw new IllegalStateException("prev has already a next or prev");
 	}
 	
 	public void addPrevious(AbstractNode node, AbstractNode prev) {
 		checkValidNewChild(prev);
-		prev.basicSetPrevious(node.getPrevious());
-		prev.basicSetParent(node.getParent());
-		prev.basicSetNext(node);
-		if (node.getPrevious() != null) {
-			node.getPrevious().basicSetNext(prev);
+		prev.basicSetPreviousSibling(node.basicGetPreviousSibling());
+		prev.basicSetParent(node.basicGetParent());
+		prev.basicSetNextSibling(node);
+		if (node.basicGetPreviousSibling() != null) {
+			node.basicGetPreviousSibling().basicSetNextSibling(prev);
 		}
-		node.basicSetPrevious(prev);
+		node.basicSetPreviousSibling(prev);
 	}
 	
 	public void addNext(AbstractNode node, AbstractNode next) {
 		checkValidNewChild(next);
-		next.basicSetNext(node.getNext());
-		next.basicSetParent(node.getParent());
-		next.basicSetNext(node);
-		if (node.getNext() != null) {
-			node.getNext().basicSetNext(next);
+		next.basicSetNextSibling(node.basicGetNextSibling());
+		next.basicSetParent(node.basicGetParent());
+		next.basicSetNextSibling(node);
+		if (node.basicGetNextSibling() != null) {
+			node.basicGetNextSibling().basicSetNextSibling(next);
 		}
-		node.basicSetNext(next);
+		node.basicSetNextSibling(next);
 	}
 	
 	public ICompositeNode newCompositeNode(EObject grammarElement, int lookahead, ICompositeNode parent) {
-		CompositeNodeWithSemanticElement result = parent != null ? new CompositeNodeWithSemanticElement() : new RootNode();
-		result.setGrammarElement(grammarElement);
+		CompositeNodeWithSemanticElement result = new CompositeNodeWithSemanticElement();
+		result.basicSetGrammarElement(grammarElement);
 		result.setLookAhead(lookahead);
 		if (parent != null)
 			addChild(parent, result);
+		return result;
+	}
+	
+	public ICompositeNode newRootNode(String input) {
+		RootNode result = new RootNode();
+		result.basicSetCompleteContent(input);
 		return result;
 	}
 
@@ -110,10 +115,10 @@ public class NodeModelBuilder {
 		if (errorMessage != null) {
 			if (isHidden) {
 				result = new HiddenLeafNodeWithSyntaxError();
-				((HiddenLeafNodeWithSyntaxError)result).setSyntaxErrorMessage(new SyntaxErrorMessage(errorMessage, null));
+				((HiddenLeafNodeWithSyntaxError)result).basicSetSyntaxErrorMessage(new SyntaxErrorMessage(errorMessage, null));
 			} else {
 				result = new LeafNodeWithSyntaxError();
-				((LeafNodeWithSyntaxError)result).setSyntaxErrorMessage(new SyntaxErrorMessage(errorMessage, null));
+				((LeafNodeWithSyntaxError)result).basicSetSyntaxErrorMessage(new SyntaxErrorMessage(errorMessage, null));
 			}
 		} else {
 			if (isHidden) {
@@ -122,31 +127,34 @@ public class NodeModelBuilder {
 				result = new LeafNode();
 			}
 		}
-		result.setGrammarElement(grammarElement);
-		result.setTotalOffset(offset);
-		result.setTotalLength(length);
+		result.basicSetGrammarElement(grammarElement);
+		result.basicSetTotalOffset(offset);
+		result.basicSetTotalLength(length);
 		addChild(parent, result);
 		return result;
 	}
 	
-	public void compress(ICompositeNode compositeNode) {
+	public ICompositeNode compressAndReturnParent(ICompositeNode compositeNode) {
 		CompositeNode casted = (CompositeNode) compositeNode;
 		if (casted.basicGetSemanticElement() == null) {
 			if (compositeNode instanceof CompositeNodeWithSemanticElement) {
 				if (casted.getSyntaxErrorMessage() == null) {
 					CompositeNode compressed = new CompositeNode();
-					compressed.setGrammarElement(compositeNode.getGrammarElement());
+					compressed.basicSetGrammarElement(casted.basicGetGrammarElement());
 					compressed.setLookAhead(compositeNode.getLookAhead());
 					replace(casted, compressed);
+					return compressed.basicGetParent();
 				} else {
 					CompositeNodeWithSyntaxError compressed = new CompositeNodeWithSyntaxError();
-					compressed.setGrammarElement(compositeNode.getGrammarElement());
+					compressed.basicSetGrammarElement(casted.basicGetGrammarElement());
 					compressed.setLookAhead(compositeNode.getLookAhead());
-					compressed.setSyntaxErrorMessage(casted.getSyntaxErrorMessage());
+					compressed.basicSetSyntaxErrorMessage(casted.getSyntaxErrorMessage());
 					replace(casted, compressed);
+					return compressed.basicGetParent();
 				}
 			}
 		}
+		return casted.basicGetParent();
 	}
 	
 	public INode setSyntaxError(INode node, SyntaxErrorMessage errorMessage) {
@@ -155,16 +163,16 @@ public class NodeModelBuilder {
 			LeafNode newNode = null;
 			if (oldNode.isHidden()) {
 				HiddenLeafNodeWithSyntaxError newLeaf = new HiddenLeafNodeWithSyntaxError();
-				newLeaf.setSyntaxErrorMessage(errorMessage);
+				newLeaf.basicSetSyntaxErrorMessage(errorMessage);
 				newNode = newLeaf;
 			} else {
 				LeafNodeWithSyntaxError newLeaf = new LeafNodeWithSyntaxError();
-				newLeaf.setSyntaxErrorMessage(errorMessage);
+				newLeaf.basicSetSyntaxErrorMessage(errorMessage);
 				newNode = newLeaf;
 			}
-			newNode.setTotalLength(oldNode.getTotalLength());
-			newNode.setTotalOffset(oldNode.getTotalOffset());
-			newNode.setGrammarElement(oldNode.getGrammarElement());
+			newNode.basicSetTotalLength(oldNode.getTotalLength());
+			newNode.basicSetTotalOffset(oldNode.getTotalOffset());
+			newNode.basicSetGrammarElement(oldNode.basicGetGrammarElement());
 			replace(oldNode, newNode);
 			return newNode;
 		} else {
@@ -172,17 +180,17 @@ public class NodeModelBuilder {
 			CompositeNode newNode = null;
 			if (oldNode.basicGetSemanticElement() != null) {
 				CompositeNodeWithSemanticElementAndSyntaxError newComposite = new CompositeNodeWithSemanticElementAndSyntaxError();
-				newComposite.setSemanticElement(oldNode.basicGetSemanticElement());
-				newComposite.setSyntaxErrorMessage(errorMessage);
+				newComposite.basicSetSemanticElement(oldNode.basicGetSemanticElement());
+				newComposite.basicSetSyntaxErrorMessage(errorMessage);
 				oldNode.basicGetSemanticElement().eAdapters().remove(oldNode);
 				newComposite.basicGetSemanticElement().eAdapters().add(newComposite);
 				newNode = newComposite;
 			} else {
 				CompositeNodeWithSyntaxError newComposite = new CompositeNodeWithSyntaxError();
-				newComposite.setSyntaxErrorMessage(errorMessage);
+				newComposite.basicSetSyntaxErrorMessage(errorMessage);
 				newNode = newComposite;
 			}
-			newNode.setGrammarElement(oldNode.getGrammarElement());
+			newNode.basicSetGrammarElement(oldNode.basicGetGrammarElement());
 			newNode.setLookAhead(oldNode.getLookAhead());
 			replace(oldNode, newNode);
 			return newNode;
@@ -190,31 +198,31 @@ public class NodeModelBuilder {
 	}
 
 	protected void replace(AbstractNode oldNode, AbstractNode newNode) {
-		newNode.basicSetParent(oldNode.getParent());
-		if ((oldNode.getParent()).getFirstChild() == oldNode) {
-			(oldNode.getParent()).basicSetFirstChild(newNode);
+		newNode.basicSetParent(oldNode.basicGetParent());
+		if ((oldNode.basicGetParent()).basicGetFirstChild() == oldNode) {
+			(oldNode.basicGetParent()).basicSetFirstChild(newNode);
 		}
-		if (oldNode.getNext() == oldNode) {
-			newNode.basicSetNext(newNode);
+		if (oldNode.basicGetNextSibling() == oldNode) {
+			newNode.basicSetNextSibling(newNode);
 		} else {
-			newNode.basicSetNext(oldNode.getNext());
-			newNode.getNext().basicSetPrevious(newNode);
+			newNode.basicSetNextSibling(oldNode.basicGetNextSibling());
+			newNode.basicGetNextSibling().basicSetPreviousSibling(newNode);
 		}
-		if (oldNode.getPrevious() == oldNode) {
-			newNode.basicSetPrevious(newNode);
+		if (oldNode.getPreviousSibling() == oldNode) {
+			newNode.basicSetPreviousSibling(newNode);
 		} else {
-			newNode.basicSetPrevious(oldNode.getPrevious());
-			newNode.getPrevious().basicSetNext(newNode);
+			newNode.basicSetPreviousSibling(oldNode.basicGetPreviousSibling());
+			newNode.basicGetPreviousSibling().basicSetNextSibling(newNode);
 		}
 		if (oldNode instanceof CompositeNode) {
 			CompositeNode oldComposite = (CompositeNode) oldNode;
 			CompositeNode newComposite = (CompositeNode) newNode;
-			AbstractNode child = oldComposite.getFirstChild();
+			AbstractNode child = oldComposite.basicGetFirstChild();
 			if (child != null) {
 				newComposite.basicSetFirstChild(child);
-				while(child.getParent() != newComposite) {
+				while(child.basicGetParent() != newComposite) {
 					child.basicSetParent(newComposite);
-					child = child.getNext();
+					child = child.basicGetNextSibling();
 				}
 			}
 		}
