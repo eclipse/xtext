@@ -21,7 +21,7 @@ public class BasicNodeIterator extends UnmodifiableIterator<AbstractNode> implem
 	private final AbstractNode startWith;
 	private AbstractNode lastReturned;
 
-	public BasicNodeIterator(AbstractNode startWith) {
+	protected BasicNodeIterator(AbstractNode startWith) {
 		this.startWith = startWith;
 	}
 

@@ -19,6 +19,8 @@ import org.eclipse.xtext.nodemodel.util.SingletonBidiIterable;
 import org.eclipse.xtext.nodemodel.util.SingletonBidiIterator;
 
 /**
+ * Unfolds the array of grammar elements that is associated with a composite node.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class SyntheticCompositeNode implements ICompositeNode {

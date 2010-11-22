@@ -68,13 +68,23 @@ public class RootNode extends CompositeNodeWithSemanticElement {
 	}
 	
 	@Override
-	public AbstractNode basicGetNextSibling() {
+	protected AbstractNode basicGetNextSibling() {
 		return this;
 	}
 	
 	@Override
-	public AbstractNode basicGetPreviousSibling() {
+	protected AbstractNode basicGetPreviousSibling() {
 		return this;
+	}
+	
+	@Override
+	protected boolean basicHasPreviousSibling() {
+		return false;
+	}
+	
+	@Override
+	protected boolean basicHasNextSibling() {
+		return false;
 	}
 	
 	@Override
@@ -93,17 +103,17 @@ public class RootNode extends CompositeNodeWithSemanticElement {
 	}
 	
 	@Override
-	public void basicSetNextSibling(AbstractNode next) {
+	protected void basicSetNextSibling(AbstractNode next) {
 		throw new UnsupportedOperationException();
 	}
 	
 	@Override
-	public void basicSetPreviousSibling(AbstractNode prev) {
+	protected void basicSetPreviousSibling(AbstractNode prev) {
 		throw new UnsupportedOperationException();
 	}
 	
 	@Override
-	public void basicSetParent(CompositeNode parent) {
+	protected void basicSetParent(CompositeNode parent) {
 		throw new UnsupportedOperationException();
 	}
 

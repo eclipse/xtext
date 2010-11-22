@@ -5,24 +5,17 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.nodemodel.impl;
+package org.eclipse.xtext.nodemodel;
 
-import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
+import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 
-/**
- * @author Sebastian Zarnekow - Initial contribution and API
- */
-public class RootNodeWithSyntaxError extends RootNode {
-
-	private SyntaxErrorMessage syntaxErrorMessage;
-	
+class RootNode extends org.eclipse.xtext.nodemodel.impl.RootNode {
 	@Override
-	public SyntaxErrorMessage getSyntaxErrorMessage() {
-		return syntaxErrorMessage;
+	protected void basicSetCompleteContent(String completeContent) {
+		super.basicSetCompleteContent(completeContent);
 	}
-
-	protected void basicSetSyntaxErrorMessage(SyntaxErrorMessage syntaxErrorMessage) {
-		this.syntaxErrorMessage = syntaxErrorMessage;
+	@Override
+	protected AbstractNode basicGetFirstChild() {
+		return super.basicGetFirstChild();
 	}
-	
 }

@@ -20,35 +20,6 @@ import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
  */
 public abstract class AbstractCompositeNodeTest extends TestCase {
 
-	protected static class RootNode extends org.eclipse.xtext.nodemodel.impl.RootNode {
-		@Override
-		protected void basicSetCompleteContent(String completeContent) {
-			super.basicSetCompleteContent(completeContent);
-		}
-	}
-	
-	protected static class LeafNode extends org.eclipse.xtext.nodemodel.impl.LeafNode {
-		@Override
-		protected void basicSetTotalLength(int length) {
-			super.basicSetTotalLength(length);
-		}
-		
-		@Override
-		protected void basicSetTotalOffset(int offset) {
-			super.basicSetTotalOffset(offset);
-		}
-		
-		@Override
-		protected AbstractNode basicGetNextSibling() {
-			return super.basicGetNextSibling();
-		}
-		
-		@Override
-		protected AbstractNode basicGetPreviousSibling() {
-			return super.basicGetPreviousSibling();
-		}
-	}
-	
 	private NodeModelBuilder mutator;
 
 	public abstract void testTextOffsetLength();

@@ -35,7 +35,7 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 		return EmptyBidiIterable.instance();
 	}
 	
-	public BidiIterable<AbstractNode> basicGetChildren() {
+	protected BidiIterable<AbstractNode> basicGetChildren() {
 		if (firstChild != null) {
 			if (firstChild.hasSiblings()) {
 				return new BasicNodeIterable(firstChild);
@@ -101,7 +101,7 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 		return null;
 	}
 	
-	public AbstractNode basicGetFirstChild() {
+	protected AbstractNode basicGetFirstChild() {
 		return firstChild;
 	}
 	
@@ -115,7 +115,7 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 		return firstChild.basicGetPreviousSibling();
 	}
 	
-	public AbstractNode basicGetLastChild() {
+	protected AbstractNode basicGetLastChild() {
 		if (firstChild == null)
 			return null;
 		return firstChild.basicGetPreviousSibling();

@@ -77,7 +77,7 @@ public abstract class AbstractNode implements INode {
 		CompositeNode candidate = parent;
 		while(candidate.basicGetParent() != null)
 			candidate = candidate.basicGetParent();
-		return candidate;
+		return candidate.getRootNode();
 	}
 	
 	public EObject getSemanticElement() {
@@ -138,7 +138,7 @@ public abstract class AbstractNode implements INode {
 		return basicHasPreviousSibling();
 	}
 	
-	public boolean basicHasPreviousSibling() {
+	protected boolean basicHasPreviousSibling() {
 		if (parent == null)
 			return false;
 		return parent.basicGetFirstChild() != this;
@@ -148,7 +148,7 @@ public abstract class AbstractNode implements INode {
 		return basicHasNextSibling();
 	}
 	
-	public boolean basicHasNextSibling() {
+	protected boolean basicHasNextSibling() {
 		if (parent == null)
 			return false;
 		return parent.basicGetLastChild() != this;
