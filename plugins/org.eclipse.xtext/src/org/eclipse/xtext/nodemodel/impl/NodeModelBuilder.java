@@ -7,11 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel.impl;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -136,8 +140,30 @@ public class NodeModelBuilder {
 	
 	public ICompositeNode compressAndReturnParent(ICompositeNode compositeNode) {
 		CompositeNode casted = (CompositeNode) compositeNode;
+		if (casted.hasChildren() && casted.basicGetFirstChild() instanceof CompositeNode) {
+			CompositeNode mergeInto = (CompositeNode) casted.basicGetFirstChild();
+			// it is our only child
+			if (mergeInto.basicGetNextSibling() == mergeInto) {
+				// it refers not to a syntax error or a semantic object
+				if (mergeInto.getSyntaxErrorMessage() == null && casted.getSyntaxErrorMessage() == null && mergeInto.basicGetSemanticElement() == null && casted.basicGetSemanticElement() == null) {
+					// lets merge our grammar element into its grammar element
+					EObject newGrammarElement = casted.getGrammarElement();
+					Object oldGrammarElement = mergeInto.basicGetGrammarElement();
+					EObject[] newElements = null;
+					if (oldGrammarElement instanceof EObject) {
+						newElements = new EObject[] { newGrammarElement, (EObject) oldGrammarElement };
+					} else {
+						List<EObject> list = Lists.asList(newGrammarElement, (EObject[]) oldGrammarElement);
+						newElements =list.toArray(new EObject[list.size()]);
+					}
+					mergeInto.basicSetGrammarElement(newElements);
+					replaceWithoutChildren(casted, mergeInto);
+					casted = mergeInto;
+				}
+			}
+		}
 		if (casted.basicGetSemanticElement() == null) {
-			if (compositeNode instanceof CompositeNodeWithSemanticElement) {
+			if (casted instanceof CompositeNodeWithSemanticElement) {
 				if (casted.getSyntaxErrorMessage() == null) {
 					CompositeNode compressed = new CompositeNode();
 					compressed.basicSetGrammarElement(casted.basicGetGrammarElement());
@@ -198,9 +224,25 @@ public class NodeModelBuilder {
 	}
 
 	protected void replace(AbstractNode oldNode, AbstractNode newNode) {
+		replaceWithoutChildren(oldNode, newNode);
+		if (oldNode instanceof CompositeNode) {
+			CompositeNode oldComposite = (CompositeNode) oldNode;
+			CompositeNode newComposite = (CompositeNode) newNode;
+			AbstractNode child = oldComposite.basicGetFirstChild();
+			if (child != null) {
+				newComposite.basicSetFirstChild(child);
+				while(child.basicGetParent() != newComposite) {
+					child.basicSetParent(newComposite);
+					child = child.basicGetNextSibling();
+				}
+			}
+		}
+	}
+
+	protected void replaceWithoutChildren(AbstractNode oldNode, AbstractNode newNode) {
 		newNode.basicSetParent(oldNode.basicGetParent());
 		if ((oldNode.basicGetParent()).basicGetFirstChild() == oldNode) {
-			(oldNode.basicGetParent()).basicSetFirstChild(newNode);
+			(newNode.basicGetParent()).basicSetFirstChild(newNode);
 		}
 		if (oldNode.basicGetNextSibling() == oldNode) {
 			newNode.basicSetNextSibling(newNode);
@@ -213,18 +255,6 @@ public class NodeModelBuilder {
 		} else {
 			newNode.basicSetPreviousSibling(oldNode.basicGetPreviousSibling());
 			newNode.basicGetPreviousSibling().basicSetNextSibling(newNode);
-		}
-		if (oldNode instanceof CompositeNode) {
-			CompositeNode oldComposite = (CompositeNode) oldNode;
-			CompositeNode newComposite = (CompositeNode) newNode;
-			AbstractNode child = oldComposite.basicGetFirstChild();
-			if (child != null) {
-				newComposite.basicSetFirstChild(child);
-				while(child.basicGetParent() != newComposite) {
-					child.basicSetParent(newComposite);
-					child = child.basicGetNextSibling();
-				}
-			}
 		}
 	}
 

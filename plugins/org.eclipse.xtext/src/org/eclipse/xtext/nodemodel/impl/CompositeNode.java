@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel.impl;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.BidiIterable;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -70,18 +71,18 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 			composite = composite.basicGetParent();
 		}
 		if (composite.basicGetParent() != null) {
-			if (composite.hasNextSibling()) {
+			if (composite.basicHasNextSibling()) {
 				CompositeNode composite2 = composite;
 				while(composite2.basicGetParent() != null) {
-					if (composite2.hasNextSibling())
+					if (composite2.basicHasNextSibling())
 						return composite2.basicGetNextSibling().getTotalOffset();
 					composite2 = composite.basicGetParent();
 				}
 			}
-			if (composite.hasPreviousSibling()) {
+			if (composite.basicHasPreviousSibling()) {
 				CompositeNode composite2 = composite;
 				while(composite2.basicGetParent() != null) {
-					if (composite2.hasPreviousSibling())
+					if (composite2.basicHasPreviousSibling())
 						return composite2.basicGetPreviousSibling().getTotalEndOffset();
 					composite2 = composite.basicGetParent();
 				}
@@ -95,7 +96,9 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 	}
 	
 	public INode getFirstChild() {
-		return firstChild;
+		if (hasChildren())
+			return firstChild.resolve();
+		return null;
 	}
 	
 	public AbstractNode basicGetFirstChild() {
@@ -117,5 +120,62 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 			return null;
 		return firstChild.basicGetPreviousSibling();
 	}
+	
+	@Override
+	protected ICompositeNode resolve() {
+		Object grammarElement = basicGetGrammarElement();
+		if (grammarElement instanceof EObject)
+			return this;
+		return new SyntheticCompositeNode(this, 0);
+	}
+	
+	@Override
+	public ICompositeNode getParent() {
+		Object grammarElementOrArray = basicGetGrammarElement();
+		if (grammarElementOrArray instanceof EObject)
+			return basicGetParent();
+		EObject[] grammarElements = (EObject[]) grammarElementOrArray;
+		return new SyntheticCompositeNode(this, grammarElements.length - 2);
+	}
+	
+	@Override
+	public EObject getGrammarElement() {
+		Object grammarElementOrArray = basicGetGrammarElement();
+		if (grammarElementOrArray instanceof EObject)
+			return (EObject) grammarElementOrArray;
+		if (grammarElementOrArray == null) {
+			return null;
+		}
+		EObject[] grammarElements = (EObject[]) grammarElementOrArray;
+		return grammarElements[grammarElements.length - 1];
+	}
+	
+	@Override
+	public boolean hasNextSibling() {
+		if (basicGetGrammarElement() instanceof EObject)
+			return super.hasNextSibling();
+		return false;
+	}
+	
+	@Override
+	public INode getNextSibling() {
+		if (basicGetGrammarElement() instanceof EObject)
+			return super.getNextSibling();
+		return null;
+	}
+	
+	@Override
+	public boolean hasPreviousSibling() {
+		if (basicGetGrammarElement() instanceof EObject)
+			return super.hasPreviousSibling();
+		return false;
+	}
+	
+	@Override
+	public INode getPreviousSibling() {
+		if (basicGetGrammarElement() instanceof EObject)
+			return super.getPreviousSibling();
+		return null;
+	}	
 	
 }

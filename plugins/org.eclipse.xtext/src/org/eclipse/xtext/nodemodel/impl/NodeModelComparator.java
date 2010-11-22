@@ -71,8 +71,10 @@ public class NodeModelComparator {
 			if (!newNode.getText().equals(((LeafNode) oldNode).getText()))
 				throw new UnequalNodeException("node's text is not the same");
 		} else {
-			if (((org.eclipse.xtext.nodemodel.impl.CompositeNode) newNode).basicGetSemanticElement() != oldNode.getElement())
-				throw new UnequalNodeException("node's semantic element is not the same");
+			if (oldNode.getElement() != null) {
+				if (newNode.getSemanticElement() != oldNode.getElement())
+					throw new UnequalNodeException("node's semantic element is not the same");
+			}
 			if (newNode.getGrammarElement() != oldNode.getGrammarElement())
 				throw new UnequalNodeException("node's grammar element is not the same");
 			if (newNode.getSyntaxErrorMessage() != null) {
