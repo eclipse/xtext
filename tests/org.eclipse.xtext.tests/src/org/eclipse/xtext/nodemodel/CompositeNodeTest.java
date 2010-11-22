@@ -8,7 +8,6 @@
 package org.eclipse.xtext.nodemodel;
 
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
-import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
