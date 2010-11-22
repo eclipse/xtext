@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.ILinker;
+import org.eclipse.xtext.nodemodel.impl.NodeModelComparator;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
@@ -207,6 +208,7 @@ public class XtextResource extends ResourceImpl {
 		if (parseResult.getRootASTElement() != null && !getContents().contains(parseResult.getRootASTElement()))
 			getContents().add(parseResult.getRootASTElement());
 		addAdapterIfNeccessary(parseResult.getRootNode());
+		new NodeModelComparator().assertEquals((org.eclipse.xtext.nodemodel.impl.CompositeNode) parseResult.getRootNode2().getFirstChild(), parseResult.getRootNode());
 		reattachModificationTracker(parseResult.getRootASTElement());
 		clearErrorsAndWarnings();
 		addSyntaxErrors();

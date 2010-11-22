@@ -132,10 +132,20 @@ public class NodeModelBuilder {
 	public void compress(ICompositeNode compositeNode) {
 		CompositeNode casted = (CompositeNode) compositeNode;
 		if (casted.basicGetSemanticElement() == null) {
-			CompositeNode compressed = new CompositeNode();
-			compressed.setGrammarElement(compositeNode.getGrammarElement());
-			compressed.setLookAhead(compositeNode.getLookAhead());
-			replace(casted, compressed);
+			if (compositeNode instanceof CompositeNodeWithSemanticElement) {
+				if (casted.getSyntaxErrorMessage() == null) {
+					CompositeNode compressed = new CompositeNode();
+					compressed.setGrammarElement(compositeNode.getGrammarElement());
+					compressed.setLookAhead(compositeNode.getLookAhead());
+					replace(casted, compressed);
+				} else {
+					CompositeNodeWithSyntaxError compressed = new CompositeNodeWithSyntaxError();
+					compressed.setGrammarElement(compositeNode.getGrammarElement());
+					compressed.setLookAhead(compositeNode.getLookAhead());
+					compressed.setSyntaxErrorMessage(casted.getSyntaxErrorMessage());
+					replace(casted, compressed);
+				}
+			}
 		}
 	}
 	

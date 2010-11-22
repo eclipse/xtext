@@ -7,13 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel;
 
-import org.eclipse.emf.common.util.TreeIterator;
-
 /**
+ * An iterable over a tree structure that is capable of being iterated 
+ * in both directions - forwards and backwards. The {@link BidiTreeIterator tree iterator}
+ * returned by {@link #treeIterator()} is capable to prune some parts of the tree
+ * if clients are not interested in descending into them.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface TreeIterable<E> extends Iterable<E> {
+public interface BidiTreeIterable<E> extends BidiIterable<E> {
 
-	TreeIterator<E> treeIterator();
+	/**
+	 * Returns a tree iterator that can be used forwards and backwards.
+	 * @return an iterator. Never returns <code>null</code>.
+	 */
+	BidiTreeIterator<E> treeIterator();
 
 }

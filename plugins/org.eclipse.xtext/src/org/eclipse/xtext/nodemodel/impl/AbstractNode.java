@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel.impl;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.BidiIterator;
+import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 
@@ -34,8 +34,8 @@ public abstract class AbstractNode implements INode {
 		return new NodeListIterator(this);
 	}
 	
-	public TreeIterator<INode> treeIterator() {
-		throw new UnsupportedOperationException();
+	public BidiTreeIterator<INode> treeIterator() {
+		return new NodeTreeIterator(this);
 	}
 
 	public String getText() {

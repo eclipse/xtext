@@ -9,7 +9,6 @@ package org.eclipse.xtext.nodemodel.impl;
 
 import java.util.Iterator;
 
-import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -32,6 +31,11 @@ public class InvariantChecker {
 		}
 		
 	}
+	
+	/**
+	 * Whether we have already passed an exception.
+	 */
+	private boolean exceptionSeen;
 	
 	/**
 	 * Assert the invariant of completely build node model.
@@ -80,6 +84,7 @@ public class InvariantChecker {
 	}
 	
 	protected int doCheckChildNodeAndReturnTotalLength(AbstractNode child, ICompositeNode parent, int startsAt) {
+		exceptionSeen |= child.getSyntaxErrorMessage() != null;
 		if (child.getNext().getPrevious() != child)
 			throw new InconsistentNodeModelException("child.next.previous != child");
 		if (child.getPrevious().getNext() != child)
@@ -93,16 +98,8 @@ public class InvariantChecker {
 		}
 		if (child instanceof ILeafNode) {
 			if (child.getGrammarElement() == null) {
-				if (child.getSyntaxErrorMessage() == null) {
-					BidiIterator<INode> iterator = child.iterator();
-					boolean hadSyntaxError = false;
-					while(iterator.hasPrevious() && !hadSyntaxError) {
-						INode node = iterator.previous();
-						if (node.getSyntaxErrorMessage() != null)
-							hadSyntaxError = true;
-					}
-					if (!hadSyntaxError)
-						throw new InconsistentNodeModelException("leaf node without grammar element");
+				if (!exceptionSeen) {
+					throw new InconsistentNodeModelException("leaf node without grammar element");
 				}
 			}
 			return doCheckLeafNodeAndReturnLength((ILeafNode) child, startsAt);
