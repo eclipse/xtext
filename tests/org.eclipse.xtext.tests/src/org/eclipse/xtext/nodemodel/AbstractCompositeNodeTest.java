@@ -13,7 +13,6 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
-import org.eclipse.xtext.nodemodel.impl.LeafNode;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 
 /**
@@ -21,6 +20,35 @@ import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
  */
 public abstract class AbstractCompositeNodeTest extends TestCase {
 
+	protected static class RootNode extends org.eclipse.xtext.nodemodel.impl.RootNode {
+		@Override
+		protected void basicSetCompleteContent(String completeContent) {
+			super.basicSetCompleteContent(completeContent);
+		}
+	}
+	
+	protected static class LeafNode extends org.eclipse.xtext.nodemodel.impl.LeafNode {
+		@Override
+		protected void basicSetTotalLength(int length) {
+			super.basicSetTotalLength(length);
+		}
+		
+		@Override
+		protected void basicSetTotalOffset(int offset) {
+			super.basicSetTotalOffset(offset);
+		}
+		
+		@Override
+		protected AbstractNode basicGetNextSibling() {
+			return super.basicGetNextSibling();
+		}
+		
+		@Override
+		protected AbstractNode basicGetPreviousSibling() {
+			return super.basicGetPreviousSibling();
+		}
+	}
+	
 	private NodeModelBuilder mutator;
 
 	public abstract void testTextOffsetLength();
@@ -51,8 +79,8 @@ public abstract class AbstractCompositeNodeTest extends TestCase {
 		addChild(composite, first);
 		assertSame(first, getFirstChild(composite));
 		assertSame(composite, first.getParent());
-		assertSame(first, first.getNext());
-		assertSame(first, first.getPrevious());
+		assertSame(first, first.basicGetNextSibling());
+		assertSame(first, first.basicGetPreviousSibling());
 	}
 
 	public void testAddChild_01() {
@@ -62,10 +90,10 @@ public abstract class AbstractCompositeNodeTest extends TestCase {
 		addChild(composite, first);
 		addChild(composite, second);
 		assertSame(first, getFirstChild(composite));
-		assertSame(second, first.getNext());
-		assertSame(second, first.getPrevious());
-		assertSame(first, second.getPrevious());
-		assertSame(first, second.getNext());
+		assertSame(second, first.getNextSibling());
+		assertSame(second, first.basicGetPreviousSibling());
+		assertSame(first, second.getPreviousSibling());
+		assertSame(first, second.basicGetNextSibling());
 		assertSame(composite, first.getParent());
 		assertSame(composite, second.getParent());
 	}
@@ -79,12 +107,12 @@ public abstract class AbstractCompositeNodeTest extends TestCase {
 		addChild(composite, second);
 		addChild(composite, third);
 		assertSame(first, getFirstChild(composite));
-		assertSame(second, first.getNext());
-		assertSame(third, second.getNext());
-		assertSame(first, third.getNext());
-		assertSame(third, first.getPrevious());
-		assertSame(second, third.getPrevious());
-		assertSame(first, second.getPrevious());
+		assertSame(second, first.getNextSibling());
+		assertSame(third, second.getNextSibling());
+		assertSame(first, third.basicGetNextSibling());
+		assertSame(third, first.basicGetPreviousSibling());
+		assertSame(second, third.getPreviousSibling());
+		assertSame(first, second.getPreviousSibling());
 		assertSame(composite, first.getParent());
 		assertSame(composite, second.getParent());
 		assertSame(composite, third.getParent());
