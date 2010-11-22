@@ -8,10 +8,15 @@
 package org.eclipse.xtext.nodemodel;
 
 /**
+ * An iterable that is capable of being iterated in both directions - forwards and backwards.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface BidiIterable<T> extends Iterable<T> {
 
+	/**
+	 * Returns an iterator that can be used forwards and backwards.
+	 * @return an iterator. Never returns <code>null</code>.
+	 */
 	BidiIterator<T> iterator();
 	
 }

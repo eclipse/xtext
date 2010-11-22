@@ -43,7 +43,9 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
@@ -281,9 +283,9 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		if (error != null)
 			errorMessage = error.getMessage();
 		if (token.getType() == Token.INVALID_TOKEN_TYPE) {
-			if (errorMessage != null) {
+			if (error == null) {
 				String lexerErrorMessage = ((XtextTokenStream) input).getLexerErrorMessage(token);
-				errorMessage = errorMessage + "; " + lexerErrorMessage;
+				errorMessage = lexerErrorMessage;
 			}
 		}
 		if (grammarElement == null) {
@@ -384,10 +386,12 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			error.setMessage(currentError.getMessage());
 			error.setIssueCode(currentError.getIssueCode());
 			node.setSyntaxError(error);
+			if (lwNode == null && node == currentNode)
+				lwNode = lwCurrentNode;
 			if (lwNode != null) {
 				INode newNode = lwNodeBuilder.setSyntaxError(lwNode, currentError);
-				if (lwNode == currentNode)
-					currentNode = (CompositeNode) newNode;
+				if (lwNode == lwCurrentNode)
+					lwCurrentNode = (ICompositeNode) newNode;
 			}
 			currentError = null;
 		}
@@ -422,11 +426,21 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			if (leafNodes.isEmpty()) {
 				appendError(currentNode, lwCurrentNode);
 			} else {
-				appendError(leafNodes.get(leafNodes.size() - 1), lwCurrentNode.getLastChild());
+				appendError(leafNodes.get(leafNodes.size() - 1), getLastLeafNode());
 			}
 		}
 	}
-
+	
+	protected INode getLastLeafNode() {
+		BidiTreeIterator<INode> iter = lwCurrentNode.treeIterator();
+		while(iter.hasPrevious()) {
+			INode previous = iter.previous();
+			if (previous instanceof ILeafNode)
+				return previous;
+		}
+		return lwCurrentNode;
+	}
+	
 	protected List<LeafNode> appendSkippedTokens() {
 		List<LeafNode> skipped = new ArrayList<LeafNode>();
 		Token currentToken = input.LT(-1);
