@@ -15,6 +15,16 @@ import org.eclipse.emf.ecore.EObject;
 public interface INode extends BidiTreeIterable<INode> {
 
 	ICompositeNode getParent();
+	
+	boolean hasPreviousSibling();
+	
+	boolean hasNextSibling();
+	
+	INode getPreviousSibling();
+	
+	INode getNextSibling();
+	
+	ICompositeNode getRootNode();
 
 	int getTotalOffset();
 
@@ -31,12 +41,7 @@ public interface INode extends BidiTreeIterable<INode> {
 	SyntaxErrorMessage getSyntaxErrorMessage();
 	
 	/**
-	 * Returns an iterator that will provide this node itself as its next element
-	 * or its predecessor as its previous element. If this node is the first child of its parent,
-	 * the previous element will be the last child. If this node is the last child the iterator
-	 * will returns the first child as its first element. If this node is neither the first
-	 * nor the last child, the iterator will be finished when it hits the first or last child depending 
-	 * on the direction.
+	 * Returns an iterator that will provide this node itself as its only element.
 	 * 
 	 * {@inheritDoc}
 	 */

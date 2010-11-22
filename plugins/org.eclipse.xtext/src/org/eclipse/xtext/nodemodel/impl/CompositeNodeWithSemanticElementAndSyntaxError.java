@@ -21,7 +21,7 @@ public class CompositeNodeWithSemanticElementAndSyntaxError extends CompositeNod
 		return syntaxErrorMessage;
 	}
 
-	public void setSyntaxErrorMessage(SyntaxErrorMessage syntaxErrorMessage) {
+	protected void basicSetSyntaxErrorMessage(SyntaxErrorMessage syntaxErrorMessage) {
 		this.syntaxErrorMessage = syntaxErrorMessage;
 	}
 }

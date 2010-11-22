@@ -10,8 +10,11 @@ package org.eclipse.xtext.nodemodel.impl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
+import org.eclipse.xtext.nodemodel.util.NodeTreeIterator;
+import org.eclipse.xtext.nodemodel.util.SingletonBidiIterator;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -24,18 +27,34 @@ public abstract class AbstractNode implements INode {
 	
 	private AbstractNode next;
 	
-	private EObject grammarElement;
+	private Object grammarElementOrArray;
 	
-	public CompositeNode getParent() {
+	public ICompositeNode getParent() {
 		return parent;
 	}
-
+	
+	protected CompositeNode basicGetParent() {
+		return parent;
+	}
+	
+	protected void basicSetParent(CompositeNode parent) {
+		this.parent = parent;
+	}
+	
 	public BidiIterator<INode> iterator() {
-		return new NodeListIterator(this);
+		return SingletonBidiIterator.<INode>create(this);
+	}
+	
+	protected BidiIterator<AbstractNode> basicIterator() {
+		return SingletonBidiIterator.create(this);
 	}
 	
 	public BidiTreeIterator<INode> treeIterator() {
 		return new NodeTreeIterator(this);
+	}
+	
+	protected BidiTreeIterator<AbstractNode> basicTreeIterator() {
+		return new BasicNodeTreeIterator(this);
 	}
 
 	public String getText() {
@@ -52,12 +71,12 @@ public abstract class AbstractNode implements INode {
 		return getTotalOffset() + getTotalLength();
 	}
 
-	protected INode getRootNode() {
+	public ICompositeNode getRootNode() {
 		if (parent == null)
 			return null;
-		INode candidate = parent;
-		while(candidate.getParent() != null)
-			candidate = candidate.getParent();
+		CompositeNode candidate = parent;
+		while(candidate.basicGetParent() != null)
+			candidate = candidate.basicGetParent();
 		return candidate;
 	}
 	
@@ -67,36 +86,71 @@ public abstract class AbstractNode implements INode {
 		return parent.getSemanticElement();
 	}
 	
-	public EObject getGrammarElement() {
-		return grammarElement;
+	protected EObject basicGetSemanticElement() {
+		return null;
 	}
 	
-	public void setGrammarElement(EObject grammarElement) {
-		this.grammarElement = grammarElement;
+	public EObject getGrammarElement() {
+		if (grammarElementOrArray instanceof EObject)
+			return (EObject) grammarElementOrArray;
+		if (grammarElementOrArray == null) {
+			return null;
+		}
+		return ((EObject[])grammarElementOrArray)[0];
+	}
+	
+	protected Object basicGetGrammarElement() {
+		return grammarElementOrArray;
+	}
+	
+	protected void basicSetGrammarElement(Object grammarElementOrArray) {
+		this.grammarElementOrArray = grammarElementOrArray;
 	}
 
 	public SyntaxErrorMessage getSyntaxErrorMessage() {
 		return null;
 	}
 	
-	public AbstractNode getPrevious() {
+	public INode getPreviousSibling() {
+		if (!hasPreviousSibling())
+			return null;
 		return prev;
 	}
 	
-	public AbstractNode getNext() {
-		return next;
+	protected AbstractNode basicGetPreviousSibling() {
+		return prev;
 	}
 	
-	public void basicSetPrevious(AbstractNode prev) {
+	protected void basicSetPreviousSibling(AbstractNode prev) {
 		this.prev = prev;
 	}
 	
-	public void basicSetNext(AbstractNode next) {
+	public INode getNextSibling() {
+		if (!hasNextSibling())
+			return null;
+		return next;
+	}
+	
+	protected AbstractNode basicGetNextSibling() {
+		return next;
+	}
+	
+	protected void basicSetNextSibling(AbstractNode next) {
 		this.next = next;
 	}
 	
-	public void basicSetParent(CompositeNode parent) {
-		this.parent = parent;
+	public boolean hasPreviousSibling() {
+		if (parent == null)
+			return false;
+		return parent.basicGetFirstChild() != this;
+	}
+	
+	public boolean hasNextSibling() {
+		return next.hasPreviousSibling();
+	}
+	
+	public boolean hasSiblings() {
+		return prev != this;
 	}
 	
 }

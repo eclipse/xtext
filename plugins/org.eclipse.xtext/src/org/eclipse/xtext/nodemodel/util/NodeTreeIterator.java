@@ -5,11 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.nodemodel.impl;
+package org.eclipse.xtext.nodemodel.util;
 
 import java.util.NoSuchElementException;
 
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 
 import com.google.common.collect.UnmodifiableIterator;
@@ -19,15 +20,15 @@ import com.google.common.collect.UnmodifiableIterator;
  */
 public class NodeTreeIterator extends UnmodifiableIterator<INode> implements BidiTreeIterator<INode>{
 
-	private final AbstractNode root;
-	private AbstractNode lastReturned;
-	private AbstractNode next;
+	private final INode root;
+	private INode lastReturned;
+	private INode next;
 	private boolean nextComputed = false;
 	private boolean pruned = false;
-	private AbstractNode previous;
+	private INode previous;
 	private boolean previousComputed = false;
 	
-	protected NodeTreeIterator(AbstractNode root) {
+	public NodeTreeIterator(INode root) {
 		this.root = root;
 	}
 
@@ -36,15 +37,15 @@ public class NodeTreeIterator extends UnmodifiableIterator<INode> implements Bid
 			return next != null;
 		if (lastReturned == null) {
 			next = root;
-		} else if (!pruned && lastReturned instanceof CompositeNode && ((CompositeNode) lastReturned).hasChildren()) {
-			next = ((CompositeNode) lastReturned).getFirstChild();
-		} else if (lastReturned.getNext() != lastReturned.getParent().getFirstChild()) {
-			next = lastReturned.getNext();
+		} else if (!pruned && lastReturned instanceof ICompositeNode && ((ICompositeNode) lastReturned).hasChildren()) {
+			next = ((ICompositeNode) lastReturned).getFirstChild();
+		} else if (lastReturned.hasNextSibling()) {
+			next = lastReturned.getNextSibling();
 		} else {
-			AbstractNode parent = lastReturned.getParent();
-			while (next == null && parent != root) {
-				if (parent.getNext() != parent.getParent().getFirstChild()) {
-					next = parent.getNext();
+			ICompositeNode parent = lastReturned.getParent();
+			while (next == null && parent != root && parent.getParent() != null) {
+				if (parent.hasNextSibling()) {
+					next = parent.getNextSibling();
 				} else {
 					parent = parent.getParent();
 				}
@@ -75,15 +76,15 @@ public class NodeTreeIterator extends UnmodifiableIterator<INode> implements Bid
 			return previous != null;
 		if (lastReturned == null) {
 			previous = root;
-		} else if (!pruned && lastReturned instanceof CompositeNode && ((CompositeNode) lastReturned).hasChildren()) {
-			previous = ((CompositeNode) lastReturned).getLastChild();
-		} else if (lastReturned.getPrevious() != lastReturned.getParent().getLastChild()) {
-			previous = lastReturned.getPrevious();
+		} else if (!pruned && lastReturned instanceof ICompositeNode && ((ICompositeNode) lastReturned).hasChildren()) {
+			previous = ((ICompositeNode) lastReturned).getLastChild();
+		} else if (lastReturned.hasPreviousSibling()) {
+			previous = lastReturned.getPreviousSibling();
 		} else {
-			AbstractNode parent = lastReturned.getParent();
-			while (previous == null && parent != root) {
-				if (parent.getPrevious() != parent.getParent().getLastChild()) {
-					previous = parent.getPrevious();
+			ICompositeNode parent = lastReturned.getParent();
+			while (previous == null && parent != root && parent.getParent() != null) {
+				if (parent.hasPreviousSibling()) {
+					previous = parent.getPreviousSibling();
 				} else {
 					parent = parent.getParent();
 				}

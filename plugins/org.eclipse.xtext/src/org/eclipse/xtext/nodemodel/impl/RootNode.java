@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel.impl;
 
-import org.eclipse.xtext.nodemodel.BidiIterator;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 
 /**
@@ -26,10 +26,10 @@ public class RootNode extends CompositeNodeWithSemanticElement {
 	}
 
 	@Override
-	public BidiIterator<INode> iterator() {
-		return SingletonBidiIterator.<INode>create(this);
+	public ICompositeNode getRootNode() {
+		return this;
 	}
-
+	
 	@Override
 	public int getTotalOffset() {
 		return 0;
@@ -49,7 +49,7 @@ public class RootNode extends CompositeNodeWithSemanticElement {
 		return 0;
 	}
 	
-	public void setCompleteContent(String completeContent) {
+	protected void basicSetCompleteContent(String completeContent) {
 		this.completeContent = completeContent;
 	}
 
@@ -58,12 +58,47 @@ public class RootNode extends CompositeNodeWithSemanticElement {
 	}
 	
 	@Override
-	public void basicSetNext(AbstractNode next) {
+	public INode getNextSibling() {
+		return null;
+	}
+	
+	@Override
+	public INode getPreviousSibling() {
+		return null;
+	}
+	
+	@Override
+	public AbstractNode basicGetNextSibling() {
+		return this;
+	}
+	
+	@Override
+	public AbstractNode basicGetPreviousSibling() {
+		return this;
+	}
+	
+	@Override
+	public boolean hasPreviousSibling() {
+		return false;
+	}
+	
+	@Override
+	public boolean hasNextSibling() {
+		return false;
+	}
+	
+	@Override
+	public boolean hasSiblings() {
+		return false;
+	}
+	
+	@Override
+	public void basicSetNextSibling(AbstractNode next) {
 		throw new UnsupportedOperationException();
 	}
 	
 	@Override
-	public void basicSetPrevious(AbstractNode prev) {
+	public void basicSetPreviousSibling(AbstractNode prev) {
 		throw new UnsupportedOperationException();
 	}
 	

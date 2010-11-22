@@ -51,11 +51,7 @@ public class InvariantChecker {
 	 */
 	public void checkInvariant(INode node) throws InconsistentNodeModelException {
 		try {
-			if (node.getParent() == null) {
-				doCheckInvariant((RootNode)node);
-			} else {
-				doCheckInvariant((RootNode) ((AbstractNode) node).getRootNode());
-			}
+			doCheckInvariant(node.getRootNode());
 		} catch(ClassCastException e) {
 			throw new InconsistentNodeModelException("node has no root node", e);
 		} catch(NullPointerException e) {
@@ -63,7 +59,7 @@ public class InvariantChecker {
 		}
 	}
 
-	protected void doCheckInvariant(RootNode rootNode) {
+	protected void doCheckInvariant(ICompositeNode rootNode) {
 		int length = doCheckCompositeNodeAndReturnTotalLength(rootNode, 0);
 		if (length != rootNode.getTotalLength())
 			throw new InconsistentNodeModelException("node's computed length differs from actual total length");
@@ -75,7 +71,7 @@ public class InvariantChecker {
 		int length = 0;
 		Iterator<INode> iter = node.getChildren().iterator();
 		while(iter.hasNext()) {
-			AbstractNode child = (AbstractNode) iter.next();
+			INode child = iter.next();
 			length += doCheckChildNodeAndReturnTotalLength(child, node, startsAt + length);
 		}
 		if (length != node.getTotalLength())
@@ -83,17 +79,17 @@ public class InvariantChecker {
 		return length;
 	}
 	
-	protected int doCheckChildNodeAndReturnTotalLength(AbstractNode child, ICompositeNode parent, int startsAt) {
+	protected int doCheckChildNodeAndReturnTotalLength(INode child, ICompositeNode parent, int startsAt) {
 		exceptionSeen |= child.getSyntaxErrorMessage() != null;
-		if (child.getNext().getPrevious() != child)
+		if (((AbstractNode) child).basicGetNextSibling().basicGetPreviousSibling() != child)
 			throw new InconsistentNodeModelException("child.next.previous != child");
-		if (child.getPrevious().getNext() != child)
+		if (((AbstractNode) child).basicGetPreviousSibling().basicGetNextSibling() != child)
 			throw new InconsistentNodeModelException("child.previous.next != child");
-		if (child.getPrevious().getParent() != child.getParent())
+		if (!((AbstractNode) child).basicGetPreviousSibling().getParent().equals(child.getParent()))
 			throw new InconsistentNodeModelException("child.previous.parent != child.parent");
-		if (child.getNext().getParent() != child.getParent())
+		if (!((AbstractNode) child).basicGetNextSibling().getParent().equals(child.getParent()))
 			throw new InconsistentNodeModelException("child.next.parent != child.parent");
-		if (child.getParent() != parent) {
+		if (!child.getParent().equals(parent)) {
 			throw new InconsistentNodeModelException("node does not point to its parent");
 		}
 		if (child instanceof ILeafNode) {
