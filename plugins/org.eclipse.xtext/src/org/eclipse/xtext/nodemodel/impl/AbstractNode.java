@@ -91,12 +91,7 @@ public abstract class AbstractNode implements INode {
 	}
 	
 	public EObject getGrammarElement() {
-		if (grammarElementOrArray instanceof EObject)
-			return (EObject) grammarElementOrArray;
-		if (grammarElementOrArray == null) {
-			return null;
-		}
-		return ((EObject[])grammarElementOrArray)[0];
+		return (EObject) grammarElementOrArray;
 	}
 	
 	protected Object basicGetGrammarElement() {
@@ -114,7 +109,7 @@ public abstract class AbstractNode implements INode {
 	public INode getPreviousSibling() {
 		if (!hasPreviousSibling())
 			return null;
-		return prev;
+		return prev.resolve();
 	}
 	
 	protected AbstractNode basicGetPreviousSibling() {
@@ -128,7 +123,7 @@ public abstract class AbstractNode implements INode {
 	public INode getNextSibling() {
 		if (!hasNextSibling())
 			return null;
-		return next;
+		return next.resolve();
 	}
 	
 	protected AbstractNode basicGetNextSibling() {
@@ -140,17 +135,30 @@ public abstract class AbstractNode implements INode {
 	}
 	
 	public boolean hasPreviousSibling() {
+		return basicHasPreviousSibling();
+	}
+	
+	public boolean basicHasPreviousSibling() {
 		if (parent == null)
 			return false;
 		return parent.basicGetFirstChild() != this;
 	}
 	
 	public boolean hasNextSibling() {
-		return next.hasPreviousSibling();
+		return basicHasNextSibling();
+	}
+	
+	public boolean basicHasNextSibling() {
+		if (parent == null)
+			return false;
+		return parent.basicGetLastChild() != this;
 	}
 	
 	public boolean hasSiblings() {
 		return prev != this;
 	}
-	
+
+	protected INode resolve() {
+		return this;
+	}
 }

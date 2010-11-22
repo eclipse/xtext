@@ -26,7 +26,7 @@ public class BasicNodeIterator extends UnmodifiableIterator<AbstractNode> implem
 	}
 
 	public boolean hasNext() {
-		return lastReturned == null || lastReturned.hasNextSibling();
+		return lastReturned == null || lastReturned.basicHasNextSibling();
 	}
 
 	public AbstractNode next() {
@@ -41,7 +41,7 @@ public class BasicNodeIterator extends UnmodifiableIterator<AbstractNode> implem
 	}
 
 	public boolean hasPrevious() {
-		return lastReturned == null || lastReturned.hasPreviousSibling();
+		return lastReturned == null || lastReturned.basicHasPreviousSibling();
 	}
 
 	public AbstractNode previous() {

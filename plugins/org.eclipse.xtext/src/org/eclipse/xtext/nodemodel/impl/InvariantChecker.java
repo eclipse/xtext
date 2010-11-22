@@ -69,7 +69,7 @@ public class InvariantChecker {
 		if (node.getTotalOffset() != startsAt)
 			throw new InconsistentNodeModelException("node with unexpected offset");
 		int length = 0;
-		Iterator<INode> iter = node.getChildren().iterator();
+		Iterator<AbstractNode> iter = ((CompositeNode) node).basicGetChildren().iterator();
 		while(iter.hasNext()) {
 			INode child = iter.next();
 			length += doCheckChildNodeAndReturnTotalLength(child, node, startsAt + length);
@@ -85,11 +85,11 @@ public class InvariantChecker {
 			throw new InconsistentNodeModelException("child.next.previous != child");
 		if (((AbstractNode) child).basicGetPreviousSibling().basicGetNextSibling() != child)
 			throw new InconsistentNodeModelException("child.previous.next != child");
-		if (!((AbstractNode) child).basicGetPreviousSibling().getParent().equals(child.getParent()))
+		if (((AbstractNode) child).basicGetPreviousSibling().basicGetParent() != ((AbstractNode) child).basicGetParent())
 			throw new InconsistentNodeModelException("child.previous.parent != child.parent");
-		if (!((AbstractNode) child).basicGetNextSibling().getParent().equals(child.getParent()))
+		if (((AbstractNode) child).basicGetNextSibling().basicGetParent() != ((AbstractNode) child).basicGetParent())
 			throw new InconsistentNodeModelException("child.next.parent != child.parent");
-		if (!child.getParent().equals(parent)) {
+		if (((AbstractNode) child).basicGetParent() != parent) {
 			throw new InconsistentNodeModelException("node does not point to its parent");
 		}
 		if (child instanceof ILeafNode) {
