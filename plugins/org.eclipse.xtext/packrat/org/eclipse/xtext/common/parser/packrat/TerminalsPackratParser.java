@@ -5,6 +5,8 @@ package org.eclipse.xtext.common.parser.packrat;
 
 import java.io.Reader;
 
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.packrat.AbstractPackratParser;
@@ -30,7 +32,11 @@ public class TerminalsPackratParser extends AbstractPackratParser {
 		return (TerminalsGrammarAccess)super.getGrammarAccess();
 	}
 
-	public IParseResult parse(String ruleName, Reader reader) {
+	public IParseResult parse(ParserRule rule, Reader reader) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public IParseResult parse(RuleCall ruleCall, Reader reader) {
 		throw new UnsupportedOperationException();
 	}
 

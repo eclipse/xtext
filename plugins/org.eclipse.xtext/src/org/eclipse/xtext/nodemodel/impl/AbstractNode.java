@@ -15,6 +15,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.nodemodel.util.NodeTreeIterator;
 import org.eclipse.xtext.nodemodel.util.SingletonBidiIterator;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -45,7 +46,7 @@ public abstract class AbstractNode implements INode {
 		return SingletonBidiIterator.<INode>create(this);
 	}
 	
-	protected BidiIterator<AbstractNode> basicIterator() {
+	public BidiIterator<AbstractNode> basicIterator() {
 		return SingletonBidiIterator.create(this);
 	}
 	
@@ -53,7 +54,7 @@ public abstract class AbstractNode implements INode {
 		return new NodeTreeIterator(this);
 	}
 	
-	protected BidiTreeIterator<AbstractNode> basicTreeIterator() {
+	public BidiTreeIterator<AbstractNode> basicTreeIterator() {
 		return new BasicNodeTreeIterator(this);
 	}
 
@@ -65,6 +66,17 @@ public abstract class AbstractNode implements INode {
 			return rootNode.getText().substring(offset, offset + length);
 		}
 		return null;
+	}
+	
+	public int getTotalStartLine() {
+		INode rootNode = getRootNode();
+		if (rootNode != null) {
+			int offset = getTotalOffset();
+			String leadingText = rootNode.getText().substring(0, offset);
+			int result = Strings.countLines(leadingText);
+			return result + 1;
+		}
+		return 1;
 	}
 	
 	public int getTotalEndOffset() {
@@ -88,6 +100,10 @@ public abstract class AbstractNode implements INode {
 	
 	protected EObject basicGetSemanticElement() {
 		return null;
+	}
+	
+	public boolean hasDirectSemanticElement() {
+		return basicGetSemanticElement() != null;
 	}
 	
 	public EObject getGrammarElement() {
@@ -155,6 +171,10 @@ public abstract class AbstractNode implements INode {
 	}
 	
 	public boolean hasSiblings() {
+		return basicHasSiblings();
+	}
+	
+	public boolean basicHasSiblings() {
 		return prev != this;
 	}
 

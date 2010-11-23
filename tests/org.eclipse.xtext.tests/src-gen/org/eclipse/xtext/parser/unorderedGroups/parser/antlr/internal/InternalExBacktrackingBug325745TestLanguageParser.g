@@ -13,7 +13,6 @@ options {
 @header {
 package org.eclipse.xtext.parser.unorderedGroups.parser.antlr.internal; 
 
-import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
@@ -24,7 +23,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
-import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parser.unorderedGroups.services.ExBacktrackingBug325745TestLanguageGrammarAccess;
 
 }
@@ -37,31 +35,30 @@ import org.eclipse.xtext.parser.unorderedGroups.services.ExBacktrackingBug325745
 */
  
 
- 	private ExBacktrackingBug325745TestLanguageGrammarAccess grammarAccess;
- 	
-    public InternalExBacktrackingBug325745TestLanguageParser(TokenStream input, IAstFactory factory, ExBacktrackingBug325745TestLanguageGrammarAccess grammarAccess) {
-        this(input);
-        this.factory = factory;
-        registerRules(grammarAccess.getGrammar());
-        this.grammarAccess = grammarAccess;
-    }
-    
-    @Override
-    protected String getFirstRuleName() {
-    	return "DelegateModel";	
-   	} 
-   	   	
-   	@Override
-   	protected ExBacktrackingBug325745TestLanguageGrammarAccess getGrammarAccess() {
-   		return grammarAccess;
-   	}
+	private ExBacktrackingBug325745TestLanguageGrammarAccess grammarAccess;
+	 	
+	public InternalExBacktrackingBug325745TestLanguageParser(TokenStream input, ExBacktrackingBug325745TestLanguageGrammarAccess grammarAccess) {
+		this(input);
+		this.grammarAccess = grammarAccess;
+		registerRules(grammarAccess.getGrammar());
+	}
+	
+	@Override
+	protected String getFirstRuleName() {
+		return "DelegateModel";	
+	} 
+	   	   	
+	@Override
+	protected ExBacktrackingBug325745TestLanguageGrammarAccess getGrammarAccess() {
+		return grammarAccess;
+	}
 }
 
 @rulecatch { 
-    catch (RecognitionException re) { 
-        recover(input,re); 
-        appendSkippedTokens();
-    } 
+	catch (RecognitionException re) { 
+	    recover(input,re); 
+	    appendSkippedTokens();
+	}
 }
 
 

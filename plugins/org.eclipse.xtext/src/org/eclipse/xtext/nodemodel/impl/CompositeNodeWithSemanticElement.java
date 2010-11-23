@@ -28,7 +28,7 @@ public class CompositeNodeWithSemanticElement extends CompositeNode implements A
 	}
 	
 	@Override
-	protected EObject basicGetSemanticElement() {
+	public EObject basicGetSemanticElement() {
 		return semanticElement;
 	}
 	

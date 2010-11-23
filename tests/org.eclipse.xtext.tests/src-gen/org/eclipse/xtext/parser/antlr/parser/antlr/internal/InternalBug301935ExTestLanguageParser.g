@@ -12,7 +12,6 @@ options {
 @header {
 package org.eclipse.xtext.parser.antlr.parser.antlr.internal; 
 
-import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
@@ -22,7 +21,6 @@ import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
-import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parser.antlr.services.Bug301935ExTestLanguageGrammarAccess;
 
 }
@@ -30,31 +28,30 @@ import org.eclipse.xtext.parser.antlr.services.Bug301935ExTestLanguageGrammarAcc
 @members {
 
 
- 	private Bug301935ExTestLanguageGrammarAccess grammarAccess;
- 	
-    public InternalBug301935ExTestLanguageParser(TokenStream input, IAstFactory factory, Bug301935ExTestLanguageGrammarAccess grammarAccess) {
-        this(input);
-        this.factory = factory;
-        registerRules(grammarAccess.getGrammar());
-        this.grammarAccess = grammarAccess;
-    }
-    
-    @Override
-    protected String getFirstRuleName() {
-    	return "DelegateModel";	
-   	} 
-   	   	
-   	@Override
-   	protected Bug301935ExTestLanguageGrammarAccess getGrammarAccess() {
-   		return grammarAccess;
-   	}
+	private Bug301935ExTestLanguageGrammarAccess grammarAccess;
+	 	
+	public InternalBug301935ExTestLanguageParser(TokenStream input, Bug301935ExTestLanguageGrammarAccess grammarAccess) {
+		this(input);
+		this.grammarAccess = grammarAccess;
+		registerRules(grammarAccess.getGrammar());
+	}
+	
+	@Override
+	protected String getFirstRuleName() {
+		return "DelegateModel";	
+	} 
+	   	   	
+	@Override
+	protected Bug301935ExTestLanguageGrammarAccess getGrammarAccess() {
+		return grammarAccess;
+	}
 }
 
 @rulecatch { 
-    catch (RecognitionException re) { 
-        recover(input,re); 
-        appendSkippedTokens();
-    } 
+	catch (RecognitionException re) { 
+	    recover(input,re); 
+	    appendSkippedTokens();
+	}
 }
 
 

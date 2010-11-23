@@ -3,15 +3,9 @@
 */
 package org.eclipse.xtext.valueconverter.parser.antlr;
 
-import org.antlr.runtime.CharStream;
-import org.antlr.runtime.TokenSource;
-import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parser.ParseException;
-import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
-
 import com.google.inject.Inject;
 
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.valueconverter.services.QualifiedNameTestLanguageGrammarAccess;
 
 public class QualifiedNameTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
@@ -20,27 +14,13 @@ public class QualifiedNameTestLanguageParser extends org.eclipse.xtext.parser.an
 	private QualifiedNameTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	protected IParseResult parse(String ruleName, CharStream in) {
-		TokenSource tokenSource = createLexer(in);
-		XtextTokenStream tokenStream = createTokenStream(tokenSource);
+	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalQualifiedNameTestLanguageParser parser = createParser(tokenStream);
-		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
-		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
-		IUnorderedGroupHelper helper = getUnorderedGroupHelper().get();
-		parser.setUnorderedGroupHelper(helper);
-		helper.initializeWith(parser);
-		try {
-			if(ruleName != null)
-				return parser.parse(ruleName);
-			return parser.parse();
-		} catch (Exception re) {
-			throw new ParseException(re.getMessage(),re);
-		}
 	}
 	
+	@Override
 	protected org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalQualifiedNameTestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalQualifiedNameTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
+		return new org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalQualifiedNameTestLanguageParser(stream, getGrammarAccess());
 	}
 	
 	@Override 

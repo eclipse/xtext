@@ -1,6 +1,5 @@
 package org.eclipse.xtext.index.parser.antlr.internal; 
 
-import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
@@ -10,7 +9,6 @@ import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
-import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.index.services.IndexTestLanguageGrammarAccess;
 
 
@@ -61,11 +59,10 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
      	private IndexTestLanguageGrammarAccess grammarAccess;
      	
-        public InternalIndexTestLanguageParser(TokenStream input, IAstFactory factory, IndexTestLanguageGrammarAccess grammarAccess) {
+        public InternalIndexTestLanguageParser(TokenStream input, IndexTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.semanticModelBuilder = factory;
-            registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
+            registerRules(grammarAccess.getGrammar());
         }
         
         @Override
@@ -81,7 +78,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "entryRuleFile"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:70:1: entryRuleFile returns [EObject current=null] : iv_ruleFile= ruleFile EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:67:1: entryRuleFile returns [EObject current=null] : iv_ruleFile= ruleFile EOF ;
     public final EObject entryRuleFile() throws RecognitionException {
         EObject current = null;
 
@@ -89,8 +86,8 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:71:2: (iv_ruleFile= ruleFile EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:72:2: iv_ruleFile= ruleFile EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:68:2: (iv_ruleFile= ruleFile EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:69:2: iv_ruleFile= ruleFile EOF
             {
              newCompositeNode(grammarAccess.getFileRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleFile_in_entryRuleFile75);
@@ -117,7 +114,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleFile"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:79:1: ruleFile returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )* ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:76:1: ruleFile returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )* ;
     public final EObject ruleFile() throws RecognitionException {
         EObject current = null;
 
@@ -127,10 +124,10 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:82:28: ( ( (lv_elements_0_0= ruleElement ) )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:83:1: ( (lv_elements_0_0= ruleElement ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:79:28: ( ( (lv_elements_0_0= ruleElement ) )* )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:80:1: ( (lv_elements_0_0= ruleElement ) )*
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:83:1: ( (lv_elements_0_0= ruleElement ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:80:1: ( (lv_elements_0_0= ruleElement ) )*
             loop1:
             do {
                 int alt1=2;
@@ -143,10 +140,10 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:84:1: (lv_elements_0_0= ruleElement )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:81:1: (lv_elements_0_0= ruleElement )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:84:1: (lv_elements_0_0= ruleElement )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:85:3: lv_elements_0_0= ruleElement
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:81:1: (lv_elements_0_0= ruleElement )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:82:3: lv_elements_0_0= ruleElement
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getFileAccess().getElementsElementParserRuleCall_0()); 
@@ -197,7 +194,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "entryRuleImport"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:109:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:106:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
     public final EObject entryRuleImport() throws RecognitionException {
         EObject current = null;
 
@@ -205,8 +202,8 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:110:2: (iv_ruleImport= ruleImport EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:111:2: iv_ruleImport= ruleImport EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:107:2: (iv_ruleImport= ruleImport EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:108:2: iv_ruleImport= ruleImport EOF
             {
              newCompositeNode(grammarAccess.getImportRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleImport_in_entryRuleImport166);
@@ -233,7 +230,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleImport"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:118:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:115:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) ) ;
     public final EObject ruleImport() throws RecognitionException {
         EObject current = null;
 
@@ -244,21 +241,21 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:121:28: ( (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:122:1: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:118:28: ( (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:119:1: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:122:1: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:122:3: otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:119:1: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:119:3: otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) )
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleImport213); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:126:1: ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:127:1: (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:123:1: ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:124:1: (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:127:1: (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:128:3: lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:124:1: (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:125:3: lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard
             {
              
             	        newCompositeNode(grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0()); 
@@ -306,7 +303,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "entryRuleQualifiedNameWithWildCard"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:152:1: entryRuleQualifiedNameWithWildCard returns [String current=null] : iv_ruleQualifiedNameWithWildCard= ruleQualifiedNameWithWildCard EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:149:1: entryRuleQualifiedNameWithWildCard returns [String current=null] : iv_ruleQualifiedNameWithWildCard= ruleQualifiedNameWithWildCard EOF ;
     public final String entryRuleQualifiedNameWithWildCard() throws RecognitionException {
         String current = null;
 
@@ -314,8 +311,8 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:153:2: (iv_ruleQualifiedNameWithWildCard= ruleQualifiedNameWithWildCard EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:154:2: iv_ruleQualifiedNameWithWildCard= ruleQualifiedNameWithWildCard EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:150:2: (iv_ruleQualifiedNameWithWildCard= ruleQualifiedNameWithWildCard EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:151:2: iv_ruleQualifiedNameWithWildCard= ruleQualifiedNameWithWildCard EOF
             {
              newCompositeNode(grammarAccess.getQualifiedNameWithWildCardRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleQualifiedNameWithWildCard_in_entryRuleQualifiedNameWithWildCard271);
@@ -342,7 +339,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleQualifiedNameWithWildCard"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:161:1: ruleQualifiedNameWithWildCard returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QualifiedName_0= ruleQualifiedName (kw= '.*' )? ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:158:1: ruleQualifiedNameWithWildCard returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QualifiedName_0= ruleQualifiedName (kw= '.*' )? ) ;
     public final AntlrDatatypeRuleToken ruleQualifiedNameWithWildCard() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -353,11 +350,11 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:164:28: ( (this_QualifiedName_0= ruleQualifiedName (kw= '.*' )? ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:165:1: (this_QualifiedName_0= ruleQualifiedName (kw= '.*' )? )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:161:28: ( (this_QualifiedName_0= ruleQualifiedName (kw= '.*' )? ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:162:1: (this_QualifiedName_0= ruleQualifiedName (kw= '.*' )? )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:165:1: (this_QualifiedName_0= ruleQualifiedName (kw= '.*' )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:166:5: this_QualifiedName_0= ruleQualifiedName (kw= '.*' )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:162:1: (this_QualifiedName_0= ruleQualifiedName (kw= '.*' )? )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:163:5: this_QualifiedName_0= ruleQualifiedName (kw= '.*' )?
             {
              
                     newCompositeNode(grammarAccess.getQualifiedNameWithWildCardAccess().getQualifiedNameParserRuleCall_0()); 
@@ -373,7 +370,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
              
                     afterParserOrEnumRuleCall();
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:176:1: (kw= '.*' )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:173:1: (kw= '.*' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -382,7 +379,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:177:2: kw= '.*'
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:174:2: kw= '.*'
                     {
                     kw=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleQualifiedNameWithWildCard348); 
 
@@ -416,7 +413,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "entryRuleQualifiedName"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:190:1: entryRuleQualifiedName returns [String current=null] : iv_ruleQualifiedName= ruleQualifiedName EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:187:1: entryRuleQualifiedName returns [String current=null] : iv_ruleQualifiedName= ruleQualifiedName EOF ;
     public final String entryRuleQualifiedName() throws RecognitionException {
         String current = null;
 
@@ -424,8 +421,8 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:191:2: (iv_ruleQualifiedName= ruleQualifiedName EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:192:2: iv_ruleQualifiedName= ruleQualifiedName EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:188:2: (iv_ruleQualifiedName= ruleQualifiedName EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:189:2: iv_ruleQualifiedName= ruleQualifiedName EOF
             {
              newCompositeNode(grammarAccess.getQualifiedNameRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName391);
@@ -452,7 +449,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleQualifiedName"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:199:1: ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:196:1: ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
     public final AntlrDatatypeRuleToken ruleQualifiedName() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -463,11 +460,11 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:202:28: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:203:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:199:28: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:200:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:203:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:203:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:200:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:200:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
             this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleQualifiedName442); 
 
@@ -476,7 +473,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
              
                 newLeafNode(this_ID_0, grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_0()); 
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:210:1: (kw= '.' this_ID_2= RULE_ID )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:207:1: (kw= '.' this_ID_2= RULE_ID )*
             loop3:
             do {
                 int alt3=2;
@@ -489,7 +486,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:211:2: kw= '.' this_ID_2= RULE_ID
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:208:2: kw= '.' this_ID_2= RULE_ID
             	    {
             	    kw=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleQualifiedName461); 
 
@@ -533,7 +530,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "entryRuleNamespace"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:231:1: entryRuleNamespace returns [EObject current=null] : iv_ruleNamespace= ruleNamespace EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:228:1: entryRuleNamespace returns [EObject current=null] : iv_ruleNamespace= ruleNamespace EOF ;
     public final EObject entryRuleNamespace() throws RecognitionException {
         EObject current = null;
 
@@ -541,8 +538,8 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:232:2: (iv_ruleNamespace= ruleNamespace EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:233:2: iv_ruleNamespace= ruleNamespace EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:229:2: (iv_ruleNamespace= ruleNamespace EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:230:2: iv_ruleNamespace= ruleNamespace EOF
             {
              newCompositeNode(grammarAccess.getNamespaceRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleNamespace_in_entryRuleNamespace523);
@@ -569,7 +566,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleNamespace"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:240:1: ruleNamespace returns [EObject current=null] : ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:237:1: ruleNamespace returns [EObject current=null] : ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' ) ;
     public final EObject ruleNamespace() throws RecognitionException {
         EObject current = null;
 
@@ -583,17 +580,17 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:243:28: ( ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:244:1: ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:240:28: ( ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:241:1: ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:244:1: ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:244:2: ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:241:1: ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:241:2: ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}'
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:244:2: ( (lv_name_0_0= ruleQualifiedName ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:245:1: (lv_name_0_0= ruleQualifiedName )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:241:2: ( (lv_name_0_0= ruleQualifiedName ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:242:1: (lv_name_0_0= ruleQualifiedName )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:245:1: (lv_name_0_0= ruleQualifiedName )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:246:3: lv_name_0_0= ruleQualifiedName
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:242:1: (lv_name_0_0= ruleQualifiedName )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:243:3: lv_name_0_0= ruleQualifiedName
             {
              
             	        newCompositeNode(grammarAccess.getNamespaceAccess().getNameQualifiedNameParserRuleCall_0_0()); 
@@ -624,7 +621,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
                 	newLeafNode(otherlv_1, grammarAccess.getNamespaceAccess().getLeftCurlyBracketKeyword_1());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:266:1: ( (lv_elements_2_0= ruleElement ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:263:1: ( (lv_elements_2_0= ruleElement ) )*
             loop4:
             do {
                 int alt4=2;
@@ -637,10 +634,10 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:267:1: (lv_elements_2_0= ruleElement )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:264:1: (lv_elements_2_0= ruleElement )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:267:1: (lv_elements_2_0= ruleElement )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:268:3: lv_elements_2_0= ruleElement
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:264:1: (lv_elements_2_0= ruleElement )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:265:3: lv_elements_2_0= ruleElement
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getNamespaceAccess().getElementsElementParserRuleCall_2_0()); 
@@ -698,7 +695,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "entryRuleElement"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:296:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:293:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
     public final EObject entryRuleElement() throws RecognitionException {
         EObject current = null;
 
@@ -706,8 +703,8 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:297:2: (iv_ruleElement= ruleElement EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:298:2: iv_ruleElement= ruleElement EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:294:2: (iv_ruleElement= ruleElement EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:295:2: iv_ruleElement= ruleElement EOF
             {
              newCompositeNode(grammarAccess.getElementRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleElement_in_entryRuleElement661);
@@ -734,7 +731,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleElement"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:305:1: ruleElement returns [EObject current=null] : (this_Namespace_0= ruleNamespace | this_Type_1= ruleType | this_Import_2= ruleImport ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:302:1: ruleElement returns [EObject current=null] : (this_Namespace_0= ruleNamespace | this_Type_1= ruleType | this_Import_2= ruleImport ) ;
     public final EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
@@ -748,10 +745,10 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:308:28: ( (this_Namespace_0= ruleNamespace | this_Type_1= ruleType | this_Import_2= ruleImport ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:309:1: (this_Namespace_0= ruleNamespace | this_Type_1= ruleType | this_Import_2= ruleImport )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:305:28: ( (this_Namespace_0= ruleNamespace | this_Type_1= ruleType | this_Import_2= ruleImport ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:306:1: (this_Namespace_0= ruleNamespace | this_Type_1= ruleType | this_Import_2= ruleImport )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:309:1: (this_Namespace_0= ruleNamespace | this_Type_1= ruleType | this_Import_2= ruleImport )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:306:1: (this_Namespace_0= ruleNamespace | this_Type_1= ruleType | this_Import_2= ruleImport )
             int alt5=3;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -779,7 +776,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
             switch (alt5) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:310:5: this_Namespace_0= ruleNamespace
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:307:5: this_Namespace_0= ruleNamespace
                     {
                      
                             newCompositeNode(grammarAccess.getElementAccess().getNamespaceParserRuleCall_0()); 
@@ -797,7 +794,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:320:5: this_Type_1= ruleType
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:317:5: this_Type_1= ruleType
                     {
                      
                             newCompositeNode(grammarAccess.getElementAccess().getTypeParserRuleCall_1()); 
@@ -815,7 +812,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:330:5: this_Import_2= ruleImport
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:327:5: this_Import_2= ruleImport
                     {
                      
                             newCompositeNode(grammarAccess.getElementAccess().getImportParserRuleCall_2()); 
@@ -853,7 +850,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "entryRuleType"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:346:1: entryRuleType returns [EObject current=null] : iv_ruleType= ruleType EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:343:1: entryRuleType returns [EObject current=null] : iv_ruleType= ruleType EOF ;
     public final EObject entryRuleType() throws RecognitionException {
         EObject current = null;
 
@@ -861,8 +858,8 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:347:2: (iv_ruleType= ruleType EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:348:2: iv_ruleType= ruleType EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:344:2: (iv_ruleType= ruleType EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:345:2: iv_ruleType= ruleType EOF
             {
              newCompositeNode(grammarAccess.getTypeRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleType_in_entryRuleType807);
@@ -889,7 +886,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleType"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:355:1: ruleType returns [EObject current=null] : (this_Entity_0= ruleEntity | this_Datatype_1= ruleDatatype ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:352:1: ruleType returns [EObject current=null] : (this_Entity_0= ruleEntity | this_Datatype_1= ruleDatatype ) ;
     public final EObject ruleType() throws RecognitionException {
         EObject current = null;
 
@@ -901,10 +898,10 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:358:28: ( (this_Entity_0= ruleEntity | this_Datatype_1= ruleDatatype ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:359:1: (this_Entity_0= ruleEntity | this_Datatype_1= ruleDatatype )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:355:28: ( (this_Entity_0= ruleEntity | this_Datatype_1= ruleDatatype ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:356:1: (this_Entity_0= ruleEntity | this_Datatype_1= ruleDatatype )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:359:1: (this_Entity_0= ruleEntity | this_Datatype_1= ruleDatatype )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:356:1: (this_Entity_0= ruleEntity | this_Datatype_1= ruleDatatype )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -922,7 +919,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:360:5: this_Entity_0= ruleEntity
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:357:5: this_Entity_0= ruleEntity
                     {
                      
                             newCompositeNode(grammarAccess.getTypeAccess().getEntityParserRuleCall_0()); 
@@ -940,7 +937,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:370:5: this_Datatype_1= ruleDatatype
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:367:5: this_Datatype_1= ruleDatatype
                     {
                      
                             newCompositeNode(grammarAccess.getTypeAccess().getDatatypeParserRuleCall_1()); 
@@ -978,7 +975,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "entryRuleEntity"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:386:1: entryRuleEntity returns [EObject current=null] : iv_ruleEntity= ruleEntity EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:383:1: entryRuleEntity returns [EObject current=null] : iv_ruleEntity= ruleEntity EOF ;
     public final EObject entryRuleEntity() throws RecognitionException {
         EObject current = null;
 
@@ -986,8 +983,8 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:387:2: (iv_ruleEntity= ruleEntity EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:388:2: iv_ruleEntity= ruleEntity EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:384:2: (iv_ruleEntity= ruleEntity EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:385:2: iv_ruleEntity= ruleEntity EOF
             {
              newCompositeNode(grammarAccess.getEntityRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleEntity_in_entryRuleEntity926);
@@ -1014,7 +1011,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleEntity"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:395:1: ruleEntity returns [EObject current=null] : (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:392:1: ruleEntity returns [EObject current=null] : (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' ) ;
     public final EObject ruleEntity() throws RecognitionException {
         EObject current = null;
 
@@ -1028,21 +1025,21 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:398:28: ( (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:399:1: (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:395:28: ( (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:396:1: (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:399:1: (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:399:3: otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:396:1: (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:396:3: otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}'
             {
             otherlv_0=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleEntity973); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getEntityAccess().getEntityKeyword_0());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:403:1: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:404:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:400:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:401:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:404:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:405:3: lv_name_1_0= RULE_ID
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:401:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:402:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEntity990); 
 
@@ -1068,7 +1065,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
                 	newLeafNode(otherlv_2, grammarAccess.getEntityAccess().getLeftCurlyBracketKeyword_2());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:425:1: ( (lv_properties_3_0= ruleProperty ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:422:1: ( (lv_properties_3_0= ruleProperty ) )*
             loop7:
             do {
                 int alt7=2;
@@ -1081,10 +1078,10 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:426:1: (lv_properties_3_0= ruleProperty )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:423:1: (lv_properties_3_0= ruleProperty )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:426:1: (lv_properties_3_0= ruleProperty )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:427:3: lv_properties_3_0= ruleProperty
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:423:1: (lv_properties_3_0= ruleProperty )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:424:3: lv_properties_3_0= ruleProperty
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getEntityAccess().getPropertiesPropertyParserRuleCall_3_0()); 
@@ -1142,7 +1139,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "entryRuleDatatype"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:455:1: entryRuleDatatype returns [EObject current=null] : iv_ruleDatatype= ruleDatatype EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:452:1: entryRuleDatatype returns [EObject current=null] : iv_ruleDatatype= ruleDatatype EOF ;
     public final EObject entryRuleDatatype() throws RecognitionException {
         EObject current = null;
 
@@ -1150,8 +1147,8 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:456:2: (iv_ruleDatatype= ruleDatatype EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:457:2: iv_ruleDatatype= ruleDatatype EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:453:2: (iv_ruleDatatype= ruleDatatype EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:454:2: iv_ruleDatatype= ruleDatatype EOF
             {
              newCompositeNode(grammarAccess.getDatatypeRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleDatatype_in_entryRuleDatatype1077);
@@ -1178,7 +1175,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleDatatype"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:464:1: ruleDatatype returns [EObject current=null] : (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:461:1: ruleDatatype returns [EObject current=null] : (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleDatatype() throws RecognitionException {
         EObject current = null;
 
@@ -1188,21 +1185,21 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:467:28: ( (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:468:1: (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:464:28: ( (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:465:1: (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:468:1: (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:468:3: otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:465:1: (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:465:3: otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleDatatype1124); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getDatatypeAccess().getDatatypeKeyword_0());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:472:1: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:473:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:469:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:470:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:473:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:474:3: lv_name_1_0= RULE_ID
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:470:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:471:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleDatatype1141); 
 
@@ -1245,7 +1242,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "entryRuleProperty"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:498:1: entryRuleProperty returns [EObject current=null] : iv_ruleProperty= ruleProperty EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:495:1: entryRuleProperty returns [EObject current=null] : iv_ruleProperty= ruleProperty EOF ;
     public final EObject entryRuleProperty() throws RecognitionException {
         EObject current = null;
 
@@ -1253,8 +1250,8 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:499:2: (iv_ruleProperty= ruleProperty EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:500:2: iv_ruleProperty= ruleProperty EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:496:2: (iv_ruleProperty= ruleProperty EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:497:2: iv_ruleProperty= ruleProperty EOF
             {
              newCompositeNode(grammarAccess.getPropertyRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleProperty_in_entryRuleProperty1182);
@@ -1281,7 +1278,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleProperty"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:507:1: ruleProperty returns [EObject current=null] : ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:504:1: ruleProperty returns [EObject current=null] : ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleProperty() throws RecognitionException {
         EObject current = null;
 
@@ -1290,17 +1287,17 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:510:28: ( ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:511:1: ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:507:28: ( ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:508:1: ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:511:1: ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:511:2: ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:508:1: ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:508:2: ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:511:2: ( ( ruleQualifiedName ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:512:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:508:2: ( ( ruleQualifiedName ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:509:1: ( ruleQualifiedName )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:512:1: ( ruleQualifiedName )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:513:3: ruleQualifiedName
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:509:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:510:3: ruleQualifiedName
             {
 
             			if (current==null) {
@@ -1324,11 +1321,11 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:526:2: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:527:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:523:2: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:524:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:527:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:528:3: lv_name_1_0= RULE_ID
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:524:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/index/parser/antlr/internal/InternalIndexTestLanguage.g:525:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleProperty1257); 
 

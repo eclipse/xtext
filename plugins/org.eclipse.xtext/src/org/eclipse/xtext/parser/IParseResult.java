@@ -33,5 +33,7 @@ public interface IParseResult {
     @Deprecated
     List<AbstractNode> getParseErrors();
     
-    Iterable<INode> getParseErrors2();
+    Iterable<INode> getSyntaxErrors();
+    
+    boolean hasSyntaxErrors();
 }

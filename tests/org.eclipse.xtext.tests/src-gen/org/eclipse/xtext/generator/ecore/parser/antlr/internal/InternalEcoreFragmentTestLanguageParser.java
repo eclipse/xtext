@@ -1,6 +1,5 @@
 package org.eclipse.xtext.generator.ecore.parser.antlr.internal; 
 
-import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
@@ -10,7 +9,6 @@ import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
-import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.generator.ecore.services.EcoreFragmentTestLanguageGrammarAccess;
 
 
@@ -55,11 +53,10 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
 
      	private EcoreFragmentTestLanguageGrammarAccess grammarAccess;
      	
-        public InternalEcoreFragmentTestLanguageParser(TokenStream input, IAstFactory factory, EcoreFragmentTestLanguageGrammarAccess grammarAccess) {
+        public InternalEcoreFragmentTestLanguageParser(TokenStream input, EcoreFragmentTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.semanticModelBuilder = factory;
-            registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
+            registerRules(grammarAccess.getGrammar());
         }
         
         @Override
@@ -75,7 +72,7 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleSecond"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:70:1: entryRuleSecond returns [EObject current=null] : iv_ruleSecond= ruleSecond EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:67:1: entryRuleSecond returns [EObject current=null] : iv_ruleSecond= ruleSecond EOF ;
     public final EObject entryRuleSecond() throws RecognitionException {
         EObject current = null;
 
@@ -83,8 +80,8 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:71:2: (iv_ruleSecond= ruleSecond EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:72:2: iv_ruleSecond= ruleSecond EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:68:2: (iv_ruleSecond= ruleSecond EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:69:2: iv_ruleSecond= ruleSecond EOF
             {
              newCompositeNode(grammarAccess.getSecondRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleSecond_in_entryRuleSecond75);
@@ -111,7 +108,7 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleSecond"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:79:1: ruleSecond returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:76:1: ruleSecond returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) ) ;
     public final EObject ruleSecond() throws RecognitionException {
         EObject current = null;
 
@@ -122,17 +119,17 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:82:28: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:83:1: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:79:28: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:80:1: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:83:1: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:83:2: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:80:1: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:80:2: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:83:2: ( (lv_name_0_0= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:84:1: (lv_name_0_0= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:80:2: ( (lv_name_0_0= RULE_ID ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:81:1: (lv_name_0_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:84:1: (lv_name_0_0= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:85:3: lv_name_0_0= RULE_ID
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:81:1: (lv_name_0_0= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:82:3: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSecond127); 
 
@@ -158,11 +155,11 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
 
                 	newLeafNode(otherlv_1, grammarAccess.getSecondAccess().getFirstKeyword_1());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:105:1: ( (otherlv_2= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:106:1: (otherlv_2= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:102:1: ( (otherlv_2= RULE_ID ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:103:1: (otherlv_2= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:106:1: (otherlv_2= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:107:3: otherlv_2= RULE_ID
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:103:1: (otherlv_2= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:104:3: otherlv_2= RULE_ID
             {
 
             			if (current==null) {

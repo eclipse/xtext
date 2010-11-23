@@ -10,7 +10,9 @@ package org.eclipse.xtext.parser;
 
 import java.io.Reader;
 
-import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.util.ReplaceRegion;
 
 import com.google.inject.ImplementedBy;
 
@@ -23,9 +25,11 @@ public interface IParser {
 	
 	IParseResult parse(Reader reader);
 	
-	IParseResult parse(String ruleName, Reader reader);
+	IParseResult parse(ParserRule rule, Reader reader);
 	
-	IParseResult reparse(CompositeNode originalRootNode, int offset, int length, String change);
+	IParseResult parse(RuleCall ruleCall, Reader reader);
+	
+	IParseResult reparse(IParseResult previousParseResult, ReplaceRegion replaceRegion);
 	
 	static class NullImpl implements IParser {
 
@@ -33,11 +37,15 @@ public interface IParser {
 			return null;
 		}
 
-		public IParseResult parse(String ruleName, Reader reader) {
+		public IParseResult parse(ParserRule rule, Reader reader) {
+			return null;
+		}
+		
+		public IParseResult parse(RuleCall ruleCall, Reader reader) {
 			return null;
 		}
 
-		public IParseResult reparse(CompositeNode originalRootNode, int offset, int length, String change) {
+		public IParseResult reparse(IParseResult previousParseResult, ReplaceRegion replaceRegion) {
 			return null;
 		}
 		

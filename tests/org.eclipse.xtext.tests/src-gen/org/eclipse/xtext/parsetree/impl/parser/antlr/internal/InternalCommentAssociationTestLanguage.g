@@ -19,7 +19,6 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 @parser::header {
 package org.eclipse.xtext.parsetree.impl.parser.antlr.internal; 
 
-import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
@@ -29,7 +28,6 @@ import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
-import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parsetree.impl.services.CommentAssociationTestLanguageGrammarAccess;
 
 }
@@ -38,11 +36,10 @@ import org.eclipse.xtext.parsetree.impl.services.CommentAssociationTestLanguageG
 
  	private CommentAssociationTestLanguageGrammarAccess grammarAccess;
  	
-    public InternalCommentAssociationTestLanguageParser(TokenStream input, IAstFactory factory, CommentAssociationTestLanguageGrammarAccess grammarAccess) {
+    public InternalCommentAssociationTestLanguageParser(TokenStream input, CommentAssociationTestLanguageGrammarAccess grammarAccess) {
         this(input);
-        this.factory = factory;
-        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
+        registerRules(grammarAccess.getGrammar());
     }
     
     @Override

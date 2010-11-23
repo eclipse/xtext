@@ -20,6 +20,7 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.ParsetreePackage;
 import org.eclipse.xtext.parsetree.SyntaxError;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author koehnlein
@@ -27,8 +28,6 @@ import org.eclipse.xtext.parsetree.SyntaxError;
  * @author Sebastian Zarnekow
  */
 public class ParsetreeUtil {
-
-	private static final char[] separator = System.getProperty("line.separator").toCharArray();
 
 	private static void checkArgument(AbstractNodeImpl abstractParserNode) {
 		int classifierID = abstractParserNode.eClass().getClassifierID();
@@ -45,7 +44,7 @@ public class ParsetreeUtil {
 		int line = 1;
 		for (LeafNode leafNode : leafNodes) {
 			String text = leafNode.getText();
-			line += countLines(text);
+			line += Strings.countLines(text);
 		}
 		return line;
 	}
@@ -53,35 +52,7 @@ public class ParsetreeUtil {
 	public static int totalEndLine(AbstractNodeImpl _this) {
 		int line = _this.getTotalLine();
 		String text = _this.serialize();
-		line += countLines(text);
-		return line;
-	}
-
-	public static int countLines(String text) {
-		return countLines(text, separator);
-	}
-
-	public static int countLines(String text, char[] separator) {
-		int line = 0;
-		char[] charArray = text.toCharArray();
-		if (separator.length == 1) {
-			for (int i = 0; i < charArray.length; i++) {
-				if (charArray[i] == separator[0]) {
-					line++;
-				}
-			}
-		} else if (separator.length == 2) {
-			for (int i = 0; i < charArray.length; i++) {
-				if (charArray[i] == separator[0] && charArray.length > i + 1 && charArray[i + 1] == separator[1]) {
-					line++;
-					i++;
-				} else if (charArray[i] == separator[1]) {
-					line++;
-				}
-			}
-		} else {
-			throw new IllegalArgumentException("Separators with more than two characters are unexpected");
-		}
+		line += Strings.countLines(text);
 		return line;
 	}
 

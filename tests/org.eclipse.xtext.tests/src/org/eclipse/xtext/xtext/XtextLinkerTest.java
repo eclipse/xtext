@@ -44,21 +44,20 @@ public class XtextLinkerTest extends AbstractXtextTests {
 	}
 
 	private void checkPackageRemovalAfterGrammarChange(boolean isRemoved, String originalGrammar, int offset, int length, String replacement) throws Exception {
-		XtextResource res = getResourceFromStringAndExpect(originalGrammar, 1);
-		res.load(null);  // triggers linking
-		Grammar g = (Grammar) res.getContents().get(0);
-		AbstractMetamodelDeclaration  genMM =  g.getMetamodelDeclarations().get(0);
-		EPackage ePackage = genMM.getEPackage();
-		assertEquals(ePackage.eResource().getResourceSet(),res.getResourceSet());
-		res.update(offset, length, replacement);
+		XtextResource resource = getResourceFromStringAndExpect(originalGrammar, 1);
+		Grammar grammar = (Grammar) resource.getContents().get(0);
+		AbstractMetamodelDeclaration  generatedMetamodel =  grammar.getMetamodelDeclarations().get(0);
+		EPackage ePackage = generatedMetamodel.getEPackage();
+		assertEquals(ePackage.eResource().getResourceSet(), resource.getResourceSet());
+		resource.update(offset, length, replacement);
 		if(isRemoved) {
 			assertNull(ePackage.eResource().getResourceSet());
 		} else {
-			assertEquals(ePackage.eResource().getResourceSet(),res.getResourceSet());
+			assertEquals(ePackage.eResource().getResourceSet(), resource.getResourceSet());
 		}
-		g = (Grammar) res.getContents().get(0);
-		genMM = g.getMetamodelDeclarations().get(0);
-		ePackage = genMM.getEPackage();
-		assertEquals(res.getResourceSet(), ePackage.eResource().getResourceSet());
+		grammar = (Grammar) resource.getContents().get(0);
+		generatedMetamodel = grammar.getMetamodelDeclarations().get(0);
+		ePackage = generatedMetamodel.getEPackage();
+		assertEquals(resource.getResourceSet(), ePackage.eResource().getResourceSet());
 	}
 }

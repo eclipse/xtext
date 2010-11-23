@@ -104,6 +104,11 @@ public abstract class AbstractBeeLangTestLanguageRuntimeModule extends DefaultRu
 		return org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
+	public void configureIgnoreCaseLinking(com.google.inject.Binder binder) {
+		binder.bind(Boolean.TYPE).annotatedWith(org.eclipse.xtext.scoping.IgnoreCaseLinking.class).toInstance(false);
+	}
+
 	// contributed by org.eclipse.xtext.generator.exporting.QualifiedNamesFragment
 	public Class<? extends org.eclipse.xtext.naming.IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider.class;

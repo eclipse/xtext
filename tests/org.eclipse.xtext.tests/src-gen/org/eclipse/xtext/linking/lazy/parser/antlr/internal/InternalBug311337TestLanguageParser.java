@@ -1,6 +1,5 @@
 package org.eclipse.xtext.linking.lazy.parser.antlr.internal; 
 
-import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
@@ -10,7 +9,6 @@ import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
-import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.linking.lazy.services.Bug311337TestLanguageGrammarAccess;
 
 
@@ -58,11 +56,10 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
 
      	private Bug311337TestLanguageGrammarAccess grammarAccess;
      	
-        public InternalBug311337TestLanguageParser(TokenStream input, IAstFactory factory, Bug311337TestLanguageGrammarAccess grammarAccess) {
+        public InternalBug311337TestLanguageParser(TokenStream input, Bug311337TestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.semanticModelBuilder = factory;
-            registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
+            registerRules(grammarAccess.getGrammar());
         }
         
         @Override
@@ -78,7 +75,7 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:70:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -86,8 +83,8 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:71:2: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:72:2: iv_ruleModel= ruleModel EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel75);
@@ -114,7 +111,7 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:79:1: ruleModel returns [EObject current=null] : ( (lv_def_0_0= ruleDefinition ) )+ ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_def_0_0= ruleDefinition ) )+ ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -124,10 +121,10 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:82:28: ( ( (lv_def_0_0= ruleDefinition ) )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:83:1: ( (lv_def_0_0= ruleDefinition ) )+
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:79:28: ( ( (lv_def_0_0= ruleDefinition ) )+ )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:80:1: ( (lv_def_0_0= ruleDefinition ) )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:83:1: ( (lv_def_0_0= ruleDefinition ) )+
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:80:1: ( (lv_def_0_0= ruleDefinition ) )+
             int cnt1=0;
             loop1:
             do {
@@ -141,10 +138,10 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:84:1: (lv_def_0_0= ruleDefinition )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:81:1: (lv_def_0_0= ruleDefinition )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:84:1: (lv_def_0_0= ruleDefinition )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:85:3: lv_def_0_0= ruleDefinition
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:81:1: (lv_def_0_0= ruleDefinition )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:82:3: lv_def_0_0= ruleDefinition
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getModelAccess().getDefDefinitionParserRuleCall_0()); 
@@ -199,7 +196,7 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleDefinition"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:109:1: entryRuleDefinition returns [EObject current=null] : iv_ruleDefinition= ruleDefinition EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:106:1: entryRuleDefinition returns [EObject current=null] : iv_ruleDefinition= ruleDefinition EOF ;
     public final EObject entryRuleDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -207,8 +204,8 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:110:2: (iv_ruleDefinition= ruleDefinition EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:111:2: iv_ruleDefinition= ruleDefinition EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:107:2: (iv_ruleDefinition= ruleDefinition EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:108:2: iv_ruleDefinition= ruleDefinition EOF
             {
              newCompositeNode(grammarAccess.getDefinitionRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleDefinition_in_entryRuleDefinition166);
@@ -235,7 +232,7 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleDefinition"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:118:1: ruleDefinition returns [EObject current=null] : (otherlv_0= '(def)' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (lv_child_3_0= ruleChild ) ) ( (lv_ref_4_0= ruleReference ) )? ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:115:1: ruleDefinition returns [EObject current=null] : (otherlv_0= '(def)' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (lv_child_3_0= ruleChild ) ) ( (lv_ref_4_0= ruleReference ) )? ) ;
     public final EObject ruleDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -250,21 +247,21 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:121:28: ( (otherlv_0= '(def)' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (lv_child_3_0= ruleChild ) ) ( (lv_ref_4_0= ruleReference ) )? ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:122:1: (otherlv_0= '(def)' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (lv_child_3_0= ruleChild ) ) ( (lv_ref_4_0= ruleReference ) )? )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:118:28: ( (otherlv_0= '(def)' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (lv_child_3_0= ruleChild ) ) ( (lv_ref_4_0= ruleReference ) )? ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:119:1: (otherlv_0= '(def)' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (lv_child_3_0= ruleChild ) ) ( (lv_ref_4_0= ruleReference ) )? )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:122:1: (otherlv_0= '(def)' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (lv_child_3_0= ruleChild ) ) ( (lv_ref_4_0= ruleReference ) )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:122:3: otherlv_0= '(def)' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (lv_child_3_0= ruleChild ) ) ( (lv_ref_4_0= ruleReference ) )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:119:1: (otherlv_0= '(def)' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (lv_child_3_0= ruleChild ) ) ( (lv_ref_4_0= ruleReference ) )? )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:119:3: otherlv_0= '(def)' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (lv_child_3_0= ruleChild ) ) ( (lv_ref_4_0= ruleReference ) )?
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleDefinition213); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getDefinitionAccess().getDefKeyword_0());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:126:1: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:127:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:123:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:124:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:127:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:128:3: lv_name_1_0= RULE_ID
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:124:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:125:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleDefinition230); 
 
@@ -290,11 +287,11 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
 
                 	newLeafNode(otherlv_2, grammarAccess.getDefinitionAccess().getColonKeyword_2());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:148:1: ( (lv_child_3_0= ruleChild ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:149:1: (lv_child_3_0= ruleChild )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:145:1: ( (lv_child_3_0= ruleChild ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:146:1: (lv_child_3_0= ruleChild )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:149:1: (lv_child_3_0= ruleChild )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:150:3: lv_child_3_0= ruleChild
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:146:1: (lv_child_3_0= ruleChild )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:147:3: lv_child_3_0= ruleChild
             {
              
             	        newCompositeNode(grammarAccess.getDefinitionAccess().getChildChildParserRuleCall_3_0()); 
@@ -321,7 +318,7 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:166:2: ( (lv_ref_4_0= ruleReference ) )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:163:2: ( (lv_ref_4_0= ruleReference ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -330,10 +327,10 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:167:1: (lv_ref_4_0= ruleReference )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:164:1: (lv_ref_4_0= ruleReference )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:167:1: (lv_ref_4_0= ruleReference )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:168:3: lv_ref_4_0= ruleReference
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:164:1: (lv_ref_4_0= ruleReference )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:165:3: lv_ref_4_0= ruleReference
                     {
                      
                     	        newCompositeNode(grammarAccess.getDefinitionAccess().getRefReferenceParserRuleCall_4_0()); 
@@ -384,7 +381,7 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleChild"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:192:1: entryRuleChild returns [EObject current=null] : iv_ruleChild= ruleChild EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:189:1: entryRuleChild returns [EObject current=null] : iv_ruleChild= ruleChild EOF ;
     public final EObject entryRuleChild() throws RecognitionException {
         EObject current = null;
 
@@ -392,8 +389,8 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:193:2: (iv_ruleChild= ruleChild EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:194:2: iv_ruleChild= ruleChild EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:190:2: (iv_ruleChild= ruleChild EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:191:2: iv_ruleChild= ruleChild EOF
             {
              newCompositeNode(grammarAccess.getChildRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleChild_in_entryRuleChild326);
@@ -420,7 +417,7 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleChild"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:201:1: ruleChild returns [EObject current=null] : (otherlv_0= '(child)' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) )? ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:198:1: ruleChild returns [EObject current=null] : (otherlv_0= '(child)' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) )? ) ;
     public final EObject ruleChild() throws RecognitionException {
         EObject current = null;
 
@@ -432,21 +429,21 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:204:28: ( (otherlv_0= '(child)' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) )? ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:205:1: (otherlv_0= '(child)' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) )? )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:201:28: ( (otherlv_0= '(child)' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) )? ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:202:1: (otherlv_0= '(child)' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) )? )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:205:1: (otherlv_0= '(child)' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:205:3: otherlv_0= '(child)' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:202:1: (otherlv_0= '(child)' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) )? )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:202:3: otherlv_0= '(child)' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) )?
             {
             otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleChild373); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getChildAccess().getChildKeyword_0());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:209:1: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:210:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:206:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:207:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:210:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:211:3: lv_name_1_0= RULE_ID
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:207:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:208:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleChild390); 
 
@@ -472,7 +469,7 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
 
                 	newLeafNode(otherlv_2, grammarAccess.getChildAccess().getColonKeyword_2());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:231:1: ( (otherlv_3= RULE_ID ) )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:228:1: ( (otherlv_3= RULE_ID ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -481,10 +478,10 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:232:1: (otherlv_3= RULE_ID )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:229:1: (otherlv_3= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:232:1: (otherlv_3= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:233:3: otherlv_3= RULE_ID
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:229:1: (otherlv_3= RULE_ID )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:230:3: otherlv_3= RULE_ID
                     {
 
                     			if (current==null) {
@@ -525,7 +522,7 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleReference"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:252:1: entryRuleReference returns [EObject current=null] : iv_ruleReference= ruleReference EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:249:1: entryRuleReference returns [EObject current=null] : iv_ruleReference= ruleReference EOF ;
     public final EObject entryRuleReference() throws RecognitionException {
         EObject current = null;
 
@@ -533,8 +530,8 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:253:2: (iv_ruleReference= ruleReference EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:254:2: iv_ruleReference= ruleReference EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:250:2: (iv_ruleReference= ruleReference EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:251:2: iv_ruleReference= ruleReference EOF
             {
              newCompositeNode(grammarAccess.getReferenceRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleReference_in_entryRuleReference464);
@@ -561,7 +558,7 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleReference"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:261:1: ruleReference returns [EObject current=null] : (otherlv_0= '(ref)' ( (otherlv_1= RULE_ID ) ) (otherlv_2= ':' () ( (otherlv_4= RULE_ID ) ) )* ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:258:1: ruleReference returns [EObject current=null] : (otherlv_0= '(ref)' ( (otherlv_1= RULE_ID ) ) (otherlv_2= ':' () ( (otherlv_4= RULE_ID ) ) )* ) ;
     public final EObject ruleReference() throws RecognitionException {
         EObject current = null;
 
@@ -573,21 +570,21 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:264:28: ( (otherlv_0= '(ref)' ( (otherlv_1= RULE_ID ) ) (otherlv_2= ':' () ( (otherlv_4= RULE_ID ) ) )* ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:265:1: (otherlv_0= '(ref)' ( (otherlv_1= RULE_ID ) ) (otherlv_2= ':' () ( (otherlv_4= RULE_ID ) ) )* )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:261:28: ( (otherlv_0= '(ref)' ( (otherlv_1= RULE_ID ) ) (otherlv_2= ':' () ( (otherlv_4= RULE_ID ) ) )* ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:262:1: (otherlv_0= '(ref)' ( (otherlv_1= RULE_ID ) ) (otherlv_2= ':' () ( (otherlv_4= RULE_ID ) ) )* )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:265:1: (otherlv_0= '(ref)' ( (otherlv_1= RULE_ID ) ) (otherlv_2= ':' () ( (otherlv_4= RULE_ID ) ) )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:265:3: otherlv_0= '(ref)' ( (otherlv_1= RULE_ID ) ) (otherlv_2= ':' () ( (otherlv_4= RULE_ID ) ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:262:1: (otherlv_0= '(ref)' ( (otherlv_1= RULE_ID ) ) (otherlv_2= ':' () ( (otherlv_4= RULE_ID ) ) )* )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:262:3: otherlv_0= '(ref)' ( (otherlv_1= RULE_ID ) ) (otherlv_2= ':' () ( (otherlv_4= RULE_ID ) ) )*
             {
             otherlv_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleReference511); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getReferenceAccess().getRefKeyword_0());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:269:1: ( (otherlv_1= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:270:1: (otherlv_1= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:266:1: ( (otherlv_1= RULE_ID ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:267:1: (otherlv_1= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:270:1: (otherlv_1= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:271:3: otherlv_1= RULE_ID
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:267:1: (otherlv_1= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:268:3: otherlv_1= RULE_ID
             {
 
             			if (current==null) {
@@ -604,7 +601,7 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:282:2: (otherlv_2= ':' () ( (otherlv_4= RULE_ID ) ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:279:2: (otherlv_2= ':' () ( (otherlv_4= RULE_ID ) ) )*
             loop4:
             do {
                 int alt4=2;
@@ -617,14 +614,14 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:282:4: otherlv_2= ':' () ( (otherlv_4= RULE_ID ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:279:4: otherlv_2= ':' () ( (otherlv_4= RULE_ID ) )
             	    {
             	    otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleReference544); 
 
             	        	newLeafNode(otherlv_2, grammarAccess.getReferenceAccess().getColonKeyword_2_0());
             	        
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:286:1: ()
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:287:5: 
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:283:1: ()
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:284:5: 
             	    {
 
             	            current = forceCreateModelElementAndSet(
@@ -634,11 +631,11 @@ public class InternalBug311337TestLanguageParser extends AbstractInternalAntlrPa
 
             	    }
 
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:292:2: ( (otherlv_4= RULE_ID ) )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:293:1: (otherlv_4= RULE_ID )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:289:2: ( (otherlv_4= RULE_ID ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:290:1: (otherlv_4= RULE_ID )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:293:1: (otherlv_4= RULE_ID )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:294:3: otherlv_4= RULE_ID
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:290:1: (otherlv_4= RULE_ID )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.g:291:3: otherlv_4= RULE_ID
             	    {
 
             	    			if (current==null) {

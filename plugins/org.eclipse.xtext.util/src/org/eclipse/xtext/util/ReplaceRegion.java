@@ -8,17 +8,22 @@
 package org.eclipse.xtext.util;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
 public class ReplaceRegion {
 
-	private int offset;
-	private int length;
-	private String text;
+	private final int offset;
+	private final int length;
+	private final String text;
 
 	public ReplaceRegion(ITextRegion region, String text) {
-		this.offset = region.getOffset();
-		this.length = region.getLength();
+		this(region.getOffset(), region.getLength(), text);
+	}
+	
+	public ReplaceRegion(int offset, int length, String text) {
+		this.offset = offset;
+		this.length = length;
 		this.text = text;
 	}
 
@@ -29,9 +34,34 @@ public class ReplaceRegion {
 	public int getLength() {
 		return length;
 	}
+	
+	/**
+	 * @return the end offset of the replace region (exclusive).
+	 */
+	public int getEndOffset() {
+		return offset + length;
+	}
 
 	public String getText() {
 		return text;
+	}
+	
+	public ReplaceRegion shiftBy(int offset) {
+		if (offset == 0)
+			return this;
+		return new ReplaceRegion(this.offset + offset, length, text);
+	}
+	
+	public void applyTo(StringBuilder builder) {
+//		if (offset == builder.length())
+//			builder.append(text);
+//		else
+			builder.replace(offset, getEndOffset(), text);
+	}
+	
+	@Override
+	public String toString() {
+		return "replace region [" + offset + " / length: " + length + "]";
 	}
 
 }

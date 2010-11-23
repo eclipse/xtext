@@ -9,6 +9,7 @@
 package org.eclipse.xtext.parser;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.parsetree.SyntaxError;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 
 /**
@@ -33,16 +34,15 @@ public class ParseResult implements IParseResult {
     private EObject rootAstElement;
     private CompositeNode rootNode;
     private ICompositeNode rootNode2;
+	private final boolean hasErrors;
     
-    public ParseResult(EObject rootAstElement, CompositeNode rootNode, ICompositeNode rootNode2) {
+    public ParseResult(EObject rootAstElement, CompositeNode rootNode, ICompositeNode rootNode2, boolean hasErrors) {
         this.rootAstElement = rootAstElement;
         this.rootNode = rootNode;
         this.rootNode2 = rootNode2;
+		this.hasErrors = hasErrors;
     }
     
-    public ParseResult() {
-    }
-
     public void setRootASTElement(EObject rootAstElement) {
         this.rootAstElement = rootAstElement;
     }
@@ -72,18 +72,31 @@ public class ParseResult implements IParseResult {
 		});
 	}
 	
-	public Iterable<INode> getParseErrors2() {
-		if (rootNode2 == null)
+	public Iterable<INode> getSyntaxErrors() {
+		if (rootNode2 == null || !hasSyntaxErrors())
 			return Collections.emptyList();
-		return Iterables.filter(rootNode2, new Predicate<INode>() {
-			public boolean apply(INode input) {
-				return input.getSyntaxErrorMessage() != null;
+		return new Iterable<INode>() {
+			public Iterator<INode> iterator() {
+				return Iterators.filter(Iterators.filter(
+						((org.eclipse.xtext.nodemodel.impl.CompositeNode) rootNode2).basicTreeIterator(), INode.class),
+						new Predicate<INode>() {
+					public boolean apply(INode input) {
+						return input.getSyntaxErrorMessage() != null;
+					}
+				});
 			}
-		});
+		};
 	}
 	
 	public ICompositeNode getRootNode2() {
 		return rootNode2;
 	}
     
+	public void setRootNode2(ICompositeNode rootNode2) {
+		this.rootNode2 = rootNode2;
+	}
+
+	public boolean hasSyntaxErrors() {
+		return hasErrors;
+	}
 }

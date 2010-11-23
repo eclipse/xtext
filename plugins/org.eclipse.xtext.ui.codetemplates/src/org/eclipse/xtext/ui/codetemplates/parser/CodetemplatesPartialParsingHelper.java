@@ -12,8 +12,8 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.parser.impl.PartialParsingHelper;
-import org.eclipse.xtext.parsetree.CompositeNode;
 
 import com.google.inject.Inject;
 
@@ -29,7 +29,7 @@ public class CodetemplatesPartialParsingHelper extends PartialParsingHelper {
 	private AbstractRule templateRule;
 	
 	@Override
-	protected boolean isInvalidRootNode(CompositeNode rootNode, CompositeNode candidate) {
+	protected boolean isInvalidRootNode(ICompositeNode rootNode, ICompositeNode candidate) {
 		if (!(candidate.getGrammarElement() instanceof RuleCall) && !(candidate.getGrammarElement() instanceof ParserRule)) {
 			return true;
 		}

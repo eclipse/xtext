@@ -1,6 +1,5 @@
 package org.eclipse.xtext.parser.encoding.parser.antlr.internal; 
 
-import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
@@ -10,7 +9,6 @@ import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
-import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parser.encoding.services.EncodingTestLanguageGrammarAccess;
 
 
@@ -50,11 +48,10 @@ public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrPar
 
      	private EncodingTestLanguageGrammarAccess grammarAccess;
      	
-        public InternalEncodingTestLanguageParser(TokenStream input, IAstFactory factory, EncodingTestLanguageGrammarAccess grammarAccess) {
+        public InternalEncodingTestLanguageParser(TokenStream input, EncodingTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.semanticModelBuilder = factory;
-            registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
+            registerRules(grammarAccess.getGrammar());
         }
         
         @Override
@@ -70,7 +67,7 @@ public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:70:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -78,8 +75,8 @@ public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrPar
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:71:2: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:72:2: iv_ruleModel= ruleModel EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel75);
@@ -106,7 +103,7 @@ public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:79:1: ruleModel returns [EObject current=null] : ( (lv_words_0_0= ruleWord ) )* ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_words_0_0= ruleWord ) )* ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -116,10 +113,10 @@ public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrPar
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:82:28: ( ( (lv_words_0_0= ruleWord ) )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:83:1: ( (lv_words_0_0= ruleWord ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:79:28: ( ( (lv_words_0_0= ruleWord ) )* )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:80:1: ( (lv_words_0_0= ruleWord ) )*
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:83:1: ( (lv_words_0_0= ruleWord ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:80:1: ( (lv_words_0_0= ruleWord ) )*
             loop1:
             do {
                 int alt1=2;
@@ -132,10 +129,10 @@ public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrPar
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:84:1: (lv_words_0_0= ruleWord )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:81:1: (lv_words_0_0= ruleWord )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:84:1: (lv_words_0_0= ruleWord )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:85:3: lv_words_0_0= ruleWord
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:81:1: (lv_words_0_0= ruleWord )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:82:3: lv_words_0_0= ruleWord
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getModelAccess().getWordsWordParserRuleCall_0()); 
@@ -186,7 +183,7 @@ public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleWord"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:109:1: entryRuleWord returns [EObject current=null] : iv_ruleWord= ruleWord EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:106:1: entryRuleWord returns [EObject current=null] : iv_ruleWord= ruleWord EOF ;
     public final EObject entryRuleWord() throws RecognitionException {
         EObject current = null;
 
@@ -194,8 +191,8 @@ public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrPar
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:110:2: (iv_ruleWord= ruleWord EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:111:2: iv_ruleWord= ruleWord EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:107:2: (iv_ruleWord= ruleWord EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:108:2: iv_ruleWord= ruleWord EOF
             {
              newCompositeNode(grammarAccess.getWordRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleWord_in_entryRuleWord166);
@@ -222,7 +219,7 @@ public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleWord"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:118:1: ruleWord returns [EObject current=null] : ( (lv_value_0_0= RULE_LEXEME ) ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:115:1: ruleWord returns [EObject current=null] : ( (lv_value_0_0= RULE_LEXEME ) ) ;
     public final EObject ruleWord() throws RecognitionException {
         EObject current = null;
 
@@ -231,14 +228,14 @@ public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrPar
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:121:28: ( ( (lv_value_0_0= RULE_LEXEME ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:122:1: ( (lv_value_0_0= RULE_LEXEME ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:118:28: ( ( (lv_value_0_0= RULE_LEXEME ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:119:1: ( (lv_value_0_0= RULE_LEXEME ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:122:1: ( (lv_value_0_0= RULE_LEXEME ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:123:1: (lv_value_0_0= RULE_LEXEME )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:119:1: ( (lv_value_0_0= RULE_LEXEME ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:120:1: (lv_value_0_0= RULE_LEXEME )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:123:1: (lv_value_0_0= RULE_LEXEME )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:124:3: lv_value_0_0= RULE_LEXEME
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:120:1: (lv_value_0_0= RULE_LEXEME )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:121:3: lv_value_0_0= RULE_LEXEME
             {
             lv_value_0_0=(Token)match(input,RULE_LEXEME,FollowSets000.FOLLOW_RULE_LEXEME_in_ruleWord217); 
 

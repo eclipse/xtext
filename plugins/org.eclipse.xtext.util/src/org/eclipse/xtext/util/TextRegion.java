@@ -8,9 +8,9 @@
 package org.eclipse.xtext.util;
 
 public class TextRegion implements ITextRegion {
-	private int offset;
+	private final int offset;
 
-	private int length;
+	private final int length;
 
 	public TextRegion(int offset, int length) {
 		this.offset = offset;
