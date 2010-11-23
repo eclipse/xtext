@@ -8,8 +8,7 @@
 package org.eclipse.xtext.resource.impl;
 
 import static com.google.common.collect.Iterables.*;
-
-import java.util.Iterator;
+import static java.util.Collections.*;
 
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -26,14 +25,11 @@ public abstract class AbstractContainer implements IContainer {
 	public Iterable<IEObjectDescription> getElements(final ISelector selector) {
 		return concat(transform(getResourceDescriptions(),new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
 			public Iterable<IEObjectDescription> apply(IResourceDescription from) {
+				if (from==null)
+					return emptySet();
 				return from.getExportedObjects(selector);
 			}
 		}));
-	}
-	
-	public IEObjectDescription getSingleElement(ISelector selector) {
-		Iterator<IEObjectDescription> iterator = getElements(selector).iterator();
-		return iterator.hasNext() ? iterator.next() : null;
 	}
 	
 }

@@ -13,7 +13,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager;
-import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.inject.ImplementedBy;
@@ -22,7 +21,7 @@ import com.google.inject.ImplementedBy;
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein - introduced QualifiedName
  */
-public interface IContainer extends IScope {
+public interface IContainer {
 
 	/**
 	 * @return the {@link IResourceDescription} contained in this container. The result is never
@@ -38,13 +37,14 @@ public interface IContainer extends IScope {
 	IResourceDescription getResourceDescription(URI uri);
 	
 	/**
+	 * @return all elements which pass the given {@link ISelector}
+	 */
+	Iterable<IEObjectDescription> getElements(ISelector selector);
+	
+	/**
 	 * a no-op implementation
 	 */
 	static IContainer NULL_CONTAINER = new IContainer(){
-
-		public IEObjectDescription getSingleElement(ISelector selector) {
-			return null;
-		}
 
 		public Iterable<IEObjectDescription> getElements(ISelector selector) {
 			return emptySet();
