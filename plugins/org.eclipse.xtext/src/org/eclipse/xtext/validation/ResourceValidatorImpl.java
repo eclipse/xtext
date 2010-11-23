@@ -121,7 +121,7 @@ public class ResourceValidatorImpl implements IResourceValidator {
 
 	protected void resolveProxies(final Resource resource, final CancelIndicator monitor) {
 		if (resource instanceof LazyLinkingResource) {
-			((LazyLinkingResource) resource).resolveLazyCrossReferences(true);
+			((LazyLinkingResource) resource).resolveLazyCrossReferences(monitor);
 		} else {
 			EcoreUtil2.resolveAll(resource, monitor);
 		}
