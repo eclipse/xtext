@@ -8,11 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
-import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.TreeTestLanguageStandaloneSetup;
+
+import com.google.common.collect.Iterables;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -34,9 +35,9 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 			modelBuffer.append(d);
 		}
 		String model = modelBuffer.toString();
-		CompositeNode rootNode = getRootNode(model);
-		IParseResult reparse = partialParser.reparse(getParser(), rootNode, model.indexOf('c'), 1, "Hugo");
-		assertTrue(reparse.getParseErrors() == null || reparse.getParseErrors().isEmpty());
+		IParseResult parseResult = getParseResult(model);
+		IParseResult reparse = reparse(parseResult, model.indexOf('c'), 1, "Hugo");
+		assertFalse(reparse.hasSyntaxErrors());
 	}
 	
 	public void testReference() throws Exception {
@@ -59,10 +60,10 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 		}
 		modelBuffer.append("}\n");
 		String model = modelBuffer.toString();
-		CompositeNode rootNode = getRootNode(model);
-		IParseResult reparse = partialParser.reparse(getParser(), rootNode, model.indexOf("Sven"), 4, "Peter");
-		if(reparse.getParseErrors() != null && !reparse.getParseErrors().isEmpty()) {
-			fail("Unexpected parse error " + reparse.getParseErrors().get(0).getSyntaxError().getMessage()) ;
+		IParseResult parseResult = getParseResult(model);
+		IParseResult reparse = reparse(parseResult, model.indexOf("Sven"), 4, "Peter");
+		if(reparse.hasSyntaxErrors()) {
+			fail("Unexpected parse errors " + Iterables.toString(reparse.getSyntaxErrors())) ;
 		}
 	}
 	
@@ -87,9 +88,11 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 		modelBuffer.append(" kind (Herbert " + NUM_ELEMENTS + 1 + "\n");
 		modelBuffer.append("}\n");
 		String model = modelBuffer.toString();
-		CompositeNode rootNode = getRootNodeAndExpect(model, 1);
-		IParseResult reparse = partialParser.reparse(getParser(), rootNode, model.indexOf("Sven"), 4, "Peter");
-		assertEquals(1, reparse.getParseErrors().size());
+		IParseResult parseResult = getParseResultAndExpect(model, 1);
+		assertEquals(1, Iterables.size(parseResult.getSyntaxErrors()));
+		IParseResult reparse = reparse(parseResult, model.indexOf("Sven"), 4, "Peter");
+		assertEquals(1, Iterables.size(reparse.getSyntaxErrors()));
+		assertTrue(reparse.hasSyntaxErrors());
 	}
 	
 	public void testBug_255015() throws Exception {
@@ -104,7 +107,7 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 		}
 		String model = modelBuffer.toString();
 		XtextResource resource = getResourceFromString(model);
-		assertEquals(0, resource.getParseResult().getParseErrors().size());
+		assertFalse(resource.getParseResult().hasSyntaxErrors());
 	}
 
 }

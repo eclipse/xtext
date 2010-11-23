@@ -9,9 +9,9 @@ package org.eclipse.xtext.parser.datatyperules;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tests.EmfAssert;
+import org.eclipse.xtext.util.ReplaceRegion;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -20,7 +20,7 @@ public class PartialParserTest extends AbstractXtextTests {
 	
 	private String model;
 	private XtextResource resource;
-	private CompositeNode rootNode;
+	private IParseResult parseResult;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -29,7 +29,7 @@ public class PartialParserTest extends AbstractXtextTests {
 		model = "a.b.c.d: 123;\n" +
 				"e.f.g.h: 456;";
 		resource = getResourceFromString(model);
-		rootNode = resource.getParseResult().getRootNode();
+		parseResult = resource.getParseResult();
 	}
 	
 	public void testSetUp() {
@@ -37,10 +37,10 @@ public class PartialParserTest extends AbstractXtextTests {
 	}
 	
 	public void testInsertSlashInFirstNode() throws Exception {
-		IParseResult parseResult = resource.getParser().reparse(rootNode, model.indexOf('3'), 0, "/");
-		assertTrue(parseResult.getParseErrors().isEmpty());
-		assertEquals(0, parseResult.getRootNode().getOffset());
-		assertSame(resource.getParseResult().getRootNode(), parseResult.getRootNode());
+		IParseResult parseResult = resource.getParser().reparse(this.parseResult, new ReplaceRegion(model.indexOf('3'), 0, "/"));
+		assertFalse(parseResult.hasSyntaxErrors());
+		assertEquals(0, parseResult.getRootNode2().getTotalOffset());
+		assertSame(resource.getParseResult().getRootNode2(), parseResult.getRootNode2());
 		String newModel = 
 			"a.b.c.d: 12/3;\n" +
 			"e.f.g.h: 456;";
@@ -48,10 +48,10 @@ public class PartialParserTest extends AbstractXtextTests {
 	}
 	
 	public void testInsertSlashInSecondNode() throws Exception {
-		IParseResult parseResult = resource.getParser().reparse(rootNode, model.indexOf('6'), 0, "/");
-		assertTrue(parseResult.getParseErrors().isEmpty());
-		assertEquals(0, parseResult.getRootNode().getOffset());
-		assertSame(resource.getParseResult().getRootNode(), parseResult.getRootNode());
+		IParseResult parseResult = resource.getParser().reparse(this.parseResult, new ReplaceRegion(model.indexOf('6'), 0, "/"));
+		assertFalse(parseResult.hasSyntaxErrors());
+		assertEquals(0, parseResult.getRootNode2().getTotalOffset());
+		assertSame(resource.getParseResult().getRootNode2(), parseResult.getRootNode2());
 		String newModel = 
 			"a.b.c.d: 123;\n" +
 			"e.f.g.h: 45/6;";

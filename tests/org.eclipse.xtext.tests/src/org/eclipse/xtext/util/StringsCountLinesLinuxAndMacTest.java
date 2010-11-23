@@ -5,11 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parsetree.impl;
+package org.eclipse.xtext.util;
 
-public class ParsetreeUtilWindowsTest extends AbstractParsetreeUtilTest {
+public class StringsCountLinesLinuxAndMacTest extends AbstractStringsCountLinesTest {
 	@Override
 	protected char[] getSeparator() {
-		return "\r\n".toCharArray();
+		return "\n".toCharArray();
 	}
+	
 }
