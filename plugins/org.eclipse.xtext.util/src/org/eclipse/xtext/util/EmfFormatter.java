@@ -26,34 +26,44 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.FeatureMap;
 
+import com.google.common.base.Predicate;
+
 public class EmfFormatter {
 
 	private static final char SPACE = ' ';
 	private static final String INDENT = "    ";
 
-	public static String objToStr(Object obj, EStructuralFeature... ignoredFeatures) {
+	public static String objToStr(Object obj, Predicate<EStructuralFeature> ignoredFeatures) {
 		Appendable buf = new StringBuilder(1024);
-		Set<EStructuralFeature> ignoreUs =
-			(ignoredFeatures != null && ignoredFeatures.length != 0) ?
-					( ignoredFeatures.length > 1 ?
-						new HashSet<EStructuralFeature>(Arrays.asList(ignoredFeatures))	:
-						Collections.singleton(ignoredFeatures[0]) ) :
-			Collections.<EStructuralFeature>emptySet();
 		try {
-			objToStrImpl(obj, "", buf, ignoreUs);
+			objToStrImpl(obj, "", buf, ignoredFeatures);
 		} catch (Exception e) {
 			throw new WrappedException(e);
 		}
 		return buf.toString();
 	}
+	
+	public static String objToStr(Object obj, EStructuralFeature... ignoredFeatures) {
+		final Set<EStructuralFeature> ignoreUs =
+			(ignoredFeatures != null && ignoredFeatures.length != 0) ?
+					( ignoredFeatures.length > 1 ?
+						new HashSet<EStructuralFeature>(Arrays.asList(ignoredFeatures))	:
+						Collections.singleton(ignoredFeatures[0]) ) :
+			Collections.<EStructuralFeature>emptySet();
+		return objToStr(obj, new Predicate<EStructuralFeature>() {
+			public boolean apply(EStructuralFeature input) {
+				return ignoreUs.contains(input);
+			}
+		});
+	}
 
-	private static void objToStrImpl(Object obj, String indent, Appendable buf, Set<EStructuralFeature> ignoreUs) throws Exception {
+	private static void objToStrImpl(Object obj, String indent, Appendable buf, Predicate<EStructuralFeature> ignoredFeatures) throws Exception {
 		String innerIdent = INDENT + indent;
 		if (obj instanceof EObject) {
 			EObject eobj = (EObject) obj;
 			buf.append(eobj.eClass().getName()).append(" {\n");
 			for (EStructuralFeature f : eobj.eClass().getEAllStructuralFeatures()) {
-				if (!eobj.eIsSet(f) || ignoreUs.contains(f))
+				if (!eobj.eIsSet(f) || ignoredFeatures.apply(f))
 					continue;
 				buf.append(innerIdent);
 				if (f instanceof EReference) {
@@ -62,7 +72,7 @@ public class EmfFormatter {
 						buf.append("cref ");
 						buf.append(f.getEType().getName()).append(SPACE);
 						buf.append(f.getName()).append(SPACE);
-						objToStrImpl(eobj.eGet(f), innerIdent, buf, ignoreUs);
+						objToStrImpl(eobj.eGet(f), innerIdent, buf, ignoredFeatures);
 					} else {
 						buf.append("ref ");
 						buf.append(f.getEType().getName()).append(SPACE);
@@ -76,7 +86,7 @@ public class EmfFormatter {
 					// logger.debug(Msg.create("Path:").path(eobj));
 					Object at = eobj.eGet(f);
 					if (eobj != at)
-						objToStrImpl(at, innerIdent, buf, ignoreUs);
+						objToStrImpl(at, innerIdent, buf, ignoredFeatures);
 					else
 						buf.append("<same as container object>");
 				} else {
@@ -95,7 +105,7 @@ public class EmfFormatter {
 			buf.append(".");
 			buf.append(e.getEStructuralFeature().getName());
 			buf.append("->");
-			objToStrImpl(e.getValue(), innerIdent, buf, ignoreUs);
+			objToStrImpl(e.getValue(), innerIdent, buf, ignoredFeatures);
 			return ;
 		}
 		if (obj instanceof Collection<?>) {
@@ -106,7 +116,7 @@ public class EmfFormatter {
 				buf.append(innerIdent);
 				printInt(counter++, coll.size(), buf);
 				buf.append(": ");
-				objToStrImpl(o, innerIdent, buf, ignoreUs);
+				objToStrImpl(o, innerIdent, buf, ignoredFeatures);
 				buf.append("\n");
 			}
 			buf.append(indent + "]");

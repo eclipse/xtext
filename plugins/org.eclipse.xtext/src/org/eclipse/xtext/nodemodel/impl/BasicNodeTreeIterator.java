@@ -37,12 +37,12 @@ public class BasicNodeTreeIterator extends UnmodifiableIterator<AbstractNode> im
 			next = root;
 		} else if (!pruned && lastReturned instanceof CompositeNode && ((CompositeNode) lastReturned).hasChildren()) {
 			next = ((CompositeNode) lastReturned).basicGetFirstChild();
-		} else if (lastReturned.hasNextSibling()) {
+		} else if (lastReturned.basicHasNextSibling()) {
 			next = lastReturned.basicGetNextSibling();
 		} else {
 			CompositeNode parent = lastReturned.basicGetParent();
 			while (next == null && parent != root && parent.basicGetParent() != null) {
-				if (parent.hasNextSibling()) {
+				if (parent.basicHasNextSibling()) {
 					next = parent.basicGetNextSibling();
 				} else {
 					parent = parent.basicGetParent();
@@ -76,12 +76,12 @@ public class BasicNodeTreeIterator extends UnmodifiableIterator<AbstractNode> im
 			previous = root;
 		} else if (!pruned && lastReturned instanceof CompositeNode && ((CompositeNode) lastReturned).hasChildren()) {
 			previous = ((CompositeNode) lastReturned).basicGetLastChild();
-		} else if (lastReturned.hasPreviousSibling()) {
+		} else if (lastReturned.basicHasPreviousSibling()) {
 			previous = lastReturned.basicGetPreviousSibling();
 		} else {
 			CompositeNode parent = lastReturned.basicGetParent();
 			while (previous == null && parent != root && parent.basicGetParent() != null) {
-				if (parent.hasPreviousSibling()) {
+				if (parent.basicHasPreviousSibling()) {
 					previous = parent.basicGetPreviousSibling();
 				} else {
 					parent = parent.basicGetParent();

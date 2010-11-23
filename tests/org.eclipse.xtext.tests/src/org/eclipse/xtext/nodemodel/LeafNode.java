@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 import org.eclipse.xtext.nodemodel.impl.CompositeNode;
 
@@ -41,21 +40,6 @@ class LeafNode extends org.eclipse.xtext.nodemodel.impl.LeafNodeWithSyntaxError 
 	@Override
 	protected void basicSetParent(CompositeNode parent) {
 		super.basicSetParent(parent);
-	}
-
-	@Override
-	protected BidiIterator<AbstractNode> basicIterator() {
-		return super.basicIterator();
-	}
-
-	@Override
-	protected BidiTreeIterator<AbstractNode> basicTreeIterator() {
-		return super.basicTreeIterator();
-	}
-
-	@Override
-	protected EObject basicGetSemanticElement() {
-		return super.basicGetSemanticElement();
 	}
 
 	@Override

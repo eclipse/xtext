@@ -7,18 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class CompositeNode extends org.eclipse.xtext.nodemodel.impl.CompositeNode {
-
-	@Override
-	protected BidiIterable<AbstractNode> basicGetChildren() {
-		return super.basicGetChildren();
-	}
 
 	@Override
 	protected AbstractNode basicGetFirstChild() {
@@ -43,21 +37,6 @@ public class CompositeNode extends org.eclipse.xtext.nodemodel.impl.CompositeNod
 	@Override
 	protected void basicSetParent(org.eclipse.xtext.nodemodel.impl.CompositeNode parent) {
 		super.basicSetParent(parent);
-	}
-
-	@Override
-	protected BidiIterator<AbstractNode> basicIterator() {
-		return super.basicIterator();
-	}
-
-	@Override
-	protected BidiTreeIterator<AbstractNode> basicTreeIterator() {
-		return super.basicTreeIterator();
-	}
-
-	@Override
-	protected EObject basicGetSemanticElement() {
-		return super.basicGetSemanticElement();
 	}
 
 	@Override

@@ -343,5 +343,34 @@ public class Strings {
 			i++;
 		return indentationString.substring(i);
 	}
+	
+	private static final char[] separator = System.getProperty("line.separator").toCharArray();
 
+	public static int countLines(String text) {
+		return countLines(text, separator);
+	}
+
+	public static int countLines(String text, char[] separator) {
+		int line = 0;
+		char[] charArray = text.toCharArray();
+		if (separator.length == 1) {
+			for (int i = 0; i < charArray.length; i++) {
+				if (charArray[i] == separator[0]) {
+					line++;
+				}
+			}
+		} else if (separator.length == 2) {
+			for (int i = 0; i < charArray.length; i++) {
+				if (charArray[i] == separator[0] && charArray.length > i + 1 && charArray[i + 1] == separator[1]) {
+					line++;
+					i++;
+				} else if (charArray[i] == separator[1]) {
+					line++;
+				}
+			}
+		} else {
+			throw new IllegalArgumentException("Separators with more than two characters are unexpected");
+		}
+		return line;
+	}
 }

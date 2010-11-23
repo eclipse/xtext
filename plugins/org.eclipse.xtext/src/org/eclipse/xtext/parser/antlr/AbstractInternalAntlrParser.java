@@ -190,6 +190,8 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	
 	private INode lwLastConsumedNode;
 	
+	private boolean hadErrors;
+	
 	protected IAstFactory semanticModelBuilder;
 	
 	private int lastConsumedIndex = -1;
@@ -392,6 +394,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 				if (lwNode == lwCurrentNode)
 					lwCurrentNode = (ICompositeNode) newNode;
 			}
+			hadErrors = true;
 			currentError = null;
 		}
 	}
@@ -632,8 +635,9 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			try {
 				appendAllTokens();
 			} finally {
-				new InvariantChecker().checkInvariant(lwCurrentNode);
-				result = new ParseResult(current, currentNode, lwCurrentNode.getRootNode());
+				ICompositeNode root = lwNodeBuilder.compressAndReturnParent(lwCurrentNode);
+				new InvariantChecker().checkInvariant(root);
+				result = new ParseResult(current, currentNode, root, hadErrors);
 			}
 		}
 		return result;

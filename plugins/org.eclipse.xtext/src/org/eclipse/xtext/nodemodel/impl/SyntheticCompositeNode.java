@@ -38,6 +38,12 @@ public class SyntheticCompositeNode implements ICompositeNode {
 			return delegate.basicGetParent();
 		return new SyntheticCompositeNode(delegate, grammarElementIdx - 1);
 	}
+	
+	public boolean hasSiblings() {
+		if (grammarElementIdx == 0)
+			return delegate.basicHasSiblings();
+		return false;
+	}
 
 	public boolean hasPreviousSibling() {
 		if (grammarElementIdx == 0)
@@ -74,6 +80,10 @@ public class SyntheticCompositeNode implements ICompositeNode {
 	public int getTotalOffset() {
 		return delegate.getTotalOffset();
 	}
+	
+	public int getTotalStartLine() {
+		return delegate.getTotalStartLine();
+	}
 
 	public int getTotalLength() {
 		return delegate.getTotalLength();
@@ -93,7 +103,11 @@ public class SyntheticCompositeNode implements ICompositeNode {
 	}
 
 	public EObject getSemanticElement() {
-		return delegate.getParent().getSemanticElement();
+		return delegate.basicGetParent().getSemanticElement();
+	}
+	
+	public boolean hasDirectSemanticElement() {
+		return false;
 	}
 
 	public SyntaxErrorMessage getSyntaxErrorMessage() {

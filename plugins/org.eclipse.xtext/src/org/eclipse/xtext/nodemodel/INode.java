@@ -28,14 +28,22 @@ public interface INode extends BidiTreeIterable<INode> {
 	ICompositeNode getParent();
 	
 	/**
-	 * Returns <code>true</code> if this is not the first child of its parent.
+	 * Returns <code>true</code> if this node has any siblings.
+	 * @return <code>true</code> if this node has any siblings.
+	 * @see #hasPreviousSibling()
+	 * @see #hasNextSibling()
+	 */
+	boolean hasSiblings();
+	
+	/**
+	 * Returns <code>true</code> if this node is not the first child of its parent.
 	 * @returns <code>true</code> if this node has a previous sibling thus {@link #getPreviousSibling()} will
 	 *   not return <code>null</code>.
 	 */
 	boolean hasPreviousSibling();
 	
 	/**
-	 * Returns <code>true</code> if this is not the last child of its parent.
+	 * Returns <code>true</code> if this node is not the last child of its parent.
 	 * @returns <code>true</code> if this node has a next sibling thus {@link #getNextSibling()} will
 	 *   not return <code>null</code>.
 	 */
@@ -72,6 +80,11 @@ public interface INode extends BidiTreeIterable<INode> {
 	 *   but may be more efficient.
 	 */
 	int getTotalEndOffset();
+	
+	/**
+	 * @return the line number in the input where the node begins (one based, including hidden tokens).
+	 */
+	int getTotalStartLine();
 
 	/**
 	 * @return the parsed text that is covered by this node (including hidden tokens). Never <code>null</code>.
@@ -87,8 +100,14 @@ public interface INode extends BidiTreeIterable<INode> {
 	/**
 	 * @return the nearest semantic object that is associated with the subtree of this node. May return <code>null</code> whenever
 	 *   the parser refused to create an object due to unrecoverable errors.
+	 * @see #hasDirectSemanticElement()
 	 */
 	EObject getSemanticElement();
+	
+	/**
+	 * @return <code>true</code> if this node as a directly associated semantic element.
+	 */
+	boolean hasDirectSemanticElement();
 
 	/**
 	 * @return the directly associated syntax error message. May return <code>null</code>.

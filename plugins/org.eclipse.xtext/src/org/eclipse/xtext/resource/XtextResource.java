@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -37,7 +38,9 @@ import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.eclipse.xtext.util.IResourceScopeCache;
+import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator.IDiagnosticAcceptor;
@@ -146,6 +149,7 @@ public class XtextResource extends ResourceImpl {
 		setEncodingFromOptions(options);
 		IParseResult result = parser.parse(new InputStreamReader(inputStream, getEncoding()));
 		updateInternalState(result);
+		new NodeModelComparator(true).assertEquals((org.eclipse.xtext.nodemodel.impl.CompositeNode) parseResult.getRootNode2().getFirstChild(), parseResult.getRootNode());
 	}
 
 	protected void setEncodingFromOptions(Map<?, ?> options) {
@@ -193,13 +197,17 @@ public class XtextResource extends ResourceImpl {
 		if (!isLoaded()) {
 			throw new IllegalStateException("You can't update an unloaded resource.");
 		}
-		EObject oldRootObject = parseResult.getRootASTElement();
-		CompositeNode oldRootNode = parseResult.getRootNode();
-		parseResult = parser.reparse(oldRootNode, offset, replacedTextLength, newText);
-		if (oldRootObject != null && oldRootObject != parseResult.getRootASTElement()) {
-			unload(oldRootObject);
-			getContents().remove(oldRootObject);
+		IParseResult oldParseResult = parseResult;
+		ReplaceRegion replaceRegion = new ReplaceRegion(new TextRegion(offset, replacedTextLength), newText);
+		parseResult = parser.reparse(oldParseResult, replaceRegion);
+		if (oldParseResult.getRootASTElement() != null && oldParseResult.getRootASTElement() != parseResult.getRootASTElement()) {
+			unload(oldParseResult.getRootASTElement());
+			getContents().remove(oldParseResult.getRootASTElement());
 		}
+		String text = parseResult.getRootNode2().getText();
+		IParseResult compareWith = parser.parse(new StringReader(text));
+		addAdapterIfNeccessary(compareWith.getRootNode());
+		new NodeModelComparator(false).assertEquals((org.eclipse.xtext.nodemodel.impl.CompositeNode) parseResult.getRootNode2().getFirstChild(), compareWith.getRootNode());
 		updateInternalState(parseResult);
 	}
 
@@ -208,7 +216,6 @@ public class XtextResource extends ResourceImpl {
 		if (parseResult.getRootASTElement() != null && !getContents().contains(parseResult.getRootASTElement()))
 			getContents().add(parseResult.getRootASTElement());
 		addAdapterIfNeccessary(parseResult.getRootNode());
-		new NodeModelComparator().assertEquals((org.eclipse.xtext.nodemodel.impl.CompositeNode) parseResult.getRootNode2().getFirstChild(), parseResult.getRootNode());
 		reattachModificationTracker(parseResult.getRootASTElement());
 		clearErrorsAndWarnings();
 		addSyntaxErrors();

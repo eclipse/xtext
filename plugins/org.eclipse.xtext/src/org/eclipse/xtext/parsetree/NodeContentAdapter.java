@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.parsetree.impl.ParsetreeUtil;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -154,7 +155,7 @@ public class NodeContentAdapter extends EContentAdapter {
 		node.setTotalLine(workingInfo.totalLine);
 		
 		workingInfo.totalOffset += node.getTotalLength();
-		workingInfo.totalLine += ParsetreeUtil.countLines(node.getText());
+		workingInfo.totalLine += Strings.countLines(node.getText());
 	}
 	
 	/*

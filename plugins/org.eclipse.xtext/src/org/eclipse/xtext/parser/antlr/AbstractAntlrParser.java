@@ -15,12 +15,14 @@ import org.antlr.runtime.ANTLRReaderStream;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.parser.AbstractParser;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
-import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.util.ReplaceRegion;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -65,7 +67,7 @@ public abstract class AbstractAntlrParser extends AbstractParser {
 
 	@Override
 	public IParseResult doParse(CharSequence sequence) {
-		return parse(getDefaultRuleName(), new StringReader(sequence.toString()));
+		return doParse(new StringReader(sequence.toString()));
 	}
 
 	public IAstFactory getElementFactory() {
@@ -79,13 +81,17 @@ public abstract class AbstractAntlrParser extends AbstractParser {
 	protected abstract String getDefaultRuleName();
 
 	protected IParseResult parse(String ruleName, CharStream in) {
+		return doParse(ruleName, in, nodeModelBuilder.get());
+	}
+
+	protected IParseResult doParse(String ruleName, CharStream in, NodeModelBuilder nodeModelBuilder) {
 		TokenSource tokenSource = createLexer(in);
 		XtextTokenStream tokenStream = createTokenStream(tokenSource);
 		setInitialHiddenTokens(tokenStream);
 		AbstractInternalAntlrParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
-		parser.setNodeModelBuilder(nodeModelBuilder.get());
+		parser.setNodeModelBuilder(nodeModelBuilder);
 		parser.setSemanticModelBuilder(getElementFactory());
 		IUnorderedGroupHelper helper = getUnorderedGroupHelper().get();
 		parser.setUnorderedGroupHelper(helper);
@@ -104,9 +110,20 @@ public abstract class AbstractAntlrParser extends AbstractParser {
 	
 	protected abstract AbstractInternalAntlrParser createParser(XtextTokenStream stream);
 
-	public IParseResult parse(String ruleName, Reader reader) {
+	public IParseResult parse(ParserRule rule, Reader reader) {
 		try {
-			IParseResult parseResult = parse(ruleName, new ANTLRReaderStream(reader));
+			IParseResult parseResult = parse(rule.getName(), new ANTLRReaderStream(reader));
+			return parseResult;
+		} catch (IOException e) {
+			throw new WrappedException(e);
+		}
+	}
+	
+	public IParseResult parse(RuleCall ruleCall, Reader reader) {
+		try {
+			NodeModelBuilder builder = nodeModelBuilder.get();
+			builder.setForcedFirstGrammarElement(ruleCall);
+			IParseResult parseResult = doParse(ruleCall.getRule().getName(), new ANTLRReaderStream(reader), builder);
 			return parseResult;
 		} catch (IOException e) {
 			throw new WrappedException(e);
@@ -114,8 +131,8 @@ public abstract class AbstractAntlrParser extends AbstractParser {
 	}
 
 	@Override
-	protected IParseResult doReparse(CompositeNode originalRootNode, int offset, int length, String change) {
-		return partialParser.reparse(this, originalRootNode, offset, length, change);
+	protected IParseResult doReparse(IParseResult previousParseResult, ReplaceRegion replaceRegion) {
+		return partialParser.reparse(this, previousParseResult, replaceRegion);
 	}
 
 	@Override

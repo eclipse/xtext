@@ -8,7 +8,6 @@
 package org.eclipse.xtext.parser.packrat;
 
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parser.ParseResult;
 import org.eclipse.xtext.parser.packrat.tokens.AbstractParsedToken;
 
 import com.google.inject.ImplementedBy;
@@ -20,15 +19,5 @@ import com.google.inject.ImplementedBy;
 public interface IParseResultFactory {
 
 	IParseResult createParseResult(AbstractParsedToken token, CharSequence input);
-
-	class NullParseResultFactory implements IParseResultFactory {
-
-		public static IParseResultFactory INSTANCE = new NullParseResultFactory();
-
-		public IParseResult createParseResult(AbstractParsedToken tokens, CharSequence input) {
-			return new ParseResult();
-		}
-
-	}
 
 }
