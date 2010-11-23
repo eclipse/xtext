@@ -12,8 +12,10 @@ import static com.google.common.collect.Iterables.*;
 
 import java.lang.reflect.Field;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EObject;
@@ -23,8 +25,11 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -36,11 +41,16 @@ import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.linking.impl.LinkingHelper;
+import org.eclipse.xtext.linking.lazy.lazyLinking.Model;
+import org.eclipse.xtext.linking.lazy.lazyLinking.Property;
+import org.eclipse.xtext.linking.lazy.lazyLinking.Type;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.ParsetreeFactory;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
@@ -141,6 +151,14 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
     	}
     }
     
+    final EContentAdapter notificationAlert = new EContentAdapter(){
+    	@Override
+    	public void notifyChanged(Notification notification) {
+    		if (notification.getFeature()!=null)
+    			fail("Unexpected notification "+notification.toString());
+    	}
+    };
+    
     public void testResolveLazyCrossReferences() throws Exception {
     	with(testLangaugeSetup());
     	ResourceSetImpl rs = new ResourceSetImpl();
@@ -158,6 +176,7 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
 				  "bar {" 
 				+ "  entity Bar{}" 
 				+ "}"), null);
+		res1.eAdapters().add(notificationAlert);
 		
 		Entity e = (Entity) find(EcoreUtil2.eAllContents(res1.getContents().get(0)),new Predicate<EObject>() {
 			public boolean apply(EObject input) {
@@ -167,9 +186,10 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
 		
 		assertTrue(((EObject)e.getProperties().get(0).eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false)).eIsProxy());
 		assertTrue(((EObject)e.getProperties().get(1).eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false)).eIsProxy());
-		((LazyLinkingResource)res1).resolveLazyCrossReferences(true);
+		((LazyLinkingResource)res1).resolveLazyCrossReferences(CancelIndicator.NullImpl);
 		assertTrue(((EObject)e.getProperties().get(0).eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false)).eIsProxy());
 		assertFalse(((EObject)e.getProperties().get(1).eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false)).eIsProxy());
+		res1.eAdapters().remove(notificationAlert);
 		EcoreUtil.resolveAll(res1);
 		assertFalse(((EObject)e.getProperties().get(0).eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false)).eIsProxy());
 		assertFalse(((EObject)e.getProperties().get(1).eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false)).eIsProxy());
@@ -193,7 +213,7 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
     			"bar {" 
     			+ "  entity Bar{}" 
     			+ "}"), null);
-    	
+    	res1.eAdapters().add(notificationAlert);
     	Entity e = (Entity) find(EcoreUtil2.eAllContents(res1.getContents().get(0)),new Predicate<EObject>() {
     		public boolean apply(EObject input) {
     			return input instanceof Entity;
@@ -203,11 +223,12 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
     	assertTrue(((EObject)e.getProperties().get(0).eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false)).eIsProxy());
     	assertTrue(((EObject)e.getProperties().get(1).eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false)).eIsProxy());
     	assertTrue(((EObject)e.getProperties().get(2).eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false)).eIsProxy());
-    	((LazyLinkingResource)res1).resolveLazyCrossReferences(true);
+    	((LazyLinkingResource)res1).resolveLazyCrossReferences(CancelIndicator.NullImpl);
     	assertEquals(1,res1.getErrors().size());
     	assertTrue(((EObject)e.getProperties().get(0).eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false)).eIsProxy());
     	assertFalse(((EObject)e.getProperties().get(1).eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false)).eIsProxy());
     	assertTrue(((EObject)e.getProperties().get(2).eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false)).eIsProxy());
+    	res1.eAdapters().remove(notificationAlert);
     	EcoreUtil.resolveAll(res1);
     	assertEquals(1,res1.getErrors().size());
     	assertFalse(((EObject)e.getProperties().get(0).eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false)).eIsProxy());
@@ -227,5 +248,52 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
     			 });
     		}
     	};
+	}
+
+	public void testResolveLazyCrossReferences_02() throws Exception {
+		with(lazyLinkingTestLangaugeSetup());
+		ResourceSetImpl rs = new ResourceSetImpl();
+		final Resource res1 = rs.createResource(URI.createURI("file1.lazylinkingtestlanguage"));
+		Resource res2 = rs.createResource(URI.createURI("file2.lazylinkingtestlanguage"));
+		res1.load(new StringInputStream("type Foo { } type Baz { Foo Bar prop; } }"), null);
+		res2.load(new StringInputStream("type Bar { }"), null);
+		res1.eAdapters().add(notificationAlert);
+		
+		Model m = (Model) res1.getContents().get(0);
+		Type t = m.getTypes().get(1);
+		Property p = t.getProperties().get(0);
+		final InternalEList<Type> types = (InternalEList<Type>) p.getType();
+		assertEquals(2, types.size());
+		for (Iterator<Type> it = types.basicIterator(); it.hasNext();) {
+			final Type tt = it.next();
+			assertTrue(tt.eIsProxy());
+		}
+		((LazyLinkingResource) res1).resolveLazyCrossReferences(CancelIndicator.NullImpl);
+		assertFalse(types.basicGet(0).eIsProxy());
+		assertTrue(types.basicGet(1).eIsProxy());
+		res1.eAdapters().remove(notificationAlert);
+    	EcoreUtil.resolveAll(res1);
+		assertFalse(types.basicGet(0).eIsProxy());
+		assertFalse(types.basicGet(1).eIsProxy());
+	}
+
+	protected ISetup lazyLinkingTestLangaugeSetup() {
+		return new LazyLinkingTestLanguageStandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(new org.eclipse.xtext.linking.lazy.LazyLinkingTestLanguageRuntimeModule() {
+					@Override
+					public void configureIResourceDescriptions(Binder binder) {
+						binder.bind(org.eclipse.xtext.resource.IResourceDescriptions.class).to(
+								ProxyfyingResourceDecriptions.class);
+					}
+
+					@Override
+					public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
+						return org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider.class;
+					}
+				});
+			}
+		};
 	}
 }
