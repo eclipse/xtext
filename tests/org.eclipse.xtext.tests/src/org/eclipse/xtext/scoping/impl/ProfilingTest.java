@@ -30,7 +30,7 @@ import com.google.inject.Injector;
  */
 public class ProfilingTest extends AbstractXtextTests {
 	
-	private static final int ELEMENTS = 600;
+	private static final int ELEMENTS = 6;
 //	private static final int ELEMENTS = 6000;
 	
 	static class OptimizedScopeProvider extends ImportedNamespaceAwareLocalScopeProvider {

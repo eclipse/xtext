@@ -35,6 +35,7 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.formatting.INodeModelFormatter;
 import org.eclipse.xtext.linking.ILinkingService;
+import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -45,6 +46,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.collect.Lists;
@@ -300,7 +302,11 @@ public abstract class AbstractXtextTests extends TestCase {
 		XtextResource resource = (XtextResource) getResourceFactory().createResource(uri);
 		rs.getResources().add(resource);
 		resource.load(in, null);
-		EcoreUtil.resolveAll(resource);
+		if (resource instanceof LazyLinkingResource) {
+			((LazyLinkingResource) resource).resolveLazyCrossReferences(CancelIndicator.NullImpl);
+		} else {
+			EcoreUtil.resolveAll(resource);
+		}
 		return resource;
 	}
 

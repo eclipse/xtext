@@ -54,6 +54,30 @@ public class ProfilerAbstractBuilderTest extends TestCase implements IResourceDe
 		super.tearDown();
 	}
 	
+	public void testIncrementalBuildWithBigLibraryFile() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+		IFolder folder = project.getProject().getFolder("src");
+		int NUM_OBJECTS = 40000;
+		StopWatch timer = new StopWatch();
+		IFile file = folder.getFile("Test_Library" + F_EXT);
+		String contents = "namespace x { ";
+		for (int i = 0; i < NUM_OBJECTS; i++) {
+			contents += " object Foo" + i;
+		}
+		contents+="}";
+		file.create(new StringInputStream(contents), true, monitor());
+		logAndReset("Creating files", timer);
+		waitForAutoBuild();
+		for (int i =0;i<5;i++) {
+			IFile f = folder.getFile("Referencing_"+i+F_EXT);
+			logAndReset("Creating library file", timer);
+			f.create(new StringInputStream("object Bar"+i+" references x.Foo1"), true, null);
+			logAndReset("Auto build", timer);
+			waitForAutoBuild();
+		}
+	}
+	
 	public void testFullBuildBigProject() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
