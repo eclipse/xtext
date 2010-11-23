@@ -70,11 +70,4 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 		return super.getElements(selector);
 	}
 	
-	@Override
-	public IEObjectDescription getSingleElement(ISelector selector) {
-		if (state.getContents().isEmpty())
-			return null;
-		return super.getSingleElement(selector);
-	}
-	
 }

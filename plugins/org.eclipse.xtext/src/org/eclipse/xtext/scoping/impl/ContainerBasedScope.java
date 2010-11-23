@@ -36,7 +36,7 @@ public class ContainerBasedScope extends AbstractScope {
 	public Iterable<IEObjectDescription> getLocalElements(ISelector selector) {
 		return filter(container.getElements(selector), new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
-				return EcoreUtil2.isAssignableFrom(reference.getEReferenceType(), input.getEObjectOrProxy().eClass());
+				return EcoreUtil2.isAssignableFrom(reference.getEReferenceType(), input.getEClass());
 			}
 		});
 	}

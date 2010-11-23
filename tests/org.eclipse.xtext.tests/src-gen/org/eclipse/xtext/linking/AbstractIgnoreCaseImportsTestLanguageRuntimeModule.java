@@ -96,7 +96,7 @@ public abstract class AbstractIgnoreCaseImportsTestLanguageRuntimeModule extends
 
 	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
 	public void configureIgnoreCaseLinking(com.google.inject.Binder binder) {
-		binder.bind(Boolean.TYPE).annotatedWith(org.eclipse.xtext.scoping.IgnoreCaseLinking.class).toInstance(true);
+		binder.bindConstant().annotatedWith(org.eclipse.xtext.scoping.IgnoreCaseLinking.class).to(true);
 	}
 
 }

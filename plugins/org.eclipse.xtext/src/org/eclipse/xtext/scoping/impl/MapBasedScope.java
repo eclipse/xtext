@@ -18,10 +18,10 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.ISelector;
 
 /**
- * A scope implemented using a {@link Map}. 
+ * A scope implemented using a {@link Map} used for efficient lookup of ordinary named {@link org.eclipse.xtext.resource.EObjectDescription}s. 
  * 
- * This implementation assumes, that the keys of the {@link Map} are the keys of the contained {@link org.eclipse.xtext.resource.EObjectDescription}s
- * as well as the name.
+ * This implementation assumes, that the keys of the {@link Map} correspond to the keys of the contained {@link org.eclipse.xtext.resource.EObjectDescription}.
+ * Additionally it assumes, that those keys are equal to <code>description.getName().toLowerCase()</code>.
  * 
  * When looking up elements using {@link ISelector.SelectByName} this implementation looks up the the elements from the map, hence are much 
  * more efficient for many {@link IEObjectDescription}s.  

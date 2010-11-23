@@ -62,7 +62,7 @@ public class ResourceDescriptionBasedScope extends AbstractScope {
 	public Iterable<IEObjectDescription> getLocalElements(ISelector selector) {
 		return filter(description.getExportedObjects(selector), new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
-				return EcoreUtil2.isAssignableFrom(type, input.getEObjectOrProxy().eClass());
+				return EcoreUtil2.isAssignableFrom(type, input.getEClass());
 			}
 		});
 	}
