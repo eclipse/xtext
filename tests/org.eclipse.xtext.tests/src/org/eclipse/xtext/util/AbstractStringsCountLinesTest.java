@@ -5,14 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parsetree.impl;
+package org.eclipse.xtext.util;
 
 import junit.framework.TestCase;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractParsetreeUtilTest extends TestCase {
+public abstract class AbstractStringsCountLinesTest extends TestCase {
 
 	private char[] separator;
 
@@ -22,7 +22,7 @@ public abstract class AbstractParsetreeUtilTest extends TestCase {
 	}
 	
 	protected void checkLineCount(int expected, String text) {
-		assertEquals(text, expected, ParsetreeUtil.countLines(text, separator));
+		assertEquals(text, expected, Strings.countLines(text, separator));
 	}
 	
 	public void testCountLines_01() {

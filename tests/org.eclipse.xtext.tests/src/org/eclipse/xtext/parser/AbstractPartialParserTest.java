@@ -10,16 +10,18 @@ package org.eclipse.xtext.parser;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.parser.impl.PartialParsingHelper;
+import org.eclipse.xtext.parser.impl.PartialParsingPointers;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.util.EmfStructureComparator;
+import org.eclipse.xtext.util.ReplaceRegion;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
 public abstract class AbstractPartialParserTest extends AbstractXtextTests {
 
-	protected static final boolean DEBUG = true;
 	protected EmfStructureComparator comparator;
 	protected PartialParsingHelper partialParser;
 
@@ -40,5 +42,14 @@ public abstract class AbstractPartialParserTest extends AbstractXtextTests {
 		comparator = null;
 		partialParser = null;
 		super.tearDown();
+	}
+	
+	protected String getReparseRegion(PartialParsingPointers parsingPointers) {
+		ICompositeNode replaceRootNode = parsingPointers.getDefaultReplaceRootNode();
+		return replaceRootNode.getText();
+	}
+	
+	protected IParseResult reparse(IParseResult parseResult, int offset, int length, String text) {
+		return partialParser.reparse(getParser(), parseResult, new ReplaceRegion(offset, length, text));
 	}
 }

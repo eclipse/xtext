@@ -4,16 +4,17 @@ import java.io.Reader;
 
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.ReplaceRegion;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class PartialParser implements IParser {
-	private final AbstractRule rule;
+	private final ParserRule rule;
 	private final IParser originalParser;
 
 	public static void assignRootRule(XtextResource resource, ParserRule rule) {
@@ -22,21 +23,24 @@ public class PartialParser implements IParser {
 		resource.setParser(partialParser);
 	}
 	
-	protected PartialParser(IParser originalParser, AbstractRule rule) {
+	protected PartialParser(IParser originalParser, ParserRule rule) {
 		this.rule = rule;
 		this.originalParser = originalParser;
 	}
 
 	public IParseResult parse(Reader reader) {
-		return originalParser.parse(rule.getName(), reader);
+		return originalParser.parse(rule, reader);
 	}
 	
-	public IParseResult parse(String ruleName, Reader reader) {
-		return originalParser.parse(ruleName, reader);
+	public IParseResult parse(ParserRule rule, Reader reader) {
+		return originalParser.parse(rule, reader);
+	}
+	
+	public IParseResult parse(RuleCall ruleCall, Reader reader) {
+		throw new UnsupportedOperationException();
 	}
 
-	public IParseResult reparse(CompositeNode originalRootNode, int offset, int length,
-			String change) {
-		return originalParser.reparse(originalRootNode, offset, length, change);
+	public IParseResult reparse(IParseResult previousParseResult, ReplaceRegion replaceRegion) {
+		return originalParser.reparse(previousParseResult, replaceRegion);
 	}
 }
