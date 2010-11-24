@@ -54,8 +54,8 @@ import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
@@ -352,12 +352,12 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 			Iterables.addAll(allGeneratedMetamodels, getAllGeneratedMetamodels(usedGrammar, visited));
 		if (allGeneratedMetamodels.isEmpty())
 			return;
-		List<AbstractNode> nodes = NodeUtil.findNodesForFeature(metamodel,
+		List<INode> nodes = NodeModelUtils.findNodesForFeature(metamodel,
 				XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE);
 		if (nodes.size() != 1)
 			throw new IllegalArgumentException();
-		String text = nodes.get(0).serialize();
-		text = (String) valueConverter.toValue(text, "STRING", nodes.get(0), null);
+		String text = nodes.get(0).getText();
+		text = (String) valueConverter.toValue(text, "STRING", nodes.get(0));
 		for (GeneratedMetamodel generatedMetamodel : allGeneratedMetamodels) {
 			EPackage generatedPackage = generatedMetamodel.getEPackage();
 			if (generatedPackage != null && nsURI.equals((generatedPackage.getNsURI()))) {

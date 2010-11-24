@@ -9,7 +9,6 @@ package org.eclipse.xtext.conversion.impl;
 
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -30,17 +29,17 @@ public class INTValueConverter extends AbstractLexerBasedConverter<Integer> {
 	protected void assertValidValue(Integer value) {
 		super.assertValidValue(value);
 		if (value < 0)
-			throw new ValueConverterException(getRuleName() + "-value may not be negative (value:" + value + ").", null, null, null);
+			throw new ValueConverterException(getRuleName() + "-value may not be negative (value:" + value + ").", null, null);
 	}
 	
-	public Integer toValue(String string, AbstractNode node, INode newNode) {
+	public Integer toValue(String string, INode node) {
 		if (Strings.isEmpty(string))
-			throw new ValueConverterException("Couldn't convert empty string to int.", node, newNode, null);
+			throw new ValueConverterException("Couldn't convert empty string to int.", node, null);
 		try {
 			int intValue = Integer.parseInt(string, 10);
 			return Integer.valueOf(intValue);
 		} catch (NumberFormatException e) {
-			throw new ValueConverterException("Couldn't convert '" + string + "' to int.", node, newNode, e);
+			throw new ValueConverterException("Couldn't convert '" + string + "' to int.", node, e);
 		}
 	}
 

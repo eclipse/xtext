@@ -78,7 +78,7 @@ public class XtextLinkingService extends DefaultLinkingService {
 
 	private List<EObject> getUsedGrammar(Grammar grammar, INode node) {
 		try {
-			String grammarName = (String) valueConverterService.toValue("", "GrammarID", null, node);
+			String grammarName = (String) valueConverterService.toValue("", "GrammarID", node);
 			if (grammarName != null) {
 				final ResourceSet resourceSet = grammar.eResource().getResourceSet();
 				for(Resource resource: resourceSet.getResources()) {
@@ -144,7 +144,7 @@ public class XtextLinkingService extends DefaultLinkingService {
 	private String getMetamodelNsURI(ILeafNode text) {
 		try {
 			return (String) valueConverterService.toValue(text.getText(), getLinkingHelper().getRuleNameFrom(text
-					.getGrammarElement()), null, text);
+					.getGrammarElement()), text);
 		} catch (ValueConverterException e) {
 			log.debug("Exception on leaf '" + text.getText() + "'", e);
 			return null;

@@ -123,7 +123,7 @@ public class NodeModelStreamer implements INodeModelStreamer {
 
 	protected void writeSemantic(ITokenStream out, ICompositeNode node) throws IOException {
 		AbstractRule rule = tokenUtil.getTokenRule(node);
-		Object val = valueConverter.toValue(tokenUtil.serializeNode(node), rule.getName(), null, node);
+		Object val = valueConverter.toValue(tokenUtil.serializeNode(node), rule.getName(), node);
 		String text = valueConverter.toString(val, rule.getName());
 		out.writeSemantic(node.getGrammarElement(), text);
 	}

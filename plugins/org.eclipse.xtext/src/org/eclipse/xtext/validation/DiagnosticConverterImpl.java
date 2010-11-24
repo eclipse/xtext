@@ -15,9 +15,8 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator.DiagnosticImpl;
@@ -128,15 +127,14 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 	 *         </ol>
 	 */
 	protected Triple<Integer, Integer, Integer> getLocationData(EObject obj, EStructuralFeature structuralFeature) {
-		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(obj);
-		if (nodeAdapter != null) {
-			AbstractNode parserNode = nodeAdapter.getParserNode();
+		INode parserNode = NodeModelUtils.getNode(obj);
+		if (parserNode != null) {
 			if (structuralFeature != null) {
-				List<AbstractNode> nodes = NodeUtil.findNodesForFeature(obj, structuralFeature);
+				List<INode> nodes = NodeModelUtils.findNodesForFeature(obj, structuralFeature);
 				if (!nodes.isEmpty())
 					parserNode = nodes.iterator().next();
 			}
-			Integer lineNumber = Integer.valueOf(parserNode.getLine());
+			Integer lineNumber = Integer.valueOf(parserNode.getStartLine());
 			int offset = parserNode.getOffset();
 			Integer charStart = Integer.valueOf(Integer.valueOf(offset));
 			Integer charEnd = Integer.valueOf(offset + parserNode.getLength());

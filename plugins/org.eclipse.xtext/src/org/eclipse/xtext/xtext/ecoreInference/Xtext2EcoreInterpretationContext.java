@@ -20,9 +20,8 @@ import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.XtextSwitch;
 
 import com.google.common.base.Function;
@@ -126,10 +125,9 @@ public class Xtext2EcoreInterpretationContext {
 	private EClassifier getTerminalType(AbstractElement terminal) throws TransformationException {
 		final EClassifier result = classifierCalculator.apply(terminal);
 		if (result == null) {
-			final NodeAdapter adapter = NodeUtil.getNodeAdapter(terminal);
-			if (adapter != null) {
-				final AbstractNode node = adapter.getParserNode();
-				throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot find type for '" + node.serialize() + "'.", terminal);
+			final ICompositeNode node = NodeModelUtils.getNode(terminal);
+			if (node != null) {
+				throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot find type for '" + node.getText() + "'.", terminal);
 			}
 			throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot find type for " + terminal.eClass().getName(), terminal);
 		}

@@ -7,15 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel.util;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -108,6 +109,23 @@ public class NodeModelUtils {
 						}
 					}
 				}
+			}
+		}
+		return result;
+	}
+	
+	public static final INode getLastCompleteNodeByOffset(INode node, int offsetPosition) {
+		BidiTreeIterator<INode> iterator = node.getRootNode().treeIterator();
+		INode result = null;
+		while (iterator.hasNext()) {
+			INode candidate = iterator.next();
+			if (candidate.getOffset() >= offsetPosition ) {
+				break;
+			} else if ((candidate instanceof ILeafNode || null == result) &&
+					   (candidate.getGrammarElement() == null ||
+							   candidate.getGrammarElement() instanceof AbstractElement ||
+							   candidate.getGrammarElement() instanceof ParserRule)) {
+				result = candidate;
 			}
 		}
 		return result;

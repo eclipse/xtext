@@ -11,15 +11,11 @@ package org.eclipse.xtext.parser.antlr;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
-
-import com.google.common.collect.Sets;
 
 /**
  * A token stream that is aware of the current lookahead.
@@ -30,10 +26,6 @@ public class XtextTokenStream extends CommonTokenStream {
 
 	private int currentLookAhead;
 	
-	private final List<Token> lookaheadTokens;
-	
-	private final Set<Token> lookaheadTokenSet;
-
 	private Map<String, Integer> rulenameToTokenType;
 	
 	private BitSet hiddenTokens;
@@ -41,22 +33,16 @@ public class XtextTokenStream extends CommonTokenStream {
 	public XtextTokenStream() {
 		super();
 		tokens = new TokenList(500);
-		lookaheadTokens = createLookAheadTokenList();
-		lookaheadTokenSet = createLookAheadTokenSet();
 	}
 
 	public XtextTokenStream(TokenSource tokenSource, int channel) {
 		super(tokenSource, channel);
 		tokens = new TokenList(500);
-		lookaheadTokens = createLookAheadTokenList();
-		lookaheadTokenSet = createLookAheadTokenSet();
 	}
 
 	public XtextTokenStream(TokenSource tokenSource, ITokenDefProvider tokenDefProvider) {
 		super(tokenSource);
 		tokens = new TokenList(500);
-		lookaheadTokens = createLookAheadTokenList();
-		lookaheadTokenSet = createLookAheadTokenSet();
 		rulenameToTokenType = new HashMap<String, Integer>(tokenDefProvider.getTokenDefMap().size());
 		for(Map.Entry<Integer, String> entry: tokenDefProvider.getTokenDefMap().entrySet()) {
 			rulenameToTokenType.put(entry.getValue(), entry.getKey());
@@ -148,9 +134,6 @@ public class XtextTokenStream extends CommonTokenStream {
 	@Override
 	public int LA(int i) {
 		Token lookaheadToken = LT(i);
-		if (lookaheadTokenSet.add(lookaheadToken)) {
-			lookaheadTokens.add(lookaheadToken);
-		}
 		if (firstMarker != -1) {
 			int currentLookAheadIsRelativeTo = Math.min(firstMarker, p);
 			int totalLA = p + i - currentLookAheadIsRelativeTo;
@@ -224,35 +207,8 @@ public class XtextTokenStream extends CommonTokenStream {
         return result;
 	}
 
-	/**
-	 * @return the lookaheadTokens
-	 */
-	public List<Token> getLookaheadTokens() {
-		return lookaheadTokens;
-	}
-	
 	public int getCurrentLookAhead() {
 		return currentLookAhead;  
-	}
-
-	public void removeLastLookaheadToken() {
-		Token removed = lookaheadTokens.remove(lookaheadTokens.size() - 1);
-		lookaheadTokenSet.remove(removed);
-	}
-	
-	protected List<Token> createLookAheadTokenList() {
-		return new ArrayList<Token>();
-	}
-	
-	protected Set<Token> createLookAheadTokenSet() {
-		return Sets.newHashSet();
-	}
-
-	public void resetLookahead() {
-		if (!lookaheadTokens.isEmpty()) {
-			lookaheadTokens.clear();
-			lookaheadTokenSet.clear();
-		}
 	}
 
 	public String getLexerErrorMessage(Token invalidToken) {

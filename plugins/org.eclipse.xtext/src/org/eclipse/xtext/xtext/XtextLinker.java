@@ -44,9 +44,9 @@ import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
 import org.eclipse.xtext.linking.impl.Linker;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
@@ -399,13 +399,13 @@ public class XtextLinker extends Linker {
 	protected void clearReference(EObject obj, EReference ref) {
 		super.clearReference(obj, ref);
 		if (obj.eIsSet(ref) && ref.getEType().equals(XtextPackage.Literals.TYPE_REF)) {
-			NodeAdapter adapter = NodeUtil.getNodeAdapter((EObject) obj.eGet(ref));
-			if (adapter == null || adapter.getParserNode() == null)
+			INode node = NodeModelUtils.getNode((EObject) obj.eGet(ref));
+			if (node == null)
 				obj.eUnset(ref);
 		}
 		if (obj.eIsSet(ref) && ref == XtextPackage.Literals.CROSS_REFERENCE__TERMINAL) {
-			NodeAdapter adapter = NodeUtil.getNodeAdapter((EObject) obj.eGet(ref));
-			if (adapter == null || adapter.getParserNode() == null)
+			INode node = NodeModelUtils.getNode((EObject) obj.eGet(ref));
+			if (node == null)
 				obj.eUnset(ref);
 		}
 	}

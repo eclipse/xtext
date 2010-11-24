@@ -24,10 +24,11 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.BidiIterator;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
@@ -235,14 +236,13 @@ public class GrammarUtil {
 	public static String getTypeRefName(TypeRef typeRef) {
 		if (typeRef.getClassifier() != null)
 			return typeRef.getClassifier().getName();
-		final NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(typeRef);
-		if (nodeAdapter != null) {
-			final CompositeNode node = nodeAdapter.getParserNode();
-			final List<LeafNode> leafNodes = node.getLeafNodes();
-			for (int i = leafNodes.size() - 1; i >= 0; i--) {
-				final LeafNode leaf = leafNodes.get(i);
-				if (!leaf.isHidden())
-					return leaf.getText();
+		final ICompositeNode node = NodeModelUtils.getNode(typeRef);
+		if (node != null) {
+			final BidiIterator<INode> leafNodes = node.treeIterator();
+			while(leafNodes.hasPrevious()) {
+				INode previous = leafNodes.previous();
+				if (previous instanceof ILeafNode && !((ILeafNode) previous).isHidden())
+					return previous.getText();
 			}
 		}
 		return null;

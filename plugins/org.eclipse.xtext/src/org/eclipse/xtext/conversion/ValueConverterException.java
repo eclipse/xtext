@@ -8,7 +8,6 @@
 package org.eclipse.xtext.conversion;
 
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.parsetree.AbstractNode;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -16,22 +15,14 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 @SuppressWarnings("serial")
 public class ValueConverterException extends RuntimeException {
 
-	private final AbstractNode node;
+	private final INode node;
 	
-	private final INode newNode;
-	
-	public ValueConverterException(String message, AbstractNode node, INode newNode, Exception cause) {
+	public ValueConverterException(String message, INode node, Exception cause) {
 		super(message == null && cause != null ? cause.getMessage() : message, cause);
 		this.node = node;
-		this.newNode = newNode;
 	}
 
-	@Deprecated
-	public AbstractNode getNode() {
+	public INode getNode() {
 		return node;
-	}
-	
-	public INode getNode2() {
-		return newNode;
 	}
 }

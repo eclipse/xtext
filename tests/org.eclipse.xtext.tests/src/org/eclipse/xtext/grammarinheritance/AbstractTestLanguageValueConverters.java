@@ -13,7 +13,6 @@ import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractToStringConverter;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.parsetree.AbstractNode;
 
 public final class AbstractTestLanguageValueConverters extends DefaultTerminalConverters {
 	@ValueConverter(rule = "REAL")
@@ -21,7 +20,7 @@ public final class AbstractTestLanguageValueConverters extends DefaultTerminalCo
 		return new AbstractToStringConverter<Double>(){
 
 			@Override
-			protected Double internalToValue(String string, AbstractNode node, INode newNode) {
+			protected Double internalToValue(String string, INode newNode) {
 				return Double.valueOf(string);
 			}
 		};

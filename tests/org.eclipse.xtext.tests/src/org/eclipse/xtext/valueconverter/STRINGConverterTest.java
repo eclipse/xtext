@@ -30,20 +30,20 @@ public class STRINGConverterTest extends AbstractXtextTests {
 
 	public void testEscapeChars() throws Exception {
 		String s = "\"\\t\\n\\r\\f\\b\"";
-		String value = valueConverter.toValue(s, null, null);
+		String value = valueConverter.toValue(s, null);
 		assertEquals("\t\n\r\f\b", value);
 		assertEquals(s, valueConverter.toString(value));
 	}
 
 	public void testUnicode() throws Exception {
 		try {
-			valueConverter.toValue("'\\u0000'", null, null);
+			valueConverter.toValue("'\\u0000'", null);
 			fail("Illegal escape chr not detected");
 		} catch (ValueConverterException e) {
 			// normal operation
 		}
 		String legalString = "\"\\\\u0000\"";
-		String value = valueConverter.toValue(legalString, null, null);
+		String value = valueConverter.toValue(legalString, null);
 		assertEquals("\\u0000", value);
 		assertEquals(legalString, valueConverter.toString(value));
 	}
@@ -51,7 +51,7 @@ public class STRINGConverterTest extends AbstractXtextTests {
 	public void testUnicode_02() throws Exception {
 		String value = "\u1234";
 		String string = valueConverter.toString(value);
-		assertEquals(value, valueConverter.toValue(string, null, null));
+		assertEquals(value, valueConverter.toValue(string, null));
 	}
 	
 	public void testEmpty() throws Exception {

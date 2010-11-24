@@ -9,7 +9,6 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.parsetree.AbstractNode;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -23,7 +22,7 @@ public class HiddenTokensMergerTestLanguageRuntimeModule extends
 			return new AbstractNullSafeConverter<String>() {
 
 				@Override
-				protected String internalToValue(String string, AbstractNode node, INode newNode) {
+				protected String internalToValue(String string, INode newNode) {
 					return string.replaceAll("\\s*", "");
 				}
 

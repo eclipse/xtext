@@ -10,7 +10,6 @@ package org.eclipse.xtext.conversion;
 
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.parsetree.AbstractNode;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -23,7 +22,7 @@ public interface IValueConverter<Type> {
 		public String toString(String value) {
 			return value;
 		}
-		public String toValue(String string, AbstractNode node, INode newNode) {
+		public String toValue(String string, INode node) {
 			return string;
 		}
 	};
@@ -34,7 +33,7 @@ public interface IValueConverter<Type> {
 	 * @return
 	 * @throws ValueConverterException
 	 */
-	Type toValue(String string, AbstractNode node, INode newNode) throws ValueConverterException;
+	Type toValue(String string, INode node) throws ValueConverterException;
 	
 	/**
 	 * @param value

@@ -10,12 +10,15 @@ package org.eclipse.xtext.parser.antlr;
 import java.util.List;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.antlr.bug299237Test.Model;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.SyntaxError;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterators;
+import com.google.common.collect.Lists;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -80,11 +83,15 @@ public class Bug299237Test extends AbstractXtextTests implements ISyntaxErrorMes
 	public void testCustomizedSyntaxError() throws Exception {
 		expectedMessage = "expected message";
 		Model model = (Model) getModelAndExpect("model a", 1);
-		CompositeNode node = NodeUtil.getNodeAdapter(model).getParserNode();
-		List<SyntaxError> syntaxErrors = node.allSyntaxErrors();
+		ICompositeNode node = NodeModelUtils.getNode(model);
+		List<INode> syntaxErrors = Lists.newArrayList(Iterators.filter(node.treeIterator(), new Predicate<INode>() {
+			public boolean apply(INode input) {
+				return input.getSyntaxErrorMessage() != null;
+			}
+		}));
 		assertEquals(1, syntaxErrors.size());
-		SyntaxError error = syntaxErrors.get(0);
-		assertEquals(expectedMessage, error.getMessage());
+		INode error = syntaxErrors.get(0);
+		assertEquals(expectedMessage, error.getSyntaxErrorMessage().getMessage());
 	}
 
 	public SyntaxErrorMessage getSyntaxErrorMessage(IParserErrorContext context) {

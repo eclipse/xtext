@@ -41,7 +41,7 @@ public class ValueSerializer implements IValueSerializer {
 		Assignment ass = GrammarUtil.containingAssignment(ruleCall);
 		if (GrammarUtil.isSingleAssignment(ass))
 			return true;
-		Object converted = converter.toValue(serialize(node), ruleCall.getRule().getName(), null, node);
+		Object converted = converter.toValue(serialize(node), ruleCall.getRule().getName(), node);
 		return converted != null && converted.equals(value);
 	}
 
@@ -84,7 +84,7 @@ public class ValueSerializer implements IValueSerializer {
 
 	public String serializeAssignedValue(EObject context, RuleCall ruleCall, Object value, INode node) {
 		if (node != null) {
-			Object converted = converter.toValue(serialize(node), ruleCall.getRule().getName(), null, node);
+			Object converted = converter.toValue(serialize(node), ruleCall.getRule().getName(), node);
 			if (converted != null && converted.equals(value))
 				return ITokenSerializer.KEEP_VALUE_FROM_NODE_MODEL;
 		}

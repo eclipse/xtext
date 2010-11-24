@@ -14,14 +14,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.ParserTestHelper;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.valueconverter.Bug250313RuntimeModule.Converters;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -30,7 +30,7 @@ import com.google.inject.Injector;
 public class Bug250313Test extends AbstractXtextTests {
 
 	private ParserTestHelper helper;
-	private AbstractNode node;
+	private INode node;
 	private String lexerRule;
 	private int convertCallCount;
 	private String string;
@@ -89,14 +89,14 @@ public class Bug250313Test extends AbstractXtextTests {
 			return delegate.toString(value, lexerRule);
 		}
 
-		public Object toValue(String string, String lexerRule, AbstractNode node, INode newNode) throws ValueConverterException {
+		public Object toValue(String string, String lexerRule, INode node) throws ValueConverterException {
 			test.toValueCalled(string, lexerRule, node);
-			return delegate.toValue(string, lexerRule, node, newNode);
+			return delegate.toValue(string, lexerRule, node);
 		}
 
 	}
 
-	public void toValueCalled(String string, String lexerRule, AbstractNode node) {
+	public void toValueCalled(String string, String lexerRule, INode node) {
 		this.string = string;
 		this.node = node;
 		this.lexerRule = lexerRule;
@@ -113,7 +113,7 @@ public class Bug250313Test extends AbstractXtextTests {
 		assertWithXtend("'str'", "this.value", model);
 		assertNotNull(lexerRule);
 		assertEquals("STRING", lexerRule);
-		assertTrue(node instanceof LeafNode);
+		assertTrue(node instanceof ILeafNode);
 		assertEquals("'str'", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -122,7 +122,7 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("'str'");
 		assertWithXtend("'str'", "this.value", model);
 		assertEquals("STRING", lexerRule);
-		assertTrue(node instanceof LeafNode);
+		assertTrue(node instanceof ILeafNode);
 		assertEquals("'str'", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -131,7 +131,7 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("2 'str'");
 		assertWithXtend("'str'", "this.value", model);
 		assertEquals("STRING", lexerRule);
-		assertTrue(node instanceof LeafNode);
+		assertTrue(node instanceof ILeafNode);
 		assertEquals("'str'", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -141,7 +141,7 @@ public class Bug250313Test extends AbstractXtextTests {
 		assertWithXtend("{'str'}", "this.multiValue", model);
 		assertNotNull(lexerRule);
 		assertEquals("STRING", lexerRule);
-		assertTrue(node instanceof LeafNode);
+		assertTrue(node instanceof ILeafNode);
 		assertEquals("'str'", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -150,7 +150,7 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("2+ 'str'");
 		assertWithXtend("{'str'}", "this.multiValue", model);
 		assertEquals("STRING", lexerRule);
-		assertTrue(node instanceof LeafNode);
+		assertTrue(node instanceof ILeafNode);
 		assertEquals("'str'", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -159,7 +159,7 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("1 str");
 		assertWithXtend("'str'", "this.value", model);
 		assertEquals("ID", lexerRule);
-		assertTrue(node instanceof LeafNode);
+		assertTrue(node instanceof ILeafNode);
 		assertEquals("str", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -168,7 +168,7 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("1 ^str");
 		assertWithXtend("'str'", "this.value", model);
 		assertEquals("ID", lexerRule);
-		assertTrue(node instanceof LeafNode);
+		assertTrue(node instanceof ILeafNode);
 		assertEquals("^str", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -177,7 +177,7 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("str");
 		assertWithXtend("'str'", "this.value", model);
 		assertEquals("ID", lexerRule);
-		assertTrue(node instanceof LeafNode);
+		assertTrue(node instanceof ILeafNode);
 		assertEquals("str", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -186,7 +186,7 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("^str");
 		assertWithXtend("'str'", "this.value", model);
 		assertEquals("ID", lexerRule);
-		assertTrue(node instanceof LeafNode);
+		assertTrue(node instanceof ILeafNode);
 		assertEquals("^str", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -195,7 +195,7 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("1+ str");
 		assertWithXtend("{'str'}", "this.multiValue", model);
 		assertEquals("ID", lexerRule);
-		assertTrue(node instanceof LeafNode);
+		assertTrue(node instanceof ILeafNode);
 		assertEquals("str", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -204,7 +204,7 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("1+ ^str");
 		assertWithXtend("{'str'}", "this.multiValue", model);
 		assertEquals("ID", lexerRule);
-		assertTrue(node instanceof LeafNode);
+		assertTrue(node instanceof ILeafNode);
 		assertEquals("^str", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -213,8 +213,8 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("1 foo - bar");
 		assertWithXtend("'str'", "this.value", model);
 		assertEquals("Datatype", lexerRule);
-		assertTrue(node instanceof CompositeNode);
-		assertEquals(6, ((CompositeNode)node).getChildren().size());
+		assertTrue(node instanceof ICompositeNode);
+		assertEquals(6, Iterables.size(((ICompositeNode)node).getChildren()));
 		assertEquals("foo - bar", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -223,8 +223,8 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("foo - bar");
 		assertWithXtend("'str'", "this.value", model);
 		assertEquals("Datatype", lexerRule);
-		assertTrue(node instanceof CompositeNode);
-		assertEquals(5, ((CompositeNode)node).getChildren().size());
+		assertTrue(node instanceof ICompositeNode);
+		assertEquals(5, Iterables.size(((ICompositeNode)node).getChildren()));
 		assertEquals("foo - bar", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -233,8 +233,8 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("3 foo - bar");
 		assertWithXtend("'str'", "this.value", model);
 		assertEquals("Datatype", lexerRule);
-		assertTrue(node instanceof CompositeNode);
-		assertEquals(6, ((CompositeNode)node).getChildren().size());
+		assertTrue(node instanceof ICompositeNode);
+		assertEquals(6, Iterables.size(((ICompositeNode)node).getChildren()));
 		assertEquals("foo - bar", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -243,8 +243,8 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("1+ foo - bar");
 		assertWithXtend("{'str'}", "this.multiValue", model);
 		assertEquals("Datatype", lexerRule);
-		assertTrue(node instanceof CompositeNode);
-		assertEquals(6, ((CompositeNode)node).getChildren().size());
+		assertTrue(node instanceof ICompositeNode);
+		assertEquals(6, Iterables.size(((ICompositeNode)node).getChildren()));
 		assertEquals("foo - bar", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -253,8 +253,8 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("3+ foo - bar");
 		assertWithXtend("{'str'}", "this.multiValue", model);
 		assertEquals("Datatype", lexerRule);
-		assertTrue(node instanceof CompositeNode);
-		assertEquals(6, ((CompositeNode)node).getChildren().size());
+		assertTrue(node instanceof ICompositeNode);
+		assertEquals(6, Iterables.size(((ICompositeNode)node).getChildren()));
 		assertEquals("foo - bar", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -263,8 +263,8 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("1 zonk + foo - bar");
 		assertWithXtend("'str'", "this.value", model);
 		assertEquals("NestedDatatype", lexerRule);
-		assertTrue(node instanceof CompositeNode);
-		assertEquals(5, ((CompositeNode)node).getChildren().size());
+		assertTrue(node instanceof ICompositeNode);
+		assertEquals(5, Iterables.size(((ICompositeNode)node).getChildren()));
 		assertEquals("zonk + foo - bar", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -273,8 +273,8 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("1 zonk +");
 		assertWithXtend("'str'", "this.value", model);
 		assertEquals("NestedDatatype", lexerRule);
-		assertTrue(node instanceof CompositeNode);
-		assertEquals(4, ((CompositeNode)node).getChildren().size());
+		assertTrue(node instanceof ICompositeNode);
+		assertEquals(4, Iterables.size(((ICompositeNode)node).getChildren()));
 		assertEquals("zonk +", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -283,8 +283,8 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("zonk + foo - bar");
 		assertWithXtend("'str'", "this.value", model);
 		assertEquals("NestedDatatype", lexerRule);
-		assertTrue(node instanceof CompositeNode);
-		assertEquals(4, ((CompositeNode)node).getChildren().size());
+		assertTrue(node instanceof ICompositeNode);
+		assertEquals(4, Iterables.size(((ICompositeNode)node).getChildren()));
 		assertEquals("zonk + foo - bar", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -293,8 +293,8 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("zonk +");
 		assertWithXtend("'str'", "this.value", model);
 		assertEquals("NestedDatatype", lexerRule);
-		assertTrue(node instanceof CompositeNode);
-		assertEquals(3, ((CompositeNode)node).getChildren().size());
+		assertTrue(node instanceof ICompositeNode);
+		assertEquals(3, Iterables.size(((ICompositeNode)node).getChildren()));
 		assertEquals("zonk +", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -303,8 +303,8 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("4 zonk + foo - bar");
 		assertWithXtend("'str'", "this.value", model);
 		assertEquals("NestedDatatype", lexerRule);
-		assertTrue(node instanceof CompositeNode);
-		assertEquals(5, ((CompositeNode)node).getChildren().size());
+		assertTrue(node instanceof ICompositeNode);
+		assertEquals(5, Iterables.size(((ICompositeNode)node).getChildren()));
 		assertEquals("zonk + foo - bar", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -313,8 +313,8 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("4 zonk +");
 		assertWithXtend("'str'", "this.value", model);
 		assertEquals("NestedDatatype", lexerRule);
-		assertTrue(node instanceof CompositeNode);
-		assertEquals(4, ((CompositeNode)node).getChildren().size());
+		assertTrue(node instanceof ICompositeNode);
+		assertEquals(4, Iterables.size(((ICompositeNode)node).getChildren()));
 		assertEquals("zonk +", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -323,8 +323,8 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("1+ zonk + foo - bar");
 		assertWithXtend("{'str'}", "this.multiValue", model);
 		assertEquals("NestedDatatype", lexerRule);
-		assertTrue(node instanceof CompositeNode);
-		assertEquals(5, ((CompositeNode)node).getChildren().size());
+		assertTrue(node instanceof ICompositeNode);
+		assertEquals(5, Iterables.size(((ICompositeNode)node).getChildren()));
 		assertEquals("zonk + foo - bar", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -333,8 +333,8 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("1+ zonk +");
 		assertWithXtend("{'str'}", "this.multiValue", model);
 		assertEquals("NestedDatatype", lexerRule);
-		assertTrue(node instanceof CompositeNode);
-		assertEquals(4, ((CompositeNode)node).getChildren().size());
+		assertTrue(node instanceof ICompositeNode);
+		assertEquals(4, Iterables.size(((ICompositeNode)node).getChildren()));
 		assertEquals("zonk +", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -343,8 +343,8 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("4+ zonk + foo - bar");
 		assertWithXtend("{'str'}", "this.multiValue", model);
 		assertEquals("NestedDatatype", lexerRule);
-		assertTrue(node instanceof CompositeNode);
-		assertEquals(5, ((CompositeNode)node).getChildren().size());
+		assertTrue(node instanceof ICompositeNode);
+		assertEquals(5, Iterables.size(((ICompositeNode)node).getChildren()));
 		assertEquals("zonk + foo - bar", string);
 		assertEquals(1, convertCallCount);
 	}
@@ -353,8 +353,8 @@ public class Bug250313Test extends AbstractXtextTests {
 		EObject model = getModel("4+ zonk +");
 		assertWithXtend("{'str'}", "this.multiValue", model);
 		assertEquals("NestedDatatype", lexerRule);
-		assertTrue(node instanceof CompositeNode);
-		assertEquals(4, ((CompositeNode)node).getChildren().size());
+		assertTrue(node instanceof ICompositeNode);
+		assertEquals(4, Iterables.size(((ICompositeNode)node).getChildren()));
 		assertEquals("zonk +", string);
 		assertEquals(1, convertCallCount);
 	}

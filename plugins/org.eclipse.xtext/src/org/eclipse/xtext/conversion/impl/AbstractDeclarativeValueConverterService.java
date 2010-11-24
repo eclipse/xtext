@@ -27,7 +27,6 @@ import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.parsetree.AbstractNode;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -59,8 +58,8 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 		return getConverter(lexerRule).toString(value);
 	}
 
-	public Object toValue(String string, String lexerRule, AbstractNode node, INode newNode) throws ValueConverterException {
-		return getConverter(lexerRule).toValue(string, node, newNode);
+	public Object toValue(String string, String lexerRule, INode node) throws ValueConverterException {
+		return getConverter(lexerRule).toValue(string, node);
 	}
 
 	@SuppressWarnings("unchecked")
