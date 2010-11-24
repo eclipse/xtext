@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.ParserTestHelper;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -88,9 +89,9 @@ public class Bug250313Test extends AbstractXtextTests {
 			return delegate.toString(value, lexerRule);
 		}
 
-		public Object toValue(String string, String lexerRule, AbstractNode node) throws ValueConverterException {
+		public Object toValue(String string, String lexerRule, AbstractNode node, INode newNode) throws ValueConverterException {
 			test.toValueCalled(string, lexerRule, node);
-			return delegate.toValue(string, lexerRule, node);
+			return delegate.toValue(string, lexerRule, node, newNode);
 		}
 
 	}

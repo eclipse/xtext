@@ -4,7 +4,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.reconstr.impl.ValueSerializer;
 import org.eclipse.xtext.parsetree.unassignedtext.services.UnassignedTextTestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.unassignedtext.services.UnassignedTextTestLanguageGrammarAccess.CommonTerminalsRuleElements;
@@ -19,7 +19,7 @@ public class UnassignedTextTestSerializer extends ValueSerializer {
 	private IGrammarAccess grammar;
 
 	@Override
-	protected String serializeUnassignedValueByRule(AbstractRule rule, EObject current, AbstractNode node) {
+	protected String serializeUnassignedValueByRule(AbstractRule rule, EObject current, INode node) {
 		UnassignedTextTestLanguageGrammarAccess g = (UnassignedTextTestLanguageGrammarAccess) grammar;
 
 		if (rule == g.getCaseInsensitiveKeywordRule())
@@ -33,7 +33,7 @@ public class UnassignedTextTestSerializer extends ValueSerializer {
 	}
 
 	@Override
-	protected String serializeUnassignedValueByRuleCall(RuleCall ruleCall, EObject current, AbstractNode node) {
+	protected String serializeUnassignedValueByRuleCall(RuleCall ruleCall, EObject current, INode node) {
 		UnassignedTextTestLanguageGrammarAccess g = (UnassignedTextTestLanguageGrammarAccess) grammar;
 
 		if (ruleCall == g.getCaseInsensitiveKeywordRuleAccess().getCaseInsensitiveKeywordTerminalRuleCall_0())

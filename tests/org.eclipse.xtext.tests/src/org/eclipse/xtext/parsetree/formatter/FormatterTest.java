@@ -7,8 +7,8 @@ import org.eclipse.xtext.formatting.INodeModelFormatter.IFormattedRegion;
 import org.eclipse.xtext.formatting.INodeModelStreamer;
 import org.eclipse.xtext.formatting.impl.AbstractTokenStream;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Decl;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguageFactory;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestLinewrapMinMax;
@@ -59,7 +59,7 @@ public class FormatterTest extends AbstractXtextTests {
 
 	// test formatting based on the NodeModel
 	private void assertFormattedNM(String expected, String model, int offset, int lengt) throws Exception {
-		CompositeNode node = NodeUtil.getRootNode(getModel(model));
+		ICompositeNode node = NodeModelUtils.getNode(getModel(model)).getRootNode();
 		// System.out.println(EmfFormatter.objToStr(node));
 		IFormattedRegion r = getNodeModelFormatter().format(node, offset, lengt);
 		String actual = model.substring(0, r.getOffset()) + r.getFormattedText()
@@ -74,7 +74,7 @@ public class FormatterTest extends AbstractXtextTests {
 		TokenBuffer ptcTb = new TokenBuffer();
 		TokenBuffer nmsTb = new TokenBuffer();
 		ptc.serializeSubtree(model, ptcTb);
-		nms.feedTokenStream(nmsTb, NodeUtil.getRootNode(model), 0, modelString.length());
+		nms.feedTokenStream(nmsTb, NodeModelUtils.getNode(model).getRootNode(), 0, modelString.length());
 		assertEquals(ptcTb.toString(), nmsTb.toString());
 	}
 

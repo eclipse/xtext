@@ -11,8 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.example.arithmetics.arithmetics.FunctionCall;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.INode;
 
 /**
  * Changes the link text to contain the whole signature of a function.
@@ -22,10 +21,9 @@ import org.eclipse.xtext.parsetree.NodeUtil;
 public class LinkingService extends DefaultLinkingService {
 	
 	@Override
-	public String getCrossRefNodeAsString(AbstractNode node)
-			throws IllegalNodeException {
+	public String getCrossRefNodeAsString(INode node) throws IllegalNodeException {
 		String result = super.getCrossRefNodeAsString(node); 
-		EObject element = NodeUtil.getNearestSemanticObject(node);
+		EObject element = node.getSemanticElement();
 		if (element instanceof FunctionCall) {
 			FunctionCall fc = (FunctionCall) element;
 			if (!fc.getArgs().isEmpty()) {

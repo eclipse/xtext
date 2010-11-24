@@ -16,36 +16,35 @@ import org.eclipse.xtext.conversion.impl.INTValueConverter;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
  */
 public class DefaultTerminalConverterTest extends TestCase {
 	
 	public void testINT() throws Exception {
 		IValueConverter<Integer> valueConverter = new INTValueConverter();
 		try {
-			valueConverter.toValue("", null);
+			valueConverter.toValue("", null, null);
 			fail("exception epxected");
 		} catch (ValueConverterException e) {
 			// expected
 		}
 		try {
-			valueConverter.toValue("  ", null);
+			valueConverter.toValue("  ", null, null);
 			fail("exception epxected");
 		} catch (ValueConverterException e) {
 			// expected
 		}
 		try {
-			valueConverter.toValue("foo", null);
+			valueConverter.toValue("foo", null, null);
 			fail("exception epxected");
 		} catch (ValueConverterException e) {
 			// expected
 		}
 		try {
-			valueConverter.toValue(null, null);
+			valueConverter.toValue(null, null, null);
 			fail("exception epxected");
 		} catch (ValueConverterException e) {
 			// expected
 		}
-		assertEquals(42,(int) valueConverter.toValue("42", null));
+		assertEquals(42,(int) valueConverter.toValue("42", null, null));
 	}
 }

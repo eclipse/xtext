@@ -17,7 +17,7 @@ public class RGBHelperTest extends TestCase {
 	}
 	
 	public void testBlue() {
-		int color = converter.toValue("0000ff", null);
+		int color = converter.toValue("0000ff", null, null);
 		RGB rgb = RGBHelper.create(color);
 		assertEquals(0, rgb.red);
 		assertEquals(0, rgb.green);
@@ -25,7 +25,7 @@ public class RGBHelperTest extends TestCase {
 	}
 	
 	public void testRed() {
-		int color = converter.toValue("ff0000", null);
+		int color = converter.toValue("ff0000", null, null);
 		RGB rgb = RGBHelper.create(color);
 		assertEquals(255, rgb.red);
 		assertEquals(0, rgb.green);
@@ -33,7 +33,7 @@ public class RGBHelperTest extends TestCase {
 	}
 	
 	public void testGreen() {
-		int color = converter.toValue("00ff00", null);
+		int color = converter.toValue("00ff00", null, null);
 		RGB rgb = RGBHelper.create(color);
 		assertEquals(0, rgb.red);
 		assertEquals(255, rgb.green);

@@ -9,9 +9,12 @@ package org.eclipse.xtext.parsetree.reconstr;
 
 import junit.framework.TestCase;
 
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.ParsetreeFactory;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.impl.AbstractNode;
+import org.eclipse.xtext.nodemodel.impl.CompositeNode;
+import org.eclipse.xtext.nodemodel.impl.LeafNode;
+import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 
 /**
@@ -20,34 +23,35 @@ import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 public class NodeIteratorTest extends TestCase {
 
 	private static final int NUM_NODES = 11;
-	private AbstractNode[] nodes;
+	private INode[] nodes;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		nodes = new AbstractNode[NUM_NODES];
-		nodes[0] = ParsetreeFactory.eINSTANCE.createCompositeNode();
-		nodes[1] = ParsetreeFactory.eINSTANCE.createLeafNode();
-		nodes[2] = ParsetreeFactory.eINSTANCE.createCompositeNode();
-		nodes[3] = ParsetreeFactory.eINSTANCE.createCompositeNode();
-		nodes[4] = ParsetreeFactory.eINSTANCE.createLeafNode();
-		nodes[5] = ParsetreeFactory.eINSTANCE.createLeafNode();
-		nodes[6] = ParsetreeFactory.eINSTANCE.createLeafNode();
-		nodes[7] = ParsetreeFactory.eINSTANCE.createCompositeNode();
-		nodes[8] = ParsetreeFactory.eINSTANCE.createLeafNode();
-		nodes[9] = ParsetreeFactory.eINSTANCE.createLeafNode();
-		nodes[10] = ParsetreeFactory.eINSTANCE.createCompositeNode();
-
-		((CompositeNode) nodes[0]).getChildren().add(nodes[1]);
-		((CompositeNode) nodes[0]).getChildren().add(nodes[2]);
-		((CompositeNode) nodes[2]).getChildren().add(nodes[3]);
-		((CompositeNode) nodes[3]).getChildren().add(nodes[4]);
-		((CompositeNode) nodes[3]).getChildren().add(nodes[5]);
-		((CompositeNode) nodes[2]).getChildren().add(nodes[6]);
-		((CompositeNode) nodes[2]).getChildren().add(nodes[7]);
-		((CompositeNode) nodes[2]).getChildren().add(nodes[8]);
-		((CompositeNode) nodes[0]).getChildren().add(nodes[9]);
-		((CompositeNode) nodes[0]).getChildren().add(nodes[10]);
+		NodeModelBuilder builder = new NodeModelBuilder();
+		nodes = new INode[NUM_NODES];
+		nodes[0] = new CompositeNode();
+		nodes[1] = new LeafNode();
+		nodes[2] = new CompositeNode();
+		nodes[3] = new CompositeNode();
+		nodes[4] = new LeafNode();
+		nodes[5] = new LeafNode();
+		nodes[6] = new LeafNode();
+		nodes[7] = new CompositeNode();
+		nodes[8] = new LeafNode();
+		nodes[9] = new LeafNode();
+		nodes[10]= new CompositeNode();
+		
+		builder.addChild((ICompositeNode)nodes[0], (AbstractNode)nodes[1]);
+		builder.addChild((ICompositeNode)nodes[0], (AbstractNode)nodes[2]);
+		builder.addChild((ICompositeNode)nodes[2], (AbstractNode)nodes[3]);
+		builder.addChild((ICompositeNode)nodes[3], (AbstractNode)nodes[4]);
+		builder.addChild((ICompositeNode)nodes[3], (AbstractNode)nodes[5]);
+		builder.addChild((ICompositeNode)nodes[2], (AbstractNode)nodes[6]);
+		builder.addChild((ICompositeNode)nodes[2], (AbstractNode)nodes[7]);
+		builder.addChild((ICompositeNode)nodes[2], (AbstractNode)nodes[8]);
+		builder.addChild((ICompositeNode)nodes[0], (AbstractNode)nodes[9]);
+		builder.addChild((ICompositeNode)nodes[0], (AbstractNode)nodes[10]);
 	}
 
 	public void testForward() throws Exception {

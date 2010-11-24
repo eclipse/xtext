@@ -17,27 +17,27 @@ public class HexintValueConverterTest extends TestCase {
 	
 	public void testIllegalValues() {
 		try {
-			converter.toValue("", null);
+			converter.toValue("", null, null);
 			fail("Expected exception");
 		} catch(ValueConverterException e) {
 		}
 		try {
-			converter.toValue("fffff", null);
+			converter.toValue("fffff", null, null);
 			fail("Expected exception");
 		} catch(ValueConverterException e) {
 		}
 		try {
-			converter.toValue("fffffff", null);
+			converter.toValue("fffffff", null, null);
 			fail("Expected exception");
 		} catch(ValueConverterException e) {
 		}
 	}
 	
 	public void testLegalValues() {
-		assertEquals(0, converter.toValue("000000", null).intValue());
-		assertEquals(255, converter.toValue("0000ff", null).intValue());
-		assertEquals(255, converter.toValue("0000FF", null).intValue());
-		assertEquals((1<<24) - 1, converter.toValue("ffffff", null).intValue());
+		assertEquals(0, converter.toValue("000000", null, null).intValue());
+		assertEquals(255, converter.toValue("0000ff", null, null).intValue());
+		assertEquals(255, converter.toValue("0000FF", null, null).intValue());
+		assertEquals((1<<24) - 1, converter.toValue("ffffff", null, null).intValue());
 	}
 
 }

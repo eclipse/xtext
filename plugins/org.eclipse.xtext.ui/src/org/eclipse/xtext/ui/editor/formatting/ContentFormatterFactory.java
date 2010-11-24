@@ -54,7 +54,7 @@ public class ContentFormatterFactory implements IContentFormatterFactory {
 
 		public ReplaceRegion exec(XtextResource state) throws Exception {
 			IFormattedRegion r = formatter.format(state.getParseResult()
-					.getRootNode(), region.getOffset(), region.getLength());
+					.getRootNode2(), region.getOffset(), region.getLength());
 			return new ReplaceRegion(r.getOffset(), r.getLenght(), r
 					.getFormattedText());
 		}
