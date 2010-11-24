@@ -16,11 +16,10 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.ParseTreeUtil;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -37,13 +36,13 @@ public class EObjectAtOffsetHelper {
 
 	protected EObject internalResolveElementAt(XtextResource resource, int offset, boolean isContainment) {
 		IParseResult parseResult = resource.getParseResult();
-		if (parseResult != null && parseResult.getRootNode() != null) {
-			AbstractNode node = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(parseResult.getRootNode(), offset);
+		if (parseResult != null && parseResult.getRootNode2() != null) {
+			INode node = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode2(), offset);
 			while (node != null) {
 				if (node.getGrammarElement() instanceof CrossReference) {
 					return resolveCrossReferencedElement(node);
-				} else if (isContainment && node.getElement() != null) {
-					return node.getElement();
+				} else if (isContainment && node.hasDirectSemanticElement()) {
+					return node.getSemanticElement();
 				} else {
 					node = node.getParent();
 				}
@@ -52,18 +51,18 @@ public class EObjectAtOffsetHelper {
 		return null;
 	}
 
-	protected EObject resolveCrossReferencedElement(AbstractNode node) {
-		EObject referenceOwner = NodeUtil.getNearestSemanticObject(node);
+	protected EObject resolveCrossReferencedElement(INode node) {
+		EObject referenceOwner = node.getSemanticElement();
 		EReference crossReference = GrammarUtil.getReference((CrossReference) node.getGrammarElement(), referenceOwner
 				.eClass());
 		if (!crossReference.isMany()) {
 			return (EObject) referenceOwner.eGet(crossReference);
 		} else {
 			List<?> listValue = (List<?>) referenceOwner.eGet(crossReference);
-			CompositeNode ownerNode = NodeUtil.getNodeAdapter(referenceOwner).getParserNode();
+			ICompositeNode ownerNode = NodeModelUtils.getNode(referenceOwner);
 			int currentIndex = 0;
-			for (TreeIterator<EObject> childrenIterator = ownerNode.eAllContents(); childrenIterator.hasNext();) {
-				AbstractNode ownerChildNode = (AbstractNode) childrenIterator.next();
+			for (TreeIterator<INode> childrenIterator = ownerNode.treeIterator(); childrenIterator.hasNext();) {
+				INode ownerChildNode = childrenIterator.next();
 				if (ownerChildNode == node) {
 					return (EObject) listValue.get(currentIndex);
 				}
@@ -77,7 +76,8 @@ public class EObjectAtOffsetHelper {
 					childrenIterator.prune();
 				}
 				if (grammarElement instanceof TypeRef || grammarElement instanceof RuleCall) {
-					childrenIterator.prune();
+					if (ownerNode != ownerChildNode)
+						childrenIterator.prune();
 				}
 			}
 		}

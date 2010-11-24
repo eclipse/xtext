@@ -156,7 +156,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		}
 
 		protected void initializeNodeAndModelData() {
-			rootNode = parseResult.getRootNode();
+			rootNode = parseResult.deprecatedGetRootNode();
 			lastCompleteNode = new LeafNodeFinder(completionOffset, true).doSwitch(rootNode);
 			if (lastCompleteNode == null)
 				lastCompleteNode = rootNode;

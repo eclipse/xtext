@@ -10,9 +10,9 @@ package org.eclipse.xtext.xtext;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.ParseTreeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Triple;
@@ -31,13 +31,13 @@ public class XtextDiagnosticConverter extends DiagnosticConverterImpl{
 	
 	@Override
 	protected Triple<Integer, Integer, Integer> getLocationData(EObject obj, EStructuralFeature structuralFeature) {
-		if (NodeUtil.getNodeAdapter(obj) == null) {
+		if (NodeModelUtils.getNode(obj) == null) {
 			ITextRegion location = locationInFileProvider.getSignificantTextRegion(obj);
 			if (location != null) {
-				AbstractNode node = NodeUtil.getNode(EcoreUtil.getRootContainer(obj));
-				AbstractNode foundNode = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(node, location.getOffset());
-				Integer lineNumber = Integer.valueOf(foundNode.getLine());
-				int offset = foundNode.getOffset();
+				ICompositeNode rootNode = NodeModelUtils.getNode(EcoreUtil.getRootContainer(obj));
+				ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(rootNode, location.getOffset());
+				Integer lineNumber = Integer.valueOf(leafNode.getStartLine());
+				int offset = leafNode.getOffset();
 				Integer charStart = Integer.valueOf(Integer.valueOf(offset));
 				Integer charEnd = Integer.valueOf(offset + location.getLength());
 				return Tuples.create(lineNumber, charStart, charEnd);

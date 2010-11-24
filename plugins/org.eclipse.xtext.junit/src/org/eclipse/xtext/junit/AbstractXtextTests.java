@@ -332,14 +332,16 @@ public abstract class AbstractXtextTests extends TestCase {
 		return getRootNode2(resource);
 	}
 
+	@Deprecated
 	protected final CompositeNode getRootNode(XtextResource resource) {
-		return resource.getParseResult().getRootNode();
+		return resource.getParseResult().deprecatedGetRootNode();
 	}
 	
 	protected final ICompositeNode getRootNode2(XtextResource resource) {
 		return resource.getParseResult().getRootNode2();
 	}
 
+	@Deprecated
 	protected final CompositeNode getRootNode(String model) throws Exception {
 		return getRootNode(getAsStream(model));
 	}

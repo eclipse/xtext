@@ -13,7 +13,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -27,13 +26,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.impl.NodeModelComparator;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeContentAdapter;
 import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.eclipse.xtext.util.IResourceScopeCache;
@@ -148,7 +144,7 @@ public class XtextResource extends ResourceImpl {
 		setEncodingFromOptions(options);
 		IParseResult result = parser.parse(new InputStreamReader(inputStream, getEncoding()));
 		updateInternalState(result);
-		new NodeModelComparator(true).assertEquals((org.eclipse.xtext.nodemodel.impl.CompositeNode) parseResult.getRootNode2().getFirstChild(), parseResult.getRootNode());
+//		new NodeModelComparator(true).assertEquals((org.eclipse.xtext.nodemodel.impl.CompositeNode) parseResult.getRootNode2().getFirstChild(), parseResult.getRootNode());
 	}
 
 	protected void setEncodingFromOptions(Map<?, ?> options) {
@@ -203,10 +199,9 @@ public class XtextResource extends ResourceImpl {
 			unload(oldParseResult.getRootASTElement());
 			getContents().remove(oldParseResult.getRootASTElement());
 		}
-		String text = parseResult.getRootNode2().getText();
-		IParseResult compareWith = parser.parse(new StringReader(text));
-		addAdapterIfNeccessary(compareWith.getRootNode());
-		new NodeModelComparator(false).assertEquals((org.eclipse.xtext.nodemodel.impl.CompositeNode) parseResult.getRootNode2().getFirstChild(), compareWith.getRootNode());
+//		String text = parseResult.getRootNode2().getText();
+//		IParseResult compareWith = parser.parse(new StringReader(text));
+//		new NodeModelComparator(false).assertEquals((org.eclipse.xtext.nodemodel.impl.CompositeNode) parseResult.getRootNode2().getFirstChild(), compareWith.getRootNode());
 		updateInternalState(parseResult);
 	}
 
@@ -214,7 +209,6 @@ public class XtextResource extends ResourceImpl {
 		this.parseResult = parseResult;
 		if (parseResult.getRootASTElement() != null && !getContents().contains(parseResult.getRootASTElement()))
 			getContents().add(parseResult.getRootASTElement());
-		addAdapterIfNeccessary(parseResult.getRootNode());
 		reattachModificationTracker(parseResult.getRootASTElement());
 		clearErrorsAndWarnings();
 		addSyntaxErrors();
@@ -255,11 +249,6 @@ public class XtextResource extends ResourceImpl {
 		linker.linkModel(parseResult.getRootASTElement(), consumer);
 		getErrors().addAll(consumer.getResult(Severity.ERROR));
 		getWarnings().addAll(consumer.getResult(Severity.WARNING));
-	}
-
-	private void addAdapterIfNeccessary(CompositeNode node) {
-		if (node != null && !NodeContentAdapter.containsNodeContentAdapter(node))
-			NodeContentAdapter.createAdapterAndAddToNode(node);
 	}
 
 	@Override

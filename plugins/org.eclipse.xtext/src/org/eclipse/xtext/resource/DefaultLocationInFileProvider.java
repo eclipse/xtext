@@ -8,11 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -25,13 +23,14 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
+
+import com.google.inject.internal.Lists;
 
 /**
  * @author Peter Friese - Implementation
@@ -48,17 +47,17 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 	}
 
 	protected ITextRegion getTextRegion(EObject obj, boolean isSignificant) {
-		final NodeAdapter adapter = NodeUtil.getNodeAdapter(obj);
-		if (adapter == null) {
+		ICompositeNode node = NodeModelUtils.getNode(obj);
+		if (node == null) {
 			if (obj.eContainer() == null)
 				return ITextRegion.EMPTY_REGION;
 			return getTextRegion(obj.eContainer(), isSignificant);
 		}
-		List<AbstractNode> nodes = null;
+		List<INode> nodes = null;
 		if (isSignificant)
 			nodes = getLocationNodes(obj);
 		if (nodes == null || nodes.isEmpty())
-			nodes = Collections.<AbstractNode> singletonList(adapter.getParserNode());
+			nodes = Collections.<INode>singletonList(node);
 		return createRegion(nodes);
 	}
 
@@ -108,31 +107,29 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 
 	protected ITextRegion getLocationOfCrossReference(EObject owner, EReference reference, int indexInList,
 			boolean isSignificant) {
-		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(owner);
-		if (nodeAdapter != null) {
-			CompositeNode parserNode = nodeAdapter.getParserNode();
-			if (parserNode != null) {
-				int currentIndex = 0;
-				for (TreeIterator<EObject> childrenIterator = parserNode.eAllContents(); childrenIterator.hasNext();) {
-					AbstractNode ownerChildNode = (AbstractNode) childrenIterator.next();
-					EObject grammarElement = ownerChildNode.getGrammarElement();
-					if (grammarElement instanceof CrossReference) {
-						EReference crossReference2 = GrammarUtil.getReference((CrossReference) grammarElement,
-								owner.eClass());
-						if (reference == crossReference2) {
-							if (currentIndex == indexInList || !reference.isMany()) {
-								return new TextRegion(ownerChildNode.getOffset(), ownerChildNode.getLength());
-							}
-							++currentIndex;
+		ICompositeNode parserNode = NodeModelUtils.getNode(owner);
+		if (parserNode != null) {
+			int currentIndex = 0;
+			for (TreeIterator<INode> childrenIterator = parserNode.treeIterator(); childrenIterator.hasNext();) {
+				INode ownerChildNode = childrenIterator.next();
+				EObject grammarElement = ownerChildNode.getGrammarElement();
+				if (grammarElement instanceof CrossReference) {
+					EReference crossReference2 = GrammarUtil.getReference((CrossReference) grammarElement,
+							owner.eClass());
+					if (reference == crossReference2) {
+						if (currentIndex == indexInList || !reference.isMany()) {
+							return new TextRegion(ownerChildNode.getOffset(), ownerChildNode.getLength());
 						}
-						childrenIterator.prune();
+						++currentIndex;
 					}
-					if (grammarElement instanceof TypeRef || grammarElement instanceof RuleCall) {
-						childrenIterator.prune();
-					}
+					childrenIterator.prune();
 				}
-				return getTextRegion(owner, isSignificant);
+				if (grammarElement instanceof TypeRef || grammarElement instanceof RuleCall) {
+					if (ownerChildNode != parserNode)
+						childrenIterator.prune();
+				}
 			}
+			return getTextRegion(owner, isSignificant);
 		}
 		return null;
 	}
@@ -140,9 +137,9 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 	protected ITextRegion getLocationOfAttribute(EObject owner, EAttribute attribute, int indexInList,
 			boolean isSignificant) {
 		if (indexInList >= 0) {
-			List<AbstractNode> findNodesForFeature = NodeUtil.findNodesForFeature(owner, attribute);
+			List<INode> findNodesForFeature = NodeModelUtils.findNodesForFeature(owner, attribute);
 			if (indexInList < findNodesForFeature.size()) {
-				AbstractNode node = findNodesForFeature.get(indexInList);
+				INode node = findNodesForFeature.get(indexInList);
 				return new TextRegion(node.getOffset(), node.getLength());
 			}
 			return getTextRegion(owner, isSignificant);
@@ -150,18 +147,16 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 		return null;
 	}
 
-	protected List<AbstractNode> getLocationNodes(EObject obj) {
+	protected List<INode> getLocationNodes(EObject obj) {
 		final EStructuralFeature nameFeature = getIdentifierFeature(obj);
 		if (nameFeature != null)
-			return NodeUtil.findNodesForFeature(obj, nameFeature);
+			return NodeModelUtils.findNodesForFeature(obj, nameFeature);
 
-		List<AbstractNode> resultNodes = new ArrayList<AbstractNode>();
-		final NodeAdapter adapter = NodeUtil.getNodeAdapter(obj);
-		final CompositeNode startNode = adapter.getParserNode();
-		AbstractNode keywordNode = null;
+		List<INode> resultNodes = Lists.newArrayList();
+		final ICompositeNode startNode = NodeModelUtils.getNode(obj);
+		INode keywordNode = null;
 		// use LeafNodes instead of children?
-		EList<AbstractNode> children = startNode.getChildren();
-		for (AbstractNode child : children) {
+		for (INode child : startNode.getChildren()) {
 			EObject grammarElement = child.getGrammarElement();
 			if (grammarElement instanceof RuleCall) {
 				RuleCall ruleCall = (RuleCall) grammarElement;
@@ -191,17 +186,17 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 		return result != null ? result : eClass.getEStructuralFeature("id");
 	}
 
-	protected ITextRegion createRegion(final List<AbstractNode> nodes) {
+	protected ITextRegion createRegion(final List<INode> nodes) {
 		// if we've got more than one ID elements, we want to select them all
 		ITextRegion result = ITextRegion.EMPTY_REGION;
-		for (AbstractNode node : nodes) {
+		for (INode node : nodes) {
 			if (!isHidden(node))
 				result = result.merge(new TextRegion(node.getOffset(), node.getLength()));
 		}
 		return result;
 	}
 
-	protected boolean isHidden(AbstractNode node) {
-		return node instanceof LeafNode && ((LeafNode) node).isHidden();
+	protected boolean isHidden(INode node) {
+		return node instanceof ILeafNode && ((ILeafNode) node).isHidden();
 	}
 }
