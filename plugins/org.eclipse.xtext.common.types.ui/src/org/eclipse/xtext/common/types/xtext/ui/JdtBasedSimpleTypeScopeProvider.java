@@ -13,7 +13,9 @@ import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
 import org.eclipse.xtext.common.types.xtext.AbstractConstructorScope;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.resource.IEObjectDescription;
 
+import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 
 /**
@@ -35,20 +37,19 @@ public class JdtBasedSimpleTypeScopeProvider extends AbstractTypeScopeProvider {
 	}
 	
 	@Override
-	public AbstractConstructorScope createConstructorScope(IJvmTypeProvider typeProvider) {
-		JdtBasedSimpleTypeScope typeScope = createTypeScope(typeProvider);
+	public AbstractConstructorScope createConstructorScope(IJvmTypeProvider typeProvider, Predicate<IEObjectDescription> filter) {
+		JdtBasedSimpleTypeScope typeScope = createTypeScope(typeProvider, filter);
 		return new JdtBasedConstructorScope(typeScope);
 	}
 
-	public JdtBasedSimpleTypeScopeProvider(JdtTypeProviderFactory typeProviderFactory,
-			IQualifiedNameConverter qualifiedNameConverter) {
+	public JdtBasedSimpleTypeScopeProvider(JdtTypeProviderFactory typeProviderFactory, IQualifiedNameConverter qualifiedNameConverter) {
 		this.typeProviderFactory = typeProviderFactory;
 		this.qualifiedNameConverter = qualifiedNameConverter;
 	}
 
 	@Override
-	public JdtBasedSimpleTypeScope createTypeScope(IJvmTypeProvider typeProvider) {
-		return new JdtBasedSimpleTypeScope((IJdtTypeProvider) typeProvider, qualifiedNameConverter);
+	public JdtBasedSimpleTypeScope createTypeScope(IJvmTypeProvider typeProvider, Predicate<IEObjectDescription> filter) {
+		return new JdtBasedSimpleTypeScope((IJdtTypeProvider) typeProvider, qualifiedNameConverter, filter);
 	}
 
 	@Override

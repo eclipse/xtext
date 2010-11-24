@@ -13,8 +13,11 @@ import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
 import org.eclipse.xtext.common.types.xtext.ClasspathBasedConstructorScope;
 import org.eclipse.xtext.common.types.xtext.ClasspathBasedTypeScope;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.ISelector;
+
+import com.google.common.base.Predicates;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -31,7 +34,7 @@ public class ClasspathBasedConstructorScopeTest extends AbstractConstructorScope
 		super.setUp();
 		factory = new ClasspathTypeProviderFactory(getClass().getClassLoader());
 		resourceSet = new ResourceSetImpl();
-		typeScope = new ClasspathBasedTypeScope(factory.createTypeProvider(resourceSet), new IQualifiedNameConverter.DefaultImpl());
+		typeScope = new ClasspathBasedTypeScope(factory.createTypeProvider(resourceSet), new IQualifiedNameConverter.DefaultImpl(), Predicates.<IEObjectDescription>alwaysTrue());
 		constructorScope = new ClasspathBasedConstructorScope(typeScope);
 	}
 	

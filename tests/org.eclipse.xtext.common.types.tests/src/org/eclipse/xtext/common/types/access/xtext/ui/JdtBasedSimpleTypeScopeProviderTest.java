@@ -59,7 +59,7 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 	}
 	
 	public void testGetScope_01() {
-		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 		assertNotNull(scope);
 		assertSame(factory.findTypeProvider(resourceSet), scope.getTypeProvider());
 	}
@@ -67,7 +67,7 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 	public void testGetScope_02() {
 		resourceSet.getResources().clear();
 		try {
-			scopeProvider.getScope(field, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+			scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 			fail("Expected IllegalStateException");
 		} catch( IllegalStateException ex) {
 			// ok
@@ -77,7 +77,7 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 	public void testGetScope_03() {
 		resource.getContents().clear();
 		try {
-			scopeProvider.getScope(field, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+			scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 			fail("Expected IllegalStateException");
 		} catch( IllegalStateException ex) {
 			// ok
@@ -87,7 +87,7 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 	public void testGetScope_04() {
 		resourceSet.getResources().clear();
 		try {
-			scopeProvider.getScope(field, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+			scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 			fail("Expected IllegalStateException");
 		} catch( IllegalStateException ex) {
 			// ok
@@ -97,7 +97,7 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 	public void testGetScope_05() {
 		resource.getContents().clear();
 		try {
-			scopeProvider.getScope(field, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+			scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 			fail("Expected IllegalStateException");
 		} catch( IllegalStateException ex) {
 			// ok
@@ -105,12 +105,12 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 	}
 	
 	public void testGetScope_06() {
-		IScope scope = scopeProvider.getScope(field, TypesPackage.Literals.JVM_CONSTRAINT_OWNER__CONSTRAINTS);
+		IScope scope = scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_CONSTRAINT_OWNER__CONSTRAINTS);
 		assertSame(IScope.NULLSCOPE, scope);
 	}
 	
 	public void testNotification_01() {
-		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 		assertTrue(resourceSet.eAdapters().isEmpty());
 		IEObjectDescription objectElement = scope.getSingleElement(new ISelector.SelectByName(QualifiedName.create(Object.class.getName())));
 		assertNotNull(objectElement);
@@ -118,7 +118,7 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 	}
 	
 	public void testNotification_02() {
-		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 		assertTrue(resourceSet.eAdapters().isEmpty());
 		IEObjectDescription objectElement = scope.getSingleElement(new ISelector.SelectByName(QualifiedName.create(Object.class.getName())));
 		Resource objectResource = objectElement.getEObjectOrProxy().eResource();
@@ -132,7 +132,7 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 	}
 	
 	public void testNotification_03() {
-		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 		assertTrue(resourceSet.eAdapters().isEmpty());
 		IEObjectDescription objectElement = scope.getSingleElement(new ISelector.SelectByName(QualifiedName.create(Object.class.getName())));
 		Resource objectResource = objectElement.getEObjectOrProxy().eResource();
@@ -145,7 +145,7 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 	}
 	
 	public void testNotification_04() {
-		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 		assertTrue(resourceSet.eAdapters().isEmpty());
 		IEObjectDescription objectElement = scope.getSingleElement(new ISelector.SelectByName(QualifiedName.create(Object.class.getName())));
 		IEObjectDescription stringElement = scope.getSingleElement(new ISelector.SelectByName(QualifiedName.create(String.class.getName())));

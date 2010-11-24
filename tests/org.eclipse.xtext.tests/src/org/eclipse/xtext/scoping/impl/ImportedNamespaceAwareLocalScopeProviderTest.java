@@ -76,12 +76,12 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 			}
 
 		});
-		globalScopeProvider.setResourceServiceProviderRegistry(new ResourceServiceProviderRegistryImpl() {
+		globalScopeProvider.setGlobalResourceDecriptionProvider(new GlobalResourceDescriptionProvider(new ResourceServiceProviderRegistryImpl() {
 			@Override
 			public IResourceServiceProvider getResourceServiceProvider(URI uri, String contentType) {
 				return provider;
 			}
-		});
+		}));
 		scopeProvider = new ImportedNamespaceAwareLocalScopeProvider(globalScopeProvider, nameProvider, nameConverter);
 	}
 

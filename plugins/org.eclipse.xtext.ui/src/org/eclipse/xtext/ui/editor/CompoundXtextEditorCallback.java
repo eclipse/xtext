@@ -19,8 +19,6 @@ import com.google.inject.Injector;
 import com.google.inject.TypeLiteral;
 
 /**
- * TODO: replace with Guice2 http://code.google.com/p/google-guice/wiki/Multibindings
- * 
  * @author Michael Clay - Initial contribution and API
  */
 public class CompoundXtextEditorCallback implements IXtextEditorCallback {
