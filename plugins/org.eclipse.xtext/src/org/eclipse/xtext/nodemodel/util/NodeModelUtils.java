@@ -75,6 +75,8 @@ public class NodeModelUtils {
 	}
 
 	public static ICompositeNode getNode(EObject object) {
+		if (object == null)
+			return null;
 		for(Adapter adapter: object.eAdapters()) {
 			if (adapter instanceof ICompositeNode)
 				return (ICompositeNode) adapter;
@@ -116,7 +118,7 @@ public class NodeModelUtils {
 	
 	public static final INode getLastCompleteNodeByOffset(INode node, int offsetPosition) {
 		BidiTreeIterator<INode> iterator = node.getRootNode().treeIterator();
-		INode result = null;
+		INode result = node;
 		while (iterator.hasNext()) {
 			INode candidate = iterator.next();
 			if (candidate.getOffset() >= offsetPosition ) {
