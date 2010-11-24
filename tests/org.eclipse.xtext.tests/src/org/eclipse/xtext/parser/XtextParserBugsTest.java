@@ -8,7 +8,7 @@
 package org.eclipse.xtext.parser;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.testlanguages.FowlerDslTestLanguageStandaloneSetup;
 
 /**
@@ -19,7 +19,7 @@ public class XtextParserBugsTest extends AbstractXtextTests {
 	public void testFirstTokenIsIllegal_254841() throws Exception {
 		with(FowlerDslTestLanguageStandaloneSetup.class);
 		String model = "firstToken";
-		CompositeNode rootNode = getRootNodeAndExpect(model, 1);
+		ICompositeNode rootNode = getRootNodeAndExpect2(model, 1);
 		assertNotNull(rootNode);
 	}
 

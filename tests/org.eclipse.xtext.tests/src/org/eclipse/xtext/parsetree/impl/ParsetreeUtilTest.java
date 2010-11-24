@@ -10,10 +10,8 @@ package org.eclipse.xtext.parsetree.impl;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeContentAdapter;
-import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.ParsetreeFactory;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -22,9 +20,9 @@ public class ParsetreeUtilTest extends AbstractXtextTests {
 
 	private String modelAsString;
 	private Grammar grammar;
-	private CompositeNode grammarNode;
-	private CompositeNode metamodelNode;
-	private CompositeNode parentMetamodelNode;
+	private ICompositeNode grammarNode;
+	private ICompositeNode metamodelNode;
+	private ICompositeNode parentMetamodelNode;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -41,8 +39,8 @@ public class ParsetreeUtilTest extends AbstractXtextTests {
 				"\n" +
 				"\n";
 		grammar = (Grammar) getModel(modelAsString);
-		grammarNode = NodeUtil.getNodeAdapter(grammar).getParserNode();
-		metamodelNode = NodeUtil.getNodeAdapter(grammar.getMetamodelDeclarations().get(0)).getParserNode();
+		grammarNode = NodeModelUtils.getNode(grammar);
+		metamodelNode = NodeModelUtils.getNode(grammar.getMetamodelDeclarations().get(0));
 		parentMetamodelNode = metamodelNode.getParent();
 	}
 	
@@ -66,51 +64,51 @@ public class ParsetreeUtilTest extends AbstractXtextTests {
 	}
 	
 	public void testLine_01() {
-		assertEquals(2, grammarNode.getLine());
+		assertEquals(2, grammarNode.getStartLine());
 	}
 	
 	public void testLine_02() {
-		assertEquals(4, metamodelNode.getLine());
+		assertEquals(4, metamodelNode.getStartLine());
 	}
 	
 	public void testLine_03() {
-		assertEquals(4, parentMetamodelNode.getLine());
+		assertEquals(4, parentMetamodelNode.getStartLine());
 	}
 	
 	public void testTotalLine_01() {
-		assertEquals(1, grammarNode.getTotalLine());
+		assertEquals(1, grammarNode.getTotalStartLine());
 	}
 	
 	public void testTotalLine_02() {
-		assertEquals(2, metamodelNode.getTotalLine());
+		assertEquals(2, metamodelNode.getTotalStartLine());
 	}
 	
 	public void testTotalLine_03() {
-		assertEquals(2, parentMetamodelNode.getTotalLine());
+		assertEquals(2, parentMetamodelNode.getTotalStartLine());
 	}
 	
 	public void testEndLine_01() {
-		assertEquals(8, grammarNode.endLine());
+		assertEquals(8, grammarNode.getEndLine());
 	}
 	
 	public void testEndLine_02() {
-		assertEquals(4, metamodelNode.endLine());
+		assertEquals(4, metamodelNode.getEndLine());
 	}
 	
 	public void testEndLine_03() {
-		assertEquals(4, parentMetamodelNode.endLine());
+		assertEquals(4, parentMetamodelNode.getEndLine());
 	}
 	
 	public void testTotalEndLine_01() {
-		assertEquals(11, grammarNode.totalEndLine());
+		assertEquals(11, grammarNode.getTotalEndLine());
 	}
 	
 	public void testTotalEndLine_02() {
-		assertEquals(4, metamodelNode.totalEndLine());
+		assertEquals(4, metamodelNode.getEndLine());
 	}
 	
 	public void testTotalEndLine_03() {
-		assertEquals(4, parentMetamodelNode.totalEndLine());
+		assertEquals(4, parentMetamodelNode.getEndLine());
 	}
 	
 	public void testOffset_01() {
@@ -158,15 +156,6 @@ public class ParsetreeUtilTest extends AbstractXtextTests {
 				parentMetamodelNode.getLength());
 	}
 	
-	public void testLength_04() {
-		CompositeNode newRootNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
-		newRootNode.getChildren().add(grammarNode);
-		NodeContentAdapter.createAdapterAndAddToNode(newRootNode);
-		assertEquals(
-				modelAsString.indexOf(';') - modelAsString.indexOf("grammar") + ";".length(),
-				newRootNode.getLength());
-	}
-	
 	public void testTotalLength_01() {
 		assertEquals(modelAsString.length(), grammarNode.getTotalLength());
 	}
@@ -183,10 +172,4 @@ public class ParsetreeUtilTest extends AbstractXtextTests {
 				parentMetamodelNode.getTotalLength());
 	}
 	
-	public void testTotalLength_04() {
-		CompositeNode newRootNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
-		newRootNode.getChildren().add(grammarNode);
-		NodeContentAdapter.createAdapterAndAddToNode(newRootNode);
-		assertEquals(modelAsString.length(), grammarNode.getTotalLength());
-	}
 }

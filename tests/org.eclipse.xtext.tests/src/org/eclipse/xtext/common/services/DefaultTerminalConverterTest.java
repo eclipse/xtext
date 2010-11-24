@@ -22,29 +22,29 @@ public class DefaultTerminalConverterTest extends TestCase {
 	public void testINT() throws Exception {
 		IValueConverter<Integer> valueConverter = new INTValueConverter();
 		try {
-			valueConverter.toValue("", null, null);
+			valueConverter.toValue("", null);
 			fail("exception epxected");
 		} catch (ValueConverterException e) {
 			// expected
 		}
 		try {
-			valueConverter.toValue("  ", null, null);
+			valueConverter.toValue("  ", null);
 			fail("exception epxected");
 		} catch (ValueConverterException e) {
 			// expected
 		}
 		try {
-			valueConverter.toValue("foo", null, null);
+			valueConverter.toValue("foo", null);
 			fail("exception epxected");
 		} catch (ValueConverterException e) {
 			// expected
 		}
 		try {
-			valueConverter.toValue(null, null, null);
+			valueConverter.toValue(null, null);
 			fail("exception epxected");
 		} catch (ValueConverterException e) {
 			// expected
 		}
-		assertEquals(42,(int) valueConverter.toValue("42", null, null));
+		assertEquals(42,(int) valueConverter.toValue("42", null));
 	}
 }

@@ -8,10 +8,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.dummy.DummyTestLanguageStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
+
+import com.google.common.collect.Iterators;
+import com.google.common.collect.Lists;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -27,8 +34,8 @@ public class CommentTest extends AbstractXtextTests{
 
     public void testSingleLineComment() throws Exception {
         String model = "// comment\n/*element foo;\nelement bar;*/";
-        AbstractNode node = getRootNode(model);
-        EList<LeafNode> leafNodes = node.getLeafNodes();
+        INode node = getRootNode2(model);
+        List<ILeafNode> leafNodes = Lists.newArrayList(Iterators.filter(node.treeIterator(), ILeafNode.class));
         assertEquals(2, leafNodes.size());
         assertTrue(leafNodes.get(0).getGrammarElement() instanceof TerminalRule);
         assertTrue(leafNodes.get(1).getGrammarElement() instanceof TerminalRule);

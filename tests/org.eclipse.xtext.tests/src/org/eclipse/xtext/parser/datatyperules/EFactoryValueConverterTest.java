@@ -26,7 +26,7 @@ public class EFactoryValueConverterTest extends AbstractXtextTests{
 		EFactoryValueConverter eDoubleConverter = new EFactoryValueConverter(EcorePackage.Literals.EDOUBLE);
 		String doubleAsString = eDoubleConverter.toString(TEST_DOUBLE_VALUE);
 		assertEquals(Double.toString(TEST_DOUBLE_VALUE), doubleAsString);
-		Object value = eDoubleConverter.toValue(doubleAsString, null, null);
+		Object value = eDoubleConverter.toValue(doubleAsString, null);
 		assertTrue(value instanceof Double);
 		assertEquals(((Double)value).doubleValue(), TEST_DOUBLE_VALUE);
 	}
@@ -44,14 +44,14 @@ public class EFactoryValueConverterTest extends AbstractXtextTests{
 	public void testEmptyString() {
 		EFactoryValueConverter eIntConverter = new EFactoryValueConverter(EcorePackage.Literals.EINT);
 		try {
-			eIntConverter.toValue("", null, null);
+			eIntConverter.toValue("", null);
 			fail("EInt converter should not convert empty string");
 		} catch(ValueConverterException e) {
 			// expected result
 		}
 		try {
 			EFactoryValueConverter eIntegerConverter = new EFactoryValueConverter(EcorePackage.Literals.EINTEGER_OBJECT);
-			eIntegerConverter.toValue("", null, null);
+			eIntegerConverter.toValue("", null);
 			fail("EInteger converter should not convert empty string");
 		} catch(ValueConverterException e) {
 			// expected result
@@ -62,13 +62,13 @@ public class EFactoryValueConverterTest extends AbstractXtextTests{
 	public void testNullString() {
 		EFactoryValueConverter eIntConverter = new EFactoryValueConverter(EcorePackage.Literals.EINT);
 		try {
-			eIntConverter.toValue(null, null, null);
+			eIntConverter.toValue(null, null);
 			fail("EInt converter should not convert empty string");
 		} catch(ValueConverterException e) {
 			// expected result
 		}
 		EFactoryValueConverter eIntegerConverter = new EFactoryValueConverter(EcorePackage.Literals.EINTEGER_OBJECT);
-		assertNull(eIntegerConverter.toValue(null, null, null));
+		assertNull(eIntegerConverter.toValue(null, null));
 	}
 	
 }

@@ -10,6 +10,7 @@ package org.eclipse.xtext.parsetree;
 
 import org.eclipse.xtext.dummy.DummyTestLanguageStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.nodemodel.INode;
 
 public class HiddenTokensTest extends AbstractXtextTests {
 	
@@ -21,26 +22,26 @@ public class HiddenTokensTest extends AbstractXtextTests {
 
 	public void testWhitespaceIsIncluded() throws Exception {
 		String model = "element foo;\nelement bar;";
-		AbstractNode node = getRootNode(model);
-		assertEquals(model,node.serialize());
+		INode node = getRootNode2(model);
+		assertEquals(model,node.getText());
 	}
 	
 	public void testWhitespaceIsIncluded2() throws Exception {
 		String model = "element foo;\nelement bar;/* foo bar */ element foo;\nelement bar;";
-		AbstractNode node = getRootNode(model);
-		assertEquals(node.serialize(),model);
+		INode node = getRootNode2(model);
+		assertEquals(node.getText(), model);
 	}
 	
 	public void testTrailingWhitespaceIsIncluded() throws Exception {
 		String model = "element foo;\nelement bar;  /* holla */ \n// stuff\n";
-		AbstractNode node = getRootNode(model);
-		assertEquals(model,node.serialize());
+		INode node = getRootNode2(model);
+		assertEquals(model, node.getText());
 	}
 	
 	public void testPrecedingWhitespaceIsIncluded() throws Exception {
 		String model = "//honolulu\n\t element foo;\nelement bar;";
-		AbstractNode node = getRootNode(model);
-		assertEquals(model,node.serialize());
+		INode node = getRootNode2(model);
+		assertEquals(model, node.getText());
 	}
 	
 }

@@ -11,6 +11,7 @@ package org.eclipse.xtext.parsetree;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.dummy.DummyTestLanguageStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 
 public class ASTChangeTest extends AbstractXtextTests {
 	
@@ -22,8 +23,8 @@ public class ASTChangeTest extends AbstractXtextTests {
 
 	public void testWhitespaceIsIncluded() throws Exception {
 		String model = "element foo;\nelement bar;";
-		CompositeNode node = getRootNode(model);
-		EObject me = node.getElement();
+		ICompositeNode node = getRootNode2(model);
+		EObject me = node.getSemanticElement();
 		assertWithXtend("'foo'", "elements.first().name", me);
 		invokeWithXtend("elements.first().setName('stuff')", me);
 		assertWithXtend("'stuff'", "elements.first().name", me);

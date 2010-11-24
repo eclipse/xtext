@@ -8,12 +8,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.reference;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
+
+import com.google.common.collect.Iterators;
+import com.google.common.collect.Lists;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -24,7 +28,7 @@ public class CommentOnEofBug_234135_Test extends AbstractXtextTests {
     public void testCommentOnEof() throws Exception {
         with(ReferenceGrammarTestLanguageStandaloneSetup.class);
         String model = "//comment";
-        EList<LeafNode> leafNodes = getRootNode(model).getLeafNodes();
+        List<ILeafNode> leafNodes = Lists.newArrayList(Iterators.filter(getRootNode2(model).treeIterator(), ILeafNode.class));
         assertEquals(1, leafNodes.size());
         EObject grammarElement = leafNodes.get(0).getGrammarElement();
         assertNotNull(grammarElement);
