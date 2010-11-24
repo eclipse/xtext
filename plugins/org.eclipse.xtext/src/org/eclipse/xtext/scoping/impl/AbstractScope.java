@@ -8,28 +8,27 @@
 package org.eclipse.xtext.scoping.impl;
 
 import static com.google.common.collect.Iterables.*;
+import static org.eclipse.xtext.scoping.Selectors.*;
 
 import java.util.Iterator;
-import java.util.Set;
 
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.ISelector;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public abstract class AbstractScope implements IScope {
-	
+
 	private IScope parent = IScope.NULLSCOPE;
-	
+
 	public AbstractScope() {
 	}
+
 	public AbstractScope(IScope parent) {
 		if (parent == null)
 			throw new NullPointerException("parent");
@@ -41,58 +40,33 @@ public abstract class AbstractScope implements IScope {
 	}
 
 	public IEObjectDescription getSingleElement(ISelector selector) {
-		if (selector==null)
+		if (selector == null)
 			selector = ISelector.SELECT_ALL;
-		Iterable<IEObjectDescription> elements = getLocalElements(selector);
+		Iterable<IEObjectDescription> elements = getElements(selector);
 		final Iterator<IEObjectDescription> iterator = elements.iterator();
 		if (iterator.hasNext())
 			return iterator.next();
-		return getParent().getSingleElement(selector);
+		return null;
 	}
 
 	public Iterable<IEObjectDescription> getElements(ISelector selector) {
-		if (selector==null)
+		if (selector == null)
 			selector = ISelector.SELECT_ALL;
 		Iterable<IEObjectDescription> localElements = getLocalElements(selector);
-		return Iterables.concat(trackKeys(localElements),Iterables.filter(parent.getElements(selector), new Predicate<IEObjectDescription>() {
-			public boolean apply(IEObjectDescription input) {
-				return !isShadowed(input);
-			}
-		}));
+		return Iterables.concat(localElements,
+				Iterables.filter(parent.getElements(selector), new Predicate<IEObjectDescription>() {
+					public boolean apply(IEObjectDescription input) {
+						return !isShadowed(input);
+					}
+				}));
 	}
-	
-	protected Set<Object> shadowingIndex = null;
-	
-	/**
-	 * call back used to add indexing functionality to the local {@link IEObjectDescription}
-	 * The default impl populates a set of keys, which are used to shadow {@link IEObjectDescription} from
-	 * the parent scope 
-	 */
-	protected Iterable<IEObjectDescription> trackKeys(Iterable<IEObjectDescription> localElements) {
-		shadowingIndex = Sets.newHashSet();
-		return transform(localElements, new Function<IEObjectDescription, IEObjectDescription>() {
-			public IEObjectDescription apply(IEObjectDescription description) {
-				shadowingIndex.add(getKey(description));
-				return description;
-			}
-		});
+
+	protected boolean isShadowed(IEObjectDescription input) {
+		final Iterable<IEObjectDescription> localElements = getLocalElements(selectByName(input.getName()));
+		final boolean isEmpty = isEmpty(localElements);
+		return !isEmpty;
 	}
-	
-	/**
-	 * @return whether the passed {@link IEObjectDescription} from the parent scope is shadowed by this scope.
-	 */
-	protected boolean isShadowed(IEObjectDescription fromParent) {
-		boolean filtered = shadowingIndex.contains(getKey(fromParent));
-		return filtered;
-	}
-	
-	/**
-	 * @return the key of the given description, which makes it shadowing others 
-	 */
-	protected Object getKey(IEObjectDescription description) {
-		return description.getKey();
-	}
-	
+
 	public abstract Iterable<IEObjectDescription> getLocalElements(ISelector selector);
 
 	@Override
@@ -102,9 +76,9 @@ public abstract class AbstractScope implements IScope {
 			final IScope parent2 = getParent();
 			parentString = parent2.toString();
 		} catch (Throwable t) {
-			parentString = t.getClass().getSimpleName()+" : "+t.getMessage();
+			parentString = t.getClass().getSimpleName() + " : " + t.getMessage();
 		}
-		return getClass().getSimpleName()+getLocalElements(ISelector.SELECT_ALL)+" -> "+parentString;
+		return getClass().getSimpleName() + getLocalElements(ISelector.SELECT_ALL) + " -> " + parentString;
 	}
 
 }

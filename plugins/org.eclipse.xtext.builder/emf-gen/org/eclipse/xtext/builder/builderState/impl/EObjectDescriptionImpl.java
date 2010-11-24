@@ -480,7 +480,4 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 		return result.toString();
 	}
 
-	public Object getKey() {
-		return getName();
-	}
 } //EObjectDescriptionImpl

@@ -145,4 +145,14 @@ public interface ISelector {
 			this.delegates.add(selector);
 		}
 	}
+	
+	abstract class PredicateSelector implements ISelector, Predicate<IEObjectDescription> {
+
+		public Iterable<IEObjectDescription> applySelector(Iterable<IEObjectDescription> elements) {
+			return filter(elements, this);
+		}
+
+		public abstract boolean apply(IEObjectDescription input);
+		
+	}
 }

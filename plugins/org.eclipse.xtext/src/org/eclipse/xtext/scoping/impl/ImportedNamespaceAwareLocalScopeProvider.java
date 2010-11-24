@@ -10,6 +10,7 @@ package org.eclipse.xtext.scoping.impl;
 
 import static com.google.common.collect.Iterables.*;
 import static java.util.Collections.*;
+import static org.eclipse.xtext.scoping.Selectors.*;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -93,7 +94,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 				Iterable<IEObjectDescription> iterable = resourceScope.getElements(Selectors.selectByName(name2, selector2));
 				return transform(iterable, new Function<IEObjectDescription, IEObjectDescription>(){
 					public IEObjectDescription apply(IEObjectDescription from) {
-						return new AliasedEObjectDescription(name2, from, isIgnoreCase);
+						return new AliasedEObjectDescription(normalizer.deresolve(from.getName()), from, isIgnoreCase);
 					}
 					
 				});
@@ -107,8 +108,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 				}
 			}), Predicates.notNull());
 		}
-		
-		
+
 	}
 
 	@Inject

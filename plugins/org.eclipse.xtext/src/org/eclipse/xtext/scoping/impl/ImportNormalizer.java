@@ -41,12 +41,8 @@ public class ImportNormalizer {
 	public QualifiedName resolve(QualifiedName relativeName) {
 		if (hasWildCard) {
 			return importedNamespacePrefix.append(relativeName);
-		}
-		if (relativeName.getFirstSegment().equals(importedNamespacePrefix.getLastSegment())) {
-			if (importedNamespacePrefix.getSegmentCount() == 1)
-				return relativeName;
-			else
-				return importedNamespacePrefix.skipLast(1).append(relativeName);
+		} else if (relativeName.getSegmentCount()==1 && relativeName.getLastSegment().equals(importedNamespacePrefix.getLastSegment())) {
+			return importedNamespacePrefix;
 		}
 		return null;
 	}

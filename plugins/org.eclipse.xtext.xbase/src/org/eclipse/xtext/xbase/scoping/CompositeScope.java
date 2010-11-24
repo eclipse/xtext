@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.scoping.newapi;
+package org.eclipse.xtext.xbase.scoping;
 
 import java.util.Arrays;
 import java.util.List;

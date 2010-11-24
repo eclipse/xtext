@@ -57,7 +57,7 @@ public class MultimapBasedScope extends AbstractScope {
 		if (elements.containsKey(lowerCase)) {
 			Collection<IEObjectDescription> shadowing = elements.get(lowerCase);
 			for (IEObjectDescription ieObjectDescription : shadowing) {
-				if (ieObjectDescription.getKey().equals(fromParent.getKey()))
+				if (ieObjectDescription.getName().equals(fromParent.getName()))
 					return true;
 			}
 		}
