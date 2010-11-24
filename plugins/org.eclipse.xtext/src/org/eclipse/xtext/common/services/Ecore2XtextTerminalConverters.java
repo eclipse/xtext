@@ -13,7 +13,6 @@ import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.parsetree.AbstractNode;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -26,11 +25,11 @@ public class Ecore2XtextTerminalConverters extends DefaultTerminalConverters {
 	public IValueConverter<String> EString() {
 		return new AbstractNullSafeConverter<String>() {
 			@Override
-			protected String internalToValue(String string, AbstractNode node, INode newNode) {
+			protected String internalToValue(String string, INode newNode) {
 				if((string.startsWith("'") && string.endsWith("'"))||(string.startsWith("\"") && string.endsWith("\""))) {
-					return STRING().toValue(string, node, newNode);
+					return STRING().toValue(string, newNode);
 				}
-				return ID().toValue(string, node, newNode);
+				return ID().toValue(string, newNode);
 			}
 
 			@Override

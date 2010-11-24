@@ -79,7 +79,7 @@ public class LinkingHelper {
 			String ruleName = getRuleNameFrom(node.getGrammarElement());
 			if (ruleName == null)
 				return convertMe;
-			Object result = valueConverter.toValue(convertMe, ruleName, null, node);
+			Object result = valueConverter.toValue(convertMe, ruleName, node);
 			return result != null ? result.toString() : null;
 		} catch (ValueConverterException ex) {
 			throw new IllegalNodeException(node, ex);

@@ -7,14 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
@@ -26,7 +28,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import com.google.inject.Inject;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class ReferenceUpdater {
 
@@ -107,8 +109,10 @@ public class ReferenceUpdater {
 	}
 
 	protected CrossReference getCrossReference(EObject referringElement, int offset) {
-		CompositeNode node = NodeUtil.getNode(referringElement);
-		for (AbstractNode childNode : NodeUtil.getAllContents(node)) {
+		ICompositeNode node = NodeModelUtils.getNode(referringElement);
+		Iterator<INode> iter = node.treeIterator();
+		while(iter.hasNext()) {
+			INode childNode = iter.next();
 			if (childNode.getOffset() >= offset && childNode.getGrammarElement() instanceof CrossReference)
 				return (CrossReference) childNode.getGrammarElement();
 		}

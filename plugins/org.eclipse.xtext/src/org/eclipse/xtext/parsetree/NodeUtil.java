@@ -20,8 +20,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
 
-import com.google.common.collect.Iterables;
-
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Heiko Behrens
@@ -193,19 +191,6 @@ public class NodeUtil {
 			}
 		}
 		return result;
-	}
-
-	/**
-	 * @param rootNode
-	 * @return
-	 */
-	public static Iterable<AbstractNode> getAllContents(final CompositeNode rootNode) {
-		Iterable<Object> iterable = new Iterable<Object>() {
-			public Iterator<Object> iterator() {
-				return EcoreUtil.getAllContents(rootNode, false);
-			}
-		};
-		return Iterables.filter(iterable, AbstractNode.class);
 	}
 
 }

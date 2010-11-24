@@ -31,6 +31,8 @@ public class NodeModelBuilder {
 
 	private EObject forcedGrammarElement;
 	
+	private boolean compressRoot = true;
+	
 	public void addChild(ICompositeNode node, AbstractNode child) {
 		CompositeNode composite = (CompositeNode) node;
 		if (composite.basicGetFirstChild() == null) {
@@ -126,16 +128,16 @@ public class NodeModelBuilder {
 		return result;
 	}
 
-	public ILeafNode newLeafNode(int offset, int length, EObject grammarElement, boolean isHidden, String errorMessage,
+	public ILeafNode newLeafNode(int offset, int length, EObject grammarElement, boolean isHidden, SyntaxErrorMessage errorMessage,
 			ICompositeNode parent) {
 		LeafNode result = null;
 		if (errorMessage != null) {
 			if (isHidden) {
 				result = new HiddenLeafNodeWithSyntaxError();
-				((HiddenLeafNodeWithSyntaxError)result).basicSetSyntaxErrorMessage(new SyntaxErrorMessage(errorMessage, null));
+				((HiddenLeafNodeWithSyntaxError)result).basicSetSyntaxErrorMessage(errorMessage);
 			} else {
 				result = new LeafNodeWithSyntaxError();
-				((LeafNodeWithSyntaxError)result).basicSetSyntaxErrorMessage(new SyntaxErrorMessage(errorMessage, null));
+				((LeafNodeWithSyntaxError)result).basicSetSyntaxErrorMessage(errorMessage);
 			}
 		} else {
 			if (isHidden) {
@@ -177,6 +179,7 @@ public class NodeModelBuilder {
 //				}
 //			}
 //		}
+		CompositeNode result = null;
 		if (casted.basicGetSemanticElement() == null) {
 			if (casted instanceof CompositeNodeWithSemanticElement) {
 				if (casted.getSyntaxErrorMessage() == null) {
@@ -184,18 +187,44 @@ public class NodeModelBuilder {
 					compressed.basicSetGrammarElement(casted.basicGetGrammarElement());
 					compressed.basicSetLookAhead(compositeNode.getLookAhead());
 					replace(casted, compressed);
-					return compressed.basicGetParent();
+					result = compressed.basicGetParent();
 				} else {
 					CompositeNodeWithSyntaxError compressed = new CompositeNodeWithSyntaxError();
 					compressed.basicSetGrammarElement(casted.basicGetGrammarElement());
 					compressed.basicSetLookAhead(compositeNode.getLookAhead());
 					compressed.basicSetSyntaxErrorMessage(casted.getSyntaxErrorMessage());
 					replace(casted, compressed);
-					return compressed.basicGetParent();
+					result = compressed.basicGetParent();
+				}
+			}
+		} 
+		if (result == null) {
+			result = casted.basicGetParent();
+		}
+		if (compressRoot && result instanceof RootNode) {
+			if (casted.hasSiblings())
+				throw new IllegalStateException("Root's child should never have siblings");
+			RootNode root = (RootNode) result;
+			if (casted.basicGetFirstChild() != null) {
+				AbstractNode firstChild = casted.basicGetFirstChild();
+				root.basicSetFirstChild(firstChild);
+				firstChild.basicSetParent(root);
+				AbstractNode child = firstChild;
+				while(child.basicHasNextSibling()) {
+					child = child.basicGetNextSibling();
+					child.basicSetParent(root);
+				}
+				root.basicSetGrammarElement(casted.basicGetGrammarElement());
+				root.basicSetSemanticElement(casted.basicGetSemanticElement());
+				root.basicSetSyntaxErrorMessage(casted.getSyntaxErrorMessage());
+				root.basicSetLookAhead(casted.getLookAhead());
+				if (casted.getSemanticElement() != null) {
+					casted.getSemanticElement().eAdapters().remove(casted);
+					root.getSemanticElement().eAdapters().add(root);
 				}
 			}
 		}
-		return casted.basicGetParent();
+		return result;
 	}
 	
 	public INode setSyntaxError(INode node, SyntaxErrorMessage errorMessage) {
@@ -240,6 +269,10 @@ public class NodeModelBuilder {
 
 	protected void replace(AbstractNode oldNode, AbstractNode newNode) {
 		replaceWithoutChildren(oldNode, newNode);
+		replaceChildren(oldNode, newNode);
+	}
+
+	protected void replaceChildren(AbstractNode oldNode, AbstractNode newNode) {
 		if (oldNode instanceof CompositeNode) {
 			CompositeNode oldComposite = (CompositeNode) oldNode;
 			CompositeNode newComposite = (CompositeNode) newNode;
@@ -298,6 +331,7 @@ public class NodeModelBuilder {
 
 	public void setForcedFirstGrammarElement(RuleCall ruleCall) {
 		this.forcedGrammarElement = ruleCall;
+		compressRoot = false;
 	}
 
 }

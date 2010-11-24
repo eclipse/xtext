@@ -10,32 +10,35 @@ package org.eclipse.xtext.parsetree;
 
 import java.util.Iterator;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.dummy.DummyTestLanguageStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
+
+import com.google.common.collect.Iterators;
 
 public class LengthOffsetLineTest extends AbstractXtextTests {
 
 	public void testOffset() throws Exception {
 		String model = "element foo;\nelement bar;";
-		CompositeNode node = getRootNode(model);
-		EList<LeafNode> leafNodes = node.getLeafNodes();
-		Iterator<LeafNode> iter = leafNodes.iterator();
-		assertEquals(0,iter.next().getTotalOffset());
-		assertEquals(7,iter.next().getTotalOffset());
-		assertEquals(8,iter.next().getTotalOffset());
-		assertEquals(11,iter.next().getTotalOffset());
-		assertEquals(12,iter.next().getTotalOffset());
-		assertEquals(13,iter.next().getTotalOffset());
-		assertEquals(20,iter.next().getTotalOffset());
-		assertEquals(21,iter.next().getTotalOffset());
-		assertEquals(24,iter.next().getTotalOffset());
+		ICompositeNode node = getRootNode2(model);
+		Iterator<ILeafNode> leafIter = Iterators.filter(node.treeIterator(), ILeafNode.class);
+		assertEquals(0,leafIter.next().getTotalOffset());
+		assertEquals(7,leafIter.next().getTotalOffset());
+		assertEquals(8,leafIter.next().getTotalOffset());
+		assertEquals(11,leafIter.next().getTotalOffset());
+		assertEquals(12,leafIter.next().getTotalOffset());
+		assertEquals(13,leafIter.next().getTotalOffset());
+		assertEquals(20,leafIter.next().getTotalOffset());
+		assertEquals(21,leafIter.next().getTotalOffset());
+		assertEquals(24,leafIter.next().getTotalOffset());
 	}
 
 	public void testOffset2() throws Exception {
 		String model = "element foo;\nelement bar;";
-		CompositeNode node = getRootNode(model);
-		Iterator<AbstractNode> iter = node.getChildren().iterator();
+		ICompositeNode node = getRootNode2(model);
+		Iterator<INode> iter = node.getChildren().iterator();
 		assertEquals(0,iter.next().getTotalOffset());
 		assertEquals(12,iter.next().getTotalOffset());
 		assertFalse(iter.hasNext());
@@ -43,46 +46,48 @@ public class LengthOffsetLineTest extends AbstractXtextTests {
 
 	public void testLineForLeafnodes() throws Exception {
 		String model = "element foo;\nelement bar;";
-		CompositeNode node = getRootNode(model);
-		EList<LeafNode> leafNodes = node.getLeafNodes();
-		Iterator<LeafNode> iter = leafNodes.iterator();
-		assertEquals(1,iter.next().getTotalLine());
-		assertEquals(1,iter.next().getTotalLine());
-		assertEquals(1,iter.next().getTotalLine());
-		assertEquals(1,iter.next().getTotalLine());
-		assertEquals(1,iter.next().getTotalLine());
-		assertEquals(2,iter.next().getTotalLine());
-		assertEquals(2,iter.next().getTotalLine());
-		assertEquals(2,iter.next().getTotalLine());
-		assertEquals(2,iter.next().getTotalLine());
+		ICompositeNode node = getRootNode2(model);
+		Iterator<ILeafNode> iter = Iterators.filter(node.treeIterator(), ILeafNode.class);
+		assertEquals(1,iter.next().getTotalStartLine());
+		assertEquals(1,iter.next().getTotalStartLine());
+		assertEquals(1,iter.next().getTotalStartLine());
+		assertEquals(1,iter.next().getTotalStartLine());
+		assertEquals(1,iter.next().getTotalStartLine());
+		assertEquals(2,iter.next().getTotalStartLine());
+		assertEquals(2,iter.next().getTotalStartLine());
+		assertEquals(2,iter.next().getTotalStartLine());
+		assertEquals(2,iter.next().getTotalStartLine());
 		assertFalse(iter.hasNext());
 	}
 
 	public void testLineForCompositeNodes() throws Exception {
 		String model = "element foo;\nelement bar;\nelement bar;\nelement bar;";
-		CompositeNode node = getRootNode(model);
-		Iterator<AbstractNode> iter = node.getChildren().iterator();
-		assertEquals(1,iter.next().getTotalLine());
+		ICompositeNode node = getRootNode2(model);
+		Iterator<INode> iter = node.getChildren().iterator();
+		assertEquals(1,iter.next().getTotalStartLine());
 		//Note: because preceding whitespace is added to the following node,
 		// the '\n' is always added to the following composite node
-		assertEquals(1,iter.next().getTotalLine());
-		assertEquals(2,iter.next().getTotalLine());
-		assertEquals(3,iter.next().getTotalLine());
+		assertEquals(1,iter.next().getTotalStartLine());
+		assertEquals(2,iter.next().getTotalStartLine());
+		assertEquals(3,iter.next().getTotalStartLine());
 		assertFalse(iter.hasNext());
 	}
 
 
 	public void testErrors1() throws Exception {
 		String model = "element # ;";
-		CompositeNode node = getRootNodeAndExpect(model, 1);
-		assertEquals(model, node.serialize());
-		EList<LeafNode> nodes = node.getLeafNodes();
-		assertEquals(5,nodes.size());
+		ICompositeNode node = getRootNodeAndExpect2(model, 1);
+		assertEquals(model, node.getText());
+		Iterator<ILeafNode> iter = Iterators.filter(node.treeIterator(), ILeafNode.class);
 		int offset = 0;
-		for (LeafNode leafNode : nodes) {
+		int count = 0;
+		while(iter.hasNext()) {
+			ILeafNode leafNode = iter.next();
+			count++;
 			assertEquals(offset,leafNode.getTotalOffset());
 			offset += leafNode.getTotalLength();
 		}
+		assertEquals(5, count);
 	}
 
 	@Override

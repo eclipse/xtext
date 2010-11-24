@@ -16,7 +16,6 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
-import org.eclipse.xtext.parsetree.AbstractNode;
 
 import com.google.inject.ImplementedBy;
 
@@ -35,10 +34,7 @@ public interface ISyntaxErrorMessageProvider {
 
 		EObject getCurrentContext();
 
-		@Deprecated
-		AbstractNode getCurrentNode();
-		
-		INode getCurrentNode2();
+		INode getCurrentNode();
 	}
 
 	interface IParserErrorContext extends IErrorContext {

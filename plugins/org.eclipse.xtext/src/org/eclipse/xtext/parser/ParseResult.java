@@ -27,13 +27,11 @@ import com.google.common.collect.Iterators;
 public class ParseResult implements IParseResult {
 
     private EObject rootAstElement;
-    private CompositeNode deprecatedRootNode;
     private ICompositeNode rootNode;
 	private final boolean hasErrors;
     
-    public ParseResult(EObject rootAstElement, CompositeNode deprecatedRootNode, ICompositeNode rootNode, boolean hasErrors) {
+    public ParseResult(EObject rootAstElement, ICompositeNode rootNode, boolean hasErrors) {
         this.rootAstElement = rootAstElement;
-        this.deprecatedRootNode = deprecatedRootNode;
         this.rootNode = rootNode;
 		this.hasErrors = hasErrors;
     }
@@ -48,7 +46,7 @@ public class ParseResult implements IParseResult {
 
     @Deprecated
 	public CompositeNode deprecatedGetRootNode() {
-        return deprecatedRootNode;
+        return null;
     }
 
 	public Iterable<INode> getSyntaxErrors() {

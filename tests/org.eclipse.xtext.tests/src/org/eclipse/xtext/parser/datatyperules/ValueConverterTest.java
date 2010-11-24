@@ -28,14 +28,14 @@ public class ValueConverterTest extends TestCase {
 
 	public void testSimpleToObject() throws ValueConverterException {
 		String s = "123";
-		BigDecimal bd = valueConverter.toValue(s, null, null);
+		BigDecimal bd = valueConverter.toValue(s, null);
 		BigDecimal expected = new BigDecimal("123");
 		assertEquals(expected, bd);
 	}
 
 	public void testFractionObject() throws ValueConverterException {
 		String s = "123/246";
-		BigDecimal bd = valueConverter.toValue(s, null, null);
+		BigDecimal bd = valueConverter.toValue(s, null);
 		BigDecimal expected = new BigDecimal("0.5");
 		assertEquals(expected, bd);
 	}
@@ -43,7 +43,7 @@ public class ValueConverterTest extends TestCase {
 	public void testZeroDenominator() throws ValueConverterException {
 		String s = "123/0";
 		try {
-			valueConverter.toValue(s, null, null);
+			valueConverter.toValue(s, null);
 			fail("expected ArithmeticException");
 		} catch(ArithmeticException ae) {
 			// expected

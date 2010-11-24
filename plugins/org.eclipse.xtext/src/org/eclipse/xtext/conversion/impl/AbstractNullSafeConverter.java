@@ -9,13 +9,9 @@ package org.eclipse.xtext.conversion.impl;
 
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.parsetree.AbstractNode;
-
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
- * @param <T>
  */
 public abstract class AbstractNullSafeConverter<T> extends AbstractValueConverter<T> {
 
@@ -27,12 +23,12 @@ public abstract class AbstractNullSafeConverter<T> extends AbstractValueConverte
 
 	protected abstract String internalToString(T value);
 
-	public T toValue(String string, AbstractNode node, INode newNode) throws ValueConverterException {
+	public T toValue(String string, INode node) throws ValueConverterException {
 		if (string == null)
 			return null;
-		return internalToValue(string, node, newNode);
+		return internalToValue(string, node);
 	}
 
-	protected abstract T internalToValue(String string, AbstractNode node, INode newNode) throws ValueConverterException;
+	protected abstract T internalToValue(String string, INode node) throws ValueConverterException;
 
 }

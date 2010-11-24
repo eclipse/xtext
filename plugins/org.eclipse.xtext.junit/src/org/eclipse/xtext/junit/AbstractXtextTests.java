@@ -40,7 +40,6 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.resource.IResourceFactory;
@@ -312,19 +311,9 @@ public abstract class AbstractXtextTests extends TestCase {
 		return resource;
 	}
 
-	protected final CompositeNode getRootNode(InputStream model) throws Exception {
-		XtextResource resource = getResource(model);
-		return getRootNode(resource);
-	}
-	
 	protected final ICompositeNode getRootNode2(InputStream model) throws Exception {
 		XtextResource resource = getResource(model);
 		return getRootNode2(resource);
-	}
-	
-	protected final CompositeNode getRootNodeAndExpect(InputStream model, int errors) throws Exception {
-		XtextResource resource = getResourceAndExpect(model, errors);
-		return getRootNode(resource);
 	}
 	
 	protected final ICompositeNode getRootNodeAndExpect2(InputStream model, int errors) throws Exception {
@@ -332,20 +321,10 @@ public abstract class AbstractXtextTests extends TestCase {
 		return getRootNode2(resource);
 	}
 
-	@Deprecated
-	protected final CompositeNode getRootNode(XtextResource resource) {
-		return resource.getParseResult().deprecatedGetRootNode();
-	}
-	
 	protected final ICompositeNode getRootNode2(XtextResource resource) {
 		return resource.getParseResult().getRootNode2();
 	}
 
-	@Deprecated
-	protected final CompositeNode getRootNode(String model) throws Exception {
-		return getRootNode(getAsStream(model));
-	}
-	
 	protected final IParseResult getParseResult(String model) throws Exception {
 		return getResourceFromString(model).getParseResult();
 	}
@@ -356,10 +335,6 @@ public abstract class AbstractXtextTests extends TestCase {
 	
 	protected final ICompositeNode getRootNode2(String model) throws Exception {
 		return getRootNode2(getAsStream(model));
-	}
-	
-	protected final CompositeNode getRootNodeAndExpect(String model, int errors) throws Exception {
-		return getRootNodeAndExpect(getAsStream(model), errors);
 	}
 	
 	protected final ICompositeNode getRootNodeAndExpect2(String model, int errors) throws Exception {

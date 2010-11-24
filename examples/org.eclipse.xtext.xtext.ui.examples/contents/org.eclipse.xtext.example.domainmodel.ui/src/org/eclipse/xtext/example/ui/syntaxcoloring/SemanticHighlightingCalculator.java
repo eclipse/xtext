@@ -8,13 +8,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.ui.syntaxcoloring;
 
+import java.util.Iterator;
+
 import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+
+import com.google.common.collect.Iterators;
 
 public class SemanticHighlightingCalculator implements ISemanticHighlightingCalculator {
 	
@@ -22,21 +25,24 @@ public class SemanticHighlightingCalculator implements ISemanticHighlightingCalc
 		if (resource == null)
 			return;
 		
-		Iterable<AbstractNode> allNodes = NodeUtil.getAllContents(resource.getParseResult().deprecatedGetRootNode());
-		for (AbstractNode abstractNode : allNodes) {
-			if (abstractNode.getGrammarElement() instanceof CrossReference) {
-				highlightNode(abstractNode, SemanticHighlightingConfiguration.CROSS_REF, acceptor);
+		Iterator<INode> allNodes = resource.getParseResult().getRootNode2().treeIterator();
+		while(allNodes.hasNext()) {
+			INode node = allNodes.next();
+			if (node.getGrammarElement() instanceof CrossReference) {
+				highlightNode(node, SemanticHighlightingConfiguration.CROSS_REF, acceptor);
 			}
 		}
 	}
 	
-	private void highlightNode(AbstractNode node, String id, IHighlightedPositionAcceptor acceptor) {
+	private void highlightNode(INode node, String id, IHighlightedPositionAcceptor acceptor) {
 		if (node == null)
 			return;
-		if (node instanceof LeafNode) {
+		if (node instanceof ILeafNode) {
 			acceptor.addPosition(node.getOffset(), node.getLength(), id);
 		} else {
-			for (LeafNode leaf: node.getLeafNodes()) {
+			Iterator<ILeafNode> leafIter = Iterators.filter(node.treeIterator(), ILeafNode.class);
+			while(leafIter.hasNext()) {
+				ILeafNode leaf = leafIter.next();
 				if (!leaf.isHidden()) {
 					acceptor.addPosition(leaf.getOffset(), leaf.getLength(), id);
 				}

@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.parsetree.AbstractNode;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -44,11 +43,11 @@ public class DefaultTerminalConverter extends AbstractLexerBasedConverter<Object
 		this.dataType = dataType;
 	}
 
-	public Object toValue(String string, AbstractNode node, INode newNode) throws ValueConverterException {
+	public Object toValue(String string, INode node) throws ValueConverterException {
 		try {
 			return dataType.getEPackage().getEFactoryInstance().createFromString(dataType, string);
 		} catch (Exception exc) {
-			throw new ValueConverterException("Error converting string to value", node, newNode, exc);
+			throw new ValueConverterException("Error converting string to value", node, exc);
 		}
 	}
 

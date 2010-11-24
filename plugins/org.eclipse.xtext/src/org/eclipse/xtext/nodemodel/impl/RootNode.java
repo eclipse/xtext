@@ -13,7 +13,7 @@ import org.eclipse.xtext.nodemodel.INode;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class RootNode extends CompositeNodeWithSemanticElement {
+public class RootNode extends CompositeNodeWithSemanticElementAndSyntaxError {
 
 	private String completeContent;
 	

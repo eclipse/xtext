@@ -1,6 +1,7 @@
 package org.eclipse.xtext.parsetree;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
 
 public class SerializeTest extends AbstractXtextTests {
@@ -25,8 +26,8 @@ public class SerializeTest extends AbstractXtextTests {
 	}
 	
 	private void checkSerialize(String model, int expectedErrors) throws Exception {
-		CompositeNode node = getRootNodeAndExpect(model, expectedErrors);
-		String serialize = node.serialize();
+		ICompositeNode node = getRootNodeAndExpect2(model, expectedErrors);
+		String serialize = node.getText();
 		assertEquals(model, serialize);
 	}
 }

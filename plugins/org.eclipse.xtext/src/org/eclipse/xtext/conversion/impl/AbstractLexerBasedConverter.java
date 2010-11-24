@@ -55,18 +55,18 @@ public abstract class AbstractLexerBasedConverter<T> extends AbstractValueConver
 		if (!getRuleName().toUpperCase().equals(getRuleName(token))) {
 			throw createTokenTypeMismatchException(value, escapedString, token);
 		}
-		T reparsedValue = toValue(token.getText(), null, null);
+		T reparsedValue = toValue(token.getText(), null);
 		if (value != reparsedValue && !value.equals(reparsedValue)) {
 			throw createTokenContentMismatchException(value, escapedString, token);
 		}
 	}
 
 	protected ValueConverterException createTokenTypeMismatchException(T value, String escapedString, Token token) {
-		return new ValueConverterException("The value '" + value + "' is an invalid " + getRuleName(), null, null, null);
+		return new ValueConverterException("The value '" + value + "' is an invalid " + getRuleName(), null, null);
 	}
 
 	protected ValueConverterException createTokenContentMismatchException(T value, String escapedString, Token token) {
-		return new ValueConverterException("The value '" + value + "' is an invalid " + getRuleName(), null, null, null);
+		return new ValueConverterException("The value '" + value + "' is an invalid " + getRuleName(), null, null);
 	}
 
 	protected TokenSource getTokenSource(String escapedValue) {
@@ -79,7 +79,7 @@ public abstract class AbstractLexerBasedConverter<T> extends AbstractValueConver
 
 	protected void assertValidValue(T value) {
 		if (value == null) {
-			throw new ValueConverterException(getRuleName() + " may not be null.", null, null, null);
+			throw new ValueConverterException(getRuleName() + " may not be null.", null, null);
 		}
 	}
 	

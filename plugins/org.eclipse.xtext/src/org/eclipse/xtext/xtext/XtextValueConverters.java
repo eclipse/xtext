@@ -17,7 +17,6 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.parsetree.AbstractNode;
 
 import com.google.common.collect.Iterators;
 
@@ -30,7 +29,7 @@ public class XtextValueConverters extends DefaultTerminalConverters {
 	public IValueConverter<String> GrammarID() {
 		return new AbstractNullSafeConverter<String>() {
 			@Override
-			protected String internalToValue(String string, AbstractNode node, INode newNode) throws ValueConverterException {
+			protected String internalToValue(String string, INode newNode) throws ValueConverterException {
 				StringBuilder result = new StringBuilder();
 				Iterator<ILeafNode> iter = Iterators.filter(newNode.treeIterator(), ILeafNode.class);
 				while(iter.hasNext()) {
@@ -39,7 +38,7 @@ public class XtextValueConverters extends DefaultTerminalConverters {
 						if (leaf.getGrammarElement() instanceof Keyword)
 							result.append(leaf.getText());
 						else
-							result.append(ID().toValue(leaf.getText(), null, leaf));
+							result.append(ID().toValue(leaf.getText(), leaf));
 					}
 				}
 				return result.toString();

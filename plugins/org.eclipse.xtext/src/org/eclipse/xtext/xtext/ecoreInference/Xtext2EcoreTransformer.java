@@ -57,9 +57,9 @@ import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
 
@@ -310,12 +310,12 @@ public class Xtext2EcoreTransformer {
 			List<EnumLiteralDeclaration> decls = EcoreUtil2.getAllContentsOfType(rule, EnumLiteralDeclaration.class);
 			for(EnumLiteralDeclaration decl : decls) {
 				if (decl.getEnumLiteral() == null) {
-					List<AbstractNode> nodes = NodeUtil.findNodesForFeature(decl, XtextPackage.Literals.ENUM_LITERAL_DECLARATION__ENUM_LITERAL);
+					List<INode> nodes = NodeModelUtils.findNodesForFeature(decl, XtextPackage.Literals.ENUM_LITERAL_DECLARATION__ENUM_LITERAL);
 					if (!nodes.isEmpty()) {
 						if (nodes.size() > 1)
 							throw new IllegalStateException("Unexpected nodes found: " + nodes);
-						AbstractNode node = nodes.get(0);
-						String text = node.serialize();
+						INode node = nodes.get(0);
+						String text = node.getText();
 						EEnumLiteral literal = null;
 						if (rule.getType().getMetamodel() instanceof ReferencedMetamodel) {
 							literal = returnType.getEEnumLiteral(text);
@@ -605,10 +605,10 @@ public class Xtext2EcoreTransformer {
 			public TransformationException caseRuleCall(RuleCall ruleCall) {
 				final AbstractRule calledRule = ruleCall.getRule();
 				if (calledRule == null) {
-					final NodeAdapter adapter = NodeUtil.getNodeAdapter(ruleCall);
-					if (adapter != null)
+					ICompositeNode node = NodeModelUtils.getNode(ruleCall);
+					if (node != null)
 						return new TransformationException(TransformationErrorCode.NoSuchRuleAvailable,
-								"Cannot find rule " + adapter.getParserNode().serialize().trim(), ruleCall);
+								"Cannot find rule " + node.getText().trim(), ruleCall);
 
 					return new TransformationException(TransformationErrorCode.NoSuchRuleAvailable,
 							"Cannot find called rule.", ruleCall);

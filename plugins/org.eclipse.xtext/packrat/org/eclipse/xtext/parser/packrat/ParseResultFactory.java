@@ -80,7 +80,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 			token.accept(this);
 		}
 		this.input = null;
-		return new ParseResult(currentStack.isEmpty() ? null : currentStack.getLast(), currentNode, null, false);
+		return new ParseResult(currentStack.isEmpty() ? null : currentStack.getLast(), null, false);
 	}
 
 	private LeafNode createLeafNode(AbstractParsedToken parsedToken) {
@@ -228,9 +228,9 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		}
 		try {
 			if (token.isMany()) {
-				factory.add(current, token.getFeature(), created, rule != null ? rule.getName() : null, currentNode, null);
+				factory.add(current, token.getFeature(), created, rule != null ? rule.getName() : null, null);
 			} else {
-				factory.set(current, token.getFeature(), created, rule != null ? rule.getName() : null, currentNode, null);
+				factory.set(current, token.getFeature(), created, rule != null ? rule.getName() : null, null);
 			}
 		} catch(ValueConverterException ex) {
 			handleValueConverterException(ex);
@@ -263,9 +263,10 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 			SyntaxError error = ParsetreeFactory.eINSTANCE.createSyntaxError();
 			if (ex.getNode() == null) {
 				currentNode.setSyntaxError(error);
-			} else {
-				ex.getNode().setSyntaxError(error);
-			}
+			} 
+//			else {
+//				ex.getNode().setSyntaxError(error);
+//			}
 		} else
 			throw new RuntimeException(ex);
 	}
@@ -321,10 +322,10 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		try {
 			if (token.isMany()) {
 				factory.add(current, token.getFeature(), token.isBoolean() ? true : token.getText(input),
-						token.getGrammarElement() instanceof Keyword ? null : token.getRuleName(), node, null);
+						token.getGrammarElement() instanceof Keyword ? null : token.getRuleName(), null);
 			} else {
 				factory.set(current, token.getFeature(), token.isBoolean() ? true : token.getText(input),
-						token.getGrammarElement() instanceof Keyword ? null : token.getRuleName(), node, null);
+						token.getGrammarElement() instanceof Keyword ? null : token.getRuleName(), null);
 			}
 		} catch(ValueConverterException ex) {
 			handleValueConverterException(ex);
@@ -344,9 +345,9 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		if (token.getFeature() != null) {
 			try {
 				if (token.isMany())
-					factory.add(newCurrent, token.getFeature(), prevCurrent, null, null, null);
+					factory.add(newCurrent, token.getFeature(), prevCurrent, null, null);
 				else
-					factory.set(newCurrent, token.getFeature(), prevCurrent, null, null, null);
+					factory.set(newCurrent, token.getFeature(), prevCurrent, null, null);
 			} catch(ValueConverterException ex) {
 				handleValueConverterException(ex);
 			} catch(Exception ex) {

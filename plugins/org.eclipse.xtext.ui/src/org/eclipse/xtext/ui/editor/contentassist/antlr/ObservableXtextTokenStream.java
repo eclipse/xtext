@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.contentassist.antlr;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
@@ -48,11 +45,6 @@ public class ObservableXtextTokenStream extends XtextTokenStream {
 		if (result == Token.EOF && getListener() != null)
 			getListener().announceEof(i);
 		return result;
-	}
-	
-	@Override
-	protected List<Token> createLookAheadTokenList() {
-		return Collections.<Token>emptyList();
 	}
 	
 	@Override
