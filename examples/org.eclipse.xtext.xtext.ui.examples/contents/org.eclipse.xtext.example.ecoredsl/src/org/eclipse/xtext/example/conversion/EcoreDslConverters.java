@@ -15,7 +15,6 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.impl.AbstractToStringConverter;
 import org.eclipse.xtext.conversion.impl.AbstractValueConverter;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.parsetree.AbstractNode;
 
 /**
  * @author Michael Clay - Initial contribution and API
@@ -26,7 +25,7 @@ public class EcoreDslConverters extends DefaultTerminalConverters {
 	public IValueConverter<Integer> sint() {
 		return new AbstractToStringConverter<Integer>() {
 			@Override
-			public Integer internalToValue(String string, AbstractNode node, INode newNode) {
+			public Integer internalToValue(String string, INode newNode) {
 				return Integer.valueOf(string);
 			}
 		};
@@ -64,7 +63,7 @@ public class EcoreDslConverters extends DefaultTerminalConverters {
 
 	private IValueConverter<Boolean> negatedBooleanConverter(final String keyword) {
 		return new AbstractValueConverter<Boolean>(){
-			public Boolean toValue(String string, AbstractNode node, INode newNode) throws ValueConverterException {
+			public Boolean toValue(String string, INode newNode) throws ValueConverterException {
 				return string == null;
 			}
 		

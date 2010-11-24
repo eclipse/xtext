@@ -31,7 +31,7 @@ public class IDValueConverterTest extends AbstractXtextTests {
 
 	public void testSimple() throws Exception {
 		String s = "abc";
-		String value = idConverter.toValue(s, null, null);
+		String value = idConverter.toValue(s, null);
 		assertEquals("abc", value);
 		assertEquals(s, idConverter.toString(value));
 	}
@@ -40,7 +40,7 @@ public class IDValueConverterTest extends AbstractXtextTests {
 		String s = "grammar";
 		String value = idConverter.toString(s);
 		assertEquals("^grammar", value);
-		assertEquals(s, idConverter.toValue(value, null, null));
+		assertEquals(s, idConverter.toValue(value, null));
 	}
 
 	public void testNull() throws Exception {

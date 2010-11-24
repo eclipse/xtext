@@ -9,10 +9,11 @@ package org.eclipse.xtext.enumrules;
 
 import org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.EntityWithEnumAndReference;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.ParserTestHelper;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.NodeUtil;
+
+import com.google.common.collect.Iterables;
 
 public class EnumAndReferenceTest extends AbstractXtextTests {
 
@@ -43,11 +44,9 @@ public class EnumAndReferenceTest extends AbstractXtextTests {
 	public void testNodes() throws Exception {
 		String modelAsString = "kindOfKeyword Hoo reference Hoo";
 		EntityWithEnumAndReference model = (EntityWithEnumAndReference) helper.getModel(modelAsString);
-		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(model);
-		
-		CompositeNode node = nodeAdapter.getParserNode();
+		ICompositeNode node = NodeModelUtils.getNode(model);
 		assertNotNull(node);
-		assertTrue(node.getChildren().size() == 7); // 3 hidden WS + 4 visible LeafNodes
+		assertTrue(Iterables.size(node.getChildren()) == 7); // 3 hidden WS + 4 visible LeafNodes
 	}
 	
 }

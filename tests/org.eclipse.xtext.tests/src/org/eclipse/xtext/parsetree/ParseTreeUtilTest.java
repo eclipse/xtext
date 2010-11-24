@@ -8,18 +8,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree;
 
-import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 
 /**
- * Unit test for <code>ParseTreeUtil</code>.
- *
  * @author Michael Clay - Initial contribution and API
- * @see ParseTreeUtil
  */
 public class ParseTreeUtilTest extends AbstractXtextTests {
 
@@ -31,18 +28,18 @@ public class ParseTreeUtilTest extends AbstractXtextTests {
 
 	public void testGetLastCompleteNodeByOffset() throws Exception {
 		String text = "spielplatz 1 \"junit\" {  ";
-		CompositeNode rootNode = getRootNodeAndExpect(text, 1);
-		AbstractNode lastCompleteNodeByOffset = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, text.length());
-		assertTrue("expect leafnode as last complete element", lastCompleteNodeByOffset instanceof LeafNode);
-		assertEquals("expect leafnode with text '{'", ((LeafNode) lastCompleteNodeByOffset).getText(), "{");
+		ICompositeNode rootNode = getRootNodeAndExpect2(text, 1);
+		INode lastCompleteNodeByOffset = NodeModelUtils.getLastCompleteNodeByOffset(rootNode, text.length());
+		assertTrue("expect leafnode as last complete element", lastCompleteNodeByOffset instanceof ILeafNode);
+		assertEquals("expect leafnode with text '{'", ((ILeafNode) lastCompleteNodeByOffset).getText(), "{");
 	}
 
 	public void testGetLastCompleteNodeByOffset2() throws Exception {
 		String text = "spielplatz 1 \"junit\" {";
-		CompositeNode rootNode = getRootNodeAndExpect(text, 1);
-		AbstractNode lastCompleteNodeByOffset = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, text.length());
-		assertTrue("expect leafnode as last complete element", lastCompleteNodeByOffset instanceof LeafNode);
-		assertEquals("expect leafnode with text '{'", ((LeafNode) lastCompleteNodeByOffset).getText(), "{");
+		ICompositeNode rootNode = getRootNodeAndExpect2(text, 1);
+		INode lastCompleteNodeByOffset = NodeModelUtils.getLastCompleteNodeByOffset(rootNode, text.length());
+		assertTrue("expect leafnode as last complete element", lastCompleteNodeByOffset instanceof ILeafNode);
+		assertEquals("expect leafnode with text '{'", ((ILeafNode) lastCompleteNodeByOffset).getText(), "{");
 	}
 
 }

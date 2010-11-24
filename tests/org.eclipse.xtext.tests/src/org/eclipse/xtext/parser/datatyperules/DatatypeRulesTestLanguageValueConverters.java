@@ -14,7 +14,6 @@ import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.parsetree.AbstractNode;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,7 +24,7 @@ public class DatatypeRulesTestLanguageValueConverters extends DefaultTerminalCon
 	public IValueConverter<BigDecimal> Fraction() {
 		return new AbstractNullSafeConverter<BigDecimal>(){
 			@Override
-			protected BigDecimal internalToValue(String string, AbstractNode node, INode newNode) {
+			protected BigDecimal internalToValue(String string, INode node) {
 				String[] splitted = string.split("/");
 				if (splitted.length > 1) {
 					return new BigDecimal(splitted[0].trim()).divide(new BigDecimal(splitted[1].trim()));

@@ -8,12 +8,12 @@
 package org.eclipse.xtext.parser.terminalrules;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.Element;
 import org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.Model;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -189,111 +189,111 @@ public class Bug317840Test extends AbstractXtextTests {
 	
 	public void testNodeModel_01() throws Exception {
 		Element element = getFirstElement("element a");
-		AbstractNode node = NodeUtil.getNode(element);
-		assertEquals("element a", node.serialize());
+		INode node = NodeModelUtils.getNode(element);
+		assertEquals("element a", node.getText());
 		assertEquals("[(element)[[( )(a)]]]", toDebugString(node));
 	}
 	
 	public void testNodeModel_02() throws Exception {
 		Element element = getFirstElement("element a b");
-		AbstractNode node = NodeUtil.getNode(element);
-		assertEquals("element a b", node.serialize());
+		INode node = NodeModelUtils.getNode(element);
+		assertEquals("element a b", node.getText());
 		assertEquals("[(element)[[( )(a)]][[( )(b)]]]", toDebugString(node));
 	}
 	
 	public void testNodeModel_03() throws Exception {
 		Element element = getFirstElement("element a b c");
-		AbstractNode node = NodeUtil.getNode(element);
-		assertEquals("element a b c", node.serialize());
+		INode node = NodeModelUtils.getNode(element);
+		assertEquals("element a b c", node.getText());
 		assertEquals("[(element)[[( )(a)]][[( )(b)]][[( )(c)]]]", toDebugString(node));
 	}
 	
 	public void testNodeModel_04() throws Exception {
 		Element element = getFirstElement("element a b c d");
-		AbstractNode node = NodeUtil.getNode(element);
-		assertEquals("element a b c d", node.serialize());
+		INode node = NodeModelUtils.getNode(element);
+		assertEquals("element a b c d", node.getText());
 		assertEquals("[(element)[[( )(a)]][[( )(b)]][[( )(c)]][[( )(d)]]]", toDebugString(node));
 	}
 	
 	public void testNodeModel_05() throws Exception {
 		Element element = getFirstElement("element a b c d e");
-		AbstractNode node = NodeUtil.getNode(element);
-		assertEquals("element a b c d e", node.serialize());
+		INode node = NodeModelUtils.getNode(element);
+		assertEquals("element a b c d e", node.getText());
 		assertEquals("[(element)[[( )(a)]][[( )(b)]][[( )(c)]][[( )(d)]][[( )(e)]]]", toDebugString(node));
 	}
 	
 	public void testNodeModel_06() throws Exception {
 		Element element = getFirstElement("element a.a");
-		AbstractNode node = NodeUtil.getNode(element);
-		assertEquals("element a.a", node.serialize());
+		INode node = NodeModelUtils.getNode(element);
+		assertEquals("element a.a", node.getText());
 		assertEquals("[(element)[[( )(a)(.)(a)]]]", toDebugString(node));
 	}
 	
 	public void testNodeModel_07() throws Exception {
 		Element element = getFirstElement("element a.a b.b");
-		AbstractNode node = NodeUtil.getNode(element);
-		assertEquals("element a.a b.b", node.serialize());
+		INode node = NodeModelUtils.getNode(element);
+		assertEquals("element a.a b.b", node.getText());
 		assertEquals("[(element)[[( )(a)(.)(a)]][[( )(b)(.)(b)]]]", toDebugString(node));
 	}
 	
 	public void testNodeModel_08() throws Exception {
 		Element element = getFirstElement("element a.a b.b c.c");
-		AbstractNode node = NodeUtil.getNode(element);
-		assertEquals("element a.a b.b c.c", node.serialize());
+		INode node = NodeModelUtils.getNode(element);
+		assertEquals("element a.a b.b c.c", node.getText());
 		assertEquals("[(element)[[( )(a)(.)(a)]][[( )(b)(.)(b)]][[( )(c)(.)(c)]]]", toDebugString(node));
 	}
 	
 	public void testNodeModel_09() throws Exception {
 		Element element = getFirstElement("element a.a b.b c.c d.d");
-		AbstractNode node = NodeUtil.getNode(element);
-		assertEquals("element a.a b.b c.c d.d", node.serialize());
+		INode node = NodeModelUtils.getNode(element);
+		assertEquals("element a.a b.b c.c d.d", node.getText());
 		assertEquals("[(element)[[( )(a)(.)(a)]][[( )(b)(.)(b)]][[( )(c)(.)(c)]][[( )(d)(.)(d)]]]", toDebugString(node));
 	}
 	
 	public void testNodeModel_10() throws Exception {
 		Element element = getFirstElement("element a.a b.b c.c d.d e.e");
-		AbstractNode node = NodeUtil.getNode(element);
-		assertEquals("element a.a b.b c.c d.d e.e", node.serialize());
+		INode node = NodeModelUtils.getNode(element);
+		assertEquals("element a.a b.b c.c d.d e.e", node.getText());
 		assertEquals("[(element)[[( )(a)(.)(a)]][[( )(b)(.)(b)]][[( )(c)(.)(c)]][[( )(d)(.)(d)]][[( )(e)(.)(e)]]]", toDebugString(node));
 	}
 	
 	public void testNodeModel_11() throws Exception {
 		Model model = getModel("element a.a ");
-		AbstractNode node = NodeUtil.getNode(model);
-		assertEquals("element a.a ", node.serialize());
+		INode node = NodeModelUtils.getNode(model);
+		assertEquals("element a.a ", node.getText());
 		assertEquals("[[(element)[[( )(a)(.)(a)]]]( )]", toDebugString(node));
 	}
 	
 	public void testNodeModel_12() throws Exception {
 		Model model = getModel(" element a.a /* */");
-		AbstractNode node = NodeUtil.getNode(model);
-		assertEquals(" element a.a /* */", node.serialize());
+		INode node = NodeModelUtils.getNode(model);
+		assertEquals(" element a.a /* */", node.getText());
 		assertEquals("[[( )(element)[[( )(a)(.)(a)]]]( )(/* */)]", toDebugString(node));
 	}
 	
 	public void testNodeModel_13() throws Exception {
 		Model model = getModel(" element a.a /* */");
-		AbstractNode node = NodeUtil.getNode(model);
-		assertEquals(" element a.a /* */", node.serialize());
+		INode node = NodeModelUtils.getNode(model);
+		assertEquals(" element a.a /* */", node.getText());
 		assertEquals("[[( )(element)[[( )(a)(.)(a)]]]( )(/* */)]", toDebugString(node));
 	}
 	
-	public String toDebugString(AbstractNode node) throws Exception {
+	public String toDebugString(INode node) throws Exception {
 		StringBuilder result = new StringBuilder();
 		appendDebugStringTo(node, result);
 		return result.toString();
 	}
 	
-	protected void appendDebugStringTo(AbstractNode node, StringBuilder result) {
-		if (node instanceof CompositeNode) {
+	protected void appendDebugStringTo(INode node, StringBuilder result) {
+		if (node instanceof ICompositeNode) {
 			result.append("[");
-			for(AbstractNode child: ((CompositeNode) node).getChildren()) {
+			for(INode child: ((ICompositeNode) node).getChildren()) {
 				appendDebugStringTo(child, result);
 			}
 			result.append("]");
 		} else {
 			result.append("(");
-			result.append(((LeafNode)node).getText());
+			result.append(((ILeafNode)node).getText());
 			result.append(")");
 		}
 	}

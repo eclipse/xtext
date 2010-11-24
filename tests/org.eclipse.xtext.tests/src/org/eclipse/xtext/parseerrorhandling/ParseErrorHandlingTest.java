@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parseerrorhandling;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -17,11 +18,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.SyntaxError;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.TreeTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.treeTestLanguage.Model;
@@ -31,9 +32,12 @@ import org.eclipse.xtext.xtextTest.Grammar;
 import org.eclipse.xtext.xtextTest.Keyword;
 import org.eclipse.xtext.xtextTest.RuleCall;
 
-public class ParseErrorHandlingTest extends AbstractXtextTests {
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
+import com.google.common.collect.Lists;
 
-	private static final Logger logger = Logger.getLogger(ParseErrorHandlingTest.class);
+public class ParseErrorHandlingTest extends AbstractXtextTests {
 
 	@Override
 	protected void setUp() throws Exception {
@@ -44,24 +48,23 @@ public class ParseErrorHandlingTest extends AbstractXtextTests {
 	public void testLexerError_01() throws Exception {
 		String model = "grammar a import 'holla' % as foo";
 		EObject root = getModelAndExpect(model, 2);
-		EList<SyntaxError> errors = NodeUtil.getRootNode(root).allSyntaxErrors();
-		assertEquals(1,errors.size());
-		assertEquals("%", ((LeafNode)errors.get(0).getNode()).getText());
-		assertEquals(1, errors.get(0).getNode().getTotalLine());
-		assertEquals(model.indexOf('%'), errors.get(0).getNode().getTotalOffset());
-		assertEquals(1, errors.get(0).getNode().getTotalLength());
-		assertEquals(1, errors.size());
+		Iterable<INode> errors = ((XtextResource) root.eResource()).getParseResult().getSyntaxErrors();
+		assertEquals(1, Iterables.size(errors));
+		assertEquals("%", errors.iterator().next().getText());
+		assertEquals(1, errors.iterator().next().getTotalStartLine());
+		assertEquals(model.indexOf('%'), errors.iterator().next().getTotalOffset());
+		assertEquals(1, errors.iterator().next().getTotalLength());
 	}
 
 	public void testParseError1() throws Exception {
 		String model = "grammar a import 'holla' foo returns x::y::Z : name=ID;";
 		EObject root = getModelAndExpect(model, 5);
-		EList<SyntaxError> errors = NodeUtil.getRootNode(root).allSyntaxErrors();
-		assertEquals("::",  ((LeafNode)errors.get(0).getNode()).getText());
-		assertEquals(1, errors.get(0).getNode().getTotalLine());
-		assertEquals(model.indexOf("::Z"), errors.get(0).getNode().getTotalOffset());
-		assertEquals(2, errors.get(0).getNode().getTotalLength());
-		assertEquals(1, errors.size());
+		Iterable<INode> errors = ((XtextResource) root.eResource()).getParseResult().getSyntaxErrors();
+		assertEquals("::",  errors.iterator().next().getText());
+		assertEquals(1, errors.iterator().next().getTotalStartLine());
+		assertEquals(model.indexOf("::Z"), errors.iterator().next().getTotalOffset());
+		assertEquals(2, errors.iterator().next().getTotalLength());
+		assertEquals(1, Iterables.size(errors));
 	}
 
 	public void testParseError2() throws Exception {
@@ -112,17 +115,28 @@ public class ParseErrorHandlingTest extends AbstractXtextTests {
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		String model = "spielplatz 100 }";
 		EObject object = getModelAndExpect(model, 1);
-		CompositeNode node = NodeUtil.getRootNode(object);
-		assertEquals(1,node.allSyntaxErrors().size());
+		ICompositeNode node = NodeModelUtils.getNode(object).getRootNode();
+		assertEquals(1, Iterables.size(allSyntaxErrors(node)));
+	}
+	
+	protected Iterable<INode> allSyntaxErrors(final ICompositeNode node) {
+		return new Iterable<INode>() {
+			public Iterator<INode> iterator() {
+				return Iterators.filter(node.treeIterator(), new Predicate<INode>() {
+					public boolean apply(INode input) {
+						return input.getSyntaxErrorMessage() != null;
+					}
+				});
+			}
+		};
 	}
 
 	public void testLexerError_02() throws Exception {
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		String model = "spielplatz 100 '}";
 		EObject object = getModelAndExpect(model, 1);
-		CompositeNode node = NodeUtil.getRootNode(object);
-		assertEquals(1,node.allSyntaxErrors().size());
-		logger.debug(node.allSyntaxErrors().get(0).getMessage());
+		ICompositeNode node = NodeModelUtils.getNode(object).getRootNode();
+		assertEquals(1, Iterables.size(allSyntaxErrors(node)));
 	}
 
 	public void testTrailingRecoverableError() throws Exception {
@@ -140,17 +154,17 @@ public class ParseErrorHandlingTest extends AbstractXtextTests {
 		assertEquals(5, diag.getLine());
 		Model parsedModel = (Model) res.getContents().get(0);
 		assertNotNull(parsedModel);
-		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(parsedModel);
-		assertNotNull(nodeAdapter);
-		List<LeafNode> leafs = nodeAdapter.getParserNode().getLeafNodes();
-		LeafNode lastWs = leafs.get(leafs.size() - 1);
+		ICompositeNode composite = NodeModelUtils.getNode(parsedModel);
+		assertNotNull(composite);
+		List<ILeafNode> leafs = Lists.newArrayList(Iterators.filter(composite.treeIterator(), ILeafNode.class));
+		ILeafNode lastWs = leafs.get(leafs.size() - 1);
 		assertTrue(lastWs.isHidden());
-		assertNull(lastWs.getSyntaxError());
-		LeafNode lastNode = leafs.get(leafs.size() - 2);
+		assertNull(lastWs.getSyntaxErrorMessage());
+		ILeafNode lastNode = leafs.get(leafs.size() - 2);
 		assertFalse(lastNode.isHidden());
 		assertNotNull(lastNode);
 		assertEquals("};", lastNode.getText());
-		assertNotNull(lastNode.getSyntaxError());
+		assertNotNull(lastNode.getSyntaxErrorMessage());
 	}
 
 }

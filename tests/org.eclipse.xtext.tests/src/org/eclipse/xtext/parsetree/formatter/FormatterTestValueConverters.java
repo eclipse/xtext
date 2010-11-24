@@ -14,7 +14,6 @@ import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.parsetree.AbstractNode;
 
 public class FormatterTestValueConverters extends DefaultTerminalConverters {
 
@@ -22,7 +21,7 @@ public class FormatterTestValueConverters extends DefaultTerminalConverters {
 	public IValueConverter<String> FQN() {
 		return new AbstractNullSafeConverter<String>() {
 			@Override
-			protected String internalToValue(String string, AbstractNode node, INode newNode) {
+			protected String internalToValue(String string, INode newNode) {
 				if (!string.equals(string.trim()))
 					throw new RuntimeException();
 				StringBuffer b = new StringBuffer();
