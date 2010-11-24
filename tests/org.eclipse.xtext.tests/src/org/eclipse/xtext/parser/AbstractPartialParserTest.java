@@ -10,7 +10,9 @@ package org.eclipse.xtext.parser;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.impl.PartialParsingHelper;
 import org.eclipse.xtext.parser.impl.PartialParsingPointers;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -51,5 +53,21 @@ public abstract class AbstractPartialParserTest extends AbstractXtextTests {
 	
 	protected IParseResult reparse(IParseResult parseResult, int offset, int length, String text) {
 		return partialParser.reparse(getParser(), parseResult, new ReplaceRegion(offset, length, text));
+	}
+	
+	protected void assertSameStructure(ICompositeNode first, ICompositeNode second) {
+		BidiTreeIterator<INode> firstIter = first.treeIterator();
+		BidiTreeIterator<INode> secondIter = second.treeIterator();
+		while(firstIter.hasNext()) {
+			assertTrue(secondIter.hasNext());
+			INode firstNext = firstIter.next();
+			INode secondNext = secondIter.next();
+			assertEquals(firstNext.getClass(), secondNext.getClass());
+			assertEquals(firstNext.getTotalOffset(), secondNext.getTotalOffset());
+			assertEquals(firstNext.getTotalLength(), secondNext.getTotalLength());
+			assertEquals(firstNext.getText(), secondNext.getText());
+			
+		}
+		assertEquals(firstIter.hasNext(), secondIter.hasNext());
 	}
 }

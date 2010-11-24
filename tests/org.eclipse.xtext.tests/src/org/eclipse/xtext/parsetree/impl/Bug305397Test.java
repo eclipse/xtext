@@ -8,13 +8,13 @@
 package org.eclipse.xtext.parsetree.impl;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.impl.bug305397.Element;
 import org.eclipse.xtext.parsetree.impl.bug305397.Model;
 
 /**
- * @author svenefftinge - Initial contribution and API
+ * @author Sven Effting - Initial contribution and API
  */
 public class Bug305397Test extends AbstractXtextTests {
 	
@@ -24,9 +24,9 @@ public class Bug305397Test extends AbstractXtextTests {
 		Element outer = model.getElements().get(0);
 		Element firstInner = outer.getElements().get(0);
 		
-		CompositeNode outerNode = NodeUtil.getNodeAdapter(outer).getParserNode();
+		ICompositeNode outerNode = NodeModelUtils.getNode(outer);
 		assertEquals(3,outerNode.getOffset());
-		CompositeNode firstInnerNode = NodeUtil.getNodeAdapter(firstInner).getParserNode();
+		ICompositeNode firstInnerNode = NodeModelUtils.getNode(firstInner);
 		assertEquals(17,firstInnerNode.getOffset());
 	}
 

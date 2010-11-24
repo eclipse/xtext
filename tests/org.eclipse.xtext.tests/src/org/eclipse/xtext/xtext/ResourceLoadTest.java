@@ -11,14 +11,13 @@ import java.util.Iterator;
 
 import junit.framework.TestResult;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.XtextResource;
 
 /**
@@ -92,9 +91,9 @@ public class ResourceLoadTest extends AbstractXtextTests {
 	public void testNoExceptionDiagnostics_04() throws Exception {
 		XtextResource r = getResourceFromString(this.model);
 		assertTrue(r.getErrors().isEmpty());
-		CompositeNode node = r.getParseResult().getRootNode();
-		for (Iterator<EObject> i = node.eAllContents(); i.hasNext();) {
-			AbstractNode childNode = (AbstractNode) i.next();
+		ICompositeNode node = r.getParseResult().getRootNode2();
+		for (Iterator<INode> i = node.treeIterator(); i.hasNext();) {
+			INode childNode = i.next();
 			String subModel = model.substring(0, childNode.getOffset())
 					+ model.substring(childNode.getOffset() + childNode.getLength());
 			Resource res = getResourceFromStringAndExpect(model, UNKNOWN_EXPECTATION);

@@ -8,6 +8,8 @@
 package org.eclipse.xtext.parsetree;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 
 /**
@@ -15,13 +17,13 @@ import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSet
  */
 public class NodeTest extends AbstractXtextTests {
 
-	private AbstractNode rootNode;
+	private INode rootNode;
 
-	private AbstractNode kindLeaf;
+	private INode kindLeaf;
 
-	private AbstractNode kindNode;
+	private INode kindNode;
 
-	private AbstractNode hiddenLeaf;
+	private INode hiddenLeaf;
 
 	private String model;
 
@@ -38,9 +40,9 @@ public class NodeTest extends AbstractXtextTests {
 				"    // comment in next line\n" +
 				"  }\n" +
 				"// comment after root\n";
-		rootNode = getRootNode(model);
-		kindLeaf = NodeUtil.findLeafNodeAtOffset((CompositeNode) rootNode, model.indexOf("kind") + 1);
-		hiddenLeaf = kindLeaf.getParent().getChildren().get(kindLeaf.getParent().getChildren().indexOf(kindLeaf) + 1);
+		rootNode = getRootNode2(model);
+		kindLeaf = NodeModelUtils.findLeafNodeAtOffset(rootNode, model.indexOf("kind") + 1);
+		hiddenLeaf = kindLeaf.getNextSibling();
 		kindNode = kindLeaf.getParent();
 	}
 
@@ -61,19 +63,19 @@ public class NodeTest extends AbstractXtextTests {
 	}
 
 	public void testRootGetLine() {
-		assertEquals(3, rootNode.getLine());
+		assertEquals(3, rootNode.getStartLine());
 	}
 
 	public void testRootGetTotalLine() {
-		assertEquals(1, rootNode.getTotalLine());
+		assertEquals(1, rootNode.getTotalStartLine());
 	}
 
 	public void testRootEndLine() {
-		assertEquals(8, rootNode.endLine());
+		assertEquals(8, rootNode.getEndLine());
 	}
 
 	public void testRootTotalEndLine() {
-		assertEquals(10, rootNode.totalEndLine());
+		assertEquals(10, rootNode.getTotalEndLine());
 	}
 
 	public void testCompositeGetOffset() {
@@ -93,19 +95,19 @@ public class NodeTest extends AbstractXtextTests {
 	}
 
 	public void testCompositeGetLine() {
-		assertEquals(5, kindNode.getLine());
+		assertEquals(5, kindNode.getStartLine());
 	}
 
 	public void testCompositeGetTotalLine() {
-		assertEquals(3, kindNode.getTotalLine());
+		assertEquals(3, kindNode.getTotalStartLine());
 	}
 
 	public void testCompositeEndLine() {
-		assertEquals(6, kindNode.endLine());
+		assertEquals(6, kindNode.getEndLine());
 	}
 
 	public void testCompositeTotalEndLine() {
-		assertEquals(6, kindNode.totalEndLine());
+		assertEquals(6, kindNode.getTotalEndLine());
 	}
 
 	public void testLeafGetOffset() {
@@ -125,19 +127,19 @@ public class NodeTest extends AbstractXtextTests {
 	}
 
 	public void testLeafGetLine() {
-		assertEquals(5, kindLeaf.getLine());
+		assertEquals(5, kindLeaf.getStartLine());
 	}
 
 	public void testLeafGetTotalLine() {
-		assertEquals(5, kindLeaf.getTotalLine());
+		assertEquals(5, kindLeaf.getTotalStartLine());
 	}
 
 	public void testLeafEndLine() {
-		assertEquals(5, kindLeaf.endLine());
+		assertEquals(5, kindLeaf.getEndLine());
 	}
 
 	public void testLeafTotalEndLine() {
-		assertEquals(5, kindLeaf.totalEndLine());
+		assertEquals(5, kindLeaf.getTotalEndLine());
 	}
 
 	public void testHiddenLeafGetOffset() {
@@ -157,19 +159,19 @@ public class NodeTest extends AbstractXtextTests {
 	}
 
 	public void testHiddenLeafGetLine() {
-		assertEquals(5, hiddenLeaf.getLine());
+		assertEquals(5, hiddenLeaf.getStartLine());
 	}
 
 	public void testHiddenLeafGetTotalLine() {
-		assertEquals(5, hiddenLeaf.getTotalLine());
+		assertEquals(5, hiddenLeaf.getTotalStartLine());
 	}
 
 	public void testHiddenLeafEndLine() {
-		assertEquals(5, hiddenLeaf.endLine());
+		assertEquals(5, hiddenLeaf.getEndLine());
 	}
 
 	public void testHiddenLeafTotalEndLine() {
-		assertEquals(5, kindLeaf.totalEndLine());
+		assertEquals(5, kindLeaf.getTotalEndLine());
 	}
 
 }
