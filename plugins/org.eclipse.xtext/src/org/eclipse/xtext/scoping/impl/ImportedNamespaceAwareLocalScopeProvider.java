@@ -155,7 +155,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		IScope globalScope = getGlobalScope(res, reference);
 		List<ImportNormalizer> normalizers = getImplicitImports();
 		if (!normalizers.isEmpty()) {
-			globalScope = new ImportScope(normalizers, globalScope, isIgnoreCase(context, reference));
+			globalScope = createImportScope(globalScope, normalizers, isIgnoreCase(context, reference));
 		}
 		return getResourceScope(globalScope, context, reference);
 	}
@@ -250,12 +250,22 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		final List<ImportNormalizer> namespaceResolvers = getImportedNamespaceResolvers(context);
 		if (!namespaceResolvers.isEmpty()) {
 			if (isRelativeImport() && name!=null)
-				result = new LocalScope(result, resourceScope,new ImportNormalizer(name, true),ignoreCase);
-			result = new ImportScope(namespaceResolvers, result, ignoreCase);
+				result = createLocalScope(result, resourceScope, name, ignoreCase);
+			result = createImportScope(result, namespaceResolvers, ignoreCase);
 		}
 		if (name!=null)
-			result = new LocalScope(result, resourceScope,new ImportNormalizer(name, true),ignoreCase);
+			result = createLocalScope(result, resourceScope, name, ignoreCase);
 		return result;
+	}
+
+	protected LocalScope createLocalScope(IScope parent, final IScope resourceScope, QualifiedName name,
+			final boolean ignoreCase) {
+		return new LocalScope(parent, resourceScope,new ImportNormalizer(name, true),ignoreCase);
+	}
+
+	protected ImportScope createImportScope(IScope parent, final List<ImportNormalizer> namespaceResolvers,
+			final boolean ignoreCase) {
+		return new ImportScope(namespaceResolvers, parent, ignoreCase);
 	}
 
 	protected QualifiedName getQualifiedNameOfLocalElement(final EObject context) {
