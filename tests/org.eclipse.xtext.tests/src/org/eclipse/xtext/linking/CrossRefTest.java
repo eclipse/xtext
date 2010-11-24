@@ -65,7 +65,7 @@ public class CrossRefTest extends AbstractXtextTests {
 	public void testGetLinkedObjects() throws Exception {
 		XtextResource r = getResourceFromString("type TypeA extends TypeB type TypeB extends TypeA type AnotherType extends TypeA");
 		EObject model = r.getParseResult().getRootASTElement();
-		ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(r.getParseResult().getRootNode2(), 6);
+		ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(r.getParseResult().getRootNode(), 6);
 
 		assertWithXtend("3", "types.size", model);
 

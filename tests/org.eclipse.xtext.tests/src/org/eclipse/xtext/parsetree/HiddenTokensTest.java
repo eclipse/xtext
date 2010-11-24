@@ -22,25 +22,25 @@ public class HiddenTokensTest extends AbstractXtextTests {
 
 	public void testWhitespaceIsIncluded() throws Exception {
 		String model = "element foo;\nelement bar;";
-		INode node = getRootNode2(model);
+		INode node = getRootNode(model);
 		assertEquals(model,node.getText());
 	}
 	
 	public void testWhitespaceIsIncluded2() throws Exception {
 		String model = "element foo;\nelement bar;/* foo bar */ element foo;\nelement bar;";
-		INode node = getRootNode2(model);
+		INode node = getRootNode(model);
 		assertEquals(node.getText(), model);
 	}
 	
 	public void testTrailingWhitespaceIsIncluded() throws Exception {
 		String model = "element foo;\nelement bar;  /* holla */ \n// stuff\n";
-		INode node = getRootNode2(model);
+		INode node = getRootNode(model);
 		assertEquals(model, node.getText());
 	}
 	
 	public void testPrecedingWhitespaceIsIncluded() throws Exception {
 		String model = "//honolulu\n\t element foo;\nelement bar;";
-		INode node = getRootNode2(model);
+		INode node = getRootNode(model);
 		assertEquals(model, node.getText());
 	}
 	

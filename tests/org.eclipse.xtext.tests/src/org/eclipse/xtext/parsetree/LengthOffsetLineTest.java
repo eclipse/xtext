@@ -22,7 +22,7 @@ public class LengthOffsetLineTest extends AbstractXtextTests {
 
 	public void testOffset() throws Exception {
 		String model = "element foo;\nelement bar;";
-		ICompositeNode node = getRootNode2(model);
+		ICompositeNode node = getRootNode(model);
 		Iterator<ILeafNode> leafIter = Iterators.filter(node.treeIterator(), ILeafNode.class);
 		assertEquals(0,leafIter.next().getTotalOffset());
 		assertEquals(7,leafIter.next().getTotalOffset());
@@ -37,7 +37,7 @@ public class LengthOffsetLineTest extends AbstractXtextTests {
 
 	public void testOffset2() throws Exception {
 		String model = "element foo;\nelement bar;";
-		ICompositeNode node = getRootNode2(model);
+		ICompositeNode node = getRootNode(model);
 		Iterator<INode> iter = node.getChildren().iterator();
 		assertEquals(0,iter.next().getTotalOffset());
 		assertEquals(12,iter.next().getTotalOffset());
@@ -46,7 +46,7 @@ public class LengthOffsetLineTest extends AbstractXtextTests {
 
 	public void testLineForLeafnodes() throws Exception {
 		String model = "element foo;\nelement bar;";
-		ICompositeNode node = getRootNode2(model);
+		ICompositeNode node = getRootNode(model);
 		Iterator<ILeafNode> iter = Iterators.filter(node.treeIterator(), ILeafNode.class);
 		assertEquals(1,iter.next().getTotalStartLine());
 		assertEquals(1,iter.next().getTotalStartLine());
@@ -62,7 +62,7 @@ public class LengthOffsetLineTest extends AbstractXtextTests {
 
 	public void testLineForCompositeNodes() throws Exception {
 		String model = "element foo;\nelement bar;\nelement bar;\nelement bar;";
-		ICompositeNode node = getRootNode2(model);
+		ICompositeNode node = getRootNode(model);
 		Iterator<INode> iter = node.getChildren().iterator();
 		assertEquals(1,iter.next().getTotalStartLine());
 		//Note: because preceding whitespace is added to the following node,
@@ -76,7 +76,7 @@ public class LengthOffsetLineTest extends AbstractXtextTests {
 
 	public void testErrors1() throws Exception {
 		String model = "element # ;";
-		ICompositeNode node = getRootNodeAndExpect2(model, 1);
+		ICompositeNode node = getRootNodeAndExpect(model, 1);
 		assertEquals(model, node.getText());
 		Iterator<ILeafNode> iter = Iterators.filter(node.treeIterator(), ILeafNode.class);
 		int offset = 0;

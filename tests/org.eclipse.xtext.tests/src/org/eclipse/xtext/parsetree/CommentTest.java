@@ -34,7 +34,7 @@ public class CommentTest extends AbstractXtextTests{
 
     public void testSingleLineComment() throws Exception {
         String model = "// comment\n/*element foo;\nelement bar;*/";
-        INode node = getRootNode2(model);
+        INode node = getRootNode(model);
         List<ILeafNode> leafNodes = Lists.newArrayList(Iterators.filter(node.treeIterator(), ILeafNode.class));
         assertEquals(2, leafNodes.size());
         assertTrue(leafNodes.get(0).getGrammarElement() instanceof TerminalRule);

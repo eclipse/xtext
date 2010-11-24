@@ -19,7 +19,7 @@ public class XtextParserBugsTest extends AbstractXtextTests {
 	public void testFirstTokenIsIllegal_254841() throws Exception {
 		with(FowlerDslTestLanguageStandaloneSetup.class);
 		String model = "firstToken";
-		ICompositeNode rootNode = getRootNodeAndExpect2(model, 1);
+		ICompositeNode rootNode = getRootNodeAndExpect(model, 1);
 		assertNotNull(rootNode);
 	}
 

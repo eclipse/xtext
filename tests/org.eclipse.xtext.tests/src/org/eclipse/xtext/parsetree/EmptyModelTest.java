@@ -30,7 +30,7 @@ public class EmptyModelTest extends AbstractXtextTests {
     private void assertEmptyModel(String model) throws Exception {
         IParseResult parseResult = getResource(new StringInputStream(model)).getParseResult();
 	    assertNull(parseResult.getRootASTElement());
-	    ICompositeNode rootNode = parseResult.getRootNode2();
+	    ICompositeNode rootNode = parseResult.getRootNode();
         assertNotNull(rootNode);
         assertEquals(model, rootNode.getText());
     }

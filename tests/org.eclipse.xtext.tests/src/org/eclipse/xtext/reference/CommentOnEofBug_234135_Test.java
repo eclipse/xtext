@@ -28,7 +28,7 @@ public class CommentOnEofBug_234135_Test extends AbstractXtextTests {
     public void testCommentOnEof() throws Exception {
         with(ReferenceGrammarTestLanguageStandaloneSetup.class);
         String model = "//comment";
-        List<ILeafNode> leafNodes = Lists.newArrayList(Iterators.filter(getRootNode2(model).treeIterator(), ILeafNode.class));
+        List<ILeafNode> leafNodes = Lists.newArrayList(Iterators.filter(getRootNode(model).treeIterator(), ILeafNode.class));
         assertEquals(1, leafNodes.size());
         EObject grammarElement = leafNodes.get(0).getGrammarElement();
         assertNotNull(grammarElement);
