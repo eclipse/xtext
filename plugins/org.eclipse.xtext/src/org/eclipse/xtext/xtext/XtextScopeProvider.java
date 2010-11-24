@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -32,18 +33,23 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.impl.AbstractExportedObjectsAwareScopeProvider;
-import org.eclipse.xtext.scoping.impl.SimpleScope;
+import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
+import org.eclipse.xtext.scoping.impl.GlobalResourceDescriptionProvider;
 import org.eclipse.xtext.scoping.impl.ResourceDescriptionBasedScope;
+import org.eclipse.xtext.scoping.impl.SimpleScope;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextScopeProvider extends AbstractExportedObjectsAwareScopeProvider {
+public class XtextScopeProvider extends AbstractScopeProvider {
+	
+	@Inject
+	private GlobalResourceDescriptionProvider resourceDecriptionProvider;
 	
 	public IScope getScope(EObject context, EReference reference) {
 		if (reference == XtextPackage.eINSTANCE.getTypeRef_Classifier()) {
@@ -130,10 +136,14 @@ public class XtextScopeProvider extends AbstractExportedObjectsAwareScopeProvide
 	}
 
 	protected IScope createScope(final Grammar grammar, final EClass type, IScope parent) {
-		final IResourceDescription resourceDescription = getResourceDescription(grammar.eResource());
+		final IResourceDescription resourceDescription = resourceDecriptionProvider.getResourceDescription(grammar.eResource());
 		if (resourceDescription == null)
 			return parent;
-		return new ResourceDescriptionBasedScope(parent, resourceDescription, type);
+		return new ResourceDescriptionBasedScope(parent, resourceDescription, new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				return EcoreUtil2.isAssignableFrom(type, input.getEClass());
+			}
+		});
 	}
 
 	protected List<Grammar> getAllGrammars(Grammar grammar) {

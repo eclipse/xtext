@@ -69,7 +69,7 @@ public class SimpleLocalScopeProvider extends AbstractGlobalScopeDelegatingScope
 			}
 
 		});
-		IScope globalScope = getGlobalScope(context, reference);
+		IScope globalScope = getGlobalScope(context.eResource(), reference);
 		return createScope(globalScope, map);
 	}
 

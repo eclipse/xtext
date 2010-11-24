@@ -7,56 +7,50 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
-import java.util.Map;
-
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.scoping.IScope;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge
  */
-public abstract class AbstractGlobalScopeProvider extends AbstractExportedObjectsAwareScopeProvider implements IGlobalScopeProvider {
-
-	public static final String NAMED_BUILDER_SCOPE = "org.eclipse.xtext.scoping.namespaces.DefaultGlobalScopeProvider.BUILDER_SCOPE";
-	
-//	@Inject(optional=true)  did not work - that's why I'll register a dummy binding for now
-	@Inject
-	@Named(NAMED_BUILDER_SCOPE)
-	private Provider<IResourceDescriptions> builderScopeResourceDescriptions;
+public abstract class AbstractGlobalScopeProvider implements IGlobalScopeProvider {
 
 	@Inject
-	private Provider<IResourceDescriptions> resourceDescriptions;
-	
-	public IResourceDescriptions getResourceDescriptions(EObject ctx) {
-		Map<Object, Object> loadOptions = ctx.eResource().getResourceSet().getLoadOptions();
-		IResourceDescriptions result = createResourceDescriptions();
-		if (loadOptions.containsKey(NAMED_BUILDER_SCOPE)) {
-			result = createBuilderScopeResourceDescriptions();
-		}
-		if (result instanceof IResourceDescriptions.IContextAware) {
-			((IResourceDescriptions.IContextAware) result).setContext(ctx);
-		}
-		return result;
+	private ResourceDescriptionsProvider provider;
+
+	public IResourceDescriptions getResourceDescriptions(Resource resource) {
+		return provider.getResourceDescriptions(resource);
 	}
 
-	public IResourceDescriptions createBuilderScopeResourceDescriptions() {
-		return builderScopeResourceDescriptions.get();
+	public void setResourceDescriptionsProvider(ResourceDescriptionsProvider provider) {
+		this.provider = provider;
 	}
 	
-	public IResourceDescriptions createResourceDescriptions() {
-		return resourceDescriptions.get();
+	public IScope getScope(Resource context, final EReference reference) {
+		return getScope(context,reference,Predicates.<IEObjectDescription>alwaysTrue());
 	}
 	
-	public void setBuilderScopeResourceDescriptions(Provider<IResourceDescriptions> resourceDescriptions) {
-		this.builderScopeResourceDescriptions = resourceDescriptions;
+	public IScope getScope(Resource context, final EReference reference, Predicate<IEObjectDescription> filter) {
+		final Predicate<IEObjectDescription> predicate = filter==null?Predicates.<IEObjectDescription>alwaysTrue():filter;
+		return getScope(context, new Predicate<IEObjectDescription>(){
+			public boolean apply(IEObjectDescription input) {
+				return EcoreUtil2.isAssignableFrom(reference.getEReferenceType(), input.getEClass()) && predicate.apply(input);
+			}
+		});
 	}
 
-	public void setResourceDescriptions(Provider<IResourceDescriptions> resourceDescriptions) {
-		this.resourceDescriptions = resourceDescriptions;
+	protected IScope getScope(Resource context, Predicate<IEObjectDescription> predicate) {
+		return IScope.NULLSCOPE;
 	}
 }

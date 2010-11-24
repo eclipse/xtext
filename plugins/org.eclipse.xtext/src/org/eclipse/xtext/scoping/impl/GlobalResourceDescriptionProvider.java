@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -14,25 +14,18 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import com.google.inject.Inject;
 
 /**
- * Abstract super class of all scope providers that are capable of creating {@link IResourceDescription}s for
- * {@link Resource}s.
- * 
- * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
-public abstract class AbstractExportedObjectsAwareScopeProvider extends AbstractScopeProvider {
-
-	@Inject
+public class GlobalResourceDescriptionProvider {
+	
 	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
 
-	public IResourceServiceProvider.Registry getResourceServiceProviderRegistry() {
-		return resourceServiceProviderRegistry;
+	@Inject
+	public GlobalResourceDescriptionProvider(IResourceServiceProvider.Registry resourceServiceProviderRegistry) {
+		this.resourceServiceProviderRegistry = resourceServiceProviderRegistry;
 	}
 
-	public void setResourceServiceProviderRegistry(IResourceServiceProvider.Registry resourceDescriptionManagerRegistry) {
-		this.resourceServiceProviderRegistry = resourceDescriptionManagerRegistry;
-	}
-
-	protected IResourceDescription getResourceDescription(Resource resource) {
+	public IResourceDescription getResourceDescription(Resource resource) {
 		IResourceServiceProvider resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(resource.getURI());
 		if (resourceServiceProvider == null)
 			return null;

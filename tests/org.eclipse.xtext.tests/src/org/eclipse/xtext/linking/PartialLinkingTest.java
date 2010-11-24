@@ -21,8 +21,8 @@ import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
@@ -62,12 +62,13 @@ public class PartialLinkingTest extends AbstractXtextTests implements IScopeProv
 		ImportUriGlobalScopeProvider globalScopeProvider = new ImportUriGlobalScopeProvider();
 		globalScopeProvider.setImportResolver(new ImportUriResolver());
 		globalScopeProvider.setCache(IResourceScopeCache.NullImpl.INSTANCE);
-		globalScopeProvider.setResourceServiceProviderRegistry(get(IResourceServiceProvider.Registry.class));
-		globalScopeProvider.setResourceDescriptions(new Provider<IResourceDescriptions>() {
+		final ResourceDescriptionsProvider provider = new ResourceDescriptionsProvider();
+		provider.setResourceDescriptions(new Provider<IResourceDescriptions>() {
 			public IResourceDescriptions get() {
 				return new IResourceDescriptions.NullImpl();
 			}
 		});
+		globalScopeProvider.setResourceDescriptionsProvider(provider);
 		globalScopeProvider.setLoadOnDemandDescriptions(new Provider<LoadOnDemandResourceDescriptions>() {
 			public LoadOnDemandResourceDescriptions get() {
 				return PartialLinkingTest.this.get(LoadOnDemandResourceDescriptions.class);

@@ -30,6 +30,7 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.ISelector;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 
@@ -39,8 +40,8 @@ import com.google.common.collect.Lists;
  */
 public class JdtBasedSimpleTypeScope extends AbstractTypeScope {
 
-	public JdtBasedSimpleTypeScope(IJdtTypeProvider typeProvider, IQualifiedNameConverter qualifiedNameConverter) {
-		super(typeProvider, qualifiedNameConverter);
+	public JdtBasedSimpleTypeScope(IJdtTypeProvider typeProvider, IQualifiedNameConverter qualifiedNameConverter, Predicate<IEObjectDescription> filter) {
+		super(typeProvider, qualifiedNameConverter, filter);
 	}
 
 	@Override

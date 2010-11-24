@@ -11,7 +11,9 @@ import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.resource.IEObjectDescription;
 
+import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 
 /**
@@ -29,13 +31,13 @@ public class ClasspathBasedTypeScopeProvider extends AbstractTypeScopeProvider {
 	private IQualifiedNameConverter qualifiedNameConverter;
 	
 	@Override
-	public ClasspathBasedTypeScope createTypeScope(IJvmTypeProvider typeProvider) {
-		return new ClasspathBasedTypeScope((ClasspathTypeProvider) typeProvider, qualifiedNameConverter);
+	public ClasspathBasedTypeScope createTypeScope(IJvmTypeProvider typeProvider, Predicate<IEObjectDescription> filter) {
+		return new ClasspathBasedTypeScope((ClasspathTypeProvider) typeProvider, qualifiedNameConverter, filter);
 	}
 	
 	@Override
-	public AbstractConstructorScope createConstructorScope(IJvmTypeProvider typeProvider) {
-		ClasspathBasedTypeScope typeScope = createTypeScope(typeProvider);
+	public AbstractConstructorScope createConstructorScope(IJvmTypeProvider typeProvider, Predicate<IEObjectDescription> filter) {
+		ClasspathBasedTypeScope typeScope = createTypeScope(typeProvider, filter);
 		return new ClasspathBasedConstructorScope(typeScope);
 	}
 

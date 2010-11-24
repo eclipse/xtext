@@ -10,8 +10,8 @@ package org.eclipse.xtext.common.types.xtext;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -21,12 +21,14 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
-import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 /**
@@ -35,21 +37,25 @@ import com.google.common.collect.Iterables;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Jan Koehnlein - introduced QualifiedName
  */
-public abstract class AbstractTypeScopeProvider extends AbstractScopeProvider {
+public abstract class AbstractTypeScopeProvider implements IGlobalScopeProvider {
 
-	public IScope getScope(EObject context, EReference reference) {
-		if (context.eResource() == null)
+	public IScope getScope(Resource resource, EReference reference) {
+		return getScope(resource,reference,Predicates.<IEObjectDescription>alwaysTrue());
+	}
+	
+	public IScope getScope(Resource resource, EReference reference, Predicate<IEObjectDescription> filter) {
+		if (resource == null)
 			throw new IllegalStateException("context must be contained in a resource");
-		ResourceSet resourceSet = context.eResource().getResourceSet();
+		ResourceSet resourceSet = resource.getResourceSet();
 		if (resourceSet == null)
 			throw new IllegalStateException("context must be contained in a resource set");
 		EClass referenceType = reference.getEReferenceType();
 		if (EcoreUtil2.isAssignableFrom(TypesPackage.Literals.JVM_TYPE, referenceType)) {
 			IJvmTypeProvider typeProvider = getTypeProvider(resourceSet);
-			return createTypeScope(typeProvider);
+			return createTypeScope(typeProvider, filter);
 		} else if (EcoreUtil2.isAssignableFrom(TypesPackage.Literals.JVM_CONSTRUCTOR, referenceType)) {
 			IJvmTypeProvider typeProvider = getTypeProvider(resourceSet);
-			return createConstructorScope(typeProvider);
+			return createConstructorScope(typeProvider, filter);
 		} else {
 			return IScope.NULLSCOPE;
 		}
@@ -60,9 +66,9 @@ public abstract class AbstractTypeScopeProvider extends AbstractScopeProvider {
 		return typeProvider;
 	}
 
-	public abstract AbstractTypeScope createTypeScope(IJvmTypeProvider typeProvider);
+	public abstract AbstractTypeScope createTypeScope(IJvmTypeProvider typeProvider, Predicate<IEObjectDescription> filter);
 
-	public abstract AbstractConstructorScope createConstructorScope(IJvmTypeProvider typeProvider);
+	public abstract AbstractConstructorScope createConstructorScope(IJvmTypeProvider typeProvider, Predicate<IEObjectDescription> filter);
 	
 	public abstract IJvmTypeProvider.Factory getTypeProviderFactory();
 	

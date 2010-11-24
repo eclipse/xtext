@@ -25,7 +25,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
-import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeProvider;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
@@ -76,7 +76,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
 	protected Collection<Delta> collectResources(ResourceSet resourceSet, Set<URI> toBeAddedOrUpdated,
 			Set<URI> toBeRemoved, IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, 1);
-		resourceSet.getLoadOptions().put(AbstractGlobalScopeProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
+		resourceSet.getLoadOptions().put(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
 		Collection<Delta> result = transitiveUpdate(resourceSet, toBeAddedOrUpdated, toBeRemoved, progress.newChild(1));
 		return result;
 	}

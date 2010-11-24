@@ -42,11 +42,11 @@ import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceFactory;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleLocalScopeProvider;
 import org.eclipse.xtext.validation.CancelableDiagnostician;
@@ -135,7 +135,7 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	}
 
 	public void configureIResourceDescriptionsBuilderScope(com.google.inject.Binder binder) {
-		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(AbstractGlobalScopeProvider.NAMED_BUILDER_SCOPE)).to(ResourceSetBasedResourceDescriptions.class);
+		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE)).to(ResourceSetBasedResourceDescriptions.class);
 	}
 	
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
