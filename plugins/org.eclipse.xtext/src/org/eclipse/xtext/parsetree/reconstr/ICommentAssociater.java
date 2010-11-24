@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultCommentAssociater;
 
 import com.google.inject.ImplementedBy;
@@ -25,6 +25,6 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultCommentAssociater.class)
 public interface ICommentAssociater {
 
-	Map<LeafNode, EObject> associateCommentsWithSemanticEObjects(EObject model, Set<CompositeNode> roots);
+	Map<ILeafNode, EObject> associateCommentsWithSemanticEObjects(EObject model, Set<ICompositeNode> roots);
 
 }

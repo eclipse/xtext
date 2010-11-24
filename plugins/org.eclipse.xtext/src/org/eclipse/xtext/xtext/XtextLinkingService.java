@@ -34,9 +34,10 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.nodemodel.BidiIterator;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.ClasspathUriResolutionException;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
 import org.eclipse.xtext.scoping.IScope;
@@ -63,21 +64,21 @@ public class XtextLinkingService extends DefaultLinkingService {
 	}
 	
 	@Override
-	public List<EObject> getLinkedObjects(EObject context, EReference ref, AbstractNode node) throws IllegalNodeException {
+	public List<EObject> getLinkedObjects(EObject context, EReference ref, INode node) throws IllegalNodeException {
 		if (ref == XtextPackage.eINSTANCE.getGrammar_UsedGrammars())
 			return getUsedGrammar((Grammar) context, node);
 		if (ref == XtextPackage.eINSTANCE.getTypeRef_Metamodel())
-			return getLinkedMetaModel((TypeRef)context, ref, (LeafNode) node);
+			return getLinkedMetaModel((TypeRef)context, ref, (ILeafNode) node);
 		if (ref == XtextPackage.eINSTANCE.getAbstractMetamodelDeclaration_EPackage() && context instanceof GeneratedMetamodel)
-			return createPackage((GeneratedMetamodel) context, (LeafNode) node);
+			return createPackage((GeneratedMetamodel) context, (ILeafNode) node);
 		if (ref == XtextPackage.eINSTANCE.getAbstractMetamodelDeclaration_EPackage() && context instanceof ReferencedMetamodel)
-			return getPackage((ReferencedMetamodel)context, (LeafNode) node);
+			return getPackage((ReferencedMetamodel)context, (ILeafNode) node);
 		return super.getLinkedObjects(context, ref, node);
 	}
 
-	private List<EObject> getUsedGrammar(Grammar grammar, AbstractNode node) {
+	private List<EObject> getUsedGrammar(Grammar grammar, INode node) {
 		try {
-			String grammarName = (String) valueConverterService.toValue("", "GrammarID", node);
+			String grammarName = (String) valueConverterService.toValue("", "GrammarID", null, node);
 			if (grammarName != null) {
 				final ResourceSet resourceSet = grammar.eResource().getResourceSet();
 				for(Resource resource: resourceSet.getResources()) {
@@ -107,7 +108,7 @@ public class XtextLinkingService extends DefaultLinkingService {
 		}
 	}
 
-	private List<EObject> getPackage(ReferencedMetamodel context, LeafNode text) {
+	private List<EObject> getPackage(ReferencedMetamodel context, ILeafNode text) {
 		String nsUri = getMetamodelNsURI(text);
 		if (nsUri == null)
 			return Collections.emptyList();
@@ -140,10 +141,10 @@ public class XtextLinkingService extends DefaultLinkingService {
 		return null;
 	}
 
-	private String getMetamodelNsURI(LeafNode text) {
+	private String getMetamodelNsURI(ILeafNode text) {
 		try {
 			return (String) valueConverterService.toValue(text.getText(), getLinkingHelper().getRuleNameFrom(text
-					.getGrammarElement()), text);
+					.getGrammarElement()), null, text);
 		} catch (ValueConverterException e) {
 			log.debug("Exception on leaf '" + text.getText() + "'", e);
 			return null;
@@ -173,7 +174,7 @@ public class XtextLinkingService extends DefaultLinkingService {
 		}
 	}
 
-	private List<EObject> createPackage(GeneratedMetamodel generatedMetamodel, LeafNode text) {
+	private List<EObject> createPackage(GeneratedMetamodel generatedMetamodel, ILeafNode text) {
 		final String nsURI = getMetamodelNsURI(text);
 		final URI uri = URI.createURI(nsURI);
 		if (uri == null || isReferencedByUsedGrammar(generatedMetamodel, nsURI))
@@ -214,12 +215,13 @@ public class XtextLinkingService extends DefaultLinkingService {
 		return false;
 	}
 
-	private List<EObject> getLinkedMetaModel(TypeRef context, EReference ref, LeafNode text) throws IllegalNodeException {
-		final CompositeNode parentNode = text.getParent();
-		for(int i = parentNode.getChildren().size() - 1; i >= 0; i-- ) {
-			AbstractNode child = parentNode.getChildren().get(i);
-			if (child instanceof LeafNode) {
-				LeafNode leaf = (LeafNode) child;
+	private List<EObject> getLinkedMetaModel(TypeRef context, EReference ref, ILeafNode text) throws IllegalNodeException {
+		final ICompositeNode parentNode = text.getParent();
+		BidiIterator<INode> iterator = parentNode.getChildren().iterator();
+		while(iterator.hasPrevious()) {
+			INode child = iterator.previous();
+			if (child instanceof ILeafNode) {
+				ILeafNode leaf = (ILeafNode) child;
 				if (text == leaf)
 					return super.getLinkedObjects(context, ref, text);
 				if (!(leaf.getGrammarElement() instanceof Keyword) && !leaf.isHidden()) {

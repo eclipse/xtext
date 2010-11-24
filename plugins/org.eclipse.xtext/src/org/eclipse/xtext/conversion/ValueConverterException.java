@@ -18,19 +18,20 @@ public class ValueConverterException extends RuntimeException {
 
 	private final AbstractNode node;
 	
-	private final INode lwNode;
+	private final INode newNode;
 	
-	public ValueConverterException(String message, AbstractNode node, Exception cause) {
+	public ValueConverterException(String message, AbstractNode node, INode newNode, Exception cause) {
 		super(message == null && cause != null ? cause.getMessage() : message, cause);
 		this.node = node;
-		this.lwNode = null;
+		this.newNode = newNode;
 	}
 
+	@Deprecated
 	public AbstractNode getNode() {
 		return node;
 	}
 	
 	public INode getNode2() {
-		return lwNode;
+		return newNode;
 	}
 }

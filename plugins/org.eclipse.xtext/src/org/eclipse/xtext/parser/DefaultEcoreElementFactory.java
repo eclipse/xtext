@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.AbstractNode;
 
 import com.google.inject.Inject;
@@ -57,29 +58,29 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 		return clazz.getEPackage().getEFactoryInstance().create(clazz);
 	}
 
-	public void set(EObject object, String feature, Object value, String ruleName, AbstractNode node) throws ValueConverterException {
+	public void set(EObject object, String feature, Object value, String ruleName, AbstractNode node, INode newNode) throws ValueConverterException {
 		final EStructuralFeature structuralFeature = object.eClass().getEStructuralFeature(feature);
 		if (structuralFeature == null)
 			throw new IllegalArgumentException(object.eClass().getName() + "." + feature + " does not exist");
 		
 		try {
-			final Object tokenValue = getTokenValue(value, ruleName, node);
-			checkNullForPrimitiveFeatures(structuralFeature, tokenValue, node);
+			final Object tokenValue = getTokenValue(value, ruleName, node, newNode);
+			checkNullForPrimitiveFeatures(structuralFeature, tokenValue, node, newNode);
 			object.eSet(structuralFeature, tokenValue);
 		} catch(ValueConverterException e) {
 			throw e;
 		} catch(NullPointerException e) {
 			log.warn(e.getMessage(), e);
-			throw new ValueConverterException("A NullPointerException occured. This indicates a missing value converter or a bug in its implementation.", node, e);
+			throw new ValueConverterException("A NullPointerException occured. This indicates a missing value converter or a bug in its implementation.", node, newNode, e);
 		} catch(Exception e) {
-			throw new ValueConverterException(null, node, e);
+			throw new ValueConverterException(null, node, newNode, e);
 		}
 	}
 
-	private Object getTokenValue(Object tokenOrValue, String ruleName, AbstractNode node) throws ValueConverterException {
+	private Object getTokenValue(Object tokenOrValue, String ruleName, AbstractNode node, INode newNode) throws ValueConverterException {
 		Object value = getTokenAsStringIfPossible(tokenOrValue);
 		if ((value == null || value instanceof CharSequence) && ruleName != null) {
-			value = converterService.toValue(value == null ? null : value.toString(), ruleName, node);
+			value = converterService.toValue(value == null ? null : value.toString(), ruleName, node, newNode);
 		}
 		return value;
 	}
@@ -91,7 +92,7 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void add(EObject object, String feature, Object value, String ruleName, AbstractNode node) throws ValueConverterException {
+	public void add(EObject object, String feature, Object value, String ruleName, AbstractNode node, INode newNode) throws ValueConverterException {
 		if (value == null)
 			return;
 		final EStructuralFeature structuralFeature = object.eClass().getEStructuralFeature(feature);
@@ -99,27 +100,27 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 			throw new IllegalArgumentException(object.eClass().getName() + "." + feature + " does not exist");
 		
 		try {
-			checkNullForPrimitiveFeatures(structuralFeature, value, node);
 			if (value instanceof EObject) {
 				// containment lists are unique per-se and the tokenValue was created just a sec ago
 				((InternalEList<EObject>) object.eGet(structuralFeature)).addUnique((EObject) value);
 			} else {
-				final Object tokenValue = getTokenValue(value, ruleName, node);
+				final Object tokenValue = getTokenValue(value, ruleName, node, newNode);
+				checkNullForPrimitiveFeatures(structuralFeature, value, node, newNode);
 				((Collection<Object>) object.eGet(structuralFeature)).add(tokenValue);
 			}
 		} catch(ValueConverterException e) {
 			throw e;
 		} catch(NullPointerException e) {
 			log.error(e.getMessage(), e);
-			throw new ValueConverterException("A NullPointerException occured. This indicates a missing value converter or a bug in its implementation.", node, e);
+			throw new ValueConverterException("A NullPointerException occured. This indicates a missing value converter or a bug in its implementation.", node, newNode, e);
 		} catch(Exception e) {
-			throw new ValueConverterException(null, node, e);
+			throw new ValueConverterException(null, node, newNode, e);
 		}
 	}
 
-	private void checkNullForPrimitiveFeatures(EStructuralFeature structuralFeature, Object tokenValue, AbstractNode node) {
+	private void checkNullForPrimitiveFeatures(EStructuralFeature structuralFeature, Object tokenValue, AbstractNode node, INode newNode) {
 		if(tokenValue == null && structuralFeature.getEType().getInstanceClass().isPrimitive()) {
-			throw new ValueConverterException("ValueConverter returned null for primitive feature " + structuralFeature.getName(), node, null);
+			throw new ValueConverterException("ValueConverter returned null for primitive feature " + structuralFeature.getName(), node, newNode, null);
 		}
 	}
 }

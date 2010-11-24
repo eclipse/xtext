@@ -13,6 +13,7 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.AbstractNode;
 
 import com.google.inject.Guice;
@@ -34,7 +35,7 @@ public class DeclarativeValueConverterServiceTest extends AbstractXtextTests {
 			this.test = test;
 		}
 		
-		public T toValue(String string, AbstractNode node) throws ValueConverterException {
+		public T toValue(String string, AbstractNode node, INode newNode) throws ValueConverterException {
 			test.announceToValue(ident);
 			return null;
 		}
@@ -114,7 +115,7 @@ public class DeclarativeValueConverterServiceTest extends AbstractXtextTests {
 	public void testSimpleIdConverter() {
 		IValueConverterService converter = get(SimpleIdConverter.class);
 		expectedIdent = "idConverter";
-		converter.toValue("Foo", "ID", null);
+		converter.toValue("Foo", "ID", null, null);
 	}
 	
 	public void testOverriddenIdConverter() {

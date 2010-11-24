@@ -30,7 +30,7 @@ public class IgnoreCaseIDValueConverterTest extends AbstractXtextTests {
 
 	public void testSimple() throws Exception {
 		String s = "abc";
-		String value = idConverter.toValue(s, null);
+		String value = idConverter.toValue(s, null, null);
 		assertEquals("abc", value);
 		assertEquals(s, idConverter.toString(value));
 	}
@@ -39,14 +39,14 @@ public class IgnoreCaseIDValueConverterTest extends AbstractXtextTests {
 		String s = "grammar";
 		String value = idConverter.toString(s);
 		assertEquals("^grammar", value);
-		assertEquals(s, idConverter.toValue(value, null));
+		assertEquals(s, idConverter.toValue(value, null, null));
 	}
 	
 	public void testEscaped_02() throws Exception {
 		String s = "GRAMMAR";
 		String value = idConverter.toString(s);
 		assertEquals("^GRAMMAR", value);
-		assertEquals(s, idConverter.toValue(value, null));
+		assertEquals(s, idConverter.toValue(value, null, null));
 	}
 
 	public void testNull() throws Exception {

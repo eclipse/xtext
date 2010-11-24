@@ -11,10 +11,11 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
 
 import com.google.common.collect.Sets;
+import com.google.inject.internal.Lists;
 
 /**
  * An iterator that can traverse a parse tree in forward and backward direction 
@@ -22,31 +23,31 @@ import com.google.common.collect.Sets;
  * 
  * @author koehnlein - Initial contribution and API
  */
-public class NodeIterator implements TreeIterator<AbstractNode> {
+public class NodeIterator implements TreeIterator<INode> {
 
-	private AbstractNode current;
+	private INode current;
 
-	private AbstractNode next;
+	private INode next;
 
-	private Set<CompositeNode> prunedComposites;
+	private Set<ICompositeNode> prunedComposites;
 
-	public NodeIterator(AbstractNode node) {
+	public NodeIterator(INode node) {
 		prunedComposites = Sets.newHashSet();
 		current = node;
 		next = findNext(node);
 	}
 
-	private AbstractNode findPrevious(AbstractNode node) {
-		CompositeNode parent = node.getParent();
+	private INode findPrevious(INode node) {
+		ICompositeNode parent = node.getParent();
 		if (parent == null) {
 			return null;
 		}
-		List<AbstractNode> siblings = parent.getChildren();
+		List<INode> siblings = Lists.newArrayList(parent.getChildren());
 		int index = siblings.indexOf(node);
 		if (index > 0) {
-			AbstractNode predecessor = siblings.get(index - 1);
-			while (predecessor instanceof CompositeNode && !prunedComposites.contains(predecessor)) {
-				List<AbstractNode> predecessorChildren = ((CompositeNode) predecessor).getChildren();
+			INode predecessor = siblings.get(index - 1);
+			while (predecessor instanceof ICompositeNode && !prunedComposites.contains(predecessor)) {
+				List<INode> predecessorChildren = Lists.newArrayList(((ICompositeNode) predecessor).getChildren());
 				if (predecessorChildren.isEmpty()) {
 					return predecessor;
 				}
@@ -57,9 +58,9 @@ public class NodeIterator implements TreeIterator<AbstractNode> {
 		return parent;
 	}
 
-	private AbstractNode findNext(AbstractNode node) {
-		if (node instanceof CompositeNode && ! prunedComposites.contains(node)) {
-			List<AbstractNode> children = ((CompositeNode) node).getChildren();
+	private INode findNext(INode node) {
+		if (node instanceof ICompositeNode && ! prunedComposites.contains(node)) {
+			List<INode> children = Lists.newArrayList(((ICompositeNode) node).getChildren());
 			if (!children.isEmpty()) {
 				return children.get(0);
 			}
@@ -67,12 +68,12 @@ public class NodeIterator implements TreeIterator<AbstractNode> {
 		return findNextSibling(node);
 	}
 
-	protected AbstractNode findNextSibling(AbstractNode node) {
-		CompositeNode parent = node.getParent();
+	protected INode findNextSibling(INode node) {
+		ICompositeNode parent = node.getParent();
 		if (parent == null) {
 			return null;
 		}
-		List<AbstractNode> siblings = parent.getChildren();
+		List<INode> siblings = Lists.newArrayList(parent.getChildren());
 		int index = siblings.indexOf(node);
 		if (index < siblings.size() - 1) {
 			return siblings.get(index + 1);
@@ -84,7 +85,7 @@ public class NodeIterator implements TreeIterator<AbstractNode> {
 		return next != null;
 	}
 
-	public AbstractNode next() {
+	public INode next() {
 		current = next;
 		next = findNext(next);
 		return current;
@@ -94,7 +95,7 @@ public class NodeIterator implements TreeIterator<AbstractNode> {
 		return current != null;
 	}
 
-	public AbstractNode previous() {
+	public INode previous() {
 		next = current;
 		current = findPrevious(current);
 		return next;
@@ -105,8 +106,8 @@ public class NodeIterator implements TreeIterator<AbstractNode> {
 	}
 
 	public void prune() {
-		if (current instanceof CompositeNode) {
-			prunedComposites.add((CompositeNode) current);
+		if (current instanceof ICompositeNode) {
+			prunedComposites.add((ICompositeNode) current);
 			next = findNext(current);
 		}
 	}

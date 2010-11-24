@@ -26,15 +26,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.ILinker;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.NodeModelComparator;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
-import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeContentAdapter;
-import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.eclipse.xtext.util.IResourceScopeCache;
@@ -308,8 +307,7 @@ public class XtextResource extends ResourceImpl {
 			return Collections.emptyList();
 
 		List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
-		for (AbstractNode nodeWithError : parseResult.getParseErrors()) {
-			SyntaxError error = nodeWithError.getSyntaxError();
+		for (INode error : parseResult.getSyntaxErrors()) {
 			diagnostics.add(new XtextSyntaxDiagnostic(error));
 		}
 		return diagnostics;

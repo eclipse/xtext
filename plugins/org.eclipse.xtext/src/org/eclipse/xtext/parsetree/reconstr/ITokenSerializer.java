@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.reconstr.impl.CrossReferenceSerializer;
 import org.eclipse.xtext.parsetree.reconstr.impl.EnumLiteralSerializer;
 import org.eclipse.xtext.parsetree.reconstr.impl.KeywordSerializer;
@@ -39,18 +39,18 @@ public interface ITokenSerializer {
 	@ImplementedBy(CrossReferenceSerializer.class)
 	interface ICrossReferenceSerializer extends ITokenSerializer {
 
-		boolean equalsOrReplacesNode(EObject context, CrossReference crossref, EObject target, AbstractNode node);
+		boolean equalsOrReplacesNode(EObject context, CrossReference crossref, EObject target, INode node);
 
-		String serializeCrossRef(EObject context, CrossReference crossref, EObject target, AbstractNode node);
+		String serializeCrossRef(EObject context, CrossReference crossref, EObject target, INode node);
 	}
 
 	@ImplementedBy(EnumLiteralSerializer.class)
 	interface IEnumLiteralSerializer extends ITokenSerializer {
-		boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, Object value, AbstractNode node);
+		boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, Object value, INode node);
 
 		boolean isValid(EObject context, RuleCall ruleCall, Object value, IErrorAcceptor errorAcceptor);
 
-		String serializeAssignedEnumLiteral(EObject context, RuleCall ruleCall, Object value, AbstractNode node);
+		String serializeAssignedEnumLiteral(EObject context, RuleCall ruleCall, Object value, INode node);
 	}
 
 	interface IErrorAcceptor {
@@ -60,29 +60,29 @@ public interface ITokenSerializer {
 	@ImplementedBy(KeywordSerializer.class)
 	interface IKeywordSerializer extends ITokenSerializer {
 
-		boolean equalsOrReplacesNode(EObject context, Keyword keyword, AbstractNode node);
+		boolean equalsOrReplacesNode(EObject context, Keyword keyword, INode node);
 
-		boolean equalsOrReplacesNode(EObject context, Keyword keyword, Object value, AbstractNode node);
+		boolean equalsOrReplacesNode(EObject context, Keyword keyword, Object value, INode node);
 		
 		boolean isValid(EObject context, Keyword keyword, Object value, IErrorAcceptor errorAcceptor);
 
-		String serializeAssignedKeyword(EObject context, Keyword keyword, Object value, AbstractNode node);
+		String serializeAssignedKeyword(EObject context, Keyword keyword, Object value, INode node);
 
-		String serializeUnassignedKeyword(EObject context, Keyword keyword, AbstractNode node);
+		String serializeUnassignedKeyword(EObject context, Keyword keyword, INode node);
 	}
 
 	@ImplementedBy(ValueSerializer.class)
 	interface IValueSerializer extends ITokenSerializer {
 
-		boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, AbstractNode node);
+		boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, INode node);
 
-		boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, Object value, AbstractNode node);
+		boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, Object value, INode node);
 
 		boolean isValid(EObject context, RuleCall ruleCall, Object value, IErrorAcceptor errorAcceptor);
 
-		String serializeAssignedValue(EObject context, RuleCall ruleCall, Object value, AbstractNode node);
+		String serializeAssignedValue(EObject context, RuleCall ruleCall, Object value, INode node);
 
-		String serializeUnassignedValue(EObject context, RuleCall ruleCall, AbstractNode node);
+		String serializeUnassignedValue(EObject context, RuleCall ruleCall, INode node);
 	}
 
 	final static String KEEP_VALUE_FROM_NODE_MODEL = "<KEEP_VALUE_FROM_NODE_MODEL>";

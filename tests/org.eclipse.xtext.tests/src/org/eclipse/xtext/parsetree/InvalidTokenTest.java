@@ -8,22 +8,32 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
+
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguageStandaloneSetup;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterators;
+import com.google.common.collect.Lists;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
- *
  */
 public class InvalidTokenTest extends AbstractXtextTests {
 
 	public void testInvalidTokenError() throws Exception {
 		with(OptionalEmptyTestLanguageStandaloneSetup.class);
-		CompositeNode rootNode = getRootNodeAndExpect("/*", 1);
-		EList<SyntaxError> allSyntaxErrors = rootNode.allSyntaxErrors();
-		assertFalse(allSyntaxErrors.isEmpty());
-		SyntaxError syntaxError = allSyntaxErrors.get(0);
-		assertTrue(syntaxError.getMessage().contains("mismatched character"));
+		ICompositeNode rootNode = getRootNodeAndExpect2("/*", 1);
+		List<INode> allErrorNodes = Lists.newArrayList(Iterators.filter(rootNode.treeIterator(), new Predicate<INode>() {
+			public boolean apply(INode input) {
+				return input.getSyntaxErrorMessage() != null;
+			}
+		}));
+		assertFalse(allErrorNodes.isEmpty());
+		INode syntaxErrorNode = allErrorNodes.get(0);
+		assertTrue(syntaxErrorNode.getSyntaxErrorMessage().getMessage().contains("mismatched character"));
 	}
 }

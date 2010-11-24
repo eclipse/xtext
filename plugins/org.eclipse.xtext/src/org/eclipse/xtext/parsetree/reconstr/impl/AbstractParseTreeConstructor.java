@@ -23,10 +23,10 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.ICommentAssociater;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
@@ -62,7 +62,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		protected final IEObjectConsumer eObjectConsumer;
 		protected final AbstractToken lastRuleCallOrigin;
 		protected final AbstractToken next;
-		protected AbstractNode node;
+		protected INode node;
 		protected List<AbstractToken> tokensForSemanticChildren = Collections.emptyList();
 		protected final int transitionIndex;
 
@@ -118,7 +118,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			return result.toString();
 		}
 
-		public boolean equalsOrReplacesNode(AbstractNode node) {
+		public boolean equalsOrReplacesNode(INode node) {
 			return false;
 		}
 
@@ -140,7 +140,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			return next;
 		}
 
-		public AbstractNode getNode() {
+		public INode getNode() {
 			return node;
 		}
 
@@ -152,7 +152,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			return transitionIndex;
 		}
 
-		public final String serialize(AbstractNode node) {
+		public final String serialize(INode node) {
 			String result = serializeInternal(node);
 			if (result != ITokenSerializer.KEEP_VALUE_FROM_NODE_MODEL)
 				return result;
@@ -163,11 +163,11 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 				return tokenUtil.serializeNode(node);
 		}
 
-		protected String serializeInternal(AbstractNode node) {
+		protected String serializeInternal(INode node) {
 			return null;
 		}
 
-		public void setNode(AbstractNode node) {
+		public void setNode(INode node) {
 			this.node = node;
 		}
 
@@ -204,7 +204,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		}
 
 		@Override
-		public boolean equalsOrReplacesNode(AbstractNode node) {
+		public boolean equalsOrReplacesNode(INode node) {
 			if (type == null)
 				return false;
 			switch (type) {
@@ -243,7 +243,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		}
 
 		@Override
-		protected String serializeInternal(AbstractNode node) {
+		protected String serializeInternal(INode node) {
 			if (type == null)
 				return null;
 			switch (type) {
@@ -283,7 +283,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 
 	protected class CommentToken extends AbstractToken {
 
-		public CommentToken(LeafNode node) {
+		public CommentToken(ILeafNode node) {
 			super(null, null, 0, null);
 			setNode(node);
 		}
@@ -307,13 +307,13 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		}
 
 		@Override
-		public boolean equalsOrReplacesNode(AbstractNode node) {
+		public boolean equalsOrReplacesNode(INode node) {
 			return keywordSerializer.equalsOrReplacesNode(eObjectConsumer.getEObject(), (Keyword) getGrammarElement(),
 					node);
 		}
 
 		@Override
-		protected String serializeInternal(AbstractNode node) {
+		protected String serializeInternal(INode node) {
 			return keywordSerializer.serializeUnassignedKeyword(eObjectConsumer.getEObject(),
 					(Keyword) getGrammarElement(), node);
 		}
@@ -357,13 +357,13 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		}
 
 		@Override
-		public boolean equalsOrReplacesNode(AbstractNode node) {
+		public boolean equalsOrReplacesNode(INode node) {
 			return valueSerializer.equalsOrReplacesNode(eObjectConsumer.getEObject(), (RuleCall) getGrammarElement(),
 					node);
 		}
 
 		@Override
-		protected String serializeInternal(AbstractNode node) {
+		protected String serializeInternal(INode node) {
 			return valueSerializer.serializeUnassignedValue(eObjectConsumer.getEObject(),
 					(RuleCall) getGrammarElement(), node);
 		}
@@ -376,7 +376,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 	}
 
 	protected class WsMergerStream {
-		protected CompositeNode lastCompositeNode = null;
+		protected ICompositeNode lastCompositeNode = null;
 		protected int lastIndex = 0;
 
 		protected ITokenStream out;
@@ -390,18 +390,18 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		}
 
 		public void flush() throws IOException {
-			List<LeafNode> whitespaces = Lists.newArrayList();
+			List<ILeafNode> whitespaces = Lists.newArrayList();
 			if (nodeIterator != null) {
 				while (nodeIterator.hasNext()) {
-					AbstractNode nextNode = nodeIterator.next();
+					INode nextNode = nodeIterator.next();
 					if (tokenUtil.isToken(nextNode)) {
 						whitespaces.clear();
 						break;
 					} else if (tokenUtil.isWhitespaceNode(nextNode))
-						whitespaces.add((LeafNode) nextNode);
+						whitespaces.add((ILeafNode) nextNode);
 				}
 			}
-			for (LeafNode l : whitespaces) {
+			for (ILeafNode l : whitespaces) {
 				//				System.out.println("WS: '" + l.getText() + "'");
 				out.writeHidden(l.getGrammarElement(), l.getText());
 			}
@@ -409,19 +409,19 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			return;
 		}
 
-		public void writeComment(LeafNode comment) throws IOException {
+		public void writeComment(ILeafNode comment) throws IOException {
 			writeWhitespacesSince(comment);
 			//			System.out.println("CM: '" + comment.getText() + "'");
 			out.writeHidden(comment.getGrammarElement(), comment.getText());
 		}
 
-		public void writeSemantic(AbstractElement grammarElement, String value, AbstractNode node) throws IOException {
+		public void writeSemantic(AbstractElement grammarElement, String value, INode node) throws IOException {
 			writeWhitespacesSince(node);
 			//			System.out.println("S:  '" + value + "'");
 			out.writeSemantic(grammarElement, value);
 		}
 
-		protected void writeWhitespacesSince(AbstractNode node) throws IOException {
+		protected void writeWhitespacesSince(INode node) throws IOException {
 			if (node == null) {
 				nodeIterator = null;
 				return;
@@ -430,18 +430,18 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 				nodeIterator = new HiddenAndTokenNodeIterator(node, tokenUtil);
 				return;
 			}
-			List<LeafNode> whitespaces = Lists.newArrayList();
+			List<ILeafNode> whitespaces = Lists.newArrayList();
 			while (nodeIterator.hasNext()) {
-				AbstractNode nextNode = nodeIterator.next();
+				INode nextNode = nodeIterator.next();
 				if (tokenUtil.isWhitespaceNode(nextNode)) {
-					whitespaces.add((LeafNode) nextNode);
+					whitespaces.add((ILeafNode) nextNode);
 				} else if (nextNode == node) {
 					if (whitespaces.isEmpty()) {
 						// signal to the formatter not to insert a whitespace
 						out.writeHidden(hiddenTokenHelper.getWhitespaceRuleFor(null, ""), "");
 						//						System.out.println("WS: -nothing-");
 					}
-					for (LeafNode whitespace : whitespaces) {
+					for (ILeafNode whitespace : whitespaces) {
 						//						System.out.println("WS: '" + whitespace.getText() + "'");
 						out.writeHidden(whitespace.getGrammarElement(), whitespace.getText());
 					}
@@ -484,8 +484,8 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 	@Inject
 	protected IValueSerializer valueSerializer;
 
-	protected void assignComment(LeafNode comment, Map<EObject, AbstractToken> eObject2Token,
-			Map<LeafNode, EObject> comments) {
+	protected void assignComment(ILeafNode comment, Map<EObject, AbstractToken> eObject2Token,
+			Map<ILeafNode, EObject> comments) {
 		EObject container = comments.get(comment);
 		if (container == null)
 			return;
@@ -502,34 +502,34 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		}
 	}
 
-	protected void assignNodesByMatching(Map<EObject, AbstractToken> eObject2Token, CompositeNode rootNode,
-			Map<LeafNode, EObject> comments) throws IOException {
+	protected void assignNodesByMatching(Map<EObject, AbstractToken> eObject2Token, ICompositeNode rootNode,
+			Map<ILeafNode, EObject> comments) throws IOException {
 		NodeIterator contents = new NodeIterator(rootNode);
 		while (contents.hasNext()) {
-			AbstractNode containedNode = contents.next();
+			INode containedNode = contents.next();
 			AbstractRule rule = containedNode.getGrammarElement() instanceof AbstractRule ? (AbstractRule) containedNode
 					.getGrammarElement()
 					: null;
 			if (hiddenTokenHelper.isWhitespace(rule))
 				continue;
-			else if (containedNode instanceof LeafNode && hiddenTokenHelper.isComment(rule))
-				assignComment((LeafNode) containedNode, eObject2Token, comments);
+			else if (containedNode instanceof ILeafNode && hiddenTokenHelper.isComment(rule))
+				assignComment((ILeafNode) containedNode, eObject2Token, comments);
 			else if (tokenUtil.isToken(containedNode)) {
-				Pair<List<LeafNode>, List<LeafNode>> leadingAndTrailingHiddenTokens = tokenUtil
+				Pair<List<ILeafNode>, List<ILeafNode>> leadingAndTrailingHiddenTokens = tokenUtil
 						.getLeadingAndTrailingHiddenTokens(containedNode);
-				for (LeafNode leadingHiddenNode : leadingAndTrailingHiddenTokens.getFirst()) {
+				for (ILeafNode leadingHiddenNode : leadingAndTrailingHiddenTokens.getFirst()) {
 					if (tokenUtil.isCommentNode(leadingHiddenNode)) {
 						assignComment(leadingHiddenNode, eObject2Token, comments);
 					}
 				}
 				assignTokenByMatcher(containedNode, eObject2Token);
-				for (LeafNode trailingHiddenNode : leadingAndTrailingHiddenTokens.getSecond()) {
+				for (ILeafNode trailingHiddenNode : leadingAndTrailingHiddenTokens.getSecond()) {
 					if (tokenUtil.isCommentNode(trailingHiddenNode)) {
 						assignComment(trailingHiddenNode, eObject2Token, comments);
 					}
 				}
 				contents.prune();
-				CompositeNode parentNode = containedNode.getParent();
+				ICompositeNode parentNode = containedNode.getParent();
 				while (parentNode != null && assignTokenDirect(parentNode, eObject2Token))
 					parentNode = parentNode.getParent();
 				if (containedNode.getOffset() > rootNode.getOffset() + rootNode.getLength()) {
@@ -539,7 +539,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		}
 	}
 
-	protected void assignTokenByMatcher(AbstractNode node, AbstractToken token, boolean recursive) {
+	protected void assignTokenByMatcher(INode node, AbstractToken token, boolean recursive) {
 		for (AbstractToken t : token.getTokensForSemanticChildren())
 			if (recursive && t instanceof AssignmentToken)
 				return;
@@ -551,7 +551,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		return;
 	}
 
-	protected void assignTokenByMatcher(AbstractNode node, Map<EObject, AbstractToken> eObject2Token) {
+	protected void assignTokenByMatcher(INode node, Map<EObject, AbstractToken> eObject2Token) {
 		EObject owner = tokenUtil.getTokenOwner(node);
 		if (owner == null)
 			return;
@@ -560,10 +560,10 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			assignTokenByMatcher(node, token, false);
 	}
 
-	protected boolean assignTokenDirect(AbstractNode node, Map<EObject, AbstractToken> eObject2Token) {
-		if (node.getElement() == null)
+	protected boolean assignTokenDirect(INode node, Map<EObject, AbstractToken> eObject2Token) {
+		if (!node.hasDirectSemanticElement())
 			return true;
-		AbstractToken token = eObject2Token.get(node.getElement());
+		AbstractToken token = eObject2Token.get(node.getSemanticElement());
 		if (token != null && token.getNode() == null) {
 			token.setNode(node);
 			return true;
@@ -572,10 +572,10 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 	}
 
 	protected void collectRootsAndEObjects(AbstractToken token, Map<EObject, AbstractToken> obj2token,
-			Set<CompositeNode> roots) {
-		CompositeNode node = NodeUtil.getNode(token.getEObjectConsumer().getEObject());
+			Set<ICompositeNode> roots) {
+		ICompositeNode node = NodeModelUtils.getNode(token.getEObjectConsumer().getEObject());
 		if (node != null && !containsNodeOrAnyParent(roots, node)) {
-			while (node.getParent() != null && node.getParent().getElement() == null)
+			while (node.getParent() != null && !node.getParent().hasDirectSemanticElement())
 				node = node.getParent();
 			roots.add(node);
 		}
@@ -587,7 +587,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		}
 	}
 
-	protected boolean containsNodeOrAnyParent(Set<CompositeNode> nodes, AbstractNode node) {
+	protected boolean containsNodeOrAnyParent(Set<ICompositeNode> nodes, INode node) {
 		if (nodes.contains(node))
 			return true;
 		if (node.getParent() != null)
@@ -629,10 +629,10 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		System.out.println(indent + "end");
 	}
 
-	protected String dumpNode(AbstractNode node) {
+	protected String dumpNode(INode node) {
 		if (node == null)
 			return "null";
-		return node.eClass().getName() + "'" + node.serialize().replace("\n", "\\n") + "' "
+		return node.getClass().getSimpleName() + "'" + node.getText().replace("\n", "\\n") + "' "
 				+ Integer.toHexString(node.hashCode());
 	}
 
@@ -705,12 +705,12 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 	public TreeConstructionReport serializeSubtree(EObject object, ITokenStream out) throws IOException {
 		TreeConstructionReportImpl report = createReport(object);
 		AbstractToken root = serialize(object, report);
-		Set<CompositeNode> roots = Sets.newHashSet();
+		Set<ICompositeNode> roots = Sets.newHashSet();
 		Map<EObject, AbstractToken> obj2token = Maps.newHashMap();
 		collectRootsAndEObjects(root, obj2token, roots);
 		//		dump("", root);
-		Map<LeafNode, EObject> comments = commentAssociater.associateCommentsWithSemanticEObjects(object, roots);
-		for (CompositeNode r : roots)
+		Map<ILeafNode, EObject> comments = commentAssociater.associateCommentsWithSemanticEObjects(object, roots);
+		for (ICompositeNode r : roots)
 			assignNodesByMatching(obj2token, r, comments);
 		WsMergerStream wsout = new WsMergerStream(out);
 		//		dump("", root);
@@ -727,7 +727,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 
 	protected ITextRegion write(AbstractToken token, WsMergerStream out, ITextRegion location) throws IOException {
 		ITextRegion currentLocation = location;
-		AbstractNode node = token.getNode();
+		INode node = token.getNode();
 		if (node != null) {
 			currentLocation = currentLocation.merge(new TextRegion(node.getOffset(), node.getLength()));
 		}
@@ -736,7 +736,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 				currentLocation = write(t, out, currentLocation);
 		else {
 			if (token instanceof CommentToken)
-				out.writeComment((LeafNode) node);
+				out.writeComment((ILeafNode) node);
 			else {
 				String val = token.serialize(node);
 				if (val != null) {
@@ -750,9 +750,9 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		return currentLocation;
 	}
 
-	protected void writeComments(Iterable<LeafNode> comments, WsMergerStream out, Set<AbstractNode> consumedComments)
+	protected void writeComments(Iterable<ILeafNode> comments, WsMergerStream out, Set<INode> consumedComments)
 			throws IOException {
-		for (LeafNode c : comments)
+		for (ILeafNode c : comments)
 			if (consumedComments.add(c))
 				out.writeComment(c);
 	}

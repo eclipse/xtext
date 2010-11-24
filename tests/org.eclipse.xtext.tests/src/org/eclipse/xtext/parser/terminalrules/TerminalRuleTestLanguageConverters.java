@@ -12,6 +12,7 @@ import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractDeclarativeValueConverterService;
 import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.util.Strings;
 
@@ -24,7 +25,7 @@ public class TerminalRuleTestLanguageConverters extends AbstractDeclarativeValue
 	public IValueConverter<String> ID() {
 		return new AbstractNullSafeConverter<String>() {
 			@Override
-			protected String internalToValue(String string, AbstractNode node) {
+			protected String internalToValue(String string, AbstractNode node, INode newNode) {
 				return string.startsWith("^") ? string.substring(1) : string;
 			}
 
@@ -42,7 +43,7 @@ public class TerminalRuleTestLanguageConverters extends AbstractDeclarativeValue
 	public IValueConverter<String> STRING() {
 		return new AbstractNullSafeConverter<String>() {
 			@Override
-			protected String internalToValue(String string, AbstractNode node) {
+			protected String internalToValue(String string, AbstractNode node, INode newNode) {
 				return Strings.convertFromJavaString(string.substring(1, string.length() - 1), false);
 			}
 

@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.linking.impl;
 
-import java.io.StringWriter;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -16,7 +15,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -28,11 +26,9 @@ import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext;
 import org.eclipse.xtext.linking.ILinkingService;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
 import com.google.inject.Inject;
 
@@ -53,20 +49,20 @@ public class Linker extends AbstractCleaningLinker {
 	private LinkingHelper linkingHelper;
 
 	public void ensureLinked(EObject obj, IDiagnosticProducer producer) {
-		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(obj);
-		if (nodeAdapter == null)
+		ICompositeNode node = NodeModelUtils.getNode(obj);
+		if (node == null)
 			return;
-		final CompositeNode node = nodeAdapter.getParserNode();
 		Set<EReference> handledReferences = new HashSet<EReference>();
 		ensureLinked(obj, producer, node, handledReferences);
 		producer.setNode(node);
 		setDefaultValues(obj, handledReferences, producer);
 	}
 
-	private void ensureLinked(EObject obj, IDiagnosticProducer producer, CompositeNode node,
+	private void ensureLinked(EObject obj, IDiagnosticProducer producer, ICompositeNode node,
 			Set<EReference> handledReferences) {
-		EList<AbstractNode> children = node.getChildren();
-		for (AbstractNode abstractNode : children) {
+		Iterator<INode> iterator = node.getChildren().iterator();
+		while(iterator.hasNext()) {
+			INode abstractNode = iterator.next();
 			if (abstractNode.getGrammarElement() instanceof CrossReference) {
 				CrossReference ref = (CrossReference) abstractNode.getGrammarElement();
 				producer.setNode(abstractNode);
@@ -107,7 +103,7 @@ public class Linker extends AbstractCleaningLinker {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	protected void ensureIsLinked(EObject obj, AbstractNode node, CrossReference ref,
+	protected void ensureIsLinked(EObject obj, INode node, CrossReference ref,
 			Set<EReference> handledReferences, IDiagnosticProducer producer) {
 		final EReference eRef = GrammarUtil.getReference(ref, obj.eClass());
 		if (eRef == null) {
@@ -182,18 +178,10 @@ public class Linker extends AbstractCleaningLinker {
 
 		private final EObject obj;
 		private final EReference eRef;
-		private final AbstractNode node;
+		private final INode node;
 		private final LinkingHelper linkingHelper;
 
-		@Deprecated
-		protected LinkingDiagnosticContext(EObject obj, EReference eRef, AbstractNode node) {
-			this.obj = obj;
-			this.eRef = eRef;
-			this.node = node;
-			this.linkingHelper = null;
-		}
-		
-		protected LinkingDiagnosticContext(EObject obj, EReference eRef, AbstractNode node, LinkingHelper helper) {
+		protected LinkingDiagnosticContext(EObject obj, EReference eRef, INode node, LinkingHelper helper) {
 			this.obj = obj;
 			this.eRef = eRef;
 			this.node = node;
@@ -209,35 +197,21 @@ public class Linker extends AbstractCleaningLinker {
 		}
 
 		public String getLinkText() {
-			if (linkingHelper != null)
-				return linkingHelper.getCrossRefNodeAsString(node, true);
-			return deprecatedGetLinkText();
+			return linkingHelper.getCrossRefNodeAsString(node, true);
 		}
 		
-		@Deprecated
-		protected String deprecatedGetLinkText() {
-			if (node instanceof LeafNode)
-				return ((LeafNode) node).getText();
-			StringWriter writer = new StringWriter();
-			for(LeafNode leafNode: node.getLeafNodes()) {
-				if(!leafNode.isHidden()) 
-					writer.append(leafNode.getText());
-			}
-			return writer.toString();
-		}
-
 	}
 
-	protected ILinkingDiagnosticContext createDiagnosticContext(EObject obj, EReference eRef, AbstractNode node) {
+	protected ILinkingDiagnosticContext createDiagnosticContext(EObject obj, EReference eRef, INode node) {
 		return new LinkingDiagnosticContext(obj, eRef, node, linkingHelper);
 	}
 
-	protected List<EObject> getLinkedObject(EObject obj, EReference eRef, AbstractNode node)
+	protected List<EObject> getLinkedObject(EObject obj, EReference eRef, INode node)
 			throws IllegalNodeException {
 		return linkingService.getLinkedObjects(obj, eRef, node);
 	}
 
-	protected boolean isNullValidResult(EObject obj, EReference eRef, AbstractNode node) {
+	protected boolean isNullValidResult(EObject obj, EReference eRef, INode node) {
 		return false;
 	}
 

@@ -14,9 +14,9 @@ import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.impl.commentAssociation.CommentAssociationFactory;
 import org.eclipse.xtext.parsetree.impl.commentAssociation.Element;
 import org.eclipse.xtext.parsetree.impl.commentAssociation.Model;
@@ -68,12 +68,12 @@ public class CommentAssociationTest extends AbstractXtextTests {
 	}
 
 	protected Multimap<EObject, String> createModel2CommentMap(Model model) {
-		CompositeNode rootNode = NodeUtil.getRootNode(model);
+		ICompositeNode rootNode = NodeModelUtils.getNode(model).getRootNode();
 		ICommentAssociater commentAssociater = getInjector().getInstance(ICommentAssociater.class);
-		Map<LeafNode, EObject> map = commentAssociater.associateCommentsWithSemanticEObjects(model, Collections
+		Map<ILeafNode, EObject> map = commentAssociater.associateCommentsWithSemanticEObjects(model, Collections
 				.singleton(rootNode));
 		Multimap<EObject, String> multimap = ArrayListMultimap.create();
-		for (Map.Entry<LeafNode, EObject> entry : map.entrySet()) {
+		for (Map.Entry<ILeafNode, EObject> entry : map.entrySet()) {
 			multimap.put(entry.getValue(), entry.getKey().getText());
 		}
 		return multimap;

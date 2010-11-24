@@ -44,8 +44,8 @@ import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Model;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Property;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Type;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.ParsetreeFactory;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.impl.LeafNode;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
@@ -73,8 +73,8 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
         LazyLinkingResource res = new LazyLinkingResource();
         res.setLinkingHelper(new LinkingHelper() {
         	@Override
-        	public String getCrossRefNodeAsString(AbstractNode node, boolean convert) {
-        		return node.serialize();
+        	public String getCrossRefNodeAsString(INode node, boolean convert) {
+        		return node.getText();
         	}
         });
         res.setEncoder(new LazyURIEncoder() {
@@ -84,13 +84,13 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
             }
 
             @Override
-            public Triple<EObject, EReference, AbstractNode> decode(Resource res, String uriFragment) {
+            public Triple<EObject, EReference, INode> decode(Resource res, String uriFragment) {
                 return Tuples.create((EObject) source, EcorePackage.Literals.EANNOTATION__REFERENCES,
-                        (AbstractNode) ParsetreeFactory.eINSTANCE.createLeafNode());
+                        (INode)new LeafNode());
             }
         });
         res.setLinkingService(new ILinkingService() {
-            public List<EObject> getLinkedObjects(EObject context, EReference reference, AbstractNode node)
+            public List<EObject> getLinkedObjects(EObject context, EReference reference, INode node)
                     throws IllegalNodeException {
                 return Lists.newArrayList(referencedObject);
             }
@@ -109,13 +109,13 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
             }
 
             @Override
-            public Triple<EObject, EReference, AbstractNode> decode(Resource res, String uriFragment) {
+            public Triple<EObject, EReference, INode> decode(Resource res, String uriFragment) {
                 return Tuples.create((EObject) source, EcorePackage.Literals.EANNOTATION__REFERENCES,
-                        (AbstractNode) ParsetreeFactory.eINSTANCE.createLeafNode());
+                        (INode) new LeafNode());
             }
         });
         res.setLinkingService(new ILinkingService() {
-            public List<EObject> getLinkedObjects(EObject context, EReference reference, AbstractNode node)
+            public List<EObject> getLinkedObjects(EObject context, EReference reference, INode node)
                     throws IllegalNodeException {
                 return Collections.emptyList();
             }

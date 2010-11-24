@@ -8,44 +8,38 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.SyntaxError;
+import org.eclipse.xtext.nodemodel.INode;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  */
 public class XtextSyntaxDiagnostic extends AbstractDiagnostic {
 
-	private final SyntaxError error;
+	private final INode errorNode;
 
-	public XtextSyntaxDiagnostic(SyntaxError error) {
-		this.error = error;
+	public XtextSyntaxDiagnostic(INode errorNode) {
+		this.errorNode = errorNode;
 	}
 	
 	@Override
 	public String getCode() {
-		return error.getIssueCode();
+		return errorNode.getSyntaxErrorMessage().getIssueCode();
 	}
 	
 	@Override
 	public String[] getData() {
-		return null;
+		return errorNode.getSyntaxErrorMessage().getIssueData();
 	}
 
 	@Override
-	protected AbstractNode getNode() {
-		return error.getNode();
+	protected INode getNode() {
+		return errorNode;
 	}
 
 	public String getMessage() {
-		return error.getMessage();
+		return errorNode.getSyntaxErrorMessage().getMessage();
 	}
 	
-	@Override
-	public String getLocation() {
-		if (error.eResource() != null)
-			return error.eResource().getURI().toString();
-		return super.getLocation();
-	}
 }

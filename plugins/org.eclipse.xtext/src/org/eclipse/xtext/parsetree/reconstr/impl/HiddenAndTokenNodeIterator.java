@@ -11,8 +11,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
 
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.Pair;
 
 import com.google.common.collect.Lists;
@@ -24,29 +24,29 @@ import com.google.common.collect.Lists;
  * 
  * @author koehnlein - Initial contribution and API
  */
-public class HiddenAndTokenNodeIterator implements Iterator<AbstractNode> {
+public class HiddenAndTokenNodeIterator implements Iterator<INode> {
 
 	private TokenUtil tokenUtil;
 
 	private NodeIterator nodeIterator;
 
-	private Queue<AbstractNode> nextNodes = Lists.newLinkedList();
+	private Queue<INode> nextNodes = Lists.newLinkedList();
 
-	private AbstractNode next;
+	private INode next;
 
-	public HiddenAndTokenNodeIterator(AbstractNode startNode, TokenUtil tokenUtil) {
+	public HiddenAndTokenNodeIterator(INode startNode, TokenUtil tokenUtil) {
 		this.nodeIterator = new NodeIterator(startNode);
 		this.tokenUtil = tokenUtil;
 		this.next = findNext();
 	}
 
-	private AbstractNode findNext() {
+	private INode findNext() {
 		if (nextNodes.isEmpty()) {
 			while (nodeIterator.hasNext()) {
-				AbstractNode candidate = nodeIterator.next();
+				INode candidate = nodeIterator.next();
 				if (tokenUtil.isToken(candidate)) {
 					nodeIterator.prune();
-					Pair<List<LeafNode>, List<LeafNode>> leadingAndTrailingHiddenTokens = tokenUtil
+					Pair<List<ILeafNode>, List<ILeafNode>> leadingAndTrailingHiddenTokens = tokenUtil
 							.getLeadingAndTrailingHiddenTokens(candidate);
 					nextNodes.addAll(leadingAndTrailingHiddenTokens.getFirst());
 					nextNodes.add(candidate);
@@ -65,8 +65,8 @@ public class HiddenAndTokenNodeIterator implements Iterator<AbstractNode> {
 		return next != null;
 	}
 
-	public AbstractNode next() {
-		AbstractNode result = next;
+	public INode next() {
+		INode result = next;
 		next = findNext();
 		return result;
 	}

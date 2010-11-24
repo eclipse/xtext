@@ -14,8 +14,8 @@ import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -43,16 +43,14 @@ public class TransformationDiagnosticsProducer extends AbstractDiagnosticProduce
 	@Override
 	public void setTarget(EObject object, EStructuralFeature feature) {
 		EObject myObject = object;
-		NodeAdapter adapter = NodeUtil.getNodeAdapter(myObject);
-		while (adapter == null) {
+		ICompositeNode result = NodeModelUtils.getNode(myObject);
+		while(result == null && myObject.eContainer() != null) {
 			myObject = myObject.eContainer();
-			if (myObject == null)
-				break;
-			adapter = NodeUtil.getNodeAdapter(myObject);
+			result = NodeModelUtils.getNode(myObject);
 		}
-		if (adapter == null)
-			throw new IllegalStateException("Cannot find NodeAdapter for object: " + myObject);
-		setNode(adapter.getParserNode());
+		if (result == null)
+			throw new IllegalStateException("Cannot find NodeAdapter for object: " + object);
+		setNode(result);
 	}
 
 }

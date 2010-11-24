@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.AbstractNode;
 
 /**
@@ -25,11 +26,11 @@ public class Ecore2XtextTerminalConverters extends DefaultTerminalConverters {
 	public IValueConverter<String> EString() {
 		return new AbstractNullSafeConverter<String>() {
 			@Override
-			protected String internalToValue(String string, AbstractNode node) {
+			protected String internalToValue(String string, AbstractNode node, INode newNode) {
 				if((string.startsWith("'") && string.endsWith("'"))||(string.startsWith("\"") && string.endsWith("\""))) {
-					return STRING().toValue(string, node);
+					return STRING().toValue(string, node, newNode);
 				}
-				return ID().toValue(string, node);
+				return ID().toValue(string, node, newNode);
 			}
 
 			@Override

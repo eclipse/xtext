@@ -44,14 +44,21 @@ public class NodeTreeIterator extends UnmodifiableIterator<INode> implements Bid
 		} else if (!pruned && lastNextReturned instanceof ICompositeNode && ((ICompositeNode) lastNextReturned).hasChildren()) {
 			next = ((ICompositeNode) lastNextReturned).getFirstChild();
 		} else if (lastNextReturned.hasNextSibling()) {
-			next = lastNextReturned.getNextSibling();
+			if (lastNextReturned == root)
+				next = null;
+			else
+				next = lastNextReturned.getNextSibling();
 		} else {
-			ICompositeNode parent = lastNextReturned.getParent();
-			while (next == null && parent != root && parent != null && parent.getParent() != null) {
-				if (parent.hasNextSibling()) {
-					next = parent.getNextSibling();
-				} else {
-					parent = parent.getParent();
+			if (lastNextReturned == root)
+				next = null;
+			else {
+				ICompositeNode parent = lastNextReturned.getParent();
+				while (next == null && parent != root && parent != null && parent.getParent() != null) {
+					if (parent.hasNextSibling()) {
+						next = parent.getNextSibling();
+					} else {
+						parent = parent.getParent();
+					}
 				}
 			}
 		}
@@ -87,14 +94,21 @@ public class NodeTreeIterator extends UnmodifiableIterator<INode> implements Bid
 		} else if (!pruned && lastPreviousReturned instanceof ICompositeNode && ((ICompositeNode) lastPreviousReturned).hasChildren()) {
 			previous = ((ICompositeNode) lastPreviousReturned).getLastChild();
 		} else if (lastPreviousReturned.hasPreviousSibling()) {
-			previous = lastPreviousReturned.getPreviousSibling();
+			if (lastPreviousReturned == root)
+				previous = null;
+			else
+				previous = lastPreviousReturned.getPreviousSibling();
 		} else {
-			ICompositeNode parent = lastPreviousReturned.getParent();
-			while (previous == null && parent != root && parent != null && parent.getParent() != null) {
-				if (parent.hasPreviousSibling()) {
-					previous = parent.getPreviousSibling();
-				} else {
-					parent = parent.getParent();
+			if (lastPreviousReturned == root)
+				previous = null;
+			else {
+				ICompositeNode parent = lastPreviousReturned.getParent();
+				while (previous == null && parent != root && parent != null && parent.getParent() != null) {
+					if (parent.hasPreviousSibling()) {
+						previous = parent.getPreviousSibling();
+					} else {
+						parent = parent.getParent();
+					}
 				}
 			}
 		}

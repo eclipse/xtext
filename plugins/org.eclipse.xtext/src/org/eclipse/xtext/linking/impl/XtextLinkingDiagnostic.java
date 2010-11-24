@@ -8,7 +8,7 @@
 package org.eclipse.xtext.linking.impl;
 
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
-import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.Arrays;
 
 /**
@@ -16,7 +16,7 @@ import org.eclipse.xtext.util.Arrays;
  */
 public class XtextLinkingDiagnostic extends AbstractDiagnostic {
 
-	private final AbstractNode node;
+	private final INode node;
 	
 	private final String message;
 	
@@ -28,7 +28,7 @@ public class XtextLinkingDiagnostic extends AbstractDiagnostic {
 	 * @param data optional user data. May not contain <code>null</code> entries.
 	 * @throws NullPointerException if node is <code>null</code> or data contains <code>null</code>.
 	 */
-	public XtextLinkingDiagnostic(AbstractNode node, String message, String code, String... data) {
+	public XtextLinkingDiagnostic(INode node, String message, String code, String... data) {
 		if (node == null)
 			throw new NullPointerException("node may not be null");
 		if (Arrays.contains(data, null)) {
@@ -41,7 +41,7 @@ public class XtextLinkingDiagnostic extends AbstractDiagnostic {
 	}
 
 	@Override
-	protected AbstractNode getNode() {
+	protected INode getNode() {
 		return node;
 	}
 

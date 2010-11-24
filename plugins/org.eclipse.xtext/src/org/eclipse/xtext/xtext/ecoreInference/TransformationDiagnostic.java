@@ -8,18 +8,18 @@
 package org.eclipse.xtext.xtext.ecoreInference;
 
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
-import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.nodemodel.INode;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class TransformationDiagnostic extends AbstractDiagnostic {
 
-	private final AbstractNode node;
+	private final INode node;
 	private final String message;
 	private final TransformationErrorCode errorCode;
 
-	public TransformationDiagnostic(AbstractNode node, String message, TransformationErrorCode errorCode) {
+	public TransformationDiagnostic(INode node, String message, TransformationErrorCode errorCode) {
 		if (node == null)
 			throw new NullPointerException("node may not be null");
 		this.node = node;
@@ -28,7 +28,7 @@ public class TransformationDiagnostic extends AbstractDiagnostic {
 	}
 	
 	@Override
-	protected AbstractNode getNode() {
+	protected INode getNode() {
 		return node;
 	}
 	

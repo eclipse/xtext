@@ -10,15 +10,14 @@ package org.eclipse.xtext.diagnostics;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.INode;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractDiagnostic implements Diagnostic {
 
-	protected abstract AbstractNode getNode();
+	protected abstract INode getNode();
 	
 	public abstract String getCode();
 	
@@ -37,7 +36,7 @@ public abstract class AbstractDiagnostic implements Diagnostic {
 	}
 
 	public int getLine() {
-		return getNode().getLine();
+		return getNode().getStartLine();
 	}
 
 	public String getLocation() {
@@ -45,10 +44,10 @@ public abstract class AbstractDiagnostic implements Diagnostic {
 	}
 
 	public URI getUriToProblem() {
-		AbstractNode node = getNode();
+		INode node = getNode();
 		if (node == null)
 			return null;
-		EObject eObject = NodeUtil.getNearestSemanticObject(node);
+		EObject eObject = node.getSemanticElement();
 		if (eObject==null || eObject.eResource()==null)
 			return null;
 		return EcoreUtil.getURI(eObject);

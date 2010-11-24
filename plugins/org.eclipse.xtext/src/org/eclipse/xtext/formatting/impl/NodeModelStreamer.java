@@ -12,13 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.formatting.INodeModelStreamer;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil;
@@ -42,24 +41,24 @@ public class NodeModelStreamer implements INodeModelStreamer {
 	@Inject
 	protected IValueConverterService valueConverter;
 
-	public ITextRegion feedTokenStream(ITokenStream out, CompositeNode in, int offset, int length) throws IOException {
-		List<AbstractNode> nodes = getLeafs(in, offset, offset + length);
+	public ITextRegion feedTokenStream(ITokenStream out, ICompositeNode in, int offset, int length) throws IOException {
+		List<INode> nodes = getLeafs(in, offset, offset + length);
 		if (nodes.isEmpty())
 			return new TextRegion(in.getOffset(), 0);
 		boolean lastIsTokenOrComment = false;
-		for (AbstractNode node : nodes) {
+		for (INode node : nodes) {
 			boolean currentIsTokenOrComment = tokenUtil.isCommentNode(node) || tokenUtil.isToken(node);
 			if (lastIsTokenOrComment && currentIsTokenOrComment)
 				writeHiddenEmpty(out);
 			lastIsTokenOrComment = currentIsTokenOrComment;
-			if (node instanceof LeafNode) {
-				LeafNode leaf = (LeafNode) node;
+			if (node instanceof ILeafNode) {
+				ILeafNode leaf = (ILeafNode) node;
 				if (leaf.isHidden())
 					writeHidden(out, leaf);
 				else
 					writeSemantic(out, leaf);
-			} else if (node instanceof CompositeNode)
-				writeSemantic(out, (CompositeNode) node);
+			} else if (node instanceof ICompositeNode)
+				writeSemantic(out, (ICompositeNode) node);
 		}
 		out.flush();
 		int rStart = nodes.get(0).getOffset();
@@ -67,45 +66,39 @@ public class NodeModelStreamer implements INodeModelStreamer {
 		return new TextRegion(rStart, rLength);
 	}
 
-	protected List<AbstractNode> getLeafs(EObject root, int fromOffset, int toOffset) {
-		List<AbstractNode> result = new ArrayList<AbstractNode>();
-		TreeIterator<EObject> it = root.eAllContents();
+	protected List<INode> getLeafs(ICompositeNode root, int fromOffset, int toOffset) {
+		List<INode> result = new ArrayList<INode>();
+		TreeIterator<INode> iterator = root.treeIterator();
 
 		// seek to fromOffset
 		if (fromOffset > 0)
-			while (it.hasNext()) {
-				EObject o = it.next();
-				if (o instanceof AbstractNode) {
-					AbstractNode node = (AbstractNode) o;
-					if (tokenUtil.isToken(node) || tokenUtil.isCommentNode(node)) {
-						it.prune();
-						if (node.getOffset() + node.getLength() >= fromOffset) {
-							result.add(node);
-							break;
-						}
+			while (iterator.hasNext()) {
+				INode node = iterator.next();
+				if (tokenUtil.isToken(node) || tokenUtil.isCommentNode(node)) {
+					iterator.prune();
+					if (node.getOffset() + node.getLength() >= fromOffset) {
+						result.add(node);
+						break;
 					}
 				}
 			}
 
 		// add tokens within the range
-		while (it.hasNext()) {
-			EObject o = it.next();
-			if (o instanceof AbstractNode) {
-				AbstractNode node = (AbstractNode) o;
-				if (node instanceof LeafNode || tokenUtil.isToken(node)) {
-					if (node.getOffset() > toOffset)
-						break;
+		while (iterator.hasNext()) {
+			INode node = iterator.next();
+			if (node instanceof ILeafNode || tokenUtil.isToken(node)) {
+				if (node.getOffset() > toOffset)
+					break;
+				else {
+					if (node instanceof ILeafNode)
+						result.add(node);
 					else {
-						if (node instanceof LeafNode)
-							result.add(node);
-						else {
-							it.prune();
-							Pair<List<LeafNode>, List<LeafNode>> surround = tokenUtil
-									.getLeadingAndTrailingHiddenTokens(node);
-							result.addAll(surround.getFirst());
-							result.add(node);
-							result.addAll(surround.getSecond());
-						}
+						iterator.prune();
+						Pair<List<ILeafNode>, List<ILeafNode>> surround = tokenUtil
+								.getLeadingAndTrailingHiddenTokens(node);
+						result.addAll(surround.getFirst());
+						result.add(node);
+						result.addAll(surround.getSecond());
 					}
 				}
 			}
@@ -120,7 +113,7 @@ public class NodeModelStreamer implements INodeModelStreamer {
 		return result;
 	}
 
-	protected void writeHidden(ITokenStream out, LeafNode node) throws IOException {
+	protected void writeHidden(ITokenStream out, ILeafNode node) throws IOException {
 		out.writeHidden(node.getGrammarElement(), node.getText());
 	}
 
@@ -128,14 +121,14 @@ public class NodeModelStreamer implements INodeModelStreamer {
 		out.writeHidden(hiddenTokenHelper.getWhitespaceRuleFor(null, ""), "");
 	}
 
-	protected void writeSemantic(ITokenStream out, CompositeNode node) throws IOException {
+	protected void writeSemantic(ITokenStream out, ICompositeNode node) throws IOException {
 		AbstractRule rule = tokenUtil.getTokenRule(node);
-		Object val = valueConverter.toValue(tokenUtil.serializeNode(node), rule.getName(), node);
+		Object val = valueConverter.toValue(tokenUtil.serializeNode(node), rule.getName(), null, node);
 		String text = valueConverter.toString(val, rule.getName());
 		out.writeSemantic(node.getGrammarElement(), text);
 	}
 
-	protected void writeSemantic(ITokenStream out, LeafNode node) throws IOException {
+	protected void writeSemantic(ITokenStream out, ILeafNode node) throws IOException {
 		out.writeSemantic(node.getGrammarElement(), node.getText());
 	}
 }

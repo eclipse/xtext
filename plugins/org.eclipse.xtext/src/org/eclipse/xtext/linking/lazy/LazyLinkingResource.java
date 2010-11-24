@@ -34,7 +34,7 @@ import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider.ILinkingDiagn
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
-import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Triple;
@@ -78,7 +78,7 @@ public class LazyLinkingResource extends XtextResource {
 			EcoreUtil.resolveAll(this);
 	}
 
-	private LinkedHashSet<Triple<EObject, EReference, AbstractNode>> resolving = Sets.newLinkedHashSet();
+	private LinkedHashSet<Triple<EObject, EReference, INode>> resolving = Sets.newLinkedHashSet();
 
 	/**
 	 * resolves any lazy cross references in this resource, adding Issues for unresolvable elements to this resource.
@@ -151,7 +151,7 @@ public class LazyLinkingResource extends XtextResource {
 	public synchronized EObject getEObject(String uriFragment) {
 		try {
 			if (getEncoder().isCrossLinkFragment(this, uriFragment)) {
-				Triple<EObject, EReference, AbstractNode> triple = getEncoder().decode(this, uriFragment);
+				Triple<EObject, EReference, INode> triple = getEncoder().decode(this, uriFragment);
 				try {
 					if (!resolving.add(triple))
 						throw new AssertionError("Cyclic resolution of lazy links : "
@@ -201,11 +201,11 @@ public class LazyLinkingResource extends XtextResource {
 		return super.getEObject(uriFragment);
 	}
 
-	private String getReferences(Triple<EObject, EReference, AbstractNode> triple,
-			LinkedHashSet<Triple<EObject, EReference, AbstractNode>> resolving2) {
+	private String getReferences(Triple<EObject, EReference, INode> triple,
+			LinkedHashSet<Triple<EObject, EReference, INode>> resolving2) {
 		StringBuffer buffer = new StringBuffer();
 		boolean found = false;
-		for (Triple<EObject, EReference, AbstractNode> triple2 : resolving2) {
+		for (Triple<EObject, EReference, INode> triple2 : resolving2) {
 			found = found || triple2.equals(triple);
 			if (found)
 				buffer.append(getQualifiedName(triple2.getSecond())).append("->");
@@ -221,10 +221,10 @@ public class LazyLinkingResource extends XtextResource {
 	protected static class DiagnosticMessageContext implements
 			ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext {
 
-		private final Triple<EObject, EReference, AbstractNode> triple;
+		private final Triple<EObject, EReference, INode> triple;
 		private final LinkingHelper linkingHelper;
 
-		protected DiagnosticMessageContext(Triple<EObject, EReference, AbstractNode> triple, LinkingHelper helper) {
+		protected DiagnosticMessageContext(Triple<EObject, EReference, INode> triple, LinkingHelper helper) {
 			this.triple = triple;
 			this.linkingHelper = helper;
 		}
@@ -243,7 +243,7 @@ public class LazyLinkingResource extends XtextResource {
 
 	}
 
-	protected void createAndAddDiagnostic(Triple<EObject, EReference, AbstractNode> triple) {
+	protected void createAndAddDiagnostic(Triple<EObject, EReference, INode> triple) {
 		DiagnosticMessage message = createDiagnosticMessage(triple);
 		if (message != null) {
 			List<Diagnostic> list = getDiagnosticList(message);
@@ -253,7 +253,7 @@ public class LazyLinkingResource extends XtextResource {
 		}
 	}
 
-	protected void removeDiagnostic(Triple<EObject, EReference, AbstractNode> triple) {
+	protected void removeDiagnostic(Triple<EObject, EReference, INode> triple) {
 		DiagnosticMessage message = createDiagnosticMessage(triple);
 		List<Diagnostic> list = getDiagnosticList(message);
 		if (!list.isEmpty()) {
@@ -262,7 +262,7 @@ public class LazyLinkingResource extends XtextResource {
 		}
 	}
 
-	protected Diagnostic createDiagnostic(Triple<EObject, EReference, AbstractNode> triple, DiagnosticMessage message) {
+	protected Diagnostic createDiagnostic(Triple<EObject, EReference, INode> triple, DiagnosticMessage message) {
 		Diagnostic diagnostic = new XtextLinkingDiagnostic(triple.getThird(), message.getMessage(),
 				message.getIssueCode(), message.getIssueData());
 		return diagnostic;
@@ -283,13 +283,13 @@ public class LazyLinkingResource extends XtextResource {
 		return list;
 	}
 
-	protected DiagnosticMessage createDiagnosticMessage(Triple<EObject, EReference, AbstractNode> triple) {
+	protected DiagnosticMessage createDiagnosticMessage(Triple<EObject, EReference, INode> triple) {
 		ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticMessageContext(triple);
 		DiagnosticMessage message = diagnosticMessageProvider.getUnresolvedProxyMessage(context);
 		return message;
 	}
 
-	protected ILinkingDiagnosticContext createDiagnosticMessageContext(Triple<EObject, EReference, AbstractNode> triple) {
+	protected ILinkingDiagnosticContext createDiagnosticMessageContext(Triple<EObject, EReference, INode> triple) {
 		return new DiagnosticMessageContext(triple, linkingHelper);
 	}
 

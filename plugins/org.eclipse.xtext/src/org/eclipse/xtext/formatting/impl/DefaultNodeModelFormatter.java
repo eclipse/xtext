@@ -18,13 +18,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.formatting.IFormatter;
 import org.eclipse.xtext.formatting.INodeModelStreamer;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
 import org.eclipse.xtext.util.ITextRegion;
 
+import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 
 /**
@@ -72,7 +73,7 @@ public class DefaultNodeModelFormatter extends AbstractNodeModelFormatter {
 	protected INodeModelStreamer nodeModelStreamer;
 
 	@Override
-	public IFormattedRegion format(CompositeNode root, int offset, int length) {
+	public IFormattedRegion format(ICompositeNode root, int offset, int length) {
 		String indent = getIndentation(root, offset);
 		TokenStringBuffer buf = new TokenStringBuffer();
 		ITokenStream out = offset == 0 ? buf : new FilterFirstWhitespaceStream(buf);
@@ -86,23 +87,20 @@ public class DefaultNodeModelFormatter extends AbstractNodeModelFormatter {
 		}
 	}
 
-	protected String getIndentation(EObject root, int fromOffset) {
+	protected String getIndentation(ICompositeNode root, int fromOffset) {
 		if (fromOffset == 0)
 			return "";
 
-		List<LeafNode> r = new ArrayList<LeafNode>();
-		Iterator<EObject> it = root.eAllContents();
+		List<ILeafNode> r = new ArrayList<ILeafNode>();
+		Iterator<ILeafNode> it = Iterators.filter(root.treeIterator(), ILeafNode.class);
 
 		// add all nodes until fromOffset
 		while (it.hasNext()) {
-			EObject o = it.next();
-			if (o instanceof LeafNode) {
-				LeafNode l = (LeafNode) o;
-				if (l.getOffset() >= fromOffset)
-					break;
-				else
-					r.add(l);
-			}
+			ILeafNode l = it.next();
+			if (l.getOffset() >= fromOffset)
+				break;
+			else
+				r.add(l);
 		}
 
 		// go backwards until first linewrap

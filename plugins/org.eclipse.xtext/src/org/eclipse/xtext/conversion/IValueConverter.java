@@ -9,6 +9,7 @@
 package org.eclipse.xtext.conversion;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.AbstractNode;
 
 /**
@@ -22,7 +23,7 @@ public interface IValueConverter<Type> {
 		public String toString(String value) {
 			return value;
 		}
-		public String toValue(String string, AbstractNode node) {
+		public String toValue(String string, AbstractNode node, INode newNode) {
 			return string;
 		}
 	};
@@ -33,7 +34,7 @@ public interface IValueConverter<Type> {
 	 * @return
 	 * @throws ValueConverterException
 	 */
-	Type toValue(String string, AbstractNode node) throws ValueConverterException;
+	Type toValue(String string, AbstractNode node, INode newNode) throws ValueConverterException;
 	
 	/**
 	 * @param value
@@ -46,7 +47,6 @@ public interface IValueConverter<Type> {
 	 * that is converted, may implement this interface. The framework will
 	 * set the rule according to the annotation of the method that provides
 	 * the value converter.
-	 * @author Sebastian Zarnekow - Initial contribution and API
 	 */
 	interface RuleSpecific {
 		void setRule(AbstractRule rule);

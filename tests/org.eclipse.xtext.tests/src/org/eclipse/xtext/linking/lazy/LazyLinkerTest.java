@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.linking.lazy;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -29,11 +29,12 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.ParsetreeFactory;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.LeafNode;
+import org.eclipse.xtext.nodemodel.impl.AbstractNode;
+import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
+import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.eclipse.xtext.util.Pair;
@@ -106,9 +107,9 @@ public class LazyLinkerTest extends AbstractXtextTests {
 		final EReference eReference = (EReference) foo.eClass().getEStructuralFeature("single");
 		assertFalse(eReference.isResolveProxies());
 
-		final AbstractNode leafNode = newCrossReferenceAssignmentNode(eReference.getName());
-		final NodeAdapter adapter = newSimpleNodeAdapter(leafNode);
-		foo.eAdapters().add(adapter);
+		final INode leafNode = newCrossReferenceAssignmentNode(eReference.getName());
+		final ICompositeNode adapter = newSimpleNodeAdapter(leafNode);
+		foo.eAdapters().add((Adapter) adapter);
 		linker.linkModel(foo, new ListBasedDiagnosticConsumer());
 		assertEquals(bar, foo.eGet(eReference, false));
 	}
@@ -128,10 +129,10 @@ public class LazyLinkerTest extends AbstractXtextTests {
 		final EReference eReference = (EReference) foo.eClass().getEStructuralFeature("many");
 		assertFalse(eReference.isResolveProxies());
 
-		final AbstractNode leafNode = newCrossReferenceAssignmentNode(eReference.getName());
-		final AbstractNode leafNode2 = newCrossReferenceAssignmentNode(eReference.getName());
-		final NodeAdapter adapter = newSimpleNodeAdapter(leafNode, leafNode2);
-		foo.eAdapters().add(adapter);
+		final INode leafNode = newCrossReferenceAssignmentNode(eReference.getName());
+		final INode leafNode2 = newCrossReferenceAssignmentNode(eReference.getName());
+		final ICompositeNode adapter = newSimpleNodeAdapter(leafNode, leafNode2);
+		foo.eAdapters().add((Adapter) adapter);
 		linker.linkModel(foo, new ListBasedDiagnosticConsumer());
 		assertEquals(bars, foo.eGet(eReference, false));
 	}
@@ -141,22 +142,23 @@ public class LazyLinkerTest extends AbstractXtextTests {
 		return EcoreUtil.create(eClass);
 	}
 
-	private AbstractNode newCrossReferenceAssignmentNode(final String feature) {
-		final LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+	private INode newCrossReferenceAssignmentNode(final String feature) {
+		final LeafNode leafNode = new LeafNode();
 		final Assignment assignment = XtextFactory.eINSTANCE.createAssignment();
 		assignment.setFeature(feature);
 		final CrossReference crossReference = XtextFactory.eINSTANCE.createCrossReference();
 		assignment.setTerminal(crossReference);
-		leafNode.setGrammarElement(crossReference);
+		leafNode.basicSetGrammarElement(crossReference);
 		return leafNode;
 	}
 
-	private NodeAdapter newSimpleNodeAdapter(final AbstractNode... nodes) {
-		final NodeAdapter adapter = new NodeAdapter();
-		final CompositeNode parserNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
-		parserNode.getChildren().addAll(Arrays.asList(nodes));
-		adapter.setParserNode(parserNode);
-		return adapter;
+	private ICompositeNode newSimpleNodeAdapter(final INode... nodes) {
+		NodeModelBuilder builder = new NodeModelBuilder();
+		ICompositeNode result = new CompositeNodeWithSemanticElement();
+		for(INode node: nodes) {
+			builder.addChild(result, (AbstractNode) node);
+		}
+		return result;
 	}
 
 }

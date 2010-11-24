@@ -8,6 +8,7 @@
 package org.eclipse.xtext.conversion.impl;
 
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.util.Strings;
 
@@ -25,13 +26,13 @@ public class STRINGValueConverter extends AbstractLexerBasedConverter<String> {
 		return '"' + Strings.convertToJavaString(value, false) + '"';
 	}
 	
-	public String toValue(String string, AbstractNode node) {
+	public String toValue(String string, AbstractNode node, INode newNode) {
 		if (string == null)
 			return null;
 		try {
 			return Strings.convertFromJavaString(string.substring(1, string.length() - 1), false);
 		} catch (IllegalArgumentException e) {
-			throw new ValueConverterException(e.getMessage(), node, e);
+			throw new ValueConverterException(e.getMessage(), node, newNode, e);
 		}
 	}
 }

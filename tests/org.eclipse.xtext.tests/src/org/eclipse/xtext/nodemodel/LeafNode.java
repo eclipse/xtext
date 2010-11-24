@@ -10,7 +10,7 @@ package org.eclipse.xtext.nodemodel;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 import org.eclipse.xtext.nodemodel.impl.CompositeNode;
 
-class LeafNode extends org.eclipse.xtext.nodemodel.impl.LeafNodeWithSyntaxError {
+public class LeafNode extends org.eclipse.xtext.nodemodel.impl.LeafNodeWithSyntaxError {
 	
 	@Override
 	protected void basicSetTotalLength(int length) {
@@ -48,7 +48,7 @@ class LeafNode extends org.eclipse.xtext.nodemodel.impl.LeafNodeWithSyntaxError 
 	}
 
 	@Override
-	protected void basicSetGrammarElement(Object grammarElementOrArray) {
+	public void basicSetGrammarElement(Object grammarElementOrArray) {
 		super.basicSetGrammarElement(grammarElementOrArray);
 	}
 

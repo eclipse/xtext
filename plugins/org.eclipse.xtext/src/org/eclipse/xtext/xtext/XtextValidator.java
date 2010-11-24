@@ -357,7 +357,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		if (nodes.size() != 1)
 			throw new IllegalArgumentException();
 		String text = nodes.get(0).serialize();
-		text = (String) valueConverter.toValue(text, "STRING", nodes.get(0));
+		text = (String) valueConverter.toValue(text, "STRING", nodes.get(0), null);
 		for (GeneratedMetamodel generatedMetamodel : allGeneratedMetamodels) {
 			EPackage generatedPackage = generatedMetamodel.getEPackage();
 			if (generatedPackage != null && nsURI.equals((generatedPackage.getNsURI()))) {

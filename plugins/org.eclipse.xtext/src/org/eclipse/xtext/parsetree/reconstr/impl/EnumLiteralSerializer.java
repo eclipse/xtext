@@ -7,38 +7,40 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
-import org.eclipse.emf.common.util.TreeIterator;
+import java.util.Iterator;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Alternatives;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IEnumLiteralSerializer;
+
+import com.google.common.collect.Iterators;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class EnumLiteralSerializer implements IEnumLiteralSerializer {
 
-	public boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, Object value, AbstractNode node) {
+	public boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, Object value, INode node) {
 		Keyword nodeLit = getLiteral(node);
 		Keyword modelLit = getLiteral(context, ruleCall, value);
 		return nodeLit != null && nodeLit.equals(modelLit);
 	}
 
-	protected Keyword getLiteral(AbstractNode node) {
+	protected Keyword getLiteral(INode node) {
 		if (node != null) {
-			TreeIterator<EObject> i = EcoreUtil2.eAll(node);
+			Iterator<ILeafNode> i = Iterators.filter(node.treeIterator(), ILeafNode.class);
 			while (i.hasNext()) {
-				EObject o = i.next();
-				if (o instanceof LeafNode && ((LeafNode) o).getGrammarElement() instanceof EnumLiteralDeclaration)
-					return ((EnumLiteralDeclaration) ((LeafNode) o).getGrammarElement()).getLiteral();
+				ILeafNode o = i.next();
+				if (o.getGrammarElement() instanceof EnumLiteralDeclaration)
+					return ((EnumLiteralDeclaration) o.getGrammarElement()).getLiteral();
 			}
 		}
 		return null;
@@ -66,7 +68,7 @@ public class EnumLiteralSerializer implements IEnumLiteralSerializer {
 		return getLiteral(context, ruleCall, value) != null;
 	}
 
-	public String serializeAssignedEnumLiteral(EObject context, RuleCall ruleCall, Object value, AbstractNode node) {
+	public String serializeAssignedEnumLiteral(EObject context, RuleCall ruleCall, Object value, INode node) {
 		Keyword nodeLit = getLiteral(node);
 		Keyword modelLit = getLiteral(context, ruleCall, value);
 		if (nodeLit != null && nodeLit.equals(modelLit))

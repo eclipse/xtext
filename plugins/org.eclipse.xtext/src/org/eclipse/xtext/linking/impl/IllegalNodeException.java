@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.linking.impl;
 
-import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.nodemodel.INode;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -16,29 +16,29 @@ public class IllegalNodeException extends RuntimeException {
 
 	private static final long serialVersionUID = -5736024053937205L;
 
-	private final AbstractNode node;
+	private final INode node;
 
-	public IllegalNodeException(AbstractNode node) {
+	public IllegalNodeException(INode node) {
 		super();
 		this.node = node;
 	}
 
-	public IllegalNodeException(AbstractNode node, String message, Throwable cause) {
+	public IllegalNodeException(INode node, String message, Throwable cause) {
 		super(message, cause);
 		this.node = node;
 	}
 
-	public IllegalNodeException(AbstractNode node, String message) {
+	public IllegalNodeException(INode node, String message) {
 		super(message);
 		this.node = node;
 	}
 
-	public IllegalNodeException(AbstractNode node, Throwable cause) {
+	public IllegalNodeException(INode node, Throwable cause) {
 		super(cause);
 		this.node = node;
 	}
 	
-	public AbstractNode getNode() {
+	public INode getNode() {
 		return node;
 	}
 	

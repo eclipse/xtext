@@ -17,7 +17,7 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSerializer;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -48,7 +48,7 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
 
-	public boolean equalsOrReplacesNode(EObject context, CrossReference crossref, EObject target, AbstractNode node) {
+	public boolean equalsOrReplacesNode(EObject context, CrossReference crossref, EObject target, INode node) {
 		if (crossref != node.getGrammarElement())
 			return false;
 		EReference ref = GrammarUtil.getReference(crossref);
@@ -83,7 +83,7 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 		return new ISelector.SelectByEObject(object);
 	}
 
-	public String serializeCrossRef(EObject context, CrossReference grammarElement, EObject target, AbstractNode node) {
+	public String serializeCrossRef(EObject context, CrossReference grammarElement, EObject target, INode node) {
 		final EReference ref = GrammarUtil.getReference(grammarElement, context.eClass());
 		String text = null;
 		if (node != null) {

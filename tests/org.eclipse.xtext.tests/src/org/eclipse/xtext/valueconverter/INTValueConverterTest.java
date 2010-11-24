@@ -30,14 +30,14 @@ public class INTValueConverterTest extends AbstractXtextTests {
 	
 	public void testSimple() throws Exception {
 		String s = "42";
-		Integer value = valueConverter.toValue(s, null);
+		Integer value = valueConverter.toValue(s, null, null);
 		assertEquals(new Integer(42), value);
 		assertEquals(s, valueConverter.toString(value));
 	}
 
 	public void testZero() throws Exception {
 		String s = "0";
-		Integer value = valueConverter.toValue(s, null);
+		Integer value = valueConverter.toValue(s, null, null);
 		assertEquals(new Integer(0), value);
 		assertEquals(s, valueConverter.toString(value));
 	}
@@ -65,7 +65,7 @@ public class INTValueConverterTest extends AbstractXtextTests {
 	public void testLargeInteger() throws Exception {
 		String valueAsString = Integer.toString(Integer.MAX_VALUE) + "42";
 		try {
-			valueConverter.toValue(valueAsString, null);
+			valueConverter.toValue(valueAsString, null, null);
 			fail("Expected exception");
 		} catch(ValueConverterException e) {
 			// expected
