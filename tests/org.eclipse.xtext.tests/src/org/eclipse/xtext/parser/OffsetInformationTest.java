@@ -1,15 +1,12 @@
 package org.eclipse.xtext.parser;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.ParsetreePackage;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
-import org.eclipse.xtext.tests.EmfAssert;
 import org.eclipse.xtext.util.StringInputStream;
 
-public class OffsetInformationTest extends AbstractXtextTests {
+public class OffsetInformationTest extends AbstractPartialParserTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -27,14 +24,14 @@ public class OffsetInformationTest extends AbstractXtextTests {
 			+ "  erwachsener (Herrmann 50)\n" 
 			+ "}";
 		XtextResource resource = getResource(new StringInputStream(string));
-		CompositeNode rootNode = resource.getParseResult().getRootNode();
+		ICompositeNode rootNode = resource.getParseResult().getRootNode2();
 		
 		for (int i=0;i<string.length()/2;i++) {
 			String substring = string.substring(i, string.length()-i);
 			resource.update(i, substring.length(), substring);
-			CompositeNode model = resource.getParseResult().getRootNode();
-			NodeUtil.checkOffsetConsistency(model);
-			EmfAssert.assertEObjectsEqual(rootNode, model,ParsetreePackage.eINSTANCE.getAbstractNode_Element());
+			ICompositeNode model = resource.getParseResult().getRootNode2();
+			new InvariantChecker().checkInvariant(model);
+			assertSameStructure(rootNode, model);
 		}
 		
 	}
