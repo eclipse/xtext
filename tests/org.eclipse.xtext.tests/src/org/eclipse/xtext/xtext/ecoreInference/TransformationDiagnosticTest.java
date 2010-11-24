@@ -9,8 +9,8 @@ package org.eclipse.xtext.xtext.ecoreInference;
 
 import junit.framework.TestCase;
 
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.ParsetreeFactory;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.impl.LeafNode;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
@@ -23,7 +23,7 @@ public class TransformationDiagnosticTest extends TestCase {
 	}
 	
 	public void testDiagnostic() throws Exception {
-		AbstractNode node = ParsetreeFactory.eINSTANCE.createLeafNode();
+		INode node = new LeafNode();
 		TransformationDiagnostic diagnostic = new TransformationDiagnostic(node, "message", TransformationErrorCode.FeatureWithDifferentConfigurationAlreadyExists);
 		String expected = "org.eclipse.xtext.xtext.ecoreInference.TransformationErrorCode.FeatureWithDifferentConfigurationAlreadyExists";
 		assertEquals(expected, diagnostic.getCode());

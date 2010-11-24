@@ -8,6 +8,7 @@ import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractToStringConverter;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.AbstractNode;
 
 /**
@@ -26,7 +27,7 @@ public class AssignmentsTestLanguageRuntimeModule extends org.eclipse.xtext.pars
 		public IValueConverter<String> IdDatatype() {
 			return new AbstractToStringConverter<String>() {
 				@Override
-				protected String internalToValue(String string, AbstractNode node) {
+				protected String internalToValue(String string, AbstractNode node, INode newNode) {
 					return "IdDatatype: " + string;
 				}
 			};
@@ -36,7 +37,7 @@ public class AssignmentsTestLanguageRuntimeModule extends org.eclipse.xtext.pars
 		public IValueConverter<String> StringDatatype() {
 			return new AbstractToStringConverter<String>() {
 				@Override
-				protected String internalToValue(String string, AbstractNode node) {
+				protected String internalToValue(String string, AbstractNode node, INode newNode) {
 					return "StringDatatype: " + string;
 				}
 			};

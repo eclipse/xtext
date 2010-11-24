@@ -37,18 +37,40 @@ public abstract class AbstractPartialParserCrossContainmentTest extends Abstract
 		return result;
 	}
 	
-	public void testCrossResourceContainment_01() throws Exception {
+	public void testCrossResourceContainment_01_Hugo_Plus_Egon() throws Exception {
 		String model = "(a+b+c)*(c/d)";
 		replaceAndReparse(model, 2, 2, "+hugo+egon", true);
-		replaceAndReparse(model, 8, 5, "egon", true);
+	}
+	
+	public void testCrossResourceContainment_01_Egon() throws Exception {
+		String model = "(a+b+c)*(c/d)";
+		replaceAndReparse(model, 8, 5, "egon", false);
+	}
+	
+	public void testCrossResourceContainment_01_Empty() throws Exception {
+		String model = "(a+b+c)*(c/d)";
 		replaceAndReparse(model, 1, 2, "", true);
 		replaceAndReparse(model, 3, 1, "(x+y+z)", true);
 	}
 	
-	public void testCrossResourceContainment_02() throws Exception {
+	public void testCrossResourceContainment_01_X_Y_Z() throws Exception {
+		String model = "(a+b+c)*(c/d)";
+		replaceAndReparse(model, 3, 1, "(x+y+z)", true);
+	}
+	
+	public void testCrossResourceContainment_02_Multiply() throws Exception {
 		String model = "(a+b+c)*(c/d)";
 		replaceAndReparse(model, 6, 3, "*", false);
+	}
+	
+	public void testCrossResourceContainment_02_Plus() throws Exception {
+		String model = "(a+b+c)*(c/d)";
 		replaceAndReparse("a b", 1, 1, "+", false);
+		replaceAndReparse(model, 3, 1, "x)+(b",false);
+	}
+	
+	public void testCrossResourceContainment_02_New_Parens() throws Exception {
+		String model = "(a+b+c)*(c/d)";
 		replaceAndReparse(model, 3, 1, "x)+(b",false);
 	}
 	

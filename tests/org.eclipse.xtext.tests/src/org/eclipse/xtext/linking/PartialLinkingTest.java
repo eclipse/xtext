@@ -17,6 +17,7 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.impl.Linker;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
+import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -153,6 +154,7 @@ public class PartialLinkingTest extends AbstractXtextTests implements IScopeProv
 		linkingService.setScopeProvider(this);
 		linker.setLinkingService(linkingService);
 		linker.setDiagnosticMessageProvider(new LinkingDiagnosticMessageProvider());
+		linker.setLinkingHelper(getInjector().getInstance(LinkingHelper.class));
 		resource.setLinker(linker);
 	}
 

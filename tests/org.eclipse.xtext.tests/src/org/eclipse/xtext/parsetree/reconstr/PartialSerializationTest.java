@@ -24,32 +24,32 @@ public class PartialSerializationTest extends AbstractXtextTests {
 		with(PartialSerializationTestLanguageStandaloneSetup.class);
 	}
 
-	private String ser(EObject obj) {
+	private String doSerialize(EObject obj) {
 		return getSerializer().serialize(obj, SaveOptions.defaultOptions());
 	}
 
 	public void testSimple() throws Exception {
 		String model = " #1  node  test  (  node  subnode  )";
 		NodeRoot root = (NodeRoot) getModel(model);
-		assertEquals("node  test  (  node  subnode  )", ser(root.getNode()));
+		assertEquals("node  test  (  node  subnode  )", doSerialize(root.getNode()));
 	}
 
 	public void testSimpleSurroundComments1() throws Exception {
 		String model = "/* x1 */ #1 /* x2 */ node /* x3 */ test  (  node  subnode /* x4 */ ) /* x5 */";
 		NodeRoot root = (NodeRoot) getModel(model);
-		assertEquals(model, ser(root));
+		assertEquals(model, doSerialize(root));
 	}
 
 	public void testSimpleSurroundComments2() throws Exception {
 		String model = "/* x1 */ #1 /* x2 */ node /* x3 */ test  (  node  subnode /* x4 */ ) /* x5 */";
 		NodeRoot root = (NodeRoot) getModel(model);
-		assertEquals("/* x2 */ node /* x3 */ test  (  node  subnode /* x4 */ ) /* x5 */", ser(root.getNode()));
+		assertEquals("/* x2 */ node /* x3 */ test  (  node  subnode /* x4 */ ) /* x5 */", doSerialize(root.getNode()));
 	}
 
 	public void testSimpleSurroundComments3() throws Exception {
 		String model = "/* x1 */ #1 /* x2 */ node /* x3 */ test /* x4 */  ( /* x5 */ node /* x6 */ subnode /* x7 */ ) /* x8 */";
 		NodeRoot root = (NodeRoot) getModel(model);
-		String ser = ser(root.getNode().getChildren().get(0));
+		String ser = doSerialize(root.getNode().getChildren().get(0));
 		assertEquals("/* x5 */ node /* x6 */ subnode", ser);
 	}
 

@@ -27,13 +27,13 @@ public class DefaultEcoreElementFactoryTest extends TestCase {
         EClass eClass = EcoreFactory.eINSTANCE.createEClass();
         IValueConverterService converter = EasyMock.createMock(IValueConverterService.class);
 
-        converter.toValue(null, "foo", null);
+        converter.toValue(null, "foo", null, null);
         EasyMock.expectLastCall().andReturn("FOO");
 
         EasyMock.replay(converter);
         DefaultEcoreElementFactory factory = new DefaultEcoreElementFactory();
         factory.setConverterService(converter);
-        factory.set(eClass, "name", null, "foo", null);
+        factory.set(eClass, "name", null, "foo", null, null);
 
         EasyMock.verify(converter);
         assertEquals("FOO", eClass.getName());
@@ -42,20 +42,22 @@ public class DefaultEcoreElementFactoryTest extends TestCase {
     public void testNullInput() throws Exception {
     	EClass eClass = EcoreFactory.eINSTANCE.createEClass();
     	LeafNode node = ParsetreeFactory.eINSTANCE.createLeafNode();
+    	org.eclipse.xtext.nodemodel.impl.LeafNode newLeafNode = new org.eclipse.xtext.nodemodel.impl.LeafNode();
         IValueConverterService converter = EasyMock.createMock(IValueConverterService.class);
-        converter.toValue(null, "foo", node);
+        converter.toValue(null, "foo", node, newLeafNode);
         EasyMock.expectLastCall().andReturn(null);
         EasyMock.replay(converter);
         
         DefaultEcoreElementFactory factory = new DefaultEcoreElementFactory();
         factory.setConverterService(converter);
         try {
-        	factory.set(eClass, "abstract", null, "foo", node);
+        	factory.set(eClass, "abstract", null, "foo", node, newLeafNode);
         	fail("Expected ValueConverterException");
         } catch(ValueConverterException ex) {
         	assertNull(ex.getCause());
         	assertTrue(ex.getMessage().indexOf("ValueConverter returned null for") >= 0);
         	assertSame(node, ex.getNode());
+        	assertSame(newLeafNode, ex.getNode2());
         }
         EasyMock.verify(converter);
     }
@@ -63,16 +65,17 @@ public class DefaultEcoreElementFactoryTest extends TestCase {
     public void testValueConverterException() throws Exception {
     	EClass eClass = EcoreFactory.eINSTANCE.createEClass();
     	LeafNode node = ParsetreeFactory.eINSTANCE.createLeafNode();
-    	ValueConverterException expected = new ValueConverterException("Foo", node, null);
+    	org.eclipse.xtext.nodemodel.impl.LeafNode newLeafNode = new org.eclipse.xtext.nodemodel.impl.LeafNode();
+    	ValueConverterException expected = new ValueConverterException("Foo", node, newLeafNode, null);
         IValueConverterService converter = EasyMock.createMock(IValueConverterService.class);
-        converter.toValue(null, "foo", node);
+        converter.toValue(null, "foo", node, newLeafNode);
         EasyMock.expectLastCall().andThrow(expected);
         EasyMock.replay(converter);
         
         DefaultEcoreElementFactory factory = new DefaultEcoreElementFactory();
         factory.setConverterService(converter);
         try {
-        	factory.set(eClass, "abstract", null, "foo", node);
+        	factory.set(eClass, "abstract", null, "foo", node, newLeafNode);
         	fail("Expected ValueConverterException");
         } catch(ValueConverterException ex) {
         	assertSame(expected, ex);
