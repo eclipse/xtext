@@ -24,12 +24,7 @@ public interface IEObjectDescription {
 	 * @return the name, this element can be accessed by.
 	 */
 	QualifiedName getName();
-	
-	/**
-	 * @return the key which makes this description unique within its scope, and shadows any elements with the same key from outer scope.
-	 */
-	Object getKey();
-	
+
 	/**
 	 * @return the qualified name of the element. 
 	 */

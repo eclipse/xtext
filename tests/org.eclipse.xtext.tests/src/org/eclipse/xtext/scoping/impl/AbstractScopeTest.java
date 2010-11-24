@@ -18,6 +18,8 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.ISelector;
 
+import com.google.common.collect.Iterables;
+
 import junit.framework.TestCase;
 
 /**
@@ -25,59 +27,80 @@ import junit.framework.TestCase;
  */
 public class AbstractScopeTest extends TestCase {
 
+	public void testShadowing() throws Exception {
+		IEObjectDescription a = EObjectDescription.create(QualifiedName.create("foo"),
+				EcorePackage.Literals.EANNOTATION);
+		IEObjectDescription b = EObjectDescription
+				.create(QualifiedName.create("foo"), EcorePackage.Literals.EATTRIBUTE);
+		IEObjectDescription c = EObjectDescription.create(QualifiedName.create("foo"), EcorePackage.Literals.EBYTE);
+		SimpleScope outer = new SimpleScope(singleton(a));
+		SimpleScope middle = new SimpleScope(outer, singleton(b));
+		SimpleScope inner = new SimpleScope(middle, singleton(c));
+		assertNull(inner.getSingleElement(new ISelector.SelectByEObject(EcorePackage.Literals.EANNOTATION)));
+	}
+
 	public void testLaziness() throws Exception {
 		LazinessTestScope c = new LazinessTestScope("c");
-		LazinessTestScope b = new LazinessTestScope("b",c);
-		LazinessTestScope a = new LazinessTestScope("a",b);
-		assertEquals(0,a.numberOfCalls);
-		assertEquals(0,b.numberOfCalls);
-		assertEquals(0,c.numberOfCalls);
+		LazinessTestScope b = new LazinessTestScope("b", c);
+		LazinessTestScope a = new LazinessTestScope("a", b);
+		assertEquals(0, a.numberOfCalls);
+		assertEquals(0, b.numberOfCalls);
+		assertEquals(0, c.numberOfCalls);
 		Iterable<IEObjectDescription> elements = a.getElements(ISelector.SELECT_ALL);
 		Iterator<IEObjectDescription> iterator = elements.iterator();
-		assertEquals(0,a.numberOfCalls);
-		assertEquals(0,b.numberOfCalls);
-		assertEquals(0,c.numberOfCalls);
+		assertEquals(0, a.numberOfCalls);
+		assertEquals(0, b.numberOfCalls);
+		assertEquals(0, c.numberOfCalls);
 		iterator.next();
-		assertEquals(1,a.numberOfCalls);
-		assertEquals(0,b.numberOfCalls);
-		assertEquals(0,c.numberOfCalls);
+		assertEquals(1, a.numberOfCalls);
+		assertEquals(0, b.numberOfCalls);
+		assertEquals(0, c.numberOfCalls);
 		iterator.next();
-		assertEquals(1,a.numberOfCalls);
-		assertEquals(1,b.numberOfCalls);
-		assertEquals(0,c.numberOfCalls);
+		assertEquals(2, a.numberOfCalls);
+		assertEquals(1, b.numberOfCalls);
+		assertEquals(0, c.numberOfCalls);
 		iterator.next();
-		assertEquals(1,a.numberOfCalls);
-		assertEquals(1,b.numberOfCalls);
-		assertEquals(1,c.numberOfCalls);
+		assertEquals(3, a.numberOfCalls);
+		assertEquals(2, b.numberOfCalls);
+		assertEquals(1, c.numberOfCalls);
 		assertFalse(iterator.hasNext());
 	}
-	
+
 	static class LazinessTestScope extends AbstractScope {
-		
+
 		private String name;
 
 		public LazinessTestScope(String name) {
-			this(name,IScope.NULLSCOPE);
+			this(name, IScope.NULLSCOPE);
 		}
-		
-		public LazinessTestScope(String name,IScope parent) {
+
+		public LazinessTestScope(String name, IScope parent) {
 			super(parent);
 			this.name = name;
 		}
-		
+
 		int numberOfCalls = 0;
 
 		@Override
 		public Iterable<IEObjectDescription> getLocalElements(final ISelector selector) {
-			return new Iterable<IEObjectDescription>() {
+			return selector.applySelector(new Iterable<IEObjectDescription>() {
 				public Iterator<IEObjectDescription> iterator() {
 					numberOfCalls++;
-					return singleton((IEObjectDescription)new EObjectDescription(QualifiedName.create(name), EcorePackage.Literals.EATTRIBUTE, null, false)).iterator();
+					return singleton(
+							(IEObjectDescription) new EObjectDescription(QualifiedName.create(name),
+									EcorePackage.Literals.EATTRIBUTE, null, false)).iterator();
 				}
-			};
+
+				@Override
+				public String toString() {
+					try {
+						return Iterables.toString(this);
+					} finally {
+						numberOfCalls--;
+					}
+				}
+			});
 		}
-		
+
 	}
 }
-
-

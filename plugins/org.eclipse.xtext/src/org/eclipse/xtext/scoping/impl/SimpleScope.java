@@ -35,7 +35,13 @@ public class SimpleScope extends AbstractScope implements Function<IEObjectDescr
 	
 	protected Set<Object> shadowingIndex = null;
 	
-	@Override
+	/**
+	 * @return the key of the given description, which makes it shadowing others
+	 */
+	protected Object getShadowingKey(IEObjectDescription description) {
+		return description.getName();
+	}
+	
 	protected Iterable<IEObjectDescription> trackKeys(Iterable<IEObjectDescription> localElements) {
 		shadowingIndex = Sets.newHashSet();
 		return transform(localElements, this);
@@ -43,17 +49,17 @@ public class SimpleScope extends AbstractScope implements Function<IEObjectDescr
 	
 	@Override
 	protected boolean isShadowed(IEObjectDescription fromParent) {
-		boolean filtered = shadowingIndex.contains(getKey(fromParent));
+		boolean filtered = shadowingIndex.contains(getShadowingKey(fromParent));
 		return filtered;
 	}
 
 	@Override
 	public Iterable<IEObjectDescription> getLocalElements(final ISelector selector) {
-		return selector.applySelector(descriptions);
+		return selector.applySelector(trackKeys(descriptions));
 	}
 	
 	public IEObjectDescription apply(IEObjectDescription from) {
-		shadowingIndex.add(getKey(from));
+		shadowingIndex.add(getShadowingKey(from));
 		return from;
 	}
 

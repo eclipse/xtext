@@ -34,11 +34,11 @@ public abstract class AbstractEObjectDescription implements IEObjectDescription 
 		return new String[0];
 	}
 	
-	public Object getKey() {
-		return ignoreCase? getIgnoreCaseName() :getName();
-	}
-
 	protected QualifiedName getIgnoreCaseName() {
 		return getName().toLowerCase();
+	}
+	
+	public boolean isIgnoreCase() {
+		return ignoreCase;
 	}
 }

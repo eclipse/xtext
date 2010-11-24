@@ -55,7 +55,7 @@ public class MapBasedScope extends AbstractScope {
 		final QualifiedName lowerCase = fromParent.getName().toLowerCase();
 		if (elements.containsKey(lowerCase)) {
 			IEObjectDescription shadowing = elements.get(lowerCase);
-			return shadowing.getKey().equals(fromParent.getKey());
+			return shadowing.getName().equals(fromParent.getName());
 		}
 		return false;
 	}

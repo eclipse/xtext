@@ -22,6 +22,7 @@ import org.eclipse.xtext.scoping.ISelector.SelectByName;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.LinkedHashMultimap;
 
@@ -50,7 +51,7 @@ public class ImportScope extends AbstractScope {
 			final SelectByName selectByName = (ISelector.SelectByName) selector;
 			final QualifiedName name = selectByName.getName();
 			Iterable<Iterable<IEObjectDescription>> iterables = transform(normalizers, new Function<ImportNormalizer, Iterable<IEObjectDescription>>(){
-				public Iterable<IEObjectDescription> apply(ImportNormalizer normalizer) {
+				public Iterable<IEObjectDescription> apply(final ImportNormalizer normalizer) {
 					final QualifiedName resolved = normalizer.resolve(name);
 					if (resolved!=null) {
 						final ISelector.SelectByName selector2 = new ISelector.SelectByName(resolved, ignoreCase);
@@ -58,7 +59,10 @@ public class ImportScope extends AbstractScope {
 						Iterable<IEObjectDescription> elements = getParent().getElements(selector2);
 						Function<IEObjectDescription, IEObjectDescription> aliaser = new Function<IEObjectDescription, IEObjectDescription>() {
 							public IEObjectDescription apply(IEObjectDescription from) {
-								return new AliasedEObjectDescription(resolved, from, ignoreCase);
+								final QualifiedName deresolved = normalizer.deresolve(from.getName());
+								if (deresolved==null)
+									throw new IllegalStateException("Couldn't deresolve "+from.getName()+" with import "+normalizer);
+								return new AliasedEObjectDescription(deresolved, from, ignoreCase);
 							}
 						};
 						return transform(elements, aliaser);
@@ -77,6 +81,11 @@ public class ImportScope extends AbstractScope {
 					if (iterator.hasNext())
 						return Iterators.emptyIterator();
 					return Iterators.singletonIterator(next);
+				}
+				
+				@Override
+				public String toString() {
+					return Iterables.toString(this);
 				}
 			};
 		}
@@ -115,7 +124,5 @@ public class ImportScope extends AbstractScope {
 				});
 		return filter(aliased, Predicates.notNull());
 	}
-	
-	
 
 }
