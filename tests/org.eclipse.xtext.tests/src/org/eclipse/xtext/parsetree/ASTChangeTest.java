@@ -23,7 +23,7 @@ public class ASTChangeTest extends AbstractXtextTests {
 
 	public void testWhitespaceIsIncluded() throws Exception {
 		String model = "element foo;\nelement bar;";
-		ICompositeNode node = getRootNode2(model);
+		ICompositeNode node = getRootNode(model);
 		EObject me = node.getSemanticElement();
 		assertWithXtend("'foo'", "elements.first().name", me);
 		invokeWithXtend("elements.first().setName('stuff')", me);

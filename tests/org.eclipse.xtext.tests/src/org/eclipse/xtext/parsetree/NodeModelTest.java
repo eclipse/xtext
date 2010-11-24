@@ -58,7 +58,7 @@ public class NodeModelTest extends AbstractXtextTests {
 	}
 
 	public void testGrammarElement() throws Exception {
-		ICompositeNode rootNode = getRootNode2(MODEL);
+		ICompositeNode rootNode = getRootNode(MODEL);
 		EObject rootGrammarElement = rootNode.getGrammarElement();
 		assertTrue(rootGrammarElement instanceof ParserRule);
 		for (Iterator<INode> i = rootNode.treeIterator(); i.hasNext();) {
@@ -108,7 +108,7 @@ public class NodeModelTest extends AbstractXtextTests {
 		Pattern whitespacePattern = Pattern.compile("\\s*");
 		String[] tokenTexts = MODEL.split(" ");
 		int tokenIndex = 0;
-		INode rootNode = getRootNode2(MODEL);
+		INode rootNode = getRootNode(MODEL);
 		for (Iterator<INode> i = rootNode.treeIterator(); i.hasNext();) {
 			INode next = i.next();
 			if (next instanceof ILeafNode) {

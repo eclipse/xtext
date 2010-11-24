@@ -26,7 +26,7 @@ public class SerializeTest extends AbstractXtextTests {
 	}
 	
 	private void checkSerialize(String model, int expectedErrors) throws Exception {
-		ICompositeNode node = getRootNodeAndExpect2(model, expectedErrors);
+		ICompositeNode node = getRootNodeAndExpect(model, expectedErrors);
 		String serialize = node.getText();
 		assertEquals(model, serialize);
 	}

@@ -44,9 +44,9 @@ public class XtextResourceTest extends AbstractXtextTests {
 
 		IParseResult parseResult = resource.getParseResult();
 		assertNotNull("parseResult", parseResult);
-		assertNotNull(parseResult.getRootNode2());
+		assertNotNull(parseResult.getRootNode());
 		assertEquals(0, Iterables.size(parseResult.getSyntaxErrors()));
-		assertEquals(0, parseResult.getRootNode2().getTotalLength());
+		assertEquals(0, parseResult.getRootNode().getTotalLength());
 		assertNull(parseResult.getRootASTElement());
 	}
 
@@ -122,9 +122,9 @@ public class XtextResourceTest extends AbstractXtextTests {
 
 		IParseResult parseResult = resource.getParseResult();
 		assertNotNull("parseResult", parseResult);
-		assertNotNull(parseResult.getRootNode2());
+		assertNotNull(parseResult.getRootNode());
 		assertEquals(0, Iterables.size(parseResult.getSyntaxErrors()));
-		assertEquals(simpleModel.length(), parseResult.getRootNode2().getTotalLength());
+		assertEquals(simpleModel.length(), parseResult.getRootNode().getTotalLength());
 		assertNotNull(parseResult.getRootASTElement());
 	}
 

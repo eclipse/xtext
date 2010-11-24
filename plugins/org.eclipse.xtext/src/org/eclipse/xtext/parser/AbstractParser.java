@@ -33,7 +33,7 @@ public abstract class AbstractParser implements IParser {
 
 	public final IParseResult reparse(IParseResult previousResult, ReplaceRegion replaceRegion) {
 		if (!isReparseSupported()) {
-			final StringBuilder builder = new StringBuilder(previousResult.getRootNode2().getText());
+			final StringBuilder builder = new StringBuilder(previousResult.getRootNode().getText());
 			replaceRegion.applyTo(builder);
 			return doParse(builder);
 		}
