@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.util.ReplaceRegion;
@@ -111,7 +111,7 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 			resourceSize = 0;
 		} else {
 			final EObject root = resource.getContents().get(0);
-			resourceSize = NodeUtil.getNodeAdapter(root).getParserNode().getTotalLength();
+			resourceSize = NodeModelUtils.getNode(root).getTotalLength();
 		}
 		recording = true;
 	}

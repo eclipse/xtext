@@ -14,10 +14,9 @@ import org.antlr.runtime.TokenSource;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerBindings;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.ui.codetemplates.templates.TemplateBody;
 import org.eclipse.xtext.ui.codetemplates.templates.Variable;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
@@ -50,7 +49,7 @@ public abstract class AbstractProposalConflictHelper implements IProposalConflic
 
 	public boolean existsConflict(String proposal, ContentAssistContext context) {
 		// hidden node between lastCompleteNode and currentNode?
-		AbstractNode lastCompleteNode = context.getLastCompleteNode();
+		INode lastCompleteNode = context.getLastCompleteNode();
 		Region replaceRegion = context.getReplaceRegion();
 		int nodeEnd = lastCompleteNode.getOffset() + lastCompleteNode.getLength();
 		if (nodeEnd < replaceRegion.getOffset())
@@ -59,8 +58,8 @@ public abstract class AbstractProposalConflictHelper implements IProposalConflic
 		return existsConflict(lastCompleteNode, replaceRegion.getOffset(), proposal, context);
 	}
 
-	public boolean existsConflict(AbstractNode lastCompleteNode, int offset, String proposal, ContentAssistContext context) {
-		String lastCompleteText = lastCompleteNode.serialize();
+	public boolean existsConflict(INode lastCompleteNode, int offset, String proposal, ContentAssistContext context) {
+		String lastCompleteText = lastCompleteNode.getText();
 		lastCompleteText = lastCompleteText.substring(0, offset - lastCompleteNode.getTotalOffset());
 		if (Strings.isEmpty(lastCompleteText))
 			return false;
@@ -101,7 +100,7 @@ public abstract class AbstractProposalConflictHelper implements IProposalConflic
 	}
 
 	protected void initTokenSource(String text, Lexer lexer, ContentAssistContext context) {
-		EObject currentModel = NodeUtil.findASTElement(context.getLastCompleteNode());
+		EObject currentModel = context.getLastCompleteNode().getSemanticElement();
 		Variable variable = currentModel != null ? EcoreUtil2.getContainerOfType(currentModel, Variable.class) : null;
 		TemplateBody body = currentModel != null ? EcoreUtil2.getContainerOfType(currentModel, TemplateBody.class) : null;
 		CharStream stream = new ANTLRStringStream(text);

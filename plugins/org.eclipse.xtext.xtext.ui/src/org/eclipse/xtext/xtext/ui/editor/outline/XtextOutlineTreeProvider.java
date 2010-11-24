@@ -15,8 +15,8 @@ import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 import org.eclipse.xtext.ui.label.StylerFactory;
@@ -88,7 +88,7 @@ public class XtextOutlineTreeProvider extends DefaultOutlineTreeProvider {
 		StyledString text = (StyledString) textDispatcher.invoke(rule);
 		Image image = imageDispatcher.invoke(rule);
 		RuleNode ruleNode = new RuleNode(rule, parentNode, image, text, isLeafDispatcher.invoke(rule));
-		CompositeNode parserNode = NodeUtil.getNode(rule);
+		ICompositeNode parserNode = NodeModelUtils.getNode(rule);
 		if (parserNode != null)
 			ruleNode.setTextRegion(new TextRegion(parserNode.getOffset(), parserNode.getLength()));
 		ruleNode.setShortTextRegion(locationInFileProvider.getSignificantTextRegion(rule));

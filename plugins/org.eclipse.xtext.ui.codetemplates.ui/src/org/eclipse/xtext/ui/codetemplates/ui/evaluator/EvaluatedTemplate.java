@@ -9,8 +9,8 @@ package org.eclipse.xtext.ui.codetemplates.ui.evaluator;
 
 import java.util.List;
 
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.ui.codetemplates.templates.Dollar;
 import org.eclipse.xtext.ui.codetemplates.templates.Literal;
 import org.eclipse.xtext.ui.codetemplates.templates.Codetemplate;
@@ -41,10 +41,10 @@ public class EvaluatedTemplate implements IProjectedContent {
 		mappedOffsetHints = Lists.newArrayList();
 		int lastOffset = 0;
 		for(TemplatePart part: body.getParts()) {
-			CompositeNode node = NodeUtil.getNode(part);
+			ICompositeNode node = NodeModelUtils.getNode(part);
 			mappedOffsetHints.add(Tuples.create(buffer.length(), node.getTotalOffset()));
 			lastOffset = node.getTotalOffset() + node.getTotalLength();
-			original.append(node.serialize());
+			original.append(node.getText());
 			if (part instanceof Literal) {
 				buffer.append(((Literal) part).getValue());
 			} else if (part instanceof Dollar) {

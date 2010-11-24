@@ -22,16 +22,16 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.xtext.UsedRulesFinder;
 
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Sets;
 
 /**
@@ -53,7 +53,7 @@ public class SemanticHighlightingCalculator implements ISemanticHighlightingCalc
 					usedRulesFinder.compute(grammar);
 				}
 			} else if (current instanceof AbstractRule) {
-				AbstractNode node = getFirstFeatureNode(current, XtextPackage.Literals.ABSTRACT_RULE__NAME.getName());
+				INode node = getFirstFeatureNode(current, XtextPackage.Literals.ABSTRACT_RULE__NAME.getName());
 				highlightNode(node, SemanticHighlightingConfiguration.RULE_DECLARATION_ID, acceptor);
 				if (current instanceof ParserRule && GrammarUtil.isDatatypeRule((ParserRule) current)) {
 					highlightNode(node, SemanticHighlightingConfiguration.DATA_TYPE_RULE_ID, acceptor);	
@@ -62,7 +62,7 @@ public class SemanticHighlightingCalculator implements ISemanticHighlightingCalc
 					highlightNode(node, SemanticHighlightingConfiguration.NEVER_CALLED_RULE_ID, acceptor);
 				}
 			} else if (current instanceof TypeRef) {
-				AbstractNode node = getFirstFeatureNode(current, null);
+				INode node = getFirstFeatureNode(current, null);
 				highlightNode(node, SemanticHighlightingConfiguration.TYPE_REFERENCE_ID, acceptor);
 			} else if (current instanceof RuleCall) {
 				RuleCall call = (RuleCall) current;
@@ -71,7 +71,7 @@ public class SemanticHighlightingCalculator implements ISemanticHighlightingCalc
 					EcoreUtil2.getContainerOfType(call, Assignment.class) == null) {
 					ParserRule container = GrammarUtil.containingParserRule(call);
 					if (container != null && !GrammarUtil.isDatatypeRule(container)) {
-						AbstractNode node = getFirstFeatureNode(call, null);
+						INode node = getFirstFeatureNode(call, null);
 						highlightNode(node, SemanticHighlightingConfiguration.UNUSED_VALUE_ID, acceptor);
 					}
 				}
@@ -79,13 +79,15 @@ public class SemanticHighlightingCalculator implements ISemanticHighlightingCalc
 		}
 	}
 	
-	private void highlightNode(AbstractNode node, String id, IHighlightedPositionAcceptor acceptor) {
+	private void highlightNode(INode node, String id, IHighlightedPositionAcceptor acceptor) {
 		if (node == null)
 			return;
-		if (node instanceof LeafNode) {
+		if (node instanceof ILeafNode) {
 			acceptor.addPosition(node.getOffset(), node.getLength(), id);
 		} else {
-			for (LeafNode leaf: node.getLeafNodes()) {
+			Iterator<ILeafNode> leafIter = Iterators.filter(node.treeIterator(), ILeafNode.class);
+			while(leafIter.hasNext()) {
+				ILeafNode leaf = leafIter.next();
 				if (!leaf.isHidden()) {
 					acceptor.addPosition(leaf.getOffset(), leaf.getLength(), id);
 				}
@@ -93,23 +95,29 @@ public class SemanticHighlightingCalculator implements ISemanticHighlightingCalc
 		}
 	}
 
-	public AbstractNode getFirstFeatureNode(EObject semantic, String feature) {
-		NodeAdapter adapter = NodeUtil.getNodeAdapter(semantic);
-		if (adapter != null) {
-			CompositeNode node = adapter.getParserNode();
-			if (node != null) {
-				if (feature == null)
-					return node;
-				for (AbstractNode child: node.getChildren()) {
-					if (child instanceof LeafNode) {
-						if (feature.equals(((LeafNode) child).getFeature())) {
-							return child;
-						}
+	public INode getFirstFeatureNode(EObject semantic, String feature) {
+		ICompositeNode node = NodeModelUtils.getNode(semantic);
+		if (node != null) {
+			if (feature == null)
+				return node;
+			for (INode child: node.getChildren()) {
+				if (child instanceof ILeafNode) {
+					if (feature.equals(getFeatureName((ILeafNode) child))) {
+						return child;
 					}
 				}
 			}
 		}
 		return null;
 	}
-
+	
+	private String getFeatureName(ILeafNode leaf) {
+		EObject grammarElement = leaf.getGrammarElement();
+		while(grammarElement.eClass() == XtextPackage.Literals.RULE_CALL && grammarElement.eClass() == XtextPackage.Literals.ALTERNATIVES) {
+			grammarElement = grammarElement.eContainer();
+		}
+		if (grammarElement.eClass() == XtextPackage.Literals.ASSIGNMENT)
+			return ((Assignment) grammarElement).getFeature();
+		return null;
+	}
 }

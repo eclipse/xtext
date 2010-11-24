@@ -3,6 +3,7 @@
 */
 package org.eclipse.xtext.ui.contentassist;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -51,9 +52,9 @@ import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
@@ -68,6 +69,7 @@ import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConf
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -285,14 +287,16 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 		ContentAssistContext.Builder myContextBuilder = context.copy();
 		myContextBuilder.setMatcher(new ClassifierPrefixMatcher(context.getMatcher(), getQualifiedNameConverter()));
 		if (model instanceof TypeRef) {
-			CompositeNode node = NodeUtil.getNodeAdapter(model).getParserNode();
+			ICompositeNode node = NodeModelUtils.getNode(model);
 			int offset = node.getOffset();
 			Region replaceRegion = new Region(offset, context.getReplaceRegion().getLength()
 					+ context.getReplaceRegion().getOffset() - offset);
 			myContextBuilder.setReplaceRegion(replaceRegion);
 			myContextBuilder.setLastCompleteNode(node);
 			StringBuilder availablePrefix = new StringBuilder(4);
-			for (LeafNode leaf : node.getLeafNodes()) {
+			Iterator<ILeafNode> leafIter = Iterators.filter(node.treeIterator(), ILeafNode.class);
+			while(leafIter.hasNext()) {
+				ILeafNode leaf = leafIter.next();
 				if (leaf.getGrammarElement() != null && !leaf.isHidden()) {
 					if ((leaf.getTotalLength() + leaf.getTotalOffset()) < context.getOffset())
 						availablePrefix.append(leaf.getText());
@@ -402,11 +406,11 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 							if (grammar.getRules().isEmpty()) {
 								offset = document.getLength();
 							} else {
-								CompositeNode node = NodeUtil.getNode(grammar.getRules().get(0));
+								ICompositeNode node = NodeModelUtils.getNode(grammar.getRules().get(0));
 								offset = node.getOffset();
 							}
 						} else {
-							CompositeNode node = NodeUtil.getNode(grammar.getMetamodelDeclarations().get(grammar.getMetamodelDeclarations().size() - 1));
+							ICompositeNode node = NodeModelUtils.getNode(grammar.getMetamodelDeclarations().get(grammar.getMetamodelDeclarations().size() - 1));
 							offset = node.getOffset() + node.getLength();
 						}
 						offset = Math.min(proposal.getReplacementOffset(), offset);

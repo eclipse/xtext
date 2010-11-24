@@ -22,8 +22,8 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.UnorderedGroup;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xtext.ui.graph.figures.BypassSegment;
 import org.eclipse.xtext.xtext.ui.graph.figures.ISegmentFigure;
 import org.eclipse.xtext.xtext.ui.graph.figures.LoopSegment;
@@ -87,7 +87,7 @@ public class Xtext2RailroadFactory {
 	}
 
 	protected Region getTextRegion(EObject eObject) {
-		CompositeNode parseTreeNode = NodeUtil.getNode(eObject);
+		ICompositeNode parseTreeNode = NodeModelUtils.getNode(eObject);
 		if (parseTreeNode != null)
 			return new Region(parseTreeNode.getOffset(), parseTreeNode.getLength());
 		else

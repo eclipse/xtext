@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 
@@ -80,13 +80,13 @@ public class ContentAssistContext {
 			return this;
 		}
 
-		public Builder setRootNode(CompositeNode rootNode) {
+		public Builder setRootNode(ICompositeNode rootNode) {
 			assertCanModify();
 			context.rootNode = rootNode;
 			return this;
 		}
 		
-		public Builder setCurrentNode(AbstractNode currentNode) {
+		public Builder setCurrentNode(INode currentNode) {
 			assertCanModify();
 			context.currentNode = currentNode;
 			context.replaceContextLength = null;
@@ -113,7 +113,7 @@ public class ContentAssistContext {
 			context.mutableFirstSetGrammarElements.add(element);
 		}
 
-		public Builder setLastCompleteNode(AbstractNode lastCompleteNode) {
+		public Builder setLastCompleteNode(INode lastCompleteNode) {
 			assertCanModify();
 			context.lastCompleteNode = lastCompleteNode;
 			return this;
@@ -178,11 +178,11 @@ public class ContentAssistContext {
 	private String prefix;
 	private String selectedText;
 	private EObject rootModel;
-	private CompositeNode rootNode;
+	private ICompositeNode rootNode;
 	private EObject currentModel;
 	private EObject previousModel;
-	private AbstractNode currentNode;
-	private AbstractNode lastCompleteNode;
+	private INode currentNode;
+	private INode lastCompleteNode;
 	private int offset;
 	private XtextResource resource;
 	private ITextViewer viewer;
@@ -232,7 +232,7 @@ public class ContentAssistContext {
 	/**
 	 * The root node in the resource. May be <code>null</code>.
 	 */
-	public CompositeNode getRootNode() {
+	public ICompositeNode getRootNode() {
 		return rootNode;
 	}
 	
@@ -240,7 +240,7 @@ public class ContentAssistContext {
 	 * The current node which is part of the current completion offset. The total offset of the 
 	 * current node may be equal to the completion offset.  
 	 */
-	public AbstractNode getCurrentNode() {
+	public INode getCurrentNode() {
 		return currentNode;
 	}
 
@@ -269,7 +269,7 @@ public class ContentAssistContext {
 	/**
 	 * The last non-hidden node before the offset that is considered to be complete.
 	 */
-	public AbstractNode getLastCompleteNode() {
+	public INode getLastCompleteNode() {
 		return lastCompleteNode;
 	}
 

@@ -18,8 +18,8 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Evaluation;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Module;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Statement;
 import org.eclipse.xtext.example.arithmetics.interpreter.Calculator;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -76,8 +76,7 @@ public class InterpreterAutoEdit implements IAutoEditStrategy {
 		Module m = (Module) state.getContents().get(0);
 		for (Statement stmt : m.getStatements()) {
 			if (stmt instanceof Evaluation) {
-				CompositeNode node = NodeUtil.getNodeAdapter(stmt)
-						.getParserNode();
+				ICompositeNode node = NodeModelUtils.getNode(stmt);
 				if (node.getOffset() <= command.offset
 						&& (node.getOffset() + node.getLength()) >= command.offset) {
 					return (Evaluation) stmt;

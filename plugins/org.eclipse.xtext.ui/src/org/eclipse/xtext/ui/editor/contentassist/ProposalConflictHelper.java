@@ -8,7 +8,7 @@
 package org.eclipse.xtext.ui.editor.contentassist;
 
 import org.eclipse.jface.text.Region;
-import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -18,7 +18,7 @@ public abstract class ProposalConflictHelper implements IProposalConflictHelper 
 	
 	public boolean existsConflict(String proposal, ContentAssistContext context) {
 		// hidden node between lastCompleteNode and currentNode?
-		AbstractNode lastCompleteNode = context.getLastCompleteNode();
+		INode lastCompleteNode = context.getLastCompleteNode();
 		Region replaceRegion = context.getReplaceRegion();
 		int nodeEnd = lastCompleteNode.getOffset() + lastCompleteNode.getLength();
 		if (nodeEnd < replaceRegion.getOffset())
@@ -29,8 +29,8 @@ public abstract class ProposalConflictHelper implements IProposalConflictHelper 
 	
 	public abstract boolean existsConflict(String lastCompleteText, String proposal);
 
-	public boolean existsConflict(AbstractNode lastCompleteNode, int offset, String proposal) {
-		String lastCompleteText = lastCompleteNode.serialize();
+	public boolean existsConflict(INode lastCompleteNode, int offset, String proposal) {
+		String lastCompleteText = lastCompleteNode.getText();
 		lastCompleteText = lastCompleteText.substring(0, offset - lastCompleteNode.getTotalOffset());
 		if (Strings.isEmpty(lastCompleteText))
 			return false;

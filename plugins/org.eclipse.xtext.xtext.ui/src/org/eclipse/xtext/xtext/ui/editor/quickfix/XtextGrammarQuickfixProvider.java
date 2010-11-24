@@ -18,8 +18,8 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextFactory;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
@@ -59,7 +59,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 				new ISemanticModification() {
 					public void apply(final EObject element, IModificationContext context) throws BadLocationException {
 						AbstractRule abstractRule = EcoreUtil2.getContainerOfType(element, ParserRule.class);
-						CompositeNode node = NodeUtil.getNode(abstractRule);
+						ICompositeNode node = NodeModelUtils.getNode(abstractRule);
 						int offset = node.getOffset() + node.getLength();
 						StringBuilder builder = new StringBuilder("\n\n");
 						if (abstractRule instanceof TerminalRule)

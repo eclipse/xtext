@@ -12,7 +12,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Position;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.folding.DefaultFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegion;
@@ -32,7 +32,7 @@ public class XtextGrammarFoldingRegionProvider extends DefaultFoldingRegionProvi
 			return result;
 		EList<EObject> contents = xtextResource.getContents().get(0).eContents();
 		for (EObject eObject : contents) {
-			Position position = getPosition(xtextDocument, NodeUtil.getNodeAdapter(eObject).getParserNode());
+			Position position = getPosition(xtextDocument, NodeModelUtils.getNode(eObject));
 			if (position != null) {
 				result.addAll(createFoldingRegions(eObject, position));
 			}

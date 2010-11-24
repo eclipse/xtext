@@ -22,8 +22,8 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer;
 import org.eclipse.xtext.util.StringInputStream;
@@ -162,7 +162,7 @@ public class DefaultTextEditComposerTest extends AbstractXtextTests {
 
 	private void assertMatches(EObject obj, TextEdit edit) {
 		assertTrue(edit instanceof ReplaceEdit);
-		AbstractNode node = NodeUtil.getNodeAdapter(obj).getParserNode();
+		INode node = NodeModelUtils.getNode(obj);
 		assertEquals(node.getOffset(), ((ReplaceEdit) edit).getOffset());
 		assertEqualsIgnoringWhitespace(getSerializer().serialize(obj, SaveOptions.defaultOptions()), ((ReplaceEdit) edit).getText());
 	}

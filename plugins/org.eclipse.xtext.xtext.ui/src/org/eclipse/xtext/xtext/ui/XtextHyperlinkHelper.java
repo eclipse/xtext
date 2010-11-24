@@ -22,7 +22,7 @@ import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -57,7 +57,7 @@ public class XtextHyperlinkHelper extends HyperlinkHelper {
 			if (nameLocation != null && nameLocation.contains(offset)) {
 				AbstractRule rule = (AbstractRule) objectAtOffset;
 				createLinksToBase(nameLocation, rule, acceptor);
-				if (rule.getType() != null && rule.getType().getClassifier() != null && NodeUtil.getNode(rule.getType()) == null) {
+				if (rule.getType() != null && rule.getType().getClassifier() != null && NodeModelUtils.getNode(rule.getType()) == null) {
 					createHyperlinksTo(resource, toRegion(nameLocation), rule.getType().getClassifier(), acceptor);
 				}
 			}

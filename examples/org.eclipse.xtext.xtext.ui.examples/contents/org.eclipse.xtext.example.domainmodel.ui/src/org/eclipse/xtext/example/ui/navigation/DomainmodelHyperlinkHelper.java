@@ -20,8 +20,8 @@ import org.eclipse.xtext.example.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.example.domainmodel.Entity;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -56,9 +56,9 @@ public class DomainmodelHyperlinkHelper extends HyperlinkHelper {
 		super.createHyperlinksByOffset(resource, offset, acceptor);
 		EObject eObject = eObjectAtOffsetHelper.resolveElementAt(resource, offset);
 		if (eObject instanceof Entity) {
-			List<AbstractNode> nodes = NodeUtil.findNodesForFeature(eObject, DomainmodelPackage.Literals.TYPE__NAME);
+			List<INode> nodes = NodeModelUtils.findNodesForFeature(eObject, DomainmodelPackage.Literals.TYPE__NAME);
 			if (!nodes.isEmpty()) {
-				AbstractNode node = nodes.get(0);
+				INode node = nodes.get(0);
 				if (node.getOffset() <= offset && node.getOffset() + node.getLength() > offset) {
 					String qualifiedJavaName = qualifiedNameConverter.toString(qualifiedNameProvider.getFullyQualifiedName(eObject));
 					if (resource.getResourceSet() instanceof XtextResourceSet) {
