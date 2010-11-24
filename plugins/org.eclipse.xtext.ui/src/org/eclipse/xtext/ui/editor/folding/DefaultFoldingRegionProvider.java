@@ -18,9 +18,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.viewers.StyledString;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -57,7 +56,7 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 
 	protected void addFoldingRegions(IXtextDocument xtextDocument, EObject eObject, List<IFoldingRegion> foldingRegions) {
 		Assert.isNotNull(eObject, "parameter 'eObject' must not be null");
-		CompositeNode compositeNode = getCompositeNode(eObject);
+		ICompositeNode compositeNode = getCompositeNode(eObject);
 		if (compositeNode != null) {
 			Position position = getPosition(xtextDocument, compositeNode);
 			if (position != null) {
@@ -73,12 +72,12 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 		}
 	}
 
-	protected CompositeNode getCompositeNode(EObject eObject) {
-		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(eObject);
-		return nodeAdapter != null ? nodeAdapter.getParserNode() : null;
+	protected ICompositeNode getCompositeNode(EObject eObject) {
+		ICompositeNode result = NodeModelUtils.getNode(eObject);
+		return result;
 	}
 
-	protected Position getPosition(IXtextDocument xtextDocument, CompositeNode compositeNode) {
+	protected Position getPosition(IXtextDocument xtextDocument, ICompositeNode compositeNode) {
 		Assert.isNotNull(compositeNode, "parameter 'compositeNode' must not be null");
 		Position position = null;
 		try {

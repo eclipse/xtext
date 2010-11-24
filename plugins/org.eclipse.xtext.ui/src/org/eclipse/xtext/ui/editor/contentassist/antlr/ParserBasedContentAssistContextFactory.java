@@ -38,14 +38,11 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextFactory;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.ParseTreeUtil;
-import org.eclipse.xtext.parsetree.util.ParsetreeSwitch;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.contentassist.AbstractContentAssistContextFactory;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
@@ -95,13 +92,13 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 
 		private XtextResource resource;
 
-		private CompositeNode rootNode;
+		private ICompositeNode rootNode;
 
-		private AbstractNode lastCompleteNode;
+		private INode lastCompleteNode;
 
-		private AbstractNode currentNode;
+		private INode currentNode;
 
-		private AbstractNode lastVisibleNode;
+		private INode lastVisibleNode;
 
 		private EObject currentModel;
 
@@ -109,7 +106,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 
 		private IParseResult parseResult;
 
-		private AbstractNode datatypeNode;
+		private INode datatypeNode;
 
 		private int completionOffset;
 
@@ -143,7 +140,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			}
 
 			// 4th context: we assume, that the current position is perfectly ok to insert a new token, if the previous one was valid
-			if (!(lastCompleteNode instanceof LeafNode) || lastCompleteNode.getGrammarElement() != null) {
+			if (!(lastCompleteNode instanceof ILeafNode) || lastCompleteNode.getGrammarElement() != null) {
 				handleLastCompleteNodeIsPartOfLookahead();
 			}
 			return Lists.transform(contextBuilders, this).toArray(new ContentAssistContext[contextBuilders.size()]);
@@ -156,16 +153,16 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		}
 
 		protected void initializeNodeAndModelData() {
-			rootNode = parseResult.deprecatedGetRootNode();
-			lastCompleteNode = new LeafNodeFinder(completionOffset, true).doSwitch(rootNode);
+			rootNode = parseResult.getRootNode2();
+			lastCompleteNode = new LeafNodeFinder(completionOffset, true).searchIn(rootNode);
 			if (lastCompleteNode == null)
 				lastCompleteNode = rootNode;
-			currentNode = new LeafNodeFinder(completionOffset, false).doSwitch(rootNode);
+			currentNode = new LeafNodeFinder(completionOffset, false).searchIn(rootNode);
 			if (currentNode == null)
 				currentNode = lastCompleteNode;
-			lastVisibleNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, completionOffset);
+			lastVisibleNode = NodeModelUtils.getLastCompleteNodeByOffset(rootNode, completionOffset);
 			datatypeNode = getContainingDatatypeRuleNode(lastCompleteNode);
-			currentModel = NodeUtil.getNearestSemanticObject(lastVisibleNode);
+			currentModel = lastVisibleNode.getSemanticElement();
 		}
 
 		protected void initializeAndAdjustCompletionOffset(int offset) {
@@ -177,7 +174,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 
 		protected void handleLastCompleteNodeIsPartOfLookahead() throws BadLocationException {
 			// do not calculate twice for the same input
-			if (!(lastCompleteNode instanceof LeafNode && ((LeafNode) lastCompleteNode).isHidden())) {
+			if (!(lastCompleteNode instanceof ILeafNode && ((ILeafNode) lastCompleteNode).isHidden())) {
 				createContextsForLastCompleteNode(currentModel);
 			}
 		}
@@ -185,14 +182,14 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		protected void handleLastCompleteNodeIsAtEndOfDatatypeNode() throws BadLocationException {
 			String prefix = getPrefix(lastCompleteNode);
 			String completeInput = viewer.getDocument().get(0, lastCompleteNode.getOffset());
-			AbstractNode previousNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, lastCompleteNode.getOffset());
-			EObject previousModel = NodeUtil.getNearestSemanticObject(previousNode);
-			AbstractNode currentDatatypeNode = getContainingDatatypeRuleNode(currentNode);
+			INode previousNode = NodeModelUtils.getLastCompleteNodeByOffset(rootNode, lastCompleteNode.getOffset());
+			EObject previousModel = previousNode.getSemanticElement();
+			INode currentDatatypeNode = getContainingDatatypeRuleNode(currentNode);
 			Collection<FollowElement> followElements = parser.getFollowElements(completeInput);
 			int prevSize = contextBuilders.size();
 			doCreateContexts(previousNode, currentDatatypeNode, prefix, previousModel, followElements);
 			
-			if (lastCompleteNode instanceof LeafNode && lastCompleteNode.getGrammarElement() == null && contextBuilders.size() != prevSize) {
+			if (lastCompleteNode instanceof ILeafNode && lastCompleteNode.getGrammarElement() == null && contextBuilders.size() != prevSize) {
 				handleLastCompleteNodeHasNoGrammarElement(contextBuilders.subList(prevSize, contextBuilders.size()), previousModel);
 			}
 		}
@@ -200,7 +197,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		protected void handleLastCompleteNodeHasNoGrammarElement(List<Builder> contextBuilderToCheck, EObject previousModel) throws BadLocationException {
 			List<ContentAssistContext> newContexts = Lists.transform(contextBuilderToCheck, this);
 			boolean wasValid = isLikelyToBeValidProposal(lastCompleteNode, newContexts);
-			if (wasValid && !(lastCompleteNode instanceof LeafNode && ((LeafNode) lastCompleteNode).isHidden())) {
+			if (wasValid && !(lastCompleteNode instanceof ILeafNode && ((ILeafNode) lastCompleteNode).isHidden())) {
 				createContextsForLastCompleteNode(previousModel);
 			}
 		}
@@ -209,16 +206,16 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			String prefix = getPrefix(datatypeNode);
 			String completeInput = viewer.getDocument().get(0, datatypeNode.getOffset());
 			Collection<FollowElement> followElements = parser.getFollowElements(completeInput);
-			AbstractNode lastCompleteNodeBeforeDatatype = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, datatypeNode.getTotalOffset());
+			INode lastCompleteNodeBeforeDatatype = NodeModelUtils.getLastCompleteNodeByOffset(rootNode, datatypeNode.getTotalOffset());
 			doCreateContexts(lastCompleteNodeBeforeDatatype, datatypeNode, prefix, currentModel, followElements);
 		}
 		
-		protected boolean isLikelyToBeValidProposal(AbstractNode lastCompleteNode, Iterable<ContentAssistContext> contexts) {
+		protected boolean isLikelyToBeValidProposal(INode lastCompleteNode, Iterable<ContentAssistContext> contexts) {
 			for(ContentAssistContext context: contexts) {
 				for (AbstractElement element: context.getFirstSetGrammarElements()) {
 					if (element instanceof Keyword) {
 						String keywordValue = ((Keyword) element).getValue();
-						String lastText = ((LeafNode) lastCompleteNode).getText();
+						String lastText = ((ILeafNode) lastCompleteNode).getText();
 						if (keywordValue.equals(lastText)) 
 							return true;
 					}
@@ -235,7 +232,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		}
 
 		protected void doCreateContexts(
-				AbstractNode lastCompleteNode, AbstractNode currentNode,
+				INode lastCompleteNode, INode currentNode,
 				String prefix, EObject previousModel, 
 				Collection<FollowElement> followElements) {
 			Set<AbstractElement> followElementAsAbstractElements = Sets.newLinkedHashSet();
@@ -251,21 +248,20 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			}
 		}
 
-		protected Multimap<EObject, AbstractElement> computeCurrentModel(EObject currentModel, AbstractNode lastCompleteNode,
+		protected Multimap<EObject, AbstractElement> computeCurrentModel(EObject currentModel, INode lastCompleteNode,
 				Collection<AbstractElement> followElements) {
 			Multimap<EObject, AbstractElement> result = LinkedHashMultimap.create();
-			NodeAdapter adapter = NodeUtil.getNodeAdapter(currentModel);
-			if (adapter == null || adapter.getParserNode() == null) {
+			ICompositeNode currentParserNode = NodeModelUtils.getNode(currentModel);
+			if (currentParserNode == null) {
 				result.putAll(currentModel, followElements);
 				return result;
 			}
-			CompositeNode currentParserNode = adapter.getParserNode();
 			EObject currentGrammarElement = currentParserNode.getGrammarElement();
 			AbstractRule currentRule = getRule(currentGrammarElement);
 			for (AbstractElement grammarElement : followElements) {
 				EObject loopGrammarElement = currentGrammarElement;
 				AbstractRule rule = currentRule;
-				CompositeNode loopParserNode = currentParserNode;
+				ICompositeNode loopParserNode = currentParserNode;
 				EObject loopLastGrammarElement = lastCompleteNode.getGrammarElement();
 				while (!canBeCalledAfter(rule, loopLastGrammarElement, grammarElement) && loopParserNode.getParent() != null) {
 					loopLastGrammarElement = loopParserNode.getGrammarElement();
@@ -275,7 +271,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 					loopGrammarElement = loopParserNode.getGrammarElement();
 					rule = getRule(loopGrammarElement);
 				}
-				EObject context = NodeUtil.getNearestSemanticObject(loopParserNode);
+				EObject context = loopParserNode.getSemanticElement();
 				result.put(context, grammarElement);
 			}
 			return result;
@@ -337,8 +333,8 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			}
 		}
 
-		public AbstractNode getContainingDatatypeRuleNode(AbstractNode node) {
-			AbstractNode result = node;
+		public INode getContainingDatatypeRuleNode(INode node) {
+			INode result = node;
 			EObject grammarElement = result.getGrammarElement();
 			if (grammarElement != null) {
 				ParserRule parserRule = GrammarUtil.containingParserRule(grammarElement);
@@ -352,9 +348,9 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		}
 
 		public ContentAssistContext.Builder doCreateContext(
-				AbstractNode lastCompleteNode, 
+				INode lastCompleteNode, 
 				EObject currentModel, EObject previousModel,
-				AbstractNode currentNode, String prefix) {
+				INode currentNode, String prefix) {
 			ContentAssistContext.Builder context = contentAssistContextProvider.get();
 
 			context.setRootNode(rootNode);
@@ -378,42 +374,42 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			return context;
 		}
 
-		public String getPrefix(AbstractNode prefixNode) {
-			if (prefixNode instanceof LeafNode) {
-				if (((LeafNode) prefixNode).isHidden() && prefixNode.getGrammarElement() != null)
+		public String getPrefix(INode prefixNode) {
+			if (prefixNode instanceof ILeafNode) {
+				if (((ILeafNode) prefixNode).isHidden() && prefixNode.getGrammarElement() != null)
 					return "";
 				return getNodeTextUpToCompletionOffset(prefixNode);
 			}
 			StringBuilder result = new StringBuilder(prefixNode.getTotalLength());
-			doComputePrefix((CompositeNode) prefixNode, result);
+			doComputePrefix((ICompositeNode) prefixNode, result);
 			return result.toString();
 		}
 
-		public String getNodeTextUpToCompletionOffset(AbstractNode currentNode) {
+		public String getNodeTextUpToCompletionOffset(INode currentNode) {
 			int startOffset = currentNode.getOffset();
-			String text = ((LeafNode) currentNode).getText();
+			String text = ((ILeafNode) currentNode).getText();
 			int length = completionOffset - startOffset;
 			String result = length > text.length() ? text : text.substring(0, length);
 			return result;
 		}
 
-		public boolean doComputePrefix(CompositeNode node, StringBuilder result) {
-			List<LeafNode> hiddens = new ArrayList<LeafNode>(2);
-			for (AbstractNode child : node.getChildren()) {
-				if (child instanceof CompositeNode) {
-					if (!doComputePrefix((CompositeNode) child, result))
+		public boolean doComputePrefix(ICompositeNode node, StringBuilder result) {
+			List<ILeafNode> hiddens = new ArrayList<ILeafNode>(2);
+			for (INode child : node.getChildren()) {
+				if (child instanceof ICompositeNode) {
+					if (!doComputePrefix((ICompositeNode) child, result))
 						return false;
 				}
 				else {
-					LeafNode leaf = (LeafNode) child;
+					ILeafNode leaf = (ILeafNode) child;
 					if (leaf.getOffset() > completionOffset)
 						return false;
 					if (leaf.isHidden()) {
 						if (result.length() != 0)
-							hiddens.add((LeafNode) child);
+							hiddens.add((ILeafNode) child);
 					}
 					else {
-						Iterator<LeafNode> iter = hiddens.iterator();
+						Iterator<ILeafNode> iter = hiddens.iterator();
 						while (iter.hasNext()) {
 							result.append(iter.next().getText());
 						}
@@ -467,7 +463,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		}
 	}
 
-	public static class LeafNodeFinder extends ParsetreeSwitch<LeafNode> {
+	public static class LeafNodeFinder {
 		private final int offset;
 		private final boolean leading;
 		
@@ -476,20 +472,27 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			this.leading = leading;
 		}
 		
-		@Override
-		public LeafNode caseCompositeNode(CompositeNode object) {
+		public ILeafNode searchIn(INode node) {
+			if (node instanceof ICompositeNode) {
+				return caseCompositeNode((ICompositeNode) node);
+			} else {
+				return caseLeafNode((ILeafNode) node);
+			}
+		}
+		
+		public ILeafNode caseCompositeNode(ICompositeNode object) {
 			if (leading) {
 				if (object.getTotalOffset() < offset && object.getTotalLength() + object.getTotalOffset() >= offset) {
-					for (AbstractNode node: object.getChildren()) {
-						LeafNode result = doSwitch(node);
+					for (INode node: object.getChildren()) {
+						ILeafNode result = searchIn(node);
 						if (result != null)
 							return result;
 					}
 				}
 			} else {
 				if (object.getTotalOffset() <= offset && object.getTotalLength() + object.getTotalOffset() > offset) {
-					for (AbstractNode node: object.getChildren()) {
-						LeafNode result = doSwitch(node);
+					for (INode node: object.getChildren()) {
+						ILeafNode result = searchIn(node);
 						if (result != null)
 							return result;
 					}
@@ -498,8 +501,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			return null;
 		}
 		
-		@Override
-		public LeafNode caseLeafNode(LeafNode object) {
+		public ILeafNode caseLeafNode(ILeafNode object) {
 			if (leading) {
 				if (object.getTotalOffset() < offset && object.getTotalLength() + object.getTotalOffset() >= offset)
 					return object;

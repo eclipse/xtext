@@ -37,8 +37,8 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.search.ui.text.Match;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IReferenceDescription;
@@ -178,16 +178,16 @@ public class QueryParticipant implements IQueryParticipant {
 		}
 
 		protected ITextRegion getLocation(EObject sourceEObject, EReference eReference, int indexInList) {
-			List<AbstractNode> result = NodeUtil.findNodesForFeature(sourceEObject, eReference);
+			List<INode> result = NodeModelUtils.findNodesForFeature(sourceEObject, eReference);
 			if (result.isEmpty())
 				return ITextRegion.EMPTY_REGION;
 			if (result.size() == 1) {
-				AbstractNode node = result.get(0);
+				INode node = result.get(0);
 				return new TextRegion(node.getOffset(), node.getLength());
 			}
 			if (indexInList == -1 || indexInList > result.size())
 				return ITextRegion.EMPTY_REGION;
-			AbstractNode node = result.get(indexInList);
+			INode node = result.get(indexInList);
 			return new TextRegion(node.getOffset(), node.getLength());
 		}
 		

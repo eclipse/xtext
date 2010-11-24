@@ -34,8 +34,8 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.access.impl.ClassFinder;
 import org.eclipse.xtext.common.types.util.JavaReflectAccess;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
@@ -246,11 +246,11 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	
 	public IEvaluationResult _evaluateTypeLiteral(XTypeLiteral literal, IEvaluationContext context) {
 		if (literal.getType() == null || literal.getType().eIsProxy()) {
-			List<AbstractNode> nodesForFeature = NodeUtil.findNodesForFeature(literal, XbasePackage.Literals.XTYPE_LITERAL__TYPE);
+			List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(literal, XbasePackage.Literals.XTYPE_LITERAL__TYPE);
 			// TODO cleanup
 			if (nodesForFeature.isEmpty())
 				return new DefaultEvaluationResult(null, new ClassNotFoundException());
-			return new DefaultEvaluationResult(null, new ClassNotFoundException(nodesForFeature.get(0).serialize()));
+			return new DefaultEvaluationResult(null, new ClassNotFoundException(nodesForFeature.get(0).getText()));
 		}
 		try {
 			Class<?> result = classFinder.forName(literal.getType().getCanonicalName());

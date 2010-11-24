@@ -17,8 +17,8 @@ import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelP
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
@@ -113,7 +113,7 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 		Image image = imageDispatcher.invoke(modelElement);
 		EObjectNode eObjectNode = new EObjectNode(modelElement, parentNode, image, text,
 				isLeafDispatcher.invoke(modelElement));
-		CompositeNode parserNode = NodeUtil.getNode(modelElement);
+		ICompositeNode parserNode = NodeModelUtils.getNode(modelElement);
 		if (parserNode != null)
 			eObjectNode.setTextRegion(new TextRegion(parserNode.getOffset(), parserNode.getLength()));
 		eObjectNode.setShortTextRegion(locationInFileProvider.getSignificantTextRegion(modelElement));

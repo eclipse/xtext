@@ -6,6 +6,8 @@ import static org.eclipse.xtext.example.css.ui.highlighting.HighlightingConfigur
 import static org.eclipse.xtext.example.css.ui.highlighting.HighlightingConfiguration.RGB_LITERAL;
 import static org.eclipse.xtext.example.css.ui.highlighting.HighlightingConfiguration.COLOR_CONSTANT;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.example.css.xcss.ColorConstant;
 import org.eclipse.xtext.example.css.xcss.ColorLiteral;
@@ -17,15 +19,17 @@ import org.eclipse.xtext.example.css.xcss.StyleRule;
 import org.eclipse.xtext.example.css.xcss.StyleSheet;
 import org.eclipse.xtext.example.css.xcss.TypeSelector;
 import org.eclipse.xtext.example.css.xcss.util.XcssSwitch;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.util.XbaseSwitch;
+
+import com.google.common.collect.Iterators;
 
 public class HighlightingCalculator implements ISemanticHighlightingCalculator {
 
@@ -42,7 +46,7 @@ public class HighlightingCalculator implements ISemanticHighlightingCalculator {
 		@Override
 		public Boolean caseXAssignment(XAssignment object) {
 			if (object.eContainer() instanceof StyleRule) {
-				highlightNode(NodeUtil.getNode(object.getAssignable()), ATTRIBUTE_ID, acceptor);
+				highlightNode(NodeModelUtils.getNode(object.getAssignable()), ATTRIBUTE_ID, acceptor);
 			}
 			delegate.doSwitch(object.getValue());
 			return true;
@@ -80,13 +84,13 @@ public class HighlightingCalculator implements ISemanticHighlightingCalculator {
 
 		@Override
 		public Boolean caseRGB(RGB object) {
-			highlightNode(NodeUtil.getNode(object), RGB_LITERAL, acceptor);
+			highlightNode(NodeModelUtils.getNode(object), RGB_LITERAL, acceptor);
 			return true;
 		}
 		
 		@Override
 		public Boolean caseColorConstant(ColorConstant object) {
-			highlightNode(NodeUtil.getNode(object), COLOR_CONSTANT, acceptor);
+			highlightNode(NodeModelUtils.getNode(object), COLOR_CONSTANT, acceptor);
 			return true;
 		}
 		
@@ -100,13 +104,13 @@ public class HighlightingCalculator implements ISemanticHighlightingCalculator {
 		
 		@Override
 		public Boolean caseTypeSelector(TypeSelector object) {
-			highlightNode(NodeUtil.getNode(object), CLASS_SELECTOR, acceptor);
+			highlightNode(NodeModelUtils.getNode(object), CLASS_SELECTOR, acceptor);
 			return true;
 		}
 		
 		@Override
 		public Boolean caseIdSelector(IdSelector object) {
-			highlightNode(NodeUtil.getNode(object), ID_SELECTOR, acceptor);
+			highlightNode(NodeModelUtils.getNode(object), ID_SELECTOR, acceptor);
 			return true;
 		}
 		
@@ -141,13 +145,15 @@ public class HighlightingCalculator implements ISemanticHighlightingCalculator {
 		new HighlightingSwitch(acceptor).doSwitch(styleSheet);
 	}
 	
-	protected void highlightNode(AbstractNode node, String id, IHighlightedPositionAcceptor acceptor) {
+	protected void highlightNode(INode node, String id, IHighlightedPositionAcceptor acceptor) {
 		if (node == null)
 			return;
-		if (node instanceof LeafNode) {
+		if (node instanceof ILeafNode) {
 			acceptor.addPosition(node.getOffset(), node.getLength(), id);
 		} else {
-			for (LeafNode leaf : node.getLeafNodes()) {
+			Iterator<ILeafNode> iterator = Iterators.filter(node.treeIterator(), ILeafNode.class);
+			while(iterator.hasNext()) {
+				ILeafNode leaf = iterator.next();
 				if (!leaf.isHidden()) {
 					acceptor.addPosition(leaf.getOffset(), leaf.getLength(), id);
 				}

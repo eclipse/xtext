@@ -17,9 +17,10 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
@@ -57,15 +58,15 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
 
-	private CrossReference findCrossReference(EObject context, AbstractNode node) {
-		if (node == null || context.equals(node.getElement()))
+	private CrossReference findCrossReference(EObject context, INode node) {
+		if (node == null || (node.hasDirectSemanticElement() && context.equals(node.getSemanticElement())))
 			return null;
 
 		EObject grammarElement = node.getGrammarElement();
 		if (grammarElement instanceof CrossReference) {
 			return (CrossReference) grammarElement;
 		} else
-			return findCrossReference(context, (AbstractNode) node.eContainer());
+			return findCrossReference(context, node.getParent());
 	}
 
 	public List<IssueResolution> getResolutionsForLinkingIssue(final Issue issue) {
@@ -123,8 +124,8 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 	}
 
 	protected EReference getUnresolvedEReference(final Issue issue, EObject target) {
-		CompositeNode rootNode = NodeUtil.getRootNode(target);
-		AbstractNode leaf = NodeUtil.findLeafNodeAtOffset(rootNode, issue.getOffset() + 1);
+		ICompositeNode rootNode = NodeModelUtils.getNode(target).getRootNode();
+		ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(rootNode, issue.getOffset() + 1);
 		CrossReference crossReference = findCrossReference(target, leaf);
 		if (crossReference != null) {
 			return  GrammarUtil.getReference(crossReference);
