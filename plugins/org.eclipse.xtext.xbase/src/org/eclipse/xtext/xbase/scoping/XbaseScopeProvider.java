@@ -49,7 +49,6 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.scoping.newapi.CompositeScope;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -147,6 +146,9 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		}
 	};
 
+	/**
+	 * TODO USe {@link JvmFeatureDescription} and {@link JvmFeatureScope}
+	 */
 	protected IScope createAssignmentFeatureScope(XAssignment context) {
 		XExpression assignable = context.getAssignable();
 		List<IEObjectDescription> descriptions = Lists.newArrayList();
@@ -340,7 +342,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 						return createJvmFeatureDescription(from, context, from.getSimpleName());
 					}
 				});
-		return new SimpleScope(parent, descriptions);
+		return new JvmFeatureScope(parent, descriptions);
 	}
 
 	protected IScope createScopeForMethods(JvmDeclaredType declType, IScope parent,
@@ -362,7 +364,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 				});
 		final IScope sugarScope = getSugarScope(descriptions, declType, parent,
 				context);
-		return new SimpleScope(sugarScope, descriptions);
+		return new JvmFeatureScope(sugarScope, descriptions);
 	}
 
 	protected IScope getSugarScope(Iterable<IEObjectDescription> operations, JvmDeclaredType declType,
@@ -381,7 +383,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			addSugaredDescriptions(jvmFeatureDescription, context, acceptor);
 		}
 
-		return sugar.isEmpty() ? parent : new SimpleScope(parent, sugar);
+		return sugar.isEmpty() ? parent : new JvmFeatureScope(parent, sugar);
 	}
 
 	protected IEObjectDescription createEObjectDescription(JvmFormalParameter p) {
@@ -413,7 +415,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 					QualifiedName operator = operatorMapping.getOperator(QualifiedName.create(op.getSimpleName()));
 					if (operator != null) {
 						acceptor.accept(createJvmFeatureDescription(operator, op, context,
-								operator + description.getKey().toString()));
+								operator + description.getName().toString()));
 					}
 				}
 				if (op.getParameters().isEmpty()) {

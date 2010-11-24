@@ -34,12 +34,12 @@ public class ImportNormalizerTest extends TestCase {
 		ImportNormalizer importNormalizer = new ImportNormalizer(namespace, false);
 		assertEquals(namespace, importNormalizer.resolve(xtextRelativeName));
 		assertEquals(null, importNormalizer.resolve(ytextRelativeName));
-		assertEquals(namespace.append(ytextRelativeName), importNormalizer.resolve(xytextRelativeName));
+		assertEquals(null, importNormalizer.resolve(xytextRelativeName));
 		
 		ImportNormalizer wildCardImportNormalizer = new ImportNormalizer(namespace, true);
 		assertEquals(namespace.append(xtextRelativeName), wildCardImportNormalizer.resolve(xtextRelativeName));
 		assertEquals(namespace.append(ytextRelativeName), wildCardImportNormalizer.resolve(ytextRelativeName));
-		assertEquals(namespace.append(ytextRelativeName), importNormalizer.resolve(xytextRelativeName));
+		assertEquals(namespace.append(xytextRelativeName), wildCardImportNormalizer.resolve(xytextRelativeName));
 
 		ImportNormalizer xtextImportNormalizer = new ImportNormalizer(xtextRelativeName, false);
 		assertEquals(xtextRelativeName, xtextImportNormalizer.resolve(xtextRelativeName));

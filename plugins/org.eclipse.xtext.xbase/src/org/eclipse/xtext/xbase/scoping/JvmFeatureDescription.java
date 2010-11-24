@@ -36,7 +36,6 @@ public class JvmFeatureDescription extends EObjectDescription {
 		return context;
 	}
 	
-	@Override
 	public String getKey() {
 		return shadowingString;
 	}
