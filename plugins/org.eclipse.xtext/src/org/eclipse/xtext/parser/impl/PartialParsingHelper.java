@@ -66,10 +66,10 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 	public IParseResult reparse(IParser parser, IParseResult previousParseResult, ReplaceRegion replaceRegion) {
 		if (parser == null)
 			throw new NullPointerException("parser may not be null");
-		if (previousParseResult == null || previousParseResult.getRootNode2() == null) {
+		if (previousParseResult == null || previousParseResult.getRootNode() == null) {
 			throw new NullPointerException("previousParseResult and previousParseResult.rootNode may not be null");
 		}
-		ICompositeNode oldRootNode = previousParseResult.getRootNode2();
+		ICompositeNode oldRootNode = previousParseResult.getRootNode();
 		if (replaceRegion.getEndOffset() > oldRootNode.getTotalLength()) {
 			log.error("Invalid " + replaceRegion + " originalLength=" + oldRootNode.getTotalLength());
 			return fullyReparse(parser, previousParseResult, replaceRegion);
@@ -166,7 +166,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 		// TODO should be merged by the node model builder - offsets have to be adjusted, too!
 //		parseResult.getRootNode().setGrammarElement(replaceNode.getGrammarElement());
 		if (oldCompositeNode != oldRootNode) {
-			nodeModelBuilder.replaceAndTransferLookAhead(oldCompositeNode, newParseResult.getRootNode2());
+			nodeModelBuilder.replaceAndTransferLookAhead(oldCompositeNode, newParseResult.getRootNode());
 			((ParseResult) newParseResult).setRootNode2(oldRootNode);
 			StringBuilder builder = new StringBuilder(oldRootNode.getText());
 			replaceRegion.applyTo(builder);
@@ -178,7 +178,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 
 	protected IParseResult fullyReparse(IParser parser, IParseResult previousParseResult, ReplaceRegion replaceRegion) {
 		unloadSemanticObject(previousParseResult.getRootASTElement());
-		String reparseRegion = insertChangeIntoReplaceRegion(previousParseResult.getRootNode2(), replaceRegion);
+		String reparseRegion = insertChangeIntoReplaceRegion(previousParseResult.getRootNode(), replaceRegion);
 		return parser.parse(new StringReader(reparseRegion));
 	}
 
@@ -204,7 +204,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 			int replacedTextLength) {
 		int myOffset = offset;
 		int myReplacedTextLength = replacedTextLength;
-		ICompositeNode oldRootNode = previousParseResult.getRootNode2();
+		ICompositeNode oldRootNode = previousParseResult.getRootNode();
 		if (myOffset == oldRootNode.getTotalLength() && myOffset != 0) {
 			// newText is appended, so look for the last original character instead
 			--myOffset;

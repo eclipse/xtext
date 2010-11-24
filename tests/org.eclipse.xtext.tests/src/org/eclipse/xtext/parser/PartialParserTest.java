@@ -65,13 +65,13 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		XtextResource resource = getResourceFromStringAndExpect(model, 1);
 		assertEquals(1, resource.getErrors().size());
 		assertEquals(1, Iterables.size(resource.getParseResult().getSyntaxErrors()));
-		ICompositeNode rootNode = resource.getParseResult().getRootNode2();
+		ICompositeNode rootNode = resource.getParseResult().getRootNode();
 		ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(rootNode, model.length() - 1);
 		assertTrue(leaf.getSyntaxErrorMessage() != null);
 		// resource.update(23, 0, ")");
 		// assertTrue(resource.getParseResult().getParseErrors().isEmpty());
 		IParseResult reparse = reparse(resource.getParseResult(), 23, 0, ")");
-		rootNode = reparse.getRootNode2();
+		rootNode = reparse.getRootNode();
 		String expectedFixedModel = "spielplatz 1 {kind (k 1)}";
 		String fixedModel = rootNode.getText();
 		assertEquals("serialized model as expected", expectedFixedModel, fixedModel);
@@ -84,10 +84,10 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		String model = "spielplatz 1 {kind (k 1)\n}";
 		XtextResource resource = getResourceFromString(model);
-		ICompositeNode rootNode = resource.getParseResult().getRootNode2();
+		ICompositeNode rootNode = resource.getParseResult().getRootNode();
 		checkGrammarAssigned(rootNode);
 		IParseResult reparse = reparse(resource.getParseResult(), model.length() - 2, 0, "\n");
-		rootNode = reparse.getRootNode2();
+		rootNode = reparse.getRootNode();
 		checkGrammarAssigned(rootNode);
 	}
 
@@ -95,19 +95,19 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		String model = "spielplatz 1 {kind (k 1)\n}";
 		XtextResource resource = getResourceFromString(model);
-		ICompositeNode rootNode = resource.getParseResult().getRootNode2();
+		ICompositeNode rootNode = resource.getParseResult().getRootNode();
 		resource.update(model.indexOf("k 1"), 3, "l 2");
-		assertSame(rootNode, resource.getParseResult().getRootNode2());
+		assertSame(rootNode, resource.getParseResult().getRootNode());
 	}
 
 	public void testParseIsPartialTwice() throws Exception {
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		String model = "spielplatz 1 {kind (k 1)\n}";
 		XtextResource resource = getResourceFromString(model);
-		ICompositeNode rootNode = resource.getParseResult().getRootNode2();
+		ICompositeNode rootNode = resource.getParseResult().getRootNode();
 		resource.update(model.indexOf("k 1"), 3, "l 2");
 		resource.update(model.indexOf("k 1"), 3, "m 3");
-		assertSame(rootNode, resource.getParseResult().getRootNode2());
+		assertSame(rootNode, resource.getParseResult().getRootNode());
 	}
 
 	private ILeafNode findLeafNodeByText(ICompositeNode root, String model, String text) {
@@ -124,12 +124,12 @@ public class PartialParserTest extends AbstractPartialParserTest {
 				"}";
 		XtextResource resource = getResourceFromString(model);
 		assertTrue(resource.getErrors().isEmpty());
-		ICompositeNode root = resource.getParseResult().getRootNode2();
+		ICompositeNode root = resource.getParseResult().getRootNode();
 		ILeafNode childrenLeaf = findLeafNodeByText(root, model, "children");
 		ILeafNode ch1Leaf = findLeafNodeByText(root, model, "ch1");
 		resource.update(model.indexOf("ch1") + 1, 1, "h");
 		resource.update(model.indexOf("ch1") + 1, 1, "h");
-		assertSame(root, resource.getParseResult().getRootNode2());
+		assertSame(root, resource.getParseResult().getRootNode());
 		assertSame(childrenLeaf, findLeafNodeByText(root, model, "children"));
 		assertNotSame(ch1Leaf, findLeafNodeByText(root, model, "ch1"));
 	}
@@ -143,12 +143,12 @@ public class PartialParserTest extends AbstractPartialParserTest {
 				"}";
 		XtextResource resource = getResourceFromString(model);
 		assertTrue(resource.getErrors().isEmpty());
-		ICompositeNode root = resource.getParseResult().getRootNode2();
+		ICompositeNode root = resource.getParseResult().getRootNode();
 		ILeafNode childrenLeaf = findLeafNodeByText(root, model, "children");
 		ILeafNode cLeaf = findLeafNodeByText(root, model, "C");
 		resource.update(model.indexOf("C"), 1, "C");
 		resource.update(model.indexOf("C"), 1, "C");
-		assertSame(root, resource.getParseResult().getRootNode2());
+		assertSame(root, resource.getParseResult().getRootNode());
 		assertSame(childrenLeaf, findLeafNodeByText(root, model, "children"));
 		assertNotSame(cLeaf, findLeafNodeByText(root, model, "ch1"));
 	}
@@ -162,12 +162,12 @@ public class PartialParserTest extends AbstractPartialParserTest {
 				"}";
 		XtextResource resource = getResourceFromString(model);
 		assertTrue(resource.getErrors().isEmpty());
-		ICompositeNode root = resource.getParseResult().getRootNode2();
+		ICompositeNode root = resource.getParseResult().getRootNode();
 		ILeafNode childrenLeaf = findLeafNodeByText(root, model, "children");
 		ILeafNode arrowLeaf = findLeafNodeByText(root, model, "->");
 		resource.update(model.indexOf("->"), 2, "->");
 		resource.update(model.indexOf("->"), 2, "->");
-		assertSame(root, resource.getParseResult().getRootNode2());
+		assertSame(root, resource.getParseResult().getRootNode());
 		assertSame(childrenLeaf, findLeafNodeByText(root, model, "children"));
 		assertNotSame(arrowLeaf, findLeafNodeByText(root, model, "->"));
 	}
@@ -181,11 +181,11 @@ public class PartialParserTest extends AbstractPartialParserTest {
 				"}";
 		XtextResource resource = getResourceFromString(model);
 		assertTrue(resource.getErrors().isEmpty());
-		ICompositeNode root = resource.getParseResult().getRootNode2();
+		ICompositeNode root = resource.getParseResult().getRootNode();
 		ILeafNode children = findLeafNodeByText(root, model, "children");
 		resource.update(model.indexOf("n {") + 2, 1, "{");
 		resource.update(model.indexOf("n {") + 2, 1, "{");
-		assertSame(root, resource.getParseResult().getRootNode2());
+		assertSame(root, resource.getParseResult().getRootNode());
 		assertNotSame(children, findLeafNodeByText(root, model, "children"));
 	}
 
@@ -208,7 +208,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 				")+d\r\n" +
 				")";
 		IParseResult parseResult = getParseResult(model);
-		ICompositeNode rootNode = parseResult.getRootNode2();
+		ICompositeNode rootNode = parseResult.getRootNode();
 		Iterator<ILeafNode> iter = Iterators.filter(rootNode.treeIterator(), ILeafNode.class);
 		boolean found = false;
 		while (iter.hasNext()) {
@@ -239,7 +239,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		IParseResult fullParseResult = getParser().parse(new StringReader(model));
 		IParseResult oldParseResult = getParser().parse(new StringReader(model));
 		IParseResult partialParseResult = reparse(oldParseResult, offset, length, model.substring(offset, offset + length));
-		assertSameStructure(fullParseResult.getRootNode2(), partialParseResult.getRootNode2());
+		assertSameStructure(fullParseResult.getRootNode(), partialParseResult.getRootNode());
 		comparator.assertSameStructure(fullParseResult.getRootASTElement(), partialParseResult.getRootASTElement());
 	}
 	
@@ -254,13 +254,13 @@ public class PartialParserTest extends AbstractPartialParserTest {
 				"        'model' ':' name=ID ';'*;";
 		XtextResource resource = getResourceFromString(model);
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
-		model = resource.getParseResult().getRootNode2().getText();
+		model = resource.getParseResult().getRootNode().getText();
 		resource.update(model.indexOf("*;") + 1, 1, "");
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
-		model = resource.getParseResult().getRootNode2().getText();
+		model = resource.getParseResult().getRootNode().getText();
 		resource.update(model.indexOf("*") + 1, 0, " ");
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
-		model = resource.getParseResult().getRootNode2().getText();
+		model = resource.getParseResult().getRootNode().getText();
 		resource.update(model.indexOf("* ") + 2, 0, ";");
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 	}
@@ -278,13 +278,13 @@ public class PartialParserTest extends AbstractPartialParserTest {
 				"        import;";
 		XtextResource resource = getResourceFromStringAndExpect(model, 1);
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
-		model = resource.getParseResult().getRootNode2().getText();
+		model = resource.getParseResult().getRootNode().getText();
 		resource.update(model.indexOf("import;") + "import".length(), 1, "");
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
-		model = resource.getParseResult().getRootNode2().getText();
+		model = resource.getParseResult().getRootNode().getText();
 		resource.update(model.indexOf(" import") + " import".length(), 0, "a");
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
-		model = resource.getParseResult().getRootNode2().getText();
+		model = resource.getParseResult().getRootNode().getText();
 		resource.update(model.indexOf(" importa") + " importa".length(), 0, ";");
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 	}
@@ -300,13 +300,13 @@ public class PartialParserTest extends AbstractPartialParserTest {
 				"        ('model' ':' name=ID ';'*);";
 		XtextResource resource = getResourceFromString(model);
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
-		model = resource.getParseResult().getRootNode2().getText();
+		model = resource.getParseResult().getRootNode().getText();
 		resource.update(model.indexOf("*);") + 1, 2, "");
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
-		model = resource.getParseResult().getRootNode2().getText();
+		model = resource.getParseResult().getRootNode().getText();
 		resource.update(model.indexOf("*") + 1, 0, " ");
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
-		model = resource.getParseResult().getRootNode2().getText();
+		model = resource.getParseResult().getRootNode().getText();
 		resource.update(model.indexOf("* ") + 2, 0, ");");
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 	}

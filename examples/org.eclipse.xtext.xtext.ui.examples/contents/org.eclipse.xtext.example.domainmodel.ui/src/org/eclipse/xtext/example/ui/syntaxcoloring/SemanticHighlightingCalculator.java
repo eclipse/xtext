@@ -25,7 +25,7 @@ public class SemanticHighlightingCalculator implements ISemanticHighlightingCalc
 		if (resource == null)
 			return;
 		
-		Iterator<INode> allNodes = resource.getParseResult().getRootNode2().treeIterator();
+		Iterator<INode> allNodes = resource.getParseResult().getRootNode().treeIterator();
 		while(allNodes.hasNext()) {
 			INode node = allNodes.next();
 			if (node.getGrammarElement() instanceof CrossReference) {

@@ -91,7 +91,7 @@ public class ResourceLoadTest extends AbstractXtextTests {
 	public void testNoExceptionDiagnostics_04() throws Exception {
 		XtextResource r = getResourceFromString(this.model);
 		assertTrue(r.getErrors().isEmpty());
-		ICompositeNode node = r.getParseResult().getRootNode2();
+		ICompositeNode node = r.getParseResult().getRootNode();
 		for (Iterator<INode> i = node.treeIterator(); i.hasNext();) {
 			INode childNode = i.next();
 			String subModel = model.substring(0, childNode.getOffset())

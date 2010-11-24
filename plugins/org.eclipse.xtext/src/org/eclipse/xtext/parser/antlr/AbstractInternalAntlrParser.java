@@ -46,7 +46,6 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
-import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
@@ -538,7 +537,6 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 				appendAllTokens();
 			} finally {
 				ICompositeNode root = nodeBuilder.compressAndReturnParent(currentNode);
-				new InvariantChecker().checkInvariant(root);
 				result = new ParseResult(current, root, hadErrors);
 			}
 		}

@@ -44,11 +44,6 @@ public class ParseResult implements IParseResult {
         return rootAstElement;
     }
 
-    @Deprecated
-	public CompositeNode deprecatedGetRootNode() {
-        return null;
-    }
-
 	public Iterable<INode> getSyntaxErrors() {
 		if (rootNode == null || !hasSyntaxErrors())
 			return Collections.emptyList();
@@ -66,7 +61,7 @@ public class ParseResult implements IParseResult {
 		};
 	}
 	
-	public ICompositeNode getRootNode2() {
+	public ICompositeNode getRootNode() {
 		return rootNode;
 	}
     

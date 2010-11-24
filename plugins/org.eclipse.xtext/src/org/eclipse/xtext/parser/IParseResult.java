@@ -11,7 +11,6 @@ package org.eclipse.xtext.parser;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.parsetree.CompositeNode;
 
 /**
  * Represents the result of the parsing. 
@@ -22,10 +21,7 @@ public interface IParseResult {
 
     EObject getRootASTElement();
 
-    @Deprecated
-    CompositeNode deprecatedGetRootNode();
-    
-    ICompositeNode getRootNode2();
+    ICompositeNode getRootNode();
     
     Iterable<INode> getSyntaxErrors();
     

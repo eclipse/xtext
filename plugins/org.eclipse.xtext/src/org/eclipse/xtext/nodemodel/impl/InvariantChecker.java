@@ -12,6 +12,7 @@ import java.util.Iterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

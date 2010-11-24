@@ -24,12 +24,12 @@ public class OffsetInformationTest extends AbstractPartialParserTest {
 			+ "  erwachsener (Herrmann 50)\n" 
 			+ "}";
 		XtextResource resource = getResource(new StringInputStream(string));
-		ICompositeNode rootNode = resource.getParseResult().getRootNode2();
+		ICompositeNode rootNode = resource.getParseResult().getRootNode();
 		
 		for (int i=0;i<string.length()/2;i++) {
 			String substring = string.substring(i, string.length()-i);
 			resource.update(i, substring.length(), substring);
-			ICompositeNode model = resource.getParseResult().getRootNode2();
+			ICompositeNode model = resource.getParseResult().getRootNode();
 			new InvariantChecker().checkInvariant(model);
 			assertSameStructure(rootNode, model);
 		}
