@@ -28,7 +28,7 @@ public class ParseTreeUtilTest extends AbstractXtextTests {
 
 	public void testGetLastCompleteNodeByOffset() throws Exception {
 		String text = "spielplatz 1 \"junit\" {  ";
-		ICompositeNode rootNode = getRootNodeAndExpect2(text, 1);
+		ICompositeNode rootNode = getRootNodeAndExpect(text, 1);
 		INode lastCompleteNodeByOffset = NodeModelUtils.getLastCompleteNodeByOffset(rootNode, text.length());
 		assertTrue("expect leafnode as last complete element", lastCompleteNodeByOffset instanceof ILeafNode);
 		assertEquals("expect leafnode with text '{'", ((ILeafNode) lastCompleteNodeByOffset).getText(), "{");
@@ -36,7 +36,7 @@ public class ParseTreeUtilTest extends AbstractXtextTests {
 
 	public void testGetLastCompleteNodeByOffset2() throws Exception {
 		String text = "spielplatz 1 \"junit\" {";
-		ICompositeNode rootNode = getRootNodeAndExpect2(text, 1);
+		ICompositeNode rootNode = getRootNodeAndExpect(text, 1);
 		INode lastCompleteNodeByOffset = NodeModelUtils.getLastCompleteNodeByOffset(rootNode, text.length());
 		assertTrue("expect leafnode as last complete element", lastCompleteNodeByOffset instanceof ILeafNode);
 		assertEquals("expect leafnode with text '{'", ((ILeafNode) lastCompleteNodeByOffset).getText(), "{");

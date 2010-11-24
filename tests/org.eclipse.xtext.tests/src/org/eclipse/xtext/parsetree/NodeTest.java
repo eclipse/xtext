@@ -40,7 +40,7 @@ public class NodeTest extends AbstractXtextTests {
 				"    // comment in next line\n" +
 				"  }\n" +
 				"// comment after root\n";
-		rootNode = getRootNode2(model);
+		rootNode = getRootNode(model);
 		kindLeaf = NodeModelUtils.findLeafNodeAtOffset(rootNode, model.indexOf("kind") + 1);
 		hiddenLeaf = kindLeaf.getNextSibling();
 		kindNode = kindLeaf.getParent();

@@ -52,7 +52,7 @@ public class DynamicChannelTest extends AbstractXtextTests {
 		IParseResult result = getParser().parse(new StringReader(model));
 		assertNotNull(result);
 		assertNotNull(result.getRootASTElement());
-		assertNotNull(result.getRootNode2());
+		assertNotNull(result.getRootNode());
 		assertNotNull(result.getSyntaxErrors());
 		assertFalse(result.hasSyntaxErrors());
 		assertTrue(result.getSyntaxErrors().toString(), Iterables.isEmpty(result.getSyntaxErrors()));
@@ -60,7 +60,7 @@ public class DynamicChannelTest extends AbstractXtextTests {
 
 	public void testNodeModelOfSimpleLanguage() throws Exception {
 		IParseResult result = getParser().parse(new StringReader(model));
-		List<ILeafNode> leafs = Lists.newArrayList(Iterators.filter(result.getRootNode2().treeIterator(), ILeafNode.class));
+		List<ILeafNode> leafs = Lists.newArrayList(Iterators.filter(result.getRootNode().treeIterator(), ILeafNode.class));
 		assertEquals(23, leafs.size());
 		int i = 0;
 		checkLeaf(leafs.get(i++), grammar, false);

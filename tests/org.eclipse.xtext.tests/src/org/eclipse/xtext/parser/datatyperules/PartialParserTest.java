@@ -39,8 +39,8 @@ public class PartialParserTest extends AbstractXtextTests {
 	public void testInsertSlashInFirstNode() throws Exception {
 		IParseResult parseResult = resource.getParser().reparse(this.parseResult, new ReplaceRegion(model.indexOf('3'), 0, "/"));
 		assertFalse(parseResult.hasSyntaxErrors());
-		assertEquals(0, parseResult.getRootNode2().getTotalOffset());
-		assertSame(resource.getParseResult().getRootNode2(), parseResult.getRootNode2());
+		assertEquals(0, parseResult.getRootNode().getTotalOffset());
+		assertSame(resource.getParseResult().getRootNode(), parseResult.getRootNode());
 		String newModel = 
 			"a.b.c.d: 12/3;\n" +
 			"e.f.g.h: 456;";
@@ -50,8 +50,8 @@ public class PartialParserTest extends AbstractXtextTests {
 	public void testInsertSlashInSecondNode() throws Exception {
 		IParseResult parseResult = resource.getParser().reparse(this.parseResult, new ReplaceRegion(model.indexOf('6'), 0, "/"));
 		assertFalse(parseResult.hasSyntaxErrors());
-		assertEquals(0, parseResult.getRootNode2().getTotalOffset());
-		assertSame(resource.getParseResult().getRootNode2(), parseResult.getRootNode2());
+		assertEquals(0, parseResult.getRootNode().getTotalOffset());
+		assertSame(resource.getParseResult().getRootNode(), parseResult.getRootNode());
 		String newModel = 
 			"a.b.c.d: 123;\n" +
 			"e.f.g.h: 45/6;";

@@ -25,7 +25,7 @@ public class LeafNodeBug_234132_Test extends AbstractXtextTests {
     public void testLeafNodeBug() throws Exception {
         with(ReferenceGrammarTestLanguageStandaloneSetup.class);
         String model = readFileIntoString("org/eclipse/xtext/reference/leafNodeBug_234132.tst");
-        ICompositeNode rootNode = getRootNodeAndExpect2(model, 1);
+        ICompositeNode rootNode = getRootNodeAndExpect(model, 1);
         Iterator<ILeafNode> iter = Iterators.filter(rootNode.treeIterator(), ILeafNode.class);
         while(iter.hasNext()) {
         	ILeafNode leafNode = iter.next();

@@ -70,7 +70,7 @@ public class AntlrParserTest extends AbstractXtextTests {
 		assertEquals("childNode.grammarElement", grammarAccess.getChildAccess().getNameIDTerminalRuleCall_0(), childNode.getGrammarElement());
 		assertFalse("childNode.element", childNode.hasDirectSemanticElement());
 
-		ICompositeNode rootNode = resource.getParseResult().getRootNode2();
+		ICompositeNode rootNode = resource.getParseResult().getRootNode();
 		assertNotNull("rootNode", rootNode);
 		assertEquals("rootNode.grammarElement", grammarAccess.getModelRule(), rootNode.getGrammarElement());
 		assertEquals(rootNode.getChildren().toString(), 1, Iterables.size(rootNode.getChildren()));
@@ -123,7 +123,7 @@ public class AntlrParserTest extends AbstractXtextTests {
 		assertTrue(otherChildNode.toString(), otherChildNode instanceof ILeafNode);
 		assertEquals("otherChildNode.grammarElement", grammarAccess.getChildAccess().getNameIDTerminalRuleCall_0(),	otherChildNode.getGrammarElement());
 
-		ICompositeNode rootNode = resource.getParseResult().getRootNode2();
+		ICompositeNode rootNode = resource.getParseResult().getRootNode();
 		assertNotNull("rootNode", rootNode);
 		assertEquals("rootNode.grammarElement", grammarAccess.getModelAccess().getParentLeftAction_1_0(), rootNode.getGrammarElement());
 		assertEquals(node, rootNode);

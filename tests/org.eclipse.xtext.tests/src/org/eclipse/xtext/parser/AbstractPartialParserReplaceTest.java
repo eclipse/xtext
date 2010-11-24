@@ -38,7 +38,7 @@ public abstract class AbstractPartialParserReplaceTest extends AbstractPartialPa
 		assertTrue("unloaded", unloaded.get());
 		assertFalse(partiallyReparse.hasSyntaxErrors());
 		String expectedReparseModel = model.substring(0, offset) + change + model.substring(offset + length);
-		assertEquals(expectedReparseModel, partiallyReparse.getRootNode2().getText());
+		assertEquals(expectedReparseModel, partiallyReparse.getRootNode().getText());
 	}
 	
 }
