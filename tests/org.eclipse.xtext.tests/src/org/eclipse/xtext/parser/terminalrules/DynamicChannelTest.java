@@ -11,8 +11,12 @@ import java.io.StringReader;
 import java.util.List;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parsetree.LeafNode;
+
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
+import com.google.inject.internal.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -48,14 +52,15 @@ public class DynamicChannelTest extends AbstractXtextTests {
 		IParseResult result = getParser().parse(new StringReader(model));
 		assertNotNull(result);
 		assertNotNull(result.getRootASTElement());
-		assertNotNull(result.getRootNode());
-		assertNotNull(result.getParseErrors());
-		assertTrue(result.getParseErrors().toString(),result.getParseErrors().isEmpty());
+		assertNotNull(result.getRootNode2());
+		assertNotNull(result.getSyntaxErrors());
+		assertFalse(result.hasSyntaxErrors());
+		assertTrue(result.getSyntaxErrors().toString(), Iterables.isEmpty(result.getSyntaxErrors()));
 	}
 
 	public void testNodeModelOfSimpleLanguage() throws Exception {
 		IParseResult result = getParser().parse(new StringReader(model));
-		List<LeafNode> leafs = result.getRootNode().getLeafNodes();
+		List<ILeafNode> leafs = Lists.newArrayList(Iterators.filter(result.getRootNode2().treeIterator(), ILeafNode.class));
 		assertEquals(23, leafs.size());
 		int i = 0;
 		checkLeaf(leafs.get(i++), grammar, false);
@@ -83,7 +88,7 @@ public class DynamicChannelTest extends AbstractXtextTests {
 		checkLeaf(leafs.get(i++), sc, false);
 	}
 
-	private void checkLeaf(LeafNode leaf, String expected, boolean expectedHidden) {
+	private void checkLeaf(ILeafNode leaf, String expected, boolean expectedHidden) {
 		assertEquals(expected, leaf.getText());
 		assertEquals(leaf.getText(), expectedHidden, leaf.isHidden());
 	}

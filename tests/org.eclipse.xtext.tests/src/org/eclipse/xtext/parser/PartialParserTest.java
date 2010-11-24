@@ -243,22 +243,6 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		comparator.assertSameStructure(fullParseResult.getRootASTElement(), partialParseResult.getRootASTElement());
 	}
 	
-	private void assertSameStructure(ICompositeNode first, ICompositeNode second) {
-		BidiTreeIterator<INode> firstIter = first.treeIterator();
-		BidiTreeIterator<INode> secondIter = second.treeIterator();
-		while(firstIter.hasNext()) {
-			assertTrue(secondIter.hasNext());
-			INode firstNext = firstIter.next();
-			INode secondNext = secondIter.next();
-			assertEquals(firstNext.getClass(), secondNext.getClass());
-			assertEquals(firstNext.getTotalOffset(), secondNext.getTotalOffset());
-			assertEquals(firstNext.getTotalLength(), secondNext.getTotalLength());
-			assertEquals(firstNext.getText(), secondNext.getText());
-			
-		}
-		assertEquals(firstIter.hasNext(), secondIter.hasNext());
-	}
-	
 	/**
 	 * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=273209
 	 */

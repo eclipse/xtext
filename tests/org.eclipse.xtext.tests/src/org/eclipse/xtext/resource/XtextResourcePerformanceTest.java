@@ -10,6 +10,8 @@ package org.eclipse.xtext.resource;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 
+import com.google.common.collect.Iterables;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -39,7 +41,8 @@ public class XtextResourcePerformanceTest extends AbstractXtextTests {
 	public void testLoad() throws Exception {
 		XtextResource resource = getResourceFromString(model);
 		assertNotNull(resource);
-		assertTrue(resource.getParseResult().getParseErrors().isEmpty());
+		assertFalse(resource.getParseResult().hasSyntaxErrors());
+		assertTrue(Iterables.isEmpty(resource.getParseResult().getSyntaxErrors()));
 		assertTrue(resource.getErrors().isEmpty());
 	}
 
@@ -57,7 +60,8 @@ public class XtextResourcePerformanceTest extends AbstractXtextTests {
 		model = modelBuilder.toString();
 		XtextResource resource = getResourceFromStringAndExpect(model, 4 * NUM_ELEMENTS);
 		assertNotNull(resource);
-		assertTrue(resource.getParseResult().getParseErrors().isEmpty());
+		assertFalse(resource.getParseResult().hasSyntaxErrors());
+		assertTrue(Iterables.isEmpty(resource.getParseResult().getSyntaxErrors()));
 		assertEquals(4 * NUM_ELEMENTS, resource.getErrors().size());
 	}
 

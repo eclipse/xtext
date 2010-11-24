@@ -2,6 +2,7 @@ package org.eclipse.xtext.parsetree;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguageStandaloneSetup;
 import org.eclipse.xtext.util.StringInputStream;
@@ -29,9 +30,9 @@ public class EmptyModelTest extends AbstractXtextTests {
     private void assertEmptyModel(String model) throws Exception {
         IParseResult parseResult = getResource(new StringInputStream(model)).getParseResult();
 	    assertNull(parseResult.getRootASTElement());
-	    CompositeNode rootNode = parseResult.getRootNode();
+	    ICompositeNode rootNode = parseResult.getRootNode2();
         assertNotNull(rootNode);
-        assertEquals(model, rootNode.serialize());
+        assertEquals(model, rootNode.getText());
     }
 	
 	public void testParseWhitespaceOnly() throws Exception {
