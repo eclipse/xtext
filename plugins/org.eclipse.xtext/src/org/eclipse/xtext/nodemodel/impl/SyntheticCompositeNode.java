@@ -81,8 +81,28 @@ public class SyntheticCompositeNode implements ICompositeNode {
 		return delegate.getTotalOffset();
 	}
 	
+	public int getOffset() {
+		return delegate.getOffset();
+	}
+	
+	public int getLength() {
+		return delegate.getLength();
+	}
+	
 	public int getTotalStartLine() {
 		return delegate.getTotalStartLine();
+	}
+	
+	public int getEndLine() {
+		return delegate.getEndLine();
+	}
+	
+	public int getStartLine() {
+		return delegate.getStartLine();
+	}
+	
+	public int getTotalEndLine() {
+		return delegate.getTotalEndLine();
 	}
 
 	public int getTotalLength() {

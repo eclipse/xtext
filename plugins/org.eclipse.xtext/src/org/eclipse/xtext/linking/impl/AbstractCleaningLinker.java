@@ -16,7 +16,7 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
-import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.nodemodel.INode;
 
 /**
  * @author Sebastian Zarnekow
@@ -59,11 +59,11 @@ public abstract class AbstractCleaningLinker extends AbstractLinker {
 	/**
 	 * @return true, if the parent node could contain cross references to the same semantic element as the given node.
 	 */
-	protected boolean shouldCheckParentNode(AbstractNode node) {
+	protected boolean shouldCheckParentNode(INode node) {
 		if (node.getGrammarElement() instanceof AbstractElement) {
 			AbstractElement grammarElement = (AbstractElement) node.getGrammarElement();
 			Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
-			if (assignment == null && node.getParent() != null && node.getParent().getElement() == null) {
+			if (assignment == null && node.getParent() != null && !node.getParent().hasDirectSemanticElement()) {
 				return true;
 			}
 		}

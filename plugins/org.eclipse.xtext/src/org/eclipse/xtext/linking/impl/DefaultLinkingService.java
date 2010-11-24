@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -101,7 +101,7 @@ public class DefaultLinkingService extends AbstractLinkingService {
 	 * @return the first element returned from the injected {@link IScopeProvider} which matches the text of the passed
 	 *         {@link LeafNode}
 	 */
-	public List<EObject> getLinkedObjects(EObject context, EReference ref, AbstractNode node)
+	public List<EObject> getLinkedObjects(EObject context, EReference ref, INode node)
 			throws IllegalNodeException {
 		final EClass requiredType = ref.getEReferenceType();
 		if (requiredType == null)
@@ -126,7 +126,7 @@ public class DefaultLinkingService extends AbstractLinkingService {
 		return new ISelector.SelectByName(qn, isIgnoreCase);
 	}
 
-	public String getCrossRefNodeAsString(AbstractNode node) throws IllegalNodeException {
+	public String getCrossRefNodeAsString(INode node) throws IllegalNodeException {
 		return linkingHelper.getCrossRefNodeAsString(node, true);
 	}
 

@@ -8,6 +8,7 @@
 package org.eclipse.xtext.linking.lazy;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -36,10 +37,9 @@ import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
 import org.eclipse.xtext.linking.impl.AbstractCleaningLinker;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticProducer;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.EcoreGenericsUtil;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.SimpleCache;
@@ -84,7 +84,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 
 	@Override
 	protected void doLinkModel(final EObject model, IDiagnosticConsumer consumer) {
-		final Multimap<EStructuralFeature.Setting, AbstractNode> settingsToLink = ArrayListMultimap.create();
+		final Multimap<EStructuralFeature.Setting, INode> settingsToLink = ArrayListMultimap.create();
 		final LinkingDiagnosticProducer producer = new LinkingDiagnosticProducer(consumer);
 		cache.execWithoutCacheClear(model.eResource(), new IUnitOfWork.Void<Resource>() {
 			@Override
@@ -101,52 +101,52 @@ public class LazyLinker extends AbstractCleaningLinker {
 	}
 
 	protected void installProxies(EObject obj, IDiagnosticProducer producer,
-			Multimap<EStructuralFeature.Setting, AbstractNode> settingsToLink) {
-		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(obj);
-		if (nodeAdapter == null)
+			Multimap<EStructuralFeature.Setting, INode> settingsToLink) {
+		ICompositeNode node = NodeModelUtils.getNode(obj);
+		if (node == null)
 			return;
-		final CompositeNode node = nodeAdapter.getParserNode();
 		installProxies(obj, producer, settingsToLink, node);
 	}
 
 	private void installProxies(EObject obj, IDiagnosticProducer producer,
-			Multimap<EStructuralFeature.Setting, AbstractNode> settingsToLink, CompositeNode node) {
-		EList<AbstractNode> children = node.getChildren();
-		for (AbstractNode abstractNode : children) {
-			if (abstractNode.getGrammarElement() instanceof CrossReference) {
-				CrossReference ref = (CrossReference) abstractNode.getGrammarElement();
-				producer.setNode(abstractNode);
+			Multimap<EStructuralFeature.Setting, INode> settingsToLink, ICompositeNode parentNode) {
+		Iterator<INode> iterator = parentNode.getChildren().iterator();
+		while(iterator.hasNext()) {
+			INode node = iterator.next();
+			if (node.getGrammarElement() instanceof CrossReference) {
+				CrossReference ref = (CrossReference) node.getGrammarElement();
+				producer.setNode(node);
 				final EReference eRef = GrammarUtil.getReference(ref, obj.eClass());
 				if (eRef == null) {
 					throw new IllegalStateException("Couldn't find EReference for crossreference " + ref);
 				}
 				if (!eRef.isResolveProxies() /*|| eRef.getEOpposite() != null see https://bugs.eclipse.org/bugs/show_bug.cgi?id=282486*/) {
 					final EStructuralFeature.Setting setting = ((InternalEObject) obj).eSetting(eRef);
-					settingsToLink.put(new SettingDelegate(setting), abstractNode);
+					settingsToLink.put(new SettingDelegate(setting), node);
 				} else {
-					createAndSetProxy(obj, abstractNode, eRef);
+					createAndSetProxy(obj, node, eRef);
 				}
 			}
 		}
-		if (shouldCheckParentNode(node)) {
-			installProxies(obj, producer, settingsToLink, node.getParent());
+		if (shouldCheckParentNode(parentNode)) {
+			installProxies(obj, producer, settingsToLink, parentNode.getParent());
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	protected void installQueuedLinks(Multimap<EStructuralFeature.Setting, AbstractNode> settingsToLink) {
+	protected void installQueuedLinks(Multimap<EStructuralFeature.Setting, INode> settingsToLink) {
 		for (EStructuralFeature.Setting setting : settingsToLink.keySet()) {
 			final EObject eObject = setting.getEObject();
 			final EReference eRef = (EReference) setting.getEStructuralFeature();
-			final Collection<AbstractNode> nodes = settingsToLink.get(setting);
+			final Collection<INode> nodes = settingsToLink.get(setting);
 			if (setting.getEStructuralFeature().isMany()) {
 				EList<EObject> list = (EList<EObject>) setting.get(false);
-				for (AbstractNode node : nodes) {
+				for (INode node : nodes) {
 					final EObject proxy = createProxy(eObject, node, eRef);
 					list.add(EcoreUtil.resolve(proxy, eObject));
 				}
 			} else {
-				final AbstractNode node = nodes.iterator().next();
+				final INode node = nodes.iterator().next();
 				final EObject proxy = createProxy(eObject, node, eRef);
 				setting.set(EcoreUtil.resolve(proxy, eObject));
 			}
@@ -154,8 +154,8 @@ public class LazyLinker extends AbstractCleaningLinker {
 	}
 
 	@SuppressWarnings("unchecked")
-	protected void createAndSetProxy(EObject obj, AbstractNode abstractNode, EReference eRef) {
-		final EObject proxy = createProxy(obj, abstractNode, eRef);
+	protected void createAndSetProxy(EObject obj, INode node, EReference eRef) {
+		final EObject proxy = createProxy(obj, node, eRef);
 		if (eRef.isMany()) {
 			((AbstractEList<EObject>) obj.eGet(eRef, false)).addUnique(proxy);
 		} else {
@@ -163,11 +163,11 @@ public class LazyLinker extends AbstractCleaningLinker {
 		}
 	}
 
-	protected EObject createProxy(EObject obj, AbstractNode abstractNode, EReference eRef) {
+	protected EObject createProxy(EObject obj, INode node, EReference eRef) {
 		if (obj.eResource() == null)
 			throw new IllegalStateException("object must be contained in a resource");
 		final URI uri = obj.eResource().getURI();
-		final URI encodedLink = uri.appendFragment(encoder.encode(obj, eRef, abstractNode));
+		final URI encodedLink = uri.appendFragment(encoder.encode(obj, eRef, node));
 		EClass referenceType = ecoreGenericsUtil.getReferenceType(eRef, obj.eClass());
 		EClass instantiableType = instantiableSubTypes.get(referenceType);
 		final EObject proxy = EcoreUtil.create(instantiableType);

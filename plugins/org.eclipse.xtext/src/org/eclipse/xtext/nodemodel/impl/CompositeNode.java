@@ -123,8 +123,8 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 	
 	@Override
 	protected ICompositeNode resolve() {
-		Object grammarElement = basicGetGrammarElement();
-		if (grammarElement instanceof EObject)
+		Object grammarElementOrArray = basicGetGrammarElement();
+		if (grammarElementOrArray == null || grammarElementOrArray instanceof EObject)
 			return this;
 		return new SyntheticCompositeNode(this, 0);
 	}
@@ -132,7 +132,7 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 	@Override
 	public ICompositeNode getParent() {
 		Object grammarElementOrArray = basicGetGrammarElement();
-		if (grammarElementOrArray instanceof EObject)
+		if (grammarElementOrArray == null || grammarElementOrArray instanceof EObject)
 			return basicGetParent();
 		EObject[] grammarElements = (EObject[]) grammarElementOrArray;
 		return new SyntheticCompositeNode(this, grammarElements.length - 2);
@@ -141,46 +141,48 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 	@Override
 	public EObject getGrammarElement() {
 		Object grammarElementOrArray = basicGetGrammarElement();
-		if (grammarElementOrArray instanceof EObject)
+		if (grammarElementOrArray == null || grammarElementOrArray instanceof EObject)
 			return (EObject) grammarElementOrArray;
-		if (grammarElementOrArray == null) {
-			return null;
-		}
 		EObject[] grammarElements = (EObject[]) grammarElementOrArray;
 		return grammarElements[grammarElements.length - 1];
 	}
 	
 	@Override
 	public boolean hasNextSibling() {
-		if (basicGetGrammarElement() instanceof EObject)
+		Object grammarElementOrArray = basicGetGrammarElement();
+		if (grammarElementOrArray == null || grammarElementOrArray instanceof EObject)
 			return super.hasNextSibling();
 		return false;
 	}
 	
 	@Override
 	public boolean hasSiblings() {
-		if (basicGetGrammarElement() instanceof EObject)
+		Object grammarElementOrArray = basicGetGrammarElement();
+		if (grammarElementOrArray == null || grammarElementOrArray instanceof EObject)
 			return super.hasSiblings();
 		return false;
 	}
 	
 	@Override
 	public INode getNextSibling() {
-		if (basicGetGrammarElement() instanceof EObject)
+		Object grammarElementOrArray = basicGetGrammarElement();
+		if (grammarElementOrArray == null || grammarElementOrArray instanceof EObject)
 			return super.getNextSibling();
 		return null;
 	}
 	
 	@Override
 	public boolean hasPreviousSibling() {
-		if (basicGetGrammarElement() instanceof EObject)
+		Object grammarElementOrArray = basicGetGrammarElement();
+		if (grammarElementOrArray == null || grammarElementOrArray instanceof EObject)
 			return super.hasPreviousSibling();
 		return false;
 	}
 	
 	@Override
 	public INode getPreviousSibling() {
-		if (basicGetGrammarElement() instanceof EObject)
+		Object grammarElementOrArray = basicGetGrammarElement();
+		if (grammarElementOrArray == null || grammarElementOrArray instanceof EObject)
 			return super.getPreviousSibling();
 		return null;
 	}	

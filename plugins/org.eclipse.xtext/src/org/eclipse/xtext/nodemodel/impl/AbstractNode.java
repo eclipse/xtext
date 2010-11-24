@@ -7,15 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel.impl;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.nodemodel.util.NodeTreeIterator;
 import org.eclipse.xtext.nodemodel.util.SingletonBidiIterator;
 import org.eclipse.xtext.util.Strings;
+
+import com.google.common.collect.Iterators;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -77,6 +82,54 @@ public abstract class AbstractNode implements INode {
 			return result + 1;
 		}
 		return 1;
+	}
+	
+	public int getStartLine() {
+		INode rootNode = getRootNode();
+		if (rootNode != null) {
+			int offset = getOffset();
+			String leadingText = rootNode.getText().substring(0, offset);
+			int result = Strings.countLines(leadingText);
+			return result + 1;
+		}
+		return 1;
+	}
+	
+	public int getEndLine() {
+		int offset = getOffset();
+		int length = getLength();
+		INode rootNode = getRootNode();
+		String text = rootNode.getText().substring(offset, offset + length);
+		int myLineCount = Strings.countLines(text);
+		return getStartLine() + myLineCount;
+	}
+	
+	public int getTotalEndLine() {
+		String text = getText();
+		int myLineCount = Strings.countLines(text);
+		return getTotalStartLine() + myLineCount;
+	}
+	
+	public int getOffset() {
+		Iterator<ILeafNode> leafIter = Iterators.filter(basicTreeIterator(), ILeafNode.class);
+		while(leafIter.hasNext()) {
+			ILeafNode leaf = leafIter.next();
+			if (!leaf.isHidden())
+				return leaf.getTotalOffset();
+		}
+		return getTotalOffset();
+	}
+	
+	public int getLength() {
+		BidiIterator<AbstractNode> iter = basicTreeIterator();
+		while(iter.hasPrevious()) {
+			INode prev = iter.previous();
+			if (prev instanceof ILeafNode && !((ILeafNode) prev).isHidden()) {
+				int offset = getOffset();
+				return prev.getTotalEndOffset() - offset;
+			}
+		}
+		return getTotalLength();
 	}
 	
 	public int getTotalEndOffset() {

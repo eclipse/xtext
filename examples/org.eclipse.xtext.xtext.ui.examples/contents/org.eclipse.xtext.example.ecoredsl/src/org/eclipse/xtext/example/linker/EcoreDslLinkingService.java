@@ -24,8 +24,8 @@ import org.eclipse.xtext.example.ecoredsl.EcoredslPackage;
 import org.eclipse.xtext.example.ecoredsl.ReferencedMetamodel;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
 
 import com.google.inject.Inject;
 
@@ -41,13 +41,13 @@ public class EcoreDslLinkingService extends DefaultLinkingService {
 
 	@Override
 	public List<EObject> getLinkedObjects(EObject context, EReference ref,
-			AbstractNode node) throws IllegalNodeException {
+			INode node) throws IllegalNodeException {
 		if (ref == EcoredslPackage.eINSTANCE.getReferencedMetamodel_EPackage())
-			return getPackage((ReferencedMetamodel) context, (LeafNode) node);
+			return getPackage((ReferencedMetamodel) context, (ILeafNode) node);
 		return super.getLinkedObjects(context, ref, node);
 	}
 
-	private List<EObject> getPackage(ReferencedMetamodel context, LeafNode text) {
+	private List<EObject> getPackage(ReferencedMetamodel context, ILeafNode text) {
 		String nsUri = getMetamodelNsURI(text);
 		if (nsUri == null) {
 			return Collections.emptyList();
@@ -59,10 +59,10 @@ public class EcoreDslLinkingService extends DefaultLinkingService {
 		return Collections.emptyList();
 	}
 
-	private String getMetamodelNsURI(LeafNode text) {
+	private String getMetamodelNsURI(ILeafNode text) {
 		try {
 			return (String) valueConverterService.toValue(text.getText(),
-					getLinkingHelper().getRuleNameFrom(text.getGrammarElement()), text);
+					getLinkingHelper().getRuleNameFrom(text.getGrammarElement()), null, text);
 		} catch (ValueConverterException e) {
 			log.debug("Exception on leaf '" + text.getText() + "'", e);
 			return null;

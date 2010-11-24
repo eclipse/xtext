@@ -7,17 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IValueSerializer;
 
+import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 
 /**
@@ -28,17 +31,17 @@ public class ValueSerializer implements IValueSerializer {
 	@Inject
 	private IValueConverterService converter;
 
-	public boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, AbstractNode node) {
+	public boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, INode node) {
 		return ruleCall == node.getGrammarElement();
 	}
 
-	public boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, Object value, AbstractNode node) {
+	public boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, Object value, INode node) {
 		if (ruleCall != node.getGrammarElement())
 			return false;
 		Assignment ass = GrammarUtil.containingAssignment(ruleCall);
 		if (GrammarUtil.isSingleAssignment(ass))
 			return true;
-		Object converted = converter.toValue(serialize(node), ruleCall.getRule().getName(), node);
+		Object converted = converter.toValue(serialize(node), ruleCall.getRule().getName(), null, node);
 		return converted != null && converted.equals(value);
 	}
 
@@ -57,13 +60,15 @@ public class ValueSerializer implements IValueSerializer {
 		}
 	}
 
-	protected String serialize(AbstractNode node) {
-		if (node instanceof LeafNode)
-			return ((LeafNode) node).getText();
+	protected String serialize(INode node) {
+		if (node instanceof ILeafNode)
+			return ((ILeafNode) node).getText();
 		else {
 			StringBuilder builder = new StringBuilder(node.getLength());
 			boolean hiddenSeen = false;
-			for (LeafNode leaf : node.getLeafNodes()) {
+			Iterator<ILeafNode> iterator = Iterators.filter(node.treeIterator(), ILeafNode.class);
+			while(iterator.hasNext()) {
+				ILeafNode leaf = iterator.next();
 				if (!leaf.isHidden()) {
 					if (hiddenSeen && builder.length() > 0)
 						builder.append(' ');
@@ -77,16 +82,16 @@ public class ValueSerializer implements IValueSerializer {
 		}
 	}
 
-	public String serializeAssignedValue(EObject context, RuleCall ruleCall, Object value, AbstractNode node) {
+	public String serializeAssignedValue(EObject context, RuleCall ruleCall, Object value, INode node) {
 		if (node != null) {
-			Object converted = converter.toValue(serialize(node), ruleCall.getRule().getName(), node);
+			Object converted = converter.toValue(serialize(node), ruleCall.getRule().getName(), null, node);
 			if (converted != null && converted.equals(value))
 				return ITokenSerializer.KEEP_VALUE_FROM_NODE_MODEL;
 		}
 		return converter.toString(value, ruleCall.getRule().getName());
 	}
 
-	public String serializeUnassignedValue(EObject context, RuleCall ruleCall, AbstractNode node) {
+	public String serializeUnassignedValue(EObject context, RuleCall ruleCall, INode node) {
 		String r = serializeUnassignedValueByRuleCall(ruleCall, context, node);
 		if (r != null)
 			return r;
@@ -101,14 +106,14 @@ public class ValueSerializer implements IValueSerializer {
 				+ ".serializeUnassignedValue() or modify your implementation to handle this rulecall.");
 	}
 
-	protected String serializeUnassignedValueByRule(AbstractRule rule, EObject current, AbstractNode node) {
+	protected String serializeUnassignedValueByRule(AbstractRule rule, EObject current, INode node) {
 		// Sorry, but there is no generic default implementation for this yet.
 		// A valid implementation would be to automatically derive a valid value
 		// for the called rule.
 		return null;
 	}
 
-	protected String serializeUnassignedValueByRuleCall(RuleCall ruleCall, EObject current, AbstractNode node) {
+	protected String serializeUnassignedValueByRuleCall(RuleCall ruleCall, EObject current, INode node) {
 		// Sorry, but there is no generic default implementation for this yet.
 		return null;
 	}

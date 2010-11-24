@@ -7,14 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
+import java.util.Iterator;
+
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.LeafNode;
+
+import com.google.common.collect.Iterators;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,14 +30,16 @@ public class XtextValueConverters extends DefaultTerminalConverters {
 	public IValueConverter<String> GrammarID() {
 		return new AbstractNullSafeConverter<String>() {
 			@Override
-			protected String internalToValue(String string, AbstractNode node) throws ValueConverterException {
+			protected String internalToValue(String string, AbstractNode node, INode newNode) throws ValueConverterException {
 				StringBuilder result = new StringBuilder();
-				for(LeafNode leaf: node.getLeafNodes()) {
+				Iterator<ILeafNode> iter = Iterators.filter(newNode.treeIterator(), ILeafNode.class);
+				while(iter.hasNext()) {
+					ILeafNode leaf = iter.next();
 					if (!leaf.isHidden()) {
 						if (leaf.getGrammarElement() instanceof Keyword)
 							result.append(leaf.getText());
 						else
-							result.append(ID().toValue(leaf.getText(), leaf));
+							result.append(ID().toValue(leaf.getText(), null, leaf));
 					}
 				}
 				return result.toString();

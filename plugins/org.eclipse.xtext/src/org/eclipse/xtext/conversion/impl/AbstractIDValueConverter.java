@@ -13,6 +13,7 @@ import org.antlr.runtime.Token;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.AbstractNode;
 
 import com.google.common.base.Function;
@@ -65,7 +66,7 @@ public abstract class AbstractIDValueConverter extends AbstractLexerBasedConvert
 	protected void assertValidValue(String value) {
 		super.assertValidValue(value);
 		if (value.length() == 0) {
-			throw new ValueConverterException(getRuleName() + " may not be empty.", null, null);
+			throw new ValueConverterException(getRuleName() + " may not be empty.", null, null, null);
 		}
 	}
 	
@@ -78,7 +79,7 @@ public abstract class AbstractIDValueConverter extends AbstractLexerBasedConvert
 					return "'" + from + "' (0x" + Integer.toHexString(from) + ")";
 				}
 			}));
-			return new ValueConverterException("ID '" + value + "' contains invalid characters: " + chars, null, null);
+			return new ValueConverterException("ID '" + value + "' contains invalid characters: " + chars, null, null, null);
 		}
 		return super.createTokenContentMismatchException(value, escapedString, token);
 	}
@@ -100,7 +101,7 @@ public abstract class AbstractIDValueConverter extends AbstractLexerBasedConvert
 		return result;
 	}
 	
-	public String toValue(String string, AbstractNode node) {
+	public String toValue(String string, AbstractNode node, INode newNode) {
 		if (string == null)
 			return null;
 		return string.startsWith("^") ? string.substring(1) : string;

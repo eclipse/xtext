@@ -228,9 +228,9 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		}
 		try {
 			if (token.isMany()) {
-				factory.add(current, token.getFeature(), created, rule != null ? rule.getName() : null, currentNode);
+				factory.add(current, token.getFeature(), created, rule != null ? rule.getName() : null, currentNode, null);
 			} else {
-				factory.set(current, token.getFeature(), created, rule != null ? rule.getName() : null, currentNode);
+				factory.set(current, token.getFeature(), created, rule != null ? rule.getName() : null, currentNode, null);
 			}
 		} catch(ValueConverterException ex) {
 			handleValueConverterException(ex);
@@ -321,10 +321,10 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		try {
 			if (token.isMany()) {
 				factory.add(current, token.getFeature(), token.isBoolean() ? true : token.getText(input),
-						token.getGrammarElement() instanceof Keyword ? null : token.getRuleName(), node);
+						token.getGrammarElement() instanceof Keyword ? null : token.getRuleName(), node, null);
 			} else {
 				factory.set(current, token.getFeature(), token.isBoolean() ? true : token.getText(input),
-						token.getGrammarElement() instanceof Keyword ? null : token.getRuleName(), node);
+						token.getGrammarElement() instanceof Keyword ? null : token.getRuleName(), node, null);
 			}
 		} catch(ValueConverterException ex) {
 			handleValueConverterException(ex);
@@ -344,9 +344,9 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		if (token.getFeature() != null) {
 			try {
 				if (token.isMany())
-					factory.add(newCurrent, token.getFeature(), prevCurrent, null, null);
+					factory.add(newCurrent, token.getFeature(), prevCurrent, null, null, null);
 				else
-					factory.set(newCurrent, token.getFeature(), prevCurrent, null, null);
+					factory.set(newCurrent, token.getFeature(), prevCurrent, null, null, null);
 			} catch(ValueConverterException ex) {
 				handleValueConverterException(ex);
 			} catch(Exception ex) {

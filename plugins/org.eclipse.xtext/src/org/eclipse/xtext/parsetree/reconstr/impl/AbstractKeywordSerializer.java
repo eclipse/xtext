@@ -9,7 +9,7 @@ package org.eclipse.xtext.parsetree.reconstr.impl;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IKeywordSerializer;
 
@@ -18,23 +18,23 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IKeywordSerializer;
  */
 public abstract class AbstractKeywordSerializer implements IKeywordSerializer {
 
-	public String serializeAssignedKeyword(EObject context, Keyword keyword, Object value, AbstractNode node) {
+	public String serializeAssignedKeyword(EObject context, Keyword keyword, Object value, INode node) {
 		if (node != null && node.getGrammarElement() == keyword)
 			return ITokenSerializer.KEEP_VALUE_FROM_NODE_MODEL;
 		return keyword.getValue();
 	}
 
-	public String serializeUnassignedKeyword(EObject context, Keyword keyword, AbstractNode node) {
+	public String serializeUnassignedKeyword(EObject context, Keyword keyword, INode node) {
 		if (node != null && node.getGrammarElement() == keyword)
 			return ITokenSerializer.KEEP_VALUE_FROM_NODE_MODEL;
 		return keyword.getValue();
 	}
 	
-	public boolean equalsOrReplacesNode(EObject context, Keyword keyword, AbstractNode node) {
+	public boolean equalsOrReplacesNode(EObject context, Keyword keyword, INode node) {
 		return node.getGrammarElement() == keyword;
 	}
 
-	public boolean equalsOrReplacesNode(EObject context, Keyword keyword, Object value, AbstractNode node) {
+	public boolean equalsOrReplacesNode(EObject context, Keyword keyword, Object value, INode node) {
 		return node.getGrammarElement() == keyword;
 	}
 

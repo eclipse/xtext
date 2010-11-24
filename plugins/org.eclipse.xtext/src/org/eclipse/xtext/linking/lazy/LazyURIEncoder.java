@@ -14,11 +14,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 
@@ -40,12 +38,12 @@ public class LazyURIEncoder {
 	 * @param node
 	 * @return
 	 */
-	public String encode(EObject obj, EReference ref, AbstractNode node) {
+	public String encode(EObject obj, EReference ref, INode node) {
 		StringBuilder fragment = new StringBuilder(20).append(XTEXT_LINK).append(SEP);
 		appendShortFragment(obj, fragment);
 		fragment.append(SEP);
 		fragment.append(toShortExternalForm(obj.eClass(), ref)).append(SEP);
-		getRelativePath(fragment, NodeUtil.getNodeAdapter(obj).getParserNode(), node);
+		getRelativePath(fragment, NodeModelUtils.getNode(obj), node);
 		return fragment.toString();
 	}
 	
@@ -75,15 +73,15 @@ public class LazyURIEncoder {
 	 * @param uriFragment
 	 * @return
 	 */
-	public Triple<EObject, EReference, AbstractNode> decode(Resource res, String uriFragment) {
+	public Triple<EObject, EReference, INode> decode(Resource res, String uriFragment) {
 		String[] split = uriFragment.split(SEP);
 		EObject source = resolveShortFragment(res, split[1]);
 		EReference ref = fromShortExternalForm(source.eClass(), split[2]);
-		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(source);
-		if (nodeAdapter==null)
+		INode compositeNode = NodeModelUtils.getNode(source);
+		if (compositeNode==null)
 			throw new IllegalStateException("Couldn't resolve lazy link, because no node model is attached.");
-		AbstractNode text = getNode(nodeAdapter.getParserNode(), split[3]);
-		return Tuples.create(source, ref, text);
+		INode textNode = getNode(compositeNode, split[3]);
+		return Tuples.create(source, ref, textNode);
 	}
 	
 	public EObject resolveShortFragment(Resource res, String shortFragment) {
@@ -113,24 +111,42 @@ public class LazyURIEncoder {
 	/**
 	 * ONLY public to be testable
 	 */
-	public void getRelativePath(StringBuilder result, AbstractNode parserNode, AbstractNode node) {
+	public void getRelativePath(StringBuilder result, INode parserNode, INode node) {
 		if (parserNode == node)
 			return;
-		if (EcoreUtil.isAncestor(parserNode, node)) {
+		if (isAncestor(parserNode, node)) {
 			getRelativePath(result, parserNode, node.getParent());
-			result.append("/").append(node.getParent().getChildren().indexOf(node));
+			int idx = 0;
+			INode child = node.getParent().getFirstChild();
+			while(child != node && child.hasNextSibling()) {
+				idx++;
+				child = child.getNextSibling();
+			}
+			result.append("/").append(idx);
 		} else {
 			result.append("/..");
 			getRelativePath(result, parserNode.getParent(), node);
 		}
 	}
+	
+	protected boolean isAncestor(INode parent, INode child) {
+		if (child.equals(parent))
+			return true;
+		INode node = child;
+		while (node.getParent() != null) {
+			if (node.getParent().equals(parent))
+				return true;
+			node = node.getParent();
+		}
+		return false;
+	}
 
 	/**
 	 * ONLY public to be testable
 	 */
-	public AbstractNode getNode(final AbstractNode node, String path) {
+	public INode getNode(final INode node, String path) {
 		final String[] split = path.split("/");
-		AbstractNode result = node;
+		INode result = node;
 		for (String string : split) {
 			String trimmed = string.trim();
 			if (trimmed.length() > 0) {
@@ -141,7 +157,12 @@ public class LazyURIEncoder {
 				} else {
 					int index = Integer.parseInt(string);
 					if (index >= 0) {
-						result = ((CompositeNode) result).getChildren().get(index);
+						INode child = ((ICompositeNode) result).getFirstChild();
+						while(index > 0) {
+							child = child.getNextSibling();
+							index--;
+						}
+						result = child;
 					}
 				}
 			}

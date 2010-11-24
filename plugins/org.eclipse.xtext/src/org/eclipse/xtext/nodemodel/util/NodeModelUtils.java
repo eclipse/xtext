@@ -7,10 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel.util;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
+
+import com.google.inject.internal.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -55,10 +67,50 @@ public class NodeModelUtils {
 		return null;
 	}
 	
-	public static boolean intersects(int offset, int length, int lookupOffset) {
+	private static boolean intersects(int offset, int length, int lookupOffset) {
 		if (offset <= lookupOffset && offset + length > lookupOffset)
 			return true;
 		return false;
+	}
+
+	public static ICompositeNode getNode(EObject object) {
+		for(Adapter adapter: object.eAdapters()) {
+			if (adapter instanceof ICompositeNode)
+				return (ICompositeNode) adapter;
+		}
+		return null;
+	}
+	
+	public static List<INode> findNodesForFeature(EObject semanticElement, EStructuralFeature structuralFeature) {
+		ICompositeNode node = getNode(semanticElement);
+		if (node != null) {
+			return findNodesForFeature(semanticElement, node, structuralFeature);
+		}
+		return Collections.emptyList();
+	}
+
+	private static List<INode> findNodesForFeature(EObject semanticElement, INode node,
+			EStructuralFeature structuralFeature) {
+		List<INode> result = Lists.newArrayList();
+		EObject grammarElement = node.getGrammarElement();
+		if (grammarElement != null) { // error node?
+			Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
+			if (assignment != null && assignment.getFeature().equals(structuralFeature.getName())) {
+				result.add(node);
+			} else {
+				if (node instanceof ICompositeNode) {
+					EObject nodeSemanticElement = node.getSemanticElement();
+					if (semanticElement.equals(nodeSemanticElement)) {
+						ICompositeNode composite = (ICompositeNode) node;
+						// check whether it's the same element
+						for (INode child : composite.getChildren()) {
+							result.addAll(findNodesForFeature(semanticElement, child, structuralFeature));
+						}
+					}
+				}
+			}
+		}
+		return result;
 	}
 	
 }

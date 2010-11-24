@@ -68,11 +68,24 @@ public interface INode extends BidiTreeIterable<INode> {
 	 * @return the offset of this node including hidden tokens.
 	 */
 	int getTotalOffset();
+	
+	/**
+	 * @return the offset of this node excluding hidden tokens. If this node is a hidden leaf node or
+	 * a composite node that does only contain hidden leaf nodes, the
+	 * total offset is returned. 
+	 */
+	int getOffset();
 
 	/**
 	 * @return the length of this node including hidden tokens.
 	 */
 	int getTotalLength();
+	
+	/**
+	 * @return the length of this node excluding hidden tokens. If this node is a hidden leaf node, the
+	 * total length is returned.
+	 */
+	int getLength();
 	
 	/**
 	 * @return the end offset (exclusive) of this node including hidden tokens. 
@@ -85,6 +98,12 @@ public interface INode extends BidiTreeIterable<INode> {
 	 * @return the line number in the input where the node begins (one based, including hidden tokens).
 	 */
 	int getTotalStartLine();
+	
+	int getStartLine();
+	
+	int getTotalEndLine();
+	
+	int getEndLine();
 
 	/**
 	 * @return the parsed text that is covered by this node (including hidden tokens). Never <code>null</code>.

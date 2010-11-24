@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.linking.impl;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.CrossReference;
@@ -14,9 +16,10 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
 
+import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 
 /**
@@ -47,14 +50,16 @@ public class LinkingHelper {
 		return rule != null ? rule.getName() : null;
 	}
 
-	public String getCrossRefNodeAsString(AbstractNode node, boolean convert) {
+	public String getCrossRefNodeAsString(INode node, boolean convert) {
 		String convertMe = null;
-		if (node instanceof LeafNode)
-			convertMe = ((LeafNode) node).getText();
+		if (node instanceof ILeafNode)
+			convertMe = ((ILeafNode) node).getText();
 		else {
-			StringBuilder builder = new StringBuilder(Math.max(node.getLength(), 1));
+			StringBuilder builder = new StringBuilder(Math.max(node.getTotalLength(), 1));
 			boolean hiddenSeen = false;
-			for (LeafNode leaf : node.getLeafNodes()) {
+			Iterator<ILeafNode> iterator = Iterators.filter(node.treeIterator(), ILeafNode.class);
+			while(iterator.hasNext()) {
+				ILeafNode leaf = iterator.next();
 				if (!leaf.isHidden()) {
 					if (hiddenSeen && builder.length() > 0)
 						builder.append(' ');
@@ -74,7 +79,7 @@ public class LinkingHelper {
 			String ruleName = getRuleNameFrom(node.getGrammarElement());
 			if (ruleName == null)
 				return convertMe;
-			Object result = valueConverter.toValue(convertMe, ruleName, node);
+			Object result = valueConverter.toValue(convertMe, ruleName, null, node);
 			return result != null ? result.toString() : null;
 		} catch (ValueConverterException ex) {
 			throw new IllegalNodeException(node, ex);

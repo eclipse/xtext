@@ -274,7 +274,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			lastConsumedNode = leafNode;
 			tokenConsumed(token, leafNode);
 			
-			createLWLeafNode(token, leafNode.getSyntaxError(), grammarElement);
+			lwLastConsumedNode = createLWLeafNode(token, leafNode.getSyntaxError(), grammarElement);
 		}
 	}
 	
@@ -294,6 +294,8 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			grammarElement = allRules.get(ruleName);
 		}
 		CommonToken commonToken = (CommonToken) token;
+		if (errorMessage != null)
+			hadErrors = true;
 		return lwNodeBuilder.newLeafNode(
 				commonToken.getStartIndex(), 
 				commonToken.getStopIndex() - commonToken.getStartIndex() + 1, 
@@ -341,36 +343,36 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		return syntaxErrorProvider;
 	}
 
-	protected void set(EObject _this, String feature, Object value, String lexerRule, AbstractNode node) {
+	protected void set(EObject _this, String feature, Object value, String lexerRule, AbstractNode node, INode newNode) {
 		try {
-			semanticModelBuilder.set(_this, feature, value, lexerRule, node);
+			semanticModelBuilder.set(_this, feature, value, lexerRule, node, newNode);
 		} catch(ValueConverterException vce) {
 			handleValueConverterException(vce);
 		}
 	}
 	
 	protected void set(EObject _this, String feature, Object value, String lexerRule) {
-		set(_this, feature, value, lexerRule, currentNode);
+		set(_this, feature, value, lexerRule, currentNode, lwCurrentNode);
 	}
 	
 	protected void setWithLastConsumed(EObject _this, String feature, Object value, String lexerRule) {
-		set(_this, feature, value, lexerRule, lastConsumedNode);
+		set(_this, feature, value, lexerRule, lastConsumedNode, lwLastConsumedNode);
 	}
 
-	protected void add(EObject _this, String feature, Object value, String lexerRule, AbstractNode node) {
+	protected void add(EObject _this, String feature, Object value, String lexerRule, AbstractNode node, INode newNode) {
 		try {
-			semanticModelBuilder.add(_this, feature, value, lexerRule, node);
+			semanticModelBuilder.add(_this, feature, value, lexerRule, node, newNode);
 		} catch(ValueConverterException vce) {
 			handleValueConverterException(vce);
 		}
 	}
 	
 	protected void add(EObject _this, String feature, Object value, String lexerRule) {
-		add(_this, feature, value, lexerRule, currentNode);
+		add(_this, feature, value, lexerRule, currentNode, lwCurrentNode);
 	}
 	
 	protected void addWithLastConsumed(EObject _this, String feature, Object value, String lexerRule) {
-		add(_this, feature, value, lexerRule, lastConsumedNode);
+		add(_this, feature, value, lexerRule, lastConsumedNode, lwLastConsumedNode);
 	}
 	
 	protected CompositeNode createCompositeNode(EObject grammarElement, CompositeNode parentNode) {
@@ -394,7 +396,6 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 				if (lwNode == lwCurrentNode)
 					lwCurrentNode = (ICompositeNode) newNode;
 			}
-			hadErrors = true;
 			currentError = null;
 		}
 	}
@@ -507,6 +508,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	}
 	
 	protected void handleValueConverterException(ValueConverterException vce) {
+		hadErrors = true;
 		Exception cause = (Exception) vce.getCause();
 		if (vce != cause) {
 			IValueConverterErrorContext errorContext = createValueConverterErrorContext(vce);
@@ -585,6 +587,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	}
 	
 	public SyntaxErrorMessage getSyntaxErrorMessage(RecognitionException e, String[] tokenNames) {
+		hadErrors = true;
 		IParserErrorContext parseErrorContext = createErrorContext(e);
 		return syntaxErrorProvider.getSyntaxErrorMessage(parseErrorContext);
 	}
@@ -797,7 +800,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
     // Assigned action code
     protected EObject forceCreateModelElementAndSet(Action action, EObject value) {
     	EObject result = semanticModelBuilder.create(action.getType().getClassifier());
-    	semanticModelBuilder.set(result, action.getFeature(), value, null /* ParserRule */, currentNode);
+    	semanticModelBuilder.set(result, action.getFeature(), value, null /* ParserRule */, currentNode, lwCurrentNode);
     	insertCompositeNode(action);
     	associateNodeWithAstElement(currentNode, result);
     	associateNodeWithAstElement(lwCurrentNode, result);
@@ -806,7 +809,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
     
     protected EObject forceCreateModelElementAndAdd(Action action, EObject value) {
     	EObject result = semanticModelBuilder.create(action.getType().getClassifier());
-    	semanticModelBuilder.add(result, action.getFeature(), value, null /* ParserRule */, currentNode);
+    	semanticModelBuilder.add(result, action.getFeature(), value, null /* ParserRule */, currentNode, lwCurrentNode);
     	insertCompositeNode(action);
     	associateNodeWithAstElement(currentNode, result);
     	associateNodeWithAstElement(lwCurrentNode, result);

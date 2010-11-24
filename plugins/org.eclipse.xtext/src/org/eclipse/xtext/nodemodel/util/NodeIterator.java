@@ -49,7 +49,11 @@ public class NodeIterator extends UnmodifiableIterator<INode> implements BidiIte
 		if (!hasPrevious())
 			throw new NoSuchElementException();
 		if (lastReturned == null) {
-			lastReturned = startWith.getPreviousSibling();
+			if (startWith.getParent() != null) {
+				lastReturned = startWith.getParent().getLastChild();
+			} else {
+				lastReturned = startWith;
+			}
 		} else {
 			lastReturned = lastReturned.getPreviousSibling();
 		}

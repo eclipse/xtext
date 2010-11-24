@@ -8,6 +8,7 @@
 package org.eclipse.xtext.conversion.impl;
 
 import java.io.StringWriter;
+import java.util.Iterator;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.ecore.EObject;
@@ -15,9 +16,11 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.LeafNode;
 
+import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 
 /**
@@ -59,10 +62,12 @@ public class QualifiedNameValueConverter extends AbstractValueConverter<String> 
 		return buffer.toString();
 	}
 
-	public String toValue(String string, AbstractNode node) throws ValueConverterException {
+	public String toValue(String string, AbstractNode node, INode newNode) throws ValueConverterException {
 		StringWriter buffer = new StringWriter();
 		boolean isFirst = true;
-		for (LeafNode leafNode : node.getLeafNodes()) {
+		Iterator<ILeafNode> iter = Iterators.filter(newNode.treeIterator(), ILeafNode.class);
+		while(iter.hasNext()) {
+			ILeafNode leafNode = iter.next();
 			EObject grammarElement = leafNode.getGrammarElement();
 			if (isDelegateRuleCall(grammarElement) || isWildcardLiteral(grammarElement)) {
 				if (!isFirst)
@@ -104,8 +109,8 @@ public class QualifiedNameValueConverter extends AbstractValueConverter<String> 
 		return valueConverterService.toString(segment, getDelegateRuleName());
 	}
 
-	protected String delegateToValue(LeafNode leafNode) {
-		return (String) valueConverterService.toValue(leafNode.getText(), getDelegateRuleName(), leafNode);
+	protected String delegateToValue(ILeafNode leafNode) {
+		return (String) valueConverterService.toValue(leafNode.getText(), getDelegateRuleName(), null, leafNode);
 	}
 
 }

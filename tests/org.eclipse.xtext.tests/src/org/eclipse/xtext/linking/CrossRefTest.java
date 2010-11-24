@@ -20,9 +20,9 @@ import org.eclipse.xtext.linking.lazy.lazyLinking.Model;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Property;
 import org.eclipse.xtext.linking.lazy.services.LazyLinkingTestLanguageGrammarAccess;
 import org.eclipse.xtext.linking.services.LangATestLanguageGrammarAccess;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSerializer;
 import org.eclipse.xtext.resource.XtextResource;
@@ -33,8 +33,8 @@ public class CrossRefTest extends AbstractXtextTests {
 	private ICrossReferenceSerializer linkingService;
 	private LangATestLanguageGrammarAccess grammar;
 	
-	protected AbstractNode getCrossReferenceNode(EObject context, EReference reference, EObject target) {
-		List<AbstractNode> nodes = NodeUtil.findNodesForFeature(context, reference);
+	protected INode getCrossReferenceNode(EObject context, EReference reference, EObject target) {
+		List<INode> nodes = NodeModelUtils.findNodesForFeature(context, reference);
 		if (!nodes.isEmpty()) {
 			if (reference.isMany()) {
 				int index = ((List<?>) context.eGet(reference, false)).indexOf(target);
@@ -65,7 +65,7 @@ public class CrossRefTest extends AbstractXtextTests {
 	public void testGetLinkedObjects() throws Exception {
 		XtextResource r = getResourceFromString("type TypeA extends TypeB type TypeB extends TypeA type AnotherType extends TypeA");
 		EObject model = r.getParseResult().getRootASTElement();
-		LeafNode leaf = (LeafNode) NodeUtil.findLeafNodeAtOffset(r.getParseResult().getRootNode(), 6);
+		ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(r.getParseResult().getRootNode2(), 6);
 
 		assertWithXtend("3", "types.size", model);
 
@@ -92,11 +92,11 @@ public class CrossRefTest extends AbstractXtextTests {
 		type = superType;
 		superType = type.getExtends();
 		assertTrue(superType.eIsProxy());
-		AbstractNode node = getCrossReferenceNode(type, GrammarUtil.getReference(grammar.getTypeAccess().getExtendsTypeCrossReference_2_1_0()), superType);
+		INode node = getCrossReferenceNode(type, GrammarUtil.getReference(grammar.getTypeAccess().getExtendsTypeCrossReference_2_1_0()), superType);
 		linkText = linkingService.serializeCrossRef(type, grammar.getTypeAccess().getExtendsTypeCrossReference_2_1_0(), superType, node);
 		assertEquals("^type", linkText);
 
-		type.eAdapters().remove(NodeUtil.getNodeAdapter(type));
+		type.eAdapters().remove(NodeModelUtils.getNode(type));
 		linkText = linkingService.serializeCrossRef(type, grammar.getTypeAccess().getExtendsTypeCrossReference_2_1_0(), superType, null);
 		assertNull(linkText);
 	}
@@ -125,7 +125,7 @@ public class CrossRefTest extends AbstractXtextTests {
 
 		propType = prop.getType().get(1);
 		assertTrue(propType.eIsProxy());
-		AbstractNode node = getCrossReferenceNode(prop, GrammarUtil.getReference(g.getPropertyAccess().getTypeTypeCrossReference_0_0()), propType);
+		INode node = getCrossReferenceNode(prop, GrammarUtil.getReference(g.getPropertyAccess().getTypeTypeCrossReference_0_0()), propType);
 		linkText = linkingService.serializeCrossRef(prop,g.getPropertyAccess().getTypeTypeCrossReference_0_0(), propType, node);
 		assertEquals("TypeC", linkText);
 
@@ -135,7 +135,7 @@ public class CrossRefTest extends AbstractXtextTests {
 		linkText = linkingService.serializeCrossRef(prop,g.getPropertyAccess().getTypeTypeCrossReference_0_0(), propType, null);
 		assertEquals("TypeB", linkText);
 
-		prop.eAdapters().remove(NodeUtil.getNodeAdapter(prop));
+		prop.eAdapters().remove(NodeModelUtils.getNode(prop));
 		propType = prop.getType().get(1);
 		assertTrue(propType.eIsProxy());
 		linkText = linkingService.serializeCrossRef(prop,g.getPropertyAccess().getTypeTypeCrossReference_0_0(), propType, null);
@@ -152,7 +152,7 @@ public class CrossRefTest extends AbstractXtextTests {
 		assertEquals("TypeA", type.getName());
 		Type superType = type.getExtends();
 		assertEquals("TypeB", superType.getName());
-		AbstractNode node = getCrossReferenceNode(type, GrammarUtil.getReference(grammar.getTypeAccess().getExtendsTypeCrossReference_2_1_0()), superType);
+		INode node = getCrossReferenceNode(type, GrammarUtil.getReference(grammar.getTypeAccess().getExtendsTypeCrossReference_2_1_0()), superType);
 		String linkText = linkingService.serializeCrossRef(type, grammar.getTypeAccess().getExtendsTypeCrossReference_2_1_0(), superType, node);
 		assertTrue(ITokenSerializer.KEEP_VALUE_FROM_NODE_MODEL == linkText);
 	}

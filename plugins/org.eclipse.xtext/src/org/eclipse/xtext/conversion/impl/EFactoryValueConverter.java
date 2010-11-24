@@ -10,6 +10,7 @@ package org.eclipse.xtext.conversion.impl;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.util.Strings;
 
@@ -30,16 +31,16 @@ public class EFactoryValueConverter implements IValueConverter<Object> {
 		return dataType.getEPackage().getEFactoryInstance().convertToString(dataType, value);
 	}
 
-	public Object toValue(String string, AbstractNode node) throws ValueConverterException {
+	public Object toValue(String string, AbstractNode node, INode newNode) throws ValueConverterException {
 		try {
 			Object value = dataType.getEPackage().getEFactoryInstance().createFromString(dataType, string);
 			if (value == null && dataType.getInstanceClass().isPrimitive()) {
 				throw new ValueConverterException("Couldn't convert '" + Strings.notNull(string) + "' to "
-						+ dataType.getName() + ".", node, null);
+						+ dataType.getName() + ".", node, newNode, null);
 			}
 			return value;
 		} catch (Exception exc) {
-			throw new ValueConverterException("Error converting string to value", node, exc);
+			throw new ValueConverterException("Error converting string to value", node, newNode, exc);
 		}
 	}
 

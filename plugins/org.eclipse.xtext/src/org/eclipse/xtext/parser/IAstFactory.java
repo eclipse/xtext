@@ -11,6 +11,7 @@ package org.eclipse.xtext.parser;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.AbstractNode;
 
 /**
@@ -35,7 +36,7 @@ public interface IAstFactory {
 	 * @param value
 	 * @throws RecognitionException
 	 */
-	void set(EObject _this, String feature, Object value, String lexerRule, AbstractNode node)
+	void set(EObject _this, String feature, Object value, String lexerRule, AbstractNode node, INode newNode)
 			throws ValueConverterException;
 
 	/**
@@ -45,7 +46,7 @@ public interface IAstFactory {
 	 * @param feature
 	 * @param value
 	 */
-	void add(EObject _this, String feature, Object value, String lexerRule, AbstractNode node)
+	void add(EObject _this, String feature, Object value, String lexerRule, AbstractNode node, INode newNode)
 			throws ValueConverterException;
 
 }

@@ -8,7 +8,7 @@
 package org.eclipse.xtext.formatting.impl;
 
 import org.eclipse.xtext.formatting.INodeModelFormatter;
-import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -44,7 +44,7 @@ public abstract class AbstractNodeModelFormatter implements INodeModelFormatter 
 
 	}
 
-	public IFormattedRegion format(CompositeNode root, int offset, int length) {
+	public IFormattedRegion format(ICompositeNode root, int offset, int length) {
 		return null;
 	}
 

@@ -9,7 +9,7 @@ package org.eclipse.xtext.diagnostics;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.nodemodel.INode;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -18,9 +18,9 @@ public interface IDiagnosticProducer {
 
 	void addDiagnostic(DiagnosticMessage message);
 	
-	AbstractNode getNode();
+	INode getNode();
 	
-	void setNode(AbstractNode node);
+	void setNode(INode node);
 	
 	void setTarget(EObject object, EStructuralFeature feature);
 	

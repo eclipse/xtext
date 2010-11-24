@@ -12,7 +12,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
-import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.nodemodel.INode;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
@@ -25,6 +25,5 @@ public interface ILinkingService {
 	 * given context. But does not set the references or modifies the passed
 	 * information somehow. The returned list might contain proxy instances.
 	 */
-	List<EObject> getLinkedObjects(EObject context, EReference reference, AbstractNode node)
-			throws IllegalNodeException;
+	List<EObject> getLinkedObjects(EObject context, EReference reference, INode node) throws IllegalNodeException;
 }

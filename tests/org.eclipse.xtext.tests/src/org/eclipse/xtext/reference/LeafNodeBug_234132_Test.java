@@ -8,32 +8,27 @@
  *******************************************************************************/
 package org.eclipse.xtext.reference;
 
+import java.util.Iterator;
 
-import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
+
+import com.google.common.collect.Iterators;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
- *
  */
 public class LeafNodeBug_234132_Test extends AbstractXtextTests {
 	
-	private static final Logger logger = Logger.getLogger(LeafNodeBug_234132_Test.class);
-
     public void testLeafNodeBug() throws Exception {
         with(ReferenceGrammarTestLanguageStandaloneSetup.class);
         String model = readFileIntoString("org/eclipse/xtext/reference/leafNodeBug_234132.tst");
-        CompositeNode rootNode = getRootNodeAndExpect(model, 1);
-        
-        EList<LeafNode> leafNodes = rootNode.getLeafNodes();
-        logger.debug("Model length=" + model.length());
-        for (LeafNode leafNode : leafNodes) {
-            String text = leafNode.getText();
-            logger.debug("Leaf node" + leafNode.toString() + " offset=" + leafNode.getTotalOffset() + " length=" + leafNode.getTotalLength() + " text=" + ((text != null)? text : ""));
+        ICompositeNode rootNode = getRootNodeAndExpect2(model, 1);
+        Iterator<ILeafNode> iter = Iterators.filter(rootNode.treeIterator(), ILeafNode.class);
+        while(iter.hasNext()) {
+        	ILeafNode leafNode = iter.next();
             assertTrue(leafNode.getTotalLength() + leafNode.getTotalOffset() <= model.length());
             assertEquals(model.substring(leafNode.getTotalOffset(), leafNode.getTotalOffset() + leafNode.getTotalLength()), leafNode.getText());
         }
