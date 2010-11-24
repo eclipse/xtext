@@ -9,6 +9,9 @@ package org.eclipse.xtext.common.types.xtext;
 
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.resource.IEObjectDescription;
+
+import com.google.common.base.Predicate;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -16,8 +19,8 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
  */
 public class ClasspathBasedTypeScope extends AbstractTypeScope {
 
-	public ClasspathBasedTypeScope(ClasspathTypeProvider typeProvider, IQualifiedNameConverter qualifiedNameConverter) {
-		super(typeProvider, qualifiedNameConverter);
+	public ClasspathBasedTypeScope(ClasspathTypeProvider typeProvider, IQualifiedNameConverter qualifiedNameConverter, Predicate<IEObjectDescription> filter) {
+		super(typeProvider, qualifiedNameConverter, filter);
 	}
 	
 }

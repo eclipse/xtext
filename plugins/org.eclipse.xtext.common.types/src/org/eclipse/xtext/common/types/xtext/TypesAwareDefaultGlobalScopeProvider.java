@@ -8,12 +8,14 @@
 package org.eclipse.xtext.common.types.xtext;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 
+import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 
 /**
@@ -27,18 +29,18 @@ public class TypesAwareDefaultGlobalScopeProvider extends DefaultGlobalScopeProv
 	private AbstractTypeScopeProvider typeScopeProvider;
 
 	@Override
-	public IScope getScope(EObject context, EReference reference) {
-		EClass referenceType = getEReferenceType(context, reference);
+	public IScope getScope(Resource resource, EReference reference, Predicate<IEObjectDescription> filter) {
+		EClass referenceType = getEReferenceType(resource, reference);
 		if (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(referenceType)) {
-			return typeScopeProvider.getScope(context, reference);
+			return typeScopeProvider.getScope(resource, reference, filter);
 		}
 		if (TypesPackage.Literals.JVM_CONSTRUCTOR.isSuperTypeOf(referenceType)) {
-			return typeScopeProvider.getScope(context, reference);
+			return typeScopeProvider.getScope(resource, reference, filter);
 		}
-		return super.getScope(context, reference);
+		return super.getScope(resource, reference, filter);
 	}
 
-	protected EClass getEReferenceType(EObject context, EReference reference) {
+	protected EClass getEReferenceType(Resource resource, EReference reference) {
 		return reference.getEReferenceType();
 	}
 	

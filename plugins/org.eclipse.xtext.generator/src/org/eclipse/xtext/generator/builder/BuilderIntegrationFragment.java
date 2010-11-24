@@ -17,8 +17,8 @@ import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.resource.containers.StateBasedContainerManager;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
-import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -40,7 +40,7 @@ public class BuilderIntegrationFragment extends DefaultGeneratorFragment {
 					IResourceDescriptions.class.getName() + "BuilderScope",
 					"binder.bind(" + IResourceDescriptions.class.getName() + ".class"
 							+ ").annotatedWith(com.google.inject.name.Names.named("
-							+ AbstractGlobalScopeProvider.class.getName() + ".NAMED_BUILDER_SCOPE)).to("
+							+ ResourceDescriptionsProvider.class.getName() + ".NAMED_BUILDER_SCOPE)).to("
 							+ ResourceSetBasedResourceDescriptions.class.getName() + ".class)")
 			.getBindings();
 	}
@@ -52,7 +52,7 @@ public class BuilderIntegrationFragment extends DefaultGeneratorFragment {
 					IResourceDescriptions.class.getName() + "BuilderScope",
 					"binder.bind(" + IResourceDescriptions.class.getName() + ".class"
 							+ ").annotatedWith(com.google.inject.name.Names.named("
-							+ AbstractGlobalScopeProvider.class.getName() + ".NAMED_BUILDER_SCOPE)).to("
+							+ ResourceDescriptionsProvider.class.getName() + ".NAMED_BUILDER_SCOPE)).to("
 							+ "org.eclipse.xtext.builder.clustering.CurrentDescriptions.ResourceSetAware.class)")
 			.addTypeToType("org.eclipse.xtext.ui.editor.IXtextEditorCallback", "org.eclipse.xtext.builder.nature.NatureAddingEditorCallback")
 			.addConfiguredBinding(

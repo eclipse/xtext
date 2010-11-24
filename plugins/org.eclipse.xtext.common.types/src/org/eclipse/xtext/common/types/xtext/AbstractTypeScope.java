@@ -23,6 +23,10 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Jan Koehnlein - introduced QualifiedName
@@ -32,12 +36,17 @@ public abstract class AbstractTypeScope extends AbstractScope {
 	private final IJvmTypeProvider typeProvider;
 
 	private final IQualifiedNameConverter qualifiedNameConverter;
-	
-	protected AbstractTypeScope(IJvmTypeProvider typeProvider, IQualifiedNameConverter qualifiedNameConverter) {
+
+	private Predicate<IEObjectDescription> filter = Predicates.<IEObjectDescription> alwaysTrue();
+
+	protected AbstractTypeScope(IJvmTypeProvider typeProvider, IQualifiedNameConverter qualifiedNameConverter,
+			Predicate<IEObjectDescription> filter) {
 		this.typeProvider = typeProvider;
 		this.qualifiedNameConverter = qualifiedNameConverter;
+		if (filter != null)
+			this.filter = filter;
 	}
-	
+
 	@Override
 	public Iterable<IEObjectDescription> getLocalElements(ISelector selector) {
 		if (selector instanceof ISelector.SelectByName) {
@@ -54,12 +63,14 @@ public abstract class AbstractTypeScope extends AbstractScope {
 		} else if (selector instanceof ISelector.SelectByEObject) {
 			EObject object = ((ISelector.SelectByEObject) selector).getEObject();
 			if (object instanceof JvmIdentifyableElement) {
-				final Set<IEObjectDescription> result = singleton(EObjectDescription.create(qualifiedNameConverter.toQualifiedName(((JvmIdentifyableElement) object).getCanonicalName()), object));
+				final Set<IEObjectDescription> result = singleton(EObjectDescription.create(
+						qualifiedNameConverter.toQualifiedName(((JvmIdentifyableElement) object).getCanonicalName()),
+						object));
 				return selector.applySelector(result);
 			}
 			return emptySet();
 		}
-		return internalGetAllLocalElements(selector);
+		return Iterables.filter(internalGetAllLocalElements(selector), filter);
 	}
 
 	protected Iterable<IEObjectDescription> internalGetAllLocalElements(ISelector selector) {
@@ -69,7 +80,7 @@ public abstract class AbstractTypeScope extends AbstractScope {
 	public IJvmTypeProvider getTypeProvider() {
 		return typeProvider;
 	}
-	
+
 	public IQualifiedNameConverter getQualifiedNameConverter() {
 		return qualifiedNameConverter;
 	}
