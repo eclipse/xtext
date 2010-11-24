@@ -261,7 +261,6 @@ public class NodeModelBuilder {
 			CompositeNode newCompositeNode = (CompositeNode) newNode;
 			newCompositeNode.basicSetLookAhead(((ICompositeNode) oldNode).getLookAhead());
 			// todo: unfold both nodes and compress afterwards
-//			newCompositeNode.basicSetGrammarElement(((AbstractNode) oldNode).basicGetGrammarElement());
 		}
 		ICompositeNode root = newNode.getRootNode();
 		BidiTreeIterator<AbstractNode> iterator = ((AbstractNode) root).basicTreeIterator();
