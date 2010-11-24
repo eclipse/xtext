@@ -9,37 +9,36 @@ package org.eclipse.xtext.scoping.impl;
 
 import static com.google.common.collect.Iterables.*;
 
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ResourceDescriptionBasedScope extends AbstractScope {
 
-	private final EClass type;
 	private final IResourceDescription description;
 	
 	private boolean allowDuplicates = false;
+	private Predicate<IEObjectDescription> filter;
 	
-	public ResourceDescriptionBasedScope(IScope parent, IResourceDescription description, EClass type) {
+	public ResourceDescriptionBasedScope(IScope parent, IResourceDescription description, Predicate<IEObjectDescription> filter) {
 		super(parent);
 		if (description == null)
 			throw new NullPointerException("description");
-		if (type == null)
-			throw new NullPointerException("type");
 		this.description = description;
-		this.type = type;
+		this.filter = filter;
+		if (filter == null)
+			this.filter = Predicates.alwaysTrue();
 	}
 	
-	public ResourceDescriptionBasedScope(IResourceDescription description, EClass type) {
-		this(IScope.NULLSCOPE, description, type);
+	public ResourceDescriptionBasedScope(IResourceDescription description, Predicate<IEObjectDescription> filter) {
+		this(IScope.NULLSCOPE, description, filter);
 	}
 	
 	public void setAllowDuplicates(boolean allow) {
@@ -53,18 +52,14 @@ public class ResourceDescriptionBasedScope extends AbstractScope {
 	protected IResourceDescription getDescription() {
 		return description;
 	}
-	
-	protected EClass getElementType() {
-		return type;
+
+	public Predicate<IEObjectDescription> getFilter() {
+		return filter;
 	}
 	
 	@Override
 	public Iterable<IEObjectDescription> getLocalElements(ISelector selector) {
-		return filter(description.getExportedObjects(selector), new Predicate<IEObjectDescription>() {
-			public boolean apply(IEObjectDescription input) {
-				return EcoreUtil2.isAssignableFrom(type, input.getEClass());
-			}
-		});
+		return filter(description.getExportedObjects(selector), filter);
 	}
 
 }

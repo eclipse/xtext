@@ -16,13 +16,15 @@ import java.util.LinkedHashSet;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.IResourceScopeCache;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -53,29 +55,30 @@ public class ImportUriGlobalScopeProvider extends AbstractGlobalScopeProvider {
 		this.cache = cache;
 	}
 	
-	public IResourceDescriptions getResourceDescriptions(EObject ctx, Collection<URI> importUris) {
-		IResourceDescriptions result = getResourceDescriptions(ctx);
+	public IResourceDescriptions getResourceDescriptions(Resource resource, Collection<URI> importUris) {
+		IResourceDescriptions result = getResourceDescriptions(resource);
 		LoadOnDemandResourceDescriptions demandResourceDescriptions = loadOnDemandDescriptions.get();
-		demandResourceDescriptions.initialize(result, importUris, ctx.eResource());
+		demandResourceDescriptions.initialize(result, importUris, resource);
 		return demandResourceDescriptions;
 	}
 
-	public IScope getScope(EObject context, EReference reference) {
-		final LinkedHashSet<URI> uniqueImportURIs = getImportedUris(context);
-		IResourceDescriptions descriptions = getResourceDescriptions(context, uniqueImportURIs);
+	@Override
+	protected IScope getScope(Resource resource, Predicate<IEObjectDescription> filter) {
+		final LinkedHashSet<URI> uniqueImportURIs = getImportedUris(resource);
+		IResourceDescriptions descriptions = getResourceDescriptions(resource, uniqueImportURIs);
 		ArrayList<URI> newArrayList = Lists.newArrayList(uniqueImportURIs);
 		Collections.reverse(newArrayList);
 		IScope scope = IScope.NULLSCOPE;
 		for (URI u : newArrayList) {
-			scope = createLazyResourceScope(scope, u, descriptions, reference);
+			scope = createLazyResourceScope(scope, u, descriptions, filter);
 		}
 		return scope;
 	}
 
-	protected LinkedHashSet<URI> getImportedUris(final EObject context) {
-		return cache.get(ImportUriGlobalScopeProvider.class.getName(), context.eResource(), new Provider<LinkedHashSet<URI>>(){
+	protected LinkedHashSet<URI> getImportedUris(final Resource resource) {
+		return cache.get(ImportUriGlobalScopeProvider.class.getName(), resource, new Provider<LinkedHashSet<URI>>(){
 			public LinkedHashSet<URI> get() {
-				TreeIterator<EObject> iterator = context.eResource().getAllContents();
+				TreeIterator<EObject> iterator = resource.getAllContents();
 				final LinkedHashSet<URI> uniqueImportURIs = new LinkedHashSet<URI>(10);
 				while (iterator.hasNext()) {
 					EObject object = iterator.next();
@@ -87,7 +90,7 @@ public class ImportUriGlobalScopeProvider extends AbstractGlobalScopeProvider {
 				}
 				Iterator<URI> uriIter = uniqueImportURIs.iterator();
 				while(uriIter.hasNext()) {
-					if (!EcoreUtil2.isValidUri(context, uriIter.next()))
+					if (!EcoreUtil2.isValidUri(resource, uriIter.next()))
 						uriIter.remove();
 				}
 				return uniqueImportURIs;
@@ -96,11 +99,11 @@ public class ImportUriGlobalScopeProvider extends AbstractGlobalScopeProvider {
 	}
 
 	protected IScope createLazyResourceScope(IScope parent, final URI uri, final IResourceDescriptions descriptions,
-			final EReference reference) {
+			final Predicate<IEObjectDescription> filter) {
 		IResourceDescription description = descriptions.getResourceDescription(uri);
 		if (description == null)
 			return parent;
-		return new ResourceDescriptionBasedScope(parent, description, reference.getEReferenceType());
+		return new ResourceDescriptionBasedScope(parent, description, filter);
 	}
 
 	public void setLoadOnDemandDescriptions(Provider<LoadOnDemandResourceDescriptions> loadOnDemandDescriptions) {

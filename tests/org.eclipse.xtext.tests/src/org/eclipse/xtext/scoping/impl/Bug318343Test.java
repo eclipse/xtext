@@ -40,12 +40,12 @@ public class Bug318343Test extends AbstractXtextTests {
 	}
 
 	public void testScopeContainsT1() throws Exception {
-		IScope scope = globalScopeProvider.getScope(resource2.getContents().get(0), LangATestLanguagePackage.Literals.TYPE__EXTENDS);
+		IScope scope = globalScopeProvider.getScope(resource2, LangATestLanguagePackage.Literals.TYPE__EXTENDS);
 		assertNotNull(scope.getSingleElement(new ISelector.SelectByName(QualifiedName.create("t1"))));
 	}
 	
 	public void testScopeContainsNotT2() throws Exception {
-		IScope scope = globalScopeProvider.getScope(resource2.getContents().get(0), LangATestLanguagePackage.Literals.TYPE__EXTENDS);
+		IScope scope = globalScopeProvider.getScope(resource2, LangATestLanguagePackage.Literals.TYPE__EXTENDS);
 		assertNull(scope.getSingleElement(new ISelector.SelectByName(QualifiedName.create("t2"))));
 	}
 	@Override

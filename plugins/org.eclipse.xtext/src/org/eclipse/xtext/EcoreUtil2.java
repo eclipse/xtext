@@ -422,13 +422,13 @@ public class EcoreUtil2 extends EcoreUtil {
 	}
 
 	/**
-	 * checks whether the given URI can be loaded given the context. I.e. there's a resource set with a correpsonding
+	 * checks whether the given URI can be loaded given the context. I.e. there's a resource set with a corresponding
 	 * resource factory and the physical resource exists.
 	 */
-	public static boolean isValidUri(EObject context, URI uri) {
-		URI newURI = getResolvedImportUri(context.eResource(), uri);
+	public static boolean isValidUri(Resource resource, URI uri) {
+		URI newURI = getResolvedImportUri(resource, uri);
 		try {
-			ResourceSet resourceSet = context.eResource().getResourceSet();
+			ResourceSet resourceSet = resource.getResourceSet();
 			if (resourceSet.getResource(uri, false) != null)
 				return true;
 			URIConverter uriConverter = resourceSet.getURIConverter();
@@ -439,6 +439,10 @@ public class EcoreUtil2 extends EcoreUtil {
 			log.trace("Cannot load resource: " + newURI, e);
 		}
 		return false;
+	}
+	
+	public static boolean isValidUri(EObject context, URI uri) {
+		return isValidUri(context.eResource(), uri);
 	}
 
 	private static URI getResolvedImportUri(Resource context, URI uri) {

@@ -9,8 +9,6 @@ package org.eclipse.xtext.scoping.impl;
 
 import static com.google.common.collect.Iterables.*;
 
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -23,30 +21,26 @@ import com.google.common.base.Predicate;
  */
 public class ContainerBasedScope extends AbstractScope {
 	
-	private final EReference reference;
+	private final Predicate<IEObjectDescription> filter;
 	private final IContainer container;
 
-	public ContainerBasedScope(IScope outer, EReference reference, IContainer container) {
+	public ContainerBasedScope(IScope outer, Predicate<IEObjectDescription> filter, IContainer container) {
 		super(outer);
-		this.reference = reference;
+		this.filter = filter;
 		this.container = container;
 	}
 	
 	@Override
 	public Iterable<IEObjectDescription> getLocalElements(ISelector selector) {
-		return filter(container.getElements(selector), new Predicate<IEObjectDescription>() {
-			public boolean apply(IEObjectDescription input) {
-				return EcoreUtil2.isAssignableFrom(reference.getEReferenceType(), input.getEClass());
-			}
-		});
+		return filter(container.getElements(selector), filter);
 	}
 	
 	protected IContainer getContainer() {
 		return container;
 	}
 	
-	protected EReference getReference() {
-		return reference;
+	protected Predicate<IEObjectDescription> getFilter() {
+		return filter;
 	}
 
 }

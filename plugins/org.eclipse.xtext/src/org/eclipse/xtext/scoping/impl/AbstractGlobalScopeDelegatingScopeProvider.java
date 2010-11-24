@@ -7,11 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.inject.Inject;
 
 /**
@@ -19,7 +22,7 @@ import com.google.inject.Inject;
  *  
  * @author Sven Efftinge - Initial contribution and API
  */
-public abstract class AbstractGlobalScopeDelegatingScopeProvider extends AbstractExportedObjectsAwareScopeProvider {
+public abstract class AbstractGlobalScopeDelegatingScopeProvider extends AbstractScopeProvider {
 
 	@Inject
 	private IGlobalScopeProvider globalScopeProvider;
@@ -32,8 +35,12 @@ public abstract class AbstractGlobalScopeDelegatingScopeProvider extends Abstrac
 	public AbstractGlobalScopeDelegatingScopeProvider() {
 	}
 	
-	protected IScope getGlobalScope(final EObject context, final EReference reference) {
-		return wrap(globalScopeProvider.getScope(context, reference));
+	protected IScope getGlobalScope(final Resource context, final EReference reference) {
+		return getGlobalScope(context, reference, Predicates.<IEObjectDescription>alwaysTrue());
+	}
+	
+	protected IScope getGlobalScope(final Resource context, final EReference reference, final Predicate<IEObjectDescription> filter) {
+		return wrap(globalScopeProvider.getScope(context, reference, filter));
 	}
 	
 	private IScopeWrapper scopeWrapper;

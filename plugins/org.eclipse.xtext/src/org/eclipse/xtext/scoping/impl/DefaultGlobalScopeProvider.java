@@ -13,18 +13,19 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IContainer;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Event.Source;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.containers.FilterUriContainer;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -40,23 +41,24 @@ public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 	@Inject
 	private IResourceDescription.Manager descriptionManager;
 	
-	public IScope getScope(final EObject context, EReference reference) {
+	@Override
+	protected IScope getScope(final Resource context, Predicate<IEObjectDescription> filter) {
 		IScope result = IScope.NULLSCOPE;
 		List<IContainer> containers = Lists.newArrayList(getVisibleContainers(context));
 		Collections.reverse(containers);
 		Iterator<IContainer> iter = containers.iterator();
 		while (iter.hasNext()) {
 			IContainer container = iter.next();
-			result = createContainerScopeWithContext(context, result, container, reference);
+			result = createContainerScopeWithContext(context, result, container, filter);
 		}
 		return result;
 	}
 
-	protected List<IContainer> getVisibleContainers(EObject context) {
-		IResourceDescription description = descriptionManager.getResourceDescription(context.eResource());
-		IResourceDescriptions resourceDescriptions = getResourceDescriptions(context);
-		String cacheKey = getCacheKey("VisibleContainers", context.eResource().getResourceSet());
-		OnChangeEvictingCache.CacheAdapter cache = new OnChangeEvictingCache().getOrCreate(context.eResource());
+	protected List<IContainer> getVisibleContainers(Resource resource) {
+		IResourceDescription description = descriptionManager.getResourceDescription(resource);
+		IResourceDescriptions resourceDescriptions = getResourceDescriptions(resource);
+		String cacheKey = getCacheKey("VisibleContainers", resource.getResourceSet());
+		OnChangeEvictingCache.CacheAdapter cache = new OnChangeEvictingCache().getOrCreate(resource);
 		List<IContainer> result = null;
 		result = cache.get(cacheKey);
 		if (result == null) {
@@ -77,28 +79,27 @@ public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 	
 	protected String getCacheKey(String base, ResourceSet context) {
 		Map<Object, Object> loadOptions = context.getLoadOptions();
-		if (loadOptions.containsKey(NAMED_BUILDER_SCOPE)) {
-			return base + "@" + NAMED_BUILDER_SCOPE;
+		if (loadOptions.containsKey(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE)) {
+			return base + "@" + ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE;
 		} 
 		return base + "@DEFAULT_SCOPE"; 
 	}
 
-	protected IScope createContainerScopeWithContext(EObject context, IScope result, IContainer container,
-			EReference reference) {
-		Resource eResource = context.eResource();
+	protected IScope createContainerScopeWithContext(Resource eResource, IScope result, IContainer container,
+			Predicate<IEObjectDescription> filter) {
 		if (eResource != null) {
 			URI uriToFilter = eResource.getURI();
 			if (container.getResourceDescription(uriToFilter) != null)
 				container = new FilterUriContainer(uriToFilter, container);
 		}
-		return createContainerScope(result, container, reference);
+		return createContainerScope(result, container, filter);
 	}
 
-	protected IScope createContainerScope(IScope parent, IContainer container, EReference reference) {
+	protected IScope createContainerScope(IScope parent, IContainer container, Predicate<IEObjectDescription> filter) {
 		Iterable<IResourceDescription> content = container.getResourceDescriptions();
 		if (Iterables.isEmpty(content))
 			return parent;
-		return new ContainerBasedScope(parent, reference, container);
+		return new ContainerBasedScope(parent, filter, container);
 	}
 
 }

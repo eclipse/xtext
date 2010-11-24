@@ -10,7 +10,6 @@ package org.eclipse.xtext.scoping.impl;
 
 import static com.google.common.collect.Iterables.*;
 import static java.util.Collections.*;
-import static org.eclipse.xtext.scoping.Selectors.*;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -31,9 +30,9 @@ import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.ISelector;
-import org.eclipse.xtext.scoping.IgnoreCaseLinking;
 import org.eclipse.xtext.scoping.ISelector.DelegatingSelector;
 import org.eclipse.xtext.scoping.ISelector.SelectByName;
+import org.eclipse.xtext.scoping.IgnoreCaseLinking;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.Selectors;
 import org.eclipse.xtext.util.IResourceScopeCache;
@@ -153,7 +152,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 	
 	protected IScope getResourceScope(Resource res, EReference reference) {
 		EObject context = res.getContents().get(0);
-		IScope globalScope = getGlobalScope(context, reference);
+		IScope globalScope = getGlobalScope(res, reference);
 		List<ImportNormalizer> normalizers = getImplicitImports();
 		if (!normalizers.isEmpty()) {
 			globalScope = new ImportScope(normalizers, globalScope, isIgnoreCase(context, reference));

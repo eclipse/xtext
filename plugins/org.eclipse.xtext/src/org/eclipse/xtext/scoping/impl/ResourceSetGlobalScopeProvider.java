@@ -9,49 +9,54 @@ package org.eclipse.xtext.scoping.impl;
 
 import static com.google.common.collect.Iterables.*;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.ResourceSetReferencingResourceSet;
-import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 
 /**
  * A {@link IGlobalScopeProvider} which puts all elements in the {@link ResourceSet} on the scope.
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class ResourceSetGlobalScopeProvider extends AbstractExportedObjectsAwareScopeProvider implements IGlobalScopeProvider {
+public class ResourceSetGlobalScopeProvider extends AbstractGlobalScopeProvider {
+	
+	@Inject
+	private GlobalResourceDescriptionProvider resourceDecriptionProvider;
+	
+	public void setGlobalResourceDecriptionProvider(GlobalResourceDescriptionProvider resourceDecriptionProvider) {
+		this.resourceDecriptionProvider = resourceDecriptionProvider;
+	}
 
-	public IScope getScope(EObject context, EReference reference) {
+	@Override
+	protected IScope getScope(Resource resource, Predicate<IEObjectDescription> filter) {
 		IScope parent = IScope.NULLSCOPE;
-		if (context.eResource() == null || context.eResource().getResourceSet() == null)
+		if (resource == null || resource.getResourceSet() == null)
 			return parent;
-		final ResourceSet resourceSet = context.eResource().getResourceSet();
+		final ResourceSet resourceSet = resource.getResourceSet();
 		if (resourceSet instanceof ResourceSetReferencingResourceSet) {
 			ResourceSetReferencingResourceSet set = (ResourceSetReferencingResourceSet) resourceSet;
 			Iterable<ResourceSet> referencedSets = Iterables.reverse(set.getReferencedResourceSets());
 			for (ResourceSet referencedSet : referencedSets) {
-				parent = createScopeWithQualifiedNames(parent, context, reference, referencedSet);
+				parent = createScopeWithQualifiedNames(parent, resource, filter, referencedSet);
 			}
 		}
-		return createScopeWithQualifiedNames(parent, context, reference, resourceSet);
+		return createScopeWithQualifiedNames(parent, resource, filter, resourceSet);
 	}
 
-	protected IScope createScopeWithQualifiedNames(final IScope parent, final EObject context,
-			final EReference reference, ResourceSet resourceSet) {
+	protected IScope createScopeWithQualifiedNames(final IScope parent, final Resource resource,
+			final Predicate<IEObjectDescription> filter, ResourceSet resourceSet) {
 		final Iterable<IResourceDescription> resourceDescriptions = Iterables.transform(resourceSet.getResources(), new Function<Resource, IResourceDescription>() {
 			public IResourceDescription apply(Resource from) {
-				return getResourceDescription(from);
+				return resourceDecriptionProvider.getResourceDescription(from);
 			}
 		});
 		return new AbstractScope(parent) {
@@ -63,11 +68,7 @@ public class ResourceSetGlobalScopeProvider extends AbstractExportedObjectsAware
 						return from.getExportedObjects(selector);
 					}
 				});
-				return filter(concat(result), new Predicate<IEObjectDescription>() {
-					public boolean apply(IEObjectDescription input) {
-						return EcoreUtil2.isAssignableFrom(reference.getEReferenceType(), input.getEObjectOrProxy().eClass());
-					}
-				});
+				return filter(concat(result), filter);
 			}
 		};
 	}
