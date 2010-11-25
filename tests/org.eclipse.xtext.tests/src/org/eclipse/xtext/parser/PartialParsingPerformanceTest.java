@@ -20,9 +20,17 @@ import com.google.common.collect.Iterables;
  */
 public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 
-	private static final int NUM_ELEMENTS = 100;
+	private static final int NUM_ELEMENTS = 100 /* 0 */;
 	
-	public void testExpression() throws Exception {
+	public void testExpression_FirstTime() throws Exception {
+		doTestExpression();
+	}
+	
+	public void testExpression_Again() throws Exception {
+		doTestExpression();
+	}
+	
+	protected void doTestExpression() throws Exception {
 		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
 		String d = ")+d)\r\n";
 		String a_b = "(a+(b*\r\n";
