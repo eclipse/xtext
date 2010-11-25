@@ -174,7 +174,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	
 	private boolean hadErrors;
 	
-	protected IAstFactory semanticModelBuilder;
+	private IAstFactory semanticModelBuilder;
 	
 	private int lastConsumedIndex = -1;
 

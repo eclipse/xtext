@@ -14,7 +14,6 @@ import java.util.Iterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.parsetree.CompositeNode;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterators;
