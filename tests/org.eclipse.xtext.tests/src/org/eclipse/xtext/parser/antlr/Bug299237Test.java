@@ -84,7 +84,7 @@ public class Bug299237Test extends AbstractXtextTests implements ISyntaxErrorMes
 		expectedMessage = "expected message";
 		Model model = (Model) getModelAndExpect("model a", 1);
 		ICompositeNode node = NodeModelUtils.getNode(model);
-		List<INode> syntaxErrors = Lists.newArrayList(Iterators.filter(node.treeIterator(), new Predicate<INode>() {
+		List<INode> syntaxErrors = Lists.newArrayList(Iterators.filter(node.iterator(), new Predicate<INode>() {
 			public boolean apply(INode input) {
 				return input.getSyntaxErrorMessage() != null;
 			}

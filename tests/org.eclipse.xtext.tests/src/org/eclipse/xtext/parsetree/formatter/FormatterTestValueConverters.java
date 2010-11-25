@@ -25,7 +25,7 @@ public class FormatterTestValueConverters extends DefaultTerminalConverters {
 				if (!string.equals(string.trim()))
 					throw new RuntimeException();
 				StringBuffer b = new StringBuffer();
-				BidiTreeIterator<INode> iterator = newNode.treeIterator();
+				BidiTreeIterator<INode> iterator = newNode.iterator();
 				while(iterator.hasNext()) {
 					INode next = iterator.next();
 					if (next instanceof ILeafNode) {

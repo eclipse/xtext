@@ -294,7 +294,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 			myContextBuilder.setReplaceRegion(replaceRegion);
 			myContextBuilder.setLastCompleteNode(node);
 			StringBuilder availablePrefix = new StringBuilder(4);
-			Iterator<ILeafNode> leafIter = Iterators.filter(node.treeIterator(), ILeafNode.class);
+			Iterator<ILeafNode> leafIter = Iterators.filter(node.iterator(), ILeafNode.class);
 			while(leafIter.hasNext()) {
 				ILeafNode leaf = leafIter.next();
 				if (leaf.getGrammarElement() != null && !leaf.isHidden()) {

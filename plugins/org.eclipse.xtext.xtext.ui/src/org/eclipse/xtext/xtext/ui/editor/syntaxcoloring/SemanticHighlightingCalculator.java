@@ -85,7 +85,7 @@ public class SemanticHighlightingCalculator implements ISemanticHighlightingCalc
 		if (node instanceof ILeafNode) {
 			acceptor.addPosition(node.getOffset(), node.getLength(), id);
 		} else {
-			Iterator<ILeafNode> leafIter = Iterators.filter(node.treeIterator(), ILeafNode.class);
+			Iterator<ILeafNode> leafIter = Iterators.filter(node.iterator(), ILeafNode.class);
 			while(leafIter.hasNext()) {
 				ILeafNode leaf = leafIter.next();
 				if (!leaf.isHidden()) {

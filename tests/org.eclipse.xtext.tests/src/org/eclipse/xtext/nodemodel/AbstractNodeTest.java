@@ -115,7 +115,7 @@ public abstract class AbstractNodeTest extends TestCase {
 		ICompositeNode rootNode = builder.newRootNode("input");
 		AbstractNode node = createNode();
 		builder.addChild(rootNode, node);
-		BidiIterator<INode> iterator = node.treeIterator();
+		BidiIterator<INode> iterator = node.iterator();
 		assertTrue(iterator.hasNext());
 		assertSame(node, iterator.next());
 		assertFalse(iterator.hasNext());
@@ -129,7 +129,7 @@ public abstract class AbstractNodeTest extends TestCase {
 	
 	public void testTreeIterator_Next_NoParent() {
 		AbstractNode node = createNode();
-		BidiIterator<INode> iterator = node.treeIterator();
+		BidiIterator<INode> iterator = node.iterator();
 		assertTrue(iterator.hasNext());
 		assertSame(node, iterator.next());
 		assertFalse(iterator.hasNext());
@@ -145,7 +145,7 @@ public abstract class AbstractNodeTest extends TestCase {
 		ICompositeNode rootNode = builder.newRootNode("input");
 		AbstractNode node = createNode();
 		builder.addChild(rootNode, node);
-		BidiIterator<INode> iterator = node.treeIterator();
+		BidiIterator<INode> iterator = node.iterator();
 		assertTrue(iterator.hasPrevious());
 		assertSame(node, iterator.previous());
 		assertFalse(iterator.hasPrevious());
@@ -159,7 +159,7 @@ public abstract class AbstractNodeTest extends TestCase {
 	
 	public void testTreeIterator_Previous_NoParent() {
 		AbstractNode node = createNode();
-		BidiIterator<INode> iterator = node.treeIterator();
+		BidiIterator<INode> iterator = node.iterator();
 		assertTrue(iterator.hasPrevious());
 		assertSame(node, iterator.previous());
 		assertFalse(iterator.hasPrevious());
@@ -175,7 +175,7 @@ public abstract class AbstractNodeTest extends TestCase {
 		ICompositeNode rootNode = builder.newRootNode("input");
 		AbstractNode node = createNode();
 		builder.addChild(rootNode, node);
-		BidiIterator<INode> iterator = node.treeIterator();
+		BidiIterator<INode> iterator = node.iterator();
 		assertSame(node, iterator.next());
 		assertTrue(iterator.hasPrevious());
 		assertSame(node, iterator.previous());
@@ -184,7 +184,7 @@ public abstract class AbstractNodeTest extends TestCase {
 	
 	public void testTreeIterator_Bidi_NoParent() {
 		AbstractNode node = createNode();
-		BidiIterator<INode> iterator = node.treeIterator();
+		BidiIterator<INode> iterator = node.iterator();
 		assertSame(node, iterator.next());
 		assertTrue(iterator.hasPrevious());
 		assertSame(node, iterator.previous());

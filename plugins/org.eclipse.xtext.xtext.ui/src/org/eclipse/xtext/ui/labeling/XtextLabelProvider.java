@@ -174,7 +174,7 @@ public class XtextLabelProvider extends DefaultEObjectLabelProvider {
 		ICompositeNode node = NodeModelUtils.getNode(declaration);
 		String literalName = UNKNOWN;
 		if (node != null) {
-			List<ILeafNode> leafs = Lists.newArrayList(Iterators.filter(node.treeIterator(), ILeafNode.class));
+			List<ILeafNode> leafs = Lists.newArrayList(Iterators.filter(node.iterator(), ILeafNode.class));
 			for (ILeafNode leaf : leafs) {
 				if (!leaf.isHidden()) {
 					literalName = leaf.getText();
@@ -192,7 +192,7 @@ public class XtextLabelProvider extends DefaultEObjectLabelProvider {
 		ICompositeNode node = NodeModelUtils.getNode(ruleCall);
 		String ruleName = UNKNOWN;
 		if (node != null) {
-			List<ILeafNode> leafs = Lists.newArrayList(Iterators.filter(node.treeIterator(), ILeafNode.class));
+			List<ILeafNode> leafs = Lists.newArrayList(Iterators.filter(node.iterator(), ILeafNode.class));
 			for (ILeafNode leaf : leafs) {
 				if (!leaf.isHidden()) {
 					ruleName = leaf.getText();
@@ -219,7 +219,7 @@ public class XtextLabelProvider extends DefaultEObjectLabelProvider {
 			else {
 				ICompositeNode node = NodeModelUtils.getNode(ref);
 				if (node != null) {
-					List<ILeafNode> leafs = Lists.newArrayList(Iterators.filter(node.treeIterator(), ILeafNode.class));
+					List<ILeafNode> leafs = Lists.newArrayList(Iterators.filter(node.iterator(), ILeafNode.class));
 					for (int i = leafs.size() - 1; i >= 0; i--) {
 						if (!leafs.get(i).isHidden()) {
 							classifierName = leafs.get(i).getText();

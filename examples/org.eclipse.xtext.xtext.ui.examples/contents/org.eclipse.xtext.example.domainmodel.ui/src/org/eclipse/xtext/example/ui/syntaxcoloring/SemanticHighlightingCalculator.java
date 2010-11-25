@@ -25,7 +25,7 @@ public class SemanticHighlightingCalculator implements ISemanticHighlightingCalc
 		if (resource == null)
 			return;
 		
-		Iterator<INode> allNodes = resource.getParseResult().getRootNode().treeIterator();
+		Iterator<INode> allNodes = resource.getParseResult().getRootNode().iterator();
 		while(allNodes.hasNext()) {
 			INode node = allNodes.next();
 			if (node.getGrammarElement() instanceof CrossReference) {
@@ -40,7 +40,7 @@ public class SemanticHighlightingCalculator implements ISemanticHighlightingCalc
 		if (node instanceof ILeafNode) {
 			acceptor.addPosition(node.getOffset(), node.getLength(), id);
 		} else {
-			Iterator<ILeafNode> leafIter = Iterators.filter(node.treeIterator(), ILeafNode.class);
+			Iterator<ILeafNode> leafIter = Iterators.filter(node.iterator(), ILeafNode.class);
 			while(leafIter.hasNext()) {
 				ILeafNode leaf = leafIter.next();
 				if (!leaf.isHidden()) {

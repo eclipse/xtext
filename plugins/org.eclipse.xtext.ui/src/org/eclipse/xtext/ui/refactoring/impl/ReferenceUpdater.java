@@ -110,7 +110,7 @@ public class ReferenceUpdater {
 
 	protected CrossReference getCrossReference(EObject referringElement, int offset) {
 		ICompositeNode node = NodeModelUtils.getNode(referringElement);
-		Iterator<INode> iter = node.treeIterator();
+		Iterator<INode> iter = node.iterator();
 		while(iter.hasNext()) {
 			INode childNode = iter.next();
 			if (childNode.getOffset() >= offset && childNode.getGrammarElement() instanceof CrossReference)
