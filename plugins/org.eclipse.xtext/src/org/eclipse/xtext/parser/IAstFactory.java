@@ -14,38 +14,41 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.nodemodel.INode;
 
 /**
+ * Responsible for instantiating and initializing the semantic model according
+ * to call backs from clients. Main (and only default) client is the parser. 
+ * 
  * @author Sven Efftinge
  */
 public interface IAstFactory {
 
 	/**
-	 * creates an instance of the given type
+	 * Creates an instance of the given type which has to be an 
+	 * {@link org.eclipse.emf.ecore.EClass EClass}.
 	 * 
-	 * @param typeName
-	 * @return
+	 * @param clazz the {@link org.eclipse.emf.ecore.EClass EClass} to be instantiated.
+	 * @return the instantiated {@link EObject} which must conform the given class.
 	 */
 	EObject create(EClassifier clazz);
 
 	/**
+	 * Assigns a given value to a feature of the element <code>_this</code>. The value may be converted
+	 * according to the optional lexer rule. 
+	 * The feature must be resolvable to a single value feature.
 	 * 
-	 * sets the value to the feature of _this element
-	 * 
-	 * @param _this
-	 * @param feature
-	 * @param value
-	 * @throws RecognitionException
+	 * @throws ValueConverterException if the value cannot be converted.
 	 */
-	void set(EObject _this, String feature, Object value, String lexerRule, INode newNode)
+	void set(EObject _this, String feature, Object value, String lexerRule, INode node)
 			throws ValueConverterException;
 
 	/**
-	 * adds the value to the feature of _this element
+	 * Adds a given value to a list described by the given feature. The list is owned by
+	 * the element <code>_this</code>. The given value may be converted
+	 * according to the optional lexer rule. 
+	 * The feature must be resolvable to a multi value feature.
 	 * 
-	 * @param _this
-	 * @param feature
-	 * @param value
+	 * @throws ValueConverterException if the value cannot be converted.
 	 */
-	void add(EObject _this, String feature, Object value, String lexerRule, INode newNode)
+	void add(EObject _this, String feature, Object value, String lexerRule, INode node)
 			throws ValueConverterException;
 
 }

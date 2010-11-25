@@ -100,7 +100,7 @@ public abstract class AbstractIDValueConverter extends AbstractLexerBasedConvert
 		return result;
 	}
 	
-	public String toValue(String string, INode newNode) {
+	public String toValue(String string, INode node) {
 		if (string == null)
 			return null;
 		return string.startsWith("^") ? string.substring(1) : string;

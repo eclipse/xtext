@@ -25,7 +25,7 @@ public class EcoreDslConverters extends DefaultTerminalConverters {
 	public IValueConverter<Integer> sint() {
 		return new AbstractToStringConverter<Integer>() {
 			@Override
-			public Integer internalToValue(String string, INode newNode) {
+			public Integer internalToValue(String string, INode node) {
 				return Integer.valueOf(string);
 			}
 		};
@@ -63,7 +63,7 @@ public class EcoreDslConverters extends DefaultTerminalConverters {
 
 	private IValueConverter<Boolean> negatedBooleanConverter(final String keyword) {
 		return new AbstractValueConverter<Boolean>(){
-			public Boolean toValue(String string, INode newNode) throws ValueConverterException {
+			public Boolean toValue(String string, INode node) throws ValueConverterException {
 				return string == null;
 			}
 		

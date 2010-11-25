@@ -25,11 +25,11 @@ public class Ecore2XtextTerminalConverters extends DefaultTerminalConverters {
 	public IValueConverter<String> EString() {
 		return new AbstractNullSafeConverter<String>() {
 			@Override
-			protected String internalToValue(String string, INode newNode) {
+			protected String internalToValue(String string, INode node) {
 				if((string.startsWith("'") && string.endsWith("'"))||(string.startsWith("\"") && string.endsWith("\""))) {
-					return STRING().toValue(string, newNode);
+					return STRING().toValue(string, node);
 				}
-				return ID().toValue(string, newNode);
+				return ID().toValue(string, node);
 			}
 
 			@Override
