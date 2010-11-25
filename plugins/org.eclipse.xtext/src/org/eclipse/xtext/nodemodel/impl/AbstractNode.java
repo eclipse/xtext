@@ -11,13 +11,14 @@ import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.BidiIterator;
+import org.eclipse.xtext.nodemodel.BidiTreeIterable;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.nodemodel.util.NodeTreeIterator;
-import org.eclipse.xtext.nodemodel.util.SingletonBidiIterator;
+import org.eclipse.xtext.nodemodel.util.ReversedBidiTreeIterable;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Iterators;
@@ -47,19 +48,15 @@ public abstract class AbstractNode implements INode {
 		this.parent = parent;
 	}
 	
-	public BidiIterator<INode> iterator() {
-		return SingletonBidiIterator.<INode>create(this);
-	}
-	
-	public BidiIterator<AbstractNode> basicIterator() {
-		return SingletonBidiIterator.create(this);
-	}
-	
-	public BidiTreeIterator<INode> treeIterator() {
+	public BidiTreeIterator<INode> iterator() {
 		return new NodeTreeIterator(this);
 	}
 	
-	public BidiTreeIterator<AbstractNode> basicTreeIterator() {
+	public BidiTreeIterable<INode> reverse() {
+		return new ReversedBidiTreeIterable<INode>(this);
+	}
+	
+	public BidiTreeIterator<AbstractNode> basicIterator() {
 		return new BasicNodeTreeIterator(this);
 	}
 
@@ -111,7 +108,7 @@ public abstract class AbstractNode implements INode {
 	}
 	
 	public int getOffset() {
-		Iterator<ILeafNode> leafIter = Iterators.filter(basicTreeIterator(), ILeafNode.class);
+		Iterator<ILeafNode> leafIter = Iterators.filter(basicIterator(), ILeafNode.class);
 		while(leafIter.hasNext()) {
 			ILeafNode leaf = leafIter.next();
 			if (!leaf.isHidden())
@@ -121,7 +118,7 @@ public abstract class AbstractNode implements INode {
 	}
 	
 	public int getLength() {
-		BidiIterator<AbstractNode> iter = basicTreeIterator();
+		BidiIterator<AbstractNode> iter = basicIterator();
 		while(iter.hasPrevious()) {
 			INode prev = iter.previous();
 			if (prev instanceof ILeafNode && !((ILeafNode) prev).isHidden()) {

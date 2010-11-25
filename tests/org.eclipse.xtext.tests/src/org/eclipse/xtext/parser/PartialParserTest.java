@@ -190,7 +190,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 	}
 
 	private void checkGrammarAssigned(ICompositeNode rootNode) {
-		BidiTreeIterator<INode> iterator = rootNode.treeIterator();
+		BidiTreeIterator<INode> iterator = rootNode.iterator();
 		while(iterator.hasNext()) {
 			INode next = iterator.next();
 			if (next != rootNode) {
@@ -209,7 +209,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 				")";
 		IParseResult parseResult = getParseResult(model);
 		ICompositeNode rootNode = parseResult.getRootNode();
-		Iterator<ILeafNode> iter = Iterators.filter(rootNode.treeIterator(), ILeafNode.class);
+		Iterator<ILeafNode> iter = Iterators.filter(rootNode.iterator(), ILeafNode.class);
 		boolean found = false;
 		while (iter.hasNext()) {
 			ILeafNode leaf = iter.next();
@@ -222,7 +222,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		assertTrue("node c found", found);
 		IParseResult reparse = reparse(parseResult, model.indexOf('c'), 1, "xy");
 		assertFalse(reparse.hasSyntaxErrors());
-		iter = Iterators.filter(rootNode.treeIterator(), ILeafNode.class);
+		iter = Iterators.filter(rootNode.iterator(), ILeafNode.class);
 		found = false;
 		while (iter.hasNext()) {
 			ILeafNode leaf = iter.next();

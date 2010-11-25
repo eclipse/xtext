@@ -238,7 +238,7 @@ public class GrammarUtil {
 			return typeRef.getClassifier().getName();
 		final ICompositeNode node = NodeModelUtils.getNode(typeRef);
 		if (node != null) {
-			final BidiIterator<INode> leafNodes = node.treeIterator();
+			final BidiIterator<INode> leafNodes = node.iterator();
 			while(leafNodes.hasPrevious()) {
 				INode previous = leafNodes.previous();
 				if (previous instanceof ILeafNode && !((ILeafNode) previous).isHidden())

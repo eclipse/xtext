@@ -10,27 +10,23 @@ package org.eclipse.xtext.nodemodel.util;
 import org.eclipse.xtext.nodemodel.BidiIterable;
 import org.eclipse.xtext.nodemodel.BidiIterator;
 
-/**
- * @author Sebastian Zarnekow - Initial contribution and API
- */
-public class SingletonBidiIterable<T> implements BidiIterable<T> {
+public class ReversedBidiIterable<T> implements BidiIterable<T> {
+	private final BidiIterable<T> delegate;
 
-	public static <T> SingletonBidiIterable<T> create(T value) {
-		return new SingletonBidiIterable<T>(value);
-	}
-	
-	private final T value;
-	
-	public SingletonBidiIterable(T value) {
-		this.value = value;
+	public ReversedBidiIterable(BidiIterable<T> delegate) {
+		this.delegate = delegate;
 	}
 
 	public BidiIterator<T> iterator() {
-		return SingletonBidiIterator.<T>create(value);
-	}
-	
-	public BidiIterable<T> reverse() {
-		return this;
+		BidiIterator<T> delegate = getDelegate().iterator(); 
+		return new ReversedBidiIterator<T>(delegate);
 	}
 
+	public BidiIterable<T> reverse() {
+		return delegate;
+	}
+	
+	protected BidiIterable<T> getDelegate() {
+		return delegate;
+	}
 }

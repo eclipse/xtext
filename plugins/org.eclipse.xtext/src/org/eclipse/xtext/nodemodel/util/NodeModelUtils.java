@@ -33,7 +33,7 @@ public class NodeModelUtils {
 	public static ILeafNode findLeafNodeAtOffset(INode node, int leafNodeOffset) {
 		int offset = node.getTotalOffset();
 		int length = node.getTotalLength();
-		BidiTreeIterator<AbstractNode> iterator = ((AbstractNode) node).basicTreeIterator();
+		BidiTreeIterator<AbstractNode> iterator = ((AbstractNode) node).basicIterator();
 		if (leafNodeOffset > (offset + length) / 2) {
 			while(iterator.hasPrevious()) {
 				AbstractNode previous = iterator.previous();
@@ -117,7 +117,7 @@ public class NodeModelUtils {
 	}
 	
 	public static final INode getLastCompleteNodeByOffset(INode node, int offsetPosition) {
-		BidiTreeIterator<INode> iterator = node.getRootNode().treeIterator();
+		BidiTreeIterator<INode> iterator = node.getRootNode().iterator();
 		INode result = node;
 		while (iterator.hasNext()) {
 			INode candidate = iterator.next();

@@ -110,7 +110,7 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 		ICompositeNode parserNode = NodeModelUtils.getNode(owner);
 		if (parserNode != null) {
 			int currentIndex = 0;
-			for (TreeIterator<INode> childrenIterator = parserNode.treeIterator(); childrenIterator.hasNext();) {
+			for (TreeIterator<INode> childrenIterator = parserNode.iterator(); childrenIterator.hasNext();) {
 				INode ownerChildNode = childrenIterator.next();
 				EObject grammarElement = ownerChildNode.getGrammarElement();
 				if (grammarElement instanceof CrossReference) {

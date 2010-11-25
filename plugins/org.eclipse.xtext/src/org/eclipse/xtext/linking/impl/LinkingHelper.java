@@ -57,7 +57,7 @@ public class LinkingHelper {
 		else {
 			StringBuilder builder = new StringBuilder(Math.max(node.getTotalLength(), 1));
 			boolean hiddenSeen = false;
-			Iterator<ILeafNode> iterator = Iterators.filter(node.treeIterator(), ILeafNode.class);
+			Iterator<ILeafNode> iterator = Iterators.filter(node.iterator(), ILeafNode.class);
 			while(iterator.hasNext()) {
 				ILeafNode leaf = iterator.next();
 				if (!leaf.isHidden()) {

@@ -92,7 +92,7 @@ public class DefaultNodeModelFormatter extends AbstractNodeModelFormatter {
 			return "";
 
 		List<ILeafNode> r = new ArrayList<ILeafNode>();
-		Iterator<ILeafNode> it = Iterators.filter(root.treeIterator(), ILeafNode.class);
+		Iterator<ILeafNode> it = Iterators.filter(root.iterator(), ILeafNode.class);
 
 		// add all nodes until fromOffset
 		while (it.hasNext()) {

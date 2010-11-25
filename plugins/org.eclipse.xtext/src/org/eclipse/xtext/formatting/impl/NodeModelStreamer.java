@@ -68,7 +68,7 @@ public class NodeModelStreamer implements INodeModelStreamer {
 
 	protected List<INode> getLeafs(ICompositeNode root, int fromOffset, int toOffset) {
 		List<INode> result = new ArrayList<INode>();
-		TreeIterator<INode> iterator = root.treeIterator();
+		TreeIterator<INode> iterator = root.iterator();
 
 		// seek to fromOffset
 		if (fromOffset > 0)

@@ -31,7 +31,7 @@ public class XtextValueConverters extends DefaultTerminalConverters {
 			@Override
 			protected String internalToValue(String string, INode newNode) throws ValueConverterException {
 				StringBuilder result = new StringBuilder();
-				Iterator<ILeafNode> iter = Iterators.filter(newNode.treeIterator(), ILeafNode.class);
+				Iterator<ILeafNode> iter = Iterators.filter(newNode.iterator(), ILeafNode.class);
 				while(iter.hasNext()) {
 					ILeafNode leaf = iter.next();
 					if (!leaf.isHidden()) {

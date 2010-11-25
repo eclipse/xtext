@@ -18,4 +18,18 @@ public class NodeIterable implements BidiIterable<INode> {
 	public BidiIterator<INode> iterator() {
 		return new NodeIterator(startWith);
 	}
+	
+	public BidiIterable<INode> reverse() {
+		return new BidiIterable<INode>() {
+
+			public BidiIterator<INode> iterator() {
+				BidiIterator<INode> delegate = NodeIterable.this.iterator(); 
+				return new ReversedBidiIterator(delegate);
+			}
+
+			public BidiIterable<INode> reverse() {
+				return NodeIterable.this;
+			}
+		};
+	}
 }

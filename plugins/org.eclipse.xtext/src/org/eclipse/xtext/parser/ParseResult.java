@@ -50,7 +50,7 @@ public class ParseResult implements IParseResult {
 			public Iterator<INode> iterator() {
 				// TODO: organize imports
 				return Iterators.filter(Iterators.filter(
-						((org.eclipse.xtext.nodemodel.impl.CompositeNode) rootNode).basicTreeIterator(), INode.class),
+						((org.eclipse.xtext.nodemodel.impl.CompositeNode) rootNode).basicIterator(), INode.class),
 						new Predicate<INode>() {
 					public boolean apply(INode input) {
 						return input.getSyntaxErrorMessage() != null;
