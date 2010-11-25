@@ -24,7 +24,6 @@ import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSet
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -209,7 +208,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 				")";
 		IParseResult parseResult = getParseResult(model);
 		ICompositeNode rootNode = parseResult.getRootNode();
-		Iterator<ILeafNode> iter = Iterators.filter(rootNode.iterator(), ILeafNode.class);
+		Iterator<ILeafNode> iter = rootNode.getLeafNodes().iterator();
 		boolean found = false;
 		while (iter.hasNext()) {
 			ILeafNode leaf = iter.next();
@@ -222,7 +221,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		assertTrue("node c found", found);
 		IParseResult reparse = reparse(parseResult, model.indexOf('c'), 1, "xy");
 		assertFalse(reparse.hasSyntaxErrors());
-		iter = Iterators.filter(rootNode.iterator(), ILeafNode.class);
+		iter = rootNode.getLeafNodes().iterator();
 		found = false;
 		while (iter.hasNext()) {
 			ILeafNode leaf = iter.next();

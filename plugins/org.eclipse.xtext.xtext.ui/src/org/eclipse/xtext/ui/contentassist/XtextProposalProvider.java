@@ -3,7 +3,6 @@
 */
 package org.eclipse.xtext.ui.contentassist;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -69,7 +68,6 @@ import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConf
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -294,9 +292,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 			myContextBuilder.setReplaceRegion(replaceRegion);
 			myContextBuilder.setLastCompleteNode(node);
 			StringBuilder availablePrefix = new StringBuilder(4);
-			Iterator<ILeafNode> leafIter = Iterators.filter(node.iterator(), ILeafNode.class);
-			while(leafIter.hasNext()) {
-				ILeafNode leaf = leafIter.next();
+			for(ILeafNode leaf: node.getLeafNodes()) {
 				if (leaf.getGrammarElement() != null && !leaf.isHidden()) {
 					if ((leaf.getTotalLength() + leaf.getTotalOffset()) < context.getOffset())
 						availablePrefix.append(leaf.getText());

@@ -6,8 +6,6 @@ import static org.eclipse.xtext.example.css.ui.highlighting.HighlightingConfigur
 import static org.eclipse.xtext.example.css.ui.highlighting.HighlightingConfiguration.RGB_LITERAL;
 import static org.eclipse.xtext.example.css.ui.highlighting.HighlightingConfiguration.COLOR_CONSTANT;
 
-import java.util.Iterator;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.example.css.xcss.ColorConstant;
 import org.eclipse.xtext.example.css.xcss.ColorLiteral;
@@ -28,8 +26,6 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculato
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.util.XbaseSwitch;
-
-import com.google.common.collect.Iterators;
 
 public class HighlightingCalculator implements ISemanticHighlightingCalculator {
 
@@ -151,9 +147,7 @@ public class HighlightingCalculator implements ISemanticHighlightingCalculator {
 		if (node instanceof ILeafNode) {
 			acceptor.addPosition(node.getOffset(), node.getLength(), id);
 		} else {
-			Iterator<ILeafNode> iterator = Iterators.filter(node.iterator(), ILeafNode.class);
-			while(iterator.hasNext()) {
-				ILeafNode leaf = iterator.next();
+			for(ILeafNode leaf: node.getLeafNodes()) {
 				if (!leaf.isHidden()) {
 					acceptor.addPosition(leaf.getOffset(), leaf.getLength(), id);
 				}
