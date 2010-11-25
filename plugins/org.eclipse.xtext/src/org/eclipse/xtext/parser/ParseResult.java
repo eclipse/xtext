@@ -14,6 +14,8 @@ import java.util.Iterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.impl.AbstractNode;
+import org.eclipse.xtext.nodemodel.impl.CompositeNode;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterators;
@@ -47,15 +49,15 @@ public class ParseResult implements IParseResult {
 		if (rootNode == null || !hasSyntaxErrors())
 			return Collections.emptyList();
 		return new Iterable<INode>() {
+			@SuppressWarnings("unchecked")
 			public Iterator<INode> iterator() {
-				// TODO: organize imports
-				return Iterators.filter(Iterators.filter(
-						((org.eclipse.xtext.nodemodel.impl.CompositeNode) rootNode).basicIterator(), INode.class),
-						new Predicate<INode>() {
-					public boolean apply(INode input) {
+				Iterator<? extends INode> result = Iterators.filter(((CompositeNode) rootNode).basicIterator(),
+						new Predicate<AbstractNode>() {
+					public boolean apply(AbstractNode input) {
 						return input.getSyntaxErrorMessage() != null;
 					}
 				});
+				return (Iterator<INode>) result;
 			}
 		};
 	}
@@ -64,8 +66,8 @@ public class ParseResult implements IParseResult {
 		return rootNode;
 	}
     
-	public void setRootNode2(ICompositeNode rootNode2) {
-		this.rootNode = rootNode2;
+	public void setRootNode(ICompositeNode rootNode) {
+		this.rootNode = rootNode;
 	}
 
 	public boolean hasSyntaxErrors() {

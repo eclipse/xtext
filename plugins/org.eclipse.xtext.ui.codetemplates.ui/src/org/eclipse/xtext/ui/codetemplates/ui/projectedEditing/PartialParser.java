@@ -2,7 +2,6 @@ package org.eclipse.xtext.ui.codetemplates.ui.projectedEditing;
 
 import java.io.Reader;
 
-import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parser.IParseResult;

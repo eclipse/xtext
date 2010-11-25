@@ -17,8 +17,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 
-import com.google.common.collect.Iterators;
-
 public class SemanticHighlightingCalculator implements ISemanticHighlightingCalculator {
 	
 	public void provideHighlightingFor(final XtextResource resource, IHighlightedPositionAcceptor acceptor) {
@@ -40,9 +38,7 @@ public class SemanticHighlightingCalculator implements ISemanticHighlightingCalc
 		if (node instanceof ILeafNode) {
 			acceptor.addPosition(node.getOffset(), node.getLength(), id);
 		} else {
-			Iterator<ILeafNode> leafIter = Iterators.filter(node.iterator(), ILeafNode.class);
-			while(leafIter.hasNext()) {
-				ILeafNode leaf = leafIter.next();
+			for(ILeafNode leaf: node.getLeafNodes()) {
 				if (!leaf.isHidden()) {
 					acceptor.addPosition(leaf.getOffset(), leaf.getLength(), id);
 				}

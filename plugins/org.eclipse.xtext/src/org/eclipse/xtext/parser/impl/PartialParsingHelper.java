@@ -167,7 +167,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 //		parseResult.getRootNode().setGrammarElement(replaceNode.getGrammarElement());
 		if (oldCompositeNode != oldRootNode) {
 			nodeModelBuilder.replaceAndTransferLookAhead(oldCompositeNode, newParseResult.getRootNode());
-			((ParseResult) newParseResult).setRootNode2(oldRootNode);
+			((ParseResult) newParseResult).setRootNode(oldRootNode);
 			StringBuilder builder = new StringBuilder(oldRootNode.getText());
 			replaceRegion.applyTo(builder);
 			nodeModelBuilder.setCompleteContent(oldRootNode, builder.toString());

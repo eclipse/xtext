@@ -56,6 +56,14 @@ public abstract class AbstractNode implements INode {
 		return new ReversedBidiTreeIterable<INode>(this);
 	}
 	
+	public Iterable<ILeafNode> getLeafNodes() {
+		return new Iterable<ILeafNode>() {
+			public Iterator<ILeafNode> iterator() {
+				return Iterators.filter(basicIterator(), ILeafNode.class);
+			}
+		};
+	}
+	
 	public BidiTreeIterator<AbstractNode> basicIterator() {
 		return new BasicNodeTreeIterator(this);
 	}

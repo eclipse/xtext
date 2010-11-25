@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
-import java.util.Iterator;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
@@ -20,7 +18,6 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IValueSerializer;
 
-import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 
 /**
@@ -66,9 +63,7 @@ public class ValueSerializer implements IValueSerializer {
 		else {
 			StringBuilder builder = new StringBuilder(node.getLength());
 			boolean hiddenSeen = false;
-			Iterator<ILeafNode> iterator = Iterators.filter(node.iterator(), ILeafNode.class);
-			while(iterator.hasNext()) {
-				ILeafNode leaf = iterator.next();
+			for(ILeafNode leaf: node.getLeafNodes()) {
 				if (!leaf.isHidden()) {
 					if (hiddenSeen && builder.length() > 0)
 						builder.append(' ');

@@ -37,7 +37,6 @@ import org.eclipse.xtext.ui.label.StylerFactory;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
 
-import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
@@ -174,8 +173,7 @@ public class XtextLabelProvider extends DefaultEObjectLabelProvider {
 		ICompositeNode node = NodeModelUtils.getNode(declaration);
 		String literalName = UNKNOWN;
 		if (node != null) {
-			List<ILeafNode> leafs = Lists.newArrayList(Iterators.filter(node.iterator(), ILeafNode.class));
-			for (ILeafNode leaf : leafs) {
+			for (ILeafNode leaf : node.getLeafNodes()) {
 				if (!leaf.isHidden()) {
 					literalName = leaf.getText();
 					break;
@@ -192,8 +190,7 @@ public class XtextLabelProvider extends DefaultEObjectLabelProvider {
 		ICompositeNode node = NodeModelUtils.getNode(ruleCall);
 		String ruleName = UNKNOWN;
 		if (node != null) {
-			List<ILeafNode> leafs = Lists.newArrayList(Iterators.filter(node.iterator(), ILeafNode.class));
-			for (ILeafNode leaf : leafs) {
+			for (ILeafNode leaf : node.getLeafNodes()) {
 				if (!leaf.isHidden()) {
 					ruleName = leaf.getText();
 					break;
@@ -219,7 +216,7 @@ public class XtextLabelProvider extends DefaultEObjectLabelProvider {
 			else {
 				ICompositeNode node = NodeModelUtils.getNode(ref);
 				if (node != null) {
-					List<ILeafNode> leafs = Lists.newArrayList(Iterators.filter(node.iterator(), ILeafNode.class));
+					List<ILeafNode> leafs = Lists.newArrayList(node.getLeafNodes());
 					for (int i = leafs.size() - 1; i >= 0; i--) {
 						if (!leafs.get(i).isHidden()) {
 							classifierName = leafs.get(i).getText();

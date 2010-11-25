@@ -63,6 +63,11 @@ public interface INode extends BidiTreeIterable<INode> {
 	 * @return the root node of this parse tree. Will not return <code>null</code> in a consistent tree.
 	 */
 	ICompositeNode getRootNode();
+	
+	/**
+	 * @return an iterable for all contained leaf nodes. Never <code>null</code>.
+	 */
+	Iterable<ILeafNode> getLeafNodes();
 
 	/**
 	 * @return the offset of this node including hidden tokens.
