@@ -112,7 +112,7 @@ public class SyntheticCompositeNode implements ICompositeNode {
 	}
 
 	public EObject getSemanticElement() {
-		return delegate.basicGetParent().getSemanticElement();
+		return delegate.getSemanticElement();
 	}
 	
 	public boolean hasDirectSemanticElement() {
@@ -162,7 +162,10 @@ public class SyntheticCompositeNode implements ICompositeNode {
 	}
 
 	public INode getLastChild() {
-		return getFirstChild();
+		EObject[] array = (EObject[]) delegate.basicGetGrammarElement();
+		if (array.length == grammarElementIdx + 1)
+			return delegate.basicGetLastChild();
+		return new SyntheticCompositeNode(delegate, grammarElementIdx + 1);
 	}
 
 	public int getLookAhead() {
