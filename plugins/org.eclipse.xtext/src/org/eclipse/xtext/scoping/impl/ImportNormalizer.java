@@ -11,6 +11,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 
 /**
  * @author koehnlein - Initial contribution and API
+ * @author Sven Efftinge
  */
 public class ImportNormalizer {
 
@@ -50,6 +51,25 @@ public class ImportNormalizer {
 	@Override
 	public String toString() {
 		return importedNamespacePrefix.toString() + (hasWildCard ? ".*" : "");
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this==obj)
+			return true;
+		if (obj==null)
+			return false;
+		if (obj instanceof ImportNormalizer) {
+			ImportNormalizer other = (ImportNormalizer)obj;
+			//TODO not ignore case aware
+			return other.hasWildCard==hasWildCard && other.importedNamespacePrefix.equals(importedNamespacePrefix);
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return importedNamespacePrefix.hashCode();
 	}
 
 }
