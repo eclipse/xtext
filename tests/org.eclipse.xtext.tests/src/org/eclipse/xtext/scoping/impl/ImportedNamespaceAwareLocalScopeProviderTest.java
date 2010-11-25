@@ -89,8 +89,13 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		XtextResource resource = getResource(new StringInputStream("import foo.bar.* "), URI
 				.createURI("import.indextestlanguage"));
 		resource.getResourceSet().createResource(URI.createURI("foo.indextestlanguage")).load(
-				new StringInputStream("foo.bar { " + "  entity Person {  " + "    String name " + "  } "
-						+ "  datatype String " + "}"), null);
+				new StringInputStream(
+						"foo.bar { " 
+						+ "  entity Person {  " 
+						+ "    String name " 
+						+ "  } "
+						+ "  datatype String " 
+						+ "}"), null);
 
 		IScope scope = scopeProvider.getScope(resource.getContents().get(0), IndexTestLanguagePackage.eINSTANCE
 				.getFile_Elements());
@@ -217,7 +222,44 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		assertNotNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("Bar"))));
 	}
 	
-	public void testDuplicateImportAreShadowed_00() throws Exception {
+	public void testDuplicateImportsAreIgnored() throws Exception {
+		final XtextResource resource = getResource(new StringInputStream(
+				  "foo { " 
+				+ "  entity Foo {}" 
+				+ "  entity Bar {}" 
+				+ "}"
+				+ "bar {"
+				+ "  entity Foo {}" 
+				+ "}" 
+				+ "baz {" 
+				+ "  import foo.*" 
+				+ "  import foo.*" 
+				+ "  entity Baz{}" 
+				+ "}"), URI
+				.createURI("withoutwildcard.indextestlanguage"));
+		Iterable<EObject> allContents = new Iterable<EObject>() {
+			public Iterator<EObject> iterator() {
+				return resource.getAllContents();
+			}
+		};
+		Entity foo = find(Iterables.filter(allContents, Entity.class), new Predicate<Entity>(){
+			public boolean apply(Entity input) {
+				return input.getName().equals("Baz");
+			}});
+		
+		IScope scope = scopeProvider.getScope(foo, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
+		assertNotNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("Bar"))));
+		assertNotNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("Foo"))));
+		ArrayList<IEObjectDescription> list = newArrayList(scope.getElements(ISelector.SELECT_ALL));
+		assertEquals(7,list.size());
+		assertTrue(any(list, new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				return input.getName().equals(QualifiedName.create("Foo"));
+			}
+		}));
+	}
+	
+	public void testUnambiguousImportAreShadowed_00() throws Exception {
 		final XtextResource resource = getResource(new StringInputStream(
 				  "foo { " 
 				+ "  entity Foo {}" 
@@ -249,11 +291,11 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		assertEquals(6,list.size());
 		assertFalse(any(list, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
-				return input.getName().equals("Foo");
+				return input.getName().equals(QualifiedName.create("Foo"));
 			}
 		}));
 	}
-	public void testDuplicateImportAreShadowed_01() throws Exception {
+	public void testUnambiguousImportAreShadowed_01() throws Exception {
 		final XtextResource resource = getResource(new StringInputStream(
 				"foo { " 
 				+ "  entity Foo {}" 
@@ -285,11 +327,11 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		assertEquals(6,list.size());
 		assertFalse(any(list, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
-				return input.getName().equals("Foo");
+				return input.getName().equals(QualifiedName.create("Foo"));
 			}
 		}));
 	}
-	public void testDuplicateImportAreShadowed_02() throws Exception {
+	public void testUnambiguousImportAreShadowed_02() throws Exception {
 		final XtextResource resource = getResource(new StringInputStream(
 				"foo { " 
 				+ "  entity Foo {}" 
@@ -321,7 +363,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		assertEquals(5,list.size());
 		assertFalse(any(list, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
-				return input.getName().equals("Foo");
+				return input.getName().equals(QualifiedName.create("Foo"));
 			}
 		}));
 	}
