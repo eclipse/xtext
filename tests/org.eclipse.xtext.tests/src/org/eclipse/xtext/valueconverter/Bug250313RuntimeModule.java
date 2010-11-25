@@ -26,7 +26,7 @@ public class Bug250313RuntimeModule extends AbstractBug250313RuntimeModule {
 		public IValueConverter<String> Datatype() {
 			return new AbstractNullSafeConverter<String>() {
 				@Override
-				protected String internalToValue(String string, INode newNode) {
+				protected String internalToValue(String string, INode node) {
 					return "str";
 				}
 
@@ -41,7 +41,7 @@ public class Bug250313RuntimeModule extends AbstractBug250313RuntimeModule {
 		public IValueConverter<String> NestedDatatype() {
 			return new AbstractNullSafeConverter<String>() {
 				@Override
-				protected String internalToValue(String string, INode newNode) {
+				protected String internalToValue(String string, INode node) {
 					return "str";
 				}
 

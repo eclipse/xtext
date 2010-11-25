@@ -24,7 +24,7 @@ public class TerminalRuleTestLanguageConverters extends AbstractDeclarativeValue
 	public IValueConverter<String> ID() {
 		return new AbstractNullSafeConverter<String>() {
 			@Override
-			protected String internalToValue(String string, INode newNode) {
+			protected String internalToValue(String string, INode node) {
 				return string.startsWith("^") ? string.substring(1) : string;
 			}
 
@@ -42,7 +42,7 @@ public class TerminalRuleTestLanguageConverters extends AbstractDeclarativeValue
 	public IValueConverter<String> STRING() {
 		return new AbstractNullSafeConverter<String>() {
 			@Override
-			protected String internalToValue(String string, INode newNode) {
+			protected String internalToValue(String string, INode node) {
 				return Strings.convertFromJavaString(string.substring(1, string.length() - 1), false);
 			}
 
