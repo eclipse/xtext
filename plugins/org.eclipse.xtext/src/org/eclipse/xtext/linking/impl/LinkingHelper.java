@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.linking.impl;
 
-import java.util.Iterator;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.CrossReference;
@@ -19,7 +17,6 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 
-import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 
 /**
@@ -57,9 +54,7 @@ public class LinkingHelper {
 		else {
 			StringBuilder builder = new StringBuilder(Math.max(node.getTotalLength(), 1));
 			boolean hiddenSeen = false;
-			Iterator<ILeafNode> iterator = Iterators.filter(node.iterator(), ILeafNode.class);
-			while(iterator.hasNext()) {
-				ILeafNode leaf = iterator.next();
+			for(ILeafNode leaf: node.getLeafNodes()) {
 				if (!leaf.isHidden()) {
 					if (hiddenSeen && builder.length() > 0)
 						builder.append(' ');

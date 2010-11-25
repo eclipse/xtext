@@ -24,7 +24,6 @@ import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
-import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
@@ -38,7 +37,7 @@ public class TokenUtil {
 	public Pair<List<ILeafNode>, List<ILeafNode>> getLeadingAndTrailingHiddenTokens(INode node) {
 		Pair<List<ILeafNode>, List<ILeafNode>> result = Tuples.<List<ILeafNode>, List<ILeafNode>> create(Lists
 				.<ILeafNode> newArrayList(), Lists.<ILeafNode> newArrayList());
-		List<ILeafNode> leafNodes = Lists.newArrayList(Iterators.filter(node.iterator(), ILeafNode.class));
+		List<ILeafNode> leafNodes = Lists.newArrayList(node.getLeafNodes());
 		int begin = 0, end = leafNodes.size() - 1;
 		while (begin <= end && leafNodes.get(begin).isHidden())
 			result.getFirst().add(leafNodes.get(begin++));
@@ -118,7 +117,7 @@ public class TokenUtil {
 	public String serializeNode(INode node) {
 		if (node instanceof ILeafNode)
 			return ((ILeafNode) node).getText();
-		List<ILeafNode> leafNodes = Lists.newArrayList(Iterators.filter(node.iterator(), ILeafNode.class));
+		List<ILeafNode> leafNodes = Lists.newArrayList(node.getLeafNodes());
 		int begin = 0, end = leafNodes.size() - 1;
 		while (begin <= end && isWhitespaceOrCommentNode(leafNodes.get(begin)))
 			begin++;

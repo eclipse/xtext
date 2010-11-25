@@ -9,7 +9,6 @@ package org.eclipse.xtext.formatting.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,7 +24,6 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
 import org.eclipse.xtext.util.ITextRegion;
 
-import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 
 /**
@@ -92,11 +90,8 @@ public class DefaultNodeModelFormatter extends AbstractNodeModelFormatter {
 			return "";
 
 		List<ILeafNode> r = new ArrayList<ILeafNode>();
-		Iterator<ILeafNode> it = Iterators.filter(root.iterator(), ILeafNode.class);
-
 		// add all nodes until fromOffset
-		while (it.hasNext()) {
-			ILeafNode l = it.next();
+		for(ILeafNode l: root.getLeafNodes()) {
 			if (l.getOffset() >= fromOffset)
 				break;
 			else

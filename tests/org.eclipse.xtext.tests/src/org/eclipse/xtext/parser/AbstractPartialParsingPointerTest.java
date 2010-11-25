@@ -8,8 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;

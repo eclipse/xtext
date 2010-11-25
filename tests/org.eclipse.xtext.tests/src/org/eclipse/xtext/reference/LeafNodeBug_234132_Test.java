@@ -8,14 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.reference;
 
-import java.util.Iterator;
-
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
-
-import com.google.common.collect.Iterators;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -26,9 +22,7 @@ public class LeafNodeBug_234132_Test extends AbstractXtextTests {
         with(ReferenceGrammarTestLanguageStandaloneSetup.class);
         String model = readFileIntoString("org/eclipse/xtext/reference/leafNodeBug_234132.tst");
         ICompositeNode rootNode = getRootNodeAndExpect(model, 1);
-        Iterator<ILeafNode> iter = Iterators.filter(rootNode.iterator(), ILeafNode.class);
-        while(iter.hasNext()) {
-        	ILeafNode leafNode = iter.next();
+        for(ILeafNode leafNode: rootNode.getLeafNodes()) {
             assertTrue(leafNode.getTotalLength() + leafNode.getTotalOffset() <= model.length());
             assertEquals(model.substring(leafNode.getTotalOffset(), leafNode.getTotalOffset() + leafNode.getTotalLength()), leafNode.getText());
         }

@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel.impl;
 
+import java.util.Collections;
+
 import org.eclipse.xtext.nodemodel.ILeafNode;
 
 /**
@@ -46,6 +48,11 @@ public class LeafNode extends AbstractNode implements ILeafNode {
 	
 	protected void basicSetTotalLength(int length) {
 		this.totalLength = length;
+	}
+	
+	@Override
+	public Iterable<ILeafNode> getLeafNodes() {
+		return Collections.<ILeafNode>singletonList(this);
 	}
 
 }

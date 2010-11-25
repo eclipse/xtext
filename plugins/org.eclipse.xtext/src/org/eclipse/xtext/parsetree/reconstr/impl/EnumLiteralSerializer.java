@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
-import java.util.Iterator;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Alternatives;
@@ -20,8 +18,6 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IEnumLiteralSerializer;
-
-import com.google.common.collect.Iterators;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -36,11 +32,9 @@ public class EnumLiteralSerializer implements IEnumLiteralSerializer {
 
 	protected Keyword getLiteral(INode node) {
 		if (node != null) {
-			Iterator<ILeafNode> i = Iterators.filter(node.iterator(), ILeafNode.class);
-			while (i.hasNext()) {
-				ILeafNode o = i.next();
-				if (o.getGrammarElement() instanceof EnumLiteralDeclaration)
-					return ((EnumLiteralDeclaration) o.getGrammarElement()).getLiteral();
+			for(ILeafNode leaf: node.getLeafNodes()) {
+				if (leaf.getGrammarElement() instanceof EnumLiteralDeclaration)
+					return ((EnumLiteralDeclaration) leaf.getGrammarElement()).getLiteral();
 			}
 		}
 		return null;

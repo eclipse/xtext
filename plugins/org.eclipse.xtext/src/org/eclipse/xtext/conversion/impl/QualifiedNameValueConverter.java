@@ -8,7 +8,6 @@
 package org.eclipse.xtext.conversion.impl;
 
 import java.io.StringWriter;
-import java.util.Iterator;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.ecore.EObject;
@@ -19,7 +18,6 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 
-import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 
 /**
@@ -64,9 +62,7 @@ public class QualifiedNameValueConverter extends AbstractValueConverter<String> 
 	public String toValue(String string, INode node) throws ValueConverterException {
 		StringWriter buffer = new StringWriter();
 		boolean isFirst = true;
-		Iterator<ILeafNode> iter = Iterators.filter(node.iterator(), ILeafNode.class);
-		while(iter.hasNext()) {
-			ILeafNode leafNode = iter.next();
+		for(ILeafNode leafNode: node.getLeafNodes()) {
 			EObject grammarElement = leafNode.getGrammarElement();
 			if (isDelegateRuleCall(grammarElement) || isWildcardLiteral(grammarElement)) {
 				if (!isFirst)

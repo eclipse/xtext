@@ -11,8 +11,6 @@ package org.eclipse.xtext.parseerrorhandling;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
@@ -156,7 +154,7 @@ public class ParseErrorHandlingTest extends AbstractXtextTests {
 		assertNotNull(parsedModel);
 		ICompositeNode composite = NodeModelUtils.getNode(parsedModel);
 		assertNotNull(composite);
-		List<ILeafNode> leafs = Lists.newArrayList(Iterators.filter(composite.iterator(), ILeafNode.class));
+		List<ILeafNode> leafs = Lists.newArrayList(composite.getLeafNodes());
 		ILeafNode lastWs = leafs.get(leafs.size() - 1);
 		assertTrue(lastWs.isHidden());
 		assertNull(lastWs.getSyntaxErrorMessage());
