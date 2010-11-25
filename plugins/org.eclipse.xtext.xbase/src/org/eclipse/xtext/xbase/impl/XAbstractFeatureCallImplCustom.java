@@ -33,7 +33,7 @@ public class XAbstractFeatureCallImplCustom extends XAbstractFeatureCallImpl {
 		if (node instanceof ILeafNode) {
 			return node.getText();
 		}
-		Iterator<ILeafNode> leafNodes = Iterators.filter(node.treeIterator(), ILeafNode.class);
+		Iterator<ILeafNode> leafNodes = Iterators.filter(node.iterator(), ILeafNode.class);
 		StringBuilder result = new StringBuilder();
 		while(leafNodes.hasNext()) {
 			ILeafNode leafNode = leafNodes.next();
