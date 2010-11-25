@@ -43,6 +43,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ReflectionUtil;
@@ -476,13 +477,23 @@ public class EcoreUtil2 extends EcoreUtil {
 		return null;
 	}
 
-	/**
-	 * @see org.eclipse.emf.ecore.util.EcoreUtil#resolveAll(Resource)
-	 */
 	public static void resolveAll(Resource resource, CancelIndicator monitor) {
 		for (Iterator<EObject> i = resource.getAllContents(); !monitor.isCanceled() && i.hasNext();) {
 			EObject eObject = i.next();
 			resolveCrossReferences(eObject, monitor);
+		}
+	}
+
+	/**
+	 * If the given resource is a {@link LazyLinkingResource} the implementation delegates
+	 * to {@link LazyLinkingResource#resolveLazyCrossReferences(CancelIndicator)} otherwise to
+	 * {@link EcoreUtil2#resolveAll(Resource, CancelIndicator)}.
+	 */
+	public static void resolveLazyCrossReferences(Resource resource, CancelIndicator monitor) {
+		if (resource instanceof LazyLinkingResource) {
+			((LazyLinkingResource) resource).resolveLazyCrossReferences(monitor);
+		} else {
+			resolveAll(resource, monitor);
 		}
 	}
 
