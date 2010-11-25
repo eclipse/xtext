@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parsetree;
+package org.eclipse.xtext.nodemodel;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.INode;
@@ -15,7 +15,7 @@ import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSet
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class NodeTest extends AbstractXtextTests {
+public class NodeModelStateTest extends AbstractXtextTests {
 
 	private INode rootNode;
 

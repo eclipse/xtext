@@ -9,7 +9,9 @@ package org.eclipse.xtext.nodemodel.impl;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.BidiIterable;
+import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.EmptyBidiIterable;
 import org.eclipse.xtext.nodemodel.util.NodeIterable;
@@ -67,26 +69,27 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 	public int getTotalOffset() {
 		if (firstChild != null)
 			return firstChild.getTotalOffset();
-		CompositeNode composite = this;
-		while(!composite.hasSiblings() && composite.basicGetParent() != null) {
-			composite = composite.basicGetParent();
+		CompositeNode compositeWithSiblings = this;
+		while(!compositeWithSiblings.hasSiblings() && compositeWithSiblings.basicGetParent() != null) {
+			compositeWithSiblings = compositeWithSiblings.basicGetParent();
 		}
-		if (composite.basicGetParent() != null) {
-			if (composite.basicHasNextSibling()) {
-				CompositeNode composite2 = composite;
-				while(composite2.basicGetParent() != null) {
-					if (composite2.basicHasNextSibling())
-						return composite2.basicGetNextSibling().getTotalOffset();
-					composite2 = composite.basicGetParent();
-				}
+		if (compositeWithSiblings.basicHasNextSibling()) {
+			AbstractNode sibling = compositeWithSiblings.basicGetNextSibling();
+			return sibling.getTotalOffset();
+		}
+		// expensive fallback - should never happen in a valid node model
+		BidiTreeIterator<INode> iter = getRootNode().iterator();
+		ILeafNode lastSeen = null;
+		while(iter.hasNext()) {
+			INode next = iter.next();
+			if (next == this) {
+				if (lastSeen == null)
+					return 0;
+				else
+					return lastSeen.getTotalEndOffset();
 			}
-			if (composite.basicHasPreviousSibling()) {
-				CompositeNode composite2 = composite;
-				while(composite2.basicGetParent() != null) {
-					if (composite2.basicHasPreviousSibling())
-						return composite2.basicGetPreviousSibling().getTotalEndOffset();
-					composite2 = composite.basicGetParent();
-				}
+			if (next instanceof ILeafNode) {
+				lastSeen = (ILeafNode) next;
 			}
 		}
 		return 0;
