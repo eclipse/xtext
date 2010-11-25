@@ -9,7 +9,6 @@ package org.eclipse.xtext.parser.impl;
 
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 
 /**
  * A mutable (!) range object.
@@ -73,7 +72,7 @@ public class Range {
 			// first syntax error
 			boolean errorSeen = false;
 			{
-				BidiTreeIterator<AbstractNode> iterator = ((AbstractNode) node).basicIterator();
+				BidiTreeIterator<INode> iterator = node.iterator();
 				while(!errorSeen && iterator.hasNext()) {
 					INode next = iterator.next();
 					if (next.getSyntaxErrorMessage() != null) {
@@ -84,7 +83,7 @@ public class Range {
 			}
 			// last syntax error
 			if (errorSeen) {
-				BidiTreeIterator<AbstractNode> iterator = ((AbstractNode) node).basicIterator();
+				BidiTreeIterator<INode> iterator = node.iterator();
 				errorSeen = false;
 				while(!errorSeen && iterator.hasPrevious()) {
 					INode prev = iterator.previous();

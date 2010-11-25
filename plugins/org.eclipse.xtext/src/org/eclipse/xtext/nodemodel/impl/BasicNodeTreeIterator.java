@@ -35,7 +35,7 @@ public class BasicNodeTreeIterator extends UnmodifiableIterator<AbstractNode> im
 			return next != null;
 		if (lastReturned == null) {
 			next = root;
-		} else if (!pruned && lastReturned instanceof CompositeNode && ((CompositeNode) lastReturned).hasChildren()) {
+		} else if (!pruned && lastReturned instanceof CompositeNode && ((CompositeNode) lastReturned).basicGetFirstChild() != null) {
 			next = ((CompositeNode) lastReturned).basicGetFirstChild();
 		} else if (lastReturned.basicHasNextSibling()) {
 			next = lastReturned.basicGetNextSibling();
@@ -74,7 +74,7 @@ public class BasicNodeTreeIterator extends UnmodifiableIterator<AbstractNode> im
 			return previous != null;
 		if (lastReturned == null) {
 			previous = root;
-		} else if (!pruned && lastReturned instanceof CompositeNode && ((CompositeNode) lastReturned).hasChildren()) {
+		} else if (!pruned && lastReturned instanceof CompositeNode && ((CompositeNode) lastReturned).basicGetFirstChild() != null) {
 			previous = ((CompositeNode) lastReturned).basicGetLastChild();
 		} else if (lastReturned.basicHasPreviousSibling()) {
 			previous = lastReturned.basicGetPreviousSibling();

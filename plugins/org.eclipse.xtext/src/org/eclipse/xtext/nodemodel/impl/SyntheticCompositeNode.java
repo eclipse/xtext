@@ -15,11 +15,11 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
+import org.eclipse.xtext.nodemodel.util.EmptyBidiIterable;
+import org.eclipse.xtext.nodemodel.util.NodeIterable;
 import org.eclipse.xtext.nodemodel.util.NodeTreeIterator;
 import org.eclipse.xtext.nodemodel.util.ReversedBidiTreeIterable;
 import org.eclipse.xtext.nodemodel.util.SingletonBidiIterable;
-
-import com.google.common.collect.Iterables;
 
 /**
  * Unfolds the array of grammar elements that is associated with a composite node.
@@ -37,42 +37,28 @@ public class SyntheticCompositeNode implements ICompositeNode {
 	}
 	
 	public ICompositeNode getParent() {
-		if (grammarElementIdx == 0)
-			return delegate.basicGetParent();
+		if (grammarElementIdx == 1)
+			return delegate;
 		return new SyntheticCompositeNode(delegate, grammarElementIdx - 1);
 	}
 	
 	public boolean hasSiblings() {
-		if (grammarElementIdx == 0)
-			return delegate.basicHasSiblings();
 		return false;
 	}
 
 	public boolean hasPreviousSibling() {
-		if (grammarElementIdx == 0)
-			return delegate.basicHasPreviousSibling();
 		return false;
 	}
 
 	public boolean hasNextSibling() {
-		if (grammarElementIdx == 0)
-			return delegate.basicHasNextSibling();
 		return false;
 	}
 
 	public INode getPreviousSibling() {
-		if (grammarElementIdx == 0) {
-			if (hasPreviousSibling())
-				return delegate.basicGetPreviousSibling().resolve();
-		}
 		return null;
 	}
 
 	public INode getNextSibling() {
-		if (grammarElementIdx == 0) {
-			if (hasNextSibling())
-				return delegate.basicGetNextSibling().resolve();
-		}
 		return null;
 	}
 
@@ -142,7 +128,7 @@ public class SyntheticCompositeNode implements ICompositeNode {
 	}
 	
 	public Iterable<ILeafNode> getLeafNodes() {
-		return Iterables.filter(this, ILeafNode.class);
+		return delegate.getLeafNodes();
 	}
 	
 	public BidiTreeIterable<INode> reverse() {
@@ -150,17 +136,28 @@ public class SyntheticCompositeNode implements ICompositeNode {
 	}
 
 	public BidiIterable<INode> getChildren() {
-		return SingletonBidiIterable.<INode>create(getFirstChild());
+		if (hasChildren()) {
+			INode firstChild = getFirstChild();
+			if (firstChild.hasSiblings()) {
+				return new NodeIterable(firstChild);
+			} else {
+				return SingletonBidiIterable.<INode>create(firstChild);
+			}
+		}
+		return EmptyBidiIterable.instance();
 	}
 
 	public boolean hasChildren() {
+		EObject[] array = (EObject[]) delegate.basicGetGrammarElement();
+		if (array.length == grammarElementIdx + 1)
+			return delegate.basicGetFirstChild() != null;
 		return true;
 	}
 
 	public INode getFirstChild() {
 		EObject[] array = (EObject[]) delegate.basicGetGrammarElement();
-		if (grammarElementIdx == array.length - 2)
-			return delegate;
+		if (array.length == grammarElementIdx + 1)
+			return delegate.basicGetFirstChild();
 		return new SyntheticCompositeNode(delegate, grammarElementIdx + 1);
 	}
 

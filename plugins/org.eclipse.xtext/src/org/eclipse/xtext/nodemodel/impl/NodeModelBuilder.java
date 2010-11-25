@@ -8,6 +8,8 @@
 package org.eclipse.xtext.nodemodel.impl;
 
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.RuleCall;
@@ -18,6 +20,8 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 
 import com.google.common.collect.Iterators;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * A statefull (!) builder that provides call back methods for clients who
@@ -27,6 +31,8 @@ import com.google.common.collect.Iterators;
 public class NodeModelBuilder {
 
 	private EObject forcedGrammarElement;
+	
+	private Map<List<EObject>, EObject[]> cachedFoldedGrammarElements = Maps.newHashMap();
 	
 	private boolean compressRoot = true;
 	
@@ -152,30 +158,32 @@ public class NodeModelBuilder {
 	
 	public ICompositeNode compressAndReturnParent(ICompositeNode compositeNode) {
 		CompositeNode casted = (CompositeNode) compositeNode;
-//		if (casted.hasChildren() && casted.basicGetFirstChild() instanceof CompositeNode) {
-//			CompositeNode mergeInto = (CompositeNode) casted.basicGetFirstChild();
-//			// it is our only child
-//			if (mergeInto.basicGetNextSibling() == mergeInto) {
-//				// it refers not to a syntax error or a semantic object
-//				if (mergeInto.getSyntaxErrorMessage() == null && casted.getSyntaxErrorMessage() == null 
-//						&& mergeInto.basicGetSemanticElement() == null && casted.basicGetSemanticElement() == null
-//						&& mergeInto.getLookAhead() == casted.getLookAhead()) {
-//					// lets merge our grammar element into its grammar element
-//					EObject newGrammarElement = casted.getGrammarElement();
-//					Object oldGrammarElement = mergeInto.basicGetGrammarElement();
-//					EObject[] newElements = null;
-//					if (oldGrammarElement instanceof EObject) {
-//						newElements = new EObject[] { newGrammarElement, (EObject) oldGrammarElement };
-//					} else {
-//						List<EObject> list = Lists.asList(newGrammarElement, (EObject[]) oldGrammarElement);
-//						newElements =list.toArray(new EObject[list.size()]);
-//					}
-//					mergeInto.basicSetGrammarElement(newElements);
-//					replaceWithoutChildren(casted, mergeInto);
-//					casted = mergeInto;
-//				}
-//			}
-//		}
+		if (casted.basicGetParent() != null && casted.hasChildren() && casted.basicGetFirstChild() instanceof CompositeNode) {
+			CompositeNode firstChild = (CompositeNode) casted.basicGetFirstChild();
+			// it is our only child
+			if (!firstChild.basicHasSiblings() && !firstChild.hasDirectSemanticElement()
+					&& firstChild.getLookAhead() == casted.getLookAhead()
+					&& firstChild.getSyntaxErrorMessage() == null) {
+				// it is our only child and has no direct semantic element
+				// so we can fold its grammar element into our own grammar elements
+				// it refers not to a syntax error or a semantic object
+				EObject myGrammarElement = casted.getGrammarElement();
+				Object childGrammarElement = firstChild.basicGetGrammarElement();
+				List<EObject> list = null;
+				if (childGrammarElement instanceof EObject) {
+					list = Lists.newArrayList(myGrammarElement, (EObject) childGrammarElement);
+				} else {
+					list = Lists.asList(myGrammarElement, (EObject[]) childGrammarElement);
+				}
+				EObject[] newElements = cachedFoldedGrammarElements.get(list);
+				if (newElements == null) {
+					newElements = list.toArray(new EObject[list.size()]);
+					cachedFoldedGrammarElements.put(list, newElements);
+				}
+				casted.basicSetGrammarElement(newElements);
+				replaceChildren(firstChild, casted);
+			}
+		}
 		CompositeNode result = null;
 		if (casted.basicGetSemanticElement() == null) {
 			if (casted instanceof CompositeNodeWithSemanticElement) {
