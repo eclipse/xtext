@@ -25,11 +25,12 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 	private int lookAhead;
 	
 	public BidiIterable<INode> getChildren() {
-		if (firstChild != null) {
+		if (hasChildren()) {
+			INode firstChild = getFirstChild();
 			if (firstChild.hasSiblings()) {
-				return new NodeIterable(getFirstChild());
+				return new NodeIterable(firstChild);
 			} else {
-				return SingletonBidiIterable.<INode>create(getFirstChild());
+				return SingletonBidiIterable.<INode>create(firstChild);
 			}
 		}
 		return EmptyBidiIterable.instance();
@@ -47,7 +48,7 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 	}
 	
 	public boolean hasChildren() {
-		return firstChild != null;
+		return firstChild != null || isFolded();
 	}
 
 	public int getLookAhead() {
@@ -96,9 +97,10 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 	}
 	
 	public INode getFirstChild() {
-		if (hasChildren())
-			return firstChild.resolve();
-		return null;
+		if (isFolded()) {
+			return new SyntheticCompositeNode(this, 1);
+		}
+		return firstChild;
 	}
 	
 	protected AbstractNode basicGetFirstChild() {
@@ -110,9 +112,10 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 	}
 	
 	public INode getLastChild() {
-		if (firstChild == null)
-			return null;
-		return firstChild.basicGetPreviousSibling();
+		if (isFolded()) {
+			return new SyntheticCompositeNode(this, 1);
+		}
+		return basicGetLastChild();
 	}
 	
 	protected AbstractNode basicGetLastChild() {
@@ -121,70 +124,30 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 		return firstChild.basicGetPreviousSibling();
 	}
 	
-	@Override
-	protected ICompositeNode resolve() {
+	protected boolean isFolded() {
 		Object grammarElementOrArray = basicGetGrammarElement();
-		if (grammarElementOrArray == null || grammarElementOrArray instanceof EObject)
-			return this;
-		return new SyntheticCompositeNode(this, 0);
+		return isFolded(grammarElementOrArray);
+	}
+
+	protected boolean isFolded(Object grammarElementOrArray) {
+		return !(grammarElementOrArray == null || grammarElementOrArray instanceof EObject);
 	}
 	
-	@Override
-	public ICompositeNode getParent() {
+	public ICompositeNode resolveAsParent() {
 		Object grammarElementOrArray = basicGetGrammarElement();
-		if (grammarElementOrArray == null || grammarElementOrArray instanceof EObject)
-			return basicGetParent();
+		if (!isFolded())
+			return this;
 		EObject[] grammarElements = (EObject[]) grammarElementOrArray;
-		return new SyntheticCompositeNode(this, grammarElements.length - 2);
-	}
+		return new SyntheticCompositeNode(this, grammarElements.length - 1);
+	}	
 	
 	@Override
 	public EObject getGrammarElement() {
 		Object grammarElementOrArray = basicGetGrammarElement();
-		if (grammarElementOrArray == null || grammarElementOrArray instanceof EObject)
+		if (!isFolded())
 			return (EObject) grammarElementOrArray;
 		EObject[] grammarElements = (EObject[]) grammarElementOrArray;
-		return grammarElements[grammarElements.length - 1];
+		return grammarElements[0];
 	}
-	
-	@Override
-	public boolean hasNextSibling() {
-		Object grammarElementOrArray = basicGetGrammarElement();
-		if (grammarElementOrArray == null || grammarElementOrArray instanceof EObject)
-			return super.hasNextSibling();
-		return false;
-	}
-	
-	@Override
-	public boolean hasSiblings() {
-		Object grammarElementOrArray = basicGetGrammarElement();
-		if (grammarElementOrArray == null || grammarElementOrArray instanceof EObject)
-			return super.hasSiblings();
-		return false;
-	}
-	
-	@Override
-	public INode getNextSibling() {
-		Object grammarElementOrArray = basicGetGrammarElement();
-		if (grammarElementOrArray == null || grammarElementOrArray instanceof EObject)
-			return super.getNextSibling();
-		return null;
-	}
-	
-	@Override
-	public boolean hasPreviousSibling() {
-		Object grammarElementOrArray = basicGetGrammarElement();
-		if (grammarElementOrArray == null || grammarElementOrArray instanceof EObject)
-			return super.hasPreviousSibling();
-		return false;
-	}
-	
-	@Override
-	public INode getPreviousSibling() {
-		Object grammarElementOrArray = basicGetGrammarElement();
-		if (grammarElementOrArray == null || grammarElementOrArray instanceof EObject)
-			return super.getPreviousSibling();
-		return null;
-	}	
 	
 }

@@ -11,6 +11,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
@@ -33,9 +34,6 @@ import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.impl.AbstractNode;
-import org.eclipse.xtext.nodemodel.impl.CompositeNode;
-import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
@@ -171,7 +169,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 			StringBuilder builder = new StringBuilder(oldRootNode.getText());
 			replaceRegion.applyTo(builder);
 			nodeModelBuilder.setCompleteContent(oldRootNode, builder.toString());
-			new InvariantChecker().checkInvariant(oldRootNode);
+//			new InvariantChecker().checkInvariant(oldRootNode);
 		} 
 		return newParseResult;
 	}
@@ -375,7 +373,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 	}
 
 	private INode getLastChild(ICompositeNode parent) {
-		BidiTreeIterator<? extends INode> iterator = ((AbstractNode) parent).basicIterator();
+		BidiTreeIterator<? extends INode> iterator = parent.iterator();
 		while(iterator.hasPrevious()) {
 			INode previous = iterator.previous();
 			if (previous instanceof ILeafNode) {
@@ -402,7 +400,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 	private void collectNodesEnclosingChangeRegion(ICompositeNode parent, Range range,
 			List<ICompositeNode> nodesEnclosingRegion) {
 		nodesEnclosingRegion.add(parent);
-		BidiIterator<AbstractNode> iterator = ((CompositeNode) parent).basicGetChildren().iterator();
+		BidiIterator<INode> iterator = parent.getChildren().iterator();
 		while(iterator.hasPrevious()) {
 			INode prev = iterator.previous();
 			if (prev instanceof ICompositeNode) {
@@ -431,7 +429,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 		ICompositeNode previous = null;
 		for (ICompositeNode node : nodesEnclosingRegion) {
 			if (node.getGrammarElement() != null) {
-							if (!mustSkipNext) {
+				if (!mustSkipNext) {
 					boolean process = true;
 					if (previous != null && !node.hasNextSibling()) {
 						if (previous.getLookAhead() == node.getLookAhead() && previous.getLookAhead() == 0) {
@@ -441,10 +439,10 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 					if (process) {
 						int remainingLookAhead = node.getLookAhead();
 						if (remainingLookAhead != 0) {
-							BidiTreeIterator<AbstractNode> iterator = ((AbstractNode) node).basicIterator();
+							Iterator<ILeafNode> iterator = node.getLeafNodes().iterator();
 							while(iterator.hasNext() && remainingLookAhead > 0) {
-								AbstractNode next = iterator.next();
-								if (next instanceof ILeafNode && !((ILeafNode) next).isHidden()) {
+								ILeafNode next = iterator.next();
+								if (!next.isHidden()) {
 									if (remainingLookAhead > 0)
 										remainingLookAhead--;
 									if (remainingLookAhead == 0) {

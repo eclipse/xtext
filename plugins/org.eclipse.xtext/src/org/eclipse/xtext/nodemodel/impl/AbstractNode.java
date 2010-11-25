@@ -37,7 +37,9 @@ public abstract class AbstractNode implements INode {
 	private Object grammarElementOrArray;
 	
 	public ICompositeNode getParent() {
-		return parent;
+		if (parent != null)
+			return parent.resolveAsParent();
+		return null;
 	}
 	
 	protected CompositeNode basicGetParent() {
@@ -183,7 +185,7 @@ public abstract class AbstractNode implements INode {
 	public INode getPreviousSibling() {
 		if (!hasPreviousSibling())
 			return null;
-		return prev.resolve();
+		return prev;
 	}
 	
 	protected AbstractNode basicGetPreviousSibling() {
@@ -197,7 +199,7 @@ public abstract class AbstractNode implements INode {
 	public INode getNextSibling() {
 		if (!hasNextSibling())
 			return null;
-		return next.resolve();
+		return next;
 	}
 	
 	protected AbstractNode basicGetNextSibling() {
@@ -232,11 +234,8 @@ public abstract class AbstractNode implements INode {
 		return basicHasSiblings();
 	}
 	
-	public boolean basicHasSiblings() {
+	protected boolean basicHasSiblings() {
 		return prev != this;
 	}
 
-	protected INode resolve() {
-		return this;
-	}
 }

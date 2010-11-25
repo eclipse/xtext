@@ -18,7 +18,6 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -48,10 +47,6 @@ public class PartialParsingPointers {
 	 * @return either a RuleCall or a ParserRule
 	 */
 	public EObject findEntryRuleOrRuleCall(ICompositeNode replaceRootNode) {
-		ICompositeNode composite = replaceRootNode.getParent();
-		if (composite instanceof SyntheticCompositeNode) {
-			return findEntryRuleOrRuleCall(composite);
-		}
 		EObject grammarElement = replaceRootNode.getGrammarElement();
 		if (grammarElement instanceof CrossReference) {
 			grammarElement = ((CrossReference) grammarElement).getTerminal();
