@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.AbstractEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -28,6 +27,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
@@ -157,7 +157,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 	protected void createAndSetProxy(EObject obj, INode node, EReference eRef) {
 		final EObject proxy = createProxy(obj, node, eRef);
 		if (eRef.isMany()) {
-			((AbstractEList<EObject>) obj.eGet(eRef, false)).addUnique(proxy);
+			((InternalEList<EObject>) obj.eGet(eRef, false)).addUnique(proxy);
 		} else {
 			obj.eSet(eRef, proxy);
 		}
