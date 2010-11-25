@@ -95,14 +95,27 @@ public interface INode extends BidiTreeIterable<INode> {
 	int getTotalEndOffset();
 	
 	/**
-	 * @return the line number in the input where the node begins (one based, including hidden tokens).
+	 * @return the line number relative to the complete input where the node begins 
+	 *   (one based, including hidden tokens).
 	 */
 	int getTotalStartLine();
 	
+	/**
+	 * @return the line number relative to the complete input where the node begins 
+	 *   (one based, excluding hidden tokens).
+	 */
 	int getStartLine();
 	
+	/**
+	 * @return the line number relative to the complete input where the node ends 
+	 *   (one based, including hidden tokens).
+	 */
 	int getTotalEndLine();
 	
+	/**
+	 * @return the line number relative to the complete input where the node ends 
+	 *   (one based, excluding hidden tokens).
+	 */
 	int getEndLine();
 
 	/**
@@ -134,19 +147,12 @@ public interface INode extends BidiTreeIterable<INode> {
 	SyntaxErrorMessage getSyntaxErrorMessage();
 	
 	/**
-	 * Returns an iterator that will provide this node itself as its only element.
-	 * 
-	 * {@inheritDoc}
-	 */
-	BidiIterator<INode> iterator();
-	
-	/**
 	 * Returns a tree iterator that uses this node as its origin and root instance. It will not return any
-	 * siblings of this root. However, the first element of invocations of {@link BidiTreeIterator#previous()}
+	 * siblings of this root. However, the first element returned by {@link BidiTreeIterator#previous()}
 	 * or {@link BidiTreeIterator#next()} will be this instance.
 	 * 
 	 * {@inheritDoc}
 	 */
-	BidiTreeIterator<INode> treeIterator();
+	BidiTreeIterator<INode> iterator();
 
 }

@@ -20,6 +20,11 @@ public interface BidiTreeIterable<E> extends BidiIterable<E> {
 	 * Returns a tree iterator that can be used forwards and backwards.
 	 * @return an iterator. Never returns <code>null</code>.
 	 */
-	BidiTreeIterator<E> treeIterator();
+	BidiTreeIterator<E> iterator();
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	BidiTreeIterable<E> reverse();
 
 }

@@ -293,7 +293,7 @@ public class NodeModelBuilder {
 			// todo: unfold both nodes and compress afterwards
 		}
 		ICompositeNode root = newNode.getRootNode();
-		BidiTreeIterator<AbstractNode> iterator = ((AbstractNode) root).basicTreeIterator();
+		BidiTreeIterator<AbstractNode> iterator = ((AbstractNode) root).basicIterator();
 		Iterator<LeafNode> leafNodeIter = Iterators.filter(iterator, LeafNode.class);
 		int offset = 0;
 		while(leafNodeIter.hasNext()) {

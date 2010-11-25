@@ -36,7 +36,7 @@ public class EnumLiteralSerializer implements IEnumLiteralSerializer {
 
 	protected Keyword getLiteral(INode node) {
 		if (node != null) {
-			Iterator<ILeafNode> i = Iterators.filter(node.treeIterator(), ILeafNode.class);
+			Iterator<ILeafNode> i = Iterators.filter(node.iterator(), ILeafNode.class);
 			while (i.hasNext()) {
 				ILeafNode o = i.next();
 				if (o.getGrammarElement() instanceof EnumLiteralDeclaration)

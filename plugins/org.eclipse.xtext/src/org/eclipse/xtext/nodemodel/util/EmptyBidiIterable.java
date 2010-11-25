@@ -26,6 +26,8 @@ public class EmptyBidiIterable<T> implements BidiIterable<T> {
 		return EmptyBidiIterator.instance();
 	}
 	
-	
+	public BidiIterable<T> reverse() {
+		return null;
+	}
 
 }

@@ -19,4 +19,24 @@ public interface BidiIterable<T> extends Iterable<T> {
 	 */
 	BidiIterator<T> iterator();
 	
+	/**
+	 * <p>Returns a reverse version of this iterable that can be used 
+	 * forwards and backwards. In other words, an iterator provided by
+	 * the reverse iterable will delegate its {@link BidiIterator#hasNext() hasNext()}
+	 * and {@link BidiIterator#next() next()} invocations to 
+	 * {@link BidiIterator#hasPrevious()} and {@link BidiIterator#previous()}
+	 * respectively.</p> 
+	 * 
+	 * <p>This allows clients to iterate backwards by means of the enhanced 
+	 * for-loop:</p>
+	 * <pre>
+	 * for(T t: iterable.reverse()) {
+	 *   // do something with t
+	 * }
+	 * </pre>
+	 * 
+	 * @return the reversed iterable. Never returns <code>null</code>.
+	 */
+	BidiIterable<T> reverse();
+	
 }

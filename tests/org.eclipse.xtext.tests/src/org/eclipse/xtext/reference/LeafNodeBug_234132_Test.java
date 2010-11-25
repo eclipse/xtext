@@ -26,7 +26,7 @@ public class LeafNodeBug_234132_Test extends AbstractXtextTests {
         with(ReferenceGrammarTestLanguageStandaloneSetup.class);
         String model = readFileIntoString("org/eclipse/xtext/reference/leafNodeBug_234132.tst");
         ICompositeNode rootNode = getRootNodeAndExpect(model, 1);
-        Iterator<ILeafNode> iter = Iterators.filter(rootNode.treeIterator(), ILeafNode.class);
+        Iterator<ILeafNode> iter = Iterators.filter(rootNode.iterator(), ILeafNode.class);
         while(iter.hasNext()) {
         	ILeafNode leafNode = iter.next();
             assertTrue(leafNode.getTotalLength() + leafNode.getTotalOffset() <= model.length());

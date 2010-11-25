@@ -64,7 +64,7 @@ public class QualifiedNameValueConverter extends AbstractValueConverter<String> 
 	public String toValue(String string, INode node) throws ValueConverterException {
 		StringWriter buffer = new StringWriter();
 		boolean isFirst = true;
-		Iterator<ILeafNode> iter = Iterators.filter(node.treeIterator(), ILeafNode.class);
+		Iterator<ILeafNode> iter = Iterators.filter(node.iterator(), ILeafNode.class);
 		while(iter.hasNext()) {
 			ILeafNode leafNode = iter.next();
 			EObject grammarElement = leafNode.getGrammarElement();

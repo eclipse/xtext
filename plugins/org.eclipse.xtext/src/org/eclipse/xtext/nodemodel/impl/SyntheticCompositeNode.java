@@ -9,14 +9,14 @@ package org.eclipse.xtext.nodemodel.impl;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.BidiIterable;
-import org.eclipse.xtext.nodemodel.BidiIterator;
+import org.eclipse.xtext.nodemodel.BidiTreeIterable;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.nodemodel.util.NodeTreeIterator;
+import org.eclipse.xtext.nodemodel.util.ReversedBidiTreeIterable;
 import org.eclipse.xtext.nodemodel.util.SingletonBidiIterable;
-import org.eclipse.xtext.nodemodel.util.SingletonBidiIterator;
 
 /**
  * Unfolds the array of grammar elements that is associated with a composite node.
@@ -134,12 +134,12 @@ public class SyntheticCompositeNode implements ICompositeNode {
 		return null;
 	}
 
-	public BidiIterator<INode> iterator() {
-		return SingletonBidiIterator.<INode>create(this);
-	}
-
-	public BidiTreeIterator<INode> treeIterator() {
+	public BidiTreeIterator<INode> iterator() {
 		return new NodeTreeIterator(this);
+	}
+	
+	public BidiTreeIterable<INode> reverse() {
+		return new ReversedBidiTreeIterable<INode>(this);
 	}
 
 	public BidiIterable<INode> getChildren() {

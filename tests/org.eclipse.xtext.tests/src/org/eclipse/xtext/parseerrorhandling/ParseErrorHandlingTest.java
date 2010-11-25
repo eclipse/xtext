@@ -122,7 +122,7 @@ public class ParseErrorHandlingTest extends AbstractXtextTests {
 	protected Iterable<INode> allSyntaxErrors(final ICompositeNode node) {
 		return new Iterable<INode>() {
 			public Iterator<INode> iterator() {
-				return Iterators.filter(node.treeIterator(), new Predicate<INode>() {
+				return Iterators.filter(node.iterator(), new Predicate<INode>() {
 					public boolean apply(INode input) {
 						return input.getSyntaxErrorMessage() != null;
 					}
@@ -156,7 +156,7 @@ public class ParseErrorHandlingTest extends AbstractXtextTests {
 		assertNotNull(parsedModel);
 		ICompositeNode composite = NodeModelUtils.getNode(parsedModel);
 		assertNotNull(composite);
-		List<ILeafNode> leafs = Lists.newArrayList(Iterators.filter(composite.treeIterator(), ILeafNode.class));
+		List<ILeafNode> leafs = Lists.newArrayList(Iterators.filter(composite.iterator(), ILeafNode.class));
 		ILeafNode lastWs = leafs.get(leafs.size() - 1);
 		assertTrue(lastWs.isHidden());
 		assertNull(lastWs.getSyntaxErrorMessage());

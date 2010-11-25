@@ -375,7 +375,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 	}
 
 	private INode getLastChild(ICompositeNode parent) {
-		BidiTreeIterator<? extends INode> iterator = ((AbstractNode) parent).basicTreeIterator();
+		BidiTreeIterator<? extends INode> iterator = ((AbstractNode) parent).basicIterator();
 		while(iterator.hasPrevious()) {
 			INode previous = iterator.previous();
 			if (previous instanceof ILeafNode) {
@@ -441,7 +441,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 					if (process) {
 						int remainingLookAhead = node.getLookAhead();
 						if (remainingLookAhead != 0) {
-							BidiTreeIterator<AbstractNode> iterator = ((AbstractNode) node).basicTreeIterator();
+							BidiTreeIterator<AbstractNode> iterator = ((AbstractNode) node).basicIterator();
 							while(iterator.hasNext() && remainingLookAhead > 0) {
 								AbstractNode next = iterator.next();
 								if (next instanceof ILeafNode && !((ILeafNode) next).isHidden()) {
