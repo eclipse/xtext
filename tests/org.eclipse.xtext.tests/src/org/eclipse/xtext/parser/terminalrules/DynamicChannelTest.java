@@ -15,7 +15,6 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.parser.IParseResult;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
 import com.google.inject.internal.Lists;
 
 /**
@@ -60,7 +59,7 @@ public class DynamicChannelTest extends AbstractXtextTests {
 
 	public void testNodeModelOfSimpleLanguage() throws Exception {
 		IParseResult result = getParser().parse(new StringReader(model));
-		List<ILeafNode> leafs = Lists.newArrayList(Iterators.filter(result.getRootNode().iterator(), ILeafNode.class));
+		List<ILeafNode> leafs = Lists.newArrayList(result.getRootNode().getLeafNodes());
 		assertEquals(23, leafs.size());
 		int i = 0;
 		checkLeaf(leafs.get(i++), grammar, false);

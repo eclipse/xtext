@@ -16,7 +16,6 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 
-import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 
 /**
@@ -28,7 +27,7 @@ public class CommentOnEofBug_234135_Test extends AbstractXtextTests {
     public void testCommentOnEof() throws Exception {
         with(ReferenceGrammarTestLanguageStandaloneSetup.class);
         String model = "//comment";
-        List<ILeafNode> leafNodes = Lists.newArrayList(Iterators.filter(getRootNode(model).iterator(), ILeafNode.class));
+        List<ILeafNode> leafNodes = Lists.newArrayList(getRootNode(model).getLeafNodes());
         assertEquals(1, leafNodes.size());
         EObject grammarElement = leafNodes.get(0).getGrammarElement();
         assertNotNull(grammarElement);

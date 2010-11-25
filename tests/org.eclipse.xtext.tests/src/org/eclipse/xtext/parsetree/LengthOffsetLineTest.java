@@ -16,23 +16,21 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 
-import com.google.common.collect.Iterators;
-
 public class LengthOffsetLineTest extends AbstractXtextTests {
 
 	public void testOffset() throws Exception {
 		String model = "element foo;\nelement bar;";
 		ICompositeNode node = getRootNode(model);
-		Iterator<ILeafNode> leafIter = Iterators.filter(node.iterator(), ILeafNode.class);
-		assertEquals(0,leafIter.next().getTotalOffset());
-		assertEquals(7,leafIter.next().getTotalOffset());
-		assertEquals(8,leafIter.next().getTotalOffset());
-		assertEquals(11,leafIter.next().getTotalOffset());
-		assertEquals(12,leafIter.next().getTotalOffset());
-		assertEquals(13,leafIter.next().getTotalOffset());
-		assertEquals(20,leafIter.next().getTotalOffset());
-		assertEquals(21,leafIter.next().getTotalOffset());
-		assertEquals(24,leafIter.next().getTotalOffset());
+		Iterator<ILeafNode> iter = node.getLeafNodes().iterator();
+		assertEquals(0,iter.next().getTotalOffset());
+		assertEquals(7,iter.next().getTotalOffset());
+		assertEquals(8,iter.next().getTotalOffset());
+		assertEquals(11,iter.next().getTotalOffset());
+		assertEquals(12,iter.next().getTotalOffset());
+		assertEquals(13,iter.next().getTotalOffset());
+		assertEquals(20,iter.next().getTotalOffset());
+		assertEquals(21,iter.next().getTotalOffset());
+		assertEquals(24,iter.next().getTotalOffset());
 	}
 
 	public void testOffset2() throws Exception {
@@ -47,7 +45,7 @@ public class LengthOffsetLineTest extends AbstractXtextTests {
 	public void testLineForLeafnodes() throws Exception {
 		String model = "element foo;\nelement bar;";
 		ICompositeNode node = getRootNode(model);
-		Iterator<ILeafNode> iter = Iterators.filter(node.iterator(), ILeafNode.class);
+		Iterator<ILeafNode> iter = node.getLeafNodes().iterator();
 		assertEquals(1,iter.next().getTotalStartLine());
 		assertEquals(1,iter.next().getTotalStartLine());
 		assertEquals(1,iter.next().getTotalStartLine());
@@ -78,7 +76,7 @@ public class LengthOffsetLineTest extends AbstractXtextTests {
 		String model = "element # ;";
 		ICompositeNode node = getRootNodeAndExpect(model, 1);
 		assertEquals(model, node.getText());
-		Iterator<ILeafNode> iter = Iterators.filter(node.iterator(), ILeafNode.class);
+		Iterator<ILeafNode> iter = node.getLeafNodes().iterator();
 		int offset = 0;
 		int count = 0;
 		while(iter.hasNext()) {

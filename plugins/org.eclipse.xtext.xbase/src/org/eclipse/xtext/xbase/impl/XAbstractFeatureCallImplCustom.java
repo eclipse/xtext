@@ -16,8 +16,6 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 
-import com.google.common.collect.Iterators;
-
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -33,10 +31,8 @@ public class XAbstractFeatureCallImplCustom extends XAbstractFeatureCallImpl {
 		if (node instanceof ILeafNode) {
 			return node.getText();
 		}
-		Iterator<ILeafNode> leafNodes = Iterators.filter(node.iterator(), ILeafNode.class);
 		StringBuilder result = new StringBuilder();
-		while(leafNodes.hasNext()) {
-			ILeafNode leafNode = leafNodes.next();
+		for(ILeafNode leafNode: node.getLeafNodes()) {
 			if (!leafNode.isHidden())
 				result.append(leafNode.getText());
 		}

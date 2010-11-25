@@ -30,7 +30,6 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.TestLanguageStandaloneSetup;
 
-import com.google.common.collect.Iterators;
 import com.google.inject.internal.Lists;
 
 public class NodeModelTest extends AbstractXtextTests {
@@ -125,7 +124,7 @@ public class NodeModelTest extends AbstractXtextTests {
 		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
 		EObject object = getModel("d / e");
 		ICompositeNode root = NodeModelUtils.getNode(object).getRootNode();
-		List<ILeafNode> nodes = Lists.newArrayList(Iterators.filter(root.iterator(), ILeafNode.class));
+		List<ILeafNode> nodes = Lists.newArrayList(root.getLeafNodes());
 		assertTrue(nodes.get(2).getGrammarElement() instanceof Keyword);
 	}
 
