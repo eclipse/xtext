@@ -9,13 +9,7 @@ package org.eclipse.xtext.parser.packrat;
 
 import java.util.LinkedList;
 
-import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
@@ -35,13 +29,6 @@ import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminal;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminalWithFeature;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminalWithFeatureInfo;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedToken;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.NodeAdapterFactory;
-import org.eclipse.xtext.parsetree.ParsetreeFactory;
-import org.eclipse.xtext.parsetree.SyntaxError;
 
 import com.google.inject.Inject;
 
@@ -50,7 +37,7 @@ import com.google.inject.Inject;
  */
 public class ParseResultFactory extends AbstractParsedTokenVisitor implements IParseResultFactory {
 
-	private CompositeNode currentNode;
+//	private CompositeNode currentNode;
 
 	private final LinkedList<EObject> currentStack;
 
@@ -59,9 +46,9 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 
 	private final LinkedList<ParsedNonTerminal> nonterminalStack;
 
-	private CharSequence input;
+//	private CharSequence input;
 
-	private EEnumLiteral lastEnumLiteral;
+//	private EEnumLiteral lastEnumLiteral;
 
 	public ParseResultFactory() {
 		this.currentStack = new LinkedList<EObject>();
@@ -69,49 +56,49 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 	}
 
 	public IParseResult createParseResult(AbstractParsedToken token, CharSequence input) {
-		currentNode = null;
+//		currentNode = null;
 		currentStack.clear();
 		nonterminalStack.clear();
-		this.input = input;
+//		this.input = input;
 		if (DebugUtil.PARSE_RESULT_FACTORY_DEBUG) {
 			IParsedTokenVisitor visitor = new CompoundParsedTokenVisitor(new ParsedTokenPrinter(), this);
 			token.accept(visitor);
 		} else {
 			token.accept(this);
 		}
-		this.input = null;
+//		this.input = null;
 		return new ParseResult(currentStack.isEmpty() ? null : currentStack.getLast(), null, false);
 	}
 
-	private LeafNode createLeafNode(AbstractParsedToken parsedToken) {
-		LeafNode result = ParsetreeFactory.eINSTANCE.createLeafNode();
-		enhanceNode(parsedToken, result);
-		result.setText(parsedToken.getText(input).toString());
-		((InternalEList<AbstractNode>)currentNode.getChildren()).addUnique(result);
-		return result;
-	}
+//	private LeafNode createLeafNode(AbstractParsedToken parsedToken) {
+//		LeafNode result = ParsetreeFactory.eINSTANCE.createLeafNode();
+//		enhanceNode(parsedToken, result);
+//		result.setText(parsedToken.getText(input).toString());
+//		((InternalEList<AbstractNode>)currentNode.getChildren()).addUnique(result);
+//		return result;
+//	}
 
-	private void enhanceNode(AbstractParsedToken parsedToken, AbstractNode node) {
-		node.setTotalOffset(parsedToken.getOffset());
-		node.setTotalLength(parsedToken.getLength());
-	}
+//	private void enhanceNode(AbstractParsedToken parsedToken, AbstractNode node) {
+//		node.setTotalOffset(parsedToken.getOffset());
+//		node.setTotalLength(parsedToken.getLength());
+//	}
 
-	protected CompositeNode createCompositeNode(AbstractParsedToken parsedToken) {
-		CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
-		enhanceNode(parsedToken, compositeNode);
-		return compositeNode;
-	}
+//	protected CompositeNode createCompositeNode(AbstractParsedToken parsedToken) {
+//		CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
+//		enhanceNode(parsedToken, compositeNode);
+//		return compositeNode;
+//	}
 
-	protected void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
-		if (node.getElement() != null && node.getElement() != astElement) {
-			throw new RuntimeException("Reassignment of astElement in parse tree node");
-		}
-		if (node.getElement() != astElement) {
-			node.setElement(astElement);
-			NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(astElement, AbstractNode.class);
-			adapter.setParserNode(node);
-		}
-	}
+//	protected void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
+//		if (node.getElement() != null && node.getElement() != astElement) {
+//			throw new RuntimeException("Reassignment of astElement in parse tree node");
+//		}
+//		if (node.getElement() != astElement) {
+//			node.setElement(astElement);
+//			NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(astElement, AbstractNode.class);
+//			adapter.setParserNode(node);
+//		}
+//	}
 
 	@Override
 	public void visitAbstractParsedToken(AbstractParsedToken token) {
@@ -122,11 +109,11 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 	public void visitErrorToken(ErrorToken token) {
 		if (token.isSkipped())
 			return;
-		LeafNode errorNode = createLeafNode(token);
-		errorNode.setGrammarElement(token.getGrammarElement());
-		SyntaxError syntaxError = ParsetreeFactory.eINSTANCE.createSyntaxError();
-		syntaxError.setMessage(token.getErrorMessage() + "@" + token.getOffset());
-		errorNode.setSyntaxError(syntaxError);
+//		LeafNode errorNode = createLeafNode(token);
+//		errorNode.setGrammarElement(token.getGrammarElement());
+//		SyntaxError syntaxError = ParsetreeFactory.eINSTANCE.createSyntaxError();
+//		syntaxError.setMessage(token.getErrorMessage() + "@" + token.getOffset());
+//		errorNode.setSyntaxError(syntaxError);
 	}
 
 	@Override
@@ -144,194 +131,194 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		nonterminalStack.add(token);
 		currentStack.add(null);
 
-		CompositeNode node = createCompositeNode(token);
-		node.setGrammarElement(token.getGrammarElement());
-		if (currentNode != null)
-			((InternalEList<AbstractNode>)currentNode.getChildren()).addUnique(node);
-		currentNode = node;
+//		CompositeNode node = createCompositeNode(token);
+//		node.setGrammarElement(token.getGrammarElement());
+//		if (currentNode != null)
+//			((InternalEList<AbstractNode>)currentNode.getChildren()).addUnique(node);
+//		currentNode = node;
 	}
 
 	@Override
 	public void visitParsedNonTerminalEnd(ParsedNonTerminalEnd token) {
 		if (token.isSkipped())
 			return;
-		currentNode.setTotalLength(token.getOffset() - currentNode.getTotalOffset());
-		final ParsedNonTerminal nonTerminal = nonterminalStack.removeLast();
-		EObject created = currentStack.removeLast();
-		if (!token.isDatatype()) {
-			if (lastEnumLiteral == null) {
-				if (created == null) {
-					if (!token.isBoolean()) {
-						created = factory.create(nonTerminal.getType());
-						associateNodeWithAstElement(currentNode, created);
-					}
-				}
-			}
-			if (token.getFeature() == null) {
-				if (lastEnumLiteral != null)
-					throw new IllegalStateException("cannot parse enum literal and discard it");
-				if (currentStack.isEmpty())
-					currentStack.add(created);
-				else if (currentStack.getLast() == null) {
-					currentStack.set(currentStack.size() - 1, created);
-				} else {
-					throw new RuntimeException("Cannot discard created object");
-				}
-			} else {
-				final AbstractRule rule = getAbstractRule(nonTerminal);
-				if (rule == null)
-					throw new IllegalStateException("Unexpected grammar element '" + nonTerminal.getGrammarElement() + "'");
-				if (!token.isBoolean()) {
-					if (lastEnumLiteral == null)
-						setFeatureValue(token, created, rule);
-					else {
-						setFeatureValue(token, lastEnumLiteral.getInstance(), rule);
-						lastEnumLiteral = null;
-					}
-				} else
-					setFeatureValue(token, true, rule);
-			}
-		} else {
-			if (token.getFeature() != null && !(nonTerminal.getGrammarElement() instanceof CrossReference)) {
-				final AbstractRule rule = getAbstractRule(nonTerminal);
-				if (!token.isBoolean()) {
-					final StringBuilder builder = new StringBuilder(token.getLength());
-					final boolean[] wasHidden = new boolean[] {false};
-					readDatatypeValue(currentNode, builder, wasHidden);
-					setFeatureValue(token, builder.toString(), rule);
-				} else {
-					setFeatureValue(token, true, rule);
-				}
-			}
-		}
-		if (currentNode.getParent() != null) {
-			currentNode = currentNode.getParent();
-		}
-	}
-
-	private AbstractRule getAbstractRule(final ParsedNonTerminal nonTerminal) {
-		return nonTerminal.getGrammarElement() instanceof AbstractRule ?
-				(AbstractRule)nonTerminal.getGrammarElement() :
-				((RuleCall)nonTerminal.getGrammarElement()).getRule();
-	}
-
-	private void setFeatureValue(ParsedNonTerminalEnd token, Object created, AbstractRule rule) {
-		EObject current = null;
-		if (currentStack.isEmpty()) {
-			throw new RuntimeException("Unexpected empty stack");
-		} else if (currentStack.getLast() == null) {
-			current = factory.create(nonterminalStack.getLast().getType());
-			associateNodeWithAstElement(currentNode.getParent(), current);
-			currentStack.set(currentStack.size() - 1, current);
-		} else {
-			current = currentStack.getLast();
-		}
-		try {
-			if (token.isMany()) {
-				factory.add(current, token.getFeature(), created, rule != null ? rule.getName() : null, null);
-			} else {
-				factory.set(current, token.getFeature(), created, rule != null ? rule.getName() : null, null);
-			}
-		} catch(ValueConverterException ex) {
-			handleValueConverterException(ex);
-		}
-	}
-
-	private void readDatatypeValue(AbstractNode node, final StringBuilder target, boolean[] wasHidden) {
-		 if (node instanceof LeafNode) {
-			 LeafNode leaf = (LeafNode) node;
-			 if (leaf.isHidden()) {
-				 if (!wasHidden[0]) {
-					 wasHidden[0] = true;
-					 if (target.length() != 0)
-						 target.append(' ');
-				 }
-			 } else {
-				 wasHidden[0] = false;
-				 target.append(leaf.getText());
-			 }
-		 } else {
-			 for(AbstractNode child: ((CompositeNode)node).getChildren()) {
-				 readDatatypeValue(child, target, wasHidden);
-			 }
-		 }
-	}
-
-	private void handleValueConverterException(ValueConverterException ex) {
-		Throwable cause = ex.getCause();
-		if (ex != cause) {
-			SyntaxError error = ParsetreeFactory.eINSTANCE.createSyntaxError();
-			if (ex.getNode() == null) {
-				currentNode.setSyntaxError(error);
-			} 
-//			else {
-//				ex.getNode().setSyntaxError(error);
+//		currentNode.setTotalLength(token.getOffset() - currentNode.getTotalOffset());
+//		final ParsedNonTerminal nonTerminal = nonterminalStack.removeLast();
+//		EObject created = currentStack.removeLast();
+//		if (!token.isDatatype()) {
+//			if (lastEnumLiteral == null) {
+//				if (created == null) {
+//					if (!token.isBoolean()) {
+//						created = factory.create(nonTerminal.getType());
+//						associateNodeWithAstElement(currentNode, created);
+//					}
+//				}
 //			}
-		} else
-			throw new RuntimeException(ex);
+//			if (token.getFeature() == null) {
+//				if (lastEnumLiteral != null)
+//					throw new IllegalStateException("cannot parse enum literal and discard it");
+//				if (currentStack.isEmpty())
+//					currentStack.add(created);
+//				else if (currentStack.getLast() == null) {
+//					currentStack.set(currentStack.size() - 1, created);
+//				} else {
+//					throw new RuntimeException("Cannot discard created object");
+//				}
+//			} else {
+//				final AbstractRule rule = getAbstractRule(nonTerminal);
+//				if (rule == null)
+//					throw new IllegalStateException("Unexpected grammar element '" + nonTerminal.getGrammarElement() + "'");
+//				if (!token.isBoolean()) {
+//					if (lastEnumLiteral == null)
+//						setFeatureValue(token, created, rule);
+//					else {
+//						setFeatureValue(token, lastEnumLiteral.getInstance(), rule);
+//						lastEnumLiteral = null;
+//					}
+//				} else
+//					setFeatureValue(token, true, rule);
+//			}
+//		} else {
+//			if (token.getFeature() != null && !(nonTerminal.getGrammarElement() instanceof CrossReference)) {
+//				final AbstractRule rule = getAbstractRule(nonTerminal);
+//				if (!token.isBoolean()) {
+//					final StringBuilder builder = new StringBuilder(token.getLength());
+//					final boolean[] wasHidden = new boolean[] {false};
+//					readDatatypeValue(currentNode, builder, wasHidden);
+//					setFeatureValue(token, builder.toString(), rule);
+//				} else {
+//					setFeatureValue(token, true, rule);
+//				}
+//			}
+//		}
+//		if (currentNode.getParent() != null) {
+//			currentNode = currentNode.getParent();
+//		}
 	}
+
+//	private AbstractRule getAbstractRule(final ParsedNonTerminal nonTerminal) {
+//		return nonTerminal.getGrammarElement() instanceof AbstractRule ?
+//				(AbstractRule)nonTerminal.getGrammarElement() :
+//				((RuleCall)nonTerminal.getGrammarElement()).getRule();
+//	}
+
+//	private void setFeatureValue(ParsedNonTerminalEnd token, Object created, AbstractRule rule) {
+//		EObject current = null;
+//		if (currentStack.isEmpty()) {
+//			throw new RuntimeException("Unexpected empty stack");
+//		} else if (currentStack.getLast() == null) {
+//			current = factory.create(nonterminalStack.getLast().getType());
+////			associateNodeWithAstElement(currentNode.getParent(), current);
+//			currentStack.set(currentStack.size() - 1, current);
+//		} else {
+//			current = currentStack.getLast();
+//		}
+//		try {
+//			if (token.isMany()) {
+//				factory.add(current, token.getFeature(), created, rule != null ? rule.getName() : null, null);
+//			} else {
+//				factory.set(current, token.getFeature(), created, rule != null ? rule.getName() : null, null);
+//			}
+//		} catch(ValueConverterException ex) {
+//			handleValueConverterException(ex);
+//		}
+//	}
+
+//	private void readDatatypeValue(AbstractNode node, final StringBuilder target, boolean[] wasHidden) {
+//		 if (node instanceof LeafNode) {
+//			 LeafNode leaf = (LeafNode) node;
+//			 if (leaf.isHidden()) {
+//				 if (!wasHidden[0]) {
+//					 wasHidden[0] = true;
+//					 if (target.length() != 0)
+//						 target.append(' ');
+//				 }
+//			 } else {
+//				 wasHidden[0] = false;
+//				 target.append(leaf.getText());
+//			 }
+//		 } else {
+//			 for(AbstractNode child: ((CompositeNode)node).getChildren()) {
+//				 readDatatypeValue(child, target, wasHidden);
+//			 }
+//		 }
+//	}
+
+//	private void handleValueConverterException(ValueConverterException ex) {
+//		Throwable cause = ex.getCause();
+//		if (ex != cause) {
+//			SyntaxError error = ParsetreeFactory.eINSTANCE.createSyntaxError();
+//			if (ex.getNode() == null) {
+//				currentNode.setSyntaxError(error);
+//			} 
+////			else {
+////				ex.getNode().setSyntaxError(error);
+////			}
+//		} else
+//			throw new RuntimeException(ex);
+//	}
 
 	@Override
 	public void visitParsedEnumLiteral(ParsedEnumLiteral token) {
 		if (token.isSkipped())
 			return;
-		LeafNode node = createLeafNode(token);
-		node.setGrammarElement(token.getGrammarElement());
-		node.setHidden(false);
-		lastEnumLiteral = token.getGrammarElement().getEnumLiteral();
+//		LeafNode node = createLeafNode(token);
+//		node.setGrammarElement(token.getGrammarElement());
+//		node.setHidden(false);
+//		lastEnumLiteral = token.getGrammarElement().getEnumLiteral();
 	}
 
 	@Override
 	public void visitParsedTerminal(ParsedTerminal token) {
 		if (token.isSkipped())
 			return;
-		LeafNode node = createLeafNode(token);
-		node.setGrammarElement(token.getGrammarElement());
-		node.setHidden(token.isHidden());
+//		LeafNode node = createLeafNode(token);
+//		node.setGrammarElement(token.getGrammarElement());
+//		node.setHidden(token.isHidden());
 	}
 
 	@Override
 	public void visitParsedTerminalWithFeatureInfo(ParsedTerminalWithFeatureInfo token) {
 		if (token.isSkipped())
 			return;
-		LeafNode node = createLeafNode(token);
-		node.setGrammarElement(token.getGrammarElement());
-		node.setHidden(token.isHidden());
-		node.setFeature(token.getFeature());
+//		LeafNode node = createLeafNode(token);
+//		node.setGrammarElement(token.getGrammarElement());
+//		node.setHidden(token.isHidden());
+//		node.setFeature(token.getFeature());
 	}
 
 	@Override
 	public void visitParsedTerminalWithFeature(ParsedTerminalWithFeature token) {
 		if (token.isSkipped())
 			return;
-		LeafNode node = createLeafNode(token);
-		node.setGrammarElement(token.getGrammarElement());
-		node.setFeature(token.getFeature());
-		node.setHidden(token.isHidden());
-
-		EObject current = null;
-		if (currentStack.isEmpty()) {
-			throw new RuntimeException("Unexpected empty stack");
-		} else if (currentStack.getLast() == null) {
-			current = factory.create(nonterminalStack.getLast().getType());
-			associateNodeWithAstElement(currentNode, current);
-			currentStack.set(currentStack.size() - 1, current);
-		} else {
-			current = currentStack.getLast();
-		}
-		try {
-			if (token.isMany()) {
-				factory.add(current, token.getFeature(), token.isBoolean() ? true : token.getText(input),
-						token.getGrammarElement() instanceof Keyword ? null : token.getRuleName(), null);
-			} else {
-				factory.set(current, token.getFeature(), token.isBoolean() ? true : token.getText(input),
-						token.getGrammarElement() instanceof Keyword ? null : token.getRuleName(), null);
-			}
-		} catch(ValueConverterException ex) {
-			handleValueConverterException(ex);
-		} catch(Exception ex) {
-			throw new RuntimeException(ex);
-		}
+//		LeafNode node = createLeafNode(token);
+//		node.setGrammarElement(token.getGrammarElement());
+//		node.setFeature(token.getFeature());
+//		node.setHidden(token.isHidden());
+//
+//		EObject current = null;
+//		if (currentStack.isEmpty()) {
+//			throw new RuntimeException("Unexpected empty stack");
+//		} else if (currentStack.getLast() == null) {
+//			current = factory.create(nonterminalStack.getLast().getType());
+//			associateNodeWithAstElement(currentNode, current);
+//			currentStack.set(currentStack.size() - 1, current);
+//		} else {
+//			current = currentStack.getLast();
+//		}
+//		try {
+//			if (token.isMany()) {
+//				factory.add(current, token.getFeature(), token.isBoolean() ? true : token.getText(input),
+//						token.getGrammarElement() instanceof Keyword ? null : token.getRuleName(), null);
+//			} else {
+//				factory.set(current, token.getFeature(), token.isBoolean() ? true : token.getText(input),
+//						token.getGrammarElement() instanceof Keyword ? null : token.getRuleName(), null);
+//			}
+//		} catch(ValueConverterException ex) {
+//			handleValueConverterException(ex);
+//		} catch(Exception ex) {
+//			throw new RuntimeException(ex);
+//		}
 	}
 
 	@Override
@@ -349,7 +336,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 				else
 					factory.set(newCurrent, token.getFeature(), prevCurrent, null, null);
 			} catch(ValueConverterException ex) {
-				handleValueConverterException(ex);
+//				handleValueConverterException(ex);
 			} catch(Exception ex) {
 				throw new RuntimeException(ex);
 			}
@@ -358,15 +345,15 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 				throw new IllegalStateException("Cannot throw away created current.");
 		}
 
-		CompositeNode prevCurrentNode = currentNode;
-        currentNode = prevCurrentNode.getParent();
-        CompositeNode newCurrentNode = createCompositeNode(token);
-        prevCurrentNode.setParent(newCurrentNode);
-        if (currentNode != null)
-        	((InternalEList<AbstractNode>)currentNode.getChildren()).addUnique(newCurrentNode);
-	    newCurrentNode.setGrammarElement(token.getGrammarElement());
-	    associateNodeWithAstElement(newCurrentNode, newCurrent);
-        currentNode = newCurrentNode;
+//		CompositeNode prevCurrentNode = currentNode;
+//        currentNode = prevCurrentNode.getParent();
+//        CompositeNode newCurrentNode = createCompositeNode(token);
+//        prevCurrentNode.setParent(newCurrentNode);
+//        if (currentNode != null)
+//        	((InternalEList<AbstractNode>)currentNode.getChildren()).addUnique(newCurrentNode);
+//	    newCurrentNode.setGrammarElement(token.getGrammarElement());
+//	    associateNodeWithAstElement(newCurrentNode, newCurrent);
+//        currentNode = newCurrentNode;
 	}
 
 	@Override
