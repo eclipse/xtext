@@ -1,6 +1,5 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal; 
 
-import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
@@ -10,7 +9,6 @@ import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
-import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.BacktrackingContentAssistTestLanguageGrammarAccess;
 
 
@@ -131,11 +129,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
      
      	private BacktrackingContentAssistTestLanguageGrammarAccess grammarAccess;
      	
-        public InternalBacktrackingContentAssistTestLanguageParser(TokenStream input, IAstFactory factory, BacktrackingContentAssistTestLanguageGrammarAccess grammarAccess) {
+        public InternalBacktrackingContentAssistTestLanguageParser(TokenStream input, BacktrackingContentAssistTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.semanticModelBuilder = factory;
-            registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
+            registerRules(grammarAccess.getGrammar());
         }
         
         @Override
@@ -151,7 +148,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleDocument"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:76:1: entryRuleDocument returns [EObject current=null] : iv_ruleDocument= ruleDocument EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:73:1: entryRuleDocument returns [EObject current=null] : iv_ruleDocument= ruleDocument EOF ;
     public final EObject entryRuleDocument() throws RecognitionException {
         EObject current = null;
 
@@ -159,8 +156,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:77:2: (iv_ruleDocument= ruleDocument EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:78:2: iv_ruleDocument= ruleDocument EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:74:2: (iv_ruleDocument= ruleDocument EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:75:2: iv_ruleDocument= ruleDocument EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getDocumentRule()); 
@@ -191,7 +188,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleDocument"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:85:1: ruleDocument returns [EObject current=null] : ( ( (lv_packages_0_0= rulePackageDeclaration ) ) | ( (lv_contexts_1_0= ruleContextDecl ) ) )* ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:82:1: ruleDocument returns [EObject current=null] : ( ( (lv_packages_0_0= rulePackageDeclaration ) ) | ( (lv_contexts_1_0= ruleContextDecl ) ) )* ;
     public final EObject ruleDocument() throws RecognitionException {
         EObject current = null;
 
@@ -203,10 +200,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:88:28: ( ( ( (lv_packages_0_0= rulePackageDeclaration ) ) | ( (lv_contexts_1_0= ruleContextDecl ) ) )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:89:1: ( ( (lv_packages_0_0= rulePackageDeclaration ) ) | ( (lv_contexts_1_0= ruleContextDecl ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:85:28: ( ( ( (lv_packages_0_0= rulePackageDeclaration ) ) | ( (lv_contexts_1_0= ruleContextDecl ) ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:86:1: ( ( (lv_packages_0_0= rulePackageDeclaration ) ) | ( (lv_contexts_1_0= ruleContextDecl ) ) )*
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:89:1: ( ( (lv_packages_0_0= rulePackageDeclaration ) ) | ( (lv_contexts_1_0= ruleContextDecl ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:86:1: ( ( (lv_packages_0_0= rulePackageDeclaration ) ) | ( (lv_contexts_1_0= ruleContextDecl ) ) )*
             loop1:
             do {
                 int alt1=3;
@@ -222,13 +219,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:89:2: ( (lv_packages_0_0= rulePackageDeclaration ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:86:2: ( (lv_packages_0_0= rulePackageDeclaration ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:89:2: ( (lv_packages_0_0= rulePackageDeclaration ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:90:1: (lv_packages_0_0= rulePackageDeclaration )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:86:2: ( (lv_packages_0_0= rulePackageDeclaration ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:87:1: (lv_packages_0_0= rulePackageDeclaration )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:90:1: (lv_packages_0_0= rulePackageDeclaration )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:91:3: lv_packages_0_0= rulePackageDeclaration
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:87:1: (lv_packages_0_0= rulePackageDeclaration )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:88:3: lv_packages_0_0= rulePackageDeclaration
             	    {
             	    if ( state.backtracking==0 ) {
             	       
@@ -263,13 +260,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:108:6: ( (lv_contexts_1_0= ruleContextDecl ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:105:6: ( (lv_contexts_1_0= ruleContextDecl ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:108:6: ( (lv_contexts_1_0= ruleContextDecl ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:109:1: (lv_contexts_1_0= ruleContextDecl )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:105:6: ( (lv_contexts_1_0= ruleContextDecl ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:106:1: (lv_contexts_1_0= ruleContextDecl )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:109:1: (lv_contexts_1_0= ruleContextDecl )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:110:3: lv_contexts_1_0= ruleContextDecl
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:106:1: (lv_contexts_1_0= ruleContextDecl )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:107:3: lv_contexts_1_0= ruleContextDecl
             	    {
             	    if ( state.backtracking==0 ) {
             	       
@@ -329,7 +326,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleBody"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:134:1: entryRuleBody returns [EObject current=null] : iv_ruleBody= ruleBody EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:131:1: entryRuleBody returns [EObject current=null] : iv_ruleBody= ruleBody EOF ;
     public final EObject entryRuleBody() throws RecognitionException {
         EObject current = null;
 
@@ -337,8 +334,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:135:2: (iv_ruleBody= ruleBody EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:136:2: iv_ruleBody= ruleBody EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:132:2: (iv_ruleBody= ruleBody EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:133:2: iv_ruleBody= ruleBody EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getBodyRule()); 
@@ -369,7 +366,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleBody"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:143:1: ruleBody returns [EObject current=null] : (otherlv_0= 'body' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:140:1: ruleBody returns [EObject current=null] : (otherlv_0= 'body' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) ) ;
     public final EObject ruleBody() throws RecognitionException {
         EObject current = null;
 
@@ -383,11 +380,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:146:28: ( (otherlv_0= 'body' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:147:1: (otherlv_0= 'body' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:143:28: ( (otherlv_0= 'body' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:144:1: (otherlv_0= 'body' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:147:1: (otherlv_0= 'body' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:147:3: otherlv_0= 'body' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:144:1: (otherlv_0= 'body' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:144:3: otherlv_0= 'body' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) )
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleBody248); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -395,7 +392,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_0, grammarAccess.getBodyAccess().getBodyKeyword_0());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:151:1: ( (lv_constraintName_1_0= ruleIdentifier ) )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:148:1: ( (lv_constraintName_1_0= ruleIdentifier ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -404,10 +401,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:152:1: (lv_constraintName_1_0= ruleIdentifier )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:149:1: (lv_constraintName_1_0= ruleIdentifier )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:152:1: (lv_constraintName_1_0= ruleIdentifier )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:153:3: lv_constraintName_1_0= ruleIdentifier
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:149:1: (lv_constraintName_1_0= ruleIdentifier )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:150:3: lv_constraintName_1_0= ruleIdentifier
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -447,11 +444,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_2, grammarAccess.getBodyAccess().getColonKeyword_2());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:173:1: ( (lv_expression_3_0= ruleExpression ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:174:1: (lv_expression_3_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:170:1: ( (lv_expression_3_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:171:1: (lv_expression_3_0= ruleExpression )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:174:1: (lv_expression_3_0= ruleExpression )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:175:3: lv_expression_3_0= ruleExpression
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:171:1: (lv_expression_3_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:172:3: lv_expression_3_0= ruleExpression
             {
             if ( state.backtracking==0 ) {
                
@@ -505,7 +502,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleClassifierContextDecl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:199:1: entryRuleClassifierContextDecl returns [EObject current=null] : iv_ruleClassifierContextDecl= ruleClassifierContextDecl EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:196:1: entryRuleClassifierContextDecl returns [EObject current=null] : iv_ruleClassifierContextDecl= ruleClassifierContextDecl EOF ;
     public final EObject entryRuleClassifierContextDecl() throws RecognitionException {
         EObject current = null;
 
@@ -513,8 +510,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:200:2: (iv_ruleClassifierContextDecl= ruleClassifierContextDecl EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:201:2: iv_ruleClassifierContextDecl= ruleClassifierContextDecl EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:197:2: (iv_ruleClassifierContextDecl= ruleClassifierContextDecl EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:198:2: iv_ruleClassifierContextDecl= ruleClassifierContextDecl EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getClassifierContextDeclRule()); 
@@ -545,7 +542,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleClassifierContextDecl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:208:1: ruleClassifierContextDecl returns [EObject current=null] : (otherlv_0= 'context' ( ( (lv_selfName_1_0= ruleIdentifier ) ) otherlv_2= ':' )? ( (lv_classifier_3_0= ruleClassifierRef ) ) ( ( (lv_invariants_4_0= ruleInvariant ) ) | ( (lv_definitions_5_0= ruleDefinition ) ) )* ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:205:1: ruleClassifierContextDecl returns [EObject current=null] : (otherlv_0= 'context' ( ( (lv_selfName_1_0= ruleIdentifier ) ) otherlv_2= ':' )? ( (lv_classifier_3_0= ruleClassifierRef ) ) ( ( (lv_invariants_4_0= ruleInvariant ) ) | ( (lv_definitions_5_0= ruleDefinition ) ) )* ) ;
     public final EObject ruleClassifierContextDecl() throws RecognitionException {
         EObject current = null;
 
@@ -563,11 +560,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:211:28: ( (otherlv_0= 'context' ( ( (lv_selfName_1_0= ruleIdentifier ) ) otherlv_2= ':' )? ( (lv_classifier_3_0= ruleClassifierRef ) ) ( ( (lv_invariants_4_0= ruleInvariant ) ) | ( (lv_definitions_5_0= ruleDefinition ) ) )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:212:1: (otherlv_0= 'context' ( ( (lv_selfName_1_0= ruleIdentifier ) ) otherlv_2= ':' )? ( (lv_classifier_3_0= ruleClassifierRef ) ) ( ( (lv_invariants_4_0= ruleInvariant ) ) | ( (lv_definitions_5_0= ruleDefinition ) ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:208:28: ( (otherlv_0= 'context' ( ( (lv_selfName_1_0= ruleIdentifier ) ) otherlv_2= ':' )? ( (lv_classifier_3_0= ruleClassifierRef ) ) ( ( (lv_invariants_4_0= ruleInvariant ) ) | ( (lv_definitions_5_0= ruleDefinition ) ) )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:209:1: (otherlv_0= 'context' ( ( (lv_selfName_1_0= ruleIdentifier ) ) otherlv_2= ':' )? ( (lv_classifier_3_0= ruleClassifierRef ) ) ( ( (lv_invariants_4_0= ruleInvariant ) ) | ( (lv_definitions_5_0= ruleDefinition ) ) )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:212:1: (otherlv_0= 'context' ( ( (lv_selfName_1_0= ruleIdentifier ) ) otherlv_2= ':' )? ( (lv_classifier_3_0= ruleClassifierRef ) ) ( ( (lv_invariants_4_0= ruleInvariant ) ) | ( (lv_definitions_5_0= ruleDefinition ) ) )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:212:3: otherlv_0= 'context' ( ( (lv_selfName_1_0= ruleIdentifier ) ) otherlv_2= ':' )? ( (lv_classifier_3_0= ruleClassifierRef ) ) ( ( (lv_invariants_4_0= ruleInvariant ) ) | ( (lv_definitions_5_0= ruleDefinition ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:209:1: (otherlv_0= 'context' ( ( (lv_selfName_1_0= ruleIdentifier ) ) otherlv_2= ':' )? ( (lv_classifier_3_0= ruleClassifierRef ) ) ( ( (lv_invariants_4_0= ruleInvariant ) ) | ( (lv_definitions_5_0= ruleDefinition ) ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:209:3: otherlv_0= 'context' ( ( (lv_selfName_1_0= ruleIdentifier ) ) otherlv_2= ':' )? ( (lv_classifier_3_0= ruleClassifierRef ) ) ( ( (lv_invariants_4_0= ruleInvariant ) ) | ( (lv_definitions_5_0= ruleDefinition ) ) )*
             {
             otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleClassifierContextDecl386); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -575,7 +572,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_0, grammarAccess.getClassifierContextDeclAccess().getContextKeyword_0());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:216:1: ( ( (lv_selfName_1_0= ruleIdentifier ) ) otherlv_2= ':' )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:213:1: ( ( (lv_selfName_1_0= ruleIdentifier ) ) otherlv_2= ':' )?
             int alt3=2;
             switch ( input.LA(1) ) {
                 case RULE_ID:
@@ -609,13 +606,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:216:2: ( (lv_selfName_1_0= ruleIdentifier ) ) otherlv_2= ':'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:213:2: ( (lv_selfName_1_0= ruleIdentifier ) ) otherlv_2= ':'
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:216:2: ( (lv_selfName_1_0= ruleIdentifier ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:217:1: (lv_selfName_1_0= ruleIdentifier )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:213:2: ( (lv_selfName_1_0= ruleIdentifier ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:214:1: (lv_selfName_1_0= ruleIdentifier )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:217:1: (lv_selfName_1_0= ruleIdentifier )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:218:3: lv_selfName_1_0= ruleIdentifier
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:214:1: (lv_selfName_1_0= ruleIdentifier )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:215:3: lv_selfName_1_0= ruleIdentifier
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -658,11 +655,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:238:3: ( (lv_classifier_3_0= ruleClassifierRef ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:239:1: (lv_classifier_3_0= ruleClassifierRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:235:3: ( (lv_classifier_3_0= ruleClassifierRef ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:236:1: (lv_classifier_3_0= ruleClassifierRef )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:239:1: (lv_classifier_3_0= ruleClassifierRef )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:240:3: lv_classifier_3_0= ruleClassifierRef
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:236:1: (lv_classifier_3_0= ruleClassifierRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:237:3: lv_classifier_3_0= ruleClassifierRef
             {
             if ( state.backtracking==0 ) {
                
@@ -693,7 +690,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:256:2: ( ( (lv_invariants_4_0= ruleInvariant ) ) | ( (lv_definitions_5_0= ruleDefinition ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:253:2: ( ( (lv_invariants_4_0= ruleInvariant ) ) | ( (lv_definitions_5_0= ruleDefinition ) ) )*
             loop4:
             do {
                 int alt4=3;
@@ -709,13 +706,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:256:3: ( (lv_invariants_4_0= ruleInvariant ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:253:3: ( (lv_invariants_4_0= ruleInvariant ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:256:3: ( (lv_invariants_4_0= ruleInvariant ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:257:1: (lv_invariants_4_0= ruleInvariant )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:253:3: ( (lv_invariants_4_0= ruleInvariant ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:254:1: (lv_invariants_4_0= ruleInvariant )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:257:1: (lv_invariants_4_0= ruleInvariant )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:258:3: lv_invariants_4_0= ruleInvariant
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:254:1: (lv_invariants_4_0= ruleInvariant )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:255:3: lv_invariants_4_0= ruleInvariant
             	    {
             	    if ( state.backtracking==0 ) {
             	       
@@ -750,13 +747,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:275:6: ( (lv_definitions_5_0= ruleDefinition ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:272:6: ( (lv_definitions_5_0= ruleDefinition ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:275:6: ( (lv_definitions_5_0= ruleDefinition ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:276:1: (lv_definitions_5_0= ruleDefinition )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:272:6: ( (lv_definitions_5_0= ruleDefinition ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:273:1: (lv_definitions_5_0= ruleDefinition )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:276:1: (lv_definitions_5_0= ruleDefinition )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:277:3: lv_definitions_5_0= ruleDefinition
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:273:1: (lv_definitions_5_0= ruleDefinition )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:274:3: lv_definitions_5_0= ruleDefinition
             	    {
             	    if ( state.backtracking==0 ) {
             	       
@@ -819,7 +816,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleClassifierRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:301:1: entryRuleClassifierRef returns [EObject current=null] : iv_ruleClassifierRef= ruleClassifierRef EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:298:1: entryRuleClassifierRef returns [EObject current=null] : iv_ruleClassifierRef= ruleClassifierRef EOF ;
     public final EObject entryRuleClassifierRef() throws RecognitionException {
         EObject current = null;
 
@@ -827,8 +824,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:302:2: (iv_ruleClassifierRef= ruleClassifierRef EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:303:2: iv_ruleClassifierRef= ruleClassifierRef EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:299:2: (iv_ruleClassifierRef= ruleClassifierRef EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:300:2: iv_ruleClassifierRef= ruleClassifierRef EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getClassifierRefRule()); 
@@ -859,7 +856,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleClassifierRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:310:1: ruleClassifierRef returns [EObject current=null] : (this_QualifiedClassifierRef_0= ruleQualifiedClassifierRef | this_SimpleClassifierRef_1= ruleSimpleClassifierRef ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:307:1: ruleClassifierRef returns [EObject current=null] : (this_QualifiedClassifierRef_0= ruleQualifiedClassifierRef | this_SimpleClassifierRef_1= ruleSimpleClassifierRef ) ;
     public final EObject ruleClassifierRef() throws RecognitionException {
         EObject current = null;
 
@@ -871,10 +868,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:313:28: ( (this_QualifiedClassifierRef_0= ruleQualifiedClassifierRef | this_SimpleClassifierRef_1= ruleSimpleClassifierRef ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:314:1: (this_QualifiedClassifierRef_0= ruleQualifiedClassifierRef | this_SimpleClassifierRef_1= ruleSimpleClassifierRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:310:28: ( (this_QualifiedClassifierRef_0= ruleQualifiedClassifierRef | this_SimpleClassifierRef_1= ruleSimpleClassifierRef ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:311:1: (this_QualifiedClassifierRef_0= ruleQualifiedClassifierRef | this_SimpleClassifierRef_1= ruleSimpleClassifierRef )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:314:1: (this_QualifiedClassifierRef_0= ruleQualifiedClassifierRef | this_SimpleClassifierRef_1= ruleSimpleClassifierRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:311:1: (this_QualifiedClassifierRef_0= ruleQualifiedClassifierRef | this_SimpleClassifierRef_1= ruleSimpleClassifierRef )
             int alt5=2;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -944,7 +941,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             switch (alt5) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:315:2: this_QualifiedClassifierRef_0= ruleQualifiedClassifierRef
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:312:2: this_QualifiedClassifierRef_0= ruleQualifiedClassifierRef
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -971,7 +968,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:328:2: this_SimpleClassifierRef_1= ruleSimpleClassifierRef
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:325:2: this_SimpleClassifierRef_1= ruleSimpleClassifierRef
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -1020,7 +1017,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleContextDecl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:347:1: entryRuleContextDecl returns [EObject current=null] : iv_ruleContextDecl= ruleContextDecl EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:344:1: entryRuleContextDecl returns [EObject current=null] : iv_ruleContextDecl= ruleContextDecl EOF ;
     public final EObject entryRuleContextDecl() throws RecognitionException {
         EObject current = null;
 
@@ -1028,8 +1025,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:348:2: (iv_ruleContextDecl= ruleContextDecl EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:349:2: iv_ruleContextDecl= ruleContextDecl EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:345:2: (iv_ruleContextDecl= ruleContextDecl EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:346:2: iv_ruleContextDecl= ruleContextDecl EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getContextDeclRule()); 
@@ -1060,7 +1057,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleContextDecl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:356:1: ruleContextDecl returns [EObject current=null] : (this_PropertyContextDecl_0= rulePropertyContextDecl | this_ClassifierContextDecl_1= ruleClassifierContextDecl | this_OperationContextDecl_2= ruleOperationContextDecl ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:353:1: ruleContextDecl returns [EObject current=null] : (this_PropertyContextDecl_0= rulePropertyContextDecl | this_ClassifierContextDecl_1= ruleClassifierContextDecl | this_OperationContextDecl_2= ruleOperationContextDecl ) ;
     public final EObject ruleContextDecl() throws RecognitionException {
         EObject current = null;
 
@@ -1074,10 +1071,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:359:28: ( (this_PropertyContextDecl_0= rulePropertyContextDecl | this_ClassifierContextDecl_1= ruleClassifierContextDecl | this_OperationContextDecl_2= ruleOperationContextDecl ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:360:1: (this_PropertyContextDecl_0= rulePropertyContextDecl | this_ClassifierContextDecl_1= ruleClassifierContextDecl | this_OperationContextDecl_2= ruleOperationContextDecl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:356:28: ( (this_PropertyContextDecl_0= rulePropertyContextDecl | this_ClassifierContextDecl_1= ruleClassifierContextDecl | this_OperationContextDecl_2= ruleOperationContextDecl ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:357:1: (this_PropertyContextDecl_0= rulePropertyContextDecl | this_ClassifierContextDecl_1= ruleClassifierContextDecl | this_OperationContextDecl_2= ruleOperationContextDecl )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:360:1: (this_PropertyContextDecl_0= rulePropertyContextDecl | this_ClassifierContextDecl_1= ruleClassifierContextDecl | this_OperationContextDecl_2= ruleOperationContextDecl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:357:1: (this_PropertyContextDecl_0= rulePropertyContextDecl | this_ClassifierContextDecl_1= ruleClassifierContextDecl | this_OperationContextDecl_2= ruleOperationContextDecl )
             int alt6=3;
             int LA6_0 = input.LA(1);
 
@@ -1110,7 +1107,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:361:2: this_PropertyContextDecl_0= rulePropertyContextDecl
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:358:2: this_PropertyContextDecl_0= rulePropertyContextDecl
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -1137,7 +1134,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:374:2: this_ClassifierContextDecl_1= ruleClassifierContextDecl
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:371:2: this_ClassifierContextDecl_1= ruleClassifierContextDecl
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -1164,7 +1161,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:387:2: this_OperationContextDecl_2= ruleOperationContextDecl
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:384:2: this_OperationContextDecl_2= ruleOperationContextDecl
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -1213,7 +1210,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleDefinition"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:406:1: entryRuleDefinition returns [EObject current=null] : iv_ruleDefinition= ruleDefinition EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:403:1: entryRuleDefinition returns [EObject current=null] : iv_ruleDefinition= ruleDefinition EOF ;
     public final EObject entryRuleDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -1221,8 +1218,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:407:2: (iv_ruleDefinition= ruleDefinition EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:408:2: iv_ruleDefinition= ruleDefinition EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:404:2: (iv_ruleDefinition= ruleDefinition EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:405:2: iv_ruleDefinition= ruleDefinition EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getDefinitionRule()); 
@@ -1253,7 +1250,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleDefinition"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:415:1: ruleDefinition returns [EObject current=null] : ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'def' ( (lv_constraintName_2_0= ruleIdentifier ) )? otherlv_3= ':' ( (lv_constrainedName_4_0= ruleIdentifier ) ) (otherlv_5= '(' ( ( (lv_parameters_6_0= ruleParameter ) ) (otherlv_7= ',' ( (lv_parameters_8_0= ruleParameter ) ) )* )? otherlv_9= ')' )? otherlv_10= ':' ( (lv_type_11_0= ruleTypeExp ) )? otherlv_12= '=' ( (lv_expression_13_0= ruleExpression ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:412:1: ruleDefinition returns [EObject current=null] : ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'def' ( (lv_constraintName_2_0= ruleIdentifier ) )? otherlv_3= ':' ( (lv_constrainedName_4_0= ruleIdentifier ) ) (otherlv_5= '(' ( ( (lv_parameters_6_0= ruleParameter ) ) (otherlv_7= ',' ( (lv_parameters_8_0= ruleParameter ) ) )* )? otherlv_9= ')' )? otherlv_10= ':' ( (lv_type_11_0= ruleTypeExp ) )? otherlv_12= '=' ( (lv_expression_13_0= ruleExpression ) ) ) ;
     public final EObject ruleDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -1281,13 +1278,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:418:28: ( ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'def' ( (lv_constraintName_2_0= ruleIdentifier ) )? otherlv_3= ':' ( (lv_constrainedName_4_0= ruleIdentifier ) ) (otherlv_5= '(' ( ( (lv_parameters_6_0= ruleParameter ) ) (otherlv_7= ',' ( (lv_parameters_8_0= ruleParameter ) ) )* )? otherlv_9= ')' )? otherlv_10= ':' ( (lv_type_11_0= ruleTypeExp ) )? otherlv_12= '=' ( (lv_expression_13_0= ruleExpression ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:419:1: ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'def' ( (lv_constraintName_2_0= ruleIdentifier ) )? otherlv_3= ':' ( (lv_constrainedName_4_0= ruleIdentifier ) ) (otherlv_5= '(' ( ( (lv_parameters_6_0= ruleParameter ) ) (otherlv_7= ',' ( (lv_parameters_8_0= ruleParameter ) ) )* )? otherlv_9= ')' )? otherlv_10= ':' ( (lv_type_11_0= ruleTypeExp ) )? otherlv_12= '=' ( (lv_expression_13_0= ruleExpression ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:415:28: ( ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'def' ( (lv_constraintName_2_0= ruleIdentifier ) )? otherlv_3= ':' ( (lv_constrainedName_4_0= ruleIdentifier ) ) (otherlv_5= '(' ( ( (lv_parameters_6_0= ruleParameter ) ) (otherlv_7= ',' ( (lv_parameters_8_0= ruleParameter ) ) )* )? otherlv_9= ')' )? otherlv_10= ':' ( (lv_type_11_0= ruleTypeExp ) )? otherlv_12= '=' ( (lv_expression_13_0= ruleExpression ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:416:1: ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'def' ( (lv_constraintName_2_0= ruleIdentifier ) )? otherlv_3= ':' ( (lv_constrainedName_4_0= ruleIdentifier ) ) (otherlv_5= '(' ( ( (lv_parameters_6_0= ruleParameter ) ) (otherlv_7= ',' ( (lv_parameters_8_0= ruleParameter ) ) )* )? otherlv_9= ')' )? otherlv_10= ':' ( (lv_type_11_0= ruleTypeExp ) )? otherlv_12= '=' ( (lv_expression_13_0= ruleExpression ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:419:1: ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'def' ( (lv_constraintName_2_0= ruleIdentifier ) )? otherlv_3= ':' ( (lv_constrainedName_4_0= ruleIdentifier ) ) (otherlv_5= '(' ( ( (lv_parameters_6_0= ruleParameter ) ) (otherlv_7= ',' ( (lv_parameters_8_0= ruleParameter ) ) )* )? otherlv_9= ')' )? otherlv_10= ':' ( (lv_type_11_0= ruleTypeExp ) )? otherlv_12= '=' ( (lv_expression_13_0= ruleExpression ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:419:2: ( (lv_static_0_0= 'static' ) )? otherlv_1= 'def' ( (lv_constraintName_2_0= ruleIdentifier ) )? otherlv_3= ':' ( (lv_constrainedName_4_0= ruleIdentifier ) ) (otherlv_5= '(' ( ( (lv_parameters_6_0= ruleParameter ) ) (otherlv_7= ',' ( (lv_parameters_8_0= ruleParameter ) ) )* )? otherlv_9= ')' )? otherlv_10= ':' ( (lv_type_11_0= ruleTypeExp ) )? otherlv_12= '=' ( (lv_expression_13_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:416:1: ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'def' ( (lv_constraintName_2_0= ruleIdentifier ) )? otherlv_3= ':' ( (lv_constrainedName_4_0= ruleIdentifier ) ) (otherlv_5= '(' ( ( (lv_parameters_6_0= ruleParameter ) ) (otherlv_7= ',' ( (lv_parameters_8_0= ruleParameter ) ) )* )? otherlv_9= ')' )? otherlv_10= ':' ( (lv_type_11_0= ruleTypeExp ) )? otherlv_12= '=' ( (lv_expression_13_0= ruleExpression ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:416:2: ( (lv_static_0_0= 'static' ) )? otherlv_1= 'def' ( (lv_constraintName_2_0= ruleIdentifier ) )? otherlv_3= ':' ( (lv_constrainedName_4_0= ruleIdentifier ) ) (otherlv_5= '(' ( ( (lv_parameters_6_0= ruleParameter ) ) (otherlv_7= ',' ( (lv_parameters_8_0= ruleParameter ) ) )* )? otherlv_9= ')' )? otherlv_10= ':' ( (lv_type_11_0= ruleTypeExp ) )? otherlv_12= '=' ( (lv_expression_13_0= ruleExpression ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:419:2: ( (lv_static_0_0= 'static' ) )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:416:2: ( (lv_static_0_0= 'static' ) )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1296,10 +1293,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:420:1: (lv_static_0_0= 'static' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:417:1: (lv_static_0_0= 'static' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:420:1: (lv_static_0_0= 'static' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:421:3: lv_static_0_0= 'static'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:417:1: (lv_static_0_0= 'static' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:418:3: lv_static_0_0= 'static'
                     {
                     lv_static_0_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleDefinition863); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -1330,7 +1327,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_1, grammarAccess.getDefinitionAccess().getDefKeyword_1());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:438:1: ( (lv_constraintName_2_0= ruleIdentifier ) )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:435:1: ( (lv_constraintName_2_0= ruleIdentifier ) )?
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1339,10 +1336,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt8) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:439:1: (lv_constraintName_2_0= ruleIdentifier )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:436:1: (lv_constraintName_2_0= ruleIdentifier )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:439:1: (lv_constraintName_2_0= ruleIdentifier )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:440:3: lv_constraintName_2_0= ruleIdentifier
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:436:1: (lv_constraintName_2_0= ruleIdentifier )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:437:3: lv_constraintName_2_0= ruleIdentifier
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -1382,11 +1379,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_3, grammarAccess.getDefinitionAccess().getColonKeyword_3());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:460:1: ( (lv_constrainedName_4_0= ruleIdentifier ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:461:1: (lv_constrainedName_4_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:457:1: ( (lv_constrainedName_4_0= ruleIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:458:1: (lv_constrainedName_4_0= ruleIdentifier )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:461:1: (lv_constrainedName_4_0= ruleIdentifier )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:462:3: lv_constrainedName_4_0= ruleIdentifier
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:458:1: (lv_constrainedName_4_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:459:3: lv_constrainedName_4_0= ruleIdentifier
             {
             if ( state.backtracking==0 ) {
                
@@ -1417,7 +1414,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:478:2: (otherlv_5= '(' ( ( (lv_parameters_6_0= ruleParameter ) ) (otherlv_7= ',' ( (lv_parameters_8_0= ruleParameter ) ) )* )? otherlv_9= ')' )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:475:2: (otherlv_5= '(' ( ( (lv_parameters_6_0= ruleParameter ) ) (otherlv_7= ',' ( (lv_parameters_8_0= ruleParameter ) ) )* )? otherlv_9= ')' )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -1426,7 +1423,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt11) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:478:4: otherlv_5= '(' ( ( (lv_parameters_6_0= ruleParameter ) ) (otherlv_7= ',' ( (lv_parameters_8_0= ruleParameter ) ) )* )? otherlv_9= ')'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:475:4: otherlv_5= '(' ( ( (lv_parameters_6_0= ruleParameter ) ) (otherlv_7= ',' ( (lv_parameters_8_0= ruleParameter ) ) )* )? otherlv_9= ')'
                     {
                     otherlv_5=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleDefinition957); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -1434,7 +1431,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                           	newLeafNode(otherlv_5, grammarAccess.getDefinitionAccess().getLeftParenthesisKeyword_5_0());
                           
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:482:1: ( ( (lv_parameters_6_0= ruleParameter ) ) (otherlv_7= ',' ( (lv_parameters_8_0= ruleParameter ) ) )* )?
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:479:1: ( ( (lv_parameters_6_0= ruleParameter ) ) (otherlv_7= ',' ( (lv_parameters_8_0= ruleParameter ) ) )* )?
                     int alt10=2;
                     int LA10_0 = input.LA(1);
 
@@ -1443,13 +1440,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     switch (alt10) {
                         case 1 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:482:2: ( (lv_parameters_6_0= ruleParameter ) ) (otherlv_7= ',' ( (lv_parameters_8_0= ruleParameter ) ) )*
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:479:2: ( (lv_parameters_6_0= ruleParameter ) ) (otherlv_7= ',' ( (lv_parameters_8_0= ruleParameter ) ) )*
                             {
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:482:2: ( (lv_parameters_6_0= ruleParameter ) )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:483:1: (lv_parameters_6_0= ruleParameter )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:479:2: ( (lv_parameters_6_0= ruleParameter ) )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:480:1: (lv_parameters_6_0= ruleParameter )
                             {
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:483:1: (lv_parameters_6_0= ruleParameter )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:484:3: lv_parameters_6_0= ruleParameter
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:480:1: (lv_parameters_6_0= ruleParameter )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:481:3: lv_parameters_6_0= ruleParameter
                             {
                             if ( state.backtracking==0 ) {
                                
@@ -1480,7 +1477,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                             }
 
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:500:2: (otherlv_7= ',' ( (lv_parameters_8_0= ruleParameter ) ) )*
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:497:2: (otherlv_7= ',' ( (lv_parameters_8_0= ruleParameter ) ) )*
                             loop9:
                             do {
                                 int alt9=2;
@@ -1493,7 +1490,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                                 switch (alt9) {
                             	case 1 :
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:500:4: otherlv_7= ',' ( (lv_parameters_8_0= ruleParameter ) )
+                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:497:4: otherlv_7= ',' ( (lv_parameters_8_0= ruleParameter ) )
                             	    {
                             	    otherlv_7=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleDefinition992); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
@@ -1501,11 +1498,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                             	          	newLeafNode(otherlv_7, grammarAccess.getDefinitionAccess().getCommaKeyword_5_1_1_0());
                             	          
                             	    }
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:504:1: ( (lv_parameters_8_0= ruleParameter ) )
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:505:1: (lv_parameters_8_0= ruleParameter )
+                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:501:1: ( (lv_parameters_8_0= ruleParameter ) )
+                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:502:1: (lv_parameters_8_0= ruleParameter )
                             	    {
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:505:1: (lv_parameters_8_0= ruleParameter )
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:506:3: lv_parameters_8_0= ruleParameter
+                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:502:1: (lv_parameters_8_0= ruleParameter )
+                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:503:3: lv_parameters_8_0= ruleParameter
                             	    {
                             	    if ( state.backtracking==0 ) {
                             	       
@@ -1569,7 +1566,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_10, grammarAccess.getDefinitionAccess().getColonKeyword_6());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:530:1: ( (lv_type_11_0= ruleTypeExp ) )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:527:1: ( (lv_type_11_0= ruleTypeExp ) )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1578,10 +1575,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt12) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:531:1: (lv_type_11_0= ruleTypeExp )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:528:1: (lv_type_11_0= ruleTypeExp )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:531:1: (lv_type_11_0= ruleTypeExp )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:532:3: lv_type_11_0= ruleTypeExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:528:1: (lv_type_11_0= ruleTypeExp )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:529:3: lv_type_11_0= ruleTypeExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -1621,11 +1618,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_12, grammarAccess.getDefinitionAccess().getEqualsSignKeyword_8());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:552:1: ( (lv_expression_13_0= ruleExpression ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:553:1: (lv_expression_13_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:549:1: ( (lv_expression_13_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:550:1: (lv_expression_13_0= ruleExpression )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:553:1: (lv_expression_13_0= ruleExpression )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:554:3: lv_expression_13_0= ruleExpression
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:550:1: (lv_expression_13_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:551:3: lv_expression_13_0= ruleExpression
             {
             if ( state.backtracking==0 ) {
                
@@ -1679,7 +1676,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleDer"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:578:1: entryRuleDer returns [EObject current=null] : iv_ruleDer= ruleDer EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:575:1: entryRuleDer returns [EObject current=null] : iv_ruleDer= ruleDer EOF ;
     public final EObject entryRuleDer() throws RecognitionException {
         EObject current = null;
 
@@ -1687,8 +1684,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:579:2: (iv_ruleDer= ruleDer EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:580:2: iv_ruleDer= ruleDer EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:576:2: (iv_ruleDer= ruleDer EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:577:2: iv_ruleDer= ruleDer EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getDerRule()); 
@@ -1719,7 +1716,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleDer"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:587:1: ruleDer returns [EObject current=null] : (otherlv_0= 'derive' otherlv_1= ':' ( (lv_expression_2_0= ruleExpression ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:584:1: ruleDer returns [EObject current=null] : (otherlv_0= 'derive' otherlv_1= ':' ( (lv_expression_2_0= ruleExpression ) ) ) ;
     public final EObject ruleDer() throws RecognitionException {
         EObject current = null;
 
@@ -1731,11 +1728,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:590:28: ( (otherlv_0= 'derive' otherlv_1= ':' ( (lv_expression_2_0= ruleExpression ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:591:1: (otherlv_0= 'derive' otherlv_1= ':' ( (lv_expression_2_0= ruleExpression ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:587:28: ( (otherlv_0= 'derive' otherlv_1= ':' ( (lv_expression_2_0= ruleExpression ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:588:1: (otherlv_0= 'derive' otherlv_1= ':' ( (lv_expression_2_0= ruleExpression ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:591:1: (otherlv_0= 'derive' otherlv_1= ':' ( (lv_expression_2_0= ruleExpression ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:591:3: otherlv_0= 'derive' otherlv_1= ':' ( (lv_expression_2_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:588:1: (otherlv_0= 'derive' otherlv_1= ':' ( (lv_expression_2_0= ruleExpression ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:588:3: otherlv_0= 'derive' otherlv_1= ':' ( (lv_expression_2_0= ruleExpression ) )
             {
             otherlv_0=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleDer1181); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -1749,11 +1746,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_1, grammarAccess.getDerAccess().getColonKeyword_1());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:599:1: ( (lv_expression_2_0= ruleExpression ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:600:1: (lv_expression_2_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:596:1: ( (lv_expression_2_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:597:1: (lv_expression_2_0= ruleExpression )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:600:1: (lv_expression_2_0= ruleExpression )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:601:3: lv_expression_2_0= ruleExpression
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:597:1: (lv_expression_2_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:598:3: lv_expression_2_0= ruleExpression
             {
             if ( state.backtracking==0 ) {
                
@@ -1807,7 +1804,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleInit"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:625:1: entryRuleInit returns [EObject current=null] : iv_ruleInit= ruleInit EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:622:1: entryRuleInit returns [EObject current=null] : iv_ruleInit= ruleInit EOF ;
     public final EObject entryRuleInit() throws RecognitionException {
         EObject current = null;
 
@@ -1815,8 +1812,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:626:2: (iv_ruleInit= ruleInit EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:627:2: iv_ruleInit= ruleInit EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:623:2: (iv_ruleInit= ruleInit EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:624:2: iv_ruleInit= ruleInit EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getInitRule()); 
@@ -1847,7 +1844,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleInit"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:634:1: ruleInit returns [EObject current=null] : (otherlv_0= 'init' otherlv_1= ':' ( (lv_expression_2_0= ruleExpression ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:631:1: ruleInit returns [EObject current=null] : (otherlv_0= 'init' otherlv_1= ':' ( (lv_expression_2_0= ruleExpression ) ) ) ;
     public final EObject ruleInit() throws RecognitionException {
         EObject current = null;
 
@@ -1859,11 +1856,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:637:28: ( (otherlv_0= 'init' otherlv_1= ':' ( (lv_expression_2_0= ruleExpression ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:638:1: (otherlv_0= 'init' otherlv_1= ':' ( (lv_expression_2_0= ruleExpression ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:634:28: ( (otherlv_0= 'init' otherlv_1= ':' ( (lv_expression_2_0= ruleExpression ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:635:1: (otherlv_0= 'init' otherlv_1= ':' ( (lv_expression_2_0= ruleExpression ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:638:1: (otherlv_0= 'init' otherlv_1= ':' ( (lv_expression_2_0= ruleExpression ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:638:3: otherlv_0= 'init' otherlv_1= ':' ( (lv_expression_2_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:635:1: (otherlv_0= 'init' otherlv_1= ':' ( (lv_expression_2_0= ruleExpression ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:635:3: otherlv_0= 'init' otherlv_1= ':' ( (lv_expression_2_0= ruleExpression ) )
             {
             otherlv_0=(Token)match(input,21,FollowSets000.FOLLOW_21_in_ruleInit1297); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -1877,11 +1874,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_1, grammarAccess.getInitAccess().getColonKeyword_1());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:646:1: ( (lv_expression_2_0= ruleExpression ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:647:1: (lv_expression_2_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:643:1: ( (lv_expression_2_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:644:1: (lv_expression_2_0= ruleExpression )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:647:1: (lv_expression_2_0= ruleExpression )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:648:3: lv_expression_2_0= ruleExpression
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:644:1: (lv_expression_2_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:645:3: lv_expression_2_0= ruleExpression
             {
             if ( state.backtracking==0 ) {
                
@@ -1935,7 +1932,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleInvariant"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:672:1: entryRuleInvariant returns [EObject current=null] : iv_ruleInvariant= ruleInvariant EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:669:1: entryRuleInvariant returns [EObject current=null] : iv_ruleInvariant= ruleInvariant EOF ;
     public final EObject entryRuleInvariant() throws RecognitionException {
         EObject current = null;
 
@@ -1943,8 +1940,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:673:2: (iv_ruleInvariant= ruleInvariant EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:674:2: iv_ruleInvariant= ruleInvariant EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:670:2: (iv_ruleInvariant= ruleInvariant EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:671:2: iv_ruleInvariant= ruleInvariant EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getInvariantRule()); 
@@ -1975,7 +1972,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleInvariant"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:681:1: ruleInvariant returns [EObject current=null] : (otherlv_0= 'inv' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:678:1: ruleInvariant returns [EObject current=null] : (otherlv_0= 'inv' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) ) ;
     public final EObject ruleInvariant() throws RecognitionException {
         EObject current = null;
 
@@ -1989,11 +1986,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:684:28: ( (otherlv_0= 'inv' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:685:1: (otherlv_0= 'inv' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:681:28: ( (otherlv_0= 'inv' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:682:1: (otherlv_0= 'inv' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:685:1: (otherlv_0= 'inv' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:685:3: otherlv_0= 'inv' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:682:1: (otherlv_0= 'inv' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:682:3: otherlv_0= 'inv' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) )
             {
             otherlv_0=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleInvariant1413); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -2001,7 +1998,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_0, grammarAccess.getInvariantAccess().getInvKeyword_0());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:689:1: ( (lv_constraintName_1_0= ruleIdentifier ) )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:686:1: ( (lv_constraintName_1_0= ruleIdentifier ) )?
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -2010,10 +2007,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt13) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:690:1: (lv_constraintName_1_0= ruleIdentifier )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:687:1: (lv_constraintName_1_0= ruleIdentifier )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:690:1: (lv_constraintName_1_0= ruleIdentifier )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:691:3: lv_constraintName_1_0= ruleIdentifier
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:687:1: (lv_constraintName_1_0= ruleIdentifier )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:688:3: lv_constraintName_1_0= ruleIdentifier
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -2053,11 +2050,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_2, grammarAccess.getInvariantAccess().getColonKeyword_2());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:711:1: ( (lv_expression_3_0= ruleExpression ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:712:1: (lv_expression_3_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:708:1: ( (lv_expression_3_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:709:1: (lv_expression_3_0= ruleExpression )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:712:1: (lv_expression_3_0= ruleExpression )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:713:3: lv_expression_3_0= ruleExpression
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:709:1: (lv_expression_3_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:710:3: lv_expression_3_0= ruleExpression
             {
             if ( state.backtracking==0 ) {
                
@@ -2111,7 +2108,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleOperationContextDecl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:737:1: entryRuleOperationContextDecl returns [EObject current=null] : iv_ruleOperationContextDecl= ruleOperationContextDecl EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:734:1: entryRuleOperationContextDecl returns [EObject current=null] : iv_ruleOperationContextDecl= ruleOperationContextDecl EOF ;
     public final EObject entryRuleOperationContextDecl() throws RecognitionException {
         EObject current = null;
 
@@ -2119,8 +2116,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:738:2: (iv_ruleOperationContextDecl= ruleOperationContextDecl EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:739:2: iv_ruleOperationContextDecl= ruleOperationContextDecl EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:735:2: (iv_ruleOperationContextDecl= ruleOperationContextDecl EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:736:2: iv_ruleOperationContextDecl= ruleOperationContextDecl EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOperationContextDeclRule()); 
@@ -2151,7 +2148,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleOperationContextDecl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:746:1: ruleOperationContextDecl returns [EObject current=null] : (otherlv_0= 'context' ( (lv_operation_1_0= ruleOperationRef ) ) otherlv_2= '(' ( ( (lv_parameters_3_0= ruleParameter ) ) (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )* )? otherlv_6= ')' otherlv_7= ':' ( (lv_type_8_0= ruleTypeExp ) )? ( ( (lv_pres_9_0= rulePre ) ) | ( (lv_posts_10_0= rulePost ) ) | ( (lv_bodies_11_0= ruleBody ) ) )* ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:743:1: ruleOperationContextDecl returns [EObject current=null] : (otherlv_0= 'context' ( (lv_operation_1_0= ruleOperationRef ) ) otherlv_2= '(' ( ( (lv_parameters_3_0= ruleParameter ) ) (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )* )? otherlv_6= ')' otherlv_7= ':' ( (lv_type_8_0= ruleTypeExp ) )? ( ( (lv_pres_9_0= rulePre ) ) | ( (lv_posts_10_0= rulePost ) ) | ( (lv_bodies_11_0= ruleBody ) ) )* ) ;
     public final EObject ruleOperationContextDecl() throws RecognitionException {
         EObject current = null;
 
@@ -2178,11 +2175,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:749:28: ( (otherlv_0= 'context' ( (lv_operation_1_0= ruleOperationRef ) ) otherlv_2= '(' ( ( (lv_parameters_3_0= ruleParameter ) ) (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )* )? otherlv_6= ')' otherlv_7= ':' ( (lv_type_8_0= ruleTypeExp ) )? ( ( (lv_pres_9_0= rulePre ) ) | ( (lv_posts_10_0= rulePost ) ) | ( (lv_bodies_11_0= ruleBody ) ) )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:750:1: (otherlv_0= 'context' ( (lv_operation_1_0= ruleOperationRef ) ) otherlv_2= '(' ( ( (lv_parameters_3_0= ruleParameter ) ) (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )* )? otherlv_6= ')' otherlv_7= ':' ( (lv_type_8_0= ruleTypeExp ) )? ( ( (lv_pres_9_0= rulePre ) ) | ( (lv_posts_10_0= rulePost ) ) | ( (lv_bodies_11_0= ruleBody ) ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:746:28: ( (otherlv_0= 'context' ( (lv_operation_1_0= ruleOperationRef ) ) otherlv_2= '(' ( ( (lv_parameters_3_0= ruleParameter ) ) (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )* )? otherlv_6= ')' otherlv_7= ':' ( (lv_type_8_0= ruleTypeExp ) )? ( ( (lv_pres_9_0= rulePre ) ) | ( (lv_posts_10_0= rulePost ) ) | ( (lv_bodies_11_0= ruleBody ) ) )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:747:1: (otherlv_0= 'context' ( (lv_operation_1_0= ruleOperationRef ) ) otherlv_2= '(' ( ( (lv_parameters_3_0= ruleParameter ) ) (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )* )? otherlv_6= ')' otherlv_7= ':' ( (lv_type_8_0= ruleTypeExp ) )? ( ( (lv_pres_9_0= rulePre ) ) | ( (lv_posts_10_0= rulePost ) ) | ( (lv_bodies_11_0= ruleBody ) ) )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:750:1: (otherlv_0= 'context' ( (lv_operation_1_0= ruleOperationRef ) ) otherlv_2= '(' ( ( (lv_parameters_3_0= ruleParameter ) ) (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )* )? otherlv_6= ')' otherlv_7= ':' ( (lv_type_8_0= ruleTypeExp ) )? ( ( (lv_pres_9_0= rulePre ) ) | ( (lv_posts_10_0= rulePost ) ) | ( (lv_bodies_11_0= ruleBody ) ) )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:750:3: otherlv_0= 'context' ( (lv_operation_1_0= ruleOperationRef ) ) otherlv_2= '(' ( ( (lv_parameters_3_0= ruleParameter ) ) (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )* )? otherlv_6= ')' otherlv_7= ':' ( (lv_type_8_0= ruleTypeExp ) )? ( ( (lv_pres_9_0= rulePre ) ) | ( (lv_posts_10_0= rulePost ) ) | ( (lv_bodies_11_0= ruleBody ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:747:1: (otherlv_0= 'context' ( (lv_operation_1_0= ruleOperationRef ) ) otherlv_2= '(' ( ( (lv_parameters_3_0= ruleParameter ) ) (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )* )? otherlv_6= ')' otherlv_7= ':' ( (lv_type_8_0= ruleTypeExp ) )? ( ( (lv_pres_9_0= rulePre ) ) | ( (lv_posts_10_0= rulePost ) ) | ( (lv_bodies_11_0= ruleBody ) ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:747:3: otherlv_0= 'context' ( (lv_operation_1_0= ruleOperationRef ) ) otherlv_2= '(' ( ( (lv_parameters_3_0= ruleParameter ) ) (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )* )? otherlv_6= ')' otherlv_7= ':' ( (lv_type_8_0= ruleTypeExp ) )? ( ( (lv_pres_9_0= rulePre ) ) | ( (lv_posts_10_0= rulePost ) ) | ( (lv_bodies_11_0= ruleBody ) ) )*
             {
             otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleOperationContextDecl1551); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -2190,11 +2187,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_0, grammarAccess.getOperationContextDeclAccess().getContextKeyword_0());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:754:1: ( (lv_operation_1_0= ruleOperationRef ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:755:1: (lv_operation_1_0= ruleOperationRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:751:1: ( (lv_operation_1_0= ruleOperationRef ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:752:1: (lv_operation_1_0= ruleOperationRef )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:755:1: (lv_operation_1_0= ruleOperationRef )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:756:3: lv_operation_1_0= ruleOperationRef
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:752:1: (lv_operation_1_0= ruleOperationRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:753:3: lv_operation_1_0= ruleOperationRef
             {
             if ( state.backtracking==0 ) {
                
@@ -2231,7 +2228,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_2, grammarAccess.getOperationContextDeclAccess().getLeftParenthesisKeyword_2());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:776:1: ( ( (lv_parameters_3_0= ruleParameter ) ) (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )* )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:773:1: ( ( (lv_parameters_3_0= ruleParameter ) ) (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )* )?
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -2240,13 +2237,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt15) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:776:2: ( (lv_parameters_3_0= ruleParameter ) ) (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:773:2: ( (lv_parameters_3_0= ruleParameter ) ) (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )*
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:776:2: ( (lv_parameters_3_0= ruleParameter ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:777:1: (lv_parameters_3_0= ruleParameter )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:773:2: ( (lv_parameters_3_0= ruleParameter ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:774:1: (lv_parameters_3_0= ruleParameter )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:777:1: (lv_parameters_3_0= ruleParameter )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:778:3: lv_parameters_3_0= ruleParameter
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:774:1: (lv_parameters_3_0= ruleParameter )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:775:3: lv_parameters_3_0= ruleParameter
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -2277,7 +2274,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:794:2: (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:791:2: (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )*
                     loop14:
                     do {
                         int alt14=2;
@@ -2290,7 +2287,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                         switch (alt14) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:794:4: otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:791:4: otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) )
                     	    {
                     	    otherlv_4=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleOperationContextDecl1619); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -2298,11 +2295,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     	          	newLeafNode(otherlv_4, grammarAccess.getOperationContextDeclAccess().getCommaKeyword_3_1_0());
                     	          
                     	    }
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:798:1: ( (lv_parameters_5_0= ruleParameter ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:799:1: (lv_parameters_5_0= ruleParameter )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:795:1: ( (lv_parameters_5_0= ruleParameter ) )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:796:1: (lv_parameters_5_0= ruleParameter )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:799:1: (lv_parameters_5_0= ruleParameter )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:800:3: lv_parameters_5_0= ruleParameter
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:796:1: (lv_parameters_5_0= ruleParameter )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:797:3: lv_parameters_5_0= ruleParameter
                     	    {
                     	    if ( state.backtracking==0 ) {
                     	       
@@ -2360,7 +2357,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_7, grammarAccess.getOperationContextDeclAccess().getColonKeyword_5());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:824:1: ( (lv_type_8_0= ruleTypeExp ) )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:821:1: ( (lv_type_8_0= ruleTypeExp ) )?
             int alt16=2;
             int LA16_0 = input.LA(1);
 
@@ -2369,10 +2366,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt16) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:825:1: (lv_type_8_0= ruleTypeExp )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:822:1: (lv_type_8_0= ruleTypeExp )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:825:1: (lv_type_8_0= ruleTypeExp )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:826:3: lv_type_8_0= ruleTypeExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:822:1: (lv_type_8_0= ruleTypeExp )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:823:3: lv_type_8_0= ruleTypeExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -2406,7 +2403,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:842:3: ( ( (lv_pres_9_0= rulePre ) ) | ( (lv_posts_10_0= rulePost ) ) | ( (lv_bodies_11_0= ruleBody ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:839:3: ( ( (lv_pres_9_0= rulePre ) ) | ( (lv_posts_10_0= rulePost ) ) | ( (lv_bodies_11_0= ruleBody ) ) )*
             loop17:
             do {
                 int alt17=4;
@@ -2431,13 +2428,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                 switch (alt17) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:842:4: ( (lv_pres_9_0= rulePre ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:839:4: ( (lv_pres_9_0= rulePre ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:842:4: ( (lv_pres_9_0= rulePre ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:843:1: (lv_pres_9_0= rulePre )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:839:4: ( (lv_pres_9_0= rulePre ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:840:1: (lv_pres_9_0= rulePre )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:843:1: (lv_pres_9_0= rulePre )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:844:3: lv_pres_9_0= rulePre
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:840:1: (lv_pres_9_0= rulePre )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:841:3: lv_pres_9_0= rulePre
             	    {
             	    if ( state.backtracking==0 ) {
             	       
@@ -2472,13 +2469,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:861:6: ( (lv_posts_10_0= rulePost ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:858:6: ( (lv_posts_10_0= rulePost ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:861:6: ( (lv_posts_10_0= rulePost ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:862:1: (lv_posts_10_0= rulePost )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:858:6: ( (lv_posts_10_0= rulePost ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:859:1: (lv_posts_10_0= rulePost )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:862:1: (lv_posts_10_0= rulePost )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:863:3: lv_posts_10_0= rulePost
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:859:1: (lv_posts_10_0= rulePost )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:860:3: lv_posts_10_0= rulePost
             	    {
             	    if ( state.backtracking==0 ) {
             	       
@@ -2513,13 +2510,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	    }
             	    break;
             	case 3 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:880:6: ( (lv_bodies_11_0= ruleBody ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:877:6: ( (lv_bodies_11_0= ruleBody ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:880:6: ( (lv_bodies_11_0= ruleBody ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:881:1: (lv_bodies_11_0= ruleBody )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:877:6: ( (lv_bodies_11_0= ruleBody ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:878:1: (lv_bodies_11_0= ruleBody )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:881:1: (lv_bodies_11_0= ruleBody )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:882:3: lv_bodies_11_0= ruleBody
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:878:1: (lv_bodies_11_0= ruleBody )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:879:3: lv_bodies_11_0= ruleBody
             	    {
             	    if ( state.backtracking==0 ) {
             	       
@@ -2582,7 +2579,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleOperationRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:906:1: entryRuleOperationRef returns [EObject current=null] : iv_ruleOperationRef= ruleOperationRef EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:903:1: entryRuleOperationRef returns [EObject current=null] : iv_ruleOperationRef= ruleOperationRef EOF ;
     public final EObject entryRuleOperationRef() throws RecognitionException {
         EObject current = null;
 
@@ -2590,8 +2587,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:907:2: (iv_ruleOperationRef= ruleOperationRef EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:908:2: iv_ruleOperationRef= ruleOperationRef EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:904:2: (iv_ruleOperationRef= ruleOperationRef EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:905:2: iv_ruleOperationRef= ruleOperationRef EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOperationRefRule()); 
@@ -2622,7 +2619,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleOperationRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:915:1: ruleOperationRef returns [EObject current=null] : (this_QualifiedOperationRef_0= ruleQualifiedOperationRef | this_SimpleOperationRef_1= ruleSimpleOperationRef ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:912:1: ruleOperationRef returns [EObject current=null] : (this_QualifiedOperationRef_0= ruleQualifiedOperationRef | this_SimpleOperationRef_1= ruleSimpleOperationRef ) ;
     public final EObject ruleOperationRef() throws RecognitionException {
         EObject current = null;
 
@@ -2634,10 +2631,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:918:28: ( (this_QualifiedOperationRef_0= ruleQualifiedOperationRef | this_SimpleOperationRef_1= ruleSimpleOperationRef ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:919:1: (this_QualifiedOperationRef_0= ruleQualifiedOperationRef | this_SimpleOperationRef_1= ruleSimpleOperationRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:915:28: ( (this_QualifiedOperationRef_0= ruleQualifiedOperationRef | this_SimpleOperationRef_1= ruleSimpleOperationRef ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:916:1: (this_QualifiedOperationRef_0= ruleQualifiedOperationRef | this_SimpleOperationRef_1= ruleSimpleOperationRef )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:919:1: (this_QualifiedOperationRef_0= ruleQualifiedOperationRef | this_SimpleOperationRef_1= ruleSimpleOperationRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:916:1: (this_QualifiedOperationRef_0= ruleQualifiedOperationRef | this_SimpleOperationRef_1= ruleSimpleOperationRef )
             int alt18=2;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -2707,7 +2704,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             switch (alt18) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:920:2: this_QualifiedOperationRef_0= ruleQualifiedOperationRef
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:917:2: this_QualifiedOperationRef_0= ruleQualifiedOperationRef
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -2734,7 +2731,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:933:2: this_SimpleOperationRef_1= ruleSimpleOperationRef
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:930:2: this_SimpleOperationRef_1= ruleSimpleOperationRef
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -2783,7 +2780,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRulePackageDeclaration"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:952:1: entryRulePackageDeclaration returns [EObject current=null] : iv_rulePackageDeclaration= rulePackageDeclaration EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:949:1: entryRulePackageDeclaration returns [EObject current=null] : iv_rulePackageDeclaration= rulePackageDeclaration EOF ;
     public final EObject entryRulePackageDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -2791,8 +2788,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:953:2: (iv_rulePackageDeclaration= rulePackageDeclaration EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:954:2: iv_rulePackageDeclaration= rulePackageDeclaration EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:950:2: (iv_rulePackageDeclaration= rulePackageDeclaration EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:951:2: iv_rulePackageDeclaration= rulePackageDeclaration EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPackageDeclarationRule()); 
@@ -2823,7 +2820,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "rulePackageDeclaration"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:961:1: rulePackageDeclaration returns [EObject current=null] : (otherlv_0= 'package' ( (lv_package_1_0= rulePackageRef ) ) ( (lv_contexts_2_0= ruleContextDecl ) )* otherlv_3= 'endpackage' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:958:1: rulePackageDeclaration returns [EObject current=null] : (otherlv_0= 'package' ( (lv_package_1_0= rulePackageRef ) ) ( (lv_contexts_2_0= ruleContextDecl ) )* otherlv_3= 'endpackage' ) ;
     public final EObject rulePackageDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -2837,11 +2834,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:964:28: ( (otherlv_0= 'package' ( (lv_package_1_0= rulePackageRef ) ) ( (lv_contexts_2_0= ruleContextDecl ) )* otherlv_3= 'endpackage' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:965:1: (otherlv_0= 'package' ( (lv_package_1_0= rulePackageRef ) ) ( (lv_contexts_2_0= ruleContextDecl ) )* otherlv_3= 'endpackage' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:961:28: ( (otherlv_0= 'package' ( (lv_package_1_0= rulePackageRef ) ) ( (lv_contexts_2_0= ruleContextDecl ) )* otherlv_3= 'endpackage' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:962:1: (otherlv_0= 'package' ( (lv_package_1_0= rulePackageRef ) ) ( (lv_contexts_2_0= ruleContextDecl ) )* otherlv_3= 'endpackage' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:965:1: (otherlv_0= 'package' ( (lv_package_1_0= rulePackageRef ) ) ( (lv_contexts_2_0= ruleContextDecl ) )* otherlv_3= 'endpackage' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:965:3: otherlv_0= 'package' ( (lv_package_1_0= rulePackageRef ) ) ( (lv_contexts_2_0= ruleContextDecl ) )* otherlv_3= 'endpackage'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:962:1: (otherlv_0= 'package' ( (lv_package_1_0= rulePackageRef ) ) ( (lv_contexts_2_0= ruleContextDecl ) )* otherlv_3= 'endpackage' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:962:3: otherlv_0= 'package' ( (lv_package_1_0= rulePackageRef ) ) ( (lv_contexts_2_0= ruleContextDecl ) )* otherlv_3= 'endpackage'
             {
             otherlv_0=(Token)match(input,23,FollowSets000.FOLLOW_23_in_rulePackageDeclaration1976); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -2849,11 +2846,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_0, grammarAccess.getPackageDeclarationAccess().getPackageKeyword_0());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:969:1: ( (lv_package_1_0= rulePackageRef ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:970:1: (lv_package_1_0= rulePackageRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:966:1: ( (lv_package_1_0= rulePackageRef ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:967:1: (lv_package_1_0= rulePackageRef )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:970:1: (lv_package_1_0= rulePackageRef )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:971:3: lv_package_1_0= rulePackageRef
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:967:1: (lv_package_1_0= rulePackageRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:968:3: lv_package_1_0= rulePackageRef
             {
             if ( state.backtracking==0 ) {
                
@@ -2884,7 +2881,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:987:2: ( (lv_contexts_2_0= ruleContextDecl ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:984:2: ( (lv_contexts_2_0= ruleContextDecl ) )*
             loop19:
             do {
                 int alt19=2;
@@ -2897,10 +2894,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                 switch (alt19) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:988:1: (lv_contexts_2_0= ruleContextDecl )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:985:1: (lv_contexts_2_0= ruleContextDecl )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:988:1: (lv_contexts_2_0= ruleContextDecl )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:989:3: lv_contexts_2_0= ruleContextDecl
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:985:1: (lv_contexts_2_0= ruleContextDecl )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:986:3: lv_contexts_2_0= ruleContextDecl
             	    {
             	    if ( state.backtracking==0 ) {
             	       
@@ -2966,7 +2963,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRulePackageRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1017:1: entryRulePackageRef returns [EObject current=null] : iv_rulePackageRef= rulePackageRef EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1014:1: entryRulePackageRef returns [EObject current=null] : iv_rulePackageRef= rulePackageRef EOF ;
     public final EObject entryRulePackageRef() throws RecognitionException {
         EObject current = null;
 
@@ -2974,8 +2971,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1018:2: (iv_rulePackageRef= rulePackageRef EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1019:2: iv_rulePackageRef= rulePackageRef EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1015:2: (iv_rulePackageRef= rulePackageRef EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1016:2: iv_rulePackageRef= rulePackageRef EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPackageRefRule()); 
@@ -3006,7 +3003,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "rulePackageRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1026:1: rulePackageRef returns [EObject current=null] : (this_QualifiedPackageRef_0= ruleQualifiedPackageRef | this_SimplePackageRef_1= ruleSimplePackageRef ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1023:1: rulePackageRef returns [EObject current=null] : (this_QualifiedPackageRef_0= ruleQualifiedPackageRef | this_SimplePackageRef_1= ruleSimplePackageRef ) ;
     public final EObject rulePackageRef() throws RecognitionException {
         EObject current = null;
 
@@ -3018,10 +3015,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1029:28: ( (this_QualifiedPackageRef_0= ruleQualifiedPackageRef | this_SimplePackageRef_1= ruleSimplePackageRef ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1030:1: (this_QualifiedPackageRef_0= ruleQualifiedPackageRef | this_SimplePackageRef_1= ruleSimplePackageRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1026:28: ( (this_QualifiedPackageRef_0= ruleQualifiedPackageRef | this_SimplePackageRef_1= ruleSimplePackageRef ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1027:1: (this_QualifiedPackageRef_0= ruleQualifiedPackageRef | this_SimplePackageRef_1= ruleSimplePackageRef )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1030:1: (this_QualifiedPackageRef_0= ruleQualifiedPackageRef | this_SimplePackageRef_1= ruleSimplePackageRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1027:1: (this_QualifiedPackageRef_0= ruleQualifiedPackageRef | this_SimplePackageRef_1= ruleSimplePackageRef )
             int alt20=2;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -3091,7 +3088,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             switch (alt20) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1031:2: this_QualifiedPackageRef_0= ruleQualifiedPackageRef
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1028:2: this_QualifiedPackageRef_0= ruleQualifiedPackageRef
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -3118,7 +3115,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1044:2: this_SimplePackageRef_1= ruleSimplePackageRef
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1041:2: this_SimplePackageRef_1= ruleSimplePackageRef
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -3167,7 +3164,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleParameter"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1063:1: entryRuleParameter returns [EObject current=null] : iv_ruleParameter= ruleParameter EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1060:1: entryRuleParameter returns [EObject current=null] : iv_ruleParameter= ruleParameter EOF ;
     public final EObject entryRuleParameter() throws RecognitionException {
         EObject current = null;
 
@@ -3175,8 +3172,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1064:2: (iv_ruleParameter= ruleParameter EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1065:2: iv_ruleParameter= ruleParameter EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1061:2: (iv_ruleParameter= ruleParameter EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1062:2: iv_ruleParameter= ruleParameter EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getParameterRule()); 
@@ -3207,7 +3204,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleParameter"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1072:1: ruleParameter returns [EObject current=null] : ( ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' )? ( (lv_type_2_0= ruleTypeExp ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1069:1: ruleParameter returns [EObject current=null] : ( ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' )? ( (lv_type_2_0= ruleTypeExp ) ) ) ;
     public final EObject ruleParameter() throws RecognitionException {
         EObject current = null;
 
@@ -3220,13 +3217,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1075:28: ( ( ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' )? ( (lv_type_2_0= ruleTypeExp ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1076:1: ( ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' )? ( (lv_type_2_0= ruleTypeExp ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1072:28: ( ( ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' )? ( (lv_type_2_0= ruleTypeExp ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1073:1: ( ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' )? ( (lv_type_2_0= ruleTypeExp ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1076:1: ( ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' )? ( (lv_type_2_0= ruleTypeExp ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1076:2: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' )? ( (lv_type_2_0= ruleTypeExp ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1073:1: ( ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' )? ( (lv_type_2_0= ruleTypeExp ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1073:2: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' )? ( (lv_type_2_0= ruleTypeExp ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1076:2: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1073:2: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' )?
             int alt21=2;
             switch ( input.LA(1) ) {
                 case RULE_ID:
@@ -3260,13 +3257,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             switch (alt21) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1076:3: ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1073:3: ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':'
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1076:3: ( (lv_name_0_0= ruleIdentifier ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1077:1: (lv_name_0_0= ruleIdentifier )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1073:3: ( (lv_name_0_0= ruleIdentifier ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1074:1: (lv_name_0_0= ruleIdentifier )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1077:1: (lv_name_0_0= ruleIdentifier )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1078:3: lv_name_0_0= ruleIdentifier
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1074:1: (lv_name_0_0= ruleIdentifier )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1075:3: lv_name_0_0= ruleIdentifier
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -3309,11 +3306,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1098:3: ( (lv_type_2_0= ruleTypeExp ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1099:1: (lv_type_2_0= ruleTypeExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1095:3: ( (lv_type_2_0= ruleTypeExp ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1096:1: (lv_type_2_0= ruleTypeExp )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1099:1: (lv_type_2_0= ruleTypeExp )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1100:3: lv_type_2_0= ruleTypeExp
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1096:1: (lv_type_2_0= ruleTypeExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1097:3: lv_type_2_0= ruleTypeExp
             {
             if ( state.backtracking==0 ) {
                
@@ -3367,7 +3364,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRulePost"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1124:1: entryRulePost returns [EObject current=null] : iv_rulePost= rulePost EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1121:1: entryRulePost returns [EObject current=null] : iv_rulePost= rulePost EOF ;
     public final EObject entryRulePost() throws RecognitionException {
         EObject current = null;
 
@@ -3375,8 +3372,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1125:2: (iv_rulePost= rulePost EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1126:2: iv_rulePost= rulePost EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1122:2: (iv_rulePost= rulePost EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1123:2: iv_rulePost= rulePost EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPostRule()); 
@@ -3407,7 +3404,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "rulePost"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1133:1: rulePost returns [EObject current=null] : (otherlv_0= 'post' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1130:1: rulePost returns [EObject current=null] : (otherlv_0= 'post' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) ) ;
     public final EObject rulePost() throws RecognitionException {
         EObject current = null;
 
@@ -3421,11 +3418,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1136:28: ( (otherlv_0= 'post' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1137:1: (otherlv_0= 'post' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1133:28: ( (otherlv_0= 'post' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1134:1: (otherlv_0= 'post' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1137:1: (otherlv_0= 'post' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1137:3: otherlv_0= 'post' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1134:1: (otherlv_0= 'post' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1134:3: otherlv_0= 'post' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) )
             {
             otherlv_0=(Token)match(input,25,FollowSets000.FOLLOW_25_in_rulePost2367); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -3433,7 +3430,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_0, grammarAccess.getPostAccess().getPostKeyword_0());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1141:1: ( (lv_constraintName_1_0= ruleIdentifier ) )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1138:1: ( (lv_constraintName_1_0= ruleIdentifier ) )?
             int alt22=2;
             int LA22_0 = input.LA(1);
 
@@ -3442,10 +3439,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt22) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1142:1: (lv_constraintName_1_0= ruleIdentifier )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1139:1: (lv_constraintName_1_0= ruleIdentifier )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1142:1: (lv_constraintName_1_0= ruleIdentifier )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1143:3: lv_constraintName_1_0= ruleIdentifier
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1139:1: (lv_constraintName_1_0= ruleIdentifier )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1140:3: lv_constraintName_1_0= ruleIdentifier
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -3485,11 +3482,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_2, grammarAccess.getPostAccess().getColonKeyword_2());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1163:1: ( (lv_expression_3_0= ruleExpression ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1164:1: (lv_expression_3_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1160:1: ( (lv_expression_3_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1161:1: (lv_expression_3_0= ruleExpression )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1164:1: (lv_expression_3_0= ruleExpression )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1165:3: lv_expression_3_0= ruleExpression
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1161:1: (lv_expression_3_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1162:3: lv_expression_3_0= ruleExpression
             {
             if ( state.backtracking==0 ) {
                
@@ -3543,7 +3540,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRulePre"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1189:1: entryRulePre returns [EObject current=null] : iv_rulePre= rulePre EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1186:1: entryRulePre returns [EObject current=null] : iv_rulePre= rulePre EOF ;
     public final EObject entryRulePre() throws RecognitionException {
         EObject current = null;
 
@@ -3551,8 +3548,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1190:2: (iv_rulePre= rulePre EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1191:2: iv_rulePre= rulePre EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1187:2: (iv_rulePre= rulePre EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1188:2: iv_rulePre= rulePre EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPreRule()); 
@@ -3583,7 +3580,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "rulePre"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1198:1: rulePre returns [EObject current=null] : (otherlv_0= 'pre' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1195:1: rulePre returns [EObject current=null] : (otherlv_0= 'pre' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) ) ;
     public final EObject rulePre() throws RecognitionException {
         EObject current = null;
 
@@ -3597,11 +3594,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1201:28: ( (otherlv_0= 'pre' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1202:1: (otherlv_0= 'pre' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1198:28: ( (otherlv_0= 'pre' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1199:1: (otherlv_0= 'pre' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1202:1: (otherlv_0= 'pre' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1202:3: otherlv_0= 'pre' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1199:1: (otherlv_0= 'pre' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1199:3: otherlv_0= 'pre' ( (lv_constraintName_1_0= ruleIdentifier ) )? otherlv_2= ':' ( (lv_expression_3_0= ruleExpression ) )
             {
             otherlv_0=(Token)match(input,26,FollowSets000.FOLLOW_26_in_rulePre2505); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -3609,7 +3606,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_0, grammarAccess.getPreAccess().getPreKeyword_0());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1206:1: ( (lv_constraintName_1_0= ruleIdentifier ) )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1203:1: ( (lv_constraintName_1_0= ruleIdentifier ) )?
             int alt23=2;
             int LA23_0 = input.LA(1);
 
@@ -3618,10 +3615,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt23) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1207:1: (lv_constraintName_1_0= ruleIdentifier )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1204:1: (lv_constraintName_1_0= ruleIdentifier )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1207:1: (lv_constraintName_1_0= ruleIdentifier )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1208:3: lv_constraintName_1_0= ruleIdentifier
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1204:1: (lv_constraintName_1_0= ruleIdentifier )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1205:3: lv_constraintName_1_0= ruleIdentifier
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -3661,11 +3658,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_2, grammarAccess.getPreAccess().getColonKeyword_2());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1228:1: ( (lv_expression_3_0= ruleExpression ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1229:1: (lv_expression_3_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1225:1: ( (lv_expression_3_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1226:1: (lv_expression_3_0= ruleExpression )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1229:1: (lv_expression_3_0= ruleExpression )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1230:3: lv_expression_3_0= ruleExpression
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1226:1: (lv_expression_3_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1227:3: lv_expression_3_0= ruleExpression
             {
             if ( state.backtracking==0 ) {
                
@@ -3719,7 +3716,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRulePropertyContextDecl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1254:1: entryRulePropertyContextDecl returns [EObject current=null] : iv_rulePropertyContextDecl= rulePropertyContextDecl EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1251:1: entryRulePropertyContextDecl returns [EObject current=null] : iv_rulePropertyContextDecl= rulePropertyContextDecl EOF ;
     public final EObject entryRulePropertyContextDecl() throws RecognitionException {
         EObject current = null;
 
@@ -3727,8 +3724,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1255:2: (iv_rulePropertyContextDecl= rulePropertyContextDecl EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1256:2: iv_rulePropertyContextDecl= rulePropertyContextDecl EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1252:2: (iv_rulePropertyContextDecl= rulePropertyContextDecl EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1253:2: iv_rulePropertyContextDecl= rulePropertyContextDecl EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPropertyContextDeclRule()); 
@@ -3759,7 +3756,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "rulePropertyContextDecl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1263:1: rulePropertyContextDecl returns [EObject current=null] : (otherlv_0= 'context' ( (lv_property_1_0= rulePropertyRef ) ) otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) ( ( ( (lv_init_4_0= ruleInit ) ) ( (lv_der_5_0= ruleDer ) )? )? | ( ( (lv_der_6_0= ruleDer ) ) ( (lv_init_7_0= ruleInit ) )? ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1260:1: rulePropertyContextDecl returns [EObject current=null] : (otherlv_0= 'context' ( (lv_property_1_0= rulePropertyRef ) ) otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) ( ( ( (lv_init_4_0= ruleInit ) ) ( (lv_der_5_0= ruleDer ) )? )? | ( ( (lv_der_6_0= ruleDer ) ) ( (lv_init_7_0= ruleInit ) )? ) ) ) ;
     public final EObject rulePropertyContextDecl() throws RecognitionException {
         EObject current = null;
 
@@ -3781,11 +3778,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1266:28: ( (otherlv_0= 'context' ( (lv_property_1_0= rulePropertyRef ) ) otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) ( ( ( (lv_init_4_0= ruleInit ) ) ( (lv_der_5_0= ruleDer ) )? )? | ( ( (lv_der_6_0= ruleDer ) ) ( (lv_init_7_0= ruleInit ) )? ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1267:1: (otherlv_0= 'context' ( (lv_property_1_0= rulePropertyRef ) ) otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) ( ( ( (lv_init_4_0= ruleInit ) ) ( (lv_der_5_0= ruleDer ) )? )? | ( ( (lv_der_6_0= ruleDer ) ) ( (lv_init_7_0= ruleInit ) )? ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1263:28: ( (otherlv_0= 'context' ( (lv_property_1_0= rulePropertyRef ) ) otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) ( ( ( (lv_init_4_0= ruleInit ) ) ( (lv_der_5_0= ruleDer ) )? )? | ( ( (lv_der_6_0= ruleDer ) ) ( (lv_init_7_0= ruleInit ) )? ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1264:1: (otherlv_0= 'context' ( (lv_property_1_0= rulePropertyRef ) ) otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) ( ( ( (lv_init_4_0= ruleInit ) ) ( (lv_der_5_0= ruleDer ) )? )? | ( ( (lv_der_6_0= ruleDer ) ) ( (lv_init_7_0= ruleInit ) )? ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1267:1: (otherlv_0= 'context' ( (lv_property_1_0= rulePropertyRef ) ) otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) ( ( ( (lv_init_4_0= ruleInit ) ) ( (lv_der_5_0= ruleDer ) )? )? | ( ( (lv_der_6_0= ruleDer ) ) ( (lv_init_7_0= ruleInit ) )? ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1267:3: otherlv_0= 'context' ( (lv_property_1_0= rulePropertyRef ) ) otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) ( ( ( (lv_init_4_0= ruleInit ) ) ( (lv_der_5_0= ruleDer ) )? )? | ( ( (lv_der_6_0= ruleDer ) ) ( (lv_init_7_0= ruleInit ) )? ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1264:1: (otherlv_0= 'context' ( (lv_property_1_0= rulePropertyRef ) ) otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) ( ( ( (lv_init_4_0= ruleInit ) ) ( (lv_der_5_0= ruleDer ) )? )? | ( ( (lv_der_6_0= ruleDer ) ) ( (lv_init_7_0= ruleInit ) )? ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1264:3: otherlv_0= 'context' ( (lv_property_1_0= rulePropertyRef ) ) otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) ( ( ( (lv_init_4_0= ruleInit ) ) ( (lv_der_5_0= ruleDer ) )? )? | ( ( (lv_der_6_0= ruleDer ) ) ( (lv_init_7_0= ruleInit ) )? ) )
             {
             otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_rulePropertyContextDecl2643); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -3793,11 +3790,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_0, grammarAccess.getPropertyContextDeclAccess().getContextKeyword_0());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1271:1: ( (lv_property_1_0= rulePropertyRef ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1272:1: (lv_property_1_0= rulePropertyRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1268:1: ( (lv_property_1_0= rulePropertyRef ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1269:1: (lv_property_1_0= rulePropertyRef )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1272:1: (lv_property_1_0= rulePropertyRef )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1273:3: lv_property_1_0= rulePropertyRef
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1269:1: (lv_property_1_0= rulePropertyRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1270:3: lv_property_1_0= rulePropertyRef
             {
             if ( state.backtracking==0 ) {
                
@@ -3834,11 +3831,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_2, grammarAccess.getPropertyContextDeclAccess().getColonKeyword_2());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1293:1: ( (lv_type_3_0= ruleTypeExp ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1294:1: (lv_type_3_0= ruleTypeExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1290:1: ( (lv_type_3_0= ruleTypeExp ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1291:1: (lv_type_3_0= ruleTypeExp )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1294:1: (lv_type_3_0= ruleTypeExp )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1295:3: lv_type_3_0= ruleTypeExp
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1291:1: (lv_type_3_0= ruleTypeExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1292:3: lv_type_3_0= ruleTypeExp
             {
             if ( state.backtracking==0 ) {
                
@@ -3869,7 +3866,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1311:2: ( ( ( (lv_init_4_0= ruleInit ) ) ( (lv_der_5_0= ruleDer ) )? )? | ( ( (lv_der_6_0= ruleDer ) ) ( (lv_init_7_0= ruleInit ) )? ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1308:2: ( ( ( (lv_init_4_0= ruleInit ) ) ( (lv_der_5_0= ruleDer ) )? )? | ( ( (lv_der_6_0= ruleDer ) ) ( (lv_init_7_0= ruleInit ) )? ) )
             int alt27=2;
             int LA27_0 = input.LA(1);
 
@@ -3888,9 +3885,9 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt27) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1311:3: ( ( (lv_init_4_0= ruleInit ) ) ( (lv_der_5_0= ruleDer ) )? )?
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1308:3: ( ( (lv_init_4_0= ruleInit ) ) ( (lv_der_5_0= ruleDer ) )? )?
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1311:3: ( ( (lv_init_4_0= ruleInit ) ) ( (lv_der_5_0= ruleDer ) )? )?
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1308:3: ( ( (lv_init_4_0= ruleInit ) ) ( (lv_der_5_0= ruleDer ) )? )?
                     int alt25=2;
                     int LA25_0 = input.LA(1);
 
@@ -3899,13 +3896,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     switch (alt25) {
                         case 1 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1311:4: ( (lv_init_4_0= ruleInit ) ) ( (lv_der_5_0= ruleDer ) )?
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1308:4: ( (lv_init_4_0= ruleInit ) ) ( (lv_der_5_0= ruleDer ) )?
                             {
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1311:4: ( (lv_init_4_0= ruleInit ) )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1312:1: (lv_init_4_0= ruleInit )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1308:4: ( (lv_init_4_0= ruleInit ) )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1309:1: (lv_init_4_0= ruleInit )
                             {
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1312:1: (lv_init_4_0= ruleInit )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1313:3: lv_init_4_0= ruleInit
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1309:1: (lv_init_4_0= ruleInit )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1310:3: lv_init_4_0= ruleInit
                             {
                             if ( state.backtracking==0 ) {
                                
@@ -3936,7 +3933,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                             }
 
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1329:2: ( (lv_der_5_0= ruleDer ) )?
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1326:2: ( (lv_der_5_0= ruleDer ) )?
                             int alt24=2;
                             int LA24_0 = input.LA(1);
 
@@ -3945,10 +3942,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                             }
                             switch (alt24) {
                                 case 1 :
-                                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1330:1: (lv_der_5_0= ruleDer )
+                                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1327:1: (lv_der_5_0= ruleDer )
                                     {
-                                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1330:1: (lv_der_5_0= ruleDer )
-                                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1331:3: lv_der_5_0= ruleDer
+                                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1327:1: (lv_der_5_0= ruleDer )
+                                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1328:3: lv_der_5_0= ruleDer
                                     {
                                     if ( state.backtracking==0 ) {
                                        
@@ -3992,16 +3989,16 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1348:6: ( ( (lv_der_6_0= ruleDer ) ) ( (lv_init_7_0= ruleInit ) )? )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1345:6: ( ( (lv_der_6_0= ruleDer ) ) ( (lv_init_7_0= ruleInit ) )? )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1348:6: ( ( (lv_der_6_0= ruleDer ) ) ( (lv_init_7_0= ruleInit ) )? )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1348:7: ( (lv_der_6_0= ruleDer ) ) ( (lv_init_7_0= ruleInit ) )?
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1345:6: ( ( (lv_der_6_0= ruleDer ) ) ( (lv_init_7_0= ruleInit ) )? )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1345:7: ( (lv_der_6_0= ruleDer ) ) ( (lv_init_7_0= ruleInit ) )?
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1348:7: ( (lv_der_6_0= ruleDer ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1349:1: (lv_der_6_0= ruleDer )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1345:7: ( (lv_der_6_0= ruleDer ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1346:1: (lv_der_6_0= ruleDer )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1349:1: (lv_der_6_0= ruleDer )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1350:3: lv_der_6_0= ruleDer
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1346:1: (lv_der_6_0= ruleDer )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1347:3: lv_der_6_0= ruleDer
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -4032,7 +4029,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1366:2: ( (lv_init_7_0= ruleInit ) )?
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1363:2: ( (lv_init_7_0= ruleInit ) )?
                     int alt26=2;
                     int LA26_0 = input.LA(1);
 
@@ -4041,10 +4038,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     switch (alt26) {
                         case 1 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1367:1: (lv_init_7_0= ruleInit )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1364:1: (lv_init_7_0= ruleInit )
                             {
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1367:1: (lv_init_7_0= ruleInit )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1368:3: lv_init_7_0= ruleInit
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1364:1: (lv_init_7_0= ruleInit )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1365:3: lv_init_7_0= ruleInit
                             {
                             if ( state.backtracking==0 ) {
                                
@@ -4110,7 +4107,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRulePropertyRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1392:1: entryRulePropertyRef returns [EObject current=null] : iv_rulePropertyRef= rulePropertyRef EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1389:1: entryRulePropertyRef returns [EObject current=null] : iv_rulePropertyRef= rulePropertyRef EOF ;
     public final EObject entryRulePropertyRef() throws RecognitionException {
         EObject current = null;
 
@@ -4118,8 +4115,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1393:2: (iv_rulePropertyRef= rulePropertyRef EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1394:2: iv_rulePropertyRef= rulePropertyRef EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1390:2: (iv_rulePropertyRef= rulePropertyRef EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1391:2: iv_rulePropertyRef= rulePropertyRef EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPropertyRefRule()); 
@@ -4150,7 +4147,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "rulePropertyRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1401:1: rulePropertyRef returns [EObject current=null] : (this_QualifiedPropertyRef_0= ruleQualifiedPropertyRef | this_SimplePropertyRef_1= ruleSimplePropertyRef ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1398:1: rulePropertyRef returns [EObject current=null] : (this_QualifiedPropertyRef_0= ruleQualifiedPropertyRef | this_SimplePropertyRef_1= ruleSimplePropertyRef ) ;
     public final EObject rulePropertyRef() throws RecognitionException {
         EObject current = null;
 
@@ -4162,10 +4159,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1404:28: ( (this_QualifiedPropertyRef_0= ruleQualifiedPropertyRef | this_SimplePropertyRef_1= ruleSimplePropertyRef ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1405:1: (this_QualifiedPropertyRef_0= ruleQualifiedPropertyRef | this_SimplePropertyRef_1= ruleSimplePropertyRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1401:28: ( (this_QualifiedPropertyRef_0= ruleQualifiedPropertyRef | this_SimplePropertyRef_1= ruleSimplePropertyRef ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1402:1: (this_QualifiedPropertyRef_0= ruleQualifiedPropertyRef | this_SimplePropertyRef_1= ruleSimplePropertyRef )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1405:1: (this_QualifiedPropertyRef_0= ruleQualifiedPropertyRef | this_SimplePropertyRef_1= ruleSimplePropertyRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1402:1: (this_QualifiedPropertyRef_0= ruleQualifiedPropertyRef | this_SimplePropertyRef_1= ruleSimplePropertyRef )
             int alt28=2;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -4235,7 +4232,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             switch (alt28) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1406:2: this_QualifiedPropertyRef_0= ruleQualifiedPropertyRef
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1403:2: this_QualifiedPropertyRef_0= ruleQualifiedPropertyRef
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -4262,7 +4259,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1419:2: this_SimplePropertyRef_1= ruleSimplePropertyRef
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1416:2: this_SimplePropertyRef_1= ruleSimplePropertyRef
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -4311,7 +4308,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleQualifiedClassifierRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1438:1: entryRuleQualifiedClassifierRef returns [EObject current=null] : iv_ruleQualifiedClassifierRef= ruleQualifiedClassifierRef EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1435:1: entryRuleQualifiedClassifierRef returns [EObject current=null] : iv_ruleQualifiedClassifierRef= ruleQualifiedClassifierRef EOF ;
     public final EObject entryRuleQualifiedClassifierRef() throws RecognitionException {
         EObject current = null;
 
@@ -4319,8 +4316,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1439:2: (iv_ruleQualifiedClassifierRef= ruleQualifiedClassifierRef EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1440:2: iv_ruleQualifiedClassifierRef= ruleQualifiedClassifierRef EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1436:2: (iv_ruleQualifiedClassifierRef= ruleQualifiedClassifierRef EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1437:2: iv_ruleQualifiedClassifierRef= ruleQualifiedClassifierRef EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getQualifiedClassifierRefRule()); 
@@ -4351,7 +4348,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleQualifiedClassifierRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1447:1: ruleQualifiedClassifierRef returns [EObject current=null] : ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleClassifierRef ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1444:1: ruleQualifiedClassifierRef returns [EObject current=null] : ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleClassifierRef ) ) ) ;
     public final EObject ruleQualifiedClassifierRef() throws RecognitionException {
         EObject current = null;
 
@@ -4364,17 +4361,17 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1450:28: ( ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleClassifierRef ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1451:1: ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleClassifierRef ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1447:28: ( ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleClassifierRef ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1448:1: ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleClassifierRef ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1451:1: ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleClassifierRef ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1451:2: ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleClassifierRef ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1448:1: ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleClassifierRef ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1448:2: ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleClassifierRef ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1451:2: ( (lv_namespace_0_0= ruleIdentifier ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1452:1: (lv_namespace_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1448:2: ( (lv_namespace_0_0= ruleIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1449:1: (lv_namespace_0_0= ruleIdentifier )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1452:1: (lv_namespace_0_0= ruleIdentifier )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1453:3: lv_namespace_0_0= ruleIdentifier
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1449:1: (lv_namespace_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1450:3: lv_namespace_0_0= ruleIdentifier
             {
             if ( state.backtracking==0 ) {
                
@@ -4411,11 +4408,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_1, grammarAccess.getQualifiedClassifierRefAccess().getColonColonKeyword_1());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1473:1: ( (lv_element_2_0= ruleClassifierRef ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1474:1: (lv_element_2_0= ruleClassifierRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1470:1: ( (lv_element_2_0= ruleClassifierRef ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1471:1: (lv_element_2_0= ruleClassifierRef )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1474:1: (lv_element_2_0= ruleClassifierRef )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1475:3: lv_element_2_0= ruleClassifierRef
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1471:1: (lv_element_2_0= ruleClassifierRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1472:3: lv_element_2_0= ruleClassifierRef
             {
             if ( state.backtracking==0 ) {
                
@@ -4469,7 +4466,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleQualifiedOperationRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1499:1: entryRuleQualifiedOperationRef returns [EObject current=null] : iv_ruleQualifiedOperationRef= ruleQualifiedOperationRef EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1496:1: entryRuleQualifiedOperationRef returns [EObject current=null] : iv_ruleQualifiedOperationRef= ruleQualifiedOperationRef EOF ;
     public final EObject entryRuleQualifiedOperationRef() throws RecognitionException {
         EObject current = null;
 
@@ -4477,8 +4474,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1500:2: (iv_ruleQualifiedOperationRef= ruleQualifiedOperationRef EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1501:2: iv_ruleQualifiedOperationRef= ruleQualifiedOperationRef EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1497:2: (iv_ruleQualifiedOperationRef= ruleQualifiedOperationRef EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1498:2: iv_ruleQualifiedOperationRef= ruleQualifiedOperationRef EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getQualifiedOperationRefRule()); 
@@ -4509,7 +4506,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleQualifiedOperationRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1508:1: ruleQualifiedOperationRef returns [EObject current=null] : ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleOperationRef ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1505:1: ruleQualifiedOperationRef returns [EObject current=null] : ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleOperationRef ) ) ) ;
     public final EObject ruleQualifiedOperationRef() throws RecognitionException {
         EObject current = null;
 
@@ -4522,17 +4519,17 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1511:28: ( ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleOperationRef ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1512:1: ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleOperationRef ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1508:28: ( ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleOperationRef ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1509:1: ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleOperationRef ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1512:1: ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleOperationRef ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1512:2: ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleOperationRef ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1509:1: ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleOperationRef ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1509:2: ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleOperationRef ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1512:2: ( (lv_namespace_0_0= ruleIdentifier ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1513:1: (lv_namespace_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1509:2: ( (lv_namespace_0_0= ruleIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1510:1: (lv_namespace_0_0= ruleIdentifier )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1513:1: (lv_namespace_0_0= ruleIdentifier )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1514:3: lv_namespace_0_0= ruleIdentifier
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1510:1: (lv_namespace_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1511:3: lv_namespace_0_0= ruleIdentifier
             {
             if ( state.backtracking==0 ) {
                
@@ -4569,11 +4566,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_1, grammarAccess.getQualifiedOperationRefAccess().getColonColonKeyword_1());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1534:1: ( (lv_element_2_0= ruleOperationRef ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1535:1: (lv_element_2_0= ruleOperationRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1531:1: ( (lv_element_2_0= ruleOperationRef ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1532:1: (lv_element_2_0= ruleOperationRef )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1535:1: (lv_element_2_0= ruleOperationRef )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1536:3: lv_element_2_0= ruleOperationRef
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1532:1: (lv_element_2_0= ruleOperationRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1533:3: lv_element_2_0= ruleOperationRef
             {
             if ( state.backtracking==0 ) {
                
@@ -4627,7 +4624,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleQualifiedPropertyRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1560:1: entryRuleQualifiedPropertyRef returns [EObject current=null] : iv_ruleQualifiedPropertyRef= ruleQualifiedPropertyRef EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1557:1: entryRuleQualifiedPropertyRef returns [EObject current=null] : iv_ruleQualifiedPropertyRef= ruleQualifiedPropertyRef EOF ;
     public final EObject entryRuleQualifiedPropertyRef() throws RecognitionException {
         EObject current = null;
 
@@ -4635,8 +4632,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1561:2: (iv_ruleQualifiedPropertyRef= ruleQualifiedPropertyRef EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1562:2: iv_ruleQualifiedPropertyRef= ruleQualifiedPropertyRef EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1558:2: (iv_ruleQualifiedPropertyRef= ruleQualifiedPropertyRef EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1559:2: iv_ruleQualifiedPropertyRef= ruleQualifiedPropertyRef EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getQualifiedPropertyRefRule()); 
@@ -4667,7 +4664,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleQualifiedPropertyRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1569:1: ruleQualifiedPropertyRef returns [EObject current=null] : ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= rulePropertyRef ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1566:1: ruleQualifiedPropertyRef returns [EObject current=null] : ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= rulePropertyRef ) ) ) ;
     public final EObject ruleQualifiedPropertyRef() throws RecognitionException {
         EObject current = null;
 
@@ -4680,17 +4677,17 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1572:28: ( ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= rulePropertyRef ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1573:1: ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= rulePropertyRef ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1569:28: ( ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= rulePropertyRef ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1570:1: ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= rulePropertyRef ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1573:1: ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= rulePropertyRef ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1573:2: ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= rulePropertyRef ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1570:1: ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= rulePropertyRef ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1570:2: ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= rulePropertyRef ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1573:2: ( (lv_namespace_0_0= ruleIdentifier ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1574:1: (lv_namespace_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1570:2: ( (lv_namespace_0_0= ruleIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1571:1: (lv_namespace_0_0= ruleIdentifier )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1574:1: (lv_namespace_0_0= ruleIdentifier )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1575:3: lv_namespace_0_0= ruleIdentifier
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1571:1: (lv_namespace_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1572:3: lv_namespace_0_0= ruleIdentifier
             {
             if ( state.backtracking==0 ) {
                
@@ -4727,11 +4724,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_1, grammarAccess.getQualifiedPropertyRefAccess().getColonColonKeyword_1());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1595:1: ( (lv_element_2_0= rulePropertyRef ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1596:1: (lv_element_2_0= rulePropertyRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1592:1: ( (lv_element_2_0= rulePropertyRef ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1593:1: (lv_element_2_0= rulePropertyRef )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1596:1: (lv_element_2_0= rulePropertyRef )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1597:3: lv_element_2_0= rulePropertyRef
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1593:1: (lv_element_2_0= rulePropertyRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1594:3: lv_element_2_0= rulePropertyRef
             {
             if ( state.backtracking==0 ) {
                
@@ -4785,7 +4782,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleQualifiedPackageRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1621:1: entryRuleQualifiedPackageRef returns [EObject current=null] : iv_ruleQualifiedPackageRef= ruleQualifiedPackageRef EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1618:1: entryRuleQualifiedPackageRef returns [EObject current=null] : iv_ruleQualifiedPackageRef= ruleQualifiedPackageRef EOF ;
     public final EObject entryRuleQualifiedPackageRef() throws RecognitionException {
         EObject current = null;
 
@@ -4793,8 +4790,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1622:2: (iv_ruleQualifiedPackageRef= ruleQualifiedPackageRef EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1623:2: iv_ruleQualifiedPackageRef= ruleQualifiedPackageRef EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1619:2: (iv_ruleQualifiedPackageRef= ruleQualifiedPackageRef EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1620:2: iv_ruleQualifiedPackageRef= ruleQualifiedPackageRef EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getQualifiedPackageRefRule()); 
@@ -4825,7 +4822,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleQualifiedPackageRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1630:1: ruleQualifiedPackageRef returns [EObject current=null] : ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= rulePackageRef ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1627:1: ruleQualifiedPackageRef returns [EObject current=null] : ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= rulePackageRef ) ) ) ;
     public final EObject ruleQualifiedPackageRef() throws RecognitionException {
         EObject current = null;
 
@@ -4838,17 +4835,17 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1633:28: ( ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= rulePackageRef ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1634:1: ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= rulePackageRef ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1630:28: ( ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= rulePackageRef ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1631:1: ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= rulePackageRef ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1634:1: ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= rulePackageRef ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1634:2: ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= rulePackageRef ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1631:1: ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= rulePackageRef ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1631:2: ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= rulePackageRef ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1634:2: ( (lv_namespace_0_0= ruleIdentifier ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1635:1: (lv_namespace_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1631:2: ( (lv_namespace_0_0= ruleIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1632:1: (lv_namespace_0_0= ruleIdentifier )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1635:1: (lv_namespace_0_0= ruleIdentifier )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1636:3: lv_namespace_0_0= ruleIdentifier
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1632:1: (lv_namespace_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1633:3: lv_namespace_0_0= ruleIdentifier
             {
             if ( state.backtracking==0 ) {
                
@@ -4885,11 +4882,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_1, grammarAccess.getQualifiedPackageRefAccess().getColonColonKeyword_1());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1656:1: ( (lv_element_2_0= rulePackageRef ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1657:1: (lv_element_2_0= rulePackageRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1653:1: ( (lv_element_2_0= rulePackageRef ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1654:1: (lv_element_2_0= rulePackageRef )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1657:1: (lv_element_2_0= rulePackageRef )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1658:3: lv_element_2_0= rulePackageRef
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1654:1: (lv_element_2_0= rulePackageRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1655:3: lv_element_2_0= rulePackageRef
             {
             if ( state.backtracking==0 ) {
                
@@ -4943,7 +4940,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleSimpleClassifierRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1682:1: entryRuleSimpleClassifierRef returns [EObject current=null] : iv_ruleSimpleClassifierRef= ruleSimpleClassifierRef EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1679:1: entryRuleSimpleClassifierRef returns [EObject current=null] : iv_ruleSimpleClassifierRef= ruleSimpleClassifierRef EOF ;
     public final EObject entryRuleSimpleClassifierRef() throws RecognitionException {
         EObject current = null;
 
@@ -4951,8 +4948,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1683:2: (iv_ruleSimpleClassifierRef= ruleSimpleClassifierRef EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1684:2: iv_ruleSimpleClassifierRef= ruleSimpleClassifierRef EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1680:2: (iv_ruleSimpleClassifierRef= ruleSimpleClassifierRef EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1681:2: iv_ruleSimpleClassifierRef= ruleSimpleClassifierRef EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getSimpleClassifierRefRule()); 
@@ -4983,7 +4980,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleSimpleClassifierRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1691:1: ruleSimpleClassifierRef returns [EObject current=null] : ( (lv_classifier_0_0= ruleIdentifier ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1688:1: ruleSimpleClassifierRef returns [EObject current=null] : ( (lv_classifier_0_0= ruleIdentifier ) ) ;
     public final EObject ruleSimpleClassifierRef() throws RecognitionException {
         EObject current = null;
 
@@ -4993,14 +4990,14 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1694:28: ( ( (lv_classifier_0_0= ruleIdentifier ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1695:1: ( (lv_classifier_0_0= ruleIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1691:28: ( ( (lv_classifier_0_0= ruleIdentifier ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1692:1: ( (lv_classifier_0_0= ruleIdentifier ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1695:1: ( (lv_classifier_0_0= ruleIdentifier ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1696:1: (lv_classifier_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1692:1: ( (lv_classifier_0_0= ruleIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1693:1: (lv_classifier_0_0= ruleIdentifier )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1696:1: (lv_classifier_0_0= ruleIdentifier )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1697:3: lv_classifier_0_0= ruleIdentifier
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1693:1: (lv_classifier_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1694:3: lv_classifier_0_0= ruleIdentifier
             {
             if ( state.backtracking==0 ) {
                
@@ -5051,7 +5048,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleSimpleOperationRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1721:1: entryRuleSimpleOperationRef returns [EObject current=null] : iv_ruleSimpleOperationRef= ruleSimpleOperationRef EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1718:1: entryRuleSimpleOperationRef returns [EObject current=null] : iv_ruleSimpleOperationRef= ruleSimpleOperationRef EOF ;
     public final EObject entryRuleSimpleOperationRef() throws RecognitionException {
         EObject current = null;
 
@@ -5059,8 +5056,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1722:2: (iv_ruleSimpleOperationRef= ruleSimpleOperationRef EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1723:2: iv_ruleSimpleOperationRef= ruleSimpleOperationRef EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1719:2: (iv_ruleSimpleOperationRef= ruleSimpleOperationRef EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1720:2: iv_ruleSimpleOperationRef= ruleSimpleOperationRef EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getSimpleOperationRefRule()); 
@@ -5091,7 +5088,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleSimpleOperationRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1730:1: ruleSimpleOperationRef returns [EObject current=null] : ( (lv_operation_0_0= ruleIdentifier ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1727:1: ruleSimpleOperationRef returns [EObject current=null] : ( (lv_operation_0_0= ruleIdentifier ) ) ;
     public final EObject ruleSimpleOperationRef() throws RecognitionException {
         EObject current = null;
 
@@ -5101,14 +5098,14 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1733:28: ( ( (lv_operation_0_0= ruleIdentifier ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1734:1: ( (lv_operation_0_0= ruleIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1730:28: ( ( (lv_operation_0_0= ruleIdentifier ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1731:1: ( (lv_operation_0_0= ruleIdentifier ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1734:1: ( (lv_operation_0_0= ruleIdentifier ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1735:1: (lv_operation_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1731:1: ( (lv_operation_0_0= ruleIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1732:1: (lv_operation_0_0= ruleIdentifier )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1735:1: (lv_operation_0_0= ruleIdentifier )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1736:3: lv_operation_0_0= ruleIdentifier
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1732:1: (lv_operation_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1733:3: lv_operation_0_0= ruleIdentifier
             {
             if ( state.backtracking==0 ) {
                
@@ -5159,7 +5156,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleSimplePackageRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1760:1: entryRuleSimplePackageRef returns [EObject current=null] : iv_ruleSimplePackageRef= ruleSimplePackageRef EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1757:1: entryRuleSimplePackageRef returns [EObject current=null] : iv_ruleSimplePackageRef= ruleSimplePackageRef EOF ;
     public final EObject entryRuleSimplePackageRef() throws RecognitionException {
         EObject current = null;
 
@@ -5167,8 +5164,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1761:2: (iv_ruleSimplePackageRef= ruleSimplePackageRef EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1762:2: iv_ruleSimplePackageRef= ruleSimplePackageRef EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1758:2: (iv_ruleSimplePackageRef= ruleSimplePackageRef EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1759:2: iv_ruleSimplePackageRef= ruleSimplePackageRef EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getSimplePackageRefRule()); 
@@ -5199,7 +5196,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleSimplePackageRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1769:1: ruleSimplePackageRef returns [EObject current=null] : ( (lv_package_0_0= ruleIdentifier ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1766:1: ruleSimplePackageRef returns [EObject current=null] : ( (lv_package_0_0= ruleIdentifier ) ) ;
     public final EObject ruleSimplePackageRef() throws RecognitionException {
         EObject current = null;
 
@@ -5209,14 +5206,14 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1772:28: ( ( (lv_package_0_0= ruleIdentifier ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1773:1: ( (lv_package_0_0= ruleIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1769:28: ( ( (lv_package_0_0= ruleIdentifier ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1770:1: ( (lv_package_0_0= ruleIdentifier ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1773:1: ( (lv_package_0_0= ruleIdentifier ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1774:1: (lv_package_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1770:1: ( (lv_package_0_0= ruleIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1771:1: (lv_package_0_0= ruleIdentifier )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1774:1: (lv_package_0_0= ruleIdentifier )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1775:3: lv_package_0_0= ruleIdentifier
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1771:1: (lv_package_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1772:3: lv_package_0_0= ruleIdentifier
             {
             if ( state.backtracking==0 ) {
                
@@ -5267,7 +5264,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleSimplePropertyRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1799:1: entryRuleSimplePropertyRef returns [EObject current=null] : iv_ruleSimplePropertyRef= ruleSimplePropertyRef EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1796:1: entryRuleSimplePropertyRef returns [EObject current=null] : iv_ruleSimplePropertyRef= ruleSimplePropertyRef EOF ;
     public final EObject entryRuleSimplePropertyRef() throws RecognitionException {
         EObject current = null;
 
@@ -5275,8 +5272,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1800:2: (iv_ruleSimplePropertyRef= ruleSimplePropertyRef EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1801:2: iv_ruleSimplePropertyRef= ruleSimplePropertyRef EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1797:2: (iv_ruleSimplePropertyRef= ruleSimplePropertyRef EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1798:2: iv_ruleSimplePropertyRef= ruleSimplePropertyRef EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getSimplePropertyRefRule()); 
@@ -5307,7 +5304,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleSimplePropertyRef"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1808:1: ruleSimplePropertyRef returns [EObject current=null] : ( (lv_feature_0_0= ruleIdentifier ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1805:1: ruleSimplePropertyRef returns [EObject current=null] : ( (lv_feature_0_0= ruleIdentifier ) ) ;
     public final EObject ruleSimplePropertyRef() throws RecognitionException {
         EObject current = null;
 
@@ -5317,14 +5314,14 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1811:28: ( ( (lv_feature_0_0= ruleIdentifier ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1812:1: ( (lv_feature_0_0= ruleIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1808:28: ( ( (lv_feature_0_0= ruleIdentifier ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1809:1: ( (lv_feature_0_0= ruleIdentifier ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1812:1: ( (lv_feature_0_0= ruleIdentifier ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1813:1: (lv_feature_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1809:1: ( (lv_feature_0_0= ruleIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1810:1: (lv_feature_0_0= ruleIdentifier )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1813:1: (lv_feature_0_0= ruleIdentifier )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1814:3: lv_feature_0_0= ruleIdentifier
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1810:1: (lv_feature_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1811:3: lv_feature_0_0= ruleIdentifier
             {
             if ( state.backtracking==0 ) {
                
@@ -5375,7 +5372,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleNavigationExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1838:1: entryRuleNavigationExp returns [EObject current=null] : iv_ruleNavigationExp= ruleNavigationExp EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1835:1: entryRuleNavigationExp returns [EObject current=null] : iv_ruleNavigationExp= ruleNavigationExp EOF ;
     public final EObject entryRuleNavigationExp() throws RecognitionException {
         EObject current = null;
 
@@ -5383,8 +5380,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1839:2: (iv_ruleNavigationExp= ruleNavigationExp EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1840:2: iv_ruleNavigationExp= ruleNavigationExp EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1836:2: (iv_ruleNavigationExp= ruleNavigationExp EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1837:2: iv_ruleNavigationExp= ruleNavigationExp EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNavigationExpRule()); 
@@ -5415,7 +5412,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleNavigationExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1847:1: ruleNavigationExp returns [EObject current=null] : (this_SubNavigationExp_0= ruleSubNavigationExp ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )? ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1844:1: ruleNavigationExp returns [EObject current=null] : (this_SubNavigationExp_0= ruleSubNavigationExp ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )? ) ;
     public final EObject ruleNavigationExp() throws RecognitionException {
         EObject current = null;
 
@@ -5440,11 +5437,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1850:28: ( (this_SubNavigationExp_0= ruleSubNavigationExp ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )? ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1851:1: (this_SubNavigationExp_0= ruleSubNavigationExp ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1847:28: ( (this_SubNavigationExp_0= ruleSubNavigationExp ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )? ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1848:1: (this_SubNavigationExp_0= ruleSubNavigationExp ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )? )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1851:1: (this_SubNavigationExp_0= ruleSubNavigationExp ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1852:2: this_SubNavigationExp_0= ruleSubNavigationExp ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1848:1: (this_SubNavigationExp_0= ruleSubNavigationExp ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1849:2: this_SubNavigationExp_0= ruleSubNavigationExp ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )?
             {
             if ( state.backtracking==0 ) {
                
@@ -5467,7 +5464,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                       afterParserOrEnumRuleCall();
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1863:1: ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1860:1: ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )?
             int alt33=3;
             int LA33_0 = input.LA(1);
 
@@ -5479,13 +5476,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt33) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1863:2: ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1860:2: ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1863:2: ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1863:3: () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1860:2: ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1860:3: () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1863:3: ()
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1864:2: 
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1860:3: ()
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1861:2: 
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -5502,13 +5499,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1872:2: ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1873:1: ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1869:2: ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1870:1: ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1873:1: ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1874:1: (lv_op_2_1= '.' | lv_op_2_2= '->' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1870:1: ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1871:1: (lv_op_2_1= '.' | lv_op_2_2= '->' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1874:1: (lv_op_2_1= '.' | lv_op_2_2= '->' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1871:1: (lv_op_2_1= '.' | lv_op_2_2= '->' )
                     int alt29=2;
                     int LA29_0 = input.LA(1);
 
@@ -5527,7 +5524,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     switch (alt29) {
                         case 1 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1875:3: lv_op_2_1= '.'
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1872:3: lv_op_2_1= '.'
                             {
                             lv_op_2_1=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleNavigationExp3910); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -5547,7 +5544,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1887:8: lv_op_2_2= '->'
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1884:8: lv_op_2_2= '->'
                             {
                             lv_op_2_2=(Token)match(input,29,FollowSets000.FOLLOW_29_in_ruleNavigationExp3939); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -5575,11 +5572,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1902:2: ( (lv_argument_3_0= ruleNavigatingExp ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1903:1: (lv_argument_3_0= ruleNavigatingExp )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1899:2: ( (lv_argument_3_0= ruleNavigatingExp ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1900:1: (lv_argument_3_0= ruleNavigatingExp )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1903:1: (lv_argument_3_0= ruleNavigatingExp )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1904:3: lv_argument_3_0= ruleNavigatingExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1900:1: (lv_argument_3_0= ruleNavigatingExp )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1901:3: lv_argument_3_0= ruleNavigatingExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -5617,13 +5614,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1921:6: ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1918:6: ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1921:6: ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1921:7: () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1918:6: ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1918:7: () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')'
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1921:7: ()
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1922:2: 
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1918:7: ()
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1919:2: 
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -5640,13 +5637,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1930:2: ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1931:1: ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1927:2: ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1928:1: ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1931:1: ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1932:1: (lv_op_5_1= '^^' | lv_op_5_2= '^' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1928:1: ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1929:1: (lv_op_5_1= '^^' | lv_op_5_2= '^' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1932:1: (lv_op_5_1= '^^' | lv_op_5_2= '^' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1929:1: (lv_op_5_1= '^^' | lv_op_5_2= '^' )
                     int alt30=2;
                     int LA30_0 = input.LA(1);
 
@@ -5665,7 +5662,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     switch (alt30) {
                         case 1 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1933:3: lv_op_5_1= '^^'
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1930:3: lv_op_5_1= '^^'
                             {
                             lv_op_5_1=(Token)match(input,30,FollowSets000.FOLLOW_30_in_ruleNavigationExp4016); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -5685,7 +5682,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1945:8: lv_op_5_2= '^'
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1942:8: lv_op_5_2= '^'
                             {
                             lv_op_5_2=(Token)match(input,31,FollowSets000.FOLLOW_31_in_ruleNavigationExp4045); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -5713,11 +5710,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1960:2: ( (lv_messageName_6_0= ruleIdentifier ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1961:1: (lv_messageName_6_0= ruleIdentifier )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1957:2: ( (lv_messageName_6_0= ruleIdentifier ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1958:1: (lv_messageName_6_0= ruleIdentifier )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1961:1: (lv_messageName_6_0= ruleIdentifier )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1962:3: lv_messageName_6_0= ruleIdentifier
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1958:1: (lv_messageName_6_0= ruleIdentifier )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1959:3: lv_messageName_6_0= ruleIdentifier
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -5754,7 +5751,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                           	newLeafNode(otherlv_7, grammarAccess.getNavigationExpAccess().getLeftParenthesisKeyword_1_1_3());
                           
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1982:1: ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )?
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1979:1: ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )?
                     int alt32=2;
                     int LA32_0 = input.LA(1);
 
@@ -5763,13 +5760,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     switch (alt32) {
                         case 1 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1982:2: ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )*
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1979:2: ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )*
                             {
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1982:2: ( (lv_arguments_8_0= ruleOclMessageArg ) )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1983:1: (lv_arguments_8_0= ruleOclMessageArg )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1979:2: ( (lv_arguments_8_0= ruleOclMessageArg ) )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1980:1: (lv_arguments_8_0= ruleOclMessageArg )
                             {
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1983:1: (lv_arguments_8_0= ruleOclMessageArg )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1984:3: lv_arguments_8_0= ruleOclMessageArg
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1980:1: (lv_arguments_8_0= ruleOclMessageArg )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1981:3: lv_arguments_8_0= ruleOclMessageArg
                             {
                             if ( state.backtracking==0 ) {
                                
@@ -5800,7 +5797,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                             }
 
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2000:2: (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )*
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1997:2: (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )*
                             loop31:
                             do {
                                 int alt31=2;
@@ -5813,7 +5810,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                                 switch (alt31) {
                             	case 1 :
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2000:4: otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) )
+                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1997:4: otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) )
                             	    {
                             	    otherlv_9=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleNavigationExp4129); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
@@ -5821,11 +5818,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                             	          	newLeafNode(otherlv_9, grammarAccess.getNavigationExpAccess().getCommaKeyword_1_1_4_1_0());
                             	          
                             	    }
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2004:1: ( (lv_arguments_10_0= ruleOclMessageArg ) )
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2005:1: (lv_arguments_10_0= ruleOclMessageArg )
+                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2001:1: ( (lv_arguments_10_0= ruleOclMessageArg ) )
+                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2002:1: (lv_arguments_10_0= ruleOclMessageArg )
                             	    {
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2005:1: (lv_arguments_10_0= ruleOclMessageArg )
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2006:3: lv_arguments_10_0= ruleOclMessageArg
+                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2002:1: (lv_arguments_10_0= ruleOclMessageArg )
+                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2003:3: lv_arguments_10_0= ruleOclMessageArg
                             	    {
                             	    if ( state.backtracking==0 ) {
                             	       
@@ -5909,7 +5906,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleNavigatingExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2034:1: entryRuleNavigatingExp returns [EObject current=null] : iv_ruleNavigatingExp= ruleNavigatingExp EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2031:1: entryRuleNavigatingExp returns [EObject current=null] : iv_ruleNavigatingExp= ruleNavigatingExp EOF ;
     public final EObject entryRuleNavigatingExp() throws RecognitionException {
         EObject current = null;
 
@@ -5917,8 +5914,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2035:2: (iv_ruleNavigatingExp= ruleNavigatingExp EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2036:2: iv_ruleNavigatingExp= ruleNavigatingExp EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2032:2: (iv_ruleNavigatingExp= ruleNavigatingExp EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2033:2: iv_ruleNavigatingExp= ruleNavigatingExp EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNavigatingExpRule()); 
@@ -5949,7 +5946,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleNavigatingExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2043:1: ruleNavigatingExp returns [EObject current=null] : (this_SubNavigatingExp_0= ruleSubNavigatingExp ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )? ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2040:1: ruleNavigatingExp returns [EObject current=null] : (this_SubNavigatingExp_0= ruleSubNavigatingExp ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )? ) ;
     public final EObject ruleNavigatingExp() throws RecognitionException {
         EObject current = null;
 
@@ -5974,11 +5971,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2046:28: ( (this_SubNavigatingExp_0= ruleSubNavigatingExp ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )? ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2047:1: (this_SubNavigatingExp_0= ruleSubNavigatingExp ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2043:28: ( (this_SubNavigatingExp_0= ruleSubNavigatingExp ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )? ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2044:1: (this_SubNavigatingExp_0= ruleSubNavigatingExp ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )? )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2047:1: (this_SubNavigatingExp_0= ruleSubNavigatingExp ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2048:2: this_SubNavigatingExp_0= ruleSubNavigatingExp ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2044:1: (this_SubNavigatingExp_0= ruleSubNavigatingExp ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2045:2: this_SubNavigatingExp_0= ruleSubNavigatingExp ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )?
             {
             if ( state.backtracking==0 ) {
                
@@ -6001,7 +5998,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                       afterParserOrEnumRuleCall();
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2059:1: ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2056:1: ( ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) ) | ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' ) )?
             int alt38=3;
             int LA38_0 = input.LA(1);
 
@@ -6013,13 +6010,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt38) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2059:2: ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2056:2: ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2059:2: ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2059:3: () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2056:2: ( () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2056:3: () ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) ) ( (lv_argument_3_0= ruleNavigatingExp ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2059:3: ()
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2060:2: 
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2056:3: ()
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2057:2: 
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -6036,13 +6033,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2068:2: ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2069:1: ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2065:2: ( ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2066:1: ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2069:1: ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2070:1: (lv_op_2_1= '.' | lv_op_2_2= '->' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2066:1: ( (lv_op_2_1= '.' | lv_op_2_2= '->' ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2067:1: (lv_op_2_1= '.' | lv_op_2_2= '->' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2070:1: (lv_op_2_1= '.' | lv_op_2_2= '->' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2067:1: (lv_op_2_1= '.' | lv_op_2_2= '->' )
                     int alt34=2;
                     int LA34_0 = input.LA(1);
 
@@ -6061,7 +6058,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     switch (alt34) {
                         case 1 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2071:3: lv_op_2_1= '.'
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2068:3: lv_op_2_1= '.'
                             {
                             lv_op_2_1=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleNavigatingExp4298); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -6081,7 +6078,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2083:8: lv_op_2_2= '->'
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2080:8: lv_op_2_2= '->'
                             {
                             lv_op_2_2=(Token)match(input,29,FollowSets000.FOLLOW_29_in_ruleNavigatingExp4327); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -6109,11 +6106,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2098:2: ( (lv_argument_3_0= ruleNavigatingExp ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2099:1: (lv_argument_3_0= ruleNavigatingExp )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2095:2: ( (lv_argument_3_0= ruleNavigatingExp ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2096:1: (lv_argument_3_0= ruleNavigatingExp )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2099:1: (lv_argument_3_0= ruleNavigatingExp )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2100:3: lv_argument_3_0= ruleNavigatingExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2096:1: (lv_argument_3_0= ruleNavigatingExp )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2097:3: lv_argument_3_0= ruleNavigatingExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -6151,13 +6148,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2117:6: ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2114:6: ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2117:6: ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2117:7: () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2114:6: ( () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2114:7: () ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) ) ( (lv_messageName_6_0= ruleIdentifier ) ) otherlv_7= '(' ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )? otherlv_11= ')'
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2117:7: ()
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2118:2: 
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2114:7: ()
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2115:2: 
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -6174,13 +6171,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2126:2: ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2127:1: ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2123:2: ( ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2124:1: ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2127:1: ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2128:1: (lv_op_5_1= '^^' | lv_op_5_2= '^' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2124:1: ( (lv_op_5_1= '^^' | lv_op_5_2= '^' ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2125:1: (lv_op_5_1= '^^' | lv_op_5_2= '^' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2128:1: (lv_op_5_1= '^^' | lv_op_5_2= '^' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2125:1: (lv_op_5_1= '^^' | lv_op_5_2= '^' )
                     int alt35=2;
                     int LA35_0 = input.LA(1);
 
@@ -6199,7 +6196,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     switch (alt35) {
                         case 1 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2129:3: lv_op_5_1= '^^'
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2126:3: lv_op_5_1= '^^'
                             {
                             lv_op_5_1=(Token)match(input,30,FollowSets000.FOLLOW_30_in_ruleNavigatingExp4404); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -6219,7 +6216,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2141:8: lv_op_5_2= '^'
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2138:8: lv_op_5_2= '^'
                             {
                             lv_op_5_2=(Token)match(input,31,FollowSets000.FOLLOW_31_in_ruleNavigatingExp4433); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -6247,11 +6244,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2156:2: ( (lv_messageName_6_0= ruleIdentifier ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2157:1: (lv_messageName_6_0= ruleIdentifier )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2153:2: ( (lv_messageName_6_0= ruleIdentifier ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2154:1: (lv_messageName_6_0= ruleIdentifier )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2157:1: (lv_messageName_6_0= ruleIdentifier )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2158:3: lv_messageName_6_0= ruleIdentifier
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2154:1: (lv_messageName_6_0= ruleIdentifier )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2155:3: lv_messageName_6_0= ruleIdentifier
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -6288,7 +6285,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                           	newLeafNode(otherlv_7, grammarAccess.getNavigatingExpAccess().getLeftParenthesisKeyword_1_1_3());
                           
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2178:1: ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )?
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2175:1: ( ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )* )?
                     int alt37=2;
                     int LA37_0 = input.LA(1);
 
@@ -6297,13 +6294,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     switch (alt37) {
                         case 1 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2178:2: ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )*
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2175:2: ( (lv_arguments_8_0= ruleOclMessageArg ) ) (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )*
                             {
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2178:2: ( (lv_arguments_8_0= ruleOclMessageArg ) )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2179:1: (lv_arguments_8_0= ruleOclMessageArg )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2175:2: ( (lv_arguments_8_0= ruleOclMessageArg ) )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2176:1: (lv_arguments_8_0= ruleOclMessageArg )
                             {
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2179:1: (lv_arguments_8_0= ruleOclMessageArg )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2180:3: lv_arguments_8_0= ruleOclMessageArg
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2176:1: (lv_arguments_8_0= ruleOclMessageArg )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2177:3: lv_arguments_8_0= ruleOclMessageArg
                             {
                             if ( state.backtracking==0 ) {
                                
@@ -6334,7 +6331,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                             }
 
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2196:2: (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )*
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2193:2: (otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) ) )*
                             loop36:
                             do {
                                 int alt36=2;
@@ -6347,7 +6344,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                                 switch (alt36) {
                             	case 1 :
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2196:4: otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) )
+                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2193:4: otherlv_9= ',' ( (lv_arguments_10_0= ruleOclMessageArg ) )
                             	    {
                             	    otherlv_9=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleNavigatingExp4517); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
@@ -6355,11 +6352,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                             	          	newLeafNode(otherlv_9, grammarAccess.getNavigatingExpAccess().getCommaKeyword_1_1_4_1_0());
                             	          
                             	    }
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2200:1: ( (lv_arguments_10_0= ruleOclMessageArg ) )
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2201:1: (lv_arguments_10_0= ruleOclMessageArg )
+                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2197:1: ( (lv_arguments_10_0= ruleOclMessageArg ) )
+                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2198:1: (lv_arguments_10_0= ruleOclMessageArg )
                             	    {
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2201:1: (lv_arguments_10_0= ruleOclMessageArg )
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2202:3: lv_arguments_10_0= ruleOclMessageArg
+                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2198:1: (lv_arguments_10_0= ruleOclMessageArg )
+                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2199:3: lv_arguments_10_0= ruleOclMessageArg
                             	    {
                             	    if ( state.backtracking==0 ) {
                             	       
@@ -6443,7 +6440,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleOclMessageArg"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2230:1: entryRuleOclMessageArg returns [EObject current=null] : iv_ruleOclMessageArg= ruleOclMessageArg EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2227:1: entryRuleOclMessageArg returns [EObject current=null] : iv_ruleOclMessageArg= ruleOclMessageArg EOF ;
     public final EObject entryRuleOclMessageArg() throws RecognitionException {
         EObject current = null;
 
@@ -6451,8 +6448,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2231:2: (iv_ruleOclMessageArg= ruleOclMessageArg EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2232:2: iv_ruleOclMessageArg= ruleOclMessageArg EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2228:2: (iv_ruleOclMessageArg= ruleOclMessageArg EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2229:2: iv_ruleOclMessageArg= ruleOclMessageArg EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOclMessageArgRule()); 
@@ -6483,7 +6480,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleOclMessageArg"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2239:1: ruleOclMessageArg returns [EObject current=null] : ( ( () otherlv_1= '?' (otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) )? ) | this_Expression_4= ruleExpression ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2236:1: ruleOclMessageArg returns [EObject current=null] : ( ( () otherlv_1= '?' (otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) )? ) | this_Expression_4= ruleExpression ) ;
     public final EObject ruleOclMessageArg() throws RecognitionException {
         EObject current = null;
 
@@ -6497,10 +6494,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2242:28: ( ( ( () otherlv_1= '?' (otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) )? ) | this_Expression_4= ruleExpression ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2243:1: ( ( () otherlv_1= '?' (otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) )? ) | this_Expression_4= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2239:28: ( ( ( () otherlv_1= '?' (otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) )? ) | this_Expression_4= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2240:1: ( ( () otherlv_1= '?' (otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) )? ) | this_Expression_4= ruleExpression )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2243:1: ( ( () otherlv_1= '?' (otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) )? ) | this_Expression_4= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2240:1: ( ( () otherlv_1= '?' (otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) )? ) | this_Expression_4= ruleExpression )
             int alt40=2;
             int LA40_0 = input.LA(1);
 
@@ -6519,13 +6516,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt40) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2243:2: ( () otherlv_1= '?' (otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) )? )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2240:2: ( () otherlv_1= '?' (otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) )? )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2243:2: ( () otherlv_1= '?' (otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) )? )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2243:3: () otherlv_1= '?' (otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) )?
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2240:2: ( () otherlv_1= '?' (otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) )? )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2240:3: () otherlv_1= '?' (otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) )?
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2243:3: ()
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2244:2: 
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2240:3: ()
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2241:2: 
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -6548,7 +6545,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                           	newLeafNode(otherlv_1, grammarAccess.getOclMessageArgAccess().getQuestionMarkKeyword_0_1());
                           
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2256:1: (otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) )?
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2253:1: (otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) ) )?
                     int alt39=2;
                     int LA39_0 = input.LA(1);
 
@@ -6557,7 +6554,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     switch (alt39) {
                         case 1 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2256:3: otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2253:3: otherlv_2= ':' ( (lv_type_3_0= ruleTypeExp ) )
                             {
                             otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleOclMessageArg4666); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -6565,11 +6562,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                                   	newLeafNode(otherlv_2, grammarAccess.getOclMessageArgAccess().getColonKeyword_0_2_0());
                                   
                             }
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2260:1: ( (lv_type_3_0= ruleTypeExp ) )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2261:1: (lv_type_3_0= ruleTypeExp )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2257:1: ( (lv_type_3_0= ruleTypeExp ) )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2258:1: (lv_type_3_0= ruleTypeExp )
                             {
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2261:1: (lv_type_3_0= ruleTypeExp )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2262:3: lv_type_3_0= ruleTypeExp
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2258:1: (lv_type_3_0= ruleTypeExp )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2259:3: lv_type_3_0= ruleTypeExp
                             {
                             if ( state.backtracking==0 ) {
                                
@@ -6613,7 +6610,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2280:2: this_Expression_4= ruleExpression
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2277:2: this_Expression_4= ruleExpression
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -6662,7 +6659,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleNUMBER_LITERAL"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2299:1: entryRuleNUMBER_LITERAL returns [String current=null] : iv_ruleNUMBER_LITERAL= ruleNUMBER_LITERAL EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2296:1: entryRuleNUMBER_LITERAL returns [String current=null] : iv_ruleNUMBER_LITERAL= ruleNUMBER_LITERAL EOF ;
     public final String entryRuleNUMBER_LITERAL() throws RecognitionException {
         String current = null;
 
@@ -6670,8 +6667,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2300:2: (iv_ruleNUMBER_LITERAL= ruleNUMBER_LITERAL EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2301:2: iv_ruleNUMBER_LITERAL= ruleNUMBER_LITERAL EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2297:2: (iv_ruleNUMBER_LITERAL= ruleNUMBER_LITERAL EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2298:2: iv_ruleNUMBER_LITERAL= ruleNUMBER_LITERAL EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNUMBER_LITERALRule()); 
@@ -6702,7 +6699,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleNUMBER_LITERAL"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2308:1: ruleNUMBER_LITERAL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? ( (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_7= RULE_INT )? ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2305:1: ruleNUMBER_LITERAL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? ( (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_7= RULE_INT )? ) ;
     public final AntlrDatatypeRuleToken ruleNUMBER_LITERAL() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -6714,11 +6711,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2311:28: ( (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? ( (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_7= RULE_INT )? ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2312:1: (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? ( (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_7= RULE_INT )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2308:28: ( (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? ( (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_7= RULE_INT )? ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2309:1: (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? ( (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_7= RULE_INT )? )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2312:1: (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? ( (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_7= RULE_INT )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2312:6: this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? ( (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_7= RULE_INT )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2309:1: (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? ( (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_7= RULE_INT )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2309:6: this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? ( (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_7= RULE_INT )?
             {
             this_INT_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleNUMBER_LITERAL4808); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -6731,7 +6728,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   newLeafNode(this_INT_0, grammarAccess.getNUMBER_LITERALAccess().getINTTerminalRuleCall_0()); 
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2319:1: (kw= '.' this_INT_2= RULE_INT )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2316:1: (kw= '.' this_INT_2= RULE_INT )?
             int alt41=2;
             int LA41_0 = input.LA(1);
 
@@ -6744,7 +6741,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt41) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2320:2: kw= '.' this_INT_2= RULE_INT
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2317:2: kw= '.' this_INT_2= RULE_INT
                     {
                     kw=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleNUMBER_LITERAL4827); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -6770,7 +6767,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2332:3: ( (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_7= RULE_INT )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2329:3: ( (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_7= RULE_INT )?
             int alt44=2;
             int LA44_0 = input.LA(1);
 
@@ -6779,9 +6776,9 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt44) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2332:4: (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_7= RULE_INT
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2329:4: (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_7= RULE_INT
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2332:4: (kw= 'e' | kw= 'E' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2329:4: (kw= 'e' | kw= 'E' )
                     int alt42=2;
                     int LA42_0 = input.LA(1);
 
@@ -6800,7 +6797,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     switch (alt42) {
                         case 1 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2333:2: kw= 'e'
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2330:2: kw= 'e'
                             {
                             kw=(Token)match(input,33,FollowSets000.FOLLOW_33_in_ruleNUMBER_LITERAL4864); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -6813,7 +6810,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2340:2: kw= 'E'
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2337:2: kw= 'E'
                             {
                             kw=(Token)match(input,34,FollowSets000.FOLLOW_34_in_ruleNUMBER_LITERAL4883); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -6828,7 +6825,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2345:2: (kw= '+' | kw= '-' )?
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2342:2: (kw= '+' | kw= '-' )?
                     int alt43=3;
                     int LA43_0 = input.LA(1);
 
@@ -6840,7 +6837,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     switch (alt43) {
                         case 1 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2346:2: kw= '+'
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2343:2: kw= '+'
                             {
                             kw=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleNUMBER_LITERAL4898); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -6853,7 +6850,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2353:2: kw= '-'
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2350:2: kw= '-'
                             {
                             kw=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleNUMBER_LITERAL4917); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -6908,7 +6905,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleEssentialOCLRestrictedKeywords"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2373:1: entryRuleEssentialOCLRestrictedKeywords returns [String current=null] : iv_ruleEssentialOCLRestrictedKeywords= ruleEssentialOCLRestrictedKeywords EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2370:1: entryRuleEssentialOCLRestrictedKeywords returns [String current=null] : iv_ruleEssentialOCLRestrictedKeywords= ruleEssentialOCLRestrictedKeywords EOF ;
     public final String entryRuleEssentialOCLRestrictedKeywords() throws RecognitionException {
         String current = null;
 
@@ -6916,8 +6913,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2374:2: (iv_ruleEssentialOCLRestrictedKeywords= ruleEssentialOCLRestrictedKeywords EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2375:2: iv_ruleEssentialOCLRestrictedKeywords= ruleEssentialOCLRestrictedKeywords EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2371:2: (iv_ruleEssentialOCLRestrictedKeywords= ruleEssentialOCLRestrictedKeywords EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2372:2: iv_ruleEssentialOCLRestrictedKeywords= ruleEssentialOCLRestrictedKeywords EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getEssentialOCLRestrictedKeywordsRule()); 
@@ -6948,7 +6945,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleEssentialOCLRestrictedKeywords"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2382:1: ruleEssentialOCLRestrictedKeywords returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'e' | kw= 'E' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2379:1: ruleEssentialOCLRestrictedKeywords returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'e' | kw= 'E' ) ;
     public final AntlrDatatypeRuleToken ruleEssentialOCLRestrictedKeywords() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -6957,10 +6954,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2385:28: ( (kw= 'e' | kw= 'E' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2386:1: (kw= 'e' | kw= 'E' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2382:28: ( (kw= 'e' | kw= 'E' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2383:1: (kw= 'e' | kw= 'E' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2386:1: (kw= 'e' | kw= 'E' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2383:1: (kw= 'e' | kw= 'E' )
             int alt45=2;
             int LA45_0 = input.LA(1);
 
@@ -6979,7 +6976,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt45) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2387:2: kw= 'e'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2384:2: kw= 'e'
                     {
                     kw=(Token)match(input,33,FollowSets000.FOLLOW_33_in_ruleEssentialOCLRestrictedKeywords5031); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -6992,7 +6989,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2394:2: kw= 'E'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2391:2: kw= 'E'
                     {
                     kw=(Token)match(input,34,FollowSets000.FOLLOW_34_in_ruleEssentialOCLRestrictedKeywords5050); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -7027,7 +7024,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleRestrictedKeywords"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2407:1: entryRuleRestrictedKeywords returns [String current=null] : iv_ruleRestrictedKeywords= ruleRestrictedKeywords EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2404:1: entryRuleRestrictedKeywords returns [String current=null] : iv_ruleRestrictedKeywords= ruleRestrictedKeywords EOF ;
     public final String entryRuleRestrictedKeywords() throws RecognitionException {
         String current = null;
 
@@ -7035,8 +7032,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2408:2: (iv_ruleRestrictedKeywords= ruleRestrictedKeywords EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2409:2: iv_ruleRestrictedKeywords= ruleRestrictedKeywords EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2405:2: (iv_ruleRestrictedKeywords= ruleRestrictedKeywords EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2406:2: iv_ruleRestrictedKeywords= ruleRestrictedKeywords EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getRestrictedKeywordsRule()); 
@@ -7067,7 +7064,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleRestrictedKeywords"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2416:1: ruleRestrictedKeywords returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_EssentialOCLRestrictedKeywords_0= ruleEssentialOCLRestrictedKeywords ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2413:1: ruleRestrictedKeywords returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_EssentialOCLRestrictedKeywords_0= ruleEssentialOCLRestrictedKeywords ;
     public final AntlrDatatypeRuleToken ruleRestrictedKeywords() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -7077,8 +7074,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2419:28: (this_EssentialOCLRestrictedKeywords_0= ruleEssentialOCLRestrictedKeywords )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2421:5: this_EssentialOCLRestrictedKeywords_0= ruleEssentialOCLRestrictedKeywords
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2416:28: (this_EssentialOCLRestrictedKeywords_0= ruleEssentialOCLRestrictedKeywords )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2418:5: this_EssentialOCLRestrictedKeywords_0= ruleEssentialOCLRestrictedKeywords
             {
             if ( state.backtracking==0 ) {
                
@@ -7120,7 +7117,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleIdentifier"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2439:1: entryRuleIdentifier returns [String current=null] : iv_ruleIdentifier= ruleIdentifier EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2436:1: entryRuleIdentifier returns [String current=null] : iv_ruleIdentifier= ruleIdentifier EOF ;
     public final String entryRuleIdentifier() throws RecognitionException {
         String current = null;
 
@@ -7128,8 +7125,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2440:2: (iv_ruleIdentifier= ruleIdentifier EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2441:2: iv_ruleIdentifier= ruleIdentifier EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2437:2: (iv_ruleIdentifier= ruleIdentifier EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2438:2: iv_ruleIdentifier= ruleIdentifier EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getIdentifierRule()); 
@@ -7160,7 +7157,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleIdentifier"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2448:1: ruleIdentifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID | this_RestrictedKeywords_1= ruleRestrictedKeywords ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2445:1: ruleIdentifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID | this_RestrictedKeywords_1= ruleRestrictedKeywords ) ;
     public final AntlrDatatypeRuleToken ruleIdentifier() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -7171,10 +7168,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2451:28: ( (this_ID_0= RULE_ID | this_RestrictedKeywords_1= ruleRestrictedKeywords ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2452:1: (this_ID_0= RULE_ID | this_RestrictedKeywords_1= ruleRestrictedKeywords )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2448:28: ( (this_ID_0= RULE_ID | this_RestrictedKeywords_1= ruleRestrictedKeywords ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2449:1: (this_ID_0= RULE_ID | this_RestrictedKeywords_1= ruleRestrictedKeywords )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2452:1: (this_ID_0= RULE_ID | this_RestrictedKeywords_1= ruleRestrictedKeywords )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2449:1: (this_ID_0= RULE_ID | this_RestrictedKeywords_1= ruleRestrictedKeywords )
             int alt46=2;
             int LA46_0 = input.LA(1);
 
@@ -7193,7 +7190,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt46) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2452:6: this_ID_0= RULE_ID
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2449:6: this_ID_0= RULE_ID
                     {
                     this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleIdentifier5244); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -7210,7 +7207,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2461:5: this_RestrictedKeywords_1= ruleRestrictedKeywords
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2458:5: this_RestrictedKeywords_1= ruleRestrictedKeywords
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -7258,7 +7255,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleStringLiteral"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2479:1: entryRuleStringLiteral returns [String current=null] : iv_ruleStringLiteral= ruleStringLiteral EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2476:1: entryRuleStringLiteral returns [String current=null] : iv_ruleStringLiteral= ruleStringLiteral EOF ;
     public final String entryRuleStringLiteral() throws RecognitionException {
         String current = null;
 
@@ -7266,8 +7263,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2480:2: (iv_ruleStringLiteral= ruleStringLiteral EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2481:2: iv_ruleStringLiteral= ruleStringLiteral EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2477:2: (iv_ruleStringLiteral= ruleStringLiteral EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2478:2: iv_ruleStringLiteral= ruleStringLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getStringLiteralRule()); 
@@ -7298,7 +7295,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleStringLiteral"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2488:1: ruleStringLiteral returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_STRING_0= RULE_STRING ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2485:1: ruleStringLiteral returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_STRING_0= RULE_STRING ;
     public final AntlrDatatypeRuleToken ruleStringLiteral() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -7307,8 +7304,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2491:28: (this_STRING_0= RULE_STRING )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2492:5: this_STRING_0= RULE_STRING
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2488:28: (this_STRING_0= RULE_STRING )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2489:5: this_STRING_0= RULE_STRING
             {
             this_STRING_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleStringLiteral5373); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -7341,7 +7338,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRulePrimitiveTypeIdentifier"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2509:1: entryRulePrimitiveTypeIdentifier returns [String current=null] : iv_rulePrimitiveTypeIdentifier= rulePrimitiveTypeIdentifier EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2506:1: entryRulePrimitiveTypeIdentifier returns [String current=null] : iv_rulePrimitiveTypeIdentifier= rulePrimitiveTypeIdentifier EOF ;
     public final String entryRulePrimitiveTypeIdentifier() throws RecognitionException {
         String current = null;
 
@@ -7349,8 +7346,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2510:2: (iv_rulePrimitiveTypeIdentifier= rulePrimitiveTypeIdentifier EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2511:2: iv_rulePrimitiveTypeIdentifier= rulePrimitiveTypeIdentifier EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2507:2: (iv_rulePrimitiveTypeIdentifier= rulePrimitiveTypeIdentifier EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2508:2: iv_rulePrimitiveTypeIdentifier= rulePrimitiveTypeIdentifier EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPrimitiveTypeIdentifierRule()); 
@@ -7381,7 +7378,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "rulePrimitiveTypeIdentifier"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2518:1: rulePrimitiveTypeIdentifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'Boolean' | kw= 'Integer' | kw= 'Real' | kw= 'String' | kw= 'UnlimitedNatural' | kw= 'OclAny' | kw= 'OclInvalid' | kw= 'OclVoid' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2515:1: rulePrimitiveTypeIdentifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'Boolean' | kw= 'Integer' | kw= 'Real' | kw= 'String' | kw= 'UnlimitedNatural' | kw= 'OclAny' | kw= 'OclInvalid' | kw= 'OclVoid' ) ;
     public final AntlrDatatypeRuleToken rulePrimitiveTypeIdentifier() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -7390,10 +7387,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2521:28: ( (kw= 'Boolean' | kw= 'Integer' | kw= 'Real' | kw= 'String' | kw= 'UnlimitedNatural' | kw= 'OclAny' | kw= 'OclInvalid' | kw= 'OclVoid' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2522:1: (kw= 'Boolean' | kw= 'Integer' | kw= 'Real' | kw= 'String' | kw= 'UnlimitedNatural' | kw= 'OclAny' | kw= 'OclInvalid' | kw= 'OclVoid' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2518:28: ( (kw= 'Boolean' | kw= 'Integer' | kw= 'Real' | kw= 'String' | kw= 'UnlimitedNatural' | kw= 'OclAny' | kw= 'OclInvalid' | kw= 'OclVoid' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2519:1: (kw= 'Boolean' | kw= 'Integer' | kw= 'Real' | kw= 'String' | kw= 'UnlimitedNatural' | kw= 'OclAny' | kw= 'OclInvalid' | kw= 'OclVoid' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2522:1: (kw= 'Boolean' | kw= 'Integer' | kw= 'Real' | kw= 'String' | kw= 'UnlimitedNatural' | kw= 'OclAny' | kw= 'OclInvalid' | kw= 'OclVoid' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2519:1: (kw= 'Boolean' | kw= 'Integer' | kw= 'Real' | kw= 'String' | kw= 'UnlimitedNatural' | kw= 'OclAny' | kw= 'OclInvalid' | kw= 'OclVoid' )
             int alt47=8;
             switch ( input.LA(1) ) {
             case 37:
@@ -7446,7 +7443,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             switch (alt47) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2523:2: kw= 'Boolean'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2520:2: kw= 'Boolean'
                     {
                     kw=(Token)match(input,37,FollowSets000.FOLLOW_37_in_rulePrimitiveTypeIdentifier5469); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -7459,7 +7456,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2530:2: kw= 'Integer'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2527:2: kw= 'Integer'
                     {
                     kw=(Token)match(input,38,FollowSets000.FOLLOW_38_in_rulePrimitiveTypeIdentifier5488); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -7472,7 +7469,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2537:2: kw= 'Real'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2534:2: kw= 'Real'
                     {
                     kw=(Token)match(input,39,FollowSets000.FOLLOW_39_in_rulePrimitiveTypeIdentifier5507); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -7485,7 +7482,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2544:2: kw= 'String'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2541:2: kw= 'String'
                     {
                     kw=(Token)match(input,40,FollowSets000.FOLLOW_40_in_rulePrimitiveTypeIdentifier5526); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -7498,7 +7495,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 5 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2551:2: kw= 'UnlimitedNatural'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2548:2: kw= 'UnlimitedNatural'
                     {
                     kw=(Token)match(input,41,FollowSets000.FOLLOW_41_in_rulePrimitiveTypeIdentifier5545); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -7511,7 +7508,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 6 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2558:2: kw= 'OclAny'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2555:2: kw= 'OclAny'
                     {
                     kw=(Token)match(input,42,FollowSets000.FOLLOW_42_in_rulePrimitiveTypeIdentifier5564); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -7524,7 +7521,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 7 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2565:2: kw= 'OclInvalid'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2562:2: kw= 'OclInvalid'
                     {
                     kw=(Token)match(input,43,FollowSets000.FOLLOW_43_in_rulePrimitiveTypeIdentifier5583); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -7537,7 +7534,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 8 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2572:2: kw= 'OclVoid'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2569:2: kw= 'OclVoid'
                     {
                     kw=(Token)match(input,44,FollowSets000.FOLLOW_44_in_rulePrimitiveTypeIdentifier5602); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -7572,7 +7569,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRulePrimitiveType"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2585:1: entryRulePrimitiveType returns [EObject current=null] : iv_rulePrimitiveType= rulePrimitiveType EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2582:1: entryRulePrimitiveType returns [EObject current=null] : iv_rulePrimitiveType= rulePrimitiveType EOF ;
     public final EObject entryRulePrimitiveType() throws RecognitionException {
         EObject current = null;
 
@@ -7580,8 +7577,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2586:2: (iv_rulePrimitiveType= rulePrimitiveType EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2587:2: iv_rulePrimitiveType= rulePrimitiveType EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2583:2: (iv_rulePrimitiveType= rulePrimitiveType EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2584:2: iv_rulePrimitiveType= rulePrimitiveType EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPrimitiveTypeRule()); 
@@ -7612,7 +7609,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "rulePrimitiveType"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2594:1: rulePrimitiveType returns [EObject current=null] : ( (lv_name_0_0= rulePrimitiveTypeIdentifier ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2591:1: rulePrimitiveType returns [EObject current=null] : ( (lv_name_0_0= rulePrimitiveTypeIdentifier ) ) ;
     public final EObject rulePrimitiveType() throws RecognitionException {
         EObject current = null;
 
@@ -7622,14 +7619,14 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2597:28: ( ( (lv_name_0_0= rulePrimitiveTypeIdentifier ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2598:1: ( (lv_name_0_0= rulePrimitiveTypeIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2594:28: ( ( (lv_name_0_0= rulePrimitiveTypeIdentifier ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2595:1: ( (lv_name_0_0= rulePrimitiveTypeIdentifier ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2598:1: ( (lv_name_0_0= rulePrimitiveTypeIdentifier ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2599:1: (lv_name_0_0= rulePrimitiveTypeIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2595:1: ( (lv_name_0_0= rulePrimitiveTypeIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2596:1: (lv_name_0_0= rulePrimitiveTypeIdentifier )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2599:1: (lv_name_0_0= rulePrimitiveTypeIdentifier )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2600:3: lv_name_0_0= rulePrimitiveTypeIdentifier
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2596:1: (lv_name_0_0= rulePrimitiveTypeIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2597:3: lv_name_0_0= rulePrimitiveTypeIdentifier
             {
             if ( state.backtracking==0 ) {
                
@@ -7680,7 +7677,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleCollectionTypeIdentifier"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2624:1: entryRuleCollectionTypeIdentifier returns [String current=null] : iv_ruleCollectionTypeIdentifier= ruleCollectionTypeIdentifier EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2621:1: entryRuleCollectionTypeIdentifier returns [String current=null] : iv_ruleCollectionTypeIdentifier= ruleCollectionTypeIdentifier EOF ;
     public final String entryRuleCollectionTypeIdentifier() throws RecognitionException {
         String current = null;
 
@@ -7688,8 +7685,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2625:2: (iv_ruleCollectionTypeIdentifier= ruleCollectionTypeIdentifier EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2626:2: iv_ruleCollectionTypeIdentifier= ruleCollectionTypeIdentifier EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2622:2: (iv_ruleCollectionTypeIdentifier= ruleCollectionTypeIdentifier EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2623:2: iv_ruleCollectionTypeIdentifier= ruleCollectionTypeIdentifier EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getCollectionTypeIdentifierRule()); 
@@ -7720,7 +7717,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleCollectionTypeIdentifier"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2633:1: ruleCollectionTypeIdentifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'Set' | kw= 'Bag' | kw= 'Sequence' | kw= 'Collection' | kw= 'OrderedSet' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2630:1: ruleCollectionTypeIdentifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'Set' | kw= 'Bag' | kw= 'Sequence' | kw= 'Collection' | kw= 'OrderedSet' ) ;
     public final AntlrDatatypeRuleToken ruleCollectionTypeIdentifier() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -7729,10 +7726,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2636:28: ( (kw= 'Set' | kw= 'Bag' | kw= 'Sequence' | kw= 'Collection' | kw= 'OrderedSet' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2637:1: (kw= 'Set' | kw= 'Bag' | kw= 'Sequence' | kw= 'Collection' | kw= 'OrderedSet' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2633:28: ( (kw= 'Set' | kw= 'Bag' | kw= 'Sequence' | kw= 'Collection' | kw= 'OrderedSet' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2634:1: (kw= 'Set' | kw= 'Bag' | kw= 'Sequence' | kw= 'Collection' | kw= 'OrderedSet' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2637:1: (kw= 'Set' | kw= 'Bag' | kw= 'Sequence' | kw= 'Collection' | kw= 'OrderedSet' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2634:1: (kw= 'Set' | kw= 'Bag' | kw= 'Sequence' | kw= 'Collection' | kw= 'OrderedSet' )
             int alt48=5;
             switch ( input.LA(1) ) {
             case 45:
@@ -7770,7 +7767,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             switch (alt48) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2638:2: kw= 'Set'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2635:2: kw= 'Set'
                     {
                     kw=(Token)match(input,45,FollowSets000.FOLLOW_45_in_ruleCollectionTypeIdentifier5782); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -7783,7 +7780,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2645:2: kw= 'Bag'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2642:2: kw= 'Bag'
                     {
                     kw=(Token)match(input,46,FollowSets000.FOLLOW_46_in_ruleCollectionTypeIdentifier5801); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -7796,7 +7793,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2652:2: kw= 'Sequence'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2649:2: kw= 'Sequence'
                     {
                     kw=(Token)match(input,47,FollowSets000.FOLLOW_47_in_ruleCollectionTypeIdentifier5820); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -7809,7 +7806,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2659:2: kw= 'Collection'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2656:2: kw= 'Collection'
                     {
                     kw=(Token)match(input,48,FollowSets000.FOLLOW_48_in_ruleCollectionTypeIdentifier5839); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -7822,7 +7819,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 5 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2666:2: kw= 'OrderedSet'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2663:2: kw= 'OrderedSet'
                     {
                     kw=(Token)match(input,49,FollowSets000.FOLLOW_49_in_ruleCollectionTypeIdentifier5858); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -7857,7 +7854,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleTypeExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2679:1: entryRuleTypeExp returns [EObject current=null] : iv_ruleTypeExp= ruleTypeExp EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2676:1: entryRuleTypeExp returns [EObject current=null] : iv_ruleTypeExp= ruleTypeExp EOF ;
     public final EObject entryRuleTypeExp() throws RecognitionException {
         EObject current = null;
 
@@ -7865,8 +7862,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2680:2: (iv_ruleTypeExp= ruleTypeExp EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2681:2: iv_ruleTypeExp= ruleTypeExp EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2677:2: (iv_ruleTypeExp= ruleTypeExp EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2678:2: iv_ruleTypeExp= ruleTypeExp EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTypeExpRule()); 
@@ -7897,7 +7894,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleTypeExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2688:1: ruleTypeExp returns [EObject current=null] : (this_PrimitiveType_0= rulePrimitiveType | this_NameExp_1= ruleNameExp | this_CollectionType_2= ruleCollectionType | this_TupleType_3= ruleTupleType ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2685:1: ruleTypeExp returns [EObject current=null] : (this_PrimitiveType_0= rulePrimitiveType | this_NameExp_1= ruleNameExp | this_CollectionType_2= ruleCollectionType | this_TupleType_3= ruleTupleType ) ;
     public final EObject ruleTypeExp() throws RecognitionException {
         EObject current = null;
 
@@ -7913,10 +7910,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2691:28: ( (this_PrimitiveType_0= rulePrimitiveType | this_NameExp_1= ruleNameExp | this_CollectionType_2= ruleCollectionType | this_TupleType_3= ruleTupleType ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2692:1: (this_PrimitiveType_0= rulePrimitiveType | this_NameExp_1= ruleNameExp | this_CollectionType_2= ruleCollectionType | this_TupleType_3= ruleTupleType )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2688:28: ( (this_PrimitiveType_0= rulePrimitiveType | this_NameExp_1= ruleNameExp | this_CollectionType_2= ruleCollectionType | this_TupleType_3= ruleTupleType ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2689:1: (this_PrimitiveType_0= rulePrimitiveType | this_NameExp_1= ruleNameExp | this_CollectionType_2= ruleCollectionType | this_TupleType_3= ruleTupleType )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2692:1: (this_PrimitiveType_0= rulePrimitiveType | this_NameExp_1= ruleNameExp | this_CollectionType_2= ruleCollectionType | this_TupleType_3= ruleTupleType )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2689:1: (this_PrimitiveType_0= rulePrimitiveType | this_NameExp_1= ruleNameExp | this_CollectionType_2= ruleCollectionType | this_TupleType_3= ruleTupleType )
             int alt49=4;
             switch ( input.LA(1) ) {
             case 37:
@@ -7962,7 +7959,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             switch (alt49) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2693:2: this_PrimitiveType_0= rulePrimitiveType
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2690:2: this_PrimitiveType_0= rulePrimitiveType
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -7989,7 +7986,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2706:2: this_NameExp_1= ruleNameExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2703:2: this_NameExp_1= ruleNameExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -8016,7 +8013,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2719:2: this_CollectionType_2= ruleCollectionType
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2716:2: this_CollectionType_2= ruleCollectionType
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -8043,7 +8040,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2732:2: this_TupleType_3= ruleTupleType
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2729:2: this_TupleType_3= ruleTupleType
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -8092,7 +8089,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleCollectionType"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2751:1: entryRuleCollectionType returns [EObject current=null] : iv_ruleCollectionType= ruleCollectionType EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2748:1: entryRuleCollectionType returns [EObject current=null] : iv_ruleCollectionType= ruleCollectionType EOF ;
     public final EObject entryRuleCollectionType() throws RecognitionException {
         EObject current = null;
 
@@ -8100,8 +8097,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2752:2: (iv_ruleCollectionType= ruleCollectionType EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2753:2: iv_ruleCollectionType= ruleCollectionType EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2749:2: (iv_ruleCollectionType= ruleCollectionType EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2750:2: iv_ruleCollectionType= ruleCollectionType EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getCollectionTypeRule()); 
@@ -8132,7 +8129,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleCollectionType"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2760:1: ruleCollectionType returns [EObject current=null] : ( ( (lv_typeIdentifier_0_0= ruleCollectionTypeIdentifier ) ) (otherlv_1= '(' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= ')' )? ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2757:1: ruleCollectionType returns [EObject current=null] : ( ( (lv_typeIdentifier_0_0= ruleCollectionTypeIdentifier ) ) (otherlv_1= '(' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= ')' )? ) ;
     public final EObject ruleCollectionType() throws RecognitionException {
         EObject current = null;
 
@@ -8146,17 +8143,17 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2763:28: ( ( ( (lv_typeIdentifier_0_0= ruleCollectionTypeIdentifier ) ) (otherlv_1= '(' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= ')' )? ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2764:1: ( ( (lv_typeIdentifier_0_0= ruleCollectionTypeIdentifier ) ) (otherlv_1= '(' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= ')' )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2760:28: ( ( ( (lv_typeIdentifier_0_0= ruleCollectionTypeIdentifier ) ) (otherlv_1= '(' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= ')' )? ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2761:1: ( ( (lv_typeIdentifier_0_0= ruleCollectionTypeIdentifier ) ) (otherlv_1= '(' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= ')' )? )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2764:1: ( ( (lv_typeIdentifier_0_0= ruleCollectionTypeIdentifier ) ) (otherlv_1= '(' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= ')' )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2764:2: ( (lv_typeIdentifier_0_0= ruleCollectionTypeIdentifier ) ) (otherlv_1= '(' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= ')' )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2761:1: ( ( (lv_typeIdentifier_0_0= ruleCollectionTypeIdentifier ) ) (otherlv_1= '(' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= ')' )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2761:2: ( (lv_typeIdentifier_0_0= ruleCollectionTypeIdentifier ) ) (otherlv_1= '(' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= ')' )?
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2764:2: ( (lv_typeIdentifier_0_0= ruleCollectionTypeIdentifier ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2765:1: (lv_typeIdentifier_0_0= ruleCollectionTypeIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2761:2: ( (lv_typeIdentifier_0_0= ruleCollectionTypeIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2762:1: (lv_typeIdentifier_0_0= ruleCollectionTypeIdentifier )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2765:1: (lv_typeIdentifier_0_0= ruleCollectionTypeIdentifier )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2766:3: lv_typeIdentifier_0_0= ruleCollectionTypeIdentifier
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2762:1: (lv_typeIdentifier_0_0= ruleCollectionTypeIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2763:3: lv_typeIdentifier_0_0= ruleCollectionTypeIdentifier
             {
             if ( state.backtracking==0 ) {
                
@@ -8187,7 +8184,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2782:2: (otherlv_1= '(' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= ')' )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2779:2: (otherlv_1= '(' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= ')' )?
             int alt50=2;
             int LA50_0 = input.LA(1);
 
@@ -8196,7 +8193,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt50) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2782:4: otherlv_1= '(' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= ')'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2779:4: otherlv_1= '(' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= ')'
                     {
                     otherlv_1=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleCollectionType6152); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8204,11 +8201,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                           	newLeafNode(otherlv_1, grammarAccess.getCollectionTypeAccess().getLeftParenthesisKeyword_1_0());
                           
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2786:1: ( (lv_type_2_0= ruleTypeExp ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2787:1: (lv_type_2_0= ruleTypeExp )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2783:1: ( (lv_type_2_0= ruleTypeExp ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2784:1: (lv_type_2_0= ruleTypeExp )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2787:1: (lv_type_2_0= ruleTypeExp )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2788:3: lv_type_2_0= ruleTypeExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2784:1: (lv_type_2_0= ruleTypeExp )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2785:3: lv_type_2_0= ruleTypeExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -8274,7 +8271,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleTupleType"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2816:1: entryRuleTupleType returns [EObject current=null] : iv_ruleTupleType= ruleTupleType EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2813:1: entryRuleTupleType returns [EObject current=null] : iv_ruleTupleType= ruleTupleType EOF ;
     public final EObject entryRuleTupleType() throws RecognitionException {
         EObject current = null;
 
@@ -8282,8 +8279,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2817:2: (iv_ruleTupleType= ruleTupleType EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2818:2: iv_ruleTupleType= ruleTupleType EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2814:2: (iv_ruleTupleType= ruleTupleType EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2815:2: iv_ruleTupleType= ruleTupleType EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTupleTypeRule()); 
@@ -8314,7 +8311,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleTupleType"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2825:1: ruleTupleType returns [EObject current=null] : ( ( (lv_name_0_0= 'Tuple' ) ) otherlv_1= '(' ( ( (lv_part_2_0= ruletuplePart ) ) (otherlv_3= ',' ( (lv_part_4_0= ruletuplePart ) ) )* )? otherlv_5= ')' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2822:1: ruleTupleType returns [EObject current=null] : ( ( (lv_name_0_0= 'Tuple' ) ) otherlv_1= '(' ( ( (lv_part_2_0= ruletuplePart ) ) (otherlv_3= ',' ( (lv_part_4_0= ruletuplePart ) ) )* )? otherlv_5= ')' ) ;
     public final EObject ruleTupleType() throws RecognitionException {
         EObject current = null;
 
@@ -8330,17 +8327,17 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2828:28: ( ( ( (lv_name_0_0= 'Tuple' ) ) otherlv_1= '(' ( ( (lv_part_2_0= ruletuplePart ) ) (otherlv_3= ',' ( (lv_part_4_0= ruletuplePart ) ) )* )? otherlv_5= ')' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2829:1: ( ( (lv_name_0_0= 'Tuple' ) ) otherlv_1= '(' ( ( (lv_part_2_0= ruletuplePart ) ) (otherlv_3= ',' ( (lv_part_4_0= ruletuplePart ) ) )* )? otherlv_5= ')' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2825:28: ( ( ( (lv_name_0_0= 'Tuple' ) ) otherlv_1= '(' ( ( (lv_part_2_0= ruletuplePart ) ) (otherlv_3= ',' ( (lv_part_4_0= ruletuplePart ) ) )* )? otherlv_5= ')' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2826:1: ( ( (lv_name_0_0= 'Tuple' ) ) otherlv_1= '(' ( ( (lv_part_2_0= ruletuplePart ) ) (otherlv_3= ',' ( (lv_part_4_0= ruletuplePart ) ) )* )? otherlv_5= ')' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2829:1: ( ( (lv_name_0_0= 'Tuple' ) ) otherlv_1= '(' ( ( (lv_part_2_0= ruletuplePart ) ) (otherlv_3= ',' ( (lv_part_4_0= ruletuplePart ) ) )* )? otherlv_5= ')' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2829:2: ( (lv_name_0_0= 'Tuple' ) ) otherlv_1= '(' ( ( (lv_part_2_0= ruletuplePart ) ) (otherlv_3= ',' ( (lv_part_4_0= ruletuplePart ) ) )* )? otherlv_5= ')'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2826:1: ( ( (lv_name_0_0= 'Tuple' ) ) otherlv_1= '(' ( ( (lv_part_2_0= ruletuplePart ) ) (otherlv_3= ',' ( (lv_part_4_0= ruletuplePart ) ) )* )? otherlv_5= ')' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2826:2: ( (lv_name_0_0= 'Tuple' ) ) otherlv_1= '(' ( ( (lv_part_2_0= ruletuplePart ) ) (otherlv_3= ',' ( (lv_part_4_0= ruletuplePart ) ) )* )? otherlv_5= ')'
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2829:2: ( (lv_name_0_0= 'Tuple' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2830:1: (lv_name_0_0= 'Tuple' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2826:2: ( (lv_name_0_0= 'Tuple' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2827:1: (lv_name_0_0= 'Tuple' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2830:1: (lv_name_0_0= 'Tuple' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2831:3: lv_name_0_0= 'Tuple'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2827:1: (lv_name_0_0= 'Tuple' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2828:3: lv_name_0_0= 'Tuple'
             {
             lv_name_0_0=(Token)match(input,50,FollowSets000.FOLLOW_50_in_ruleTupleType6276); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -8368,7 +8365,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_1, grammarAccess.getTupleTypeAccess().getLeftParenthesisKeyword_1());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2848:1: ( ( (lv_part_2_0= ruletuplePart ) ) (otherlv_3= ',' ( (lv_part_4_0= ruletuplePart ) ) )* )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2845:1: ( ( (lv_part_2_0= ruletuplePart ) ) (otherlv_3= ',' ( (lv_part_4_0= ruletuplePart ) ) )* )?
             int alt52=2;
             int LA52_0 = input.LA(1);
 
@@ -8377,13 +8374,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt52) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2848:2: ( (lv_part_2_0= ruletuplePart ) ) (otherlv_3= ',' ( (lv_part_4_0= ruletuplePart ) ) )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2845:2: ( (lv_part_2_0= ruletuplePart ) ) (otherlv_3= ',' ( (lv_part_4_0= ruletuplePart ) ) )*
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2848:2: ( (lv_part_2_0= ruletuplePart ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2849:1: (lv_part_2_0= ruletuplePart )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2845:2: ( (lv_part_2_0= ruletuplePart ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2846:1: (lv_part_2_0= ruletuplePart )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2849:1: (lv_part_2_0= ruletuplePart )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2850:3: lv_part_2_0= ruletuplePart
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2846:1: (lv_part_2_0= ruletuplePart )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2847:3: lv_part_2_0= ruletuplePart
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -8414,7 +8411,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2866:2: (otherlv_3= ',' ( (lv_part_4_0= ruletuplePart ) ) )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2863:2: (otherlv_3= ',' ( (lv_part_4_0= ruletuplePart ) ) )*
                     loop51:
                     do {
                         int alt51=2;
@@ -8427,7 +8424,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                         switch (alt51) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2866:4: otherlv_3= ',' ( (lv_part_4_0= ruletuplePart ) )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2863:4: otherlv_3= ',' ( (lv_part_4_0= ruletuplePart ) )
                     	    {
                     	    otherlv_3=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleTupleType6336); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -8435,11 +8432,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     	          	newLeafNode(otherlv_3, grammarAccess.getTupleTypeAccess().getCommaKeyword_2_1_0());
                     	          
                     	    }
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2870:1: ( (lv_part_4_0= ruletuplePart ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2871:1: (lv_part_4_0= ruletuplePart )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2867:1: ( (lv_part_4_0= ruletuplePart ) )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2868:1: (lv_part_4_0= ruletuplePart )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2871:1: (lv_part_4_0= ruletuplePart )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2872:3: lv_part_4_0= ruletuplePart
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2868:1: (lv_part_4_0= ruletuplePart )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2869:3: lv_part_4_0= ruletuplePart
                     	    {
                     	    if ( state.backtracking==0 ) {
                     	       
@@ -8514,7 +8511,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuletuplePart"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2900:1: entryRuletuplePart returns [EObject current=null] : iv_ruletuplePart= ruletuplePart EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2897:1: entryRuletuplePart returns [EObject current=null] : iv_ruletuplePart= ruletuplePart EOF ;
     public final EObject entryRuletuplePart() throws RecognitionException {
         EObject current = null;
 
@@ -8522,8 +8519,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2901:2: (iv_ruletuplePart= ruletuplePart EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2902:2: iv_ruletuplePart= ruletuplePart EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2898:2: (iv_ruletuplePart= ruletuplePart EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2899:2: iv_ruletuplePart= ruletuplePart EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTuplePartRule()); 
@@ -8554,7 +8551,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruletuplePart"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2909:1: ruletuplePart returns [EObject current=null] : ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2906:1: ruletuplePart returns [EObject current=null] : ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) ) ;
     public final EObject ruletuplePart() throws RecognitionException {
         EObject current = null;
 
@@ -8567,17 +8564,17 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2912:28: ( ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2913:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2909:28: ( ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2910:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2913:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2913:2: ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2910:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2910:2: ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2913:2: ( (lv_name_0_0= ruleIdentifier ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2914:1: (lv_name_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2910:2: ( (lv_name_0_0= ruleIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2911:1: (lv_name_0_0= ruleIdentifier )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2914:1: (lv_name_0_0= ruleIdentifier )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2915:3: lv_name_0_0= ruleIdentifier
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2911:1: (lv_name_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2912:3: lv_name_0_0= ruleIdentifier
             {
             if ( state.backtracking==0 ) {
                
@@ -8614,11 +8611,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_1, grammarAccess.getTuplePartAccess().getColonKeyword_1());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2935:1: ( (lv_type_2_0= ruleTypeExp ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2936:1: (lv_type_2_0= ruleTypeExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2932:1: ( (lv_type_2_0= ruleTypeExp ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2933:1: (lv_type_2_0= ruleTypeExp )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2936:1: (lv_type_2_0= ruleTypeExp )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2937:3: lv_type_2_0= ruleTypeExp
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2933:1: (lv_type_2_0= ruleTypeExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2934:3: lv_type_2_0= ruleTypeExp
             {
             if ( state.backtracking==0 ) {
                
@@ -8672,7 +8669,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleCollectionLiteralExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2961:1: entryRuleCollectionLiteralExp returns [EObject current=null] : iv_ruleCollectionLiteralExp= ruleCollectionLiteralExp EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2958:1: entryRuleCollectionLiteralExp returns [EObject current=null] : iv_ruleCollectionLiteralExp= ruleCollectionLiteralExp EOF ;
     public final EObject entryRuleCollectionLiteralExp() throws RecognitionException {
         EObject current = null;
 
@@ -8680,8 +8677,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2962:2: (iv_ruleCollectionLiteralExp= ruleCollectionLiteralExp EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2963:2: iv_ruleCollectionLiteralExp= ruleCollectionLiteralExp EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2959:2: (iv_ruleCollectionLiteralExp= ruleCollectionLiteralExp EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2960:2: iv_ruleCollectionLiteralExp= ruleCollectionLiteralExp EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getCollectionLiteralExpRule()); 
@@ -8712,7 +8709,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleCollectionLiteralExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2970:1: ruleCollectionLiteralExp returns [EObject current=null] : (this_CollectionType_0= ruleCollectionType ( () otherlv_2= '{' ( ( (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart ) ) (otherlv_4= ',' ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) ) )* )? otherlv_6= '}' )? ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2967:1: ruleCollectionLiteralExp returns [EObject current=null] : (this_CollectionType_0= ruleCollectionType ( () otherlv_2= '{' ( ( (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart ) ) (otherlv_4= ',' ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) ) )* )? otherlv_6= '}' )? ) ;
     public final EObject ruleCollectionLiteralExp() throws RecognitionException {
         EObject current = null;
 
@@ -8729,11 +8726,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2973:28: ( (this_CollectionType_0= ruleCollectionType ( () otherlv_2= '{' ( ( (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart ) ) (otherlv_4= ',' ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) ) )* )? otherlv_6= '}' )? ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2974:1: (this_CollectionType_0= ruleCollectionType ( () otherlv_2= '{' ( ( (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart ) ) (otherlv_4= ',' ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) ) )* )? otherlv_6= '}' )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2970:28: ( (this_CollectionType_0= ruleCollectionType ( () otherlv_2= '{' ( ( (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart ) ) (otherlv_4= ',' ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) ) )* )? otherlv_6= '}' )? ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2971:1: (this_CollectionType_0= ruleCollectionType ( () otherlv_2= '{' ( ( (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart ) ) (otherlv_4= ',' ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) ) )* )? otherlv_6= '}' )? )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2974:1: (this_CollectionType_0= ruleCollectionType ( () otherlv_2= '{' ( ( (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart ) ) (otherlv_4= ',' ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) ) )* )? otherlv_6= '}' )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2975:2: this_CollectionType_0= ruleCollectionType ( () otherlv_2= '{' ( ( (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart ) ) (otherlv_4= ',' ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) ) )* )? otherlv_6= '}' )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2971:1: (this_CollectionType_0= ruleCollectionType ( () otherlv_2= '{' ( ( (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart ) ) (otherlv_4= ',' ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) ) )* )? otherlv_6= '}' )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2972:2: this_CollectionType_0= ruleCollectionType ( () otherlv_2= '{' ( ( (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart ) ) (otherlv_4= ',' ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) ) )* )? otherlv_6= '}' )?
             {
             if ( state.backtracking==0 ) {
                
@@ -8756,7 +8753,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                       afterParserOrEnumRuleCall();
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2986:1: ( () otherlv_2= '{' ( ( (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart ) ) (otherlv_4= ',' ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) ) )* )? otherlv_6= '}' )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2983:1: ( () otherlv_2= '{' ( ( (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart ) ) (otherlv_4= ',' ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) ) )* )? otherlv_6= '}' )?
             int alt55=2;
             int LA55_0 = input.LA(1);
 
@@ -8765,10 +8762,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt55) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2986:2: () otherlv_2= '{' ( ( (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart ) ) (otherlv_4= ',' ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) ) )* )? otherlv_6= '}'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2983:2: () otherlv_2= '{' ( ( (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart ) ) (otherlv_4= ',' ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) ) )* )? otherlv_6= '}'
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2986:2: ()
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2987:2: 
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2983:2: ()
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2984:2: 
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -8791,7 +8788,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                           	newLeafNode(otherlv_2, grammarAccess.getCollectionLiteralExpAccess().getLeftCurlyBracketKeyword_1_1());
                           
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2999:1: ( ( (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart ) ) (otherlv_4= ',' ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) ) )* )?
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2996:1: ( ( (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart ) ) (otherlv_4= ',' ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) ) )* )?
                     int alt54=2;
                     int LA54_0 = input.LA(1);
 
@@ -8800,13 +8797,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     switch (alt54) {
                         case 1 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2999:2: ( (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart ) ) (otherlv_4= ',' ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) ) )*
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2996:2: ( (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart ) ) (otherlv_4= ',' ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) ) )*
                             {
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2999:2: ( (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart ) )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3000:1: (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2996:2: ( (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart ) )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2997:1: (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart )
                             {
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3000:1: (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3001:3: lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2997:1: (lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:2998:3: lv_collectionLiteralParts_3_0= ruleCollectionLiteralPart
                             {
                             if ( state.backtracking==0 ) {
                                
@@ -8837,7 +8834,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                             }
 
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3017:2: (otherlv_4= ',' ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) ) )*
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3014:2: (otherlv_4= ',' ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) ) )*
                             loop53:
                             do {
                                 int alt53=2;
@@ -8850,7 +8847,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                                 switch (alt53) {
                             	case 1 :
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3017:4: otherlv_4= ',' ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) )
+                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3014:4: otherlv_4= ',' ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) )
                             	    {
                             	    otherlv_4=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleCollectionLiteralExp6653); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
@@ -8858,11 +8855,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                             	          	newLeafNode(otherlv_4, grammarAccess.getCollectionLiteralExpAccess().getCommaKeyword_1_2_1_0());
                             	          
                             	    }
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3021:1: ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) )
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3022:1: (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart )
+                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3018:1: ( (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart ) )
+                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3019:1: (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart )
                             	    {
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3022:1: (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart )
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3023:3: lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart
+                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3019:1: (lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart )
+                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3020:3: lv_collectionLiteralParts_5_0= ruleCollectionLiteralPart
                             	    {
                             	    if ( state.backtracking==0 ) {
                             	       
@@ -8943,7 +8940,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleCollectionLiteralPart"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3051:1: entryRuleCollectionLiteralPart returns [EObject current=null] : iv_ruleCollectionLiteralPart= ruleCollectionLiteralPart EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3048:1: entryRuleCollectionLiteralPart returns [EObject current=null] : iv_ruleCollectionLiteralPart= ruleCollectionLiteralPart EOF ;
     public final EObject entryRuleCollectionLiteralPart() throws RecognitionException {
         EObject current = null;
 
@@ -8951,8 +8948,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3052:2: (iv_ruleCollectionLiteralPart= ruleCollectionLiteralPart EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3053:2: iv_ruleCollectionLiteralPart= ruleCollectionLiteralPart EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3049:2: (iv_ruleCollectionLiteralPart= ruleCollectionLiteralPart EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3050:2: iv_ruleCollectionLiteralPart= ruleCollectionLiteralPart EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getCollectionLiteralPartRule()); 
@@ -8983,7 +8980,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleCollectionLiteralPart"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3060:1: ruleCollectionLiteralPart returns [EObject current=null] : ( ( (lv_expression_0_0= ruleExpression ) ) (otherlv_1= '..' ( (lv_lastExpression_2_0= ruleExpression ) ) )? ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3057:1: ruleCollectionLiteralPart returns [EObject current=null] : ( ( (lv_expression_0_0= ruleExpression ) ) (otherlv_1= '..' ( (lv_lastExpression_2_0= ruleExpression ) ) )? ) ;
     public final EObject ruleCollectionLiteralPart() throws RecognitionException {
         EObject current = null;
 
@@ -8996,17 +8993,17 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3063:28: ( ( ( (lv_expression_0_0= ruleExpression ) ) (otherlv_1= '..' ( (lv_lastExpression_2_0= ruleExpression ) ) )? ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3064:1: ( ( (lv_expression_0_0= ruleExpression ) ) (otherlv_1= '..' ( (lv_lastExpression_2_0= ruleExpression ) ) )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3060:28: ( ( ( (lv_expression_0_0= ruleExpression ) ) (otherlv_1= '..' ( (lv_lastExpression_2_0= ruleExpression ) ) )? ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3061:1: ( ( (lv_expression_0_0= ruleExpression ) ) (otherlv_1= '..' ( (lv_lastExpression_2_0= ruleExpression ) ) )? )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3064:1: ( ( (lv_expression_0_0= ruleExpression ) ) (otherlv_1= '..' ( (lv_lastExpression_2_0= ruleExpression ) ) )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3064:2: ( (lv_expression_0_0= ruleExpression ) ) (otherlv_1= '..' ( (lv_lastExpression_2_0= ruleExpression ) ) )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3061:1: ( ( (lv_expression_0_0= ruleExpression ) ) (otherlv_1= '..' ( (lv_lastExpression_2_0= ruleExpression ) ) )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3061:2: ( (lv_expression_0_0= ruleExpression ) ) (otherlv_1= '..' ( (lv_lastExpression_2_0= ruleExpression ) ) )?
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3064:2: ( (lv_expression_0_0= ruleExpression ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3065:1: (lv_expression_0_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3061:2: ( (lv_expression_0_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3062:1: (lv_expression_0_0= ruleExpression )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3065:1: (lv_expression_0_0= ruleExpression )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3066:3: lv_expression_0_0= ruleExpression
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3062:1: (lv_expression_0_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3063:3: lv_expression_0_0= ruleExpression
             {
             if ( state.backtracking==0 ) {
                
@@ -9037,7 +9034,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3082:2: (otherlv_1= '..' ( (lv_lastExpression_2_0= ruleExpression ) ) )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3079:2: (otherlv_1= '..' ( (lv_lastExpression_2_0= ruleExpression ) ) )?
             int alt56=2;
             int LA56_0 = input.LA(1);
 
@@ -9046,7 +9043,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt56) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3082:4: otherlv_1= '..' ( (lv_lastExpression_2_0= ruleExpression ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3079:4: otherlv_1= '..' ( (lv_lastExpression_2_0= ruleExpression ) )
                     {
                     otherlv_1=(Token)match(input,53,FollowSets000.FOLLOW_53_in_ruleCollectionLiteralPart6797); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9054,11 +9051,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                           	newLeafNode(otherlv_1, grammarAccess.getCollectionLiteralPartAccess().getFullStopFullStopKeyword_1_0());
                           
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3086:1: ( (lv_lastExpression_2_0= ruleExpression ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3087:1: (lv_lastExpression_2_0= ruleExpression )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3083:1: ( (lv_lastExpression_2_0= ruleExpression ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3084:1: (lv_lastExpression_2_0= ruleExpression )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3087:1: (lv_lastExpression_2_0= ruleExpression )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3088:3: lv_lastExpression_2_0= ruleExpression
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3084:1: (lv_lastExpression_2_0= ruleExpression )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3085:3: lv_lastExpression_2_0= ruleExpression
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -9118,7 +9115,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRulePrimitiveLiteralExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3112:1: entryRulePrimitiveLiteralExp returns [EObject current=null] : iv_rulePrimitiveLiteralExp= rulePrimitiveLiteralExp EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3109:1: entryRulePrimitiveLiteralExp returns [EObject current=null] : iv_rulePrimitiveLiteralExp= rulePrimitiveLiteralExp EOF ;
     public final EObject entryRulePrimitiveLiteralExp() throws RecognitionException {
         EObject current = null;
 
@@ -9126,8 +9123,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3113:2: (iv_rulePrimitiveLiteralExp= rulePrimitiveLiteralExp EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3114:2: iv_rulePrimitiveLiteralExp= rulePrimitiveLiteralExp EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3110:2: (iv_rulePrimitiveLiteralExp= rulePrimitiveLiteralExp EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3111:2: iv_rulePrimitiveLiteralExp= rulePrimitiveLiteralExp EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPrimitiveLiteralExpRule()); 
@@ -9158,7 +9155,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "rulePrimitiveLiteralExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3121:1: rulePrimitiveLiteralExp returns [EObject current=null] : (this_NumberLiteralExp_0= ruleNumberLiteralExp | this_StringLiteralExp_1= ruleStringLiteralExp | this_BooleanLiteralExp_2= ruleBooleanLiteralExp | this_InvalidLiteralExp_3= ruleInvalidLiteralExp | this_NullLiteralExp_4= ruleNullLiteralExp ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3118:1: rulePrimitiveLiteralExp returns [EObject current=null] : (this_NumberLiteralExp_0= ruleNumberLiteralExp | this_StringLiteralExp_1= ruleStringLiteralExp | this_BooleanLiteralExp_2= ruleBooleanLiteralExp | this_InvalidLiteralExp_3= ruleInvalidLiteralExp | this_NullLiteralExp_4= ruleNullLiteralExp ) ;
     public final EObject rulePrimitiveLiteralExp() throws RecognitionException {
         EObject current = null;
 
@@ -9176,10 +9173,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3124:28: ( (this_NumberLiteralExp_0= ruleNumberLiteralExp | this_StringLiteralExp_1= ruleStringLiteralExp | this_BooleanLiteralExp_2= ruleBooleanLiteralExp | this_InvalidLiteralExp_3= ruleInvalidLiteralExp | this_NullLiteralExp_4= ruleNullLiteralExp ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3125:1: (this_NumberLiteralExp_0= ruleNumberLiteralExp | this_StringLiteralExp_1= ruleStringLiteralExp | this_BooleanLiteralExp_2= ruleBooleanLiteralExp | this_InvalidLiteralExp_3= ruleInvalidLiteralExp | this_NullLiteralExp_4= ruleNullLiteralExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3121:28: ( (this_NumberLiteralExp_0= ruleNumberLiteralExp | this_StringLiteralExp_1= ruleStringLiteralExp | this_BooleanLiteralExp_2= ruleBooleanLiteralExp | this_InvalidLiteralExp_3= ruleInvalidLiteralExp | this_NullLiteralExp_4= ruleNullLiteralExp ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3122:1: (this_NumberLiteralExp_0= ruleNumberLiteralExp | this_StringLiteralExp_1= ruleStringLiteralExp | this_BooleanLiteralExp_2= ruleBooleanLiteralExp | this_InvalidLiteralExp_3= ruleInvalidLiteralExp | this_NullLiteralExp_4= ruleNullLiteralExp )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3125:1: (this_NumberLiteralExp_0= ruleNumberLiteralExp | this_StringLiteralExp_1= ruleStringLiteralExp | this_BooleanLiteralExp_2= ruleBooleanLiteralExp | this_InvalidLiteralExp_3= ruleInvalidLiteralExp | this_NullLiteralExp_4= ruleNullLiteralExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3122:1: (this_NumberLiteralExp_0= ruleNumberLiteralExp | this_StringLiteralExp_1= ruleStringLiteralExp | this_BooleanLiteralExp_2= ruleBooleanLiteralExp | this_InvalidLiteralExp_3= ruleInvalidLiteralExp | this_NullLiteralExp_4= ruleNullLiteralExp )
             int alt57=5;
             switch ( input.LA(1) ) {
             case RULE_INT:
@@ -9218,7 +9215,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             switch (alt57) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3126:2: this_NumberLiteralExp_0= ruleNumberLiteralExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3123:2: this_NumberLiteralExp_0= ruleNumberLiteralExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -9245,7 +9242,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3139:2: this_StringLiteralExp_1= ruleStringLiteralExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3136:2: this_StringLiteralExp_1= ruleStringLiteralExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -9272,7 +9269,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3152:2: this_BooleanLiteralExp_2= ruleBooleanLiteralExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3149:2: this_BooleanLiteralExp_2= ruleBooleanLiteralExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -9299,7 +9296,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3165:2: this_InvalidLiteralExp_3= ruleInvalidLiteralExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3162:2: this_InvalidLiteralExp_3= ruleInvalidLiteralExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -9326,7 +9323,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 5 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3178:2: this_NullLiteralExp_4= ruleNullLiteralExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3175:2: this_NullLiteralExp_4= ruleNullLiteralExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -9375,7 +9372,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleTupleLiteralExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3197:1: entryRuleTupleLiteralExp returns [EObject current=null] : iv_ruleTupleLiteralExp= ruleTupleLiteralExp EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3194:1: entryRuleTupleLiteralExp returns [EObject current=null] : iv_ruleTupleLiteralExp= ruleTupleLiteralExp EOF ;
     public final EObject entryRuleTupleLiteralExp() throws RecognitionException {
         EObject current = null;
 
@@ -9383,8 +9380,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3198:2: (iv_ruleTupleLiteralExp= ruleTupleLiteralExp EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3199:2: iv_ruleTupleLiteralExp= ruleTupleLiteralExp EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3195:2: (iv_ruleTupleLiteralExp= ruleTupleLiteralExp EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3196:2: iv_ruleTupleLiteralExp= ruleTupleLiteralExp EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTupleLiteralExpRule()); 
@@ -9415,7 +9412,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleTupleLiteralExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3206:1: ruleTupleLiteralExp returns [EObject current=null] : ( () otherlv_1= 'Tuple' (otherlv_2= '{' ( (lv_part_3_0= ruleTupleLiteralPart ) ) (otherlv_4= ',' ( (lv_part_5_0= ruleTupleLiteralPart ) ) )* otherlv_6= '}' )? ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3203:1: ruleTupleLiteralExp returns [EObject current=null] : ( () otherlv_1= 'Tuple' (otherlv_2= '{' ( (lv_part_3_0= ruleTupleLiteralPart ) ) (otherlv_4= ',' ( (lv_part_5_0= ruleTupleLiteralPart ) ) )* otherlv_6= '}' )? ) ;
     public final EObject ruleTupleLiteralExp() throws RecognitionException {
         EObject current = null;
 
@@ -9431,14 +9428,14 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3209:28: ( ( () otherlv_1= 'Tuple' (otherlv_2= '{' ( (lv_part_3_0= ruleTupleLiteralPart ) ) (otherlv_4= ',' ( (lv_part_5_0= ruleTupleLiteralPart ) ) )* otherlv_6= '}' )? ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3210:1: ( () otherlv_1= 'Tuple' (otherlv_2= '{' ( (lv_part_3_0= ruleTupleLiteralPart ) ) (otherlv_4= ',' ( (lv_part_5_0= ruleTupleLiteralPart ) ) )* otherlv_6= '}' )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3206:28: ( ( () otherlv_1= 'Tuple' (otherlv_2= '{' ( (lv_part_3_0= ruleTupleLiteralPart ) ) (otherlv_4= ',' ( (lv_part_5_0= ruleTupleLiteralPart ) ) )* otherlv_6= '}' )? ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3207:1: ( () otherlv_1= 'Tuple' (otherlv_2= '{' ( (lv_part_3_0= ruleTupleLiteralPart ) ) (otherlv_4= ',' ( (lv_part_5_0= ruleTupleLiteralPart ) ) )* otherlv_6= '}' )? )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3210:1: ( () otherlv_1= 'Tuple' (otherlv_2= '{' ( (lv_part_3_0= ruleTupleLiteralPart ) ) (otherlv_4= ',' ( (lv_part_5_0= ruleTupleLiteralPart ) ) )* otherlv_6= '}' )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3210:2: () otherlv_1= 'Tuple' (otherlv_2= '{' ( (lv_part_3_0= ruleTupleLiteralPart ) ) (otherlv_4= ',' ( (lv_part_5_0= ruleTupleLiteralPart ) ) )* otherlv_6= '}' )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3207:1: ( () otherlv_1= 'Tuple' (otherlv_2= '{' ( (lv_part_3_0= ruleTupleLiteralPart ) ) (otherlv_4= ',' ( (lv_part_5_0= ruleTupleLiteralPart ) ) )* otherlv_6= '}' )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3207:2: () otherlv_1= 'Tuple' (otherlv_2= '{' ( (lv_part_3_0= ruleTupleLiteralPart ) ) (otherlv_4= ',' ( (lv_part_5_0= ruleTupleLiteralPart ) ) )* otherlv_6= '}' )?
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3210:2: ()
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3211:2: 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3207:2: ()
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3208:2: 
             {
             if ( state.backtracking==0 ) {
                
@@ -9461,7 +9458,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_1, grammarAccess.getTupleLiteralExpAccess().getTupleKeyword_1());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3223:1: (otherlv_2= '{' ( (lv_part_3_0= ruleTupleLiteralPart ) ) (otherlv_4= ',' ( (lv_part_5_0= ruleTupleLiteralPart ) ) )* otherlv_6= '}' )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3220:1: (otherlv_2= '{' ( (lv_part_3_0= ruleTupleLiteralPart ) ) (otherlv_4= ',' ( (lv_part_5_0= ruleTupleLiteralPart ) ) )* otherlv_6= '}' )?
             int alt59=2;
             int LA59_0 = input.LA(1);
 
@@ -9470,7 +9467,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt59) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3223:3: otherlv_2= '{' ( (lv_part_3_0= ruleTupleLiteralPart ) ) (otherlv_4= ',' ( (lv_part_5_0= ruleTupleLiteralPart ) ) )* otherlv_6= '}'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3220:3: otherlv_2= '{' ( (lv_part_3_0= ruleTupleLiteralPart ) ) (otherlv_4= ',' ( (lv_part_5_0= ruleTupleLiteralPart ) ) )* otherlv_6= '}'
                     {
                     otherlv_2=(Token)match(input,51,FollowSets000.FOLLOW_51_in_ruleTupleLiteralExp7143); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9478,11 +9475,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                           	newLeafNode(otherlv_2, grammarAccess.getTupleLiteralExpAccess().getLeftCurlyBracketKeyword_2_0());
                           
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3227:1: ( (lv_part_3_0= ruleTupleLiteralPart ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3228:1: (lv_part_3_0= ruleTupleLiteralPart )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3224:1: ( (lv_part_3_0= ruleTupleLiteralPart ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3225:1: (lv_part_3_0= ruleTupleLiteralPart )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3228:1: (lv_part_3_0= ruleTupleLiteralPart )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3229:3: lv_part_3_0= ruleTupleLiteralPart
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3225:1: (lv_part_3_0= ruleTupleLiteralPart )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3226:3: lv_part_3_0= ruleTupleLiteralPart
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -9513,7 +9510,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3245:2: (otherlv_4= ',' ( (lv_part_5_0= ruleTupleLiteralPart ) ) )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3242:2: (otherlv_4= ',' ( (lv_part_5_0= ruleTupleLiteralPart ) ) )*
                     loop58:
                     do {
                         int alt58=2;
@@ -9526,7 +9523,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                         switch (alt58) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3245:4: otherlv_4= ',' ( (lv_part_5_0= ruleTupleLiteralPart ) )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3242:4: otherlv_4= ',' ( (lv_part_5_0= ruleTupleLiteralPart ) )
                     	    {
                     	    otherlv_4=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleTupleLiteralExp7177); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -9534,11 +9531,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     	          	newLeafNode(otherlv_4, grammarAccess.getTupleLiteralExpAccess().getCommaKeyword_2_2_0());
                     	          
                     	    }
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3249:1: ( (lv_part_5_0= ruleTupleLiteralPart ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3250:1: (lv_part_5_0= ruleTupleLiteralPart )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3246:1: ( (lv_part_5_0= ruleTupleLiteralPart ) )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3247:1: (lv_part_5_0= ruleTupleLiteralPart )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3250:1: (lv_part_5_0= ruleTupleLiteralPart )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3251:3: lv_part_5_0= ruleTupleLiteralPart
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3247:1: (lv_part_5_0= ruleTupleLiteralPart )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3248:3: lv_part_5_0= ruleTupleLiteralPart
                     	    {
                     	    if ( state.backtracking==0 ) {
                     	       
@@ -9613,7 +9610,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleTupleLiteralPart"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3279:1: entryRuleTupleLiteralPart returns [EObject current=null] : iv_ruleTupleLiteralPart= ruleTupleLiteralPart EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3276:1: entryRuleTupleLiteralPart returns [EObject current=null] : iv_ruleTupleLiteralPart= ruleTupleLiteralPart EOF ;
     public final EObject entryRuleTupleLiteralPart() throws RecognitionException {
         EObject current = null;
 
@@ -9621,8 +9618,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3280:2: (iv_ruleTupleLiteralPart= ruleTupleLiteralPart EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3281:2: iv_ruleTupleLiteralPart= ruleTupleLiteralPart EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3277:2: (iv_ruleTupleLiteralPart= ruleTupleLiteralPart EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3278:2: iv_ruleTupleLiteralPart= ruleTupleLiteralPart EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTupleLiteralPartRule()); 
@@ -9653,7 +9650,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleTupleLiteralPart"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3288:1: ruleTupleLiteralPart returns [EObject current=null] : ( ( (lv_name_0_0= ruleIdentifier ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )? otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3285:1: ruleTupleLiteralPart returns [EObject current=null] : ( ( (lv_name_0_0= ruleIdentifier ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )? otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) ) ;
     public final EObject ruleTupleLiteralPart() throws RecognitionException {
         EObject current = null;
 
@@ -9669,17 +9666,17 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3291:28: ( ( ( (lv_name_0_0= ruleIdentifier ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )? otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3292:1: ( ( (lv_name_0_0= ruleIdentifier ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )? otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3288:28: ( ( ( (lv_name_0_0= ruleIdentifier ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )? otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3289:1: ( ( (lv_name_0_0= ruleIdentifier ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )? otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3292:1: ( ( (lv_name_0_0= ruleIdentifier ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )? otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3292:2: ( (lv_name_0_0= ruleIdentifier ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )? otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3289:1: ( ( (lv_name_0_0= ruleIdentifier ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )? otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3289:2: ( (lv_name_0_0= ruleIdentifier ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )? otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3292:2: ( (lv_name_0_0= ruleIdentifier ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3293:1: (lv_name_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3289:2: ( (lv_name_0_0= ruleIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3290:1: (lv_name_0_0= ruleIdentifier )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3293:1: (lv_name_0_0= ruleIdentifier )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3294:3: lv_name_0_0= ruleIdentifier
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3290:1: (lv_name_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3291:3: lv_name_0_0= ruleIdentifier
             {
             if ( state.backtracking==0 ) {
                
@@ -9710,7 +9707,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3310:2: (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3307:2: (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )?
             int alt60=2;
             int LA60_0 = input.LA(1);
 
@@ -9719,7 +9716,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt60) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3310:4: otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3307:4: otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) )
                     {
                     otherlv_1=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleTupleLiteralPart7319); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9727,11 +9724,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                           	newLeafNode(otherlv_1, grammarAccess.getTupleLiteralPartAccess().getColonKeyword_1_0());
                           
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3314:1: ( (lv_type_2_0= ruleTypeExp ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3315:1: (lv_type_2_0= ruleTypeExp )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3311:1: ( (lv_type_2_0= ruleTypeExp ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3312:1: (lv_type_2_0= ruleTypeExp )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3315:1: (lv_type_2_0= ruleTypeExp )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3316:3: lv_type_2_0= ruleTypeExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3312:1: (lv_type_2_0= ruleTypeExp )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3313:3: lv_type_2_0= ruleTypeExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -9774,11 +9771,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_3, grammarAccess.getTupleLiteralPartAccess().getEqualsSignKeyword_2());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3336:1: ( (lv_initExpression_4_0= ruleExpression ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3337:1: (lv_initExpression_4_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3333:1: ( (lv_initExpression_4_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3334:1: (lv_initExpression_4_0= ruleExpression )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3337:1: (lv_initExpression_4_0= ruleExpression )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3338:3: lv_initExpression_4_0= ruleExpression
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3334:1: (lv_initExpression_4_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3335:3: lv_initExpression_4_0= ruleExpression
             {
             if ( state.backtracking==0 ) {
                
@@ -9832,7 +9829,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleNumberLiteralExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3362:1: entryRuleNumberLiteralExp returns [EObject current=null] : iv_ruleNumberLiteralExp= ruleNumberLiteralExp EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3359:1: entryRuleNumberLiteralExp returns [EObject current=null] : iv_ruleNumberLiteralExp= ruleNumberLiteralExp EOF ;
     public final EObject entryRuleNumberLiteralExp() throws RecognitionException {
         EObject current = null;
 
@@ -9840,8 +9837,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3363:2: (iv_ruleNumberLiteralExp= ruleNumberLiteralExp EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3364:2: iv_ruleNumberLiteralExp= ruleNumberLiteralExp EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3360:2: (iv_ruleNumberLiteralExp= ruleNumberLiteralExp EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3361:2: iv_ruleNumberLiteralExp= ruleNumberLiteralExp EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNumberLiteralExpRule()); 
@@ -9872,7 +9869,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleNumberLiteralExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3371:1: ruleNumberLiteralExp returns [EObject current=null] : ( (lv_name_0_0= ruleNUMBER_LITERAL ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3368:1: ruleNumberLiteralExp returns [EObject current=null] : ( (lv_name_0_0= ruleNUMBER_LITERAL ) ) ;
     public final EObject ruleNumberLiteralExp() throws RecognitionException {
         EObject current = null;
 
@@ -9882,14 +9879,14 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3374:28: ( ( (lv_name_0_0= ruleNUMBER_LITERAL ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3375:1: ( (lv_name_0_0= ruleNUMBER_LITERAL ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3371:28: ( ( (lv_name_0_0= ruleNUMBER_LITERAL ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3372:1: ( (lv_name_0_0= ruleNUMBER_LITERAL ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3375:1: ( (lv_name_0_0= ruleNUMBER_LITERAL ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3376:1: (lv_name_0_0= ruleNUMBER_LITERAL )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3372:1: ( (lv_name_0_0= ruleNUMBER_LITERAL ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3373:1: (lv_name_0_0= ruleNUMBER_LITERAL )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3376:1: (lv_name_0_0= ruleNUMBER_LITERAL )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3377:3: lv_name_0_0= ruleNUMBER_LITERAL
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3373:1: (lv_name_0_0= ruleNUMBER_LITERAL )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3374:3: lv_name_0_0= ruleNUMBER_LITERAL
             {
             if ( state.backtracking==0 ) {
                
@@ -9940,7 +9937,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleStringLiteralExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3401:1: entryRuleStringLiteralExp returns [EObject current=null] : iv_ruleStringLiteralExp= ruleStringLiteralExp EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3398:1: entryRuleStringLiteralExp returns [EObject current=null] : iv_ruleStringLiteralExp= ruleStringLiteralExp EOF ;
     public final EObject entryRuleStringLiteralExp() throws RecognitionException {
         EObject current = null;
 
@@ -9948,8 +9945,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3402:2: (iv_ruleStringLiteralExp= ruleStringLiteralExp EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3403:2: iv_ruleStringLiteralExp= ruleStringLiteralExp EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3399:2: (iv_ruleStringLiteralExp= ruleStringLiteralExp EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3400:2: iv_ruleStringLiteralExp= ruleStringLiteralExp EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getStringLiteralExpRule()); 
@@ -9980,7 +9977,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleStringLiteralExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3410:1: ruleStringLiteralExp returns [EObject current=null] : ( (lv_values_0_0= ruleStringLiteral ) )+ ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3407:1: ruleStringLiteralExp returns [EObject current=null] : ( (lv_values_0_0= ruleStringLiteral ) )+ ;
     public final EObject ruleStringLiteralExp() throws RecognitionException {
         EObject current = null;
 
@@ -9990,10 +9987,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3413:28: ( ( (lv_values_0_0= ruleStringLiteral ) )+ )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3414:1: ( (lv_values_0_0= ruleStringLiteral ) )+
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3410:28: ( ( (lv_values_0_0= ruleStringLiteral ) )+ )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3411:1: ( (lv_values_0_0= ruleStringLiteral ) )+
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3414:1: ( (lv_values_0_0= ruleStringLiteral ) )+
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3411:1: ( (lv_values_0_0= ruleStringLiteral ) )+
             int cnt61=0;
             loop61:
             do {
@@ -10007,10 +10004,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                 switch (alt61) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3415:1: (lv_values_0_0= ruleStringLiteral )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3412:1: (lv_values_0_0= ruleStringLiteral )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3415:1: (lv_values_0_0= ruleStringLiteral )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3416:3: lv_values_0_0= ruleStringLiteral
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3412:1: (lv_values_0_0= ruleStringLiteral )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3413:3: lv_values_0_0= ruleStringLiteral
             	    {
             	    if ( state.backtracking==0 ) {
             	       
@@ -10072,7 +10069,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleBooleanLiteralExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3440:1: entryRuleBooleanLiteralExp returns [EObject current=null] : iv_ruleBooleanLiteralExp= ruleBooleanLiteralExp EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3437:1: entryRuleBooleanLiteralExp returns [EObject current=null] : iv_ruleBooleanLiteralExp= ruleBooleanLiteralExp EOF ;
     public final EObject entryRuleBooleanLiteralExp() throws RecognitionException {
         EObject current = null;
 
@@ -10080,8 +10077,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3441:2: (iv_ruleBooleanLiteralExp= ruleBooleanLiteralExp EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3442:2: iv_ruleBooleanLiteralExp= ruleBooleanLiteralExp EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3438:2: (iv_ruleBooleanLiteralExp= ruleBooleanLiteralExp EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3439:2: iv_ruleBooleanLiteralExp= ruleBooleanLiteralExp EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getBooleanLiteralExpRule()); 
@@ -10112,7 +10109,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleBooleanLiteralExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3449:1: ruleBooleanLiteralExp returns [EObject current=null] : ( () ( ( (lv_isTrue_1_0= 'true' ) ) | otherlv_2= 'false' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3446:1: ruleBooleanLiteralExp returns [EObject current=null] : ( () ( ( (lv_isTrue_1_0= 'true' ) ) | otherlv_2= 'false' ) ) ;
     public final EObject ruleBooleanLiteralExp() throws RecognitionException {
         EObject current = null;
 
@@ -10122,14 +10119,14 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3452:28: ( ( () ( ( (lv_isTrue_1_0= 'true' ) ) | otherlv_2= 'false' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3453:1: ( () ( ( (lv_isTrue_1_0= 'true' ) ) | otherlv_2= 'false' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3449:28: ( ( () ( ( (lv_isTrue_1_0= 'true' ) ) | otherlv_2= 'false' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3450:1: ( () ( ( (lv_isTrue_1_0= 'true' ) ) | otherlv_2= 'false' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3453:1: ( () ( ( (lv_isTrue_1_0= 'true' ) ) | otherlv_2= 'false' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3453:2: () ( ( (lv_isTrue_1_0= 'true' ) ) | otherlv_2= 'false' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3450:1: ( () ( ( (lv_isTrue_1_0= 'true' ) ) | otherlv_2= 'false' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3450:2: () ( ( (lv_isTrue_1_0= 'true' ) ) | otherlv_2= 'false' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3453:2: ()
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3454:2: 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3450:2: ()
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3451:2: 
             {
             if ( state.backtracking==0 ) {
                
@@ -10146,7 +10143,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3462:2: ( ( (lv_isTrue_1_0= 'true' ) ) | otherlv_2= 'false' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3459:2: ( ( (lv_isTrue_1_0= 'true' ) ) | otherlv_2= 'false' )
             int alt62=2;
             int LA62_0 = input.LA(1);
 
@@ -10165,13 +10162,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt62) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3462:3: ( (lv_isTrue_1_0= 'true' ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3459:3: ( (lv_isTrue_1_0= 'true' ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3462:3: ( (lv_isTrue_1_0= 'true' ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3463:1: (lv_isTrue_1_0= 'true' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3459:3: ( (lv_isTrue_1_0= 'true' ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3460:1: (lv_isTrue_1_0= 'true' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3463:1: (lv_isTrue_1_0= 'true' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3464:3: lv_isTrue_1_0= 'true'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3460:1: (lv_isTrue_1_0= 'true' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3461:3: lv_isTrue_1_0= 'true'
                     {
                     lv_isTrue_1_0=(Token)match(input,54,FollowSets000.FOLLOW_54_in_ruleBooleanLiteralExp7658); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -10197,7 +10194,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3478:7: otherlv_2= 'false'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3475:7: otherlv_2= 'false'
                     {
                     otherlv_2=(Token)match(input,55,FollowSets000.FOLLOW_55_in_ruleBooleanLiteralExp7689); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -10234,7 +10231,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleInvalidLiteralExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3490:1: entryRuleInvalidLiteralExp returns [EObject current=null] : iv_ruleInvalidLiteralExp= ruleInvalidLiteralExp EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3487:1: entryRuleInvalidLiteralExp returns [EObject current=null] : iv_ruleInvalidLiteralExp= ruleInvalidLiteralExp EOF ;
     public final EObject entryRuleInvalidLiteralExp() throws RecognitionException {
         EObject current = null;
 
@@ -10242,8 +10239,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3491:2: (iv_ruleInvalidLiteralExp= ruleInvalidLiteralExp EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3492:2: iv_ruleInvalidLiteralExp= ruleInvalidLiteralExp EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3488:2: (iv_ruleInvalidLiteralExp= ruleInvalidLiteralExp EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3489:2: iv_ruleInvalidLiteralExp= ruleInvalidLiteralExp EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getInvalidLiteralExpRule()); 
@@ -10274,7 +10271,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleInvalidLiteralExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3499:1: ruleInvalidLiteralExp returns [EObject current=null] : ( () otherlv_1= 'invalid' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3496:1: ruleInvalidLiteralExp returns [EObject current=null] : ( () otherlv_1= 'invalid' ) ;
     public final EObject ruleInvalidLiteralExp() throws RecognitionException {
         EObject current = null;
 
@@ -10283,14 +10280,14 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3502:28: ( ( () otherlv_1= 'invalid' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3503:1: ( () otherlv_1= 'invalid' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3499:28: ( ( () otherlv_1= 'invalid' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3500:1: ( () otherlv_1= 'invalid' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3503:1: ( () otherlv_1= 'invalid' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3503:2: () otherlv_1= 'invalid'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3500:1: ( () otherlv_1= 'invalid' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3500:2: () otherlv_1= 'invalid'
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3503:2: ()
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3504:2: 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3500:2: ()
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3501:2: 
             {
             if ( state.backtracking==0 ) {
                
@@ -10336,7 +10333,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleNullLiteralExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3524:1: entryRuleNullLiteralExp returns [EObject current=null] : iv_ruleNullLiteralExp= ruleNullLiteralExp EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3521:1: entryRuleNullLiteralExp returns [EObject current=null] : iv_ruleNullLiteralExp= ruleNullLiteralExp EOF ;
     public final EObject entryRuleNullLiteralExp() throws RecognitionException {
         EObject current = null;
 
@@ -10344,8 +10341,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3525:2: (iv_ruleNullLiteralExp= ruleNullLiteralExp EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3526:2: iv_ruleNullLiteralExp= ruleNullLiteralExp EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3522:2: (iv_ruleNullLiteralExp= ruleNullLiteralExp EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3523:2: iv_ruleNullLiteralExp= ruleNullLiteralExp EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNullLiteralExpRule()); 
@@ -10376,7 +10373,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleNullLiteralExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3533:1: ruleNullLiteralExp returns [EObject current=null] : ( () otherlv_1= 'null' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3530:1: ruleNullLiteralExp returns [EObject current=null] : ( () otherlv_1= 'null' ) ;
     public final EObject ruleNullLiteralExp() throws RecognitionException {
         EObject current = null;
 
@@ -10385,14 +10382,14 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3536:28: ( ( () otherlv_1= 'null' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3537:1: ( () otherlv_1= 'null' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3533:28: ( ( () otherlv_1= 'null' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3534:1: ( () otherlv_1= 'null' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3537:1: ( () otherlv_1= 'null' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3537:2: () otherlv_1= 'null'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3534:1: ( () otherlv_1= 'null' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3534:2: () otherlv_1= 'null'
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3537:2: ()
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3538:2: 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3534:2: ()
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3535:2: 
             {
             if ( state.backtracking==0 ) {
                
@@ -10438,7 +10435,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleExpression"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3558:1: entryRuleExpression returns [EObject current=null] : iv_ruleExpression= ruleExpression EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3555:1: entryRuleExpression returns [EObject current=null] : iv_ruleExpression= ruleExpression EOF ;
     public final EObject entryRuleExpression() throws RecognitionException {
         EObject current = null;
 
@@ -10446,8 +10443,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3559:2: (iv_ruleExpression= ruleExpression EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3560:2: iv_ruleExpression= ruleExpression EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3556:2: (iv_ruleExpression= ruleExpression EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3557:2: iv_ruleExpression= ruleExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getExpressionRule()); 
@@ -10478,7 +10475,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleExpression"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3567:1: ruleExpression returns [EObject current=null] : (this_implies_0= ruleimplies | this_LetExp_1= ruleLetExp ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3564:1: ruleExpression returns [EObject current=null] : (this_implies_0= ruleimplies | this_LetExp_1= ruleLetExp ) ;
     public final EObject ruleExpression() throws RecognitionException {
         EObject current = null;
 
@@ -10490,10 +10487,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3570:28: ( (this_implies_0= ruleimplies | this_LetExp_1= ruleLetExp ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3571:1: (this_implies_0= ruleimplies | this_LetExp_1= ruleLetExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3567:28: ( (this_implies_0= ruleimplies | this_LetExp_1= ruleLetExp ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3568:1: (this_implies_0= ruleimplies | this_LetExp_1= ruleLetExp )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3571:1: (this_implies_0= ruleimplies | this_LetExp_1= ruleLetExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3568:1: (this_implies_0= ruleimplies | this_LetExp_1= ruleLetExp )
             int alt63=2;
             int LA63_0 = input.LA(1);
 
@@ -10512,7 +10509,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt63) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3572:2: this_implies_0= ruleimplies
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3569:2: this_implies_0= ruleimplies
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -10539,7 +10536,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3585:2: this_LetExp_1= ruleLetExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3582:2: this_LetExp_1= ruleLetExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -10588,7 +10585,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleimplies"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3604:1: entryRuleimplies returns [EObject current=null] : iv_ruleimplies= ruleimplies EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3601:1: entryRuleimplies returns [EObject current=null] : iv_ruleimplies= ruleimplies EOF ;
     public final EObject entryRuleimplies() throws RecognitionException {
         EObject current = null;
 
@@ -10596,8 +10593,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3605:2: (iv_ruleimplies= ruleimplies EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3606:2: iv_ruleimplies= ruleimplies EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3602:2: (iv_ruleimplies= ruleimplies EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3603:2: iv_ruleimplies= ruleimplies EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getImpliesRule()); 
@@ -10628,7 +10625,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleimplies"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3613:1: ruleimplies returns [EObject current=null] : (this_xor_0= rulexor ( () ( (lv_op_2_0= 'implies' ) ) ( ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) ) ) )* ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3610:1: ruleimplies returns [EObject current=null] : (this_xor_0= rulexor ( () ( (lv_op_2_0= 'implies' ) ) ( ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) ) ) )* ) ;
     public final EObject ruleimplies() throws RecognitionException {
         EObject current = null;
 
@@ -10643,11 +10640,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3616:28: ( (this_xor_0= rulexor ( () ( (lv_op_2_0= 'implies' ) ) ( ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) ) ) )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3617:1: (this_xor_0= rulexor ( () ( (lv_op_2_0= 'implies' ) ) ( ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) ) ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3613:28: ( (this_xor_0= rulexor ( () ( (lv_op_2_0= 'implies' ) ) ( ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) ) ) )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3614:1: (this_xor_0= rulexor ( () ( (lv_op_2_0= 'implies' ) ) ( ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) ) ) )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3617:1: (this_xor_0= rulexor ( () ( (lv_op_2_0= 'implies' ) ) ( ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) ) ) )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3618:2: this_xor_0= rulexor ( () ( (lv_op_2_0= 'implies' ) ) ( ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3614:1: (this_xor_0= rulexor ( () ( (lv_op_2_0= 'implies' ) ) ( ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) ) ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3615:2: this_xor_0= rulexor ( () ( (lv_op_2_0= 'implies' ) ) ( ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) ) ) )*
             {
             if ( state.backtracking==0 ) {
                
@@ -10670,7 +10667,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                       afterParserOrEnumRuleCall();
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3629:1: ( () ( (lv_op_2_0= 'implies' ) ) ( ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3626:1: ( () ( (lv_op_2_0= 'implies' ) ) ( ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) ) ) )*
             loop65:
             do {
                 int alt65=2;
@@ -10689,10 +10686,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                 switch (alt65) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3629:2: () ( (lv_op_2_0= 'implies' ) ) ( ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3626:2: () ( (lv_op_2_0= 'implies' ) ) ( ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3629:2: ()
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3630:2: 
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3626:2: ()
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3627:2: 
             	    {
             	    if ( state.backtracking==0 ) {
             	       
@@ -10709,11 +10706,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             	    }
 
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3638:2: ( (lv_op_2_0= 'implies' ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3639:1: (lv_op_2_0= 'implies' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3635:2: ( (lv_op_2_0= 'implies' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3636:1: (lv_op_2_0= 'implies' )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3639:1: (lv_op_2_0= 'implies' )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3640:3: lv_op_2_0= 'implies'
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3636:1: (lv_op_2_0= 'implies' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3637:3: lv_op_2_0= 'implies'
             	    {
             	    lv_op_2_0=(Token)match(input,58,FollowSets000.FOLLOW_58_in_ruleimplies8131); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -10735,13 +10732,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             	    }
 
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3653:2: ( ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3654:1: ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3650:2: ( ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3651:1: ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3654:1: ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3655:1: (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3651:1: ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3652:1: (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3655:1: (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3652:1: (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp )
             	    int alt64=2;
             	    int LA64_0 = input.LA(1);
 
@@ -10760,7 +10757,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	    }
             	    switch (alt64) {
             	        case 1 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3656:3: lv_argument_3_1= rulexor
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3653:3: lv_argument_3_1= rulexor
             	            {
             	            if ( state.backtracking==0 ) {
             	               
@@ -10789,7 +10786,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	            }
             	            break;
             	        case 2 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3671:8: lv_argument_3_2= ruleLetExp
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3668:8: lv_argument_3_2= ruleLetExp
             	            {
             	            if ( state.backtracking==0 ) {
             	               
@@ -10858,7 +10855,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRulexor"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3697:1: entryRulexor returns [EObject current=null] : iv_rulexor= rulexor EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3694:1: entryRulexor returns [EObject current=null] : iv_rulexor= rulexor EOF ;
     public final EObject entryRulexor() throws RecognitionException {
         EObject current = null;
 
@@ -10866,8 +10863,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3698:2: (iv_rulexor= rulexor EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3699:2: iv_rulexor= rulexor EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3695:2: (iv_rulexor= rulexor EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3696:2: iv_rulexor= rulexor EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXorRule()); 
@@ -10898,7 +10895,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "rulexor"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3706:1: rulexor returns [EObject current=null] : (this_or_0= ruleor ( () ( (lv_op_2_0= 'xor' ) ) ( ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) ) ) )* ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3703:1: rulexor returns [EObject current=null] : (this_or_0= ruleor ( () ( (lv_op_2_0= 'xor' ) ) ( ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) ) ) )* ) ;
     public final EObject rulexor() throws RecognitionException {
         EObject current = null;
 
@@ -10913,11 +10910,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3709:28: ( (this_or_0= ruleor ( () ( (lv_op_2_0= 'xor' ) ) ( ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) ) ) )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3710:1: (this_or_0= ruleor ( () ( (lv_op_2_0= 'xor' ) ) ( ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) ) ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3706:28: ( (this_or_0= ruleor ( () ( (lv_op_2_0= 'xor' ) ) ( ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) ) ) )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3707:1: (this_or_0= ruleor ( () ( (lv_op_2_0= 'xor' ) ) ( ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) ) ) )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3710:1: (this_or_0= ruleor ( () ( (lv_op_2_0= 'xor' ) ) ( ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) ) ) )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3711:2: this_or_0= ruleor ( () ( (lv_op_2_0= 'xor' ) ) ( ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3707:1: (this_or_0= ruleor ( () ( (lv_op_2_0= 'xor' ) ) ( ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) ) ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3708:2: this_or_0= ruleor ( () ( (lv_op_2_0= 'xor' ) ) ( ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) ) ) )*
             {
             if ( state.backtracking==0 ) {
                
@@ -10940,7 +10937,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                       afterParserOrEnumRuleCall();
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3722:1: ( () ( (lv_op_2_0= 'xor' ) ) ( ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3719:1: ( () ( (lv_op_2_0= 'xor' ) ) ( ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) ) ) )*
             loop67:
             do {
                 int alt67=2;
@@ -10959,10 +10956,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                 switch (alt67) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3722:2: () ( (lv_op_2_0= 'xor' ) ) ( ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3719:2: () ( (lv_op_2_0= 'xor' ) ) ( ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3722:2: ()
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3723:2: 
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3719:2: ()
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3720:2: 
             	    {
             	    if ( state.backtracking==0 ) {
             	       
@@ -10979,11 +10976,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             	    }
 
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3731:2: ( (lv_op_2_0= 'xor' ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3732:1: (lv_op_2_0= 'xor' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3728:2: ( (lv_op_2_0= 'xor' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3729:1: (lv_op_2_0= 'xor' )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3732:1: (lv_op_2_0= 'xor' )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3733:3: lv_op_2_0= 'xor'
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3729:1: (lv_op_2_0= 'xor' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3730:3: lv_op_2_0= 'xor'
             	    {
             	    lv_op_2_0=(Token)match(input,59,FollowSets000.FOLLOW_59_in_rulexor8317); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -11005,13 +11002,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             	    }
 
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3746:2: ( ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3747:1: ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3743:2: ( ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3744:1: ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3747:1: ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3748:1: (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3744:1: ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3745:1: (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3748:1: (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3745:1: (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp )
             	    int alt66=2;
             	    int LA66_0 = input.LA(1);
 
@@ -11030,7 +11027,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	    }
             	    switch (alt66) {
             	        case 1 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3749:3: lv_argument_3_1= ruleor
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3746:3: lv_argument_3_1= ruleor
             	            {
             	            if ( state.backtracking==0 ) {
             	               
@@ -11059,7 +11056,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	            }
             	            break;
             	        case 2 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3764:8: lv_argument_3_2= ruleLetExp
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3761:8: lv_argument_3_2= ruleLetExp
             	            {
             	            if ( state.backtracking==0 ) {
             	               
@@ -11128,7 +11125,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleor"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3790:1: entryRuleor returns [EObject current=null] : iv_ruleor= ruleor EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3787:1: entryRuleor returns [EObject current=null] : iv_ruleor= ruleor EOF ;
     public final EObject entryRuleor() throws RecognitionException {
         EObject current = null;
 
@@ -11136,8 +11133,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3791:2: (iv_ruleor= ruleor EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3792:2: iv_ruleor= ruleor EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3788:2: (iv_ruleor= ruleor EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3789:2: iv_ruleor= ruleor EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOrRule()); 
@@ -11168,7 +11165,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleor"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3799:1: ruleor returns [EObject current=null] : (this_and_0= ruleand ( () ( (lv_op_2_0= 'or' ) ) ( ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) ) ) )* ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3796:1: ruleor returns [EObject current=null] : (this_and_0= ruleand ( () ( (lv_op_2_0= 'or' ) ) ( ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) ) ) )* ) ;
     public final EObject ruleor() throws RecognitionException {
         EObject current = null;
 
@@ -11183,11 +11180,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3802:28: ( (this_and_0= ruleand ( () ( (lv_op_2_0= 'or' ) ) ( ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) ) ) )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3803:1: (this_and_0= ruleand ( () ( (lv_op_2_0= 'or' ) ) ( ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) ) ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3799:28: ( (this_and_0= ruleand ( () ( (lv_op_2_0= 'or' ) ) ( ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) ) ) )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3800:1: (this_and_0= ruleand ( () ( (lv_op_2_0= 'or' ) ) ( ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) ) ) )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3803:1: (this_and_0= ruleand ( () ( (lv_op_2_0= 'or' ) ) ( ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) ) ) )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3804:2: this_and_0= ruleand ( () ( (lv_op_2_0= 'or' ) ) ( ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3800:1: (this_and_0= ruleand ( () ( (lv_op_2_0= 'or' ) ) ( ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) ) ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3801:2: this_and_0= ruleand ( () ( (lv_op_2_0= 'or' ) ) ( ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) ) ) )*
             {
             if ( state.backtracking==0 ) {
                
@@ -11210,7 +11207,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                       afterParserOrEnumRuleCall();
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3815:1: ( () ( (lv_op_2_0= 'or' ) ) ( ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3812:1: ( () ( (lv_op_2_0= 'or' ) ) ( ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) ) ) )*
             loop69:
             do {
                 int alt69=2;
@@ -11229,10 +11226,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                 switch (alt69) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3815:2: () ( (lv_op_2_0= 'or' ) ) ( ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3812:2: () ( (lv_op_2_0= 'or' ) ) ( ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3815:2: ()
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3816:2: 
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3812:2: ()
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3813:2: 
             	    {
             	    if ( state.backtracking==0 ) {
             	       
@@ -11249,11 +11246,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             	    }
 
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3824:2: ( (lv_op_2_0= 'or' ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3825:1: (lv_op_2_0= 'or' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3821:2: ( (lv_op_2_0= 'or' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3822:1: (lv_op_2_0= 'or' )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3825:1: (lv_op_2_0= 'or' )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3826:3: lv_op_2_0= 'or'
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3822:1: (lv_op_2_0= 'or' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3823:3: lv_op_2_0= 'or'
             	    {
             	    lv_op_2_0=(Token)match(input,60,FollowSets000.FOLLOW_60_in_ruleor8503); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -11275,13 +11272,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             	    }
 
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3839:2: ( ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3840:1: ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3836:2: ( ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3837:1: ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3840:1: ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3841:1: (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3837:1: ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3838:1: (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3841:1: (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3838:1: (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp )
             	    int alt68=2;
             	    int LA68_0 = input.LA(1);
 
@@ -11300,7 +11297,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	    }
             	    switch (alt68) {
             	        case 1 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3842:3: lv_argument_3_1= ruleand
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3839:3: lv_argument_3_1= ruleand
             	            {
             	            if ( state.backtracking==0 ) {
             	               
@@ -11329,7 +11326,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	            }
             	            break;
             	        case 2 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3857:8: lv_argument_3_2= ruleLetExp
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3854:8: lv_argument_3_2= ruleLetExp
             	            {
             	            if ( state.backtracking==0 ) {
             	               
@@ -11398,7 +11395,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleand"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3883:1: entryRuleand returns [EObject current=null] : iv_ruleand= ruleand EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3880:1: entryRuleand returns [EObject current=null] : iv_ruleand= ruleand EOF ;
     public final EObject entryRuleand() throws RecognitionException {
         EObject current = null;
 
@@ -11406,8 +11403,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3884:2: (iv_ruleand= ruleand EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3885:2: iv_ruleand= ruleand EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3881:2: (iv_ruleand= ruleand EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3882:2: iv_ruleand= ruleand EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getAndRule()); 
@@ -11438,7 +11435,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleand"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3892:1: ruleand returns [EObject current=null] : (this_equality_0= ruleequality ( () ( (lv_op_2_0= 'and' ) ) ( ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) ) ) )* ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3889:1: ruleand returns [EObject current=null] : (this_equality_0= ruleequality ( () ( (lv_op_2_0= 'and' ) ) ( ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) ) ) )* ) ;
     public final EObject ruleand() throws RecognitionException {
         EObject current = null;
 
@@ -11453,11 +11450,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3895:28: ( (this_equality_0= ruleequality ( () ( (lv_op_2_0= 'and' ) ) ( ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) ) ) )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3896:1: (this_equality_0= ruleequality ( () ( (lv_op_2_0= 'and' ) ) ( ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) ) ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3892:28: ( (this_equality_0= ruleequality ( () ( (lv_op_2_0= 'and' ) ) ( ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) ) ) )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3893:1: (this_equality_0= ruleequality ( () ( (lv_op_2_0= 'and' ) ) ( ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) ) ) )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3896:1: (this_equality_0= ruleequality ( () ( (lv_op_2_0= 'and' ) ) ( ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) ) ) )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3897:2: this_equality_0= ruleequality ( () ( (lv_op_2_0= 'and' ) ) ( ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3893:1: (this_equality_0= ruleequality ( () ( (lv_op_2_0= 'and' ) ) ( ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) ) ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3894:2: this_equality_0= ruleequality ( () ( (lv_op_2_0= 'and' ) ) ( ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) ) ) )*
             {
             if ( state.backtracking==0 ) {
                
@@ -11480,7 +11477,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                       afterParserOrEnumRuleCall();
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3908:1: ( () ( (lv_op_2_0= 'and' ) ) ( ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3905:1: ( () ( (lv_op_2_0= 'and' ) ) ( ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) ) ) )*
             loop71:
             do {
                 int alt71=2;
@@ -11499,10 +11496,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                 switch (alt71) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3908:2: () ( (lv_op_2_0= 'and' ) ) ( ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3905:2: () ( (lv_op_2_0= 'and' ) ) ( ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3908:2: ()
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3909:2: 
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3905:2: ()
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3906:2: 
             	    {
             	    if ( state.backtracking==0 ) {
             	       
@@ -11519,11 +11516,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             	    }
 
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3917:2: ( (lv_op_2_0= 'and' ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3918:1: (lv_op_2_0= 'and' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3914:2: ( (lv_op_2_0= 'and' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3915:1: (lv_op_2_0= 'and' )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3918:1: (lv_op_2_0= 'and' )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3919:3: lv_op_2_0= 'and'
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3915:1: (lv_op_2_0= 'and' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3916:3: lv_op_2_0= 'and'
             	    {
             	    lv_op_2_0=(Token)match(input,61,FollowSets000.FOLLOW_61_in_ruleand8689); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -11545,13 +11542,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             	    }
 
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3932:2: ( ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3933:1: ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3929:2: ( ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3930:1: ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3933:1: ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3934:1: (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3930:1: ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3931:1: (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3934:1: (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3931:1: (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp )
             	    int alt70=2;
             	    int LA70_0 = input.LA(1);
 
@@ -11570,7 +11567,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	    }
             	    switch (alt70) {
             	        case 1 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3935:3: lv_argument_3_1= ruleequality
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3932:3: lv_argument_3_1= ruleequality
             	            {
             	            if ( state.backtracking==0 ) {
             	               
@@ -11599,7 +11596,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	            }
             	            break;
             	        case 2 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3950:8: lv_argument_3_2= ruleLetExp
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3947:8: lv_argument_3_2= ruleLetExp
             	            {
             	            if ( state.backtracking==0 ) {
             	               
@@ -11668,7 +11665,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleequality"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3976:1: entryRuleequality returns [EObject current=null] : iv_ruleequality= ruleequality EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3973:1: entryRuleequality returns [EObject current=null] : iv_ruleequality= ruleequality EOF ;
     public final EObject entryRuleequality() throws RecognitionException {
         EObject current = null;
 
@@ -11676,8 +11673,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3977:2: (iv_ruleequality= ruleequality EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3978:2: iv_ruleequality= ruleequality EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3974:2: (iv_ruleequality= ruleequality EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3975:2: iv_ruleequality= ruleequality EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getEqualityRule()); 
@@ -11708,7 +11705,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleequality"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3985:1: ruleequality returns [EObject current=null] : (this_relational_0= rulerelational ( () ( ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) ) ) ( ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) ) ) )* ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3982:1: ruleequality returns [EObject current=null] : (this_relational_0= rulerelational ( () ( ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) ) ) ( ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) ) ) )* ) ;
     public final EObject ruleequality() throws RecognitionException {
         EObject current = null;
 
@@ -11724,11 +11721,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3988:28: ( (this_relational_0= rulerelational ( () ( ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) ) ) ( ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) ) ) )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3989:1: (this_relational_0= rulerelational ( () ( ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) ) ) ( ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) ) ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3985:28: ( (this_relational_0= rulerelational ( () ( ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) ) ) ( ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) ) ) )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3986:1: (this_relational_0= rulerelational ( () ( ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) ) ) ( ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) ) ) )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3989:1: (this_relational_0= rulerelational ( () ( ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) ) ) ( ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) ) ) )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3990:2: this_relational_0= rulerelational ( () ( ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) ) ) ( ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3986:1: (this_relational_0= rulerelational ( () ( ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) ) ) ( ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) ) ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3987:2: this_relational_0= rulerelational ( () ( ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) ) ) ( ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) ) ) )*
             {
             if ( state.backtracking==0 ) {
                
@@ -11751,7 +11748,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                       afterParserOrEnumRuleCall();
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4001:1: ( () ( ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) ) ) ( ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3998:1: ( () ( ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) ) ) ( ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) ) ) )*
             loop74:
             do {
                 int alt74=2;
@@ -11779,10 +11776,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                 switch (alt74) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4001:2: () ( ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) ) ) ( ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3998:2: () ( ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) ) ) ( ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4001:2: ()
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4002:2: 
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3998:2: ()
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3999:2: 
             	    {
             	    if ( state.backtracking==0 ) {
             	       
@@ -11799,13 +11796,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             	    }
 
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4010:2: ( ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4011:1: ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4007:2: ( ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4008:1: ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4011:1: ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4012:1: (lv_op_2_1= '=' | lv_op_2_2= '<>' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4008:1: ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4009:1: (lv_op_2_1= '=' | lv_op_2_2= '<>' )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4012:1: (lv_op_2_1= '=' | lv_op_2_2= '<>' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4009:1: (lv_op_2_1= '=' | lv_op_2_2= '<>' )
             	    int alt72=2;
             	    int LA72_0 = input.LA(1);
 
@@ -11824,7 +11821,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	    }
             	    switch (alt72) {
             	        case 1 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4013:3: lv_op_2_1= '='
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4010:3: lv_op_2_1= '='
             	            {
             	            lv_op_2_1=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleequality8877); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -11844,7 +11841,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	            }
             	            break;
             	        case 2 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4025:8: lv_op_2_2= '<>'
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4022:8: lv_op_2_2= '<>'
             	            {
             	            lv_op_2_2=(Token)match(input,62,FollowSets000.FOLLOW_62_in_ruleequality8906); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -11872,13 +11869,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             	    }
 
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4040:2: ( ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4041:1: ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4037:2: ( ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4038:1: ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4041:1: ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4042:1: (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4038:1: ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4039:1: (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4042:1: (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4039:1: (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp )
             	    int alt73=2;
             	    int LA73_0 = input.LA(1);
 
@@ -11897,7 +11894,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	    }
             	    switch (alt73) {
             	        case 1 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4043:3: lv_argument_3_1= rulerelational
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4040:3: lv_argument_3_1= rulerelational
             	            {
             	            if ( state.backtracking==0 ) {
             	               
@@ -11926,7 +11923,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	            }
             	            break;
             	        case 2 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4058:8: lv_argument_3_2= ruleLetExp
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4055:8: lv_argument_3_2= ruleLetExp
             	            {
             	            if ( state.backtracking==0 ) {
             	               
@@ -11995,7 +11992,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRulerelational"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4084:1: entryRulerelational returns [EObject current=null] : iv_rulerelational= rulerelational EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4081:1: entryRulerelational returns [EObject current=null] : iv_rulerelational= rulerelational EOF ;
     public final EObject entryRulerelational() throws RecognitionException {
         EObject current = null;
 
@@ -12003,8 +12000,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4085:2: (iv_rulerelational= rulerelational EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4086:2: iv_rulerelational= rulerelational EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4082:2: (iv_rulerelational= rulerelational EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4083:2: iv_rulerelational= rulerelational EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getRelationalRule()); 
@@ -12035,7 +12032,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "rulerelational"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4093:1: rulerelational returns [EObject current=null] : (this_additive_0= ruleadditive ( () ( ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) ) ) ( ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) ) ) )* ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4090:1: rulerelational returns [EObject current=null] : (this_additive_0= ruleadditive ( () ( ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) ) ) ( ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) ) ) )* ) ;
     public final EObject rulerelational() throws RecognitionException {
         EObject current = null;
 
@@ -12053,11 +12050,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4096:28: ( (this_additive_0= ruleadditive ( () ( ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) ) ) ( ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) ) ) )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4097:1: (this_additive_0= ruleadditive ( () ( ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) ) ) ( ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) ) ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4093:28: ( (this_additive_0= ruleadditive ( () ( ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) ) ) ( ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) ) ) )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4094:1: (this_additive_0= ruleadditive ( () ( ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) ) ) ( ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) ) ) )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4097:1: (this_additive_0= ruleadditive ( () ( ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) ) ) ( ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) ) ) )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4098:2: this_additive_0= ruleadditive ( () ( ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) ) ) ( ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4094:1: (this_additive_0= ruleadditive ( () ( ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) ) ) ( ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) ) ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4095:2: this_additive_0= ruleadditive ( () ( ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) ) ) ( ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) ) ) )*
             {
             if ( state.backtracking==0 ) {
                
@@ -12080,7 +12077,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                       afterParserOrEnumRuleCall();
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4109:1: ( () ( ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) ) ) ( ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4106:1: ( () ( ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) ) ) ( ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) ) ) )*
             loop77:
             do {
                 int alt77=2;
@@ -12134,10 +12131,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                 switch (alt77) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4109:2: () ( ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) ) ) ( ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4106:2: () ( ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) ) ) ( ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4109:2: ()
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4110:2: 
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4106:2: ()
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4107:2: 
             	    {
             	    if ( state.backtracking==0 ) {
             	       
@@ -12154,13 +12151,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             	    }
 
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4118:2: ( ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4119:1: ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4115:2: ( ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4116:1: ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4119:1: ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4120:1: (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4116:1: ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4117:1: (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4120:1: (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4117:1: (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' )
             	    int alt75=4;
             	    switch ( input.LA(1) ) {
             	    case 63:
@@ -12193,7 +12190,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             	    switch (alt75) {
             	        case 1 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4121:3: lv_op_2_1= '>'
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4118:3: lv_op_2_1= '>'
             	            {
             	            lv_op_2_1=(Token)match(input,63,FollowSets000.FOLLOW_63_in_rulerelational9097); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -12213,7 +12210,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	            }
             	            break;
             	        case 2 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4133:8: lv_op_2_2= '<'
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4130:8: lv_op_2_2= '<'
             	            {
             	            lv_op_2_2=(Token)match(input,64,FollowSets000.FOLLOW_64_in_rulerelational9126); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -12233,7 +12230,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	            }
             	            break;
             	        case 3 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4145:8: lv_op_2_3= '>='
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4142:8: lv_op_2_3= '>='
             	            {
             	            lv_op_2_3=(Token)match(input,65,FollowSets000.FOLLOW_65_in_rulerelational9155); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -12253,7 +12250,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	            }
             	            break;
             	        case 4 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4157:8: lv_op_2_4= '<='
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4154:8: lv_op_2_4= '<='
             	            {
             	            lv_op_2_4=(Token)match(input,66,FollowSets000.FOLLOW_66_in_rulerelational9184); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -12281,13 +12278,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             	    }
 
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4172:2: ( ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4173:1: ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4169:2: ( ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4170:1: ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4173:1: ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4174:1: (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4170:1: ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4171:1: (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4174:1: (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4171:1: (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp )
             	    int alt76=2;
             	    int LA76_0 = input.LA(1);
 
@@ -12306,7 +12303,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	    }
             	    switch (alt76) {
             	        case 1 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4175:3: lv_argument_3_1= ruleadditive
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4172:3: lv_argument_3_1= ruleadditive
             	            {
             	            if ( state.backtracking==0 ) {
             	               
@@ -12335,7 +12332,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	            }
             	            break;
             	        case 2 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4190:8: lv_argument_3_2= ruleLetExp
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4187:8: lv_argument_3_2= ruleLetExp
             	            {
             	            if ( state.backtracking==0 ) {
             	               
@@ -12404,7 +12401,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleadditive"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4216:1: entryRuleadditive returns [EObject current=null] : iv_ruleadditive= ruleadditive EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4213:1: entryRuleadditive returns [EObject current=null] : iv_ruleadditive= ruleadditive EOF ;
     public final EObject entryRuleadditive() throws RecognitionException {
         EObject current = null;
 
@@ -12412,8 +12409,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4217:2: (iv_ruleadditive= ruleadditive EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4218:2: iv_ruleadditive= ruleadditive EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4214:2: (iv_ruleadditive= ruleadditive EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4215:2: iv_ruleadditive= ruleadditive EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getAdditiveRule()); 
@@ -12444,7 +12441,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleadditive"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4225:1: ruleadditive returns [EObject current=null] : (this_multiplicative_0= rulemultiplicative ( () ( ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) ) ) ( ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) ) ) )* ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4222:1: ruleadditive returns [EObject current=null] : (this_multiplicative_0= rulemultiplicative ( () ( ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) ) ) ( ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) ) ) )* ) ;
     public final EObject ruleadditive() throws RecognitionException {
         EObject current = null;
 
@@ -12460,11 +12457,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4228:28: ( (this_multiplicative_0= rulemultiplicative ( () ( ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) ) ) ( ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) ) ) )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4229:1: (this_multiplicative_0= rulemultiplicative ( () ( ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) ) ) ( ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) ) ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4225:28: ( (this_multiplicative_0= rulemultiplicative ( () ( ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) ) ) ( ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) ) ) )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4226:1: (this_multiplicative_0= rulemultiplicative ( () ( ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) ) ) ( ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) ) ) )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4229:1: (this_multiplicative_0= rulemultiplicative ( () ( ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) ) ) ( ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) ) ) )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4230:2: this_multiplicative_0= rulemultiplicative ( () ( ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) ) ) ( ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4226:1: (this_multiplicative_0= rulemultiplicative ( () ( ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) ) ) ( ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) ) ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4227:2: this_multiplicative_0= rulemultiplicative ( () ( ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) ) ) ( ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) ) ) )*
             {
             if ( state.backtracking==0 ) {
                
@@ -12487,7 +12484,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                       afterParserOrEnumRuleCall();
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4241:1: ( () ( ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) ) ) ( ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4238:1: ( () ( ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) ) ) ( ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) ) ) )*
             loop80:
             do {
                 int alt80=2;
@@ -12515,10 +12512,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                 switch (alt80) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4241:2: () ( ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) ) ) ( ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4238:2: () ( ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) ) ) ( ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4241:2: ()
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4242:2: 
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4238:2: ()
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4239:2: 
             	    {
             	    if ( state.backtracking==0 ) {
             	       
@@ -12535,13 +12532,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             	    }
 
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4250:2: ( ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4251:1: ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4247:2: ( ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4248:1: ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4251:1: ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4252:1: (lv_op_2_1= '+' | lv_op_2_2= '-' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4248:1: ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4249:1: (lv_op_2_1= '+' | lv_op_2_2= '-' )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4252:1: (lv_op_2_1= '+' | lv_op_2_2= '-' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4249:1: (lv_op_2_1= '+' | lv_op_2_2= '-' )
             	    int alt78=2;
             	    int LA78_0 = input.LA(1);
 
@@ -12560,7 +12557,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	    }
             	    switch (alt78) {
             	        case 1 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4253:3: lv_op_2_1= '+'
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4250:3: lv_op_2_1= '+'
             	            {
             	            lv_op_2_1=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleadditive9375); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -12580,7 +12577,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	            }
             	            break;
             	        case 2 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4265:8: lv_op_2_2= '-'
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4262:8: lv_op_2_2= '-'
             	            {
             	            lv_op_2_2=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleadditive9404); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -12608,13 +12605,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             	    }
 
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4280:2: ( ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4281:1: ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4277:2: ( ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4278:1: ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4281:1: ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4282:1: (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4278:1: ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4279:1: (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4282:1: (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4279:1: (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp )
             	    int alt79=2;
             	    int LA79_0 = input.LA(1);
 
@@ -12633,7 +12630,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	    }
             	    switch (alt79) {
             	        case 1 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4283:3: lv_argument_3_1= rulemultiplicative
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4280:3: lv_argument_3_1= rulemultiplicative
             	            {
             	            if ( state.backtracking==0 ) {
             	               
@@ -12662,7 +12659,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	            }
             	            break;
             	        case 2 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4298:8: lv_argument_3_2= ruleLetExp
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4295:8: lv_argument_3_2= ruleLetExp
             	            {
             	            if ( state.backtracking==0 ) {
             	               
@@ -12731,7 +12728,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRulemultiplicative"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4324:1: entryRulemultiplicative returns [EObject current=null] : iv_rulemultiplicative= rulemultiplicative EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4321:1: entryRulemultiplicative returns [EObject current=null] : iv_rulemultiplicative= rulemultiplicative EOF ;
     public final EObject entryRulemultiplicative() throws RecognitionException {
         EObject current = null;
 
@@ -12739,8 +12736,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4325:2: (iv_rulemultiplicative= rulemultiplicative EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4326:2: iv_rulemultiplicative= rulemultiplicative EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4322:2: (iv_rulemultiplicative= rulemultiplicative EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4323:2: iv_rulemultiplicative= rulemultiplicative EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getMultiplicativeRule()); 
@@ -12771,7 +12768,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "rulemultiplicative"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4333:1: rulemultiplicative returns [EObject current=null] : (this_unary_0= ruleunary ( () ( ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) ) ) ( ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) ) ) )* ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4330:1: rulemultiplicative returns [EObject current=null] : (this_unary_0= ruleunary ( () ( ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) ) ) ( ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) ) ) )* ) ;
     public final EObject rulemultiplicative() throws RecognitionException {
         EObject current = null;
 
@@ -12787,11 +12784,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4336:28: ( (this_unary_0= ruleunary ( () ( ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) ) ) ( ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) ) ) )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4337:1: (this_unary_0= ruleunary ( () ( ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) ) ) ( ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) ) ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4333:28: ( (this_unary_0= ruleunary ( () ( ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) ) ) ( ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) ) ) )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4334:1: (this_unary_0= ruleunary ( () ( ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) ) ) ( ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) ) ) )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4337:1: (this_unary_0= ruleunary ( () ( ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) ) ) ( ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) ) ) )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4338:2: this_unary_0= ruleunary ( () ( ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) ) ) ( ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4334:1: (this_unary_0= ruleunary ( () ( ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) ) ) ( ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) ) ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4335:2: this_unary_0= ruleunary ( () ( ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) ) ) ( ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) ) ) )*
             {
             if ( state.backtracking==0 ) {
                
@@ -12814,7 +12811,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                       afterParserOrEnumRuleCall();
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4349:1: ( () ( ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) ) ) ( ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4346:1: ( () ( ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) ) ) ( ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) ) ) )*
             loop83:
             do {
                 int alt83=2;
@@ -12842,10 +12839,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                 switch (alt83) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4349:2: () ( ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) ) ) ( ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4346:2: () ( ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) ) ) ( ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4349:2: ()
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4350:2: 
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4346:2: ()
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4347:2: 
             	    {
             	    if ( state.backtracking==0 ) {
             	       
@@ -12862,13 +12859,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             	    }
 
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4358:2: ( ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4359:1: ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4355:2: ( ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4356:1: ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4359:1: ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4360:1: (lv_op_2_1= '*' | lv_op_2_2= '/' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4356:1: ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4357:1: (lv_op_2_1= '*' | lv_op_2_2= '/' )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4360:1: (lv_op_2_1= '*' | lv_op_2_2= '/' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4357:1: (lv_op_2_1= '*' | lv_op_2_2= '/' )
             	    int alt81=2;
             	    int LA81_0 = input.LA(1);
 
@@ -12887,7 +12884,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	    }
             	    switch (alt81) {
             	        case 1 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4361:3: lv_op_2_1= '*'
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4358:3: lv_op_2_1= '*'
             	            {
             	            lv_op_2_1=(Token)match(input,67,FollowSets000.FOLLOW_67_in_rulemultiplicative9595); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -12907,7 +12904,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	            }
             	            break;
             	        case 2 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4373:8: lv_op_2_2= '/'
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4370:8: lv_op_2_2= '/'
             	            {
             	            lv_op_2_2=(Token)match(input,68,FollowSets000.FOLLOW_68_in_rulemultiplicative9624); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -12935,13 +12932,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             	    }
 
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4388:2: ( ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4389:1: ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4385:2: ( ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4386:1: ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4389:1: ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4390:1: (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4386:1: ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4387:1: (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4390:1: (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4387:1: (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp )
             	    int alt82=2;
             	    int LA82_0 = input.LA(1);
 
@@ -12960,7 +12957,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	    }
             	    switch (alt82) {
             	        case 1 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4391:3: lv_argument_3_1= ruleunary
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4388:3: lv_argument_3_1= ruleunary
             	            {
             	            if ( state.backtracking==0 ) {
             	               
@@ -12989,7 +12986,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	            }
             	            break;
             	        case 2 :
-            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4406:8: lv_argument_3_2= ruleLetExp
+            	            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4403:8: lv_argument_3_2= ruleLetExp
             	            {
             	            if ( state.backtracking==0 ) {
             	               
@@ -13058,7 +13055,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleunary"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4432:1: entryRuleunary returns [EObject current=null] : iv_ruleunary= ruleunary EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4429:1: entryRuleunary returns [EObject current=null] : iv_ruleunary= ruleunary EOF ;
     public final EObject entryRuleunary() throws RecognitionException {
         EObject current = null;
 
@@ -13066,8 +13063,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4433:2: (iv_ruleunary= ruleunary EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4434:2: iv_ruleunary= ruleunary EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4430:2: (iv_ruleunary= ruleunary EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4431:2: iv_ruleunary= ruleunary EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getUnaryRule()); 
@@ -13098,7 +13095,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleunary"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4441:1: ruleunary returns [EObject current=null] : (this_NavigationExp_0= ruleNavigationExp | ( () ( ( (lv_op_2_1= '-' | lv_op_2_2= 'not' ) ) ) ( (lv_source_3_0= ruleunary ) ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4438:1: ruleunary returns [EObject current=null] : (this_NavigationExp_0= ruleNavigationExp | ( () ( ( (lv_op_2_1= '-' | lv_op_2_2= 'not' ) ) ) ( (lv_source_3_0= ruleunary ) ) ) ) ;
     public final EObject ruleunary() throws RecognitionException {
         EObject current = null;
 
@@ -13112,10 +13109,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4444:28: ( (this_NavigationExp_0= ruleNavigationExp | ( () ( ( (lv_op_2_1= '-' | lv_op_2_2= 'not' ) ) ) ( (lv_source_3_0= ruleunary ) ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4445:1: (this_NavigationExp_0= ruleNavigationExp | ( () ( ( (lv_op_2_1= '-' | lv_op_2_2= 'not' ) ) ) ( (lv_source_3_0= ruleunary ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4441:28: ( (this_NavigationExp_0= ruleNavigationExp | ( () ( ( (lv_op_2_1= '-' | lv_op_2_2= 'not' ) ) ) ( (lv_source_3_0= ruleunary ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4442:1: (this_NavigationExp_0= ruleNavigationExp | ( () ( ( (lv_op_2_1= '-' | lv_op_2_2= 'not' ) ) ) ( (lv_source_3_0= ruleunary ) ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4445:1: (this_NavigationExp_0= ruleNavigationExp | ( () ( ( (lv_op_2_1= '-' | lv_op_2_2= 'not' ) ) ) ( (lv_source_3_0= ruleunary ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4442:1: (this_NavigationExp_0= ruleNavigationExp | ( () ( ( (lv_op_2_1= '-' | lv_op_2_2= 'not' ) ) ) ( (lv_source_3_0= ruleunary ) ) ) )
             int alt85=2;
             int LA85_0 = input.LA(1);
 
@@ -13134,7 +13131,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt85) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4446:2: this_NavigationExp_0= ruleNavigationExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4443:2: this_NavigationExp_0= ruleNavigationExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -13161,13 +13158,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4458:6: ( () ( ( (lv_op_2_1= '-' | lv_op_2_2= 'not' ) ) ) ( (lv_source_3_0= ruleunary ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4455:6: ( () ( ( (lv_op_2_1= '-' | lv_op_2_2= 'not' ) ) ) ( (lv_source_3_0= ruleunary ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4458:6: ( () ( ( (lv_op_2_1= '-' | lv_op_2_2= 'not' ) ) ) ( (lv_source_3_0= ruleunary ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4458:7: () ( ( (lv_op_2_1= '-' | lv_op_2_2= 'not' ) ) ) ( (lv_source_3_0= ruleunary ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4455:6: ( () ( ( (lv_op_2_1= '-' | lv_op_2_2= 'not' ) ) ) ( (lv_source_3_0= ruleunary ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4455:7: () ( ( (lv_op_2_1= '-' | lv_op_2_2= 'not' ) ) ) ( (lv_source_3_0= ruleunary ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4458:7: ()
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4459:2: 
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4455:7: ()
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4456:2: 
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -13184,13 +13181,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4467:2: ( ( (lv_op_2_1= '-' | lv_op_2_2= 'not' ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4468:1: ( (lv_op_2_1= '-' | lv_op_2_2= 'not' ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4464:2: ( ( (lv_op_2_1= '-' | lv_op_2_2= 'not' ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4465:1: ( (lv_op_2_1= '-' | lv_op_2_2= 'not' ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4468:1: ( (lv_op_2_1= '-' | lv_op_2_2= 'not' ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4469:1: (lv_op_2_1= '-' | lv_op_2_2= 'not' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4465:1: ( (lv_op_2_1= '-' | lv_op_2_2= 'not' ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4466:1: (lv_op_2_1= '-' | lv_op_2_2= 'not' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4469:1: (lv_op_2_1= '-' | lv_op_2_2= 'not' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4466:1: (lv_op_2_1= '-' | lv_op_2_2= 'not' )
                     int alt84=2;
                     int LA84_0 = input.LA(1);
 
@@ -13209,7 +13206,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     switch (alt84) {
                         case 1 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4470:3: lv_op_2_1= '-'
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4467:3: lv_op_2_1= '-'
                             {
                             lv_op_2_1=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleunary9821); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -13229,7 +13226,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4482:8: lv_op_2_2= 'not'
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4479:8: lv_op_2_2= 'not'
                             {
                             lv_op_2_2=(Token)match(input,69,FollowSets000.FOLLOW_69_in_ruleunary9850); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -13257,11 +13254,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4497:2: ( (lv_source_3_0= ruleunary ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4498:1: (lv_source_3_0= ruleunary )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4494:2: ( (lv_source_3_0= ruleunary ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4495:1: (lv_source_3_0= ruleunary )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4498:1: (lv_source_3_0= ruleunary )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4499:3: lv_source_3_0= ruleunary
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4495:1: (lv_source_3_0= ruleunary )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4496:3: lv_source_3_0= ruleunary
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -13321,7 +13318,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleSubNavigationExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4523:1: entryRuleSubNavigationExp returns [EObject current=null] : iv_ruleSubNavigationExp= ruleSubNavigationExp EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4520:1: entryRuleSubNavigationExp returns [EObject current=null] : iv_ruleSubNavigationExp= ruleSubNavigationExp EOF ;
     public final EObject entryRuleSubNavigationExp() throws RecognitionException {
         EObject current = null;
 
@@ -13329,8 +13326,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4524:2: (iv_ruleSubNavigationExp= ruleSubNavigationExp EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4525:2: iv_ruleSubNavigationExp= ruleSubNavigationExp EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4521:2: (iv_ruleSubNavigationExp= ruleSubNavigationExp EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4522:2: iv_ruleSubNavigationExp= ruleSubNavigationExp EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getSubNavigationExpRule()); 
@@ -13361,7 +13358,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleSubNavigationExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4532:1: ruleSubNavigationExp returns [EObject current=null] : (this_RoundBracketExp_0= ruleRoundBracketExp | this_SquareBracketExp_1= ruleSquareBracketExp | this_SelfExp_2= ruleSelfExp | this_PrimitiveLiteralExp_3= rulePrimitiveLiteralExp | this_TupleLiteralExp_4= ruleTupleLiteralExp | this_CollectionLiteralExp_5= ruleCollectionLiteralExp | this_PreExp_6= rulePreExp | this_TypeExp_7= ruleTypeExp | this_IfExp_8= ruleIfExp | (otherlv_9= '(' () ( (lv_source_11_0= ruleExpression ) ) otherlv_12= ')' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4529:1: ruleSubNavigationExp returns [EObject current=null] : (this_RoundBracketExp_0= ruleRoundBracketExp | this_SquareBracketExp_1= ruleSquareBracketExp | this_SelfExp_2= ruleSelfExp | this_PrimitiveLiteralExp_3= rulePrimitiveLiteralExp | this_TupleLiteralExp_4= ruleTupleLiteralExp | this_CollectionLiteralExp_5= ruleCollectionLiteralExp | this_PreExp_6= rulePreExp | this_TypeExp_7= ruleTypeExp | this_IfExp_8= ruleIfExp | (otherlv_9= '(' () ( (lv_source_11_0= ruleExpression ) ) otherlv_12= ')' ) ) ;
     public final EObject ruleSubNavigationExp() throws RecognitionException {
         EObject current = null;
 
@@ -13391,15 +13388,15 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4535:28: ( (this_RoundBracketExp_0= ruleRoundBracketExp | this_SquareBracketExp_1= ruleSquareBracketExp | this_SelfExp_2= ruleSelfExp | this_PrimitiveLiteralExp_3= rulePrimitiveLiteralExp | this_TupleLiteralExp_4= ruleTupleLiteralExp | this_CollectionLiteralExp_5= ruleCollectionLiteralExp | this_PreExp_6= rulePreExp | this_TypeExp_7= ruleTypeExp | this_IfExp_8= ruleIfExp | (otherlv_9= '(' () ( (lv_source_11_0= ruleExpression ) ) otherlv_12= ')' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4536:1: (this_RoundBracketExp_0= ruleRoundBracketExp | this_SquareBracketExp_1= ruleSquareBracketExp | this_SelfExp_2= ruleSelfExp | this_PrimitiveLiteralExp_3= rulePrimitiveLiteralExp | this_TupleLiteralExp_4= ruleTupleLiteralExp | this_CollectionLiteralExp_5= ruleCollectionLiteralExp | this_PreExp_6= rulePreExp | this_TypeExp_7= ruleTypeExp | this_IfExp_8= ruleIfExp | (otherlv_9= '(' () ( (lv_source_11_0= ruleExpression ) ) otherlv_12= ')' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4532:28: ( (this_RoundBracketExp_0= ruleRoundBracketExp | this_SquareBracketExp_1= ruleSquareBracketExp | this_SelfExp_2= ruleSelfExp | this_PrimitiveLiteralExp_3= rulePrimitiveLiteralExp | this_TupleLiteralExp_4= ruleTupleLiteralExp | this_CollectionLiteralExp_5= ruleCollectionLiteralExp | this_PreExp_6= rulePreExp | this_TypeExp_7= ruleTypeExp | this_IfExp_8= ruleIfExp | (otherlv_9= '(' () ( (lv_source_11_0= ruleExpression ) ) otherlv_12= ')' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4533:1: (this_RoundBracketExp_0= ruleRoundBracketExp | this_SquareBracketExp_1= ruleSquareBracketExp | this_SelfExp_2= ruleSelfExp | this_PrimitiveLiteralExp_3= rulePrimitiveLiteralExp | this_TupleLiteralExp_4= ruleTupleLiteralExp | this_CollectionLiteralExp_5= ruleCollectionLiteralExp | this_PreExp_6= rulePreExp | this_TypeExp_7= ruleTypeExp | this_IfExp_8= ruleIfExp | (otherlv_9= '(' () ( (lv_source_11_0= ruleExpression ) ) otherlv_12= ')' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4536:1: (this_RoundBracketExp_0= ruleRoundBracketExp | this_SquareBracketExp_1= ruleSquareBracketExp | this_SelfExp_2= ruleSelfExp | this_PrimitiveLiteralExp_3= rulePrimitiveLiteralExp | this_TupleLiteralExp_4= ruleTupleLiteralExp | this_CollectionLiteralExp_5= ruleCollectionLiteralExp | this_PreExp_6= rulePreExp | this_TypeExp_7= ruleTypeExp | this_IfExp_8= ruleIfExp | (otherlv_9= '(' () ( (lv_source_11_0= ruleExpression ) ) otherlv_12= ')' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4533:1: (this_RoundBracketExp_0= ruleRoundBracketExp | this_SquareBracketExp_1= ruleSquareBracketExp | this_SelfExp_2= ruleSelfExp | this_PrimitiveLiteralExp_3= rulePrimitiveLiteralExp | this_TupleLiteralExp_4= ruleTupleLiteralExp | this_CollectionLiteralExp_5= ruleCollectionLiteralExp | this_PreExp_6= rulePreExp | this_TypeExp_7= ruleTypeExp | this_IfExp_8= ruleIfExp | (otherlv_9= '(' () ( (lv_source_11_0= ruleExpression ) ) otherlv_12= ')' ) )
             int alt86=10;
             alt86 = dfa86.predict(input);
             switch (alt86) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4537:2: this_RoundBracketExp_0= ruleRoundBracketExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4534:2: this_RoundBracketExp_0= ruleRoundBracketExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -13426,7 +13423,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4550:2: this_SquareBracketExp_1= ruleSquareBracketExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4547:2: this_SquareBracketExp_1= ruleSquareBracketExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -13453,7 +13450,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4563:2: this_SelfExp_2= ruleSelfExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4560:2: this_SelfExp_2= ruleSelfExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -13480,7 +13477,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4576:2: this_PrimitiveLiteralExp_3= rulePrimitiveLiteralExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4573:2: this_PrimitiveLiteralExp_3= rulePrimitiveLiteralExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -13507,7 +13504,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 5 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4589:2: this_TupleLiteralExp_4= ruleTupleLiteralExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4586:2: this_TupleLiteralExp_4= ruleTupleLiteralExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -13534,7 +13531,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 6 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4602:2: this_CollectionLiteralExp_5= ruleCollectionLiteralExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4599:2: this_CollectionLiteralExp_5= ruleCollectionLiteralExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -13561,7 +13558,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 7 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4615:2: this_PreExp_6= rulePreExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4612:2: this_PreExp_6= rulePreExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -13588,7 +13585,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 8 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4628:2: this_TypeExp_7= ruleTypeExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4625:2: this_TypeExp_7= ruleTypeExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -13615,7 +13612,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 9 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4641:2: this_IfExp_8= ruleIfExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4638:2: this_IfExp_8= ruleIfExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -13642,10 +13639,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 10 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4653:6: (otherlv_9= '(' () ( (lv_source_11_0= ruleExpression ) ) otherlv_12= ')' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4650:6: (otherlv_9= '(' () ( (lv_source_11_0= ruleExpression ) ) otherlv_12= ')' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4653:6: (otherlv_9= '(' () ( (lv_source_11_0= ruleExpression ) ) otherlv_12= ')' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4653:8: otherlv_9= '(' () ( (lv_source_11_0= ruleExpression ) ) otherlv_12= ')'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4650:6: (otherlv_9= '(' () ( (lv_source_11_0= ruleExpression ) ) otherlv_12= ')' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4650:8: otherlv_9= '(' () ( (lv_source_11_0= ruleExpression ) ) otherlv_12= ')'
                     {
                     otherlv_9=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleSubNavigationExp10242); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -13653,8 +13650,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                           	newLeafNode(otherlv_9, grammarAccess.getSubNavigationExpAccess().getLeftParenthesisKeyword_9_0());
                           
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4657:1: ()
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4658:2: 
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4654:1: ()
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4655:2: 
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -13671,11 +13668,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4666:2: ( (lv_source_11_0= ruleExpression ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4667:1: (lv_source_11_0= ruleExpression )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4663:2: ( (lv_source_11_0= ruleExpression ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4664:1: (lv_source_11_0= ruleExpression )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4667:1: (lv_source_11_0= ruleExpression )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4668:3: lv_source_11_0= ruleExpression
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4664:1: (lv_source_11_0= ruleExpression )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4665:3: lv_source_11_0= ruleExpression
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -13741,7 +13738,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleSubNavigatingExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4696:1: entryRuleSubNavigatingExp returns [EObject current=null] : iv_ruleSubNavigatingExp= ruleSubNavigatingExp EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4693:1: entryRuleSubNavigatingExp returns [EObject current=null] : iv_ruleSubNavigatingExp= ruleSubNavigatingExp EOF ;
     public final EObject entryRuleSubNavigatingExp() throws RecognitionException {
         EObject current = null;
 
@@ -13749,8 +13746,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4697:2: (iv_ruleSubNavigatingExp= ruleSubNavigatingExp EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4698:2: iv_ruleSubNavigatingExp= ruleSubNavigatingExp EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4694:2: (iv_ruleSubNavigatingExp= ruleSubNavigatingExp EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4695:2: iv_ruleSubNavigatingExp= ruleSubNavigatingExp EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getSubNavigatingExpRule()); 
@@ -13781,7 +13778,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleSubNavigatingExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4705:1: ruleSubNavigatingExp returns [EObject current=null] : (this_RoundBracketExp_0= ruleRoundBracketExp | this_SquareBracketExp_1= ruleSquareBracketExp | this_PreExp_2= rulePreExp | this_NameExp_3= ruleNameExp ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4702:1: ruleSubNavigatingExp returns [EObject current=null] : (this_RoundBracketExp_0= ruleRoundBracketExp | this_SquareBracketExp_1= ruleSquareBracketExp | this_PreExp_2= rulePreExp | this_NameExp_3= ruleNameExp ) ;
     public final EObject ruleSubNavigatingExp() throws RecognitionException {
         EObject current = null;
 
@@ -13797,10 +13794,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4708:28: ( (this_RoundBracketExp_0= ruleRoundBracketExp | this_SquareBracketExp_1= ruleSquareBracketExp | this_PreExp_2= rulePreExp | this_NameExp_3= ruleNameExp ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4709:1: (this_RoundBracketExp_0= ruleRoundBracketExp | this_SquareBracketExp_1= ruleSquareBracketExp | this_PreExp_2= rulePreExp | this_NameExp_3= ruleNameExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4705:28: ( (this_RoundBracketExp_0= ruleRoundBracketExp | this_SquareBracketExp_1= ruleSquareBracketExp | this_PreExp_2= rulePreExp | this_NameExp_3= ruleNameExp ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4706:1: (this_RoundBracketExp_0= ruleRoundBracketExp | this_SquareBracketExp_1= ruleSquareBracketExp | this_PreExp_2= rulePreExp | this_NameExp_3= ruleNameExp )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4709:1: (this_RoundBracketExp_0= ruleRoundBracketExp | this_SquareBracketExp_1= ruleSquareBracketExp | this_PreExp_2= rulePreExp | this_NameExp_3= ruleNameExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4706:1: (this_RoundBracketExp_0= ruleRoundBracketExp | this_SquareBracketExp_1= ruleSquareBracketExp | this_PreExp_2= rulePreExp | this_NameExp_3= ruleNameExp )
             int alt87=4;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -13888,7 +13885,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             switch (alt87) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4710:2: this_RoundBracketExp_0= ruleRoundBracketExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4707:2: this_RoundBracketExp_0= ruleRoundBracketExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -13915,7 +13912,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4723:2: this_SquareBracketExp_1= ruleSquareBracketExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4720:2: this_SquareBracketExp_1= ruleSquareBracketExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -13942,7 +13939,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4736:2: this_PreExp_2= rulePreExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4733:2: this_PreExp_2= rulePreExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -13969,7 +13966,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4749:2: this_NameExp_3= ruleNameExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4746:2: this_NameExp_3= ruleNameExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -14018,7 +14015,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleiteratorVariable"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4768:1: entryRuleiteratorVariable returns [EObject current=null] : iv_ruleiteratorVariable= ruleiteratorVariable EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4765:1: entryRuleiteratorVariable returns [EObject current=null] : iv_ruleiteratorVariable= ruleiteratorVariable EOF ;
     public final EObject entryRuleiteratorVariable() throws RecognitionException {
         EObject current = null;
 
@@ -14026,8 +14023,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4769:2: (iv_ruleiteratorVariable= ruleiteratorVariable EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4770:2: iv_ruleiteratorVariable= ruleiteratorVariable EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4766:2: (iv_ruleiteratorVariable= ruleiteratorVariable EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4767:2: iv_ruleiteratorVariable= ruleiteratorVariable EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getIteratorVariableRule()); 
@@ -14058,7 +14055,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleiteratorVariable"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4777:1: ruleiteratorVariable returns [EObject current=null] : ( ( (lv_name_0_0= ruleIdentifier ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )? ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4774:1: ruleiteratorVariable returns [EObject current=null] : ( ( (lv_name_0_0= ruleIdentifier ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )? ) ;
     public final EObject ruleiteratorVariable() throws RecognitionException {
         EObject current = null;
 
@@ -14071,17 +14068,17 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4780:28: ( ( ( (lv_name_0_0= ruleIdentifier ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )? ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4781:1: ( ( (lv_name_0_0= ruleIdentifier ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4777:28: ( ( ( (lv_name_0_0= ruleIdentifier ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )? ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4778:1: ( ( (lv_name_0_0= ruleIdentifier ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )? )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4781:1: ( ( (lv_name_0_0= ruleIdentifier ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4781:2: ( (lv_name_0_0= ruleIdentifier ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4778:1: ( ( (lv_name_0_0= ruleIdentifier ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4778:2: ( (lv_name_0_0= ruleIdentifier ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )?
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4781:2: ( (lv_name_0_0= ruleIdentifier ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4782:1: (lv_name_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4778:2: ( (lv_name_0_0= ruleIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4779:1: (lv_name_0_0= ruleIdentifier )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4782:1: (lv_name_0_0= ruleIdentifier )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4783:3: lv_name_0_0= ruleIdentifier
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4779:1: (lv_name_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4780:3: lv_name_0_0= ruleIdentifier
             {
             if ( state.backtracking==0 ) {
                
@@ -14112,7 +14109,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4799:2: (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4796:2: (otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) )?
             int alt88=2;
             int LA88_0 = input.LA(1);
 
@@ -14121,7 +14118,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt88) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4799:4: otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4796:4: otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) )
                     {
                     otherlv_1=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleiteratorVariable10578); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -14129,11 +14126,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                           	newLeafNode(otherlv_1, grammarAccess.getIteratorVariableAccess().getColonKeyword_1_0());
                           
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4803:1: ( (lv_type_2_0= ruleTypeExp ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4804:1: (lv_type_2_0= ruleTypeExp )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4800:1: ( (lv_type_2_0= ruleTypeExp ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4801:1: (lv_type_2_0= ruleTypeExp )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4804:1: (lv_type_2_0= ruleTypeExp )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4805:3: lv_type_2_0= ruleTypeExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4801:1: (lv_type_2_0= ruleTypeExp )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4802:3: lv_type_2_0= ruleTypeExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -14193,7 +14190,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleiteratorAccumulator"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4829:1: entryRuleiteratorAccumulator returns [EObject current=null] : iv_ruleiteratorAccumulator= ruleiteratorAccumulator EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4826:1: entryRuleiteratorAccumulator returns [EObject current=null] : iv_ruleiteratorAccumulator= ruleiteratorAccumulator EOF ;
     public final EObject entryRuleiteratorAccumulator() throws RecognitionException {
         EObject current = null;
 
@@ -14201,8 +14198,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4830:2: (iv_ruleiteratorAccumulator= ruleiteratorAccumulator EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4831:2: iv_ruleiteratorAccumulator= ruleiteratorAccumulator EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4827:2: (iv_ruleiteratorAccumulator= ruleiteratorAccumulator EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4828:2: iv_ruleiteratorAccumulator= ruleiteratorAccumulator EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getIteratorAccumulatorRule()); 
@@ -14233,7 +14230,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleiteratorAccumulator"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4838:1: ruleiteratorAccumulator returns [EObject current=null] : ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4835:1: ruleiteratorAccumulator returns [EObject current=null] : ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) ) ;
     public final EObject ruleiteratorAccumulator() throws RecognitionException {
         EObject current = null;
 
@@ -14249,17 +14246,17 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4841:28: ( ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4842:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4838:28: ( ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4839:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4842:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4842:2: ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4839:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4839:2: ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4842:2: ( (lv_name_0_0= ruleIdentifier ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4843:1: (lv_name_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4839:2: ( (lv_name_0_0= ruleIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4840:1: (lv_name_0_0= ruleIdentifier )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4843:1: (lv_name_0_0= ruleIdentifier )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4844:3: lv_name_0_0= ruleIdentifier
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4840:1: (lv_name_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4841:3: lv_name_0_0= ruleIdentifier
             {
             if ( state.backtracking==0 ) {
                
@@ -14296,11 +14293,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_1, grammarAccess.getIteratorAccumulatorAccess().getColonKeyword_1());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4864:1: ( (lv_type_2_0= ruleTypeExp ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4865:1: (lv_type_2_0= ruleTypeExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4861:1: ( (lv_type_2_0= ruleTypeExp ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4862:1: (lv_type_2_0= ruleTypeExp )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4865:1: (lv_type_2_0= ruleTypeExp )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4866:3: lv_type_2_0= ruleTypeExp
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4862:1: (lv_type_2_0= ruleTypeExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4863:3: lv_type_2_0= ruleTypeExp
             {
             if ( state.backtracking==0 ) {
                
@@ -14337,11 +14334,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_3, grammarAccess.getIteratorAccumulatorAccess().getEqualsSignKeyword_3());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4886:1: ( (lv_initExpression_4_0= ruleExpression ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4887:1: (lv_initExpression_4_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4883:1: ( (lv_initExpression_4_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4884:1: (lv_initExpression_4_0= ruleExpression )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4887:1: (lv_initExpression_4_0= ruleExpression )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4888:3: lv_initExpression_4_0= ruleExpression
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4884:1: (lv_initExpression_4_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4885:3: lv_initExpression_4_0= ruleExpression
             {
             if ( state.backtracking==0 ) {
                
@@ -14395,7 +14392,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleRoundBracketExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4912:1: entryRuleRoundBracketExp returns [EObject current=null] : iv_ruleRoundBracketExp= ruleRoundBracketExp EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4909:1: entryRuleRoundBracketExp returns [EObject current=null] : iv_ruleRoundBracketExp= ruleRoundBracketExp EOF ;
     public final EObject entryRuleRoundBracketExp() throws RecognitionException {
         EObject current = null;
 
@@ -14403,8 +14400,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4913:2: (iv_ruleRoundBracketExp= ruleRoundBracketExp EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4914:2: iv_ruleRoundBracketExp= ruleRoundBracketExp EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4910:2: (iv_ruleRoundBracketExp= ruleRoundBracketExp EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4911:2: iv_ruleRoundBracketExp= ruleRoundBracketExp EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getRoundBracketExpRule()); 
@@ -14435,7 +14432,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleRoundBracketExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4921:1: ruleRoundBracketExp returns [EObject current=null] : ( ( (lv_name_0_0= ruleNameExp ) ) (otherlv_1= '@' ( (lv_pre_2_0= 'pre' ) ) )? otherlv_3= '(' ( ( (lv_variable1_4_0= ruleiteratorVariable ) ) ( (otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) ) ) | (otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) ) ) )? otherlv_9= '|' )? ( ( (lv_arguments_10_0= ruleExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleExpression ) ) )* )? otherlv_13= ')' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4918:1: ruleRoundBracketExp returns [EObject current=null] : ( ( (lv_name_0_0= ruleNameExp ) ) (otherlv_1= '@' ( (lv_pre_2_0= 'pre' ) ) )? otherlv_3= '(' ( ( (lv_variable1_4_0= ruleiteratorVariable ) ) ( (otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) ) ) | (otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) ) ) )? otherlv_9= '|' )? ( ( (lv_arguments_10_0= ruleExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleExpression ) ) )* )? otherlv_13= ')' ) ;
     public final EObject ruleRoundBracketExp() throws RecognitionException {
         EObject current = null;
 
@@ -14463,17 +14460,17 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4924:28: ( ( ( (lv_name_0_0= ruleNameExp ) ) (otherlv_1= '@' ( (lv_pre_2_0= 'pre' ) ) )? otherlv_3= '(' ( ( (lv_variable1_4_0= ruleiteratorVariable ) ) ( (otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) ) ) | (otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) ) ) )? otherlv_9= '|' )? ( ( (lv_arguments_10_0= ruleExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleExpression ) ) )* )? otherlv_13= ')' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4925:1: ( ( (lv_name_0_0= ruleNameExp ) ) (otherlv_1= '@' ( (lv_pre_2_0= 'pre' ) ) )? otherlv_3= '(' ( ( (lv_variable1_4_0= ruleiteratorVariable ) ) ( (otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) ) ) | (otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) ) ) )? otherlv_9= '|' )? ( ( (lv_arguments_10_0= ruleExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleExpression ) ) )* )? otherlv_13= ')' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4921:28: ( ( ( (lv_name_0_0= ruleNameExp ) ) (otherlv_1= '@' ( (lv_pre_2_0= 'pre' ) ) )? otherlv_3= '(' ( ( (lv_variable1_4_0= ruleiteratorVariable ) ) ( (otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) ) ) | (otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) ) ) )? otherlv_9= '|' )? ( ( (lv_arguments_10_0= ruleExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleExpression ) ) )* )? otherlv_13= ')' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4922:1: ( ( (lv_name_0_0= ruleNameExp ) ) (otherlv_1= '@' ( (lv_pre_2_0= 'pre' ) ) )? otherlv_3= '(' ( ( (lv_variable1_4_0= ruleiteratorVariable ) ) ( (otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) ) ) | (otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) ) ) )? otherlv_9= '|' )? ( ( (lv_arguments_10_0= ruleExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleExpression ) ) )* )? otherlv_13= ')' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4925:1: ( ( (lv_name_0_0= ruleNameExp ) ) (otherlv_1= '@' ( (lv_pre_2_0= 'pre' ) ) )? otherlv_3= '(' ( ( (lv_variable1_4_0= ruleiteratorVariable ) ) ( (otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) ) ) | (otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) ) ) )? otherlv_9= '|' )? ( ( (lv_arguments_10_0= ruleExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleExpression ) ) )* )? otherlv_13= ')' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4925:2: ( (lv_name_0_0= ruleNameExp ) ) (otherlv_1= '@' ( (lv_pre_2_0= 'pre' ) ) )? otherlv_3= '(' ( ( (lv_variable1_4_0= ruleiteratorVariable ) ) ( (otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) ) ) | (otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) ) ) )? otherlv_9= '|' )? ( ( (lv_arguments_10_0= ruleExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleExpression ) ) )* )? otherlv_13= ')'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4922:1: ( ( (lv_name_0_0= ruleNameExp ) ) (otherlv_1= '@' ( (lv_pre_2_0= 'pre' ) ) )? otherlv_3= '(' ( ( (lv_variable1_4_0= ruleiteratorVariable ) ) ( (otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) ) ) | (otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) ) ) )? otherlv_9= '|' )? ( ( (lv_arguments_10_0= ruleExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleExpression ) ) )* )? otherlv_13= ')' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4922:2: ( (lv_name_0_0= ruleNameExp ) ) (otherlv_1= '@' ( (lv_pre_2_0= 'pre' ) ) )? otherlv_3= '(' ( ( (lv_variable1_4_0= ruleiteratorVariable ) ) ( (otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) ) ) | (otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) ) ) )? otherlv_9= '|' )? ( ( (lv_arguments_10_0= ruleExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleExpression ) ) )* )? otherlv_13= ')'
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4925:2: ( (lv_name_0_0= ruleNameExp ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4926:1: (lv_name_0_0= ruleNameExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4922:2: ( (lv_name_0_0= ruleNameExp ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4923:1: (lv_name_0_0= ruleNameExp )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4926:1: (lv_name_0_0= ruleNameExp )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4927:3: lv_name_0_0= ruleNameExp
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4923:1: (lv_name_0_0= ruleNameExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4924:3: lv_name_0_0= ruleNameExp
             {
             if ( state.backtracking==0 ) {
                
@@ -14504,7 +14501,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4943:2: (otherlv_1= '@' ( (lv_pre_2_0= 'pre' ) ) )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4940:2: (otherlv_1= '@' ( (lv_pre_2_0= 'pre' ) ) )?
             int alt89=2;
             int LA89_0 = input.LA(1);
 
@@ -14513,7 +14510,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt89) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4943:4: otherlv_1= '@' ( (lv_pre_2_0= 'pre' ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4940:4: otherlv_1= '@' ( (lv_pre_2_0= 'pre' ) )
                     {
                     otherlv_1=(Token)match(input,70,FollowSets000.FOLLOW_70_in_ruleRoundBracketExp10864); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -14521,11 +14518,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                           	newLeafNode(otherlv_1, grammarAccess.getRoundBracketExpAccess().getCommercialAtKeyword_1_0());
                           
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4947:1: ( (lv_pre_2_0= 'pre' ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4948:1: (lv_pre_2_0= 'pre' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4944:1: ( (lv_pre_2_0= 'pre' ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4945:1: (lv_pre_2_0= 'pre' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4948:1: (lv_pre_2_0= 'pre' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4949:3: lv_pre_2_0= 'pre'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4945:1: (lv_pre_2_0= 'pre' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4946:3: lv_pre_2_0= 'pre'
                     {
                     lv_pre_2_0=(Token)match(input,26,FollowSets000.FOLLOW_26_in_ruleRoundBracketExp10882); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -14559,18 +14556,18 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_3, grammarAccess.getRoundBracketExpAccess().getLeftParenthesisKeyword_2());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4966:1: ( ( (lv_variable1_4_0= ruleiteratorVariable ) ) ( (otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) ) ) | (otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) ) ) )? otherlv_9= '|' )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4963:1: ( ( (lv_variable1_4_0= ruleiteratorVariable ) ) ( (otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) ) ) | (otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) ) ) )? otherlv_9= '|' )?
             int alt91=2;
             alt91 = dfa91.predict(input);
             switch (alt91) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4966:2: ( (lv_variable1_4_0= ruleiteratorVariable ) ) ( (otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) ) ) | (otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) ) ) )? otherlv_9= '|'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4963:2: ( (lv_variable1_4_0= ruleiteratorVariable ) ) ( (otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) ) ) | (otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) ) ) )? otherlv_9= '|'
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4966:2: ( (lv_variable1_4_0= ruleiteratorVariable ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4967:1: (lv_variable1_4_0= ruleiteratorVariable )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4963:2: ( (lv_variable1_4_0= ruleiteratorVariable ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4964:1: (lv_variable1_4_0= ruleiteratorVariable )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4967:1: (lv_variable1_4_0= ruleiteratorVariable )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4968:3: lv_variable1_4_0= ruleiteratorVariable
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4964:1: (lv_variable1_4_0= ruleiteratorVariable )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4965:3: lv_variable1_4_0= ruleiteratorVariable
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -14601,7 +14598,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4984:2: ( (otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) ) ) | (otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) ) ) )?
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4981:2: ( (otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) ) ) | (otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) ) ) )?
                     int alt90=3;
                     int LA90_0 = input.LA(1);
 
@@ -14613,10 +14610,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     switch (alt90) {
                         case 1 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4984:3: (otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) ) )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4981:3: (otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) ) )
                             {
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4984:3: (otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) ) )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4984:5: otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4981:3: (otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) ) )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4981:5: otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) )
                             {
                             otherlv_5=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleRoundBracketExp10945); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -14624,11 +14621,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                                   	newLeafNode(otherlv_5, grammarAccess.getRoundBracketExpAccess().getCommaKeyword_3_1_0_0());
                                   
                             }
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4988:1: ( (lv_variable2_6_0= ruleiteratorVariable ) )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4989:1: (lv_variable2_6_0= ruleiteratorVariable )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4985:1: ( (lv_variable2_6_0= ruleiteratorVariable ) )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4986:1: (lv_variable2_6_0= ruleiteratorVariable )
                             {
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4989:1: (lv_variable2_6_0= ruleiteratorVariable )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4990:3: lv_variable2_6_0= ruleiteratorVariable
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4986:1: (lv_variable2_6_0= ruleiteratorVariable )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4987:3: lv_variable2_6_0= ruleiteratorVariable
                             {
                             if ( state.backtracking==0 ) {
                                
@@ -14666,10 +14663,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5007:6: (otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) ) )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5004:6: (otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) ) )
                             {
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5007:6: (otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) ) )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5007:8: otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5004:6: (otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) ) )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5004:8: otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) )
                             {
                             otherlv_7=(Token)match(input,71,FollowSets000.FOLLOW_71_in_ruleRoundBracketExp10986); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -14677,11 +14674,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                                   	newLeafNode(otherlv_7, grammarAccess.getRoundBracketExpAccess().getSemicolonKeyword_3_1_1_0());
                                   
                             }
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5011:1: ( (lv_variable2_8_0= ruleiteratorAccumulator ) )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5012:1: (lv_variable2_8_0= ruleiteratorAccumulator )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5008:1: ( (lv_variable2_8_0= ruleiteratorAccumulator ) )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5009:1: (lv_variable2_8_0= ruleiteratorAccumulator )
                             {
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5012:1: (lv_variable2_8_0= ruleiteratorAccumulator )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5013:3: lv_variable2_8_0= ruleiteratorAccumulator
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5009:1: (lv_variable2_8_0= ruleiteratorAccumulator )
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5010:3: lv_variable2_8_0= ruleiteratorAccumulator
                             {
                             if ( state.backtracking==0 ) {
                                
@@ -14733,7 +14730,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5033:3: ( ( (lv_arguments_10_0= ruleExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleExpression ) ) )* )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5030:3: ( ( (lv_arguments_10_0= ruleExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleExpression ) ) )* )?
             int alt93=2;
             int LA93_0 = input.LA(1);
 
@@ -14742,13 +14739,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt93) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5033:4: ( (lv_arguments_10_0= ruleExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleExpression ) ) )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5030:4: ( (lv_arguments_10_0= ruleExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleExpression ) ) )*
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5033:4: ( (lv_arguments_10_0= ruleExpression ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5034:1: (lv_arguments_10_0= ruleExpression )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5030:4: ( (lv_arguments_10_0= ruleExpression ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5031:1: (lv_arguments_10_0= ruleExpression )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5034:1: (lv_arguments_10_0= ruleExpression )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5035:3: lv_arguments_10_0= ruleExpression
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5031:1: (lv_arguments_10_0= ruleExpression )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5032:3: lv_arguments_10_0= ruleExpression
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -14779,7 +14776,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5051:2: (otherlv_11= ',' ( (lv_arguments_12_0= ruleExpression ) ) )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5048:2: (otherlv_11= ',' ( (lv_arguments_12_0= ruleExpression ) ) )*
                     loop92:
                     do {
                         int alt92=2;
@@ -14792,7 +14789,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                         switch (alt92) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5051:4: otherlv_11= ',' ( (lv_arguments_12_0= ruleExpression ) )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5048:4: otherlv_11= ',' ( (lv_arguments_12_0= ruleExpression ) )
                     	    {
                     	    otherlv_11=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleRoundBracketExp11059); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -14800,11 +14797,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     	          	newLeafNode(otherlv_11, grammarAccess.getRoundBracketExpAccess().getCommaKeyword_4_1_0());
                     	          
                     	    }
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5055:1: ( (lv_arguments_12_0= ruleExpression ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5056:1: (lv_arguments_12_0= ruleExpression )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5052:1: ( (lv_arguments_12_0= ruleExpression ) )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5053:1: (lv_arguments_12_0= ruleExpression )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5056:1: (lv_arguments_12_0= ruleExpression )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5057:3: lv_arguments_12_0= ruleExpression
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5053:1: (lv_arguments_12_0= ruleExpression )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5054:3: lv_arguments_12_0= ruleExpression
                     	    {
                     	    if ( state.backtracking==0 ) {
                     	       
@@ -14879,7 +14876,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleSquareBracketExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5085:1: entryRuleSquareBracketExp returns [EObject current=null] : iv_ruleSquareBracketExp= ruleSquareBracketExp EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5082:1: entryRuleSquareBracketExp returns [EObject current=null] : iv_ruleSquareBracketExp= ruleSquareBracketExp EOF ;
     public final EObject entryRuleSquareBracketExp() throws RecognitionException {
         EObject current = null;
 
@@ -14887,8 +14884,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5086:2: (iv_ruleSquareBracketExp= ruleSquareBracketExp EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5087:2: iv_ruleSquareBracketExp= ruleSquareBracketExp EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5083:2: (iv_ruleSquareBracketExp= ruleSquareBracketExp EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5084:2: iv_ruleSquareBracketExp= ruleSquareBracketExp EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getSquareBracketExpRule()); 
@@ -14919,7 +14916,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleSquareBracketExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5094:1: ruleSquareBracketExp returns [EObject current=null] : ( ( (lv_name_0_0= ruleNameExp ) ) otherlv_1= '[' ( (lv_arguments_2_0= ruleExpression ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleExpression ) ) )* otherlv_5= ']' (otherlv_6= '@' ( (lv_pre_7_0= 'pre' ) ) )? ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5091:1: ruleSquareBracketExp returns [EObject current=null] : ( ( (lv_name_0_0= ruleNameExp ) ) otherlv_1= '[' ( (lv_arguments_2_0= ruleExpression ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleExpression ) ) )* otherlv_5= ']' (otherlv_6= '@' ( (lv_pre_7_0= 'pre' ) ) )? ) ;
     public final EObject ruleSquareBracketExp() throws RecognitionException {
         EObject current = null;
 
@@ -14938,17 +14935,17 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5097:28: ( ( ( (lv_name_0_0= ruleNameExp ) ) otherlv_1= '[' ( (lv_arguments_2_0= ruleExpression ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleExpression ) ) )* otherlv_5= ']' (otherlv_6= '@' ( (lv_pre_7_0= 'pre' ) ) )? ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5098:1: ( ( (lv_name_0_0= ruleNameExp ) ) otherlv_1= '[' ( (lv_arguments_2_0= ruleExpression ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleExpression ) ) )* otherlv_5= ']' (otherlv_6= '@' ( (lv_pre_7_0= 'pre' ) ) )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5094:28: ( ( ( (lv_name_0_0= ruleNameExp ) ) otherlv_1= '[' ( (lv_arguments_2_0= ruleExpression ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleExpression ) ) )* otherlv_5= ']' (otherlv_6= '@' ( (lv_pre_7_0= 'pre' ) ) )? ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5095:1: ( ( (lv_name_0_0= ruleNameExp ) ) otherlv_1= '[' ( (lv_arguments_2_0= ruleExpression ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleExpression ) ) )* otherlv_5= ']' (otherlv_6= '@' ( (lv_pre_7_0= 'pre' ) ) )? )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5098:1: ( ( (lv_name_0_0= ruleNameExp ) ) otherlv_1= '[' ( (lv_arguments_2_0= ruleExpression ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleExpression ) ) )* otherlv_5= ']' (otherlv_6= '@' ( (lv_pre_7_0= 'pre' ) ) )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5098:2: ( (lv_name_0_0= ruleNameExp ) ) otherlv_1= '[' ( (lv_arguments_2_0= ruleExpression ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleExpression ) ) )* otherlv_5= ']' (otherlv_6= '@' ( (lv_pre_7_0= 'pre' ) ) )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5095:1: ( ( (lv_name_0_0= ruleNameExp ) ) otherlv_1= '[' ( (lv_arguments_2_0= ruleExpression ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleExpression ) ) )* otherlv_5= ']' (otherlv_6= '@' ( (lv_pre_7_0= 'pre' ) ) )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5095:2: ( (lv_name_0_0= ruleNameExp ) ) otherlv_1= '[' ( (lv_arguments_2_0= ruleExpression ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleExpression ) ) )* otherlv_5= ']' (otherlv_6= '@' ( (lv_pre_7_0= 'pre' ) ) )?
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5098:2: ( (lv_name_0_0= ruleNameExp ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5099:1: (lv_name_0_0= ruleNameExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5095:2: ( (lv_name_0_0= ruleNameExp ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5096:1: (lv_name_0_0= ruleNameExp )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5099:1: (lv_name_0_0= ruleNameExp )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5100:3: lv_name_0_0= ruleNameExp
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5096:1: (lv_name_0_0= ruleNameExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5097:3: lv_name_0_0= ruleNameExp
             {
             if ( state.backtracking==0 ) {
                
@@ -14985,11 +14982,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_1, grammarAccess.getSquareBracketExpAccess().getLeftSquareBracketKeyword_1());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5120:1: ( (lv_arguments_2_0= ruleExpression ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5121:1: (lv_arguments_2_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5117:1: ( (lv_arguments_2_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5118:1: (lv_arguments_2_0= ruleExpression )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5121:1: (lv_arguments_2_0= ruleExpression )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5122:3: lv_arguments_2_0= ruleExpression
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5118:1: (lv_arguments_2_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5119:3: lv_arguments_2_0= ruleExpression
             {
             if ( state.backtracking==0 ) {
                
@@ -15020,7 +15017,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5138:2: (otherlv_3= ',' ( (lv_arguments_4_0= ruleExpression ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5135:2: (otherlv_3= ',' ( (lv_arguments_4_0= ruleExpression ) ) )*
             loop94:
             do {
                 int alt94=2;
@@ -15033,7 +15030,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                 switch (alt94) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5138:4: otherlv_3= ',' ( (lv_arguments_4_0= ruleExpression ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5135:4: otherlv_3= ',' ( (lv_arguments_4_0= ruleExpression ) )
             	    {
             	    otherlv_3=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleSquareBracketExp11234); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -15041,11 +15038,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	          	newLeafNode(otherlv_3, grammarAccess.getSquareBracketExpAccess().getCommaKeyword_3_0());
             	          
             	    }
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5142:1: ( (lv_arguments_4_0= ruleExpression ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5143:1: (lv_arguments_4_0= ruleExpression )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5139:1: ( (lv_arguments_4_0= ruleExpression ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5140:1: (lv_arguments_4_0= ruleExpression )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5143:1: (lv_arguments_4_0= ruleExpression )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5144:3: lv_arguments_4_0= ruleExpression
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5140:1: (lv_arguments_4_0= ruleExpression )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5141:3: lv_arguments_4_0= ruleExpression
             	    {
             	    if ( state.backtracking==0 ) {
             	       
@@ -15091,7 +15088,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_5, grammarAccess.getSquareBracketExpAccess().getRightSquareBracketKeyword_4());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5164:1: (otherlv_6= '@' ( (lv_pre_7_0= 'pre' ) ) )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5161:1: (otherlv_6= '@' ( (lv_pre_7_0= 'pre' ) ) )?
             int alt95=2;
             int LA95_0 = input.LA(1);
 
@@ -15100,7 +15097,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             }
             switch (alt95) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5164:3: otherlv_6= '@' ( (lv_pre_7_0= 'pre' ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5161:3: otherlv_6= '@' ( (lv_pre_7_0= 'pre' ) )
                     {
                     otherlv_6=(Token)match(input,70,FollowSets000.FOLLOW_70_in_ruleSquareBracketExp11282); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -15108,11 +15105,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                           	newLeafNode(otherlv_6, grammarAccess.getSquareBracketExpAccess().getCommercialAtKeyword_5_0());
                           
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5168:1: ( (lv_pre_7_0= 'pre' ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5169:1: (lv_pre_7_0= 'pre' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5165:1: ( (lv_pre_7_0= 'pre' ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5166:1: (lv_pre_7_0= 'pre' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5169:1: (lv_pre_7_0= 'pre' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5170:3: lv_pre_7_0= 'pre'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5166:1: (lv_pre_7_0= 'pre' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5167:3: lv_pre_7_0= 'pre'
                     {
                     lv_pre_7_0=(Token)match(input,26,FollowSets000.FOLLOW_26_in_ruleSquareBracketExp11300); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -15163,7 +15160,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRulePreExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5191:1: entryRulePreExp returns [EObject current=null] : iv_rulePreExp= rulePreExp EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5188:1: entryRulePreExp returns [EObject current=null] : iv_rulePreExp= rulePreExp EOF ;
     public final EObject entryRulePreExp() throws RecognitionException {
         EObject current = null;
 
@@ -15171,8 +15168,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5192:2: (iv_rulePreExp= rulePreExp EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5193:2: iv_rulePreExp= rulePreExp EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5189:2: (iv_rulePreExp= rulePreExp EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5190:2: iv_rulePreExp= rulePreExp EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPreExpRule()); 
@@ -15203,7 +15200,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "rulePreExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5200:1: rulePreExp returns [EObject current=null] : ( ( (lv_name_0_0= ruleNameExp ) ) otherlv_1= '@' otherlv_2= 'pre' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5197:1: rulePreExp returns [EObject current=null] : ( ( (lv_name_0_0= ruleNameExp ) ) otherlv_1= '@' otherlv_2= 'pre' ) ;
     public final EObject rulePreExp() throws RecognitionException {
         EObject current = null;
 
@@ -15215,17 +15212,17 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5203:28: ( ( ( (lv_name_0_0= ruleNameExp ) ) otherlv_1= '@' otherlv_2= 'pre' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5204:1: ( ( (lv_name_0_0= ruleNameExp ) ) otherlv_1= '@' otherlv_2= 'pre' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5200:28: ( ( ( (lv_name_0_0= ruleNameExp ) ) otherlv_1= '@' otherlv_2= 'pre' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5201:1: ( ( (lv_name_0_0= ruleNameExp ) ) otherlv_1= '@' otherlv_2= 'pre' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5204:1: ( ( (lv_name_0_0= ruleNameExp ) ) otherlv_1= '@' otherlv_2= 'pre' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5204:2: ( (lv_name_0_0= ruleNameExp ) ) otherlv_1= '@' otherlv_2= 'pre'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5201:1: ( ( (lv_name_0_0= ruleNameExp ) ) otherlv_1= '@' otherlv_2= 'pre' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5201:2: ( (lv_name_0_0= ruleNameExp ) ) otherlv_1= '@' otherlv_2= 'pre'
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5204:2: ( (lv_name_0_0= ruleNameExp ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5205:1: (lv_name_0_0= ruleNameExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5201:2: ( (lv_name_0_0= ruleNameExp ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5202:1: (lv_name_0_0= ruleNameExp )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5205:1: (lv_name_0_0= ruleNameExp )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5206:3: lv_name_0_0= ruleNameExp
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5202:1: (lv_name_0_0= ruleNameExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5203:3: lv_name_0_0= ruleNameExp
             {
             if ( state.backtracking==0 ) {
                
@@ -15291,7 +15288,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleSelfExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5238:1: entryRuleSelfExp returns [EObject current=null] : iv_ruleSelfExp= ruleSelfExp EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5235:1: entryRuleSelfExp returns [EObject current=null] : iv_ruleSelfExp= ruleSelfExp EOF ;
     public final EObject entryRuleSelfExp() throws RecognitionException {
         EObject current = null;
 
@@ -15299,8 +15296,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5239:2: (iv_ruleSelfExp= ruleSelfExp EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5240:2: iv_ruleSelfExp= ruleSelfExp EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5236:2: (iv_ruleSelfExp= ruleSelfExp EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5237:2: iv_ruleSelfExp= ruleSelfExp EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getSelfExpRule()); 
@@ -15331,7 +15328,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleSelfExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5247:1: ruleSelfExp returns [EObject current=null] : ( () otherlv_1= 'self' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5244:1: ruleSelfExp returns [EObject current=null] : ( () otherlv_1= 'self' ) ;
     public final EObject ruleSelfExp() throws RecognitionException {
         EObject current = null;
 
@@ -15340,14 +15337,14 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5250:28: ( ( () otherlv_1= 'self' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5251:1: ( () otherlv_1= 'self' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5247:28: ( ( () otherlv_1= 'self' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5248:1: ( () otherlv_1= 'self' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5251:1: ( () otherlv_1= 'self' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5251:2: () otherlv_1= 'self'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5248:1: ( () otherlv_1= 'self' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5248:2: () otherlv_1= 'self'
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5251:2: ()
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5252:2: 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5248:2: ()
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5249:2: 
             {
             if ( state.backtracking==0 ) {
                
@@ -15393,7 +15390,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleNameExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5272:1: entryRuleNameExp returns [EObject current=null] : iv_ruleNameExp= ruleNameExp EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5269:1: entryRuleNameExp returns [EObject current=null] : iv_ruleNameExp= ruleNameExp EOF ;
     public final EObject entryRuleNameExp() throws RecognitionException {
         EObject current = null;
 
@@ -15401,8 +15398,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5273:2: (iv_ruleNameExp= ruleNameExp EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5274:2: iv_ruleNameExp= ruleNameExp EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5270:2: (iv_ruleNameExp= ruleNameExp EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5271:2: iv_ruleNameExp= ruleNameExp EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNameExpRule()); 
@@ -15433,7 +15430,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleNameExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5281:1: ruleNameExp returns [EObject current=null] : (this_PathNameExp_0= rulePathNameExp | this_SimpleNameExp_1= ruleSimpleNameExp ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5278:1: ruleNameExp returns [EObject current=null] : (this_PathNameExp_0= rulePathNameExp | this_SimpleNameExp_1= ruleSimpleNameExp ) ;
     public final EObject ruleNameExp() throws RecognitionException {
         EObject current = null;
 
@@ -15445,10 +15442,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5284:28: ( (this_PathNameExp_0= rulePathNameExp | this_SimpleNameExp_1= ruleSimpleNameExp ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5285:1: (this_PathNameExp_0= rulePathNameExp | this_SimpleNameExp_1= ruleSimpleNameExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5281:28: ( (this_PathNameExp_0= rulePathNameExp | this_SimpleNameExp_1= ruleSimpleNameExp ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5282:1: (this_PathNameExp_0= rulePathNameExp | this_SimpleNameExp_1= ruleSimpleNameExp )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5285:1: (this_PathNameExp_0= rulePathNameExp | this_SimpleNameExp_1= ruleSimpleNameExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5282:1: (this_PathNameExp_0= rulePathNameExp | this_SimpleNameExp_1= ruleSimpleNameExp )
             int alt96=2;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -15518,7 +15515,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             switch (alt96) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5286:2: this_PathNameExp_0= rulePathNameExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5283:2: this_PathNameExp_0= rulePathNameExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -15545,7 +15542,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5299:2: this_SimpleNameExp_1= ruleSimpleNameExp
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5296:2: this_SimpleNameExp_1= ruleSimpleNameExp
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -15594,7 +15591,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRulePathNameExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5318:1: entryRulePathNameExp returns [EObject current=null] : iv_rulePathNameExp= rulePathNameExp EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5315:1: entryRulePathNameExp returns [EObject current=null] : iv_rulePathNameExp= rulePathNameExp EOF ;
     public final EObject entryRulePathNameExp() throws RecognitionException {
         EObject current = null;
 
@@ -15602,8 +15599,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5319:2: (iv_rulePathNameExp= rulePathNameExp EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5320:2: iv_rulePathNameExp= rulePathNameExp EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5316:2: (iv_rulePathNameExp= rulePathNameExp EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5317:2: iv_rulePathNameExp= rulePathNameExp EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPathNameExpRule()); 
@@ -15634,7 +15631,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "rulePathNameExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5327:1: rulePathNameExp returns [EObject current=null] : ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleNameExp ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5324:1: rulePathNameExp returns [EObject current=null] : ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleNameExp ) ) ) ;
     public final EObject rulePathNameExp() throws RecognitionException {
         EObject current = null;
 
@@ -15647,17 +15644,17 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5330:28: ( ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleNameExp ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5331:1: ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleNameExp ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5327:28: ( ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleNameExp ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5328:1: ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleNameExp ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5331:1: ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleNameExp ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5331:2: ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleNameExp ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5328:1: ( ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleNameExp ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5328:2: ( (lv_namespace_0_0= ruleIdentifier ) ) otherlv_1= '::' ( (lv_element_2_0= ruleNameExp ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5331:2: ( (lv_namespace_0_0= ruleIdentifier ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5332:1: (lv_namespace_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5328:2: ( (lv_namespace_0_0= ruleIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5329:1: (lv_namespace_0_0= ruleIdentifier )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5332:1: (lv_namespace_0_0= ruleIdentifier )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5333:3: lv_namespace_0_0= ruleIdentifier
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5329:1: (lv_namespace_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5330:3: lv_namespace_0_0= ruleIdentifier
             {
             if ( state.backtracking==0 ) {
                
@@ -15694,11 +15691,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_1, grammarAccess.getPathNameExpAccess().getColonColonKeyword_1());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5353:1: ( (lv_element_2_0= ruleNameExp ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5354:1: (lv_element_2_0= ruleNameExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5350:1: ( (lv_element_2_0= ruleNameExp ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5351:1: (lv_element_2_0= ruleNameExp )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5354:1: (lv_element_2_0= ruleNameExp )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5355:3: lv_element_2_0= ruleNameExp
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5351:1: (lv_element_2_0= ruleNameExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5352:3: lv_element_2_0= ruleNameExp
             {
             if ( state.backtracking==0 ) {
                
@@ -15752,7 +15749,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleSimpleNameExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5379:1: entryRuleSimpleNameExp returns [EObject current=null] : iv_ruleSimpleNameExp= ruleSimpleNameExp EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5376:1: entryRuleSimpleNameExp returns [EObject current=null] : iv_ruleSimpleNameExp= ruleSimpleNameExp EOF ;
     public final EObject entryRuleSimpleNameExp() throws RecognitionException {
         EObject current = null;
 
@@ -15760,8 +15757,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5380:2: (iv_ruleSimpleNameExp= ruleSimpleNameExp EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5381:2: iv_ruleSimpleNameExp= ruleSimpleNameExp EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5377:2: (iv_ruleSimpleNameExp= ruleSimpleNameExp EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5378:2: iv_ruleSimpleNameExp= ruleSimpleNameExp EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getSimpleNameExpRule()); 
@@ -15792,7 +15789,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleSimpleNameExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5388:1: ruleSimpleNameExp returns [EObject current=null] : ( (lv_element_0_0= ruleIdentifier ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5385:1: ruleSimpleNameExp returns [EObject current=null] : ( (lv_element_0_0= ruleIdentifier ) ) ;
     public final EObject ruleSimpleNameExp() throws RecognitionException {
         EObject current = null;
 
@@ -15802,14 +15799,14 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5391:28: ( ( (lv_element_0_0= ruleIdentifier ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5392:1: ( (lv_element_0_0= ruleIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5388:28: ( ( (lv_element_0_0= ruleIdentifier ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5389:1: ( (lv_element_0_0= ruleIdentifier ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5392:1: ( (lv_element_0_0= ruleIdentifier ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5393:1: (lv_element_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5389:1: ( (lv_element_0_0= ruleIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5390:1: (lv_element_0_0= ruleIdentifier )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5393:1: (lv_element_0_0= ruleIdentifier )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5394:3: lv_element_0_0= ruleIdentifier
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5390:1: (lv_element_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5391:3: lv_element_0_0= ruleIdentifier
             {
             if ( state.backtracking==0 ) {
                
@@ -15860,7 +15857,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleIfExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5418:1: entryRuleIfExp returns [EObject current=null] : iv_ruleIfExp= ruleIfExp EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5415:1: entryRuleIfExp returns [EObject current=null] : iv_ruleIfExp= ruleIfExp EOF ;
     public final EObject entryRuleIfExp() throws RecognitionException {
         EObject current = null;
 
@@ -15868,8 +15865,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5419:2: (iv_ruleIfExp= ruleIfExp EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5420:2: iv_ruleIfExp= ruleIfExp EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5416:2: (iv_ruleIfExp= ruleIfExp EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5417:2: iv_ruleIfExp= ruleIfExp EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getIfExpRule()); 
@@ -15900,7 +15897,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleIfExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5427:1: ruleIfExp returns [EObject current=null] : (otherlv_0= 'if' ( (lv_condition_1_0= ruleExpression ) ) otherlv_2= 'then' ( (lv_thenExpression_3_0= ruleExpression ) ) otherlv_4= 'else' ( (lv_elseExpression_5_0= ruleExpression ) ) otherlv_6= 'endif' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5424:1: ruleIfExp returns [EObject current=null] : (otherlv_0= 'if' ( (lv_condition_1_0= ruleExpression ) ) otherlv_2= 'then' ( (lv_thenExpression_3_0= ruleExpression ) ) otherlv_4= 'else' ( (lv_elseExpression_5_0= ruleExpression ) ) otherlv_6= 'endif' ) ;
     public final EObject ruleIfExp() throws RecognitionException {
         EObject current = null;
 
@@ -15918,11 +15915,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5430:28: ( (otherlv_0= 'if' ( (lv_condition_1_0= ruleExpression ) ) otherlv_2= 'then' ( (lv_thenExpression_3_0= ruleExpression ) ) otherlv_4= 'else' ( (lv_elseExpression_5_0= ruleExpression ) ) otherlv_6= 'endif' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5431:1: (otherlv_0= 'if' ( (lv_condition_1_0= ruleExpression ) ) otherlv_2= 'then' ( (lv_thenExpression_3_0= ruleExpression ) ) otherlv_4= 'else' ( (lv_elseExpression_5_0= ruleExpression ) ) otherlv_6= 'endif' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5427:28: ( (otherlv_0= 'if' ( (lv_condition_1_0= ruleExpression ) ) otherlv_2= 'then' ( (lv_thenExpression_3_0= ruleExpression ) ) otherlv_4= 'else' ( (lv_elseExpression_5_0= ruleExpression ) ) otherlv_6= 'endif' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5428:1: (otherlv_0= 'if' ( (lv_condition_1_0= ruleExpression ) ) otherlv_2= 'then' ( (lv_thenExpression_3_0= ruleExpression ) ) otherlv_4= 'else' ( (lv_elseExpression_5_0= ruleExpression ) ) otherlv_6= 'endif' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5431:1: (otherlv_0= 'if' ( (lv_condition_1_0= ruleExpression ) ) otherlv_2= 'then' ( (lv_thenExpression_3_0= ruleExpression ) ) otherlv_4= 'else' ( (lv_elseExpression_5_0= ruleExpression ) ) otherlv_6= 'endif' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5431:3: otherlv_0= 'if' ( (lv_condition_1_0= ruleExpression ) ) otherlv_2= 'then' ( (lv_thenExpression_3_0= ruleExpression ) ) otherlv_4= 'else' ( (lv_elseExpression_5_0= ruleExpression ) ) otherlv_6= 'endif'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5428:1: (otherlv_0= 'if' ( (lv_condition_1_0= ruleExpression ) ) otherlv_2= 'then' ( (lv_thenExpression_3_0= ruleExpression ) ) otherlv_4= 'else' ( (lv_elseExpression_5_0= ruleExpression ) ) otherlv_6= 'endif' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5428:3: otherlv_0= 'if' ( (lv_condition_1_0= ruleExpression ) ) otherlv_2= 'then' ( (lv_thenExpression_3_0= ruleExpression ) ) otherlv_4= 'else' ( (lv_elseExpression_5_0= ruleExpression ) ) otherlv_6= 'endif'
             {
             otherlv_0=(Token)match(input,76,FollowSets000.FOLLOW_76_in_ruleIfExp11949); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -15930,11 +15927,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_0, grammarAccess.getIfExpAccess().getIfKeyword_0());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5435:1: ( (lv_condition_1_0= ruleExpression ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5436:1: (lv_condition_1_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5432:1: ( (lv_condition_1_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5433:1: (lv_condition_1_0= ruleExpression )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5436:1: (lv_condition_1_0= ruleExpression )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5437:3: lv_condition_1_0= ruleExpression
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5433:1: (lv_condition_1_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5434:3: lv_condition_1_0= ruleExpression
             {
             if ( state.backtracking==0 ) {
                
@@ -15971,11 +15968,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_2, grammarAccess.getIfExpAccess().getThenKeyword_2());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5457:1: ( (lv_thenExpression_3_0= ruleExpression ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5458:1: (lv_thenExpression_3_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5454:1: ( (lv_thenExpression_3_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5455:1: (lv_thenExpression_3_0= ruleExpression )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5458:1: (lv_thenExpression_3_0= ruleExpression )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5459:3: lv_thenExpression_3_0= ruleExpression
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5455:1: (lv_thenExpression_3_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5456:3: lv_thenExpression_3_0= ruleExpression
             {
             if ( state.backtracking==0 ) {
                
@@ -16012,11 +16009,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_4, grammarAccess.getIfExpAccess().getElseKeyword_4());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5479:1: ( (lv_elseExpression_5_0= ruleExpression ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5480:1: (lv_elseExpression_5_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5476:1: ( (lv_elseExpression_5_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5477:1: (lv_elseExpression_5_0= ruleExpression )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5480:1: (lv_elseExpression_5_0= ruleExpression )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5481:3: lv_elseExpression_5_0= ruleExpression
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5477:1: (lv_elseExpression_5_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5478:3: lv_elseExpression_5_0= ruleExpression
             {
             if ( state.backtracking==0 ) {
                
@@ -16076,7 +16073,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleLetExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5509:1: entryRuleLetExp returns [EObject current=null] : iv_ruleLetExp= ruleLetExp EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5506:1: entryRuleLetExp returns [EObject current=null] : iv_ruleLetExp= ruleLetExp EOF ;
     public final EObject entryRuleLetExp() throws RecognitionException {
         EObject current = null;
 
@@ -16084,8 +16081,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5510:2: (iv_ruleLetExp= ruleLetExp EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5511:2: iv_ruleLetExp= ruleLetExp EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5507:2: (iv_ruleLetExp= ruleLetExp EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5508:2: iv_ruleLetExp= ruleLetExp EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getLetExpRule()); 
@@ -16116,7 +16113,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleLetExp"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5518:1: ruleLetExp returns [EObject current=null] : (otherlv_0= 'let' ( (lv_variable_1_0= ruleLetVariable ) ) (otherlv_2= ',' ( (lv_variable_3_0= ruleLetVariable ) ) )* otherlv_4= 'in' ( (lv_in_5_0= ruleExpression ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5515:1: ruleLetExp returns [EObject current=null] : (otherlv_0= 'let' ( (lv_variable_1_0= ruleLetVariable ) ) (otherlv_2= ',' ( (lv_variable_3_0= ruleLetVariable ) ) )* otherlv_4= 'in' ( (lv_in_5_0= ruleExpression ) ) ) ;
     public final EObject ruleLetExp() throws RecognitionException {
         EObject current = null;
 
@@ -16133,11 +16130,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5521:28: ( (otherlv_0= 'let' ( (lv_variable_1_0= ruleLetVariable ) ) (otherlv_2= ',' ( (lv_variable_3_0= ruleLetVariable ) ) )* otherlv_4= 'in' ( (lv_in_5_0= ruleExpression ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5522:1: (otherlv_0= 'let' ( (lv_variable_1_0= ruleLetVariable ) ) (otherlv_2= ',' ( (lv_variable_3_0= ruleLetVariable ) ) )* otherlv_4= 'in' ( (lv_in_5_0= ruleExpression ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5518:28: ( (otherlv_0= 'let' ( (lv_variable_1_0= ruleLetVariable ) ) (otherlv_2= ',' ( (lv_variable_3_0= ruleLetVariable ) ) )* otherlv_4= 'in' ( (lv_in_5_0= ruleExpression ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5519:1: (otherlv_0= 'let' ( (lv_variable_1_0= ruleLetVariable ) ) (otherlv_2= ',' ( (lv_variable_3_0= ruleLetVariable ) ) )* otherlv_4= 'in' ( (lv_in_5_0= ruleExpression ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5522:1: (otherlv_0= 'let' ( (lv_variable_1_0= ruleLetVariable ) ) (otherlv_2= ',' ( (lv_variable_3_0= ruleLetVariable ) ) )* otherlv_4= 'in' ( (lv_in_5_0= ruleExpression ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5522:3: otherlv_0= 'let' ( (lv_variable_1_0= ruleLetVariable ) ) (otherlv_2= ',' ( (lv_variable_3_0= ruleLetVariable ) ) )* otherlv_4= 'in' ( (lv_in_5_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5519:1: (otherlv_0= 'let' ( (lv_variable_1_0= ruleLetVariable ) ) (otherlv_2= ',' ( (lv_variable_3_0= ruleLetVariable ) ) )* otherlv_4= 'in' ( (lv_in_5_0= ruleExpression ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5519:3: otherlv_0= 'let' ( (lv_variable_1_0= ruleLetVariable ) ) (otherlv_2= ',' ( (lv_variable_3_0= ruleLetVariable ) ) )* otherlv_4= 'in' ( (lv_in_5_0= ruleExpression ) )
             {
             otherlv_0=(Token)match(input,80,FollowSets000.FOLLOW_80_in_ruleLetExp12131); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -16145,11 +16142,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_0, grammarAccess.getLetExpAccess().getLetKeyword_0());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5526:1: ( (lv_variable_1_0= ruleLetVariable ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5527:1: (lv_variable_1_0= ruleLetVariable )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5523:1: ( (lv_variable_1_0= ruleLetVariable ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5524:1: (lv_variable_1_0= ruleLetVariable )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5527:1: (lv_variable_1_0= ruleLetVariable )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5528:3: lv_variable_1_0= ruleLetVariable
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5524:1: (lv_variable_1_0= ruleLetVariable )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5525:3: lv_variable_1_0= ruleLetVariable
             {
             if ( state.backtracking==0 ) {
                
@@ -16180,7 +16177,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5544:2: (otherlv_2= ',' ( (lv_variable_3_0= ruleLetVariable ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5541:2: (otherlv_2= ',' ( (lv_variable_3_0= ruleLetVariable ) ) )*
             loop97:
             do {
                 int alt97=2;
@@ -16193,7 +16190,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
                 switch (alt97) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5544:4: otherlv_2= ',' ( (lv_variable_3_0= ruleLetVariable ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5541:4: otherlv_2= ',' ( (lv_variable_3_0= ruleLetVariable ) )
             	    {
             	    otherlv_2=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleLetExp12165); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -16201,11 +16198,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	          	newLeafNode(otherlv_2, grammarAccess.getLetExpAccess().getCommaKeyword_2_0());
             	          
             	    }
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5548:1: ( (lv_variable_3_0= ruleLetVariable ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5549:1: (lv_variable_3_0= ruleLetVariable )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5545:1: ( (lv_variable_3_0= ruleLetVariable ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5546:1: (lv_variable_3_0= ruleLetVariable )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5549:1: (lv_variable_3_0= ruleLetVariable )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5550:3: lv_variable_3_0= ruleLetVariable
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5546:1: (lv_variable_3_0= ruleLetVariable )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5547:3: lv_variable_3_0= ruleLetVariable
             	    {
             	    if ( state.backtracking==0 ) {
             	       
@@ -16251,11 +16248,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_4, grammarAccess.getLetExpAccess().getInKeyword_3());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5570:1: ( (lv_in_5_0= ruleExpression ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5571:1: (lv_in_5_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5567:1: ( (lv_in_5_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5568:1: (lv_in_5_0= ruleExpression )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5571:1: (lv_in_5_0= ruleExpression )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5572:3: lv_in_5_0= ruleExpression
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5568:1: (lv_in_5_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5569:3: lv_in_5_0= ruleExpression
             {
             if ( state.backtracking==0 ) {
                
@@ -16309,7 +16306,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleLetVariable"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5596:1: entryRuleLetVariable returns [EObject current=null] : iv_ruleLetVariable= ruleLetVariable EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5593:1: entryRuleLetVariable returns [EObject current=null] : iv_ruleLetVariable= ruleLetVariable EOF ;
     public final EObject entryRuleLetVariable() throws RecognitionException {
         EObject current = null;
 
@@ -16317,8 +16314,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5597:2: (iv_ruleLetVariable= ruleLetVariable EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5598:2: iv_ruleLetVariable= ruleLetVariable EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5594:2: (iv_ruleLetVariable= ruleLetVariable EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5595:2: iv_ruleLetVariable= ruleLetVariable EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getLetVariableRule()); 
@@ -16349,7 +16346,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleLetVariable"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5605:1: ruleLetVariable returns [EObject current=null] : ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5602:1: ruleLetVariable returns [EObject current=null] : ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) ) ;
     public final EObject ruleLetVariable() throws RecognitionException {
         EObject current = null;
 
@@ -16365,17 +16362,17 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5608:28: ( ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5609:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5605:28: ( ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5606:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5609:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5609:2: ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5606:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5606:2: ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_type_2_0= ruleTypeExp ) ) otherlv_3= '=' ( (lv_initExpression_4_0= ruleExpression ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5609:2: ( (lv_name_0_0= ruleIdentifier ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5610:1: (lv_name_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5606:2: ( (lv_name_0_0= ruleIdentifier ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5607:1: (lv_name_0_0= ruleIdentifier )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5610:1: (lv_name_0_0= ruleIdentifier )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5611:3: lv_name_0_0= ruleIdentifier
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5607:1: (lv_name_0_0= ruleIdentifier )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5608:3: lv_name_0_0= ruleIdentifier
             {
             if ( state.backtracking==0 ) {
                
@@ -16412,11 +16409,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_1, grammarAccess.getLetVariableAccess().getColonKeyword_1());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5631:1: ( (lv_type_2_0= ruleTypeExp ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5632:1: (lv_type_2_0= ruleTypeExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5628:1: ( (lv_type_2_0= ruleTypeExp ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5629:1: (lv_type_2_0= ruleTypeExp )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5632:1: (lv_type_2_0= ruleTypeExp )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5633:3: lv_type_2_0= ruleTypeExp
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5629:1: (lv_type_2_0= ruleTypeExp )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5630:3: lv_type_2_0= ruleTypeExp
             {
             if ( state.backtracking==0 ) {
                
@@ -16453,11 +16450,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                   	newLeafNode(otherlv_3, grammarAccess.getLetVariableAccess().getEqualsSignKeyword_3());
                   
             }
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5653:1: ( (lv_initExpression_4_0= ruleExpression ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5654:1: (lv_initExpression_4_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5650:1: ( (lv_initExpression_4_0= ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5651:1: (lv_initExpression_4_0= ruleExpression )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5654:1: (lv_initExpression_4_0= ruleExpression )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5655:3: lv_initExpression_4_0= ruleExpression
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5651:1: (lv_initExpression_4_0= ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:5652:3: lv_initExpression_4_0= ruleExpression
             {
             if ( state.backtracking==0 ) {
                
@@ -16514,8 +16511,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         EObject this_PropertyContextDecl_0 = null;
 
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:361:2: (this_PropertyContextDecl_0= rulePropertyContextDecl )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:361:2: this_PropertyContextDecl_0= rulePropertyContextDecl
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:358:2: (this_PropertyContextDecl_0= rulePropertyContextDecl )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:358:2: this_PropertyContextDecl_0= rulePropertyContextDecl
         {
         if ( state.backtracking==0 ) {
            
@@ -16537,8 +16534,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         EObject this_ClassifierContextDecl_1 = null;
 
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:374:2: (this_ClassifierContextDecl_1= ruleClassifierContextDecl )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:374:2: this_ClassifierContextDecl_1= ruleClassifierContextDecl
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:371:2: (this_ClassifierContextDecl_1= ruleClassifierContextDecl )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:371:2: this_ClassifierContextDecl_1= ruleClassifierContextDecl
         {
         if ( state.backtracking==0 ) {
            
@@ -16563,11 +16560,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         EObject lv_argument_3_2 = null;
 
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3629:2: ( () ( (lv_op_2_0= 'implies' ) ) ( ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3629:2: () ( (lv_op_2_0= 'implies' ) ) ( ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3626:2: ( () ( (lv_op_2_0= 'implies' ) ) ( ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3626:2: () ( (lv_op_2_0= 'implies' ) ) ( ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) ) )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3629:2: ()
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3630:2: 
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3626:2: ()
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3627:2: 
         {
         if ( state.backtracking==0 ) {
            
@@ -16577,11 +16574,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
         }
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3638:2: ( (lv_op_2_0= 'implies' ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3639:1: (lv_op_2_0= 'implies' )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3635:2: ( (lv_op_2_0= 'implies' ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3636:1: (lv_op_2_0= 'implies' )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3639:1: (lv_op_2_0= 'implies' )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3640:3: lv_op_2_0= 'implies'
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3636:1: (lv_op_2_0= 'implies' )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3637:3: lv_op_2_0= 'implies'
         {
         lv_op_2_0=(Token)match(input,58,FollowSets000.FOLLOW_58_in_synpred87_InternalBacktrackingContentAssistTestLanguage8131); if (state.failed) return ;
 
@@ -16590,13 +16587,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
         }
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3653:2: ( ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3654:1: ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3650:2: ( ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3651:1: ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3654:1: ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3655:1: (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3651:1: ( (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3652:1: (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3655:1: (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3652:1: (lv_argument_3_1= rulexor | lv_argument_3_2= ruleLetExp )
         int alt123=2;
         int LA123_0 = input.LA(1);
 
@@ -16615,7 +16612,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         }
         switch (alt123) {
             case 1 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3656:3: lv_argument_3_1= rulexor
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3653:3: lv_argument_3_1= rulexor
                 {
                 pushFollow(FollowSets000.FOLLOW_rulexor_in_synpred87_InternalBacktrackingContentAssistTestLanguage8167);
                 lv_argument_3_1=rulexor();
@@ -16626,7 +16623,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3671:8: lv_argument_3_2= ruleLetExp
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3668:8: lv_argument_3_2= ruleLetExp
                 {
                 if ( state.backtracking==0 ) {
                    
@@ -16663,11 +16660,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         EObject lv_argument_3_2 = null;
 
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3722:2: ( () ( (lv_op_2_0= 'xor' ) ) ( ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3722:2: () ( (lv_op_2_0= 'xor' ) ) ( ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3719:2: ( () ( (lv_op_2_0= 'xor' ) ) ( ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3719:2: () ( (lv_op_2_0= 'xor' ) ) ( ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) ) )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3722:2: ()
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3723:2: 
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3719:2: ()
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3720:2: 
         {
         if ( state.backtracking==0 ) {
            
@@ -16677,11 +16674,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
         }
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3731:2: ( (lv_op_2_0= 'xor' ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3732:1: (lv_op_2_0= 'xor' )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3728:2: ( (lv_op_2_0= 'xor' ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3729:1: (lv_op_2_0= 'xor' )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3732:1: (lv_op_2_0= 'xor' )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3733:3: lv_op_2_0= 'xor'
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3729:1: (lv_op_2_0= 'xor' )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3730:3: lv_op_2_0= 'xor'
         {
         lv_op_2_0=(Token)match(input,59,FollowSets000.FOLLOW_59_in_synpred89_InternalBacktrackingContentAssistTestLanguage8317); if (state.failed) return ;
 
@@ -16690,13 +16687,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
         }
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3746:2: ( ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3747:1: ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3743:2: ( ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3744:1: ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3747:1: ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3748:1: (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3744:1: ( (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3745:1: (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3748:1: (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3745:1: (lv_argument_3_1= ruleor | lv_argument_3_2= ruleLetExp )
         int alt124=2;
         int LA124_0 = input.LA(1);
 
@@ -16715,7 +16712,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         }
         switch (alt124) {
             case 1 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3749:3: lv_argument_3_1= ruleor
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3746:3: lv_argument_3_1= ruleor
                 {
                 pushFollow(FollowSets000.FOLLOW_ruleor_in_synpred89_InternalBacktrackingContentAssistTestLanguage8353);
                 lv_argument_3_1=ruleor();
@@ -16726,7 +16723,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3764:8: lv_argument_3_2= ruleLetExp
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3761:8: lv_argument_3_2= ruleLetExp
                 {
                 if ( state.backtracking==0 ) {
                    
@@ -16763,11 +16760,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         EObject lv_argument_3_2 = null;
 
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3815:2: ( () ( (lv_op_2_0= 'or' ) ) ( ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3815:2: () ( (lv_op_2_0= 'or' ) ) ( ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3812:2: ( () ( (lv_op_2_0= 'or' ) ) ( ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3812:2: () ( (lv_op_2_0= 'or' ) ) ( ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) ) )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3815:2: ()
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3816:2: 
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3812:2: ()
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3813:2: 
         {
         if ( state.backtracking==0 ) {
            
@@ -16777,11 +16774,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
         }
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3824:2: ( (lv_op_2_0= 'or' ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3825:1: (lv_op_2_0= 'or' )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3821:2: ( (lv_op_2_0= 'or' ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3822:1: (lv_op_2_0= 'or' )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3825:1: (lv_op_2_0= 'or' )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3826:3: lv_op_2_0= 'or'
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3822:1: (lv_op_2_0= 'or' )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3823:3: lv_op_2_0= 'or'
         {
         lv_op_2_0=(Token)match(input,60,FollowSets000.FOLLOW_60_in_synpred91_InternalBacktrackingContentAssistTestLanguage8503); if (state.failed) return ;
 
@@ -16790,13 +16787,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
         }
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3839:2: ( ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3840:1: ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3836:2: ( ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3837:1: ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3840:1: ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3841:1: (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3837:1: ( (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3838:1: (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3841:1: (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3838:1: (lv_argument_3_1= ruleand | lv_argument_3_2= ruleLetExp )
         int alt125=2;
         int LA125_0 = input.LA(1);
 
@@ -16815,7 +16812,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         }
         switch (alt125) {
             case 1 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3842:3: lv_argument_3_1= ruleand
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3839:3: lv_argument_3_1= ruleand
                 {
                 pushFollow(FollowSets000.FOLLOW_ruleand_in_synpred91_InternalBacktrackingContentAssistTestLanguage8539);
                 lv_argument_3_1=ruleand();
@@ -16826,7 +16823,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3857:8: lv_argument_3_2= ruleLetExp
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3854:8: lv_argument_3_2= ruleLetExp
                 {
                 if ( state.backtracking==0 ) {
                    
@@ -16863,11 +16860,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         EObject lv_argument_3_2 = null;
 
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3908:2: ( () ( (lv_op_2_0= 'and' ) ) ( ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3908:2: () ( (lv_op_2_0= 'and' ) ) ( ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3905:2: ( () ( (lv_op_2_0= 'and' ) ) ( ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3905:2: () ( (lv_op_2_0= 'and' ) ) ( ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) ) )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3908:2: ()
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3909:2: 
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3905:2: ()
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3906:2: 
         {
         if ( state.backtracking==0 ) {
            
@@ -16877,11 +16874,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
         }
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3917:2: ( (lv_op_2_0= 'and' ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3918:1: (lv_op_2_0= 'and' )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3914:2: ( (lv_op_2_0= 'and' ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3915:1: (lv_op_2_0= 'and' )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3918:1: (lv_op_2_0= 'and' )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3919:3: lv_op_2_0= 'and'
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3915:1: (lv_op_2_0= 'and' )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3916:3: lv_op_2_0= 'and'
         {
         lv_op_2_0=(Token)match(input,61,FollowSets000.FOLLOW_61_in_synpred93_InternalBacktrackingContentAssistTestLanguage8689); if (state.failed) return ;
 
@@ -16890,13 +16887,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
         }
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3932:2: ( ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3933:1: ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3929:2: ( ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3930:1: ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3933:1: ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3934:1: (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3930:1: ( (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3931:1: (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3934:1: (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3931:1: (lv_argument_3_1= ruleequality | lv_argument_3_2= ruleLetExp )
         int alt126=2;
         int LA126_0 = input.LA(1);
 
@@ -16915,7 +16912,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         }
         switch (alt126) {
             case 1 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3935:3: lv_argument_3_1= ruleequality
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3932:3: lv_argument_3_1= ruleequality
                 {
                 pushFollow(FollowSets000.FOLLOW_ruleequality_in_synpred93_InternalBacktrackingContentAssistTestLanguage8725);
                 lv_argument_3_1=ruleequality();
@@ -16926,7 +16923,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3950:8: lv_argument_3_2= ruleLetExp
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3947:8: lv_argument_3_2= ruleLetExp
                 {
                 if ( state.backtracking==0 ) {
                    
@@ -16964,11 +16961,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         EObject lv_argument_3_2 = null;
 
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4001:2: ( () ( ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) ) ) ( ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4001:2: () ( ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) ) ) ( ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3998:2: ( () ( ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) ) ) ( ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3998:2: () ( ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) ) ) ( ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) ) )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4001:2: ()
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4002:2: 
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3998:2: ()
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:3999:2: 
         {
         if ( state.backtracking==0 ) {
            
@@ -16978,13 +16975,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
         }
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4010:2: ( ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4011:1: ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4007:2: ( ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4008:1: ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4011:1: ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4012:1: (lv_op_2_1= '=' | lv_op_2_2= '<>' )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4008:1: ( (lv_op_2_1= '=' | lv_op_2_2= '<>' ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4009:1: (lv_op_2_1= '=' | lv_op_2_2= '<>' )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4012:1: (lv_op_2_1= '=' | lv_op_2_2= '<>' )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4009:1: (lv_op_2_1= '=' | lv_op_2_2= '<>' )
         int alt127=2;
         int LA127_0 = input.LA(1);
 
@@ -17003,14 +17000,14 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         }
         switch (alt127) {
             case 1 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4013:3: lv_op_2_1= '='
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4010:3: lv_op_2_1= '='
                 {
                 lv_op_2_1=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred96_InternalBacktrackingContentAssistTestLanguage8877); if (state.failed) return ;
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4025:8: lv_op_2_2= '<>'
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4022:8: lv_op_2_2= '<>'
                 {
                 lv_op_2_2=(Token)match(input,62,FollowSets000.FOLLOW_62_in_synpred96_InternalBacktrackingContentAssistTestLanguage8906); if (state.failed) return ;
 
@@ -17025,13 +17022,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
         }
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4040:2: ( ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4041:1: ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4037:2: ( ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4038:1: ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4041:1: ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4042:1: (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4038:1: ( (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4039:1: (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4042:1: (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4039:1: (lv_argument_3_1= rulerelational | lv_argument_3_2= ruleLetExp )
         int alt128=2;
         int LA128_0 = input.LA(1);
 
@@ -17050,7 +17047,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         }
         switch (alt128) {
             case 1 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4043:3: lv_argument_3_1= rulerelational
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4040:3: lv_argument_3_1= rulerelational
                 {
                 pushFollow(FollowSets000.FOLLOW_rulerelational_in_synpred96_InternalBacktrackingContentAssistTestLanguage8945);
                 lv_argument_3_1=rulerelational();
@@ -17061,7 +17058,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4058:8: lv_argument_3_2= ruleLetExp
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4055:8: lv_argument_3_2= ruleLetExp
                 {
                 if ( state.backtracking==0 ) {
                    
@@ -17101,11 +17098,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         EObject lv_argument_3_2 = null;
 
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4109:2: ( () ( ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) ) ) ( ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4109:2: () ( ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) ) ) ( ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4106:2: ( () ( ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) ) ) ( ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4106:2: () ( ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) ) ) ( ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) ) )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4109:2: ()
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4110:2: 
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4106:2: ()
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4107:2: 
         {
         if ( state.backtracking==0 ) {
            
@@ -17115,13 +17112,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
         }
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4118:2: ( ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4119:1: ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4115:2: ( ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4116:1: ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4119:1: ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4120:1: (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4116:1: ( (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4117:1: (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4120:1: (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4117:1: (lv_op_2_1= '>' | lv_op_2_2= '<' | lv_op_2_3= '>=' | lv_op_2_4= '<=' )
         int alt129=4;
         switch ( input.LA(1) ) {
         case 63:
@@ -17154,28 +17151,28 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
         switch (alt129) {
             case 1 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4121:3: lv_op_2_1= '>'
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4118:3: lv_op_2_1= '>'
                 {
                 lv_op_2_1=(Token)match(input,63,FollowSets000.FOLLOW_63_in_synpred101_InternalBacktrackingContentAssistTestLanguage9097); if (state.failed) return ;
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4133:8: lv_op_2_2= '<'
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4130:8: lv_op_2_2= '<'
                 {
                 lv_op_2_2=(Token)match(input,64,FollowSets000.FOLLOW_64_in_synpred101_InternalBacktrackingContentAssistTestLanguage9126); if (state.failed) return ;
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4145:8: lv_op_2_3= '>='
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4142:8: lv_op_2_3= '>='
                 {
                 lv_op_2_3=(Token)match(input,65,FollowSets000.FOLLOW_65_in_synpred101_InternalBacktrackingContentAssistTestLanguage9155); if (state.failed) return ;
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4157:8: lv_op_2_4= '<='
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4154:8: lv_op_2_4= '<='
                 {
                 lv_op_2_4=(Token)match(input,66,FollowSets000.FOLLOW_66_in_synpred101_InternalBacktrackingContentAssistTestLanguage9184); if (state.failed) return ;
 
@@ -17190,13 +17187,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
         }
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4172:2: ( ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4173:1: ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4169:2: ( ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4170:1: ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4173:1: ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4174:1: (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4170:1: ( (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4171:1: (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4174:1: (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4171:1: (lv_argument_3_1= ruleadditive | lv_argument_3_2= ruleLetExp )
         int alt130=2;
         int LA130_0 = input.LA(1);
 
@@ -17215,7 +17212,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         }
         switch (alt130) {
             case 1 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4175:3: lv_argument_3_1= ruleadditive
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4172:3: lv_argument_3_1= ruleadditive
                 {
                 pushFollow(FollowSets000.FOLLOW_ruleadditive_in_synpred101_InternalBacktrackingContentAssistTestLanguage9223);
                 lv_argument_3_1=ruleadditive();
@@ -17226,7 +17223,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4190:8: lv_argument_3_2= ruleLetExp
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4187:8: lv_argument_3_2= ruleLetExp
                 {
                 if ( state.backtracking==0 ) {
                    
@@ -17264,11 +17261,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         EObject lv_argument_3_2 = null;
 
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4241:2: ( () ( ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) ) ) ( ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4241:2: () ( ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) ) ) ( ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4238:2: ( () ( ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) ) ) ( ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4238:2: () ( ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) ) ) ( ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) ) )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4241:2: ()
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4242:2: 
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4238:2: ()
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4239:2: 
         {
         if ( state.backtracking==0 ) {
            
@@ -17278,13 +17275,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
         }
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4250:2: ( ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4251:1: ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4247:2: ( ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4248:1: ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4251:1: ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4252:1: (lv_op_2_1= '+' | lv_op_2_2= '-' )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4248:1: ( (lv_op_2_1= '+' | lv_op_2_2= '-' ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4249:1: (lv_op_2_1= '+' | lv_op_2_2= '-' )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4252:1: (lv_op_2_1= '+' | lv_op_2_2= '-' )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4249:1: (lv_op_2_1= '+' | lv_op_2_2= '-' )
         int alt131=2;
         int LA131_0 = input.LA(1);
 
@@ -17303,14 +17300,14 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         }
         switch (alt131) {
             case 1 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4253:3: lv_op_2_1= '+'
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4250:3: lv_op_2_1= '+'
                 {
                 lv_op_2_1=(Token)match(input,35,FollowSets000.FOLLOW_35_in_synpred104_InternalBacktrackingContentAssistTestLanguage9375); if (state.failed) return ;
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4265:8: lv_op_2_2= '-'
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4262:8: lv_op_2_2= '-'
                 {
                 lv_op_2_2=(Token)match(input,36,FollowSets000.FOLLOW_36_in_synpred104_InternalBacktrackingContentAssistTestLanguage9404); if (state.failed) return ;
 
@@ -17325,13 +17322,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
         }
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4280:2: ( ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4281:1: ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4277:2: ( ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4278:1: ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4281:1: ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4282:1: (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4278:1: ( (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4279:1: (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4282:1: (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4279:1: (lv_argument_3_1= rulemultiplicative | lv_argument_3_2= ruleLetExp )
         int alt132=2;
         int LA132_0 = input.LA(1);
 
@@ -17350,7 +17347,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         }
         switch (alt132) {
             case 1 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4283:3: lv_argument_3_1= rulemultiplicative
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4280:3: lv_argument_3_1= rulemultiplicative
                 {
                 pushFollow(FollowSets000.FOLLOW_rulemultiplicative_in_synpred104_InternalBacktrackingContentAssistTestLanguage9443);
                 lv_argument_3_1=rulemultiplicative();
@@ -17361,7 +17358,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4298:8: lv_argument_3_2= ruleLetExp
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4295:8: lv_argument_3_2= ruleLetExp
                 {
                 if ( state.backtracking==0 ) {
                    
@@ -17399,11 +17396,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         EObject lv_argument_3_2 = null;
 
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4349:2: ( () ( ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) ) ) ( ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4349:2: () ( ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) ) ) ( ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4346:2: ( () ( ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) ) ) ( ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4346:2: () ( ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) ) ) ( ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) ) )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4349:2: ()
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4350:2: 
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4346:2: ()
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4347:2: 
         {
         if ( state.backtracking==0 ) {
            
@@ -17413,13 +17410,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
         }
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4358:2: ( ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4359:1: ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4355:2: ( ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4356:1: ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4359:1: ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4360:1: (lv_op_2_1= '*' | lv_op_2_2= '/' )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4356:1: ( (lv_op_2_1= '*' | lv_op_2_2= '/' ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4357:1: (lv_op_2_1= '*' | lv_op_2_2= '/' )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4360:1: (lv_op_2_1= '*' | lv_op_2_2= '/' )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4357:1: (lv_op_2_1= '*' | lv_op_2_2= '/' )
         int alt133=2;
         int LA133_0 = input.LA(1);
 
@@ -17438,14 +17435,14 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         }
         switch (alt133) {
             case 1 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4361:3: lv_op_2_1= '*'
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4358:3: lv_op_2_1= '*'
                 {
                 lv_op_2_1=(Token)match(input,67,FollowSets000.FOLLOW_67_in_synpred107_InternalBacktrackingContentAssistTestLanguage9595); if (state.failed) return ;
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4373:8: lv_op_2_2= '/'
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4370:8: lv_op_2_2= '/'
                 {
                 lv_op_2_2=(Token)match(input,68,FollowSets000.FOLLOW_68_in_synpred107_InternalBacktrackingContentAssistTestLanguage9624); if (state.failed) return ;
 
@@ -17460,13 +17457,13 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
         }
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4388:2: ( ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4389:1: ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4385:2: ( ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4386:1: ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4389:1: ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4390:1: (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4386:1: ( (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4387:1: (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4390:1: (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4387:1: (lv_argument_3_1= ruleunary | lv_argument_3_2= ruleLetExp )
         int alt134=2;
         int LA134_0 = input.LA(1);
 
@@ -17485,7 +17482,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         }
         switch (alt134) {
             case 1 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4391:3: lv_argument_3_1= ruleunary
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4388:3: lv_argument_3_1= ruleunary
                 {
                 pushFollow(FollowSets000.FOLLOW_ruleunary_in_synpred107_InternalBacktrackingContentAssistTestLanguage9663);
                 lv_argument_3_1=ruleunary();
@@ -17496,7 +17493,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4406:8: lv_argument_3_2= ruleLetExp
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4403:8: lv_argument_3_2= ruleLetExp
                 {
                 if ( state.backtracking==0 ) {
                    
@@ -17530,8 +17527,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         EObject this_RoundBracketExp_0 = null;
 
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4537:2: (this_RoundBracketExp_0= ruleRoundBracketExp )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4537:2: this_RoundBracketExp_0= ruleRoundBracketExp
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4534:2: (this_RoundBracketExp_0= ruleRoundBracketExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4534:2: this_RoundBracketExp_0= ruleRoundBracketExp
         {
         if ( state.backtracking==0 ) {
            
@@ -17553,8 +17550,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         EObject this_SquareBracketExp_1 = null;
 
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4550:2: (this_SquareBracketExp_1= ruleSquareBracketExp )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4550:2: this_SquareBracketExp_1= ruleSquareBracketExp
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4547:2: (this_SquareBracketExp_1= ruleSquareBracketExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4547:2: this_SquareBracketExp_1= ruleSquareBracketExp
         {
         if ( state.backtracking==0 ) {
            
@@ -17576,8 +17573,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         EObject this_TupleLiteralExp_4 = null;
 
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4589:2: (this_TupleLiteralExp_4= ruleTupleLiteralExp )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4589:2: this_TupleLiteralExp_4= ruleTupleLiteralExp
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4586:2: (this_TupleLiteralExp_4= ruleTupleLiteralExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4586:2: this_TupleLiteralExp_4= ruleTupleLiteralExp
         {
         if ( state.backtracking==0 ) {
            
@@ -17599,8 +17596,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         EObject this_CollectionLiteralExp_5 = null;
 
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4602:2: (this_CollectionLiteralExp_5= ruleCollectionLiteralExp )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4602:2: this_CollectionLiteralExp_5= ruleCollectionLiteralExp
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4599:2: (this_CollectionLiteralExp_5= ruleCollectionLiteralExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4599:2: this_CollectionLiteralExp_5= ruleCollectionLiteralExp
         {
         if ( state.backtracking==0 ) {
            
@@ -17622,8 +17619,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         EObject this_PreExp_6 = null;
 
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4615:2: (this_PreExp_6= rulePreExp )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4615:2: this_PreExp_6= rulePreExp
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4612:2: (this_PreExp_6= rulePreExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4612:2: this_PreExp_6= rulePreExp
         {
         if ( state.backtracking==0 ) {
            
@@ -17645,8 +17642,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         EObject this_TypeExp_7 = null;
 
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4628:2: (this_TypeExp_7= ruleTypeExp )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4628:2: this_TypeExp_7= ruleTypeExp
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4625:2: (this_TypeExp_7= ruleTypeExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4625:2: this_TypeExp_7= ruleTypeExp
         {
         if ( state.backtracking==0 ) {
            
@@ -17668,8 +17665,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         EObject this_RoundBracketExp_0 = null;
 
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4710:2: (this_RoundBracketExp_0= ruleRoundBracketExp )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4710:2: this_RoundBracketExp_0= ruleRoundBracketExp
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4707:2: (this_RoundBracketExp_0= ruleRoundBracketExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4707:2: this_RoundBracketExp_0= ruleRoundBracketExp
         {
         if ( state.backtracking==0 ) {
            
@@ -17691,8 +17688,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         EObject this_SquareBracketExp_1 = null;
 
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4723:2: (this_SquareBracketExp_1= ruleSquareBracketExp )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4723:2: this_SquareBracketExp_1= ruleSquareBracketExp
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4720:2: (this_SquareBracketExp_1= ruleSquareBracketExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4720:2: this_SquareBracketExp_1= ruleSquareBracketExp
         {
         if ( state.backtracking==0 ) {
            
@@ -17714,8 +17711,8 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         EObject this_PreExp_2 = null;
 
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4736:2: (this_PreExp_2= rulePreExp )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4736:2: this_PreExp_2= rulePreExp
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4733:2: (this_PreExp_2= rulePreExp )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:4733:2: this_PreExp_2= rulePreExp
         {
         if ( state.backtracking==0 ) {
            
@@ -18083,7 +18080,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             this.transition = DFA86_transition;
         }
         public String getDescription() {
-            return "4536:1: (this_RoundBracketExp_0= ruleRoundBracketExp | this_SquareBracketExp_1= ruleSquareBracketExp | this_SelfExp_2= ruleSelfExp | this_PrimitiveLiteralExp_3= rulePrimitiveLiteralExp | this_TupleLiteralExp_4= ruleTupleLiteralExp | this_CollectionLiteralExp_5= ruleCollectionLiteralExp | this_PreExp_6= rulePreExp | this_TypeExp_7= ruleTypeExp | this_IfExp_8= ruleIfExp | (otherlv_9= '(' () ( (lv_source_11_0= ruleExpression ) ) otherlv_12= ')' ) )";
+            return "4533:1: (this_RoundBracketExp_0= ruleRoundBracketExp | this_SquareBracketExp_1= ruleSquareBracketExp | this_SelfExp_2= ruleSelfExp | this_PrimitiveLiteralExp_3= rulePrimitiveLiteralExp | this_TupleLiteralExp_4= ruleTupleLiteralExp | this_CollectionLiteralExp_5= ruleCollectionLiteralExp | this_PreExp_6= rulePreExp | this_TypeExp_7= ruleTypeExp | this_IfExp_8= ruleIfExp | (otherlv_9= '(' () ( (lv_source_11_0= ruleExpression ) ) otherlv_12= ')' ) )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -18307,7 +18304,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             this.transition = DFA91_transition;
         }
         public String getDescription() {
-            return "4966:1: ( ( (lv_variable1_4_0= ruleiteratorVariable ) ) ( (otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) ) ) | (otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) ) ) )? otherlv_9= '|' )?";
+            return "4963:1: ( ( (lv_variable1_4_0= ruleiteratorVariable ) ) ( (otherlv_5= ',' ( (lv_variable2_6_0= ruleiteratorVariable ) ) ) | (otherlv_7= ';' ( (lv_variable2_8_0= ruleiteratorAccumulator ) ) ) )? otherlv_9= '|' )?";
         }
     }
  

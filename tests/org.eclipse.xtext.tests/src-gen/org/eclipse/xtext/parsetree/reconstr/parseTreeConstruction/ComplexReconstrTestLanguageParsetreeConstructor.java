@@ -3039,12 +3039,12 @@ protected class TrickyG1_RightSquareBracketKeyword_2 extends KeywordToken  {
  *
  **/
 
-// //TrickyH: x+='a' TrickyH?; 
+// TrickyG1 //TrickyH: x+='a' TrickyH?; 
 // // TrickyG: TrickyG1 | TrickyG2;
 // // TrickyG1: name=TrickyG3;
 // // TrickyG2: name=TrickyG4;
 // // TrickyG3: val=ID {T.x=current} 'x';
-// // TrickyG4: val=INT {T.x=current} 'y'; TrickyG1 | val=INT
+// // TrickyG4: val=INT {T.x=current} 'y'; | val=INT
 protected class TrickyG2_Alternatives extends AlternativesToken {
 
 	public TrickyG2_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

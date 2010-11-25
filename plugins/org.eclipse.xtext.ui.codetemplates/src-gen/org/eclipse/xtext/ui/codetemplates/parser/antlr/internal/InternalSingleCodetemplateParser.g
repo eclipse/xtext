@@ -12,7 +12,6 @@ options {
 @header {
 package org.eclipse.xtext.ui.codetemplates.parser.antlr.internal; 
 
-import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
@@ -22,7 +21,6 @@ import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
-import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.ui.codetemplates.services.SingleCodetemplateGrammarAccess;
 
 }
@@ -30,31 +28,30 @@ import org.eclipse.xtext.ui.codetemplates.services.SingleCodetemplateGrammarAcce
 @members {
 
 
- 	private SingleCodetemplateGrammarAccess grammarAccess;
- 	
-    public InternalSingleCodetemplateParser(TokenStream input, IAstFactory factory, SingleCodetemplateGrammarAccess grammarAccess) {
-        this(input);
-        this.factory = factory;
-        registerRules(grammarAccess.getGrammar());
-        this.grammarAccess = grammarAccess;
-    }
-    
-    @Override
-    protected String getFirstRuleName() {
-    	return "Codetemplates";	
-   	} 
-   	   	
-   	@Override
-   	protected SingleCodetemplateGrammarAccess getGrammarAccess() {
-   		return grammarAccess;
-   	}
+	private SingleCodetemplateGrammarAccess grammarAccess;
+	 	
+	public InternalSingleCodetemplateParser(TokenStream input, SingleCodetemplateGrammarAccess grammarAccess) {
+		this(input);
+		this.grammarAccess = grammarAccess;
+		registerRules(grammarAccess.getGrammar());
+	}
+	
+	@Override
+	protected String getFirstRuleName() {
+		return "Codetemplates";	
+	} 
+	   	   	
+	@Override
+	protected SingleCodetemplateGrammarAccess getGrammarAccess() {
+		return grammarAccess;
+	}
 }
 
 @rulecatch { 
-    catch (RecognitionException re) { 
-        recover(input,re); 
-        appendSkippedTokens();
-    } 
+	catch (RecognitionException re) { 
+	    recover(input,re); 
+	    appendSkippedTokens();
+	}
 }
 
 

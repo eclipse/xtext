@@ -638,12 +638,12 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		//	TrickyG1 | val=INT;
 		public ParserRule getRule() { return rule; }
 
-		////TrickyH: x+='a' TrickyH?; 
+		//TrickyG1 //TrickyH: x+='a' TrickyH?; 
 		//// TrickyG: TrickyG1 | TrickyG2;
 		//// TrickyG1: name=TrickyG3;
 		//// TrickyG2: name=TrickyG4;
 		//// TrickyG3: val=ID {T.x=current} 'x';
-		//// TrickyG4: val=INT {T.x=current} 'y'; TrickyG1 | val=INT
+		//// TrickyG4: val=INT {T.x=current} 'y'; | val=INT
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//TrickyG1

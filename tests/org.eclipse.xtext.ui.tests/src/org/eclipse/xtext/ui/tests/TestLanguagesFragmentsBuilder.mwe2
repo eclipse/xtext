@@ -23,7 +23,7 @@ var backtrack = false
 var memoize = false
 
 CompositeGeneratorFragment {
-	fragment = @TestLanguagesFragments auto-inject {}
+	fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments auto-inject {}
 	fragment = validation.JavaValidatorFragment {}
 	fragment = builder.BuilderIntegrationFragment {}
 }

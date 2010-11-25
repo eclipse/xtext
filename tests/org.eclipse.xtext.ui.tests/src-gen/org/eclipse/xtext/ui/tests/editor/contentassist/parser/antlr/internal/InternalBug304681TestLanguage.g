@@ -20,7 +20,6 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 @parser::header {
 package org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal; 
 
-import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
@@ -31,7 +30,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
-import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug304681TestLanguageGrammarAccess;
 
 }
@@ -45,11 +43,10 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug304681TestLan
  
  	private Bug304681TestLanguageGrammarAccess grammarAccess;
  	
-    public InternalBug304681TestLanguageParser(TokenStream input, IAstFactory factory, Bug304681TestLanguageGrammarAccess grammarAccess) {
+    public InternalBug304681TestLanguageParser(TokenStream input, Bug304681TestLanguageGrammarAccess grammarAccess) {
         this(input);
-        this.factory = factory;
-        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
+        registerRules(grammarAccess.getGrammar());
     }
     
     @Override

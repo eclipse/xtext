@@ -1,6 +1,5 @@
 package org.eclipse.xtext.ui.tests.editor.outline.parser.antlr.internal; 
 
-import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
@@ -10,7 +9,6 @@ import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
-import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.ui.tests.editor.outline.services.OutlineTestLanguageGrammarAccess;
 
 
@@ -58,11 +56,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalAntlrPars
 
      	private OutlineTestLanguageGrammarAccess grammarAccess;
      	
-        public InternalOutlineTestLanguageParser(TokenStream input, IAstFactory factory, OutlineTestLanguageGrammarAccess grammarAccess) {
+        public InternalOutlineTestLanguageParser(TokenStream input, OutlineTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.semanticModelBuilder = factory;
-            registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
+            registerRules(grammarAccess.getGrammar());
         }
         
         @Override
@@ -78,7 +75,7 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "entryRuleModel"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:70:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -86,8 +83,8 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalAntlrPars
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:71:2: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:72:2: iv_ruleModel= ruleModel EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel75);
@@ -114,7 +111,7 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:79:1: ruleModel returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )* ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )* ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -124,10 +121,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalAntlrPars
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:82:28: ( ( (lv_elements_0_0= ruleElement ) )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:83:1: ( (lv_elements_0_0= ruleElement ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:79:28: ( ( (lv_elements_0_0= ruleElement ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:80:1: ( (lv_elements_0_0= ruleElement ) )*
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:83:1: ( (lv_elements_0_0= ruleElement ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:80:1: ( (lv_elements_0_0= ruleElement ) )*
             loop1:
             do {
                 int alt1=2;
@@ -140,10 +137,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalAntlrPars
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:84:1: (lv_elements_0_0= ruleElement )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:81:1: (lv_elements_0_0= ruleElement )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:84:1: (lv_elements_0_0= ruleElement )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:85:3: lv_elements_0_0= ruleElement
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:81:1: (lv_elements_0_0= ruleElement )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:82:3: lv_elements_0_0= ruleElement
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_0()); 
@@ -194,7 +191,7 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "entryRuleElement"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:109:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:106:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
     public final EObject entryRuleElement() throws RecognitionException {
         EObject current = null;
 
@@ -202,8 +199,8 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalAntlrPars
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:110:2: (iv_ruleElement= ruleElement EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:111:2: iv_ruleElement= ruleElement EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:107:2: (iv_ruleElement= ruleElement EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:108:2: iv_ruleElement= ruleElement EOF
             {
              newCompositeNode(grammarAccess.getElementRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleElement_in_entryRuleElement166);
@@ -230,7 +227,7 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "ruleElement"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:118:1: ruleElement returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '(' ( (otherlv_2= RULE_ID ) )* otherlv_3= ')' )? otherlv_4= '{' ( (lv_children_5_0= ruleElement ) )* otherlv_6= '}' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:115:1: ruleElement returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '(' ( (otherlv_2= RULE_ID ) )* otherlv_3= ')' )? otherlv_4= '{' ( (lv_children_5_0= ruleElement ) )* otherlv_6= '}' ) ;
     public final EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
@@ -246,17 +243,17 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalAntlrPars
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:121:28: ( ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '(' ( (otherlv_2= RULE_ID ) )* otherlv_3= ')' )? otherlv_4= '{' ( (lv_children_5_0= ruleElement ) )* otherlv_6= '}' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:122:1: ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '(' ( (otherlv_2= RULE_ID ) )* otherlv_3= ')' )? otherlv_4= '{' ( (lv_children_5_0= ruleElement ) )* otherlv_6= '}' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:118:28: ( ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '(' ( (otherlv_2= RULE_ID ) )* otherlv_3= ')' )? otherlv_4= '{' ( (lv_children_5_0= ruleElement ) )* otherlv_6= '}' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:119:1: ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '(' ( (otherlv_2= RULE_ID ) )* otherlv_3= ')' )? otherlv_4= '{' ( (lv_children_5_0= ruleElement ) )* otherlv_6= '}' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:122:1: ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '(' ( (otherlv_2= RULE_ID ) )* otherlv_3= ')' )? otherlv_4= '{' ( (lv_children_5_0= ruleElement ) )* otherlv_6= '}' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:122:2: ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '(' ( (otherlv_2= RULE_ID ) )* otherlv_3= ')' )? otherlv_4= '{' ( (lv_children_5_0= ruleElement ) )* otherlv_6= '}'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:119:1: ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '(' ( (otherlv_2= RULE_ID ) )* otherlv_3= ')' )? otherlv_4= '{' ( (lv_children_5_0= ruleElement ) )* otherlv_6= '}' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:119:2: ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '(' ( (otherlv_2= RULE_ID ) )* otherlv_3= ')' )? otherlv_4= '{' ( (lv_children_5_0= ruleElement ) )* otherlv_6= '}'
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:122:2: ( (lv_name_0_0= RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:123:1: (lv_name_0_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:119:2: ( (lv_name_0_0= RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:120:1: (lv_name_0_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:123:1: (lv_name_0_0= RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:124:3: lv_name_0_0= RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:120:1: (lv_name_0_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:121:3: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleElement218); 
 
@@ -278,7 +275,7 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalAntlrPars
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:140:2: (otherlv_1= '(' ( (otherlv_2= RULE_ID ) )* otherlv_3= ')' )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:137:2: (otherlv_1= '(' ( (otherlv_2= RULE_ID ) )* otherlv_3= ')' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -287,13 +284,13 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalAntlrPars
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:140:4: otherlv_1= '(' ( (otherlv_2= RULE_ID ) )* otherlv_3= ')'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:137:4: otherlv_1= '(' ( (otherlv_2= RULE_ID ) )* otherlv_3= ')'
                     {
                     otherlv_1=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleElement236); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getElementAccess().getLeftParenthesisKeyword_1_0());
                         
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:144:1: ( (otherlv_2= RULE_ID ) )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:141:1: ( (otherlv_2= RULE_ID ) )*
                     loop2:
                     do {
                         int alt2=2;
@@ -306,10 +303,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalAntlrPars
 
                         switch (alt2) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:145:1: (otherlv_2= RULE_ID )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:142:1: (otherlv_2= RULE_ID )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:145:1: (otherlv_2= RULE_ID )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:146:3: otherlv_2= RULE_ID
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:142:1: (otherlv_2= RULE_ID )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:143:3: otherlv_2= RULE_ID
                     	    {
 
                     	    			if (current==null) {
@@ -346,7 +343,7 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalAntlrPars
 
                 	newLeafNode(otherlv_4, grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_2());
                 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:165:1: ( (lv_children_5_0= ruleElement ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:162:1: ( (lv_children_5_0= ruleElement ) )*
             loop4:
             do {
                 int alt4=2;
@@ -359,10 +356,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalAntlrPars
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:166:1: (lv_children_5_0= ruleElement )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:163:1: (lv_children_5_0= ruleElement )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:166:1: (lv_children_5_0= ruleElement )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:167:3: lv_children_5_0= ruleElement
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:163:1: (lv_children_5_0= ruleElement )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.g:164:3: lv_children_5_0= ruleElement
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getElementAccess().getChildrenElementParserRuleCall_3_0()); 

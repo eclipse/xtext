@@ -18,6 +18,7 @@ public class XtypeParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrPar
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+	@Override
 	protected org.eclipse.xtext.xbase.parser.antlr.internal.InternalXtypeParser createParser(XtextTokenStream stream) {
 		return new org.eclipse.xtext.xbase.parser.antlr.internal.InternalXtypeParser(stream, getGrammarAccess());
 	}

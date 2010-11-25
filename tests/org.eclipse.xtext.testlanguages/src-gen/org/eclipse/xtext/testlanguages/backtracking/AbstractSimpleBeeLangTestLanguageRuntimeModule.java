@@ -106,7 +106,7 @@ public abstract class AbstractSimpleBeeLangTestLanguageRuntimeModule extends Def
 
 	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
 	public void configureIgnoreCaseLinking(com.google.inject.Binder binder) {
-		binder.bind(Boolean.TYPE).annotatedWith(org.eclipse.xtext.scoping.IgnoreCaseLinking.class).toInstance(false);
+		binder.bindConstant().annotatedWith(org.eclipse.xtext.scoping.IgnoreCaseLinking.class).to(false);
 	}
 
 	// contributed by org.eclipse.xtext.generator.exporting.QualifiedNamesFragment

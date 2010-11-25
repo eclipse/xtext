@@ -1,6 +1,5 @@
 package org.eclipse.xtext.example.parser.antlr.internal; 
 
-import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
@@ -10,7 +9,6 @@ import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
-import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.example.services.EcoreDslGrammarAccess;
 
 
@@ -100,11 +98,10 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
      	private EcoreDslGrammarAccess grammarAccess;
      	
-        public InternalEcoreDslParser(TokenStream input, IAstFactory factory, EcoreDslGrammarAccess grammarAccess) {
+        public InternalEcoreDslParser(TokenStream input, EcoreDslGrammarAccess grammarAccess) {
             this(input);
-            this.semanticModelBuilder = factory;
-            registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
+            registerRules(grammarAccess.getGrammar());
         }
         
         @Override
@@ -120,7 +117,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEcoreDsl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:70:1: entryRuleEcoreDsl returns [EObject current=null] : iv_ruleEcoreDsl= ruleEcoreDsl EOF ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:67:1: entryRuleEcoreDsl returns [EObject current=null] : iv_ruleEcoreDsl= ruleEcoreDsl EOF ;
     public final EObject entryRuleEcoreDsl() throws RecognitionException {
         EObject current = null;
 
@@ -128,8 +125,8 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:71:2: (iv_ruleEcoreDsl= ruleEcoreDsl EOF )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:72:2: iv_ruleEcoreDsl= ruleEcoreDsl EOF
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:68:2: (iv_ruleEcoreDsl= ruleEcoreDsl EOF )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:69:2: iv_ruleEcoreDsl= ruleEcoreDsl EOF
             {
              newCompositeNode(grammarAccess.getEcoreDslRule()); 
             pushFollow(FOLLOW_ruleEcoreDsl_in_entryRuleEcoreDsl75);
@@ -156,7 +153,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEcoreDsl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:79:1: ruleEcoreDsl returns [EObject current=null] : ( ( (lv_metamodelDeclarations_0_0= ruleReferencedMetamodel ) )* ( (lv_package_1_0= ruleEPackageDecl ) ) ) ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:76:1: ruleEcoreDsl returns [EObject current=null] : ( ( (lv_metamodelDeclarations_0_0= ruleReferencedMetamodel ) )* ( (lv_package_1_0= ruleEPackageDecl ) ) ) ;
     public final EObject ruleEcoreDsl() throws RecognitionException {
         EObject current = null;
 
@@ -168,13 +165,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:82:28: ( ( ( (lv_metamodelDeclarations_0_0= ruleReferencedMetamodel ) )* ( (lv_package_1_0= ruleEPackageDecl ) ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:83:1: ( ( (lv_metamodelDeclarations_0_0= ruleReferencedMetamodel ) )* ( (lv_package_1_0= ruleEPackageDecl ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:79:28: ( ( ( (lv_metamodelDeclarations_0_0= ruleReferencedMetamodel ) )* ( (lv_package_1_0= ruleEPackageDecl ) ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:80:1: ( ( (lv_metamodelDeclarations_0_0= ruleReferencedMetamodel ) )* ( (lv_package_1_0= ruleEPackageDecl ) ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:83:1: ( ( (lv_metamodelDeclarations_0_0= ruleReferencedMetamodel ) )* ( (lv_package_1_0= ruleEPackageDecl ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:83:2: ( (lv_metamodelDeclarations_0_0= ruleReferencedMetamodel ) )* ( (lv_package_1_0= ruleEPackageDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:80:1: ( ( (lv_metamodelDeclarations_0_0= ruleReferencedMetamodel ) )* ( (lv_package_1_0= ruleEPackageDecl ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:80:2: ( (lv_metamodelDeclarations_0_0= ruleReferencedMetamodel ) )* ( (lv_package_1_0= ruleEPackageDecl ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:83:2: ( (lv_metamodelDeclarations_0_0= ruleReferencedMetamodel ) )*
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:80:2: ( (lv_metamodelDeclarations_0_0= ruleReferencedMetamodel ) )*
             loop1:
             do {
                 int alt1=2;
@@ -187,10 +184,10 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:84:1: (lv_metamodelDeclarations_0_0= ruleReferencedMetamodel )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:81:1: (lv_metamodelDeclarations_0_0= ruleReferencedMetamodel )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:84:1: (lv_metamodelDeclarations_0_0= ruleReferencedMetamodel )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:85:3: lv_metamodelDeclarations_0_0= ruleReferencedMetamodel
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:81:1: (lv_metamodelDeclarations_0_0= ruleReferencedMetamodel )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:82:3: lv_metamodelDeclarations_0_0= ruleReferencedMetamodel
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getEcoreDslAccess().getMetamodelDeclarationsReferencedMetamodelParserRuleCall_0_0()); 
@@ -223,11 +220,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:101:3: ( (lv_package_1_0= ruleEPackageDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:102:1: (lv_package_1_0= ruleEPackageDecl )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:98:3: ( (lv_package_1_0= ruleEPackageDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:99:1: (lv_package_1_0= ruleEPackageDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:102:1: (lv_package_1_0= ruleEPackageDecl )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:103:3: lv_package_1_0= ruleEPackageDecl
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:99:1: (lv_package_1_0= ruleEPackageDecl )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:100:3: lv_package_1_0= ruleEPackageDecl
             {
              
             	        newCompositeNode(grammarAccess.getEcoreDslAccess().getPackageEPackageDeclParserRuleCall_1_0()); 
@@ -275,7 +272,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleReferencedMetamodel"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:127:1: entryRuleReferencedMetamodel returns [EObject current=null] : iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:124:1: entryRuleReferencedMetamodel returns [EObject current=null] : iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF ;
     public final EObject entryRuleReferencedMetamodel() throws RecognitionException {
         EObject current = null;
 
@@ -283,8 +280,8 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:128:2: (iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:129:2: iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:125:2: (iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:126:2: iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF
             {
              newCompositeNode(grammarAccess.getReferencedMetamodelRule()); 
             pushFollow(FOLLOW_ruleReferencedMetamodel_in_entryRuleReferencedMetamodel189);
@@ -311,7 +308,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleReferencedMetamodel"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:136:1: ruleReferencedMetamodel returns [EObject current=null] : (otherlv_0= 'import' ( ( (lv_alias_1_0= RULE_ID ) ) otherlv_2= '=' )? ( (otherlv_3= RULE_STRING ) ) otherlv_4= ';' ) ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:133:1: ruleReferencedMetamodel returns [EObject current=null] : (otherlv_0= 'import' ( ( (lv_alias_1_0= RULE_ID ) ) otherlv_2= '=' )? ( (otherlv_3= RULE_STRING ) ) otherlv_4= ';' ) ;
     public final EObject ruleReferencedMetamodel() throws RecognitionException {
         EObject current = null;
 
@@ -324,17 +321,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:139:28: ( (otherlv_0= 'import' ( ( (lv_alias_1_0= RULE_ID ) ) otherlv_2= '=' )? ( (otherlv_3= RULE_STRING ) ) otherlv_4= ';' ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:140:1: (otherlv_0= 'import' ( ( (lv_alias_1_0= RULE_ID ) ) otherlv_2= '=' )? ( (otherlv_3= RULE_STRING ) ) otherlv_4= ';' )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:136:28: ( (otherlv_0= 'import' ( ( (lv_alias_1_0= RULE_ID ) ) otherlv_2= '=' )? ( (otherlv_3= RULE_STRING ) ) otherlv_4= ';' ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:137:1: (otherlv_0= 'import' ( ( (lv_alias_1_0= RULE_ID ) ) otherlv_2= '=' )? ( (otherlv_3= RULE_STRING ) ) otherlv_4= ';' )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:140:1: (otherlv_0= 'import' ( ( (lv_alias_1_0= RULE_ID ) ) otherlv_2= '=' )? ( (otherlv_3= RULE_STRING ) ) otherlv_4= ';' )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:140:3: otherlv_0= 'import' ( ( (lv_alias_1_0= RULE_ID ) ) otherlv_2= '=' )? ( (otherlv_3= RULE_STRING ) ) otherlv_4= ';'
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:137:1: (otherlv_0= 'import' ( ( (lv_alias_1_0= RULE_ID ) ) otherlv_2= '=' )? ( (otherlv_3= RULE_STRING ) ) otherlv_4= ';' )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:137:3: otherlv_0= 'import' ( ( (lv_alias_1_0= RULE_ID ) ) otherlv_2= '=' )? ( (otherlv_3= RULE_STRING ) ) otherlv_4= ';'
             {
             otherlv_0=(Token)match(input,16,FOLLOW_16_in_ruleReferencedMetamodel236); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getReferencedMetamodelAccess().getImportKeyword_0());
                 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:144:1: ( ( (lv_alias_1_0= RULE_ID ) ) otherlv_2= '=' )?
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:141:1: ( ( (lv_alias_1_0= RULE_ID ) ) otherlv_2= '=' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -343,13 +340,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:144:2: ( (lv_alias_1_0= RULE_ID ) ) otherlv_2= '='
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:141:2: ( (lv_alias_1_0= RULE_ID ) ) otherlv_2= '='
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:144:2: ( (lv_alias_1_0= RULE_ID ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:145:1: (lv_alias_1_0= RULE_ID )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:141:2: ( (lv_alias_1_0= RULE_ID ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:142:1: (lv_alias_1_0= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:145:1: (lv_alias_1_0= RULE_ID )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:146:3: lv_alias_1_0= RULE_ID
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:142:1: (lv_alias_1_0= RULE_ID )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:143:3: lv_alias_1_0= RULE_ID
                     {
                     lv_alias_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleReferencedMetamodel254); 
 
@@ -381,11 +378,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:166:3: ( (otherlv_3= RULE_STRING ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:167:1: (otherlv_3= RULE_STRING )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:163:3: ( (otherlv_3= RULE_STRING ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:164:1: (otherlv_3= RULE_STRING )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:167:1: (otherlv_3= RULE_STRING )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:168:3: otherlv_3= RULE_STRING
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:164:1: (otherlv_3= RULE_STRING )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:165:3: otherlv_3= RULE_STRING
             {
 
             			if (current==null) {
@@ -427,7 +424,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEPackageDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:191:1: entryRuleEPackageDecl returns [EObject current=null] : iv_ruleEPackageDecl= ruleEPackageDecl EOF ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:188:1: entryRuleEPackageDecl returns [EObject current=null] : iv_ruleEPackageDecl= ruleEPackageDecl EOF ;
     public final EObject entryRuleEPackageDecl() throws RecognitionException {
         EObject current = null;
 
@@ -435,8 +432,8 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:192:2: (iv_ruleEPackageDecl= ruleEPackageDecl EOF )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:193:2: iv_ruleEPackageDecl= ruleEPackageDecl EOF
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:189:2: (iv_ruleEPackageDecl= ruleEPackageDecl EOF )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:190:2: iv_ruleEPackageDecl= ruleEPackageDecl EOF
             {
              newCompositeNode(grammarAccess.getEPackageDeclRule()); 
             pushFollow(FOLLOW_ruleEPackageDecl_in_entryRuleEPackageDecl341);
@@ -463,7 +460,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEPackageDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:200:1: ruleEPackageDecl returns [EObject current=null] : ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'package' ( (lv_name_2_0= ruleQID ) ) otherlv_3= 'nsURI' otherlv_4= '=' ( (lv_nsURI_5_0= RULE_STRING ) ) otherlv_6= 'nsPrefix' otherlv_7= '=' ( (lv_nsPrefix_8_0= ruleQID ) ) otherlv_9= '{' ( ( (lv_eSubpackages_10_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_11_0= ruleEClassifierDecl ) ) )* otherlv_12= '}' ) ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:197:1: ruleEPackageDecl returns [EObject current=null] : ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'package' ( (lv_name_2_0= ruleQID ) ) otherlv_3= 'nsURI' otherlv_4= '=' ( (lv_nsURI_5_0= RULE_STRING ) ) otherlv_6= 'nsPrefix' otherlv_7= '=' ( (lv_nsPrefix_8_0= ruleQID ) ) otherlv_9= '{' ( ( (lv_eSubpackages_10_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_11_0= ruleEClassifierDecl ) ) )* otherlv_12= '}' ) ;
     public final EObject ruleEPackageDecl() throws RecognitionException {
         EObject current = null;
 
@@ -489,13 +486,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:203:28: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'package' ( (lv_name_2_0= ruleQID ) ) otherlv_3= 'nsURI' otherlv_4= '=' ( (lv_nsURI_5_0= RULE_STRING ) ) otherlv_6= 'nsPrefix' otherlv_7= '=' ( (lv_nsPrefix_8_0= ruleQID ) ) otherlv_9= '{' ( ( (lv_eSubpackages_10_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_11_0= ruleEClassifierDecl ) ) )* otherlv_12= '}' ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:204:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'package' ( (lv_name_2_0= ruleQID ) ) otherlv_3= 'nsURI' otherlv_4= '=' ( (lv_nsURI_5_0= RULE_STRING ) ) otherlv_6= 'nsPrefix' otherlv_7= '=' ( (lv_nsPrefix_8_0= ruleQID ) ) otherlv_9= '{' ( ( (lv_eSubpackages_10_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_11_0= ruleEClassifierDecl ) ) )* otherlv_12= '}' )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:200:28: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'package' ( (lv_name_2_0= ruleQID ) ) otherlv_3= 'nsURI' otherlv_4= '=' ( (lv_nsURI_5_0= RULE_STRING ) ) otherlv_6= 'nsPrefix' otherlv_7= '=' ( (lv_nsPrefix_8_0= ruleQID ) ) otherlv_9= '{' ( ( (lv_eSubpackages_10_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_11_0= ruleEClassifierDecl ) ) )* otherlv_12= '}' ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:201:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'package' ( (lv_name_2_0= ruleQID ) ) otherlv_3= 'nsURI' otherlv_4= '=' ( (lv_nsURI_5_0= RULE_STRING ) ) otherlv_6= 'nsPrefix' otherlv_7= '=' ( (lv_nsPrefix_8_0= ruleQID ) ) otherlv_9= '{' ( ( (lv_eSubpackages_10_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_11_0= ruleEClassifierDecl ) ) )* otherlv_12= '}' )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:204:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'package' ( (lv_name_2_0= ruleQID ) ) otherlv_3= 'nsURI' otherlv_4= '=' ( (lv_nsURI_5_0= RULE_STRING ) ) otherlv_6= 'nsPrefix' otherlv_7= '=' ( (lv_nsPrefix_8_0= ruleQID ) ) otherlv_9= '{' ( ( (lv_eSubpackages_10_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_11_0= ruleEClassifierDecl ) ) )* otherlv_12= '}' )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:204:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'package' ( (lv_name_2_0= ruleQID ) ) otherlv_3= 'nsURI' otherlv_4= '=' ( (lv_nsURI_5_0= RULE_STRING ) ) otherlv_6= 'nsPrefix' otherlv_7= '=' ( (lv_nsPrefix_8_0= ruleQID ) ) otherlv_9= '{' ( ( (lv_eSubpackages_10_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_11_0= ruleEClassifierDecl ) ) )* otherlv_12= '}'
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:201:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'package' ( (lv_name_2_0= ruleQID ) ) otherlv_3= 'nsURI' otherlv_4= '=' ( (lv_nsURI_5_0= RULE_STRING ) ) otherlv_6= 'nsPrefix' otherlv_7= '=' ( (lv_nsPrefix_8_0= ruleQID ) ) otherlv_9= '{' ( ( (lv_eSubpackages_10_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_11_0= ruleEClassifierDecl ) ) )* otherlv_12= '}' )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:201:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'package' ( (lv_name_2_0= ruleQID ) ) otherlv_3= 'nsURI' otherlv_4= '=' ( (lv_nsURI_5_0= RULE_STRING ) ) otherlv_6= 'nsPrefix' otherlv_7= '=' ( (lv_nsPrefix_8_0= ruleQID ) ) otherlv_9= '{' ( ( (lv_eSubpackages_10_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_11_0= ruleEClassifierDecl ) ) )* otherlv_12= '}'
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:204:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )*
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:201:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )*
             loop3:
             do {
                 int alt3=2;
@@ -508,10 +505,10 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:205:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:202:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:205:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:206:3: lv_eAnnotations_0_0= ruleEAnnotationDecl
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:202:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:203:3: lv_eAnnotations_0_0= ruleEAnnotationDecl
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getEPackageDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
@@ -548,11 +545,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_1, grammarAccess.getEPackageDeclAccess().getPackageKeyword_1());
                 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:226:1: ( (lv_name_2_0= ruleQID ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:227:1: (lv_name_2_0= ruleQID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:223:1: ( (lv_name_2_0= ruleQID ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:224:1: (lv_name_2_0= ruleQID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:227:1: (lv_name_2_0= ruleQID )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:228:3: lv_name_2_0= ruleQID
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:224:1: (lv_name_2_0= ruleQID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:225:3: lv_name_2_0= ruleQID
             {
              
             	        newCompositeNode(grammarAccess.getEPackageDeclAccess().getNameQIDParserRuleCall_2_0()); 
@@ -587,11 +584,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_4, grammarAccess.getEPackageDeclAccess().getEqualsSignKeyword_4());
                 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:252:1: ( (lv_nsURI_5_0= RULE_STRING ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:253:1: (lv_nsURI_5_0= RULE_STRING )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:249:1: ( (lv_nsURI_5_0= RULE_STRING ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:250:1: (lv_nsURI_5_0= RULE_STRING )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:253:1: (lv_nsURI_5_0= RULE_STRING )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:254:3: lv_nsURI_5_0= RULE_STRING
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:250:1: (lv_nsURI_5_0= RULE_STRING )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:251:3: lv_nsURI_5_0= RULE_STRING
             {
             lv_nsURI_5_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleEPackageDecl472); 
 
@@ -621,11 +618,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_7, grammarAccess.getEPackageDeclAccess().getEqualsSignKeyword_7());
                 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:278:1: ( (lv_nsPrefix_8_0= ruleQID ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:279:1: (lv_nsPrefix_8_0= ruleQID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:275:1: ( (lv_nsPrefix_8_0= ruleQID ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:276:1: (lv_nsPrefix_8_0= ruleQID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:279:1: (lv_nsPrefix_8_0= ruleQID )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:280:3: lv_nsPrefix_8_0= ruleQID
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:276:1: (lv_nsPrefix_8_0= ruleQID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:277:3: lv_nsPrefix_8_0= ruleQID
             {
              
             	        newCompositeNode(grammarAccess.getEPackageDeclAccess().getNsPrefixQIDParserRuleCall_8_0()); 
@@ -656,20 +653,20 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_9, grammarAccess.getEPackageDeclAccess().getLeftCurlyBracketKeyword_9());
                 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:300:1: ( ( (lv_eSubpackages_10_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_11_0= ruleEClassifierDecl ) ) )*
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:297:1: ( ( (lv_eSubpackages_10_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_11_0= ruleEClassifierDecl ) ) )*
             loop4:
             do {
                 int alt4=3;
                 alt4 = dfa4.predict(input);
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:300:2: ( (lv_eSubpackages_10_0= ruleSubEPackageDecl ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:297:2: ( (lv_eSubpackages_10_0= ruleSubEPackageDecl ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:300:2: ( (lv_eSubpackages_10_0= ruleSubEPackageDecl ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:301:1: (lv_eSubpackages_10_0= ruleSubEPackageDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:297:2: ( (lv_eSubpackages_10_0= ruleSubEPackageDecl ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:298:1: (lv_eSubpackages_10_0= ruleSubEPackageDecl )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:301:1: (lv_eSubpackages_10_0= ruleSubEPackageDecl )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:302:3: lv_eSubpackages_10_0= ruleSubEPackageDecl
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:298:1: (lv_eSubpackages_10_0= ruleSubEPackageDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:299:3: lv_eSubpackages_10_0= ruleSubEPackageDecl
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getEPackageDeclAccess().getESubpackagesSubEPackageDeclParserRuleCall_10_0_0()); 
@@ -700,13 +697,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:319:6: ( (lv_eClassifiers_11_0= ruleEClassifierDecl ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:316:6: ( (lv_eClassifiers_11_0= ruleEClassifierDecl ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:319:6: ( (lv_eClassifiers_11_0= ruleEClassifierDecl ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:320:1: (lv_eClassifiers_11_0= ruleEClassifierDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:316:6: ( (lv_eClassifiers_11_0= ruleEClassifierDecl ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:317:1: (lv_eClassifiers_11_0= ruleEClassifierDecl )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:320:1: (lv_eClassifiers_11_0= ruleEClassifierDecl )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:321:3: lv_eClassifiers_11_0= ruleEClassifierDecl
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:317:1: (lv_eClassifiers_11_0= ruleEClassifierDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:318:3: lv_eClassifiers_11_0= ruleEClassifierDecl
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getEPackageDeclAccess().getEClassifiersEClassifierDeclParserRuleCall_10_1_0()); 
@@ -767,7 +764,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleSubEPackageDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:349:1: entryRuleSubEPackageDecl returns [EObject current=null] : iv_ruleSubEPackageDecl= ruleSubEPackageDecl EOF ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:346:1: entryRuleSubEPackageDecl returns [EObject current=null] : iv_ruleSubEPackageDecl= ruleSubEPackageDecl EOF ;
     public final EObject entryRuleSubEPackageDecl() throws RecognitionException {
         EObject current = null;
 
@@ -775,8 +772,8 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:350:2: (iv_ruleSubEPackageDecl= ruleSubEPackageDecl EOF )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:351:2: iv_ruleSubEPackageDecl= ruleSubEPackageDecl EOF
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:347:2: (iv_ruleSubEPackageDecl= ruleSubEPackageDecl EOF )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:348:2: iv_ruleSubEPackageDecl= ruleSubEPackageDecl EOF
             {
              newCompositeNode(grammarAccess.getSubEPackageDeclRule()); 
             pushFollow(FOLLOW_ruleSubEPackageDecl_in_entryRuleSubEPackageDecl633);
@@ -803,7 +800,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSubEPackageDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:358:1: ruleSubEPackageDecl returns [EObject current=null] : ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'package' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' ( ( (lv_eSubpackages_4_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_5_0= ruleEClassifierDecl ) ) )* otherlv_6= '}' ) ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:355:1: ruleSubEPackageDecl returns [EObject current=null] : ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'package' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' ( ( (lv_eSubpackages_4_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_5_0= ruleEClassifierDecl ) ) )* otherlv_6= '}' ) ;
     public final EObject ruleSubEPackageDecl() throws RecognitionException {
         EObject current = null;
 
@@ -821,13 +818,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:361:28: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'package' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' ( ( (lv_eSubpackages_4_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_5_0= ruleEClassifierDecl ) ) )* otherlv_6= '}' ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:362:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'package' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' ( ( (lv_eSubpackages_4_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_5_0= ruleEClassifierDecl ) ) )* otherlv_6= '}' )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:358:28: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'package' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' ( ( (lv_eSubpackages_4_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_5_0= ruleEClassifierDecl ) ) )* otherlv_6= '}' ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:359:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'package' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' ( ( (lv_eSubpackages_4_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_5_0= ruleEClassifierDecl ) ) )* otherlv_6= '}' )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:362:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'package' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' ( ( (lv_eSubpackages_4_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_5_0= ruleEClassifierDecl ) ) )* otherlv_6= '}' )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:362:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'package' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' ( ( (lv_eSubpackages_4_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_5_0= ruleEClassifierDecl ) ) )* otherlv_6= '}'
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:359:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'package' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' ( ( (lv_eSubpackages_4_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_5_0= ruleEClassifierDecl ) ) )* otherlv_6= '}' )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:359:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'package' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' ( ( (lv_eSubpackages_4_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_5_0= ruleEClassifierDecl ) ) )* otherlv_6= '}'
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:362:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )*
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:359:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )*
             loop5:
             do {
                 int alt5=2;
@@ -840,10 +837,10 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt5) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:363:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:360:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:363:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:364:3: lv_eAnnotations_0_0= ruleEAnnotationDecl
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:360:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:361:3: lv_eAnnotations_0_0= ruleEAnnotationDecl
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getSubEPackageDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
@@ -880,11 +877,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_1, grammarAccess.getSubEPackageDeclAccess().getPackageKeyword_1());
                 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:384:1: ( (lv_name_2_0= RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:385:1: (lv_name_2_0= RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:381:1: ( (lv_name_2_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:382:1: (lv_name_2_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:385:1: (lv_name_2_0= RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:386:3: lv_name_2_0= RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:382:1: (lv_name_2_0= RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:383:3: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSubEPackageDecl719); 
 
@@ -910,20 +907,20 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_3, grammarAccess.getSubEPackageDeclAccess().getLeftCurlyBracketKeyword_3());
                 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:406:1: ( ( (lv_eSubpackages_4_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_5_0= ruleEClassifierDecl ) ) )*
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:403:1: ( ( (lv_eSubpackages_4_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_5_0= ruleEClassifierDecl ) ) )*
             loop6:
             do {
                 int alt6=3;
                 alt6 = dfa6.predict(input);
                 switch (alt6) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:406:2: ( (lv_eSubpackages_4_0= ruleSubEPackageDecl ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:403:2: ( (lv_eSubpackages_4_0= ruleSubEPackageDecl ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:406:2: ( (lv_eSubpackages_4_0= ruleSubEPackageDecl ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:407:1: (lv_eSubpackages_4_0= ruleSubEPackageDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:403:2: ( (lv_eSubpackages_4_0= ruleSubEPackageDecl ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:404:1: (lv_eSubpackages_4_0= ruleSubEPackageDecl )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:407:1: (lv_eSubpackages_4_0= ruleSubEPackageDecl )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:408:3: lv_eSubpackages_4_0= ruleSubEPackageDecl
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:404:1: (lv_eSubpackages_4_0= ruleSubEPackageDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:405:3: lv_eSubpackages_4_0= ruleSubEPackageDecl
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getSubEPackageDeclAccess().getESubpackagesSubEPackageDeclParserRuleCall_4_0_0()); 
@@ -954,13 +951,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:425:6: ( (lv_eClassifiers_5_0= ruleEClassifierDecl ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:422:6: ( (lv_eClassifiers_5_0= ruleEClassifierDecl ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:425:6: ( (lv_eClassifiers_5_0= ruleEClassifierDecl ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:426:1: (lv_eClassifiers_5_0= ruleEClassifierDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:422:6: ( (lv_eClassifiers_5_0= ruleEClassifierDecl ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:423:1: (lv_eClassifiers_5_0= ruleEClassifierDecl )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:426:1: (lv_eClassifiers_5_0= ruleEClassifierDecl )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:427:3: lv_eClassifiers_5_0= ruleEClassifierDecl
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:423:1: (lv_eClassifiers_5_0= ruleEClassifierDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:424:3: lv_eClassifiers_5_0= ruleEClassifierDecl
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getSubEPackageDeclAccess().getEClassifiersEClassifierDeclParserRuleCall_4_1_0()); 
@@ -1021,7 +1018,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEClassifierDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:455:1: entryRuleEClassifierDecl returns [EObject current=null] : iv_ruleEClassifierDecl= ruleEClassifierDecl EOF ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:452:1: entryRuleEClassifierDecl returns [EObject current=null] : iv_ruleEClassifierDecl= ruleEClassifierDecl EOF ;
     public final EObject entryRuleEClassifierDecl() throws RecognitionException {
         EObject current = null;
 
@@ -1029,8 +1026,8 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:456:2: (iv_ruleEClassifierDecl= ruleEClassifierDecl EOF )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:457:2: iv_ruleEClassifierDecl= ruleEClassifierDecl EOF
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:453:2: (iv_ruleEClassifierDecl= ruleEClassifierDecl EOF )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:454:2: iv_ruleEClassifierDecl= ruleEClassifierDecl EOF
             {
              newCompositeNode(grammarAccess.getEClassifierDeclRule()); 
             pushFollow(FOLLOW_ruleEClassifierDecl_in_entryRuleEClassifierDecl835);
@@ -1057,7 +1054,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEClassifierDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:464:1: ruleEClassifierDecl returns [EObject current=null] : (this_EClassDecl_0= ruleEClassDecl | this_EDataTypeDecl_1= ruleEDataTypeDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:461:1: ruleEClassifierDecl returns [EObject current=null] : (this_EClassDecl_0= ruleEClassDecl | this_EDataTypeDecl_1= ruleEDataTypeDecl ) ;
     public final EObject ruleEClassifierDecl() throws RecognitionException {
         EObject current = null;
 
@@ -1069,15 +1066,15 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:467:28: ( (this_EClassDecl_0= ruleEClassDecl | this_EDataTypeDecl_1= ruleEDataTypeDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:468:1: (this_EClassDecl_0= ruleEClassDecl | this_EDataTypeDecl_1= ruleEDataTypeDecl )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:464:28: ( (this_EClassDecl_0= ruleEClassDecl | this_EDataTypeDecl_1= ruleEDataTypeDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:465:1: (this_EClassDecl_0= ruleEClassDecl | this_EDataTypeDecl_1= ruleEDataTypeDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:468:1: (this_EClassDecl_0= ruleEClassDecl | this_EDataTypeDecl_1= ruleEDataTypeDecl )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:465:1: (this_EClassDecl_0= ruleEClassDecl | this_EDataTypeDecl_1= ruleEDataTypeDecl )
             int alt7=2;
             alt7 = dfa7.predict(input);
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:469:5: this_EClassDecl_0= ruleEClassDecl
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:466:5: this_EClassDecl_0= ruleEClassDecl
                     {
                      
                             newCompositeNode(grammarAccess.getEClassifierDeclAccess().getEClassDeclParserRuleCall_0()); 
@@ -1095,7 +1092,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:479:5: this_EDataTypeDecl_1= ruleEDataTypeDecl
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:476:5: this_EDataTypeDecl_1= ruleEDataTypeDecl
                     {
                      
                             newCompositeNode(grammarAccess.getEClassifierDeclAccess().getEDataTypeDeclParserRuleCall_1()); 
@@ -1133,7 +1130,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEDataTypeDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:495:1: entryRuleEDataTypeDecl returns [EObject current=null] : iv_ruleEDataTypeDecl= ruleEDataTypeDecl EOF ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:492:1: entryRuleEDataTypeDecl returns [EObject current=null] : iv_ruleEDataTypeDecl= ruleEDataTypeDecl EOF ;
     public final EObject entryRuleEDataTypeDecl() throws RecognitionException {
         EObject current = null;
 
@@ -1141,8 +1138,8 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:496:2: (iv_ruleEDataTypeDecl= ruleEDataTypeDecl EOF )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:497:2: iv_ruleEDataTypeDecl= ruleEDataTypeDecl EOF
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:493:2: (iv_ruleEDataTypeDecl= ruleEDataTypeDecl EOF )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:494:2: iv_ruleEDataTypeDecl= ruleEDataTypeDecl EOF
             {
              newCompositeNode(grammarAccess.getEDataTypeDeclRule()); 
             pushFollow(FOLLOW_ruleEDataTypeDecl_in_entryRuleEDataTypeDecl954);
@@ -1169,7 +1166,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEDataTypeDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:504:1: ruleEDataTypeDecl returns [EObject current=null] : ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_serializable_1_0= RULE_SERIALIZABLE ) )? (otherlv_2= 'datatype' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) ) otherlv_6= ';' ) ) | this_EEnumDecl_7= ruleEEnumDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:501:1: ruleEDataTypeDecl returns [EObject current=null] : ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_serializable_1_0= RULE_SERIALIZABLE ) )? (otherlv_2= 'datatype' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) ) otherlv_6= ';' ) ) | this_EEnumDecl_7= ruleEEnumDecl ) ;
     public final EObject ruleEDataTypeDecl() throws RecognitionException {
         EObject current = null;
 
@@ -1188,20 +1185,20 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:507:28: ( ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_serializable_1_0= RULE_SERIALIZABLE ) )? (otherlv_2= 'datatype' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) ) otherlv_6= ';' ) ) | this_EEnumDecl_7= ruleEEnumDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:508:1: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_serializable_1_0= RULE_SERIALIZABLE ) )? (otherlv_2= 'datatype' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) ) otherlv_6= ';' ) ) | this_EEnumDecl_7= ruleEEnumDecl )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:504:28: ( ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_serializable_1_0= RULE_SERIALIZABLE ) )? (otherlv_2= 'datatype' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) ) otherlv_6= ';' ) ) | this_EEnumDecl_7= ruleEEnumDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:505:1: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_serializable_1_0= RULE_SERIALIZABLE ) )? (otherlv_2= 'datatype' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) ) otherlv_6= ';' ) ) | this_EEnumDecl_7= ruleEEnumDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:508:1: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_serializable_1_0= RULE_SERIALIZABLE ) )? (otherlv_2= 'datatype' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) ) otherlv_6= ';' ) ) | this_EEnumDecl_7= ruleEEnumDecl )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:505:1: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_serializable_1_0= RULE_SERIALIZABLE ) )? (otherlv_2= 'datatype' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) ) otherlv_6= ';' ) ) | this_EEnumDecl_7= ruleEEnumDecl )
             int alt10=2;
             alt10 = dfa10.predict(input);
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:508:2: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_serializable_1_0= RULE_SERIALIZABLE ) )? (otherlv_2= 'datatype' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) ) otherlv_6= ';' ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:505:2: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_serializable_1_0= RULE_SERIALIZABLE ) )? (otherlv_2= 'datatype' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) ) otherlv_6= ';' ) )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:508:2: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_serializable_1_0= RULE_SERIALIZABLE ) )? (otherlv_2= 'datatype' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) ) otherlv_6= ';' ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:508:3: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_serializable_1_0= RULE_SERIALIZABLE ) )? (otherlv_2= 'datatype' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) ) otherlv_6= ';' )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:505:2: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_serializable_1_0= RULE_SERIALIZABLE ) )? (otherlv_2= 'datatype' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) ) otherlv_6= ';' ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:505:3: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_serializable_1_0= RULE_SERIALIZABLE ) )? (otherlv_2= 'datatype' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) ) otherlv_6= ';' )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:508:3: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )*
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:505:3: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )*
                     loop8:
                     do {
                         int alt8=2;
@@ -1214,10 +1211,10 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                         switch (alt8) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:509:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:506:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
                     	    {
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:509:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:510:3: lv_eAnnotations_0_0= ruleEAnnotationDecl
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:506:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:507:3: lv_eAnnotations_0_0= ruleEAnnotationDecl
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getEDataTypeDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0_0()); 
@@ -1250,7 +1247,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:526:3: ( (lv_serializable_1_0= RULE_SERIALIZABLE ) )?
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:523:3: ( (lv_serializable_1_0= RULE_SERIALIZABLE ) )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1259,10 +1256,10 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:527:1: (lv_serializable_1_0= RULE_SERIALIZABLE )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:524:1: (lv_serializable_1_0= RULE_SERIALIZABLE )
                             {
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:527:1: (lv_serializable_1_0= RULE_SERIALIZABLE )
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:528:3: lv_serializable_1_0= RULE_SERIALIZABLE
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:524:1: (lv_serializable_1_0= RULE_SERIALIZABLE )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:525:3: lv_serializable_1_0= RULE_SERIALIZABLE
                             {
                             lv_serializable_1_0=(Token)match(input,RULE_SERIALIZABLE,FOLLOW_RULE_SERIALIZABLE_in_ruleEDataTypeDecl1029); 
 
@@ -1287,18 +1284,18 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:544:3: (otherlv_2= 'datatype' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) ) otherlv_6= ';' )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:544:5: otherlv_2= 'datatype' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) ) otherlv_6= ';'
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:541:3: (otherlv_2= 'datatype' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) ) otherlv_6= ';' )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:541:5: otherlv_2= 'datatype' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) ) otherlv_6= ';'
                     {
                     otherlv_2=(Token)match(input,24,FOLLOW_24_in_ruleEDataTypeDecl1048); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getEDataTypeDeclAccess().getDatatypeKeyword_0_2_0());
                         
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:548:1: ( (lv_name_3_0= RULE_ID ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:549:1: (lv_name_3_0= RULE_ID )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:545:1: ( (lv_name_3_0= RULE_ID ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:546:1: (lv_name_3_0= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:549:1: (lv_name_3_0= RULE_ID )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:550:3: lv_name_3_0= RULE_ID
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:546:1: (lv_name_3_0= RULE_ID )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:547:3: lv_name_3_0= RULE_ID
                     {
                     lv_name_3_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEDataTypeDecl1065); 
 
@@ -1324,11 +1321,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                         	newLeafNode(otherlv_4, grammarAccess.getEDataTypeDeclAccess().getColonKeyword_0_2_2());
                         
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:570:1: ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:571:1: (lv_instanceClassName_5_0= ruleSTRING_OR_QID )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:567:1: ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:568:1: (lv_instanceClassName_5_0= ruleSTRING_OR_QID )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:571:1: (lv_instanceClassName_5_0= ruleSTRING_OR_QID )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:572:3: lv_instanceClassName_5_0= ruleSTRING_OR_QID
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:568:1: (lv_instanceClassName_5_0= ruleSTRING_OR_QID )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:569:3: lv_instanceClassName_5_0= ruleSTRING_OR_QID
                     {
                      
                     	        newCompositeNode(grammarAccess.getEDataTypeDeclAccess().getInstanceClassNameSTRING_OR_QIDParserRuleCall_0_2_3_0()); 
@@ -1369,7 +1366,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:594:5: this_EEnumDecl_7= ruleEEnumDecl
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:591:5: this_EEnumDecl_7= ruleEEnumDecl
                     {
                      
                             newCompositeNode(grammarAccess.getEDataTypeDeclAccess().getEEnumDeclParserRuleCall_1()); 
@@ -1407,7 +1404,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEAnnotationDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:610:1: entryRuleEAnnotationDecl returns [EObject current=null] : iv_ruleEAnnotationDecl= ruleEAnnotationDecl EOF ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:607:1: entryRuleEAnnotationDecl returns [EObject current=null] : iv_ruleEAnnotationDecl= ruleEAnnotationDecl EOF ;
     public final EObject entryRuleEAnnotationDecl() throws RecognitionException {
         EObject current = null;
 
@@ -1415,8 +1412,8 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:611:2: (iv_ruleEAnnotationDecl= ruleEAnnotationDecl EOF )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:612:2: iv_ruleEAnnotationDecl= ruleEAnnotationDecl EOF
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:608:2: (iv_ruleEAnnotationDecl= ruleEAnnotationDecl EOF )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:609:2: iv_ruleEAnnotationDecl= ruleEAnnotationDecl EOF
             {
              newCompositeNode(grammarAccess.getEAnnotationDeclRule()); 
             pushFollow(FOLLOW_ruleEAnnotationDecl_in_entryRuleEAnnotationDecl1180);
@@ -1443,7 +1440,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEAnnotationDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:619:1: ruleEAnnotationDecl returns [EObject current=null] : (otherlv_0= '@' ( (lv_source_1_0= ruleSTRING_OR_QID ) ) (otherlv_2= '(' ( (lv_details_3_0= ruleMapEntry ) ) (otherlv_4= ',' ( (lv_details_5_0= ruleMapEntry ) ) )* otherlv_6= ')' )? ) ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:616:1: ruleEAnnotationDecl returns [EObject current=null] : (otherlv_0= '@' ( (lv_source_1_0= ruleSTRING_OR_QID ) ) (otherlv_2= '(' ( (lv_details_3_0= ruleMapEntry ) ) (otherlv_4= ',' ( (lv_details_5_0= ruleMapEntry ) ) )* otherlv_6= ')' )? ) ;
     public final EObject ruleEAnnotationDecl() throws RecognitionException {
         EObject current = null;
 
@@ -1461,21 +1458,21 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:622:28: ( (otherlv_0= '@' ( (lv_source_1_0= ruleSTRING_OR_QID ) ) (otherlv_2= '(' ( (lv_details_3_0= ruleMapEntry ) ) (otherlv_4= ',' ( (lv_details_5_0= ruleMapEntry ) ) )* otherlv_6= ')' )? ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:623:1: (otherlv_0= '@' ( (lv_source_1_0= ruleSTRING_OR_QID ) ) (otherlv_2= '(' ( (lv_details_3_0= ruleMapEntry ) ) (otherlv_4= ',' ( (lv_details_5_0= ruleMapEntry ) ) )* otherlv_6= ')' )? )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:619:28: ( (otherlv_0= '@' ( (lv_source_1_0= ruleSTRING_OR_QID ) ) (otherlv_2= '(' ( (lv_details_3_0= ruleMapEntry ) ) (otherlv_4= ',' ( (lv_details_5_0= ruleMapEntry ) ) )* otherlv_6= ')' )? ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:620:1: (otherlv_0= '@' ( (lv_source_1_0= ruleSTRING_OR_QID ) ) (otherlv_2= '(' ( (lv_details_3_0= ruleMapEntry ) ) (otherlv_4= ',' ( (lv_details_5_0= ruleMapEntry ) ) )* otherlv_6= ')' )? )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:623:1: (otherlv_0= '@' ( (lv_source_1_0= ruleSTRING_OR_QID ) ) (otherlv_2= '(' ( (lv_details_3_0= ruleMapEntry ) ) (otherlv_4= ',' ( (lv_details_5_0= ruleMapEntry ) ) )* otherlv_6= ')' )? )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:623:3: otherlv_0= '@' ( (lv_source_1_0= ruleSTRING_OR_QID ) ) (otherlv_2= '(' ( (lv_details_3_0= ruleMapEntry ) ) (otherlv_4= ',' ( (lv_details_5_0= ruleMapEntry ) ) )* otherlv_6= ')' )?
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:620:1: (otherlv_0= '@' ( (lv_source_1_0= ruleSTRING_OR_QID ) ) (otherlv_2= '(' ( (lv_details_3_0= ruleMapEntry ) ) (otherlv_4= ',' ( (lv_details_5_0= ruleMapEntry ) ) )* otherlv_6= ')' )? )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:620:3: otherlv_0= '@' ( (lv_source_1_0= ruleSTRING_OR_QID ) ) (otherlv_2= '(' ( (lv_details_3_0= ruleMapEntry ) ) (otherlv_4= ',' ( (lv_details_5_0= ruleMapEntry ) ) )* otherlv_6= ')' )?
             {
             otherlv_0=(Token)match(input,26,FOLLOW_26_in_ruleEAnnotationDecl1227); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getEAnnotationDeclAccess().getCommercialAtKeyword_0());
                 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:627:1: ( (lv_source_1_0= ruleSTRING_OR_QID ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:628:1: (lv_source_1_0= ruleSTRING_OR_QID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:624:1: ( (lv_source_1_0= ruleSTRING_OR_QID ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:625:1: (lv_source_1_0= ruleSTRING_OR_QID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:628:1: (lv_source_1_0= ruleSTRING_OR_QID )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:629:3: lv_source_1_0= ruleSTRING_OR_QID
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:625:1: (lv_source_1_0= ruleSTRING_OR_QID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:626:3: lv_source_1_0= ruleSTRING_OR_QID
             {
              
             	        newCompositeNode(grammarAccess.getEAnnotationDeclAccess().getSourceSTRING_OR_QIDParserRuleCall_1_0()); 
@@ -1502,7 +1499,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:645:2: (otherlv_2= '(' ( (lv_details_3_0= ruleMapEntry ) ) (otherlv_4= ',' ( (lv_details_5_0= ruleMapEntry ) ) )* otherlv_6= ')' )?
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:642:2: (otherlv_2= '(' ( (lv_details_3_0= ruleMapEntry ) ) (otherlv_4= ',' ( (lv_details_5_0= ruleMapEntry ) ) )* otherlv_6= ')' )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1511,17 +1508,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt12) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:645:4: otherlv_2= '(' ( (lv_details_3_0= ruleMapEntry ) ) (otherlv_4= ',' ( (lv_details_5_0= ruleMapEntry ) ) )* otherlv_6= ')'
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:642:4: otherlv_2= '(' ( (lv_details_3_0= ruleMapEntry ) ) (otherlv_4= ',' ( (lv_details_5_0= ruleMapEntry ) ) )* otherlv_6= ')'
                     {
                     otherlv_2=(Token)match(input,27,FOLLOW_27_in_ruleEAnnotationDecl1261); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getEAnnotationDeclAccess().getLeftParenthesisKeyword_2_0());
                         
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:649:1: ( (lv_details_3_0= ruleMapEntry ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:650:1: (lv_details_3_0= ruleMapEntry )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:646:1: ( (lv_details_3_0= ruleMapEntry ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:647:1: (lv_details_3_0= ruleMapEntry )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:650:1: (lv_details_3_0= ruleMapEntry )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:651:3: lv_details_3_0= ruleMapEntry
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:647:1: (lv_details_3_0= ruleMapEntry )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:648:3: lv_details_3_0= ruleMapEntry
                     {
                      
                     	        newCompositeNode(grammarAccess.getEAnnotationDeclAccess().getDetailsMapEntryParserRuleCall_2_1_0()); 
@@ -1548,7 +1545,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:667:2: (otherlv_4= ',' ( (lv_details_5_0= ruleMapEntry ) ) )*
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:664:2: (otherlv_4= ',' ( (lv_details_5_0= ruleMapEntry ) ) )*
                     loop11:
                     do {
                         int alt11=2;
@@ -1561,17 +1558,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                         switch (alt11) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:667:4: otherlv_4= ',' ( (lv_details_5_0= ruleMapEntry ) )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:664:4: otherlv_4= ',' ( (lv_details_5_0= ruleMapEntry ) )
                     	    {
                     	    otherlv_4=(Token)match(input,28,FOLLOW_28_in_ruleEAnnotationDecl1295); 
 
                     	        	newLeafNode(otherlv_4, grammarAccess.getEAnnotationDeclAccess().getCommaKeyword_2_2_0());
                     	        
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:671:1: ( (lv_details_5_0= ruleMapEntry ) )
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:672:1: (lv_details_5_0= ruleMapEntry )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:668:1: ( (lv_details_5_0= ruleMapEntry ) )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:669:1: (lv_details_5_0= ruleMapEntry )
                     	    {
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:672:1: (lv_details_5_0= ruleMapEntry )
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:673:3: lv_details_5_0= ruleMapEntry
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:669:1: (lv_details_5_0= ruleMapEntry )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:670:3: lv_details_5_0= ruleMapEntry
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getEAnnotationDeclAccess().getDetailsMapEntryParserRuleCall_2_2_1_0()); 
@@ -1638,7 +1635,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEClassDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:701:1: entryRuleEClassDecl returns [EObject current=null] : iv_ruleEClassDecl= ruleEClassDecl EOF ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:698:1: entryRuleEClassDecl returns [EObject current=null] : iv_ruleEClassDecl= ruleEClassDecl EOF ;
     public final EObject entryRuleEClassDecl() throws RecognitionException {
         EObject current = null;
 
@@ -1646,8 +1643,8 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:702:2: (iv_ruleEClassDecl= ruleEClassDecl EOF )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:703:2: iv_ruleEClassDecl= ruleEClassDecl EOF
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:699:2: (iv_ruleEClassDecl= ruleEClassDecl EOF )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:700:2: iv_ruleEClassDecl= ruleEClassDecl EOF
             {
              newCompositeNode(grammarAccess.getEClassDeclRule()); 
             pushFollow(FOLLOW_ruleEClassDecl_in_entryRuleEClassDecl1368);
@@ -1674,7 +1671,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEClassDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:710:1: ruleEClassDecl returns [EObject current=null] : ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_abstract_1_0= 'abstract' ) )? ( ( (lv_interface_2_0= 'interface' ) ) | otherlv_3= 'class' ) ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '<' ( (lv_eTypeParameters_6_0= ruleETypeParameterDecl ) ) (otherlv_7= ',' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) )* otherlv_9= '>' )? (otherlv_10= 'extends' ( (lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= ',' ( (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl ) ) )* )? (otherlv_14= ':' ( (lv_instanceClassName_15_0= ruleSTRING_OR_QID ) ) )? otherlv_16= '{' ( ( (lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl ) ) | ( (lv_eOperations_18_0= ruleEOperationDecl ) ) )* otherlv_19= '}' ) ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:707:1: ruleEClassDecl returns [EObject current=null] : ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_abstract_1_0= 'abstract' ) )? ( ( (lv_interface_2_0= 'interface' ) ) | otherlv_3= 'class' ) ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '<' ( (lv_eTypeParameters_6_0= ruleETypeParameterDecl ) ) (otherlv_7= ',' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) )* otherlv_9= '>' )? (otherlv_10= 'extends' ( (lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= ',' ( (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl ) ) )* )? (otherlv_14= ':' ( (lv_instanceClassName_15_0= ruleSTRING_OR_QID ) ) )? otherlv_16= '{' ( ( (lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl ) ) | ( (lv_eOperations_18_0= ruleEOperationDecl ) ) )* otherlv_19= '}' ) ;
     public final EObject ruleEClassDecl() throws RecognitionException {
         EObject current = null;
 
@@ -1710,13 +1707,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:713:28: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_abstract_1_0= 'abstract' ) )? ( ( (lv_interface_2_0= 'interface' ) ) | otherlv_3= 'class' ) ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '<' ( (lv_eTypeParameters_6_0= ruleETypeParameterDecl ) ) (otherlv_7= ',' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) )* otherlv_9= '>' )? (otherlv_10= 'extends' ( (lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= ',' ( (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl ) ) )* )? (otherlv_14= ':' ( (lv_instanceClassName_15_0= ruleSTRING_OR_QID ) ) )? otherlv_16= '{' ( ( (lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl ) ) | ( (lv_eOperations_18_0= ruleEOperationDecl ) ) )* otherlv_19= '}' ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:714:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_abstract_1_0= 'abstract' ) )? ( ( (lv_interface_2_0= 'interface' ) ) | otherlv_3= 'class' ) ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '<' ( (lv_eTypeParameters_6_0= ruleETypeParameterDecl ) ) (otherlv_7= ',' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) )* otherlv_9= '>' )? (otherlv_10= 'extends' ( (lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= ',' ( (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl ) ) )* )? (otherlv_14= ':' ( (lv_instanceClassName_15_0= ruleSTRING_OR_QID ) ) )? otherlv_16= '{' ( ( (lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl ) ) | ( (lv_eOperations_18_0= ruleEOperationDecl ) ) )* otherlv_19= '}' )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:710:28: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_abstract_1_0= 'abstract' ) )? ( ( (lv_interface_2_0= 'interface' ) ) | otherlv_3= 'class' ) ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '<' ( (lv_eTypeParameters_6_0= ruleETypeParameterDecl ) ) (otherlv_7= ',' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) )* otherlv_9= '>' )? (otherlv_10= 'extends' ( (lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= ',' ( (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl ) ) )* )? (otherlv_14= ':' ( (lv_instanceClassName_15_0= ruleSTRING_OR_QID ) ) )? otherlv_16= '{' ( ( (lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl ) ) | ( (lv_eOperations_18_0= ruleEOperationDecl ) ) )* otherlv_19= '}' ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:711:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_abstract_1_0= 'abstract' ) )? ( ( (lv_interface_2_0= 'interface' ) ) | otherlv_3= 'class' ) ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '<' ( (lv_eTypeParameters_6_0= ruleETypeParameterDecl ) ) (otherlv_7= ',' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) )* otherlv_9= '>' )? (otherlv_10= 'extends' ( (lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= ',' ( (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl ) ) )* )? (otherlv_14= ':' ( (lv_instanceClassName_15_0= ruleSTRING_OR_QID ) ) )? otherlv_16= '{' ( ( (lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl ) ) | ( (lv_eOperations_18_0= ruleEOperationDecl ) ) )* otherlv_19= '}' )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:714:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_abstract_1_0= 'abstract' ) )? ( ( (lv_interface_2_0= 'interface' ) ) | otherlv_3= 'class' ) ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '<' ( (lv_eTypeParameters_6_0= ruleETypeParameterDecl ) ) (otherlv_7= ',' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) )* otherlv_9= '>' )? (otherlv_10= 'extends' ( (lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= ',' ( (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl ) ) )* )? (otherlv_14= ':' ( (lv_instanceClassName_15_0= ruleSTRING_OR_QID ) ) )? otherlv_16= '{' ( ( (lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl ) ) | ( (lv_eOperations_18_0= ruleEOperationDecl ) ) )* otherlv_19= '}' )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:714:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_abstract_1_0= 'abstract' ) )? ( ( (lv_interface_2_0= 'interface' ) ) | otherlv_3= 'class' ) ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '<' ( (lv_eTypeParameters_6_0= ruleETypeParameterDecl ) ) (otherlv_7= ',' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) )* otherlv_9= '>' )? (otherlv_10= 'extends' ( (lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= ',' ( (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl ) ) )* )? (otherlv_14= ':' ( (lv_instanceClassName_15_0= ruleSTRING_OR_QID ) ) )? otherlv_16= '{' ( ( (lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl ) ) | ( (lv_eOperations_18_0= ruleEOperationDecl ) ) )* otherlv_19= '}'
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:711:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_abstract_1_0= 'abstract' ) )? ( ( (lv_interface_2_0= 'interface' ) ) | otherlv_3= 'class' ) ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '<' ( (lv_eTypeParameters_6_0= ruleETypeParameterDecl ) ) (otherlv_7= ',' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) )* otherlv_9= '>' )? (otherlv_10= 'extends' ( (lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= ',' ( (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl ) ) )* )? (otherlv_14= ':' ( (lv_instanceClassName_15_0= ruleSTRING_OR_QID ) ) )? otherlv_16= '{' ( ( (lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl ) ) | ( (lv_eOperations_18_0= ruleEOperationDecl ) ) )* otherlv_19= '}' )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:711:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_abstract_1_0= 'abstract' ) )? ( ( (lv_interface_2_0= 'interface' ) ) | otherlv_3= 'class' ) ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '<' ( (lv_eTypeParameters_6_0= ruleETypeParameterDecl ) ) (otherlv_7= ',' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) )* otherlv_9= '>' )? (otherlv_10= 'extends' ( (lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= ',' ( (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl ) ) )* )? (otherlv_14= ':' ( (lv_instanceClassName_15_0= ruleSTRING_OR_QID ) ) )? otherlv_16= '{' ( ( (lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl ) ) | ( (lv_eOperations_18_0= ruleEOperationDecl ) ) )* otherlv_19= '}'
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:714:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )*
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:711:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )*
             loop13:
             do {
                 int alt13=2;
@@ -1729,10 +1726,10 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt13) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:715:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:712:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:715:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:716:3: lv_eAnnotations_0_0= ruleEAnnotationDecl
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:712:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:713:3: lv_eAnnotations_0_0= ruleEAnnotationDecl
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getEClassDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
@@ -1765,7 +1762,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:732:3: ( (lv_abstract_1_0= 'abstract' ) )?
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:729:3: ( (lv_abstract_1_0= 'abstract' ) )?
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -1774,10 +1771,10 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt14) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:733:1: (lv_abstract_1_0= 'abstract' )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:730:1: (lv_abstract_1_0= 'abstract' )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:733:1: (lv_abstract_1_0= 'abstract' )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:734:3: lv_abstract_1_0= 'abstract'
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:730:1: (lv_abstract_1_0= 'abstract' )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:731:3: lv_abstract_1_0= 'abstract'
                     {
                     lv_abstract_1_0=(Token)match(input,30,FOLLOW_30_in_ruleEClassDecl1443); 
 
@@ -1798,7 +1795,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:747:3: ( ( (lv_interface_2_0= 'interface' ) ) | otherlv_3= 'class' )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:744:3: ( ( (lv_interface_2_0= 'interface' ) ) | otherlv_3= 'class' )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -1816,13 +1813,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt15) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:747:4: ( (lv_interface_2_0= 'interface' ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:744:4: ( (lv_interface_2_0= 'interface' ) )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:747:4: ( (lv_interface_2_0= 'interface' ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:748:1: (lv_interface_2_0= 'interface' )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:744:4: ( (lv_interface_2_0= 'interface' ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:745:1: (lv_interface_2_0= 'interface' )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:748:1: (lv_interface_2_0= 'interface' )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:749:3: lv_interface_2_0= 'interface'
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:745:1: (lv_interface_2_0= 'interface' )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:746:3: lv_interface_2_0= 'interface'
                     {
                     lv_interface_2_0=(Token)match(input,31,FOLLOW_31_in_ruleEClassDecl1476); 
 
@@ -1844,7 +1841,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:763:7: otherlv_3= 'class'
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:760:7: otherlv_3= 'class'
                     {
                     otherlv_3=(Token)match(input,32,FOLLOW_32_in_ruleEClassDecl1507); 
 
@@ -1856,11 +1853,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:767:2: ( (lv_name_4_0= RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:768:1: (lv_name_4_0= RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:764:2: ( (lv_name_4_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:765:1: (lv_name_4_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:768:1: (lv_name_4_0= RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:769:3: lv_name_4_0= RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:765:1: (lv_name_4_0= RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:766:3: lv_name_4_0= RULE_ID
             {
             lv_name_4_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEClassDecl1525); 
 
@@ -1882,7 +1879,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:785:2: (otherlv_5= '<' ( (lv_eTypeParameters_6_0= ruleETypeParameterDecl ) ) (otherlv_7= ',' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) )* otherlv_9= '>' )?
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:782:2: (otherlv_5= '<' ( (lv_eTypeParameters_6_0= ruleETypeParameterDecl ) ) (otherlv_7= ',' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) )* otherlv_9= '>' )?
             int alt17=2;
             int LA17_0 = input.LA(1);
 
@@ -1891,17 +1888,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt17) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:785:4: otherlv_5= '<' ( (lv_eTypeParameters_6_0= ruleETypeParameterDecl ) ) (otherlv_7= ',' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) )* otherlv_9= '>'
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:782:4: otherlv_5= '<' ( (lv_eTypeParameters_6_0= ruleETypeParameterDecl ) ) (otherlv_7= ',' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) )* otherlv_9= '>'
                     {
                     otherlv_5=(Token)match(input,33,FOLLOW_33_in_ruleEClassDecl1543); 
 
                         	newLeafNode(otherlv_5, grammarAccess.getEClassDeclAccess().getLessThanSignKeyword_4_0());
                         
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:789:1: ( (lv_eTypeParameters_6_0= ruleETypeParameterDecl ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:790:1: (lv_eTypeParameters_6_0= ruleETypeParameterDecl )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:786:1: ( (lv_eTypeParameters_6_0= ruleETypeParameterDecl ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:787:1: (lv_eTypeParameters_6_0= ruleETypeParameterDecl )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:790:1: (lv_eTypeParameters_6_0= ruleETypeParameterDecl )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:791:3: lv_eTypeParameters_6_0= ruleETypeParameterDecl
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:787:1: (lv_eTypeParameters_6_0= ruleETypeParameterDecl )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:788:3: lv_eTypeParameters_6_0= ruleETypeParameterDecl
                     {
                      
                     	        newCompositeNode(grammarAccess.getEClassDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_4_1_0()); 
@@ -1928,7 +1925,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:807:2: (otherlv_7= ',' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) )*
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:804:2: (otherlv_7= ',' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) )*
                     loop16:
                     do {
                         int alt16=2;
@@ -1941,17 +1938,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                         switch (alt16) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:807:4: otherlv_7= ',' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:804:4: otherlv_7= ',' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) )
                     	    {
                     	    otherlv_7=(Token)match(input,28,FOLLOW_28_in_ruleEClassDecl1577); 
 
                     	        	newLeafNode(otherlv_7, grammarAccess.getEClassDeclAccess().getCommaKeyword_4_2_0());
                     	        
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:811:1: ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) )
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:812:1: (lv_eTypeParameters_8_0= ruleETypeParameterDecl )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:808:1: ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:809:1: (lv_eTypeParameters_8_0= ruleETypeParameterDecl )
                     	    {
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:812:1: (lv_eTypeParameters_8_0= ruleETypeParameterDecl )
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:813:3: lv_eTypeParameters_8_0= ruleETypeParameterDecl
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:809:1: (lv_eTypeParameters_8_0= ruleETypeParameterDecl )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:810:3: lv_eTypeParameters_8_0= ruleETypeParameterDecl
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getEClassDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_4_2_1_0()); 
@@ -1997,7 +1994,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:833:3: (otherlv_10= 'extends' ( (lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= ',' ( (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl ) ) )* )?
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:830:3: (otherlv_10= 'extends' ( (lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= ',' ( (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl ) ) )* )?
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -2006,17 +2003,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt19) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:833:5: otherlv_10= 'extends' ( (lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= ',' ( (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl ) ) )*
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:830:5: otherlv_10= 'extends' ( (lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= ',' ( (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl ) ) )*
                     {
                     otherlv_10=(Token)match(input,35,FOLLOW_35_in_ruleEClassDecl1627); 
 
                         	newLeafNode(otherlv_10, grammarAccess.getEClassDeclAccess().getExtendsKeyword_5_0());
                         
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:837:1: ( (lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:838:1: (lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:834:1: ( (lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:835:1: (lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:838:1: (lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:839:3: lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:835:1: (lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:836:3: lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl
                     {
                      
                     	        newCompositeNode(grammarAccess.getEClassDeclAccess().getEGenericSuperTypesEGenericTypeReferenceDeclParserRuleCall_5_1_0()); 
@@ -2043,7 +2040,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:855:2: (otherlv_12= ',' ( (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl ) ) )*
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:852:2: (otherlv_12= ',' ( (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl ) ) )*
                     loop18:
                     do {
                         int alt18=2;
@@ -2056,17 +2053,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                         switch (alt18) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:855:4: otherlv_12= ',' ( (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl ) )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:852:4: otherlv_12= ',' ( (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl ) )
                     	    {
                     	    otherlv_12=(Token)match(input,28,FOLLOW_28_in_ruleEClassDecl1661); 
 
                     	        	newLeafNode(otherlv_12, grammarAccess.getEClassDeclAccess().getCommaKeyword_5_2_0());
                     	        
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:859:1: ( (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl ) )
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:860:1: (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:856:1: ( (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl ) )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:857:1: (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl )
                     	    {
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:860:1: (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl )
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:861:3: lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:857:1: (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:858:3: lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getEClassDeclAccess().getEGenericSuperTypesEGenericTypeReferenceDeclParserRuleCall_5_2_1_0()); 
@@ -2108,7 +2105,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:877:6: (otherlv_14= ':' ( (lv_instanceClassName_15_0= ruleSTRING_OR_QID ) ) )?
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:874:6: (otherlv_14= ':' ( (lv_instanceClassName_15_0= ruleSTRING_OR_QID ) ) )?
             int alt20=2;
             int LA20_0 = input.LA(1);
 
@@ -2117,17 +2114,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt20) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:877:8: otherlv_14= ':' ( (lv_instanceClassName_15_0= ruleSTRING_OR_QID ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:874:8: otherlv_14= ':' ( (lv_instanceClassName_15_0= ruleSTRING_OR_QID ) )
                     {
                     otherlv_14=(Token)match(input,25,FOLLOW_25_in_ruleEClassDecl1699); 
 
                         	newLeafNode(otherlv_14, grammarAccess.getEClassDeclAccess().getColonKeyword_6_0());
                         
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:881:1: ( (lv_instanceClassName_15_0= ruleSTRING_OR_QID ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:882:1: (lv_instanceClassName_15_0= ruleSTRING_OR_QID )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:878:1: ( (lv_instanceClassName_15_0= ruleSTRING_OR_QID ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:879:1: (lv_instanceClassName_15_0= ruleSTRING_OR_QID )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:882:1: (lv_instanceClassName_15_0= ruleSTRING_OR_QID )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:883:3: lv_instanceClassName_15_0= ruleSTRING_OR_QID
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:879:1: (lv_instanceClassName_15_0= ruleSTRING_OR_QID )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:880:3: lv_instanceClassName_15_0= ruleSTRING_OR_QID
                     {
                      
                     	        newCompositeNode(grammarAccess.getEClassDeclAccess().getInstanceClassNameSTRING_OR_QIDParserRuleCall_6_1_0()); 
@@ -2164,20 +2161,20 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_16, grammarAccess.getEClassDeclAccess().getLeftCurlyBracketKeyword_7());
                 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:903:1: ( ( (lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl ) ) | ( (lv_eOperations_18_0= ruleEOperationDecl ) ) )*
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:900:1: ( ( (lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl ) ) | ( (lv_eOperations_18_0= ruleEOperationDecl ) ) )*
             loop21:
             do {
                 int alt21=3;
                 alt21 = dfa21.predict(input);
                 switch (alt21) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:903:2: ( (lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:900:2: ( (lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:903:2: ( (lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:904:1: (lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:900:2: ( (lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:901:1: (lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:904:1: (lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:905:3: lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:901:1: (lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:902:3: lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getEClassDeclAccess().getEStructuralFeaturesEStructuralFeatureDeclParserRuleCall_8_0_0()); 
@@ -2208,13 +2205,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:922:6: ( (lv_eOperations_18_0= ruleEOperationDecl ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:919:6: ( (lv_eOperations_18_0= ruleEOperationDecl ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:922:6: ( (lv_eOperations_18_0= ruleEOperationDecl ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:923:1: (lv_eOperations_18_0= ruleEOperationDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:919:6: ( (lv_eOperations_18_0= ruleEOperationDecl ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:920:1: (lv_eOperations_18_0= ruleEOperationDecl )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:923:1: (lv_eOperations_18_0= ruleEOperationDecl )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:924:3: lv_eOperations_18_0= ruleEOperationDecl
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:920:1: (lv_eOperations_18_0= ruleEOperationDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:921:3: lv_eOperations_18_0= ruleEOperationDecl
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getEClassDeclAccess().getEOperationsEOperationDeclParserRuleCall_8_1_0()); 
@@ -2275,7 +2272,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEStructuralFeatureDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:952:1: entryRuleEStructuralFeatureDecl returns [EObject current=null] : iv_ruleEStructuralFeatureDecl= ruleEStructuralFeatureDecl EOF ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:949:1: entryRuleEStructuralFeatureDecl returns [EObject current=null] : iv_ruleEStructuralFeatureDecl= ruleEStructuralFeatureDecl EOF ;
     public final EObject entryRuleEStructuralFeatureDecl() throws RecognitionException {
         EObject current = null;
 
@@ -2283,8 +2280,8 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:953:2: (iv_ruleEStructuralFeatureDecl= ruleEStructuralFeatureDecl EOF )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:954:2: iv_ruleEStructuralFeatureDecl= ruleEStructuralFeatureDecl EOF
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:950:2: (iv_ruleEStructuralFeatureDecl= ruleEStructuralFeatureDecl EOF )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:951:2: iv_ruleEStructuralFeatureDecl= ruleEStructuralFeatureDecl EOF
             {
              newCompositeNode(grammarAccess.getEStructuralFeatureDeclRule()); 
             pushFollow(FOLLOW_ruleEStructuralFeatureDecl_in_entryRuleEStructuralFeatureDecl1833);
@@ -2311,7 +2308,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEStructuralFeatureDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:961:1: ruleEStructuralFeatureDecl returns [EObject current=null] : (this_EAttributeDecl_0= ruleEAttributeDecl | this_EReferenceDecl_1= ruleEReferenceDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:958:1: ruleEStructuralFeatureDecl returns [EObject current=null] : (this_EAttributeDecl_0= ruleEAttributeDecl | this_EReferenceDecl_1= ruleEReferenceDecl ) ;
     public final EObject ruleEStructuralFeatureDecl() throws RecognitionException {
         EObject current = null;
 
@@ -2323,15 +2320,15 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:964:28: ( (this_EAttributeDecl_0= ruleEAttributeDecl | this_EReferenceDecl_1= ruleEReferenceDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:965:1: (this_EAttributeDecl_0= ruleEAttributeDecl | this_EReferenceDecl_1= ruleEReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:961:28: ( (this_EAttributeDecl_0= ruleEAttributeDecl | this_EReferenceDecl_1= ruleEReferenceDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:962:1: (this_EAttributeDecl_0= ruleEAttributeDecl | this_EReferenceDecl_1= ruleEReferenceDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:965:1: (this_EAttributeDecl_0= ruleEAttributeDecl | this_EReferenceDecl_1= ruleEReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:962:1: (this_EAttributeDecl_0= ruleEAttributeDecl | this_EReferenceDecl_1= ruleEReferenceDecl )
             int alt22=2;
             alt22 = dfa22.predict(input);
             switch (alt22) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:966:5: this_EAttributeDecl_0= ruleEAttributeDecl
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:963:5: this_EAttributeDecl_0= ruleEAttributeDecl
                     {
                      
                             newCompositeNode(grammarAccess.getEStructuralFeatureDeclAccess().getEAttributeDeclParserRuleCall_0()); 
@@ -2349,7 +2346,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:976:5: this_EReferenceDecl_1= ruleEReferenceDecl
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:973:5: this_EReferenceDecl_1= ruleEReferenceDecl
                     {
                      
                             newCompositeNode(grammarAccess.getEStructuralFeatureDeclAccess().getEReferenceDeclParserRuleCall_1()); 
@@ -2387,7 +2384,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEAttributeDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:992:1: entryRuleEAttributeDecl returns [EObject current=null] : iv_ruleEAttributeDecl= ruleEAttributeDecl EOF ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:989:1: entryRuleEAttributeDecl returns [EObject current=null] : iv_ruleEAttributeDecl= ruleEAttributeDecl EOF ;
     public final EObject entryRuleEAttributeDecl() throws RecognitionException {
         EObject current = null;
 
@@ -2395,8 +2392,8 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:993:2: (iv_ruleEAttributeDecl= ruleEAttributeDecl EOF )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:994:2: iv_ruleEAttributeDecl= ruleEAttributeDecl EOF
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:990:2: (iv_ruleEAttributeDecl= ruleEAttributeDecl EOF )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:991:2: iv_ruleEAttributeDecl= ruleEAttributeDecl EOF
             {
              newCompositeNode(grammarAccess.getEAttributeDeclRule()); 
             pushFollow(FOLLOW_ruleEAttributeDecl_in_entryRuleEAttributeDecl1952);
@@ -2423,7 +2420,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEAttributeDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1001:1: ruleEAttributeDecl returns [EObject current=null] : ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_iD_1_0= 'ID' ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )* otherlv_9= 'attr' ( (lv_eGenericType_10_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_11= '[' ( (lv_lowerBound_12_0= RULE_INT ) ) (otherlv_13= '..' ( (lv_upperBound_14_0= ruleSINT ) ) )? otherlv_15= ']' )? ( (lv_name_16_0= RULE_ID ) ) (otherlv_17= '=' ( (lv_defaultValueLiteral_18_0= RULE_STRING ) ) )? otherlv_19= ';' ) ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:998:1: ruleEAttributeDecl returns [EObject current=null] : ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_iD_1_0= 'ID' ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )* otherlv_9= 'attr' ( (lv_eGenericType_10_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_11= '[' ( (lv_lowerBound_12_0= RULE_INT ) ) (otherlv_13= '..' ( (lv_upperBound_14_0= ruleSINT ) ) )? otherlv_15= ']' )? ( (lv_name_16_0= RULE_ID ) ) (otherlv_17= '=' ( (lv_defaultValueLiteral_18_0= RULE_STRING ) ) )? otherlv_19= ';' ) ;
     public final EObject ruleEAttributeDecl() throws RecognitionException {
         EObject current = null;
 
@@ -2454,13 +2451,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1004:28: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_iD_1_0= 'ID' ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )* otherlv_9= 'attr' ( (lv_eGenericType_10_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_11= '[' ( (lv_lowerBound_12_0= RULE_INT ) ) (otherlv_13= '..' ( (lv_upperBound_14_0= ruleSINT ) ) )? otherlv_15= ']' )? ( (lv_name_16_0= RULE_ID ) ) (otherlv_17= '=' ( (lv_defaultValueLiteral_18_0= RULE_STRING ) ) )? otherlv_19= ';' ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1005:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_iD_1_0= 'ID' ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )* otherlv_9= 'attr' ( (lv_eGenericType_10_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_11= '[' ( (lv_lowerBound_12_0= RULE_INT ) ) (otherlv_13= '..' ( (lv_upperBound_14_0= ruleSINT ) ) )? otherlv_15= ']' )? ( (lv_name_16_0= RULE_ID ) ) (otherlv_17= '=' ( (lv_defaultValueLiteral_18_0= RULE_STRING ) ) )? otherlv_19= ';' )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1001:28: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_iD_1_0= 'ID' ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )* otherlv_9= 'attr' ( (lv_eGenericType_10_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_11= '[' ( (lv_lowerBound_12_0= RULE_INT ) ) (otherlv_13= '..' ( (lv_upperBound_14_0= ruleSINT ) ) )? otherlv_15= ']' )? ( (lv_name_16_0= RULE_ID ) ) (otherlv_17= '=' ( (lv_defaultValueLiteral_18_0= RULE_STRING ) ) )? otherlv_19= ';' ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1002:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_iD_1_0= 'ID' ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )* otherlv_9= 'attr' ( (lv_eGenericType_10_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_11= '[' ( (lv_lowerBound_12_0= RULE_INT ) ) (otherlv_13= '..' ( (lv_upperBound_14_0= ruleSINT ) ) )? otherlv_15= ']' )? ( (lv_name_16_0= RULE_ID ) ) (otherlv_17= '=' ( (lv_defaultValueLiteral_18_0= RULE_STRING ) ) )? otherlv_19= ';' )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1005:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_iD_1_0= 'ID' ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )* otherlv_9= 'attr' ( (lv_eGenericType_10_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_11= '[' ( (lv_lowerBound_12_0= RULE_INT ) ) (otherlv_13= '..' ( (lv_upperBound_14_0= ruleSINT ) ) )? otherlv_15= ']' )? ( (lv_name_16_0= RULE_ID ) ) (otherlv_17= '=' ( (lv_defaultValueLiteral_18_0= RULE_STRING ) ) )? otherlv_19= ';' )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1005:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_iD_1_0= 'ID' ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )* otherlv_9= 'attr' ( (lv_eGenericType_10_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_11= '[' ( (lv_lowerBound_12_0= RULE_INT ) ) (otherlv_13= '..' ( (lv_upperBound_14_0= ruleSINT ) ) )? otherlv_15= ']' )? ( (lv_name_16_0= RULE_ID ) ) (otherlv_17= '=' ( (lv_defaultValueLiteral_18_0= RULE_STRING ) ) )? otherlv_19= ';'
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1002:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_iD_1_0= 'ID' ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )* otherlv_9= 'attr' ( (lv_eGenericType_10_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_11= '[' ( (lv_lowerBound_12_0= RULE_INT ) ) (otherlv_13= '..' ( (lv_upperBound_14_0= ruleSINT ) ) )? otherlv_15= ']' )? ( (lv_name_16_0= RULE_ID ) ) (otherlv_17= '=' ( (lv_defaultValueLiteral_18_0= RULE_STRING ) ) )? otherlv_19= ';' )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1002:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_iD_1_0= 'ID' ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )* otherlv_9= 'attr' ( (lv_eGenericType_10_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_11= '[' ( (lv_lowerBound_12_0= RULE_INT ) ) (otherlv_13= '..' ( (lv_upperBound_14_0= ruleSINT ) ) )? otherlv_15= ']' )? ( (lv_name_16_0= RULE_ID ) ) (otherlv_17= '=' ( (lv_defaultValueLiteral_18_0= RULE_STRING ) ) )? otherlv_19= ';'
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1005:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )*
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1002:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )*
             loop23:
             do {
                 int alt23=2;
@@ -2473,10 +2470,10 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt23) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1006:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1003:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1006:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1007:3: lv_eAnnotations_0_0= ruleEAnnotationDecl
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1003:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1004:3: lv_eAnnotations_0_0= ruleEAnnotationDecl
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getEAttributeDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
@@ -2509,7 +2506,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1023:3: ( ( (lv_iD_1_0= 'ID' ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )*
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1020:3: ( ( (lv_iD_1_0= 'ID' ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )*
             loop24:
             do {
                 int alt24=9;
@@ -2559,13 +2556,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt24) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1023:4: ( (lv_iD_1_0= 'ID' ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1020:4: ( (lv_iD_1_0= 'ID' ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1023:4: ( (lv_iD_1_0= 'ID' ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1024:1: (lv_iD_1_0= 'ID' )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1020:4: ( (lv_iD_1_0= 'ID' ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1021:1: (lv_iD_1_0= 'ID' )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1024:1: (lv_iD_1_0= 'ID' )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1025:3: lv_iD_1_0= 'ID'
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1021:1: (lv_iD_1_0= 'ID' )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1022:3: lv_iD_1_0= 'ID'
             	    {
             	    lv_iD_1_0=(Token)match(input,36,FOLLOW_36_in_ruleEAttributeDecl2028); 
 
@@ -2587,13 +2584,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1039:6: ( (lv_unique_2_0= RULE_BAG ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1036:6: ( (lv_unique_2_0= RULE_BAG ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1039:6: ( (lv_unique_2_0= RULE_BAG ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1040:1: (lv_unique_2_0= RULE_BAG )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1036:6: ( (lv_unique_2_0= RULE_BAG ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1037:1: (lv_unique_2_0= RULE_BAG )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1040:1: (lv_unique_2_0= RULE_BAG )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1041:3: lv_unique_2_0= RULE_BAG
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1037:1: (lv_unique_2_0= RULE_BAG )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1038:3: lv_unique_2_0= RULE_BAG
             	    {
             	    lv_unique_2_0=(Token)match(input,RULE_BAG,FOLLOW_RULE_BAG_in_ruleEAttributeDecl2064); 
 
@@ -2619,13 +2616,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1058:6: ( (lv_ordered_3_0= RULE_RANDOM ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1055:6: ( (lv_ordered_3_0= RULE_RANDOM ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1058:6: ( (lv_ordered_3_0= RULE_RANDOM ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1059:1: (lv_ordered_3_0= RULE_RANDOM )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1055:6: ( (lv_ordered_3_0= RULE_RANDOM ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1056:1: (lv_ordered_3_0= RULE_RANDOM )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1059:1: (lv_ordered_3_0= RULE_RANDOM )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1060:3: lv_ordered_3_0= RULE_RANDOM
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1056:1: (lv_ordered_3_0= RULE_RANDOM )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1057:3: lv_ordered_3_0= RULE_RANDOM
             	    {
             	    lv_ordered_3_0=(Token)match(input,RULE_RANDOM,FOLLOW_RULE_RANDOM_in_ruleEAttributeDecl2092); 
 
@@ -2651,13 +2648,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 4 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1077:6: ( (lv_changeable_4_0= RULE_READONLY ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1074:6: ( (lv_changeable_4_0= RULE_READONLY ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1077:6: ( (lv_changeable_4_0= RULE_READONLY ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1078:1: (lv_changeable_4_0= RULE_READONLY )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1074:6: ( (lv_changeable_4_0= RULE_READONLY ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1075:1: (lv_changeable_4_0= RULE_READONLY )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1078:1: (lv_changeable_4_0= RULE_READONLY )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1079:3: lv_changeable_4_0= RULE_READONLY
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1075:1: (lv_changeable_4_0= RULE_READONLY )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1076:3: lv_changeable_4_0= RULE_READONLY
             	    {
             	    lv_changeable_4_0=(Token)match(input,RULE_READONLY,FOLLOW_RULE_READONLY_in_ruleEAttributeDecl2120); 
 
@@ -2683,13 +2680,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 5 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1096:6: ( (lv_volatile_5_0= 'volatile' ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1093:6: ( (lv_volatile_5_0= 'volatile' ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1096:6: ( (lv_volatile_5_0= 'volatile' ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1097:1: (lv_volatile_5_0= 'volatile' )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1093:6: ( (lv_volatile_5_0= 'volatile' ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1094:1: (lv_volatile_5_0= 'volatile' )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1097:1: (lv_volatile_5_0= 'volatile' )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1098:3: lv_volatile_5_0= 'volatile'
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1094:1: (lv_volatile_5_0= 'volatile' )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1095:3: lv_volatile_5_0= 'volatile'
             	    {
             	    lv_volatile_5_0=(Token)match(input,37,FOLLOW_37_in_ruleEAttributeDecl2149); 
 
@@ -2711,13 +2708,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 6 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1112:6: ( (lv_transient_6_0= 'transient' ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1109:6: ( (lv_transient_6_0= 'transient' ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1112:6: ( (lv_transient_6_0= 'transient' ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1113:1: (lv_transient_6_0= 'transient' )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1109:6: ( (lv_transient_6_0= 'transient' ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1110:1: (lv_transient_6_0= 'transient' )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1113:1: (lv_transient_6_0= 'transient' )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1114:3: lv_transient_6_0= 'transient'
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1110:1: (lv_transient_6_0= 'transient' )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1111:3: lv_transient_6_0= 'transient'
             	    {
             	    lv_transient_6_0=(Token)match(input,38,FOLLOW_38_in_ruleEAttributeDecl2186); 
 
@@ -2739,13 +2736,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 7 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1128:6: ( (lv_unsettable_7_0= 'unsettable' ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1125:6: ( (lv_unsettable_7_0= 'unsettable' ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1128:6: ( (lv_unsettable_7_0= 'unsettable' ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1129:1: (lv_unsettable_7_0= 'unsettable' )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1125:6: ( (lv_unsettable_7_0= 'unsettable' ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1126:1: (lv_unsettable_7_0= 'unsettable' )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1129:1: (lv_unsettable_7_0= 'unsettable' )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1130:3: lv_unsettable_7_0= 'unsettable'
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1126:1: (lv_unsettable_7_0= 'unsettable' )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1127:3: lv_unsettable_7_0= 'unsettable'
             	    {
             	    lv_unsettable_7_0=(Token)match(input,39,FOLLOW_39_in_ruleEAttributeDecl2223); 
 
@@ -2767,13 +2764,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 8 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1144:6: ( (lv_derived_8_0= 'derived' ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1141:6: ( (lv_derived_8_0= 'derived' ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1144:6: ( (lv_derived_8_0= 'derived' ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1145:1: (lv_derived_8_0= 'derived' )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1141:6: ( (lv_derived_8_0= 'derived' ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1142:1: (lv_derived_8_0= 'derived' )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1145:1: (lv_derived_8_0= 'derived' )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1146:3: lv_derived_8_0= 'derived'
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1142:1: (lv_derived_8_0= 'derived' )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1143:3: lv_derived_8_0= 'derived'
             	    {
             	    lv_derived_8_0=(Token)match(input,40,FOLLOW_40_in_ruleEAttributeDecl2260); 
 
@@ -2804,11 +2801,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_9, grammarAccess.getEAttributeDeclAccess().getAttrKeyword_2());
                 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1163:1: ( (lv_eGenericType_10_0= ruleEGenericTypeReferenceDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1164:1: (lv_eGenericType_10_0= ruleEGenericTypeReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1160:1: ( (lv_eGenericType_10_0= ruleEGenericTypeReferenceDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1161:1: (lv_eGenericType_10_0= ruleEGenericTypeReferenceDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1164:1: (lv_eGenericType_10_0= ruleEGenericTypeReferenceDecl )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1165:3: lv_eGenericType_10_0= ruleEGenericTypeReferenceDecl
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1161:1: (lv_eGenericType_10_0= ruleEGenericTypeReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1162:3: lv_eGenericType_10_0= ruleEGenericTypeReferenceDecl
             {
              
             	        newCompositeNode(grammarAccess.getEAttributeDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0()); 
@@ -2835,7 +2832,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1181:2: (otherlv_11= '[' ( (lv_lowerBound_12_0= RULE_INT ) ) (otherlv_13= '..' ( (lv_upperBound_14_0= ruleSINT ) ) )? otherlv_15= ']' )?
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1178:2: (otherlv_11= '[' ( (lv_lowerBound_12_0= RULE_INT ) ) (otherlv_13= '..' ( (lv_upperBound_14_0= ruleSINT ) ) )? otherlv_15= ']' )?
             int alt26=2;
             int LA26_0 = input.LA(1);
 
@@ -2844,17 +2841,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt26) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1181:4: otherlv_11= '[' ( (lv_lowerBound_12_0= RULE_INT ) ) (otherlv_13= '..' ( (lv_upperBound_14_0= ruleSINT ) ) )? otherlv_15= ']'
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1178:4: otherlv_11= '[' ( (lv_lowerBound_12_0= RULE_INT ) ) (otherlv_13= '..' ( (lv_upperBound_14_0= ruleSINT ) ) )? otherlv_15= ']'
                     {
                     otherlv_11=(Token)match(input,42,FOLLOW_42_in_ruleEAttributeDecl2321); 
 
                         	newLeafNode(otherlv_11, grammarAccess.getEAttributeDeclAccess().getLeftSquareBracketKeyword_4_0());
                         
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1185:1: ( (lv_lowerBound_12_0= RULE_INT ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1186:1: (lv_lowerBound_12_0= RULE_INT )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1182:1: ( (lv_lowerBound_12_0= RULE_INT ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1183:1: (lv_lowerBound_12_0= RULE_INT )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1186:1: (lv_lowerBound_12_0= RULE_INT )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1187:3: lv_lowerBound_12_0= RULE_INT
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1183:1: (lv_lowerBound_12_0= RULE_INT )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1184:3: lv_lowerBound_12_0= RULE_INT
                     {
                     lv_lowerBound_12_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleEAttributeDecl2338); 
 
@@ -2876,7 +2873,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1203:2: (otherlv_13= '..' ( (lv_upperBound_14_0= ruleSINT ) ) )?
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1200:2: (otherlv_13= '..' ( (lv_upperBound_14_0= ruleSINT ) ) )?
                     int alt25=2;
                     int LA25_0 = input.LA(1);
 
@@ -2885,17 +2882,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt25) {
                         case 1 :
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1203:4: otherlv_13= '..' ( (lv_upperBound_14_0= ruleSINT ) )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1200:4: otherlv_13= '..' ( (lv_upperBound_14_0= ruleSINT ) )
                             {
                             otherlv_13=(Token)match(input,43,FOLLOW_43_in_ruleEAttributeDecl2356); 
 
                                 	newLeafNode(otherlv_13, grammarAccess.getEAttributeDeclAccess().getFullStopFullStopKeyword_4_2_0());
                                 
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1207:1: ( (lv_upperBound_14_0= ruleSINT ) )
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1208:1: (lv_upperBound_14_0= ruleSINT )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1204:1: ( (lv_upperBound_14_0= ruleSINT ) )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1205:1: (lv_upperBound_14_0= ruleSINT )
                             {
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1208:1: (lv_upperBound_14_0= ruleSINT )
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1209:3: lv_upperBound_14_0= ruleSINT
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1205:1: (lv_upperBound_14_0= ruleSINT )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1206:3: lv_upperBound_14_0= ruleSINT
                             {
                              
                             	        newCompositeNode(grammarAccess.getEAttributeDeclAccess().getUpperBoundSINTParserRuleCall_4_2_1_0()); 
@@ -2938,11 +2935,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1229:3: ( (lv_name_16_0= RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1230:1: (lv_name_16_0= RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1226:3: ( (lv_name_16_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1227:1: (lv_name_16_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1230:1: (lv_name_16_0= RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1231:3: lv_name_16_0= RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1227:1: (lv_name_16_0= RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1228:3: lv_name_16_0= RULE_ID
             {
             lv_name_16_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEAttributeDecl2410); 
 
@@ -2964,7 +2961,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1247:2: (otherlv_17= '=' ( (lv_defaultValueLiteral_18_0= RULE_STRING ) ) )?
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1244:2: (otherlv_17= '=' ( (lv_defaultValueLiteral_18_0= RULE_STRING ) ) )?
             int alt27=2;
             int LA27_0 = input.LA(1);
 
@@ -2973,17 +2970,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt27) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1247:4: otherlv_17= '=' ( (lv_defaultValueLiteral_18_0= RULE_STRING ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1244:4: otherlv_17= '=' ( (lv_defaultValueLiteral_18_0= RULE_STRING ) )
                     {
                     otherlv_17=(Token)match(input,17,FOLLOW_17_in_ruleEAttributeDecl2428); 
 
                         	newLeafNode(otherlv_17, grammarAccess.getEAttributeDeclAccess().getEqualsSignKeyword_6_0());
                         
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1251:1: ( (lv_defaultValueLiteral_18_0= RULE_STRING ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1252:1: (lv_defaultValueLiteral_18_0= RULE_STRING )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1248:1: ( (lv_defaultValueLiteral_18_0= RULE_STRING ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1249:1: (lv_defaultValueLiteral_18_0= RULE_STRING )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1252:1: (lv_defaultValueLiteral_18_0= RULE_STRING )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1253:3: lv_defaultValueLiteral_18_0= RULE_STRING
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1249:1: (lv_defaultValueLiteral_18_0= RULE_STRING )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1250:3: lv_defaultValueLiteral_18_0= RULE_STRING
                     {
                     lv_defaultValueLiteral_18_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleEAttributeDecl2445); 
 
@@ -3036,7 +3033,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEReferenceDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1281:1: entryRuleEReferenceDecl returns [EObject current=null] : iv_ruleEReferenceDecl= ruleEReferenceDecl EOF ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1278:1: entryRuleEReferenceDecl returns [EObject current=null] : iv_ruleEReferenceDecl= ruleEReferenceDecl EOF ;
     public final EObject entryRuleEReferenceDecl() throws RecognitionException {
         EObject current = null;
 
@@ -3044,8 +3041,8 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1282:2: (iv_ruleEReferenceDecl= ruleEReferenceDecl EOF )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1283:2: iv_ruleEReferenceDecl= ruleEReferenceDecl EOF
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1279:2: (iv_ruleEReferenceDecl= ruleEReferenceDecl EOF )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1280:2: iv_ruleEReferenceDecl= ruleEReferenceDecl EOF
             {
              newCompositeNode(grammarAccess.getEReferenceDeclRule()); 
             pushFollow(FOLLOW_ruleEReferenceDecl_in_entryRuleEReferenceDecl2500);
@@ -3072,7 +3069,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEReferenceDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1290:1: ruleEReferenceDecl returns [EObject current=null] : ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_resolveProxies_1_0= RULE_LOCAL ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )* ( ( (lv_containment_9_0= 'val' ) ) | otherlv_10= 'ref' ) ( (lv_eGenericType_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= '[' ( (lv_lowerBound_13_0= RULE_INT ) ) (otherlv_14= '..' ( (lv_upperBound_15_0= ruleSINT ) ) )? otherlv_16= ']' )? (otherlv_17= '#' ( (otherlv_18= RULE_ID ) ) )? ( (lv_name_19_0= RULE_ID ) ) otherlv_20= ';' ) ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1287:1: ruleEReferenceDecl returns [EObject current=null] : ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_resolveProxies_1_0= RULE_LOCAL ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )* ( ( (lv_containment_9_0= 'val' ) ) | otherlv_10= 'ref' ) ( (lv_eGenericType_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= '[' ( (lv_lowerBound_13_0= RULE_INT ) ) (otherlv_14= '..' ( (lv_upperBound_15_0= ruleSINT ) ) )? otherlv_16= ']' )? (otherlv_17= '#' ( (otherlv_18= RULE_ID ) ) )? ( (lv_name_19_0= RULE_ID ) ) otherlv_20= ';' ) ;
     public final EObject ruleEReferenceDecl() throws RecognitionException {
         EObject current = null;
 
@@ -3104,13 +3101,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1293:28: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_resolveProxies_1_0= RULE_LOCAL ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )* ( ( (lv_containment_9_0= 'val' ) ) | otherlv_10= 'ref' ) ( (lv_eGenericType_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= '[' ( (lv_lowerBound_13_0= RULE_INT ) ) (otherlv_14= '..' ( (lv_upperBound_15_0= ruleSINT ) ) )? otherlv_16= ']' )? (otherlv_17= '#' ( (otherlv_18= RULE_ID ) ) )? ( (lv_name_19_0= RULE_ID ) ) otherlv_20= ';' ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1294:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_resolveProxies_1_0= RULE_LOCAL ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )* ( ( (lv_containment_9_0= 'val' ) ) | otherlv_10= 'ref' ) ( (lv_eGenericType_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= '[' ( (lv_lowerBound_13_0= RULE_INT ) ) (otherlv_14= '..' ( (lv_upperBound_15_0= ruleSINT ) ) )? otherlv_16= ']' )? (otherlv_17= '#' ( (otherlv_18= RULE_ID ) ) )? ( (lv_name_19_0= RULE_ID ) ) otherlv_20= ';' )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1290:28: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_resolveProxies_1_0= RULE_LOCAL ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )* ( ( (lv_containment_9_0= 'val' ) ) | otherlv_10= 'ref' ) ( (lv_eGenericType_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= '[' ( (lv_lowerBound_13_0= RULE_INT ) ) (otherlv_14= '..' ( (lv_upperBound_15_0= ruleSINT ) ) )? otherlv_16= ']' )? (otherlv_17= '#' ( (otherlv_18= RULE_ID ) ) )? ( (lv_name_19_0= RULE_ID ) ) otherlv_20= ';' ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1291:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_resolveProxies_1_0= RULE_LOCAL ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )* ( ( (lv_containment_9_0= 'val' ) ) | otherlv_10= 'ref' ) ( (lv_eGenericType_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= '[' ( (lv_lowerBound_13_0= RULE_INT ) ) (otherlv_14= '..' ( (lv_upperBound_15_0= ruleSINT ) ) )? otherlv_16= ']' )? (otherlv_17= '#' ( (otherlv_18= RULE_ID ) ) )? ( (lv_name_19_0= RULE_ID ) ) otherlv_20= ';' )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1294:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_resolveProxies_1_0= RULE_LOCAL ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )* ( ( (lv_containment_9_0= 'val' ) ) | otherlv_10= 'ref' ) ( (lv_eGenericType_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= '[' ( (lv_lowerBound_13_0= RULE_INT ) ) (otherlv_14= '..' ( (lv_upperBound_15_0= ruleSINT ) ) )? otherlv_16= ']' )? (otherlv_17= '#' ( (otherlv_18= RULE_ID ) ) )? ( (lv_name_19_0= RULE_ID ) ) otherlv_20= ';' )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1294:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_resolveProxies_1_0= RULE_LOCAL ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )* ( ( (lv_containment_9_0= 'val' ) ) | otherlv_10= 'ref' ) ( (lv_eGenericType_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= '[' ( (lv_lowerBound_13_0= RULE_INT ) ) (otherlv_14= '..' ( (lv_upperBound_15_0= ruleSINT ) ) )? otherlv_16= ']' )? (otherlv_17= '#' ( (otherlv_18= RULE_ID ) ) )? ( (lv_name_19_0= RULE_ID ) ) otherlv_20= ';'
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1291:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_resolveProxies_1_0= RULE_LOCAL ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )* ( ( (lv_containment_9_0= 'val' ) ) | otherlv_10= 'ref' ) ( (lv_eGenericType_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= '[' ( (lv_lowerBound_13_0= RULE_INT ) ) (otherlv_14= '..' ( (lv_upperBound_15_0= ruleSINT ) ) )? otherlv_16= ']' )? (otherlv_17= '#' ( (otherlv_18= RULE_ID ) ) )? ( (lv_name_19_0= RULE_ID ) ) otherlv_20= ';' )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1291:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_resolveProxies_1_0= RULE_LOCAL ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )* ( ( (lv_containment_9_0= 'val' ) ) | otherlv_10= 'ref' ) ( (lv_eGenericType_11_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_12= '[' ( (lv_lowerBound_13_0= RULE_INT ) ) (otherlv_14= '..' ( (lv_upperBound_15_0= ruleSINT ) ) )? otherlv_16= ']' )? (otherlv_17= '#' ( (otherlv_18= RULE_ID ) ) )? ( (lv_name_19_0= RULE_ID ) ) otherlv_20= ';'
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1294:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )*
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1291:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )*
             loop28:
             do {
                 int alt28=2;
@@ -3123,10 +3120,10 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt28) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1295:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1292:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1295:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1296:3: lv_eAnnotations_0_0= ruleEAnnotationDecl
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1292:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1293:3: lv_eAnnotations_0_0= ruleEAnnotationDecl
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getEReferenceDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
@@ -3159,7 +3156,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1312:3: ( ( (lv_resolveProxies_1_0= RULE_LOCAL ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )*
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1309:3: ( ( (lv_resolveProxies_1_0= RULE_LOCAL ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )*
             loop29:
             do {
                 int alt29=9;
@@ -3209,13 +3206,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt29) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1312:4: ( (lv_resolveProxies_1_0= RULE_LOCAL ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1309:4: ( (lv_resolveProxies_1_0= RULE_LOCAL ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1312:4: ( (lv_resolveProxies_1_0= RULE_LOCAL ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1313:1: (lv_resolveProxies_1_0= RULE_LOCAL )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1309:4: ( (lv_resolveProxies_1_0= RULE_LOCAL ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1310:1: (lv_resolveProxies_1_0= RULE_LOCAL )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1313:1: (lv_resolveProxies_1_0= RULE_LOCAL )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1314:3: lv_resolveProxies_1_0= RULE_LOCAL
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1310:1: (lv_resolveProxies_1_0= RULE_LOCAL )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1311:3: lv_resolveProxies_1_0= RULE_LOCAL
             	    {
             	    lv_resolveProxies_1_0=(Token)match(input,RULE_LOCAL,FOLLOW_RULE_LOCAL_in_ruleEReferenceDecl2575); 
 
@@ -3241,13 +3238,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1331:6: ( (lv_unique_2_0= RULE_BAG ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1328:6: ( (lv_unique_2_0= RULE_BAG ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1331:6: ( (lv_unique_2_0= RULE_BAG ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1332:1: (lv_unique_2_0= RULE_BAG )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1328:6: ( (lv_unique_2_0= RULE_BAG ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1329:1: (lv_unique_2_0= RULE_BAG )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1332:1: (lv_unique_2_0= RULE_BAG )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1333:3: lv_unique_2_0= RULE_BAG
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1329:1: (lv_unique_2_0= RULE_BAG )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1330:3: lv_unique_2_0= RULE_BAG
             	    {
             	    lv_unique_2_0=(Token)match(input,RULE_BAG,FOLLOW_RULE_BAG_in_ruleEReferenceDecl2603); 
 
@@ -3273,13 +3270,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1350:6: ( (lv_ordered_3_0= RULE_RANDOM ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1347:6: ( (lv_ordered_3_0= RULE_RANDOM ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1350:6: ( (lv_ordered_3_0= RULE_RANDOM ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1351:1: (lv_ordered_3_0= RULE_RANDOM )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1347:6: ( (lv_ordered_3_0= RULE_RANDOM ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1348:1: (lv_ordered_3_0= RULE_RANDOM )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1351:1: (lv_ordered_3_0= RULE_RANDOM )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1352:3: lv_ordered_3_0= RULE_RANDOM
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1348:1: (lv_ordered_3_0= RULE_RANDOM )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1349:3: lv_ordered_3_0= RULE_RANDOM
             	    {
             	    lv_ordered_3_0=(Token)match(input,RULE_RANDOM,FOLLOW_RULE_RANDOM_in_ruleEReferenceDecl2631); 
 
@@ -3305,13 +3302,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 4 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1369:6: ( (lv_changeable_4_0= RULE_READONLY ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1366:6: ( (lv_changeable_4_0= RULE_READONLY ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1369:6: ( (lv_changeable_4_0= RULE_READONLY ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1370:1: (lv_changeable_4_0= RULE_READONLY )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1366:6: ( (lv_changeable_4_0= RULE_READONLY ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1367:1: (lv_changeable_4_0= RULE_READONLY )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1370:1: (lv_changeable_4_0= RULE_READONLY )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1371:3: lv_changeable_4_0= RULE_READONLY
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1367:1: (lv_changeable_4_0= RULE_READONLY )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1368:3: lv_changeable_4_0= RULE_READONLY
             	    {
             	    lv_changeable_4_0=(Token)match(input,RULE_READONLY,FOLLOW_RULE_READONLY_in_ruleEReferenceDecl2659); 
 
@@ -3337,13 +3334,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 5 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1388:6: ( (lv_volatile_5_0= 'volatile' ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1385:6: ( (lv_volatile_5_0= 'volatile' ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1388:6: ( (lv_volatile_5_0= 'volatile' ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1389:1: (lv_volatile_5_0= 'volatile' )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1385:6: ( (lv_volatile_5_0= 'volatile' ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1386:1: (lv_volatile_5_0= 'volatile' )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1389:1: (lv_volatile_5_0= 'volatile' )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1390:3: lv_volatile_5_0= 'volatile'
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1386:1: (lv_volatile_5_0= 'volatile' )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1387:3: lv_volatile_5_0= 'volatile'
             	    {
             	    lv_volatile_5_0=(Token)match(input,37,FOLLOW_37_in_ruleEReferenceDecl2688); 
 
@@ -3365,13 +3362,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 6 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1404:6: ( (lv_transient_6_0= 'transient' ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1401:6: ( (lv_transient_6_0= 'transient' ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1404:6: ( (lv_transient_6_0= 'transient' ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1405:1: (lv_transient_6_0= 'transient' )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1401:6: ( (lv_transient_6_0= 'transient' ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1402:1: (lv_transient_6_0= 'transient' )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1405:1: (lv_transient_6_0= 'transient' )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1406:3: lv_transient_6_0= 'transient'
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1402:1: (lv_transient_6_0= 'transient' )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1403:3: lv_transient_6_0= 'transient'
             	    {
             	    lv_transient_6_0=(Token)match(input,38,FOLLOW_38_in_ruleEReferenceDecl2725); 
 
@@ -3393,13 +3390,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 7 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1420:6: ( (lv_unsettable_7_0= 'unsettable' ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1417:6: ( (lv_unsettable_7_0= 'unsettable' ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1420:6: ( (lv_unsettable_7_0= 'unsettable' ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1421:1: (lv_unsettable_7_0= 'unsettable' )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1417:6: ( (lv_unsettable_7_0= 'unsettable' ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1418:1: (lv_unsettable_7_0= 'unsettable' )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1421:1: (lv_unsettable_7_0= 'unsettable' )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1422:3: lv_unsettable_7_0= 'unsettable'
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1418:1: (lv_unsettable_7_0= 'unsettable' )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1419:3: lv_unsettable_7_0= 'unsettable'
             	    {
             	    lv_unsettable_7_0=(Token)match(input,39,FOLLOW_39_in_ruleEReferenceDecl2762); 
 
@@ -3421,13 +3418,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 8 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1436:6: ( (lv_derived_8_0= 'derived' ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1433:6: ( (lv_derived_8_0= 'derived' ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1436:6: ( (lv_derived_8_0= 'derived' ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1437:1: (lv_derived_8_0= 'derived' )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1433:6: ( (lv_derived_8_0= 'derived' ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1434:1: (lv_derived_8_0= 'derived' )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1437:1: (lv_derived_8_0= 'derived' )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1438:3: lv_derived_8_0= 'derived'
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1434:1: (lv_derived_8_0= 'derived' )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1435:3: lv_derived_8_0= 'derived'
             	    {
             	    lv_derived_8_0=(Token)match(input,40,FOLLOW_40_in_ruleEReferenceDecl2799); 
 
@@ -3454,7 +3451,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1451:4: ( ( (lv_containment_9_0= 'val' ) ) | otherlv_10= 'ref' )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1448:4: ( ( (lv_containment_9_0= 'val' ) ) | otherlv_10= 'ref' )
             int alt30=2;
             int LA30_0 = input.LA(1);
 
@@ -3472,13 +3469,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt30) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1451:5: ( (lv_containment_9_0= 'val' ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1448:5: ( (lv_containment_9_0= 'val' ) )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1451:5: ( (lv_containment_9_0= 'val' ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1452:1: (lv_containment_9_0= 'val' )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1448:5: ( (lv_containment_9_0= 'val' ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1449:1: (lv_containment_9_0= 'val' )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1452:1: (lv_containment_9_0= 'val' )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1453:3: lv_containment_9_0= 'val'
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1449:1: (lv_containment_9_0= 'val' )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1450:3: lv_containment_9_0= 'val'
                     {
                     lv_containment_9_0=(Token)match(input,45,FOLLOW_45_in_ruleEReferenceDecl2833); 
 
@@ -3500,7 +3497,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1467:7: otherlv_10= 'ref'
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1464:7: otherlv_10= 'ref'
                     {
                     otherlv_10=(Token)match(input,46,FOLLOW_46_in_ruleEReferenceDecl2864); 
 
@@ -3512,11 +3509,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1471:2: ( (lv_eGenericType_11_0= ruleEGenericTypeReferenceDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1472:1: (lv_eGenericType_11_0= ruleEGenericTypeReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1468:2: ( (lv_eGenericType_11_0= ruleEGenericTypeReferenceDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1469:1: (lv_eGenericType_11_0= ruleEGenericTypeReferenceDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1472:1: (lv_eGenericType_11_0= ruleEGenericTypeReferenceDecl )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1473:3: lv_eGenericType_11_0= ruleEGenericTypeReferenceDecl
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1469:1: (lv_eGenericType_11_0= ruleEGenericTypeReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1470:3: lv_eGenericType_11_0= ruleEGenericTypeReferenceDecl
             {
              
             	        newCompositeNode(grammarAccess.getEReferenceDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0()); 
@@ -3543,7 +3540,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1489:2: (otherlv_12= '[' ( (lv_lowerBound_13_0= RULE_INT ) ) (otherlv_14= '..' ( (lv_upperBound_15_0= ruleSINT ) ) )? otherlv_16= ']' )?
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1486:2: (otherlv_12= '[' ( (lv_lowerBound_13_0= RULE_INT ) ) (otherlv_14= '..' ( (lv_upperBound_15_0= ruleSINT ) ) )? otherlv_16= ']' )?
             int alt32=2;
             int LA32_0 = input.LA(1);
 
@@ -3552,17 +3549,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt32) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1489:4: otherlv_12= '[' ( (lv_lowerBound_13_0= RULE_INT ) ) (otherlv_14= '..' ( (lv_upperBound_15_0= ruleSINT ) ) )? otherlv_16= ']'
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1486:4: otherlv_12= '[' ( (lv_lowerBound_13_0= RULE_INT ) ) (otherlv_14= '..' ( (lv_upperBound_15_0= ruleSINT ) ) )? otherlv_16= ']'
                     {
                     otherlv_12=(Token)match(input,42,FOLLOW_42_in_ruleEReferenceDecl2899); 
 
                         	newLeafNode(otherlv_12, grammarAccess.getEReferenceDeclAccess().getLeftSquareBracketKeyword_4_0());
                         
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1493:1: ( (lv_lowerBound_13_0= RULE_INT ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1494:1: (lv_lowerBound_13_0= RULE_INT )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1490:1: ( (lv_lowerBound_13_0= RULE_INT ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1491:1: (lv_lowerBound_13_0= RULE_INT )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1494:1: (lv_lowerBound_13_0= RULE_INT )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1495:3: lv_lowerBound_13_0= RULE_INT
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1491:1: (lv_lowerBound_13_0= RULE_INT )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1492:3: lv_lowerBound_13_0= RULE_INT
                     {
                     lv_lowerBound_13_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleEReferenceDecl2916); 
 
@@ -3584,7 +3581,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1511:2: (otherlv_14= '..' ( (lv_upperBound_15_0= ruleSINT ) ) )?
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1508:2: (otherlv_14= '..' ( (lv_upperBound_15_0= ruleSINT ) ) )?
                     int alt31=2;
                     int LA31_0 = input.LA(1);
 
@@ -3593,17 +3590,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt31) {
                         case 1 :
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1511:4: otherlv_14= '..' ( (lv_upperBound_15_0= ruleSINT ) )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1508:4: otherlv_14= '..' ( (lv_upperBound_15_0= ruleSINT ) )
                             {
                             otherlv_14=(Token)match(input,43,FOLLOW_43_in_ruleEReferenceDecl2934); 
 
                                 	newLeafNode(otherlv_14, grammarAccess.getEReferenceDeclAccess().getFullStopFullStopKeyword_4_2_0());
                                 
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1515:1: ( (lv_upperBound_15_0= ruleSINT ) )
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1516:1: (lv_upperBound_15_0= ruleSINT )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1512:1: ( (lv_upperBound_15_0= ruleSINT ) )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1513:1: (lv_upperBound_15_0= ruleSINT )
                             {
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1516:1: (lv_upperBound_15_0= ruleSINT )
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1517:3: lv_upperBound_15_0= ruleSINT
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1513:1: (lv_upperBound_15_0= ruleSINT )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1514:3: lv_upperBound_15_0= ruleSINT
                             {
                              
                             	        newCompositeNode(grammarAccess.getEReferenceDeclAccess().getUpperBoundSINTParserRuleCall_4_2_1_0()); 
@@ -3646,7 +3643,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1537:3: (otherlv_17= '#' ( (otherlv_18= RULE_ID ) ) )?
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1534:3: (otherlv_17= '#' ( (otherlv_18= RULE_ID ) ) )?
             int alt33=2;
             int LA33_0 = input.LA(1);
 
@@ -3655,17 +3652,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt33) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1537:5: otherlv_17= '#' ( (otherlv_18= RULE_ID ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1534:5: otherlv_17= '#' ( (otherlv_18= RULE_ID ) )
                     {
                     otherlv_17=(Token)match(input,47,FOLLOW_47_in_ruleEReferenceDecl2984); 
 
                         	newLeafNode(otherlv_17, grammarAccess.getEReferenceDeclAccess().getNumberSignKeyword_5_0());
                         
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1541:1: ( (otherlv_18= RULE_ID ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1542:1: (otherlv_18= RULE_ID )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1538:1: ( (otherlv_18= RULE_ID ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1539:1: (otherlv_18= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1542:1: (otherlv_18= RULE_ID )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1543:3: otherlv_18= RULE_ID
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1539:1: (otherlv_18= RULE_ID )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1540:3: otherlv_18= RULE_ID
                     {
 
                     			if (current==null) {
@@ -3688,11 +3685,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1554:4: ( (lv_name_19_0= RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1555:1: (lv_name_19_0= RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1551:4: ( (lv_name_19_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1552:1: (lv_name_19_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1555:1: (lv_name_19_0= RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1556:3: lv_name_19_0= RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1552:1: (lv_name_19_0= RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1553:3: lv_name_19_0= RULE_ID
             {
             lv_name_19_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEReferenceDecl3023); 
 
@@ -3739,7 +3736,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEEnumDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1584:1: entryRuleEEnumDecl returns [EObject current=null] : iv_ruleEEnumDecl= ruleEEnumDecl EOF ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1581:1: entryRuleEEnumDecl returns [EObject current=null] : iv_ruleEEnumDecl= ruleEEnumDecl EOF ;
     public final EObject entryRuleEEnumDecl() throws RecognitionException {
         EObject current = null;
 
@@ -3747,8 +3744,8 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1585:2: (iv_ruleEEnumDecl= ruleEEnumDecl EOF )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1586:2: iv_ruleEEnumDecl= ruleEEnumDecl EOF
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1582:2: (iv_ruleEEnumDecl= ruleEEnumDecl EOF )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1583:2: iv_ruleEEnumDecl= ruleEEnumDecl EOF
             {
              newCompositeNode(grammarAccess.getEEnumDeclRule()); 
             pushFollow(FOLLOW_ruleEEnumDecl_in_entryRuleEEnumDecl3076);
@@ -3775,7 +3772,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEEnumDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1593:1: ruleEEnumDecl returns [EObject current=null] : ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'enum' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' ( (lv_eLiterals_4_0= ruleEEnumLiteralDecl ) )+ otherlv_5= '}' ) ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1590:1: ruleEEnumDecl returns [EObject current=null] : ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'enum' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' ( (lv_eLiterals_4_0= ruleEEnumLiteralDecl ) )+ otherlv_5= '}' ) ;
     public final EObject ruleEEnumDecl() throws RecognitionException {
         EObject current = null;
 
@@ -3791,13 +3788,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1596:28: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'enum' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' ( (lv_eLiterals_4_0= ruleEEnumLiteralDecl ) )+ otherlv_5= '}' ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1597:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'enum' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' ( (lv_eLiterals_4_0= ruleEEnumLiteralDecl ) )+ otherlv_5= '}' )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1593:28: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'enum' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' ( (lv_eLiterals_4_0= ruleEEnumLiteralDecl ) )+ otherlv_5= '}' ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1594:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'enum' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' ( (lv_eLiterals_4_0= ruleEEnumLiteralDecl ) )+ otherlv_5= '}' )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1597:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'enum' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' ( (lv_eLiterals_4_0= ruleEEnumLiteralDecl ) )+ otherlv_5= '}' )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1597:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'enum' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' ( (lv_eLiterals_4_0= ruleEEnumLiteralDecl ) )+ otherlv_5= '}'
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1594:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'enum' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' ( (lv_eLiterals_4_0= ruleEEnumLiteralDecl ) )+ otherlv_5= '}' )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1594:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* otherlv_1= 'enum' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' ( (lv_eLiterals_4_0= ruleEEnumLiteralDecl ) )+ otherlv_5= '}'
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1597:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )*
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1594:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )*
             loop34:
             do {
                 int alt34=2;
@@ -3810,10 +3807,10 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt34) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1598:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1595:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1598:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1599:3: lv_eAnnotations_0_0= ruleEAnnotationDecl
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1595:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1596:3: lv_eAnnotations_0_0= ruleEAnnotationDecl
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getEEnumDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
@@ -3850,11 +3847,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_1, grammarAccess.getEEnumDeclAccess().getEnumKeyword_1());
                 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1619:1: ( (lv_name_2_0= RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1620:1: (lv_name_2_0= RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1616:1: ( (lv_name_2_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1617:1: (lv_name_2_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1620:1: (lv_name_2_0= RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1621:3: lv_name_2_0= RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1617:1: (lv_name_2_0= RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1618:3: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEEnumDecl3162); 
 
@@ -3880,7 +3877,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_3, grammarAccess.getEEnumDeclAccess().getLeftCurlyBracketKeyword_3());
                 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1641:1: ( (lv_eLiterals_4_0= ruleEEnumLiteralDecl ) )+
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1638:1: ( (lv_eLiterals_4_0= ruleEEnumLiteralDecl ) )+
             int cnt35=0;
             loop35:
             do {
@@ -3894,10 +3891,10 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt35) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1642:1: (lv_eLiterals_4_0= ruleEEnumLiteralDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1639:1: (lv_eLiterals_4_0= ruleEEnumLiteralDecl )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1642:1: (lv_eLiterals_4_0= ruleEEnumLiteralDecl )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1643:3: lv_eLiterals_4_0= ruleEEnumLiteralDecl
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1639:1: (lv_eLiterals_4_0= ruleEEnumLiteralDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1640:3: lv_eLiterals_4_0= ruleEEnumLiteralDecl
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getEEnumDeclAccess().getELiteralsEEnumLiteralDeclParserRuleCall_4_0()); 
@@ -3959,7 +3956,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEEnumLiteralDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1671:1: entryRuleEEnumLiteralDecl returns [EObject current=null] : iv_ruleEEnumLiteralDecl= ruleEEnumLiteralDecl EOF ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1668:1: entryRuleEEnumLiteralDecl returns [EObject current=null] : iv_ruleEEnumLiteralDecl= ruleEEnumLiteralDecl EOF ;
     public final EObject entryRuleEEnumLiteralDecl() throws RecognitionException {
         EObject current = null;
 
@@ -3967,8 +3964,8 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1672:2: (iv_ruleEEnumLiteralDecl= ruleEEnumLiteralDecl EOF )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1673:2: iv_ruleEEnumLiteralDecl= ruleEEnumLiteralDecl EOF
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1669:2: (iv_ruleEEnumLiteralDecl= ruleEEnumLiteralDecl EOF )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1670:2: iv_ruleEEnumLiteralDecl= ruleEEnumLiteralDecl EOF
             {
              newCompositeNode(grammarAccess.getEEnumLiteralDeclRule()); 
             pushFollow(FOLLOW_ruleEEnumLiteralDecl_in_entryRuleEEnumLiteralDecl3249);
@@ -3995,7 +3992,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEEnumLiteralDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1680:1: ruleEEnumLiteralDecl returns [EObject current=null] : ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= RULE_INT ) ) )? ( (lv_literal_4_0= RULE_STRING ) )? otherlv_5= ';' ) ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1677:1: ruleEEnumLiteralDecl returns [EObject current=null] : ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= RULE_INT ) ) )? ( (lv_literal_4_0= RULE_STRING ) )? otherlv_5= ';' ) ;
     public final EObject ruleEEnumLiteralDecl() throws RecognitionException {
         EObject current = null;
 
@@ -4010,13 +4007,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1683:28: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= RULE_INT ) ) )? ( (lv_literal_4_0= RULE_STRING ) )? otherlv_5= ';' ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1684:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= RULE_INT ) ) )? ( (lv_literal_4_0= RULE_STRING ) )? otherlv_5= ';' )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1680:28: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= RULE_INT ) ) )? ( (lv_literal_4_0= RULE_STRING ) )? otherlv_5= ';' ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1681:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= RULE_INT ) ) )? ( (lv_literal_4_0= RULE_STRING ) )? otherlv_5= ';' )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1684:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= RULE_INT ) ) )? ( (lv_literal_4_0= RULE_STRING ) )? otherlv_5= ';' )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1684:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= RULE_INT ) ) )? ( (lv_literal_4_0= RULE_STRING ) )? otherlv_5= ';'
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1681:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= RULE_INT ) ) )? ( (lv_literal_4_0= RULE_STRING ) )? otherlv_5= ';' )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1681:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= RULE_INT ) ) )? ( (lv_literal_4_0= RULE_STRING ) )? otherlv_5= ';'
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1684:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )*
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1681:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )*
             loop36:
             do {
                 int alt36=2;
@@ -4029,10 +4026,10 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt36) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1685:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1682:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1685:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1686:3: lv_eAnnotations_0_0= ruleEAnnotationDecl
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1682:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1683:3: lv_eAnnotations_0_0= ruleEAnnotationDecl
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getEEnumLiteralDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
@@ -4065,11 +4062,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1702:3: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1703:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1699:3: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1700:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1703:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1704:3: lv_name_1_0= RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1700:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1701:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEEnumLiteralDecl3323); 
 
@@ -4091,7 +4088,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1720:2: (otherlv_2= '=' ( (lv_value_3_0= RULE_INT ) ) )?
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1717:2: (otherlv_2= '=' ( (lv_value_3_0= RULE_INT ) ) )?
             int alt37=2;
             int LA37_0 = input.LA(1);
 
@@ -4100,17 +4097,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt37) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1720:4: otherlv_2= '=' ( (lv_value_3_0= RULE_INT ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1717:4: otherlv_2= '=' ( (lv_value_3_0= RULE_INT ) )
                     {
                     otherlv_2=(Token)match(input,17,FOLLOW_17_in_ruleEEnumLiteralDecl3341); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getEEnumLiteralDeclAccess().getEqualsSignKeyword_2_0());
                         
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1724:1: ( (lv_value_3_0= RULE_INT ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1725:1: (lv_value_3_0= RULE_INT )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1721:1: ( (lv_value_3_0= RULE_INT ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1722:1: (lv_value_3_0= RULE_INT )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1725:1: (lv_value_3_0= RULE_INT )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1726:3: lv_value_3_0= RULE_INT
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1722:1: (lv_value_3_0= RULE_INT )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1723:3: lv_value_3_0= RULE_INT
                     {
                     lv_value_3_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleEEnumLiteralDecl3358); 
 
@@ -4138,7 +4135,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1742:4: ( (lv_literal_4_0= RULE_STRING ) )?
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1739:4: ( (lv_literal_4_0= RULE_STRING ) )?
             int alt38=2;
             int LA38_0 = input.LA(1);
 
@@ -4147,10 +4144,10 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt38) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1743:1: (lv_literal_4_0= RULE_STRING )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1740:1: (lv_literal_4_0= RULE_STRING )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1743:1: (lv_literal_4_0= RULE_STRING )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1744:3: lv_literal_4_0= RULE_STRING
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1740:1: (lv_literal_4_0= RULE_STRING )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1741:3: lv_literal_4_0= RULE_STRING
                     {
                     lv_literal_4_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleEEnumLiteralDecl3382); 
 
@@ -4200,7 +4197,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleETypeParameterDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1772:1: entryRuleETypeParameterDecl returns [EObject current=null] : iv_ruleETypeParameterDecl= ruleETypeParameterDecl EOF ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1769:1: entryRuleETypeParameterDecl returns [EObject current=null] : iv_ruleETypeParameterDecl= ruleETypeParameterDecl EOF ;
     public final EObject entryRuleETypeParameterDecl() throws RecognitionException {
         EObject current = null;
 
@@ -4208,8 +4205,8 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1773:2: (iv_ruleETypeParameterDecl= ruleETypeParameterDecl EOF )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1774:2: iv_ruleETypeParameterDecl= ruleETypeParameterDecl EOF
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1770:2: (iv_ruleETypeParameterDecl= ruleETypeParameterDecl EOF )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1771:2: iv_ruleETypeParameterDecl= ruleETypeParameterDecl EOF
             {
              newCompositeNode(grammarAccess.getETypeParameterDeclRule()); 
             pushFollow(FOLLOW_ruleETypeParameterDecl_in_entryRuleETypeParameterDecl3436);
@@ -4236,7 +4233,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleETypeParameterDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1781:1: ruleETypeParameterDecl returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= 'extends' ( (lv_eBounds_2_0= ruleEGenericTypeDecl ) ) )? ) ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1778:1: ruleETypeParameterDecl returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= 'extends' ( (lv_eBounds_2_0= ruleEGenericTypeDecl ) ) )? ) ;
     public final EObject ruleETypeParameterDecl() throws RecognitionException {
         EObject current = null;
 
@@ -4248,17 +4245,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1784:28: ( ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= 'extends' ( (lv_eBounds_2_0= ruleEGenericTypeDecl ) ) )? ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1785:1: ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= 'extends' ( (lv_eBounds_2_0= ruleEGenericTypeDecl ) ) )? )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1781:28: ( ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= 'extends' ( (lv_eBounds_2_0= ruleEGenericTypeDecl ) ) )? ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1782:1: ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= 'extends' ( (lv_eBounds_2_0= ruleEGenericTypeDecl ) ) )? )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1785:1: ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= 'extends' ( (lv_eBounds_2_0= ruleEGenericTypeDecl ) ) )? )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1785:2: ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= 'extends' ( (lv_eBounds_2_0= ruleEGenericTypeDecl ) ) )?
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1782:1: ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= 'extends' ( (lv_eBounds_2_0= ruleEGenericTypeDecl ) ) )? )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1782:2: ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= 'extends' ( (lv_eBounds_2_0= ruleEGenericTypeDecl ) ) )?
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1785:2: ( (lv_name_0_0= RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1786:1: (lv_name_0_0= RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1782:2: ( (lv_name_0_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1783:1: (lv_name_0_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1786:1: (lv_name_0_0= RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1787:3: lv_name_0_0= RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1783:1: (lv_name_0_0= RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1784:3: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleETypeParameterDecl3488); 
 
@@ -4280,7 +4277,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1803:2: (otherlv_1= 'extends' ( (lv_eBounds_2_0= ruleEGenericTypeDecl ) ) )?
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1800:2: (otherlv_1= 'extends' ( (lv_eBounds_2_0= ruleEGenericTypeDecl ) ) )?
             int alt39=2;
             int LA39_0 = input.LA(1);
 
@@ -4289,17 +4286,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt39) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1803:4: otherlv_1= 'extends' ( (lv_eBounds_2_0= ruleEGenericTypeDecl ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1800:4: otherlv_1= 'extends' ( (lv_eBounds_2_0= ruleEGenericTypeDecl ) )
                     {
                     otherlv_1=(Token)match(input,35,FOLLOW_35_in_ruleETypeParameterDecl3506); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getETypeParameterDeclAccess().getExtendsKeyword_1_0());
                         
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1807:1: ( (lv_eBounds_2_0= ruleEGenericTypeDecl ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1808:1: (lv_eBounds_2_0= ruleEGenericTypeDecl )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1804:1: ( (lv_eBounds_2_0= ruleEGenericTypeDecl ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1805:1: (lv_eBounds_2_0= ruleEGenericTypeDecl )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1808:1: (lv_eBounds_2_0= ruleEGenericTypeDecl )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1809:3: lv_eBounds_2_0= ruleEGenericTypeDecl
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1805:1: (lv_eBounds_2_0= ruleEGenericTypeDecl )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1806:3: lv_eBounds_2_0= ruleEGenericTypeDecl
                     {
                      
                     	        newCompositeNode(grammarAccess.getETypeParameterDeclAccess().getEBoundsEGenericTypeDeclParserRuleCall_1_1_0()); 
@@ -4353,7 +4350,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEGenericTypeReferenceDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1833:1: entryRuleEGenericTypeReferenceDecl returns [EObject current=null] : iv_ruleEGenericTypeReferenceDecl= ruleEGenericTypeReferenceDecl EOF ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1830:1: entryRuleEGenericTypeReferenceDecl returns [EObject current=null] : iv_ruleEGenericTypeReferenceDecl= ruleEGenericTypeReferenceDecl EOF ;
     public final EObject entryRuleEGenericTypeReferenceDecl() throws RecognitionException {
         EObject current = null;
 
@@ -4361,8 +4358,8 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1834:2: (iv_ruleEGenericTypeReferenceDecl= ruleEGenericTypeReferenceDecl EOF )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1835:2: iv_ruleEGenericTypeReferenceDecl= ruleEGenericTypeReferenceDecl EOF
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1831:2: (iv_ruleEGenericTypeReferenceDecl= ruleEGenericTypeReferenceDecl EOF )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1832:2: iv_ruleEGenericTypeReferenceDecl= ruleEGenericTypeReferenceDecl EOF
             {
              newCompositeNode(grammarAccess.getEGenericTypeReferenceDeclRule()); 
             pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_entryRuleEGenericTypeReferenceDecl3565);
@@ -4389,7 +4386,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEGenericTypeReferenceDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1842:1: ruleEGenericTypeReferenceDecl returns [EObject current=null] : ( ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? ) | (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) ) ) ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1839:1: ruleEGenericTypeReferenceDecl returns [EObject current=null] : ( ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? ) | (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) ) ) ;
     public final EObject ruleEGenericTypeReferenceDecl() throws RecognitionException {
         EObject current = null;
 
@@ -4407,10 +4404,10 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1845:28: ( ( ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? ) | (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1846:1: ( ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? ) | (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1842:28: ( ( ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? ) | (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1843:1: ( ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? ) | (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1846:1: ( ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? ) | (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1843:1: ( ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? ) | (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) ) )
             int alt42=2;
             int LA42_0 = input.LA(1);
 
@@ -4428,16 +4425,16 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt42) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1846:2: ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1843:2: ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1846:2: ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1846:3: ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )?
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1843:2: ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1843:3: ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )?
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1846:3: ( (otherlv_0= RULE_ID ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1847:1: (otherlv_0= RULE_ID )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1843:3: ( (otherlv_0= RULE_ID ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1844:1: (otherlv_0= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1847:1: (otherlv_0= RULE_ID )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1848:3: otherlv_0= RULE_ID
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1844:1: (otherlv_0= RULE_ID )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1845:3: otherlv_0= RULE_ID
                     {
 
                     			if (current==null) {
@@ -4454,7 +4451,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1859:2: (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )?
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1856:2: (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )?
                     int alt41=2;
                     int LA41_0 = input.LA(1);
 
@@ -4463,17 +4460,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt41) {
                         case 1 :
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1859:4: otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>'
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1856:4: otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>'
                             {
                             otherlv_1=(Token)match(input,33,FOLLOW_33_in_ruleEGenericTypeReferenceDecl3634); 
 
                                 	newLeafNode(otherlv_1, grammarAccess.getEGenericTypeReferenceDeclAccess().getLessThanSignKeyword_0_1_0());
                                 
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1863:1: ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) )
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1864:1: (lv_eTypeArguments_2_0= ruleEGenericTypeDecl )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1860:1: ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1861:1: (lv_eTypeArguments_2_0= ruleEGenericTypeDecl )
                             {
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1864:1: (lv_eTypeArguments_2_0= ruleEGenericTypeDecl )
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1865:3: lv_eTypeArguments_2_0= ruleEGenericTypeDecl
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1861:1: (lv_eTypeArguments_2_0= ruleEGenericTypeDecl )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1862:3: lv_eTypeArguments_2_0= ruleEGenericTypeDecl
                             {
                              
                             	        newCompositeNode(grammarAccess.getEGenericTypeReferenceDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_1_0()); 
@@ -4500,7 +4497,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                             }
 
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1881:2: (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )*
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1878:2: (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )*
                             loop40:
                             do {
                                 int alt40=2;
@@ -4513,17 +4510,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                                 switch (alt40) {
                             	case 1 :
-                            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1881:4: otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) )
+                            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1878:4: otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) )
                             	    {
                             	    otherlv_3=(Token)match(input,28,FOLLOW_28_in_ruleEGenericTypeReferenceDecl3668); 
 
                             	        	newLeafNode(otherlv_3, grammarAccess.getEGenericTypeReferenceDeclAccess().getCommaKeyword_0_1_2_0());
                             	        
-                            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1885:1: ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) )
-                            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1886:1: (lv_eTypeArguments_4_0= ruleEGenericTypeDecl )
+                            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1882:1: ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) )
+                            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1883:1: (lv_eTypeArguments_4_0= ruleEGenericTypeDecl )
                             	    {
-                            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1886:1: (lv_eTypeArguments_4_0= ruleEGenericTypeDecl )
-                            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1887:3: lv_eTypeArguments_4_0= ruleEGenericTypeDecl
+                            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1883:1: (lv_eTypeArguments_4_0= ruleEGenericTypeDecl )
+                            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1884:3: lv_eTypeArguments_4_0= ruleEGenericTypeDecl
                             	    {
                             	     
                             	    	        newCompositeNode(grammarAccess.getEGenericTypeReferenceDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_2_1_0()); 
@@ -4576,20 +4573,20 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1908:6: (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1905:6: (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1908:6: (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1908:8: otherlv_6= '#' ( (otherlv_7= RULE_ID ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1905:6: (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1905:8: otherlv_6= '#' ( (otherlv_7= RULE_ID ) )
                     {
                     otherlv_6=(Token)match(input,47,FOLLOW_47_in_ruleEGenericTypeReferenceDecl3725); 
 
                         	newLeafNode(otherlv_6, grammarAccess.getEGenericTypeReferenceDeclAccess().getNumberSignKeyword_1_0());
                         
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1912:1: ( (otherlv_7= RULE_ID ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1913:1: (otherlv_7= RULE_ID )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1909:1: ( (otherlv_7= RULE_ID ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1910:1: (otherlv_7= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1913:1: (otherlv_7= RULE_ID )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1914:3: otherlv_7= RULE_ID
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1910:1: (otherlv_7= RULE_ID )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1911:3: otherlv_7= RULE_ID
                     {
 
                     			if (current==null) {
@@ -4633,7 +4630,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEGenericTypeDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1933:1: entryRuleEGenericTypeDecl returns [EObject current=null] : iv_ruleEGenericTypeDecl= ruleEGenericTypeDecl EOF ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1930:1: entryRuleEGenericTypeDecl returns [EObject current=null] : iv_ruleEGenericTypeDecl= ruleEGenericTypeDecl EOF ;
     public final EObject entryRuleEGenericTypeDecl() throws RecognitionException {
         EObject current = null;
 
@@ -4641,8 +4638,8 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1934:2: (iv_ruleEGenericTypeDecl= ruleEGenericTypeDecl EOF )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1935:2: iv_ruleEGenericTypeDecl= ruleEGenericTypeDecl EOF
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1931:2: (iv_ruleEGenericTypeDecl= ruleEGenericTypeDecl EOF )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1932:2: iv_ruleEGenericTypeDecl= ruleEGenericTypeDecl EOF
             {
              newCompositeNode(grammarAccess.getEGenericTypeDeclRule()); 
             pushFollow(FOLLOW_ruleEGenericTypeDecl_in_entryRuleEGenericTypeDecl3782);
@@ -4669,7 +4666,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEGenericTypeDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1942:1: ruleEGenericTypeDecl returns [EObject current=null] : ( ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? ) | (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= '?' ( (otherlv_9= 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) ) | (otherlv_11= 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) ) ) ) ) ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1939:1: ruleEGenericTypeDecl returns [EObject current=null] : ( ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? ) | (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= '?' ( (otherlv_9= 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) ) | (otherlv_11= 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) ) ) ) ) ;
     public final EObject ruleEGenericTypeDecl() throws RecognitionException {
         EObject current = null;
 
@@ -4694,10 +4691,10 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1945:28: ( ( ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? ) | (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= '?' ( (otherlv_9= 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) ) | (otherlv_11= 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) ) ) ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1946:1: ( ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? ) | (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= '?' ( (otherlv_9= 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) ) | (otherlv_11= 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) ) ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1942:28: ( ( ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? ) | (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= '?' ( (otherlv_9= 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) ) | (otherlv_11= 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) ) ) ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1943:1: ( ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? ) | (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= '?' ( (otherlv_9= 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) ) | (otherlv_11= 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) ) ) ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1946:1: ( ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? ) | (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= '?' ( (otherlv_9= 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) ) | (otherlv_11= 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) ) ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1943:1: ( ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? ) | (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= '?' ( (otherlv_9= 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) ) | (otherlv_11= 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) ) ) ) )
             int alt46=3;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -4724,16 +4721,16 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             switch (alt46) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1946:2: ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1943:2: ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1946:2: ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1946:3: ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )?
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1943:2: ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )? )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1943:3: ( (otherlv_0= RULE_ID ) ) (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )?
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1946:3: ( (otherlv_0= RULE_ID ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1947:1: (otherlv_0= RULE_ID )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1943:3: ( (otherlv_0= RULE_ID ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1944:1: (otherlv_0= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1947:1: (otherlv_0= RULE_ID )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1948:3: otherlv_0= RULE_ID
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1944:1: (otherlv_0= RULE_ID )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1945:3: otherlv_0= RULE_ID
                     {
 
                     			if (current==null) {
@@ -4750,7 +4747,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1959:2: (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )?
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1956:2: (otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>' )?
                     int alt44=2;
                     int LA44_0 = input.LA(1);
 
@@ -4759,17 +4756,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt44) {
                         case 1 :
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1959:4: otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>'
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1956:4: otherlv_1= '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* otherlv_5= '>'
                             {
                             otherlv_1=(Token)match(input,33,FOLLOW_33_in_ruleEGenericTypeDecl3851); 
 
                                 	newLeafNode(otherlv_1, grammarAccess.getEGenericTypeDeclAccess().getLessThanSignKeyword_0_1_0());
                                 
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1963:1: ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) )
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1964:1: (lv_eTypeArguments_2_0= ruleEGenericTypeDecl )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1960:1: ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1961:1: (lv_eTypeArguments_2_0= ruleEGenericTypeDecl )
                             {
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1964:1: (lv_eTypeArguments_2_0= ruleEGenericTypeDecl )
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1965:3: lv_eTypeArguments_2_0= ruleEGenericTypeDecl
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1961:1: (lv_eTypeArguments_2_0= ruleEGenericTypeDecl )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1962:3: lv_eTypeArguments_2_0= ruleEGenericTypeDecl
                             {
                              
                             	        newCompositeNode(grammarAccess.getEGenericTypeDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_1_0()); 
@@ -4796,7 +4793,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                             }
 
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1981:2: (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )*
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1978:2: (otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )*
                             loop43:
                             do {
                                 int alt43=2;
@@ -4809,17 +4806,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                                 switch (alt43) {
                             	case 1 :
-                            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1981:4: otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) )
+                            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1978:4: otherlv_3= ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) )
                             	    {
                             	    otherlv_3=(Token)match(input,28,FOLLOW_28_in_ruleEGenericTypeDecl3885); 
 
                             	        	newLeafNode(otherlv_3, grammarAccess.getEGenericTypeDeclAccess().getCommaKeyword_0_1_2_0());
                             	        
-                            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1985:1: ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) )
-                            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1986:1: (lv_eTypeArguments_4_0= ruleEGenericTypeDecl )
+                            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1982:1: ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) )
+                            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1983:1: (lv_eTypeArguments_4_0= ruleEGenericTypeDecl )
                             	    {
-                            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1986:1: (lv_eTypeArguments_4_0= ruleEGenericTypeDecl )
-                            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1987:3: lv_eTypeArguments_4_0= ruleEGenericTypeDecl
+                            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1983:1: (lv_eTypeArguments_4_0= ruleEGenericTypeDecl )
+                            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1984:3: lv_eTypeArguments_4_0= ruleEGenericTypeDecl
                             	    {
                             	     
                             	    	        newCompositeNode(grammarAccess.getEGenericTypeDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_2_1_0()); 
@@ -4872,20 +4869,20 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2008:6: (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2005:6: (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2008:6: (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2008:8: otherlv_6= '#' ( (otherlv_7= RULE_ID ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2005:6: (otherlv_6= '#' ( (otherlv_7= RULE_ID ) ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2005:8: otherlv_6= '#' ( (otherlv_7= RULE_ID ) )
                     {
                     otherlv_6=(Token)match(input,47,FOLLOW_47_in_ruleEGenericTypeDecl3942); 
 
                         	newLeafNode(otherlv_6, grammarAccess.getEGenericTypeDeclAccess().getNumberSignKeyword_1_0());
                         
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2012:1: ( (otherlv_7= RULE_ID ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2013:1: (otherlv_7= RULE_ID )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2009:1: ( (otherlv_7= RULE_ID ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2010:1: (otherlv_7= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2013:1: (otherlv_7= RULE_ID )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2014:3: otherlv_7= RULE_ID
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2010:1: (otherlv_7= RULE_ID )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2011:3: otherlv_7= RULE_ID
                     {
 
                     			if (current==null) {
@@ -4909,16 +4906,16 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2026:6: (otherlv_8= '?' ( (otherlv_9= 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) ) | (otherlv_11= 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) ) ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2023:6: (otherlv_8= '?' ( (otherlv_9= 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) ) | (otherlv_11= 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) ) ) )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2026:6: (otherlv_8= '?' ( (otherlv_9= 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) ) | (otherlv_11= 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) ) ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2026:8: otherlv_8= '?' ( (otherlv_9= 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) ) | (otherlv_11= 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2023:6: (otherlv_8= '?' ( (otherlv_9= 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) ) | (otherlv_11= 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) ) ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2023:8: otherlv_8= '?' ( (otherlv_9= 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) ) | (otherlv_11= 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) ) )
                     {
                     otherlv_8=(Token)match(input,49,FOLLOW_49_in_ruleEGenericTypeDecl3982); 
 
                         	newLeafNode(otherlv_8, grammarAccess.getEGenericTypeDeclAccess().getQuestionMarkKeyword_2_0());
                         
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2030:1: ( (otherlv_9= 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) ) | (otherlv_11= 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2027:1: ( (otherlv_9= 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) ) | (otherlv_11= 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) ) )
                     int alt45=2;
                     int LA45_0 = input.LA(1);
 
@@ -4936,20 +4933,20 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt45) {
                         case 1 :
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2030:2: (otherlv_9= 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2027:2: (otherlv_9= 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) )
                             {
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2030:2: (otherlv_9= 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) )
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2030:4: otherlv_9= 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2027:2: (otherlv_9= 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2027:4: otherlv_9= 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) )
                             {
                             otherlv_9=(Token)match(input,35,FOLLOW_35_in_ruleEGenericTypeDecl3996); 
 
                                 	newLeafNode(otherlv_9, grammarAccess.getEGenericTypeDeclAccess().getExtendsKeyword_2_1_0_0());
                                 
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2034:1: ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) )
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2035:1: (lv_eUpperBound_10_0= ruleEGenericTypeDecl )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2031:1: ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2032:1: (lv_eUpperBound_10_0= ruleEGenericTypeDecl )
                             {
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2035:1: (lv_eUpperBound_10_0= ruleEGenericTypeDecl )
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2036:3: lv_eUpperBound_10_0= ruleEGenericTypeDecl
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2032:1: (lv_eUpperBound_10_0= ruleEGenericTypeDecl )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2033:3: lv_eUpperBound_10_0= ruleEGenericTypeDecl
                             {
                              
                             	        newCompositeNode(grammarAccess.getEGenericTypeDeclAccess().getEUpperBoundEGenericTypeDeclParserRuleCall_2_1_0_1_0()); 
@@ -4983,20 +4980,20 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2053:6: (otherlv_11= 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2050:6: (otherlv_11= 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) )
                             {
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2053:6: (otherlv_11= 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) )
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2053:8: otherlv_11= 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2050:6: (otherlv_11= 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2050:8: otherlv_11= 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) )
                             {
                             otherlv_11=(Token)match(input,50,FOLLOW_50_in_ruleEGenericTypeDecl4037); 
 
                                 	newLeafNode(otherlv_11, grammarAccess.getEGenericTypeDeclAccess().getSuperKeyword_2_1_1_0());
                                 
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2057:1: ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) )
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2058:1: (lv_eLowerBound_12_0= ruleEGenericTypeDecl )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2054:1: ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2055:1: (lv_eLowerBound_12_0= ruleEGenericTypeDecl )
                             {
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2058:1: (lv_eLowerBound_12_0= ruleEGenericTypeDecl )
-                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2059:3: lv_eLowerBound_12_0= ruleEGenericTypeDecl
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2055:1: (lv_eLowerBound_12_0= ruleEGenericTypeDecl )
+                            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2056:3: lv_eLowerBound_12_0= ruleEGenericTypeDecl
                             {
                              
                             	        newCompositeNode(grammarAccess.getEGenericTypeDeclAccess().getELowerBoundEGenericTypeDeclParserRuleCall_2_1_1_1_0()); 
@@ -5059,7 +5056,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEOperationDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2083:1: entryRuleEOperationDecl returns [EObject current=null] : iv_ruleEOperationDecl= ruleEOperationDecl EOF ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2080:1: entryRuleEOperationDecl returns [EObject current=null] : iv_ruleEOperationDecl= ruleEOperationDecl EOF ;
     public final EObject entryRuleEOperationDecl() throws RecognitionException {
         EObject current = null;
 
@@ -5067,8 +5064,8 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2084:2: (iv_ruleEOperationDecl= ruleEOperationDecl EOF )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2085:2: iv_ruleEOperationDecl= ruleEOperationDecl EOF
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2081:2: (iv_ruleEOperationDecl= ruleEOperationDecl EOF )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2082:2: iv_ruleEOperationDecl= ruleEOperationDecl EOF
             {
              newCompositeNode(grammarAccess.getEOperationDeclRule()); 
             pushFollow(FOLLOW_ruleEOperationDecl_in_entryRuleEOperationDecl4097);
@@ -5095,7 +5092,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEOperationDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2092:1: ruleEOperationDecl returns [EObject current=null] : ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_unique_1_0= RULE_BAG ) ) | ( (lv_ordered_2_0= RULE_RANDOM ) ) )* otherlv_3= 'op' ( ( (lv_eGenericType_4_0= ruleEGenericTypeReferenceDecl ) ) | otherlv_5= 'void' ) ( (lv_name_6_0= RULE_ID ) ) (otherlv_7= '<' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) (otherlv_9= ',' ( (lv_eTypeParameters_10_0= ruleETypeParameterDecl ) ) )* otherlv_11= '>' )? otherlv_12= '(' ( ( (lv_eParameters_13_0= ruleEParameterDecl ) ) (otherlv_14= ',' ( (lv_eParameters_15_0= ruleEParameterDecl ) ) )* )? otherlv_16= ')' (otherlv_17= 'throws' ( (lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_19= ',' ( (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl ) ) )* )? otherlv_21= ';' ) ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2089:1: ruleEOperationDecl returns [EObject current=null] : ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_unique_1_0= RULE_BAG ) ) | ( (lv_ordered_2_0= RULE_RANDOM ) ) )* otherlv_3= 'op' ( ( (lv_eGenericType_4_0= ruleEGenericTypeReferenceDecl ) ) | otherlv_5= 'void' ) ( (lv_name_6_0= RULE_ID ) ) (otherlv_7= '<' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) (otherlv_9= ',' ( (lv_eTypeParameters_10_0= ruleETypeParameterDecl ) ) )* otherlv_11= '>' )? otherlv_12= '(' ( ( (lv_eParameters_13_0= ruleEParameterDecl ) ) (otherlv_14= ',' ( (lv_eParameters_15_0= ruleEParameterDecl ) ) )* )? otherlv_16= ')' (otherlv_17= 'throws' ( (lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_19= ',' ( (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl ) ) )* )? otherlv_21= ';' ) ;
     public final EObject ruleEOperationDecl() throws RecognitionException {
         EObject current = null;
 
@@ -5133,13 +5130,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2095:28: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_unique_1_0= RULE_BAG ) ) | ( (lv_ordered_2_0= RULE_RANDOM ) ) )* otherlv_3= 'op' ( ( (lv_eGenericType_4_0= ruleEGenericTypeReferenceDecl ) ) | otherlv_5= 'void' ) ( (lv_name_6_0= RULE_ID ) ) (otherlv_7= '<' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) (otherlv_9= ',' ( (lv_eTypeParameters_10_0= ruleETypeParameterDecl ) ) )* otherlv_11= '>' )? otherlv_12= '(' ( ( (lv_eParameters_13_0= ruleEParameterDecl ) ) (otherlv_14= ',' ( (lv_eParameters_15_0= ruleEParameterDecl ) ) )* )? otherlv_16= ')' (otherlv_17= 'throws' ( (lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_19= ',' ( (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl ) ) )* )? otherlv_21= ';' ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2096:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_unique_1_0= RULE_BAG ) ) | ( (lv_ordered_2_0= RULE_RANDOM ) ) )* otherlv_3= 'op' ( ( (lv_eGenericType_4_0= ruleEGenericTypeReferenceDecl ) ) | otherlv_5= 'void' ) ( (lv_name_6_0= RULE_ID ) ) (otherlv_7= '<' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) (otherlv_9= ',' ( (lv_eTypeParameters_10_0= ruleETypeParameterDecl ) ) )* otherlv_11= '>' )? otherlv_12= '(' ( ( (lv_eParameters_13_0= ruleEParameterDecl ) ) (otherlv_14= ',' ( (lv_eParameters_15_0= ruleEParameterDecl ) ) )* )? otherlv_16= ')' (otherlv_17= 'throws' ( (lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_19= ',' ( (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl ) ) )* )? otherlv_21= ';' )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2092:28: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_unique_1_0= RULE_BAG ) ) | ( (lv_ordered_2_0= RULE_RANDOM ) ) )* otherlv_3= 'op' ( ( (lv_eGenericType_4_0= ruleEGenericTypeReferenceDecl ) ) | otherlv_5= 'void' ) ( (lv_name_6_0= RULE_ID ) ) (otherlv_7= '<' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) (otherlv_9= ',' ( (lv_eTypeParameters_10_0= ruleETypeParameterDecl ) ) )* otherlv_11= '>' )? otherlv_12= '(' ( ( (lv_eParameters_13_0= ruleEParameterDecl ) ) (otherlv_14= ',' ( (lv_eParameters_15_0= ruleEParameterDecl ) ) )* )? otherlv_16= ')' (otherlv_17= 'throws' ( (lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_19= ',' ( (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl ) ) )* )? otherlv_21= ';' ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2093:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_unique_1_0= RULE_BAG ) ) | ( (lv_ordered_2_0= RULE_RANDOM ) ) )* otherlv_3= 'op' ( ( (lv_eGenericType_4_0= ruleEGenericTypeReferenceDecl ) ) | otherlv_5= 'void' ) ( (lv_name_6_0= RULE_ID ) ) (otherlv_7= '<' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) (otherlv_9= ',' ( (lv_eTypeParameters_10_0= ruleETypeParameterDecl ) ) )* otherlv_11= '>' )? otherlv_12= '(' ( ( (lv_eParameters_13_0= ruleEParameterDecl ) ) (otherlv_14= ',' ( (lv_eParameters_15_0= ruleEParameterDecl ) ) )* )? otherlv_16= ')' (otherlv_17= 'throws' ( (lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_19= ',' ( (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl ) ) )* )? otherlv_21= ';' )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2096:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_unique_1_0= RULE_BAG ) ) | ( (lv_ordered_2_0= RULE_RANDOM ) ) )* otherlv_3= 'op' ( ( (lv_eGenericType_4_0= ruleEGenericTypeReferenceDecl ) ) | otherlv_5= 'void' ) ( (lv_name_6_0= RULE_ID ) ) (otherlv_7= '<' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) (otherlv_9= ',' ( (lv_eTypeParameters_10_0= ruleETypeParameterDecl ) ) )* otherlv_11= '>' )? otherlv_12= '(' ( ( (lv_eParameters_13_0= ruleEParameterDecl ) ) (otherlv_14= ',' ( (lv_eParameters_15_0= ruleEParameterDecl ) ) )* )? otherlv_16= ')' (otherlv_17= 'throws' ( (lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_19= ',' ( (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl ) ) )* )? otherlv_21= ';' )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2096:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_unique_1_0= RULE_BAG ) ) | ( (lv_ordered_2_0= RULE_RANDOM ) ) )* otherlv_3= 'op' ( ( (lv_eGenericType_4_0= ruleEGenericTypeReferenceDecl ) ) | otherlv_5= 'void' ) ( (lv_name_6_0= RULE_ID ) ) (otherlv_7= '<' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) (otherlv_9= ',' ( (lv_eTypeParameters_10_0= ruleETypeParameterDecl ) ) )* otherlv_11= '>' )? otherlv_12= '(' ( ( (lv_eParameters_13_0= ruleEParameterDecl ) ) (otherlv_14= ',' ( (lv_eParameters_15_0= ruleEParameterDecl ) ) )* )? otherlv_16= ')' (otherlv_17= 'throws' ( (lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_19= ',' ( (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl ) ) )* )? otherlv_21= ';'
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2093:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_unique_1_0= RULE_BAG ) ) | ( (lv_ordered_2_0= RULE_RANDOM ) ) )* otherlv_3= 'op' ( ( (lv_eGenericType_4_0= ruleEGenericTypeReferenceDecl ) ) | otherlv_5= 'void' ) ( (lv_name_6_0= RULE_ID ) ) (otherlv_7= '<' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) (otherlv_9= ',' ( (lv_eTypeParameters_10_0= ruleETypeParameterDecl ) ) )* otherlv_11= '>' )? otherlv_12= '(' ( ( (lv_eParameters_13_0= ruleEParameterDecl ) ) (otherlv_14= ',' ( (lv_eParameters_15_0= ruleEParameterDecl ) ) )* )? otherlv_16= ')' (otherlv_17= 'throws' ( (lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_19= ',' ( (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl ) ) )* )? otherlv_21= ';' )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2093:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_unique_1_0= RULE_BAG ) ) | ( (lv_ordered_2_0= RULE_RANDOM ) ) )* otherlv_3= 'op' ( ( (lv_eGenericType_4_0= ruleEGenericTypeReferenceDecl ) ) | otherlv_5= 'void' ) ( (lv_name_6_0= RULE_ID ) ) (otherlv_7= '<' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) (otherlv_9= ',' ( (lv_eTypeParameters_10_0= ruleETypeParameterDecl ) ) )* otherlv_11= '>' )? otherlv_12= '(' ( ( (lv_eParameters_13_0= ruleEParameterDecl ) ) (otherlv_14= ',' ( (lv_eParameters_15_0= ruleEParameterDecl ) ) )* )? otherlv_16= ')' (otherlv_17= 'throws' ( (lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_19= ',' ( (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl ) ) )* )? otherlv_21= ';'
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2096:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )*
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2093:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )*
             loop47:
             do {
                 int alt47=2;
@@ -5152,10 +5149,10 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt47) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2097:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2094:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2097:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2098:3: lv_eAnnotations_0_0= ruleEAnnotationDecl
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2094:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2095:3: lv_eAnnotations_0_0= ruleEAnnotationDecl
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getEOperationDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
@@ -5188,7 +5185,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2114:3: ( ( (lv_unique_1_0= RULE_BAG ) ) | ( (lv_ordered_2_0= RULE_RANDOM ) ) )*
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2111:3: ( ( (lv_unique_1_0= RULE_BAG ) ) | ( (lv_ordered_2_0= RULE_RANDOM ) ) )*
             loop48:
             do {
                 int alt48=3;
@@ -5204,13 +5201,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt48) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2114:4: ( (lv_unique_1_0= RULE_BAG ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2111:4: ( (lv_unique_1_0= RULE_BAG ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2114:4: ( (lv_unique_1_0= RULE_BAG ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2115:1: (lv_unique_1_0= RULE_BAG )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2111:4: ( (lv_unique_1_0= RULE_BAG ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2112:1: (lv_unique_1_0= RULE_BAG )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2115:1: (lv_unique_1_0= RULE_BAG )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2116:3: lv_unique_1_0= RULE_BAG
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2112:1: (lv_unique_1_0= RULE_BAG )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2113:3: lv_unique_1_0= RULE_BAG
             	    {
             	    lv_unique_1_0=(Token)match(input,RULE_BAG,FOLLOW_RULE_BAG_in_ruleEOperationDecl4172); 
 
@@ -5236,13 +5233,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2133:6: ( (lv_ordered_2_0= RULE_RANDOM ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2130:6: ( (lv_ordered_2_0= RULE_RANDOM ) )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2133:6: ( (lv_ordered_2_0= RULE_RANDOM ) )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2134:1: (lv_ordered_2_0= RULE_RANDOM )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2130:6: ( (lv_ordered_2_0= RULE_RANDOM ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2131:1: (lv_ordered_2_0= RULE_RANDOM )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2134:1: (lv_ordered_2_0= RULE_RANDOM )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2135:3: lv_ordered_2_0= RULE_RANDOM
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2131:1: (lv_ordered_2_0= RULE_RANDOM )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2132:3: lv_ordered_2_0= RULE_RANDOM
             	    {
             	    lv_ordered_2_0=(Token)match(input,RULE_RANDOM,FOLLOW_RULE_RANDOM_in_ruleEOperationDecl4200); 
 
@@ -5277,7 +5274,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_3, grammarAccess.getEOperationDeclAccess().getOpKeyword_2());
                 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2155:1: ( ( (lv_eGenericType_4_0= ruleEGenericTypeReferenceDecl ) ) | otherlv_5= 'void' )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2152:1: ( ( (lv_eGenericType_4_0= ruleEGenericTypeReferenceDecl ) ) | otherlv_5= 'void' )
             int alt49=2;
             int LA49_0 = input.LA(1);
 
@@ -5295,13 +5292,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt49) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2155:2: ( (lv_eGenericType_4_0= ruleEGenericTypeReferenceDecl ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2152:2: ( (lv_eGenericType_4_0= ruleEGenericTypeReferenceDecl ) )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2155:2: ( (lv_eGenericType_4_0= ruleEGenericTypeReferenceDecl ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2156:1: (lv_eGenericType_4_0= ruleEGenericTypeReferenceDecl )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2152:2: ( (lv_eGenericType_4_0= ruleEGenericTypeReferenceDecl ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2153:1: (lv_eGenericType_4_0= ruleEGenericTypeReferenceDecl )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2156:1: (lv_eGenericType_4_0= ruleEGenericTypeReferenceDecl )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2157:3: lv_eGenericType_4_0= ruleEGenericTypeReferenceDecl
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2153:1: (lv_eGenericType_4_0= ruleEGenericTypeReferenceDecl )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2154:3: lv_eGenericType_4_0= ruleEGenericTypeReferenceDecl
                     {
                      
                     	        newCompositeNode(grammarAccess.getEOperationDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0_0()); 
@@ -5332,7 +5329,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2174:7: otherlv_5= 'void'
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2171:7: otherlv_5= 'void'
                     {
                     otherlv_5=(Token)match(input,52,FOLLOW_52_in_ruleEOperationDecl4259); 
 
@@ -5344,11 +5341,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2178:2: ( (lv_name_6_0= RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2179:1: (lv_name_6_0= RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2175:2: ( (lv_name_6_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2176:1: (lv_name_6_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2179:1: (lv_name_6_0= RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2180:3: lv_name_6_0= RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2176:1: (lv_name_6_0= RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2177:3: lv_name_6_0= RULE_ID
             {
             lv_name_6_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEOperationDecl4277); 
 
@@ -5370,7 +5367,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2196:2: (otherlv_7= '<' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) (otherlv_9= ',' ( (lv_eTypeParameters_10_0= ruleETypeParameterDecl ) ) )* otherlv_11= '>' )?
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2193:2: (otherlv_7= '<' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) (otherlv_9= ',' ( (lv_eTypeParameters_10_0= ruleETypeParameterDecl ) ) )* otherlv_11= '>' )?
             int alt51=2;
             int LA51_0 = input.LA(1);
 
@@ -5379,17 +5376,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt51) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2196:4: otherlv_7= '<' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) (otherlv_9= ',' ( (lv_eTypeParameters_10_0= ruleETypeParameterDecl ) ) )* otherlv_11= '>'
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2193:4: otherlv_7= '<' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) (otherlv_9= ',' ( (lv_eTypeParameters_10_0= ruleETypeParameterDecl ) ) )* otherlv_11= '>'
                     {
                     otherlv_7=(Token)match(input,33,FOLLOW_33_in_ruleEOperationDecl4295); 
 
                         	newLeafNode(otherlv_7, grammarAccess.getEOperationDeclAccess().getLessThanSignKeyword_5_0());
                         
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2200:1: ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2201:1: (lv_eTypeParameters_8_0= ruleETypeParameterDecl )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2197:1: ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2198:1: (lv_eTypeParameters_8_0= ruleETypeParameterDecl )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2201:1: (lv_eTypeParameters_8_0= ruleETypeParameterDecl )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2202:3: lv_eTypeParameters_8_0= ruleETypeParameterDecl
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2198:1: (lv_eTypeParameters_8_0= ruleETypeParameterDecl )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2199:3: lv_eTypeParameters_8_0= ruleETypeParameterDecl
                     {
                      
                     	        newCompositeNode(grammarAccess.getEOperationDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_5_1_0()); 
@@ -5416,7 +5413,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2218:2: (otherlv_9= ',' ( (lv_eTypeParameters_10_0= ruleETypeParameterDecl ) ) )*
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2215:2: (otherlv_9= ',' ( (lv_eTypeParameters_10_0= ruleETypeParameterDecl ) ) )*
                     loop50:
                     do {
                         int alt50=2;
@@ -5429,17 +5426,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                         switch (alt50) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2218:4: otherlv_9= ',' ( (lv_eTypeParameters_10_0= ruleETypeParameterDecl ) )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2215:4: otherlv_9= ',' ( (lv_eTypeParameters_10_0= ruleETypeParameterDecl ) )
                     	    {
                     	    otherlv_9=(Token)match(input,28,FOLLOW_28_in_ruleEOperationDecl4329); 
 
                     	        	newLeafNode(otherlv_9, grammarAccess.getEOperationDeclAccess().getCommaKeyword_5_2_0());
                     	        
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2222:1: ( (lv_eTypeParameters_10_0= ruleETypeParameterDecl ) )
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2223:1: (lv_eTypeParameters_10_0= ruleETypeParameterDecl )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2219:1: ( (lv_eTypeParameters_10_0= ruleETypeParameterDecl ) )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2220:1: (lv_eTypeParameters_10_0= ruleETypeParameterDecl )
                     	    {
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2223:1: (lv_eTypeParameters_10_0= ruleETypeParameterDecl )
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2224:3: lv_eTypeParameters_10_0= ruleETypeParameterDecl
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2220:1: (lv_eTypeParameters_10_0= ruleETypeParameterDecl )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2221:3: lv_eTypeParameters_10_0= ruleETypeParameterDecl
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getEOperationDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_5_2_1_0()); 
@@ -5489,7 +5486,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_12, grammarAccess.getEOperationDeclAccess().getLeftParenthesisKeyword_6());
                 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2248:1: ( ( (lv_eParameters_13_0= ruleEParameterDecl ) ) (otherlv_14= ',' ( (lv_eParameters_15_0= ruleEParameterDecl ) ) )* )?
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2245:1: ( ( (lv_eParameters_13_0= ruleEParameterDecl ) ) (otherlv_14= ',' ( (lv_eParameters_15_0= ruleEParameterDecl ) ) )* )?
             int alt53=2;
             int LA53_0 = input.LA(1);
 
@@ -5498,13 +5495,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt53) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2248:2: ( (lv_eParameters_13_0= ruleEParameterDecl ) ) (otherlv_14= ',' ( (lv_eParameters_15_0= ruleEParameterDecl ) ) )*
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2245:2: ( (lv_eParameters_13_0= ruleEParameterDecl ) ) (otherlv_14= ',' ( (lv_eParameters_15_0= ruleEParameterDecl ) ) )*
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2248:2: ( (lv_eParameters_13_0= ruleEParameterDecl ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2249:1: (lv_eParameters_13_0= ruleEParameterDecl )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2245:2: ( (lv_eParameters_13_0= ruleEParameterDecl ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2246:1: (lv_eParameters_13_0= ruleEParameterDecl )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2249:1: (lv_eParameters_13_0= ruleEParameterDecl )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2250:3: lv_eParameters_13_0= ruleEParameterDecl
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2246:1: (lv_eParameters_13_0= ruleEParameterDecl )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2247:3: lv_eParameters_13_0= ruleEParameterDecl
                     {
                      
                     	        newCompositeNode(grammarAccess.getEOperationDeclAccess().getEParametersEParameterDeclParserRuleCall_7_0_0()); 
@@ -5531,7 +5528,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2266:2: (otherlv_14= ',' ( (lv_eParameters_15_0= ruleEParameterDecl ) ) )*
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2263:2: (otherlv_14= ',' ( (lv_eParameters_15_0= ruleEParameterDecl ) ) )*
                     loop52:
                     do {
                         int alt52=2;
@@ -5544,17 +5541,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                         switch (alt52) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2266:4: otherlv_14= ',' ( (lv_eParameters_15_0= ruleEParameterDecl ) )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2263:4: otherlv_14= ',' ( (lv_eParameters_15_0= ruleEParameterDecl ) )
                     	    {
                     	    otherlv_14=(Token)match(input,28,FOLLOW_28_in_ruleEOperationDecl4413); 
 
                     	        	newLeafNode(otherlv_14, grammarAccess.getEOperationDeclAccess().getCommaKeyword_7_1_0());
                     	        
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2270:1: ( (lv_eParameters_15_0= ruleEParameterDecl ) )
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2271:1: (lv_eParameters_15_0= ruleEParameterDecl )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2267:1: ( (lv_eParameters_15_0= ruleEParameterDecl ) )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2268:1: (lv_eParameters_15_0= ruleEParameterDecl )
                     	    {
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2271:1: (lv_eParameters_15_0= ruleEParameterDecl )
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2272:3: lv_eParameters_15_0= ruleEParameterDecl
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2268:1: (lv_eParameters_15_0= ruleEParameterDecl )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2269:3: lv_eParameters_15_0= ruleEParameterDecl
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getEOperationDeclAccess().getEParametersEParameterDeclParserRuleCall_7_1_1_0()); 
@@ -5600,7 +5597,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_16, grammarAccess.getEOperationDeclAccess().getRightParenthesisKeyword_8());
                 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2292:1: (otherlv_17= 'throws' ( (lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_19= ',' ( (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl ) ) )* )?
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2289:1: (otherlv_17= 'throws' ( (lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_19= ',' ( (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl ) ) )* )?
             int alt55=2;
             int LA55_0 = input.LA(1);
 
@@ -5609,17 +5606,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt55) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2292:3: otherlv_17= 'throws' ( (lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_19= ',' ( (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl ) ) )*
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2289:3: otherlv_17= 'throws' ( (lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl ) ) (otherlv_19= ',' ( (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl ) ) )*
                     {
                     otherlv_17=(Token)match(input,53,FOLLOW_53_in_ruleEOperationDecl4463); 
 
                         	newLeafNode(otherlv_17, grammarAccess.getEOperationDeclAccess().getThrowsKeyword_9_0());
                         
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2296:1: ( (lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl ) )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2297:1: (lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2293:1: ( (lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl ) )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2294:1: (lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl )
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2297:1: (lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl )
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2298:3: lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2294:1: (lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl )
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2295:3: lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl
                     {
                      
                     	        newCompositeNode(grammarAccess.getEOperationDeclAccess().getEGenericExceptionsEGenericTypeReferenceDeclParserRuleCall_9_1_0()); 
@@ -5646,7 +5643,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2314:2: (otherlv_19= ',' ( (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl ) ) )*
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2311:2: (otherlv_19= ',' ( (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl ) ) )*
                     loop54:
                     do {
                         int alt54=2;
@@ -5659,17 +5656,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                         switch (alt54) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2314:4: otherlv_19= ',' ( (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl ) )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2311:4: otherlv_19= ',' ( (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl ) )
                     	    {
                     	    otherlv_19=(Token)match(input,28,FOLLOW_28_in_ruleEOperationDecl4497); 
 
                     	        	newLeafNode(otherlv_19, grammarAccess.getEOperationDeclAccess().getCommaKeyword_9_2_0());
                     	        
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2318:1: ( (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl ) )
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2319:1: (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2315:1: ( (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl ) )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2316:1: (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl )
                     	    {
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2319:1: (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl )
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2320:3: lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2316:1: (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2317:3: lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getEOperationDeclAccess().getEGenericExceptionsEGenericTypeReferenceDeclParserRuleCall_9_2_1_0()); 
@@ -5736,7 +5733,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEParameterDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2348:1: entryRuleEParameterDecl returns [EObject current=null] : iv_ruleEParameterDecl= ruleEParameterDecl EOF ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2345:1: entryRuleEParameterDecl returns [EObject current=null] : iv_ruleEParameterDecl= ruleEParameterDecl EOF ;
     public final EObject entryRuleEParameterDecl() throws RecognitionException {
         EObject current = null;
 
@@ -5744,8 +5741,8 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2349:2: (iv_ruleEParameterDecl= ruleEParameterDecl EOF )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2350:2: iv_ruleEParameterDecl= ruleEParameterDecl EOF
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2346:2: (iv_ruleEParameterDecl= ruleEParameterDecl EOF )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2347:2: iv_ruleEParameterDecl= ruleEParameterDecl EOF
             {
              newCompositeNode(grammarAccess.getEParameterDeclRule()); 
             pushFollow(FOLLOW_ruleEParameterDecl_in_entryRuleEParameterDecl4570);
@@ -5772,7 +5769,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEParameterDecl"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2357:1: ruleEParameterDecl returns [EObject current=null] : ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_eGenericType_1_0= ruleEGenericTypeReferenceDecl ) ) ( (lv_name_2_0= RULE_ID ) ) ) ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2354:1: ruleEParameterDecl returns [EObject current=null] : ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_eGenericType_1_0= ruleEGenericTypeReferenceDecl ) ) ( (lv_name_2_0= RULE_ID ) ) ) ;
     public final EObject ruleEParameterDecl() throws RecognitionException {
         EObject current = null;
 
@@ -5785,13 +5782,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2360:28: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_eGenericType_1_0= ruleEGenericTypeReferenceDecl ) ) ( (lv_name_2_0= RULE_ID ) ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2361:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_eGenericType_1_0= ruleEGenericTypeReferenceDecl ) ) ( (lv_name_2_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2357:28: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_eGenericType_1_0= ruleEGenericTypeReferenceDecl ) ) ( (lv_name_2_0= RULE_ID ) ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2358:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_eGenericType_1_0= ruleEGenericTypeReferenceDecl ) ) ( (lv_name_2_0= RULE_ID ) ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2361:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_eGenericType_1_0= ruleEGenericTypeReferenceDecl ) ) ( (lv_name_2_0= RULE_ID ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2361:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_eGenericType_1_0= ruleEGenericTypeReferenceDecl ) ) ( (lv_name_2_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2358:1: ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_eGenericType_1_0= ruleEGenericTypeReferenceDecl ) ) ( (lv_name_2_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2358:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_eGenericType_1_0= ruleEGenericTypeReferenceDecl ) ) ( (lv_name_2_0= RULE_ID ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2361:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )*
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2358:2: ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )*
             loop56:
             do {
                 int alt56=2;
@@ -5804,10 +5801,10 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt56) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2362:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2359:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2362:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2363:3: lv_eAnnotations_0_0= ruleEAnnotationDecl
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2359:1: (lv_eAnnotations_0_0= ruleEAnnotationDecl )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2360:3: lv_eAnnotations_0_0= ruleEAnnotationDecl
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getEParameterDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
@@ -5840,11 +5837,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2379:3: ( (lv_eGenericType_1_0= ruleEGenericTypeReferenceDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2380:1: (lv_eGenericType_1_0= ruleEGenericTypeReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2376:3: ( (lv_eGenericType_1_0= ruleEGenericTypeReferenceDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2377:1: (lv_eGenericType_1_0= ruleEGenericTypeReferenceDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2380:1: (lv_eGenericType_1_0= ruleEGenericTypeReferenceDecl )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2381:3: lv_eGenericType_1_0= ruleEGenericTypeReferenceDecl
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2377:1: (lv_eGenericType_1_0= ruleEGenericTypeReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2378:3: lv_eGenericType_1_0= ruleEGenericTypeReferenceDecl
             {
              
             	        newCompositeNode(grammarAccess.getEParameterDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_1_0()); 
@@ -5871,11 +5868,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2397:2: ( (lv_name_2_0= RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2398:1: (lv_name_2_0= RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2394:2: ( (lv_name_2_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2395:1: (lv_name_2_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2398:1: (lv_name_2_0= RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2399:3: lv_name_2_0= RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2395:1: (lv_name_2_0= RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2396:3: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEParameterDecl4665); 
 
@@ -5918,7 +5915,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleMapEntry"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2423:1: entryRuleMapEntry returns [EObject current=null] : iv_ruleMapEntry= ruleMapEntry EOF ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2420:1: entryRuleMapEntry returns [EObject current=null] : iv_ruleMapEntry= ruleMapEntry EOF ;
     public final EObject entryRuleMapEntry() throws RecognitionException {
         EObject current = null;
 
@@ -5926,8 +5923,8 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2424:2: (iv_ruleMapEntry= ruleMapEntry EOF )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2425:2: iv_ruleMapEntry= ruleMapEntry EOF
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2421:2: (iv_ruleMapEntry= ruleMapEntry EOF )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2422:2: iv_ruleMapEntry= ruleMapEntry EOF
             {
              newCompositeNode(grammarAccess.getMapEntryRule()); 
             pushFollow(FOLLOW_ruleMapEntry_in_entryRuleMapEntry4706);
@@ -5954,7 +5951,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleMapEntry"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2432:1: ruleMapEntry returns [EObject current=null] : ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) ) ) ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2429:1: ruleMapEntry returns [EObject current=null] : ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) ) ) ;
     public final EObject ruleMapEntry() throws RecognitionException {
         EObject current = null;
 
@@ -5965,17 +5962,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2435:28: ( ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2436:1: ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2432:28: ( ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2433:1: ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2436:1: ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2436:2: ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2433:1: ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2433:2: ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2436:2: ( (lv_key_0_0= RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2437:1: (lv_key_0_0= RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2433:2: ( (lv_key_0_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2434:1: (lv_key_0_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2437:1: (lv_key_0_0= RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2438:3: lv_key_0_0= RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2434:1: (lv_key_0_0= RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2435:3: lv_key_0_0= RULE_ID
             {
             lv_key_0_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMapEntry4758); 
 
@@ -6001,11 +5998,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_1, grammarAccess.getMapEntryAccess().getEqualsSignKeyword_1());
                 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2458:1: ( (lv_value_2_0= RULE_STRING ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2459:1: (lv_value_2_0= RULE_STRING )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2455:1: ( (lv_value_2_0= RULE_STRING ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2456:1: (lv_value_2_0= RULE_STRING )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2459:1: (lv_value_2_0= RULE_STRING )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2460:3: lv_value_2_0= RULE_STRING
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2456:1: (lv_value_2_0= RULE_STRING )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2457:3: lv_value_2_0= RULE_STRING
             {
             lv_value_2_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleMapEntry4792); 
 
@@ -6048,7 +6045,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleQID"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2484:1: entryRuleQID returns [String current=null] : iv_ruleQID= ruleQID EOF ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2481:1: entryRuleQID returns [String current=null] : iv_ruleQID= ruleQID EOF ;
     public final String entryRuleQID() throws RecognitionException {
         String current = null;
 
@@ -6056,8 +6053,8 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2485:2: (iv_ruleQID= ruleQID EOF )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2486:2: iv_ruleQID= ruleQID EOF
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2482:2: (iv_ruleQID= ruleQID EOF )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2483:2: iv_ruleQID= ruleQID EOF
             {
              newCompositeNode(grammarAccess.getQIDRule()); 
             pushFollow(FOLLOW_ruleQID_in_entryRuleQID4834);
@@ -6084,7 +6081,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleQID"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2493:1: ruleQID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID ( (kw= '.' | kw= '$' ) this_ID_3= RULE_ID )* ) ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2490:1: ruleQID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID ( (kw= '.' | kw= '$' ) this_ID_3= RULE_ID )* ) ;
     public final AntlrDatatypeRuleToken ruleQID() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -6095,11 +6092,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2496:28: ( (this_ID_0= RULE_ID ( (kw= '.' | kw= '$' ) this_ID_3= RULE_ID )* ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2497:1: (this_ID_0= RULE_ID ( (kw= '.' | kw= '$' ) this_ID_3= RULE_ID )* )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2493:28: ( (this_ID_0= RULE_ID ( (kw= '.' | kw= '$' ) this_ID_3= RULE_ID )* ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2494:1: (this_ID_0= RULE_ID ( (kw= '.' | kw= '$' ) this_ID_3= RULE_ID )* )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2497:1: (this_ID_0= RULE_ID ( (kw= '.' | kw= '$' ) this_ID_3= RULE_ID )* )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2497:6: this_ID_0= RULE_ID ( (kw= '.' | kw= '$' ) this_ID_3= RULE_ID )*
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2494:1: (this_ID_0= RULE_ID ( (kw= '.' | kw= '$' ) this_ID_3= RULE_ID )* )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2494:6: this_ID_0= RULE_ID ( (kw= '.' | kw= '$' ) this_ID_3= RULE_ID )*
             {
             this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleQID4885); 
 
@@ -6108,7 +6105,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
              
                 newLeafNode(this_ID_0, grammarAccess.getQIDAccess().getIDTerminalRuleCall_0()); 
                 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2504:1: ( (kw= '.' | kw= '$' ) this_ID_3= RULE_ID )*
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2501:1: ( (kw= '.' | kw= '$' ) this_ID_3= RULE_ID )*
             loop58:
             do {
                 int alt58=2;
@@ -6121,9 +6118,9 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt58) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2504:2: (kw= '.' | kw= '$' ) this_ID_3= RULE_ID
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2501:2: (kw= '.' | kw= '$' ) this_ID_3= RULE_ID
             	    {
-            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2504:2: (kw= '.' | kw= '$' )
+            	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2501:2: (kw= '.' | kw= '$' )
             	    int alt57=2;
             	    int LA57_0 = input.LA(1);
 
@@ -6141,7 +6138,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    }
             	    switch (alt57) {
             	        case 1 :
-            	            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2505:2: kw= '.'
+            	            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2502:2: kw= '.'
             	            {
             	            kw=(Token)match(input,54,FOLLOW_54_in_ruleQID4905); 
 
@@ -6152,7 +6149,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	            }
             	            break;
             	        case 2 :
-            	            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2512:2: kw= '$'
+            	            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2509:2: kw= '$'
             	            {
             	            kw=(Token)match(input,55,FOLLOW_55_in_ruleQID4924); 
 
@@ -6202,7 +6199,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleSTRING_OR_QID"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2532:1: entryRuleSTRING_OR_QID returns [String current=null] : iv_ruleSTRING_OR_QID= ruleSTRING_OR_QID EOF ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2529:1: entryRuleSTRING_OR_QID returns [String current=null] : iv_ruleSTRING_OR_QID= ruleSTRING_OR_QID EOF ;
     public final String entryRuleSTRING_OR_QID() throws RecognitionException {
         String current = null;
 
@@ -6210,8 +6207,8 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2533:2: (iv_ruleSTRING_OR_QID= ruleSTRING_OR_QID EOF )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2534:2: iv_ruleSTRING_OR_QID= ruleSTRING_OR_QID EOF
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2530:2: (iv_ruleSTRING_OR_QID= ruleSTRING_OR_QID EOF )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2531:2: iv_ruleSTRING_OR_QID= ruleSTRING_OR_QID EOF
             {
              newCompositeNode(grammarAccess.getSTRING_OR_QIDRule()); 
             pushFollow(FOLLOW_ruleSTRING_OR_QID_in_entryRuleSTRING_OR_QID4988);
@@ -6238,7 +6235,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSTRING_OR_QID"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2541:1: ruleSTRING_OR_QID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_STRING_0= RULE_STRING | this_QID_1= ruleQID ) ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2538:1: ruleSTRING_OR_QID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_STRING_0= RULE_STRING | this_QID_1= ruleQID ) ;
     public final AntlrDatatypeRuleToken ruleSTRING_OR_QID() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -6249,10 +6246,10 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2544:28: ( (this_STRING_0= RULE_STRING | this_QID_1= ruleQID ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2545:1: (this_STRING_0= RULE_STRING | this_QID_1= ruleQID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2541:28: ( (this_STRING_0= RULE_STRING | this_QID_1= ruleQID ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2542:1: (this_STRING_0= RULE_STRING | this_QID_1= ruleQID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2545:1: (this_STRING_0= RULE_STRING | this_QID_1= ruleQID )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2542:1: (this_STRING_0= RULE_STRING | this_QID_1= ruleQID )
             int alt59=2;
             int LA59_0 = input.LA(1);
 
@@ -6270,7 +6267,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt59) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2545:6: this_STRING_0= RULE_STRING
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2542:6: this_STRING_0= RULE_STRING
                     {
                     this_STRING_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleSTRING_OR_QID5039); 
 
@@ -6283,7 +6280,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2554:5: this_QID_1= ruleQID
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2551:5: this_QID_1= ruleQID
                     {
                      
                             newCompositeNode(grammarAccess.getSTRING_OR_QIDAccess().getQIDParserRuleCall_1()); 
@@ -6323,7 +6320,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleSINT"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2572:1: entryRuleSINT returns [String current=null] : iv_ruleSINT= ruleSINT EOF ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2569:1: entryRuleSINT returns [String current=null] : iv_ruleSINT= ruleSINT EOF ;
     public final String entryRuleSINT() throws RecognitionException {
         String current = null;
 
@@ -6331,8 +6328,8 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2573:2: (iv_ruleSINT= ruleSINT EOF )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2574:2: iv_ruleSINT= ruleSINT EOF
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2570:2: (iv_ruleSINT= ruleSINT EOF )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2571:2: iv_ruleSINT= ruleSINT EOF
             {
              newCompositeNode(grammarAccess.getSINTRule()); 
             pushFollow(FOLLOW_ruleSINT_in_entryRuleSINT5118);
@@ -6359,7 +6356,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSINT"
-    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2581:1: ruleSINT returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '-' )? this_INT_1= RULE_INT ) ;
+    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2578:1: ruleSINT returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '-' )? this_INT_1= RULE_INT ) ;
     public final AntlrDatatypeRuleToken ruleSINT() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -6369,13 +6366,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2584:28: ( ( (kw= '-' )? this_INT_1= RULE_INT ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2585:1: ( (kw= '-' )? this_INT_1= RULE_INT )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2581:28: ( ( (kw= '-' )? this_INT_1= RULE_INT ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2582:1: ( (kw= '-' )? this_INT_1= RULE_INT )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2585:1: ( (kw= '-' )? this_INT_1= RULE_INT )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2585:2: (kw= '-' )? this_INT_1= RULE_INT
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2582:1: ( (kw= '-' )? this_INT_1= RULE_INT )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2582:2: (kw= '-' )? this_INT_1= RULE_INT
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2585:2: (kw= '-' )?
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2582:2: (kw= '-' )?
             int alt60=2;
             int LA60_0 = input.LA(1);
 
@@ -6384,7 +6381,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt60) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2586:2: kw= '-'
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2583:2: kw= '-'
                     {
                     kw=(Token)match(input,56,FOLLOW_56_in_ruleSINT5168); 
 
@@ -6503,7 +6500,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             this.transition = DFA4_transition;
         }
         public String getDescription() {
-            return "()* loopback of 300:1: ( ( (lv_eSubpackages_10_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_11_0= ruleEClassifierDecl ) ) )*";
+            return "()* loopback of 297:1: ( ( (lv_eSubpackages_10_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_11_0= ruleEClassifierDecl ) ) )*";
         }
     }
     static final String DFA6_eotS =
@@ -6577,7 +6574,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             this.transition = DFA6_transition;
         }
         public String getDescription() {
-            return "()* loopback of 406:1: ( ( (lv_eSubpackages_4_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_5_0= ruleEClassifierDecl ) ) )*";
+            return "()* loopback of 403:1: ( ( (lv_eSubpackages_4_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_5_0= ruleEClassifierDecl ) ) )*";
         }
     }
     static final String DFA7_eotS =
@@ -6646,7 +6643,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             this.transition = DFA7_transition;
         }
         public String getDescription() {
-            return "468:1: (this_EClassDecl_0= ruleEClassDecl | this_EDataTypeDecl_1= ruleEDataTypeDecl )";
+            return "465:1: (this_EClassDecl_0= ruleEClassDecl | this_EDataTypeDecl_1= ruleEDataTypeDecl )";
         }
     }
     static final String DFA10_eotS =
@@ -6715,7 +6712,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             this.transition = DFA10_transition;
         }
         public String getDescription() {
-            return "508:1: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_serializable_1_0= RULE_SERIALIZABLE ) )? (otherlv_2= 'datatype' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) ) otherlv_6= ';' ) ) | this_EEnumDecl_7= ruleEEnumDecl )";
+            return "505:1: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_serializable_1_0= RULE_SERIALIZABLE ) )? (otherlv_2= 'datatype' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) ) otherlv_6= ';' ) ) | this_EEnumDecl_7= ruleEEnumDecl )";
         }
     }
     static final String DFA21_eotS =
@@ -6793,7 +6790,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             this.transition = DFA21_transition;
         }
         public String getDescription() {
-            return "()* loopback of 903:1: ( ( (lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl ) ) | ( (lv_eOperations_18_0= ruleEOperationDecl ) ) )*";
+            return "()* loopback of 900:1: ( ( (lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl ) ) | ( (lv_eOperations_18_0= ruleEOperationDecl ) ) )*";
         }
     }
     static final String DFA22_eotS =
@@ -6880,7 +6877,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             this.transition = DFA22_transition;
         }
         public String getDescription() {
-            return "965:1: (this_EAttributeDecl_0= ruleEAttributeDecl | this_EReferenceDecl_1= ruleEReferenceDecl )";
+            return "962:1: (this_EAttributeDecl_0= ruleEAttributeDecl | this_EReferenceDecl_1= ruleEReferenceDecl )";
         }
     }
  

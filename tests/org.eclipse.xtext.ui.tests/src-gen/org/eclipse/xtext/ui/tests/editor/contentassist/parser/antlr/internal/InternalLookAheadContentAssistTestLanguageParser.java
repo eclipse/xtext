@@ -1,6 +1,5 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal; 
 
-import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
@@ -10,7 +9,6 @@ import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
-import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.LookAheadContentAssistTestLanguageGrammarAccess;
 
 
@@ -63,11 +61,10 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
 
      	private LookAheadContentAssistTestLanguageGrammarAccess grammarAccess;
      	
-        public InternalLookAheadContentAssistTestLanguageParser(TokenStream input, IAstFactory factory, LookAheadContentAssistTestLanguageGrammarAccess grammarAccess) {
+        public InternalLookAheadContentAssistTestLanguageParser(TokenStream input, LookAheadContentAssistTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.semanticModelBuilder = factory;
-            registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
+            registerRules(grammarAccess.getGrammar());
         }
         
         @Override
@@ -83,7 +80,7 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start "entryRuleModel"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:70:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -91,8 +88,8 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:71:2: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:72:2: iv_ruleModel= ruleModel EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel75);
@@ -119,7 +116,7 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:79:1: ruleModel returns [EObject current=null] : ( () ( (otherlv_1= '(' ( (lv_attribute_2_0= ruleAttribute ) )* ( (lv_attribute_3_0= rulePair ) )* otherlv_4= ')' ) | (otherlv_5= '[' ( (lv_attribute_6_0= ruleAttribute ) )+ ( (lv_attribute_7_0= rulePair ) )* otherlv_8= ']' ) | (otherlv_9= '<' ( (lv_attribute_10_0= ruleAttribute ) )* ( (lv_attribute_11_0= rulePair ) )+ otherlv_12= '>' ) | (otherlv_13= '{' ( (lv_attribute_14_0= ruleAttribute ) )+ ( (lv_attribute_15_0= rulePair ) )+ otherlv_16= '}' ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( () ( (otherlv_1= '(' ( (lv_attribute_2_0= ruleAttribute ) )* ( (lv_attribute_3_0= rulePair ) )* otherlv_4= ')' ) | (otherlv_5= '[' ( (lv_attribute_6_0= ruleAttribute ) )+ ( (lv_attribute_7_0= rulePair ) )* otherlv_8= ']' ) | (otherlv_9= '<' ( (lv_attribute_10_0= ruleAttribute ) )* ( (lv_attribute_11_0= rulePair ) )+ otherlv_12= '>' ) | (otherlv_13= '{' ( (lv_attribute_14_0= ruleAttribute ) )+ ( (lv_attribute_15_0= rulePair ) )+ otherlv_16= '}' ) ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -151,14 +148,14 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:82:28: ( ( () ( (otherlv_1= '(' ( (lv_attribute_2_0= ruleAttribute ) )* ( (lv_attribute_3_0= rulePair ) )* otherlv_4= ')' ) | (otherlv_5= '[' ( (lv_attribute_6_0= ruleAttribute ) )+ ( (lv_attribute_7_0= rulePair ) )* otherlv_8= ']' ) | (otherlv_9= '<' ( (lv_attribute_10_0= ruleAttribute ) )* ( (lv_attribute_11_0= rulePair ) )+ otherlv_12= '>' ) | (otherlv_13= '{' ( (lv_attribute_14_0= ruleAttribute ) )+ ( (lv_attribute_15_0= rulePair ) )+ otherlv_16= '}' ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:83:1: ( () ( (otherlv_1= '(' ( (lv_attribute_2_0= ruleAttribute ) )* ( (lv_attribute_3_0= rulePair ) )* otherlv_4= ')' ) | (otherlv_5= '[' ( (lv_attribute_6_0= ruleAttribute ) )+ ( (lv_attribute_7_0= rulePair ) )* otherlv_8= ']' ) | (otherlv_9= '<' ( (lv_attribute_10_0= ruleAttribute ) )* ( (lv_attribute_11_0= rulePair ) )+ otherlv_12= '>' ) | (otherlv_13= '{' ( (lv_attribute_14_0= ruleAttribute ) )+ ( (lv_attribute_15_0= rulePair ) )+ otherlv_16= '}' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:79:28: ( ( () ( (otherlv_1= '(' ( (lv_attribute_2_0= ruleAttribute ) )* ( (lv_attribute_3_0= rulePair ) )* otherlv_4= ')' ) | (otherlv_5= '[' ( (lv_attribute_6_0= ruleAttribute ) )+ ( (lv_attribute_7_0= rulePair ) )* otherlv_8= ']' ) | (otherlv_9= '<' ( (lv_attribute_10_0= ruleAttribute ) )* ( (lv_attribute_11_0= rulePair ) )+ otherlv_12= '>' ) | (otherlv_13= '{' ( (lv_attribute_14_0= ruleAttribute ) )+ ( (lv_attribute_15_0= rulePair ) )+ otherlv_16= '}' ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:80:1: ( () ( (otherlv_1= '(' ( (lv_attribute_2_0= ruleAttribute ) )* ( (lv_attribute_3_0= rulePair ) )* otherlv_4= ')' ) | (otherlv_5= '[' ( (lv_attribute_6_0= ruleAttribute ) )+ ( (lv_attribute_7_0= rulePair ) )* otherlv_8= ']' ) | (otherlv_9= '<' ( (lv_attribute_10_0= ruleAttribute ) )* ( (lv_attribute_11_0= rulePair ) )+ otherlv_12= '>' ) | (otherlv_13= '{' ( (lv_attribute_14_0= ruleAttribute ) )+ ( (lv_attribute_15_0= rulePair ) )+ otherlv_16= '}' ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:83:1: ( () ( (otherlv_1= '(' ( (lv_attribute_2_0= ruleAttribute ) )* ( (lv_attribute_3_0= rulePair ) )* otherlv_4= ')' ) | (otherlv_5= '[' ( (lv_attribute_6_0= ruleAttribute ) )+ ( (lv_attribute_7_0= rulePair ) )* otherlv_8= ']' ) | (otherlv_9= '<' ( (lv_attribute_10_0= ruleAttribute ) )* ( (lv_attribute_11_0= rulePair ) )+ otherlv_12= '>' ) | (otherlv_13= '{' ( (lv_attribute_14_0= ruleAttribute ) )+ ( (lv_attribute_15_0= rulePair ) )+ otherlv_16= '}' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:83:2: () ( (otherlv_1= '(' ( (lv_attribute_2_0= ruleAttribute ) )* ( (lv_attribute_3_0= rulePair ) )* otherlv_4= ')' ) | (otherlv_5= '[' ( (lv_attribute_6_0= ruleAttribute ) )+ ( (lv_attribute_7_0= rulePair ) )* otherlv_8= ']' ) | (otherlv_9= '<' ( (lv_attribute_10_0= ruleAttribute ) )* ( (lv_attribute_11_0= rulePair ) )+ otherlv_12= '>' ) | (otherlv_13= '{' ( (lv_attribute_14_0= ruleAttribute ) )+ ( (lv_attribute_15_0= rulePair ) )+ otherlv_16= '}' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:80:1: ( () ( (otherlv_1= '(' ( (lv_attribute_2_0= ruleAttribute ) )* ( (lv_attribute_3_0= rulePair ) )* otherlv_4= ')' ) | (otherlv_5= '[' ( (lv_attribute_6_0= ruleAttribute ) )+ ( (lv_attribute_7_0= rulePair ) )* otherlv_8= ']' ) | (otherlv_9= '<' ( (lv_attribute_10_0= ruleAttribute ) )* ( (lv_attribute_11_0= rulePair ) )+ otherlv_12= '>' ) | (otherlv_13= '{' ( (lv_attribute_14_0= ruleAttribute ) )+ ( (lv_attribute_15_0= rulePair ) )+ otherlv_16= '}' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:80:2: () ( (otherlv_1= '(' ( (lv_attribute_2_0= ruleAttribute ) )* ( (lv_attribute_3_0= rulePair ) )* otherlv_4= ')' ) | (otherlv_5= '[' ( (lv_attribute_6_0= ruleAttribute ) )+ ( (lv_attribute_7_0= rulePair ) )* otherlv_8= ']' ) | (otherlv_9= '<' ( (lv_attribute_10_0= ruleAttribute ) )* ( (lv_attribute_11_0= rulePair ) )+ otherlv_12= '>' ) | (otherlv_13= '{' ( (lv_attribute_14_0= ruleAttribute ) )+ ( (lv_attribute_15_0= rulePair ) )+ otherlv_16= '}' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:83:2: ()
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:84:5: 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:80:2: ()
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:81:5: 
             {
 
                     current = forceCreateModelElement(
@@ -168,7 +165,7 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:89:2: ( (otherlv_1= '(' ( (lv_attribute_2_0= ruleAttribute ) )* ( (lv_attribute_3_0= rulePair ) )* otherlv_4= ')' ) | (otherlv_5= '[' ( (lv_attribute_6_0= ruleAttribute ) )+ ( (lv_attribute_7_0= rulePair ) )* otherlv_8= ']' ) | (otherlv_9= '<' ( (lv_attribute_10_0= ruleAttribute ) )* ( (lv_attribute_11_0= rulePair ) )+ otherlv_12= '>' ) | (otherlv_13= '{' ( (lv_attribute_14_0= ruleAttribute ) )+ ( (lv_attribute_15_0= rulePair ) )+ otherlv_16= '}' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:86:2: ( (otherlv_1= '(' ( (lv_attribute_2_0= ruleAttribute ) )* ( (lv_attribute_3_0= rulePair ) )* otherlv_4= ')' ) | (otherlv_5= '[' ( (lv_attribute_6_0= ruleAttribute ) )+ ( (lv_attribute_7_0= rulePair ) )* otherlv_8= ']' ) | (otherlv_9= '<' ( (lv_attribute_10_0= ruleAttribute ) )* ( (lv_attribute_11_0= rulePair ) )+ otherlv_12= '>' ) | (otherlv_13= '{' ( (lv_attribute_14_0= ruleAttribute ) )+ ( (lv_attribute_15_0= rulePair ) )+ otherlv_16= '}' ) )
             int alt9=4;
             switch ( input.LA(1) ) {
             case 11:
@@ -200,16 +197,16 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
 
             switch (alt9) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:89:3: (otherlv_1= '(' ( (lv_attribute_2_0= ruleAttribute ) )* ( (lv_attribute_3_0= rulePair ) )* otherlv_4= ')' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:86:3: (otherlv_1= '(' ( (lv_attribute_2_0= ruleAttribute ) )* ( (lv_attribute_3_0= rulePair ) )* otherlv_4= ')' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:89:3: (otherlv_1= '(' ( (lv_attribute_2_0= ruleAttribute ) )* ( (lv_attribute_3_0= rulePair ) )* otherlv_4= ')' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:89:5: otherlv_1= '(' ( (lv_attribute_2_0= ruleAttribute ) )* ( (lv_attribute_3_0= rulePair ) )* otherlv_4= ')'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:86:3: (otherlv_1= '(' ( (lv_attribute_2_0= ruleAttribute ) )* ( (lv_attribute_3_0= rulePair ) )* otherlv_4= ')' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:86:5: otherlv_1= '(' ( (lv_attribute_2_0= ruleAttribute ) )* ( (lv_attribute_3_0= rulePair ) )* otherlv_4= ')'
                     {
                     otherlv_1=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleModel133); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getModelAccess().getLeftParenthesisKeyword_1_0_0());
                         
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:93:1: ( (lv_attribute_2_0= ruleAttribute ) )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:90:1: ( (lv_attribute_2_0= ruleAttribute ) )*
                     loop1:
                     do {
                         int alt1=2;
@@ -228,10 +225,10 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
 
                         switch (alt1) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:94:1: (lv_attribute_2_0= ruleAttribute )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:91:1: (lv_attribute_2_0= ruleAttribute )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:94:1: (lv_attribute_2_0= ruleAttribute )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:95:3: lv_attribute_2_0= ruleAttribute
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:91:1: (lv_attribute_2_0= ruleAttribute )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:92:3: lv_attribute_2_0= ruleAttribute
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getModelAccess().getAttributeAttributeParserRuleCall_1_0_1_0()); 
@@ -264,7 +261,7 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
                         }
                     } while (true);
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:111:3: ( (lv_attribute_3_0= rulePair ) )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:108:3: ( (lv_attribute_3_0= rulePair ) )*
                     loop2:
                     do {
                         int alt2=2;
@@ -277,10 +274,10 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
 
                         switch (alt2) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:112:1: (lv_attribute_3_0= rulePair )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:109:1: (lv_attribute_3_0= rulePair )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:112:1: (lv_attribute_3_0= rulePair )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:113:3: lv_attribute_3_0= rulePair
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:109:1: (lv_attribute_3_0= rulePair )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:110:3: lv_attribute_3_0= rulePair
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getModelAccess().getAttributePairParserRuleCall_1_0_2_0()); 
@@ -324,16 +321,16 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:134:6: (otherlv_5= '[' ( (lv_attribute_6_0= ruleAttribute ) )+ ( (lv_attribute_7_0= rulePair ) )* otherlv_8= ']' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:131:6: (otherlv_5= '[' ( (lv_attribute_6_0= ruleAttribute ) )+ ( (lv_attribute_7_0= rulePair ) )* otherlv_8= ']' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:134:6: (otherlv_5= '[' ( (lv_attribute_6_0= ruleAttribute ) )+ ( (lv_attribute_7_0= rulePair ) )* otherlv_8= ']' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:134:8: otherlv_5= '[' ( (lv_attribute_6_0= ruleAttribute ) )+ ( (lv_attribute_7_0= rulePair ) )* otherlv_8= ']'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:131:6: (otherlv_5= '[' ( (lv_attribute_6_0= ruleAttribute ) )+ ( (lv_attribute_7_0= rulePair ) )* otherlv_8= ']' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:131:8: otherlv_5= '[' ( (lv_attribute_6_0= ruleAttribute ) )+ ( (lv_attribute_7_0= rulePair ) )* otherlv_8= ']'
                     {
                     otherlv_5=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleModel209); 
 
                         	newLeafNode(otherlv_5, grammarAccess.getModelAccess().getLeftSquareBracketKeyword_1_1_0());
                         
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:138:1: ( (lv_attribute_6_0= ruleAttribute ) )+
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:135:1: ( (lv_attribute_6_0= ruleAttribute ) )+
                     int cnt3=0;
                     loop3:
                     do {
@@ -353,10 +350,10 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
 
                         switch (alt3) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:139:1: (lv_attribute_6_0= ruleAttribute )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:136:1: (lv_attribute_6_0= ruleAttribute )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:139:1: (lv_attribute_6_0= ruleAttribute )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:140:3: lv_attribute_6_0= ruleAttribute
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:136:1: (lv_attribute_6_0= ruleAttribute )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:137:3: lv_attribute_6_0= ruleAttribute
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getModelAccess().getAttributeAttributeParserRuleCall_1_1_1_0()); 
@@ -393,7 +390,7 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
                         cnt3++;
                     } while (true);
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:156:3: ( (lv_attribute_7_0= rulePair ) )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:153:3: ( (lv_attribute_7_0= rulePair ) )*
                     loop4:
                     do {
                         int alt4=2;
@@ -406,10 +403,10 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:157:1: (lv_attribute_7_0= rulePair )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:154:1: (lv_attribute_7_0= rulePair )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:157:1: (lv_attribute_7_0= rulePair )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:158:3: lv_attribute_7_0= rulePair
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:154:1: (lv_attribute_7_0= rulePair )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:155:3: lv_attribute_7_0= rulePair
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getModelAccess().getAttributePairParserRuleCall_1_1_2_0()); 
@@ -453,16 +450,16 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:179:6: (otherlv_9= '<' ( (lv_attribute_10_0= ruleAttribute ) )* ( (lv_attribute_11_0= rulePair ) )+ otherlv_12= '>' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:176:6: (otherlv_9= '<' ( (lv_attribute_10_0= ruleAttribute ) )* ( (lv_attribute_11_0= rulePair ) )+ otherlv_12= '>' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:179:6: (otherlv_9= '<' ( (lv_attribute_10_0= ruleAttribute ) )* ( (lv_attribute_11_0= rulePair ) )+ otherlv_12= '>' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:179:8: otherlv_9= '<' ( (lv_attribute_10_0= ruleAttribute ) )* ( (lv_attribute_11_0= rulePair ) )+ otherlv_12= '>'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:176:6: (otherlv_9= '<' ( (lv_attribute_10_0= ruleAttribute ) )* ( (lv_attribute_11_0= rulePair ) )+ otherlv_12= '>' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:176:8: otherlv_9= '<' ( (lv_attribute_10_0= ruleAttribute ) )* ( (lv_attribute_11_0= rulePair ) )+ otherlv_12= '>'
                     {
                     otherlv_9=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleModel285); 
 
                         	newLeafNode(otherlv_9, grammarAccess.getModelAccess().getLessThanSignKeyword_1_2_0());
                         
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:183:1: ( (lv_attribute_10_0= ruleAttribute ) )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:180:1: ( (lv_attribute_10_0= ruleAttribute ) )*
                     loop5:
                     do {
                         int alt5=2;
@@ -481,10 +478,10 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:184:1: (lv_attribute_10_0= ruleAttribute )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:181:1: (lv_attribute_10_0= ruleAttribute )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:184:1: (lv_attribute_10_0= ruleAttribute )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:185:3: lv_attribute_10_0= ruleAttribute
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:181:1: (lv_attribute_10_0= ruleAttribute )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:182:3: lv_attribute_10_0= ruleAttribute
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getModelAccess().getAttributeAttributeParserRuleCall_1_2_1_0()); 
@@ -517,7 +514,7 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
                         }
                     } while (true);
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:201:3: ( (lv_attribute_11_0= rulePair ) )+
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:198:3: ( (lv_attribute_11_0= rulePair ) )+
                     int cnt6=0;
                     loop6:
                     do {
@@ -531,10 +528,10 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
 
                         switch (alt6) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:202:1: (lv_attribute_11_0= rulePair )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:199:1: (lv_attribute_11_0= rulePair )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:202:1: (lv_attribute_11_0= rulePair )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:203:3: lv_attribute_11_0= rulePair
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:199:1: (lv_attribute_11_0= rulePair )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:200:3: lv_attribute_11_0= rulePair
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getModelAccess().getAttributePairParserRuleCall_1_2_2_0()); 
@@ -582,16 +579,16 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:224:6: (otherlv_13= '{' ( (lv_attribute_14_0= ruleAttribute ) )+ ( (lv_attribute_15_0= rulePair ) )+ otherlv_16= '}' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:221:6: (otherlv_13= '{' ( (lv_attribute_14_0= ruleAttribute ) )+ ( (lv_attribute_15_0= rulePair ) )+ otherlv_16= '}' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:224:6: (otherlv_13= '{' ( (lv_attribute_14_0= ruleAttribute ) )+ ( (lv_attribute_15_0= rulePair ) )+ otherlv_16= '}' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:224:8: otherlv_13= '{' ( (lv_attribute_14_0= ruleAttribute ) )+ ( (lv_attribute_15_0= rulePair ) )+ otherlv_16= '}'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:221:6: (otherlv_13= '{' ( (lv_attribute_14_0= ruleAttribute ) )+ ( (lv_attribute_15_0= rulePair ) )+ otherlv_16= '}' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:221:8: otherlv_13= '{' ( (lv_attribute_14_0= ruleAttribute ) )+ ( (lv_attribute_15_0= rulePair ) )+ otherlv_16= '}'
                     {
                     otherlv_13=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleModel361); 
 
                         	newLeafNode(otherlv_13, grammarAccess.getModelAccess().getLeftCurlyBracketKeyword_1_3_0());
                         
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:228:1: ( (lv_attribute_14_0= ruleAttribute ) )+
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:225:1: ( (lv_attribute_14_0= ruleAttribute ) )+
                     int cnt7=0;
                     loop7:
                     do {
@@ -611,10 +608,10 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
 
                         switch (alt7) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:229:1: (lv_attribute_14_0= ruleAttribute )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:226:1: (lv_attribute_14_0= ruleAttribute )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:229:1: (lv_attribute_14_0= ruleAttribute )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:230:3: lv_attribute_14_0= ruleAttribute
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:226:1: (lv_attribute_14_0= ruleAttribute )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:227:3: lv_attribute_14_0= ruleAttribute
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getModelAccess().getAttributeAttributeParserRuleCall_1_3_1_0()); 
@@ -651,7 +648,7 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
                         cnt7++;
                     } while (true);
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:246:3: ( (lv_attribute_15_0= rulePair ) )+
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:243:3: ( (lv_attribute_15_0= rulePair ) )+
                     int cnt8=0;
                     loop8:
                     do {
@@ -665,10 +662,10 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
 
                         switch (alt8) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:247:1: (lv_attribute_15_0= rulePair )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:244:1: (lv_attribute_15_0= rulePair )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:247:1: (lv_attribute_15_0= rulePair )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:248:3: lv_attribute_15_0= rulePair
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:244:1: (lv_attribute_15_0= rulePair )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:245:3: lv_attribute_15_0= rulePair
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getModelAccess().getAttributePairParserRuleCall_1_3_2_0()); 
@@ -739,7 +736,7 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start "entryRuleAttribute"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:276:1: entryRuleAttribute returns [EObject current=null] : iv_ruleAttribute= ruleAttribute EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:273:1: entryRuleAttribute returns [EObject current=null] : iv_ruleAttribute= ruleAttribute EOF ;
     public final EObject entryRuleAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -747,8 +744,8 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:277:2: (iv_ruleAttribute= ruleAttribute EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:278:2: iv_ruleAttribute= ruleAttribute EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:274:2: (iv_ruleAttribute= ruleAttribute EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:275:2: iv_ruleAttribute= ruleAttribute EOF
             {
              newCompositeNode(grammarAccess.getAttributeRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAttribute_in_entryRuleAttribute455);
@@ -775,7 +772,7 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start "ruleAttribute"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:285:1: ruleAttribute returns [EObject current=null] : ( (lv_value_0_0= RULE_ID ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:282:1: ruleAttribute returns [EObject current=null] : ( (lv_value_0_0= RULE_ID ) ) ;
     public final EObject ruleAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -784,14 +781,14 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:288:28: ( ( (lv_value_0_0= RULE_ID ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:289:1: ( (lv_value_0_0= RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:285:28: ( ( (lv_value_0_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:286:1: ( (lv_value_0_0= RULE_ID ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:289:1: ( (lv_value_0_0= RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:290:1: (lv_value_0_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:286:1: ( (lv_value_0_0= RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:287:1: (lv_value_0_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:290:1: (lv_value_0_0= RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:291:3: lv_value_0_0= RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:287:1: (lv_value_0_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:288:3: lv_value_0_0= RULE_ID
             {
             lv_value_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleAttribute506); 
 
@@ -831,7 +828,7 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start "entryRulePair"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:315:1: entryRulePair returns [EObject current=null] : iv_rulePair= rulePair EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:312:1: entryRulePair returns [EObject current=null] : iv_rulePair= rulePair EOF ;
     public final EObject entryRulePair() throws RecognitionException {
         EObject current = null;
 
@@ -839,8 +836,8 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:316:2: (iv_rulePair= rulePair EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:317:2: iv_rulePair= rulePair EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:313:2: (iv_rulePair= rulePair EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:314:2: iv_rulePair= rulePair EOF
             {
              newCompositeNode(grammarAccess.getPairRule()); 
             pushFollow(FollowSets000.FOLLOW_rulePair_in_entryRulePair546);
@@ -867,7 +864,7 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start "rulePair"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:324:1: rulePair returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_ID ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:321:1: rulePair returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_ID ) ) ) ;
     public final EObject rulePair() throws RecognitionException {
         EObject current = null;
 
@@ -878,17 +875,17 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:327:28: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_ID ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:328:1: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:324:28: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_ID ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:325:1: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_ID ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:328:1: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_ID ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:328:2: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:325:1: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:325:2: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_ID ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:328:2: ( (lv_name_0_0= RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:329:1: (lv_name_0_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:325:2: ( (lv_name_0_0= RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:326:1: (lv_name_0_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:329:1: (lv_name_0_0= RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:330:3: lv_name_0_0= RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:326:1: (lv_name_0_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:327:3: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rulePair598); 
 
@@ -914,11 +911,11 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
 
                 	newLeafNode(otherlv_1, grammarAccess.getPairAccess().getEqualsSignKeyword_1());
                 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:350:1: ( (lv_value_2_0= RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:351:1: (lv_value_2_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:347:1: ( (lv_value_2_0= RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:348:1: (lv_value_2_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:351:1: (lv_value_2_0= RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:352:3: lv_value_2_0= RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:348:1: (lv_value_2_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:349:3: lv_value_2_0= RULE_ID
             {
             lv_value_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rulePair632); 
 

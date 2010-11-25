@@ -1,6 +1,5 @@
 package org.eclipse.xtext.ui.tests.parser.antlr.internal; 
 
-import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
@@ -10,7 +9,6 @@ import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
-import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.ui.tests.services.FoldingTestLanguageGrammarAccess;
 
 
@@ -56,11 +54,10 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
 
      	private FoldingTestLanguageGrammarAccess grammarAccess;
      	
-        public InternalFoldingTestLanguageParser(TokenStream input, IAstFactory factory, FoldingTestLanguageGrammarAccess grammarAccess) {
+        public InternalFoldingTestLanguageParser(TokenStream input, FoldingTestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.semanticModelBuilder = factory;
-            registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
+            registerRules(grammarAccess.getGrammar());
         }
         
         @Override
@@ -76,7 +73,7 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "entryRuleFoldingModel"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:70:1: entryRuleFoldingModel returns [EObject current=null] : iv_ruleFoldingModel= ruleFoldingModel EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:67:1: entryRuleFoldingModel returns [EObject current=null] : iv_ruleFoldingModel= ruleFoldingModel EOF ;
     public final EObject entryRuleFoldingModel() throws RecognitionException {
         EObject current = null;
 
@@ -84,8 +81,8 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:71:2: (iv_ruleFoldingModel= ruleFoldingModel EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:72:2: iv_ruleFoldingModel= ruleFoldingModel EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:68:2: (iv_ruleFoldingModel= ruleFoldingModel EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:69:2: iv_ruleFoldingModel= ruleFoldingModel EOF
             {
              newCompositeNode(grammarAccess.getFoldingModelRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleFoldingModel_in_entryRuleFoldingModel75);
@@ -112,7 +109,7 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "ruleFoldingModel"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:79:1: ruleFoldingModel returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )* ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:76:1: ruleFoldingModel returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )* ;
     public final EObject ruleFoldingModel() throws RecognitionException {
         EObject current = null;
 
@@ -122,10 +119,10 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:82:28: ( ( (lv_elements_0_0= ruleElement ) )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:83:1: ( (lv_elements_0_0= ruleElement ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:79:28: ( ( (lv_elements_0_0= ruleElement ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:80:1: ( (lv_elements_0_0= ruleElement ) )*
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:83:1: ( (lv_elements_0_0= ruleElement ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:80:1: ( (lv_elements_0_0= ruleElement ) )*
             loop1:
             do {
                 int alt1=2;
@@ -138,10 +135,10 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:84:1: (lv_elements_0_0= ruleElement )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:81:1: (lv_elements_0_0= ruleElement )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:84:1: (lv_elements_0_0= ruleElement )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:85:3: lv_elements_0_0= ruleElement
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:81:1: (lv_elements_0_0= ruleElement )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:82:3: lv_elements_0_0= ruleElement
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getFoldingModelAccess().getElementsElementParserRuleCall_0()); 
@@ -192,7 +189,7 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "entryRuleElement"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:109:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:106:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
     public final EObject entryRuleElement() throws RecognitionException {
         EObject current = null;
 
@@ -200,8 +197,8 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:110:2: (iv_ruleElement= ruleElement EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:111:2: iv_ruleElement= ruleElement EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:107:2: (iv_ruleElement= ruleElement EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:108:2: iv_ruleElement= ruleElement EOF
             {
              newCompositeNode(grammarAccess.getElementRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleElement_in_entryRuleElement166);
@@ -228,7 +225,7 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "ruleElement"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:118:1: ruleElement returns [EObject current=null] : (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( (lv_subelements_2_0= ruleElement ) )* otherlv_3= 'end' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:115:1: ruleElement returns [EObject current=null] : (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( (lv_subelements_2_0= ruleElement ) )* otherlv_3= 'end' ) ;
     public final EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
@@ -241,21 +238,21 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:121:28: ( (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( (lv_subelements_2_0= ruleElement ) )* otherlv_3= 'end' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:122:1: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( (lv_subelements_2_0= ruleElement ) )* otherlv_3= 'end' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:118:28: ( (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( (lv_subelements_2_0= ruleElement ) )* otherlv_3= 'end' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:119:1: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( (lv_subelements_2_0= ruleElement ) )* otherlv_3= 'end' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:122:1: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( (lv_subelements_2_0= ruleElement ) )* otherlv_3= 'end' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:122:3: otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( (lv_subelements_2_0= ruleElement ) )* otherlv_3= 'end'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:119:1: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( (lv_subelements_2_0= ruleElement ) )* otherlv_3= 'end' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:119:3: otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( (lv_subelements_2_0= ruleElement ) )* otherlv_3= 'end'
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleElement213); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getElementAccess().getElementKeyword_0());
                 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:126:1: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:127:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:123:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:124:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:127:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:128:3: lv_name_1_0= RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:124:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:125:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleElement230); 
 
@@ -277,7 +274,7 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:144:2: ( (lv_subelements_2_0= ruleElement ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:141:2: ( (lv_subelements_2_0= ruleElement ) )*
             loop2:
             do {
                 int alt2=2;
@@ -290,10 +287,10 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:145:1: (lv_subelements_2_0= ruleElement )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:142:1: (lv_subelements_2_0= ruleElement )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:145:1: (lv_subelements_2_0= ruleElement )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:146:3: lv_subelements_2_0= ruleElement
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:142:1: (lv_subelements_2_0= ruleElement )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:143:3: lv_subelements_2_0= ruleElement
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getElementAccess().getSubelementsElementParserRuleCall_2_0()); 

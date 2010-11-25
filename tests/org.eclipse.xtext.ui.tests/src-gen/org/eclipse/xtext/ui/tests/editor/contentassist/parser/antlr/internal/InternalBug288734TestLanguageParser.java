@@ -1,6 +1,5 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal; 
 
-import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
@@ -10,7 +9,6 @@ import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
-import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug288734TestLanguageGrammarAccess;
 
 
@@ -59,11 +57,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
      	private Bug288734TestLanguageGrammarAccess grammarAccess;
      	
-        public InternalBug288734TestLanguageParser(TokenStream input, IAstFactory factory, Bug288734TestLanguageGrammarAccess grammarAccess) {
+        public InternalBug288734TestLanguageParser(TokenStream input, Bug288734TestLanguageGrammarAccess grammarAccess) {
             this(input);
-            this.semanticModelBuilder = factory;
-            registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
+            registerRules(grammarAccess.getGrammar());
         }
         
         @Override
@@ -79,7 +76,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleModel"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:70:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -87,8 +84,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:71:2: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:72:2: iv_ruleModel= ruleModel EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel75);
@@ -115,7 +112,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:79:1: ruleModel returns [EObject current=null] : ( (lv_constants_0_0= ruleTConstant ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_constants_0_0= ruleTConstant ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -125,14 +122,14 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:82:28: ( ( (lv_constants_0_0= ruleTConstant ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:83:1: ( (lv_constants_0_0= ruleTConstant ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:79:28: ( ( (lv_constants_0_0= ruleTConstant ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:80:1: ( (lv_constants_0_0= ruleTConstant ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:83:1: ( (lv_constants_0_0= ruleTConstant ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:84:1: (lv_constants_0_0= ruleTConstant )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:80:1: ( (lv_constants_0_0= ruleTConstant ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:81:1: (lv_constants_0_0= ruleTConstant )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:84:1: (lv_constants_0_0= ruleTConstant )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:85:3: lv_constants_0_0= ruleTConstant
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:81:1: (lv_constants_0_0= ruleTConstant )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:82:3: lv_constants_0_0= ruleTConstant
             {
              
             	        newCompositeNode(grammarAccess.getModelAccess().getConstantsTConstantParserRuleCall_0()); 
@@ -177,7 +174,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleTConstant"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:109:1: entryRuleTConstant returns [EObject current=null] : iv_ruleTConstant= ruleTConstant EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:106:1: entryRuleTConstant returns [EObject current=null] : iv_ruleTConstant= ruleTConstant EOF ;
     public final EObject entryRuleTConstant() throws RecognitionException {
         EObject current = null;
 
@@ -185,8 +182,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:110:2: (iv_ruleTConstant= ruleTConstant EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:111:2: iv_ruleTConstant= ruleTConstant EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:107:2: (iv_ruleTConstant= ruleTConstant EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:108:2: iv_ruleTConstant= ruleTConstant EOF
             {
              newCompositeNode(grammarAccess.getTConstantRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleTConstant_in_entryRuleTConstant165);
@@ -213,7 +210,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleTConstant"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:118:1: ruleTConstant returns [EObject current=null] : (this_TStringConstant_0= ruleTStringConstant | this_TIntegerConstant_1= ruleTIntegerConstant | this_TBooleanConstant_2= ruleTBooleanConstant ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:115:1: ruleTConstant returns [EObject current=null] : (this_TStringConstant_0= ruleTStringConstant | this_TIntegerConstant_1= ruleTIntegerConstant | this_TBooleanConstant_2= ruleTBooleanConstant ) ;
     public final EObject ruleTConstant() throws RecognitionException {
         EObject current = null;
 
@@ -227,15 +224,15 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:121:28: ( (this_TStringConstant_0= ruleTStringConstant | this_TIntegerConstant_1= ruleTIntegerConstant | this_TBooleanConstant_2= ruleTBooleanConstant ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:122:1: (this_TStringConstant_0= ruleTStringConstant | this_TIntegerConstant_1= ruleTIntegerConstant | this_TBooleanConstant_2= ruleTBooleanConstant )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:118:28: ( (this_TStringConstant_0= ruleTStringConstant | this_TIntegerConstant_1= ruleTIntegerConstant | this_TBooleanConstant_2= ruleTBooleanConstant ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:119:1: (this_TStringConstant_0= ruleTStringConstant | this_TIntegerConstant_1= ruleTIntegerConstant | this_TBooleanConstant_2= ruleTBooleanConstant )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:122:1: (this_TStringConstant_0= ruleTStringConstant | this_TIntegerConstant_1= ruleTIntegerConstant | this_TBooleanConstant_2= ruleTBooleanConstant )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:119:1: (this_TStringConstant_0= ruleTStringConstant | this_TIntegerConstant_1= ruleTIntegerConstant | this_TBooleanConstant_2= ruleTBooleanConstant )
             int alt1=3;
             alt1 = dfa1.predict(input);
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:123:5: this_TStringConstant_0= ruleTStringConstant
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:120:5: this_TStringConstant_0= ruleTStringConstant
                     {
                      
                             newCompositeNode(grammarAccess.getTConstantAccess().getTStringConstantParserRuleCall_0()); 
@@ -253,7 +250,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:133:5: this_TIntegerConstant_1= ruleTIntegerConstant
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:130:5: this_TIntegerConstant_1= ruleTIntegerConstant
                     {
                      
                             newCompositeNode(grammarAccess.getTConstantAccess().getTIntegerConstantParserRuleCall_1()); 
@@ -271,7 +268,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:143:5: this_TBooleanConstant_2= ruleTBooleanConstant
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:140:5: this_TBooleanConstant_2= ruleTBooleanConstant
                     {
                      
                             newCompositeNode(grammarAccess.getTConstantAccess().getTBooleanConstantParserRuleCall_2()); 
@@ -309,7 +306,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleTStringConstant"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:159:1: entryRuleTStringConstant returns [EObject current=null] : iv_ruleTStringConstant= ruleTStringConstant EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:156:1: entryRuleTStringConstant returns [EObject current=null] : iv_ruleTStringConstant= ruleTStringConstant EOF ;
     public final EObject entryRuleTStringConstant() throws RecognitionException {
         EObject current = null;
 
@@ -317,8 +314,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:160:2: (iv_ruleTStringConstant= ruleTStringConstant EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:161:2: iv_ruleTStringConstant= ruleTStringConstant EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:157:2: (iv_ruleTStringConstant= ruleTStringConstant EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:158:2: iv_ruleTStringConstant= ruleTStringConstant EOF
             {
              newCompositeNode(grammarAccess.getTStringConstantRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleTStringConstant_in_entryRuleTStringConstant311);
@@ -345,7 +342,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleTStringConstant"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:168:1: ruleTStringConstant returns [EObject current=null] : ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'string' ( (lv_name_3_0= RULE_ID ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:165:1: ruleTStringConstant returns [EObject current=null] : ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'string' ( (lv_name_3_0= RULE_ID ) ) ) ;
     public final EObject ruleTStringConstant() throws RecognitionException {
         EObject current = null;
 
@@ -358,13 +355,13 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:171:28: ( ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'string' ( (lv_name_3_0= RULE_ID ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:172:1: ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'string' ( (lv_name_3_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:168:28: ( ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'string' ( (lv_name_3_0= RULE_ID ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:169:1: ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'string' ( (lv_name_3_0= RULE_ID ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:172:1: ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'string' ( (lv_name_3_0= RULE_ID ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:172:2: ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'string' ( (lv_name_3_0= RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:169:1: ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'string' ( (lv_name_3_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:169:2: ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'string' ( (lv_name_3_0= RULE_ID ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:172:2: ( (lv_annotations_0_0= ruleTAnnotation ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:169:2: ( (lv_annotations_0_0= ruleTAnnotation ) )*
             loop2:
             do {
                 int alt2=2;
@@ -377,10 +374,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:173:1: (lv_annotations_0_0= ruleTAnnotation )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:170:1: (lv_annotations_0_0= ruleTAnnotation )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:173:1: (lv_annotations_0_0= ruleTAnnotation )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:174:3: lv_annotations_0_0= ruleTAnnotation
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:170:1: (lv_annotations_0_0= ruleTAnnotation )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:171:3: lv_annotations_0_0= ruleTAnnotation
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getTStringConstantAccess().getAnnotationsTAnnotationParserRuleCall_0_0()); 
@@ -421,11 +418,11 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
                 	newLeafNode(otherlv_2, grammarAccess.getTStringConstantAccess().getStringKeyword_2());
                 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:198:1: ( (lv_name_3_0= RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:199:1: (lv_name_3_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:195:1: ( (lv_name_3_0= RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:196:1: (lv_name_3_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:199:1: (lv_name_3_0= RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:200:3: lv_name_3_0= RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:196:1: (lv_name_3_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:197:3: lv_name_3_0= RULE_ID
             {
             lv_name_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleTStringConstant409); 
 
@@ -468,7 +465,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleTIntegerConstant"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:224:1: entryRuleTIntegerConstant returns [EObject current=null] : iv_ruleTIntegerConstant= ruleTIntegerConstant EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:221:1: entryRuleTIntegerConstant returns [EObject current=null] : iv_ruleTIntegerConstant= ruleTIntegerConstant EOF ;
     public final EObject entryRuleTIntegerConstant() throws RecognitionException {
         EObject current = null;
 
@@ -476,8 +473,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:225:2: (iv_ruleTIntegerConstant= ruleTIntegerConstant EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:226:2: iv_ruleTIntegerConstant= ruleTIntegerConstant EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:222:2: (iv_ruleTIntegerConstant= ruleTIntegerConstant EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:223:2: iv_ruleTIntegerConstant= ruleTIntegerConstant EOF
             {
              newCompositeNode(grammarAccess.getTIntegerConstantRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleTIntegerConstant_in_entryRuleTIntegerConstant450);
@@ -504,7 +501,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleTIntegerConstant"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:233:1: ruleTIntegerConstant returns [EObject current=null] : ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'integer' ( (lv_name_3_0= RULE_ID ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:230:1: ruleTIntegerConstant returns [EObject current=null] : ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'integer' ( (lv_name_3_0= RULE_ID ) ) ) ;
     public final EObject ruleTIntegerConstant() throws RecognitionException {
         EObject current = null;
 
@@ -517,13 +514,13 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:236:28: ( ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'integer' ( (lv_name_3_0= RULE_ID ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:237:1: ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'integer' ( (lv_name_3_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:233:28: ( ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'integer' ( (lv_name_3_0= RULE_ID ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:234:1: ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'integer' ( (lv_name_3_0= RULE_ID ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:237:1: ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'integer' ( (lv_name_3_0= RULE_ID ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:237:2: ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'integer' ( (lv_name_3_0= RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:234:1: ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'integer' ( (lv_name_3_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:234:2: ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'integer' ( (lv_name_3_0= RULE_ID ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:237:2: ( (lv_annotations_0_0= ruleTAnnotation ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:234:2: ( (lv_annotations_0_0= ruleTAnnotation ) )*
             loop3:
             do {
                 int alt3=2;
@@ -536,10 +533,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:238:1: (lv_annotations_0_0= ruleTAnnotation )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:235:1: (lv_annotations_0_0= ruleTAnnotation )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:238:1: (lv_annotations_0_0= ruleTAnnotation )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:239:3: lv_annotations_0_0= ruleTAnnotation
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:235:1: (lv_annotations_0_0= ruleTAnnotation )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:236:3: lv_annotations_0_0= ruleTAnnotation
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getTIntegerConstantAccess().getAnnotationsTAnnotationParserRuleCall_0_0()); 
@@ -580,11 +577,11 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
                 	newLeafNode(otherlv_2, grammarAccess.getTIntegerConstantAccess().getIntegerKeyword_2());
                 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:263:1: ( (lv_name_3_0= RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:264:1: (lv_name_3_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:260:1: ( (lv_name_3_0= RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:261:1: (lv_name_3_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:264:1: (lv_name_3_0= RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:265:3: lv_name_3_0= RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:261:1: (lv_name_3_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:262:3: lv_name_3_0= RULE_ID
             {
             lv_name_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleTIntegerConstant548); 
 
@@ -627,7 +624,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleTBooleanConstant"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:289:1: entryRuleTBooleanConstant returns [EObject current=null] : iv_ruleTBooleanConstant= ruleTBooleanConstant EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:286:1: entryRuleTBooleanConstant returns [EObject current=null] : iv_ruleTBooleanConstant= ruleTBooleanConstant EOF ;
     public final EObject entryRuleTBooleanConstant() throws RecognitionException {
         EObject current = null;
 
@@ -635,8 +632,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:290:2: (iv_ruleTBooleanConstant= ruleTBooleanConstant EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:291:2: iv_ruleTBooleanConstant= ruleTBooleanConstant EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:287:2: (iv_ruleTBooleanConstant= ruleTBooleanConstant EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:288:2: iv_ruleTBooleanConstant= ruleTBooleanConstant EOF
             {
              newCompositeNode(grammarAccess.getTBooleanConstantRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleTBooleanConstant_in_entryRuleTBooleanConstant589);
@@ -663,7 +660,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleTBooleanConstant"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:298:1: ruleTBooleanConstant returns [EObject current=null] : ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'boolean' ( (lv_name_3_0= RULE_ID ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:295:1: ruleTBooleanConstant returns [EObject current=null] : ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'boolean' ( (lv_name_3_0= RULE_ID ) ) ) ;
     public final EObject ruleTBooleanConstant() throws RecognitionException {
         EObject current = null;
 
@@ -676,13 +673,13 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:301:28: ( ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'boolean' ( (lv_name_3_0= RULE_ID ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:302:1: ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'boolean' ( (lv_name_3_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:298:28: ( ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'boolean' ( (lv_name_3_0= RULE_ID ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:299:1: ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'boolean' ( (lv_name_3_0= RULE_ID ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:302:1: ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'boolean' ( (lv_name_3_0= RULE_ID ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:302:2: ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'boolean' ( (lv_name_3_0= RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:299:1: ( ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'boolean' ( (lv_name_3_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:299:2: ( (lv_annotations_0_0= ruleTAnnotation ) )* otherlv_1= 'constant' otherlv_2= 'boolean' ( (lv_name_3_0= RULE_ID ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:302:2: ( (lv_annotations_0_0= ruleTAnnotation ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:299:2: ( (lv_annotations_0_0= ruleTAnnotation ) )*
             loop4:
             do {
                 int alt4=2;
@@ -695,10 +692,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:303:1: (lv_annotations_0_0= ruleTAnnotation )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:300:1: (lv_annotations_0_0= ruleTAnnotation )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:303:1: (lv_annotations_0_0= ruleTAnnotation )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:304:3: lv_annotations_0_0= ruleTAnnotation
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:300:1: (lv_annotations_0_0= ruleTAnnotation )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:301:3: lv_annotations_0_0= ruleTAnnotation
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getTBooleanConstantAccess().getAnnotationsTAnnotationParserRuleCall_0_0()); 
@@ -739,11 +736,11 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
                 	newLeafNode(otherlv_2, grammarAccess.getTBooleanConstantAccess().getBooleanKeyword_2());
                 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:328:1: ( (lv_name_3_0= RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:329:1: (lv_name_3_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:325:1: ( (lv_name_3_0= RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:326:1: (lv_name_3_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:329:1: (lv_name_3_0= RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:330:3: lv_name_3_0= RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:326:1: (lv_name_3_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:327:3: lv_name_3_0= RULE_ID
             {
             lv_name_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleTBooleanConstant687); 
 
@@ -786,7 +783,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleTAnnotation"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:354:1: entryRuleTAnnotation returns [EObject current=null] : iv_ruleTAnnotation= ruleTAnnotation EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:351:1: entryRuleTAnnotation returns [EObject current=null] : iv_ruleTAnnotation= ruleTAnnotation EOF ;
     public final EObject entryRuleTAnnotation() throws RecognitionException {
         EObject current = null;
 
@@ -794,8 +791,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:355:2: (iv_ruleTAnnotation= ruleTAnnotation EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:356:2: iv_ruleTAnnotation= ruleTAnnotation EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:352:2: (iv_ruleTAnnotation= ruleTAnnotation EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:353:2: iv_ruleTAnnotation= ruleTAnnotation EOF
             {
              newCompositeNode(grammarAccess.getTAnnotationRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleTAnnotation_in_entryRuleTAnnotation728);
@@ -822,7 +819,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleTAnnotation"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:363:1: ruleTAnnotation returns [EObject current=null] : (otherlv_0= '@desc' ( (lv_description_1_0= RULE_STRING ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:360:1: ruleTAnnotation returns [EObject current=null] : (otherlv_0= '@desc' ( (lv_description_1_0= RULE_STRING ) ) ) ;
     public final EObject ruleTAnnotation() throws RecognitionException {
         EObject current = null;
 
@@ -832,21 +829,21 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:366:28: ( (otherlv_0= '@desc' ( (lv_description_1_0= RULE_STRING ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:367:1: (otherlv_0= '@desc' ( (lv_description_1_0= RULE_STRING ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:363:28: ( (otherlv_0= '@desc' ( (lv_description_1_0= RULE_STRING ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:364:1: (otherlv_0= '@desc' ( (lv_description_1_0= RULE_STRING ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:367:1: (otherlv_0= '@desc' ( (lv_description_1_0= RULE_STRING ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:367:3: otherlv_0= '@desc' ( (lv_description_1_0= RULE_STRING ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:364:1: (otherlv_0= '@desc' ( (lv_description_1_0= RULE_STRING ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:364:3: otherlv_0= '@desc' ( (lv_description_1_0= RULE_STRING ) )
             {
             otherlv_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleTAnnotation775); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getTAnnotationAccess().getDescKeyword_0());
                 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:371:1: ( (lv_description_1_0= RULE_STRING ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:372:1: (lv_description_1_0= RULE_STRING )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:368:1: ( (lv_description_1_0= RULE_STRING ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:369:1: (lv_description_1_0= RULE_STRING )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:372:1: (lv_description_1_0= RULE_STRING )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:373:3: lv_description_1_0= RULE_STRING
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:369:1: (lv_description_1_0= RULE_STRING )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:370:3: lv_description_1_0= RULE_STRING
             {
             lv_description_1_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleTAnnotation792); 
 
@@ -943,7 +940,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
             this.transition = DFA1_transition;
         }
         public String getDescription() {
-            return "122:1: (this_TStringConstant_0= ruleTStringConstant | this_TIntegerConstant_1= ruleTIntegerConstant | this_TBooleanConstant_2= ruleTBooleanConstant )";
+            return "119:1: (this_TStringConstant_0= ruleTStringConstant | this_TIntegerConstant_1= ruleTIntegerConstant | this_TBooleanConstant_2= ruleTBooleanConstant )";
         }
     }
  

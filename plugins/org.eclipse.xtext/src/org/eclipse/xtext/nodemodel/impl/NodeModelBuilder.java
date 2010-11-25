@@ -8,7 +8,6 @@
 package org.eclipse.xtext.nodemodel.impl;
 
 import java.util.Iterator;
-import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.RuleCall;
@@ -19,8 +18,6 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 
 import com.google.common.collect.Iterators;
-import com.google.common.collect.Lists;
-import com.google.common.collect.UnmodifiableIterator;
 
 /**
  * A statefull (!) builder that provides call back methods for clients who
