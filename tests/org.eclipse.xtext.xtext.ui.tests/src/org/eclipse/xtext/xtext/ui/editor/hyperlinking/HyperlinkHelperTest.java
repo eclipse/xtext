@@ -132,7 +132,7 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 
 	public void testCreateHyperlinksByOffset_05() {
 		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("[ecore::EObject]"), true));
-		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("ecore::EObject]"), true));
+		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("[ecore::EObject]") + "[ecore::EObject".length(), true));
 		IHyperlink[] hyperlinks = helper.createHyperlinksByOffset(resource, model.indexOf("core::EObject]"), true);
 		assertNotNull(hyperlinks);
 		assertEquals(1, hyperlinks.length);
@@ -144,7 +144,7 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 	public void testCreateHyperlinksByOffset_06() {
 		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("::EObject]"), true));
 		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf(":EObject]"), true));
-		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("EObject]"), true));
+		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("EObject]") + "EObject".length(), true));
 		IHyperlink[] hyperlinks = helper.createHyperlinksByOffset(resource, model.indexOf("Object]"), true);
 		assertNotNull(hyperlinks);
 		assertEquals(1, hyperlinks.length);
@@ -158,7 +158,7 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 	}
 
 	public void testCreateHyperlinksByOffset_07() {
-		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("Element*"), true));
+		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("Element*") - 1, true));
 		IHyperlink[] hyperlinks = helper.createHyperlinksByOffset(resource, model.indexOf("lement*"), true);
 		assertNotNull(hyperlinks);
 		assertEquals(1, hyperlinks.length);
