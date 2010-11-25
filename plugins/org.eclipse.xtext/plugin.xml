@@ -23,11 +23,5 @@
        genModel = "org/eclipse/xtext/Xtext.genmodel" /> 
   </extension>
 
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.eclipse.org/2008/xtext/parsetree" 
-       class = "org.eclipse.xtext.parsetree.ParsetreePackage"
-       genModel = "model/parsetree.genmodel" /> 
-  </extension>
 
 </plugin>

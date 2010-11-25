@@ -8,14 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.impl.PartialParsingHelper;
 import org.eclipse.xtext.parser.impl.PartialParsingPointers;
-import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.util.EmfStructureComparator;
 import org.eclipse.xtext.util.ReplaceRegion;
 
@@ -31,12 +29,7 @@ public abstract class AbstractPartialParserTest extends AbstractXtextTests {
 	protected void setUp() throws Exception {
 		super.setUp();
 		partialParser = new PartialParsingHelper();
-		comparator = new EmfStructureComparator() {
-			@Override
-			protected boolean isRelevantChild(EObject container, EObject child) {
-				return !(child instanceof LeafNode) || !((LeafNode)child).isHidden();
-			}
-		};
+		comparator = new EmfStructureComparator();
 	}
 
 	@Override
