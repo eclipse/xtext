@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.parsetree;
+package org.eclipse.xtext.nodemodel.util;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -18,7 +18,7 @@ import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSet
 /**
  * @author Michael Clay - Initial contribution and API
  */
-public class ParseTreeUtilTest extends AbstractXtextTests {
+public class GetLastCompleteNodeTest extends AbstractXtextTests {
 
 	@Override
 	protected void setUp() throws Exception {
