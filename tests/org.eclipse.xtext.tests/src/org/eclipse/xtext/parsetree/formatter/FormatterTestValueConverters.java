@@ -11,7 +11,6 @@ import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
-import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 
@@ -21,17 +20,13 @@ public class FormatterTestValueConverters extends DefaultTerminalConverters {
 	public IValueConverter<String> FQN() {
 		return new AbstractNullSafeConverter<String>() {
 			@Override
-			protected String internalToValue(String string, INode newNode) {
+			protected String internalToValue(String string, INode node) {
 				if (!string.equals(string.trim()))
 					throw new RuntimeException();
 				StringBuffer b = new StringBuffer();
-				BidiTreeIterator<INode> iterator = newNode.iterator();
-				while(iterator.hasNext()) {
-					INode next = iterator.next();
-					if (next instanceof ILeafNode) {
-						if (!((ILeafNode) next).isHidden()) {
-							b.append(next.getText());
-						}
+				for(ILeafNode leaf: node.getLeafNodes()) {
+					if (!leaf.isHidden()) {
+						b.append(leaf.getText());
 					}
 				}
 				return b.toString();

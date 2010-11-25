@@ -317,9 +317,9 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		return syntaxErrorProvider;
 	}
 
-	protected void set(EObject _this, String feature, Object value, String lexerRule, INode newNode) {
+	protected void set(EObject _this, String feature, Object value, String lexerRule, INode node) {
 		try {
-			semanticModelBuilder.set(_this, feature, value, lexerRule, newNode);
+			semanticModelBuilder.set(_this, feature, value, lexerRule, node);
 		} catch(ValueConverterException vce) {
 			handleValueConverterException(vce);
 		}

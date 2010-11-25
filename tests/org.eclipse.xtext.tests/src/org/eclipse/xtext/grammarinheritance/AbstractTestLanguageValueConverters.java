@@ -20,7 +20,7 @@ public final class AbstractTestLanguageValueConverters extends DefaultTerminalCo
 		return new AbstractToStringConverter<Double>(){
 
 			@Override
-			protected Double internalToValue(String string, INode newNode) {
+			protected Double internalToValue(String string, INode node) {
 				return Double.valueOf(string);
 			}
 		};
