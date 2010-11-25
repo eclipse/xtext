@@ -4,9 +4,8 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  *******************************************************************************/
-package org.eclipse.xtext.parsetree;
+package org.eclipse.xtext.nodemodel;
 
 import java.util.Iterator;
 import java.util.List;
@@ -36,6 +35,12 @@ public class NodeModelTest extends AbstractXtextTests {
 
 	private static final String MODEL = "reducible 'x' choice optional y choice z reducible 'x' 'y'";
 
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		with(TestLanguageStandaloneSetup.class);
+	}
+	
 	public void testNavigabilityAst2Node() throws Exception {
 		EObject object = getModel(MODEL);
 		checkNavigabilityAst2Node(object);
@@ -126,12 +131,6 @@ public class NodeModelTest extends AbstractXtextTests {
 		ICompositeNode root = NodeModelUtils.getNode(object).getRootNode();
 		List<ILeafNode> nodes = Lists.newArrayList(root.getLeafNodes());
 		assertTrue(nodes.get(2).getGrammarElement() instanceof Keyword);
-	}
-
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		with(TestLanguageStandaloneSetup.class);
 	}
 
 }
