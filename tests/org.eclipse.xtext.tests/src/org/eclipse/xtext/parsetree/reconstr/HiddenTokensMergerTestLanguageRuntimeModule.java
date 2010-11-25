@@ -22,7 +22,7 @@ public class HiddenTokensMergerTestLanguageRuntimeModule extends
 			return new AbstractNullSafeConverter<String>() {
 
 				@Override
-				protected String internalToValue(String string, INode newNode) {
+				protected String internalToValue(String string, INode node) {
 					return string.replaceAll("\\s*", "");
 				}
 
