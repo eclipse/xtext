@@ -38,14 +38,22 @@ public interface ISyntaxErrorMessageProvider {
 	}
 
 	interface IParserErrorContext extends IErrorContext {
+		/**
+		 * @returns the recognition exception in the parser. May be <code>null</code> in 
+		 * case of lexer errors.
+		 */
 		RecognitionException getRecognitionException();
 	
 		String[] getTokenNames();
 	}
 	
 	interface IUnorderedGroupErrorContext extends IParserErrorContext {
+		
 		List<AbstractElement> getMissingMandatoryElements();
 		
+		/**
+		 * @returns the failed predicate exception caused by a specific unordered group. Never <code>null</code>.
+		 */
 		FailedPredicateException getRecognitionException();
 	}
 	

@@ -60,7 +60,9 @@ import com.google.common.collect.Lists;
 import com.google.inject.internal.Maps;
 
 /**
- * TODO Javadoc
+ * Base class for Xtext's generated parsers. It is reasonable customizable by means of 
+ * object composition, e.g. error messages can be tailored to specific needs with an
+ * {@link ISyntaxErrorMessageProvider}, objects construction is subject to an {@link IAstFactory}.
  */
 public abstract class AbstractInternalAntlrParser extends Parser {
 
@@ -95,6 +97,28 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		public String[] getTokenNames() {
 			return readableTokenNames;
 		}
+	}
+	
+	protected class LexerErrorContext extends ErrorContext implements IParserErrorContext {
+
+		private String message;
+
+		public LexerErrorContext(String message) {
+			this.message = message;
+		}
+		
+		public String getDefaultMessage() {
+			return message;
+		}
+
+		public RecognitionException getRecognitionException() {
+			return null;
+		}
+
+		public String[] getTokenNames() {
+			return readableTokenNames;
+		}
+		
 	}
 	
 	private static final Class<?>[] emptyClassArray = new Class[0];
@@ -242,7 +266,8 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		if (token.getType() == Token.INVALID_TOKEN_TYPE) {
 			if (error == null) {
 				String lexerErrorMessage = ((XtextTokenStream) input).getLexerErrorMessage(token);
-				error = new SyntaxErrorMessage(lexerErrorMessage, null);
+				LexerErrorContext errorContext = new LexerErrorContext(lexerErrorMessage);
+				error = syntaxErrorProvider.getSyntaxErrorMessage(errorContext);
 			}
 		}
 		if (grammarElement == null) {
@@ -324,7 +349,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		add(_this, feature, value, lexerRule, lastConsumedNode);
 	}
 	
-	private void appendError(INode node) {
+	protected void appendError(INode node) {
 		if (currentError != null) {
 			if (node.getSyntaxErrorMessage() == null) {
 				INode newNode = nodeBuilder.setSyntaxError(node, currentError);
@@ -477,7 +502,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			e = new MissingTokenException(ttype, input, inserted);
 			reportError(e);  // report after inserting so AW sees the token in the exception
 			return null;
-	//		throw e;
+			// throw e;
 		}
 		// even that didn't work; must throw the exception
 		e = new MismatchedTokenException(ttype, input);
