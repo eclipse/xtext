@@ -1,0 +1,27 @@
+<project>
+	<target name="create.javadoc">
+		<property name="javadoc.output" value="${output}/javadoc" />
+
+		<echo message="Source code location ${checkoutLocation}" />
+		<echo message="Javadoc output location ${javadoc.output}" />
+		<echo message="Target platform path ${targetPlatform}" />
+
+		<!-- Define classpath -->
+		<path id="javadoc-classpath">
+			<fileset dir="${targetPlatform}">
+				<include name="*.jar" />
+			</fileset>
+		</path>
+		
+		<!-- Prepare dirs -->
+		<delete dir="${javadoc.output}" />
+		<mkdir dir="${javadoc.output}" />
+
+		<javadoc destdir="${javadoc.output}" classpathref="javadoc-classpath" maxmemory="1024m" source="1.5" useexternalfile="true" author="true" version="true" use="true" windowtitle="Xtext Documentation">
+			<fileset dir="${checkoutLocation}/plugins/" defaultexcludes="true">
+				<include name="**/*.java" />
+				<exclude name="**/test/**" />
+			</fileset>
+		</javadoc>
+	</target>
+</project>
