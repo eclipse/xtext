@@ -4,7 +4,6 @@
         <cs:dependency name="com.google.inject" componentType="osgi.bundle"/>
         <cs:dependency name="com.google.collect" componentType="osgi.bundle"/>
         <cs:dependency name="org.aopalliance" componentType="osgi.bundle"/>
-        <cs:dependency name="org.apache.commons.logging" componentType="osgi.bundle" versionDesignator="1.1.1"/>
         <cs:dependency name="org.easymock" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.emf.ecore.editor" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.emf.mwe.ui" componentType="eclipse.feature"/>
@@ -12,7 +11,7 @@
         <cs:dependency name="org.eclipse.jdt" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.pde.core" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.pde.junit.runtime" componentType="osgi.bundle"/>
-        <cs:dependency name="org.eclipse.platform" componentType="eclipse.feature"/>
+        <cs:dependency name="org.eclipse.platform" componentType="eclipse.feature"  versionDesignator="[3.5.0,3.6.0)"/>
         <cs:dependency name="org.eclipse.xpand.ui" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.xtend.util.stdlib" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.draw2d" componentType="eclipse.feature"/>
