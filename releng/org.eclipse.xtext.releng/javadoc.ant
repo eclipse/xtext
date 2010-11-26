@@ -1,5 +1,5 @@
-<project>
-	<target name="create.javadoc">
+<project name="javadoc-project">
+	<target name="-create.javadoc">
 		<property name="javadoc.output" value="${output}/javadoc" />
 
 		<echo message="Source code location ${checkoutLocation}" />
