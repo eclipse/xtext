@@ -70,13 +70,6 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.xtext.junit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.eclipse.xtext.common.types"
          download-size="0"
          install-size="0"
@@ -90,12 +83,6 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          version="0.0.0"
          unpack="false"/>
 
-   <plugin
-         id="org.eclipse.xtext.ui.junit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
    <plugin
          id="org.eclipse.xtext.ecore"

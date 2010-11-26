@@ -75,4 +75,20 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    <includes
          id="org.eclipse.xtext.xtext.ui.source"
          version="0.0.0"/>
+
+  
+   <plugin
+         id="org.eclipse.xtext.junit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.ui.junit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>
