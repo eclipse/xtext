@@ -14,6 +14,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
@@ -87,32 +88,55 @@ public class NodeModelUtils {
 	public static List<INode> findNodesForFeature(EObject semanticElement, EStructuralFeature structuralFeature) {
 		ICompositeNode node = getNode(semanticElement);
 		if (node != null) {
+			while (node.getParent() != null && !node.getParent().hasDirectSemanticElement()) {
+				node = node.getParent();
+			}
 			return findNodesForFeature(semanticElement, node, structuralFeature);
 		}
 		return Collections.emptyList();
 	}
 
-	private static List<INode> findNodesForFeature(EObject semanticElement, INode node,
-			EStructuralFeature structuralFeature) {
+	private static List<INode> findNodesForFeature(EObject semanticElement, INode node,	EStructuralFeature structuralFeature) {
 		List<INode> result = Lists.newArrayList();
-		EObject grammarElement = node.getGrammarElement();
-		if (grammarElement != null) { // error node?
-			Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
-			if (assignment != null && assignment.getFeature().equals(structuralFeature.getName())) {
-				result.add(node);
-			} else {
-				if (node instanceof ICompositeNode) {
-					EObject nodeSemanticElement = node.getSemanticElement();
-					if (semanticElement.equals(nodeSemanticElement)) {
-						ICompositeNode composite = (ICompositeNode) node;
-						// check whether it's the same element
-						for (INode child : composite.getChildren()) {
-							result.addAll(findNodesForFeature(semanticElement, child, structuralFeature));
-						}
-					}
+		String featureName = structuralFeature.getName();
+		BidiTreeIterator<INode> iterator = node.iterator();
+		while(iterator.hasNext()) {
+			INode child = iterator.next();
+			EObject grammarElement  = child.getGrammarElement();
+			if (grammarElement instanceof Action) {
+				Action action = (Action) grammarElement;
+				child = iterator.next();
+				if (featureName.equals(action.getFeature())) {
+					result.add(child);
 				}
+				iterator.prune();
+			} else if (child != node) {
+				Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
+				if (assignment != null) {
+					if (featureName.equals(assignment.getFeature())) {
+						result.add(child);
+					}
+					iterator.prune();
+				} 
 			}
 		}
+//		EObject grammarElement = node.getGrammarElement();
+//		if (grammarElement != null) { // error node?
+//			Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
+//			if (assignment != null && assignment.getFeature().equals(structuralFeature.getName())) {
+//				result.add(node);
+//			} else {
+//				if (node instanceof ICompositeNode) {
+//					if (!node.hasDirectSemanticElement() || node.getSemanticElement()==semanticElement) {
+//						ICompositeNode composite = (ICompositeNode) node;
+//						// check whether it's the same element
+//						for (INode child : composite.getChildren()) {
+//							result.addAll(findNodesForFeature(semanticElement, child, structuralFeature));
+//						}
+//					}
+//				}
+//			}
+//		}
 		return result;
 	}
 	

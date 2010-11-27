@@ -44,7 +44,7 @@ code[Java][public class MyDslUiModule extends AbstractMyDslUiModule {
 Often the default strategy only needs some guidance (e.g. selecting the text corresponding to another 
 feature than e[name]). In that case you can simply subclass e[DefaultLocationInFileProvider] and override 
 the methods e[getIdentifierFeature()] and / or e[useKeyword()] to guide the first and last steps of the strategy 
-as described above (see codeRef[org.eclipse.xtext.xtext.ui.XtextLocationInFileProvider] 
+as described above (see codeRef[org.eclipse.xtext.xtext.XtextLocationInFileProvider] 
 for an example).
 
 
