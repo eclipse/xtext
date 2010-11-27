@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.resource.IFragmentProvider;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.xtext.XtextFormatter;
 import org.eclipse.xtext.xtext.XtextFragmentProvider;
 import org.eclipse.xtext.xtext.XtextLinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.xtext.XtextLinkingService;
+import org.eclipse.xtext.xtext.XtextLocationInFileProvider;
 import org.eclipse.xtext.xtext.XtextQualifiedNameConverter;
 import org.eclipse.xtext.xtext.XtextReferableElementsUnloader;
 import org.eclipse.xtext.xtext.XtextResourceDescriptionManager;
@@ -111,6 +113,11 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 	
 	public Class<? extends ILinkingDiagnosticMessageProvider.Extended> bindILinkingDiagnosticMessageProvider() {
 		return XtextLinkingDiagnosticMessageProvider.class;
+	}
+	
+	@Override
+	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
+		return XtextLocationInFileProvider.class;
 	}
 	
 }
