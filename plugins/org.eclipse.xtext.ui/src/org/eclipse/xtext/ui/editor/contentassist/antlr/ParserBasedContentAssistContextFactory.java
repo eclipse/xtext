@@ -38,6 +38,7 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextFactory;
+import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -160,7 +161,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			currentNode = new LeafNodeFinder(completionOffset, false).searchIn(rootNode);
 			if (currentNode == null)
 				currentNode = lastCompleteNode;
-			lastVisibleNode = NodeModelUtils.getLastCompleteNodeByOffset(rootNode, completionOffset);
+			lastVisibleNode = getLastCompleteNodeByOffset(rootNode, completionOffset);
 			datatypeNode = getContainingDatatypeRuleNode(lastCompleteNode);
 			currentModel = lastVisibleNode.getSemanticElement();
 		}
@@ -182,7 +183,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		protected void handleLastCompleteNodeIsAtEndOfDatatypeNode() throws BadLocationException {
 			String prefix = getPrefix(lastCompleteNode);
 			String completeInput = viewer.getDocument().get(0, lastCompleteNode.getOffset());
-			INode previousNode = NodeModelUtils.getLastCompleteNodeByOffset(rootNode, lastCompleteNode.getOffset());
+			INode previousNode = getLastCompleteNodeByOffset(rootNode, lastCompleteNode.getOffset());
 			EObject previousModel = previousNode.getSemanticElement();
 			INode currentDatatypeNode = getContainingDatatypeRuleNode(currentNode);
 			Collection<FollowElement> followElements = parser.getFollowElements(completeInput);
@@ -206,7 +207,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			String prefix = getPrefix(datatypeNode);
 			String completeInput = viewer.getDocument().get(0, datatypeNode.getOffset());
 			Collection<FollowElement> followElements = parser.getFollowElements(completeInput);
-			INode lastCompleteNodeBeforeDatatype = NodeModelUtils.getLastCompleteNodeByOffset(rootNode, datatypeNode.getTotalOffset());
+			INode lastCompleteNodeBeforeDatatype = getLastCompleteNodeByOffset(rootNode, datatypeNode.getTotalOffset());
 			doCreateContexts(lastCompleteNodeBeforeDatatype, datatypeNode, prefix, currentModel, followElements);
 		}
 		
@@ -451,6 +452,23 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			if (rule == null)
 				throw new IllegalStateException();
 			return rule;
+		}
+		
+		protected INode getLastCompleteNodeByOffset(INode node, int offsetPosition) {
+			BidiTreeIterator<INode> iterator = node.getRootNode().iterator();
+			INode result = node;
+			while (iterator.hasNext()) {
+				INode candidate = iterator.next();
+				if (candidate.getOffset() >= offsetPosition ) {
+					break;
+				} else if ((candidate instanceof ILeafNode || null == result) &&
+						   (candidate.getGrammarElement() == null ||
+								   candidate.getGrammarElement() instanceof AbstractElement ||
+								   candidate.getGrammarElement() instanceof ParserRule)) {
+					result = candidate;
+				}
+			}
+			return result;
 		}
 	}
 
