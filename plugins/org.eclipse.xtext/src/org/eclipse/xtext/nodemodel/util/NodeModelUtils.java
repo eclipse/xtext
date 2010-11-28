@@ -13,11 +13,12 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -27,10 +28,18 @@ import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 import com.google.inject.internal.Lists;
 
 /**
+ * The NodeModelUtils are a collection of useful methods when dealing with the node model
+ * directly. They encapsulate the default construction semantics of the node model as it
+ * is created by the parser.
+ *  
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class NodeModelUtils {
 
+	/**
+	 * Find the leaf node at the given offset. May return <code>null</code> if the given
+	 * offset is not valid for the node (sub-)tree.
+	 */
 	public static ILeafNode findLeafNodeAtOffset(INode node, int leafNodeOffset) {
 		int offset = node.getTotalOffset();
 		int length = node.getTotalLength();
@@ -75,6 +84,11 @@ public class NodeModelUtils {
 		return false;
 	}
 
+	/**
+	 * @return the node that is directly associated with the given object by means of an
+	 * EMF-Adapter.
+	 * @see NodeModelUtils#findActualNodeFor(EObject) 
+	 */
 	public static ICompositeNode getNode(EObject object) {
 		if (object == null)
 			return null;
@@ -85,17 +99,18 @@ public class NodeModelUtils {
 		return null;
 	}
 	
-	public static List<INode> findNodesForFeature(EObject semanticElement, EStructuralFeature structuralFeature) {
-		ICompositeNode node = getNode(semanticElement);
+	/**
+	 * @return the list of nodes that were used to assign values to the given feature for
+	 * the given object.
+	 */
+	public static List<INode> findNodesForFeature(EObject semanticObject, EStructuralFeature structuralFeature) {
+		ICompositeNode node = findActualNodeFor(semanticObject);
 		if (node != null) {
-			while (node.getParent() != null && !node.getParent().hasDirectSemanticElement()) {
-				node = node.getParent();
-			}
-			return findNodesForFeature(semanticElement, node, structuralFeature);
+			return findNodesForFeature(semanticObject, node, structuralFeature);
 		}
 		return Collections.emptyList();
 	}
-
+	
 	private static List<INode> findNodesForFeature(EObject semanticElement, INode node,	EStructuralFeature structuralFeature) {
 		List<INode> result = Lists.newArrayList();
 		String featureName = structuralFeature.getName();
@@ -103,58 +118,81 @@ public class NodeModelUtils {
 		while(iterator.hasNext()) {
 			INode child = iterator.next();
 			EObject grammarElement  = child.getGrammarElement();
-			if (grammarElement instanceof Action) {
-				Action action = (Action) grammarElement;
-				child = iterator.next();
-				if (featureName.equals(action.getFeature())) {
-					result.add(child);
-				}
-				iterator.prune();
-			} else if (child != node) {
-				Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
-				if (assignment != null) {
-					if (featureName.equals(assignment.getFeature())) {
+			if (grammarElement != null) {
+				if (grammarElement instanceof Action) {
+					Action action = (Action) grammarElement;
+					child = iterator.next();
+					if (featureName.equals(action.getFeature())) {
 						result.add(child);
 					}
 					iterator.prune();
-				} 
-			}
-		}
-//		EObject grammarElement = node.getGrammarElement();
-//		if (grammarElement != null) { // error node?
-//			Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
-//			if (assignment != null && assignment.getFeature().equals(structuralFeature.getName())) {
-//				result.add(node);
-//			} else {
-//				if (node instanceof ICompositeNode) {
-//					if (!node.hasDirectSemanticElement() || node.getSemanticElement()==semanticElement) {
-//						ICompositeNode composite = (ICompositeNode) node;
-//						// check whether it's the same element
-//						for (INode child : composite.getChildren()) {
-//							result.addAll(findNodesForFeature(semanticElement, child, structuralFeature));
-//						}
-//					}
-//				}
-//			}
-//		}
-		return result;
-	}
-	
-	public static final INode getLastCompleteNodeByOffset(INode node, int offsetPosition) {
-		BidiTreeIterator<INode> iterator = node.getRootNode().iterator();
-		INode result = node;
-		while (iterator.hasNext()) {
-			INode candidate = iterator.next();
-			if (candidate.getOffset() >= offsetPosition ) {
-				break;
-			} else if ((candidate instanceof ILeafNode || null == result) &&
-					   (candidate.getGrammarElement() == null ||
-							   candidate.getGrammarElement() instanceof AbstractElement ||
-							   candidate.getGrammarElement() instanceof ParserRule)) {
-				result = candidate;
+				} else if (child != node) {
+					Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
+					if (assignment != null) {
+						if (featureName.equals(assignment.getFeature())) {
+							result.add(child);
+						}
+						iterator.prune();
+					} 
+				}
 			}
 		}
 		return result;
 	}
 	
+	/**
+	 * @return the node that covers all assigned values of the given object. It handles {@link Action Actions}
+	 * and {@link RuleCall unassigned rule calls}.
+	 */
+	public static ICompositeNode findActualNodeFor(EObject semanticObject) {
+		ICompositeNode node = getNode(semanticObject);
+		if (node != null) {
+			while (node.getParent() != null && !node.getParent().hasDirectSemanticElement()) {
+				node = node.getParent();
+			}
+		}
+		return node;
+	}
+	
+	/**
+	 * @return the semantic object that is really associated with the actual container node of the given node.
+	 * It handles {@link Action Actions} and {@link RuleCall unassigned rule calls}. 
+	 */
+	public static EObject findActualSemanticObjectFor(INode node) {
+		if (node.hasDirectSemanticElement())
+			return node.getSemanticElement();
+		EObject grammarElement = node.getGrammarElement();
+		if (grammarElement == null)
+			return findActualSemanticObjectFor(node.getParent());
+		Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
+		if (assignment != null) {
+			return findActualSemanticObjectFor(node.getParent());
+		} else {
+			AbstractRule rule = null;
+			if (grammarElement instanceof RuleCall) {
+				rule = ((RuleCall) grammarElement).getRule();
+			} else if (grammarElement instanceof AbstractRule) {
+				rule = (AbstractRule) grammarElement;
+			}
+			if (rule instanceof ParserRule && !GrammarUtil.isDatatypeRule(rule)) {
+				if (node instanceof ICompositeNode) {
+					for(INode child: ((ICompositeNode) node).getChildren()) {
+						if (child instanceof ICompositeNode) {
+							EObject childGrammarElement = child.getGrammarElement();
+							if (childGrammarElement instanceof Action) {
+								return findActualSemanticObjectFor(child);
+							} else if (childGrammarElement instanceof RuleCall) {
+								RuleCall childRuleCall = (RuleCall) childGrammarElement;
+								if (childRuleCall.getRule() instanceof ParserRule && !GrammarUtil.isDatatypeRule(childRuleCall.getRule())) {
+									return findActualSemanticObjectFor(child);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return findActualSemanticObjectFor(node.getParent());
+	}
+
 }
