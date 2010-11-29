@@ -11,18 +11,14 @@ package org.eclipse.xtext.resource;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreSwitch;
-import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -47,7 +43,7 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 	}
 
 	protected ITextRegion getTextRegion(EObject obj, boolean isSignificant) {
-		ICompositeNode node = NodeModelUtils.getNode(obj);
+		ICompositeNode node = NodeModelUtils.findActualNodeFor(obj);
 		if (node == null) {
 			if (obj.eContainer() == null)
 				return ITextRegion.EMPTY_REGION;
@@ -107,37 +103,20 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 
 	protected ITextRegion getLocationOfCrossReference(EObject owner, EReference reference, int indexInList,
 			boolean isSignificant) {
-		ICompositeNode parserNode = NodeModelUtils.getNode(owner);
-		if (parserNode != null) {
-			int currentIndex = 0;
-			for (TreeIterator<INode> childrenIterator = parserNode.iterator(); childrenIterator.hasNext();) {
-				INode ownerChildNode = childrenIterator.next();
-				EObject grammarElement = ownerChildNode.getGrammarElement();
-				if (grammarElement instanceof CrossReference) {
-					EReference crossReference2 = GrammarUtil.getReference((CrossReference) grammarElement,
-							owner.eClass());
-					if (reference == crossReference2) {
-						if (currentIndex == indexInList || !reference.isMany()) {
-							return new TextRegion(ownerChildNode.getOffset(), ownerChildNode.getLength());
-						}
-						++currentIndex;
-					}
-					childrenIterator.prune();
-				}
-				if (grammarElement instanceof TypeRef || grammarElement instanceof RuleCall) {
-					if (ownerChildNode != parserNode)
-						childrenIterator.prune();
-				}
-			}
-			return getTextRegion(owner, isSignificant);
-		}
-		return null;
+		return doGetLocationOfFeature(owner, reference, indexInList, isSignificant);
 	}
 
 	protected ITextRegion getLocationOfAttribute(EObject owner, EAttribute attribute, int indexInList,
 			boolean isSignificant) {
+		return doGetLocationOfFeature(owner, attribute, indexInList, isSignificant);
+	}
+
+	protected ITextRegion doGetLocationOfFeature(EObject owner, EStructuralFeature feature, int indexInList,
+			boolean isSignificant) {
+		if (!feature.isMany())
+			indexInList = 0;
 		if (indexInList >= 0) {
-			List<INode> findNodesForFeature = NodeModelUtils.findNodesForFeature(owner, attribute);
+			List<INode> findNodesForFeature = NodeModelUtils.findNodesForFeature(owner, feature);
 			if (indexInList < findNodesForFeature.size()) {
 				INode node = findNodesForFeature.get(indexInList);
 				return new TextRegion(node.getOffset(), node.getLength());

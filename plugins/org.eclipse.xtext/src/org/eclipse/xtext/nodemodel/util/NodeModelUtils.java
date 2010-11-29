@@ -126,6 +126,19 @@ public class NodeModelUtils {
 						if (featureName.equals(action.getFeature())) {
 							result.add(child);
 						}
+					} else {
+						// navigate the action's left side (first child) until we find an assignment (a rule call)
+						// the assignment will tell us about the feature to which we assigned
+						// the semantic object that has been created by the action
+						INode firstChild = ((ICompositeNode)child).getFirstChild();
+						while(firstChild.getGrammarElement() instanceof Action) {
+							firstChild = ((ICompositeNode)firstChild).getFirstChild();
+						}
+						EObject firstChildGrammarElement = firstChild.getGrammarElement();
+						Assignment assignment = GrammarUtil.containingAssignment(firstChildGrammarElement);
+						if (assignment != null && featureName.equals(assignment.getFeature())) {
+							result.add(child);
+						}
 					}
 					iterator.prune();
 				} else if (child != node) {
