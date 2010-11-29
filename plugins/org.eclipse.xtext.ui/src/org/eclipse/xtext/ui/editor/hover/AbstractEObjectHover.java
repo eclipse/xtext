@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.Region;
+import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
@@ -97,7 +98,9 @@ public abstract class AbstractEObjectHover extends AbstractHover {
 			EObject o = eObjectAtOffsetHelper.resolveElementAt(resource, offset);
 			if (o != null) {
 				ITextRegion region = locationInFileProvider.getSignificantTextRegion(o);
-				return Tuples.create(o, (IRegion) new Region(region.getOffset(), region.getLength()));
+				final IRegion region2 = new Region(region.getOffset(), region.getLength());
+				if (TextUtilities.overlaps(region2, new Region(offset, 0)))
+					return Tuples.create(o, region2);
 			}
 		}
 		return null;
