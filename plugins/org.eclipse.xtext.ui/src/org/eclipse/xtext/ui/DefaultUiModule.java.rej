@@ -1,0 +1,19 @@
+diff a/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/DefaultUiModule.java b/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/DefaultUiModule.java	(rejected hunks)
+@@ -287,5 +297,17 @@ public class DefaultUiModule extends AbstractGenericModule {
+ 		return XtextResourceSetProvider.class;
+ 	}
+ 
++	public Class<? extends IAnnotationHover> bindAnnotationHover () {
++		return ProblemHover.class;		
++	}
+ 	
++	public void configureTextHover(com.google.inject.Binder binder) {
++		binder.bind(ITextHover.class).to(DelegatingHover.class);
++		binder.bind(ITextHover.class).annotatedWith(com.google.inject.name.Names.named(DelegatingHover.PRIORITY_HOVER)).to(AnnotationWithQuickFixesHover.class);
++		binder.bind(ITextHover.class).annotatedWith(com.google.inject.name.Names.named(DelegatingHover.DEFAULT_HOVER)).to(XtextHtmlHover.class);
++	}
++	
++	public Class<? extends IHtmlHoverContentProvider> bindHtmlHoverContentProvider () {
++		return DefaultHtmlHoverContentProvider.class;
++	}
+ }

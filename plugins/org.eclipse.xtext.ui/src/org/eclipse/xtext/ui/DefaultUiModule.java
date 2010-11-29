@@ -21,6 +21,7 @@ import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.rules.IPartitionTokenScanner;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.source.DefaultCharacterPairMatcher;
+import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.jface.text.templates.persistence.TemplateStore;
@@ -28,6 +29,8 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
+import org.eclipse.xtext.documentation.impl.MutiLineCommentDocumentationProvider;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IExternalContentSupport;
@@ -54,6 +57,9 @@ import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.formatting.ContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.formatting.PreferenceStoreIndentationInformation;
+import org.eclipse.xtext.ui.editor.hover.DefaultCompositeHover;
+import org.eclipse.xtext.ui.editor.hover.ProblemAnnotationHover;
+import org.eclipse.xtext.ui.editor.hover.html.HtmlEObjectDocumentationProviderDecorator;
 import org.eclipse.xtext.ui.editor.hyperlinking.DefaultHyperlinkDetector;
 import org.eclipse.xtext.ui.editor.model.DocumentPartitioner;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
@@ -278,6 +284,12 @@ public class DefaultUiModule extends AbstractGenericModule {
 	public void configureUiEncodingProvider(Binder binder) {
 		binder.bind(IEncodingProvider.class).annotatedWith(DispatchingProvider.Ui.class)
 				.to(WorkspaceEncodingProvider.class);
+	}	
+	
+	public void configureDefaultHtmlEObjectDocumentationProvider(Binder binder) {
+		binder.bind(IEObjectDocumentationProvider.class).annotatedWith
+		(Names.named(HtmlEObjectDocumentationProviderDecorator.DELEGATE))
+		.to(MutiLineCommentDocumentationProvider.class);		
 	}
 
 	public Class<? extends IAllContainersState.Provider> bindIAllContainersState$Provider() {
@@ -290,6 +302,18 @@ public class DefaultUiModule extends AbstractGenericModule {
 
 	public Class<? extends IResourceSetProvider> bindIResourceSetProvider() {
 		return XtextResourceSetProvider.class;
+	}
+
+	public Class<? extends IAnnotationHover> bindIAnnotationHover () {
+		return ProblemAnnotationHover.class;		
+	}
+		 
+	public Class<? extends org.eclipse.jface.text.ITextHover> bindITextHover() {
+		return DefaultCompositeHover.class;
+	}
+			
+	public Class<? extends IEObjectDocumentationProvider> bindIEObjectDocumentationProvider () {
+		return HtmlEObjectDocumentationProviderDecorator.class;
 	}
 
 }

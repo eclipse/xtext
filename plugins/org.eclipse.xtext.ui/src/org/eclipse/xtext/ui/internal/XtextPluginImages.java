@@ -100,6 +100,9 @@ public class XtextPluginImages {
 	public static final ImageDescriptor DESC_EXPAND_ALL = create(PATH_LCL, "expandall.gif");
 	public static final ImageDescriptor DESC_COLLAPSE_ALL = create(PATH_LCL, "collapseall.gif");
 	
+	public static final ImageDescriptor DESC_OPEN_DECLARATION = create(PATH_LCL, "goto_input.gif");
+	public static final ImageDescriptor DESC_OPEN_DECLARATION_DISABLED = create(PATH_LCL_DISABLED, "goto_input.gif");
+	
 	/**
 	 * WIZ
 	 */

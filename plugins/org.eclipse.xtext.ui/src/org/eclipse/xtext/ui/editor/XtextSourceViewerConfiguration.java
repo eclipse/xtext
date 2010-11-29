@@ -29,7 +29,6 @@ import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.contentassist.IContentAssistantFactory;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
-import org.eclipse.xtext.ui.editor.hover.ProblemHover;
 import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper;
 import org.eclipse.xtext.ui.editor.quickfix.XtextQuickAssistAssistant;
 import org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper;
@@ -72,14 +71,28 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	@Inject
 	private ITokenTypeToPartitionTypeMapper partitionTypesMapper;
 	
+	@Inject
+	private Provider<IAnnotationHover> annotationHoverProvider;
+
+	@Inject
+	private Provider<ITextHover> textHoverProvider;
+	
 	@Override
 	public IAnnotationHover getAnnotationHover(ISourceViewer sourceViewer) {
-		return new ProblemHover(sourceViewer);
+		IAnnotationHover hover = annotationHoverProvider.get();
+		if (hover instanceof ISourceViewerAware) {
+			((ISourceViewerAware) hover).setSourceViewer(sourceViewer);
+		}
+		return hover;
 	}
 	
 	@Override
 	public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType) {
-		return new ProblemHover(sourceViewer);
+		ITextHover hover = textHoverProvider.get();
+		if (hover instanceof ISourceViewerAware) {
+			((ISourceViewerAware) hover).setSourceViewer(sourceViewer);
+		}
+		return hover;
 	}
 
 	@Inject(optional = true)

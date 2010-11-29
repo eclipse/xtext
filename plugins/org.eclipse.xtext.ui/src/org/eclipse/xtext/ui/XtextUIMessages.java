@@ -20,7 +20,7 @@ import com.ibm.icu.text.MessageFormat;
  * Singleton for all message bundle classes used from within
  * <i>org.eclipse.xtext.ui</i>.
  * 
- * @author Dennis Hübner - Initial contribution and API
+ * @author Dennis H¸bner - Initial contribution and API
  * @author Michael Clay
  * @see org.eclipse.osgi.util.NLS
  * 
@@ -87,4 +87,16 @@ public class XtextUIMessages extends NLS {
 	public static String ToggleLinkWithEditorAction_description;
 	public static String ToggleLinkWithEditorAction_label;
 	public static String ToggleLinkWithEditorAction_toolTip;
+	
+	/**
+	 * messages for hover
+	 */
+	public static String XtextBrowserInformationControlInput_Back;
+	public static String XtextBrowserInformationControlInput_BackTo;
+	public static String XtextBrowserInformationControlInput_Forward;
+	public static String XtextBrowserInformationControlInput_ForwardTo;
+	public static String XtextBrowserInformationControlInput_OpenDeclaration;
+	public static String AnnotationWithQuickFixesHover_message_singleQuickFix;
+	public static String AnnotationWithQuickFixesHover_message_multipleQuickFix;
+
 }

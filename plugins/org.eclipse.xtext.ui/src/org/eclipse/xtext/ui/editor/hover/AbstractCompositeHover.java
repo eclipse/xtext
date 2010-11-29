@@ -1,0 +1,109 @@
+/*******************************************************************************
+ * Copyright (c) 2010 Christoph Kulla
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *   Christoph Kulla - Initial API and implementation
+ *******************************************************************************/
+package org.eclipse.xtext.ui.editor.hover;
+
+import java.util.List;
+
+import org.eclipse.jface.text.IInformationControlCreator;
+import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.ITextHover;
+import org.eclipse.jface.text.ITextHoverExtension;
+import org.eclipse.jface.text.ITextHoverExtension2;
+import org.eclipse.jface.text.ITextViewer;
+import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.xtext.ui.editor.ISourceViewerAware;
+
+/**
+ * The CompositeHover is a hover which delegates calls to a list of hovers. It iterates through this list of hovers and
+ * chooses the first one which provides a region in getHoverRegion(). Override the method createHovers() to configure
+ * the list of hovers.
+ * 
+ * @author Christoph Kulla - Initial contribution and API
+ */
+public abstract class AbstractCompositeHover implements ITextHover, ITextHoverExtension, ITextHoverExtension2,
+		ISourceViewerAware {
+
+	private List<ITextHover> hovers;
+	private ITextHover currentHover;
+
+	public AbstractCompositeHover() {
+		super();
+	}
+
+	public List<ITextHover> getHovers() {
+		if (hovers == null)
+			hovers = createHovers();
+		return hovers;
+	}
+
+	abstract protected List<ITextHover> createHovers();
+
+	public void setSourceViewer(ISourceViewer sourceViewer) {
+		if (getHovers() != null) {
+			for (ITextHover hover : getHovers()) {
+				if (hover instanceof ISourceViewerAware)
+					((ISourceViewerAware) hover).setSourceViewer(sourceViewer);
+			}
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	public IRegion getHoverRegion(ITextViewer textViewer, int offset) {
+		if (getHovers() != null) {
+			for (ITextHover hover : getHovers()) {
+				IRegion region = hover.getHoverRegion(textViewer, offset);
+				if (region != null) {
+
+					Object hoverInfo = null;
+					if (hover instanceof ITextHoverExtension2)
+						hoverInfo = ((ITextHoverExtension2) hover).getHoverInfo2(textViewer, region);
+					else {
+						hoverInfo = hover.getHoverInfo(textViewer, region);
+					}
+					if (hoverInfo != null && !(hoverInfo instanceof String && ((String) hoverInfo).length() == 0)) {
+						currentHover = hover;
+						return region;
+					}
+				}
+			}
+		}
+		currentHover = null;
+		return null;
+	}
+
+	@Deprecated
+	public String getHoverInfo(ITextViewer textViewer, IRegion hoverRegion) {
+		// should never be called
+		if (currentHover != null) {
+			return currentHover.getHoverInfo(textViewer, hoverRegion);
+		}
+		return null;
+	}
+
+	@SuppressWarnings("deprecation")
+	public Object getHoverInfo2(ITextViewer textViewer, IRegion hoverRegion) {
+		if (currentHover != null) {
+			if (currentHover instanceof ITextHoverExtension2)
+				return ((ITextHoverExtension2) currentHover).getHoverInfo2(textViewer, hoverRegion);
+			else {
+				return currentHover.getHoverInfo(textViewer, hoverRegion);
+			}
+		}
+		return null;
+	}
+
+	public IInformationControlCreator getHoverControlCreator() {
+		if (currentHover instanceof ITextHoverExtension)
+			return ((ITextHoverExtension) currentHover).getHoverControlCreator();
+		return null;
+	}
+
+}
