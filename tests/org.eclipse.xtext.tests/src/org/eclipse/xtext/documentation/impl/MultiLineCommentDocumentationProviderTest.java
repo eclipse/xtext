@@ -62,7 +62,7 @@ public class MultiLineCommentDocumentationProviderTest extends AbstractXtextTest
 				"* " + expectedDocumentation + "\n" +
 				"*/\n" +
 				"element A;");
-		assertEquals ("", documentation);
+		assertEquals (expectedDocumentation, documentation);
 	}
 	
 	public void testRect() throws Exception {
@@ -123,7 +123,7 @@ public class MultiLineCommentDocumentationProviderTest extends AbstractXtextTest
 			"*/\n" +
 			"/* */" +
 			document);
-		assertEquals (expectedDocumentation, documentation);
+		assertEquals ("", documentation);
 	}
 	
 	public void testNoComment() throws Exception {

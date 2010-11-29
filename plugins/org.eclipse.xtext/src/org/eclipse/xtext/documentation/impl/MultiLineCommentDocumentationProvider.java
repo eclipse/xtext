@@ -39,7 +39,7 @@ public class MultiLineCommentDocumentationProvider implements IEObjectDocumentat
 
 	@Inject(optional = true)
 	@Named(START_TAG)
-	String startTag = "/\\*"; // regular expression
+	String startTag = "/\\*\\*?"; // regular expression
 
 	@Inject(optional = true)
 	@Named(END_TAG)
