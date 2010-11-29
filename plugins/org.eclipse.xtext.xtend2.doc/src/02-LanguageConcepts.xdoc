@@ -61,7 +61,7 @@ code[
 	inject org.eclipse.MyService myService;
 ]
 
-This will translate to Java as a corresponding import, a field as well a setter method annotated with @Inject: 
+This will translate to Java as a field as well a setter method annotated with @Inject: 
 
 code[Java][
 import org.eclipse.MyService;
@@ -106,8 +106,8 @@ code[
 
 section2[Injected Extension Methods]
 
-The code[extension] keyword is also available for code[inject] which is a much nicer than importing static methods, because you don't bind your code to 
-actual implementation, since the implementation can be easily changed through global dependency configuration.
+The code[extension] keyword is also available for code[inject] which is much nicer than importing static methods, because you don't bind your code to 
+actual implementation, since the implementation can be easily changed through the global dependency injection configuration (i.e. Guice modules).
 
 Example:
 
@@ -120,16 +120,16 @@ code[
 	inject extension my.common.IterableExtensions;
 ]  
 
-and can the use it as if those functions were members of any code[java.lang.Iterable]:
+and can then use it as if those functions were members of any code[java.lang.Iterable]:
 
 code[
 	myIterable.find(e|e.name=="Foo")
 ]
 
-The nice thing with using injection as opposed to static methods is, that in case there is a bug in the extension or it implemented inefficiently, 
+The nice thing with using injection as opposed to static methods is, that in case there is a bug in the extension or it is implemented inefficiently, 
 you can simply exchange the component with a better implementation, without modifying the library nor the client code. 
-You'll just have to change the binding in your guice module. Also this gives you a general hook for any AOP-like thing you would want to do, 
-or allows you to write agains an SPI, where the concrete implementation can be provided by a third party.
+You'll only have to change the binding in your guice module. Also this gives you a general hook for any AOP-like thing you would want to do, 
+or allows you to write against an SPI, where the concrete implementation can be provided by a third party.
 
 code[
 	ImportSection : (Import|Injection)*;
@@ -141,7 +141,7 @@ section:classDeclaration[Class Declaration]
 
 The class declaration reuses a lot of Java's syntax but still is a bit different in some aspects.
 Firstly the default visibility of any class is code[public]. It is possible to write it explicitly but if not specified it defaults to public.
-The code[package private] visibility does not exist.
+Java's default "package private" visibility does not exist.
 
 The code[abstract] as well as the code[final] modifiers are directly translated to Java, hence have the exact same meaning.
 
@@ -358,29 +358,6 @@ section3:RichStringType[Typing]
 
 The rich string is translated to an efficient string concatenation and the return type of a rich string is code[java.lang.CharStream] which allows
 much room for efficient implementation.
-
-section2:collectShortcut[Shortcut navigation through lists]
-
-In Xtend2 one usually navigates over graphs which contain a lot of collections. If you for instance need the qualified name of
-the interfaces a type is extending you could write the following using closures:
-
-code[
-	myType.interfaces.collect(e|e.qualifiedName)
-]
-
-However because this situation is so common Xtend2 provides a special sugared expression for that.
-So instead of the code above you can write:
-
-code[
-	myType.interfaces.*qualifiedName
-]
-
-Note that we decided to come up with an explicit operator (.*) because overloading the '.' operator as it is the case in Xpand,
-has caused a lot of surprises in the past. With an explicit operator the tooling as well as the user always can distinct whether you
-invoke a feature on the iterables elements or on the iterable itself.
-
-The operator works on all members of code[java.lang.Iterable]. the return type is always an code[java.lang.Iterable<T>] where code[T]
-is the return type of the called feature.
 
 section2:extensionMethods[Extension Method Syntax]
 

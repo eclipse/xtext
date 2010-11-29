@@ -228,7 +228,7 @@ inject&nbsp;org.eclipse.MyService&nbsp;myService;<br />
 </p>
 
 <p>
-This will translate to Java as a corresponding import, a field as well a setter method annotated with @Inject: 
+This will translate to Java as a field as well a setter method annotated with @Inject: 
 </p>
 
 <p>
@@ -362,8 +362,8 @@ Injected Extension Methods
 <p>
 The <span class="inlinecode">extension</span>
  keyword is also available for <span class="inlinecode">inject</span>
- which is a much nicer than importing static methods, because you don&apos;t bind your code to 
-actual implementation, since the implementation can be easily changed through global dependency configuration.
+ which is much nicer than importing static methods, because you don&apos;t bind your code to 
+actual implementation, since the implementation can be easily changed through the global dependency injection configuration (i.e. Guice modules).
 </p>
 
 <p>
@@ -393,7 +393,7 @@ inject&nbsp;extension&nbsp;my.common.IterableExtensions;<br />
 </p>
 
 <p>
-and can the use it as if those functions were members of any <span class="inlinecode">java.lang.Iterable</span>
+and can then use it as if those functions were members of any <span class="inlinecode">java.lang.Iterable</span>
 :
 </p>
 
@@ -411,10 +411,10 @@ myIterable.find(e|e.name==&quot;Foo&quot;)<br />
 </p>
 
 <p>
-The nice thing with using injection as opposed to static methods is, that in case there is a bug in the extension or it implemented inefficiently, 
+The nice thing with using injection as opposed to static methods is, that in case there is a bug in the extension or it is implemented inefficiently, 
 you can simply exchange the component with a better implementation, without modifying the library nor the client code. 
-You&apos;ll just have to change the binding in your guice module. Also this gives you a general hook for any AOP-like thing you would want to do, 
-or allows you to write agains an SPI, where the concrete implementation can be provided by a third party.
+You&apos;ll only have to change the binding in your guice module. Also this gives you a general hook for any AOP-like thing you would want to do, 
+or allows you to write against an SPI, where the concrete implementation can be provided by a third party.
 </p>
 
 <p>
@@ -455,8 +455,7 @@ Class Declaration
 The class declaration reuses a lot of Java&apos;s syntax but still is a bit different in some aspects.
 Firstly the default visibility of any class is <span class="inlinecode">public</span>
 . It is possible to write it explicitly but if not specified it defaults to public.
-The <span class="inlinecode">package&nbsp;private</span>
- visibility does not exist.
+Java&apos;s default &quot;package private&quot; visibility does not exist.
 </p>
 
 <p>
@@ -1071,75 +1070,6 @@ much room for efficient implementation.
 
 
 </div>
-
-</div>
-
-<a name="collectShortcut"></a>
-
-<a name="collectShortcut"></a>
-<div class="section" title="Shortcut navigation through lists">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Shortcut navigation through lists
-</h3>
-</div>
-</div>
-</div>
-
-
-
-<p>
-In Xtend2 one usually navigates over graphs which contain a lot of collections. If you for instance need the qualified name of
-the interfaces a type is extending you could write the following using closures:
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-myType.interfaces.collect(e|e.qualifiedName)<br />
-</p>
-</div>
-</div>
-
-
-</p>
-
-<p>
-However because this situation is so common Xtend2 provides a special sugared expression for that.
-So instead of the code above you can write:
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-myType.interfaces.*qualifiedName<br />
-</p>
-</div>
-</div>
-
-
-</p>
-
-<p>
-Note that we decided to come up with an explicit operator (.*) because overloading the &apos;.&apos; operator as it is the case in Xpand,
-has caused a lot of surprises in the past. With an explicit operator the tooling as well as the user always can distinct whether you
-invoke a feature on the iterables elements or on the iterable itself.
-</p>
-
-<p>
-The operator works on all members of <span class="inlinecode">java.lang.Iterable</span>
-. the return type is always an <span class="inlinecode">java.lang.Iterable&lt;T&gt;</span>
- where <span class="inlinecode">T</span>
-
-is the return type of the called feature.
-</p>
-
 
 </div>
 
