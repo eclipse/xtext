@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.ui;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
@@ -63,5 +64,15 @@ public class XtextLocationInFileProviderTest extends AbstractXtextTests {
 		ITextRegion region = locationInFileProvider.getSignificantTextRegion(body, XtextPackage.Literals.ABSTRACT_ELEMENT__CARDINALITY, 0);
 		String cardinality = grammarText.substring(region.getOffset(), region.getOffset() + region.getLength());
 		assertEquals("*", cardinality);
+	}
+	
+	public void testKeywordLocation() {
+		Keyword keyword = (Keyword) grammar.getRules().get(0).getAlternatives();
+		ITextRegion region = locationInFileProvider.getFullTextRegion(keyword);
+		String fullRegion = grammarText.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals("'keyword'*", fullRegion);
+		region = locationInFileProvider.getSignificantTextRegion(keyword);
+		String significantRegion = grammarText.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals("'keyword'*", significantRegion);
 	}
 }
