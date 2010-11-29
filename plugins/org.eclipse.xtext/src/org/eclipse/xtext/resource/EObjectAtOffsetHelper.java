@@ -61,7 +61,7 @@ public class EObjectAtOffsetHelper {
 			List<?> listValue = (List<?>) referenceOwner.eGet(crossReference);
 			ICompositeNode ownerNode = NodeModelUtils.getNode(referenceOwner);
 			int currentIndex = 0;
-			for (TreeIterator<INode> childrenIterator = ownerNode.iterator(); childrenIterator.hasNext();) {
+			for (TreeIterator<INode> childrenIterator = ownerNode.getAsTreeIterable().iterator(); childrenIterator.hasNext();) {
 				INode ownerChildNode = childrenIterator.next();
 				if (ownerChildNode == node) {
 					return (EObject) listValue.get(currentIndex);

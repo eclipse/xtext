@@ -26,7 +26,7 @@ import org.eclipse.xtext.nodemodel.util.SingletonBidiIterable;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class SyntheticCompositeNode implements ICompositeNode {
+public class SyntheticCompositeNode implements ICompositeNode, BidiTreeIterable<INode> {
 
 	private final CompositeNode delegate;
 	private final int grammarElementIdx;
@@ -121,6 +121,10 @@ public class SyntheticCompositeNode implements ICompositeNode {
 
 	public SyntaxErrorMessage getSyntaxErrorMessage() {
 		return null;
+	}
+	
+	public BidiTreeIterable<INode> getAsTreeIterable() {
+		return this;
 	}
 
 	public BidiTreeIterator<INode> iterator() {

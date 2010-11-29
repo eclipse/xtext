@@ -373,7 +373,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	}
 	
 	protected INode getLastLeafNode() {
-		BidiTreeIterator<INode> iter = currentNode.iterator();
+		BidiTreeIterator<INode> iter = currentNode.getAsTreeIterable().iterator();
 		while(iter.hasPrevious()) {
 			INode previous = iter.previous();
 			if (previous instanceof ILeafNode)

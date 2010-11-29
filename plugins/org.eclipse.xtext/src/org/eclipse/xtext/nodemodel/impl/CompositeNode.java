@@ -78,7 +78,7 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 			return sibling.getTotalOffset();
 		}
 		// expensive fallback - should never happen in a valid node model
-		BidiTreeIterator<INode> iter = getRootNode().iterator();
+		BidiTreeIterator<INode> iter = getRootNode().getAsTreeIterable().iterator();
 		ILeafNode lastSeen = null;
 		while(iter.hasNext()) {
 			INode next = iter.next();

@@ -72,7 +72,7 @@ public class Range {
 			// first syntax error
 			boolean errorSeen = false;
 			{
-				BidiTreeIterator<INode> iterator = node.iterator();
+				BidiTreeIterator<INode> iterator = node.getAsTreeIterable().iterator();
 				while(!errorSeen && iterator.hasNext()) {
 					INode next = iterator.next();
 					if (next.getSyntaxErrorMessage() != null) {
@@ -83,7 +83,7 @@ public class Range {
 			}
 			// last syntax error
 			if (errorSeen) {
-				BidiTreeIterator<INode> iterator = node.iterator();
+				BidiTreeIterator<INode> iterator = node.getAsTreeIterable().iterator();
 				errorSeen = false;
 				while(!errorSeen && iterator.hasPrevious()) {
 					INode prev = iterator.previous();

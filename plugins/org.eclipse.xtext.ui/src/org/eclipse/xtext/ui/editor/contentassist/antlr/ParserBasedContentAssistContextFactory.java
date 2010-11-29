@@ -455,7 +455,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		}
 		
 		protected INode getLastCompleteNodeByOffset(INode node, int offsetPosition) {
-			BidiTreeIterator<INode> iterator = node.getRootNode().iterator();
+			BidiTreeIterator<INode> iterator = node.getRootNode().getAsTreeIterable().iterator();
 			INode result = node;
 			while (iterator.hasNext()) {
 				INode candidate = iterator.next();
