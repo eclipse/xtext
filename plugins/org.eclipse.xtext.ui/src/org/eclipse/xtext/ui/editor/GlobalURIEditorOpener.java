@@ -32,6 +32,7 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
+import com.google.inject.internal.Nullable;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -49,7 +50,7 @@ public class GlobalURIEditorOpener implements IURIEditorOpener {
 	@Inject
 	private IStorage2UriMapper mapper;
 	
-	@Inject
+	@Inject @Nullable
 	private IWorkbench workbench;
 	
 	public IEditorPart open(URI uri, boolean select) {
@@ -115,15 +116,21 @@ public class GlobalURIEditorOpener implements IURIEditorOpener {
 	}
 
 	protected IEditorPart openDefaultEditor(IFile file) throws PartInitException {
-		IWorkbenchPage page = workbench.getActiveWorkbenchWindow().getActivePage();
+		IWorkbenchPage page = getWorkbench().getActiveWorkbenchWindow().getActivePage();
 		return IDE.openEditor(page, file);
 	}
 
+
 	protected IEditorPart openDefaultEditor(IStorage storage, URI uri) throws PartInitException {
 		XtextReadonlyEditorInput editorInput = new XtextReadonlyEditorInput(storage);
-		IWorkbenchPage page = workbench.getActiveWorkbenchWindow().getActivePage();
+		IWorkbenchPage page = getWorkbench().getActiveWorkbenchWindow().getActivePage();
 		return IDE.openEditor(page, editorInput, PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(
 				uri.lastSegment()).getId());
 	}
 	
+	protected IWorkbench getWorkbench() {
+		if (workbench==null)
+			throw new IllegalStateException("No workbench");
+		return workbench;
+	}
 }

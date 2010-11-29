@@ -63,8 +63,7 @@ import com.ibm.icu.text.MessageFormat;
 // IEObjectDocumentationProvider.
 
 /**
- * Provides Xtext documentation as hover info for model elements
- * (clone from JDT's JavadocHover).
+ * Provides Xtext documentation as hover info for model elements (clone from JDT's JavadocHover).
  * 
  * @author Christoph Kulla - Initial contribution and API
  */
@@ -73,10 +72,10 @@ public class XtextHtmlHover extends AbstractEObjectHover {
 
 	@Inject
 	private IGlobalServiceProvider serviceProvider;
-	
+
 	@Inject
 	private IURIEditorOpener uriEditorOpener;
-		
+
 	@Inject(optional = true)
 	@Named("org.eclipse.xtext.ui.editor.hover.XtextEditorHover.styleSheetFileName")
 	private String styleSheetFileName = "/XtextHoverStyleSheet.css"; //$NON-NLS-1$
@@ -84,10 +83,10 @@ public class XtextHtmlHover extends AbstractEObjectHover {
 	@Inject(optional = true)
 	@Named("org.eclipse.xtext.ui.editor.hover.XtextEditorHover.font")
 	private String fontSymbolicName = "org.eclipse.jdt.ui.javadocfont"; //$NON-NLS-1$ 
-	
+
 	@Inject
 	private XtextElementLinks elementLinks;
-	
+
 	private static String fgStyleSheet;
 
 	private IInformationControlCreator hoverControlCreator;
@@ -98,9 +97,9 @@ public class XtextHtmlHover extends AbstractEObjectHover {
 		private final BrowserInformationControl fInfoControl;
 
 		public BackAction(BrowserInformationControl infoControl) {
-			fInfoControl= infoControl;
+			fInfoControl = infoControl;
 			setText(XtextUIMessages.XtextBrowserInformationControlInput_Back);
-			ISharedImages images= PlatformUI.getWorkbench().getSharedImages();
+			ISharedImages images = PlatformUI.getWorkbench().getSharedImages();
 			setImageDescriptor(images.getImageDescriptor(ISharedImages.IMG_TOOL_BACK));
 			setDisabledImageDescriptor(images.getImageDescriptor(ISharedImages.IMG_TOOL_BACK_DISABLED));
 
@@ -109,18 +108,19 @@ public class XtextHtmlHover extends AbstractEObjectHover {
 
 		@Override
 		public void run() {
-			BrowserInformationControlInput previous= (BrowserInformationControlInput) fInfoControl.getInput().getPrevious();
+			BrowserInformationControlInput previous = (BrowserInformationControlInput) fInfoControl.getInput()
+					.getPrevious();
 			if (previous != null) {
 				fInfoControl.setInput(previous);
 			}
 		}
 
 		public void update() {
-			BrowserInformationControlInput current= fInfoControl.getInput();
+			BrowserInformationControlInput current = fInfoControl.getInput();
 
 			if (current != null && current.getPrevious() != null) {
-				BrowserInput previous= current.getPrevious();
-				setToolTipText(MessageFormat.format(XtextUIMessages.XtextBrowserInformationControlInput_BackTo,  
+				BrowserInput previous = current.getPrevious();
+				setToolTipText(MessageFormat.format(XtextUIMessages.XtextBrowserInformationControlInput_BackTo,
 						new Object[] { previous.getInputName() }));
 				setEnabled(true);
 			} else {
@@ -134,9 +134,9 @@ public class XtextHtmlHover extends AbstractEObjectHover {
 		private final BrowserInformationControl fInfoControl;
 
 		public ForwardAction(BrowserInformationControl infoControl) {
-			fInfoControl= infoControl;
+			fInfoControl = infoControl;
 			setText(XtextUIMessages.XtextBrowserInformationControlInput_Forward);
-			ISharedImages images= PlatformUI.getWorkbench().getSharedImages();
+			ISharedImages images = PlatformUI.getWorkbench().getSharedImages();
 			setImageDescriptor(images.getImageDescriptor(ISharedImages.IMG_TOOL_FORWARD));
 			setDisabledImageDescriptor(images.getImageDescriptor(ISharedImages.IMG_TOOL_FORWARD_DISABLED));
 
@@ -145,18 +145,18 @@ public class XtextHtmlHover extends AbstractEObjectHover {
 
 		@Override
 		public void run() {
-			BrowserInformationControlInput next= (BrowserInformationControlInput) fInfoControl.getInput().getNext();
+			BrowserInformationControlInput next = (BrowserInformationControlInput) fInfoControl.getInput().getNext();
 			if (next != null) {
 				fInfoControl.setInput(next);
 			}
 		}
 
 		public void update() {
-			BrowserInformationControlInput current= fInfoControl.getInput();
+			BrowserInformationControlInput current = fInfoControl.getInput();
 
 			if (current != null && current.getNext() != null) {
-				setToolTipText(MessageFormat.format(XtextUIMessages.XtextBrowserInformationControlInput_ForwardTo,  
-						new Object[] { current.getNext().getInputName()}));
+				setToolTipText(MessageFormat.format(XtextUIMessages.XtextBrowserInformationControlInput_ForwardTo,
+						new Object[] { current.getNext().getInputName() }));
 				setEnabled(true);
 			} else {
 				setToolTipText(XtextUIMessages.XtextBrowserInformationControlInput_Forward);
@@ -168,32 +168,32 @@ public class XtextHtmlHover extends AbstractEObjectHover {
 	// This part is responsible for display the hover content in the 
 	// JavaDoc view. A corresponding XtextDoc view is not available yet.
 	// Therefore this code is disabled for later use.
-	
-//	private static final class ShowInJavadocViewAction extends Action {
-//		private final BrowserInformationControl fInfoControl;
-//
-//		public ShowInJavadocViewAction(BrowserInformationControl infoControl) {
-//			fInfoControl= infoControl;
-//			setText(JavaHoverMessages.JavadocHover_showInJavadoc);
-//			setImageDescriptor(JavaPluginImages.DESC_OBJS_JAVADOCTAG); //TODO: better image
-//		}
-//
-//		/*
-//		 * @see org.eclipse.jface.action.Action#run()
-//		 */
-//		@Override
-//		public void run() {
-//			JavadocBrowserInformationControlInput infoInput= (JavadocBrowserInformationControlInput) fInfoControl.getInput(); //TODO: check cast
-//			fInfoControl.notifyDelayedInputChange(null);
-//			fInfoControl.dispose(); //FIXME: should have protocol to hide, rather than dispose
-//			try {
-//				JavadocView view= (JavadocView) JavaPlugin.getActivePage().showView(JavaUI.ID_JAVADOC_VIEW);
-//				view.setInput(infoInput);
-//			} catch (PartInitException e) {
-//				JavaPlugin.log(e);
-//			}
-//		}
-//	}
+
+	//	private static final class ShowInJavadocViewAction extends Action {
+	//		private final BrowserInformationControl fInfoControl;
+	//
+	//		public ShowInJavadocViewAction(BrowserInformationControl infoControl) {
+	//			fInfoControl= infoControl;
+	//			setText(JavaHoverMessages.JavadocHover_showInJavadoc);
+	//			setImageDescriptor(JavaPluginImages.DESC_OBJS_JAVADOCTAG); //TODO: better image
+	//		}
+	//
+	//		/*
+	//		 * @see org.eclipse.jface.action.Action#run()
+	//		 */
+	//		@Override
+	//		public void run() {
+	//			JavadocBrowserInformationControlInput infoInput= (JavadocBrowserInformationControlInput) fInfoControl.getInput(); //TODO: check cast
+	//			fInfoControl.notifyDelayedInputChange(null);
+	//			fInfoControl.dispose(); //FIXME: should have protocol to hide, rather than dispose
+	//			try {
+	//				JavadocView view= (JavadocView) JavaPlugin.getActivePage().showView(JavaUI.ID_JAVADOC_VIEW);
+	//				view.setInput(infoInput);
+	//			} catch (PartInitException e) {
+	//				JavaPlugin.log(e);
+	//			}
+	//		}
+	//	}
 
 	/**
 	 * Action that opens the current hover input element.
@@ -202,7 +202,7 @@ public class XtextHtmlHover extends AbstractEObjectHover {
 		private final BrowserInformationControl fInfoControl;
 
 		public OpenDeclarationAction(BrowserInformationControl infoControl) {
-			fInfoControl= infoControl;
+			fInfoControl = infoControl;
 			setText(XtextUIMessages.XtextBrowserInformationControlInput_OpenDeclaration);
 			setImageDescriptor(XtextPluginImages.DESC_OPEN_DECLARATION);
 			setDisabledImageDescriptor(XtextPluginImages.DESC_OPEN_DECLARATION_DISABLED);
@@ -214,36 +214,39 @@ public class XtextHtmlHover extends AbstractEObjectHover {
 		@Override
 		public void run() {
 			if (fInfoControl.getInput() instanceof XtextBrowserInformationControlInput) {
-				XtextBrowserInformationControlInput infoInput = (XtextBrowserInformationControlInput) fInfoControl.getInput();
+				XtextBrowserInformationControlInput infoInput = (XtextBrowserInformationControlInput) fInfoControl
+						.getInput();
 				fInfoControl.notifyDelayedInputChange(null);
 				fInfoControl.dispose();
-				uriEditorOpener.open (createURI(infoInput.getElement()), true);
+				if (uriEditorOpener != null)
+					uriEditorOpener.open(createURI(infoInput.getElement()), true);
 			}
-		}		
+		}
 	}
 
 	private org.eclipse.emf.common.util.URI createURI(EObject o) {
 		return o.eResource().getURI().appendFragment(o.eResource().getURIFragment(o));
 	}
-	
+
 	private void addLinkListener(final BrowserInformationControl control) {
 		control.addLocationListener(elementLinks.createLocationListener(new XtextElementLinks.ILinkHandler() {
 
 			public void handleXtextdocViewLink(URI linkTarget) {
 				// TODO: enable when XtextDoc view available
-//				control.notifyDelayedInputChange(null);
-//				control.setVisible(false);
-//				control.dispose(); //FIXME: should have protocol to hide, rather than dispose
-//				try {
-//					JavadocView view= (JavadocView) JavaPlugin.getActivePage().showView(JavaUI.ID_JAVADOC_VIEW);
-//					view.setInput(linkTarget);
-//				} catch (PartInitException e) {
-//					JavaPlugin.log(e);
-//				}
+				//				control.notifyDelayedInputChange(null);
+				//				control.setVisible(false);
+				//				control.dispose(); //FIXME: should have protocol to hide, rather than dispose
+				//				try {
+				//					JavadocView view= (JavadocView) JavaPlugin.getActivePage().showView(JavaUI.ID_JAVADOC_VIEW);
+				//					view.setInput(linkTarget);
+				//				} catch (PartInitException e) {
+				//					JavaPlugin.log(e);
+				//				}
 			}
 
 			public void handleInlineXtextdocLink(URI linkTarget) {
-				XtextBrowserInformationControlInput hoverInfo = getHoverInfo(getTarget(linkTarget), null, (XtextBrowserInformationControlInput) control.getInput());
+				XtextBrowserInformationControlInput hoverInfo = getHoverInfo(getTarget(linkTarget), null,
+						(XtextBrowserInformationControlInput) control.getInput());
 				if (control.hasDelayedInputChangeListener())
 					control.notifyDelayedInputChange(hoverInfo);
 				else
@@ -253,14 +256,14 @@ public class XtextHtmlHover extends AbstractEObjectHover {
 			public void handleDeclarationLink(URI linkTarget) {
 				control.notifyDelayedInputChange(null);
 				control.dispose(); //FIXME: should have protocol to hide, rather than dispose
-				uriEditorOpener.open (linkTarget, true);
-
+				if (uriEditorOpener != null)
+					uriEditorOpener.open(linkTarget, true);
 			}
 
 			public boolean handleExternalLink(URL url, Display display) {
 				control.notifyDelayedInputChange(null);
 				control.dispose(); //FIXME: should have protocol to hide, rather than dispose
-				
+
 				// open external links in real browser:
 				OpenBrowserUtil.openExternal(url, display);
 				return true;
@@ -268,14 +271,15 @@ public class XtextHtmlHover extends AbstractEObjectHover {
 
 			public void handleTextSet() {
 			}
-			
-			EObject getTarget (URI uri) {
-				ResourceSet rs = ((XtextBrowserInformationControlInput) control.getInput()).getElement().eResource().getResourceSet();
+
+			EObject getTarget(URI uri) {
+				ResourceSet rs = ((XtextBrowserInformationControlInput) control.getInput()).getElement().eResource()
+						.getResourceSet();
 				return rs.getEObject(uri, true);
 			}
 		}));
 	}
-	
+
 	public final class PresenterControlCreator extends AbstractReusableInformationControlCreator {
 
 		/*
@@ -284,36 +288,36 @@ public class XtextHtmlHover extends AbstractEObjectHover {
 		@Override
 		public IInformationControl doCreateInformationControl(Shell parent) {
 			if (BrowserInformationControl.isAvailable(parent)) {
-				ToolBarManager tbm= new ToolBarManager(SWT.FLAT);
+				ToolBarManager tbm = new ToolBarManager(SWT.FLAT);
 				String font = "org.eclipse.jdt.ui.javadocfont"; // FIXME: mPreferenceConstants.APPEARANCE_JAVADOC_FONT;
-				BrowserInformationControl iControl= new BrowserInformationControl(parent, font, tbm);
+				BrowserInformationControl iControl = new BrowserInformationControl(parent, font, tbm);
 
-				final BackAction backAction= new BackAction(iControl);
+				final BackAction backAction = new BackAction(iControl);
 				backAction.setEnabled(false);
 				tbm.add(backAction);
-				final ForwardAction forwardAction= new ForwardAction(iControl);
+				final ForwardAction forwardAction = new ForwardAction(iControl);
 				tbm.add(forwardAction);
 				forwardAction.setEnabled(false);
 
-//				final ShowInJavadocViewAction showInJavadocViewAction= new ShowInJavadocViewAction(iControl);
-//				tbm.add(showInJavadocViewAction);
-				final OpenDeclarationAction openDeclarationAction= new OpenDeclarationAction(iControl);
+				//				final ShowInJavadocViewAction showInJavadocViewAction= new ShowInJavadocViewAction(iControl);
+				//				tbm.add(showInJavadocViewAction);
+				final OpenDeclarationAction openDeclarationAction = new OpenDeclarationAction(iControl);
 				tbm.add(openDeclarationAction);
 
-//				final SimpleSelectionProvider selectionProvider= new SimpleSelectionProvider();
+				//				final SimpleSelectionProvider selectionProvider= new SimpleSelectionProvider();
 
-				IInputChangedListener inputChangeListener= new IInputChangedListener() {
+				IInputChangedListener inputChangeListener = new IInputChangedListener() {
 					public void inputChanged(Object newInput) {
 						backAction.update();
 						forwardAction.update();
 						if (newInput == null) {
-//							selectionProvider.setSelection(new StructuredSelection());
+							//							selectionProvider.setSelection(new StructuredSelection());
 						} else if (newInput instanceof XtextBrowserInformationControlInput) {
-//							XtextBrowserInformationControlInput input= (XtextBrowserInformationControlInput) newInput;
-//							Object inputElement = input.getInputElement();
-//							selectionProvider.setSelection(new StructuredSelection(inputElement));
-//							boolean isJavaElementInput= inputElement instanceof IJavaElement;
-//							showInJavadocViewAction.setEnabled(isJavaElementInput);
+							//							XtextBrowserInformationControlInput input= (XtextBrowserInformationControlInput) newInput;
+							//							Object inputElement = input.getInputElement();
+							//							selectionProvider.setSelection(new StructuredSelection(inputElement));
+							//							boolean isJavaElementInput= inputElement instanceof IJavaElement;
+							//							showInJavadocViewAction.setEnabled(isJavaElementInput);
 							openDeclarationAction.setEnabled(true);
 						}
 					}
@@ -334,7 +338,7 @@ public class XtextHtmlHover extends AbstractEObjectHover {
 		private final IInformationControlCreator fInformationPresenterControlCreator;
 
 		public HoverControlCreator(IInformationControlCreator informationPresenterControlCreator) {
-			fInformationPresenterControlCreator= informationPresenterControlCreator;
+			fInformationPresenterControlCreator = informationPresenterControlCreator;
 		}
 
 		/*
@@ -344,8 +348,9 @@ public class XtextHtmlHover extends AbstractEObjectHover {
 		public IInformationControl doCreateInformationControl(Shell parent) {
 			String tooltipAffordanceString = EditorsUI.getTooltipAffordanceString();
 			if (BrowserInformationControl.isAvailable(parent)) {
-				String font= "org.eclipse.jdt.ui.javadocfont"; // FIXME: PreferenceConstants.APPEARANCE_JAVADOC_FONT;
-				BrowserInformationControl iControl= new BrowserInformationControl(parent, font, tooltipAffordanceString) {
+				String font = "org.eclipse.jdt.ui.javadocfont"; // FIXME: PreferenceConstants.APPEARANCE_JAVADOC_FONT;
+				BrowserInformationControl iControl = new BrowserInformationControl(parent, font,
+						tooltipAffordanceString) {
 					/*
 					 * @see org.eclipse.jface.text.IInformationControlExtension5#getInformationPresenterControlCreator()
 					 */
@@ -371,34 +376,34 @@ public class XtextHtmlHover extends AbstractEObjectHover {
 
 			if (control instanceof IInformationControlExtension4) {
 				String tooltipAffordanceString = EditorsUI.getTooltipAffordanceString();
-				((IInformationControlExtension4)control).setStatusText(tooltipAffordanceString);
+				((IInformationControlExtension4) control).setStatusText(tooltipAffordanceString);
 			}
 
 			return true;
 		}
 	}
-	
+
 	public IInformationControlCreator getInformationPresenterControlCreator() {
 		if (presenterControlCreator == null)
-			presenterControlCreator= new PresenterControlCreator();
+			presenterControlCreator = new PresenterControlCreator();
 		return presenterControlCreator;
-	}	
-	
+	}
 
 	@Override
 	public IInformationControlCreator getHoverControlCreator() {
 		if (hoverControlCreator == null)
-			hoverControlCreator= new HoverControlCreator(getInformationPresenterControlCreator());
+			hoverControlCreator = new HoverControlCreator(getInformationPresenterControlCreator());
 		return hoverControlCreator;
 	}
-	
+
 	/**
 	 * @deprecated see {@link org.eclipse.jface.text.ITextHover#getHoverInfo(ITextViewer, IRegion)}
 	 */
 	@Override
 	@Deprecated
 	public String getHoverInfo(ITextViewer textViewer, IRegion hoverRegion) {
-		XtextBrowserInformationControlInput info= (XtextBrowserInformationControlInput) getHoverInfo2(textViewer, hoverRegion);
+		XtextBrowserInformationControlInput info = (XtextBrowserInformationControlInput) getHoverInfo2(textViewer,
+				hoverRegion);
 		return info != null ? info.getHtml() : null;
 	}
 
@@ -410,32 +415,34 @@ public class XtextHtmlHover extends AbstractEObjectHover {
 		return internalGetHoverInfo(textViewer, hoverRegion);
 	}
 
-	protected XtextBrowserInformationControlInput internalGetHoverInfo(final ITextViewer textViewer, final IRegion hoverRegion) {
+	protected XtextBrowserInformationControlInput internalGetHoverInfo(final ITextViewer textViewer,
+			final IRegion hoverRegion) {
 		IXtextDocument xtextDocument = XtextDocumentUtil.get(textViewer);
 
 		return xtextDocument.readOnly(new IUnitOfWork<XtextBrowserInformationControlInput, XtextResource>() {
 			public XtextBrowserInformationControlInput exec(XtextResource state) throws Exception {
-				Pair<EObject,IRegion> element = getXtextElementAt(state, hoverRegion);
-				if (element!=null && element.getSecond()!=null) {
-					return getHoverInfo (element.getFirst(), hoverRegion, null);
+				Pair<EObject, IRegion> element = getXtextElementAt(state, hoverRegion);
+				if (element != null && element.getSecond() != null) {
+					return getHoverInfo(element.getFirst(), hoverRegion, null);
 				}
 				return null;
-			}		
+			}
 		});
 	}
 
 	@Override
-	protected Object getHoverInfo2 (final EObject eObject, final ITextViewer textViewer, final IRegion hoverRegion) {
+	protected Object getHoverInfo2(final EObject eObject, final ITextViewer textViewer, final IRegion hoverRegion) {
 		return getHoverInfo(eObject, null, null);
 	}
-	
-	protected XtextBrowserInformationControlInput getHoverInfo(EObject element, IRegion hoverRegion, XtextBrowserInformationControlInput previous) {
+
+	protected XtextBrowserInformationControlInput getHoverInfo(EObject element, IRegion hoverRegion,
+			XtextBrowserInformationControlInput previous) {
 		IEObjectHoverProvider hoverProvider = serviceProvider.findService(element, IEObjectHoverProvider.class);
-		if (hoverProvider==null) {
+		if (hoverProvider == null) {
 			return null;
 		}
 		String html = hoverProvider.getHoverInfoAsHtml(element);
-		if (html!=null) {
+		if (html != null) {
 			StringBuffer buffer = new StringBuffer(html);
 			HTMLPrinter.insertPageProlog(buffer, 0, getStyleSheet());
 			HTMLPrinter.addPageEpilog(buffer);
@@ -445,34 +452,35 @@ public class XtextHtmlHover extends AbstractEObjectHover {
 		}
 		return null;
 	}
-	
+
 	protected String getStyleSheet() {
 		if (fgStyleSheet == null)
-			fgStyleSheet= loadStyleSheet();
-		String css= fgStyleSheet;
+			fgStyleSheet = loadStyleSheet();
+		String css = fgStyleSheet;
 		if (css != null) {
-			FontData fontData= JFaceResources.getFontRegistry().getFontData(fontSymbolicName)[0];
-			css= HTMLPrinter.convertTopLevelFont(css, fontData);
+			FontData fontData = JFaceResources.getFontRegistry().getFontData(fontSymbolicName)[0];
+			css = HTMLPrinter.convertTopLevelFont(css, fontData);
 		}
 		return css;
 	}
-	
+
 	/**
 	 * Loads and returns the hover style sheet.
+	 * 
 	 * @return the style sheet, or <code>null</code> if unable to load
 	 */
 	private String loadStyleSheet() {
-		URL styleSheetURL= Activator.getDefault().getBundle().getEntry(styleSheetFileName); //$NON-NLS-1$
+		URL styleSheetURL = Activator.getDefault().getBundle().getEntry(styleSheetFileName); //$NON-NLS-1$
 		if (styleSheetURL != null) {
-			BufferedReader reader= null;
+			BufferedReader reader = null;
 			try {
-				reader= new BufferedReader(new InputStreamReader(styleSheetURL.openStream()));
-				StringBuffer buffer= new StringBuffer(1500);
-				String line= reader.readLine();
+				reader = new BufferedReader(new InputStreamReader(styleSheetURL.openStream()));
+				StringBuffer buffer = new StringBuffer(1500);
+				String line = reader.readLine();
 				while (line != null) {
 					buffer.append(line);
 					buffer.append('\n');
-					line= reader.readLine();
+					line = reader.readLine();
 				}
 				return buffer.toString();
 			} catch (IOException ex) {
