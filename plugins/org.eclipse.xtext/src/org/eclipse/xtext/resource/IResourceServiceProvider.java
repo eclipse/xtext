@@ -48,6 +48,12 @@ public interface IResourceServiceProvider {
 	
 	IEncodingProvider getEncodingProvider();
 	
+	/**
+	 * A generic way to obtain an implementation for a certain type.
+	 * @return <code>null</code> is no implementation of the given type can be provided. 
+	 */
+	public <T> T get(Class<T> t);
+	
 	@ProvidedBy(Registry.RegistryProvider.class)
 	interface Registry {
 		/**

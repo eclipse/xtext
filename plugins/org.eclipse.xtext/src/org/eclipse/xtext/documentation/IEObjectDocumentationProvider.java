@@ -11,12 +11,16 @@
 package org.eclipse.xtext.documentation;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.documentation.impl.MultiLineCommentDocumentationProvider;
+
+import com.google.inject.ImplementedBy;
 
 /**
  * Returns a documentation string for an EObject.
  * 
  * @author Christoph Kulla - Initial contribution and API
  */
+@ImplementedBy(MultiLineCommentDocumentationProvider.class)
 public interface IEObjectDocumentationProvider {
 
 	public String getDocumentation (EObject o);

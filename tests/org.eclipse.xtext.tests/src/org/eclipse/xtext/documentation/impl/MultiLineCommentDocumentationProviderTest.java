@@ -43,7 +43,7 @@ public class MultiLineCommentDocumentationProviderTest extends AbstractXtextTest
 		Element element = model.getElements().get(index);
 		assertNotNull (element);
 		
-		MutiLineCommentDocumentationProvider mlcdp = getInjector().getInstance(MutiLineCommentDocumentationProvider.class);
+		MultiLineCommentDocumentationProvider mlcdp = getInjector().getInstance(MultiLineCommentDocumentationProvider.class);
 		return mlcdp.getDocumentation(element);
 	}
 	

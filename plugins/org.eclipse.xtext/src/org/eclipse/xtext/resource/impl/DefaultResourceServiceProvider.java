@@ -14,11 +14,12 @@ import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.resource.IContainer.Manager;
 import org.eclipse.xtext.validation.IResourceValidator;
 
 import com.google.common.collect.Sets;
+import com.google.inject.ConfigurationException;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import com.google.inject.name.Named;
 
 /**
@@ -26,33 +27,16 @@ import com.google.inject.name.Named;
  */
 public class DefaultResourceServiceProvider implements IResourceServiceProvider {
 	
-	@Inject
-	private Manager containerManager;
-	
-	public void setContainerManager(Manager containerManager) {
-		this.containerManager = containerManager;
-	}
-
-	public Manager getContainerManager() {
-		return containerManager;
+	public org.eclipse.xtext.resource.IContainer.Manager getContainerManager() {
+		return get(org.eclipse.xtext.resource.IContainer.Manager.class);
 	}
 	
-	@Inject
-	private IResourceDescription.Manager resourceDescriptionManager;
-
 	public IResourceDescription.Manager getResourceDescriptionManager() {
-		return resourceDescriptionManager;
+		return get(IResourceDescription.Manager.class);
 	}
 	
-	public void setResourceDescriptionManager(IResourceDescription.Manager resourceDescriptionManager) {
-		this.resourceDescriptionManager = resourceDescriptionManager;
-	}
-	
-	@Inject(optional=true)
-	private IResourceValidator resourceValidator;
-
 	public IResourceValidator getResourceValidator() {
-		return resourceValidator;
+		return get(IResourceValidator.class);
 	}
 	
 	private Set<String> extensions;
@@ -70,10 +54,19 @@ public class DefaultResourceServiceProvider implements IResourceServiceProvider 
 		return extensions.contains(uri.fileExtension());
 	}
 
-	@Inject 
-	private IEncodingProvider encodingProvider;
-	
 	public IEncodingProvider getEncodingProvider() {
-		return encodingProvider;
+		return get(IEncodingProvider.class);
 	}
+	
+	@Inject
+	private Injector injector;
+	
+	public <T> T get(Class<T> t) {
+		try {
+			return injector.getInstance(t);
+		} catch (ConfigurationException e) {
+			return null;
+		}
+	}
+	
 }
