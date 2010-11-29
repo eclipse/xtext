@@ -18,7 +18,8 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultEObjectHoverProvider.class)
 public interface IEObjectHoverProvider {
 	/**
-	 * @return an HTML string to be shown in a hover pop up.
+	 * @return an HTML string to be shown in a hover pop up, returns <code>null</code> is no hover information exists
+	 *         for the given element.
 	 */
 	String getHoverInfoAsHtml(EObject object);
 }
