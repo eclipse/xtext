@@ -1,0 +1,557 @@
+\documentclass[a4paper]{scrreprt}
+
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl} 
+%%\usepackage[utf8]{inputenc}
+\usepackage[latin1]{inputenc}
+\usepackage{listings}
+
+\usepackage{todonotes}
+
+
+%%\usepackage{helvet}
+
+
+\lstdefinelanguage{Java}
+  {morekeywords={abstract, continue, for, new, switch, assert, default, goto, package, synchronized, boolean, do, if, private, this, break, double, implements, protected, throw, byte, else, import, public, throws, case, enum, instanceof, return, transient, catch, extends, int, short, try, char, final, interface, static, void, class, finally, long, strictfp, volatile, const, float, native, super, while},
+    sensitive=true,
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morestring=[b]",
+    morestring=[b]',
+  }
+
+%\lstdefinelanguage{Xtext}
+%  {morekeywords={grammar, generate, import, as, terminal, hidden},
+%    sensitive=true,
+%    morecomment=[l]{//},
+%    morecomment=[s]{/*}{*/},
+%    morestring=[b]",
+%    morestring=[b]',
+%  }
+
+%\lstdefinelanguage{Xbase}
+%  {morekeywords={super, val, var, extends, instanceof, new,%
+%   null, true, false, if, else, switch, case, default, do,%
+%   while, for, def, class, as, throw, try, catch, finally},
+%    sensitive=true,
+%    morecomment=[l]{//},
+%    morecomment=[s]{/*}{*/},
+%    morestring=[b]",
+%    morestring=[b]',
+%  }
+
+%% force more space between subsections!
+\makeatletter
+\renewcommand\subsection{\medskip\@startsection{subsection}{2}{\z@}%
+  {-.25ex\@plus -.1ex \@minus -.2ex}%
+  {1.5ex \@plus .2ex \@minus -.4ex}%
+  {\ifnum \scr@compatibility>\@nameuse{scr@v@2.96}\relax
+    \setlength{\parfillskip}{\z@ plus 1fil}\fi
+    \raggedsection\normalfont\sectfont\nobreak\size@subsection
+  }%
+}
+\makeatother
+
+%\lstdefinelanguage{xtext}{keywords={terminal, grammar, import, generate, hidden, as}, sensitive=true,string={"},morestring={'},comment={//},morecomment=[s]{/*}{*/}}
+
+\lstset{tabsize=4, basicstyle=\sffamily\small, keywordstyle=\bfseries, columns=[r]fullflexible}
+
+\usepackage[english]{babel}
+
+% import this as last package
+\usepackage{hyperref}
+
+\newlength{\itemindentlen}
+\author{Sven Efftinge, et al.}
+\title{Xtend2 Language Specification}
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+\chapter{Preface}
+\label{Preface}
+This document specifies the language Xtend2. Xtend2 is a programming language implemented in Xtext, based on Xbase, and tightly integrated with Java.
+It's main purpose is to write compilers, interpreters and other things, where you need to traverse typed tree structures (read EMF models). It
+integrates and compiles to Java.  
+
+Conceptually and syntactically, Xtend2 is a subset of Java, with the following differences:
+
+\setlength{\itemindentlen}{\textwidth}
+\begin{itemize}
+\addtolength{\itemindentlen}{-2.5em}
+
+\item \begin{minipage}[t]{\itemindentlen}
+First class support for template syntax
+\end{minipage}
+\item \begin{minipage}[t]{\itemindentlen}
+extension methods
+\end{minipage}
+\item \begin{minipage}[t]{\itemindentlen}
+multiple dispatch aka polymorphic method invocation
+\end{minipage}
+\item \begin{minipage}[t]{\itemindentlen}
+built-in support for dependency injection
+\end{minipage}
+\item \begin{minipage}[t]{\itemindentlen}
+inferred return types
+\end{minipage}
+\item \begin{minipage}[t]{\itemindentlen}
+convenient graph navigation expressions
+\end{minipage}
+\item \begin{minipage}[t]{\itemindentlen}
+Uses Xbase expressions, which means :
+		
+\setlength{\itemindentlen}{\textwidth}
+\begin{itemize}
+\addtolength{\itemindentlen}{-2.5em}
+
+\item \begin{minipage}[t]{\itemindentlen}
+No checked exceptions
+\end{minipage}
+\item \begin{minipage}[t]{\itemindentlen}
+Pure object-oriented, i.e. no built-in types and no arrays
+\end{minipage}
+\item \begin{minipage}[t]{\itemindentlen}
+Everything is an expression, there are no statements
+\end{minipage}
+\item \begin{minipage}[t]{\itemindentlen}
+Closures
+\end{minipage}
+\item \begin{minipage}[t]{\itemindentlen}
+Type inference
+\end{minipage}
+\item \begin{minipage}[t]{\itemindentlen}
+Properties
+\end{minipage}
+\item \begin{minipage}[t]{\itemindentlen}
+Simple operator overloading
+\end{minipage}
+\item \begin{minipage}[t]{\itemindentlen}
+Powerful switch expressions
+\end{minipage}
+\end{itemize}
+\addtolength{\itemindentlen}{2.5em}
+	
+\end{minipage}
+\end{itemize}
+\addtolength{\itemindentlen}{2.5em}
+\chapter{Language Concepts}
+\label{LanguageConcepts}
+On a first glance an Xtend2 file pretty much looks like a Java file. it starts with a package declaration followed by an import section, and after that comes the class definition.
+That class in fact is directly translated to a Java class in the corresponding Java package.
+Here is an example:
+\begin{lstlisting}
+package com.acme;
+
+import java.util.List;
+
+class MyClass {
+	String first(List<String> elements) {
+		...
+	}
+}
+
+\end{lstlisting}
+
+\section{Package Declaration}
+\label{packageDecl}
+Package declarations are like in Java, with the small difference, that an identifier can be escaped with a \textit{\textasciicircum{}} in cae it conflicts with a keyword.
+
+\subsection{Syntax}
+
+\begin{lstlisting}
+PackageDeclaration : 'package' QualifiedName;
+QualifiedName : ID ('.' ID);
+
+\end{lstlisting}
+
+
+
+
+\section{Imports}
+\label{imports}
+Also the imports are equivalent to the imports known from Java. Again one can escape any names conflicting with keywords using the \textit{\textasciicircum{}}.
+
+\subsection{Syntax}
+
+\begin{lstlisting}
+ImportSection : (Import|StaticImport)*;
+Import : 'import' 'static'? QualifiedName ('.''*')?;
+
+\end{lstlisting}
+
+
+
+
+\section{Class Declaration}
+\label{classDeclaration}
+Also the class declaration reuses a lot of Java's syntax it is a bit different in some aspects.
+Firstly the default visibility of any class is \lstinline[]°public°. It is possible to write it explicitly but if not specified it defaults to public.
+The \lstinline[]°package private° visibility does not exist.
+
+The \lstinline[]°abstract° as well as the \lstinline[]°final° modifiers are directly translated to Java, hence have the exact same meaning.
+
+\subsection{Inheritance}
+
+Also inheritance is directly reused from Java. Xtend2 allows single inheritance of Java classes as well as implementing multiple Java interfaces.
+
+
+\subsection{Generics}
+
+Full Java Generics are supported.
+
+
+\subsection{Syntax}
+
+\begin{lstlisting}
+ClassDeclaration : 
+	(Visibility|'abstract'|'final')* 'class' TypeParameters? ('extends' QualifiedName)? ('implements' QualifiedName (',' QualifiedName)*)? '{'
+		Members*
+	'}'
+;
+Visibility : 'public'|'protected'|'private';
+
+
+\end{lstlisting}
+
+
+
+
+\section{Fields}
+\label{Fields}
+An Xtend2 class can have state, just declare a field like you are used to in Java.
+
+\begin{lstlisting}
+int numberOfCalls = 0; 
+
+\end{lstlisting}
+
+
+It directly translates to Java.
+The default visibility for fields is \lstinline[]°private°.
+
+\subsection{Syntax}
+
+\begin{lstlisting}
+FieldDef : ('public'|'protected'|'private'|'final')* TypeRef? ID'
+    ( '=' Expression)? ';'
+
+\end{lstlisting}
+
+
+
+
+\section{Functions}
+\label{Functions}
+Xtend2 functions are declared within a class and are usually translated to a corresponding Java method with the exact same signature. The only exception 
+is overloaded methods, which compile to a single method. This is explained in 
+\autoref{polymorphicDispatch}. 
+
+The default visibility of a function is \lstinline[]°public°, which can also be declared explicitly. The two other available visibilities are \lstinline[]°protected° and \lstinline[]°private°.
+
+A function can be declared either \lstinline[]°final° or \lstinline[]°abstract°. If it is declared \lstinline[]°abstract° also the class needs to be declared \lstinline[]°abstract° and the function is 
+not allowed to have an implementation.
+
+An example of a function declaration
+\begin{lstlisting}
+Boolean equalsIgnoreCase(String s1,String s2) :
+	s1.toLowerCase() == s2.toLowerCase();
+
+\end{lstlisting}
+
+
+\subsection{Inferred Return Types}
+\label{inferredReturnTypes}
+If the return type of a function can be inferred it does not need to be declared.
+That is the function
+
+\begin{lstlisting}
+Boolean equalsIgnoreCase(String s1,String s2) :
+	s1.toLowerCase() == s2.toLowerCase();
+
+\end{lstlisting}
+
+
+could be declared like this:
+
+\begin{lstlisting}
+equalsIgnoreCase(String s1,String s2) :
+	s1.toLowerCase() == s2.toLowerCase();
+
+\end{lstlisting}
+
+
+This doesn't work for abstract function declarations as well as if the 
+return type of a function depends on a recursive call of the same function.
+The compiler tells the user when it needs to be specified.
+
+
+\subsection{Generics}
+
+Full Java Generics are supported.
+
+
+\subsection{Method overloading and polymorphic dispatch}
+\label{polymorphicDispatch}
+It is possible to overload methods, but overloaded methods are not simply transalted to corresponding Java methods.
+Instead for each set of methods where the name is equal and the number of arguments is equal the most common dominator signature is taken (or computed if neccessary)
+and only for that method a Java method is derived. Within the implementation the correct method is looked up at runtime.
+This is done by sorting the methods from most specific to least specific and generating an if-else cascade for the code.
+
+Example: The following functions
+\begin{lstlisting}
+foo(Number x) : 'it's some number';
+foo(Integer x) : 'it's an int';
+
+\end{lstlisting}
+ 
+
+compile to the following Java method:
+
+\begin{lstlisting} [language=Java]
+public String foo(Number x) {
+	if (x== null || x instanceof Integer) {
+		return "it's an int";
+	} else {
+		return "it's some number";
+	}
+} 
+
+\end{lstlisting}
+
+
+In case there is no single most general signature, one is computed.
+Example:
+
+\begin{lstlisting}
+foo(Number x, Integer y) : 'it's some number and an int';
+foo(Integer x, Number x) : 'it's an int and a number';
+
+\end{lstlisting}
+
+
+\begin{lstlisting} [language=Java]
+public String foo(Number x) {
+	if ((x== null || x instanceof Number) && (y== null ||y instanceof Integer)) {
+		return "it's some number and an int";
+	} else if ((x== null || x instanceof Integer) && (y== null || y instanceof Number)){
+		return "it's an int and a number";
+	} else {
+		throw new UnsupportedOperationException("foo is not implemented for arguments "+x+" and "+y);
+	}
+} 
+
+\end{lstlisting}
+
+
+As you can see a null reference is always a match. If you want to fetch null you can declare a parameter using the type \lstinline[]°java.lang.Void°.
+
+\begin{lstlisting}
+foo(Void x) : throw new NullPointerException("x");
+foo(Number x) : 'it's some number';
+foo(Integer x) : 'it's an int';
+
+\end{lstlisting}
+
+
+Which compiles to the following Java code:
+
+\begin{lstlisting} [language=Java]
+public String foo(Number x) {
+	if (x== null) {
+		throw new NullPointerException("x")
+	} else if (x== null || x instanceof Integer) {
+		return "it's an int";
+	} else {
+		return "it's some number";
+	}
+} 
+
+\end{lstlisting}
+
+
+So essential we put the polymorphic invocation logic into the declaration and not into the method call.
+The nice thing is that polymorphic overloaded functions can be transparently called from Java, and behave exactly the same as if they were called from Xtend2.
+
+
+\subsection{Syntax}
+
+Syntactically Xtend functions are much like Java methods, expect that there are no static methods, the return types are optional and of course the function body
+consists of one expression instead of a sequence of statements. 
+
+\begin{lstlisting}
+FunctionDef : ('public'|'protected'|'private'|'abstract'|'final')* TypeParameters? TypeRef? ID'('(ParameterDeclaration (',' ParameterDeclaration)*)?')' 
+	('throws' TypeRef (',' TypeRef)*)?
+    ( ':' Expression ';'
+	| BlockExpression
+	| ';')
+
+\end{lstlisting}
+
+
+
+
+\section{Expressions (in addition Xbase)}
+\label{Expressions}
+Xtend2 adds a couple of expressions to the basic set of expressions provided by Xbase.
+
+\subsection{Rich Strings}
+\label{RichStrings}
+Of course there is the template expression, which is used to write readable string concatenation, which is the main thing you do when writing a code generator.
+Xtend2 reuses the syntax known from the well known and widely used Xpand template language (in fact Xtend2 is considered the successor to Xpand and Xtend). Let's have a look at
+an example of how a typical function with template expressions look like:
+
+\begin{lstlisting}
+toClass(Entity this) :»
+	package «packageName»;
+	
+	«placeImports»
+	
+	public class «name» «IF extendedType!=null»extends «extendedType»«ENDIF»{
+		«FOREACH members»
+			«member.toMember»
+		«ENDFOREACH»
+	}
+	«;
+
+\end{lstlisting}
+
+
+If you are familiar with Xpand, you'll notice that it is exactly the same syntax. The difference is, that the template syntax is actually an expression, which means it 
+can occur everywhere where an expression is expected. For instance in conjunction the powerful switch expression from Xbase:
+
+\begin{lstlisting}
+toMember(Member this) :
+	switch(this) {
+		Field :»private «type» «name» ;«;
+		Method case isAbstract :» abstract «...;
+		Method:» ..... «;
+	};
+
+\end{lstlisting}
+
+
+\subsubsection{IF in Rich Strings}
+\label{RichStringIF}
+There is a special IF to be used within rich strings which is identical in syntax and meaning to the old IF from Xpand.
+Note that you could also use the if expression, but since it has not an explicit terminal token, it is not as readable in that context.
+
+
+\subsubsection{FOREACH in Rich Strings}
+\label{RichStringFOREACH}
+Also the FOREACH statement is available and can only be used in the context of a rich string.
+It also supports the SEPARATOR and ITERATOR declaration from Xpand. 
+\todo[inline]{Think about whether we really want to stick to the verbose syntax form previous Xpand for SEPARATOR and ITERATOR}
+
+
+\subsubsection{Typing}
+\label{RichStringType}
+The rich string is translated to an efficient string concatenation and the return type of a rich string is \lstinline[]°java.lang.CharStream° which allows
+much room for efficient implementation.
+
+
+\subsection{Shortcut navigation through lists}
+\label{collectShortcut}
+In Xtend2 one usually navigates over graphs which contain a lot of collections. If you for instance need the qualified name of
+the interfaces a type is extending you could write the following using closures:
+
+\begin{lstlisting}
+myType.interfaces.collect(e|e.qualifiedName)
+
+\end{lstlisting}
+
+
+However because this situation is so common Xtend2 provides a special sugared expression for that.
+So instead of the code above you can write:
+
+\begin{lstlisting}
+myType.interfaces.*qualifiedName
+
+\end{lstlisting}
+
+
+Note that we decided to come up with an explicit operator (.*) because overloading the '.' operator as it is the case in Xpand,
+has caused a lot of surprises in the past. With an explicit operator the tooling as well as the user always can distinct whether you
+invoke a feature on the iterables elements or on the iterable itself.
+
+The operator works on all members of \lstinline[]°java.lang.Iterable°. the return type is always an \lstinline[]°java.lang.Iterable<T>° where \lstinline[]°T°
+is the return type of the called feature.
+
+
+\subsection{Extension Method Syntax}
+\label{extensionMethods}
+Static functions as well as any members annotated with @Extension can be called using the extension method syntax.
+This means that a function imported through a static import, like e.g. java.util.Collections.singleton(T) can be invoked using 
+the member syntax.
+
+Example:
+
+\begin{lstlisting}
+"Foo".singleton
+
+\end{lstlisting}
+
+
+is the same as
+
+\begin{lstlisting}
+singleton("Foo")
+
+\end{lstlisting}
+
+
+Note that extension methods never shadow a member of the current reference. That is if \lstinline[]°java.lang.String° has a field \lstinline[]°singleton°, a method \lstinline[]°singleton()° or a method
+\lstinline[]°getSingleton()°, those memebers would be referenced. That is done at compile time, so the tooling is able to tell you what you actually reference.
+
+Static functions as well as extensions in the previous version of Xtend make clients not only depend on a certain signature but on the implementation as it is not 
+possible to exchange the implementation of a static function. That's where the @Extension annotation in conjunction with dependency injection comes in.
+
+If you have declared a field with @Extension than all members of that type become available for extension method syntax.
+
+Example
+
+Imagine the following Java interface
+
+\begin{lstlisting}
+interface MyExtensions {
+	String getComputedProperty(SomeType type);
+}
+
+\end{lstlisting}
+
+
+With Java you would have to call this method on an instance of MyExtensions like so:
+
+\begin{lstlisting}
+myExtensions.getComputedProperty(someType)
+
+\end{lstlisting}
+
+
+In Xtend2 you can have the instance injected like in Java:
+
+\begin{lstlisting}
+@Inject @Extension MyExtensions extensions;
+
+\end{lstlisting}
+
+
+But instead of using the long expression known from Java (which would also work) you are able to use the extension method syntax:
+
+\begin{lstlisting}
+someType.computedProperty
+
+\end{lstlisting}
+
+
+It will statically bind to the right method and even more important it doesn't bind to a specific implementation but just to the signature.
+The implementation can be provided through dependency injection.
+
+
+\chapter*{List of External Links}
+
+
+\listoftodos
+\end{document}

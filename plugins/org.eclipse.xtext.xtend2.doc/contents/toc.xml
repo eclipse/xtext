@@ -1,0 +1,58 @@
+<toc topic="contents/01-Preface.xdoc.html" label="Xtend2 Language Specification">
+<topic href="contents/01-Preface.xdoc.html" label="Preface" >
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html" label="Language Concepts" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#packageDecl" label="Package Declaration" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#packageDecl-2" label="Syntax" >
+</topic>
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#imports" label="Imports" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#importExtension" label="Importing Extension Methods" >
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#imports-3" label="Syntax" >
+</topic>
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#inject" label="Dependency Injection" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#inject-5" label="Name can be inferred" >
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#inject-6" label="Guice Keys" >
+</topic>
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#classDeclaration" label="Class Declaration" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#classDeclaration-3" label="Inheritance" >
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#classDeclaration-4" label="Generics" >
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#classDeclaration-5" label="Syntax" >
+</topic>
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#Fields" label="Fields" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#Fields-4" label="Syntax" >
+</topic>
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#Functions" label="Functions" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#inferredReturnTypes" label="Inferred Return Types" >
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#Functions-6" label="Generics" >
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#polymorphicDispatch" label="Method overloading and polymorphic dispatch" >
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#Functions-8" label="Syntax" >
+</topic>
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#Expressions" label="Expressions (in addition Xbase)" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#RichStrings" label="Rich Strings" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#RichStringIF" label="IF in Rich Strings" >
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#RichStringFOREACH" label="FOREACH in Rich Strings" >
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#RichStringType" label="Typing" >
+</topic>
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#collectShortcut" label="Shortcut navigation through lists" >
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#extensionMethods" label="Extension Method Syntax" >
+</topic>
+</topic>
+</topic>
+</toc>
