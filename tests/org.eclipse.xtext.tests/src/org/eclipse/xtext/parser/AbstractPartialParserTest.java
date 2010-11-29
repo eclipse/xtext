@@ -49,8 +49,8 @@ public abstract class AbstractPartialParserTest extends AbstractXtextTests {
 	}
 	
 	protected void assertSameStructure(ICompositeNode first, ICompositeNode second) {
-		BidiTreeIterator<INode> firstIter = first.iterator();
-		BidiTreeIterator<INode> secondIter = second.iterator();
+		BidiTreeIterator<INode> firstIter = first.getAsTreeIterable().iterator();
+		BidiTreeIterator<INode> secondIter = second.getAsTreeIterable().iterator();
 		while(firstIter.hasNext()) {
 			assertTrue(secondIter.hasNext());
 			INode firstNext = firstIter.next();
