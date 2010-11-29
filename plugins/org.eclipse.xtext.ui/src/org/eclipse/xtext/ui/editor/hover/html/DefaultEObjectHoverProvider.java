@@ -13,6 +13,7 @@ package org.eclipse.xtext.ui.editor.hover.html;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 
 import com.google.inject.Inject;
@@ -31,8 +32,13 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 
 	@Inject
 	private IEObjectDocumentationProvider decoratedProvider;
+	
+	@Inject
+	private IQualifiedNameProvider nameProvider;
 
 	public String getHoverInfoAsHtml(EObject o) {
+		if (!hasHover(o))
+			return null;
 		StringBuffer buffer = new StringBuffer();
 		buffer.append (getFirstLine(o));
 		String documentation = getDocumentation(o);
@@ -42,6 +48,10 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 			buffer.append("</p>");
 		}
 		return buffer.toString();
+	}
+
+	protected boolean hasHover(EObject o) {
+		return nameProvider.getFullyQualifiedName(o)!=null;
 	}
 
 	protected String getDocumentation(EObject o) {

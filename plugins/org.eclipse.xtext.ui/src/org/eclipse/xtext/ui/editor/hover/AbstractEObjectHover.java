@@ -10,20 +10,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.hover;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.nodemodel.ILeafNode;
-import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -31,8 +29,8 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import com.google.inject.Inject;
 
 /**
- * A hover which determines the EObject at the hover region. Subclasses have to implement 
- * getHoverInfo2 (final EObject eObject, final ITextViewer textViewer, final IRegion hoverRegion).
+ * A hover which determines the EObject at the hover region. Subclasses have to implement getHoverInfo2 (final EObject
+ * eObject, final ITextViewer textViewer, final IRegion hoverRegion).
  * 
  * @author Christoph Kulla - Initial contribution and API
  */
@@ -40,13 +38,16 @@ public abstract class AbstractEObjectHover extends AbstractHover {
 
 	@Inject
 	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
-	
+
+	@Inject
+	private ILocationInFileProvider locationInFileProvider;
+
 	@Override
 	public IRegion getHoverRegion(final ITextViewer textViewer, final int offset) {
 		IXtextDocument xtextDocument = XtextDocumentUtil.get(textViewer);
 		return xtextDocument.readOnly(new IUnitOfWork<IRegion, XtextResource>() {
 			public IRegion exec(XtextResource state) throws Exception {
-				Pair<EObject,IRegion> element = getXtextElementAt(state, offset);
+				Pair<EObject, IRegion> element = getXtextElementAt(state, offset);
 				if (element != null) {
 					return element.getSecond();
 				} else {
@@ -57,22 +58,23 @@ public abstract class AbstractEObjectHover extends AbstractHover {
 	}
 
 	public Object getHoverInfo2(final ITextViewer textViewer, final IRegion hoverRegion) {
-		if (hoverRegion==null)
+		if (hoverRegion == null)
 			return null;
 		IXtextDocument xtextDocument = XtextDocumentUtil.get(textViewer);
 		return xtextDocument.readOnly(new IUnitOfWork<Object, XtextResource>() {
 			public Object exec(XtextResource state) throws Exception {
-				Pair<EObject,IRegion> element = getXtextElementAt(state, hoverRegion.getOffset());
-				if (element!=null && element.getSecond()!=null) {
-					return getHoverInfo2 (element.getFirst(), textViewer, hoverRegion);
-				} 
+				Pair<EObject, IRegion> element = getXtextElementAt(state, hoverRegion.getOffset());
+				if (element != null && element.getSecond() != null) {
+					return getHoverInfo2(element.getFirst(), textViewer, hoverRegion);
+				}
 				return null;
-			}		
+			}
 		});
 	}
-	
-	protected abstract Object getHoverInfo2 (final EObject eObject, final ITextViewer textViewer, final IRegion hoverRegion);
-	
+
+	protected abstract Object getHoverInfo2(final EObject eObject, final ITextViewer textViewer,
+			final IRegion hoverRegion);
+
 	/**
 	 * Call this method only from within an IUnitOfWork
 	 */
@@ -89,31 +91,16 @@ public abstract class AbstractEObjectHover extends AbstractHover {
 		if (crossLinkedEObject != null) {
 			if (!crossLinkedEObject.eIsProxy()) {
 				ILeafNode an = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
-				return Tuples.create (crossLinkedEObject, (IRegion) new Region (an.getOffset(), an.getLength()));
+				return Tuples.create(crossLinkedEObject, (IRegion) new Region(an.getOffset(), an.getLength()));
 			}
-		} else {		
-			// check for name
+		} else {
 			EObject o = eObjectAtOffsetHelper.resolveElementAt(resource, offset);
-			EStructuralFeature nameFeature = o.eClass().getEStructuralFeature("name");
-			if (nameFeature != null) {
-				List<INode> nodes = NodeModelUtils.findNodesForFeature(o, nameFeature);
-				if (contains(nodes, offset)) {
-					int length = 0;
-					for (INode n: nodes) {
-						length += n.getLength();
-					}
-					return Tuples.create (o, (IRegion) new Region (nodes.get(0).getOffset(), length));
-				}
+			if (o != null) {
+				ITextRegion region = locationInFileProvider.getSignificantTextRegion(o);
+				return Tuples.create(o, (IRegion) new Region(region.getOffset(), region.getLength()));
 			}
-		}		
+		}
 		return null;
 	}
 
-	private boolean contains(List<INode> nodes, int offset) {
-		for (INode n: nodes) {
-			if (n.getOffset()<=offset && offset<n.getOffset()+n.getLength())
-				return true;
-		}
-		return false;
-	}
 }
