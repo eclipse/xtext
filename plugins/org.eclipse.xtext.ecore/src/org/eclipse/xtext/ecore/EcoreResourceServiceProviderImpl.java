@@ -41,4 +41,8 @@ public class EcoreResourceServiceProviderImpl implements IResourceServiceProvide
 	public IEncodingProvider getEncodingProvider() {
 		return encodingProvider;
 	}
+	
+	public <T> T get(Class<T> t) {
+		return null;
+	}
 }
