@@ -884,6 +884,274 @@ Examples
 
 </div>
 
+<a name="spreadOperator"></a>
+
+<a name="spreadOperator"></a>
+<div class="section" title="Spread Operator">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+Spread Operator
+</h2>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Xbase provides a special sugared notation to invoke a certain feature on each element of a collect
+and obtain the results as another iterable. This is essentially a short cut notation for a higher order function on <span class="inlinecode">java.lang.Iterable</span>
+.
+If you for instance want the names of all persons in a <span class="inlinecode">List</span>
+ you could write the following using a higher order function and a closures:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+listOfPersons.collect(e|e.name)<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+However because this situation is so common Xbase provides a special sugared expression for that.
+So alternatively to the code above you can write:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+listOfPersons*.name<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+Note that we decided to come up with an explicit operator (.*) because overloading the &apos;.&apos; operator as it is the case in Xpand,
+has caused a lot of surprises in the past. With an explicit operator the tooling as well as the user always can distinct whether you
+invoke a feature on the iterables elements or on the iterable itself.
+Also note that this really is just a shortcut for collect. It doesn&apos;t do any flattening, when you invoke it on iterables containing iterables.
+</p>
+
+<p>
+The operator works on all members of <span class="inlinecode">java.lang.Iterable</span>
+. the return type is always an <span class="inlinecode">java.lang.Iterable&lt;T&gt;</span>
+ where <span class="inlinecode">T</span>
+
+is the return type of the called feature.
+</p>
+
+
+
+
+<a name="spreadOperator-7"></a>
+<div class="section" title="Syntax">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Syntax
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+XIterableFeatureCall:<br />&nbsp;&nbsp;&nbsp;&nbsp;PrimaryExpression&nbsp;(&apos;*.&apos;)&nbsp;FeatureCall;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+</div>
+
+
+
+<a name="spreadOperator-8"></a>
+<div class="section" title="Examples">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Examples
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+
+<ul>
+
+<li>
+
+<p>
+<span class="inlinecode">myListOfPersons*.name</span>
+
+</p>
+
+</li>
+
+</ul>
+
+</p>
+
+
+</div>
+
+</div>
+
+<a name="nullableFeatureCalls"></a>
+
+<a name="nullableFeatureCalls"></a>
+<div class="section" title="Safe Navigation Featurecall">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+Safe Navigation Featurecall
+</h2>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Checking for null references can make code very unreadable. In many situations it is ok for an expression to return null if a receiver was null.
+Xbase supports the safe navigatioj operator <span class="inlinecode">?.</span>
+ to make such code more readable.
+</p>
+
+<p>
+Instead of writing 
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+if&nbsp;(myRef==null)&nbsp;null&nbsp;else&nbsp;myRef.doStuff()<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+one can write
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myRef?.doStuff()<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+
+
+<a name="nullableFeatureCalls-6"></a>
+<div class="section" title="Syntax">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Syntax
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+XSafeFeatureCall:<br />&nbsp;&nbsp;&nbsp;&nbsp;PrimaryExpression&nbsp;(&apos;?.&apos;)&nbsp;FeatureCall;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+</div>
+
+
+
+<a name="nullableFeatureCalls-7"></a>
+<div class="section" title="Examples">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Examples
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+
+<ul>
+
+<li>
+
+<p>
+<span class="inlinecode">myListOfPersons.name</span>
+
+</p>
+
+</li>
+
+</ul>
+
+</p>
+
+
+</div>
+
+</div>
+
 <a name="Closures"></a>
 
 <a name="Closures"></a>

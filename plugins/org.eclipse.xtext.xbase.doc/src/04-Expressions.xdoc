@@ -241,6 +241,74 @@ ul[
 	item[code[oh.my.foo(bar)]]
 ]
 
+section:spreadOperator[Spread Operator]
+
+Xbase provides a special sugared notation to invoke a certain feature on each element of a collect
+and obtain the results as another iterable. This is essentially a short cut notation for a higher order function on code[java.lang.Iterable].
+If you for instance want the names of all persons in a code[List] you could write the following using a higher order function and a closures:
+
+code[
+	listOfPersons.collect(e|e.name)
+]
+
+However because this situation is so common Xbase provides a special sugared expression for that.
+So alternatively to the code above you can write:
+
+code[
+	listOfPersons*.name
+]
+
+Note that we decided to come up with an explicit operator (.*) because overloading the '.' operator as it is the case in Xpand,
+has caused a lot of surprises in the past. With an explicit operator the tooling as well as the user always can distinct whether you
+invoke a feature on the iterables elements or on the iterable itself.
+Also note that this really is just a shortcut for collect. It doesn't do any flattening, when you invoke it on iterables containing iterables.
+
+The operator works on all members of code[java.lang.Iterable]. the return type is always an code[java.lang.Iterable<T>] where code[T]
+is the return type of the called feature.
+
+section2[Syntax]
+
+code[
+XIterableFeatureCall:
+	PrimaryExpression ('*.') FeatureCall;
+]
+
+section2[Examples]
+
+ul[
+	item[code[myListOfPersons*.name]]
+]
+
+section:nullableFeatureCalls[Safe Navigation Featurecall]
+
+Checking for null references can make code very unreadable. In many situations it is ok for an expression to return null if a receiver was null.
+Xbase supports the safe navigatioj operator code[?.] to make such code more readable.
+
+Instead of writing 
+
+code[
+	if (myRef==null) null else myRef.doStuff()
+]
+
+one can write
+
+code[
+	myRef?.doStuff()
+]
+
+section2[Syntax]
+
+code[
+XSafeFeatureCall:
+	PrimaryExpression ('?.') FeatureCall;
+]
+
+section2[Examples]
+
+ul[
+	item[code[myListOfPersons.name]]
+]
+
 section:Closures[Closures]
 
 A closure is a literal that defines an anonymous function. A closure also captures the current scope, so that any final variables and parameters visible at construction time 
