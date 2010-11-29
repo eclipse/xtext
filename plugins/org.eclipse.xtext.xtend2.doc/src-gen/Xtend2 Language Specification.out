@@ -1,0 +1,21 @@
+\BOOKMARK [0][-]{chapter.1}{Preface}{}
+\BOOKMARK [0][-]{chapter.2}{Language Concepts}{}
+\BOOKMARK [1][-]{section.2.1}{Package Declaration}{chapter.2}
+\BOOKMARK [2][-]{subsection.2.1.1}{Syntax}{section.2.1}
+\BOOKMARK [1][-]{section.2.2}{Imports}{chapter.2}
+\BOOKMARK [2][-]{subsection.2.2.1}{Syntax}{section.2.2}
+\BOOKMARK [1][-]{section.2.3}{Class Declaration}{chapter.2}
+\BOOKMARK [2][-]{subsection.2.3.1}{Inheritance}{section.2.3}
+\BOOKMARK [2][-]{subsection.2.3.2}{Generics}{section.2.3}
+\BOOKMARK [2][-]{subsection.2.3.3}{Syntax}{section.2.3}
+\BOOKMARK [1][-]{section.2.4}{Fields}{chapter.2}
+\BOOKMARK [2][-]{subsection.2.4.1}{Syntax}{section.2.4}
+\BOOKMARK [1][-]{section.2.5}{Functions}{chapter.2}
+\BOOKMARK [2][-]{subsection.2.5.1}{Inferred Return Types}{section.2.5}
+\BOOKMARK [2][-]{subsection.2.5.2}{Generics}{section.2.5}
+\BOOKMARK [2][-]{subsection.2.5.3}{Method overloading and polymorphic dispatch}{section.2.5}
+\BOOKMARK [2][-]{subsection.2.5.4}{Syntax}{section.2.5}
+\BOOKMARK [1][-]{section.2.6}{Expressions \(in addition Xbase\)}{chapter.2}
+\BOOKMARK [2][-]{subsection.2.6.1}{Rich Strings}{section.2.6}
+\BOOKMARK [2][-]{subsection.2.6.2}{Shortcut navigation through lists}{section.2.6}
+\BOOKMARK [2][-]{subsection.2.6.3}{Extension Method Syntax}{section.2.6}

@@ -1,0 +1,27 @@
+chapter:Preface[Preface]
+
+This document specifies the language Xtend2. Xtend2 is a programming language implemented in Xtext, based on Xbase, and tightly integrated with Java.
+It's main purpose is to write compilers, interpreters and other things, where you need to traverse typed tree structures (read EMF models). It
+integrates and compiles to Java.  
+
+Conceptually and syntactically, Xtend2 is a subset of Java, with the following differences:
+ul[
+	item[First class support for template syntax]
+	item[extension methods]
+	item[multiple dispatch aka polymorphic method invocation]
+	item[built-in support for dependency injection]
+	item[inferred return types]
+	item[convenient graph navigation expressions]
+	item[Uses Xbase expressions, which means :
+		ul[
+			item[No checked exceptions]
+			item[Pure object-oriented, i.e. no built-in types and no arrays]
+			item[Everything is an expression, there are no statements]
+			item[Closures]
+			item[Type inference]
+			item[Properties]
+			item[Simple operator overloading]
+			item[Powerful switch expressions]
+		]
+	]
+]

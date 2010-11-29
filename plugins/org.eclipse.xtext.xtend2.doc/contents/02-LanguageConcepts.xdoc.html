@@ -1,0 +1,1303 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Language Concepts</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="index.html" title="">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+
+<a name="LanguageConcepts"></a>
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Language Concepts</h1>
+
+<p>
+On a first glance an Xtend2 file pretty much looks like a Java file. it starts with a package declaration followed by an import section, and after that comes the class definition.
+That class in fact is directly translated to a Java class in the corresponding Java package.
+Here is an example:
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+package&nbsp;com.acme;<br /><br />import&nbsp;java.util.List;<br /><br />class&nbsp;MyClass&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+<a name="packageDecl"></a>
+
+<a name="packageDecl"></a>
+<div class="section" title="Package Declaration">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+Package Declaration
+</h2>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Package declarations are like in Java, with the small difference, that an identifier can be escaped with a <em>^</em> in cae it conflicts with a keyword.
+</p>
+
+
+
+
+<a name="packageDecl-2"></a>
+<div class="section" title="Syntax">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Syntax
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+PackageDeclaration&nbsp;:&nbsp;&apos;package&apos;&nbsp;QualifiedName;<br />QualifiedName&nbsp;:&nbsp;ID&nbsp;(&apos;.&apos;&nbsp;ID);<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+</div>
+
+</div>
+
+<a name="imports"></a>
+
+<a name="imports"></a>
+<div class="section" title="Imports">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+Imports
+</h2>
+</div>
+</div>
+</div>
+
+
+
+<p>
+The ordinary imports of type names are equivalent to the imports known from Java. Again one can escape any names conflicting with keywords using the <em>^</em>.
+</p>
+
+
+<a name="importExtension"></a>
+
+<a name="importExtension"></a>
+<div class="section" title="Importing Extension Methods">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Importing Extension Methods
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+In addition one can add the keyword <span class="inlinecode">extension</span>
+ after the import (where the keyword <span class="inlinecode">static</span>
+ occurs in Java), which makes any static methods 
+from a certain type available as an 
+<a href="02-LanguageConcepts.xdoc.html#extensionMethods">extension method</a>. The <span class="inlinecode">extension</span>
+ keyword only works with qualified imports (i.e. non-wildcard imports).
+If you only want to make some methods from the imported type available using the extension syntax, you can provide a list of function names.
+You cannot further specify type arguments.
+</p>
+
+<p>
+Example:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+import&nbsp;extension&nbsp;java.util.Collections.(sort,&nbsp;shuffle);<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+This will import four methods (<span class="inlinecode">sort(List&lt;T&gt;)</span>
+, <span class="inlinecode">sort(List&lt;T&gt;,&nbsp;Comparator&lt;?&nbsp;super&nbsp;T&gt;)</span>
+, <span class="inlinecode">shuffle(List&lt;?&gt;)</span>
+, <span class="inlinecode">shuffle(List&lt;?&gt;,&nbsp;Random)</span>
+) available as extension methods.
+</p>
+
+
+</div>
+
+
+
+<a name="imports-3"></a>
+<div class="section" title="Syntax">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Syntax
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+ImportSection&nbsp;:&nbsp;(Import|Injection)*;<br />Import&nbsp;:&nbsp;&apos;import&apos;&nbsp;&apos;extension&apos;?&nbsp;QualifiedName&nbsp;((&apos;.&apos;&apos;*&apos;)|&apos;(&apos;ID&nbsp;(&apos;,&apos;&nbsp;ID)&apos;)&apos;)?;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+</div>
+
+</div>
+
+<a name="inject"></a>
+
+<a name="inject"></a>
+<div class="section" title="Dependency Injection">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+Dependency Injection
+</h2>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Xtend2 has built-in support for dependency injection, which means that declaring dependencies is a first class feature of Xtend2.
+It is done as part of the import section and looks like this:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+inject&nbsp;org.eclipse.MyService&nbsp;myService;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+This will translate to Java as a corresponding import, a field as well a setter method annotated with @Inject: 
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">import</span>&nbsp;org.eclipse.MyService;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;...<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;MyService&nbsp;myService;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;@Inject<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setMyService(MyService&nbsp;myService)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.myService&nbsp;=&nbsp;myService;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+
+
+<a name="inject-5"></a>
+<div class="section" title="Name can be inferred">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Name can be inferred
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+You could even leave the name out as by default it will be the lower case version o the simple name of the class.
+That is the following inject declaration would be equvalent with the former.
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+inject&nbsp;org.eclipse.MyService;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+</div>
+
+
+
+<a name="inject-6"></a>
+<div class="section" title="Guice Keys">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Guice Keys
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Xtend2 uses Guice as the dependency injection container, which in turn uses types as keys. Those types can be generified, which
+is why you can write the following in Xtend2.
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+inject&nbsp;java.util.HashMap&lt;String,MyType&gt;&nbsp;myCache;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+Also Guice allows to use annotations to further distinct between different implementations of the same type. This is usually done by using
+the <span class="inlinecode">com.google.inject.name.Named</span>
+ annotation or a custom annotation which is itself annotated with <span class="inlinecode">com.google.inject.BindingAnnotation</span>
+.
+</p>
+
+<p>
+Xtend supports these two variants:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+inject&nbsp;@CustomAnnotation&nbsp;my.Service&nbsp;customService;&nbsp;<br />inject&nbsp;@&quot;NamedThingy&quot;&nbsp;my.Service&nbsp;namedService;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+</div>
+
+
+
+<a name="inject-7"></a>
+<div class="section" title="Injected Extension Methods">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Injected Extension Methods
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+The <span class="inlinecode">extension</span>
+ keyword is also available for <span class="inlinecode">inject</span>
+ which is a much nicer than importing static methods, because you don&apos;t bind your code to 
+actual implementation, since the implementation can be easily changed through global dependency configuration.
+</p>
+
+<p>
+Example:
+</p>
+
+<p>
+We will likely ship a nice library for the different common types. Imagine we had something like ListExtensions which adds some higher-order functions
+to the java.util.collection library (we will likely use google collections here).
+</p>
+
+<p>
+You declare the dependency like this:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+inject&nbsp;extension&nbsp;my.common.IterableExtensions;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+and can the use it as if those functions were members of any <span class="inlinecode">java.lang.Iterable</span>
+:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myIterable.find(e|e.name==&quot;Foo&quot;)<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+The nice thing with using injection as opposed to static methods is, that in case there is a bug in the extension or it implemented inefficiently, 
+you can simply exchange the component with a better implementation, without modifying the library nor the client code. 
+You&apos;ll just have to change the binding in your guice module. Also this gives you a general hook for any AOP-like thing you would want to do, 
+or allows you to write agains an SPI, where the concrete implementation can be provided by a third party.
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+ImportSection&nbsp;:&nbsp;(Import|Injection)*;<br />Import&nbsp;:&nbsp;...<br />Injection&nbsp;:&nbsp;&apos;inject&apos;&nbsp;&apos;extension&apos;?&nbsp;(&apos;@&apos;STRING&nbsp;|&nbsp;&apos;@&apos;TypeReference)&nbsp;TypeReference&nbsp;(&apos;(&apos;ID&nbsp;(&apos;,&apos;&nbsp;ID)&apos;)&apos;)?;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+</div>
+
+</div>
+
+<a name="classDeclaration"></a>
+
+<a name="classDeclaration"></a>
+<div class="section" title="Class Declaration">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+Class Declaration
+</h2>
+</div>
+</div>
+</div>
+
+
+
+<p>
+The class declaration reuses a lot of Java&apos;s syntax but still is a bit different in some aspects.
+Firstly the default visibility of any class is <span class="inlinecode">public</span>
+. It is possible to write it explicitly but if not specified it defaults to public.
+The <span class="inlinecode">package&nbsp;private</span>
+ visibility does not exist.
+</p>
+
+<p>
+The <span class="inlinecode">abstract</span>
+ as well as the <span class="inlinecode">final</span>
+ modifiers are directly translated to Java, hence have the exact same meaning.
+</p>
+
+
+
+
+<a name="classDeclaration-3"></a>
+<div class="section" title="Inheritance">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Inheritance
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Also inheritance is directly reused from Java. Xtend2 allows single inheritance of Java classes as well as implementing multiple Java interfaces.
+</p>
+
+
+</div>
+
+
+
+<a name="classDeclaration-4"></a>
+<div class="section" title="Generics">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Generics
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Full Java Generics are supported.
+</p>
+
+
+</div>
+
+
+
+<a name="classDeclaration-5"></a>
+<div class="section" title="Syntax">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Syntax
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+ClassDeclaration&nbsp;:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(Visibility|&apos;abstract&apos;|&apos;final&apos;)*&nbsp;&apos;class&apos;&nbsp;TypeParameters?&nbsp;(&apos;extends&apos;&nbsp;QualifiedName)?&nbsp;(&apos;implements&apos;&nbsp;QualifiedName&nbsp;(&apos;,&apos;&nbsp;QualifiedName)*)?&nbsp;&apos;{&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Members*<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;}&apos;<br />;<br />Visibility&nbsp;:&nbsp;&apos;public&apos;|&apos;protected&apos;|&apos;private&apos;;<br /><br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+</div>
+
+</div>
+
+<a name="Fields"></a>
+
+<a name="Fields"></a>
+<div class="section" title="Fields">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+Fields
+</h2>
+</div>
+</div>
+</div>
+
+
+
+<p>
+An Xtend2 class can have state, just declare a field like you are used to in Java.
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+int&nbsp;numberOfCalls&nbsp;=&nbsp;0;&nbsp;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+It directly translates to Java.
+The default visibility for fields is <span class="inlinecode">private</span>
+.
+</p>
+
+
+
+
+<a name="Fields-4"></a>
+<div class="section" title="Syntax">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Syntax
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+FieldDef&nbsp;:&nbsp;(&apos;public&apos;|&apos;protected&apos;|&apos;private&apos;|&apos;final&apos;)*&nbsp;TypeRef?&nbsp;ID&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;&apos;=&apos;&nbsp;Expression)?&nbsp;&apos;;&apos;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+</div>
+
+</div>
+
+<a name="Functions"></a>
+
+<a name="Functions"></a>
+<div class="section" title="Functions">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+Functions
+</h2>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Xtend2 functions are declared within a class and are usually translated to a corresponding Java method with the exact same signature. The only exception 
+is overloaded methods, which compile to a single method. This is explained in 
+<a href="02-LanguageConcepts.xdoc.html#polymorphicDispatch">section polymorphicDispatch</a>. 
+</p>
+
+<p>
+The default visibility of a function is <span class="inlinecode">public</span>
+, which can also be declared explicitly. The two other available visibilities are <span class="inlinecode">protected</span>
+ and <span class="inlinecode">private</span>
+.
+</p>
+
+<p>
+A function can be declared either <span class="inlinecode">final</span>
+ or <span class="inlinecode">abstract</span>
+. If it is declared <span class="inlinecode">abstract</span>
+ also the class needs to be declared <span class="inlinecode">abstract</span>
+ and the function is 
+not allowed to have an implementation.
+</p>
+
+<p>
+An example of a function declaration
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Boolean&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+<a name="inferredReturnTypes"></a>
+
+<a name="inferredReturnTypes"></a>
+<div class="section" title="Inferred Return Types">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Inferred Return Types
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+If the return type of a function can be inferred it does not need to be declared.
+That is the function
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Boolean&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+could be declared like this:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+This doesn&apos;t work for abstract function declarations as well as if the 
+return type of a function depends on a recursive call of the same function.
+The compiler tells the user when it needs to be specified.
+</p>
+
+
+</div>
+
+
+
+<a name="Functions-6"></a>
+<div class="section" title="Generics">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Generics
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Full Java Generics are supported.
+</p>
+
+
+</div>
+
+<a name="polymorphicDispatch"></a>
+
+<a name="polymorphicDispatch"></a>
+<div class="section" title="Method overloading and polymorphic dispatch">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Method overloading and polymorphic dispatch
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+It is possible to overload methods, but overloaded methods are not simply transalted to corresponding Java methods.
+Instead for each set of methods where the name is equal and the number of arguments is equal the most common dominator signature is taken (or computed if neccessary)
+and only for that method a Java method is derived. Within the implementation the correct method is looked up at runtime.
+This is done by sorting the methods from most specific to least specific and generating an if-else cascade for the code.
+</p>
+
+<p>
+Example: The following functions
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+foo(Number&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;some&nbsp;number&apos;;<br />foo(Integer&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;an&nbsp;int&apos;;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+compile to the following Java method:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x==&nbsp;null&nbsp;||&nbsp;x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;&quot;it&apos;s&nbsp;an&nbsp;<span class="keyword">int</span>&quot;;<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;&quot;it&apos;s&nbsp;some&nbsp;number&quot;;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}&nbsp;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+In case there is no single most general signature, one is computed.
+Example:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+foo(Number&nbsp;x,&nbsp;Integer&nbsp;y)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;some&nbsp;number&nbsp;and&nbsp;an&nbsp;int&apos;;<br />foo(Integer&nbsp;x,&nbsp;Number&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;an&nbsp;int&nbsp;and&nbsp;a&nbsp;number&apos;;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;((x==&nbsp;null&nbsp;||&nbsp;x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)&nbsp;&amp;&amp;&nbsp;(y==&nbsp;null&nbsp;||y&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;&quot;it&apos;s&nbsp;some&nbsp;number&nbsp;and&nbsp;an&nbsp;<span class="keyword">int</span>&quot;;<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;((x==&nbsp;null&nbsp;||&nbsp;x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;&amp;&amp;&nbsp;(y==&nbsp;null&nbsp;||&nbsp;y&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;&quot;it&apos;s&nbsp;an&nbsp;<span class="keyword">int</span>&nbsp;and&nbsp;a&nbsp;number&quot;;<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;UnsupportedOperationException(&quot;foo&nbsp;is&nbsp;not&nbsp;implemented&nbsp;<span class="keyword">for</span>&nbsp;arguments&nbsp;&quot;+x+&quot;&nbsp;and&nbsp;&quot;+y);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}&nbsp;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+As you can see a null reference is always a match. If you want to fetch null you can declare a parameter using the type <span class="inlinecode">java.lang.Void</span>
+.
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+foo(Void&nbsp;x)&nbsp;:&nbsp;throw&nbsp;new&nbsp;NullPointerException(&quot;x&quot;);<br />foo(Number&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;some&nbsp;number&apos;;<br />foo(Integer&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;an&nbsp;int&apos;;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+Which compiles to the following Java code:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x==&nbsp;null)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;NullPointerException(&quot;x&quot;)<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x==&nbsp;null&nbsp;||&nbsp;x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;&quot;it&apos;s&nbsp;an&nbsp;<span class="keyword">int</span>&quot;;<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;&quot;it&apos;s&nbsp;some&nbsp;number&quot;;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}&nbsp;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+So essential we put the polymorphic invocation logic into the declaration and not into the method call.
+The nice thing is that polymorphic overloaded functions can be transparently called from Java, and behave exactly the same as if they were called from Xtend2.
+</p>
+
+
+</div>
+
+
+
+<a name="Functions-8"></a>
+<div class="section" title="Syntax">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Syntax
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Syntactically Xtend functions are much like Java methods, expect that there are no static methods, the return types are optional and of course the function body
+consists of one expression instead of a sequence of statements. 
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+FunctionDef&nbsp;:&nbsp;(&apos;public&apos;|&apos;protected&apos;|&apos;private&apos;|&apos;abstract&apos;|&apos;final&apos;)*&nbsp;TypeParameters?&nbsp;TypeRef?&nbsp;ID&apos;(&apos;(ParameterDeclaration&nbsp;(&apos;,&apos;&nbsp;ParameterDeclaration)*)?&apos;)&apos;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(&apos;throws&apos;&nbsp;TypeRef&nbsp;(&apos;,&apos;&nbsp;TypeRef)*)?<br />&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;&apos;:&apos;&nbsp;Expression&nbsp;&apos;;&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;BlockExpression<br />&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&apos;;&apos;)<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+</div>
+
+</div>
+
+<a name="Expressions"></a>
+
+<a name="Expressions"></a>
+<div class="section" title="Expressions (in addition Xbase)">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+Expressions (in addition Xbase)
+</h2>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Xtend2 adds a couple of expressions to the basic set of expressions provided by Xbase.
+</p>
+
+
+<a name="RichStrings"></a>
+
+<a name="RichStrings"></a>
+<div class="section" title="Rich Strings">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Rich Strings
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Of course there is the template expression, which is used to write readable string concatenation, which is the main thing you do when writing a code generator.
+Xtend2 reuses the syntax known from the well known and widely used Xpand template language (in fact Xtend2 is considered the successor to Xpand and Xtend). Let&apos;s have a look at
+an example of how a typical function with template expressions look like:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+toClass(Entity&nbsp;this)&nbsp;:»<br />&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;«packageName»;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;«placeImports»<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;«name»&nbsp;«IF&nbsp;extendedType!=null»extends&nbsp;«extendedType»«ENDIF»{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«FOREACH&nbsp;members»<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«member.toMember»<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«ENDFOREACH»<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;«;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+If you are familiar with Xpand, you&apos;ll notice that it is exactly the same syntax. The difference is, that the template syntax is actually an expression, which means it 
+can occur everywhere where an expression is expected. For instance in conjunction the powerful switch expression from Xbase:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+toMember(Member&nbsp;this)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;switch(this)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Field&nbsp;:»private&nbsp;«type»&nbsp;«name»&nbsp;;«;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;case&nbsp;isAbstract&nbsp;:»&nbsp;abstract&nbsp;«...;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Method:»&nbsp;.....&nbsp;«;<br />&nbsp;&nbsp;&nbsp;&nbsp;};<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+<a name="RichStringIF"></a>
+
+<a name="RichStringIF"></a>
+<div class="section" title="IF in Rich Strings">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+IF in Rich Strings
+</h4>
+</div>
+</div>
+</div>
+
+
+
+<p>
+There is a special IF to be used within rich strings which is identical in syntax and meaning to the old IF from Xpand.
+Note that you could also use the if expression, but since it has not an explicit terminal token, it is not as readable in that context.
+</p>
+
+
+</div>
+
+<a name="RichStringFOREACH"></a>
+
+<a name="RichStringFOREACH"></a>
+<div class="section" title="FOREACH in Rich Strings">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+FOREACH in Rich Strings
+</h4>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Also the FOREACH statement is available and can only be used in the context of a rich string.
+It also supports the SEPARATOR and ITERATOR declaration from Xpand. 
+
+</p>
+
+
+</div>
+
+<a name="RichStringType"></a>
+
+<a name="RichStringType"></a>
+<div class="section" title="Typing">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+Typing
+</h4>
+</div>
+</div>
+</div>
+
+
+
+<p>
+The rich string is translated to an efficient string concatenation and the return type of a rich string is <span class="inlinecode">java.lang.CharStream</span>
+ which allows
+much room for efficient implementation.
+</p>
+
+
+</div>
+
+</div>
+
+<a name="collectShortcut"></a>
+
+<a name="collectShortcut"></a>
+<div class="section" title="Shortcut navigation through lists">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Shortcut navigation through lists
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+In Xtend2 one usually navigates over graphs which contain a lot of collections. If you for instance need the qualified name of
+the interfaces a type is extending you could write the following using closures:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myType.interfaces.collect(e|e.qualifiedName)<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+However because this situation is so common Xtend2 provides a special sugared expression for that.
+So instead of the code above you can write:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myType.interfaces.*qualifiedName<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+Note that we decided to come up with an explicit operator (.*) because overloading the &apos;.&apos; operator as it is the case in Xpand,
+has caused a lot of surprises in the past. With an explicit operator the tooling as well as the user always can distinct whether you
+invoke a feature on the iterables elements or on the iterable itself.
+</p>
+
+<p>
+The operator works on all members of <span class="inlinecode">java.lang.Iterable</span>
+. the return type is always an <span class="inlinecode">java.lang.Iterable&lt;T&gt;</span>
+ where <span class="inlinecode">T</span>
+
+is the return type of the called feature.
+</p>
+
+
+</div>
+
+<a name="extensionMethods"></a>
+
+<a name="extensionMethods"></a>
+<div class="section" title="Extension Method Syntax">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Extension Method Syntax
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Static functions as well as any members annotated with @Extension can be called using the extension method syntax.
+This means that a function imported through a static import, like e.g. java.util.Collections.singleton(T) can be invoked using 
+the member syntax.
+</p>
+
+<p>
+Example:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+&quot;Foo&quot;.singleton<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+is the same as
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+singleton(&quot;Foo&quot;)<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+Note that extension methods never shadow a member of the current reference. That is if <span class="inlinecode">java.lang.String</span>
+ has a field <span class="inlinecode">singleton</span>
+, a method <span class="inlinecode">singleton()</span>
+ or a method
+<span class="inlinecode">getSingleton()</span>
+, those memebers would be referenced. That is done at compile time, so the tooling is able to tell you what you actually reference.
+</p>
+
+<p>
+Static functions as well as extensions in the previous version of Xtend make clients not only depend on a certain signature but on the implementation as it is not 
+possible to exchange the implementation of a static function. That&apos;s where the @Extension annotation in conjunction with dependency injection comes in.
+</p>
+
+<p>
+If you have declared a field with @Extension than all members of that type become available for extension method syntax.
+</p>
+
+<p>
+Example
+</p>
+
+<p>
+Imagine the following Java interface
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+interface&nbsp;MyExtensions&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;getComputedProperty(SomeType&nbsp;type);<br />}<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+With Java you would have to call this method on an instance of MyExtensions like so:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myExtensions.getComputedProperty(someType)<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+In Xtend2 you can have the instance injected like in Java:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Inject&nbsp;@Extension&nbsp;MyExtensions&nbsp;extensions;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+But instead of using the long expression known from Java (which would also work) you are able to use the extension method syntax:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+someType.computedProperty<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+It will statically bind to the right method and even more important it doesn&apos;t bind to a specific implementation but just to the signature.
+The implementation can be provided through dependency injection.
+</p>
+
+
+</div>
+
+</div>
+
+</body>
+</html>
