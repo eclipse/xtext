@@ -8,59 +8,51 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.hover;
 
-import java.util.Collection;
-import java.util.Iterator;
-
 import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.DefaultInformationControl;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IInformationControl;
+import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextHover;
+import org.eclipse.jface.text.ITextHoverExtension;
 import org.eclipse.jface.text.ITextHoverExtension2;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.Region;
-import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.graphics.Point;
-import org.eclipse.xtext.ui.XtextUIMessages;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.editors.text.EditorsUI;
+import org.eclipse.xtext.ui.editor.ISourceViewerAware;
 
 /**
  * @author Patrick Schoenbach - Initial API and implementation
  */
-public abstract class AbstractHover implements IAnnotationHover, ITextHover, ITextHoverExtension2 {
+public abstract class AbstractHover implements ITextHover, ITextHoverExtension, ITextHoverExtension2, ISourceViewerAware {
 
-	protected final ISourceViewer sourceViewer;
+	protected ISourceViewer sourceViewer;
 
-	public AbstractHover(final ISourceViewer sourceViewer) {
-		if (sourceViewer == null)
-			throw new IllegalArgumentException();
-
-		this.sourceViewer = sourceViewer;
+	public void setSourceViewer(ISourceViewer sourceViewer) {
+		this.sourceViewer = sourceViewer;		
 	}
 
 	public IDocument getDocument() {
 		return sourceViewer.getDocument();
 	}
 
-	public String getHoverInfo(final ISourceViewer sourceViewer, final int lineNumber) {
-		return getHoverInfoInternal(lineNumber, -1);
-	}
 
 	@Deprecated
 	public String getHoverInfo(final ITextViewer textViewer, final IRegion hoverRegion) {
-		return getHoverInfo2(textViewer, hoverRegion);
+		Object o = getHoverInfo2(textViewer, hoverRegion);
+		if (o!=null)
+			return o.toString();
+		return null;
 	}
 
-	// for TextHover
-	public String getHoverInfo2(final ITextViewer textViewer, final IRegion hoverRegion) {
-		int lineNumber;
-		try {
-			lineNumber = getDocument().getLineOfOffset(hoverRegion.getOffset());
-		}
-		catch (final BadLocationException e) {
-			return null;
-		}
-		return getHoverInfoInternal(lineNumber, hoverRegion.getOffset());
+	public int getLineNumber (final ITextViewer textViewer, final IRegion hoverRegion) throws BadLocationException {
+		return textViewer.getDocument().getLineOfOffset(hoverRegion.getOffset());
 	}
+
 
 	public IRegion getHoverRegion(final ITextViewer textViewer, final int offset) {
 		final Point selection = textViewer.getSelectedRange();
@@ -68,39 +60,17 @@ public abstract class AbstractHover implements IAnnotationHover, ITextHover, ITe
 			return new Region(selection.x, selection.y);
 		return new Region(offset, 0);
 	}
-
-	protected String formatInfo(final Collection<String> messages) {
-		final StringBuffer buffer = new StringBuffer();
-		if (messages.size() > 1) {
-			buffer.append(XtextUIMessages.AbstractHover_MultipleMarkers);
-			final Iterator<String> e = messages.iterator();
-			while (e.hasNext()) {
-				splitInfo("- " + e.next() + "\n", buffer);
+	
+	/*
+	 * @see ITextHoverExtension#getHoverControlCreator()
+	 * @since 3.0
+	 */
+	public IInformationControlCreator getHoverControlCreator() {
+		return new IInformationControlCreator() {
+			public IInformationControl createInformationControl(Shell parent) {
+				return new DefaultInformationControl(parent, EditorsUI.getTooltipAffordanceString());
 			}
-		}
-		else if (messages.size() == 1) {
-			splitInfo(messages.iterator().next(), buffer);
-		}
-		return buffer.toString();
+		};
 	}
 
-	protected abstract String getHoverInfoInternal(final int lineNumber, final int offset);
-
-	private String splitInfo(final String message, final StringBuffer buffer) {
-		String msg = message;
-		String prefix = "";
-		int pos;
-		do {
-			pos = msg.indexOf(" ", 60);
-			if (pos > -1) {
-				buffer.append(prefix + msg.substring(0, pos) + "\n");
-				msg = msg.substring(pos);
-				prefix = "  ";
-			}
-			else {
-				buffer.append(prefix + msg);
-			}
-		} while (pos > -1);
-		return buffer.toString();
-	}
 }

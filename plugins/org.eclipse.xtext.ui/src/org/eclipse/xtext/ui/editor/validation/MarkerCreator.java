@@ -25,13 +25,14 @@ public class MarkerCreator {
 			lineNR = "line: " + issue.getLineNumber() + " ";
 		}
 		marker.setAttribute(IMarker.LOCATION, lineNR + resource.getFullPath().toString());
+		marker.setAttribute(Issue.CODE_KEY, issue.getCode());		
+		marker.setAttribute(IMarker.SEVERITY, getSeverity(issue));
 		marker.setAttribute(IMarker.CHAR_START, issue.getOffset());
 		if(issue.getOffset() != null && issue.getLength() != null)
 			marker.setAttribute(IMarker.CHAR_END, issue.getOffset()+issue.getLength());
 		marker.setAttribute(IMarker.LINE_NUMBER, issue.getLineNumber());
 		marker.setAttribute(IMarker.MESSAGE, issue.getMessage());
-		marker.setAttribute(IMarker.SEVERITY, getSeverity(issue));
-		marker.setAttribute(Issue.CODE_KEY, issue.getCode());
+
 		if (issue.getUriToProblem()!=null) 
 			marker.setAttribute(Issue.URI_KEY, issue.getUriToProblem().toString());
 		if(issue.getData() != null && issue.getData().length > 0) {
