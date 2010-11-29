@@ -57,12 +57,12 @@ public class XtextHtmlHoverTest extends AbstractEditorTest {
 	}
 
 	@SuppressWarnings("deprecation")
-	public void testNoHover () {	
+	public void testNoHover() {	
 		assertNull(hover.getHoverInfo(editor.getInternalSourceViewer(), new Region(0, 1)));
 		assertNull(hover.getHoverInfo2(editor.getInternalSourceViewer(), new Region(0, 1)));
 	}
 	
-	public void testHover () {	
+	public void testHover() {	
 		assertNotNull(hover.getHoverInfo2(editor.getInternalSourceViewer(), new Region(modelAsText.indexOf("mystuff"), 1)));
 		XtextBrowserInformationControlInput ici = (XtextBrowserInformationControlInput) hover.getHoverInfo2(editor.getInternalSourceViewer(), new Region(modelAsText.indexOf("mystuff"), 1));
 		assertNotNull(ici); 
