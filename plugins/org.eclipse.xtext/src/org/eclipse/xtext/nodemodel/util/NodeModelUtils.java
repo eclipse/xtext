@@ -121,9 +121,11 @@ public class NodeModelUtils {
 			if (grammarElement != null) {
 				if (grammarElement instanceof Action) {
 					Action action = (Action) grammarElement;
-					child = iterator.next();
-					if (featureName.equals(action.getFeature())) {
-						result.add(child);
+					if (child.getSemanticElement() == semanticElement) {
+						child = iterator.next();
+						if (featureName.equals(action.getFeature())) {
+							result.add(child);
+						}
 					}
 					iterator.prune();
 				} else if (child != node) {
