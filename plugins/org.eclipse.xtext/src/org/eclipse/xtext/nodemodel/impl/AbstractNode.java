@@ -26,7 +26,7 @@ import com.google.common.collect.Iterators;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractNode implements INode {
+public abstract class AbstractNode implements INode, BidiTreeIterable<INode> {
 	
 	private CompositeNode parent;
 
@@ -48,6 +48,10 @@ public abstract class AbstractNode implements INode {
 	
 	protected void basicSetParent(CompositeNode parent) {
 		this.parent = parent;
+	}
+	
+	public BidiTreeIterable<INode> getAsTreeIterable() {
+		return this;
 	}
 	
 	public BidiTreeIterator<INode> iterator() {

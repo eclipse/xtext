@@ -62,7 +62,7 @@ public class MultiLineCommentDocumentationProvider implements IEObjectDocumentat
 		ICompositeNode node = NodeModelUtils.getNode(o);
 		if (node != null) {
 			// get the last multi line comment before a non hidden leaf node
-			for (INode abstractNode : node) {
+			for (INode abstractNode : node.getAsTreeIterable()) {
 				if (abstractNode instanceof ILeafNode && !((ILeafNode) abstractNode).isHidden())
 					break;
 				if (abstractNode instanceof ILeafNode && abstractNode.getGrammarElement() instanceof TerminalRule

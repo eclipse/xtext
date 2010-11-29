@@ -373,7 +373,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 	}
 
 	private INode getLastChild(ICompositeNode parent) {
-		BidiTreeIterator<? extends INode> iterator = parent.iterator();
+		BidiTreeIterator<? extends INode> iterator = parent.getAsTreeIterable().iterator();
 		while(iterator.hasPrevious()) {
 			INode previous = iterator.previous();
 			if (previous instanceof ILeafNode) {

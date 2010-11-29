@@ -114,7 +114,7 @@ public class NodeModelUtils {
 	private static List<INode> findNodesForFeature(EObject semanticElement, INode node,	EStructuralFeature structuralFeature) {
 		List<INode> result = Lists.newArrayList();
 		String featureName = structuralFeature.getName();
-		BidiTreeIterator<INode> iterator = node.iterator();
+		BidiTreeIterator<INode> iterator = node.getAsTreeIterable().iterator();
 		while(iterator.hasNext()) {
 			INode child = iterator.next();
 			EObject grammarElement  = child.getGrammarElement();

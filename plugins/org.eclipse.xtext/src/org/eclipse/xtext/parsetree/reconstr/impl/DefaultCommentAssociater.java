@@ -108,7 +108,7 @@ public class DefaultCommentAssociater extends AbstractCommentAssociater {
 	}
 
 	protected EObject getEObjectForRemainingComments(ICompositeNode rootNode) {
-		TreeIterator<INode> i = rootNode.iterator();
+		TreeIterator<INode> i = rootNode.getAsTreeIterable().iterator();
 		while (i.hasNext()) {
 			INode o = i.next();
 			if (o.hasDirectSemanticElement())

@@ -120,7 +120,7 @@ public class ParseErrorHandlingTest extends AbstractXtextTests {
 	protected Iterable<INode> allSyntaxErrors(final ICompositeNode node) {
 		return new Iterable<INode>() {
 			public Iterator<INode> iterator() {
-				return Iterators.filter(node.iterator(), new Predicate<INode>() {
+				return Iterators.filter(node.getAsTreeIterable().iterator(), new Predicate<INode>() {
 					public boolean apply(INode input) {
 						return input.getSyntaxErrorMessage() != null;
 					}

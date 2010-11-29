@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface INode extends BidiTreeIterable<INode> {
+public interface INode {
 
 	/**
 	 * Returns the parent of the node or <code>null</code> if and only if this is the root node.
@@ -152,12 +152,12 @@ public interface INode extends BidiTreeIterable<INode> {
 	SyntaxErrorMessage getSyntaxErrorMessage();
 	
 	/**
-	 * Returns a tree iterator that uses this node as its origin and root instance. It will not return any
+	 * Returns a tree iterable that uses this node as its origin and root instance. Its iterator will not return any
 	 * siblings of this root. However, the first element returned by {@link BidiTreeIterator#previous()}
 	 * or {@link BidiTreeIterator#next()} will be this instance.
 	 * 
 	 * {@inheritDoc}
 	 */
-	BidiTreeIterator<INode> iterator();
+	BidiTreeIterable<INode> getAsTreeIterable();
 
 }
