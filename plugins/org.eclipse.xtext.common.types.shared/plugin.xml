@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.xtext.protocol_resourceServiceProvider">
+      <resourceServiceProvider
+            class="org.eclipse.xtext.common.types.shared.SharedCommonTypesExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+            protocolName="java">
+      </resourceServiceProvider>
+   </extension>
+
+</plugin>

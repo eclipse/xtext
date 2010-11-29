@@ -29,8 +29,6 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
-import org.eclipse.xtext.documentation.impl.MutiLineCommentDocumentationProvider;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IExternalContentSupport;
@@ -59,7 +57,6 @@ import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.formatting.PreferenceStoreIndentationInformation;
 import org.eclipse.xtext.ui.editor.hover.DefaultCompositeHover;
 import org.eclipse.xtext.ui.editor.hover.ProblemAnnotationHover;
-import org.eclipse.xtext.ui.editor.hover.html.HtmlEObjectDocumentationProviderDecorator;
 import org.eclipse.xtext.ui.editor.hyperlinking.DefaultHyperlinkDetector;
 import org.eclipse.xtext.ui.editor.model.DocumentPartitioner;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
@@ -286,12 +283,6 @@ public class DefaultUiModule extends AbstractGenericModule {
 				.to(WorkspaceEncodingProvider.class);
 	}	
 	
-	public void configureDefaultHtmlEObjectDocumentationProvider(Binder binder) {
-		binder.bind(IEObjectDocumentationProvider.class).annotatedWith
-		(Names.named(HtmlEObjectDocumentationProviderDecorator.DELEGATE))
-		.to(MutiLineCommentDocumentationProvider.class);		
-	}
-
 	public Class<? extends IAllContainersState.Provider> bindIAllContainersState$Provider() {
 		return ContainerStateProvider.class;
 	}
@@ -312,8 +303,4 @@ public class DefaultUiModule extends AbstractGenericModule {
 		return DefaultCompositeHover.class;
 	}
 			
-	public Class<? extends IEObjectDocumentationProvider> bindIEObjectDocumentationProvider () {
-		return HtmlEObjectDocumentationProviderDecorator.class;
-	}
-
 }

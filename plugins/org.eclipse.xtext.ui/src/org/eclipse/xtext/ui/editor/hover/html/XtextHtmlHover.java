@@ -41,11 +41,12 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.editors.text.EditorsUI;
-import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
+import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.hover.AbstractEObjectHover;
+import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.internal.Activator;
@@ -71,7 +72,7 @@ import com.ibm.icu.text.MessageFormat;
 public class XtextHtmlHover extends AbstractEObjectHover {
 
 	@Inject
-	private IEObjectDocumentationProvider documentationProvider;
+	private IGlobalServiceProvider serviceProvider;
 	
 	@Inject
 	private IURIEditorOpener uriEditorOpener;
@@ -86,9 +87,6 @@ public class XtextHtmlHover extends AbstractEObjectHover {
 	
 	@Inject
 	private XtextElementLinks elementLinks;
-	
-	@Inject 
-	private ILabelProvider labelProvider;
 	
 	private static String fgStyleSheet;
 
@@ -412,10 +410,7 @@ public class XtextHtmlHover extends AbstractEObjectHover {
 		return internalGetHoverInfo(textViewer, hoverRegion);
 	}
 
-	private XtextBrowserInformationControlInput internalGetHoverInfo(final ITextViewer textViewer, final IRegion hoverRegion) {
-		if (documentationProvider==null) 
-			return null;
-		
+	protected XtextBrowserInformationControlInput internalGetHoverInfo(final ITextViewer textViewer, final IRegion hoverRegion) {
 		IXtextDocument xtextDocument = XtextDocumentUtil.get(textViewer);
 
 		return xtextDocument.readOnly(new IUnitOfWork<XtextBrowserInformationControlInput, XtextResource>() {
@@ -423,7 +418,7 @@ public class XtextHtmlHover extends AbstractEObjectHover {
 				Pair<EObject,IRegion> element = getXtextElementAt(state, hoverRegion);
 				if (element!=null && element.getSecond()!=null) {
 					return getHoverInfo (element.getFirst(), hoverRegion, null);
-				} 
+				}
 				return null;
 			}		
 		});
@@ -435,12 +430,17 @@ public class XtextHtmlHover extends AbstractEObjectHover {
 	}
 	
 	protected XtextBrowserInformationControlInput getHoverInfo(EObject element, IRegion hoverRegion, XtextBrowserInformationControlInput previous) {
-		String html = documentationProvider.getDocumentation(element);
+		IEObjectHoverProvider hoverProvider = serviceProvider.findService(element, IEObjectHoverProvider.class);
+		if (hoverProvider==null) {
+			return null;
+		}
+		String html = hoverProvider.getHoverInfoAsHtml(element);
 		if (html!=null) {
 			StringBuffer buffer = new StringBuffer(html);
 			HTMLPrinter.insertPageProlog(buffer, 0, getStyleSheet());
 			HTMLPrinter.addPageEpilog(buffer);
 			html = buffer.toString();
+			ILabelProvider labelProvider = serviceProvider.findService(element, ILabelProvider.class);
 			return new XtextBrowserInformationControlInput(previous, element, html, labelProvider);
 		}
 		return null;

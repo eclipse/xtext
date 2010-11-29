@@ -18,6 +18,7 @@ import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.validation.IResourceValidator;
 
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -76,5 +77,12 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 
 	public IURIEditorOpener getURIEditorOpener() {
 		return uriEditorOpener;
+	}
+	
+	@Inject
+	private Injector injector;
+	
+	public <T> T get(Class<T> t) {
+		return injector.getInstance(t);
 	}
 }

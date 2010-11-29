@@ -51,8 +51,12 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 				+ "generate test 'http://test'\n"
 				+ "Model: name=ID;";
 		resource = getResource(documentContent, uri.toString());
-		DefaultResourceServiceProvider provider = new DefaultResourceServiceProvider();
-		provider.setResourceDescriptionManager(this);
+		DefaultResourceServiceProvider provider = new DefaultResourceServiceProvider() {
+			@Override
+			public org.eclipse.xtext.resource.IResourceDescription.Manager getResourceDescriptionManager() {
+				return DocumentBasedDirtyResourceTest.this;
+			}
+		};
 		resource.setResourceServiceProvider(provider);
 		dirtyResource = new DocumentBasedDirtyResource();
 		description = this;

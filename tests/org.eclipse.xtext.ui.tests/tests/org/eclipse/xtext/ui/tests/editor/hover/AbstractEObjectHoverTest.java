@@ -68,7 +68,7 @@ public class AbstractEObjectHoverTest extends AbstractEditorTest {
 	public void testCrossReferences () {
 		assertNull (hover.getHoverRegion(editor.getInternalSourceViewer(), 34));
 		assertEquals(new Region (35,7), hover.getHoverRegion(editor.getInternalSourceViewer(), 35));
-		assertEquals(new Region (35,7), hover.getHoverRegion(editor.getInternalSourceViewer(), 42));
+		assertEquals(new Region (35,7), hover.getHoverRegion(editor.getInternalSourceViewer(), 41));
 		assertNull (hover.getHoverRegion(editor.getInternalSourceViewer(), 43));
 	}
 
