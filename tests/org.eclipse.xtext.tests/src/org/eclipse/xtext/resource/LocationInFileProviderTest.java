@@ -147,9 +147,9 @@ public class LocationInFileProviderTest extends AbstractXtextTests {
 		ITextRegion location = locationInFileProvider.getFullTextRegion(elements.get(0), LocationprovidertestPackage.Literals.ELEMENT__NAME, 0);
 		assertEquals(modelAsString.indexOf("x"), location.getOffset());
 		assertEquals(1, location.getLength());
-		// index out of bounds -> return owner's full region 
+		// single feature index out of bounds -> ignore index 
 		location = locationInFileProvider.getFullTextRegion(elements.get(1), LocationprovidertestPackage.Literals.ELEMENT__NAME, 1);
-		assertEquals(modelAsString.indexOf("element y"), location.getOffset());
-		assertEquals("element y".length(), location.getLength());		
+		assertEquals(modelAsString.lastIndexOf("y"), location.getOffset());
+		assertEquals("y".length(), location.getLength());		
 	}
 }
