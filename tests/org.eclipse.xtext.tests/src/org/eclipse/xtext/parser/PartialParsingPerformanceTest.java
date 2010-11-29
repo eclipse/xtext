@@ -20,7 +20,7 @@ import com.google.common.collect.Iterables;
  */
 public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 
-	private static final int NUM_ELEMENTS = 4500 /* 0 */;
+	private static final int NUM_ELEMENTS = 100 /* 0 */;
 	
 	public void testExpression_FirstTime() throws Exception {
 		doTestExpression();
