@@ -63,8 +63,11 @@ public class NamesAreUniqueValidator extends AbstractDeclarativeValidator {
 	}
 
 	public void doCheckUniqueNames(Resource resource, CancelIndicator cancelIndicator) {
-		IResourceDescription.Manager manager = resourceServiceProviderRegistry.getResourceServiceProvider(
-				resource.getURI()).getResourceDescriptionManager();
+		final IResourceServiceProvider resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(
+				resource.getURI());
+		if (resourceServiceProvider==null)
+			return;
+		IResourceDescription.Manager manager = resourceServiceProvider.getResourceDescriptionManager();
 		if (manager != null) {
 			IResourceDescription description = manager.getResourceDescription(resource);
 			if (description != null) {

@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 
@@ -55,7 +56,10 @@ public class LoadOnDemandResourceDescriptions implements IResourceDescriptions {
 				IResourceServiceProvider serviceProvider = serviceProviderRegistry.getResourceServiceProvider(uri);
 				if (serviceProvider==null)
 					throw new IllegalStateException("No "+IResourceServiceProvider.class.getSimpleName()+" found in registry for uri "+uri);
-				result = serviceProvider.getResourceDescriptionManager().getResourceDescription(resource);
+				final Manager resourceDescriptionManager = serviceProvider.getResourceDescriptionManager();
+				if (resourceDescriptionManager == null)
+					throw new IllegalStateException("No "+IResourceDescription.Manager.class.getName()+" provided by service provider for URI "+uri);
+				result = resourceDescriptionManager.getResourceDescription(resource);
 			}
 		}
 		return result;

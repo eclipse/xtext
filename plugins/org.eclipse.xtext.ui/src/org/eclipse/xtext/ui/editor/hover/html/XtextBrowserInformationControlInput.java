@@ -66,6 +66,8 @@ public class XtextBrowserInformationControlInput extends BrowserInformationContr
 
 	@Override
 	public String getInputName() {
+		if (fLabelProvider==null)
+			return "no label provider";
 		return fLabelProvider.getText(fElement);
 	}
 

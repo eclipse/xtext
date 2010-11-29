@@ -69,8 +69,12 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		resourceSet = new ResourceSetImpl();
 		resourceURI = URI.createURI("scheme://foo");
 		resource = new XtextResource(resourceURI);
-		DefaultResourceServiceProvider resourceServiceProvider = new DefaultResourceServiceProvider();
-		resourceServiceProvider.setResourceDescriptionManager(this);
+		DefaultResourceServiceProvider resourceServiceProvider = new DefaultResourceServiceProvider() {
+			@Override
+			public org.eclipse.xtext.resource.IResourceDescription.Manager getResourceDescriptionManager() {
+				return DirtyStateEditorSupportTest.this;
+			}
+		};
 		resource.setResourceServiceProvider(resourceServiceProvider);
 		resourceSet.getResources().add(resource);
 		dirtyStateSupport = new DirtyStateEditorSupport();

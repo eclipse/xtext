@@ -24,7 +24,7 @@ import com.google.inject.name.Named;
 /**
  * @author Christoph Kulla - Initial contribution and API
  */
-public class MutiLineCommentDocumentationProvider implements IEObjectDocumentationProvider {
+public class MultiLineCommentDocumentationProvider implements IEObjectDocumentationProvider {
 
 	public final static String RULE = "org.eclipse.xtext.ui.editor.hover.MultiLineDocumentationProvider.ruleName";
 	public final static String START_TAG = "org.eclipse.xtext.ui.editor.hover.MultiLineDocumentationProvider.startTag";
@@ -39,7 +39,7 @@ public class MutiLineCommentDocumentationProvider implements IEObjectDocumentati
 
 	@Inject(optional = true)
 	@Named(START_TAG)
-	String startTag = "/\\*\\*"; // regular expression
+	String startTag = "/\\*"; // regular expression
 
 	@Inject(optional = true)
 	@Named(END_TAG)

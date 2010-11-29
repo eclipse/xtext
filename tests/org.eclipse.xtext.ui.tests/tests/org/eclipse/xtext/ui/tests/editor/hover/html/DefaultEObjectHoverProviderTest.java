@@ -11,10 +11,11 @@
 package org.eclipse.xtext.ui.tests.editor.hover.html;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.ui.editor.hover.html.HtmlEObjectDocumentationProviderDecorator;
+import org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.TestLanguageRuntimeModule;
@@ -26,12 +27,11 @@ import org.eclipse.xtext.util.Modules2;
 import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.name.Names;
 
 /**
  * @author Christoph Kulla - Initial contribution and API
  */
-public class HtmlEObjectDocumentationProviderDecoratorTest extends AbstractXtextTests {
+public class DefaultEObjectHoverProviderTest extends AbstractXtextTests {
 
 	public ISetup getTestLanguageSetup(final IEObjectDocumentationProvider ieObjectDocumentationProvider) {
 		return new KeywordsUiTestLanguageStandaloneSetup() {
@@ -39,17 +39,23 @@ public class HtmlEObjectDocumentationProviderDecoratorTest extends AbstractXtext
 			public Injector createInjector() {
 				return Guice.createInjector(Modules2.mixin(
 						new TestLanguageRuntimeModule(),
-						new TestLanguageUiModule(Activator.getInstance()) {
-							@Override
-							public void configureDefaultHtmlEObjectDocumentationProvider(Binder binder) {
-								binder.bind(IEObjectDocumentationProvider.class).annotatedWith
-								(Names.named(HtmlEObjectDocumentationProviderDecorator.DELEGATE))
-								.toInstance(ieObjectDocumentationProvider);		
-							}							
-						},
+						new TestModule(Activator.getInstance(),ieObjectDocumentationProvider),
 						new SharedStateModule()));
 			}
 		};
+	}
+	
+	static class TestModule extends TestLanguageUiModule {
+
+		private IEObjectDocumentationProvider provider;
+
+		public TestModule(AbstractUIPlugin plugin, final IEObjectDocumentationProvider provider) {
+			super(plugin);
+			this.provider = provider;
+		}
+		public IEObjectDocumentationProvider bindIEObjectDocumentationProvider() {
+			return provider;		
+		}
 	}
 	
 	public void testElementHasNoDocumentation () throws Exception {
@@ -59,8 +65,8 @@ public class HtmlEObjectDocumentationProviderDecoratorTest extends AbstractXtext
 			}
 		}));
 		File f = (File) getModel ("stuff test");
-		HtmlEObjectDocumentationProviderDecorator cut = get(HtmlEObjectDocumentationProviderDecorator.class);
-		assertEquals ("Stuff <b>test</b>", cut.getDocumentation(f.getStuff().get(0)));
+		DefaultEObjectHoverProvider cut = get(DefaultEObjectHoverProvider.class);
+		assertEquals ("Stuff <b>test</b>", cut.getHoverInfoAsHtml(f.getStuff().get(0)));
 	}
 	
 	public void testElementHasDocumentation () throws Exception {
@@ -70,8 +76,8 @@ public class HtmlEObjectDocumentationProviderDecoratorTest extends AbstractXtext
 			}
 		}));
 		File f = (File) getModel ("stuff test");
-		HtmlEObjectDocumentationProviderDecorator cut = get(HtmlEObjectDocumentationProviderDecorator.class);
-		assertEquals ("Stuff <b>test</b><p>Test</p>", cut.getDocumentation(f.getStuff().get(0)));
+		DefaultEObjectHoverProvider cut = get(DefaultEObjectHoverProvider.class);
+		assertEquals ("Stuff <b>test</b><p>Test</p>", cut.getHoverInfoAsHtml(f.getStuff().get(0)));
 	}
 	
 }

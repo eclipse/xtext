@@ -13,36 +13,43 @@ package org.eclipse.xtext.ui.editor.hover.html;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
+import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 /**
  * Returns a html string as documentation. Delegates to another IEObjectDocumentationProvider and adds
  * the objects type and label at the beginning.
  * 
  * @author Christoph Kulla - Initial contribution and API
+ * @author Sven Efftinge
  */
-public class HtmlEObjectDocumentationProviderDecorator implements IEObjectDocumentationProvider {
-
-	public static final String DELEGATE = "org.eclipse.xtext.ui.editor.hover.html.DelegatingtHtmlEObjectDocumentationProvider.delegate";
+public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 
 	@Inject
 	private ILabelProvider labelProvider;
 
-	@Inject @Named(DELEGATE)
+	@Inject
 	private IEObjectDocumentationProvider decoratedProvider;
 
-	public String getDocumentation(EObject o) {
+	public String getHoverInfoAsHtml(EObject o) {
 		StringBuffer buffer = new StringBuffer();
-		buffer.append (o.eClass().getName()+ " <b>"+getLabel(o)+"</b>");
-		String documentation = decoratedProvider.getDocumentation(o);
+		buffer.append (getFirstLine(o));
+		String documentation = getDocumentation(o);
 		if (documentation!=null && documentation.length()>0) {
 			buffer.append ("<p>");
 			buffer.append (documentation);
 			buffer.append("</p>");
 		}
 		return buffer.toString();
+	}
+
+	protected String getDocumentation(EObject o) {
+		return decoratedProvider.getDocumentation(o);
+	}
+
+	protected String getFirstLine(EObject o) {
+		return o.eClass().getName()+ " <b>"+getLabel(o)+"</b>";
 	}
 	
 	protected String getLabel (EObject o) {
@@ -52,6 +59,6 @@ public class HtmlEObjectDocumentationProviderDecorator implements IEObjectDocume
 	protected ILabelProvider getLabelProvider () {
 		return labelProvider;
 	}
-	
+
 }
 
