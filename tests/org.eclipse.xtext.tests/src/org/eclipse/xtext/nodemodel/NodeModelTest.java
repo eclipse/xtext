@@ -56,7 +56,7 @@ public class NodeModelTest extends AbstractXtextTests {
 		ICompositeNode rootNode = (ICompositeNode) adapters.get(0);
 		assertTrue(rootNode.getParent() == null);
 		checkNavigabilityNode2Ast(rootNode);
-		for (Iterator<INode> i = rootNode.iterator(); i.hasNext();) {
+		for (Iterator<INode> i = rootNode.getAsTreeIterable().iterator(); i.hasNext();) {
 			checkNavigabilityNode2Ast(i.next());
 		}
 	}
@@ -65,7 +65,7 @@ public class NodeModelTest extends AbstractXtextTests {
 		ICompositeNode rootNode = getRootNode(MODEL);
 		EObject rootGrammarElement = rootNode.getGrammarElement();
 		assertTrue(rootGrammarElement instanceof ParserRule);
-		for (Iterator<INode> i = rootNode.iterator(); i.hasNext();) {
+		for (Iterator<INode> i = rootNode.getAsTreeIterable().iterator(); i.hasNext();) {
 			INode next = i.next();
 			if (next == rootNode) {
 				EObject grammarElement = next.getGrammarElement();
@@ -113,7 +113,7 @@ public class NodeModelTest extends AbstractXtextTests {
 		String[] tokenTexts = MODEL.split(" ");
 		int tokenIndex = 0;
 		INode rootNode = getRootNode(MODEL);
-		for (Iterator<INode> i = rootNode.iterator(); i.hasNext();) {
+		for (Iterator<INode> i = rootNode.getAsTreeIterable().iterator(); i.hasNext();) {
 			INode next = i.next();
 			if (next instanceof ILeafNode) {
 				ILeafNode leafNode = (ILeafNode) next;

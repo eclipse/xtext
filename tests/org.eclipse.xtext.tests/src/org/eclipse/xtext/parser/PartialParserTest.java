@@ -189,7 +189,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 	}
 
 	private void checkGrammarAssigned(ICompositeNode rootNode) {
-		BidiTreeIterator<INode> iterator = rootNode.iterator();
+		BidiTreeIterator<INode> iterator = rootNode.getAsTreeIterable().iterator();
 		while(iterator.hasNext()) {
 			INode next = iterator.next();
 			if (next != rootNode) {
