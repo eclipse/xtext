@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -44,7 +45,7 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 
 	@Inject
 	private IValueConverterService valueConverter;
-	
+
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
 
@@ -66,21 +67,37 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 		return valueConverter.toString(unconverted, ruleName);
 	}
 
+	protected ISelector getSelector(EObject object) {
+		return new ISelector.SelectByEObject(object);
+	}
+
 	protected String getUnconvertedLinkText(EObject object, EReference reference, EObject context) {
 		IScope scope = scopeProvider.getScope(context, reference);
 		if (scope == null)
 			return null;
 		IEObjectDescription eObjectDescription = scope.getSingleElement(getSelector(object));
 		if (eObjectDescription != null) {
-			IEObjectDescription singleElement = scope.getSingleElement(new ISelector.SelectByName(eObjectDescription.getName()));
-			if (singleElement!=null && singleElement.getEObjectURI().equals(eObjectDescription.getEObjectURI()))
+			IEObjectDescription singleElement = scope.getSingleElement(new ISelector.SelectByName(eObjectDescription
+					.getName()));
+			if (singleElement != null && singleElement.getEObjectURI().equals(eObjectDescription.getEObjectURI()))
 				return qualifiedNameConverter.toString(eObjectDescription.getName());
 		}
 		return null;
 	}
 
-	protected ISelector getSelector(EObject object) {
-		return new ISelector.SelectByEObject(object);
+	public boolean isValid(EObject context, CrossReference crossref, EObject target, IErrorAcceptor errorAcceptor) {
+		try {
+			final EReference ref = GrammarUtil.getReference(crossref, context.eClass());
+			String text = getUnconvertedLinkText(target, ref, context);
+			if (text == null)
+				return true; // maybe we'll find something useful in the node model later on?
+			getConvertedValue(text, crossref);
+			return true;
+		} catch (ValueConverterException e) {
+			if (errorAcceptor != null)
+				errorAcceptor.error(e.getMessage());
+			return false;
+		}
 	}
 
 	public String serializeCrossRef(EObject context, CrossReference grammarElement, EObject target, INode node) {
