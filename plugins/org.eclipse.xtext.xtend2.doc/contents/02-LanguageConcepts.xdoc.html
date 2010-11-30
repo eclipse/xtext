@@ -545,80 +545,6 @@ ClassDeclaration&nbsp;:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(Visibility|&apos;abs
 
 </div>
 
-<a name="Fields"></a>
-
-<a name="Fields"></a>
-<div class="section" title="Fields">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title">
-Fields
-</h2>
-</div>
-</div>
-</div>
-
-
-
-<p>
-An Xtend2 class can have state, just declare a field like you are used to in Java.
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-int&nbsp;numberOfCalls&nbsp;=&nbsp;0;&nbsp;<br />
-</p>
-</div>
-</div>
-
-
-</p>
-
-<p>
-It directly translates to Java.
-The default visibility for fields is <span class="inlinecode">private</span>
-.
-</p>
-
-
-
-
-<a name="Fields-4"></a>
-<div class="section" title="Syntax">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Syntax
-</h3>
-</div>
-</div>
-</div>
-
-
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-FieldDef&nbsp;:&nbsp;(&apos;public&apos;|&apos;protected&apos;|&apos;private&apos;|&apos;final&apos;)*&nbsp;TypeRef?&nbsp;ID&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;&apos;=&apos;&nbsp;Expression)?&nbsp;&apos;;&apos;<br />
-</p>
-</div>
-</div>
-
-
-</p>
-
-
-</div>
-
-</div>
-
 <a name="Functions"></a>
 
 <a name="Functions"></a>
@@ -636,8 +562,9 @@ Functions
 
 
 <p>
-Xtend2 functions are declared within a class and are usually translated to a corresponding Java method with the exact same signature. The only exception 
-is overloaded methods, which compile to a single method. This is explained in 
+The only members an Xtend2 class can have are functions.
+Xtend2 functions are declared within a class and are usually translated to a corresponding Java method with the exact same signature. 
+The only exception is overloaded methods, which compile to a single method. This is explained in the section about 
 <a href="02-LanguageConcepts.xdoc.html#polymorphicDispatch">section polymorphicDispatch</a>. 
 </p>
 
