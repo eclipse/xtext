@@ -11,6 +11,7 @@
 package org.eclipse.xtext.ui.tests.editor.hover.html;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.internal.text.html.BrowserInformationControlInput;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
@@ -24,13 +25,13 @@ import org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguageStandalo
 import org.eclipse.xtext.ui.tests.ui.TestLanguageUiModule;
 import org.eclipse.xtext.util.Modules2;
 
-import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 /**
  * @author Christoph Kulla - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class DefaultEObjectHoverProviderTest extends AbstractXtextTests {
 
 	public ISetup getTestLanguageSetup(final IEObjectDocumentationProvider ieObjectDocumentationProvider) {
@@ -66,7 +67,11 @@ public class DefaultEObjectHoverProviderTest extends AbstractXtextTests {
 		}));
 		File f = (File) getModel ("stuff test");
 		DefaultEObjectHoverProvider cut = get(DefaultEObjectHoverProvider.class);
-		assertEquals ("Stuff <b>test</b>", cut.getHoverInfoAsHtml(f.getStuff().get(0)));
+		assertTrue(getHtml(f.getStuff().get(0), cut).contains("Stuff <b>test</b>"));
+	}
+
+	protected String getHtml(EObject obj, DefaultEObjectHoverProvider cut) {
+		return ((BrowserInformationControlInput)cut.getHoverInfo(obj,null,null).getInfo()).getHtml();
 	}
 	
 	public void testElementHasDocumentation () throws Exception {
@@ -77,7 +82,7 @@ public class DefaultEObjectHoverProviderTest extends AbstractXtextTests {
 		}));
 		File f = (File) getModel ("stuff test");
 		DefaultEObjectHoverProvider cut = get(DefaultEObjectHoverProvider.class);
-		assertEquals ("Stuff <b>test</b><p>Test</p>", cut.getHoverInfoAsHtml(f.getStuff().get(0)));
+		assertTrue(getHtml(f.getStuff().get(0), cut).contains("Stuff <b>test</b><p>Test</p>"));
 	}
 	
 }

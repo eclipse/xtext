@@ -8,6 +8,9 @@
 package org.eclipse.xtext.ui.editor.hover;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.text.IInformationControlCreator;
+import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider;
 
 import com.google.inject.ImplementedBy;
@@ -18,8 +21,25 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultEObjectHoverProvider.class)
 public interface IEObjectHoverProvider {
 	/**
-	 * @return an HTML string to be shown in a hover pop up, returns <code>null</code> is no hover information exists
+	 * 
+	 * @param the {@link EObject} for which to show an information hover. 
+	 * @param the viewer - might not contain the given {@link EObject}.
+	 * @param the region - might be a cross reference pointing to the given object.
+	 * 
+	 * @return an to be shown in a hover pop up, returns <code>null</code> if no hover information exists
 	 *         for the given element.
 	 */
-	String getHoverInfoAsHtml(EObject object);
+	IInformationControlCreatorProvider getHoverInfo(EObject object, ITextViewer viewer, IRegion region);
+	
+	public interface IInformationControlCreatorProvider {
+		/**
+		 * an {@link IInformationControlCreator} capable of creating an {@link org.eclipse.jface.text.IInformationControl} for the
+		 * information provided by {@link #getInfo()}.
+		 */
+		IInformationControlCreator getHoverControlCreator();
+		/**
+		 * The information to be used by the {@link IInformationControlCreator}.
+		 */
+		Object getInfo();
+	}
 }

@@ -2,10 +2,15 @@ module GenerateSpec
 
 import org.eclipse.emf.mwe.utils.*
 
+/**
+ * foo bar 
+ */
 var targetDir = "src-gen"
 var modelPath = "src/"
 
 Workflow {
+	
+	bean = String{}
 
 	component = @workflow.XDocGenerator {
 		// or define search scope explicitly
