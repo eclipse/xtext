@@ -165,28 +165,11 @@ code[
 	
 ]
 
-section:Fields[Fields]
-
-An Xtend2 class can have state, just declare a field like you are used to in Java.
-
-code[
-	int numberOfCalls = 0; 
-]
-
-It directly translates to Java.
-The default visibility for fields is code[private].
-
-section2[Syntax]
-
-code[
-	FieldDef : ('public'|'protected'|'private'|'final')* TypeRef? ID'
-	    ( '=' Expression)? ';'
-]
-
 section:Functions[Functions]
 
-Xtend2 functions are declared within a class and are usually translated to a corresponding Java method with the exact same signature. The only exception 
-is overloaded methods, which compile to a single method. This is explained in ref:polymorphicDispatch. 
+The only members an Xtend2 class can have are functions.
+Xtend2 functions are declared within a class and are usually translated to a corresponding Java method with the exact same signature. 
+The only exception is overloaded methods, which compile to a single method. This is explained in the section about ref:polymorphicDispatch. 
 
 The default visibility of a function is code[public], which can also be declared explicitly. The two other available visibilities are code[protected] and code[private].
 
