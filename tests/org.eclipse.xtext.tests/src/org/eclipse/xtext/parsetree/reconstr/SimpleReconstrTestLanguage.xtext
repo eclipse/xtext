@@ -18,7 +18,8 @@ Term returns Expression:
 	Atom | TwoNumbers | ManyStrings | Type | Ref2 | Spare | Boolean | Transient1 | 
 	Consumed1 | Consumed2 | Loop1 | Loop2 | Loop3 | Loop4 | LoopBug285452 | 
 	DuplicateBug284491 | EmptyObjectBug284850 | MultiInheritanceBug280439 | 
-	EObjectRef | TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171 | Bug310435Val | Bug310435Enum;
+	EObjectRef | TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171 | Bug310435Val | Bug310435Enum |
+	CrossRefNameTest;
 		
 Atom: 
 	name=ID;
@@ -122,3 +123,15 @@ enum EnumBug310435Lit1 returns EnumBug310435Enum:
 	
 enum EnumBug310435Lit2 returns EnumBug310435Enum:
 	lit2='lit2';
+	
+CrossRefNameTest:
+	"#22" named+=CrossRefNamed* "kw1" ("kw2" ref+=[CrossRefNamed|ID1] | "kw3" ref+=[CrossRefNamed|ID2])*;
+	
+CrossRefNamed:
+	name=(ID1|ID2);
+	
+terminal ID1:
+	'i' 'd' ('0'..'9')*;
+	
+terminal ID2:
+	'I' 'D' ('0'..'9')*;

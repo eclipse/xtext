@@ -188,7 +188,7 @@ public class SimpleReconstrTest extends AbstractXtextTests {
 	}
 
 	public void testSpare() throws Exception {
-		String model = "#3 id1";
+		String model = "#3 foo1";
 		assertEquals(model, parseAndSerialize(model));
 	}
 
@@ -318,6 +318,11 @@ public class SimpleReconstrTest extends AbstractXtextTests {
 	
 	public void testEnumBug310435Val() throws Exception {
 		String model = "#21 kw2 '234' kw1 foo kw2 '[]' kw1 bar";
+		assertEquals(model, parseAndSerialize(model));
+	}
+	
+	public void testRefnameTest() throws Exception {
+		String model = "#22 id1 id2 ID3 ID4 kw1 kw2 id1 kw3 ID3 kw2 id2 kw3 ID4";
 		assertEquals(model, parseAndSerialize(model));
 	}
 
