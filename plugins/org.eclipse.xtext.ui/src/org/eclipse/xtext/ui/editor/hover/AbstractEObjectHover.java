@@ -65,15 +65,15 @@ public abstract class AbstractEObjectHover extends AbstractHover {
 		return xtextDocument.readOnly(new IUnitOfWork<Object, XtextResource>() {
 			public Object exec(XtextResource state) throws Exception {
 				Pair<EObject, IRegion> element = getXtextElementAt(state, hoverRegion.getOffset());
-				if (element != null && element.getSecond() != null) {
-					return getHoverInfo2(element.getFirst(), textViewer, hoverRegion);
+				if (element != null && element.getFirst() != null) {
+					return internalgetHoverInfo(element.getFirst(), textViewer, hoverRegion);
 				}
 				return null;
 			}
 		});
 	}
 
-	protected abstract Object getHoverInfo2(final EObject eObject, final ITextViewer textViewer,
+	protected abstract Object internalgetHoverInfo(final EObject eObject, final ITextViewer textViewer,
 			final IRegion hoverRegion);
 
 	/**

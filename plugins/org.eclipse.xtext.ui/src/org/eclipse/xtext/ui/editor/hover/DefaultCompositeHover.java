@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.text.ITextHover;
-import org.eclipse.xtext.ui.editor.hover.html.DeclarationHoverDispatcher;
 
 import com.google.inject.Inject;
 
@@ -30,7 +29,7 @@ public class DefaultCompositeHover extends AbstractCompositeHover  {
 	protected AnnotationWithQuickFixesHover annotationHover;
 	
 	@Inject
-	protected DeclarationHoverDispatcher htmlHover;
+	protected DispatchingEObjectTextHover htmlHover;
 	
 	@Override
 	protected List<ITextHover> createHovers() {
