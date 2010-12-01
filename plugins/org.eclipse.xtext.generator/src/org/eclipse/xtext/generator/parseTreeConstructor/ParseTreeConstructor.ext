@@ -29,6 +29,9 @@ List[AbstractElement] getNestedElementsFromAssignment(Assignment ass):
 boolean isAssignmentRequired(Assignment ass):
 	JAVA org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorUtil.isAssignmentRequired(org.eclipse.xtext.Assignment);
 	
+boolean crossReferenceExistsWithDifferentTerminal(CrossReference ass):
+	JAVA org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorUtil.crossReferenceExistsWithDifferentTerminal(org.eclipse.xtext.CrossReference);
+	
 List[AbstractElement] calcRootFollowers(Grammar g):
 	JAVA org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorUtil.calcRootFollowers(org.eclipse.xtext.Grammar);
 	
