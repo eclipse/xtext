@@ -17,7 +17,7 @@ import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.Region;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.hover.AbstractEObjectHover;
+import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.tests.Activator;
@@ -26,7 +26,7 @@ import org.eclipse.xtext.ui.tests.editor.AbstractEditorTest;
 /**
  * @author Christoph Kulla - Initial contribution and API
  */
-public class AbstractEObjectHoverTest extends AbstractEditorTest {
+public class DispatchingEObjectTextHoverTest extends AbstractEditorTest {
 	
 	protected XtextEditor editor;
 	
@@ -76,12 +76,12 @@ public class AbstractEObjectHoverTest extends AbstractEditorTest {
 		editor.getSite().getPage().activate(part);
 	}
 	
-	static class MockHover extends AbstractEObjectHover {
+	static class MockHover extends DispatchingEObjectTextHover {
 		
 		EObject hoverObject;
 
 		@Override
-		protected Object getHoverInfo2(EObject eObject, ITextViewer textViewer, IRegion hoverRegion) {
+		protected Object internalgetHoverInfo(EObject eObject, ITextViewer textViewer, IRegion hoverRegion) {
 			hoverObject = eObject;
 			return "test";
 		}
