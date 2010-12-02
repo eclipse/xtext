@@ -20,7 +20,6 @@ import org.eclipse.xtext.common.types.xtext.TypesAwareDefaultGlobalScopeProvider
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.DefaultGeneratorFragment;
-import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 
 /**
@@ -57,7 +56,6 @@ public class TypesGeneratorFragment extends DefaultGeneratorFragment {
 					 	"org.eclipse.xtext.common.types.xtext.ui.TypeAwareHyperlinkHelper")
 			 .addTypeToType("org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher", 
 					 	"org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher")
-			 .addTypeToType ("org.eclipse.jface.text.ITextHover", "org.eclipse.xtext.common.types.xtext.ui.JdtCompositeHover")
 			 .addTypeToType("org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider$ReferenceProposalCreator", 
 					 	"org.eclipse.xtext.common.types.xtext.ui.TypeAwareReferenceProposalCreator")
 			 .getBindings();
