@@ -1428,6 +1428,80 @@ public interface SimplerewritetestPackage extends EPackage
   int BUG310435_VAL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.CrossRefNameTestImpl <em>Cross Ref Name Test</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.CrossRefNameTestImpl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getCrossRefNameTest()
+   * @generated
+   */
+  int CROSS_REF_NAME_TEST = 35;
+
+  /**
+   * The feature id for the '<em><b>Em</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CROSS_REF_NAME_TEST__EM = EXPRESSION__EM;
+
+  /**
+   * The feature id for the '<em><b>Named</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CROSS_REF_NAME_TEST__NAMED = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Ref</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CROSS_REF_NAME_TEST__REF = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Cross Ref Name Test</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CROSS_REF_NAME_TEST_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.CrossRefNamedImpl <em>Cross Ref Named</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.CrossRefNamedImpl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getCrossRefNamed()
+   * @generated
+   */
+  int CROSS_REF_NAMED = 36;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CROSS_REF_NAMED__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Cross Ref Named</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CROSS_REF_NAMED_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.OpImpl <em>Op</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1435,7 +1509,7 @@ public interface SimplerewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getOp()
    * @generated
    */
-  int OP = 35;
+  int OP = 37;
 
   /**
    * The feature id for the '<em><b>Em</b></em>' attribute.
@@ -1472,7 +1546,7 @@ public interface SimplerewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getEnumBug310435Enum()
    * @generated
    */
-  int ENUM_BUG310435_ENUM = 36;
+  int ENUM_BUG310435_ENUM = 38;
 
 
   /**
@@ -2332,6 +2406,59 @@ public interface SimplerewritetestPackage extends EPackage
   EAttribute getBug310435Val_Lits();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.CrossRefNameTest <em>Cross Ref Name Test</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Cross Ref Name Test</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.CrossRefNameTest
+   * @generated
+   */
+  EClass getCrossRefNameTest();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.CrossRefNameTest#getNamed <em>Named</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Named</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.CrossRefNameTest#getNamed()
+   * @see #getCrossRefNameTest()
+   * @generated
+   */
+  EReference getCrossRefNameTest_Named();
+
+  /**
+   * Returns the meta object for the reference list '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.CrossRefNameTest#getRef <em>Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Ref</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.CrossRefNameTest#getRef()
+   * @see #getCrossRefNameTest()
+   * @generated
+   */
+  EReference getCrossRefNameTest_Ref();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.CrossRefNamed <em>Cross Ref Named</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Cross Ref Named</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.CrossRefNamed
+   * @generated
+   */
+  EClass getCrossRefNamed();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.CrossRefNamed#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.CrossRefNamed#getName()
+   * @see #getCrossRefNamed()
+   * @generated
+   */
+  EAttribute getCrossRefNamed_Name();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op <em>Op</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3102,6 +3229,50 @@ public interface SimplerewritetestPackage extends EPackage
      * @generated
      */
     EAttribute BUG310435_VAL__LITS = eINSTANCE.getBug310435Val_Lits();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.CrossRefNameTestImpl <em>Cross Ref Name Test</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.CrossRefNameTestImpl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getCrossRefNameTest()
+     * @generated
+     */
+    EClass CROSS_REF_NAME_TEST = eINSTANCE.getCrossRefNameTest();
+
+    /**
+     * The meta object literal for the '<em><b>Named</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CROSS_REF_NAME_TEST__NAMED = eINSTANCE.getCrossRefNameTest_Named();
+
+    /**
+     * The meta object literal for the '<em><b>Ref</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CROSS_REF_NAME_TEST__REF = eINSTANCE.getCrossRefNameTest_Ref();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.CrossRefNamedImpl <em>Cross Ref Named</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.CrossRefNamedImpl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getCrossRefNamed()
+     * @generated
+     */
+    EClass CROSS_REF_NAMED = eINSTANCE.getCrossRefNamed();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute CROSS_REF_NAMED__NAME = eINSTANCE.getCrossRefNamed_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.OpImpl <em>Op</em>}' class.

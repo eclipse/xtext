@@ -38,6 +38,8 @@ public interface ITokenSerializer {
 	 */
 	@ImplementedBy(CrossReferenceSerializer.class)
 	interface ICrossReferenceSerializer extends ITokenSerializer {
+		
+		boolean isValid(EObject context, CrossReference crossref, EObject target, IErrorAcceptor errorAcceptor);
 
 		boolean equalsOrReplacesNode(EObject context, CrossReference crossref, EObject target, INode node);
 

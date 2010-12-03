@@ -19,6 +19,8 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug310435Val;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ConcreteMulti;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.CrossRefNameTest;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.CrossRefNamed;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectElement;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectRef;
@@ -408,6 +410,21 @@ public class SimplerewritetestSwitch<T>
         Bug310435Val bug310435Val = (Bug310435Val)theEObject;
         T result = caseBug310435Val(bug310435Val);
         if (result == null) result = caseExpression(bug310435Val);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.CROSS_REF_NAME_TEST:
+      {
+        CrossRefNameTest crossRefNameTest = (CrossRefNameTest)theEObject;
+        T result = caseCrossRefNameTest(crossRefNameTest);
+        if (result == null) result = caseExpression(crossRefNameTest);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.CROSS_REF_NAMED:
+      {
+        CrossRefNamed crossRefNamed = (CrossRefNamed)theEObject;
+        T result = caseCrossRefNamed(crossRefNamed);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -979,6 +996,38 @@ public class SimplerewritetestSwitch<T>
    * @generated
    */
   public T caseBug310435Val(Bug310435Val object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Cross Ref Name Test</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Cross Ref Name Test</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCrossRefNameTest(CrossRefNameTest object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Cross Ref Named</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Cross Ref Named</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCrossRefNamed(CrossRefNamed object)
   {
     return null;
   }

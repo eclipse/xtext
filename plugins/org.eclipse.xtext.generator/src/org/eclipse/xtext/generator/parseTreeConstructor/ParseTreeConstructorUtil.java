@@ -11,10 +11,13 @@ package org.eclipse.xtext.generator.parseTreeConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
@@ -25,6 +28,8 @@ import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.parsetree.reconstr.impl.TreeConstState;
 import org.eclipse.xtext.parsetree.reconstr.impl.TreeConstructionNFAProvider;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -46,12 +51,10 @@ public class ParseTreeConstructorUtil {
 		return callees;
 	}
 
-	public static List<AbstractElement> getNestedElementsFromAssignment(
-			Assignment assignment) {
+	public static List<AbstractElement> getNestedElementsFromAssignment(Assignment assignment) {
 		AbstractElement t = assignment.getTerminal();
 		ArrayList<AbstractElement> r = new ArrayList<AbstractElement>();
-		if (t instanceof Keyword || t instanceof RuleCall
-				|| t instanceof CrossReference)
+		if (t instanceof Keyword || t instanceof RuleCall || t instanceof CrossReference)
 			r.add(t);
 		else {
 			r.addAll(GrammarUtil.containedKeywords(t));
@@ -66,8 +69,27 @@ public class ParseTreeConstructorUtil {
 	}
 
 	public static String getParseTreeConstructorName(Grammar g, Naming n) {
-		return getPackage(g,n) + "." + GrammarUtil.getName(g)
-				+ "ParsetreeConstructor";
+		return getPackage(g, n) + "." + GrammarUtil.getName(g) + "ParsetreeConstructor";
+	}
+
+	private static List<CrossReference> getCrossReferencesWithSameEReference(CrossReference cr) {
+		Grammar g = GrammarUtil.getGrammar(cr);
+		EReference ref = GrammarUtil.getReference(cr);
+		List<CrossReference> result = Lists.newArrayList();
+		for (CrossReference c : EcoreUtil2.getAllContentsOfType(g, CrossReference.class))
+			if (GrammarUtil.getReference(c) == ref)
+				result.add(c);
+		return result;
+	}
+
+	public static boolean crossReferenceExistsWithDifferentTerminal(CrossReference cr) {
+		List<CrossReference> crossRefs = getCrossReferencesWithSameEReference(cr);
+		if (crossRefs.isEmpty())
+			return false;
+		for (CrossReference c : crossRefs)
+			if (!EcoreUtil.equals(cr.getTerminal(), c.getTerminal()))
+				return true;
+		return false;
 	}
 
 	public static boolean isAssignmentRequired(Assignment assignment) {
@@ -91,7 +113,7 @@ public class ParseTreeConstructorUtil {
 			return isOptionalUnorderedGroup((UnorderedGroup) group.eContainer());
 		return false;
 	}
-	
+
 	private static boolean isOptionalUnorderedGroup(UnorderedGroup group) {
 		if (GrammarUtil.containedAssignments(group).size() != 1)
 			return false;
