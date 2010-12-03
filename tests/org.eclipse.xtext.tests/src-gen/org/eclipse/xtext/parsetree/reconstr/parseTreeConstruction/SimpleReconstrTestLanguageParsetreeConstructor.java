@@ -70,6 +70,8 @@ protected class ThisRootNode extends RootToken {
 			case 36: return new Bug305171_Group(this, this, 36, inst);
 			case 37: return new Bug310435Enum_Group(this, this, 37, inst);
 			case 38: return new Bug310435Val_Group(this, this, 38, inst);
+			case 39: return new CrossRefNameTest_Group(this, this, 39, inst);
+			case 40: return new CrossRefNamed_NameAssignment(this, this, 40, inst);
 			default: return null;
 		}	
 	}	
@@ -113,6 +115,7 @@ protected class Op_Group extends GroupToken {
 		   getEObject().eClass() != grammarAccess.getBug310435ValRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getConsumed1Rule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getConsumed2Rule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getCrossRefNameTestRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getDuplicateBug284491Rule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getEObjectRefRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getEmptyObjectBug284850Rule().getType().getClassifier() && 
@@ -288,13 +291,13 @@ protected class Op_ValuesAssignment_1_1 extends AssignmentToken  {
  * Term returns Expression:
  * 	Atom | TwoNumbers | ManyStrings | Type | Ref2 | Spare | Boolean | Transient1 | Consumed1 | Consumed2 | Loop1 | Loop2 |
  * 	Loop3 | Loop4 | LoopBug285452 | DuplicateBug284491 | EmptyObjectBug284850 | MultiInheritanceBug280439 | EObjectRef |
- * 	TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171 | Bug310435Val | Bug310435Enum;
+ * 	TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171 | Bug310435Val | Bug310435Enum | CrossRefNameTest;
  *
  **/
 
 // Atom | TwoNumbers | ManyStrings | Type | Ref2 | Spare | Boolean | Transient1 | Consumed1 | Consumed2 | Loop1 | Loop2 |
 // Loop3 | Loop4 | LoopBug285452 | DuplicateBug284491 | EmptyObjectBug284850 | MultiInheritanceBug280439 | EObjectRef |
-// TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171 | Bug310435Val | Bug310435Enum
+// TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171 | Bug310435Val | Bug310435Enum | CrossRefNameTest
 protected class Term_Alternatives extends AlternativesToken {
 
 	public Term_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -334,6 +337,7 @@ protected class Term_Alternatives extends AlternativesToken {
 			case 22: return new Term_Bug305171ParserRuleCall_22(lastRuleCallOrigin, this, 22, inst);
 			case 23: return new Term_Bug310435ValParserRuleCall_23(lastRuleCallOrigin, this, 23, inst);
 			case 24: return new Term_Bug310435EnumParserRuleCall_24(lastRuleCallOrigin, this, 24, inst);
+			case 25: return new Term_CrossRefNameTestParserRuleCall_25(lastRuleCallOrigin, this, 25, inst);
 			default: return null;
 		}	
 	}
@@ -347,6 +351,7 @@ protected class Term_Alternatives extends AlternativesToken {
 		   getEObject().eClass() != grammarAccess.getBug310435ValRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getConsumed1Rule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getConsumed2Rule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getCrossRefNameTestRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getDuplicateBug284491Rule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getEObjectRefRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getEmptyObjectBug284850Rule().getType().getClassifier() && 
@@ -1273,6 +1278,42 @@ protected class Term_Bug310435EnumParserRuleCall_24 extends RuleCallToken {
 	}	
 }
 
+// CrossRefNameTest
+protected class Term_CrossRefNameTestParserRuleCall_25 extends RuleCallToken {
+	
+	public Term_CrossRefNameTestParserRuleCall_25(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getTermAccess().getCrossRefNameTestParserRuleCall_25();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new CrossRefNameTest_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getCrossRefNameTestRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(CrossRefNameTest_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
 
 /************ end Rule Term ****************/
 
@@ -1359,6 +1400,7 @@ protected class Parens_Group extends GroupToken {
 		   getEObject().eClass() != grammarAccess.getBug310435ValRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getConsumed1Rule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getConsumed2Rule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getCrossRefNameTestRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getDuplicateBug284491Rule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getEObjectRefRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getEmptyObjectBug284850Rule().getType().getClassifier() && 
@@ -7383,5 +7425,377 @@ protected class Bug310435Val_LitsAssignment_1_1_1 extends AssignmentToken  {
 
 
 /************ end Rule Bug310435Val ****************/
+
+
+/************ begin Rule CrossRefNameTest ****************
+ *
+ * CrossRefNameTest:
+ * 	"#22" named+=CrossRefNamed* "kw1" ("kw2" ref+=[CrossRefNamed|ID1] | "kw3" ref+=[CrossRefNamed|ID2])*;
+ *
+ **/
+
+// "#22" named+=CrossRefNamed* "kw1" ("kw2" ref+=[CrossRefNamed|ID1] | "kw3" ref+=[CrossRefNamed|ID2])*
+protected class CrossRefNameTest_Group extends GroupToken {
+	
+	public CrossRefNameTest_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getCrossRefNameTestAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new CrossRefNameTest_Alternatives_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new CrossRefNameTest_Kw1Keyword_2(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getCrossRefNameTestRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "#22"
+protected class CrossRefNameTest_NumberSignDigitTwoDigitTwoKeyword_0 extends KeywordToken  {
+	
+	public CrossRefNameTest_NumberSignDigitTwoDigitTwoKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getCrossRefNameTestAccess().getNumberSignDigitTwoDigitTwoKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// named+=CrossRefNamed*
+protected class CrossRefNameTest_NamedAssignment_1 extends AssignmentToken  {
+	
+	public CrossRefNameTest_NamedAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getCrossRefNameTestAccess().getNamedAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new CrossRefNamed_NameAssignment(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("named",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("named");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getCrossRefNamedRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getCrossRefNameTestAccess().getNamedCrossRefNamedParserRuleCall_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new CrossRefNameTest_NamedAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new CrossRefNameTest_NumberSignDigitTwoDigitTwoKeyword_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+// "kw1"
+protected class CrossRefNameTest_Kw1Keyword_2 extends KeywordToken  {
+	
+	public CrossRefNameTest_Kw1Keyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getCrossRefNameTestAccess().getKw1Keyword_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new CrossRefNameTest_NamedAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new CrossRefNameTest_NumberSignDigitTwoDigitTwoKeyword_0(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// ("kw2" ref+=[CrossRefNamed|ID1] | "kw3" ref+=[CrossRefNamed|ID2])*
+protected class CrossRefNameTest_Alternatives_3 extends AlternativesToken {
+
+	public CrossRefNameTest_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getCrossRefNameTestAccess().getAlternatives_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new CrossRefNameTest_Group_3_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new CrossRefNameTest_Group_3_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "kw2" ref+=[CrossRefNamed|ID1]
+protected class CrossRefNameTest_Group_3_0 extends GroupToken {
+	
+	public CrossRefNameTest_Group_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getCrossRefNameTestAccess().getGroup_3_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new CrossRefNameTest_RefAssignment_3_0_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "kw2"
+protected class CrossRefNameTest_Kw2Keyword_3_0_0 extends KeywordToken  {
+	
+	public CrossRefNameTest_Kw2Keyword_3_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getCrossRefNameTestAccess().getKw2Keyword_3_0_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new CrossRefNameTest_Alternatives_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new CrossRefNameTest_Kw1Keyword_2(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// ref+=[CrossRefNamed|ID1]
+protected class CrossRefNameTest_RefAssignment_3_0_1 extends AssignmentToken  {
+	
+	public CrossRefNameTest_RefAssignment_3_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getCrossRefNameTestAccess().getRefAssignment_3_0_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new CrossRefNameTest_Kw2Keyword_3_0_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("ref",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("ref");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getCrossRefNameTestAccess().getRefCrossRefNamedCrossReference_3_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getCrossRefNameTestAccess().getRefCrossRefNamedCrossReference_3_0_1_0(), (EObject)value , null)) {
+				type = AssignmentType.CROSS_REFERENCE;
+				element = grammarAccess.getCrossRefNameTestAccess().getRefCrossRefNamedCrossReference_3_0_1_0(); 
+				return obj;
+			}
+		}
+		return null;
+	}
+
+}
+
+
+// "kw3" ref+=[CrossRefNamed|ID2]
+protected class CrossRefNameTest_Group_3_1 extends GroupToken {
+	
+	public CrossRefNameTest_Group_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getCrossRefNameTestAccess().getGroup_3_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new CrossRefNameTest_RefAssignment_3_1_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "kw3"
+protected class CrossRefNameTest_Kw3Keyword_3_1_0 extends KeywordToken  {
+	
+	public CrossRefNameTest_Kw3Keyword_3_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getCrossRefNameTestAccess().getKw3Keyword_3_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new CrossRefNameTest_Alternatives_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new CrossRefNameTest_Kw1Keyword_2(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// ref+=[CrossRefNamed|ID2]
+protected class CrossRefNameTest_RefAssignment_3_1_1 extends AssignmentToken  {
+	
+	public CrossRefNameTest_RefAssignment_3_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getCrossRefNameTestAccess().getRefAssignment_3_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new CrossRefNameTest_Kw3Keyword_3_1_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("ref",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("ref");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getCrossRefNameTestAccess().getRefCrossRefNamedCrossReference_3_1_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getCrossRefNameTestAccess().getRefCrossRefNamedCrossReference_3_1_1_0(), (EObject)value , null)) {
+				type = AssignmentType.CROSS_REFERENCE;
+				element = grammarAccess.getCrossRefNameTestAccess().getRefCrossRefNamedCrossReference_3_1_1_0(); 
+				return obj;
+			}
+		}
+		return null;
+	}
+
+}
+
+
+
+
+/************ end Rule CrossRefNameTest ****************/
+
+
+/************ begin Rule CrossRefNamed ****************
+ *
+ * CrossRefNamed:
+ * 	name=(ID1 | ID2);
+ *
+ **/
+
+// name=(ID1 | ID2)
+protected class CrossRefNamed_NameAssignment extends AssignmentToken  {
+	
+	public CrossRefNamed_NameAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getCrossRefNamedAccess().getNameAssignment();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getCrossRefNamedRule().getType().getClassifier())
+			return null;
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getCrossRefNamedAccess().getNameID1TerminalRuleCall_0_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getCrossRefNamedAccess().getNameID1TerminalRuleCall_0_0();
+			return obj;
+		}
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getCrossRefNamedAccess().getNameID2TerminalRuleCall_0_1(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getCrossRefNamedAccess().getNameID2TerminalRuleCall_0_1();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+/************ end Rule CrossRefNamed ****************/
 
 }

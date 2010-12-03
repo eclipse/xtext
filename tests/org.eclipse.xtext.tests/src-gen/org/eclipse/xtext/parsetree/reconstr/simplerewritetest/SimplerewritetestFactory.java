@@ -341,6 +341,24 @@ public interface SimplerewritetestFactory extends EFactory
   Bug310435Val createBug310435Val();
 
   /**
+   * Returns a new object of class '<em>Cross Ref Name Test</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Cross Ref Name Test</em>'.
+   * @generated
+   */
+  CrossRefNameTest createCrossRefNameTest();
+
+  /**
+   * Returns a new object of class '<em>Cross Ref Named</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Cross Ref Named</em>'.
+   * @generated
+   */
+  CrossRefNamed createCrossRefNamed();
+
+  /**
    * Returns a new object of class '<em>Op</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

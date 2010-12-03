@@ -77,16 +77,17 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cBug305171ParserRuleCall_22 = (RuleCall)cAlternatives.eContents().get(22);
 		private final RuleCall cBug310435ValParserRuleCall_23 = (RuleCall)cAlternatives.eContents().get(23);
 		private final RuleCall cBug310435EnumParserRuleCall_24 = (RuleCall)cAlternatives.eContents().get(24);
+		private final RuleCall cCrossRefNameTestParserRuleCall_25 = (RuleCall)cAlternatives.eContents().get(25);
 		
 		//Term returns Expression:
 		//	Atom | TwoNumbers | ManyStrings | Type | Ref2 | Spare | Boolean | Transient1 | Consumed1 | Consumed2 | Loop1 | Loop2 |
 		//	Loop3 | Loop4 | LoopBug285452 | DuplicateBug284491 | EmptyObjectBug284850 | MultiInheritanceBug280439 | EObjectRef |
-		//	TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171 | Bug310435Val | Bug310435Enum;
+		//	TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171 | Bug310435Val | Bug310435Enum | CrossRefNameTest;
 		public ParserRule getRule() { return rule; }
 
 		//Atom | TwoNumbers | ManyStrings | Type | Ref2 | Spare | Boolean | Transient1 | Consumed1 | Consumed2 | Loop1 | Loop2 |
 		//Loop3 | Loop4 | LoopBug285452 | DuplicateBug284491 | EmptyObjectBug284850 | MultiInheritanceBug280439 | EObjectRef |
-		//TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171 | Bug310435Val | Bug310435Enum
+		//TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171 | Bug310435Val | Bug310435Enum | CrossRefNameTest
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Atom
@@ -163,6 +164,9 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 
 		//Bug310435Enum
 		public RuleCall getBug310435EnumParserRuleCall_24() { return cBug310435EnumParserRuleCall_24; }
+
+		//CrossRefNameTest
+		public RuleCall getCrossRefNameTestParserRuleCall_25() { return cCrossRefNameTestParserRuleCall_25; }
 	}
 
 	public class AtomElements extends AbstractParserRuleElementFinder {
@@ -1588,6 +1592,102 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//STRING
 		public RuleCall getLitsSTRINGTerminalRuleCall_1_1_1_0() { return cLitsSTRINGTerminalRuleCall_1_1_1_0; }
 	}
+
+	public class CrossRefNameTestElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CrossRefNameTest");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitTwoDigitTwoKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNamedAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNamedCrossRefNamedParserRuleCall_1_0 = (RuleCall)cNamedAssignment_1.eContents().get(0);
+		private final Keyword cKw1Keyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
+		private final Group cGroup_3_0 = (Group)cAlternatives_3.eContents().get(0);
+		private final Keyword cKw2Keyword_3_0_0 = (Keyword)cGroup_3_0.eContents().get(0);
+		private final Assignment cRefAssignment_3_0_1 = (Assignment)cGroup_3_0.eContents().get(1);
+		private final CrossReference cRefCrossRefNamedCrossReference_3_0_1_0 = (CrossReference)cRefAssignment_3_0_1.eContents().get(0);
+		private final RuleCall cRefCrossRefNamedID1TerminalRuleCall_3_0_1_0_1 = (RuleCall)cRefCrossRefNamedCrossReference_3_0_1_0.eContents().get(1);
+		private final Group cGroup_3_1 = (Group)cAlternatives_3.eContents().get(1);
+		private final Keyword cKw3Keyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
+		private final Assignment cRefAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
+		private final CrossReference cRefCrossRefNamedCrossReference_3_1_1_0 = (CrossReference)cRefAssignment_3_1_1.eContents().get(0);
+		private final RuleCall cRefCrossRefNamedID2TerminalRuleCall_3_1_1_0_1 = (RuleCall)cRefCrossRefNamedCrossReference_3_1_1_0.eContents().get(1);
+		
+		//CrossRefNameTest:
+		//	"#22" named+=CrossRefNamed* "kw1" ("kw2" ref+=[CrossRefNamed|ID1] | "kw3" ref+=[CrossRefNamed|ID2])*;
+		public ParserRule getRule() { return rule; }
+
+		//"#22" named+=CrossRefNamed* "kw1" ("kw2" ref+=[CrossRefNamed|ID1] | "kw3" ref+=[CrossRefNamed|ID2])*
+		public Group getGroup() { return cGroup; }
+
+		//"#22"
+		public Keyword getNumberSignDigitTwoDigitTwoKeyword_0() { return cNumberSignDigitTwoDigitTwoKeyword_0; }
+
+		//named+=CrossRefNamed*
+		public Assignment getNamedAssignment_1() { return cNamedAssignment_1; }
+
+		//CrossRefNamed
+		public RuleCall getNamedCrossRefNamedParserRuleCall_1_0() { return cNamedCrossRefNamedParserRuleCall_1_0; }
+
+		//"kw1"
+		public Keyword getKw1Keyword_2() { return cKw1Keyword_2; }
+
+		//("kw2" ref+=[CrossRefNamed|ID1] | "kw3" ref+=[CrossRefNamed|ID2])*
+		public Alternatives getAlternatives_3() { return cAlternatives_3; }
+
+		//"kw2" ref+=[CrossRefNamed|ID1]
+		public Group getGroup_3_0() { return cGroup_3_0; }
+
+		//"kw2"
+		public Keyword getKw2Keyword_3_0_0() { return cKw2Keyword_3_0_0; }
+
+		//ref+=[CrossRefNamed|ID1]
+		public Assignment getRefAssignment_3_0_1() { return cRefAssignment_3_0_1; }
+
+		//[CrossRefNamed|ID1]
+		public CrossReference getRefCrossRefNamedCrossReference_3_0_1_0() { return cRefCrossRefNamedCrossReference_3_0_1_0; }
+
+		//ID1
+		public RuleCall getRefCrossRefNamedID1TerminalRuleCall_3_0_1_0_1() { return cRefCrossRefNamedID1TerminalRuleCall_3_0_1_0_1; }
+
+		//"kw3" ref+=[CrossRefNamed|ID2]
+		public Group getGroup_3_1() { return cGroup_3_1; }
+
+		//"kw3"
+		public Keyword getKw3Keyword_3_1_0() { return cKw3Keyword_3_1_0; }
+
+		//ref+=[CrossRefNamed|ID2]
+		public Assignment getRefAssignment_3_1_1() { return cRefAssignment_3_1_1; }
+
+		//[CrossRefNamed|ID2]
+		public CrossReference getRefCrossRefNamedCrossReference_3_1_1_0() { return cRefCrossRefNamedCrossReference_3_1_1_0; }
+
+		//ID2
+		public RuleCall getRefCrossRefNamedID2TerminalRuleCall_3_1_1_0_1() { return cRefCrossRefNamedID2TerminalRuleCall_3_1_1_0_1; }
+	}
+
+	public class CrossRefNamedElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CrossRefNamed");
+		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
+		private final Alternatives cNameAlternatives_0 = (Alternatives)cNameAssignment.eContents().get(0);
+		private final RuleCall cNameID1TerminalRuleCall_0_0 = (RuleCall)cNameAlternatives_0.eContents().get(0);
+		private final RuleCall cNameID2TerminalRuleCall_0_1 = (RuleCall)cNameAlternatives_0.eContents().get(1);
+		
+		//CrossRefNamed:
+		//	name=(ID1 | ID2);
+		public ParserRule getRule() { return rule; }
+
+		//name=(ID1 | ID2)
+		public Assignment getNameAssignment() { return cNameAssignment; }
+
+		//ID1 | ID2
+		public Alternatives getNameAlternatives_0() { return cNameAlternatives_0; }
+
+		//ID1
+		public RuleCall getNameID1TerminalRuleCall_0_0() { return cNameID1TerminalRuleCall_0_0; }
+
+		//ID2
+		public RuleCall getNameID2TerminalRuleCall_0_1() { return cNameID2TerminalRuleCall_0_1; }
+	}
 	
 	
 	public class EnumBug310435Lit1Elements extends AbstractEnumRuleElementFinder {
@@ -1663,6 +1763,10 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	private Bug310435ValElements pBug310435Val;
 	private EnumBug310435Lit1Elements unknownRuleEnumBug310435Lit1;
 	private EnumBug310435Lit2Elements unknownRuleEnumBug310435Lit2;
+	private CrossRefNameTestElements pCrossRefNameTest;
+	private CrossRefNamedElements pCrossRefNamed;
+	private TerminalRule tID1;
+	private TerminalRule tID2;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -1698,7 +1802,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Term returns Expression:
 	//	Atom | TwoNumbers | ManyStrings | Type | Ref2 | Spare | Boolean | Transient1 | Consumed1 | Consumed2 | Loop1 | Loop2 |
 	//	Loop3 | Loop4 | LoopBug285452 | DuplicateBug284491 | EmptyObjectBug284850 | MultiInheritanceBug280439 | EObjectRef |
-	//	TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171 | Bug310435Val | Bug310435Enum;
+	//	TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171 | Bug310435Val | Bug310435Enum | CrossRefNameTest;
 	public TermElements getTermAccess() {
 		return (pTerm != null) ? pTerm : (pTerm = new TermElements());
 	}
@@ -2096,6 +2200,38 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	public EnumRule getEnumBug310435Lit2Rule() {
 		return getEnumBug310435Lit2Access().getRule();
 	}
+
+	//CrossRefNameTest:
+	//	"#22" named+=CrossRefNamed* "kw1" ("kw2" ref+=[CrossRefNamed|ID1] | "kw3" ref+=[CrossRefNamed|ID2])*;
+	public CrossRefNameTestElements getCrossRefNameTestAccess() {
+		return (pCrossRefNameTest != null) ? pCrossRefNameTest : (pCrossRefNameTest = new CrossRefNameTestElements());
+	}
+	
+	public ParserRule getCrossRefNameTestRule() {
+		return getCrossRefNameTestAccess().getRule();
+	}
+
+	//CrossRefNamed:
+	//	name=(ID1 | ID2);
+	public CrossRefNamedElements getCrossRefNamedAccess() {
+		return (pCrossRefNamed != null) ? pCrossRefNamed : (pCrossRefNamed = new CrossRefNamedElements());
+	}
+	
+	public ParserRule getCrossRefNamedRule() {
+		return getCrossRefNamedAccess().getRule();
+	}
+
+	//terminal ID1:
+	//	"i" "d" "0".."9"*;
+	public TerminalRule getID1Rule() {
+		return (tID1 != null) ? tID1 : (tID1 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID1"));
+	} 
+
+	//terminal ID2:
+	//	"I" "D" "0".."9"*;
+	public TerminalRule getID2Rule() {
+		return (tID2 != null) ? tID2 : (tID2 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID2"));
+	} 
 
 	//terminal ID:
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;

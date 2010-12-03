@@ -138,6 +138,15 @@
     <eLiterals name="lit1" literal="lit1"/>
     <eLiterals name="lit2" literal="lit2"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CrossRefNameTest" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="named" upperBound="-1"
+        eType="#//CrossRefNamed" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" unique="false" upperBound="-1"
+        eType="#//CrossRefNamed"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CrossRefNamed">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Op" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
         eType="#//Expression" containment="true"/>

@@ -23,6 +23,8 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug310435Val;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ConcreteMulti;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.CrossRefNameTest;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.CrossRefNamed;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectElement;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectRef;
@@ -140,6 +142,8 @@ public class SimplerewritetestFactoryImpl extends EFactoryImpl implements Simple
       case SimplerewritetestPackage.BUG305171: return createBug305171();
       case SimplerewritetestPackage.BUG310435_ENUM: return createBug310435Enum();
       case SimplerewritetestPackage.BUG310435_VAL: return createBug310435Val();
+      case SimplerewritetestPackage.CROSS_REF_NAME_TEST: return createCrossRefNameTest();
+      case SimplerewritetestPackage.CROSS_REF_NAMED: return createCrossRefNamed();
       case SimplerewritetestPackage.OP: return createOp();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -563,6 +567,28 @@ public class SimplerewritetestFactoryImpl extends EFactoryImpl implements Simple
   {
     Bug310435ValImpl bug310435Val = new Bug310435ValImpl();
     return bug310435Val;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CrossRefNameTest createCrossRefNameTest()
+  {
+    CrossRefNameTestImpl crossRefNameTest = new CrossRefNameTestImpl();
+    return crossRefNameTest;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CrossRefNamed createCrossRefNamed()
+  {
+    CrossRefNamedImpl crossRefNamed = new CrossRefNamedImpl();
+    return crossRefNamed;
   }
 
   /**

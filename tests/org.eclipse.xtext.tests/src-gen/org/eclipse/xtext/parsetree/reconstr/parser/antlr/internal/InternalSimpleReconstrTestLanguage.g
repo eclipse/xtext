@@ -381,6 +381,16 @@ ruleTerm returns [EObject current=null]
         $current = $this_Bug310435Enum_24.current; 
         afterParserOrEnumRuleCall();
     }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getTermAccess().getCrossRefNameTestParserRuleCall_25()); 
+    }
+    this_CrossRefNameTest_25=ruleCrossRefNameTest
+    { 
+        $current = $this_CrossRefNameTest_25.current; 
+        afterParserOrEnumRuleCall();
+    }
 )
 ;
 
@@ -2528,6 +2538,145 @@ ruleBug310435Val returns [EObject current=null]
 
 
 
+// Entry rule entryRuleCrossRefNameTest
+entryRuleCrossRefNameTest returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getCrossRefNameTestRule()); }
+	 iv_ruleCrossRefNameTest=ruleCrossRefNameTest 
+	 { $current=$iv_ruleCrossRefNameTest.current; } 
+	 EOF 
+;
+
+// Rule CrossRefNameTest
+ruleCrossRefNameTest returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#22' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getCrossRefNameTestAccess().getNumberSignDigitTwoDigitTwoKeyword_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getCrossRefNameTestAccess().getNamedCrossRefNamedParserRuleCall_1_0()); 
+	    }
+		lv_named_1_0=ruleCrossRefNamed		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getCrossRefNameTestRule());
+	        }
+       		add(
+       			$current, 
+       			"named",
+        		lv_named_1_0, 
+        		"CrossRefNamed");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)*	otherlv_2='kw1' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getCrossRefNameTestAccess().getKw1Keyword_2());
+    }
+((	otherlv_3='kw2' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getCrossRefNameTestAccess().getKw2Keyword_3_0_0());
+    }
+(
+(
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getCrossRefNameTestRule());
+	        }
+        }
+	otherlv_4=RULE_ID1
+	{
+		newLeafNode(otherlv_4, grammarAccess.getCrossRefNameTestAccess().getRefCrossRefNamedCrossReference_3_0_1_0()); 
+	}
+
+)
+))
+    |(	otherlv_5='kw3' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getCrossRefNameTestAccess().getKw3Keyword_3_1_0());
+    }
+(
+(
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getCrossRefNameTestRule());
+	        }
+        }
+	otherlv_6=RULE_ID2
+	{
+		newLeafNode(otherlv_6, grammarAccess.getCrossRefNameTestAccess().getRefCrossRefNamedCrossReference_3_1_1_0()); 
+	}
+
+)
+)))*)
+;
+
+
+
+
+
+// Entry rule entryRuleCrossRefNamed
+entryRuleCrossRefNamed returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getCrossRefNamedRule()); }
+	 iv_ruleCrossRefNamed=ruleCrossRefNamed 
+	 { $current=$iv_ruleCrossRefNamed.current; } 
+	 EOF 
+;
+
+// Rule CrossRefNamed
+ruleCrossRefNamed returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+(
+(
+		lv_name_0_1=RULE_ID1
+		{
+			newLeafNode(lv_name_0_1, grammarAccess.getCrossRefNamedAccess().getNameID1TerminalRuleCall_0_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getCrossRefNamedRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"name",
+        		lv_name_0_1, 
+        		"ID1");
+	    }
+
+    |		lv_name_0_2=RULE_ID2
+		{
+			newLeafNode(lv_name_0_2, grammarAccess.getCrossRefNamedAccess().getNameID2TerminalRuleCall_0_1()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getCrossRefNamedRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"name",
+        		lv_name_0_2, 
+        		"ID2");
+	    }
+
+)
+
+)
+)
+;
+
+
+
+
+
 // Rule EnumBug310435Lit1
 ruleEnumBug310435Lit1 returns [Enumerator current=null] 
     @init { enterRule(); }
@@ -2553,6 +2702,10 @@ ruleEnumBug310435Lit2 returns [Enumerator current=null]
 );
 
 
+
+RULE_ID1 : 'i' 'd' ('0'..'9')*;
+
+RULE_ID2 : 'I' 'D' ('0'..'9')*;
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

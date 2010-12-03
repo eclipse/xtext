@@ -21,6 +21,8 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug310435Val;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ConcreteMulti;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.CrossRefNameTest;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.CrossRefNamed;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectElement;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectRef;
@@ -286,6 +288,16 @@ public class SimplerewritetestAdapterFactory extends AdapterFactoryImpl
       public Adapter caseBug310435Val(Bug310435Val object)
       {
         return createBug310435ValAdapter();
+      }
+      @Override
+      public Adapter caseCrossRefNameTest(CrossRefNameTest object)
+      {
+        return createCrossRefNameTestAdapter();
+      }
+      @Override
+      public Adapter caseCrossRefNamed(CrossRefNamed object)
+      {
+        return createCrossRefNamedAdapter();
       }
       @Override
       public Adapter caseOp(Op object)
@@ -835,6 +847,36 @@ public class SimplerewritetestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createBug310435ValAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.CrossRefNameTest <em>Cross Ref Name Test</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.CrossRefNameTest
+   * @generated
+   */
+  public Adapter createCrossRefNameTestAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.CrossRefNamed <em>Cross Ref Named</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.CrossRefNamed
+   * @generated
+   */
+  public Adapter createCrossRefNamedAdapter()
   {
     return null;
   }
