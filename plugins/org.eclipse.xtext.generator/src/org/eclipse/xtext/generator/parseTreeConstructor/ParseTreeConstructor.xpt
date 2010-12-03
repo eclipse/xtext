@@ -253,7 +253,7 @@ protected class «elementMethodName()» extends UnassignedTextToken {
 «DEFINE assignmentCreate FOR CrossReference-»
 		if(value instanceof EObject) { // «metaType.name»
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.«gaRuleElementAccessor()».getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.«gaRuleElementAccessor()».getType().getClassifier())«IF crossReferenceExistsWithDifferentTerminal()» && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.«gaRuleElementAccessor()», (EObject)value , null)«ENDIF») {
 				type = AssignmentType.CROSS_REFERENCE;
 				element = grammarAccess.«gaRuleElementAccessor()»; 
 				return obj;
