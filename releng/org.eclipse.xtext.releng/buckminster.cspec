@@ -29,7 +29,7 @@
 		<cs:public name="create.javadoc" actor="ant">
 			<cs:actorProperties>
 				<cs:property key="buildFile" value="javadoc.ant" />
-				<cs:property key="targets" value="-create.javadoc" />
+				<cs:property key="targets" value="create.javadoc" />
 			</cs:actorProperties>
 			<cs:properties>
 				<cs:property key="checkoutLocation" value="${checkout.location}" />

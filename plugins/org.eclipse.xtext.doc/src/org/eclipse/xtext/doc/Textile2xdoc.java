@@ -1,3 +1,4 @@
+package org.eclipse.xtext.doc;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FilenameFilter;

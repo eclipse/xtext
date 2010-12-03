@@ -1,24 +1,33 @@
 <project name="javadoc-project">
-	<target name="-create.javadoc">
-		<property name="javadoc.output" value="${output}/javadoc" />
+	<target name="create.javadoc">
 
-		<echo message="Source code location ${checkoutLocation}" />
-		<echo message="Javadoc output location ${javadoc.output}" />
+		<property name="projectName" value="Xtext" />
+
+		<!-- workspace defaults -->
+		<property name="output" value="./javadoc" />
+		<property name="checkoutLocation" value="../.." />
+		<property name="targetPlatform" value="${eclipse.home}" />
+
+		<property name="sourcesLocation" value="${checkoutLocation}/plugins/" />
+
+
+		<echo message="Source code location ${sourcesLocation}" />
+		<echo message="Javadoc output location ${output}" />
 		<echo message="Target platform path ${targetPlatform}" />
 
 		<!-- Define classpath -->
 		<path id="javadoc-classpath">
 			<fileset dir="${targetPlatform}">
-				<include name="*.jar" />
+				<include name="**/*.jar" />
 			</fileset>
 		</path>
-		
-		<!-- Prepare dirs -->
-		<delete dir="${javadoc.output}" />
-		<mkdir dir="${javadoc.output}" />
 
-		<javadoc destdir="${javadoc.output}" classpathref="javadoc-classpath" maxmemory="1024m" source="1.5" useexternalfile="true" author="true" version="true" use="true" windowtitle="Xtext Documentation">
-			<fileset dir="${checkoutLocation}/plugins/" defaultexcludes="true">
+		<!-- Prepare dirs -->
+		<delete dir="${output}" />
+		<mkdir dir="${output}" />
+
+		<javadoc destdir="${output}" Encoding="ISO-8859-1" classpathref="javadoc-classpath" maxmemory="1024m" source="1.5" useexternalfile="true" author="true" version="true" use="true" windowtitle="${projectName} Documentation">
+			<fileset dir="${sourcesLocation}/plugins/" defaultexcludes="true">
 				<include name="**/*.java" />
 				<exclude name="**/test/**" />
 			</fileset>
