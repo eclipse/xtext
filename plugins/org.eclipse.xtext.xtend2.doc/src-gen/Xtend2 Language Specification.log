@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live/MacPorts 2009_6) (format=pdflatex 2010.8.26)  6 DEC 2010 09:33
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live/MacPorts 2009_6) (format=pdflatex 2010.8.26)  6 DEC 2010 11:00
 entering extended mode
  %&-line parsing enabled.
 **"Xtend2 Language Specification.tex"
@@ -589,7 +589,7 @@ File: hpdftex.def 2009/10/09 v6.79a Hyperref driver for pdfTeX
 )
 \itemindentlen=\skip50
 
-No file "Xtend2 Language Specification".aux.
+(./Xtend2 Language Specification.aux)
 \openout1 = `"Xtend2 Language Specification.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
@@ -607,6 +607,7 @@ LaTeX Font Info:    ... okay on input line 53.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 53.
 LaTeX Font Info:    ... okay on input line 53.
 \c@lstlisting=\count131
+
 (/opt/local/share/texmf-texlive-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count132
@@ -631,6 +632,8 @@ Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 )
 LaTeX Info: Redefining \ref on input line 53.
 LaTeX Info: Redefining \pageref on input line 53.
+
+(./Xtend2 Language Specification.out) (./Xtend2 Language Specification.out)
 \@outlinefile=\write4
 \openout4 = `"Xtend2 Language Specification.out"'.
 
@@ -649,6 +652,20 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 
 {/opt/local/var/db/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+(./Xtend2 Language Specification.toc
+Class scrreprt Info: You've told me to use the font selection of the element
+(scrreprt)           `sectioning' that is an alias of element `disposition'
+(scrreprt)            on input line 2.
+Class scrreprt Info: You've told me to use the font selection of the element
+(scrreprt)           `sectioning' that is an alias of element `disposition'
+(scrreprt)            on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 4.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 4.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 4.
+)
 \tf@toc=\write5
 \openout5 = `"Xtend2 Language Specification.toc"'.
 
@@ -673,47 +690,91 @@ LaTeX Font Info:    Font shape `OMS/aer/m/n' in size <10.95> not available
 
 ]
 Chapter 2.
+[4
+
+]
+LaTeX Font Info:    Try loading font information for OMS+aess on input line 183
+.
+LaTeX Font Info:    No file OMSaess.fd. on input line 183.
+
+
+LaTeX Font Warning: Font shape `OMS/aess/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead
+(Font)              for symbol `textasteriskcentered' on input line 183.
+
+
+Overfull \hbox (31.21004pt too wide) in paragraph at lines 238--240
+\T1/aer/m/n/10.95 no-ta-tion or a cus-tom an-no-ta-tion which is it-self an-no-
+tated with [][][][][][][][][]. 
+ []
+
+
+Overfull \hbox (53.65747pt too wide) in paragraph at lines 250--252
+[]\T1/aer/m/n/10.95 Providers are de-clared like in plain Guice. That is you wr
+ap your type into [][][][][][][][][].
+ []
+
+[5] [6]
+Overfull \hbox (172.53477pt too wide) in paragraph at lines 339--340
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[7] [8]
+Overfull \hbox (61.08868pt too wide) in paragraph at lines 502--503
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[9]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 162.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 162.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 162.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 162.
+(Font)              <5> on input line 546.
 
-LaTeX Warning: Hyper reference `extensionMethods' on page 4 undefined on input 
-line 164.
+Overfull \hbox (206.87425pt too wide) in paragraph at lines 566--567
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
 
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 588.
+LaTeX Font Info:    No file T1lmr.fd. on input line 588.
 
-LaTeX Warning: Reference `extensionMethods' on page 4 undefined on input line 1
-64.
+LaTeX Font Warning: Font shape `T1/lmr/m/n' undefined
+(Font)              using `T1/cmr/m/n' instead on input line 588.
 
+[10]
+Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
+ine 627.
+ [11] [12] [13] (./Xtend2 Language Specification.tdo)
+\tf@tdo=\write6
+\openout6 = `"Xtend2 Language Specification.tdo"'.
 
-! Package Listings Error: lstinline ended by EOL.
+ [14
 
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.164 ...fied imports (i.e. non-wildcard imports).
-                                                  
-? 
-! Emergency stop.
- ...                                              
-                                                  
-l.164 ...fied imports (i.e. non-wildcard imports).
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+]
+(./Xtend2 Language Specification.aux)
 
- 
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+ ) 
 Here is how much of TeX's memory you used:
- 14265 strings out of 495061
- 236609 string characters out of 3181964
- 319415 words of memory out of 3000000
- 17139 multiletter control sequences out of 15000+200000
- 26708 words of font info for 50 fonts, out of 3000000 for 9000
+ 14811 strings out of 495061
+ 244118 string characters out of 3181964
+ 351342 words of memory out of 3000000
+ 17421 multiletter control sequences out of 15000+200000
+ 35777 words of font info for 70 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 60i,7n,51p,444b,1098s stack positions out of 5000i,500n,10000p,200000b,50000s
-!  ==> Fatal error occurred, no output PDF file produced!
+ 60i,8n,78p,444b,1764s stack positions out of 5000i,500n,10000p,200000b,50000s
+ </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000
+.600pk></opt/local/share/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmbx
+10.pfb></opt/local/share/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmmi
+10.pfb></opt/local/share/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmr1
+0.pfb></opt/local/share/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmr12
+.pfb></opt/local/share/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmss10
+.pfb></opt/local/share/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmssbx
+10.pfb></opt/local/share/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmsy
+10.pfb></opt/local/share/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmti
+10.pfb>
+Output written on "Xtend2 Language Specification.pdf" (14 pages, 178771 bytes).
+
+PDF statistics:
+ 499 PDF objects out of 1000 (max. 8388607)
+ 238 named destinations out of 1000 (max. 500000)
+ 237 words of extra memory for PDF output out of 10000 (max. 10000000)
+

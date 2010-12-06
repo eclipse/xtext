@@ -1,1 +1,28 @@
 \BOOKMARK [0][-]{chapter.1}{Preface}{}
+\BOOKMARK [0][-]{chapter.2}{Language Concepts}{}
+\BOOKMARK [1][-]{section.2.1}{Package Declaration}{chapter.2}
+\BOOKMARK [2][-]{subsection.2.1.1}{Syntax}{section.2.1}
+\BOOKMARK [1][-]{section.2.2}{Imports}{chapter.2}
+\BOOKMARK [2][-]{subsection.2.2.1}{Importing Extension Methods}{section.2.2}
+\BOOKMARK [2][-]{subsection.2.2.2}{Syntax}{section.2.2}
+\BOOKMARK [1][-]{section.2.3}{Dependency Injection}{chapter.2}
+\BOOKMARK [2][-]{subsection.2.3.1}{Name can be inferred}{section.2.3}
+\BOOKMARK [2][-]{subsection.2.3.2}{Guice Keys}{section.2.3}
+\BOOKMARK [2][-]{subsection.2.3.3}{Injected Extension Methods}{section.2.3}
+\BOOKMARK [1][-]{section.2.4}{Class Declaration}{chapter.2}
+\BOOKMARK [2][-]{subsection.2.4.1}{Inheritance}{section.2.4}
+\BOOKMARK [2][-]{subsection.2.4.2}{Generics}{section.2.4}
+\BOOKMARK [2][-]{subsection.2.4.3}{Abstract Classes}{section.2.4}
+\BOOKMARK [2][-]{subsection.2.4.4}{Syntax}{section.2.4}
+\BOOKMARK [1][-]{section.2.5}{Functions}{chapter.2}
+\BOOKMARK [2][-]{subsection.2.5.1}{Visibility}{section.2.5}
+\BOOKMARK [2][-]{subsection.2.5.2}{Overriding Functions}{section.2.5}
+\BOOKMARK [2][-]{subsection.2.5.3}{Abstract Functions}{section.2.5}
+\BOOKMARK [2][-]{subsection.2.5.4}{Inferred Return Types}{section.2.5}
+\BOOKMARK [2][-]{subsection.2.5.5}{Generics}{section.2.5}
+\BOOKMARK [2][-]{subsection.2.5.6}{Polymorphic Method Overloading}{section.2.5}
+\BOOKMARK [2][-]{subsection.2.5.7}{Syntax}{section.2.5}
+\BOOKMARK [1][-]{section.2.6}{Expressions \(in addition Xbase\)}{chapter.2}
+\BOOKMARK [2][-]{subsection.2.6.1}{Rich Strings}{section.2.6}
+\BOOKMARK [2][-]{subsection.2.6.2}{Extension Method Syntax}{section.2.6}
+\BOOKMARK [2][-]{subsection.2.6.3}{Create Expression}{section.2.6}

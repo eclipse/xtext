@@ -159,9 +159,9 @@ The ordinary imports of type names are equivalent to the imports known from Java
 
 \subsection{Importing Extension Methods}
 \label{importExtension}
-In addition one can add the keyword \lstinline]°extension° after the import (where the keyword \lstinline]°static° occurs in Java), which makes any static methods 
+In addition one can add the keyword \lstinline°extension° after the import (where the keyword \lstinline°static° occurs in Java), which makes any static methods 
 from a certain type available as an 
-\hyperref[extensionMethods]{extension method~(§\ref*{extensionMethods})}. The \lstinline]°extension° keyword only works with qualified imports (i.e. non-wildcard imports).
+\hyperref[extensionMethods]{extension method~(§\ref*{extensionMethods})}. The \lstinline°extension° keyword only works with qualified imports (i.e. non-wildcard imports).
 If you only want to make some methods from the imported type available using the extension syntax, you can provide a list of function names.
 You cannot further specify type arguments.
 
@@ -173,7 +173,7 @@ import extension java.util.Collections.(sort, shuffle);
 \end{lstlisting}
 
 
-This will import four methods (\lstinline]°sort(List<T>)°, \lstinline]°sort(List<T>, Comparator<? super T>)°, \lstinline]°shuffle(List<?>)°, \lstinline]°shuffle(List<?>, Random)°) available as 
+This will import four methods (\lstinline°sort(List<T>)°, \lstinline°sort(List<T>, Comparator<? super T>)°, \lstinline°shuffle(List<?>)°, \lstinline°shuffle(List<?>, Random)°) available as 
 \hyperref[extensionMethods]{extension methods~(§\ref*{extensionMethods})}.
 
 
@@ -236,7 +236,7 @@ inject HashMap<String,MyType> myCache;
 
 
 Also Guice allows to use annotations to further distinct between different implementations of the same type. This is usually done by using
-the \lstinline]°com.google.inject.name.Named° annotation or a custom annotation which is itself annotated with \lstinline]°com.google.inject.BindingAnnotation°.
+the \lstinline°com.google.inject.name.Named° annotation or a custom annotation which is itself annotated with \lstinline°com.google.inject.BindingAnnotation°.
 
 Xtend supports these two variants:
 
@@ -247,7 +247,7 @@ inject @"NamedThingy" my.Service namedService;
 \end{lstlisting}
 
 
-Providers are declared like in plain Guice. That is you wrap your type into \lstinline]°com.google.inject.Provider°.
+Providers are declared like in plain Guice. That is you wrap your type into \lstinline°com.google.inject.Provider°.
 Example:
 
 \begin{lstlisting}
@@ -259,7 +259,7 @@ inject @CustomAnnotation Provider<Service> customServiceProvider;
 
 \subsection{Injected Extension Methods}
 
-The \lstinline]°extension° keyword is also available for \lstinline]°inject° which is much nicer than importing static methods, because you don't bind your code to 
+The \lstinline°extension° keyword is also available for \lstinline°inject° which is much nicer than importing static methods, because you don't bind your code to 
 actual implementation, since the implementation can be easily changed through the global dependency injection configuration (i.e. Guice modules).
 
 Example:
@@ -285,7 +285,7 @@ inject extension my.common.IterableExtensions;
 \end{lstlisting}
   
 
-and can then use it as if those functions were members of any \lstinline]°java.lang.Iterable°:
+and can then use it as if those functions were members of any \lstinline°java.lang.Iterable°:
 
 \begin{lstlisting}
 myIterable.find(e|e.name=="Foo")
@@ -311,10 +311,10 @@ Injection : 'inject' 'extension'? ('@'STRING | '@'TypeReference) TypeReference (
 \section{Class Declaration}
 \label{classDeclaration}
 The class declaration reuses a lot of Java's syntax but still is a bit different in some aspects.
-Firstly the default visibility of any class is \lstinline]°public°. It is possible to write it explicitly but if not specified it defaults to public.
+Firstly the default visibility of any class is \lstinline°public°. It is possible to write it explicitly but if not specified it defaults to public.
 Java's default "package private" visibility does not exist.
 
-The \lstinline]°abstract° as well as the \lstinline]°final° modifiers are directly translated to Java, hence have the exact same meaning.
+The \lstinline°abstract° as well as the \lstinline°final° modifiers are directly translated to Java, hence have the exact same meaning.
 
 \subsection{Inheritance}
 
@@ -328,7 +328,7 @@ Full Java Generics with the exact same syntax and semantics are supported.
 
 \subsection{Abstract Classes}
 
-A class is automatically \lstinline]°abstract° if one of its functions is abstract. 
+A class is automatically \lstinline°abstract° if one of its functions is abstract. 
 This is the case if the function's expression (body) is not defined. 
 
 
@@ -364,14 +364,14 @@ Boolean equalsIgnoreCase(String s1,String s2) :
 
 \subsection{Visibility}
 
-The default visibility of a function is \lstinline]°public°, which can also be declared explicitly. The two other available visibilities are \lstinline]°protected° and \lstinline]°private°.
+The default visibility of a function is \lstinline°public°, which can also be declared explicitly. The two other available visibilities are \lstinline°protected° and \lstinline°private°.
 
 
 \subsection{Overriding Functions}
 
-Like Java methods an Xtend2 function can be declared non overridable using the keyword \lstinline]°final°.
+Like Java methods an Xtend2 function can be declared non overridable using the keyword \lstinline°final°.
 
-Also if a function overrides a method from the suberclass, the \lstinline]°override° keyword is mandatory.
+Also if a function overrides a method from the suberclass, the \lstinline°override° keyword is mandatory.
 
 Example:
 \begin{lstlisting}
@@ -384,7 +384,7 @@ final override Boolean equalsIgnoreCase(String s1,String s2) :
 
 \subsection{Abstract Functions}
 
-A function is automatically considered \lstinline]°abstract° if its expression (body) is not defined.
+A function is automatically considered \lstinline°abstract° if its expression (body) is not defined.
 
 Example:
 \begin{lstlisting}
@@ -506,7 +506,7 @@ public String foo(Number x) {
 \end{lstlisting}
 
 
-As you can see a null reference is always a match. If you want to fetch null you can declare a parameter using the type \lstinline]°java.lang.Void°.
+As you can see a null reference is always a match. If you want to fetch null you can declare a parameter using the type \lstinline°java.lang.Void°.
 
 \begin{lstlisting}
 foo(Number x) : 'it's some number';
@@ -532,18 +532,29 @@ public String foo(Number x) {
 \end{lstlisting}
 
 
-Note that the type \lstinline]°java.lang.Void° is considered the most specific type and will always have higher precedence than any other types in the ordering.
+Note that the type \lstinline°java.lang.Void° is considered the most specific type and will always have higher precedence than any other types in the ordering.
 
 
 \subsubsection{Overloading Functions from Super Types}
 
-Functions (or Java Methods) from super types are not included in the dispatch. You'll have to call them explicitly using the \lstinline]°super° reference. 
+Functions (or Java Methods) from super types are not included in the dispatch. You'll have to call them explicitly using the \lstinline°super° reference. 
 
 
 \subsubsection{Excluding functions from polymorphic dispatch}
 
 Sometimes you need to have the static dispatch from Java, for instance if you implement an interface with two method declarations where one overloads 
-the other. In that case you have to add the keyword \lstinline]°no-dispatch°.
+the other. In that case you have to add the keyword \lstinline°no-dispatch°.
+
+\begin{lstlisting}
+no-dispatch foo(Number x) : 'it's some number';
+foo(Integer x) : 'it's an int';
+foo(Void x) : throw new NullPointerException("x");
+
+\end{lstlisting}
+
+
+In this case the resulting Java class will have two methods, one for Number and one containing the polymorphic dispatch for \lstinline°Void°
+and \lstinline°Integer°, which will have the most common signature \lstinline°foo(Integer x)°.
 
 
 \subsection{Syntax}
@@ -565,7 +576,7 @@ FunctionDef : ('public'|'protected'|'private'|'abstract'|'final')* TypeParameter
 
 \section{Expressions (in addition Xbase)}
 \label{Expressions}
-Xtend2 adds a couple of expressions to the basic set of expressions provided by Xbase.
+Xtend2 adds some expressions to the basic set of expressions provided by Xbase.
 
 \subsection{Rich Strings}
 \label{RichStrings}
@@ -618,13 +629,19 @@ It also supports the SEPARATOR and ITERATOR declaration from Xpand.
 
 \subsubsection{Typing}
 \label{RichStringType}
-The rich string is translated to an efficient string concatenation and the return type of a rich string is \lstinline]°java.lang.CharStream° which allows
+The rich string is translated to an efficient string concatenation and the return type of a rich string is \lstinline°java.lang.CharStream° which allows
 much room for efficient implementation.
+
+
+\subsubsection{Whitespace Handling}
+\label{WhitespaceHandling}
+\todo[inline]{Whitespace Handling}
 
 
 \subsection{Extension Method Syntax}
 \label{extensionMethods}
-Static functions as well as any members annotated with @Extension can be called using the extension method syntax.
+Imports and injections preceded with 
+\hyperref[importExtension]{the keyword \lstinline°extension°~(§\ref*{importExtension})} can be called using the extension method syntax.
 This means that a function imported through a static import, like e.g. java.util.Collections.singleton(T) can be invoked using 
 the member syntax.
 
@@ -644,15 +661,14 @@ singleton("Foo")
 \end{lstlisting}
 
 
-Note that extension methods never shadow a member of the current reference. That is if \lstinline]°java.lang.String° has a field \lstinline]°singleton°, a method \lstinline]°singleton()° or a method
-\lstinline]°getSingleton()°, those memebers would be referenced. That is done at compile time, so the tooling is able to tell you what you actually reference.
+Note that extension methods never shadow a member of the current reference. That is if \lstinline°java.lang.String° has a field \lstinline°singleton°, a method \lstinline°singleton()° or a method
+\lstinline°getSingleton()°, those memebers would be referenced. That is done at compile time, so the tooling is able to tell you what you actually reference.
 
-Static functions as well as extensions in the previous version of Xtend make clients not only depend on a certain signature but on the implementation as it is not 
-possible to exchange the implementation of a static function. That's where the @Extension annotation in conjunction with dependency injection comes in.
+Static functions as well as extensions in the previous version of Xtend make clients not only depend on a certain signature but on the implementation as 
+it is not possible to exchange the implementation of a static function. That's where the \lstinline°extension° keyword in conjunction with dependency injection 
+comes in. If you have annotated a dependency with the \lstinline°extension° keyword, its members become available for extension method syntax.
 
-If you have declared a field with @Extension than all members of that type become available for extension method syntax.
-
-Example
+Example:
 
 Imagine the following Java interface
 
@@ -675,7 +691,7 @@ myExtensions.getComputedProperty(someType)
 In Xtend2 you can have the instance injected like in Java:
 
 \begin{lstlisting}
-@Inject @Extension MyExtensions extensions;
+inject extension MyExtensions;
 
 \end{lstlisting}
 
@@ -690,6 +706,57 @@ someType.computedProperty
 
 It will statically bind to the right method and even more important it doesn't bind to a specific implementation but just to the signature.
 The implementation can be provided through dependency injection.
+
+
+\subsection{Create Expression}
+\label{CreateExpression}
+Xtend2 supports model to model transformations. There is actually only one little problem a transformation language has to solve, which is to
+get rid of the need to transform a net of objects in two phases. This is unforntunately necessary because you would end up with endless recursion
+if you write a mapping between objects but these objects are connected in a circular way, which is almost always the case.
+
+Consider you want to transform the following Java interface to Java Class with an abstract method:
+
+\begin{lstlisting}
+interface Foo {
+	Foo newFoo();
+}
+
+\end{lstlisting}
+ 
+
+Note how Foo contains a method and that method again refers to Foo. We have a circular dependency. Traditionally those problems are solved by doing the transformation
+in multiple phases: First transform the tree hierarchy, to make sure that all declarations are in place. Then establish the cross references. 
+Thi problem with this approach is that you have to split up you code. The transformation of a method needs to be split up in creating the object and setting the values and containing
+elements and a code section which establishes the crossreference. This complicates the code and harms readability.
+
+In Xtend2 there is a so called create expression (similar to the create extension from previous Xtend). The example from above could be 
+implemented like this:
+
+\begin{lstlisting}
+toAbstractClass(Interface intf) :
+	create new Class() {
+		name = intf.name;
+		abstract = true;
+		methods.addAll(intf.methods.toAbstractMethod);
+	}
+;
+toAbstractMethod(Method m) :
+	create new Method() {
+		name = m.name;
+		abstract = true;
+		returnType = m.returnType.toAbstractClass; // recursive
+	}
+;
+
+\end{lstlisting}
+ 
+
+the create expression contains two expressions. The first expression right after the keyword is called the creator expression, the second expression is 
+called the initializer. The execution semantics is that the result of the creator expression is cached and the key is comprised of all local variables and
+the create expression itself. This means that whenever the same create expression with the exact same local variables (equality) is executed again the
+expression will just return the cached value. After the value is cached it executes the initializer. 
+The nice thing is, that you don't have to care about circular references since a call to the same create expression with the same arguments will return a reference to
+the not yet fully initialized element. 
 
 
 \chapter*{List of External Links}
