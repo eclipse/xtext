@@ -91,6 +91,7 @@ public class TerminalRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	private TerminalRule tID;
 	private TerminalRule tINT;
 	private TerminalRule tSTRING;
+	private TerminalRule tESCAPED_CHAR;
 	private TerminalRule tML_COMMENT;
 	private TerminalRule tSL_COMMENT;
 	private TerminalRule tWS;
@@ -133,10 +134,15 @@ public class TerminalRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
-	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//	"\"" (ESCAPED_CHAR | !("\\" | "\""))* "\"" | "\'" (ESCAPED_CHAR | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return (tSTRING != null) ? tSTRING : (tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
+	} 
+
+	//terminal fragment ESCAPED_CHAR:
+	//	"\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\");
+	public TerminalRule getESCAPED_CHARRule() {
+		return (tESCAPED_CHAR != null) ? tESCAPED_CHAR : (tESCAPED_CHAR = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ESCAPED_CHAR"));
 	} 
 
 	//terminal ML_COMMENT:

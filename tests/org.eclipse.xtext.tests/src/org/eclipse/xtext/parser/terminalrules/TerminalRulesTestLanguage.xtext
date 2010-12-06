@@ -24,11 +24,14 @@ Model:
 terminal ID  		: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 terminal INT 		: ('0'..'9')+;
 terminal STRING	: 
-			'"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\') | !('\\'|'"') )* '"' |
-			"'" ( '\\' ('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\') | !('\\'|"'") )* "'"
+			'"' ( ESCAPED_CHAR | !('\\'|'"') )* '"' |
+			"'" ( ESCAPED_CHAR | !('\\'|"'") )* "'"
 		; 
+
+terminal fragment ESCAPED_CHAR: '\\' ('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\');		
+
 terminal ML_COMMENT	: '/*' -> '*/';
-terminal SL_COMMENT 	: '//' !('\n'|'\r')* ('\r'? '\n')?;
+terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 
 terminal WS			: (' '|'\t'|'\r'|'\n')+;
 

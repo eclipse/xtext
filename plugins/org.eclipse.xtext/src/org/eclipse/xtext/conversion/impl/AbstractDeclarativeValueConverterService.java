@@ -89,6 +89,10 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 					String ruleName = method.getAnnotation(ValueConverter.class).rule();
 					AbstractRule rule = GrammarUtil.findRuleForName(getGrammar(), ruleName);
 					if (rule != null) {
+						if (rule instanceof TerminalRule) {
+							if (((TerminalRule) rule).isFragment())
+								throw new IllegalStateException("Tried to register a value converter for a fragment terminal rule: '" + ruleName + "'");
+						}
 						if (!thisConverters.add(ruleName)) {
 							throw new IllegalStateException("Tried to register two value converters for rule '" + ruleName + "'");
 						}
@@ -128,9 +132,11 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 			}
 		}
 		for (TerminalRule terminalRule : allTerminalRules(getGrammar())) {
-			String terminalRuleName = terminalRule.getName();
-			if (!converters.containsKey(terminalRuleName)) {
-				converters.put(terminalRuleName, defaultTerminalConverterFactory.create(terminalRule));
+			if (!terminalRule.isFragment()) {
+				String terminalRuleName = terminalRule.getName();
+				if (!converters.containsKey(terminalRuleName)) {
+					converters.put(terminalRuleName, defaultTerminalConverterFactory.create(terminalRule));
+				}
 			}
 		}
 	}
