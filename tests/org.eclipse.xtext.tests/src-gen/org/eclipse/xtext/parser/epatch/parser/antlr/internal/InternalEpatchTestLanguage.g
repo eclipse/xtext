@@ -2067,76 +2067,82 @@ ruleMigration returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(	otherlv_0='migrate' 
+((
     {
-    	newLeafNode(otherlv_0, grammarAccess.getMigrationAccess().getMigrateKeyword_0());
+        $current = forceCreateModelElement(
+            grammarAccess.getMigrationAccess().getMigrationAction_0(),
+            $current);
+    }
+)	otherlv_1='migrate' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getMigrationAccess().getMigrateKeyword_1());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMigrationAccess().getFirstExecutableParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getMigrationAccess().getFirstExecutableParserRuleCall_2_0()); 
 	    }
-		lv_first_1_0=ruleExecutable		{
+		lv_first_2_0=ruleExecutable		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMigrationRule());
 	        }
        		set(
        			$current, 
        			"first",
-        		lv_first_1_0, 
+        		lv_first_2_0, 
         		"Executable");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)?((	otherlv_2='as' 
+)?((	otherlv_3='as' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getMigrationAccess().getAsKeyword_2_0_0());
+    	newLeafNode(otherlv_3, grammarAccess.getMigrationAccess().getAsKeyword_3_0_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMigrationAccess().getAsOpExecutableParserRuleCall_2_0_1_0()); 
+	        newCompositeNode(grammarAccess.getMigrationAccess().getAsOpExecutableParserRuleCall_3_0_1_0()); 
 	    }
-		lv_asOp_3_0=ruleExecutable		{
+		lv_asOp_4_0=ruleExecutable		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMigrationRule());
 	        }
        		set(
        			$current, 
        			"asOp",
-        		lv_asOp_3_0, 
+        		lv_asOp_4_0, 
         		"Executable");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
 ))
-    |(	otherlv_4='each' 
+    |(	otherlv_5='each' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getMigrationAccess().getEachKeyword_2_1_0());
+    	newLeafNode(otherlv_5, grammarAccess.getMigrationAccess().getEachKeyword_3_1_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMigrationAccess().getEachOpExecutableParserRuleCall_2_1_1_0()); 
+	        newCompositeNode(grammarAccess.getMigrationAccess().getEachOpExecutableParserRuleCall_3_1_1_0()); 
 	    }
-		lv_eachOp_5_0=ruleExecutable		{
+		lv_eachOp_6_0=ruleExecutable		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMigrationRule());
 	        }
        		set(
        			$current, 
        			"eachOp",
-        		lv_eachOp_5_0, 
+        		lv_eachOp_6_0, 
         		"Executable");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)))?	otherlv_6=';' 
+)))?	otherlv_7=';' 
     {
-    	newLeafNode(otherlv_6, grammarAccess.getMigrationAccess().getSemicolonKeyword_3());
+    	newLeafNode(otherlv_7, grammarAccess.getMigrationAccess().getSemicolonKeyword_4());
     }
 )
 ;

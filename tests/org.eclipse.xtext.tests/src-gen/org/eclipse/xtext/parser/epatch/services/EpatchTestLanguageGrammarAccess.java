@@ -1335,10 +1335,10 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		private final RuleCall cFragmentFRAGMENTTerminalRuleCall_2_0 = (RuleCall)cFragmentAssignment_2.eContents().get(0);
 		
 		//ObjectCopy:
-		//	"copy" resource=[NamedResource] fragment=FRAGMENT;
+		//	"copy" resource=[NamedResource] ^fragment=FRAGMENT;
 		public ParserRule getRule() { return rule; }
 
-		//"copy" resource=[NamedResource] fragment=FRAGMENT
+		//"copy" resource=[NamedResource] ^fragment=FRAGMENT
 		public Group getGroup() { return cGroup; }
 
 		//"copy"
@@ -1353,7 +1353,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//ID
 		public RuleCall getResourceNamedResourceIDTerminalRuleCall_1_0_1() { return cResourceNamedResourceIDTerminalRuleCall_1_0_1; }
 
-		//fragment=FRAGMENT
+		//^fragment=FRAGMENT
 		public Assignment getFragmentAssignment_2() { return cFragmentAssignment_2; }
 
 		//FRAGMENT
@@ -1363,66 +1363,70 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	public class MigrationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Migration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cMigrateKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cFirstAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cFirstExecutableParserRuleCall_1_0 = (RuleCall)cFirstAssignment_1.eContents().get(0);
-		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
-		private final Group cGroup_2_0 = (Group)cAlternatives_2.eContents().get(0);
-		private final Keyword cAsKeyword_2_0_0 = (Keyword)cGroup_2_0.eContents().get(0);
-		private final Assignment cAsOpAssignment_2_0_1 = (Assignment)cGroup_2_0.eContents().get(1);
-		private final RuleCall cAsOpExecutableParserRuleCall_2_0_1_0 = (RuleCall)cAsOpAssignment_2_0_1.eContents().get(0);
-		private final Group cGroup_2_1 = (Group)cAlternatives_2.eContents().get(1);
-		private final Keyword cEachKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
-		private final Assignment cEachOpAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
-		private final RuleCall cEachOpExecutableParserRuleCall_2_1_1_0 = (RuleCall)cEachOpAssignment_2_1_1.eContents().get(0);
-		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Action cMigrationAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cMigrateKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cFirstAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cFirstExecutableParserRuleCall_2_0 = (RuleCall)cFirstAssignment_2.eContents().get(0);
+		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
+		private final Group cGroup_3_0 = (Group)cAlternatives_3.eContents().get(0);
+		private final Keyword cAsKeyword_3_0_0 = (Keyword)cGroup_3_0.eContents().get(0);
+		private final Assignment cAsOpAssignment_3_0_1 = (Assignment)cGroup_3_0.eContents().get(1);
+		private final RuleCall cAsOpExecutableParserRuleCall_3_0_1_0 = (RuleCall)cAsOpAssignment_3_0_1.eContents().get(0);
+		private final Group cGroup_3_1 = (Group)cAlternatives_3.eContents().get(1);
+		private final Keyword cEachKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
+		private final Assignment cEachOpAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
+		private final RuleCall cEachOpExecutableParserRuleCall_3_1_1_0 = (RuleCall)cEachOpAssignment_3_1_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//// ******************* migration *****************************
 		//Migration:
-		//	"migrate" first=Executable? ("as" asOp=Executable | "each" eachOp=Executable)? ";";
+		//	{Migration} "migrate" first=Executable? ("as" asOp=Executable | "each" eachOp=Executable)? ";";
 		public ParserRule getRule() { return rule; }
 
-		//"migrate" first=Executable? ("as" asOp=Executable | "each" eachOp=Executable)? ";"
+		//{Migration} "migrate" first=Executable? ("as" asOp=Executable | "each" eachOp=Executable)? ";"
 		public Group getGroup() { return cGroup; }
 
+		//{Migration}
+		public Action getMigrationAction_0() { return cMigrationAction_0; }
+
 		//"migrate"
-		public Keyword getMigrateKeyword_0() { return cMigrateKeyword_0; }
+		public Keyword getMigrateKeyword_1() { return cMigrateKeyword_1; }
 
 		//first=Executable?
-		public Assignment getFirstAssignment_1() { return cFirstAssignment_1; }
+		public Assignment getFirstAssignment_2() { return cFirstAssignment_2; }
 
 		//Executable
-		public RuleCall getFirstExecutableParserRuleCall_1_0() { return cFirstExecutableParserRuleCall_1_0; }
+		public RuleCall getFirstExecutableParserRuleCall_2_0() { return cFirstExecutableParserRuleCall_2_0; }
 
 		//("as" asOp=Executable | "each" eachOp=Executable)?
-		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
 		//"as" asOp=Executable
-		public Group getGroup_2_0() { return cGroup_2_0; }
+		public Group getGroup_3_0() { return cGroup_3_0; }
 
 		//"as"
-		public Keyword getAsKeyword_2_0_0() { return cAsKeyword_2_0_0; }
+		public Keyword getAsKeyword_3_0_0() { return cAsKeyword_3_0_0; }
 
 		//asOp=Executable
-		public Assignment getAsOpAssignment_2_0_1() { return cAsOpAssignment_2_0_1; }
+		public Assignment getAsOpAssignment_3_0_1() { return cAsOpAssignment_3_0_1; }
 
 		//Executable
-		public RuleCall getAsOpExecutableParserRuleCall_2_0_1_0() { return cAsOpExecutableParserRuleCall_2_0_1_0; }
+		public RuleCall getAsOpExecutableParserRuleCall_3_0_1_0() { return cAsOpExecutableParserRuleCall_3_0_1_0; }
 
 		//"each" eachOp=Executable
-		public Group getGroup_2_1() { return cGroup_2_1; }
+		public Group getGroup_3_1() { return cGroup_3_1; }
 
 		//"each"
-		public Keyword getEachKeyword_2_1_0() { return cEachKeyword_2_1_0; }
+		public Keyword getEachKeyword_3_1_0() { return cEachKeyword_3_1_0; }
 
 		//eachOp=Executable
-		public Assignment getEachOpAssignment_2_1_1() { return cEachOpAssignment_2_1_1; }
+		public Assignment getEachOpAssignment_3_1_1() { return cEachOpAssignment_3_1_1; }
 
 		//Executable
-		public RuleCall getEachOpExecutableParserRuleCall_2_1_1_0() { return cEachOpExecutableParserRuleCall_2_1_1_0; }
+		public RuleCall getEachOpExecutableParserRuleCall_3_1_1_0() { return cEachOpExecutableParserRuleCall_3_1_1_0; }
 
 		//";"
-		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
+		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 
 	public class ExecutableElements extends AbstractParserRuleElementFinder {
@@ -1751,7 +1755,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	}
 
 	//ObjectCopy:
-	//	"copy" resource=[NamedResource] fragment=FRAGMENT;
+	//	"copy" resource=[NamedResource] ^fragment=FRAGMENT;
 	public ObjectCopyElements getObjectCopyAccess() {
 		return (pObjectCopy != null) ? pObjectCopy : (pObjectCopy = new ObjectCopyElements());
 	}
@@ -1768,7 +1772,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 
 	//// ******************* migration *****************************
 	//Migration:
-	//	"migrate" first=Executable? ("as" asOp=Executable | "each" eachOp=Executable)? ";";
+	//	{Migration} "migrate" first=Executable? ("as" asOp=Executable | "each" eachOp=Executable)? ";";
 	public MigrationElements getMigrationAccess() {
 		return (pMigration != null) ? pMigration : (pMigration = new MigrationElements());
 	}

@@ -607,6 +607,11 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/EpatchTestLanguage#//Migration"/>
       </type>
       <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/EpatchTestLanguage#//Migration"/>
+          </type>
+        </elements>
         <elements xsi:type="xtext:Keyword" value="migrate"/>
         <elements xsi:type="xtext:Assignment" cardinality="?" feature="first" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.23"/>

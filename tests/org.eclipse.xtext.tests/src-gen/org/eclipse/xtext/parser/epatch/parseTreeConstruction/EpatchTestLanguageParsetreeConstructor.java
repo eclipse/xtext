@@ -6308,11 +6308,11 @@ protected class ObjectNew_ImpFragAssignment_2 extends AssignmentToken  {
 /************ begin Rule ObjectCopy ****************
  *
  * ObjectCopy:
- * 	"copy" resource=[NamedResource] fragment=FRAGMENT;
+ * 	"copy" resource=[NamedResource] ^fragment=FRAGMENT;
  *
  **/
 
-// "copy" resource=[NamedResource] fragment=FRAGMENT
+// "copy" resource=[NamedResource] ^fragment=FRAGMENT
 protected class ObjectCopy_Group extends GroupToken {
 	
 	public ObjectCopy_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6399,7 +6399,7 @@ protected class ObjectCopy_ResourceAssignment_1 extends AssignmentToken  {
 
 }
 
-// fragment=FRAGMENT
+// ^fragment=FRAGMENT
 protected class ObjectCopy_FragmentAssignment_2 extends AssignmentToken  {
 	
 	public ObjectCopy_FragmentAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6441,11 +6441,11 @@ protected class ObjectCopy_FragmentAssignment_2 extends AssignmentToken  {
  *
  * // ******************* migration *****************************
  * Migration:
- * 	"migrate" first=Executable? ("as" asOp=Executable | "each" eachOp=Executable)? ";";
+ * 	{Migration} "migrate" first=Executable? ("as" asOp=Executable | "each" eachOp=Executable)? ";";
  *
  **/
 
-// "migrate" first=Executable? ("as" asOp=Executable | "each" eachOp=Executable)? ";"
+// {Migration} "migrate" first=Executable? ("as" asOp=Executable | "each" eachOp=Executable)? ";"
 protected class Migration_Group extends GroupToken {
 	
 	public Migration_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6460,30 +6460,30 @@ protected class Migration_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Migration_SemicolonKeyword_3(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Migration_SemicolonKeyword_4(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getMigrationRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getMigrationAccess().getMigrationAction_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
 
 }
 
-// "migrate"
-protected class Migration_MigrateKeyword_0 extends KeywordToken  {
-	
-	public Migration_MigrateKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+// {Migration}
+protected class Migration_MigrationAction_0 extends ActionToken  {
+
+	public Migration_MigrationAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getMigrationAccess().getMigrateKeyword_0();
+	public Action getGrammarElement() {
+		return grammarAccess.getMigrationAccess().getMigrationAction_0();
 	}
 
     @Override
@@ -6493,18 +6493,45 @@ protected class Migration_MigrateKeyword_0 extends KeywordToken  {
 		}	
 	}
 
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
+}
+
+// "migrate"
+protected class Migration_MigrateKeyword_1 extends KeywordToken  {
+	
+	public Migration_MigrateKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getMigrationAccess().getMigrateKeyword_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Migration_MigrationAction_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
 }
 
 // first=Executable?
-protected class Migration_FirstAssignment_1 extends AssignmentToken  {
+protected class Migration_FirstAssignment_2 extends AssignmentToken  {
 	
-	public Migration_FirstAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Migration_FirstAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getMigrationAccess().getFirstAssignment_1();
+		return grammarAccess.getMigrationAccess().getFirstAssignment_2();
 	}
 
     @Override
@@ -6523,7 +6550,7 @@ protected class Migration_FirstAssignment_1 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExecutableRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getMigrationAccess().getFirstExecutableParserRuleCall_1_0(); 
+				element = grammarAccess.getMigrationAccess().getFirstExecutableParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -6535,29 +6562,29 @@ protected class Migration_FirstAssignment_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Migration_MigrateKeyword_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new Migration_MigrateKeyword_1(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // ("as" asOp=Executable | "each" eachOp=Executable)?
-protected class Migration_Alternatives_2 extends AlternativesToken {
+protected class Migration_Alternatives_3 extends AlternativesToken {
 
-	public Migration_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Migration_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Alternatives getGrammarElement() {
-		return grammarAccess.getMigrationAccess().getAlternatives_2();
+		return grammarAccess.getMigrationAccess().getAlternatives_3();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Migration_Group_2_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new Migration_Group_2_1(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new Migration_Group_3_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Migration_Group_3_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -6565,21 +6592,21 @@ protected class Migration_Alternatives_2 extends AlternativesToken {
 }
 
 // "as" asOp=Executable
-protected class Migration_Group_2_0 extends GroupToken {
+protected class Migration_Group_3_0 extends GroupToken {
 	
-	public Migration_Group_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Migration_Group_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getMigrationAccess().getGroup_2_0();
+		return grammarAccess.getMigrationAccess().getGroup_3_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Migration_AsOpAssignment_2_0_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Migration_AsOpAssignment_3_0_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -6587,22 +6614,22 @@ protected class Migration_Group_2_0 extends GroupToken {
 }
 
 // "as"
-protected class Migration_AsKeyword_2_0_0 extends KeywordToken  {
+protected class Migration_AsKeyword_3_0_0 extends KeywordToken  {
 	
-	public Migration_AsKeyword_2_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Migration_AsKeyword_3_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getMigrationAccess().getAsKeyword_2_0_0();
+		return grammarAccess.getMigrationAccess().getAsKeyword_3_0_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Migration_FirstAssignment_1(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new Migration_MigrateKeyword_0(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new Migration_FirstAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Migration_MigrateKeyword_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -6610,15 +6637,15 @@ protected class Migration_AsKeyword_2_0_0 extends KeywordToken  {
 }
 
 // asOp=Executable
-protected class Migration_AsOpAssignment_2_0_1 extends AssignmentToken  {
+protected class Migration_AsOpAssignment_3_0_1 extends AssignmentToken  {
 	
-	public Migration_AsOpAssignment_2_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Migration_AsOpAssignment_3_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getMigrationAccess().getAsOpAssignment_2_0_1();
+		return grammarAccess.getMigrationAccess().getAsOpAssignment_3_0_1();
 	}
 
     @Override
@@ -6637,7 +6664,7 @@ protected class Migration_AsOpAssignment_2_0_1 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExecutableRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getMigrationAccess().getAsOpExecutableParserRuleCall_2_0_1_0(); 
+				element = grammarAccess.getMigrationAccess().getAsOpExecutableParserRuleCall_3_0_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -6649,7 +6676,7 @@ protected class Migration_AsOpAssignment_2_0_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Migration_AsKeyword_2_0_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new Migration_AsKeyword_3_0_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -6657,21 +6684,21 @@ protected class Migration_AsOpAssignment_2_0_1 extends AssignmentToken  {
 
 
 // "each" eachOp=Executable
-protected class Migration_Group_2_1 extends GroupToken {
+protected class Migration_Group_3_1 extends GroupToken {
 	
-	public Migration_Group_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Migration_Group_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getMigrationAccess().getGroup_2_1();
+		return grammarAccess.getMigrationAccess().getGroup_3_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Migration_EachOpAssignment_2_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Migration_EachOpAssignment_3_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -6679,22 +6706,22 @@ protected class Migration_Group_2_1 extends GroupToken {
 }
 
 // "each"
-protected class Migration_EachKeyword_2_1_0 extends KeywordToken  {
+protected class Migration_EachKeyword_3_1_0 extends KeywordToken  {
 	
-	public Migration_EachKeyword_2_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Migration_EachKeyword_3_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getMigrationAccess().getEachKeyword_2_1_0();
+		return grammarAccess.getMigrationAccess().getEachKeyword_3_1_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Migration_FirstAssignment_1(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new Migration_MigrateKeyword_0(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new Migration_FirstAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Migration_MigrateKeyword_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -6702,15 +6729,15 @@ protected class Migration_EachKeyword_2_1_0 extends KeywordToken  {
 }
 
 // eachOp=Executable
-protected class Migration_EachOpAssignment_2_1_1 extends AssignmentToken  {
+protected class Migration_EachOpAssignment_3_1_1 extends AssignmentToken  {
 	
-	public Migration_EachOpAssignment_2_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Migration_EachOpAssignment_3_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getMigrationAccess().getEachOpAssignment_2_1_1();
+		return grammarAccess.getMigrationAccess().getEachOpAssignment_3_1_1();
 	}
 
     @Override
@@ -6729,7 +6756,7 @@ protected class Migration_EachOpAssignment_2_1_1 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExecutableRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getMigrationAccess().getEachOpExecutableParserRuleCall_2_1_1_0(); 
+				element = grammarAccess.getMigrationAccess().getEachOpExecutableParserRuleCall_3_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -6741,7 +6768,7 @@ protected class Migration_EachOpAssignment_2_1_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Migration_EachKeyword_2_1_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new Migration_EachKeyword_3_1_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -6750,23 +6777,23 @@ protected class Migration_EachOpAssignment_2_1_1 extends AssignmentToken  {
 
 
 // ";"
-protected class Migration_SemicolonKeyword_3 extends KeywordToken  {
+protected class Migration_SemicolonKeyword_4 extends KeywordToken  {
 	
-	public Migration_SemicolonKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Migration_SemicolonKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getMigrationAccess().getSemicolonKeyword_3();
+		return grammarAccess.getMigrationAccess().getSemicolonKeyword_4();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Migration_Alternatives_2(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new Migration_FirstAssignment_1(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new Migration_MigrateKeyword_0(lastRuleCallOrigin, this, 2, inst);
+			case 0: return new Migration_Alternatives_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Migration_FirstAssignment_2(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Migration_MigrateKeyword_1(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
