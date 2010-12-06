@@ -115,7 +115,7 @@ quoteIfNeccesary(String this) :
 isXtextKeyword(String this) :
 	{ 'ML_COMMENT', 'ID', 'WS','INT', 'STRING', 'ANY_OTHER', 'SL_COMMENT', 
 	  'returns', 'generate', 'terminal', 'with', 'hidden', 'enum', 'grammar', 
-	  'import', 'as', 'current'
+	  'import', 'as', 'current', 'fragment'
 	}.contains(this);
 	
 idAttribute(EClass this) :

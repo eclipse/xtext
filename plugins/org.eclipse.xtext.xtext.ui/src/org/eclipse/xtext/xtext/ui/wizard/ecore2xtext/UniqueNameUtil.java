@@ -35,7 +35,7 @@ public class UniqueNameUtil {
 			"string", "any_other", "sl_comment" });
 
 	private static final List<String> RESERVED_KEYWORDS = Arrays.asList(new String[] { "returns", "generate",
-			"terminal", "with", "hidden", "enum", "grammar", "import", "as", "current" });
+			"terminal", "with", "hidden", "enum", "grammar", "import", "as", "current", "fragment" });
 
 	public static String uniqueName(ENamedElement element) {
 		return uniqueName(element, element.getName(), element2uniqueName);
