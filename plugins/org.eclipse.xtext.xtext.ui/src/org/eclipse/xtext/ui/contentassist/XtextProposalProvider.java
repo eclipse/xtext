@@ -372,8 +372,11 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 	protected void createOverrideProposal(final AbstractRule overrideMe, final Grammar grammar,
 			final ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		StringBuilder proposal = new StringBuilder();
-		if (overrideMe instanceof TerminalRule)
+		if (overrideMe instanceof TerminalRule) {
 			proposal.append("terminal ");
+			if (((TerminalRule) overrideMe).isFragment())
+				proposal.append("fragment ");
+		}
 		if (overrideMe instanceof EnumRule)
 			proposal.append("enum ");
 		proposal.append(overrideMe.getName());
