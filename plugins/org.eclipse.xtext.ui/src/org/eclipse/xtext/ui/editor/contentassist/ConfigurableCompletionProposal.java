@@ -9,34 +9,44 @@ package org.eclipse.xtext.ui.editor.contentassist;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IInformationControlCreator;
+import org.eclipse.jface.text.ITextHoverExtension;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.ICompletionProposalExtension2;
+import org.eclipse.jface.text.contentassist.ICompletionProposalExtension3;
 import org.eclipse.jface.text.contentassist.ICompletionProposalExtension4;
+import org.eclipse.jface.text.contentassist.ICompletionProposalExtension5;
 import org.eclipse.jface.text.contentassist.ICompletionProposalExtension6;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.link.ILinkedModeListener;
 import org.eclipse.jface.text.link.LinkedModeModel;
 import org.eclipse.jface.text.link.LinkedModeUI;
-import org.eclipse.jface.text.link.LinkedPosition;
-import org.eclipse.jface.text.link.LinkedPositionGroup;
 import org.eclipse.jface.text.link.LinkedModeUI.ExitFlags;
 import org.eclipse.jface.text.link.LinkedModeUI.IExitPolicy;
+import org.eclipse.jface.text.link.LinkedPosition;
+import org.eclipse.jface.text.link.LinkedPositionGroup;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.util.Strings;
+
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Michael Clay
+ * @author Christoph Kulla - Added support for hovers
  */
-public class ConfigurableCompletionProposal implements Comparable<ConfigurableCompletionProposal>, ICompletionProposal, ICompletionProposalExtension2, ICompletionProposalExtension4, ICompletionProposalExtension6 {
+public class ConfigurableCompletionProposal implements Comparable<ConfigurableCompletionProposal>, ICompletionProposal, ICompletionProposalExtension2, ICompletionProposalExtension3, ICompletionProposalExtension4, ICompletionProposalExtension5, ICompletionProposalExtension6 {
 
 	private static final Logger log = Logger.getLogger(ConfigurableCompletionProposal.class);
 	
@@ -57,9 +67,11 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	/** The context information of this proposal. */
 	private IContextInformation contextInformation;
 	/** The additional info of this proposal. */
-	private String additionalProposalInfo;
+	private Object additionalProposalInfo;
 	
 	private IReplacementTextApplier textApplier;
+	
+	private IEObjectHover hover;
 	
 	public interface IReplacementTextApplier {
 		void apply(IDocument document, ConfigurableCompletionProposal proposal) throws BadLocationException;
@@ -167,7 +179,10 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	 * @see ICompletionProposal#getAdditionalProposalInfo()
 	 */
 	public String getAdditionalProposalInfo() {
-		return additionalProposalInfo;
+		if (additionalProposalInfo != null) {
+			return additionalProposalInfo.toString();
+		}
+		return null;
 	}
 	
 	@Override
@@ -256,7 +271,7 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 		this.contextInformation = contextInformation;
 	}
 
-	public void setAdditionalProposalInfo(String additionalProposalInfo) {
+	public void setAdditionalProposalInfo(Object additionalProposalInfo) {
 		this.additionalProposalInfo = additionalProposalInfo;
 	}
 
@@ -436,4 +451,41 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 
 	}
 
+	public IInformationControlCreator getInformationControlCreator() {
+		if (hover!=null && hover instanceof ITextHoverExtension) {
+			return ((ITextHoverExtension) hover).getHoverControlCreator();
+		}
+		return null;
+	}
+
+	public CharSequence getPrefixCompletionText(IDocument document, int completionOffset) {
+		return getReplacementString();
+	}
+
+	public int getPrefixCompletionStart(IDocument document, int completionOffset) {
+		return getReplacementOffset();
+	}
+
+	public void setHover (IEObjectHover hover) {
+		this.hover = hover;
+	}
+
+	public Object getAdditionalProposalInfo(IProgressMonitor monitor) {
+		if (hover!=null) {
+			EObject eObject = null;
+			if (additionalProposalInfo instanceof EObject) {
+				eObject = (EObject) additionalProposalInfo;
+			} else { 
+				if (additionalProposalInfo instanceof Provider) {
+					Object o = ((Provider<?>) additionalProposalInfo).get();
+					if (o instanceof EObject)
+						eObject = (EObject) o;
+				}
+			}
+			if (eObject != null) {
+				return hover.getHoverInfo(eObject, viewer, null);
+			}
+		}
+		return additionalProposalInfo != null ? additionalProposalInfo : null;
+	}
 }

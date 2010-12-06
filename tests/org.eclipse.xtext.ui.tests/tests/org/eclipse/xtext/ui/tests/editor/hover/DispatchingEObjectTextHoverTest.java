@@ -81,7 +81,7 @@ public class DispatchingEObjectTextHoverTest extends AbstractEditorTest {
 		EObject hoverObject;
 
 		@Override
-		protected Object internalgetHoverInfo(EObject eObject, ITextViewer textViewer, IRegion hoverRegion) {
+		public Object getHoverInfo(EObject eObject, ITextViewer textViewer, IRegion hoverRegion) {
 			hoverObject = eObject;
 			return "test";
 		}

@@ -27,7 +27,7 @@ public class DispatchingEObjectTextHover extends AbstractEObjectHover {
 	private IInformationControlCreatorProvider lastCreatorProvider;
 
 	@Override
-	protected Object internalgetHoverInfo(EObject first, ITextViewer textViewer, IRegion hoverRegion) {
+	public Object getHoverInfo(EObject first, ITextViewer textViewer, IRegion hoverRegion) {
 		IEObjectHoverProvider hoverProvider = serviceProvider.findService(first, IEObjectHoverProvider.class);
 		if (hoverProvider==null)
 			return null;

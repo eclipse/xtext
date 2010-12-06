@@ -35,7 +35,7 @@ import com.google.inject.Inject;
  * 
  * @author Christoph Kulla - Initial contribution and API
  */
-public abstract class AbstractEObjectHover extends AbstractHover {
+public abstract class AbstractEObjectHover extends AbstractHover implements IEObjectHover {
 
 	@Inject
 	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
@@ -66,14 +66,14 @@ public abstract class AbstractEObjectHover extends AbstractHover {
 			public Object exec(XtextResource state) throws Exception {
 				Pair<EObject, IRegion> element = getXtextElementAt(state, hoverRegion.getOffset());
 				if (element != null && element.getFirst() != null) {
-					return internalgetHoverInfo(element.getFirst(), textViewer, hoverRegion);
+					return getHoverInfo(element.getFirst(), textViewer, hoverRegion);
 				}
 				return null;
 			}
 		});
 	}
 
-	protected abstract Object internalgetHoverInfo(final EObject eObject, final ITextViewer textViewer,
+	public abstract Object getHoverInfo(final EObject eObject, final ITextViewer textViewer,
 			final IRegion hoverRegion);
 
 	/**

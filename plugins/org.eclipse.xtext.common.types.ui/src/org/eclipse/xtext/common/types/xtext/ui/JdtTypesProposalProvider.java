@@ -30,7 +30,9 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
+import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -46,12 +48,16 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalFactory;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.ReplacementTextApplier;
+import org.eclipse.xtext.ui.editor.hover.AbstractEObjectHover;
+import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Jan Koehnlein - introduced QualifiedName
+ * @author Christoph Kulla - added support for hovers
  */
 @SuppressWarnings("restriction")
 public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
@@ -67,6 +73,12 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 	
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
+	
+	@Inject
+	private IEObjectHover hover;
+	
+	@Inject
+	private JdtTypeProviderFactory jdtTypeProviderFatory;
 	
 	public static class FQNShortener extends ReplacementTextApplier {
 		private final IScope scope;
@@ -203,6 +215,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 			}
 		});
 		final ContentAssistContext myContext = contextBuilder.toContext();
+		final IJvmTypeProvider jvmTypeProvider = jdtTypeProviderFatory.findOrCreateTypeProvider(context.getResource().getResourceSet());
 		SearchEngine searchEngine = new SearchEngine();
 		searchEngine.searchAllTypeNames(
 				packageName, SearchPattern.R_PATTERN_MATCH, 
@@ -225,7 +238,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 							}
 							fqName.append(simpleTypeName);
 							String fqNameAsString = fqName.toString();
-							createTypeProposal(fqNameAsString, modifiers, enclosingTypeNames.length>0, proposalFactory, myContext, scopeAware);
+							createTypeProposal(fqNameAsString, modifiers, enclosingTypeNames.length>0, proposalFactory, myContext, scopeAware, jvmTypeProvider);
 						}
 					}
 				}, 
@@ -258,8 +271,8 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 		}
 	}
 
-	protected void createTypeProposal(String typeName, int modifiers, boolean isInnerType, ICompletionProposalFactory proposalFactory, 
-			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	protected void createTypeProposal(final String typeName, int modifiers, boolean isInnerType, ICompletionProposalFactory proposalFactory, 
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor, final IJvmTypeProvider jvmTypeProvider) {
 		if (acceptor.canAcceptMoreProposals()) {
 			int lastDot = typeName.lastIndexOf('.');
 			StyledString displayString = new StyledString(typeName);
@@ -267,6 +280,14 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 				displayString = new StyledString(typeName.substring(lastDot + 1)).append(" - " + typeName.substring(0, lastDot), StyledString.QUALIFIER_STYLER);
 			Image img = computeImage(typeName,isInnerType, modifiers);
 			ICompletionProposal proposal = proposalFactory.createCompletionProposal(typeName, displayString, img, context);
+			if (proposal instanceof ConfigurableCompletionProposal) {
+				// calculate the type lazy, as this require a lot of time for large completion lists
+				((ConfigurableCompletionProposal) proposal).setAdditionalProposalInfo(new Provider<EObject>(){
+					public EObject get() {
+						return jvmTypeProvider.findTypeByName(typeName);
+					}});
+				((ConfigurableCompletionProposal) proposal).setHover(hover);
+			}
 			acceptor.accept(proposal);
 		}
 	}

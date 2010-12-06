@@ -32,6 +32,8 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.ISelector;
+import org.eclipse.xtext.ui.editor.hover.AbstractEObjectHover;
+import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
 import org.eclipse.xtext.util.PolymorphicDispatcher.WarningErrorHandler;
@@ -48,11 +50,15 @@ import com.google.inject.Inject;
  * @author Michael Clay - Initial contribution and API
  * @author Jan Köhnlein - Initial contribution and API
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Christoph Kulla - added support for hover
  */
 public abstract class AbstractJavaBasedContentProposalProvider extends AbstractContentProposalProvider {
 
 	private final static Logger log = Logger.getLogger(AbstractJavaBasedContentProposalProvider.class);
 
+	@Inject
+	IEObjectHover hover;
+	
 	protected class DefaultProposalCreator implements Function<IEObjectDescription, ICompletionProposal> {
 
 		private final ContentAssistContext contentAssistContext;
@@ -85,6 +91,10 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 					qualifiedNameConverter.toString(candidate.getName()));
 			Image image = getImage(objectOrProxy);
 			result = createCompletionProposal(proposal, displayString, image, contentAssistContext);
+			if (result instanceof ConfigurableCompletionProposal) {
+				((ConfigurableCompletionProposal) result).setAdditionalProposalInfo(objectOrProxy);
+				((ConfigurableCompletionProposal) result).setHover(hover);
+			}
 			getPriorityHelper().adjustCrossReferencePriority(result, contentAssistContext.getPrefix());
 			return result;
 		}
