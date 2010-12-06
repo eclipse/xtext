@@ -273,7 +273,7 @@ finally {
 «ENDDEFINE»
 
 «DEFINE rule(Grammar original, boolean debugGrammar) FOR TerminalRule»
-«ruleName()» : «toLexerBody()»«IF debugGrammar && original.initialHiddenTokens().contains(ruleName())» {skip();}«ENDIF»;
+«IF fragment»fragment «ENDIF»«ruleName()» : «toLexerBody()»«IF debugGrammar && original.initialHiddenTokens().contains(ruleName())» {skip();}«ENDIF»;
 «ENDDEFINE»
 
 «DEFINE ebnf(AntlrOptions options, boolean debugGrammar) FOR AbstractElement-»

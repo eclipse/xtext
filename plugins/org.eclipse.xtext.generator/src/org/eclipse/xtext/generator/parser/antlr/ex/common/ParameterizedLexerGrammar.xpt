@@ -68,7 +68,7 @@ import «superclass»;
 
 «DEFINE rule(AntlrFragmentHelper helper) FOR TerminalRule»
 «IF !helper.isSyntheticTerminalRule(this)-»
-«ruleName()» : «toLexerBody()»;
+«IF fragment»fragment «ENDIF»«ruleName()» : «toLexerBody()»;
 «ELSE-»
 fragment «ruleName()» : ;
 «ENDIF-»
@@ -87,7 +87,7 @@ SYNTHETIC_ALL_KEYWORDS :
 	«ENDIF-» 
 «ENDFOREACH-»
 «FOREACH allTerminalRules() AS rule ITERATOR  it-»
-«IF !helper.isSyntheticTerminalRule(rule)-»
+«IF !helper.isSyntheticTerminalRule(rule) && !rule.fragment-»
 	(FRAGMENT_«rule.ruleName()»)=> FRAGMENT_«rule.ruleName()» {$type = «rule.ruleName()»; } «IF !it.lastIteration»|
 «ENDIF-»
 «ENDIF-»
@@ -99,8 +99,12 @@ fragment FRAGMENT_«getKeywordRuleName(kw)» : '«kw.toAntlrString()»';
 
 «DEFINE backtrackingRule(AntlrFragmentHelper helper) FOR TerminalRule»
 «IF !helper.isSyntheticTerminalRule(this)-»
+«IF fragment-»
+fragment «ruleName()» : «toLexerBody()»;
+«ELSE-»
 fragment «ruleName()» : FRAGMENT_«ruleName()»;
 fragment FRAGMENT_«ruleName()» : «toLexerBody()»;
+«ENDIF-»
 «ENDIF-»
 «ENDDEFINE»
 
