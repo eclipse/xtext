@@ -242,19 +242,43 @@ public class Xtext2EcoreTransformer {
 					throw new TransformationException(TransformationErrorCode.InvalidSupertype,
 							"Cannot determine return type of overridden rule.", rule.getType());
 				if (!datatype.equals(parentRule.getType().getClassifier())) {
-					String ruleName = "datatype ";
-					if (rule instanceof TerminalRule)
-						ruleName = "terminal ";
-					else if (rule instanceof EnumRule)
-						ruleName = "enum ";
+					String ruleName = getRuleNameForErrorMessage(parentRule);
 					throw new TransformationException(TransformationErrorCode.InvalidSupertype,
 							"Cannot inherit from " + ruleName + "rule and return another type.", rule.getType());
+				}
+				if (parentRule.eClass() != rule.eClass()) {
+					if (parentRule instanceof EnumRule || parentRule instanceof ParserRule) {
+						if (rule instanceof TerminalRule && ((TerminalRule) rule).isFragment()) {
+							throw new TransformationException(TransformationErrorCode.NoSuchRuleAvailable,
+									"A terminal fragment cannot override enum rule " + rule.getName() + ".", rule);	
+						}
+					} else if (parentRule instanceof TerminalRule) {
+						String ruleName = getRuleNameForErrorMessage(rule);
+						throw new TransformationException(TransformationErrorCode.NoSuchRuleAvailable,
+								"A " + ruleName + " rule cannot override a terminal rule.", rule);
+					}
+				}
+				if (rule instanceof TerminalRule && parentRule instanceof TerminalRule) {
+					TerminalRule terminal = (TerminalRule) rule;
+					if (terminal.isFragment() && !((TerminalRule) parentRule).isFragment()) {
+						String message = "Terminal fragment cannot inherit from terminal rule '" + parentRule.getName() + "'";
+						throw new TransformationException(TransformationErrorCode.NoSuchRuleAvailable, message, rule);
+					}
 				}
 				return;
 			}
 		}
 	}
 
+	protected String getRuleNameForErrorMessage(AbstractRule rule) {
+		String ruleName = "datatype ";
+		if (rule instanceof TerminalRule)
+			ruleName = "terminal ";
+		else if (rule instanceof EnumRule)
+			ruleName = "enum ";
+		return ruleName;
+	}
+	
 	private boolean deriveTypesImpl() {
 		boolean result = true;
 		for (AbstractRule rule : grammar.getRules()) {

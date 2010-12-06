@@ -558,4 +558,11 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .append("IN")
 	        .assertText("terminal INT returns EInt:\n\t\n;\n", ":");
     }
+    
+    public void testOverrideRule_05() throws Exception {
+    	newBuilder(getXtextSetup())
+    	.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.xtext.ui.editor.contentassist.GrammarWithTerminalFragment")
+    	.append("ESC")
+    	.assertText("terminal fragment ESCAPED_CHAR:\n\t\n;\n", ":");
+    }
 }
