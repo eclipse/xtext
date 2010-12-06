@@ -25,17 +25,31 @@
 </topic>
 <topic href="contents/02-LanguageConcepts.xdoc.html#classDeclaration-4" label="Generics" >
 </topic>
-<topic href="contents/02-LanguageConcepts.xdoc.html#classDeclaration-5" label="Syntax" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#classDeclaration-5" label="Abstract Classes" >
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#classDeclaration-6" label="Syntax" >
 </topic>
 </topic>
 <topic href="contents/02-LanguageConcepts.xdoc.html#Functions" label="Functions" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#Functions-3" label="Visibility" >
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#Functions-4" label="Overriding Functions" >
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#Functions-5" label="Abstract Functions" >
+</topic>
 <topic href="contents/02-LanguageConcepts.xdoc.html#inferredReturnTypes" label="Inferred Return Types" >
 </topic>
-<topic href="contents/02-LanguageConcepts.xdoc.html#Functions-6" label="Generics" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#Functions-7" label="Generics" >
 </topic>
-<topic href="contents/02-LanguageConcepts.xdoc.html#polymorphicDispatch" label="Method overloading and polymorphic dispatch" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#polymorphicDispatch" label="Polymorphic Method Overloading" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#polymorphicDispatch-4" label="How overloaded method are translated to Java" >
 </topic>
-<topic href="contents/02-LanguageConcepts.xdoc.html#Functions-8" label="Syntax" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#polymorphicDispatch-5" label="Overloading Functions from Super Types" >
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#polymorphicDispatch-6" label="Excluding functions from polymorphic dispatch" >
+</topic>
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#Functions-9" label="Syntax" >
 </topic>
 </topic>
 <topic href="contents/02-LanguageConcepts.xdoc.html#Expressions" label="Expressions (in addition Xbase)" >
@@ -46,8 +60,12 @@
 </topic>
 <topic href="contents/02-LanguageConcepts.xdoc.html#RichStringType" label="Typing" >
 </topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#WhitespaceHandling" label="Whitespace Handling" >
+</topic>
 </topic>
 <topic href="contents/02-LanguageConcepts.xdoc.html#extensionMethods" label="Extension Method Syntax" >
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#CreateExpression" label="Create Expression" >
 </topic>
 </topic>
 </topic>

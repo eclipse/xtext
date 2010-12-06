@@ -19,7 +19,7 @@ Here is an example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-package&nbsp;com.acme;<br /><br />import&nbsp;java.util.List;<br /><br />class&nbsp;MyClass&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />
+
 </p>
 </div>
 </div>
@@ -45,7 +45,7 @@ Package Declaration
 
 
 <p>
-Package declarations are like in Java, with the small difference, that an identifier can be escaped with a <em>^</em> in cae it conflicts with a keyword.
+Package declarations are like in Java, with the small difference, that an identifier can be escaped with a <em>^</em> in case it conflicts with a keyword.
 </p>
 
 
@@ -70,7 +70,7 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-PackageDeclaration&nbsp;:&nbsp;&apos;package&apos;&nbsp;QualifiedName;<br />QualifiedName&nbsp;:&nbsp;ID&nbsp;(&apos;.&apos;&nbsp;ID);<br />
+
 </p>
 </div>
 </div>
@@ -121,11 +121,11 @@ Importing Extension Methods
 
 
 <p>
-In addition one can add the keyword <span class="inlinecode">extension</span>
- after the import (where the keyword <span class="inlinecode">static</span>
+In addition one can add the keyword <span class="inlinecode"></span>
+ after the import (where the keyword <span class="inlinecode"></span>
  occurs in Java), which makes any static methods 
 from a certain type available as an 
-<a href="02-LanguageConcepts.xdoc.html#extensionMethods">extension method</a>. The <span class="inlinecode">extension</span>
+<a href="02-LanguageConcepts.xdoc.html#extensionMethods">extension method</a>. The <span class="inlinecode"></span>
  keyword only works with qualified imports (i.e. non-wildcard imports).
 If you only want to make some methods from the imported type available using the extension syntax, you can provide a list of function names.
 You cannot further specify type arguments.
@@ -140,7 +140,7 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-import&nbsp;extension&nbsp;java.util.Collections.(sort,&nbsp;shuffle);<br />
+
 </p>
 </div>
 </div>
@@ -149,11 +149,12 @@ import&nbsp;extension&nbsp;java.util.Collections.(sort,&nbsp;shuffle);<br />
 </p>
 
 <p>
-This will import four methods (<span class="inlinecode">sort(List&lt;T&gt;)</span>
-, <span class="inlinecode">sort(List&lt;T&gt;,&nbsp;Comparator&lt;?&nbsp;super&nbsp;T&gt;)</span>
-, <span class="inlinecode">shuffle(List&lt;?&gt;)</span>
-, <span class="inlinecode">shuffle(List&lt;?&gt;,&nbsp;Random)</span>
-) available as extension methods.
+This will import four methods (<span class="inlinecode"></span>
+, <span class="inlinecode"></span>
+, <span class="inlinecode"></span>
+, <span class="inlinecode"></span>
+) available as 
+<a href="02-LanguageConcepts.xdoc.html#extensionMethods">extension methods</a>.
 </p>
 
 
@@ -180,7 +181,7 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-ImportSection&nbsp;:&nbsp;(Import|Injection)*;<br />Import&nbsp;:&nbsp;&apos;import&apos;&nbsp;&apos;extension&apos;?&nbsp;QualifiedName&nbsp;((&apos;.&apos;&apos;*&apos;)|&apos;(&apos;ID&nbsp;(&apos;,&apos;&nbsp;ID)&apos;)&apos;)?;<br />
+
 </p>
 </div>
 </div>
@@ -219,7 +220,7 @@ It is done as part of the import section and looks like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-inject&nbsp;org.eclipse.MyService&nbsp;myService;<br />
+
 </p>
 </div>
 </div>
@@ -236,7 +237,7 @@ This will translate to Java as a field as well a setter method annotated with @I
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">import</span>&nbsp;org.eclipse.MyService;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;...<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;MyService&nbsp;myService;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;@Inject<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setMyService(MyService&nbsp;myService)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.myService&nbsp;=&nbsp;myService;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<span class="keyword">private</span>&nbsp;MyService&nbsp;myService;<br /><br />@Inject<br /><span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setMyService(MyService&nbsp;myService)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.myService&nbsp;=&nbsp;myService;<br />}<br />
 </p>
 </div>
 </div>
@@ -262,7 +263,7 @@ Name can be inferred
 
 
 <p>
-You could even leave the name out as by default it will be the lower case version o the simple name of the class.
+You could even leave the name out as by default it will be the lower case version of the simple name of the class.
 That is the following inject declaration would be equvalent with the former.
 </p>
 
@@ -271,7 +272,7 @@ That is the following inject declaration would be equvalent with the former.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-inject&nbsp;org.eclipse.MyService;<br />
+
 </p>
 </div>
 </div>
@@ -308,7 +309,7 @@ is why you can write the following in Xtend2.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-inject&nbsp;java.util.HashMap&lt;String,MyType&gt;&nbsp;myCache;<br />
+
 </p>
 </div>
 </div>
@@ -318,8 +319,8 @@ inject&nbsp;java.util.HashMap&lt;String,MyType&gt;&nbsp;myCache;<br />
 
 <p>
 Also Guice allows to use annotations to further distinct between different implementations of the same type. This is usually done by using
-the <span class="inlinecode">com.google.inject.name.Named</span>
- annotation or a custom annotation which is itself annotated with <span class="inlinecode">com.google.inject.BindingAnnotation</span>
+the <span class="inlinecode"></span>
+ annotation or a custom annotation which is itself annotated with <span class="inlinecode"></span>
 .
 </p>
 
@@ -332,7 +333,26 @@ Xtend supports these two variants:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-inject&nbsp;@CustomAnnotation&nbsp;my.Service&nbsp;customService;&nbsp;<br />inject&nbsp;@&quot;NamedThingy&quot;&nbsp;my.Service&nbsp;namedService;<br />
+
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+Providers are declared like in plain Guice. That is you wrap your type into <span class="inlinecode"></span>
+.
+Example:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+
 </p>
 </div>
 </div>
@@ -360,8 +380,8 @@ Injected Extension Methods
 
 
 <p>
-The <span class="inlinecode">extension</span>
- keyword is also available for <span class="inlinecode">inject</span>
+The <span class="inlinecode"></span>
+ keyword is also available for <span class="inlinecode"></span>
  which is much nicer than importing static methods, because you don&apos;t bind your code to 
 actual implementation, since the implementation can be easily changed through the global dependency injection configuration (i.e. Guice modules).
 </p>
@@ -371,8 +391,21 @@ Example:
 </p>
 
 <p>
-We will likely ship a nice library for the different common types. Imagine we had something like ListExtensions which adds some higher-order functions
-to the java.util.collection library (we will likely use google collections here).
+Imagine you had something like IterableExtensions which adds some higher-order functions
+to the java.util collection library (we will likely ship a library based on google guava).
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+
+</p>
+</div>
+</div>
+
+
 </p>
 
 <p>
@@ -384,7 +417,7 @@ You declare the dependency like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-inject&nbsp;extension&nbsp;my.common.IterableExtensions;<br />
+
 </p>
 </div>
 </div>
@@ -393,7 +426,7 @@ inject&nbsp;extension&nbsp;my.common.IterableExtensions;<br />
 </p>
 
 <p>
-and can then use it as if those functions were members of any <span class="inlinecode">java.lang.Iterable</span>
+and can then use it as if those functions were members of any <span class="inlinecode"></span>
 :
 </p>
 
@@ -402,7 +435,7 @@ and can then use it as if those functions were members of any <span class="inlin
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myIterable.find(e|e.name==&quot;Foo&quot;)<br />
+
 </p>
 </div>
 </div>
@@ -411,8 +444,8 @@ myIterable.find(e|e.name==&quot;Foo&quot;)<br />
 </p>
 
 <p>
-The nice thing with using injection as opposed to static methods is, that in case there is a bug in the extension or it is implemented inefficiently, 
-you can simply exchange the component with a better implementation, without modifying the library nor the client code. 
+The nice thing with using injection as opposed to static methods is, that in case there is a bug in the extension or it is implemented inefficiently or you 
+just need a different strategy, you can simply exchange the component with another implementation. You do this without modifying the library nor the client code. 
 You&apos;ll only have to change the binding in your guice module. Also this gives you a general hook for any AOP-like thing you would want to do, 
 or allows you to write against an SPI, where the concrete implementation can be provided by a third party.
 </p>
@@ -422,7 +455,7 @@ or allows you to write against an SPI, where the concrete implementation can be 
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-ImportSection&nbsp;:&nbsp;(Import|Injection)*;<br />Import&nbsp;:&nbsp;...<br />Injection&nbsp;:&nbsp;&apos;inject&apos;&nbsp;&apos;extension&apos;?&nbsp;(&apos;@&apos;STRING&nbsp;|&nbsp;&apos;@&apos;TypeReference)&nbsp;TypeReference&nbsp;(&apos;(&apos;ID&nbsp;(&apos;,&apos;&nbsp;ID)&apos;)&apos;)?;<br />
+
 </p>
 </div>
 </div>
@@ -453,14 +486,14 @@ Class Declaration
 
 <p>
 The class declaration reuses a lot of Java&apos;s syntax but still is a bit different in some aspects.
-Firstly the default visibility of any class is <span class="inlinecode">public</span>
+Firstly the default visibility of any class is <span class="inlinecode"></span>
 . It is possible to write it explicitly but if not specified it defaults to public.
-Java&apos;s default &quot;package private&quot; visibility does not exist.
+Java&apos;s default "package private" visibility does not exist.
 </p>
 
 <p>
-The <span class="inlinecode">abstract</span>
- as well as the <span class="inlinecode">final</span>
+The <span class="inlinecode"></span>
+ as well as the <span class="inlinecode"></span>
  modifiers are directly translated to Java, hence have the exact same meaning.
 </p>
 
@@ -505,7 +538,7 @@ Generics
 
 
 <p>
-Full Java Generics are supported.
+Full Java Generics with the exact same syntax and semantics are supported.
 </p>
 
 
@@ -514,6 +547,31 @@ Full Java Generics are supported.
 
 
 <a name="classDeclaration-5"></a>
+<div class="section" title="Abstract Classes">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Abstract Classes
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+A class is automatically <span class="inlinecode"></span>
+ if one of its functions is abstract. 
+This is the case if the function&apos;s expression (body) is not defined. 
+</p>
+
+
+</div>
+
+
+
+<a name="classDeclaration-6"></a>
 <div class="section" title="Syntax">
 <div class="titlepage">
 <div>
@@ -532,7 +590,7 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-ClassDeclaration&nbsp;:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(Visibility|&apos;abstract&apos;|&apos;final&apos;)*&nbsp;&apos;class&apos;&nbsp;TypeParameters?&nbsp;(&apos;extends&apos;&nbsp;QualifiedName)?&nbsp;(&apos;implements&apos;&nbsp;QualifiedName&nbsp;(&apos;,&apos;&nbsp;QualifiedName)*)?&nbsp;&apos;{&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Members*<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;}&apos;<br />;<br />Visibility&nbsp;:&nbsp;&apos;public&apos;|&apos;protected&apos;|&apos;private&apos;;<br /><br />
+
 </p>
 </div>
 </div>
@@ -562,26 +620,9 @@ Functions
 
 
 <p>
-The only members an Xtend2 class can have are functions.
 Xtend2 functions are declared within a class and are usually translated to a corresponding Java method with the exact same signature. 
 The only exception is overloaded methods, which compile to a single method. This is explained in the section about 
 <a href="02-LanguageConcepts.xdoc.html#polymorphicDispatch">section polymorphicDispatch</a>. 
-</p>
-
-<p>
-The default visibility of a function is <span class="inlinecode">public</span>
-, which can also be declared explicitly. The two other available visibilities are <span class="inlinecode">protected</span>
- and <span class="inlinecode">private</span>
-.
-</p>
-
-<p>
-A function can be declared either <span class="inlinecode">final</span>
- or <span class="inlinecode">abstract</span>
-. If it is declared <span class="inlinecode">abstract</span>
- also the class needs to be declared <span class="inlinecode">abstract</span>
- and the function is 
-not allowed to have an implementation.
 </p>
 
 <p>
@@ -590,7 +631,7 @@ An example of a function declaration
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Boolean&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();<br />
+
 </p>
 </div>
 </div>
@@ -598,6 +639,113 @@ Boolean&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br />&nbsp;&
 
 </p>
 
+
+
+
+<a name="Functions-3"></a>
+<div class="section" title="Visibility">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Visibility
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+The default visibility of a function is <span class="inlinecode"></span>
+, which can also be declared explicitly. The two other available visibilities are <span class="inlinecode"></span>
+ and <span class="inlinecode"></span>
+.
+</p>
+
+
+</div>
+
+
+
+<a name="Functions-4"></a>
+<div class="section" title="Overriding Functions">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Overriding Functions
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Like Java methods an Xtend2 function can be declared non overridable using the keyword <span class="inlinecode"></span>
+.
+</p>
+
+<p>
+Also if a function overrides a method from the suberclass, the <span class="inlinecode"></span>
+ keyword is mandatory.
+</p>
+
+<p>
+Example:
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+</div>
+
+
+
+<a name="Functions-5"></a>
+<div class="section" title="Abstract Functions">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Abstract Functions
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+A function is automatically considered <span class="inlinecode"></span>
+ if its expression (body) is not defined.
+</p>
+
+<p>
+Example:
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+</div>
 
 <a name="inferredReturnTypes"></a>
 
@@ -625,7 +773,7 @@ That is the function
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Boolean&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();<br />
+
 </p>
 </div>
 </div>
@@ -642,7 +790,7 @@ could be declared like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();<br />
+
 </p>
 </div>
 </div>
@@ -661,7 +809,7 @@ The compiler tells the user when it needs to be specified.
 
 
 
-<a name="Functions-6"></a>
+<a name="Functions-7"></a>
 <div class="section" title="Generics">
 <div class="titlepage">
 <div>
@@ -676,7 +824,7 @@ Generics
 
 
 <p>
-Full Java Generics are supported.
+Full Java Generics with the exact same syntax and semantics are supported.
 </p>
 
 
@@ -685,12 +833,12 @@ Full Java Generics are supported.
 <a name="polymorphicDispatch"></a>
 
 <a name="polymorphicDispatch"></a>
-<div class="section" title="Method overloading and polymorphic dispatch">
+<div class="section" title="Polymorphic Method Overloading">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-Method overloading and polymorphic dispatch
+Polymorphic Method Overloading
 </h3>
 </div>
 </div>
@@ -699,9 +847,52 @@ Method overloading and polymorphic dispatch
 
 
 <p>
-It is possible to overload methods, but overloaded methods are not simply transalted to corresponding Java methods.
-Instead for each set of methods where the name is equal and the number of arguments is equal the most common dominator signature is taken (or computed if neccessary)
-and only for that method a Java method is derived. Within the implementation the correct method is looked up at runtime.
+It is possible to overload methods, but overloaded methods are not invoked based on the static types of arguments as in Java.
+In Xtend2 an overloaded method is invoked based on the rutime types of the arguments. This has a lot of advantages and is a very convenient way 
+to add functionality to heterogenous data structors especially with deeper type hierarchies (i.e. EMF models and other typed domain models).
+It essentially eleminates the problem the visitor pattern is trying to solve.
+</p>
+
+<p>
+This allows you to write a code generator by defining a function for all kinds of AST elements you want to process.
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+
+
+<a name="polymorphicDispatch-4"></a>
+<div class="section" title="How overloaded method are translated to Java">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+How overloaded method are translated to Java
+</h4>
+</div>
+</div>
+</div>
+
+
+
+<p>
+The polymorphic behavior of overloaded methods shall be transparently work no matter you call such a function from Java, Xtend2 or any other JVM language.
+Therefore the runtime dispatch is not done on the caller&apos;s side but on the declaration side. 
+For each set of methods where the name is equal and the number of arguments is equal, the most common dominator signature is taken 
+or computed if there is no most common denominator. Only for that signature a Java method is generated. 
+Within the implementation the correct method is looked up at runtime using if else cascades.
 This is done by sorting the methods from most specific to least specific and generating an if-else cascade for the code.
 </p>
 
@@ -711,7 +902,7 @@ Example: The following functions
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-foo(Number&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;some&nbsp;number&apos;;<br />foo(Integer&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;an&nbsp;int&apos;;<br />
+
 </p>
 </div>
 </div>
@@ -728,7 +919,7 @@ compile to the following Java method:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x==&nbsp;null&nbsp;||&nbsp;x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;&quot;it&apos;s&nbsp;an&nbsp;<span class="keyword">int</span>&quot;;<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;&quot;it&apos;s&nbsp;some&nbsp;number&quot;;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}&nbsp;<br />
+<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x==&nbsp;null&nbsp;||&nbsp;x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;"it&apos;s&nbsp;an&nbsp;int";<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;"it&apos;s&nbsp;some&nbsp;number";<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}&nbsp;<br />
 </p>
 </div>
 </div>
@@ -737,7 +928,8 @@ compile to the following Java method:
 </p>
 
 <p>
-In case there is no single most general signature, one is computed.
+In case there is no single most general signature, one is computed and the
+different overloaded methods are matched in the order they are declared within the class file.
 Example:
 </p>
 
@@ -746,7 +938,7 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-foo(Number&nbsp;x,&nbsp;Integer&nbsp;y)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;some&nbsp;number&nbsp;and&nbsp;an&nbsp;int&apos;;<br />foo(Integer&nbsp;x,&nbsp;Number&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;an&nbsp;int&nbsp;and&nbsp;a&nbsp;number&apos;;<br />
+
 </p>
 </div>
 </div>
@@ -759,7 +951,7 @@ foo(Number&nbsp;x,&nbsp;Integer&nbsp;y)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;some&nb
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;((x==&nbsp;null&nbsp;||&nbsp;x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)&nbsp;&amp;&amp;&nbsp;(y==&nbsp;null&nbsp;||y&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;&quot;it&apos;s&nbsp;some&nbsp;number&nbsp;and&nbsp;an&nbsp;<span class="keyword">int</span>&quot;;<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;((x==&nbsp;null&nbsp;||&nbsp;x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;&amp;&amp;&nbsp;(y==&nbsp;null&nbsp;||&nbsp;y&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;&quot;it&apos;s&nbsp;an&nbsp;<span class="keyword">int</span>&nbsp;and&nbsp;a&nbsp;number&quot;;<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;UnsupportedOperationException(&quot;foo&nbsp;is&nbsp;not&nbsp;implemented&nbsp;<span class="keyword">for</span>&nbsp;arguments&nbsp;&quot;+x+&quot;&nbsp;and&nbsp;&quot;+y);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}&nbsp;<br />
+<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;((x==&nbsp;null&nbsp;||&nbsp;x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)&nbsp;&amp;&amp;&nbsp;(y==&nbsp;null&nbsp;||y&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;"it&apos;s&nbsp;some&nbsp;number&nbsp;and&nbsp;an&nbsp;int";<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;((x==&nbsp;null&nbsp;||&nbsp;x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;&amp;&amp;&nbsp;(y==&nbsp;null&nbsp;||&nbsp;y&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;"it&apos;s&nbsp;an&nbsp;int&nbsp;and&nbsp;a&nbsp;number";<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;UnsupportedOperationException("foo&nbsp;is&nbsp;not&nbsp;implemented&nbsp;for&nbsp;arguments&nbsp;"+x+"&nbsp;and&nbsp;"+y);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}&nbsp;<br />
 </p>
 </div>
 </div>
@@ -768,7 +960,7 @@ foo(Number&nbsp;x,&nbsp;Integer&nbsp;y)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;some&nb
 </p>
 
 <p>
-As you can see a null reference is always a match. If you want to fetch null you can declare a parameter using the type <span class="inlinecode">java.lang.Void</span>
+As you can see a null reference is always a match. If you want to fetch null you can declare a parameter using the type <span class="inlinecode"></span>
 .
 </p>
 
@@ -777,7 +969,7 @@ As you can see a null reference is always a match. If you want to fetch null you
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-foo(Void&nbsp;x)&nbsp;:&nbsp;throw&nbsp;new&nbsp;NullPointerException(&quot;x&quot;);<br />foo(Number&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;some&nbsp;number&apos;;<br />foo(Integer&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;an&nbsp;int&apos;;<br />
+
 </p>
 </div>
 </div>
@@ -794,7 +986,7 @@ Which compiles to the following Java code:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x==&nbsp;null)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;NullPointerException(&quot;x&quot;)<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x==&nbsp;null&nbsp;||&nbsp;x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;&quot;it&apos;s&nbsp;an&nbsp;<span class="keyword">int</span>&quot;;<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;&quot;it&apos;s&nbsp;some&nbsp;number&quot;;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}&nbsp;<br />
+<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x==&nbsp;null)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;NullPointerException("x")<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x==&nbsp;null&nbsp;||&nbsp;x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;"it&apos;s&nbsp;an&nbsp;int";<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;"it&apos;s&nbsp;some&nbsp;number";<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}&nbsp;<br />
 </p>
 </div>
 </div>
@@ -803,8 +995,8 @@ Which compiles to the following Java code:
 </p>
 
 <p>
-So essential we put the polymorphic invocation logic into the declaration and not into the method call.
-The nice thing is that polymorphic overloaded functions can be transparently called from Java, and behave exactly the same as if they were called from Xtend2.
+Note that the type <span class="inlinecode"></span>
+ is considered the most specific type and will always have higher precedence than any other types in the ordering.
 </p>
 
 
@@ -812,7 +1004,79 @@ The nice thing is that polymorphic overloaded functions can be transparently cal
 
 
 
-<a name="Functions-8"></a>
+<a name="polymorphicDispatch-5"></a>
+<div class="section" title="Overloading Functions from Super Types">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+Overloading Functions from Super Types
+</h4>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Functions (or Java Methods) from super types are not included in the dispatch. You&apos;ll have to call them explicitly using the <span class="inlinecode"></span>
+ reference. 
+</p>
+
+
+</div>
+
+
+
+<a name="polymorphicDispatch-6"></a>
+<div class="section" title="Excluding functions from polymorphic dispatch">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+Excluding functions from polymorphic dispatch
+</h4>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Sometimes you need to have the static dispatch from Java, for instance if you implement an interface with two method declarations where one overloads 
+the other. In that case you have to add the keyword <span class="inlinecode"></span>
+.
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+In this case the resulting Java class will have two methods, one for Number and one containing the polymorphic dispatch for <span class="inlinecode"></span>
+
+and <span class="inlinecode"></span>
+, which will have the most common signature <span class="inlinecode"></span>
+.
+</p>
+
+
+</div>
+
+</div>
+
+
+
+<a name="Functions-9"></a>
 <div class="section" title="Syntax">
 <div class="titlepage">
 <div>
@@ -836,7 +1100,7 @@ consists of one expression instead of a sequence of statements.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-FunctionDef&nbsp;:&nbsp;(&apos;public&apos;|&apos;protected&apos;|&apos;private&apos;|&apos;abstract&apos;|&apos;final&apos;)*&nbsp;TypeParameters?&nbsp;TypeRef?&nbsp;ID&apos;(&apos;(ParameterDeclaration&nbsp;(&apos;,&apos;&nbsp;ParameterDeclaration)*)?&apos;)&apos;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(&apos;throws&apos;&nbsp;TypeRef&nbsp;(&apos;,&apos;&nbsp;TypeRef)*)?<br />&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;&apos;:&apos;&nbsp;Expression&nbsp;&apos;;&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;BlockExpression<br />&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&apos;;&apos;)<br />
+
 </p>
 </div>
 </div>
@@ -866,7 +1130,7 @@ Expressions (in addition Xbase)
 
 
 <p>
-Xtend2 adds a couple of expressions to the basic set of expressions provided by Xbase.
+Xtend2 adds some expressions to the basic set of expressions provided by Xbase.
 </p>
 
 
@@ -897,7 +1161,7 @@ an example of how a typical function with template expressions look like:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-toClass(Entity&nbsp;this)&nbsp;:»<br />&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;«packageName»;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;«placeImports»<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;«name»&nbsp;«IF&nbsp;extendedType!=null»extends&nbsp;«extendedType»«ENDIF»{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«FOREACH&nbsp;members»<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«member.toMember»<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«ENDFOREACH»<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;«;<br />
+
 </p>
 </div>
 </div>
@@ -915,7 +1179,7 @@ can occur everywhere where an expression is expected. For instance in conjunctio
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-toMember(Member&nbsp;this)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;switch(this)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Field&nbsp;:»private&nbsp;«type»&nbsp;«name»&nbsp;;«;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;case&nbsp;isAbstract&nbsp;:»&nbsp;abstract&nbsp;«...;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Method:»&nbsp;.....&nbsp;«;<br />&nbsp;&nbsp;&nbsp;&nbsp;};<br />
+
 </p>
 </div>
 </div>
@@ -990,9 +1254,32 @@ Typing
 
 
 <p>
-The rich string is translated to an efficient string concatenation and the return type of a rich string is <span class="inlinecode">java.lang.CharStream</span>
+The rich string is translated to an efficient string concatenation and the return type of a rich string is <span class="inlinecode"></span>
  which allows
 much room for efficient implementation.
+</p>
+
+
+</div>
+
+<a name="WhitespaceHandling"></a>
+
+<a name="WhitespaceHandling"></a>
+<div class="section" title="Whitespace Handling">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+Whitespace Handling
+</h4>
+</div>
+</div>
+</div>
+
+
+
+<p>
+
 </p>
 
 
@@ -1017,7 +1304,9 @@ Extension Method Syntax
 
 
 <p>
-Static functions as well as any members annotated with @Extension can be called using the extension method syntax.
+Imports and injections preceded with 
+<a href="02-LanguageConcepts.xdoc.html#importExtension">the keyword <span class="inlinecode"></span>
+</a> can be called using the extension method syntax.
 This means that a function imported through a static import, like e.g. java.util.Collections.singleton(T) can be invoked using 
 the member syntax.
 </p>
@@ -1031,7 +1320,7 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-&quot;Foo&quot;.singleton<br />
+
 </p>
 </div>
 </div>
@@ -1048,7 +1337,7 @@ is the same as
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-singleton(&quot;Foo&quot;)<br />
+
 </p>
 </div>
 </div>
@@ -1057,25 +1346,24 @@ singleton(&quot;Foo&quot;)<br />
 </p>
 
 <p>
-Note that extension methods never shadow a member of the current reference. That is if <span class="inlinecode">java.lang.String</span>
- has a field <span class="inlinecode">singleton</span>
-, a method <span class="inlinecode">singleton()</span>
+Note that extension methods never shadow a member of the current reference. That is if <span class="inlinecode"></span>
+ has a field <span class="inlinecode"></span>
+, a method <span class="inlinecode"></span>
  or a method
-<span class="inlinecode">getSingleton()</span>
+<span class="inlinecode"></span>
 , those memebers would be referenced. That is done at compile time, so the tooling is able to tell you what you actually reference.
 </p>
 
 <p>
-Static functions as well as extensions in the previous version of Xtend make clients not only depend on a certain signature but on the implementation as it is not 
-possible to exchange the implementation of a static function. That&apos;s where the @Extension annotation in conjunction with dependency injection comes in.
+Static functions as well as extensions in the previous version of Xtend make clients not only depend on a certain signature but on the implementation as 
+it is not possible to exchange the implementation of a static function. That&apos;s where the <span class="inlinecode"></span>
+ keyword in conjunction with dependency injection 
+comes in. If you have annotated a dependency with the <span class="inlinecode"></span>
+ keyword, its members become available for extension method syntax.
 </p>
 
 <p>
-If you have declared a field with @Extension than all members of that type become available for extension method syntax.
-</p>
-
-<p>
-Example
+Example:
 </p>
 
 <p>
@@ -1087,7 +1375,7 @@ Imagine the following Java interface
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-interface&nbsp;MyExtensions&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;getComputedProperty(SomeType&nbsp;type);<br />}<br />
+
 </p>
 </div>
 </div>
@@ -1104,7 +1392,7 @@ With Java you would have to call this method on an instance of MyExtensions like
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myExtensions.getComputedProperty(someType)<br />
+
 </p>
 </div>
 </div>
@@ -1121,7 +1409,7 @@ In Xtend2 you can have the instance injected like in Java:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@Inject&nbsp;@Extension&nbsp;MyExtensions&nbsp;extensions;<br />
+
 </p>
 </div>
 </div>
@@ -1138,7 +1426,7 @@ But instead of using the long expression known from Java (which would also work)
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-someType.computedProperty<br />
+
 </p>
 </div>
 </div>
@@ -1149,6 +1437,82 @@ someType.computedProperty<br />
 <p>
 It will statically bind to the right method and even more important it doesn&apos;t bind to a specific implementation but just to the signature.
 The implementation can be provided through dependency injection.
+</p>
+
+
+</div>
+
+<a name="CreateExpression"></a>
+
+<a name="CreateExpression"></a>
+<div class="section" title="Create Expression">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Create Expression
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Xtend2 supports model to model transformations. There is actually only one little problem a transformation language has to solve, which is to
+get rid of the need to transform a net of objects in two phases. This is unforntunately necessary because you would end up with endless recursion
+if you write a mapping between objects but these objects are connected in a circular way, which is almost always the case.
+</p>
+
+<p>
+Consider you want to transform the following Java interface to Java Class with an abstract method:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+Note how Foo contains a method and that method again refers to Foo. We have a circular dependency. Traditionally those problems are solved by doing the transformation
+in multiple phases: First transform the tree hierarchy, to make sure that all declarations are in place. Then establish the cross references. 
+Thi problem with this approach is that you have to split up you code. The transformation of a method needs to be split up in creating the object and setting the values and containing
+elements and a code section which establishes the crossreference. This complicates the code and harms readability.
+</p>
+
+<p>
+In Xtend2 there is a so called create expression (similar to the create extension from previous Xtend). The example from above could be 
+implemented like this:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+the create expression contains two expressions. The first expression right after the keyword is called the creator expression, the second expression is 
+called the initializer. The execution semantics is that the result of the creator expression is cached and the key is comprised of all local variables and
+the create expression itself. This means that whenever the same create expression with the exact same local variables (equality) is executed again the
+expression will just return the cached value. After the value is cached it executes the initializer. 
+The nice thing is, that you don&apos;t have to care about circular references since a call to the same create expression with the same arguments will return a reference to
+the not yet fully initialized element. 
 </p>
 
 
