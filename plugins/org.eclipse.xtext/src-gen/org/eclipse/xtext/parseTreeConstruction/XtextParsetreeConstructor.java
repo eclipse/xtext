@@ -4642,11 +4642,12 @@ protected class ParenthesizedElement_RightParenthesisKeyword_2 extends KeywordTo
 /************ begin Rule TerminalRule ****************
  *
  * TerminalRule:
- * 	"terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=TerminalAlternatives ";";
+ * 	"terminal" (fragment?="fragment" name=ID | name=ID ("returns" type=TypeRef)?) ":" alternatives=TerminalAlternatives
+ * 	";";
  *
  **/
 
-// "terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=TerminalAlternatives ";"
+// "terminal" (fragment?="fragment" name=ID | name=ID ("returns" type=TypeRef)?) ":" alternatives=TerminalAlternatives ";"
 protected class TerminalRule_Group extends GroupToken {
 	
 	public TerminalRule_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4661,7 +4662,7 @@ protected class TerminalRule_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TerminalRule_SemicolonKeyword_5(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new TerminalRule_SemicolonKeyword_4(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4696,16 +4697,153 @@ protected class TerminalRule_TerminalKeyword_0 extends KeywordToken  {
 
 }
 
-// name=ID
-protected class TerminalRule_NameAssignment_1 extends AssignmentToken  {
+// fragment?="fragment" name=ID | name=ID ("returns" type=TypeRef)?
+protected class TerminalRule_Alternatives_1 extends AlternativesToken {
+
+	public TerminalRule_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
 	
-	public TerminalRule_NameAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getTerminalRuleAccess().getAlternatives_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new TerminalRule_Group_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new TerminalRule_Group_1_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// fragment?="fragment" name=ID
+protected class TerminalRule_Group_1_0 extends GroupToken {
+	
+	public TerminalRule_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getTerminalRuleAccess().getGroup_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new TerminalRule_NameAssignment_1_0_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// fragment?="fragment"
+protected class TerminalRule_FragmentAssignment_1_0_0 extends AssignmentToken  {
+	
+	public TerminalRule_FragmentAssignment_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getTerminalRuleAccess().getNameAssignment_1();
+		return grammarAccess.getTerminalRuleAccess().getFragmentAssignment_1_0_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new TerminalRule_TerminalKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("fragment",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("fragment");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getTerminalRuleAccess().getFragmentFragmentKeyword_1_0_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// name=ID
+protected class TerminalRule_NameAssignment_1_0_1 extends AssignmentToken  {
+	
+	public TerminalRule_NameAssignment_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTerminalRuleAccess().getNameAssignment_1_0_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new TerminalRule_FragmentAssignment_1_0_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTerminalRuleAccess().getNameIDTerminalRuleCall_1_0_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getTerminalRuleAccess().getNameIDTerminalRuleCall_1_0_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// name=ID ("returns" type=TypeRef)?
+protected class TerminalRule_Group_1_1 extends GroupToken {
+	
+	public TerminalRule_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getTerminalRuleAccess().getGroup_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new TerminalRule_Group_1_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new TerminalRule_NameAssignment_1_1_0(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// name=ID
+protected class TerminalRule_NameAssignment_1_1_0 extends AssignmentToken  {
+	
+	public TerminalRule_NameAssignment_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTerminalRuleAccess().getNameAssignment_1_1_0();
 	}
 
     @Override
@@ -4720,9 +4858,9 @@ protected class TerminalRule_NameAssignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTerminalRuleAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTerminalRuleAccess().getNameIDTerminalRuleCall_1_1_0_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getTerminalRuleAccess().getNameIDTerminalRuleCall_1_0();
+			element = grammarAccess.getTerminalRuleAccess().getNameIDTerminalRuleCall_1_1_0_0();
 			return obj;
 		}
 		return null;
@@ -4731,21 +4869,21 @@ protected class TerminalRule_NameAssignment_1 extends AssignmentToken  {
 }
 
 // ("returns" type=TypeRef)?
-protected class TerminalRule_Group_2 extends GroupToken {
+protected class TerminalRule_Group_1_1_1 extends GroupToken {
 	
-	public TerminalRule_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TerminalRule_Group_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getTerminalRuleAccess().getGroup_2();
+		return grammarAccess.getTerminalRuleAccess().getGroup_1_1_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TerminalRule_TypeAssignment_2_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new TerminalRule_TypeAssignment_1_1_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4753,21 +4891,21 @@ protected class TerminalRule_Group_2 extends GroupToken {
 }
 
 // "returns"
-protected class TerminalRule_ReturnsKeyword_2_0 extends KeywordToken  {
+protected class TerminalRule_ReturnsKeyword_1_1_1_0 extends KeywordToken  {
 	
-	public TerminalRule_ReturnsKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TerminalRule_ReturnsKeyword_1_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getTerminalRuleAccess().getReturnsKeyword_2_0();
+		return grammarAccess.getTerminalRuleAccess().getReturnsKeyword_1_1_1_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TerminalRule_NameAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new TerminalRule_NameAssignment_1_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4775,15 +4913,15 @@ protected class TerminalRule_ReturnsKeyword_2_0 extends KeywordToken  {
 }
 
 // type=TypeRef
-protected class TerminalRule_TypeAssignment_2_1 extends AssignmentToken  {
+protected class TerminalRule_TypeAssignment_1_1_1_1 extends AssignmentToken  {
 	
-	public TerminalRule_TypeAssignment_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TerminalRule_TypeAssignment_1_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getTerminalRuleAccess().getTypeAssignment_2_1();
+		return grammarAccess.getTerminalRuleAccess().getTypeAssignment_1_1_1_1();
 	}
 
     @Override
@@ -4802,7 +4940,7 @@ protected class TerminalRule_TypeAssignment_2_1 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTypeRefRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getTerminalRuleAccess().getTypeTypeRefParserRuleCall_2_1_0(); 
+				element = grammarAccess.getTerminalRuleAccess().getTypeTypeRefParserRuleCall_1_1_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -4814,30 +4952,31 @@ protected class TerminalRule_TypeAssignment_2_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new TerminalRule_ReturnsKeyword_2_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new TerminalRule_ReturnsKeyword_1_1_1_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 
+
+
 // ":"
-protected class TerminalRule_ColonKeyword_3 extends KeywordToken  {
+protected class TerminalRule_ColonKeyword_2 extends KeywordToken  {
 	
-	public TerminalRule_ColonKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TerminalRule_ColonKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getTerminalRuleAccess().getColonKeyword_3();
+		return grammarAccess.getTerminalRuleAccess().getColonKeyword_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TerminalRule_Group_2(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new TerminalRule_NameAssignment_1(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new TerminalRule_Alternatives_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4845,15 +4984,15 @@ protected class TerminalRule_ColonKeyword_3 extends KeywordToken  {
 }
 
 // alternatives=TerminalAlternatives
-protected class TerminalRule_AlternativesAssignment_4 extends AssignmentToken  {
+protected class TerminalRule_AlternativesAssignment_3 extends AssignmentToken  {
 	
-	public TerminalRule_AlternativesAssignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TerminalRule_AlternativesAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getTerminalRuleAccess().getAlternativesAssignment_4();
+		return grammarAccess.getTerminalRuleAccess().getAlternativesAssignment_3();
 	}
 
     @Override
@@ -4872,7 +5011,7 @@ protected class TerminalRule_AlternativesAssignment_4 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTerminalAlternativesRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getTerminalRuleAccess().getAlternativesTerminalAlternativesParserRuleCall_4_0(); 
+				element = grammarAccess.getTerminalRuleAccess().getAlternativesTerminalAlternativesParserRuleCall_3_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -4884,28 +5023,28 @@ protected class TerminalRule_AlternativesAssignment_4 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new TerminalRule_ColonKeyword_3(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new TerminalRule_ColonKeyword_2(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // ";"
-protected class TerminalRule_SemicolonKeyword_5 extends KeywordToken  {
+protected class TerminalRule_SemicolonKeyword_4 extends KeywordToken  {
 	
-	public TerminalRule_SemicolonKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TerminalRule_SemicolonKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getTerminalRuleAccess().getSemicolonKeyword_5();
+		return grammarAccess.getTerminalRuleAccess().getSemicolonKeyword_4();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TerminalRule_AlternativesAssignment_4(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new TerminalRule_AlternativesAssignment_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}

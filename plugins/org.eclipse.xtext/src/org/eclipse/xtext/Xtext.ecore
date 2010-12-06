@@ -66,7 +66,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="terminal" eType="#//AbstractElement"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TerminalRule" eSuperTypes="#//AbstractRule"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TerminalRule" eSuperTypes="#//AbstractRule">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fragment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractNegatedToken" eSuperTypes="#//AbstractElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="terminal" eType="#//AbstractElement"
         containment="true"/>

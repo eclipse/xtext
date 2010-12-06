@@ -695,13 +695,22 @@ public interface XtextPackage extends EPackage {
 	int TERMINAL_RULE__ALTERNATIVES = ABSTRACT_RULE__ALTERNATIVES;
 
 	/**
+	 * The feature id for the '<em><b>Fragment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERMINAL_RULE__FRAGMENT = ABSTRACT_RULE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Terminal Rule</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TERMINAL_RULE_FEATURE_COUNT = ABSTRACT_RULE_FEATURE_COUNT + 0;
+	int TERMINAL_RULE_FEATURE_COUNT = ABSTRACT_RULE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.AbstractNegatedTokenImpl <em>Abstract Negated Token</em>}' class.
@@ -1567,6 +1576,17 @@ public interface XtextPackage extends EPackage {
 	EClass getTerminalRule();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.TerminalRule#isFragment <em>Fragment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Fragment</em>'.
+	 * @see org.eclipse.xtext.TerminalRule#isFragment()
+	 * @see #getTerminalRule()
+	 * @generated
+	 */
+	EAttribute getTerminalRule_Fragment();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.AbstractNegatedToken <em>Abstract Negated Token</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2119,6 +2139,14 @@ public interface XtextPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TERMINAL_RULE = eINSTANCE.getTerminalRule();
+
+		/**
+		 * The meta object literal for the '<em><b>Fragment</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TERMINAL_RULE__FRAGMENT = eINSTANCE.getTerminalRule_Fragment();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.impl.AbstractNegatedTokenImpl <em>Abstract Negated Token</em>}' class.
