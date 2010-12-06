@@ -561,8 +561,48 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     
     public void testOverrideRule_05() throws Exception {
     	newBuilder(getXtextSetup())
-    	.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.xtext.ui.editor.contentassist.GrammarWithTerminalFragment")
-    	.append("ESC")
-    	.assertText("terminal fragment ESCAPED_CHAR:\n\t\n;\n", ":");
+	    	.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.xtext.ui.editor.contentassist.GrammarWithTerminalFragment")
+	    	.append("ESC")
+	    	.assertText("terminal fragment ESCAPED_CHAR:\n\t\n;\n", ":");
+    }
+    
+    public void testCompleteHiddenTokens_01() throws Exception {
+    	newBuilder(getXtextSetup())
+	    	.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals hidden()")
+	    	.appendNl("Model: name=ID;")
+	    	.appendNl("DataType: ID;")
+	    	.appendNl("terminal fragment Fragment: 'a'..'z';")
+	    	.appendNl("terminal Terminal: 'a'..'z';")
+	    	.assertTextAtCursorPosition("hidden(", "hidden(".length(), 
+	    			"(", 
+	    			")", 
+	    			"WS", 
+	    			"SL_COMMENT", 
+	    			"ML_COMMENT",
+	    			"ID",
+	    			"INT",
+	    			"ANY_OTHER",
+	    			"STRING",
+	    			"Terminal");
+    }
+    
+    public void testCompleteHiddenTokens_02() throws Exception {
+    	newBuilder(getXtextSetup())
+	    	.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
+	    	.appendNl("Model hidden(): name=ID;")
+	    	.appendNl("DataType: ID;")
+	    	.appendNl("terminal fragment Fragment: 'a'..'z';")
+	    	.appendNl("terminal Terminal: 'a'..'z';")
+	    	.assertTextAtCursorPosition("hidden(", "hidden(".length(), 
+	    			"(", 
+	    			")", 
+	    			"WS", 
+	    			"SL_COMMENT", 
+	    			"ML_COMMENT",
+	    			"ID",
+	    			"INT",
+	    			"ANY_OTHER",
+	    			"STRING",
+	    			"Terminal");
     }
 }

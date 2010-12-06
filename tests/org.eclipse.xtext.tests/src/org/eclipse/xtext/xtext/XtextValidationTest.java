@@ -1055,6 +1055,96 @@ public class XtextValidationTest extends AbstractXtextTests implements Validatio
 		messageAcceptor.validate();
 	}
 	
+	public void testHiddenTokenIsATerminal_01() throws Exception {
+		String grammarAsText =
+			"grammar test with org.eclipse.xtext.common.Terminals hidden(Model)\n" +
+			"generate test 'http://test'\n" +
+			"Model: name=ID;\n";
+	
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(grammar, true, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkHiddenTokenIsNotAFragment(grammar);
+		messageAcceptor.validate();
+	}
+	
+	public void testHiddenTokenIsATerminal_02() throws Exception {
+		String grammarAsText =
+			"grammar test with org.eclipse.xtext.common.Terminals\n" +
+			"generate test 'http://test'\n" +
+			"Model hidden(Foo): name=ID;\n"+
+			"enum Foo: A | B;";
+	
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		ParserRule rule = (ParserRule) grammar.getRules().get(0);
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(rule, true, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkHiddenTokenIsNotAFragment(rule);
+		messageAcceptor.validate();
+	}
+	
+	public void testHiddenTokenIsATerminal_03() throws Exception {
+		String grammarAsText =
+			"grammar test with org.eclipse.xtext.common.Terminals hidden(Fragment)\n" +
+			"generate test 'http://test'\n" +
+			"Model: name=ID;\n" +
+			"terminal fragment Fragment: 'a'..'z'+;";
+	
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(grammar, true, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkHiddenTokenIsNotAFragment(grammar);
+		messageAcceptor.validate();
+	}
+	
+	public void testHiddenTokenIsATerminal_04() throws Exception {
+		String grammarAsText =
+			"grammar test with org.eclipse.xtext.common.Terminals\n" +
+			"generate test 'http://test'\n" +
+			"Model hidden(Fragment): name=ID;\n" +
+			"terminal fragment Fragment: 'a'..'z'+;";
+	
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		ParserRule rule = (ParserRule) grammar.getRules().get(0);
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(rule, true, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkHiddenTokenIsNotAFragment(rule);
+		messageAcceptor.validate();
+	}
+	
+	public void testHiddenTokenIsATerminal_05() throws Exception {
+		String grammarAsText =
+			"grammar test with org.eclipse.xtext.common.Terminals hidden(WS)\n" +
+			"generate test 'http://test'\n" +
+			"Model: name=ID;\n";
+	
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, false, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkHiddenTokenIsNotAFragment(grammar);
+		messageAcceptor.validate();
+	}
+	
+	public void testHiddenTokenIsATerminal_06() throws Exception {
+		String grammarAsText =
+			"grammar test with org.eclipse.xtext.common.Terminals\n" +
+			"generate test 'http://test'\n" +
+			"Model hidden(WS): name=ID;";
+	
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		ParserRule rule = (ParserRule) grammar.getRules().get(0);
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, false, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkHiddenTokenIsNotAFragment(rule);
+		messageAcceptor.validate();
+	}
+	
 	public class ValidatingMessageAcceptor implements ValidationMessageAcceptor {
 
 		private final Set<EObject> contexts;

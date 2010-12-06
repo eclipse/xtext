@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -84,6 +85,8 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	public static final String INVALID_METAMODEL_NAME = "org.eclipse.xtext.grammar.InvalidMetaModelName";
 	public static final String INVALID_ACTION_USAGE = "org.eclipse.xtext.grammar.InvalidActionUsage";
 	public static final String EMPTY_ENUM_LITERAL= "org.eclipse.xtext.grammar.EmptyEnumLiteral";
+	public static final String INVALID_HIDDEN_TOKEN = "org.eclipse.xtext.grammar.InvalidHiddenToken";
+	public static final String INVALID_HIDDEN_TOKEN_FRAGMENT = "org.eclipse.xtext.grammar.InvalidHiddenTokenFragment";
 
 	@Inject
 	private IValueConverterService valueConverter;
@@ -826,6 +829,32 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	@Check
 	public void checkInstantiatedType(Action action) {
 		checkTypeIsEClass(action.getType());
+	}
+
+	@Check
+	public void checkHiddenTokenIsNotAFragment(ParserRule rule) {
+		if (rule.isDefinesHiddenTokens()) {
+			checkHiddenTokenIsNotAFragment(rule, rule.getHiddenTokens(), XtextPackage.Literals.PARSER_RULE__HIDDEN_TOKENS);
+		}
+	}
+	
+	@Check
+	public void checkHiddenTokenIsNotAFragment(Grammar grammar) {
+		if (grammar.isDefinesHiddenTokens()) {
+			checkHiddenTokenIsNotAFragment(grammar, grammar.getHiddenTokens(), XtextPackage.Literals.GRAMMAR__HIDDEN_TOKENS);
+		}
+	}
+	
+	protected void checkHiddenTokenIsNotAFragment(EObject owner, List<AbstractRule> hiddenTokens, EReference reference) {
+		for(int i = 0; i < hiddenTokens.size(); i++) {
+			AbstractRule hiddenToken = hiddenTokens.get(i);
+			if (hiddenToken instanceof TerminalRule) {
+				if (((TerminalRule) hiddenToken).isFragment())
+					error("Cannot use terminal fragments as hidden tokens.", owner, owner.eClass().getFeatureID(reference), INVALID_HIDDEN_TOKEN_FRAGMENT, String.valueOf(i));
+			} else {
+				error("Only terminal rules may be used as hidden tokens.", owner, owner.eClass().getFeatureID(reference), INVALID_HIDDEN_TOKEN, String.valueOf(i));
+			}
+		}
 	}
 	
 }
