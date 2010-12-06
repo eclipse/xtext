@@ -63,8 +63,7 @@ AbstractToken returns AbstractElement:
 ;
 
 AbstractTokenWithCardinality returns AbstractElement:
-	(Assignment | 
-	 AbstractTerminal) (cardinality=('?'|'*'|'+'))?
+	(Assignment | AbstractTerminal) (cardinality=('?'|'*'|'+'))?
 ;
 
 Action returns Action:
@@ -112,7 +111,7 @@ ParenthesizedElement returns AbstractElement:
 ;
 
 TerminalRule :
-	'terminal' name=ID ('returns' type=TypeRef)? ':'
+	'terminal' (fragment?='fragment' name=ID | name=ID ('returns' type=TypeRef)?) ':'
 		alternatives=TerminalAlternatives
 	';'
 ;
