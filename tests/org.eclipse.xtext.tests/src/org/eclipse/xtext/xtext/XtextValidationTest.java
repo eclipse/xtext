@@ -1145,6 +1145,136 @@ public class XtextValidationTest extends AbstractXtextTests implements Validatio
 		messageAcceptor.validate();
 	}
 	
+	public void testRuleCallAllowed_01() throws Exception {
+		String grammarAsText =
+			"grammar test with org.eclipse.xtext.common.Terminals\n" +
+			"generate test 'http://test'\n" +
+			"Model: name=ID;\n"+
+			"terminal MyTerminal: Fragment;\n"+
+			"terminal fragment Fragment: 'a'..'z'+;";
+	
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		TerminalRule rule = (TerminalRule) grammar.getRules().get(1);
+		RuleCall ruleCall = (RuleCall) rule.getAlternatives();
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, false, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkUnassignedRuleCallAllowed(ruleCall);
+		validator.checkTerminalFragmentCalledFromTerminalRule(ruleCall);
+		messageAcceptor.validate();
+	}
+	
+	public void testRuleCallAllowed_02() throws Exception {
+		String grammarAsText =
+			"grammar test with org.eclipse.xtext.common.Terminals\n" +
+			"generate test 'http://test'\n" +
+			"Model: name=ID;\n"+
+			"terminal fragment FirstFragment: SecondFragment;\n"+
+			"terminal fragment SecondFragment: 'a'..'z'+;";
+	
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		TerminalRule rule = (TerminalRule) grammar.getRules().get(1);
+		RuleCall ruleCall = (RuleCall) rule.getAlternatives();
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, false, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkUnassignedRuleCallAllowed(ruleCall);
+		validator.checkTerminalFragmentCalledFromTerminalRule(ruleCall);
+		messageAcceptor.validate();
+	}
+	
+	public void testRuleCallAllowed_03() throws Exception {
+		String grammarAsText =
+			"grammar test with org.eclipse.xtext.common.Terminals\n" +
+			"generate test 'http://test'\n" +
+			"Model: name=ID;\n"+
+			"terminal fragment Fragment: Terminal;\n"+
+			"terminal Terminal: 'a'..'z'+;";
+	
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		TerminalRule rule = (TerminalRule) grammar.getRules().get(1);
+		RuleCall ruleCall = (RuleCall) rule.getAlternatives();
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, false, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkUnassignedRuleCallAllowed(ruleCall);
+		validator.checkTerminalFragmentCalledFromTerminalRule(ruleCall);
+		messageAcceptor.validate();
+	}
+	
+	public void testRuleCallAllowed_04() throws Exception {
+		String grammarAsText =
+			"grammar test with org.eclipse.xtext.common.Terminals\n" +
+			"generate test 'http://test'\n" +
+			"Model: name=Terminal;\n"+
+			"terminal Terminal: 'a'..'z'+;";
+	
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		ParserRule rule = (ParserRule) grammar.getRules().get(0);
+		RuleCall ruleCall = (RuleCall) ((Assignment) rule.getAlternatives()).getTerminal();
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, false, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkUnassignedRuleCallAllowed(ruleCall);
+		validator.checkTerminalFragmentCalledFromTerminalRule(ruleCall);
+		messageAcceptor.validate();
+	}
+	
+	public void testRuleCallAllowed_05() throws Exception {
+		String grammarAsText =
+			"grammar test with org.eclipse.xtext.common.Terminals\n" +
+			"generate test 'http://test'\n" +
+			"Model: name=Fragment;\n"+
+			"terminal fragment Fragment: 'a'..'z'+;";
+	
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		ParserRule rule = (ParserRule) grammar.getRules().get(0);
+		RuleCall ruleCall = (RuleCall) ((Assignment) rule.getAlternatives()).getTerminal();
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(ruleCall, true, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkUnassignedRuleCallAllowed(ruleCall);
+		validator.checkTerminalFragmentCalledFromTerminalRule(ruleCall);
+		messageAcceptor.validate();
+	}
+	
+	public void testRuleCallAllowed_06() throws Exception {
+		String grammarAsText =
+			"grammar test with org.eclipse.xtext.common.Terminals\n" +
+			"generate test 'http://test'\n" +
+			"Model: name=Terminal;\n"+
+			"terminal Terminal: Enum;\n" +
+			"enum Enum: A | B;";
+	
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		TerminalRule rule = (TerminalRule) grammar.getRules().get(1);
+		RuleCall ruleCall = (RuleCall) rule.getAlternatives();
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(ruleCall, true, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkUnassignedRuleCallAllowed(ruleCall);
+		validator.checkTerminalFragmentCalledFromTerminalRule(ruleCall);
+		messageAcceptor.validate();
+	}
+	
+	public void testRuleCallAllowed_07() throws Exception {
+		String grammarAsText =
+			"grammar test with org.eclipse.xtext.common.Terminals\n" +
+			"generate test 'http://test'\n" +
+			"Model: name=ID;\n"+
+			"terminal Terminal: Model;";
+	
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		TerminalRule rule = (TerminalRule) grammar.getRules().get(1);
+		RuleCall ruleCall = (RuleCall) rule.getAlternatives();
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(ruleCall, true, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkUnassignedRuleCallAllowed(ruleCall);
+		validator.checkTerminalFragmentCalledFromTerminalRule(ruleCall);
+		messageAcceptor.validate();
+	}
+	
 	public class ValidatingMessageAcceptor implements ValidationMessageAcceptor {
 
 		private final Set<EObject> contexts;
