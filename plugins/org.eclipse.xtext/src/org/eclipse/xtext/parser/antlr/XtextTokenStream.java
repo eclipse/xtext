@@ -60,7 +60,10 @@ public class XtextTokenStream extends CommonTokenStream {
 			Token tok = (Token) super.get(index);
 			// adjust only tokens in the 'future', as we wont change the channel of previously parsed
 			// tokens
-			if (hiddenTokens != null && tok.getType() >= Token.MIN_TOKEN_TYPE && index >= p)
+			int current = p;
+			if (firstMarker != -1)
+				current = firstMarker;
+			if (hiddenTokens != null && tok.getType() >= Token.MIN_TOKEN_TYPE && index >= current)
 				tok.setChannel(hiddenTokens.get(tok.getType()) ? Token.HIDDEN_CHANNEL : Token.DEFAULT_CHANNEL);
 			return tok;
 		}
