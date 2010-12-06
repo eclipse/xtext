@@ -55,7 +55,10 @@ import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.formatting.ContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.formatting.PreferenceStoreIndentationInformation;
+import org.eclipse.xtext.ui.editor.hover.AbstractEObjectHover;
 import org.eclipse.xtext.ui.editor.hover.DefaultCompositeHover;
+import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover;
+import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.ui.editor.hover.ProblemAnnotationHover;
 import org.eclipse.xtext.ui.editor.hyperlinking.DefaultHyperlinkDetector;
 import org.eclipse.xtext.ui.editor.model.DocumentPartitioner;
@@ -302,5 +305,9 @@ public class DefaultUiModule extends AbstractGenericModule {
 	public Class<? extends org.eclipse.jface.text.ITextHover> bindITextHover() {
 		return DefaultCompositeHover.class;
 	}
-			
+
+	public Class<? extends IEObjectHover> bindIEObjectHover() {
+		return DispatchingEObjectTextHover.class;
+	}
+	
 }
