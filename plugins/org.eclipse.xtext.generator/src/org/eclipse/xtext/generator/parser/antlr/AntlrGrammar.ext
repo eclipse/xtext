@@ -12,7 +12,6 @@ import org::eclipse::emf::ecore;
 extension org::eclipse::xtext::generator::grammarAccess::GrammarAccess reexport;
 extension org::eclipse::xtext::Extensions reexport;
 extension org::eclipse::xtext::GrammarUtil reexport;
-extension org::eclipse::xtext::Utilities;
 extension org::eclipse::xtext::EcoreUtils;
 
 ruleName(ParserRule this) : 'rule'+name;
