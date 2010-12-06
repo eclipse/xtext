@@ -223,6 +223,17 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertEquals("baz",call.getFeatureName());
 		assertTrue(call.getArguments().get(0) instanceof XIntLiteral);
 	}
+	
+	public void testMemberFeatureCall_00() throws Exception {
+		XMemberFeatureCall call = (XMemberFeatureCall) expression("'holla'?.bar(4)");
+		assertTrue(call.isNullSafe());
+		assertFalse(call.isSpreading());
+	}
+	public void testMemberFeatureCall_01() throws Exception {
+		XMemberFeatureCall call = (XMemberFeatureCall) expression("somList*.bar(4)");
+		assertFalse(call.isNullSafe());
+		assertTrue(call.isSpreading());
+	}
 
 	public void testIf_0() throws Exception {
 		XIfExpression ie = (XIfExpression) expression("if (true) false");

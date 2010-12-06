@@ -76,7 +76,7 @@ OpUnary:
 
 XMemberFeatureCall returns XExpression:
 	XPrimaryExpression
-	({XMemberFeatureCall.memberCallTarget=current} "." 
+	({XMemberFeatureCall.memberCallTarget=current} ("."|nullSafe?="?."|spreading?="*.") 
 		('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?  
 		feature=[types::JvmIdentifyableElement] (explicitOperationCall?='(' (memberCallArguments+=XExpression (','	memberCallArguments+=XExpression)*)? ')')?)*;
 
