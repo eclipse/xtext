@@ -110,11 +110,13 @@ public class SemanticHighlightingCalculator implements ISemanticHighlightingCalc
 	
 	private String getFeatureName(ILeafNode leaf) {
 		EObject grammarElement = leaf.getGrammarElement();
-		while(grammarElement.eClass() == XtextPackage.Literals.RULE_CALL && grammarElement.eClass() == XtextPackage.Literals.ALTERNATIVES) {
-			grammarElement = grammarElement.eContainer();
+		if (grammarElement != null) {
+			while(grammarElement.eClass() == XtextPackage.Literals.RULE_CALL && grammarElement.eClass() == XtextPackage.Literals.ALTERNATIVES) {
+				grammarElement = grammarElement.eContainer();
+			}
+			if (grammarElement.eClass() == XtextPackage.Literals.ASSIGNMENT)
+				return ((Assignment) grammarElement).getFeature();
 		}
-		if (grammarElement.eClass() == XtextPackage.Literals.ASSIGNMENT)
-			return ((Assignment) grammarElement).getFeature();
 		return null;
 	}
 }
