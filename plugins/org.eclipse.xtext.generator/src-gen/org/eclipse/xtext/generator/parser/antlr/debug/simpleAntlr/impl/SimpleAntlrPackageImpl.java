@@ -311,7 +311,7 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getRule_Name()
+  public EAttribute getRule_Fragment()
   {
     return (EAttribute)ruleEClass.getEStructuralFeatures().get(0);
   }
@@ -321,9 +321,19 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getRule_Name()
+  {
+    return (EAttribute)ruleEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getRule_Body()
   {
-    return (EReference)ruleEClass.getEStructuralFeatures().get(1);
+    return (EReference)ruleEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -589,6 +599,7 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
     createEAttribute(optionValueEClass, OPTION_VALUE__VALUE);
 
     ruleEClass = createEClass(RULE);
+    createEAttribute(ruleEClass, RULE__FRAGMENT);
     createEAttribute(ruleEClass, RULE__NAME);
     createEReference(ruleEClass, RULE__BODY);
 
@@ -680,6 +691,7 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
     initEAttribute(getOptionValue_Value(), ecorePackage.getEString(), "value", null, 0, 1, OptionValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ruleEClass, Rule.class, "Rule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRule_Fragment(), ecorePackage.getEBoolean(), "fragment", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getRule_Name(), ecorePackage.getEString(), "name", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRule_Body(), this.getRuleElement(), null, "body", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

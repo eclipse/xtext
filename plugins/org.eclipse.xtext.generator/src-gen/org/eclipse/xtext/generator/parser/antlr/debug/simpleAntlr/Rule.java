@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Rule#isFragment <em>Fragment</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Rule#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Rule#getBody <em>Body</em>}</li>
  * </ul>
@@ -26,6 +27,32 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Rule extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Fragment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Fragment</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Fragment</em>' attribute.
+   * @see #setFragment(boolean)
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPackage#getRule_Fragment()
+   * @model
+   * @generated
+   */
+  boolean isFragment();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Rule#isFragment <em>Fragment</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Fragment</em>' attribute.
+   * @see #isFragment()
+   * @generated
+   */
+  void setFragment(boolean value);
+
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->

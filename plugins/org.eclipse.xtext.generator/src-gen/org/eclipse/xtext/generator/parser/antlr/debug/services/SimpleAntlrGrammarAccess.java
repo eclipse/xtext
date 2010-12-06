@@ -156,37 +156,45 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 	public class RuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Rule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
-		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cBodyAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cBodyAlternativesParserRuleCall_2_0 = (RuleCall)cBodyAssignment_2.eContents().get(0);
-		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cFragmentAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cFragmentFragmentKeyword_0_0 = (Keyword)cFragmentAssignment_0.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cBodyAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cBodyAlternativesParserRuleCall_3_0 = (RuleCall)cBodyAssignment_3.eContents().get(0);
+		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Rule:
-		//	name=ID ":" body=Alternatives ";";
+		//	^fragment?="fragment"? name=ID ":" body=Alternatives ";";
 		public ParserRule getRule() { return rule; }
 
-		//name=ID ":" body=Alternatives ";"
+		//^fragment?="fragment"? name=ID ":" body=Alternatives ";"
 		public Group getGroup() { return cGroup; }
 
+		//^fragment?="fragment"?
+		public Assignment getFragmentAssignment_0() { return cFragmentAssignment_0; }
+
+		//"fragment"
+		public Keyword getFragmentFragmentKeyword_0_0() { return cFragmentFragmentKeyword_0_0; }
+
 		//name=ID
-		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
 		//":"
-		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
+		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 
 		//body=Alternatives
-		public Assignment getBodyAssignment_2() { return cBodyAssignment_2; }
+		public Assignment getBodyAssignment_3() { return cBodyAssignment_3; }
 
 		//Alternatives
-		public RuleCall getBodyAlternativesParserRuleCall_2_0() { return cBodyAlternativesParserRuleCall_2_0; }
+		public RuleCall getBodyAlternativesParserRuleCall_3_0() { return cBodyAlternativesParserRuleCall_3_0; }
 
 		//";"
-		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
+		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 
 	public class AlternativesElements extends AbstractParserRuleElementFinder {
@@ -663,7 +671,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Rule:
-	//	name=ID ":" body=Alternatives ";";
+	//	^fragment?="fragment"? name=ID ":" body=Alternatives ";";
 	public RuleElements getRuleAccess() {
 		return (pRule != null) ? pRule : (pRule = new RuleElements());
 	}

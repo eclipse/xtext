@@ -181,13 +181,22 @@ public interface SimpleAntlrPackage extends EPackage
   int RULE = 3;
 
   /**
+   * The feature id for the '<em><b>Fragment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE__FRAGMENT = 0;
+
+  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int RULE__NAME = 0;
+  int RULE__NAME = 1;
 
   /**
    * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -196,7 +205,7 @@ public interface SimpleAntlrPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RULE__BODY = 1;
+  int RULE__BODY = 2;
 
   /**
    * The number of structural features of the '<em>Rule</em>' class.
@@ -205,7 +214,7 @@ public interface SimpleAntlrPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RULE_FEATURE_COUNT = 2;
+  int RULE_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.RuleElementImpl <em>Rule Element</em>}' class.
@@ -641,6 +650,17 @@ public interface SimpleAntlrPackage extends EPackage
   EClass getRule();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Rule#isFragment <em>Fragment</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Fragment</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Rule#isFragment()
+   * @see #getRule()
+   * @generated
+   */
+  EAttribute getRule_Fragment();
+
+  /**
    * Returns the meta object for the attribute '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Rule#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1003,6 +1023,14 @@ public interface SimpleAntlrPackage extends EPackage
      * @generated
      */
     EClass RULE = eINSTANCE.getRule();
+
+    /**
+     * The meta object literal for the '<em><b>Fragment</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute RULE__FRAGMENT = eINSTANCE.getRule_Fragment();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.

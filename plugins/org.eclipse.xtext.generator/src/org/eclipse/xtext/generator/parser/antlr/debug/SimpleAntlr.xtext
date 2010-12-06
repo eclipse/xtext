@@ -22,7 +22,7 @@ IdOrInt:
 ;
 
 Rule:
-  name = ID ':'
+  ^fragment?='fragment'? name = ID ':'
     body=Alternatives
   ';'
 ;

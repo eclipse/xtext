@@ -25,6 +25,7 @@ import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPac
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.RuleImpl#isFragment <em>Fragment</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.RuleImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.RuleImpl#getBody <em>Body</em>}</li>
  * </ul>
@@ -34,6 +35,26 @@ import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPac
  */
 public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
 {
+  /**
+   * The default value of the '{@link #isFragment() <em>Fragment</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isFragment()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean FRAGMENT_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isFragment() <em>Fragment</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isFragment()
+   * @generated
+   * @ordered
+   */
+  protected boolean fragment = FRAGMENT_EDEFAULT;
+
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -83,6 +104,29 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   protected EClass eStaticClass()
   {
     return SimpleAntlrPackage.Literals.RULE;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public boolean isFragment()
+  {
+    return fragment;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setFragment(boolean newFragment)
+  {
+    boolean oldFragment = fragment;
+    fragment = newFragment;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SimpleAntlrPackage.RULE__FRAGMENT, oldFragment, fragment));
   }
 
   /**
@@ -182,6 +226,8 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   {
     switch (featureID)
     {
+      case SimpleAntlrPackage.RULE__FRAGMENT:
+        return isFragment();
       case SimpleAntlrPackage.RULE__NAME:
         return getName();
       case SimpleAntlrPackage.RULE__BODY:
@@ -200,6 +246,9 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   {
     switch (featureID)
     {
+      case SimpleAntlrPackage.RULE__FRAGMENT:
+        setFragment((Boolean)newValue);
+        return;
       case SimpleAntlrPackage.RULE__NAME:
         setName((String)newValue);
         return;
@@ -220,6 +269,9 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   {
     switch (featureID)
     {
+      case SimpleAntlrPackage.RULE__FRAGMENT:
+        setFragment(FRAGMENT_EDEFAULT);
+        return;
       case SimpleAntlrPackage.RULE__NAME:
         setName(NAME_EDEFAULT);
         return;
@@ -240,6 +292,8 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   {
     switch (featureID)
     {
+      case SimpleAntlrPackage.RULE__FRAGMENT:
+        return fragment != FRAGMENT_EDEFAULT;
       case SimpleAntlrPackage.RULE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case SimpleAntlrPackage.RULE__BODY:
@@ -259,7 +313,9 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
+    result.append(" (fragment: ");
+    result.append(fragment);
+    result.append(", name: ");
     result.append(name);
     result.append(')');
     return result.toString();

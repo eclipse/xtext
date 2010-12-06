@@ -69,6 +69,9 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/generator/parser/antlr/simpleAntlr#//Rule"/>
       </type>
       <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="fragment" operator="?=">
+          <terminal xsi:type="xtext:Keyword" value="fragment"/>
+        </elements>
         <elements xsi:type="xtext:Assignment" feature="name" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
         </elements>

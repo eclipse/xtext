@@ -22,6 +22,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleAntlr.ecore#//OptionValue/value"/>
     </genClasses>
     <genClasses ecoreClass="SimpleAntlr.ecore#//Rule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleAntlr.ecore#//Rule/fragment"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleAntlr.ecore#//Rule/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//Rule/body"/>
     </genClasses>

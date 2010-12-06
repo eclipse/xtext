@@ -320,9 +320,24 @@ ruleRule returns [EObject current=null]
     @after { leaveRule(); }:
 ((
 (
-		lv_name_0_0=RULE_ID
+		lv_fragment_0_0=	'fragment' 
+    {
+        newLeafNode(lv_fragment_0_0, grammarAccess.getRuleAccess().getFragmentFragmentKeyword_0_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getRuleRule());
+	        }
+       		setWithLastConsumed($current, "fragment", true, "fragment");
+	    }
+
+)
+)?(
+(
+		lv_name_1_0=RULE_ID
 		{
-			newLeafNode(lv_name_0_0, grammarAccess.getRuleAccess().getNameIDTerminalRuleCall_0_0()); 
+			newLeafNode(lv_name_1_0, grammarAccess.getRuleAccess().getNameIDTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -331,36 +346,36 @@ ruleRule returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"name",
-        		lv_name_0_0, 
+        		lv_name_1_0, 
         		"ID");
 	    }
 
 )
-)	otherlv_1=':' 
+)	otherlv_2=':' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getRuleAccess().getColonKeyword_1());
+    	newLeafNode(otherlv_2, grammarAccess.getRuleAccess().getColonKeyword_2());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRuleAccess().getBodyAlternativesParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getRuleAccess().getBodyAlternativesParserRuleCall_3_0()); 
 	    }
-		lv_body_2_0=ruleAlternatives		{
+		lv_body_3_0=ruleAlternatives		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRuleRule());
 	        }
        		set(
        			$current, 
        			"body",
-        		lv_body_2_0, 
+        		lv_body_3_0, 
         		"Alternatives");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_3=';' 
+)	otherlv_4=';' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getRuleAccess().getSemicolonKeyword_3());
+    	newLeafNode(otherlv_4, grammarAccess.getRuleAccess().getSemicolonKeyword_4());
     }
 )
 ;
