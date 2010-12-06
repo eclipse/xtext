@@ -85,14 +85,14 @@ ObjectNew:
 	"new" ^import=[Import] impFrag=FRAGMENT;
 	
 ObjectCopy:
-	"copy" resource=[NamedResource] fragment=FRAGMENT;
+	"copy" resource=[NamedResource] ^fragment=FRAGMENT;
 	
 terminal FRAGMENT: 
 	'#' ('a'..'z'|'A'..'Z'|'0'..'9'|'_'|'/'|'['|']'|'{'|'}'|'.'|'@')+;
 	
 // ******************* migration *****************************
   
-Migration:
+Migration: {Migration}
 	"migrate" first=Executable? (("as" asOp=Executable) | ("each" eachOp=Executable))? ";";
 	
 Executable:
