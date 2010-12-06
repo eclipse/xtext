@@ -1,12 +1,14 @@
 \documentclass[a4paper]{scrreprt}
 
 \usepackage[T1]{fontenc}
-\usepackage{ae,aecompl} 
-%%\usepackage[utf8]{inputenc}
+\usepackage{ae,aecompl,aeguill} 
 \usepackage[latin1]{inputenc}
 \usepackage{listings}
+\usepackage[american]{babel}
 
 \usepackage{todonotes}
+
+
 
 
 %%\usepackage{helvet}
@@ -19,27 +21,8 @@
     morecomment=[s]{/*}{*/},
     morestring=[b]",
     morestring=[b]',
+    literate={«}{{\font\larm=larm1000\larm\char 190}}1
   }
-
-%\lstdefinelanguage{Xtext}
-%  {morekeywords={grammar, generate, import, as, terminal, hidden},
-%    sensitive=true,
-%    morecomment=[l]{//},
-%    morecomment=[s]{/*}{*/},
-%    morestring=[b]",
-%    morestring=[b]',
-%  }
-
-%\lstdefinelanguage{Xbase}
-%  {morekeywords={super, val, var, extends, instanceof, new,%
-%   null, true, false, if, else, switch, case, default, do,%
-%   while, for, def, class, as, throw, try, catch, finally},
-%    sensitive=true,
-%    morecomment=[l]{//},
-%    morecomment=[s]{/*}{*/},
-%    morestring=[b]",
-%    morestring=[b]',
-%  }
 
 %% force more space between subsections!
 \makeatletter
@@ -55,9 +38,9 @@
 
 %\lstdefinelanguage{xtext}{keywords={terminal, grammar, import, generate, hidden, as}, sensitive=true,string={"},morestring={'},comment={//},morecomment=[s]{/*}{*/}}
 
-\lstset{tabsize=4, basicstyle=\sffamily\small, keywordstyle=\bfseries, columns=[r]fullflexible}
+\lstset{tabsize=4, basicstyle=\sffamily\small, keywordstyle=\bfseries, columns=[r]fullflexible, escapechar={ß}}
 
-\usepackage[english]{babel}
+%%\usepackage[english]{babel}
 
 % import this as last package
 \usepackage{hyperref}
@@ -157,7 +140,7 @@ class MyClass {
 
 \section{Package Declaration}
 \label{packageDecl}
-Package declarations are like in Java, with the small difference, that an identifier can be escaped with a \textit{\textasciicircum{}} in cae it conflicts with a keyword.
+Package declarations are like in Java, with the small difference, that an identifier can be escaped with a \textit{\textasciicircum{}} in case it conflicts with a keyword.
 
 \subsection{Syntax}
 
@@ -172,13 +155,153 @@ QualifiedName : ID ('.' ID);
 
 \section{Imports}
 \label{imports}
-Also the imports are equivalent to the imports known from Java. Again one can escape any names conflicting with keywords using the \textit{\textasciicircum{}}.
+The ordinary imports of type names are equivalent to the imports known from Java. Again one can escape any names conflicting with keywords using the \textit{\textasciicircum{}}.
+
+\subsection{Importing Extension Methods}
+\label{importExtension}
+In addition one can add the keyword \lstinline]°extension° after the import (where the keyword \lstinline]°static° occurs in Java), which makes any static methods 
+from a certain type available as an 
+\hyperref[extensionMethods]{extension method~(§\ref*{extensionMethods})}. The \lstinline]°extension° keyword only works with qualified imports (i.e. non-wildcard imports).
+If you only want to make some methods from the imported type available using the extension syntax, you can provide a list of function names.
+You cannot further specify type arguments.
+
+Example:
+
+\begin{lstlisting}
+import extension java.util.Collections.(sort, shuffle);
+
+\end{lstlisting}
+
+
+This will import four methods (\lstinline]°sort(List<T>)°, \lstinline]°sort(List<T>, Comparator<? super T>)°, \lstinline]°shuffle(List<?>)°, \lstinline]°shuffle(List<?>, Random)°) available as 
+\hyperref[extensionMethods]{extension methods~(§\ref*{extensionMethods})}.
+
 
 \subsection{Syntax}
 
 \begin{lstlisting}
-ImportSection : (Import|StaticImport)*;
-Import : 'import' 'static'? QualifiedName ('.''*')?;
+ImportSection : (Import|Injection)*;
+Import : 'import' 'extension'? QualifiedName (('.''*')|'('ID (',' ID)')')?;
+
+\end{lstlisting}
+
+
+
+
+\section{Dependency Injection}
+\label{inject}
+Xtend2 has built-in support for dependency injection, which means that declaring dependencies is a first class feature of Xtend2.
+It is done as part of the import section and looks like this:
+
+\begin{lstlisting}
+inject MyService myService;
+
+\end{lstlisting}
+
+
+This will translate to Java as a field as well a setter method annotated with @Inject: 
+
+\begin{lstlisting}[language=Java]
+private MyService myService;
+
+@Inject
+public void setMyService(MyService myService) {
+	this.myService = myService;
+}
+
+\end{lstlisting}
+
+
+\subsection{Name can be inferred}
+
+You could even leave the name out as by default it will be the lower case version of the simple name of the class.
+That is the following inject declaration would be equvalent with the former.
+
+\begin{lstlisting}
+inject MyService;
+
+\end{lstlisting}
+
+
+
+\subsection{Guice Keys}
+
+Xtend2 uses Guice as the dependency injection container, which in turn uses types as keys. Those types can be generified, which
+is why you can write the following in Xtend2.
+
+\begin{lstlisting}
+inject HashMap<String,MyType> myCache;
+
+\end{lstlisting}
+
+
+Also Guice allows to use annotations to further distinct between different implementations of the same type. This is usually done by using
+the \lstinline]°com.google.inject.name.Named° annotation or a custom annotation which is itself annotated with \lstinline]°com.google.inject.BindingAnnotation°.
+
+Xtend supports these two variants:
+
+\begin{lstlisting}
+inject @CustomAnnotation my.Service customService; 
+inject @"NamedThingy" my.Service namedService;
+
+\end{lstlisting}
+
+
+Providers are declared like in plain Guice. That is you wrap your type into \lstinline]°com.google.inject.Provider°.
+Example:
+
+\begin{lstlisting}
+inject @CustomAnnotation Provider<Service> customServiceProvider; 
+
+\end{lstlisting}
+
+
+
+\subsection{Injected Extension Methods}
+
+The \lstinline]°extension° keyword is also available for \lstinline]°inject° which is much nicer than importing static methods, because you don't bind your code to 
+actual implementation, since the implementation can be easily changed through the global dependency injection configuration (i.e. Guice modules).
+
+Example:
+
+Imagine you had something like IterableExtensions which adds some higher-order functions
+to the java.util collection library (we will likely ship a library based on google guava).
+
+\begin{lstlisting}
+class IterableExtensions {
+   public <T> T find(Iterable<T> elements, Function<T,Boolean> func) {
+     ...
+   }
+}
+
+\end{lstlisting}
+
+
+You declare the dependency like this:
+
+\begin{lstlisting}
+inject extension my.common.IterableExtensions;
+
+\end{lstlisting}
+  
+
+and can then use it as if those functions were members of any \lstinline]°java.lang.Iterable°:
+
+\begin{lstlisting}
+myIterable.find(e|e.name=="Foo")
+
+\end{lstlisting}
+
+
+The nice thing with using injection as opposed to static methods is, that in case there is a bug in the extension or it is implemented inefficiently or you 
+just need a different strategy, you can simply exchange the component with another implementation. You do this without modifying the library nor the client code. 
+You'll only have to change the binding in your guice module. Also this gives you a general hook for any AOP-like thing you would want to do, 
+or allows you to write against an SPI, where the concrete implementation can be provided by a third party.
+
+\begin{lstlisting}
+ImportSection : (Import|Injection)*;
+Import : ...
+Injection : 'inject' 'extension'? ('@'STRING | '@'TypeReference) TypeReference ('('ID (',' ID)')')?;
 
 \end{lstlisting}
 
@@ -187,11 +310,11 @@ Import : 'import' 'static'? QualifiedName ('.''*')?;
 
 \section{Class Declaration}
 \label{classDeclaration}
-Also the class declaration reuses a lot of Java's syntax it is a bit different in some aspects.
-Firstly the default visibility of any class is \lstinline[]°public°. It is possible to write it explicitly but if not specified it defaults to public.
-The \lstinline[]°package private° visibility does not exist.
+The class declaration reuses a lot of Java's syntax but still is a bit different in some aspects.
+Firstly the default visibility of any class is \lstinline]°public°. It is possible to write it explicitly but if not specified it defaults to public.
+Java's default "package private" visibility does not exist.
 
-The \lstinline[]°abstract° as well as the \lstinline[]°final° modifiers are directly translated to Java, hence have the exact same meaning.
+The \lstinline]°abstract° as well as the \lstinline]°final° modifiers are directly translated to Java, hence have the exact same meaning.
 
 \subsection{Inheritance}
 
@@ -200,7 +323,13 @@ Also inheritance is directly reused from Java. Xtend2 allows single inheritance 
 
 \subsection{Generics}
 
-Full Java Generics are supported.
+Full Java Generics with the exact same syntax and semantics are supported.
+
+
+\subsection{Abstract Classes}
+
+A class is automatically \lstinline]°abstract° if one of its functions is abstract. 
+This is the case if the function's expression (body) is not defined. 
 
 
 \subsection{Syntax}
@@ -219,40 +348,11 @@ Visibility : 'public'|'protected'|'private';
 
 
 
-\section{Fields}
-\label{Fields}
-An Xtend2 class can have state, just declare a field like you are used to in Java.
-
-\begin{lstlisting}
-int numberOfCalls = 0; 
-
-\end{lstlisting}
-
-
-It directly translates to Java.
-The default visibility for fields is \lstinline[]°private°.
-
-\subsection{Syntax}
-
-\begin{lstlisting}
-FieldDef : ('public'|'protected'|'private'|'final')* TypeRef? ID'
-    ( '=' Expression)? ';'
-
-\end{lstlisting}
-
-
-
-
 \section{Functions}
 \label{Functions}
-Xtend2 functions are declared within a class and are usually translated to a corresponding Java method with the exact same signature. The only exception 
-is overloaded methods, which compile to a single method. This is explained in 
+Xtend2 functions are declared within a class and are usually translated to a corresponding Java method with the exact same signature. 
+The only exception is overloaded methods, which compile to a single method. This is explained in the section about 
 \autoref{polymorphicDispatch}. 
-
-The default visibility of a function is \lstinline[]°public°, which can also be declared explicitly. The two other available visibilities are \lstinline[]°protected° and \lstinline[]°private°.
-
-A function can be declared either \lstinline[]°final° or \lstinline[]°abstract°. If it is declared \lstinline[]°abstract° also the class needs to be declared \lstinline[]°abstract° and the function is 
-not allowed to have an implementation.
 
 An example of a function declaration
 \begin{lstlisting}
@@ -260,6 +360,38 @@ Boolean equalsIgnoreCase(String s1,String s2) :
 	s1.toLowerCase() == s2.toLowerCase();
 
 \end{lstlisting}
+
+
+\subsection{Visibility}
+
+The default visibility of a function is \lstinline]°public°, which can also be declared explicitly. The two other available visibilities are \lstinline]°protected° and \lstinline]°private°.
+
+
+\subsection{Overriding Functions}
+
+Like Java methods an Xtend2 function can be declared non overridable using the keyword \lstinline]°final°.
+
+Also if a function overrides a method from the suberclass, the \lstinline]°override° keyword is mandatory.
+
+Example:
+\begin{lstlisting}
+final override Boolean equalsIgnoreCase(String s1,String s2) :
+	s1.toLowerCase() == s2.toLowerCase();
+
+\end{lstlisting}
+
+
+
+\subsection{Abstract Functions}
+
+A function is automatically considered \lstinline]°abstract° if its expression (body) is not defined.
+
+Example:
+\begin{lstlisting}
+Boolean myAbstractFunction(String s1,String s2);
+
+\end{lstlisting}
+
 
 
 \subsection{Inferred Return Types}
@@ -290,14 +422,41 @@ The compiler tells the user when it needs to be specified.
 
 \subsection{Generics}
 
-Full Java Generics are supported.
+Full Java Generics with the exact same syntax and semantics are supported.
 
 
-\subsection{Method overloading and polymorphic dispatch}
+\subsection{Polymorphic Method Overloading}
 \label{polymorphicDispatch}
-It is possible to overload methods, but overloaded methods are not simply transalted to corresponding Java methods.
-Instead for each set of methods where the name is equal and the number of arguments is equal the most common dominator signature is taken (or computed if neccessary)
-and only for that method a Java method is derived. Within the implementation the correct method is looked up at runtime.
+It is possible to overload methods, but overloaded methods are not invoked based on the static types of arguments as in Java.
+In Xtend2 an overloaded method is invoked based on the rutime types of the arguments. This has a lot of advantages and is a very convenient way 
+to add functionality to heterogenous data structors especially with deeper type hierarchies (i.e. EMF models and other typed domain models).
+It essentially eleminates the problem the visitor pattern is trying to solve.
+
+This allows you to write a code generator by defining a function for all kinds of AST elements you want to process.
+
+\begin{lstlisting}
+class MyCompiler {
+	compile(CompilationUnit cu) :
+		... cu.types.compile() ...;
+	compile(Interface interface) :
+		... cu.members.compile() ...;
+	compile(Class cu) :
+		... cu.members.compile() ...;
+	compile(Field cu) :
+		...;
+	...
+}
+
+\end{lstlisting}
+
+
+\subsubsection{How overloaded method are translated to Java}
+
+The polymorphic behavior of overloaded methods shall be transparently work no matter you call such a function from Java, Xtend2 or any other JVM language.
+Therefore the runtime dispatch is not done on the caller's side but on the declaration side. 
+For each set of methods where the name is equal and the number of arguments is equal, the most common dominator signature is taken 
+or computed if there is no most common denominator. Only for that signature a Java method is generated. 
+Within the implementation the correct method is looked up at runtime using if else cascades.
 This is done by sorting the methods from most specific to least specific and generating an if-else cascade for the code.
 
 Example: The following functions
@@ -310,7 +469,7 @@ foo(Integer x) : 'it's an int';
 
 compile to the following Java method:
 
-\begin{lstlisting} [language=Java]
+\begin{lstlisting}[language=Java]
 public String foo(Number x) {
 	if (x== null || x instanceof Integer) {
 		return "it's an int";
@@ -322,7 +481,8 @@ public String foo(Number x) {
 \end{lstlisting}
 
 
-In case there is no single most general signature, one is computed.
+In case there is no single most general signature, one is computed and the
+different overloaded methods are matched in the order they are declared within the class file.
 Example:
 
 \begin{lstlisting}
@@ -332,7 +492,7 @@ foo(Integer x, Number x) : 'it's an int and a number';
 \end{lstlisting}
 
 
-\begin{lstlisting} [language=Java]
+\begin{lstlisting}[language=Java]
 public String foo(Number x) {
 	if ((x== null || x instanceof Number) && (y== null ||y instanceof Integer)) {
 		return "it's some number and an int";
@@ -346,19 +506,19 @@ public String foo(Number x) {
 \end{lstlisting}
 
 
-As you can see a null reference is always a match. If you want to fetch null you can declare a parameter using the type \lstinline[]°java.lang.Void°.
+As you can see a null reference is always a match. If you want to fetch null you can declare a parameter using the type \lstinline]°java.lang.Void°.
 
 \begin{lstlisting}
-foo(Void x) : throw new NullPointerException("x");
 foo(Number x) : 'it's some number';
 foo(Integer x) : 'it's an int';
+foo(Void x) : throw new NullPointerException("x");
 
 \end{lstlisting}
 
 
 Which compiles to the following Java code:
 
-\begin{lstlisting} [language=Java]
+\begin{lstlisting}[language=Java]
 public String foo(Number x) {
 	if (x== null) {
 		throw new NullPointerException("x")
@@ -372,8 +532,18 @@ public String foo(Number x) {
 \end{lstlisting}
 
 
-So essential we put the polymorphic invocation logic into the declaration and not into the method call.
-The nice thing is that polymorphic overloaded functions can be transparently called from Java, and behave exactly the same as if they were called from Xtend2.
+Note that the type \lstinline]°java.lang.Void° is considered the most specific type and will always have higher precedence than any other types in the ordering.
+
+
+\subsubsection{Overloading Functions from Super Types}
+
+Functions (or Java Methods) from super types are not included in the dispatch. You'll have to call them explicitly using the \lstinline]°super° reference. 
+
+
+\subsubsection{Excluding functions from polymorphic dispatch}
+
+Sometimes you need to have the static dispatch from Java, for instance if you implement an interface with two method declarations where one overloads 
+the other. In that case you have to add the keyword \lstinline]°no-dispatch°.
 
 
 \subsection{Syntax}
@@ -448,36 +618,8 @@ It also supports the SEPARATOR and ITERATOR declaration from Xpand.
 
 \subsubsection{Typing}
 \label{RichStringType}
-The rich string is translated to an efficient string concatenation and the return type of a rich string is \lstinline[]°java.lang.CharStream° which allows
+The rich string is translated to an efficient string concatenation and the return type of a rich string is \lstinline]°java.lang.CharStream° which allows
 much room for efficient implementation.
-
-
-\subsection{Shortcut navigation through lists}
-\label{collectShortcut}
-In Xtend2 one usually navigates over graphs which contain a lot of collections. If you for instance need the qualified name of
-the interfaces a type is extending you could write the following using closures:
-
-\begin{lstlisting}
-myType.interfaces.collect(e|e.qualifiedName)
-
-\end{lstlisting}
-
-
-However because this situation is so common Xtend2 provides a special sugared expression for that.
-So instead of the code above you can write:
-
-\begin{lstlisting}
-myType.interfaces.*qualifiedName
-
-\end{lstlisting}
-
-
-Note that we decided to come up with an explicit operator (.*) because overloading the '.' operator as it is the case in Xpand,
-has caused a lot of surprises in the past. With an explicit operator the tooling as well as the user always can distinct whether you
-invoke a feature on the iterables elements or on the iterable itself.
-
-The operator works on all members of \lstinline[]°java.lang.Iterable°. the return type is always an \lstinline[]°java.lang.Iterable<T>° where \lstinline[]°T°
-is the return type of the called feature.
 
 
 \subsection{Extension Method Syntax}
@@ -502,8 +644,8 @@ singleton("Foo")
 \end{lstlisting}
 
 
-Note that extension methods never shadow a member of the current reference. That is if \lstinline[]°java.lang.String° has a field \lstinline[]°singleton°, a method \lstinline[]°singleton()° or a method
-\lstinline[]°getSingleton()°, those memebers would be referenced. That is done at compile time, so the tooling is able to tell you what you actually reference.
+Note that extension methods never shadow a member of the current reference. That is if \lstinline]°java.lang.String° has a field \lstinline]°singleton°, a method \lstinline]°singleton()° or a method
+\lstinline]°getSingleton()°, those memebers would be referenced. That is done at compile time, so the tooling is able to tell you what you actually reference.
 
 Static functions as well as extensions in the previous version of Xtend make clients not only depend on a certain signature but on the implementation as it is not 
 possible to exchange the implementation of a static function. That's where the @Extension annotation in conjunction with dependency injection comes in.
