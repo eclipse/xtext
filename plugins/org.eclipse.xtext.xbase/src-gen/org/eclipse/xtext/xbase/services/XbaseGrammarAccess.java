@@ -665,7 +665,12 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cXPrimaryExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Action cXMemberFeatureCallMemberCallTargetAction_1_0 = (Action)cGroup_1.eContents().get(0);
-		private final Keyword cFullStopKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Alternatives cAlternatives_1_1 = (Alternatives)cGroup_1.eContents().get(1);
+		private final Keyword cFullStopKeyword_1_1_0 = (Keyword)cAlternatives_1_1.eContents().get(0);
+		private final Assignment cNullSafeAssignment_1_1_1 = (Assignment)cAlternatives_1_1.eContents().get(1);
+		private final Keyword cNullSafeQuestionMarkFullStopKeyword_1_1_1_0 = (Keyword)cNullSafeAssignment_1_1_1.eContents().get(0);
+		private final Assignment cSpreadingAssignment_1_1_2 = (Assignment)cAlternatives_1_1.eContents().get(2);
+		private final Keyword cSpreadingAsteriskFullStopKeyword_1_1_2_0 = (Keyword)cSpreadingAssignment_1_1_2.eContents().get(0);
 		private final Group cGroup_1_2 = (Group)cGroup_1.eContents().get(2);
 		private final Keyword cLessThanSignKeyword_1_2_0 = (Keyword)cGroup_1_2.eContents().get(0);
 		private final Assignment cTypeArgumentsAssignment_1_2_1 = (Assignment)cGroup_1_2.eContents().get(1);
@@ -691,29 +696,47 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_1_4_2 = (Keyword)cGroup_1_4.eContents().get(2);
 		
 		//XMemberFeatureCall returns XExpression:
-		//	XPrimaryExpression ({XMemberFeatureCall.memberCallTarget=current} "." ("<" typeArguments+=JvmArgumentTypeReference
-		//	("," typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifyableElement]
-		//	(explicitOperationCall?="(" (memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")?)*;
+		//	XPrimaryExpression ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | spreading?="*.") ("<"
+		//	typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
+		//	feature=[types::JvmIdentifyableElement] (explicitOperationCall?="(" (memberCallArguments+=XExpression (","
+		//	memberCallArguments+=XExpression)*)? ")")?)*;
 		public ParserRule getRule() { return rule; }
 
-		//XPrimaryExpression ({XMemberFeatureCall.memberCallTarget=current} "." ("<" typeArguments+=JvmArgumentTypeReference (","
-		//typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifyableElement] (explicitOperationCall?="("
-		//(memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")?)*
+		//XPrimaryExpression ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | spreading?="*.") ("<"
+		//typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
+		//feature=[types::JvmIdentifyableElement] (explicitOperationCall?="(" (memberCallArguments+=XExpression (","
+		//memberCallArguments+=XExpression)*)? ")")?)*
 		public Group getGroup() { return cGroup; }
 
 		//XPrimaryExpression
 		public RuleCall getXPrimaryExpressionParserRuleCall_0() { return cXPrimaryExpressionParserRuleCall_0; }
 
-		//({XMemberFeatureCall.memberCallTarget=current} "." ("<" typeArguments+=JvmArgumentTypeReference (","
-		//typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifyableElement] (explicitOperationCall?="("
-		//(memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")?)*
+		//({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | spreading?="*.") ("<"
+		//typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
+		//feature=[types::JvmIdentifyableElement] (explicitOperationCall?="(" (memberCallArguments+=XExpression (","
+		//memberCallArguments+=XExpression)*)? ")")?)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{XMemberFeatureCall.memberCallTarget=current}
 		public Action getXMemberFeatureCallMemberCallTargetAction_1_0() { return cXMemberFeatureCallMemberCallTargetAction_1_0; }
 
+		//"." | nullSafe?="?." | spreading?="*."
+		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
+
 		//"."
-		public Keyword getFullStopKeyword_1_1() { return cFullStopKeyword_1_1; }
+		public Keyword getFullStopKeyword_1_1_0() { return cFullStopKeyword_1_1_0; }
+
+		//nullSafe?="?."
+		public Assignment getNullSafeAssignment_1_1_1() { return cNullSafeAssignment_1_1_1; }
+
+		//"?."
+		public Keyword getNullSafeQuestionMarkFullStopKeyword_1_1_1_0() { return cNullSafeQuestionMarkFullStopKeyword_1_1_1_0; }
+
+		//spreading?="*."
+		public Assignment getSpreadingAssignment_1_1_2() { return cSpreadingAssignment_1_1_2; }
+
+		//"*."
+		public Keyword getSpreadingAsteriskFullStopKeyword_1_1_2_0() { return cSpreadingAsteriskFullStopKeyword_1_1_2_0; }
 
 		//("<" typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
 		public Group getGroup_1_2() { return cGroup_1_2; }
@@ -2224,9 +2247,10 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XMemberFeatureCall returns XExpression:
-	//	XPrimaryExpression ({XMemberFeatureCall.memberCallTarget=current} "." ("<" typeArguments+=JvmArgumentTypeReference
-	//	("," typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifyableElement]
-	//	(explicitOperationCall?="(" (memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")?)*;
+	//	XPrimaryExpression ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | spreading?="*.") ("<"
+	//	typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
+	//	feature=[types::JvmIdentifyableElement] (explicitOperationCall?="(" (memberCallArguments+=XExpression (","
+	//	memberCallArguments+=XExpression)*)? ")")?)*;
 	public XMemberFeatureCallElements getXMemberFeatureCallAccess() {
 		return (pXMemberFeatureCall != null) ? pXMemberFeatureCall : (pXMemberFeatureCall = new XMemberFeatureCallElements());
 	}

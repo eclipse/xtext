@@ -131,7 +131,11 @@ ruleOpUnary :
 // Rule XMemberFeatureCall
 ruleXMemberFeatureCall :
 	ruleXPrimaryExpression (
-		'.' (
+		(
+			'.' |
+			'?.' |
+			'*.'
+		) (
 			'<' ruleJvmArgumentTypeReference (
 				',' ruleJvmArgumentTypeReference
 			)* '>'

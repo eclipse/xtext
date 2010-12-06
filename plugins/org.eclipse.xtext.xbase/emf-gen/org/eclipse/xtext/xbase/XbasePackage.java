@@ -428,13 +428,31 @@ public interface XbasePackage extends EPackage
 	int XMEMBER_FEATURE_CALL__EXPLICIT_OPERATION_CALL = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Spreading</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XMEMBER_FEATURE_CALL__SPREADING = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Null Safe</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XMEMBER_FEATURE_CALL__NULL_SAFE = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>XMember Feature Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XMEMBER_FEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 3;
+	int XMEMBER_FEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl <em>XFeature Call</em>}' class.
@@ -1588,6 +1606,28 @@ public interface XbasePackage extends EPackage
 	EAttribute getXMemberFeatureCall_ExplicitOperationCall();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isSpreading <em>Spreading</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Spreading</em>'.
+	 * @see org.eclipse.xtext.xbase.XMemberFeatureCall#isSpreading()
+	 * @see #getXMemberFeatureCall()
+	 * @generated
+	 */
+	EAttribute getXMemberFeatureCall_Spreading();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isNullSafe <em>Null Safe</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Null Safe</em>'.
+	 * @see org.eclipse.xtext.xbase.XMemberFeatureCall#isNullSafe()
+	 * @see #getXMemberFeatureCall()
+	 * @generated
+	 */
+	EAttribute getXMemberFeatureCall_NullSafe();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XFeatureCall <em>XFeature Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2398,6 +2438,22 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EAttribute XMEMBER_FEATURE_CALL__EXPLICIT_OPERATION_CALL = eINSTANCE.getXMemberFeatureCall_ExplicitOperationCall();
+
+		/**
+		 * The meta object literal for the '<em><b>Spreading</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XMEMBER_FEATURE_CALL__SPREADING = eINSTANCE.getXMemberFeatureCall_Spreading();
+
+		/**
+		 * The meta object literal for the '<em><b>Null Safe</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XMEMBER_FEATURE_CALL__NULL_SAFE = eINSTANCE.getXMemberFeatureCall_NullSafe();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl <em>XFeature Call</em>}' class.

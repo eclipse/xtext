@@ -53,6 +53,7 @@ public class XcssParser extends AbstractContentAssistParser {
 					put(grammarAccess.getOpMultiAccess().getAlternatives(), "rule__OpMulti__Alternatives");
 					put(grammarAccess.getXUnaryOperationAccess().getAlternatives(), "rule__XUnaryOperation__Alternatives");
 					put(grammarAccess.getOpUnaryAccess().getAlternatives(), "rule__OpUnary__Alternatives");
+					put(grammarAccess.getXMemberFeatureCallAccess().getAlternatives_1_1(), "rule__XMemberFeatureCall__Alternatives_1_1");
 					put(grammarAccess.getXPrimaryExpressionAccess().getAlternatives(), "rule__XPrimaryExpression__Alternatives");
 					put(grammarAccess.getXSwitchExpressionAccess().getAlternatives_4_2(), "rule__XSwitchExpression__Alternatives_4_2");
 					put(grammarAccess.getXCasePartAccess().getAlternatives_3(), "rule__XCasePart__Alternatives_3");
@@ -196,6 +197,8 @@ public class XcssParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXMultiplicativeExpressionAccess().getRightOperandAssignment_1_2(), "rule__XMultiplicativeExpression__RightOperandAssignment_1_2");
 					put(grammarAccess.getXUnaryOperationAccess().getFeatureAssignment_0_1(), "rule__XUnaryOperation__FeatureAssignment_0_1");
 					put(grammarAccess.getXUnaryOperationAccess().getOperandAssignment_0_2(), "rule__XUnaryOperation__OperandAssignment_0_2");
+					put(grammarAccess.getXMemberFeatureCallAccess().getNullSafeAssignment_1_1_1(), "rule__XMemberFeatureCall__NullSafeAssignment_1_1_1");
+					put(grammarAccess.getXMemberFeatureCallAccess().getSpreadingAssignment_1_1_2(), "rule__XMemberFeatureCall__SpreadingAssignment_1_1_2");
 					put(grammarAccess.getXMemberFeatureCallAccess().getTypeArgumentsAssignment_1_2_1(), "rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_1");
 					put(grammarAccess.getXMemberFeatureCallAccess().getTypeArgumentsAssignment_1_2_2_1(), "rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_2_1");
 					put(grammarAccess.getXMemberFeatureCallAccess().getFeatureAssignment_1_3(), "rule__XMemberFeatureCall__FeatureAssignment_1_3");

@@ -34,6 +34,8 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#getMemberCallTarget <em>Member Call Target</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#getMemberCallArguments <em>Member Call Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#isExplicitOperationCall <em>Explicit Operation Call</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#isSpreading <em>Spreading</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#isNullSafe <em>Null Safe</em>}</li>
  * </ul>
  * </p>
  *
@@ -80,6 +82,46 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * @ordered
 	 */
 	protected boolean explicitOperationCall = EXPLICIT_OPERATION_CALL_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isSpreading() <em>Spreading</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSpreading()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean SPREADING_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isSpreading() <em>Spreading</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSpreading()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean spreading = SPREADING_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isNullSafe() <em>Null Safe</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isNullSafe()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean NULL_SAFE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isNullSafe() <em>Null Safe</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isNullSafe()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean nullSafe = NULL_SAFE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -192,6 +234,52 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isSpreading()
+	{
+		return spreading;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSpreading(boolean newSpreading)
+	{
+		boolean oldSpreading = spreading;
+		spreading = newSpreading;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XMEMBER_FEATURE_CALL__SPREADING, oldSpreading, spreading));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isNullSafe()
+	{
+		return nullSafe;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNullSafe(boolean newNullSafe)
+	{
+		boolean oldNullSafe = nullSafe;
+		nullSafe = newNullSafe;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XMEMBER_FEATURE_CALL__NULL_SAFE, oldNullSafe, nullSafe));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -221,6 +309,10 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 				return getMemberCallArguments();
 			case XbasePackage.XMEMBER_FEATURE_CALL__EXPLICIT_OPERATION_CALL:
 				return isExplicitOperationCall();
+			case XbasePackage.XMEMBER_FEATURE_CALL__SPREADING:
+				return isSpreading();
+			case XbasePackage.XMEMBER_FEATURE_CALL__NULL_SAFE:
+				return isNullSafe();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -246,6 +338,12 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 			case XbasePackage.XMEMBER_FEATURE_CALL__EXPLICIT_OPERATION_CALL:
 				setExplicitOperationCall((Boolean)newValue);
 				return;
+			case XbasePackage.XMEMBER_FEATURE_CALL__SPREADING:
+				setSpreading((Boolean)newValue);
+				return;
+			case XbasePackage.XMEMBER_FEATURE_CALL__NULL_SAFE:
+				setNullSafe((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -269,6 +367,12 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 			case XbasePackage.XMEMBER_FEATURE_CALL__EXPLICIT_OPERATION_CALL:
 				setExplicitOperationCall(EXPLICIT_OPERATION_CALL_EDEFAULT);
 				return;
+			case XbasePackage.XMEMBER_FEATURE_CALL__SPREADING:
+				setSpreading(SPREADING_EDEFAULT);
+				return;
+			case XbasePackage.XMEMBER_FEATURE_CALL__NULL_SAFE:
+				setNullSafe(NULL_SAFE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -289,6 +393,10 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 				return memberCallArguments != null && !memberCallArguments.isEmpty();
 			case XbasePackage.XMEMBER_FEATURE_CALL__EXPLICIT_OPERATION_CALL:
 				return explicitOperationCall != EXPLICIT_OPERATION_CALL_EDEFAULT;
+			case XbasePackage.XMEMBER_FEATURE_CALL__SPREADING:
+				return spreading != SPREADING_EDEFAULT;
+			case XbasePackage.XMEMBER_FEATURE_CALL__NULL_SAFE:
+				return nullSafe != NULL_SAFE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -306,6 +414,10 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (explicitOperationCall: ");
 		result.append(explicitOperationCall);
+		result.append(", spreading: ");
+		result.append(spreading);
+		result.append(", nullSafe: ");
+		result.append(nullSafe);
 		result.append(')');
 		return result.toString();
 	}

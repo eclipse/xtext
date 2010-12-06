@@ -663,9 +663,10 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XMemberFeatureCall returns XExpression:
-	//	XPrimaryExpression ({XMemberFeatureCall.memberCallTarget=current} "." ("<" typeArguments+=JvmArgumentTypeReference
-	//	("," typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifyableElement]
-	//	(explicitOperationCall?="(" (memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")?)*;
+	//	XPrimaryExpression ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | spreading?="*.") ("<"
+	//	typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
+	//	feature=[types::JvmIdentifyableElement] (explicitOperationCall?="(" (memberCallArguments+=XExpression (","
+	//	memberCallArguments+=XExpression)*)? ")")?)*;
 	public XbaseGrammarAccess.XMemberFeatureCallElements getXMemberFeatureCallAccess() {
 		return gaXbase.getXMemberFeatureCallAccess();
 	}

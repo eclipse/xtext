@@ -529,6 +529,12 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		IEvaluationResult memberCallTarget = evaluate(featureCall.getMemberCallTarget(), context);
 		if (memberCallTarget.getException() != null)
 			return memberCallTarget;
+		if (memberCallTarget.getResult()==null) {
+			if (featureCall.isNullSafe())
+				return new DefaultEvaluationResult(null,null);
+			else
+				return new DefaultEvaluationResult(null,new NullPointerException("the receiver "+featureCall.getMemberCallTarget()+" evaluated to null"));
+		}
 		IEvaluationResult result = featureCallDispatcher.invoke(featureCall.getFeature(), featureCall, memberCallTarget.getResult(), context);
 		return result;
 	}

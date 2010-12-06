@@ -18,6 +18,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#getMemberCallTarget <em>Member Call Target</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#getMemberCallArguments <em>Member Call Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isExplicitOperationCall <em>Explicit Operation Call</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isSpreading <em>Spreading</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isNullSafe <em>Null Safe</em>}</li>
  * </ul>
  * </p>
  *
@@ -94,5 +96,57 @@ public interface XMemberFeatureCall extends XAbstractFeatureCall
 	 * @generated
 	 */
 	void setExplicitOperationCall(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Spreading</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Spreading</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Spreading</em>' attribute.
+	 * @see #setSpreading(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXMemberFeatureCall_Spreading()
+	 * @model
+	 * @generated
+	 */
+	boolean isSpreading();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isSpreading <em>Spreading</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Spreading</em>' attribute.
+	 * @see #isSpreading()
+	 * @generated
+	 */
+	void setSpreading(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Null Safe</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Null Safe</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Null Safe</em>' attribute.
+	 * @see #setNullSafe(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXMemberFeatureCall_NullSafe()
+	 * @model
+	 * @generated
+	 */
+	boolean isNullSafe();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isNullSafe <em>Null Safe</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Null Safe</em>' attribute.
+	 * @see #isNullSafe()
+	 * @generated
+	 */
+	void setNullSafe(boolean value);
 
 } // XMemberFeatureCall
