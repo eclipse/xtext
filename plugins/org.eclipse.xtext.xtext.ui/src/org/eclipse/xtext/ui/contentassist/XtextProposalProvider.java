@@ -67,6 +67,7 @@ import org.eclipse.xtext.xtext.UsedRulesFinder;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -546,6 +547,33 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 					}
 				});
 		return !Iterables.contains(allRuleNames, eClassifier);
-
 	}
+	
+	@Override
+	public void completeParserRule_HiddenTokens(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeHiddenTokens(assignment, context, acceptor);
+	}
+
+	@Override
+	public void completeGrammar_HiddenTokens(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeHiddenTokens(assignment, context, acceptor);
+	}
+	
+	protected void completeHiddenTokens(Assignment assignment, final ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		CrossReference crossReference = (CrossReference) assignment.getTerminal();
+		lookupCrossReference(crossReference, context, acceptor, new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				EObject object = input.getEObjectOrProxy();
+				if (object.eIsProxy())
+					object = context.getResource().getResourceSet().getEObject(input.getEObjectURI(), true);
+				if (object instanceof TerminalRule)
+					return !((TerminalRule) object).isFragment();
+				return false;
+			}
+		});
+	}
+	
 }
