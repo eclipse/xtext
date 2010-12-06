@@ -86,6 +86,14 @@ public class ParserTest extends AbstractXtextTests {
 	public void testString_03() throws Exception {
 		doTest("ab cd", "'ab cd'", stringFeature);
 	}
+	
+	public void testString_04() throws Exception {
+		doTest("ab\\cd", "'ab\\\\cd'", stringFeature);
+	}
+	
+	public void testString_05() throws Exception {
+		doTest("ab\ncd", "'ab\\ncd'", stringFeature);
+	}
 
 	public void testMlComment_01() throws Exception {
 		doTest("/* abc */", "/* abc */", mlCommentFeature);
