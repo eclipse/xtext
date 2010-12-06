@@ -316,7 +316,7 @@ finally {
 «ENDDEFINE»
 
 «DEFINE rule FOR TerminalRule»
-«ruleName()» : «toLexerBody()»;
+«IF fragment»fragment «ENDIF»«ruleName()» : «toLexerBody()»;
 «ENDDEFINE»
 
 «DEFINE ebnf FOR AbstractElement-»
