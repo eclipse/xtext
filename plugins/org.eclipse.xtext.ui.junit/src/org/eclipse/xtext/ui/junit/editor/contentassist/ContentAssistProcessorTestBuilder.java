@@ -153,7 +153,7 @@ public class ContentAssistProcessorTestBuilder {
 					proposedText = ((ReplacementTextApplier) configurableProposal.getTextApplier()).getActualReplacementString(configurableProposal);
 				}
 			}
-			Assert.assertTrue("expect completionProposal text '" + expectation + "', but got " +
+			Assert.assertTrue("Missing proposal '" + proposedText + "'. Expect completionProposal text '" + expectation + "', but got " +
 					Strings.concat(", ", toString(computeCompletionProposals)),
 					Arrays.asList(expectedText).contains(proposedText));
 		}

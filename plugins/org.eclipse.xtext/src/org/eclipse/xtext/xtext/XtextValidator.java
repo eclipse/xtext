@@ -528,14 +528,31 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 
 	@Check
 	public void checkUnassignedRuleCallAllowed(final RuleCall call) {
-		if (call.getRule() != null && GrammarUtil.containingAssignment(call) == null) {
+		if (call.getRule() != null && !call.getRule().eIsProxy() && GrammarUtil.containingAssignment(call) == null) {
 			AbstractRule container = EcoreUtil2.getContainerOfType(call, AbstractRule.class);
 			if (call.getRule() instanceof ParserRule) {
 				if (container instanceof TerminalRule) {
-					error("Cannot call parser rule from terminal rule.", null);
+					getMessageAcceptor().acceptError("Cannot call parser rule from terminal rule.", call, XtextPackage.RULE_CALL__RULE, null);
 				}
 				else if (!GrammarUtil.isDatatypeRule((ParserRule) call.getRule()))
 					checkCurrentMustBeUnassigned(call);
+			}
+			if (call.getRule() instanceof EnumRule) {
+				if (container instanceof TerminalRule) {
+					getMessageAcceptor().acceptError("Cannot call enum rule from terminal rule.", call, XtextPackage.RULE_CALL__RULE, null);
+				}
+			}
+		}
+	}
+	
+	@Check
+	public void checkTerminalFragmentCalledFromTerminalRule(final RuleCall call) {
+		if (call.getRule() != null && !call.getRule().eIsProxy() && GrammarUtil.containingAssignment(call) != null) {
+			if (call.getRule() instanceof TerminalRule && ((TerminalRule) call.getRule()).isFragment()) {
+				AbstractRule container = EcoreUtil2.getContainerOfType(call, AbstractRule.class);
+				if (!(container instanceof TerminalRule)) {
+					getMessageAcceptor().acceptError("Only terminal rules may use terminal fragments.", call, XtextPackage.RULE_CALL__RULE, null);
+				}
 			}
 		}
 	}

@@ -480,7 +480,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .appendNl("'class' name=ID ('extends' references=[Class])?;");
 	}
     
-    public void testCompleteRuleCallForReferencedType() throws Exception {
+    public void testCompleteRuleForReferencedType() throws Exception {
     	newBuilder(getXtextSetup())
 			.appendNl("grammar Foo with org.eclipse.xtext.common.Terminals")
 			.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\"") 
@@ -494,7 +494,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     		.assertText(":");
     }
 
-    public void testCompleteRuleCallForReferencedTypeWithAlias() throws Exception {
+    public void testCompleteRuleForReferencedTypeWithAlias() throws Exception {
     	newBuilder(getXtextSetup())
     		.appendNl("grammar Foo with org.eclipse.xtext.common.Terminals")
     		.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\" as ecore") 
@@ -605,4 +605,58 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	    			"STRING",
 	    			"Terminal");
     }
+    
+    public void testCompleteRuleCall_01() throws Exception {
+    	newBuilder(getXtextSetup())
+	    	.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
+	    	.appendNl("generate test 'http://test'")
+	    	.appendNl("Model: name=ID;")
+	    	.appendNl("DataType: ID;")
+	    	.appendNl("enum EnumType: A | B;")
+	    	.appendNl("terminal fragment Fragment: 'a'..'z';")
+	    	.appendNl("terminal Terminal: 'a'..'z';")
+	    	.assertTextAtCursorPosition("ID", 
+	    			"=", 
+	    			"[",
+	    			"(",
+	    			"\"Value\"",
+	    			"WS", 
+	    			"SL_COMMENT", 
+	    			"ML_COMMENT",
+	    			"ID",
+	    			"INT",
+	    			"ANY_OTHER",
+	    			"STRING",
+    				"Terminal",
+    				"DataType",
+    				"Model",
+    				"EnumType");
+    }
+    
+    public void testCompleteRuleCall_02() throws Exception {
+    	newBuilder(getXtextSetup())
+	    	.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
+	    	.appendNl("generate test 'http://test'")
+	    	.appendNl("Model: name=STRING;")
+	    	.appendNl("DataType: STRING;")
+	    	.appendNl("enum EnumType: A | B;")
+	    	.appendNl("terminal fragment Fragment: 'a'..'z';")
+	    	.appendNl("terminal Terminal: ID;")
+	    	.assertTextAtCursorPosition("ID", 
+	    			"\"Value\"", 
+	    			"(",
+	    			"->",
+	    			".",
+	    			"!",
+	    			"WS", 
+	    			"SL_COMMENT", 
+	    			"ML_COMMENT",
+	    			"ID",
+	    			"INT",
+	    			"ANY_OTHER",
+	    			"STRING",
+    				"Terminal",
+    				"Fragment");
+    }
+    
 }

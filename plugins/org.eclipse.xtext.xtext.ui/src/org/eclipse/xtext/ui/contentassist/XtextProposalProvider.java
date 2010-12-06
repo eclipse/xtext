@@ -49,6 +49,7 @@ import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextFactory;
+import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -561,19 +562,55 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 		completeHiddenTokens(assignment, context, acceptor);
 	}
 	
+	/**
+	 * Do not propose terminal fragments in hidden token sections.
+	 */
 	protected void completeHiddenTokens(Assignment assignment, final ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		CrossReference crossReference = (CrossReference) assignment.getTerminal();
 		lookupCrossReference(crossReference, context, acceptor, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
-				EObject object = input.getEObjectOrProxy();
-				if (object.eIsProxy())
-					object = context.getResource().getResourceSet().getEObject(input.getEObjectURI(), true);
-				if (object instanceof TerminalRule)
-					return !((TerminalRule) object).isFragment();
+				if (input.getEClass() == XtextPackage.Literals.TERMINAL_RULE) {
+					EObject object = input.getEObjectOrProxy();
+					if (object.eIsProxy())
+						object = context.getResource().getResourceSet().getEObject(input.getEObjectURI(), true);
+					if (object instanceof TerminalRule)
+						return !((TerminalRule) object).isFragment();
+				}
 				return false;
 			}
 		});
+	}
+	
+	/**
+	 * Do not propose enum and parser rules inside of terminal rules,
+	 * do not propose terminal fragments in parser rules.
+	 */
+	@Override
+	public void completeRuleCall_Rule(EObject model, Assignment assignment, final ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		AbstractRule containingRule = EcoreUtil2.getContainerOfType(model, AbstractRule.class);
+		CrossReference crossReference = (CrossReference) assignment.getTerminal();
+		if (containingRule instanceof TerminalRule) {
+			lookupCrossReference(crossReference, context, acceptor, new Predicate<IEObjectDescription>() {
+				public boolean apply(IEObjectDescription input) {
+					return input.getEClass() == XtextPackage.Literals.TERMINAL_RULE;
+				}
+			});	
+		} else {
+			lookupCrossReference(crossReference, context, acceptor, new Predicate<IEObjectDescription>() {
+				public boolean apply(IEObjectDescription input) {
+					if (input.getEClass() == XtextPackage.Literals.TERMINAL_RULE) {
+						EObject object = input.getEObjectOrProxy();
+						if (object.eIsProxy())
+							object = context.getResource().getResourceSet().getEObject(input.getEObjectURI(), true);
+						if (object instanceof TerminalRule)
+							return !((TerminalRule) object).isFragment();
+					}
+					return true;
+				}
+			});
+		}
 	}
 	
 }
