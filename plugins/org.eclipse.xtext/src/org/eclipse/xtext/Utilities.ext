@@ -1,7 +1,0 @@
-// *************************
-// generic utilities
-
-subList(List this, Object start, Object end) :
-	let s = (contains(start) ? indexOf(start) : 0) :
-		let e = (contains(end) ? indexOf(end) : this.size) :
-			select(x|let ix = indexOf(x) : ix>=s && ix<=e);

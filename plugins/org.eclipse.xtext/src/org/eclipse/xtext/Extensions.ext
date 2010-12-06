@@ -47,14 +47,6 @@ boolean isQualified(String name) :
 	name.contains("::")
 ;
 
-/*TODO remove me, don't use me 
-String getTypeName(String fqn) :
-	isQualified(fqn) ? fqn.split("::").last() : fqn
-;
-*/
-
 String getAlias(String fqn) :
 	isQualified(fqn) ? fqn.split("::").first() : null
 ;
-
-
