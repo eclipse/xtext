@@ -34,7 +34,7 @@ Identifiers
 
 
 <p>
-Identifiers are used to name all constructs, such as types, methods and variables. They start with a &quot;Java letter&quot;, which is a character for which the Java method 
+Identifiers are used to name all constructs, such as types, methods and variables. They start with a "Java letter", which is a character for which the Java method 
 <em>Character.isJavaIdentifierstart(char)</em>
 returns <em>true</em>. For the other characters also digits (0...9) are allowed. For those the method <em>Character.isJavaIdentifierPart(char)</em> must be true.
 See <a href="http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.8">§ 3.8 Identifiers</a> for the original definition in the Java Language Specification.
@@ -62,7 +62,7 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-//TODO<br />
+
 </p>
 </div>
 </div>
@@ -91,11 +91,11 @@ Escaped Identifiers
 
 <p>
 Identifiers may not have the same spelling as any reserved keyword. 
-However, identifiers starting with a <span class="inlinecode">^</span>
+However, identifiers starting with a <span class="inlinecode"></span>
  are so called escaped identifiers. Escaped identifiers are used in cases when there is a 
-conflict with a reserved keyword. Imagine you have introduced a keyword <span class="inlinecode">service</span>
+conflict with a reserved keyword. Imagine you have introduced a keyword <span class="inlinecode"></span>
  in your language but want to call a Java property <em>service</em> at some point. 
-In such cases you use an escaped identifier <span class="inlinecode">^service</span>
+In such cases you use an escaped identifier <span class="inlinecode"></span>
  to reference the Java property.
 </p>
 
@@ -125,7 +125,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode">Foo</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -134,7 +134,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode">Foo42</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -143,7 +143,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode">FOO</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -152,7 +152,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode">_42</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -161,7 +161,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode">_foo</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -170,7 +170,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode">^extends</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -202,7 +202,7 @@ String Literals
 
 
 <p>
-String literals can either use single quotes (&apos;) or double quotes (&quot;) as their terminals. When using double quotes all literals allowed by Java string literals are
+String literals can either use single quotes (&apos;) or double quotes (") as their terminals. When using double quotes all literals allowed by Java string literals are
 supported. In addition new line characters are allowed, that is in Xbase all string literals can span multiple lines. When using single quotes the only difference
 is that single quotes within the literal have to be escaped and double quotes do not.
 </p>
@@ -237,7 +237,7 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-//TODO<br />
+
 </p>
 </div>
 </div>
@@ -271,7 +271,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode">&apos;Foo&nbsp;Bar&nbsp;Baz&apos;</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -280,7 +280,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode">&quot;Foo&nbsp;Bar&nbsp;Baz&quot;</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -293,7 +293,7 @@ Examples
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-&quot;&nbsp;the&nbsp;quick&nbsp;brown&nbsp;fox&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jumps&nbsp;over&nbsp;the&nbsp;lazy&nbsp;dog.&quot;
+
 </p>
 </div>
 </div>
@@ -306,7 +306,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode">&apos;Escapes&nbsp;:&nbsp;\&apos;&nbsp;&apos;</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -315,7 +315,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode">&quot;Escapes&nbsp;:&nbsp;\&quot;&nbsp;&quot;</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -348,17 +348,17 @@ Integer Literals
 
 <p>
 Integer literals consist of one or more digits. 
-Only decimal literals are supported and they always result in a value of type <span class="inlinecode">java.lang.Integer</span>
+Only decimal literals are supported and they always result in a value of type <span class="inlinecode"></span>
  
-(it might result in native type <span class="inlinecode">int</span>
+(it might result in native type <span class="inlinecode"></span>
  when translated to Java, see 
 <a href="03-Types.xdoc.html#Types">Types</a>).
 The compiler makes sure that only numbers between 0 and <em>Integer.MAX</em> (0x7fffffff) are used.
 </p>
 
 <p>
-There is no negative integer literal, instead the expression <span class="inlinecode">-23</span>
- is parsed as the prefix operator <span class="inlinecode">-</span>
+There is no negative integer literal, instead the expression <span class="inlinecode"></span>
+ is parsed as the prefix operator <span class="inlinecode"></span>
  applied to an integer literal.
 </p>
 
@@ -384,7 +384,7 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-terminal&nbsp;INT&nbsp;returns&nbsp;ecore::EInt:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(&apos;0&apos;..&apos;9&apos;)+<br />;<br />
+
 </p>
 </div>
 </div>
@@ -440,7 +440,7 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-terminal&nbsp;ML_COMMENT&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;/*&apos;&nbsp;-&gt;&nbsp;&apos;*/&apos;<br />;<br />terminal&nbsp;SL_COMMENT&nbsp;:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;//&apos;&nbsp;!(&apos;\n&apos;|&apos;\r&apos;)*&nbsp;(&apos;\r&apos;?&nbsp;&apos;\n&apos;)?<br />;<br />
+
 </p>
 </div>
 </div>
@@ -470,10 +470,10 @@ White Space
 
 
 <p>
-The white space characters <span class="inlinecode">&apos;&nbsp;&apos;</span>
-, <span class="inlinecode">&apos;\t&apos;</span>
-, <span class="inlinecode">&apos;\n&apos;</span>
-, and <span class="inlinecode">&apos;\r</span>
+The white space characters <span class="inlinecode"></span>
+, <span class="inlinecode"></span>
+, <span class="inlinecode"></span>
+, and <span class="inlinecode"></span>
  are allowed to occur anywhere between the other syntactic elements. 
 </p>
 
@@ -504,7 +504,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 <li>
 
 <p>
-<span class="inlinecode">extends</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -513,7 +513,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 <li>
 
 <p>
-<span class="inlinecode">super</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -522,7 +522,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 <li>
 
 <p>
-<span class="inlinecode">instanceof</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -531,7 +531,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 <li>
 
 <p>
-<span class="inlinecode">new</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -540,7 +540,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 <li>
 
 <p>
-<span class="inlinecode">null</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -549,7 +549,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 <li>
 
 <p>
-<span class="inlinecode">false</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -558,7 +558,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 <li>
 
 <p>
-<span class="inlinecode">true</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -567,7 +567,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 <li>
 
 <p>
-<span class="inlinecode">val</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -576,7 +576,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 <li>
 
 <p>
-<span class="inlinecode">var</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -585,7 +585,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 <li>
 
 <p>
-<span class="inlinecode">if</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -594,7 +594,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 <li>
 
 <p>
-<span class="inlinecode">else</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -603,7 +603,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 <li>
 
 <p>
-<span class="inlinecode">switch</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -612,7 +612,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 <li>
 
 <p>
-<span class="inlinecode">case</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -621,7 +621,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 <li>
 
 <p>
-<span class="inlinecode">default</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -630,7 +630,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 <li>
 
 <p>
-<span class="inlinecode">do</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -639,7 +639,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 <li>
 
 <p>
-<span class="inlinecode">while</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -648,7 +648,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 <li>
 
 <p>
-<span class="inlinecode">for</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -657,7 +657,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 <li>
 
 <p>
-<span class="inlinecode">class</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -666,7 +666,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 <li>
 
 <p>
-<span class="inlinecode">throw</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -675,7 +675,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 <li>
 
 <p>
-<span class="inlinecode">try</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -684,7 +684,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 <li>
 
 <p>
-<span class="inlinecode">catch</span>
+<span class="inlinecode"></span>
 
 </p>
 
@@ -693,7 +693,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 <li>
 
 <p>
-<span class="inlinecode">finally</span>
+<span class="inlinecode"></span>
 
 </p>
 
