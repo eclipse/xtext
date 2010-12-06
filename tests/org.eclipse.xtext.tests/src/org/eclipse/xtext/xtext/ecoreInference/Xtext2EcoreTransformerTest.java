@@ -1286,4 +1286,121 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		}
 	}
 	
+	public void testOverrideTerminalFragment_01() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n" + 
+			"terminal fragment ESCAPED_CHAR: '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\\');"; 
+		getResourceFromString(grammarAsString);
+	}
+	
+	public void testOverrideTerminalFragment_02() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n" + 
+			"terminal ESCAPED_CHAR: '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\\');"; 
+		getResourceFromString(grammarAsString);
+	}
+	
+	public void testOverrideTerminalFragment_03() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n" + 
+			"ESCAPED_CHAR: '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\\');"; 
+		getResourceFromStringAndExpect(grammarAsString, 1);
+	}
+	
+	public void testOverrideTerminalFragment_04() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n" + 
+			"enum ESCAPED_CHAR: A | B;"; 
+		getResourceFromStringAndExpect(grammarAsString, 1);
+	}
+	
+	public void testOverrideTerminalRule_01() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n" + 
+			"terminal fragment ID: 'a'..'z'+;"; 
+		getResourceFromStringAndExpect(grammarAsString, 1);
+	}
+	
+	public void testOverrideTerminalRule_02() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n" + 
+			"terminal ID: 'a'..'z'+;"; 
+		getResourceFromString(grammarAsString);
+	}
+	
+	public void testOverrideTerminalRule_03() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n" + 
+			"ID: 'a' | 'z';"; 
+		getResourceFromStringAndExpect(grammarAsString, 1);
+	}
+	
+	public void testOverrideTerminalRule_04() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage\n" + 
+			"enum ID: A | B;"; 
+		getResourceFromStringAndExpect(grammarAsString, 1);
+	}
+	
+	public void testOverrideDatatypeRule_01() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage\n" + 
+			"terminal fragment ModelId: 'a'..'z'+;"; 
+		getResourceFromStringAndExpect(grammarAsString, 1);
+	}
+	
+	public void testOverrideDatatypeRule_02() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage\n" + 
+			"terminal ModelId: 'a'..'z'+;"; 
+		getResourceFromString(grammarAsString);
+	}
+	
+	public void testOverrideDatatypeRule_03() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage\n" + 
+			"ModelId: 'a' | 'z';"; 
+		getResourceFromString(grammarAsString);
+	}
+	
+	public void testOverrideDatatypeRule_04() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.xtext.ecoreInference.DataTypeRuleWithEnumResultTestLanguage\n" +
+			"import 'http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest'\n" + 
+			"import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'\n" +
+			"enum ExistingEnumAsDT returns ExistingEnum: SameName;"; 
+		getResourceFromString(grammarAsString);
+	}
+	
+	public void testOverrideEnumRule_01() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
+			"import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'\n" +
+			"terminal fragment ExistingEnum: 'a'..'z'+;"; 
+		getResourceFromStringAndExpect(grammarAsString, 1);
+	}
+	
+	public void testOverrideEnumRule_02() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
+			"import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'\n" +
+			"terminal ExistingEnum returns ExistingEnum: 'a'..'z'+;"; 
+		getResourceFromString(grammarAsString);
+	}
+	
+	public void testOverrideEnumRule_03() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
+			"import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'\n" +
+			"ExistingEnum returns ExistingEnum: 'a' | 'z';"; 
+		getResourceFromString(grammarAsString);
+	}
+	
+	public void testOverrideEnumRule_04() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
+			"import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'\n" +
+			"enum ExistingEnum: SameName;"; 
+		getResourceFromString(grammarAsString);
+	}
 }
