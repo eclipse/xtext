@@ -317,8 +317,21 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 	public void testNullSafeOperator_01() {
 		assertEvaluatesWithException(NullPointerException.class, "null.toString()");
 		assertEvaluatesWithException(NullPointerException.class, "null?.toString().toString()");
+	}
+	
+	public void testNullSafeOperator_02() {
 		assertEvaluatesTo(null, "null?.toString()");
 		assertEvaluatesTo(null, "null?.toString()?.toString()");
+	}
+	
+	public void testSpreadOperator_01() {
+		assertEvaluatesWithException(NullPointerException.class, "null*.toString()");
+		assertEvaluatesWithException(ClassCastException.class, "''*.toString()");
+	}
+	
+	public void testSpreadOperator_02() {
+		assertEvaluatesTo(Lists.newArrayList(
+				"A", "B", "C"), "'abc'.toCharArray*.toString*.toUpperCase");
 	}
 	
 	public void testSwitchExpression_01() {
