@@ -314,9 +314,11 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 				"new testdata.FieldAccess().finalField");
 	}
 	
-	public void testMemberFeatureCall_08() {
+	public void testNullSafeOperator_01() {
 		assertEvaluatesWithException(NullPointerException.class, "null.toString()");
+		assertEvaluatesWithException(NullPointerException.class, "null?.toString().toString()");
 		assertEvaluatesTo(null, "null?.toString()");
+		assertEvaluatesTo(null, "null?.toString()?.toString()");
 	}
 	
 	public void testSwitchExpression_01() {

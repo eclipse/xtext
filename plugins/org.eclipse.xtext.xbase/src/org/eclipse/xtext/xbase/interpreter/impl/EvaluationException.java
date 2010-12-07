@@ -7,28 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.interpreter.impl;
 
-import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
-
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DefaultEvaluationResult implements IEvaluationResult {
+public class EvaluationException extends RuntimeException {
 
-	private final Object result;
-	private final Throwable throwable;
+	private static final long serialVersionUID = 1L;
 
-	public DefaultEvaluationResult(Object result, Throwable throwable) {
-		this.result = result;
-		this.throwable = throwable;
-	}
-	
-	public Throwable getException() {
-		return throwable;
-	}
-
-	public Object getResult() {
-		return result;
+	public EvaluationException(Throwable cause) {
+		super(cause);
 	}
 
 }
