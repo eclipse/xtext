@@ -198,19 +198,19 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		this.classLoader = classLoader;
 	}
 	
-	private PolymorphicDispatcher<IEvaluationResult> evaluateDispatcher = createEvaluateDispatcher();
-	private PolymorphicDispatcher<IEvaluationResult> assignmentDispatcher = createAssignmentDispatcher();
-	private PolymorphicDispatcher<IEvaluationResult> featureCallDispatcher = createFeatureCallDispatcher();
+	private PolymorphicDispatcher<Object> evaluateDispatcher = createEvaluateDispatcher();
+	private PolymorphicDispatcher<Object> assignmentDispatcher = createAssignmentDispatcher();
+	private PolymorphicDispatcher<Object> featureCallDispatcher = createFeatureCallDispatcher();
 
-	protected PolymorphicDispatcher<IEvaluationResult> createEvaluateDispatcher() {
+	protected PolymorphicDispatcher<Object> createEvaluateDispatcher() {
 		return PolymorphicDispatcher.createForSingleTarget(new PrefixMethodFilter("_evaluate", 2, 2), this);
 	}
 	
-	protected PolymorphicDispatcher<IEvaluationResult> createAssignmentDispatcher() {
+	protected PolymorphicDispatcher<Object> createAssignmentDispatcher() {
 		return PolymorphicDispatcher.createForSingleTarget(new PrefixMethodFilter("_assignValue", 4, 4), this);
 	}
 	
-	protected PolymorphicDispatcher<IEvaluationResult> createFeatureCallDispatcher() {
+	protected PolymorphicDispatcher<Object> createFeatureCallDispatcher() {
 		return PolymorphicDispatcher.createForSingleTarget(new PrefixMethodFilter("_featureCall", 4, 4), this);
 	}
 	
@@ -223,44 +223,55 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 
 	public IEvaluationResult evaluate(EObject expression, IEvaluationContext context) {
-		IEvaluationResult result = evaluateDispatcher.invoke(expression, context);
+		try {
+			Object result = internalEvaluate(expression, context);
+			// TODO: should we unwrap the array?
+//			result = unwrapArray(result);
+			return new DefaultEvaluationResult(result, null);
+		} catch(EvaluationException e) {
+			return new DefaultEvaluationResult(null, e.getCause());
+		}
+	}
+	
+	protected Object internalEvaluate(EObject expression, IEvaluationContext context) throws EvaluationException {
+		Object result = evaluateDispatcher.invoke(expression, context);
 		result = wrapArray(result);
 		return result;
 	}
 	
-	public IEvaluationResult _evaluateNullLiteral(XNullLiteral literal, IEvaluationContext context) {
-		return DefaultEvaluationResult.NULL;
+	public Object _evaluateNullLiteral(XNullLiteral literal, IEvaluationContext context) {
+		return null;
 	}
 	
-	public IEvaluationResult _evaluateStringLiteral(XStringLiteral literal, IEvaluationContext context) {
-		return new DefaultEvaluationResult(literal.getValue(), null);
+	public Object _evaluateStringLiteral(XStringLiteral literal, IEvaluationContext context) {
+		return literal.getValue();
 	}
 	
-	public IEvaluationResult _evaluateIntLiteral(XIntLiteral literal, IEvaluationContext context) {
-		return new DefaultEvaluationResult(literal.getValue(), null);
+	public Object _evaluateIntLiteral(XIntLiteral literal, IEvaluationContext context) {
+		return literal.getValue();
 	}
 	
-	public IEvaluationResult _evaluateBooleanLiteral(XBooleanLiteral literal, IEvaluationContext context) {
-		return new DefaultEvaluationResult(literal.isIsTrue(), null);
+	public Object _evaluateBooleanLiteral(XBooleanLiteral literal, IEvaluationContext context) {
+		return literal.isIsTrue();
 	}
 	
-	public IEvaluationResult _evaluateTypeLiteral(XTypeLiteral literal, IEvaluationContext context) {
+	public Object _evaluateTypeLiteral(XTypeLiteral literal, IEvaluationContext context) {
 		if (literal.getType() == null || literal.getType().eIsProxy()) {
 			List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(literal, XbasePackage.Literals.XTYPE_LITERAL__TYPE);
 			// TODO cleanup
 			if (nodesForFeature.isEmpty())
-				return new DefaultEvaluationResult(null, new ClassNotFoundException());
-			return new DefaultEvaluationResult(null, new ClassNotFoundException(nodesForFeature.get(0).getText()));
+				throw new EvaluationException(new ClassNotFoundException());
+			throw new EvaluationException(new ClassNotFoundException(nodesForFeature.get(0).getText()));
 		}
 		try {
 			Class<?> result = classFinder.forName(literal.getType().getCanonicalName());
-			return new DefaultEvaluationResult(result, null);
+			return result;
 		} catch(ClassNotFoundException cnfe) {
-			return new DefaultEvaluationResult(null, cnfe);
+			throw new EvaluationException(cnfe);
 		}
 	}
 	
-	public IEvaluationResult _evaluateClosure(XClosure closure, IEvaluationContext context) {
+	public Object _evaluateClosure(XClosure closure, IEvaluationContext context) {
 		Class<?> functionIntf = null;
 		switch(closure.getFormalParameters().size()) {
 			case 0:  functionIntf = Functions.Function0.class; break;
@@ -274,49 +285,41 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 		ClosureInvocationHandler invocationHandler = new ClosureInvocationHandler(closure, context, this);
 		Object proxy = Proxy.newProxyInstance(classLoader, new Class<?>[] { functionIntf }, invocationHandler);
-		return new DefaultEvaluationResult(proxy, null);
+		return proxy;
 	}
 	
-	public IEvaluationResult _evaluateBlockExpression(XBlockExpression literal, IEvaluationContext context) {
+	public Object _evaluateBlockExpression(XBlockExpression literal, IEvaluationContext context) {
 		List<XExpression> expressions = literal.getExpressions();
 		
-		IEvaluationResult result = DefaultEvaluationResult.NULL;
+		Object result = null;
 		IEvaluationContext forkedContext = context.fork();
 		for(int i = 0; i < expressions.size(); i++) {
-			result = evaluate(expressions.get(i), forkedContext);
-			if (result.getException() != null)
-				return new DefaultEvaluationResult(null, result.getException());
+			result = internalEvaluate(expressions.get(i), forkedContext);
 		}
 		return result;
 	}
 	
-	public IEvaluationResult _evaluateIfExpression(XIfExpression ifExpression, IEvaluationContext context) {
-		IEvaluationResult conditionResult = evaluate(ifExpression.getIf(), context);
-		if (conditionResult.getException() != null) {
-			return conditionResult;
-		}
-		if (Boolean.TRUE.equals(conditionResult.getResult())) {
-			return evaluate(ifExpression.getThen(), context);
+	public Object _evaluateIfExpression(XIfExpression ifExpression, IEvaluationContext context) {
+		Object conditionResult = internalEvaluate(ifExpression.getIf(), context);
+		if (Boolean.TRUE.equals(conditionResult)) {
+			return internalEvaluate(ifExpression.getThen(), context);
 		} else {
 			if (ifExpression.getElse() == null)
-				return DefaultEvaluationResult.NULL;
-			return evaluate(ifExpression.getElse(), context);
+				return null;
+			return internalEvaluate(ifExpression.getElse(), context);
 		}
 	}
 	
-	public IEvaluationResult _evaluateSwitchExpression(XSwitchExpression switchExpression, IEvaluationContext context) {
+	public Object _evaluateSwitchExpression(XSwitchExpression switchExpression, IEvaluationContext context) {
 		IEvaluationContext forkedContext = context.fork();
-		IEvaluationResult conditionResult = null;
+		Object conditionResult = null;
 		if (switchExpression.getSwitch() != null) {
-			conditionResult = evaluate(switchExpression.getSwitch(), forkedContext);
-			if (conditionResult.getException() != null) {
-				return conditionResult;
-			}
+			conditionResult = internalEvaluate(switchExpression.getSwitch(), forkedContext);
 			if (!(switchExpression.getSwitch() instanceof XVariableDeclaration)) {
-				forkedContext.newValue(XbaseScopeProvider.THIS, conditionResult.getResult());
+				forkedContext.newValue(XbaseScopeProvider.THIS, conditionResult);
 			}
 		} else {
-			conditionResult = new DefaultEvaluationResult(forkedContext.getValue(XbaseScopeProvider.THIS), null);
+			conditionResult = forkedContext.getValue(XbaseScopeProvider.THIS);
 		}
 		for(XCasePart casePart: switchExpression.getCases()) {
 			Class<?> expectedType = null;
@@ -325,86 +328,85 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 				try {
 					expectedType = classFinder.forName(typeName);
 				} catch (ClassNotFoundException e) {
-					return new DefaultEvaluationResult(null, e);
+					throw new EvaluationException(new NoClassDefFoundError(typeName));
 				}
 			}
-			if (expectedType != null && conditionResult.getResult() == null)
+			if (expectedType != null && conditionResult == null)
 				throw new IllegalStateException("Switch without expression or implicit 'this' may not use type guards");
-			if (expectedType == null || expectedType.isInstance(conditionResult.getResult())) {
+			if (expectedType == null || expectedType.isInstance(conditionResult)) {
 				if (casePart.getCase() != null) {
-					IEvaluationResult casePartResult = evaluate(casePart.getCase(), forkedContext);
-					if (casePartResult.getException() != null)
-						return casePartResult;
-					if (Boolean.TRUE.equals(casePartResult.getResult()) || eq(conditionResult.getResult(), casePartResult.getResult())) {
-						return evaluate(casePart.getThen(), forkedContext);
+					Object casePartResult = internalEvaluate(casePart.getCase(), forkedContext);
+					if (Boolean.TRUE.equals(casePartResult) || eq(conditionResult, casePartResult)) {
+						return internalEvaluate(casePart.getThen(), forkedContext);
 					}
 				} else {
-					return evaluate(casePart.getThen(), forkedContext);
+					return internalEvaluate(casePart.getThen(), forkedContext);
 				}
 			}
 		}
 		if (switchExpression.getDefault() != null) {
-			IEvaluationResult defaultResult = evaluate(switchExpression.getDefault(), forkedContext);
+			Object defaultResult = internalEvaluate(switchExpression.getDefault(), forkedContext);
 			return defaultResult;
 		}
-		return DefaultEvaluationResult.NULL;
+		return null;
 	}
 	
-	public IEvaluationResult _evaluateCastedExpression(XCastedExpression castedExpression, IEvaluationContext context) {
-		IEvaluationResult result = evaluate(castedExpression.getTarget(), context);
-		if (result.getException() != null)
-			return result;
+	public Object _evaluateCastedExpression(XCastedExpression castedExpression, IEvaluationContext context) {
+		Object result = internalEvaluate(castedExpression.getTarget(), context);
 		String typeName = castedExpression.getType().getType().getCanonicalName();
 		Class<?> expectedType = null;
 		try {
 			expectedType = classFinder.forName(typeName);
 		} catch (ClassNotFoundException e) {
-			return new DefaultEvaluationResult(null, e);
+			throw new EvaluationException(new NoClassDefFoundError(typeName));
 		}
 		try {
-			expectedType.cast(result.getResult());
+			expectedType.cast(result);
 		} catch(ClassCastException e) {
-			return new DefaultEvaluationResult(null, e);
+			throw new EvaluationException(e);
 		}
 		return result;
 	}
 	
-	public IEvaluationResult _evaluateThrowExpression(XThrowExpression throwExpression, IEvaluationContext context) {
-		IEvaluationResult thrown = evaluate(throwExpression.getExpression(), context);
-		if (thrown.getException() != null)
-			return thrown;
-		if (thrown.getResult() == null) {
-			return createNullPointerResult(throwExpression, "throwable expression evaluated to 'null'");
+	public Object _evaluateThrowExpression(XThrowExpression throwExpression, IEvaluationContext context) {
+		Object thrown = internalEvaluate(throwExpression.getExpression(), context);
+		if (thrown == null) {
+			return throwNullPointerException(throwExpression, "throwable expression evaluated to 'null'");
 		}
-		if (!(thrown.getResult() instanceof Throwable)) {
-			return createClassCastResult(throwExpression.getExpression(), thrown, Throwable.class);
+		if (!(thrown instanceof Throwable)) {
+			return throwClassCastException(throwExpression.getExpression(), thrown, Throwable.class);
 		}
-		return new DefaultEvaluationResult(null, (Throwable)thrown.getResult());
+		throw new EvaluationException((Throwable)thrown);
 	}
 	
-	public IEvaluationResult _evaluateTryCatchFinallyExpression(XTryCatchFinallyExpression tryCatchFinally, IEvaluationContext context) {
-		IEvaluationResult result = evaluate(tryCatchFinally.getExpression(), context);
-		if (result.getException() != null) {
+	public Object _evaluateTryCatchFinallyExpression(XTryCatchFinallyExpression tryCatchFinally, IEvaluationContext context) {
+		Object result = null;
+		try {
+			result = internalEvaluate(tryCatchFinally.getExpression(), context);
+		} catch(EvaluationException evaluationException) {
+			Throwable cause = evaluationException.getCause();
 			for(XCatchClause catchClause: tryCatchFinally.getCatchClauses()) {
 				JvmFormalParameter exception = catchClause.getDeclaredParam();
 				String exceptionTypeName = exception.getParameterType().getType().getCanonicalName();
 				try {
 					Class<?> exceptionType = classFinder.forName(exceptionTypeName);
-					if (!exceptionType.isInstance(result.getException()))
+					if (!exceptionType.isInstance(cause))
 						continue;
 				} catch(ClassNotFoundException e) {
-					return new DefaultEvaluationResult(null, e);
+					throw new EvaluationException(new NoClassDefFoundError(exceptionTypeName));
 				}
 				IEvaluationContext forked = context.fork();
-				forked.newValue(QualifiedName.create(exception.getName()), result.getException());
-				result = evaluate(catchClause.getExpression(), forked);
+				forked.newValue(QualifiedName.create(exception.getName()), cause);
+				result = internalEvaluate(catchClause.getExpression(), forked);
 				break;
 			}
 		}
+		
 		if (tryCatchFinally.getFinallyExpression() != null) {
-			IEvaluationResult finallyResult = evaluate(tryCatchFinally.getFinallyExpression(), context);
-			if (finallyResult.getException() != null) {
-				return new DefaultEvaluationResult(null, new FinallyDidNotCompleteException(finallyResult.getException()));
+			try {
+				internalEvaluate(tryCatchFinally.getFinallyExpression(), context);
+			} catch(EvaluationException e) {
+				throw new EvaluationException(new FinallyDidNotCompleteException(e));
 			}
 		}
 		return result;
@@ -414,19 +416,20 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return a == b || (a!=null && a.equals(b));
 	}
 	
-	protected IEvaluationResult createNullPointerResult(XExpression expression, String message) {
-		return new DefaultEvaluationResult(null, new NullPointerException(message)); 
+	protected Object throwNullPointerException(XExpression expression, String message) {
+		throw new EvaluationException(new NullPointerException(message)); 
 	}
 	
-	protected IEvaluationResult createClassCastResult(XExpression expression, 
-			IEvaluationResult result, Class<?> expectedType) {
-		return new DefaultEvaluationResult(null, 
-				new ClassCastException("Expected: " + expectedType.getCanonicalName() + " but got: " + result.getResult().getClass().getCanonicalName())); 
+	protected Object throwClassCastException(XExpression expression, 
+			Object result, Class<?> expectedType) {
+		throw new EvaluationException(new ClassCastException(
+						"Expected: " + expectedType.getCanonicalName() + 
+						" but got: " + result.getClass().getCanonicalName()));
 	}
 	
-	protected IEvaluationResult wrapArray(IEvaluationResult result) {
-		if (result.getResult() != null && result.getException() == null) {
-			return wrapArray(result, result.getResult());
+	protected Object wrapArray(Object result) {
+		if (result != null) {
+			return doWrapArray(result);
 		}
 		return result;
 	}
@@ -439,30 +442,28 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return value;
 	}
 	
-	protected IEvaluationResult wrapArray(IEvaluationResult original, Object array) {
-		Class<?> arrayClass = array.getClass();
+	protected Object doWrapArray(Object object) {
+		Class<?> arrayClass = object.getClass();
 		if (arrayClass.isArray()) {
 			if (arrayClass.getComponentType().isPrimitive()) {
-				WrappedPrimitiveArray result = WrappedPrimitiveArray.create(array);
-				return new DefaultEvaluationResult(result, null);
+				WrappedPrimitiveArray result = WrappedPrimitiveArray.create(object);
+				return result;
 			}
-			WrappedArray<Object> result = WrappedArray.create((Object[])array);
-			return new DefaultEvaluationResult(result, null);
+			WrappedArray<Object> result = WrappedArray.create((Object[])object);
+			return result;
 		}
-		return original;
+		return object;
 	}
 	
-	public IEvaluationResult _evaluateForLoopExpression(XForLoopExpression forLoop, IEvaluationContext context) {
-		IEvaluationResult iterableOrIterator = evaluate(forLoop.getForExpression(), context);
-		if (iterableOrIterator.getException() != null)
-			return iterableOrIterator;
-		if (iterableOrIterator.getResult() == null)
-			return createNullPointerResult(forLoop.getForExpression(), "iterable evaluated to 'null'");
+	public Object _evaluateForLoopExpression(XForLoopExpression forLoop, IEvaluationContext context) {
+		Object iterableOrIterator = internalEvaluate(forLoop.getForExpression(), context);
+		if (iterableOrIterator == null)
+			return throwNullPointerException(forLoop.getForExpression(), "iterable evaluated to 'null'");
 		Iterator<?> iter = null;
-		if (iterableOrIterator.getResult() instanceof Iterable<?>) {
-			iter = ((Iterable<?>) iterableOrIterator.getResult()).iterator();
+		if (iterableOrIterator instanceof Iterable<?>) {
+			iter = ((Iterable<?>) iterableOrIterator).iterator();
 		} else {
-			return createClassCastResult(forLoop.getForExpression(), iterableOrIterator, java.lang.Iterable.class); 
+			return throwClassCastException(forLoop.getForExpression(), iterableOrIterator, java.lang.Iterable.class); 
 		}
 		IEvaluationContext forkedContext = context.fork();
 		QualifiedName paramName = QualifiedName.create(forLoop.getDeclaredParam().getName());
@@ -470,147 +471,122 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		while(iter.hasNext()) {
 			Object next = iter.next();
 			forkedContext.assignValue(paramName, next);
-			IEvaluationResult result = evaluate(forLoop.getEachExpression(), forkedContext);
-			if (result.getException() != null)
-				return result;
+			internalEvaluate(forLoop.getEachExpression(), forkedContext);
 		}
-		return DefaultEvaluationResult.NULL;
+		return null;
 	}
 	
-	public IEvaluationResult _evaluateWhileExpression(XWhileExpression whileLoop, IEvaluationContext context) {
-		IEvaluationResult condition = evaluate(whileLoop.getPredicate(), context);
-		if (condition.getException() != null)
-			return condition;
-		while(Boolean.TRUE.equals(condition.getResult())) {
-			IEvaluationResult body = evaluate(whileLoop.getBody(), context);
-			if (body.getException() != null)
-				return body;
-			condition = evaluate(whileLoop.getPredicate(), context);
-			if (condition.getException() != null)
-				return condition;
+	public Object _evaluateWhileExpression(XWhileExpression whileLoop, IEvaluationContext context) {
+		Object condition = internalEvaluate(whileLoop.getPredicate(), context);
+		while(Boolean.TRUE.equals(condition)) {
+			internalEvaluate(whileLoop.getBody(), context);
+			condition = internalEvaluate(whileLoop.getPredicate(), context);
 		}
-		return DefaultEvaluationResult.NULL;
+		return null;
 	}
 	
 	public IEvaluationResult _evaluateDoWhileExpression(XDoWhileExpression doWhileLoop, IEvaluationContext context) {
-		IEvaluationResult condition = null;
+		Object condition = null;
 		do {
-			IEvaluationResult body = evaluate(doWhileLoop.getBody(), context);
-			if (body.getException() != null)
-				return body;
-			condition = evaluate(doWhileLoop.getPredicate(), context);
-			if (condition.getException() != null)
-				return condition;
-		} while(Boolean.TRUE.equals(condition.getResult()));
-		return DefaultEvaluationResult.NULL;
+			internalEvaluate(doWhileLoop.getBody(), context);
+			condition = internalEvaluate(doWhileLoop.getPredicate(), context);
+		} while(Boolean.TRUE.equals(condition));
+		return null;
 	}
 	
-	public IEvaluationResult _evaluateConstructorCall(XConstructorCall constructorCall, IEvaluationContext context) {
+	public Object _evaluateConstructorCall(XConstructorCall constructorCall, IEvaluationContext context) {
 		List<Object> arguments = Lists.newArrayList();
 		JvmConstructor jvmConstructor = constructorCall.getConstructor();
-		IEvaluationResult argumentException = evaluateArgumentExpressions(jvmConstructor, constructorCall.getArguments(), arguments, context);
-		if (argumentException != null && argumentException.getException() != null)
-			return argumentException;
+		evaluateArgumentExpressions(jvmConstructor, constructorCall.getArguments(), arguments, context);
 		Constructor<?> constructor = javaReflectAccess.getConstructor(jvmConstructor);
 		try {
 			if (constructor == null)
 				throw new NoSuchMethodException("Could not find constructor " + jvmConstructor.getFullyQualifiedName());
 			constructor.setAccessible(true);
 			Object result = constructor.newInstance(arguments.toArray(new Object[arguments.size()]));
-			return new DefaultEvaluationResult(result, null);
+			return result;
 		} catch(InvocationTargetException targetException) {
-			return new DefaultEvaluationResult(null, targetException.getTargetException());
+			throw new EvaluationException(targetException.getTargetException());
 		} catch(Exception e) {
 			throw new IllegalStateException("Could not invoke constructor: " + jvmConstructor.getCanonicalName(), e);
 		}
 	}
 	
-	public IEvaluationResult _evaluateMemberFeatureCall(XMemberFeatureCall featureCall, IEvaluationContext context) {
-		IEvaluationResult memberCallTarget = evaluate(featureCall.getMemberCallTarget(), context);
-		if (memberCallTarget.getException() != null)
-			return memberCallTarget;
-		if (memberCallTarget.getResult()==null) {
+	public Object _evaluateMemberFeatureCall(XMemberFeatureCall featureCall, IEvaluationContext context) {
+		Object memberCallTarget = internalEvaluate(featureCall.getMemberCallTarget(), context);
+		if (memberCallTarget==null) {
 			if (featureCall.isNullSafe())
-				return new DefaultEvaluationResult(null,null);
-			else
-				return new DefaultEvaluationResult(null,new NullPointerException("the receiver "+featureCall.getMemberCallTarget()+" evaluated to null"));
+				return null;
 		}
-		IEvaluationResult result = featureCallDispatcher.invoke(featureCall.getFeature(), featureCall, memberCallTarget.getResult(), context);
+		Object result = featureCallDispatcher.invoke(featureCall.getFeature(), featureCall, memberCallTarget, context);
 		return result;
 	}
 	
-	public IEvaluationResult _evaluateBinaryOperation(XBinaryOperation operation, IEvaluationContext context) {
-		IEvaluationResult leftOperand = evaluate(operation.getLeftOperand(), context);
-		if (leftOperand.getException() != null)
-			return leftOperand;
-		IEvaluationResult result = featureCallDispatcher.invoke(operation.getFeature(), operation, leftOperand.getResult(), context);
+	public Object _evaluateBinaryOperation(XBinaryOperation operation, IEvaluationContext context) {
+		Object leftOperand = internalEvaluate(operation.getLeftOperand(), context);
+		Object result = featureCallDispatcher.invoke(operation.getFeature(), operation, leftOperand, context);
 		return result;
 	}
 	
-	public IEvaluationResult _evaluateInstanceOf(XInstanceOfExpression instanceOf, IEvaluationContext context) {
-		IEvaluationResult instance = evaluate(instanceOf.getExpression(), context);
-		if (instance.getException() != null)
-			return instance;
-		if (instance.getResult() == null)
-			return new DefaultEvaluationResult(Boolean.FALSE, null);
+	public Object _evaluateInstanceOf(XInstanceOfExpression instanceOf, IEvaluationContext context) {
+		Object instance = internalEvaluate(instanceOf.getExpression(), context);
+		if (instance == null)
+			return Boolean.FALSE;
 		
 		Class<?> expectedType = null;
+		String className = instanceOf.getType().getCanonicalName();
 		try {
-			expectedType = classFinder.forName(instanceOf.getType().getCanonicalName());
+			expectedType = classFinder.forName(className);
 		} catch(ClassNotFoundException cnfe) {
-			return new DefaultEvaluationResult(null, cnfe);
+			throw new EvaluationException(new NoClassDefFoundError(className));
 		}
-		return new DefaultEvaluationResult(expectedType.isInstance(instance.getResult()), null);
+		return expectedType.isInstance(instance);
 	}
 	
-	public IEvaluationResult _evaluateVariableDeclaration(XVariableDeclaration variableDecl, IEvaluationContext context) {
-		IEvaluationResult result = evaluate(variableDecl.getRight(), context);
-		if (result.getException() != null)
-			return result;
-		context.newValue(QualifiedName.create(variableDecl.getName()), result.getResult());
+	public Object _evaluateVariableDeclaration(XVariableDeclaration variableDecl, IEvaluationContext context) {
+		Object result = internalEvaluate(variableDecl.getRight(), context);
+		context.newValue(QualifiedName.create(variableDecl.getName()), result);
 		return result;
 	}
 	
-	public IEvaluationResult _evaluateFeatureCall(XFeatureCall featureCall, IEvaluationContext context) {
+	public Object _evaluateFeatureCall(XFeatureCall featureCall, IEvaluationContext context) {
 		return featureCallDispatcher.invoke(featureCall.getFeature(), featureCall, null, context);
 	}
 	
-	public IEvaluationResult _featureCallVariableDeclaration(XVariableDeclaration variableDeclaration, XAbstractFeatureCall featureCall, Object receiver, IEvaluationContext context) {
+	public Object _featureCallVariableDeclaration(XVariableDeclaration variableDeclaration, XAbstractFeatureCall featureCall, Object receiver, IEvaluationContext context) {
 		if (receiver != null)
 			throw new IllegalStateException("feature was variableDeclaration but got receiver instead of null. Receiver: " + receiver);
 		Object value = context.getValue(QualifiedName.create(variableDeclaration.getName()));
-		return new DefaultEvaluationResult(value, null);
+		return value;
 	}
 	
-	public IEvaluationResult _featureCallFormalParameter(JvmFormalParameter parameter, XAbstractFeatureCall featureCall, Object receiver, IEvaluationContext context) {
+	public Object _featureCallFormalParameter(JvmFormalParameter parameter, XAbstractFeatureCall featureCall, Object receiver, IEvaluationContext context) {
 		if (receiver != null)
 			throw new IllegalStateException("feature was parameter but got receiver instead of null. Receiver: " + receiver);
 		Object value = context.getValue(QualifiedName.create(parameter.getName()));
-		return new DefaultEvaluationResult(value, null);
+		return value;
 	}
 	
-	public IEvaluationResult _featureCallOperation(JvmOperation operation, XAbstractFeatureCall featureCall, Object receiver, IEvaluationContext context) {
+	public Object _featureCallOperation(JvmOperation operation, XAbstractFeatureCall featureCall, Object receiver, IEvaluationContext context) {
 		List<XExpression> operationArguments = featureCall.getArguments().subList(1, featureCall.getArguments().size());
 		return featureCallOperationImpl(operation, operationArguments, receiver, context);
 	}
 	
-	public IEvaluationResult _featureCallOperation(JvmOperation operation, XFeatureCall featureCall, Object receiver, IEvaluationContext context) {
+	public Object _featureCallOperation(JvmOperation operation, XFeatureCall featureCall, Object receiver, IEvaluationContext context) {
 		if (receiver != null)
 			throw new IllegalStateException("feature was simple feature call but got receiver instead of null. Receiver: " + receiver);
 		List<XExpression> operationArguments = featureCall.getFeatureCallArguments();
 		return featureCallOperationImpl(operation, operationArguments, context.getValue(XbaseScopeProvider.THIS), context);
 	}
 
-	protected IEvaluationResult featureCallOperationImpl(JvmOperation operation, List<XExpression> operationArguments,
+	protected Object featureCallOperationImpl(JvmOperation operation, List<XExpression> operationArguments,
 			Object receiver, IEvaluationContext context) {
 		List<Object> argumentValues = Lists.newArrayList();
-		IEvaluationResult argumentException = evaluateArgumentExpressions(operation, operationArguments, argumentValues, context);
-		if (argumentException != null && argumentException.getException() != null)
-			return argumentException;
+		evaluateArgumentExpressions(operation, operationArguments, argumentValues, context);
 		return invokeOperation(operation, receiver, argumentValues);
 	}
 
-	protected IEvaluationResult invokeOperation(JvmOperation operation, Object receiver, List<Object> argumentValues) {
+	protected Object invokeOperation(JvmOperation operation, Object receiver, List<Object> argumentValues) {
 		Method method = javaReflectAccess.getMethod(operation);
 		try {
 			if (method == null) {
@@ -619,34 +595,33 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			method.setAccessible(true);
 			if (!Modifier.isStatic(method.getModifiers())) {
 				if (receiver == null)
-					return new DefaultEvaluationResult(null, new NullPointerException("Cannot invoke instance method: " + operation.getCanonicalName() + " without receiver"));
+					throw new EvaluationException(new NullPointerException("Cannot invoke instance method: " + operation.getCanonicalName() + " without receiver"));
 				Object result = method.invoke(receiver, argumentValues.toArray(new Object[argumentValues.size()]));
-				return new DefaultEvaluationResult(result, null);
+				return result;
 			} else {
 				argumentValues.add(0, receiver);
 				Object result = method.invoke(null, argumentValues.toArray(new Object[argumentValues.size()]));
-				return new DefaultEvaluationResult(result, null);
+				return result;
 			}
+		} catch(EvaluationException e) {
+			throw e;
 		} catch(InvocationTargetException targetException) {
-			return new DefaultEvaluationResult(null, targetException.getTargetException());
+			throw new EvaluationException(targetException.getTargetException());
 		} catch(Exception e) {
 			throw new IllegalStateException("Could not invoke method: " + operation.getFullyQualifiedName() + " on instance: " + receiver, e);
 		}
 	}
 	
-	protected IEvaluationResult evaluateArgumentExpressions(JvmExecutable executable, List<XExpression> expressions, List<Object> result,
+	protected void evaluateArgumentExpressions(JvmExecutable executable, List<XExpression> expressions, List<Object> result,
 			IEvaluationContext context) {
 		int i = 0;
 		for(XExpression arg: expressions) {
-			IEvaluationResult argResult = evaluate(arg, context);
-			if (argResult.getException() != null)
-				return argResult;
+			Object argResult = internalEvaluate(arg, context);
 			JvmTypeReference parameterType = executable.getParameters().get(i).getParameterType();
-			Object argumentValue = coerceArgumentType(argResult.getResult(), parameterType);
+			Object argumentValue = coerceArgumentType(argResult, parameterType);
 			result.add(argumentValue);
 			i++;
 		}
-		return null;
 	}
 
 	protected Object coerceArgumentType(Object value, JvmTypeReference expectedType) {
@@ -690,24 +665,24 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return value;
 	}
 
-	public IEvaluationResult _featureCallField(JvmField jvmField, XMemberFeatureCall featureCall, Object receiver, IEvaluationContext context) {
+	public Object _featureCallField(JvmField jvmField, XMemberFeatureCall featureCall, Object receiver, IEvaluationContext context) {
 		if (receiver == null)
-			return new DefaultEvaluationResult(null, new NullPointerException("Cannot access field: " + jvmField.getCanonicalName() + " on null instance"));
+			throw new EvaluationException(new NullPointerException("Cannot access field: " + jvmField.getCanonicalName() + " on null instance"));
 		
 		return featureCallField(jvmField, receiver);
 	}
 	
-	public IEvaluationResult _featureCallField(JvmField jvmField, XFeatureCall featureCall, Object receiver, IEvaluationContext context) {
+	public Object _featureCallField(JvmField jvmField, XFeatureCall featureCall, Object receiver, IEvaluationContext context) {
 		if (receiver != null)
 			throw new IllegalStateException("feature was simple feature call but got receiver instead of null. Receiver: " + receiver);
 		Object thisReceiver = context.getValue(XbaseScopeProvider.THIS);
 		if (thisReceiver == null)
-			return new DefaultEvaluationResult(null, new NullPointerException("Cannot access field: " + jvmField.getCanonicalName() + " on null instance"));
+			throw new EvaluationException(new NullPointerException("Cannot access field: " + jvmField.getCanonicalName() + " on null instance"));
 		
 		return featureCallField(jvmField, thisReceiver);
 	}
 
-	protected IEvaluationResult featureCallField(JvmField jvmField, Object receiver) {
+	protected Object featureCallField(JvmField jvmField, Object receiver) {
 		Field field = javaReflectAccess.getField(jvmField);
 		try {
 			if (field == null) {
@@ -715,48 +690,43 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			}
 			field.setAccessible(true);
 			Object result = field.get(receiver);
-			return new DefaultEvaluationResult(result, null);
+			return result;
 		} catch(Exception e) {
 			throw new IllegalStateException("Could not access field: " + jvmField.getFullyQualifiedName() + " on instance: " + receiver, e);
 		}
 	}
 	
-	public IEvaluationResult _evaluateAssignment(XAssignment assignment, IEvaluationContext context) {
-		IEvaluationResult value = evaluate(assignment.getValue(), context);
-		if (value.getException() != null)
-			return value;
-		IEvaluationResult assign = assignValue(assignment.getFeature(), assignment.getAssignable(), value.getResult(), context);
+	public Object _evaluateAssignment(XAssignment assignment, IEvaluationContext context) {
+		Object value = internalEvaluate(assignment.getValue(), context);
+		Object assign = assignValue(assignment.getFeature(), assignment.getAssignable(), value, context);
 		return assign;
 	}
 	
-	public IEvaluationResult assignValue(JvmIdentifyableElement feature, Object assignable, Object value, IEvaluationContext context) {
+	public Object assignValue(JvmIdentifyableElement feature, Object assignable, Object value, IEvaluationContext context) {
 		return assignmentDispatcher.invoke(feature, assignable, value, context);
 	}
 	
-	public IEvaluationResult _assignValueToDeclaredVariable(XVariableDeclaration variable, Object assignable, Object value, IEvaluationContext context) {
+	public Object _assignValueToDeclaredVariable(XVariableDeclaration variable, Object assignable, Object value, IEvaluationContext context) {
 		context.assignValue(QualifiedName.create(variable.getName()), value);
-		return new DefaultEvaluationResult(value, null);
+		return value;
 	}
 	
-	public IEvaluationResult _assignValueToField(JvmField jvmField, XMemberFeatureCall assignable, Object value, IEvaluationContext context) {
-		IEvaluationResult target = evaluate(assignable.getMemberCallTarget(), context);
-		if (target.getException() != null)
-			return target;
-		Object receiver = target.getResult();
+	public Object _assignValueToField(JvmField jvmField, XMemberFeatureCall assignable, Object value, IEvaluationContext context) {
+		Object receiver = internalEvaluate(assignable.getMemberCallTarget(), context);
 		if (receiver == null)
-			return new DefaultEvaluationResult(null, new NullPointerException("Cannot assign value to field: " + jvmField.getCanonicalName() + " on null instance"));
+			throw new EvaluationException(new NullPointerException("Cannot assign value to field: " + jvmField.getCanonicalName() + " on null instance"));
 		
 		return assignValueToField(jvmField, receiver, value);
 	}
 	
-	public IEvaluationResult _assignValueToField(JvmField jvmField, XFeatureCall assignable, Object value, IEvaluationContext context) {
+	public Object _assignValueToField(JvmField jvmField, XFeatureCall assignable, Object value, IEvaluationContext context) {
 		Object receiver = context.getValue(XbaseScopeProvider.THIS);
 		if (receiver == null)
-			return new DefaultEvaluationResult(null, new NullPointerException("Cannot assign value to field: " + jvmField.getCanonicalName() + " on null instance"));
+			throw new EvaluationException(new NullPointerException("Cannot assign value to field: " + jvmField.getCanonicalName() + " on null instance"));
 		return assignValueToField(jvmField, receiver, value);
 	}
 
-	protected IEvaluationResult assignValueToField(JvmField jvmField, Object receiver, Object value) {
+	protected Object assignValueToField(JvmField jvmField, Object receiver, Object value) {
 		Field field = javaReflectAccess.getField(jvmField);
 		try {
 			if (field == null) {
@@ -764,42 +734,36 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			}
 			field.setAccessible(true);
 			field.set(receiver, value);
-			return new DefaultEvaluationResult(value, null);
+			return value;
 		} catch(Exception e) {
 			throw new IllegalStateException("Could not access field: " + jvmField.getFullyQualifiedName() + " on instance: " + receiver, e);
 		}
 	}
 	
-	public IEvaluationResult _assignValueByOperation(JvmOperation jvmOperation, XMemberFeatureCall assignable, Object value, IEvaluationContext context) {
-		IEvaluationResult target = evaluate(assignable.getMemberCallTarget(), context);
-		if (target.getException() != null)
-			return target;
-		Object receiver = target.getResult();
+	public Object _assignValueByOperation(JvmOperation jvmOperation, XMemberFeatureCall assignable, Object value, IEvaluationContext context) {
+		Object receiver = internalEvaluate(assignable.getMemberCallTarget(), context);
 		if (receiver == null)
-			return new DefaultEvaluationResult(null, new NullPointerException("Cannot invoke instance method: " + jvmOperation.getCanonicalName() + " without receiver"));
+			throw new EvaluationException(new NullPointerException("Cannot invoke instance method: " + jvmOperation.getCanonicalName() + " without receiver"));
 		
 		return assignValueByOperation(jvmOperation, receiver, value);
 	}
 	
-	public IEvaluationResult _assignValueByOperation(JvmOperation jvmOperation, XFeatureCall assignable, Object value, IEvaluationContext context) {
+	public Object _assignValueByOperation(JvmOperation jvmOperation, XFeatureCall assignable, Object value, IEvaluationContext context) {
 		// TODO: rework linking semantic and remove special case for add()
 		Object receiver = null;
 		if ("add".equals(jvmOperation.getSimpleName())) {
-			IEvaluationResult receiverResult = evaluate(assignable, context);
-			if (receiverResult.getException() != null)
-				return receiverResult;
-			receiver = receiverResult.getResult();
+			receiver = internalEvaluate(assignable, context);
 		} else {
 			receiver = context.getValue(XbaseScopeProvider.THIS);
 		}
 		if (receiver == null)
-			return new DefaultEvaluationResult(null, new NullPointerException("Cannot invoke instance method: " + jvmOperation.getCanonicalName() + " without receiver"));
+			throw new EvaluationException(new NullPointerException("Cannot invoke instance method: " + jvmOperation.getCanonicalName() + " without receiver"));
 		return assignValueByOperation(jvmOperation, receiver, value);
 	}
 	
-	protected IEvaluationResult assignValueByOperation(JvmOperation operation, Object receiver, Object value) {
+	protected Object assignValueByOperation(JvmOperation operation, Object receiver, Object value) {
 		List<Object> argumentValues = Lists.newArrayList(value);
-		IEvaluationResult result = invokeOperation(operation, receiver, argumentValues);
+		Object result = invokeOperation(operation, receiver, argumentValues);
 		return result;
 	}
 	
