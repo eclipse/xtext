@@ -55,7 +55,6 @@ import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.formatting.ContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.formatting.PreferenceStoreIndentationInformation;
-import org.eclipse.xtext.ui.editor.hover.AbstractEObjectHover;
 import org.eclipse.xtext.ui.editor.hover.DefaultCompositeHover;
 import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;

@@ -32,7 +32,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.ISelector;
-import org.eclipse.xtext.ui.editor.hover.AbstractEObjectHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
