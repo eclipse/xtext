@@ -70,6 +70,8 @@ import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -512,14 +514,29 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 	}
 	
-	public Object _evaluateMemberFeatureCall(XMemberFeatureCall featureCall, IEvaluationContext context) {
+	public Object _evaluateMemberFeatureCall(final XMemberFeatureCall featureCall, final IEvaluationContext context) {
 		Object memberCallTarget = internalEvaluate(featureCall.getMemberCallTarget(), context);
-		if (memberCallTarget==null) {
-			if (featureCall.isNullSafe())
-				return null;
+		if (featureCall.isNullSafe() && memberCallTarget==null)
+			return null;
+		if (featureCall.isSpreading()) {
+			if (memberCallTarget == null)
+				return throwNullPointerException(featureCall.getMemberCallTarget(), "iterable evaluated to 'null'");
+			if (memberCallTarget instanceof Iterable<?>) {
+				class Spread implements Function<Object, Object> {
+					public Object apply(Object from) {
+						Object result = featureCallDispatcher.invoke(featureCall.getFeature(), featureCall, from, context);
+						return result;
+					}
+				}
+				Iterable<?> iterable = (Iterable<?>) memberCallTarget;
+				return Lists.newArrayList(Iterables.transform(iterable, new Spread()));
+			} else {
+				return throwClassCastException(featureCall.getMemberCallTarget(), memberCallTarget, java.lang.Iterable.class); 
+			}
+		} else {
+			Object result = featureCallDispatcher.invoke(featureCall.getFeature(), featureCall, memberCallTarget, context);
+			return result;
 		}
-		Object result = featureCallDispatcher.invoke(featureCall.getFeature(), featureCall, memberCallTarget, context);
-		return result;
 	}
 	
 	public Object _evaluateBinaryOperation(XBinaryOperation operation, IEvaluationContext context) {

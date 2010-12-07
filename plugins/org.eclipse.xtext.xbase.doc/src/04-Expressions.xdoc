@@ -266,6 +266,10 @@ Also note that this really is just a shortcut for collect. It doesn't do any fla
 The operator works on all members of code[java.lang.Iterable]. the return type is always an code[java.lang.Iterable<T>] where code[T]
 is the return type of the called feature.
 
+e[TODO: Discuss, whether we want do an eager transformation of the iterable (and thereby provide a suiteable return type such as list if 
+'this' is a list or 'collection' if this is a collection). Otherwise we'll have to restrict the parameters of the spread operation
+to final values (capture context as we do for closures). ]
+
 section2[Syntax]
 
 code[
