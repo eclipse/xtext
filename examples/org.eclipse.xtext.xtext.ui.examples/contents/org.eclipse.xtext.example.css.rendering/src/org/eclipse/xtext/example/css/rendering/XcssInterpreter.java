@@ -2,7 +2,6 @@ package org.eclipse.xtext.example.css.rendering;
 
 import java.lang.reflect.Field;
 
-import org.apache.log4j.Logger;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
@@ -27,15 +26,13 @@ import org.eclipse.xtext.example.css.xcss.WildcardSelector;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
-import org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationResult;
+import org.eclipse.xtext.xbase.interpreter.impl.EvaluationException;
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 
 import com.google.inject.Provider;
 
 public class XcssInterpreter extends XbaseInterpreter  {
-
-	private static final Logger logger = Logger.getLogger(XcssInterpreter.class);
 
 	private Display display;
 	
@@ -57,80 +54,67 @@ public class XcssInterpreter extends XbaseInterpreter  {
 		return evaluate(styleSheet, context);
 	}
 	
-	public IEvaluationResult _evaluateStyleSheet(StyleSheet styleSheet, IEvaluationContext context) {
+	public Object _evaluateStyleSheet(StyleSheet styleSheet, IEvaluationContext context) {
 		for(StyleRule rule: styleSheet.getRules()) {
-			IEvaluationResult ruleResult = evaluate(rule, context);
-			if (ruleResult.getException() != null) {
-				logger.error(ruleResult.getException().getMessage(), ruleResult.getException());
-			}
+			internalEvaluate(rule, context);
 		}
-		return DefaultEvaluationResult.NULL;
+		return null;
 	}
 	
-	public IEvaluationResult _evaluateStyleRule(StyleRule rule, IEvaluationContext context) {
+	public Object _evaluateStyleRule(StyleRule rule, IEvaluationContext context) {
 		for(Selector selector: rule.getSelectors()) {
-			IEvaluationResult selectorResult = evaluate(selector, context);
-			if (selectorResult.getException() != null)
-				return selectorResult;
-			if (Boolean.FALSE.equals(selectorResult.getResult())) {
-				return DefaultEvaluationResult.NULL;
+			Object selectorResult = internalEvaluate(selector, context);
+			if (Boolean.FALSE.equals(selectorResult)) {
+				return null;
 			}
 		}
 		for(XExpression setting: rule.getSettings()) {
-			IEvaluationResult settingResult = evaluate(setting, context);
-			if (settingResult.getException() != null)
-				return settingResult;
+			internalEvaluate(setting, context);
 		}
-		return DefaultEvaluationResult.NULL;
+		return null;
 	}
 	
-	public IEvaluationResult _evaluateTypeSelector(TypeSelector typeSelector, IEvaluationContext context) {
+	public Object _evaluateTypeSelector(TypeSelector typeSelector, IEvaluationContext context) {
 		Object widget = context.getValue(XbaseScopeProvider.THIS);
 		Class<?> expectedType = null;
 		try {
 			expectedType = getClassFinder().forName(typeSelector.getType().getCanonicalName());
 		} catch(ClassNotFoundException cnfe) {
-			return new DefaultEvaluationResult(null, cnfe);
+			throw new EvaluationException(cnfe);
 		}
 		if (!expectedType.isInstance(widget)) {
-			return new DefaultEvaluationResult(Boolean.FALSE, null);
+			return Boolean.FALSE;
 		}
 		if (typeSelector.getFilter() != null && typeSelector.getFilter() != null) {
-			IEvaluationResult filterResult = evaluate(typeSelector.getFilter(), context);
-			if (filterResult.getException() != null)
-				return filterResult;
-			return new DefaultEvaluationResult(Boolean.TRUE.equals(filterResult.getResult()), null);
+			Object filterResult = internalEvaluate(typeSelector.getFilter(), context);
+			return Boolean.TRUE.equals(filterResult);
 		}
-		return new DefaultEvaluationResult(Boolean.TRUE, null);
+		return Boolean.TRUE;
 	}
 	
-	public IEvaluationResult _evaluateIdSelector(IdSelector idSelector, IEvaluationContext context) {
+	public Object _evaluateIdSelector(IdSelector idSelector, IEvaluationContext context) {
 		Object widget = context.getValue(XbaseScopeProvider.THIS);
 		if (widget instanceof Widget) {
 			Object idData = ((Widget) widget).getData("org.eclipse.e4.ui.css.id");
 			if (idData == null || !idSelector.getId().equals(idData))
-				return new DefaultEvaluationResult(Boolean.FALSE, null);
+				return Boolean.FALSE;
 		}
 		if (idSelector.getFilter() != null && idSelector.getFilter() != null) {
-			IEvaluationResult filterResult = evaluate(idSelector.getFilter(), context);
-			if (filterResult.getException() != null)
-				return filterResult;
-			return new DefaultEvaluationResult(Boolean.TRUE.equals(filterResult.getResult()), null);
+			Object filterResult = internalEvaluate(idSelector.getFilter(), context);
+			return Boolean.TRUE.equals(filterResult);
 		}
-		return new DefaultEvaluationResult(Boolean.TRUE, null);
+		return Boolean.TRUE;
 	}
 	
-	public IEvaluationResult _evaluateTypeSelector(WildcardSelector wildcard, IEvaluationContext context) {
+	public Object _evaluateTypeSelector(WildcardSelector wildcard, IEvaluationContext context) {
 		if (wildcard.getFilter() != null && wildcard.getFilter() != null) {
-			IEvaluationResult filterResult = evaluate(wildcard.getFilter(), context);
-			if (filterResult.getException() != null)
-				return filterResult;
-			return new DefaultEvaluationResult(Boolean.TRUE.equals(filterResult.getResult()), null);
+			Object filterResult = evaluate(wildcard.getFilter(), context);
+			return Boolean.TRUE.equals(filterResult);
 		}
-		return new DefaultEvaluationResult(Boolean.TRUE, null);
+		return Boolean.TRUE;
 	}
 	
-	public IEvaluationResult _evaluateColorConstant(ColorConstant colorConstant, IEvaluationContext context) {
+	public Object _evaluateColorConstant(ColorConstant colorConstant, IEvaluationContext context) {
 		JvmIdentifyableElement constant = colorConstant.getConstant();
 		if (constant instanceof JvmField) {
 			Field field = getJavaReflectAccess().getField((JvmField) constant);
@@ -143,13 +127,13 @@ public class XcssInterpreter extends XbaseInterpreter  {
 					throw new IllegalStateException("Could not access static field: " + constant.getCanonicalName(), e);
 				}
 				Color color = display.getSystemColor(colorConstantValue);
-				return new DefaultEvaluationResult(color, null);
+				return color;
 			}
 		}
-		return DefaultEvaluationResult.NULL;
+		return null;
 	}
 	
-	public IEvaluationResult _evaluateRGB(RGB color, IEvaluationContext context) {
+	public Object _evaluateRGB(RGB color, IEvaluationContext context) {
 		org.eclipse.swt.graphics.RGB rgb = null;
 		if (color.isHex()) {
 			int value = color.getValue();
@@ -157,24 +141,23 @@ public class XcssInterpreter extends XbaseInterpreter  {
 		} else {
 			rgb = new org.eclipse.swt.graphics.RGB(color.getRed(), color.getGreen(), color.getBlue());
 		}
-		return new DefaultEvaluationResult(new Color(display, rgb), null);
+		return new Color(display, rgb);
 	}
 	
-	public IEvaluationResult _evaluateGradient(Gradient gradient, IEvaluationContext context) {
+	public Object _evaluateGradient(Gradient gradient, IEvaluationContext context) {
 		BackgroundGradient bgGradient = new BackgroundGradient();
 		for(ColorLiteral color: gradient.getColors()) {
-			IEvaluationResult colorResult = evaluate(color, context);
-			if (colorResult.getException() != null)
-				return colorResult;
-			bgGradient.addColor(colorResult.getResult());
+			Object colorResult = evaluate(color, context);
+			bgGradient.addColor(colorResult);
 		}
 		for(Percent percent: gradient.getPercents()) {
 			bgGradient.addPercent(percent.getValue());
 		}
-		return new DefaultEvaluationResult(bgGradient, null);
+		return bgGradient;
 	}
 	
-	protected IEvaluationResult assignValueByOperation(JvmOperation operation, Object receiver, Object value) {
+	@Override
+	protected Object assignValueByOperation(JvmOperation operation, Object receiver, Object value) {
 		if (StyleAware.class.getCanonicalName().equals(operation.getDeclaringType().getCanonicalName())) {
 			if (receiver instanceof Control) {
 				StyleAware borderAware = StyleAwareImpl.getBorderAware((Control) receiver);
@@ -182,7 +165,7 @@ public class XcssInterpreter extends XbaseInterpreter  {
 				if (receiver != null)
 					return super.assignValueByOperation(operation, receiver, value);
 			}
-			return DefaultEvaluationResult.NULL;
+			return null;
 		} else {
 			return super.assignValueByOperation(operation, receiver, value);
 		}
