@@ -107,18 +107,21 @@ XLiteral returns XExpression:
 XClosure returns XExpression:
 	{XClosure} (formalParameters+=JvmFormalParameter (',' formalParameters+=JvmFormalParameter)*)? '|' expression=XExpression;
 
-XCastedExpression :
+XCastedExpression returns XExpression:
+	{XCastedExpression}
 	'(' type=JvmTypeReference ')' target=XMemberFeatureCall;
 
 XParenthesizedExpression returns XExpression:
 	'(' XExpression ')';
 
-XIfExpression:
+XIfExpression returns XExpression:
+	{XIfExpression}
 	'if' '(' if=XExpression ')'
 	then=XExpression
 	('else' else=XExpression)?;
 
-XSwitchExpression:
+XSwitchExpression returns XExpression:
+	{XSwitchExpression}
 	'switch' switch=XExpressionInsideBlock? '{'
 	(cases+=XCasePart)+
 	('default' ':' (
@@ -131,20 +134,24 @@ XCasePart:
 		then=XExpression ';' |
 		then=XBlockExpression);
 
-XForLoopExpression :
+XForLoopExpression returns XExpression:
+	{XForLoopExpression}
 	'for' '(' declaredParam=JvmFormalParameter ':' forExpression=XExpression ')'
 		eachExpression=XExpression;
 
-XWhileExpression:
+XWhileExpression returns XExpression:
+	{XWhileExpression}
 	'while' '(' predicate=XExpression ')'
 		body=XExpression;
 	
-XDoWhileExpression:
+XDoWhileExpression returns XExpression:
+	{XDoWhileExpression}
    'do'
        body=XExpression
    'while' '(' predicate=XExpression ')';
 
-XBlockExpression: {XBlockExpression}
+XBlockExpression returns XExpression: 
+	{XBlockExpression}
 	'{'
 		(expressions+=XExpressionInsideBlock ';'?)*
 	'}';
@@ -152,40 +159,44 @@ XBlockExpression: {XBlockExpression}
 XExpressionInsideBlock returns XExpression:
 	XVariableDeclaration | XExpression;
 
-XVariableDeclaration:
+XVariableDeclaration returns XExpression:
+	{XVariableDeclaration}
 	(writeable?='var'|'val') (type=JvmTypeReference)? name=ID '=' right=XExpression;
 
 JvmFormalParameter returns types::JvmFormalParameter:
 	(parameterType=JvmTypeReference)? name=ID;
 
-XFeatureCall returns XFeatureCall:
+XFeatureCall returns XExpression:
+	{XFeatureCall}
 	('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')? 
 	feature=[types::JvmIdentifyableElement] (explicitOperationCall?='(' (featureCallArguments+=XExpression (',' featureCallArguments+=XExpression)*)? ')')?;
 
-XConstructorCall:
+XConstructorCall returns XExpression:
+	{XConstructorCall}
 	'new' constructor=[types::JvmConstructor|QualifiedName] 
 	('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
 	'(' (arguments+=XExpression (',' arguments+=XExpression)*)? ')';
 
-XBooleanLiteral:
-	{XBooleanLiteral} 'false' | isTrue?='true';
+XBooleanLiteral returns XExpression :
+	{XBooleanLiteral} ('false' | isTrue?='true');
 
-XNullLiteral:
+XNullLiteral returns XExpression :
 	{XNullLiteral} 'null';
 
-XIntLiteral:
-	value=INT;
+XIntLiteral returns XExpression :
+	{XIntLiteral} value=INT;
 
-XStringLiteral:
-	value=STRING;
+XStringLiteral returns XExpression:
+	{XStringLiteral} value=STRING;
 
-XTypeLiteral:
-	type=[types::JvmType|QualifiedName] '.' 'class';
+XTypeLiteral returns XExpression :
+	{XTypeLiteral} type=[types::JvmType|QualifiedName] '.' 'class';
 	
-XThrowExpression:
-	'throw' expression=XExpression;
+XThrowExpression returns XExpression :
+	{XThrowExpression} 'throw' expression=XExpression;
 	
-XTryCatchFinallyExpression:
+XTryCatchFinallyExpression returns XExpression:
+	{XTryCatchFinallyExpression}
 	'try' 
 		expression=XExpression
 	(
