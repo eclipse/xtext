@@ -95,7 +95,7 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 	protected JvmTypeReference _type(XIfExpression object, Context<JvmTypeReference> context) {
 		internalGetType(object.getIf(), Context.newCtx(typesService.getTypeForName(BOOLEAN_TYPE_NAME, object), context));
 		if (object.getElse() != null)
-			return typesService.getCommonType(Lists.newArrayList(internalGetType(object.getThen(), context),
+			return typesService.getCommonSuperType(Lists.newArrayList(internalGetType(object.getThen(), context),
 					internalGetType(object.getElse(), context)));
 		else
 			return internalGetType(object.getThen(), context);
@@ -111,7 +111,7 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 		}
 		if (object.getDefault() != null)
 			returnTypes.add(internalGetType(object.getDefault(), context));
-		return typesService.getCommonType(returnTypes);
+		return typesService.getCommonSuperType(returnTypes);
 	}
 
 	protected JvmTypeReference _type(XCasePart object, Context<JvmTypeReference> context) {
