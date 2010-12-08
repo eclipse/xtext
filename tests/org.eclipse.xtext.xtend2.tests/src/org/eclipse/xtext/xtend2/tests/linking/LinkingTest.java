@@ -27,7 +27,7 @@ public class LinkingTest extends AbstractXtend2Test {
 	
 	
 	public void testTypeReference_withImport() throws Exception {
-		XtendFunction func = (XtendFunction) clazz("import java.lang.* class X { (String)=>Boolean foo() : |true;}").getMembers().get(0);
+		XtendFunction func = (XtendFunction) clazz("import java.lang.* class X { (String)=>Boolean foo() |true }").getMembers().get(0);
 		XFunctionTypeRef type = (XFunctionTypeRef) func.getReturnType();
 		JvmTypeReference returnType = (JvmTypeReference) type.getReturnType();
 		assertEquals("java.lang.Boolean", returnType.getCanonicalName());
@@ -36,14 +36,14 @@ public class LinkingTest extends AbstractXtend2Test {
 	}
 	
 	public void testTypeReference_0() throws Exception {
-		XtendFunction func = function("=>java.lang.Boolean foo() : |true;");
+		XtendFunction func = function("=>java.lang.Boolean foo() |true");
 		XFunctionTypeRef type = (XFunctionTypeRef) func.getReturnType();
 		JvmTypeReference returnType = (JvmTypeReference) type.getReturnType();
 		assertEquals("java.lang.Boolean", returnType.getCanonicalName());
 	}
 	
 	public void testTypeParameterReference() throws Exception {
-		XtendFunction func = function("<X> X foo(X x) : x;");
+		XtendFunction func = function("<X> X foo(X x) x");
 		JvmTypeReference returnType = func.getReturnType();
 		JvmTypeParameter typeParamDecl = (JvmTypeParameter) returnType.getType();
 		assertEquals("X", typeParamDecl.getCanonicalName());
@@ -54,7 +54,7 @@ public class LinkingTest extends AbstractXtend2Test {
 	}
 	
 	public void testTypeParameterReference_0() throws Exception {
-		XtendFunction func = (XtendFunction) file("import java.lang.* class X { <String> String foo(String x) : x;}").getClasses().get(0).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("import java.lang.* class X { <String> String foo(String x) x}").getClasses().get(0).getMembers().get(0);
 		JvmTypeReference returnType = func.getReturnType();
 		JvmTypeParameter typeParamDecl = (JvmTypeParameter) returnType.getType();
 		assertEquals("String", typeParamDecl.getCanonicalName());
@@ -65,7 +65,7 @@ public class LinkingTest extends AbstractXtend2Test {
 	}
 	
 	public void testTypeParameterReference_1() throws Exception {
-		XtendFunction func = (XtendFunction) file("import java.lang.* class X { <String> String foo(java.lang.String x) : x;}")
+		XtendFunction func = (XtendFunction) file("import java.lang.* class X { <String> String foo(java.lang.String x) x}")
 				.getClasses().get(0).getMembers().get(0);
 		JvmTypeReference returnType = func.getReturnType();
 		JvmTypeParameter typeParamDecl = (JvmTypeParameter) returnType.getType();
@@ -89,7 +89,7 @@ public class LinkingTest extends AbstractXtend2Test {
 //	}
 	
 	public void testFeatureScope_1() throws Exception {
-		XtendFile file = file ("import java.lang.String class X { String foo() : 'hello world'; String bar(String foo) : foo;}");
+		XtendFile file = file ("import java.lang.String class X { String foo() 'hello world' String bar(String foo) foo}");
 		XtendClass xClass = file.getClasses().get(0);
 		XtendFunction func  = (XtendFunction) xClass.getMembers().get(1);
 		XAbstractFeatureCall featureCall1 = (XAbstractFeatureCall) func.getExpression();
@@ -106,7 +106,7 @@ public class LinkingTest extends AbstractXtend2Test {
 //	}
 	
 	public void testFeatureScope_3() throws Exception {
-		XtendFile file = file ("import java.lang.String class X { String foo(String foo) : String foo|foo;}");
+		XtendFile file = file ("import java.lang.String class X { String foo(String foo) String foo|foo}");
 		XtendClass xClass = file.getClasses().get(0);
 		XtendFunction func  = (XtendFunction) xClass.getMembers().get(0);
 		XClosure closure = (XClosure) func.getExpression();
@@ -115,7 +115,7 @@ public class LinkingTest extends AbstractXtend2Test {
 	}
 	
 	public void testMemberFeatureScope_0() throws Exception {
-		XtendFile file = file ("import java.lang.String class X { String foo(String foo) : foo.length();}");
+		XtendFile file = file ("import java.lang.String class X { String foo(String foo) foo.length()}");
 		XtendClass xClass = file.getClasses().get(0);
 		XtendFunction func  = (XtendFunction) xClass.getMembers().get(0);
 		XMemberFeatureCall call = (XMemberFeatureCall) func.getExpression();
