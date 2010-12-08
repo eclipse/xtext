@@ -35,6 +35,5 @@ Member returns types::JvmMember:
 
 Function returns XtendFunction :
 	('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
-	(returnType=JvmTypeReference)? name=ID '(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
-		(':' expression=XExpression ';' | expression=XBlockExpression);
-
+	(returnType=JvmTypeReference)? name=ID '(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')' 
+		expression=XExpression;
