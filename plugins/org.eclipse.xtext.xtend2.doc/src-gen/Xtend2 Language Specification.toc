@@ -28,9 +28,9 @@
 \contentsline {subsection}{\numberline {2.5.7}Syntax}{10}{subsection.2.5.7}
 \contentsline {section}{\numberline {2.6}Expressions (in addition Xbase)}{10}{section.2.6}
 \contentsline {subsection}{\numberline {2.6.1}Rich Strings}{10}{subsection.2.6.1}
-\contentsline {subsubsection}{IF in Rich Strings}{11}{section*.5}
-\contentsline {subsubsection}{FOREACH in Rich Strings}{11}{section*.6}
-\contentsline {subsubsection}{Typing}{11}{section*.8}
-\contentsline {subsubsection}{Whitespace Handling}{11}{section*.9}
-\contentsline {subsection}{\numberline {2.6.2}Extension Method Syntax}{12}{subsection.2.6.2}
-\contentsline {subsection}{\numberline {2.6.3}Create Expression}{12}{subsection.2.6.3}
+\contentsline {subsubsection}{Conditions in Rich Strings}{11}{section*.5}
+\contentsline {subsubsection}{Loops in Rich Strings}{11}{section*.6}
+\contentsline {subsubsection}{Typing}{11}{section*.9}
+\contentsline {subsubsection}{Whitespace Handling}{12}{section*.10}
+\contentsline {subsection}{\numberline {2.6.2}Extension Method Syntax}{13}{subsection.2.6.2}
+\contentsline {subsection}{\numberline {2.6.3}Create Expression}{14}{subsection.2.6.3}

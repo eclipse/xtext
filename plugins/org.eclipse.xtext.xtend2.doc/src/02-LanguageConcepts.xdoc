@@ -373,57 +373,7 @@ section:Expressions[Expressions (in addition Xbase)]
 
 Xtend2 adds some expressions to the basic set of expressions provided by Xbase.
 
-section2:RichStrings[Rich Strings]
-
-Of course there is the template expression, which is used to write readable string concatenation, which is the main thing you do when writing a code generator.
-Xtend2 reuses the syntax known from the well known and widely used Xpand template language (in fact Xtend2 is considered the successor to Xpand and Xtend). Let's have a look at
-an example of how a typical function with template expressions look like:
-
-code[
-toClass(Entity this) :»
-	package «packageName»;
-	
-	«placeImports»
-	
-	public class «name» «IF extendedType!=null»extends «extendedType»«ENDIF»{
-		«FOREACH members»
-			«member.toMember»
-		«ENDFOREACH»
-	}
-	«;
-]
-
-If you are familiar with Xpand, you'll notice that it is exactly the same syntax. The difference is, that the template syntax is actually an expression, which means it 
-can occur everywhere where an expression is expected. For instance in conjunction the powerful switch expression from Xbase:
-
-code[
-toMember(Member this) :
-	switch(this) {
-		Field :»private «type» «name» ;«;
-		Method case isAbstract :» abstract «...;
-		Method:» ..... «;
-	};
-]
-
-section3:RichStringIF[IF in Rich Strings]
-
-There is a special IF to be used within rich strings which is identical in syntax and meaning to the old IF from Xpand.
-Note that you could also use the if expression, but since it has not an explicit terminal token, it is not as readable in that context.
-
-section3:RichStringFOREACH[FOREACH in Rich Strings]
-
-Also the FOREACH statement is available and can only be used in the context of a rich string.
-It also supports the SEPARATOR and ITERATOR declaration from Xpand. 
-todo[Think about whether we really want to stick to the verbose syntax form previous Xpand for SEPARATOR and ITERATOR]
-
-section3:RichStringType[Typing]
-
-The rich string is translated to an efficient string concatenation and the return type of a rich string is code[java.lang.CharStream] which allows
-much room for efficient implementation.
-
-section3:WhitespaceHandling[Whitespace Handling]
-
-todo[Whitespace Handling]
+section2-ref[RichStrings]
 
 section2:extensionMethods[Extension Method Syntax]
 
