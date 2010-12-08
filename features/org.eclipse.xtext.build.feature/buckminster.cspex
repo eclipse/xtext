@@ -2,9 +2,8 @@
 <cs:cspecExtension xmlns:com="http://www.eclipse.org/buckminster/Common-1.0" xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0">
 
 	<cs:dependencies>
-		<!-- <cs:dependency name="org.eclipse.xtext.releng" componentType="buckminster" />
-		 -->
-		 <cs:dependency name="org.eclipse.xtext.tests" componentType="eclipse.feature" />
+		<!-- <cs:dependency name="org.eclipse.xtext.releng" componentType="buckminster" /> -->
+		<cs:dependency name="org.eclipse.xtext.tests" componentType="eclipse.feature" />
 	</cs:dependencies>
 
 
@@ -17,6 +16,13 @@
 			<cs:products alias="output" base="${buckminster.output}/site.tp/" />
 		</cs:private>
 
+		<cs:public name="create.category.xml" actor="ant">
+			<cs:actorProperties>
+				<cs:property key="buildFile" value="packaging.ant" />
+				<cs:property key="targets" value="-create.category.xml" />
+			</cs:actorProperties>
+		</cs:public>
+
 		<cs:public name="package.tmf-xtext-Update" actor="ant">
 			<cs:actorProperties>
 				<cs:property key="buildFile" value="packaging.ant" />
@@ -26,6 +32,7 @@
 				<cs:property key="package.name" value="tmf-xtext-Update" />
 			</cs:properties>
 			<cs:prerequisites>
+				<cs:attribute name="create.category.xml" alias="create.category" />
 				<cs:attribute name="site.p2" alias="repository" />
 			</cs:prerequisites>
 			<cs:products alias="output" base="${buckminster.output}/zips/" />
@@ -49,7 +56,7 @@
 			<cs:products alias="output" base="${buckminster.output}/zips/" />
 		</cs:public>
 
-		<cs:public name="package.tmf-xtext-Examples" actor="ant">
+		<cs:public name="package.tmf-xtext-examples" actor="ant">
 			<cs:actorProperties>
 				<cs:property key="buildFile" value="packaging.ant" />
 				<cs:property key="targets" value="package.ius" />
@@ -58,7 +65,7 @@
 				<cs:property key="content.ius"
 					value="org.eclipse.xtext.examples.feature.group,org.eclipse.xtext.examples.source.feature.group" />
 				<cs:property key="prerequisite.ius" value="org.eclipse.xtext.runtime.feature.group,org.eclipse.xtext.ui.feature.group" />
-				<cs:property key="package.name" value="tmf-xtext-Examples" />
+				<cs:property key="package.name" value="tmf-xtext-examples" />
 			</cs:properties>
 			<cs:prerequisites>
 				<cs:attribute name="site.p2" alias="repository" />
@@ -66,15 +73,14 @@
 			</cs:prerequisites>
 			<cs:products alias="output" base="${buckminster.output}/zips/" />
 		</cs:public>
-		
+
 		<cs:public name="package.tmf-xtext-runtime" actor="ant">
 			<cs:actorProperties>
 				<cs:property key="buildFile" value="packaging.ant" />
 				<cs:property key="targets" value="package.ius" />
 			</cs:actorProperties>
 			<cs:properties>
-				<cs:property key="content.ius"
-					value="org.eclipse.xtext.runtime.feature.group" />
+				<cs:property key="content.ius" value="org.eclipse.xtext.runtime.feature.group" />
 				<cs:property key="prerequisite.ius" value="com.google.collect" />
 				<cs:property key="package.name" value="tmf-xtext-runtime" />
 			</cs:properties>
@@ -91,8 +97,7 @@
 				<cs:property key="targets" value="package.ius" />
 			</cs:actorProperties>
 			<cs:properties>
-				<cs:property key="content.ius"
-					value="org.eclipse.xtext.tests.feature.group" />
+				<cs:property key="content.ius" value="org.eclipse.xtext.tests.feature.group" />
 				<cs:property key="prerequisite.ius" value="com.google.collect" />
 				<cs:property key="package.name" value="tmf-xtext-Automated-Tests" />
 			</cs:properties>
@@ -102,7 +107,7 @@
 			</cs:prerequisites>
 			<cs:products alias="output" base="${buckminster.output}/zips/" />
 		</cs:public>
-		
+
 		<cs:public name="package.tmf-xtext-sourcedoc" actor="ant">
 			<cs:actorProperties>
 				<cs:property key="buildFile" value="packaging.ant" />
@@ -134,9 +139,10 @@
 		<cs:public name="build">
 			<cs:attribute name="package.tmf-xtext-Update" />
 			<cs:attribute name="package.tmf-xtext-SDK" />
-			<cs:attribute name="package.tmf-xtext-Examples" />
+			<cs:attribute name="package.tmf-xtext-examples" />
 			<cs:attribute name="package.tmf-xtext-runtime" />
 			<cs:attribute name="package.tmf-xtext-sourcedoc" />
+			<cs:attribute name="package.tmf-xtext-tests" />
 		</cs:public>
 	</cs:groups>
 </cs:cspecExtension>
