@@ -111,7 +111,7 @@ ParenthesizedElement returns AbstractElement:
 ;
 
 TerminalRule :
-	'terminal' (fragment?='fragment' name=ID | name=ID ('returns' type=TypeRef)?) ':'
+	'terminal' (^fragment?='fragment' name=ID | name=ID ('returns' type=TypeRef)?) ':'
 		alternatives=TerminalAlternatives
 	';'
 ;
