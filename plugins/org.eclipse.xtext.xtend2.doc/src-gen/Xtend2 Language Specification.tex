@@ -579,10 +579,11 @@ FunctionDef : ('public'|'protected'|'private'|'abstract'|'final')* TypeParameter
 Xtend2 adds some expressions to the basic set of expressions provided by Xbase.
 
 \subsection{Rich Strings}
-\label{RichStrings}
-Of course there is the template expression, which is used to write readable string concatenation, which is the main thing you do when writing a code generator.
-Xtend2 reuses the syntax known from the well known and widely used Xpand template language (in fact Xtend2 is considered the successor to Xpand and Xtend). Let's have a look at
-an example of how a typical function with template expressions look like:
+
+Of course there is the template expression, which is used to write readable string concatenation, which
+is the main thing you do when writing a code generator. Xtend2 reuses the syntax known from the well
+known and widely used Xpand template language (in fact Xtend2 is considered the successor to Xpand and
+Xtend). Let's have a look at an example of how a typical function with template expressions look like:
 
 \begin{lstlisting}
 toClass(Entity this) :»
@@ -600,8 +601,9 @@ toClass(Entity this) :»
 \end{lstlisting}
 
 
-If you are familiar with Xpand, you'll notice that it is exactly the same syntax. The difference is, that the template syntax is actually an expression, which means it 
-can occur everywhere where an expression is expected. For instance in conjunction the powerful switch expression from Xbase:
+If you are familiar with Xpand, you'll notice that it is exactly the same syntax. The difference is, that
+the template syntax is actually an expression, which means it can occur everywhere where an expression is
+expected. For instance in conjunction the powerful switch expression from Xbase:
 
 \begin{lstlisting}
 toMember(Member this) :
@@ -614,28 +616,140 @@ toMember(Member this) :
 \end{lstlisting}
 
 
-\subsubsection{IF in Rich Strings}
+\subsubsection{Conditions in Rich Strings}
 \label{RichStringIF}
-There is a special IF to be used within rich strings which is identical in syntax and meaning to the old IF from Xpand.
-Note that you could also use the if expression, but since it has not an explicit terminal token, it is not as readable in that context.
+There is a special \lstinline°IF° to be used within rich strings which is identical in syntax and meaning to the
+old \lstinline°IF° from Xpand. Note that you could also use the if expression, but since it has not an explicit
+terminal token, it is not as readable in that context.
 
 
-\subsubsection{FOREACH in Rich Strings}
+\subsubsection{Loops in Rich Strings}
 \label{RichStringFOREACH}
-Also the FOREACH statement is available and can only be used in the context of a rich string.
-It also supports the SEPARATOR and ITERATOR declaration from Xpand. 
-\todo[inline]{Think about whether we really want to stick to the verbose syntax form previous Xpand for SEPARATOR and ITERATOR}
+Also the \lstinline°FOREACH° statement is available and can only be used in the context of a rich string.
+It also supports the \lstinline°SEPARATOR° and \lstinline°ITERATOR° declaration from Xpand.
+
+\todo[inline]{Think about whether we really want to stick to the verbose syntax form previous Xpand for SEPARATOR
+and ITERATOR}
+
+\todo[inline]{It should be possible to use libraries to provide access to an iterator or to pass a separator by
+means of closures}
 
 
 \subsubsection{Typing}
 \label{RichStringType}
-The rich string is translated to an efficient string concatenation and the return type of a rich string is \lstinline°java.lang.CharStream° which allows
-much room for efficient implementation.
+The rich string is translated to an efficient string concatenation and the return type of a rich string
+is \lstinline°java.lang.CharSequence° which allows much room for efficient implementation.
 
 
 \subsubsection{Whitespace Handling}
 \label{WhitespaceHandling}
-\todo[inline]{Whitespace Handling}
+One of the key features of rich strings is the smart handling of whitespace in the template output. The
+whitespace is not written into the output data structure as is but preprocessed. This allows for readable
+templates as well as nicely formatted output. This can be achieved by applying three simple rules
+when the rich string is evaluated.
+
+
+\setlength{\itemindentlen}{\textwidth}
+\begin{enumerate}
+\addtolength{\itemindentlen}{-2.5em}
+
+\item \begin{minipage}[t]{\itemindentlen}
+
+		An evaluated rich string as part of another string will be prefixed with the current indentation
+		of the caller before it is inserted into the result.
+	
+\end{minipage}
+\item \begin{minipage}[t]{\itemindentlen}
+
+		Indentation in the template that is relative to a control structure will not be propagated to
+		the output string. A control structure is a \lstinline°FOREACH°-loop or a condition (\lstinline°IF°) as well
+		as the opening and closing marks of the rich string itself.
+		
+		The indentation is considered to be relative to such a constrol structure if the previous line
+		ends with a control structure followed by optional white space. The amount of whitespace is not
+		taken into account but the delta to the other lines.
+	
+\end{minipage}
+\item \begin{minipage}[t]{\itemindentlen}
+
+		Lines that do not contain any static text which is not whitespace but do contain control structures
+		or invocations of other templates which evaluate to an empty string, will not appear in the output.
+	
+\end{minipage}
+\end{enumerate}
+\addtolength{\itemindentlen}{2.5em}
+
+The behavior is best described with a set of examples. The following table assumes a data structure of
+nested nodes.
+
+
+\noindent\begin{tabular}{|p{0.5\textwidth}|p{0.5\textwidth}|}
+
+			\begin{lstlisting}
+class Template {
+	print(Node this) """
+		node «name» {}
+	"""
+}
+			
+\end{lstlisting}
+
+		 & 
+			\begin{lstlisting}
+node NodeName{}
+			
+\end{lstlisting}
+
+		
+\end{tabular}
+
+
+The indentation before \lstinline°node «name»° will be skipped as it is relative to the opening
+mark of the rich string and thereby not considered to be relevant for the output but only
+for readability of the template itself.
+
+
+\noindent\begin{tabular}{|p{0.5\textwidth}|p{0.5\textwidth}|}
+
+			\begin{lstlisting}
+class Template {
+	print(Node this) """
+		node «name» {
+			«IF hasChildren»
+				«children*.print»
+			«ENDIF»
+		}
+	"""
+}
+			
+\end{lstlisting}
+
+		 & 
+			\begin{lstlisting}
+node Parent{
+	node FirstChild {
+	}
+	node SecondChild {
+		node Leaf {
+		}
+	}
+}
+			
+\end{lstlisting}
+
+		
+\end{tabular}
+
+
+As in the previous example, there is no indentation on the root level for the same reason.
+The first nesting level has only one indentation level in the output. This is derived from
+the indentation of the \lstinline°IF hasChildren° condition in the template which is nested in
+the node. The additional nesting of the recursive invocation \lstinline°children*.print° is not
+visible in the output as it is relative the the surrounding control structure. The line with
+\lstinline°IF° and \lstinline°ENDIF° contain only control structures thus they are skipped in the output.
+Note the additional indentation of the node \textit{Leaf} which happens due to the first rule:
+Indentation is propagated to called templates.
+
 
 
 \subsection{Extension Method Syntax}
