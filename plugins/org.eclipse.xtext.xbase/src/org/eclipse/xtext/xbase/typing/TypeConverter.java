@@ -44,9 +44,9 @@ public class TypeConverter {
 		@SuppressWarnings("serial")
 		EcoreUtil.Copier copier = new EcoreUtil.Copier(false, true) {
 			@Override
-			public EObject copy(EObject arg0) {
-				if (arg0 instanceof JvmTypeReference) {
-					JvmTypeReference typeRef = (JvmTypeReference) arg0;
+			public EObject copy(EObject object) {
+				if (object instanceof JvmTypeReference) {
+					JvmTypeReference typeRef = (JvmTypeReference) object;
 					if (typeRef.getType() instanceof JvmVoid) {
 						return typesService.getTypeForName(
 								nameConverter.toQualifiedName(Void.class.getCanonicalName()), context);
@@ -58,7 +58,7 @@ public class TypeConverter {
 						return convertArrayToList((JvmArrayType) typeRef.getType(), context);
 					}
 				}
-				return super.copy(arg0);
+				return super.copy(object);
 			}
 		};
 		JvmTypeReference copy = (JvmTypeReference) copier.copy(toBeConverted);

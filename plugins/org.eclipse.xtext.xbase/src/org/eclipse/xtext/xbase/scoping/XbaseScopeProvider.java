@@ -52,6 +52,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -69,13 +70,13 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	private OperatorMapping operatorMapping;
 
 	@Inject
-	private ITypeProvider<JvmTypeReference> typeResolver;
+	private ITypeProvider<JvmTypeReference> typeProvider;
 
 	@Inject
 	private CallableFeaturePredicate featurePredicate;
 
 	@Inject
-	private TypeArgumentContext.Provider provider;
+	private TypeArgumentContext.Provider typeArgumentContextProvider;
 
 	@Inject
 	private IJvmTypeConformanceComputer conformanceChecker;
@@ -83,8 +84,10 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		if (isFeatureCallScope(reference)) {
-			return new BestMatchingJvmFeatureScope(conformanceChecker, context,
-					reference, createFeatureCallScope(context, reference),getSelector(context, reference));
+			return new BestMatchingJvmFeatureScope(
+					conformanceChecker, context, reference, 
+					createFeatureCallScope(context, reference),
+					getFeaturePredicateSelector(context, reference));
 		}
 		return super.getScope(context, reference);
 	}
@@ -103,7 +106,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 				return IScope.NULLSCOPE;
 			XExpression target = call.getArguments().get(0);
 			if (target != null) {
-				JvmTypeReference jvmTypeReference = typeResolver.getType(target, null);
+				JvmTypeReference jvmTypeReference = typeProvider.getType(target, null);
 				if (jvmTypeReference != null) {
 					return createFeatureScopeForTypeRef(jvmTypeReference, IScope.NULLSCOPE, publicOnly);
 				}
@@ -115,7 +118,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 
 		if (thisVariable != null) {
 			EObject thisVal = thisVariable.getEObjectOrProxy();
-			JvmTypeReference type = typeResolver.getType(thisVal, null);
+			JvmTypeReference type = typeProvider.getType(thisVal, null);
 			if (type != null) {
 				implicitThis.setDelegate(createFeatureScopeForTypeRef(type, IScope.NULLSCOPE, publicOnly));
 			}
@@ -123,7 +126,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return localVariableScope;
 	}
 
-	protected ISelector getSelector(final EObject context, final EReference reference) {
+	protected ISelector getFeaturePredicateSelector(final EObject context, final EReference reference) {
 		return new ISelector() {
 			public Iterable<IEObjectDescription> applySelector(Iterable<IEObjectDescription> elements) {
 				return filter(elements, new Predicate<IEObjectDescription>() {
@@ -140,14 +143,13 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	}
 
 	protected Predicate<JvmMember> publicOnly = new Predicate<JvmMember>() {
-
 		public boolean apply(JvmMember input) {
 			return input.getVisibility() == JvmVisibility.PUBLIC;
 		}
 	};
 
 	/**
-	 * TODO USe {@link JvmFeatureDescription} and {@link JvmFeatureScope}
+	 * TODO Use {@link JvmFeatureDescription} and {@link JvmFeatureScope}
 	 */
 	protected IScope createAssignmentFeatureScope(XAssignment context) {
 		XExpression assignable = context.getAssignable();
@@ -173,7 +175,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 					} else {
 						typedElement = featureCall.getArguments().get(0);
 					}
-					JvmTypeReference typeReference = typeResolver.getType(typedElement, null);
+					JvmTypeReference typeReference = typeProvider.getType(typedElement, null);
 					IScope scope = createFeatureScopeForTypeRef(typeReference, IScope.NULLSCOPE, new Predicate<JvmMember>() {
 
 						public boolean apply(JvmMember input) {
@@ -203,15 +205,11 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 //				}
 			}
 		}
-		JvmTypeReference typeReference = typeResolver.getType(assignable, null);
+		JvmTypeReference typeReference = typeProvider.getType(assignable, null);
 		if (typeReference!=null) {
-			return new SimpleScope(createFeatureScopeForTypeRef(typeReference, parent, new Predicate<JvmMember>() {
-				public boolean apply(JvmMember input) {
-					return true;
-				}
-			}),descriptions);
+			return new SimpleScope(createFeatureScopeForTypeRef(typeReference, parent, Predicates.<JvmMember>alwaysTrue()),descriptions);
 		}
-		return new SimpleScope(parent,descriptions);
+		return new SimpleScope(parent, descriptions);
 
 	}
 
@@ -287,7 +285,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	protected IScope createFeatureScopeForTypeRef(JvmTypeReference type, IScope parent,
 			Predicate<JvmMember> isAccept) {
 		if (type.getType() instanceof JvmDeclaredType) {
-			TypeArgumentContext context = provider.get(type);
+			TypeArgumentContext context = typeArgumentContextProvider.get(type);
 			return createFeatureScopeForTypeRef(type, parent, isAccept, context);
 		}
 		//TODO handle JvmTypeParameter
@@ -431,6 +429,8 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	}
 
 	protected String getPropertyName(JvmOperation op) {
+		// TODO: default should use java.beans.Introspector.decapitalize(String)
+		// TODO: handle isFooBar properties
 		String opName = op.getSimpleName();
 		if (opName.startsWith("get") && opName.length() > 3 && Character.isUpperCase(opName.charAt(3))) {
 			return Strings.toFirstLower(opName.substring(3));
