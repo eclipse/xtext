@@ -16,12 +16,15 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
+import org.eclipse.xtext.common.types.memberoverrides.GenericSuperClass;
+import org.eclipse.xtext.common.types.memberoverrides.SubClass;
+import org.eclipse.xtext.common.types.memberoverrides.SubOfGenericClass;
+import org.eclipse.xtext.common.types.memberoverrides.SuperClass;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext.Provider;
 
 import com.google.common.collect.Sets;
@@ -33,7 +36,7 @@ public class MethodOverrideServiceTest extends TestCase {
 	
 	private ClasspathTypeProvider typeProvider;
 	private JvmTypeReferences typeRefs;
-	private MethodOverrideService service;
+	private JvmFeatureOverridesService service;
 	private Provider typeArgCtxProvider;
 
 	@Override
@@ -45,7 +48,7 @@ public class MethodOverrideServiceTest extends TestCase {
 		typeProvider = new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet);
 		typeRefs = new JvmTypeReferences(TypesFactory.eINSTANCE, typeProvider);
 		typeArgCtxProvider = new TypeArgumentContext.Provider();
-		service = new MethodOverrideService(new SuperTypeCollector(TypesFactory.eINSTANCE));
+		service = new JvmFeatureOverridesService(new SuperTypeCollector(TypesFactory.eINSTANCE), typeArgCtxProvider);
 	}
 	
 	@Override
@@ -57,9 +60,8 @@ public class MethodOverrideServiceTest extends TestCase {
 	
 	public void testSimple() throws Exception {
 		JvmTypeReference reference = typeRefs.typeReference("java.util.ArrayList").wildCardExtends("java.lang.CharSequence").create();
-		TypeArgumentContext context = typeArgCtxProvider.get(reference);
-		Iterable<JvmOperation> iterable = service.getAllMethods((JvmDeclaredType) reference.getType(), context);
-		HashSet<JvmOperation> set = Sets.newHashSet(iterable);
+		Iterable<JvmFeature> iterable = service.getAllJvmFeatures(reference);
+		HashSet<JvmFeature> set = Sets.newHashSet(iterable);
 		
 		assertFalse(set.contains(findOperation("java.util.AbstractList","add(int,E)")));
 		assertFalse(set.contains(findOperation("java.util.List","add(int,E)")));
@@ -68,9 +70,52 @@ public class MethodOverrideServiceTest extends TestCase {
 		assertFalse(set.contains(findOperation("java.util.List","iterator()")));
 	}
 	
-	protected JvmOperation findOperation(String typeName, String methodSignature) {
+	public void testContainsFields() throws Exception {
+		JvmTypeReference reference = typeRefs.typeReference(SubClass.class.getName()).create();
+		Iterable<JvmFeature> iterable = service.getAllJvmFeatures(reference);
+		HashSet<JvmFeature> set = Sets.newHashSet(iterable);
+		
+		assertTrue(set.contains(findOperation(SubClass.class.getName(),"privateField")));
+		assertTrue(set.contains(findOperation(SubClass.class.getName(),"protectedField")));
+		assertTrue(set.contains(findOperation(SubClass.class.getName(),"publicField")));
+		
+		assertTrue(set.contains(findOperation(SuperClass.class.getName(),"privateField")));
+		assertFalse(set.contains(findOperation(SuperClass.class.getName(),"protectedField")));
+		assertFalse(set.contains(findOperation(SuperClass.class.getName(),"publicField")));
+		
+		assertTrue(set.contains(findOperation(SubClass.class.getName(),"publicMethod()")));
+		assertFalse(set.contains(findOperation(SuperClass.class.getName(),"publicMethod()")));
+		assertFalse(set.contains(findOperation(SubClass.class.getName(),"protectedMethod()")));
+		assertTrue(set.contains(findOperation(SuperClass.class.getName(),"protectedMethod()")));
+		assertFalse(set.contains(findOperation(SuperClass.class.getName(),"privateMethod(java.lang.Object)")));
+		assertFalse(set.contains(findOperation(SuperClass.class.getName(),"privateMethod(java.lang.String)")));
+		assertTrue(set.contains(findOperation(SubClass.class.getName(),"privateMethod(java.lang.Object)")));
+		assertTrue(set.contains(findOperation(SubClass.class.getName(),"privateMethod(java.lang.String)")));
+	}
+	
+	public void testGenerics_00() throws Exception {
+		JvmTypeReference reference = typeRefs.typeReference(SubOfGenericClass.class.getName()).arg(String.class.getName()).create();
+		Iterable<JvmFeature> iterable = service.getAllJvmFeatures(reference);
+		HashSet<JvmFeature> set = Sets.newHashSet(iterable);
+		
+		assertTrue(set.contains(findOperation(SubOfGenericClass.class.getName(),"myMethod(java.lang.String)")));
+		assertFalse(set.contains(findOperation(GenericSuperClass.class.getName(),"myMethod(java.lang.String)")));
+		assertFalse(set.contains(findOperation(GenericSuperClass.class.getName(),"myMethod(T)")));
+	}
+	
+	public void testGenerics_01() throws Exception {
+		JvmTypeReference reference = typeRefs.typeReference(SubOfGenericClass.class.getName()).arg(Object.class.getName()).create();
+		Iterable<JvmFeature> iterable = service.getAllJvmFeatures(reference);
+		HashSet<JvmFeature> set = Sets.newHashSet(iterable);
+		
+		assertTrue(set.contains(findOperation(SubOfGenericClass.class.getName(),"myMethod(java.lang.String)")));
+		assertFalse(set.contains(findOperation(GenericSuperClass.class.getName(),"myMethod(java.lang.String)")));
+		assertTrue(set.contains(findOperation(GenericSuperClass.class.getName(),"myMethod(T)")));
+	}
+	
+	protected JvmFeature findOperation(String typeName, String methodSignature) {
 		JvmType type = typeProvider.findTypeByName(typeName);
-		return (JvmOperation) type.eResource().getEObject(typeName+"."+methodSignature);
+		return (JvmFeature) type.eResource().getEObject(typeName+"."+methodSignature);
 	}
 
 	
