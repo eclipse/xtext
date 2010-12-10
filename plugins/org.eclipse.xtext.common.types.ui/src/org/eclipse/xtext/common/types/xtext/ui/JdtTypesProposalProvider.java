@@ -48,7 +48,6 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalFactory;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.ReplacementTextApplier;
-import org.eclipse.xtext.ui.editor.hover.AbstractEObjectHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 
 import com.google.inject.Inject;
