@@ -7,19 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
+import static com.google.common.collect.Iterables.*;
+
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmVisibility;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -27,37 +29,42 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class MethodOverrideService {
+public class JvmFeatureOverridesService {
 
 	@Inject
 	private SuperTypeCollector superTypeCollector;
 	
-	protected MethodOverrideService() {}
-	public MethodOverrideService(SuperTypeCollector superTypeCollector) {
+	@Inject
+	private TypeArgumentContext.Provider contextProvider;
+	
+	protected JvmFeatureOverridesService() {}
+	public JvmFeatureOverridesService(SuperTypeCollector superTypeCollector, TypeArgumentContext.Provider contextProvider) {
 		this.superTypeCollector = superTypeCollector;
+		this.contextProvider = contextProvider;
 	}
 	
-	public Iterable<JvmOperation> getAllMethods(JvmDeclaredType type, TypeArgumentContext ctx) {
-		Iterable<JvmOperation> result = type.getDeclaredOperations();
+	public Iterable<JvmFeature> getAllJvmFeatures(JvmTypeReference type) {
+		TypeArgumentContext context = contextProvider.get(type);
+		return getAllJvmFeatures((JvmDeclaredType)type.getType(), context);
+	}
+	
+	public Iterable<JvmFeature> getAllJvmFeatures(JvmDeclaredType type, TypeArgumentContext ctx) {
+		Iterable<JvmFeature> result = filter(type.getMembers(),JvmFeature.class);
 		Set<JvmTypeReference> types = superTypeCollector.collectSuperTypes(type);
 		for (JvmTypeReference jvmTypeReference : types) {
 			JvmType jvmType = jvmTypeReference.getType();
 			if (jvmType instanceof JvmDeclaredType) {
-				Iterable<JvmOperation> declaredOperations = ((JvmDeclaredType) jvmType).getDeclaredOperations();
-				result = Iterables.concat(result, Iterables.filter(declaredOperations, new Predicate<JvmOperation>() {
-					public boolean apply(JvmOperation input) {
-						return isVisible(input);
-					}
-				}));
+				Iterable<JvmFeature> declaredMembers = filter(((JvmDeclaredType) jvmType).getMembers(),JvmFeature.class);
+				result = Iterables.concat(result, declaredMembers);
 			}
 		}
 		return removeOverridden(result, ctx);
 	}
 
-	protected Iterable<JvmOperation> removeOverridden(Iterable<JvmOperation> result, TypeArgumentContext ctx) {
-		Set<JvmOperation> operation = Sets.newHashSet(result);
-		for (JvmOperation op1 : result) {
-			for (JvmOperation op2 : result) {
+	protected Iterable<JvmFeature> removeOverridden(Iterable<JvmFeature> result, TypeArgumentContext ctx) {
+		Set<JvmFeature> operation = Sets.newHashSet(result);
+		for (JvmFeature op1 : result) {
+			for (JvmFeature op2 : result) {
 				if (isOverridden(op1, op2, ctx))
 					operation.remove(op2);
 			}
@@ -78,23 +85,31 @@ public class MethodOverrideService {
 		return allOps;
 	}
 
-	public boolean isOverridden(JvmOperation overriding, JvmOperation overridden, TypeArgumentContext context) {
+	public boolean isOverridden(JvmFeature overriding, JvmFeature overridden, TypeArgumentContext context) {
+		if (overridden.getClass() != overriding.getClass())
+			return false;
 		if (!isNameEqual(overriding, overridden))
 			return false;
-		if (!isSameNumberOfArguments(overriding, overridden))
+		if (!isInheritanceRelation((JvmMember)overriding, (JvmMember)overridden))
 			return false;
-		if (!isInheritanceRelation(overriding, overridden))
-			return false;
-		if (!isSameArgumentTypes(overriding, overridden, context))
-			return false;
+		if (overriding instanceof JvmOperation && overridden instanceof JvmOperation) {
+			JvmOperation overridingOp = (JvmOperation)overriding; 
+			JvmOperation overriddenOp = (JvmOperation)overridden; 
+			if (!isSameNumberOfArguments(overridingOp, overriddenOp))
+				return false;
+			if (!isSameArgumentTypes(overridingOp, overriddenOp, context))
+				return false;
+		}
+		if (overriding instanceof JvmField && overridden instanceof JvmField) {
+			JvmField overridingField = (JvmField)overriding; 
+			JvmField overriddenField = (JvmField)overridden;
+			if (overridingField.isStatic() != overriddenField.isStatic())
+				return false;
+		}
 		return true;
 	}
 
-	protected boolean isVisible(JvmOperation overridden) {
-		return overridden.getVisibility() != JvmVisibility.PRIVATE;
-	}
-	
-	protected boolean isNameEqual(JvmOperation overriding, JvmOperation overridden) {
+	protected boolean isNameEqual(JvmFeature overriding, JvmFeature overridden) {
 		return overriding.getSimpleName().equals(overridden.getSimpleName());
 	}
 
@@ -112,7 +127,7 @@ public class MethodOverrideService {
 		return true;
 	}
 
-	protected boolean isInheritanceRelation(JvmOperation overriding, JvmOperation overridden) {
+	protected boolean isInheritanceRelation(JvmMember overriding, JvmMember overridden) {
 		return superTypeCollector.isSuperType(overriding.getDeclaringType(), overridden.getDeclaringType());
 	}
 }
