@@ -95,4 +95,8 @@ public class ImportedNamesAdapter extends AdapterImpl implements IScopeWrapper {
 	public IScope wrap(IScope scope) {
 		return new WrappingScope(scope);
 	}
+
+	public void clear() {
+		importedNames.clear();
+	}
 }
