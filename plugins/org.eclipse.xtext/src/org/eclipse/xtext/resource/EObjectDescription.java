@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -77,7 +78,7 @@ public class EObjectDescription extends AbstractEObjectDescription {
 	@Override
 	public String[] getUserDataKeys() {
 		if (userData==null)
-			return new String[0];
+			return Strings.EMPTY_ARRAY;
 		return userData.keySet().toArray(new String[userData.size()]);
 	}
 

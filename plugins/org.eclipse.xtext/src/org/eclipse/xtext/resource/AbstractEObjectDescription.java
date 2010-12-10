@@ -9,6 +9,7 @@
 package org.eclipse.xtext.resource;
 
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -31,7 +32,7 @@ public abstract class AbstractEObjectDescription implements IEObjectDescription 
 	}
 	
 	public String[] getUserDataKeys() {
-		return new String[0];
+		return Strings.EMPTY_ARRAY;
 	}
 	
 	protected QualifiedName getIgnoreCaseName() {
