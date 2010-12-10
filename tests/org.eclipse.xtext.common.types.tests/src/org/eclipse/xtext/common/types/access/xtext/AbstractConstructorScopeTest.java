@@ -42,7 +42,7 @@ public abstract class AbstractConstructorScopeTest extends TestCase {
 	}
 	
 	public void testGetElementByName_02() {
-		IEObjectDescription objectElement = getConstructorScope().getSingleElement(new ISelector.SelectByName(QualifiedName.create(Object.class.getName() + "Foo")));
+		IEObjectDescription objectElement = getConstructorScope().getSingleElement(new ISelector.SelectByName(QualifiedName.create(Object.class.getName() + "SuperClass")));
 		assertNull(objectElement);
 	}
 	

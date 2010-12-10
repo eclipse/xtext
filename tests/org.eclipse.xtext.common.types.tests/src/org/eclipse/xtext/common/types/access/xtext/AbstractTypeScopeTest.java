@@ -35,7 +35,7 @@ public abstract class AbstractTypeScopeTest extends TestCase {
 	}
 	
 	public void testGetElementByName_02() {
-		IEObjectDescription objectElement = getTypeScope().getSingleElement(new ISelector.SelectByName(QualifiedName.create(Object.class.getName() + "Foo")));
+		IEObjectDescription objectElement = getTypeScope().getSingleElement(new ISelector.SelectByName(QualifiedName.create(Object.class.getName() + "SuperClass")));
 		assertNull(objectElement);
 	}
 	
