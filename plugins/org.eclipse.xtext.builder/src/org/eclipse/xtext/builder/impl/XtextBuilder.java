@@ -28,6 +28,7 @@ import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant.BuildType;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
@@ -39,11 +40,10 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
  * @author Knut Wannheden
+ * @author Sebastian Zarnekow - BuildData as blackboard for scheduled data
  */
 public class XtextBuilder extends IncrementalProjectBuilder {
 
-	private static final IProject[] EMPTY_PROJECT_ARRAY = new IProject[0];
-	
 	private static final Logger log = Logger.getLogger(XtextBuilder.class);
 
 	public static final String BUILDER_ID = XtextProjectHelper.BUILDER_ID;
@@ -103,7 +103,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			if (monitor != null)
 				monitor.done();
 		}
-		return EMPTY_PROJECT_ARRAY;
+		return getProject().getReferencedProjects();
 	}
 
 	/**
@@ -120,7 +120,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			public boolean visit(IResourceDelta delta) throws CoreException {
 				if (progress.isCanceled())
 					throw new OperationCanceledException();
-
+				if (delta.getResource() instanceof IProject) {
+					return delta.getResource() == getProject();
+				}
 				if (delta.getResource() instanceof IStorage) {
 					if (delta.getKind() == IResourceDelta.REMOVED) {
 						return toBeBuiltComputer.removeStorage(null, toBeBuilt, (IStorage) delta.getResource());
@@ -147,10 +149,11 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		SubMonitor progress = SubMonitor.convert(monitor, 2);
 
 		ResourceSet resourceSet = getResourceSetProvider().get(getProject());
+		resourceSet.getLoadOptions().put(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
 		if (resourceSet instanceof ResourceSetImpl) {
 			((ResourceSetImpl) resourceSet).setURIResourceMap(Maps.<URI, Resource> newHashMap());
 		}
-		BuildData buildData = new BuildData(getProject(), resourceSet, toBeBuilt, queuedBuildData);
+		BuildData buildData = new BuildData(getProject().getName(), resourceSet, toBeBuilt, queuedBuildData);
 		ImmutableList<Delta> deltas = builderState.update(buildData, progress.newChild(1));
 		if (participant != null) {
 			participant.build(new IXtextBuilderParticipant.BuildContext(this, resourceSet, deltas, type),

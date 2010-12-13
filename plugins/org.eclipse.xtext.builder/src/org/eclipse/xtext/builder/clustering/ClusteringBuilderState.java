@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -31,7 +32,6 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.common.collect.ImmutableList;
@@ -76,25 +76,21 @@ public class ClusteringBuilderState extends AbstractBuilderState {
     protected Collection<Delta> doUpdate(BuildData buildData, final Map<URI, IResourceDescription> newMap, IProgressMonitor monitor) {
         final SubMonitor progress = SubMonitor.convert(monitor, 100);
 
+        
         // Step 1: Clean the set of deleted URIs. If any of them are also added, they're not deleted.
-        final Set<URI> toBeDeleted = Sets.newHashSet(buildData.getToBeDeleted());
-        toBeDeleted.removeAll(buildData.getToBeUpdated());
+        final Set<URI> toBeDeleted = buildData.getAndRemoveToBeDeleted();
 
-        // Set a global flag such that linking actually uses our new state. Doesn't need to be reset, since it's
-        // linked to this resourceSet used during building.
-        ResourceSet resourceSet = buildData.getResourceSet();
-        resourceSet.getLoadOptions().put(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
-        // TW: I don't like this. There would need to be some other, more generic way to layer indices.
-
-        // Step 2: Create a new state (old state minus the deleted resources). This, by virtue of the flag above
+        // Step 2: Create a new state (old state minus the deleted resources). This, by virtue of the flag 
+        // NAMED_BUILDER_SCOPE in the resource set's load options
         // and a Guice binding, is the index that is used during the build; i.e., linking during the build will
         // use this. Once the build is completed, the persistable index is reset to the contents of newState by
         // virtue of the newMap, which is maintained in synch with this.
+        ResourceSet resourceSet = buildData.getResourceSet();
         final CurrentDescriptions newState = new CurrentDescriptions(resourceSet, this, toBeDeleted);
 
         // Step 3: Create a queue; write new temporary resource descriptions for the added or updated resources so that we can link
         // subsequently; put all the added or updated resources into the queue.
-        final List<URI> queue = writeNewResourceDescriptions(resourceSet, this, newState, buildData.getToBeUpdated(), progress.newChild(20));
+        writeNewResourceDescriptions(buildData, this, newState, progress.newChild(20));
 
         if (progress.isCanceled()) {
             throw new OperationCanceledException();
@@ -106,12 +102,15 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         for (final URI uri : toBeDeleted) {
             newMap.remove(uri);
         }
-        final Set<URI> notInDelta = Sets.newHashSet(newMap.keySet());
-        notInDelta.removeAll(buildData.getToBeUpdated());
+        final Set<URI> allRemainingURIs = Sets.newLinkedHashSet(newMap.keySet());
+        allRemainingURIs.removeAll(buildData.getToBeUpdated());
 
         // Our return value. It contains all the deltas resulting from this build.
         final Set<Delta> allDeltas = Sets.newHashSet();
 
+        // Add all pending deltas to all deltas (may be scheduled java deltas)
+        queueAffectedResources(allRemainingURIs, this, newState, buildData.getAndRemovePendingDeltas(), buildData, progress.newChild(1));
+        
         // Step 5: Put all resources depending on a deleted resource into the queue. Also register the deltas in allDeltas.
         if (!toBeDeleted.isEmpty()) {
             for (final URI uri : toBeDeleted) {
@@ -120,13 +119,14 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                     allDeltas.add(new DefaultResourceDescriptionDelta(oldDescription, null));
                 }
             }
-            queueAffectedResources(notInDelta, this, newState, allDeltas, queue, progress.newChild(1));
+            queueAffectedResources(allRemainingURIs, this, newState, allDeltas, buildData, progress.newChild(1));
         }
 
         // Step 6: Iteratively got through the queue. For each resource, create a new resource description and queue all depending
         // resources that are not yet in the delta. Validate resources. Do this in chunks.
         final SubMonitor subProgress = progress.newChild(80);
         int index = 1;
+        Queue<URI> queue = buildData.getURIQueue();
         while (!queue.isEmpty()) {
             subProgress.setWorkRemaining(queue.size() + 2);
             // TODO: How to properly do progress indication with an unknown amount of work? Somehow, the progress bar doesn't
@@ -134,7 +134,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
             final List<Delta> newDeltas = new ArrayList<Delta>(clusterSize);
             final List<Delta> changedDeltas = new ArrayList<Delta>(clusterSize);
             while (!queue.isEmpty() && newDeltas.size() < clusterSize) {
-                final URI changedURI = queue.remove(0);
+                final URI changedURI = queue.poll();
                 if (subProgress.isCanceled()) {
                     throw new OperationCanceledException();
                 }
@@ -184,7 +184,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                 subProgress.worked(1);
                 index++;
             }
-            queueAffectedResources(notInDelta, this, newState, changedDeltas, queue, subProgress.newChild(1));
+            queueAffectedResources(allRemainingURIs, this, newState, changedDeltas, buildData, subProgress.newChild(1));
             changedDeltas.clear();
             // Validate now.
             updateMarkers(resourceSet, ImmutableList.<Delta>copyOf(newDeltas), subProgress.newChild(1));
@@ -211,14 +211,14 @@ public class ClusteringBuilderState extends AbstractBuilderState {
      *            The progress monitor used for user feedback
      * @return A list of all the URIs of toBeUpdated that could be indeed loaded and for which new description were written.
      */
-    protected List<URI> writeNewResourceDescriptions(
-            ResourceSet resourceSet,
+    protected void writeNewResourceDescriptions(
+            BuildData buildData,
             IResourceDescriptions oldState,
             CurrentDescriptions newState,
-            Set<URI> toBeUpdated,
             final IProgressMonitor monitor) {
-        final List<URI> queue = Lists.newLinkedList();
         int index = 1;
+        Collection<URI> toBeUpdated = buildData.getToBeUpdated();
+        ResourceSet resourceSet = buildData.getResourceSet();
         final int n = toBeUpdated.size();
         final SubMonitor subMonitor = SubMonitor.convert(monitor, "Write new resource descriptions", n); // TODO: NLS
         for (final URI uri : toBeUpdated) {
@@ -240,7 +240,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                     // could do with some clean-up, too, because all we actually want to do is register the new resource
                     // description, not the delta.
                     newState.register(new DefaultResourceDescriptionDelta(oldState.getResourceDescription(uri), copiedDescription));
-                    queue.add(uri);
+                    buildData.queueURI(uri);
                 }
             } catch (final WrappedException ex) {
                 if (resourceSet.getURIConverter().exists(uri, Collections.emptyMap())) {
@@ -263,12 +263,11 @@ public class ClusteringBuilderState extends AbstractBuilderState {
             }
         }
         resourceSet.getResources().clear(); // Empty the resource set so that the next phase starts afresh.
-        return queue;
     }
 
     /**
-     * Put all resources that depend on some changes onto the queue of resources to be processed. Updates notInDelta by removing all
-     * URIs put into the queue.
+     * Put all resources that depend on some changes onto the queue of resources to be processed. 
+     * Updates notInDelta by removing all URIs put into the queue.
      * 
      * @param notInDelta
      *            URIs of unchanged and unaffected resources
@@ -283,14 +282,19 @@ public class ClusteringBuilderState extends AbstractBuilderState {
      * @param monitor
      *            The progress monitor used for user feedback
      */
-    protected void queueAffectedResources(Set<URI> notInDelta, IResourceDescriptions oldState, CurrentDescriptions newState,
-            Collection<Delta> deltas, List<URI> queue, final IProgressMonitor monitor) {
-        final SubMonitor progress = SubMonitor.convert(monitor, notInDelta.size());
+    protected void queueAffectedResources(
+    		Set<URI> allRemainingURIs, 
+    		IResourceDescriptions oldState, 
+    		CurrentDescriptions newState,
+            Collection<Delta> deltas, 
+            BuildData buildData, 
+            final IProgressMonitor monitor) {
+        final SubMonitor progress = SubMonitor.convert(monitor, allRemainingURIs.size());
         if (deltas.isEmpty()) {
             return;
         }
-        final List<URI> toRemove = Lists.<URI>newArrayList();
-        for (final URI candidateURI : notInDelta) {
+        final List<URI> toRemove = Lists.newArrayList();
+        for (final URI candidateURI : allRemainingURIs) {
             if (progress.isCanceled()) {
                 throw new OperationCanceledException();
             }
@@ -301,13 +305,13 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                 toRemove.add(candidateURI);
             } else {
                 if (manager.isAffected(deltas, candidateDescription, newState)) {
-                    queue.add(candidateURI);
+                    buildData.queueURI(candidateURI);
                     toRemove.add(candidateURI);
                 }
             }
             progress.worked(1);
         }
-        notInDelta.removeAll(toRemove);
+        allRemainingURIs.removeAll(toRemove);
     }
 
 	protected IResourceDescription.Manager getResourceDescriptionManager(URI uri) {

@@ -26,12 +26,17 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
@@ -52,7 +57,10 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 	private IResourceSetProvider resourceSetProvider;
 
 	@Inject 
-	private BuildScheduler buildManager;
+	private BuildScheduler buildScheduler;
+	
+	@Inject
+	private QueuedBuildData queuedBuildData;
 	
 	public IResourceSetProvider getResourceSetProvider() {
 		return resourceSetProvider;
@@ -96,7 +104,7 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 							return false;
 						}
 					});
-					buildManager.scheduleBuildIfNecessary(toUpdate);
+					buildScheduler.scheduleBuildIfNecessary(toUpdate);
 				} catch (CoreException e) {
 					log.error(e.getMessage(), e);
 				}
@@ -130,7 +138,11 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 							SubMonitor progress = SubMonitor.convert(monitor, 1);
 							try {
 								ResourceSet resourceSet = getResourceSetProvider().get(project);
-								BuildData buildData = new BuildData(project, resourceSet, toBeBuilt, null);
+								resourceSet.getLoadOptions().put(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
+								if (resourceSet instanceof ResourceSetImpl) {
+									((ResourceSetImpl) resourceSet).setURIResourceMap(Maps.<URI, Resource> newHashMap());
+								}
+								BuildData buildData = new BuildData(project.getName(), resourceSet, toBeBuilt, queuedBuildData);
 								getBuilderState().update(buildData,	progress.newChild(1));
 								
 								resourceSet.getResources().clear();
