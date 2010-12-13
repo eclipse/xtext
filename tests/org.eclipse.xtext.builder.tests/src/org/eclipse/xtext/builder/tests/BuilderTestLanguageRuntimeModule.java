@@ -36,6 +36,6 @@ public class BuilderTestLanguageRuntimeModule extends org.eclipse.xtext.builder.
 	}
 	
 	public Class<? extends IXtextBuilderParticipant> bindBuilderParticipant() {
-		return LoggingBuilderParticipant.class;
+		return DelegatingBuilderParticipant.class;
 	}
 }
