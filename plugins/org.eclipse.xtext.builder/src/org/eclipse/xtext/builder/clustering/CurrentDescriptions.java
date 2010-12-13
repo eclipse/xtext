@@ -19,76 +19,122 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Thomas Wolf <thomas.wolf@paranor.ch> - Performance optimization and JavaDoc
  */
 public class CurrentDescriptions extends AdapterImpl implements IResourceDescriptions {
-    
-	private final IResourceDescriptions oldState;
-    
-	private final Map<URI, IResourceDescription> updatedDescriptions = Maps.newHashMap();
 
-    public CurrentDescriptions(ResourceSet resourceSet, IResourceDescriptions oldState, Set<URI> initiallyDeleted) {
-        this.oldState = oldState;
-        for (URI uri : initiallyDeleted) {
-            updatedDescriptions.put(uri, null);
-        }
-        resourceSet.eAdapters().add(this);
-    }
+	/**
+	 * New index.
+	 */
+	private final Map<URI, IResourceDescription> currentDescriptions = Maps.newLinkedHashMap();
 
-    public void register(IResourceDescription.Delta delta) {
-        if (updatedDescriptions.containsKey(delta.getUri())) {
-        	if (updatedDescriptions.get(delta.getUri()) != delta.getNew()) {
-        		throw new IllegalStateException("Cannot register description twice: " + delta.getUri());
-        	}
-        	return;
-        }
-        updatedDescriptions.put(delta.getUri(), delta.getNew());
-    }
+	/**
+	 * Create a new index based on an old one.
+	 * 
+	 * @param resourceSet
+	 *            The resource set
+	 * @param oldState
+	 *            The old index
+	 * @param initiallyDeleted
+	 *            URIs of resources physically deleted
+	 */
+	public CurrentDescriptions(ResourceSet resourceSet, IResourceDescriptions oldState, Set<URI> initiallyDeleted) {
+		// TW: Make a copy here...
+		for (final IResourceDescription desc : oldState.getAllResourceDescriptions()) {
+			final URI uri = desc.getURI();
+			if (!initiallyDeleted.contains(uri)) {
+				currentDescriptions.put(uri, desc);
+			}
+		}
+		resourceSet.eAdapters().add(this);
+	}
 
-    public Iterable<IResourceDescription> getAllResourceDescriptions() {
-        return Iterables.filter(Iterables.concat(updatedDescriptions.values(),
-                Iterables.filter(oldState.getAllResourceDescriptions(), new Predicate<IResourceDescription>() {
-                    public boolean apply(IResourceDescription input) {
-                        return !updatedDescriptions.containsKey(input.getURI());
-                    }
-                })), Predicates.notNull());
-    }
+	/**
+	 * Put a new resource description into the index, or remove one if the delta has no new description. A delta for a
+	 * particular URI may be registered more than once; overwriting any earlier registration.
+	 * 
+	 * @param delta
+	 *            The resource change.
+	 */
+	public void register(IResourceDescription.Delta delta) {
+		final IResourceDescription newDesc = delta.getNew();
+		if (newDesc == null) {
+			currentDescriptions.remove(delta.getUri());
+		} else {
+			currentDescriptions.put(delta.getUri(), newDesc);
+		}
+	}
 
-    public IResourceDescription getResourceDescription(URI uri) {
-        if (updatedDescriptions.containsKey(uri)) {
-            return updatedDescriptions.get(uri);
-        }
-        return oldState.getResourceDescription(uri);
-    }
+	/**
+	 * Return the full contents of the index.
+	 * 
+	 * @return The index' contents.
+	 */
+	public Iterable<IResourceDescription> getAllResourceDescriptions() {
+		return currentDescriptions.values();
+	}
 
-    @Override
-    public boolean isAdapterForType(Object type) {
-        return CurrentDescriptions.class.equals(type);
-    }
+	/**
+	 * Return the resource description for a URI.
+	 * 
+	 * @param uri
+	 *            The URI
+	 * @return The resource description, or null if there is none.
+	 */
+	public IResourceDescription getResourceDescription(URI uri) {
+		return currentDescriptions.get(uri);
+	}
 
-    public static class ResourceSetAware implements IResourceDescriptions.IContextAware {
+	/**
+	 * @return <code>true</code> if the given type is class {@link CurrentDescriptions}. 
+	 */
+	@Override
+	public boolean isAdapterForType(Object type) {
+		return CurrentDescriptions.class.equals(type);
+	}
 
-        private IResourceDescriptions delegate;
+	/**
+	 * Context-aware instance of our index.
+	 */
+	public static class ResourceSetAware implements IResourceDescriptions.IContextAware {
 
-        public void setContext(Notifier ctx) {
-            ResourceSet resourceSet = EcoreUtil2.getResourceSet(ctx);
-            delegate = (IResourceDescriptions) EcoreUtil.getAdapter(
-                    resourceSet.eAdapters(), CurrentDescriptions.class);
-        }
+		/** Base index. */
+		private IResourceDescriptions delegate;
 
-        public Iterable<IResourceDescription> getAllResourceDescriptions() {
-            return delegate.getAllResourceDescriptions();
-        }
+		/**
+		 * Set the context.
+		 * 
+		 * @param ctx
+		 *            The context
+		 */
+		public void setContext(Notifier ctx) {
+			final ResourceSet resourceSet = EcoreUtil2.getResourceSet(ctx);
+			delegate = (IResourceDescriptions) EcoreUtil.getAdapter(resourceSet.eAdapters(), CurrentDescriptions.class);
+		}
 
-        public IResourceDescription getResourceDescription(URI uri) {
-            return delegate.getResourceDescription(uri);
-        }
+		/**
+		 * Return the full contents of the index.
+		 * 
+		 * @return The index' contents.
+		 */
+		public Iterable<IResourceDescription> getAllResourceDescriptions() {
+			return delegate.getAllResourceDescriptions();
+		}
 
-    }
+		/**
+		 * Return the resource description for a URI.
+		 * 
+		 * @param uri
+		 *            The URI
+		 * @return The resource description, or null if there is none.
+		 */
+		public IResourceDescription getResourceDescription(URI uri) {
+			return delegate.getResourceDescription(uri);
+		}
+
+	}
 }
