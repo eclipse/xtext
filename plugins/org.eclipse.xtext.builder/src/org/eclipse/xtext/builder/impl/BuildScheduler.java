@@ -100,6 +100,15 @@ public class BuildScheduler {
 					if (isBuildable(project)) {
 						project.build(IncrementalProjectBuilder.FULL_BUILD, XtextBuilder.BUILDER_ID, builderArguments,
 								progress.newChild(1));
+//						for(IProject referencing: project.getReferencingProjects()) {
+//							synchronized (projectsScheduledForBuild) {
+//								projectsScheduledForBuild.remove(referencing);
+//								if (isBuildable(referencing)) {
+//									referencing.build(IncrementalProjectBuilder.FULL_BUILD, XtextBuilder.BUILDER_ID, builderArguments,
+//											progress.newChild(1));
+//								}
+//							}
+//						}
 					} else {
 						progress.worked(1);
 					}

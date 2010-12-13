@@ -7,11 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
+import java.util.Collection;
+import java.util.Queue;
 import java.util.Set;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.resource.IResourceDescription;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -20,19 +22,18 @@ public class BuildData {
 
 	private final ToBeBuilt toBeBuilt;
 	private final QueuedBuildData queuedBuildData;
-	private final IProject project;
+	private final String projectName;
 	private final ResourceSet resourceSet;
 	
-	public BuildData(IProject project, ResourceSet resourceSet, ToBeBuilt toBeBuilt, QueuedBuildData queuedBuildData) {
-		this.project = project;
+	public BuildData(String projectName, ResourceSet resourceSet, ToBeBuilt toBeBuilt, QueuedBuildData queuedBuildData) {
+		this.projectName = projectName;
 		this.resourceSet = resourceSet;
 		this.toBeBuilt = toBeBuilt;
 		this.queuedBuildData = queuedBuildData;
 	}
 
 	public boolean isEmpty() {
-		// TODO: queue Data
-		return getToBeDeleted().isEmpty() && getToBeUpdated().isEmpty();
+		return getToBeDeleted().isEmpty() && getToBeUpdated().isEmpty() && queuedBuildData.isEmpty(projectName);
 	}
 
 	public Set<URI> getToBeDeleted() {
@@ -45,6 +46,23 @@ public class BuildData {
 
 	public ResourceSet getResourceSet() {
 		return resourceSet;
+	}
+
+	public Set<URI> getAndRemoveToBeDeleted() {
+		Set<URI> result = toBeBuilt.getAndRemoveToBeDeleted();
+        return result;
+	}
+
+	public void queueURI(URI uri) {
+		queuedBuildData.queueURI(uri);
+	}
+
+	public Collection<IResourceDescription.Delta> getAndRemovePendingDeltas() {
+		return queuedBuildData.getAndRemovePendingDeltas();
+	}
+
+	public Queue<URI> getURIQueue() {
+		return queuedBuildData.getQueue(projectName);
 	}
 	
 }

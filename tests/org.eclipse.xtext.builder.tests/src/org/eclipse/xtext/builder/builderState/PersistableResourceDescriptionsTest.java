@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.builder.clustering.ClusteringBuilderState;
 import org.eclipse.xtext.builder.impl.BuildData;
+import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.builder.impl.ToBeBuilt;
 import org.eclipse.xtext.builder.tests.BuilderTestLanguageStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
@@ -281,7 +282,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 				toBeBuilt.getToBeDeleted().addAll(toBeDeleted);
 			if (toBeUpdated != null)
 				toBeBuilt.getToBeUpdated().addAll(toBeUpdated);
-			BuildData buildData = new BuildData(null, resourceSet, toBeBuilt, null);
+			BuildData buildData = new BuildData("", resourceSet, toBeBuilt, builderInjector.getInstance(QueuedBuildData.class));
 			ImmutableList<Delta> update = builderState.update(buildData, new NullProgressMonitor());
 			return Maps.uniqueIndex(update, new Function<IResourceDescription.Delta, URI>() {
 				public URI apply(IResourceDescription.Delta from) {

@@ -24,4 +24,12 @@ public class ToBeBuilt {
 	public Set<URI> getToBeUpdated() {
 		return toBeUpdated;
 	}
+
+	public Set<URI> getAndRemoveToBeDeleted() {
+		Set<URI> result = toBeDeleted;
+		toBeDeleted = null;
+		result.removeAll(toBeUpdated);
+		return result;
+	}
+
 }
