@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.builder.clustering.ClusteringBuilderState;
+import org.eclipse.xtext.builder.impl.BuildData;
+import org.eclipse.xtext.builder.impl.ToBeBuilt;
 import org.eclipse.xtext.builder.tests.BuilderTestLanguageStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.junit.util.URIBasedTestResourceDescription;
@@ -274,7 +276,13 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 	private Map<URI, IResourceDescription.Delta> update(Set<URI> toBeUpdated, Set<URI> toBeDeleted) {
 		ResourceSet resourceSet = createResourceSet();
 		try {
-			ImmutableList<Delta> update = builderState.update(resourceSet, toBeUpdated, toBeDeleted, new NullProgressMonitor());
+			ToBeBuilt toBeBuilt = new ToBeBuilt();
+			if (toBeDeleted != null)
+				toBeBuilt.getToBeDeleted().addAll(toBeDeleted);
+			if (toBeUpdated != null)
+				toBeBuilt.getToBeUpdated().addAll(toBeUpdated);
+			BuildData buildData = new BuildData(null, resourceSet, toBeBuilt, null);
+			ImmutableList<Delta> update = builderState.update(buildData, new NullProgressMonitor());
 			return Maps.uniqueIndex(update, new Function<IResourceDescription.Delta, URI>() {
 				public URI apply(IResourceDescription.Delta from) {
 					return from.getOld() != null ? from.getOld().getURI() : from.getNew().getURI();

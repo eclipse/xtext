@@ -11,7 +11,7 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.builder.impl.BuildData;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 
@@ -37,7 +37,7 @@ public interface IBuilderState extends IResourceDescriptions, IResourceDescripti
 	 * 
 	 * @return a list of changes in the form of deltas.
 	 */
-	ImmutableList<IResourceDescription.Delta> update(ResourceSet resourceSet, Set<URI> toBeAddedOrUpdated, Set<URI> toBeRemoved, IProgressMonitor monitor);
+	ImmutableList<IResourceDescription.Delta> update(BuildData buildData, IProgressMonitor monitor);
 	
 	/**
 	 * Remove the descriptions for the given resource-uris from the {@link IResourceDescriptions}.
