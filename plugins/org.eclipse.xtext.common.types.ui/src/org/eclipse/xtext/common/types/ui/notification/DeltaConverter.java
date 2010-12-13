@@ -11,6 +11,7 @@ import org.eclipse.jdt.core.IField;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaElementDelta;
 import org.eclipse.jdt.core.IMethod;
+import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
@@ -89,7 +90,7 @@ public class DeltaConverter {
 					IJavaElementDelta.F_PRIMARY_RESOURCE 
 				  | IJavaElementDelta.F_MOVED_FROM 
 				  | IJavaElementDelta.F_MOVED_TO)) != 0
-				  || delta.getKind() == IJavaElementDelta.ADDED) {
+				  || delta.getKind() == IJavaElementDelta.ADDED && delta.getFlags() == 0) {
 			ICompilationUnit cu = (ICompilationUnit) delta.getElement();
 			try {
 				for(IType type: cu.getTypes()) {
@@ -167,7 +168,7 @@ public class DeltaConverter {
 	
 	protected void convertCompilationUnits(IJavaElementDelta delta, List<IResourceDescription.Delta> result) {
 		IJavaElement element = delta.getElement();
-		if (hasStructureErrors(element)) 
+		if (delta.getKind() != IJavaElementDelta.REMOVED && hasStructureErrors(element)) 
 			return;
 		if (element.getElementType() == IJavaElement.COMPILATION_UNIT) {
 			convertCompilationUnit(delta, result);
@@ -175,6 +176,25 @@ public class DeltaConverter {
 		if (element.getElementType() < IJavaElement.COMPILATION_UNIT) {
 			for(IJavaElementDelta child: delta.getAffectedChildren()) {
 				convertCompilationUnits(child, result);
+			}
+			if (delta.getKind() == IJavaElementDelta.ADDED && 
+					delta.getAffectedChildren().length == 0 && 
+					element.getElementType() == IJavaElement.PACKAGE_FRAGMENT) {
+				IPackageFragment fragment = (IPackageFragment) element;
+				try {
+					for(ICompilationUnit cu: fragment.getCompilationUnits()) {
+						for(IType type: cu.getTypes()) {
+							URI uri = getURIFor(type);
+							List<IEObjectDescription> exported = getExportedEObjects(type);
+							TypeResourceDescription newDescription = new TypeResourceDescription(uri, exported);
+							IResourceDescription.Delta resourceDelta = new ChangedResourceDescriptionDelta(null, newDescription);
+							result.add(resourceDelta);
+						}
+					}
+				} catch(JavaModelException e) {
+					if (logger.isDebugEnabled())
+						logger.debug(e, e);
+				}
 			}
 		}
 	}
