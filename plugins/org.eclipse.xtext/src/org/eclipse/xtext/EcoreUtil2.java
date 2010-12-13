@@ -408,7 +408,7 @@ public class EcoreUtil2 extends EcoreUtil {
 	}
 
 	public static boolean isAssignableFrom(EClass target, EClass candidate) {
-		return (target == EcorePackage.Literals.EOBJECT || target.isSuperTypeOf(candidate));
+		return (candidate != null && (target == EcorePackage.Literals.EOBJECT || target.isSuperTypeOf(candidate)));
 	}
 
 	@SuppressWarnings("unchecked")

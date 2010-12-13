@@ -57,7 +57,7 @@ public class Selectors {
 			public Iterable<IEObjectDescription> applySelector(Iterable<IEObjectDescription> elements) {
 				return filter(elements, new Predicate<IEObjectDescription>(){
 					public boolean apply(IEObjectDescription input) {
-						return EcoreUtil2.isAssignableFrom(clazz, input.getEObjectOrProxy().eClass());
+						return EcoreUtil2.isAssignableFrom(clazz, input.getEClass());
 					}});
 			}
 		};

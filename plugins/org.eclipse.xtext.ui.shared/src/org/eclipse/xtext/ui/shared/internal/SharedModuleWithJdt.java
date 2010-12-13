@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.shared.internal;
 
 import org.eclipse.xtext.builder.impl.ToBeBuiltComputer;
+import org.eclipse.xtext.builder.impl.javasupport.JavaChangeQueueFiller;
 import org.eclipse.xtext.builder.impl.javasupport.ProjectClasspathChangeListener;
 import org.eclipse.xtext.builder.impl.javasupport.JdtToBeBuiltComputer;
 import org.eclipse.xtext.common.types.ui.notification.TypeResourceUnloader;
@@ -30,6 +31,7 @@ public class SharedModuleWithJdt extends AbstractModule {
 		bind(IStorage2UriMapper.class).to(Storage2UriMapperJavaImpl.class);
 		bind(IResourceSetProvider.class).to(XtextResourceSetProvider.class);
 		bind(TypeResourceUnloader.class).asEagerSingleton();
+		bind(JavaChangeQueueFiller.class).asEagerSingleton();
 	}
 
 }

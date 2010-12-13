@@ -132,7 +132,7 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 				if (outgoingReferences.contains(deltaURI)) {
 					return true;
 				}
-				if (interestingResources.contains(deltaURI)) {
+				if (interestingResources.contains(deltaURI) || !deltaURI.isPlatform()) {
 					if (isAffected(delta, candidate)) {
 						return true;
 					}

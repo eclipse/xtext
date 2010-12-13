@@ -16,8 +16,8 @@ import org.eclipse.xtext.util.Strings;
 
 /**
  * Very simple description which actually wraps a qualified name. This description
- * cannot provide a {@link #getEObjectOrProxy() proxy} nor give access to an {@link #getEClass() eClass}.
- * An {@link #getEObjectURI() uri is not available}.
+ * cannot provide a {@link #getEObjectOrProxy() proxy} nor give access to an {@link #getEObjectURI() uri}.
+ * It will return <code>null</code> when it is queried for an {@link #getEClass() EClass}.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class NameBasedEObjectDescription implements IEObjectDescription {
@@ -47,8 +47,7 @@ public class NameBasedEObjectDescription implements IEObjectDescription {
 	}
 
 	public EClass getEClass() {
-		throw new UnsupportedOperationException("getEClass");
-//		return null;
+		return null;
 	}
 
 	public String getUserData(String name) {
