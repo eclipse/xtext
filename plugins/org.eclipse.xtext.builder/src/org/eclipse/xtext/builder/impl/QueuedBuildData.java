@@ -73,7 +73,7 @@ public class QueuedBuildData {
 	}
 	
 	public boolean isEmpty(String projectName) {
-		return getQueue(projectName).isEmpty();
+		return deltas.isEmpty() && getQueue(projectName).isEmpty();
 	}
 
 	public Queue<URI> getQueue(String projectName) {

@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.Flags;
+import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IField;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaElementDelta;
@@ -83,6 +84,28 @@ public class DeltaConverter {
 					IResourceDescription.Delta resourceDelta = new ChangedResourceDescriptionDelta(oldDescription, newDescription);
 					result.add(resourceDelta);
 				}
+			}
+		} else if ((delta.getFlags() & (
+					IJavaElementDelta.F_PRIMARY_RESOURCE 
+				  | IJavaElementDelta.F_MOVED_FROM 
+				  | IJavaElementDelta.F_MOVED_TO)) != 0
+				  || delta.getKind() == IJavaElementDelta.ADDED) {
+			ICompilationUnit cu = (ICompilationUnit) delta.getElement();
+			try {
+				for(IType type: cu.getTypes()) {
+					URI uri = getURIFor(type);
+					List<IEObjectDescription> exported = getExportedEObjects(type);
+					IResourceDescription oldDescription = null;
+					TypeResourceDescription newDescription = null;
+					newDescription = new TypeResourceDescription(uri, exported);
+					List<IEObjectDescription> additionallyExportedEObjects = getAdditionallyExportedEObjects(type, delta);
+					oldDescription = new LayeredTypeResourceDescription(newDescription, additionallyExportedEObjects);
+					IResourceDescription.Delta resourceDelta = new ChangedResourceDescriptionDelta(oldDescription, newDescription);
+					result.add(resourceDelta);
+				}
+			} catch(JavaModelException e) {
+				if (logger.isDebugEnabled())
+					logger.debug(e, e);
 			}
 		}
 	}

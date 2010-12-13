@@ -109,7 +109,9 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         final Set<Delta> allDeltas = Sets.newHashSet();
 
         // Add all pending deltas to all deltas (may be scheduled java deltas)
-        queueAffectedResources(allRemainingURIs, this, newState, buildData.getAndRemovePendingDeltas(), buildData, progress.newChild(1));
+        Collection<Delta> pendingDeltas = buildData.getAndRemovePendingDeltas();
+        allDeltas.addAll(pendingDeltas);
+        queueAffectedResources(allRemainingURIs, this, newState, pendingDeltas, buildData, progress.newChild(1));
         
         // Step 5: Put all resources depending on a deleted resource into the queue. Also register the deltas in allDeltas.
         if (!toBeDeleted.isEmpty()) {
