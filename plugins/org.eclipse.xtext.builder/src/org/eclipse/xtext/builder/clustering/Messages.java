@@ -18,7 +18,6 @@ public class Messages extends NLS {
 	public static String ClusteringBuilderState_1;
 	public static String ClusteringBuilderState_2;
 	public static String ClusteringUpdater_0;
-	public static String ClusteringUpdater_2;
 	public static String ClusteringUpdater_4;
 	public static String ClusteringUpdater_5;
 	static {

@@ -42,6 +42,8 @@ import com.google.inject.Inject;
  */
 public class XtextBuilder extends IncrementalProjectBuilder {
 
+	private static final IProject[] EMPTY_PROJECT_ARRAY = new IProject[0];
+	
 	private static final Logger log = Logger.getLogger(XtextBuilder.class);
 
 	public static final String BUILDER_ID = XtextProjectHelper.BUILDER_ID;
@@ -57,6 +59,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 
 	@Inject
 	private RegistryBuilderParticipant participant;
+	
+	@Inject
+	private QueuedBuildData queuedBuildData;
 
 	public IResourceSetProvider getResourceSetProvider() {
 		return resourceSetProvider;
@@ -98,7 +103,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			if (monitor != null)
 				monitor.done();
 		}
-		return null;
+		return EMPTY_PROJECT_ARRAY;
 	}
 
 	/**
@@ -145,8 +150,8 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		if (resourceSet instanceof ResourceSetImpl) {
 			((ResourceSetImpl) resourceSet).setURIResourceMap(Maps.<URI, Resource> newHashMap());
 		}
-		ImmutableList<Delta> deltas = builderState.update(resourceSet, toBeBuilt.toBeUpdated, toBeBuilt.toBeDeleted,
-				progress.newChild(1));
+		BuildData buildData = new BuildData(getProject(), resourceSet, toBeBuilt, queuedBuildData);
+		ImmutableList<Delta> deltas = builderState.update(buildData, progress.newChild(1));
 		if (participant != null) {
 			participant.build(new IXtextBuilderParticipant.BuildContext(this, resourceSet, deltas, type),
 					progress.newChild(1));
@@ -206,7 +211,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	 */
 	protected void doClean(ToBeBuilt toBeBuilt, IProgressMonitor monitor) throws CoreException {
 		SubMonitor progress = SubMonitor.convert(monitor, 2);
-		ImmutableList<Delta> deltas = builderState.clean(toBeBuilt.toBeDeleted, progress.newChild(1));
+		ImmutableList<Delta> deltas = builderState.clean(toBeBuilt.getToBeDeleted(), progress.newChild(1));
 		if (participant != null) {
 			participant.build(new IXtextBuilderParticipant.BuildContext(this, 
 					getResourceSetProvider().get(getProject()), 

@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.builderState.AbstractBuilderState;
 import org.eclipse.xtext.builder.builderState.BuilderStateUtil;
+import org.eclipse.xtext.builder.impl.BuildData;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
@@ -72,16 +73,16 @@ public class ClusteringBuilderState extends AbstractBuilderState {
      * @return A list of deltas describing all changes made by the build.
      */
     @Override
-    protected Collection<Delta> doUpdate(ResourceSet resourceSet, Set<URI> toBeUpdated,
-            Set<URI> toBeRemoved, final Map<URI, IResourceDescription> newMap, IProgressMonitor monitor) {
+    protected Collection<Delta> doUpdate(BuildData buildData, final Map<URI, IResourceDescription> newMap, IProgressMonitor monitor) {
         final SubMonitor progress = SubMonitor.convert(monitor, 100);
 
         // Step 1: Clean the set of deleted URIs. If any of them are also added, they're not deleted.
-        final Set<URI> toBeDeleted = Sets.newHashSet(toBeRemoved);
-        toBeDeleted.removeAll(toBeUpdated);
+        final Set<URI> toBeDeleted = Sets.newHashSet(buildData.getToBeDeleted());
+        toBeDeleted.removeAll(buildData.getToBeUpdated());
 
         // Set a global flag such that linking actually uses our new state. Doesn't need to be reset, since it's
         // linked to this resourceSet used during building.
+        ResourceSet resourceSet = buildData.getResourceSet();
         resourceSet.getLoadOptions().put(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
         // TW: I don't like this. There would need to be some other, more generic way to layer indices.
 
@@ -93,7 +94,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
 
         // Step 3: Create a queue; write new temporary resource descriptions for the added or updated resources so that we can link
         // subsequently; put all the added or updated resources into the queue.
-        final List<URI> queue = writeNewResourceDescriptions(resourceSet, this, newState, toBeUpdated, progress.newChild(20));
+        final List<URI> queue = writeNewResourceDescriptions(resourceSet, this, newState, buildData.getToBeUpdated(), progress.newChild(20));
 
         if (progress.isCanceled()) {
             throw new OperationCanceledException();
@@ -106,7 +107,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
             newMap.remove(uri);
         }
         final Set<URI> notInDelta = Sets.newHashSet(newMap.keySet());
-        notInDelta.removeAll(toBeUpdated);
+        notInDelta.removeAll(buildData.getToBeUpdated());
 
         // Our return value. It contains all the deltas resulting from this build.
         final Set<Delta> allDeltas = Sets.newHashSet();
