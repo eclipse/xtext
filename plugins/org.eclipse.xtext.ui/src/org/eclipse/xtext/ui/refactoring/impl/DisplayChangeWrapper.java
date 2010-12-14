@@ -7,12 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
+import java.util.List;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.ChangeDescriptor;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
+import org.eclipse.ltk.core.refactoring.TextEditBasedChange;
+import org.eclipse.ltk.core.refactoring.TextEditBasedChangeGroup;
+import org.eclipse.text.edits.TextEditGroup;
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 
 /**
@@ -20,11 +26,16 @@ import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
  * 
  * @author koehnlein - Initial contribution and API
  */
-public class DisplayChangeWrapper extends Change {
+public class DisplayChangeWrapper extends TextEditBasedChange {
 
 	private Change delegate;
 
-	public DisplayChangeWrapper(Change delegate) {
+	public DisplayChangeWrapper(TextEditBasedChange delegate) {
+		this((Change)delegate);
+	}
+	
+	protected DisplayChangeWrapper(Change delegate) {
+		super(delegate.getName());
 		this.delegate = delegate;
 	}
 	
@@ -114,4 +125,68 @@ public class DisplayChangeWrapper extends Change {
 		return delegate.toString();
 	}
 
+	@Override
+	public void addChangeGroup(TextEditBasedChangeGroup group) {
+		getTextEditBasedChangeDelegate().addChangeGroup(group);
+	}
+
+	@Override
+	public void addTextEditGroup(TextEditGroup group) {
+		getTextEditBasedChangeDelegate().addTextEditGroup(group);
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public boolean hasOneGroupCategory(List groupCategories) {
+		return getTextEditBasedChangeDelegate().hasOneGroupCategory(groupCategories);
+	}
+
+	@Override
+	public String getCurrentContent(IProgressMonitor pm) throws CoreException {
+		return getTextEditBasedChangeDelegate().getCurrentContent(pm);
+	}
+
+	@Override
+	public String getCurrentContent(IRegion region, boolean expandRegionToFullLine, int surroundingLines,
+			IProgressMonitor pm) throws CoreException {
+		return getTextEditBasedChangeDelegate().getCurrentContent(region, expandRegionToFullLine, surroundingLines, pm);
+	}
+
+	@Override
+	public boolean getKeepPreviewEdits() {
+		return getTextEditBasedChangeDelegate().getKeepPreviewEdits();
+	}
+
+	@Override
+	public String getPreviewContent(TextEditBasedChangeGroup[] changeGroups, IRegion region,
+			boolean expandRegionToFullLine, int surroundingLines, IProgressMonitor pm) throws CoreException {
+		return getTextEditBasedChangeDelegate().getPreviewContent(changeGroups, region, expandRegionToFullLine, surroundingLines, pm);
+	}
+
+	@Override
+	public String getPreviewContent(IProgressMonitor pm) throws CoreException {
+		return getTextEditBasedChangeDelegate().getPreviewContent(pm);
+	}
+
+	@Override
+	public String getTextType() {
+		return getTextEditBasedChangeDelegate().getTextType();
+	}
+
+	@Override
+	public void setKeepPreviewEdits(boolean keep) {
+		getTextEditBasedChangeDelegate().setKeepPreviewEdits(keep);
+	}
+
+	@Override
+	public void setTextType(String type) {
+		getTextEditBasedChangeDelegate().setTextType(type);
+	}
+	
+	protected TextEditBasedChange getTextEditBasedChangeDelegate() {
+		if(!(delegate instanceof TextEditBasedChange))
+			throw new RuntimeException("Delegate change is not a TextEditBasedChange but is expected to be one. This should never happen ;-)");
+		return (TextEditBasedChange) delegate;
+	}
+	
 }

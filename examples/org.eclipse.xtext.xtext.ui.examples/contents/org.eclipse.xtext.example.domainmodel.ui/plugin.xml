@@ -217,11 +217,5 @@
           class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.example.ui.search.DomainmodelSearchFilter">
     </filter>
  </extension>
- <extension
-       point="org.eclipse.xtext.builder.participant">
-    <participant
-          class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.example.ui.generator.Generator">
-    </participant>
- </extension>
  
 </plugin>

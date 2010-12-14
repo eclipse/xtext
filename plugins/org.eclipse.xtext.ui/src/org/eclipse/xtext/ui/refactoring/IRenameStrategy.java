@@ -5,28 +5,28 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.refactoring.impl;
+package org.eclipse.xtext.ui.refactoring;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
+import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
+import org.eclipse.xtext.util.ReplaceRegion;
+
+import com.google.inject.ImplementedBy;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class RefactoringStatusException extends RuntimeException {
+public interface IRenameStrategy {
 
-	private static final long serialVersionUID = 6796021485044787459L;
-	private final boolean isFatal;
+	String getCurrentName();
 
-	public RefactoringStatusException(String message, boolean isFatal) {
-		super(message);
-		this.isFatal = isFatal;
-	}
+	ReplaceRegion getReplaceRegion(String newName);
+
+	RefactoringStatus validateNewName(String newName);
 	
-	public void reportToStatus(RefactoringStatus status) {
-		if(isFatal)
-			status.addFatalError(getMessage());
-		else
-			status.addError(getMessage());
+	@ImplementedBy(DefaultRenameStrategy.Provider.class)
+	interface Provider {
+		IRenameStrategy get(EObject targetEObject, IRefactoringDocument targetDocument);
 	}
-	
 }

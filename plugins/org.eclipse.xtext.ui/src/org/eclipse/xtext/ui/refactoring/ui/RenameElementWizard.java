@@ -21,7 +21,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameElementProcessor;
+import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -32,8 +32,8 @@ public class RenameElementWizard extends RefactoringWizard {
 		super(refactoring, DIALOG_BASED_USER_INTERFACE);
 	}
 
-	protected AbstractRenameElementProcessor getRefactoringProcessor() {
-		return (AbstractRenameElementProcessor) ((ProcessorBasedRefactoring) getRefactoring()).getProcessor();
+	protected AbstractRenameProcessor getRefactoringProcessor() {
+		return (AbstractRenameProcessor) ((ProcessorBasedRefactoring) getRefactoring()).getProcessor();
 	}
 
 	@Override
@@ -43,11 +43,11 @@ public class RenameElementWizard extends RefactoringWizard {
 
 	protected static class UserInputPage extends UserInputWizardPage {
 
-		private final AbstractRenameElementProcessor renameElementProcessor;
+		private final AbstractRenameProcessor renameElementProcessor;
 
 		private Text nameField;
 
-		public UserInputPage(AbstractRenameElementProcessor processor) {
+		public UserInputPage(AbstractRenameProcessor processor) {
 			super("RenameElementResourceRefactoringInputPage"); //$NON-NLS-1$
 			renameElementProcessor = processor;
 		}

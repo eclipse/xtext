@@ -8,12 +8,17 @@
 package org.eclipse.xtext.ui.tests.refactoring;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-import org.eclipse.text.edits.ReplaceEdit;
+import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.refactoring.IRenameElementStrategy;
+import org.eclipse.xtext.ui.refactoring.IRefactoringDocument;
+import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
+import org.eclipse.xtext.util.ReplaceRegion;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -24,7 +29,7 @@ import com.google.inject.Injector;
 public class DefaultRenameElementStrategyTest extends AbstractXtextTests {
 
 	@Inject
-	private IRenameElementStrategy.Provider strategyProvider;
+	private IRenameStrategy.Provider strategyProvider;
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -38,10 +43,20 @@ public class DefaultRenameElementStrategyTest extends AbstractXtextTests {
 	}
 
 	public void testRenameElementStrategy() throws Exception {
-		XtextResource resource = getResourceFromString("A { B { C } }");
-		URI targetElementURI = resource.getURI().appendFragment("//@elements.0");
-		MockRefactoringDocument mockDocument = new MockRefactoringDocument(resource);
-		IRenameElementStrategy renameElementStrategy = strategyProvider.get(targetElementURI, mockDocument);
+		final XtextResource resource = getResourceFromString("A { B { C } }");
+		EObject targetElement = resource.getContents().get(0).eContents().get(0);
+		assertNotNull(targetElement);
+		assertTrue(targetElement instanceof Element);
+		assertEquals("A", ((Element) targetElement).getName());
+		IRefactoringDocument mockDocument = new IRefactoringDocument() {
+			public Change createChange(String name, TextEdit textEdit) {
+				return null;
+			}
+			public URI getURI() {
+				return resource.getURI();
+			}
+		};
+		IRenameStrategy renameElementStrategy = strategyProvider.get(targetElement, mockDocument);
 		assertNotNull(renameElementStrategy);
 		assertEquals("A", renameElementStrategy.getCurrentName());
 		RefactoringStatus validateNewNameStatus = renameElementStrategy.validateNewName("A");
@@ -49,7 +64,7 @@ public class DefaultRenameElementStrategyTest extends AbstractXtextTests {
 		assertFalse(validateNewNameStatus.hasError());
 		validateNewNameStatus = renameElementStrategy.validateNewName("D");
 		assertTrue(validateNewNameStatus.isOK());
-		ReplaceEdit renameEdit = renameElementStrategy.getRenameEdit("D");
+		ReplaceRegion renameEdit = renameElementStrategy.getReplaceRegion("D");
 		assertEquals(0, renameEdit.getOffset());
 		assertEquals(1, renameEdit.getLength());
 		assertEquals("D", renameEdit.getText());
