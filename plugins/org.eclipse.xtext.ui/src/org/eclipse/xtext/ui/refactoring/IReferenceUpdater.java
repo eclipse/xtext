@@ -5,28 +5,22 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.refactoring.impl;
+package org.eclipse.xtext.ui.refactoring;
 
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
+import org.eclipse.xtext.ui.refactoring.impl.UpdateAcceptor;
+import org.eclipse.xtext.util.ReplaceRegion;
 
 /**
+ * Updates references to renamed elements.
+ * 
  * @author koehnlein - Initial contribution and API
  */
-public class RefactoringStatusException extends RuntimeException {
+public interface IReferenceUpdater {
 
-	private static final long serialVersionUID = 6796021485044787459L;
-	private final boolean isFatal;
+	RefactoringStatus createReferenceUpdates(ElementRenameInfo baseRenameInfo,
+			Iterable<ElementRenameInfo> dependentRenameInfos, ReplaceRegion declarationEdit, ResourceSet resourceSet,
+			UpdateAcceptor updateAcceptor);
 
-	public RefactoringStatusException(String message, boolean isFatal) {
-		super(message);
-		this.isFatal = isFatal;
-	}
-	
-	public void reportToStatus(RefactoringStatus status) {
-		if(isFatal)
-			status.addFatalError(getMessage());
-		else
-			status.addError(getMessage());
-	}
-	
 }

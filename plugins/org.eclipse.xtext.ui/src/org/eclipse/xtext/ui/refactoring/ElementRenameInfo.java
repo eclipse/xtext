@@ -7,27 +7,39 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.ltk.core.refactoring.Change;
-import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-import org.eclipse.text.edits.TextEdit;
-import org.eclipse.xtext.ui.refactoring.impl.DefaultRefactoringDocumentProvider;
 
-import com.google.inject.ImplementedBy;
+import org.eclipse.emf.common.util.URI;
+
 
 /**
- * Abstraction over an open document or a text file that is affected by a refactoring. 
+ * Information on an element to be renamed.  
  *  
  * @author koehnlein - Initial contribution and API
  */
-public interface IRefactoringDocument {
+public class ElementRenameInfo {
 
-	Change createChange(String name, TextEdit textEdit);
+	private final URI elementURI;
 	
-	URI getURI();
+	private final int offset;
+
+	private final IRefactoringDocument document;
 	
-	@ImplementedBy(DefaultRefactoringDocumentProvider.class)
-	static interface Provider {
-		IRefactoringDocument get(URI resourceURI, RefactoringStatus status);
+	public ElementRenameInfo(IRefactoringDocument document, URI renamedElementURI, int offset) {
+		super();
+		this.document = document;
+		this.elementURI = renamedElementURI;
+		this.offset = offset;
+	}
+
+	public int getOffset() {
+		return offset;
+	}
+	
+	public URI getElementURI() {
+		return elementURI;
+	}
+
+	public IRefactoringDocument getDocument() {
+		return document;
 	}
 }

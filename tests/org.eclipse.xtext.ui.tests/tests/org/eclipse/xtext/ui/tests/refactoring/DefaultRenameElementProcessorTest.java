@@ -29,6 +29,7 @@ import org.eclipse.xtext.ui.tests.editor.AbstractEditorTest;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Provider;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -38,17 +39,16 @@ public class DefaultRenameElementProcessorTest extends AbstractEditorTest {
 	private IJavaProject project;
 
 	@Inject
-	private RenameElementProcessor processor;
+	private Provider<RenameElementProcessor> processorProvider;
 	
 	private static final String TEST_PROJECT = "refactoring.test";
 	private static final String TEST_FILE_NAME = TEST_PROJECT + "/" + "File.refactoringtestlanguage";
 
 	@Override
 	protected void setUp() throws Exception {
-		super.setUp();		
-		project = createJavaProject(TEST_PROJECT);
+		super.setUp();
+		project = makeJavaProject(createProject(TEST_PROJECT));
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
-		addSourceFolder(project, "src");
 		Injector injector = Activator.getInstance().getInjector(getEditorId());
 		injector.injectMembers(this);
 	}
@@ -69,7 +69,7 @@ public class DefaultRenameElementProcessorTest extends AbstractEditorTest {
 		String initialModel = "B A { ref B }";
 		IFile testFile = IResourcesSetupUtil.createFile(TEST_FILE_NAME, initialModel);
 		URI targetElementURI = URI.createPlatformResourceURI(testFile.getFullPath().toString(), true).appendFragment("//@elements.0");
-		rename(testFile, targetElementURI, "B", "C");
+		rename(targetElementURI, "C");
 		String model = readFile(testFile);
 		assertEquals(initialModel.replaceAll("B", "C"), model);
 	}
@@ -80,20 +80,16 @@ public class DefaultRenameElementProcessorTest extends AbstractEditorTest {
 		XtextEditor editor = openEditor(testFile);
 		assertFalse(editor.isDirty());
 		URI targetElementURI = URI.createPlatformResourceURI(testFile.getFullPath().toString(), true).appendFragment("//@elements.0");
-		rename(testFile, targetElementURI, "B", "C");
+		rename(targetElementURI, "C");
 		assertTrue(editor.isDirty());
 		assertEquals(initialModel.replaceAll("B", "C"), editor.getDocument().get());	
-		rename(testFile, targetElementURI, "C", "B");
+		rename(targetElementURI, "B");
 		assertTrue(editor.isDirty());
 		assertEquals(initialModel, editor.getDocument().get());
 	}
 	
-	protected void rename(IFile testFile, URI targetElementURI, String oldName, String newName) throws CoreException, Exception {
-		refactor(targetElementURI, newName);
-	}
-	
-
-	protected void refactor(URI targetElementURI, String newName) throws CoreException {
+	protected void rename(URI targetElementURI, String newName) throws CoreException, Exception {
+		RenameElementProcessor processor = processorProvider.get();
 		processor.initialize(targetElementURI);
 		RefactoringStatus initialStatus = processor.checkInitialConditions(new NullProgressMonitor());
 		assertTrue(initialStatus.isOK());
@@ -104,7 +100,6 @@ public class DefaultRenameElementProcessorTest extends AbstractEditorTest {
 		assertNotNull(change);
 		change.perform(new NullProgressMonitor());
 	}
-
 
 	protected String readFile(IFile file) throws Exception {
 		InputStream inputStream = file.getContents();

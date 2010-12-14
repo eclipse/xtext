@@ -8,7 +8,10 @@
 package org.eclipse.xtext.ui.tests.refactoring;
 
 import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.ltk.core.refactoring.Change;
@@ -17,22 +20,17 @@ import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.TextFileChange;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.refactoring.IRefactoringDocument;
+import org.eclipse.xtext.ui.refactoring.impl.DefaultRefactoringDocumentProvider.EditorDocument;
+import org.eclipse.xtext.ui.refactoring.impl.DefaultRefactoringDocumentProvider.FileDocument;
 import org.eclipse.xtext.ui.refactoring.impl.DisplayChangeWrapper;
-import org.eclipse.xtext.ui.refactoring.impl.RefactoringDocumentProvider.EditorDocument;
-import org.eclipse.xtext.ui.refactoring.impl.RefactoringDocumentProvider.FileDocument;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.AbstractEditorTest;
-import org.eclipse.xtext.ui.tests.refactoring.refactoring.AbstractElement;
-import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
-import org.eclipse.xtext.ui.tests.refactoring.refactoring.Main;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Injector;
 
@@ -86,8 +84,8 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 		assertTrue(change instanceof TextFileChange);
 		assertEquals(CHANGE_NAME, change.getName());
 		
-		TextEdit undoEdit = checkEdit(document, textEdit, "C");
-		assertNull(undoEdit);
+		Change undoChange = checkEdit(document, textEdit);
+		assertNotNull(undoChange);
 	}
 
 	public void testEditorResource() throws Exception {
@@ -95,18 +93,18 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 		IRefactoringDocument cleanDocument = createAndCheckDocument(testFile);
 		assertTrue(cleanDocument instanceof EditorDocument);
 		IXtextDocument editorDocument = editor.getDocument();
-		assertEquals(editorDocument, ((EditorDocument) cleanDocument).getXtextDocument());
+		assertEquals(editorDocument, ((EditorDocument) cleanDocument).getDocument());
 		
 		Change change = cleanDocument.createChange(CHANGE_NAME, textEdit);
 		assertTrue(change instanceof DisplayChangeWrapper);
 		assertEquals(CHANGE_NAME, change.getName());
 		assertTrue(((DisplayChangeWrapper) change).getDelegate() instanceof DocumentChange);
 		
-		TextEdit undoEdit = checkEdit(cleanDocument, textEdit, "C");
+		Change undoChange = checkEdit(cleanDocument, textEdit);
+		assertNotNull(undoChange);
 		IRefactoringDocument dirtyDocument = createAndCheckDocument(testFile);
 		assertTrue(cleanDocument instanceof EditorDocument);
-		assertEquals(editorDocument, ((EditorDocument) dirtyDocument).getXtextDocument());
-		checkEdit(dirtyDocument, undoEdit, "A");
+		assertEquals(editorDocument, ((EditorDocument) dirtyDocument).getDocument());
 	}
 
 	protected IRefactoringDocument createAndCheckDocument(IFile testFile) {
@@ -117,18 +115,11 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 		return document;
 	}
 	
-	protected TextEdit checkEdit(IRefactoringDocument document, TextEdit textEdit, final String expectedName) {
-		TextEdit undoEdit = document.apply(textEdit);
-		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
-			@Override
-			public void process(XtextResource state) throws Exception {
-				Main main = (Main) state.getContents().get(0);
-				assertFalse(main.getElements().isEmpty());
-				AbstractElement element = main.getElements().get(0);
-				assertTrue(element instanceof Element);
-				assertEquals(expectedName, ((Element) element).getName());
-			}});
-		return undoEdit;
+	protected Change checkEdit(IRefactoringDocument document, TextEdit textEdit) throws CoreException {
+		Change change = document.createChange("change", textEdit);
+		assertNotNull(change);
+		Change undoChange = change.perform(new NullProgressMonitor());
+		return undoChange;
 	}
 
 }
