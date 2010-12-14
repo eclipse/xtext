@@ -191,4 +191,9 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	}
 
 	static class IEncodingProviderDispatcher extends DispatchingProvider<IEncodingProvider>{}
+	
+	public void configureIResourceDescriptionsLiveScope(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.resource.IResourceDescriptions.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider.LIVE_SCOPE)).to(org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions.class);
+	}
+
 }
