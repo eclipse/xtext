@@ -17,6 +17,7 @@ import java.util.Queue;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceDescription;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -108,6 +109,10 @@ public class QueuedBuildData {
 				return uris.size() + list.size();
 			}
 		};
+	}
+
+	public Iterable<URI> getAllRemainingURIs() {
+		return Iterables.concat(uris, Iterables.concat(projectNameToChangedResource.values()));
 	}
 
 }

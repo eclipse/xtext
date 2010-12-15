@@ -286,7 +286,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 			ImmutableList<Delta> update = builderState.update(buildData, new NullProgressMonitor());
 			return Maps.uniqueIndex(update, new Function<IResourceDescription.Delta, URI>() {
 				public URI apply(IResourceDescription.Delta from) {
-					return from.getOld() != null ? from.getOld().getURI() : from.getNew().getURI();
+					return from.getUri();
 				}
 			});
 		} finally {
