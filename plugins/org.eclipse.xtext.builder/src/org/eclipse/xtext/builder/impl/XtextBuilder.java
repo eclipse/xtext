@@ -70,6 +70,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	@SuppressWarnings("rawtypes")
 	@Override
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
+		long startTime = System.currentTimeMillis();
 		try {
 			if (monitor != null) {
 				final String taskName = Messages.XtextBuilder_Building + getProject().getName() + ": "; //$NON-NLS-1$
@@ -102,6 +103,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		} finally {
 			if (monitor != null)
 				monitor.done();
+			log.info("Build " + getProject().getName() + " in " + (System.currentTimeMillis() - startTime) + " ms");
 		}
 		return getProject().getReferencedProjects();
 	}

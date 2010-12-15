@@ -28,8 +28,8 @@ import org.eclipse.xtext.builder.builderState.AbstractBuilderState;
 import org.eclipse.xtext.builder.builderState.BuilderStateUtil;
 import org.eclipse.xtext.builder.impl.BuildData;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -104,6 +104,13 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         }
         final Set<URI> allRemainingURIs = Sets.newLinkedHashSet(newMap.keySet());
         allRemainingURIs.removeAll(buildData.getToBeUpdated());
+        for(URI remainingURI: buildData.getAllRemainingURIs()) {
+        	allRemainingURIs.remove(remainingURI);
+        }
+        // TODO: consider to remove any entry from upstream projects and independent projects
+        // from the set of remaining uris (template method or service?)
+        // this should reduce the number of to-be-checked descriptions significantly
+        // for common setups (large number of reasonable sized projects)
 
         // Our return value. It contains all the deltas resulting from this build.
         final Set<Delta> allDeltas = Sets.newHashSet();
