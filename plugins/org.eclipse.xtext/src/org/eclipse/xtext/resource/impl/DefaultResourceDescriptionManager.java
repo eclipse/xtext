@@ -27,7 +27,6 @@ import org.eclipse.xtext.util.IResourceScopeCache;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.internal.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -99,7 +98,7 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 	}
 
 	protected Collection<QualifiedName> getImportedNames(IResourceDescription candidate) {
-		return Lists.newArrayList(candidate.getImportedNames());
+		return Sets.newHashSet(candidate.getImportedNames());
 	}
 
 	protected void addExportedNames(Set<QualifiedName> names, IResourceDescription resourceDescriptor) {
@@ -110,51 +109,51 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 			names.add(ieObjectDescription.getName().toLowerCase());
 		}
 	}
-
-	public boolean isAffected(Collection<IResourceDescription.Delta> deltas,
-			IResourceDescription candidate,
-			IResourceDescriptions context) {
-		Set<URI> outgoingReferences = descriptionUtils.collectOutgoingReferences(candidate);
-		Set<URI> interestingResources = Sets.newHashSet();
-		// deleted resources are no longer visible resources
-		// so we collect them pessimistic up-front
-		for (IResourceDescription.Delta delta : deltas) {
-			if (delta.getNew() == null)
-				interestingResources.add(delta.getUri());
-		}
-		Set<URI> visibleResources = collectVisibleResources(candidate, context);
-		interestingResources.addAll(visibleResources);
-		if (interestingResources.isEmpty()) // should at least contain the resource itself
-			return true;
-		for (IResourceDescription.Delta delta : deltas) {
+	
+    public boolean isAffected(Collection<Delta> deltas, IResourceDescription candidate, IResourceDescriptions context) {
+        Set<URI> outgoingReferences = descriptionUtils.collectOutgoingReferences(candidate);
+        if (!outgoingReferences.isEmpty()) {
+	        for (IResourceDescription.Delta delta : deltas)
+	            if (delta.haveEObjectDescriptionsChanged() && outgoingReferences.contains(delta.getUri()))
+	                return true;
+        }
+        // this is a tradeoff - we could either check whether a given delta uri is contained
+        // in a reachable container and check for intersecting names afterwards, or we can do
+        // the other way round
+        // unfortunately there is no way to decide reliably which algorithm scales better
+        // note that this method is called for each description so we have something like a 
+        // number of deltas x number of resources which is not really nice
+        List<IContainer> containers = null;
+        Collection<QualifiedName> importedNames = getImportedNames(candidate);
+        for (IResourceDescription.Delta delta : deltas) {
 			if (delta.haveEObjectDescriptionsChanged()) {
-				URI deltaURI = delta.getUri();
-				if (outgoingReferences.contains(deltaURI)) {
-					return true;
-				}
-				if (interestingResources.contains(deltaURI) || !deltaURI.isPlatform()) {
-					if (isAffected(delta, candidate)) {
+				if (isAffected(importedNames, delta.getNew()) || isAffected(importedNames, delta.getOld())) {
+					// TODO: the validation of outgoing references should cover this use case
+					// however, the test org.eclipse.xtext.builder.builderState.PersistableResourceDescriptionsTest.testDelete()
+					// fails without this additional check
+					if (delta.getNew() == null) // deleted resources cannot be found in a container
 						return true;
+					if (!delta.getUri().isPlatform() && !delta.getUri().isArchive()) // java resource
+						return true;
+					if (containers == null)
+						containers = containerManager.getVisibleContainers(candidate, context);
+					for (IContainer container : containers) {
+						if (container.getResourceDescription(delta.getUri()) != null)
+							return true;
 					}
 				}
 			}
+        }
+        return false;
+    }
+
+	protected boolean isAffected(Collection<QualifiedName> importedNames, IResourceDescription description) {
+		if (description != null) {
+		    for (IEObjectDescription desc : description.getExportedObjects())
+		        if (importedNames.contains(desc.getName().toLowerCase()))
+		            return true;
 		}
 		return false;
-	}
-
-	protected Set<URI> collectVisibleResources(IResourceDescription description, IResourceDescriptions allDescriptions) {
-		Set<URI> result = null;
-		List<IContainer> containers = containerManager.getVisibleContainers(description, allDescriptions);
-		for (IContainer container: containers) {
-			for(IResourceDescription resourceDescription: container.getResourceDescriptions()) {
-				if (result == null)
-					result = Sets.newHashSet();
-				result.add(resourceDescription.getURI());
-			}
-		}
-		if (result == null)
-			return Collections.emptySet();
-		return result;
 	}
 	
 	public DescriptionUtils getDescriptionUtils() {
