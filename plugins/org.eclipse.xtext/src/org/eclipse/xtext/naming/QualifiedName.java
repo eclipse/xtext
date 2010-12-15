@@ -7,21 +7,27 @@
  *******************************************************************************/
 package org.eclipse.xtext.naming;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.xtext.util.Strings;
+
 import com.google.common.base.Function;
-import com.google.common.collect.ImmutableList;
 
 /**
- * A datatype for dealing with qualified names. Instances are usually provided by a {@link IQualifiedNameProvider}.
+ * A datatype for dealing with qualified names. 
+ * Instances are usually provided by a {@link IQualifiedNameProvider}.
  * 
  * @author Jan Koehnlein - Initial contribution and API
- * 
  */
 public class QualifiedName implements Comparable<QualifiedName> {
 
-	protected List<String> segments;
+	private final int hash;
+	
+	private final String[] segments;
+	
+	private QualifiedName lowerCase;
 
 	public static final QualifiedName EMPTY = new QualifiedName();
 
@@ -38,7 +44,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 					throw new IllegalArgumentException("Segment cannot be null");
 				}
 		}
-		return new QualifiedName(segments);
+		return new QualifiedName(segments != null ? segments.clone() : Strings.EMPTY_ARRAY);
 	}
 
 	/**
@@ -57,40 +63,40 @@ public class QualifiedName implements Comparable<QualifiedName> {
 
 	protected QualifiedName(String... segments) {
 		if (segments == null || segments.length == 0)
-			this.segments = Collections.emptyList();
+			this.segments = Strings.EMPTY_ARRAY;
 		else
-			this.segments = ImmutableList.of(segments);
+			this.segments = segments;
+		hash = Arrays.hashCode(this.segments);
 	}
 
 	public boolean isEmpty() {
-		return segments.isEmpty();
+		return segments.length == 0;
 	}
 
 	public List<String> getSegments() {
-		return segments;
+		return Collections.unmodifiableList(Arrays.asList(segments));
 	}
 
 	public int getSegmentCount() {
-		return getSegments().size();
+		return segments.length;
 	}
 
 	public String getSegment(int index) {
-		return getSegments().get(index);
+		return segments[index];
 	}
 
 	public String getLastSegment() {
-		return getSegments().get(getSegmentCount() - 1);
+		return segments[segments.length - 1];
 	}
 
 	public String getFirstSegment() {
-		return getSegments().get(0);
+		return segments[0];
 	}
 
 	public QualifiedName append(String segment) {
 		String[] newSegments = new String[getSegmentCount() + 1];
-		for (int i = 0; i < getSegmentCount(); ++i)
-			newSegments[i] = getSegment(i);
-		newSegments[getSegmentCount()] = segment;
+		System.arraycopy(segments, 0, newSegments, 0, segments.length);
+		newSegments[segments.length] = segment;
 		return new QualifiedName(newSegments);
 	}
 
@@ -111,9 +117,8 @@ public class QualifiedName implements Comparable<QualifiedName> {
 			throw new IllegalArgumentException("Cannot skip " + skipCount + " fragments from QualifiedName with "
 					+ getSegmentCount() + " segments");
 		}
-		String[] newSegments = new String[getSegmentCount() - skipCount];
-		for (int i = skipCount; i < getSegmentCount(); ++i)
-			newSegments[i - skipCount] = getSegment(i);
+		String[] newSegments = new String[segments.length - skipCount];
+		System.arraycopy(segments, skipCount, newSegments, 0, newSegments.length);
 		return new QualifiedName(newSegments);
 	}
 
@@ -125,29 +130,36 @@ public class QualifiedName implements Comparable<QualifiedName> {
 			throw new IllegalArgumentException("Cannot skip " + skipCount + " fragments from QualifiedName with "
 					+ getSegmentCount() + " segments");
 		}
-		String[] newSegments = new String[getSegmentCount() - skipCount];
-		for (int i = 0; i < getSegmentCount() - skipCount; ++i)
-			newSegments[i] = getSegment(i);
+		String[] newSegments = new String[segments.length - skipCount];
+		System.arraycopy(segments, 0, newSegments, 0, newSegments.length);
 		return new QualifiedName(newSegments);
 	}
 
 	public QualifiedName toLowerCase() {
-		String[] newSegments = new String[getSegmentCount()];
+		if (lowerCase != null)
+			return lowerCase;
+		String[] newSegments = new String[segments.length];
 		for (int i = 0; i < getSegmentCount(); ++i)
-			newSegments[i] = getSegment(i).toLowerCase();
-		return new QualifiedName(newSegments);
+			newSegments[i] = segments[i].toLowerCase();
+		lowerCase = new QualifiedName(newSegments) {
+			@Override
+			public QualifiedName toLowerCase() {
+				return this;
+			}
+		};
+		return lowerCase;
 	}
 
 	public QualifiedName toUpperCase() {
 		String[] newSegments = new String[getSegmentCount()];
 		for (int i = 0; i < getSegmentCount(); ++i)
-			newSegments[i] = getSegment(i).toUpperCase();
+			newSegments[i] = segments[i].toUpperCase();
 		return new QualifiedName(newSegments);
 	}
 
 	@Override
 	public int hashCode() {
-		return getSegments().hashCode();
+		return hash;
 	}
 
 	@Override
@@ -156,11 +168,11 @@ public class QualifiedName implements Comparable<QualifiedName> {
 			return true;
 		if (obj instanceof QualifiedName) {
 			QualifiedName other = (QualifiedName) obj;
-			return this.segments.equals(other.segments);
+			if (hash != other.hash)
+				return false;
+			return Arrays.equals(segments, other.segments);
 		}
 		return false;
-//		return obj instanceof QualifiedName && ((QualifiedName) obj).getSegmentCount() == getSegmentCount()
-//				&& startsWith((QualifiedName) obj, false);
 	}
 
 	public boolean equalsIgnoreCase(Object obj) {
