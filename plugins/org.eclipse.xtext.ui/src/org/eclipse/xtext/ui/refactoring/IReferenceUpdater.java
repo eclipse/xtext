@@ -19,8 +19,7 @@ import org.eclipse.xtext.util.ReplaceRegion;
  */
 public interface IReferenceUpdater {
 
-	RefactoringStatus createReferenceUpdates(ElementRenameInfo baseRenameInfo,
-			Iterable<ElementRenameInfo> dependentRenameInfos, ReplaceRegion declarationEdit, ResourceSet resourceSet,
-			UpdateAcceptor updateAcceptor);
+	RefactoringStatus createReferenceUpdates(ElementRenameArguments elementRenameArguments,
+			ReplaceRegion declarationEdit, ResourceSet resourceSet, UpdateAcceptor updateAcceptor);
 
 }

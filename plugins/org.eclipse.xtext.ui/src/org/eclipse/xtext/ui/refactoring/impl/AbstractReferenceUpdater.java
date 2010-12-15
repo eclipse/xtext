@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -26,6 +25,7 @@ import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.ElementRenameInfo;
 import org.eclipse.xtext.ui.refactoring.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
@@ -33,7 +33,6 @@ import org.eclipse.xtext.ui.refactoring.impl.CrossRefRenameInfo.Table;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ReplaceRegion;
 
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.internal.Maps;
 
@@ -54,12 +53,11 @@ public abstract class AbstractReferenceUpdater implements IReferenceUpdater {
 	protected abstract Table getCrossReferenceInfos(Iterable<ElementRenameInfo> elementRenameInfos, ResourceSet resourceSet,
 			RefactoringStatus status);
 
-	public RefactoringStatus createReferenceUpdates(ElementRenameInfo baseRenameInfo, Iterable<ElementRenameInfo> dependentRenameInfos,
+	public RefactoringStatus createReferenceUpdates(ElementRenameArguments elementRenameArguments,
 			ReplaceRegion declarationEdit, ResourceSet resourceSet, UpdateAcceptor updateAcceptor) {
 		RefactoringStatus status = new RefactoringStatus();
-		Iterable<ElementRenameInfo> allRenameInfos = Iterables.concat(Collections.singletonList(baseRenameInfo), dependentRenameInfos);
-		Table crossRefInfos = getCrossReferenceInfos(allRenameInfos, resourceSet, status);
-		Resource targetResource = resourceSet.getResource(baseRenameInfo.getElementURI().trimFragment(), false);
+		Table crossRefInfos = getCrossReferenceInfos(elementRenameArguments.getAllElementRenameInfos(), resourceSet, status);
+		Resource targetResource = resourceSet.getResource(elementRenameArguments.getBaseElementRenameInfo().getElementURI().trimFragment(), false);
 		if (!(targetResource instanceof XtextResource)) {
 			throw new RefactoringStatusException("Cannot load target resource", true);
 		}
@@ -67,8 +65,8 @@ public abstract class AbstractReferenceUpdater implements IReferenceUpdater {
 		ReplaceRegion undoDeclarationEdit = null;
 		try {
 			undoDeclarationEdit = applyTextEdit((XtextResource) targetResource, declarationEdit);
-			OffsetCorrector offsetCorrector = new OffsetCorrector(baseRenameInfo.getDocument(), declarationEdit);
-			Map<ElementRenameInfo, EObject> renamedElementsMap = resolveRenamedElements(allRenameInfos, resourceSet,
+			OffsetCorrector offsetCorrector = new OffsetCorrector(elementRenameArguments.getBaseElementRenameInfo().getDocument(), declarationEdit);
+			Map<ElementRenameInfo, EObject> renamedElementsMap = resolveRenamedElements(elementRenameArguments.getAllElementRenameInfos(), resourceSet,
 					offsetCorrector);
 			for (IRefactoringDocument referringDocument : crossRefInfos.getDocuments()) {
 				XtextResource referringResource = (XtextResource) resourceSet.getResource(referringDocument.getURI(), true);

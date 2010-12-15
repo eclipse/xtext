@@ -21,12 +21,12 @@ import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.participants.CheckConditionsContext;
 import org.eclipse.ltk.core.refactoring.participants.ParticipantManager;
 import org.eclipse.ltk.core.refactoring.participants.RefactoringParticipant;
-import org.eclipse.ltk.core.refactoring.participants.RenameArguments;
 import org.eclipse.ltk.core.refactoring.participants.RenameParticipant;
 import org.eclipse.ltk.core.refactoring.participants.SharableParticipants;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
+import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.ElementRenameInfo;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.ui.refactoring.IRefactoringDocument;
@@ -80,6 +80,8 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	private String newName;
 
 	private UpdateAcceptor updateAcceptor;
+
+	private ElementRenameArguments renameArguments;
 
 	@Override
 	public void initialize(final URI targetElementURI) {
@@ -157,18 +159,18 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 			updateAcceptor.accept(targetDocument, declarationEdit);
 			ElementRenameInfo baseRenameInfo = new ElementRenameInfo(targetDocument, targetElementURI, declarationEdit.getOffset());
 			Iterable<ElementRenameInfo> dependentRenameInfos = dependentElementsCalculator.getDependentElementRenameInfos(targetElement, baseRenameInfo);
-			createReferenceUpdates(declarationEdit, baseRenameInfo, dependentRenameInfos);
+			renameArguments = new ElementRenameArguments(newName, baseRenameInfo, dependentRenameInfos, true);
+			createReferenceUpdates(declarationEdit, renameArguments);
 		} catch (Exception exc) {
 			handleException(exc);
 		}
 		return status;
 	}
 
-	protected void createReferenceUpdates(final ReplaceRegion declarationEdit, ElementRenameInfo baseRenameInfo,
-			Iterable<ElementRenameInfo> dependentRenameInfos) {
-		RefactoringStatus localReferencesStatus = localReferenceUpdater.createReferenceUpdates(baseRenameInfo, dependentRenameInfos, declarationEdit, resourceSet, updateAcceptor);
+	protected void createReferenceUpdates(final ReplaceRegion declarationEdit, ElementRenameArguments renameArguments) {
+		RefactoringStatus localReferencesStatus = localReferenceUpdater.createReferenceUpdates(renameArguments, declarationEdit, resourceSet, updateAcceptor);
 		status.merge(localReferencesStatus);
-		RefactoringStatus externalReferenceStatus = indexedReferenceUpdaterDispatcher.createReferenceUpdates(baseRenameInfo, dependentRenameInfos, declarationEdit, resourceSet, updateAcceptor);
+		RefactoringStatus externalReferenceStatus = indexedReferenceUpdaterDispatcher.createReferenceUpdates(renameArguments, declarationEdit, resourceSet, updateAcceptor);
 		status.merge(externalReferenceStatus);
 	}
 
@@ -180,7 +182,6 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	@Override
 	public RefactoringParticipant[] loadParticipants(RefactoringStatus status, SharableParticipants sharedParticipants)
 			throws CoreException {
-		RenameArguments renameArguments = new RenameArguments(newName, false);
 		RenameParticipant[] renameParticipants = ParticipantManager.loadRenameParticipants(status, this,
 				targetElementURI, renameArguments, new String[] { XtextProjectHelper.NATURE_ID }, sharedParticipants);
 		return renameParticipants;

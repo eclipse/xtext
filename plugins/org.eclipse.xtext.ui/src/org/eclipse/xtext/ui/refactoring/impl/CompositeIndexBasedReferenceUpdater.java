@@ -7,9 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
-import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Sets.*;
-import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Set;
@@ -20,6 +18,7 @@ import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.ElementRenameInfo;
 import org.eclipse.xtext.ui.refactoring.IIndexBasedReferenceUpdater;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
@@ -38,15 +37,12 @@ public class CompositeIndexBasedReferenceUpdater implements IReferenceUpdater {
 	@Inject
 	private IResourceDescriptions index;
 
-	public RefactoringStatus createReferenceUpdates(ElementRenameInfo baseRenameInfo,
-			Iterable<ElementRenameInfo> dependentRenameInfos, ReplaceRegion declarationEdit, ResourceSet resourceSet,
+	public RefactoringStatus createReferenceUpdates(ElementRenameArguments elementRenameArguments , ReplaceRegion declarationEdit, ResourceSet resourceSet,
 			UpdateAcceptor textEditChangeAcceptor) {
 		RefactoringStatus status = new RefactoringStatus();
-		Iterable<ElementRenameInfo> allRenameInfos = concat(singletonList(baseRenameInfo), dependentRenameInfos);
-		Iterable<IReferenceUpdater> referenceUpdaters = collectIndexBasedReferenceUpdaters(status, allRenameInfos);
+		Iterable<IReferenceUpdater> referenceUpdaters = collectIndexBasedReferenceUpdaters(status, elementRenameArguments.getAllElementRenameInfos());
 		for (IReferenceUpdater referenceUpdater : referenceUpdaters) {
-			RefactoringStatus referenceUpdateStatus = referenceUpdater.createReferenceUpdates(baseRenameInfo,
-					dependentRenameInfos, declarationEdit, resourceSet, textEditChangeAcceptor);
+			RefactoringStatus referenceUpdateStatus = referenceUpdater.createReferenceUpdates(elementRenameArguments, declarationEdit, resourceSet, textEditChangeAcceptor);
 			status.merge(referenceUpdateStatus);
 		}
 		return status;
