@@ -114,16 +114,22 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 				.trimFragment());
 		if (resourceDescription != null) {
 			ReferenceSearchViewTreeNode resourceNode = resourceNode(resourceDescription, isUpdateViewer);
+			ReferenceSearchViewTreeNode referenceNode = null;
 			for (IEObjectDescription eObjectDescription : resourceDescription.getExportedObjects()) {
 				if (eObjectDescription.getEObjectURI().equals(eObjectURI)) {
-					ReferenceSearchViewTreeNode referenceNode = new ReferenceSearchViewTreeNode(resourceNode,
-							referenceDescription, eObjectDescription);
-					if (isUpdateViewer) {
-						viewer.add(resourceNode, referenceNode);
-						viewer.expandToLevel(resourceNode, 1);
-					}
+					referenceNode = new ReferenceSearchViewTreeNode(resourceNode, referenceDescription,
+							eObjectDescription);
+					break;
 				}
 			}
+			if (referenceNode == null)
+				referenceNode = new ReferenceSearchViewTreeNode(resourceNode, referenceDescription,
+						referenceDescription);
+			if (isUpdateViewer) {
+				viewer.add(resourceNode, referenceNode);
+				viewer.expandToLevel(resourceNode, 1);
+			}
+
 		}
 	}
 
@@ -178,8 +184,8 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 				} else if (event instanceof Reset) {
 					if (rootNodes != null && !rootNodes.isEmpty()) {
 						synchronized (viewer) {
-							viewer.remove(viewer.getInput(), Iterables.toArray(rootNodes,
-									ReferenceSearchViewTreeNode.class));
+							viewer.remove(viewer.getInput(),
+									Iterables.toArray(rootNodes, ReferenceSearchViewTreeNode.class));
 							rootNodes = null;
 						}
 					}
