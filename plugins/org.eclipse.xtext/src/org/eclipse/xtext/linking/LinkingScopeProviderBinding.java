@@ -5,17 +5,16 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.tests.typing;
+package org.eclipse.xtext.linking;
 
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+import com.google.inject.BindingAnnotation;
 
 /**
- * @author Sven Efftinge
- *
+ * @author Sven Efftinge - Initial contribution and API
  */
-public class TypesServiceTest extends AbstractXbaseTestCase {
-	
-	public void testGetCommonType() throws Exception {
-		
-	}
-}
+@BindingAnnotation
+@Retention(RetentionPolicy.RUNTIME)
+public @interface LinkingScopeProviderBinding {}

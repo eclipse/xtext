@@ -10,14 +10,19 @@ ruleXExpression :
 
 // Rule XAssignment
 ruleXAssignment :
+	RULE_ID ruleOpSingleAssign ruleXAssignment |
 	ruleXOrExpression (
-		ruleOpAssign ruleXAssignment
+		ruleOpMultiAssign ruleXAssignment
 	)?
 ;
 
-// Rule OpAssign
-ruleOpAssign :
-	'=' |
+// Rule OpSingleAssign
+ruleOpSingleAssign :
+	'='
+;
+
+// Rule OpMultiAssign
+ruleOpMultiAssign :
 	'+='
 ;
 
@@ -131,6 +136,7 @@ ruleOpUnary :
 // Rule XMemberFeatureCall
 ruleXMemberFeatureCall :
 	ruleXPrimaryExpression (
+		'.' RULE_ID ruleOpSingleAssign ruleXAssignment |
 		(
 			'.' |
 			'?.' |

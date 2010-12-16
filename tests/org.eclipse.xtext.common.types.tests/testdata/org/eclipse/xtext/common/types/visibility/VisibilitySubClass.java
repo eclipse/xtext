@@ -5,23 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.scoping;
-
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.impl.SimpleScope;
+package org.eclipse.xtext.common.types.visibility;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class JvmFeatureScope extends SimpleScope {
-	
-	public JvmFeatureScope(IScope parent, final Iterable<IEObjectDescription> descriptions) {
-		super(parent,descriptions);
-	}
+public class VisibilitySubClass extends VisibilitySuperClass {
 
-	@Override
-	protected Object getShadowingKey(IEObjectDescription description) {
-		return ((JvmFeatureDescription)description).getKey();
-	}
 }

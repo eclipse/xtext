@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.scoping;
+package org.eclipse.xtext.xbase.scoping.featurecalls;
 
 import static org.eclipse.xtext.naming.QualifiedName.*;
 

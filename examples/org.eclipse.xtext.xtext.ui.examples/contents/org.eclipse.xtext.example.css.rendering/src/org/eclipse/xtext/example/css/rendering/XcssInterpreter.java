@@ -23,6 +23,7 @@ import org.eclipse.xtext.example.css.xcss.StyleRule;
 import org.eclipse.xtext.example.css.xcss.StyleSheet;
 import org.eclipse.xtext.example.css.xcss.TypeSelector;
 import org.eclipse.xtext.example.css.xcss.WildcardSelector;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
@@ -157,17 +158,19 @@ public class XcssInterpreter extends XbaseInterpreter  {
 	}
 	
 	@Override
-	protected Object assignValueByOperation(JvmOperation operation, Object receiver, Object value) {
+	public Object _assignValueByOperation(JvmOperation operation,
+			XAssignment assignment, Object value, IEvaluationContext context) {
+		Object receiver = getReceiver(assignment, context);
 		if (StyleAware.class.getCanonicalName().equals(operation.getDeclaringType().getCanonicalName())) {
 			if (receiver instanceof Control) {
 				StyleAware borderAware = StyleAwareImpl.getBorderAware((Control) receiver);
 				receiver = borderAware;
 				if (receiver != null)
-					return super.assignValueByOperation(operation, receiver, value);
+					return super._assignValueByOperation(operation, assignment, value, context);
 			}
 			return null;
 		} else {
-			return super.assignValueByOperation(operation, receiver, value);
+			return super._assignValueByOperation(operation, assignment, value, context);
 		}
 //		List<Object> argumentValues = Lists.newArrayList(value);
 //		IEvaluationResult result = invokeOperation(operation, receiver, argumentValues);

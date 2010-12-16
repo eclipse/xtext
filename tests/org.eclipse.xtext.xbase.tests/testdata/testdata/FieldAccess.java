@@ -13,7 +13,7 @@ package testdata;
 public class FieldAccess {
 
 	public String stringField;
-	public String finalField;
+	public final String finalField;
 	
 	public FieldAccess() {
 		finalField = "finalField";

@@ -24,7 +24,7 @@ import com.google.common.collect.Iterables;
  */
 public abstract class AbstractScope implements IScope {
 
-	private IScope parent = IScope.NULLSCOPE;
+	protected IScope parent = IScope.NULLSCOPE;
 
 	public AbstractScope() {
 	}

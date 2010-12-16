@@ -151,6 +151,8 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 			checkType(argument, context);
 		}
 		JvmConstructor constructor = object.getConstructor();
+		if (constructor.eIsProxy())
+			return null;
 		JvmParameterizedTypeReference result = factory.createJvmParameterizedTypeReference();
 		result.setType(constructor.getDeclaringType());
 		for (JvmTypeReference argument : object.getTypeArguments()) {

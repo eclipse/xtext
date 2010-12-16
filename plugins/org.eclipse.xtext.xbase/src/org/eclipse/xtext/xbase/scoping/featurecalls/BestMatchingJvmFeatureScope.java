@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.scoping;
+package org.eclipse.xtext.xbase.scoping.featurecalls;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -18,9 +18,8 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.ISelector;
 
 /**
- * 
  * A scope which goes through all returned EObjectDescriptions in order to find the best fit, if it is asked for the
- * 'first' element.
+ * 'first' element. 
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -30,7 +29,7 @@ public class BestMatchingJvmFeatureScope implements IScope {
 	protected final EReference reference;
 	private IJvmTypeConformanceComputer computer;
 	private IScope delegate;
-	private ISelector selector;
+	private ISelector filter;
 
 	public BestMatchingJvmFeatureScope(IJvmTypeConformanceComputer computer, EObject context, EReference ref,
 			IScope delegate, ISelector selector) {
@@ -38,23 +37,16 @@ public class BestMatchingJvmFeatureScope implements IScope {
 		this.context = context;
 		this.reference = ref;
 		this.delegate = delegate;
-		this.selector = selector;
+		this.filter = selector;
 	}
 
 	public IEObjectDescription getSingleElement(ISelector selector) {
-		Iterable<IEObjectDescription> iterable = delegate.getElements(enhance(selector));
-		return getBestMatch(iterable);
+		return getBestMatch(getElements(selector));
 	}
 	
-	protected ISelector enhance(ISelector selector2) {
-		if (selector2 instanceof ISelector.DelegatingSelector) {
-			((ISelector.DelegatingSelector) selector2).addDelegate(selector);
-		}
-		return selector2;
-	}
-
 	public Iterable<IEObjectDescription> getElements(ISelector selector) {
-		return delegate.getElements(enhance(selector));
+		Iterable<IEObjectDescription> iterable = this.filter.applySelector(delegate.getElements(selector));
+		return iterable;
 	}
 
 	protected IEObjectDescription getBestMatch(Iterable<IEObjectDescription> iterable) {

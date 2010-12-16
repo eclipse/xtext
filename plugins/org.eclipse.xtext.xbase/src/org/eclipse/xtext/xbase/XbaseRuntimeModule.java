@@ -9,11 +9,16 @@ package org.eclipse.xtext.xbase;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
+import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
+import org.eclipse.xtext.xbase.linking.XbaseLinkingScopeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
+
+import com.google.inject.Binder;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -33,5 +38,10 @@ public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 	
 	public Class<? extends IEvaluationContext> bindEvaluationContext() {
 		return DefaultEvaluationContext.class;
+	}
+	
+	@Override
+	public void configureLinkingIScopeProvider(Binder binder) {
+		binder.bind(IScopeProvider.class).annotatedWith(LinkingScopeProviderBinding.class).to(XbaseLinkingScopeProvider.class);
 	}
 }

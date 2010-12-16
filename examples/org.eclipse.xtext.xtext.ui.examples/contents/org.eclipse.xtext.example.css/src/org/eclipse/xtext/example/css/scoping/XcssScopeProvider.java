@@ -24,6 +24,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.SingletonScope;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 
@@ -87,19 +88,19 @@ public class XcssScopeProvider extends XbaseScopeProvider {
 		return super.createLocalVarScope(context, reference, parentScope);
 	}
 
-	protected IScope createFeatureScopeForTypeRef(JvmTypeReference type, IScope parent,
+	protected IScope createFeatureScopeForTypeRef(JvmTypeReference type, XAbstractFeatureCall context, IScope parent,
 			Predicate<JvmMember> isAccept) {
 		if (type instanceof JvmWildcardTypeReference) {
 			JvmWildcardTypeReference wildcard = (JvmWildcardTypeReference) type;
 			for(JvmTypeConstraint constraint: wildcard.getConstraints()) {
 				if (constraint instanceof JvmUpperBound) {
 					JvmTypeReference upperBound = constraint.getTypeReference();
-					parent = createFeatureScopeForTypeRef(upperBound, parent, isAccept);
+					parent = createFeatureScopeForTypeRef(upperBound, context, getContextType(context));
 				}
 			}
 			return parent;
 		} else {
-			return super.createFeatureScopeForTypeRef(type, parent, isAccept);
+			return super.createFeatureScopeForTypeRef(type, context, getContextType(context));
 		}
 	}
 	

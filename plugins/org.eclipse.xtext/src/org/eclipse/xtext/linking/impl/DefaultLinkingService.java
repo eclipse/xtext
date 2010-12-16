@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
@@ -37,6 +38,7 @@ import com.google.inject.Provider;
 public class DefaultLinkingService extends AbstractLinkingService {
 
 	@Inject
+	@LinkingScopeProviderBinding
 	private IScopeProvider scopeProvider;
 
 	@Inject

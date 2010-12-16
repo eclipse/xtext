@@ -8,9 +8,10 @@
 package org.eclipse.xtext.xbase.tests.scoping;
 
 import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
@@ -32,17 +33,16 @@ public class XbaseScopeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testAssignment_1() throws Exception {
-		XAssignment assignment = (XAssignment) expression("new java.util.ArrayList<java.lang.String>() += 'foo'", true);
+		XBinaryOperation assignment = (XBinaryOperation) expression("new java.util.ArrayList<java.lang.String>() += 'foo'", true);
 		assertEquals("java.util.ArrayList.add(E)",assignment.getFeature().getCanonicalName());
 	}
 	
 	public void testLocalVarAssignment_1() throws Exception {
 		XBlockExpression block = (XBlockExpression) expression("{ var x = ''; x = '' }");
 		XAssignment assignment = (XAssignment) block.getExpressions().get(1);
-		assertTrue(String.valueOf(assignment.getAssignable()), assignment.getAssignable() instanceof XFeatureCall);
-		assertTrue(String.valueOf(((XAbstractFeatureCall) assignment.getAssignable()).getFeature()), assignment.getAssignable() instanceof XFeatureCall);
+		assertNull(assignment.getAssignable());
 		assertTrue(String.valueOf(assignment.getFeature()), assignment.getFeature() instanceof XVariableDeclaration);
-		assertSame(assignment.getFeature(), ((XAbstractFeatureCall) assignment.getAssignable()).getFeature());
+		assertSame(block.getExpressions().get(0), assignment.getFeature());
 	}
 	
 	public void testImplicitThis_1() throws Exception {
@@ -88,7 +88,9 @@ public class XbaseScopeProviderTest extends AbstractXbaseTestCase {
 				"	val size = 23;" +
 				"	size;" +
 				"}", false);
-		assertTrue(((XFeatureCall)bop.getExpressions().get(2)).getFeature() instanceof XVariableDeclaration);
+		final JvmIdentifyableElement feature = ((XFeatureCall)bop.getExpressions().get(2)).getFeature();
+		assertTrue(feature.getClass().getName(), feature instanceof XVariableDeclaration);
+		
 		XConstructorCall xConstructorCall = (XConstructorCall)((XVariableDeclaration)bop.getExpressions().get(0)).getRight();
 		assertTrue(xConstructorCall.getConstructor().eIsProxy());
 	}
@@ -239,8 +241,7 @@ public class XbaseScopeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testGenerics_1() throws Exception {
-		// TODO fix the concrete error
-		expressionWithError("((testdata.GenericType1<? extends java.lang.String>) null) += 'foo'", 1);
+		expressionWithError("((testdata.GenericType1<? extends java.lang.String>) null) += 'foo'", 0);
 	}
 	
 	public void testGenerics_2() throws Exception {
@@ -273,7 +274,7 @@ public class XbaseScopeProviderTest extends AbstractXbaseTestCase {
 	
 	public void testPropertySetter_1() throws Exception {
 		XAssignment exp = (XAssignment) expression("new testdata.Properties1().prop1 = 'Text'");
-		assertEquals(((XMemberFeatureCall)exp.getAssignable()).getFeature(), exp.getFeature());
+		assertEquals(((XConstructorCall)exp.getAssignable()).getConstructor().getDeclaringType(), ((JvmField)exp.getFeature()).getDeclaringType());
 	}
 	
 	public void testPropertySetter_2() throws Exception {
