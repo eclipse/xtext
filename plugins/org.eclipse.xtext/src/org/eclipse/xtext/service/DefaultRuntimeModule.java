@@ -17,6 +17,7 @@ import org.eclipse.xtext.formatting.INodeModelFormatter;
 import org.eclipse.xtext.formatting.impl.DefaultNodeModelFormatter;
 import org.eclipse.xtext.formatting.impl.OneWhitespaceFormatter;
 import org.eclipse.xtext.linking.ILinkingService;
+import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.lazy.LazyLinker;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
@@ -124,6 +125,10 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 
 	public Class<? extends IScopeProvider> bindIScopeProvider() {
 		return SimpleLocalScopeProvider.class;
+	}
+	
+	public void configureLinkingIScopeProvider(Binder binder) {
+		binder.bind(IScopeProvider.class).annotatedWith(LinkingScopeProviderBinding.class).to(IScopeProvider.class);
 	}
 	
 	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
