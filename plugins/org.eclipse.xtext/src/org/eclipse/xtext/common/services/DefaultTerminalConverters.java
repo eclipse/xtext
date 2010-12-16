@@ -13,10 +13,12 @@ import org.eclipse.xtext.conversion.impl.AbstractDeclarativeValueConverterServic
 import org.eclipse.xtext.conversion.impl.AbstractIDValueConverter;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * Default converters for Strings, Integers and IDs.
  */
+@Singleton
 public class DefaultTerminalConverters extends AbstractDeclarativeValueConverterService {
 	
 	@Inject
