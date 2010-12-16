@@ -5,11 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.tests.scoping;
+package org.eclipse.xtext.xbase.tests.linking;
 
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -25,7 +27,7 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class XbaseScopeProviderTest extends AbstractXbaseTestCase {
+public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	
 	public void testMemberCall() throws Exception {
 		XMemberFeatureCall expression = (XMemberFeatureCall) expression("'x'.length()");
@@ -280,5 +282,17 @@ public class XbaseScopeProviderTest extends AbstractXbaseTestCase {
 	public void testPropertySetter_2() throws Exception {
 		XAssignment exp = (XAssignment) expression("new testdata.Properties1().prop2 = 'Text'");
 		assertEquals("testdata.Properties1.setProp2(java.lang.String)", exp.getFeature().getCanonicalName());
+	}
+	
+	public void testLinkingToInvisibleElements() throws Exception {
+		XMemberFeatureCall expression = (XMemberFeatureCall) expression("new testdata.GenericType1<java.lang.String>().t.offset");
+		assertEquals("java.lang.String.offset", expression.getFeature().getCanonicalName());
+		assertTrue(((JvmMember)expression.getFeature()).getVisibility()==JvmVisibility.PRIVATE);
+	}
+	
+	public void testAssignmentToInvisibleElements() throws Exception {
+		XAssignment expression = (XAssignment) expression("new testdata.GenericType1<java.lang.String>().t = 'foo'");
+		assertEquals("testdata.GenericType1.t", expression.getFeature().getCanonicalName());
+		assertTrue(((JvmMember)expression.getFeature()).getVisibility()==JvmVisibility.PRIVATE);
 	}
 }
