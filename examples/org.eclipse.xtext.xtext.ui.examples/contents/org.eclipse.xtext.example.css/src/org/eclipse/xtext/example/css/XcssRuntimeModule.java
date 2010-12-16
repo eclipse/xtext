@@ -12,7 +12,7 @@ import org.eclipse.xtext.example.css.scoping.XcssGlobalScopeDelegatingScopeProvi
 import org.eclipse.xtext.example.css.scoping.XcssTypeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipse.xtext.xbase.scoping.CallableFeaturePredicate;
+import org.eclipse.xtext.xbase.scoping.featurecalls.CallableFeaturePredicate;
 
 import com.google.inject.name.Names;
 

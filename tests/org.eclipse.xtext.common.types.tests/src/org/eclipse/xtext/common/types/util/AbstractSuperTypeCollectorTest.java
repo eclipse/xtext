@@ -9,10 +9,13 @@ package org.eclipse.xtext.common.types.util;
 
 import java.io.Serializable;
 import java.util.AbstractCollection;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.RandomAccess;
 
 import junit.framework.TestCase;
 
@@ -81,6 +84,28 @@ public abstract class AbstractSuperTypeCollectorTest extends TestCase {
 		assertEquals(collected.toString(), ImmutableSet.of(
 				Iterable.class.getName(),
 				Collection.class.getName(),Object.class.getName()), collected);
+	}
+	
+	public void testSortedResultForList() {
+		Iterator<String> collected = getCollector().collectSuperTypeNames(getType(List.class)).iterator();
+		assertEquals(Collection.class.getName(),collected.next());
+		assertEquals(Iterable.class.getName(),collected.next());
+		assertEquals(Object.class.getName(),collected.next());
+		assertFalse(collected.hasNext());
+	}
+	
+	public void testSortedResultForArrayList() {
+		Iterator<String> collected = getCollector().collectSuperTypeNames(getType(ArrayList.class)).iterator();
+		assertEquals(Serializable.class.getName(),collected.next());
+		assertEquals(Object.class.getName(),collected.next());
+		assertEquals(Cloneable.class.getName(),collected.next());
+		assertEquals(RandomAccess.class.getName(),collected.next());
+		assertEquals(List.class.getName(),collected.next());
+		assertEquals(Collection.class.getName(),collected.next());
+		assertEquals(Iterable.class.getName(),collected.next());
+		assertEquals(AbstractList.class.getName(),collected.next());
+		assertEquals(AbstractCollection.class.getName(),collected.next());
+		assertFalse(collected.hasNext());
 	}
 	
 	public void testArgIsNull() {

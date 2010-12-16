@@ -270,7 +270,7 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 	
 	public void testCommonSuperType_0() throws Exception {
 		assertCommonSuperType(
-				Serializable.class,
+				CharSequence.class,
 				String.class,
 				StringBuilder.class);
 	}
