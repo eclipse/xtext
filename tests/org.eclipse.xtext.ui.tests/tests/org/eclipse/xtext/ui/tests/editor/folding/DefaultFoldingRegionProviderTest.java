@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.folding;
 
+import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -15,8 +17,6 @@ import org.eclipse.xtext.ui.editor.folding.DefaultFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegion;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.tests.editor.AbstractEditorTest;
-
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 
 /**
  * @author svenefftinge - Initial contribution and API
@@ -27,37 +27,88 @@ public class DefaultFoldingRegionProviderTest extends AbstractEditorTest {
 	protected String getEditorId() {
 		return "org.eclipse.xtext.ui.tests.FoldingTestLanguage";
 	}
-	
+
 	public void testGetFoldingRegions0() throws Exception {
 		IFile iFile = createFile("foo/bar.foldingtestlanguage", "element foo element bar end element baz end end");
-		XtextEditor editor = openEditor(iFile);
-		IXtextDocument document = editor.getDocument();
+		IXtextDocument document = openFileAndReturnDocument(iFile);
 		DefaultFoldingRegionProvider reg = new DefaultFoldingRegionProvider();
 		List<IFoldingRegion> regions = reg.getFoldingRegions(document);
-		assertEquals(0,regions.size());
+		assertEquals(0, regions.size());
 	}
+
 	public void testGetFoldingRegions1() throws Exception {
 		IFile iFile = createFile("foo/bar.foldingtestlanguage", "element foo \nelement bar end \nelement baz end end");
-		XtextEditor editor = openEditor(iFile);
-		IXtextDocument document = editor.getDocument();
+		IXtextDocument document = openFileAndReturnDocument(iFile);
 		DefaultFoldingRegionProvider reg = new DefaultFoldingRegionProvider();
 		List<IFoldingRegion> regions = reg.getFoldingRegions(document);
-		assertEquals(1,regions.size());
+		assertEquals(1, regions.size());
 	}
+
 	public void testGetFoldingRegions2() throws Exception {
 		IFile iFile = createFile("foo/bar.foldingtestlanguage", "element foo \nelement bar \nend \nelement baz end end");
-		XtextEditor editor = openEditor(iFile);
-		IXtextDocument document = editor.getDocument();
+		IXtextDocument document = openFileAndReturnDocument(iFile);
 		DefaultFoldingRegionProvider reg = new DefaultFoldingRegionProvider();
 		List<IFoldingRegion> regions = reg.getFoldingRegions(document);
-		assertEquals(2,regions.size());
+		assertEquals(2, regions.size());
 	}
+
 	public void testGetFoldingRegions3() throws Exception {
-		IFile iFile = createFile("foo/bar.foldingtestlanguage", "element foo \nelement \nbar end \nelement baz \nend end");
-		XtextEditor editor = openEditor(iFile);
-		IXtextDocument document = editor.getDocument();
+		IFile iFile = createFile("foo/bar.foldingtestlanguage",
+				"element foo \nelement \nbar end \nelement baz \nend end");
+		IXtextDocument document = openFileAndReturnDocument(iFile);
 		DefaultFoldingRegionProvider reg = new DefaultFoldingRegionProvider();
 		List<IFoldingRegion> regions = reg.getFoldingRegions(document);
-		assertEquals(3,regions.size());
+		assertEquals(3, regions.size());
+	}
+
+	public void testGetFoldingRegionsWithMlCommentInSameLine() throws Exception {
+		IFile iFile = createFile("foo/bar.foldingtestlanguage",
+				"/* */\n element foo \nelement bar end \nelement baz end end");
+		IXtextDocument document = openFileAndReturnDocument(iFile);
+		DefaultFoldingRegionProvider reg = new DefaultFoldingRegionProvider();
+		List<IFoldingRegion> regions = reg.getFoldingRegions(document);
+		assertEquals(1, regions.size());
+	}
+
+	public void testGetFoldingRegionsWithMlCommentStart() throws Exception {
+		IFile iFile = createFile("foo/bar.foldingtestlanguage",
+				"/**\n*/\n element foo \nelement bar end \nelement baz end end");
+		IXtextDocument document = openFileAndReturnDocument(iFile);
+		DefaultFoldingRegionProvider reg = new DefaultFoldingRegionProvider();
+		List<IFoldingRegion> regions = reg.getFoldingRegions(document);
+		assertEquals(2, regions.size());
+	}
+
+	public void testGetFoldingRegionsWithMlCommentEnd() throws Exception {
+		IFile iFile = createFile("foo/bar.foldingtestlanguage",
+				"element foo \nelement bar end \nelement baz end end\n/**\n*/");
+		IXtextDocument document = openFileAndReturnDocument(iFile);
+		DefaultFoldingRegionProvider reg = new DefaultFoldingRegionProvider();
+		List<IFoldingRegion> regions = reg.getFoldingRegions(document);
+		assertEquals(2, regions.size());
+	}
+
+	public void testGetFoldingRegionsWithMlCommentBetween() throws Exception {
+		IFile iFile = createFile("foo/bar.foldingtestlanguage",
+				"element foo \nelement bar \n /**\n*/ \n end \nelement baz end end");
+		IXtextDocument document = openFileAndReturnDocument(iFile);
+		DefaultFoldingRegionProvider reg = new DefaultFoldingRegionProvider();
+		List<IFoldingRegion> regions = reg.getFoldingRegions(document);
+		assertEquals(3, regions.size());
+	}
+
+	public void testGetFoldingRegionsWithMutltipleMlComment() throws Exception {
+		IFile iFile = createFile("foo/bar.foldingtestlanguage",
+				"/**\n*/\n element foo \nelement bar \n/**\n*/\n end \nelement \n/**\n*/\n baz end \n/**\n*/\n end");
+		IXtextDocument document = openFileAndReturnDocument(iFile);
+		DefaultFoldingRegionProvider reg = new DefaultFoldingRegionProvider();
+		List<IFoldingRegion> regions = reg.getFoldingRegions(document);
+		assertEquals(7, regions.size());
+	}
+
+	protected IXtextDocument openFileAndReturnDocument(IFile iFile) throws Exception {
+		XtextEditor editor = openEditor(iFile);
+		IXtextDocument document = editor.getDocument();
+		return document;
 	}
 }
