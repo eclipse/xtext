@@ -10,6 +10,7 @@ package org.eclipse.xtext.builder.clustering;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
@@ -35,7 +36,6 @@ import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -114,11 +114,6 @@ public class ClusteringBuilderState extends AbstractBuilderState {
 
         // Our return value. It contains all the deltas resulting from this build.
         final Set<Delta> allDeltas = Sets.newHashSet();
-
-        // Add all pending deltas to all deltas (may be scheduled java deltas)
-        Collection<Delta> pendingDeltas = buildData.getAndRemovePendingDeltas();
-        allDeltas.addAll(pendingDeltas);
-        queueAffectedResources(allRemainingURIs, this, newState, pendingDeltas, buildData, progress.newChild(1));
         
         // Step 5: Put all resources depending on a deleted resource into the queue. Also register the deltas in allDeltas.
         if (!toBeDeleted.isEmpty()) {
@@ -128,9 +123,12 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                     allDeltas.add(new DefaultResourceDescriptionDelta(oldDescription, null));
                 }
             }
-            queueAffectedResources(allRemainingURIs, this, newState, allDeltas, buildData, progress.newChild(1));
         }
-
+        // Add all pending deltas to all deltas (may be scheduled java deltas)
+        Collection<Delta> pendingDeltas = buildData.getAndRemovePendingDeltas();
+        allDeltas.addAll(pendingDeltas);
+        queueAffectedResources(allRemainingURIs, this, newState, allDeltas, buildData, progress.newChild(1));
+        
         // Step 6: Iteratively got through the queue. For each resource, create a new resource description and queue all depending
         // resources that are not yet in the delta. Validate resources. Do this in chunks.
         final SubMonitor subProgress = progress.newChild(80);
@@ -194,11 +192,9 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                 index++;
             }
             queueAffectedResources(allRemainingURIs, this, newState, changedDeltas, buildData, subProgress.newChild(1));
-            changedDeltas.clear();
             // Validate now.
             updateMarkers(resourceSet, ImmutableList.<Delta>copyOf(newDeltas), subProgress.newChild(1));
             allDeltas.addAll(newDeltas);
-            newDeltas.clear();
             // Release memory
             resourceSet.getResources().clear();
         }
@@ -298,29 +294,29 @@ public class ClusteringBuilderState extends AbstractBuilderState {
             Collection<Delta> deltas, 
             BuildData buildData, 
             final IProgressMonitor monitor) {
-        final SubMonitor progress = SubMonitor.convert(monitor, allRemainingURIs.size());
-        if (deltas.isEmpty()) {
+    	if (deltas.isEmpty()) {
             return;
         }
-        final List<URI> toRemove = Lists.newArrayList();
-        for (final URI candidateURI : allRemainingURIs) {
+        final SubMonitor progress = SubMonitor.convert(monitor, allRemainingURIs.size());
+        Iterator<URI> iter = allRemainingURIs.iterator();
+        while (iter.hasNext()) {
             if (progress.isCanceled()) {
                 throw new OperationCanceledException();
             }
+            final URI candidateURI = iter.next();
             final IResourceDescription candidateDescription = oldState.getResourceDescription(candidateURI);
             final IResourceDescription.Manager manager = getResourceDescriptionManager(candidateURI);
             if (candidateDescription == null || manager == null) {
                 // If there is no description in the old state, there's no need to re-check this over and over.
-                toRemove.add(candidateURI);
+                iter.remove();
             } else {
                 if (manager.isAffected(deltas, candidateDescription, newState)) {
                     buildData.queueURI(candidateURI);
-                    toRemove.add(candidateURI);
+                    iter.remove();
                 }
             }
             progress.worked(1);
         }
-        allRemainingURIs.removeAll(toRemove);
     }
 
 	protected IResourceDescription.Manager getResourceDescriptionManager(URI uri) {
