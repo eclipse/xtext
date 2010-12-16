@@ -7,11 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.shared;
 
+import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.util.Modules;
 
 public class Activator implements BundleActivator {
 
@@ -31,7 +33,7 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
-		Activator.injector = Guice.createInjector(new SharedCommonTypesModule());
+		Activator.injector = Guice.createInjector(Modules.override(new SharedStateModule()).with(new SharedCommonTypesModule()));
 	}
 
 	/*

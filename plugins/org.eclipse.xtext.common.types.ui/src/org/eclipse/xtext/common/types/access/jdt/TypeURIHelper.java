@@ -40,6 +40,12 @@ public class TypeURIHelper implements URIHelperConstants {
 		uriBuilder.append(URIHelperConstants.PROTOCOL).append(":").append(withoutProtocol);
 		return createURI(uriBuilder);
 	}
+	
+	public URI createResourceURIForFQN(String fqn) {
+		StringBuilder uriBuilder = new StringBuilder(URIHelperConstants.PROTOCOL.length() + 1 + URIHelperConstants.OBJECTS.length() + fqn.length());
+		uriBuilder.append(URIHelperConstants.PROTOCOL).append(":").append(URIHelperConstants.OBJECTS).append(fqn);
+		return createURI(uriBuilder);
+	}
 
 	public StringBuilder createURIBuilder() {
 		StringBuilder builder = new StringBuilder(48);

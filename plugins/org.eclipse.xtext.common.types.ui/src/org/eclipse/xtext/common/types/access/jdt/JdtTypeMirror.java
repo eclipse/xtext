@@ -13,12 +13,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.core.ElementChangedEvent;
-import org.eclipse.jdt.core.IElementChangedListener;
-import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.jdt.core.IJavaElementDelta;
 import org.eclipse.jdt.core.IType;
-import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractClassMirror;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
@@ -26,9 +21,9 @@ import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JdtTypeMirror extends AbstractClassMirror implements IElementChangedListener, Adapter {
+public class JdtTypeMirror extends AbstractClassMirror implements Adapter {
 
-	private final IType mirroredType;
+	private IType mirroredType;
 	private final ITypeFactory<IType> typeFactory;
 	private TypeResource typeResource;
 
@@ -40,7 +35,6 @@ public class JdtTypeMirror extends AbstractClassMirror implements IElementChange
 	public void initialize(TypeResource typeResource) {
 		typeResource.getContents().add(typeFactory.createType(mirroredType));
 		this.typeResource = typeResource;
-		JavaCore.addElementChangedListener(this);
 		typeResource.getResourceSet().eAdapters().add(this);
 	}
 
@@ -53,31 +47,13 @@ public class JdtTypeMirror extends AbstractClassMirror implements IElementChange
 		return mirroredType;
 	}
 
-	public void elementChanged(ElementChangedEvent event) {
-		if (isAffectedBy(event.getDelta()))
-			unloadResource();
-	}
-	
-	private boolean isAffectedBy(IJavaElementDelta delta) {
-		IJavaElement element = delta.getElement();
-		if (mirroredType.equals(element))
-			return true;
-		if (element.getElementType() > IJavaElement.TYPE)
-			return false;
-		for(IJavaElementDelta child: delta.getAffectedChildren()) {
-			if (isAffectedBy(child))
-				return true;
-		}
-		return false;
-	}
-
 	protected void unloadResource() {
 		if (typeResource.getResourceSet() != null)
 			typeResource.getResourceSet().eAdapters().remove(this);
-		JavaCore.removeElementChangedListener(this);
 		typeResource.unload();
 		if (typeResource.getResourceSet() != null)
 			typeResource.getResourceSet().getResources().remove(typeResource);
+		mirroredType = null;
 	}
 
 	public Notifier getTarget() {

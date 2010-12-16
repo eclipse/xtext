@@ -78,7 +78,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	protected IMirror createMirrorForFQN(String name) throws TypeNotFoundException {
 		try {
 			IType type = javaProject.findType(name);
-			if (type == null)
+			if (type == null || !type.exists())
 				throw new TypeNotFoundException("No such type available '" + name + "'");
 			return new JdtTypeMirror(type, typeFactory);
 		}

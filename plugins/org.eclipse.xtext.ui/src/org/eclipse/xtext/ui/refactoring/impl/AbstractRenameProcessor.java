@@ -9,7 +9,7 @@ package org.eclipse.xtext.ui.refactoring.impl;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.ltk.core.refactoring.participants.RenameProcessor;
-import org.eclipse.xtext.ui.refactoring.IRenameElementStrategy;
+import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 
 import com.google.inject.ImplementedBy;
 
@@ -19,11 +19,11 @@ import com.google.inject.ImplementedBy;
  * @author koehnlein - Initial contribution and API
  */
 @ImplementedBy(RenameElementProcessor.class)
-public abstract class AbstractRenameElementProcessor extends RenameProcessor {
+public abstract class AbstractRenameProcessor extends RenameProcessor {
 
 	public abstract void initialize(URI targetElementURI);
 
-	public abstract IRenameElementStrategy getRenameElementStrategy();
+	public abstract IRenameStrategy getRenameElementStrategy();
 
 	public abstract void setNewName(String newName);
 }

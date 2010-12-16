@@ -23,6 +23,7 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.ui.editor.DocumentBasedDirtyResource;
@@ -198,6 +199,10 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 	public IResourceDescription getResourceDescription(Resource resource) {
 		assertSame(this.resource, resource);
 		return description;
+	}
+	
+	public Delta createDelta(IResourceDescription oldDescription, IResourceDescription newDescription) {
+		return new DefaultResourceDescriptionDelta(oldDescription, newDescription);
 	}
 
 	public URI getURI() {

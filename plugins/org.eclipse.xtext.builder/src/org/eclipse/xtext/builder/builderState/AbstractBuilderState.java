@@ -17,14 +17,16 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.builder.impl.BuildData;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -41,9 +43,6 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 
 	@Inject
 	private PersistedStateProvider persister;
-
-	@Inject
-	private IResourceDescriptionsUpdater updater;
 
 	private boolean isLoaded = false;
 
@@ -93,22 +92,17 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 		this.persister = persister;
 	}
 
-	public synchronized ImmutableList<IResourceDescription.Delta> update(ResourceSet resourceSet,
-			Set<URI> toBeAddedOrUpdated, Set<URI> toBeRemoved, IProgressMonitor monitor) {
+	public synchronized ImmutableList<IResourceDescription.Delta> update(BuildData buildData, IProgressMonitor monitor) {
 		ensureLoaded();
-		toBeAddedOrUpdated = ensureNotNull(toBeAddedOrUpdated);
-		toBeRemoved = ensureNotNull(toBeRemoved);
-
 		final SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.AbstractBuilderState_0, 1);
 		subMonitor.subTask(Messages.AbstractBuilderState_0);
-		if (toBeAddedOrUpdated.isEmpty() && toBeRemoved.isEmpty())
+		if (buildData.isEmpty())
 			return ImmutableList.of();
 		if (monitor.isCanceled())
 			throw new OperationCanceledException();
 
 		final Map<URI, IResourceDescription> newMap = getCopiedResourceDescriptionsMap();
-		final Collection<Delta> result = doUpdate(resourceSet, toBeAddedOrUpdated, toBeRemoved, newMap,
-				subMonitor.newChild(1));
+		final Collection<IResourceDescription.Delta> result = doUpdate(buildData, newMap, subMonitor.newChild(1));
 
 		if (monitor.isCanceled())
 			throw new OperationCanceledException();
@@ -119,8 +113,7 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 		return event.getDeltas();
 	}
 
-	protected abstract Collection<Delta> doUpdate(ResourceSet resourceSet, Set<URI> toBeAddedOrUpdated,
-			Set<URI> toBeRemoved, Map<URI, IResourceDescription> newMap, IProgressMonitor monitor);
+	protected abstract Collection<IResourceDescription.Delta> doUpdate(BuildData buildData, Map<URI, IResourceDescription> newMap, IProgressMonitor monitor);
 
 	public synchronized ImmutableList<IResourceDescription.Delta> clean(Set<URI> toBeRemoved, IProgressMonitor monitor) {
 		ensureLoaded();
@@ -132,12 +125,12 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 			return ImmutableList.of();
 		if (monitor.isCanceled())
 			throw new OperationCanceledException();
-		Collection<Delta> deltas = doClean(toBeRemoved, subMonitor.newChild(1));
+		Collection<IResourceDescription.Delta> deltas = doClean(toBeRemoved, subMonitor.newChild(1));
 
 		final Map<URI, IResourceDescription> newMap = getCopiedResourceDescriptionsMap();
 		if (monitor.isCanceled())
 			throw new OperationCanceledException();
-		for (Delta delta : deltas) {
+		for (IResourceDescription.Delta delta : deltas) {
 			newMap.remove(delta.getOld().getURI());
 		}
 		ResourceDescriptionChangeEvent event = new ResourceDescriptionChangeEvent(deltas, this);
@@ -150,17 +143,19 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 		return event.getDeltas();
 	}
 
-	protected Collection<Delta> doClean(Set<URI> toBeRemoved, IProgressMonitor monitor) {
-		SubMonitor subMonitor = SubMonitor.convert(monitor, 1);
-		Collection<Delta> result = updater.clean(this, toBeRemoved, subMonitor.newChild(1));
-		return result;
+	protected Collection<IResourceDescription.Delta> doClean(Set<URI> toBeRemoved, IProgressMonitor monitor) {
+        SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.AbstractBuilderState_2, toBeRemoved.size());
+        subMonitor.subTask(Messages.AbstractBuilderState_2);
+        Set<URI> toBeDeletedAsSet = Sets.newHashSet(toBeRemoved);
+        Map<URI, IResourceDescription.Delta> result = Maps.newHashMap();
+        for (URI toDelete : toBeDeletedAsSet) {
+            IResourceDescription resourceDescription = getResourceDescription(toDelete);
+            if (resourceDescription != null) {
+                result.put(toDelete, new DefaultResourceDescriptionDelta(resourceDescription, null));
+            }
+            subMonitor.worked(1);
+        }
+        return result.values();
 	}
 
-	protected Collection<Delta> transitiveUpdate(ResourceSet resourceSet, Set<URI> toBeAddedOrUpdated,
-			Set<URI> toBeRemoved, IProgressMonitor monitor) {
-		SubMonitor subMonitor = SubMonitor.convert(monitor, 1);
-		Collection<Delta> result = updater.transitiveUpdate(this, resourceSet, toBeAddedOrUpdated, toBeRemoved,
-				subMonitor.newChild(1));
-		return result;
-	}
 }

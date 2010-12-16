@@ -35,13 +35,13 @@ public abstract class AbstractBuilderTest extends TestCase implements IResourceD
 
 	@Override
 	protected void tearDown() throws Exception {
-		super.tearDown();
 		cleanWorkspace();
 		waitForAutoBuild();
 		events.clear();
 		getBuilderState().removeListener(this);
 		assertEquals(0, countResourcesInIndex());
 		assertEquals(0, root().getProjects().length);
+		super.tearDown();
 	}
 
 	public void descriptionsChanged(Event event) {
