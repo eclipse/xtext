@@ -8,22 +8,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.folding;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.jface.text.Position;
-import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 /**
@@ -31,6 +33,11 @@ import com.google.common.collect.Lists;
  */
 public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 	private static final Logger log = Logger.getLogger(DefaultFoldingRegionProvider.class);
+	protected static final Predicate<ITypedRegion> COMMENT_REGION_PREDICATE = new Predicate<ITypedRegion>() {
+		public boolean apply(ITypedRegion rule) {
+			return TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION.equals(rule.getType());
+		}
+	};
 
 	public List<IFoldingRegion> getFoldingRegions(final IXtextDocument xtextDocument) {
 		return xtextDocument.readOnly(new IUnitOfWork<List<IFoldingRegion>, XtextResource>() {
@@ -44,72 +51,48 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 
 	protected List<IFoldingRegion> doGetFoldingRegions(IXtextDocument xtextDocument, XtextResource xtextResource) {
 		List<IFoldingRegion> foldingRegions = Lists.newArrayList();
+		IFoldingRegionAcceptor foldingRegionAcceptor = createAcceptor(xtextDocument, foldingRegions);
+		computeObjectFolding(xtextDocument, xtextResource, foldingRegionAcceptor);
+		computeCommentFolding(xtextDocument, foldingRegionAcceptor);
+		return foldingRegions;
+	}
+
+	protected IFoldingRegionAcceptor createAcceptor(IXtextDocument xtextDocument, List<IFoldingRegion> foldingRegions) {
+		return new DefaultFoldingRegionAcceptor(xtextDocument, foldingRegions);
+	}
+
+	protected void computeObjectFolding(IXtextDocument xtextDocument, XtextResource xtextResource,
+			IFoldingRegionAcceptor foldingRegionAcceptor) {
 		Iterator<EObject> allContents = xtextResource.getAllContents();
 		while (allContents.hasNext()) {
 			EObject eObject = allContents.next();
 			if (isHandled(eObject)) {
-				addFoldingRegions(xtextDocument, eObject, foldingRegions);
+				computeObjectFolding(xtextDocument, eObject, foldingRegionAcceptor);
 			}
 		}
-		return foldingRegions;
 	}
 
-	protected void addFoldingRegions(IXtextDocument xtextDocument, EObject eObject, List<IFoldingRegion> foldingRegions) {
-		Assert.isNotNull(eObject, "parameter 'eObject' must not be null");
-		ICompositeNode compositeNode = getCompositeNode(eObject);
+	protected void computeObjectFolding(IXtextDocument xtextDocument, EObject eObject,
+			IFoldingRegionAcceptor foldingRegionAcceptor) {
+		ICompositeNode compositeNode = NodeModelUtils.getNode(eObject);
 		if (compositeNode != null) {
-			Position position = getPosition(xtextDocument, compositeNode);
-			if (position != null) {
-				List<IFoldingRegion> newFoldingRegions = createFoldingRegions(eObject, position);
-				Assert.isNotNull(newFoldingRegions, "'newFoldingRegions' must not be null");
-				foldingRegions.addAll(newFoldingRegions);
-			} else {
-				if (log.isDebugEnabled()) {
-					log.debug("No position for eObject '" + eObject + "' with compositeNode '" + compositeNode
-							+ "' provided");
-				}
-			}
+			foldingRegionAcceptor.accept(compositeNode.getOffset(), compositeNode.getLength());
 		}
 	}
 
-	protected ICompositeNode getCompositeNode(EObject eObject) {
-		ICompositeNode result = NodeModelUtils.getNode(eObject);
-		return result;
-	}
-
-	protected Position getPosition(IXtextDocument xtextDocument, ICompositeNode compositeNode) {
-		Assert.isNotNull(compositeNode, "parameter 'compositeNode' must not be null");
-		Position position = null;
+	protected void computeCommentFolding(IXtextDocument xtextDocument, IFoldingRegionAcceptor foldingRegionAcceptor) {
 		try {
-			int startLine = xtextDocument.getLineOfOffset(compositeNode.getOffset());
-			int endLine = xtextDocument.getLineOfOffset(compositeNode.getOffset() + compositeNode.getLength());
-			if (startLine < endLine) {
-				int start = xtextDocument.getLineOffset(startLine);
-				int end = xtextDocument.getLineOffset(endLine) + xtextDocument.getLineLength(endLine);
-				position = new Position(start, end - start);
+			ITypedRegion[] typedRegions = xtextDocument.computePartitioning(0, xtextDocument.getLength());
+			for (ITypedRegion typedRegion : Iterables.filter(Arrays.asList(typedRegions), COMMENT_REGION_PREDICATE)) {
+				foldingRegionAcceptor.accept(typedRegion.getOffset(), typedRegion.getLength());
 			}
-
 		} catch (BadLocationException e) {
 			log.error(e);
 		}
-		return position;
-
 	}
 
 	protected boolean isHandled(EObject eObject) {
 		return eObject.eContainer() != null;
 	}
 
-	protected List<IFoldingRegion> createFoldingRegions(EObject eObject, Position position) {
-		IFoldingRegion foldingRegion = newFoldingRegion(eObject, position);
-		return Lists.newArrayList(foldingRegion);
-	}
-
-	protected IFoldingRegion newFoldingRegion(EObject eObject, Position position) {
-		return new DefaultFoldingRegion(position);
-	}
-
-	protected IFoldingRegion newFoldingRegion(EObject eObject, Position position, StyledString styledString) {
-		return new DefaultFoldingRegion(position, styledString);
-	}
 }
