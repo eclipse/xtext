@@ -7,10 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
+import static com.google.common.collect.Iterables.*;
+
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Set;
-import java.util.TreeSet;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -52,13 +52,7 @@ public class SuperTypeCollector {
 	public Set<JvmTypeReference> collectSuperTypes(JvmTypeReference type) {
 		Set<JvmTypeReference> doCollectSupertypeData = doCollectSupertypeData(type,
 				Functions.<JvmTypeReference> identity());
-		TreeSet<JvmTypeReference> set = new TreeSet<JvmTypeReference>(new Comparator<JvmTypeReference>() {
-			public int compare(JvmTypeReference o1, JvmTypeReference o2) {
-				return o1.getCanonicalName().compareTo(o2.getCanonicalName());
-			}
-		});
-		set.addAll(doCollectSupertypeData);
-		return set;
+		return doCollectSupertypeData;
 	}
 
 	public Set<String> collectSuperTypeNames(JvmType type) {
@@ -127,7 +121,7 @@ public class SuperTypeCollector {
 		@Override
 		public Void caseJvmDeclaredType(JvmDeclaredType object) {
 			if (!object.eIsProxy()) {
-				for (JvmTypeReference superType : object.getSuperTypes()) {
+				for (JvmTypeReference superType : reverse(object.getSuperTypes())) {
 					doSwitch(superType);
 				}
 			}

@@ -50,13 +50,17 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	public void testAssignment_RightAssociativity() throws Exception {
 		XAssignment ass = (XAssignment) expression("foo = bar += baz");
 		assertEquals(2,ass.getArguments().size());
-		assertEquals("=", ass.getFeatureName());
-		assertEquals("foo", ((XFeatureCall)ass.getArguments().get(0)).getFeatureName());
-		ass = (XAssignment) ass.getArguments().get(1);
-		assertEquals(2,ass.getArguments().size());
-		assertEquals("+=", ass.getFeatureName());
-		assertEquals("bar", ((XFeatureCall)ass.getArguments().get(0)).getFeatureName());
-		assertEquals("baz", ((XFeatureCall)ass.getArguments().get(1)).getFeatureName());
+		assertEquals("foo", ass.getFeatureName());
+		assertNull(ass.getAssignable());
+		XBinaryOperation op = (XBinaryOperation) ass.getArguments().get(1);
+		assertEquals(2,op.getArguments().size());
+		assertEquals("+=", op.getFeatureName());
+		assertEquals("bar", ((XFeatureCall)op.getArguments().get(0)).getFeatureName());
+		assertEquals("baz", ((XFeatureCall)op.getArguments().get(1)).getFeatureName());
+	}
+	
+	public void testAssignments_00() throws Exception {
+		expression("(foo).bar = baz");
 	}
 	
 	public void testOrAndAndPrecedence() throws Exception {

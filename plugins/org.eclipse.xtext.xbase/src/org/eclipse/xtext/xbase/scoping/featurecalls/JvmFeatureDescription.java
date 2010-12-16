@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.scoping;
+package org.eclipse.xtext.xbase.scoping.featurecalls;
 
 import java.util.Collections;
 
@@ -21,11 +21,13 @@ public class JvmFeatureDescription extends EObjectDescription {
 
 	private TypeArgumentContext context;
 	private String shadowingString;
+	private boolean isValid = true;
 
-	public JvmFeatureDescription(QualifiedName qualifiedName, JvmFeature element, TypeArgumentContext context, String shadowingString) {
+	public JvmFeatureDescription(QualifiedName qualifiedName, JvmFeature element, TypeArgumentContext context, String shadowingString, boolean isValid2) {
 		super(qualifiedName, element, Collections.<String,String>emptyMap(),false);
 		this.context = context;
 		this.shadowingString = shadowingString;
+		this.isValid = isValid2;
 	}
 	
 	public JvmFeature getJvmFeature() {
@@ -43,6 +45,10 @@ public class JvmFeatureDescription extends EObjectDescription {
 	@Override
 	public String toString() {
 		return shadowingString;
+	}
+	
+	public boolean isValid() {
+		return isValid;
 	}
 	
 }

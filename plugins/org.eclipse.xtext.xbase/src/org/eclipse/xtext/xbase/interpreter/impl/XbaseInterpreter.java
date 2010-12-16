@@ -715,35 +715,23 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	
 	public Object _evaluateAssignment(XAssignment assignment, IEvaluationContext context) {
 		Object value = internalEvaluate(assignment.getValue(), context);
-		Object assign = assignValue(assignment.getFeature(), assignment.getAssignable(), value, context);
+		Object assign = assignValue(assignment.getFeature(), assignment, value, context);
 		return assign;
 	}
 	
-	public Object assignValue(JvmIdentifyableElement feature, Object assignable, Object value, IEvaluationContext context) {
-		return assignmentDispatcher.invoke(feature, assignable, value, context);
+	public Object assignValue(JvmIdentifyableElement feature, XAssignment assignment, Object value, IEvaluationContext context) {
+		return assignmentDispatcher.invoke(feature, assignment, value, context);
 	}
 	
-	public Object _assignValueToDeclaredVariable(XVariableDeclaration variable, Object assignable, Object value, IEvaluationContext context) {
+	public Object _assignValueToDeclaredVariable(XVariableDeclaration variable, XAssignment assignment, Object value, IEvaluationContext context) {
 		context.assignValue(QualifiedName.create(variable.getName()), value);
 		return value;
 	}
 	
-	public Object _assignValueToField(JvmField jvmField, XMemberFeatureCall assignable, Object value, IEvaluationContext context) {
-		Object receiver = internalEvaluate(assignable.getMemberCallTarget(), context);
+	public Object _assignValueToField(JvmField jvmField, XAssignment assignment, Object value, IEvaluationContext context) {
+		Object receiver = getReceiver(assignment, context);
 		if (receiver == null)
 			throw new EvaluationException(new NullPointerException("Cannot assign value to field: " + jvmField.getCanonicalName() + " on null instance"));
-		
-		return assignValueToField(jvmField, receiver, value);
-	}
-	
-	public Object _assignValueToField(JvmField jvmField, XFeatureCall assignable, Object value, IEvaluationContext context) {
-		Object receiver = context.getValue(XbaseScopeProvider.THIS);
-		if (receiver == null)
-			throw new EvaluationException(new NullPointerException("Cannot assign value to field: " + jvmField.getCanonicalName() + " on null instance"));
-		return assignValueToField(jvmField, receiver, value);
-	}
-
-	protected Object assignValueToField(JvmField jvmField, Object receiver, Object value) {
 		Field field = javaReflectAccess.getField(jvmField);
 		try {
 			if (field == null) {
@@ -756,31 +744,24 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			throw new IllegalStateException("Could not access field: " + jvmField.getFullyQualifiedName() + " on instance: " + receiver, e);
 		}
 	}
-	
-	public Object _assignValueByOperation(JvmOperation jvmOperation, XMemberFeatureCall assignable, Object value, IEvaluationContext context) {
-		Object receiver = internalEvaluate(assignable.getMemberCallTarget(), context);
-		if (receiver == null)
-			throw new EvaluationException(new NullPointerException("Cannot invoke instance method: " + jvmOperation.getCanonicalName() + " without receiver"));
-		
-		return assignValueByOperation(jvmOperation, receiver, value);
-	}
-	
-	public Object _assignValueByOperation(JvmOperation jvmOperation, XFeatureCall assignable, Object value, IEvaluationContext context) {
-		// TODO: rework linking semantic and remove special case for add()
+
+	protected Object getReceiver(XAssignment assignment, IEvaluationContext context) {
 		Object receiver = null;
-		if ("add".equals(jvmOperation.getSimpleName())) {
-			receiver = internalEvaluate(assignable, context);
-		} else {
+		if (assignment.getAssignable()==null) {
+			// TODO don't imply 'this', but get the information from the AST 
 			receiver = context.getValue(XbaseScopeProvider.THIS);
+		} else {
+			receiver = internalEvaluate(assignment.getAssignable(), context);
 		}
-		if (receiver == null)
-			throw new EvaluationException(new NullPointerException("Cannot invoke instance method: " + jvmOperation.getCanonicalName() + " without receiver"));
-		return assignValueByOperation(jvmOperation, receiver, value);
+		return receiver;
 	}
 	
-	protected Object assignValueByOperation(JvmOperation operation, Object receiver, Object value) {
+	public Object _assignValueByOperation(JvmOperation jvmOperation, XAssignment assignment, Object value, IEvaluationContext context) {
+		Object receiver = getReceiver(assignment, context);
+		if (receiver == null)
+			throw new EvaluationException(new NullPointerException("Cannot invoke instance method: " + jvmOperation.getCanonicalName() + " without receiver"));
 		List<Object> argumentValues = Lists.newArrayList(value);
-		Object result = invokeOperation(operation, receiver, argumentValues);
+		Object result = invokeOperation(jvmOperation, receiver, argumentValues);
 		return result;
 	}
 	

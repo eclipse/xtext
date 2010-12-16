@@ -21,7 +21,7 @@ import com.google.common.base.Function;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class JvmFeatureShadowingIndexObjectProvider implements Function<JvmFeature, String> {
+public class JvmFeatureSignatureProvider implements Function<JvmFeature, String> {
 	
 	static class Switch extends TypesSwitch<String> {
 		
@@ -53,7 +53,7 @@ public class JvmFeatureShadowingIndexObjectProvider implements Function<JvmFeatu
 	}
 	private Switch theSwitch = null;
 	
-	public JvmFeatureShadowingIndexObjectProvider(TypeArgumentContext context) {
+	public JvmFeatureSignatureProvider(TypeArgumentContext context) {
 		theSwitch = new Switch(context);
 	}
 

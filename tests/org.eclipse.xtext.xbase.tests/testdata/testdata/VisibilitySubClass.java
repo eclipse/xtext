@@ -8,15 +8,8 @@
 package testdata;
 
 /**
- * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
-public class FieldAccess {
+public class VisibilitySubClass extends VisibilitySuperType {
 
-	public String stringField;
-	public final String finalField;
-	
-	public FieldAccess() {
-		finalField = "finalField";
-	}
-	
 }

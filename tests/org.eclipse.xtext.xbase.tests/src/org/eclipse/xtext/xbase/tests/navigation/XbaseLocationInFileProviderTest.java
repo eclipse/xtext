@@ -57,16 +57,16 @@ public class XbaseLocationInFileProviderTest extends AbstractXbaseTestCase {
 	
 	public void testAssignment_rhs_03() throws Exception {
 		String text = "a = b += c";
-		XAssignment assignment = (XAssignment) ((XAssignment) expression(text)).getValue();
-		ITextRegion region = locationInFileProvider.getSignificantTextRegion(assignment, XbasePackage.Literals.XASSIGNMENT__VALUE, 0);
+		XBinaryOperation assignment = (XBinaryOperation) ((XAssignment) expression(text)).getValue();
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(assignment, XbasePackage.Literals.XBINARY_OPERATION__RIGHT_OPERAND, 0);
 		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
 		assertEquals("c", significant);
 	}
 	
 	public void testAssignment_rhs_04() throws Exception {
 		String text = "a = b += c";
-		XAssignment assignment = (XAssignment) ((XAssignment) expression(text)).getValue();
-		ITextRegion region = locationInFileProvider.getSignificantTextRegion(assignment, XbasePackage.Literals.XASSIGNMENT__ASSIGNABLE, 0);
+		XBinaryOperation assignment = (XBinaryOperation) ((XAssignment) expression(text)).getValue();
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(assignment, XbasePackage.Literals.XBINARY_OPERATION__LEFT_OPERAND, 0);
 		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
 		assertEquals("b", significant);
 	}

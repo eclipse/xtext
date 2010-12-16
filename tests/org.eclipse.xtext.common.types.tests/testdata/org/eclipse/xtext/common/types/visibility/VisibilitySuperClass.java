@@ -5,17 +5,15 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.tests.typing;
-
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+package org.eclipse.xtext.common.types.visibility;
 
 /**
- * @author Sven Efftinge
- *
+ * @author Sven Efftinge - Initial contribution and API
  */
-public class TypesServiceTest extends AbstractXbaseTestCase {
+public class VisibilitySuperClass {
+	@SuppressWarnings("unused")
+	private String privateField;
+	protected String protectedField;
+	public String publicField;
 	
-	public void testGetCommonType() throws Exception {
-		
-	}
 }

@@ -47,8 +47,8 @@ public class XbaseNodeModelTest extends AbstractXbaseTestCase {
 	
 	public void testAssignment_rhs_03() throws Exception {
 		String text = "a=b+=c";
-		XAssignment assignment = (XAssignment) ((XAssignment) expression(text)).getValue();
-		List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(assignment, XbasePackage.Literals.XASSIGNMENT__VALUE);
+		XBinaryOperation assignment = (XBinaryOperation) ((XAssignment) expression(text)).getValue();
+		List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(assignment, XbasePackage.Literals.XBINARY_OPERATION__RIGHT_OPERAND);
 		assertEquals(1, nodesForFeature.size());
 		String nodeText = nodesForFeature.get(0).getText();
 		assertEquals("c", nodeText);
@@ -56,8 +56,8 @@ public class XbaseNodeModelTest extends AbstractXbaseTestCase {
 	
 	public void testAssignment_rhs_04() throws Exception {
 		String text = "a=b+=c";
-		XAssignment assignment = (XAssignment) ((XAssignment) expression(text)).getValue();
-		List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(assignment, XbasePackage.Literals.XASSIGNMENT__ASSIGNABLE);
+		XBinaryOperation assignment = (XBinaryOperation) ((XAssignment) expression(text)).getValue();
+		List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(assignment, XbasePackage.Literals.XBINARY_OPERATION__LEFT_OPERAND);
 		assertEquals(1, nodesForFeature.size());
 		String nodeText = nodesForFeature.get(0).getText();
 		assertEquals("b", nodeText);

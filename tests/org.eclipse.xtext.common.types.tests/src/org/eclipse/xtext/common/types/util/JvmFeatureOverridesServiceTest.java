@@ -32,7 +32,7 @@ import com.google.common.collect.Sets;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class MethodOverrideServiceTest extends TestCase {
+public class JvmFeatureOverridesServiceTest extends TestCase {
 	
 	private ClasspathTypeProvider typeProvider;
 	private JvmTypeReferences typeRefs;

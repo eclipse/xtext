@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.scoping;
+package org.eclipse.xtext.xbase.scoping.featurecalls;
 
 import java.util.Collections;
 
@@ -17,9 +17,10 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.typing.ITypeProvider;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
@@ -29,6 +30,7 @@ import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.typing.TypeConverter;
 
+import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 
 /**
@@ -37,7 +39,7 @@ import com.google.inject.Inject;
  * given {@link XAbstractFeatureCall}.
  * </p>
  * <p>
- * Note that the {@link XAbstractFeatureCall} not neccessarily needs to be complete. Any guards for any missing
+ * Note that the {@link XAbstractFeatureCall} not necessarily needs to be complete. Any guards for any missing
  * information should be skipped. This ensures, that this predicate can also be used in the context of content assist.
  * </p>
  * <p>
@@ -55,7 +57,7 @@ import com.google.inject.Inject;
  * 
  * @author Sven Efftinge
  */
-public class CallableFeaturePredicate {
+public class CallableFeaturePredicate implements Predicate<IEObjectDescription> {
 
 	private PolymorphicDispatcher<Boolean> dispatcher = new PolymorphicDispatcher<Boolean>("_case", 4, 4,
 			Collections.singletonList(this));
@@ -68,25 +70,33 @@ public class CallableFeaturePredicate {
 
 	@Inject
 	private TypeConverter typeConverter;
-
-	public boolean accept(EObject input, EObject context, EReference reference, TypeArgumentContext typeArgContext) {
-		// if the context's type doesn't match the refeernce's type, we are in fuzzy content assist mode
-		// just accept anything for now.
-		if (!reference.getEContainingClass().isInstance(context))
-			return true;
-		return dispatch_case(input, context, reference, typeArgContext);
+	
+	private EObject context;
+	private EReference reference;
+	
+	public void iniitialize(EObject context, EReference reference) {
+		this.context = context;
+		this.reference = reference;
+	}
+	
+	public boolean apply(IEObjectDescription input) {
+		if (input instanceof JvmFeatureDescription) {
+			final JvmFeatureDescription jvmFeatureDescription = (JvmFeatureDescription)input;
+			return dispatch_case(jvmFeatureDescription.getJvmFeature(), context, reference, jvmFeatureDescription);
+		}
+		return true;
 	}
 
 	protected boolean dispatch_case(EObject input, EObject context, EReference reference,
-			TypeArgumentContext typeArgContext) {
-		return dispatcher.invoke(input, context, reference, typeArgContext);
+			JvmFeatureDescription jvmFeatureDescription) {
+		return dispatcher.invoke(input, context, reference, jvmFeatureDescription);
 	}
 
-	protected boolean _case(Object input, Object context, EReference ref, TypeArgumentContext typeArgContext) {
+	protected boolean _case(Object input, Object context, EReference ref, JvmFeatureDescription jvmFeatureDescription) {
 		return false;
 	}
 
-	protected boolean _case(JvmOperation input, XBinaryOperation op, EReference ref, TypeArgumentContext typeArgContext) {
+	protected boolean _case(JvmOperation input, XBinaryOperation op, EReference ref, JvmFeatureDescription jvmFeatureDescription) {
 		if (input.getParameters().size() != 1)
 			return false;
 		if (op.getRightOperand() != null && op.getLeftOperand() != null) {
@@ -98,93 +108,97 @@ public class CallableFeaturePredicate {
 		return true;
 	}
 
-	protected boolean _case(JvmOperation input, XAssignment op, EReference ref, TypeArgumentContext typeArgContext) {
+	protected boolean _case(JvmOperation input, XAssignment op, EReference ref, JvmFeatureDescription jvmFeatureDescription) {
 		if (input.getParameters().size() != 1)
 			return false;
 		if (op.getValue() != null) {
 			JvmTypeReference type = typeProvider.getType(op.getValue(),
 					ITypeProvider.Context.<JvmTypeReference> newCtx());
-			if (!isCompatibleArgument(input.getParameters().get(0).getParameterType(), type, op, typeArgContext))
+			if (!isCompatibleArgument(input.getParameters().get(0).getParameterType(), type, op, jvmFeatureDescription))
 				return false;
 		}
 		return true;
 	}
 
-	protected boolean _case(JvmField input, XAssignment op, EReference ref, TypeArgumentContext typeArgContext) {
+	protected boolean _case(JvmField input, XAssignment op, EReference ref, JvmFeatureDescription jvmFeatureDescription) {
 		return !input.isFinal() && !input.isStatic();
 	}
 
 	protected boolean _case(XVariableDeclaration input, XAssignment op, EReference ref,
-			TypeArgumentContext typeArgContext) {
+			JvmFeatureDescription jvmFeatureDescription) {
 		return input.isWriteable();
 	}
 
 	protected boolean _case(JvmOperation input, XMemberFeatureCall op, EReference ref,
-			TypeArgumentContext typeArgContext) {
-		//TODO need to know whether we are in fuzzy content assist mode
+			JvmFeatureDescription jvmFeatureDescription) {
 		EList<XExpression> arguments = op.getMemberCallArguments();
-		return checkJvmOperation(input, op, typeArgContext, arguments);
+		return checkJvmOperation(input, op, op.isExplicitOperationCall(), jvmFeatureDescription, arguments);
 	}
 
 	protected boolean _case(JvmField input, XMemberFeatureCall op, EReference ref,
-			TypeArgumentContext typeArgContext) {
-		//TODO need to know whether we are in fuzzy content assist mode
+			JvmFeatureDescription jvmFeatureDescription) {
 		if (!op.getMemberCallArguments().isEmpty() || op.isExplicitOperationCall())
 			return false;
 		
 		return !input.isStatic();
 	}
 
-	protected boolean checkJvmOperation(JvmOperation input, EObject context, TypeArgumentContext typeArgContext,
+	protected boolean checkJvmOperation(JvmOperation input, XAbstractFeatureCall context, boolean isExplicitOperationCall, JvmFeatureDescription jvmFeatureDescription,
 			EList<XExpression> arguments) {
 		if (input.getParameters().size() != arguments.size())
+			return false;
+		if (!isExplicitOperationCall && !isSugaredMethodInvocationWithoutParanthesis(jvmFeatureDescription))
 			return false;
 		
 		for (int i = 0; i < arguments.size(); i++) {
 			XExpression expression = arguments.get(i);
 			JvmTypeReference type = typeProvider.getType(expression, ITypeProvider.Context.<JvmTypeReference> newCtx());
 			JvmTypeReference declaredType = input.getParameters().get(i).getParameterType();
-			if (!isCompatibleArgument(declaredType, type, context, typeArgContext))
+			if (!isCompatibleArgument(declaredType, type, context, jvmFeatureDescription))
 				return false;
 		}
 		return true;
 	}
 
+	protected boolean isSugaredMethodInvocationWithoutParanthesis(JvmFeatureDescription jvmFeatureDescription) {
+		return jvmFeatureDescription.getKey().indexOf('(')==-1;
+	}
+
 	protected boolean isCompatibleArgument(JvmTypeReference declaredType, JvmTypeReference actualType,
-			EObject contextElement, TypeArgumentContext typeArgContext) {
+			EObject contextElement, JvmFeatureDescription jvmFeatureDescription) {
 		return actualType == null
 				|| actualType.getCanonicalName().equals("java.lang.Void")
-				|| confomance.isConformant(typeConverter.convert(typeArgContext.resolve(declaredType), contextElement),
+				|| confomance.isConformant(typeConverter.convert(jvmFeatureDescription.getContext().resolve(declaredType), contextElement),
 						actualType);
 	}
 
 	protected boolean _case(XVariableDeclaration input, XFeatureCall context, EReference reference,
-			TypeArgumentContext typeArgContext) {
+			JvmFeatureDescription jvmFeatureDescription) {
 		return true;
 	}
 
 	protected boolean _case(JvmFormalParameter param, XFeatureCall context, EReference reference,
-			TypeArgumentContext typeArgContext) {
+			JvmFeatureDescription jvmFeatureDescription) {
 		return true;
 	}
 	
 	protected boolean _case(JvmField param, XFeatureCall context, EReference reference,
-			TypeArgumentContext typeArgContext) {
+			JvmFeatureDescription jvmFeatureDescription) {
 		return !param.isStatic() && !context.isExplicitOperationCall();
 	}
 
 	protected boolean _case(JvmOperation param, XFeatureCall context, EReference reference,
-			TypeArgumentContext typeArgContext) {
+			JvmFeatureDescription jvmFeatureDescription) {
 		if (param.isStatic()) {
 			return false;
 		} else {
-			boolean result = checkJvmOperation(param, context, typeArgContext, context.getArguments());
+			boolean result = checkJvmOperation(param, context, context.isExplicitOperationCall(), jvmFeatureDescription, context.getArguments());
 			return result;
 		}
 	}
 
 	protected boolean _case(JvmOperation param, XUnaryOperation context, EReference reference,
-			TypeArgumentContext typeArgContext) {
+			JvmFeatureDescription jvmFeatureDescription) {
 		return param.getParameters().isEmpty();
 	}
 
