@@ -448,7 +448,9 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XAssignment returns XExpression:
-	//	XOrExpression ({XAssignment.assignable=current} feature=[types::JvmIdentifyableElement|OpAssign] value=XAssignment)?;
+	//	{XAssignment} feature=[types::JvmIdentifyableElement] OpSingleAssign value=XAssignment | XOrExpression
+	//	({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpMultiAssign]
+	//	rightOperand=XAssignment)?;
 	public XbaseGrammarAccess.XAssignmentElements getXAssignmentAccess() {
 		return gaXbase.getXAssignmentAccess();
 	}
@@ -457,14 +459,24 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		return getXAssignmentAccess().getRule();
 	}
 
-	//OpAssign:
-	//	"=" | "+=";
-	public XbaseGrammarAccess.OpAssignElements getOpAssignAccess() {
-		return gaXbase.getOpAssignAccess();
+	//OpSingleAssign:
+	//	"=";
+	public XbaseGrammarAccess.OpSingleAssignElements getOpSingleAssignAccess() {
+		return gaXbase.getOpSingleAssignAccess();
 	}
 	
-	public ParserRule getOpAssignRule() {
-		return getOpAssignAccess().getRule();
+	public ParserRule getOpSingleAssignRule() {
+		return getOpSingleAssignAccess().getRule();
+	}
+
+	//OpMultiAssign:
+	//	"+=";
+	public XbaseGrammarAccess.OpMultiAssignElements getOpMultiAssignAccess() {
+		return gaXbase.getOpMultiAssignAccess();
+	}
+	
+	public ParserRule getOpMultiAssignRule() {
+		return getOpMultiAssignAccess().getRule();
 	}
 
 	//XOrExpression returns XExpression:
@@ -636,7 +648,8 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XMemberFeatureCall returns XExpression:
-	//	XPrimaryExpression ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | spreading?="*.") ("<"
+	//	XPrimaryExpression ({XAssignment.assignable=current} "." feature=[types::JvmIdentifyableElement] OpSingleAssign
+	//	value=XAssignment | {XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | spreading?="*.") ("<"
 	//	typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
 	//	feature=[types::JvmIdentifyableElement] (explicitOperationCall?="(" (memberCallArguments+=XExpression (","
 	//	memberCallArguments+=XExpression)*)? ")")?)*;
