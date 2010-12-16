@@ -24,9 +24,15 @@ public class ResourceDescriptionsProvider {
 
 	public static final String NAMED_BUILDER_SCOPE = "org.eclipse.xtext.scoping.namespaces.DefaultGlobalScopeProvider.BUILDER_SCOPE";
 
+	public static final String LIVE_SCOPE = "org.eclipse.xtext.scoping.LIVE_SCOPE";
+
 	@Inject
 	@Named(NAMED_BUILDER_SCOPE)
 	private Provider<IResourceDescriptions> builderScopeResourceDescriptions;
+
+	@Inject
+	@Named(LIVE_SCOPE)
+	private Provider<IResourceDescriptions> liveScopeResourceDescriptions;
 
 	@Inject
 	private Provider<IResourceDescriptions> resourceDescriptions;
@@ -37,12 +43,19 @@ public class ResourceDescriptionsProvider {
 		if (loadOptions.containsKey(NAMED_BUILDER_SCOPE)) {
 			result = createBuilderScopeResourceDescriptions();
 		}
+		if (loadOptions.containsKey(LIVE_SCOPE)) {
+			result = createLiveScopeResourceDescriptions();
+		}
 		if (result instanceof IResourceDescriptions.IContextAware) {
 			((IResourceDescriptions.IContextAware) result).setContext(resource);
 		}
 		return result;
 	}
 
+	public IResourceDescriptions createLiveScopeResourceDescriptions() {
+		return liveScopeResourceDescriptions.get();
+	}
+	
 	public IResourceDescriptions createBuilderScopeResourceDescriptions() {
 		return builderScopeResourceDescriptions.get();
 	}

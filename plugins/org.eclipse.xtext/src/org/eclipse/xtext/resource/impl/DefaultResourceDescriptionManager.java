@@ -56,6 +56,10 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 			}
 		});
 	}
+	
+	public Delta createDelta(IResourceDescription oldDescription, IResourceDescription newDescription) {
+		return new DefaultResourceDescriptionDelta(oldDescription, newDescription);
+	}
 
 	protected IResourceDescription internalGetResourceDescription(Resource resource, IQualifiedNameProvider nameProvider) {
 		return new DefaultResourceDescription(resource, nameProvider);
@@ -128,7 +132,7 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 				if (outgoingReferences.contains(deltaURI)) {
 					return true;
 				}
-				if (interestingResources.contains(deltaURI)) {
+				if (interestingResources.contains(deltaURI) || !deltaURI.isPlatform()) {
 					if (isAffected(delta, candidate)) {
 						return true;
 					}

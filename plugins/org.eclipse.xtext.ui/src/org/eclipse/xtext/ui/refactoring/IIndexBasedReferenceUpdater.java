@@ -7,17 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.ltk.core.refactoring.participants.RenameRefactoring;
-import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameElementRefactoringProvider;
+import org.eclipse.xtext.ui.refactoring.impl.IndexBasedReferenceUpdater;
 
 import com.google.inject.ImplementedBy;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
-@ImplementedBy(DefaultRenameElementRefactoringProvider.class)
-public interface IRenameElementRefactoringProvider {
+@ImplementedBy(IndexBasedReferenceUpdater.class)
+public interface IIndexBasedReferenceUpdater extends IReferenceUpdater {
 
-	RenameRefactoring getRenameRefactoring(URI targetElementURI);
+	
 }

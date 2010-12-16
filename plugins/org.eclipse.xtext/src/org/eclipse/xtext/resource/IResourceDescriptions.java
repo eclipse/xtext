@@ -13,9 +13,10 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
 
 /**
- * Represents an observable set of {@link IResourceDescription}
+ * Represents a set of {@link IResourceDescription}
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
 public interface IResourceDescriptions {
 
@@ -26,8 +27,6 @@ public interface IResourceDescriptions {
 	/**
 	 * A context aware instance {@link IResourceDescriptions}.
 	 * Needs to be configured with the current context before used.
-	 * 
-	 * @author Sven Efftinge - Initial contribution and API
 	 */
 	interface IContextAware extends IResourceDescriptions {
 		

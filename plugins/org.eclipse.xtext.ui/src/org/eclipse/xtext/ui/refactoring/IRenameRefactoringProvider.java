@@ -8,28 +8,16 @@
 package org.eclipse.xtext.ui.refactoring;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-import org.eclipse.text.edits.ReplaceEdit;
-import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameElementStrategy;
-import org.eclipse.xtext.ui.refactoring.impl.ElementRenameInfo;
+import org.eclipse.ltk.core.refactoring.participants.RenameRefactoring;
+import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameRefactoringProvider;
 
 import com.google.inject.ImplementedBy;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
-public interface IRenameElementStrategy {
+@ImplementedBy(DefaultRenameRefactoringProvider.class)
+public interface IRenameRefactoringProvider {
 
-	String getCurrentName();
-
-	ReplaceEdit getRenameEdit(String newName);
-
-	RefactoringStatus validateNewName(String newName);
-
-	ElementRenameInfo.Table getRenamedElementInfos();
-	
-	@ImplementedBy(DefaultRenameElementStrategy.Provider.class)
-	interface Provider {
-		IRenameElementStrategy get(URI targetElementURI, IRefactoringDocument document);
-	}
+	RenameRefactoring getRenameRefactoring(URI targetElementURI);
 }

@@ -37,6 +37,9 @@ public abstract class AbstractCleaningLinker extends AbstractLinker {
 
 	protected void beforeModelLinked(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
 		clearAllReferences(model);
+		ImportedNamesAdapter adapter = ImportedNamesAdapter.find(model.eResource());
+		if (adapter!=null)
+			adapter.clear();
 	}
 
 	protected void clearAllReferences(EObject model) {

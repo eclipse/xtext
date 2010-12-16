@@ -11,25 +11,23 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.TextEdit;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.refactoring.impl.RefactoringDocumentProvider;
-import org.eclipse.xtext.util.concurrent.IReadAccess;
+import org.eclipse.xtext.ui.refactoring.impl.DefaultRefactoringDocumentProvider;
 
 import com.google.inject.ImplementedBy;
 
 /**
- * Abstraction on files and opened documents affected by a refactoring.
- * 
+ * Abstraction over an open document or a text file that is affected by a refactoring. 
+ *  
  * @author koehnlein - Initial contribution and API
  */
-public interface IRefactoringDocument extends IReadAccess<XtextResource>{
+public interface IRefactoringDocument {
 
-	TextEdit apply(TextEdit edit);
-	
 	Change createChange(String name, TextEdit textEdit);
-
-	@ImplementedBy(RefactoringDocumentProvider.class)
-	interface Provider {
-		IRefactoringDocument get(final URI uri, final RefactoringStatus status);
+	
+	URI getURI();
+	
+	@ImplementedBy(DefaultRefactoringDocumentProvider.class)
+	static interface Provider {
+		IRefactoringDocument get(URI resourceURI, RefactoringStatus status);
 	}
 }

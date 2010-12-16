@@ -19,10 +19,11 @@ import org.eclipse.ltk.core.refactoring.participants.RenameRefactoring;
 import org.eclipse.ltk.ui.refactoring.RefactoringWizardOpenOperation;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
-import org.eclipse.xtext.ui.refactoring.IRenameElementRefactoringProvider;
+import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -37,11 +38,11 @@ public class RenameElementHandler extends AbstractHandler {
 	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
 
 	@Inject
-	private IRenameElementRefactoringProvider refactoringProvider;
-
-	@Inject 
 	private ILocationInFileProvider locationInFileProvider;
 	
+	@Inject 
+	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
+
 	protected static final Logger LOG = Logger.getLogger(RenameElementHandler.class);
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -50,23 +51,23 @@ public class RenameElementHandler extends AbstractHandler {
 			if (editor != null) {
 				final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
 				URI targetElementURI = editor.getDocument().readOnly(new IUnitOfWork<URI, XtextResource>() {
-					public URI exec(XtextResource state) throws Exception {
-						EObject element = eObjectAtOffsetHelper.resolveElementAt(state, selection.getOffset());
-						if (element != null) {
-							ITextRegion region = locationInFileProvider.getSignificantTextRegion(element);
-							editor.selectAndReveal(region.getOffset(), region.getLength());
-							final URI eObjectURI = EcoreUtil.getURI(element);
-							return eObjectURI;
+					public URI exec(XtextResource resource) throws Exception {
+						EObject targetElement = eObjectAtOffsetHelper.resolveElementAt(resource, selection.getOffset());
+						if (targetElement != null) {
+							final URI targetElementURI = EcoreUtil.getURI(targetElement);
+							selectElementInEditor(targetElement, targetElementURI, editor, resource);
+							return targetElementURI;
 						}
 						return null;
 					}
 				});
 				if (targetElementURI != null) {
-					RenameRefactoring renameRefactoring = refactoringProvider.getRenameRefactoring(targetElementURI);
-					RenameElementWizard renameElementWizard = new RenameElementWizard(renameRefactoring);
-					RefactoringWizardOpenOperation openOperation = new RefactoringWizardOpenOperation(
-							renameElementWizard);
-					openOperation.run(editor.getSite().getShell(), "Rename Element");
+					// refactoring target could be from another language
+					IResourceServiceProvider resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(targetElementURI.trimFragment());
+					if(resourceServiceProvider != null) {
+						RenameElementOperation renameElementExecution = resourceServiceProvider.get(RenameElementOperation.class);
+						renameElementExecution.execute(editor, targetElementURI);
+					}
 				}
 			}
 		} catch (Exception exc) {
@@ -74,5 +75,25 @@ public class RenameElementHandler extends AbstractHandler {
 		}
 		return null;
 	}
+	
+	protected void selectElementInEditor(EObject targetElement, final URI targetElementURI,
+			final XtextEditor editor, XtextResource editorResource) {
+		if (targetElementURI != null && targetElementURI.trimFragment().equals(editorResource.getURI())) {
+			ITextRegion region = locationInFileProvider.getSignificantTextRegion(targetElement);
+			editor.selectAndReveal(region.getOffset(), region.getLength());
+		}
+	}
 
+	public static class RenameElementOperation {
+		@Inject
+		private IRenameRefactoringProvider refactoringProvider;
+		
+		public void execute(final XtextEditor editor, URI targetElementURI) throws InterruptedException {
+			RenameRefactoring renameRefactoring = refactoringProvider.getRenameRefactoring(targetElementURI);
+			RenameElementWizard renameElementWizard = new RenameElementWizard(renameRefactoring);
+			RefactoringWizardOpenOperation openOperation = new RefactoringWizardOpenOperation(
+					renameElementWizard);
+			openOperation.run(editor.getSite().getShell(), "Rename Element");
+		}
+	}
 }

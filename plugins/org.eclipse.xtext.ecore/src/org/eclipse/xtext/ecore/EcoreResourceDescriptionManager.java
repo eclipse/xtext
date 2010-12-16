@@ -14,14 +14,20 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 
 /**
+ * TODO: implement {@link #isAffected(Delta, IResourceDescription)}
  * @author Sven Efftinge - Initial contribution and API
  */
 public class EcoreResourceDescriptionManager implements Manager {
 
 	public IResourceDescription getResourceDescription(Resource resource) {
 		return new EcoreResourceDescription(resource);
+	}
+	
+	public Delta createDelta(IResourceDescription oldDescription, IResourceDescription newDescription) {
+		return new DefaultResourceDescriptionDelta(oldDescription, newDescription);
 	}
 
 	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {

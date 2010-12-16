@@ -28,4 +28,5 @@ public class RefactoringStatusException extends RuntimeException {
 		else
 			status.addError(getMessage());
 	}
+	
 }

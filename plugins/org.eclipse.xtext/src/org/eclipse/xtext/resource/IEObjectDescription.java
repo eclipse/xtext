@@ -46,12 +46,14 @@ public interface IEObjectDescription {
 	EClass getEClass();
 	
 	/**
-	 * access to specific user data
+	 * Access to specific user data.
+	 * @param key the user data key. May not be <code>null</code>. Unknown keys yield <code>null</code>.
+	 * @return the value. May be <code>null</code>.
 	 */
-	String getUserData(String name);
+	String getUserData(String key);
 	
 	/**
-	 * @return all available user data keys 
+	 * @return all available user data keys. Never <code>null</code>. 
 	 */
 	String[] getUserDataKeys();
 	

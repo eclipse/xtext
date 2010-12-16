@@ -14,8 +14,8 @@ import org.eclipse.emf.common.util.URI;
 import com.google.common.collect.Sets;
 
 public class ToBeBuilt {
-	Set<URI> toBeUpdated = Sets.newHashSet();
-	Set<URI> toBeDeleted = Sets.newHashSet();
+	private Set<URI> toBeUpdated = Sets.newHashSet();
+	private Set<URI> toBeDeleted = Sets.newHashSet();
 	
 	public Set<URI> getToBeDeleted() {
 		return toBeDeleted;
@@ -24,4 +24,12 @@ public class ToBeBuilt {
 	public Set<URI> getToBeUpdated() {
 		return toBeUpdated;
 	}
+
+	public Set<URI> getAndRemoveToBeDeleted() {
+		Set<URI> result = toBeDeleted;
+		toBeDeleted = null;
+		result.removeAll(toBeUpdated);
+		return result;
+	}
+
 }

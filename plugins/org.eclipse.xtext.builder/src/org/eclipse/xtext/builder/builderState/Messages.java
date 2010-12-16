@@ -15,6 +15,7 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.xtext.builder.builderState.messages"; //$NON-NLS-1$
 	public static String AbstractBuilderState_0;
+	public static String AbstractBuilderState_2;
 	public static String MarkerUpdaterImpl_ValidateResources;
 	static {
 		// initialize resource bundle

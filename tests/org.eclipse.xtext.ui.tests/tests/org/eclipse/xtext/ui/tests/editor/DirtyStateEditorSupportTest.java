@@ -28,6 +28,7 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport;
 import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport.IDirtyStateEditorSupportClient;
@@ -387,6 +388,10 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 
 	public IResourceDescription getResourceDescription(URI uri) {
 		return null;
+	}
+	
+	public Delta createDelta(IResourceDescription oldDescription, IResourceDescription newDescription) {
+		return new DefaultResourceDescriptionDelta(oldDescription, newDescription);
 	}
 
 	public List<ILexerTokenRegion> getTokens() {

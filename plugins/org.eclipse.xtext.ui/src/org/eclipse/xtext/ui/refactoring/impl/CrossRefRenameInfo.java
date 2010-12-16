@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.IReferenceDescription;
+import org.eclipse.xtext.ui.refactoring.ElementRenameInfo;
 import org.eclipse.xtext.ui.refactoring.IRefactoringDocument;
 
 import com.google.common.collect.HashMultimap;
@@ -40,7 +41,6 @@ public class CrossRefRenameInfo {
 		this.index = index;
 		this.renamedTarget = renamedTarget;
 	}
-
 	
 	public IRefactoringDocument getReferringDocument() {
 		return referringDocument;

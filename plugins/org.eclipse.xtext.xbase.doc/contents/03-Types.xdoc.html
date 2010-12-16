@@ -21,10 +21,10 @@ Xbase comes with the notion of function types.
 Xbase does not bind to any of the built-in types such as <em>int</em> or <em>boolean</em>, instead any references to those built-in types will automatically use the corresponding 
 wrapper type, e.g. <em>java.lang.Boolean</em> instead of <em>boolean</em>. Arrays are supported also in Xbase but are translated to <em>java.util.List</em>s: An 
 array <em>int[]</em> binds to <em>java.util.List&lt;java.lang.Integer&gt;</em> (in short <em>List&lt;Integer&gt;</em>). 
-This means when referring to <span class="inlinecode"></span>
+This means when referring to <span class="inlinecode">myList.isEmpty()</span>
  within an Xbase expression the static return type is <em>java.lang.Boolean</em>. 
 At runtime however the compiler may be smarter and use the native types. Especially the types <em>int</em> and <em>boolean</em> are most often used with
- built-in operators and the wrapper type is only occasionally needed (for instance when putting <span class="inlinecode"></span>
+ built-in operators and the wrapper type is only occasionally needed (for instance when putting <span class="inlinecode">int</span>
 s into collections).
 </p>
 
@@ -71,7 +71,7 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-
+QualifiedName:<br />&nbsp;&nbsp;ID&nbsp;(&apos;.&apos;&nbsp;ID)*<br />;&nbsp;&nbsp;&nbsp;&nbsp;<br />
 </p>
 </div>
 </div>
@@ -109,7 +109,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode"></span>
+<span class="inlinecode">java.lang.String</span>
 
 </p>
 
@@ -118,7 +118,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode"></span>
+<span class="inlinecode">String</span>
 
 </p>
 
@@ -151,11 +151,11 @@ Function Types
 
 <p>
 Xbase introduces <em>closures</em>, which require an additional kind of type. On the JVM-Level a closure (or more generally any function object) is just an instance of one of the 
-types in <span class="inlinecode"></span>
+types in <span class="inlinecode">org.eclipse.xtext.xbase.lib.Function*</span>
 , dependening on the number of arguments. However, as closures are a very important language feature, a special 
 sugared syntax for function types has been introduced.  
-So instead of writing <span class="inlinecode"></span>
- one can write <span class="inlinecode"></span>
+So instead of writing <span class="inlinecode">Function1&lt;String,Boolean&gt;</span>
+ one can write <span class="inlinecode">(String)=&gt;Boolean</span>
 .
 </p>
 
@@ -181,7 +181,7 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-
+XFunctionTypeRef:<br />&nbsp;&nbsp;(&apos;(&apos;JvmTypeReference&nbsp;(&apos;,&apos;&nbsp;JvmTypeReference)*&apos;)&apos;)?&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&apos;=&gt;&apos;&nbsp;JvmTypeReference;<br />
 </p>
 </div>
 </div>
@@ -215,7 +215,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode"></span>
+<span class="inlinecode">=&gt;Boolean&nbsp;//&nbsp;predicate&nbsp;without&nbsp;parameters</span>
 
 </p>
 
@@ -224,7 +224,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode"></span>
+<span class="inlinecode">(String)=&gt;Boolean&nbsp;//&nbsp;One&nbsp;argument&nbsp;predicate</span>
 
 </p>
 
@@ -233,7 +233,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode"></span>
+<span class="inlinecode">(Mutable)=&gt;Void&nbsp;//&nbsp;A&nbsp;method&nbsp;doing&nbsp;side&nbsp;effects&nbsp;on&nbsp;an&nbsp;instance&nbsp;of&nbsp;Mutable&nbsp;and&nbsp;returns&nbsp;null</span>
 
 </p>
 
@@ -242,7 +242,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode"></span>
+<span class="inlinecode">(List&lt;String&gt;)=&gt;String</span>
 
 </p>
 
@@ -305,7 +305,7 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-
+JvmTypeReference:<br />&nbsp;&nbsp;JvmParameterizedTypeReference&nbsp;|&nbsp;<br />&nbsp;&nbsp;XFunctionTypeRef;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />XFunctionTypeRef:<br />&nbsp;&nbsp;(&apos;(&apos;&nbsp;JvmTypeReference&nbsp;(&apos;,&apos;&nbsp;JvmTypeReference)*&nbsp;&apos;)&apos;)?&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&apos;=&gt;&apos;&nbsp;JvmTypeReference;<br /><br />JvmParameterizedTypeReference:<br />&nbsp;&nbsp;type=QualifiedName&nbsp;(&apos;&lt;&apos;&nbsp;JvmTypeArgument&nbsp;(&apos;,&apos;&nbsp;JvmTypeArgument)*&nbsp;&apos;&gt;&apos;)?;<br /><br />JvmTypeArgument:<br />&nbsp;&nbsp;JvmReferenceTypeArgument&nbsp;|&nbsp;<br />&nbsp;&nbsp;JvmWildcardTypeArgument;<br />&nbsp;&nbsp;<br />JvmReferenceTypeArgument&nbsp;:<br />&nbsp;&nbsp;JvmTypeReference;<br /><br />JvmWildcardTypeArgument:<br />&nbsp;&nbsp;&apos;?&apos;&nbsp;(JvmUpperBound&nbsp;|&nbsp;JvmLowerBound)?;<br /><br />JvmLowerBound&nbsp;:<br />&nbsp;&apos;super&apos;&nbsp;JvmTypeReference;<br /><br />JvmUpperBound&nbsp;:&nbsp;<br />&nbsp;&apos;extends&apos;&nbsp;JvmTypeReference;<br /><br />
 </p>
 </div>
 </div>
@@ -339,7 +339,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode"></span>
+<span class="inlinecode">String</span>
 
 </p>
 
@@ -348,7 +348,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode"></span>
+<span class="inlinecode">java.lang.String</span>
 
 </p>
 
@@ -357,7 +357,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode"></span>
+<span class="inlinecode">List&lt;?&gt;</span>
 
 </p>
 
@@ -366,7 +366,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode"></span>
+<span class="inlinecode">List&lt;?&nbsp;extends&nbsp;Comparable&lt;?&nbsp;extends&nbsp;FooBar&gt;</span>
 
 </p>
 
@@ -375,7 +375,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode"></span>
+<span class="inlinecode">List&lt;?&nbsp;super&nbsp;MyLowerBound&gt;</span>
 
 </p>
 
@@ -384,7 +384,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode"></span>
+<span class="inlinecode">List&lt;?&nbsp;extends&nbsp;=&gt;Boolean&gt;</span>
 
 </p>
 
@@ -416,15 +416,15 @@ The type java.lang.Void
 
 
 <p>
-The <span class="inlinecode"></span>
- reference is the only valid value of the type <span class="inlinecode"></span>
+The <span class="inlinecode">null</span>
+ reference is the only valid value of the type <span class="inlinecode">Void</span>
 , which gets some special treatment in Xbase. Every Java method which is declared <em>void</em> (i.e. without a return value)
 is translated to a method with return type <em>java.lang.Void</em>. At runtime such method invocations will result in <em>null</em>.
-The speciality is that while it is allowed to pass <span class="inlinecode"></span>
+The speciality is that while it is allowed to pass <span class="inlinecode">null</span>
  everywhere (TODO discuss use of nullable annotation) instead of any other value, this does not mean that <em>java.lang.Void</em>
-is a subtype of any other type. The <span class="inlinecode"></span>
+is a subtype of any other type. The <span class="inlinecode">instanceOf</span>
  operator as well as the type matchers in the 
-<a href="04-Expressions.xdoc.html#SwitchExpression">section SwitchExpression</a> do not match <span class="inlinecode"></span>
+<a href="04-Expressions.xdoc.html#SwitchExpression">section SwitchExpression</a> do not match <span class="inlinecode">null</span>
 .
 </p>
 

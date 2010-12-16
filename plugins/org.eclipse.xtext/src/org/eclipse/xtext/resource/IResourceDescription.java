@@ -63,6 +63,8 @@ public interface IResourceDescription {
 		 */
 		IResourceDescription getResourceDescription(Resource resource);
 
+		IResourceDescription.Delta createDelta(IResourceDescription oldDescription, IResourceDescription newDescription);
+		
 		/**
 		 * @return whether the candidate is affected by the change in the delta.
 		 * @throws IllegalArgumentException
