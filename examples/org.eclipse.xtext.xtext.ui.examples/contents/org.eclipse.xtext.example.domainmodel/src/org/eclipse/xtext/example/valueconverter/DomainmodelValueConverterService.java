@@ -13,10 +13,12 @@ import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
+@Singleton
 public class DomainmodelValueConverterService extends DefaultTerminalConverters {
 
 	@Inject
