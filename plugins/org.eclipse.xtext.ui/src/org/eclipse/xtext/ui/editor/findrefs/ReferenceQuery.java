@@ -14,12 +14,8 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.search.ui.ISearchQuery;
 import org.eclipse.search.ui.ISearchResult;
-import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.ILocalContextProvider;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
@@ -28,21 +24,24 @@ import com.google.inject.Inject;
 public class ReferenceQuery implements ISearchQuery {
 
 	@Inject
-	private IResourceDescriptions resourceDescriptions;
+	private IReferenceFinder finder;
 
 	private ReferenceSearchResult searchResult;
 
-	private URI eObjectTargetURI;
-
 	private String label;
 
+	private URI targetURI;
+
+	private ILocalContextProvider localContextProvider;
+
 	public ReferenceQuery() {
-		searchResult = new ReferenceSearchResult(this);
 	}
 
-	public void init(URI eObjectTargetURI, String label) {
-		this.eObjectTargetURI = eObjectTargetURI;
+	public void init(URI targetURI, IReferenceFinder.ILocalContextProvider localContextProvider, String label) {
+		this.targetURI = targetURI;
+		this.localContextProvider = localContextProvider;
 		this.label = label;
+		this.searchResult = new ReferenceSearchResult(this);
 	}
 
 	public boolean canRerun() {
@@ -63,24 +62,8 @@ public class ReferenceQuery implements ISearchQuery {
 
 	public IStatus run(IProgressMonitor monitor) throws OperationCanceledException {
 		searchResult.reset();
-		int numResources = Iterables.size(resourceDescriptions.getAllResourceDescriptions());
-		monitor.beginTask(Messages.ReferenceQuery_monitor, numResources);
-		for (IResourceDescription resourceDescription : resourceDescriptions.getAllResourceDescriptions()) {
-			Iterable<IReferenceDescription> matchingReferenceDescriptors = Iterables.filter(resourceDescription
-					.getReferenceDescriptions(), new Predicate<IReferenceDescription>() {
-				public boolean apply(IReferenceDescription input) {
-					return eObjectTargetURI.equals(input.getTargetEObjectUri());
-				}
-			});
-			for (IReferenceDescription matchingReferenceDescription : matchingReferenceDescriptors) {
-				searchResult.addMatchingReference(matchingReferenceDescription);
-			}
-			if (monitor.isCanceled()) {
-				return Status.CANCEL_STATUS;
-			}
-			monitor.worked(1);
-		}
-		return Status.OK_STATUS;
+		finder.findReferences(targetURI, localContextProvider, searchResult, monitor);
+		return (monitor.isCanceled()) ? Status.CANCEL_STATUS : Status.OK_STATUS;
 	}
 
 }

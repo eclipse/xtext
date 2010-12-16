@@ -21,7 +21,7 @@ import com.google.common.collect.Lists;
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class ReferenceSearchResult implements ISearchResult {
+public class ReferenceSearchResult implements ISearchResult, DefaultReferenceFinder.IAcceptor {
 
 	private ReferenceQuery query;
 
@@ -71,7 +71,7 @@ public class ReferenceSearchResult implements ISearchResult {
 		return getLabel();
 	}
 
-	public void addMatchingReference(IReferenceDescription referenceDescription) {
+	public void accept(IReferenceDescription referenceDescription) {
 		matchingReferences.add(referenceDescription);
 		fireEvent(new ReferenceSearchResultEvents.Added(this, referenceDescription));
 	}
