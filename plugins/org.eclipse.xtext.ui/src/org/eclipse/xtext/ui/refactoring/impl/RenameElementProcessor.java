@@ -23,15 +23,13 @@ import org.eclipse.ltk.core.refactoring.participants.ParticipantManager;
 import org.eclipse.ltk.core.refactoring.participants.RefactoringParticipant;
 import org.eclipse.ltk.core.refactoring.participants.RenameParticipant;
 import org.eclipse.ltk.core.refactoring.participants.SharableParticipants;
-import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.ElementRenameInfo;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.ui.refactoring.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
-import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+import org.eclipse.xtext.ui.refactoring.UpdateAcceptor;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.Strings;
 
@@ -45,13 +43,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	protected static final Logger LOG = Logger.getLogger(RenameElementProcessor.class);
 
 	@Inject
-	private IResourceSetProvider resourceSetProvider;
-
-	@Inject
-	private IExternalContentSupport externalContentSupport;
-
-	@Inject
-	private IDirtyStateManager dirtyStateManager;
+	private RefactoringResourceSetProvider resourceSetProvider;
 
 	@Inject 
 	private IRefactoringDocument.Provider refactoringDocumentProvider;
@@ -66,11 +58,8 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	private IWorkspace workspace;
 	
 	@Inject
-	private LocalReferenceUpdater localReferenceUpdater;
+	private ReferenceUpdaterDispatcher referenceUpdaterDispatcher;
 	
-	@Inject
-	private CompositeIndexBasedReferenceUpdater indexedReferenceUpdaterDispatcher;
-
 	private ResourceSet resourceSet;
 	private RefactoringStatus status;
 	private URI targetElementURI;
@@ -90,15 +79,13 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 			this.targetElementURI = targetElementURI;
 			this.targetDocument = refactoringDocumentProvider.get(targetElementURI, status);
 			resourceSet = resourceSetProvider.get(getProject(targetElementURI));
-			resourceSet.getLoadOptions().put(org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider.LIVE_SCOPE, Boolean.TRUE);
-			externalContentSupport.configureResourceSet(resourceSet, dirtyStateManager);
 			targetElement = resourceSet.getEObject(targetElementURI, true);
 			if(targetElement == null) {
 				throw new RefactoringStatusException("Rename target element can not be resolved", true);
 			}
 			this.strategy = strategyProvider.get(targetElement, targetDocument);
 		} catch (Exception e) {
-			handleException(e);
+			RefactoringStatusExtension.handleException(status, e);
 		}
 	}
 
@@ -149,7 +136,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	}
 
 	@Override
-	public RefactoringStatus checkFinalConditions(IProgressMonitor pm, CheckConditionsContext context)
+	public RefactoringStatus checkFinalConditions(IProgressMonitor monitor, CheckConditionsContext context)
 			throws CoreException, OperationCanceledException {
 		updateAcceptor = new UpdateAcceptor();
 		try {
@@ -160,18 +147,11 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 			ElementRenameInfo baseRenameInfo = new ElementRenameInfo(targetDocument, targetElementURI, declarationEdit.getOffset());
 			Iterable<ElementRenameInfo> dependentRenameInfos = dependentElementsCalculator.getDependentElementRenameInfos(targetElement, baseRenameInfo);
 			renameArguments = new ElementRenameArguments(newName, baseRenameInfo, dependentRenameInfos, true);
-			createReferenceUpdates(declarationEdit, renameArguments);
+			referenceUpdaterDispatcher.createReferenceUpdates(renameArguments, strategy, resourceSet, updateAcceptor, monitor);
 		} catch (Exception exc) {
-			handleException(exc);
+			RefactoringStatusExtension.handleException(status, exc);
 		}
 		return status;
-	}
-
-	protected void createReferenceUpdates(final ReplaceRegion declarationEdit, ElementRenameArguments renameArguments) {
-		RefactoringStatus localReferencesStatus = localReferenceUpdater.createReferenceUpdates(renameArguments, declarationEdit, resourceSet, updateAcceptor);
-		status.merge(localReferencesStatus);
-		RefactoringStatus externalReferenceStatus = indexedReferenceUpdaterDispatcher.createReferenceUpdates(renameArguments, declarationEdit, resourceSet, updateAcceptor);
-		status.merge(externalReferenceStatus);
 	}
 
 	@Override
@@ -187,12 +167,4 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 		return renameParticipants;
 	}
 
-	protected void handleException(Exception e) {
-		if (e instanceof RefactoringStatusException) {
-			((RefactoringStatusException) e).reportToStatus(status);
-		} else {
-			status.addFatalError("Error during refactoring. See log for details");
-			LOG.error(e);
-		}
-	}
 }

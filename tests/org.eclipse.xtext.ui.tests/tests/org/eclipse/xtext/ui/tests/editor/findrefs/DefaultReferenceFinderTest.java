@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.tests.editor.findrefs;
 
 import static com.google.common.collect.Lists.*;
+import static java.util.Collections.*;
 
 import java.io.IOException;
 import java.util.Queue;
@@ -74,7 +75,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementB)));
 		referenceFinder.findLocalReferences(elementA, acceptor, new NullProgressMonitor());
 		acceptor.assertFinished();
-		referenceFinder.findIndexedReferences(EcoreUtil.getURI(elementA), acceptor, new NullProgressMonitor());
+		referenceFinder.findIndexedReferences(singleton(EcoreUtil.getURI(elementA)), acceptor, new NullProgressMonitor());
 		acceptor.assertFinished();
 
 		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,
@@ -92,7 +93,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 		acceptor.assertFinished();
 		acceptor.expect(new DefaultReferenceDescription(elementD, elementC,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
-		referenceFinder.findIndexedReferences(EcoreUtil.getURI(elementC), acceptor, new NullProgressMonitor());
+		referenceFinder.findIndexedReferences(singleton(EcoreUtil.getURI(elementC)), acceptor, new NullProgressMonitor());
 		acceptor.assertFinished();
 
 		acceptor.expect(new DefaultReferenceDescription(elementD, elementC,
@@ -112,7 +113,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 		acceptor.assertFinished();
 		acceptor.expect(new DefaultReferenceDescription(elementD, elementA,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
-		referenceFinder.findIndexedReferences(EcoreUtil.getURI(elementA), acceptor, new NullProgressMonitor());
+		referenceFinder.findIndexedReferences(singleton(EcoreUtil.getURI(elementA)), acceptor, new NullProgressMonitor());
 		acceptor.assertFinished();
 
 		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,

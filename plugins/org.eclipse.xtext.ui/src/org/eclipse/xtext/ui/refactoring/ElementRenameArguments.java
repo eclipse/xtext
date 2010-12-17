@@ -39,5 +39,4 @@ public class ElementRenameArguments extends RenameArguments {
 		return concat(Collections.singletonList(baseElementRenameInfo), dependentElementRenameInfos);
 	}
 	
-	
 }

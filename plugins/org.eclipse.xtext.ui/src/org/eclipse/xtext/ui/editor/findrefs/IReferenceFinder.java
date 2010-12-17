@@ -29,6 +29,10 @@ public interface IReferenceFinder {
 	interface ILocalContextProvider {
 		<R> R readOnly(URI targetURI, IUnitOfWork<R, EObject> work);
 	}
-	
-	void findReferences(URI targetURI, ILocalContextProvider localContextProvider, IAcceptor acceptor, IProgressMonitor progressMonitor);
+
+	void findReferences(Iterable<URI> targetURI, ILocalContextProvider localContextProvider, IAcceptor acceptor,
+			IProgressMonitor progressMonitor);
+
+	void findReferences(URI targetURI, ILocalContextProvider localContextProvider, IAcceptor acceptor,
+			IProgressMonitor monitor);
 }

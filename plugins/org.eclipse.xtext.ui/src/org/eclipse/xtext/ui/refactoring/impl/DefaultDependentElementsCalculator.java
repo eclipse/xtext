@@ -24,7 +24,7 @@ import com.google.inject.internal.Lists;
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class ContentDependentElementsCalculator implements IDependentElementsCalculator {
+public class DefaultDependentElementsCalculator implements IDependentElementsCalculator {
 
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;

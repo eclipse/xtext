@@ -19,7 +19,7 @@ import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.ui.refactoring.IRefactoringDocument;
-import org.eclipse.xtext.ui.refactoring.impl.UpdateAcceptor;
+import org.eclipse.xtext.ui.refactoring.UpdateAcceptor;
 import org.eclipse.xtext.util.ReplaceRegion;
 
 /**

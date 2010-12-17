@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.refactoring;
 import java.util.Collections;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.ui.refactoring.impl.ContentDependentElementsCalculator;
+import org.eclipse.xtext.ui.refactoring.impl.DefaultDependentElementsCalculator;
 
 import com.google.inject.ImplementedBy;
 
@@ -20,7 +20,7 @@ import com.google.inject.ImplementedBy;
  * 
  * @author koehnlein - Initial contribution and API
  */
-@ImplementedBy(ContentDependentElementsCalculator.class)
+@ImplementedBy(DefaultDependentElementsCalculator.class)
 public interface IDependentElementsCalculator {
 
 	Iterable<ElementRenameInfo> getDependentElementRenameInfos(EObject baseElement, ElementRenameInfo baseRenameInfo);

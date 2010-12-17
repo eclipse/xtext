@@ -22,6 +22,11 @@ public class RefactoringStatusException extends RuntimeException {
 		this.isFatal = isFatal;
 	}
 	
+	public boolean isFatal() {
+		return isFatal;
+	}
+
+	@Deprecated
 	public void reportToStatus(RefactoringStatus status) {
 		if(isFatal)
 			status.addFatalError(getMessage());

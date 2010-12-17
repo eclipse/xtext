@@ -5,13 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.refactoring.impl;
+package org.eclipse.xtext.ui.refactoring;
 
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.CompositeChange;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
-import org.eclipse.xtext.ui.refactoring.IRefactoringDocument;
 import org.eclipse.xtext.util.ReplaceRegion;
 
 import com.google.common.collect.HashMultimap;

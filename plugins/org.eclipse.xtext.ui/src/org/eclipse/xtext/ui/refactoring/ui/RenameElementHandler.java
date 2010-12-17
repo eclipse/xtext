@@ -18,8 +18,8 @@ import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.ltk.core.refactoring.participants.RenameRefactoring;
 import org.eclipse.ltk.ui.refactoring.RefactoringWizardOpenOperation;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
+import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
@@ -39,9 +39,9 @@ public class RenameElementHandler extends AbstractHandler {
 
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
-	
-	@Inject 
-	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
+
+	@Inject
+	private IGlobalServiceProvider globalServiceProvider;
 
 	protected static final Logger LOG = Logger.getLogger(RenameElementHandler.class);
 
@@ -63,11 +63,10 @@ public class RenameElementHandler extends AbstractHandler {
 				});
 				if (targetElementURI != null) {
 					// refactoring target could be from another language
-					IResourceServiceProvider resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(targetElementURI.trimFragment());
-					if(resourceServiceProvider != null) {
-						RenameElementOperation renameElementExecution = resourceServiceProvider.get(RenameElementOperation.class);
-						renameElementExecution.execute(editor, targetElementURI);
-					}
+					RenameElementOperation renameElementOperation = globalServiceProvider.findService(
+							targetElementURI.trimFragment(), RenameElementOperation.class);
+					if (renameElementOperation != null)
+						renameElementOperation.execute(editor, targetElementURI);
 				}
 			}
 		} catch (Exception exc) {
@@ -75,9 +74,9 @@ public class RenameElementHandler extends AbstractHandler {
 		}
 		return null;
 	}
-	
-	protected void selectElementInEditor(EObject targetElement, final URI targetElementURI,
-			final XtextEditor editor, XtextResource editorResource) {
+
+	protected void selectElementInEditor(EObject targetElement, final URI targetElementURI, final XtextEditor editor,
+			XtextResource editorResource) {
 		if (targetElementURI != null && targetElementURI.trimFragment().equals(editorResource.getURI())) {
 			ITextRegion region = locationInFileProvider.getSignificantTextRegion(targetElement);
 			editor.selectAndReveal(region.getOffset(), region.getLength());
@@ -87,12 +86,11 @@ public class RenameElementHandler extends AbstractHandler {
 	public static class RenameElementOperation {
 		@Inject
 		private IRenameRefactoringProvider refactoringProvider;
-		
+
 		public void execute(final XtextEditor editor, URI targetElementURI) throws InterruptedException {
 			RenameRefactoring renameRefactoring = refactoringProvider.getRenameRefactoring(targetElementURI);
 			RenameElementWizard renameElementWizard = new RenameElementWizard(renameRefactoring);
-			RefactoringWizardOpenOperation openOperation = new RefactoringWizardOpenOperation(
-					renameElementWizard);
+			RefactoringWizardOpenOperation openOperation = new RefactoringWizardOpenOperation(renameElementWizard);
 			openOperation.run(editor.getSite().getShell(), "Rename Element");
 		}
 	}
