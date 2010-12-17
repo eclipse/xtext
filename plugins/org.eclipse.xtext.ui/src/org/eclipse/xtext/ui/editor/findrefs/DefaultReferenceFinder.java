@@ -7,13 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.findrefs;
 
+import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Sets.*;
+import static java.util.Collections.*;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -31,6 +35,7 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.DefaultReferenceDescription;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
@@ -46,17 +51,24 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 		this.index = index;
 	}
 
-	public void findReferences(URI targetURI, ILocalContextProvider localContextProvider, final IAcceptor acceptor,
-			IProgressMonitor monitor) {
+	public void findReferences(URI targetURI, ILocalContextProvider localContextProvider,
+			final IAcceptor acceptor, IProgressMonitor monitor) {
+		findReferences(singleton(targetURI), localContextProvider, acceptor, monitor);
+	}
+			
+	public void findReferences(Iterable<URI> targetURIs, ILocalContextProvider localContextProvider,
+			final IAcceptor acceptor, IProgressMonitor monitor) {
 		final IProgressMonitor realMonitor = (monitor == null) ? new NullProgressMonitor() : monitor;
 		realMonitor.beginTask("Find references", 2);
-		localContextProvider.readOnly(targetURI, new IUnitOfWork<Boolean, EObject>() {
-			public Boolean exec(EObject state) throws Exception {
-				findLocalReferences(state, acceptor, new SubProgressMonitor(realMonitor, 1));
-				return true;
-			}
-		});
-		findIndexedReferences(targetURI, acceptor, new SubProgressMonitor(realMonitor, 1));
+		for (URI targetURI : targetURIs) {
+			localContextProvider.readOnly(targetURI, new IUnitOfWork<Boolean, EObject>() {
+				public Boolean exec(EObject state) throws Exception {
+					findLocalReferences(state, acceptor, new SubProgressMonitor(realMonitor, 1));
+					return true;
+				}
+			});
+		}
+		findIndexedReferences(targetURIs, acceptor, new SubProgressMonitor(realMonitor, 1));
 		realMonitor.done();
 	}
 
@@ -100,33 +112,39 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 		URI resourceURI = element.eResource().getURI();
 		LinkedList<URI> parentURIs = newLinkedList();
 		EObject currentParent = element;
-		while(currentParent != null) { 
+		while (currentParent != null) {
 			parentURIs.addFirst(EcoreUtil.getURI(currentParent));
 			currentParent = currentParent.eContainer();
 		}
 		int currentBestIndex = -1;
 		IResourceDescription resourceDescription = index.getResourceDescription(resourceURI);
-		for(IEObjectDescription exportedEObject: resourceDescription.getExportedObjects()) {
-			currentBestIndex = Math.max(currentBestIndex, parentURIs.indexOf(exportedEObject.getEObjectURI())); 
+		if (resourceDescription != null) {
+			for (IEObjectDescription exportedEObject : resourceDescription.getExportedObjects()) {
+				currentBestIndex = Math.max(currentBestIndex, parentURIs.indexOf(exportedEObject.getEObjectURI()));
+			}
 		}
-		if(currentBestIndex == -1)
+		if (currentBestIndex == -1)
 			return null;
-		else 
-			return parentURIs.get(currentBestIndex); 
+		else
+			return parentURIs.get(currentBestIndex);
 	}
-	
-	public void findIndexedReferences(URI targetURI, IAcceptor acceptor, IProgressMonitor monitor) {
+
+	public void findIndexedReferences(Iterable<URI> targetURIs, IAcceptor acceptor, IProgressMonitor monitor) {
+		Set<URI> targetResourceURIs = newHashSet(transform(targetURIs, new Function<URI, URI>() {
+			public URI apply(URI from) {
+				return from.trimFragment();
+			}
+		}));
 		if (monitor.isCanceled())
 			return;
 		int numResources = Iterables.size(index.getAllResourceDescriptions());
-		URI targetResourceURI = targetURI.trimFragment();
 		monitor.beginTask(Messages.ReferenceQuery_monitor, numResources);
 		for (IResourceDescription resourceDescription : index.getAllResourceDescriptions()) {
 			if (monitor.isCanceled())
 				return;
-			if (!targetResourceURI.equals(resourceDescription.getURI())) {
+			if (!targetResourceURIs.contains(resourceDescription.getURI())) {
 				for (IReferenceDescription referenceDescription : resourceDescription.getReferenceDescriptions()) {
-					if (referenceDescription.getTargetEObjectUri().equals(targetURI)) {
+					if (contains(targetURIs, referenceDescription.getTargetEObjectUri())) {
 						acceptor.accept(referenceDescription);
 					}
 				}
@@ -135,5 +153,5 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 		}
 		monitor.done();
 	}
-
+	
 }

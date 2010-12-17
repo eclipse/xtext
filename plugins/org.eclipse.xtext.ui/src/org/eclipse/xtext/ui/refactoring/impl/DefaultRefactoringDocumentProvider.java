@@ -88,53 +88,80 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 		return null;
 	}
 
-	public static class EditorDocument implements IRefactoringDocument {
-
+	public static abstract class AbstractRefactoringDocument implements IRefactoringDocument {
 		private URI resourceURI;
-		private IDocument document;
-
-		public EditorDocument(URI resourceURI, IDocument document) {
+		
+		public AbstractRefactoringDocument(URI resourceURI) {
 			this.resourceURI = resourceURI;
-			this.document = document;
 		}
 
-		public Change createChange(String name, TextEdit textEdit) {
-			DocumentChange documentChange = new DocumentChange(name, document);
-			documentChange.setEdit(textEdit);
-			return new DisplayChangeWrapper(documentChange);
-		}
+		public abstract Change createChange(String name, TextEdit textEdit);
 
 		public URI getURI() {
 			return resourceURI;
 		}
 		
+		@Override
+		public boolean equals(Object obj) {
+			return getClass().isInstance(obj) && ((IRefactoringDocument) obj).getURI().equals(resourceURI);
+		}
+		
+		@Override
+		public int hashCode() {
+			return resourceURI.hashCode();
+		}
+	}
+	
+	public static class EditorDocument extends AbstractRefactoringDocument {
+
+		private IDocument document;
+
+		public EditorDocument(URI resourceURI, IDocument document) {
+			super(resourceURI);
+			this.document = document;
+		}
+
 		public IDocument getDocument() {
 			return document;
 		}
+		
+		@Override
+		public Change createChange(String name, TextEdit textEdit) {
+			DocumentChange documentChange = new DocumentChange(getName(), document);
+			documentChange.setEdit(textEdit);
+			return new DisplayChangeWrapper(documentChange);
+		}
+		
+		protected String getName() {
+			StringBuilder buffer = new StringBuilder(getURI().lastSegment());
+			buffer.append(" - ");
+			buffer.append(getURI().segment(1));
+			for(int i=2; i< getURI().segmentCount() -1; ++i) {
+				buffer.append("/");
+				buffer.append(getURI().segment(i));
+			}
+			return buffer.toString();
+		}
 	}
 
-	public static class FileDocument implements IRefactoringDocument {
+	public static class FileDocument extends AbstractRefactoringDocument {
 
-		private URI resourceURI;
 		private IFile file;
 
 		public FileDocument(URI resourceURI, IFile file) {
-			this.resourceURI = resourceURI;
+			super(resourceURI);
 			this.file = file;
 		}
 
+		public IFile getFile() {
+			return file;
+		}
+		
+		@Override
 		public Change createChange(String name, TextEdit textEdit) {
 			TextFileChange textFileChange = new TextFileChange(name, file);
 			textFileChange.setEdit(textEdit);
 			return textFileChange;
-		}
-
-		public URI getURI() {
-			return resourceURI;
-		}
-		
-		public IFile getFile() {
-			return file;
 		}
 	}
 }

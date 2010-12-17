@@ -20,7 +20,7 @@ import com.google.inject.ImplementedBy;
 public interface IRenameStrategy {
 
 	String getCurrentName();
-
+	
 	ReplaceRegion getReplaceRegion(String newName);
 	
 	RefactoringStatus validateNewName(String newName);

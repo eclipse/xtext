@@ -20,7 +20,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.refactoring.ElementRenameInfo;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.ui.refactoring.IRefactoringDocument;
-import org.eclipse.xtext.ui.refactoring.impl.ContentDependentElementsCalculator;
+import org.eclipse.xtext.ui.refactoring.impl.DefaultDependentElementsCalculator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
 
 import com.google.common.base.Predicate;
@@ -61,7 +61,7 @@ public class DependentElementsCalculatorTest extends AbstractXtextTests {
 	}
 
 	public void testContentDependentElements() throws Exception {
-		Iterable<ElementRenameInfo> dependentElementRenameInfos = get(ContentDependentElementsCalculator.class)
+		Iterable<ElementRenameInfo> dependentElementRenameInfos = get(DefaultDependentElementsCalculator.class)
 				.getDependentElementRenameInfos(baseElement, baseRenameInfo);
 		assertEquals(2, size(dependentElementRenameInfos));
 		assertContainsElement(dependentElementRenameInfos, "B");

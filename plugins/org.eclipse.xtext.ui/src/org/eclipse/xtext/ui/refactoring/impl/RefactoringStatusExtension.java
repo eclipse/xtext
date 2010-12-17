@@ -5,22 +5,27 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.refactoring;
+package org.eclipse.xtext.ui.refactoring.impl;
 
-import org.eclipse.core.runtime.IProgressMonitor;
+import org.apache.log4j.Logger;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.ui.refactoring.impl.DefaultReferenceUpdater;
-
-import com.google.inject.ImplementedBy;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
-@ImplementedBy(DefaultReferenceUpdater.class)
-public interface IReferenceUpdater{
+public class RefactoringStatusExtension {
 
-	RefactoringStatus createReferenceUpdates(ElementRenameArguments elementRenameArguments,
-			IRenameStrategy renameStrategy, Iterable<IReferenceDescription> referenceDescriptions, UpdateAcceptor updateAcceptor, IProgressMonitor monitor);
+	private static final Logger LOG = Logger.getLogger(RefactoringStatusExtension.class);
 	
+	public static void handleException(RefactoringStatus status, Exception exc) {
+		if(exc instanceof RefactoringStatusException) { 
+			if(((RefactoringStatusException) exc).isFatal())
+				status.addFatalError(exc.getMessage());
+			else
+				status.addError(exc.getMessage());
+		} else {
+			status.addFatalError(exc.getMessage());
+			LOG.error(exc);
+		}
+	}
 }

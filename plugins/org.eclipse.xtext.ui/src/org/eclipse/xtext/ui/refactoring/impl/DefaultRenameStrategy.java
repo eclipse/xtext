@@ -58,11 +58,6 @@ public class DefaultRenameStrategy implements IRenameStrategy {
 		return new ReplaceRegion(currentNameTextRegion.getOffset(), currentNameTextRegion.getLength(), newName);
 	}
 	
-	public void apply(String newName, IRefactoringDocument document) {
-		ReplaceRegion replaceRegion = getReplaceRegion(newName);
-		
-	}
-
 	public RefactoringStatus validateNewName(String newName) {
 		RefactoringStatus newRefactoringStatus = new RefactoringStatus();
 		if (Strings.equal(newName, currentName))

@@ -22,7 +22,7 @@ import org.eclipse.search.ui.NewSearchUI;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
@@ -42,8 +42,8 @@ public class FindReferencesHandler extends AbstractHandler {
 	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
 
 	@Inject
-	private IResourceServiceProvider.Registry serviceProviderRegistry;
-	
+	private IGlobalServiceProvider globalServiceProvider;
+
 	@Inject
 	private IReferenceFinder.ILocalContextProvider localContextProvider;
 
@@ -64,10 +64,9 @@ public class FindReferencesHandler extends AbstractHandler {
 					}
 				});
 				if (targetURI != null) {
-					IResourceServiceProvider resourceServiceProvider = serviceProviderRegistry
-							.getResourceServiceProvider(targetURI.trimFragment());
-					QueryExecutor queryExecutor = resourceServiceProvider.get(QueryExecutor.class);
-					if(queryExecutor != null) {
+					QueryExecutor queryExecutor = globalServiceProvider.findService(targetURI.trimFragment(),
+							QueryExecutor.class);
+					if (queryExecutor != null) {
 						queryExecutor.execute(targetURI, localContextProvider);
 					}
 				}
@@ -87,10 +86,10 @@ public class FindReferencesHandler extends AbstractHandler {
 
 		@Inject
 		private IQualifiedNameProvider qualifiedNameProvider;
-		
+
 		@Inject
 		private IQualifiedNameConverter qualifiedNameConverter;
-		
+
 		public void execute(URI targetElementURI, IReferenceFinder.ILocalContextProvider localContextProvider) {
 			ReferenceQuery referenceQuery = queryProvider.get();
 			String qualifiedName = localContextProvider.readOnly(targetElementURI, new IUnitOfWork<String, EObject>() {
