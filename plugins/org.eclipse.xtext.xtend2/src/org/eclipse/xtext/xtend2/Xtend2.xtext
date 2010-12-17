@@ -35,5 +35,66 @@ Member returns types::JvmMember:
 
 Function returns XtendFunction :
 	('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
-	(returnType=JvmTypeReference)? name=ID '(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')' 
-		expression=XExpression;
+	(returnType=JvmTypeReference)? name=ID '(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
+		(expression=XExpression | ';');
+		
+XStringLiteral returns xbase::XExpression:
+	{xbase::XStringLiteral} value=STRING |
+	RichString
+;
+		
+RichString returns xbase::XExpression:
+	{RichStringLiteral} value=RICH_TEXT |
+	{RichString} elements+=RichStringLiteralStart (elements+=RichStringPart elements+=RichStringLiteralInbetween)* elements+=RichStringPart elements+=RichStringLiteralEnd
+;
+
+RichStringLiteralStart returns xbase::XExpression :
+	{RichStringLiteral} value=RICH_TEXT_START
+; 
+
+RichStringLiteralInbetween returns xbase::XExpression :
+	{RichStringLiteral} value=RICH_TEXT_INBETWEEN
+; 
+
+RichStringLiteralEnd returns xbase::XExpression :
+	{RichStringLiteral} value=RICH_TEXT_END
+; 
+
+InternalRichString returns xbase::XExpression:
+	{RichStringLiteral} value=RICH_TEXT_INBETWEEN |
+	{RichString} elements+=RichStringLiteralInbetween (elements+=RichStringPart elements+=RichStringLiteralInbetween)+;
+
+RichStringPart returns xbase::XExpression:
+	XExpression |
+	RichStringForLoop |
+	RichStringIf
+;
+
+RichStringForLoop returns xbase::XExpression:
+	{RichStringForLoop}
+	"FOR" declaredParam=JvmFormalParameter ':' forExpression=XExpression
+		eachExpression=InternalRichString
+	"ENDFOR"
+;
+
+RichStringIf returns xbase::XExpression :
+	{RichStringIf}
+	"IF" if=XExpression
+		then=InternalRichString
+		elseIfs+=RichStringElseIf*
+	("ELSE" 
+		else=InternalRichString)?
+	"ENDIF"
+;
+
+RichStringElseIf returns RichStringElseIf:
+	"ELSEIF" if=XExpression then=InternalRichString
+;
+
+terminal RICH_TEXT : "'''" IN_DOUBLE_QUOTE_RICH_STRING* "'''";
+terminal RICH_TEXT_START : "'''" IN_DOUBLE_QUOTE_RICH_STRING* '«';
+terminal RICH_TEXT_END : '»' IN_DOUBLE_QUOTE_RICH_STRING* "'''" ;
+terminal RICH_TEXT_INBETWEEN : '»' IN_DOUBLE_QUOTE_RICH_STRING* '«'; 
+
+terminal fragment IN_DOUBLE_QUOTE_RICH_STRING : "''" !"'" |"'" !"'"| !('«'|"'");
+

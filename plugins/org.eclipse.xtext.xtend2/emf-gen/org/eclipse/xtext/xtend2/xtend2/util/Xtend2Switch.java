@@ -22,6 +22,10 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XForLoopExpression;
+import org.eclipse.xtext.xbase.XStringLiteral;
+
 import org.eclipse.xtext.xtend2.xtend2.*;
 
 /**
@@ -150,6 +154,47 @@ public class Xtend2Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case Xtend2Package.RICH_STRING:
+			{
+				RichString richString = (RichString)theEObject;
+				T result = caseRichString(richString);
+				if (result == null) result = caseXExpression(richString);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Xtend2Package.RICH_STRING_LITERAL:
+			{
+				RichStringLiteral richStringLiteral = (RichStringLiteral)theEObject;
+				T result = caseRichStringLiteral(richStringLiteral);
+				if (result == null) result = caseXStringLiteral(richStringLiteral);
+				if (result == null) result = caseXExpression(richStringLiteral);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Xtend2Package.RICH_STRING_FOR_LOOP:
+			{
+				RichStringForLoop richStringForLoop = (RichStringForLoop)theEObject;
+				T result = caseRichStringForLoop(richStringForLoop);
+				if (result == null) result = caseXForLoopExpression(richStringForLoop);
+				if (result == null) result = caseXExpression(richStringForLoop);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Xtend2Package.RICH_STRING_IF:
+			{
+				RichStringIf richStringIf = (RichStringIf)theEObject;
+				T result = caseRichStringIf(richStringIf);
+				if (result == null) result = caseXExpression(richStringIf);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Xtend2Package.RICH_STRING_ELSE_IF:
+			{
+				RichStringElseIf richStringElseIf = (RichStringElseIf)theEObject;
+				T result = caseRichStringElseIf(richStringElseIf);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -214,6 +259,86 @@ public class Xtend2Switch<T>
 	 * @generated
 	 */
 	public T caseXtendClass(XtendClass object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Rich String</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Rich String</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRichString(RichString object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Rich String Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Rich String Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRichStringLiteral(RichStringLiteral object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Rich String For Loop</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Rich String For Loop</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRichStringForLoop(RichStringForLoop object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Rich String If</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Rich String If</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRichStringIf(RichStringIf object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Rich String Else If</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Rich String Else If</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRichStringElseIf(RichStringElseIf object)
 	{
 		return null;
 	}
@@ -390,6 +515,54 @@ public class Xtend2Switch<T>
 	 * @generated
 	 */
 	public T caseJvmGenericType(JvmGenericType object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XExpression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XExpression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXExpression(XExpression object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XString Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XString Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXStringLiteral(XStringLiteral object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XFor Loop Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XFor Loop Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXForLoopExpression(XForLoopExpression object)
 	{
 		return null;
 	}

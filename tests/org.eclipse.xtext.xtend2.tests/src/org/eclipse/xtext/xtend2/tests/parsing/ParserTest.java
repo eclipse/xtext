@@ -4,8 +4,15 @@ import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2Test;
+import org.eclipse.xtext.xtend2.xtend2.RichString;
+import org.eclipse.xtext.xtend2.xtend2.RichStringElseIf;
+import org.eclipse.xtext.xtend2.xtend2.RichStringIf;
+import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
@@ -139,5 +146,61 @@ public class ParserTest extends AbstractXtend2Test {
 		XtendFunction f2 = (XtendFunction) clazz.getMembers().get(1);
 		assertEquals("String",((XFeatureCall)f1.getExpression()).getFeatureName());
 		assertNotNull(f2.getReturnType());
+	}
+
+	public void testRichString_00() throws Exception {
+		XtendFunction function = function("foo() ''' foo '''");
+		assertTrue(function.getExpression() instanceof RichStringLiteral); 
+	}
+	
+	public void testRichString_01() throws Exception {
+		XtendFunction function = function("foo() ''' foo «'holla'» bar '''");
+		final RichString richString = (RichString) function.getExpression();
+		assertTrue(richString.getElements().get(0) instanceof RichStringLiteral); 
+		assertTrue(richString.getElements().get(1) instanceof XStringLiteral); 
+		assertTrue(richString.getElements().get(2) instanceof RichStringLiteral); 
+	}
+	
+	public void testRichString_02() throws Exception {
+		XtendFunction function = function("foo() ''''''");
+		assertTrue(function.getExpression() instanceof RichStringLiteral); 
+	}
+	
+	public void testRichStringIF_00() throws Exception {
+		XtendFunction function = function("foo() ''' foo «IF true» wurst «ELSEIF f==3» brot «ELSE» machine «ENDIF» bar '''");
+		final RichString richString = (RichString) function.getExpression();
+		assertTrue(richString.getElements().get(0) instanceof RichStringLiteral);
+		
+		final RichStringIf rsIf = (RichStringIf) richString.getElements().get(1);
+		assertTrue(rsIf.getIf() instanceof XBooleanLiteral); 
+		assertTrue(rsIf.getThen() instanceof RichStringLiteral);
+		assertEquals(1,rsIf.getElseIfs().size());
+		
+		RichStringElseIf elseIf = rsIf.getElseIfs().get(0);
+		assertTrue(elseIf.getIf() instanceof XBinaryOperation);
+		assertTrue(elseIf.getThen() instanceof RichStringLiteral);
+		
+		assertTrue(rsIf.getElse() instanceof RichStringLiteral);
+		
+		assertTrue(richString.getElements().get(2) instanceof RichStringLiteral); 
+	}
+	
+	public void testRichStringIF_01() throws Exception {
+		XtendFunction function = function("foo() ''' foo «IF true» wurst «IF false» brot «ELSE» machine «ENDIF» bar «ENDIF»'''");
+		final RichString richString = (RichString) function.getExpression();
+		assertTrue(richString.getElements().get(0) instanceof RichStringLiteral);
+		
+		final RichStringIf rsIf = (RichStringIf) richString.getElements().get(1);
+		assertTrue(rsIf.getIf() instanceof XBooleanLiteral);
+		
+		final RichString then = (RichString) rsIf.getThen();
+		assertEquals(3,then.getElements().size());
+		RichStringIf innerIf = (RichStringIf) then.getElements().get(1);
+		assertTrue(innerIf.getIf() instanceof XBooleanLiteral);
+		assertTrue(innerIf.getElse() instanceof RichStringLiteral);
+		
+		assertTrue(rsIf.getElse()==null);
+		
+		assertTrue(richString.getElements().get(2) instanceof RichStringLiteral); 
 	}
 }

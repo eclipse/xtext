@@ -24,6 +24,10 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XForLoopExpression;
+import org.eclipse.xtext.xbase.XStringLiteral;
+
 import org.eclipse.xtext.xtend2.xtend2.*;
 
 /**
@@ -110,6 +114,31 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 				return createXtendClassAdapter();
 			}
 			@Override
+			public Adapter caseRichString(RichString object)
+			{
+				return createRichStringAdapter();
+			}
+			@Override
+			public Adapter caseRichStringLiteral(RichStringLiteral object)
+			{
+				return createRichStringLiteralAdapter();
+			}
+			@Override
+			public Adapter caseRichStringForLoop(RichStringForLoop object)
+			{
+				return createRichStringForLoopAdapter();
+			}
+			@Override
+			public Adapter caseRichStringIf(RichStringIf object)
+			{
+				return createRichStringIfAdapter();
+			}
+			@Override
+			public Adapter caseRichStringElseIf(RichStringElseIf object)
+			{
+				return createRichStringElseIfAdapter();
+			}
+			@Override
 			public Adapter caseJvmAnnotationTarget(JvmAnnotationTarget object)
 			{
 				return createJvmAnnotationTargetAdapter();
@@ -163,6 +192,21 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 			public Adapter caseJvmGenericType(JvmGenericType object)
 			{
 				return createJvmGenericTypeAdapter();
+			}
+			@Override
+			public Adapter caseXExpression(XExpression object)
+			{
+				return createXExpressionAdapter();
+			}
+			@Override
+			public Adapter caseXStringLiteral(XStringLiteral object)
+			{
+				return createXStringLiteralAdapter();
+			}
+			@Override
+			public Adapter caseXForLoopExpression(XForLoopExpression object)
+			{
+				return createXForLoopExpressionAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object)
@@ -242,6 +286,81 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createXtendClassAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtend2.xtend2.RichString <em>Rich String</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xtend2.xtend2.RichString
+	 * @generated
+	 */
+	public Adapter createRichStringAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtend2.xtend2.RichStringLiteral <em>Rich String Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xtend2.xtend2.RichStringLiteral
+	 * @generated
+	 */
+	public Adapter createRichStringLiteralAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtend2.xtend2.RichStringForLoop <em>Rich String For Loop</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xtend2.xtend2.RichStringForLoop
+	 * @generated
+	 */
+	public Adapter createRichStringForLoopAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtend2.xtend2.RichStringIf <em>Rich String If</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xtend2.xtend2.RichStringIf
+	 * @generated
+	 */
+	public Adapter createRichStringIfAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtend2.xtend2.RichStringElseIf <em>Rich String Else If</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xtend2.xtend2.RichStringElseIf
+	 * @generated
+	 */
+	public Adapter createRichStringElseIfAdapter()
 	{
 		return null;
 	}
@@ -407,6 +526,51 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createJvmGenericTypeAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XExpression <em>XExpression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xbase.XExpression
+	 * @generated
+	 */
+	public Adapter createXExpressionAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XStringLiteral <em>XString Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xbase.XStringLiteral
+	 * @generated
+	 */
+	public Adapter createXStringLiteralAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XForLoopExpression <em>XFor Loop Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xbase.XForLoopExpression
+	 * @generated
+	 */
+	public Adapter createXForLoopExpressionAdapter()
 	{
 		return null;
 	}
