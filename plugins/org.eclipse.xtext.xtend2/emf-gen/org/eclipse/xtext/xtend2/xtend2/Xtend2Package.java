@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.xtext.common.types.TypesPackage;
 
+import org.eclipse.xtext.xbase.XbasePackage;
+
 /**
  * <!-- begin-user-doc -->
  * The <b>Package</b> for the model.
@@ -434,6 +436,200 @@ public interface Xtend2Package extends EPackage
 	 */
 	int XTEND_CLASS_FEATURE_COUNT = TypesPackage.JVM_GENERIC_TYPE_FEATURE_COUNT + 3;
 
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.RichStringImpl <em>Rich String</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xtend2.xtend2.impl.RichStringImpl
+	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getRichString()
+	 * @generated
+	 */
+	int RICH_STRING = 4;
+
+	/**
+	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RICH_STRING__ELEMENTS = XbasePackage.XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Rich String</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RICH_STRING_FEATURE_COUNT = XbasePackage.XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.RichStringLiteralImpl <em>Rich String Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xtend2.xtend2.impl.RichStringLiteralImpl
+	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getRichStringLiteral()
+	 * @generated
+	 */
+	int RICH_STRING_LITERAL = 5;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RICH_STRING_LITERAL__VALUE = XbasePackage.XSTRING_LITERAL__VALUE;
+
+	/**
+	 * The number of structural features of the '<em>Rich String Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RICH_STRING_LITERAL_FEATURE_COUNT = XbasePackage.XSTRING_LITERAL_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.RichStringForLoopImpl <em>Rich String For Loop</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xtend2.xtend2.impl.RichStringForLoopImpl
+	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getRichStringForLoop()
+	 * @generated
+	 */
+	int RICH_STRING_FOR_LOOP = 6;
+
+	/**
+	 * The feature id for the '<em><b>For Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RICH_STRING_FOR_LOOP__FOR_EXPRESSION = XbasePackage.XFOR_LOOP_EXPRESSION__FOR_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Each Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RICH_STRING_FOR_LOOP__EACH_EXPRESSION = XbasePackage.XFOR_LOOP_EXPRESSION__EACH_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Declared Param</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RICH_STRING_FOR_LOOP__DECLARED_PARAM = XbasePackage.XFOR_LOOP_EXPRESSION__DECLARED_PARAM;
+
+	/**
+	 * The number of structural features of the '<em>Rich String For Loop</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RICH_STRING_FOR_LOOP_FEATURE_COUNT = XbasePackage.XFOR_LOOP_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.RichStringIfImpl <em>Rich String If</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xtend2.xtend2.impl.RichStringIfImpl
+	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getRichStringIf()
+	 * @generated
+	 */
+	int RICH_STRING_IF = 7;
+
+	/**
+	 * The feature id for the '<em><b>If</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RICH_STRING_IF__IF = XbasePackage.XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Then</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RICH_STRING_IF__THEN = XbasePackage.XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Else Ifs</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RICH_STRING_IF__ELSE_IFS = XbasePackage.XEXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Else</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RICH_STRING_IF__ELSE = XbasePackage.XEXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Rich String If</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RICH_STRING_IF_FEATURE_COUNT = XbasePackage.XEXPRESSION_FEATURE_COUNT + 4;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.RichStringElseIfImpl <em>Rich String Else If</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xtend2.xtend2.impl.RichStringElseIfImpl
+	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getRichStringElseIf()
+	 * @generated
+	 */
+	int RICH_STRING_ELSE_IF = 8;
+
+	/**
+	 * The feature id for the '<em><b>If</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RICH_STRING_ELSE_IF__IF = 0;
+
+	/**
+	 * The feature id for the '<em><b>Then</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RICH_STRING_ELSE_IF__THEN = 1;
+
+	/**
+	 * The number of structural features of the '<em>Rich String Else If</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RICH_STRING_ELSE_IF_FEATURE_COUNT = 2;
+
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.XtendFile <em>Xtend File</em>}'.
@@ -586,6 +782,133 @@ public interface Xtend2Package extends EPackage
 	EReference getXtendClass_Implements();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.RichString <em>Rich String</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Rich String</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.RichString
+	 * @generated
+	 */
+	EClass getRichString();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtend2.xtend2.RichString#getElements <em>Elements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Elements</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.RichString#getElements()
+	 * @see #getRichString()
+	 * @generated
+	 */
+	EReference getRichString_Elements();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.RichStringLiteral <em>Rich String Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Rich String Literal</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.RichStringLiteral
+	 * @generated
+	 */
+	EClass getRichStringLiteral();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.RichStringForLoop <em>Rich String For Loop</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Rich String For Loop</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.RichStringForLoop
+	 * @generated
+	 */
+	EClass getRichStringForLoop();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.RichStringIf <em>Rich String If</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Rich String If</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.RichStringIf
+	 * @generated
+	 */
+	EClass getRichStringIf();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtend2.xtend2.RichStringIf#getIf <em>If</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>If</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.RichStringIf#getIf()
+	 * @see #getRichStringIf()
+	 * @generated
+	 */
+	EReference getRichStringIf_If();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtend2.xtend2.RichStringIf#getThen <em>Then</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Then</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.RichStringIf#getThen()
+	 * @see #getRichStringIf()
+	 * @generated
+	 */
+	EReference getRichStringIf_Then();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtend2.xtend2.RichStringIf#getElseIfs <em>Else Ifs</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Else Ifs</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.RichStringIf#getElseIfs()
+	 * @see #getRichStringIf()
+	 * @generated
+	 */
+	EReference getRichStringIf_ElseIfs();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtend2.xtend2.RichStringIf#getElse <em>Else</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Else</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.RichStringIf#getElse()
+	 * @see #getRichStringIf()
+	 * @generated
+	 */
+	EReference getRichStringIf_Else();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.RichStringElseIf <em>Rich String Else If</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Rich String Else If</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.RichStringElseIf
+	 * @generated
+	 */
+	EClass getRichStringElseIf();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtend2.xtend2.RichStringElseIf#getIf <em>If</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>If</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.RichStringElseIf#getIf()
+	 * @see #getRichStringElseIf()
+	 * @generated
+	 */
+	EReference getRichStringElseIf_If();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtend2.xtend2.RichStringElseIf#getThen <em>Then</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Then</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.RichStringElseIf#getThen()
+	 * @see #getRichStringElseIf()
+	 * @generated
+	 */
+	EReference getRichStringElseIf_Then();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -727,6 +1050,112 @@ public interface Xtend2Package extends EPackage
 		 * @generated
 		 */
 		EReference XTEND_CLASS__IMPLEMENTS = eINSTANCE.getXtendClass_Implements();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.RichStringImpl <em>Rich String</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xtend2.xtend2.impl.RichStringImpl
+		 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getRichString()
+		 * @generated
+		 */
+		EClass RICH_STRING = eINSTANCE.getRichString();
+
+		/**
+		 * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RICH_STRING__ELEMENTS = eINSTANCE.getRichString_Elements();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.RichStringLiteralImpl <em>Rich String Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xtend2.xtend2.impl.RichStringLiteralImpl
+		 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getRichStringLiteral()
+		 * @generated
+		 */
+		EClass RICH_STRING_LITERAL = eINSTANCE.getRichStringLiteral();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.RichStringForLoopImpl <em>Rich String For Loop</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xtend2.xtend2.impl.RichStringForLoopImpl
+		 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getRichStringForLoop()
+		 * @generated
+		 */
+		EClass RICH_STRING_FOR_LOOP = eINSTANCE.getRichStringForLoop();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.RichStringIfImpl <em>Rich String If</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xtend2.xtend2.impl.RichStringIfImpl
+		 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getRichStringIf()
+		 * @generated
+		 */
+		EClass RICH_STRING_IF = eINSTANCE.getRichStringIf();
+
+		/**
+		 * The meta object literal for the '<em><b>If</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RICH_STRING_IF__IF = eINSTANCE.getRichStringIf_If();
+
+		/**
+		 * The meta object literal for the '<em><b>Then</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RICH_STRING_IF__THEN = eINSTANCE.getRichStringIf_Then();
+
+		/**
+		 * The meta object literal for the '<em><b>Else Ifs</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RICH_STRING_IF__ELSE_IFS = eINSTANCE.getRichStringIf_ElseIfs();
+
+		/**
+		 * The meta object literal for the '<em><b>Else</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RICH_STRING_IF__ELSE = eINSTANCE.getRichStringIf_Else();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.RichStringElseIfImpl <em>Rich String Else If</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xtend2.xtend2.impl.RichStringElseIfImpl
+		 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getRichStringElseIf()
+		 * @generated
+		 */
+		EClass RICH_STRING_ELSE_IF = eINSTANCE.getRichStringElseIf();
+
+		/**
+		 * The meta object literal for the '<em><b>If</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RICH_STRING_ELSE_IF__IF = eINSTANCE.getRichStringElseIf_If();
+
+		/**
+		 * The meta object literal for the '<em><b>Then</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RICH_STRING_ELSE_IF__THEN = eINSTANCE.getRichStringElseIf_Then();
 
 	}
 

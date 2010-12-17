@@ -52,6 +52,9 @@ Workflow {
 			fragment = XtextAntlrGeneratorFragment {
 				options = auto-inject {}
 			}
+			fragment = DebugAntlrGeneratorFragment {
+				options = auto-inject {}
+			}
 			fragment = validation.JavaValidatorFragment {}
 			fragment = scoping.ImportNamespacesScopingFragment {}
 			fragment = types.TypesGeneratorFragment {}

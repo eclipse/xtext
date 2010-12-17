@@ -71,6 +71,11 @@ public class Xtend2FactoryImpl extends EFactoryImpl implements Xtend2Factory
 			case Xtend2Package.XTEND_IMPORT: return createXtendImport();
 			case Xtend2Package.XTEND_FUNCTION: return createXtendFunction();
 			case Xtend2Package.XTEND_CLASS: return createXtendClass();
+			case Xtend2Package.RICH_STRING: return createRichString();
+			case Xtend2Package.RICH_STRING_LITERAL: return createRichStringLiteral();
+			case Xtend2Package.RICH_STRING_FOR_LOOP: return createRichStringForLoop();
+			case Xtend2Package.RICH_STRING_IF: return createRichStringIf();
+			case Xtend2Package.RICH_STRING_ELSE_IF: return createRichStringElseIf();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -118,6 +123,61 @@ public class Xtend2FactoryImpl extends EFactoryImpl implements Xtend2Factory
 	{
 		XtendClassImpl xtendClass = new XtendClassImpl();
 		return xtendClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RichString createRichString()
+	{
+		RichStringImpl richString = new RichStringImpl();
+		return richString;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RichStringLiteral createRichStringLiteral()
+	{
+		RichStringLiteralImpl richStringLiteral = new RichStringLiteralImpl();
+		return richStringLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RichStringForLoop createRichStringForLoop()
+	{
+		RichStringForLoopImpl richStringForLoop = new RichStringForLoopImpl();
+		return richStringForLoop;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RichStringIf createRichStringIf()
+	{
+		RichStringIfImpl richStringIf = new RichStringIfImpl();
+		return richStringIf;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RichStringElseIf createRichStringElseIf()
+	{
+		RichStringElseIfImpl richStringElseIf = new RichStringElseIfImpl();
+		return richStringElseIf;
 	}
 
 	/**
