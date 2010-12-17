@@ -5,7 +5,7 @@
     editDirectory="" editorDirectory="" modelPluginID="org.eclipse.xtext.xbase" forceOverwrite="true"
     modelName="Xbase" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.xbase.edit"
-    editorPluginID="org.eclipse.xtext.xbase.edit" usedGenPackages="../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types">
+    editorPluginID="org.eclipse.xtext.xbase.edit" usedGenPackages="platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types">
   <genPackages prefix="Xtype" basePackage="org.eclipse.xtext" ecorePackage="Xtype.ecore#/">
     <genClasses ecoreClass="Xtype.ecore#//TypeRef"/>
     <genClasses ecoreClass="Xtype.ecore#//ClosureTypeRef">
