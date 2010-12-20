@@ -16,6 +16,7 @@ import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.junit.util.URIBasedTestResourceDescription;
@@ -24,7 +25,6 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
-import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.ui.editor.IDirtyResource;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringResourceSetProvider;
@@ -107,6 +107,6 @@ public class RefactoringResourceSetProviderTest extends TestCase {
 		IResourceDescriptions resourceDescriptions = resourceDescriptionsProvider.getResourceDescriptions(resource);
 		IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(resource.getURI());
 		assertNotNull(resourceDescription);
-		assertFalse(isEmpty(resourceDescription.getExportedObjects(new ISelector.SelectByName(QualifiedName.create(name)))));
+		assertFalse(isEmpty(resourceDescription.getExportedObjects(EcorePackage.Literals.EOBJECT, QualifiedName.create(name), false)));
 	}
 }
