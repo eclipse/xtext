@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.scoping.featurecalls;
 
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 
 /**
@@ -25,10 +24,6 @@ public class JvmFeatureScope extends SimpleScope {
 		super(parent, (Iterable<IEObjectDescription>)(Iterable<?>)descriptions);
 		this.jvmFeatureDescriptions = descriptions;
 		this.scopeDescription = scopeDescription;
-	}
-	
-	public void setParent(IScope parent) {
-		this.parent = parent;
 	}
 	
 	public String getScopeDescription() {
@@ -47,7 +42,7 @@ public class JvmFeatureScope extends SimpleScope {
 	@Override
 	public String toString() {
 		if (scopeDescription!=null)
-			return "'"+scopeDescription+"'"+getLocalElements(ISelector.SELECT_ALL) + " -> " + getParent().toString();
+			return "'"+scopeDescription+"'"+getAllLocalElements() + " -> " + getParent().toString();
 		return super.toString();
 	}
 }

@@ -12,16 +12,25 @@ import static java.util.Collections.*;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager;
-import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.inject.ImplementedBy;
 
 /**
+ * A {@link IContainer container} describes resources that should be treated as visible
+ * on the same level during the scoping stage. This depends on language implementations
+ * in a way that a container that was obtained for a given resource may contain other resources
+ * that would create other containers with distinct contents.
+ * A container may be optimized by means of the {@link ISelectable}-contract. 
+ * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein - introduced QualifiedName
+ * @author Sebastian Zarnekow - Extracted {@link ISelectable}
  */
-public interface IContainer {
+public interface IContainer extends ISelectable {
 
 	/**
 	 * @return the {@link IResourceDescription} contained in this container. The result is never
@@ -37,29 +46,39 @@ public interface IContainer {
 	IResourceDescription getResourceDescription(URI uri);
 	
 	/**
-	 * @return all elements which pass the given {@link ISelector}
-	 */
-	Iterable<IEObjectDescription> getElements(ISelector selector);
-	
-	/**
 	 * a no-op implementation
 	 */
-	static IContainer NULL_CONTAINER = new IContainer(){
+	static IContainer NULL_CONTAINER = new IContainer() {
 
-		public Iterable<IEObjectDescription> getElements(ISelector selector) {
+		public boolean isEmpty() {
+			return true;
+		}
+		
+		public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 			return emptySet();
 		}
-
+		
+		public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
+			return emptySet();
+		}
+		
+		public Iterable<IEObjectDescription> getExportedObjects() {
+			return emptySet();
+		}
+		
+		public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
+			return emptySet();
+		}
+		
 		public Iterable<IResourceDescription> getResourceDescriptions() {
 			return emptySet();
 		}
 
 		public IResourceDescription getResourceDescription(URI uri) {
 			return null;
-		}};
-	/**
-	 * @author Sven Efftinge - Initial contribution and API
-	 */
+		}
+	};
+
 	@ImplementedBy(SimpleResourceDescriptionsBasedContainerManager.class)
 	interface Manager {
 
@@ -71,7 +90,7 @@ public interface IContainer {
 
 		/**
 		 * @return a sorted list of all {@link IContainer}, which are visible from the given {@link IResourceDescription}.
-		 * In an Java environment this would correspond to the list of classpath entries. The list includes the 
+		 * In an Java environment this would correspond to the list of class-path entries. The list includes the 
 		 * container that contains the given resource description. However, the result may be empty due to
 		 * internal errors.
 		 */

@@ -13,6 +13,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container;
@@ -26,7 +27,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.EObjectDescriptionLookUp;
-import org.eclipse.xtext.scoping.ISelector;
 
 /**
  * <!-- begin-user-doc -->
@@ -168,8 +168,40 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 		return importedNames;
 	}
 
-	public Iterable<IEObjectDescription> getExportedObjects(ISelector selector) {
-		return getLookUp().getExportedObjects(selector);
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean isEmpty() {
+		return exportedObjects == null || exportedObjects.isEmpty();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
+		return getLookUp().getExportedObjectsByType(type);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
+		return getLookUp().getExportedObjects(type, name, ignoreCase);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
+		return getLookUp().getExportedObjectsByObject(object);
 	}
 
 	/**

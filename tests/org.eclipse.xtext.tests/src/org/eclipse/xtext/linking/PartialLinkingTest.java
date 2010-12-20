@@ -26,6 +26,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.CaseInsensitivityHelper;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
@@ -75,7 +76,9 @@ public class PartialLinkingTest extends AbstractXtextTests implements IScopeProv
 				return PartialLinkingTest.this.get(LoadOnDemandResourceDescriptions.class);
 			}
 		});
-		scopeProvider = new ImportedNamespaceAwareLocalScopeProvider(globalScopeProvider, nameProvider, nameConverter);
+		CaseInsensitivityHelper caseInsensitivityHelper = new CaseInsensitivityHelper();
+		globalScopeProvider.setCaseInsensitivityHelper(caseInsensitivityHelper);
+		scopeProvider = new ImportedNamespaceAwareLocalScopeProvider(globalScopeProvider, nameProvider, nameConverter, caseInsensitivityHelper);
 		modelAsText =
 			"spielplatz 1 {\n" +
 			"  kind( Bommel1 1)\n" +

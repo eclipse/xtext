@@ -17,6 +17,9 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.ISelector;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
 /**
  * A scope which goes through all returned EObjectDescriptions in order to find the best fit, if it is asked for the
  * 'first' element. 
@@ -29,15 +32,15 @@ public class BestMatchingJvmFeatureScope implements IScope {
 	protected final EReference reference;
 	private IJvmTypeConformanceComputer computer;
 	private IScope delegate;
-	private ISelector filter;
+	private Predicate<IEObjectDescription> filter;
 
 	public BestMatchingJvmFeatureScope(IJvmTypeConformanceComputer computer, EObject context, EReference ref,
-			IScope delegate, ISelector selector) {
+			IScope delegate, Predicate<IEObjectDescription> filter) {
 		this.computer = computer;
 		this.context = context;
 		this.reference = ref;
 		this.delegate = delegate;
-		this.filter = selector;
+		this.filter = filter;
 	}
 
 	public IEObjectDescription getSingleElement(ISelector selector) {
@@ -45,8 +48,12 @@ public class BestMatchingJvmFeatureScope implements IScope {
 	}
 	
 	public Iterable<IEObjectDescription> getElements(ISelector selector) {
-		Iterable<IEObjectDescription> iterable = this.filter.applySelector(delegate.getElements(selector));
-		return iterable;
+		Iterable<IEObjectDescription> unfiltered = delegate.getElements(selector);
+		if (filter != null) {
+			Iterable<IEObjectDescription> result = Iterables.filter(unfiltered, filter);
+			return result;
+		}
+		return unfiltered;
 	}
 
 	protected IEObjectDescription getBestMatch(Iterable<IEObjectDescription> iterable) {

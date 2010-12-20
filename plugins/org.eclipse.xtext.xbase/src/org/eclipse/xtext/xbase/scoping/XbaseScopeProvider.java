@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping;
 
-import java.util.Map;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -40,9 +40,9 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentDescriptionProvid
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentSugarDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
 
-import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.internal.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -165,29 +165,26 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 
 	protected IScope createLocalVarScopeForBlock(XBlockExpression block, int indexOfContextExpressionInBlock,
 			IScope parentScope) {
-		Map<QualifiedName, IEObjectDescription> vars = Maps.newHashMap();
-
+		List<IEObjectDescription> descriptions = Lists.newArrayList();
 		for (int i = 0; i < indexOfContextExpressionInBlock; i++) {
 			XExpression expression = block.getExpressions().get(i);
 			if (expression instanceof XVariableDeclaration) {
 				XVariableDeclaration varDecl = (XVariableDeclaration) expression;
 				IEObjectDescription desc = createEObjectDescription(varDecl);
-				vars.put(desc.getName().toLowerCase(), desc);
+				descriptions.add(desc);
 			}
 		}
-		if (vars.isEmpty())
-			return parentScope;
-		return new MapBasedScope(parentScope, vars);
+		return MapBasedScope.createScope(parentScope, descriptions);
 	}
 
 	protected IScope createLocalVarScopeForClosure(XClosure closure, IScope parentScope) {
+		List<IEObjectDescription> descriptions = Lists.newArrayList();
 		EList<JvmFormalParameter> params = closure.getFormalParameters();
-		Map<QualifiedName, IEObjectDescription> descriptions = Maps.newHashMap();
 		for (JvmFormalParameter p : params) {
 			IEObjectDescription desc = createEObjectDescription(p);
-			descriptions.put(desc.getName().toLowerCase(), desc);
+			descriptions.add(desc);
 		}
-		return new MapBasedScope(parentScope, descriptions);
+		return MapBasedScope.createScope(parentScope, descriptions);
 	}
 
 	protected IScope createFeatureScopeForTypeRef(JvmTypeReference type, XAbstractFeatureCall call, JvmDeclaredType currentContext) {

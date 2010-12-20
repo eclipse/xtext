@@ -13,19 +13,23 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
-import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.common.collect.ImmutableList;
 import com.google.inject.ImplementedBy;
 
 /**
- * A representation of a resource's contents.
+ * A representation of a resource's contents as an {@link ISelectable}.
+ * The exported objects of a {@link Resource} describe its public interface.
+ * A {@link IResourceDescription description} holds information about the 
+ * {@link #getImportedNames() imported names} which can be used to compute the
+ * transitive closure when a resource is modified. Information about the actually
+ * established {@link #getReferenceDescriptions() cross references} is available, too.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
  * @author Jan Koehnlein
  */
-public interface IResourceDescription {
+public interface IResourceDescription extends ISelectable {
 
 	/**
 	 * @return descriptions of all EObjects provided by the given Resource. The result is expected to return any
@@ -33,11 +37,6 @@ public interface IResourceDescription {
 	 *         {@link IEObjectDescription}. The order of the exported objects matters.
 	 */
 	Iterable<IEObjectDescription> getExportedObjects();
-
-	/**
-	 * @return all {@link IEObjectDescription} from {@link #getExportedObjects()} which pass the given {@link ISelector}.
-	 */
-	Iterable<IEObjectDescription> getExportedObjects(ISelector selector);
 
 	/**
 	 * @return the list of names the described resource depends depends on.
@@ -63,6 +62,9 @@ public interface IResourceDescription {
 		 */
 		IResourceDescription getResourceDescription(Resource resource);
 
+		/**
+		 * @return a delta for both given descriptions.
+		 */
 		IResourceDescription.Delta createDelta(IResourceDescription oldDescription, IResourceDescription newDescription);
 		
 		/**

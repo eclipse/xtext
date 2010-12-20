@@ -7,18 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
-import static java.util.Collections.*;
-
 import java.util.Collections;
 import java.util.Map;
 
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.ISelector;
+
+import com.google.common.collect.Maps;
 
 /**
- * A scope implemented using a {@link Map} used for efficient lookup of ordinary named {@link org.eclipse.xtext.resource.EObjectDescription}s. 
+ * A scope implemented using a {@link Map} used for efficient lookup of ordinary named 
+ * {@link org.eclipse.xtext.resource.EObjectDescription EObjectDescriptions}. 
  * 
  * This implementation assumes, that the keys of the {@link Map} correspond to the keys of the contained {@link org.eclipse.xtext.resource.EObjectDescription}.
  * Additionally it assumes, that those keys are equal to <code>description.getName().toLowerCase()</code>.
@@ -30,33 +30,59 @@ import org.eclipse.xtext.scoping.ISelector;
  */
 public class MapBasedScope extends AbstractScope {
 
+	public static IScope createScope(IScope parent, Iterable<IEObjectDescription> descriptions, boolean ignoreCase) {
+		Map<QualifiedName, IEObjectDescription> map = null;
+		for(IEObjectDescription description: descriptions) {
+			if (map == null)
+				map = Maps.newHashMapWithExpectedSize(3);
+			if (ignoreCase)
+				map.put(description.getName().toLowerCase(), description);
+			else
+				map.put(description.getName(), description);
+		}
+		if (map == null || map.isEmpty()) {
+			return parent;
+		}
+		return new MapBasedScope(parent, map, ignoreCase);
+	}
+	
+	public static IScope createScope(IScope parent, Iterable<IEObjectDescription> descriptions) {
+		return createScope(parent, descriptions, false);
+	}
+	
 	private Map<QualifiedName, IEObjectDescription> elements;
 
-	public MapBasedScope(IScope parent, Map<QualifiedName, IEObjectDescription> elements) {
-		super(parent);
+	protected MapBasedScope(IScope parent, Map<QualifiedName, IEObjectDescription> elements, boolean ignoreCase) {
+		super(parent, ignoreCase);
 		this.elements = elements;
 	}
-
+	
 	@Override
-	public Iterable<IEObjectDescription> getLocalElements(ISelector selector) {
-		if (selector instanceof ISelector.SelectByName) {
-			QualifiedName name = ((ISelector.SelectByName) selector).getName().toLowerCase();
-			if (elements.containsKey(name)) {
-				return selector.applySelector(singleton(elements.get(name)));
-			} else {
-				return Collections.emptySet();
-			}
+	protected Iterable<IEObjectDescription> getAllLocalElements() {
+		return elements.values();
+	}
+	
+	@Override
+	protected Iterable<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
+		IEObjectDescription result = null;
+		if (isIgnoreCase()) {
+			result = elements.get(name.toLowerCase());
+		} else {
+			result = elements.get(name);
 		}
-		return selector.applySelector(elements.values());
+		if (result == null)
+			return Collections.emptyList();
+		return Collections.singleton(result);
 	}
 
 	@Override
 	protected boolean isShadowed(IEObjectDescription fromParent) {
-		final QualifiedName lowerCase = fromParent.getName().toLowerCase();
-		if (elements.containsKey(lowerCase)) {
-			IEObjectDescription shadowing = elements.get(lowerCase);
-			return shadowing.getName().equals(fromParent.getName());
+		if (isIgnoreCase()) {
+			boolean result = elements.containsKey(fromParent.getName().toLowerCase());
+			return result;
+		} else {
+			boolean result = elements.containsKey(fromParent.getName());
+			return result;
 		}
-		return false;
 	}
 }

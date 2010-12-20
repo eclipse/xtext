@@ -1,0 +1,49 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.scoping.impl;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.ISelectable;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.Selectors;
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+public class ScopeBasedSelectable implements ISelectable {
+
+	private final IScope scope;
+
+	public ScopeBasedSelectable(IScope scope) {
+		this.scope = scope;
+	}
+	
+	public boolean isEmpty() {
+		return false;
+	}
+
+	public Iterable<IEObjectDescription> getExportedObjects() {
+		return scope.getElements(Selectors.selectAll());
+	}
+
+	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
+		return scope.getElements(Selectors.selectByName(name));
+	}
+
+	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
+		return scope.getElements(Selectors.selectAll());
+	}
+	
+	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
+		return scope.getElements(Selectors.selectByEObject(object));
+	}
+
+}

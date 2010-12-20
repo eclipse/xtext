@@ -10,7 +10,7 @@ package org.eclipse.xtext.scoping.impl;
 import org.eclipse.xtext.naming.QualifiedName;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
  */
 public class ImportNormalizer {

@@ -3,7 +3,9 @@
  */
 package org.eclipse.xtext.xtend2.scoping;
 
-import java.util.Map;
+import static java.util.Collections.singleton;
+
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -22,9 +24,7 @@ import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
-import com.google.common.collect.Maps;
-
-import static java.util.Collections.*;
+import com.google.inject.internal.Lists;
 
 /**
  * @author Sven Efftinge
@@ -37,12 +37,12 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 		if (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(reference.getEReferenceType())) {
 			XtendFunction type = EcoreUtil2.getContainerOfType(context, XtendFunction.class);
 			if (!type.getTypeParameters().isEmpty()) {
-				Map<QualifiedName, IEObjectDescription> map = Maps.newHashMap();
+				List<IEObjectDescription> descriptions = Lists.newArrayList();
 				for (JvmTypeParameter param : type.getTypeParameters()) {
 					QualifiedName qn = QualifiedName.create(param.getName());
-					map.put(qn.toLowerCase(), EObjectDescription.create(qn, param));
+					descriptions.add(EObjectDescription.create(qn, param));
 				}
-				return new MapBasedScope(parent,map);
+				return MapBasedScope.createScope(parent, descriptions);
 			}
 				
 		}
@@ -56,12 +56,12 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 		} else if  (context instanceof XtendFunction) {
 			XtendFunction func = (XtendFunction) context;
 			EList<JvmFormalParameter> list = func.getParameters();
-			Map<QualifiedName,IEObjectDescription> map = Maps.newHashMap();
+			List<IEObjectDescription> descriptions = Lists.newArrayList();
 			for (JvmFormalParameter jvmFormalParameter : list) {
 				IEObjectDescription desc = createIEObjectDescription(jvmFormalParameter);
-				map.put(desc.getName().toLowerCase(),desc);
+				descriptions.add(desc);
 			}
-			return new MapBasedScope(super.createLocalVarScope(context, reference, parent),map);
+			return MapBasedScope.createScope(super.createLocalVarScope(context, reference, parent), descriptions);
 		}
 		return super.createLocalVarScope(context, reference, parent);
 	}

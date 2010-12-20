@@ -10,11 +10,11 @@ package org.eclipse.xtext.scoping.impl;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.ICaseInsensitivityHelper;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.inject.Inject;
 
 /**
@@ -26,17 +26,20 @@ public abstract class AbstractGlobalScopeDelegatingScopeProvider extends Abstrac
 
 	@Inject
 	private IGlobalScopeProvider globalScopeProvider;
-
-	protected AbstractGlobalScopeDelegatingScopeProvider(IGlobalScopeProvider globalScopeProvider) {
-		this.globalScopeProvider = globalScopeProvider;
-	}
-
+	
 	@Inject
-	public AbstractGlobalScopeDelegatingScopeProvider() {
+	private ICaseInsensitivityHelper caseInsensitivityHelper;
+
+	protected AbstractGlobalScopeDelegatingScopeProvider() {
 	}
 	
+	protected AbstractGlobalScopeDelegatingScopeProvider(IGlobalScopeProvider globalScopeProvider, ICaseInsensitivityHelper caseInsensitivityHelper) {
+		this.globalScopeProvider = globalScopeProvider;
+		this.caseInsensitivityHelper = caseInsensitivityHelper;
+	}
+
 	protected IScope getGlobalScope(final Resource context, final EReference reference) {
-		return getGlobalScope(context, reference, Predicates.<IEObjectDescription>alwaysTrue());
+		return getGlobalScope(context, reference, null);
 	}
 	
 	protected IScope getGlobalScope(final Resource context, final EReference reference, final Predicate<IEObjectDescription> filter) {
@@ -51,6 +54,10 @@ public abstract class AbstractGlobalScopeDelegatingScopeProvider extends Abstrac
 
 	protected IScope wrap(IScope scope) {
 		return scopeWrapper!=null ? scopeWrapper.wrap(scope) : scope;
+	}
+	
+	protected boolean isIgnoreCase(EReference reference) {
+		return caseInsensitivityHelper.isIgnoreCase(reference);
 	}
 
 }

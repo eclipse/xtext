@@ -7,14 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.List;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
@@ -63,14 +64,14 @@ public class ImportUriGlobalScopeProvider extends AbstractGlobalScopeProvider {
 	}
 
 	@Override
-	protected IScope getScope(Resource resource, Predicate<IEObjectDescription> filter) {
+	protected IScope getScope(Resource resource, boolean ignoreCase, EClass type, Predicate<IEObjectDescription> filter) {
 		final LinkedHashSet<URI> uniqueImportURIs = getImportedUris(resource);
 		IResourceDescriptions descriptions = getResourceDescriptions(resource, uniqueImportURIs);
-		ArrayList<URI> newArrayList = Lists.newArrayList(uniqueImportURIs);
-		Collections.reverse(newArrayList);
+		List<URI> urisAsList = Lists.newArrayList(uniqueImportURIs);
+		Collections.reverse(urisAsList);
 		IScope scope = IScope.NULLSCOPE;
-		for (URI u : newArrayList) {
-			scope = createLazyResourceScope(scope, u, descriptions, filter);
+		for (URI uri : urisAsList) {
+			scope = createLazyResourceScope(scope, uri, descriptions, type, filter, ignoreCase);
 		}
 		return scope;
 	}
@@ -99,11 +100,9 @@ public class ImportUriGlobalScopeProvider extends AbstractGlobalScopeProvider {
 	}
 
 	protected IScope createLazyResourceScope(IScope parent, final URI uri, final IResourceDescriptions descriptions,
-			final Predicate<IEObjectDescription> filter) {
+			EClass type, final Predicate<IEObjectDescription> filter, boolean ignoreCase) {
 		IResourceDescription description = descriptions.getResourceDescription(uri);
-		if (description == null)
-			return parent;
-		return new ResourceDescriptionBasedScope(parent, description, filter);
+		return SelectableBasedScope.createScope(parent, description, filter, type, ignoreCase);
 	}
 
 	public void setLoadOnDemandDescriptions(Provider<LoadOnDemandResourceDescriptions> loadOnDemandDescriptions) {

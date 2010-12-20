@@ -21,7 +21,10 @@ import org.eclipse.xtext.resource.IEObjectDescription;
  * valid/interesting depending on the actual client (i.e. linker, content assist, etc.).
  * 
  * Scopes are usually nested and descriptions ({@link IEObjectDescription}) from nested scopes can shadow descriptions
- * from outer scopes. Usually the attribute {@link IEObjectDescription#getKey()} is used for that.
+ * from outer scopes. Usually the attribute {@link IEObjectDescription#getName() name} is used for that.
+ * 
+ * Clients should usually inherit from {@link org.eclipse.xtext.scoping.impl.AbstractScope AbstractScope} to implement
+ * own scopes. 
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -31,12 +34,14 @@ public interface IScope {
 	 * An implementation might use any strategy to find a single element, if multiple elements fulfill the given
 	 * selector.
 	 * 
-	 * @return a single element given the {@link ISelector}.
+	 * @param selector the selection critiria. May not be <code>null</code>.
+	 * @return the first element that matches the {@link ISelector selector}. May be <code>null</code>.
 	 */
 	IEObjectDescription getSingleElement(ISelector selector);
 
 	/**
-	 * @return all elements which pass the given {@link ISelector}
+	 * @param selector the selection critiria. May not be <code>null</code>.
+	 * @return all elements which match the {@link ISelector selector}. Never <code>null</code>.
 	 */
 	Iterable<IEObjectDescription> getElements(ISelector selector);
 

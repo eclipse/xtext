@@ -11,40 +11,44 @@ import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.ISelectable;
 import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.ISelector;
+import org.eclipse.xtext.scoping.Selectors;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Maps;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
 public class ImportScope extends AbstractScope {
-	private List<ImportNormalizer> normalizers;
 
-	private boolean ignoreCase;
+	private final List<ImportNormalizer> normalizers;
 
-	private IScope scopeToImportFrom;
+	private final ISelectable importFrom;
 
-	public ImportScope(List<ImportNormalizer> namespaceResolvers, IScope parent, IScope scopeToImportFrom, boolean ignoreCase) {
-		super(parent);
+	private final EClass type;
+
+	public ImportScope(List<ImportNormalizer> namespaceResolvers, IScope parent, ISelectable importFrom, EClass type, boolean ignoreCase) {
+		super(parent, ignoreCase);
+		this.type = type;
 		this.normalizers = removeDuplicates(namespaceResolvers);
-		this.ignoreCase = ignoreCase;
-		this.scopeToImportFrom = scopeToImportFrom;
+		this.importFrom = importFrom;
 	}
 	
 	protected List<ImportNormalizer> removeDuplicates(List<ImportNormalizer> namespaceResolvers) {
@@ -56,78 +60,53 @@ public class ImportScope extends AbstractScope {
 		return list;
 	}
 
-	public ImportScope(List<ImportNormalizer> namespaceResolvers, IScope parent, boolean ignoreCase) {
-		this(namespaceResolvers, parent,parent,ignoreCase);
-	}
-	
 	@Override
 	public String toString() {
-		return getClass().getSimpleName()+normalizers+getLocalElements(ISelector.SELECT_ALL)+" -> "+getParent();
+		return getClass().getSimpleName()+normalizers+getAllLocalElements()+" -> "+getParent();
 	}
 	
 	@Override
-	public Iterable<IEObjectDescription> getElements(ISelector selector) {
-		if (isHugeSelection(selector)) {
-			final Iterable<IEObjectDescription> globalElements = getParent().getElements(ISelector.SELECT_ALL);
-			Iterable<IEObjectDescription> aliasingElements = globalElements;
-			if (scopeToImportFrom!=getParent())
-				aliasingElements = scopeToImportFrom.getElements(ISelector.SELECT_ALL);
-			Iterable<IEObjectDescription> localElements = getLocalElements(aliasingElements);
-			final Map<QualifiedName,IEObjectDescription> elements = Maps.uniqueIndex(localElements,
-					new Function<IEObjectDescription, QualifiedName>() {
-						public QualifiedName apply(IEObjectDescription from) {
-							return ignoreCase?from.getName().toLowerCase():from.getName();
-						}
-					});
-			return concat(selector.applySelector(localElements), filter(selector.applySelector(globalElements), new Predicate<IEObjectDescription>() {
-				public boolean apply(IEObjectDescription input) {
-					return !elements.containsKey(ignoreCase?input.getName().toLowerCase():input.getName());
-				}
-			}));
-		}
-		return super.getElements(selector);
+	protected Iterable<IEObjectDescription> getAllElements() {
+		final Iterable<IEObjectDescription> globalElements = getParent().getElements(Selectors.selectAll());
+		Iterable<IEObjectDescription> importedElements = importFrom != null ? importFrom.getExportedObjects() : globalElements;
+		Iterable<IEObjectDescription> aliased = getAllAliasedElements(importedElements);
+		final Map<QualifiedName,IEObjectDescription> elements = Maps.uniqueIndex(aliased,
+				new Function<IEObjectDescription, QualifiedName>() {
+					public QualifiedName apply(IEObjectDescription from) {
+						return isIgnoreCase() ? from.getName().toLowerCase(): from.getName();
+					}
+				});
+		return concat(aliased, filter(globalElements, new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				return !elements.containsKey(isIgnoreCase() ? input.getName().toLowerCase() : input.getName());
+			}
+		}));
 	}
-
-	protected boolean isHugeSelection(ISelector selector) {
-		return !(selector instanceof ISelector.SelectByName) && !(selector instanceof ISelector.SelectByEObject);
-	}
-
-	@Override
-	public Iterable<IEObjectDescription> getLocalElements(ISelector selector) {
-		if (selector instanceof ISelector.SelectByName) {
-			return getLocalElements((ISelector.SelectByName)selector);
-		}
-		Iterable<IEObjectDescription> candidates = scopeToImportFrom.getElements(selector);
-		return getLocalElements(candidates);
-	}
-
-	protected Iterable<IEObjectDescription> getLocalElements(Iterable<IEObjectDescription> candidates) {
-		final LinkedHashMultimap<QualifiedName, IEObjectDescription> map = LinkedHashMultimap.create();
-		for (IEObjectDescription from : candidates) {
-			QualifiedName fullyQualifiedName = from.getName();
+	
+	protected Iterable<IEObjectDescription> getAllAliasedElements(Iterable<IEObjectDescription> allImportedElements) {
+		Map<QualifiedName, IEObjectDescription> aliasToDescription = Maps.newHashMap();
+		for (IEObjectDescription imported : allImportedElements) {
+			QualifiedName fullyQualifiedName = imported.getName();
 			for (ImportNormalizer normalizer : normalizers) {
-				QualifiedName qualifiedName = normalizer.deresolve(fullyQualifiedName);
-				if (qualifiedName != null) {
-					map.put(ignoreCase?qualifiedName.toLowerCase():qualifiedName, from);
+				QualifiedName alias = normalizer.deresolve(fullyQualifiedName);
+				if (alias != null) {
+					QualifiedName key = alias;
+					if (isIgnoreCase()) {
+						key = key.toLowerCase();
+					}
+					if (aliasToDescription.containsKey(alias)) {
+						aliasToDescription.put(alias, null);
+					} else {
+						aliasToDescription.put(alias, imported);
+					}
 				}
 			}
 		}
-		final Iterable<IEObjectDescription> aliased = transform(map.keys(),
-				new Function<QualifiedName, IEObjectDescription>() {
-					public IEObjectDescription apply(QualifiedName from) {
-						Set<IEObjectDescription> set = map.get(from);
-						if (set.size()==1) {
-							final IEObjectDescription element = set.iterator().next();
-							QualifiedName name = from;
-							if (ignoreCase) {
-								for (ImportNormalizer normalizer : normalizers) {
-									QualifiedName qualifiedName = normalizer.deresolve(element.getName());
-									if (qualifiedName != null) {
-										name = qualifiedName;
-									}
-								}
-							}
-							return new AliasedEObjectDescription(name, element, ignoreCase);
+		final Iterable<IEObjectDescription> aliased = transform(aliasToDescription.entrySet(),
+				new Function<Map.Entry<QualifiedName, IEObjectDescription>, IEObjectDescription>() {
+					public IEObjectDescription apply(Map.Entry<QualifiedName, IEObjectDescription> entry) {
+						if (entry.getValue() != null) {
+							return new AliasedEObjectDescription(entry.getKey(), entry.getValue());
 						}
 						return null;
 					}
@@ -136,46 +115,78 @@ public class ImportScope extends AbstractScope {
 		return filter(aliased, Predicates.notNull());
 	}
 
-	protected Iterable<IEObjectDescription> getLocalElements(final ISelector.SelectByName selectByName) {
-		final QualifiedName name = selectByName.getName();
-		Iterable<Iterable<IEObjectDescription>> iterables = transform(normalizers, new Function<ImportNormalizer, Iterable<IEObjectDescription>>(){
-			public Iterable<IEObjectDescription> apply(final ImportNormalizer normalizer) {
-				final QualifiedName resolved = normalizer.resolve(name);
-				if (resolved!=null) {
-					final ISelector.SelectByName selector2 = new ISelector.SelectByName(resolved, ignoreCase);
-					selector2.getDelegateSelectors().addAll(selectByName.getDelegateSelectors());
-					Iterable<IEObjectDescription> elements = scopeToImportFrom.getElements(selector2);
-					Function<IEObjectDescription, IEObjectDescription> aliaser = new Function<IEObjectDescription, IEObjectDescription>() {
-						public IEObjectDescription apply(IEObjectDescription from) {
-							final QualifiedName deresolved = normalizer.deresolve(from.getName());
-							if (deresolved==null)
-								throw new IllegalStateException("Couldn't deresolve "+from.getName()+" with import "+normalizer);
-							return new AliasedEObjectDescription(deresolved, from, ignoreCase);
-						}
-					};
-					return transform(elements, aliaser);
+	@Override
+	protected Iterable<IEObjectDescription> getAllLocalElements() {
+		throw new UnsupportedOperationException();
+	}
+	
+	@Override
+	protected Iterable<IEObjectDescription> getLocalElementsByEObject(final EObject object, final URI uri) {
+		if (importFrom != null) {
+			Iterable<IEObjectDescription> candidates = importFrom.getExportedObjectsByObject(object);
+			return getAliasedElements(candidates);
+		} else {
+			Iterable<IEObjectDescription> candidates = getParent().getElements(Selectors.selectByEObject(object));
+			return getAliasedElements(candidates);
+		}
+	}
+	
+	protected Iterable<IEObjectDescription> getAliasedElements(Iterable<IEObjectDescription> candidates) {
+		final LinkedHashMultimap<QualifiedName, IEObjectDescription> aliasToDescription = LinkedHashMultimap.create();
+		for (IEObjectDescription from : candidates) {
+			QualifiedName fullyQualifiedName = from.getName();
+			for (ImportNormalizer normalizer : normalizers) {
+				QualifiedName qualifiedName = normalizer.deresolve(fullyQualifiedName);
+				if (qualifiedName != null) {
+					aliasToDescription.put(isIgnoreCase() ? qualifiedName.toLowerCase() : qualifiedName, from);
 				}
-				return null;
 			}
-		});
-		final Iterable<IEObjectDescription> iterable = concat(filter(iterables,Predicates.notNull()));
-		return new Iterable<IEObjectDescription>() {
-			
-			public Iterator<IEObjectDescription> iterator() {
-				Iterator<IEObjectDescription> iterator = iterable.iterator();
-				if (!iterator.hasNext()) 
-					return Iterators.emptyIterator();
-				IEObjectDescription next = iterator.next();
-				if (iterator.hasNext())
-					return Iterators.emptyIterator();
-				return Iterators.singletonIterator(next);
+		}
+		final Iterable<IEObjectDescription> aliased = transform(aliasToDescription.keys(),
+				new Function<QualifiedName, IEObjectDescription>() {
+					public IEObjectDescription apply(QualifiedName shortName) {
+						Set<IEObjectDescription> set = aliasToDescription.get(shortName);
+						if (set.size()==1) {
+							return getSingleLocalElementByName(shortName);
+						}
+						return null;
+					}
+
+				});
+		return filter(aliased, Predicates.notNull());
+	}
+	
+	@Override
+	protected IEObjectDescription getSingleLocalElementByName(QualifiedName name) {
+		IEObjectDescription result = null;
+		ISelectable importFrom = this.importFrom;
+		if (importFrom == null) {
+			importFrom = new ScopeBasedSelectable(getParent());
+		}
+		for(ImportNormalizer normalizer: normalizers) {
+			final QualifiedName resolvedName = normalizer.resolve(name);
+			if (resolvedName != null) {
+				Iterable<IEObjectDescription> resolvedElements = importFrom.getExportedObjects(type, resolvedName, isIgnoreCase());
+				for(IEObjectDescription resolvedElement: resolvedElements) {
+					if (result != null) {
+						return null;
+					}
+					QualifiedName alias = normalizer.deresolve(resolvedElement.getName());
+					if (alias==null)
+						throw new IllegalStateException("Couldn't deresolve "+resolvedElement.getName()+" with import "+normalizer);
+					result = new AliasedEObjectDescription(alias, resolvedElement);
+				}
 			}
-			
-			@Override
-			public String toString() {
-				return Iterables.toString(this);
-			}
-		};
+		}
+		return result;
+	}
+	
+	@Override
+	protected Iterable<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
+		IEObjectDescription result = getSingleLocalElementByName(name);
+		if (result == null)
+			return Collections.emptyList();
+		return Collections.singleton(result);
 	}
 
 }

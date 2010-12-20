@@ -19,13 +19,13 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.util.EmfFormatter;
 
@@ -70,7 +70,7 @@ public class BuilderUtil {
 		URI uri = URI.createURI("platform:/resource"+fileUri);
 		IResourceDescription description = descriptions.getResourceDescription(uri);
 		if (description!=null) {
-			return description.getExportedObjects(new ISelector.SelectByName(QualifiedName.create(eObjectName))).iterator().hasNext();
+			return description.getExportedObjects(EcorePackage.Literals.EOBJECT, QualifiedName.create(eObjectName), false).iterator().hasNext();
 		}
 		return false;
 	}

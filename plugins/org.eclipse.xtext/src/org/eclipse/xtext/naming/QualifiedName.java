@@ -20,6 +20,7 @@ import com.google.common.base.Function;
  * Instances are usually provided by a {@link IQualifiedNameProvider}.
  * 
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
 public class QualifiedName implements Comparable<QualifiedName> {
 

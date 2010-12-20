@@ -15,6 +15,8 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -25,7 +27,6 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
-import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.ui.editor.DocumentBasedDirtyResource;
 import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -220,12 +221,23 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		return false;
 	}
 	
-	public Iterable<IEObjectDescription> getExportedObjects(ISelector selector) {
-		fail("Unexpected invocation");
-		return null;
+	public boolean isEmpty() {
+		return true;
 	}
 
 	public Iterable<IEObjectDescription> getExportedObjects() {
+		return Collections.emptyList();
+	}
+	
+	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
+		return Collections.emptyList();
+	}
+	
+	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
+		return Collections.emptyList();
+	}
+	
+	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 		return Collections.emptyList();
 	}
 	

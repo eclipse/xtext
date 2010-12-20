@@ -313,17 +313,6 @@ public interface BuilderStatePackage extends EPackage {
 
 
 	/**
-	 * The meta object id for the '<em>ISelector</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.scoping.ISelector
-	 * @see org.eclipse.xtext.builder.builderState.impl.BuilderStatePackageImpl#getISelector()
-	 * @generated
-	 */
-	int ISELECTOR = 7;
-
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.resource.IResourceDescription <em>Resource Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -577,17 +566,6 @@ public interface BuilderStatePackage extends EPackage {
 	EDataType getQualifiedName();
 
 	/**
-	 * Returns the meta object for data type '{@link org.eclipse.xtext.scoping.ISelector <em>ISelector</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>ISelector</em>'.
-	 * @see org.eclipse.xtext.scoping.ISelector
-	 * @model instanceClass="org.eclipse.xtext.scoping.ISelector"
-	 * @generated
-	 */
-	EDataType getISelector();
-
-	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -805,16 +783,6 @@ public interface BuilderStatePackage extends EPackage {
 		 * @generated
 		 */
 		EDataType QUALIFIED_NAME = eINSTANCE.getQualifiedName();
-
-		/**
-		 * The meta object literal for the '<em>ISelector</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.scoping.ISelector
-		 * @see org.eclipse.xtext.builder.builderState.impl.BuilderStatePackageImpl#getISelector()
-		 * @generated
-		 */
-		EDataType ISELECTOR = eINSTANCE.getISelector();
 
 	}
 

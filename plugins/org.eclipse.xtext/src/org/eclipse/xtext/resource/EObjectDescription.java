@@ -23,8 +23,7 @@ import org.eclipse.xtext.util.Strings;
  */
 public class EObjectDescription extends AbstractEObjectDescription {
 
-	public EObjectDescription(QualifiedName qualifiedName, EObject element, Map<String, String> userData, boolean ignorecase) {
-		super(ignorecase);
+	public EObjectDescription(QualifiedName qualifiedName, EObject element, Map<String, String> userData) {
 		if (qualifiedName == null)
 			throw new NullPointerException("qualified name may not be null");
 		this.qualifiedName = qualifiedName;
@@ -41,7 +40,7 @@ public class EObjectDescription extends AbstractEObjectDescription {
 	}
 	
 	public static IEObjectDescription create(QualifiedName qualifiedName, EObject element, Map<String, String> userData) {
-		return new EObjectDescription(qualifiedName, element, userData, false);
+		return new EObjectDescription(qualifiedName, element, userData);
 	}
 	
 	public static IEObjectDescription create(QualifiedName qualifiedName, EObject element) {

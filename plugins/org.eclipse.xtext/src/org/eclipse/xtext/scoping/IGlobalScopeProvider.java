@@ -27,7 +27,8 @@ public interface IGlobalScopeProvider {
 	/**
 	 * Returns a global scope for the given context. The scope provides access to the
 	 * {@link org.eclipse.xtext.resource.EObjectDescription} visible from the given {@link Resource}
-	 * according to the definition of the global scope hierarchy (which is usually defined by {@link org.eclipse.xtext.resource.IContainer.Manager}).
+	 * according to the definition of the global scope hierarchy (which is usually defined by 
+	 * {@link org.eclipse.xtext.resource.IContainer.Manager}).
 	 *
 	 * @param context the resource from which the global scope is looked at.
 	 * @param the reference for which to construct a global scope.
