@@ -91,6 +91,7 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 				List<IEObjectDescription> discardedDescriptions = Lists.newArrayList();
 				Set<String> qualifiedNames = Sets.newHashSet();
 				int addedDescriptions = 0;
+				int checkedDescriptions = 0;
 				for (IEObjectDescription referableElement : scope.getElements(getSelector())) {
 					String referableElementQualifiedName = qualifiedNameConverter.toString(referableElement.getQualifiedName());
 					if (similarityMatcher.isSimilar(issueString, qualifiedNameConverter.toString(referableElement.getName()))) {
@@ -101,6 +102,9 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 						if (qualifiedNames.add(referableElementQualifiedName))
 							discardedDescriptions.add(referableElement);
 					}
+					checkedDescriptions++;
+					if (checkedDescriptions>100)
+						break;
 				}
 				if (discardedDescriptions.size() + addedDescriptions <= 5) {
 					for(IEObjectDescription referableElement: discardedDescriptions) {
