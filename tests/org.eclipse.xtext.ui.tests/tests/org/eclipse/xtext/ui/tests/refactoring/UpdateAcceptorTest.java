@@ -9,18 +9,13 @@ package org.eclipse.xtext.ui.tests.refactoring;
 
 import junit.framework.TestCase;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.CompositeChange;
-import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
-import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.ui.refactoring.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.UpdateAcceptor;
+import org.eclipse.xtext.ui.tests.refactoring.MockRefactoringDocument.MockChange;
 import org.eclipse.xtext.util.ReplaceRegion;
 
 /**
@@ -32,104 +27,51 @@ public class UpdateAcceptorTest extends TestCase {
 
 	public void testAddTextEdit() throws Exception {
 		UpdateAcceptor updateAcceptor = new UpdateAcceptor();
-		IRefactoringDocument mockDocument0 = new MockDocument();
-		IRefactoringDocument mockDocument1 = new MockDocument();
-		
-		updateAcceptor.accept(mockDocument0, new ReplaceRegion(0,1,"foo"));
-		updateAcceptor.accept(mockDocument1, new ReplaceRegion(1,2,"bar"));
-		updateAcceptor.accept(mockDocument0, new ReplaceRegion(3,4,"baz"));
+		IRefactoringDocument mockDocument0 = new MockRefactoringDocument();
+		IRefactoringDocument mockDocument1 = new MockRefactoringDocument();
+
+		updateAcceptor.accept(mockDocument0, new ReplaceRegion(0, 1, "foo"));
+		updateAcceptor.accept(mockDocument1, new ReplaceRegion(1, 2, "bar"));
+		updateAcceptor.accept(mockDocument0, new ReplaceRegion(3, 4, "baz"));
 
 		Change change = updateAcceptor.createChange(CHANGE_NAME);
 		assertTrue(change instanceof CompositeChange);
-		Change[] children = ((CompositeChange)change).getChildren();
+		Change[] children = ((CompositeChange) change).getChildren();
 		assertEquals(2, children.length);
 		assertTrue(children[0] instanceof MockChange);
-		MockChange change0 = (MockChange)children[0];
+		MockChange change0 = (MockChange) children[0];
 		assertEquals(CHANGE_NAME, change0.getName());
 		assertTrue(children[1] instanceof MockChange);
-		MockChange change1 = (MockChange)children[1];
+		MockChange change1 = (MockChange) children[1];
 		assertEquals(CHANGE_NAME, change1.getName());
 		assertTrue(change0.getTextEdit() instanceof MultiTextEdit);
 		assertTrue(change1.getTextEdit() instanceof MultiTextEdit);
-		assertEquals(3, ((MultiTextEdit)change0.getTextEdit()).getChildrenSize() + ((MultiTextEdit)change1.getTextEdit()).getChildrenSize());
+		assertEquals(
+				3,
+				((MultiTextEdit) change0.getTextEdit()).getChildrenSize()
+						+ ((MultiTextEdit) change1.getTextEdit()).getChildrenSize());
 	}
-	
+
 	public void testProhibitChangeAndReplaceRegionForSameDocument() {
 		UpdateAcceptor updateAcceptor = new UpdateAcceptor();
-		IRefactoringDocument mockDocument0 = new MockDocument();
-		IRefactoringDocument mockDocument1 = new MockDocument();
+		IRefactoringDocument mockDocument0 = new MockRefactoringDocument();
+		IRefactoringDocument mockDocument1 = new MockRefactoringDocument();
 
-		updateAcceptor.accept(mockDocument0, new MockChange("foo", new ReplaceEdit(0,1,"foo")));
-		updateAcceptor.accept(mockDocument0, new MockChange("bar", new ReplaceEdit(0,1,"bar")));
+		updateAcceptor.accept(mockDocument0, new MockChange("foo", new ReplaceEdit(0, 1, "foo")));
+		updateAcceptor.accept(mockDocument0, new MockChange("bar", new ReplaceEdit(0, 1, "bar")));
 		try {
-			updateAcceptor.accept(mockDocument0, new ReplaceRegion(0,1,"bar"));
+			updateAcceptor.accept(mockDocument0, new ReplaceRegion(0, 1, "bar"));
 			fail("UpdateAcceptor should not allow ReplaceRegions and Changes on the smae IRefactoringDocument");
 		} catch (Exception e) {
 			// ok
 		}
-		updateAcceptor.accept(mockDocument1, new ReplaceRegion(0,1,"foo"));
-		updateAcceptor.accept(mockDocument1, new ReplaceRegion(0,1,"bar"));
+		updateAcceptor.accept(mockDocument1, new ReplaceRegion(0, 1, "foo"));
+		updateAcceptor.accept(mockDocument1, new ReplaceRegion(0, 1, "bar"));
 		try {
-			updateAcceptor.accept(mockDocument1, new MockChange("foo", new ReplaceEdit(0,1,"foo")));
+			updateAcceptor.accept(mockDocument1, new MockChange("foo", new ReplaceEdit(0, 1, "foo")));
 			fail("UpdateAcceptor should not allow ReplaceRegions and Changes on the smae IRefactoringDocument");
 		} catch (Exception e) {
 			// ok
 		}
 	}
-	
-	public static class MockDocument implements IRefactoringDocument {
-
-		public Change createChange(String name, TextEdit textEdit) {
-			return new MockChange(name, textEdit);
-		}
-
-		public URI getURI() {
-			return null;
-		}
-
-		public String getContents() {
-			return null;
-		}
-	}
-	
-	public static class MockChange extends Change {
-
-		private final String name;
-		private final TextEdit textEdit;
-
-		public MockChange(String name, TextEdit textEdit) {
-			this.name = name;
-			this.textEdit = textEdit;
-		}
-		
-		@Override
-		public String getName() {
-			return name;
-		}
-
-		public TextEdit getTextEdit() {
-			return textEdit;
-		}
-		
-		@Override
-		public void initializeValidationData(IProgressMonitor pm) {
-		}
-
-		@Override
-		public RefactoringStatus isValid(IProgressMonitor pm) throws CoreException, OperationCanceledException {
-			return null;
-		}
-
-		@Override
-		public Change perform(IProgressMonitor pm) throws CoreException {
-			return null;
-		}
-
-		@Override
-		public Object getModifiedElement() {
-			return null;
-		}
-		
-	}
-	
 }

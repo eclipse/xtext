@@ -12,8 +12,6 @@ import static com.google.common.collect.Iterables.*;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.ltk.core.refactoring.Change;
-import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
@@ -48,19 +46,7 @@ public class DependentElementsCalculatorTest extends AbstractXtextTests {
 		assertNotNull(baseElement);
 		assertTrue(baseElement instanceof Element);
 		assertEquals("A", ((Element) baseElement).getName());
-		mockDocument = new IRefactoringDocument() {
-			public Change createChange(String name, TextEdit textEdit) {
-				return null;
-			}
-
-			public URI getURI() {
-				return resource.getURI();
-			}
-
-			public String getContents() {
-				return "";
-			}
-		};
+		mockDocument = new MockRefactoringDocument(resource.getURI(), null);
 		baseRenameInfo = new ElementRenameInfo(mockDocument, baseElementURI, -1);
 	}
 

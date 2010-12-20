@@ -19,7 +19,7 @@ Import:
 	'import' importedNamespace=FQNWithWC; 
 
 Element:
-	name=ID ('{' contained+=Element* ('ref' referenced+=[Element|FQN])* '}')?
+	name=ID ('{' ( contained+=Element | 'ref' referenced+=[Element|FQN] )* '}')?
 ;
 
 FQN:

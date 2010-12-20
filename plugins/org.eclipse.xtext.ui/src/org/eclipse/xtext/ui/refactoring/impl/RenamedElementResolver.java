@@ -31,7 +31,7 @@ public class RenamedElementResolver {
 	@Inject
 	private IGlobalServiceProvider globalServiceProvider;
 
-	protected Map<URI, EObject> resolveRenamedElements(Iterable<ElementRenameInfo> elementRenameInfos,
+	public Map<URI, EObject> resolveRenamedElements(Iterable<ElementRenameInfo> elementRenameInfos,
 			ResourceSet resourceSet, OffsetCorrector offsetCorrector) {
 		HashMap<URI, EObject> renamedElementsMap = Maps.newHashMap();
 		for (ElementRenameInfo elementRenameInfo : elementRenameInfos) {
@@ -53,7 +53,7 @@ public class RenamedElementResolver {
 		return eObjectAtOffsetHelper;
 	}
 	
-	protected EObject resolveReferringElement(Resource referringResource,
+	public EObject resolveReferringElement(Resource referringResource,
 			IReferenceDescription referenceDescription, Map<URI, EObject> uri2renamedElement) {
 		// referring element might have been renamed, too
 		for (URI renamedElementURI : uri2renamedElement.keySet()) {
