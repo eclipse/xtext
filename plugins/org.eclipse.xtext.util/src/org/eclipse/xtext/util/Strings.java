@@ -352,19 +352,21 @@ public class Strings {
 
 	public static int countLines(String text, char[] separator) {
 		int line = 0;
-		char[] charArray = text.toCharArray();
 		if (separator.length == 1) {
-			for (int i = 0; i < charArray.length; i++) {
-				if (charArray[i] == separator[0]) {
+			char c = separator[0];
+			for (int i = 0; i < text.length(); i++) {
+				if (text.charAt(i) == c) {
 					line++;
 				}
 			}
 		} else if (separator.length == 2) {
-			for (int i = 0; i < charArray.length; i++) {
-				if (charArray[i] == separator[0] && charArray.length > i + 1 && charArray[i + 1] == separator[1]) {
+			char c1 = separator[0];
+			char c2 = separator[1];
+			for (int i = 0; i < text.length(); i++) {
+				if (text.charAt(i) == c1 && text.length() > i + 1 && text.charAt(i + 1) == c2) {
 					line++;
 					i++;
-				} else if (charArray[i] == separator[1]) {
+				} else if (text.charAt(i) == c2) {
 					line++;
 				}
 			}
