@@ -33,7 +33,7 @@ public class QualifiedNamesFragment extends DefaultGeneratorFragment {
 				.addTypeToType("org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher",
 						"org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher")
 				.addTypeToType("org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator",
-						"org.eclipse.xtext.ui.refactoring.impl.ContentDependentElementsCalculator")
+						"org.eclipse.xtext.ui.refactoring.impl.DefaultDependentElementsCalculator")
 				.getBindings();
 	}
 }
