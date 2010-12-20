@@ -12,6 +12,8 @@ import static org.eclipse.xtext.util.Strings.*;
 import java.io.ByteArrayOutputStream;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -39,9 +41,12 @@ public class XMLReferenceUpdater extends AbstractReferenceUpdater {
 	@Override
 	protected void internalCreateReferenceUpdates(ElementRenameArguments elementRenameArguments,
 			Multimap<URI, IReferenceDescription> resource2references, ResourceSet resourceSet,
-			ReplaceRegion declarationEdit, UpdateAcceptor updateAcceptor, RefactoringStatus status) {
+			ReplaceRegion declarationEdit, UpdateAcceptor updateAcceptor, RefactoringStatus status, IProgressMonitor monitor) {
+		SubMonitor progress = SubMonitor.convert(monitor, "Updating XMI References", resource2references.keySet().size());
 		for (URI referringResourceURI : resource2references.keySet()) {
 			try {
+				if(progress.isCanceled())
+					break;
 				Resource referringResource = resourceSet.getResource(referringResourceURI, false);
 				if(!(referringResource instanceof XMLResource)) {
 					throw new RefactoringStatusException("Referring resource in XMLReferenceUpdater is not an XMLResource.", false);
@@ -51,6 +56,7 @@ public class XMLReferenceUpdater extends AbstractReferenceUpdater {
 				referringResource.save(outputStream, null);
 				String newContent = new String(((XMLResource) referringResource).getEncoding());
 				updateAcceptor.accept(referringDocument, new ReplaceRegion(0, referringDocument.getContents().length(), newContent));
+				progress.worked(1);
 			} catch (Exception exc) {
 				status.addFatalError("Could not save referring resource " + notNull(referringResourceURI)
 						+ ". See log for details.");

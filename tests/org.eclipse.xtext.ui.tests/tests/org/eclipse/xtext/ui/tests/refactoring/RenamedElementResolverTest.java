@@ -60,11 +60,12 @@ public class RenamedElementResolverTest extends AbstractXtextTests {
 		MockRefactoringDocument document = new MockRefactoringDocument(resourceURI, textualModel);
 		ElementRenameInfo baseRenameInfo = new ElementRenameInfo(document, uriB, offsetB);
 		IDependentElementsCalculator dependentElementsCalculator = get(IDependentElementsCalculator.class);
-		Iterable<ElementRenameInfo> dependentElementRenameInfos = dependentElementsCalculator.getDependentElementRenameInfos(elementB, baseRenameInfo);
+		Iterable<ElementRenameInfo> dependentElementRenameInfos = dependentElementsCalculator.getDependentElementRenameInfos(elementB, baseRenameInfo, null);
 		assertEquals(1, size(dependentElementRenameInfos));
 		List<ElementRenameInfo> elementRenameInfos = newArrayList(baseRenameInfo, dependentElementRenameInfos.iterator().next());
 		resource.update(offsetB, 1, newName);
 		OffsetCorrector offsetCorrector = new OffsetCorrector(document, new ReplaceRegion(offsetB, 1, newName));
+		
 		Map<URI, EObject> renamedElements = renamedElementResolver.resolveRenamedElements(elementRenameInfos, resource.getResourceSet(), offsetCorrector);
 		assertEquals(2, renamedElements.size());
 		assertTrue(renamedElements.get(uriB) instanceof Element);

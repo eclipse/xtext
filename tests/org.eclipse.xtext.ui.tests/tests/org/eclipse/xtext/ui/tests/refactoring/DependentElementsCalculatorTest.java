@@ -52,7 +52,7 @@ public class DependentElementsCalculatorTest extends AbstractXtextTests {
 
 	public void testContentDependentElements() throws Exception {
 		Iterable<ElementRenameInfo> dependentElementRenameInfos = get(DefaultDependentElementsCalculator.class)
-				.getDependentElementRenameInfos(baseElement, baseRenameInfo);
+				.getDependentElementRenameInfos(baseElement, baseRenameInfo, null);
 		assertEquals(2, size(dependentElementRenameInfos));
 		assertContainsElement(dependentElementRenameInfos, "B");
 		assertContainsElement(dependentElementRenameInfos, "C");
@@ -60,7 +60,7 @@ public class DependentElementsCalculatorTest extends AbstractXtextTests {
 
 	public void testNullDependentElements() throws Exception {
 		Iterable<ElementRenameInfo> dependentElementRenameInfos = get(IDependentElementsCalculator.Null.class)
-				.getDependentElementRenameInfos(baseElement, baseRenameInfo);
+				.getDependentElementRenameInfos(baseElement, baseRenameInfo, null);
 		assertTrue(isEmpty(dependentElementRenameInfos));
 	}
 

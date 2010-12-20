@@ -12,6 +12,8 @@ import static org.eclipse.xtext.util.Strings.*;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -52,11 +54,11 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 	@Inject
 	private ITokenSerializer.ICrossReferenceSerializer crossReferenceSerializer;
 
-
 	@Override
 	protected void internalCreateReferenceUpdates(ElementRenameArguments elementRenameArguments,
 			Multimap<URI, IReferenceDescription> resource2references, ResourceSet resourceSet,
-			ReplaceRegion declarationEdit, UpdateAcceptor updateAcceptor, RefactoringStatus status) {
+			ReplaceRegion declarationEdit, UpdateAcceptor updateAcceptor, RefactoringStatus status, IProgressMonitor monitor) {
+		SubMonitor progress = SubMonitor.convert(monitor, "Creating reference updates", resource2references.keySet().size());
 		OffsetCorrector offsetCorrector = new OffsetCorrector(elementRenameArguments.getBaseElementRenameInfo()
 				.getDocument(), declarationEdit);
 		Map<URI, EObject> uri2renamedElement = renamedElementResolver.resolveRenamedElements(
@@ -71,7 +73,6 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 						+ " is not an XtextResource", true);
 			}
 			((XtextResource)referringResource).getCache().clear(referringResource);
-
 			for (IReferenceDescription referenceDescription : resource2references.get(referringResourceURI)) {
 				EObject referringElement = renamedElementResolver.resolveReferringElement(referringResource, referenceDescription,
 						uri2renamedElement);
@@ -80,6 +81,7 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 						referenceDescription.getEReference(), referenceDescription.getIndexInList(),
 						newTargetElement, updateAcceptor, offsetCorrector, status);
 			}
+			progress.worked(1);
 		}
 	}
 

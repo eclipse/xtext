@@ -13,6 +13,7 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -138,16 +139,19 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	@Override
 	public RefactoringStatus checkFinalConditions(IProgressMonitor monitor, CheckConditionsContext context)
 			throws CoreException, OperationCanceledException {
+		SubMonitor progress = SubMonitor.convert(monitor, 100);
 		updateAcceptor = new UpdateAcceptor();
 		try {
 			ReplaceRegion declarationEdit = strategy.getReplaceRegion(newName);
 			if (declarationEdit == null)
 				throw new RefactoringStatusException("Could not create a text edit", true);
 			updateAcceptor.accept(targetDocument, declarationEdit);
+			progress.worked(10);
 			ElementRenameInfo baseRenameInfo = new ElementRenameInfo(targetDocument, targetElementURI, declarationEdit.getOffset());
-			Iterable<ElementRenameInfo> dependentRenameInfos = dependentElementsCalculator.getDependentElementRenameInfos(targetElement, baseRenameInfo);
+			progress.worked(10);
+			Iterable<ElementRenameInfo> dependentRenameInfos = dependentElementsCalculator.getDependentElementRenameInfos(targetElement, baseRenameInfo, progress.newChild(10));
 			renameArguments = new ElementRenameArguments(newName, baseRenameInfo, dependentRenameInfos, true);
-			referenceUpdaterDispatcher.createReferenceUpdates(renameArguments, strategy, resourceSet, updateAcceptor, monitor);
+			referenceUpdaterDispatcher.createReferenceUpdates(renameArguments, strategy, resourceSet, updateAcceptor, progress.newChild(70));
 		} catch (Exception exc) {
 			RefactoringStatusExtension.handleException(status, exc);
 		}
@@ -155,8 +159,8 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	}
 
 	@Override
-	public Change createChange(IProgressMonitor pm) throws CoreException, OperationCanceledException {
-		return updateAcceptor.createChange("Rename " + strategy.getCurrentName() + " to " + newName);
+	public Change createChange(IProgressMonitor monitor) throws CoreException, OperationCanceledException {
+		return updateAcceptor.createChange("Rename " + strategy.getCurrentName() + " to " + newName, monitor);
 	}
 
 	@Override

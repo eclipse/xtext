@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.CompositeChange;
 import org.eclipse.text.edits.MultiTextEdit;
@@ -26,38 +28,43 @@ public class UpdateAcceptor {
 
 	private Multimap<IRefactoringDocument, ReplaceRegion> document2textReplacements = HashMultimap.create();
 	private Multimap<IRefactoringDocument, Change> document2change = HashMultimap.create();
-	
+
 	public void accept(IRefactoringDocument document, ReplaceRegion replaceRegion) {
-		if(document2change.containsKey(document))
+		if (document2change.containsKey(document))
 			throw new IllegalStateException("Cannot accept changes and text edits for the same document.");
 		document2textReplacements.put(document, replaceRegion);
 	}
 
 	public void accept(IRefactoringDocument document, Change change) {
-		if(document2textReplacements.containsKey(document))
+		if (document2textReplacements.containsKey(document))
 			throw new IllegalStateException("Cannot accept changes and text edits for the same document.");
 		document2change.put(document, change);
 	}
 
-	public Change createChange(String name) {
+	public Change createChange(String name, IProgressMonitor monitor) {
+		SubMonitor progress = SubMonitor.convert(monitor, document2textReplacements.keySet().size()
+				+ document2change.keySet().size());
 		CompositeChange compositeChange = new CompositeChange(name);
-		for(IRefactoringDocument document: document2textReplacements.keySet()) {
+		for (IRefactoringDocument document : document2textReplacements.keySet()) {
 			Iterable<ReplaceRegion> textReplacements = document2textReplacements.get(document);
 			MultiTextEdit multiEdit = new MultiTextEdit();
 			for (ReplaceRegion textReplacement : textReplacements) {
-				ReplaceEdit replaceEdit = new ReplaceEdit(textReplacement.getOffset(), textReplacement.getLength(), textReplacement.getText());
+				ReplaceEdit replaceEdit = new ReplaceEdit(textReplacement.getOffset(), textReplacement.getLength(),
+						textReplacement.getText());
 				multiEdit.addChild(replaceEdit);
 			}
 			Change change = document.createChange(name, multiEdit);
 			compositeChange.add(change);
+			progress.worked(1);
 		}
-		for(IRefactoringDocument document: document2change.keySet()) {
+		for (IRefactoringDocument document : document2change.keySet()) {
 			Iterable<Change> documentChanges = document2change.get(document);
 			CompositeChange documentCompositeChange = new CompositeChange(name);
 			documentCompositeChange.addAll(Iterables.toArray(documentChanges, Change.class));
 			compositeChange.add(documentCompositeChange);
+			progress.worked(1);
 		}
 		return compositeChange;
 	}
-	
+
 }

@@ -22,7 +22,6 @@ import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.AbstractEditorTest;
@@ -36,8 +35,6 @@ import com.google.inject.Provider;
  */
 public class DefaultRenameElementProcessorTest extends AbstractEditorTest {
 
-	private IJavaProject project;
-
 	@Inject
 	private Provider<RenameElementProcessor> processorProvider;
 	
@@ -47,7 +44,7 @@ public class DefaultRenameElementProcessorTest extends AbstractEditorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		project = makeJavaProject(createProject(TEST_PROJECT));
+		IJavaProject project = makeJavaProject(createProject(TEST_PROJECT));
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		Injector injector = Activator.getInstance().getInjector(getEditorId());
 		injector.injectMembers(this);
@@ -56,13 +53,6 @@ public class DefaultRenameElementProcessorTest extends AbstractEditorTest {
 	@Override
 	protected String getEditorId() {
 		return "org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage";
-	}
-
-	@Override
-	protected void tearDown() throws Exception {
-		super.tearDown();
-		if (project != null)
-			JavaProjectSetupUtil.deleteJavaProject(project);
 	}
 
 	public void testFileRename() throws Exception {

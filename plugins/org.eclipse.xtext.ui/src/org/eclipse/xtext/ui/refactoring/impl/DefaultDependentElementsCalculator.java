@@ -10,6 +10,8 @@ package org.eclipse.xtext.ui.refactoring.impl;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -32,9 +34,12 @@ public class DefaultDependentElementsCalculator implements IDependentElementsCal
 	private ILocationInFileProvider locationInFileProvider;
 
 	public Iterable<ElementRenameInfo> getDependentElementRenameInfos(EObject baseElement,
-			ElementRenameInfo baseRenameInfo) {
+			ElementRenameInfo baseRenameInfo, IProgressMonitor monitor) {
+		SubMonitor progress = SubMonitor.convert(monitor, 10);
 		List<ElementRenameInfo> elementRenameInfos = Lists.newArrayList();
 		for (Iterator<EObject> i = EcoreUtil.getAllProperContents(baseElement, false); i.hasNext();) {
+			if(progress.isCanceled())
+				break;
 			EObject childElement = i.next();
 			URI childURI = EcoreUtil.getURI(childElement);
 			ITextRegion childTextRegion = locationInFileProvider.getSignificantTextRegion(childElement);
@@ -42,6 +47,8 @@ public class DefaultDependentElementsCalculator implements IDependentElementsCal
 				elementRenameInfos.add(new ElementRenameInfo(baseRenameInfo.getDocument(), childURI, childTextRegion
 						.getOffset()));
 			}
+			progress.worked(1);
+			progress.setWorkRemaining(10);
 		}
 		return elementRenameInfos;
 	}

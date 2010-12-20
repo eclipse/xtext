@@ -46,7 +46,6 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 	private static final String TEST_FILE_CONTENT = "A { B }";
 	private static final String CHANGE_NAME = "Change";
 	
-	private IJavaProject project;
 	private IRefactoringDocument.Provider documentFactory;
 	private IFile testFile;
 	private RefactoringStatus status;
@@ -60,20 +59,13 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		project = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT);
+		IJavaProject project = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT);
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		Injector injector = Activator.getInstance().getInjector(getEditorId());
 		documentFactory = injector.getInstance(IRefactoringDocument.Provider.class);
 		status = new RefactoringStatus();
 		testFile = IResourcesSetupUtil.createFile(TEST_FILE_PATH, TEST_FILE_CONTENT);
 		textEdit = new ReplaceEdit(0,1,"C");
-	}
-
-	@Override
-	protected void tearDown() throws Exception {
-		super.tearDown();
-		if (project != null)
-			JavaProjectSetupUtil.deleteJavaProject(project);
 	}
 
 	public void testFileResource() throws Exception {
