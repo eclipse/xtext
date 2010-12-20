@@ -4,8 +4,17 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="builderState"
     nsURI="http://www.eclipse.org/xtext/builderstate/1.0" nsPrefix="builderState">
   <eClassifiers xsi:type="ecore:EClass" name="ResourceDescription" instanceClassName="org.eclipse.xtext.resource.IResourceDescription">
+    <eOperations name="isEmpty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="getExportedObjectsByType" upperBound="-1" eType="#//EObjectDescription">
+      <eParameters name="type" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    </eOperations>
     <eOperations name="getExportedObjects" upperBound="-1" eType="#//EObjectDescription">
-      <eParameters name="selector" eType="#//ISelector"/>
+      <eParameters name="type" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+      <eParameters name="name" eType="#//QualifiedName"/>
+      <eParameters name="ignoreCase" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="getExportedObjectsByObject" upperBound="-1" eType="#//EObjectDescription">
+      <eParameters name="object" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="URI" lowerBound="1" eType="#//EURI"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exportedObjects" upperBound="-1"
@@ -49,5 +58,4 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="containerEObjectURI" eType="#//EURI"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="QualifiedName" instanceClassName="org.eclipse.xtext.naming.QualifiedName"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="ISelector" instanceClassName="org.eclipse.xtext.scoping.ISelector"/>
 </ecore:EPackage>

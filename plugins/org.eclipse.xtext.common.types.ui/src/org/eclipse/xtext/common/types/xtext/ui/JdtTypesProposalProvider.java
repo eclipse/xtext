@@ -104,9 +104,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 					if (!resolved.eIsProxy()) {
 						IEObjectDescription shortedElement = scope.getSingleElement(new ISelector.SelectByEObject(resolved));
 						if (shortedElement != null) {
-							IEObjectDescription description = scope.getSingleElement(new ISelector.SelectByName(shortedElement.getName()));
-							if (description!=null && description.getEObjectURI().equals(shortedElement.getEObjectURI()))
-								replacementString = applyValueConverter(shortedElement.getName());
+							replacementString = applyValueConverter(shortedElement.getName());
 						}
 					}
 				}

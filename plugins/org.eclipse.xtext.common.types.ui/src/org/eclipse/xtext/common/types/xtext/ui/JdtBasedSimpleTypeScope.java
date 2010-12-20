@@ -28,7 +28,6 @@ import org.eclipse.xtext.common.types.xtext.AbstractTypeScope;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableMap;
@@ -45,7 +44,7 @@ public class JdtBasedSimpleTypeScope extends AbstractTypeScope {
 	}
 
 	@Override
-	protected Iterable<IEObjectDescription> internalGetAllLocalElements(ISelector selector) {
+	protected Iterable<IEObjectDescription> internalGetAllElements() {
 		IJavaProject javaProject = getTypeProvider().getJavaProject();
 		if (javaProject == null)
 			return Collections.emptyList();
@@ -89,7 +88,7 @@ public class JdtBasedSimpleTypeScope extends AbstractTypeScope {
 		catch (JavaModelException e) {
 			// ignore
 		}
-		return selector.applySelector(allScopedElements);
+		return allScopedElements;
 	}
 	
 	public IEObjectDescription createScopedElement(String fullyQualifiedName) {

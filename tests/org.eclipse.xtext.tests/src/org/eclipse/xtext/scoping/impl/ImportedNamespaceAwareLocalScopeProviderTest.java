@@ -88,7 +88,9 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 				return provider;
 			}
 		}));
-		scopeProvider = new ImportedNamespaceAwareLocalScopeProvider(globalScopeProvider, nameProvider, nameConverter);
+		CaseInsensitivityHelper caseInsensitivityHelper = new CaseInsensitivityHelper();
+		globalScopeProvider.setCaseInsensitivityHelper(caseInsensitivityHelper);
+		scopeProvider = new ImportedNamespaceAwareLocalScopeProvider(globalScopeProvider, nameProvider, nameConverter, caseInsensitivityHelper);
 	}
 
 	public void testImports() throws Exception {
