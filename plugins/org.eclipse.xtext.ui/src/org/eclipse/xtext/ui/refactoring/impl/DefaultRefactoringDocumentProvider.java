@@ -7,10 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.DocumentChange;
@@ -25,6 +29,8 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.ITextEditorExtension;
+import org.eclipse.xtext.parser.IEncodingProvider;
+import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.refactoring.IRefactoringDocument;
@@ -42,6 +48,9 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 
 	@Inject
 	private IWorkspace workspace;
+
+	@Inject
+	private IGlobalServiceProvider globalServiceProvider;
 
 	protected IFileEditorInput getEditorInput(URI resourceURI, RefactoringStatus status) {
 		if (!resourceURI.isPlatformResource()) {
@@ -80,17 +89,19 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 					return null;
 				}
 			}.syncExec();
-			if (openDocument != null)
+			if (openDocument != null) {
 				return new EditorDocument(resourceURI, openDocument);
-			else
-				return new FileDocument(resourceURI, fileEditorInput.getFile());
+			} else {
+				return new FileDocument(resourceURI, fileEditorInput.getFile(), globalServiceProvider.findService(
+						resourceURI, IEncodingProvider.class));
+			}
 		}
 		return null;
 	}
 
 	public static abstract class AbstractRefactoringDocument implements IRefactoringDocument {
 		private URI resourceURI;
-		
+
 		public AbstractRefactoringDocument(URI resourceURI) {
 			this.resourceURI = resourceURI;
 		}
@@ -100,18 +111,18 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 		public URI getURI() {
 			return resourceURI;
 		}
-		
+
 		@Override
 		public boolean equals(Object obj) {
 			return getClass().isInstance(obj) && ((IRefactoringDocument) obj).getURI().equals(resourceURI);
 		}
-		
+
 		@Override
 		public int hashCode() {
 			return resourceURI.hashCode();
 		}
 	}
-	
+
 	public static class EditorDocument extends AbstractRefactoringDocument {
 
 		private IDocument document;
@@ -124,44 +135,69 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 		public IDocument getDocument() {
 			return document;
 		}
-		
+
 		@Override
 		public Change createChange(String name, TextEdit textEdit) {
 			DocumentChange documentChange = new DocumentChange(getName(), document);
 			documentChange.setEdit(textEdit);
 			return new DisplayChangeWrapper(documentChange);
 		}
-		
+
 		protected String getName() {
 			StringBuilder buffer = new StringBuilder(getURI().lastSegment());
 			buffer.append(" - ");
 			buffer.append(getURI().segment(1));
-			for(int i=2; i< getURI().segmentCount() -1; ++i) {
+			for (int i = 2; i < getURI().segmentCount() - 1; ++i) {
 				buffer.append("/");
 				buffer.append(getURI().segment(i));
 			}
 			return buffer.toString();
+		}
+
+		public String getContents() {
+			return document.get();
 		}
 	}
 
 	public static class FileDocument extends AbstractRefactoringDocument {
 
 		private IFile file;
+		private IEncodingProvider encodingProvider;
 
-		public FileDocument(URI resourceURI, IFile file) {
+		public FileDocument(URI resourceURI, IFile file, IEncodingProvider encodingProvider) {
 			super(resourceURI);
 			this.file = file;
+			this.encodingProvider = encodingProvider;
 		}
 
 		public IFile getFile() {
 			return file;
 		}
-		
+
 		@Override
 		public Change createChange(String name, TextEdit textEdit) {
 			TextFileChange textFileChange = new TextFileChange(name, file);
 			textFileChange.setEdit(textEdit);
 			return textFileChange;
 		}
+
+		public String getContents() {
+			try {
+				InputStream inputStream = file.getContents();
+				String charset = (encodingProvider != null) ? encodingProvider.getEncoding(getURI()) : file
+						.getCharset();
+				InputStreamReader input = new InputStreamReader(inputStream, charset);
+				final char[] buffer = new char[4096];
+				StringBuilder output = new StringBuilder(4096);
+				int read; 
+				while((read = input.read(buffer, 0, buffer.length)) != -1) {
+					output.append(buffer, 0, read);
+				}
+				return output.toString();
+			} catch (Exception e) {
+				throw new WrappedException(e);
+			}
+		}
+
 	}
 }

@@ -14,6 +14,8 @@ import java.util.Collections;
 import org.eclipse.ltk.core.refactoring.participants.RenameArguments;
 
 /**
+ * Stores information on an element to be renamed and elements whose names change as a consequence.
+ * 
  * @author koehnlein - Initial contribution and API
  */
 public class ElementRenameArguments extends RenameArguments {
@@ -21,7 +23,8 @@ public class ElementRenameArguments extends RenameArguments {
 	private final ElementRenameInfo baseElementRenameInfo;
 	private final Iterable<ElementRenameInfo> dependentElementRenameInfos;
 
-	public ElementRenameArguments(String newName, ElementRenameInfo baseElementRenameInfo, Iterable<ElementRenameInfo> dependentElementRenameInfos, boolean updateReferences) {
+	public ElementRenameArguments(String newName, ElementRenameInfo baseElementRenameInfo,
+			Iterable<ElementRenameInfo> dependentElementRenameInfos, boolean updateReferences) {
 		super(newName, updateReferences);
 		this.baseElementRenameInfo = baseElementRenameInfo;
 		this.dependentElementRenameInfos = dependentElementRenameInfos;
@@ -30,7 +33,7 @@ public class ElementRenameArguments extends RenameArguments {
 	public ElementRenameInfo getBaseElementRenameInfo() {
 		return baseElementRenameInfo;
 	}
-	
+
 	public Iterable<ElementRenameInfo> getDependentElementRenameInfos() {
 		return dependentElementRenameInfos;
 	}
@@ -38,5 +41,5 @@ public class ElementRenameArguments extends RenameArguments {
 	public Iterable<ElementRenameInfo> getAllElementRenameInfos() {
 		return concat(Collections.singletonList(baseElementRenameInfo), dependentElementRenameInfos);
 	}
-	
+
 }

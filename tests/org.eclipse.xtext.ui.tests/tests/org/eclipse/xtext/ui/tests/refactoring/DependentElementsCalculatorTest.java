@@ -52,9 +52,13 @@ public class DependentElementsCalculatorTest extends AbstractXtextTests {
 			public Change createChange(String name, TextEdit textEdit) {
 				return null;
 			}
-			
+
 			public URI getURI() {
 				return resource.getURI();
+			}
+
+			public String getContents() {
+				return "";
 			}
 		};
 		baseRenameInfo = new ElementRenameInfo(mockDocument, baseElementURI, -1);
@@ -74,11 +78,13 @@ public class DependentElementsCalculatorTest extends AbstractXtextTests {
 		assertTrue(isEmpty(dependentElementRenameInfos));
 	}
 
-	protected void assertContainsElement(Iterable<ElementRenameInfo> dependentElementRenameInfos, final String elementName) {
+	protected void assertContainsElement(Iterable<ElementRenameInfo> dependentElementRenameInfos,
+			final String elementName) {
 		assertTrue(any(dependentElementRenameInfos, new Predicate<ElementRenameInfo>() {
 			public boolean apply(ElementRenameInfo info) {
 				EObject dependentElement = resource.getEObject(info.getElementURI().fragment());
-				return dependentElement instanceof Element && ((Element) dependentElement).getName().equals(elementName)
+				return dependentElement instanceof Element
+						&& ((Element) dependentElement).getName().equals(elementName)
 						&& info.getOffset() == NodeModelUtils.getNode(dependentElement).getOffset()
 						&& info.getDocument() == mockDocument;
 			}

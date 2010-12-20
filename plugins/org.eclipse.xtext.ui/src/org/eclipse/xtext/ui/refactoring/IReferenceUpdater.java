@@ -15,12 +15,15 @@ import org.eclipse.xtext.ui.refactoring.impl.DefaultReferenceUpdater;
 import com.google.inject.ImplementedBy;
 
 /**
+ * A component to update references to elements renamed in a refactoring.
+ * 
  * @author koehnlein - Initial contribution and API
  */
 @ImplementedBy(DefaultReferenceUpdater.class)
-public interface IReferenceUpdater{
+public interface IReferenceUpdater {
 
 	RefactoringStatus createReferenceUpdates(ElementRenameArguments elementRenameArguments,
-			IRenameStrategy renameStrategy, Iterable<IReferenceDescription> referenceDescriptions, UpdateAcceptor updateAcceptor, IProgressMonitor monitor);
-	
+			IRenameStrategy renameStrategy, Iterable<IReferenceDescription> referenceDescriptions,
+			UpdateAcceptor updateAcceptor, IProgressMonitor monitor);
+
 }

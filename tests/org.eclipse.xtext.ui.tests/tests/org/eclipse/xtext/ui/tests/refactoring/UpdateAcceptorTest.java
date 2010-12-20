@@ -17,6 +17,7 @@ import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.CompositeChange;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.MultiTextEdit;
+import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.ui.refactoring.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.UpdateAcceptor;
@@ -53,6 +54,28 @@ public class UpdateAcceptorTest extends TestCase {
 		assertEquals(3, ((MultiTextEdit)change0.getTextEdit()).getChildrenSize() + ((MultiTextEdit)change1.getTextEdit()).getChildrenSize());
 	}
 	
+	public void testProhibitChangeAndReplaceRegionForSameDocument() {
+		UpdateAcceptor updateAcceptor = new UpdateAcceptor();
+		IRefactoringDocument mockDocument0 = new MockDocument();
+		IRefactoringDocument mockDocument1 = new MockDocument();
+
+		updateAcceptor.accept(mockDocument0, new MockChange("foo", new ReplaceEdit(0,1,"foo")));
+		updateAcceptor.accept(mockDocument0, new MockChange("bar", new ReplaceEdit(0,1,"bar")));
+		try {
+			updateAcceptor.accept(mockDocument0, new ReplaceRegion(0,1,"bar"));
+			fail("UpdateAcceptor should not allow ReplaceRegions and Changes on the smae IRefactoringDocument");
+		} catch (Exception e) {
+			// ok
+		}
+		updateAcceptor.accept(mockDocument1, new ReplaceRegion(0,1,"foo"));
+		updateAcceptor.accept(mockDocument1, new ReplaceRegion(0,1,"bar"));
+		try {
+			updateAcceptor.accept(mockDocument1, new MockChange("foo", new ReplaceEdit(0,1,"foo")));
+			fail("UpdateAcceptor should not allow ReplaceRegions and Changes on the smae IRefactoringDocument");
+		} catch (Exception e) {
+			// ok
+		}
+	}
 	
 	public static class MockDocument implements IRefactoringDocument {
 
@@ -63,7 +86,10 @@ public class UpdateAcceptorTest extends TestCase {
 		public URI getURI() {
 			return null;
 		}
-		
+
+		public String getContents() {
+			return null;
+		}
 	}
 	
 	public static class MockChange extends Change {

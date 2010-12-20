@@ -14,6 +14,8 @@ import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameRefactoringProvider;
 import com.google.inject.ImplementedBy;
 
 /**
+ * Provides the rename refactoring of a given element.
+ * 
  * @author koehnlein - Initial contribution and API
  */
 @ImplementedBy(DefaultRenameRefactoringProvider.class)
