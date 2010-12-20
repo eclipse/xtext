@@ -14,7 +14,7 @@ import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import com.google.inject.ImplementedBy;
 
 /**
- * Unfortunately LTK only defines abstract classes, so this is an abstract class instead of an interface only.
+ * Unfortunately LTK only defines abstract classes so this is an abstract class instead of an interface only.
  * 
  * @author koehnlein - Initial contribution and API
  */

@@ -55,6 +55,9 @@ public class DefaultRenameElementStrategyTest extends AbstractXtextTests {
 			public URI getURI() {
 				return resource.getURI();
 			}
+			public String getContents() {
+				return "";
+			}
 		};
 		IRenameStrategy renameElementStrategy = strategyProvider.get(targetElement, mockDocument);
 		assertNotNull(renameElementStrategy);

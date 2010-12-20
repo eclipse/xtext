@@ -15,6 +15,8 @@ import org.eclipse.xtext.util.ReplaceRegion;
 import com.google.inject.ImplementedBy;
 
 /**
+ * Customizable strategy for the text based rename refactoring of a concrete {@link EObject}. 
+ * 
  * @author koehnlein - Initial contribution and API
  */
 public interface IRenameStrategy {

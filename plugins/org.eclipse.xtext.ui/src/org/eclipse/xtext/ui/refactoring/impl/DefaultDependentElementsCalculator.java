@@ -22,13 +22,15 @@ import com.google.inject.Inject;
 import com.google.inject.internal.Lists;
 
 /**
+ * Delivers all contained elements of an element to be renamed in order to updated references to them.
+ * 
  * @author koehnlein - Initial contribution and API
  */
 public class DefaultDependentElementsCalculator implements IDependentElementsCalculator {
 
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
-	
+
 	public Iterable<ElementRenameInfo> getDependentElementRenameInfos(EObject baseElement,
 			ElementRenameInfo baseRenameInfo) {
 		List<ElementRenameInfo> elementRenameInfos = Lists.newArrayList();
@@ -37,7 +39,8 @@ public class DefaultDependentElementsCalculator implements IDependentElementsCal
 			URI childURI = EcoreUtil.getURI(childElement);
 			ITextRegion childTextRegion = locationInFileProvider.getSignificantTextRegion(childElement);
 			if (childURI != null && childTextRegion != null) {
-				elementRenameInfos.add(new ElementRenameInfo(baseRenameInfo.getDocument(), childURI, childTextRegion.getOffset()));
+				elementRenameInfos.add(new ElementRenameInfo(baseRenameInfo.getDocument(), childURI, childTextRegion
+						.getOffset()));
 			}
 		}
 		return elementRenameInfos;

@@ -71,6 +71,9 @@ public class OffsetCorrectorTest extends TestCase {
 			public URI getURI() {
 				return null;
 			}
+			public String getContents() {
+				return null;
+			}
 		};
 	}
 }

@@ -18,7 +18,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 
 /**
- * Aggregates {@link TextEdit}s and {@link Change}s into a {@link CompositeChange}.
+ * Aggregates {@link TextEdit}s and/or {@link Change}s into a {@link CompositeChange}.
  * 
  * @author koehnlein - Initial contribution and API
  */

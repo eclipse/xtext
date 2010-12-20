@@ -39,8 +39,9 @@ import com.google.inject.Injector;
  */
 public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 
+	private static final String TEST_FILE_NAME = "File.refactoringtestlanguage";
 	private static final String TEST_PROJECT = "refactoring.test";
-	private static final String TEST_FILE_NAME = TEST_PROJECT + "/" + "File.refactoringtestlanguage";
+	private static final String TEST_FILE_PATH = TEST_PROJECT + "/" + TEST_FILE_NAME;
 
 	private static final String TEST_FILE_CONTENT = "A { B }";
 	private static final String CHANGE_NAME = "Change";
@@ -64,7 +65,7 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 		Injector injector = Activator.getInstance().getInjector(getEditorId());
 		documentFactory = injector.getInstance(IRefactoringDocument.Provider.class);
 		status = new RefactoringStatus();
-		testFile = IResourcesSetupUtil.createFile(TEST_FILE_NAME, TEST_FILE_CONTENT);
+		testFile = IResourcesSetupUtil.createFile(TEST_FILE_PATH, TEST_FILE_CONTENT);
 		textEdit = new ReplaceEdit(0,1,"C");
 	}
 
@@ -79,6 +80,7 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 		IRefactoringDocument document = createAndCheckDocument(testFile);
 		assertTrue(document instanceof FileDocument);
 		assertEquals(testFile, ((FileDocument) document).getFile());
+		assertEquals(TEST_FILE_CONTENT, document.getContents());
 		
 		Change change = document.createChange(CHANGE_NAME, textEdit);
 		assertTrue(change instanceof TextFileChange);
@@ -94,10 +96,11 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 		assertTrue(cleanDocument instanceof EditorDocument);
 		IXtextDocument editorDocument = editor.getDocument();
 		assertEquals(editorDocument, ((EditorDocument) cleanDocument).getDocument());
+		assertEquals(TEST_FILE_CONTENT, cleanDocument.getContents());
 		
 		Change change = cleanDocument.createChange(CHANGE_NAME, textEdit);
 		assertTrue(change instanceof DisplayChangeWrapper);
-		assertEquals(CHANGE_NAME, change.getName());
+		assertEquals(TEST_FILE_NAME + " - " + TEST_FILE_PATH, change.getName());
 		assertTrue(((DisplayChangeWrapper) change).getDelegate() instanceof DocumentChange);
 		
 		Change undoChange = checkEdit(cleanDocument, textEdit);

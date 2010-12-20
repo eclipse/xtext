@@ -26,8 +26,11 @@ public interface IRefactoringDocument {
 	
 	URI getURI();
 	
+	String getContents();
+
 	@ImplementedBy(DefaultRefactoringDocumentProvider.class)
 	static interface Provider {
 		IRefactoringDocument get(URI resourceURI, RefactoringStatus status);
 	}
+
 }
