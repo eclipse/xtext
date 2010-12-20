@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -35,7 +34,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
 import org.eclipse.xtext.scoping.impl.GlobalResourceDescriptionProvider;
-import org.eclipse.xtext.scoping.impl.ResourceDescriptionBasedScope;
+import org.eclipse.xtext.scoping.impl.SelectableBasedScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 
 import com.google.common.base.Function;
@@ -137,13 +136,7 @@ public class XtextScopeProvider extends AbstractScopeProvider {
 
 	protected IScope createScope(final Grammar grammar, final EClass type, IScope parent) {
 		final IResourceDescription resourceDescription = resourceDecriptionProvider.getResourceDescription(grammar.eResource());
-		if (resourceDescription == null)
-			return parent;
-		return new ResourceDescriptionBasedScope(parent, resourceDescription, new Predicate<IEObjectDescription>() {
-			public boolean apply(IEObjectDescription input) {
-				return EcoreUtil2.isAssignableFrom(type, input.getEClass());
-			}
-		});
+		return SelectableBasedScope.createScope(parent, resourceDescription, type, false);
 	}
 
 	protected List<Grammar> getAllGrammars(Grammar grammar) {

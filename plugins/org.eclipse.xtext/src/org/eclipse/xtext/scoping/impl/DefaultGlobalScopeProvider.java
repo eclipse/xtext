@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IContainer;
@@ -42,14 +43,14 @@ public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 	private IResourceDescription.Manager descriptionManager;
 	
 	@Override
-	protected IScope getScope(final Resource context, Predicate<IEObjectDescription> filter) {
+	protected IScope getScope(final Resource context, boolean ignoreCase, EClass type, Predicate<IEObjectDescription> filter) {
 		IScope result = IScope.NULLSCOPE;
 		List<IContainer> containers = Lists.newArrayList(getVisibleContainers(context));
 		Collections.reverse(containers);
 		Iterator<IContainer> iter = containers.iterator();
 		while (iter.hasNext()) {
 			IContainer container = iter.next();
-			result = createContainerScopeWithContext(context, result, container, filter);
+			result = createContainerScopeWithContext(context, result, container, filter, type, ignoreCase);
 		}
 		return result;
 	}
@@ -85,21 +86,18 @@ public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 		return base + "@DEFAULT_SCOPE"; 
 	}
 
-	protected IScope createContainerScopeWithContext(Resource eResource, IScope result, IContainer container,
-			Predicate<IEObjectDescription> filter) {
+	protected IScope createContainerScopeWithContext(Resource eResource, IScope parent, IContainer container,
+			Predicate<IEObjectDescription> filter, EClass type, boolean ignoreCase) {
 		if (eResource != null) {
 			URI uriToFilter = eResource.getURI();
 			if (container.getResourceDescription(uriToFilter) != null)
 				container = new FilterUriContainer(uriToFilter, container);
 		}
-		return createContainerScope(result, container, filter);
+		return createContainerScope(parent, container, filter, type, ignoreCase);
 	}
 
-	protected IScope createContainerScope(IScope parent, IContainer container, Predicate<IEObjectDescription> filter) {
-		Iterable<IResourceDescription> content = container.getResourceDescriptions();
-		if (Iterables.isEmpty(content))
-			return parent;
-		return new ContainerBasedScope(parent, filter, container);
+	protected IScope createContainerScope(IScope parent, IContainer container, Predicate<IEObjectDescription> filter, EClass type, boolean ignoreCase) {
+		return SelectableBasedScope.createScope(parent, container, filter, type, ignoreCase);
 	}
 
 }

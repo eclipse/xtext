@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -16,10 +15,7 @@ import org.eclipse.xtext.util.Strings;
  */
 public abstract class AbstractEObjectDescription implements IEObjectDescription {
 	
-	private boolean ignoreCase;
-
-	public AbstractEObjectDescription(boolean isIgnoreCase) {
-		this.ignoreCase =isIgnoreCase;
+	protected AbstractEObjectDescription() {
 	}
 	
 	@Override
@@ -35,11 +31,4 @@ public abstract class AbstractEObjectDescription implements IEObjectDescription 
 		return Strings.EMPTY_ARRAY;
 	}
 	
-	protected QualifiedName getIgnoreCaseName() {
-		return getName().toLowerCase();
-	}
-	
-	public boolean isIgnoreCase() {
-		return ignoreCase;
-	}
 }

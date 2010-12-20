@@ -17,15 +17,13 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
  */
 public class AliasedEObjectDescription extends AbstractEObjectDescription {
 
 	private IEObjectDescription delegate;
 	private QualifiedName alias;
 
-	public AliasedEObjectDescription(QualifiedName alias, IEObjectDescription delegate, boolean ignoreCase) {
-		super(ignoreCase);
+	public AliasedEObjectDescription(QualifiedName alias, IEObjectDescription delegate) {
 		this.alias = alias;
 		this.delegate = delegate;
 	}

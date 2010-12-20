@@ -7,15 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
-import static com.google.common.collect.Iterables.*;
-
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.ISelectable;
 import org.eclipse.xtext.resource.ResourceSetReferencingResourceSet;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -37,7 +37,8 @@ public class ResourceSetGlobalScopeProvider extends AbstractGlobalScopeProvider 
 	}
 
 	@Override
-	protected IScope getScope(Resource resource, Predicate<IEObjectDescription> filter) {
+	protected IScope getScope(Resource resource, boolean ignoreCase, EClass type,
+			Predicate<IEObjectDescription> filter) {
 		IScope parent = IScope.NULLSCOPE;
 		if (resource == null || resource.getResourceSet() == null)
 			return parent;
@@ -46,31 +47,62 @@ public class ResourceSetGlobalScopeProvider extends AbstractGlobalScopeProvider 
 			ResourceSetReferencingResourceSet set = (ResourceSetReferencingResourceSet) resourceSet;
 			Iterable<ResourceSet> referencedSets = Iterables.reverse(set.getReferencedResourceSets());
 			for (ResourceSet referencedSet : referencedSets) {
-				parent = createScopeWithQualifiedNames(parent, resource, filter, referencedSet);
+				parent = createScopeWithQualifiedNames(parent, resource, filter, referencedSet, type, ignoreCase);
 			}
 		}
-		return createScopeWithQualifiedNames(parent, resource, filter, resourceSet);
+		return createScopeWithQualifiedNames(parent, resource, filter, resourceSet, type, ignoreCase);
 	}
-
+	
 	protected IScope createScopeWithQualifiedNames(final IScope parent, final Resource resource,
-			final Predicate<IEObjectDescription> filter, ResourceSet resourceSet) {
-		final Iterable<IResourceDescription> resourceDescriptions = Iterables.transform(resourceSet.getResources(), new Function<Resource, IResourceDescription>() {
-			public IResourceDescription apply(Resource from) {
+			final Predicate<IEObjectDescription> filter, ResourceSet resourceSet, EClass type, boolean ignoreCase) {
+		final Iterable<ISelectable> resourceDescriptions = Iterables.transform(resourceSet.getResources(), new Function<Resource, ISelectable>() {
+			public ISelectable apply(Resource from) {
 				return resourceDecriptionProvider.getResourceDescription(from);
 			}
 		});
-		return new AbstractScope(parent) {
+		ISelectable compound = new ISelectable() {
 			
-			@Override
-			public Iterable<IEObjectDescription> getLocalElements(final ISelector selector) {
-				Iterable<Iterable<IEObjectDescription>> result = transform(resourceDescriptions, new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
-					public Iterable<IEObjectDescription> apply(IResourceDescription from) {
-						return from.getExportedObjects(selector);
+			public boolean isEmpty() {
+				for (ISelectable description: resourceDescriptions) {
+					if (!description.isEmpty())
+						return false;
+				}
+				return true;
+			}
+			
+			public Iterable<IEObjectDescription> getExportedObjectsByType(final EClass type) {
+				return Iterables.concat(Iterables.transform(resourceDescriptions, new Function<ISelectable, Iterable<IEObjectDescription>>() {
+					public Iterable<IEObjectDescription> apply(ISelectable from) {
+						return from.getExportedObjectsByType(type);
 					}
-				});
-				return filter(concat(result), filter);
+				}));
+			}
+			
+			public Iterable<IEObjectDescription> getExportedObjectsByObject(final EObject object) {
+				return Iterables.concat(Iterables.transform(resourceDescriptions, new Function<ISelectable, Iterable<IEObjectDescription>>() {
+					public Iterable<IEObjectDescription> apply(ISelectable from) {
+						return from.getExportedObjectsByObject(object);
+					}
+				}));
+			}
+			
+			public Iterable<IEObjectDescription> getExportedObjects(final EClass type, final QualifiedName name, final boolean ignoreCase) {
+				return Iterables.concat(Iterables.transform(resourceDescriptions, new Function<ISelectable, Iterable<IEObjectDescription>>() {
+					public Iterable<IEObjectDescription> apply(ISelectable from) {
+						return from.getExportedObjects(type, name, ignoreCase);
+					}
+				}));
+			}
+			
+			public Iterable<IEObjectDescription> getExportedObjects() {
+				return Iterables.concat(Iterables.transform(resourceDescriptions, new Function<ISelectable, Iterable<IEObjectDescription>>() {
+					public Iterable<IEObjectDescription> apply(ISelectable from) {
+						return from.getExportedObjects();
+					}
+				}));
 			}
 		};
+		return SelectableBasedScope.createScope(parent, compound, filter, type, ignoreCase);
 	}
 
 }

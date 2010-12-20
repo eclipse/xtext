@@ -83,26 +83,17 @@ public class Scopes {
 	 * filtered out.
 	 */
 	public static <T extends EObject> Iterable<IEObjectDescription> scopedElementsFor(Iterable<? extends T> elements,
-			final Function<T, QualifiedName> nameComputation, final boolean ignoreCase) {
+			final Function<T, QualifiedName> nameComputation) {
 		Iterable<IEObjectDescription> transformed = Iterables.transform(elements,
 				new Function<T, IEObjectDescription>() {
 					public IEObjectDescription apply(T from) {
 						final QualifiedName qualifiedName = nameComputation.apply(from);
 						if (qualifiedName != null)
-							return new EObjectDescription(qualifiedName, from, null, ignoreCase);
+							return new EObjectDescription(qualifiedName, from, null);
 						return null;
 					}
 				});
 		return Iterables.filter(transformed, Predicates.notNull());
-	}
-	/**
-	 * transforms an {@link Iterable} of {@link EObject}s into an {@link Iterable} of {@link IScopedElement}s computing
-	 * the name of the elements using the passed {@link Function} If the passed function returns null the object is
-	 * filtered out.
-	 */
-	public static <T extends EObject> Iterable<IEObjectDescription> scopedElementsFor(Iterable<? extends T> elements,
-			final Function<T, QualifiedName> nameComputation) {
-		return scopedElementsFor(elements, nameComputation, false);
 	}
 	
 	/**

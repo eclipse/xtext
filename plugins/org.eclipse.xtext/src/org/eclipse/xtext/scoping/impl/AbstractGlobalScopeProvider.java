@@ -7,17 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
+import org.eclipse.xtext.scoping.ICaseInsensitivityHelper;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.inject.Inject;
 
 /**
@@ -28,6 +28,9 @@ public abstract class AbstractGlobalScopeProvider implements IGlobalScopeProvide
 
 	@Inject
 	private ResourceDescriptionsProvider provider;
+	
+	@Inject
+	private ICaseInsensitivityHelper caseInsensitivityHelper;
 
 	public IResourceDescriptions getResourceDescriptions(Resource resource) {
 		return provider.getResourceDescriptions(resource);
@@ -37,20 +40,23 @@ public abstract class AbstractGlobalScopeProvider implements IGlobalScopeProvide
 		this.provider = provider;
 	}
 	
-	public IScope getScope(Resource context, final EReference reference) {
-		return getScope(context,reference,Predicates.<IEObjectDescription>alwaysTrue());
+	public IScope getScope(Resource resource, final EReference reference) {
+		return getScope(resource, reference, null);
 	}
 	
-	public IScope getScope(Resource context, final EReference reference, Predicate<IEObjectDescription> filter) {
-		final Predicate<IEObjectDescription> predicate = filter==null?Predicates.<IEObjectDescription>alwaysTrue():filter;
-		return getScope(context, new Predicate<IEObjectDescription>(){
-			public boolean apply(IEObjectDescription input) {
-				return EcoreUtil2.isAssignableFrom(reference.getEReferenceType(), input.getEClass()) && predicate.apply(input);
-			}
-		});
+	public IScope getScope(Resource resource, final EReference reference, Predicate<IEObjectDescription> filter) {
+		return getScope(resource, isIgnoreCase(reference), reference.getEReferenceType(), filter);
 	}
 
-	protected IScope getScope(Resource context, Predicate<IEObjectDescription> predicate) {
+	protected IScope getScope(Resource resource, boolean ignoreCase, EClass type, Predicate<IEObjectDescription> predicate) {
 		return IScope.NULLSCOPE;
+	}
+	
+	protected boolean isIgnoreCase(EReference reference) {
+		return caseInsensitivityHelper.isIgnoreCase(reference);
+	}
+	
+	public void setCaseInsensitivityHelper(ICaseInsensitivityHelper caseInsensitivityHelper) {
+		this.caseInsensitivityHelper = caseInsensitivityHelper;
 	}
 }

@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.impl;
 
-import static org.eclipse.xtext.scoping.Selectors.*;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -116,30 +114,30 @@ public class DefaultResourceDescriptionTest extends TestCase implements IQualifi
 	}
 
 	public void testGetExportedEObjects_EClass_String() throws Exception {
-		assertContains(description.getExportedObjects(selectByName(QualifiedName.create(pack.getName()),selectByType(pack.eClass()))), pack);
-		assertContains(description.getExportedObjects(selectByName(QualifiedName.create("foo"),selectByType(pack.eClass()))));
-		assertContains(description.getExportedObjects(selectByName(QualifiedName.create("foo"),selectByType(eClass.eClass()))));
+		assertContains(description.getExportedObjects(pack.eClass(), QualifiedName.create(pack.getName()), false), pack);
+		assertContains(description.getExportedObjects(pack.eClass(), QualifiedName.create("foo"), false));
+		assertContains(description.getExportedObjects(eClass.eClass(), QualifiedName.create("foo"), false));
 	}
 	
 	public void testGetExportedEObjectsIgnoreCase() throws Exception {
-		assertContains(description.getExportedObjects(selectByNameIgnoreCase(QualifiedName.create(pack.getName().toUpperCase()),selectByType(pack.eClass()))), pack);
-		assertContains(description.getExportedObjects(selectByNameIgnoreCase(QualifiedName.create("foo").toUpperCase(),selectByType(pack.eClass()))));
-		assertContains(description.getExportedObjects(selectByNameIgnoreCase(QualifiedName.create("foo").toUpperCase(),selectByType(eClass.eClass()))));
+		assertContains(description.getExportedObjects(pack.eClass(), QualifiedName.create(pack.getName().toUpperCase()), true), pack);
+		assertContains(description.getExportedObjects(pack.eClass(), QualifiedName.create("foo").toUpperCase(),true));
+		assertContains(description.getExportedObjects(eClass.eClass(), QualifiedName.create("foo").toUpperCase(),true));
 	}
 	
 	public void testGetExportedEObjects_EClass() throws Exception {
-		assertContains(description.getExportedObjects(selectByType(EcorePackage.Literals.EPACKAGE)),pack);
-		assertContains(description.getExportedObjects(selectByType(EcorePackage.Literals.ECLASSIFIER)),eClass,dtype);
-		assertContains(description.getExportedObjects(selectByType(EcorePackage.Literals.ECLASS)),eClass);
-		assertContains(description.getExportedObjects(selectByType(EcorePackage.Literals.EDATA_TYPE)),dtype);
-		assertContains(description.getExportedObjects(selectByType(EcorePackage.Literals.EATTRIBUTE)));
+		assertContains(description.getExportedObjectsByType(EcorePackage.Literals.EPACKAGE),pack);
+		assertContains(description.getExportedObjectsByType(EcorePackage.Literals.ECLASSIFIER),eClass,dtype);
+		assertContains(description.getExportedObjectsByType(EcorePackage.Literals.ECLASS),eClass);
+		assertContains(description.getExportedObjectsByType(EcorePackage.Literals.EDATA_TYPE),dtype);
+		assertContains(description.getExportedObjectsByType(EcorePackage.Literals.EATTRIBUTE));
 	}
 	
 	public void testGetExportedEObjectsForEObject() throws Exception {
-		assertContains(description.getExportedObjects(selectByEObject(pack)),pack);
-		assertContains(description.getExportedObjects(selectByEObject(eClass)),eClass);
-		assertContains(description.getExportedObjects(selectByEObject(dtype)),dtype);
-		assertContains(description.getExportedObjects(selectByEObject(EcoreFactory.eINSTANCE.createEAttribute())));
+		assertContains(description.getExportedObjectsByObject(pack), pack);
+		assertContains(description.getExportedObjectsByObject(eClass),eClass);
+		assertContains(description.getExportedObjectsByObject(dtype),dtype);
+		assertContains(description.getExportedObjectsByObject(EcoreFactory.eINSTANCE.createEAttribute()));
 	}
 
 	private void assertContains(Iterable<IEObjectDescription> exportedObjects, EObject ...expectedContents) {

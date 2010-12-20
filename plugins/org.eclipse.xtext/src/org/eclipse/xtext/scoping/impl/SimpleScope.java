@@ -7,61 +7,66 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
-import static com.google.common.collect.Iterables.*;
-
 import java.util.Set;
 
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.ISelector;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Sets;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
-public class SimpleScope extends AbstractScope implements Function<IEObjectDescription, IEObjectDescription> {
+public class SimpleScope extends AbstractScope {
 	
-	protected Iterable<IEObjectDescription> descriptions;
+	private final Iterable<IEObjectDescription> descriptions;
 	
-	public SimpleScope(IScope parent, Iterable<IEObjectDescription> descriptions) {
-		super(parent);
+	protected Set<Object> shadowingIndex;
+	
+	public SimpleScope(IScope parent, Iterable<IEObjectDescription> descriptions, boolean ignoreCase) {
+		super(parent, ignoreCase);
+		if (descriptions == null)
+			throw new IllegalArgumentException("descriptions may not be null");
 		this.descriptions = descriptions;
 	}
-	public SimpleScope(Iterable<IEObjectDescription> descriptions) {
-		this(IScope.NULLSCOPE,descriptions);
+	
+	public SimpleScope(IScope parent, Iterable<IEObjectDescription> descriptions) {
+		this(parent, descriptions, false);
 	}
 	
-	protected Set<Object> shadowingIndex = null;
+	public SimpleScope(Iterable<IEObjectDescription> descriptions, boolean ignoreCase) {
+		this(IScope.NULLSCOPE, descriptions, ignoreCase);
+	}
+	
+	public SimpleScope(Iterable<IEObjectDescription> descriptions) {
+		this(IScope.NULLSCOPE, descriptions, false);
+	}
+	
+	@Override
+	protected Iterable<IEObjectDescription> getAllLocalElements() {
+		return descriptions;
+	}
 	
 	/**
 	 * @return the key of the given description, which makes it shadowing others
 	 */
 	protected Object getShadowingKey(IEObjectDescription description) {
+		if (isIgnoreCase())
+			return description.getName().toLowerCase();
 		return description.getName();
-	}
-	
-	protected Iterable<IEObjectDescription> trackKeys(Iterable<IEObjectDescription> localElements) {
-		shadowingIndex = Sets.newHashSet();
-		return transform(localElements, this);
 	}
 	
 	@Override
 	protected boolean isShadowed(IEObjectDescription fromParent) {
-		boolean filtered = shadowingIndex.contains(getShadowingKey(fromParent));
-		return filtered;
+		if (shadowingIndex == null) {
+			shadowingIndex = Sets.newHashSet();
+			for(IEObjectDescription local: getAllLocalElements()) {
+				shadowingIndex.add(getShadowingKey(local));
+			}
+		}
+		boolean result = shadowingIndex.contains(getShadowingKey(fromParent));
+		return result;
 	}
-
-	@Override
-	public Iterable<IEObjectDescription> getLocalElements(final ISelector selector) {
-		return selector.applySelector(trackKeys(descriptions));
-	}
-	
-	public IEObjectDescription apply(IEObjectDescription from) {
-		shadowingIndex.add(getShadowingKey(from));
-		return from;
-	}
-
 
 }

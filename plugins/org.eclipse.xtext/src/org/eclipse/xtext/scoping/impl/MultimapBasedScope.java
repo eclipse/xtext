@@ -13,55 +13,77 @@ import java.util.Collections;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.ISelector;
 
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 
 /**
- * @author Sven Efftinge - Initial contribution and API
- * 
  * A scope implemented using a {@link Multimap}. 
  * 
  * This implementation assumes, that the keys of the {@link Multimap} are the keys of the contained {@link org.eclipse.xtext.resource.EObjectDescription}s
  * as well as the name.
  * 
  * When looking up elements using {@link ISelector.SelectByName} this implementation looks up the the elements from the map, hence are much 
- * more efficient for many {@link IEObjectDescription}s.  
- * 
+ * more efficient for many {@link IEObjectDescription}s.
+ *   
+ * @author Sven Efftinge - Initial contribution and API 
+ * @author Sebastian Zarnekow
  */
 public class MultimapBasedScope extends AbstractScope {
 
+	public static IScope createScope(IScope parent, Iterable<IEObjectDescription> descriptions, boolean ignoreCase) {
+		Multimap<QualifiedName, IEObjectDescription> map = null;
+		for(IEObjectDescription description: descriptions) {
+			if (map == null)
+				map = LinkedHashMultimap.create(5,2);
+			if (ignoreCase)
+				map.put(description.getName().toLowerCase(), description);
+			else
+				map.put(description.getName(), description);
+		}
+		if (map == null || map.isEmpty()) {
+			return parent;
+		}
+		return new MultimapBasedScope(parent, map, ignoreCase);
+	}
+	
 	private Multimap<QualifiedName, IEObjectDescription> elements;
 
-	public MultimapBasedScope(IScope parent, Multimap<QualifiedName, IEObjectDescription> elements) {
-		super(parent);
+	protected MultimapBasedScope(IScope parent, Multimap<QualifiedName, IEObjectDescription> elements, boolean ignoreCase) {
+		super(parent, ignoreCase);
 		this.elements = elements;
+	}
+	
+	@Override
+	protected Iterable<IEObjectDescription> getAllLocalElements() {
+		return elements.values();
 	}
 
 	@Override
-	public Iterable<IEObjectDescription> getLocalElements(ISelector selector) {
-		if (selector instanceof ISelector.SelectByName) {
-			QualifiedName name = ((ISelector.SelectByName) selector).getName().toLowerCase();
-			if (elements.containsKey(name)) {
-				return selector.applySelector(elements.get(name));
-			} else {
-				return Collections.emptySet();
-			}
+	protected Iterable<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
+		QualifiedName query = name;
+		if (isIgnoreCase()) {
+			query = name.toLowerCase();
 		}
-		return selector.applySelector(elements.values());
+		if (elements.containsKey(query)) {
+			Collection<IEObjectDescription> result = elements.get(query);
+			return result;
+		}
+		return Collections.emptyList();
 	}
 	
 	@Override
 	protected boolean isShadowed(IEObjectDescription fromParent) {
-		final QualifiedName lowerCase = fromParent.getName().toLowerCase();
-		if (elements.containsKey(lowerCase)) {
-			Collection<IEObjectDescription> shadowing = elements.get(lowerCase);
-			for (IEObjectDescription ieObjectDescription : shadowing) {
-				if (ieObjectDescription.getName().equals(fromParent.getName()))
-					return true;
-			}
+		QualifiedName name = fromParent.getName();
+		if (isIgnoreCase()) {
+			name = name.toLowerCase();
 		}
-		return false;
+		boolean result = elements.containsKey(name);
+		return result;
 	}
+
+//	public Multimap<QualifiedName, IEObjectDescription> getMap() {
+//		return elements;
+//	}
 	
 }

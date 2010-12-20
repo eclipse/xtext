@@ -13,11 +13,13 @@ import java.util.Collections;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsBasedContainer;
-import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.common.collect.Maps;
 
@@ -64,10 +66,31 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 	}
 	
 	@Override
-	public Iterable<IEObjectDescription> getElements(ISelector selector) {
+	public Iterable<IEObjectDescription> getExportedObjects() {
 		if (state.getContents().isEmpty())
 			return emptyList();
-		return super.getElements(selector);
+		return super.getExportedObjects();
 	}
 	
+	@Override
+	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
+		if (state.getContents().isEmpty())
+			return emptyList();
+		return super.getExportedObjectsByType(type);
+	}
+	
+	@Override
+	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
+		if (state.getContents().isEmpty())
+			return emptyList();
+		return super.getExportedObjectsByObject(object);
+	}
+	
+	@Override
+	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName qualifiedName, boolean ignoreCase) {
+		if (state.getContents().isEmpty())
+			return emptyList();
+		return super.getExportedObjects(type, qualifiedName, ignoreCase);
+	}
+
 }

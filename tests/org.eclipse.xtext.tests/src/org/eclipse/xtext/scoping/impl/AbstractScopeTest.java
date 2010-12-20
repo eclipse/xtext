@@ -33,7 +33,7 @@ public class AbstractScopeTest extends TestCase {
 		IEObjectDescription b = EObjectDescription
 				.create(QualifiedName.create("foo"), EcorePackage.Literals.EATTRIBUTE);
 		IEObjectDescription c = EObjectDescription.create(QualifiedName.create("foo"), EcorePackage.Literals.EBYTE);
-		SimpleScope outer = new SimpleScope(singleton(a));
+		SimpleScope outer = new SimpleScope(singleton(a), false);
 		SimpleScope middle = new SimpleScope(outer, singleton(b));
 		SimpleScope inner = new SimpleScope(middle, singleton(c));
 		assertNull(inner.getSingleElement(new ISelector.SelectByEObject(EcorePackage.Literals.EANNOTATION)));
@@ -75,20 +75,20 @@ public class AbstractScopeTest extends TestCase {
 		}
 
 		public LazinessTestScope(String name, IScope parent) {
-			super(parent);
+			super(parent, false);
 			this.name = name;
 		}
 
 		int numberOfCalls = 0;
 
 		@Override
-		public Iterable<IEObjectDescription> getLocalElements(final ISelector selector) {
-			return selector.applySelector(new Iterable<IEObjectDescription>() {
+		protected Iterable<IEObjectDescription> getAllLocalElements() {
+			return new Iterable<IEObjectDescription>() {
 				public Iterator<IEObjectDescription> iterator() {
 					numberOfCalls++;
 					return singleton(
 							(IEObjectDescription) new EObjectDescription(QualifiedName.create(name),
-									EcorePackage.Literals.EATTRIBUTE, null, false)).iterator();
+									EcorePackage.Literals.EATTRIBUTE, null)).iterator();
 				}
 
 				@Override
@@ -99,8 +99,7 @@ public class AbstractScopeTest extends TestCase {
 						numberOfCalls--;
 					}
 				}
-			});
+			};
 		}
-
 	}
 }

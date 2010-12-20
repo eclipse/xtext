@@ -7,15 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.xtext.EcoreUtil2;
+import java.util.Iterator;
+
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.ISelector;
-import org.eclipse.xtext.scoping.ISelector.DelegatingSelector;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 /**
@@ -35,36 +33,18 @@ public class FilteringScope implements IScope {
 		this.filter = filter;
 	}
 	
-	public FilteringScope(IScope delegate, final EClass ...allowedTypes) {
-		this.delegate = delegate;
-		this.filter = new Predicate<IEObjectDescription>(){
-
-			public boolean apply(IEObjectDescription input) {
-				for (EClass eClass : allowedTypes) {
-					if (EcoreUtil2.isAssignableFrom(eClass, input.getEClass()))
-						return true;
-				}
-				return false;
-			}};
-	}
-
 	public IEObjectDescription getSingleElement(ISelector selector) {
-		return delegate.getSingleElement(enhanceSelector(selector));
+		Iterable<IEObjectDescription> elements = getElements(selector);
+		Iterator<IEObjectDescription> iterator = elements.iterator();
+		if (iterator.hasNext())
+			return iterator.next();
+		return null;
 	}
 
 	public Iterable<IEObjectDescription> getElements(ISelector selector) {
-		return delegate.getElements(enhanceSelector(selector));
+		return Iterables.filter(delegate.getElements(selector), filter);
 	}
-
-	protected ISelector enhanceSelector(ISelector selector) {
-		if (selector instanceof ISelector.DelegatingSelector) {
-			final DelegatingSelector delegatingSelector = (ISelector.DelegatingSelector) selector;
-			delegatingSelector.addDelegate(new ISelector(){
-				public Iterable<IEObjectDescription> applySelector(Iterable<IEObjectDescription> elements) {
-					return Iterables.filter(elements,Predicates.not(filter));
-				}});
-		}
-		return selector;
-	}
+	
+	
 
 }

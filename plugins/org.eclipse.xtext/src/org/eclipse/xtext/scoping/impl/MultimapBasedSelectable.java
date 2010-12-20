@@ -1,11 +1,11 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.resource.impl;
+package org.eclipse.xtext.scoping.impl;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,28 +19,26 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ISelectable;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
+import com.google.inject.internal.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * @author Sven Efftinge
  */
-public class EObjectDescriptionLookUp implements ISelectable {
-	
-	private volatile Multimap<QualifiedName, IEObjectDescription> nameToObjects;
-	
-	private volatile List<IEObjectDescription> allDescriptions;
+public class MultimapBasedSelectable implements ISelectable {
 
-	public EObjectDescriptionLookUp(List<IEObjectDescription> allDescriptions) {
+	private Multimap<QualifiedName, IEObjectDescription> nameToObjects;
+	private List<IEObjectDescription> allDescriptions;
+	
+	public MultimapBasedSelectable(Iterable<IEObjectDescription> allDescriptions) {
 		setExportedObjects(allDescriptions);
 	}
 	
 	public boolean isEmpty() {
-		return allDescriptions.isEmpty();
+		return nameToObjects.isEmpty();
 	}
 	
 	public Iterable<IEObjectDescription> getExportedObjectsByType(final EClass type) {
@@ -73,7 +71,7 @@ public class EObjectDescriptionLookUp implements ISelectable {
 		if (allDescriptions.isEmpty())
 			return Collections.emptyList();
 		QualifiedName lowerCase = name.toLowerCase();
-		if (getNameToObjects().containsKey(lowerCase)) {
+		if (nameToObjects.containsKey(lowerCase)) {
 			Predicate<IEObjectDescription> predicate = ignoreCase 
 				?	new Predicate<IEObjectDescription>() {
 						public boolean apply(IEObjectDescription input) {
@@ -85,7 +83,7 @@ public class EObjectDescriptionLookUp implements ISelectable {
 						return name.equals(input.getName()) && EcoreUtil2.isAssignableFrom(type, input.getEClass());
 					}
 				};
-			return Iterables.filter(getNameToObjects().get(lowerCase), predicate);
+			return Iterables.filter(nameToObjects.get(lowerCase), predicate);
 		} else
 			return Collections.emptyList();
 	}
@@ -94,25 +92,13 @@ public class EObjectDescriptionLookUp implements ISelectable {
 		return allDescriptions;
 	}
 
-	public void setExportedObjects(List<IEObjectDescription> allDescriptions) {
-		synchronized (this) {
-			this.allDescriptions = allDescriptions;
-			this.nameToObjects = null;			
+	public void setExportedObjects(Iterable<IEObjectDescription> allDescriptions) {
+		this.allDescriptions = Lists.newArrayList();
+		this.nameToObjects = LinkedHashMultimap.create(); 
+		for(IEObjectDescription description: allDescriptions) {
+			this.allDescriptions.add(description);
+			nameToObjects.put(description.getName().toLowerCase(), description);
 		}
 	}
 
-	protected Multimap<QualifiedName, IEObjectDescription> getNameToObjects() {
-		if (nameToObjects == null) {
-			synchronized (this) {
-				if (nameToObjects == null) {
-					this.nameToObjects  = Multimaps.index(allDescriptions, new Function<IEObjectDescription, QualifiedName>() {
-						public QualifiedName apply(IEObjectDescription from) {
-							return from.getName().toLowerCase();
-						}
-					});
-				}
-			}
-		}
-		return nameToObjects;
-	}
 }

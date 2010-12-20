@@ -77,10 +77,7 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 			return null;
 		IEObjectDescription eObjectDescription = scope.getSingleElement(getSelector(object));
 		if (eObjectDescription != null) {
-			IEObjectDescription singleElement = scope.getSingleElement(new ISelector.SelectByName(eObjectDescription
-					.getName()));
-			if (singleElement != null && singleElement.getEObjectURI().equals(eObjectDescription.getEObjectURI()))
-				return qualifiedNameConverter.toString(eObjectDescription.getName());
+			return qualifiedNameConverter.toString(eObjectDescription.getName());
 		}
 		return null;
 	}
