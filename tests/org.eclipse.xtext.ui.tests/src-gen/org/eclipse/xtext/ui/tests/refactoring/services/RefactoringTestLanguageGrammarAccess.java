@@ -84,20 +84,21 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Assignment cContainedAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cContainedElementParserRuleCall_1_1_0 = (RuleCall)cContainedAssignment_1_1.eContents().get(0);
-		private final Group cGroup_1_2 = (Group)cGroup_1.eContents().get(2);
-		private final Keyword cRefKeyword_1_2_0 = (Keyword)cGroup_1_2.eContents().get(0);
-		private final Assignment cReferencedAssignment_1_2_1 = (Assignment)cGroup_1_2.eContents().get(1);
-		private final CrossReference cReferencedElementCrossReference_1_2_1_0 = (CrossReference)cReferencedAssignment_1_2_1.eContents().get(0);
-		private final RuleCall cReferencedElementFQNParserRuleCall_1_2_1_0_1 = (RuleCall)cReferencedElementCrossReference_1_2_1_0.eContents().get(1);
-		private final Keyword cRightCurlyBracketKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
+		private final Alternatives cAlternatives_1_1 = (Alternatives)cGroup_1.eContents().get(1);
+		private final Assignment cContainedAssignment_1_1_0 = (Assignment)cAlternatives_1_1.eContents().get(0);
+		private final RuleCall cContainedElementParserRuleCall_1_1_0_0 = (RuleCall)cContainedAssignment_1_1_0.eContents().get(0);
+		private final Group cGroup_1_1_1 = (Group)cAlternatives_1_1.eContents().get(1);
+		private final Keyword cRefKeyword_1_1_1_0 = (Keyword)cGroup_1_1_1.eContents().get(0);
+		private final Assignment cReferencedAssignment_1_1_1_1 = (Assignment)cGroup_1_1_1.eContents().get(1);
+		private final CrossReference cReferencedElementCrossReference_1_1_1_1_0 = (CrossReference)cReferencedAssignment_1_1_1_1.eContents().get(0);
+		private final RuleCall cReferencedElementFQNParserRuleCall_1_1_1_1_0_1 = (RuleCall)cReferencedElementCrossReference_1_1_1_1_0.eContents().get(1);
+		private final Keyword cRightCurlyBracketKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
 		
 		//Element:
-		//	name=ID ("{" contained+=Element* ("ref" referenced+=[Element|FQN])* "}")?;
+		//	name=ID ("{" (contained+=Element | "ref" referenced+=[Element|FQN])* "}")?;
 		public ParserRule getRule() { return rule; }
 
-		//name=ID ("{" contained+=Element* ("ref" referenced+=[Element|FQN])* "}")?
+		//name=ID ("{" (contained+=Element | "ref" referenced+=[Element|FQN])* "}")?
 		public Group getGroup() { return cGroup; }
 
 		//name=ID
@@ -106,35 +107,38 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
-		//("{" contained+=Element* ("ref" referenced+=[Element|FQN])* "}")?
+		//("{" (contained+=Element | "ref" referenced+=[Element|FQN])* "}")?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_1_0() { return cLeftCurlyBracketKeyword_1_0; }
 
-		//contained+=Element*
-		public Assignment getContainedAssignment_1_1() { return cContainedAssignment_1_1; }
+		//(contained+=Element | "ref" referenced+=[Element|FQN])*
+		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
+
+		//contained+=Element
+		public Assignment getContainedAssignment_1_1_0() { return cContainedAssignment_1_1_0; }
 
 		//Element
-		public RuleCall getContainedElementParserRuleCall_1_1_0() { return cContainedElementParserRuleCall_1_1_0; }
+		public RuleCall getContainedElementParserRuleCall_1_1_0_0() { return cContainedElementParserRuleCall_1_1_0_0; }
 
-		//("ref" referenced+=[Element|FQN])*
-		public Group getGroup_1_2() { return cGroup_1_2; }
+		//"ref" referenced+=[Element|FQN]
+		public Group getGroup_1_1_1() { return cGroup_1_1_1; }
 
 		//"ref"
-		public Keyword getRefKeyword_1_2_0() { return cRefKeyword_1_2_0; }
+		public Keyword getRefKeyword_1_1_1_0() { return cRefKeyword_1_1_1_0; }
 
 		//referenced+=[Element|FQN]
-		public Assignment getReferencedAssignment_1_2_1() { return cReferencedAssignment_1_2_1; }
+		public Assignment getReferencedAssignment_1_1_1_1() { return cReferencedAssignment_1_1_1_1; }
 
 		//[Element|FQN]
-		public CrossReference getReferencedElementCrossReference_1_2_1_0() { return cReferencedElementCrossReference_1_2_1_0; }
+		public CrossReference getReferencedElementCrossReference_1_1_1_1_0() { return cReferencedElementCrossReference_1_1_1_1_0; }
 
 		//FQN
-		public RuleCall getReferencedElementFQNParserRuleCall_1_2_1_0_1() { return cReferencedElementFQNParserRuleCall_1_2_1_0_1; }
+		public RuleCall getReferencedElementFQNParserRuleCall_1_1_1_1_0_1() { return cReferencedElementFQNParserRuleCall_1_1_1_1_0_1; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_1_3() { return cRightCurlyBracketKeyword_1_3; }
+		public Keyword getRightCurlyBracketKeyword_1_2() { return cRightCurlyBracketKeyword_1_2; }
 	}
 
 	public class FQNElements extends AbstractParserRuleElementFinder {
@@ -245,7 +249,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//Element:
-	//	name=ID ("{" contained+=Element* ("ref" referenced+=[Element|FQN])* "}")?;
+	//	name=ID ("{" (contained+=Element | "ref" referenced+=[Element|FQN])* "}")?;
 	public ElementElements getElementAccess() {
 		return (pElement != null) ? pElement : (pElement = new ElementElements());
 	}

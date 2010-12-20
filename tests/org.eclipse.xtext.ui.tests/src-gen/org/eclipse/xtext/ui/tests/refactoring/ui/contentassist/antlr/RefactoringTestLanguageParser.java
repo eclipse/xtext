@@ -38,18 +38,19 @@ public class RefactoringTestLanguageParser extends AbstractContentAssistParser {
 				private static final long serialVersionUID = 1L;
 				{
 					put(grammarAccess.getAbstractElementAccess().getAlternatives(), "rule__AbstractElement__Alternatives");
+					put(grammarAccess.getElementAccess().getAlternatives_1_1(), "rule__Element__Alternatives_1_1");
 					put(grammarAccess.getImportAccess().getGroup(), "rule__Import__Group__0");
 					put(grammarAccess.getElementAccess().getGroup(), "rule__Element__Group__0");
 					put(grammarAccess.getElementAccess().getGroup_1(), "rule__Element__Group_1__0");
-					put(grammarAccess.getElementAccess().getGroup_1_2(), "rule__Element__Group_1_2__0");
+					put(grammarAccess.getElementAccess().getGroup_1_1_1(), "rule__Element__Group_1_1_1__0");
 					put(grammarAccess.getFQNAccess().getGroup(), "rule__FQN__Group__0");
 					put(grammarAccess.getFQNAccess().getGroup_1(), "rule__FQN__Group_1__0");
 					put(grammarAccess.getFQNWithWCAccess().getGroup(), "rule__FQNWithWC__Group__0");
 					put(grammarAccess.getMainAccess().getElementsAssignment(), "rule__Main__ElementsAssignment");
 					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1(), "rule__Import__ImportedNamespaceAssignment_1");
 					put(grammarAccess.getElementAccess().getNameAssignment_0(), "rule__Element__NameAssignment_0");
-					put(grammarAccess.getElementAccess().getContainedAssignment_1_1(), "rule__Element__ContainedAssignment_1_1");
-					put(grammarAccess.getElementAccess().getReferencedAssignment_1_2_1(), "rule__Element__ReferencedAssignment_1_2_1");
+					put(grammarAccess.getElementAccess().getContainedAssignment_1_1_0(), "rule__Element__ContainedAssignment_1_1_0");
+					put(grammarAccess.getElementAccess().getReferencedAssignment_1_1_1_1(), "rule__Element__ReferencedAssignment_1_1_1_1");
 				}
 			};
 		}

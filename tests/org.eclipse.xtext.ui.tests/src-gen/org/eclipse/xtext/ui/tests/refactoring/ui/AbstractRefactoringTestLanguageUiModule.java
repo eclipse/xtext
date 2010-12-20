@@ -88,5 +88,10 @@ public abstract class AbstractRefactoringTestLanguageUiModule extends DefaultUiM
 		return org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.exporting.QualifiedNamesFragment
+	public Class<? extends org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator> bindIDependentElementsCalculator() {
+		return org.eclipse.xtext.ui.refactoring.impl.DefaultDependentElementsCalculator.class;
+	}
+
 
 }

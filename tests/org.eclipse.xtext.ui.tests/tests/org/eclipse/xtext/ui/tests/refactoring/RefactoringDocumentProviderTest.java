@@ -100,7 +100,7 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 		
 		Change change = cleanDocument.createChange(CHANGE_NAME, textEdit);
 		assertTrue(change instanceof DisplayChangeWrapper);
-		assertEquals(TEST_FILE_NAME + " - " + TEST_FILE_PATH, change.getName());
+		assertEquals(TEST_FILE_NAME + " - " + TEST_PROJECT, change.getName());
 		assertTrue(((DisplayChangeWrapper) change).getDelegate() instanceof DocumentChange);
 		
 		Change undoChange = checkEdit(cleanDocument, textEdit);

@@ -7,11 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.refactoring;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.refactoring.IRefactoringDocument;
@@ -48,17 +45,7 @@ public class DefaultRenameElementStrategyTest extends AbstractXtextTests {
 		assertNotNull(targetElement);
 		assertTrue(targetElement instanceof Element);
 		assertEquals("A", ((Element) targetElement).getName());
-		IRefactoringDocument mockDocument = new IRefactoringDocument() {
-			public Change createChange(String name, TextEdit textEdit) {
-				return null;
-			}
-			public URI getURI() {
-				return resource.getURI();
-			}
-			public String getContents() {
-				return "";
-			}
-		};
+		IRefactoringDocument mockDocument = new MockRefactoringDocument(resource.getURI(), null);
 		IRenameStrategy renameElementStrategy = strategyProvider.get(targetElement, mockDocument);
 		assertNotNull(renameElementStrategy);
 		assertEquals("A", renameElementStrategy.getCurrentName());

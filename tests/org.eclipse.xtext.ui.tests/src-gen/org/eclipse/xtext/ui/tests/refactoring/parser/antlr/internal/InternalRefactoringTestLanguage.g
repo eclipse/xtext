@@ -221,10 +221,10 @@ ruleElement returns [EObject current=null]
     {
     	newLeafNode(otherlv_1, grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_1_0());
     }
-(
+((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getElementAccess().getContainedElementParserRuleCall_1_1_0()); 
+	        newCompositeNode(grammarAccess.getElementAccess().getContainedElementParserRuleCall_1_1_0_0()); 
 	    }
 		lv_contained_2_0=ruleElement		{
 	        if ($current==null) {
@@ -239,9 +239,10 @@ ruleElement returns [EObject current=null]
 	    }
 
 )
-)*(	otherlv_3='ref' 
+)
+    |(	otherlv_3='ref' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getElementAccess().getRefKeyword_1_2_0());
+    	newLeafNode(otherlv_3, grammarAccess.getElementAccess().getRefKeyword_1_1_1_0());
     }
 (
 (
@@ -251,16 +252,16 @@ ruleElement returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getElementAccess().getReferencedElementCrossReference_1_2_1_0()); 
+	        newCompositeNode(grammarAccess.getElementAccess().getReferencedElementCrossReference_1_1_1_1_0()); 
 	    }
 		ruleFQN		{ 
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))*	otherlv_5='}' 
+)))*	otherlv_5='}' 
     {
-    	newLeafNode(otherlv_5, grammarAccess.getElementAccess().getRightCurlyBracketKeyword_1_3());
+    	newLeafNode(otherlv_5, grammarAccess.getElementAccess().getRightCurlyBracketKeyword_1_2());
     }
 )?)
 ;

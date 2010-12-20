@@ -7,14 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.refactoring;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.ltk.core.refactoring.Change;
-import org.eclipse.text.edits.TextEdit;
+import junit.framework.TestCase;
+
 import org.eclipse.xtext.ui.refactoring.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.impl.OffsetCorrector;
 import org.eclipse.xtext.util.ReplaceRegion;
-
-import junit.framework.TestCase;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -27,7 +24,7 @@ public class OffsetCorrectorTest extends TestCase {
 	}
 	
 	public void testGrowDeclaringDocument() {
-		IRefactoringDocument declarationDocument = createMockDocument();
+		IRefactoringDocument declarationDocument = new MockRefactoringDocument();
 		ReplaceRegion declarationEdit = new ReplaceRegion(1, 2, "foo");
 		OffsetCorrector offsetCorrector = new OffsetCorrector(declarationDocument, declarationEdit);
 		assertEquals(0, offsetCorrector.oldToNew(declarationDocument, 0));
@@ -39,7 +36,7 @@ public class OffsetCorrectorTest extends TestCase {
 	}
 
 	public void testShrinkDeclaringDocument() {
-		IRefactoringDocument declarationDocument = createMockDocument();
+		IRefactoringDocument declarationDocument = new MockRefactoringDocument();
 		ReplaceRegion declarationEdit = new ReplaceRegion(1, 2, "f");
 		OffsetCorrector offsetCorrector = new OffsetCorrector(declarationDocument, declarationEdit);
 		assertEquals(0, offsetCorrector.oldToNew(declarationDocument, 0));
@@ -51,29 +48,15 @@ public class OffsetCorrectorTest extends TestCase {
 	}
 
 	public void testUnaffectedDocument() {
-		IRefactoringDocument declarationDocument = createMockDocument();
+		IRefactoringDocument declarationDocument = new MockRefactoringDocument();
 		ReplaceRegion declarationEdit = new ReplaceRegion(1, 2, "foo");
 		OffsetCorrector offsetCorrector = new OffsetCorrector(declarationDocument, declarationEdit);
-		IRefactoringDocument otherDocument = createMockDocument();
+		IRefactoringDocument otherDocument = new MockRefactoringDocument();
 		assertEquals(0, offsetCorrector.oldToNew(otherDocument, 0));
 		assertEquals(1, offsetCorrector.oldToNew(otherDocument, 1));
 		assertEquals(3, offsetCorrector.oldToNew(otherDocument, 3));
 		assertEquals(0, offsetCorrector.newToOld(otherDocument, 0));
 		assertEquals(1, offsetCorrector.newToOld(otherDocument, 1));
 		assertEquals(5, offsetCorrector.newToOld(otherDocument, 5));		
-	}
-
-	protected IRefactoringDocument createMockDocument() {
-		return new IRefactoringDocument() {
-			public Change createChange(String name, TextEdit textEdit) {
-				return null;
-			}
-			public URI getURI() {
-				return null;
-			}
-			public String getContents() {
-				return null;
-			}
-		};
 	}
 }
