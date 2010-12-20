@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.impl;
 
-import static org.eclipse.xtext.scoping.Selectors.*;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -84,9 +82,9 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 	}
 	
 	public void testEmptyResourceSet() {
-		Iterable<IEObjectDescription> iterable = container.getElements(selectByType(EcorePackage.Literals.EOBJECT));
+		Iterable<IEObjectDescription> iterable = container.getExportedObjectsByType(EcorePackage.Literals.EOBJECT);
 		assertTrue(Iterables.isEmpty(iterable));
-		iterable = container.getElements(selectByTypeAndName(EcorePackage.Literals.EOBJECT, QualifiedName.create("Zonk")));
+		iterable = container.getExportedObjects(EcorePackage.Literals.EOBJECT, QualifiedName.create("Zonk"), false);
 		assertTrue(Iterables.isEmpty(iterable));
 	}
 	
@@ -95,11 +93,11 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 		EClass type = EcorePackage.Literals.EPACKAGE;
 		Resource resource = createResource();
 		createNamedElement(qualifiedName, type, resource);
-		Iterable<IEObjectDescription> iterable = container.getElements(selectByType(EcorePackage.Literals.ECLASS));
+		Iterable<IEObjectDescription> iterable = container.getExportedObjectsByType(EcorePackage.Literals.ECLASS);
 		assertTrue(Iterables.isEmpty(iterable));
-		iterable = container.getElements(selectByTypeAndName(EcorePackage.Literals.ECLASS, qualifiedName));
+		iterable = container.getExportedObjects(EcorePackage.Literals.ECLASS, qualifiedName, false);
 		assertTrue(Iterables.isEmpty(iterable));
-		iterable = container.getElements(selectByTypeAndName(EcorePackage.Literals.EPACKAGE, QualifiedName.create("AnotherName")));
+		iterable = container.getExportedObjects(EcorePackage.Literals.EPACKAGE, QualifiedName.create("AnotherName"), false);
 		assertTrue(Iterables.isEmpty(iterable));
 	}
 	
@@ -108,15 +106,15 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 		EClass type = EcorePackage.Literals.EPACKAGE;
 		Resource resource = createResource();
 		ENamedElement element = createNamedElement(qualifiedName, type, resource);
-		Iterable<IEObjectDescription> iterable = container.getElements(selectByType(EcorePackage.Literals.EPACKAGE));
+		Iterable<IEObjectDescription> iterable = container.getExportedObjectsByType(EcorePackage.Literals.EPACKAGE);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
-		iterable = container.getElements(selectByType(EcorePackage.Literals.EOBJECT));
+		iterable = container.getExportedObjectsByType(EcorePackage.Literals.EOBJECT);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
-		iterable = container.getElements(selectByTypeAndName(EcorePackage.Literals.EPACKAGE, qualifiedName));
+		iterable = container.getExportedObjects(EcorePackage.Literals.EPACKAGE, qualifiedName, false);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
-		iterable = container.getElements(selectByTypeAndName(EcorePackage.Literals.ENAMED_ELEMENT, qualifiedName));
+		iterable = container.getExportedObjects(EcorePackage.Literals.ENAMED_ELEMENT, qualifiedName, false);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
-		iterable = container.getElements(selectByTypeAndName(EcorePackage.Literals.EOBJECT, qualifiedName));
+		iterable = container.getExportedObjects(EcorePackage.Literals.EOBJECT, qualifiedName, false);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
 	}
 	
@@ -126,15 +124,15 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 		Resource resource = createResource();
 		ENamedElement element = createNamedElement(qualifiedName, type, resource);
 		ENamedElement other = createNamedElement(null, EcorePackage.Literals.ECLASS, resource);
-		Iterable<IEObjectDescription> iterable = container.getElements(selectByType(EcorePackage.Literals.EPACKAGE));
+		Iterable<IEObjectDescription> iterable = container.getExportedObjectsByType(EcorePackage.Literals.EPACKAGE);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
-		iterable = container.getElements(selectByType(EcorePackage.Literals.ECLASSIFIER));
+		iterable = container.getExportedObjectsByType(EcorePackage.Literals.ECLASSIFIER);
 		assertSame(other, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
-		iterable = container.getElements(selectByTypeAndName(EcorePackage.Literals.EPACKAGE, qualifiedName));
+		iterable = container.getExportedObjects(EcorePackage.Literals.EPACKAGE, qualifiedName, false);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
-		iterable = container.getElements(selectByTypeAndName(EcorePackage.Literals.ENAMED_ELEMENT, qualifiedName));
+		iterable = container.getExportedObjects(EcorePackage.Literals.ENAMED_ELEMENT, qualifiedName, false);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
-		iterable = container.getElements(selectByTypeAndName(EcorePackage.Literals.EOBJECT, qualifiedName));
+		iterable = container.getExportedObjects(EcorePackage.Literals.EOBJECT, qualifiedName, false);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
 	}
 	
@@ -146,13 +144,13 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 		resource = createResource();
 		ENamedElement second = createNamedElement(qualifiedName, type, resource);
 		List<ENamedElement> expected = Lists.newArrayList(first, second);
-		Iterable<IEObjectDescription> iterable = container.getElements(selectByType(EcorePackage.Literals.EPACKAGE));
+		Iterable<IEObjectDescription> iterable = container.getExportedObjectsByType(EcorePackage.Literals.EPACKAGE);
 		checkFindAllEObjectsResult(expected, iterable);
-		iterable = container.getElements(selectByTypeAndName(EcorePackage.Literals.EPACKAGE, qualifiedName));
+		iterable = container.getExportedObjects(EcorePackage.Literals.EPACKAGE, qualifiedName, false);
 		checkFindAllEObjectsResult(expected, iterable);
-		iterable = container.getElements(selectByTypeAndName(EcorePackage.Literals.ENAMED_ELEMENT, qualifiedName));
+		iterable = container.getExportedObjects(EcorePackage.Literals.ENAMED_ELEMENT, qualifiedName, false);
 		checkFindAllEObjectsResult(expected, iterable);
-		iterable = container.getElements(selectByTypeAndName(EcorePackage.Literals.EOBJECT, qualifiedName));
+		iterable = container.getExportedObjects(EcorePackage.Literals.EOBJECT, qualifiedName, false);
 		checkFindAllEObjectsResult(expected, iterable);
 	}
 
@@ -173,9 +171,9 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 				createNamedElement(null, EcorePackage.Literals.ECLASS, resource);
 			}
 		}
-		Iterable<IEObjectDescription> iterable = container.getElements(selectByType(EcorePackage.Literals.EDATA_TYPE));
+		Iterable<IEObjectDescription> iterable = container.getExportedObjectsByType(EcorePackage.Literals.EDATA_TYPE);
 		assertTrue(Iterables.isEmpty(iterable));
-		iterable = container.getElements(selectByType(EcorePackage.Literals.ECLASS));
+		iterable = container.getExportedObjectsByType(EcorePackage.Literals.ECLASS);
 		assertEquals(resourceCount*eClassCount, Iterables.size(iterable));
 	}
 

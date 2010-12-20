@@ -164,7 +164,7 @@ public class DefaultResourceDescriptionDeltaTest extends TestCase {
 		
 		TestResDesc resourceDesc2 = new TestResDesc();
 		resourceDesc2.imported.add(FOO);
-		resourceDesc2.exported.add(new EObjectDescription(BAR, EcorePackage.Literals.EANNOTATION__CONTENTS, Collections.singletonMap("foo", "bar"),false){
+		resourceDesc2.exported.add(new EObjectDescription(BAR, EcorePackage.Literals.EANNOTATION__CONTENTS, Collections.singletonMap("foo", "bar")){
 			@Override
 			public URI getEObjectURI() {
 				return EcoreUtil.getURI(EcorePackage.Literals.EANNOTATION);
@@ -182,7 +182,7 @@ public class DefaultResourceDescriptionDeltaTest extends TestCase {
 		
 		TestResDesc resourceDesc2 = new TestResDesc();
 		resourceDesc2.imported.add(FOO);
-		resourceDesc2.exported.add(new EObjectDescription(BAR, EcorePackage.Literals.EANNOTATION, Collections.singletonMap("foo", "bar"),false){
+		resourceDesc2.exported.add(new EObjectDescription(BAR, EcorePackage.Literals.EANNOTATION, Collections.singletonMap("foo", "bar")){
 			@Override
 			public URI getEObjectURI() {
 				return super.getEObjectURI().appendFragment("foo");

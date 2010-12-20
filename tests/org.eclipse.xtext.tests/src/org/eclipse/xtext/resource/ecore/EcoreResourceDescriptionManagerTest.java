@@ -22,7 +22,6 @@ import org.eclipse.xtext.ecore.EcoreResourceDescriptionManager;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
@@ -59,7 +58,7 @@ public class EcoreResourceDescriptionManagerTest extends TestCase {
 					if (next instanceof ENamedElement) {
 						String name = ((ENamedElement) next).getName();
 //						Iterable<IEObjectDescription> objects = 
-						description.getExportedObjects(new ISelector.SelectByName(QualifiedName.create(name)));
+						description.getExportedObjects(EcorePackage.Literals.EOBJECT, QualifiedName.create(name), false);
 //						assertFalse(name + " - " + uri + " - " + next, Iterables.isEmpty(objects));
 					}
 				}

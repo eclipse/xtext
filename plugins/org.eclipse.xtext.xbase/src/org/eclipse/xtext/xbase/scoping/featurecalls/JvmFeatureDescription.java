@@ -19,15 +19,15 @@ import org.eclipse.xtext.resource.EObjectDescription;
  */
 public class JvmFeatureDescription extends EObjectDescription {
 
-	private TypeArgumentContext context;
-	private String shadowingString;
-	private boolean isValid = true;
+	private final TypeArgumentContext context;
+	private final String shadowingString;
+	private final boolean isValid;
 
-	public JvmFeatureDescription(QualifiedName qualifiedName, JvmFeature element, TypeArgumentContext context, String shadowingString, boolean isValid2) {
-		super(qualifiedName, element, Collections.<String,String>emptyMap(),false);
+	public JvmFeatureDescription(QualifiedName qualifiedName, JvmFeature element, TypeArgumentContext context, String shadowingString, boolean isValid) {
+		super(qualifiedName, element, Collections.<String,String>emptyMap());
 		this.context = context;
 		this.shadowingString = shadowingString;
-		this.isValid = isValid2;
+		this.isValid = isValid;
 	}
 	
 	public JvmFeature getJvmFeature() {

@@ -22,7 +22,9 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.ISelector;
+import org.eclipse.xtext.scoping.Selectors;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
 
 import com.google.common.base.Function;
@@ -35,45 +37,66 @@ public abstract class AbstractConstructorScope extends AbstractScope {
 	private AbstractTypeScope typeScope;
 	
 	protected AbstractConstructorScope(AbstractTypeScope typeScope) {
+		super(IScope.NULLSCOPE, false);
 		this.typeScope = typeScope;
 	}
 	
 	@Override
-	public Iterable<IEObjectDescription> getLocalElements(ISelector selector) {
-		if (selector instanceof ISelector.SelectByName) {
-			final QualifiedName qualifiedName = ((ISelector.SelectByName) selector).getName();
-			IEObjectDescription typeDescription = typeScope.getSingleElement(selector);
-			if (typeDescription == null)
-				return emptySet();
-			JvmType type = (JvmType) typeDescription.getEObjectOrProxy();
-			if (type.eIsProxy() || !(type instanceof JvmGenericType)) {
-				return emptySet();
-			}
-			final JvmGenericType castedType = (JvmGenericType) type;
-			if (castedType.isInterface()) {
-				return emptySet();
-			}
-			Iterable<JvmConstructor> constructors = new Iterable<JvmConstructor>() {
-				public Iterator<JvmConstructor> iterator() {
-					return castedType.getDeclaredConstructors().iterator();
-				}
-			};
-			return transform(constructors, new Function<JvmConstructor,IEObjectDescription>(){
-				public IEObjectDescription apply(JvmConstructor from) {
-					return EObjectDescription.create(qualifiedName, from);
-				}});
-		} else if (selector instanceof ISelector.SelectByEObject) {
-			EObject object = ((ISelector.SelectByEObject) selector).getEObject();
-				if (object instanceof JvmConstructor) {
-				final Set<IEObjectDescription> result = singleton(EObjectDescription.create(getQualifiedNameConverter().toQualifiedName(((JvmIdentifyableElement) object).getCanonicalName()), object));
-				return selector.applySelector(result);
-			}
+	protected Iterable<IEObjectDescription> getElementsByEObject(ISelector.SelectByEObject selector) {
+		EObject object = selector.getEObject();
+		if (object instanceof JvmConstructor) {
+			final Set<IEObjectDescription> result = singleton(EObjectDescription.create(getQualifiedNameConverter().toQualifiedName(((JvmIdentifyableElement) object).getCanonicalName()), object));
+			return result;
+		}
+		return emptySet();
+	}
+	
+	@Override
+	protected Iterable<IEObjectDescription> getElementsByName(ISelector.SelectByName selector) {
+		final QualifiedName name = selector.getName();
+		IEObjectDescription typeDescription = typeScope.getSingleElement(Selectors.selectByName(name));
+		if (typeDescription == null)
+			return emptySet();
+		JvmType type = (JvmType) typeDescription.getEObjectOrProxy();
+		if (type.eIsProxy() || !(type instanceof JvmGenericType)) {
 			return emptySet();
 		}
-		return internalGetAllLocalElements(selector);
+		final JvmGenericType castedType = (JvmGenericType) type;
+		if (castedType.isInterface()) {
+			return emptySet();
+		}
+		Iterable<JvmConstructor> constructors = new Iterable<JvmConstructor>() {
+			public Iterator<JvmConstructor> iterator() {
+				return castedType.getDeclaredConstructors().iterator();
+			}
+		};
+		return transform(constructors, new Function<JvmConstructor,IEObjectDescription>(){
+			public IEObjectDescription apply(JvmConstructor from) {
+				return EObjectDescription.create(name, from);
+			}
+		});
+	}
+	
+	@Override
+	protected IEObjectDescription getSingleElementByName(ISelector.SelectByName selector) {
+		Iterable<IEObjectDescription> byName = getElementsByName(selector);
+		Iterator<IEObjectDescription> iterator = byName.iterator();
+		if (iterator.hasNext())
+			return iterator.next();
+		return null;
+	}
+	
+	@Override
+	protected Iterable<IEObjectDescription> getAllElements() {
+		return internalGetAllElements();
+	}
+	
+	@Override
+	protected Iterable<IEObjectDescription> getAllLocalElements() {
+		throw new UnsupportedOperationException();
 	}
 
-	protected Iterable<IEObjectDescription> internalGetAllLocalElements(ISelector selector) {
+	protected Iterable<IEObjectDescription> internalGetAllElements() {
 		throw new UnsupportedOperationException();
 	}
 	

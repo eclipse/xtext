@@ -40,7 +40,7 @@ import com.google.common.collect.Iterables;
 public abstract class AbstractTypeScopeProvider implements IGlobalScopeProvider {
 
 	public IScope getScope(Resource resource, EReference reference) {
-		return getScope(resource,reference,Predicates.<IEObjectDescription>alwaysTrue());
+		return getScope(resource, reference, null);
 	}
 	
 	public IScope getScope(Resource resource, EReference reference, Predicate<IEObjectDescription> filter) {

@@ -74,7 +74,7 @@ public class CallableFeaturePredicate implements Predicate<IEObjectDescription> 
 	private EObject context;
 	private EReference reference;
 	
-	public void iniitialize(EObject context, EReference reference) {
+	public void initialize(EObject context, EReference reference) {
 		this.context = context;
 		this.reference = reference;
 	}
