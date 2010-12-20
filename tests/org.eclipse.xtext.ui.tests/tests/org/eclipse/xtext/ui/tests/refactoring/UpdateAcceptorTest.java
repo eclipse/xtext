@@ -34,7 +34,7 @@ public class UpdateAcceptorTest extends TestCase {
 		updateAcceptor.accept(mockDocument1, new ReplaceRegion(1, 2, "bar"));
 		updateAcceptor.accept(mockDocument0, new ReplaceRegion(3, 4, "baz"));
 
-		Change change = updateAcceptor.createChange(CHANGE_NAME);
+		Change change = updateAcceptor.createChange(CHANGE_NAME, null);
 		assertTrue(change instanceof CompositeChange);
 		Change[] children = ((CompositeChange) change).getChildren();
 		assertEquals(2, children.length);

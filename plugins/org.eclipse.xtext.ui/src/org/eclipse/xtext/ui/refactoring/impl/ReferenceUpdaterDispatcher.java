@@ -14,6 +14,7 @@ import static org.eclipse.xtext.util.Strings.*;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
@@ -45,17 +46,23 @@ public class ReferenceUpdaterDispatcher {
 
 	public RefactoringStatus createReferenceUpdates(ElementRenameArguments elementRenameArguments,
 			IRenameStrategy renameStrategy, ResourceSet resourceSet, UpdateAcceptor updateAcceptor, IProgressMonitor monitor) {
+		SubMonitor progress = SubMonitor.convert(monitor, "Updating references", 100);
 		RefactoringStatus status = new RefactoringStatus();
 		try {
 			ResourceSetLocalContextProvider localContextProvider = new ResourceSetLocalContextProvider(resourceSet);
 			referenceFinder.findReferences(getAllRenamedElementURIs(elementRenameArguments),
-					localContextProvider, acceptor, null);
-			Multimap<IReferenceUpdater, IReferenceDescription> updater2descriptions = acceptor
+					localContextProvider, acceptor, progress.newChild(30));
+			if(!progress.isCanceled()) {
+				Multimap<IReferenceUpdater, IReferenceDescription> updater2descriptions = acceptor
 					.getReferenceUpdater2ReferenceDescriptions();
-			for (IReferenceUpdater referenceUpdater : updater2descriptions.keySet()) {
-				RefactoringStatus updaterStatus = referenceUpdater.createReferenceUpdates(elementRenameArguments,
-						renameStrategy, updater2descriptions.get(referenceUpdater), updateAcceptor, monitor);
-				status.merge(updaterStatus);
+				progress = progress.newChild(70).setWorkRemaining(updater2descriptions.keySet().size());
+				for (IReferenceUpdater referenceUpdater : updater2descriptions.keySet()) {
+					if(progress.isCanceled())
+						break;
+					RefactoringStatus updaterStatus = referenceUpdater.createReferenceUpdates(elementRenameArguments,
+						renameStrategy, updater2descriptions.get(referenceUpdater), updateAcceptor, progress.newChild(1));
+					status.merge(updaterStatus);
+				}
 			}
 		} catch (Exception exc) {
 			RefactoringStatusExtension.handleException(status, exc);
