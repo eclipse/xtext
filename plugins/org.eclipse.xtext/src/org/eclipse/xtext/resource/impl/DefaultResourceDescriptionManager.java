@@ -27,11 +27,13 @@ import org.eclipse.xtext.util.IResourceScopeCache;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
  */
+@Singleton
 public class DefaultResourceDescriptionManager implements IResourceDescription.Manager {
 
 	@Inject
