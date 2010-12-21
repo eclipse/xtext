@@ -14,11 +14,13 @@ import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Knut Wannheden
  */
+@Singleton
 public class PreferenceStoreIndentationInformation implements IIndentationInformation, IPropertyChangeListener {
 
 	private IPreferenceStoreAccess storeAccess;
