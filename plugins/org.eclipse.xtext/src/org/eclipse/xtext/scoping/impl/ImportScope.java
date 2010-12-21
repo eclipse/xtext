@@ -84,7 +84,7 @@ public class ImportScope extends AbstractScope {
 	}
 	
 	protected Iterable<IEObjectDescription> getAllAliasedElements(Iterable<IEObjectDescription> allImportedElements) {
-		Map<QualifiedName, IEObjectDescription> aliasToDescription = Maps.newHashMap();
+		Map<QualifiedName, IEObjectDescription> keyToDescription = Maps.newHashMap();
 		for (IEObjectDescription imported : allImportedElements) {
 			QualifiedName fullyQualifiedName = imported.getName();
 			for (ImportNormalizer normalizer : normalizers) {
@@ -94,25 +94,15 @@ public class ImportScope extends AbstractScope {
 					if (isIgnoreCase()) {
 						key = key.toLowerCase();
 					}
-					if (aliasToDescription.containsKey(alias)) {
-						aliasToDescription.put(alias, null);
+					if (keyToDescription.containsKey(key)) {
+						keyToDescription.put(key, null);
 					} else {
-						aliasToDescription.put(alias, imported);
+						keyToDescription.put(key, new AliasedEObjectDescription(alias, imported));
 					}
 				}
 			}
 		}
-		final Iterable<IEObjectDescription> aliased = transform(aliasToDescription.entrySet(),
-				new Function<Map.Entry<QualifiedName, IEObjectDescription>, IEObjectDescription>() {
-					public IEObjectDescription apply(Map.Entry<QualifiedName, IEObjectDescription> entry) {
-						if (entry.getValue() != null) {
-							return new AliasedEObjectDescription(entry.getKey(), entry.getValue());
-						}
-						return null;
-					}
-
-				});
-		return filter(aliased, Predicates.notNull());
+		return filter(keyToDescription.values(), Predicates.notNull());
 	}
 
 	@Override
