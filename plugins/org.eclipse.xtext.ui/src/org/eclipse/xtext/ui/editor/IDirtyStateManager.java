@@ -10,13 +10,14 @@ package org.eclipse.xtext.ui.editor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.ISelectable;
 
 /**
  * An implementation of {@link IDirtyStateManager} can be used to register
  * a currently edited resource and listen to changes on those resources.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IDirtyStateManager extends IExternalContentSupport.IExternalContentProvider, IResourceDescription.Event.Source {
+public interface IDirtyStateManager extends ISelectable, IExternalContentSupport.IExternalContentProvider, IResourceDescription.Event.Source {
 
 	/**
 	 * The {@link IDirtyStateManager} will raise specialized events that provide

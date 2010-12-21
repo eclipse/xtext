@@ -13,6 +13,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -388,6 +390,26 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 
 	public IResourceDescription getResourceDescription(URI uri) {
 		return null;
+	}
+	
+	public boolean isEmpty() {
+		return true;
+	}
+
+	public Iterable<IEObjectDescription> getExportedObjects() {
+		throw new UnsupportedOperationException();
+	}
+
+	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
+		throw new UnsupportedOperationException();
+	}
+
+	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
+		throw new UnsupportedOperationException();
+	}
+
+	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
+		throw new UnsupportedOperationException();
 	}
 	
 	public Delta createDelta(IResourceDescription oldDescription, IResourceDescription newDescription) {

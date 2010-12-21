@@ -7,10 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
+import java.util.Collections;
+
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.ISelectable;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
@@ -114,5 +122,57 @@ public class DirtyStateAwareResourceDescriptions extends AbstractResourceDescrip
 		if (result == null)
 			result = globalDescriptions.getResourceDescription(uri);
 		return result;
+	}
+
+	public boolean isEmpty() {
+		return globalDescriptions.isEmpty();
+	}
+
+	public Iterable<IEObjectDescription> getExportedObjects() {
+		return Iterables.concat(Iterables.transform(getAllResourceDescriptions(), new Function<ISelectable, Iterable<IEObjectDescription>>() {
+			public Iterable<IEObjectDescription> apply(ISelectable from) {
+				if (from != null)
+					return from.getExportedObjects();
+				return Collections.emptyList();
+			}
+		}));
+	}
+
+	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
+		Iterable<IEObjectDescription> dirtyDescriptions = dirtyStateManager.getExportedObjects(type, name, ignoreCase);
+		Iterable<IEObjectDescription> persistentDescriptions = globalDescriptions.getExportedObjects(type, name, ignoreCase);
+		return joinIterables(dirtyDescriptions, persistentDescriptions);
+	}
+
+	protected Iterable<IEObjectDescription> joinIterables(Iterable<IEObjectDescription> dirtyDescriptions,
+			Iterable<IEObjectDescription> persistentDescriptions) {
+		Iterable<IEObjectDescription> filteredPersistent = Iterables.filter(persistentDescriptions, new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				URI resourceURI = input.getEObjectURI().trimFragment();
+				if (dirtyStateManager.hasContent(resourceURI))
+					return false;
+				return true;
+			}
+		});
+		return Iterables.concat(dirtyDescriptions, filteredPersistent);
+	}
+
+	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
+		Iterable<IEObjectDescription> dirtyDescriptions = dirtyStateManager.getExportedObjectsByType(type);
+		Iterable<IEObjectDescription> persistentDescriptions = globalDescriptions.getExportedObjectsByType(type);
+		return joinIterables(dirtyDescriptions, persistentDescriptions);
+	}
+
+	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
+		URI resourceURI = null;
+		if (object.eResource() != null) {
+			resourceURI = object.eResource().getURI();
+		} else {
+			URI uri = EcoreUtil.getURI(object);
+			resourceURI = uri.trimFragment();
+		}
+		if (dirtyStateManager.hasContent(resourceURI))
+			return dirtyStateManager.getExportedObjectsByObject(object);
+		return globalDescriptions.getExportedObjectsByObject(object);
 	}
 }

@@ -12,11 +12,18 @@ import java.util.Collections;
 import java.util.concurrent.ConcurrentMap;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.MapMaker;
 
 /**
@@ -123,4 +130,53 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 		return managedResources.containsKey(uri);
 	}
 
+	public boolean isEmpty() {
+		return managedResources.isEmpty();
+	}
+	
+	public Iterable<IEObjectDescription> getExportedObjects() {
+		return Iterables.concat(Iterables.transform(managedResources.values(), new Function<IDirtyResource, Iterable<IEObjectDescription>>() {
+			public Iterable<IEObjectDescription> apply(IDirtyResource from) {
+				if (from != null)
+					return from.getDescription().getExportedObjects();
+				return Collections.emptyList();
+			}
+		}));
+	}
+	
+	public Iterable<IEObjectDescription> getExportedObjects(final EClass type, final QualifiedName name, final boolean ignoreCase) {
+		return Iterables.concat(Iterables.transform(managedResources.values(), new Function<IDirtyResource, Iterable<IEObjectDescription>>() {
+			public Iterable<IEObjectDescription> apply(IDirtyResource from) {
+				if (from != null)
+					return from.getDescription().getExportedObjects(type, name, ignoreCase);
+				return Collections.emptyList();
+			}
+		}));
+	}
+	
+	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
+		URI resourceURI = null;
+		if (object.eResource() != null) {
+			resourceURI = object.eResource().getURI();
+		} else {
+			URI uri = EcoreUtil.getURI(object);
+			resourceURI = uri.trimFragment();
+		}
+		IDirtyResource dirtyResource = getDirtyResource(resourceURI);
+		if (dirtyResource != null) {
+			return dirtyResource.getDescription().getExportedObjectsByObject(object);
+		}
+		return Collections.emptyList();
+	}
+	
+	public Iterable<IEObjectDescription> getExportedObjectsByType(final EClass type) {
+		return Iterables.concat(Iterables.transform(managedResources.values(), new Function<IDirtyResource, Iterable<IEObjectDescription>>() {
+			public Iterable<IEObjectDescription> apply(IDirtyResource from) {
+				if (from != null)
+					return from.getDescription().getExportedObjectsByType(type);
+				return Collections.emptyList();
+			}
+		}));
+	}
+	
 }

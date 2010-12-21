@@ -84,7 +84,12 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 
 			public String getContainerHandle(URI uri) {
 				return null;
-			}}));
+			}
+			
+			public boolean isEmpty(String containerHandle) {
+				return true;
+			}
+		}));
 		return resourceSetImpl;
 	}
 	
