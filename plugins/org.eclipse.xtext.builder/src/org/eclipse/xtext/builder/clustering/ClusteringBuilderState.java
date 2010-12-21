@@ -12,7 +12,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
@@ -27,6 +26,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.builderState.AbstractBuilderState;
 import org.eclipse.xtext.builder.builderState.BuilderStateUtil;
+import org.eclipse.xtext.builder.builderState.ResourceDescriptionsData;
 import org.eclipse.xtext.builder.impl.BuildData;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
@@ -73,7 +73,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
      * @return A list of deltas describing all changes made by the build.
      */
     @Override
-    protected Collection<Delta> doUpdate(BuildData buildData, final Map<URI, IResourceDescription> newMap, IProgressMonitor monitor) {
+    protected Collection<Delta> doUpdate(BuildData buildData, ResourceDescriptionsData newData, IProgressMonitor monitor) {
         final SubMonitor progress = SubMonitor.convert(monitor, 100);
 
         
@@ -86,7 +86,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         // use this. Once the build is completed, the persistable index is reset to the contents of newState by
         // virtue of the newMap, which is maintained in synch with this.
         ResourceSet resourceSet = buildData.getResourceSet();
-        final CurrentDescriptions newState = new CurrentDescriptions(resourceSet, this, toBeDeleted);
+        final CurrentDescriptions newState = new CurrentDescriptions(resourceSet, newData);
 
         // Step 3: Create a queue; write new temporary resource descriptions for the added or updated resources so that we can link
         // subsequently; put all the added or updated resources into the queue.
@@ -100,9 +100,9 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         // queued for processing, its URI is removed from this set. queueAffectedResources will consider only resources
         // in this set as potential candidates.
         for (final URI uri : toBeDeleted) {
-            newMap.remove(uri);
+        	newData.removeDescription(uri);
         }
-        final Set<URI> allRemainingURIs = Sets.newLinkedHashSet(newMap.keySet());
+        final Set<URI> allRemainingURIs = Sets.newLinkedHashSet(newData.getAllURIs());
         allRemainingURIs.removeAll(buildData.getToBeUpdated());
         for(URI remainingURI: buildData.getAllRemainingURIs()) {
         	allRemainingURIs.remove(remainingURI);
@@ -183,9 +183,9 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                     // Make the new resource description known and update the map.
                     newState.register(newDelta);
                     if (newDelta.getNew() == null) {
-                        newMap.remove(changedURI);
+                        newData.removeDescription(changedURI);
                     } else {
-                        newMap.put(changedURI, newDelta.getNew());
+                    	newData.addDescription(changedURI, newDelta.getNew());
                     }
                 }
                 subProgress.worked(1);

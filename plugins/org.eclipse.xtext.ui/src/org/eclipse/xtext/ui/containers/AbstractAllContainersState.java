@@ -126,6 +126,21 @@ public abstract class AbstractAllContainersState extends AbstractStorage2UriMapp
 		}
 		return initContainedURIs(containerHandle, result);
 	}
+	
+	public boolean isEmpty(String containerHandle) {
+		Collection<URI> uris = null;
+		try {
+			readLock.lock();
+			if (emptyHandles.contains(containerHandle))
+				return true;
+			uris = handleToContent.get(containerHandle);
+			if (!uris.isEmpty())
+				return false;
+		} finally {
+			readLock.unlock();
+		}
+		return initContainedURIs(containerHandle, uris).isEmpty();
+	}
 
 	protected Collection<URI> initContainedURIs(String containerHandle, Collection<URI> result) {
 		Collection<URI> uris = doInitContainedURIs(containerHandle);

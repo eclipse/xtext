@@ -11,6 +11,9 @@ import java.util.Collections;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.naming.QualifiedName;
 
 /**
  * Represents a set of {@link IResourceDescription}
@@ -18,7 +21,7 @@ import org.eclipse.emf.common.util.URI;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge - Initial contribution and API
  */
-public interface IResourceDescriptions {
+public interface IResourceDescriptions extends ISelectable {
 
 	Iterable<IResourceDescription> getAllResourceDescriptions();
 
@@ -41,6 +44,26 @@ public interface IResourceDescriptions {
 
 		public IResourceDescription getResourceDescription(URI uri) {
 			return null;
+		}
+
+		public boolean isEmpty() {
+			return true;
+		}
+
+		public Iterable<IEObjectDescription> getExportedObjects() {
+			return Collections.emptyList();
+		}
+
+		public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
+			return Collections.emptyList();
+		}
+
+		public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
+			return Collections.emptyList();
+		}
+
+		public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
+			return Collections.emptyList();
 		}
 
 	}

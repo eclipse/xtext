@@ -24,6 +24,10 @@ public class DelegatingIAllContainerAdapter extends AdapterImpl implements IAllC
 		super();
 		this.delegate = delegate;
 	}
+	
+	public boolean isEmpty(String containerHandle) {
+		return delegate.isEmpty(containerHandle);
+	}
 
 	public List<String> getVisibleContainerHandles(String handle) {
 		return delegate.getVisibleContainerHandles(handle);

@@ -7,19 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.clustering;
 
-import java.util.Map;
-import java.util.Set;
-
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.builder.builderState.ResourceDescriptionsData;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
-
-import com.google.common.collect.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -30,7 +30,7 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 	/**
 	 * New index.
 	 */
-	private final Map<URI, IResourceDescription> currentDescriptions = Maps.newLinkedHashMap();
+	private final ResourceDescriptionsData newData;
 
 	/**
 	 * Create a new index based on an old one.
@@ -42,14 +42,8 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 	 * @param initiallyDeleted
 	 *            URIs of resources physically deleted
 	 */
-	public CurrentDescriptions(ResourceSet resourceSet, IResourceDescriptions oldState, Set<URI> initiallyDeleted) {
-		// TW: Make a copy here...
-		for (final IResourceDescription desc : oldState.getAllResourceDescriptions()) {
-			final URI uri = desc.getURI();
-			if (!initiallyDeleted.contains(uri)) {
-				currentDescriptions.put(uri, desc);
-			}
-		}
+	public CurrentDescriptions(ResourceSet resourceSet, ResourceDescriptionsData newData) {
+		this.newData = newData;
 		resourceSet.eAdapters().add(this);
 	}
 
@@ -63,9 +57,9 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 	public void register(IResourceDescription.Delta delta) {
 		final IResourceDescription newDesc = delta.getNew();
 		if (newDesc == null) {
-			currentDescriptions.remove(delta.getUri());
+			newData.removeDescription(delta.getUri());
 		} else {
-			currentDescriptions.put(delta.getUri(), newDesc);
+			newData.addDescription(delta.getUri(), newDesc);
 		}
 	}
 
@@ -75,7 +69,7 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 	 * @return The index' contents.
 	 */
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
-		return currentDescriptions.values();
+		return newData.getAllResourceDescriptions();
 	}
 
 	/**
@@ -86,7 +80,27 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 	 * @return The resource description, or null if there is none.
 	 */
 	public IResourceDescription getResourceDescription(URI uri) {
-		return currentDescriptions.get(uri);
+		return newData.getResourceDescription(uri);
+	}
+
+	public boolean isEmpty() {
+		return newData.isEmpty();
+	}
+
+	public Iterable<IEObjectDescription> getExportedObjects() {
+		return newData.getExportedObjects();
+	}
+
+	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
+		return newData.getExportedObjects(type, name, ignoreCase);
+	}
+
+	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
+		return newData.getExportedObjectsByType(type);
+	}
+
+	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
+		return newData.getExportedObjectsByObject(object);
 	}
 
 	/**
@@ -134,6 +148,26 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 		 */
 		public IResourceDescription getResourceDescription(URI uri) {
 			return delegate.getResourceDescription(uri);
+		}
+
+		public boolean isEmpty() {
+			return delegate.isEmpty();
+		}
+
+		public Iterable<IEObjectDescription> getExportedObjects() {
+			return delegate.getExportedObjects();
+		}
+
+		public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
+			return delegate.getExportedObjects(type, name, ignoreCase);
+		}
+
+		public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
+			return delegate.getExportedObjectsByType(type);
+		}
+
+		public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
+			return delegate.getExportedObjectsByObject(object);
 		}
 
 	}

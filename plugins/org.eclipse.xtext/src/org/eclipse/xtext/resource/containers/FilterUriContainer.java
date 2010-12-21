@@ -8,7 +8,10 @@
 package org.eclipse.xtext.resource.containers;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IContainer;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.AbstractContainer;
 
@@ -31,6 +34,17 @@ public class FilterUriContainer extends AbstractContainer {
 		return Iterables.filter(delegate.getResourceDescriptions(), new Predicate<IResourceDescription>() {
 			public boolean apply(IResourceDescription input) {
 				return !input.getURI().equals(filterMe);
+			}
+		});
+	}
+	
+	@Override
+	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName qualifiedName, boolean ignoreCase) {
+		Iterable<IEObjectDescription> unfiltered = delegate.getExportedObjects(type, qualifiedName, ignoreCase);
+		return Iterables.filter(unfiltered, new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				URI resourceURI = input.getEObjectURI().trimFragment();
+				return !resourceURI.equals(filterMe);
 			}
 		});
 	}

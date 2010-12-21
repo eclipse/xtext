@@ -15,6 +15,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.ISelectable;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
 
 import com.google.common.base.Function;
@@ -25,7 +26,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class ResourceSetBasedResourceDescriptions implements IResourceDescriptions.IContextAware {
+public class ResourceSetBasedResourceDescriptions extends AbstractCompoundSelectable implements IResourceDescriptions.IContextAware {
 
 	private ResourceSet resourceSet;
 
@@ -46,6 +47,16 @@ public class ResourceSetBasedResourceDescriptions implements IResourceDescriptio
 				return getResourceDescription(from.getURI());
 			}
 		}), Predicates.notNull());
+	}
+	
+	@Override
+	protected Iterable<? extends ISelectable> getSelectables() {
+		return getAllResourceDescriptions();
+	}
+	
+	@Override
+	public boolean isEmpty() {
+		return resourceSet.getResources().isEmpty();
 	}
 
 	public IResourceDescription getResourceDescription(URI uri) {

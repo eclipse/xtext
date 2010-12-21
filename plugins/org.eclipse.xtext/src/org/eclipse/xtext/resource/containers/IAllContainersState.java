@@ -18,6 +18,8 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
  */
 public interface IAllContainersState {
 
+	boolean isEmpty(String containerHandle);
+	
 	List<String> getVisibleContainerHandles(String handle);
 
 	Collection<URI> getContainedURIs(String containerHandle);

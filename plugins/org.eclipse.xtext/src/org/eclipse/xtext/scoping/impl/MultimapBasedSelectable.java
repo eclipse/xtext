@@ -38,7 +38,7 @@ public class MultimapBasedSelectable implements ISelectable {
 	}
 	
 	public boolean isEmpty() {
-		return nameToObjects.isEmpty();
+		return allDescriptions.isEmpty();
 	}
 	
 	public Iterable<IEObjectDescription> getExportedObjectsByType(final EClass type) {

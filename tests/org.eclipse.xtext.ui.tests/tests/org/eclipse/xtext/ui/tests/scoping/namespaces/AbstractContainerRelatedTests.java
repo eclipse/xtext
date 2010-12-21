@@ -18,9 +18,15 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit.util.URIBasedTestResourceDescription;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.ISelectable;
+import org.eclipse.xtext.resource.impl.AbstractCompoundSelectable;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 
@@ -34,6 +40,7 @@ public abstract class AbstractContainerRelatedTests extends TestCase implements 
 	protected IProject project1;
 	protected IProject project2;
 	protected Map<URI, IResourceDescription> uriToResourceDescription;
+	protected ISelectable selectableDelegate;
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -46,6 +53,12 @@ public abstract class AbstractContainerRelatedTests extends TestCase implements 
 		IResourcesSetupUtil.addNature(project1, XtextProjectHelper.NATURE_ID);
 		IResourcesSetupUtil.addNature(project2, XtextProjectHelper.NATURE_ID);
 		uriToResourceDescription = Maps.newHashMap();
+		selectableDelegate = new AbstractCompoundSelectable() {
+			@Override
+			protected Iterable<IResourceDescription> getSelectables() {
+				return getAllResourceDescriptions();
+			}
+		};
 	}
 	
 	@Override
@@ -69,6 +82,10 @@ public abstract class AbstractContainerRelatedTests extends TestCase implements 
 		return result;
 	}
 	
+	public boolean isEmpty() {
+		return uriToResourceDescription.isEmpty();
+	}
+	
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
 		return uriToResourceDescription.values();
 	}
@@ -76,5 +93,21 @@ public abstract class AbstractContainerRelatedTests extends TestCase implements 
 	public IResourceDescription getResourceDescription(URI uri) {
 		return uriToResourceDescription.get(uri);
 	}
-
+	
+	public Iterable<IEObjectDescription> getExportedObjects() {
+		return selectableDelegate.getExportedObjects();
+	}
+	
+	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
+		return selectableDelegate.getExportedObjects(type, name, ignoreCase);
+	}
+	
+	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
+		return selectableDelegate.getExportedObjectsByObject(object);
+	}
+	
+	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
+		return selectableDelegate.getExportedObjectsByType(type);
+	}
+	
 }
