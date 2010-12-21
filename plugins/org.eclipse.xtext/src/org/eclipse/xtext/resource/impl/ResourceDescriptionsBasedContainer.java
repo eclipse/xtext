@@ -21,24 +21,36 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
 /**
+ * A default {@link ResourceDescriptionsBasedContainer} will expose the complete
+ * set of resource descriptions of a backing {@link IResourceDescriptions}. Clients may
+ * override and filter the uris based on arbitrary criteria by means of {@link #contains(IResourceDescription)}
+ * and {@link #hasResourceDescription(URI)}. The implementation has to be symmetric. The default
+ * implementation of {@link #contains(IResourceDescription) contains} delegates to 
+ * {@link #hasResourceDescription(URI) hasResourceDescription}.
+ * 
+ * The default implementation is not synchronized as clients will usually create
+ * short living containers.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO Think about synchronization and cache invalidation to enable reuse of ProjectBasedContainers
- *  - ConcurrentHashMap
- *  - ReentrantRWLock
- *  - Listen for description deltas
  */
 public class ResourceDescriptionsBasedContainer extends AbstractContainer implements IResourceDescription.Event.Listener {
 
 	private final IResourceDescriptions descriptions;
 	
+	/**
+	 * A cache for the contained descriptions.
+	 */
 	private Map<URI, IResourceDescription> uriToDescription;
 
 	public ResourceDescriptionsBasedContainer(IResourceDescriptions descriptions) {
 		this.descriptions = descriptions;
 	}
 	
+	@Override
 	public IResourceDescription getResourceDescription(URI uri) {
-		return getUriToDescription().get(uri);
+		if (hasResourceDescription(uri))
+			return getUriToDescription().get(uri);
+		return null;
 	}
 
 	public Iterable<IResourceDescription> getResourceDescriptions() {
@@ -61,9 +73,14 @@ public class ResourceDescriptionsBasedContainer extends AbstractContainer implem
 		return Iterables.filter(unfiltered, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
 				URI resourceURI = input.getEObjectURI().trimFragment();
-				return contains(resourceURI);
+				return hasResourceDescription(resourceURI);
 			}
 		});
+	}
+	
+	@Override
+	public int getResourceDescriptionCount() {
+		return getUriToDescription().size();
 	}
 	
 	protected Map<URI, IResourceDescription> getUriToDescription() {
@@ -93,10 +110,11 @@ public class ResourceDescriptionsBasedContainer extends AbstractContainer implem
 	}
 	
 	protected boolean contains(IResourceDescription input) {
-		return contains(input.getURI());
+		return hasResourceDescription(input.getURI());
 	}
 	
-	protected boolean contains(URI uri) {
+	@Override
+	public boolean hasResourceDescription(URI uri) {
 		return true;
 	}
 	

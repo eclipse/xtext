@@ -12,6 +12,12 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.URI;
 
 /**
+ * An {@link IContainerState} represent a set of {@link URI uris} that
+ * constitute the contents of a {@link StateBasedContainer container}.
+ * Instances of {@link IContainerState} are usually long living and reflect
+ * the physical structure of projects and files in a workspace or another
+ * file system abstraction, e.g. the class-path of a Java virtual machine.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface IContainerState {

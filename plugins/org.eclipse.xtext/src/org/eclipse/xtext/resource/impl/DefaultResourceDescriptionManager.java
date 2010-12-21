@@ -127,20 +127,19 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
         Collection<QualifiedName> importedNames = getImportedNames(candidate);
         for (IResourceDescription.Delta delta : deltas) {
 			if (delta.haveEObjectDescriptionsChanged()) {
-				if (isAffected(importedNames, delta.getNew()) || isAffected(importedNames, delta.getOld())) {
-					// TODO: the validation of outgoing references should cover this use case
-					// however, the test org.eclipse.xtext.builder.builderState.PersistableResourceDescriptionsTest.testDelete()
-					// fails without this additional check
-					if (delta.getNew() == null) // deleted resources cannot be found in a container
-						return true;
-					if (!delta.getUri().isPlatform() && !delta.getUri().isArchive()) // java resource
-						return true;
+				// not a java resource - delta's resource should be contained in a visible container
+				if (delta.getUri().isPlatform() || delta.getUri().isArchive()) { 
 					if (containers == null)
 						containers = containerManager.getVisibleContainers(candidate, context);
-					for (IContainer container : containers) {
-						if (container.getResourceDescription(delta.getUri()) != null)
-							return true;
+					boolean descriptionIsContained = false;
+					for(int i = 0; i < containers.size() && !descriptionIsContained; i++) {
+						descriptionIsContained = containers.get(i).hasResourceDescription(delta.getUri());
 					}
+					if (!descriptionIsContained)
+						return false;
+				}
+				if (isAffected(importedNames, delta.getNew()) || isAffected(importedNames, delta.getOld())) {
+					return true;
 				}
 			}
         }

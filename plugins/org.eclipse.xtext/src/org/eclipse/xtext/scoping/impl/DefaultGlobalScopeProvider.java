@@ -90,7 +90,7 @@ public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 			Predicate<IEObjectDescription> filter, EClass type, boolean ignoreCase) {
 		if (eResource != null) {
 			URI uriToFilter = eResource.getURI();
-			if (container.getResourceDescription(uriToFilter) != null)
+			if (container.hasResourceDescription(uriToFilter))
 				container = new FilterUriContainer(uriToFilter, container);
 		}
 		return createContainerScope(parent, container, filter, type, ignoreCase);

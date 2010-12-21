@@ -20,6 +20,9 @@ import org.eclipse.xtext.resource.impl.AbstractContainer;
 import com.google.common.collect.Iterables;
 
 /**
+ * A container implementation that ensures that a given resource description
+ * is part of the container. Delegates any other requests to another container.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class DescriptionAddingContainer extends AbstractContainer {
@@ -27,6 +30,10 @@ public class DescriptionAddingContainer extends AbstractContainer {
 	private final IResourceDescription description;
 	private final IContainer delegate;
 
+	/**
+	 * @param addMe the description to be merged into this container. May not be contained in the given delegate.
+	 * @param delegate the backing container.
+	 */
 	public DescriptionAddingContainer(IResourceDescription addMe, IContainer delegate) {
 		this.description = addMe;
 		this.delegate = delegate;
@@ -34,6 +41,18 @@ public class DescriptionAddingContainer extends AbstractContainer {
 	
 	public Iterable<IResourceDescription> getResourceDescriptions() {
 		return Iterables.concat(Collections.singleton(description), delegate.getResourceDescriptions());
+	}
+	
+	@Override
+	public int getResourceDescriptionCount() {
+		return delegate.getResourceDescriptionCount() + 1;
+	}
+	
+	@Override
+	public boolean hasResourceDescription(URI uri) {
+		if (uri.equals(description.getURI()))
+			return true;
+		return delegate.hasResourceDescription(uri);
 	}
 	
 	@Override
@@ -48,6 +67,7 @@ public class DescriptionAddingContainer extends AbstractContainer {
 		return Iterables.concat(added, delegated);
 	}
 
+	@Override
 	public IResourceDescription getResourceDescription(URI uri) {
 		if (description.getURI().equals(uri))
 			return description;
