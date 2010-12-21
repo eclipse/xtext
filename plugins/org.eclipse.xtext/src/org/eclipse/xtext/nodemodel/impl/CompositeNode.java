@@ -70,7 +70,7 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 		if (firstChild != null)
 			return firstChild.getTotalOffset();
 		CompositeNode compositeWithSiblings = this;
-		while(!compositeWithSiblings.hasSiblings() && compositeWithSiblings.basicGetParent() != null) {
+		while(!compositeWithSiblings.basicHasNextSibling() && compositeWithSiblings.basicGetParent() != null) {
 			compositeWithSiblings = compositeWithSiblings.basicGetParent();
 		}
 		if (compositeWithSiblings.basicHasNextSibling()) {
