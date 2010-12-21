@@ -23,6 +23,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.ISelectable;
 
 import com.google.common.collect.Iterables;
 
@@ -36,6 +37,7 @@ public class ResourceDescriptionsBasedContainerTest extends TestCase implements 
 	private EClass eClass;
 	private URI uri;
 	private ResourceDescription resourceDescription;
+	private ISelectable selectableDelegate;
 	
 	private class ResourceDescription extends AbstractResourceDescription {
 
@@ -68,6 +70,12 @@ public class ResourceDescriptionsBasedContainerTest extends TestCase implements 
 		eClass.setName("SomeName");
 		resourceDescription = new ResourceDescription();
 		container = new ResourceDescriptionsBasedContainer(this);
+		selectableDelegate = new AbstractCompoundSelectable() {
+			@Override
+			protected Iterable<? extends ISelectable> getSelectables() {
+				return getAllResourceDescriptions();
+			}
+		};
 	}
 	
 	public void testGetExportedObjectsByType_01() {
@@ -120,6 +128,26 @@ public class ResourceDescriptionsBasedContainerTest extends TestCase implements 
 		if (uri == this.uri)
 			return resourceDescription;
 		return null;
+	}
+
+	public boolean isEmpty() {
+		return false;
+	}
+
+	public Iterable<IEObjectDescription> getExportedObjects() {
+		return selectableDelegate.getExportedObjects();
+	}
+
+	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
+		return selectableDelegate.getExportedObjects(type, name, ignoreCase);
+	}
+
+	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
+		return selectableDelegate.getExportedObjectsByType(type);
+	}
+
+	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
+		return selectableDelegate.getExportedObjectsByObject(object);
 	}
 	
 }

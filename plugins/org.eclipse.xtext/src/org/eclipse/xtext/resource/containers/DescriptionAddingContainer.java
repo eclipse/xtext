@@ -10,7 +10,10 @@ package org.eclipse.xtext.resource.containers;
 import java.util.Collections;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IContainer;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.AbstractContainer;
 
@@ -31,6 +34,18 @@ public class DescriptionAddingContainer extends AbstractContainer {
 	
 	public Iterable<IResourceDescription> getResourceDescriptions() {
 		return Iterables.concat(Collections.singleton(description), delegate.getResourceDescriptions());
+	}
+	
+	@Override
+	public boolean isEmpty() {
+		return false;
+	}
+	
+	@Override
+	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName qualifiedName, boolean ignoreCase) {
+		Iterable<IEObjectDescription> added = description.getExportedObjects(type, qualifiedName, ignoreCase);
+		Iterable<IEObjectDescription> delegated = delegate.getExportedObjects(type, qualifiedName, ignoreCase);
+		return Iterables.concat(added, delegated);
 	}
 
 	public IResourceDescription getResourceDescription(URI uri) {

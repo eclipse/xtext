@@ -40,6 +40,10 @@ public class ResourceSetBasedAllContainersState implements IAllContainersState {
 	public Collection<URI> getContainedURIs(String containerHandle) {
 		return container2URIs.get(containerHandle);
 	}
+	
+	public boolean isEmpty(String containerHandle) {
+		return getContainedURIs(containerHandle).isEmpty();
+	}
 
 	public String getContainerHandle(URI uri) {
 		Set<String> set = uri2container.get(uri);

@@ -27,4 +27,8 @@ class ContainerState implements IContainerState {
 	public boolean contains(URI uri) {
 		return getContents().contains(uri);
 	}
+	
+	public boolean isEmpty() {
+		return globalState.isEmpty(root);
+	}
 }

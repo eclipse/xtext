@@ -19,5 +19,7 @@ public interface IContainerState {
 	Collection<URI> getContents();
 	
 	boolean contains(URI uri);
+
+	boolean isEmpty();
 	
 }

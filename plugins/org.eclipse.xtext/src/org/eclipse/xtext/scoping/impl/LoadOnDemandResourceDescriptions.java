@@ -14,8 +14,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
+import org.eclipse.xtext.resource.impl.AbstractCompoundSelectable;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.ISelectable;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
@@ -25,7 +27,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class LoadOnDemandResourceDescriptions implements IResourceDescriptions {
+public class LoadOnDemandResourceDescriptions extends AbstractCompoundSelectable implements IResourceDescriptions {
 
 	private IResourceDescriptions delegate;
 	private Collection<URI> validUris;
@@ -46,6 +48,16 @@ public class LoadOnDemandResourceDescriptions implements IResourceDescriptions {
 				return getResourceDescription(from);
 			}
 		}), Predicates.notNull());
+	}
+	
+	@Override
+	public boolean isEmpty() {
+		return validUris.isEmpty();
+	}
+	
+	@Override
+	protected Iterable<? extends ISelectable> getSelectables() {
+		return getAllResourceDescriptions();
 	}
 
 	public IResourceDescription getResourceDescription(URI uri) {

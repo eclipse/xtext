@@ -10,6 +10,9 @@ package org.eclipse.xtext.resource.impl;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 
@@ -41,7 +44,28 @@ public class ResourceDescriptionsBasedContainer extends AbstractContainer implem
 	public Iterable<IResourceDescription> getResourceDescriptions() {
 		return getUriToDescription().values();
 	}
+	
+	@Override
+	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName qualifiedName, boolean ignoreCase) {
+		Iterable<IEObjectDescription> unfiltered = getDescriptions().getExportedObjects(type, qualifiedName, ignoreCase);
+		return filterByURI(unfiltered);
+	}
+	
+	@Override
+	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
+		Iterable<IEObjectDescription> unfiltered = getDescriptions().getExportedObjectsByType(type);
+		return filterByURI(unfiltered);
+	}
 
+	protected Iterable<IEObjectDescription> filterByURI(Iterable<IEObjectDescription> unfiltered) {
+		return Iterables.filter(unfiltered, new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				URI resourceURI = input.getEObjectURI().trimFragment();
+				return contains(resourceURI);
+			}
+		});
+	}
+	
 	protected Map<URI, IResourceDescription> getUriToDescription() {
 		Map<URI, IResourceDescription> result = uriToDescription;
 		if (result == null) {
@@ -69,6 +93,10 @@ public class ResourceDescriptionsBasedContainer extends AbstractContainer implem
 	}
 	
 	protected boolean contains(IResourceDescription input) {
+		return contains(input.getURI());
+	}
+	
+	protected boolean contains(URI uri) {
 		return true;
 	}
 	

@@ -36,10 +36,15 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 	}
 
 	@Override
-	protected boolean contains(IResourceDescription input) {
-		return state.contains(input.getURI());
+	protected boolean contains(URI uri) {
+		return state.contains(uri);
 	}
 
+	@Override
+	public boolean isEmpty() {
+		return state.isEmpty();
+	}
+	
 	@Override
 	public IResourceDescription getResourceDescription(URI uri) {
 		if (state.contains(uri))

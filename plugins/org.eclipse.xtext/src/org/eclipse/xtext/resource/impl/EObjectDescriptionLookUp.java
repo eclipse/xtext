@@ -9,6 +9,8 @@ package org.eclipse.xtext.resource.impl;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.RandomAccess;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -19,11 +21,10 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ISelectable;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -31,7 +32,7 @@ import com.google.common.collect.Multimaps;
  */
 public class EObjectDescriptionLookUp implements ISelectable {
 	
-	private volatile Multimap<QualifiedName, IEObjectDescription> nameToObjects;
+	private volatile Map<QualifiedName, List<IEObjectDescription>> nameToObjects;
 	
 	private volatile List<IEObjectDescription> allDescriptions;
 
@@ -73,21 +74,21 @@ public class EObjectDescriptionLookUp implements ISelectable {
 		if (allDescriptions.isEmpty())
 			return Collections.emptyList();
 		QualifiedName lowerCase = name.toLowerCase();
-		if (getNameToObjects().containsKey(lowerCase)) {
-			Predicate<IEObjectDescription> predicate = ignoreCase 
-				?	new Predicate<IEObjectDescription>() {
-						public boolean apply(IEObjectDescription input) {
-							return EcoreUtil2.isAssignableFrom(type, input.getEClass());
-						}
-					}
-				:	new Predicate<IEObjectDescription>() {
-					public boolean apply(IEObjectDescription input) {
-						return name.equals(input.getName()) && EcoreUtil2.isAssignableFrom(type, input.getEClass());
-					}
-				};
-			return Iterables.filter(getNameToObjects().get(lowerCase), predicate);
-		} else
+		List<IEObjectDescription> values = getNameToObjects().get(lowerCase);
+		if (values == null)
 			return Collections.emptyList();
+		Predicate<IEObjectDescription> predicate = ignoreCase 
+			?	new Predicate<IEObjectDescription>() {
+					public boolean apply(IEObjectDescription input) {
+						return EcoreUtil2.isAssignableFrom(type, input.getEClass());
+					}
+				}
+			:	new Predicate<IEObjectDescription>() {
+				public boolean apply(IEObjectDescription input) {
+					return name.equals(input.getName()) && EcoreUtil2.isAssignableFrom(type, input.getEClass());
+				}
+			};
+		return Iterables.filter(values, predicate);
 	}
 	
 	public Iterable<IEObjectDescription> getExportedObjects() {
@@ -101,18 +102,37 @@ public class EObjectDescriptionLookUp implements ISelectable {
 		}
 	}
 
-	protected Multimap<QualifiedName, IEObjectDescription> getNameToObjects() {
+	protected Map<QualifiedName, List<IEObjectDescription>> getNameToObjects() {
 		if (nameToObjects == null) {
 			synchronized (this) {
 				if (nameToObjects == null) {
-					this.nameToObjects  = Multimaps.index(allDescriptions, new Function<IEObjectDescription, QualifiedName>() {
-						public QualifiedName apply(IEObjectDescription from) {
-							return from.getName().toLowerCase();
+					Map<QualifiedName, List<IEObjectDescription>> nameToObjects = Maps.newHashMapWithExpectedSize(allDescriptions.size());
+					if (allDescriptions instanceof RandomAccess) {
+						for(int i = 0; i < allDescriptions.size(); i++) {
+							IEObjectDescription description = allDescriptions.get(i);
+							putIntoMap(nameToObjects, description);
 						}
-					});
+					} else {
+						for(IEObjectDescription description: allDescriptions) {
+							putIntoMap(nameToObjects, description);
+						}
+					}
+					this.nameToObjects = nameToObjects; 
 				}
 			}
 		}
-		return nameToObjects;
+		return this.nameToObjects;
 	}
+
+	protected void putIntoMap(Map<QualifiedName, List<IEObjectDescription>> nameToObjects,
+			IEObjectDescription description) {
+		QualifiedName indexKey = description.getName().toLowerCase();
+		List<IEObjectDescription> values = nameToObjects.get(indexKey);
+		if (values == null) {
+			values = Lists.newArrayListWithExpectedSize(2);
+			nameToObjects.put(indexKey, values);
+		}
+		values.add(description);
+	}
+
 }
