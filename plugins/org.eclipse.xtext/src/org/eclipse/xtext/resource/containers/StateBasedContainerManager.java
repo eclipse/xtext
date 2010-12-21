@@ -28,7 +28,7 @@ public class StateBasedContainerManager implements IContainer.Manager {
 	
 	@Inject
 	private IAllContainersState.Provider stateProvider;
-
+	
 	public IContainer getContainer(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
 		String root = internalGetContainerHandle(desc, resourceDescriptions);
 		if (root == null) {
@@ -37,7 +37,7 @@ public class StateBasedContainerManager implements IContainer.Manager {
 			return IContainer.NULL_CONTAINER;
 		}
 		IContainer result = createContainer(root, resourceDescriptions);
-		if (result.getResourceDescription(desc.getURI()) == null) {
+		if (!result.hasResourceDescription(desc.getURI())) {
 			// desc has not been saved -> merge containers
 			result = new DescriptionAddingContainer(desc, result);
 		}
@@ -55,7 +55,7 @@ public class StateBasedContainerManager implements IContainer.Manager {
 		List<IContainer> result = getVisibleContainers(handles, resourceDescriptions);
 		if (!result.isEmpty()) {
 			IContainer first = result.get(0);
-			if (first.getResourceDescription(desc.getURI()) == null) {
+			if (!first.hasResourceDescription(desc.getURI())) {
 				first = new DescriptionAddingContainer(desc, first);
 				result.set(0, first);
 			}
@@ -67,7 +67,7 @@ public class StateBasedContainerManager implements IContainer.Manager {
 		return stateProvider.get(resourceDescriptions);
 	}
 
-	protected IContainer createContainer(final String handle, IResourceDescriptions resourceDescriptions) {
+	protected IContainer createContainer(final String handle, final IResourceDescriptions resourceDescriptions) {
 		IContainerState containerState = new ContainerState(handle, getState(resourceDescriptions));
 		StateBasedContainer result = new StateBasedContainer(resourceDescriptions, containerState);
 		return result;
@@ -78,7 +78,9 @@ public class StateBasedContainerManager implements IContainer.Manager {
 			return Collections.emptyList();
 		List<IContainer> result = Lists.newArrayListWithExpectedSize(handles.size());
 		for(String handle: handles) {
-			result.add(createContainer(handle, resourceDescriptions));
+			IContainer container = createContainer(handle, resourceDescriptions);
+			if (!container.isEmpty() || result.isEmpty())
+				result.add(container);
 		}
 		return result;
 	}

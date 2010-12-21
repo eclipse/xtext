@@ -24,6 +24,10 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsBasedContainer;
 import com.google.common.collect.Maps;
 
 /**
+ * A specialized container which is based on some long living lightweight state.
+ * A {@link IContainerState container state} is used to decide about the actually
+ * contained resource descriptions.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
@@ -36,8 +40,13 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 	}
 
 	@Override
-	protected boolean contains(URI uri) {
+	public boolean hasResourceDescription(URI uri) {
 		return state.contains(uri);
+	}
+	
+	@Override
+	public int getResourceDescriptionCount() {
+		return state.getContents().size();
 	}
 
 	@Override

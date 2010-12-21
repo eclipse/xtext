@@ -19,7 +19,11 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 /**
+ * A container that virtually removes a {@link IResourceDescription resource description}
+ * with a given {@link URI uri} from another container.
+ * 
  * @author Holger Schill - Initial contribution and API
+ * @author Sebastian Zarnekow - Optimizations and Javadoc
  */
 public class FilterUriContainer extends AbstractContainer {
 	private final URI filterMe;
@@ -28,6 +32,26 @@ public class FilterUriContainer extends AbstractContainer {
 	public FilterUriContainer(URI filterMe, IContainer delegate) {
 		this.filterMe = filterMe;
 		this.delegate = delegate;
+	}
+	
+	@Override
+	public boolean isEmpty() {
+		return getResourceDescriptionCount() == 0;
+	}
+	
+	@Override
+	public boolean hasResourceDescription(URI uri) {
+		if (filterMe.equals(uri))
+			return false;
+		return delegate.hasResourceDescription(uri);
+	}
+	
+	@Override
+	public int getResourceDescriptionCount() {
+		int delegateCount = delegate.getResourceDescriptionCount();
+		if (delegate.hasResourceDescription(filterMe))
+			return delegateCount-1;
+		return delegateCount;
 	}
 	
 	public Iterable<IResourceDescription> getResourceDescriptions() {
@@ -49,6 +73,7 @@ public class FilterUriContainer extends AbstractContainer {
 		});
 	}
 
+	@Override
 	public IResourceDescription getResourceDescription(URI uri) {
 		if (uri.equals(filterMe))
 			return null;

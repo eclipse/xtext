@@ -16,7 +16,13 @@ import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
 /**
+ * Abstract container implementation. Minimal clients have to implement
+ * {@link #getResourceDescriptions()}.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractContainer extends AbstractCompoundSelectable implements IContainer {
@@ -24,6 +30,22 @@ public abstract class AbstractContainer extends AbstractCompoundSelectable imple
 	@Override
 	protected Iterable<IResourceDescription> getSelectables() {
 		return getResourceDescriptions();
+	}
+	
+	public int getResourceDescriptionCount() {
+		return Iterables.size(getResourceDescriptions());
+	}
+	
+	public boolean hasResourceDescription(URI uri) {
+		return getResourceDescription(uri) != null;
+	}
+	
+	public IResourceDescription getResourceDescription(final URI uri) {
+		return Iterables.find(getResourceDescriptions(), new Predicate<IResourceDescription>() {
+			public boolean apply(IResourceDescription input) {
+				return uri.equals(input.getURI());
+			}
+		});
 	}
 	
 	@Override

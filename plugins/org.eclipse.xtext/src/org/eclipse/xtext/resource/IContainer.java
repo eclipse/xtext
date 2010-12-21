@@ -37,6 +37,16 @@ public interface IContainer extends ISelectable {
 	 * <code>null</code>. The result may be a cached view on the actual content of the underlying resources.
 	 */
 	Iterable<IResourceDescription> getResourceDescriptions();
+	
+	/**
+	 * @return the total number of resource descriptions returned by {@link #getResourceDescriptions()}
+	 */
+	int getResourceDescriptionCount();
+	
+	/**
+	 * @return <code>true</code> if the container can provide a {@link #getResourceDescription(URI) resource description with the given uri}. 
+	 */
+	boolean hasResourceDescription(URI uri);
 
 	/**
 	 * @return the {@link IResourceDescription} for the given URI, or null is this container does 
@@ -52,6 +62,14 @@ public interface IContainer extends ISelectable {
 
 		public boolean isEmpty() {
 			return true;
+		}
+		
+		public int getResourceDescriptionCount() {
+			return 0;
+		}
+		
+		public boolean hasResourceDescription(URI uri) {
+			return false;
 		}
 		
 		public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
