@@ -31,14 +31,13 @@ import com.google.inject.Inject;
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class XMLReferenceUpdater extends AbstractReferenceUpdater {
+public class XMLReferenceUpdater  {
 
 	@Inject
 	private IRefactoringDocument.Provider refactoringDocumentProvider;
 
 	private static final Logger LOG = Logger.getLogger(XMLReferenceUpdater.class);
 
-	@Override
 	protected void internalCreateReferenceUpdates(ElementRenameArguments elementRenameArguments,
 			Multimap<URI, IReferenceDescription> resource2references, ResourceSet resourceSet,
 			ReplaceRegion declarationEdit, UpdateAcceptor updateAcceptor, RefactoringStatus status, IProgressMonitor monitor) {

@@ -15,12 +15,8 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.resource.ILocationInFileProvider;
-import org.eclipse.xtext.ui.refactoring.ElementRenameInfo;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
-import org.eclipse.xtext.util.ITextRegion;
 
-import com.google.inject.Inject;
 import com.google.inject.internal.Lists;
 
 /**
@@ -30,27 +26,21 @@ import com.google.inject.internal.Lists;
  */
 public class DefaultDependentElementsCalculator implements IDependentElementsCalculator {
 
-	@Inject
-	private ILocationInFileProvider locationInFileProvider;
-
-	public Iterable<ElementRenameInfo> getDependentElementRenameInfos(EObject baseElement,
-			ElementRenameInfo baseRenameInfo, IProgressMonitor monitor) {
+	public Iterable<URI> getDependentElementURIs(EObject baseElement, IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, 10);
-		List<ElementRenameInfo> elementRenameInfos = Lists.newArrayList();
+		List<URI> elementURIs = Lists.newArrayList();
 		for (Iterator<EObject> i = EcoreUtil.getAllProperContents(baseElement, false); i.hasNext();) {
 			if(progress.isCanceled())
 				break;
 			EObject childElement = i.next();
 			URI childURI = EcoreUtil.getURI(childElement);
-			ITextRegion childTextRegion = locationInFileProvider.getSignificantTextRegion(childElement);
-			if (childURI != null && childTextRegion != null) {
-				elementRenameInfos.add(new ElementRenameInfo(baseRenameInfo.getDocument(), childURI, childTextRegion
-						.getOffset()));
+			if (childURI != null) {
+				elementURIs.add(childURI);
 			}
 			progress.worked(1);
 			progress.setWorkRemaining(10);
 		}
-		return elementRenameInfos;
+		return elementURIs;
 	}
 
 }

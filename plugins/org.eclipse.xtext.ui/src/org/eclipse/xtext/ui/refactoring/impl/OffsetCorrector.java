@@ -15,6 +15,7 @@ import org.eclipse.xtext.util.ReplaceRegion;
  * 
  * @author koehnlein - Initial contribution and API
  */
+@Deprecated
 public class OffsetCorrector {
 
 	private final IRefactoringDocument declarationDocument;

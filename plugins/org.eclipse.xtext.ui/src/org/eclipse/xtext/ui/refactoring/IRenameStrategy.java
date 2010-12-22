@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.refactoring;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
 import org.eclipse.xtext.util.ReplaceRegion;
@@ -23,12 +24,14 @@ public interface IRenameStrategy {
 
 	String getCurrentName();
 	
-	ReplaceRegion getReplaceRegion(String newName);
+	void applyChange(String newName, ResourceSet resourceSet);
 	
 	RefactoringStatus validateNewName(String newName);
-	
+
+	ReplaceRegion getReplaceRegion(String newName);
+
 	@ImplementedBy(DefaultRenameStrategy.Provider.class)
 	interface Provider {
-		IRenameStrategy get(EObject targetEObject, IRefactoringDocument targetDocument);
+		IRenameStrategy get(EObject targetEObject);
 	}
 }
