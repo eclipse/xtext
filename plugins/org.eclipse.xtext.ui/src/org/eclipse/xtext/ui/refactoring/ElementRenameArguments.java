@@ -11,6 +11,7 @@ import static com.google.common.collect.Iterables.*;
 
 import java.util.Collections;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.ltk.core.refactoring.participants.RenameArguments;
 
 /**
@@ -20,26 +21,26 @@ import org.eclipse.ltk.core.refactoring.participants.RenameArguments;
  */
 public class ElementRenameArguments extends RenameArguments {
 
-	private final ElementRenameInfo baseElementRenameInfo;
-	private final Iterable<ElementRenameInfo> dependentElementRenameInfos;
+	private final URI baseElementURI;
+	private final Iterable<URI> dependentElementURIs;
 
-	public ElementRenameArguments(String newName, ElementRenameInfo baseElementRenameInfo,
-			Iterable<ElementRenameInfo> dependentElementRenameInfos, boolean updateReferences) {
+	public ElementRenameArguments(String newName, URI baseElementURI, Iterable<URI> dependentElementURIs,
+			boolean updateReferences) {
 		super(newName, updateReferences);
-		this.baseElementRenameInfo = baseElementRenameInfo;
-		this.dependentElementRenameInfos = dependentElementRenameInfos;
+		this.baseElementURI = baseElementURI;
+		this.dependentElementURIs = dependentElementURIs;
 	}
 
-	public ElementRenameInfo getBaseElementRenameInfo() {
-		return baseElementRenameInfo;
+	public Iterable<URI> getAllElementURIs() {
+		return concat(Collections.singletonList(baseElementURI), dependentElementURIs);
 	}
 
-	public Iterable<ElementRenameInfo> getDependentElementRenameInfos() {
-		return dependentElementRenameInfos;
+	public URI getBaseElementURI() {
+		return baseElementURI;
 	}
 
-	public Iterable<ElementRenameInfo> getAllElementRenameInfos() {
-		return concat(Collections.singletonList(baseElementRenameInfo), dependentElementRenameInfos);
+	public Iterable<URI> getDependentElementURIs() {
+		return dependentElementURIs;
 	}
-
+	
 }

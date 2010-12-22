@@ -24,8 +24,8 @@ public class RefactoringStatusExtension {
 			else
 				status.addError(exc.getMessage());
 		} else {
-			status.addFatalError(exc.getMessage());
-			LOG.error(exc);
+			status.addFatalError("Error during refactoring: " + exc.getMessage() +". See log for details");
+			LOG.error("Error during refactoring", exc);
 		}
 	}
 }

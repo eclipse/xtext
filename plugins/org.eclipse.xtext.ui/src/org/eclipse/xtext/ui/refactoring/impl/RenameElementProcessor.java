@@ -26,7 +26,6 @@ import org.eclipse.ltk.core.refactoring.participants.RenameParticipant;
 import org.eclipse.ltk.core.refactoring.participants.SharableParticipants;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
-import org.eclipse.xtext.ui.refactoring.ElementRenameInfo;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.ui.refactoring.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
@@ -84,7 +83,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 			if(targetElement == null) {
 				throw new RefactoringStatusException("Rename target element can not be resolved", true);
 			}
-			this.strategy = strategyProvider.get(targetElement, targetDocument);
+			this.strategy = strategyProvider.get(targetElement);
 		} catch (Exception e) {
 			RefactoringStatusExtension.handleException(status, e);
 		}
@@ -147,11 +146,10 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 				throw new RefactoringStatusException("Could not create a text edit", true);
 			updateAcceptor.accept(targetDocument, declarationEdit);
 			progress.worked(10);
-			ElementRenameInfo baseRenameInfo = new ElementRenameInfo(targetDocument, targetElementURI, declarationEdit.getOffset());
-			progress.worked(10);
-			Iterable<ElementRenameInfo> dependentRenameInfos = dependentElementsCalculator.getDependentElementRenameInfos(targetElement, baseRenameInfo, progress.newChild(10));
-			renameArguments = new ElementRenameArguments(newName, baseRenameInfo, dependentRenameInfos, true);
-			referenceUpdaterDispatcher.createReferenceUpdates(renameArguments, strategy, resourceSet, updateAcceptor, progress.newChild(70));
+			Iterable<URI> dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(targetElement, progress.newChild(10));
+			renameArguments = new ElementRenameArguments(newName, targetElementURI, dependentElementURIs, true);
+			RefactoringStatus referenceUpdateStatus = referenceUpdaterDispatcher.createReferenceUpdates(renameArguments, strategy, resourceSet, updateAcceptor, progress.newChild(70));
+			status.merge(referenceUpdateStatus);
 		} catch (Exception exc) {
 			RefactoringStatusExtension.handleException(status, exc);
 		}

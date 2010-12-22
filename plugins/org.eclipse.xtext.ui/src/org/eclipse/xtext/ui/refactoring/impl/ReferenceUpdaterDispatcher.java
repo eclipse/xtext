@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
-import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Maps.*;
 import static org.eclipse.xtext.util.Strings.*;
 
@@ -23,12 +22,10 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
 import org.eclipse.xtext.ui.editor.findrefs.ResourceSetLocalContextProvider;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
-import org.eclipse.xtext.ui.refactoring.ElementRenameInfo;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.UpdateAcceptor;
 
-import com.google.common.base.Function;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
@@ -50,7 +47,7 @@ public class ReferenceUpdaterDispatcher {
 		RefactoringStatus status = new RefactoringStatus();
 		try {
 			ResourceSetLocalContextProvider localContextProvider = new ResourceSetLocalContextProvider(resourceSet);
-			referenceFinder.findReferences(getAllRenamedElementURIs(elementRenameArguments),
+			referenceFinder.findReferences(elementRenameArguments.getAllElementURIs(),
 					localContextProvider, acceptor, progress.newChild(30));
 			if(!progress.isCanceled()) {
 				Multimap<IReferenceUpdater, IReferenceDescription> updater2descriptions = acceptor
@@ -68,15 +65,6 @@ public class ReferenceUpdaterDispatcher {
 			RefactoringStatusExtension.handleException(status, exc);
 		}
 		return status;
-	}
-
-	protected Iterable<URI> getAllRenamedElementURIs(ElementRenameArguments elementRenameArguments) {
-		Iterable<URI> renamedElementsURIs = transform(elementRenameArguments.getAllElementRenameInfos(), new Function<ElementRenameInfo, URI>() {
-			public URI apply(ElementRenameInfo from) {
-				return from.getElementURI();
-			}
-		});
-		return renamedElementsURIs;
 	}
 
 	public static class Acceptor implements IReferenceFinder.IAcceptor {

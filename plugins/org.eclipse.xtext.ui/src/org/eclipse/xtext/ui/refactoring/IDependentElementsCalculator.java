@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.refactoring;
 import java.util.Collections;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultDependentElementsCalculator;
 
@@ -24,11 +25,10 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultDependentElementsCalculator.class)
 public interface IDependentElementsCalculator {
 
-	Iterable<ElementRenameInfo> getDependentElementRenameInfos(EObject baseElement, ElementRenameInfo baseRenameInfo, IProgressMonitor monitor);
+	Iterable<URI> getDependentElementURIs(EObject baseElement, IProgressMonitor monitor);
 
 	static class Null implements IDependentElementsCalculator {
-		public Iterable<ElementRenameInfo> getDependentElementRenameInfos(EObject baseElement,
-				ElementRenameInfo baseRenameInfo, IProgressMonitor monitor) {
+		public Iterable<URI> getDependentElementURIs(EObject baseElement, IProgressMonitor monitor) {
 			return Collections.emptyList();
 		}
 	}
