@@ -61,7 +61,7 @@ public class RenameElementWizard extends RefactoringWizard {
 			label.setText("New name");
 			label.setLayoutData(new GridData());
 			nameField = new Text(composite, SWT.BORDER);
-			nameField.setText(renameElementProcessor.getRenameElementStrategy().getCurrentName());
+			nameField.setText(renameElementProcessor.getRenameElementStrategy().getOriginalName());
 			nameField.setFont(composite.getFont());
 			nameField.setLayoutData(new GridData(GridData.FILL, GridData.BEGINNING, true, false));
 			nameField.addModifyListener(new ModifyListener() {

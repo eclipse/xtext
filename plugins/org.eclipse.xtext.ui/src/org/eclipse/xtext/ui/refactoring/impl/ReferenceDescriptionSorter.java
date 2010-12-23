@@ -23,9 +23,8 @@ public class ReferenceDescriptionSorter {
 
 	@Inject
 	private IWorkspace workspace;
-	
-	public Multimap<IProject, IReferenceDescription> sortByProject(
-			Iterable<IReferenceDescription> referenceDescriptions) {
+
+	public Multimap<IProject, IReferenceDescription> sortByProject(Iterable<IReferenceDescription> referenceDescriptions) {
 		Multimap<IProject, IReferenceDescription> referencesByProject = HashMultimap.create();
 		for (IReferenceDescription referenceDescription : referenceDescriptions) {
 			URI sourceEObjectUri = referenceDescription.getSourceEObjectUri();
@@ -44,6 +43,5 @@ public class ReferenceDescriptionSorter {
 		}
 		return referencesByResourceURI;
 	}
-
 
 }

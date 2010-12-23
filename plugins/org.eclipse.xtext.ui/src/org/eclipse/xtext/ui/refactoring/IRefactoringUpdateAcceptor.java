@@ -7,30 +7,36 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.TextEdit;
-import org.eclipse.xtext.ui.refactoring.impl.DefaultRefactoringDocumentProvider;
+import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
+import org.eclipse.xtext.ui.refactoring.impl.RefactoringUpdateAcceptor;
 
 import com.google.inject.ImplementedBy;
 
 /**
- * Abstraction over an open document or a text file that is affected by a refactoring. 
- *  
+ * Aggregates document updates as {@link Change Changes} or {@link TextEdits}. Clients can report issues to the
+ * refactoring status.
+ * 
  * @author koehnlein - Initial contribution and API
  */
-public interface IRefactoringDocument {
+@ImplementedBy(RefactoringUpdateAcceptor.class)
+public interface IRefactoringUpdateAcceptor {
 
-	Change createChange(String name, TextEdit textEdit);
-	
-	URI getURI();
-	
-	String getContents();
+	void accept(URI resourceURI, TextEdit textEdit);
 
-	@ImplementedBy(DefaultRefactoringDocumentProvider.class)
-	static interface Provider {
-		IRefactoringDocument get(URI resourceURI, RefactoringStatus status);
-	}
+	void accept(URI resourceURI, Change change);
+
+	RefactoringStatus getRefactoringStatus();
+	
+	IRefactoringDocument getDocument(URI resourceURI);
+	
+	/**
+	 * Returns a composite change of all accepted updates.
+	 */
+	Change createCompositeChange(String name, IProgressMonitor monitor);
 
 }

@@ -12,54 +12,52 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Map;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
+import org.eclipse.xtext.ui.refactoring.IRenamedElementTracker;
 
 /**
  * Renames an element without loosing track of the element and dependent elements.
  * 
  * @author koehnlein - Initial contribution and API
  */
-public class RenamedElementTracker {
+public class RenamedElementTracker implements IRenamedElementTracker {
 
-	private Map<URI, URI> old2newURI;
-
-	public void rename(ElementRenameArguments renameArguments, ResourceSet resourceSet, IRenameStrategy renameStrategy) {
-		Map<EObject, URI> renamedElement2oldURI = resolveRenamedElements(renameArguments, resourceSet);
-		renameStrategy.applyChange(renameArguments.getNewName(), resourceSet);
-		old2newURI = relocateRenamedElements(renamedElement2oldURI);		
-	}
-	
-	protected Map<URI, URI> relocateRenamedElements(Map<EObject, URI> renamedElement2oldURI) {
-		Map<URI, URI> old2newURI = newHashMap();
-		for(Map.Entry<EObject, URI> entry: renamedElement2oldURI.entrySet()) {
-			URI newURI = EcoreUtil.getURI(entry.getKey());
-			old2newURI.put(entry.getValue(), newURI);
-		}
+	public Map<URI, URI> renameAndTrack(Iterable<URI> renamedElementURIs, String newName, ResourceSet resourceSet, IRenameStrategy renameStrategy, IProgressMonitor monitor) {
+		SubMonitor progress = SubMonitor.convert(monitor).setWorkRemaining(3);
+		Map<EObject, URI> renamedElement2oldURI = resolveRenamedElements(renamedElementURIs, resourceSet);
+		progress.worked(1);
+		renameStrategy.applyDeclarationChange(newName, resourceSet);
+		progress.worked(1);
+		Map<URI, URI> old2newURI = relocateRenamedElements(renamedElement2oldURI);
+		progress.worked(1);
 		return old2newURI;
 	}
 
-	protected Map<EObject, URI> resolveRenamedElements(ElementRenameArguments renameArguments,
-			ResourceSet resourceSet) {
+	protected Map<EObject, URI> resolveRenamedElements(Iterable<URI> renamedElementURIs, ResourceSet resourceSet) {
 		Map<EObject, URI> renamedElement2oldURI = newHashMap();
-		for (URI renamedElementURI : renameArguments.getAllElementURIs()) {
+		for (URI renamedElementURI : renamedElementURIs) {
 			EObject renamedElement = resourceSet.getEObject(renamedElementURI, true);
 			if (renamedElement == null)
-				throw new RefactoringStatusException("Cannot resolve dependent element "
-						+ notNull(renamedElementURI), true);
+				throw new RefactoringStatusException("Cannot resolve dependent element " + notNull(renamedElementURI),
+						true);
 			renamedElement2oldURI.put(renamedElement, renamedElementURI);
 		}
 		return renamedElement2oldURI;
 	}
 
-	public URI getNewURI(URI oldURI) {
-		if (old2newURI.containsKey(oldURI))
-			return old2newURI.get(oldURI);
-		return oldURI;
+	protected Map<URI, URI> relocateRenamedElements(Map<EObject, URI> renamedElement2oldURI) {
+		Map<URI, URI> old2newURI = newHashMap();
+		for (Map.Entry<EObject, URI> entry : renamedElement2oldURI.entrySet()) {
+			URI newURI = EcoreUtil.getURI(entry.getKey());
+			old2newURI.put(entry.getValue(), newURI);
+		}
+		return old2newURI;
 	}
 
 }

@@ -14,10 +14,18 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.TextEdit;
-import org.eclipse.xtext.ui.refactoring.IRefactoringDocument;
+import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 
 public class MockRefactoringDocument implements IRefactoringDocument {
 
+	public static class Provider implements IRefactoringDocument.Provider {
+
+		public IRefactoringDocument get(URI resourceURI, RefactoringStatus status) {
+			return new MockRefactoringDocument(resourceURI, "");
+		}
+		
+	}
+	
 	private final URI uri;
 	private final String content;
 
@@ -38,7 +46,7 @@ public class MockRefactoringDocument implements IRefactoringDocument {
 		return uri;
 	}
 
-	public String getContents() {
+	public String getOriginalContents() {
 		return content;
 	}
 

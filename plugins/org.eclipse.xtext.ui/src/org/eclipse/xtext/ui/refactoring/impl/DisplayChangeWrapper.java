@@ -22,7 +22,10 @@ import org.eclipse.text.edits.TextEditGroup;
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 
 /**
- * Wraps the execution of a {@link Change} to be performed on the display thread.
+ * Wraps a {@link Change} to be performed on the display thread.
+ * 
+ * {@link org.eclipse.ltk.core.refactoring.DocumentChange DocumentChanges} are by default not executed on the display
+ * thread, causing thread access exceptions and leaving documents opened in editors in an inconsistent state.
  * 
  * @author koehnlein - Initial contribution and API
  */
@@ -31,14 +34,14 @@ public class DisplayChangeWrapper extends TextEditBasedChange {
 	private Change delegate;
 
 	public DisplayChangeWrapper(TextEditBasedChange delegate) {
-		this((Change)delegate);
+		this((Change) delegate);
 	}
-	
+
 	protected DisplayChangeWrapper(Change delegate) {
 		super(delegate.getName());
 		this.delegate = delegate;
 	}
-	
+
 	public Change getDelegate() {
 		return delegate;
 	}
@@ -160,7 +163,8 @@ public class DisplayChangeWrapper extends TextEditBasedChange {
 	@Override
 	public String getPreviewContent(TextEditBasedChangeGroup[] changeGroups, IRegion region,
 			boolean expandRegionToFullLine, int surroundingLines, IProgressMonitor pm) throws CoreException {
-		return getTextEditBasedChangeDelegate().getPreviewContent(changeGroups, region, expandRegionToFullLine, surroundingLines, pm);
+		return getTextEditBasedChangeDelegate().getPreviewContent(changeGroups, region, expandRegionToFullLine,
+				surroundingLines, pm);
 	}
 
 	@Override
@@ -182,11 +186,12 @@ public class DisplayChangeWrapper extends TextEditBasedChange {
 	public void setTextType(String type) {
 		getTextEditBasedChangeDelegate().setTextType(type);
 	}
-	
+
 	protected TextEditBasedChange getTextEditBasedChangeDelegate() {
-		if(!(delegate instanceof TextEditBasedChange))
-			throw new RuntimeException("Delegate change is not a TextEditBasedChange but is expected to be one. This should never happen ;-)");
+		if (!(delegate instanceof TextEditBasedChange))
+			throw new RuntimeException(
+					"Delegate change is not a TextEditBasedChange but is expected to be one. This should never happen ;-)");
 		return (TextEditBasedChange) delegate;
 	}
-	
+
 }

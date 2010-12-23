@@ -16,15 +16,13 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
 import org.eclipse.xtext.ui.editor.findrefs.ResourceSetLocalContextProvider;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
+import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
-import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
-import org.eclipse.xtext.ui.refactoring.UpdateAcceptor;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -39,35 +37,29 @@ public class ReferenceUpdaterDispatcher {
 	private IReferenceFinder referenceFinder;
 
 	@Inject
-	private Acceptor acceptor;
+	private ReferenceDescriptionAcceptor referenceDescriptionAcceptor;
 
-	public RefactoringStatus createReferenceUpdates(ElementRenameArguments elementRenameArguments,
-			IRenameStrategy renameStrategy, ResourceSet resourceSet, UpdateAcceptor updateAcceptor, IProgressMonitor monitor) {
+	public void createReferenceUpdates(ElementRenameArguments elementRenameArguments,
+			ResourceSet resourceSet, IRefactoringUpdateAcceptor updateAcceptor,
+			IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, "Updating references", 100);
-		RefactoringStatus status = new RefactoringStatus();
-		try {
-			ResourceSetLocalContextProvider localContextProvider = new ResourceSetLocalContextProvider(resourceSet);
-			referenceFinder.findReferences(elementRenameArguments.getAllElementURIs(),
-					localContextProvider, acceptor, progress.newChild(30));
-			if(!progress.isCanceled()) {
-				Multimap<IReferenceUpdater, IReferenceDescription> updater2descriptions = acceptor
+		ResourceSetLocalContextProvider localContextProvider = new ResourceSetLocalContextProvider(resourceSet);
+		referenceFinder.findAllReferences(elementRenameArguments.getRenamedElementURIs(), localContextProvider, referenceDescriptionAcceptor,
+				progress.newChild(30));
+		if (!progress.isCanceled()) {
+			Multimap<IReferenceUpdater, IReferenceDescription> updater2descriptions = referenceDescriptionAcceptor
 					.getReferenceUpdater2ReferenceDescriptions();
-				progress = progress.newChild(70).setWorkRemaining(updater2descriptions.keySet().size());
-				for (IReferenceUpdater referenceUpdater : updater2descriptions.keySet()) {
-					if(progress.isCanceled())
-						break;
-					RefactoringStatus updaterStatus = referenceUpdater.createReferenceUpdates(elementRenameArguments,
-						renameStrategy, updater2descriptions.get(referenceUpdater), updateAcceptor, progress.newChild(1));
-					status.merge(updaterStatus);
-				}
+			progress = progress.newChild(70).setWorkRemaining(updater2descriptions.keySet().size());
+			for (IReferenceUpdater referenceUpdater : updater2descriptions.keySet()) {
+				if (progress.isCanceled())
+					break;
+				referenceUpdater.createReferenceUpdates(elementRenameArguments, 
+						updater2descriptions.get(referenceUpdater), updateAcceptor, progress.newChild(1));
 			}
-		} catch (Exception exc) {
-			RefactoringStatusExtension.handleException(status, exc);
 		}
-		return status;
 	}
 
-	public static class Acceptor implements IReferenceFinder.IAcceptor {
+	public static class ReferenceDescriptionAcceptor implements IReferenceFinder.IAcceptor {
 
 		@Inject
 		private IResourceServiceProvider.Registry resourceServicveProviderRegistry;
@@ -76,8 +68,12 @@ public class ReferenceUpdaterDispatcher {
 		private Multimap<IReferenceUpdater, IReferenceDescription> updater2refs = HashMultimap.create();
 
 		public void accept(IReferenceDescription referenceDescription) {
-			if(referenceDescription.getSourceEObjectUri() == null || referenceDescription.getTargetEObjectUri() == null || referenceDescription.getEReference() == null) {
-				throw new RefactoringStatusException("Xtext index is corrupt. It is suggested to perform a workspace refresh and a clean build.", true);
+			if (referenceDescription.getSourceEObjectUri() == null
+					|| referenceDescription.getTargetEObjectUri() == null
+					|| referenceDescription.getEReference() == null) {
+				throw new RefactoringStatusException(
+						"Xtext index is corrupt. It is suggested to perform a workspace refresh and a clean build.",
+						true);
 			}
 			URI sourceResourceURI = referenceDescription.getSourceEObjectUri().trimFragment();
 			if (!sourceResourceURI.isPlatformResource()) {
