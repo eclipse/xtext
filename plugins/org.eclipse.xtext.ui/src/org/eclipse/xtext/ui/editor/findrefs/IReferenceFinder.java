@@ -30,9 +30,12 @@ public interface IReferenceFinder {
 		<R> R readOnly(URI targetURI, IUnitOfWork<R, EObject> work);
 	}
 
-	void findReferences(Iterable<URI> targetURI, ILocalContextProvider localContextProvider, IAcceptor acceptor,
+	void findAllReferences(Iterable<URI> targetURI, ILocalContextProvider localContextProvider, IAcceptor acceptor,
 			IProgressMonitor progressMonitor);
 
-	void findReferences(URI targetURI, ILocalContextProvider localContextProvider, IAcceptor acceptor,
+	void findAllReferences(URI targetURI, ILocalContextProvider localContextProvider, IAcceptor acceptor,
 			IProgressMonitor monitor);
+	
+	void findLocalReferences(EObject target, IAcceptor acceptor, IProgressMonitor monitor);
+
 }

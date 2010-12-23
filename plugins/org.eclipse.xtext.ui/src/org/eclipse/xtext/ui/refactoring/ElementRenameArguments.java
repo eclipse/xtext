@@ -7,11 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring;
 
-import static com.google.common.collect.Iterables.*;
-
-import java.util.Collections;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ltk.core.refactoring.participants.RenameArguments;
 
 /**
@@ -22,25 +21,34 @@ import org.eclipse.ltk.core.refactoring.participants.RenameArguments;
 public class ElementRenameArguments extends RenameArguments {
 
 	private final URI baseElementURI;
-	private final Iterable<URI> dependentElementURIs;
+	private final Map<URI,URI> original2newElementURIs;
+	private final IRenameStrategy renameStrategy;
 
-	public ElementRenameArguments(String newName, URI baseElementURI, Iterable<URI> dependentElementURIs,
+	public ElementRenameArguments(URI baseElementURI, String newName, IRenameStrategy renameStrategy,
+			Map<URI,URI> original2newElementURIs,
 			boolean updateReferences) {
 		super(newName, updateReferences);
 		this.baseElementURI = baseElementURI;
-		this.dependentElementURIs = dependentElementURIs;
+		this.renameStrategy = renameStrategy;
+		this.original2newElementURIs = original2newElementURIs;
 	}
 
-	public Iterable<URI> getAllElementURIs() {
-		return concat(Collections.singletonList(baseElementURI), dependentElementURIs);
+	public Iterable<URI> getRenamedElementURIs() {
+		return original2newElementURIs.keySet();
 	}
-
+	
 	public URI getBaseElementURI() {
 		return baseElementURI;
 	}
-
-	public Iterable<URI> getDependentElementURIs() {
-		return dependentElementURIs;
+	
+	public URI getNewElementURI(URI originalElementURI) {
+		URI newElementURI = original2newElementURIs.get(originalElementURI);
+		return (newElementURI != null) ? newElementURI : originalElementURI; 
 	}
+
+	public void applyDeclarationChange(ResourceSet resourceSet) {
+		renameStrategy.applyDeclarationChange(getNewName(), resourceSet);
+	}
+
 	
 }

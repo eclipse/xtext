@@ -51,12 +51,12 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 		this.index = index;
 	}
 
-	public void findReferences(URI targetURI, ILocalContextProvider localContextProvider,
+	public void findAllReferences(URI targetURI, ILocalContextProvider localContextProvider,
 			final IAcceptor acceptor, IProgressMonitor monitor) {
-		findReferences(singleton(targetURI), localContextProvider, acceptor, monitor);
+		findAllReferences(singleton(targetURI), localContextProvider, acceptor, monitor);
 	}
 			
-	public void findReferences(Iterable<URI> targetURIs, ILocalContextProvider localContextProvider,
+	public void findAllReferences(Iterable<URI> targetURIs, ILocalContextProvider localContextProvider,
 			final IAcceptor acceptor, IProgressMonitor monitor) {
 		final IProgressMonitor realMonitor = (monitor == null) ? new NullProgressMonitor() : monitor;
 		realMonitor.beginTask("Find references", 2);

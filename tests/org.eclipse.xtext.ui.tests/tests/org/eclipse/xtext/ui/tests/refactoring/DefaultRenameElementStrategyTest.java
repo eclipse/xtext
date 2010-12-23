@@ -7,56 +7,88 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.refactoring;
 
+import static com.google.common.collect.Lists.*;
+
+import java.util.List;
+
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
+import org.eclipse.text.edits.ReplaceEdit;
+import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.refactoring.IRefactoringDocument;
+import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
-import org.eclipse.xtext.util.ReplaceRegion;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class DefaultRenameElementStrategyTest extends AbstractXtextTests {
+public class DefaultRenameElementStrategyTest extends AbstractXtextTests implements IRefactoringUpdateAcceptor {
 
 	@Inject
 	private IRenameStrategy.Provider strategyProvider;
 	
+	private List<TextEdit> textEdits = newArrayList();
+	private List<Change> changes = newArrayList();
+	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		with(RefactoringTestLanguageStandaloneSetup.class);
 		getInjector().injectMembers(this);
 	}
 	
-	@Override
-	protected Injector getInjector() {
-		return Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage");
-	}
-
 	public void testRenameElementStrategy() throws Exception {
 		final XtextResource resource = getResourceFromString("A { B { C } }");
 		EObject targetElement = resource.getContents().get(0).eContents().get(0);
 		assertNotNull(targetElement);
 		assertTrue(targetElement instanceof Element);
 		assertEquals("A", ((Element) targetElement).getName());
-		IRefactoringDocument mockDocument = new MockRefactoringDocument(resource.getURI(), null);
-		IRenameStrategy renameElementStrategy = strategyProvider.get(targetElement, mockDocument);
+		IRenameStrategy renameElementStrategy = strategyProvider.get(targetElement);
 		assertNotNull(renameElementStrategy);
-		assertEquals("A", renameElementStrategy.getCurrentName());
+		assertEquals("A", renameElementStrategy.getOriginalName());
 		RefactoringStatus validateNewNameStatus = renameElementStrategy.validateNewName("A");
 		assertTrue(validateNewNameStatus.hasWarning());
 		assertFalse(validateNewNameStatus.hasError());
 		validateNewNameStatus = renameElementStrategy.validateNewName("D");
 		assertTrue(validateNewNameStatus.isOK());
-		ReplaceRegion renameEdit = renameElementStrategy.getReplaceRegion("D");
+		renameElementStrategy.applyDeclarationChange("D", resource.getResourceSet());
+		assertEquals("D", ((Element) targetElement).getName());
+		renameElementStrategy.createDeclarationUpdates("D", this);
+		assertEquals(0, changes.size());
+		assertEquals(1, textEdits.size());
+		assertTrue(textEdits.get(0) instanceof ReplaceEdit);
+		ReplaceEdit renameEdit = (ReplaceEdit) textEdits.get(0);
 		assertEquals(0, renameEdit.getOffset());
 		assertEquals(1, renameEdit.getLength());
 		assertEquals("D", renameEdit.getText());
+	}
+
+	public void accept(URI resourceURI, TextEdit textEdit) {
+		textEdits.add(textEdit);		
+	}
+
+	public void accept(URI resourceURI, Change change) {
+		changes.add(change);
+	}
+
+	public RefactoringStatus getRefactoringStatus() {
+		return null;
+	}
+
+	public IRefactoringDocument getDocument(URI resourceURI) {
+		return null;
+	}
+
+	public Change createCompositeChange(String name, IProgressMonitor monitor) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

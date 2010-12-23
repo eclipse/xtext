@@ -7,40 +7,31 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
-import static org.eclipse.xtext.util.Strings.*;
-
 import java.io.ByteArrayOutputStream;
 
-import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.ltk.core.refactoring.RefactoringStatus;
+import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
-import org.eclipse.xtext.ui.refactoring.IRefactoringDocument;
-import org.eclipse.xtext.ui.refactoring.UpdateAcceptor;
-import org.eclipse.xtext.util.ReplaceRegion;
+import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 
 import com.google.common.collect.Multimap;
-import com.google.inject.Inject;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class XMLReferenceUpdater  {
+public class XMLReferenceUpdater extends AbstractReferenceUpdater {
 
-	@Inject
-	private IRefactoringDocument.Provider refactoringDocumentProvider;
-
-	private static final Logger LOG = Logger.getLogger(XMLReferenceUpdater.class);
-
-	protected void internalCreateReferenceUpdates(ElementRenameArguments elementRenameArguments,
+	@Override
+	protected void createReferenceUpdates(ElementRenameArguments elementRenameArguments,
 			Multimap<URI, IReferenceDescription> resource2references, ResourceSet resourceSet,
-			ReplaceRegion declarationEdit, UpdateAcceptor updateAcceptor, RefactoringStatus status, IProgressMonitor monitor) {
+			IRefactoringUpdateAcceptor updateAcceptor, IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, "Updating XMI References", resource2references.keySet().size());
 		for (URI referringResourceURI : resource2references.keySet()) {
 			try {
@@ -50,18 +41,16 @@ public class XMLReferenceUpdater  {
 				if(!(referringResource instanceof XMLResource)) {
 					throw new RefactoringStatusException("Referring resource in XMLReferenceUpdater is not an XMLResource.", false);
 				}
-				IRefactoringDocument referringDocument = refactoringDocumentProvider.get(referringResourceURI, status);
+				IRefactoringDocument referringDocument = updateAcceptor.getDocument(referringResourceURI);
 				ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 				referringResource.save(outputStream, null);
 				String newContent = new String(((XMLResource) referringResource).getEncoding());
-				updateAcceptor.accept(referringDocument, new ReplaceRegion(0, referringDocument.getContents().length(), newContent));
+				updateAcceptor.accept(referringResourceURI, new ReplaceEdit(0, referringDocument.getOriginalContents().length(), newContent));
 				progress.worked(1);
 			} catch (Exception exc) {
-				status.addFatalError("Could not save referring resource " + notNull(referringResourceURI)
-						+ ". See log for details.");
-				LOG.error(exc);
+				throw new WrappedException(exc);
 			}
 		}
 	}
-	
+
 }

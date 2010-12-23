@@ -33,7 +33,6 @@ import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.refactoring.IRefactoringDocument;
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 
 import com.google.inject.Inject;
@@ -154,7 +153,7 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 			return buffer.toString();
 		}
 
-		public String getContents() {
+		public String getOriginalContents() {
 			return document.get();
 		}
 	}
@@ -181,7 +180,7 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 			return textFileChange;
 		}
 
-		public String getContents() {
+		public String getOriginalContents() {
 			try {
 				InputStream inputStream = file.getContents();
 				String charset = (encodingProvider != null) ? encodingProvider.getEncoding(getURI()) : file

@@ -7,25 +7,29 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
-import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
+import org.eclipse.text.edits.TextEdit;
+
+import com.google.inject.ImplementedBy;
 
 /**
+ * Abstraction over an open document or a text file that is affected by a refactoring. 
+ *  
  * @author koehnlein - Initial contribution and API
  */
-public class RefactoringStatusExtension {
+public interface IRefactoringDocument {
 
-	private static final Logger LOG = Logger.getLogger(RefactoringStatusExtension.class);
+	Change createChange(String name, TextEdit textEdit);
 	
-	public static void handleException(RefactoringStatus status, Exception exc) {
-		if(exc instanceof RefactoringStatusException) { 
-			if(((RefactoringStatusException) exc).isFatal())
-				status.addFatalError(exc.getMessage());
-			else
-				status.addError(exc.getMessage());
-		} else {
-			status.addFatalError("Error during refactoring: " + exc.getMessage() +". See log for details");
-			LOG.error("Error during refactoring", exc);
-		}
+	URI getURI();
+	
+	String getOriginalContents();
+
+	@ImplementedBy(DefaultRefactoringDocumentProvider.class)
+	static interface Provider {
+		IRefactoringDocument get(URI resourceURI, RefactoringStatus status);
 	}
+
 }

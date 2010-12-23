@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
-import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-
 /**
+ * A convenient way to stop calculation of refactoring changes.
+ * 
+ * The message will be reported to the {@link org.eclipse.ltk.core.refactoring.RefactoringStatus} and thus to the UI.
+ * For any other exception, the stack trace is logged to the console additionally.
+ * 
  * @author koehnlein - Initial contribution and API
  */
 public class RefactoringStatusException extends RuntimeException {
@@ -21,17 +24,9 @@ public class RefactoringStatusException extends RuntimeException {
 		super(message);
 		this.isFatal = isFatal;
 	}
-	
+
 	public boolean isFatal() {
 		return isFatal;
 	}
 
-	@Deprecated
-	public void reportToStatus(RefactoringStatus status) {
-		if(isFatal)
-			status.addFatalError(getMessage());
-		else
-			status.addError(getMessage());
-	}
-	
 }

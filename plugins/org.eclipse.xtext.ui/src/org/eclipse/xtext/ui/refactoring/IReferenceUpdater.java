@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ui.refactoring;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultReferenceUpdater;
 
@@ -22,8 +21,8 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultReferenceUpdater.class)
 public interface IReferenceUpdater {
 
-	RefactoringStatus createReferenceUpdates(ElementRenameArguments elementRenameArguments,
-			IRenameStrategy renameStrategy, Iterable<IReferenceDescription> referenceDescriptions,
-			UpdateAcceptor updateAcceptor, IProgressMonitor monitor);
+	void createReferenceUpdates(ElementRenameArguments elementRenameArguments,
+			Iterable<IReferenceDescription> referenceDescriptions, IRefactoringUpdateAcceptor updateAcceptor,
+			IProgressMonitor monitor);
 
 }

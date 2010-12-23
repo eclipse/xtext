@@ -80,7 +80,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 
 		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementB)));
-		referenceFinder.findReferences(EcoreUtil.getURI(elementA), localContextProvider, acceptor,
+		referenceFinder.findAllReferences(EcoreUtil.getURI(elementA), localContextProvider, acceptor,
 				new NullProgressMonitor());
 		acceptor.assertFinished();
 	}
@@ -98,7 +98,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 
 		acceptor.expect(new DefaultReferenceDescription(elementD, elementC,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
-		referenceFinder.findReferences(EcoreUtil.getURI(elementC), localContextProvider, acceptor,
+		referenceFinder.findAllReferences(EcoreUtil.getURI(elementC), localContextProvider, acceptor,
 				new NullProgressMonitor());
 		acceptor.assertFinished();
 	}
@@ -120,7 +120,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementB)));
 		acceptor.expect(new DefaultReferenceDescription(elementD, elementA,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
-		referenceFinder.findReferences(EcoreUtil.getURI(elementA), localContextProvider, acceptor,
+		referenceFinder.findAllReferences(EcoreUtil.getURI(elementA), localContextProvider, acceptor,
 				new NullProgressMonitor());
 		acceptor.assertFinished();
 		

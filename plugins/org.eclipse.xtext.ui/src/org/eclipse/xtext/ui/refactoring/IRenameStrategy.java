@@ -11,24 +11,29 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
-import org.eclipse.xtext.util.ReplaceRegion;
 
 import com.google.inject.ImplementedBy;
 
 /**
- * Customizable strategy for the text based rename refactoring of a concrete {@link EObject}. 
+ * Customizable strategy for the text based rename refactoring of a given {@link EObject}. 
  * 
  * @author koehnlein - Initial contribution and API
  */
 public interface IRenameStrategy {
 
-	String getCurrentName();
-	
-	void applyChange(String newName, ResourceSet resourceSet);
+	String getOriginalName();
 	
 	RefactoringStatus validateNewName(String newName);
 
-	ReplaceRegion getReplaceRegion(String newName);
+	/**
+	 * Applies the declaration change to the semantic model in the given resource set.
+	 */
+	void applyDeclarationChange(String newName, ResourceSet resourceSet);
+	
+	/**
+	 * Creates the document updates and reports them to the updateAcceptor
+	 */
+	void createDeclarationUpdates(String newName, IRefactoringUpdateAcceptor updateAcceptor);
 
 	@ImplementedBy(DefaultRenameStrategy.Provider.class)
 	interface Provider {

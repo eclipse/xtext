@@ -25,10 +25,10 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil;
-import org.eclipse.xtext.ui.refactoring.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRefactoringDocumentProvider.EditorDocument;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRefactoringDocumentProvider.FileDocument;
 import org.eclipse.xtext.ui.refactoring.impl.DisplayChangeWrapper;
+import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.AbstractEditorTest;
 
@@ -72,7 +72,7 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 		IRefactoringDocument document = createAndCheckDocument(testFile);
 		assertTrue(document instanceof FileDocument);
 		assertEquals(testFile, ((FileDocument) document).getFile());
-		assertEquals(TEST_FILE_CONTENT, document.getContents());
+		assertEquals(TEST_FILE_CONTENT, document.getOriginalContents());
 		
 		Change change = document.createChange(CHANGE_NAME, textEdit);
 		assertTrue(change instanceof TextFileChange);
@@ -88,7 +88,7 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 		assertTrue(cleanDocument instanceof EditorDocument);
 		IXtextDocument editorDocument = editor.getDocument();
 		assertEquals(editorDocument, ((EditorDocument) cleanDocument).getDocument());
-		assertEquals(TEST_FILE_CONTENT, cleanDocument.getContents());
+		assertEquals(TEST_FILE_CONTENT, cleanDocument.getOriginalContents());
 		
 		Change change = cleanDocument.createChange(CHANGE_NAME, textEdit);
 		assertTrue(change instanceof DisplayChangeWrapper);
