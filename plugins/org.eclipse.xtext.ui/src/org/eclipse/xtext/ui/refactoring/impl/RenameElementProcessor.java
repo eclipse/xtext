@@ -149,16 +149,16 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 		SubMonitor progress = SubMonitor.convert(monitor, 100);
 		try {
 			Iterable<URI> dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(targetElement,
-					progress.newChild(10));
+					progress.newChild(1));
 			Map<URI, URI> original2newElementURIs = renameElementTracker.renameAndTrack(
 					concat(Collections.singleton(targetElementURI), dependentElementURIs), newName, resourceSet,
-					renameStrategy, progress.newChild(10));
+					renameStrategy, progress.newChild(1));
 			renameStrategy.createDeclarationUpdates(newName, updateAcceptor);
 
 			renameArguments = new ElementRenameArguments(targetElementURI, newName, renameStrategy,
 					original2newElementURIs, true);
 			referenceUpdaterDispatcher.createReferenceUpdates(renameArguments, resourceSet, updateAcceptor,
-					progress.newChild(80));
+					progress.newChild(98));
 			status.merge(updateAcceptor.getRefactoringStatus());
 		} catch (Exception exc) {
 			handleException(status, exc);

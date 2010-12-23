@@ -39,22 +39,21 @@ public abstract class AbstractReferenceUpdater implements IReferenceUpdater {
 			Iterable<IReferenceDescription> referenceDescriptions, IRefactoringUpdateAcceptor updateAcceptor,
 			IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, 100);
-		progress.beginTask("Sort references by project", 5);
+		progress.beginTask("Sort references by project", 1);
 		Multimap<IProject, IReferenceDescription> project2references = sorter.sortByProject(referenceDescriptions);
-		SubMonitor allProjectsProgress = progress.newChild(95).setWorkRemaining(project2references.keySet().size());
+		SubMonitor allProjectsProgress = progress.newChild(98).setWorkRemaining(project2references.keySet().size());
 		for (IProject project : project2references.keySet()) {
 			if (allProjectsProgress.isCanceled())
 				break;
 			Multimap<URI, IReferenceDescription> resource2references = sorter.sortByResource(project2references
 					.get(project));
-			int numResources = resource2references.keySet().size();
-			SubMonitor projectProgress = allProjectsProgress.newChild(1).setWorkRemaining(numResources + 2);
+			SubMonitor projectProgress = allProjectsProgress.newChild(1).setWorkRemaining(100);
 			ResourceSet resourceSet = resourceSetProvider.get(project);
 			loadTargetResource(resourceSet, elementRenameArguments, projectProgress.newChild(1));
-			loadReferringResources(resourceSet, resource2references.keySet(), projectProgress.newChild(numResources));
+			loadReferringResources(resourceSet, resource2references.keySet(), projectProgress.newChild(5));
 			elementRenameArguments.applyDeclarationChange(resourceSet);
 			createReferenceUpdates(elementRenameArguments, resource2references, resourceSet, updateAcceptor,
-					projectProgress.newChild(1));
+					projectProgress.newChild(94));
 		}
 	}
 

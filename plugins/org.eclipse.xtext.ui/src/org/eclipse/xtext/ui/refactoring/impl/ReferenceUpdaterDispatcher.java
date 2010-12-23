@@ -23,6 +23,7 @@ import org.eclipse.xtext.ui.editor.findrefs.ResourceSetLocalContextProvider;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
+import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -39,30 +40,27 @@ public class ReferenceUpdaterDispatcher {
 	@Inject
 	private ReferenceDescriptionAcceptor referenceDescriptionAcceptor;
 
-	public void createReferenceUpdates(ElementRenameArguments elementRenameArguments,
-			ResourceSet resourceSet, IRefactoringUpdateAcceptor updateAcceptor,
-			IProgressMonitor monitor) {
+	public void createReferenceUpdates(ElementRenameArguments elementRenameArguments, ResourceSet resourceSet,
+			IRefactoringUpdateAcceptor updateAcceptor, IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, "Updating references", 100);
 		ResourceSetLocalContextProvider localContextProvider = new ResourceSetLocalContextProvider(resourceSet);
-		referenceFinder.findAllReferences(elementRenameArguments.getRenamedElementURIs(), localContextProvider, referenceDescriptionAcceptor,
-				progress.newChild(30));
-		if (!progress.isCanceled()) {
-			Multimap<IReferenceUpdater, IReferenceDescription> updater2descriptions = referenceDescriptionAcceptor
-					.getReferenceUpdater2ReferenceDescriptions();
-			progress = progress.newChild(70).setWorkRemaining(updater2descriptions.keySet().size());
-			for (IReferenceUpdater referenceUpdater : updater2descriptions.keySet()) {
-				if (progress.isCanceled())
-					break;
-				referenceUpdater.createReferenceUpdates(elementRenameArguments, 
-						updater2descriptions.get(referenceUpdater), updateAcceptor, progress.newChild(1));
-			}
+		referenceFinder.findAllReferences(elementRenameArguments.getRenamedElementURIs(), localContextProvider,
+				referenceDescriptionAcceptor, progress.newChild(2));
+		Multimap<IReferenceUpdater, IReferenceDescription> updater2descriptions = referenceDescriptionAcceptor
+				.getReferenceUpdater2ReferenceDescriptions();
+		SubMonitor updaterProgress = progress.newChild(98).setWorkRemaining(updater2descriptions.keySet().size());
+		for (IReferenceUpdater referenceUpdater : updater2descriptions.keySet()) {
+			if (updaterProgress.isCanceled())
+				return;
+			referenceUpdater.createReferenceUpdates(elementRenameArguments, updater2descriptions.get(referenceUpdater),
+					updateAcceptor, updaterProgress.newChild(1));
 		}
 	}
 
 	public static class ReferenceDescriptionAcceptor implements IReferenceFinder.IAcceptor {
 
 		@Inject
-		private IResourceServiceProvider.Registry resourceServicveProviderRegistry;
+		private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
 
 		private Map<IResourceServiceProvider, IReferenceUpdater> provider2updater = newHashMap();
 		private Multimap<IReferenceUpdater, IReferenceDescription> updater2refs = HashMultimap.create();
@@ -84,7 +82,7 @@ public class ReferenceUpdaterDispatcher {
 		}
 
 		protected IReferenceUpdater getReferenceUpdater(URI sourceResourceURI) {
-			IResourceServiceProvider resourceServiceProvider = resourceServicveProviderRegistry
+			IResourceServiceProvider resourceServiceProvider = resourceServiceProviderRegistry
 					.getResourceServiceProvider(sourceResourceURI);
 			IReferenceUpdater referenceUpdater = provider2updater.get(resourceServiceProvider);
 			if (referenceUpdater == null) {

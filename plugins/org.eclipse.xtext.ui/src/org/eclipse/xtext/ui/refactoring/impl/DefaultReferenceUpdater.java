@@ -53,6 +53,8 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 		SubMonitor progress = SubMonitor.convert(monitor, "Creating reference updates", resource2references.keySet()
 				.size());
 		for (URI referringResourceURI : resource2references.keySet()) {
+			if(progress.isCanceled())
+				return;
 			Resource referringResource = resourceSet.getResource(referringResourceURI, false);
 			if (!(referringResource instanceof XtextResource)) {
 				throw new RefactoringStatusException("Resource " + notNull(referringResourceURI)

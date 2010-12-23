@@ -3660,4 +3660,28 @@
         </resourceServiceProvider>
     </extension>
 
+<!-- adding resource factories -->
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/xtext/referringTestLanguage" 
+       class = "org.eclipse.xtext.ui.tests.refactoring.referring.ReferringPackage"
+       genModel = "org/eclipse/xtext/ui/tests/refactoring/ReferringTestLanguage.genmodel" /> 
+	
+  </extension>
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.ui.tests.refactoring.ui.ReferringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="referringtestlanguage">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.tests.refactoring.ui.ReferringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="referringtestlanguage">
+        </resourceServiceProvider>
+    </extension>
+
 </plugin>
