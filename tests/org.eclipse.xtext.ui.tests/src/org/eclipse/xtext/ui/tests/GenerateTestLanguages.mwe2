@@ -176,5 +176,13 @@ Workflow {
 				fragment = exporting.QualifiedNamesFragment {}
 			}
 		}
+		language = {
+			uri="classpath:/org/eclipse/xtext/ui/tests/refactoring/ReferringTestLanguage.xtext"
+			fragment = CompositeGeneratorFragment {
+				fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragmentsBuilder auto-inject {}
+				fragment = scoping.ImportNamespacesScopingFragment {}
+				fragment = exporting.QualifiedNamesFragment {}
+			}
+		}
 	}
 }

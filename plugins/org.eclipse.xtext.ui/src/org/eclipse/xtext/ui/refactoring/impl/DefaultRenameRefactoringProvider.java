@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.refactoring.impl;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.ltk.core.refactoring.RefactoringTickProvider;
 import org.eclipse.ltk.core.refactoring.participants.RenameRefactoring;
 import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 
@@ -22,7 +23,12 @@ public class DefaultRenameRefactoringProvider implements IRenameRefactoringProvi
 		AbstractRenameProcessor processor = processorProvider.get();
 		if (processor != null) {
 			processor.initialize(targetElementURI);
-			return new RenameRefactoring(processor);
+			return new RenameRefactoring(processor) {
+				@Override
+				protected RefactoringTickProvider doGetRefactoringTickProvider() {
+					return new RefactoringTickProvider(1, 200, 1, 1);
+				}
+			};
 		}
 		return null;
 	}

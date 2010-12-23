@@ -197,5 +197,8 @@ Export-Package: org.eclipse.xtext.ui.tests,
  org.eclipse.xtext.ui.tests.refactoring.parser.antlr,
  org.eclipse.xtext.ui.tests.refactoring.parser.antlr.internal,
  org.eclipse.xtext.ui.tests.refactoring.validation,
- org.eclipse.xtext.ui.tests.refactoring.ui.contentassist.antlr
+ org.eclipse.xtext.ui.tests.refactoring.ui.contentassist.antlr,
+ org.eclipse.xtext.ui.tests.refactoring.referring,
+ org.eclipse.xtext.ui.tests.refactoring.referring.impl,
+ org.eclipse.xtext.ui.tests.refactoring.referring.util
 
