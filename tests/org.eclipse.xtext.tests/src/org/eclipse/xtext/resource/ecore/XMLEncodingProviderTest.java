@@ -10,9 +10,9 @@ package org.eclipse.xtext.resource.ecore;
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.ecore.XMLEncodingProvider;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
+import org.eclipse.xtext.resource.generic.XMLEncodingProvider;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API

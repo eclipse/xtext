@@ -7,36 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.ecore;
 
-import org.eclipse.xtext.Constants;
-import org.eclipse.xtext.parser.IEncodingProvider;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.service.AbstractGenericModule;
-
-import com.google.inject.Binder;
-import com.google.inject.name.Names;
+import org.eclipse.xtext.resource.generic.AbstractEmfResourceRuntimeModule;
 
 /**
- * Default bindings for Ecore's resource service provider, etc.
- * 
- * @author Sven Efftinge - Initial contribution and API
+ * @author koehnlein - Initial contribution and API
  */
-public class EcoreRuntimeModule extends AbstractGenericModule {
+public class EcoreRuntimeModule extends AbstractEmfResourceRuntimeModule {
 
-	public Class<? extends IResourceServiceProvider> bindIResourceServiceProvider() {
-		return EcoreResourceServiceProviderImpl.class;
+	@Override
+	protected String getLanguageName() {
+		return "org.eclipse.emf.ecore.presentation.EcoreEditorID";
+	}
+
+	@Override
+	protected String getFileExtensions() {
+		return "ecore";
 	}
 	
-	public Class<? extends IEncodingProvider> bindIEncodingProvider() {
-		return XMLEncodingProvider.class;
-	}
-	
-	public void configureLanguageName(Binder binder) {
-		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME))
-				.toInstance("org.eclipse.emf.ecore.presentation.EcoreEditorID");
-	}
-
-	public void configureFileExtensions(Binder binder) {
-		binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("ecore");
-	}
-
 }
