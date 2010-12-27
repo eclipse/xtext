@@ -16,8 +16,10 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.IResourceServiceProvider.Registry;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
 import org.eclipse.xtext.ui.editor.findrefs.ResourceSetLocalContextProvider;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
@@ -38,12 +40,14 @@ public class ReferenceUpdaterDispatcher {
 	private IReferenceFinder referenceFinder;
 
 	@Inject
-	private ReferenceDescriptionAcceptor referenceDescriptionAcceptor;
+	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
 
 	public void createReferenceUpdates(ElementRenameArguments elementRenameArguments, ResourceSet resourceSet,
 			IRefactoringUpdateAcceptor updateAcceptor, IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, "Updating references", 100);
 		ResourceSetLocalContextProvider localContextProvider = new ResourceSetLocalContextProvider(resourceSet);
+		ReferenceDescriptionAcceptor referenceDescriptionAcceptor = new ReferenceDescriptionAcceptor(
+				resourceServiceProviderRegistry, updateAcceptor.getRefactoringStatus());
 		referenceFinder.findAllReferences(elementRenameArguments.getRenamedElementURIs(), localContextProvider,
 				referenceDescriptionAcceptor, progress.newChild(2));
 		Multimap<IReferenceUpdater, IReferenceDescription> updater2descriptions = referenceDescriptionAcceptor
@@ -59,11 +63,17 @@ public class ReferenceUpdaterDispatcher {
 
 	public static class ReferenceDescriptionAcceptor implements IReferenceFinder.IAcceptor {
 
-		@Inject
-		private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
-
 		private Map<IResourceServiceProvider, IReferenceUpdater> provider2updater = newHashMap();
 		private Multimap<IReferenceUpdater, IReferenceDescription> updater2refs = HashMultimap.create();
+
+		private RefactoringStatus status;
+		private final Registry resourceServiceProviderRegistry;
+
+		public ReferenceDescriptionAcceptor(IResourceServiceProvider.Registry resourceServiceProviderRegistry,
+				RefactoringStatus status) {
+			this.resourceServiceProviderRegistry = resourceServiceProviderRegistry;
+			this.status = status;
+		}
 
 		public void accept(IReferenceDescription referenceDescription) {
 			if (referenceDescription.getSourceEObjectUri() == null
@@ -78,7 +88,12 @@ public class ReferenceUpdaterDispatcher {
 				throw new RefactoringStatusException("Referring element is not in workspace: "
 						+ notNull(sourceResourceURI), false);
 			}
-			updater2refs.put(getReferenceUpdater(sourceResourceURI), referenceDescription);
+			IReferenceUpdater referenceUpdater = getReferenceUpdater(sourceResourceURI);
+			if (referenceUpdater == null)
+				status.addError("Cannot find a reference updater for " + notNull(sourceResourceURI)
+						+ " which contains references to renamed elements");
+			else
+				updater2refs.put(referenceUpdater, referenceDescription);
 		}
 
 		protected IReferenceUpdater getReferenceUpdater(URI sourceResourceURI) {
@@ -86,10 +101,10 @@ public class ReferenceUpdaterDispatcher {
 					.getResourceServiceProvider(sourceResourceURI);
 			IReferenceUpdater referenceUpdater = provider2updater.get(resourceServiceProvider);
 			if (referenceUpdater == null) {
-				referenceUpdater = (resourceServiceProvider instanceof IResourceUIServiceProvider) 
-					? ((IResourceUIServiceProvider) resourceServiceProvider).getReferenceUpdater() 
-					: resourceServiceProvider.get(IReferenceUpdater.class);
-				provider2updater.put(resourceServiceProvider, referenceUpdater);
+				referenceUpdater = (resourceServiceProvider instanceof IResourceUIServiceProvider) ? ((IResourceUIServiceProvider) resourceServiceProvider)
+						.getReferenceUpdater() : resourceServiceProvider.get(IReferenceUpdater.class);
+				if (referenceUpdater != null)
+					provider2updater.put(resourceServiceProvider, referenceUpdater);
 			}
 			return referenceUpdater;
 		}
