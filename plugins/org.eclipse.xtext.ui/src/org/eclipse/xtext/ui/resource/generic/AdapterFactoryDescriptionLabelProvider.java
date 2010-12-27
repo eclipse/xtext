@@ -1,4 +1,4 @@
-package org.eclipse.xtext.ui.ecore;
+package org.eclipse.xtext.ui.resource.generic;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -6,7 +6,7 @@ import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
 
 import com.google.inject.Inject;
 
-public class EcoreDescriptionLabelProvider extends DefaultDescriptionLabelProvider {
+public class AdapterFactoryDescriptionLabelProvider extends DefaultDescriptionLabelProvider {
 
 	@Inject
 	private AdapterFactoryLabelProvider delegate;

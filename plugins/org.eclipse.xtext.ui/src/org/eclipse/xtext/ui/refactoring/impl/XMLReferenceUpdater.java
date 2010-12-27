@@ -44,7 +44,7 @@ public class XMLReferenceUpdater extends AbstractReferenceUpdater {
 				IRefactoringDocument referringDocument = updateAcceptor.getDocument(referringResourceURI);
 				ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 				referringResource.save(outputStream, null);
-				String newContent = new String(((XMLResource) referringResource).getEncoding());
+				String newContent = new String(outputStream.toByteArray(), ((XMLResource) referringResource).getEncoding());
 				updateAcceptor.accept(referringResourceURI, new ReplaceEdit(0, referringDocument.getOriginalContents().length(), newContent));
 				progress.worked(1);
 			} catch (Exception exc) {

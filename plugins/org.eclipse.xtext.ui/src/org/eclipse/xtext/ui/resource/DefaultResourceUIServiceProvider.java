@@ -15,10 +15,12 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IContainer.Manager;
 import org.eclipse.xtext.ui.LanguageSpecific;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
+import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import org.eclipse.xtext.validation.IResourceValidator;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.internal.Nullable;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -77,6 +79,14 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 
 	public IURIEditorOpener getURIEditorOpener() {
 		return uriEditorOpener;
+	}
+	
+	@Inject
+	@Nullable
+	private IReferenceUpdater referenceUpdater;
+	
+	public IReferenceUpdater getReferenceUpdater() {
+		return referenceUpdater;
 	}
 	
 	@Inject

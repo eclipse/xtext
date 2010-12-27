@@ -12,6 +12,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
+import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 
 import com.google.inject.ImplementedBy;
 
@@ -39,4 +40,9 @@ public interface IResourceUIServiceProvider extends IResourceServiceProvider {
 	 * The {@link IURIEditorOpener} of the language
 	 */
 	IURIEditorOpener getURIEditorOpener();
+	
+	/**
+	 * The reference updater of the language.
+	 */
+	IReferenceUpdater getReferenceUpdater();
 }

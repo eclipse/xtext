@@ -9,7 +9,7 @@ import org.eclipse.emf.ecore.presentation.EcoreEditor;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.xtext.ui.editor.LanguageSpecificURIEditorOpener;
 
-public class EditorOpener extends LanguageSpecificURIEditorOpener {
+public class EcoreEditorOpener extends LanguageSpecificURIEditorOpener {
 	
 	@Override
 	protected void selectAndReveal(IEditorPart openEditor, URI uri,
