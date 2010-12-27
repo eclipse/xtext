@@ -44,11 +44,12 @@ public class DefaultRenameStrategy implements IRenameStrategy {
 	}
 
 	protected String originalName;
-	protected URI targetElementURI;
+	protected URI targetElementOriginalURI;
 	protected ITextRegion originalNameRegion;
+	private URI targetElementNewURI;
 
 	protected DefaultRenameStrategy(EObject targetElement, ILocationInFileProvider locationInFileProvider) {
-		this.targetElementURI = EcoreUtil.getURI(targetElement);
+		this.targetElementOriginalURI = EcoreUtil.getURI(targetElement);
 		EAttribute nameAttribute = getNameAttribute(targetElement);
 		this.originalName = targetElement.eGet(nameAttribute).toString();
 		if (Strings.isEmpty(originalName))
@@ -68,6 +69,21 @@ public class DefaultRenameStrategy implements IRenameStrategy {
 	}
 
 	public void applyDeclarationChange(String newName, ResourceSet resourceSet) {
+		EObject renamedElement = setName(targetElementOriginalURI, newName, resourceSet);
+		targetElementNewURI = EcoreUtil.getURI(renamedElement);
+	}
+
+	public void revertDeclarationChange(ResourceSet resourceSet) {
+		if(targetElementNewURI == null)
+			return;
+		setName(targetElementNewURI, originalName, resourceSet);
+	}
+	
+	public void createDeclarationUpdates(String newName, IRefactoringUpdateAcceptor updateAcceptor) {
+		updateAcceptor.accept(targetElementOriginalURI.trimFragment(), getDeclarationTextEdit(newName));
+	}
+
+	protected EObject setName(URI targetElementURI, String newName, ResourceSet resourceSet) {
 		for(Resource resource: resourceSet.getResources())
 			EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
 		EObject targetElement = resourceSet.getEObject(targetElementURI, false);
@@ -76,12 +92,9 @@ public class DefaultRenameStrategy implements IRenameStrategy {
 		}
 		EAttribute nameAttribute = getNameAttribute(targetElement);
 		targetElement.eSet(nameAttribute, newName);
+		return targetElement;
 	}
 	
-	public void createDeclarationUpdates(String newName, IRefactoringUpdateAcceptor updateAcceptor) {
-		updateAcceptor.accept(targetElementURI.trimFragment(), getDeclarationTextEdit(newName));
-	}
-
 	protected EAttribute getNameAttribute(EObject eObject) {
 		return SimpleAttributeResolver.NAME_RESOLVER.getAttribute(eObject);
 	}
