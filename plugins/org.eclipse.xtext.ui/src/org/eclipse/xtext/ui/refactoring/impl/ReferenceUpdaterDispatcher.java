@@ -86,7 +86,9 @@ public class ReferenceUpdaterDispatcher {
 					.getResourceServiceProvider(sourceResourceURI);
 			IReferenceUpdater referenceUpdater = provider2updater.get(resourceServiceProvider);
 			if (referenceUpdater == null) {
-				referenceUpdater = resourceServiceProvider.get(IReferenceUpdater.class);
+				referenceUpdater = (resourceServiceProvider instanceof IResourceUIServiceProvider) 
+					? ((IResourceUIServiceProvider) resourceServiceProvider).getReferenceUpdater() 
+					: resourceServiceProvider.get(IReferenceUpdater.class);
 				provider2updater.put(resourceServiceProvider, referenceUpdater);
 			}
 			return referenceUpdater;

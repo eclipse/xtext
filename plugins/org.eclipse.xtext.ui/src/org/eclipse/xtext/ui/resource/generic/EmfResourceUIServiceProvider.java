@@ -5,18 +5,21 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.ecore;
+package org.eclipse.xtext.ui.resource.generic;
 
-import org.eclipse.xtext.ecore.EcoreResourceServiceProviderImpl;
+import org.eclipse.xtext.resource.generic.EmfResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.DefaultResourceUIServiceProvider;
+
+import com.google.inject.Inject;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class EcoreResourceUIServiceProviderImpl extends DefaultResourceUIServiceProvider {
+public class EmfResourceUIServiceProvider extends DefaultResourceUIServiceProvider {
 
-	public EcoreResourceUIServiceProviderImpl() {
-		super(new EcoreResourceServiceProviderImpl());
+	@Inject
+	public EmfResourceUIServiceProvider(EmfResourceServiceProvider runtimeDelegate) {
+		super(runtimeDelegate);
 	}
 	
 }

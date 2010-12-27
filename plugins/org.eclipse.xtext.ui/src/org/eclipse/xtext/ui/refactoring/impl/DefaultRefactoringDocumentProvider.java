@@ -31,8 +31,6 @@ import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.ITextEditorExtension;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
-import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 
 import com.google.inject.Inject;
@@ -73,9 +71,9 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 		URI resourceURI = uri.trimFragment();
 		final IFileEditorInput fileEditorInput = getEditorInput(resourceURI, status);
 		if (fileEditorInput != null) {
-			IXtextDocument openDocument = new DisplayRunnableWithResult<IXtextDocument>() {
+			IDocument openDocument = new DisplayRunnableWithResult<IDocument>() {
 				@Override
-				protected IXtextDocument run() throws Exception {
+				protected IDocument run() throws Exception {
 					IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
 					IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
 					IEditorPart editor = activePage.findEditor(fileEditorInput);
@@ -83,7 +81,7 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 						if (editor instanceof ITextEditorExtension
 								&& ((ITextEditorExtension) editor).isEditorInputReadOnly())
 							status.addError("Editor " + fileEditorInput.getName() + " is read only");
-						return ((XtextEditor) editor).getDocument();
+						return ((ITextEditor) editor).getDocumentProvider().getDocument(fileEditorInput);
 					}
 					return null;
 				}

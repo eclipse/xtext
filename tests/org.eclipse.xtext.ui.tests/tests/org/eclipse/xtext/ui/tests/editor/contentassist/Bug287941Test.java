@@ -8,8 +8,9 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ecore.EcoreResourceServiceProviderImpl;
+import org.eclipse.xtext.ecore.EcoreRuntimeModule;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.generic.EmfResourceServiceProvider;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
@@ -23,9 +24,14 @@ import com.google.inject.Injector;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class Bug287941Test extends AbstractContentAssistProcessorTest {
+	
+	private EmfResourceServiceProvider getEmfServiceProvider() {
+		Injector injector = Guice.createInjector(new EcoreRuntimeModule());
+		return injector.getInstance(EmfResourceServiceProvider.class);
+	}
 
 	public ISetup getBug287941TestLanguageSetup() {
-		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new EcoreResourceServiceProviderImpl());
+		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", getEmfServiceProvider());
 		return new Bug287941TestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {

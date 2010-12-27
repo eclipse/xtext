@@ -65,6 +65,7 @@ Export-Package: org.eclipse.xtext.common.ui.contentassist,
  org.eclipse.xtext.ui.refactoring.impl,
  org.eclipse.xtext.ui.refactoring.ui,
  org.eclipse.xtext.ui.resource,
+ org.eclipse.xtext.ui.resource.generic,
  org.eclipse.xtext.ui.search,
  org.eclipse.xtext.ui.util,
  org.eclipse.xtext.ui.wizard

@@ -7,15 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ecore;
 
-import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent;
-import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;
-import org.eclipse.xtext.Constants;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.generic.AbstractEmfResourceSupport;
 
-import com.google.inject.Guice;
-import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.google.inject.name.Named;
+import com.google.inject.Module;
 
 /**
  * 
@@ -41,42 +35,11 @@ import com.google.inject.name.Named;
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class EcoreSupport implements IWorkflowComponent {
+public class EcoreSupport extends AbstractEmfResourceSupport {
 
-	@Inject
-	@Named(Constants.FILE_EXTENSIONS)
-	private String fileExtension;
-
-	@Inject
-	private IResourceServiceProvider resourceServiceProvider;
-
-	@Inject
-	private IResourceServiceProvider.Registry registry;
-
-	public void preInvoke() {
-		Injector injector = Guice.createInjector(getGuiceModule());
-		injector.injectMembers(this);
-		registerInRegistry();
-	}
-
-	private EcoreRuntimeModule guiceModule = new EcoreRuntimeModule();
-
-	public void setGuiceModule(EcoreRuntimeModule module) {
-		this.guiceModule = module;
-	}
-
-	protected EcoreRuntimeModule getGuiceModule() {
-		return guiceModule;
-	}
-
-	protected void registerInRegistry() {
-		registry.getExtensionToFactoryMap().put(fileExtension, resourceServiceProvider);
-	}
-
-	public void invoke(IWorkflowContext ctx) {
-	}
-
-	public void postInvoke() {
+	@Override
+	protected Module createGuiceModule() {
+		return new EcoreRuntimeModule();
 	}
 
 }
