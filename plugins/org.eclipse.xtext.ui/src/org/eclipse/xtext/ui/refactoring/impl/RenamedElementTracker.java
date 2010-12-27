@@ -36,6 +36,7 @@ public class RenamedElementTracker implements IRenamedElementTracker {
 		progress.worked(1);
 		Map<URI, URI> old2newURI = relocateRenamedElements(renamedElement2oldURI);
 		progress.worked(1);
+		renameStrategy.revertDeclarationChange(resourceSet);
 		return old2newURI;
 	}
 

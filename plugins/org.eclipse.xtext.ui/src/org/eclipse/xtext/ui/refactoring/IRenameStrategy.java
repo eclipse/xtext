@@ -31,6 +31,11 @@ public interface IRenameStrategy {
 	void applyDeclarationChange(String newName, ResourceSet resourceSet);
 	
 	/**
+	 * Reverts the declaration change to the semantic model in the given resource set.
+	 */
+	void revertDeclarationChange(ResourceSet resourceSet);
+	
+	/**
 	 * Creates the document updates and reports them to the updateAcceptor
 	 */
 	void createDeclarationUpdates(String newName, IRefactoringUpdateAcceptor updateAcceptor);

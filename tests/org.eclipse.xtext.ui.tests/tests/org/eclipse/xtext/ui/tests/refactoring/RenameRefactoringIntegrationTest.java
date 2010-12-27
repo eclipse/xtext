@@ -15,10 +15,15 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
@@ -29,6 +34,8 @@ import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.AbstractEditorTest;
+import org.eclipse.xtext.ui.tests.refactoring.referring.Reference;
+import org.eclipse.xtext.ui.tests.refactoring.referring.ReferringFactory;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -65,7 +72,7 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		testFile0 = IResourcesSetupUtil.createFile(TEST_FILE0_NAME, initialModel0);
 		initialModel1 = "X { ref B }";
 		testFile1 = IResourcesSetupUtil.createFile(TEST_FILE1_NAME, initialModel1);
-		uriB = URI.createPlatformResourceURI(testFile0.getFullPath().toString(), true).appendFragment("//@elements.0");
+		uriB = URI.createPlatformResourceURI(testFile0.getFullPath().toString(), true).appendFragment("B");
 	}
 
 	@Override
@@ -87,14 +94,14 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		assertFalse(editor.isDirty());
 		doRename();
 		assertTrue(editor.isDirty());
-		assertEquals(initialModel0.replaceAll("B", "C"), editor.getDocument().get());	
+		assertEquals(initialModel0.replaceAll("B", "C"), editor.getDocument().get());
 		assertEquals(initialModel1.replaceAll("B", "C"), readFile(testFile1));
 		undoRename();
 		assertTrue(editor.isDirty());
 		assertEquals(initialModel0, editor.getDocument().get());
 		assertEquals(initialModel1, readFile(testFile1));
 	}
-	
+
 	public void testEditorEditorRename() throws Exception {
 		XtextEditor editor0 = openEditor(testFile0);
 		XtextEditor editor1 = openEditor(testFile1);
@@ -103,46 +110,63 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		doRename();
 		assertTrue(editor0.isDirty());
 		assertTrue(editor1.isDirty());
-		assertEquals(initialModel0.replaceAll("B", "C"), editor0.getDocument().get());	
-		assertEquals(initialModel1.replaceAll("B", "C"), editor1.getDocument().get());	
+		assertEquals(initialModel0.replaceAll("B", "C"), editor0.getDocument().get());
+		assertEquals(initialModel1.replaceAll("B", "C"), editor1.getDocument().get());
 		undoRename();
 		assertTrue(editor0.isDirty());
 		assertTrue(editor1.isDirty());
 		assertEquals(initialModel0, editor0.getDocument().get());
 		assertEquals(initialModel1, editor1.getDocument().get());
 	}
-	
+
 	public void testFileEditorRename() throws Exception {
 		XtextEditor editor1 = openEditor(testFile1);
 		assertFalse(editor1.isDirty());
 		doRename();
 		assertEquals(initialModel0.replaceAll("B", "C"), readFile(testFile0));
 		assertTrue(editor1.isDirty());
-		assertEquals(initialModel1.replaceAll("B", "C"), editor1.getDocument().get());	
+		assertEquals(initialModel1.replaceAll("B", "C"), editor1.getDocument().get());
 		undoRename();
 		assertEquals(initialModel0, readFile(testFile0));
 		assertTrue(editor1.isDirty());
 		assertEquals(initialModel1, editor1.getDocument().get());
 	}
-	
+
 	public void testDirtyEditor() throws Exception {
 		XtextEditor editor = openEditor(testFile0);
 		String dirtyModel = "Y B A { ref B }";
 		editor.getDocument().set(dirtyModel);
 		assertTrue(editor.isDirty());
-		uriB = URI.createPlatformResourceURI(testFile0.getFullPath().toString(), true).appendFragment("//@elements.1");
 		doRename();
 		assertTrue(editor.isDirty());
-		assertEquals(dirtyModel.replaceAll("B", "C"),editor.getDocument().get());
+		assertEquals(dirtyModel.replaceAll("B", "C"), editor.getDocument().get());
 	}
-	
-	public void testRefFromOtherLanguage() throws Exception {
+
+	public void testRefFromOtherXtextLanguage() throws Exception {
 		String initialModel = "ref B";
-		IFile otherLanguageFile = IResourcesSetupUtil.createFile(TEST_PROJECT + "/otherLanguageFile.referringtestlanguage", initialModel);
+		IFile otherLanguageFile = IResourcesSetupUtil.createFile(TEST_PROJECT
+				+ "/otherLanguageFile.referringtestlanguage", initialModel);
 		doRename();
 		assertEquals(initialModel.replaceAll("B", "C"), readFile(otherLanguageFile));
 	}
-	
+
+	public void testRefFromOtherNonXtextLanguage() throws Exception {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		EObject elementB = resourceSet.getEObject(uriB, true);
+		String xmiFileName = "otherLanguageFile.referring_xmi";
+		Resource referringResource = resourceSet.createResource(URI.createPlatformResourceURI(TEST_PROJECT + "/"
+				+ xmiFileName, true));
+		Reference ref = ReferringFactory.eINSTANCE.createReference();
+		ref.setReferenced(elementB);
+		referringResource.getContents().add(ref);
+		referringResource.save(null);
+		project.refreshLocal(IResource.DEPTH_INFINITE, null);
+		IFile referringXmiFile = project.getFile(xmiFileName);
+		String originalContent = readFile(referringXmiFile);
+		doRename();
+		assertEquals(originalContent.replaceAll("#B", "#C"), readFile(referringXmiFile));
+	}
+
 	protected void doRename() throws Exception {
 		IResourcesSetupUtil.waitForAutoBuild();
 		final Change change = createChange(uriB, "C");
@@ -155,7 +179,7 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		}.run(null);
 	}
 
-	protected void undoRename() throws Exception{
+	protected void undoRename() throws Exception {
 		IResourcesSetupUtil.waitForAutoBuild();
 		new WorkspaceModifyOperation() {
 			@Override
@@ -165,7 +189,7 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 			}
 		}.run(null);
 	}
-	
+
 	protected Change createChange(URI targetElementURI, String newName) throws Exception {
 		RenameElementProcessor processor = processorProvider.get();
 		processor.initialize(targetElementURI);
@@ -177,8 +201,8 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		final Change change = processor.createChange(new NullProgressMonitor());
 		assertNotNull(change);
 		return change;
-	}	
-	
+	}
+
 	protected String readFile(IFile file) throws Exception {
 		InputStream inputStream = file.getContents();
 		try {

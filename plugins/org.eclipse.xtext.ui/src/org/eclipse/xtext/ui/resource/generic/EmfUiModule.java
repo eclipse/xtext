@@ -16,11 +16,14 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.IImageHelper;
 import org.eclipse.xtext.ui.InjectableAdapterFactory;
+import org.eclipse.xtext.ui.LanguageSpecific;
 import org.eclipse.xtext.ui.PluginImageHelper;
+import org.eclipse.xtext.ui.editor.IURIEditorOpener;
+import org.eclipse.xtext.ui.editor.LanguageSpecificURIEditorOpener;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.ui.label.InjectableAdapterFactoryLabelProvider;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
-import org.eclipse.xtext.ui.refactoring.impl.XMLReferenceUpdater;
+import org.eclipse.xtext.ui.refactoring.impl.EmfResourceReferenceUpdater;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
 
@@ -69,6 +72,9 @@ public class EmfUiModule extends AbstractGenericModule {
 		return DefaultEObjectLabelProvider.class;
 	}
 	
+	public void configureLanguageSpecificURIEditorOpener(com.google.inject.Binder binder) {
+		binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class).to(LanguageSpecificURIEditorOpener.class);
+	}
 	
 	public Class<? extends IImageHelper> bindIImageHelper() {
 		return PluginImageHelper.class;
@@ -83,6 +89,6 @@ public class EmfUiModule extends AbstractGenericModule {
 	}
 	
 	public Class<? extends IReferenceUpdater> bindIReferenceUpdater() {
-		return XMLReferenceUpdater.class;
+		return EmfResourceReferenceUpdater.class;
 	}
 }
