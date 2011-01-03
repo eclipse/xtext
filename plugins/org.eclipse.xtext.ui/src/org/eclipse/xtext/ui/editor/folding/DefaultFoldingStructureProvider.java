@@ -9,7 +9,7 @@
 package org.eclipse.xtext.ui.editor.folding;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +28,9 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -109,30 +110,22 @@ public class DefaultFoldingStructureProvider implements IFoldingStructureProvide
 	protected void calculateProjectionAnnotationModel(boolean allowCollapse) {
 		ProjectionAnnotationModel projectionAnnotationModel = this.viewer.getProjectionAnnotationModel();
 		if (projectionAnnotationModel != null) {
-			List<IFoldingRegion> foldingRegions = foldingRegionProvider.getFoldingRegions(editor.getDocument());
-			HashBiMap<Position, IFoldingRegion> positionsMap = toPositionIndexedMap(foldingRegions);
-			Annotation[] newRegions = mergeFoldingRegions(positionsMap, projectionAnnotationModel);
-			updateFoldingRegions(allowCollapse, projectionAnnotationModel, positionsMap, newRegions);
+			// make a defensive copy as we modify the folded positions in subsequent operations
+			Collection<FoldedPosition> foldedPositions = Sets.newLinkedHashSet(foldingRegionProvider.getFoldingRegions(editor.getDocument()));
+			Annotation[] newRegions = mergeFoldingRegions(foldedPositions, projectionAnnotationModel);
+			updateFoldingRegions(allowCollapse, projectionAnnotationModel, foldedPositions, newRegions);
 		}
-	}
-
-	protected HashBiMap<Position, IFoldingRegion> toPositionIndexedMap(List<IFoldingRegion> foldingRegions) {
-		HashBiMap<Position, IFoldingRegion> positionsMap = HashBiMap.create();
-		for (IFoldingRegion foldingRegion : foldingRegions) {
-			positionsMap.put(foldingRegion.getPosition(), foldingRegion);
-		}
-		return positionsMap;
 	}
 
 	@SuppressWarnings("unchecked")
-	protected Annotation[] mergeFoldingRegions(HashBiMap<Position, IFoldingRegion> positionsMap,
+	protected Annotation[] mergeFoldingRegions(Collection<FoldedPosition> foldedPositions,
 			ProjectionAnnotationModel projectionAnnotationModel) {
 		List<Annotation> deletions = new ArrayList<Annotation>();
 		for (Iterator<Annotation> iterator = projectionAnnotationModel.getAnnotationIterator(); iterator.hasNext();) {
 			Annotation annotation = iterator.next();
 			if (annotation instanceof ProjectionAnnotation) {
 				Position position = projectionAnnotationModel.getPosition(annotation);
-				if (positionsMap.remove(position) == null) {
+				if (!foldedPositions.remove(position)) {
 					deletions.add(annotation);
 				}
 			}
@@ -141,25 +134,24 @@ public class DefaultFoldingStructureProvider implements IFoldingStructureProvide
 	}
 
 	protected void updateFoldingRegions(boolean allowCollapse, ProjectionAnnotationModel model,
-			HashBiMap<Position, IFoldingRegion> positionsMap, Annotation[] deletions) {
-		Map<ProjectionAnnotation, Position> additionsMap = new HashMap<ProjectionAnnotation, Position>();
-		for (Iterator<IFoldingRegion> iterator = positionsMap.values().iterator(); iterator.hasNext();) {
-			IFoldingRegion foldingRegion = iterator.next();
-			addProjectionAnnotation(allowCollapse, foldingRegion, additionsMap);
+			Collection<FoldedPosition> foldedPositions, Annotation[] deletions) {
+		Map<ProjectionAnnotation, Position> additionsMap = Maps.newHashMap();
+		for (FoldedPosition foldedPosition: foldedPositions) {
+			addProjectionAnnotation(allowCollapse, foldedPosition, additionsMap);
 		}
 		if (deletions.length != 0 || additionsMap.size() != 0) {
 			model.modifyAnnotations(deletions, additionsMap, new Annotation[] {});
 		}
 	}
 
-	protected void addProjectionAnnotation(boolean allowCollapse, IFoldingRegion foldingRegion,
+	protected void addProjectionAnnotation(boolean allowCollapse, Position foldingRegion,
 			Map<ProjectionAnnotation, Position> additionsMap) {
 		ProjectionAnnotation projectionAnnotation = createProjectionAnnotation(allowCollapse, foldingRegion);
-		additionsMap.put(projectionAnnotation, foldingRegion.getPosition());
+		additionsMap.put(projectionAnnotation, foldingRegion);
 	}
 
-	protected ProjectionAnnotation createProjectionAnnotation(boolean allowCollapse, IFoldingRegion foldingRegion) {
-		return new StyledProjectionAnnotation(allowCollapse, foldingRegion.getAlias());
+	protected ProjectionAnnotation createProjectionAnnotation(boolean isCollapsed, Position foldedRegion) {
+		return new ProjectionAnnotation(isCollapsed);
 	}
 
 	/**
