@@ -7,8 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
+import static java.util.Collections.*;
+
+import java.util.Collections;
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -28,6 +36,7 @@ import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XIntLiteral;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XStringLiteral;
+import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 
@@ -38,11 +47,11 @@ import com.google.inject.Inject;
  */
 public class XbaseCompiler {
 
-	private PolymorphicDispatcher<Void> toJavaStmntDispatcher = 
-		PolymorphicDispatcher.createForSingleTarget("_prepare", 2,2,this);
+	private PolymorphicDispatcher<Void> toJavaStmntDispatcher = PolymorphicDispatcher.createForSingleTarget("_prepare",
+			2, 2, this);
 
-	private PolymorphicDispatcher<Void> toJavaExprDispatcher = 
-		PolymorphicDispatcher.createForSingleTarget("_toJavaExpression", 2,2,this);
+	private PolymorphicDispatcher<Void> toJavaExprDispatcher = PolymorphicDispatcher.createForSingleTarget(
+			"_toJavaExpression", 2, 2, this);
 
 	public CharSequence compile(EObject obj) {
 		StringBuilder builder = new StringBuilder();
@@ -120,8 +129,9 @@ public class XbaseCompiler {
 		final EList<XExpression> expressions = expr.getExpressions();
 		for (int i = 0; i < expressions.size(); i++) {
 			XExpression ex = expressions.get(i);
-			internalPrepare(ex, b);
-			if (i == expressions.size() - 1) {
+			if (i < expressions.size() - 1) {
+				internalToJavaStatement(ex, b);
+			} else {
 				b.append(getVarName(expr)).append(" = ");
 				internalToJavaExpression(ex, b);
 				b.append(";").append("\n");
@@ -133,13 +143,13 @@ public class XbaseCompiler {
 	public void _toJavaExpression(XBlockExpression expr, StringBuilder b) {
 		b.append(getVarName(expr));
 	}
-	
+
 	public void _prepare(XVariableDeclaration expr, StringBuilder b) {
 		internalPrepare(expr.getRight(), b);
 		if (!expr.isWriteable()) {
 			b.append("final ");
 		}
-		if (expr.getType()!=null) {
+		if (expr.getType() != null) {
 			b.append(expr.getType().toString());
 		} else {
 			b.append(getReturnTypeName(expr.getRight()));
@@ -150,13 +160,12 @@ public class XbaseCompiler {
 		internalToJavaExpression(expr.getRight(), b);
 		b.append(";\n");
 	}
-	
+
 	protected String makeJavaIdentifier(String name) {
-		return name.equals("this")?"_this":name;
+		return name.equals("this") ? "_this" : name;
 	}
 
 	public void _toJavaExpression(XVariableDeclaration expr, StringBuilder b) {
-		throw new UnsupportedOperationException("A variable declaration cannot exist in the context of a Java expression.");
 	}
 
 	public void _prepare(XWhileExpression expr, StringBuilder b) {
@@ -169,7 +178,7 @@ public class XbaseCompiler {
 	public void _toJavaExpression(XWhileExpression expr, StringBuilder b) {
 		b.append("null");
 	}
-	
+
 	public void _prepare(XForLoopExpression expr, StringBuilder b) {
 		internalPrepare(expr.getForExpression(), b);
 		b.append("for (");
@@ -179,11 +188,16 @@ public class XbaseCompiler {
 		b.append(" : ");
 		internalToJavaExpression(expr.getForExpression(), b);
 		b.append(") {\n");
-		internalPrepare(expr.getEachExpression(), b);
-		internalToJavaExpression(expr.getEachExpression(), b);
+		internalToJavaStatement(expr.getEachExpression(), b);
 		b.append("}\n");
 	}
-	
+
+	protected void internalToJavaStatement(XExpression expr, StringBuilder b) {
+		internalPrepare(expr, b);
+		internalToJavaExpression(expr, b);
+		b.append(";\n");
+	}
+
 	public void _toJavaExpression(XForLoopExpression expr, StringBuilder b) {
 		b.append("null");
 	}
@@ -202,7 +216,7 @@ public class XbaseCompiler {
 			for (int i = 0; i < expr.getTypeArguments().size(); i++) {
 				JvmTypeReference arg = expr.getTypeArguments().get(i);
 				b.append(arg.getCanonicalName());
-				if (i+1<expr.getTypeArguments().size())
+				if (i + 1 < expr.getTypeArguments().size())
 					b.append(", ");
 			}
 			b.append(">");
@@ -240,7 +254,7 @@ public class XbaseCompiler {
 			internalToJavaExpression(expr.getValue(), b);
 		}
 	}
-	
+
 	public void _prepare(XIfExpression expr, StringBuilder b) {
 		internalPrepare(expr.getIf(), b);
 		b.append(getReturnTypeName(expr));
@@ -255,7 +269,7 @@ public class XbaseCompiler {
 		b.append(" = ");
 		internalToJavaExpression(expr.getThen(), b);
 		b.append(";\n");
-		if (expr.getElse()!=null) {
+		if (expr.getElse() != null) {
 			b.append("} else {\n");
 			internalPrepare(expr.getElse(), b);
 			b.append(getVarName(expr));
@@ -265,7 +279,7 @@ public class XbaseCompiler {
 		}
 		b.append("}\n");
 	}
-	
+
 	public void _toJavaExpression(XIfExpression expr, StringBuilder b) {
 		b.append(getVarName(expr));
 	}
@@ -276,39 +290,53 @@ public class XbaseCompiler {
 		}
 	}
 
-	public void _toJavaExpression(XAbstractFeatureCall expr, StringBuilder b) {
-		if (expr instanceof XMemberFeatureCall) {
-			internalToJavaExpression(((XMemberFeatureCall) expr).getMemberCallTarget(), b);
-			b.append(".");
-		} else if (expr instanceof XFeatureCall) {
-			if (expr.getFeature() instanceof JvmMember) {
-				b.append("_this.");
+	public void _toJavaExpression(XUnaryOperation expr, StringBuilder b) {
+		internalToJavaExpression((expr).getOperand(), b);
+		b.append(".");
+		appendFeatureCall(expr.getFeature(), Collections.<XExpression> emptyList(), b);
+	}
+
+	public void _toJavaExpression(XBinaryOperation expr, StringBuilder b) {
+		internalToJavaExpression((expr).getLeftOperand(), b);
+		b.append(".");
+		appendFeatureCall(expr.getFeature(), singletonList(expr.getRightOperand()), b);
+	}
+
+	public void _toJavaExpression(XFeatureCall expr, StringBuilder b) {
+		if (expr.getFeature() instanceof JvmFeature) {
+			b.append("_this.");
+			appendFeatureCall(expr.getFeature(), expr.getArguments(), b);
+		} else {
+			if (expr.getFeature() instanceof JvmFormalParameter) {
+				b.append(((JvmFormalParameter) expr.getFeature()).getName());
+			} else {
+				throw new IllegalArgumentException("Couldn't handle feature of type " + expr.getFeature().getClass());
 			}
-			if (expr.getFeature() instanceof XVariableDeclaration) {
-				b.append(((XVariableDeclaration)expr.getFeature()).getName());
-			}
-		} else if (expr instanceof XBinaryOperation) {
-			internalToJavaExpression(((XBinaryOperation) expr).getLeftOperand(), b);
-			b.append(".");
 		}
-		if (expr.getFeature() instanceof JvmMember) {
-			b.append(((JvmMember) expr.getFeature()).getSimpleName());
+	}
+
+	public void _toJavaExpression(XMemberFeatureCall expr, StringBuilder b) {
+		internalToJavaExpression(expr.getMemberCallTarget(), b);
+		b.append(".");
+		appendFeatureCall(expr.getFeature(), expr.getMemberCallArguments(), b);
+	}
+
+	protected void appendFeatureCall(JvmIdentifyableElement feature, List<XExpression> arguments, StringBuilder b) {
+		if (feature instanceof JvmMember) {
+			b.append(((JvmMember) feature).getSimpleName());
 		}
-		if (expr.getFeature() instanceof JvmOperation) {
+		if (feature instanceof JvmOperation) {
 			b.append("(");
-			if (expr instanceof XMemberFeatureCall) {
-				EList<XExpression> arguments = ((XMemberFeatureCall) expr).getMemberCallArguments();
-				appendArguments(arguments, b);
-			}
+			appendArguments(arguments, b);
 			b.append(")");
 		}
 	}
 
-	protected void appendArguments(EList<XExpression> eList, StringBuilder b) {
+	protected void appendArguments(List<XExpression> eList, StringBuilder b) {
 		for (int i = 0; i < eList.size(); i++) {
 			XExpression expression = eList.get(i);
 			internalToJavaExpression(expression, b);
-			if (i+1 < eList.size())
+			if (i + 1 < eList.size())
 				b.append(", ");
 		}
 	}
