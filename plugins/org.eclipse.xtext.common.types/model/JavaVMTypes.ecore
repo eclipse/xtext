@@ -110,7 +110,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="#//JvmVisibility"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fullyQualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JvmFeature" abstract="true" eSuperTypes="#//JvmIdentifyableElement">
+  <eClassifiers xsi:type="ecore:EClass" name="JvmFeature" abstract="true" eSuperTypes="#//JvmMember">
     <eOperations name="getSimpleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="JvmVisibility">
@@ -119,20 +119,20 @@
     <eLiterals name="PROTECTED" value="2"/>
     <eLiterals name="PUBLIC" value="3"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JvmField" eSuperTypes="#//JvmMember #//JvmFeature">
+  <eClassifiers xsi:type="ecore:EClass" name="JvmField" eSuperTypes="#//JvmFeature">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="final" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//JvmTypeReference"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JvmExecutable" abstract="true" eSuperTypes="#//JvmMember #//JvmTypeParameterDeclarator">
+  <eClassifiers xsi:type="ecore:EClass" name="JvmExecutable" abstract="true" eSuperTypes="#//JvmFeature #//JvmTypeParameterDeclarator">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//JvmFormalParameter" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exceptions" upperBound="-1"
         eType="#//JvmTypeReference" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmConstructor" eSuperTypes="#//JvmExecutable"/>
-  <eClassifiers xsi:type="ecore:EClass" name="JvmOperation" eSuperTypes="#//JvmExecutable #//JvmFeature">
+  <eClassifiers xsi:type="ecore:EClass" name="JvmOperation" eSuperTypes="#//JvmExecutable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="final" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>

@@ -28,7 +28,6 @@ import org.eclipse.xtext.scoping.Scopes;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 /**

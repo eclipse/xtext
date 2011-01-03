@@ -40,6 +40,7 @@ public interface IJvmTypeConformanceComputer extends ITypeConformanceComputer<Jv
 	 */
 	public JvmTypeReference getCommonSuperType(final List<JvmTypeReference> types);
 	
+	
 	public class Impl implements IJvmTypeConformanceComputer{
 
 		private SuperTypeCollector superTypeCollector;
@@ -167,17 +168,23 @@ public interface IJvmTypeConformanceComputer extends ITypeConformanceComputer<Jv
 		}
 
 		protected boolean isBoxing(JvmType typeA, JvmType typeB) {
-			return is(typeA, Integer.class) && is(typeB, Integer.TYPE) || is(typeA, Boolean.class)
-					&& is(typeB, Boolean.TYPE) || is(typeA, Long.class) && is(typeB, Long.TYPE) || is(typeA, Float.class)
-					&& is(typeB, Float.TYPE) || is(typeA, Double.class) && is(typeB, Double.TYPE) || is(typeA, Byte.class)
-					&& is(typeB, Byte.TYPE);
+			return is(typeA, Integer.class) && is(typeB, Integer.TYPE) 
+				|| is(typeA, Boolean.class) && is(typeB, Boolean.TYPE) 
+				|| is(typeA, Long.class) && is(typeB, Long.TYPE) 
+				|| is(typeA, Float.class) && is(typeB, Float.TYPE) 
+				|| is(typeA, Double.class) && is(typeB, Double.TYPE) 
+				|| is(typeA, Byte.class) && is(typeB, Byte.TYPE) 
+				|| is(typeA, Character.class) && is(typeB,Character.TYPE);
 		}
 
 		protected boolean isUnBoxing(JvmType typeA, JvmType typeB) {
-			return is(typeB, Integer.class) && is(typeA, Integer.TYPE) || is(typeB, Boolean.class)
-					&& is(typeA, Boolean.TYPE) || is(typeB, Long.class) && is(typeA, Long.TYPE) || is(typeB, Float.class)
-					&& is(typeA, Float.TYPE) || is(typeB, Double.class) && is(typeA, Double.TYPE) || is(typeB, Byte.class)
-					&& is(typeA, Byte.TYPE);
+			return is(typeB, Integer.class) && is(typeA, Integer.TYPE) 
+				|| is(typeB, Boolean.class) && is(typeA, Boolean.TYPE) 
+				|| is(typeB, Long.class) && is(typeA, Long.TYPE) 
+				|| is(typeB, Float.class) && is(typeA, Float.TYPE) 
+				|| is(typeB, Double.class) && is(typeA, Double.TYPE) 
+				|| is(typeB, Byte.class) && is(typeA, Byte.TYPE) 
+				|| is(typeB, Character.class) && is(typeA,Character.TYPE);
 		}
 
 		protected boolean is(JvmType typeA, Class<?> class1) {
