@@ -20,7 +20,7 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 /**
- * @author svenefftinge - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
 public class XtypeScopeProvider extends AbstractScopeProvider {
 

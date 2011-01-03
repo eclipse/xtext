@@ -7,15 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping;
 
+import static com.google.common.collect.Iterables.*;
+
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -35,11 +40,13 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
+import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScopeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentSugarDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
 
+import com.google.common.base.Function;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.internal.Lists;
@@ -87,7 +94,34 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			}
 			return createFeatureCallScope((XAbstractFeatureCall) context, reference);
 		}
+		if (isConstructorCallScope(reference)) {
+			return createConstructorCallScope(context,reference);
+		}
 		return super.getScope(context, reference);
+	}
+
+	protected IScope createConstructorCallScope(EObject context, EReference reference) {
+		final IScope scope = super.getScope(context, reference);
+		return new IScope() {
+			
+			public IEObjectDescription getSingleElement(ISelector selector) {
+				throw new UnsupportedOperationException();
+			}
+			
+			public Iterable<IEObjectDescription> getElements(ISelector selector) {
+				Iterable<IEObjectDescription> result = transform(scope.getElements(selector), new Function<IEObjectDescription, IEObjectDescription>() {
+					public IEObjectDescription apply(IEObjectDescription from) {
+						final JvmConstructor constructor = (JvmConstructor) from.getEObjectOrProxy();
+						return new JvmFeatureDescription(from.getQualifiedName(), constructor, null, constructor.getCanonicalName(), false);
+					}
+				});
+				return result;
+			}
+		};
+	}
+
+	protected boolean isConstructorCallScope(EReference reference) {
+		return reference.getEReferenceType()==TypesPackage.Literals.JVM_CONSTRUCTOR;
 	}
 
 	protected boolean isFeatureCallScope(EReference reference) {

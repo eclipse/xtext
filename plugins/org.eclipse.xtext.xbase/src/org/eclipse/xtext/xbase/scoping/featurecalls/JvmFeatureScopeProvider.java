@@ -14,6 +14,7 @@ import static java.util.Collections.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -133,7 +134,13 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 		if (!(type.getType() instanceof JvmDeclaredType))
 			return null;
 		JvmDeclaredType declType = (JvmDeclaredType) type.getType();
-		Iterable<JvmFeature> features = filter(declType.getMembers(), JvmFeature.class);
+		Iterable<JvmFeature> features = filter(filter(declType.getMembers(), JvmFeature.class),
+				new Predicate<JvmFeature>() {
+
+					public boolean apply(JvmFeature input) {
+						return !(input instanceof JvmConstructor);
+					}
+				});
 		if (!features.iterator().hasNext())
 			return null;
 		final List<JvmFeatureDescription> descriptions = Lists.newArrayList();
