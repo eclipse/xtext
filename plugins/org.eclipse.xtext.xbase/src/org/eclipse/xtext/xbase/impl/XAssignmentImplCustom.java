@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.impl;
 
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -18,10 +17,7 @@ public class XAssignmentImplCustom extends XAssignmentImpl {
 	
 	@Override
 	public EList<XExpression> getArguments() {
-		BasicEList<XExpression> result = new BasicEList<XExpression>(2);
-		result.add(getAssignable());
-		result.add(getValue());
-		return result;
+		return asArguments(getAssignable(), getValue());
 	}
 	
 	@Override

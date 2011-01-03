@@ -10,6 +10,8 @@ package org.eclipse.xtext.xbase.impl;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -20,6 +22,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XAbstractFeatureCallImplCustom extends XAbstractFeatureCallImpl {
+	
 	
 	@Override
 	public String getFeatureName() {
@@ -56,5 +59,15 @@ public class XAbstractFeatureCallImplCustom extends XAbstractFeatureCallImpl {
 		if (x == null)
 			return "<null>";
 		return "<"+x.getClass().getSimpleName()+">";
+	}
+
+	protected EList<XExpression> asArguments(XExpression... arguments) {
+		EList<XExpression> result = new EObjectResolvingEList<XExpression>(XExpression.class, this, XbasePackage.XABSTRACT_FEATURE_CALL__ARGUMENTS);
+		for (XExpression arg : arguments) {
+			if(arg != null){
+				result.add(arg);
+			}
+		}
+		return result;
 	}
 }
