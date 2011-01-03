@@ -339,16 +339,6 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getXExpression_ReturnType()
-	{
-		return (EReference)xExpressionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getXIfExpression()
 	{
 		return xIfExpressionEClass;
@@ -1185,7 +1175,6 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 
 		// Create classes and their features
 		xExpressionEClass = createEClass(XEXPRESSION);
-		createEReference(xExpressionEClass, XEXPRESSION__RETURN_TYPE);
 
 		xIfExpressionEClass = createEClass(XIF_EXPRESSION);
 		createEReference(xIfExpressionEClass, XIF_EXPRESSION__IF);
@@ -1357,7 +1346,6 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(xExpressionEClass, XExpression.class, "XExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getXExpression_ReturnType(), theTypesPackage.getJvmTypeReference(), null, "returnType", null, 0, 1, XExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(xIfExpressionEClass, XIfExpression.class, "XIfExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXIfExpression_If(), this.getXExpression(), null, "if", null, 0, 1, XIfExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
