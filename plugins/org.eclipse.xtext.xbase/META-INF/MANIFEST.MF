@@ -21,11 +21,13 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0",
  org.antlr.runtime
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.xbase,
+ org.eclipse.xtext.xbase.compiler,
  org.eclipse.xtext.xbase.formatting,
  org.eclipse.xtext.xbase.impl,
  org.eclipse.xtext.xbase.interpreter,
  org.eclipse.xtext.xbase.interpreter.impl,
  org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtext.xbase.linking,
  org.eclipse.xtext.xbase.parseTreeConstruction,
  org.eclipse.xtext.xbase.parser.antlr,
  org.eclipse.xtext.xbase.parser.antlr.internal,
