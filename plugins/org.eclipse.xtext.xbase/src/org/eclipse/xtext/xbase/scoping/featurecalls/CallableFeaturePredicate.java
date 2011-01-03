@@ -12,6 +12,7 @@ import java.util.Collections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -23,6 +24,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
@@ -63,7 +65,7 @@ public class CallableFeaturePredicate implements Predicate<IEObjectDescription> 
 			Collections.singletonList(this));
 
 	@Inject
-	private IJvmTypeConformanceComputer confomance;
+	private IJvmTypeConformanceComputer conformance;
 
 	@Inject
 	private ITypeProvider<JvmTypeReference> typeProvider;
@@ -96,13 +98,30 @@ public class CallableFeaturePredicate implements Predicate<IEObjectDescription> 
 		return false;
 	}
 
+	protected boolean _case(JvmConstructor input, XConstructorCall op, EReference ref, JvmFeatureDescription jvmFeatureDescription) {
+		final int numberOfArgs = input.getParameters().size();
+		if (numberOfArgs != op.getArguments().size())
+			return false;
+		if (!op.getTypeArguments().isEmpty() && input.getTypeParameters().size() == op.getTypeArguments().size())
+			return false;
+		for (int i = 0; i < numberOfArgs; i++) {
+			JvmFormalParameter parameter = input.getParameters().get(i);
+			XExpression expression = op.getArguments().get(i);
+			JvmTypeReference type = typeProvider.getType(expression,
+					ITypeProvider.Context.<JvmTypeReference> newCtx());
+			if (!conformance.isConformant(parameter.getParameterType(), type))
+				return false;
+		}
+		return true;
+	}
+	
 	protected boolean _case(JvmOperation input, XBinaryOperation op, EReference ref, JvmFeatureDescription jvmFeatureDescription) {
 		if (input.getParameters().size() != 1)
 			return false;
 		if (op.getRightOperand() != null && op.getLeftOperand() != null) {
 			JvmTypeReference type = typeProvider.getType(op.getLeftOperand(),
 					ITypeProvider.Context.<JvmTypeReference> newCtx());
-			if (!confomance.isConformant(input.getParameters().get(0).getParameterType(), type))
+			if (!conformance.isConformant(input.getParameters().get(0).getParameterType(), type))
 				return false;
 		}
 		return true;
@@ -168,7 +187,7 @@ public class CallableFeaturePredicate implements Predicate<IEObjectDescription> 
 			EObject contextElement, JvmFeatureDescription jvmFeatureDescription) {
 		return actualType == null
 				|| actualType.getCanonicalName().equals("java.lang.Void")
-				|| confomance.isConformant(typeConverter.convert(jvmFeatureDescription.getContext().resolve(declaredType), contextElement),
+				|| conformance.isConformant(typeConverter.convert(jvmFeatureDescription.getContext().resolve(declaredType), contextElement),
 						actualType);
 	}
 

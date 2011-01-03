@@ -240,6 +240,19 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 		return internalGetType(object.getExpression(), context);
 	}
 	
+	@Override
+	protected JvmTypeReference _type(JvmFormalParameter parameter, Context<JvmTypeReference> context) {
+		if (parameter.getParameterType()==null) {
+			if (parameter.eContainer() instanceof XForLoopExpression) {
+				//TODO infer type from iterable
+//				XForLoopExpression forLoop = (XForLoopExpression) parameter.eContainer();
+//				JvmParameterizedTypeReference reference = (JvmParameterizedTypeReference) internalGetType(forLoop.getForExpression(), context);
+//				reference.getArguments()
+			}
+		}
+		return super._type(parameter, context);
+	}
+	
 	public TypesFactory getTypesFactory() {
 		return factory;
 	}

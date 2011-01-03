@@ -49,10 +49,10 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	
 	public void testAssignment_RightAssociativity() throws Exception {
 		XAssignment ass = (XAssignment) expression("foo = bar += baz");
-		assertEquals(2,ass.getArguments().size());
+		assertEquals(1,ass.getArguments().size());
 		assertEquals("foo", ass.getFeatureName());
 		assertNull(ass.getAssignable());
-		XBinaryOperation op = (XBinaryOperation) ass.getArguments().get(1);
+		XBinaryOperation op = (XBinaryOperation) ass.getArguments().get(0);
 		assertEquals(2,op.getArguments().size());
 		assertEquals("+=", op.getFeatureName());
 		assertEquals("bar", ((XFeatureCall)op.getArguments().get(0)).getFeatureName());
@@ -422,7 +422,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	}
 
 	public void testConstructorCall_1() throws Exception {
-		XConstructorCall cc = (XConstructorCall) expression("new java.util.ArrayList(1)");
+		XConstructorCall cc = (XConstructorCall) expression("new java.util.ArrayList(1)",true);
 		assertNotNull(cc.getConstructor());
 		assertFalse(cc.getConstructor().eIsProxy());
 		assertEquals(1, cc.getArguments().size());

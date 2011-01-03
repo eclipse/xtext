@@ -295,4 +295,9 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		assertEquals("testdata.GenericType1.t", expression.getFeature().getCanonicalName());
 		assertTrue(((JvmMember)expression.getFeature()).getVisibility()==JvmVisibility.PRIVATE);
 	}
+	
+	public void testConstructorCall_00() throws Exception {
+		XConstructorCall expression = (XConstructorCall) expression("new java.util.ArrayList<java.lang.String>(42)");
+		assertEquals("java.util.ArrayList.ArrayList(int)", expression.getConstructor().getCanonicalName());
+	}
 }
