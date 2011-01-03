@@ -10,10 +10,6 @@ package org.eclipse.xtext.example.domainmodel;
 import org.eclipse.xtext.example.DomainmodelStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.util.OnChangeEvictingCache;
-import org.eclipse.xtext.util.Wrapper;
-import org.eclipse.xtext.util.OnChangeEvictingCache.CacheAdapter;
-import org.eclipse.xtext.util.OnChangeEvictingCache.Listener;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
