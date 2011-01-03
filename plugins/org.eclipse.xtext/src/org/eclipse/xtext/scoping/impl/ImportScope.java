@@ -9,12 +9,12 @@ package org.eclipse.xtext.scoping.impl;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
+import static java.util.Collections.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -28,9 +28,10 @@ import org.eclipse.xtext.scoping.Selectors;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -44,13 +45,14 @@ public class ImportScope extends AbstractScope {
 
 	private final EClass type;
 
-	public ImportScope(List<ImportNormalizer> namespaceResolvers, IScope parent, ISelectable importFrom, EClass type, boolean ignoreCase) {
+	public ImportScope(List<ImportNormalizer> namespaceResolvers, IScope parent, ISelectable importFrom, EClass type,
+			boolean ignoreCase) {
 		super(parent, ignoreCase);
 		this.type = type;
 		this.normalizers = removeDuplicates(namespaceResolvers);
 		this.importFrom = importFrom;
 	}
-	
+
 	protected List<ImportNormalizer> removeDuplicates(List<ImportNormalizer> namespaceResolvers) {
 		ArrayList<ImportNormalizer> list = newArrayList();
 		for (ImportNormalizer importNormalizer : namespaceResolvers) {
@@ -62,18 +64,17 @@ public class ImportScope extends AbstractScope {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName()+normalizers+getAllLocalElements()+" -> "+getParent();
+		return getClass().getSimpleName() + normalizers + getAllLocalElements() + " -> " + getParent();
 	}
-	
+
 	@Override
 	protected Iterable<IEObjectDescription> getAllElements() {
 		final Iterable<IEObjectDescription> globalElements = getParent().getElements(Selectors.selectAll());
-		Iterable<IEObjectDescription> importedElements = importFrom != null ? importFrom.getExportedObjects() : globalElements;
-		Iterable<IEObjectDescription> aliased = getAllAliasedElements(importedElements);
-		final Map<QualifiedName,IEObjectDescription> elements = Maps.uniqueIndex(aliased,
+		Iterable<IEObjectDescription> aliased = getAllLocalElements();
+		final Map<QualifiedName, IEObjectDescription> elements = Maps.uniqueIndex(aliased,
 				new Function<IEObjectDescription, QualifiedName>() {
 					public QualifiedName apply(IEObjectDescription from) {
-						return isIgnoreCase() ? from.getName().toLowerCase(): from.getName();
+						return isIgnoreCase() ? from.getName().toLowerCase() : from.getName();
 					}
 				});
 		return concat(aliased, filter(globalElements, new Predicate<IEObjectDescription>() {
@@ -82,10 +83,27 @@ public class ImportScope extends AbstractScope {
 			}
 		}));
 	}
-	
-	protected Iterable<IEObjectDescription> getAllAliasedElements(Iterable<IEObjectDescription> allImportedElements) {
-		Map<QualifiedName, IEObjectDescription> keyToDescription = Maps.newHashMap();
-		for (IEObjectDescription imported : allImportedElements) {
+
+	@Override
+	protected Iterable<IEObjectDescription> getAllLocalElements() {
+		final Iterable<IEObjectDescription> exportedObjects = getImportFrom().getExportedObjects();
+		return getAliasedElements(exportedObjects);
+	}
+
+	@Override
+	protected Iterable<IEObjectDescription> getLocalElementsByEObject(final EObject object, final URI uri) {
+		Iterable<IEObjectDescription> candidates = getImportFrom().getExportedObjectsByObject(object);
+		return getAliasedElements(candidates);
+	}
+
+	/*
+	 * public for testing purposes only
+	 */
+	protected Iterable<IEObjectDescription> getAliasedElements(Iterable<IEObjectDescription> candidates) {
+		Multimap<QualifiedName, IEObjectDescription> keyToDescription = ArrayListMultimap.create();
+		Multimap<QualifiedName, ImportNormalizer> keyToNormalizer = HashMultimap.create();
+
+		for (IEObjectDescription imported : candidates) {
 			QualifiedName fullyQualifiedName = imported.getName();
 			for (ImportNormalizer normalizer : normalizers) {
 				QualifiedName alias = normalizer.deresolve(fullyQualifiedName);
@@ -94,89 +112,58 @@ public class ImportScope extends AbstractScope {
 					if (isIgnoreCase()) {
 						key = key.toLowerCase();
 					}
-					if (keyToDescription.containsKey(key)) {
-						keyToDescription.put(key, null);
-					} else {
-						keyToDescription.put(key, new AliasedEObjectDescription(alias, imported));
-					}
+					keyToDescription.put(key, new AliasedEObjectDescription(alias, imported));
+					keyToNormalizer.put(key, normalizer);
 				}
 			}
 		}
-		return filter(keyToDescription.values(), Predicates.notNull());
+		for (QualifiedName name : keyToNormalizer.keySet()) {
+			if (keyToNormalizer.get(name).size() > 1)
+				keyToDescription.removeAll(name);
+		}
+		return keyToDescription.values();
 	}
 
-	@Override
-	protected Iterable<IEObjectDescription> getAllLocalElements() {
-		throw new UnsupportedOperationException();
-	}
-	
-	@Override
-	protected Iterable<IEObjectDescription> getLocalElementsByEObject(final EObject object, final URI uri) {
-		if (importFrom != null) {
-			Iterable<IEObjectDescription> candidates = importFrom.getExportedObjectsByObject(object);
-			return getAliasedElements(candidates);
-		} else {
-			Iterable<IEObjectDescription> candidates = getParent().getElements(Selectors.selectByEObject(object));
-			return getAliasedElements(candidates);
-		}
-	}
-	
-	protected Iterable<IEObjectDescription> getAliasedElements(Iterable<IEObjectDescription> candidates) {
-		final LinkedHashMultimap<QualifiedName, IEObjectDescription> aliasToDescription = LinkedHashMultimap.create();
-		for (IEObjectDescription from : candidates) {
-			QualifiedName fullyQualifiedName = from.getName();
-			for (ImportNormalizer normalizer : normalizers) {
-				QualifiedName qualifiedName = normalizer.deresolve(fullyQualifiedName);
-				if (qualifiedName != null) {
-					aliasToDescription.put(isIgnoreCase() ? qualifiedName.toLowerCase() : qualifiedName, from);
-				}
-			}
-		}
-		final Iterable<IEObjectDescription> aliased = transform(aliasToDescription.keys(),
-				new Function<QualifiedName, IEObjectDescription>() {
-					public IEObjectDescription apply(QualifiedName shortName) {
-						Set<IEObjectDescription> set = aliasToDescription.get(shortName);
-						if (set.size()==1) {
-							return getSingleLocalElementByName(shortName);
-						}
-						return null;
-					}
-
-				});
-		return filter(aliased, Predicates.notNull());
-	}
-	
 	@Override
 	protected IEObjectDescription getSingleLocalElementByName(QualifiedName name) {
-		IEObjectDescription result = null;
-		ISelectable importFrom = this.importFrom;
-		if (importFrom == null) {
-			importFrom = new ScopeBasedSelectable(getParent());
-		}
-		for(ImportNormalizer normalizer: normalizers) {
+		Iterator<IEObjectDescription> iterator = getLocalElementsByName(name).iterator();
+		return iterator.hasNext() ? iterator.next() : null;
+	}
+
+	@Override
+	protected Iterable<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
+		List<IEObjectDescription> result = newArrayList();
+		ImportNormalizer foundForNormalizer = null;
+		ISelectable importFrom = getImportFrom();
+		for (ImportNormalizer normalizer : normalizers) {
 			final QualifiedName resolvedName = normalizer.resolve(name);
 			if (resolvedName != null) {
-				Iterable<IEObjectDescription> resolvedElements = importFrom.getExportedObjects(type, resolvedName, isIgnoreCase());
-				for(IEObjectDescription resolvedElement: resolvedElements) {
-					if (result != null) {
-						return null;
-					}
+				Iterable<IEObjectDescription> resolvedElements = importFrom.getExportedObjects(type, resolvedName,
+						isIgnoreCase());
+				for (IEObjectDescription resolvedElement : resolvedElements) {
+					if (foundForNormalizer == null)
+						foundForNormalizer = normalizer;
+					else if (foundForNormalizer != normalizer)
+						return emptyList();
 					QualifiedName alias = normalizer.deresolve(resolvedElement.getName());
-					if (alias==null)
-						throw new IllegalStateException("Couldn't deresolve "+resolvedElement.getName()+" with import "+normalizer);
-					result = new AliasedEObjectDescription(alias, resolvedElement);
+					if (alias == null)
+						throw new IllegalStateException("Couldn't deresolve " + resolvedElement.getName()
+								+ " with import " + normalizer);
+					final AliasedEObjectDescription aliasedEObjectDescription = new AliasedEObjectDescription(alias,
+							resolvedElement);
+					result.add(aliasedEObjectDescription);
 				}
 			}
 		}
 		return result;
 	}
-	
-	@Override
-	protected Iterable<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
-		IEObjectDescription result = getSingleLocalElementByName(name);
-		if (result == null)
-			return Collections.emptyList();
-		return Collections.singleton(result);
+
+	protected ISelectable getImportFrom() {
+		ISelectable importFrom = this.importFrom;
+		if (importFrom == null) {
+			importFrom = new ScopeBasedSelectable(getParent());
+		}
+		return importFrom;
 	}
 
 }

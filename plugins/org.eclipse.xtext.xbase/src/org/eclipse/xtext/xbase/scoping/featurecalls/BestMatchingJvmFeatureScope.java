@@ -44,7 +44,8 @@ public class BestMatchingJvmFeatureScope implements IScope {
 	}
 
 	public IEObjectDescription getSingleElement(ISelector selector) {
-		return getBestMatch(getElements(selector));
+		final Iterable<IEObjectDescription> elements = getElements(selector);
+		return getBestMatch(elements);
 	}
 	
 	public Iterable<IEObjectDescription> getElements(ISelector selector) {
