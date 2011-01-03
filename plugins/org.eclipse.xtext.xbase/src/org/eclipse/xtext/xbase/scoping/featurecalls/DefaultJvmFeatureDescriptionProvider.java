@@ -56,7 +56,7 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 	}
 
 	protected boolean isValid(JvmFeature feature) {
-		final JvmMember jvmMember = (JvmMember)feature;
+		final JvmMember jvmMember = feature;
 		return visibilityService.isVisible(jvmMember,contextType);
 	}
 
