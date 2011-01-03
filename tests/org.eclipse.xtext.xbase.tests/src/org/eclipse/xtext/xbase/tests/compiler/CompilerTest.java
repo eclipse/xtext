@@ -31,6 +31,7 @@ public class CompilerTest extends AbstractXtextTests {
 				"java.lang.Integer _var;\n" +
 				"{\n" +
 				"final java.util.ArrayList<java.lang.String> _this = new java.util.ArrayList<java.lang.String>();\n" +
+				";\n" +
 				"_var = _this.size();\n" +
 				"}\n" +
 				"return _var;"
@@ -47,16 +48,16 @@ public class CompilerTest extends AbstractXtextTests {
 				"return _var;"
 				, "if (true) 42 else 21");
 	}
-//TODO	
-//	public void testForEach() throws Exception {
-//		assertCompilesTo(
-//				"for (java.lang.String s : new java.util.ArrayList<java.lang.String>()) {\n" +
-//				"s.length();\n" +
-//				"}\n" +
-//				"return null;"
-//				, "for (java.lang.String s : new java.util.ArrayList<java.lang.String>()) " +
-//						"s.length");
-//	}
+
+	public void testForEach() throws Exception {
+		assertCompilesTo(
+				"for (java.lang.String s : new java.util.ArrayList<java.lang.String>()) {\n" +
+				"s.length();\n" +
+				"}\n" +
+				"return null;"
+				, "for (java.lang.String s : new java.util.ArrayList<java.lang.String>()) " +
+						"s.length");
+	}
 
 	protected void assertCompilesTo(final String expectedJavaCode, final String xbaseCode) throws Exception {
 		EObject model = getModel(xbaseCode);
