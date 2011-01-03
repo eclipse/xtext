@@ -8,15 +8,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.folding;
 
-import org.eclipse.jface.viewers.StyledString;
-
 /**
  * @author Michael Clay - Initial contribution and API
+ * @author Sebastian Zarnekow - Distinguish between total and identifying region
  */
-public interface IFoldingRegionAcceptor {
-
-	void accept(int offset, int length, StyledString text);
+public interface IFoldingRegionAcceptor<AdditionalParam> {
 
 	void accept(int offset, int length);
+	
+	/**
+	 * @param contentStart the start of the significant content relative to the offset.
+	 * @param param used to compute the significant region.
+	 */
+	void accept(int offset, int length, AdditionalParam param);
 
 }

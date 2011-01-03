@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.tests.editor;
 
 import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.BadPartitioningException;
 import org.eclipse.jface.text.BadPositionCategoryException;
 import org.eclipse.jface.text.IDocumentListener;
 import org.eclipse.jface.text.IDocumentPartitioner;
@@ -265,4 +266,41 @@ public abstract class AbstractDocumentSimulatingTest extends AbstractXtextTests 
 		return null;
 	}
 
+	public ITypedRegion[] computePartitioning(String partitioning, int offset, int length,
+			boolean includeZeroLengthPartitions) throws BadLocationException, BadPartitioningException {
+		fail("Unexpected call");
+		return null;
+	}
+	
+	public String getContentType(String partitioning, int offset, boolean preferOpenPartitions)
+			throws BadLocationException, BadPartitioningException {
+		fail("Unexpected call");
+		return null;
+	}
+	
+	public IDocumentPartitioner getDocumentPartitioner(String partitioning) {
+		fail("Unexpected call");
+		return null;
+	}
+	
+	public String[] getLegalContentTypes(String partitioning) throws BadPartitioningException {
+		fail("Unexpected call");
+		return null;
+	}
+	
+	public ITypedRegion getPartition(String partitioning, int offset, boolean preferOpenPartitions)
+			throws BadLocationException, BadPartitioningException {
+		fail("Unexpected call");
+		return null;
+	}
+	
+	public String[] getPartitionings() {
+		fail("Unexpected call");
+		return null;
+	}
+	
+	public void setDocumentPartitioner(String partitioning, IDocumentPartitioner partitioner) {
+		fail("Unexpected call");
+	}
+	
 }

@@ -8,49 +8,50 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.folding;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.jface.text.Position;
-import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.util.ITextRegion;
 
 /**
  * @author Michael Clay - Initial contribution and API
+ * @author Sebastian Zarnekow - Introduced FoldedPosition
  */
-public class DefaultFoldingRegionAcceptor implements IFoldingRegionAcceptor {
+public class DefaultFoldingRegionAcceptor implements IFoldingRegionAcceptor<ITextRegion> {
 	private static final Logger log = Logger.getLogger(DefaultFoldingRegionAcceptor.class);
-	private List<IFoldingRegion> foldingRegions;
+	private Collection<FoldedPosition> result;
 	private IXtextDocument xtextDocument;
 
-	public DefaultFoldingRegionAcceptor(IXtextDocument document, List<IFoldingRegion> foldingRegions) {
-		super();
-		this.foldingRegions = foldingRegions;
+	public DefaultFoldingRegionAcceptor(IXtextDocument document, Collection<FoldedPosition> result) {
+		this.result = result;
 		this.xtextDocument = document;
 	}
 
+	public void accept(int offset, int length, ITextRegion significantRegion) {
+		IRegion position = getLineRegion(offset, length);
+		FoldedPosition foldingRegion = newFoldedPosition(position, significantRegion);
+		if (foldingRegion != null) {
+			result.add(foldingRegion);
+		}
+	}
+	
 	public void accept(int offset, int length) {
 		accept(offset, length, null);
 	}
 
-	public void accept(int offset, int length, StyledString text) {
-		Position position = getPosition(offset, length);
-		IFoldingRegion foldingRegion = newFoldingRegion(position, text);
-		if (foldingRegion != null) {
-			foldingRegions.add(foldingRegion);
-		}
-	}
-
-	protected Position getPosition(int offset, int length) {
-		Position position = null;
+	protected IRegion getLineRegion(int offset, int length) {
+		IRegion position = null;
 		try {
 			int startLine = xtextDocument.getLineOfOffset(offset);
 			int endLine = xtextDocument.getLineOfOffset(offset + length);
 			if (startLine < endLine) {
 				int start = xtextDocument.getLineOffset(startLine);
 				int end = xtextDocument.getLineOffset(endLine) + xtextDocument.getLineLength(endLine);
-				position = new Position(start, end - start);
+				position = new Region(start, end - start);
 			}
 		} catch (BadLocationException e) {
 			log.error(e);
@@ -58,12 +59,12 @@ public class DefaultFoldingRegionAcceptor implements IFoldingRegionAcceptor {
 		return position;
 	}
 
-	protected IFoldingRegion newFoldingRegion(Position position) {
-		return newFoldingRegion(position, null);
-	}
-
-	protected IFoldingRegion newFoldingRegion(Position position, StyledString styledString) {
-		return position != null ? new DefaultFoldingRegion(position, styledString) : null;
+	protected FoldedPosition newFoldedPosition(IRegion region, ITextRegion significantRegion) {
+		if (region == null)
+			return null;
+		if (significantRegion != null)
+			return new DefaultFoldedPosition(region.getOffset(), region.getLength(), significantRegion.getOffset() - region.getOffset(), significantRegion.getLength());
+		return new DefaultFoldedPosition(region.getOffset(), region.getLength(), DefaultFoldedPosition.UNSET, DefaultFoldedPosition.UNSET);
 	}
 
 }

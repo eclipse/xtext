@@ -9,6 +9,7 @@
 package org.eclipse.xtext.ui.editor.model;
 
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IDocumentExtension3;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.concurrent.IReadAccess;
 import org.eclipse.xtext.util.concurrent.IWriteAccess;
@@ -18,7 +19,7 @@ import org.eclipse.xtext.util.concurrent.IWriteAccess;
  * @author Sven Efftinge
  * @author Jan Koehnlein
  */
-public interface IXtextDocument extends IDocument, IReadAccess<XtextResource>, IWriteAccess<XtextResource> {
+public interface IXtextDocument extends IDocument, IDocumentExtension3, IReadAccess<XtextResource>, IWriteAccess<XtextResource> {
 
 	public <T> T getAdapter(Class<T> adapterType);
 	

@@ -7,19 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.folding;
 
-import java.util.List;
-
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.ui.editor.folding.DefaultFoldingRegionProvider;
-import org.eclipse.xtext.ui.editor.folding.IFoldingRegion;
-import org.eclipse.xtext.ui.editor.folding.IFoldingRegionAcceptor;
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-
-import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -27,16 +17,7 @@ import com.google.common.collect.Lists;
 public class XtextGrammarFoldingRegionProvider extends DefaultFoldingRegionProvider {
 
 	@Override
-	protected List<IFoldingRegion> doGetFoldingRegions(IXtextDocument xtextDocument, XtextResource xtextResource) {
-		List<IFoldingRegion> result = Lists.newArrayList();
-		if (xtextResource == null || xtextResource.getContents().isEmpty())
-			return result;
-		IFoldingRegionAcceptor foldingRegionAcceptor = createAcceptor(xtextDocument, result);
-		EList<EObject> contents = xtextResource.getContents().get(0).eContents();
-		for (EObject eObject : contents) {
-			ICompositeNode parserNode = NodeModelUtils.getNode(eObject);
-			foldingRegionAcceptor.accept(parserNode.getOffset(), parserNode.getLength());
-		}
-		return result;
+	protected boolean shouldProcessContent(EObject object) {
+		return !(object instanceof AbstractRule);
 	}
 }
