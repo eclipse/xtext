@@ -28,6 +28,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
@@ -36,6 +37,7 @@ import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.AbstractEditorTest;
 import org.eclipse.xtext.ui.tests.refactoring.referring.Reference;
 import org.eclipse.xtext.ui.tests.refactoring.referring.ReferringFactory;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -136,6 +138,12 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		XtextEditor editor = openEditor(testFile0);
 		String dirtyModel = "Y B A { ref B }";
 		editor.getDocument().set(dirtyModel);
+		editor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
+			@Override
+			public void process(XtextResource state) throws Exception {
+				// just wait for the reconciler to announce the dirty state
+			}
+		});
 		assertTrue(editor.isDirty());
 		doRename();
 		assertTrue(editor.isDirty());
