@@ -58,4 +58,8 @@ public class AliasedEObjectDescription extends AbstractEObjectDescription {
 		return delegate.getEClass();
 	}
 	
+	public IEObjectDescription getAliasedEObjectDescription() {
+		return delegate;
+	}
+	
 }

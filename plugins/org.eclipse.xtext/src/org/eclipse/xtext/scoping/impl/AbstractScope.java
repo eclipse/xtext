@@ -21,6 +21,7 @@ import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.scoping.Selectors;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 
@@ -52,6 +53,11 @@ public abstract class AbstractScope implements IScope {
 
 		public boolean apply(IEObjectDescription input) {
 			return !scope.isShadowed(input);
+		}
+		
+		@Override
+		public String toString() {
+			return Iterables.toString(this);
 		}
 		
 	}
