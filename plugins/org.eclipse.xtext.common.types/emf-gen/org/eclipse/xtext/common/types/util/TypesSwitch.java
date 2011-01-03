@@ -243,8 +243,8 @@ public class TypesSwitch<T>
 				JvmEnumerationLiteral jvmEnumerationLiteral = (JvmEnumerationLiteral)theEObject;
 				T result = caseJvmEnumerationLiteral(jvmEnumerationLiteral);
 				if (result == null) result = caseJvmField(jvmEnumerationLiteral);
-				if (result == null) result = caseJvmMember(jvmEnumerationLiteral);
 				if (result == null) result = caseJvmFeature(jvmEnumerationLiteral);
+				if (result == null) result = caseJvmMember(jvmEnumerationLiteral);
 				if (result == null) result = caseJvmAnnotationTarget(jvmEnumerationLiteral);
 				if (result == null) result = caseJvmIdentifyableElement(jvmEnumerationLiteral);
 				if (result == null) result = defaultCase(theEObject);
@@ -313,6 +313,8 @@ public class TypesSwitch<T>
 			{
 				JvmFeature jvmFeature = (JvmFeature)theEObject;
 				T result = caseJvmFeature(jvmFeature);
+				if (result == null) result = caseJvmMember(jvmFeature);
+				if (result == null) result = caseJvmAnnotationTarget(jvmFeature);
 				if (result == null) result = caseJvmIdentifyableElement(jvmFeature);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -321,8 +323,8 @@ public class TypesSwitch<T>
 			{
 				JvmField jvmField = (JvmField)theEObject;
 				T result = caseJvmField(jvmField);
-				if (result == null) result = caseJvmMember(jvmField);
 				if (result == null) result = caseJvmFeature(jvmField);
+				if (result == null) result = caseJvmMember(jvmField);
 				if (result == null) result = caseJvmAnnotationTarget(jvmField);
 				if (result == null) result = caseJvmIdentifyableElement(jvmField);
 				if (result == null) result = defaultCase(theEObject);
@@ -332,8 +334,9 @@ public class TypesSwitch<T>
 			{
 				JvmExecutable jvmExecutable = (JvmExecutable)theEObject;
 				T result = caseJvmExecutable(jvmExecutable);
-				if (result == null) result = caseJvmMember(jvmExecutable);
+				if (result == null) result = caseJvmFeature(jvmExecutable);
 				if (result == null) result = caseJvmTypeParameterDeclarator(jvmExecutable);
+				if (result == null) result = caseJvmMember(jvmExecutable);
 				if (result == null) result = caseJvmAnnotationTarget(jvmExecutable);
 				if (result == null) result = caseJvmIdentifyableElement(jvmExecutable);
 				if (result == null) result = defaultCase(theEObject);
@@ -344,8 +347,9 @@ public class TypesSwitch<T>
 				JvmConstructor jvmConstructor = (JvmConstructor)theEObject;
 				T result = caseJvmConstructor(jvmConstructor);
 				if (result == null) result = caseJvmExecutable(jvmConstructor);
-				if (result == null) result = caseJvmMember(jvmConstructor);
+				if (result == null) result = caseJvmFeature(jvmConstructor);
 				if (result == null) result = caseJvmTypeParameterDeclarator(jvmConstructor);
+				if (result == null) result = caseJvmMember(jvmConstructor);
 				if (result == null) result = caseJvmAnnotationTarget(jvmConstructor);
 				if (result == null) result = caseJvmIdentifyableElement(jvmConstructor);
 				if (result == null) result = defaultCase(theEObject);
@@ -357,8 +361,8 @@ public class TypesSwitch<T>
 				T result = caseJvmOperation(jvmOperation);
 				if (result == null) result = caseJvmExecutable(jvmOperation);
 				if (result == null) result = caseJvmFeature(jvmOperation);
-				if (result == null) result = caseJvmMember(jvmOperation);
 				if (result == null) result = caseJvmTypeParameterDeclarator(jvmOperation);
+				if (result == null) result = caseJvmMember(jvmOperation);
 				if (result == null) result = caseJvmAnnotationTarget(jvmOperation);
 				if (result == null) result = caseJvmIdentifyableElement(jvmOperation);
 				if (result == null) result = defaultCase(theEObject);

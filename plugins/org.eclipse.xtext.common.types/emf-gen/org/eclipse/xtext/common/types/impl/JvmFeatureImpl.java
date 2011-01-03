@@ -19,7 +19,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *
  * @generated
  */
-public abstract class JvmFeatureImpl extends JvmIdentifyableElementImplCustom implements JvmFeature
+public abstract class JvmFeatureImpl extends JvmMemberImplCustom implements JvmFeature
 {
 	/**
 	 * <!-- begin-user-doc -->
@@ -40,18 +40,6 @@ public abstract class JvmFeatureImpl extends JvmIdentifyableElementImplCustom im
 	protected EClass eStaticClass()
 	{
 		return TypesPackage.Literals.JVM_FEATURE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getSimpleName()
-	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
 	}
 
 } //JvmFeatureImpl

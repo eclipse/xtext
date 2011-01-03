@@ -1629,14 +1629,12 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		jvmWildcardTypeReferenceEClass.getESuperTypes().add(this.getJvmTypeReference());
 		jvmMemberEClass.getESuperTypes().add(this.getJvmAnnotationTarget());
 		jvmMemberEClass.getESuperTypes().add(this.getJvmIdentifyableElement());
-		jvmFeatureEClass.getESuperTypes().add(this.getJvmIdentifyableElement());
-		jvmFieldEClass.getESuperTypes().add(this.getJvmMember());
+		jvmFeatureEClass.getESuperTypes().add(this.getJvmMember());
 		jvmFieldEClass.getESuperTypes().add(this.getJvmFeature());
-		jvmExecutableEClass.getESuperTypes().add(this.getJvmMember());
+		jvmExecutableEClass.getESuperTypes().add(this.getJvmFeature());
 		jvmExecutableEClass.getESuperTypes().add(this.getJvmTypeParameterDeclarator());
 		jvmConstructorEClass.getESuperTypes().add(this.getJvmExecutable());
 		jvmOperationEClass.getESuperTypes().add(this.getJvmExecutable());
-		jvmOperationEClass.getESuperTypes().add(this.getJvmFeature());
 		jvmFormalParameterEClass.getESuperTypes().add(this.getJvmIdentifyableElement());
 		jvmFormalParameterEClass.getESuperTypes().add(this.getJvmAnnotationTarget());
 		jvmIntAnnotationValueEClass.getESuperTypes().add(this.getJvmAnnotationValue());

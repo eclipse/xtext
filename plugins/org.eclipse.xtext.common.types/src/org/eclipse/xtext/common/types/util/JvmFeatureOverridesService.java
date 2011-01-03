@@ -90,19 +90,19 @@ public class JvmFeatureOverridesService {
 			return false;
 		if (!isNameEqual(overriding, overridden))
 			return false;
-		if (!isInheritanceRelation((JvmMember)overriding, (JvmMember)overridden))
+		if (!isInheritanceRelation(overriding, overridden))
 			return false;
 		if (overriding instanceof JvmOperation && overridden instanceof JvmOperation) {
-			JvmOperation overridingOp = (JvmOperation)overriding; 
-			JvmOperation overriddenOp = (JvmOperation)overridden; 
+			JvmOperation overridingOp = (JvmOperation) overriding;
+			JvmOperation overriddenOp = (JvmOperation) overridden;
 			if (!isSameNumberOfArguments(overridingOp, overriddenOp))
 				return false;
 			if (!isSameArgumentTypes(overridingOp, overriddenOp, context))
 				return false;
 		}
 		if (overriding instanceof JvmField && overridden instanceof JvmField) {
-			JvmField overridingField = (JvmField)overriding; 
-			JvmField overriddenField = (JvmField)overridden;
+			JvmField overridingField = (JvmField) overriding;
+			JvmField overriddenField = (JvmField) overridden;
 			if (overridingField.isStatic() != overriddenField.isStatic())
 				return false;
 		}

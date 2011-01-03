@@ -24,7 +24,7 @@ import org.eclipse.emf.common.util.EList;
  * @model abstract="true"
  * @generated
  */
-public interface JvmExecutable extends JvmMember, JvmTypeParameterDeclarator
+public interface JvmExecutable extends JvmFeature, JvmTypeParameterDeclarator
 {
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.

@@ -862,6 +862,61 @@ public interface TypesPackage extends EPackage
 	int JVM_MEMBER_FEATURE_COUNT = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmFeatureImpl <em>Jvm Feature</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmFeatureImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmFeature()
+	 * @generated
+	 */
+	int JVM_FEATURE = 22;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_FEATURE__ANNOTATIONS = JVM_MEMBER__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_FEATURE__DECLARING_TYPE = JVM_MEMBER__DECLARING_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_FEATURE__VISIBILITY = JVM_MEMBER__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_FEATURE__FULLY_QUALIFIED_NAME = JVM_MEMBER__FULLY_QUALIFIED_NAME;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Feature</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_FEATURE_FEATURE_COUNT = JVM_MEMBER_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmFieldImpl <em>Jvm Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -878,7 +933,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_FIELD__ANNOTATIONS = JVM_MEMBER__ANNOTATIONS;
+	int JVM_FIELD__ANNOTATIONS = JVM_FEATURE__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
@@ -887,7 +942,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_FIELD__DECLARING_TYPE = JVM_MEMBER__DECLARING_TYPE;
+	int JVM_FIELD__DECLARING_TYPE = JVM_FEATURE__DECLARING_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -896,7 +951,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_FIELD__VISIBILITY = JVM_MEMBER__VISIBILITY;
+	int JVM_FIELD__VISIBILITY = JVM_FEATURE__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
@@ -905,7 +960,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_FIELD__FULLY_QUALIFIED_NAME = JVM_MEMBER__FULLY_QUALIFIED_NAME;
+	int JVM_FIELD__FULLY_QUALIFIED_NAME = JVM_FEATURE__FULLY_QUALIFIED_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -914,7 +969,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_FIELD__STATIC = JVM_MEMBER_FEATURE_COUNT + 0;
+	int JVM_FIELD__STATIC = JVM_FEATURE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Final</b></em>' attribute.
@@ -923,7 +978,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_FIELD__FINAL = JVM_MEMBER_FEATURE_COUNT + 1;
+	int JVM_FIELD__FINAL = JVM_FEATURE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -932,7 +987,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_FIELD__TYPE = JVM_MEMBER_FEATURE_COUNT + 2;
+	int JVM_FIELD__TYPE = JVM_FEATURE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Field</em>' class.
@@ -941,7 +996,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_FIELD_FEATURE_COUNT = JVM_MEMBER_FEATURE_COUNT + 3;
+	int JVM_FIELD_FEATURE_COUNT = JVM_FEATURE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmEnumerationLiteralImpl <em>Jvm Enumeration Literal</em>}' class.
@@ -1265,25 +1320,6 @@ public interface TypesPackage extends EPackage
 	int JVM_WILDCARD_TYPE_REFERENCE_FEATURE_COUNT = JVM_CONSTRAINT_OWNER_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmFeatureImpl <em>Jvm Feature</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.JvmFeatureImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmFeature()
-	 * @generated
-	 */
-	int JVM_FEATURE = 22;
-
-	/**
-	 * The number of structural features of the '<em>Jvm Feature</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_FEATURE_FEATURE_COUNT = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmExecutableImpl <em>Jvm Executable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1300,7 +1336,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_EXECUTABLE__ANNOTATIONS = JVM_MEMBER__ANNOTATIONS;
+	int JVM_EXECUTABLE__ANNOTATIONS = JVM_FEATURE__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
@@ -1309,7 +1345,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_EXECUTABLE__DECLARING_TYPE = JVM_MEMBER__DECLARING_TYPE;
+	int JVM_EXECUTABLE__DECLARING_TYPE = JVM_FEATURE__DECLARING_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -1318,7 +1354,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_EXECUTABLE__VISIBILITY = JVM_MEMBER__VISIBILITY;
+	int JVM_EXECUTABLE__VISIBILITY = JVM_FEATURE__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
@@ -1327,7 +1363,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_EXECUTABLE__FULLY_QUALIFIED_NAME = JVM_MEMBER__FULLY_QUALIFIED_NAME;
+	int JVM_EXECUTABLE__FULLY_QUALIFIED_NAME = JVM_FEATURE__FULLY_QUALIFIED_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
@@ -1336,7 +1372,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_EXECUTABLE__TYPE_PARAMETERS = JVM_MEMBER_FEATURE_COUNT + 0;
+	int JVM_EXECUTABLE__TYPE_PARAMETERS = JVM_FEATURE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1345,7 +1381,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_EXECUTABLE__PARAMETERS = JVM_MEMBER_FEATURE_COUNT + 1;
+	int JVM_EXECUTABLE__PARAMETERS = JVM_FEATURE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Exceptions</b></em>' containment reference list.
@@ -1354,7 +1390,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_EXECUTABLE__EXCEPTIONS = JVM_MEMBER_FEATURE_COUNT + 2;
+	int JVM_EXECUTABLE__EXCEPTIONS = JVM_FEATURE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Executable</em>' class.
@@ -1363,7 +1399,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_EXECUTABLE_FEATURE_COUNT = JVM_MEMBER_FEATURE_COUNT + 3;
+	int JVM_EXECUTABLE_FEATURE_COUNT = JVM_FEATURE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmConstructorImpl <em>Jvm Constructor</em>}' class.

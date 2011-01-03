@@ -32,7 +32,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *
  * @generated
  */
-public class JvmFieldImpl extends JvmMemberImplCustom implements JvmField
+public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 {
 	/**
 	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.

@@ -24,7 +24,7 @@ package org.eclipse.xtext.common.types;
  * @model
  * @generated
  */
-public interface JvmField extends JvmMember, JvmFeature
+public interface JvmField extends JvmFeature
 {
 	/**
 	 * Returns the value of the '<em><b>Static</b></em>' attribute.

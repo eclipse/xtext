@@ -40,7 +40,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *
  * @generated
  */
-public abstract class JvmExecutableImpl extends JvmMemberImplCustom implements JvmExecutable
+public abstract class JvmExecutableImpl extends JvmFeatureImpl implements JvmExecutable
 {
 	/**
 	 * The cached value of the '{@link #getTypeParameters() <em>Type Parameters</em>}' containment reference list.

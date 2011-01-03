@@ -35,7 +35,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * @generated
  */
 public class JvmFieldItemProvider
-	extends JvmMemberItemProvider
+	extends JvmFeatureItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,

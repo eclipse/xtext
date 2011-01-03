@@ -70,13 +70,22 @@ public interface XbasePackage extends EPackage
 	int XEXPRESSION = 0;
 
 	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XEXPRESSION__RETURN_TYPE = 0;
+
+	/**
 	 * The number of structural features of the '<em>XExpression</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XEXPRESSION_FEATURE_COUNT = 0;
+	int XEXPRESSION_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XIfExpressionImpl <em>XIf Expression</em>}' class.
@@ -87,6 +96,15 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	int XIF_EXPRESSION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XIF_EXPRESSION__RETURN_TYPE = XEXPRESSION__RETURN_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>If</b></em>' containment reference.
@@ -133,6 +151,15 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	int XSWITCH_EXPRESSION = 2;
+
+	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XSWITCH_EXPRESSION__RETURN_TYPE = XEXPRESSION__RETURN_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Switch</b></em>' containment reference.
@@ -227,6 +254,15 @@ public interface XbasePackage extends EPackage
 	int XBLOCK_EXPRESSION = 4;
 
 	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBLOCK_EXPRESSION__RETURN_TYPE = XEXPRESSION__RETURN_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -253,6 +289,15 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	int XVARIABLE_DECLARATION = 5;
+
+	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XVARIABLE_DECLARATION__RETURN_TYPE = XEXPRESSION__RETURN_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -310,6 +355,15 @@ public interface XbasePackage extends EPackage
 	int XABSTRACT_FEATURE_CALL = 6;
 
 	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XABSTRACT_FEATURE_CALL__RETURN_TYPE = XEXPRESSION__RETURN_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -363,6 +417,15 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	int XMEMBER_FEATURE_CALL = 7;
+
+	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XMEMBER_FEATURE_CALL__RETURN_TYPE = XABSTRACT_FEATURE_CALL__RETURN_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
@@ -465,6 +528,15 @@ public interface XbasePackage extends EPackage
 	int XFEATURE_CALL = 8;
 
 	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XFEATURE_CALL__RETURN_TYPE = XABSTRACT_FEATURE_CALL__RETURN_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -538,6 +610,15 @@ public interface XbasePackage extends EPackage
 	int XCONSTRUCTOR_CALL = 9;
 
 	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCONSTRUCTOR_CALL__RETURN_TYPE = XEXPRESSION__RETURN_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Constructor</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -584,6 +665,15 @@ public interface XbasePackage extends EPackage
 	int XBOOLEAN_LITERAL = 10;
 
 	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBOOLEAN_LITERAL__RETURN_TYPE = XEXPRESSION__RETURN_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Is True</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -612,6 +702,15 @@ public interface XbasePackage extends EPackage
 	int XNULL_LITERAL = 11;
 
 	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XNULL_LITERAL__RETURN_TYPE = XEXPRESSION__RETURN_TYPE;
+
+	/**
 	 * The number of structural features of the '<em>XNull Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -629,6 +728,15 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	int XINT_LITERAL = 12;
+
+	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XINT_LITERAL__RETURN_TYPE = XEXPRESSION__RETURN_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -659,6 +767,15 @@ public interface XbasePackage extends EPackage
 	int XSTRING_LITERAL = 13;
 
 	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XSTRING_LITERAL__RETURN_TYPE = XEXPRESSION__RETURN_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -685,6 +802,15 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	int XCLOSURE = 14;
+
+	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCLOSURE__RETURN_TYPE = XEXPRESSION__RETURN_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Formal Parameters</b></em>' containment reference list.
@@ -724,6 +850,15 @@ public interface XbasePackage extends EPackage
 	int XCASTED_EXPRESSION = 15;
 
 	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCASTED_EXPRESSION__RETURN_TYPE = XEXPRESSION__RETURN_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -759,6 +894,15 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	int XBINARY_OPERATION = 16;
+
+	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBINARY_OPERATION__RETURN_TYPE = XABSTRACT_FEATURE_CALL__RETURN_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
@@ -834,6 +978,15 @@ public interface XbasePackage extends EPackage
 	int XUNARY_OPERATION = 17;
 
 	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XUNARY_OPERATION__RETURN_TYPE = XABSTRACT_FEATURE_CALL__RETURN_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -898,6 +1051,15 @@ public interface XbasePackage extends EPackage
 	int XFOR_LOOP_EXPRESSION = 18;
 
 	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XFOR_LOOP_EXPRESSION__RETURN_TYPE = XEXPRESSION__RETURN_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>For Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -944,6 +1106,15 @@ public interface XbasePackage extends EPackage
 	int XABSTRACT_WHILE_EXPRESSION = 19;
 
 	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XABSTRACT_WHILE_EXPRESSION__RETURN_TYPE = XEXPRESSION__RETURN_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Predicate</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -979,6 +1150,15 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	int XDO_WHILE_EXPRESSION = 20;
+
+	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XDO_WHILE_EXPRESSION__RETURN_TYPE = XABSTRACT_WHILE_EXPRESSION__RETURN_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Predicate</b></em>' containment reference.
@@ -1018,6 +1198,15 @@ public interface XbasePackage extends EPackage
 	int XWHILE_EXPRESSION = 21;
 
 	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XWHILE_EXPRESSION__RETURN_TYPE = XABSTRACT_WHILE_EXPRESSION__RETURN_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Predicate</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1055,6 +1244,15 @@ public interface XbasePackage extends EPackage
 	int XTYPE_LITERAL = 22;
 
 	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTYPE_LITERAL__RETURN_TYPE = XEXPRESSION__RETURN_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1081,6 +1279,15 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	int XINSTANCE_OF_EXPRESSION = 23;
+
+	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XINSTANCE_OF_EXPRESSION__RETURN_TYPE = XEXPRESSION__RETURN_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1120,6 +1327,15 @@ public interface XbasePackage extends EPackage
 	int XTHROW_EXPRESSION = 24;
 
 	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTHROW_EXPRESSION__RETURN_TYPE = XEXPRESSION__RETURN_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1146,6 +1362,15 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	int XTRY_CATCH_FINALLY_EXPRESSION = 25;
+
+	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTRY_CATCH_FINALLY_EXPRESSION__RETURN_TYPE = XEXPRESSION__RETURN_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1231,6 +1456,15 @@ public interface XbasePackage extends EPackage
 	int XASSIGNMENT = 27;
 
 	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XASSIGNMENT__RETURN_TYPE = XABSTRACT_FEATURE_CALL__RETURN_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1303,6 +1537,17 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	EClass getXExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XExpression#getReturnType <em>Return Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Return Type</em>'.
+	 * @see org.eclipse.xtext.xbase.XExpression#getReturnType()
+	 * @see #getXExpression()
+	 * @generated
+	 */
+	EReference getXExpression_ReturnType();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XIfExpression <em>XIf Expression</em>}'.
@@ -2200,6 +2445,14 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EClass XEXPRESSION = eINSTANCE.getXExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Return Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XEXPRESSION__RETURN_TYPE = eINSTANCE.getXExpression_ReturnType();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XIfExpressionImpl <em>XIf Expression</em>}' class.

@@ -25,7 +25,7 @@ package org.eclipse.xtext.common.types;
  * @model
  * @generated
  */
-public interface JvmOperation extends JvmExecutable, JvmFeature
+public interface JvmOperation extends JvmExecutable
 {
 	/**
 	 * Returns the value of the '<em><b>Static</b></em>' attribute.
