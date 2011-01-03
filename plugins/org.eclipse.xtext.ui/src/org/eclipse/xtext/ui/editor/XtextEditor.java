@@ -305,7 +305,9 @@ public class XtextEditor extends TextEditor {
 	 * 
 	 */
 	public boolean isContentAssistAvailable() {
-		return getSourceViewerConfiguration().getContentAssistant(getSourceViewer()) != null;
+		boolean result = getSourceViewer().getTextOperationTarget().canDoOperation(ISourceViewer.CONTENTASSIST_PROPOSALS);
+		return result;
+//		return getSourceViewerConfiguration().getContentAssistant(getSourceViewer()) != null;
 	}
 
 	@Override
@@ -422,10 +424,6 @@ public class XtextEditor extends TextEditor {
 		}
 	}
 
-	/**
-	 * TODO: get rid of this method. It is only here to support
-	 * org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler, which needs access to the sourceviewer.
-	 */
 	public ISourceViewer getInternalSourceViewer() {
 		return getSourceViewer();
 	}
