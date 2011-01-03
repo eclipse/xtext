@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.impl;
 
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -18,12 +17,9 @@ public class XBinaryOperationImplCustom extends XBinaryOperationImpl {
 	
 	@Override
 	public EList<XExpression> getArguments() {
-		BasicEList<XExpression> result = new BasicEList<XExpression>(2);
-		result.add(getLeftOperand());
-		result.add(getRightOperand());
-		return result;
+		return asArguments(getLeftOperand(), getRightOperand());
 	}
-	
+
 	@Override
 	public String toString() {
 		return getExpressionAsString(getLeftOperand())+" "+getFeatureName()+" "+getExpressionAsString(getLeftOperand());

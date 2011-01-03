@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.impl;
 
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -17,10 +16,9 @@ import org.eclipse.xtext.xbase.XExpression;
 public class XMemberFeatureCallImplCustom extends XMemberFeatureCallImpl {
 	@Override
 	public EList<XExpression> getArguments() {
-		BasicEList<XExpression> result = new BasicEList<XExpression>(getMemberCallArguments().size()+1);
-		result.add(getMemberCallTarget());
-		result.addAll(getMemberCallArguments());
-		return result;
+		EList<XExpression> args = asArguments(getMemberCallTarget());
+		args.addAll(getMemberCallArguments());
+		return args;
 	}
 	
 	@Override

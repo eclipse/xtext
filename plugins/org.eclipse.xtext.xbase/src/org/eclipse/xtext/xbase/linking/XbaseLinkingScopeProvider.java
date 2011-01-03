@@ -49,7 +49,7 @@ public class XbaseLinkingScopeProvider implements IScopeProvider {
 	}
 
 	protected boolean isFeatureCallScope(EReference reference) {
-		return reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE;
+		return reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE || reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR;
 	}
 	
 	protected Predicate<IEObjectDescription> getFeaturePredicateSelector(final EObject context, final EReference reference) {
