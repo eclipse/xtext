@@ -20,6 +20,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
+import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
@@ -37,7 +38,7 @@ public class DefaultRenameStrategy implements IRenameStrategy {
 		@Inject
 		private ILocationInFileProvider locationInFileProvider;
 		
-		public IRenameStrategy get(final EObject targetElement) {
+		public IRenameStrategy get(final EObject targetElement, IRenameElementContext renameElementContext) {
 			return new DefaultRenameStrategy(targetElement, locationInFileProvider);
 		}
 

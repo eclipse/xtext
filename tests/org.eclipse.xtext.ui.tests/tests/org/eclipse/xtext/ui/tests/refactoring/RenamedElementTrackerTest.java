@@ -45,7 +45,7 @@ public class RenamedElementTrackerTest extends AbstractXtextTests {
 		String newName = "newB";
 
 		List<URI> renamedElementURIs = newArrayList(uriB, uriC);
-		IRenameStrategy renameStrategy = get(IRenameStrategy.Provider.class).get(elementB);
+		IRenameStrategy renameStrategy = get(IRenameStrategy.Provider.class).get(elementB, null);
 
 		IRenamedElementTracker renamedElementTracker = new RenamedElementTracker();
 		Map<URI, URI> original2newElementURIs = renamedElementTracker.renameAndTrack(renamedElementURIs, newName,

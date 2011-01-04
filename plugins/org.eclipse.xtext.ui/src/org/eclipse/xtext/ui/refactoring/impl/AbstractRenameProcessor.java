@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.ltk.core.refactoring.participants.RenameProcessor;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
+import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
 import com.google.inject.ImplementedBy;
 
@@ -21,7 +21,7 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(RenameElementProcessor.class)
 public abstract class AbstractRenameProcessor extends RenameProcessor {
 
-	public abstract void initialize(URI targetElementURI);
+	public abstract void initialize(IRenameElementContext renameElementContext);
 
 	public abstract IRenameStrategy getRenameElementStrategy();
 
