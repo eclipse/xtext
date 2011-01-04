@@ -65,7 +65,9 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 		};
 		resourceDescriptionManager = new DefaultResourceDescriptionManager();
 		resourceDescriptionManager.setCache(IResourceScopeCache.NullImpl.INSTANCE);
-		resourceDescriptionManager.setNameProvider(qualifiedNameProvider);
+		DefaultResourceDescriptionStrategy strategy = new DefaultResourceDescriptionStrategy();
+		strategy.setQualifiedNameProvider(qualifiedNameProvider);
+		resourceDescriptionManager.setStrategy(strategy);
 		ResourceSetBasedResourceDescriptions resDescs = new ResourceSetBasedResourceDescriptions();
 		resDescs.setContext(resourceSet);
 		resDescs.setRegistry(this);

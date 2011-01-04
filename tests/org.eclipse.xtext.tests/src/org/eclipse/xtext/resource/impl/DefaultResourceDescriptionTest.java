@@ -33,20 +33,30 @@ import com.google.common.collect.Lists;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DefaultResourceDescriptionTest extends TestCase implements IQualifiedNameProvider {
+public class DefaultResourceDescriptionTest extends TestCase {
 
 	private DefaultResourceDescription description;
 	private EPackage pack;
 	private EClass eClass;
 	private EDataType dtype;
 	private Resource resource;
-	private IQualifiedNameProvider delegate;
+	private IQualifiedNameProvider nameProvider;
+	private DefaultResourceDescriptionStrategy strategy;
 
 	@Override
 	protected void setUp() throws Exception {
 		resource = new XMLResourceImpl();
 		resource.setURI(URI.createURI("foo:/test"));
-		description = new DefaultResourceDescription(resource, this);
+		nameProvider = new IQualifiedNameProvider.AbstractImpl() {
+			public QualifiedName getFullyQualifiedName(EObject obj) {
+				if (obj instanceof ENamedElement)
+					return QualifiedName.create(((ENamedElement) obj).getName());
+				return null;
+			}
+		};
+		strategy = new DefaultResourceDescriptionStrategy();
+		strategy.setQualifiedNameProvider(nameProvider);
+		description = new DefaultResourceDescription(resource, strategy);
 		EcoreFactory f = EcoreFactory.eINSTANCE;
 		pack = f.createEPackage();
 		pack.setName("MyPackage");
@@ -58,23 +68,16 @@ public class DefaultResourceDescriptionTest extends TestCase implements IQualifi
 		pack.getEClassifiers().add(dtype);
 		resource.getContents().add(pack);
 
-		delegate = new IQualifiedNameProvider.AbstractImpl() {
-			public QualifiedName getFullyQualifiedName(EObject obj) {
-				if (obj instanceof ENamedElement)
-					return QualifiedName.create(((ENamedElement) obj).getName());
-				return null;
-			}
-		};
 	}
 
 	public void testGetExportedObject_1() throws Exception {
-		delegate = new IQualifiedNameProvider.AbstractImpl() {
+		strategy.setQualifiedNameProvider(new IQualifiedNameProvider.AbstractImpl() {
 			public QualifiedName getFullyQualifiedName(EObject obj) {
 				if (obj instanceof EPackage)
 					return QualifiedName.create(((EPackage) obj).getName());
 				return null;
 			}
-		};
+		});
 
 		Iterable<IEObjectDescription> iterable = description.getExportedObjects();
 		ArrayList<IEObjectDescription> list = Lists.newArrayList(iterable);
@@ -84,13 +87,13 @@ public class DefaultResourceDescriptionTest extends TestCase implements IQualifi
 	}
 
 	public void testGetExportedObject_2() throws Exception {
-		delegate = new IQualifiedNameProvider.AbstractImpl() {
+		strategy.setQualifiedNameProvider(new IQualifiedNameProvider.AbstractImpl() {
 			public QualifiedName getFullyQualifiedName(EObject obj) {
 				if (obj instanceof EClassifier)
 					return QualifiedName.create(((EClassifier) obj).getName());
 				return null;
 			}
-		};
+		});
 
 		Iterable<IEObjectDescription> iterable = description.getExportedObjects();
 		ArrayList<IEObjectDescription> list = Lists.newArrayList(iterable);
@@ -150,14 +153,6 @@ public class DefaultResourceDescriptionTest extends TestCase implements IQualifi
 			assertTrue(obj+" wasn't contained",found);
 		}
 		assertEquals(collection.size(),expectedContents.length);
-	}
-
-	public QualifiedName getFullyQualifiedName(EObject obj) {
-		return delegate.getFullyQualifiedName(obj);
-	}
-
-	public QualifiedName apply(EObject from) {
-		return delegate.apply(from);
 	}
 
 }
