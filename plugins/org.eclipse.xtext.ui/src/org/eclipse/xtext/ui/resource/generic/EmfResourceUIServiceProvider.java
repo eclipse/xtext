@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.resource.generic;
 
-import org.eclipse.xtext.resource.generic.EmfResourceServiceProvider;
+import org.eclipse.xtext.resource.generic.GenericResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.DefaultResourceUIServiceProvider;
 
 import com.google.inject.Inject;
@@ -18,7 +18,7 @@ import com.google.inject.Inject;
 public class EmfResourceUIServiceProvider extends DefaultResourceUIServiceProvider {
 
 	@Inject
-	public EmfResourceUIServiceProvider(EmfResourceServiceProvider runtimeDelegate) {
+	public EmfResourceUIServiceProvider(GenericResourceServiceProvider runtimeDelegate) {
 		super(runtimeDelegate);
 	}
 	

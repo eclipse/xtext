@@ -7,12 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.refactoring;
 
-import org.eclipse.xtext.resource.generic.AbstractEmfResourceRuntimeModule;
+import org.eclipse.xtext.resource.generic.AbstractGenericResourceRuntimeModule;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class ReferringXmiResourceModule extends AbstractEmfResourceRuntimeModule {
+public class ReferringXmiResourceModule extends AbstractGenericResourceRuntimeModule {
 
 	@Override
 	protected String getLanguageName() {
