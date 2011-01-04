@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.tests.compiler;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
+import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 
 /**
@@ -58,10 +59,12 @@ public class CompilerTest extends AbstractXtextTests {
 				, "for (java.lang.String s : new java.util.ArrayList<java.lang.String>()) " +
 						"s.length");
 	}
-
+	
 	protected void assertCompilesTo(final String expectedJavaCode, final String xbaseCode) throws Exception {
 		EObject model = getModel(xbaseCode);
 		XbaseCompiler compiler = get(XbaseCompiler.class);
-		assertEquals(expectedJavaCode,compiler.compile(model).toString());
+		IAppendable appandable = new IAppendable.StringBuilderBasedAppendable();
+		compiler.compile(model,appandable);
+		assertEquals(expectedJavaCode,appandable.toString());
 	}
 }
