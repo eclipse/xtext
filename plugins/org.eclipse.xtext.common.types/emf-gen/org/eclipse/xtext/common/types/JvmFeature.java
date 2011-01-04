@@ -18,12 +18,4 @@ package org.eclipse.xtext.common.types;
  */
 public interface JvmFeature extends JvmMember
 {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	String getSimpleName();
-
 } // JvmFeature
