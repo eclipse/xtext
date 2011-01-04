@@ -53,20 +53,18 @@ public class XbaseCompiler {
 	private PolymorphicDispatcher<Void> toJavaExprDispatcher = PolymorphicDispatcher.createForSingleTarget(
 			"_toJavaExpression", 2, 2, this);
 
-	public CharSequence compile(EObject obj) {
-		StringBuilder builder = new StringBuilder();
-		internalPrepare(obj, builder);
-		builder.append("return ");
-		internalToJavaExpression(obj, builder);
-		builder.append(";");
-		return builder;
+	public void compile(EObject obj, IAppendable appendable) {
+		internalPrepare(obj, appendable);
+		appendable.append("return ");
+		internalToJavaExpression(obj, appendable);
+		appendable.append(";\n");
 	}
 
-	protected void internalPrepare(EObject obj, StringBuilder builder) {
+	protected void internalPrepare(EObject obj, IAppendable builder) {
 		toJavaStmntDispatcher.invoke(obj, builder);
 	}
 
-	protected void internalToJavaExpression(EObject obj, StringBuilder builder) {
+	protected void internalToJavaExpression(EObject obj, IAppendable builder) {
 		toJavaExprDispatcher.invoke(obj, builder);
 	}
 
@@ -75,6 +73,10 @@ public class XbaseCompiler {
 
 	public void setTypeProvider(ITypeProvider<JvmTypeReference> typeProvider) {
 		this.typeProvider = typeProvider;
+	}
+	
+	protected ITypeProvider<JvmTypeReference> getTypeProvider() {
+		return typeProvider;
 	}
 
 	protected String getReturnTypeName(XExpression expr) {
@@ -88,42 +90,42 @@ public class XbaseCompiler {
 		return "_var";
 	}
 
-	public void _prepare(XExpression func, StringBuilder b) {
+	public void _prepare(XExpression func, IAppendable b) {
 		throw new UnsupportedOperationException("Coudn't find a compilation strategy for expressions of type "
 				+ func.getClass().getCanonicalName());
 	}
 
-	public void _toJavaExpression(XExpression func, StringBuilder b) {
+	public void _toJavaExpression(XExpression func, IAppendable b) {
 		throw new UnsupportedOperationException("Coudn't find a compilation strategy for expressions of type "
 				+ func.getClass().getCanonicalName());
 	}
 
-	public void _prepare(XStringLiteral expr, StringBuilder b) {
+	public void _prepare(XStringLiteral expr, IAppendable b) {
 		//Always inline as expression
 	}
 
-	public void _toJavaExpression(XStringLiteral expr, StringBuilder b) {
+	public void _toJavaExpression(XStringLiteral expr, IAppendable b) {
 		String javaString = expr.getValue().replace("\"", "\\\"");
 		b.append('"').append(javaString).append('"');
 	}
 
-	public void _prepare(XIntLiteral expr, StringBuilder b) {
+	public void _prepare(XIntLiteral expr, IAppendable b) {
 		//Always inline as expression
 	}
 
-	public void _toJavaExpression(XIntLiteral expr, StringBuilder b) {
+	public void _toJavaExpression(XIntLiteral expr, IAppendable b) {
 		b.append(expr.getValue()).append("L");
 	}
 
-	public void _prepare(XBooleanLiteral expr, StringBuilder b) {
+	public void _prepare(XBooleanLiteral expr, IAppendable b) {
 		//Always inline as expression
 	}
 
-	public void _toJavaExpression(XBooleanLiteral expr, StringBuilder b) {
+	public void _toJavaExpression(XBooleanLiteral expr, IAppendable b) {
 		b.append(expr.isIsTrue());
 	}
 
-	public void _prepare(XBlockExpression expr, StringBuilder b) {
+	public void _prepare(XBlockExpression expr, IAppendable b) {
 		b.append(getReturnTypeName(expr)).append(" ").append(getVarName(expr)).append(";\n");
 		b.append("{\n");
 		final EList<XExpression> expressions = expr.getExpressions();
@@ -140,11 +142,11 @@ public class XbaseCompiler {
 		b.append("}\n");
 	}
 
-	public void _toJavaExpression(XBlockExpression expr, StringBuilder b) {
+	public void _toJavaExpression(XBlockExpression expr, IAppendable b) {
 		b.append(getVarName(expr));
 	}
 
-	public void _prepare(XVariableDeclaration expr, StringBuilder b) {
+	public void _prepare(XVariableDeclaration expr, IAppendable b) {
 		internalPrepare(expr.getRight(), b);
 		if (!expr.isWriteable()) {
 			b.append("final ");
@@ -165,21 +167,21 @@ public class XbaseCompiler {
 		return name.equals("this") ? "_this" : name;
 	}
 
-	public void _toJavaExpression(XVariableDeclaration expr, StringBuilder b) {
+	public void _toJavaExpression(XVariableDeclaration expr, IAppendable b) {
 	}
 
-	public void _prepare(XWhileExpression expr, StringBuilder b) {
+	public void _prepare(XWhileExpression expr, IAppendable b) {
 		b.append("while (");
 		internalPrepare(expr.getPredicate(), b);
 		b.append(")");
 		internalPrepare(expr.getBody(), b);
 	}
 
-	public void _toJavaExpression(XWhileExpression expr, StringBuilder b) {
+	public void _toJavaExpression(XWhileExpression expr, IAppendable b) {
 		b.append("null");
 	}
 
-	public void _prepare(XForLoopExpression expr, StringBuilder b) {
+	public void _prepare(XForLoopExpression expr, IAppendable b) {
 		internalPrepare(expr.getForExpression(), b);
 		b.append("for (");
 		b.append(expr.getDeclaredParam().getParameterType().getCanonicalName());
@@ -192,23 +194,23 @@ public class XbaseCompiler {
 		b.append("}\n");
 	}
 
-	protected void internalToJavaStatement(XExpression expr, StringBuilder b) {
+	protected void internalToJavaStatement(XExpression expr, IAppendable b) {
 		internalPrepare(expr, b);
 		internalToJavaExpression(expr, b);
 		b.append(";\n");
 	}
 
-	public void _toJavaExpression(XForLoopExpression expr, StringBuilder b) {
+	public void _toJavaExpression(XForLoopExpression expr, IAppendable b) {
 		b.append("null");
 	}
 
-	public void _prepare(XConstructorCall expr, StringBuilder b) {
+	public void _prepare(XConstructorCall expr, IAppendable b) {
 		for (XExpression arg : expr.getArguments()) {
 			internalPrepare(arg, b);
 		}
 	}
 
-	public void _toJavaExpression(XConstructorCall expr, StringBuilder b) {
+	public void _toJavaExpression(XConstructorCall expr, IAppendable b) {
 		b.append("new ");
 		b.append(expr.getConstructor().getDeclaringType().getCanonicalName());
 		if (!expr.getTypeArguments().isEmpty()) {
@@ -226,23 +228,23 @@ public class XbaseCompiler {
 		b.append(")");
 	}
 
-	public void _prepare(XCastedExpression expr, StringBuilder b) {
+	public void _prepare(XCastedExpression expr, IAppendable b) {
 		internalPrepare(expr.getTarget(), b);
 	}
 
-	public void _toJavaExpression(XCastedExpression expr, StringBuilder b) {
+	public void _toJavaExpression(XCastedExpression expr, IAppendable b) {
 		b.append("(");
 		b.append(expr.getType().getCanonicalName());
 		b.append(") ");
 		internalToJavaExpression(expr.getTarget(), b);
 	}
 
-	public void _prepare(XAssignment expr, StringBuilder b) {
+	public void _prepare(XAssignment expr, IAppendable b) {
 		internalPrepare(expr.getAssignable(), b);
 		internalPrepare(expr.getValue(), b);
 	}
 
-	public void _toJavaExpression(XAssignment expr, StringBuilder b) {
+	public void _toJavaExpression(XAssignment expr, IAppendable b) {
 		if (expr.getFeature() instanceof JvmOperation) {
 			b.append(".");
 			b.append(((JvmOperation) expr.getFeature()).getSimpleName());
@@ -255,7 +257,7 @@ public class XbaseCompiler {
 		}
 	}
 
-	public void _prepare(XIfExpression expr, StringBuilder b) {
+	public void _prepare(XIfExpression expr, IAppendable b) {
 		internalPrepare(expr.getIf(), b);
 		b.append(getReturnTypeName(expr));
 		b.append(" ");
@@ -280,29 +282,29 @@ public class XbaseCompiler {
 		b.append("}\n");
 	}
 
-	public void _toJavaExpression(XIfExpression expr, StringBuilder b) {
+	public void _toJavaExpression(XIfExpression expr, IAppendable b) {
 		b.append(getVarName(expr));
 	}
 
-	public void _prepare(XAbstractFeatureCall expr, StringBuilder b) {
+	public void _prepare(XAbstractFeatureCall expr, IAppendable b) {
 		for (XExpression arg : expr.getArguments()) {
 			internalPrepare(arg, b);
 		}
 	}
 
-	public void _toJavaExpression(XUnaryOperation expr, StringBuilder b) {
+	public void _toJavaExpression(XUnaryOperation expr, IAppendable b) {
 		internalToJavaExpression((expr).getOperand(), b);
 		b.append(".");
 		appendFeatureCall(expr.getFeature(), Collections.<XExpression> emptyList(), b);
 	}
 
-	public void _toJavaExpression(XBinaryOperation expr, StringBuilder b) {
+	public void _toJavaExpression(XBinaryOperation expr, IAppendable b) {
 		internalToJavaExpression((expr).getLeftOperand(), b);
 		b.append(".");
 		appendFeatureCall(expr.getFeature(), singletonList(expr.getRightOperand()), b);
 	}
 
-	public void _toJavaExpression(XFeatureCall expr, StringBuilder b) {
+	public void _toJavaExpression(XFeatureCall expr, IAppendable b) {
 		if (expr.getFeature() instanceof JvmFeature) {
 			b.append("_this.");
 			appendFeatureCall(expr.getFeature(), expr.getArguments(), b);
@@ -315,13 +317,13 @@ public class XbaseCompiler {
 		}
 	}
 
-	public void _toJavaExpression(XMemberFeatureCall expr, StringBuilder b) {
+	public void _toJavaExpression(XMemberFeatureCall expr, IAppendable b) {
 		internalToJavaExpression(expr.getMemberCallTarget(), b);
 		b.append(".");
 		appendFeatureCall(expr.getFeature(), expr.getMemberCallArguments(), b);
 	}
 
-	protected void appendFeatureCall(JvmIdentifyableElement feature, List<XExpression> arguments, StringBuilder b) {
+	protected void appendFeatureCall(JvmIdentifyableElement feature, List<XExpression> arguments, IAppendable b) {
 		if (feature instanceof JvmMember) {
 			b.append(((JvmMember) feature).getSimpleName());
 		}
@@ -332,7 +334,7 @@ public class XbaseCompiler {
 		}
 	}
 
-	protected void appendArguments(List<XExpression> eList, StringBuilder b) {
+	protected void appendArguments(List<XExpression> eList, IAppendable b) {
 		for (int i = 0; i < eList.size(); i++) {
 			XExpression expression = eList.get(i);
 			internalToJavaExpression(expression, b);
