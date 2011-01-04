@@ -92,6 +92,7 @@ public class EmfResourceDescriptionManagerTest extends TestCase {
 		Resource ecoreResource = new XMIResourceImpl(URI.createURI(copyOfEPackage.getNsURI()));
 		ecoreResource.getContents().add(copyOfEPackage);
 		IResourceDescription oldDescription = manager.getResourceDescription(ecoreResource);
+		oldDescription.getExportedObjects();
 		copyOfEPackage.setName("ecore_new");
 		IResourceDescription newDescription = manager.getResourceDescription(ecoreResource);
 		

@@ -38,6 +38,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl;
 import org.eclipse.xtext.scoping.IScope;
@@ -67,11 +68,13 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		globalScopeProvider = new ResourceSetGlobalScopeProvider();
 		nameProvider = new DefaultDeclarativeQualifiedNameProvider();
 		nameConverter = new IQualifiedNameConverter.DefaultImpl();
+		final DefaultResourceDescriptionStrategy strategy = new DefaultResourceDescriptionStrategy();
+		strategy.setQualifiedNameProvider(nameProvider);
 		final DefaultResourceDescriptionManager resourceDescMnr = new DefaultResourceDescriptionManager() {
 			@Override
 			public IResourceDescription getResourceDescription(Resource resource) {
 				DefaultResourceDescription resourceDescription = new DefaultResourceDescription(resource,
-						nameProvider);
+						strategy);
 				return resourceDescription;
 			}
 			

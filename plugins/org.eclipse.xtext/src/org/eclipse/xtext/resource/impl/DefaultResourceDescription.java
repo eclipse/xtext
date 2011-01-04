@@ -7,36 +7,29 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.impl;
 
-import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Lists.*;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.linking.impl.ImportedNamesAdapter;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.resource.EObjectDescription;
+import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.IAcceptor;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -52,13 +45,13 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 
 	private final URI uri;
 
-	private final IQualifiedNameProvider nameProvider;
-
 	private List<IReferenceDescription> referenceDescriptions;
 
-	public DefaultResourceDescription(Resource resource, IQualifiedNameProvider nameProvider) {
+	private IDefaultResourceDescriptionStrategy strategy;
+
+	public DefaultResourceDescription(Resource resource, IDefaultResourceDescriptionStrategy strategy) {
 		this.resource = resource;
-		this.nameProvider = nameProvider;
+		this.strategy = strategy;
 		this.uri = getNormalizedURI(resource);
 	}
 
@@ -72,32 +65,19 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 				return Collections.<IEObjectDescription> emptyList();
 			}
 		}
-		Iterable<EObject> contents = new Iterable<EObject>() {
-			public Iterator<EObject> iterator() {
-				return EcoreUtil.getAllProperContents(getResource(), true);
+		final List<IEObjectDescription> eObjectDescriptions = newArrayList();
+		IAcceptor<IEObjectDescription> acceptor = new IAcceptor<IEObjectDescription>() {
+			public void accept(IEObjectDescription eObjectDescription) {
+				eObjectDescriptions.add(eObjectDescription);
 			}
 		};
-		Iterable<IEObjectDescription> result = transform(contents, new Function<EObject, IEObjectDescription>() {
-			public IEObjectDescription apply(EObject from) {
-				return createIEObjectDescription(from);
-			}
-		});
-		Iterable<IEObjectDescription> filter = Iterables.filter(result, Predicates.notNull());
-		return Lists.newArrayList(filter);
-	}
-
-	protected IEObjectDescription createIEObjectDescription(EObject from) {
-		if (nameProvider == null)
-			return null;
-		try {
-			QualifiedName qualifiedName = nameProvider.getFullyQualifiedName(from);
-			if (qualifiedName != null) {
-				return EObjectDescription.create(qualifiedName, from);
-			}
-		} catch (Exception exc) {
-			log.error(exc.getMessage());
+		TreeIterator<EObject> allProperContents = EcoreUtil.getAllProperContents(getResource(), true);
+		while (allProperContents.hasNext()) {
+			EObject content = allProperContents.next();
+			if (!strategy.createEObjectDescriptions(content, acceptor))
+				allProperContents.prune();
 		}
-		return null;
+		return eObjectDescriptions;
 	}
 
 	public Iterable<QualifiedName> getImportedNames() {
@@ -118,45 +98,28 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 		return uri;
 	}
 
-	public IQualifiedNameProvider getNameProvider() {
-		return nameProvider;
-	}
-
-	@SuppressWarnings("unchecked")
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
 		if (this.referenceDescriptions == null) {
-			Map<EObject, IEObjectDescription> eObject2exportedEObjects = createEObject2ExportedEObjectsMap(getExportedObjects());
-			List<IReferenceDescription> referenceDescriptions = Lists.newArrayList();
-			TreeIterator<EObject> contents = EcoreUtil.getAllProperContents(this.resource, true);
-			while (contents.hasNext()) {
-				EObject eObject = contents.next();
-				EList<EReference> references = eObject.eClass().getEAllReferences();
-				for (EReference eReference : references) {
-					if (!eReference.isContainment()) {
-						Object val = eObject.eGet(eReference);
-						if (val != null) {
-							if (eReference.isMany()) {
-								List<EObject> list = (List<EObject>) val;
-								for (int i = 0; i < list.size(); i++) {
-									EObject to = list.get(i);
-									if (isResolved(to)) {
-										referenceDescriptions.add(new DefaultReferenceDescription(eObject, to,
-												eReference, i, findExportedContainerURI(eObject,
-														eObject2exportedEObjects)));
-									}
-								}
-							} else {
-								EObject to = (EObject) val;
-								if (isResolved(to)) {
-									referenceDescriptions.add(new DefaultReferenceDescription(eObject, to, eReference,
-											-1, findExportedContainerURI(eObject, eObject2exportedEObjects)));
-								}
-							}
-						}
-					}
-				}
-			}
+			List<IReferenceDescription> referenceDescriptions = computeReferenceDescriptions();
 			this.referenceDescriptions = referenceDescriptions;
+		}
+		return referenceDescriptions;
+	}
+
+	protected List<IReferenceDescription> computeReferenceDescriptions() {
+		final List<IReferenceDescription> referenceDescriptions = Lists.newArrayList();
+		IAcceptor<IReferenceDescription> acceptor = new IAcceptor<IReferenceDescription>() {
+			public void accept(IReferenceDescription referenceDescription) {
+				referenceDescriptions.add(referenceDescription);
+			}
+		};
+		Map<EObject, IEObjectDescription> eObject2exportedEObjects = createEObject2ExportedEObjectsMap(getExportedObjects());
+		TreeIterator<EObject> contents = EcoreUtil.getAllProperContents(this.resource, true);
+		while (contents.hasNext()) {
+			EObject eObject = contents.next();
+			URI exportedContainerURI = findExportedContainerURI(eObject, eObject2exportedEObjects);
+			if(!strategy.createReferenceDescriptions(eObject, exportedContainerURI, acceptor))
+				contents.prune();
 		}
 		return referenceDescriptions;
 	}
@@ -181,9 +144,5 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 			currentContainer = currentContainer.eContainer();
 		}
 		return null;
-	}
-
-	protected boolean isResolved(EObject to) {
-		return to != null && !((InternalEObject) to).eIsProxy();
 	}
 }
