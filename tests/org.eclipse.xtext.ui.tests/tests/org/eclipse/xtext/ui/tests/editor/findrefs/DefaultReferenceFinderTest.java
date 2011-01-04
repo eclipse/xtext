@@ -25,10 +25,10 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.DefaultReferenceDescription;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.ui.editor.findrefs.DefaultReferenceFinder;
-import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
 import org.eclipse.xtext.ui.editor.findrefs.ResourceSetLocalContextProvider;
 import org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
@@ -126,7 +126,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 		
 	}
 	
-	public static class MockAcceptor implements IReferenceFinder.IAcceptor {
+	public static class MockAcceptor implements IAcceptor<IReferenceDescription> {
 
 		private Queue<IReferenceDescription> expectationQueue = newLinkedList();
 

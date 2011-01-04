@@ -33,6 +33,7 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.DefaultReferenceDescription;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.base.Function;
@@ -52,12 +53,12 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 	}
 
 	public void findAllReferences(URI targetURI, ILocalContextProvider localContextProvider,
-			final IAcceptor acceptor, IProgressMonitor monitor) {
+			final IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor) {
 		findAllReferences(singleton(targetURI), localContextProvider, acceptor, monitor);
 	}
 			
 	public void findAllReferences(Iterable<URI> targetURIs, ILocalContextProvider localContextProvider,
-			final IAcceptor acceptor, IProgressMonitor monitor) {
+			final IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor) {
 		final IProgressMonitor realMonitor = (monitor == null) ? new NullProgressMonitor() : monitor;
 		realMonitor.beginTask("Find references", 2);
 		for (URI targetURI : targetURIs) {
@@ -72,7 +73,7 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 		realMonitor.done();
 	}
 
-	public void findLocalReferences(EObject target, IAcceptor acceptor, IProgressMonitor monitor) {
+	public void findLocalReferences(EObject target, IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor) {
 		if (monitor.isCanceled())
 			return;
 		if (target != null) {
@@ -129,7 +130,7 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 			return parentURIs.get(currentBestIndex);
 	}
 
-	public void findIndexedReferences(Iterable<URI> targetURIs, IAcceptor acceptor, IProgressMonitor monitor) {
+	public void findIndexedReferences(Iterable<URI> targetURIs, IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor) {
 		Set<URI> targetResourceURIs = newHashSet(transform(targetURIs, new Function<URI, URI>() {
 			public URI apply(URI from) {
 				return from.trimFragment();

@@ -15,13 +15,14 @@ import org.eclipse.search.ui.ISearchResult;
 import org.eclipse.search.ui.ISearchResultListener;
 import org.eclipse.search.ui.SearchResultEvent;
 import org.eclipse.xtext.resource.IReferenceDescription;
+import org.eclipse.xtext.util.IAcceptor;
 
 import com.google.common.collect.Lists;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class ReferenceSearchResult implements ISearchResult, DefaultReferenceFinder.IAcceptor {
+public class ReferenceSearchResult implements ISearchResult, IAcceptor<IReferenceDescription> {
 
 	private ReferenceQuery query;
 
