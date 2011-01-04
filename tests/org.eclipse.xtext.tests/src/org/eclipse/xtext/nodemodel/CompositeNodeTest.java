@@ -7,6 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.util.EcoreAdapterFactory;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 
 /**
@@ -82,5 +87,17 @@ public class CompositeNodeTest extends AbstractCompositeNodeTest {
 	@Override
 	protected CompositeNodeWithSemanticElement createCompositeNode() {
 		return new CompositeNodeWithSemanticElement();
+	}
+	
+	public void testIsAdapterForType() {
+		EObject object = EcoreFactory.eINSTANCE.createEObject();
+		CompositeNodeWithSemanticElement node = createCompositeNode();
+		object.eAdapters().add(node);
+		AdapterFactory adapterFactory = new EcoreAdapterFactory();
+		Adapter adapter = adapterFactory.adapt(object, INode.class);
+		assertSame(node, adapter);
+		// the following line may not throw a ClassCastException
+		Adapter secondAdapter = adapterFactory.adapt(object, new Object());
+		assertNull(secondAdapter);
 	}
 }

@@ -52,7 +52,7 @@ public class CompositeNodeWithSemanticElement extends CompositeNode implements A
 	}
 
 	public boolean isAdapterForType(Object type) {
-		return INode.class.isAssignableFrom((Class<?>)type);
+		return type instanceof Class<?> && INode.class.isAssignableFrom((Class<?>)type);
 	}
 	
 }
