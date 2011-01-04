@@ -9,7 +9,6 @@ package org.eclipse.xtext.scoping.impl;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
-import static org.eclipse.xtext.scoping.Selectors.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -23,8 +22,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ISelectable;
 import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.ISelector;
-import org.eclipse.xtext.scoping.ISelector.SelectByEObject;
 
 import junit.framework.TestCase;
 
@@ -57,10 +54,6 @@ public class ImportScopeTest extends TestCase {
 			return super.getAliasedElements(candidates);
 		}
 		
-		@Override
-		protected Iterable<IEObjectDescription> getElementsByEObject(SelectByEObject selector) {
-			return super.getElementsByEObject(selector);
-		}
 	}
 	
 	public void testImports_01() throws Exception {
@@ -71,7 +64,7 @@ public class ImportScopeTest extends TestCase {
 		ImportNormalizer n2 = new ImportNormalizer(QualifiedName.create("de","foo"), false);
 		TestableImportScope scope = new TestableImportScope(newArrayList(n1,n2), outer, new ScopeBasedSelectable(outer), EcorePackage.Literals.EOBJECT, false);
 		
-		final Iterable<IEObjectDescription> elements = scope.getElements(ISelector.SELECT_ALL);
+		final Iterable<IEObjectDescription> elements = scope.getAllElements();
 		Iterator<IEObjectDescription> iterator = elements.iterator();
 		assertEquals("foo.bar", iterator.next().getName().toString());
 		assertEquals("foo", iterator.next().getName().toString());
@@ -92,7 +85,7 @@ public class ImportScopeTest extends TestCase {
 		n2 = new ImportNormalizer(QualifiedName.create("foo"), false);
 		TestableImportScope scope = new TestableImportScope(newArrayList(n1,n2), outer, new ScopeBasedSelectable(outer), EcorePackage.Literals.EOBJECT, false);
 		
-		final Iterable<IEObjectDescription> elements = scope.getElements(ISelector.SELECT_ALL);
+		final Iterable<IEObjectDescription> elements = scope.getAllElements();
 		Iterator<IEObjectDescription> iterator = elements.iterator();
 		assertEquals("bar", iterator.next().getName().toString());
 		assertEquals("foo", iterator.next().getName().toString());
@@ -110,7 +103,7 @@ public class ImportScopeTest extends TestCase {
 		ImportNormalizer n2 = new ImportNormalizer(QualifiedName.create("de"), true);
 		TestableImportScope scope = new TestableImportScope(newArrayList(n1,n2), outer, new ScopeBasedSelectable(outer), EcorePackage.Literals.EOBJECT, false);
 		
-		Iterator<IEObjectDescription> iterator = scope.getElements(ISelector.SELECT_ALL).iterator();
+		Iterator<IEObjectDescription> iterator = scope.getAllElements().iterator();
 		assertSame(desc1,iterator.next());
 		assertSame(desc2,iterator.next());
 		assertFalse(iterator.hasNext());
@@ -124,7 +117,7 @@ public class ImportScopeTest extends TestCase {
 		ImportNormalizer n2 = new ImportNormalizer(QualifiedName.create("de"), true);
 		TestableImportScope scope = new TestableImportScope(newArrayList(n1,n2), outer, new ScopeBasedSelectable(outer), EcorePackage.Literals.EOBJECT, true);
 		
-		Iterator<IEObjectDescription> iterator = scope.getElements(ISelector.SELECT_ALL).iterator();
+		Iterator<IEObjectDescription> iterator = scope.getAllElements().iterator();
 		assertSame(desc1,iterator.next());
 		assertSame(desc2,iterator.next());
 		assertFalse(iterator.hasNext());
@@ -138,9 +131,9 @@ public class ImportScopeTest extends TestCase {
 		ImportNormalizer n2 = new ImportNormalizer(QualifiedName.create("de"), true);
 		TestableImportScope scope = new TestableImportScope(newArrayList(n1,n2), outer, new ScopeBasedSelectable(outer), EcorePackage.Literals.EOBJECT, false);
 		
-		assertNull(scope.getSingleElement(selectByName(QualifiedName.create("foo"))));
-		assertNotNull(scope.getSingleElement(selectByName(QualifiedName.create("com","foo"))));
-		assertNotNull(scope.getSingleElement(selectByName(QualifiedName.create("de","foo"))));
+		assertNull(scope.getSingleElement(QualifiedName.create("foo")));
+		assertNotNull(scope.getSingleElement(QualifiedName.create("com","foo")));
+		assertNotNull(scope.getSingleElement(QualifiedName.create("de","foo")));
 	}
 	
 	public void testDuplicatesNotVisible_02_IgnoreCase() throws Exception {
@@ -151,9 +144,9 @@ public class ImportScopeTest extends TestCase {
 		ImportNormalizer n2 = new ImportNormalizer(QualifiedName.create("de"), true);
 		TestableImportScope scope = new TestableImportScope(newArrayList(n1,n2), outer, new ScopeBasedSelectable(outer), EcorePackage.Literals.EOBJECT, true);
 		
-		assertNull(scope.getSingleElement(selectByName(QualifiedName.create("Foo"))));
-		assertNotNull(scope.getSingleElement(selectByName(QualifiedName.create("com","Foo"))));
-		assertNotNull(scope.getSingleElement(selectByName(QualifiedName.create("de","Foo"))));
+		assertNull(scope.getSingleElement(QualifiedName.create("Foo")));
+		assertNotNull(scope.getSingleElement(QualifiedName.create("com","Foo")));
+		assertNotNull(scope.getSingleElement(QualifiedName.create("de","Foo")));
 	}
 	
 	public void testMultipleElementsByName_00() throws Exception {
@@ -164,7 +157,7 @@ public class ImportScopeTest extends TestCase {
 		ImportNormalizer n2 = new ImportNormalizer(QualifiedName.create("de"), true);
 		TestableImportScope scope = new TestableImportScope(newArrayList(n1,n2), outer, new ScopeBasedSelectable(outer), EcorePackage.Literals.EOBJECT, true);
 		
-		assertNotNull(scope.getSingleElement(selectByName(QualifiedName.create("Foo"))));
+		assertNotNull(scope.getSingleElement(QualifiedName.create("Foo")));
 		Iterable<IEObjectDescription> elements = scope.getLocalElementsByName(QualifiedName.create("Foo"));
 		assertEquals(2,size(elements));
 	}
@@ -226,7 +219,7 @@ public class ImportScopeTest extends TestCase {
 		ImportNormalizer n1 = new ImportNormalizer(QualifiedName.create("com"), true);
 		ImportNormalizer n2 = new ImportNormalizer(QualifiedName.create("de"), true);
 		TestableImportScope scope = new TestableImportScope(newArrayList(n1,n2), outer, new ScopeBasedSelectable(outer), EcorePackage.Literals.EOBJECT, true);
-		Iterable<IEObjectDescription> iterable = scope.getElementsByEObject((SelectByEObject) selectByEObject(EcorePackage.Literals.EANNOTATION));
+		Iterable<IEObjectDescription> iterable = scope.getElements(EcorePackage.Literals.EANNOTATION);
 		assertEquals(1, size(iterable));
 		assertEquals("com.foo",iterable.iterator().next().getName().toString());
 	}

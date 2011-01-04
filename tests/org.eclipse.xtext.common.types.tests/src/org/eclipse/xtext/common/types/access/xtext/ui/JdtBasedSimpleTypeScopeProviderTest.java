@@ -25,7 +25,6 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.ISelector;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -112,7 +111,7 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 	public void testNotification_01() {
 		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 		assertTrue(resourceSet.eAdapters().isEmpty());
-		IEObjectDescription objectElement = scope.getSingleElement(new ISelector.SelectByName(QualifiedName.create(Object.class.getName())));
+		IEObjectDescription objectElement = scope.getSingleElement(QualifiedName.create(Object.class.getName()));
 		assertNotNull(objectElement);
 		assertEquals(1, resourceSet.eAdapters().size());
 	}
@@ -120,7 +119,7 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 	public void testNotification_02() {
 		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 		assertTrue(resourceSet.eAdapters().isEmpty());
-		IEObjectDescription objectElement = scope.getSingleElement(new ISelector.SelectByName(QualifiedName.create(Object.class.getName())));
+		IEObjectDescription objectElement = scope.getSingleElement(QualifiedName.create(Object.class.getName()));
 		Resource objectResource = objectElement.getEObjectOrProxy().eResource();
 		assertTrue(objectResource.isLoaded());
 		int size = resourceSet.getResources().size();
@@ -134,7 +133,7 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 	public void testNotification_03() {
 		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 		assertTrue(resourceSet.eAdapters().isEmpty());
-		IEObjectDescription objectElement = scope.getSingleElement(new ISelector.SelectByName(QualifiedName.create(Object.class.getName())));
+		IEObjectDescription objectElement = scope.getSingleElement(QualifiedName.create(Object.class.getName()));
 		Resource objectResource = objectElement.getEObjectOrProxy().eResource();
 		assertTrue(objectResource.isLoaded());
 		int adaptersSize = resourceSet.eAdapters().size();
@@ -147,8 +146,8 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 	public void testNotification_04() {
 		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field.eResource(), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 		assertTrue(resourceSet.eAdapters().isEmpty());
-		IEObjectDescription objectElement = scope.getSingleElement(new ISelector.SelectByName(QualifiedName.create(Object.class.getName())));
-		IEObjectDescription stringElement = scope.getSingleElement(new ISelector.SelectByName(QualifiedName.create(String.class.getName())));
+		IEObjectDescription objectElement = scope.getSingleElement(QualifiedName.create(Object.class.getName()));
+		IEObjectDescription stringElement = scope.getSingleElement(QualifiedName.create(String.class.getName()));
 		Resource objectResource = objectElement.getEObjectOrProxy().eResource();
 		int size = resourceSet.getResources().size();
 		int adaptersSize = resourceSet.eAdapters().size();

@@ -18,7 +18,6 @@ import org.eclipse.xtext.common.types.xtext.ui.JdtBasedSimpleTypeScope;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -44,7 +43,7 @@ public class JdtBasedSimpleTypeScopeTest extends AbstractTypeScopeTest {
 	}
 	
 	public void testGetContents_01() {
-		Iterable<IEObjectDescription> contents = typeScope.getElements(ISelector.SELECT_ALL);
+		Iterable<IEObjectDescription> contents = typeScope.getAllElements();
 		assertTrue(Iterables.any(contents, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
 				return List.class.getName().equals(input.getName().toString());
@@ -53,7 +52,7 @@ public class JdtBasedSimpleTypeScopeTest extends AbstractTypeScopeTest {
 	}
 	
 	public void testGetContents_02() {
-		Iterable<IEObjectDescription> contents = typeScope.getElements(ISelector.SELECT_ALL);
+		Iterable<IEObjectDescription> contents = typeScope.getAllElements();
 		assertTrue(Iterables.any(contents, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
 				return "int".equals(input.getName().toString());

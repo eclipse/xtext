@@ -31,7 +31,6 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
@@ -110,7 +109,7 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 				Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
 			if (model != null) {
 				IScope scope = getScopeProvider().getScope(model, reference);
-				Iterable<IEObjectDescription> candidates = scope.getElements(getSelector(model,reference,filter));
+				Iterable<IEObjectDescription> candidates = queryScope(scope, model, reference, filter);
 				for (IEObjectDescription candidate : candidates) {
 					if (!acceptor.canAcceptMoreProposals())
 						return;
@@ -129,8 +128,8 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 			return scopeProvider;
 		}
 		
-		public ISelector getSelector(EObject model, EReference reference, Predicate<IEObjectDescription> filter) {
-			return ISelector.SELECT_ALL;
+		public Iterable<IEObjectDescription> queryScope(IScope scope, EObject model, EReference reference, Predicate<IEObjectDescription> filter) {
+			return scope.getAllElements();
 		}
 	}
 

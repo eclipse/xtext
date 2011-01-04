@@ -9,55 +9,117 @@ package org.eclipse.xtext.scoping;
 
 import java.util.Collections;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
 /**
- * A scope defines which elements {@link IEObjectDescription} can be seen in a certain area within a model/program.
- * Scopes are used to resolve cross references during linking, content assist , serialization of cross references, etc.
+ * <p>A scope defines which elements {@link IEObjectDescription} can be seen in a certain area within a model/program.</p>
+ * <p>In other words: A scope is a kind of container structure that provides access to all objects that can be reached
+ * from a given {@link org.eclipse.emf.ecore.EReference reference}. These objects may be invalid from a semantic point
+ * of view, e.g. a scope may expose private fields of a class if there is no better candidate. This allows for
+ * better error messages instead of broken cross references.</p>
  * 
- * Scopes are constructed and provided by an {@link IScopeProvider}.
+ * <p>Scopes are used to resolve cross references during linking, content assist, serialization of models, etc.</p>
  * 
- * Clients pass in an {@link ISelector} to select from the elements of each scope, only those which are
- * valid/interesting depending on the actual client (i.e. linker, content assist, etc.).
+ * <p>Scopes are constructed and provided by an {@link IScopeProvider} for a given pair of a 
+ * {@link org.eclipse.emf.ecore.EObject context object} and a {@link org.eclipse.emf.ecore.EReference cross reference}.</p>
  * 
- * Scopes are usually nested and descriptions ({@link IEObjectDescription}) from nested scopes can shadow descriptions
- * from outer scopes. Usually the attribute {@link IEObjectDescription#getName() name} is used for that.
+ * <p>Clients can use several different query operations to select elements from a scope.
+ * They are free to filter the result further to a set of valid or interesting depending on the actual use case.
+ * A linker may want to create links to invalid objects to provide while content assist should filter these
+ * instances.</p>
+ * <ul>
+ * <li>Query by {@link QualifiedName name}: Scopes can be queried by name. Implementations should answer this query fast.</li>
+ * <li>Query by {@link EObject object}: Scopes can be queried by objects. Implementations should consider the 
+ * {@link org.eclipse.emf.common.util.URI uri} of the object, too.</li>
+ * <li>Wildcard query: All elements of the scope should be returned.</li>
+ * </ul>
+ * <p>Each concrete query can be used to obtain a single element (which is usually the first that matches the criteria) or all
+ * elements from the scope that are suitable. The wildcard query can be used to obtain the complete content of a scope.</p>
  * 
- * Clients should usually inherit from {@link org.eclipse.xtext.scoping.impl.AbstractScope AbstractScope} to implement
- * own scopes. 
+ * <p>Scopes are usually nested (see {@link org.eclipse.xtext.scoping.impl.AbstractScope#getParent() AbstractScope#getParent} 
+ * and {@link IEObjectDescription descriptions} from nested scopes can shadow descriptions
+ * from parent scopes. Usually the {@link IEObjectDescription#getName() name} of a {@link IEObjectDescription description} 
+ * is used as the shadowing criteria.</p>
+ * 
+ * <p>Clients should usually inherit from {@link org.eclipse.xtext.scoping.impl.AbstractScope AbstractScope} to implement
+ * own scopes.</p> 
+ * 
+ * <p>Clients are free to extend the interface and introduce further query operations like prefix search or fuzzy
+ * name matching.</p>
  * 
  * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
 public interface IScope {
 
 	/**
-	 * An implementation might use any strategy to find a single element, if multiple elements fulfill the given
-	 * selector.
+	 * Find the first description that matches the given name.
 	 * 
-	 * @param selector the selection critiria. May not be <code>null</code>.
-	 * @return the first element that matches the {@link ISelector selector}. May be <code>null</code>.
+	 * @param name the name of the to-be-found element. May not be <code>null</code>.
+	 * @return the first element that matches the {@link QualifiedName name}. May be <code>null</code>.
 	 */
-	IEObjectDescription getSingleElement(ISelector selector);
+	IEObjectDescription getSingleElement(QualifiedName name);
+	
+	/**
+	 * Find all descriptions that match the given name.
+	 * 
+	 * @param name the name of the to-be-found elements. May not be <code>null</code>.
+	 * @return all elements that match the {@link QualifiedName name}. Never <code>null</code>.
+	 */
+	Iterable<IEObjectDescription> getElements(QualifiedName name);
+	
+	/**
+	 * Find the first description that matches the given instance.
+	 * 
+	 * @param object the instance whose description should be obtained. May not be <code>null</code>.
+	 * @return the first element that matches the {@link EObject instance}. May be <code>null</code>.
+	 */
+	IEObjectDescription getSingleElement(EObject object);
+	
+	/**
+	 * Find all descriptions that match the given instance.
+	 * 
+	 * @param object the instance whose descriptions should be obtained. May not be <code>null</code>.
+	 * @return all elements that match the {@link EObject instance}. Never <code>null</code>.
+	 */
+	Iterable<IEObjectDescription> getElements(EObject object);
 
 	/**
-	 * @param selector the selection critiria. May not be <code>null</code>.
-	 * @return all elements which match the {@link ISelector selector}. Never <code>null</code>.
+	 * Obtain all elements from the scope. Implementors a free to throw an {@link UnsupportedOperationException}
+	 * if the scope cannot be enumerated.
+	 * 
+	 * @return all elements of the scope. Never <code>null</code>.
+	 * @throws UnsupportedOperationException if the scope cannot be enumerated.
 	 */
-	Iterable<IEObjectDescription> getElements(ISelector selector);
+	Iterable<IEObjectDescription> getAllElements();
 
 	/**
 	 * a NO-OP implementation.
 	 */
 	public final static IScope NULLSCOPE = new IScope() {
 
-		public IEObjectDescription getSingleElement(ISelector selector) {
+		public IEObjectDescription getSingleElement(QualifiedName name) {
 			return null;
 		}
 
-		public Iterable<IEObjectDescription> getElements(ISelector selector) {
-			return Collections.emptySet();
+		public Iterable<IEObjectDescription> getElements(QualifiedName name) {
+			return Collections.emptyList();
 		}
 
+		public IEObjectDescription getSingleElement(EObject object) {
+			return null;
+		}
+
+		public Iterable<IEObjectDescription> getElements(EObject object) {
+			return Collections.emptyList();
+		}
+
+		public Iterable<IEObjectDescription> getAllElements() {
+			return Collections.emptyList();
+		}
+		
 		@Override
 		public String toString() {
 			return "NULLSCOPE";

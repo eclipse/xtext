@@ -16,11 +16,16 @@ import com.google.inject.ImplementedBy;
  * Clients who want to use ignore case cross references should implement
  * this service if the case sensitivity depends on an {@link EReference} or
  * bind the constant {@link IgnoreCaseLinking} to <code>true</code>.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @ImplementedBy(CaseInsensitivityHelper.class)
 public interface ICaseInsensitivityHelper {
 
+	/**
+	 * @param reference the current reference. May not be <code>null</code>.
+	 * @return <code>true</code> if the scope for the given reference should be case insensitive.
+	 */
 	boolean isIgnoreCase(EReference reference);
 	
 }

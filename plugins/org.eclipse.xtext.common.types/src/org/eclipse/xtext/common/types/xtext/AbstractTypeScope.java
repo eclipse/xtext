@@ -21,13 +21,15 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 /**
+ * A scope that provides access to {@link JvmType types}.
+ * Case insensitivity is not supported. It's always the most outer scope.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Jan Koehnlein - introduced QualifiedName
  */
@@ -48,9 +50,8 @@ public abstract class AbstractTypeScope extends AbstractScope {
 	}
 	
 	@Override
-	protected IEObjectDescription getSingleElementByName(ISelector.SelectByName selector) {
+	public IEObjectDescription getSingleElement(QualifiedName name) {
 		try {
-			QualifiedName name = selector.getName();
 			JvmType type = typeProvider.findTypeByName(qualifiedNameConverter.toString(name));
 			if (type == null)
 				return null;
@@ -64,16 +65,15 @@ public abstract class AbstractTypeScope extends AbstractScope {
 	}
 	
 	@Override
-	protected Iterable<IEObjectDescription> getElementsByName(ISelector.SelectByName selector) {
-		IEObjectDescription result = getSingleElementByName(selector);
+	public Iterable<IEObjectDescription> getElements(QualifiedName name) {
+		IEObjectDescription result = getSingleElement(name);
 		if (result != null)
 			return singleton(result);
 		return emptySet();
 	}
 	
 	@Override
-	protected Iterable<IEObjectDescription> getElementsByEObject(ISelector.SelectByEObject selector) {
-		EObject object = selector.getEObject();
+	public Iterable<IEObjectDescription> getElements(EObject object) {
 		if (object instanceof JvmIdentifyableElement) {
 			final Set<IEObjectDescription> result = singleton(EObjectDescription.create(
 					qualifiedNameConverter.toQualifiedName(((JvmIdentifyableElement) object).getCanonicalName()),
@@ -91,7 +91,7 @@ public abstract class AbstractTypeScope extends AbstractScope {
 	}
 	
 	@Override
-	protected Iterable<IEObjectDescription> getAllElements() {
+	public Iterable<IEObjectDescription> getAllElements() {
 		return filterResult(internalGetAllElements());
 	}
 	
@@ -112,4 +112,8 @@ public abstract class AbstractTypeScope extends AbstractScope {
 		return qualifiedNameConverter;
 	}
 
+	@Override
+	public String toString() {
+		return getClass().getSimpleName();
+	}
 }

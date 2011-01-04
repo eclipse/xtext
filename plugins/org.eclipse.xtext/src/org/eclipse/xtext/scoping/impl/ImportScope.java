@@ -24,7 +24,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ISelectable;
 import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.Selectors;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -68,8 +67,8 @@ public class ImportScope extends AbstractScope {
 	}
 
 	@Override
-	protected Iterable<IEObjectDescription> getAllElements() {
-		final Iterable<IEObjectDescription> globalElements = getParent().getElements(Selectors.selectAll());
+	public Iterable<IEObjectDescription> getAllElements() {
+		final Iterable<IEObjectDescription> globalElements = getParent().getAllElements();
 		Iterable<IEObjectDescription> aliased = getAllLocalElements();
 		final Map<QualifiedName, IEObjectDescription> elements = Maps.uniqueIndex(aliased,
 				new Function<IEObjectDescription, QualifiedName>() {

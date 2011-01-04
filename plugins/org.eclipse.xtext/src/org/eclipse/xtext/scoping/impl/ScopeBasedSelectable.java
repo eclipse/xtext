@@ -13,7 +13,6 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ISelectable;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.Selectors;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -31,19 +30,19 @@ public class ScopeBasedSelectable implements ISelectable {
 	}
 
 	public Iterable<IEObjectDescription> getExportedObjects() {
-		return scope.getElements(Selectors.selectAll());
+		return scope.getAllElements();
 	}
 
 	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
-		return scope.getElements(Selectors.selectByName(name));
+		return scope.getElements(name);
 	}
 
 	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
-		return scope.getElements(Selectors.selectAll());
+		return scope.getAllElements();
 	}
 	
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
-		return scope.getElements(Selectors.selectByEObject(object));
+		return scope.getElements(object);
 	}
 
 }

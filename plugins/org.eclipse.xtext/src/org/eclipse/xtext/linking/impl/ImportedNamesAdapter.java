@@ -14,11 +14,11 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.scoping.impl.IScopeWrapper;
 
 /**
@@ -44,42 +44,49 @@ public class ImportedNamesAdapter extends AdapterImpl implements IScopeWrapper {
 	 */
 	public class WrappingScope implements IScope {
 		
-		private IScope delegate;
+		private final IScope delegate;
+		
 		public WrappingScope(IScope scope) {
 			this.delegate = scope;
 		}
 		
-		public Iterable<IEObjectDescription> getElements(final ISelector selector) {
-			if (selector instanceof ISelector.SelectByName) {
-				final QualifiedName name = ((ISelector.SelectByName) selector).getName().toLowerCase();
-				final Iterable<IEObjectDescription> elements = delegate.getElements(selector);
-				return new Iterable<IEObjectDescription>() {
-					public Iterator<IEObjectDescription> iterator() {
-						importedNames.add(name);
-						return elements.iterator();
-					}
-				};
-			} else {
-				handleNoSelectNameQuery(selector);
-			}
-			return delegate.getElements(selector);
-		}
-
-		protected void handleNoSelectNameQuery(ISelector selector) {
-			if (log.isInfoEnabled())
-				log.info("getElements should be called without a SelectByName selector during linking.");
+		public IEObjectDescription getSingleElement(QualifiedName name) {
+			final QualifiedName lowerCase = name.toLowerCase();
+			importedNames.add(lowerCase);
+			return delegate.getSingleElement(name);
 		}
 		
-		public IEObjectDescription getSingleElement(ISelector selector) {
-			if (selector instanceof ISelector.SelectByName) {
-				final QualifiedName name = ((ISelector.SelectByName) selector).getName().toLowerCase();
-				importedNames.add(name);
-			} else {
-				handleNoSelectNameQuery(selector);
-			}
-			return delegate.getSingleElement(selector);
+		public Iterable<IEObjectDescription> getElements(final QualifiedName name) {
+			return new Iterable<IEObjectDescription>() {
+				public Iterator<IEObjectDescription> iterator() {
+					final QualifiedName lowerCase = name.toLowerCase();
+					importedNames.add(lowerCase);
+					final Iterable<IEObjectDescription> elements = delegate.getElements(name);
+					return elements.iterator();
+				}
+			};
 		}
-
+		
+		public Iterable<IEObjectDescription> getElements(EObject object) {
+			handleNoNameQuery();
+			return delegate.getElements(object);
+		}
+		
+		public IEObjectDescription getSingleElement(EObject object) {
+			handleNoNameQuery();
+			return delegate.getSingleElement(object);
+		}
+		
+		public Iterable<IEObjectDescription> getAllElements() {
+			handleNoNameQuery();
+			return delegate.getAllElements();
+		}
+		
+		protected void handleNoNameQuery() {
+			if (log.isInfoEnabled())
+				log.info("getElements should be called with a QualifiedName during linking.");
+		}
+		
 		@Override
 		public String toString() {
 			return getClass().getSimpleName()+" -> "+delegate;
