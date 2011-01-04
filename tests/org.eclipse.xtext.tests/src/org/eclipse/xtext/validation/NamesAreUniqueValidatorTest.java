@@ -25,6 +25,7 @@ import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
@@ -55,14 +56,16 @@ public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements I
 		};
 		validator.setResourceServiceProviderRegistry(this);
 		validator.setHelper(this);
+		final DefaultResourceDescriptionStrategy strategy  = new DefaultResourceDescriptionStrategy();
+		strategy.setQualifiedNameProvider(new IQualifiedNameProvider.AbstractImpl() {
+			public QualifiedName getFullyQualifiedName(EObject obj) {
+				return QualifiedName.create(SimpleAttributeResolver.NAME_RESOLVER.getValue(obj));
+			}
+		});
 		resourceDescriptionManager = new DefaultResourceDescriptionManager() {
 			@Override
 			public IResourceDescription getResourceDescription(Resource resource) {
-				DefaultResourceDescription resourceDescription = new DefaultResourceDescription(resource, new IQualifiedNameProvider.AbstractImpl() {
-					public QualifiedName getFullyQualifiedName(EObject obj) {
-						return QualifiedName.create(SimpleAttributeResolver.NAME_RESOLVER.getValue(obj));
-					}
-				});
+				DefaultResourceDescription resourceDescription = new DefaultResourceDescription(resource, strategy);
 				return resourceDescription;
 			}
 		};

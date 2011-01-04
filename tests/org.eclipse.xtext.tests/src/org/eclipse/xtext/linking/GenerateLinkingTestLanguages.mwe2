@@ -46,7 +46,12 @@ Workflow {
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/linking/LangATestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = CompositeGeneratorFragment {
+				fragment = @TestLanguagesFragments {
+				}
+				fragment = scoping.ImportNamespacesScopingFragment {
+				}
+			}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.xtext"
