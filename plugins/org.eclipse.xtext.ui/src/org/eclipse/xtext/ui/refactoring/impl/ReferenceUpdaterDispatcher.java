@@ -26,6 +26,7 @@ import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
+import org.eclipse.xtext.util.IAcceptor;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -61,7 +62,7 @@ public class ReferenceUpdaterDispatcher {
 		}
 	}
 
-	public static class ReferenceDescriptionAcceptor implements IReferenceFinder.IAcceptor {
+	public static class ReferenceDescriptionAcceptor implements IAcceptor<IReferenceDescription> {
 
 		private Map<IResourceServiceProvider, IReferenceUpdater> provider2updater = newHashMap();
 		private Multimap<IReferenceUpdater, IReferenceDescription> updater2refs = HashMultimap.create();
