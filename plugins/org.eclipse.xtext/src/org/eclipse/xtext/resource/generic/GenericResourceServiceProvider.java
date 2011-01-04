@@ -23,9 +23,12 @@ import com.google.inject.internal.Nullable;
 import com.google.inject.name.Named;
 
 /**
+ * An {@link IResourceServiceProvider} for non-Xtext resources. 
+ * 
  * @author Sven Efftinge - Initial contribution and API
+ * @author Jan Koehnlein
  */
-public class EmfResourceServiceProvider implements IResourceServiceProvider {
+public class GenericResourceServiceProvider implements IResourceServiceProvider {
 
 	@Inject
 	@Nullable

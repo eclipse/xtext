@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ecore;
 
-import org.eclipse.xtext.resource.generic.AbstractEmfResourceSupport;
+import org.eclipse.xtext.resource.generic.AbstractGenericResourceSupport;
 
 import com.google.inject.Module;
 
@@ -35,7 +35,7 @@ import com.google.inject.Module;
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class EcoreSupport extends AbstractEmfResourceSupport {
+public class EcoreSupport extends AbstractGenericResourceSupport {
 
 	@Override
 	protected Module createGuiceModule() {

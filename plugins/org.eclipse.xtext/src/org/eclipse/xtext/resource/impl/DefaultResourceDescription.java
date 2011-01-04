@@ -28,10 +28,12 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.IResourceScopeCache;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -45,16 +47,25 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 
 	private final URI uri;
 
-	private List<IReferenceDescription> referenceDescriptions;
-
 	private IDefaultResourceDescriptionStrategy strategy;
 
-	public DefaultResourceDescription(Resource resource, IDefaultResourceDescriptionStrategy strategy) {
+	private IResourceScopeCache cache;
+
+	public DefaultResourceDescription(Resource resource, IDefaultResourceDescriptionStrategy strategy,
+				IResourceScopeCache cache) {
 		this.resource = resource;
 		this.strategy = strategy;
+		this.cache = cache;
 		this.uri = getNormalizedURI(resource);
 	}
 
+	/**
+	 * For testing. Uses a {@link IResourceScopeCache.NullImpl}.
+	 */
+	public DefaultResourceDescription(Resource resource, IDefaultResourceDescriptionStrategy strategy) {
+		this(resource, strategy, new IResourceScopeCache.NullImpl());
+	}
+	
 	@Override
 	protected List<IEObjectDescription> computeExportedObjects() {
 		if (!getResource().isLoaded()) {
@@ -65,10 +76,10 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 				return Collections.<IEObjectDescription> emptyList();
 			}
 		}
-		final List<IEObjectDescription> eObjectDescriptions = newArrayList();
+		final List<IEObjectDescription> exportedEObjects = newArrayList();
 		IAcceptor<IEObjectDescription> acceptor = new IAcceptor<IEObjectDescription>() {
 			public void accept(IEObjectDescription eObjectDescription) {
-				eObjectDescriptions.add(eObjectDescription);
+				exportedEObjects.add(eObjectDescription);
 			}
 		};
 		TreeIterator<EObject> allProperContents = EcoreUtil.getAllProperContents(getResource(), true);
@@ -77,7 +88,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 			if (!strategy.createEObjectDescriptions(content, acceptor))
 				allProperContents.prune();
 		}
-		return eObjectDescriptions;
+		return exportedEObjects;
 	}
 
 	public Iterable<QualifiedName> getImportedNames() {
@@ -98,12 +109,14 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 		return uri;
 	}
 
+	private String REFERENCE_DESCRIPTIONS_CACHE_KEY = DefaultReferenceDescription.class.getName()
+			+ "#getReferenceDescriptions";
+
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
-		if (this.referenceDescriptions == null) {
-			List<IReferenceDescription> referenceDescriptions = computeReferenceDescriptions();
-			this.referenceDescriptions = referenceDescriptions;
-		}
-		return referenceDescriptions;
+		return cache.get(REFERENCE_DESCRIPTIONS_CACHE_KEY, getResource(), new Provider<List<IReferenceDescription>>(){
+			public List<IReferenceDescription> get() {
+				return computeReferenceDescriptions();
+			}});
 	}
 
 	protected List<IReferenceDescription> computeReferenceDescriptions() {
@@ -118,7 +131,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 		while (contents.hasNext()) {
 			EObject eObject = contents.next();
 			URI exportedContainerURI = findExportedContainerURI(eObject, eObject2exportedEObjects);
-			if(!strategy.createReferenceDescriptions(eObject, exportedContainerURI, acceptor))
+			if (!strategy.createReferenceDescriptions(eObject, exportedContainerURI, acceptor))
 				contents.prune();
 		}
 		return referenceDescriptions;
@@ -144,5 +157,20 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 			currentContainer = currentContainer.eContainer();
 		}
 		return null;
+	}
+
+	private String EOBJECT_LOOKUP_CACHE_KEY = DefaultReferenceDescription.class.getName() + "#getLookUp";
+
+	@Override
+	protected EObjectDescriptionLookUp getLookUp() {
+		return cache.get(EOBJECT_LOOKUP_CACHE_KEY, getResource(), new Provider<EObjectDescriptionLookUp>() {
+			public EObjectDescriptionLookUp get() {
+				if(lookup != null) 
+					lookup.setExportedObjects(computeExportedObjects());
+				else 
+					lookup = new EObjectDescriptionLookUp(computeExportedObjects());
+				return lookup;
+			}
+		});
 	}
 }

@@ -18,17 +18,19 @@ import org.eclipse.xtext.resource.DescriptionUtils;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
-import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
+import org.eclipse.xtext.util.IResourceScopeCache;
 
 import com.google.inject.Inject;
 
 /**
+ * An {@link IResourceDescription.Manager} for non-Xtext resources. 
+ * 
  * @author koehnlein - Initial contribution and API
  */
-public class EmfResourceDescriptionManager implements Manager {
+public class GenericResourceDescriptionManager implements IResourceDescription.Manager {
 
 	@Inject
 	private IDefaultResourceDescriptionStrategy resourceDescriptionStrategy;
@@ -36,8 +38,11 @@ public class EmfResourceDescriptionManager implements Manager {
 	@Inject
 	private DescriptionUtils descriptionUtils;
 
+	@Inject
+	private IResourceScopeCache cache = new IResourceScopeCache.NullImpl();
+
 	public IResourceDescription getResourceDescription(Resource resource) {
-		return new DefaultResourceDescription(resource, resourceDescriptionStrategy);
+		return new DefaultResourceDescription(resource, resourceDescriptionStrategy, cache);
 	}
 
 	public Delta createDelta(IResourceDescription oldDescription, IResourceDescription newDescription) {
