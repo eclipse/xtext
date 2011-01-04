@@ -16,7 +16,6 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.common.collect.Iterables;
 
@@ -36,7 +35,7 @@ public class AbstractScopeTest extends TestCase {
 		SimpleScope outer = new SimpleScope(singleton(a), false);
 		SimpleScope middle = new SimpleScope(outer, singleton(b));
 		SimpleScope inner = new SimpleScope(middle, singleton(c));
-		assertNull(inner.getSingleElement(new ISelector.SelectByEObject(EcorePackage.Literals.EANNOTATION)));
+		assertNull(inner.getSingleElement(EcorePackage.Literals.EANNOTATION));
 	}
 
 	public void testLaziness() throws Exception {
@@ -46,7 +45,7 @@ public class AbstractScopeTest extends TestCase {
 		assertEquals(0, a.numberOfCalls);
 		assertEquals(0, b.numberOfCalls);
 		assertEquals(0, c.numberOfCalls);
-		Iterable<IEObjectDescription> elements = a.getElements(ISelector.SELECT_ALL);
+		Iterable<IEObjectDescription> elements = a.getAllElements();
 		Iterator<IEObjectDescription> iterator = elements.iterator();
 		assertEquals(0, a.numberOfCalls);
 		assertEquals(0, b.numberOfCalls);

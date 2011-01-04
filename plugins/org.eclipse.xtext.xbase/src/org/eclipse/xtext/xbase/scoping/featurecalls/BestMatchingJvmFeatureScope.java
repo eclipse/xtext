@@ -13,9 +13,9 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -43,18 +43,37 @@ public class BestMatchingJvmFeatureScope implements IScope {
 		this.filter = filter;
 	}
 
-	public IEObjectDescription getSingleElement(ISelector selector) {
-		final Iterable<IEObjectDescription> elements = getElements(selector);
-		return getBestMatch(elements);
+	public Iterable<IEObjectDescription> getAllElements() {
+		Iterable<IEObjectDescription> unfiltered = delegate.getAllElements();
+		return filter(unfiltered);
 	}
 	
-	public Iterable<IEObjectDescription> getElements(ISelector selector) {
-		Iterable<IEObjectDescription> unfiltered = delegate.getElements(selector);
+	public Iterable<IEObjectDescription> getElements(EObject object) {
+		Iterable<IEObjectDescription> unfiltered = delegate.getElements(object);
+		return filter(unfiltered);
+	}
+
+	protected Iterable<IEObjectDescription> filter(Iterable<IEObjectDescription> unfiltered) {
 		if (filter != null) {
 			Iterable<IEObjectDescription> result = Iterables.filter(unfiltered, filter);
 			return result;
 		}
 		return unfiltered;
+	}
+	
+	public Iterable<IEObjectDescription> getElements(QualifiedName name) {
+		Iterable<IEObjectDescription> unfiltered = delegate.getElements(name);
+		return filter(unfiltered);
+	}
+	
+	public IEObjectDescription getSingleElement(EObject object) {
+		final Iterable<IEObjectDescription> elements = getElements(object);
+		return getBestMatch(elements);
+	}
+	
+	public IEObjectDescription getSingleElement(QualifiedName name) {
+		final Iterable<IEObjectDescription> elements = getElements(name);
+		return getBestMatch(elements);
 	}
 
 	protected IEObjectDescription getBestMatch(Iterable<IEObjectDescription> iterable) {

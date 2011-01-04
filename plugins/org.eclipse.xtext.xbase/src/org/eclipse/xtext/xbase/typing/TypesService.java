@@ -24,7 +24,6 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.typing.ITypeConformanceComputer;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XtypeFactory;
@@ -58,7 +57,7 @@ public class TypesService implements ITypeConformanceComputer<JvmTypeReference> 
 
 	public JvmTypeReference getTypeForName(QualifiedName qualifiedName, EObject context, JvmTypeReference... params) {
 		IScope scope = scopeProvider.getScope(context, syntheticReference);
-		IEObjectDescription contentByName = scope.getSingleElement(new ISelector.SelectByName(qualifiedName));
+		IEObjectDescription contentByName = scope.getSingleElement(qualifiedName);
 		if (contentByName != null) {
 			JvmParameterizedTypeReference simpleType = factory.createJvmParameterizedTypeReference();
 			simpleType.setType((JvmType) contentByName.getEObjectOrProxy());

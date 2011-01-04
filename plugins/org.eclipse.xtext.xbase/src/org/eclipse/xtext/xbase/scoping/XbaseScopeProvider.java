@@ -24,7 +24,6 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
 import org.eclipse.xtext.scoping.impl.SingletonScope;
 import org.eclipse.xtext.typing.ITypeProvider;
@@ -103,12 +102,13 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		final IScope scope = super.getScope(context, reference);
 		return new IScope() {
 			
-			public IEObjectDescription getSingleElement(ISelector selector) {
-				throw new UnsupportedOperationException();
+			public Iterable<IEObjectDescription> getAllElements() {
+				Iterable<IEObjectDescription> original = scope.getAllElements();
+				return createFeatureDescriptions(original);
 			}
-			
-			public Iterable<IEObjectDescription> getElements(ISelector selector) {
-				Iterable<IEObjectDescription> result = transform(scope.getElements(selector), new Function<IEObjectDescription, IEObjectDescription>() {
+
+			protected Iterable<IEObjectDescription> createFeatureDescriptions(Iterable<IEObjectDescription> original) {
+				Iterable<IEObjectDescription> result = transform(original, new Function<IEObjectDescription, IEObjectDescription>() {
 					public IEObjectDescription apply(IEObjectDescription from) {
 						final JvmConstructor constructor = (JvmConstructor) from.getEObjectOrProxy();
 						return new JvmFeatureDescription(from.getQualifiedName(), constructor, null, constructor.getCanonicalName(), false);
@@ -116,6 +116,25 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 				});
 				return result;
 			}
+			
+			public Iterable<IEObjectDescription> getElements(EObject object) {
+				Iterable<IEObjectDescription> original = scope.getElements(object);
+				return createFeatureDescriptions(original);
+			}
+			
+			public Iterable<IEObjectDescription> getElements(QualifiedName name) {
+				Iterable<IEObjectDescription> original = scope.getElements(name);
+				return createFeatureDescriptions(original);
+			}
+			
+			public IEObjectDescription getSingleElement(EObject object) {
+				throw new UnsupportedOperationException();
+			}
+			
+			public IEObjectDescription getSingleElement(QualifiedName name) {
+				throw new UnsupportedOperationException();
+			}
+			
 		};
 	}
 
@@ -135,7 +154,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		if (call instanceof XFeatureCall || ((call instanceof XAssignment) && ((XAssignment)call).getAssignable()==null)) {
 			DelegatingScope implicitThis = new DelegatingScope();
 			IScope localVariableScope = createLocalVarScope(call, reference, implicitThis);
-			IEObjectDescription thisVariable = localVariableScope.getSingleElement(new ISelector.SelectByName(THIS));
+			IEObjectDescription thisVariable = localVariableScope.getSingleElement(THIS);
 
 			if (thisVariable != null) {
 				EObject thisVal = thisVariable.getEObjectOrProxy();

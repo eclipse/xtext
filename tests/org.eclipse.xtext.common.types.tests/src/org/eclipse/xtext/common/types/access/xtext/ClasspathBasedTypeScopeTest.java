@@ -14,7 +14,6 @@ import org.eclipse.xtext.common.types.xtext.ClasspathBasedTypeScope;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.common.base.Predicates;
 
@@ -37,7 +36,7 @@ public class ClasspathBasedTypeScopeTest extends AbstractTypeScopeTest {
 	
 	public void testGetContents_01() {
 		try {
-			typeScope.getElements(ISelector.SELECT_ALL);
+			typeScope.getAllElements();
 			fail("expected UnsupportedOperationException");
 		} catch(UnsupportedOperationException e) {
 			// ok

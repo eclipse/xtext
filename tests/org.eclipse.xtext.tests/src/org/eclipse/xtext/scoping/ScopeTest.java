@@ -36,26 +36,26 @@ public class ScopeTest extends TestCase {
 	}
 
 	public void testContentByEObject_existent() throws Exception {
-		assertNotNull(scope.getSingleElement(new ISelector.SelectByEObject(EcorePackage.eINSTANCE.getEAnnotation())));
+		assertNotNull(scope.getSingleElement(EcorePackage.eINSTANCE.getEAnnotation()));
 	}
 
 	public void testContentByEObject_nonExistent() throws Exception {
-		assertNull(scope.getSingleElement(new ISelector.SelectByEObject(EcorePackage.eINSTANCE.getEAnnotation_Contents())));
+		assertNull(scope.getSingleElement(EcorePackage.eINSTANCE.getEAnnotation_Contents()));
 	}
 
 	public void testContentByEObject_withProxy() throws Exception {
 		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
 		((InternalEObject) eClass).eSetProxyURI(EcoreUtil.getURI(EcorePackage.eINSTANCE.getEAnnotation()));
-		assertNotNull(scope.getSingleElement(new ISelector.SelectByEObject(eClass)));
+		assertNotNull(scope.getSingleElement(eClass));
 	}
 
 	public void testContentByName_existent() throws Exception {
 		QualifiedName qualifiedName = QualifiedName.create(EcorePackage.eINSTANCE.getEAnnotation().getName());
-		assertEquals(qualifiedName, scope.getSingleElement(new ISelector.SelectByName(qualifiedName)).getName());
+		assertEquals(qualifiedName, scope.getSingleElement(qualifiedName).getName());
 	}
 
 	public void testContentByName_nonExistent() throws Exception {
-		assertNull(scope.getSingleElement(new ISelector.SelectByName(QualifiedName.create("unknown_name"))));
+		assertNull(scope.getSingleElement(QualifiedName.create("unknown_name")));
 	}
 
 	private AbstractScope getEcoreClassifiersScope() {

@@ -23,13 +23,15 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.ISelector;
-import org.eclipse.xtext.scoping.Selectors;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
 
 import com.google.common.base.Function;
 
 /**
+ * A scope that provides access to {@link JvmConstructor constructors}.
+ * Case insensitivity is not supported. It's always the most outer scope.
+ * Lookup is delegated to a {@link AbstractTypeScope type scope}.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractConstructorScope extends AbstractScope {
@@ -42,8 +44,7 @@ public abstract class AbstractConstructorScope extends AbstractScope {
 	}
 	
 	@Override
-	protected Iterable<IEObjectDescription> getElementsByEObject(ISelector.SelectByEObject selector) {
-		EObject object = selector.getEObject();
+	public Iterable<IEObjectDescription> getElements(EObject object) {
 		if (object instanceof JvmConstructor) {
 			final Set<IEObjectDescription> result = singleton(EObjectDescription.create(getQualifiedNameConverter().toQualifiedName(((JvmIdentifyableElement) object).getCanonicalName()), object));
 			return result;
@@ -52,9 +53,8 @@ public abstract class AbstractConstructorScope extends AbstractScope {
 	}
 	
 	@Override
-	protected Iterable<IEObjectDescription> getElementsByName(ISelector.SelectByName selector) {
-		final QualifiedName name = selector.getName();
-		IEObjectDescription typeDescription = typeScope.getSingleElement(Selectors.selectByName(name));
+	public Iterable<IEObjectDescription> getElements(final QualifiedName name) {
+		IEObjectDescription typeDescription = typeScope.getSingleElement(name);
 		if (typeDescription == null)
 			return emptySet();
 		JvmType type = (JvmType) typeDescription.getEObjectOrProxy();
@@ -78,8 +78,8 @@ public abstract class AbstractConstructorScope extends AbstractScope {
 	}
 	
 	@Override
-	protected IEObjectDescription getSingleElementByName(ISelector.SelectByName selector) {
-		Iterable<IEObjectDescription> byName = getElementsByName(selector);
+	public IEObjectDescription getSingleElement(QualifiedName name) {
+		Iterable<IEObjectDescription> byName = getElements(name);
 		Iterator<IEObjectDescription> iterator = byName.iterator();
 		if (iterator.hasNext())
 			return iterator.next();
@@ -87,7 +87,7 @@ public abstract class AbstractConstructorScope extends AbstractScope {
 	}
 	
 	@Override
-	protected Iterable<IEObjectDescription> getAllElements() {
+	public final Iterable<IEObjectDescription> getAllElements() {
 		return internalGetAllElements();
 	}
 	
@@ -108,4 +108,8 @@ public abstract class AbstractConstructorScope extends AbstractScope {
 		return getTypeScope().getQualifiedNameConverter();
 	}
 	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName();
+	}
 }

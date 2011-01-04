@@ -10,7 +10,6 @@ package org.eclipse.xtext.scoping.impl;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
-import static org.eclipse.xtext.scoping.Selectors.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,7 +41,6 @@ import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.base.Predicate;
@@ -110,7 +108,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 
 		IScope scope = scopeProvider.getScope(resource.getContents().get(0), IndexTestLanguagePackage.eINSTANCE
 				.getFile_Elements());
-		List<QualifiedName> names = toListOfNames(scope.getElements(ISelector.SELECT_ALL));
+		List<QualifiedName> names = toListOfNames(scope.getAllElements());
 		assertEquals(names.toString(), 5, names.size());
 		assertTrue(names.contains(nameConverter.toQualifiedName("Person")));
 		assertTrue(names.contains(nameConverter.toQualifiedName("String")));
@@ -136,8 +134,8 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		Entity entity = filter(allContents, Entity.class).iterator().next();
 
 		IScope scope = scopeProvider.getScope(entity, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("baz.String"))));
-		assertNotNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("stuff.baz.String"))));
+		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("baz.String")));
+		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("stuff.baz.String")));
 	}
 
 	public void testRelativePath() throws Exception {
@@ -159,9 +157,9 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		Entity entity = filter(allContents, Entity.class).iterator().next();
 
 		IScope scope = scopeProvider.getScope(entity, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("String"))));
-		assertNotNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("baz.String"))));
-		assertNotNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("stuff.baz.String"))));
+		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("String")));
+		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("baz.String")));
+		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("stuff.baz.String")));
 	}
 
 	public void testReexports2() throws Exception {
@@ -184,9 +182,9 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		Datatype datatype = filter(allContents, Datatype.class).iterator().next();
 
 		IScope scope = scopeProvider.getScope(datatype, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("D"))));
-		assertNotNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("E.D"))));
-		assertNotNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("A.B.D"))));
+		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("D")));
+		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("E.D")));
+		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("A.B.D")));
 	}
 
 	public void testLocalElementsNotFromIndex() throws Exception {
@@ -206,7 +204,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		};
 		Datatype datatype = filter(allContents, Datatype.class).iterator().next();
 		IScope scope = scopeProvider.getScope(datatype, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("A.B.D"))));
+		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("A.B.D")));
 	}
 
 	public void testImportsWithoutWildcard() throws Exception {
@@ -230,7 +228,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		assertEquals("Foo", foo.getName());
 
 		IScope scope = scopeProvider.getScope(foo, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("Bar"))));
+		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("Bar")));
 	}
 	
 	public void testDuplicateImportsAreIgnored() throws Exception {
@@ -259,9 +257,9 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 			}});
 		
 		IScope scope = scopeProvider.getScope(foo, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("Bar"))));
-		assertNotNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("Foo"))));
-		ArrayList<IEObjectDescription> list = newArrayList(scope.getElements(ISelector.SELECT_ALL));
+		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("Bar")));
+		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("Foo")));
+		ArrayList<IEObjectDescription> list = newArrayList(scope.getAllElements());
 		assertEquals(7,list.size());
 		assertTrue(any(list, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
@@ -296,9 +294,9 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 			}});
 		
 		IScope scope = scopeProvider.getScope(foo, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("Bar"))));
-		assertNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("Foo"))));
-		ArrayList<IEObjectDescription> list = newArrayList(scope.getElements(ISelector.SELECT_ALL));
+		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("Bar")));
+		assertNull(scope.getSingleElement(nameConverter.toQualifiedName("Foo")));
+		ArrayList<IEObjectDescription> list = newArrayList(scope.getAllElements());
 		assertEquals(6,list.size());
 		assertFalse(any(list, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
@@ -332,9 +330,9 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 			}});
 		
 		IScope scope = scopeProvider.getScope(foo, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("Bar"))));
-		assertNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("Foo"))));
-		ArrayList<IEObjectDescription> list = newArrayList(scope.getElements(ISelector.SELECT_ALL));
+		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("Bar")));
+		assertNull(scope.getSingleElement(nameConverter.toQualifiedName("Foo")));
+		ArrayList<IEObjectDescription> list = newArrayList(scope.getAllElements());
 		assertEquals(6,list.size());
 		assertFalse(any(list, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
@@ -368,9 +366,9 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 			}});
 		
 		IScope scope = scopeProvider.getScope(foo, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("Bar"))));
-		assertNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("Foo"))));
-		ArrayList<IEObjectDescription> list = newArrayList(scope.getElements(ISelector.SELECT_ALL));
+		assertNull(scope.getSingleElement(nameConverter.toQualifiedName("Bar")));
+		assertNull(scope.getSingleElement(nameConverter.toQualifiedName("Foo")));
+		ArrayList<IEObjectDescription> list = newArrayList(scope.getAllElements());
 		assertEquals(5,list.size());
 		assertFalse(any(list, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
@@ -396,7 +394,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		assertEquals("Foo", foo.getName());
 
 		IScope scope = scopeProvider.getScope(foo, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("Bar"))));
+		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("Bar")));
 	}
 
 	public void testResourceSetReferencingResourceSet() throws Exception {
@@ -426,8 +424,8 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		assertEquals("Foo", foo.getName());
 
 		IScope scope = scopeProvider.getScope(foo, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("Bar"))));
-		assertNotNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("bar.Bar"))));
+		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("Bar")));
+		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("bar.Bar")));
 	}
 
 	public void testResourceSetReferencingResourceSet2() throws Exception {
@@ -448,8 +446,8 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		Entity baz = getEntityByName(res2,"Baz");
 
 		IScope scope = scopeProvider.getScope(baz, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("foo.Foo"))));
-		assertNull(scope.getSingleElement(selectByName(nameConverter.toQualifiedName("bar.Bar"))));
+		assertNotNull(scope.getSingleElement(nameConverter.toQualifiedName("foo.Foo")));
+		assertNull(scope.getSingleElement(nameConverter.toQualifiedName("bar.Bar")));
 	}
 
 	protected Entity getEntityByName(final Resource res2, String name) {

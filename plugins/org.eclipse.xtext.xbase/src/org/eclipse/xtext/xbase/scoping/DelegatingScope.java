@@ -7,9 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.ISelector;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -22,12 +23,24 @@ public class DelegatingScope implements IScope {
 		this.delegate = delegate;
 	}
 
-	public IEObjectDescription getSingleElement(ISelector selector) {
-		return delegate.getSingleElement(selector);
+	public IEObjectDescription getSingleElement(QualifiedName name) {
+		return delegate.getSingleElement(name);
 	}
 
-	public Iterable<IEObjectDescription> getElements(ISelector selector) {
-		return delegate.getElements(selector);
+	public Iterable<IEObjectDescription> getElements(QualifiedName name) {
+		return delegate.getElements(name);
+	}
+
+	public IEObjectDescription getSingleElement(EObject object) {
+		return delegate.getSingleElement(object);
+	}
+
+	public Iterable<IEObjectDescription> getElements(EObject object) {
+		return delegate.getElements(object);
+	}
+
+	public Iterable<IEObjectDescription> getAllElements() {
+		return delegate.getAllElements();
 	}
 
 	@Override
