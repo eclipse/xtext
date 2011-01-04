@@ -36,7 +36,7 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 		IScope parent = super.getScope(context, reference);
 		if (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(reference.getEReferenceType())) {
 			XtendFunction type = EcoreUtil2.getContainerOfType(context, XtendFunction.class);
-			if (!type.getTypeParameters().isEmpty()) {
+			if (type!=null && !type.getTypeParameters().isEmpty()) {
 				List<IEObjectDescription> descriptions = Lists.newArrayList();
 				for (JvmTypeParameter param : type.getTypeParameters()) {
 					QualifiedName qn = QualifiedName.create(param.getName());

@@ -114,7 +114,7 @@ public class XbaseCompiler {
 	}
 
 	public void _toJavaExpression(XIntLiteral expr, IAppendable b) {
-		b.append(expr.getValue()).append("L");
+		b.append(expr.getValue());
 	}
 
 	public void _prepare(XBooleanLiteral expr, IAppendable b) {

@@ -5,7 +5,13 @@ package org.eclipse.xtext.xtend2;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.xtend2.scoping.Xtend2ImportedNamespaceScopeProvider;
 import org.eclipse.xtext.xtend2.typing.Xtend2TypeProvider;
+
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -17,5 +23,10 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 	
 	public Class<? extends org.eclipse.xtext.typing.ITypeProvider<JvmTypeReference>> bindITypeProvider() {
 		return Xtend2TypeProvider.class;
+	}
+	
+	@Override
+	public void configureIScopeProviderDelegate(Binder binder) {
+		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(Xtend2ImportedNamespaceScopeProvider.class);
 	}
 }
