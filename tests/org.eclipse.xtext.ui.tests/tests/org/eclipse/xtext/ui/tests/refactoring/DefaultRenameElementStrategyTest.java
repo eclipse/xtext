@@ -51,7 +51,7 @@ public class DefaultRenameElementStrategyTest extends AbstractXtextTests impleme
 		assertNotNull(targetElement);
 		assertTrue(targetElement instanceof Element);
 		assertEquals("A", ((Element) targetElement).getName());
-		IRenameStrategy renameElementStrategy = strategyProvider.get(targetElement);
+		IRenameStrategy renameElementStrategy = strategyProvider.get(targetElement, null);
 		assertNotNull(renameElementStrategy);
 		assertEquals("A", renameElementStrategy.getOriginalName());
 		RefactoringStatus validateNewNameStatus = renameElementStrategy.validateNewName("A");

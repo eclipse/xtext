@@ -35,6 +35,7 @@ import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IRenamedElementTracker;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
+import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
@@ -80,16 +81,16 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	private ElementRenameArguments renameArguments;
 
 	@Override
-	public void initialize(final URI targetElementURI) {
+	public void initialize(final IRenameElementContext renameElementContext) {
 		status = new RefactoringStatus();
 		try {
-			this.targetElementURI = targetElementURI;
+			this.targetElementURI = renameElementContext.getTargetElementURI();
 			resourceSet = resourceSetProvider.get(getProject(targetElementURI));
 			targetElement = resourceSet.getEObject(targetElementURI, true);
 			if (targetElement == null) {
 				throw new RefactoringStatusException("Rename target element can not be resolved", true);
 			}
-			this.renameStrategy = strategyProvider.get(targetElement);
+			this.renameStrategy = strategyProvider.get(targetElement, renameElementContext);
 		} catch (Exception e) {
 			handleException(status, e);
 		}

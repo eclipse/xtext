@@ -50,23 +50,24 @@ public class RenameElementHandler extends AbstractHandler {
 			final XtextEditor editor = EditorUtils.getActiveXtextEditor(event);
 			if (editor != null) {
 				final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
-				URI targetElementURI = editor.getDocument().readOnly(new IUnitOfWork<URI, XtextResource>() {
-					public URI exec(XtextResource resource) throws Exception {
+				IRenameElementContext renameElementContext = editor.getDocument().readOnly(new IUnitOfWork<IRenameElementContext, XtextResource>() {
+					public IRenameElementContext exec(XtextResource resource) throws Exception {
 						EObject targetElement = eObjectAtOffsetHelper.resolveElementAt(resource, selection.getOffset());
 						if (targetElement != null) {
 							final URI targetElementURI = EcoreUtil.getURI(targetElement);
+							IRenameElementContext.Impl renameElementContext = new IRenameElementContext.Impl(targetElementURI, targetElement.eClass(), editor, selection);
 							selectElementInEditor(targetElement, targetElementURI, editor, resource);
-							return targetElementURI;
+							return renameElementContext;
 						}
 						return null;
 					}
 				});
-				if (targetElementURI != null) {
+				if (renameElementContext != null) {
 					// refactoring target could be from another language
 					RenameElementOperation renameElementOperation = globalServiceProvider.findService(
-							targetElementURI.trimFragment(), RenameElementOperation.class);
+							renameElementContext.getTargetElementURI().trimFragment(), RenameElementOperation.class);
 					if (renameElementOperation != null)
-						renameElementOperation.execute(editor, targetElementURI);
+						renameElementOperation.execute(renameElementContext);
 				}
 			}
 		} catch (Exception exc) {
@@ -87,11 +88,11 @@ public class RenameElementHandler extends AbstractHandler {
 		@Inject
 		private IRenameRefactoringProvider refactoringProvider;
 
-		public void execute(final XtextEditor editor, URI targetElementURI) throws InterruptedException {
-			RenameRefactoring renameRefactoring = refactoringProvider.getRenameRefactoring(targetElementURI);
+		public void execute(IRenameElementContext renameElementContext) throws InterruptedException {
+			RenameRefactoring renameRefactoring = refactoringProvider.getRenameRefactoring(renameElementContext);
 			RenameElementWizard renameElementWizard = new RenameElementWizard(renameRefactoring);
 			RefactoringWizardOpenOperation openOperation = new RefactoringWizardOpenOperation(renameElementWizard);
-			openOperation.run(editor.getSite().getShell(), "Rename Element");
+			openOperation.run(renameElementContext.getTriggeringEditor().getSite().getShell(), "Rename Element");
 		}
 	}
 }

@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
+import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
 import com.google.inject.ImplementedBy;
 
@@ -42,6 +43,6 @@ public interface IRenameStrategy {
 
 	@ImplementedBy(DefaultRenameStrategy.Provider.class)
 	interface Provider {
-		IRenameStrategy get(EObject targetEObject);
+		IRenameStrategy get(EObject targetEObject, IRenameElementContext renameElementContext);
 	}
 }
