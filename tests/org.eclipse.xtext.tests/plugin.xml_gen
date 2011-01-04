@@ -5,63 +5,90 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.eclipse.org/2008/tmf/xtext/Bug292245TestLanguage" 
-       class = "org.eclipse.xtext.parser.terminalrules.bug292245TestLanguage.Bug292245TestLanguagePackage"
-       genModel = "org/eclipse/xtext/parser/terminalrules/Bug292245TestLanguage.genmodel" /> 
+       uri = "http://eclipse.org/xtext/Bug287988TestLanguage" 
+       class = "org.eclipse.xtext.linking.bug287988Test.Bug287988TestPackage"
+       genModel = "org/eclipse/xtext/linking/Bug287988TestLanguage.genmodel" /> 
 	
   </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.eclipse.org/2008/tmf/xtext/Bug297105TestLanguage" 
-       class = "org.eclipse.xtext.parser.terminalrules.bug297105TestLanguage.Bug297105TestLanguagePackage"
-       genModel = "org/eclipse/xtext/parser/terminalrules/Bug297105TestLanguage.genmodel" /> 
+       uri = "http://eclipse.org/xtext/Bug289059TestLanguage" 
+       class = "org.eclipse.xtext.linking.bug289059Test.Bug289059TestPackage"
+       genModel = "org/eclipse/xtext/linking/Bug289059TestLanguage.genmodel" /> 
 	
   </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.eclipse.org/2010/tmf/xtext/Bug317840TestLanguage" 
-       class = "org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.Bug317840TestLanguagePackage"
-       genModel = "org/eclipse/xtext/parser/terminalrules/Bug317840TestLanguage.genmodel" /> 
+       uri = "http://www.eclipse.org/xtext/test/Bug313089TestLanguage" 
+       class = "org.eclipse.xtext.linking.bug313089.Bug313089Package"
+       genModel = "org/eclipse/xtext/linking/Bug313089TestLanguage.genmodel" /> 
 	
   </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.eclipse.org/2008/tmf/xtext/ECoreTerminalsTest" 
-       class = "org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.EcoreTerminalsTestLanguagePackage"
-       genModel = "org/eclipse/xtext/parser/terminalrules/EcoreTerminalsTestLanguage.genmodel" /> 
+       uri = "http://eclipse.org/xtext/importUriTestLanguage" 
+       class = "org.eclipse.xtext.linking.importedURI.ImportedURIPackage"
+       genModel = "org/eclipse/xtext/linking/ImportUriTestLanguage.genmodel" /> 
 	
   </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.eclipse.org/2008/tmf/xtext/HiddenTerminalsTest" 
-       class = "org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.HiddenTerminalsTestLanguagePackage"
-       genModel = "org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.genmodel" /> 
+       uri = "http://eclipse.org/xtext/langATestLanguage" 
+       class = "org.eclipse.xtext.linking.langATestLanguage.LangATestLanguagePackage"
+       genModel = "org/eclipse/xtext/linking/LangATestLanguage.genmodel" /> 
 	
   </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.eclipse.org/2008/tmf/xtext/TerminalRulesTest" 
-       class = "org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.TerminalRulesTestLanguagePackage"
-       genModel = "org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.genmodel" /> 
+       uri = "http://eclipse.org/xtext/ignoreCaseLinkingTestLanguage" 
+       class = "org.eclipse.xtext.linking.ignoreCaseLinkingTest.IgnoreCaseLinkingTestPackage"
+       genModel = "org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.genmodel" /> 
 	
   </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.eclipse.org/2008/tmf/xtext/XtextTerminalsTestLanguage" 
-       class = "org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTerminalsTestLanguagePackage"
-       genModel = "org/eclipse/xtext/parser/terminalrules/XtextTerminalsTestLanguage.genmodel" /> 
+       uri = "http://eclipse.org/xtext/ignoreCaseNamespacesTestLanguage" 
+       class = "org.eclipse.xtext.linking.ignoreCaseNamespacesTest.IgnoreCaseNamespacesTestPackage"
+       genModel = "org/eclipse/xtext/linking/IgnoreCaseNamespacesTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://eclipse.org/xtext/ignoreCaseImportsTestLanguage" 
+       class = "org.eclipse.xtext.linking.ignoreCaseImportsTest.IgnoreCaseImportsTestPackage"
+       genModel = "org/eclipse/xtext/linking/IgnoreCaseImportsTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://xtext.org/testlanguages/bug311337" 
+       class = "org.eclipse.xtext.linking.lazy.bug311337.Bug311337Package"
+       genModel = "org/eclipse/xtext/linking/lazy/Bug311337TestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://eclipse.org/xtext/lazyLinkingTestLanguage" 
+       class = "org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingPackage"
+       genModel = "org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.genmodel" /> 
 	
   </extension>
 

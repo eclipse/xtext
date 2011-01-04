@@ -17,9 +17,9 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
+import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
-import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.xtext.XtextCrossReferenceSerializer;
@@ -31,7 +31,7 @@ import org.eclipse.xtext.xtext.XtextLinkingService;
 import org.eclipse.xtext.xtext.XtextLocationInFileProvider;
 import org.eclipse.xtext.xtext.XtextQualifiedNameConverter;
 import org.eclipse.xtext.xtext.XtextReferableElementsUnloader;
-import org.eclipse.xtext.xtext.XtextResourceDescriptionManager;
+import org.eclipse.xtext.xtext.XtextResourceDescriptionStrategy;
 import org.eclipse.xtext.xtext.XtextScopeProvider;
 import org.eclipse.xtext.xtext.XtextTransientValueService;
 import org.eclipse.xtext.xtext.XtextValidator;
@@ -107,8 +107,8 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 		return XtextDiagnosticConverter.class;
 	}
 	
-	public Class<? extends IResourceDescription.Manager> bindIResourceDescriptionsManager() {
-		return XtextResourceDescriptionManager.class;
+	public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
+		return XtextResourceDescriptionStrategy.class;
 	}
 	
 	public Class<? extends ILinkingDiagnosticMessageProvider.Extended> bindILinkingDiagnosticMessageProvider() {

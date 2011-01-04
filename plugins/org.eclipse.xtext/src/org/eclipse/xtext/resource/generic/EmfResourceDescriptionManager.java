@@ -14,12 +14,13 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.DescriptionUtils;
+import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 
 import com.google.inject.Inject;
@@ -30,13 +31,13 @@ import com.google.inject.Inject;
 public class EmfResourceDescriptionManager implements Manager {
 
 	@Inject
-	private IQualifiedNameProvider qualifiedNameProvider;
+	private IDefaultResourceDescriptionStrategy resourceDescriptionStrategy;
 
 	@Inject
 	private DescriptionUtils descriptionUtils;
 
 	public IResourceDescription getResourceDescription(Resource resource) {
-		return new EmfResourceDescription(resource, qualifiedNameProvider);
+		return new DefaultResourceDescription(resource, resourceDescriptionStrategy);
 	}
 
 	public Delta createDelta(IResourceDescription oldDescription, IResourceDescription newDescription) {

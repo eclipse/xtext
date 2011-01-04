@@ -15,9 +15,9 @@ import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.DescriptionUtils;
 import org.eclipse.xtext.resource.IContainer;
+import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
@@ -37,7 +37,7 @@ import com.google.inject.Singleton;
 public class DefaultResourceDescriptionManager implements IResourceDescription.Manager {
 
 	@Inject
-	private IQualifiedNameProvider nameProvider;
+	private IDefaultResourceDescriptionStrategy strategy;
 	
 	@Inject
 	private IContainer.Manager containerManager;
@@ -53,7 +53,7 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 	public IResourceDescription getResourceDescription(final Resource resource) {
 		return cache.get(CACHE_KEY, resource, new Provider<IResourceDescription>() {
 			public IResourceDescription get() {
-				return internalGetResourceDescription(resource, nameProvider);
+				return internalGetResourceDescription(resource, strategy);
 			}
 		});
 	}
@@ -62,16 +62,8 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 		return new DefaultResourceDescriptionDelta(oldDescription, newDescription);
 	}
 
-	protected IResourceDescription internalGetResourceDescription(Resource resource, IQualifiedNameProvider nameProvider) {
-		return new DefaultResourceDescription(resource, nameProvider);
-	}
-	
-	public void setNameProvider(IQualifiedNameProvider nameProvider) {
-		this.nameProvider = nameProvider;
-	}
-	
-	public IQualifiedNameProvider getNameProvider() {
-		return nameProvider;
+	protected IResourceDescription internalGetResourceDescription(Resource resource, IDefaultResourceDescriptionStrategy strategy) {
+		return new DefaultResourceDescription(resource, strategy);
 	}
 	
 	public IContainer.Manager getContainerManager() {
@@ -163,5 +155,9 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 	
 	public void setDescriptionUtils(DescriptionUtils descriptionUtils) {
 		this.descriptionUtils = descriptionUtils;
+	}
+	
+	public void setStrategy(IDefaultResourceDescriptionStrategy strategy) {
+		this.strategy = strategy;
 	}
 }

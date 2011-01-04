@@ -18,11 +18,12 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -47,7 +48,9 @@ public class DefaultResourceDescriptionManagerTest extends TestCase {
 				return null;
 			}
 		};
-		resourceDescription = new DefaultResourceDescription(resource, nameProvider) {
+		DefaultResourceDescriptionStrategy descriptionStrategy = new DefaultResourceDescriptionStrategy();
+		descriptionStrategy.setQualifiedNameProvider(nameProvider);
+		resourceDescription = new DefaultResourceDescription(resource, descriptionStrategy) {
 			@Override
 			public Iterable<QualifiedName> getImportedNames() {
 				return importedNames;

@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.naming.SimpleNameProvider;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IContainer.Manager;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -37,8 +36,8 @@ import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport.IDirtyStateEditorSupp
 import org.eclipse.xtext.ui.editor.DirtyStateManager;
 import org.eclipse.xtext.ui.editor.DocumentBasedDirtyResource;
 import org.eclipse.xtext.ui.editor.IDirtyResource;
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
 import org.eclipse.xtext.ui.notification.StateChangeEventBroker;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -363,7 +362,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 	}
 
 	public IResourceDescription getResourceDescription(Resource resource) {
-		return new DefaultResourceDescription(resource, new SimpleNameProvider()) {
+		return new DefaultResourceDescription(resource, null) {
 			@Override
 			protected List<IEObjectDescription> computeExportedObjects() {
 				return exportedObjects;

@@ -79,4 +79,24 @@ public abstract class AbstractLangATestLanguageRuntimeModule extends DefaultRunt
 		return org.eclipse.xtext.linking.parseTreeConstruction.LangATestLanguageParsetreeConstructor.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
+	public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
+		return org.eclipse.xtext.linking.scoping.LangATestLanguageScopeProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
+	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider.class);
+	}
+
+	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
+	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
+		return org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
+	public void configureIgnoreCaseLinking(com.google.inject.Binder binder) {
+		binder.bindConstant().annotatedWith(org.eclipse.xtext.scoping.IgnoreCaseLinking.class).to(false);
+	}
+
 }
