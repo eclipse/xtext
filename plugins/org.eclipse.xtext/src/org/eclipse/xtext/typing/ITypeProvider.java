@@ -57,5 +57,9 @@ public interface ITypeProvider<T> {
 		public T getExpectedType() {
 			return expectedType;
 		}
+		
+		public Context<T> newWithExpectedType(T expectedType) {
+			return new Context<T>(expectedType,acceptor);
+		}
 	}
 }
