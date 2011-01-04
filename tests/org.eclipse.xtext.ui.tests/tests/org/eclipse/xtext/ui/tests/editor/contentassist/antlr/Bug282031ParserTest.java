@@ -68,7 +68,7 @@ public class Bug282031ParserTest extends AbstractXtextTests {
 
 	protected Collection<FollowElement> getFollowSet(String input) {
 		AbstractContentAssistParser parser = get(LookAheadContentAssistTestLanguageParser.class);
-		return parser.getFollowElements(input);
+		return parser.getFollowElements(input, false);
 	}
 	
 	private void assertFollowers(String input, Set<AbstractElement> expected) {

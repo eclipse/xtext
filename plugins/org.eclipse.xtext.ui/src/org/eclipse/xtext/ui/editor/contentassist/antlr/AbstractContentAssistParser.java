@@ -275,10 +275,11 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 	
 	protected abstract String[] getInitialHiddenTokens();
 	
-	public Collection<FollowElement> getFollowElements(String input) {
+	public Collection<FollowElement> getFollowElements(String input, boolean strict) {
 		CharStream stream = new ANTLRStringStream(input);
 		TokenSource tokenSource = createLexer(stream);
 		AbstractInternalContentAssistParser parser = createParser();
+		parser.setStrict(strict);
 		ObservableXtextTokenStream tokens = new ObservableXtextTokenStream(tokenSource, parser);
 		tokens.setInitialHiddenTokens(getInitialHiddenTokens());
 		parser.setTokenStream(tokens);

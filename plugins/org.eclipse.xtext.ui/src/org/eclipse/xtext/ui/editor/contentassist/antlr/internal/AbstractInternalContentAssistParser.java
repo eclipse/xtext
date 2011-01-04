@@ -116,6 +116,8 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	protected int lookAheadAddOn;
 	protected boolean marked = false;
 	protected boolean resyncing = false;
+	protected boolean strict = false;
+	protected int wasErrorCount = -1;
 	protected int predictionLevel = 0;
 	protected int currentMarker;
 	protected int firstMarker;
@@ -347,7 +349,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 
 	protected StreamAdapter createMismatchStrategy() {
 		return new StreamAdapter() {
-			
+
 			private boolean wasErrorRecovery = false;
 			
 			public void announceEof(int lookAhead) {
@@ -448,11 +450,18 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		}
 		if (delegate == null) {
 			selectEofStrategy();
+			if (strict) {
+				wasErrorCount = state.syntaxErrors;
+			}
 		}
-		if (grammarElements.isEmpty() || delegate == null)
-			return;
 		if (inMismatchIsUnwantedToken)
 			return;
+		if (grammarElements.isEmpty() || delegate == null)
+			return;
+		if (strict) {
+			if (wasErrorCount != state.syntaxErrors)
+				return;
+		}
 		delegate.announceEof(lookAhead);
 	}
 	
@@ -467,7 +476,8 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	public boolean mismatchIsUnwantedToken(IntStream input, int ttype) {
 		try {
 			inMismatchIsUnwantedToken = true;
-			return super.mismatchIsUnwantedToken(input, ttype);
+			boolean result = super.mismatchIsUnwantedToken(input, ttype);
+			return result;
 		} finally {
 			inMismatchIsUnwantedToken = false;
 		}
@@ -542,6 +552,10 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 
 	public IUnorderedGroupHelper getUnorderedGroupHelper() {
 		return unorderedGroupHelper;
+	}
+	
+	public void setStrict(boolean strict) {
+		this.strict = strict;
 	}
 
 }

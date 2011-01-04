@@ -176,7 +176,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		protected void handleLastCompleteNodeIsPartOfLookahead() throws BadLocationException {
 			// do not calculate twice for the same input
 			if (!(lastCompleteNode instanceof ILeafNode && ((ILeafNode) lastCompleteNode).isHidden())) {
-				createContextsForLastCompleteNode(currentModel);
+				createContextsForLastCompleteNode(currentModel, true);
 			}
 		}
 
@@ -186,7 +186,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			INode previousNode = getLastCompleteNodeByOffset(rootNode, lastCompleteNode.getOffset());
 			EObject previousModel = previousNode.getSemanticElement();
 			INode currentDatatypeNode = getContainingDatatypeRuleNode(currentNode);
-			Collection<FollowElement> followElements = parser.getFollowElements(completeInput);
+			Collection<FollowElement> followElements = parser.getFollowElements(completeInput, false);
 			int prevSize = contextBuilders.size();
 			doCreateContexts(previousNode, currentDatatypeNode, prefix, previousModel, followElements);
 			
@@ -199,14 +199,14 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			List<ContentAssistContext> newContexts = Lists.transform(contextBuilderToCheck, this);
 			boolean wasValid = isLikelyToBeValidProposal(lastCompleteNode, newContexts);
 			if (wasValid && !(lastCompleteNode instanceof ILeafNode && ((ILeafNode) lastCompleteNode).isHidden())) {
-				createContextsForLastCompleteNode(previousModel);
+				createContextsForLastCompleteNode(previousModel, false);
 			}
 		}
 
 		protected void handleLastCompleteNodeAsPartOfDatatypeNode() throws BadLocationException {
 			String prefix = getPrefix(datatypeNode);
 			String completeInput = viewer.getDocument().get(0, datatypeNode.getOffset());
-			Collection<FollowElement> followElements = parser.getFollowElements(completeInput);
+			Collection<FollowElement> followElements = parser.getFollowElements(completeInput, false);
 			INode lastCompleteNodeBeforeDatatype = getLastCompleteNodeByOffset(rootNode, datatypeNode.getTotalOffset());
 			doCreateContexts(lastCompleteNodeBeforeDatatype, datatypeNode, prefix, currentModel, followElements);
 		}
@@ -225,10 +225,10 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			return false;
 		}
 
-		protected void createContextsForLastCompleteNode(EObject previousModel) throws BadLocationException {
+		protected void createContextsForLastCompleteNode(EObject previousModel, boolean strict) throws BadLocationException {
 			String prefix = "";
 			String completeInput = viewer.getDocument().get(0, completionOffset);
-			Collection<FollowElement> followElements = parser.getFollowElements(completeInput);
+			Collection<FollowElement> followElements = parser.getFollowElements(completeInput, strict);
 			doCreateContexts(lastCompleteNode, currentNode, prefix, previousModel, followElements);
 		}
 

@@ -22,6 +22,6 @@ public class ParserTest extends AbstractParserTest {
 	@Override
 	protected Collection<FollowElement> getFollowSet(String input) throws RecognitionException {
 		AbstractContentAssistParser parser = get(XtextGrammarUiTestLanguageParser.class);
-		return parser.getFollowElements(input);
+		return parser.getFollowElements(input, false);
 	}
 }

@@ -9,7 +9,6 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.EValidator;
-import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 
@@ -17,8 +16,9 @@ public class IntegrationTest extends TestCase {
 
 	@Override
 	protected void tearDown() throws Exception {
-		super.tearDown();
 		cleanWorkspace();
+		waitForAutoBuild();
+		super.tearDown();
 	}
 
 	public void testValidSimpleModel() throws Exception {
@@ -64,7 +64,8 @@ public class IntegrationTest extends TestCase {
 		createFile("foo/src/foo.dmodel", "entity Foo {}");
 		IFile file = createFile("foo/src/bar.dmodel", "entity Bar { ref stuff : Fuu }");
 		waitForAutoBuild();
-		assertEquals(1, file.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE).length);
+		IMarker[] markers = file.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE);
+		assertEquals(printMarkers(markers), 1, markers.length);
 	}
 
 	public void testTwoFilesInTwoReferencedProjects() throws Exception {
@@ -73,12 +74,12 @@ public class IntegrationTest extends TestCase {
 		IFile file1 = createFile("foo/src/foo.dmodel", "entity Foo {}");
 		IFile file2 = createFile("bar/src/bar.dmodel", "entity Bar { ref stuff : Foo }");
 		addProjectReference(bar, foo);
-		IClasspathEntry[] classpathEntries = bar.getResolvedClasspath(true);
-		for (IClasspathEntry entry : classpathEntries) {
-			if (entry.getEntryKind() == IClasspathEntry.CPE_PROJECT) {
-				System.out.println(entry.getPath());
-			}
-		}
+//		IClasspathEntry[] classpathEntries = bar.getResolvedClasspath(true);
+//		for (IClasspathEntry entry : classpathEntries) {
+//			if (entry.getEntryKind() == IClasspathEntry.CPE_PROJECT) {
+//				System.out.println(entry.getPath());
+//			}
+//		}
 		waitForAutoBuild();
 		assertEquals(0, file1.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE).length);
 		assertEquals(0, file2.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE).length);
