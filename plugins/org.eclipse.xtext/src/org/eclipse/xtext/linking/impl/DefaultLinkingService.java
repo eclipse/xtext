@@ -20,8 +20,6 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.scoping.ISelector;
-import org.eclipse.xtext.scoping.Selectors;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeDelegatingScopeProvider;
 
@@ -113,17 +111,13 @@ public class DefaultLinkingService extends AbstractLinkingService {
 		final String crossRefString = getCrossRefNodeAsString(node);
 		if (crossRefString != null && !crossRefString.equals("")) {
 			QualifiedName qualifiedLinkName =  qualifiedNameConverter.toQualifiedName(crossRefString);
-			IEObjectDescription eObjectDescription = scope.getSingleElement(getSelector(qualifiedLinkName));
+			IEObjectDescription eObjectDescription = scope.getSingleElement(qualifiedLinkName);
 			if (eObjectDescription != null)
 				return Collections.singletonList(eObjectDescription.getEObjectOrProxy());
 		}
 		return Collections.emptyList();
 	}
 	
-	protected ISelector getSelector(QualifiedName qn) {
-		return Selectors.selectByName(qn);
-	}
-
 	public String getCrossRefNodeAsString(INode node) throws IllegalNodeException {
 		return linkingHelper.getCrossRefNodeAsString(node, true);
 	}

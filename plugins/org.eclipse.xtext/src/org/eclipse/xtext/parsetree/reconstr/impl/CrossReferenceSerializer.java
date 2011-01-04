@@ -24,7 +24,6 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSeri
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.util.EmfFormatter;
 
 import com.google.inject.Inject;
@@ -67,15 +66,11 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 		return valueConverter.toString(unconverted, ruleName);
 	}
 
-	protected ISelector getSelector(EObject object) {
-		return new ISelector.SelectByEObject(object);
-	}
-
 	protected String getUnconvertedLinkText(EObject object, EReference reference, EObject context) {
 		IScope scope = scopeProvider.getScope(context, reference);
 		if (scope == null)
 			return null;
-		IEObjectDescription eObjectDescription = scope.getSingleElement(getSelector(object));
+		IEObjectDescription eObjectDescription = scope.getSingleElement(object);
 		if (eObjectDescription != null) {
 			return qualifiedNameConverter.toString(eObjectDescription.getName());
 		}

@@ -14,36 +14,48 @@ import java.util.Iterator;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.ISelector;
-import org.eclipse.xtext.scoping.Selectors;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
+import com.google.inject.Provider;
 
 /**
+ * <p>Base class for custom scope implementations. It supports nesting of scopes
+ * into each other, appropriate shadowing semantics and case sensitive and insensitive 
+ * lookup.</p>
+ * 
+ * <p>Implementors have to provide {@link #getAllLocalElements()}. However, it is recommended
+ * to customize {@link #getLocalElementsByEObject(EObject, URI)} and {@link #getLocalElementsByName(QualifiedName)}
+ * as well.</p> 
+ * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
 public abstract class AbstractScope implements IScope {
 
+	/**
+	 * Lazy iterable with a reasonable {@link #toString()} implementation that supports
+	 * shadowing of parents elements by means of filtering. 
+	 */
 	protected static class ParentIterable implements Iterable<IEObjectDescription>, Predicate<IEObjectDescription> {
 
 		private final AbstractScope scope;
-		private final ISelector selector;
+		private final Provider<Iterable<IEObjectDescription>> provider;
 		private Iterable<IEObjectDescription> parentElements;
 
-		protected ParentIterable(AbstractScope scope, ISelector selector) {
+		protected ParentIterable(AbstractScope scope, Provider<Iterable<IEObjectDescription>> provider) {
 			this.scope = scope;
-			this.selector = selector;
+			this.provider = provider;
 		}
 
 		public Iterator<IEObjectDescription> iterator() {
 			if (parentElements == null) {
-				parentElements = scope.getParent().getElements(selector);
+				parentElements = provider.get();
 			}
 			Iterator<IEObjectDescription> parentIterator = parentElements.iterator();
 			Iterator<IEObjectDescription> filteredIterator = Iterators.filter(parentIterator, this);
@@ -65,6 +77,11 @@ public abstract class AbstractScope implements IScope {
 	
 	private final IScope parent;
 
+	/**
+	 * Creates a new scope with a given parent. 
+	 * @param parent the parent scope. May not be <code>null</code>. Use {@link IScope#NULLSCOPE NULLSCOPE} instead.
+	 * @param ignoreCase whether name lookup and shadowing should be case insensitive or not. 
+	 */
 	protected AbstractScope(IScope parent, boolean ignoreCase) {
 		if (parent == null)
 			throw new IllegalArgumentException("parent may not be null. Use IScope.NULLSCOPE instead.");
@@ -79,26 +96,12 @@ public abstract class AbstractScope implements IScope {
 	public boolean isIgnoreCase() {
 		return ignoreCase;
 	}
-
-	public IEObjectDescription getSingleElement(ISelector selector) {
-		if (selector == null)
-			throw new IllegalArgumentException("selector may not be null");
-		if (selector instanceof ISelector.SelectByName) {
-			return getSingleElementByName((ISelector.SelectByName) selector);
-		} else {
-			Iterable<IEObjectDescription> elements = getElements(selector);
-			final Iterator<IEObjectDescription> iterator = elements.iterator();
-			if (iterator.hasNext())
-				return iterator.next();
-			return null;
-		}
-	}
-
-	protected IEObjectDescription getSingleElementByName(ISelector.SelectByName selector) {
-		IEObjectDescription result = getSingleLocalElementByName(selector.getName());
+	
+	public IEObjectDescription getSingleElement(QualifiedName name) {
+		IEObjectDescription result = getSingleLocalElementByName(name);
 		if (result != null)
 			return result;
-		return getParent().getSingleElement(selector);
+		return getParent().getSingleElement(name);
 	}
 	
 	protected IEObjectDescription getSingleLocalElementByName(QualifiedName name) {
@@ -109,44 +112,52 @@ public abstract class AbstractScope implements IScope {
 		return null;
 	}
 
-	public Iterable<IEObjectDescription> getElements(ISelector selector) {
-		if (selector == null)
-			throw new IllegalArgumentException("selector may not be null");
-		if (selector instanceof ISelector.SelectByName) {
-			Iterable<IEObjectDescription> result = getElementsByName((ISelector.SelectByName) selector);
-			return result;
-		} else if (selector instanceof ISelector.SelectByEObject) {
-			Iterable<IEObjectDescription> result = getElementsByEObject((ISelector.SelectByEObject) selector);
-			return result;
-		} else {
-			Iterable<IEObjectDescription> result = getAllElements();
+	public Iterable<IEObjectDescription> getAllElements() {
+		Iterable<IEObjectDescription> localElements = getAllLocalElements();
+		Iterable<IEObjectDescription> parentElements = getParentElements(new Provider<Iterable<IEObjectDescription>>() {
+			public Iterable<IEObjectDescription> get() {
+				return getParent().getAllElements();
+			}
+		});
+		Iterable<IEObjectDescription> result = Iterables.concat(localElements, parentElements);
+		return result;
+	}
+	
+	public Iterable<IEObjectDescription> getElements(final QualifiedName name) {
+		Iterable<IEObjectDescription> localElements = getLocalElementsByName(name);
+		Iterable<IEObjectDescription> parentElements = getParentElements(new Provider<Iterable<IEObjectDescription>>() {
+			public Iterable<IEObjectDescription> get() {
+				return getParent().getElements(name);
+			}
+		});
+		Iterable<IEObjectDescription> result = Iterables.concat(localElements, parentElements);
+		return result;
+	}
+	
+	public IEObjectDescription getSingleElement(EObject object) {
+		Iterable<IEObjectDescription> elements = getElements(object);
+		Iterator<IEObjectDescription> iterator = elements.iterator();
+		if (iterator.hasNext()) {
+			IEObjectDescription result = iterator.next();
 			return result;
 		}
-	}
-
-	protected Iterable<IEObjectDescription> getAllElements() {
-		Iterable<IEObjectDescription> localElements = getAllLocalElements();
-		Iterable<IEObjectDescription> parentElements = getParentElements(Selectors.selectAll());
-		Iterable<IEObjectDescription> result = Iterables.concat(localElements, parentElements);
-		return result;
+		return null;
 	}
 	
-	protected Iterable<IEObjectDescription> getElementsByName(ISelector.SelectByName selector) {
-		Iterable<IEObjectDescription> localElements = getLocalElementsByName(selector.getName());
-		Iterable<IEObjectDescription> parentElements = getParentElements(selector);
-		Iterable<IEObjectDescription> result = Iterables.concat(localElements, parentElements);
-		return result;
-	}
-	
-	protected Iterable<IEObjectDescription> getElementsByEObject(final ISelector.SelectByEObject selector) {
-		Iterable<IEObjectDescription> localElements = getLocalElementsByEObject(selector.getEObject(), selector.getUri());
-		Iterable<IEObjectDescription> parentElements = getParentElements(selector);
+	public Iterable<IEObjectDescription> getElements(final EObject object) {
+		final URI uri = EcoreUtil.getURI(object);
+		Iterable<IEObjectDescription> localElements = getLocalElementsByEObject(object, uri);
+		Iterable<IEObjectDescription> parentElements = getParentElements(new Provider<Iterable<IEObjectDescription>>() {
+			public Iterable<IEObjectDescription> get() {
+				return getParent().getElements(object);
+			}
+		});
 		Iterable<IEObjectDescription> unfilteredResult = Iterables.concat(localElements, parentElements);
 		Iterable<IEObjectDescription> result = Iterables.filter(unfilteredResult, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
 				Iterable<IEObjectDescription> localByName = getLocalElementsByName(input.getName());
 				for(IEObjectDescription local: localByName) {
-					if (!local.getEObjectURI().equals(selector.getUri())) {
+					if (!local.getEObjectURI().equals(uri)) {
 						return false;
 					}
 				}
@@ -189,10 +200,10 @@ public abstract class AbstractScope implements IScope {
 		return result;
 	}
 	
-	protected Iterable<IEObjectDescription> getParentElements(ISelector selector) {
+	protected Iterable<IEObjectDescription> getParentElements(Provider<Iterable<IEObjectDescription>> provider) {
 		if (getParent() == IScope.NULLSCOPE)
 			return Collections.emptyList();
-		return new ParentIterable(this, selector);
+		return new ParentIterable(this, provider);
 	}
 	
 	protected boolean isShadowed(IEObjectDescription input) {

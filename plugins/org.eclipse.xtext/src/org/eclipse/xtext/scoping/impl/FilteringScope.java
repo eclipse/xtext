@@ -9,15 +9,15 @@ package org.eclipse.xtext.scoping.impl;
 
 import java.util.Iterator;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 /**
- * 
  * A FilteringScope filters out all {@link IEObjectDescription} for which 
  * the given predicate returns <code>false</code>. 
  * 
@@ -33,18 +33,33 @@ public class FilteringScope implements IScope {
 		this.filter = filter;
 	}
 	
-	public IEObjectDescription getSingleElement(ISelector selector) {
-		Iterable<IEObjectDescription> elements = getElements(selector);
+	public Iterable<IEObjectDescription> getAllElements() {
+		return Iterables.filter(delegate.getAllElements(), filter);
+	}
+	
+	public Iterable<IEObjectDescription> getElements(EObject object) {
+		return Iterables.filter(delegate.getElements(object), filter);
+	}
+	
+	public Iterable<IEObjectDescription> getElements(QualifiedName name) {
+		return Iterables.filter(delegate.getElements(name), filter);
+	}
+	
+	public IEObjectDescription getSingleElement(EObject object) {
+		Iterable<IEObjectDescription> elements = getElements(object);
+		return getFirst(elements);
+	}
+	
+	public IEObjectDescription getSingleElement(QualifiedName name) {
+		Iterable<IEObjectDescription> elements = getElements(name);
+		return getFirst(elements);
+	}
+	
+	protected IEObjectDescription getFirst(Iterable<IEObjectDescription> elements) {
 		Iterator<IEObjectDescription> iterator = elements.iterator();
 		if (iterator.hasNext())
 			return iterator.next();
 		return null;
 	}
-
-	public Iterable<IEObjectDescription> getElements(ISelector selector) {
-		return Iterables.filter(delegate.getElements(selector), filter);
-	}
-	
-	
 
 }
