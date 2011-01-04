@@ -15,7 +15,11 @@ import java.util.Collection;
  */
 public interface IContentAssistParser {
 
-	Collection<FollowElement> getFollowElements(String input);
+	/**
+	 * @param strict if <code>true</code>
+	 * the parser will not use error recovery on the very last token of the input.
+	 */
+	Collection<FollowElement> getFollowElements(String input, boolean strict);
 
 	Collection<FollowElement> getFollowElements(FollowElement element);
 	

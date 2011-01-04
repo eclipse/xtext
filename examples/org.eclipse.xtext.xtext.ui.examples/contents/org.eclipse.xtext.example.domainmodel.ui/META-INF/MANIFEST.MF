@@ -22,4 +22,6 @@ Require-Bundle: org.eclipse.xtext.example.domainmodel;bundle-version="2.0.0",
 Bundle-Activator: org.eclipse.xtext.example.ui.internal.DomainmodelActivator
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Import-Package: org.apache.log4j
-Export-Package: org.eclipse.xtext.example.ui.contentassist.antlr
+Export-Package: org.eclipse.xtext.example.ui,
+ org.eclipse.xtext.example.ui.contentassist.antlr,
+ org.eclipse.xtext.example.ui.internal
