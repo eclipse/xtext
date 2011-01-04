@@ -19,19 +19,19 @@ import com.google.inject.Binder;
 import com.google.inject.name.Names;
 
 /**
- * Default bindings for Ecore's resource service provider, etc.
+ * Default bindings for EMF resources which are not based on Xtext.
  * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
  */
-public abstract class AbstractEmfResourceRuntimeModule extends AbstractGenericModule {
+public abstract class AbstractGenericResourceRuntimeModule extends AbstractGenericModule {
 
 	protected abstract String getLanguageName();
 	
 	protected abstract String getFileExtensions();
 
 	public Class<? extends IResourceServiceProvider> bindIResourceServiceProvider() {
-		return EmfResourceServiceProvider.class;
+		return GenericResourceServiceProvider.class;
 	}
 	
 	public Class<? extends IEncodingProvider> bindIEncodingProvider() {
@@ -39,7 +39,7 @@ public abstract class AbstractEmfResourceRuntimeModule extends AbstractGenericMo
 	}
 	
 	public Class<? extends IResourceDescription.Manager> bindIResourceDescription$Manager() {
-		return EmfResourceDescriptionManager.class;
+		return GenericResourceDescriptionManager.class;
 	}
 	
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {

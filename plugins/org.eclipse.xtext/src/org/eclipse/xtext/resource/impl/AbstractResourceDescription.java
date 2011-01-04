@@ -22,7 +22,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
  */
 public abstract class AbstractResourceDescription implements IResourceDescription {
 	
-	private EObjectDescriptionLookUp lookup;
+	protected EObjectDescriptionLookUp lookup;
 	
 	public boolean isEmpty() {
 		return getLookUp().isEmpty();

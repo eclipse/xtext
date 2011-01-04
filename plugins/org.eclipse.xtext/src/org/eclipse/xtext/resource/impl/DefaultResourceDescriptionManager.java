@@ -63,7 +63,7 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 	}
 
 	protected IResourceDescription internalGetResourceDescription(Resource resource, IDefaultResourceDescriptionStrategy strategy) {
-		return new DefaultResourceDescription(resource, strategy);
+		return new DefaultResourceDescription(resource, strategy, cache);
 	}
 	
 	public IContainer.Manager getContainerManager() {

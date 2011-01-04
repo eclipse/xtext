@@ -20,29 +20,15 @@ import com.google.inject.name.Named;
 
 /**
  * 
- * This class is intended to be used from an MWE workflow.
+ * This class is intended to be used in an MWE workflow.
  * 
- * It instantiates and registers the Ecore support for Xtext, which allows for referencing ecore models from any Xtext
- * language.
- * 
- * Usage:
- * 
- * <pre>
- *    component = org.eclipse.xtext.ecore.EcoreSupport{}
- * </pre>
- * 
- * If you want to provide a different guice guiceModule than the default one ({@link EcoreRuntimeModule}) in order to
- * change any implementation classes, you can make use of the property guiceModule. E.g. :
- * 
- * <pre>
- *    component = org.eclipse.xtext.ecore.EcoreSupport{
- *       guiceModule = my.special.CustomizedEcoreRuntimeModule {}
- *    }
- * </pre>
+ * It instantiates and registers Xtext support for a non-Xtext based EMF resources, e.g. to reference model elements from
+ * any Xtext language.
  * 
  * @author Sven Efftinge - Initial contribution and API
+ * @author Jan Koehnlein 
  */
-public abstract class AbstractEmfResourceSupport implements IWorkflowComponent {
+public abstract class AbstractGenericResourceSupport implements IWorkflowComponent {
 
 	@Inject
 	@Named(Constants.FILE_EXTENSIONS)
