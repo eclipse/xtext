@@ -15,7 +15,6 @@ import org.eclipse.xtext.linking.langATestLanguage.LangATestLanguagePackage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
@@ -41,12 +40,12 @@ public class Bug318343Test extends AbstractXtextTests {
 
 	public void testScopeContainsT1() throws Exception {
 		IScope scope = globalScopeProvider.getScope(resource2, LangATestLanguagePackage.Literals.TYPE__EXTENDS);
-		assertNotNull(scope.getSingleElement(new ISelector.SelectByName(QualifiedName.create("t1"))));
+		assertNotNull(scope.getSingleElement(QualifiedName.create("t1")));
 	}
 	
 	public void testScopeContainsNotT2() throws Exception {
 		IScope scope = globalScopeProvider.getScope(resource2, LangATestLanguagePackage.Literals.TYPE__EXTENDS);
-		assertNull(scope.getSingleElement(new ISelector.SelectByName(QualifiedName.create("t2"))));
+		assertNull(scope.getSingleElement(QualifiedName.create("t2")));
 	}
 	@Override
 	protected void tearDown() throws Exception {

@@ -19,7 +19,6 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.inject.Inject;
 
@@ -60,7 +59,7 @@ public class CrossReferenceTemplateVariableResolver extends AbstractTemplateVari
 		}
 		IScope scope = castedContext.getScopeProvider().getScope(
 				castedContext.getContentAssistContext().getCurrentModel(), reference);
-		Iterable<IEObjectDescription> linkingCandidates = scope.getElements(getSelector());
+		Iterable<IEObjectDescription> linkingCandidates = queryScope(scope);
 
 		List<String> names = new ArrayList<String>();
 		for (IEObjectDescription eObjectDescription : linkingCandidates) {
@@ -69,8 +68,8 @@ public class CrossReferenceTemplateVariableResolver extends AbstractTemplateVari
 		return names;
 	}
 
-	protected ISelector getSelector() {
-		return ISelector.SELECT_ALL;
+	protected Iterable<IEObjectDescription> queryScope(IScope scope) {
+		return scope.getAllElements();
 	}
 
 	protected EReference getReference(String eClassName, String eReferenceName, Grammar grammar) {

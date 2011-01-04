@@ -18,7 +18,6 @@ import org.eclipse.xtext.linking.importedURI.ImportedURIPackage;
 import org.eclipse.xtext.linking.importedURI.Main;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.common.collect.Sets;
 
@@ -153,7 +152,7 @@ public class SimpleNameScopeProviderTest extends AbstractXtextTests {
 		Resource resource = rs.getResource(URI.createURI("foo.importuritestlanguage"), true);
 		
 		IScope scope = getScopeProvider().getScope(((Main)resource.getContents().get(0)).getTypes().get(0), ImportedURIPackage.Literals.TYPE__EXTENDS);
-		HashSet<IEObjectDescription> set = Sets.newHashSet(scope.getElements(ISelector.SELECT_ALL));
+		HashSet<IEObjectDescription> set = Sets.newHashSet(scope.getAllElements());
 		assertEquals(4,set.size());
 	}
 
