@@ -24,6 +24,7 @@ import org.eclipse.xtext.resource.ISelectable;
 import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.ISelector;
+import org.eclipse.xtext.scoping.ISelector.SelectByEObject;
 
 import junit.framework.TestCase;
 
@@ -54,6 +55,11 @@ public class ImportScopeTest extends TestCase {
 		@Override
 		protected Iterable<IEObjectDescription> getAliasedElements(Iterable<IEObjectDescription> candidates) {
 			return super.getAliasedElements(candidates);
+		}
+		
+		@Override
+		protected Iterable<IEObjectDescription> getElementsByEObject(SelectByEObject selector) {
+			return super.getElementsByEObject(selector);
 		}
 	}
 	
@@ -199,6 +205,7 @@ public class ImportScopeTest extends TestCase {
 		Iterable<IEObjectDescription> elements = scope.getAliasedElements(newArrayList);
 		assertEquals(0,size(elements));
 	}
+	
 	public void testAllAliasedElements_02() throws Exception {
 		final IEObjectDescription desc1 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION, null);
 		final IEObjectDescription desc2 = new EObjectDescription(QualifiedName.create("com","bar"), EcorePackage.Literals.EANNOTATION, null);
@@ -211,4 +218,17 @@ public class ImportScopeTest extends TestCase {
 		assertEquals(1,size(elements));
 		assertSame(desc2,((AliasedEObjectDescription)elements.iterator().next()).getAliasedEObjectDescription());
 	}
+	
+	public void testGetByEObject_00() throws Exception {
+		final IEObjectDescription desc1 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION, null);
+		final IEObjectDescription desc2 = new EObjectDescription(QualifiedName.create("de","foo"), EcorePackage.Literals.EATTRIBUTE, null);
+		SimpleScope outer = new SimpleScope(newArrayList(desc1,desc2), true);
+		ImportNormalizer n1 = new ImportNormalizer(QualifiedName.create("com"), true);
+		ImportNormalizer n2 = new ImportNormalizer(QualifiedName.create("de"), true);
+		TestableImportScope scope = new TestableImportScope(newArrayList(n1,n2), outer, new ScopeBasedSelectable(outer), EcorePackage.Literals.EOBJECT, true);
+		Iterable<IEObjectDescription> iterable = scope.getElementsByEObject((SelectByEObject) selectByEObject(EcorePackage.Literals.EANNOTATION));
+		assertEquals(1, size(iterable));
+		assertEquals("com.foo",iterable.iterator().next().getName().toString());
+	}
+	
 }
