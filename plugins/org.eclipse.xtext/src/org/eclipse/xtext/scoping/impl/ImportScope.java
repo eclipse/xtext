@@ -28,8 +28,8 @@ import org.eclipse.xtext.scoping.Selectors;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
@@ -93,14 +93,18 @@ public class ImportScope extends AbstractScope {
 	@Override
 	protected Iterable<IEObjectDescription> getLocalElementsByEObject(final EObject object, final URI uri) {
 		Iterable<IEObjectDescription> candidates = getImportFrom().getExportedObjectsByObject(object);
-		return getAliasedElements(candidates);
+		final Iterable<IEObjectDescription> aliasedElements = getAliasedElements(candidates);
+		// make sure that the element is returned when asked by name.
+		return filter(aliasedElements, new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				IEObjectDescription description = getSingleLocalElementByName(input.getName());
+				return description!=null && description.getEObjectOrProxy()==input.getEObjectOrProxy();
+			}
+		});
 	}
 
-	/*
-	 * public for testing purposes only
-	 */
 	protected Iterable<IEObjectDescription> getAliasedElements(Iterable<IEObjectDescription> candidates) {
-		Multimap<QualifiedName, IEObjectDescription> keyToDescription = ArrayListMultimap.create();
+		Multimap<QualifiedName, IEObjectDescription> keyToDescription = LinkedHashMultimap.create();
 		Multimap<QualifiedName, ImportNormalizer> keyToNormalizer = HashMultimap.create();
 
 		for (IEObjectDescription imported : candidates) {
