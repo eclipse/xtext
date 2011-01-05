@@ -24,7 +24,7 @@ public class CompilerTest extends AbstractXtextTests {
 	}
 	
 	public void testSimple() throws Exception {
-		assertCompilesTo("return \"foo\".length();", "'foo'.length");
+		assertCompilesTo("return \"foo\".length();\n", "'foo'.length");
 	}
 	
 	public void testBlock() throws Exception {
@@ -35,7 +35,7 @@ public class CompilerTest extends AbstractXtextTests {
 				";\n" +
 				"_var = _this.size();\n" +
 				"}\n" +
-				"return _var;"
+				"return _var;\n"
 				, "{ val this = new java.util.ArrayList<java.lang.String>(); size;}");
 	}
 	
@@ -43,10 +43,10 @@ public class CompilerTest extends AbstractXtextTests {
 		assertCompilesTo(
 				"java.lang.Integer _var;\n" +
 				"if (true) {\n" +
-				"_var = 42L;\n" +
+				"_var = 42;\n" +
 				"} else {\n" +
-				"_var = 21L;\n}\n" +
-				"return _var;"
+				"_var = 21;\n}\n" +
+				"return _var;\n"
 				, "if (true) 42 else 21");
 	}
 
@@ -55,7 +55,7 @@ public class CompilerTest extends AbstractXtextTests {
 				"for (java.lang.String s : new java.util.ArrayList<java.lang.String>()) {\n" +
 				"s.length();\n" +
 				"}\n" +
-				"return null;"
+				"return null;\n"
 				, "for (java.lang.String s : new java.util.ArrayList<java.lang.String>()) " +
 						"s.length");
 	}

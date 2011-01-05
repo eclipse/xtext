@@ -46,7 +46,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XbaseCompiler {
-
+	
 	private PolymorphicDispatcher<Void> toJavaStmntDispatcher = PolymorphicDispatcher.createForSingleTarget("_prepare",
 			2, 2, this);
 
@@ -80,7 +80,7 @@ public class XbaseCompiler {
 	}
 
 	protected String getReturnTypeName(XExpression expr) {
-		return typeProvider.getType(expr, null).getCanonicalName();
+		return typeProvider.getType(expr).getCanonicalName();
 	}
 
 	protected String getVarName(XExpression ex) {
