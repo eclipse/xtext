@@ -110,7 +110,7 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 		JvmTypeReference featureType = getType(eobject);
 		if (object instanceof XMemberFeatureCall) {
 			JvmTypeReference targetType = getType(((XMemberFeatureCall) object).getMemberCallTarget());
-			return typeArgCtxProvider.get(targetType).resolve(featureType);
+			return typeArgCtxProvider.get(targetType).resolveCovariant(featureType);
 		}
 		return featureType;
 	}

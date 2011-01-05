@@ -243,7 +243,8 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testGenerics_1() throws Exception {
-		expressionWithError("((testdata.GenericType1<? extends java.lang.String>) null) += 'foo'", 0);
+		// linking is ok but should trigger a validation error
+		expression("((testdata.GenericType1<? extends java.lang.String>) null) += 'foo'", true);
 	}
 	
 	public void testGenerics_2() throws Exception {

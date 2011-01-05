@@ -191,8 +191,8 @@ public class CallableFeaturePredicate implements Predicate<IEObjectDescription> 
 	protected boolean isCompatibleArgument(JvmTypeReference declaredType, JvmTypeReference actualType,
 			EObject contextElement, JvmFeatureDescription jvmFeatureDescription) {
 		return actualType == null
-				|| actualType.getCanonicalName().equals("java.lang.Void")
-				|| conformance.isConformant(typeConverter.convert(jvmFeatureDescription.getContext().resolve(declaredType), contextElement),
+				|| actualType.getCanonicalName().equals("java.lang.Void") // void should be treated as compatible to everything
+				|| conformance.isConformant(typeConverter.convert(jvmFeatureDescription.getContext().resolveContravariant(declaredType), contextElement),
 						actualType);
 	}
 

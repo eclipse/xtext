@@ -9,7 +9,6 @@ package org.eclipse.xtext.common.types.util;
 
 import static com.google.common.collect.Iterables.*;
 
-import java.util.Collections;
 import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -18,8 +17,6 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 
-import com.google.common.base.Function;
-import com.google.common.base.Functions;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
@@ -29,6 +26,15 @@ import com.google.inject.Inject;
  */
 public class SuperTypeCollector {
 
+	interface SuperTypeAcceptor {
+		/**
+		 * @param superType a found super type
+		 * @param the distance to the starting type. StringBuilder has a distance 1 to 
+		 * AbstractStringBuilder, distance 1 and 2 to CharSequence and distance 2 to Appendable.
+		 */
+		boolean accept(JvmTypeReference superType, int distance);
+	}
+	
 	@Inject
 	private TypesFactory factory;
 	
@@ -37,7 +43,6 @@ public class SuperTypeCollector {
 	public SuperTypeCollector(TypesFactory factory) {
 		this.factory = factory;
 	}
-	
 	
 	protected JvmTypeReference newRef(JvmType type) {
 		JvmParameterizedTypeReference reference = factory.createJvmParameterizedTypeReference();
@@ -50,9 +55,17 @@ public class SuperTypeCollector {
 	}
 
 	public Set<JvmTypeReference> collectSuperTypes(JvmTypeReference type) {
-		Set<JvmTypeReference> doCollectSupertypeData = doCollectSupertypeData(type,
-				Functions.<JvmTypeReference> identity());
-		return doCollectSupertypeData;
+		final Set<JvmTypeReference> result = Sets.newLinkedHashSet();
+		doCollectSupertypeData(type, new SuperTypeAcceptor() {
+			public boolean accept(JvmTypeReference superType, int distance) {
+				return result.add(superType);
+			}
+		});
+		return result;
+	}
+	
+	public void collectSuperTypes(JvmTypeReference type, SuperTypeAcceptor acceptor) {
+		doCollectSupertypeData(type, acceptor);
 	}
 
 	public Set<String> collectSuperTypeNames(JvmType type) {
@@ -60,56 +73,55 @@ public class SuperTypeCollector {
 	}
 
 	public Set<JvmType> collectSuperTypesAsRawTypes(JvmTypeReference type) {
-		Function<JvmTypeReference, JvmType> function = new Function<JvmTypeReference, JvmType>() {
-			public JvmType apply(JvmTypeReference from) {
-				return from.getType();
+		final Set<JvmType> result = Sets.newLinkedHashSet();
+		doCollectSupertypeData(type, new SuperTypeAcceptor() {
+			public boolean accept(JvmTypeReference superType, int distance) {
+				return result.add(superType.getType());
 			}
-		};
-		return doCollectSupertypeData(type, function);
+		});
+		return result;
 	}
 
 	public Set<String> collectSuperTypeNames(JvmTypeReference type) {
-		Function<JvmTypeReference, String> function = new Function<JvmTypeReference, String>() {
-			public String apply(JvmTypeReference from) {
-				if (from instanceof JvmParameterizedTypeReference) {
-					return ((JvmParameterizedTypeReference) from).getType().getCanonicalName();
-				}
-				return from.getCanonicalName();
+		final Set<String> result = Sets.newLinkedHashSet();
+		doCollectSupertypeData(type, new SuperTypeAcceptor() {
+			public boolean accept(JvmTypeReference superType, int distance) {
+				String name = getSuperTypeName(superType);
+				return result.add(name);
 			}
-		};
-		return doCollectSupertypeData(type, function);
+			
+			public String getSuperTypeName(JvmTypeReference typeReference) {
+				if (typeReference instanceof JvmParameterizedTypeReference) {
+					return ((JvmParameterizedTypeReference) typeReference).getType().getCanonicalName();
+				}
+				return typeReference.getCanonicalName();
+			}
+		});
+		return result;
 	}
 
-	public <Result> Set<Result> doCollectSupertypeData(JvmTypeReference type,
-			Function<JvmTypeReference, Result> function) {
+	public void doCollectSupertypeData(JvmTypeReference type, SuperTypeAcceptor acceptor) {
 		if (type != null) {
-			Implementation<Result> implementation = new Implementation<Result>(function);
+			Implementation implementation = new Implementation(acceptor);
 			implementation.doSwitch(type);
-			Set<Result> result = implementation.getResult();
-			return result;
 		}
-		return Collections.emptySet();
 	}
 
-	public static class Implementation<Result> extends TypesSwitch<Void> {
+	public static class Implementation extends TypesSwitch<Void> {
 
 		private boolean collecting = false;
-		private final Set<Result> result;
-		private final Function<JvmTypeReference, Result> transformation;
+		private final SuperTypeAcceptor acceptor;
+		private int level;
 
-		public Implementation(Function<JvmTypeReference, Result> transformation) {
-			this.transformation = transformation;
-			result = Sets.newLinkedHashSet();
+		public Implementation(SuperTypeAcceptor acceptor) {
+			this.acceptor = acceptor;
+			this.level = 0;
 		}
 
-		public Set<Result> getResult() {
-			return result;
-		}
-		
 		@Override
 		public Void caseJvmTypeReference(JvmTypeReference object) {
 			if (!object.eIsProxy()) {
-				if (!collecting || result.add(transformation.apply(object))) {
+				if (!collecting || acceptor.accept(object, level)) {
 					collecting = true;
 					if (object.getType() != null)
 						doSwitch(object.getType());
@@ -121,9 +133,11 @@ public class SuperTypeCollector {
 		@Override
 		public Void caseJvmDeclaredType(JvmDeclaredType object) {
 			if (!object.eIsProxy()) {
+				level++;
 				for (JvmTypeReference superType : reverse(object.getSuperTypes())) {
 					doSwitch(superType);
 				}
+				level--;
 			}
 			return null;
 		}

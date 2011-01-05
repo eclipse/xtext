@@ -26,10 +26,10 @@ public class ArrayClient {
 		}
 	}
 	
-	public void inplaceSwap(Object[] values) {
+	public void inplaceSwap(String[] values) {
 		if (values.length != 2)
 			throw new IllegalArgumentException("length must be 2");
-		Object first = values[0];
+		String first = values[0];
 		values[0] = values[1];
 		values[1] = first;
 	}

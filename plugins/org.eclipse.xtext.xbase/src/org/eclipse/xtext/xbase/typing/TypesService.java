@@ -80,18 +80,19 @@ public class TypesService {
 		if (contentByName != null) {
 			JvmParameterizedTypeReference simpleType = factory.createJvmParameterizedTypeReference();
 			simpleType.setType((JvmType) contentByName.getEObjectOrProxy());
-			if (params.length==0) {
-				if (simpleType.getType() instanceof JvmTypeParameterDeclarator) {
-					JvmTypeParameterDeclarator type = (JvmTypeParameterDeclarator) simpleType.getType();
-					for (@SuppressWarnings("unused") JvmTypeParameter typeParam : type.getTypeParameters()) {
-						simpleType.getArguments().add(factory.createJvmWildcardTypeReference());
-					}
-				}
-			} else {
-				for (JvmTypeReference xTypeRef : params) {
-					simpleType.getArguments().add(EcoreUtil2.clone(xTypeRef));
-				}
+			// TODO wildcard types do not allow method calls with parameters of type <?> - create raw types instead
+//			if (params.length==0) {
+//				if (simpleType.getType() instanceof JvmTypeParameterDeclarator) {
+//					JvmTypeParameterDeclarator type = (JvmTypeParameterDeclarator) simpleType.getType();
+//					for (@SuppressWarnings("unused") JvmTypeParameter typeParam : type.getTypeParameters()) {
+//						simpleType.getArguments().add(factory.createJvmWildcardTypeReference());
+//					}
+//				}
+//			} else {
+			for (JvmTypeReference xTypeRef : params) {
+				simpleType.getArguments().add(EcoreUtil2.clone(xTypeRef));
 			}
+//			}
 			return simpleType;
 		}
 		return null;
