@@ -5,27 +5,19 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.tests.typing;
-
-import static org.eclipse.xtext.typing.ITypeConformanceComputer.*;
+package org.eclipse.xtext.xbase.tests.validation;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.typing.ITypeProvider;
-import org.eclipse.xtext.typing.ITypeProvider.Context;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
-
-import com.google.inject.Inject;
+import org.eclipse.xtext.xbase.validation.TypeConformanceValidator;
 
 /**
  * @author koehnlein - Initial contribution and API
+ * @author Sven Efftinge
  */
-public class XbaseTypeProviderTypeConformanceTests extends AbstractXbaseValidatonTest {
-
-	@Inject
-	protected ITypeProvider<JvmTypeReference> typeProvider;
+public class TypeConformanceValidatorTest extends AbstractXbaseValidationTest {
 
 	public void testIfPredicate() throws Exception {
 		assertNoConformanceError("if (true) 'foo'");
@@ -58,32 +50,26 @@ public class XbaseTypeProviderTypeConformanceTests extends AbstractXbaseValidato
 	public void testCatchClause() throws Exception {
 		assertNoConformanceError("try 'foo' catch (java.lang.Exception foo) 'bar'");
 		assertNoConformanceError("try 'foo' catch (java.lang.IllegalArgumentException foo) 'bar'");
-		assertConformanceError("try 'foo' catch (java.lang.String foo) 'bar'", TypesPackage.Literals.JVM_FORMAL_PARAMETER, "java.lang.Throwable", "java.lang.String");
+		assertConformanceError("try 'foo' catch (java.lang.String foo) 'bar'",
+				TypesPackage.Literals.JVM_FORMAL_PARAMETER, "java.lang.Throwable", "java.lang.String");
 	}
-	
+
 	public void testThrowsExpression() throws Exception {
 		assertNoConformanceError("throw new java.lang.Exception()");
 		assertNoConformanceError("throw new java.lang.IllegalArgumentException()");
-		assertConformanceError("throw 42", XbasePackage.Literals.XINT_LITERAL, "java.lang.Integer", "java.lang.Throwable");
+		assertConformanceError("throw 42", XbasePackage.Literals.XINT_LITERAL, "java.lang.Integer",
+				"java.lang.Throwable");
 	}
-	
-	public void testForExpression() throws Exception {
-		
-	}
-	
+
 	protected void assertConformanceError(String expression, EClass objectType, String... messageParts)
 			throws Exception {
-		resetErrors();
-		XExpression xExpression = expression(expression, true);
-		typeProvider.getType(xExpression, Context.<JvmTypeReference> newCtx(this));
-		super.assertError(objectType, ISSUE_NON_CONFORMANT_TYPES, messageParts);
+		final XExpression xExpression = expression(expression, true);
+		assertError(xExpression, objectType, TypeConformanceValidator.INCOMPATIBLE_TYPES, messageParts);
 	}
 
 	protected void assertNoConformanceError(String expression) throws Exception {
-		resetErrors();
-		XExpression xExpression = expression(expression, true);
-		typeProvider.getType(xExpression, Context.<JvmTypeReference> newCtx(this));
-		super.assertNoError(ISSUE_NON_CONFORMANT_TYPES);
+		final XExpression xExpression = expression(expression, true);
+		assertNoError(xExpression, TypeConformanceValidator.INCOMPATIBLE_TYPES);
 	}
 
 }

@@ -68,10 +68,18 @@ public class CallableFeaturePredicate implements Predicate<IEObjectDescription> 
 	private IJvmTypeConformanceComputer conformance;
 
 	@Inject
+	private TypeConverter typeConverter;
+	
+	@Inject
 	private ITypeProvider<JvmTypeReference> typeProvider;
 
-	@Inject
-	private TypeConverter typeConverter;
+	public void setTypeProvider(ITypeProvider<JvmTypeReference> typeProvider) {
+		this.typeProvider = typeProvider;
+	}
+	
+	protected ITypeProvider<JvmTypeReference> getTypeProvider() {
+		return typeProvider;
+	}
 	
 	private EObject context;
 	private EReference reference;
@@ -107,8 +115,7 @@ public class CallableFeaturePredicate implements Predicate<IEObjectDescription> 
 		for (int i = 0; i < numberOfArgs; i++) {
 			JvmFormalParameter parameter = input.getParameters().get(i);
 			XExpression expression = op.getArguments().get(i);
-			JvmTypeReference type = typeProvider.getType(expression,
-					ITypeProvider.Context.<JvmTypeReference> newCtx());
+			JvmTypeReference type = typeProvider.getType(expression);
 			if (!conformance.isConformant(parameter.getParameterType(), type))
 				return false;
 		}
@@ -119,8 +126,7 @@ public class CallableFeaturePredicate implements Predicate<IEObjectDescription> 
 		if (input.getParameters().size() != 1)
 			return false;
 		if (op.getRightOperand() != null && op.getLeftOperand() != null) {
-			JvmTypeReference type = typeProvider.getType(op.getLeftOperand(),
-					ITypeProvider.Context.<JvmTypeReference> newCtx());
+			JvmTypeReference type = typeProvider.getType(op.getLeftOperand());
 			if (!conformance.isConformant(input.getParameters().get(0).getParameterType(), type))
 				return false;
 		}
@@ -131,8 +137,7 @@ public class CallableFeaturePredicate implements Predicate<IEObjectDescription> 
 		if (input.getParameters().size() != 1)
 			return false;
 		if (op.getValue() != null) {
-			JvmTypeReference type = typeProvider.getType(op.getValue(),
-					ITypeProvider.Context.<JvmTypeReference> newCtx());
+			JvmTypeReference type = typeProvider.getType(op.getValue());
 			if (!isCompatibleArgument(input.getParameters().get(0).getParameterType(), type, op, jvmFeatureDescription))
 				return false;
 		}
@@ -171,7 +176,7 @@ public class CallableFeaturePredicate implements Predicate<IEObjectDescription> 
 		
 		for (int i = 0; i < arguments.size(); i++) {
 			XExpression expression = arguments.get(i);
-			JvmTypeReference type = typeProvider.getType(expression, ITypeProvider.Context.<JvmTypeReference> newCtx());
+			JvmTypeReference type = typeProvider.getType(expression);
 			JvmTypeReference declaredType = input.getParameters().get(i).getParameterType();
 			if (!isCompatibleArgument(declaredType, type, context, jvmFeatureDescription))
 				return false;

@@ -59,9 +59,6 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	public static final QualifiedName ADD = QualifiedName.create("+=");
 
 	@Inject
-	private ITypeProvider<JvmTypeReference> typeProvider;
-
-	@Inject
 	private JvmFeatureScopeProvider jvmFeatureScopeProvider;
 	
 	@Inject
@@ -75,6 +72,17 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	
 	@Inject
 	private Provider<XAssignmentSugarDescriptionProvider> assignmentSugarFeatureDescProvider;
+	
+	@Inject
+	private ITypeProvider<JvmTypeReference> typeProvider;
+
+	public void setTypeProvider(ITypeProvider<JvmTypeReference> typeProvider) {
+		this.typeProvider = typeProvider;
+	}
+	
+	protected ITypeProvider<JvmTypeReference> getTypeProvider() {
+		return typeProvider;
+	}
 	
 	public void setSugarFeatureDescProvider(Provider<XFeatureCallSugarDescriptionProvider> sugarFeatureDescProvider) {
 		this.sugarFeatureDescProvider = sugarFeatureDescProvider;
@@ -158,7 +166,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 
 			if (thisVariable != null) {
 				EObject thisVal = thisVariable.getEObjectOrProxy();
-				JvmTypeReference type = typeProvider.getType(thisVal, null);
+				JvmTypeReference type = typeProvider.getType(thisVal);
 				if (type != null) {
 					implicitThis.setDelegate(createFeatureScopeForTypeRef(type, call, getContextType(call)));
 				}
@@ -169,7 +177,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			return IScope.NULLSCOPE;
 		XExpression target = call.getArguments().get(0);
 		if (target != null) {
-			JvmTypeReference jvmTypeReference = typeProvider.getType(target, null);
+			JvmTypeReference jvmTypeReference = typeProvider.getType(target);
 			if (jvmTypeReference != null) {
 				return createFeatureScopeForTypeRef(jvmTypeReference, call, getContextType(call));
 			}

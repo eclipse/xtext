@@ -12,18 +12,14 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
+import org.eclipse.xtext.xbase.typing.TypesService;
 
 import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge
- *
  */
 public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
-	
-	@Inject
-	private ITypeProvider<JvmTypeReference> typeResolver;
 	
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
@@ -35,37 +31,37 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	public void testSwitchExpression() throws Exception {
-		assertResolvedReturnType(XbaseTypeProvider.STRING_TYPE_NAME,"switch { case true : 's'; case false : 'foo'; default: 'bar';}");
-		assertResolvedReturnType(XbaseTypeProvider.OBJECT_TYPE_NAME,"switch { case true : 's'; case false : new java.lang.Object(); default: 'bar';}");
+		assertResolvedReturnType(TypesService.STRING_TYPE_NAME,"switch { case true : 's'; case false : 'foo'; default: 'bar';}");
+		assertResolvedReturnType(TypesService.OBJECT_TYPE_NAME,"switch { case true : 's'; case false : new java.lang.Object(); default: 'bar';}");
 	}
 
 	public void testBlockExpression() throws Exception {
-		assertResolvedReturnType(XbaseTypeProvider.INTEGER_TYPE_NAME, "{true;4;}");
-		assertResolvedReturnType(XbaseTypeProvider.BOOLEAN_TYPE_NAME, "{4;true;}");
-		assertResolvedReturnType(XbaseTypeProvider.VOID_TYPE_NAME, "{null;}");
+		assertResolvedReturnType(TypesService.INTEGER_TYPE_NAME, "{true;4;}");
+		assertResolvedReturnType(TypesService.BOOLEAN_TYPE_NAME, "{4;true;}");
+		assertResolvedReturnType(TypesService.VOID_TYPE_NAME, "{null;}");
 	}
 
 	public void testNullLiteral() throws Exception {
-		assertResolvedReturnType(XbaseTypeProvider.VOID_TYPE_NAME, "null");
+		assertResolvedReturnType(TypesService.VOID_TYPE_NAME, "null");
 	}
 	
 	public void testBooleanLiteral() throws Exception {
-		assertResolvedReturnType(XbaseTypeProvider.BOOLEAN_TYPE_NAME, "true");
-		assertResolvedReturnType(XbaseTypeProvider.BOOLEAN_TYPE_NAME, "false");
+		assertResolvedReturnType(TypesService.BOOLEAN_TYPE_NAME, "true");
+		assertResolvedReturnType(TypesService.BOOLEAN_TYPE_NAME, "false");
 	}
 	
 	public void testStringLiteral() throws Exception {
-		assertResolvedReturnType(XbaseTypeProvider.STRING_TYPE_NAME, "'foo'");
-		assertResolvedReturnType(XbaseTypeProvider.STRING_TYPE_NAME, "\"foo\"");
+		assertResolvedReturnType(TypesService.STRING_TYPE_NAME, "'foo'");
+		assertResolvedReturnType(TypesService.STRING_TYPE_NAME, "\"foo\"");
 	}
 	
 	public void testIntLiteral() throws Exception {
-		assertResolvedReturnType(XbaseTypeProvider.INTEGER_TYPE_NAME, "3");
+		assertResolvedReturnType(TypesService.INTEGER_TYPE_NAME, "3");
 	}
 	
 	public void testCastExpression() throws Exception {
-		assertResolvedReturnType(XbaseTypeProvider.STRING_TYPE_NAME, "(java.lang.String) null");
-		assertResolvedReturnType(XbaseTypeProvider.BOOLEAN_TYPE_NAME, "(java.lang.Boolean) 'foo'");
+		assertResolvedReturnType(TypesService.STRING_TYPE_NAME, "(java.lang.String) null");
+		assertResolvedReturnType(TypesService.BOOLEAN_TYPE_NAME, "(java.lang.Boolean) 'foo'");
 	}
 	
 	public void testConstructorCall() throws Exception {
@@ -116,8 +112,12 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedReturnType("java.lang.Void", "for(java.lang.String x : new java.util.ArrayList()) 'foo'");
 	}
 	
+
+	@Inject
+	private ITypeProvider<JvmTypeReference> typeProvider;
+	
 	public void assertResolvedReturnType(QualifiedName typeName, String expression) throws Exception {
-		JvmTypeReference typeRef = typeResolver.getType(expression(expression,true),null);
+		JvmTypeReference typeRef = typeProvider.getType(expression(expression,true));
 		assertNotNull("type ref was null for "+expression,typeRef);
 		assertEquals(qualifiedNameConverter.toString(typeName) ,toString(typeRef));
 	}

@@ -37,8 +37,8 @@ public class TypeConverter {
 	 * this implementation converts any primitive types to their wrapper types and any arrays X[]to corresponding
 	 * java.util.List<X> types.
 	 */
-	public JvmTypeReference convert(JvmTypeReference toBeConverted, final EObject context) {
-		if (toBeConverted == null)
+	public JvmTypeReference convert(JvmTypeReference type, final EObject context) {
+		if (type == null)
 			return null;
 
 		@SuppressWarnings("serial")
@@ -61,7 +61,7 @@ public class TypeConverter {
 				return super.copy(object);
 			}
 		};
-		JvmTypeReference copy = (JvmTypeReference) copier.copy(toBeConverted);
+		JvmTypeReference copy = (JvmTypeReference) copier.copy(type);
 		copier.copyReferences();
 		return copy;
 	}

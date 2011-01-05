@@ -26,6 +26,9 @@ public abstract class AbstractInjectableValidator implements EValidator {
 	@Inject
 	public void register(EValidatorRegistrar registrar) {
 		List<EPackage> packages = getEPackages();
+		if (packages.size()==0) {
+			throw new IllegalStateException("No EPackages were registered for the validator "+getClass().getName()+" please override and implement getEPackages().");
+		}
 		for (EPackage ePackage : packages) {
 			registrar.register(ePackage, this);
 		}
