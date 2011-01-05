@@ -7,12 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
@@ -35,8 +31,8 @@ public class ImportUriValidator extends AbstractDeclarativeValidator {
 	}
 
 	@Override
-	protected List<EPackage> getEPackages() {
-		return Collections.emptyList();
+	public void register(EValidatorRegistrar registrar) {
+		// not registered for any package
 	}
 	
 	public void setResolver(ImportUriResolver resolver) {
