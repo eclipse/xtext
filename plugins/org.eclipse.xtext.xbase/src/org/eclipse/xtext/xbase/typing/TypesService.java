@@ -16,6 +16,8 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -58,7 +60,7 @@ public class TypesService {
 	public static final QualifiedName STRING_TYPE_NAME;
 	public static final QualifiedName OBJECT_TYPE_NAME;
 	public static final QualifiedName JAVA_LANG_THROWABLE;
-	public static final QualifiedName JAVA_UTIL_ITERABLE;
+	public static final QualifiedName JAVA_LANG_ITERABLE;
 
 	static {
 		IQualifiedNameConverter.DefaultImpl nameConverter = new IQualifiedNameConverter.DefaultImpl();
@@ -69,7 +71,7 @@ public class TypesService {
 		STRING_TYPE_NAME = nameConverter.toQualifiedName(String.class.getName());
 		OBJECT_TYPE_NAME = nameConverter.toQualifiedName(Object.class.getName());
 		JAVA_LANG_THROWABLE = nameConverter.toQualifiedName(Throwable.class.getName());
-		JAVA_UTIL_ITERABLE = nameConverter.toQualifiedName(Iterable.class.getName());
+		JAVA_LANG_ITERABLE = nameConverter.toQualifiedName(Iterable.class.getName());
 	}
 	
 	public JvmTypeReference getTypeForName(QualifiedName qualifiedName, EObject context, JvmTypeReference... params) {
@@ -78,8 +80,17 @@ public class TypesService {
 		if (contentByName != null) {
 			JvmParameterizedTypeReference simpleType = factory.createJvmParameterizedTypeReference();
 			simpleType.setType((JvmType) contentByName.getEObjectOrProxy());
-			for (JvmTypeReference xTypeRef : params) {
-				simpleType.getArguments().add(EcoreUtil2.clone(xTypeRef));
+			if (params.length==0) {
+				if (simpleType.getType() instanceof JvmTypeParameterDeclarator) {
+					JvmTypeParameterDeclarator type = (JvmTypeParameterDeclarator) simpleType.getType();
+					for (@SuppressWarnings("unused") JvmTypeParameter typeParam : type.getTypeParameters()) {
+						simpleType.getArguments().add(factory.createJvmWildcardTypeReference());
+					}
+				}
+			} else {
+				for (JvmTypeReference xTypeRef : params) {
+					simpleType.getArguments().add(EcoreUtil2.clone(xTypeRef));
+				}
 			}
 			return simpleType;
 		}

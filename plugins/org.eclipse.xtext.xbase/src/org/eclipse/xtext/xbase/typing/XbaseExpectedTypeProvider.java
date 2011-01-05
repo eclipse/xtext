@@ -8,10 +8,16 @@
 package org.eclipse.xtext.xbase.typing;
 
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.typing.AbstractExpectedTypeProvider;
 import org.eclipse.xtext.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
@@ -43,6 +49,12 @@ public class XbaseExpectedTypeProvider extends AbstractExpectedTypeProvider<JvmT
 
 	@Inject
 	private TypesService typeService;
+	
+	@Inject
+	private XbaseTypeArgumentContextProvider typeArgCtxProvider;
+	
+	@Inject
+	private TypesFactory factory;
 
 	protected JvmTypeReference _expectedType(XAssignment assignment, EReference reference, int index) {
 		if (reference == XbasePackage.Literals.XASSIGNMENT__VALUE) {
@@ -54,26 +66,30 @@ public class XbaseExpectedTypeProvider extends AbstractExpectedTypeProvider<JvmT
 
 	protected JvmTypeReference _expectedType(XMemberFeatureCall expr, EReference reference, int index) {
 		if (reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS) {
-			//TODO resolve type parameters
+			TypeArgumentContext context = typeArgCtxProvider.getContext(expr.getMemberCallTarget());
 			JvmExecutable feature = (JvmExecutable) expr.getFeature();
 			JvmFormalParameter parameter = feature.getParameters().get(index);
-			return parameter.getParameterType();
+			return context.resolve(parameter.getParameterType());
 		}
 		return getExpectedType(expr);
 	}
 
 	protected JvmTypeReference _expectedType(XBinaryOperation expr, EReference reference, int index) {
 		if (reference == XbasePackage.Literals.XBINARY_OPERATION__RIGHT_OPERAND) {
+			TypeArgumentContext context = typeArgCtxProvider.getContext(expr.getLeftOperand());
 			JvmExecutable feature = (JvmExecutable) expr.getFeature();
 			JvmFormalParameter parameter = feature.getParameters().get(0);
-			return parameter.getParameterType();
+			return context.resolve(parameter.getParameterType());
 		}
 		return getExpectedType(expr);
 	}
 
 	protected JvmTypeReference _expectedType(XVariableDeclaration expr, EReference reference, int index) {
 		if (reference == XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT) {
-			return expr.getType();
+			final JvmTypeReference type = expr.getType();
+			if (type != null)
+				return type;
+			return typeService.getTypeForName(TypesService.OBJECT_TYPE_NAME, expr);
 		}
 		return null; // no expectations
 	}
@@ -108,8 +124,18 @@ public class XbaseExpectedTypeProvider extends AbstractExpectedTypeProvider<JvmT
 
 	protected JvmTypeReference _expectedType(XForLoopExpression expr, EReference reference, int index) {
 		if (reference == XbasePackage.Literals.XFOR_LOOP_EXPRESSION__FOR_EXPRESSION) {
-			//TODO use expr.getDeclaredParam().getParameterType() to further constraint the iterable (upper bound type param) 
-			final JvmTypeReference typeForName = typeService.getTypeForName(TypesService.JAVA_UTIL_ITERABLE, expr);
+			final JvmTypeReference typeForName = typeService.getTypeForName(TypesService.JAVA_LANG_ITERABLE, expr);
+			// infer the type argument for the iterable if a type has been specified
+			if (expr.getDeclaredParam().getParameterType()!=null) {
+				JvmTypeReference paramType = EcoreUtil2.clone(expr.getDeclaredParam().getParameterType());
+				JvmWildcardTypeReference wildCard = factory.createJvmWildcardTypeReference();
+				JvmUpperBound upperBound = factory.createJvmUpperBound();
+				upperBound.setTypeReference(paramType);
+				wildCard.getConstraints().add(upperBound);
+				final JvmParameterizedTypeReference jvmParameterizedTypeReference = (JvmParameterizedTypeReference)typeForName;
+				jvmParameterizedTypeReference.getArguments().clear();
+				jvmParameterizedTypeReference.getArguments().add(wildCard);
+			}
 			return typeForName;
 		}
 		return null; // no other expectations
