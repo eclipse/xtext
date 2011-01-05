@@ -18,7 +18,7 @@ public class XcssTypeProvider extends XbaseTypeProvider {
 	@Inject
 	private SuperTypeCollector superTypeCollector;
 	
-	protected JvmTypeReference _type(TypeSelector selector, Context<JvmTypeReference> context) {
+	protected JvmTypeReference _type(TypeSelector selector) {
 		JvmTypeReference control = getTypesService().getTypeForName(
 				QualifiedName.create("org", "eclipse", "swt", "widgets", "Control"), selector);
 		if (control == null)
@@ -47,11 +47,11 @@ public class XcssTypeProvider extends XbaseTypeProvider {
 		return selector;
 	}
 	
-	protected JvmTypeReference _type(ColorLiteral colorLiteral, Context<JvmTypeReference> context) {
+	protected JvmTypeReference _type(ColorLiteral colorLiteral) {
 		return getTypesService().getTypeForName(QualifiedName.create("org", "eclipse", "swt", "graphics", "Color"), colorLiteral);
 	}
 	
-	protected JvmTypeReference _type(Gradient gradient, Context<JvmTypeReference> context) {
+	protected JvmTypeReference _type(Gradient gradient) {
 		return getTypesService().getTypeForName(
 				QualifiedName.create("org", "eclipse", "xtext", "example", "css", "runtime", "BackgroundGradient"), gradient);
 	}
