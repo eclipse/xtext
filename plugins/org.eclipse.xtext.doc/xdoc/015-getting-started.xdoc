@@ -136,8 +136,8 @@ code[Xtext][generate domainmodel "http://www.eclipse.org/xtext/example/Domainmod
 
 Ecore e[EPackages] are effectively a set of classes (in EMF they are called 
 e[EClass]) which are used to represent the in-memory-model of a text file. Instead
-of e[model] we also sometimes refer to it as e[semantic model] or _Abstract Syntax 
-Tree (AST)_. Note, that in the case of Xtext it's actually a graph rather than a 
+of e[model] we also sometimes refer to it as e[semantic model] or e[Abstract Syntax 
+Tree (AST)]. Note, that in the case of Xtext it's actually a graph rather than a 
 tree, since it also contains crosslinks. But as the term AST is so commonly 
 used and well known we are ignoring this minor detail. 
 

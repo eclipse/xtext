@@ -722,7 +722,7 @@ Fullname:
 ;
 ]
 
-The sample rule "Person" defines multiline comments (_ML_COMMENT_), single-line comments (_SL_COMMENT_), and whitespace (_WS_) to be allowed between the e[Fullname] and the e[age]. Because the rule e[Fullname] does not introduce another set of hidden terminals, it allows the same symbols to appear between e[firstname] and e[lastname] as the calling rule e[Person]. Thus, the following input is perfectly valid for the given grammar snippet:
+The sample rule "Person" defines multiline comments (e[ML_COMMENT]), single-line comments (e[SL_COMMENT]), and whitespace (e[WS]) to be allowed between the e[Fullname] and the e[age]. Because the rule e[Fullname] does not introduce another set of hidden terminals, it allows the same symbols to appear between e[firstname] and e[lastname] as the calling rule e[Person]. Thus, the following input is perfectly valid for the given grammar snippet:
 
 code[Java][John /* comment */ Smith // line comment
 /* comment */

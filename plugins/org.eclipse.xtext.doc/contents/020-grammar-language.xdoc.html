@@ -70,7 +70,7 @@ In order to implment this little language with Xtext, you need to write the foll
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-&nbsp;<span class="keyword">grammar</span>&nbsp;my.pack.SecretCompartments&nbsp;<br />&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals<br /><span class="keyword">generate</span>&nbsp;secretcompartment&nbsp;&quot;http://www.eclipse.org/secretcompartment&quot;<br /><br />Statemachine&nbsp;:<br />&nbsp;&apos;events&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;(events+=Event)+<br />&nbsp;&apos;end&apos;<br />&nbsp;(&apos;resetEvents&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;(resetEvents+=[Event])+<br />&nbsp;&apos;end&apos;)?<br />&nbsp;&apos;commands&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;(commands+=Command)+<br />&nbsp;&apos;end&apos;<br />&nbsp;(states+=State)+;<br /><br />Event&nbsp;:<br />&nbsp;name=ID&nbsp;code=ID;<br /><br />Command&nbsp;:<br />&nbsp;name=ID&nbsp;code=ID;<br /><br />State&nbsp;:<br />&nbsp;&apos;state&apos;&nbsp;name=ID<br />&nbsp;&nbsp;&nbsp;&nbsp;(&apos;actions&apos;&nbsp;&apos;{&apos;&nbsp;(actions+=[Command])+&nbsp;&apos;}&apos;)?<br />&nbsp;&nbsp;&nbsp;&nbsp;(transitions+=Transition)*<br />&nbsp;&apos;end&apos;;<br /><br />Transition&nbsp;:<br />&nbsp;event=[Event]&nbsp;&apos;=&gt;&apos;&nbsp;state=[State];<br />&nbsp;
+&nbsp;<span class="keyword">grammar</span>&nbsp;my.pack.SecretCompartments&nbsp;<br />&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals<br /><span class="keyword">generate</span>&nbsp;secretcompartment&nbsp;"http://www.eclipse.org/secretcompartment"<br /><br />Statemachine&nbsp;:<br />&nbsp;&apos;events&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;(events+=Event)+<br />&nbsp;&apos;end&apos;<br />&nbsp;(&apos;resetEvents&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;(resetEvents+=[Event])+<br />&nbsp;&apos;end&apos;)?<br />&nbsp;&apos;commands&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;(commands+=Command)+<br />&nbsp;&apos;end&apos;<br />&nbsp;(states+=State)+;<br /><br />Event&nbsp;:<br />&nbsp;name=ID&nbsp;code=ID;<br /><br />Command&nbsp;:<br />&nbsp;name=ID&nbsp;code=ID;<br /><br />State&nbsp;:<br />&nbsp;&apos;state&apos;&nbsp;name=ID<br />&nbsp;&nbsp;&nbsp;&nbsp;(&apos;actions&apos;&nbsp;&apos;{&apos;&nbsp;(actions+=[Command])+&nbsp;&apos;}&apos;)?<br />&nbsp;&nbsp;&nbsp;&nbsp;(transitions+=Transition)*<br />&nbsp;&apos;end&apos;;<br /><br />Transition&nbsp;:<br />&nbsp;event=[Event]&nbsp;&apos;=&gt;&apos;&nbsp;state=[State];<br />&nbsp;
 </p>
 </div>
 </div>
@@ -79,7 +79,7 @@ In order to implment this little language with Xtext, you need to write the foll
 </p>
 
 <p>
-Martin uses this example throughout his book &quot;Domain-Specific Languages&quot; to implement external and internal DSLs using
+Martin uses this example throughout his book "Domain-Specific Languages" to implement external and internal DSLs using
 different technologies. Note, that none of his implmentations is nearly as readable and concise as the description in
 Xtext&apos;s grammar language above. That is of course because the grammar language is designed to do just that, i.e. it is 
 specific to the domain of language descriptions.
@@ -204,7 +204,7 @@ secret compartment example. To do so just state:
 </p>
 
 <p>
-That statement means: generate an <em>EPackage</em> with the <em>name</em> &quot;secretcompartment&quot; and the <em>nsURI</em> &quot;http://www.eclipse.org/secretcompartment&quot;. 
+That statement means: generate an <em>EPackage</em> with the <em>name</em> "secretcompartment" and the <em>nsURI</em> "http://www.eclipse.org/secretcompartment". 
 Actually these are the properties that are required to create an <em>EPackage</em>.
 Xtext will then add <em>EClasses</em> with properties (_EAttributes_ and <em>EReferences</em>) for the different rules, as described in
 
@@ -295,7 +295,7 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-fragment&nbsp;=&nbsp;org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment&nbsp;{<br />&nbsp;&nbsp;genModels&nbsp;=<br />&nbsp;&nbsp;&nbsp;&nbsp;&quot;platform:/resource/my.project/src/my/pack/SecretCompartments.genmodel&quot;<br />}<br />
+fragment&nbsp;=&nbsp;org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment&nbsp;{<br />&nbsp;&nbsp;genModels&nbsp;=<br />&nbsp;&nbsp;&nbsp;&nbsp;"platform:/resource/my.project/src/my/pack/SecretCompartments.genmodel"<br />}<br />
 </p>
 </div>
 </div>
@@ -345,7 +345,7 @@ As with platform resource URIs you&apos;ll also have to tell the generator where
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-fragment&nbsp;=&nbsp;org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment&nbsp;{<br />&nbsp;&nbsp;genModels&nbsp;=<br />&nbsp;&nbsp;&nbsp;&nbsp;&quot;classpath:/model/JvmTypes.genmodel&quot;<br />}<br />
+fragment&nbsp;=&nbsp;org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment&nbsp;{<br />&nbsp;&nbsp;genModels&nbsp;=<br />&nbsp;&nbsp;&nbsp;&nbsp;"classpath:/model/JvmTypes.genmodel"<br />}<br />
 </p>
 </div>
 </div>
@@ -383,7 +383,7 @@ to use its nsURI :
 </p>
 
 <p>
-<span class="inlinecode"><span class="keyword">import</span>&nbsp;&quot;http://www.eclipse.org/emf/2002/Ecore&quot;&nbsp;<span class="keyword">as</span>&nbsp;ecore</span>
+<span class="inlinecode"><span class="keyword">import</span>&nbsp;"http://www.eclipse.org/emf/2002/Ecore"&nbsp;<span class="keyword">as</span>&nbsp;ecore</span>
 
 </p>
 
@@ -658,7 +658,7 @@ Extended Backus-Naur Form Expressions
 
 
 <p>
-Token rules are described using &quot;Extended Backus-Naur Form&quot;-like (EBNF) expressions. The different expressions 
+Token rules are described using "Extended Backus-Naur Form"-like (EBNF) expressions. The different expressions 
 are described in the following. The one thing all of these expressions have in common is the cardinality operator.
 There are four different possible cardinalities
 
@@ -729,7 +729,7 @@ The <em>ID</em> rule in <em>org.eclipse.xtext.common.Terminals</em> for instance
 </p>
 
 <p>
-The question mark sets the cardinality to &quot;none or one&quot; (i.e. optional) like explained above.
+The question mark sets the cardinality to "none or one" (i.e. optional) like explained above.
 </p>
 
 <p>
@@ -1440,7 +1440,7 @@ Example with alternatives:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-MyRule&nbsp;<span class="keyword">returns</span>&nbsp;TypeA&nbsp;:<br />&nbsp;&nbsp;&quot;A&quot;&nbsp;name=ID&nbsp;|<br />&nbsp;&nbsp;MyOtherRule<br />;&nbsp;<br />&nbsp;<br />MyOtherRule&nbsp;<span class="keyword">returns</span>&nbsp;TypeB&nbsp;:<br />&nbsp;&nbsp;&quot;B&quot;&nbsp;name&nbsp;=&nbsp;ID<br />;<br />
+MyRule&nbsp;<span class="keyword">returns</span>&nbsp;TypeA&nbsp;:<br />&nbsp;&nbsp;"A"&nbsp;name=ID&nbsp;|<br />&nbsp;&nbsp;MyOtherRule<br />;&nbsp;<br />&nbsp;<br />MyOtherRule&nbsp;<span class="keyword">returns</span>&nbsp;TypeB&nbsp;:<br />&nbsp;&nbsp;"B"&nbsp;name&nbsp;=&nbsp;ID<br />;<br />
 </p>
 </div>
 </div>
@@ -1457,7 +1457,7 @@ Example with simple actions:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-MyRule&nbsp;<span class="keyword">returns</span>&nbsp;TypeA&nbsp;:<br />&nbsp;&nbsp;&quot;A&quot;&nbsp;name=ID&nbsp;|<br />&nbsp;&nbsp;&quot;B&quot;&nbsp;{TypeB}&nbsp;name=ID<br />;&nbsp;<br />
+MyRule&nbsp;<span class="keyword">returns</span>&nbsp;TypeA&nbsp;:<br />&nbsp;&nbsp;"A"&nbsp;name=ID&nbsp;|<br />&nbsp;&nbsp;"B"&nbsp;{TypeB}&nbsp;name=ID<br />;&nbsp;<br />
 </p>
 </div>
 </div>
@@ -1492,13 +1492,13 @@ Unassigned Rule Calls
 <p>
 We previously explained, that the <em>EObject</em> to be returned is created lazily when the first assignment occurs or 
 when a simple action is evaluated. There is another way one can set the <em>EObject</em> to be returned, which we call 
-an &quot;unassigned rule call&quot;.
+an "unassigned rule call".
 </p>
 
 <p>
 Unassigned rule calls (the name suggests it) are rule calls to other parser rules, which are not used within an 
 assignment. If there is no feature the returned value shall be assigned to, the value is assigned to the 
-&quot;to-be-returned&quot; result of the calling rule.
+"to-be-returned" result of the calling rule.
 </p>
 
 <p>
@@ -1589,7 +1589,7 @@ Expression&nbsp;:<br />&nbsp;&nbsp;Expression&nbsp;&apos;+&apos;&nbsp;Expression
 </p>
 
 <p>
-Instead one has to rewrite such things by &quot;left-factoring&quot; it:
+Instead one has to rewrite such things by "left-factoring" it:
 </p>
 
 <p>
@@ -1728,7 +1728,7 @@ Person&nbsp;<span class="keyword">hidden</span>(WS,&nbsp;ML_COMMENT,&nbsp;SL_COM
 </p>
 
 <p>
-The sample rule &quot;Person&quot; defines multiline comments (_ML_COMMENT_), single-line comments (_SL_COMMENT_), and whitespace (_WS_) to be allowed between the <em>Fullname</em> and the <em>age</em>. Because the rule <em>Fullname</em> does not introduce another set of hidden terminals, it allows the same symbols to appear between <em>firstname</em> and <em>lastname</em> as the calling rule <em>Person</em>. Thus, the following input is perfectly valid for the given grammar snippet:
+The sample rule "Person" defines multiline comments (<em>ML_COMMENT</em>), single-line comments (<em>SL_COMMENT</em>), and whitespace (<em>WS</em>) to be allowed between the <em>Fullname</em> and the <em>age</em>. Because the rule <em>Fullname</em> does not introduce another set of hidden terminals, it allows the same symbols to appear between <em>firstname</em> and <em>lastname</em> as the calling rule <em>Person</em>. Thus, the following input is perfectly valid for the given grammar snippet:
 </p>
 
 <p>
@@ -1799,7 +1799,7 @@ allow for use of hidden tokens.
 </p>
 
 <p>
-If you, for instance, want to define a rule to consume Java-like qualified names (e.g. &quot;foo.bar.Baz&quot;)
+If you, for instance, want to define a rule to consume Java-like qualified names (e.g. "foo.bar.Baz")
 you could write:
 </p>
 
@@ -1822,7 +1822,7 @@ If you had defined it as a terminal rule, it would possibly hide the <em>ID</em>
 </p>
 
 <p>
-In addition when this has been defined as a data type rule, it is allowed to use hidden tokens (e.g. &quot;/* comment <em></em>/&quot;) between the IDs and dots (e.g. <em>foo/* comment */. bar . Baz</em>).
+In addition when this has been defined as a data type rule, it is allowed to use hidden tokens (e.g. "/* comment <em></em>/") between the IDs and dots (e.g. <em>foo/* comment */. bar . Baz</em>).
 </p>
 
 <p>
@@ -1915,7 +1915,7 @@ Please note, that Ecore does not support unset values for enums. If you formulat
 </p>
 
 <p>
-<span class="inlinecode">Element:&nbsp;&quot;element&quot;&nbsp;name=ID&nbsp;(value=SomeEnum)?;</span>
+<span class="inlinecode">Element:&nbsp;"element"&nbsp;name=ID&nbsp;(value=SomeEnum)?;</span>
 
 </p>
 
@@ -2234,7 +2234,7 @@ Each <em>EAttribute</em> or <em>EReference</em> takes its name from the assignme
 </p>
 
 <p>
-Furthermore, each type that is added to the currently possible return types automatically extends the current return type of the parser rule. You can specify additional common super types by means of &quot;artificial&quot; parser rules, that are never called, e.g.
+Furthermore, each type that is added to the currently possible return types automatically extends the current return type of the parser rule. You can specify additional common super types by means of "artificial" parser rules, that are never called, e.g.
 </p>
 
 <p>
@@ -2519,7 +2519,7 @@ Example :
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">grammar</span>&nbsp;my.SuperGrammar<br />...<br />RuleA&nbsp;:&nbsp;&quot;a&quot;&nbsp;stuff=RuleB;<br />RuleB&nbsp;:&nbsp;&quot;{&quot;&nbsp;name=ID&nbsp;&quot;}&quot;;<br /><br /><span class="keyword">grammar</span>&nbsp;my.SubGrammar&nbsp;<span class="keyword">with</span>&nbsp;my.SuperGrammar<br /><br />Model&nbsp;:&nbsp;(ruleAs+=RuleA)*;<br /><br />//&nbsp;overrides&nbsp;my.SuperGrammar.RuleB<br />RuleB&nbsp;:&nbsp;&apos;[&apos;&nbsp;name=ID&nbsp;&apos;]&apos;;<br />
+<span class="keyword">grammar</span>&nbsp;my.SuperGrammar<br />...<br />RuleA&nbsp;:&nbsp;"a"&nbsp;stuff=RuleB;<br />RuleB&nbsp;:&nbsp;"{"&nbsp;name=ID&nbsp;"}";<br /><br /><span class="keyword">grammar</span>&nbsp;my.SubGrammar&nbsp;<span class="keyword">with</span>&nbsp;my.SuperGrammar<br /><br />Model&nbsp;:&nbsp;(ruleAs+=RuleA)*;<br /><br />//&nbsp;overrides&nbsp;my.SuperGrammar.RuleB<br />RuleB&nbsp;:&nbsp;&apos;[&apos;&nbsp;name=ID&nbsp;&apos;]&apos;;<br />
 </p>
 </div>
 </div>
@@ -2559,7 +2559,7 @@ Xtext ships with a default set of predefined, reasonable and often required term
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-&nbsp;<span class="keyword">grammar</span>&nbsp;org.eclipse.xtext.common.Terminals&nbsp;<br />&nbsp;<span class="keyword">hidden</span>(WS,&nbsp;ML_COMMENT,&nbsp;SL_COMMENT)<br /><span class="keyword">import</span>&nbsp;&quot;http://www.eclipse.org/emf/2002/Ecore&quot;&nbsp;<span class="keyword">as</span>&nbsp;ecore<br /><span class="keyword">terminal</span>&nbsp;ID&nbsp;:&nbsp;<br />&nbsp;&apos;^&apos;?(&apos;a&apos;..&apos;z&apos;|&apos;A&apos;..&apos;Z&apos;|&apos;_&apos;)&nbsp;(&apos;a&apos;..&apos;z&apos;|&apos;A&apos;..&apos;Z&apos;|&apos;_&apos;|&apos;0&apos;..&apos;9&apos;)*&nbsp;;<br /><span class="keyword">terminal</span>&nbsp;INT&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EInt:&nbsp;(&apos;0&apos;..&apos;9&apos;)+&nbsp;;<br /><span class="keyword">terminal</span>&nbsp;STRING&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<br />&nbsp;&apos;&quot;&apos;&nbsp;(&nbsp;&apos;\\&apos;&nbsp;(&apos;b&apos;|&apos;t&apos;|&apos;n&apos;|&apos;f&apos;|&apos;r&apos;|&apos;&quot;&apos;|&quot;&apos;&quot;|&apos;\\&apos;)&nbsp;|&nbsp;!(&apos;\\&apos;|&apos;&quot;&apos;)&nbsp;)*&nbsp;&apos;&quot;&apos;&nbsp;|<br />&nbsp;&quot;&apos;&quot;&nbsp;(&nbsp;&apos;\\&apos;&nbsp;(&apos;b&apos;|&apos;t&apos;|&apos;n&apos;|&apos;f&apos;|&apos;r&apos;|&apos;&quot;&apos;|&quot;&apos;&quot;|&apos;\\&apos;)&nbsp;|&nbsp;!(&apos;\\&apos;|&quot;&apos;&quot;)&nbsp;)*&nbsp;&quot;&apos;&quot;;&nbsp;<br /><span class="keyword">terminal</span>&nbsp;ML_COMMENT&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&apos;/*&apos;&nbsp;-&gt;&nbsp;&apos;*/&apos;&nbsp;;<br /><span class="keyword">terminal</span>&nbsp;SL_COMMENT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&apos;//&apos;&nbsp;!(&apos;\n&apos;|&apos;\r&apos;)*&nbsp;(&apos;\r&apos;?&nbsp;&apos;\n&apos;)?&nbsp;;<br /><span class="keyword">terminal</span>&nbsp;WS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;(&apos;&nbsp;&apos;|&apos;\t&apos;|&apos;\r&apos;|&apos;\n&apos;)+&nbsp;;<br /><span class="keyword">terminal</span>&nbsp;ANY_OTHER:&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;;
+&nbsp;<span class="keyword">grammar</span>&nbsp;org.eclipse.xtext.common.Terminals&nbsp;<br />&nbsp;<span class="keyword">hidden</span>(WS,&nbsp;ML_COMMENT,&nbsp;SL_COMMENT)<br /><span class="keyword">import</span>&nbsp;"http://www.eclipse.org/emf/2002/Ecore"&nbsp;<span class="keyword">as</span>&nbsp;ecore<br /><span class="keyword">terminal</span>&nbsp;ID&nbsp;:&nbsp;<br />&nbsp;&apos;^&apos;?(&apos;a&apos;..&apos;z&apos;|&apos;A&apos;..&apos;Z&apos;|&apos;_&apos;)&nbsp;(&apos;a&apos;..&apos;z&apos;|&apos;A&apos;..&apos;Z&apos;|&apos;_&apos;|&apos;0&apos;..&apos;9&apos;)*&nbsp;;<br /><span class="keyword">terminal</span>&nbsp;INT&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EInt:&nbsp;(&apos;0&apos;..&apos;9&apos;)+&nbsp;;<br /><span class="keyword">terminal</span>&nbsp;STRING&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<br />&nbsp;&apos;"&apos;&nbsp;(&nbsp;&apos;\\&apos;&nbsp;(&apos;b&apos;|&apos;t&apos;|&apos;n&apos;|&apos;f&apos;|&apos;r&apos;|&apos;"&apos;|"&apos;"|&apos;\\&apos;)&nbsp;|&nbsp;!(&apos;\\&apos;|&apos;"&apos;)&nbsp;)*&nbsp;&apos;"&apos;&nbsp;|<br />&nbsp;"&apos;"&nbsp;(&nbsp;&apos;\\&apos;&nbsp;(&apos;b&apos;|&apos;t&apos;|&apos;n&apos;|&apos;f&apos;|&apos;r&apos;|&apos;"&apos;|"&apos;"|&apos;\\&apos;)&nbsp;|&nbsp;!(&apos;\\&apos;|"&apos;")&nbsp;)*&nbsp;"&apos;";&nbsp;<br />terminal&nbsp;ML_COMMENT&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&apos;/*&apos;&nbsp;-&gt;&nbsp;&apos;*/&apos;&nbsp;;<br />terminal&nbsp;SL_COMMENT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&apos;//&apos;&nbsp;!(&apos;\n&apos;|&apos;\r&apos;)*&nbsp;(&apos;\r&apos;?&nbsp;&apos;\n&apos;)?&nbsp;;<br />terminal&nbsp;WS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;(&apos;&nbsp;&apos;|&apos;\t&apos;|&apos;\r&apos;|&apos;\n&apos;)+&nbsp;;<br />terminal&nbsp;ANY_OTHER:&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;;
 </p>
 </div>
 </div>

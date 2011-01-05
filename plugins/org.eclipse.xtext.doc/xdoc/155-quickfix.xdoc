@@ -9,7 +9,7 @@ specific e[code] with the diagnostic.
 
 In the following example taken from the e[DomainmodelJavaValidator] 
 the diagnostic's e[code] is given by the third argument to the e[warning()] method and it is a reference 
-to the static e[String] field e[==INVALID]TYPE_NAME==_ in the validator class.
+to the static e[String] field e[INVALID_TYPE_NAME] in the validator class.
 
 code[Java][warning("Name should start with a capital", 
     DomainmodelPackage.TYPE__NAME, INVALID_TYPE_NAME, type.getName());
@@ -19,9 +19,9 @@ Now that the validation has a unique code identifying the problem we can registe
 We start by adding the 
 codeRef[org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment] 
 to our workflow and after regenerating the code we should find an empty class e[MyDslQuickfixProvider] 
-in our DSL's UI project and new entries in the e[==plugin.xml]gen==_ file.
+in our DSL's UI project and new entries in the e[plugin.xml_gen] file.
 
-Continuing with the e[==INVALID]TYPE_NAME==_ problem from the Domainmodel example we add a method with which 
+Continuing with the e[INVALID_TYPE_NAME] problem from the Domainmodel example we add a method with which 
 the problem can be fixed (have a look at the e[DomainmodelQuickfixProvider] for details):
 
 code[Java][@Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME)

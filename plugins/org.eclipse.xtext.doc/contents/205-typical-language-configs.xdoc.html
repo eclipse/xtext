@@ -183,7 +183,7 @@ In in this case just remove the JDT stuff in this way:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">protected</span>&nbsp;String[]&nbsp;getProjectNatures()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;String[]&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;org.eclipse.pde.PluginNature&quot;,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;org.eclipse.xtext.ui.shared.xtextNature&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;};<br />}<br /><br /><span class="keyword">protected</span>&nbsp;String[]&nbsp;getBuilders()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;String[]&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;org.eclipse.pde.ManifestBuilder&quot;,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;org.eclipse.pde.SchemaBuilder&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;};<br />}<br />
+<span class="keyword">protected</span>&nbsp;String[]&nbsp;getProjectNatures()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;String[]&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"org.eclipse.pde.PluginNature",<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"org.eclipse.xtext.ui.shared.xtextNature"<br />&nbsp;&nbsp;&nbsp;&nbsp;};<br />}<br /><br /><span class="keyword">protected</span>&nbsp;String[]&nbsp;getBuilders()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;String[]&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"org.eclipse.pde.ManifestBuilder",&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"org.eclipse.pde.SchemaBuilder"<br />&nbsp;&nbsp;&nbsp;&nbsp;};<br />}<br />
 </p>
 </div>
 </div>
@@ -491,7 +491,7 @@ The resulting AST looks like this:
 
 <p>
 <div class="image" >
-<img src="images/expression-ast.png" class=" " />
+<img src="images/expression-ast.png" class=" "  style=" " />
  
 </div>
 </p>

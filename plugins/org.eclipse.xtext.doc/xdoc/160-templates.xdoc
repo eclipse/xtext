@@ -9,8 +9,8 @@ link[http://help.eclipse.org/ganymede/topic/org.eclipse.cdt.doc.user/tasks/cdt_t
 img[images/preferences_templates.png][ ][ ][ ]
 
 
-By default Xtext registers e[ContextTypes] for each rule (_\[languageName\].\[RuleName\]_) and for each 
-keyword (_\[languageName\].kw_\[keyword\]_). If you don't 
+By default Xtext registers e[ContextTypes] for each rule (e[\[languageName\].\[RuleName\]]) and for each 
+keyword (e[\[languageName\].kw_\[keyword\]]). If you don't 
 like these defaults you'll have to subclass 
 codeRef[org.eclipse.xtext.ui.editor.templates.XtextTemplateContextTypeRegistry] 
 and configure it via ref:guicemodules[Guice]. 

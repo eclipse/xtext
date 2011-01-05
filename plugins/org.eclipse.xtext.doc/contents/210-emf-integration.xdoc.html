@@ -43,8 +43,8 @@ Given the example model from the
 
 <p>
 <div class="image" >
-<img src="images/ast.png" class=" width:50%" />
- 
+<img src="images/ast.png" class=" "  style=" width:50%" />
+ (Sample AST)
 </div>
 </p>
 
@@ -95,8 +95,8 @@ We have summarized these most relevant concepts of Ecore in the following diagra
 
 <p>
 <div class="image" >
-<img src="images/ecore.png" class=" " />
- 
+<img src="images/ecore.png" class=" "  style=" " />
+(Ecore concepts)
 </div>
 </p>
 
@@ -204,7 +204,7 @@ Xtext provides an implementation of EMF&apos;s resource, the
 
 <p>
 <div class="image" >
-<img src="images/emf-integration.png" class=" " />
+<img src="images/emf-integration.png" class=" "  style=" " />
  
 </div>
 </p>
@@ -279,7 +279,8 @@ Prefer optional rule calls (cardinality <em>?</em> or <em>*</em>) to mandatory o
 <li>
 
 <p>
-You should not use an Xtext-Editor on the same model instance as a self-synchronizing other editor, e.g. a canonical GMF editor (see :#gmf_integration_stage_1 for details). The Xtext parser replaces re-parsed subtrees of the AST rather than modifying it, so elements will become stale. As the Xtext editor continuously re-parses the model on changes, this will happen rather often. It is safer to synchronize editors more loosely, e.g. on file changes. 
+You should not use an Xtext-Editor on the same model instance as a self-synchronizing other editor, e.g. a canonical GMF editor (see 
+<a href="210-emf-integration.xdoc.html#gmf_integration_stage_1">section gmf_integration_stage_1</a> for details). The Xtext parser replaces re-parsed subtrees of the AST rather than modifying it, so elements will become stale. As the Xtext editor continuously re-parses the model on changes, this will happen rather often. It is safer to synchronize editors more loosely, e.g. on file changes. 
 </p>
 
 </li>
@@ -287,7 +288,12 @@ You should not use an Xtext-Editor on the same model instance as a self-synchron
 <li>
 
 <p>
-Implement an <em>IFragmentProvider</em>:#fragmentProvider to make the XtextResource return stable fragments for its contained elements, e.g. based on composite names rather than order of appearance.
+Implement an 
+<a href="110-fragmentprovider.xdoc.html#fragmentProvider"><em>IFragmentProvider</em></a> to make 
+	the XtextResource return stable fragments for its contained
+	elements, e.g. based on composite names rather than order of 
+	appearance.
+
 </p>
 
 </li>
@@ -295,7 +301,11 @@ Implement an <em>IFragmentProvider</em>:#fragmentProvider to make the XtextResou
 <li>
 
 <p>
-Implement an <em>IQualifiedNameProvider</em> and an <em>IScopeProvider</em>:#scoping to make the names of all linkable elements in cross-references unique. 
+Implement an <em>IQualifiedNameProvider</em> and an 
+
+<a href="080-scoping.xdoc.html#scoping"><em>IScopeProvider</em></a> to make the names of all linkable 
+	elements in cross-references unique.
+
 </p>
 
 </li>
@@ -303,7 +313,10 @@ Implement an <em>IQualifiedNameProvider</em> and an <em>IScopeProvider</em>:#sco
 <li>
 
 <p>
-Provide an <em>IFormatter</em>:#formatting to improve the readability of the generated textual models.  
+Provide an 
+<a href="105-formatting.xdoc.html#formatting"><em>IFormatter</em></a> to improve the readability 
+	of the generated textual models.
+
 </p>
 
 </li>
@@ -311,7 +324,12 @@ Provide an <em>IFormatter</em>:#formatting to improve the readability of the gen
 <li>
 
 <p>
-Register an <em>IReferableElementsUnloader</em> to turn deleted/replaced model elements into EMF proxies. Design the rest of your application such that it does never keep references to  <em>EObjects</em> or to cope with proxies. That will improve the stability of your application drastically.
+Register an <em>IReferableElementsUnloader</em> to turn 
+	deleted/replaced model elements into EMF proxies. Design the rest 
+	of your application such that it does never keep references to 
+<em>EObjects</em> or to cope with proxies. That will improve the 
+	stability of your application drastically.
+
 </p>
 
 </li>
@@ -319,7 +337,11 @@ Register an <em>IReferableElementsUnloader</em> to turn deleted/replaced model e
 <li>
 
 <p>
-Xtext will register an EMF <em>ResourceFactory</em>, so resources with the file extension you entered when generating the Xtext plug-ins will be automatically loaded in an <em>XtextResource</em> when you use EMF&apos;s <em>ResourceSet</em> API to load it.
+Xtext will register an EMF <em>ResourceFactory</em>, so resources with 
+	the file extension you entered when generating the Xtext plug-ins 
+	will be automatically loaded in an <em>XtextResource</em> when you use 
+	EMF&apos;s <em>ResourceSet</em> API to load it.
+
 </p>
 
 </li>
@@ -353,6 +375,120 @@ The <a href="http://www.eclipse.org/modeling/gmp/?project=gmf">Graphical Modelin
 
 <p>
 
+<table>
+<tr>
+<td>
+Plug-in
+</td>
+<td>
+Framework
+</td>
+<td>
+Purpose
+</td>
+<td>
+Contents
+</td>
+</tr>
+<tr>
+<td>
+o.e.x.example.gmf
+</td>
+<td>
+Xtext
+</td>
+<td>
+Xtext runtime plug-in
+</td>
+<td>
+Grammar, derived metamodel and language infrastructure
+</td>
+</tr>
+<tr>
+<td>
+o.e.x.e.g.ui
+</td>
+<td>
+Xtext
+</td>
+<td>
+Xtext UI plug-in
+</td>
+<td>
+Xtext editor and services
+</td>
+</tr>
+<tr>
+<td>
+o.e.x.e.g.edit
+</td>
+<td>
+EMF
+</td>
+<td>
+EMF.edit plug-in
+</td>
+<td>
+UI services generated from the metamodel
+</td>
+</tr>
+<tr>
+<td>
+o.e.x.e.g.models
+</td>
+<td>
+GMF
+</td>
+<td>
+GMF design models
+</td>
+<td>
+Input for the GMF code generator
+</td>
+</tr>
+<tr>
+<td>
+o.e.x.e.g.diagram
+</td>
+<td>
+GMF
+</td>
+<td>
+GMF diagram editor
+</td>
+<td>
+Purely generated from the GMF design models
+</td>
+</tr>
+<tr>
+<td>
+o.e.x.e.g.d.extensions
+</td>
+<td>
+GMF and Xtext
+</td>
+<td>
+GMF diagram editor extensions
+</td>
+<td>
+Manual extensions to the generated GMF editor for integration with Xtext
+</td>
+</tr>
+<tr>
+<td>
+o.e.x.gmf.glue
+</td>
+<td>
+Xtext and GMF
+</td>
+<td>
+Glue code
+</td>
+<td>
+Generic code to integrate Xtext and GMF
+</td>
+</tr>
+</table>
 
 </p>
 
@@ -406,7 +542,7 @@ From the GMF side, we followed the default procedure and created a gmfgraph mode
 </p>
 
 <p>
-Voilà, we now have a diagram editor that reads/writes its semantic model as text. Also note that the validator from Xtext is already integrated in the diagram editor via the menu bar. 
+Voilˆ, we now have a diagram editor that reads/writes its semantic model as text. Also note that the validator from Xtext is already integrated in the diagram editor via the menu bar. 
 </p>
 
 
@@ -431,7 +567,8 @@ GMF&apos;s generated parser for the labels is a bit poor: It will work on attrib
 </p>
 
 <p>
-An <em>XtextResource</em> keeps track of it&apos;s concrete syntax representation by means of a so called node model (see :#parser_rules for a more detailed description). The node model represents the parse tree and provides information on the offset, length and text that has been parsed to create a semantic model element. The nodes are attached to their semantic elements by means of a node adapter.    
+An <em>XtextResource</em> keeps track of it&apos;s concrete syntax representation by means of a so called node model (see 
+<a href="020-grammar-language.xdoc.html#parser_rules">section parser_rules</a> for a more detailed description). The node model represents the parse tree and provides information on the offset, length and text that has been parsed to create a semantic model element. The nodes are attached to their semantic elements by means of a node adapter.    
 </p>
 
 <p>
@@ -464,7 +601,7 @@ in the method <em>createEditingDomain()</em> of the generated <em>EntitiesDocume
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Dynamic&nbsp;Templates&nbsp;-&gt;&nbsp;true<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Template&nbsp;Directory&nbsp;-&gt;&nbsp;&quot;org.eclipse.xtext.example.gmf.models/templates&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Dynamic&nbsp;Templates&nbsp;-&gt;&nbsp;true<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Template&nbsp;Directory&nbsp;-&gt;&nbsp;"org.eclipse.xtext.example.gmf.models/templates"<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 </div>
 </div>
@@ -481,7 +618,7 @@ in the <em>GenEditorGenerator</em> and
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Required&nbsp;Plugins&nbsp;-&gt;&nbsp;&quot;org.eclipse.xtext.gmf.glue&quot;&nbsp;<br />
+Required&nbsp;Plugins&nbsp;-&gt;&nbsp;"org.eclipse.xtext.gmf.glue"&nbsp;<br />
 </p>
 </div>
 </div>

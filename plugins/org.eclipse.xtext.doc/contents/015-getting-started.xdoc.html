@@ -87,11 +87,37 @@ Choose a meaningful project name, language name and file extension, e.g.
 
 <p>
 
+<table>
+<tr>
+<td>
+<em>Main project name:</em>
+</td>
+<td>
+org.eclipse.xtext.example.domainmodel
+</td>
+</tr>
+<tr>
+<td>
+<em>Language name:</em>
+</td>
+<td>
+org.eclipse.xtext.example.Domainmodel
+</td>
+</tr>
+<tr>
+<td>
+<em>DSL-File extension:</em>
+</td>
+<td>
+dmodel
+</td>
+</tr>
+</table>
 
 </p>
 
 <p>
-Keep &quot;Create generator project&quot; checked, as we will also create a code generator in a second step.
+Keep "Create generator project" checked, as we will also create a code generator in a second step.
 If you want to materialize the full blown Domainmodel example that ships with Xtext, it is
 strongly recommend to use another language name and file extension for this tutorial.
 </p>
@@ -102,7 +128,7 @@ Click on <em>Finish</em> to create the projects.
 
 <p>
 <div class="image" >
-<img src="images/getting-started-wizard.png" class=" " />
+<img src="images/getting-started-wizard.png" class=" "  style=" " />
  
 </div>
 </p>
@@ -140,7 +166,7 @@ libraries, which are referenced by the means of OSGi using the Manifest.MF.
 
 <p>
 <div class="image" >
-<img src="images/getting-started-project-layout.png" class=" " />
+<img src="images/getting-started-project-layout.png" class=" "  style=" " />
  
 </div>
 </p>
@@ -187,7 +213,7 @@ Build Your Own Grammar
 <em>_Please note_</em>: If you encounter strange errors while copying and pasting
 a snippet from this document to your Eclipse editor, your documentation
 viewer most likely has inserted characters different from {space} into your 
-clipboard. Reenter the &quot;whitespace&quot; or type the text by hand to be sure everything
+clipboard. Reenter the "whitespace" or type the text by hand to be sure everything
 works fine. 
 </p>
 
@@ -244,7 +270,7 @@ The next statement declares an EMF Ecore package, aka <em>EPackage</em>, to be d
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;&quot;http://www.eclipse.org/xtext/example/Domainmodel&quot;<br />
+<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;"http://www.eclipse.org/xtext/example/Domainmodel"<br />
 </p>
 </div>
 </div>
@@ -255,8 +281,8 @@ The next statement declares an EMF Ecore package, aka <em>EPackage</em>, to be d
 <p>
 Ecore <em>EPackages</em> are effectively a set of classes (in EMF they are called 
 <em>EClass</em>) which are used to represent the in-memory-model of a text file. Instead
-of <em>model</em> we also sometimes refer to it as <em>semantic model</em> or _Abstract Syntax 
-Tree (AST)_. Note, that in the case of Xtext it&apos;s actually a graph rather than a 
+of <em>model</em> we also sometimes refer to it as <em>semantic model</em> or <em>Abstract Syntax 
+Tree (AST)</em>. Note, that in the case of Xtext it&apos;s actually a graph rather than a 
 tree, since it also contains crosslinks. But as the term AST is so commonly 
 used and well known we are ignoring this minor detail. 
 </p>
@@ -292,6 +318,40 @@ four different cardinalities available.
 
 <p>
 
+<table>
+<tr>
+<td>
+(no operator)
+</td>
+<td>
+exactly one
+</td>
+</tr>
+<tr>
+<td>
+<em>?</em>
+</td>
+<td>
+zero or one
+</td>
+</tr>
+<tr>
+<td>
+<em>*</em>
+</td>
+<td>
+zero or more
+</td>
+</tr>
+<tr>
+<td>
+<em>+</em>
+</td>
+<td>
+one or more
+</td>
+</tr>
+</table>
 
 </p>
 
@@ -380,6 +440,41 @@ side was parsed successfully. Here&apos;s the list of available assignment opera
 
 <p>
 
+<table>
+<tr>
+<td>
+
+</td>
+<td>
+<em>feature=...</em>
+</td>
+<td>
+corresponds to <em>setFeature(...)</em>
+</td>
+</tr>
+<tr>
+<td>
+
+</td>
+<td>
+<em>list+=...</em>
+</td>
+<td>
+corresponds to <em>getList().add(...)</em>
+</td>
+</tr>
+<tr>
+<td>
+
+</td>
+<td>
+<em>condition?=...</em>
+</td>
+<td>
+corresponds to <em>setCondition(true)</em>
+</td>
+</tr>
+</table>
 
 </p>
 
@@ -500,7 +595,7 @@ Feature:<br />&nbsp;&nbsp;name=ID&nbsp;&apos;:&apos;&nbsp;type=TypeRef;<br />
 <p>
 In many target platforms there is a difference between the notion of a simple 
 attribute and a reference. In relational databases, for instance, a table contains 
-the values of attributes directly, but references are &quot;modeled&quot; by the means of 
+the values of attributes directly, but references are "modeled" by the means of 
 foreign keys. In object-relational persistence technologies such as JPA or Hibernate 
 references can have additional life-cycle semantics, which define what to do with 
 referenced objects in certain circumstances. Therefore you typically make a distinction 
@@ -546,7 +641,7 @@ In the end your grammar editor should look like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">grammar</span>&nbsp;org.eclipse.xtext.example.Domainmodel&nbsp;<br />&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals<br />&nbsp;&nbsp;<br /><span class="keyword">generate</span>&nbsp;domainmodel&nbsp;&quot;http://www.eclipse.org/xtext/example/Domainmodel&quot;&nbsp;&nbsp;<br /><br />DomainModel&nbsp;:<br />&nbsp;&nbsp;(elements+=Type)*;<br />&nbsp;&nbsp;<br />Type:<br />&nbsp;&nbsp;DataType&nbsp;|&nbsp;Entity;<br />&nbsp;&nbsp;<br />DataType:<br />&nbsp;&nbsp;&apos;datatype&apos;&nbsp;name=ID;<br />&nbsp;<br />Entity:<br />&nbsp;&nbsp;&apos;entity&apos;&nbsp;name=ID&nbsp;(&apos;extends&apos;&nbsp;superType=[Entity])?&nbsp;&apos;{&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;(features+=Feature)*<br />&nbsp;&nbsp;&apos;}&apos;;<br />&nbsp;<br />Feature:<br />&nbsp;&nbsp;name=ID&nbsp;&apos;:&apos;&nbsp;type=TypeRef;<br />&nbsp;&nbsp;<br />TypeRef:<br />&nbsp;&nbsp;referenced=[Type]&nbsp;(multi?=&apos;*&apos;)?;<br />&nbsp;&nbsp;
+<span class="keyword">grammar</span>&nbsp;org.eclipse.xtext.example.Domainmodel&nbsp;<br />&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals<br />&nbsp;&nbsp;<br /><span class="keyword">generate</span>&nbsp;domainmodel&nbsp;"http://www.eclipse.org/xtext/example/Domainmodel"&nbsp;&nbsp;<br /><br />DomainModel&nbsp;:<br />&nbsp;&nbsp;(elements+=Type)*;<br />&nbsp;&nbsp;<br />Type:<br />&nbsp;&nbsp;DataType&nbsp;|&nbsp;Entity;<br />&nbsp;&nbsp;<br />DataType:<br />&nbsp;&nbsp;&apos;datatype&apos;&nbsp;name=ID;<br />&nbsp;<br />Entity:<br />&nbsp;&nbsp;&apos;entity&apos;&nbsp;name=ID&nbsp;(&apos;extends&apos;&nbsp;superType=[Entity])?&nbsp;&apos;{&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;(features+=Feature)*<br />&nbsp;&nbsp;&apos;}&apos;;<br />&nbsp;<br />Feature:<br />&nbsp;&nbsp;name=ID&nbsp;&apos;:&apos;&nbsp;type=TypeRef;<br />&nbsp;&nbsp;<br />TypeRef:<br />&nbsp;&nbsp;referenced=[Type]&nbsp;(multi?=&apos;*&apos;)?;<br />&nbsp;&nbsp;
 </p>
 </div>
 </div>
@@ -631,8 +726,8 @@ references etc.
 
 <p>
 <div class="image" >
-<img src="images/getting-started-editor.png" class=" width:50%" />
- 
+<img src="images/getting-started-editor.png" class=""  style="width:50%" />
+
 </div>
 </p>
 
@@ -907,7 +1002,7 @@ That&apos;s all for the grammar. It should now read as
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">grammar</span>&nbsp;org.eclipse.xtext.example.Domainmodel&nbsp;<br />&nbsp;&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals<br /><br /><span class="keyword">generate</span>&nbsp;domainmodel&nbsp;&quot;http://www.eclipse.org/xtext/example/Domainmodel&quot;<br /><br />DomainModel:<br />&nbsp;&nbsp;(elements+=AbstractElement)*;<br /><br />AbstractElement:<br />&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Type&nbsp;|&nbsp;Import;<br />&nbsp;&nbsp;<br />Import:<br />&nbsp;&nbsp;&apos;<span class="keyword">import</span>&apos;&nbsp;importedNamespace=QualifiedNameWithWildCard;<br /><br />PackageDeclaration:<br />&nbsp;&nbsp;&apos;package&apos;&nbsp;name=QualifiedName&nbsp;&apos;{&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;(elements+=AbstractElement)*<br />&nbsp;&nbsp;&apos;}&apos;;<br /><br />Type:<br />&nbsp;&nbsp;Entity&nbsp;|&nbsp;DataType;<br /><br />DataType:<br />&nbsp;&nbsp;&apos;datatype&apos;&nbsp;name=ID;<br /><br />Entity:<br />&nbsp;&nbsp;&apos;entity&apos;&nbsp;name=ID&nbsp;(&apos;extends&apos;&nbsp;superType=[Entity|QualifiedName])?&nbsp;&apos;{&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;(features+=Feature)*<br />&nbsp;&nbsp;&apos;}&apos;;<br /><br />Feature:<br />&nbsp;&nbsp;name=ID&nbsp;&apos;:&apos;&nbsp;type=TypeRef;<br /><br />TypeRef:<br />&nbsp;&nbsp;referenced=[Type|QualifiedName]&nbsp;(multi?=&apos;*&apos;)?;<br /><br />QualifiedName:<br />&nbsp;&nbsp;ID&nbsp;(&apos;.&apos;&nbsp;ID)*;<br />&nbsp;&nbsp;<br />QualifiedNameWithWildCard:<br />&nbsp;&nbsp;QualifiedName&nbsp;&apos;.*&apos;?;<br />
+<span class="keyword">grammar</span>&nbsp;org.eclipse.xtext.example.Domainmodel&nbsp;<br />&nbsp;&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals<br /><br /><span class="keyword">generate</span>&nbsp;domainmodel&nbsp;"http://www.eclipse.org/xtext/example/Domainmodel"<br /><br />DomainModel:<br />&nbsp;&nbsp;(elements+=AbstractElement)*;<br /><br />AbstractElement:<br />&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Type&nbsp;|&nbsp;Import;<br />&nbsp;&nbsp;<br />Import:<br />&nbsp;&nbsp;&apos;<span class="keyword">import</span>&apos;&nbsp;importedNamespace=QualifiedNameWithWildCard;<br /><br />PackageDeclaration:<br />&nbsp;&nbsp;&apos;package&apos;&nbsp;name=QualifiedName&nbsp;&apos;{&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;(elements+=AbstractElement)*<br />&nbsp;&nbsp;&apos;}&apos;;<br /><br />Type:<br />&nbsp;&nbsp;Entity&nbsp;|&nbsp;DataType;<br /><br />DataType:<br />&nbsp;&nbsp;&apos;datatype&apos;&nbsp;name=ID;<br /><br />Entity:<br />&nbsp;&nbsp;&apos;entity&apos;&nbsp;name=ID&nbsp;(&apos;extends&apos;&nbsp;superType=[Entity|QualifiedName])?&nbsp;&apos;{&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;(features+=Feature)*<br />&nbsp;&nbsp;&apos;}&apos;;<br /><br />Feature:<br />&nbsp;&nbsp;name=ID&nbsp;&apos;:&apos;&nbsp;type=TypeRef;<br /><br />TypeRef:<br />&nbsp;&nbsp;referenced=[Type|QualifiedName]&nbsp;(multi?=&apos;*&apos;)?;<br /><br />QualifiedName:<br />&nbsp;&nbsp;ID&nbsp;(&apos;.&apos;&nbsp;ID)*;<br />&nbsp;&nbsp;<br />QualifiedNameWithWildCard:<br />&nbsp;&nbsp;QualifiedName&nbsp;&apos;.*&apos;?;<br />
 </p>
 </div>
 </div>
@@ -986,7 +1081,7 @@ load a model into memory (and also save them):
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">new</span>&nbsp;DomainmodelStandaloneSetup().createInjectorAndDoEMFRegistration();<br /><br />ResourceSet&nbsp;rs&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ResourceSetImpl();<br />Resource&nbsp;resource&nbsp;=&nbsp;rs.getResource(URI.createURI(&quot;./mymodel.dmodel&quot;),&nbsp;true);<br />EObject&nbsp;eobject&nbsp;=&nbsp;resource.getContents().get(0);<br />&nbsp;
+<span class="keyword">new</span>&nbsp;DomainmodelStandaloneSetup().createInjectorAndDoEMFRegistration();<br /><br />ResourceSet&nbsp;rs&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ResourceSetImpl();<br />Resource&nbsp;resource&nbsp;=&nbsp;rs.getResource(URI.createURI("./mymodel.dmodel"),&nbsp;true);<br />EObject&nbsp;eobject&nbsp;=&nbsp;resource.getContents().get(0);<br />&nbsp;
 </p>
 </div>
 </div>
@@ -1028,7 +1123,7 @@ The second parameter denotes whether the resource should automatically be loaded
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;rs.getResource(URI.createURI(&quot;./mymodel.dmodel&quot;),&nbsp;false);<br />resource.load(null);<br />
+&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;rs.getResource(URI.createURI("./mymodel.dmodel"),&nbsp;false);<br />resource.load(null);<br />
 </p>
 </div>
 </div>
@@ -1095,7 +1190,7 @@ with EObjects in a generic way.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-assertEquals(&quot;DomainModel&quot;,&nbsp;eobject.eClass().getName());<br />&nbsp;
+assertEquals("DomainModel",&nbsp;eobject.eClass().getName());<br />&nbsp;
 </p>
 </div>
 </div>
@@ -1131,7 +1226,7 @@ The generated Java types provide getter and setter methods for each <em>EAttribu
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-EList&lt;AbstractElement&gt;&nbsp;elements&nbsp;=&nbsp;domainModel.getElements();<br /><span class="keyword">for</span>&nbsp;(AbstractElement&nbsp;abstractElement&nbsp;:&nbsp;elements)&nbsp;{<br />&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(abstractElement&nbsp;<span class="keyword">instanceof</span>&nbsp;Entity)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;Entity&nbsp;entity&nbsp;=&nbsp;((Entity)abstractElement);<br />&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(&quot;entity&nbsp;&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;entity.getName()<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;&quot;&nbsp;<span class="keyword">extends</span>&nbsp;&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;entity.getSuperType().getName());<br />&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(abstractElement&nbsp;<span class="keyword">instanceof</span>&nbsp;PackageDeclaration)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PackageDeclaration&nbsp;pkgDecl&nbsp;=&nbsp;(PackageDeclaration)&nbsp;abstractElement;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(&quot;<span class="keyword">package</span>&nbsp;&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;pkgDecl.getName());<br />&nbsp;&nbsp;}<br />}<br />
+EList&lt;AbstractElement&gt;&nbsp;elements&nbsp;=&nbsp;domainModel.getElements();<br /><span class="keyword">for</span>&nbsp;(AbstractElement&nbsp;abstractElement&nbsp;:&nbsp;elements)&nbsp;{<br />&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(abstractElement&nbsp;<span class="keyword">instanceof</span>&nbsp;Entity)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;Entity&nbsp;entity&nbsp;=&nbsp;((Entity)abstractElement);<br />&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("entity&nbsp;"<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;entity.getName()<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;"&nbsp;extends&nbsp;"<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;entity.getSuperType().getName());<br />&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(abstractElement&nbsp;<span class="keyword">instanceof</span>&nbsp;PackageDeclaration)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PackageDeclaration&nbsp;pkgDecl&nbsp;=&nbsp;(PackageDeclaration)&nbsp;abstractElement;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("package&nbsp;"<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;pkgDecl.getName());<br />&nbsp;&nbsp;}<br />}<br />
 </p>
 </div>
 </div>
@@ -1196,9 +1291,9 @@ In addition to the text <em>LeafNodes</em> also hold information about the line,
 <p>
 The other node type is called <em>CompositeNode</em> and is created for almost each grammar element. A composite node can contain other composite nodes and leaf nodes.
 The super type of both node types is <em>AbstractNode</em>. One can find a couple of convenience methods in 
-<em>org.eclipse.xtext.parsetree.NodeUtil</em>
+<em></em>
  and 
-<em>org.eclipse.xtext.parsetree.ParseTreeUtil</em>
+<em></em>
 .
 </p>
 
@@ -1231,7 +1326,7 @@ the element from the grammar which was responsible for parsing or lexing that no
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-DomainModel&nbsp;domainModel&nbsp;=&nbsp;(DomainModel)&nbsp;eObject;<br />CompositeNode&nbsp;node&nbsp;=&nbsp;NodeUtil.getNode(domainModel);<br />ParserRule&nbsp;parserRule&nbsp;=&nbsp;(ParserRule)&nbsp;node.getGrammarElement();<br />assertEquals(&quot;DomainModel&quot;,&nbsp;parserRule.getName());<br />
+DomainModel&nbsp;domainModel&nbsp;=&nbsp;(DomainModel)&nbsp;eObject;<br />CompositeNode&nbsp;node&nbsp;=&nbsp;NodeUtil.getNode(domainModel);<br />ParserRule&nbsp;parserRule&nbsp;=&nbsp;(ParserRule)&nbsp;node.getGrammarElement();<br />assertEquals("DomainModel",&nbsp;parserRule.getName());<br />
 </p>
 </div>
 </div>
@@ -1341,9 +1436,10 @@ diagram illustrates the four different kinds of models.
 
 <p>
 <div class="image" >
-<img src="images/xtext_data_structures.png" class=" width:50%" />
+<img src="images/xtext_data_structures.png" class=""  style="width:50%" />
  
 </div>
+
 </p>
 
 
@@ -1439,7 +1535,7 @@ a result created a third project for us in the workspace. If you&apos;ve followe
 
 <p>
 <div class="image" >
-<img src="images/generator-project.png" class=" width:50%" />
+<img src="images/generator-project.png" class=" "  style="width:50%" />
  
 </div>
 </p>
@@ -1513,7 +1609,7 @@ Let&apos;s have a look at the MWE2 file as generated by the wizard:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">module</span>&nbsp;workflow.DomainmodelGenerator<br /><br /><span class="keyword">import</span>&nbsp;org.eclipse.emf.mwe.utils.*<br /><br /><span class="keyword">var</span>&nbsp;targetDir&nbsp;=&nbsp;&quot;src-gen&quot;<br /><span class="keyword">var</span>&nbsp;fileEncoding&nbsp;=&nbsp;&quot;ISO-8859-1&quot;<br /><span class="keyword">var</span>&nbsp;modelPath&nbsp;=&nbsp;&quot;src/model&quot;<br /><br />Workflow&nbsp;{<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;org.eclipse.xtext.mwe.Reader&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;lookup&nbsp;all&nbsp;resources&nbsp;on&nbsp;the&nbsp;classpath<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;useJavaClassPath&nbsp;=&nbsp;<span class="keyword">true</span><br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;or&nbsp;define&nbsp;search&nbsp;scope&nbsp;explicitly<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path&nbsp;=&nbsp;modelPath<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;this&nbsp;class&nbsp;will&nbsp;be&nbsp;generated&nbsp;by&nbsp;the&nbsp;xtext&nbsp;generator&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;register&nbsp;=&nbsp;org.eclipse.xtext.example.DomainmodelStandaloneSetup&nbsp;{}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;load&nbsp;=&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;slot&nbsp;=&nbsp;&quot;greetings&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;&quot;Greeting&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;org.eclipse.xpand2.Generator&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expand&nbsp;=&nbsp;&quot;templates::Template::main&nbsp;FOREACH&nbsp;greetings&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outlet&nbsp;=&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path&nbsp;=&nbsp;targetDir<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fileEncoding&nbsp;=&nbsp;fileEncoding<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />
+<span class="keyword">module</span>&nbsp;workflow.DomainmodelGenerator<br /><br /><span class="keyword">import</span>&nbsp;org.eclipse.emf.mwe.utils.*<br /><br /><span class="keyword">var</span>&nbsp;targetDir&nbsp;=&nbsp;"src-gen"<br /><span class="keyword">var</span>&nbsp;fileEncoding&nbsp;=&nbsp;"ISO-8859-1"<br /><span class="keyword">var</span>&nbsp;modelPath&nbsp;=&nbsp;"src/model"<br /><br />Workflow&nbsp;{<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;org.eclipse.xtext.mwe.Reader&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;lookup&nbsp;all&nbsp;resources&nbsp;on&nbsp;the&nbsp;classpath<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;useJavaClassPath&nbsp;=&nbsp;<span class="keyword">true</span><br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;or&nbsp;define&nbsp;search&nbsp;scope&nbsp;explicitly<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path&nbsp;=&nbsp;modelPath<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;this&nbsp;class&nbsp;will&nbsp;be&nbsp;generated&nbsp;by&nbsp;the&nbsp;xtext&nbsp;generator&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;register&nbsp;=&nbsp;org.eclipse.xtext.example.DomainmodelStandaloneSetup&nbsp;{}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;load&nbsp;=&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;slot&nbsp;=&nbsp;"greetings"<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;"Greeting"<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;org.eclipse.xpand2.Generator&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expand&nbsp;=&nbsp;"templates::Template::main&nbsp;FOREACH&nbsp;greetings"<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outlet&nbsp;=&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path&nbsp;=&nbsp;targetDir<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fileEncoding&nbsp;=&nbsp;fileEncoding<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />
 </p>
 </div>
 </div>
@@ -1577,7 +1673,7 @@ name, too:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">module</span>&nbsp;workflow.DomainmodelGenerator<br /><br /><span class="keyword">import</span>&nbsp;org.eclipse.emf.mwe.utils.*<br /><br /><span class="keyword">var</span>&nbsp;targetDir&nbsp;=&nbsp;&quot;src-gen&quot;<br /><span class="keyword">var</span>&nbsp;fileEncoding&nbsp;=&nbsp;&quot;ISO-8859-1&quot;<br /><span class="keyword">var</span>&nbsp;modelPath&nbsp;=&nbsp;&quot;src/model&quot;<br /><br />Workflow&nbsp;{<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;org.eclipse.xtext.mwe.Reader&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;lookup&nbsp;all&nbsp;resources&nbsp;on&nbsp;the&nbsp;classpath<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;useJavaClassPath&nbsp;=&nbsp;<span class="keyword">true</span><br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;or&nbsp;define&nbsp;search&nbsp;scope&nbsp;explicitly<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path&nbsp;=&nbsp;modelPath<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;this&nbsp;class&nbsp;will&nbsp;be&nbsp;generated&nbsp;by&nbsp;the&nbsp;xtext&nbsp;generator&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;register&nbsp;=&nbsp;org.eclipse.xtext.example.DomainmodelStandaloneSetup&nbsp;{}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;load&nbsp;=&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;slot&nbsp;=&nbsp;&quot;entities&quot;&nbsp;//changed&nbsp;to&nbsp;entities<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;&quot;Entity&quot;&nbsp;&nbsp;&nbsp;//changed&nbsp;to&nbsp;Entity<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;org.eclipse.xpand2.Generator&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expand&nbsp;=&nbsp;&quot;templates::Template::main&nbsp;FOREACH&nbsp;entities&quot;&nbsp;//changed&nbsp;to&nbsp;entities<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outlet&nbsp;=&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path&nbsp;=&nbsp;targetDir<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fileEncoding&nbsp;=&nbsp;fileEncoding<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />
+<span class="keyword">module</span>&nbsp;workflow.DomainmodelGenerator<br /><br /><span class="keyword">import</span>&nbsp;org.eclipse.emf.mwe.utils.*<br /><br /><span class="keyword">var</span>&nbsp;targetDir&nbsp;=&nbsp;"src-gen"<br /><span class="keyword">var</span>&nbsp;fileEncoding&nbsp;=&nbsp;"ISO-8859-1"<br /><span class="keyword">var</span>&nbsp;modelPath&nbsp;=&nbsp;"src/model"<br /><br />Workflow&nbsp;{<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;org.eclipse.xtext.mwe.Reader&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;lookup&nbsp;all&nbsp;resources&nbsp;on&nbsp;the&nbsp;classpath<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;useJavaClassPath&nbsp;=&nbsp;<span class="keyword">true</span><br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;or&nbsp;define&nbsp;search&nbsp;scope&nbsp;explicitly<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path&nbsp;=&nbsp;modelPath<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;this&nbsp;class&nbsp;will&nbsp;be&nbsp;generated&nbsp;by&nbsp;the&nbsp;xtext&nbsp;generator&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;register&nbsp;=&nbsp;org.eclipse.xtext.example.DomainmodelStandaloneSetup&nbsp;{}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;load&nbsp;=&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;slot&nbsp;=&nbsp;"entities"&nbsp;//changed&nbsp;to&nbsp;entities<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;"Entity"&nbsp;&nbsp;&nbsp;//changed&nbsp;to&nbsp;Entity<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;org.eclipse.xpand2.Generator&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expand&nbsp;=&nbsp;"templates::Template::main&nbsp;FOREACH&nbsp;entities"&nbsp;//changed&nbsp;to&nbsp;entities<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outlet&nbsp;=&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path&nbsp;=&nbsp;targetDir<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fileEncoding&nbsp;=&nbsp;fileEncoding<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />
 </p>
 </div>
 </div>
@@ -1614,7 +1710,7 @@ Please open that file and replace its contents with the following Xpand code:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-«<span class="keyword">IMPORT</span>&nbsp;org::eclipse::xtext::example::domainmodel»<br />«<span class="keyword">EXTENSION</span>&nbsp;templates::Extensions»<br /><br />«<span class="keyword">DEFINE</span>&nbsp;main&nbsp;<span class="keyword">FOR</span>&nbsp;Entity-»<br />«<span class="keyword">FILE</span>&nbsp;qualifiedName().replaceAll(&quot;\\.&quot;,&quot;/&quot;)+&quot;.java&quot;-»<br />package&nbsp;«packageName()»;<br /><br />public&nbsp;class&nbsp;«name»&nbsp;«IF&nbsp;superType&nbsp;!=&nbsp;null»&nbsp;extends&nbsp;«superType.name»«ENDIF»{<br />&nbsp;&nbsp;«<span class="keyword">EXPAND</span>&nbsp;property&nbsp;<span class="keyword">FOREACH</span>&nbsp;features»<br />}<br />«<span class="keyword">ENDFILE</span>»<br />«<span class="keyword">ENDDEFINE</span>»<br /><br />«<span class="keyword">DEFINE</span>&nbsp;property&nbsp;<span class="keyword">FOR</span>&nbsp;Feature»<br />&nbsp;&nbsp;private&nbsp;«type.referenced.qualifiedName()»&nbsp;«name»;<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;public&nbsp;void&nbsp;set«name.toFirstUpper()»(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«type.referenced.qualifiedName()»&nbsp;«name»)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.«name»&nbsp;=&nbsp;«name»;<br />&nbsp;&nbsp;}&nbsp;<br />&nbsp;&nbsp;public&nbsp;«type.referenced.qualifiedName()»&nbsp;get«name.toFirstUpper()»()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;«name»;<br />&nbsp;&nbsp;}&nbsp;<br />«<span class="keyword">ENDDEFINE</span>»<br />
+Ç<span class="keyword">IMPORT</span>&nbsp;org::eclipse::xtext::example::domainmodelÈ<br />Ç<span class="keyword">EXTENSION</span>&nbsp;templates::ExtensionsÈ<br /><br />Ç<span class="keyword">DEFINE</span>&nbsp;main&nbsp;<span class="keyword">FOR</span>&nbsp;Entity-È<br />Ç<span class="keyword">FILE</span>&nbsp;qualifiedName().replaceAll("\\.","/")+".java"-È<br />package&nbsp;ÇpackageName()È;<br /><br />public&nbsp;class&nbsp;ÇnameÈ&nbsp;ÇIF&nbsp;superType&nbsp;!=&nbsp;nullÈ&nbsp;extends&nbsp;ÇsuperType.nameÈÇENDIFÈ{<br />&nbsp;&nbsp;Ç<span class="keyword">EXPAND</span>&nbsp;property&nbsp;<span class="keyword">FOREACH</span>&nbsp;featuresÈ<br />}<br />Ç<span class="keyword">ENDFILE</span>È<br />Ç<span class="keyword">ENDDEFINE</span>È<br /><br />Ç<span class="keyword">DEFINE</span>&nbsp;property&nbsp;<span class="keyword">FOR</span>&nbsp;FeatureÈ<br />&nbsp;&nbsp;private&nbsp;Çtype.referenced.qualifiedName()È&nbsp;ÇnameÈ;<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;public&nbsp;void&nbsp;setÇname.toFirstUpper()È(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Çtype.referenced.qualifiedName()È&nbsp;ÇnameÈ)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.ÇnameÈ&nbsp;=&nbsp;ÇnameÈ;<br />&nbsp;&nbsp;}&nbsp;<br />&nbsp;&nbsp;public&nbsp;Çtype.referenced.qualifiedName()È&nbsp;getÇname.toFirstUpper()È()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;ÇnameÈ;<br />&nbsp;&nbsp;}&nbsp;<br />Ç<span class="keyword">ENDDEFINE</span>È<br />
 </p>
 </div>
 </div>
@@ -1639,7 +1735,7 @@ for one or more arguments. The general syntax is as follows:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-&nbsp;«<span class="keyword">DEFINE</span>&nbsp;name(ArgType1&nbsp;arg1,&nbsp;ArgType2&nbsp;arg2)&nbsp;<span class="keyword">FOR</span>&nbsp;MainArgType»<br />
+&nbsp;Ç<span class="keyword">DEFINE</span>&nbsp;name(ArgType1&nbsp;arg1,&nbsp;ArgType2&nbsp;arg2)&nbsp;<span class="keyword">FOR</span>&nbsp;MainArgTypeÈ<br />
 </p>
 </div>
 </div>
@@ -1663,7 +1759,7 @@ current contents by the following snippet:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">import</span>&nbsp;org::eclipse::xtext::example::domainmodel;<br /><br />packageName(Type&nbsp;<span class="keyword">this</span>)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;qualifiedName(eContainer());<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />packageName(Void&nbsp;<span class="keyword">this</span>)&nbsp;:&nbsp;null;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />String&nbsp;qualifiedName(Object&nbsp;<span class="keyword">this</span>)&nbsp;:&nbsp;null;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />String&nbsp;qualifiedName(Type&nbsp;<span class="keyword">this</span>)&nbsp;:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;packageName()==null?&nbsp;name&nbsp;:&nbsp;packageName()+&quot;.&quot;+name;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />String&nbsp;qualifiedName(PackageDeclaration&nbsp;<span class="keyword">this</span>)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;qualifiedName(eContainer())==null&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">then</span>&nbsp;name<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span>&nbsp;qualifiedName(eContainer())+&apos;.&apos;+name;<br />
+<span class="keyword">import</span>&nbsp;org::eclipse::xtext::example::domainmodel;<br /><br />packageName(Type&nbsp;<span class="keyword">this</span>)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;qualifiedName(eContainer());<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />packageName(Void&nbsp;<span class="keyword">this</span>)&nbsp;:&nbsp;null;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />String&nbsp;qualifiedName(Object&nbsp;<span class="keyword">this</span>)&nbsp;:&nbsp;null;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />String&nbsp;qualifiedName(Type&nbsp;<span class="keyword">this</span>)&nbsp;:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;packageName()==null?&nbsp;name&nbsp;:&nbsp;packageName()+"."+name;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />String&nbsp;qualifiedName(PackageDeclaration&nbsp;<span class="keyword">this</span>)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;qualifiedName(eContainer())==null&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">then</span>&nbsp;name<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span>&nbsp;qualifiedName(eContainer())+&apos;.&apos;+name;<br />
 </p>
 </div>
 </div>

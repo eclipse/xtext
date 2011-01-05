@@ -21,7 +21,7 @@ of the UI more clearly. The used example grammar is as follows:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-grammar&nbsp;org.eclipse.text.documentation.Sample&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;org.eclipse.xtext.common.Terminals<br /><br />generate&nbsp;gen&nbsp;&apos;http://www.eclipse.org/xtext/documentation/Sample&apos;<br /><br />Model&nbsp;:<br />&nbsp;&nbsp;&quot;model&quot;&nbsp;intAttribute=INT&nbsp;(stringDescription=STRING)?&nbsp;&quot;{&quot;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(rules&nbsp;+=&nbsp;AbstractRule)*&nbsp;<br />&nbsp;&nbsp;&quot;}&quot;&nbsp;<br />;<br /><br />AbstractRule:<br />&nbsp;&nbsp;RuleA&nbsp;|&nbsp;RuleB<br />;<br /><br />RuleA&nbsp;:<br />&nbsp;&nbsp;&nbsp;&quot;RuleA&quot;&nbsp;&quot;(&quot;&nbsp;name&nbsp;=&nbsp;ID&nbsp;&quot;)&quot;&nbsp;;<br /><br />RuleB&nbsp;return&nbsp;gen::CustomType:<br />&nbsp;&nbsp;&nbsp;&quot;RuleB&quot;&nbsp;&quot;(&quot;&nbsp;ruleA&nbsp;=&nbsp;[RuleA]&nbsp;&quot;)&quot;&nbsp;;<br />
+<span class="keyword">grammar</span>&nbsp;org.eclipse.text.documentation.Sample&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals<br /><br /><span class="keyword">generate</span>&nbsp;gen&nbsp;&apos;http://www.eclipse.org/xtext/documentation/Sample&apos;<br /><br />Model&nbsp;:<br />&nbsp;&nbsp;"model"&nbsp;intAttribute=INT&nbsp;(stringDescription=STRING)?&nbsp;"{"&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(rules&nbsp;+=&nbsp;AbstractRule)*&nbsp;<br />&nbsp;&nbsp;"}"&nbsp;<br />;<br /><br />AbstractRule:<br />&nbsp;&nbsp;RuleA&nbsp;|&nbsp;RuleB<br />;<br /><br />RuleA&nbsp;:<br />&nbsp;&nbsp;&nbsp;"RuleA"&nbsp;"("&nbsp;name&nbsp;=&nbsp;ID&nbsp;")"&nbsp;;<br /><br />RuleB&nbsp;return&nbsp;gen::CustomType:<br />&nbsp;&nbsp;&nbsp;"RuleB"&nbsp;"("&nbsp;ruleA&nbsp;=&nbsp;[RuleA]&nbsp;")"&nbsp;;<br />
 </p>
 </div>
 </div>
@@ -187,7 +187,7 @@ the <em>DefaultEObjectLabelProvider</em>.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;SampleLabelProvider&nbsp;<span class="keyword">extends</span>&nbsp;DefaultLabelProvider&nbsp;{<br /><br />&nbsp;&nbsp;String&nbsp;text(RuleA&nbsp;rule)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;&quot;Rule:&nbsp;&quot;&nbsp;+&nbsp;rule.getName();<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;String&nbsp;image(RuleA&nbsp;rule)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;&quot;ruleA.gif&quot;;<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;String&nbsp;image(RuleB&nbsp;rule)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;&quot;ruleB.gif&quot;;<br />&nbsp;&nbsp;}<br />}<br />&nbsp;&nbsp;&nbsp;&nbsp;
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;SampleLabelProvider&nbsp;<span class="keyword">extends</span>&nbsp;DefaultLabelProvider&nbsp;{<br /><br />&nbsp;&nbsp;String&nbsp;text(RuleA&nbsp;rule)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;"Rule:&nbsp;"&nbsp;+&nbsp;rule.getName();<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;String&nbsp;image(RuleA&nbsp;rule)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;"ruleA.gif";<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;String&nbsp;image(RuleB&nbsp;rule)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;"ruleB.gif";<br />&nbsp;&nbsp;}<br />}<br />&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 </div>
 </div>
@@ -403,7 +403,7 @@ model with the intAttribute &apos;7&apos;
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;completeModel_StringDescription&nbsp;(<br />&nbsp;&nbsp;Model&nbsp;model,&nbsp;<br />&nbsp;&nbsp;Assignment&nbsp;assignment,&nbsp;<br />&nbsp;&nbsp;ContentAssistContext&nbsp;context,&nbsp;<br />&nbsp;&nbsp;ICompletionProposalAcceptor&nbsp;acceptor)&nbsp;{<br />&nbsp;&nbsp;//&nbsp;call&nbsp;implementation&nbsp;in&nbsp;superclass<br />&nbsp;&nbsp;<span class="keyword">super</span>.completeModel_StringDescription(<br />&nbsp;&nbsp;&nbsp;&nbsp;model,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;assignment,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;context,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;acceptor);<br /><br />&nbsp;&nbsp;//&nbsp;compute&nbsp;the&nbsp;plain&nbsp;proposal<br />&nbsp;&nbsp;String&nbsp;proposal&nbsp;=&nbsp;&quot;Description&nbsp;<span class="keyword">for</span>&nbsp;model&nbsp;#&quot;&nbsp;+&nbsp;model.getIntAttribute();<br /><br />&nbsp;&nbsp;//&nbsp;convert&nbsp;it&nbsp;to&nbsp;a&nbsp;valid&nbsp;STRING-terminal<br />&nbsp;&nbsp;proposal&nbsp;=&nbsp;getValueConverter().toString(proposal,&nbsp;&quot;STRING&quot;);<br /><br />&nbsp;&nbsp;//&nbsp;create&nbsp;the&nbsp;completion&nbsp;proposal<br />&nbsp;&nbsp;//&nbsp;the&nbsp;result&nbsp;may&nbsp;be&nbsp;null&nbsp;as&nbsp;the&nbsp;createCompletionProposal(..)&nbsp;methods&nbsp;<br />&nbsp;&nbsp;//&nbsp;check&nbsp;<span class="keyword">for</span>&nbsp;valid&nbsp;prefixes<br />&nbsp;&nbsp;//&nbsp;and&nbsp;terminal&nbsp;token&nbsp;conflicts<br />&nbsp;&nbsp;ICompletionProposal&nbsp;completionProposal&nbsp;=&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;createCompletionProposal(proposal,&nbsp;context);<br /><br />&nbsp;&nbsp;//&nbsp;register&nbsp;the&nbsp;proposal,&nbsp;the&nbsp;acceptor&nbsp;handles&nbsp;null-values&nbsp;gracefully<br />&nbsp;&nbsp;acceptor.accept(completionProposal);<br />}
+<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;completeModel_StringDescription&nbsp;(<br />&nbsp;&nbsp;Model&nbsp;model,&nbsp;<br />&nbsp;&nbsp;Assignment&nbsp;assignment,&nbsp;<br />&nbsp;&nbsp;ContentAssistContext&nbsp;context,&nbsp;<br />&nbsp;&nbsp;ICompletionProposalAcceptor&nbsp;acceptor)&nbsp;{<br />&nbsp;&nbsp;//&nbsp;call&nbsp;implementation&nbsp;in&nbsp;superclass<br />&nbsp;&nbsp;<span class="keyword">super</span>.completeModel_StringDescription(<br />&nbsp;&nbsp;&nbsp;&nbsp;model,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;assignment,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;context,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;acceptor);<br /><br />&nbsp;&nbsp;//&nbsp;compute&nbsp;the&nbsp;plain&nbsp;proposal<br />&nbsp;&nbsp;String&nbsp;proposal&nbsp;=&nbsp;"Description&nbsp;for&nbsp;model&nbsp;#"&nbsp;+&nbsp;model.getIntAttribute();<br /><br />&nbsp;&nbsp;//&nbsp;convert&nbsp;it&nbsp;to&nbsp;a&nbsp;valid&nbsp;STRING-terminal<br />&nbsp;&nbsp;proposal&nbsp;=&nbsp;getValueConverter().toString(proposal,&nbsp;"STRING");<br /><br />&nbsp;&nbsp;//&nbsp;create&nbsp;the&nbsp;completion&nbsp;proposal<br />&nbsp;&nbsp;//&nbsp;the&nbsp;result&nbsp;may&nbsp;be&nbsp;null&nbsp;as&nbsp;the&nbsp;createCompletionProposal(..)&nbsp;methods&nbsp;<br />&nbsp;&nbsp;//&nbsp;check&nbsp;<span class="keyword">for</span>&nbsp;valid&nbsp;prefixes<br />&nbsp;&nbsp;//&nbsp;and&nbsp;terminal&nbsp;token&nbsp;conflicts<br />&nbsp;&nbsp;ICompletionProposal&nbsp;completionProposal&nbsp;=&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;createCompletionProposal(proposal,&nbsp;context);<br /><br />&nbsp;&nbsp;//&nbsp;register&nbsp;the&nbsp;proposal,&nbsp;the&nbsp;acceptor&nbsp;handles&nbsp;null-values&nbsp;gracefully<br />&nbsp;&nbsp;acceptor.accept(completionProposal);<br />}
 </p>
 </div>
 </div>
@@ -445,7 +445,7 @@ specific <em>code</em> with the diagnostic.
 <p>
 In the following example taken from the <em>DomainmodelJavaValidator</em> 
 the diagnostic&apos;s <em>code</em> is given by the third argument to the <em>warning()</em> method and it is a reference 
-to the static <em>String</em> field <em>==INVALID</em>TYPE_NAME==_ in the validator class.
+to the static <em>String</em> field <em>INVALID_TYPE_NAME</em> in the validator class.
 </p>
 
 <p>
@@ -453,7 +453,7 @@ to the static <em>String</em> field <em>==INVALID</em>TYPE_NAME==_ in the valida
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-warning(&quot;Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital&quot;,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.TYPE__NAME,&nbsp;INVALID_TYPE_NAME,&nbsp;type.getName());<br />
+warning("Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital",&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.TYPE__NAME,&nbsp;INVALID_TYPE_NAME,&nbsp;type.getName());<br />
 </p>
 </div>
 </div>
@@ -468,11 +468,11 @@ We start by adding the
 <em>org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment</em>
  
 to our workflow and after regenerating the code we should find an empty class <em>MyDslQuickfixProvider</em> 
-in our DSL&apos;s UI project and new entries in the <em>==plugin.xml</em>gen==_ file.
+in our DSL&apos;s UI project and new entries in the <em>plugin.xml_gen</em> file.
 </p>
 
 <p>
-Continuing with the <em>==INVALID</em>TYPE_NAME==_ problem from the Domainmodel example we add a method with which 
+Continuing with the <em>INVALID_TYPE_NAME</em> problem from the Domainmodel example we add a method with which 
 the problem can be fixed (have a look at the <em>DomainmodelQuickfixProvider</em> for details):
 </p>
 
@@ -481,7 +481,7 @@ the problem can be fixed (have a look at the <em>DomainmodelQuickfixProvider</em
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME)<br /><span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;fixName(<span class="keyword">final</span>&nbsp;Issue&nbsp;issue,&nbsp;IssueResolutionAcceptor&nbsp;acceptor)&nbsp;{<br />&nbsp;&nbsp;acceptor.accept(issue,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&quot;Capitalize&nbsp;name&quot;,&nbsp;//&nbsp;quick&nbsp;fix&nbsp;label<br />&nbsp;&nbsp;&nbsp;&nbsp;&quot;Capitalize&nbsp;name&nbsp;&nbsp;of&nbsp;&apos;&quot;&nbsp;+&nbsp;issue.getData()[0]&nbsp;+&nbsp;&quot;&apos;&quot;,&nbsp;&nbsp;//&nbsp;description&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&quot;upcase.png&quot;,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;quick&nbsp;fix&nbsp;icon<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;IModification()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;apply(IModificationContext&nbsp;context)&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throws</span>&nbsp;BadLocationException&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IXtextDocument&nbsp;xtextDocument&nbsp;=&nbsp;context.getXtextDocument();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;firstLetter&nbsp;=&nbsp;xtextDocument.get(issue.getOffset(),&nbsp;1);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xtextDocument.replace(issue.getOffset(),&nbsp;1,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings.toFirstUpper(firstLetter));<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;);<br />}<br />
+@Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME)<br /><span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;fixName(<span class="keyword">final</span>&nbsp;Issue&nbsp;issue,&nbsp;IssueResolutionAcceptor&nbsp;acceptor)&nbsp;{<br />&nbsp;&nbsp;acceptor.accept(issue,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;"Capitalize&nbsp;name",&nbsp;//&nbsp;quick&nbsp;fix&nbsp;label<br />&nbsp;&nbsp;&nbsp;&nbsp;"Capitalize&nbsp;name&nbsp;&nbsp;of&nbsp;&apos;"&nbsp;+&nbsp;issue.getData()[0]&nbsp;+&nbsp;"&apos;",&nbsp;&nbsp;//&nbsp;description&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;"upcase.png",&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;quick&nbsp;fix&nbsp;icon<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;IModification()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;apply(IModificationContext&nbsp;context)&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throws</span>&nbsp;BadLocationException&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IXtextDocument&nbsp;xtextDocument&nbsp;=&nbsp;context.getXtextDocument();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;firstLetter&nbsp;=&nbsp;xtextDocument.get(issue.getOffset(),&nbsp;1);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xtextDocument.replace(issue.getOffset(),&nbsp;1,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings.toFirstUpper(firstLetter));<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;);<br />}<br />
 </p>
 </div>
 </div>
@@ -537,7 +537,7 @@ The following snippet shows a semantic quick fix for a similar problem.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@Fix(DomainmodelJavaValidator.INVALID_FEATURE_NAME)<br /><span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;fixFeatureName(<span class="keyword">final</span>&nbsp;Issue&nbsp;issue,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IssueResolutionAcceptor&nbsp;acceptor)&nbsp;{<br />&nbsp;&nbsp;acceptor.accept(issue,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&quot;Uncapitalize&nbsp;name&quot;,&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;label<br />&nbsp;&nbsp;&nbsp;&nbsp;&quot;Uncapitalize&nbsp;name&nbsp;of&nbsp;&apos;&quot;&nbsp;+&nbsp;issue.getData()[0]&nbsp;+&nbsp;&quot;&apos;&quot;,&nbsp;//&nbsp;description<br />&nbsp;&nbsp;&nbsp;&nbsp;&quot;upcase.png&quot;,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;icon&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;ISemanticModification()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;apply(EObject&nbsp;element,&nbsp;IModificationContext&nbsp;context)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((Feature)&nbsp;element).setName(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings.toFirstLower(issue.getData()[0]));<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;);<br />}<br />
+@Fix(DomainmodelJavaValidator.INVALID_FEATURE_NAME)<br /><span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;fixFeatureName(<span class="keyword">final</span>&nbsp;Issue&nbsp;issue,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IssueResolutionAcceptor&nbsp;acceptor)&nbsp;{<br />&nbsp;&nbsp;acceptor.accept(issue,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;"Uncapitalize&nbsp;name",&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;label<br />&nbsp;&nbsp;&nbsp;&nbsp;"Uncapitalize&nbsp;name&nbsp;of&nbsp;&apos;"&nbsp;+&nbsp;issue.getData()[0]&nbsp;+&nbsp;"&apos;",&nbsp;//&nbsp;description<br />&nbsp;&nbsp;&nbsp;&nbsp;"upcase.png",&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;icon&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;ISemanticModification()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;apply(EObject&nbsp;element,&nbsp;IModificationContext&nbsp;context)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((Feature)&nbsp;element).setName(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings.toFirstLower(issue.getData()[0]));<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;);<br />}<br />
 </p>
 </div>
 </div>
@@ -605,14 +605,14 @@ the generated UI-plug-in. This file contains templates in a format as described 
 
 <p>
 <div class="image" >
-<img src="images/preferences_templates.png" class=" " />
+<img src="images/preferences_templates.png" class=" "  style=" " />
  
 </div>
 </p>
 
 <p>
-By default Xtext registers <em>ContextTypes</em> for each rule (_[languageName].[RuleName]_) and for each 
-keyword (_[languageName].kw_[keyword]_). If you don&apos;t 
+By default Xtext registers <em>ContextTypes</em> for each rule (<em>[languageName].[RuleName]</em>) and for each 
+keyword (<em>[languageName].kw_[keyword]</em>). If you don&apos;t 
 like these defaults you&apos;ll have to subclass 
 
 <em>org.eclipse.xtext.ui.editor.templates.XtextTemplateContextTypeRegistry</em>
@@ -681,7 +681,7 @@ For example the following template:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-&lt;template&nbsp;name=&quot;transition&quot;&nbsp;description=&quot;event&nbsp;transition&quot;&nbsp;id=&quot;transition&quot;<br />&nbsp;&nbsp;context=&quot;org.eclipse.xtext.example.FowlerDsl.Transition&quot;&nbsp;enabled=&quot;true&quot;&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;${event:CrossReference(&apos;Transition.event&apos;)}&nbsp;=&gt;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${state:CrossReference(&apos;Transition.state&apos;)<br />&lt;/template&gt;<br />
+&lt;template&nbsp;name="transition"&nbsp;description="event&nbsp;transition"&nbsp;id="transition"<br />&nbsp;&nbsp;context="org.eclipse.xtext.example.FowlerDsl.Transition"&nbsp;enabled="true"&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;${event:CrossReference(&apos;Transition.event&apos;)}&nbsp;=&gt;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${state:CrossReference(&apos;Transition.state&apos;)<br />&lt;/template&gt;<br />
 </p>
 </div>
 </div>
@@ -695,7 +695,7 @@ yields the text <em>event =&gt; state</em> and allows selecting any events and s
 
 <p>
 <div class="image" >
-<img src="images/templates_crossref.png" class=" " />
+<img src="images/templates_crossref.png" class=" "  style=" " />
  
 </div>
 </p>
@@ -745,7 +745,7 @@ For example the following template (taken from the domainmodel example):
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-&lt;template&nbsp;name=&quot;Operation&quot;&nbsp;description=&quot;template&nbsp;for&nbsp;an&nbsp;Operation&quot;<br />&nbsp;&nbsp;id=&quot;org.eclipse.xtext.example.Domainmodel.Operation&quot;<br />&nbsp;&nbsp;context=&quot;org.eclipse.xtext.example.Domainmodel.Operation&quot;<br />&nbsp;&nbsp;enabled=&quot;true&quot;&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;${visibility:Enum(&apos;Visibility&apos;)}&nbsp;op&nbsp;${name}(${cursor}):<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${type:CrossReference(&apos;Operation.type&apos;)}<br />&lt;/template&gt;<br />
+&lt;template&nbsp;name="Operation"&nbsp;description="template&nbsp;for&nbsp;an&nbsp;Operation"<br />&nbsp;&nbsp;id="org.eclipse.xtext.example.Domainmodel.Operation"<br />&nbsp;&nbsp;context="org.eclipse.xtext.example.Domainmodel.Operation"<br />&nbsp;&nbsp;enabled="true"&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;${visibility:Enum(&apos;Visibility&apos;)}&nbsp;op&nbsp;${name}(${cursor}):<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${type:CrossReference(&apos;Operation.type&apos;)}<br />&lt;/template&gt;<br />
 </p>
 </div>
 </div>
@@ -761,7 +761,7 @@ are template variables.
 
 <p>
 <div class="image" >
-<img src="images/templates_enum.png" class=" " />
+<img src="images/templates_enum.png" class=" "  style=" " />
  
 </div>
 </p>
@@ -805,8 +805,7 @@ We redesigned the outline in 2.0. The following no longer reflects the current s
 
 
 <p>
-TODO: 
-Rewrite this section
+
 </p>
 
 <p>
@@ -818,7 +817,7 @@ the outline with the editor selection by clicking the <em>Link with Editor</em> 
 
 <p>
 <div class="image" >
-<img src="images/sample_outline.png" class=" " />
+<img src="images/sample_outline.png" class=" "  style=" " />
  
 </div>
 </p>
@@ -870,7 +869,7 @@ for each of the EClasses that are of interest:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslTransformer&nbsp;<span class="keyword">extends</span>&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;AbstractDeclarativeSemanticModelTransformer&nbsp;{&nbsp;<br />&nbsp;&nbsp;/**<br />&nbsp;&nbsp;&nbsp;*&nbsp;This&nbsp;method&nbsp;will&nbsp;be&nbsp;called&nbsp;by&nbsp;naming&nbsp;convention:<br />&nbsp;&nbsp;&nbsp;*&nbsp;-&nbsp;method&nbsp;name&nbsp;must&nbsp;be&nbsp;createNode<br />&nbsp;&nbsp;&nbsp;*&nbsp;-&nbsp;first&nbsp;param:&nbsp;subclass&nbsp;of&nbsp;EObject<br />&nbsp;&nbsp;&nbsp;*&nbsp;-&nbsp;second&nbsp;param:&nbsp;ContentOutlineNode&nbsp;<br />&nbsp;&nbsp;&nbsp;*/<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;ContentOutlineNode&nbsp;createNode(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Attribute&nbsp;semanticNode,&nbsp;ContentOutlineNode&nbsp;parentNode)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;ContentOutlineNode&nbsp;node&nbsp;=&nbsp;<span class="keyword">super</span>.newOutlineNode(semanticNode,&nbsp;parentNode);<br />&nbsp;&nbsp;&nbsp;&nbsp;node.setLabel(&quot;special&nbsp;&quot;&nbsp;+&nbsp;node.getLabel());<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;node;<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;ContentOutlineNode&nbsp;createNode(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Property&nbsp;semanticNode,&nbsp;ContentOutlineNode&nbsp;parentNode)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;ContentOutlineNode&nbsp;node&nbsp;=&nbsp;<span class="keyword">super</span>.newOutlineNode(semanticNode,&nbsp;parentNode);<br />&nbsp;&nbsp;&nbsp;&nbsp;node.setLabel(&quot;pimped&nbsp;&quot;&nbsp;+&nbsp;node.getLabel());<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;node;<br />&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;/**<br />&nbsp;&nbsp;&nbsp;*&nbsp;This&nbsp;method&nbsp;will&nbsp;be&nbsp;called&nbsp;by&nbsp;naming&nbsp;convention:<br />&nbsp;&nbsp;&nbsp;*&nbsp;-&nbsp;method&nbsp;name&nbsp;must&nbsp;be&nbsp;getChildren<br />&nbsp;&nbsp;&nbsp;*&nbsp;-&nbsp;first&nbsp;param:&nbsp;subclass&nbsp;of&nbsp;EObject<br />&nbsp;&nbsp;&nbsp;*/<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;List&lt;EObject&gt;&nbsp;getChildren(Attribute&nbsp;attribute)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;attribute.eContents();<br />&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;List&lt;EObject&gt;&nbsp;getChildren(Property&nbsp;property)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;NO_CHILDREN;<br />&nbsp;&nbsp;}<br />}<br />
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslTransformer&nbsp;<span class="keyword">extends</span>&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;AbstractDeclarativeSemanticModelTransformer&nbsp;{&nbsp;<br />&nbsp;&nbsp;/**<br />&nbsp;&nbsp;&nbsp;*&nbsp;This&nbsp;method&nbsp;will&nbsp;be&nbsp;called&nbsp;by&nbsp;naming&nbsp;convention:<br />&nbsp;&nbsp;&nbsp;*&nbsp;-&nbsp;method&nbsp;name&nbsp;must&nbsp;be&nbsp;createNode<br />&nbsp;&nbsp;&nbsp;*&nbsp;-&nbsp;first&nbsp;param:&nbsp;subclass&nbsp;of&nbsp;EObject<br />&nbsp;&nbsp;&nbsp;*&nbsp;-&nbsp;second&nbsp;param:&nbsp;ContentOutlineNode&nbsp;<br />&nbsp;&nbsp;&nbsp;*/<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;ContentOutlineNode&nbsp;createNode(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Attribute&nbsp;semanticNode,&nbsp;ContentOutlineNode&nbsp;parentNode)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;ContentOutlineNode&nbsp;node&nbsp;=&nbsp;<span class="keyword">super</span>.newOutlineNode(semanticNode,&nbsp;parentNode);<br />&nbsp;&nbsp;&nbsp;&nbsp;node.setLabel("special&nbsp;"&nbsp;+&nbsp;node.getLabel());<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;node;<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;ContentOutlineNode&nbsp;createNode(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Property&nbsp;semanticNode,&nbsp;ContentOutlineNode&nbsp;parentNode)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;ContentOutlineNode&nbsp;node&nbsp;=&nbsp;<span class="keyword">super</span>.newOutlineNode(semanticNode,&nbsp;parentNode);<br />&nbsp;&nbsp;&nbsp;&nbsp;node.setLabel("pimped&nbsp;"&nbsp;+&nbsp;node.getLabel());<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;node;<br />&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;/**<br />&nbsp;&nbsp;&nbsp;*&nbsp;This&nbsp;method&nbsp;will&nbsp;be&nbsp;called&nbsp;by&nbsp;naming&nbsp;convention:<br />&nbsp;&nbsp;&nbsp;*&nbsp;-&nbsp;method&nbsp;name&nbsp;must&nbsp;be&nbsp;getChildren<br />&nbsp;&nbsp;&nbsp;*&nbsp;-&nbsp;first&nbsp;param:&nbsp;subclass&nbsp;of&nbsp;EObject<br />&nbsp;&nbsp;&nbsp;*/<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;List&lt;EObject&gt;&nbsp;getChildren(Attribute&nbsp;attribute)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;attribute.eContents();<br />&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;List&lt;EObject&gt;&nbsp;getChildren(Property&nbsp;property)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;NO_CHILDREN;<br />&nbsp;&nbsp;}<br />}<br />
 </p>
 </div>
 </div>
@@ -971,7 +970,7 @@ handled correctly):
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;FilterFooAction&nbsp;<span class="keyword">extends</span>&nbsp;AbstractFilterAction&nbsp;{<br /><br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;FilterFooAction(XtextContentOutlinePage&nbsp;outlinePage)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>(&quot;Filter&nbsp;Foo&quot;,&nbsp;outlinePage);<br />&nbsp;&nbsp;&nbsp;&nbsp;setToolTipText(&quot;Show&nbsp;/&nbsp;hide&nbsp;foo&quot;);<br />&nbsp;&nbsp;&nbsp;&nbsp;setDescription(&quot;Show&nbsp;/&nbsp;hide&nbsp;foo&quot;);<br />&nbsp;&nbsp;&nbsp;&nbsp;setImageDescriptor(Activator.getImageDescriptor(&quot;icons/foo.gif&quot;));<br />&nbsp;&nbsp;&nbsp;&nbsp;setDisabledImageDescriptor(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Activator.getImageDescriptor(&quot;icons/foo.gif&quot;));<br />&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;@Override<br />&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;getToggleId()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;&quot;FilterFooAction.isChecked&quot;;<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;@Override<br />&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;ViewerFilter&nbsp;createFilter()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;FooOutlineFilter();<br />&nbsp;&nbsp;}<br /><br />}<br />
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;FilterFooAction&nbsp;<span class="keyword">extends</span>&nbsp;AbstractFilterAction&nbsp;{<br /><br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;FilterFooAction(XtextContentOutlinePage&nbsp;outlinePage)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>("Filter&nbsp;Foo",&nbsp;outlinePage);<br />&nbsp;&nbsp;&nbsp;&nbsp;setToolTipText("Show&nbsp;/&nbsp;hide&nbsp;foo");<br />&nbsp;&nbsp;&nbsp;&nbsp;setDescription("Show&nbsp;/&nbsp;hide&nbsp;foo");<br />&nbsp;&nbsp;&nbsp;&nbsp;setImageDescriptor(Activator.getImageDescriptor("icons/foo.gif"));<br />&nbsp;&nbsp;&nbsp;&nbsp;setDisabledImageDescriptor(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Activator.getImageDescriptor("icons/foo.gif"));<br />&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;@Override<br />&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;getToggleId()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;"FilterFooAction.isChecked";<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;@Override<br />&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;ViewerFilter&nbsp;createFilter()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;FooOutlineFilter();<br />&nbsp;&nbsp;}<br /><br />}<br />
 </p>
 </div>
 </div>
@@ -1095,7 +1094,7 @@ All we need to do is specify a list of types that we later want to bind context 
 
 <p>
 If you want to bind context menu actions to nodes representing <em>Attribute</em> and <em>Entity</em>, you need to 
-change the declaration of _types as follows:
+change the declaration of <em>types</em> as follows:
 </p>
 
 <p>
@@ -1140,7 +1139,7 @@ and the menu contribution:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-&lt;extension<br />&nbsp;&nbsp;point=&quot;org.eclipse.ui.commands&quot;&gt;<br />&nbsp;&nbsp;&lt;command<br />&nbsp;&nbsp;&nbsp;&nbsp;id=&quot;org.example.mydsl.ui.editor.outline.SampleOutlineCommand&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;name=&quot;Sample&nbsp;Command&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;description=&quot;Just&nbsp;a&nbsp;sample&nbsp;command&quot;&gt;<br />&nbsp;&nbsp;&lt;/command&gt;<br />&lt;/extension&gt;<br />
+&lt;extension&nbsp;point="org.eclipse.ui.commands"&gt;<br />&nbsp;&nbsp;&lt;command<br />&nbsp;&nbsp;&nbsp;&nbsp;id="org.example.mydsl.ui.editor.outline.SampleOutlineCommand"<br />&nbsp;&nbsp;&nbsp;&nbsp;name="Sample&nbsp;Command"<br />&nbsp;&nbsp;&nbsp;&nbsp;description="Just&nbsp;a&nbsp;sample&nbsp;command"&gt;<br />&nbsp;&nbsp;&lt;/command&gt;<br />&lt;/extension&gt;<br />
 </p>
 </div>
 </div>
@@ -1159,7 +1158,7 @@ attribute of your command.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-&lt;extension<br />&nbsp;&nbsp;point=&quot;org.eclipse.ui.handlers&quot;&gt;<br />&nbsp;&nbsp;&lt;handler<br />&nbsp;&nbsp;&nbsp;&nbsp;class=&quot;org.example.mydsl.ui.editor.outline.SampleOutlineNodeHandler&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;commandId=&quot;org.example.mydsl.ui.editor.outline.SampleOutlineCommand&quot;&gt;<br />&nbsp;&nbsp;&lt;/handler&gt;<br />&lt;/extension&gt;<br />
+&lt;extension<br />&nbsp;&nbsp;point="org.eclipse.ui.handlers"&gt;<br />&nbsp;&nbsp;&lt;handler<br />&nbsp;&nbsp;&nbsp;&nbsp;class="org.example.mydsl.ui.editor.outline.SampleOutlineNodeHandler"<br />&nbsp;&nbsp;&nbsp;&nbsp;commandId="org.example.mydsl.ui.editor.outline.SampleOutlineCommand"&gt;<br />&nbsp;&nbsp;&lt;/handler&gt;<br />&lt;/extension&gt;<br />
 </p>
 </div>
 </div>
@@ -1176,7 +1175,7 @@ Finally, define a <em>menuContribution</em> to add the command to the context me
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-&lt;extension<br />&nbsp;&nbsp;point=&quot;org.eclipse.ui.menus&quot;&gt;<br />&nbsp;&nbsp;&lt;menuContribution<br />&nbsp;&nbsp;&nbsp;&nbsp;locationURI=&quot;popup:org.eclipse.xtext.ui.outline?after=additions&quot;&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;command<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commandId=&quot;org.example.mydsl.ui.editor.outline.SampleOutlineCommand&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label=&quot;Sample&nbsp;action&nbsp;registered&nbsp;for&nbsp;Attributes&quot;&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;visibleWhen&nbsp;checkEnabled=&quot;false&quot;&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;iterate&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;adapt&nbsp;type=&quot;org.example.mydsl.Attribute&quot;&nbsp;/&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/iterate&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/visibleWhen&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;/command&gt;<br />&nbsp;&nbsp;&lt;/menuContribution&gt;<br />&lt;/extension&gt;<br />
+&lt;extension&nbsp;point="org.eclipse.ui.menus"&gt;<br />&nbsp;&nbsp;&lt;menuContribution<br />&nbsp;&nbsp;&nbsp;&nbsp;locationURI="popup:org.eclipse.xtext.ui.outline?after=additions"&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;command<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commandId="org.example.mydsl.ui.editor.outline.SampleOutlineCommand"<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label="Sample&nbsp;action&nbsp;registered&nbsp;for&nbsp;Attributes"&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;visibleWhen&nbsp;checkEnabled="false"&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;iterate&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;adapt&nbsp;type="org.example.mydsl.Attribute"&nbsp;/&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/iterate&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/visibleWhen&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;/command&gt;<br />&nbsp;&nbsp;&lt;/menuContribution&gt;<br />&lt;/extension&gt;<br />
 </p>
 </div>
 </div>
@@ -1186,7 +1185,7 @@ Finally, define a <em>menuContribution</em> to add the command to the context me
 
 <p>
 Again, pay attention to the <em>commandId</em> attribute. The connection between your node type(s) and 
-the menu contribution is made by the part <em>&lt;adapt type=&quot;org.example.mydsl.Attribute&quot; /&gt;</em>. 
+the menu contribution is made by the part <em>&lt;adapt type="org.example.mydsl.Attribute" /&gt;</em>. 
 </p>
 
 
@@ -1425,7 +1424,7 @@ helps to understand the meaning and to find errors in the source code.
 
 <p>
 <div class="image" >
-<img src="images/highlighting.png" class=" width:100%" />
+<img src="images/highlighting.png" class=" "  style=" width:100%" />
  
 </div>
 </p>
@@ -1445,7 +1444,7 @@ persisted and reloaded on startup.
 
 <p>
 <div class="image" >
-<img src="images/preferences_syntax.png" class=" width:50%" />
+<img src="images/preferences_syntax.png" class=" "  style="width:50% " />
  
 </div>
 </p>
@@ -1497,7 +1496,7 @@ for a style&apos;s id. An implementation will usually be very similar to the
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;DefaultHighlightingConfiguration&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;IHighlightingConfiguration&nbsp;{<br /><br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;String&nbsp;KEYWORD_ID&nbsp;=&nbsp;&quot;keyword&quot;;<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;String&nbsp;COMMENT_ID&nbsp;=&nbsp;&quot;comment&quot;;<br /><br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(IHighlightingConfigurationAcceptor&nbsp;acceptor)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;acceptor.acceptDefaultHighlighting(KEYWORD_ID,&nbsp;&quot;Keyword&quot;,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;keywordTextStyle());<br />&nbsp;&nbsp;&nbsp;&nbsp;acceptor.acceptDefaultHighlighting(COMMENT_ID,&nbsp;&quot;Comment&quot;,&nbsp;//&nbsp;...<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;...<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;TextStyle&nbsp;keywordTextStyle()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;TextStyle&nbsp;textStyle&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;TextStyle();<br />&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setColor(<span class="keyword">new</span>&nbsp;RGB(127,&nbsp;0,&nbsp;85));<br />&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setStyle(SWT.BOLD);<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;textStyle;<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;//&nbsp;...<br />}<br />
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;DefaultHighlightingConfiguration&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;IHighlightingConfiguration&nbsp;{<br /><br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;String&nbsp;KEYWORD_ID&nbsp;=&nbsp;"keyword";<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;String&nbsp;COMMENT_ID&nbsp;=&nbsp;"comment";<br /><br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(IHighlightingConfigurationAcceptor&nbsp;acceptor)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;acceptor.acceptDefaultHighlighting(KEYWORD_ID,&nbsp;"Keyword",&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;keywordTextStyle());<br />&nbsp;&nbsp;&nbsp;&nbsp;acceptor.acceptDefaultHighlighting(COMMENT_ID,&nbsp;"Comment",&nbsp;//&nbsp;...<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;...<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;TextStyle&nbsp;keywordTextStyle()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;TextStyle&nbsp;textStyle&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;TextStyle();<br />&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setColor(<span class="keyword">new</span>&nbsp;RGB(127,&nbsp;0,&nbsp;85));<br />&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setStyle(SWT.BOLD);<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;textStyle;<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;//&nbsp;...<br />}<br />
 </p>
 </div>
 </div>
@@ -1594,7 +1593,7 @@ of a lexical <em>IHighlightingConfiguration</em>.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;HighlightingConfiguration&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;IHighlightingConfiguration&nbsp;{<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;//&nbsp;lexical&nbsp;stuff&nbsp;goes&nbsp;here&nbsp;<br />&nbsp;&nbsp;//&nbsp;..<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">final</span>&nbsp;<span class="keyword">static</span>&nbsp;String&nbsp;CROSS_REF&nbsp;=&nbsp;&quot;CrossReference&quot;;&nbsp;<br /><br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(IHighlightingConfigurationAcceptor&nbsp;acceptor)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;lexical&nbsp;stuff&nbsp;goes&nbsp;here&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;..<br />&nbsp;&nbsp;&nbsp;&nbsp;acceptor.acceptDefaultHighlighting(CROSS_REF,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;Cross-References&quot;,&nbsp;crossReferenceTextStyle());<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;TextStyle&nbsp;crossReferenceTextStyle()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;TextStyle&nbsp;textStyle&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;TextStyle();<br />&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setStyle(SWT.ITALIC);<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;textStyle;<br />&nbsp;&nbsp;}<br />}<br />
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;HighlightingConfiguration&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;IHighlightingConfiguration&nbsp;{<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;//&nbsp;lexical&nbsp;stuff&nbsp;goes&nbsp;here&nbsp;<br />&nbsp;&nbsp;//&nbsp;..<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">final</span>&nbsp;<span class="keyword">static</span>&nbsp;String&nbsp;CROSS_REF&nbsp;=&nbsp;"CrossReference";&nbsp;<br /><br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(IHighlightingConfigurationAcceptor&nbsp;acceptor)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;lexical&nbsp;stuff&nbsp;goes&nbsp;here&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;..<br />&nbsp;&nbsp;&nbsp;&nbsp;acceptor.acceptDefaultHighlighting(CROSS_REF,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Cross-References",&nbsp;crossReferenceTextStyle());<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;TextStyle&nbsp;crossReferenceTextStyle()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;TextStyle&nbsp;textStyle&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;TextStyle();<br />&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setStyle(SWT.ITALIC);<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;textStyle;<br />&nbsp;&nbsp;}<br />}<br />
 </p>
 </div>
 </div>
@@ -1648,7 +1647,7 @@ has the Xtext nature and thereby the builder assigned. You enable the generation
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">import</span>&nbsp;org.eclipse.xtext.ui.generator.*&nbsp;<br /><br />//&nbsp;project&nbsp;wizard&nbsp;fragment<br />fragment&nbsp;=&nbsp;projectWizard.SimpleProjectWizardFragment&nbsp;{<br />&nbsp;&nbsp;generatorProjectName&nbsp;=&nbsp;&quot;${projectName}.generator&quot;<br />&nbsp;&nbsp;modelFileExtension&nbsp;=&nbsp;file.extensions<br />}<br />
+<span class="keyword">import</span>&nbsp;org.eclipse.xtext.ui.generator.*&nbsp;<br /><br />//&nbsp;project&nbsp;wizard&nbsp;fragment<br />fragment&nbsp;=&nbsp;projectWizard.SimpleProjectWizardFragment&nbsp;{<br />&nbsp;&nbsp;generatorProjectName&nbsp;=&nbsp;"${projectName}.generator"<br />&nbsp;&nbsp;modelFileExtension&nbsp;=&nbsp;file.extensions<br />}<br />
 </p>
 </div>
 </div>
@@ -1688,7 +1687,7 @@ and the <em>modelFileExtension</em> specifies the default file extension associa
 <p>
 After running the Xtext generator, the DSL&apos;s UI project will contain a new Xpand template 
 <em>MyDslNewProject.xpt</em> in the <em>src</em> folder in the package <em>[base-package].ui.wizard</em>. 
-Note: It may be necessary to manually merge the new entry in the <em>plugin.xml</em>__gen_ into your 
+Note: It may be necessary to manually merge the new entry in the <em>plugin.xml_gen</em> into your 
 <em>plugin.xml</em> of the UI project to enable the wizard contribution.
 </p>
 

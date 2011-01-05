@@ -91,7 +91,7 @@ The only thing you have to do in order to use this factory is to prefix the clas
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-&lt;extension<br />&nbsp;&nbsp;point=&quot;org.eclipse.ui.editors&quot;&gt;<br />&nbsp;&nbsp;&lt;editor<br />&nbsp;&nbsp;&nbsp;&nbsp;class=&quot;&lt;MyLanguageName&gt;ExecutableExtensionFactory:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.ui.editor.XtextEditor&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;contributorClass=<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;org.eclipse.ui.editors.text.TextEditorActionContributor&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;default=&quot;true&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;extensions=&quot;ecoredsl&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;id=&quot;org.eclipse.xtext.example.EcoreDsl&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;name=&quot;EcoreDsl&nbsp;Editor&quot;&gt;<br />&nbsp;&nbsp;&lt;/editor&gt;<br />&lt;/extension&gt;<br />
+&lt;extension<br />&nbsp;&nbsp;point="org.eclipse.ui.editors"&gt;<br />&nbsp;&nbsp;&lt;editor<br />&nbsp;&nbsp;&nbsp;&nbsp;class="&lt;MyLanguageName&gt;ExecutableExtensionFactory:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.ui.editor.XtextEditor"<br />&nbsp;&nbsp;&nbsp;&nbsp;contributorClass=<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"org.eclipse.ui.editors.text.TextEditorActionContributor"<br />&nbsp;&nbsp;&nbsp;&nbsp;default="true"<br />&nbsp;&nbsp;&nbsp;&nbsp;extensions="ecoredsl"<br />&nbsp;&nbsp;&nbsp;&nbsp;id="org.eclipse.xtext.example.EcoreDsl"<br />&nbsp;&nbsp;&nbsp;&nbsp;name="EcoreDsl&nbsp;Editor"&gt;<br />&nbsp;&nbsp;&lt;/editor&gt;<br />&lt;/extension&gt;<br />
 </p>
 </div>
 </div>
@@ -310,7 +310,7 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-MyRule:<br />&nbsp;&nbsp;({MySubRule}&nbsp;&quot;sub&quot;)?&nbsp;(strVal+=ID&nbsp;intVal+=INT)*;<br />&nbsp;&nbsp;&nbsp;&nbsp;
+MyRule:<br />&nbsp;&nbsp;({MySubRule}&nbsp;"sub")?&nbsp;(strVal+=ID&nbsp;intVal+=INT)*;<br />&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 </div>
 </div>
@@ -363,7 +363,7 @@ Values: It must be possible to
 </p>
 
 <p>
-The typical use cases for the concrete syntax validator are validation in non-Xtext-editors that, however, use an <em>XtextResource</em>. This is, for example, the case when combining GMF and Xtext. Another use case is when the semantic model is modified &quot;manually&quot; (not by the parser) and then serialized again. Since it is very difficult for the serializer to provide 
+The typical use cases for the concrete syntax validator are validation in non-Xtext-editors that, however, use an <em>XtextResource</em>. This is, for example, the case when combining GMF and Xtext. Another use case is when the semantic model is modified "manually" (not by the parser) and then serialized again. Since it is very difficult for the serializer to provide 
 <a href="100-serialization.xdoc.html#parsetreeconstructor">meaningful error messages</a>, the concrete syntax validator is executed by default before serialization. A textual Xtext editor itself, however, is <em>not</em> a valid use case. Here, the parser ensures that all syntactical constraints are met. Therefore, there is no value in additionally running the concrete syntax validator.  
 </p>
 
@@ -502,7 +502,7 @@ All in all this is very similar to how JUnit works. Here is an example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;DomainmodelJavaValidator&nbsp;<br />&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;AbstractDomainmodelJavaValidator&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;@Check<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;checkTypeNameStartsWithCapital(Type&nbsp;type)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(!Character.isUpperCase(type.getName().charAt(0)))<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;warning(&quot;Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital&quot;,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.TYPE__NAME);<br />&nbsp;&nbsp;}<br />}<br />
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;DomainmodelJavaValidator&nbsp;<br />&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;AbstractDomainmodelJavaValidator&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;@Check<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;checkTypeNameStartsWithCapital(Type&nbsp;type)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(!Character.isUpperCase(type.getName().charAt(0)))<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;warning("Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital",&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.TYPE__NAME);<br />&nbsp;&nbsp;}<br />}<br />
 </p>
 </div>
 </div>
@@ -555,7 +555,7 @@ fragment&nbsp;=&nbsp;org.eclipse.xtext.generator.validation.CheckFragment&nbsp;{
 </p>
 
 <p>
-After regenerating your language artifacts you will find three new files &quot;YourLanguageChecks.chk&quot;, &quot;YourLanguageFastChecks.chk&quot; and &quot;YourLanguageExpensiveChecks.chk&quot; in the <em>src/</em> folder in the sub-package <em>validation</em>.  The checks in these files will be executed when saving a file, while typing (FastChecks) or when triggering the validation explicitly (ExpensiveChecks). When using Check the example of the previous chapter could be written like this.
+After regenerating your language artifacts you will find three new files "YourLanguageChecks.chk", "YourLanguageFastChecks.chk" and "YourLanguageExpensiveChecks.chk" in the <em>src/</em> folder in the sub-package <em>validation</em>.  The checks in these files will be executed when saving a file, while typing (FastChecks) or when triggering the validation explicitly (ExpensiveChecks). When using Check the example of the previous chapter could be written like this.
 </p>
 
 <p>
@@ -563,7 +563,7 @@ After regenerating your language artifacts you will find three new files &quot;Y
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">context</span>&nbsp;Type#name&nbsp;<span class="keyword">WARNING</span>&nbsp;&quot;Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital&quot;:<br />&nbsp;&nbsp;name.toFirstUpper()&nbsp;==&nbsp;name;&nbsp;&nbsp;<br />
+<span class="keyword">context</span>&nbsp;Type#name&nbsp;<span class="keyword">WARNING</span>&nbsp;"Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital":<br />&nbsp;&nbsp;name.toFirstUpper()&nbsp;==&nbsp;name;&nbsp;&nbsp;<br />
 </p>
 </div>
 </div>
@@ -607,7 +607,7 @@ As noted above, Xtext uses EMF&apos;s <em>EValidator</em> API to register Java o
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-EObject&nbsp;myModel&nbsp;=&nbsp;myResource.getContents().get(0);<br />Diagnostic&nbsp;diagnostic&nbsp;=&nbsp;Diagnostician.INSTANCE.validate(myModel);<br /><span class="keyword">switch</span>&nbsp;(diagnostic.getSeverity())&nbsp;{<br />&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;Diagnostic.ERROR:<br />&nbsp;&nbsp;&nbsp;&nbsp;System.err.println(&quot;Model&nbsp;has&nbsp;errors:&nbsp;&quot;,diagnostic);<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br />&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;Diagnostic.WARNING:<br />&nbsp;&nbsp;&nbsp;&nbsp;System.err.println(&quot;Model&nbsp;has&nbsp;warnings:&nbsp;&quot;,diagnostic);<br />}<br />
+EObject&nbsp;myModel&nbsp;=&nbsp;myResource.getContents().get(0);<br />Diagnostic&nbsp;diagnostic&nbsp;=&nbsp;Diagnostician.INSTANCE.validate(myModel);<br /><span class="keyword">switch</span>&nbsp;(diagnostic.getSeverity())&nbsp;{<br />&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;Diagnostic.ERROR:<br />&nbsp;&nbsp;&nbsp;&nbsp;System.err.println("Model&nbsp;has&nbsp;errors:&nbsp;",diagnostic);<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br />&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;Diagnostic.WARNING:<br />&nbsp;&nbsp;&nbsp;&nbsp;System.err.println("Model&nbsp;has&nbsp;warnings:&nbsp;",diagnostic);<br />}<br />
 </p>
 </div>
 </div>
@@ -693,7 +693,7 @@ Validator:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyLanguageValidator&nbsp;<span class="keyword">extends</span>&nbsp;AbstractDeclarativeValidator&nbsp;{<br />&nbsp;&nbsp;@Check<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;checkFooElement(FooElement&nbsp;element)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(element.getBarAttribute().contains(&quot;foo&quot;))<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(&quot;Only&nbsp;Foos&nbsp;allowed&quot;,&nbsp;element,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyLanguagePackage.FOO_ELEMENT__BAR_ATTRIBUTE,&nbsp;101);<br />&nbsp;&nbsp;}<br />}<br />
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyLanguageValidator&nbsp;<span class="keyword">extends</span>&nbsp;AbstractDeclarativeValidator&nbsp;{<br />&nbsp;&nbsp;@Check<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;checkFooElement(FooElement&nbsp;element)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(element.getBarAttribute().contains("foo"))<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error("Only&nbsp;Foos&nbsp;allowed",&nbsp;element,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyLanguagePackage.FOO_ELEMENT__BAR_ATTRIBUTE,&nbsp;101);<br />&nbsp;&nbsp;}<br />}<br />
 </p>
 </div>
 </div>
@@ -710,7 +710,7 @@ JUnit-Test:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyLanguageValidatorTest&nbsp;<span class="keyword">extends</span>&nbsp;AbstractXtextTests&nbsp;{<br /><br />&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;ValidatorTester&lt;MyLanguageValidator&gt;&nbsp;tester;<br /><br />&nbsp;&nbsp;@Override<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setUp()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;with(MyLanguageStandaloneSetup.<span class="keyword">class</span>);<br />&nbsp;&nbsp;&nbsp;&nbsp;MyLanguageValidator&nbsp;validator&nbsp;=&nbsp;get(MyLanguageValidator.<span class="keyword">class</span>);<br />&nbsp;&nbsp;&nbsp;&nbsp;tester&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ValidatorTester&lt;TestingValidator&gt;(validator);<br />&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;testError()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;FooElement&nbsp;model&nbsp;=&nbsp;MyLanguageFactory.eINSTANCE.createFooElement()<br />&nbsp;&nbsp;&nbsp;&nbsp;model.setBarAttribute(&quot;barbarbarbarfoo&quot;);<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;tester.validator().checkFooElement(model);<br />&nbsp;&nbsp;&nbsp;&nbsp;tester.diagnose().assertError(101);<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;testError2()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;FooElement&nbsp;model&nbsp;=&nbsp;MyLanguageFactory.eINSTANCE.createFooElement()<br />&nbsp;&nbsp;&nbsp;&nbsp;model.setBarAttribute(&quot;barbarbarbarfoo&quot;);<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;tester.validate(model).assertError(101);<br />&nbsp;&nbsp;}<br />}<br />
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyLanguageValidatorTest&nbsp;<span class="keyword">extends</span>&nbsp;AbstractXtextTests&nbsp;{<br /><br />&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;ValidatorTester&lt;MyLanguageValidator&gt;&nbsp;tester;<br /><br />&nbsp;&nbsp;@Override<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setUp()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;with(MyLanguageStandaloneSetup.<span class="keyword">class</span>);<br />&nbsp;&nbsp;&nbsp;&nbsp;MyLanguageValidator&nbsp;validator&nbsp;=&nbsp;get(MyLanguageValidator.<span class="keyword">class</span>);<br />&nbsp;&nbsp;&nbsp;&nbsp;tester&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ValidatorTester&lt;TestingValidator&gt;(validator);<br />&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;testError()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;FooElement&nbsp;model&nbsp;=&nbsp;MyLanguageFactory.eINSTANCE.createFooElement()<br />&nbsp;&nbsp;&nbsp;&nbsp;model.setBarAttribute("barbarbarbarfoo");<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;tester.validator().checkFooElement(model);<br />&nbsp;&nbsp;&nbsp;&nbsp;tester.diagnose().assertError(101);<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;testError2()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;FooElement&nbsp;model&nbsp;=&nbsp;MyLanguageFactory.eINSTANCE.createFooElement()<br />&nbsp;&nbsp;&nbsp;&nbsp;model.setBarAttribute("barbarbarbarfoo");<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;tester.validate(model).assertError(101);<br />&nbsp;&nbsp;}<br />}<br />
 </p>
 </div>
 </div>
@@ -805,7 +805,7 @@ _assertDiagnostics(int severity, int code, String messageFragment)_: Verifies se
 <p>
 _assertAll(DiagnosticPredicate... predicates)_: Allows to describe multiple diagnostics at the same time and verifies that all of them are present. Class 
 <em>org.eclipse.xtext.junit.validation.AssertableDiagnostics</em>
- contains static <em>error()</em> and <em>warning()</em>-methods which help to create the needed <em>DiagnosticPredicate</em>. Example: <em>assertAll(error(123), warning(&quot;some part of the message&quot;))</em>. 
+ contains static <em>error()</em> and <em>warning()</em>-methods which help to create the needed <em>DiagnosticPredicate</em>. Example: <em>assertAll(error(123), warning("some part of the message"))</em>. 
 </p>
 
 </li>
@@ -1183,8 +1183,8 @@ as well as the corresponding <em>EClass</em>. In addition one can export arbitra
 
 <p>
 <div class="image" >
-<img src="images/index_datamodel.png" class=" " />
- 
+<img src="images/index_datamodel.png" class=" "  style=" " />
+(Descriptions)
 </div>
 </p>
 
@@ -1355,7 +1355,7 @@ workflow of your language. It will bind an
 <em>org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider</em>
  
 (
-<em>org.eclipse.xtext.resource.ignorecase.IgnoreCaseImportUriGlobalScopeProvider</em>
+<em></em>
  
 if the <em>caseInsensitve</em> flag is set) that handles <em>importURI</em> features.
 </p>
@@ -1393,7 +1393,7 @@ Since version 1.0.0 Xtext provides support for this kind of global scoping. To e
  has to be bound to 
 the <em>IGlobalScopeProvider</em> interface. For case insensitive names use the 
 
-<em>org.eclipse.xtext.resource.ignorecase.IgnoreCaseDefaultGlobalScopeProvider</em>
+<em></em>
 .
 </p>
 
@@ -1405,7 +1405,7 @@ and independent from the JDT.
 </p>
 
 <p>
-In order to know what is available in the &quot;world&quot; a global scope provider which relies on external 
+In order to know what is available in the "world" a global scope provider which relies on external 
 configuration needs to read that configuration in and be able to find all candidates for a certain 
 <em>EReference</em>. If you don&apos;t want to force users to have a folder and file name structure reflecting 
 the actual qualified names of the referenceable <em>EObjects</em>, you&apos;ll have to load all resources up front 
@@ -1510,7 +1510,7 @@ in detail in the following sections.
 <p>
 <div class="image" >
 <img src="images/index_container.png" class=" " />
- 
+(IContainer Management)
 </div>
 </p>
 
@@ -1717,7 +1717,7 @@ becomes an <em>IContainer</em> of its own. In the following snippet,
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-component&nbsp;=&nbsp;org.eclipse.xtext.mwe.Reader&nbsp;{<br />&nbsp;&nbsp;//&nbsp;lookup&nbsp;all&nbsp;resources&nbsp;on&nbsp;the&nbsp;classpath<br />&nbsp;&nbsp;//&nbsp;useJavaClassPath&nbsp;=&nbsp;true<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;//&nbsp;or&nbsp;define&nbsp;search&nbsp;scope&nbsp;explicitly<br />&nbsp;&nbsp;path&nbsp;=&nbsp;&quot;src/models&quot;<br />&nbsp;&nbsp;path&nbsp;=&nbsp;&quot;src/further-models&quot;<br /><br />&nbsp;&nbsp;...<br />}<br />&nbsp;
+component&nbsp;=&nbsp;org.eclipse.xtext.mwe.Reader&nbsp;{<br />&nbsp;&nbsp;//&nbsp;lookup&nbsp;all&nbsp;resources&nbsp;on&nbsp;the&nbsp;classpath<br />&nbsp;&nbsp;//&nbsp;useJavaClassPath&nbsp;=&nbsp;true<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;//&nbsp;or&nbsp;define&nbsp;search&nbsp;scope&nbsp;explicitly<br />&nbsp;&nbsp;path&nbsp;=&nbsp;"src/models"<br />&nbsp;&nbsp;path&nbsp;=&nbsp;"src/further-models"<br /><br />&nbsp;&nbsp;...<br />}<br />&nbsp;
 </p>
 </div>
 </div>
@@ -1765,7 +1765,7 @@ following example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-//&nbsp;file&nbsp;contents&nbsp;scope<br /><span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;my.Constants.STATIC;<br /><br /><span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ScopeExample&nbsp;{&nbsp;//&nbsp;<span class="keyword">class</span>&nbsp;body&nbsp;scope<br />&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;Object&nbsp;field&nbsp;=&nbsp;STATIC;<br /><br />&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">void</span>&nbsp;method(String&nbsp;param)&nbsp;{&nbsp;//&nbsp;method&nbsp;body&nbsp;scope<br />&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;localVar&nbsp;=&nbsp;&quot;bar&quot;;<br />&nbsp;&nbsp;&nbsp;&nbsp;innerBlock:&nbsp;{&nbsp;//&nbsp;block&nbsp;scope<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;innerScopeVar&nbsp;=&nbsp;&quot;foo&quot;;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object&nbsp;field&nbsp;=&nbsp;innerScopeVar;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;the&nbsp;scope&nbsp;hierarchy&nbsp;at&nbsp;<span class="keyword">this</span>&nbsp;point&nbsp;would&nbsp;look&nbsp;like&nbsp;<span class="keyword">this</span>:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;blockScope{field,innerScopeVar}-&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;methodScope{localVar,&nbsp;param}-&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;classScope{field}-&gt;&nbsp;(&apos;field&apos;&nbsp;is&nbsp;shadowed)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;fileScope{STATIC}-&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;classpathScope{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&apos;all&nbsp;qualified&nbsp;names&nbsp;of&nbsp;accessible&nbsp;<span class="keyword">static</span>&nbsp;fields&apos;}&nbsp;-&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;NULLSCOPE{}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;field.add(localVar);<br />&nbsp;&nbsp;}<br />}<br />
+//&nbsp;file&nbsp;contents&nbsp;scope<br /><span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;my.Constants.STATIC;<br /><br /><span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ScopeExample&nbsp;{&nbsp;//&nbsp;<span class="keyword">class</span>&nbsp;body&nbsp;scope<br />&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;Object&nbsp;field&nbsp;=&nbsp;STATIC;<br /><br />&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">void</span>&nbsp;method(String&nbsp;param)&nbsp;{&nbsp;//&nbsp;method&nbsp;body&nbsp;scope<br />&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;localVar&nbsp;=&nbsp;"bar";<br />&nbsp;&nbsp;&nbsp;&nbsp;innerBlock:&nbsp;{&nbsp;//&nbsp;block&nbsp;scope<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;innerScopeVar&nbsp;=&nbsp;"foo";<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object&nbsp;field&nbsp;=&nbsp;innerScopeVar;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;the&nbsp;scope&nbsp;hierarchy&nbsp;at&nbsp;<span class="keyword">this</span>&nbsp;point&nbsp;would&nbsp;look&nbsp;like&nbsp;<span class="keyword">this</span>:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;blockScope{field,innerScopeVar}-&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;methodScope{localVar,&nbsp;param}-&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;classScope{field}-&gt;&nbsp;(&apos;field&apos;&nbsp;is&nbsp;shadowed)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;fileScope{STATIC}-&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;classpathScope{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&apos;all&nbsp;qualified&nbsp;names&nbsp;of&nbsp;accessible&nbsp;<span class="keyword">static</span>&nbsp;fields&apos;}&nbsp;-&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;NULLSCOPE{}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;field.add(localVar);<br />&nbsp;&nbsp;}<br />}<br />
 </p>
 </div>
 </div>
@@ -1969,7 +1969,7 @@ your implementation in your runtime module.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-FowlerDslQualifiedNameProvider&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;DefaultDeclarativeQualifiedNameProvider&nbsp;{<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;qualifiedName(Transition&nbsp;t)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(t.getEvent()&nbsp;==&nbsp;null&nbsp;|| !(t.eContainer()&nbsp;<span class="keyword">instanceof</span>&nbsp;State))&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;null;<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span>&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;((State)t.eContainer()).getName()&nbsp;+&nbsp;&quot;.&quot;&nbsp;t.getEvent().getName();<br />&nbsp;&nbsp;}<br />}<br />
+FowlerDslQualifiedNameProvider&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;DefaultDeclarativeQualifiedNameProvider&nbsp;{<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;qualifiedName(Transition&nbsp;t)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(t.getEvent()&nbsp;==&nbsp;null&nbsp;||Ê!(t.eContainer()&nbsp;<span class="keyword">instanceof</span>&nbsp;State))&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;null;<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span>&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;((State)t.eContainer()).getName()&nbsp;+&nbsp;"."&nbsp;t.getEvent().getName();<br />&nbsp;&nbsp;}<br />}<br />
 </p>
 </div>
 </div>
@@ -2955,7 +2955,7 @@ the following example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ExampleFormatter&nbsp;<span class="keyword">extends</span>&nbsp;AbstractDeclarativeFormatter&nbsp;{<br /><br />&nbsp;&nbsp;@Override<br />&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;configureFormatting(FormattingConfig&nbsp;c)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;ExampleLanguageGrammarAccess&nbsp;f&nbsp;=&nbsp;getGrammarAccess();<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;c.setAutoLinewrap(120);<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;find&nbsp;common&nbsp;keywords&nbsp;an&nbsp;specify&nbsp;formatting&nbsp;<span class="keyword">for</span>&nbsp;them<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(Pair&lt;Keyword,&nbsp;Keyword&gt;&nbsp;pair&nbsp;:&nbsp;f.findKeywordPairs(&quot;(&quot;,&nbsp;&quot;)&quot;))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().after(pair.getFirst());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().before(pair.getSecond());<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(Keyword&nbsp;comma&nbsp;:&nbsp;f.findKeywords(&quot;,&quot;))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().before(comma);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;formatting&nbsp;<span class="keyword">for</span>&nbsp;grammar&nbsp;rule&nbsp;Line<br />&nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap(2).after(f.getLineAccess().getSemicolonKeyword_1());<br />&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().before(f.getLineAccess().getSemicolonKeyword_1());<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;formatting&nbsp;<span class="keyword">for</span>&nbsp;grammar&nbsp;rule&nbsp;TestIndentation<br />&nbsp;&nbsp;&nbsp;&nbsp;c.setIndentationIncrement().after(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());<br />&nbsp;&nbsp;&nbsp;&nbsp;c.setIndentationDecrement().before(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());<br />&nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap().after(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());<br />&nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap().after(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;formatting&nbsp;<span class="keyword">for</span>&nbsp;grammar&nbsp;rule&nbsp;Param<br />&nbsp;&nbsp;&nbsp;&nbsp;c.setNoLinewrap().around(f.getParamAccess().getColonKeyword_1());<br />&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().around(f.getParamAccess().getColonKeyword_1());<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;formatting&nbsp;<span class="keyword">for</span>&nbsp;Comments&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;2).before(g.getSL_COMMENTRule());<br />&nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;2).before(g.getML_COMMENTRule());<br />&nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;1).after(g.getML_COMMENTRule());<br />&nbsp;&nbsp;}<br />}<br />
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ExampleFormatter&nbsp;<span class="keyword">extends</span>&nbsp;AbstractDeclarativeFormatter&nbsp;{<br /><br />&nbsp;&nbsp;@Override<br />&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;configureFormatting(FormattingConfig&nbsp;c)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;ExampleLanguageGrammarAccess&nbsp;f&nbsp;=&nbsp;getGrammarAccess();<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;c.setAutoLinewrap(120);<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;find&nbsp;common&nbsp;keywords&nbsp;an&nbsp;specify&nbsp;formatting&nbsp;<span class="keyword">for</span>&nbsp;them<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(Pair&lt;Keyword,&nbsp;Keyword&gt;&nbsp;pair&nbsp;:&nbsp;f.findKeywordPairs("(",&nbsp;")"))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().after(pair.getFirst());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().before(pair.getSecond());<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(Keyword&nbsp;comma&nbsp;:&nbsp;f.findKeywords(","))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().before(comma);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;formatting&nbsp;<span class="keyword">for</span>&nbsp;grammar&nbsp;rule&nbsp;Line<br />&nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap(2).after(f.getLineAccess().getSemicolonKeyword_1());<br />&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().before(f.getLineAccess().getSemicolonKeyword_1());<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;formatting&nbsp;<span class="keyword">for</span>&nbsp;grammar&nbsp;rule&nbsp;TestIndentation<br />&nbsp;&nbsp;&nbsp;&nbsp;c.setIndentationIncrement().after(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());<br />&nbsp;&nbsp;&nbsp;&nbsp;c.setIndentationDecrement().before(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());<br />&nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap().after(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());<br />&nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap().after(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;formatting&nbsp;<span class="keyword">for</span>&nbsp;grammar&nbsp;rule&nbsp;Param<br />&nbsp;&nbsp;&nbsp;&nbsp;c.setNoLinewrap().around(f.getParamAccess().getColonKeyword_1());<br />&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().around(f.getParamAccess().getColonKeyword_1());<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;formatting&nbsp;<span class="keyword">for</span>&nbsp;Comments&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;2).before(g.getSL_COMMENTRule());<br />&nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;2).before(g.getML_COMMENTRule());<br />&nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;1).after(g.getML_COMMENTRule());<br />&nbsp;&nbsp;}<br />}<br />
 </p>
 </div>
 </div>
@@ -3048,7 +3048,7 @@ elements. The following matching criteria exist:
 <li>
 
 <p>
-_after(ele)_: The instruction is applied after the grammar element <em>ele</em> has been matched. For example, if your grammar uses the keyword &quot;;&quot; to end lines, this can instruct the formatter to insert a line break after the semicolon.  
+_after(ele)_: The instruction is applied after the grammar element <em>ele</em> has been matched. For example, if your grammar uses the keyword ";" to end lines, this can instruct the formatter to insert a line break after the semicolon.  
 </p>
 
 </li>
@@ -3056,7 +3056,7 @@ _after(ele)_: The instruction is applied after the grammar element <em>ele</em> 
 <li>
 
 <p>
-_before(ele)_: The instruction is executed before the matched element. For example, if your grammar contains lists which separate their values with the keyword &quot;,&quot;, you can instruct the formatter to suppress the whitespace before the comma.
+_before(ele)_: The instruction is executed before the matched element. For example, if your grammar contains lists which separate their values with the keyword ",", you can instruct the formatter to suppress the whitespace before the comma.
 </p>
 
 </li>
@@ -3107,7 +3107,7 @@ terminology of the lexer a data type rule can match a composition of multiple to
 The parameter <em>ele</em> can be a grammar&apos;s <em>AbstractElement</em> or a grammar&apos;s <em>AbstractRule</em>. All grammar 
 rules and almost all abstract elements can be matched. This includes rule calls, parser rules, groups 
 and alternatives. The semantic of <em>before(ele)</em>, <em>after(ele)</em>, etc. for rule calls and parser rules is 
-identical to when the parser would &quot;pass&quot; this part of the grammar. The stack of called rules is taken 
+identical to when the parser would "pass" this part of the grammar. The stack of called rules is taken 
 into account. The following abstract elements can <em>not</em> have assigned formatting instructions:
 
 
@@ -3262,7 +3262,7 @@ _findKeywords(String... keywords)_ returns all keywords that equal one of the pa
 <li>
 
 <p>
-_findKeywordPairs(String leftKw, String rightKw)_: returns tuples of keywords from the same grammar rule. Pairs are matched nested and sequentially.  Example: for <em>Rule: &apos;(&apos; name=ID (&apos;(&apos; foo=ID &apos;)&apos;) &apos;)&apos; | &apos;(&apos; bar=ID &apos;)&apos;</em> <em>findKeywordPairs(&quot;(&quot;, &quot;)&quot;)</em> returns three pairs.
+_findKeywordPairs(String leftKw, String rightKw)_: returns tuples of keywords from the same grammar rule. Pairs are matched nested and sequentially.  Example: for <em>Rule: &apos;(&apos; name=ID (&apos;(&apos; foo=ID &apos;)&apos;) &apos;)&apos; | &apos;(&apos; bar=ID &apos;)&apos;</em> <em>findKeywordPairs("(", ")")</em> returns three pairs.
 </p>
 
 </li>
@@ -3387,7 +3387,7 @@ Encoding in Xtext
 
 <p>
 <em>Encoding</em>, AKA <em>character set</em>, describes the way characters are encoded into bytes and vice versa. 
-Famous standard encodings are &quot;UTF-8&quot; or &quot;ISO-8859-1&quot;. The list of available encodings can be determined
+Famous standard encodings are "UTF-8" or "ISO-8859-1". The list of available encodings can be determined
 by calling <em>java.nio.Charset.availableCharsets()</em>. There is also a list of encodings and their 
 canonical Java names in the <a href="http://java.sun.com/j2se/1.5.0/docs/guide/intl/encoding.doc.html.">API docs</a>
 </p>
@@ -3452,7 +3452,7 @@ property in the workflow next to your grammar, e.g.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Generator&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;encoding&nbsp;=&quot;UTF-8&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;...<br />
+Generator&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;encoding&nbsp;="UTF-8"<br />&nbsp;&nbsp;&nbsp;&nbsp;...<br />
 </p>
 </div>
 </div>
@@ -3568,7 +3568,7 @@ of your language by default. You can override that by passing an option on load 
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Map&lt;?,?&gt;&nbsp;options&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;HashMap();<br />options.put(XtextResource.OPTION_ENCODING,&nbsp;&quot;UTF-8&quot;);<br />myXtextResource.load(options);<br />options.put(XtextResource.OPTION_ENCODING,&nbsp;&quot;ISO-8859-1&quot;);<br />myXtextResource.save(options);<br />
+Map&lt;?,?&gt;&nbsp;options&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;HashMap();<br />options.put(XtextResource.OPTION_ENCODING,&nbsp;"UTF-8");<br />myXtextResource.load(options);<br />options.put(XtextResource.OPTION_ENCODING,&nbsp;"ISO-8859-1");<br />myXtextResource.save(options);<br />
 </p>
 </div>
 </div>
@@ -3625,7 +3625,7 @@ Encoding of Xtext Source Code
 
 
 <p>
-The source code of the Xtext framework itself is completely encoded in &quot;ISO 8859-1&quot;, which is necessary 
+The source code of the Xtext framework itself is completely encoded in "ISO 8859-1", which is necessary 
 to make the Xpand templates work everywhere (they use french quotation markup). That encoding is hard 
 coded into the Xtext generator code. You are likely never going to change that. 
 </p>

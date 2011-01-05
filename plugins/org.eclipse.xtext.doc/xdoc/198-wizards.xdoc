@@ -25,7 +25,7 @@ item[and the e[modelFileExtension] specifies the default file extension associat
 
 After running the Xtext generator, the DSL's UI project will contain a new Xpand template 
 e[MyDslNewProject.xpt] in the e[src] folder in the package e[\[base-package\].ui.wizard]. 
-Note: It may be necessary to manually merge the new entry in the e[plugin.xml]__gen_ into your 
+Note: It may be necessary to manually merge the new entry in the e[plugin.xml_gen] into your 
 e[plugin.xml] of the UI project to enable the wizard contribution.
 
 The generated Xpand template will be expanded by the project wizard when the user clicks the e[Finish] button 

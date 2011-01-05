@@ -97,8 +97,8 @@ Make sure that your <em>dsl.ui</em>-projects do not refer to the plug-in <em>org
 </p>
 
 <p>
-The next step is to fix the import statements in your classes to match the refactored naming scheme in Xtext. Perform a global search for &quot;_import org.eclipse.xtext.ui.common._&quot; and 
-&quot;_import org.eclipse.xtext.ui.core._&quot; and replace the matches with &quot;_import org.eclipse.xtext.ui._&quot;. This fixes most of the problems in the manually written code. 
+The next step is to fix the import statements in your classes to match the refactored naming scheme in Xtext. Perform a global search for "_import org.eclipse.xtext.ui.common._" and 
+"_import org.eclipse.xtext.ui.core._" and replace the matches with "_import org.eclipse.xtext.ui._". This fixes most of the problems in the manually written code. 
 </p>
 
 
@@ -122,7 +122,7 @@ Rename the Packages in the dsl.ui-Plug-in
 
 <p>
 We changed the naming pattern for artifacts in the <em>dsl.ui</em>-plug-in to match the OSGI conventions. The easiest way to update your existing projects is to apply a 
-&quot;Rename Package&quot; refactoring on the packages in the <em>src</em>- and <em>src-gen</em> folder <em>before</em> you re-run the workflow that regenerates your language. Make sure you ticked &quot;Rename sub-packages&quot; in the dialog. It is error-prone to enable the search in non-Java files as this will perform incompatible changes in the manifest files. Furthermore, it is important to perform the rename operation in the <em>src-gen</em> folder, too. This ensures that the references in your manually written code are properly updated.
+"Rename Package" refactoring on the packages in the <em>src</em>- and <em>src-gen</em> folder <em>before</em> you re-run the workflow that regenerates your language. Make sure you ticked "Rename sub-packages" in the dialog. It is error-prone to enable the search in non-Java files as this will perform incompatible changes in the manifest files. Furthermore, it is important to perform the rename operation in the <em>src-gen</em> folder, too. This ensures that the references in your manually written code are properly updated.
 </p>
 
 
@@ -154,7 +154,7 @@ Please replace
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-&lt;fragment&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;class=&quot;org.eclipse.xtext.generator.scoping.JavaScopingFragment&quot;/&gt;
+&lt;fragment&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;class="org.eclipse.xtext.generator.scoping.JavaScopingFragment"/&gt;
 </p>
 </div>
 </div>
@@ -171,7 +171,7 @@ with
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-&lt;fragment&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;class=&quot;org.eclipse.xtext.generator.scoping.ImportURIScopingFragment&quot;/&gt;<br />&lt;fragment&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;class=&quot;org.eclipse.xtext.generator.exporting.SimpleNamesFragment&quot;/&gt;
+&lt;fragment&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;class="org.eclipse.xtext.generator.scoping.ImportURIScopingFragment"/&gt;<br />&lt;fragment&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;class="org.eclipse.xtext.generator.exporting.SimpleNamesFragment"/&gt;
 </p>
 </div>
 </div>
@@ -238,7 +238,7 @@ The plug-in <em>org.eclipse.xtext.log4j</em> no longer exists. We use a package 
 <li>
 
 <p>
-Due to renamed packages, you have to fix all references to classes therein in the <em>plugin.xml</em>. A diff with the <em>plugin.xml</em>__gen_ will be a great help. If you haven&apos;t added a lot manually, consider merging these into the generated version instead of going the other way around. Note that warnings in the <em>plugin.xml</em> can be considered to be real errors most of the time. Make sure
+Due to renamed packages, you have to fix all references to classes therein in the <em>plugin.xml</em>. A diff with the <em>plugin.xml_gen</em> will be a great help. If you haven&apos;t added a lot manually, consider merging these into the generated version instead of going the other way around. Note that warnings in the <em>plugin.xml</em> can be considered to be real errors most of the time. Make sure
 </p>
 
 </li>
@@ -394,7 +394,7 @@ The <em>HyperlinkHelper</em> uses field injection instead of constructor injecti
 <li>
 
 <p>
-The API to skip a node in the outline has changed. Instead of returning the <em>HIDDEN</em>NODE_ you&apos;ll have to implement <em>boolean consumeNode(MyType)</em> and return <em>false</em>.
+The API to skip a node in the outline has changed. Instead of returning the <em>HIDDEN_NODE</em> you&apos;ll have to implement <em>boolean consumeNode(MyType)</em> and return <em>false</em>.
 </p>
 
 </li>

@@ -81,12 +81,30 @@ Xtext targets easy to use and naturally feeling languages. It focuses on the lex
 todo[revise indentation levels]
 ul[
 item[Prefer optional rule calls (cardinality e[?] or e[*]) to mandatory ones (cardinality e[+] or default), such that missing references will not obstruct serialization. ]
-item[You should not use an Xtext-Editor on the same model instance as a self-synchronizing other editor, e.g. a canonical GMF editor (see :#gmf_integration_stage_1 for details). The Xtext parser replaces re-parsed subtrees of the AST rather than modifying it, so elements will become stale. As the Xtext editor continuously re-parses the model on changes, this will happen rather often. It is safer to synchronize editors more loosely, e.g. on file changes. ]
-item[Implement an e[IFragmentProvider]:#fragmentProvider to make the XtextResource return stable fragments for its contained elements, e.g. based on composite names rather than order of appearance.]
-item[Implement an e[IQualifiedNameProvider] and an e[IScopeProvider]:#scoping to make the names of all linkable elements in cross-references unique. ]
-item[Provide an e[IFormatter]:#formatting to improve the readability of the generated textual models.  ]
-item[Register an e[IReferableElementsUnloader] to turn deleted/replaced model elements into EMF proxies. Design the rest of your application such that it does never keep references to  e[EObjects] or to cope with proxies. That will improve the stability of your application drastically.]
-item[Xtext will register an EMF e[ResourceFactory], so resources with the file extension you entered when generating the Xtext plug-ins will be automatically loaded in an e[XtextResource] when you use EMF's e[ResourceSet] API to load it.]
+item[You should not use an Xtext-Editor on the same model instance as a self-synchronizing other editor, e.g. a canonical GMF editor (see ref:gmf_integration_stage_1 for details). The Xtext parser replaces re-parsed subtrees of the AST rather than modifying it, so elements will become stale. As the Xtext editor continuously re-parses the model on changes, this will happen rather often. It is safer to synchronize editors more loosely, e.g. on file changes. ]
+item[Implement an ref:fragmentProvider[e[IFragmentProvider]] to make 
+	the XtextResource return stable fragments for its contained
+	elements, e.g. based on composite names rather than order of 
+	appearance.
+]
+item[Implement an e[IQualifiedNameProvider] and an 
+	ref:scoping[e[IScopeProvider]] to make the names of all linkable 
+	elements in cross-references unique.
+]
+item[Provide an ref:formatting[e[IFormatter]] to improve the readability 
+	of the generated textual models.
+]
+item[Register an e[IReferableElementsUnloader] to turn 
+	deleted/replaced model elements into EMF proxies. Design the rest 
+	of your application such that it does never keep references to 
+	e[EObjects] or to cope with proxies. That will improve the 
+	stability of your application drastically.
+]
+item[Xtext will register an EMF e[ResourceFactory], so resources with 
+	the file extension you entered when generating the Xtext plug-ins 
+	will be automatically loaded in an e[XtextResource] when you use 
+	EMF's e[ResourceSet] API to load it.
+]
 ]
 
 
@@ -132,7 +150,7 @@ section3[Stage 2: Calling the Xtext Parser to Parse GMF Labels]
 
 GMF's generated parser for the labels is a bit poor: It will work on attributes only, and will fail for cross-references, e.g. an attibute's type. So why not use the Xtext parser to process the user's input? 
 
-An e[XtextResource] keeps track of it's concrete syntax representation by means of a so called node model (see :#parser_rules for a more detailed description). The node model represents the parse tree and provides information on the offset, length and text that has been parsed to create a semantic model element. The nodes are attached to their semantic elements by means of a node adapter.    
+An e[XtextResource] keeps track of it's concrete syntax representation by means of a so called node model (see ref:parser_rules for a more detailed description). The node model represents the parse tree and provides information on the offset, length and text that has been parsed to create a semantic model element. The nodes are attached to their semantic elements by means of a node adapter.    
 
 We can use the node adapter to access the text block that represents an attribute, and call the Xtext parser to parse the user input. The example code is contained in  e[org.eclipse.xtext.gmf.glue.edit.part.AntlrParserWrapper]todo[codeRef]. e[SimplePropertyWrapperEditPartOverride] shows how this is integrated into the generated GMF editor. Use the e[EntitiesEditPartFactoryOverride] to instantiate it and the e[EntitiesEditPartProviderOverride] to create the overridden factory, and register the latter to the extension point. Note that this is a non-invasive way to extend generated GMF editors.
 

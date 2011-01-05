@@ -201,7 +201,7 @@ code[Java][public class MyDslContentOutlineNodeAdapterFactory extends
 ]
 
 If you want to bind context menu actions to nodes representing e[Attribute] and e[Entity], you need to 
-change the declaration of _types as follows:
+change the declaration of e[types] as follows:
 
 code[Java][private static final Class<?>\[\] types = { Attribute.class, Entity.class };]
 
