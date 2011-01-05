@@ -101,7 +101,7 @@ public class BestMatchingJvmFeatureScope implements IScope {
 					for (int i = 0; i < opA.getParameters().size(); i++) {
 						JvmTypeReference pA = opA.getParameters().get(i).getParameterType();
 						JvmTypeReference pB = opB.getParameters().get(i).getParameterType();
-						if (!computer.isConformant(contextA.resolve(pA), contextB.resolve(pB)))
+						if (!computer.isConformant(contextA.resolveContravariant(pA), contextB.resolveContravariant(pB)))
 							return a;
 					}
 					return b;

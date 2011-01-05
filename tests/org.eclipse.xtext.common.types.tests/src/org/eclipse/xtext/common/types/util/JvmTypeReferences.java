@@ -16,8 +16,6 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 
-import com.google.inject.Inject;
-
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -26,7 +24,6 @@ public class JvmTypeReferences {
 	private TypesFactory typesFactory;
 	private IJvmTypeProvider typesProvider;
 	
-	@Inject
 	public JvmTypeReferences(TypesFactory typesFactory, IJvmTypeProvider typesProvider) {
 		this.typesProvider = typesProvider;
 		this.typesFactory = typesFactory;
@@ -85,7 +82,6 @@ public class JvmTypeReferences {
 			reference.getArguments().add(argument);
 			return constructor;
 		}
-		
 		public JvmParameterizedTypeReferenceConstructor wildCardSuper(String qualifiedName) {
 			JvmWildcardTypeReference argument = typesFactory.createJvmWildcardTypeReference();
 			JvmLowerBound upperBound = typesFactory.createJvmLowerBound();

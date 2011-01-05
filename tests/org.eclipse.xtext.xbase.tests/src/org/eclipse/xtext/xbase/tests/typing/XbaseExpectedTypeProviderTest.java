@@ -95,7 +95,8 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	public void testForLoopExpression_1() throws Exception {
 		XForLoopExpression loop = (XForLoopExpression) expression("for (x : null) null");
 
-		assertExpected("java.lang.Iterable<?>", loop.getForExpression());
+		// expect raw type
+		assertExpected("java.lang.Iterable", loop.getForExpression());
 		assertExpected(null, loop.getEachExpression());
 		assertExpected(null, loop.getDeclaredParam());
 	}
@@ -140,7 +141,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 				"}")).getTarget();
 		assertExpected(null,exp.getSwitch());
 		for (XCasePart cp : exp.getCases()) {
-			assertExpected("java.lang.Class<?>", cp.getTypeGuard());
+			assertExpected("java.lang.Class", cp.getTypeGuard());
 			assertExpected(null, cp.getCase());
 			assertExpected("java.lang.String", cp.getThen());
 		}
@@ -154,7 +155,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 				"  default : null;" +
 		"}")).getTarget();
 		for (XCasePart cp : exp.getCases()) {
-			assertExpected("java.lang.Class<?>", cp.getTypeGuard());
+			assertExpected("java.lang.Class", cp.getTypeGuard());
 			assertExpected("java.lang.Boolean", cp.getCase());
 			assertExpected("java.lang.String", cp.getThen());
 		}

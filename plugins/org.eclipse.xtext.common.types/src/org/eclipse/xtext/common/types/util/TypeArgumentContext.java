@@ -7,29 +7,39 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
+import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.util.Wrapper;
 
 import com.google.common.collect.Maps;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
 public class TypeArgumentContext {
 
 	private Map<JvmTypeParameter, JvmTypeReference> context;
+	
+	private JvmDeclaredType objectType;
 
-	public TypeArgumentContext(Map<JvmTypeParameter, JvmTypeReference> context) {
+	public TypeArgumentContext(Map<JvmTypeParameter, JvmTypeReference> context, JvmDeclaredType objectType) {
 		this.context = context;
+		this.objectType = objectType;
 	}
 
 	public JvmTypeReference getBoundArgument(JvmTypeParameter param) {
@@ -37,57 +47,150 @@ public class TypeArgumentContext {
 		return jvmTypeArgument;
 	}
 	
-	@SuppressWarnings("serial")
-	public JvmTypeReference resolve(JvmTypeReference element) {
+	/**
+	 * Resolve the reference for a contravariant location, e.g. a parameter type of a method.
+	 * @return the resolved reference or <code>null</code> if the reference cannot be resolved contravariant.
+	 */
+	public JvmTypeReference resolveContravariant(JvmTypeReference element) {
+		JvmTypeReference copy = doGetResolvedCopy(element, Wrapper.wrap(Boolean.FALSE));
+		if (copy instanceof JvmWildcardTypeReference) {
+			for(JvmTypeConstraint constraint: ((JvmWildcardTypeReference) copy).getConstraints()) {
+				if (constraint instanceof JvmLowerBound) {
+					JvmTypeReference lowerBound = constraint.getTypeReference();
+					return lowerBound;
+				}
+			}
+			// only upper bounds set - no valid contravariant value 
+			return null;
+		}
+		return copy;
+	}
+	
+	/**
+	 * Resolve the reference for a covariant location, e.g. a return type of a method.
+	 * @return the resolved reference or <code>null</code> if the reference cannot be resolved covariant.
+	 */
+	public JvmTypeReference resolveCovariant(JvmTypeReference element) {
+		JvmTypeReference copy = doGetResolvedCopy(element, Wrapper.wrap(Boolean.FALSE));
+		if (copy instanceof JvmWildcardTypeReference) {
+			for(JvmTypeConstraint constraint: ((JvmWildcardTypeReference) copy).getConstraints()) {
+				if (constraint instanceof JvmUpperBound)
+					return constraint.getTypeReference();
+			}
+			// no upperbound given - return object
+			JvmParameterizedTypeReference result = createTypeReference();
+			result.setType(objectType);
+			return result;
+		}
+		return copy;
+	}
+	
+	/**
+	 * Resolve the reference for an invariant location, e.g. an extends clause
+	 * @return the resolved reference or <code>null</code> if the reference cannot be resolved covariant.
+	 */
+	public JvmTypeReference resolveInvariant(JvmTypeReference element) {
+		Wrapper<Boolean> foundRawType = Wrapper.wrap(Boolean.FALSE);
+		JvmTypeReference copy = doGetResolvedCopy(element, foundRawType);
+		if (foundRawType.get()) {
+			if (element instanceof JvmParameterizedTypeReference) {
+				JvmParameterizedTypeReference result = createTypeReference();
+				result.setType(element.getType());
+				return result;
+			} else if (element instanceof JvmWildcardTypeReference) {
+				for(JvmTypeConstraint constraint: ((JvmWildcardTypeReference) copy).getConstraints()) {
+					if (constraint instanceof JvmUpperBound) {
+						JvmParameterizedTypeReference result = createTypeReference();
+						result.setType(constraint.getTypeReference().getType());
+						return result;
+					}
+				}
+			}
+		}
+		return copy;
+	}
+
+	protected JvmTypeReference doGetResolvedCopy(JvmTypeReference element, final Wrapper<Boolean> foundRawType) {
+		@SuppressWarnings("serial")
 		EcoreUtil.Copier copier = new EcoreUtil.Copier(false,true) {
 			@Override
-			public EObject copy(EObject arg0) {
-				if (arg0 instanceof JvmParameterizedTypeReference) {
-					JvmParameterizedTypeReference parameterizedTypeRef = (JvmParameterizedTypeReference) arg0;
+			public EObject copy(EObject object) {
+				EObject resolvedObject = resolveTypeParameters(object); 
+				EObject result = super.copy(resolvedObject);
+				return result;
+			}
+
+			protected EObject resolveTypeParameters(EObject object) {
+				if (object instanceof JvmParameterizedTypeReference) {
+					JvmParameterizedTypeReference parameterizedTypeRef = (JvmParameterizedTypeReference) object;
 					JvmType type = parameterizedTypeRef.getType();
 					if (type instanceof JvmTypeParameter) {
 						JvmTypeReference resolved = TypeArgumentContext.this.getBoundArgument((JvmTypeParameter) type);
 						if (resolved!=null) {
-							arg0 = resolve(resolved);
+							return resolveTypeParameters(resolved);
+						} else {
+							// raw type - return object reference
+							foundRawType.set(Boolean.TRUE);
+							JvmParameterizedTypeReference result = createTypeReference();
+							result.setType(objectType);
+							return result;
 						}
 					}
 				}
-				return super.copy(arg0);
+				return object;
 			}
 		};
 		JvmTypeReference copy = (JvmTypeReference) copier.copy(element);
 		copier.copyReferences();
 		return copy;
-		
 	}
 	
+	protected JvmParameterizedTypeReference createTypeReference() {
+		TypesFactory factory = (TypesFactory) objectType.eClass().getEPackage().getEFactoryInstance();
+		JvmParameterizedTypeReference result = factory.createJvmParameterizedTypeReference();
+		return result;
+	}
 
 	public static class Provider {
 		
+		public Provider() {
+		}
+		
 		public TypeArgumentContext get(JvmTypeReference contextRef) {
 			Map<JvmTypeParameter, JvmTypeReference> context = Maps.newHashMap();
-			internalComputeContext(contextRef, context);
-			return new TypeArgumentContext(context);
+			JvmDeclaredType objectType = internalComputeContext(contextRef, context);
+			return new TypeArgumentContext(context, objectType);
 		}
 
-		protected void internalComputeContext(JvmTypeReference contextRef,
-				Map<JvmTypeParameter, JvmTypeReference> context) {
+		protected JvmDeclaredType internalComputeContext(JvmTypeReference contextRef, Map<JvmTypeParameter, JvmTypeReference> context) {
 			if (contextRef instanceof JvmParameterizedTypeReference) {
 				JvmParameterizedTypeReference typeRef = (JvmParameterizedTypeReference) contextRef;
-				for (int i = 0; i < typeRef.getArguments().size(); i++) {
-					JvmTypeReference argument = typeRef.getArguments().get(i);
-					JvmTypeParameter param = ((JvmGenericType) typeRef.getType()).getTypeParameters().get(i);
-					context.put(param, argument);
+				List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) typeRef.getType()).getTypeParameters();
+				List<JvmTypeReference> typeArguments = typeRef.getArguments();
+				if (!typeArguments.isEmpty()) {
+					// parameterized type reference
+					for (int i = 0; i < typeArguments.size(); i++) {
+						JvmTypeReference argument = typeArguments.get(i);
+						JvmTypeParameter param = typeParameters.get(i);
+						context.put(param, argument);
+					}
 				}
 			}
 			JvmType type = contextRef.getType();
 			if (type instanceof JvmDeclaredType) {
 				JvmDeclaredType declaredType = (JvmDeclaredType) type;
-				EList<JvmTypeReference> superTypes = declaredType.getSuperTypes();
+				if ("java.lang.Object".equals(declaredType.getCanonicalName()))
+					return declaredType;
+				List<JvmTypeReference> superTypes = declaredType.getSuperTypes();
+				JvmDeclaredType result = null;
 				for (JvmTypeReference jvmTypeReference : superTypes) {
-					internalComputeContext(jvmTypeReference, context);
+					JvmDeclaredType temp = internalComputeContext(jvmTypeReference, context);
+					if (temp != null)
+						result = temp;
 				}
+				return result;
 			}
+			return null;
 		}
 	}
 }

@@ -24,7 +24,7 @@ import com.google.inject.Provider;
 public class XbaseTypeArgumentContextProvider extends TypeArgumentContext.Provider {
 	
 	@Inject
-	private ITypeProvider<JvmTypeReference> typeProvider; 
+	private ITypeProvider<JvmTypeReference> typeProvider;
 	
 	public TypeArgumentContext getContext(final EObject obj) {
 		Provider<TypeArgumentContext> provider = new Provider<TypeArgumentContext>() {
@@ -37,7 +37,7 @@ public class XbaseTypeArgumentContextProvider extends TypeArgumentContext.Provid
 		if (cache==null)
 			return provider.get();
 		else
-			return cache.get(Tuples.pair("typeContext",obj), obj.eResource(), provider);
+			return cache.get(Tuples.pair("typeContext", obj), obj.eResource(), provider);
 	}
 	
 	protected IResourceScopeCache getCache(EObject obj) {

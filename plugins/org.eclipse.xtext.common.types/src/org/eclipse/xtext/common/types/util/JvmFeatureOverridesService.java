@@ -121,7 +121,9 @@ public class JvmFeatureOverridesService {
 		for (int i = 0; i < overriding.getParameters().size(); i++) {
 			JvmFormalParameter overridingParam = overriding.getParameters().get(i);
 			JvmFormalParameter overriddenParam = overridden.getParameters().get(i);
-			if (!EcoreUtil.equals(context.resolve(overridingParam.getParameterType()), context.resolve(overriddenParam.getParameterType())))
+			JvmTypeReference overridingType = context.resolveContravariant(overridingParam.getParameterType());
+			JvmTypeReference overriddenType = context.resolveContravariant(overriddenParam.getParameterType());
+			if (!EcoreUtil.equals(overridingType, overriddenType))
 				return false;
 		}
 		return true;

@@ -69,7 +69,7 @@ public class XbaseExpectedTypeProvider extends AbstractExpectedTypeProvider<JvmT
 			TypeArgumentContext context = typeArgCtxProvider.getContext(expr.getMemberCallTarget());
 			JvmExecutable feature = (JvmExecutable) expr.getFeature();
 			JvmFormalParameter parameter = feature.getParameters().get(index);
-			return context.resolve(parameter.getParameterType());
+			return context.resolveContravariant(parameter.getParameterType());
 		}
 		return getExpectedType(expr);
 	}
@@ -79,7 +79,7 @@ public class XbaseExpectedTypeProvider extends AbstractExpectedTypeProvider<JvmT
 			TypeArgumentContext context = typeArgCtxProvider.getContext(expr.getLeftOperand());
 			JvmExecutable feature = (JvmExecutable) expr.getFeature();
 			JvmFormalParameter parameter = feature.getParameters().get(0);
-			return context.resolve(parameter.getParameterType());
+			return context.resolveContravariant(parameter.getParameterType());
 		}
 		return getExpectedType(expr);
 	}

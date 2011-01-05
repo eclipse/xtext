@@ -13,6 +13,7 @@ import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypesSwitch;
 
@@ -43,7 +44,11 @@ public class JvmFeatureSignatureProvider implements Function<JvmFeature, String>
 			builder.append("(");
 			Iterator<JvmFormalParameter> params = object.getParameters().iterator();
 			while (params.hasNext()){
-				builder.append(context.resolve(params.next().getParameterType()).getCanonicalName());
+				JvmTypeReference resolvedParameterType = context.resolveContravariant(params.next().getParameterType());
+				if (resolvedParameterType != null)
+					builder.append(resolvedParameterType.getCanonicalName());
+				else
+					builder.append("null");
 				if (params.hasNext())
 					builder.append(",");
 			}
