@@ -434,10 +434,10 @@ public class EcoreUtil2 extends EcoreUtil {
 				return true;
 			URIConverter uriConverter = resourceSet.getURIConverter();
 			URI normalized = uriConverter.normalize(newURI);
-			// fix for https://bugs.eclipse.org/bugs/show_bug.cgi?id=326760
-			if("platform".equals(uri.scheme()) && !uri.isPlatform()) 
-				return false;
 			if (normalized != null)
+				// fix for https://bugs.eclipse.org/bugs/show_bug.cgi?id=326760
+				if("platform".equals(normalized.scheme()) && !normalized.isPlatform()) 
+					return false;
 				return uriConverter.exists(normalized, Collections.emptyMap());
 		} catch (RuntimeException e) { // thrown by org.eclipse.emf.ecore.resource.ResourceSet#getResource(URI, boolean)
 			log.trace("Cannot load resource: " + newURI, e);
