@@ -89,7 +89,7 @@ public class LinkingTest extends AbstractXtend2Test {
 //	}
 	
 	public void testFeatureScope_1() throws Exception {
-		XtendFile file = file ("import java.lang.String class X { String foo() 'hello world' String bar(String foo) foo}");
+		XtendFile file = file ("class X { String foo() 'hello world' String bar(String foo) foo}");
 		XtendClass xClass = file.getClasses().get(0);
 		XtendFunction func  = (XtendFunction) xClass.getMembers().get(1);
 		XAbstractFeatureCall featureCall1 = (XAbstractFeatureCall) func.getExpression();

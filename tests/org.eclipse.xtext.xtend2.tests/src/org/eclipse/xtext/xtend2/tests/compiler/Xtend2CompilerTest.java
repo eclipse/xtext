@@ -27,6 +27,15 @@ public class Xtend2CompilerTest extends AbstractXtextTests {
 				"return x.length();\n" +
 				"}\n" +
 				"\n}";
+		assertCompilesTo(expected, input);
+	}
+	
+	
+
+	protected void assertFunctionCompilesTo(final String expected, final String input) throws Exception {
+//		assertCompilesTo("public class X {\n"+expected+"", input)
+	}
+	protected void assertCompilesTo(final String expected, final String input) throws Exception {
 		EObject model = getModel(input);
 
 		Xtend2Compiler compiler = get(Xtend2Compiler.class);

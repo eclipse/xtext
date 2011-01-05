@@ -47,7 +47,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 	protected void compile(XtendFunction obj, IAppendable appendable) {
 		//TODO typeparams, exceptions
-		JvmTypeReference returnType = getTypeProvider().getType(obj, null);
+		JvmTypeReference returnType = getTypeProvider().getType(obj);
 		appendable.append("public ").append(returnType.getCanonicalName()).append(" ").append(obj.getName()).append("(");
 		final int numParams = obj.getParameters().size();
 		for (int i = 0; i < numParams; i++) {
