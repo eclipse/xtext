@@ -67,6 +67,8 @@ public class ResourceSetBasedResourceDescriptions extends AbstractCompoundSelect
 		if (resourceServiceProvider == null)
 			return null;
 		Manager manager = resourceServiceProvider.getResourceDescriptionManager();
+		if (manager==null)
+			return null;
 		return manager.getResourceDescription(resource);
 	}
 

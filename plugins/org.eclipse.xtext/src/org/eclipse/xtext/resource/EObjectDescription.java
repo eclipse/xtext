@@ -56,7 +56,14 @@ public class EObjectDescription extends AbstractEObjectDescription {
 	}
 
 	public URI getEObjectURI() {
-		return EcoreUtil.getURI(element);
+		return normalize(element, EcoreUtil.getURI(element));
+	}
+	
+	protected URI normalize(EObject element, URI uri) {
+		if (element!=null && element.eResource()!=null && element.eResource().getResourceSet() != null)
+			return element.eResource().getResourceSet().getURIConverter().normalize(uri);
+		else
+			return uri;
 	}
 
 	public QualifiedName getName() {
