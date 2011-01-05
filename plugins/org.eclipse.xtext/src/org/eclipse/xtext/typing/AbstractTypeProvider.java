@@ -8,66 +8,63 @@
 package org.eclipse.xtext.typing;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class AbstractTypeProvider<T> implements ITypeProvider<T> {
 
-	private final PolymorphicDispatcher<T> dispatcher = PolymorphicDispatcher
-			.createForSingleTarget("_type", 2, 2, this);
-	@Inject
-	private ITypeConformanceComputer<T> conformanceChecker;
+	private final PolymorphicDispatcher<T> typeDispatcher = PolymorphicDispatcher.createForSingleTarget("_type", this);
 
-	public void setConformanceChecker(ITypeConformanceComputer<T> conformanceChecker) {
-		this.conformanceChecker = conformanceChecker;
+	@Inject(optional = true)
+	private IExpectedTypeProvider<T> expectedTypeProvider;
+
+	public void setExpectedTypeProvider(IExpectedTypeProvider<T> expectedTypeProvider) {
+		this.expectedTypeProvider = expectedTypeProvider;
 	}
 
-	public T getType(EObject astNode, Context<T> context) {
+	protected T getExpectedType(EObject astNode) {
+		return expectedTypeProvider != null ? expectedTypeProvider.getExpectedType(astNode) : null;
+	}
+
+	public T getType(final EObject astNode) {
 		if (astNode == null)
 			throw new IllegalArgumentException("expression was null");
-		return internalGetType(astNode, context);
+		final Provider<T> provider = new Provider<T>() {
+			public T get() {
+				final T invoke = typeDispatcher.invoke(astNode);
+				T actual = doConversion(invoke, astNode);
+				return actual;
+			}
+		};
+		final IResourceScopeCache cache = getCache(astNode);
+		if (cache == null)
+			return provider.get();
+		else
+			return cache.get(Tuples.pair("typeInference", astNode), astNode.eResource(), provider);
 	}
 
-
-	protected T internalGetType(EObject expression, Context<T> context) {
-		if (expression == null)
-			throw new IllegalArgumentException("expression was null");
-		if (context == null)
-			context = Context.newCtx();
-		T actual = dispatch_type(expression, context);
-		if (actual == null)
+	private IResourceScopeCache getCache(EObject astNode) {
+		if (!(astNode.eResource() instanceof XtextResource))
 			return null;
-		if (context.getExpectedType() != null) {
-			checkConformance(expression, context, actual);
-		}
-		return actual;
+		return ((XtextResource) astNode.eResource()).getCache();
 	}
 
-	protected T dispatch_type(EObject expression, Context<T> context) {
-		return dispatcher.invoke(expression, context);
+	protected T doConversion(T actualType, EObject context) {
+		return actualType;
 	}
 
-	/**
-	 * Is used to allow invocation of type provider on root element and override for certain expression containing AST
-	 * nodes.
-	 */
-	public T _type(EObject stNode, Context<T> context) {
-		for (EObject child : stNode.eContents()) {
-			internalGetType(child, context);
-		}
-		return null;
-	}
-
-	protected void checkConformance(EObject expression, Context<T> context, T actual) {
-		if (context.getExpectedType()!=null && !conformanceChecker.isConformant(context.getExpectedType(), actual)) {
-			context.acceptError(
-					"Type mismatch: cannot convert from " + getName(actual) + " to " + getName(context.getExpectedType()), expression,
-					null, ITypeConformanceComputer.ISSUE_NON_CONFORMANT_TYPES);
-		}
+	public T _type(EObject stNode, T expectedType, ValidationMessageAcceptor messageAcceptor) {
+		throw new IllegalArgumentException("Type computation is not implmented for AST nodes of type "
+				+ stNode.getClass().getCanonicalName());
 	}
 
 	protected String getName(T actual) {

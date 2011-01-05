@@ -147,10 +147,5 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 			return ignoreNotifications;
 		}
 
-		@Deprecated
-		public <T> T get(Object key, Resource res, Provider<T> provider) {
-			// TODO Auto-generated method stub
-			return null;
-		}
 	}
 }
