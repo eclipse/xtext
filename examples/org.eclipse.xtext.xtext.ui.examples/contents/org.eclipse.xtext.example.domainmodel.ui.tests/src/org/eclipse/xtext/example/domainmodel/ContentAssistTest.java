@@ -8,15 +8,10 @@
 package org.eclipse.xtext.example.domainmodel;
 
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.example.DomainmodelRuntimeModule;
 import org.eclipse.xtext.example.DomainmodelStandaloneSetup;
-import org.eclipse.xtext.example.ui.DomainmodelUiModule;
 import org.eclipse.xtext.example.ui.internal.DomainmodelActivator;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
-import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.util.Modules2;
 
-import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 /**
@@ -27,13 +22,18 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 	public ISetup getSetup() {
 		return new DomainmodelStandaloneSetup() {
 			@Override
-			public Injector createInjector() {
-				return Guice.createInjector(Modules2.mixin(
-						new DomainmodelRuntimeModule(),
-						new DomainmodelUiModule(DomainmodelActivator.getInstance()), 
-						new SharedStateModule()));
+			public Injector createInjectorAndDoEMFRegistration() {
+				// skip the emf stuff as it is done by means of the plugin.xml
+				return DomainmodelActivator.getInstance().getInjector("org.eclipse.xtext.example.Domainmodel");
 			}
 		};
+	}
+	
+	@Override
+	protected void setUp() throws Exception {
+		// access the activator prior to calling super.setup()
+		DomainmodelActivator.getInstance(); 
+		super.setUp();
 	}
 
 	public void testContentAssist() throws Exception {
