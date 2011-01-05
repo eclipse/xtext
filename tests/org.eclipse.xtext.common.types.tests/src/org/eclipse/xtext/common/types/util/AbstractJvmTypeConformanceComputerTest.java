@@ -8,9 +8,12 @@
 package org.eclipse.xtext.common.types.util;
 
 import java.io.Serializable;
+import java.nio.CharBuffer;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import junit.framework.TestCase;
 
@@ -33,24 +36,30 @@ import org.eclipse.xtext.common.types.access.impl.DeclaredTypeFactory;
 import com.google.inject.internal.Lists;
 
 /**
- * @author svenefftinge - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
 public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 
-	private IJvmTypeConformanceComputer computer = new IJvmTypeConformanceComputer.Impl(new SuperTypeCollector(TypesFactory.eINSTANCE));
+	private IJvmTypeConformanceComputer computer = null;
 	private DeclaredTypeFactory factory = new DeclaredTypeFactory(new ClassURIHelper());
 
+	@Override
+	protected void tearDown() throws Exception {
+		computer = null;
+		super.tearDown();
+	}
+	
 	protected JvmTypeReference ref(java.lang.reflect.Type type, JvmTypeReference... arguments) {
-		JvmTypeReference createTypeReference = factory.createTypeReference(type);
+		JvmTypeReference result = factory.createTypeReference(type);
 		if (arguments.length > 0) {
 			for (JvmTypeReference typeArgument : arguments) {
-				((JvmParameterizedTypeReference) createTypeReference).getArguments().add(typeArgument);
+				((JvmParameterizedTypeReference) result).getArguments().add(typeArgument);
 			}
 		}
 		Resource syntheticResource = getSyntheticResource();
-		syntheticResource.getContents().add(createTypeReference);
+		syntheticResource.getContents().add(result);
 		EcoreUtil.resolveAll(syntheticResource);
-		return createTypeReference;
+		return result;
 	}
 
 	protected JvmGenericArrayTypeReference array(JvmTypeReference typeRef, int i) {
@@ -102,8 +111,8 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 //		zonk = foo; // ok
 		JvmTypeReference rawList = ref(List.class);
 		JvmTypeReference List_of_super_String = ref(List.class, wc_super(ref(String.class)));
-		assertTrue(computer.isConformant(rawList, List_of_super_String));
-		assertTrue(computer.isConformant(List_of_super_String, rawList));
+		assertTrue(getComputer().isConformant(rawList, List_of_super_String));
+		assertTrue(getComputer().isConformant(List_of_super_String, rawList));
 	}
 	
 	/**
@@ -118,8 +127,8 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 //		zonk = foo; // ok
 		JvmTypeReference List_String = ref(List.class, ref(String.class));
 		JvmTypeReference List_rawtype = ref(List.class);
-		assertTrue(computer.isConformant(List_String, List_rawtype));
-		assertTrue(computer.isConformant(List_rawtype, List_String));
+		assertTrue(getComputer().isConformant(List_String, List_rawtype));
+		assertTrue(getComputer().isConformant(List_rawtype, List_String));
 	}
 	
 	/**
@@ -134,15 +143,15 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 //		zonk = foo; // ok
 		JvmTypeReference List_String = ref(List.class, wc_extends(ref(String.class)));
 		JvmTypeReference List_rawtype = ref(List.class);
-		assertTrue(computer.isConformant(List_String, List_rawtype));
-		assertTrue(computer.isConformant(List_rawtype, List_String));
+		assertTrue(getComputer().isConformant(List_String, List_rawtype));
+		assertTrue(getComputer().isConformant(List_rawtype, List_String));
 	}
 	
 	
 	public void testInterfacesConformToObject() throws Exception {
 		JvmTypeReference interfaceType = ref(CharSequence.class);
 		JvmTypeReference objectType = ref(Object.class);
-		assertTrue(computer.isConformant(objectType, interfaceType));
+		assertTrue(getComputer().isConformant(objectType, interfaceType));
 	}
 	
 	/**
@@ -151,8 +160,8 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 	public void testGenerics_super_1() throws Exception {
 		JvmTypeReference List_of_super_CharSequence = ref(List.class, wc_super(ref(CharSequence.class)));
 		JvmTypeReference List_of_super_String = ref(List.class, wc_super(ref(String.class)));
-		assertTrue(computer.isConformant(List_of_super_String, List_of_super_CharSequence));
-		assertFalse(computer.isConformant(List_of_super_CharSequence, List_of_super_String));
+		assertTrue(getComputer().isConformant(List_of_super_String, List_of_super_CharSequence));
+		assertFalse(getComputer().isConformant(List_of_super_CharSequence, List_of_super_String));
 	}
 
 	/**
@@ -161,8 +170,8 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 	public void testGenerics_UnconstraintWildcard_1() throws Exception {
 		JvmTypeReference List_CharSequence = ref(List.class, ref(CharSequence.class));
 		JvmTypeReference List_of_wildcard = ref(List.class, wc());
-		assertTrue(computer.isConformant(List_of_wildcard, List_CharSequence));
-		assertFalse(computer.isConformant(List_CharSequence, List_of_wildcard));
+		assertTrue(getComputer().isConformant(List_of_wildcard, List_CharSequence));
+		assertFalse(getComputer().isConformant(List_CharSequence, List_of_wildcard));
 	}
 	
 	/**
@@ -171,8 +180,8 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 	public void testGenerics_UnconstraintWildcard_2() throws Exception {
 		JvmTypeReference List_of_super_CharSequence = ref(List.class, wc_super(ref(CharSequence.class)));
 		JvmTypeReference List_of_wildcard = ref(List.class, wc());
-		assertTrue(computer.isConformant(List_of_wildcard, List_of_super_CharSequence));
-		assertFalse(computer.isConformant(List_of_super_CharSequence, List_of_wildcard));
+		assertTrue(getComputer().isConformant(List_of_wildcard, List_of_super_CharSequence));
+		assertFalse(getComputer().isConformant(List_of_super_CharSequence, List_of_wildcard));
 	}
 	/**
 	 * List<?> <= List<? extends CharSequence> 
@@ -180,82 +189,99 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 	public void testGenerics_UnconstraintWildcard_3() throws Exception {
 		JvmTypeReference List_of_extends_CharSequence = ref(List.class, wc_extends(ref(CharSequence.class)));
 		JvmTypeReference List_of_wildcard = ref(List.class, wc());
-		assertTrue(computer.isConformant(List_of_wildcard, List_of_extends_CharSequence));
-		assertFalse(computer.isConformant(List_of_extends_CharSequence, List_of_wildcard));
+		assertTrue(getComputer().isConformant(List_of_wildcard, List_of_extends_CharSequence));
+		assertFalse(getComputer().isConformant(List_of_extends_CharSequence, List_of_wildcard));
 	}
 
 	public void testGenerics_1() throws Exception {
 		JvmTypeReference List_of_String = ref(List.class, ref(String.class));
 		JvmTypeReference List_of_extends_String = ref(List.class, wc_extends(ref(String.class)));
-		assertTrue(computer.isConformant(List_of_extends_String, List_of_String));
-		assertFalse(computer.isConformant(List_of_String, List_of_extends_String));
+		assertTrue(getComputer().isConformant(List_of_extends_String, List_of_String));
+		assertFalse(getComputer().isConformant(List_of_String, List_of_extends_String));
 	}
-
+	
 	public void testGenerics_2() throws Exception {
 		JvmTypeReference List_of_String = ref(List.class, ref(String.class));
 		JvmTypeReference Collection_of_String = ref(Collection.class, ref(String.class));
-		assertTrue(computer.isConformant(Collection_of_String, List_of_String));
-		assertFalse(computer.isConformant(List_of_String, Collection_of_String));
+		assertTrue(getComputer().isConformant(Collection_of_String, List_of_String));
+		assertFalse(getComputer().isConformant(List_of_String, Collection_of_String));
 	}
 
 	public void testGenerics_3() throws Exception {
 		JvmTypeReference Func_of_String_String = ref(Map.class, ref(String.class), ref(String.class));
 		JvmTypeReference Func_of_extends_String_String = ref(Map.class, wc_extends(ref(String.class)), ref(String.class));
-		assertTrue(computer.isConformant(Func_of_extends_String_String, Func_of_String_String));
-		assertFalse(computer.isConformant(Func_of_String_String, Func_of_extends_String_String));
+		assertTrue(getComputer().isConformant(Func_of_extends_String_String, Func_of_String_String));
+		assertFalse(getComputer().isConformant(Func_of_String_String, Func_of_extends_String_String));
 	}
 
 	public void testGenerics_4() throws Exception {
 		JvmTypeReference Func_of_String_String = ref(Map.class, ref(String.class), ref(String.class));
 		JvmTypeReference Func_of_extends_String_String = ref(Map.class, ref(String.class), ref(String.class));
-		assertTrue(computer.isConformant(Func_of_extends_String_String, Func_of_String_String));
-		assertTrue(computer.isConformant(Func_of_String_String, Func_of_extends_String_String));
+		assertTrue(getComputer().isConformant(Func_of_extends_String_String, Func_of_String_String));
+		assertTrue(getComputer().isConformant(Func_of_String_String, Func_of_extends_String_String));
+	}
+	
+	/**
+	 * List<CharSequence> =/= List<String>  
+	 */
+	public void testGenerics_5() throws Exception {
+		JvmTypeReference List_of_String = ref(List.class, ref(String.class));
+		JvmTypeReference List_of_CharSequence = ref(List.class, ref(CharSequence.class));
+		assertFalse(getComputer().isConformant(List_of_CharSequence, List_of_String));
+		assertFalse(getComputer().isConformant(List_of_String, List_of_CharSequence));
+	}
+	
+	public void testGenerics_6() throws Exception {
+		JvmTypeReference List_of_List_of_String = ref(List.class, ref(List.class, ref(String.class)));
+		JvmTypeReference List_of_List_of_CharSequence = ref(List.class, ref(List.class, ref(CharSequence.class)));
+		assertFalse(getComputer().isConformant(List_of_List_of_CharSequence, List_of_List_of_String));
+		assertFalse(getComputer().isConformant(List_of_List_of_String, List_of_List_of_CharSequence));
 	}
 
 	public void testSameType() throws Exception {
-		assertTrue(computer.isConformant(ref(String.class), ref(String.class)));
+		assertTrue(getComputer().isConformant(ref(String.class), ref(String.class)));
 	}
 
 	public void testInheritanceCompatibility() throws Exception {
-		assertTrue(computer.isConformant(ref(CharSequence.class), ref(String.class)));
-		assertFalse(computer.isConformant(ref(String.class), ref(CharSequence.class)));
+		assertTrue(getComputer().isConformant(ref(CharSequence.class), ref(String.class)));
+		assertFalse(getComputer().isConformant(ref(String.class), ref(CharSequence.class)));
 	}
 
 	public void testAutoBoxingInteger() throws Exception {
-		assertTrue(computer.isConformant(ref(Integer.TYPE), ref(Integer.class)));
-		assertTrue(computer.isConformant(ref(Integer.class), ref(Integer.TYPE)));
+		assertTrue(getComputer().isConformant(ref(Integer.TYPE), ref(Integer.class)));
+		assertTrue(getComputer().isConformant(ref(Integer.class), ref(Integer.TYPE)));
 	}
 
 	public void testAutoBoxingBoolean() throws Exception {
-		assertTrue(computer.isConformant(ref(Boolean.TYPE), ref(Boolean.class)));
-		assertTrue(computer.isConformant(ref(Boolean.class), ref(Boolean.TYPE)));
+		assertTrue(getComputer().isConformant(ref(Boolean.TYPE), ref(Boolean.class)));
+		assertTrue(getComputer().isConformant(ref(Boolean.class), ref(Boolean.TYPE)));
 	}
 
 	public void testAutoBoxingLong() throws Exception {
-		assertTrue(computer.isConformant(ref(Long.TYPE), ref(Long.class)));
-		assertTrue(computer.isConformant(ref(Long.class), ref(Long.TYPE)));
+		assertTrue(getComputer().isConformant(ref(Long.TYPE), ref(Long.class)));
+		assertTrue(getComputer().isConformant(ref(Long.class), ref(Long.TYPE)));
 	}
 
 	public void testAutoBoxingFloat() throws Exception {
-		assertTrue(computer.isConformant(ref(Float.TYPE), ref(Float.class)));
-		assertTrue(computer.isConformant(ref(Float.class), ref(Float.TYPE)));
+		assertTrue(getComputer().isConformant(ref(Float.TYPE), ref(Float.class)));
+		assertTrue(getComputer().isConformant(ref(Float.class), ref(Float.TYPE)));
 	}
 
 	public void testAutoBoxingDouble() throws Exception {
-		assertTrue(computer.isConformant(ref(Double.TYPE), ref(Double.class)));
-		assertTrue(computer.isConformant(ref(Double.class), ref(Double.TYPE)));
+		assertTrue(getComputer().isConformant(ref(Double.TYPE), ref(Double.class)));
+		assertTrue(getComputer().isConformant(ref(Double.class), ref(Double.TYPE)));
 	}
 
 	public void testAutoBoxingByte() throws Exception {
-		assertTrue(computer.isConformant(ref(Byte.TYPE), ref(Byte.class)));
-		assertTrue(computer.isConformant(ref(Byte.class), ref(Byte.TYPE)));
+		assertTrue(getComputer().isConformant(ref(Byte.TYPE), ref(Byte.class)));
+		assertTrue(getComputer().isConformant(ref(Byte.class), ref(Byte.TYPE)));
 	}
 
 	public void testArrayType() throws Exception {
-		assertTrue(computer.isConformant(array(ref(String.class), 1), array(ref(String.class), 1)));
-		assertFalse(computer.isConformant(array(ref(String.class), 1), array(ref(CharSequence.class), 1)));
-		assertFalse(computer.isConformant(array(ref(String.class), 2), array(ref(String.class), 1)));
-		assertFalse(computer.isConformant(array(ref(String.class), 1), array(ref(String.class), 2)));
+		assertTrue(getComputer().isConformant(array(ref(String.class), 1), array(ref(String.class), 1)));
+		assertFalse(getComputer().isConformant(array(ref(String.class), 1), array(ref(CharSequence.class), 1)));
+		assertFalse(getComputer().isConformant(array(ref(String.class), 2), array(ref(String.class), 1)));
+		assertFalse(getComputer().isConformant(array(ref(String.class), 1), array(ref(String.class), 2)));
 	}
 	
 	protected void assertCommonSuperType(Class<?> expected, Class<?> ...types) {
@@ -264,13 +290,21 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 			Class<?> class1 = types[i];
 			refs.add(ref(class1));
 		}
-		JvmTypeReference type = computer.getCommonSuperType(refs);
-		assertEquals(expected.getCanonicalName(), type.getCanonicalName());
+		assertCommonSuperType(expected.getCanonicalName(), refs);
+	}
+	
+	protected void assertCommonSuperType(String expected, JvmTypeReference... types) {
+		assertCommonSuperType(expected, Arrays.asList(types));
+	}
+	
+	protected void assertCommonSuperType(String expected, List<JvmTypeReference> refs) {
+		JvmTypeReference type = getComputer().getCommonSuperType(refs);
+		assertEquals(expected, type.getCanonicalName());
 	}
 	
 	public void testCommonSuperType_0() throws Exception {
 		assertCommonSuperType(
-				CharSequence.class,
+				Serializable.class,
 				String.class,
 				StringBuilder.class);
 	}
@@ -307,14 +341,71 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 		);
 	}
 	
+	public void testCommonSuperType_5() throws Exception {
+		assertCommonSuperType(
+				Serializable.class,
+				String.class,
+				StringBuilder.class,
+				Serializable.class);
+	}
+	
+	public void testCommonSuperType_6() throws Exception {
+		assertCommonSuperType(
+				Serializable.class,
+				StringBuilder.class,
+				String.class);
+	}
+	
+	public void testCommonSuperType_7() throws Exception {
+		assertCommonSuperType(
+				Appendable.class,
+				StringBuilder.class,
+				CharBuffer.class);
+	}
+	
+	public void testCommonSuperType_8() throws Exception {
+		assertCommonSuperType(
+				"java.util.Collection<java.lang.String>",
+				ref(Set.class, ref(String.class)),
+				ref(List.class, ref(String.class)));
+	}
+	
+	public void testCommonSuperType_9() throws Exception {
+		assertCommonSuperType(
+				"java.util.Collection", // one raw type - super type is raw type
+				ref(Set.class, ref(String.class)),
+				ref(List.class));
+	}
+	
+	public void testCommonSuperType_10() throws Exception {
+		assertCommonSuperType(
+				"java.util.Collection<? extends java.lang.CharSequence>",
+				ref(Set.class, ref(String.class)),
+				ref(List.class, ref(CharSequence.class)));
+	}
+	
 	public void testConformanceWithTypeParameter() throws Exception {
 		JvmTypeParameter typeParam = ((JvmGenericType)ref(List.class).getType()).getTypeParameters().get(0);
 		JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
 		reference.setType(typeParam);
-		assertTrue(computer.isConformant(reference, ref(Object.class)));
-		assertTrue(computer.isConformant(reference, ref(String.class)));
-		assertTrue(computer.isConformant(reference, ref(CharSequence.class)));
-		assertTrue(computer.isConformant(reference, ref(Serializable.class)));
+		assertTrue(getComputer().isConformant(reference, ref(Object.class)));
+		assertTrue(getComputer().isConformant(reference, ref(String.class)));
+		assertTrue(getComputer().isConformant(reference, ref(CharSequence.class)));
+		assertTrue(getComputer().isConformant(reference, ref(Serializable.class)));
+	}
+
+	protected void setComputer(IJvmTypeConformanceComputer computer) {
+		this.computer = computer;
+	}
+
+	protected IJvmTypeConformanceComputer getComputer() {
+		if (computer == null) {
+			computer = new DefaultJvmTypeConformanceComputer(
+				new SuperTypeCollector(TypesFactory.eINSTANCE),
+				new TypeArgumentContext.Provider(), 
+				TypesFactory.eINSTANCE);
+		}
+		return computer;
 	}
 
 }

@@ -22,7 +22,6 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
@@ -41,8 +40,8 @@ public class TypeArgumentContextTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		ResourceSet resourceSet = new ResourceSetImpl();
-		Resource syntheticResource = new XMLResourceImpl(URI.createURI("http://synthetic.resource"));
-		resourceSet.getResources().add(syntheticResource);
+		Resource resource = new XMLResourceImpl(URI.createURI("http://synthetic.resource"));
+		resourceSet.getResources().add(resource);
 		typeProvider = new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet);
 		typeRefs = new JvmTypeReferences(TypesFactory.eINSTANCE, typeProvider);
 		typeArgCtxProvider = new TypeArgumentContext.Provider();
@@ -79,9 +78,20 @@ public class TypeArgumentContextTest extends TestCase {
 		TypeArgumentContext context = typeArgCtxProvider.get(reference);
 		JvmOperation jvmOperation = findOperation("java.util.List", "add(E)");
 		
-		assertEquals("? extends java.lang.CharSequence",context.resolve(jvmOperation.getParameters().get(0).getParameterType()).getCanonicalName());
+		assertEquals(null, context.resolveContravariant(jvmOperation.getParameters().get(0).getParameterType()));
 		JvmOperation get = findOperation("java.util.List", "get(int)");
-		assertEquals("? extends java.lang.CharSequence",context.resolve(get.getReturnType()).getCanonicalName());
+		assertEquals("java.lang.CharSequence",context.resolveCovariant(get.getReturnType()).getCanonicalName());
+	}
+	
+	public void testResolve_1() throws Exception {
+		JvmTypeReference reference = typeRefs.typeReference("java.util.ArrayList").wildCardSuper("java.lang.CharSequence").create();
+		TypeArgumentContext context = typeArgCtxProvider.get(reference);
+		JvmOperation jvmOperation = findOperation("java.util.List", "add(E)");
+		
+		JvmTypeReference resolvedParameter = context.resolveContravariant(jvmOperation.getParameters().get(0).getParameterType());
+		assertEquals("java.lang.CharSequence", resolvedParameter.getCanonicalName());
+		JvmOperation get = findOperation("java.util.List", "get(int)");
+		assertEquals("java.lang.Object",context.resolveCovariant(get.getReturnType()).getCanonicalName());
 	}
 	
 	public void testResolve_WithUnResolved() throws Exception {
@@ -89,11 +99,10 @@ public class TypeArgumentContextTest extends TestCase {
 		TypeArgumentContext context = typeArgCtxProvider.get(reference);
 		JvmOperation jvmOperation = findOperation("java.util.List", "add(E)");
 		
-		JvmTypeParameter parameter = ((JvmGenericType)reference.getType()).getTypeParameters().get(0);
-		
-		assertSame(parameter,context.resolve(jvmOperation.getParameters().get(0).getParameterType()).getType());
+		JvmTypeReference resolvedParameter = context.resolveContravariant(jvmOperation.getParameters().get(0).getParameterType());
+		assertEquals("java.lang.Object", resolvedParameter.getCanonicalName());
 		JvmOperation get = findOperation("java.util.List", "get(int)");
-		assertEquals(parameter,context.resolve(get.getReturnType()).getType());
+		assertEquals("java.lang.Object", context.resolveCovariant(get.getReturnType()).getCanonicalName());
 	}
 	
 	public void testResolveDeeplyNested() throws Exception {
@@ -106,7 +115,7 @@ public class TypeArgumentContextTest extends TestCase {
 		TypeArgumentContext context = typeArgCtxProvider.get(reference);
 		
 		JvmOperation get = findOperation("java.util.List", "get(int)");
-		assertEquals("? extends java.util.Map<? super java.lang.String,? extends java.lang.Number>",context.resolve(get.getReturnType()).getCanonicalName());
+		assertEquals("java.util.Map<? super java.lang.String,? extends java.lang.Number>",context.resolveCovariant(get.getReturnType()).getCanonicalName());
 	}
 	
 	protected JvmOperation findOperation(String typeName, String methodSignature) {
