@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.validation.TypeConformanceValidator;
+import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -64,12 +64,12 @@ public class TypeConformanceValidatorTest extends AbstractXbaseValidationTest {
 	protected void assertConformanceError(String expression, EClass objectType, String... messageParts)
 			throws Exception {
 		final XExpression xExpression = expression(expression, true);
-		assertError(xExpression, objectType, TypeConformanceValidator.INCOMPATIBLE_TYPES, messageParts);
+		assertError(xExpression, objectType, XbaseJavaValidator.INCOMPATIBLE_TYPES, messageParts);
 	}
 
 	protected void assertNoConformanceError(String expression) throws Exception {
 		final XExpression xExpression = expression(expression, true);
-		assertNoError(xExpression, TypeConformanceValidator.INCOMPATIBLE_TYPES);
+		assertNoError(xExpression, XbaseJavaValidator.INCOMPATIBLE_TYPES);
 	}
 
 }

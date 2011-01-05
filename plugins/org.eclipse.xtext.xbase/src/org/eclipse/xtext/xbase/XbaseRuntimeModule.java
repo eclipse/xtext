@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
+import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
@@ -17,6 +18,7 @@ import org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
 import org.eclipse.xtext.xbase.linking.XbaseLinkingScopeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseExpectedTypeProvider;
+import org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 
 import com.google.inject.Binder;
@@ -35,6 +37,10 @@ public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 	
 	public Class<? extends org.eclipse.xtext.typing.IExpectedTypeProvider<JvmTypeReference>> bindIExpectedTypeProvider() {
 		return XbaseExpectedTypeProvider.class;
+	}
+	
+	public Class<? extends TypeArgumentContext.Provider> bindTypeArgumentContextProvider() {
+		return XbaseTypeArgumentContextProvider.class;
 	}
 	
 	public Class<? extends IExpressionInterpreter> bindInterpreter() {
