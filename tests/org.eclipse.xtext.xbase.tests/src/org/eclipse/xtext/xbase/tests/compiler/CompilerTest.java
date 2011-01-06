@@ -36,7 +36,7 @@ public class CompilerTest extends AbstractXtextTests {
 				"_var = _this.size();\n" +
 				"}\n" +
 				"return _var;\n"
-				, "{ val this = new java.util.ArrayList<java.lang.String>(); size;}");
+				, "{ val this = new java.util.ArrayList<String>(); size;}");
 	}
 	
 	public void testIf() throws Exception {
@@ -56,7 +56,7 @@ public class CompilerTest extends AbstractXtextTests {
 				"s.length();\n" +
 				"}\n" +
 				"return null;\n"
-				, "for (java.lang.String s : new java.util.ArrayList<java.lang.String>()) " +
+				, "for (String s : new java.util.ArrayList<String>()) " +
 						"s.length");
 	}
 	

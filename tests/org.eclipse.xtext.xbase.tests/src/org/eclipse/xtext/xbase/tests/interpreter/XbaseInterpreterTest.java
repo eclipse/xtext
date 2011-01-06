@@ -56,7 +56,7 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 	}
 	
 	public void testTypeLiteral_01() {
-		assertEvaluatesTo(Void.class, "java.lang.Void.class");
+		assertEvaluatesTo(Void.class, "Void.class");
 	}
 	
 	public void testTypeLiteral_02() {
@@ -186,7 +186,7 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 	public void testAssignment_11() {
 		assertEvaluatesTo("literal", 
 				"{" +
-				"  var list = new testdata.GenericType1<java.lang.String>()" +
+				"  var list = new testdata.GenericType1<String>()" +
 				"  list += 'literal'" +
 				"  list.get()" +
 				"}");
@@ -195,7 +195,7 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 	public void testAssignment_12() {
 		assertEvaluatesTo(Boolean.TRUE, 
 				"{" +
-				"  var list = new testdata.GenericType1<java.lang.String>()" +
+				"  var list = new testdata.GenericType1<String>()" +
 				"  list += 'literal'" +
 				"}");
 	}
@@ -207,16 +207,17 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 	public void testForLoop_01() {
 		assertEvaluatesTo(new Character('c'), 
 				"{\n" +
-				"  var java.lang.Character result = null\n" +
+				"  var Character result = null\n" +
 				"  for(x: 'abc'.toCharArray) result = x\n" +
 				"  result" +
 				"}");
 	}
 	
+//TODO
 //	public void testForLoop_02() {
 //		assertEvaluatesTo(new Character('b'), 
 //				"{\n" +
-//				"  var java.lang.Character result = null\n" +
+//				"  var Character result = null\n" +
 //				"  for(x: 'aba'.toCharArray) if (result == null) result = x\n" +
 //				"  result" +
 //				"}");
@@ -351,11 +352,11 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 	}
 	
 	public void testSwitchExpression_05() {
-		assertEvaluatesTo(null, "switch true { java.lang.String : 'literal'; }");
+		assertEvaluatesTo(null, "switch true { String : 'literal'; }");
 	}
 	
 	public void testSwitchExpression_06() {
-		assertEvaluatesTo("literal", "switch true { java.lang.Boolean : 'literal'; }");
+		assertEvaluatesTo("literal", "switch true { Boolean : 'literal'; }");
 	}
 	
 	public void testSwitchExpression_07() {
@@ -367,46 +368,46 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 	}
 	
 	public void testSwitchExpression_09() {
-		assertEvaluatesTo(Integer.valueOf(4), "switch 'foo' { case 'foo': 4; java.lang.String: 3; }");
+		assertEvaluatesTo(Integer.valueOf(4), "switch 'foo' { case 'foo': 4; String: 3; }");
 	}
 	
 	public void testSwitchExpression_10() {
-		assertEvaluatesTo(Integer.valueOf(3), "switch 'foo' { java.lang.Boolean case 'foo': 4; java.lang.String: 3; }");
+		assertEvaluatesTo(Integer.valueOf(3), "switch 'foo' { Boolean case 'foo': 4; String: 3; }");
 	}
 	
 	public void testCastedExpression_01() {
-		assertEvaluatesTo("literal", "(java.lang.String) 'literal'");
+		assertEvaluatesTo("literal", "(String) 'literal'");
 	}
 	
 	public void testCastedExpression_02() {
-		assertEvaluatesWithException(ClassCastException.class, "(java.lang.Integer) 'literal'");
+		assertEvaluatesWithException(ClassCastException.class, "(Integer) 'literal'");
 	}
 	
 	public void testCastedExpression_03() {
-		assertEvaluatesTo(null, "(java.lang.Integer) null");
+		assertEvaluatesTo(null, "(Integer) null");
 	}
 	
 	public void testTryCatch_01() {
-		assertEvaluatesTo("caught", "try { (java.lang.Boolean) 'literal' } catch(java.lang.ClassCastException e) {'caught'}");
+		assertEvaluatesTo("caught", "try { (Boolean) 'literal' } catch(ClassCastException e) {'caught'}");
 	}
 	
 	public void testTryCatch_02() {
-		assertEvaluatesTo("literal", "try { (java.lang.String) 'literal' } catch(java.lang.ClassCastException e) {'caught'}");
+		assertEvaluatesTo("literal", "try { (String) 'literal' } catch(ClassCastException e) {'caught'}");
 	}
 	
 	public void testTryCatch_03() {
-		assertEvaluatesTo("ClassCastException", "try { (java.lang.Boolean) 'literal' } catch(java.lang.ClassCastException e) {e.getClass().getSimpleName()}");
+		assertEvaluatesTo("ClassCastException", "try { (Boolean) 'literal' } catch(ClassCastException e) {e.getClass().getSimpleName()}");
 	}
 	
 	public void testTryCatch_04() {
-		assertEvaluatesWithException(NullPointerException.class, "try { (java.lang.Boolean) 'literal' } catch(java.lang.ClassCastException e) null == e");
+		assertEvaluatesWithException(NullPointerException.class, "try { (Boolean) 'literal' } catch(ClassCastException e) null == e");
 	}
 	
 	public void testTryCatch_05() {
 		assertEvaluatesWithException(NullPointerException.class, 
-				"try (java.lang.Boolean) 'literal' " +
-				"  catch(java.lang.ClassCastException e) null == e // throw new NullPointerException()" +
-				"  catch(java.lang.NullPointerException e) 'dont catch subsequent exceptions'");
+				"try (Boolean) 'literal' " +
+				"  catch(ClassCastException e) null == e // throw new NullPointerException()" +
+				"  catch(NullPointerException e) 'dont catch subsequent exceptions'");
 	}
 	
 	public void testTryFinally_01() {
@@ -422,7 +423,7 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 	}
 	
 	public void testConstructor_02() {
-		assertEvaluatesTo(new Character('a'), "new java.lang.Character('abc'.charAt(0))");
+		assertEvaluatesTo(new Character('a'), "new Character('abc'.charAt(0))");
 	}
 	
 	public void testConstructor_03() {
@@ -446,19 +447,19 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 	}
 	
 	public void testInstanceOf_01() {
-		assertEvaluatesTo(Boolean.TRUE, "'literal' instanceof java.lang.String");
+		assertEvaluatesTo(Boolean.TRUE, "'literal' instanceof String");
 	}
 	
 	public void testInstanceOf_02() {
-		assertEvaluatesTo(Boolean.TRUE, "'literal' instanceof java.lang.CharSequence");
+		assertEvaluatesTo(Boolean.TRUE, "'literal' instanceof CharSequence");
 	}
 	
 	public void testInstanceOf_03() {
-		assertEvaluatesTo(Boolean.FALSE, "'literal' instanceof java.lang.Boolean");
+		assertEvaluatesTo(Boolean.FALSE, "'literal' instanceof Boolean");
 	}
 	
 	public void testInstanceOf_04() {
-		assertEvaluatesTo(Boolean.FALSE, "null instanceof java.lang.Boolean");
+		assertEvaluatesTo(Boolean.FALSE, "null instanceof Boolean");
 	}
 	
 //	public void testClosure_01() {
@@ -483,43 +484,43 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 //	
 //	public void testClosure_05() {
 //		assertEvaluatesTo("LITERAL", 
-//				"new testdata.ClosureClient().invoke1(java.lang.String s|s.toUpperCase, 'literal')");
+//				"new testdata.ClosureClient().invoke1(String s|s.toUpperCase, 'literal')");
 //	}
 //	
 //	public void testClosure_06() {
 //		assertEvaluatesTo("LITERAL", 
 //				"new testdata.ClosureClient().invoke2(" +
-//				"  p1, java.lang.String s|s.toUpperCase, null, 'literal')");
+//				"  p1, String s|s.toUpperCase, null, 'literal')");
 //	}
 //	
 //	public void testClosure_07() {
 //		assertEvaluatesTo("LITERAL", 
 //				"new testdata.ClosureClient().invoke3(" +
-//				"  p1, p2, java.lang.String s|s.toUpperCase, null, null, 'literal')");
+//				"  p1, p2, String s|s.toUpperCase, null, null, 'literal')");
 //	}
 //	
 //	public void testClosure_08() {
 //		assertEvaluatesTo("LITERAL", 
 //				"new testdata.ClosureClient().invoke4(" +
-//				"  p1, p2, p3, java.lang.String s|s.toUpperCase, null, null, null, 'literal')");
+//				"  p1, p2, p3, String s|s.toUpperCase, null, null, null, 'literal')");
 //	}
 //	
 //	public void testClosure_09() {
 //		assertEvaluatesTo("LITERAL", 
 //				"new testdata.ClosureClient().invoke5(" +
-//				"  p1, p2, p3, p4, java.lang.String s|s.toUpperCase, null, null, null, null, 'literal')");
+//				"  p1, p2, p3, p4, String s|s.toUpperCase, null, null, null, null, 'literal')");
 //	}
 //	
 //	public void testClosure_10() {
 //		assertEvaluatesTo("LITERAL", 
 //				"new testdata.ClosureClient().invoke6(" +
-//				"  p1, p2, p3, p4, p5, java.lang.String s|s.toUpperCase, null, null, null, null, null, 'literal')");
+//				"  p1, p2, p3, p4, p5, String s|s.toUpperCase, null, null, null, null, null, 'literal')");
 //	}
 //	
 //	public void testClosure_11() {
 //		assertEvaluatesTo(new Character('a'), 
 //				"new testdata.ClosureClient().invokeX(" +
-//				"  java.lang.Character c1, c2, c3, c4, c5, c6, c7|c1, 'abcdefg'.toCharArray)");
+//				"  Character c1, c2, c3, c4, c5, c6, c7|c1, 'abcdefg'.toCharArray)");
 //	}
 //	
 //	public void testClosure_12() {
@@ -534,17 +535,17 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 //	
 //	public void testClosure_14() {
 //		assertEvaluatesTo("LITERAL", 
-//				"new testdata.ClosureClient().useGoogleCollectFunction(java.lang.String s|s.toUpperCase, 'literal')");
+//				"new testdata.ClosureClient().useGoogleCollectFunction(String s|s.toUpperCase, 'literal')");
 //	}
 //	
 //	public void testClosure_15() {
 //		assertEvaluatesTo(Boolean.TRUE, 
-//				"new testdata.ClosureClient().useGoogleCollectPredicate(java.lang.String s|'literal'.equals(s), 'literal')");
+//				"new testdata.ClosureClient().useGoogleCollectPredicate(String s|'literal'.equals(s), 'literal')");
 //	}
 //	
 //	public void testClosure_16() {
 //		assertEvaluatesTo(Boolean.FALSE, 
-//				"new testdata.ClosureClient().useGoogleCollectPredicate(java.lang.String s|'literal'.equals(s), 'false')");
+//				"new testdata.ClosureClient().useGoogleCollectPredicate(String s|'literal'.equals(s), 'false')");
 //	}
 //	
 //	public void testClosure_17() {

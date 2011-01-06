@@ -40,7 +40,7 @@ public class SerializerTest extends AbstractXbaseTestCase {
 		Serializer serializer = get(Serializer.class);
 		String string = serializer.serialize(instanceOfExpression);
 		// TODO: The expection is wrong
-		assertEquals("| \"value\" instanceof java.lang.String", string);
+		assertEquals("| \"value\" instanceof String", string);
 //		assertEquals("|'value'; instanceof java.lang.String", string);
 	}
 
