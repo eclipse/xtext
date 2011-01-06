@@ -52,15 +52,10 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cRulesAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cRulesAbstractRuleParserRuleCall_5_0 = (RuleCall)cRulesAssignment_5.eContents().get(0);
 		
-		//Grammar:
-		//	"grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)?
-		//	(definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
-		//	metamodelDeclarations+=AbstractMetamodelDeclaration* rules+=AbstractRule+;
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[2]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[0]->EClass'Grammar'
 		public ParserRule getRule() { return rule; }
 
-		//"grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)?
-		//(definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
-		//metamodelDeclarations+=AbstractMetamodelDeclaration* rules+=AbstractRule+
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[2]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[0]->EClass'Grammar'
 		public Group getGroup() { return cGroup; }
 
 		//"grammar"
@@ -72,37 +67,37 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		//GrammarID
 		public RuleCall getNameGrammarIDParserRuleCall_1_0() { return cNameGrammarIDParserRuleCall_1_0; }
 
-		//("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)?
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[2]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[0]->EClass'Grammar'
 		public Group getGroup_2() { return cGroup_2; }
 
 		//"with"
 		public Keyword getWithKeyword_2_0() { return cWithKeyword_2_0; }
 
-		//usedGrammars+=[Grammar|GrammarID]
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[2]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[0]->EClass'Grammar'
 		public Assignment getUsedGrammarsAssignment_2_1() { return cUsedGrammarsAssignment_2_1; }
 
-		//[Grammar|GrammarID]
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[2]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[0]->EClass'Grammar'
 		public CrossReference getUsedGrammarsGrammarCrossReference_2_1_0() { return cUsedGrammarsGrammarCrossReference_2_1_0; }
 
 		//GrammarID
 		public RuleCall getUsedGrammarsGrammarGrammarIDParserRuleCall_2_1_0_1() { return cUsedGrammarsGrammarGrammarIDParserRuleCall_2_1_0_1; }
 
-		//("," usedGrammars+=[Grammar|GrammarID])*
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[2]->Group.elements[2]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[0]->EClass'Grammar'
 		public Group getGroup_2_2() { return cGroup_2_2; }
 
 		//","
 		public Keyword getCommaKeyword_2_2_0() { return cCommaKeyword_2_2_0; }
 
-		//usedGrammars+=[Grammar|GrammarID]
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[2]->Group.elements[2]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[0]->EClass'Grammar'
 		public Assignment getUsedGrammarsAssignment_2_2_1() { return cUsedGrammarsAssignment_2_2_1; }
 
-		//[Grammar|GrammarID]
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[2]->Group.elements[2]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[0]->EClass'Grammar'
 		public CrossReference getUsedGrammarsGrammarCrossReference_2_2_1_0() { return cUsedGrammarsGrammarCrossReference_2_2_1_0; }
 
 		//GrammarID
 		public RuleCall getUsedGrammarsGrammarGrammarIDParserRuleCall_2_2_1_0_1() { return cUsedGrammarsGrammarGrammarIDParserRuleCall_2_2_1_0_1; }
 
-		//(definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[3]->Group.elements[2]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 		public Group getGroup_3() { return cGroup_3; }
 
 		//definesHiddenTokens?="hidden"
@@ -114,28 +109,28 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		//"("
 		public Keyword getLeftParenthesisKeyword_3_1() { return cLeftParenthesisKeyword_3_1; }
 
-		//(hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)?
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[3]->Group.elements[2]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 		public Group getGroup_3_2() { return cGroup_3_2; }
 
-		//hiddenTokens+=[AbstractRule]
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[3]->Group.elements[2]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 		public Assignment getHiddenTokensAssignment_3_2_0() { return cHiddenTokensAssignment_3_2_0; }
 
-		//[AbstractRule]
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[3]->Group.elements[2]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 		public CrossReference getHiddenTokensAbstractRuleCrossReference_3_2_0_0() { return cHiddenTokensAbstractRuleCrossReference_3_2_0_0; }
 
 		//ID
 		public RuleCall getHiddenTokensAbstractRuleIDTerminalRuleCall_3_2_0_0_1() { return cHiddenTokensAbstractRuleIDTerminalRuleCall_3_2_0_0_1; }
 
-		//("," hiddenTokens+=[AbstractRule])*
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[3]->Group.elements[2]->Group.elements[1]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 		public Group getGroup_3_2_1() { return cGroup_3_2_1; }
 
 		//","
 		public Keyword getCommaKeyword_3_2_1_0() { return cCommaKeyword_3_2_1_0; }
 
-		//hiddenTokens+=[AbstractRule]
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[3]->Group.elements[2]->Group.elements[1]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 		public Assignment getHiddenTokensAssignment_3_2_1_1() { return cHiddenTokensAssignment_3_2_1_1; }
 
-		//[AbstractRule]
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[3]->Group.elements[2]->Group.elements[1]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 		public CrossReference getHiddenTokensAbstractRuleCrossReference_3_2_1_1_0() { return cHiddenTokensAbstractRuleCrossReference_3_2_1_1_0; }
 
 		//ID
@@ -357,13 +352,10 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cAlternativesAlternativesParserRuleCall_4_0 = (RuleCall)cAlternativesAssignment_4.eContents().get(0);
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//ParserRule:
-		//	name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] (","
-		//	hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=Alternatives ";";
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[6]->ParserRule'ParserRule'.alternatives->Group.elements[2]->Group.elements[2]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 		public ParserRule getRule() { return rule; }
 
-		//name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] (","
-		//hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=Alternatives ";"
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[6]->ParserRule'ParserRule'.alternatives->Group.elements[2]->Group.elements[2]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 		public Group getGroup() { return cGroup; }
 
 		//name=ID
@@ -384,7 +376,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		//TypeRef
 		public RuleCall getTypeTypeRefParserRuleCall_1_1_0() { return cTypeTypeRefParserRuleCall_1_1_0; }
 
-		//(definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[6]->ParserRule'ParserRule'.alternatives->Group.elements[2]->Group.elements[2]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 		public Group getGroup_2() { return cGroup_2; }
 
 		//definesHiddenTokens?="hidden"
@@ -396,28 +388,28 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		//"("
 		public Keyword getLeftParenthesisKeyword_2_1() { return cLeftParenthesisKeyword_2_1; }
 
-		//(hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)?
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[6]->ParserRule'ParserRule'.alternatives->Group.elements[2]->Group.elements[2]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 		public Group getGroup_2_2() { return cGroup_2_2; }
 
-		//hiddenTokens+=[AbstractRule]
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[6]->ParserRule'ParserRule'.alternatives->Group.elements[2]->Group.elements[2]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 		public Assignment getHiddenTokensAssignment_2_2_0() { return cHiddenTokensAssignment_2_2_0; }
 
-		//[AbstractRule]
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[6]->ParserRule'ParserRule'.alternatives->Group.elements[2]->Group.elements[2]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 		public CrossReference getHiddenTokensAbstractRuleCrossReference_2_2_0_0() { return cHiddenTokensAbstractRuleCrossReference_2_2_0_0; }
 
 		//ID
 		public RuleCall getHiddenTokensAbstractRuleIDTerminalRuleCall_2_2_0_0_1() { return cHiddenTokensAbstractRuleIDTerminalRuleCall_2_2_0_0_1; }
 
-		//("," hiddenTokens+=[AbstractRule])*
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[6]->ParserRule'ParserRule'.alternatives->Group.elements[2]->Group.elements[2]->Group.elements[1]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 		public Group getGroup_2_2_1() { return cGroup_2_2_1; }
 
 		//","
 		public Keyword getCommaKeyword_2_2_1_0() { return cCommaKeyword_2_2_1_0; }
 
-		//hiddenTokens+=[AbstractRule]
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[6]->ParserRule'ParserRule'.alternatives->Group.elements[2]->Group.elements[2]->Group.elements[1]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 		public Assignment getHiddenTokensAssignment_2_2_1_1() { return cHiddenTokensAssignment_2_2_1_1; }
 
-		//[AbstractRule]
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[6]->ParserRule'ParserRule'.alternatives->Group.elements[2]->Group.elements[2]->Group.elements[1]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 		public CrossReference getHiddenTokensAbstractRuleCrossReference_2_2_1_1_0() { return cHiddenTokensAbstractRuleCrossReference_2_2_1_1_0; }
 
 		//ID
@@ -451,20 +443,19 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cClassifierEClassifierCrossReference_1_0 = (CrossReference)cClassifierAssignment_1.eContents().get(0);
 		private final RuleCall cClassifierEClassifierIDTerminalRuleCall_1_0_1 = (RuleCall)cClassifierEClassifierCrossReference_1_0.eContents().get(1);
 		
-		//TypeRef:
-		//	(metamodel=[AbstractMetamodelDeclaration] "::")? classifier=[ecore::EClassifier];
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[7]->ParserRule'TypeRef'.alternatives->Group.elements[0]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[2]->EClass'AbstractMetamodelDeclaration'
 		public ParserRule getRule() { return rule; }
 
-		//(metamodel=[AbstractMetamodelDeclaration] "::")? classifier=[ecore::EClassifier]
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[7]->ParserRule'TypeRef'.alternatives->Group.elements[0]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[2]->EClass'AbstractMetamodelDeclaration'
 		public Group getGroup() { return cGroup; }
 
-		//(metamodel=[AbstractMetamodelDeclaration] "::")?
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[7]->ParserRule'TypeRef'.alternatives->Group.elements[0]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[2]->EClass'AbstractMetamodelDeclaration'
 		public Group getGroup_0() { return cGroup_0; }
 
-		//metamodel=[AbstractMetamodelDeclaration]
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[7]->ParserRule'TypeRef'.alternatives->Group.elements[0]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[2]->EClass'AbstractMetamodelDeclaration'
 		public Assignment getMetamodelAssignment_0_0() { return cMetamodelAssignment_0_0; }
 
-		//[AbstractMetamodelDeclaration]
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[7]->ParserRule'TypeRef'.alternatives->Group.elements[0]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[2]->EClass'AbstractMetamodelDeclaration'
 		public CrossReference getMetamodelAbstractMetamodelDeclarationCrossReference_0_0_0() { return cMetamodelAbstractMetamodelDeclarationCrossReference_0_0_0; }
 
 		//ID
@@ -494,20 +485,19 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cElementsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
 		private final RuleCall cElementsUnorderedGroupParserRuleCall_1_1_1_0 = (RuleCall)cElementsAssignment_1_1_1.eContents().get(0);
 		
-		//Alternatives returns AbstractElement:
-		//	UnorderedGroup ({Alternatives.elements+=current} ("|" elements+=UnorderedGroup)+)?;
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[8]->ParserRule'Alternatives'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 		public ParserRule getRule() { return rule; }
 
-		//UnorderedGroup ({Alternatives.elements+=current} ("|" elements+=UnorderedGroup)+)?
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[8]->ParserRule'Alternatives'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 		public Group getGroup() { return cGroup; }
 
 		//UnorderedGroup
 		public RuleCall getUnorderedGroupParserRuleCall_0() { return cUnorderedGroupParserRuleCall_0; }
 
-		//({Alternatives.elements+=current} ("|" elements+=UnorderedGroup)+)?
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[8]->ParserRule'Alternatives'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 		public Group getGroup_1() { return cGroup_1; }
 
-		//{Alternatives.elements+=current}
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[8]->ParserRule'Alternatives'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 		public Action getAlternativesElementsAction_1_0() { return cAlternativesElementsAction_1_0; }
 
 		//("|" elements+=UnorderedGroup)+
@@ -534,20 +524,19 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cElementsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
 		private final RuleCall cElementsGroupParserRuleCall_1_1_1_0 = (RuleCall)cElementsAssignment_1_1_1.eContents().get(0);
 		
-		//UnorderedGroup returns AbstractElement:
-		//	Group ({UnorderedGroup.elements+=current} ("&" elements+=Group)+)?;
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[9]->ParserRule'UnorderedGroup'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 		public ParserRule getRule() { return rule; }
 
-		//Group ({UnorderedGroup.elements+=current} ("&" elements+=Group)+)?
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[9]->ParserRule'UnorderedGroup'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[21]->EClass'UnorderedGroup'
 		public Group getGroup() { return cGroup; }
 
 		//Group
 		public RuleCall getGroupParserRuleCall_0() { return cGroupParserRuleCall_0; }
 
-		//({UnorderedGroup.elements+=current} ("&" elements+=Group)+)?
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[9]->ParserRule'UnorderedGroup'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[21]->EClass'UnorderedGroup'
 		public Group getGroup_1() { return cGroup_1; }
 
-		//{UnorderedGroup.elements+=current}
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[9]->ParserRule'UnorderedGroup'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[21]->EClass'UnorderedGroup'
 		public Action getUnorderedGroupElementsAction_1_0() { return cUnorderedGroupElementsAction_1_0; }
 
 		//("&" elements+=Group)+
@@ -572,20 +561,19 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cElementsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cElementsAbstractTokenParserRuleCall_1_1_0 = (RuleCall)cElementsAssignment_1_1.eContents().get(0);
 		
-		//Group returns AbstractElement:
-		//	AbstractToken ({Group.elements+=current} elements+=AbstractToken+)?;
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[10]->ParserRule'Group'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 		public ParserRule getRule() { return rule; }
 
-		//AbstractToken ({Group.elements+=current} elements+=AbstractToken+)?
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[10]->ParserRule'Group'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[22]->EClass'Group'
 		public Group getGroup() { return cGroup; }
 
 		//AbstractToken
 		public RuleCall getAbstractTokenParserRuleCall_0() { return cAbstractTokenParserRuleCall_0; }
 
-		//({Group.elements+=current} elements+=AbstractToken+)?
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[10]->ParserRule'Group'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[22]->EClass'Group'
 		public Group getGroup_1() { return cGroup_1; }
 
-		//{Group.elements+=current}
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[10]->ParserRule'Group'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[22]->EClass'Group'
 		public Action getGroupElementsAction_1_0() { return cGroupElementsAction_1_0; }
 
 		//elements+=AbstractToken+
@@ -601,8 +589,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cAbstractTokenWithCardinalityParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cActionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//AbstractToken returns AbstractElement:
-		//	AbstractTokenWithCardinality | Action;
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[11]->ParserRule'AbstractToken'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 		public ParserRule getRule() { return rule; }
 
 		//AbstractTokenWithCardinality | Action
@@ -627,8 +614,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cCardinalityAsteriskKeyword_1_0_1 = (Keyword)cCardinalityAlternatives_1_0.eContents().get(1);
 		private final Keyword cCardinalityPlusSignKeyword_1_0_2 = (Keyword)cCardinalityAlternatives_1_0.eContents().get(2);
 		
-		//AbstractTokenWithCardinality returns AbstractElement:
-		//	(Assignment | AbstractTerminal) cardinality=("?" | "*" | "+")?;
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[12]->ParserRule'AbstractTokenWithCardinality'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 		public ParserRule getRule() { return rule; }
 
 		//(Assignment | AbstractTerminal) cardinality=("?" | "*" | "+")?
@@ -730,8 +716,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRuleCallParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cParenthesizedElementParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		//AbstractTerminal returns AbstractElement:
-		//	Keyword | RuleCall | ParenthesizedElement;
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[14]->ParserRule'AbstractTerminal'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 		public ParserRule getRule() { return rule; }
 
 		//Keyword | RuleCall | ParenthesizedElement
@@ -769,14 +754,13 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cRuleAbstractRuleCrossReference_0 = (CrossReference)cRuleAssignment.eContents().get(0);
 		private final RuleCall cRuleAbstractRuleIDTerminalRuleCall_0_1 = (RuleCall)cRuleAbstractRuleCrossReference_0.eContents().get(1);
 		
-		//RuleCall:
-		//	rule=[AbstractRule];
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[16]->ParserRule'RuleCall'.alternatives->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 		public ParserRule getRule() { return rule; }
 
-		//rule=[AbstractRule]
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[16]->ParserRule'RuleCall'.alternatives->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 		public Assignment getRuleAssignment() { return cRuleAssignment; }
 
-		//[AbstractRule]
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[16]->ParserRule'RuleCall'.alternatives->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 		public CrossReference getRuleAbstractRuleCrossReference_0() { return cRuleAbstractRuleCrossReference_0; }
 
 		//ID
@@ -839,8 +823,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cParenthesizedAssignableElementParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cCrossReferenceParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
-		//AssignableTerminal returns AbstractElement:
-		//	Keyword | RuleCall | ParenthesizedAssignableElement | CrossReference;
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[18]->ParserRule'AssignableTerminal'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 		public ParserRule getRule() { return rule; }
 
 		//Keyword | RuleCall | ParenthesizedAssignableElement | CrossReference
@@ -866,8 +849,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cAssignableAlternativesParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//ParenthesizedAssignableElement returns AbstractElement:
-		//	"(" AssignableAlternatives ")";
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[19]->ParserRule'ParenthesizedAssignableElement'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 		public ParserRule getRule() { return rule; }
 
 		//"(" AssignableAlternatives ")"
@@ -894,20 +876,19 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cElementsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
 		private final RuleCall cElementsAssignableTerminalParserRuleCall_1_1_1_0 = (RuleCall)cElementsAssignment_1_1_1.eContents().get(0);
 		
-		//AssignableAlternatives returns AbstractElement:
-		//	AssignableTerminal ({Alternatives.elements+=current} ("|" elements+=AssignableTerminal)+)?;
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[20]->ParserRule'AssignableAlternatives'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 		public ParserRule getRule() { return rule; }
 
-		//AssignableTerminal ({Alternatives.elements+=current} ("|" elements+=AssignableTerminal)+)?
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[20]->ParserRule'AssignableAlternatives'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 		public Group getGroup() { return cGroup; }
 
 		//AssignableTerminal
 		public RuleCall getAssignableTerminalParserRuleCall_0() { return cAssignableTerminalParserRuleCall_0; }
 
-		//({Alternatives.elements+=current} ("|" elements+=AssignableTerminal)+)?
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[20]->ParserRule'AssignableAlternatives'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 		public Group getGroup_1() { return cGroup_1; }
 
-		//{Alternatives.elements+=current}
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[20]->ParserRule'AssignableAlternatives'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 		public Action getAlternativesElementsAction_1_0() { return cAlternativesElementsAction_1_0; }
 
 		//("|" elements+=AssignableTerminal)+
@@ -973,8 +954,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cKeywordParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cRuleCallParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//CrossReferenceableTerminal returns AbstractElement:
-		//	Keyword | RuleCall;
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[22]->ParserRule'CrossReferenceableTerminal'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 		public ParserRule getRule() { return rule; }
 
 		//Keyword | RuleCall
@@ -994,8 +974,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cAlternativesParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//ParenthesizedElement returns AbstractElement:
-		//	"(" Alternatives ")";
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[23]->ParserRule'ParenthesizedElement'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 		public ParserRule getRule() { return rule; }
 
 		//"(" Alternatives ")"
@@ -1034,23 +1013,23 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//TerminalRule:
-		//	"terminal" (fragment?="fragment" name=ID | name=ID ("returns" type=TypeRef)?) ":" alternatives=TerminalAlternatives
+		//	"terminal" (^fragment?="fragment" name=ID | name=ID ("returns" type=TypeRef)?) ":" alternatives=TerminalAlternatives
 		//	";";
 		public ParserRule getRule() { return rule; }
 
-		//"terminal" (fragment?="fragment" name=ID | name=ID ("returns" type=TypeRef)?) ":" alternatives=TerminalAlternatives ";"
+		//"terminal" (^fragment?="fragment" name=ID | name=ID ("returns" type=TypeRef)?) ":" alternatives=TerminalAlternatives ";"
 		public Group getGroup() { return cGroup; }
 
 		//"terminal"
 		public Keyword getTerminalKeyword_0() { return cTerminalKeyword_0; }
 
-		//fragment?="fragment" name=ID | name=ID ("returns" type=TypeRef)?
+		//^fragment?="fragment" name=ID | name=ID ("returns" type=TypeRef)?
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//fragment?="fragment" name=ID
+		//^fragment?="fragment" name=ID
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
-		//fragment?="fragment"
+		//^fragment?="fragment"
 		public Assignment getFragmentAssignment_1_0_0() { return cFragmentAssignment_1_0_0; }
 
 		//"fragment"
@@ -1107,20 +1086,19 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cElementsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
 		private final RuleCall cElementsTerminalGroupParserRuleCall_1_1_1_0 = (RuleCall)cElementsAssignment_1_1_1.eContents().get(0);
 		
-		//TerminalAlternatives returns AbstractElement:
-		//	TerminalGroup ({Alternatives.elements+=current} ("|" elements+=TerminalGroup)+)?;
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[25]->ParserRule'TerminalAlternatives'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 		public ParserRule getRule() { return rule; }
 
-		//TerminalGroup ({Alternatives.elements+=current} ("|" elements+=TerminalGroup)+)?
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[25]->ParserRule'TerminalAlternatives'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 		public Group getGroup() { return cGroup; }
 
 		//TerminalGroup
 		public RuleCall getTerminalGroupParserRuleCall_0() { return cTerminalGroupParserRuleCall_0; }
 
-		//({Alternatives.elements+=current} ("|" elements+=TerminalGroup)+)?
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[25]->ParserRule'TerminalAlternatives'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 		public Group getGroup_1() { return cGroup_1; }
 
-		//{Alternatives.elements+=current}
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[25]->ParserRule'TerminalAlternatives'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 		public Action getAlternativesElementsAction_1_0() { return cAlternativesElementsAction_1_0; }
 
 		//("|" elements+=TerminalGroup)+
@@ -1145,20 +1123,19 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cElementsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cElementsTerminalTokenParserRuleCall_1_1_0 = (RuleCall)cElementsAssignment_1_1.eContents().get(0);
 		
-		//TerminalGroup returns AbstractElement:
-		//	TerminalToken ({Group.elements+=current} elements+=TerminalToken+)?;
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[26]->ParserRule'TerminalGroup'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 		public ParserRule getRule() { return rule; }
 
-		//TerminalToken ({Group.elements+=current} elements+=TerminalToken+)?
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[26]->ParserRule'TerminalGroup'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[22]->EClass'Group'
 		public Group getGroup() { return cGroup; }
 
 		//TerminalToken
 		public RuleCall getTerminalTokenParserRuleCall_0() { return cTerminalTokenParserRuleCall_0; }
 
-		//({Group.elements+=current} elements+=TerminalToken+)?
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[26]->ParserRule'TerminalGroup'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[22]->EClass'Group'
 		public Group getGroup_1() { return cGroup_1; }
 
-		//{Group.elements+=current}
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[26]->ParserRule'TerminalGroup'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[22]->EClass'Group'
 		public Action getGroupElementsAction_1_0() { return cGroupElementsAction_1_0; }
 
 		//elements+=TerminalToken+
@@ -1178,8 +1155,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cCardinalityAsteriskKeyword_1_0_1 = (Keyword)cCardinalityAlternatives_1_0.eContents().get(1);
 		private final Keyword cCardinalityPlusSignKeyword_1_0_2 = (Keyword)cCardinalityAlternatives_1_0.eContents().get(2);
 		
-		//TerminalToken returns AbstractElement:
-		//	TerminalTokenElement cardinality=("?" | "*" | "+")?;
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[27]->ParserRule'TerminalToken'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 		public ParserRule getRule() { return rule; }
 
 		//TerminalTokenElement cardinality=("?" | "*" | "+")?
@@ -1213,8 +1189,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cAbstractNegatedTokenParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		private final RuleCall cWildcardParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
-		//TerminalTokenElement returns AbstractElement:
-		//	CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard;
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[28]->ParserRule'TerminalTokenElement'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 		public ParserRule getRule() { return rule; }
 
 		//CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard
@@ -1243,8 +1218,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTerminalAlternativesParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//ParenthesizedTerminalElement returns AbstractElement:
-		//	"(" TerminalAlternatives ")";
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[29]->ParserRule'ParenthesizedTerminalElement'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 		public ParserRule getRule() { return rule; }
 
 		//"(" TerminalAlternatives ")"
@@ -1334,14 +1308,13 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Action cWildcardAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cFullStopKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
-		//Wildcard:
-		//	{Wildcard} ".";
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[33]->ParserRule'Wildcard'.alternatives->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[17]->EClass'Wildcard'
 		public ParserRule getRule() { return rule; }
 
-		//{Wildcard} "."
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[33]->ParserRule'Wildcard'.alternatives->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[17]->EClass'Wildcard'
 		public Group getGroup() { return cGroup; }
 
-		//{Wildcard}
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[33]->ParserRule'Wildcard'.alternatives->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[17]->EClass'Wildcard'
 		public Action getWildcardAction_0() { return cWildcardAction_0; }
 
 		//"."
@@ -1358,20 +1331,19 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightKeywordParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
-		//CharacterRange returns AbstractElement:
-		//	Keyword ({CharacterRange.left=current} ".." right=Keyword)?;
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[34]->ParserRule'CharacterRange'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 		public ParserRule getRule() { return rule; }
 
-		//Keyword ({CharacterRange.left=current} ".." right=Keyword)?
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[34]->ParserRule'CharacterRange'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[23]->EClass'CharacterRange'
 		public Group getGroup() { return cGroup; }
 
 		//Keyword
 		public RuleCall getKeywordParserRuleCall_0() { return cKeywordParserRuleCall_0; }
 
-		//({CharacterRange.left=current} ".." right=Keyword)?
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[34]->ParserRule'CharacterRange'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[23]->EClass'CharacterRange'
 		public Group getGroup_1() { return cGroup_1; }
 
-		//{CharacterRange.left=current}
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[34]->ParserRule'CharacterRange'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[23]->EClass'CharacterRange'
 		public Action getCharacterRangeLeftAction_1_0() { return cCharacterRangeLeftAction_1_0; }
 
 		//".."
@@ -1451,20 +1423,19 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cElementsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
 		private final RuleCall cElementsEnumLiteralDeclarationParserRuleCall_1_1_1_0 = (RuleCall)cElementsAssignment_1_1_1.eContents().get(0);
 		
-		//EnumLiterals returns AbstractElement:
-		//	EnumLiteralDeclaration ({Alternatives.elements+=current} ("|" elements+=EnumLiteralDeclaration)+)?;
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[36]->ParserRule'EnumLiterals'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 		public ParserRule getRule() { return rule; }
 
-		//EnumLiteralDeclaration ({Alternatives.elements+=current} ("|" elements+=EnumLiteralDeclaration)+)?
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[36]->ParserRule'EnumLiterals'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 		public Group getGroup() { return cGroup; }
 
 		//EnumLiteralDeclaration
 		public RuleCall getEnumLiteralDeclarationParserRuleCall_0() { return cEnumLiteralDeclarationParserRuleCall_0; }
 
-		//({Alternatives.elements+=current} ("|" elements+=EnumLiteralDeclaration)+)?
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[36]->ParserRule'EnumLiterals'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 		public Group getGroup_1() { return cGroup_1; }
 
-		//{Alternatives.elements+=current}
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[36]->ParserRule'EnumLiterals'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 		public Action getAlternativesElementsAction_1_0() { return cAlternativesElementsAction_1_0; }
 
 		//("|" elements+=EnumLiteralDeclaration)+
@@ -1581,10 +1552,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	
-	//Grammar:
-	//	"grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)?
-	//	(definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
-	//	metamodelDeclarations+=AbstractMetamodelDeclaration* rules+=AbstractRule+;
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[2]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[0]->EClass'Grammar'
 	public GrammarElements getGrammarAccess() {
 		return (pGrammar != null) ? pGrammar : (pGrammar = new GrammarElements());
 	}
@@ -1647,9 +1615,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		return getReferencedMetamodelAccess().getRule();
 	}
 
-	//ParserRule:
-	//	name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] (","
-	//	hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=Alternatives ";";
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[6]->ParserRule'ParserRule'.alternatives->Group.elements[2]->Group.elements[2]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 	public ParserRuleElements getParserRuleAccess() {
 		return (pParserRule != null) ? pParserRule : (pParserRule = new ParserRuleElements());
 	}
@@ -1658,8 +1624,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		return getParserRuleAccess().getRule();
 	}
 
-	//TypeRef:
-	//	(metamodel=[AbstractMetamodelDeclaration] "::")? classifier=[ecore::EClassifier];
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[7]->ParserRule'TypeRef'.alternatives->Group.elements[0]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[2]->EClass'AbstractMetamodelDeclaration'
 	public TypeRefElements getTypeRefAccess() {
 		return (pTypeRef != null) ? pTypeRef : (pTypeRef = new TypeRefElements());
 	}
@@ -1668,8 +1633,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		return getTypeRefAccess().getRule();
 	}
 
-	//Alternatives returns AbstractElement:
-	//	UnorderedGroup ({Alternatives.elements+=current} ("|" elements+=UnorderedGroup)+)?;
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[8]->ParserRule'Alternatives'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 	public AlternativesElements getAlternativesAccess() {
 		return (pAlternatives != null) ? pAlternatives : (pAlternatives = new AlternativesElements());
 	}
@@ -1678,8 +1642,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		return getAlternativesAccess().getRule();
 	}
 
-	//UnorderedGroup returns AbstractElement:
-	//	Group ({UnorderedGroup.elements+=current} ("&" elements+=Group)+)?;
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[9]->ParserRule'UnorderedGroup'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 	public UnorderedGroupElements getUnorderedGroupAccess() {
 		return (pUnorderedGroup != null) ? pUnorderedGroup : (pUnorderedGroup = new UnorderedGroupElements());
 	}
@@ -1688,8 +1651,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		return getUnorderedGroupAccess().getRule();
 	}
 
-	//Group returns AbstractElement:
-	//	AbstractToken ({Group.elements+=current} elements+=AbstractToken+)?;
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[10]->ParserRule'Group'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 	public GroupElements getGroupAccess() {
 		return (pGroup != null) ? pGroup : (pGroup = new GroupElements());
 	}
@@ -1698,8 +1660,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		return getGroupAccess().getRule();
 	}
 
-	//AbstractToken returns AbstractElement:
-	//	AbstractTokenWithCardinality | Action;
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[11]->ParserRule'AbstractToken'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 	public AbstractTokenElements getAbstractTokenAccess() {
 		return (pAbstractToken != null) ? pAbstractToken : (pAbstractToken = new AbstractTokenElements());
 	}
@@ -1708,8 +1669,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		return getAbstractTokenAccess().getRule();
 	}
 
-	//AbstractTokenWithCardinality returns AbstractElement:
-	//	(Assignment | AbstractTerminal) cardinality=("?" | "*" | "+")?;
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[12]->ParserRule'AbstractTokenWithCardinality'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 	public AbstractTokenWithCardinalityElements getAbstractTokenWithCardinalityAccess() {
 		return (pAbstractTokenWithCardinality != null) ? pAbstractTokenWithCardinality : (pAbstractTokenWithCardinality = new AbstractTokenWithCardinalityElements());
 	}
@@ -1728,8 +1688,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		return getActionAccess().getRule();
 	}
 
-	//AbstractTerminal returns AbstractElement:
-	//	Keyword | RuleCall | ParenthesizedElement;
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[14]->ParserRule'AbstractTerminal'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 	public AbstractTerminalElements getAbstractTerminalAccess() {
 		return (pAbstractTerminal != null) ? pAbstractTerminal : (pAbstractTerminal = new AbstractTerminalElements());
 	}
@@ -1748,8 +1707,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		return getKeywordAccess().getRule();
 	}
 
-	//RuleCall:
-	//	rule=[AbstractRule];
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[16]->ParserRule'RuleCall'.alternatives->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 	public RuleCallElements getRuleCallAccess() {
 		return (pRuleCall != null) ? pRuleCall : (pRuleCall = new RuleCallElements());
 	}
@@ -1768,8 +1726,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		return getAssignmentAccess().getRule();
 	}
 
-	//AssignableTerminal returns AbstractElement:
-	//	Keyword | RuleCall | ParenthesizedAssignableElement | CrossReference;
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[18]->ParserRule'AssignableTerminal'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 	public AssignableTerminalElements getAssignableTerminalAccess() {
 		return (pAssignableTerminal != null) ? pAssignableTerminal : (pAssignableTerminal = new AssignableTerminalElements());
 	}
@@ -1778,8 +1735,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		return getAssignableTerminalAccess().getRule();
 	}
 
-	//ParenthesizedAssignableElement returns AbstractElement:
-	//	"(" AssignableAlternatives ")";
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[19]->ParserRule'ParenthesizedAssignableElement'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 	public ParenthesizedAssignableElementElements getParenthesizedAssignableElementAccess() {
 		return (pParenthesizedAssignableElement != null) ? pParenthesizedAssignableElement : (pParenthesizedAssignableElement = new ParenthesizedAssignableElementElements());
 	}
@@ -1788,8 +1744,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		return getParenthesizedAssignableElementAccess().getRule();
 	}
 
-	//AssignableAlternatives returns AbstractElement:
-	//	AssignableTerminal ({Alternatives.elements+=current} ("|" elements+=AssignableTerminal)+)?;
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[20]->ParserRule'AssignableAlternatives'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 	public AssignableAlternativesElements getAssignableAlternativesAccess() {
 		return (pAssignableAlternatives != null) ? pAssignableAlternatives : (pAssignableAlternatives = new AssignableAlternativesElements());
 	}
@@ -1808,8 +1763,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		return getCrossReferenceAccess().getRule();
 	}
 
-	//CrossReferenceableTerminal returns AbstractElement:
-	//	Keyword | RuleCall;
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[22]->ParserRule'CrossReferenceableTerminal'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 	public CrossReferenceableTerminalElements getCrossReferenceableTerminalAccess() {
 		return (pCrossReferenceableTerminal != null) ? pCrossReferenceableTerminal : (pCrossReferenceableTerminal = new CrossReferenceableTerminalElements());
 	}
@@ -1818,8 +1772,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		return getCrossReferenceableTerminalAccess().getRule();
 	}
 
-	//ParenthesizedElement returns AbstractElement:
-	//	"(" Alternatives ")";
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[23]->ParserRule'ParenthesizedElement'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 	public ParenthesizedElementElements getParenthesizedElementAccess() {
 		return (pParenthesizedElement != null) ? pParenthesizedElement : (pParenthesizedElement = new ParenthesizedElementElements());
 	}
@@ -1829,7 +1782,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TerminalRule:
-	//	"terminal" (fragment?="fragment" name=ID | name=ID ("returns" type=TypeRef)?) ":" alternatives=TerminalAlternatives
+	//	"terminal" (^fragment?="fragment" name=ID | name=ID ("returns" type=TypeRef)?) ":" alternatives=TerminalAlternatives
 	//	";";
 	public TerminalRuleElements getTerminalRuleAccess() {
 		return (pTerminalRule != null) ? pTerminalRule : (pTerminalRule = new TerminalRuleElements());
@@ -1839,8 +1792,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		return getTerminalRuleAccess().getRule();
 	}
 
-	//TerminalAlternatives returns AbstractElement:
-	//	TerminalGroup ({Alternatives.elements+=current} ("|" elements+=TerminalGroup)+)?;
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[25]->ParserRule'TerminalAlternatives'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 	public TerminalAlternativesElements getTerminalAlternativesAccess() {
 		return (pTerminalAlternatives != null) ? pTerminalAlternatives : (pTerminalAlternatives = new TerminalAlternativesElements());
 	}
@@ -1849,8 +1801,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		return getTerminalAlternativesAccess().getRule();
 	}
 
-	//TerminalGroup returns AbstractElement:
-	//	TerminalToken ({Group.elements+=current} elements+=TerminalToken+)?;
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[26]->ParserRule'TerminalGroup'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 	public TerminalGroupElements getTerminalGroupAccess() {
 		return (pTerminalGroup != null) ? pTerminalGroup : (pTerminalGroup = new TerminalGroupElements());
 	}
@@ -1859,8 +1810,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		return getTerminalGroupAccess().getRule();
 	}
 
-	//TerminalToken returns AbstractElement:
-	//	TerminalTokenElement cardinality=("?" | "*" | "+")?;
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[27]->ParserRule'TerminalToken'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 	public TerminalTokenElements getTerminalTokenAccess() {
 		return (pTerminalToken != null) ? pTerminalToken : (pTerminalToken = new TerminalTokenElements());
 	}
@@ -1869,8 +1819,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		return getTerminalTokenAccess().getRule();
 	}
 
-	//TerminalTokenElement returns AbstractElement:
-	//	CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard;
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[28]->ParserRule'TerminalTokenElement'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 	public TerminalTokenElementElements getTerminalTokenElementAccess() {
 		return (pTerminalTokenElement != null) ? pTerminalTokenElement : (pTerminalTokenElement = new TerminalTokenElementElements());
 	}
@@ -1879,8 +1828,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		return getTerminalTokenElementAccess().getRule();
 	}
 
-	//ParenthesizedTerminalElement returns AbstractElement:
-	//	"(" TerminalAlternatives ")";
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[29]->ParserRule'ParenthesizedTerminalElement'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 	public ParenthesizedTerminalElementElements getParenthesizedTerminalElementAccess() {
 		return (pParenthesizedTerminalElement != null) ? pParenthesizedTerminalElement : (pParenthesizedTerminalElement = new ParenthesizedTerminalElementElements());
 	}
@@ -1919,8 +1867,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		return getUntilTokenAccess().getRule();
 	}
 
-	//Wildcard:
-	//	{Wildcard} ".";
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[33]->ParserRule'Wildcard'.alternatives->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[17]->EClass'Wildcard'
 	public WildcardElements getWildcardAccess() {
 		return (pWildcard != null) ? pWildcard : (pWildcard = new WildcardElements());
 	}
@@ -1929,8 +1876,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		return getWildcardAccess().getRule();
 	}
 
-	//CharacterRange returns AbstractElement:
-	//	Keyword ({CharacterRange.left=current} ".." right=Keyword)?;
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[34]->ParserRule'CharacterRange'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 	public CharacterRangeElements getCharacterRangeAccess() {
 		return (pCharacterRange != null) ? pCharacterRange : (pCharacterRange = new CharacterRangeElements());
 	}
@@ -1949,8 +1895,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		return getEnumRuleAccess().getRule();
 	}
 
-	//EnumLiterals returns AbstractElement:
-	//	EnumLiteralDeclaration ({Alternatives.elements+=current} ("|" elements+=EnumLiteralDeclaration)+)?;
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[36]->ParserRule'EnumLiterals'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
 	public EnumLiteralsElements getEnumLiteralsAccess() {
 		return (pEnumLiterals != null) ? pEnumLiterals : (pEnumLiterals = new EnumLiteralsElements());
 	}
@@ -1982,8 +1927,8 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
-	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
+	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

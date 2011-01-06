@@ -88,26 +88,25 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final EnumLiteralDeclaration cDifferentNameEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
 		private final Keyword cDifferentNameDifferentLiteralKeyword_2_0 = (Keyword)cDifferentNameEnumLiteralDeclaration_2.eContents().get(0);
 		
-		//enum ExistingEnum:
-		//	SameName | OverriddenLiteral="overridden" | DifferentName="DifferentLiteral";
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.enumrules.EnumRulesTestLanguage'.rules[1]->EnumRule'ExistingEnum'.alternatives->Alternatives.elements[0]->EnumLiteralDeclaration.enumLiteral to EPackage'enums'.eClassifiers[0]->EEnum'ExistingEnum'.eLiterals[0]->EEnumLiteral'SameName'
 		public EnumRule getRule() { return rule; }
 
-		//SameName | OverriddenLiteral="overridden" | DifferentName="DifferentLiteral"
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.enumrules.EnumRulesTestLanguage'.rules[1]->EnumRule'ExistingEnum'.alternatives->Alternatives.elements[0]->EnumLiteralDeclaration.enumLiteral to EPackage'enums'.eClassifiers[0]->EEnum'ExistingEnum'.eLiterals[0]->EEnumLiteral'SameName'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//SameName
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.enumrules.EnumRulesTestLanguage'.rules[1]->EnumRule'ExistingEnum'.alternatives->Alternatives.elements[0]->EnumLiteralDeclaration.enumLiteral to EPackage'enums'.eClassifiers[0]->EEnum'ExistingEnum'.eLiterals[0]->EEnumLiteral'SameName'
 		public EnumLiteralDeclaration getSameNameEnumLiteralDeclaration_0() { return cSameNameEnumLiteralDeclaration_0; }
 
 		//"SameName"
 		public Keyword getSameNameSameNameKeyword_0_0() { return cSameNameSameNameKeyword_0_0; }
 
-		//OverriddenLiteral="overridden"
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.enumrules.EnumRulesTestLanguage'.rules[1]->EnumRule'ExistingEnum'.alternatives->Alternatives.elements[1]->EnumLiteralDeclaration.enumLiteral to EPackage'enums'.eClassifiers[0]->EEnum'ExistingEnum'.eLiterals[1]->EEnumLiteral'OverriddenLiteral'
 		public EnumLiteralDeclaration getOverriddenLiteralEnumLiteralDeclaration_1() { return cOverriddenLiteralEnumLiteralDeclaration_1; }
 
 		//"overridden"
 		public Keyword getOverriddenLiteralOverriddenKeyword_1_0() { return cOverriddenLiteralOverriddenKeyword_1_0; }
 
-		//DifferentName="DifferentLiteral"
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.enumrules.EnumRulesTestLanguage'.rules[1]->EnumRule'ExistingEnum'.alternatives->Alternatives.elements[2]->EnumLiteralDeclaration.enumLiteral to EPackage'enums'.eClassifiers[0]->EEnum'ExistingEnum'.eLiterals[2]->EEnumLiteral'DifferentName'
 		public EnumLiteralDeclaration getDifferentNameEnumLiteralDeclaration_2() { return cDifferentNameEnumLiteralDeclaration_2; }
 
 		//"DifferentLiteral"
@@ -177,8 +176,7 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getModelAccess().getRule();
 	}
 
-	//enum ExistingEnum:
-	//	SameName | OverriddenLiteral="overridden" | DifferentName="DifferentLiteral";
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.enumrules.EnumRulesTestLanguage'.rules[1]->EnumRule'ExistingEnum'.alternatives->Alternatives.elements[0]->EnumLiteralDeclaration.enumLiteral to EPackage'enums'.eClassifiers[0]->EEnum'ExistingEnum'.eLiterals[0]->EEnumLiteral'SameName'
 	public ExistingEnumElements getExistingEnumAccess() {
 		return (unknownRuleExistingEnum != null) ? unknownRuleExistingEnum : (unknownRuleExistingEnum = new ExistingEnumElements());
 	}
@@ -210,8 +208,8 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
-	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
+	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

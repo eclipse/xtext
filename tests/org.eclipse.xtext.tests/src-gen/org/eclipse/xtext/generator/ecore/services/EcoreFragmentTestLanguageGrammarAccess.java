@@ -27,11 +27,10 @@ public class EcoreFragmentTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final CrossReference cFirstFirstCrossReference_2_0 = (CrossReference)cFirstAssignment_2.eContents().get(0);
 		private final RuleCall cFirstFirstIDTerminalRuleCall_2_0_1 = (RuleCall)cFirstFirstCrossReference_2_0.eContents().get(1);
 		
-		//Second returns second::Second:
-		//	name=ID "first" first=[first::First];
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.ecore.EcoreFragmentTestLanguage'.rules[0]->ParserRule'Second'.alternatives->Group.elements[2]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'first'.eClassifiers[0]->EClass'First'
 		public ParserRule getRule() { return rule; }
 
-		//name=ID "first" first=[first::First]
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.ecore.EcoreFragmentTestLanguage'.rules[0]->ParserRule'Second'.alternatives->Group.elements[2]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'first'.eClassifiers[0]->EClass'First'
 		public Group getGroup() { return cGroup; }
 
 		//name=ID
@@ -43,10 +42,10 @@ public class EcoreFragmentTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//"first"
 		public Keyword getFirstKeyword_1() { return cFirstKeyword_1; }
 
-		//first=[first::First]
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.ecore.EcoreFragmentTestLanguage'.rules[0]->ParserRule'Second'.alternatives->Group.elements[2]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'first'.eClassifiers[0]->EClass'First'
 		public Assignment getFirstAssignment_2() { return cFirstAssignment_2; }
 
-		//[first::First]
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.ecore.EcoreFragmentTestLanguage'.rules[0]->ParserRule'Second'.alternatives->Group.elements[2]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'first'.eClassifiers[0]->EClass'First'
 		public CrossReference getFirstFirstCrossReference_2_0() { return cFirstFirstCrossReference_2_0; }
 
 		//ID
@@ -77,8 +76,7 @@ public class EcoreFragmentTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	
-	//Second returns second::Second:
-	//	name=ID "first" first=[first::First];
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.ecore.EcoreFragmentTestLanguage'.rules[0]->ParserRule'Second'.alternatives->Group.elements[2]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'first'.eClassifiers[0]->EClass'First'
 	public SecondElements getSecondAccess() {
 		return (pSecond != null) ? pSecond : (pSecond = new SecondElements());
 	}
@@ -100,8 +98,8 @@ public class EcoreFragmentTestLanguageGrammarAccess extends AbstractGrammarEleme
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
-	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
+	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

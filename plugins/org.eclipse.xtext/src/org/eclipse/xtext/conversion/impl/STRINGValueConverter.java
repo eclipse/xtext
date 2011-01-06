@@ -16,10 +16,6 @@ import org.eclipse.xtext.util.Strings;
  */
 public class STRINGValueConverter extends AbstractLexerBasedConverter<String> {
 	
-	public STRINGValueConverter() {
-		super();
-	}
-	
 	@Override
 	protected String toEscapedString(String value) {
 		return '"' + Strings.convertToJavaString(value, false) + '"';
@@ -29,7 +25,7 @@ public class STRINGValueConverter extends AbstractLexerBasedConverter<String> {
 		if (string == null)
 			return null;
 		try {
-			return Strings.convertFromJavaString(string.substring(1, string.length() - 1), false);
+			return Strings.convertFromJavaString(string.substring(1, string.length() - 1), true);
 		} catch (IllegalArgumentException e) {
 			throw new ValueConverterException(e.getMessage(), node, e);
 		}

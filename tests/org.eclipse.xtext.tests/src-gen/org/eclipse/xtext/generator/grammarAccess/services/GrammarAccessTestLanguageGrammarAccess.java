@@ -22,8 +22,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Assignment cElementsAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cElementsTypeParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
-		//Root returns root::AModel:
-		//	elements+=Type*;
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage'.rules[0]->ParserRule'Root'.type->TypeRef.classifier to EPackage'ametamodel'.eSubpackages[0]->EPackage'asubpackage'.eClassifiers[1]->EClass'AModel'
 		public ParserRule getRule() { return rule; }
 
 		//elements+=Type*
@@ -39,8 +38,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final RuleCall cATypeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cAnotherTypeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//Type returns root::AType:
-		//	AType | AnotherType;
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage'.rules[1]->ParserRule'Type'.type->TypeRef.classifier to EPackage'ametamodel'.eSubpackages[0]->EPackage'asubpackage'.eClassifiers[0]->EClass'AType'
 		public ParserRule getRule() { return rule; }
 
 		//AType | AnotherType
@@ -59,17 +57,16 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Keyword cFooKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Action cATypeAction_1 = (Action)cGroup.eContents().get(1);
 		
-		//AType returns root::AType:
-		//	"foo" {root::AType};
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage'.rules[2]->ParserRule'AType'.type->TypeRef.classifier to EPackage'ametamodel'.eSubpackages[0]->EPackage'asubpackage'.eClassifiers[0]->EClass'AType'
 		public ParserRule getRule() { return rule; }
 
-		//"foo" {root::AType}
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage'.rules[2]->ParserRule'AType'.alternatives->Group.elements[1]->Action.type->TypeRef.classifier to EPackage'ametamodel'.eSubpackages[0]->EPackage'asubpackage'.eClassifiers[0]->EClass'AType'
 		public Group getGroup() { return cGroup; }
 
 		//"foo"
 		public Keyword getFooKeyword_0() { return cFooKeyword_0; }
 
-		//{root::AType}
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage'.rules[2]->ParserRule'AType'.alternatives->Group.elements[1]->Action.type->TypeRef.classifier to EPackage'ametamodel'.eSubpackages[0]->EPackage'asubpackage'.eClassifiers[0]->EClass'AType'
 		public Action getATypeAction_1() { return cATypeAction_1; }
 	}
 
@@ -79,17 +76,16 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Keyword cBarKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Action cAnotherTypeAction_1 = (Action)cGroup.eContents().get(1);
 		
-		//AnotherType returns sub::AnotherType:
-		//	"bar" {sub::AnotherType};
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage'.rules[3]->ParserRule'AnotherType'.type->TypeRef.classifier to EPackage'ametamodel'.eSubpackages[0]->EPackage'asubpackage'.eSubpackages[0]->EPackage'emptyPackage'.eSubpackages[0]->EPackage'subsubpackage'.eClassifiers[0]->EClass'AnotherType'
 		public ParserRule getRule() { return rule; }
 
-		//"bar" {sub::AnotherType}
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage'.rules[3]->ParserRule'AnotherType'.alternatives->Group.elements[1]->Action.type->TypeRef.classifier to EPackage'ametamodel'.eSubpackages[0]->EPackage'asubpackage'.eSubpackages[0]->EPackage'emptyPackage'.eSubpackages[0]->EPackage'subsubpackage'.eClassifiers[0]->EClass'AnotherType'
 		public Group getGroup() { return cGroup; }
 
 		//"bar"
 		public Keyword getBarKeyword_0() { return cBarKeyword_0; }
 
-		//{sub::AnotherType}
+		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage'.rules[3]->ParserRule'AnotherType'.alternatives->Group.elements[1]->Action.type->TypeRef.classifier to EPackage'ametamodel'.eSubpackages[0]->EPackage'asubpackage'.eSubpackages[0]->EPackage'emptyPackage'.eSubpackages[0]->EPackage'subsubpackage'.eClassifiers[0]->EClass'AnotherType'
 		public Action getAnotherTypeAction_1() { return cAnotherTypeAction_1; }
 	}
 	
@@ -120,8 +116,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	
-	//Root returns root::AModel:
-	//	elements+=Type*;
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage'.rules[0]->ParserRule'Root'.type->TypeRef.classifier to EPackage'ametamodel'.eSubpackages[0]->EPackage'asubpackage'.eClassifiers[1]->EClass'AModel'
 	public RootElements getRootAccess() {
 		return (pRoot != null) ? pRoot : (pRoot = new RootElements());
 	}
@@ -130,8 +125,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 		return getRootAccess().getRule();
 	}
 
-	//Type returns root::AType:
-	//	AType | AnotherType;
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage'.rules[1]->ParserRule'Type'.type->TypeRef.classifier to EPackage'ametamodel'.eSubpackages[0]->EPackage'asubpackage'.eClassifiers[0]->EClass'AType'
 	public TypeElements getTypeAccess() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	}
@@ -140,8 +134,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 		return getTypeAccess().getRule();
 	}
 
-	//AType returns root::AType:
-	//	"foo" {root::AType};
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage'.rules[2]->ParserRule'AType'.type->TypeRef.classifier to EPackage'ametamodel'.eSubpackages[0]->EPackage'asubpackage'.eClassifiers[0]->EClass'AType'
 	public ATypeElements getATypeAccess() {
 		return (pAType != null) ? pAType : (pAType = new ATypeElements());
 	}
@@ -150,8 +143,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 		return getATypeAccess().getRule();
 	}
 
-	//AnotherType returns sub::AnotherType:
-	//	"bar" {sub::AnotherType};
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage'.rules[3]->ParserRule'AnotherType'.type->TypeRef.classifier to EPackage'ametamodel'.eSubpackages[0]->EPackage'asubpackage'.eSubpackages[0]->EPackage'emptyPackage'.eSubpackages[0]->EPackage'subsubpackage'.eClassifiers[0]->EClass'AnotherType'
 	public AnotherTypeElements getAnotherTypeAccess() {
 		return (pAnotherType != null) ? pAnotherType : (pAnotherType = new AnotherTypeElements());
 	}
@@ -173,8 +165,8 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
-	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
+	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

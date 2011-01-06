@@ -43,8 +43,7 @@ protected class ThisRootNode extends RootToken {
 
 /************ begin Rule Root ****************
  *
- * Root returns root::AModel:
- * 	elements+=Type*;
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage'.rules[0]->ParserRule'Root'.type->TypeRef.classifier to EPackage'ametamodel'.eSubpackages[0]->EPackage'asubpackage'.eClassifiers[1]->EClass'AModel'
  *
  **/
 
@@ -99,8 +98,7 @@ protected class Root_ElementsAssignment extends AssignmentToken  {
 
 /************ begin Rule Type ****************
  *
- * Type returns root::AType:
- * 	AType | AnotherType;
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage'.rules[1]->ParserRule'Type'.type->TypeRef.classifier to EPackage'ametamodel'.eSubpackages[0]->EPackage'asubpackage'.eClassifiers[0]->EClass'AType'
  *
  **/
 
@@ -213,12 +211,11 @@ protected class Type_AnotherTypeParserRuleCall_1 extends RuleCallToken {
 
 /************ begin Rule AType ****************
  *
- * AType returns root::AType:
- * 	"foo" {root::AType};
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage'.rules[2]->ParserRule'AType'.type->TypeRef.classifier to EPackage'ametamodel'.eSubpackages[0]->EPackage'asubpackage'.eClassifiers[0]->EClass'AType'
  *
  **/
 
-// "foo" {root::AType}
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage'.rules[2]->ParserRule'AType'.alternatives->Group.elements[1]->Action.type->TypeRef.classifier to EPackage'ametamodel'.eSubpackages[0]->EPackage'asubpackage'.eClassifiers[0]->EClass'AType'
 protected class AType_Group extends GroupToken {
 	
 	public AType_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -268,7 +265,7 @@ protected class AType_FooKeyword_0 extends KeywordToken  {
 
 }
 
-// {root::AType}
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage'.rules[2]->ParserRule'AType'.alternatives->Group.elements[1]->Action.type->TypeRef.classifier to EPackage'ametamodel'.eSubpackages[0]->EPackage'asubpackage'.eClassifiers[0]->EClass'AType'
 protected class AType_ATypeAction_1 extends ActionToken  {
 
 	public AType_ATypeAction_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -301,12 +298,11 @@ protected class AType_ATypeAction_1 extends ActionToken  {
 
 /************ begin Rule AnotherType ****************
  *
- * AnotherType returns sub::AnotherType:
- * 	"bar" {sub::AnotherType};
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage'.rules[3]->ParserRule'AnotherType'.type->TypeRef.classifier to EPackage'ametamodel'.eSubpackages[0]->EPackage'asubpackage'.eSubpackages[0]->EPackage'emptyPackage'.eSubpackages[0]->EPackage'subsubpackage'.eClassifiers[0]->EClass'AnotherType'
  *
  **/
 
-// "bar" {sub::AnotherType}
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage'.rules[3]->ParserRule'AnotherType'.alternatives->Group.elements[1]->Action.type->TypeRef.classifier to EPackage'ametamodel'.eSubpackages[0]->EPackage'asubpackage'.eSubpackages[0]->EPackage'emptyPackage'.eSubpackages[0]->EPackage'subsubpackage'.eClassifiers[0]->EClass'AnotherType'
 protected class AnotherType_Group extends GroupToken {
 	
 	public AnotherType_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -356,7 +352,7 @@ protected class AnotherType_BarKeyword_0 extends KeywordToken  {
 
 }
 
-// {sub::AnotherType}
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage'.rules[3]->ParserRule'AnotherType'.alternatives->Group.elements[1]->Action.type->TypeRef.classifier to EPackage'ametamodel'.eSubpackages[0]->EPackage'asubpackage'.eSubpackages[0]->EPackage'emptyPackage'.eSubpackages[0]->EPackage'subsubpackage'.eClassifiers[0]->EClass'AnotherType'
 protected class AnotherType_AnotherTypeAction_1 extends ActionToken  {
 
 	public AnotherType_AnotherTypeAction_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

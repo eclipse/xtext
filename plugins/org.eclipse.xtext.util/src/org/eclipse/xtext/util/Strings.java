@@ -127,6 +127,8 @@ public class Strings {
 				if (useUnicode && aChar == 'u') {
 					// Read the xxxx
 					int value = 0;
+					if(off+4 > end)
+						throw new IllegalArgumentException("Malformed \\uxxxx encoding.");
 					for (int i = 0; i < 4; i++) {
 						aChar = in[off++];
 						switch (aChar) {

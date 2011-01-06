@@ -76,16 +76,11 @@ protected class ThisRootNode extends RootToken {
 
 /************ begin Rule Grammar ****************
  *
- * Grammar:
- * 	"grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)?
- * 	(definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
- * 	metamodelDeclarations+=AbstractMetamodelDeclaration* rules+=AbstractRule+;
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[2]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[0]->EClass'Grammar'
  *
  **/
 
-// "grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)?
-// (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
-// metamodelDeclarations+=AbstractMetamodelDeclaration* rules+=AbstractRule+
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[2]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[0]->EClass'Grammar'
 protected class Grammar_Group extends GroupToken {
 	
 	public Grammar_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -169,7 +164,7 @@ protected class Grammar_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)?
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[2]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[0]->EClass'Grammar'
 protected class Grammar_Group_2 extends GroupToken {
 	
 	public Grammar_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -214,7 +209,7 @@ protected class Grammar_WithKeyword_2_0 extends KeywordToken  {
 
 }
 
-// usedGrammars+=[Grammar|GrammarID]
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[2]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[0]->EClass'Grammar'
 protected class Grammar_UsedGrammarsAssignment_2_1 extends AssignmentToken  {
 	
 	public Grammar_UsedGrammarsAssignment_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -251,7 +246,7 @@ protected class Grammar_UsedGrammarsAssignment_2_1 extends AssignmentToken  {
 
 }
 
-// ("," usedGrammars+=[Grammar|GrammarID])*
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[2]->Group.elements[2]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[0]->EClass'Grammar'
 protected class Grammar_Group_2_2 extends GroupToken {
 	
 	public Grammar_Group_2_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -296,7 +291,7 @@ protected class Grammar_CommaKeyword_2_2_0 extends KeywordToken  {
 
 }
 
-// usedGrammars+=[Grammar|GrammarID]
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[2]->Group.elements[2]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[0]->EClass'Grammar'
 protected class Grammar_UsedGrammarsAssignment_2_2_1 extends AssignmentToken  {
 	
 	public Grammar_UsedGrammarsAssignment_2_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -335,7 +330,7 @@ protected class Grammar_UsedGrammarsAssignment_2_2_1 extends AssignmentToken  {
 
 
 
-// (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[3]->Group.elements[2]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 protected class Grammar_Group_3 extends GroupToken {
 	
 	public Grammar_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -414,7 +409,7 @@ protected class Grammar_LeftParenthesisKeyword_3_1 extends KeywordToken  {
 
 }
 
-// (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)?
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[3]->Group.elements[2]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 protected class Grammar_Group_3_2 extends GroupToken {
 	
 	public Grammar_Group_3_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -437,7 +432,7 @@ protected class Grammar_Group_3_2 extends GroupToken {
 
 }
 
-// hiddenTokens+=[AbstractRule]
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[3]->Group.elements[2]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 protected class Grammar_HiddenTokensAssignment_3_2_0 extends AssignmentToken  {
 	
 	public Grammar_HiddenTokensAssignment_3_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -474,7 +469,7 @@ protected class Grammar_HiddenTokensAssignment_3_2_0 extends AssignmentToken  {
 
 }
 
-// ("," hiddenTokens+=[AbstractRule])*
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[3]->Group.elements[2]->Group.elements[1]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 protected class Grammar_Group_3_2_1 extends GroupToken {
 	
 	public Grammar_Group_3_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -519,7 +514,7 @@ protected class Grammar_CommaKeyword_3_2_1_0 extends KeywordToken  {
 
 }
 
-// hiddenTokens+=[AbstractRule]
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[0]->ParserRule'Grammar'.alternatives->Group.elements[3]->Group.elements[2]->Group.elements[1]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 protected class Grammar_HiddenTokensAssignment_3_2_1_1 extends AssignmentToken  {
 	
 	public Grammar_HiddenTokensAssignment_3_2_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1348,14 +1343,11 @@ protected class ReferencedMetamodel_AliasAssignment_2_1 extends AssignmentToken 
 
 /************ begin Rule ParserRule ****************
  *
- * ParserRule:
- * 	name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] (","
- * 	hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=Alternatives ";";
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[6]->ParserRule'ParserRule'.alternatives->Group.elements[2]->Group.elements[2]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
  *
  **/
 
-// name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] (","
-// hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=Alternatives ";"
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[6]->ParserRule'ParserRule'.alternatives->Group.elements[2]->Group.elements[2]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 protected class ParserRule_Group extends GroupToken {
 	
 	public ParserRule_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1508,7 +1500,7 @@ protected class ParserRule_TypeAssignment_1_1 extends AssignmentToken  {
 }
 
 
-// (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[6]->ParserRule'ParserRule'.alternatives->Group.elements[2]->Group.elements[2]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 protected class ParserRule_Group_2 extends GroupToken {
 	
 	public ParserRule_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1587,7 +1579,7 @@ protected class ParserRule_LeftParenthesisKeyword_2_1 extends KeywordToken  {
 
 }
 
-// (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)?
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[6]->ParserRule'ParserRule'.alternatives->Group.elements[2]->Group.elements[2]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 protected class ParserRule_Group_2_2 extends GroupToken {
 	
 	public ParserRule_Group_2_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1610,7 +1602,7 @@ protected class ParserRule_Group_2_2 extends GroupToken {
 
 }
 
-// hiddenTokens+=[AbstractRule]
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[6]->ParserRule'ParserRule'.alternatives->Group.elements[2]->Group.elements[2]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 protected class ParserRule_HiddenTokensAssignment_2_2_0 extends AssignmentToken  {
 	
 	public ParserRule_HiddenTokensAssignment_2_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1647,7 +1639,7 @@ protected class ParserRule_HiddenTokensAssignment_2_2_0 extends AssignmentToken 
 
 }
 
-// ("," hiddenTokens+=[AbstractRule])*
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[6]->ParserRule'ParserRule'.alternatives->Group.elements[2]->Group.elements[2]->Group.elements[1]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 protected class ParserRule_Group_2_2_1 extends GroupToken {
 	
 	public ParserRule_Group_2_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1692,7 +1684,7 @@ protected class ParserRule_CommaKeyword_2_2_1_0 extends KeywordToken  {
 
 }
 
-// hiddenTokens+=[AbstractRule]
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[6]->ParserRule'ParserRule'.alternatives->Group.elements[2]->Group.elements[2]->Group.elements[1]->Group.elements[1]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 protected class ParserRule_HiddenTokensAssignment_2_2_1_1 extends AssignmentToken  {
 	
 	public ParserRule_HiddenTokensAssignment_2_2_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1853,12 +1845,11 @@ protected class ParserRule_SemicolonKeyword_5 extends KeywordToken  {
 
 /************ begin Rule TypeRef ****************
  *
- * TypeRef:
- * 	(metamodel=[AbstractMetamodelDeclaration] "::")? classifier=[ecore::EClassifier];
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[7]->ParserRule'TypeRef'.alternatives->Group.elements[0]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[2]->EClass'AbstractMetamodelDeclaration'
  *
  **/
 
-// (metamodel=[AbstractMetamodelDeclaration] "::")? classifier=[ecore::EClassifier]
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[7]->ParserRule'TypeRef'.alternatives->Group.elements[0]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[2]->EClass'AbstractMetamodelDeclaration'
 protected class TypeRef_Group extends GroupToken {
 	
 	public TypeRef_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1887,7 +1878,7 @@ protected class TypeRef_Group extends GroupToken {
 
 }
 
-// (metamodel=[AbstractMetamodelDeclaration] "::")?
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[7]->ParserRule'TypeRef'.alternatives->Group.elements[0]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[2]->EClass'AbstractMetamodelDeclaration'
 protected class TypeRef_Group_0 extends GroupToken {
 	
 	public TypeRef_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1909,7 +1900,7 @@ protected class TypeRef_Group_0 extends GroupToken {
 
 }
 
-// metamodel=[AbstractMetamodelDeclaration]
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[7]->ParserRule'TypeRef'.alternatives->Group.elements[0]->Group.elements[0]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[2]->EClass'AbstractMetamodelDeclaration'
 protected class TypeRef_MetamodelAssignment_0_0 extends AssignmentToken  {
 	
 	public TypeRef_MetamodelAssignment_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2011,12 +2002,11 @@ protected class TypeRef_ClassifierAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule Alternatives ****************
  *
- * Alternatives returns AbstractElement:
- * 	UnorderedGroup ({Alternatives.elements+=current} ("|" elements+=UnorderedGroup)+)?;
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[8]->ParserRule'Alternatives'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
  *
  **/
 
-// UnorderedGroup ({Alternatives.elements+=current} ("|" elements+=UnorderedGroup)+)?
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[8]->ParserRule'Alternatives'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 protected class Alternatives_Group extends GroupToken {
 	
 	public Alternatives_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2086,7 +2076,7 @@ protected class Alternatives_UnorderedGroupParserRuleCall_0 extends RuleCallToke
 	}	
 }
 
-// ({Alternatives.elements+=current} ("|" elements+=UnorderedGroup)+)?
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[8]->ParserRule'Alternatives'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 protected class Alternatives_Group_1 extends GroupToken {
 	
 	public Alternatives_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2115,7 +2105,7 @@ protected class Alternatives_Group_1 extends GroupToken {
 
 }
 
-// {Alternatives.elements+=current}
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[8]->ParserRule'Alternatives'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 protected class Alternatives_AlternativesElementsAction_1_0 extends ActionToken  {
 
 	public Alternatives_AlternativesElementsAction_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2243,12 +2233,11 @@ protected class Alternatives_ElementsAssignment_1_1_1 extends AssignmentToken  {
 
 /************ begin Rule UnorderedGroup ****************
  *
- * UnorderedGroup returns AbstractElement:
- * 	Group ({UnorderedGroup.elements+=current} ("&" elements+=Group)+)?;
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[9]->ParserRule'UnorderedGroup'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
  *
  **/
 
-// Group ({UnorderedGroup.elements+=current} ("&" elements+=Group)+)?
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[9]->ParserRule'UnorderedGroup'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[21]->EClass'UnorderedGroup'
 protected class UnorderedGroup_Group extends GroupToken {
 	
 	public UnorderedGroup_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2318,7 +2307,7 @@ protected class UnorderedGroup_GroupParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// ({UnorderedGroup.elements+=current} ("&" elements+=Group)+)?
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[9]->ParserRule'UnorderedGroup'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[21]->EClass'UnorderedGroup'
 protected class UnorderedGroup_Group_1 extends GroupToken {
 	
 	public UnorderedGroup_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2347,7 +2336,7 @@ protected class UnorderedGroup_Group_1 extends GroupToken {
 
 }
 
-// {UnorderedGroup.elements+=current}
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[9]->ParserRule'UnorderedGroup'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[21]->EClass'UnorderedGroup'
 protected class UnorderedGroup_UnorderedGroupElementsAction_1_0 extends ActionToken  {
 
 	public UnorderedGroup_UnorderedGroupElementsAction_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2475,12 +2464,11 @@ protected class UnorderedGroup_ElementsAssignment_1_1_1 extends AssignmentToken 
 
 /************ begin Rule Group ****************
  *
- * Group returns AbstractElement:
- * 	AbstractToken ({Group.elements+=current} elements+=AbstractToken+)?;
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[10]->ParserRule'Group'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
  *
  **/
 
-// AbstractToken ({Group.elements+=current} elements+=AbstractToken+)?
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[10]->ParserRule'Group'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[22]->EClass'Group'
 protected class Group_Group extends GroupToken {
 	
 	public Group_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2550,7 +2538,7 @@ protected class Group_AbstractTokenParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// ({Group.elements+=current} elements+=AbstractToken+)?
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[10]->ParserRule'Group'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[22]->EClass'Group'
 protected class Group_Group_1 extends GroupToken {
 	
 	public Group_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2579,7 +2567,7 @@ protected class Group_Group_1 extends GroupToken {
 
 }
 
-// {Group.elements+=current}
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[10]->ParserRule'Group'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[22]->EClass'Group'
 protected class Group_GroupElementsAction_1_0 extends ActionToken  {
 
 	public Group_GroupElementsAction_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2662,8 +2650,7 @@ protected class Group_ElementsAssignment_1_1 extends AssignmentToken  {
 
 /************ begin Rule AbstractToken ****************
  *
- * AbstractToken returns AbstractElement:
- * 	AbstractTokenWithCardinality | Action;
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[11]->ParserRule'AbstractToken'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
  *
  **/
 
@@ -2779,8 +2766,7 @@ protected class AbstractToken_ActionParserRuleCall_1 extends RuleCallToken {
 
 /************ begin Rule AbstractTokenWithCardinality ****************
  *
- * AbstractTokenWithCardinality returns AbstractElement:
- * 	(Assignment | AbstractTerminal) cardinality=("?" | "*" | "+")?;
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[12]->ParserRule'AbstractTokenWithCardinality'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
  *
  **/
 
@@ -3234,8 +3220,7 @@ protected class Action_RightCurlyBracketKeyword_3 extends KeywordToken  {
 
 /************ begin Rule AbstractTerminal ****************
  *
- * AbstractTerminal returns AbstractElement:
- * 	Keyword | RuleCall | ParenthesizedElement;
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[14]->ParserRule'AbstractTerminal'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
  *
  **/
 
@@ -3433,12 +3418,11 @@ protected class Keyword_ValueAssignment extends AssignmentToken  {
 
 /************ begin Rule RuleCall ****************
  *
- * RuleCall:
- * 	rule=[AbstractRule];
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[16]->ParserRule'RuleCall'.alternatives->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
  *
  **/
 
-// rule=[AbstractRule]
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[16]->ParserRule'RuleCall'.alternatives->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[1]->EClass'AbstractRule'
 protected class RuleCall_RuleAssignment extends AssignmentToken  {
 	
 	public RuleCall_RuleAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3644,8 +3628,7 @@ protected class Assignment_TerminalAssignment_2 extends AssignmentToken  {
 
 /************ begin Rule AssignableTerminal ****************
  *
- * AssignableTerminal returns AbstractElement:
- * 	Keyword | RuleCall | ParenthesizedAssignableElement | CrossReference;
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[18]->ParserRule'AssignableTerminal'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
  *
  **/
 
@@ -3832,8 +3815,7 @@ protected class AssignableTerminal_CrossReferenceParserRuleCall_3 extends RuleCa
 
 /************ begin Rule ParenthesizedAssignableElement ****************
  *
- * ParenthesizedAssignableElement returns AbstractElement:
- * 	"(" AssignableAlternatives ")";
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[19]->ParserRule'ParenthesizedAssignableElement'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
  *
  **/
 
@@ -3953,12 +3935,11 @@ protected class ParenthesizedAssignableElement_RightParenthesisKeyword_2 extends
 
 /************ begin Rule AssignableAlternatives ****************
  *
- * AssignableAlternatives returns AbstractElement:
- * 	AssignableTerminal ({Alternatives.elements+=current} ("|" elements+=AssignableTerminal)+)?;
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[20]->ParserRule'AssignableAlternatives'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
  *
  **/
 
-// AssignableTerminal ({Alternatives.elements+=current} ("|" elements+=AssignableTerminal)+)?
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[20]->ParserRule'AssignableAlternatives'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 protected class AssignableAlternatives_Group extends GroupToken {
 	
 	public AssignableAlternatives_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4025,7 +4006,7 @@ protected class AssignableAlternatives_AssignableTerminalParserRuleCall_0 extend
 	}	
 }
 
-// ({Alternatives.elements+=current} ("|" elements+=AssignableTerminal)+)?
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[20]->ParserRule'AssignableAlternatives'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 protected class AssignableAlternatives_Group_1 extends GroupToken {
 	
 	public AssignableAlternatives_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4054,7 +4035,7 @@ protected class AssignableAlternatives_Group_1 extends GroupToken {
 
 }
 
-// {Alternatives.elements+=current}
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[20]->ParserRule'AssignableAlternatives'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 protected class AssignableAlternatives_AlternativesElementsAction_1_0 extends ActionToken  {
 
 	public AssignableAlternatives_AlternativesElementsAction_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4403,8 +4384,7 @@ protected class CrossReference_RightSquareBracketKeyword_3 extends KeywordToken 
 
 /************ begin Rule CrossReferenceableTerminal ****************
  *
- * CrossReferenceableTerminal returns AbstractElement:
- * 	Keyword | RuleCall;
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[22]->ParserRule'CrossReferenceableTerminal'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
  *
  **/
 
@@ -4517,8 +4497,7 @@ protected class CrossReferenceableTerminal_RuleCallParserRuleCall_1 extends Rule
 
 /************ begin Rule ParenthesizedElement ****************
  *
- * ParenthesizedElement returns AbstractElement:
- * 	"(" Alternatives ")";
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[23]->ParserRule'ParenthesizedElement'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
  *
  **/
 
@@ -4642,12 +4621,12 @@ protected class ParenthesizedElement_RightParenthesisKeyword_2 extends KeywordTo
 /************ begin Rule TerminalRule ****************
  *
  * TerminalRule:
- * 	"terminal" (fragment?="fragment" name=ID | name=ID ("returns" type=TypeRef)?) ":" alternatives=TerminalAlternatives
+ * 	"terminal" (^fragment?="fragment" name=ID | name=ID ("returns" type=TypeRef)?) ":" alternatives=TerminalAlternatives
  * 	";";
  *
  **/
 
-// "terminal" (fragment?="fragment" name=ID | name=ID ("returns" type=TypeRef)?) ":" alternatives=TerminalAlternatives ";"
+// "terminal" (^fragment?="fragment" name=ID | name=ID ("returns" type=TypeRef)?) ":" alternatives=TerminalAlternatives ";"
 protected class TerminalRule_Group extends GroupToken {
 	
 	public TerminalRule_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4697,7 +4676,7 @@ protected class TerminalRule_TerminalKeyword_0 extends KeywordToken  {
 
 }
 
-// fragment?="fragment" name=ID | name=ID ("returns" type=TypeRef)?
+// ^fragment?="fragment" name=ID | name=ID ("returns" type=TypeRef)?
 protected class TerminalRule_Alternatives_1 extends AlternativesToken {
 
 	public TerminalRule_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4720,7 +4699,7 @@ protected class TerminalRule_Alternatives_1 extends AlternativesToken {
 
 }
 
-// fragment?="fragment" name=ID
+// ^fragment?="fragment" name=ID
 protected class TerminalRule_Group_1_0 extends GroupToken {
 	
 	public TerminalRule_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4742,7 +4721,7 @@ protected class TerminalRule_Group_1_0 extends GroupToken {
 
 }
 
-// fragment?="fragment"
+// ^fragment?="fragment"
 protected class TerminalRule_FragmentAssignment_1_0_0 extends AssignmentToken  {
 	
 	public TerminalRule_FragmentAssignment_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5057,12 +5036,11 @@ protected class TerminalRule_SemicolonKeyword_4 extends KeywordToken  {
 
 /************ begin Rule TerminalAlternatives ****************
  *
- * TerminalAlternatives returns AbstractElement:
- * 	TerminalGroup ({Alternatives.elements+=current} ("|" elements+=TerminalGroup)+)?;
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[25]->ParserRule'TerminalAlternatives'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
  *
  **/
 
-// TerminalGroup ({Alternatives.elements+=current} ("|" elements+=TerminalGroup)+)?
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[25]->ParserRule'TerminalAlternatives'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 protected class TerminalAlternatives_Group extends GroupToken {
 	
 	public TerminalAlternatives_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5133,7 +5111,7 @@ protected class TerminalAlternatives_TerminalGroupParserRuleCall_0 extends RuleC
 	}	
 }
 
-// ({Alternatives.elements+=current} ("|" elements+=TerminalGroup)+)?
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[25]->ParserRule'TerminalAlternatives'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 protected class TerminalAlternatives_Group_1 extends GroupToken {
 	
 	public TerminalAlternatives_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5162,7 +5140,7 @@ protected class TerminalAlternatives_Group_1 extends GroupToken {
 
 }
 
-// {Alternatives.elements+=current}
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[25]->ParserRule'TerminalAlternatives'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 protected class TerminalAlternatives_AlternativesElementsAction_1_0 extends ActionToken  {
 
 	public TerminalAlternatives_AlternativesElementsAction_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5290,12 +5268,11 @@ protected class TerminalAlternatives_ElementsAssignment_1_1_1 extends Assignment
 
 /************ begin Rule TerminalGroup ****************
  *
- * TerminalGroup returns AbstractElement:
- * 	TerminalToken ({Group.elements+=current} elements+=TerminalToken+)?;
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[26]->ParserRule'TerminalGroup'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
  *
  **/
 
-// TerminalToken ({Group.elements+=current} elements+=TerminalToken+)?
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[26]->ParserRule'TerminalGroup'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[22]->EClass'Group'
 protected class TerminalGroup_Group extends GroupToken {
 	
 	public TerminalGroup_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5366,7 +5343,7 @@ protected class TerminalGroup_TerminalTokenParserRuleCall_0 extends RuleCallToke
 	}	
 }
 
-// ({Group.elements+=current} elements+=TerminalToken+)?
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[26]->ParserRule'TerminalGroup'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[22]->EClass'Group'
 protected class TerminalGroup_Group_1 extends GroupToken {
 	
 	public TerminalGroup_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5395,7 +5372,7 @@ protected class TerminalGroup_Group_1 extends GroupToken {
 
 }
 
-// {Group.elements+=current}
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[26]->ParserRule'TerminalGroup'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[22]->EClass'Group'
 protected class TerminalGroup_GroupElementsAction_1_0 extends ActionToken  {
 
 	public TerminalGroup_GroupElementsAction_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5478,8 +5455,7 @@ protected class TerminalGroup_ElementsAssignment_1_1 extends AssignmentToken  {
 
 /************ begin Rule TerminalToken ****************
  *
- * TerminalToken returns AbstractElement:
- * 	TerminalTokenElement cardinality=("?" | "*" | "+")?;
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[27]->ParserRule'TerminalToken'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
  *
  **/
 
@@ -5604,8 +5580,7 @@ protected class TerminalToken_CardinalityAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule TerminalTokenElement ****************
  *
- * TerminalTokenElement returns AbstractElement:
- * 	CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard;
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[28]->ParserRule'TerminalTokenElement'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
  *
  **/
 
@@ -5835,8 +5810,7 @@ protected class TerminalTokenElement_WildcardParserRuleCall_4 extends RuleCallTo
 
 /************ begin Rule ParenthesizedTerminalElement ****************
  *
- * ParenthesizedTerminalElement returns AbstractElement:
- * 	"(" TerminalAlternatives ")";
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[29]->ParserRule'ParenthesizedTerminalElement'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
  *
  **/
 
@@ -6288,12 +6262,11 @@ protected class UntilToken_TerminalAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule Wildcard ****************
  *
- * Wildcard:
- * 	{Wildcard} ".";
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[33]->ParserRule'Wildcard'.alternatives->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[17]->EClass'Wildcard'
  *
  **/
 
-// {Wildcard} "."
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[33]->ParserRule'Wildcard'.alternatives->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[17]->EClass'Wildcard'
 protected class Wildcard_Group extends GroupToken {
 	
 	public Wildcard_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6322,7 +6295,7 @@ protected class Wildcard_Group extends GroupToken {
 
 }
 
-// {Wildcard}
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[33]->ParserRule'Wildcard'.alternatives->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[17]->EClass'Wildcard'
 protected class Wildcard_WildcardAction_0 extends ActionToken  {
 
 	public Wildcard_WildcardAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6376,12 +6349,11 @@ protected class Wildcard_FullStopKeyword_1 extends KeywordToken  {
 
 /************ begin Rule CharacterRange ****************
  *
- * CharacterRange returns AbstractElement:
- * 	Keyword ({CharacterRange.left=current} ".." right=Keyword)?;
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[34]->ParserRule'CharacterRange'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
  *
  **/
 
-// Keyword ({CharacterRange.left=current} ".." right=Keyword)?
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[34]->ParserRule'CharacterRange'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[23]->EClass'CharacterRange'
 protected class CharacterRange_Group extends GroupToken {
 	
 	public CharacterRange_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6448,7 +6420,7 @@ protected class CharacterRange_KeywordParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// ({CharacterRange.left=current} ".." right=Keyword)?
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[34]->ParserRule'CharacterRange'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[23]->EClass'CharacterRange'
 protected class CharacterRange_Group_1 extends GroupToken {
 	
 	public CharacterRange_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6477,7 +6449,7 @@ protected class CharacterRange_Group_1 extends GroupToken {
 
 }
 
-// {CharacterRange.left=current}
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[34]->ParserRule'CharacterRange'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[23]->EClass'CharacterRange'
 protected class CharacterRange_CharacterRangeLeftAction_1_0 extends ActionToken  {
 
 	public CharacterRange_CharacterRangeLeftAction_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6858,12 +6830,11 @@ protected class EnumRule_SemicolonKeyword_5 extends KeywordToken  {
 
 /************ begin Rule EnumLiterals ****************
  *
- * EnumLiterals returns AbstractElement:
- * 	EnumLiteralDeclaration ({Alternatives.elements+=current} ("|" elements+=EnumLiteralDeclaration)+)?;
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[36]->ParserRule'EnumLiterals'.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[7]->EClass'AbstractElement'
  *
  **/
 
-// EnumLiteralDeclaration ({Alternatives.elements+=current} ("|" elements+=EnumLiteralDeclaration)+)?
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[36]->ParserRule'EnumLiterals'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 protected class EnumLiterals_Group extends GroupToken {
 	
 	public EnumLiterals_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6930,7 +6901,7 @@ protected class EnumLiterals_EnumLiteralDeclarationParserRuleCall_0 extends Rule
 	}	
 }
 
-// ({Alternatives.elements+=current} ("|" elements+=EnumLiteralDeclaration)+)?
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[36]->ParserRule'EnumLiterals'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 protected class EnumLiterals_Group_1 extends GroupToken {
 	
 	public EnumLiterals_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6959,7 +6930,7 @@ protected class EnumLiterals_Group_1 extends GroupToken {
 
 }
 
-// {Alternatives.elements+=current}
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.Xtext'.rules[36]->ParserRule'EnumLiterals'.alternatives->Group.elements[1]->Group.elements[0]->Action.type->TypeRef.classifier to EPackage'xtext'.eClassifiers[20]->EClass'Alternatives'
 protected class EnumLiterals_AlternativesElementsAction_1_0 extends ActionToken  {
 
 	public EnumLiterals_AlternativesElementsAction_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
