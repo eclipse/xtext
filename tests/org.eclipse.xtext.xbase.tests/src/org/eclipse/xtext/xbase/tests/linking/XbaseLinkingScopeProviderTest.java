@@ -35,7 +35,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testAssignment_1() throws Exception {
-		XBinaryOperation assignment = (XBinaryOperation) expression("new java.util.ArrayList<java.lang.String>() += 'foo'", true);
+		XBinaryOperation assignment = (XBinaryOperation) expression("new java.util.ArrayList<String>() += 'foo'", true);
 		assertEquals("java.util.ArrayList.add(E)",assignment.getFeature().getCanonicalName());
 	}
 	
@@ -50,7 +50,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	public void testImplicitThis_1() throws Exception {
 		XBlockExpression bop = (XBlockExpression) expression(
 				"{ " +
-				"	val this = new java.util.ArrayList<java.lang.String>(); " +
+				"	val this = new java.util.ArrayList<String>(); " +
 				"	size;" +
 				"}");
 		assertEquals("java.util.ArrayList.size()",((XFeatureCall)bop.getExpressions().get(1)).getFeature().getCanonicalName());
@@ -59,7 +59,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	public void testImplicitThis_2() throws Exception {
 		XBlockExpression bop = (XBlockExpression) expression(
 				"{ " +
-				"	val this = new java.util.ArrayList<java.lang.String>(); " +
+				"	val this = new java.util.ArrayList<String>(); " +
 				"	size();" +
 				"}");
 		assertEquals("java.util.ArrayList.size()",((XFeatureCall)bop.getExpressions().get(1)).getFeature().getCanonicalName());
@@ -68,7 +68,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	public void testImplicitThis_3() throws Exception {
 		XBlockExpression bop = (XBlockExpression) expression(
 				"{ " +
-				"	val java.util.List this = new java.util.ArrayList<java.lang.String>(); " +
+				"	val java.util.List this = new java.util.ArrayList<String>(); " +
 				"	size;" +
 				"}");
 		assertEquals("java.util.List.size()",((XFeatureCall)bop.getExpressions().get(1)).getFeature().getCanonicalName());
@@ -77,7 +77,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	public void testImplicitThis_4() throws Exception {
 		XBlockExpression bop = (XBlockExpression) expression(
 				"{ " +
-				"	val java.util.List this = new java.util.ArrayList<java.lang.String>(); " +
+				"	val java.util.List this = new java.util.ArrayList<String>(); " +
 				"	size();" +
 				"}");
 		assertEquals("java.util.List.size()",((XFeatureCall)bop.getExpressions().get(1)).getFeature().getCanonicalName());
@@ -86,7 +86,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	public void testShadowing_1() throws Exception {
 		XBlockExpression bop = (XBlockExpression) expression(
 				"{ " +
-				"	val this = new java.util.List<java.lang.String>(); " +
+				"	val this = new java.util.List<String>(); " +
 				"	val size = 23;" +
 				"	size;" +
 				"}", false);
@@ -101,7 +101,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		XBlockExpression bop = (XBlockExpression) expression(
 				"{ " +
 				"	val size = 23;" +
-				"	val this = new java.util.ArrayList<java.lang.String>(); " +
+				"	val this = new java.util.ArrayList<String>(); " +
 				"	size;" +
 				"}");
 		assertTrue(((XFeatureCall)bop.getExpressions().get(2)).getFeature() instanceof XVariableDeclaration);
@@ -112,7 +112,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 				"{" +
 				"	val size = 23;" +
 				"	{" +
-				"		val this = new java.util.ArrayList<java.lang.String>(); " +
+				"		val this = new java.util.ArrayList<String>(); " +
 				"		size;" +
 				"	};" +
 				"}");
@@ -125,7 +125,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 				"{" +
 				"	val size = 23;" +
 				"	{" +
-				"		val this = new java.util.ArrayList<java.lang.String>(); " +
+				"		val this = new java.util.ArrayList<String>(); " +
 				"		size();" +
 				"	};" +
 				"}");
@@ -139,7 +139,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		XBlockExpression bop = (XBlockExpression) expression(
 				"{" +
 				"	val size = 23;" +
-				"	java.lang.String size|size;" +
+				"	String size|size;" +
 				"}");
 		XClosure closure = (XClosure)bop.getExpressions().get(1);
 		assertSame(closure.getFormalParameters().get(0), ((XFeatureCall)closure.getExpression()).getFeature());
@@ -149,7 +149,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		XBlockExpression bop = (XBlockExpression) expression(
 				"{" +
 				"	val size = 23;" +
-				"	java.lang.String x|size;" +
+				"	String x|size;" +
 				"}");
 		XClosure closure = (XClosure)bop.getExpressions().get(1);
 		assertSame(bop.getExpressions().get(0), ((XFeatureCall)closure.getExpression()).getFeature());
@@ -159,20 +159,20 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		XBlockExpression bop = (XBlockExpression) expression(
 				"{" +
 				"	val size = 23;" +
-				"	java.lang.String size| java.lang.String x|size;" +
+				"	String size| String x|size;" +
 		"}");
 		XClosure closure = (XClosure)bop.getExpressions().get(1);
 		assertSame(closure.getFormalParameters().get(0), ((XFeatureCall)((XClosure)closure.getExpression()).getExpression()).getFeature());
 	}
 	
 	public void testTryCatch_0() throws Exception {
-		XTryCatchFinallyExpression exp = (XTryCatchFinallyExpression) expression("try 'foo' catch (java.lang.Exception e) e",true);
+		XTryCatchFinallyExpression exp = (XTryCatchFinallyExpression) expression("try 'foo' catch (Exception e) e",true);
 		XCatchClause xCatchClause = exp.getCatchClauses().get(0);
 		assertSame(xCatchClause.getDeclaredParam(), ((XFeatureCall)xCatchClause.getExpression()).getFeature());
 	}
 	
 	public void testTryCatch_1() throws Exception {
-		expression("try { (java.lang.Boolean) 'literal' } catch(java.lang.ClassCastException e) {e.getClass().getSimpleName()}", true);
+		expression("try { (Boolean) 'literal' } catch(ClassCastException e) {e.getClass().getSimpleName()}", true);
 	}
 	
 	public void testFeatureCall() throws Exception {
@@ -215,7 +215,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		XBlockExpression block = (XBlockExpression) expression("{" +
 				"  val this = new testdata.MethodOverrides1();" +
 				"  m1('String');" +
-				"  m1((java.lang.CharSequence)'CharSequence');" +
+				"  m1((CharSequence)'CharSequence');" +
 		"}");
 		XFeatureCall call1 = (XFeatureCall) block.getExpressions().get(1);
 		XFeatureCall call2 = (XFeatureCall) block.getExpressions().get(2);
@@ -227,8 +227,8 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		XBlockExpression block = (XBlockExpression) expression("{" +
 				"  val this = new testdata.MethodOverrides2();" +
 				"  m1('String');" +
-				"  m1((java.lang.CharSequence)'CharSequence');" +
-				"  m1((java.lang.Object)'String');" +
+				"  m1((CharSequence)'CharSequence');" +
+				"  m1((Object)'String');" +
 		"}");
 		XFeatureCall call1 = (XFeatureCall) block.getExpressions().get(1);
 		XFeatureCall call2 = (XFeatureCall) block.getExpressions().get(2);
@@ -239,7 +239,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testGenerics() throws Exception {
-		expression("new testdata.GenericType1<java.lang.String>() += 'foo'", true);
+		expression("new testdata.GenericType1<String>() += 'foo'", true);
 	}
 	
 	public void testGenerics_1() throws Exception {
@@ -286,19 +286,19 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testLinkingToInvisibleElements() throws Exception {
-		XMemberFeatureCall expression = (XMemberFeatureCall) expression("new testdata.GenericType1<java.lang.String>().t.offset");
+		XMemberFeatureCall expression = (XMemberFeatureCall) expression("new testdata.GenericType1<String>().t.offset");
 		assertEquals("java.lang.String.offset", expression.getFeature().getCanonicalName());
 		assertTrue(((JvmMember)expression.getFeature()).getVisibility()==JvmVisibility.PRIVATE);
 	}
 	
 	public void testAssignmentToInvisibleElements() throws Exception {
-		XAssignment expression = (XAssignment) expression("new testdata.GenericType1<java.lang.String>().t = 'foo'");
+		XAssignment expression = (XAssignment) expression("new testdata.GenericType1<String>().t = 'foo'");
 		assertEquals("testdata.GenericType1.t", expression.getFeature().getCanonicalName());
 		assertTrue(((JvmMember)expression.getFeature()).getVisibility()==JvmVisibility.PRIVATE);
 	}
 	
 	public void testConstructorCall_00() throws Exception {
-		XConstructorCall expression = (XConstructorCall) expression("new java.util.ArrayList<java.lang.String>(42)");
+		XConstructorCall expression = (XConstructorCall) expression("new java.util.ArrayList<String>(42)");
 		assertEquals("java.util.ArrayList.ArrayList(int)", expression.getConstructor().getCanonicalName());
 	}
 }

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtend2.scoping;
+package org.eclipse.xtext.xbase.scoping;
 
 import static java.util.Collections.*;
 
@@ -18,7 +18,7 @@ import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class Xtend2ImportedNamespaceScopeProvider extends ImportedNamespaceAwareLocalScopeProvider {
+public class XbaseImportedNamespaceScopeProvider extends ImportedNamespaceAwareLocalScopeProvider {
 	
 	@Override
 	protected List<ImportNormalizer> getImplicitImports() {
