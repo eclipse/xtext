@@ -44,7 +44,7 @@ public class CopiedResourceDescription extends AbstractResourceDescription {
                             return from;
                         }
                         InternalEObject result = (InternalEObject) EcoreUtil.create(from.getEClass());
-                        result.eSetProxyURI(EcoreUtil.getURI(from.getEObjectOrProxy()));
+                        result.eSetProxyURI(from.getEObjectURI());
                         Map<String, String> userData = null;
                         for (final String key : from.getUserDataKeys()) {
                             if (userData == null) {
