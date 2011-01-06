@@ -23,6 +23,11 @@ import org.eclipse.xtext.util.Strings;
  */
 public class EObjectDescription extends AbstractEObjectDescription {
 
+	private final Map<String, String> userData;
+	private final QualifiedName qualifiedName;
+	private final EObject element;
+	private URI normalizedURI;
+	
 	public EObjectDescription(QualifiedName qualifiedName, EObject element, Map<String, String> userData) {
 		if (qualifiedName == null)
 			throw new NullPointerException("qualified name may not be null");
@@ -47,16 +52,15 @@ public class EObjectDescription extends AbstractEObjectDescription {
 		return create(qualifiedName, element, Collections.<String,String>emptyMap());
 	}
 
-	private final Map<String, String> userData;
-	private final QualifiedName qualifiedName;
-	private final EObject element;
-
 	public EObject getEObjectOrProxy() {
 		return element;
 	}
 
 	public URI getEObjectURI() {
-		return normalize(element, EcoreUtil.getURI(element));
+		if (normalizedURI == null) {
+			normalizedURI = normalize(element, EcoreUtil.getURI(element));
+		}
+		return normalizedURI; 
 	}
 	
 	protected URI normalize(EObject element, URI uri) {
