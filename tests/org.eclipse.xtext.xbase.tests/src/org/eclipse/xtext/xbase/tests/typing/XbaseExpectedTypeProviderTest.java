@@ -42,6 +42,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	public void testMemberFeatureCall() throws Exception {
 		XMemberFeatureCall fc = (XMemberFeatureCall) expression("'foo'.charAt(null)");
 		assertExpected("int", fc.getMemberCallArguments().get(0));
+		assertExpected(null, fc.getMemberCallTarget());
 	}
 
 	public void testBinaryOperationCall() throws Exception {

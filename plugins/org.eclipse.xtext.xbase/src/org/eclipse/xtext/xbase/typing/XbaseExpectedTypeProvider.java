@@ -70,7 +70,8 @@ public class XbaseExpectedTypeProvider extends AbstractExpectedTypeProvider<JvmT
 			JvmExecutable feature = (JvmExecutable) expr.getFeature();
 			JvmFormalParameter parameter = feature.getParameters().get(index);
 			return context.resolveContravariant(parameter.getParameterType());
-		}
+		} else if(reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) 
+			return null;
 		return getExpectedType(expr);
 	}
 

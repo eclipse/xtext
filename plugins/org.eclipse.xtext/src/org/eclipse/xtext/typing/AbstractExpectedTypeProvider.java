@@ -9,7 +9,6 @@ package org.eclipse.xtext.typing;
 
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.resource.XtextResource;
@@ -25,26 +24,12 @@ import com.google.inject.Provider;
 public class AbstractExpectedTypeProvider<T> implements IExpectedTypeProvider<T> {
 
 	public T getExpectedType(EObject obj) {
-		//TODO measure whether caching this method makes sense
-		EObject container = obj.eContainer();
-		if (container == null)
+		EReference containmentReference = obj.eContainmentFeature();
+		if(containmentReference == null)
 			return null;
-		EList<EReference> eList = container.eClass().getEAllContainments();
-		for (EReference eReference : eList) {
-			if (eReference.isMany()) {
-				@SuppressWarnings("unchecked")
-				List<? extends EObject> eGet = (List<? extends EObject>) container.eGet(eReference);
-				int i = eGet.indexOf(obj);
-				if (i != -1) {
-					return getExpectedType(container, eReference, i);
-				}
-			} else {
-				if (container.eGet(eReference) == obj)
-					return getExpectedType(container, eReference, -1);
-			}
-		}
-		// should never happen
-		throw new IllegalStateException("element not found in any containment reference");
+		EObject container = obj.eContainer();
+		int index = (containmentReference.isMany()) ? ((List<?>)container.eGet(containmentReference)).indexOf(obj) : -1;
+		return getExpectedType(container, containmentReference, index);
 	}
 
 	private IResourceScopeCache getCache(EObject astNode) {
