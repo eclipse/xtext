@@ -36,22 +36,32 @@ public class STRINGConverterTest extends AbstractXtextTests {
 	}
 
 	public void testUnicode() throws Exception {
-		try {
-			valueConverter.toValue("'\\u0000'", null);
-			fail("Illegal escape chr not detected");
-		} catch (ValueConverterException e) {
-			// normal operation
-		}
 		String legalString = "\"\\\\u0000\"";
 		String value = valueConverter.toValue(legalString, null);
 		assertEquals("\\u0000", value);
 		assertEquals(legalString, valueConverter.toString(value));
 	}
 	
+	public void testUnicode_01() throws Exception {
+		String value = valueConverter.toValue("\"\\u0001\"", null);
+		assertEquals("\u0001", value);
+		assertEquals("\"\u0001\"", valueConverter.toString(value));
+	}
+	
 	public void testUnicode_02() throws Exception {
 		String value = "\u1234";
 		String string = valueConverter.toString(value);
 		assertEquals(value, valueConverter.toValue(string, null));
+	}
+	
+	public void testUnicodeSequenceLength() throws Exception {
+		try {
+			valueConverter.toValue("'\\u123'", null);
+			fail("Illegal short unicode sequence not detected");
+		} catch(ValueConverterException e) {
+			// normal operation
+		}
+		assertEquals("\u1234", valueConverter.toValue("'\\u1234'", null));
 	}
 	
 	public void testEmpty() throws Exception {

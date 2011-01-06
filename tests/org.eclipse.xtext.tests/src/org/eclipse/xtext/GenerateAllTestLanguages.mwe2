@@ -285,6 +285,10 @@ Workflow {
 			uri = "classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/terminalrules/UnicodeTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parser/terminalrules/XtextTerminalsTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
