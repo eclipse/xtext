@@ -6,21 +6,20 @@ integrates and compiles to Java.
 
 Conceptually and syntactically, Xtend2 is a subset of Java, with the following differences:
 ul[
-	item[First class support for template syntax]
-	item[extension methods]
+	item[First class support for template syntax, with intelligent whitespace handling]
+	item[built-in support for dependency injection (based in Google Guice)]
+	item[injected extension methods]
 	item[multiple dispatch aka polymorphic method invocation]
-	item[built-in support for dependency injection]
-	item[inferred return types]
-	item[convenient graph navigation expressions]
+	item[Advanced type inference]
 	item[Uses Xbase expressions, which means :
 		ul[
 			item[No checked exceptions]
-			item[Pure object-oriented, i.e. no built-in types and no arrays]
-			item[Everything is an expression, there are no statements]
+			item[Object-oriented]
+			item[No statements - Everything is an expression]
 			item[Closures]
 			item[Type inference]
-			item[Properties]
-			item[Simple operator overloading]
+			item[Java Beans Properties are called using simple property access and assignment operators]
+			item[Operator overloading]
 			item[Powerful switch expressions]
 		]
 	]

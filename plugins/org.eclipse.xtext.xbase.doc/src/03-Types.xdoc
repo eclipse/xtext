@@ -1,19 +1,16 @@
 chapter:Types[Types]
 
-Xbase binds to the Java Virtual Machine. This means that expressions written in Xbase refer to Java types and Java type members. Xbase itself uses only types 
-defined in the Java language, such as classes, interfaces, annotations and enums. It also supports Java generics and shares the known syntax. In addition to Java, 
-Xbase comes with the notion of function types. 
+Xbase binds to the Java Virtual Machine. This means that expressions written in Xbase refer to Java types and Java type members. Xbase itself uses types 
+defined in the Java language, such as classes, interfaces, annotations and enums. It also supports Java generics and shares the known syntax. In addition 
+to Java, Xbase comes with the notion of function types. 
 
-Xbase does not bind to any of the built-in types such as e[int] or e[boolean], instead any references to those built-in types will automatically use the corresponding 
-wrapper type, e.g. e[java.lang.Boolean] instead of e[boolean]. Arrays are supported also in Xbase but are translated to e[java.util.List]s: An 
+Xbase does not bind to Arrays but translates any references to e[java.util.List]s: An 
 array e[int\[\]] binds to e[java.util.List<java.lang.Integer>] (in short e[List<Integer>]). 
-This means when referring to code[myList.isEmpty()] within an Xbase expression the static return type is e[java.lang.Boolean]. 
-At runtime however the compiler may be smarter and use the native types. Especially the types e[int] and e[boolean] are most often used with
- built-in operators and the wrapper type is only occasionally needed (for instance when putting code[int]s into collections).
 
 section:TypeReferences[Simple Type References]
 
-A simple type reference only consists of a e[qualified name]. A qualified name is a name made up of identifiers which are separated by a dot (like in Java).
+A simple type reference only consists of a e[qualified name]. A qualified name is a name made up of identifiers which are separated by a dot 
+(like in Java).
 
 section2[Syntax]
 
@@ -23,7 +20,7 @@ QualifiedName:
 ;	
 ]
 
-There is no rule for a simple type reference, as it is expressed as a parameterized type references without paramters.
+There is no parser rule for a simple type reference, as it is expressed as a parameterized type references without parameters.
 
 section2[Examples]
 
@@ -34,10 +31,12 @@ ul[
 
 section:FunctionTypes[Function Types]
 
-Xbase introduces e[closures], which require an additional kind of type. On the JVM-Level a closure (or more generally any function object) is just an instance of one of the 
-types in code[org.eclipse.xtext.xbase.lib.Function*], dependening on the number of arguments. However, as closures are a very important language feature, a special 
-sugared syntax for function types has been introduced.  
+Xbase introduces e[closures], and therefore an additional function type signature. On the JVM-Level a closure (or more generally any function object) is just an instance of one of the 
+types in code[org.eclipse.xtext.xbase.lib.Function*], depending on the number of arguments. However, as closures are a very important language feature, 
+a special sugared syntax for function types has been introduced.  
 So instead of writing code[Function1<String,Boolean>] one can write code[(String)=>Boolean].
+
+For more information on closures see ref:Closures.
 
 section2[Syntax]
 
@@ -52,7 +51,7 @@ section2[Examples]
 ul[
 	item[code[=>Boolean // predicate without parameters]]
 	item[code[(String)=>Boolean // One argument predicate]]
-	item[code[(Mutable)=>Void // A method doing side effects on an instance of Mutable and returns null]]
+	item[code[(Mutable)=>Void // A method doing side effects only - returns null]]
 	item[code[(List<String>)=>String]]
 ]
 
@@ -61,7 +60,7 @@ section:ParameterizedTypeReference[Parameterized Type References]
 The general syntax for type references allows to take any number of type arguments. The semantics as well as the syntax is almost the same as in Java, so please 
 refer to the third edition of the  link[http://java.sun.com/docs/books/jls/third_edition/html/j3TOC.html][Java Language Specification].
 
-The only difference is that in Xbase a type reference can also be a function type. In the following the full syntax fo type references is shown, including function types and
+The only difference is that in Xbase a type reference can also be a function type. In the following the full syntax of type references is shown, including function types and
 type arguments.
 
 section2[Syntax]
@@ -109,10 +108,11 @@ ul[
 
 section:VoidType[The type java.lang.Void]
 
-The code[null] reference is the only valid value of the type code[Void], which gets some special treatment in Xbase. Every Java method which is declared e[void] (i.e. without a return value)
-is translated to a method with return type e[java.lang.Void]. At runtime such method invocations will result in e[null].
-The speciality is that while it is allowed to pass code[null] everywhere (TODO discuss use of nullable annotation) instead of any other value, this does not mean that e[java.lang.Void]
-is a subtype of any other type. The code[instanceOf] operator as well as the type matchers in the ref:SwitchExpression do not match code[null].
+The code[null] reference is the only valid value of the type code[Void], which gets some special treatment in Xbase. Every Java method which is declared 
+e[void] (i.e. without a return value) is translated to a method with return type e[java.lang.Void]. At runtime such method invocations will result in 
+e[null]. The specialty is that while it is allowed to pass code[null] everywhere todo[discuss use of nullable annotation] instead of any other value, 
+this does not mean that e[java.lang.Void] is a subtype of any other type. The code[instanceOf] operator as well as the type matchers in 
+the ref:SwitchExpression do not match code[null].
 
 section:ConformanceRules[Conformance Rules]
 

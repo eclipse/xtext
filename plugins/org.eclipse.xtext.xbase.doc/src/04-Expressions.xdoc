@@ -1,10 +1,10 @@
 chapter:Expressions[Expressions]
 
-Expressions are the main language constructs which are used to express behavior and computation of values. Xbase does not support the concept of a statement, but instead comes with powerful 
-expressions to handle situations in which the imperative nature of statements are a better fit. An expression always results in a value (might be the value 'null' though). In addition expressions can
-be statically typed. By default it is assumed that languages making use of Xbase provide enough static context information for static type analysis, which is the basis of a lot of
-IDE features coming with Xbase. However, the static typing is not mandatory and might be completely skipped if not wished. The openness of the compiler even allows to change the generation of 
-concrete feature invocations to reflective calls, such that the language can be fully dynamically typed.
+Expressions are the main language constructs which are used to express behavior and computation of values. Xbase does not support the concept of a 
+statement, but instead comes with powerful expressions to handle situations in which the imperative nature of statements are a better fit. An 
+expression always results in a value (might be the value 'null' though). In addition expressions can be statically typed. By default it is assumed 
+that languages making use of Xbase provide enough static context information for static type analysis, which is the basis of a lot of
+IDE features coming with Xbase.
 
 section:Literals[Literals]
 
@@ -23,7 +23,9 @@ XStringLiteral:
 
 section2:ExpressionsIntegerLiterals[Integer Literals]
 
-An integer literal as defined in ref:IntegerLiterals creates an instance of code[Integer].
+An integer literal as defined in ref:IntegerLiterals creates an code[int].
+There is no signed int. If you put a minus operator in front of an int literal it is taken as a UnaryOperator
+with one argument (the positive int literal).
 
 section2[Syntax]
 
@@ -34,7 +36,7 @@ XIntegerLiteral:
 
 section2:BooleanLiteral[Boolean Literals]
 
-There are two boolean literals, code[true] and code[false] which correspond to their Java counterpart of type e[java.lang.Boolean]. 
+There are two boolean literals, code[true] and code[false] which correspond to their Java counterpart of type e[boolean]. 
 
 section2[Syntax]
 
@@ -66,6 +68,25 @@ XTypeLiteral:
 	QualifiedName '.' 'class';
 ]
 
+section:TypeCasts[Type Casts]
+
+Type cast behave like casts in Java, but have a slightly more readable syntax.
+Type casts bind stronger than any other operator but weaker than feature calls.
+
+section2[Syntax]
+
+code[
+XCastedExpression:
+	Expression 'as' JvmTypeReference;
+]
+
+section2[Examples]
+
+ul[
+	item[code[my.foo as MyType]]
+	item[code[(1 + 3 * 5 * (- 23)) as BigInteger]]
+]
+
 section:Operators[Infix Operators]
 
 Xbase supports a couple of predefined infix operators. In contrast to Java, the operators are not fixed
@@ -74,47 +95,41 @@ operators for any type just by implementing the corresponding method signature.
 The following defines the operators and the corresponding Java method signatures / expressions.
 
 table[
-	tr[td[code[e1.someProp = e2]]		td[code[e1.someProp = e2]]]
-	tr[td[ ]							td[code[e1.someProp(e2)]]]
-	tr[td[ ]							td[code[e1.setSomeProp(e2)]]]
-	tr[td[code[e1 += e2]]				td[code[e1.add(e2)]]]
-	tr[td[code[e1.someFeature += e2]]	td[code[e1.addSomeFeature(e2)]]]
+	tr[td[code[e1 += e2]]				td[code[e1._operator_add(e2)]]]
 	tr[td[code[ ]]						td[code[ ]]]
 	
-	tr[td[code[e1 || e2]]				td[code[e1.or(e2)]]]
+	tr[td[code[e1 || e2]]				td[code[e1._operator_or(e2)]]]
 	tr[td[code[ ]]						td[code[ ]]]
 	
-	tr[td[code[e1 && e2]]				td[code[e1.and(e2)]]]
+	tr[td[code[e1 && e2]]				td[code[e1._operator_and(e2)]]]
 	tr[td[code[ ]]						td[code[ ]]]
 	
 	tr[td[code[e1 instanceof RawTypeRef]]td[code[e1 instanceof RawTypeRef /* direct translation to Java */]]]
-	tr[td[code[e1 == e2]]				td[code[e1.equals(e2)]]]
-	tr[td[code[e1 != e2]]				td[code[e1.notEquals(e2)]]]
-	tr[td[code[e1 < e2]]				td[code[e1.lessThan(e2)]]]
-	tr[td[code[e1 > e2]]				td[code[e1.greaterThan(e2)]]]
-	tr[td[code[e1 <= e2]]				td[code[e1.lessEqualsThan(e2)]]]
-	tr[td[code[e1 >= e2]]				td[code[e1.greaterEqualsThan(e2)]]]
+	tr[td[code[e1 == e2]]				td[code[e1._operator_equals(e2)]]]
+	tr[td[code[e1 != e2]]				td[code[e1._operator_notEquals(e2)]]]
+	tr[td[code[e1 < e2]]				td[code[e1._operator_lessThan(e2)]]]
+	tr[td[code[e1 > e2]]				td[code[e1._operator_greaterThan(e2)]]]
+	tr[td[code[e1 <= e2]]				td[code[e1._operator_lessEqualsThan(e2)]]]
+	tr[td[code[e1 >= e2]]				td[code[e1._operator_greaterEqualsThan(e2)]]]
 	tr[td[code[ ]]						td[code[ ]]]
 	
-	tr[td[code[e1 -> e2]]				td[code[e1.mappedTo(e2)]]]
-	tr[td[code[e1 .. e2]]				td[code[e1.upTo(e2)]]]
+	tr[td[code[e1 -> e2]]				td[code[e1._operator_mappedTo(e2)]]]
+	tr[td[code[e1 .. e2]]				td[code[e1._operator_upTo(e2)]]]
 	tr[td[code[ ]]						td[code[ ]]]
 	
-	tr[td[code[e1 + e2]]				td[code[e1.plus(e2)]]]
-	tr[td[code[e1 - e2]]				td[code[e1.minus(e2)]]]
+	tr[td[code[e1 + e2]]				td[code[e1._operator_plus(e2)]]]
+	tr[td[code[e1 - e2]]				td[code[e1._operator_minus(e2)]]]
 	tr[td[code[ ]]						td[code[ ]]]
 	
-	tr[td[code[e1 * e2]]				td[code[e1.multiply(e2)]]]
-	tr[td[code[e1 / e2]]				td[code[e1.divide(e2)]]]
-	tr[td[code[e1 % e2]]				td[code[e1.modulo(e2)]]]
-	tr[td[code[e1 ** e2]]				td[code[e1.power(e2)]]]
+	tr[td[code[e1 * e2]]				td[code[e1._operator_multiply(e2)]]]
+	tr[td[code[e1 / e2]]				td[code[e1._operator_divide(e2)]]]
+	tr[td[code[e1 % e2]]				td[code[e1._operator_modulo(e2)]]]
+	tr[td[code[e1 ** e2]]				td[code[e1._operator_power(e2)]]]
 	tr[td[code[ ]]						td[code[ ]]]
 	
-	tr[td[code[! e1]]					td[code[e1.not()]]]
-	tr[td[code[- e1]]					td[code[e1.minus()]]]
+	tr[td[code[! e1]]					td[code[e1._operator_not()]]]
+	tr[td[code[- e1]]					td[code[e1._operator_minus()]]]
 	tr[td[code[ ]]						td[code[ ]]]
-	
-	tr[td[code[e1\[e2\]]]				td[code[e1.apply(<Exp2)]]]
 ]
 		
 The table above also defines the operator precedence in ascending order. The blank lines separate precedence levels. 
@@ -140,34 +155,14 @@ code[Java][
 Remember in Xbase everything is an expression and has to return something. In the case of simple assignments the return value is the value returned from the corresponding
 Java expression, which is the assigned value.
 
-If there is no accessible field on the left operand's type, first a method called code[myProperty(OneArg)] and then code[setMyProperty(OneArg)] is looked up. It has to take 
-one argument of the type (or a super type) of the right hand operand. The return value will be whatever the setter method returns (which usually is code[null]). 
+If there is no accessible field on the left operand's type, a method called code[setMyProperty(OneArg)] (JavaBeans
+setter method) is looked up. It has to take one argument of the type (or a super type) of the right hand operand. The return value will be whatever the 
+setter method returns (which usually is code[null]). 
 As a result the compiler translates to :
 
 code[Java][
 	myObj.setMyProperty("foo")
 ]
-
-section2:addAssignment[Add Assignment]
-
-The translation rule for the add assignment operator code[+=] is as follows:
-Given the expression 
-
-code[
-	myObj.myProperty += "foo"
-]
-
-The compiler first looks up whether, the left hand side operand is of some type providing a method code[add(StringOrSuperType)]. 
-In that case the expression translates to the following Java expression :
-
-code[Java][
-	myObj.myProperty.add("foo");
-]
-
-If there is no such method, the compiler looks for a method called code[addMyProperty(OneArg)] on the type of the target expression
-of the feature call. That is it looks whether the type of code[myObj] provides a method called code[addMyProperty(StringOrSuperType)].
-
-The return value and compile-time type will be whatever the invoked Java method returns.
 
 section2[Short-Circuit Boolean Operators]
 
@@ -176,8 +171,7 @@ in short circuit mode, which means that the right hand operand might not be eval
 ol[
 	item[in the case of code[||] the operand on the right hand side is not evaluated if the left operand evaluates to code[true].]
 	item[in the case of code[&&] the operand on the right hand side is not evaluated if the left operand evaluates to code[false].]
-]
- 
+] 
 
 section2[Examples]
 
@@ -195,7 +189,7 @@ ul[
 section:FeatureCalls[Feature Calls]
 
 A feature call is used to invoke members of objects, such as fields and methods, but also can refer to local variables and parameters, 
-which are made available for the current expression's scope (TODO define how scopes are declared around expressions). 
+which are made available for the current expression's scope. 
 
 section2[Syntax]
 
@@ -226,11 +220,35 @@ That is if
 code[
 	this.myProperty
 ]
-if a valid expression
+is a valid expression
 code[
 	myProperty
 ]
-is valid as well and is equivalent. 
+is valid as well and is equivalent, as long as there is no local variable 'myProperty' on the scope,
+which would have higher precedence.
+
+section2:Extensions[Extensions]
+
+Languages extending Xbase might want to contribute to the feature scope. Besides that one can of course
+change the whole implementation as it seems fit there is a special hook, which can be used to add so
+called extension methods to existing types. 
+
+Xbase itself comes with a standard library of such extension methods adding support for various operators
+for the common types, such as java.lang.String, java.util.List, etc.
+
+These extension methods are declared in separate Java classes. There are various ways how extension methods
+can be added. The simplest is, that the langauge designer predefines, which extension methods are available.
+This means, that language users cannot add additional library functions using this mechanism.
+
+Another alternative is to have them lookedup by a certain nameing convention. Also for more general languages
+it is possible to let users add extenstion methods using imports or the like. This approach can be seen in the
+language Xtend2, where extension methods are lexically imported through static imports and/or dependency
+injection.
+
+The precedence of extension methods is always lower than real member methods, that is you cannot override
+member features. Also the extension members are not invoked polymorphic. If you have two extension methods
+on the scope (code[foo(Object)] and code[foo(String)]) the expression code[(foo as Object).foo] would
+bind and invoke code[foo(Object)].
 
 section2[Examples]
 
@@ -258,7 +276,7 @@ code[
 	listOfPersons*.name
 ]
 
-Note that we decided to come up with an explicit operator (.*) because overloading the '.' operator as it is the case in Xpand,
+Note that we decided to come up with an explicit operator (*.) because overloading the '.' operator as it is the case in Xpand,
 has caused a lot of surprises in the past. With an explicit operator the tooling as well as the user always can distinct whether you
 invoke a feature on the iterables elements or on the iterable itself.
 Also note that this really is just a shortcut for collect. It doesn't do any flattening, when you invoke it on iterables containing iterables.
@@ -286,7 +304,7 @@ ul[
 section:nullableFeatureCalls[Safe Navigation Featurecall]
 
 Checking for null references can make code very unreadable. In many situations it is ok for an expression to return null if a receiver was null.
-Xbase supports the safe navigatioj operator code[?.] to make such code more readable.
+Xbase supports the safe navigation operator code[?.] to make such code more readable.
 
 Instead of writing 
 
@@ -310,28 +328,41 @@ XSafeFeatureCall:
 section2[Examples]
 
 ul[
-	item[code[myListOfPersons.name]]
+	item[code[person?.address?.name]]
 ]
 
 section:Closures[Closures]
 
-A closure is a literal that defines an anonymous function. A closure also captures the current scope, so that any final variables and parameters visible at construction time 
-can be referred to in the closure's expression. 
+A closure is a literal that defines an anonymous function. A closure also captures the current scope,
+so that any final variables and parameters visible at construction time can be referred to in the closure's expression. 
 
 section2[Syntax]
 
 code[
 XClosure:
-	(JvmFormalParameter (',' JvmFormalParameter)*)? '|' XExpression;
+	'\[' (JvmFormalParameter (',' JvmFormalParameter)*)? '|' XExpression '\]';
 	
 JvmFormalParameter:
 	JvmTypeReference? ID;
 ]
 
+The surrounding square brackets are optional if the closure is directly passed to function call.
+
+code[
+	myList.find(e|e.name==null)
+	myList.find(\[e|e.name==null\])
+]
+
+But in all other cases the square brackets are mandatory:
+
+code[
+	val func = \[String s| s.length>3\]
+]
+
 section2:FunctionMapping[Function Mapping]
 
-An Xbase closure is a Java object of one of the e[Function] interfaces shipped with the runtime library of Xbase. There is an interface for each number of parameters.
-The names of the interfaces are 
+An Xbase closure is a Java object of one of the e[Function] interfaces shipped with the runtime library of Xbase. There is an interface 
+for each number of parameters. The names of the interfaces are 
 ul[
 	item[e[Function0<ReturnType>] for zero parameters, ]
 	item[e[Function1<Param1Type, ReturnType>] for one parameters, ]
@@ -340,12 +371,22 @@ ul[
 	item[e[Function6<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type, ReturnType>] for six parameters, ]
 ]
 
-In order to allow seamless integration with Google Guava (formerly known as Google Collect) the type code[Function1] 
-extends code[com.google.common.base.Function<F, T>] and the type e[Function0] extends code[com.google.common.base.Supplier<T>]. 
-There is also an auto-coercion for any code[Function1<T,Boolean>] to code[com.google.common.base.Predicate<T>].
+In order to allow seamless integration with existing libraries such as Google Guava (formerly known as Google Collect) closures
+are auto coerced to expected types if those types declare only one method (methods from java.lang.Object
+don't count).
 
-e[TODO: Discuss, whether we want to go a step further and do auto conversion to any type declaring only one method. That would allow to pass
-closures also to methods expecting other such types like e.g. code[Iterable]. This would avoid a fixed dependency to Google Guava, too.]
+As a result given the method code[java.util.Collections.sort(List<T>, Comparator<? super T>)] is available
+as an extension method, it can be invoked like this
+
+code[
+	newArrayList('aaa','bb','c').sort(
+		e1,e2| if e1.length>e2.length 
+					-1 
+				else if e1.length<e2.length 
+					1
+				else 
+					0)
+]
 
 section2:ClosuresTypeInference[Typing]
 
@@ -390,8 +431,8 @@ XIfExpression:
 	('else' XExpression)?;
 ]
 
-An expression code[if (p) e1 else e2] results to either the value code[e1] or code[e2] depending on whether the predicate code[p] evaluates to code[true] or code[false]. 
-The else part is optional which is a shorthand for code[else null].
+An expression code[if (p) e1 else e2] results to either the value code[e1] or code[e2] depending on whether the predicate code[p] 
+evaluates to code[true] or code[false]. The else part is optional which is a shorthand for code[else null].
 That is 
 code[
 	if (foo) x // is the same as 'if (foo) x else null'
@@ -416,15 +457,13 @@ section2[Syntax]
 
 code[
 XSwitchExpression:
-	'switch' XExpressionOrVariableDeclaration? '{'
+	'switch' XExpressionOrVariableDeclaration '{'
 		XCasePart+
-		('default' ':' (XBlockExpression 
-			  		  | XExpression ';'))?
+		('default' ':' XExpression))?
 	'}';
 
 XCasePart:
-	JvmTypeReference? ('case' XExpression)? ':' 
-		(XBlockExpression | XExpression ';');
+	JvmTypeReference? ('case' XExpression)? ':' XExpression );
 ]
 
 The switch statement is a bit different from the one in Java. First, there is no fall through which means only one case is evaluated at most.
@@ -445,14 +484,10 @@ code[this] variable. In order to avoid shadowing, a ref:VariableDeclaration[vari
 
 A case clause is taken if the switch value equals the result of the case's guard expression or if the case's guard expression evaluates to code[true].
 
-section2[Leaving out the main expression]
-
-It is possible to leave out the main expression. Then the first case clause for which its guard returns code[true] is taken and executed.
-
 section2[Type guards]
 
-In addition to the case predicate one can add a so called e[Type Guard] which is syntactically just ref:TypeReferences[type reference] in front of the case keyword.  
-The compiler will use that type for the switch expression in subsequent expressions.
+In addition to the case predicate one can add a so called e[Type Guard] which is syntactically just ref:TypeReferences[type reference] in 
+front of the case keyword. The compiler will use that type for the switch expression in subsequent expressions.
 Example:
 code[
 	{
@@ -482,7 +517,7 @@ section2[Syntax]
 
 code[
 XVariableDeclaration:
-	('val' | 'var') JvmTypeReference ID '=' XExpression;
+	('val' | 'var') JvmTypeReference? ID '=' XExpression;
 ]
 
 Xbase resembles the keywords code[val] and code[var] known from Scala (link[http://www.scala-lang.org/docu/files/ScalaReference.pdf][The Scala Language Specification 2.8]).
@@ -651,7 +686,9 @@ section2[Syntax]
 
 code[
 XConstructorCall:
-  'new' (QualifiedName ('<' JvmTypeArgument (',' JvmTypeArgument)* '>')? '('(XExpression (',' XExpression)*)?')')?;
+  'new' QualifiedName 
+  		('<' JvmTypeArgument (',' JvmTypeArgument)* '>')? 
+  		('('(XExpression (',' XExpression)*)?')')?;
 ]
 
 section2[Example]
