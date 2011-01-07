@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import com.google.common.base.Function;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -18,7 +20,7 @@ public interface Functions {
 
 	}
 	
-	interface Function1<Param, Result> {
+	interface Function1<Param, Result> extends Function<Param, Result>{
 
 		Result apply(Param p);
 
