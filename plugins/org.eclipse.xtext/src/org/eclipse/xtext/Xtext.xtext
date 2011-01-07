@@ -71,7 +71,19 @@ Action returns Action:
 ;
 
 AbstractTerminal returns AbstractElement: 
-   Keyword | RuleCall | ParenthesizedElement
+   Keyword | 
+   RuleCall | 
+   ParenthesizedElement |
+   // Keyword and RuleCall are used inside of Assignable terminal
+   // As we do not want to be able to write name==>ID
+   // the rules for Keyword and RuleCall have been copied
+   PredicatedKeyword | 
+   PredicatedRuleCall |
+   // We have to make this one explicit since the ParenthesizedElement does not
+   // create an object but we have to set the predicated flag
+   // TODO: As soon as we have an own element for parenthesized elements with
+   // cardinality, we should refactor this part of the grammar
+   PredicatedGroup
 ;
 
 Keyword : 
@@ -82,8 +94,16 @@ RuleCall :
    rule=[AbstractRule]
 ;
 
+PredicatedKeyword returns Keyword:
+	predicated?='=>' value=STRING  
+;
+
+PredicatedRuleCall returns RuleCall:
+	predicated?='=>' rule=[AbstractRule]
+;
+
 Assignment returns Assignment:
-   feature=ID operator=('+='|'='|'?=') ^terminal=AssignableTerminal
+   predicated?='=>'? feature=ID operator=('+='|'='|'?=') ^terminal=AssignableTerminal
 ;
 
 AssignableTerminal returns AbstractElement:
@@ -108,6 +128,10 @@ CrossReferenceableTerminal returns AbstractElement:
 
 ParenthesizedElement returns AbstractElement:
    '(' Alternatives ')'
+;
+
+PredicatedGroup returns Group:
+	predicated?='=>' '(' elements+=Alternatives ')' 
 ;
 
 TerminalRule :
