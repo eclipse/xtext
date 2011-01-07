@@ -12,7 +12,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.Tuples;
-import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -37,7 +36,9 @@ public class AbstractTypeProvider<T> implements ITypeProvider<T> {
 
 	public T getType(final EObject astNode) {
 		if (astNode == null)
-			throw new IllegalArgumentException("expression was null");
+			throw new TypeResolutionException("expression is null");
+		if (astNode.eIsProxy())
+			throw new TypeResolutionException("expression is an unresolved proxy");
 		final Provider<T> provider = new Provider<T>() {
 			public T get() {
 				final T invoke = typeDispatcher.invoke(astNode);
@@ -62,8 +63,8 @@ public class AbstractTypeProvider<T> implements ITypeProvider<T> {
 		return actualType;
 	}
 
-	public T _type(EObject stNode, T expectedType, ValidationMessageAcceptor messageAcceptor) {
-		throw new IllegalArgumentException("Type computation is not implmented for AST nodes of type "
+	public T _type(EObject stNode) {
+		throw new TypeResolutionException("Type computation is not implemented for AST nodes of type "
 				+ stNode.getClass().getCanonicalName());
 	}
 
