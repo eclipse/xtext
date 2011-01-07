@@ -27,6 +27,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
 import org.eclipse.xtext.scoping.impl.SingletonScope;
 import org.eclipse.xtext.typing.ITypeProvider;
+import org.eclipse.xtext.typing.TypeResolutionException;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -60,48 +61,52 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 
 	@Inject
 	private JvmFeatureScopeProvider jvmFeatureScopeProvider;
-	
+
 	@Inject
 	private Provider<DefaultJvmFeatureDescriptionProvider> defaultFeatureDescProvider;
 
 	@Inject
 	private Provider<XFeatureCallSugarDescriptionProvider> sugarFeatureDescProvider;
-	
+
 	@Inject
 	private Provider<XAssignmentDescriptionProvider> assignmentFeatureDescProvider;
-	
+
 	@Inject
 	private Provider<XAssignmentSugarDescriptionProvider> assignmentSugarFeatureDescProvider;
-	
+
 	@Inject
 	private ITypeProvider<JvmTypeReference> typeProvider;
 
 	public void setTypeProvider(ITypeProvider<JvmTypeReference> typeProvider) {
 		this.typeProvider = typeProvider;
 	}
-	
+
 	protected ITypeProvider<JvmTypeReference> getTypeProvider() {
 		return typeProvider;
 	}
-	
+
 	public void setSugarFeatureDescProvider(Provider<XFeatureCallSugarDescriptionProvider> sugarFeatureDescProvider) {
 		this.sugarFeatureDescProvider = sugarFeatureDescProvider;
 	}
-	
+
 	public void setDefaultFeatureDescProvider(Provider<DefaultJvmFeatureDescriptionProvider> defaultFeatureDescProvider) {
 		this.defaultFeatureDescProvider = defaultFeatureDescProvider;
 	}
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
-		if (isFeatureCallScope(reference)) {
-			if (!(context instanceof XAbstractFeatureCall)) {
-				return IScope.NULLSCOPE;
+		try {
+			if (isFeatureCallScope(reference)) {
+				if (!(context instanceof XAbstractFeatureCall)) {
+					return IScope.NULLSCOPE;
+				}
+				return createFeatureCallScope((XAbstractFeatureCall) context, reference);
 			}
-			return createFeatureCallScope((XAbstractFeatureCall) context, reference);
-		}
-		if (isConstructorCallScope(reference)) {
-			return createConstructorCallScope(context,reference);
+			if (isConstructorCallScope(reference)) {
+				return createConstructorCallScope(context, reference);
+			}
+		} catch (TypeResolutionException exception) {
+			return IScope.NULLSCOPE;
 		}
 		return super.getScope(context, reference);
 	}
@@ -109,57 +114,60 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	protected IScope createConstructorCallScope(EObject context, EReference reference) {
 		final IScope scope = super.getScope(context, reference);
 		return new IScope() {
-			
+
 			public Iterable<IEObjectDescription> getAllElements() {
 				Iterable<IEObjectDescription> original = scope.getAllElements();
 				return createFeatureDescriptions(original);
 			}
 
 			protected Iterable<IEObjectDescription> createFeatureDescriptions(Iterable<IEObjectDescription> original) {
-				Iterable<IEObjectDescription> result = transform(original, new Function<IEObjectDescription, IEObjectDescription>() {
-					public IEObjectDescription apply(IEObjectDescription from) {
-						final JvmConstructor constructor = (JvmConstructor) from.getEObjectOrProxy();
-						return new JvmFeatureDescription(from.getQualifiedName(), constructor, null, constructor.getCanonicalName(), false);
-					}
-				});
+				Iterable<IEObjectDescription> result = transform(original,
+						new Function<IEObjectDescription, IEObjectDescription>() {
+							public IEObjectDescription apply(IEObjectDescription from) {
+								final JvmConstructor constructor = (JvmConstructor) from.getEObjectOrProxy();
+								return new JvmFeatureDescription(from.getQualifiedName(), constructor, null,
+										constructor.getCanonicalName(), false);
+							}
+						});
 				return result;
 			}
-			
+
 			public Iterable<IEObjectDescription> getElements(EObject object) {
 				Iterable<IEObjectDescription> original = scope.getElements(object);
 				return createFeatureDescriptions(original);
 			}
-			
+
 			public Iterable<IEObjectDescription> getElements(QualifiedName name) {
 				Iterable<IEObjectDescription> original = scope.getElements(name);
 				return createFeatureDescriptions(original);
 			}
-			
+
 			public IEObjectDescription getSingleElement(EObject object) {
 				throw new UnsupportedOperationException();
 			}
-			
+
 			public IEObjectDescription getSingleElement(QualifiedName name) {
 				throw new UnsupportedOperationException();
 			}
-			
+
 		};
 	}
 
 	protected boolean isConstructorCallScope(EReference reference) {
-		return reference.getEReferenceType()==TypesPackage.Literals.JVM_CONSTRUCTOR;
+		return reference.getEReferenceType() == TypesPackage.Literals.JVM_CONSTRUCTOR;
 	}
 
 	protected boolean isFeatureCallScope(EReference reference) {
 		return reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE;
 	}
-	
+
 	/**
 	 * creates the feature scope for {@link XAbstractFeatureCall}, including the local variables in case it is feature
 	 * call without receiver (XFeatureCall).
 	 */
 	protected IScope createFeatureCallScope(final XAbstractFeatureCall call, EReference reference) {
-		if (call instanceof XFeatureCall || ((call instanceof XAssignment) && ((XAssignment)call).getAssignable()==null)) {
+		if (call instanceof XFeatureCall
+				|| ((call instanceof XAssignment) && ((XAssignment) call).getAssignable() == null)) {
 			DelegatingScope implicitThis = new DelegatingScope();
 			IScope localVariableScope = createLocalVarScope(call, reference, implicitThis);
 			IEObjectDescription thisVariable = localVariableScope.getSingleElement(THIS);
@@ -176,7 +184,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		if (call.getArguments().isEmpty())
 			return IScope.NULLSCOPE;
 		XExpression target = call.getArguments().get(0);
-		if (target != null) {
+		if (target != null && !target.eIsProxy()) {
 			JvmTypeReference jvmTypeReference = typeProvider.getType(target);
 			if (jvmTypeReference != null) {
 				return createFeatureScopeForTypeRef(jvmTypeReference, call, getContextType(call));
@@ -247,13 +255,14 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return MapBasedScope.createScope(parentScope, descriptions);
 	}
 
-	protected IScope createFeatureScopeForTypeRef(JvmTypeReference type, XAbstractFeatureCall call, JvmDeclaredType currentContext) {
+	protected IScope createFeatureScopeForTypeRef(JvmTypeReference type, XAbstractFeatureCall call,
+			JvmDeclaredType currentContext) {
 		if (call instanceof XAssignment) {
 			XAssignmentDescriptionProvider provider1 = assignmentFeatureDescProvider.get();
 			XAssignmentSugarDescriptionProvider provider2 = assignmentSugarFeatureDescProvider.get();
 			provider1.setContextType(currentContext);
 			provider2.setContextType(currentContext);
-			return jvmFeatureScopeProvider.createFeatureScopeForTypeRef(type, provider1,provider2);
+			return jvmFeatureScopeProvider.createFeatureScopeForTypeRef(type, provider1, provider2);
 		} else {
 			final DefaultJvmFeatureDescriptionProvider provider1 = defaultFeatureDescProvider.get();
 			final XFeatureCallSugarDescriptionProvider provider2 = sugarFeatureDescProvider.get();

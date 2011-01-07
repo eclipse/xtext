@@ -7,10 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.typing;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.typing.ITypeProvider;
+import org.eclipse.xtext.typing.TypeResolutionException;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.TypesService;
 
@@ -112,7 +117,35 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedReturnType("java.lang.Void", "for(java.lang.String x : new java.util.ArrayList()) 'foo'");
 	}
 	
+	public void testNull() throws Exception {
+		try {
+			typeProvider.getType(null);
+			fail("Exception expected");
+		} catch (TypeResolutionException e) {
+			assertTrue(e.getMessage().contains("is null"));
+		}
+	}
+	
+	public void testEObject() throws Exception {
+		try {
+			typeProvider.getType(EcoreFactory.eINSTANCE.createEObject());
+			fail("Exception expected");
+		} catch (TypeResolutionException e) {
+			assertTrue(e.getMessage().contains("not implemented"));
+		}
+	}
 
+	public void testProxy() throws Exception {
+		try {
+			EObject proxy = EcoreFactory.eINSTANCE.createEObject();
+			((InternalEObject)proxy).eSetProxyURI(URI.createURI("path#fragment"));
+			typeProvider.getType(proxy);
+			fail("Exception expected");
+		} catch (TypeResolutionException e) {
+			assertTrue(e.getMessage().contains("unresolved proxy"));
+		}
+	}
+	
 	@Inject
 	private ITypeProvider<JvmTypeReference> typeProvider;
 	
