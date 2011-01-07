@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -164,13 +165,7 @@ public class DirtyStateAwareResourceDescriptions extends AbstractResourceDescrip
 	}
 
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
-		URI resourceURI = null;
-		if (object.eResource() != null) {
-			resourceURI = object.eResource().getURI();
-		} else {
-			URI uri = EcoreUtil.getURI(object);
-			resourceURI = uri.trimFragment();
-		}
+		URI resourceURI = EcoreUtil2.getNormalizedResourceURI(object);
 		if (dirtyStateManager.hasContent(resourceURI))
 			return dirtyStateManager.getExportedObjectsByObject(object);
 		return globalDescriptions.getExportedObjectsByObject(object);
