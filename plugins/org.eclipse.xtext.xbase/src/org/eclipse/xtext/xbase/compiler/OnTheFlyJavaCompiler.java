@@ -46,7 +46,7 @@ public class OnTheFlyJavaCompiler {
 	}
 	
 	public void addClassPathOfClass(Class<?> clazz) {
-		final String classNameAsPath = "/"+clazz.getCanonicalName().replace('.', '/');
+		final String classNameAsPath = File.separator+clazz.getCanonicalName().replace('.', File.separatorChar);
 		URL url = clazz.getResource(classNameAsPath+".class");
 		String pathToFolderOrJar = null;
 		if (url.getProtocol().startsWith("bundleresource")) {
@@ -131,8 +131,10 @@ public class OnTheFlyJavaCompiler {
 		String tempDir = System.getProperty("java.io.tmpdir");
 		if (tempDir == null)
 			tempDir = "./";
-		final File srcFile = new File(tempDir + classname.replace('.', '/') + ".java");
-		final File targetFile = new File(tempDir + classname.replace('.', '/') + ".class");
+		tempDir += File.separator;
+		final String classNameAsPath = classname.replace('.', File.separatorChar);
+		final File srcFile = new File(tempDir + classNameAsPath + ".java");
+		final File targetFile = new File(tempDir + classNameAsPath + ".class");
 		try {
 			Files.writeStringIntoFile(srcFile.getCanonicalPath(), code);
 			ByteArrayOutputStream errorStream = new ByteArrayOutputStream();
