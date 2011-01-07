@@ -39,6 +39,7 @@ public class TypeConverterTest extends AbstractXbaseTestCase {
 		assertMappedTypeCanonicalNameEquals("short", "java.lang.Short", ctx);
 		assertMappedTypeCanonicalNameEquals("float", "java.lang.Float", ctx);
 		assertMappedTypeCanonicalNameEquals("double", "java.lang.Double", ctx);
+		assertMappedTypeCanonicalNameEquals("void", "java.lang.Void", ctx);
 	}
 	
 	public void testConvertArrays() throws Exception {
