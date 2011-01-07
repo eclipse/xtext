@@ -15,12 +15,12 @@ import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XUnaryOperation;
-import org.eclipse.xtext.xbase.tests.interpreter.AbstractXbaseInterpreterTest;
+import org.eclipse.xtext.xbase.tests.interpreter.XbaseInterpreterTest;
 
 /**
  * @author Sebastian Benz - Initial contribution and API
  */
-public class CustomExpressionTest extends AbstractXbaseInterpreterTest {
+public class CustomExpressionTest extends XbaseInterpreterTest {
 
 	public void testBinaryExpressionsShouldReturnArgumentsInInternalEList() throws Exception {
 		assertResolvingCrossReferencesThrowsNoException("1 == 1");
