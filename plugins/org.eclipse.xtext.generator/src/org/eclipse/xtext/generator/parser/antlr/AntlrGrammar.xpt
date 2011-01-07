@@ -24,7 +24,9 @@
 */
 grammar «IF debugGrammar»Debug«ENDIF»«getGrammarFileName().toSimpleName()»;
 
+«IF !debugGrammar || options.backtrack || options.memoize || options.k>=0-»
 options {
+«ENDIF-»
 «IF !debugGrammar-»
 	superClass=AbstractInternalAntlrParser;
 «ENDIF-»
@@ -37,7 +39,9 @@ options {
 	«IF options.k>=0»
 	 k=«options.k»;
 	«ENDIF»
+«IF !debugGrammar || options.backtrack || options.memoize || options.k>=0-»
 }
+«ENDIF-»
 
 «IF !debugGrammar-»
 @lexer::header {
@@ -277,11 +281,11 @@ finally {
 «ENDDEFINE»
 
 «DEFINE ebnf(AntlrOptions options, boolean debugGrammar) FOR AbstractElement-»
-«IF mustBeParenthesized()»(«EXPAND ebnf2(options, debugGrammar)»)«ELSE»«EXPAND ebnf2(options, debugGrammar)»«ENDIF»«cardinality-»
+«IF mustBeParenthesized()»(«IF predicated»(«EXPAND ebnf2(options, true)»)=>«ENDIF»«EXPAND ebnf2(options, debugGrammar)»)«ELSE»«EXPAND ebnf2(options, debugGrammar)»«ENDIF»«cardinality-»
 «ENDDEFINE»
 
 «DEFINE dataTypeEbnf(boolean debugGrammar) FOR AbstractElement-»
-«IF mustBeParenthesized()»(«EXPAND dataTypeEbnf2(debugGrammar)»)«ELSE»«EXPAND dataTypeEbnf2(debugGrammar)»«ENDIF»«cardinality-»
+«IF mustBeParenthesized()»(«IF predicated»(«EXPAND dataTypeEbnf2(true)»)=>«ENDIF»«EXPAND dataTypeEbnf2(debugGrammar)»)«ELSE»«EXPAND dataTypeEbnf2(debugGrammar)»«ENDIF»«cardinality-»
 «ENDDEFINE»
 
 «DEFINE dataTypeEbnf2(boolean debugGrammar) FOR AbstractElement»ERROR «metaType.name» not matched«ENDDEFINE»

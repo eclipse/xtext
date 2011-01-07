@@ -46,3 +46,6 @@ Collection[UnorderedGroup] allUnorderedGroups(Grammar grammar):
 
 Collection[Assignment] allAssignments(Grammar grammar):
 	JAVA org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment.getAllAssignments(org.eclipse.xtext.Grammar);
+	
+Collection[AbstractElement] allPredicatedElements(Grammar grammar):
+	JAVA org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment.getAllPredicatedElements(org.eclipse.xtext.Grammar);

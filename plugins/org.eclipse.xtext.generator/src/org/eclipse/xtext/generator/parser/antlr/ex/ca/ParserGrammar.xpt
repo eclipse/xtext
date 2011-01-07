@@ -29,7 +29,7 @@ parser grammar «helper.getContentAssistParserGrammarFileName(this).toSimpleName(
 options {
 	tokenVocab=«helper.getContentAssistLexerGrammarFileName(this).toSimpleName()»;
 	superClass=AbstractInternalContentAssistParser;
-	«IF options.backtrack-»
+	«IF options.backtrack || !helper.getAllPredicatedElements(this).isEmpty-»
 	backtrack=true;
 	«ENDIF-»
 	«IF options.memoize-»

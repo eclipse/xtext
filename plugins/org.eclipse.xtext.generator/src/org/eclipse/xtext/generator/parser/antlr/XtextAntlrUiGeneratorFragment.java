@@ -29,6 +29,9 @@ import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Generator;
 import org.eclipse.xtext.generator.Naming;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
+
 /**
  * A {@link IGeneratorFragment} to generate a lightweight AntLR based parser used in content assist.
  * 
@@ -124,6 +127,16 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 		return getAllElementsByType(g, Assignment.class);
 	}
 
+	public static Collection<AbstractElement> getAllPredicatedElements(Grammar g) {
+		Collection<AbstractElement> unfiltered = getAllElementsByType(g, AbstractElement.class);
+		Collection<AbstractElement> result = Collections2.filter(unfiltered, new Predicate<AbstractElement>() {
+			public boolean apply(AbstractElement input) {
+				return input.isPredicated();
+			}
+		});
+		return result;
+	}
+	
 	private static <T extends AbstractElement> Collection<T> getAllElementsByType(Grammar g, Class<T> type) {
 		Collection<ParserRule> allParserRules = GrammarUtil.allParserRules(g);
 		List<T> result = new ArrayList<T>(30);

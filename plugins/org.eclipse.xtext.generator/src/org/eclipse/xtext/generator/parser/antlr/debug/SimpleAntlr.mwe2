@@ -9,6 +9,7 @@ var grammarURI = "classpath:/org/eclipse/xtext/generator/parser/antlr/debug/Simp
 var file.extensions = "simpleAntlr"
 var projectName = "org.eclipse.xtext.generator"
 var runtimeProject = "../${projectName}"
+var backtrack = true
 
 Workflow {
 	
@@ -43,7 +44,9 @@ Workflow {
 				fileExtensions = file.extensions
 			}
 				
-			fragment = parser.antlr.XtextAntlrGeneratorFragment {}
+			fragment = parser.antlr.XtextAntlrGeneratorFragment {
+				options = auto-inject {}
+			}
 			
 			// java-based API for validation 
 			fragment = validation.JavaValidatorFragment {

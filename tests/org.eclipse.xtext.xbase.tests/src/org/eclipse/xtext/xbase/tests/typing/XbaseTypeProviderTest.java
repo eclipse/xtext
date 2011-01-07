@@ -36,8 +36,8 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	public void testSwitchExpression() throws Exception {
-		assertResolvedReturnType(TypesService.STRING_TYPE_NAME,"switch { case true : 's'; case false : 'foo'; default: 'bar';}");
-		assertResolvedReturnType(TypesService.OBJECT_TYPE_NAME,"switch { case true : 's'; case false : new java.lang.Object(); default: 'bar';}");
+		assertResolvedReturnType(TypesService.STRING_TYPE_NAME,"switch true { case true : 's' case false : 'foo' default: 'bar'}");
+		assertResolvedReturnType(TypesService.OBJECT_TYPE_NAME,"switch true { case true : 's' case false : new java.lang.Object() default: 'bar'}");
 	}
 
 	public void testBlockExpression() throws Exception {
@@ -65,8 +65,8 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testCastExpression() throws Exception {
-		assertResolvedReturnType(TypesService.STRING_TYPE_NAME, "(java.lang.String) null");
-		assertResolvedReturnType(TypesService.BOOLEAN_TYPE_NAME, "(java.lang.Boolean) 'foo'");
+		assertResolvedReturnType(TypesService.STRING_TYPE_NAME, "null as String");
+		assertResolvedReturnType(TypesService.BOOLEAN_TYPE_NAME, "'foo' as Boolean");
 	}
 	
 	public void testConstructorCall() throws Exception {
@@ -80,7 +80,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testClosure() throws Exception {
-		assertResolvedReturnType("(java.lang.String) => java.lang.Boolean", "java.lang.String x| true");
+		assertResolvedReturnType("(java.lang.String) => java.lang.Boolean", "[java.lang.String x| true]");
 	}
 	
 	public void testFeatureCall() throws Exception {

@@ -100,13 +100,13 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	}
 
 	public void testClosure_1() throws Exception {
-		XClosure closure = (XClosure) expression("|'foo'");
+		XClosure closure = (XClosure) expression("[|'foo']");
 		assertEquals("foo", ((XStringLiteral) closure.getExpression())
 				.getValue());
 	}
 
 	public void testClosure_2() throws Exception {
-		XClosure closure = (XClosure) expression("bar|'foo'");
+		XClosure closure = (XClosure) expression("[bar|'foo']");
 		assertEquals("foo", ((XStringLiteral) closure.getExpression())
 				.getValue());
 		assertEquals("bar", closure.getFormalParameters().get(0).getName());
@@ -114,7 +114,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	}
 
 	public void testClosure_3() throws Exception {
-		XClosure closure = (XClosure) expression("String bar|'foo'");
+		XClosure closure = (XClosure) expression("[String bar|'foo']");
 		assertEquals("foo", ((XStringLiteral) closure.getExpression())
 				.getValue());
 		assertEquals("bar", closure.getFormalParameters().get(0).getName());
@@ -123,7 +123,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	}
 
 	public void testClosure_4() throws Exception {
-		XClosure closure = (XClosure) expression("foo, String bar|'foo'");
+		XClosure closure = (XClosure) expression("[foo, String bar|'foo']");
 		assertEquals("foo", ((XStringLiteral) closure.getExpression())
 				.getValue());
 		assertEquals("foo", closure.getFormalParameters().get(0).getName());
@@ -134,7 +134,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testClosure_5() throws Exception {
-		XClosure closure = (XClosure) expression("(String) => String mapper|mapper('something')");
+		XClosure closure = (XClosure) expression("[(String) => String mapper|mapper('something')]");
 		assertTrue(closure.getExpression() instanceof XFeatureCall);
 		JvmFormalParameter formalParameter = closure.getFormalParameters().get(0);
 		assertEquals("mapper", formalParameter.getName());
@@ -142,15 +142,39 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testClosure_6() throws Exception {
-		XClosure closure = (XClosure) expression("((String) => String mapper|mapper('something'))");
+		XClosure closure = (XClosure) expression("([(String) => String mapper|mapper('something')])");
 		assertTrue(closure.getExpression() instanceof XFeatureCall);
 		JvmFormalParameter formalParameter = closure.getFormalParameters().get(0);
 		assertEquals("mapper", formalParameter.getName());
 		assertTrue(formalParameter.getParameterType() instanceof XFunctionTypeRef);
 	}
 
+	public void testShortClosure_1() throws Exception {
+		XFeatureCall featureCall = (XFeatureCall) expression("foo(a,b|a+b)");
+		assertEquals(1, featureCall.getArguments().size());
+		assertTrue(featureCall.getArguments().get(0) instanceof XClosure);
+		XClosure closure = (XClosure) featureCall.getArguments().get(0);
+		assertEquals(2, closure.getFormalParameters().size());
+	}
+	
+	public void testShortClosure_2() throws Exception {
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) expression("foo.bar(a,b|a+b)");
+		assertEquals(1, featureCall.getMemberCallArguments().size());
+		assertTrue(featureCall.getMemberCallArguments().get(0) instanceof XClosure);
+		XClosure closure = (XClosure) featureCall.getMemberCallArguments().get(0);
+		assertEquals(2, closure.getFormalParameters().size());
+	}
+	
+	public void testShortClosure_3() throws Exception {
+		XConstructorCall featureCall = (XConstructorCall) expression("new Something(a,b|a+b)");
+		assertEquals(1, featureCall.getArguments().size());
+		assertTrue(featureCall.getArguments().get(0) instanceof XClosure);
+		XClosure closure = (XClosure) featureCall.getArguments().get(0);
+		assertEquals(2, closure.getFormalParameters().size());
+	}
+	
 	public void testCastedExpression() throws Exception {
-		XCastedExpression cast = (XCastedExpression) expression("(Foo)bar");
+		XCastedExpression cast = (XCastedExpression) expression("bar as Foo");
 		assertTrue(cast.getTarget() instanceof XFeatureCall);
 		assertNotNull(cast.getType());
 	}
@@ -161,7 +185,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	}
 
 	public void testCastedExpression_2() throws Exception {
-		XBinaryOperation binary = (XBinaryOperation) expression("(Foo)bar.baz + zonk");
+		XBinaryOperation binary = (XBinaryOperation) expression("bar.baz as Foo + zonk");
 		assertTrue(binary.getArguments().get(0) instanceof XCastedExpression);
 		assertTrue(binary.getArguments().get(1) instanceof XFeatureCall);
 	}
@@ -269,7 +293,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testIfWithClosure() throws Exception {
-		XIfExpression ie = (XIfExpression) expression("if (foo) | if (bar) zonk else bar");
+		XIfExpression ie = (XIfExpression) expression("if (foo) [| if (bar) zonk else bar]");
 		assertNull(ie.getElse());
 	}
 	
@@ -285,17 +309,17 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	}
 
 	public void testSwitch_0() throws Exception {
-		XSwitchExpression se = (XSwitchExpression) expression("switch { case 1==0 : '1'; }");
+		XSwitchExpression se = (XSwitchExpression) expression("switch true { case 1==0 : '1' }");
 		assertNull(se.getDefault());
 		assertEquals(1, se.getCases().size());
-		assertNull(se.getSwitch());
+		assertNotNull(se.getSwitch());
 		XCasePart casePart = se.getCases().get(0);
 		assertTrue(casePart.getCase() instanceof XBinaryOperation);
 		assertTrue(casePart.getThen() instanceof XStringLiteral);
 	}
 
 	public void testSwitch_1() throws Exception {
-		XSwitchExpression se = (XSwitchExpression) expression("switch number{case 1:'1'; case 2:'2'; default:'3';}");
+		XSwitchExpression se = (XSwitchExpression) expression("switch number{case 1:'1' case 2:'2' default:'3'}");
 		assertTrue(se.getDefault() instanceof XStringLiteral);
 		assertEquals(2, se.getCases().size());
 		assertTrue(se.getSwitch() instanceof XFeatureCall);
@@ -310,7 +334,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testSwitch_2() throws Exception {
-		XSwitchExpression se = (XSwitchExpression) expression("switch foo{ String case foo.length(): bar; String : {baz;}}");
+		XSwitchExpression se = (XSwitchExpression) expression("switch foo{ String case foo.length(): bar String : {baz;}}");
 		assertEquals(2,se.getCases().size());
 		assertNull(se.getDefault());
 		XCasePart c1 = se.getCases().get(0);
@@ -357,7 +381,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testBlockExpression_5() throws Exception {
-		XBlockExpression be = (XBlockExpression) expression("{foo bar|bar}");
+		XBlockExpression be = (XBlockExpression) expression("{[foo bar|bar]}");
 		assertEquals(1, be.getExpressions().size());
 		assertTrue(be.getExpressions().get(0) instanceof XClosure);
 	}
@@ -471,7 +495,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	}
 
 	public void testTypeLiteral() throws Exception {
-		XTypeLiteral expression = (XTypeLiteral) expression("String.class");
+		XTypeLiteral expression = (XTypeLiteral) expression("typeof(String)");
 		assertEquals("java.lang.String",expression.getType().getCanonicalName());
 	}
 	
@@ -482,7 +506,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testInstanceOf_1() throws Exception {
-		XClosure closure = (XClosure) expression("|true instanceof Boolean");
+		XClosure closure = (XClosure) expression("[|true instanceof Boolean]");
 		XInstanceOfExpression expression = (XInstanceOfExpression) closure.getExpression();
 		assertEquals("java.lang.Boolean",expression.getType().getCanonicalName());
 		assertTrue(expression.getExpression() instanceof XBooleanLiteral);

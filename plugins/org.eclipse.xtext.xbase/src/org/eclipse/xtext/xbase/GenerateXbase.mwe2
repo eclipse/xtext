@@ -15,8 +15,8 @@ import org.eclipse.xtext.generator.parser.antlr.*
 var projectName = "org.eclipse.xtext.xbase"
 var runtimeProject = "../${projectName}"
 var uiProject = "${runtimeProject}.ui"
-var backtrack = true
-var memoize = true
+var backtrack = false
+var memoize = false
 
 Workflow {
 	bean = StandaloneSetup { 

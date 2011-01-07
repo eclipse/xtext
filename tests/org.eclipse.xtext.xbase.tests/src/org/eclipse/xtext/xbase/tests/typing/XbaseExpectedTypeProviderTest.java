@@ -68,7 +68,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	public void testBlockExpression() throws Exception {
-		XCastedExpression cast = (XCastedExpression) expression("(java.lang.Boolean){ true false null}");
+		XCastedExpression cast = (XCastedExpression) expression("{ true false null} as Boolean");
 		XBlockExpression target = (XBlockExpression) cast.getTarget();
 
 		assertExpected(null, target.getExpressions().get(0));
@@ -77,7 +77,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	public void testIfExpression() throws Exception {
-		XCastedExpression cast = (XCastedExpression) expression("(java.lang.String)if (null) null else null");
+		XCastedExpression cast = (XCastedExpression) expression("(if (null) null else null) as String");
 		XIfExpression target = (XIfExpression) cast.getTarget();
 
 		assertExpected("java.lang.Boolean", target.getIf());
@@ -118,7 +118,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 
 	public void testTryCatchExpression() throws Exception {
 		XTryCatchFinallyExpression exp = (XTryCatchFinallyExpression) ((XCastedExpression) 
-				expression("(java.lang.String)try null catch (java.lang.Throwable t) null finally null"))
+				expression("(try null catch (java.lang.Throwable t) null finally null) as String"))
 				.getTarget();
 
 		assertExpected("java.lang.String", exp.getExpression());
@@ -136,10 +136,10 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	
 	public void testSwitchExpression_0() throws Exception {
 		XSwitchExpression exp = (XSwitchExpression) ((XCastedExpression)expression(
-				"(java.lang.String) switch null {" +
-				"  java.lang.Boolean case null : null;" +
-				"  default : null;" +
-				"}")).getTarget();
+				"switch null {" +
+				"  java.lang.Boolean case null : null" +
+				"  default : null" +
+				"} as String")).getTarget();
 		assertExpected(null,exp.getSwitch());
 		for (XCasePart cp : exp.getCases()) {
 			assertExpected("java.lang.Class", cp.getTypeGuard());
@@ -151,28 +151,28 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	
 	public void testSwitchExpression_1() throws Exception {
 		XSwitchExpression exp = (XSwitchExpression) ((XCastedExpression)expression(
-				"(java.lang.String) switch {" +
-				"  java.lang.Boolean case null : null;" +
-				"  default : null;" +
-		"}")).getTarget();
+				"switch true {" +
+				"  java.lang.Boolean case null : null" +
+				"  default : null" +
+				"} as String")).getTarget();
 		for (XCasePart cp : exp.getCases()) {
 			assertExpected("java.lang.Class", cp.getTypeGuard());
-			assertExpected("java.lang.Boolean", cp.getCase());
+			assertExpected(null, cp.getCase());
 			assertExpected("java.lang.String", cp.getThen());
 		}
 		assertExpected("java.lang.String", exp.getDefault());
 	}
 	
 	public void testCastedExpression() throws Exception {
-		XCastedExpression expression = (XCastedExpression) expression("(java.lang.Class<? extends java.lang.CharSequence>)null");
+		XCastedExpression expression = (XCastedExpression) expression("null as java.lang.Class<? extends java.lang.CharSequence>");
 		assertExpected("java.lang.Class<? extends java.lang.CharSequence>", expression.getTarget());
 	}
 
 	protected void assertExpected(String expectedExpectedType, EObject obj) {
 		JvmTypeReference reference = get(XbaseExpectedTypeProvider.class).getExpectedType(obj);
 		if (reference == null)
-			assertNull("expected " + expectedExpectedType + " but was null", expectedExpectedType);
+			assertNull("expected " + expectedExpectedType + " for " + obj + " but was null", expectedExpectedType);
 		else
-			assertEquals(expectedExpectedType, reference.getCanonicalName());
+			assertEquals("expression yielded unexpected type: " + obj, expectedExpectedType, reference.getCanonicalName());
 	}
 }

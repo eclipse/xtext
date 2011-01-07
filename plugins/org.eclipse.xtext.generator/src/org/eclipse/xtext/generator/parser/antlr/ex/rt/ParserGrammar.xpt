@@ -157,7 +157,7 @@ finally {
 «ENDIF-»
     }
     @after { leaveRule(); }:
-    «EXPAND ebnf(original, options) FOR this.alternatives»
+    «EXPAND ebnf(original, options, true) FOR this.alternatives»
 ;
 «IF definesHiddenTokens || (options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty)-»
 finally {
@@ -219,7 +219,7 @@ finally {
     }
     @after { leaveRule();
     }:
-   «EXPAND dataTypeEbnf(original) FOR this.alternatives»
+   «EXPAND dataTypeEbnf(original, true) FOR this.alternatives»
     ;
 «IF definesHiddenTokens || (options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty)-»
 finally {
@@ -241,7 +241,7 @@ finally {
 «ruleName()» returns [Enumerator current=null] 
     @init { enterRule(); }
     @after { leaveRule(); }:
-    «EXPAND ebnf(original, options) FOR this.alternatives»;
+    «EXPAND ebnf(original, options, true) FOR this.alternatives»;
 «ENDIF»
 «ENDDEFINE»
 
@@ -253,21 +253,24 @@ finally {
     }
 «ENDDEFINE»
 
-«DEFINE ebnf(Grammar grammar, AntlrOptions options) FOR AbstractElement-»
-«IF mustBeParenthesized()»(«EXPAND ebnf2(grammar, options)»)«ELSE»«EXPAND ebnf2(grammar, options)»«ENDIF»«cardinality-»
+«DEFINE ebnf(Grammar grammar, AntlrOptions options, boolean writeActions) FOR AbstractElement-»
+«IF mustBeParenthesized()»(«IF predicated»(«EXPAND ebnf2(grammar, options, false)»)=>«ENDIF»«EXPAND ebnf2(grammar, options, writeActions)»)«ELSE»«EXPAND ebnf2(grammar, options, writeActions)»«ENDIF»«cardinality-»
 «ENDDEFINE»
 
-«DEFINE dataTypeEbnf(Grammar grammar) FOR AbstractElement-»
-«IF mustBeParenthesized()»(«EXPAND dataTypeEbnf2(grammar)»)«ELSE»«EXPAND dataTypeEbnf2(grammar)»«ENDIF»«cardinality-»
+«DEFINE dataTypeEbnf(Grammar grammar, boolean writeActions) FOR AbstractElement-»
+«IF mustBeParenthesized()»(«IF predicated»(«EXPAND dataTypeEbnf2(grammar, false)»)=>«ENDIF»«EXPAND dataTypeEbnf2(grammar, writeActions)»)«ELSE»«EXPAND dataTypeEbnf2(grammar, writeActions)»«ENDIF»«cardinality-»
 «ENDDEFINE»
 
-«DEFINE dataTypeEbnf2(Grammar grammar) FOR AbstractElement»ERROR «metaType.name» not matched«ENDDEFINE»
+«DEFINE dataTypeEbnf2(Grammar grammar, boolean writeActions) FOR AbstractElement»ERROR «metaType.name» not matched«ENDDEFINE»
 
-«DEFINE dataTypeEbnf2(Grammar grammar) FOR Alternatives-»«EXPAND dataTypeEbnf(grammar) FOREACH elements SEPARATOR '\n    |'»«ENDDEFINE»
+«DEFINE dataTypeEbnf2(Grammar grammar, boolean writeActions) FOR Alternatives-»«EXPAND dataTypeEbnf(grammar, writeActions) FOREACH elements SEPARATOR '\n    |'»«ENDDEFINE»
 
-«DEFINE dataTypeEbnf2(Grammar grammar) FOR Group»«EXPAND dataTypeEbnf(grammar) FOREACH elements»«ENDDEFINE»
+«DEFINE dataTypeEbnf2(Grammar grammar, boolean writeActions) FOR Group»«EXPAND dataTypeEbnf(grammar, writeActions) FOREACH elements»«ENDDEFINE»
 
-«DEFINE dataTypeEbnf2(Grammar grammar) FOR UnorderedGroup»
+«DEFINE dataTypeEbnf2(Grammar grammar, boolean writeActions) FOR UnorderedGroup»
+«IF !writeActions-»
+(«EXPAND dataTypeEbnf(grammar, writeActions) FOREACH elements SEPARATOR '\n    |'»)*
+«ELSE-»
 «LET elements.reject(e|e.isOptionalCardinality()).size AS mandatoryContent»
 (
 	{ 
@@ -282,7 +285,7 @@ finally {
 	 				  getUnorderedGroupHelper().select(grammarAccess.«gaRuleElementAccessor()», «it.counter0»);
 	 				}
 «REM»Predicate {true}=> helps to workaround an issue in the Antlr grammar processing«ENDREM»«IF true»«ENDIF-»
-					({true}?=>(«EXPAND dataTypeEbnf2(grammar) FOR element»))«IF element.isMultipleCardinality()»+«ENDIF»
+					({true}?=>(«EXPAND dataTypeEbnf2(grammar, writeActions) FOR element»))«IF element.isMultipleCardinality()»+«ENDIF»
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.«gaRuleElementAccessor()»);
 	 				}
@@ -297,23 +300,27 @@ finally {
 	  getUnorderedGroupHelper().leave(grammarAccess.«gaRuleElementAccessor()»);
 	}
 «ENDLET»
+«ENDIF-»
 «ENDDEFINE»
 
-«DEFINE dataTypeEbnf2(Grammar grammar) FOR Keyword»
-	kw=«grammar.getKeywordRuleName(value)» 
+«DEFINE dataTypeEbnf2(Grammar grammar, boolean writeActions) FOR Keyword»
+	«IF writeActions»kw=«ENDIF»«grammar.getKeywordRuleName(value)» 
+«IF writeActions-»
     {
         $current.merge(kw);
         «EXPAND newLeafNode("kw")» 
     }
+«ENDIF-»
 «ENDDEFINE»
 
-«DEFINE dataTypeEbnf2(Grammar grammar) FOR RuleCall-»
+«DEFINE dataTypeEbnf2(Grammar grammar, boolean writeActions) FOR RuleCall-»
+«IF writeActions-»
 «IF (ParserRule.isInstance(rule) || EnumRule.isInstance(rule)) && !isAssigned()»
     { 
         «EXPAND newCompositeNode» 
     }
 «ENDIF-»
-    «localVar()»=«rule.ruleName()-»
+    «localVar()»=«ENDIF»«rule.ruleName()-»«IF writeActions-»
     {
 		$current.merge(«localVar()»);
     }
@@ -327,15 +334,19 @@ finally {
     «EXPAND newLeafNode(localVar())» 
     }
 «ENDIF-»
+«ENDIF-»
 «ENDDEFINE»
 
-«DEFINE ebnf2(Grammar grammar, AntlrOptions options) FOR AbstractElement»ERROR «metaType.name» not matched«ENDDEFINE»
+«DEFINE ebnf2(Grammar grammar, AntlrOptions options, boolean writeActions) FOR AbstractElement»ERROR «metaType.name» not matched«ENDDEFINE»
 
-«DEFINE ebnf2(Grammar grammar, AntlrOptions options) FOR Alternatives-»«EXPAND ebnf(grammar, options) FOREACH elements SEPARATOR '\n    |'»«ENDDEFINE»
+«DEFINE ebnf2(Grammar grammar, AntlrOptions options, boolean writeActions) FOR Alternatives-»«EXPAND ebnf(grammar, options, writeActions) FOREACH elements SEPARATOR '\n    |'»«ENDDEFINE»
 
-«DEFINE ebnf2(Grammar grammar, AntlrOptions options) FOR Group»«EXPAND ebnf(grammar, options) FOREACH elements»«ENDDEFINE»
+«DEFINE ebnf2(Grammar grammar, AntlrOptions options, boolean writeActions) FOR Group»«EXPAND ebnf(grammar, options, writeActions) FOREACH elements»«ENDDEFINE»
 
-«DEFINE ebnf2(Grammar grammar, AntlrOptions options) FOR UnorderedGroup»
+«DEFINE ebnf2(Grammar grammar, AntlrOptions options, boolean writeActions) FOR UnorderedGroup»
+«IF !writeActions-»
+(«EXPAND ebnf(grammar, options, writeActions) FOREACH elements SEPARATOR '\n    |'»)*
+«ELSE-»
 «LET elements.reject(e|e.isOptionalCardinality()).size AS mandatoryContent»
 (
 	{ 
@@ -350,7 +361,7 @@ finally {
 	 				  getUnorderedGroupHelper().select(grammarAccess.«gaRuleElementAccessor()», «it.counter0»);
 	 				}
 «REM»Predicate {true}=> helps to workaround an issue in the Antlr grammar processing«ENDREM»«IF true»«ENDIF-»
-					({true}?=>(«EXPAND ebnf2(grammar, options) FOR element»))«IF element.isMultipleCardinality()»+«ENDIF»
+					({true}?=>(«EXPAND ebnf2(grammar, options, writeActions) FOR element»))«IF element.isMultipleCardinality()»+«ENDIF»
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.«gaRuleElementAccessor()»);
 	 				}
@@ -365,57 +376,69 @@ finally {
 	  getUnorderedGroupHelper().leave(grammarAccess.«gaRuleElementAccessor()»);
 	}
 «ENDLET»
+«ENDIF-»
 «ENDDEFINE»
 
-«DEFINE crossrefEbnf(Grammar grammar, CrossReference ref) FOR AbstractElement-»
+«DEFINE crossrefEbnf(Grammar grammar, CrossReference ref, boolean writeActions) FOR AbstractElement-»
 «ERROR "crossrefEbnf is not supported for AbstractElement"»
 «ENDDEFINE»
 
-«DEFINE crossrefEbnf(Grammar grammar, CrossReference ref) FOR Alternatives-»
-		(«EXPAND crossrefEbnf(grammar, ref) FOREACH elements SEPARATOR '\n    |'»)
+«DEFINE crossrefEbnf(Grammar grammar, CrossReference ref, boolean writeActions) FOR Alternatives-»
+		(«EXPAND crossrefEbnf(grammar, ref, writeActions) FOREACH elements SEPARATOR '\n    |'»)
 «ENDDEFINE»
 
-«DEFINE crossrefEbnf(Grammar grammar, CrossReference ref) FOR RuleCall-»
-«EXPAND crossrefEbnf(grammar, ref) FOR rule-»
+«DEFINE crossrefEbnf(Grammar grammar, CrossReference ref, boolean writeActions) FOR RuleCall-»
+«EXPAND crossrefEbnf(grammar, ref, writeActions) FOR rule-»
 «ENDDEFINE»
 
-«DEFINE crossrefEbnf(Grammar grammar, CrossReference ref) FOR AbstractRule-»
+«DEFINE crossrefEbnf(Grammar grammar, CrossReference ref, boolean writeActions) FOR AbstractRule-»
 «ERROR "crossrefEbnf is not supported for AbstractRule"»
 «ENDDEFINE»
 
-«DEFINE crossrefEbnf(Grammar grammar, CrossReference ref) FOR ParserRule-»
+«DEFINE crossrefEbnf(Grammar grammar, CrossReference ref, boolean writeActions) FOR ParserRule-»
 «IF !isDatatypeRule()-»
 «ERROR "crossrefEbnf is not supported for ParserRule that is not a datatype rule"»
 «ELSE-»
+«IF writeActions-»
 		{ 
 	        «EXPAND newCompositeNode FOR ref» 
 	    }
+«ENDIF-»
 		«ruleName()-»
+«IF writeActions-»
+		{ 
+	        afterParserOrEnumRuleCall();
+	    }
+«ENDIF-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE crossrefEbnf(Grammar grammar, CrossReference ref, boolean writeActions) FOR EnumRule-»
+«IF writeActions-»
+		{ 
+	        «EXPAND newCompositeNode FOR ref» 
+	    }
+«ENDIF-»
+		«ruleName()-»
+«IF writeActions-»
 		{ 
 	        afterParserOrEnumRuleCall();
 	    }
 «ENDIF-»
 «ENDDEFINE»
 
-«DEFINE crossrefEbnf(Grammar grammar, CrossReference ref) FOR EnumRule-»
-		{ 
-	        «EXPAND newCompositeNode FOR ref» 
-	    }
-		«ruleName()-»
-		{ 
-	        afterParserOrEnumRuleCall();
-	    }
-«ENDDEFINE»
-
-«DEFINE crossrefEbnf(Grammar grammar, CrossReference ref) FOR TerminalRule-»
-	«ref.containingAssignment().localVar()»=«ruleName()»
+«DEFINE crossrefEbnf(Grammar grammar, CrossReference ref, boolean writeActions) FOR TerminalRule-»
+	«IF writeActions»«ref.containingAssignment().localVar()»=«ENDIF»«ruleName()»
+«IF writeActions-»
 	{
 		«EXPAND newLeafNode(ref.containingAssignment().localVar()) FOR ref» 
 	}
+«ENDIF-»
 «ENDDEFINE»
 
-«DEFINE assignmentEbnf(Grammar grammar, Assignment assignment, AntlrOptions options) FOR AbstractElement-»
-		«assignment.localVar(this)»=«EXPAND ebnf(grammar, options)» 
+«DEFINE assignmentEbnf(Grammar grammar, Assignment assignment, AntlrOptions options, boolean writeActions) FOR AbstractElement-»
+		«IF writeActions»«assignment.localVar(this)»=«ENDIF»«EXPAND ebnf(grammar, options, writeActions)»
+«IF writeActions-»
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.«assignment.containingParserRule().grammarElementAccess()»);
@@ -425,39 +448,42 @@ finally {
         		ELSE»«assignment.localVar(this)»«
         		ENDIF», «assignment.terminal.toStringLiteral()»);
 	    }
+«ENDIF-»
 «ENDDEFINE»
 
-«DEFINE assignmentEbnf(Grammar grammar, Assignment assignment, AntlrOptions options) FOR Group-»
+«DEFINE assignmentEbnf(Grammar grammar, Assignment assignment, AntlrOptions options, boolean writeActions) FOR Group-»
 «ERROR "assignmentEbnf is not supported for Group"»
 «ENDDEFINE»
 
-«DEFINE assignmentEbnf(Grammar grammar, Assignment assignment, AntlrOptions options) FOR Assignment-»
+«DEFINE assignmentEbnf(Grammar grammar, Assignment assignment, AntlrOptions options, boolean writeActions) FOR Assignment-»
 «ERROR "assignmentEbnf is not supported for Assignment"»
 «ENDDEFINE»
 
-«DEFINE assignmentEbnf(Grammar grammar, Assignment assignment, AntlrOptions options) FOR Action-»
+«DEFINE assignmentEbnf(Grammar grammar, Assignment assignment, AntlrOptions options, boolean writeActions) FOR Action-»
 «ERROR "assignmentEbnf is not supported for Action"»
 «ENDDEFINE»
 
-«DEFINE assignmentEbnf(Grammar grammar, Assignment assignment, AntlrOptions options) FOR Alternatives-»
+«DEFINE assignmentEbnf(Grammar grammar, Assignment assignment, AntlrOptions options, boolean writeActions) FOR Alternatives-»
 (
-«EXPAND assignmentEbnf(grammar, assignment, options) FOREACH elements SEPARATOR '\n    |'»
+«EXPAND assignmentEbnf(grammar, assignment, options, writeActions) FOREACH elements SEPARATOR '\n    |'»
 )
 «ENDDEFINE»
 
-«DEFINE assignmentEbnf(Grammar grammar, Assignment assignment, AntlrOptions options) FOR RuleCall-»
-«EXPAND assignmentEbnf(assignment, this) FOR rule-»
+«DEFINE assignmentEbnf(Grammar grammar, Assignment assignment, AntlrOptions options, boolean writeActions) FOR RuleCall-»
+«EXPAND assignmentEbnf(assignment, this, writeActions) FOR rule-»
 «ENDDEFINE»
 
-«DEFINE assignmentEbnf(Assignment assignment, RuleCall call) FOR AbstractRule-»
+«DEFINE assignmentEbnf(Assignment assignment, RuleCall call, boolean writeActions) FOR AbstractRule-»
 «ERROR "assignmentEbnf is not supported for AbstractRule"»
 «ENDDEFINE»
 
-«DEFINE assignmentEbnf(Assignment assignment, RuleCall call) FOR ParserRule-»
+«DEFINE assignmentEbnf(Assignment assignment, RuleCall call, boolean writeActions) FOR ParserRule-»
+«IF writeActions-»
 		{ 
 	        «EXPAND newCompositeNode FOR call» 
 	    }
-		«assignment.localVar(call)»=«ruleName()-»
+		«assignment.localVar(call)»=«ENDIF»«ruleName()-»
+«IF writeActions-»
 		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.«assignment.containingParserRule().grammarElementAccess()»);
@@ -469,13 +495,16 @@ finally {
         		«call.toStringLiteral()»);
 	        afterParserOrEnumRuleCall();
 	    }
+«ENDIF-»
 «ENDDEFINE»
 
-«DEFINE assignmentEbnf(Assignment assignment, RuleCall call) FOR EnumRule-»
+«DEFINE assignmentEbnf(Assignment assignment, RuleCall call, boolean writeActions) FOR EnumRule-»
+«IF writeActions-»
 		{ 
 	        «EXPAND newCompositeNode FOR call» 
 	    }
-		«assignment.localVar(call)»=«ruleName()-»
+		«assignment.localVar(call)»=«ENDIF»«ruleName()-»
+«IF writeActions-»
 		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.«assignment.containingParserRule().grammarElementAccess()»);
@@ -487,10 +516,13 @@ finally {
         		«call.toStringLiteral()»);
 	        afterParserOrEnumRuleCall();
 	    }
+«ENDIF-»
 «ENDDEFINE»
 
-«DEFINE assignmentEbnf(Assignment assignment, RuleCall call) FOR TerminalRule-»
-		«assignment.localVar(call)»=«ruleName()»
+«DEFINE assignmentEbnf(Assignment assignment, RuleCall call, boolean writeActions) FOR TerminalRule-»
+«IF writeActions-»
+		«assignment.localVar(call)»=«ENDIF»«ruleName()»
+«IF writeActions-»
 		{
 			«EXPAND newLeafNode(assignment.localVar(call)) FOR call» 
 		}
@@ -504,9 +536,11 @@ finally {
         		«IF assignment.isBoolean()»true«ELSE»«assignment.localVar(call)»«ENDIF», 
         		«call.toStringLiteral()»);
 	    }
+«ENDIF-»
 «ENDDEFINE»
 
-«DEFINE assignmentEbnf(Grammar grammar, Assignment assignment, AntlrOptions options) FOR CrossReference-»
+«DEFINE assignmentEbnf(Grammar grammar, Assignment assignment, AntlrOptions options, boolean writeActions) FOR CrossReference-»
+«IF writeActions-»
 «IF options.backtrack-»
 		{ 
 		  /* */ 
@@ -517,20 +551,22 @@ finally {
 	            $current = createModelElement(grammarAccess.«assignment.containingParserRule().grammarElementAccess()»);
 	        }
         }
-		«EXPAND crossrefEbnf(grammar, this) FOR terminal-»
+«ENDIF-»
+		«EXPAND crossrefEbnf(grammar, this, writeActions) FOR terminal-»
 «ENDDEFINE»
 
-«DEFINE ebnf2(Grammar grammar, AntlrOptions options) FOR Assignment»
+«DEFINE ebnf2(Grammar grammar, AntlrOptions options, boolean writeActions) FOR Assignment»
 (
-«EXPAND assignmentEbnf(grammar, this, options) FOR terminal»
+«EXPAND assignmentEbnf(grammar, this, options, writeActions) FOR terminal»
 )
 «ENDDEFINE»
 
-«DEFINE ebnf2(Grammar grammar, AntlrOptions options) FOR CrossReference»
+«DEFINE ebnf2(Grammar grammar, AntlrOptions options, boolean writeActions) FOR CrossReference»
 «ERROR "ebnf2(Grammar grammar) is not supported for CrossReference"»
 «ENDDEFINE»
 
-«DEFINE ebnf2(Grammar grammar, AntlrOptions options) FOR Action»
+«DEFINE ebnf2(Grammar grammar, AntlrOptions options, boolean writeActions) FOR Action»
+«IF writeActions-»
 «IF options.backtrack-»
 	{ 
 	  /* */ 
@@ -541,10 +577,13 @@ finally {
             grammarAccess.«grammarElementAccess()»,
             $current);
     }
+«ENDIF-»
 «ENDDEFINE»
 
-«DEFINE ebnf2(Grammar grammar, AntlrOptions options) FOR Keyword»
-	«IF !isAssigned()»«localVar()»=«ENDIF»«grammar.getKeywordRuleName(value)» 
+«DEFINE ebnf2(Grammar grammar, AntlrOptions options, boolean writeActions) FOR Keyword»
+«IF writeActions-»
+	«IF !isAssigned()»«localVar()»=«ENDIF»«ENDIF»«grammar.getKeywordRuleName(value)»
+«IF writeActions-»
     {
     	«IF !isAssigned()-»
     	«EXPAND newLeafNode(localVar())»
@@ -552,9 +591,11 @@ finally {
         «EXPAND newLeafNode(containingAssignment().localVar(this))»
         «ENDIF-»  
     }
+«ENDIF-»
 «ENDDEFINE»
 
-«DEFINE ebnf2(Grammar grammar, AntlrOptions options) FOR RuleCall-»
+«DEFINE ebnf2(Grammar grammar, AntlrOptions options, boolean writeActions) FOR RuleCall-»
+«IF writeActions-»
 «IF (ParserRule.isInstance(rule) || EnumRule.isInstance(rule)) && !isAssigned()»
 «IF options.backtrack-»
 	{ 
@@ -566,7 +607,9 @@ finally {
     }
 «IF (ParserRule.isInstance(rule) && !isDatatypeRule((ParserRule)rule) && !EnumRule.isInstance(rule))-»
     «localVar()»=«ENDIF-»«ENDIF-»«IF TerminalRule.isInstance(rule)-»«localVar()»=«ENDIF-»
+«ENDIF-»
 «rule.ruleName()-»
+«IF writeActions-»
 «IF (ParserRule.isInstance(rule) || EnumRule.isInstance(rule)) && !isAssigned()»
     {
 «IF (ParserRule.isInstance(rule) && !isDatatypeRule((ParserRule)rule) && !EnumRule.isInstance(rule))-»
@@ -579,6 +622,7 @@ finally {
     { 
     «EXPAND newLeafNode(localVar())» 
     }
+«ENDIF-»
 «ENDIF-»
 «ENDDEFINE»
 
