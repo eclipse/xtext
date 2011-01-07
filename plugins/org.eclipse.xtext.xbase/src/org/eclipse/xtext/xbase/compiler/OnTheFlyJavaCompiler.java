@@ -49,6 +49,13 @@ public class OnTheFlyJavaCompiler {
 		final String classNameAsPath = "/"+clazz.getCanonicalName().replace('.', '/');
 		URL url = clazz.getResource(classNameAsPath+".class");
 		String pathToFolderOrJar = null;
+		if (url.getProtocol().startsWith("bundleresource")) {
+			try {
+				url = resolveBundleResourceURL(url);
+			} catch (IOException e) {
+				throw new WrappedException(e);
+			}
+		}
 		if (url.getProtocol().startsWith("jar")) {
 			try {
 				pathToFolderOrJar = new URL(url.getPath().substring(0,url.getPath().indexOf('!'))).toURI().getRawPath();
@@ -56,13 +63,6 @@ public class OnTheFlyJavaCompiler {
 				throw new WrappedException(e);
 			}
 		} else {
-			if (url.getProtocol().startsWith("bundleresource")) {
-				try {
-					url = resolveBundleResourceURL(url);
-				} catch (IOException e) {
-					throw new WrappedException(e);
-				}
-			}
 			String resolvedRawPath;
 			try {
 				resolvedRawPath = url.toURI().getRawPath();
