@@ -24,7 +24,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.grammarinheritance.AbstractTestLanguage'.rules[0]->ParserRule'InheritedParserRule'.type->TypeRef.classifier to EPackage'ametamodel'.eClassifiers[0]->EClass'AType'
+		//InheritedParserRule returns mm::AType:
+		//	"element" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"element" name=ID
@@ -47,7 +48,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		private final Assignment cElementsAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cElementsOverridableParserRuleParserRuleCall_1_0 = (RuleCall)cElementsAssignment_1.eContents().get(0);
 		
-		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.grammarinheritance.AbstractTestLanguage'.rules[1]->ParserRule'AbstractCallOverridenParserRule'.type->TypeRef.classifier to EPackage'ametamodel'.eClassifiers[1]->EClass'AModel'
+		//AbstractCallOverridenParserRule returns mm::AModel:
+		//	"overridemodel" elements+=OverridableParserRule*;
 		public ParserRule getRule() { return rule; }
 
 		//"overridemodel" elements+=OverridableParserRule*
@@ -70,7 +72,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.grammarinheritance.AbstractTestLanguage'.rules[2]->ParserRule'OverridableParserRule'.type->TypeRef.classifier to EPackage'ametamodel'.eClassifiers[0]->EClass'AType'
+		//OverridableParserRule returns mm::AType:
+		//	"element" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"element" name=ID
@@ -93,7 +96,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameSTRINGTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.grammarinheritance.AbstractTestLanguage'.rules[3]->ParserRule'OverridableParserRule2'.type->TypeRef.classifier to EPackage'ametamodel'.eClassifiers[0]->EClass'AType'
+		//OverridableParserRule2 returns mm::AType:
+		//	"other element" name=STRING;
 		public ParserRule getRule() { return rule; }
 
 		//"other element" name=STRING
@@ -116,7 +120,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		private final Assignment cElementsAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cElementsExtendableParserRuleParserRuleCall_1_0 = (RuleCall)cElementsAssignment_1.eContents().get(0);
 		
-		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.grammarinheritance.AbstractTestLanguage'.rules[4]->ParserRule'AbstractCallExtendedParserRule'.type->TypeRef.classifier to EPackage'ametamodel'.eClassifiers[1]->EClass'AModel'
+		//AbstractCallExtendedParserRule returns mm::AModel:
+		//	"extendedmodel" elements+=ExtendableParserRule*;
 		public ParserRule getRule() { return rule; }
 
 		//"extendedmodel" elements+=ExtendableParserRule*
@@ -139,7 +144,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.grammarinheritance.AbstractTestLanguage'.rules[5]->ParserRule'ExtendableParserRule'.type->TypeRef.classifier to EPackage'ametamodel'.eClassifiers[0]->EClass'AType'
+		//ExtendableParserRule returns mm::AType:
+		//	"element" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"element" name=ID
@@ -186,7 +192,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	
-	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.grammarinheritance.AbstractTestLanguage'.rules[0]->ParserRule'InheritedParserRule'.type->TypeRef.classifier to EPackage'ametamodel'.eClassifiers[0]->EClass'AType'
+	//InheritedParserRule returns mm::AType:
+	//	"element" name=ID;
 	public InheritedParserRuleElements getInheritedParserRuleAccess() {
 		return (pInheritedParserRule != null) ? pInheritedParserRule : (pInheritedParserRule = new InheritedParserRuleElements());
 	}
@@ -195,7 +202,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return getInheritedParserRuleAccess().getRule();
 	}
 
-	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.grammarinheritance.AbstractTestLanguage'.rules[1]->ParserRule'AbstractCallOverridenParserRule'.type->TypeRef.classifier to EPackage'ametamodel'.eClassifiers[1]->EClass'AModel'
+	//AbstractCallOverridenParserRule returns mm::AModel:
+	//	"overridemodel" elements+=OverridableParserRule*;
 	public AbstractCallOverridenParserRuleElements getAbstractCallOverridenParserRuleAccess() {
 		return (pAbstractCallOverridenParserRule != null) ? pAbstractCallOverridenParserRule : (pAbstractCallOverridenParserRule = new AbstractCallOverridenParserRuleElements());
 	}
@@ -204,7 +212,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return getAbstractCallOverridenParserRuleAccess().getRule();
 	}
 
-	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.grammarinheritance.AbstractTestLanguage'.rules[2]->ParserRule'OverridableParserRule'.type->TypeRef.classifier to EPackage'ametamodel'.eClassifiers[0]->EClass'AType'
+	//OverridableParserRule returns mm::AType:
+	//	"element" name=ID;
 	public OverridableParserRuleElements getOverridableParserRuleAccess() {
 		return (pOverridableParserRule != null) ? pOverridableParserRule : (pOverridableParserRule = new OverridableParserRuleElements());
 	}
@@ -213,7 +222,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return getOverridableParserRuleAccess().getRule();
 	}
 
-	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.grammarinheritance.AbstractTestLanguage'.rules[3]->ParserRule'OverridableParserRule2'.type->TypeRef.classifier to EPackage'ametamodel'.eClassifiers[0]->EClass'AType'
+	//OverridableParserRule2 returns mm::AType:
+	//	"other element" name=STRING;
 	public OverridableParserRule2Elements getOverridableParserRule2Access() {
 		return (pOverridableParserRule2 != null) ? pOverridableParserRule2 : (pOverridableParserRule2 = new OverridableParserRule2Elements());
 	}
@@ -222,7 +232,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return getOverridableParserRule2Access().getRule();
 	}
 
-	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.grammarinheritance.AbstractTestLanguage'.rules[4]->ParserRule'AbstractCallExtendedParserRule'.type->TypeRef.classifier to EPackage'ametamodel'.eClassifiers[1]->EClass'AModel'
+	//AbstractCallExtendedParserRule returns mm::AModel:
+	//	"extendedmodel" elements+=ExtendableParserRule*;
 	public AbstractCallExtendedParserRuleElements getAbstractCallExtendedParserRuleAccess() {
 		return (pAbstractCallExtendedParserRule != null) ? pAbstractCallExtendedParserRule : (pAbstractCallExtendedParserRule = new AbstractCallExtendedParserRuleElements());
 	}
@@ -231,7 +242,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return getAbstractCallExtendedParserRuleAccess().getRule();
 	}
 
-	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.grammarinheritance.AbstractTestLanguage'.rules[5]->ParserRule'ExtendableParserRule'.type->TypeRef.classifier to EPackage'ametamodel'.eClassifiers[0]->EClass'AType'
+	//ExtendableParserRule returns mm::AType:
+	//	"element" name=ID;
 	public ExtendableParserRuleElements getExtendableParserRuleAccess() {
 		return (pExtendableParserRule != null) ? pExtendableParserRule : (pExtendableParserRule = new ExtendableParserRuleElements());
 	}

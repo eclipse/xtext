@@ -40,11 +40,12 @@ protected class ThisRootNode extends RootToken {
 
 /************ begin Rule Second ****************
  *
- * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.ecore.EcoreFragmentTestLanguage'.rules[0]->ParserRule'Second'.alternatives->Group.elements[2]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'first'.eClassifiers[0]->EClass'First'
+ * Second returns second::Second:
+ * 	name=ID "first" first=[first::First];
  *
  **/
 
-// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.ecore.EcoreFragmentTestLanguage'.rules[0]->ParserRule'Second'.alternatives->Group.elements[2]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'first'.eClassifiers[0]->EClass'First'
+// name=ID "first" first=[first::First]
 protected class Second_Group extends GroupToken {
 	
 	public Second_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -128,7 +129,7 @@ protected class Second_FirstKeyword_1 extends KeywordToken  {
 
 }
 
-// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.generator.ecore.EcoreFragmentTestLanguage'.rules[0]->ParserRule'Second'.alternatives->Group.elements[2]->Assignment.terminal->CrossReference.type->TypeRef.classifier to EPackage'first'.eClassifiers[0]->EClass'First'
+// first=[first::First]
 protected class Second_FirstAssignment_2 extends AssignmentToken  {
 	
 	public Second_FirstAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

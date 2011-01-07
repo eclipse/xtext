@@ -1,22 +1,21 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <jardesc>
-<jar path="org.eclipse.xtext.bootstrap/lastversion.jar"/>
-<options buildIfNeeded="true" compress="true" descriptionLocation="/org.eclipse.xtext.bootstrap/createjar.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
-<storedRefactorings deprecationInfo="true" structuralOnly="false"/>
-<selectedProjects/>
-<manifest generateManifest="true" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
-<sealing sealJar="false">
-<packagesToSeal/>
-<packagesToUnSeal/>
-</sealing>
-</manifest>
-<selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
-<javaElement handleIdentifier="=org.eclipse.xtext/src-gen"/>
-<javaElement handleIdentifier="=org.eclipse.xtext/emf-gen"/>
-<javaElement handleIdentifier="=org.eclipse.xtext/src"/>
-<javaElement handleIdentifier="=de.itemis.xtext.antlr/src"/>
-<javaElement handleIdentifier="=org.eclipse.xtext.util/src"/>
-<javaElement handleIdentifier="=org.eclipse.xtext/model"/>
-<javaElement handleIdentifier="=org.eclipse.xtext.generator/src"/>
-</selectedElements>
+    <jar path="org.eclipse.xtext.bootstrap/lastversion.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/org.eclipse.xtext.bootstrap/createjar.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
+        <javaElement handleIdentifier="=org.eclipse.xtext.generator/src"/>
+        <javaElement handleIdentifier="=org.eclipse.xtext.util/src"/>
+        <javaElement handleIdentifier="=org.eclipse.xtext/src"/>
+        <javaElement handleIdentifier="=org.eclipse.xtext/emf-gen"/>
+        <javaElement handleIdentifier="=org.eclipse.xtext/src-gen"/>
+        <javaElement handleIdentifier="=de.itemis.xtext.antlr/src"/>
+    </selectedElements>
 </jardesc>

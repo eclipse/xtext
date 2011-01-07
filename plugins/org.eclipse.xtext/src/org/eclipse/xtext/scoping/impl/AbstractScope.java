@@ -15,6 +15,7 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -145,7 +146,7 @@ public abstract class AbstractScope implements IScope {
 	}
 	
 	public Iterable<IEObjectDescription> getElements(final EObject object) {
-		final URI uri = EcoreUtil.getURI(object);
+		final URI uri = EcoreUtil2.getNormalizedURI(object);
 		Iterable<IEObjectDescription> localElements = getLocalElementsByEObject(object, uri);
 		Iterable<IEObjectDescription> parentElements = getParentElements(new Provider<Iterable<IEObjectDescription>>() {
 			public Iterable<IEObjectDescription> get() {

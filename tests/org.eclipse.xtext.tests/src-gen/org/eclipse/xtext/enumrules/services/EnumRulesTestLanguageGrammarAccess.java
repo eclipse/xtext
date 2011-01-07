@@ -88,25 +88,26 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final EnumLiteralDeclaration cDifferentNameEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
 		private final Keyword cDifferentNameDifferentLiteralKeyword_2_0 = (Keyword)cDifferentNameEnumLiteralDeclaration_2.eContents().get(0);
 		
-		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.enumrules.EnumRulesTestLanguage'.rules[1]->EnumRule'ExistingEnum'.alternatives->Alternatives.elements[0]->EnumLiteralDeclaration.enumLiteral to EPackage'enums'.eClassifiers[0]->EEnum'ExistingEnum'.eLiterals[0]->EEnumLiteral'SameName'
+		//enum ExistingEnum:
+		//	SameName | OverriddenLiteral="overridden" | DifferentName="DifferentLiteral";
 		public EnumRule getRule() { return rule; }
 
-		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.enumrules.EnumRulesTestLanguage'.rules[1]->EnumRule'ExistingEnum'.alternatives->Alternatives.elements[0]->EnumLiteralDeclaration.enumLiteral to EPackage'enums'.eClassifiers[0]->EEnum'ExistingEnum'.eLiterals[0]->EEnumLiteral'SameName'
+		//SameName | OverriddenLiteral="overridden" | DifferentName="DifferentLiteral"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.enumrules.EnumRulesTestLanguage'.rules[1]->EnumRule'ExistingEnum'.alternatives->Alternatives.elements[0]->EnumLiteralDeclaration.enumLiteral to EPackage'enums'.eClassifiers[0]->EEnum'ExistingEnum'.eLiterals[0]->EEnumLiteral'SameName'
+		//SameName
 		public EnumLiteralDeclaration getSameNameEnumLiteralDeclaration_0() { return cSameNameEnumLiteralDeclaration_0; }
 
 		//"SameName"
 		public Keyword getSameNameSameNameKeyword_0_0() { return cSameNameSameNameKeyword_0_0; }
 
-		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.enumrules.EnumRulesTestLanguage'.rules[1]->EnumRule'ExistingEnum'.alternatives->Alternatives.elements[1]->EnumLiteralDeclaration.enumLiteral to EPackage'enums'.eClassifiers[0]->EEnum'ExistingEnum'.eLiterals[1]->EEnumLiteral'OverriddenLiteral'
+		//OverriddenLiteral="overridden"
 		public EnumLiteralDeclaration getOverriddenLiteralEnumLiteralDeclaration_1() { return cOverriddenLiteralEnumLiteralDeclaration_1; }
 
 		//"overridden"
 		public Keyword getOverriddenLiteralOverriddenKeyword_1_0() { return cOverriddenLiteralOverriddenKeyword_1_0; }
 
-		//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.enumrules.EnumRulesTestLanguage'.rules[1]->EnumRule'ExistingEnum'.alternatives->Alternatives.elements[2]->EnumLiteralDeclaration.enumLiteral to EPackage'enums'.eClassifiers[0]->EEnum'ExistingEnum'.eLiterals[2]->EEnumLiteral'DifferentName'
+		//DifferentName="DifferentLiteral"
 		public EnumLiteralDeclaration getDifferentNameEnumLiteralDeclaration_2() { return cDifferentNameEnumLiteralDeclaration_2; }
 
 		//"DifferentLiteral"
@@ -176,7 +177,8 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getModelAccess().getRule();
 	}
 
-	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.enumrules.EnumRulesTestLanguage'.rules[1]->EnumRule'ExistingEnum'.alternatives->Alternatives.elements[0]->EnumLiteralDeclaration.enumLiteral to EPackage'enums'.eClassifiers[0]->EEnum'ExistingEnum'.eLiterals[0]->EEnumLiteral'SameName'
+	//enum ExistingEnum:
+	//	SameName | OverriddenLiteral="overridden" | DifferentName="DifferentLiteral";
 	public ExistingEnumElements getExistingEnumAccess() {
 		return (unknownRuleExistingEnum != null) ? unknownRuleExistingEnum : (unknownRuleExistingEnum = new ExistingEnumElements());
 	}

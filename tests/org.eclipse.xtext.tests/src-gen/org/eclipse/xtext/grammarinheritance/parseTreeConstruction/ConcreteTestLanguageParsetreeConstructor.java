@@ -408,7 +408,9 @@ protected class ConcreteParserRule_ElementsAssignment_3 extends AssignmentToken 
 
 /************ begin Rule OverridableParserRule ****************
  *
- * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage'.rules[2]->ParserRule'OverridableParserRule'.type->TypeRef.classifier to EPackage'ametamodel'.eClassifiers[0]->EClass'AType'
+ * // override OverridableParserRule and call it
+ * OverridableParserRule returns mm::AType:
+ * 	"overriddenelement" name=ID;
  *
  **/
 
@@ -711,7 +713,9 @@ protected class OverridableParserRule2_AgeAssignment_3 extends AssignmentToken  
 
 /************ begin Rule ExtendableParserRule ****************
  *
- * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage'.rules[5]->ParserRule'ExtendableParserRule'.type->TypeRef.classifier to EPackage'ametamodel'.eClassifiers[0]->EClass'AType'
+ * // override and extend ExtendableParserRule and call it
+ * ExtendableParserRule returns mm::AType:
+ * 	Subrule1 | Subrule2 | Subrule3;
  *
  **/
 
@@ -1306,7 +1310,8 @@ protected class CallExtendedParserRule_CallAssignment extends AssignmentToken  {
 
 /************ begin Rule InheritedParserRule ****************
  *
- * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.grammarinheritance.AbstractTestLanguage'.rules[0]->ParserRule'InheritedParserRule'.type->TypeRef.classifier to EPackage'ametamodel'.eClassifiers[0]->EClass'AType'
+ * InheritedParserRule returns mm::AType:
+ * 	"element" name=ID;
  *
  **/
 
@@ -1400,7 +1405,8 @@ protected class InheritedParserRule_NameAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule AbstractCallOverridenParserRule ****************
  *
- * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.grammarinheritance.AbstractTestLanguage'.rules[1]->ParserRule'AbstractCallOverridenParserRule'.type->TypeRef.classifier to EPackage'ametamodel'.eClassifiers[1]->EClass'AModel'
+ * AbstractCallOverridenParserRule returns mm::AModel:
+ * 	"overridemodel" elements+=OverridableParserRule*;
  *
  **/
 
@@ -1508,7 +1514,8 @@ protected class AbstractCallOverridenParserRule_ElementsAssignment_1 extends Ass
 
 /************ begin Rule AbstractCallExtendedParserRule ****************
  *
- * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Could not serialize cross reference from Grammar'org.eclipse.xtext.grammarinheritance.AbstractTestLanguage'.rules[4]->ParserRule'AbstractCallExtendedParserRule'.type->TypeRef.classifier to EPackage'ametamodel'.eClassifiers[1]->EClass'AModel'
+ * AbstractCallExtendedParserRule returns mm::AModel:
+ * 	"extendedmodel" elements+=ExtendableParserRule*;
  *
  **/
 
