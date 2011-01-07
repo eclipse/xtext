@@ -30,7 +30,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	private IQualifiedNameConverter qualifiedNameConverter;
 	
 	public void testIfExpression() throws Exception {
-		assertResolvedReturnType("java.lang.Object", "if (true) 'foo' else null");
+		assertResolvedReturnType("java.lang.String", "if (true) 'foo' else null");
 		assertResolvedReturnType("java.lang.String", "if (true) 'foo' else 'bar'");
 		assertResolvedReturnType("java.lang.String", "if (true) 'foo'");
 	}
