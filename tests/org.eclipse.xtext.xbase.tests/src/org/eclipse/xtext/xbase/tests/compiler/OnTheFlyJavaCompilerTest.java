@@ -10,16 +10,27 @@ package org.eclipse.xtext.xbase.tests.compiler;
 import junit.framework.TestCase;
 
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler;
+import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 
+import com.google.common.base.Function;
 import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class OnTheFlyJavaCompilerTest extends TestCase {
-	private OnTheFlyJavaCompiler compiler = new OnTheFlyJavaCompiler();
+	private OnTheFlyJavaCompiler compiler = new OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler();
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		compiler.setParentClassLoader(OnTheFlyJavaCompilerTest.class.getClassLoader());
+		compiler.addClassPathOfClass(OnTheFlyJavaCompilerTest.class);
+		compiler.addClassPathOfClass(Functions.class);
+		compiler.addClassPathOfClass(Function.class);
+		compiler.addClassPathOfClass(Provider.class);
+	}
 	
 	@SuppressWarnings("unchecked")
 	public void testCompileToClass() throws Exception {
