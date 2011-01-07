@@ -177,6 +177,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
         .assertText(
         		"::",
         		":",
+        		"=>",
         		"Feature",
         		"\"Value\"",
         		"RuleA",
@@ -192,7 +193,30 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
         		"{");
     }
     
-    public void testEnumCompletion_10() throws Exception {
+    public void testCompleteCrossReference_05() throws Exception {
+    	newBuilder(getXtextSetup())
+        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
+        .appendNl("generate metamodelA 'http://foo.bar/A' as alias")
+        .appendNl("generate metamodelB 'http://foo.bar/B'")
+        .appendNl("RuleA: name=ID;")
+        .append("RuleB returns alias:=>")
+        .assertText(
+        		"=>",
+        		"Feature",
+        		"\"Value\"",
+        		"RuleA",
+        		"RuleB",
+        		"ID",
+        		"STRING",
+        		"INT",
+        		"SL_COMMENT",
+        		"WS",
+        		"ML_COMMENT",
+        		"ANY_OTHER",
+        		"(");
+    }
+    
+    public void testEnumCompletion_01() throws Exception {
     	newBuilder(getXtextSetup())
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate myDsl1 \"http://www.xtext.org/example/MyDsl1\"")
@@ -299,7 +323,8 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"ML_COMMENT",
 	        		"ANY_OTHER",
 	        		"(",
-	        		"{");
+	        		"{",
+	        		"=>");
     }
     
     public void testCompleteFeatureName_02() throws Exception {
@@ -321,6 +346,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"ANY_OTHER",
 	        		"(",
 	        		"{",
+	        		"=>",
 	        		"*",
 	        		"+",
 	        		";",
@@ -350,7 +376,197 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"ML_COMMENT",
 	        		"ANY_OTHER",
 	        		"(",
-	        		"{");
+	        		"{",
+	        		"=>");
+    }
+    
+    public void testCompleteFeatureName_04() throws Exception {
+    	newBuilder(getXtextSetup())
+	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
+	        .appendNl("generate metamodelA 'http://foo.bar/A'")
+	        .appendNl("RuleA: name=ID;")
+	        .append("RuleB returns RuleA: =>")
+	        .assertText(
+	        		"=>",
+	        		"name",
+	        		"Feature",
+	        		"\"Value\"",
+	        		"RuleA",
+	        		"RuleB",
+	        		"ID",
+	        		"STRING",
+	        		"INT",
+	        		"SL_COMMENT",
+	        		"WS",
+	        		"ML_COMMENT",
+	        		"ANY_OTHER",
+	        		"(");
+    }
+    
+    public void testCompleteFeatureName_05() throws Exception {
+    	newBuilder(getXtextSetup())
+	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
+	        .appendNl("generate metamodelA 'http://foo.bar/A'")
+	        .appendNl("RuleA: name=ID;")
+	        .append("RuleB returns RuleA: => ")
+	        .assertText(
+	        		"name",
+	        		"Feature",
+	        		"\"Value\"",
+	        		"RuleA",
+	        		"RuleB",
+	        		"ID",
+	        		"STRING",
+	        		"INT",
+	        		"SL_COMMENT",
+	        		"WS",
+	        		"ML_COMMENT",
+	        		"ANY_OTHER",
+	        		"(");
+    }
+    
+    public void testCompleteFeatureName_06() throws Exception {
+    	newBuilder(getXtextSetup())
+	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
+	        .appendNl("generate metamodelA 'http://foo.bar/A'")
+	        .append("RuleA: name=ID =>")
+	        .assertText(
+	        		"name",
+	        		"Feature",
+	        		"\"Value\"",
+	        		"RuleA",
+	        		"ID",
+	        		"STRING",
+	        		"INT",
+	        		"SL_COMMENT",
+	        		"WS",
+	        		"ML_COMMENT",
+	        		"ANY_OTHER",
+	        		"(",
+	        		"=>");
+    }
+    
+    public void testCompleteFeatureName_07() throws Exception {
+    	newBuilder(getXtextSetup())
+	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
+	        .appendNl("generate metamodelA 'http://foo.bar/A'")
+	        .appendNl("RuleA: name=ID => ")
+	        .assertText(
+	        		"name",
+	        		"Feature",
+	        		"\"Value\"",
+	        		"RuleA",
+	        		"ID",
+	        		"STRING",
+	        		"INT",
+	        		"SL_COMMENT",
+	        		"WS",
+	        		"ML_COMMENT",
+	        		"ANY_OTHER",
+	        		"(");
+    }
+    
+    public void testCompleteFeatureName_08() throws Exception {
+    	newBuilder(getXtextSetup())
+	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
+	        .appendNl("generate metamodelA 'http://foo.bar/A'")
+	        .appendNl("RuleA: name=ID somethingElse=ID;")
+	        .append("RuleB returns RuleA: =>")
+	        .assertText(
+	        		"name",
+	        		"somethingElse",
+	        		"Feature",
+	        		"\"Value\"",
+	        		"RuleA",
+	        		"RuleB",
+	        		"ID",
+	        		"STRING",
+	        		"INT",
+	        		"SL_COMMENT",
+	        		"WS",
+	        		"ML_COMMENT",
+	        		"ANY_OTHER",
+	        		"(",
+	        		"=>");
+    }
+    
+    public void testCompleteFeatureName_09() throws Exception {
+    	newBuilder(getXtextSetup())
+	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
+	        .appendNl("generate metamodelA 'http://foo.bar/A'")
+	        .appendNl("RuleA: name=ID somethingElse=ID;")
+	        .append("RuleB returns RuleA: => ")
+	        .assertText(
+	        		"name",
+	        		"somethingElse",
+	        		"Feature",
+	        		"\"Value\"",
+	        		"RuleA",
+	        		"RuleB",
+	        		"ID",
+	        		"STRING",
+	        		"INT",
+	        		"SL_COMMENT",
+	        		"WS",
+	        		"ML_COMMENT",
+	        		"ANY_OTHER",
+	        		"(");
+    }
+    
+    public void testCompleteFeatureName_10() throws Exception {
+    	newBuilder(getXtextSetup())
+	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
+	        .appendNl("generate metamodelA 'http://foo.bar/A'")
+	        .appendNl("RuleA: name=ID somethingElse=ID;")
+	        .append("RuleB returns RuleA: =")
+	        .assertText(
+	        		"=>");
+    }
+    
+    public void testCompleteFeatureName_11() throws Exception {
+    	newBuilder(getXtextSetup())
+	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
+	        .appendNl("generate metamodelA 'http://foo.bar/A'")
+	        .appendNl("RuleA: name=ID;")
+	        .append("RuleB returns RuleA: =>(name=ID);")
+	        .assertTextAtCursorPosition("(",
+	        		"=>",
+	        		"name",
+	        		"Feature",
+	        		"\"Value\"",
+	        		"RuleA",
+	        		"RuleB",
+	        		"ID",
+	        		"STRING",
+	        		"INT",
+	        		"SL_COMMENT",
+	        		"WS",
+	        		"ML_COMMENT",
+	        		"ANY_OTHER",
+	        		"(");
+    }
+    
+    public void testCompleteFeatureName_12() throws Exception {
+    	newBuilder(getXtextSetup())
+	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
+	        .appendNl("generate metamodelA 'http://foo.bar/A'")
+	        .appendNl("RuleA: name=ID;")
+	        .append("RuleB returns RuleA: =>  name=ID;")
+	        .assertTextAtCursorPosition("  name",
+	        		"=>",
+	        		"name",
+	        		"Feature",
+	        		"\"Value\"",
+	        		"RuleA",
+	        		"RuleB",
+	        		"ID",
+	        		"STRING",
+	        		"INT",
+	        		"SL_COMMENT",
+	        		"WS",
+	        		"ML_COMMENT",
+	        		"ANY_OTHER",
+	        		"(");
     }
     
     public void testAliasCompletion_01() throws Exception {
@@ -615,7 +831,8 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	    	.appendNl("enum EnumType: A | B;")
 	    	.appendNl("terminal fragment Fragment: 'a'..'z';")
 	    	.appendNl("terminal Terminal: 'a'..'z';")
-	    	.assertTextAtCursorPosition("ID", 
+	    	.assertTextAtCursorPosition("ID",
+	    			"=>",
 	    			"=", 
 	    			"[",
 	    			"(",
