@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XbaseFactory;
@@ -23,8 +24,8 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
  */
 public class SerializerTest extends AbstractXbaseTestCase {
 	
-	public void testSerialize() throws IOException {
-		Resource resource = newResource("(java.lang.String)'foo'");
+	public void testSerialize_01() throws IOException {
+		Resource resource = newResource("'foo' as String");
 		XCastedExpression casted = (XCastedExpression) resource.getContents().get(0);
 		
 		XbaseFactory factory = XbaseFactory.eINSTANCE;
@@ -39,9 +40,29 @@ public class SerializerTest extends AbstractXbaseTestCase {
 		resource.getContents().add(instanceOfExpression);
 		Serializer serializer = get(Serializer.class);
 		String string = serializer.serialize(instanceOfExpression);
-		// TODO: The expection is wrong
-		assertEquals("| \"value\" instanceof String", string);
-//		assertEquals("|'value'; instanceof java.lang.String", string);
+		assertEquals("[ | \"value\" ] instanceof String", string);
+	}
+	
+	public void testSerialize_02() throws IOException {
+		Resource resource = newResource("'foo' as String");
+		XCastedExpression casted = (XCastedExpression) resource.getContents().get(0);
+		
+		XbaseFactory factory = XbaseFactory.eINSTANCE;
+		XIfExpression ifExpression = factory.createXIfExpression();
+		ifExpression.setIf(factory.createXBooleanLiteral());
+		XStringLiteral stringLiteral = factory.createXStringLiteral();
+		stringLiteral.setValue("value");
+		ifExpression.setThen(stringLiteral);
+		XInstanceOfExpression instanceOfExpression = factory.createXInstanceOfExpression();
+		instanceOfExpression.setExpression(ifExpression);
+		instanceOfExpression.setType(casted.getType().getType());
+		resource.getContents().clear();
+		resource.getContents().add(instanceOfExpression);
+		Serializer serializer = get(Serializer.class);
+		String string = serializer.serialize(instanceOfExpression);
+		// TODO expectation is wrong
+		assertEquals("if ( false ) \"value\" instanceof String", string);
+//		assertEquals("(if ( false ) \"value\") instanceof String", string);
 	}
 
 }

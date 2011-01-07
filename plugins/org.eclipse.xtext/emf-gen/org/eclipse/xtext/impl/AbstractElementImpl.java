@@ -24,6 +24,7 @@ import org.eclipse.xtext.XtextPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.impl.AbstractElementImpl#getCardinality <em>Cardinality</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.AbstractElementImpl#isPredicated <em>Predicated</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,6 +50,26 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
 	 * @ordered
 	 */
 	protected String cardinality = CARDINALITY_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isPredicated() <em>Predicated</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isPredicated()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean PREDICATED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isPredicated() <em>Predicated</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isPredicated()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean predicated = PREDICATED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -95,11 +116,34 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isPredicated() {
+		return predicated;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPredicated(boolean newPredicated) {
+		boolean oldPredicated = predicated;
+		predicated = newPredicated;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.ABSTRACT_ELEMENT__PREDICATED, oldPredicated, predicated));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case XtextPackage.ABSTRACT_ELEMENT__CARDINALITY:
 				return getCardinality();
+			case XtextPackage.ABSTRACT_ELEMENT__PREDICATED:
+				return isPredicated();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -114,6 +158,9 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
 		switch (featureID) {
 			case XtextPackage.ABSTRACT_ELEMENT__CARDINALITY:
 				setCardinality((String)newValue);
+				return;
+			case XtextPackage.ABSTRACT_ELEMENT__PREDICATED:
+				setPredicated((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -130,6 +177,9 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
 			case XtextPackage.ABSTRACT_ELEMENT__CARDINALITY:
 				setCardinality(CARDINALITY_EDEFAULT);
 				return;
+			case XtextPackage.ABSTRACT_ELEMENT__PREDICATED:
+				setPredicated(PREDICATED_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -144,6 +194,8 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
 		switch (featureID) {
 			case XtextPackage.ABSTRACT_ELEMENT__CARDINALITY:
 				return CARDINALITY_EDEFAULT == null ? cardinality != null : !CARDINALITY_EDEFAULT.equals(cardinality);
+			case XtextPackage.ABSTRACT_ELEMENT__PREDICATED:
+				return predicated != PREDICATED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -160,6 +212,8 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (cardinality: ");
 		result.append(cardinality);
+		result.append(", predicated: ");
+		result.append(predicated);
 		result.append(')');
 		return result.toString();
 	}

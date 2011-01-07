@@ -11,8 +11,8 @@ var projectName = "org.eclipse.xtext.xtend2"
 var runtimeProject = "../${projectName}"
 
 var uiProject = "${runtimeProject}.ui"
-var backtrack = true
-var memoize = true
+var backtrack = false
+var memoize = false
 
 Workflow {
 	bean = StandaloneSetup {

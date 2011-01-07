@@ -68,6 +68,8 @@ public class FQNPrefixMatcher extends PrefixMatcher {
 				if (splitName.length < splitPrefix.length) {
 					return false;
 				}
+				if (splitPrefix.length == 0)
+					return false;
 				for(int i = 0; i < splitPrefix.length ; i++) {
 					if (!delegate.isCandidateMatchingPrefix(splitName[i], splitPrefix[i]))
 						return false;

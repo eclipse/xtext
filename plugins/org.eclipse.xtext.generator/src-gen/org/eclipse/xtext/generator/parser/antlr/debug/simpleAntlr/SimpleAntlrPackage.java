@@ -236,6 +236,43 @@ public interface SimpleAntlrPackage extends EPackage
   int RULE_ELEMENT_FEATURE_COUNT = 0;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.PredicatedImpl <em>Predicated</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.PredicatedImpl
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getPredicated()
+   * @generated
+   */
+  int PREDICATED = 5;
+
+  /**
+   * The feature id for the '<em><b>Predicate</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PREDICATED__PREDICATE = RULE_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Element</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PREDICATED__ELEMENT = RULE_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Predicated</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PREDICATED_FEATURE_COUNT = RULE_ELEMENT_FEATURE_COUNT + 2;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.RuleOptionsImpl <em>Rule Options</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -243,7 +280,7 @@ public interface SimpleAntlrPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getRuleOptions()
    * @generated
    */
-  int RULE_OPTIONS = 5;
+  int RULE_OPTIONS = 6;
 
   /**
    * The feature id for the '<em><b>Options</b></em>' containment reference.
@@ -280,7 +317,7 @@ public interface SimpleAntlrPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getRuleCall()
    * @generated
    */
-  int RULE_CALL = 6;
+  int RULE_CALL = 7;
 
   /**
    * The feature id for the '<em><b>Rule</b></em>' attribute.
@@ -308,7 +345,7 @@ public interface SimpleAntlrPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getKeyword()
    * @generated
    */
-  int KEYWORD = 7;
+  int KEYWORD = 8;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -336,7 +373,7 @@ public interface SimpleAntlrPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getWildcard()
    * @generated
    */
-  int WILDCARD = 8;
+  int WILDCARD = 9;
 
   /**
    * The number of structural features of the '<em>Wildcard</em>' class.
@@ -355,7 +392,7 @@ public interface SimpleAntlrPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getAlternatives()
    * @generated
    */
-  int ALTERNATIVES = 9;
+  int ALTERNATIVES = 10;
 
   /**
    * The feature id for the '<em><b>Groups</b></em>' containment reference list.
@@ -383,7 +420,7 @@ public interface SimpleAntlrPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getGroup()
    * @generated
    */
-  int GROUP = 10;
+  int GROUP = 11;
 
   /**
    * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -411,7 +448,7 @@ public interface SimpleAntlrPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getElementWithCardinality()
    * @generated
    */
-  int ELEMENT_WITH_CARDINALITY = 11;
+  int ELEMENT_WITH_CARDINALITY = 12;
 
   /**
    * The feature id for the '<em><b>Element</b></em>' containment reference.
@@ -448,7 +485,7 @@ public interface SimpleAntlrPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getNegatedElement()
    * @generated
    */
-  int NEGATED_ELEMENT = 12;
+  int NEGATED_ELEMENT = 13;
 
   /**
    * The feature id for the '<em><b>Element</b></em>' containment reference.
@@ -476,7 +513,7 @@ public interface SimpleAntlrPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getUntilElement()
    * @generated
    */
-  int UNTIL_ELEMENT = 13;
+  int UNTIL_ELEMENT = 14;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -513,7 +550,7 @@ public interface SimpleAntlrPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getSkip()
    * @generated
    */
-  int SKIP = 14;
+  int SKIP = 15;
 
   /**
    * The feature id for the '<em><b>Options</b></em>' containment reference.
@@ -691,6 +728,38 @@ public interface SimpleAntlrPackage extends EPackage
    * @generated
    */
   EClass getRuleElement();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Predicated <em>Predicated</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Predicated</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Predicated
+   * @generated
+   */
+  EClass getPredicated();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Predicated#getPredicate <em>Predicate</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Predicate</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Predicated#getPredicate()
+   * @see #getPredicated()
+   * @generated
+   */
+  EReference getPredicated_Predicate();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Predicated#getElement <em>Element</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Element</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Predicated#getElement()
+   * @see #getPredicated()
+   * @generated
+   */
+  EReference getPredicated_Element();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleOptions <em>Rule Options</em>}'.
@@ -1057,6 +1126,32 @@ public interface SimpleAntlrPackage extends EPackage
      * @generated
      */
     EClass RULE_ELEMENT = eINSTANCE.getRuleElement();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.PredicatedImpl <em>Predicated</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.PredicatedImpl
+     * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getPredicated()
+     * @generated
+     */
+    EClass PREDICATED = eINSTANCE.getPredicated();
+
+    /**
+     * The meta object literal for the '<em><b>Predicate</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PREDICATED__PREDICATE = eINSTANCE.getPredicated_Predicate();
+
+    /**
+     * The meta object literal for the '<em><b>Element</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PREDICATED__ELEMENT = eINSTANCE.getPredicated_Element();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.RuleOptionsImpl <em>Rule Options</em>}' class.

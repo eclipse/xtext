@@ -264,7 +264,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 				AbstractRule rule = currentRule;
 				ICompositeNode loopParserNode = currentParserNode;
 				EObject loopLastGrammarElement = lastCompleteNode.getGrammarElement();
-				while (!canBeCalledAfter(rule, loopLastGrammarElement, grammarElement) && loopParserNode.getParent() != null) {
+				while (!canBeCalledAfter(rule, loopLastGrammarElement, lastCompleteNode.getText(), grammarElement) && loopParserNode.getParent() != null) {
 					loopLastGrammarElement = loopParserNode.getGrammarElement();
 					loopParserNode = loopParserNode.getParent();
 					while (loopParserNode.getGrammarElement() == null && loopParserNode.getParent() != null)
@@ -432,13 +432,16 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			return parser;
 		}
 
-		protected boolean canBeCalledAfter(AbstractRule rule, final EObject previousGrammarElement, final EObject nextGrammarElement) {
-			return createCallHierachyHelper(previousGrammarElement, nextGrammarElement).doSwitch(rule);
+		protected boolean canBeCalledAfter(AbstractRule rule, final EObject previousGrammarElement, String previousText, final EObject nextGrammarElement) {
+			Boolean result = createCallHierachyHelper(previousGrammarElement, previousText, nextGrammarElement).doSwitch(rule);
+			return result;
 		}
 
-		protected ParserBasedContentAssistContextFactory.CallHierarchyHelper createCallHierachyHelper(final EObject previousGrammarElement,
+		protected ParserBasedContentAssistContextFactory.CallHierarchyHelper createCallHierachyHelper(
+				final EObject previousGrammarElement,
+				final String previousText,
 				final EObject nextGrammarElement) {
-			return new ParserBasedContentAssistContextFactory.CallHierarchyHelper(nextGrammarElement, previousGrammarElement);
+			return new ParserBasedContentAssistContextFactory.CallHierarchyHelper(nextGrammarElement, previousText, previousGrammarElement);
 		}
 
 		protected AbstractRule getRule(EObject currentGrammarElement) {
@@ -665,9 +668,11 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		private EObject grammarElement;
 		private EObject queuedGrammarElement;
 		private Boolean result = Boolean.FALSE;
+		private String expectedText;
 	
-		public CallHierarchyHelper(EObject nextGrammarElement, EObject previousGrammarElement) {
+		public CallHierarchyHelper(EObject nextGrammarElement, String previousText, EObject previousGrammarElement) {
 			this.nextGrammarElement = nextGrammarElement;
+			this.expectedText = previousText;
 			grammarElement = previousGrammarElement;
 			queuedGrammarElement = nextGrammarElement;
 		}
@@ -685,16 +690,17 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			EObject wasGrammarElement = grammarElement;
 			Boolean result = doSwitch(object.getAlternatives());
 			visiting.remove(object);
-			if (wasGrammarElement == grammarElement) // we store the result per grammarElement for performance reasons
+			if (isExpectedGrammarElement(wasGrammarElement)) // we store the result per grammarElement for performance reasons
 				visited.put(object, result);
 			return result;
 		}
 	
 		private boolean checkFurther(EObject object) {
-			if (object == grammarElement) {
+			if (isExpectedGrammarElement(object)) {
 				if (queuedGrammarElement != null) {
 					grammarElement = queuedGrammarElement;
 					queuedGrammarElement = null;
+					expectedText = null;
 					visited.clear();
 					visiting.clear();
 					return true;
@@ -703,6 +709,18 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 				return false;
 			}
 			return true;
+		}
+
+		protected boolean isExpectedGrammarElement(EObject object) {
+			if (object == grammarElement)
+				return true;
+			if (grammarElement == null && expectedText != null) {
+				if (object instanceof Keyword) {
+					if (expectedText.equals(((Keyword) object).getValue()))
+						return true;
+				}
+			}
+			return false;
 		}
 	
 		@Override

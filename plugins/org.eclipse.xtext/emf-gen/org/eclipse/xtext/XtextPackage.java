@@ -419,13 +419,22 @@ public interface XtextPackage extends EPackage {
 	int ABSTRACT_ELEMENT__CARDINALITY = 0;
 
 	/**
+	 * The feature id for the '<em><b>Predicated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_ELEMENT__PREDICATED = 1;
+
+	/**
 	 * The number of structural features of the '<em>Abstract Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ELEMENT_FEATURE_COUNT = 1;
+	int ABSTRACT_ELEMENT_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.ActionImpl <em>Action</em>}' class.
@@ -445,6 +454,15 @@ public interface XtextPackage extends EPackage {
 	 * @ordered
 	 */
 	int ACTION__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+	/**
+	 * The feature id for the '<em><b>Predicated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -502,6 +520,15 @@ public interface XtextPackage extends EPackage {
 	int KEYWORD__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
 
 	/**
+	 * The feature id for the '<em><b>Predicated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEYWORD__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
+
+	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -539,6 +566,15 @@ public interface XtextPackage extends EPackage {
 	int RULE_CALL__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
 
 	/**
+	 * The feature id for the '<em><b>Predicated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE_CALL__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
+
+	/**
 	 * The feature id for the '<em><b>Rule</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -574,6 +610,15 @@ public interface XtextPackage extends EPackage {
 	 * @ordered
 	 */
 	int ASSIGNMENT__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+	/**
+	 * The feature id for the '<em><b>Predicated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' attribute.
@@ -629,6 +674,15 @@ public interface XtextPackage extends EPackage {
 	 * @ordered
 	 */
 	int CROSS_REFERENCE__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+	/**
+	 * The feature id for the '<em><b>Predicated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CROSS_REFERENCE__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -732,6 +786,15 @@ public interface XtextPackage extends EPackage {
 	int ABSTRACT_NEGATED_TOKEN__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
 
 	/**
+	 * The feature id for the '<em><b>Predicated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_NEGATED_TOKEN__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
+
+	/**
 	 * The feature id for the '<em><b>Terminal</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -767,6 +830,15 @@ public interface XtextPackage extends EPackage {
 	 * @ordered
 	 */
 	int NEGATED_TOKEN__CARDINALITY = ABSTRACT_NEGATED_TOKEN__CARDINALITY;
+
+	/**
+	 * The feature id for the '<em><b>Predicated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NEGATED_TOKEN__PREDICATED = ABSTRACT_NEGATED_TOKEN__PREDICATED;
 
 	/**
 	 * The feature id for the '<em><b>Terminal</b></em>' containment reference.
@@ -806,6 +878,15 @@ public interface XtextPackage extends EPackage {
 	int UNTIL_TOKEN__CARDINALITY = ABSTRACT_NEGATED_TOKEN__CARDINALITY;
 
 	/**
+	 * The feature id for the '<em><b>Predicated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNTIL_TOKEN__PREDICATED = ABSTRACT_NEGATED_TOKEN__PREDICATED;
+
+	/**
 	 * The feature id for the '<em><b>Terminal</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -841,6 +922,15 @@ public interface XtextPackage extends EPackage {
 	 * @ordered
 	 */
 	int WILDCARD__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+	/**
+	 * The feature id for the '<em><b>Predicated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WILDCARD__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
 
 	/**
 	 * The number of structural features of the '<em>Wildcard</em>' class.
@@ -917,6 +1007,15 @@ public interface XtextPackage extends EPackage {
 	int ENUM_LITERAL_DECLARATION__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
 
 	/**
+	 * The feature id for the '<em><b>Predicated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_LITERAL_DECLARATION__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
+
+	/**
 	 * The feature id for the '<em><b>Enum Literal</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -963,6 +1062,15 @@ public interface XtextPackage extends EPackage {
 	int COMPOUND_ELEMENT__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
 
 	/**
+	 * The feature id for the '<em><b>Predicated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOUND_ELEMENT__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
+
+	/**
 	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -998,6 +1106,15 @@ public interface XtextPackage extends EPackage {
 	 * @ordered
 	 */
 	int ALTERNATIVES__CARDINALITY = COMPOUND_ELEMENT__CARDINALITY;
+
+	/**
+	 * The feature id for the '<em><b>Predicated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALTERNATIVES__PREDICATED = COMPOUND_ELEMENT__PREDICATED;
 
 	/**
 	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -1037,6 +1154,15 @@ public interface XtextPackage extends EPackage {
 	int UNORDERED_GROUP__CARDINALITY = COMPOUND_ELEMENT__CARDINALITY;
 
 	/**
+	 * The feature id for the '<em><b>Predicated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNORDERED_GROUP__PREDICATED = COMPOUND_ELEMENT__PREDICATED;
+
+	/**
 	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1074,6 +1200,15 @@ public interface XtextPackage extends EPackage {
 	int GROUP__CARDINALITY = COMPOUND_ELEMENT__CARDINALITY;
 
 	/**
+	 * The feature id for the '<em><b>Predicated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GROUP__PREDICATED = COMPOUND_ELEMENT__PREDICATED;
+
+	/**
 	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1109,6 +1244,15 @@ public interface XtextPackage extends EPackage {
 	 * @ordered
 	 */
 	int CHARACTER_RANGE__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+	/**
+	 * The feature id for the '<em><b>Predicated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHARACTER_RANGE__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1404,6 +1548,17 @@ public interface XtextPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAbstractElement_Cardinality();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.AbstractElement#isPredicated <em>Predicated</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Predicated</em>'.
+	 * @see org.eclipse.xtext.AbstractElement#isPredicated()
+	 * @see #getAbstractElement()
+	 * @generated
+	 */
+	EAttribute getAbstractElement_Predicated();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.Action <em>Action</em>}'.
@@ -1999,6 +2154,14 @@ public interface XtextPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ABSTRACT_ELEMENT__CARDINALITY = eINSTANCE.getAbstractElement_Cardinality();
+
+		/**
+		 * The meta object literal for the '<em><b>Predicated</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ABSTRACT_ELEMENT__PREDICATED = eINSTANCE.getAbstractElement_Predicated();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.impl.ActionImpl <em>Action</em>}' class.

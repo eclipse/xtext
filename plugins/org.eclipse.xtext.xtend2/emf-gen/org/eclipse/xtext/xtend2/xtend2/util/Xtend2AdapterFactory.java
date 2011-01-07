@@ -154,6 +154,11 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 				return createJvmMemberAdapter();
 			}
 			@Override
+			public Adapter caseJvmFeature(JvmFeature object)
+			{
+				return createJvmFeatureAdapter();
+			}
+			@Override
 			public Adapter caseJvmTypeParameterDeclarator(JvmTypeParameterDeclarator object)
 			{
 				return createJvmTypeParameterDeclaratorAdapter();
@@ -162,11 +167,6 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 			public Adapter caseJvmExecutable(JvmExecutable object)
 			{
 				return createJvmExecutableAdapter();
-			}
-			@Override
-			public Adapter caseJvmFeature(JvmFeature object)
-			{
-				return createJvmFeatureAdapter();
 			}
 			@Override
 			public Adapter caseJvmOperation(JvmOperation object)
@@ -411,6 +411,21 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmFeature <em>Jvm Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmFeature
+	 * @generated
+	 */
+	public Adapter createJvmFeatureAdapter()
+	{
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmTypeParameterDeclarator <em>Jvm Type Parameter Declarator</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -436,21 +451,6 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createJvmExecutableAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmFeature <em>Jvm Feature</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.JvmFeature
-	 * @generated
-	 */
-	public Adapter createJvmFeatureAdapter()
 	{
 		return null;
 	}

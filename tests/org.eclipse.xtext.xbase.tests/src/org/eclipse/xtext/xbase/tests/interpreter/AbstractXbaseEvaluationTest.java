@@ -10,6 +10,9 @@ package org.eclipse.xtext.xbase.tests.interpreter;
 import java.util.Collections;
 import java.util.Stack;
 
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
+import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 
 import testdata.ExceptionSubclass;
@@ -22,13 +25,13 @@ import com.google.inject.internal.Lists;
  */
 public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase {
 
+	protected abstract void assertEvaluatesTo(Object object, String string);
+	protected abstract void assertEvaluatesWithException(Class<? extends Throwable> class1, String string);
+
 	public void testNull() {
 		assertEvaluatesTo(null, "null");
 	}
 	
-	protected abstract void assertEvaluatesTo(Object object, String string);
-	protected abstract void assertEvaluatesWithException(Class<? extends Throwable> class1, String string);
-
 	public void testNullBlockResult_01() {
 		assertEvaluatesTo(null, "{ null; }");
 	}
@@ -62,11 +65,11 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 	}
 	
 	public void testTypeLiteral_01() {
-		assertEvaluatesTo(Void.class, "Void.class");
+		assertEvaluatesTo(Void.class, "typeof(Void)");
 	}
-	
+
 	public void testTypeLiteral_02() {
-		assertEvaluatesTo(Void.TYPE, "void.class");
+		assertEvaluatesTo(Void.TYPE, "typeof(void)");
 	}
 	
 	public void testIfExpression_01() {
@@ -286,10 +289,9 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 		assertEvaluatesTo("literal", "'literal'.toUpperCase().toLowerCase()");
 	}
 	
-//	field is not public
-//	public void testMemberFeatureCall_03() {
-//		assertEvaluatesTo("source", "new java.util.EventObject('source').source");
-//	}
+	public void testMemberFeatureCall_03() {
+		assertEvaluatesTo("source", "new java.util.EventObject('source').source");
+	}
 	
 	public void testMemberFeatureCall_04() {
 		assertEvaluatesTo("literal", 
@@ -342,76 +344,78 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 	}
 	
 	public void testSwitchExpression_01() {
-		assertEvaluatesTo(null, "switch true { case false: 'literal'; }");
+		assertEvaluatesTo(null, "switch true { case false: 'literal' }");
 	}
 	
 	public void testSwitchExpression_02() {
-		assertEvaluatesTo("literal", "switch false { case false: 'literal'; }");
+		assertEvaluatesTo("literal", "switch false { case false: 'literal' }");
 	}
 	
 	public void testSwitchExpression_03() {
-		assertEvaluatesTo(Boolean.FALSE, "{ var this = true switch false { case true: this; } }");
+		assertEvaluatesTo(Boolean.FALSE, "{ var this = true switch false { case true: this } }");
 	}
 	
 	public void testSwitchExpression_04() {
-		assertEvaluatesTo(Boolean.TRUE, "{ var this = false switch true { case true: this; } }");
+		assertEvaluatesTo(Boolean.TRUE, "{ var this = false switch true { case true: this } }");
 	}
 	
 	public void testSwitchExpression_05() {
-		assertEvaluatesTo(null, "switch true { String : 'literal'; }");
+		assertEvaluatesTo(null, "switch true { String : 'literal' }");
 	}
 	
 	public void testSwitchExpression_06() {
-		assertEvaluatesTo("literal", "switch true { Boolean : 'literal'; }");
+		assertEvaluatesTo("literal", "switch true { Boolean : 'literal' }");
 	}
 	
 	public void testSwitchExpression_07() {
-		assertEvaluatesTo("literal", "switch true { case false: null; default: 'literal'; }");
+		assertEvaluatesTo("literal", "switch true { case false: null default: 'literal' }");
 	}
 	
 	public void testSwitchExpression_08() {
-		assertEvaluatesTo("literal", "switch true { case false: null; case true: 'literal'; }");
+		assertEvaluatesTo("literal", "switch true { case false: null case true: 'literal' }");
 	}
 	
 	public void testSwitchExpression_09() {
-		assertEvaluatesTo(Integer.valueOf(4), "switch 'foo' { case 'foo': 4; String: 3; }");
+		assertEvaluatesTo(Integer.valueOf(4), "switch 'foo' { case 'foo': 4 String: 3 }");
 	}
 	
 	public void testSwitchExpression_10() {
-		assertEvaluatesTo(Integer.valueOf(3), "switch 'foo' { Boolean case 'foo': 4; String: 3; }");
+		assertEvaluatesTo(Integer.valueOf(3), "switch 'foo' { Boolean case 'foo': 4 String: 3 }");
 	}
 	
 	public void testCastedExpression_01() {
-		assertEvaluatesTo("literal", "(String) 'literal'");
+		assertEvaluatesTo("literal", "'literal' as String");
 	}
 	
 	public void testCastedExpression_02() {
-		assertEvaluatesWithException(ClassCastException.class, "(Integer) 'literal'");
+		assertEvaluatesWithException(ClassCastException.class, "'literal' as Integer");
 	}
 	
 	public void testCastedExpression_03() {
-		assertEvaluatesTo(null, "(Integer) null");
+		assertEvaluatesTo(null, "null as Integer");
 	}
 	
 	public void testTryCatch_01() {
-		assertEvaluatesTo("caught", "try { (Boolean) 'literal' } catch(ClassCastException e) {'caught'}");
+		assertEvaluatesTo("caught", "try { 'literal' as Boolean } catch(ClassCastException e) {'caught'}");
 	}
 	
 	public void testTryCatch_02() {
-		assertEvaluatesTo("literal", "try { (String) 'literal' } catch(ClassCastException e) {'caught'}");
+		assertEvaluatesTo("literal", "try { 'literal' as String } catch(ClassCastException e) {'caught'}");
 	}
 	
 	public void testTryCatch_03() {
-		assertEvaluatesTo("ClassCastException", "try { (Boolean) 'literal' } catch(ClassCastException e) {e.getClass().getSimpleName()}");
+		assertEvaluatesTo("ClassCastException", "try { 'literal' as Boolean } catch(ClassCastException e) {e.getClass().getSimpleName()}");
 	}
 	
 	public void testTryCatch_04() {
-		assertEvaluatesWithException(NullPointerException.class, "try { (Boolean) 'literal' } catch(ClassCastException e) null == e");
+		// TODO Fix '==' behavior
+		assertEvaluatesWithException(NullPointerException.class, "try { 'literal' as Boolean } catch(ClassCastException e) null == e");
 	}
 	
 	public void testTryCatch_05() {
+		// TODO Fix '==' behavior
 		assertEvaluatesWithException(NullPointerException.class, 
-				"try (Boolean) 'literal' " +
+				"try 'literal' as Boolean" +
 				"  catch(ClassCastException e) null == e // throw new NullPointerException()" +
 				"  catch(NullPointerException e) 'dont catch subsequent exceptions'");
 	}

@@ -729,12 +729,25 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cKeywordParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cRuleCallParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cParenthesizedElementParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cPredicatedKeywordParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cPredicatedRuleCallParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cPredicatedGroupParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		
 		//AbstractTerminal returns AbstractElement:
-		//	Keyword | RuleCall | ParenthesizedElement;
+		//	Keyword | RuleCall | ParenthesizedElement | // Keyword and RuleCall are used inside of Assignable terminal
+		//	// As we do not want to be able to write name==>ID
+		//	// the rules for Keyword and RuleCall have been copied
+		//	PredicatedKeyword | PredicatedRuleCall | // We have to make this one explicit since the ParenthesizedElement does not
+		//	// create an object but we have to set the predicated flag
+		//	PredicatedGroup;
 		public ParserRule getRule() { return rule; }
 
-		//Keyword | RuleCall | ParenthesizedElement
+		//Keyword | RuleCall | ParenthesizedElement | // Keyword and RuleCall are used inside of Assignable terminal
+		//// As we do not want to be able to write name==>ID
+		//// the rules for Keyword and RuleCall have been copied
+		//PredicatedKeyword | PredicatedRuleCall | // We have to make this one explicit since the ParenthesizedElement does not
+		//// create an object but we have to set the predicated flag
+		//PredicatedGroup
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Keyword
@@ -745,6 +758,20 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 
 		//ParenthesizedElement
 		public RuleCall getParenthesizedElementParserRuleCall_2() { return cParenthesizedElementParserRuleCall_2; }
+
+		//// Keyword and RuleCall are used inside of Assignable terminal
+		//// As we do not want to be able to write name==>ID
+		//// the rules for Keyword and RuleCall have been copied
+		//PredicatedKeyword
+		public RuleCall getPredicatedKeywordParserRuleCall_3() { return cPredicatedKeywordParserRuleCall_3; }
+
+		//PredicatedRuleCall
+		public RuleCall getPredicatedRuleCallParserRuleCall_4() { return cPredicatedRuleCallParserRuleCall_4; }
+
+		//// We have to make this one explicit since the ParenthesizedElement does not
+		//// create an object but we have to set the predicated flag
+		//PredicatedGroup
+		public RuleCall getPredicatedGroupParserRuleCall_5() { return cPredicatedGroupParserRuleCall_5; }
 	}
 
 	public class KeywordElements extends AbstractParserRuleElementFinder {
@@ -783,52 +810,120 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getRuleAbstractRuleIDTerminalRuleCall_0_1() { return cRuleAbstractRuleIDTerminalRuleCall_0_1; }
 	}
 
+	public class PredicatedKeywordElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PredicatedKeyword");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cPredicatedAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cPredicatedEqualsSignGreaterThanSignKeyword_0_0 = (Keyword)cPredicatedAssignment_0.eContents().get(0);
+		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cValueSTRINGTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
+		
+		//PredicatedKeyword returns Keyword:
+		//	predicated?="=>" value=STRING;
+		public ParserRule getRule() { return rule; }
+
+		//predicated?="=>" value=STRING
+		public Group getGroup() { return cGroup; }
+
+		//predicated?="=>"
+		public Assignment getPredicatedAssignment_0() { return cPredicatedAssignment_0; }
+
+		//"=>"
+		public Keyword getPredicatedEqualsSignGreaterThanSignKeyword_0_0() { return cPredicatedEqualsSignGreaterThanSignKeyword_0_0; }
+
+		//value=STRING
+		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
+
+		//STRING
+		public RuleCall getValueSTRINGTerminalRuleCall_1_0() { return cValueSTRINGTerminalRuleCall_1_0; }
+	}
+
+	public class PredicatedRuleCallElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PredicatedRuleCall");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cPredicatedAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cPredicatedEqualsSignGreaterThanSignKeyword_0_0 = (Keyword)cPredicatedAssignment_0.eContents().get(0);
+		private final Assignment cRuleAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cRuleAbstractRuleCrossReference_1_0 = (CrossReference)cRuleAssignment_1.eContents().get(0);
+		private final RuleCall cRuleAbstractRuleIDTerminalRuleCall_1_0_1 = (RuleCall)cRuleAbstractRuleCrossReference_1_0.eContents().get(1);
+		
+		//PredicatedRuleCall returns RuleCall:
+		//	predicated?="=>" rule=[AbstractRule];
+		public ParserRule getRule() { return rule; }
+
+		//predicated?="=>" rule=[AbstractRule]
+		public Group getGroup() { return cGroup; }
+
+		//predicated?="=>"
+		public Assignment getPredicatedAssignment_0() { return cPredicatedAssignment_0; }
+
+		//"=>"
+		public Keyword getPredicatedEqualsSignGreaterThanSignKeyword_0_0() { return cPredicatedEqualsSignGreaterThanSignKeyword_0_0; }
+
+		//rule=[AbstractRule]
+		public Assignment getRuleAssignment_1() { return cRuleAssignment_1; }
+
+		//[AbstractRule]
+		public CrossReference getRuleAbstractRuleCrossReference_1_0() { return cRuleAbstractRuleCrossReference_1_0; }
+
+		//ID
+		public RuleCall getRuleAbstractRuleIDTerminalRuleCall_1_0_1() { return cRuleAbstractRuleIDTerminalRuleCall_1_0_1; }
+	}
+
 	public class AssignmentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Assignment");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cFeatureAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cFeatureIDTerminalRuleCall_0_0 = (RuleCall)cFeatureAssignment_0.eContents().get(0);
-		private final Assignment cOperatorAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final Alternatives cOperatorAlternatives_1_0 = (Alternatives)cOperatorAssignment_1.eContents().get(0);
-		private final Keyword cOperatorPlusSignEqualsSignKeyword_1_0_0 = (Keyword)cOperatorAlternatives_1_0.eContents().get(0);
-		private final Keyword cOperatorEqualsSignKeyword_1_0_1 = (Keyword)cOperatorAlternatives_1_0.eContents().get(1);
-		private final Keyword cOperatorQuestionMarkEqualsSignKeyword_1_0_2 = (Keyword)cOperatorAlternatives_1_0.eContents().get(2);
-		private final Assignment cTerminalAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cTerminalAssignableTerminalParserRuleCall_2_0 = (RuleCall)cTerminalAssignment_2.eContents().get(0);
+		private final Assignment cPredicatedAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cPredicatedEqualsSignGreaterThanSignKeyword_0_0 = (Keyword)cPredicatedAssignment_0.eContents().get(0);
+		private final Assignment cFeatureAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cFeatureIDTerminalRuleCall_1_0 = (RuleCall)cFeatureAssignment_1.eContents().get(0);
+		private final Assignment cOperatorAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final Alternatives cOperatorAlternatives_2_0 = (Alternatives)cOperatorAssignment_2.eContents().get(0);
+		private final Keyword cOperatorPlusSignEqualsSignKeyword_2_0_0 = (Keyword)cOperatorAlternatives_2_0.eContents().get(0);
+		private final Keyword cOperatorEqualsSignKeyword_2_0_1 = (Keyword)cOperatorAlternatives_2_0.eContents().get(1);
+		private final Keyword cOperatorQuestionMarkEqualsSignKeyword_2_0_2 = (Keyword)cOperatorAlternatives_2_0.eContents().get(2);
+		private final Assignment cTerminalAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cTerminalAssignableTerminalParserRuleCall_3_0 = (RuleCall)cTerminalAssignment_3.eContents().get(0);
 		
 		//Assignment:
-		//	feature=ID operator=("+=" | "=" | "?=") ^terminal=AssignableTerminal;
+		//	predicated?="=>"? feature=ID operator=("+=" | "=" | "?=") ^terminal=AssignableTerminal;
 		public ParserRule getRule() { return rule; }
 
-		//feature=ID operator=("+=" | "=" | "?=") ^terminal=AssignableTerminal
+		//predicated?="=>"? feature=ID operator=("+=" | "=" | "?=") ^terminal=AssignableTerminal
 		public Group getGroup() { return cGroup; }
 
+		//predicated?="=>"?
+		public Assignment getPredicatedAssignment_0() { return cPredicatedAssignment_0; }
+
+		//"=>"
+		public Keyword getPredicatedEqualsSignGreaterThanSignKeyword_0_0() { return cPredicatedEqualsSignGreaterThanSignKeyword_0_0; }
+
 		//feature=ID
-		public Assignment getFeatureAssignment_0() { return cFeatureAssignment_0; }
+		public Assignment getFeatureAssignment_1() { return cFeatureAssignment_1; }
 
 		//ID
-		public RuleCall getFeatureIDTerminalRuleCall_0_0() { return cFeatureIDTerminalRuleCall_0_0; }
+		public RuleCall getFeatureIDTerminalRuleCall_1_0() { return cFeatureIDTerminalRuleCall_1_0; }
 
 		//operator=("+=" | "=" | "?=")
-		public Assignment getOperatorAssignment_1() { return cOperatorAssignment_1; }
+		public Assignment getOperatorAssignment_2() { return cOperatorAssignment_2; }
 
 		//"+=" | "=" | "?="
-		public Alternatives getOperatorAlternatives_1_0() { return cOperatorAlternatives_1_0; }
+		public Alternatives getOperatorAlternatives_2_0() { return cOperatorAlternatives_2_0; }
 
 		//"+="
-		public Keyword getOperatorPlusSignEqualsSignKeyword_1_0_0() { return cOperatorPlusSignEqualsSignKeyword_1_0_0; }
+		public Keyword getOperatorPlusSignEqualsSignKeyword_2_0_0() { return cOperatorPlusSignEqualsSignKeyword_2_0_0; }
 
 		//"="
-		public Keyword getOperatorEqualsSignKeyword_1_0_1() { return cOperatorEqualsSignKeyword_1_0_1; }
+		public Keyword getOperatorEqualsSignKeyword_2_0_1() { return cOperatorEqualsSignKeyword_2_0_1; }
 
 		//"?="
-		public Keyword getOperatorQuestionMarkEqualsSignKeyword_1_0_2() { return cOperatorQuestionMarkEqualsSignKeyword_1_0_2; }
+		public Keyword getOperatorQuestionMarkEqualsSignKeyword_2_0_2() { return cOperatorQuestionMarkEqualsSignKeyword_2_0_2; }
 
 		//^terminal=AssignableTerminal
-		public Assignment getTerminalAssignment_2() { return cTerminalAssignment_2; }
+		public Assignment getTerminalAssignment_3() { return cTerminalAssignment_3; }
 
 		//AssignableTerminal
-		public RuleCall getTerminalAssignableTerminalParserRuleCall_2_0() { return cTerminalAssignableTerminalParserRuleCall_2_0; }
+		public RuleCall getTerminalAssignableTerminalParserRuleCall_3_0() { return cTerminalAssignableTerminalParserRuleCall_3_0; }
 	}
 
 	public class AssignableTerminalElements extends AbstractParserRuleElementFinder {
@@ -1009,6 +1104,42 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 
 		//")"
 		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
+	}
+
+	public class PredicatedGroupElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PredicatedGroup");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cPredicatedAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cPredicatedEqualsSignGreaterThanSignKeyword_0_0 = (Keyword)cPredicatedAssignment_0.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cElementsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cElementsAlternativesParserRuleCall_2_0 = (RuleCall)cElementsAssignment_2.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		//PredicatedGroup returns Group:
+		//	predicated?="=>" "(" elements+=Alternatives ")";
+		public ParserRule getRule() { return rule; }
+
+		//predicated?="=>" "(" elements+=Alternatives ")"
+		public Group getGroup() { return cGroup; }
+
+		//predicated?="=>"
+		public Assignment getPredicatedAssignment_0() { return cPredicatedAssignment_0; }
+
+		//"=>"
+		public Keyword getPredicatedEqualsSignGreaterThanSignKeyword_0_0() { return cPredicatedEqualsSignGreaterThanSignKeyword_0_0; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
+
+		//elements+=Alternatives
+		public Assignment getElementsAssignment_2() { return cElementsAssignment_2; }
+
+		//Alternatives
+		public RuleCall getElementsAlternativesParserRuleCall_2_0() { return cElementsAlternativesParserRuleCall_2_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
 	}
 
 	public class TerminalRuleElements extends AbstractParserRuleElementFinder {
@@ -1538,6 +1669,8 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	private AbstractTerminalElements pAbstractTerminal;
 	private KeywordElements pKeyword;
 	private RuleCallElements pRuleCall;
+	private PredicatedKeywordElements pPredicatedKeyword;
+	private PredicatedRuleCallElements pPredicatedRuleCall;
 	private AssignmentElements pAssignment;
 	private AssignableTerminalElements pAssignableTerminal;
 	private ParenthesizedAssignableElementElements pParenthesizedAssignableElement;
@@ -1545,6 +1678,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	private CrossReferenceElements pCrossReference;
 	private CrossReferenceableTerminalElements pCrossReferenceableTerminal;
 	private ParenthesizedElementElements pParenthesizedElement;
+	private PredicatedGroupElements pPredicatedGroup;
 	private TerminalRuleElements pTerminalRule;
 	private TerminalAlternativesElements pTerminalAlternatives;
 	private TerminalGroupElements pTerminalGroup;
@@ -1729,7 +1863,12 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AbstractTerminal returns AbstractElement:
-	//	Keyword | RuleCall | ParenthesizedElement;
+	//	Keyword | RuleCall | ParenthesizedElement | // Keyword and RuleCall are used inside of Assignable terminal
+	//	// As we do not want to be able to write name==>ID
+	//	// the rules for Keyword and RuleCall have been copied
+	//	PredicatedKeyword | PredicatedRuleCall | // We have to make this one explicit since the ParenthesizedElement does not
+	//	// create an object but we have to set the predicated flag
+	//	PredicatedGroup;
 	public AbstractTerminalElements getAbstractTerminalAccess() {
 		return (pAbstractTerminal != null) ? pAbstractTerminal : (pAbstractTerminal = new AbstractTerminalElements());
 	}
@@ -1758,8 +1897,28 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		return getRuleCallAccess().getRule();
 	}
 
+	//PredicatedKeyword returns Keyword:
+	//	predicated?="=>" value=STRING;
+	public PredicatedKeywordElements getPredicatedKeywordAccess() {
+		return (pPredicatedKeyword != null) ? pPredicatedKeyword : (pPredicatedKeyword = new PredicatedKeywordElements());
+	}
+	
+	public ParserRule getPredicatedKeywordRule() {
+		return getPredicatedKeywordAccess().getRule();
+	}
+
+	//PredicatedRuleCall returns RuleCall:
+	//	predicated?="=>" rule=[AbstractRule];
+	public PredicatedRuleCallElements getPredicatedRuleCallAccess() {
+		return (pPredicatedRuleCall != null) ? pPredicatedRuleCall : (pPredicatedRuleCall = new PredicatedRuleCallElements());
+	}
+	
+	public ParserRule getPredicatedRuleCallRule() {
+		return getPredicatedRuleCallAccess().getRule();
+	}
+
 	//Assignment:
-	//	feature=ID operator=("+=" | "=" | "?=") ^terminal=AssignableTerminal;
+	//	predicated?="=>"? feature=ID operator=("+=" | "=" | "?=") ^terminal=AssignableTerminal;
 	public AssignmentElements getAssignmentAccess() {
 		return (pAssignment != null) ? pAssignment : (pAssignment = new AssignmentElements());
 	}
@@ -1826,6 +1985,16 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getParenthesizedElementRule() {
 		return getParenthesizedElementAccess().getRule();
+	}
+
+	//PredicatedGroup returns Group:
+	//	predicated?="=>" "(" elements+=Alternatives ")";
+	public PredicatedGroupElements getPredicatedGroupAccess() {
+		return (pPredicatedGroup != null) ? pPredicatedGroup : (pPredicatedGroup = new PredicatedGroupElements());
+	}
+	
+	public ParserRule getPredicatedGroupRule() {
+		return getPredicatedGroupAccess().getRule();
 	}
 
 	//TerminalRule:

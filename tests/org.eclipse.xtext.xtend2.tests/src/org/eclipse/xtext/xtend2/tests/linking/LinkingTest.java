@@ -27,7 +27,7 @@ public class LinkingTest extends AbstractXtend2Test {
 	
 	
 	public void testTypeReference_withImport() throws Exception {
-		XtendFunction func = (XtendFunction) clazz("import java.lang.* class X { (String)=>Boolean foo() |true }").getMembers().get(0);
+		XtendFunction func = (XtendFunction) clazz("import java.lang.* class X { (String)=>Boolean foo() [|true] }").getMembers().get(0);
 		XFunctionTypeRef type = (XFunctionTypeRef) func.getReturnType();
 		JvmTypeReference returnType = (JvmTypeReference) type.getReturnType();
 		assertEquals("java.lang.Boolean", returnType.getCanonicalName());
@@ -36,7 +36,7 @@ public class LinkingTest extends AbstractXtend2Test {
 	}
 	
 	public void testTypeReference_0() throws Exception {
-		XtendFunction func = function("=>java.lang.Boolean foo() |true");
+		XtendFunction func = function("=>java.lang.Boolean foo() [|true]");
 		XFunctionTypeRef type = (XFunctionTypeRef) func.getReturnType();
 		JvmTypeReference returnType = (JvmTypeReference) type.getReturnType();
 		assertEquals("java.lang.Boolean", returnType.getCanonicalName());
@@ -106,7 +106,7 @@ public class LinkingTest extends AbstractXtend2Test {
 //	}
 	
 	public void testFeatureScope_3() throws Exception {
-		XtendFile file = file ("import java.lang.String class X { String foo(String foo) String foo|foo}");
+		XtendFile file = file ("import java.lang.String class X { String foo(String foo) [String foo|foo]}");
 		XtendClass xClass = file.getClasses().get(0);
 		XtendFunction func  = (XtendFunction) xClass.getMembers().get(0);
 		XClosure closure = (XClosure) func.getExpression();

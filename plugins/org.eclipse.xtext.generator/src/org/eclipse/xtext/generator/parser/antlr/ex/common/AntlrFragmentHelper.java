@@ -24,6 +24,9 @@ import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.generator.Naming;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
+
 /**
  * The fragment helper will be passed to the extended Antlr grammar template and allows to
  * override certain aspects. This is an attempt to circumvent the limitations of static java
@@ -104,6 +107,16 @@ public class AntlrFragmentHelper {
 	
 	public Collection<? extends AbstractElement> getAllAssignments(Grammar g) {
 		return getAllElementsByType(g, Assignment.class);
+	}
+	
+	public Collection<? extends AbstractElement> getAllPredicatedElements(Grammar g) {
+		Collection<AbstractElement> unfiltered = getAllElementsByType(g, AbstractElement.class);
+		Collection<AbstractElement> result = Collections2.filter(unfiltered, new Predicate<AbstractElement>() {
+			public boolean apply(AbstractElement input) {
+				return input.isPredicated();
+			}
+		});
+		return result;
 	}
 	
 	/**

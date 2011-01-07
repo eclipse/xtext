@@ -9,7 +9,7 @@ AntlrGrammar:
   
 Options: {Options}
   'options' '{'
-     optionValues+=OptionValue*
+     optionValues+=OptionValue+
   '}'
 ;
 
@@ -42,7 +42,8 @@ Atom returns RuleElement:
 
 OtherElement returns RuleElement:
   {NegatedElement} '~' element=(Parenthesized | Literal)
-  | Parenthesized 
+  | Predicated
+  | Parenthesized
   | Literal ({UntilElement.left=current} '..' right=Literal)?
 ;
 
@@ -51,7 +52,11 @@ EmptyParenthesis:
 ;
 
 Parenthesized returns RuleElement:
-  '(' EmptyParenthesis* Alternatives ')' EmptyParenthesis*
+  '(' EmptyParenthesis* Alternatives ')' EmptyParenthesis* 
+;
+
+Predicated:
+  '(' '(' EmptyParenthesis* predicate=Alternatives ')' EmptyParenthesis* '=>' element=OtherElement ')'
 ;
 
 RuleOptions:

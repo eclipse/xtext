@@ -130,6 +130,14 @@ public class SimpleAntlrSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case SimpleAntlrPackage.PREDICATED:
+      {
+        Predicated predicated = (Predicated)theEObject;
+        T result = casePredicated(predicated);
+        if (result == null) result = caseRuleElement(predicated);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case SimpleAntlrPackage.RULE_OPTIONS:
       {
         RuleOptions ruleOptions = (RuleOptions)theEObject;
@@ -291,6 +299,22 @@ public class SimpleAntlrSwitch<T>
    * @generated
    */
   public T caseRuleElement(RuleElement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Predicated</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Predicated</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePredicated(Predicated object)
   {
     return null;
   }

@@ -23,36 +23,38 @@ public class XbaseInterpreterTest extends AbstractXbaseEvaluationTest {
 		super.setUp();
 		interpreter = get(IExpressionInterpreter.class);
 	}
-	
+
 	@Override
 	protected void tearDown() throws Exception {
 		interpreter = null;
 		super.tearDown();
 	}
-	
+
 	@Override
 	public void assertEvaluatesTo(Object expectation, String model) {
 		try {
 			XExpression expression = expression(model, true);
 			IEvaluationResult result = interpreter.evaluate(expression);
-			assertNull("Expected no exception. Model was: " + model + ", Exception was: "+ result.getException(), result.getException());
+			assertNull("Expected no exception. Model was: " + model + ", Exception was: " + result.getException(),
+					result.getException());
 			assertEquals("Model was: " + model, expectation, result.getResult());
-		} catch(Exception e) {
+		} catch (Exception e) {
 			if (e instanceof RuntimeException)
-				throw (RuntimeException)e;
+				throw (RuntimeException) e;
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	@Override
 	public void assertEvaluatesWithException(Class<? extends Throwable> expectatedException, String model) {
 		try {
 			XExpression expression = expression(model);
 			IEvaluationResult result = interpreter.evaluate(expression);
-			assertTrue("Expected " + expectatedException.getSimpleName() + " but got: " + result.getException(), expectatedException.isInstance(result.getException()));
-		} catch(Exception e) {
+			assertTrue("Expected " + expectatedException.getSimpleName() + " but got: " + result.getException(),
+					expectatedException.isInstance(result.getException()));
+		} catch (Exception e) {
 			if (e instanceof RuntimeException)
-				throw (RuntimeException)e;
+				throw (RuntimeException) e;
 			throw new RuntimeException(e);
 		}
 	}

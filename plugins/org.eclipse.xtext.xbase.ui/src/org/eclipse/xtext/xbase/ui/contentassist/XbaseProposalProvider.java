@@ -15,10 +15,20 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 	@Override
 	public void completeJvmParameterizedTypeReference_Type(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		if (context.getPrefix().length() > 0) {
+			if (!Character.isJavaIdentifierStart(context.getPrefix().charAt(0)))
+				return;
+		}
+		super.completeJvmParameterizedTypeReference_Type(model, assignment, context, acceptor);
 	}
 	
 	@Override
 	public void completeXTypeLiteral_Type(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
+		if (context.getPrefix().length() > 0) {
+			if (!Character.isJavaIdentifierStart(context.getPrefix().charAt(0)))
+				return;
+		}
+		super.completeXTypeLiteral_Type(model, assignment, context, acceptor);
 	}
 }

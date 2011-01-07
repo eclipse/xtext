@@ -547,7 +547,7 @@ protected class JvmParameterizedTypeReference_TypeAssignment_0 extends Assignmen
 
 }
 
-// ("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)* ">")?
+// (=> "<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)* ">")?
 protected class JvmParameterizedTypeReference_Group_1 extends GroupToken {
 	
 	public JvmParameterizedTypeReference_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -569,7 +569,7 @@ protected class JvmParameterizedTypeReference_Group_1 extends GroupToken {
 
 }
 
-// "<"
+// => "<"
 protected class JvmParameterizedTypeReference_LessThanSignKeyword_1_0 extends KeywordToken  {
 	
 	public JvmParameterizedTypeReference_LessThanSignKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

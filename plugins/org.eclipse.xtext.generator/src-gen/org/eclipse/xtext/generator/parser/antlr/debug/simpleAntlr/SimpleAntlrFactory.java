@@ -71,6 +71,15 @@ public interface SimpleAntlrFactory extends EFactory
   RuleElement createRuleElement();
 
   /**
+   * Returns a new object of class '<em>Predicated</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Predicated</em>'.
+   * @generated
+   */
+  Predicated createPredicated();
+
+  /**
    * Returns a new object of class '<em>Rule Options</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

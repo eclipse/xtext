@@ -97,7 +97,7 @@ public class XtextFormatter extends AbstractDeclarativeFormatter {
 
 		// Assignment
 		AssignmentElements as = g.getAssignmentAccess();
-		cfg.setNoSpace().around(as.getOperatorAssignment_1());
+		cfg.setNoSpace().around(as.getOperatorAssignment_2());
 
 		// CrossReference
 		CrossReferenceElements cr = g.getCrossReferenceAccess();

@@ -45,7 +45,7 @@ XStringLiteral returns xbase::XExpression:
 		
 RichString returns xbase::XExpression:
 	{RichStringLiteral} value=RICH_TEXT |
-	{RichString} elements+=RichStringLiteralStart (elements+=RichStringPart elements+=RichStringLiteralInbetween)* elements+=RichStringPart elements+=RichStringLiteralEnd
+	{RichString} elements+=RichStringLiteralStart elements+=RichStringPart (elements+=RichStringLiteralInbetween elements+=RichStringPart)* elements+=RichStringLiteralEnd
 ;
 
 RichStringLiteralStart returns xbase::XExpression :

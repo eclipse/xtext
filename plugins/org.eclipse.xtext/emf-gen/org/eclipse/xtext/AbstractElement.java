@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.AbstractElement#getCardinality <em>Cardinality</em>}</li>
+ *   <li>{@link org.eclipse.xtext.AbstractElement#isPredicated <em>Predicated</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,5 +51,31 @@ public interface AbstractElement extends EObject {
 	 * @generated
 	 */
 	void setCardinality(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Predicated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Predicated</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Predicated</em>' attribute.
+	 * @see #setPredicated(boolean)
+	 * @see org.eclipse.xtext.XtextPackage#getAbstractElement_Predicated()
+	 * @model
+	 * @generated
+	 */
+	boolean isPredicated();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.AbstractElement#isPredicated <em>Predicated</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Predicated</em>' attribute.
+	 * @see #isPredicated()
+	 * @generated
+	 */
+	void setPredicated(boolean value);
 
 } // AbstractElement

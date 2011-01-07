@@ -139,7 +139,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		XBlockExpression bop = (XBlockExpression) expression(
 				"{" +
 				"	val size = 23;" +
-				"	String size|size;" +
+				"	[String size|size];" +
 				"}");
 		XClosure closure = (XClosure)bop.getExpressions().get(1);
 		assertSame(closure.getFormalParameters().get(0), ((XFeatureCall)closure.getExpression()).getFeature());
@@ -149,7 +149,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		XBlockExpression bop = (XBlockExpression) expression(
 				"{" +
 				"	val size = 23;" +
-				"	String x|size;" +
+				"	[String x|size];" +
 				"}");
 		XClosure closure = (XClosure)bop.getExpressions().get(1);
 		assertSame(bop.getExpressions().get(0), ((XFeatureCall)closure.getExpression()).getFeature());
@@ -159,8 +159,8 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		XBlockExpression bop = (XBlockExpression) expression(
 				"{" +
 				"	val size = 23;" +
-				"	String size| String x|size;" +
-		"}");
+				"	[String size| [String x|size]];" +
+				"}");
 		XClosure closure = (XClosure)bop.getExpressions().get(1);
 		assertSame(closure.getFormalParameters().get(0), ((XFeatureCall)((XClosure)closure.getExpression()).getExpression()).getFeature());
 	}
@@ -172,7 +172,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testTryCatch_1() throws Exception {
-		expression("try { (Boolean) 'literal' } catch(ClassCastException e) {e.getClass().getSimpleName()}", true);
+		expression("try { 'literal' as Boolean } catch(ClassCastException e) {e.getClass().getSimpleName()}", true);
 	}
 	
 	public void testFeatureCall() throws Exception {
@@ -215,7 +215,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		XBlockExpression block = (XBlockExpression) expression("{" +
 				"  val this = new testdata.MethodOverrides1();" +
 				"  m1('String');" +
-				"  m1((CharSequence)'CharSequence');" +
+				"  m1('CharSequence' as CharSequence);" +
 		"}");
 		XFeatureCall call1 = (XFeatureCall) block.getExpressions().get(1);
 		XFeatureCall call2 = (XFeatureCall) block.getExpressions().get(2);
@@ -227,8 +227,8 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		XBlockExpression block = (XBlockExpression) expression("{" +
 				"  val this = new testdata.MethodOverrides2();" +
 				"  m1('String');" +
-				"  m1((CharSequence)'CharSequence');" +
-				"  m1((Object)'String');" +
+				"  m1('CharSequence' as CharSequence);" +
+				"  m1('String' as Object);" +
 		"}");
 		XFeatureCall call1 = (XFeatureCall) block.getExpressions().get(1);
 		XFeatureCall call2 = (XFeatureCall) block.getExpressions().get(2);
@@ -244,7 +244,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	
 	public void testGenerics_1() throws Exception {
 		// linking is ok but should trigger a validation error
-		expression("((testdata.GenericType1<? extends java.lang.String>) null) += 'foo'", true);
+		expression("(null as testdata.GenericType1<? extends java.lang.String>) += 'foo'", true);
 	}
 	
 	public void testGenerics_2() throws Exception {

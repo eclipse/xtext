@@ -103,6 +103,11 @@ public class SimpleAntlrAdapterFactory extends AdapterFactoryImpl
         return createRuleElementAdapter();
       }
       @Override
+      public Adapter casePredicated(Predicated object)
+      {
+        return createPredicatedAdapter();
+      }
+      @Override
       public Adapter caseRuleOptions(RuleOptions object)
       {
         return createRuleOptionsAdapter();
@@ -245,6 +250,21 @@ public class SimpleAntlrAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createRuleElementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Predicated <em>Predicated</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Predicated
+   * @generated
+   */
+  public Adapter createPredicatedAdapter()
   {
     return null;
   }

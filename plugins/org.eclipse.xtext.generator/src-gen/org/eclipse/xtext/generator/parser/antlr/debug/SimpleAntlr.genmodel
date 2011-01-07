@@ -27,6 +27,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//Rule/body"/>
     </genClasses>
     <genClasses ecoreClass="SimpleAntlr.ecore#//RuleElement"/>
+    <genClasses ecoreClass="SimpleAntlr.ecore#//Predicated">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//Predicated/predicate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//Predicated/element"/>
+    </genClasses>
     <genClasses ecoreClass="SimpleAntlr.ecore#//RuleOptions">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//RuleOptions/options"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//RuleOptions/element"/>

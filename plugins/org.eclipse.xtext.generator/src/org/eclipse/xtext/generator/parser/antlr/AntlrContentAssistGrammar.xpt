@@ -26,7 +26,7 @@ grammar «getGrammarFileName().toSimpleName()»;
 
 options {
 	superClass=AbstractInternalContentAssistParser;
-	«IF options.backtrack-»
+	«IF options.backtrack || !allPredicatedElements().isEmpty-»
 	backtrack=true;
 	«ENDIF-»
 	«IF options.memoize-»

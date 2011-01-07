@@ -20,6 +20,7 @@ import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Keyword;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.NegatedElement;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.OptionValue;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Options;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Predicated;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Rule;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleCall;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleElement;
@@ -72,6 +73,13 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * @generated
    */
   private EClass ruleElementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass predicatedEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -351,6 +359,36 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getPredicated()
+  {
+    return predicatedEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getPredicated_Predicate()
+  {
+    return (EReference)predicatedEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getPredicated_Element()
+  {
+    return (EReference)predicatedEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getRuleOptions()
   {
     return ruleOptionsEClass;
@@ -605,6 +643,10 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
 
     ruleElementEClass = createEClass(RULE_ELEMENT);
 
+    predicatedEClass = createEClass(PREDICATED);
+    createEReference(predicatedEClass, PREDICATED__PREDICATE);
+    createEReference(predicatedEClass, PREDICATED__ELEMENT);
+
     ruleOptionsEClass = createEClass(RULE_OPTIONS);
     createEReference(ruleOptionsEClass, RULE_OPTIONS__OPTIONS);
     createEReference(ruleOptionsEClass, RULE_OPTIONS__ELEMENT);
@@ -666,6 +708,7 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    predicatedEClass.getESuperTypes().add(this.getRuleElement());
     ruleOptionsEClass.getESuperTypes().add(this.getRuleElement());
     ruleCallEClass.getESuperTypes().add(this.getRuleElement());
     keywordEClass.getESuperTypes().add(this.getRuleElement());
@@ -696,6 +739,10 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
     initEReference(getRule_Body(), this.getRuleElement(), null, "body", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ruleElementEClass, RuleElement.class, "RuleElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(predicatedEClass, Predicated.class, "Predicated", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getPredicated_Predicate(), this.getRuleElement(), null, "predicate", null, 0, 1, Predicated.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPredicated_Element(), this.getRuleElement(), null, "element", null, 0, 1, Predicated.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ruleOptionsEClass, RuleOptions.class, "RuleOptions", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getRuleOptions_Options(), this.getOptions(), null, "options", null, 0, 1, RuleOptions.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

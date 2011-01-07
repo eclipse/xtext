@@ -5,8 +5,6 @@ grammar InternalXtype;
 
 options {
 	superClass=AbstractInternalAntlrParser;
-	backtrack=true;
-	 memoize=true;
 	
 }
 
@@ -36,11 +34,6 @@ import org.eclipse.xtext.xbase.services.XtypeGrammarAccess;
 
 @parser::members {
 
-/*
-  This grammar contains a lot of empty actions to work around a bug in ANTLR.
-  Otherwise the ANTLR tool will create synpreds that cannot be compiled in some rare cases.
-*/
- 
  	private XtypeGrammarAccess grammarAccess;
  	
     public InternalXtypeParser(TokenStream input, XtypeGrammarAccess grammarAccess) {
@@ -85,9 +78,6 @@ ruleJvmTypeReference returns [EObject current=null]
     }
     @after { leaveRule(); }:
 (
-	{ 
-	  /* */ 
-	}
     { 
         newCompositeNode(grammarAccess.getJvmTypeReferenceAccess().getJvmParameterizedTypeReferenceParserRuleCall_0()); 
     }
@@ -98,9 +88,6 @@ ruleJvmTypeReference returns [EObject current=null]
     }
 
     |
-	{ 
-	  /* */ 
-	}
     { 
         newCompositeNode(grammarAccess.getJvmTypeReferenceAccess().getXFunctionTypeRefParserRuleCall_1()); 
     }
@@ -223,9 +210,6 @@ ruleJvmParameterizedTypeReference returns [EObject current=null]
     @after { leaveRule(); }:
 ((
 (
-		{ 
-		  /* */ 
-		}
 		{
 			if ($current==null) {
 	            $current = createModelElement(grammarAccess.getJvmParameterizedTypeReferenceRule());
@@ -239,11 +223,12 @@ ruleJvmParameterizedTypeReference returns [EObject current=null]
 	    }
 
 )
-)(	otherlv_1='<' 
+)(((	'<' 
+)=>	otherlv_1='<' 
     {
     	newLeafNode(otherlv_1, grammarAccess.getJvmParameterizedTypeReferenceAccess().getLessThanSignKeyword_1_0());
     }
-(
+)(
 (
 		{ 
 	        newCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0()); 
@@ -309,9 +294,6 @@ ruleJvmArgumentTypeReference returns [EObject current=null]
     }
     @after { leaveRule(); }:
 (
-	{ 
-	  /* */ 
-	}
     { 
         newCompositeNode(grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmTypeReferenceParserRuleCall_0()); 
     }
@@ -322,9 +304,6 @@ ruleJvmArgumentTypeReference returns [EObject current=null]
     }
 
     |
-	{ 
-	  /* */ 
-	}
     { 
         newCompositeNode(grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmWildcardTypeReferenceParserRuleCall_1()); 
     }
@@ -355,9 +334,6 @@ ruleJvmWildcardTypeReference returns [EObject current=null]
     }
     @after { leaveRule(); }:
 ((
-	{ 
-	  /* */ 
-	}
     {
         $current = forceCreateModelElement(
             grammarAccess.getJvmWildcardTypeReferenceAccess().getJvmWildcardTypeReferenceAction_0(),
@@ -587,7 +563,7 @@ RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 
-RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
+RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 

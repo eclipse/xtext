@@ -72,6 +72,7 @@ public class SimpleAntlrFactoryImpl extends EFactoryImpl implements SimpleAntlrF
       case SimpleAntlrPackage.OPTION_VALUE: return createOptionValue();
       case SimpleAntlrPackage.RULE: return createRule();
       case SimpleAntlrPackage.RULE_ELEMENT: return createRuleElement();
+      case SimpleAntlrPackage.PREDICATED: return createPredicated();
       case SimpleAntlrPackage.RULE_OPTIONS: return createRuleOptions();
       case SimpleAntlrPackage.RULE_CALL: return createRuleCall();
       case SimpleAntlrPackage.KEYWORD: return createKeyword();
@@ -140,6 +141,17 @@ public class SimpleAntlrFactoryImpl extends EFactoryImpl implements SimpleAntlrF
   {
     RuleElementImpl ruleElement = new RuleElementImpl();
     return ruleElement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Predicated createPredicated()
+  {
+    PredicatedImpl predicated = new PredicatedImpl();
+    return predicated;
   }
 
   /**
