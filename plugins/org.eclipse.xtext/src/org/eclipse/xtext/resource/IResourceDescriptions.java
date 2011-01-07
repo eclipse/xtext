@@ -25,17 +25,20 @@ public interface IResourceDescriptions extends ISelectable {
 
 	Iterable<IResourceDescription> getAllResourceDescriptions();
 
-	IResourceDescription getResourceDescription(URI uri);
+	/**
+	 * Returns the resource descriptions for the given URI. It's the client's responsibility to normalize the URI.
+	 */
+	IResourceDescription getResourceDescription(URI normalizedURI);
 
 	/**
-	 * A context aware instance {@link IResourceDescriptions}.
-	 * Needs to be configured with the current context before used.
+	 * A context aware instance {@link IResourceDescriptions}. Needs to be configured with the current context before
+	 * used.
 	 */
 	interface IContextAware extends IResourceDescriptions {
-		
+
 		void setContext(Notifier ctx);
 	}
-	
+
 	class NullImpl implements IResourceDescriptions {
 
 		public Iterable<IResourceDescription> getAllResourceDescriptions() {

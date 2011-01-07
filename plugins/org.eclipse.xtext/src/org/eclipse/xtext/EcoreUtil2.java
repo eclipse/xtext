@@ -239,7 +239,7 @@ public class EcoreUtil2 extends EcoreUtil {
 		String fragment = resource.getURIFragment(eObject);
 		return fragment;
 	}
-
+	
 	public static EClassifier getCompatibleType(EClassifier typeA, EClassifier typeB) {
 		if (typeA.equals(typeB))
 			return typeA;
@@ -567,5 +567,29 @@ public class EcoreUtil2 extends EcoreUtil {
 
 	public static boolean hasSameURI(EObject o0, EObject o1) {
 		return EcoreUtil.getURI(o0).equals(EcoreUtil.getURI(o1));
+	}
+	
+	public static URI getNormalizedResourceURI(EObject eObject) {
+		if(eObject.eResource() != null)
+			return getNormalizedURI(eObject.eResource());
+		return URIConverter.INSTANCE.normalize(EcoreUtil.getURI(eObject).trimFragment());
+	}
+	
+	public static URI getNormalizedURI(EObject eObject) {
+		URI rawURI = EcoreUtil.getURI(eObject);
+		Resource resource = eObject.eResource();
+		if(resource != null && resource.getResourceSet() != null) {
+			return resource.getResourceSet().getURIConverter().normalize(rawURI);
+		} else {
+			return URIConverter.INSTANCE.normalize(rawURI);
+		}
+	}
+
+	public static URI getNormalizedURI(Resource resource) {
+		if(resource.getResourceSet() != null) {
+			return resource.getResourceSet().getURIConverter().normalize(resource.getURI());
+		} else {
+			return URIConverter.INSTANCE.normalize(resource.getURI());
+		}
 	}
 }

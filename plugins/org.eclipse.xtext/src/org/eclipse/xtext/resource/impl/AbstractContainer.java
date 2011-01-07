@@ -11,7 +11,7 @@ import java.util.Collections;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -50,13 +50,7 @@ public abstract class AbstractContainer extends AbstractCompoundSelectable imple
 	
 	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(final EObject object) {
-		URI resourceURI = null;
-		if (object.eResource() != null) {
-			resourceURI = object.eResource().getURI();
-		} else {
-			URI uri = EcoreUtil.getURI(object);
-			resourceURI = uri.trimFragment();
-		}
+		URI resourceURI = EcoreUtil2.getNormalizedResourceURI(object);
 		IResourceDescription description = getResourceDescription(resourceURI);
 		if (description == null)
 			return Collections.emptyList();
