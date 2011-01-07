@@ -1,6 +1,6 @@
 document[Xtend2 Language Specification]
 
-authors[Sven Efftinge, et al.]
+authors[Sven Efftinge, Sebastian Zarnekow, et al.]
 
 codelanguage-def[Java][
 	abstract,continue,for,new,switch,assert,default,goto,package,synchronized,

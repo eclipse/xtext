@@ -5,6 +5,8 @@
 <topic href="contents/02-LanguageConcepts.xdoc.html#packageDecl" label="Package Declaration" >
 <topic href="contents/02-LanguageConcepts.xdoc.html#packageDecl-2" label="Syntax" >
 </topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#packageDecl-3" label="Examples" >
+</topic>
 </topic>
 <topic href="contents/02-LanguageConcepts.xdoc.html#imports" label="Imports" >
 <topic href="contents/02-LanguageConcepts.xdoc.html#importExtension" label="Importing Extension Methods" >
@@ -42,25 +44,23 @@
 <topic href="contents/02-LanguageConcepts.xdoc.html#Functions-7" label="Generics" >
 </topic>
 <topic href="contents/02-LanguageConcepts.xdoc.html#polymorphicDispatch" label="Polymorphic Method Overloading" >
-<topic href="contents/02-LanguageConcepts.xdoc.html#polymorphicDispatch-4" label="How overloaded method are translated to Java" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#polymorphicDispatch-6" label="How case methods are translated to Java" >
 </topic>
-<topic href="contents/02-LanguageConcepts.xdoc.html#polymorphicDispatch-5" label="Overloading Functions from Super Types" >
-</topic>
-<topic href="contents/02-LanguageConcepts.xdoc.html#polymorphicDispatch-6" label="Excluding functions from polymorphic dispatch" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#polymorphicDispatch-7" label="Overloading Functions from Super Types" >
 </topic>
 </topic>
 <topic href="contents/02-LanguageConcepts.xdoc.html#Functions-9" label="Syntax" >
 </topic>
 </topic>
 <topic href="contents/02-LanguageConcepts.xdoc.html#Expressions" label="Expressions (in addition Xbase)" >
-<topic href="contents/02-LanguageConcepts.xdoc.html" label="Rich Strings" >
-<topic href="contents/03-RichStrings.xdoc.html#RichStringIF" label="Conditions in Rich Strings" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#Expressions-2" label="Rich Strings" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#RichStringIF" label="Conditions in Rich Strings" >
 </topic>
-<topic href="contents/03-RichStrings.xdoc.html#RichStringFOREACH" label="Loops in Rich Strings" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#RichStringFOREACH" label="Loops in Rich Strings" >
 </topic>
-<topic href="contents/03-RichStrings.xdoc.html#RichStringType" label="Typing" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#RichStringType" label="Typing" >
 </topic>
-<topic href="contents/03-RichStrings.xdoc.html#WhitespaceHandling" label="Whitespace Handling" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#WhitespaceHandling" label="Whitespace Handling" >
 </topic>
 </topic>
 <topic href="contents/02-LanguageConcepts.xdoc.html#extensionMethods" label="Extension Method Syntax" >

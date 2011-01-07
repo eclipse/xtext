@@ -19,7 +19,7 @@ Here is an example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-package&nbsp;com.acme;<br /><br />import&nbsp;java.util.List;<br /><br />class&nbsp;MyClass&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />
+package&nbsp;com.acme<br /><br />import&nbsp;java.util.List<br /><br />class&nbsp;MyClass&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />
 </p>
 </div>
 </div>
@@ -45,7 +45,8 @@ Package Declaration
 
 
 <p>
-Package declarations are like in Java, with the small difference, that an identifier can be escaped with a <em>^</em> in case it conflicts with a keyword.
+Package declarations are like in Java, with the small difference, that an identifier can be escaped with a  <em>^</em> in case it conflicts with a keyword.
+Also you don&apos;t terminate a package decalaration with a semicolon.
 </p>
 
 
@@ -81,6 +82,48 @@ PackageDeclaration&nbsp;:&nbsp;&apos;package&apos;&nbsp;QualifiedName;<br />Qual
 
 </div>
 
+
+
+<a name="packageDecl-3"></a>
+<div class="section" title="Examples">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Examples
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+package&nbsp;org.eclipse.xtext<br />
+</p>
+</div>
+</div>
+
+
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+package&nbsp;my.^public.^package<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+</div>
+
 </div>
 
 <a name="imports"></a>
@@ -100,7 +143,9 @@ Imports
 
 
 <p>
-The ordinary imports of type names are equivalent to the imports known from Java. Again one can escape any names conflicting with keywords using the <em>^</em>.
+The ordinary imports of type names are equivalent to the imports known from Java. 
+Again one can escape any names conflicting with keywords using the <em>^</em> and the import statemet is never
+terminated with a semicolon.
 </p>
 
 
@@ -181,7 +226,7 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-ImportSection&nbsp;:&nbsp;(Import|Injection)*;<br />Import&nbsp;:&nbsp;&apos;import&apos;&nbsp;&apos;extension&apos;?&nbsp;QualifiedName&nbsp;((&apos;.&apos;&apos;*&apos;)|&apos;(&apos;ID&nbsp;(&apos;,&apos;&nbsp;ID)&apos;)&apos;)?;<br />
+ImportSection&nbsp;:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(Import|Injection)*;<br />Import&nbsp;:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;import&apos;&nbsp;&apos;extension&apos;?&nbsp;QualifiedName&nbsp;((&apos;.&apos;&apos;*&apos;)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&apos;(&apos;ID&nbsp;(&apos;,&apos;&nbsp;ID)&apos;)&apos;)?;<br />
 </p>
 </div>
 </div>
@@ -455,7 +500,7 @@ or allows you to write against an SPI, where the concrete implementation can be 
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-ImportSection&nbsp;:&nbsp;(Import|Injection)*;<br />Import&nbsp;:&nbsp;...<br />Injection&nbsp;:&nbsp;&apos;inject&apos;&nbsp;&apos;extension&apos;?&nbsp;(&apos;@&apos;STRING&nbsp;|&nbsp;&apos;@&apos;TypeReference)&nbsp;TypeReference&nbsp;(&apos;(&apos;ID&nbsp;(&apos;,&apos;&nbsp;ID)&apos;)&apos;)?;<br />
+ImportSection&nbsp;:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(Import|Injection)*;<br />Import&nbsp;:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;...<br />Injection&nbsp;:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;inject&apos;&nbsp;&apos;extension&apos;?&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(&apos;@&apos;STRING&nbsp;|&nbsp;&apos;@&apos;TypeReference)?&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;TypeReference&nbsp;(&apos;(&apos;ID&nbsp;(&apos;,&apos;&nbsp;ID)*&apos;)&apos;)?;<br />
 </p>
 </div>
 </div>
@@ -590,7 +635,7 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-ClassDeclaration&nbsp;:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(Visibility|&apos;abstract&apos;|&apos;final&apos;)*&nbsp;&apos;class&apos;&nbsp;TypeParameters?&nbsp;(&apos;extends&apos;&nbsp;QualifiedName)?&nbsp;(&apos;implements&apos;&nbsp;QualifiedName&nbsp;(&apos;,&apos;&nbsp;QualifiedName)*)?&nbsp;&apos;{&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Members*<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;}&apos;<br />;<br />Visibility&nbsp;:&nbsp;&apos;public&apos;|&apos;protected&apos;|&apos;private&apos;;<br /><br />
+ClassDeclaration&nbsp;:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(Visibility|&apos;abstract&apos;|&apos;final&apos;)*&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;class&apos;&nbsp;TypeParameters?&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(&apos;extends&apos;&nbsp;QualifiedName)?&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(&apos;implements&apos;&nbsp;QualifiedName&nbsp;(&apos;,&apos;&nbsp;QualifiedName)*)?&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;{&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Members*<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;}&apos;<br />;<br />Visibility&nbsp;:&nbsp;&apos;public&apos;|&apos;protected&apos;|&apos;private&apos;;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />
 </p>
 </div>
 </div>
@@ -621,7 +666,7 @@ Functions
 
 <p>
 Xtend2 functions are declared within a class and are usually translated to a corresponding Java method with the exact same signature. 
-The only exception is overloaded methods, which compile to a single method. This is explained in the section about 
+The only exception is case methods, which compile to a single method. This is explained in the section about 
 <a href="02-LanguageConcepts.xdoc.html#polymorphicDispatch">section polymorphicDispatch</a>. 
 </p>
 
@@ -658,7 +703,8 @@ Visibility
 
 <p>
 The default visibility of a function is <span class="inlinecode">public</span>
-, which can also be declared explicitly. The two other available visibilities are <span class="inlinecode">protected</span>
+, which can also be declared explicitly. 
+The two other available visibilities are <span class="inlinecode">protected</span>
  and <span class="inlinecode">private</span>
 .
 </p>
@@ -688,7 +734,7 @@ Like Java methods an Xtend2 function can be declared non overridable using the k
 </p>
 
 <p>
-Also if a function overrides a method from the suberclass, the <span class="inlinecode">override</span>
+Also if a function overrides a method from the super class, the <span class="inlinecode">override</span>
  keyword is mandatory.
 </p>
 
@@ -742,6 +788,11 @@ Boolean&nbsp;myAbstractFunction(String&nbsp;s1,String&nbsp;s2);<br />
 </div>
 
 
+</p>
+
+<p>
+In such cases the class needs to be flagged <span class="inlinecode">abstract</span>
+ otherwise the compiler will complain.
 </p>
 
 
@@ -825,6 +876,14 @@ Generics
 
 <p>
 Full Java Generics with the exact same syntax and semantics are supported.
+Raw types, i.e. parameterized types without type parameters are treated as if each type parameter were
+a wild card.
+</p>
+
+<p>
+That is <span class="inlinecode">List</span>
+ is the same as  <span class="inlinecode">List&lt;?&gt;</span>
+
 </p>
 
 
@@ -847,9 +906,24 @@ Polymorphic Method Overloading
 
 
 <p>
-It is possible to overload methods, but overloaded methods are not invoked based on the static types of arguments as in Java.
-In Xtend2 an overloaded method is invoked based on the rutime types of the arguments. This has a lot of advantages and is a very convenient way 
-to add functionality to heterogenous data structors especially with deeper type hierarchies (i.e. EMF models and other typed domain models).
+It is possible to overload methods like in Java, and the resolution is also like in Java based on the
+static type of the arguments and only dynamic polymorphic on the receiver.
+However Xtend2 supports the special notion of case methods, which makes such overloaded methods polymorphic
+dispatched.
+</p>
+
+<p>
+Such methods get the keyword <span class="inlinecode">case</span>
+ and all methods with the same name and the same number of arguments
+need either be marked with <span class="inlinecode">case</span>
+ or not.
+</p>
+
+<p>
+If they are marked as case methods, the compiler will infer one method with the most common argument
+types which contains an if else cascade dispatching between the different case methods based on the actual
+runtime types of the arguments. This has a lot of advantages and is a very convenient way 
+to add functionality to heterogenous data structures especially with deeper type hierarchies (i.e. EMF models and other typed domain models).
 It essentially eleminates the problem the visitor pattern is trying to solve.
 </p>
 
@@ -862,7 +936,7 @@ This allows you to write a code generator by defining a function for all kinds o
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-class&nbsp;MyCompiler&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;compile(CompilationUnit&nbsp;cu)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;cu.types.compile()&nbsp;...;<br />&nbsp;&nbsp;&nbsp;&nbsp;compile(Interface&nbsp;interface)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;cu.members.compile()&nbsp;...;<br />&nbsp;&nbsp;&nbsp;&nbsp;compile(Class&nbsp;cu)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;cu.members.compile()&nbsp;...;<br />&nbsp;&nbsp;&nbsp;&nbsp;compile(Field&nbsp;cu)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...;<br />&nbsp;&nbsp;&nbsp;&nbsp;...<br />}<br />
+class&nbsp;MyCompiler&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;compile(CompilationUnit&nbsp;cu)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;cu.types.compile()&nbsp;...;<br />&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;compile(Interface&nbsp;interface)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;cu.members.compile()&nbsp;...;<br />&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;compile(Class&nbsp;cu)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;cu.members.compile()&nbsp;...;<br />&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;compile(Field&nbsp;cu)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...;<br />&nbsp;&nbsp;&nbsp;&nbsp;...<br />}<br />
 </p>
 </div>
 </div>
@@ -873,13 +947,13 @@ class&nbsp;MyCompiler&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;compile(CompilationUni
 
 
 
-<a name="polymorphicDispatch-4"></a>
-<div class="section" title="How overloaded method are translated to Java">
+<a name="polymorphicDispatch-6"></a>
+<div class="section" title="How case methods are translated to Java">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
-How overloaded method are translated to Java
+How case methods are translated to Java
 </h4>
 </div>
 </div>
@@ -888,11 +962,16 @@ How overloaded method are translated to Java
 
 
 <p>
-The polymorphic behavior of overloaded methods shall be transparently work no matter you call such a function from Java, Xtend2 or any other JVM language.
+The polymorphic behavior of case methods shall be transparently work no matter you call such a function from Java, Xtend2 or any other JVM language.
 Therefore the runtime dispatch is not done on the caller&apos;s side but on the declaration side. 
-For each set of methods where the name is equal and the number of arguments is equal, the most common dominator signature is taken 
-or computed if there is no most common denominator. Only for that signature a Java method is generated. 
-Within the implementation the correct method is looked up at runtime using if else cascades.
+For each set of case methods where the name is equal and the number of arguments is equal, the most common denominator signature is taken 
+or computed if there is no most common denominator. Only for that signature a Java method with the given
+name is generated, all the case methods are generated to protected methods where the name is prefixed with an
+underscore. 
+</p>
+
+<p>
+Within the implementation of the dispatch method the correct case method is looked up at runtime using if else cascades.
 This is done by sorting the methods from most specific to least specific and generating an if-else cascade for the code.
 </p>
 
@@ -902,7 +981,7 @@ Example: The following functions
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-foo(Number&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;some&nbsp;number&apos;;<br />foo(Integer&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;an&nbsp;int&apos;;<br />
+foo(Number&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;a&nbsp;number&apos;;<br />foo(Integer&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;an&nbsp;int&apos;;<br />
 </p>
 </div>
 </div>
@@ -919,7 +998,7 @@ compile to the following Java method:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x==&nbsp;null&nbsp;||&nbsp;x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;"it&apos;s&nbsp;an&nbsp;int";<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;"it&apos;s&nbsp;some&nbsp;number";<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}&nbsp;<br />
+<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Integer)x);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Number)x);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Couldn&apos;t&nbsp;dispatch.&nbsp;Argument&nbsp;was&nbsp;Number&nbsp;x&nbsp;:"+x);<br />}&nbsp;<br /><br /><span class="keyword">protected</span>&nbsp;String&nbsp;_foo(Integer&nbsp;x)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;"It&apos;s&nbsp;an&nbsp;int";<br />}<br /><br /><span class="keyword">protected</span>&nbsp;String&nbsp;_foo(Number&nbsp;x)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;"It&apos;s&nbsp;a&nbsp;number";<br />}<br />
 </p>
 </div>
 </div>
@@ -938,7 +1017,7 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-foo(Number&nbsp;x,&nbsp;Integer&nbsp;y)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;some&nbsp;number&nbsp;and&nbsp;an&nbsp;int&apos;;<br />foo(Integer&nbsp;x,&nbsp;Number&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;an&nbsp;int&nbsp;and&nbsp;a&nbsp;number&apos;;<br />
+foo(Number&nbsp;x,&nbsp;Integer&nbsp;y)&nbsp;:&nbsp;"it&apos;s&nbsp;some&nbsp;number&nbsp;and&nbsp;an&nbsp;int";<br />foo(Integer&nbsp;x,&nbsp;Number&nbsp;x)&nbsp;:&nbsp;"it&apos;s&nbsp;an&nbsp;int&nbsp;and&nbsp;a&nbsp;number";<br />
 </p>
 </div>
 </div>
@@ -951,7 +1030,7 @@ foo(Number&nbsp;x,&nbsp;Integer&nbsp;y)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;some&nb
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;((x==&nbsp;null&nbsp;||&nbsp;x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)&nbsp;&amp;&amp;&nbsp;(y==&nbsp;null&nbsp;||y&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;"it&apos;s&nbsp;some&nbsp;number&nbsp;and&nbsp;an&nbsp;int";<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;((x==&nbsp;null&nbsp;||&nbsp;x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;&amp;&amp;&nbsp;(y==&nbsp;null&nbsp;||&nbsp;y&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;"it&apos;s&nbsp;an&nbsp;int&nbsp;and&nbsp;a&nbsp;number";<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;UnsupportedOperationException("foo&nbsp;is&nbsp;not&nbsp;implemented&nbsp;for&nbsp;arguments&nbsp;"+x+"&nbsp;and&nbsp;"+y);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}&nbsp;<br />
+<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x,&nbsp;Number&nbsp;y)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;((x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp;&nbsp;(y&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Number)x,(Integer)y);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;((x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp;&nbsp;(y&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Integer)x,(Number)y);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Couldn&apos;t&nbsp;handle&nbsp;Number&nbsp;x:"+x+",&nbsp;Number&nbsp;y:"+y);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}&nbsp;<br />
 </p>
 </div>
 </div>
@@ -960,7 +1039,7 @@ foo(Number&nbsp;x,&nbsp;Integer&nbsp;y)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;some&nb
 </p>
 
 <p>
-As you can see a null reference is always a match. If you want to fetch null you can declare a parameter using the type <span class="inlinecode">java.lang.Void</span>
+As you can see a null reference is never a match. If you want to fetch null you can declare a parameter using the type <span class="inlinecode">java.lang.Void</span>
 .
 </p>
 
@@ -986,7 +1065,7 @@ Which compiles to the following Java code:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x==&nbsp;null)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;NullPointerException("x")<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x==&nbsp;null&nbsp;||&nbsp;x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;"it&apos;s&nbsp;an&nbsp;int";<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;"it&apos;s&nbsp;some&nbsp;number";<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}&nbsp;<br />
+<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Integer)x);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Number)x);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;==&nbsp;null)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Void)null);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Couldn&apos;t&nbsp;handle&nbsp;Number&nbsp;x:"+x+",&nbsp;Number&nbsp;y:"+y);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}&nbsp;<br />
 </p>
 </div>
 </div>
@@ -994,17 +1073,12 @@ Which compiles to the following Java code:
 
 </p>
 
-<p>
-Note that the type <span class="inlinecode">java.lang.Void</span>
- is considered the most specific type and will always have higher precedence than any other types in the ordering.
-</p>
-
 
 </div>
 
 
 
-<a name="polymorphicDispatch-5"></a>
+<a name="polymorphicDispatch-7"></a>
 <div class="section" title="Overloading Functions from Super Types">
 <div class="titlepage">
 <div>
@@ -1019,33 +1093,30 @@ Overloading Functions from Super Types
 
 
 <p>
-Functions (or Java Methods) from super types are not included in the dispatch. You&apos;ll have to call them explicitly using the <span class="inlinecode">super</span>
- reference. 
+Any methods from super types conforming to the compiled form of a case method are also included in the
+dispatch. Conforming means they have the right number of arguments and start with an underscore.
 </p>
 
-
-</div>
-
-
-
-<a name="polymorphicDispatch-6"></a>
-<div class="section" title="Excluding functions from polymorphic dispatch">
-<div class="titlepage">
-<div>
-<div>
-<h4 class="title">
-Excluding functions from polymorphic dispatch
-</h4>
-</div>
-</div>
-</div>
-
-
+<p>
+Example:
+</p>
 
 <p>
-Sometimes you need to have the static dispatch from Java, for instance if you implement an interface with two method declarations where one overloads 
-the other. In that case you have to add the keyword <span class="inlinecode">no-dispatch</span>
-.
+Consider the following Java class :
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+public&nbsp;abstract&nbsp;class&nbsp;AbstractLabelProvider&nbsp;{<br />&nbsp;&nbsp;&nbsp;protected&nbsp;String&nbsp;_label(Object&nbsp;o)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;some&nbsp;generic&nbsp;implementation<br />&nbsp;&nbsp;&nbsp;}<br />}<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+and the following xtend class extends it like this:
 </p>
 
 <p>
@@ -1053,7 +1124,7 @@ the other. In that case you have to add the keyword <span class="inlinecode">no-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-no-dispatch&nbsp;foo(Number&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;some&nbsp;number&apos;;<br />foo(Integer&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;an&nbsp;int&apos;;<br />foo(Void&nbsp;x)&nbsp;:&nbsp;throw&nbsp;new&nbsp;NullPointerException("x");<br />
+class&nbsp;MyLabelProvider&nbsp;extends&nbsp;AbstractLabelProvider&nbsp;{<br />&nbsp;&nbsp;&nbsp;case&nbsp;label(Entity&nbsp;this)&nbsp;name<br />&nbsp;&nbsp;&nbsp;case&nbsp;label(Method&nbsp;this)&nbsp;name+"("+params.toString(",")+"):"+type<br />&nbsp;&nbsp;&nbsp;case&nbsp;label(Field&nbsp;this)&nbsp;name+type<br />}<br />
 </p>
 </div>
 </div>
@@ -1062,11 +1133,20 @@ no-dispatch&nbsp;foo(Number&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;some&nbsp;n
 </p>
 
 <p>
-In this case the resulting Java class will have two methods, one for Number and one containing the polymorphic dispatch for <span class="inlinecode">Void</span>
+The resulting dispatch method in the generated Java class &apos;MyLabelProvider&apos; looks like this:
+</p>
 
-and <span class="inlinecode">Integer</span>
-, which will have the most common signature <span class="inlinecode">foo(Integer&nbsp;x)</span>
-.
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+public&nbsp;String&nbsp;label(Object&nbsp;o)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(o&nbsp;instanceof&nbsp;Field)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;_label((Field)o);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;if&nbsp;(o&nbsp;instanceof&nbsp;Method){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;_foo((Method)o);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;if&nbsp;(o&nbsp;instanceof&nbsp;Entity){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;_foo((Entity)o);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;if&nbsp;(o&nbsp;instanceof&nbsp;Object){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;_foo((Object)o);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;IllegalArgumentException(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Couldn&apos;t&nbsp;handle&nbsp;Object&nbsp;o:"+o);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />
+</p>
+</div>
+</div>
+
+
 </p>
 
 
@@ -1091,8 +1171,8 @@ Syntax
 
 
 <p>
-Syntactically Xtend functions are much like Java methods, expect that there are no static methods, the return types are optional and of course the function body
-consists of one expression instead of a sequence of statements. 
+Syntactically Xtend functions are much like Java methods, expect that there are no static methods, the return types are optional and 
+of course the function body consists of one expression instead of a sequence of statements. 
 </p>
 
 <p>
@@ -1100,7 +1180,7 @@ consists of one expression instead of a sequence of statements.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-FunctionDef&nbsp;:&nbsp;(&apos;public&apos;|&apos;protected&apos;|&apos;private&apos;|&apos;abstract&apos;|&apos;final&apos;)*&nbsp;TypeParameters?&nbsp;TypeRef?&nbsp;ID&apos;(&apos;(ParameterDeclaration&nbsp;(&apos;,&apos;&nbsp;ParameterDeclaration)*)?&apos;)&apos;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(&apos;throws&apos;&nbsp;TypeRef&nbsp;(&apos;,&apos;&nbsp;TypeRef)*)?<br />&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;&apos;:&apos;&nbsp;Expression&nbsp;&apos;;&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;BlockExpression<br />&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&apos;;&apos;)<br />
+FunctionDef&nbsp;:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(&apos;public&apos;|&apos;protected&apos;|&apos;private&apos;|&apos;final&apos;|&apos;case&apos;|&apos;override&apos;)*&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;TypeParameters?&nbsp;TypeRef?&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;ID&apos;(&apos;(ParameterDeclaration&nbsp;(&apos;,&apos;&nbsp;ParameterDeclaration)*)?&apos;)&apos;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(&apos;throws&apos;&nbsp;TypeRef&nbsp;(&apos;,&apos;&nbsp;TypeRef)*)?<br />&nbsp;&nbsp;&nbsp;&nbsp;Expression<br />;<br />
 </p>
 </div>
 </div>
@@ -1361,7 +1441,6 @@ nested nodes.
 <td>
 
 
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
@@ -1372,10 +1451,8 @@ class&nbsp;Template&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;print(Node&nbsp;this)&nb
 
 
 
-
 </td>
 <td>
-
 
 
 <div class="literallayout">
@@ -1388,11 +1465,8 @@ node&nbsp;NodeName{}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
 
-
 </td>
-
 </tr>
-
 </table>
 
 </p>
@@ -1411,7 +1485,6 @@ for readability of the template itself.
 <td>
 
 
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
@@ -1422,10 +1495,8 @@ class&nbsp;Template&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;print(Node&nbsp;this)&nb
 
 
 
-
 </td>
 <td>
-
 
 
 <div class="literallayout">
@@ -1438,11 +1509,8 @@ node&nbsp;Parent{<br />&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;FirstChild&nbsp;{<br />
 
 
 
-
 </td>
-
 </tr>
-
 </table>
 
 </p>
@@ -1485,10 +1553,11 @@ Extension Method Syntax
 
 
 <p>
-Imports and injections preceded with 
+Static methods from imports and methods from injected objects where the declaration
+is preceded with 
 <a href="02-LanguageConcepts.xdoc.html#importExtension">the keyword <span class="inlinecode">extension</span>
-</a> can be called using the extension method syntax.
-This means that a function imported through a static import, like e.g. java.util.Collections.singleton(T) can be invoked using 
+</a> can be called using the member syntax.
+This means that a method imported through a static import, like e.g. java.util.Collections.singleton(T) can be invoked using 
 the member syntax.
 </p>
 
@@ -1532,7 +1601,7 @@ Note that extension methods never shadow a member of the current reference. That
 , a method <span class="inlinecode">singleton()</span>
  or a method
 <span class="inlinecode">getSingleton()</span>
-, those memebers would be referenced. That is done at compile time, so the tooling is able to tell you what you actually reference.
+, those members would be referenced. That is done at compile time, so the tooling is able to tell you what you actually reference.
 </p>
 
 <p>
@@ -1640,13 +1709,13 @@ Create Expression
 
 
 <p>
-Xtend2 supports model to model transformations. There is actually only one little problem a transformation language has to solve, which is to
-get rid of the need to transform a net of objects in two phases. This is unforntunately necessary because you would end up with endless recursion
+Xtend2 supports model to model transformations. The single most important problem a transformation language has to solve, is to
+get rid of the need to transform a net of objects in two phases. This is unfortunately necessary because you would end up with endless recursion
 if you write a mapping between objects but these objects are connected in a circular way, which is almost always the case.
 </p>
 
 <p>
-Consider you want to transform the following Java interface to Java Class with an abstract method:
+Consider you want to transform the AST of the following Java interface to Java Class with an abstract method:
 </p>
 
 <p>
@@ -1665,8 +1734,8 @@ interface&nbsp;Foo&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;Foo&nbsp;newFoo();<br />}
 <p>
 Note how Foo contains a method and that method again refers to Foo. We have a circular dependency. Traditionally those problems are solved by doing the transformation
 in multiple phases: First transform the tree hierarchy, to make sure that all declarations are in place. Then establish the cross references. 
-Thi problem with this approach is that you have to split up you code. The transformation of a method needs to be split up in creating the object and setting the values and containing
-elements and a code section which establishes the crossreference. This complicates the code and harms readability.
+The problem with this approach is that you have to split up you code. The transformation of a method needs to be split up in creating the object and 
+setting the values and containing elements and a code section which establishes the cross reference. This complicates the code and harms readability.
 </p>
 
 <p>

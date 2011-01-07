@@ -1,7 +1,7 @@
 chapter:LexicalStructure[Lexical Syntax]
 
-Xbase comes with a small set of lexer rules, which can be overridden and hence changed by users. However the default implementation is carefully chosen and it is recommended to stick 
-with the lexical syntax described in the following.
+Xbase comes with a small set of lexer rules, which can be overridden and hence changed by users. However the default implementation is carefully 
+chosen and it is recommended to stick with the lexical syntax described in the following.
 
 section:Identifiers[Identifiers]
 
@@ -105,6 +105,7 @@ ol[
 	item[code[extends]]
 	item[code[super]]
 	item[code[instanceof]]
+	item[code[as]]
 	item[code[new]]
 	item[code[null]]
 	item[code[false]]

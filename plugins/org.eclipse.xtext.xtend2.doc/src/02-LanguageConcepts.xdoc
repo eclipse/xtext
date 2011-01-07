@@ -4,9 +4,9 @@ On a first glance an Xtend2 file pretty much looks like a Java file. it starts w
 That class in fact is directly translated to a Java class in the corresponding Java package.
 Here is an example:
 code[
-package com.acme;
+package com.acme
 
-import java.util.List;
+import java.util.List
 
 class MyClass {
 	String first(List<String> elements) {
@@ -17,7 +17,8 @@ class MyClass {
 
 section:packageDecl[Package Declaration]
 
-Package declarations are like in Java, with the small difference, that an identifier can be escaped with a e[^] in case it conflicts with a keyword.
+Package declarations are like in Java, with the small difference, that an identifier can be escaped with a  e[^] in case it conflicts with a keyword.
+Also you don't terminate a package decalaration with a semicolon.
 
 section2[Syntax]
 
@@ -26,9 +27,20 @@ code[
 	QualifiedName : ID ('.' ID);
 ]
 
+section2[Examples]
+
+code[
+	package org.eclipse.xtext
+]
+code[
+	package my.^public.^package
+]
+
 section:imports[Imports]
 
-The ordinary imports of type names are equivalent to the imports known from Java. Again one can escape any names conflicting with keywords using the e[^].
+The ordinary imports of type names are equivalent to the imports known from Java. 
+Again one can escape any names conflicting with keywords using the e[^] and the import statemet is never
+terminated with a semicolon.
 
 section2:importExtension[Importing Extension Methods]
 
@@ -48,8 +60,11 @@ This will import four methods (code[sort(List<T>)], code[sort(List<T>, Comparato
 section2[Syntax]
 
 code[
-	ImportSection : (Import|Injection)*;
-	Import : 'import' 'extension'? QualifiedName (('.''*')|'('ID (',' ID)')')?;
+	ImportSection : 
+		(Import|Injection)*;
+	Import : 
+		'import' 'extension'? QualifiedName (('.''*')
+											|'('ID (',' ID)')')?;
 ]
 
 section:inject[Dependency Injection]
@@ -118,11 +133,11 @@ Imagine you had something like IterableExtensions which adds some higher-order f
 to the java.util collection library (we will likely ship a library based on google guava).
 
 code[
-	class IterableExtensions {
-	   public <T> T find(Iterable<T> elements, Function<T,Boolean> func) {
-	     ...
-	   }
-	}
+class IterableExtensions {
+   public <T> T find(Iterable<T> elements, Function<T,Boolean> func) {
+     ...
+   }
+}
 ]
 
 You declare the dependency like this:
@@ -143,9 +158,14 @@ You'll only have to change the binding in your guice module. Also this gives you
 or allows you to write against an SPI, where the concrete implementation can be provided by a third party.
 
 code[
-	ImportSection : (Import|Injection)*;
-	Import : ...
-	Injection : 'inject' 'extension'? ('@'STRING | '@'TypeReference) TypeReference ('('ID (',' ID)')')?;
+ImportSection : 
+	(Import|Injection)*;
+Import : 
+	...
+Injection : 
+	'inject' 'extension'? 
+	('@'STRING | '@'TypeReference)? 
+	TypeReference ('('ID (',' ID)*')')?;
 ]
 
 section:classDeclaration[Class Declaration]
@@ -172,19 +192,23 @@ This is the case if the function's expression (body) is not defined.
 section2[Syntax]
 
 code[
-	ClassDeclaration : 
-		(Visibility|'abstract'|'final')* 'class' TypeParameters? ('extends' QualifiedName)? ('implements' QualifiedName (',' QualifiedName)*)? '{'
-			Members*
-		'}'
-	;
-	Visibility : 'public'|'protected'|'private';
+ClassDeclaration : 
+	(Visibility|'abstract'|'final')* 
+	'class' TypeParameters? 
+	('extends' QualifiedName)? 
+	('implements' QualifiedName (',' QualifiedName)*)? 
+	'{'
+		Members*
+	'}'
+;
+Visibility : 'public'|'protected'|'private';
 	
 ]
 
 section:Functions[Functions]
 
 Xtend2 functions are declared within a class and are usually translated to a corresponding Java method with the exact same signature. 
-The only exception is overloaded methods, which compile to a single method. This is explained in the section about ref:polymorphicDispatch. 
+The only exception is case methods, which compile to a single method. This is explained in the section about ref:polymorphicDispatch. 
 
 An example of a function declaration
 code[
@@ -194,13 +218,14 @@ code[
 
 section2[Visibility]
 
-The default visibility of a function is code[public], which can also be declared explicitly. The two other available visibilities are code[protected] and code[private].
+The default visibility of a function is code[public], which can also be declared explicitly. 
+The two other available visibilities are code[protected] and code[private].
 
 section2[Overriding Functions]
 
 Like Java methods an Xtend2 function can be declared non overridable using the keyword code[final].
 
-Also if a function overrides a method from the suberclass, the code[override] keyword is mandatory.
+Also if a function overrides a method from the super class, the code[override] keyword is mandatory.
 
 Example:
 code[
@@ -216,6 +241,8 @@ Example:
 code[
 	Boolean myAbstractFunction(String s1,String s2);
 ]
+
+In such cases the class needs to be flagged code[abstract] otherwise the compiler will complain.
 
 section2:inferredReturnTypes[Inferred Return Types]
 
@@ -241,42 +268,58 @@ The compiler tells the user when it needs to be specified.
 section2[Generics]
 
 Full Java Generics with the exact same syntax and semantics are supported.
+Raw types, i.e. parameterized types without type parameters are treated as if each type parameter were
+a wild card.
+
+That is code[List] is the same as  code[List<?>]
 
 section2:polymorphicDispatch[Polymorphic Method Overloading]
 
-It is possible to overload methods, but overloaded methods are not invoked based on the static types of arguments as in Java.
-In Xtend2 an overloaded method is invoked based on the rutime types of the arguments. This has a lot of advantages and is a very convenient way 
-to add functionality to heterogenous data structors especially with deeper type hierarchies (i.e. EMF models and other typed domain models).
+It is possible to overload methods like in Java, and the resolution is also like in Java based on the
+static type of the arguments and only dynamic polymorphic on the receiver.
+However Xtend2 supports the special notion of case methods, which makes such overloaded methods polymorphic
+dispatched.
+
+Such methods get the keyword code[case] and all methods with the same name and the same number of arguments
+need either be marked with code[case] or not.
+
+If they are marked as case methods, the compiler will infer one method with the most common argument
+types which contains an if else cascade dispatching between the different case methods based on the actual
+runtime types of the arguments. This has a lot of advantages and is a very convenient way 
+to add functionality to heterogenous data structures especially with deeper type hierarchies (i.e. EMF models and other typed domain models).
 It essentially eleminates the problem the visitor pattern is trying to solve.
 
 This allows you to write a code generator by defining a function for all kinds of AST elements you want to process.
 
 code[
 	class MyCompiler {
-		compile(CompilationUnit cu) :
+		case compile(CompilationUnit cu) :
 			... cu.types.compile() ...;
-		compile(Interface interface) :
+		case compile(Interface interface) :
 			... cu.members.compile() ...;
-		compile(Class cu) :
+		case compile(Class cu) :
 			... cu.members.compile() ...;
-		compile(Field cu) :
+		case compile(Field cu) :
 			...;
 		...
 	}
 ]
 
-section3[How overloaded method are translated to Java]
+section3[How case methods are translated to Java]
 
-The polymorphic behavior of overloaded methods shall be transparently work no matter you call such a function from Java, Xtend2 or any other JVM language.
+The polymorphic behavior of case methods shall be transparently work no matter you call such a function from Java, Xtend2 or any other JVM language.
 Therefore the runtime dispatch is not done on the caller's side but on the declaration side. 
-For each set of methods where the name is equal and the number of arguments is equal, the most common dominator signature is taken 
-or computed if there is no most common denominator. Only for that signature a Java method is generated. 
-Within the implementation the correct method is looked up at runtime using if else cascades.
+For each set of case methods where the name is equal and the number of arguments is equal, the most common denominator signature is taken 
+or computed if there is no most common denominator. Only for that signature a Java method with the given
+name is generated, all the case methods are generated to protected methods where the name is prefixed with an
+underscore. 
+
+Within the implementation of the dispatch method the correct case method is looked up at runtime using if else cascades.
 This is done by sorting the methods from most specific to least specific and generating an if-else cascade for the code.
 
 Example: The following functions
 code[
-	foo(Number x) : 'it's some number';
+	foo(Number x) : 'it's a number';
 	foo(Integer x) : 'it's an int';
 ] 
 
@@ -284,12 +327,22 @@ compile to the following Java method:
 
 code[Java][
 	public String foo(Number x) {
-		if (x== null || x instanceof Integer) {
-			return "it's an int";
-		} else {
-			return "it's some number";
-		}
+		if (x instanceof Integer) {
+			return _foo((Integer)x);
+		} else if (x instanceof Number) {
+			return _foo((Number)x);
+		} 
+		throw new IllegalArgumentException(
+			"Couldn't dispatch. Argument was Number x :"+x);
 	} 
+	
+	protected String _foo(Integer x) {
+		return "It's an int";
+	}
+	
+	protected String _foo(Number x) {
+		return "It's a number";
+	}
 ]
 
 In case there is no single most general signature, one is computed and the
@@ -297,23 +350,26 @@ different overloaded methods are matched in the order they are declared within t
 Example:
 
 code[
-	foo(Number x, Integer y) : 'it's some number and an int';
-	foo(Integer x, Number x) : 'it's an int and a number';
+	foo(Number x, Integer y) : "it's some number and an int";
+	foo(Integer x, Number x) : "it's an int and a number";
 ]
 
 code[Java][
-	public String foo(Number x) {
-		if ((x== null || x instanceof Number) && (y== null ||y instanceof Integer)) {
-			return "it's some number and an int";
-		} else if ((x== null || x instanceof Integer) && (y== null || y instanceof Number)){
-			return "it's an int and a number";
+	public String foo(Number x, Number y) {
+		if ((x instanceof Number) 
+			&& (y instanceof Integer)) {
+			return _foo((Number)x,(Integer)y);
+		} else if ((x instanceof Integer) 
+			&& (y instanceof Number)){
+			return _foo((Integer)x,(Number)y);
 		} else {
-			throw new UnsupportedOperationException("foo is not implemented for arguments "+x+" and "+y);
+			throw new IllegalArgumentException(
+				"Couldn't handle Number x:"+x+", Number y:"+y);
 		}
 	} 
 ]
 
-As you can see a null reference is always a match. If you want to fetch null you can declare a parameter using the type code[java.lang.Void].
+As you can see a null reference is never a match. If you want to fetch null you can declare a parameter using the type code[java.lang.Void].
 
 code[
 	foo(Number x) : 'it's some number';
@@ -324,49 +380,78 @@ code[
 Which compiles to the following Java code:
 
 code[Java][
-	public String foo(Number x) {
-		if (x== null) {
-			throw new NullPointerException("x")
-		} else if (x== null || x instanceof Integer) {
-			return "it's an int";
-		} else {
-			return "it's some number";
-		}
-	} 
+public String foo(Number x) {
+	if (x instanceof Integer) {
+		return _foo((Integer)x);
+	} else if (x instanceof Number){
+		return _foo((Number)x);
+	} else if (x == null) {
+	    return _foo((Void)null);
+	} else {
+		throw new IllegalArgumentException(
+			"Couldn't handle Number x:"+x+", Number y:"+y);
+	}
+} 
 ]
-
-Note that the type code[java.lang.Void] is considered the most specific type and will always have higher precedence than any other types in the ordering.
 
 section3[Overloading Functions from Super Types]
 
-Functions (or Java Methods) from super types are not included in the dispatch. You'll have to call them explicitly using the code[super] reference. 
+Any methods from super types conforming to the compiled form of a case method are also included in the
+dispatch. Conforming means they have the right number of arguments and start with an underscore.
 
-section3[Excluding functions from polymorphic dispatch]
+Example:
 
-Sometimes you need to have the static dispatch from Java, for instance if you implement an interface with two method declarations where one overloads 
-the other. In that case you have to add the keyword code[no-dispatch].
-
-
+Consider the following Java class :
 code[
-	no-dispatch foo(Number x) : 'it's some number';
-	foo(Integer x) : 'it's an int';
-	foo(Void x) : throw new NullPointerException("x");
+	public abstract class AbstractLabelProvider {
+	   protected String _label(Object o) {
+	   	 // some generic implementation
+	   }
+	}
 ]
 
-In this case the resulting Java class will have two methods, one for Number and one containing the polymorphic dispatch for code[Void]
-and code[Integer], which will have the most common signature code[foo(Integer x)].
+and the following xtend class extends it like this:
+
+code[
+	class MyLabelProvider extends AbstractLabelProvider {
+	   case label(Entity this) name
+	   case label(Method this) name+"("+params.toString(",")+"):"+type
+	   case label(Field this) name+type
+	}
+]
+
+The resulting dispatch method in the generated Java class 'MyLabelProvider' looks like this:
+
+code[
+	public String label(Object o) {
+		if (o instanceof Field) {
+			return _label((Field)o);
+		} else if (o instanceof Method){
+			return _foo((Method)o);
+		} else if (o instanceof Entity){
+			return _foo((Entity)o);
+		} else if (o instanceof Object){
+			return _foo((Object)o);
+		} else {
+			throw new IllegalArgumentException(
+				"Couldn't handle Object o:"+o);
+		}
+	}
+]
 
 section2[Syntax]
 
-Syntactically Xtend functions are much like Java methods, expect that there are no static methods, the return types are optional and of course the function body
-consists of one expression instead of a sequence of statements. 
+Syntactically Xtend functions are much like Java methods, expect that there are no static methods, the return types are optional and 
+of course the function body consists of one expression instead of a sequence of statements. 
 
 code[
-	FunctionDef : ('public'|'protected'|'private'|'abstract'|'final')* TypeParameters? TypeRef? ID'('(ParameterDeclaration (',' ParameterDeclaration)*)?')' 
-		('throws' TypeRef (',' TypeRef)*)?
-	    ( ':' Expression ';'
-		| BlockExpression
-		| ';')
+FunctionDef : 
+	('public'|'protected'|'private'|'final'|'case'|'override')* 
+	TypeParameters? TypeRef? 
+	ID'('(ParameterDeclaration (',' ParameterDeclaration)*)?')' 
+	('throws' TypeRef (',' TypeRef)*)?
+    Expression
+;
 ]
 
 section:Expressions[Expressions (in addition Xbase)]
@@ -377,8 +462,9 @@ section2-ref[RichStrings]
 
 section2:extensionMethods[Extension Method Syntax]
 
-Imports and injections preceded with ref:importExtension[the keyword code[extension]] can be called using the extension method syntax.
-This means that a function imported through a static import, like e.g. java.util.Collections.singleton(T) can be invoked using 
+Static methods from imports and methods from injected objects where the declaration
+is preceded with ref:importExtension[the keyword code[extension]] can be called using the member syntax.
+This means that a method imported through a static import, like e.g. java.util.Collections.singleton(T) can be invoked using 
 the member syntax.
 
 Example:
@@ -394,7 +480,7 @@ code[
 ]
 
 Note that extension methods never shadow a member of the current reference. That is if code[java.lang.String] has a field code[singleton], a method code[singleton()] or a method
-code[getSingleton()], those memebers would be referenced. That is done at compile time, so the tooling is able to tell you what you actually reference.
+code[getSingleton()], those members would be referenced. That is done at compile time, so the tooling is able to tell you what you actually reference.
 
 Static functions as well as extensions in the previous version of Xtend make clients not only depend on a certain signature but on the implementation as 
 it is not possible to exchange the implementation of a static function. That's where the code[extension] keyword in conjunction with dependency injection 
@@ -433,11 +519,11 @@ The implementation can be provided through dependency injection.
 
 section2:CreateExpression[Create Expression]
 
-Xtend2 supports model to model transformations. There is actually only one little problem a transformation language has to solve, which is to
-get rid of the need to transform a net of objects in two phases. This is unforntunately necessary because you would end up with endless recursion
+Xtend2 supports model to model transformations. The single most important problem a transformation language has to solve, is to
+get rid of the need to transform a net of objects in two phases. This is unfortunately necessary because you would end up with endless recursion
 if you write a mapping between objects but these objects are connected in a circular way, which is almost always the case.
 
-Consider you want to transform the following Java interface to Java Class with an abstract method:
+Consider you want to transform the AST of the following Java interface to Java Class with an abstract method:
 
 code[
 	interface Foo {
@@ -447,8 +533,8 @@ code[
 
 Note how Foo contains a method and that method again refers to Foo. We have a circular dependency. Traditionally those problems are solved by doing the transformation
 in multiple phases: First transform the tree hierarchy, to make sure that all declarations are in place. Then establish the cross references. 
-Thi problem with this approach is that you have to split up you code. The transformation of a method needs to be split up in creating the object and setting the values and containing
-elements and a code section which establishes the crossreference. This complicates the code and harms readability.
+The problem with this approach is that you have to split up you code. The transformation of a method needs to be split up in creating the object and 
+setting the values and containing elements and a code section which establishes the cross reference. This complicates the code and harms readability.
 
 In Xtend2 there is a so called create expression (similar to the create extension from previous Xtend). The example from above could be 
 implemented like this:

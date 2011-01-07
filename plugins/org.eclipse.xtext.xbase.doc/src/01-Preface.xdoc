@@ -19,8 +19,9 @@ hovering, folding and navigation can be easily integrated and reused within any 
 
 Conceptually and syntactically, Xbase is like Java statements+expressions, with the following differences:
 ul[
+	item[Runs on the JVM]
 	item[No checked exceptions]
-	item[Pure object-oriented, i.e. no built-in types and no arrays]
+	item[Object-oriented]
 	item[Everything is an expression, there are no statements]
 	item[Closures]
 	item[Type inference]

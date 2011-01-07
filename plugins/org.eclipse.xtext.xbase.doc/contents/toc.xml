@@ -81,11 +81,9 @@
 <topic href="contents/04-Expressions.xdoc.html#Operators" label="Infix Operators" >
 <topic href="contents/04-Expressions.xdoc.html#propertyAssignment" label="Property Assignment" >
 </topic>
-<topic href="contents/04-Expressions.xdoc.html#addAssignment" label="Add Assignment" >
+<topic href="contents/04-Expressions.xdoc.html#Operators-4" label="Short-Circuit Boolean Operators" >
 </topic>
-<topic href="contents/04-Expressions.xdoc.html#Operators-5" label="Short-Circuit Boolean Operators" >
-</topic>
-<topic href="contents/04-Expressions.xdoc.html#Operators-6" label="Examples" >
+<topic href="contents/04-Expressions.xdoc.html#Operators-5" label="Examples" >
 </topic>
 </topic>
 <topic href="contents/04-Expressions.xdoc.html#FeatureCalls" label="Feature Calls" >
@@ -95,7 +93,9 @@
 </topic>
 <topic href="contents/04-Expressions.xdoc.html#ImplicitThis" label="Implicit 'this' variable" >
 </topic>
-<topic href="contents/04-Expressions.xdoc.html#FeatureCalls-5" label="Examples" >
+<topic href="contents/04-Expressions.xdoc.html#Extensions" label="Extensions" >
+</topic>
+<topic href="contents/04-Expressions.xdoc.html#FeatureCalls-6" label="Examples" >
 </topic>
 </topic>
 <topic href="contents/04-Expressions.xdoc.html#spreadOperator" label="Spread Operator" >

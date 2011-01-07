@@ -12,20 +12,14 @@
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Types</h1>
 
 <p>
-Xbase binds to the Java Virtual Machine. This means that expressions written in Xbase refer to Java types and Java type members. Xbase itself uses only types 
-defined in the Java language, such as classes, interfaces, annotations and enums. It also supports Java generics and shares the known syntax. In addition to Java, 
-Xbase comes with the notion of function types. 
+Xbase binds to the Java Virtual Machine. This means that expressions written in Xbase refer to Java types and Java type members. Xbase itself uses types 
+defined in the Java language, such as classes, interfaces, annotations and enums. It also supports Java generics and shares the known syntax. In addition 
+to Java, Xbase comes with the notion of function types. 
 </p>
 
 <p>
-Xbase does not bind to any of the built-in types such as <em>int</em> or <em>boolean</em>, instead any references to those built-in types will automatically use the corresponding 
-wrapper type, e.g. <em>java.lang.Boolean</em> instead of <em>boolean</em>. Arrays are supported also in Xbase but are translated to <em>java.util.List</em>s: An 
+Xbase does not bind to Arrays but translates any references to <em>java.util.List</em>s: An 
 array <em>int[]</em> binds to <em>java.util.List&lt;java.lang.Integer&gt;</em> (in short <em>List&lt;Integer&gt;</em>). 
-This means when referring to <span class="inlinecode">myList.isEmpty()</span>
- within an Xbase expression the static return type is <em>java.lang.Boolean</em>. 
-At runtime however the compiler may be smarter and use the native types. Especially the types <em>int</em> and <em>boolean</em> are most often used with
- built-in operators and the wrapper type is only occasionally needed (for instance when putting <span class="inlinecode">int</span>
-s into collections).
 </p>
 
 
@@ -46,7 +40,8 @@ Simple Type References
 
 
 <p>
-A simple type reference only consists of a <em>qualified name</em>. A qualified name is a name made up of identifiers which are separated by a dot (like in Java).
+A simple type reference only consists of a <em>qualified name</em>. A qualified name is a name made up of identifiers which are separated by a dot 
+(like in Java).
 </p>
 
 
@@ -80,7 +75,7 @@ QualifiedName:<br />&nbsp;&nbsp;ID&nbsp;(&apos;.&apos;&nbsp;ID)*<br />;&nbsp;&nb
 </p>
 
 <p>
-There is no rule for a simple type reference, as it is expressed as a parameterized type references without paramters.
+There is no parser rule for a simple type reference, as it is expressed as a parameterized type references without parameters.
 </p>
 
 
@@ -150,19 +145,24 @@ Function Types
 
 
 <p>
-Xbase introduces <em>closures</em>, which require an additional kind of type. On the JVM-Level a closure (or more generally any function object) is just an instance of one of the 
+Xbase introduces <em>closures</em>, and therefore an additional function type signature. On the JVM-Level a closure (or more generally any function object) is just an instance of one of the 
 types in <span class="inlinecode">org.eclipse.xtext.xbase.lib.Function*</span>
-, dependening on the number of arguments. However, as closures are a very important language feature, a special 
-sugared syntax for function types has been introduced.  
+, depending on the number of arguments. However, as closures are a very important language feature, 
+a special sugared syntax for function types has been introduced.  
 So instead of writing <span class="inlinecode">Function1&lt;String,Boolean&gt;</span>
  one can write <span class="inlinecode">(String)=&gt;Boolean</span>
 .
 </p>
 
+<p>
+For more information on closures see 
+<a href="04-Expressions.xdoc.html#Closures">section Closures</a>.
+</p>
 
 
 
-<a name="FunctionTypes-2"></a>
+
+<a name="FunctionTypes-3"></a>
 <div class="section" title="Syntax">
 <div class="titlepage">
 <div>
@@ -194,7 +194,7 @@ XFunctionTypeRef:<br />&nbsp;&nbsp;(&apos;(&apos;JvmTypeReference&nbsp;(&apos;,&
 
 
 
-<a name="FunctionTypes-3"></a>
+<a name="FunctionTypes-4"></a>
 <div class="section" title="Examples">
 <div class="titlepage">
 <div>
@@ -233,7 +233,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode">(Mutable)=&gt;Void&nbsp;//&nbsp;A&nbsp;method&nbsp;doing&nbsp;side&nbsp;effects&nbsp;on&nbsp;an&nbsp;instance&nbsp;of&nbsp;Mutable&nbsp;and&nbsp;returns&nbsp;null</span>
+<span class="inlinecode">(Mutable)=&gt;Void&nbsp;//&nbsp;A&nbsp;method&nbsp;doing&nbsp;side&nbsp;effects&nbsp;only&nbsp;-&nbsp;returns&nbsp;null</span>
 
 </p>
 
@@ -279,7 +279,7 @@ refer to the third edition of the  <a href="http://java.sun.com/docs/books/jls/t
 </p>
 
 <p>
-The only difference is that in Xbase a type reference can also be a function type. In the following the full syntax fo type references is shown, including function types and
+The only difference is that in Xbase a type reference can also be a function type. In the following the full syntax of type references is shown, including function types and
 type arguments.
 </p>
 
@@ -418,12 +418,13 @@ The type java.lang.Void
 <p>
 The <span class="inlinecode">null</span>
  reference is the only valid value of the type <span class="inlinecode">Void</span>
-, which gets some special treatment in Xbase. Every Java method which is declared <em>void</em> (i.e. without a return value)
-is translated to a method with return type <em>java.lang.Void</em>. At runtime such method invocations will result in <em>null</em>.
-The speciality is that while it is allowed to pass <span class="inlinecode">null</span>
- everywhere (TODO discuss use of nullable annotation) instead of any other value, this does not mean that <em>java.lang.Void</em>
-is a subtype of any other type. The <span class="inlinecode">instanceOf</span>
- operator as well as the type matchers in the 
+, which gets some special treatment in Xbase. Every Java method which is declared 
+<em>void</em> (i.e. without a return value) is translated to a method with return type <em>java.lang.Void</em>. At runtime such method invocations will result in 
+<em>null</em>. The specialty is that while it is allowed to pass <span class="inlinecode">null</span>
+ everywhere  instead of any other value, 
+this does not mean that <em>java.lang.Void</em> is a subtype of any other type. The <span class="inlinecode">instanceOf</span>
+ operator as well as the type matchers in 
+the 
 <a href="04-Expressions.xdoc.html#SwitchExpression">section SwitchExpression</a> do not match <span class="inlinecode">null</span>
 .
 </p>
