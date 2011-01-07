@@ -132,8 +132,8 @@ public class Xtend2Switch<T>
 				if (result == null) result = caseJvmOperation(xtendFunction);
 				if (result == null) result = caseJvmExecutable(xtendFunction);
 				if (result == null) result = caseJvmFeature(xtendFunction);
-				if (result == null) result = caseJvmMember(xtendFunction);
 				if (result == null) result = caseJvmTypeParameterDeclarator(xtendFunction);
+				if (result == null) result = caseJvmMember(xtendFunction);
 				if (result == null) result = caseJvmAnnotationTarget(xtendFunction);
 				if (result == null) result = caseJvmIdentifyableElement(xtendFunction);
 				if (result == null) result = defaultCase(theEObject);
@@ -392,6 +392,22 @@ public class Xtend2Switch<T>
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Feature</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Feature</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJvmFeature(JvmFeature object)
+	{
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Jvm Type Parameter Declarator</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -419,22 +435,6 @@ public class Xtend2Switch<T>
 	 * @generated
 	 */
 	public T caseJvmExecutable(JvmExecutable object)
-	{
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Jvm Feature</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Jvm Feature</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseJvmFeature(JvmFeature object)
 	{
 		return null;
 	}

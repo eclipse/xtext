@@ -110,14 +110,14 @@ public class ParserTest extends AbstractXtend2Test {
 	}
 	
 	public void testFunctionTypeRef_0() throws Exception {
-		XtendFunction func = function("=>Boolean foo() |true");
+		XtendFunction func = function("=>Boolean foo() [|true]");
 		XFunctionTypeRef type = (XFunctionTypeRef) func.getReturnType();
 		assertNotNull(type.getReturnType());
 		assertEquals(0,type.getParamTypes().size());
 	}
 	
 	public void testFunctionTypeRef_1() throws Exception {
-		XtendFunction func = function("(String)=>Boolean foo() String s|s==null");
+		XtendFunction func = function("(String)=>Boolean foo() [String s|s==null]");
 		XFunctionTypeRef type = (XFunctionTypeRef) func.getReturnType();
 		assertNotNull(type.getReturnType());
 		assertEquals(1,type.getParamTypes().size());
