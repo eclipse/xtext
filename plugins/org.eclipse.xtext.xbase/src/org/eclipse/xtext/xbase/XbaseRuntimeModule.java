@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.linking.XbaseLinkingScopeProvider;
 import org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseExpectedTypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider;
+import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 
 import com.google.inject.Binder;
@@ -62,5 +63,9 @@ public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 	@Override
 	public void configureIScopeProviderDelegate(Binder binder) {
 		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(XbaseImportedNamespaceScopeProvider.class);
+	}
+	
+	public Class<? extends IJvmTypeConformanceComputer> bindIJvmTypeConformanceComputer() {
+		return XbaseTypeConformanceComputer.class;
 	}
 }
