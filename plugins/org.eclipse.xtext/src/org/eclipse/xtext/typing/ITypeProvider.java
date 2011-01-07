@@ -20,8 +20,8 @@ public interface ITypeProvider<T> {
 	 * computes the type of the given astNode.
 	 * @param astNode - the node for which to compute the type T
 	 * 
-	 * @return the type T or null. <code>null</code> indicates a problem with type resolution. 
-	 * 		   Clients shouldn't register follow up errors in that case.
+	 * @return the type T or null if the type cannot be determined
+	 * @throws TypeResolutionException if there is a problem with type resolution. 
 	 */
 	public T getType(EObject astNode);
 	
