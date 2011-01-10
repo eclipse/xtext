@@ -61,6 +61,15 @@ public class TypeConformanceValidatorTest extends AbstractXbaseValidationTest {
 				"java.lang.Throwable");
 	}
 
+	public void testForLoop() throws Exception {
+		assertNoConformanceError("for(String foo : new java.util.ArrayList<String>()) 'bar'");
+		assertConformanceError("for(Integer foo : true) 'bar'", XbasePackage.Literals.XBOOLEAN_LITERAL,
+				"java.lang.Boolean", "java.lang.Integer");
+		assertConformanceError("for(Integer foo : new java.util.ArrayList<String>()) 'bar'",
+				XbasePackage.Literals.XCONSTRUCTOR_CALL, "java.lang.Iterable<? extends java.lang.Integer>",
+				"java.util.ArrayList<java.lang.String>");
+	}
+
 	protected void assertConformanceError(String expression, EClass objectType, String... messageParts)
 			throws Exception {
 		final XExpression xExpression = expression(expression, true);

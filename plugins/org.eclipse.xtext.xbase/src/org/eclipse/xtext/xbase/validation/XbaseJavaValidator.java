@@ -1,54 +1,78 @@
 package org.eclipse.xtext.xbase.validation;
 
-import static com.google.common.collect.Lists.*;
+import static java.util.Collections.*;
+import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.typing.IExpectedTypeProvider;
 import org.eclipse.xtext.typing.ITypeProvider;
 import org.eclipse.xtext.typing.TypeResolutionException;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XCatchClause;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 
 import com.google.inject.Inject;
- 
 
 public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
-	
+
 	public static final String INCOMPATIBLE_TYPES = "xbase.incompatible_types";
-	
+	public static final String ASSIGNMENT_TO_FINAL = "xbase.assignment_to_final";
+
 	@Inject
 	private ITypeProvider<JvmTypeReference> typeProvider;
-	
+
 	@Inject
 	private IExpectedTypeProvider<JvmTypeReference> expectedTypeProvider;
-	
+
 	@Inject
 	private IJvmTypeConformanceComputer conformanceComputer;
-	
+
 	@Check
 	public void checkTypes(EObject obj) {
 		try {
-		JvmTypeReference expectedType = expectedTypeProvider.getExpectedType(obj);
-		if (expectedType==null)
-			return;
-		JvmTypeReference actualType = typeProvider.getType(obj);
-		if (!conformanceComputer.isConformant(expectedType, actualType)) {
-			error("Incompatible types. Expected "+expectedType.getCanonicalName()+" but was "+actualType.getCanonicalName(), -1, INCOMPATIBLE_TYPES);
-		}
+			JvmTypeReference expectedType = expectedTypeProvider.getExpectedType(obj);
+			if (expectedType == null)
+				return;
+			JvmTypeReference actualType = typeProvider.getType(obj);
+			if (!conformanceComputer.isConformant(expectedType, actualType)) {
+				error("Incompatible types. Expected " + getTypeCanonicalName(expectedType) + " but was "
+						+ getTypeCanonicalName(actualType), obj, -1, INCOMPATIBLE_TYPES);
+			}
 		} catch (TypeResolutionException e) {
 			// do nothing, error should be handled elsewhere
 		}
 	}
+
+	@Check
+	public void checkTypes(XCatchClause catchClause) {
+		checkTypes(catchClause.getDeclaredParam());
+	}
 	
+	@Check
+	public void checkAssignment(XAssignment assignment) {
+		if (assignment.getFeature() instanceof XVariableDeclaration
+				&& !((XVariableDeclaration) assignment.getFeature()).isWriteable()) {
+			error("Assignment to final variable", XbasePackage.XASSIGNMENT__ASSIGNABLE, ASSIGNMENT_TO_FINAL);
+		} else if (assignment.getFeature() instanceof JvmFormalParameter) {
+			error("Assignment to final parameter", XbasePackage.XASSIGNMENT__ASSIGNABLE, ASSIGNMENT_TO_FINAL);
+		}
+	}
+
 	@Override
 	protected List<EPackage> getEPackages() {
-		return newArrayList(XbasePackage.eINSTANCE, TypesPackage.eINSTANCE);
+		return singletonList((EPackage)XbasePackage.eINSTANCE);
+	}
+
+	protected String getTypeCanonicalName(JvmTypeReference typeRef) {
+		return (typeRef == null) ? "<null>" : notNull(typeRef.getCanonicalName());
 	}
 
 }

@@ -57,6 +57,7 @@ public class JavaIdentifierValueConverterTest extends AbstractXbaseTestCase {
 		assertValidToValue("B$A", "B$A");		
 		assertInvalidToValue("3aaa");
 		assertInvalidToValue("%");
+		assertInvalidToValue("}");
 	}
 	
 	protected void assertValidToString(String value, String expectedString) {
