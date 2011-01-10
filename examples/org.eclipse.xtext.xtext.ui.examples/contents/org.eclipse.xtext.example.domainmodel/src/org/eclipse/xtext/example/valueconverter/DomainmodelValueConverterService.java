@@ -16,7 +16,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
- * @author Jan Koehnleinlein - Initial contribution and API
+ * @author Jan Koehnleinnitial contribution and API
  */
 @Singleton
 public class DomainmodelValueConverterService extends DefaultTerminalConverters {

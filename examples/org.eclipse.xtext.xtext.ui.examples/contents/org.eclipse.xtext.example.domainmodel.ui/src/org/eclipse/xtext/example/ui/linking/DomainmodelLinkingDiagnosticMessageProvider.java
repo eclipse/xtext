@@ -18,7 +18,7 @@ import org.eclipse.xtext.example.domainmodel.util.DomainmodelSwitch;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
 
 /**
- * @author Jan Koehnleinlein - Initial contribution and API
+ * @author Jan Koehnleinnitial contribution and API
  */
 public class DomainmodelLinkingDiagnosticMessageProvider extends LinkingDiagnosticMessageProvider {
 
