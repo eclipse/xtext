@@ -874,4 +874,10 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		}
 	}
 	
+	@Check
+	public void checkUnorderedGroupIsNotPredicated(Grammar grammar) {
+		PredicateUsesUnorderedGroupInspector inspector = new PredicateUsesUnorderedGroupInspector(getMessageAcceptor());
+		inspector.inspect(grammar);
+	}
+	
 }
