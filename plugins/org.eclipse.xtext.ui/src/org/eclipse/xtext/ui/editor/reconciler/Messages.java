@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.editor.reconciler;
 import org.eclipse.osgi.util.NLS;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.xtext.ui.editor.reconciler.messages"; //$NON-NLS-1$

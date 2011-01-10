@@ -9,7 +9,7 @@ package org.eclipse.xtext.generator.grammarAccess;
 
 /**
  * Grammar access fragment is empty (sub-)package aware now by default. 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @Deprecated
 public class SubPackageAwareGrammarAccessFragment extends GrammarAccessFragment {

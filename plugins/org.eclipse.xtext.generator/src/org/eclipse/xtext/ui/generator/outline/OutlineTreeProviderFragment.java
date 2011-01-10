@@ -22,7 +22,7 @@ import org.eclipse.xtext.generator.Naming;
  * An {@link IGeneratorFragment} to generate the configuration for a transformer for the outline view of an Xtext
  * language.
  * 
- * @author koehnlein
+ * @author Jan Koehnlein
  */
 public class OutlineTreeProviderFragment extends AbstractGeneratorFragment {
 

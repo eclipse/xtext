@@ -10,7 +10,7 @@ package org.eclipse.xtext.builder.impl;
 import java.util.Map;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("rawtypes")
 public interface IBuildFlag {

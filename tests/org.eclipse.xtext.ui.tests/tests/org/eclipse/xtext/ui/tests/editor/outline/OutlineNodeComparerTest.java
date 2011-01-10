@@ -23,7 +23,7 @@ import org.eclipse.xtext.ui.tests.editor.outline.outlineTest.OutlineTestFactory;
 import com.google.inject.Injector;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class OutlineNodeComparerTest extends AbstractXtextTests {
 

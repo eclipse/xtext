@@ -22,7 +22,7 @@ import org.eclipse.swt.widgets.Display;
 /**
  * Helper class for styled strings.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class StylerFactory {
 	/**

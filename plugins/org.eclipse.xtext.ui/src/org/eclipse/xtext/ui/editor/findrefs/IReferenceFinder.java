@@ -17,7 +17,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import com.google.inject.ImplementedBy;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @ImplementedBy(DefaultReferenceFinder.class)
 public interface IReferenceFinder {

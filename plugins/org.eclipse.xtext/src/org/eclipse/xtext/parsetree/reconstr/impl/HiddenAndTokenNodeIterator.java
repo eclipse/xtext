@@ -22,7 +22,7 @@ import com.google.common.collect.Lists;
  * {@link AbstractParseTreeConstructor.WsMergerStream}, i.e. whitespaces within token nodes 
  * before or after the token node itself.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class HiddenAndTokenNodeIterator implements Iterator<INode> {
 

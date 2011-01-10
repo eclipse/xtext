@@ -16,7 +16,7 @@ import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.VerifyEvent;
 
 /**
- * @author koehnlein
+ * @author Jan Koehnlein
  */
 public class PopupXtextEditorKeyListener extends KeyAdapter implements VerifyKeyListener {
 

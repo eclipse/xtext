@@ -22,7 +22,7 @@ import com.google.inject.Inject;
  * A label provider that implements {@link ILabelProvider} as well as {@link IStyledLabelProvider} with an optional
  * delegate.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public abstract class AbstractLabelProvider extends LabelProvider implements IStyledLabelProvider, IItemLabelProvider {
 

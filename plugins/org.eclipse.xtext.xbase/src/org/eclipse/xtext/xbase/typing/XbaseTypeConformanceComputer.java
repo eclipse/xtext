@@ -16,7 +16,7 @@ import org.eclipse.xtext.common.types.util.TypeArgumentContext.Provider;
 import com.google.inject.Inject;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class XbaseTypeConformanceComputer extends DefaultJvmTypeConformanceComputer {
 

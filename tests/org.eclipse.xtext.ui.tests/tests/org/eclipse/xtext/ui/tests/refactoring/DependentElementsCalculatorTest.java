@@ -18,7 +18,7 @@ import org.eclipse.xtext.ui.refactoring.impl.DefaultDependentElementsCalculator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class DependentElementsCalculatorTest extends AbstractXtextTests {
 

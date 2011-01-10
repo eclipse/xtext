@@ -17,7 +17,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class DefaultTerminalConverter extends AbstractLexerBasedConverter<Object> {
 

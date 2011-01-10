@@ -27,7 +27,7 @@ import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public interface IOutlineContribution extends IPreferenceStoreInitializer {
 

@@ -8,7 +8,7 @@
 package org.eclipse.xtext.generator.ecore2xtext;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class FormatterFragment extends org.eclipse.xtext.generator.formatting.FormatterFragment {
 

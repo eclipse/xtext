@@ -21,7 +21,7 @@ import com.google.inject.ImplementedBy;
  * Aggregates document updates as {@link Change Changes} or {@link TextEdits}. Clients can report issues to the
  * refactoring status.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @ImplementedBy(RefactoringUpdateAcceptor.class)
 public interface IRefactoringUpdateAcceptor {

@@ -15,7 +15,7 @@ import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.ILocalContextProvid
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class ResourceSetLocalContextProvider implements ILocalContextProvider {
 

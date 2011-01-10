@@ -17,7 +17,7 @@ import org.eclipse.xtext.ui.label.AbstractLabelProvider;
 import com.google.inject.Inject;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class OutlineNodeLabelProvider extends DelegatingStyledCellLabelProvider implements ILabelProvider {
 

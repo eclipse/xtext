@@ -16,7 +16,7 @@ import com.google.inject.Singleton;
 /**
  * Provides the default file encoding for a language.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public interface IEncodingProvider {
 

@@ -14,7 +14,7 @@ import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class RefactoringTestLanguageFragmentProvider implements IFragmentProvider {
 

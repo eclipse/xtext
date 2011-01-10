@@ -25,7 +25,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class GrammarTest extends AbstractXtextTests {
 

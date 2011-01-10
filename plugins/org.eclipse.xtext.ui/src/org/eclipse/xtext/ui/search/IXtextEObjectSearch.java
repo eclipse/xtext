@@ -22,7 +22,7 @@ import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @ImplementedBy(IXtextEObjectSearch.Default.class)
 public interface IXtextEObjectSearch {

@@ -18,7 +18,7 @@ import com.google.inject.ImplementedBy;
  * 
  * Top-level hook for clients who want to provide a completely different rename refactoring implementation.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @ImplementedBy(DefaultRenameRefactoringProvider.class)
 public interface IRenameRefactoringProvider {

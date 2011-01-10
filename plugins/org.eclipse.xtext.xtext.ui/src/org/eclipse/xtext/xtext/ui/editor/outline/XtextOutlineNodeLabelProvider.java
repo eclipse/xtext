@@ -14,7 +14,7 @@ import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import com.google.inject.Inject;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class XtextOutlineNodeLabelProvider extends OutlineNodeLabelProvider {
 

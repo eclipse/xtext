@@ -20,7 +20,7 @@ import org.eclipse.xtext.util.IAcceptor;
 import com.google.common.collect.Lists;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class ReferenceSearchResult implements ISearchResult, IAcceptor<IReferenceDescription> {
 

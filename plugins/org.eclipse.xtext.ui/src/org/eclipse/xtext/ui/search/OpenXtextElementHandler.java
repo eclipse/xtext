@@ -23,7 +23,7 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class OpenXtextElementHandler extends AbstractHandler {
 

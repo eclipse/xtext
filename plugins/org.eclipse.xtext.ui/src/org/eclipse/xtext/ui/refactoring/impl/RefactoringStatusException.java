@@ -13,7 +13,7 @@ package org.eclipse.xtext.ui.refactoring.impl;
  * The message will be reported to the {@link org.eclipse.ltk.core.refactoring.RefactoringStatus} and thus to the UI.
  * For any other exception, the stack trace is logged to the console additionally.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class RefactoringStatusException extends RuntimeException {
 

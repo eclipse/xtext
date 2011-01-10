@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.xtext.ui.editor.outline.actions.SortOutlineContribution;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class SortContributionTest extends AbstractOutlineWorkbenchTest {
 

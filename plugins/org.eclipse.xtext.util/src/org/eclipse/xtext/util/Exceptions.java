@@ -10,7 +10,7 @@ package org.eclipse.xtext.util;
 import org.eclipse.emf.common.util.WrappedException;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class Exceptions {
 

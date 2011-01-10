@@ -15,7 +15,7 @@ import org.eclipse.emf.common.util.URI;
  * 
  * See {@link ClasspathUriResolver} for details.
  * 
- * @author koehnlein
+ * @author Jan Koehnlein
  */
 public class ClasspathUriUtil {
 

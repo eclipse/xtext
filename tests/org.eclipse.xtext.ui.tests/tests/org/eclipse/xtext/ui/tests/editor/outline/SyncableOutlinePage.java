@@ -14,7 +14,7 @@ import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
 /**
  * This horrible hack allows to wait for outline tree updates without blocking the display thread.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class SyncableOutlinePage extends OutlinePage {
 

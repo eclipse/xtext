@@ -17,7 +17,7 @@ import com.google.inject.ImplementedBy;
 /**
  * Abstraction over an open document or a text file that is affected by a refactoring. 
  *  
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public interface IRefactoringDocument {
 

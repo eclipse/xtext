@@ -14,7 +14,7 @@ import java.util.concurrent.TimeoutException;
 import org.eclipse.swt.widgets.Display;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class DisplaySafeSyncer {
 

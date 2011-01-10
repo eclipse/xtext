@@ -32,7 +32,7 @@ import org.eclipse.xtext.resource.XtextResource;
 /**
  * Reconciles the node models of all XtextResources in a TransactionalEditingDomain with semantic changes.
  * 
- * @author koehnlein
+ * @author Jan Koehnlein
  */
 public class XtextNodeModelReconciler extends AdapterImpl implements TransactionalEditingDomainListener,
 		IOperationHistoryListener {

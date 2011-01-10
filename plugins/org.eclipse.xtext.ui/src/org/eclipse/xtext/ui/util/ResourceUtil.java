@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 /**
  * Copied from org.eclipse.emf.workspace.util.WorkspaceSynchronizer to avoid dependencies to EMFT.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class ResourceUtil {
 

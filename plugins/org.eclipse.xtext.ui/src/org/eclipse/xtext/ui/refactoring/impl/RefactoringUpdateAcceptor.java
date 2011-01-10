@@ -30,7 +30,7 @@ import com.google.inject.Inject;
 /**
  * Aggregates {@link TextEdit}s and/or {@link Change}s into a {@link CompositeChange}.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class RefactoringUpdateAcceptor implements IRefactoringUpdateAcceptor {
 

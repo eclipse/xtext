@@ -18,7 +18,7 @@ import com.google.inject.ImplementedBy;
 /**
  * Customizable strategy for the text based rename refactoring of a given {@link EObject}. 
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public interface IRenameStrategy {
 

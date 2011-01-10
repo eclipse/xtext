@@ -11,7 +11,7 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 /**
  * An {@link IGeneratorFragment} to generate an EMF resource factory and its registration.
  *  
- * @author koehnlein - Javadocs
+ * @author Jan Koehnlein - Javadocs
  */
 public class ResourceFactoryFragment extends AbstractGeneratorFragment {
 	private List<String> fileExtensions = new ArrayList<String>();

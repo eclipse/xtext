@@ -21,7 +21,7 @@ import org.eclipse.ui.PlatformUI;
 /**
  * Detects concurrent modifications of GMF and Xtext editors based on Xtext's dirty state management.
  * 
- * @author koehnlein
+ * @author Jan Koehnlein
  */
 public class ConcurrentModificationObserver implements IPartListener {
 

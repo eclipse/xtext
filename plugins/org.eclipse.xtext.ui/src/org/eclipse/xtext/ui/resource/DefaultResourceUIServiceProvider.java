@@ -23,7 +23,7 @@ import com.google.inject.Injector;
 import com.google.inject.internal.Nullable;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvider {
 

@@ -25,7 +25,7 @@ import org.eclipse.xtext.resource.XtextResource;
  * A Command that deactivates the {@link ChangeAggregatorAdapter} and updates a textual section of an Xtext model in an
  * Xtext resource. Used to avoid cycles in the change aggregation.
  * 
- * @author koehnlein
+ * @author Jan Koehnlein
  */
 public class UpdateXtextResourceTextCommand {
 

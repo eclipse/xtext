@@ -18,7 +18,7 @@ import org.eclipse.xtext.ui.editor.IDirtyResource;
 /**
  * An implementation of {@link IDirtyResource} for resources without an underlying document.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class SimpleDirtyResource implements IDirtyResource {
 

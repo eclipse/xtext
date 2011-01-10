@@ -17,7 +17,7 @@ import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 /**
  * A node representing the value(s) of one of its owner's {@link EStructuralFeature}s.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class EStructuralFeatureNode extends AbstractOutlineNode {
 

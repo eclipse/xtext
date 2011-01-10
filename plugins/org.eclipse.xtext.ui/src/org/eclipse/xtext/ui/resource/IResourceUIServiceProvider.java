@@ -17,7 +17,7 @@ import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import com.google.inject.ImplementedBy;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
  */
 @ImplementedBy(DefaultResourceUIServiceProvider.class)

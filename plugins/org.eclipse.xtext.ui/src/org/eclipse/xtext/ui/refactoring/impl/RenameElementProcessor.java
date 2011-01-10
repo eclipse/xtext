@@ -44,7 +44,7 @@ import com.google.inject.Inject;
  * LTK {@link org.eclipse.ltk.core.refactoring.participants.RefactoringProcessor} for an Xtext element rename
  * refactoring.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class RenameElementProcessor extends AbstractRenameProcessor {
 

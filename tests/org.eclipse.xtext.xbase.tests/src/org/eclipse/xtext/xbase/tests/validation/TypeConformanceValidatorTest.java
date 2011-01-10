@@ -14,7 +14,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
  */
 public class TypeConformanceValidatorTest extends AbstractXbaseValidationTest {

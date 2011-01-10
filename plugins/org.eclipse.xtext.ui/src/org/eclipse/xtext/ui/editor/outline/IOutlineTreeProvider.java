@@ -16,7 +16,7 @@ import com.google.inject.ImplementedBy;
  * Creates outline nodes. Only called from within {@link org.eclipse.xtext.util.concurrent.IUnitOfWork}s where the
  * {@link Resource} can be read safely.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @ImplementedBy(DefaultOutlineTreeProvider.class)
 public interface IOutlineTreeProvider {

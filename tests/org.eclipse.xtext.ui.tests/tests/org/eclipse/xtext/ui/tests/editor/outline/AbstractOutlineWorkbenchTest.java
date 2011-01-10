@@ -30,7 +30,7 @@ import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.tests.editor.AbstractEditorTest;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 

@@ -11,7 +11,7 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.xtext.ui.internal.XtextPluginImages;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public interface ReferenceSearchViewPageActions {
 

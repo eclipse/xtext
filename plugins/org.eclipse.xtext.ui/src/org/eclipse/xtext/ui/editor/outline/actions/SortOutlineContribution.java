@@ -20,7 +20,7 @@ import org.eclipse.xtext.ui.internal.XtextPluginImages;
 import com.google.inject.Inject;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class SortOutlineContribution extends AbstractToggleActionContribution {
 	public static final String PREFERENCE_KEY = "ui.outline.sort2";

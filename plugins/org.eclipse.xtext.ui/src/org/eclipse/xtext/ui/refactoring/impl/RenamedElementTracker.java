@@ -24,7 +24,7 @@ import org.eclipse.xtext.ui.refactoring.IRenamedElementTracker;
 /**
  * Renames an element without loosing track of the element and dependent elements.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class RenamedElementTracker implements IRenamedElementTracker {
 

@@ -5,7 +5,7 @@ import org.eclipse.search.ui.SearchResultEvent;
 import org.eclipse.xtext.resource.IReferenceDescription;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public interface ReferenceSearchResultEvents {
 

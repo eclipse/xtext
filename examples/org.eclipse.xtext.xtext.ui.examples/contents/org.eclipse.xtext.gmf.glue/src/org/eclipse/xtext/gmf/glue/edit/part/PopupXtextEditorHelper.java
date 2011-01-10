@@ -58,7 +58,7 @@ import com.google.inject.Module;
  * Override the generated <code>performDirectEdit</code> methods in the EditPart of the label to be directly edited, and
  * call {@link #showEditor()} instead of opening the default {@link TextCellEditor}.
  * 
- * @author koehnlein
+ * @author Jan Koehnlein
  */
 public class PopupXtextEditorHelper {
 

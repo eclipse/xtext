@@ -17,7 +17,7 @@ import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.DefaultGeneratorFragment;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class Ecore2XtextValueConverterServiceFragment extends DefaultGeneratorFragment {
 
