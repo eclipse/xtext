@@ -28,6 +28,7 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
@@ -1272,6 +1273,87 @@ public class XtextValidationTest extends AbstractXtextTests implements Validatio
 		validator.setMessageAcceptor(messageAcceptor);
 		validator.checkUnassignedRuleCallAllowed(ruleCall);
 		validator.checkTerminalFragmentCalledFromTerminalRule(ruleCall);
+		messageAcceptor.validate();
+	}
+	
+	public void testPredicatedUnorderedGroup_01() throws Exception {
+		String grammarAsText =
+				"grammar test with org.eclipse.xtext.common.Terminals\n" +
+				"generate test 'http://test'\n" +
+				"Model: =>(name=ID & value=STRING);\n";
+		
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, true, false);
+		messageAcceptor.expectedContext(
+				grammar.getRules().get(0).getAlternatives(),
+				((CompoundElement) grammar.getRules().get(0).getAlternatives()).getElements().get(0)
+		);
+		PredicateUsesUnorderedGroupInspector inspector = new PredicateUsesUnorderedGroupInspector(messageAcceptor);
+		inspector.inspect(grammar);
+		messageAcceptor.validate();
+	}
+	
+	public void testPredicatedUnorderedGroup_02() throws Exception {
+		String grammarAsText =
+				"grammar test with org.eclipse.xtext.common.Terminals\n" +
+				"generate test 'http://test'\n" +
+				"A: =>C;\n" +
+				"B: =>C;\n" +
+				"C: name=ID & value=STRING;";
+		
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, true, false);
+		messageAcceptor.expectedContext(
+				grammar.getRules().get(0).getAlternatives(),
+				grammar.getRules().get(1).getAlternatives(),
+				grammar.getRules().get(2).getAlternatives()
+		);
+		PredicateUsesUnorderedGroupInspector inspector = new PredicateUsesUnorderedGroupInspector(messageAcceptor);
+		inspector.inspect(grammar);
+		messageAcceptor.validate();
+	}
+	
+	public void testPredicatedUnorderedGroup_03() throws Exception {
+		String grammarAsText =
+				"grammar test with org.eclipse.xtext.common.Terminals\n" +
+				"generate test 'http://test'\n" +
+				"A: =>B;\n" +
+				"B: =>C;\n" +
+				"C: name=ID & value=STRING;";
+		
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, true, false);
+		messageAcceptor.expectedContext(
+				grammar.getRules().get(0).getAlternatives(),
+				grammar.getRules().get(1).getAlternatives(),
+				grammar.getRules().get(2).getAlternatives()
+		);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkUnorderedGroupIsNotPredicated(grammar);
+		messageAcceptor.validate();
+	}
+	
+	public void testPredicatedUnorderedGroup_04() throws Exception {
+		String grammarAsText =
+				"grammar test with org.eclipse.xtext.common.Terminals\n" +
+				"generate test 'http://test'\n" +
+				"A: =>(name=ID value=B);\n" +
+				"B: name=ID & value=STRING;";
+		
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, true, false);
+		Group predicatedGroup = (Group) grammar.getRules().get(0).getAlternatives();
+		Group groupContent = (Group) predicatedGroup.getElements().get(0);
+		Assignment valueAssignment = (Assignment) groupContent.getElements().get(1);
+		messageAcceptor.expectedContext(
+				grammar.getRules().get(0).getAlternatives(),
+				valueAssignment.getTerminal(),
+				grammar.getRules().get(1).getAlternatives()
+		);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkUnorderedGroupIsNotPredicated(grammar);
 		messageAcceptor.validate();
 	}
 	
