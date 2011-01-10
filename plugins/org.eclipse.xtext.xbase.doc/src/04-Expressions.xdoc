@@ -59,13 +59,16 @@ XNullLiteral:
 
 section2:TypeLiteral[Type Literals]
 
-Type literals are written like in Java. They consist of a reference to a raw type suffixed with a dot and the keyword code[class].
+Type literals are specified using the keyword e[typeof], e.g.
+ul[
+  item[typeof (java.lang.String) // yields java.lang.String.class]
+]
 
 section2[Syntax]
 
 code[
 XTypeLiteral:
-	QualifiedName '.' 'class';
+	{XTypeLiteral} 'typeof' '(' QualifiedName ')';
 ]
 
 section:TypeCasts[Type Casts]
