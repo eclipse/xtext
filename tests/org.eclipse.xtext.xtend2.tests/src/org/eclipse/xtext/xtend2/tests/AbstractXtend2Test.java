@@ -25,6 +25,7 @@ public abstract class AbstractXtend2Test extends AbstractXtextTests {
 	protected XtendClass clazz(String string) throws Exception {
 		return file(string).getClasses().get(0);
 	}
+	
 	protected XtendFile file(String string) throws Exception {
 		XtextResourceSet set = get(XtextResourceSet.class);
 		Resource resource = set.createResource(URI.createURI("Test.xtd"));
