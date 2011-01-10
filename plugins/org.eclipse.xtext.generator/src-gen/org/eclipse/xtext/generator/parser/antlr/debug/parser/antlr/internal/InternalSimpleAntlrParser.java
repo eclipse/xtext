@@ -24,33 +24,33 @@ public class InternalSimpleAntlrParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'grammar'", "';'", "'options'", "'{'", "'}'", "'='", "'fragment'", "':'", "'|'", "'+'", "'*'", "'?'", "'~'", "'..'", "'('", "')'", "'=>'", "'{skip();}'", "'.'"
     };
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int T__12=12;
-    public static final int T__28=28;
-    public static final int T__23=23;
-    public static final int T__20=20;
-    public static final int T__13=13;
-    public static final int RULE_STRING=6;
-    public static final int T__21=21;
-    public static final int T__19=19;
-    public static final int T__14=14;
-    public static final int T__11=11;
-    public static final int T__22=22;
     public static final int T__29=29;
-    public static final int RULE_WS=9;
-    public static final int T__17=17;
-    public static final int RULE_INT=5;
-    public static final int EOF=-1;
+    public static final int T__28=28;
     public static final int T__27=27;
-    public static final int T__16=16;
-    public static final int T__24=24;
-    public static final int RULE_ANY_OTHER=10;
     public static final int T__26=26;
     public static final int T__25=25;
+    public static final int T__24=24;
+    public static final int T__23=23;
+    public static final int T__22=22;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int T__21=21;
+    public static final int T__20=20;
     public static final int RULE_SL_COMMENT=8;
-    public static final int T__18=18;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T__19=19;
+    public static final int RULE_STRING=6;
+    public static final int T__16=16;
     public static final int T__15=15;
+    public static final int T__18=18;
+    public static final int T__17=17;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=9;
 
     // delegates
     // delegators
@@ -3614,11 +3614,11 @@ public class InternalSimpleAntlrParser extends AbstractInternalAntlrParser {
 
     // Delegated rules
 
-    public final boolean synpred17_InternalSimpleAntlr() {
+    public final boolean synpred16_InternalSimpleAntlr() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred17_InternalSimpleAntlr_fragment(); // can never throw exception
+            synpred16_InternalSimpleAntlr_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -3628,11 +3628,11 @@ public class InternalSimpleAntlrParser extends AbstractInternalAntlrParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred16_InternalSimpleAntlr() {
+    public final boolean synpred17_InternalSimpleAntlr() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred16_InternalSimpleAntlr_fragment(); // can never throw exception
+            synpred17_InternalSimpleAntlr_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
