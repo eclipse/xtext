@@ -20,7 +20,7 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class LabelProviderInjectionTest extends TestCase {
 

@@ -21,7 +21,7 @@ import org.eclipse.xtext.parsetree.reconstr.impl.HiddenAndTokenNodeIterator;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class HiddenAndTokenNodeIteratorTest extends TestCase {
 

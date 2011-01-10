@@ -23,7 +23,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import com.google.inject.Inject;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class LoadingLocalContextProvider implements IReferenceFinder.ILocalContextProvider {
 

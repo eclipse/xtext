@@ -26,7 +26,7 @@ import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public abstract class AbstractReferenceUpdater implements IReferenceUpdater {
 	@Inject

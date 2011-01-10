@@ -13,7 +13,7 @@ import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.editor.outline.actions.LinkWithEditorOutlineContribution;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class Bug326812Test extends AbstractOutlineWorkbenchTest {
 

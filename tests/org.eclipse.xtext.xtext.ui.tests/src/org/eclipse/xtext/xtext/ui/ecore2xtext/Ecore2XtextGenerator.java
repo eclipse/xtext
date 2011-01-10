@@ -33,7 +33,7 @@ import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.EPackageInfo;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class Ecore2XtextGenerator extends AbstractWorkflowComponent2 {
 

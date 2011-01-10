@@ -30,7 +30,7 @@ import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class ReferenceSearchResultContentProvider implements ITreeContentProvider, ISearchResultListener,
 		IResourceDescription.Event.Listener {

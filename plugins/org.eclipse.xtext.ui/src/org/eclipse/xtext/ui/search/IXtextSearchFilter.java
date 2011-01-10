@@ -25,7 +25,7 @@ import com.google.common.collect.Sets;
  * A filter to reject elements form the candidates in the global "Open Xtext Element" dialog. Filters can be registered
  * to the extension point <code>org.eclipse.xtext.ui.searchFilter</code>.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public interface IXtextSearchFilter {
 

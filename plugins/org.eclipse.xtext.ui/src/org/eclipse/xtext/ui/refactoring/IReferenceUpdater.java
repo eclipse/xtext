@@ -16,7 +16,7 @@ import com.google.inject.ImplementedBy;
 /**
  * A component to update references to elements renamed in a refactoring.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @ImplementedBy(DefaultReferenceUpdater.class)
 public interface IReferenceUpdater {

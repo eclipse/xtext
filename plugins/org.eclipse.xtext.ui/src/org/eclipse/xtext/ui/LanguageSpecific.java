@@ -15,7 +15,7 @@ import com.google.inject.BindingAnnotation;
 /**
  * An annotation marking a binding as language specific in contrast to a global service.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @Retention(RetentionPolicy.RUNTIME)
 @BindingAnnotation

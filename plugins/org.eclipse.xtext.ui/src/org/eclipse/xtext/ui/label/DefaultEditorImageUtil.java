@@ -12,7 +12,7 @@ import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.PlatformUI;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class DefaultEditorImageUtil {
 	public ImageDescriptor getDefaultEditorImageDescriptor(String fileName) {

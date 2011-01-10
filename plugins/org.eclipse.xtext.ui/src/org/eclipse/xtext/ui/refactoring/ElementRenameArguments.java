@@ -16,7 +16,7 @@ import org.eclipse.ltk.core.refactoring.participants.RenameArguments;
 /**
  * Stores information on an element to be renamed and elements whose names change as a consequence.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class ElementRenameArguments extends RenameArguments {
 

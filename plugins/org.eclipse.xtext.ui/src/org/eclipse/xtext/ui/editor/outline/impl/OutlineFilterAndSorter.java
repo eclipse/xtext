@@ -19,7 +19,7 @@ import com.google.common.collect.Lists;
 import com.google.inject.Singleton;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @Singleton
 public class OutlineFilterAndSorter {

@@ -23,7 +23,7 @@ import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 /**
  * Delegates to the {@link IDescriptionLabelProvider} looked up in the {@link IResourceServiceProvider.Registry}
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class GlobalDescriptionLabelProvider extends BaseLabelProvider implements ILabelProvider, IItemLabelProvider, IStyledLabelProvider {
 

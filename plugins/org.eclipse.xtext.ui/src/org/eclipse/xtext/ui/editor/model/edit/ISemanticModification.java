@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.editor.model.edit;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public interface ISemanticModification {
 

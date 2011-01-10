@@ -31,7 +31,7 @@ import com.google.inject.Inject;
  * errors. For Xtext-based languages it is far more error tolerant to use a {@link DefaultReferenceUpdater} that only
  * serializes the sections of the document that contain the cross-references.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class EmfResourceReferenceUpdater extends AbstractReferenceUpdater {
 

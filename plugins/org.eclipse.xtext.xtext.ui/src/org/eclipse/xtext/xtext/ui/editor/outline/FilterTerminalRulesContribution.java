@@ -23,7 +23,7 @@ import org.eclipse.xtext.xtext.ui.Activator;
 import com.google.inject.BindingAnnotation;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class FilterTerminalRulesContribution extends AbstractFilterOutlineContribution {
 

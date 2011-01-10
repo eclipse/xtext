@@ -20,7 +20,7 @@ import com.google.inject.ImplementedBy;
  * Tracks the URIs of the elements whose names change in a refactoring. This is necessary as URIs could change if the
  * language implements a name dependent {@link org.eclipse.xtext.resource.IFragmentProvider}.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @ImplementedBy(RenamedElementTracker.class)
 public interface IRenamedElementTracker {

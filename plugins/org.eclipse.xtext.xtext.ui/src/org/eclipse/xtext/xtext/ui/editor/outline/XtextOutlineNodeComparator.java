@@ -13,7 +13,7 @@ import org.eclipse.xtext.ui.editor.outline.actions.SortOutlineContribution;
 import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class XtextOutlineNodeComparator extends SortOutlineContribution.DefaultComparator {
 	@Override

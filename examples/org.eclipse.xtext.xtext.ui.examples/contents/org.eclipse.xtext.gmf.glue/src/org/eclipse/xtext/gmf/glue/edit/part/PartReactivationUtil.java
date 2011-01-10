@@ -17,7 +17,7 @@ import org.eclipse.ui.IWorkbenchPart;
 /**
  * When closing the popup {@link XtextEditor}, the keybindings are lost. This tool offers a hack to restore them.
  * 
- * @author koehnlein
+ * @author Jan Koehnlein
  */
 public class PartReactivationUtil {
 

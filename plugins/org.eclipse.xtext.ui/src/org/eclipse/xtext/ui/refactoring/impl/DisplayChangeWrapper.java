@@ -27,7 +27,7 @@ import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
  * {@link org.eclipse.ltk.core.refactoring.DocumentChange DocumentChanges} are by default not executed on the display
  * thread, causing thread access exceptions and leaving documents opened in editors in an inconsistent state.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class DisplayChangeWrapper extends TextEditBasedChange {
 

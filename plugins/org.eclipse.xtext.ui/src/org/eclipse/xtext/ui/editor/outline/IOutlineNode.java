@@ -19,7 +19,7 @@ import org.eclipse.xtext.util.concurrent.IReadAccess;
  * A model for a node in the outline. Implementors must inherit from
  * {@link org.eclipse.xtext.ui.editor.outline.impl.AbstractOutlineNode}.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public interface IOutlineNode extends IAdaptable, IReadAccess<EObject> {
 

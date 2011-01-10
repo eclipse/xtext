@@ -22,7 +22,7 @@ import com.google.inject.internal.Lists;
 /**
  * Delivers all contained elements of an element to be renamed in order to updated references to them.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class DefaultDependentElementsCalculator implements IDependentElementsCalculator {
 

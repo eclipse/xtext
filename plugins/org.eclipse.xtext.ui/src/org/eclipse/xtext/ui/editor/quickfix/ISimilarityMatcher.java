@@ -13,7 +13,7 @@ import org.eclipse.xtext.util.Strings;
 import com.google.inject.ImplementedBy;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @ImplementedBy(ISimilarityMatcher.Default.class)
 public interface ISimilarityMatcher {

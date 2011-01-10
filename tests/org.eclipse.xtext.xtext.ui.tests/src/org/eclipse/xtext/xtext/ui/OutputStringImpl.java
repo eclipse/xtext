@@ -13,7 +13,7 @@ import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.Output;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class OutputStringImpl implements Output {
 

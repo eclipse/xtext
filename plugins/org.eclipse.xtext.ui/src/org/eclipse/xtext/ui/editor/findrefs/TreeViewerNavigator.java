@@ -17,7 +17,7 @@ import org.eclipse.swt.widgets.TreeItem;
 /**
  * Mostly copied from {@link org.eclipse.search2.internal.ui.basic.views.TreeViewerNavigator}.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class TreeViewerNavigator {
 

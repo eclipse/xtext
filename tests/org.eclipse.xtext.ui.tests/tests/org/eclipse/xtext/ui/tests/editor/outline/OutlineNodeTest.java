@@ -26,7 +26,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import com.google.inject.Injector;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class OutlineNodeTest extends AbstractXtextTests {
 

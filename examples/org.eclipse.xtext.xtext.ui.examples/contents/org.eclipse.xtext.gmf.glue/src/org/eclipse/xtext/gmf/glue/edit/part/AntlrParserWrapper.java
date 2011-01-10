@@ -34,7 +34,7 @@ import com.google.inject.Injector;
 /**
  * Wraps a (partial) Xtext parser in a GMF {@link IParser}.
  * 
- * @author koehnlein
+ * @author Jan Koehnlein
  */
 public class AntlrParserWrapper implements IParser {
 

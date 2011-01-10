@@ -14,7 +14,7 @@ import org.eclipse.ui.IEditorPart;
 import com.google.inject.ImplementedBy;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @ImplementedBy(GlobalURIEditorOpener.class)
 public interface IURIEditorOpener {

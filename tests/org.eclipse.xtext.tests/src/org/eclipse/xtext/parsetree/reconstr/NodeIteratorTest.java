@@ -18,7 +18,7 @@ import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class NodeIteratorTest extends TestCase {
 

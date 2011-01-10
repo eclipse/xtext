@@ -17,7 +17,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
 /**
  * A label provider that dispatches to typed <code>Object image()</code> and <code>Object text()</code> methods.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class DeclarativeLabelProvider extends AbstractLabelProvider {
 

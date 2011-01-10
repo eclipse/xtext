@@ -24,7 +24,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import com.google.common.collect.Lists;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public abstract class AbstractOutlineNode implements IOutlineNode {
 

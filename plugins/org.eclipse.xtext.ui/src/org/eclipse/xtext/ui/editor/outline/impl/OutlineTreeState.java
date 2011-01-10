@@ -23,7 +23,7 @@ import com.google.common.collect.Sets;
 /**
  * Either stores the expansion/selection of a tree viewer or aggregates the new expansion/selection state.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class OutlineTreeState {
 

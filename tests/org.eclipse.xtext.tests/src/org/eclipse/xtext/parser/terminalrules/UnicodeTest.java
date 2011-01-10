@@ -18,7 +18,7 @@ import org.eclipse.xtext.parser.terminalrules.unicode.UnicodeFactory;
 import org.eclipse.xtext.resource.XtextResource;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class UnicodeTest extends AbstractXtextTests {
 

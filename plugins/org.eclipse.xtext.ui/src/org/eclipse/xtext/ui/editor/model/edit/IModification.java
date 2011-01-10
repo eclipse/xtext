@@ -8,7 +8,7 @@
 package org.eclipse.xtext.ui.editor.model.edit;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public interface IModification {
 

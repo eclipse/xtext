@@ -20,7 +20,7 @@ import org.eclipse.xtext.ui.tests.editor.AbstractEditorTest;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class EncodingTest extends AbstractEditorTest {
 

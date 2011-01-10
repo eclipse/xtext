@@ -17,7 +17,7 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import com.google.inject.Inject;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class DefaultEObjectLabelProvider extends DeclarativeLabelProvider {
 

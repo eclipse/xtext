@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class BufferedBinaryResourceFactory extends ResourceFactoryImpl {
 	@Override

@@ -15,7 +15,7 @@ import org.eclipse.ui.IEditorPart;
 /**
  * The context information of a rename element refactoring.
  *  
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public interface IRenameElementContext {
 

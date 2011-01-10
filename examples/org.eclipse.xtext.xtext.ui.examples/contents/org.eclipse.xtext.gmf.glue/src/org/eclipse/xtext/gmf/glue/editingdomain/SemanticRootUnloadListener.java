@@ -24,7 +24,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
  * 
  * Activate an instance of this in the {@link EditPart#activate()} method of the {@link DiagramEditPart}.
  * 
- * @author koehnlein
+ * @author Jan Koehnlein
  */
 public class SemanticRootUnloadListener implements ResourceSetListener {
 

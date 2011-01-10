@@ -30,7 +30,7 @@ import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class IssueDataTest extends AbstractQuickfixTest {
 

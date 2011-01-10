@@ -17,7 +17,7 @@ import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import com.google.inject.Inject;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class DefaultDescriptionLabelProvider extends DeclarativeLabelProvider {
 

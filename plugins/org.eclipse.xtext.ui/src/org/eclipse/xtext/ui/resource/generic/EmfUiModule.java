@@ -30,7 +30,7 @@ import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
 import com.google.inject.Binder;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class EmfUiModule extends AbstractGenericModule {
 

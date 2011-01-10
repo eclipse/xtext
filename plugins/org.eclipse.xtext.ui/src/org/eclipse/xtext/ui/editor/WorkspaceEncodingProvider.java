@@ -26,7 +26,7 @@ import com.google.inject.Singleton;
  * Resolves the encoding for {@link IFile}s and falls back to the {@link IEncodingProvider} configured for in the
  * runtime module otherwise.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @Singleton
 public class WorkspaceEncodingProvider implements IEncodingProvider {

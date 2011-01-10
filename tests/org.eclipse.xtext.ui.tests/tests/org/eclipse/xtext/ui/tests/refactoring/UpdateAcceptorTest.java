@@ -18,7 +18,7 @@ import org.eclipse.xtext.ui.refactoring.impl.RefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.tests.refactoring.MockRefactoringDocument.MockChange;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class UpdateAcceptorTest extends TestCase {
 

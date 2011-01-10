@@ -16,7 +16,7 @@ import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
 import com.google.inject.Inject;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public abstract class AbstractFilterOutlineContribution extends AbstractToggleActionContribution {
 

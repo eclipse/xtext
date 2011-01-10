@@ -8,7 +8,7 @@
 package org.eclipse.xtext.ui.label;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class EditorImageHelper {
 

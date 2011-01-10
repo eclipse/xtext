@@ -13,7 +13,7 @@ import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import com.google.inject.ImplementedBy;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @ImplementedBy(DefaultOutlineTreeProvider.class)
 public interface IOutlineTreeStructureProvider  {

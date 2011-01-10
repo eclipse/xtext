@@ -8,7 +8,7 @@
 package org.eclipse.xtext.gmf.glue.edit.part;
 
 /**
- * @author koehnlein
+ * @author Jan Koehnlein
  */
 public class StringUtil {
 

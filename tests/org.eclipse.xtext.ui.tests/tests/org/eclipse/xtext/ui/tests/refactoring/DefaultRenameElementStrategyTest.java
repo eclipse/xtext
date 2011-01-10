@@ -28,7 +28,7 @@ import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
 import com.google.inject.Inject;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class DefaultRenameElementStrategyTest extends AbstractXtextTests implements IRefactoringUpdateAcceptor {
 

@@ -17,7 +17,7 @@ import com.google.inject.Inject;
 /**
  * The JFace/SWT content provider. The tree of visible IOutlineNodes has already been pre-computed.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class OutlineNodeContentProvider implements ITreeContentProvider {
 
