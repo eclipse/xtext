@@ -11,6 +11,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.typing.IExpectedTypeProvider;
 import org.eclipse.xtext.typing.ITypeProvider;
+import org.eclipse.xtext.typing.TypeResolutionException;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.XbasePackage;
 
@@ -32,12 +33,16 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	@Check
 	public void checkTypes(EObject obj) {
+		try {
 		JvmTypeReference expectedType = expectedTypeProvider.getExpectedType(obj);
 		if (expectedType==null)
 			return;
 		JvmTypeReference actualType = typeProvider.getType(obj);
 		if (!conformanceComputer.isConformant(expectedType, actualType)) {
 			error("Incompatible types. Expected "+expectedType.getCanonicalName()+" but was "+actualType.getCanonicalName(), -1, INCOMPATIBLE_TYPES);
+		}
+		} catch (TypeResolutionException e) {
+			// do nothing, error should be handled elsewhere
 		}
 	}
 	
