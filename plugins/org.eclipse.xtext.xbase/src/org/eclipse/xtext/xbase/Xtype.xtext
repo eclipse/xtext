@@ -42,3 +42,7 @@ JvmTypeParameter :
 
 QualifiedName:
   ID ('.' ID)*;
+  
+// uncomment for unicode identifiers
+terminal ID:
+	'^'?('a'..'z'|'A'..'Z'|'_'|'$'|'\u0080'..'\ufffd') ('a'..'z'|'A'..'Z'|'_'|'$'|'0'..'9'|'\u0080'..'\ufffd')*;
