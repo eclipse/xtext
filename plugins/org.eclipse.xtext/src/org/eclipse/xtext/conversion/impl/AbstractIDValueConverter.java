@@ -73,16 +73,20 @@ public abstract class AbstractIDValueConverter extends AbstractLexerBasedConvert
 	protected ValueConverterException createTokenContentMismatchException(String value, String escapedString, Token token) {
 		Set<Character> invalidChars = collectInvalidCharacters(value);
 		if (invalidChars != null) {
-			String chars = Joiner.on(", ").join(Iterables.transform(invalidChars, new Function<Character, String>() {
-				public String apply(Character from) {
-					return "'" + from + "' (0x" + Integer.toHexString(from) + ")";
-				}
-			}));
-			return new ValueConverterException("ID '" + value + "' contains invalid characters: " + chars, null, null);
+			return new ValueConverterException(getInvalidCharactersMessage(value, invalidChars), null, null);
 		}
 		return super.createTokenContentMismatchException(value, escapedString, token);
 	}
 
+	protected String getInvalidCharactersMessage(String value, Set<Character> invalidChars) {
+		String chars = Joiner.on(", ").join(Iterables.transform(invalidChars, new Function<Character, String>() {
+			public String apply(Character from) {
+				return "'" + from + "' (0x" + Integer.toHexString(from) + ")";
+			}
+		}));
+		return "ID '" + value + "' contains invalid characters: " + chars;
+	}
+	
 	protected Set<Character> collectInvalidCharacters(String value) {
 		Set<Character> result = null;
 		for (int i = 0; i < value.length(); i++) {
