@@ -18,7 +18,7 @@ import org.eclipse.xtext.parsetree.impl.crossContainment.Element;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class TransientContainerReferencesTest extends TestCase {
 

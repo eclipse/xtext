@@ -19,7 +19,7 @@ import org.eclipse.xtext.index.indexTestLanguage.Entity;
 import com.google.common.collect.Iterables;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class ReaderTest extends AbstractReaderTest {
 

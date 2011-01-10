@@ -12,7 +12,7 @@ import org.eclipse.xtext.generator.Naming;
 /**
  * An {@link IGeneratorFragment} to generate a label provider.
  * 
- * @author koehnlein - javadocs
+ * @author Jan Koehnlein - javadocs
  * @author Sven Efftinge
  */
 public class LabelProviderFragment extends AbstractGeneratorFragment {

@@ -16,7 +16,7 @@ import org.eclipse.xtext.resource.locationprovidertest.Model;
 import org.eclipse.xtext.util.ITextRegion;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class LocationInFileProviderTest extends AbstractXtextTests {
 

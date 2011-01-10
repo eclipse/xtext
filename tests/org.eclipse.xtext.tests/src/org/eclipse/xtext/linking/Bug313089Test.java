@@ -10,7 +10,7 @@ package org.eclipse.xtext.linking;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class Bug313089Test extends AbstractXtextTests {
 

@@ -25,7 +25,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
  */
 public abstract class AbstractXbaseValidationTest extends AbstractXbaseTestCase {

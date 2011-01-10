@@ -12,7 +12,7 @@ import org.eclipse.xtext.resource.generic.AbstractGenericResourceRuntimeModule;
 /**
  * Default Guice bindings for managing Ecore resources in the context of Xtext.
  *  
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class EcoreRuntimeModule extends AbstractGenericResourceRuntimeModule {
 
