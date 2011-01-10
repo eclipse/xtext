@@ -10,7 +10,7 @@ package org.eclipse.xtext.naming;
 import junit.framework.TestCase;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class DeclarativeQualifiedNameConverterTest extends TestCase {
 

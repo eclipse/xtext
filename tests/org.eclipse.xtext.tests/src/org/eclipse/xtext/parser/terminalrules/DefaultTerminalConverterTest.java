@@ -17,7 +17,7 @@ import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import com.ibm.icu.text.SimpleDateFormat;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class DefaultTerminalConverterTest extends AbstractXtextTests {
 

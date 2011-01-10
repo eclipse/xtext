@@ -16,7 +16,7 @@ import org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.Composit
 import org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.Model;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class EFactoryValueConverterTest extends AbstractXtextTests{
 

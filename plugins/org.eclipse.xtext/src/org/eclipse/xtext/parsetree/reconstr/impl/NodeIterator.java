@@ -21,7 +21,7 @@ import com.google.inject.internal.Lists;
  * An iterator that can traverse a parse tree in forward and backward direction 
  * starting from any element in the tree. Also allows pruning of nodes. 
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class NodeIterator implements TreeIterator<INode> {
 

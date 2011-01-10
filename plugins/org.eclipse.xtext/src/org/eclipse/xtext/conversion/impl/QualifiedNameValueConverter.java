@@ -24,7 +24,7 @@ import com.google.inject.Inject;
  * A value converter for qualified names consisting of segments or wildcard literals separated by namespace delimiters.
  * Delegates to another value converter for the segments, thus enabling individual quoting of segments.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class QualifiedNameValueConverter extends AbstractValueConverter<String> {
 

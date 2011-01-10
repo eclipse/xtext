@@ -15,7 +15,7 @@ import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter;
 import com.google.inject.Inject;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class QualifiedNameTerminalConverters extends DefaultTerminalConverters {
 

@@ -26,7 +26,7 @@ import com.google.common.collect.Lists;
 /**
  * A slot entry filtering all contents of the resource set rather than the exported objects only.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class ResourceSetBasedSlotEntry extends SlotEntry {
 

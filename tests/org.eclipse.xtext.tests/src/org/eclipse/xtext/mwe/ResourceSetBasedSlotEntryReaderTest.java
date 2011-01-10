@@ -14,7 +14,7 @@ import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.xtext.index.IndexTestLanguageStandaloneSetup;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class ResourceSetBasedSlotEntryReaderTest extends AbstractReaderTest {
 

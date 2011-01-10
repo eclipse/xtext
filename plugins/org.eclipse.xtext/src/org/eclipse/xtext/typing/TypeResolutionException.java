@@ -8,7 +8,7 @@
 package org.eclipse.xtext.typing;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class TypeResolutionException extends RuntimeException {
 

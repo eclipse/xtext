@@ -18,7 +18,7 @@ import com.google.inject.Provider;
  * Allows to implement a UI service that overrides a runtime service
  * but still can fall back to it.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class DispatchingProvider<T> implements Provider<T> {
 
