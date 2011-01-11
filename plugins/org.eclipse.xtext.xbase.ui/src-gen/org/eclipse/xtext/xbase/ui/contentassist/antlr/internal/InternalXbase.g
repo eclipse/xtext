@@ -4448,7 +4448,7 @@ rule__XCastedExpression__Group__1__Impl
 :
 (
 { before(grammarAccess.getXCastedExpressionAccess().getGroup_1()); }
-(rule__XCastedExpression__Group_1__0)?
+(rule__XCastedExpression__Group_1__0)*
 { after(grammarAccess.getXCastedExpressionAccess().getGroup_1()); }
 )
 

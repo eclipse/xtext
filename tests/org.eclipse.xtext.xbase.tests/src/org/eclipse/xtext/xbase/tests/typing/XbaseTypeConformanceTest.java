@@ -10,9 +10,9 @@ package org.eclipse.xtext.xbase.tests.typing;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.eclipse.xtext.xbase.typing.IXbaseTypeProvider;
 import org.eclipse.xtext.xbase.typing.TypesService;
 
 import com.google.inject.Inject;
@@ -26,7 +26,7 @@ public class XbaseTypeConformanceTest extends AbstractXbaseTestCase {
 	private TypesService typeService;
 
 	@Inject
-	private ITypeProvider<JvmTypeReference> typeProvider;
+	private IXbaseTypeProvider typeProvider;
 
 	@Inject
 	private IJvmTypeConformanceComputer typeConformanceComputer;

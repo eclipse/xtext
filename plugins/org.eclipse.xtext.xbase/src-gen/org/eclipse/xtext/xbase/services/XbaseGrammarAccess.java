@@ -792,16 +792,16 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_1_1_0 = (RuleCall)cTypeAssignment_1_1.eContents().get(0);
 		
 		//XCastedExpression returns XExpression:
-		//	XMemberFeatureCall (=> ({XCastedExpression.target=current} "as") type=JvmTypeReference)?;
+		//	XMemberFeatureCall (=> ({XCastedExpression.target=current} "as") type=JvmTypeReference)*;
 		public ParserRule getRule() { return rule; }
 
-		//XMemberFeatureCall (=> ({XCastedExpression.target=current} "as") type=JvmTypeReference)?
+		//XMemberFeatureCall (=> ({XCastedExpression.target=current} "as") type=JvmTypeReference)*
 		public Group getGroup() { return cGroup; }
 
 		//XMemberFeatureCall
 		public RuleCall getXMemberFeatureCallParserRuleCall_0() { return cXMemberFeatureCallParserRuleCall_0; }
 
-		//(=> ({XCastedExpression.target=current} "as") type=JvmTypeReference)?
+		//(=> ({XCastedExpression.target=current} "as") type=JvmTypeReference)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//=> ({XCastedExpression.target=current} "as")
@@ -2607,7 +2607,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XCastedExpression returns XExpression:
-	//	XMemberFeatureCall (=> ({XCastedExpression.target=current} "as") type=JvmTypeReference)?;
+	//	XMemberFeatureCall (=> ({XCastedExpression.target=current} "as") type=JvmTypeReference)*;
 	public XCastedExpressionElements getXCastedExpressionAccess() {
 		return (pXCastedExpression != null) ? pXCastedExpression : (pXCastedExpression = new XCastedExpressionElements());
 	}

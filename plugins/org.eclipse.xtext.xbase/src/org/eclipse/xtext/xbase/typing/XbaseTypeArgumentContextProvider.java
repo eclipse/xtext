@@ -11,7 +11,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.typing.ITypeProvider;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.Tuples;
 
@@ -24,7 +23,7 @@ import com.google.inject.Provider;
 public class XbaseTypeArgumentContextProvider extends TypeArgumentContext.Provider {
 	
 	@Inject
-	private ITypeProvider<JvmTypeReference> typeProvider;
+	private IXbaseTypeProvider typeProvider;
 	
 	public TypeArgumentContext getContext(final EObject obj) {
 		Provider<TypeArgumentContext> provider = new Provider<TypeArgumentContext>() {

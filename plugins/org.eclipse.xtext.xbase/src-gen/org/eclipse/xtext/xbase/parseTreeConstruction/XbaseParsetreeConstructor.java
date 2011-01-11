@@ -3089,11 +3089,11 @@ protected class XUnaryOperation_XCastedExpressionParserRuleCall_1 extends RuleCa
 /************ begin Rule XCastedExpression ****************
  *
  * XCastedExpression returns XExpression:
- * 	XMemberFeatureCall (=> ({XCastedExpression.target=current} "as") type=JvmTypeReference)?;
+ * 	XMemberFeatureCall (=> ({XCastedExpression.target=current} "as") type=JvmTypeReference)*;
  *
  **/
 
-// XMemberFeatureCall (=> ({XCastedExpression.target=current} "as") type=JvmTypeReference)?
+// XMemberFeatureCall (=> ({XCastedExpression.target=current} "as") type=JvmTypeReference)*
 protected class XCastedExpression_Group extends GroupToken {
 	
 	public XCastedExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3178,7 +3178,7 @@ protected class XCastedExpression_XMemberFeatureCallParserRuleCall_0 extends Rul
 	}	
 }
 
-// (=> ({XCastedExpression.target=current} "as") type=JvmTypeReference)?
+// (=> ({XCastedExpression.target=current} "as") type=JvmTypeReference)*
 protected class XCastedExpression_Group_1 extends GroupToken {
 	
 	public XCastedExpression_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3266,7 +3266,8 @@ protected class XCastedExpression_XCastedExpressionTargetAction_1_0_0_0 extends 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XCastedExpression_XMemberFeatureCallParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new XCastedExpression_Group_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new XCastedExpression_XMemberFeatureCallParserRuleCall_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}

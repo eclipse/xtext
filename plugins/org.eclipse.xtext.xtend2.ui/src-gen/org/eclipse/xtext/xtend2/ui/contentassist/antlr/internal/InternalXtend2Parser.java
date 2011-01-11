@@ -6511,11 +6511,11 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             if ( (LA4_0==RULE_RICH_TEXT_INBETWEEN) ) {
                 int LA4_1 = input.LA(2);
 
-                if ( (LA4_1==EOF||LA4_1==51||(LA4_1>=53 && LA4_1<=55)) ) {
-                    alt4=1;
-                }
-                else if ( ((LA4_1>=RULE_ID && LA4_1<=RULE_RICH_TEXT_START)||LA4_1==RULE_INT||LA4_1==26||(LA4_1>=29 && LA4_1<=30)||LA4_1==35||LA4_1==38||LA4_1==42||LA4_1==47||LA4_1==49||LA4_1==52||LA4_1==58||LA4_1==61||LA4_1==63||(LA4_1>=66 && LA4_1<=73)||LA4_1==83) ) {
+                if ( ((LA4_1>=RULE_ID && LA4_1<=RULE_RICH_TEXT_START)||LA4_1==RULE_INT||LA4_1==26||(LA4_1>=29 && LA4_1<=30)||LA4_1==35||LA4_1==38||LA4_1==42||LA4_1==47||LA4_1==49||LA4_1==52||LA4_1==58||LA4_1==61||LA4_1==63||(LA4_1>=66 && LA4_1<=73)||LA4_1==83) ) {
                     alt4=2;
+                }
+                else if ( (LA4_1==EOF||LA4_1==51||(LA4_1>=53 && LA4_1<=55)) ) {
+                    alt4=1;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -7685,14 +7685,17 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             if ( (LA15_0==36) ) {
                 int LA15_1 = input.LA(2);
 
-                if ( (LA15_1==RULE_ID) ) {
+                if ( (LA15_1==26) ) {
+                    alt15=2;
+                }
+                else if ( (LA15_1==RULE_ID) ) {
                     int LA15_3 = input.LA(3);
 
-                    if ( (LA15_3==EOF||(LA15_3>=RULE_ID && LA15_3<=RULE_INT)||(LA15_3>=17 && LA15_3<=38)||(LA15_3>=42 && LA15_3<=44)||(LA15_3>=47 && LA15_3<=48)||LA15_3==50||(LA15_3>=56 && LA15_3<=58)||(LA15_3>=60 && LA15_3<=76)||(LA15_3>=80 && LA15_3<=83)) ) {
-                        alt15=2;
-                    }
-                    else if ( (LA15_3==16) ) {
+                    if ( (LA15_3==16) ) {
                         alt15=1;
+                    }
+                    else if ( (LA15_3==EOF||(LA15_3>=RULE_ID && LA15_3<=RULE_INT)||(LA15_3>=17 && LA15_3<=38)||(LA15_3>=42 && LA15_3<=44)||(LA15_3>=47 && LA15_3<=48)||LA15_3==50||(LA15_3>=56 && LA15_3<=58)||(LA15_3>=60 && LA15_3<=76)||(LA15_3>=80 && LA15_3<=83)) ) {
+                        alt15=2;
                     }
                     else {
                         if (state.backtracking>0) {state.failed=true; return ;}
@@ -7701,9 +7704,6 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
 
                         throw nvae;
                     }
-                }
-                else if ( (LA15_1==26) ) {
-                    alt15=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -23342,46 +23342,55 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XCastedExpression__Group__1__Impl"
-    // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:7836:1: rule__XCastedExpression__Group__1__Impl : ( ( rule__XCastedExpression__Group_1__0 )? ) ;
+    // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:7836:1: rule__XCastedExpression__Group__1__Impl : ( ( rule__XCastedExpression__Group_1__0 )* ) ;
     public final void rule__XCastedExpression__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:7840:1: ( ( ( rule__XCastedExpression__Group_1__0 )? ) )
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:7841:1: ( ( rule__XCastedExpression__Group_1__0 )? )
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:7840:1: ( ( ( rule__XCastedExpression__Group_1__0 )* ) )
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:7841:1: ( ( rule__XCastedExpression__Group_1__0 )* )
             {
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:7841:1: ( ( rule__XCastedExpression__Group_1__0 )? )
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:7842:1: ( rule__XCastedExpression__Group_1__0 )?
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:7841:1: ( ( rule__XCastedExpression__Group_1__0 )* )
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:7842:1: ( rule__XCastedExpression__Group_1__0 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCastedExpressionAccess().getGroup_1()); 
             }
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:7843:1: ( rule__XCastedExpression__Group_1__0 )?
-            int alt56=2;
-            int LA56_0 = input.LA(1);
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:7843:1: ( rule__XCastedExpression__Group_1__0 )*
+            loop56:
+            do {
+                int alt56=2;
+                int LA56_0 = input.LA(1);
 
-            if ( (LA56_0==57) ) {
-                int LA56_1 = input.LA(2);
+                if ( (LA56_0==57) ) {
+                    int LA56_2 = input.LA(2);
 
-                if ( (synpred77_InternalXtend2()) ) {
-                    alt56=1;
-                }
-            }
-            switch (alt56) {
-                case 1 :
-                    // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:7843:2: rule__XCastedExpression__Group_1__0
-                    {
-                    pushFollow(FOLLOW_rule__XCastedExpression__Group_1__0_in_rule__XCastedExpression__Group__1__Impl15997);
-                    rule__XCastedExpression__Group_1__0();
-
-                    state._fsp--;
-                    if (state.failed) return ;
-
+                    if ( (synpred77_InternalXtend2()) ) {
+                        alt56=1;
                     }
-                    break;
 
-            }
+
+                }
+
+
+                switch (alt56) {
+            	case 1 :
+            	    // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:7843:2: rule__XCastedExpression__Group_1__0
+            	    {
+            	    pushFollow(FOLLOW_rule__XCastedExpression__Group_1__0_in_rule__XCastedExpression__Group__1__Impl15997);
+            	    rule__XCastedExpression__Group_1__0();
+
+            	    state._fsp--;
+            	    if (state.failed) return ;
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop56;
+                }
+            } while (true);
 
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXCastedExpressionAccess().getGroup_1()); 
@@ -50168,7 +50177,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XCastedExpression__Group__1_in_rule__XCastedExpression__Group__015914 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXMemberFeatureCall_in_rule__XCastedExpression__Group__0__Impl15941 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XCastedExpression__Group__1__Impl_in_rule__XCastedExpression__Group__115970 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XCastedExpression__Group_1__0_in_rule__XCastedExpression__Group__1__Impl15997 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XCastedExpression__Group_1__0_in_rule__XCastedExpression__Group__1__Impl15997 = new BitSet(new long[]{0x0200000000000002L});
     public static final BitSet FOLLOW_rule__XCastedExpression__Group_1__0__Impl_in_rule__XCastedExpression__Group_1__016032 = new BitSet(new long[]{0x0000800000000010L,0x0000000000001000L});
     public static final BitSet FOLLOW_rule__XCastedExpression__Group_1__1_in_rule__XCastedExpression__Group_1__016035 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XCastedExpression__Group_1_0__0_in_rule__XCastedExpression__Group_1__0__Impl16062 = new BitSet(new long[]{0x0000000000000002L});

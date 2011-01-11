@@ -42,15 +42,14 @@ public class AbstractTypeProvider<T> implements ITypeProvider<T> {
 		final Provider<T> provider = new Provider<T>() {
 			public T get() {
 				final T invoke = typeDispatcher.invoke(astNode);
-				T actual = doConversion(invoke, astNode);
-				return actual;
+				return invoke;
 			}
 		};
 		final IResourceScopeCache cache = getCache(astNode);
 		if (cache == null)
 			return provider.get();
 		else
-			return cache.get(Tuples.pair("typeInference", astNode), astNode.eResource(), provider);
+			return cache.get(Tuples.create("typeInference", astNode), astNode.eResource(), provider);
 	}
 
 	private IResourceScopeCache getCache(EObject astNode) {

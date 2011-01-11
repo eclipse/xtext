@@ -44,6 +44,7 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScopeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentSugarDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
+import org.eclipse.xtext.xbase.typing.IXbaseTypeProvider;
 
 import com.google.common.base.Function;
 import com.google.inject.Inject;
@@ -75,9 +76,9 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	private Provider<XAssignmentSugarDescriptionProvider> assignmentSugarFeatureDescProvider;
 
 	@Inject
-	private ITypeProvider<JvmTypeReference> typeProvider;
+	private IXbaseTypeProvider typeProvider;
 
-	public void setTypeProvider(ITypeProvider<JvmTypeReference> typeProvider) {
+	public void setTypeProvider(IXbaseTypeProvider typeProvider) {
 		this.typeProvider = typeProvider;
 	}
 

@@ -8,6 +8,8 @@ import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider;
+import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
+import org.eclipse.xtext.xtend2.typing.Xtend2ExpectedTypeProvider;
 import org.eclipse.xtext.xtend2.typing.Xtend2TypeProvider;
 
 import com.google.inject.Binder;
@@ -22,7 +24,15 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 	}
 	
 	public Class<? extends org.eclipse.xtext.typing.ITypeProvider<JvmTypeReference>> bindITypeProvider() {
+		return XbaseTypeProvider.class;
+	}
+	
+	public Class<? extends XbaseTypeProvider> bindXbaseTypeProvider() {
 		return Xtend2TypeProvider.class;
+	}
+	
+	public Class<? extends org.eclipse.xtext.typing.IExpectedTypeProvider<JvmTypeReference>> bindIExpectedTypeProvider() {
+		return Xtend2ExpectedTypeProvider.class;
 	}
 	
 	@Override

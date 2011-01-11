@@ -7,12 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.typing;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Sven Efftinge
  */
 public class TypeResolutionException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
+	private EObject astNode;
 
 	public TypeResolutionException(String message, Throwable cause) {
 		super(message, cause);
@@ -21,8 +25,16 @@ public class TypeResolutionException extends RuntimeException {
 	public TypeResolutionException(String message) {
 		super(message);
 	}
+	public TypeResolutionException(String message, EObject astNode) {
+		this(message);
+		this.astNode = astNode;
+	}
 
 	public TypeResolutionException(Throwable cause) {
 		super(cause);
+	}
+	
+	public EObject getAstNode() {
+		return astNode;
 	}
 }

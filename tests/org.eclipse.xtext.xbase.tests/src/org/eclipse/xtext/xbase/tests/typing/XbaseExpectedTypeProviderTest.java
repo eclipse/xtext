@@ -96,8 +96,8 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	public void testForLoopExpression_1() throws Exception {
 		XForLoopExpression loop = (XForLoopExpression) expression("for (x : null) null");
 
-		// expect raw type
-		assertExpected("java.lang.Iterable", loop.getForExpression());
+		//TODO create special validation rule to check Iterable type
+		assertExpected(null, loop.getForExpression());
 		assertExpected(null, loop.getEachExpression());
 		assertExpected(null, loop.getDeclaredParam());
 	}

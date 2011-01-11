@@ -1229,7 +1229,7 @@ ruleXCastedExpression returns [EObject current=null]
 	    }
 
 )
-))?)
+))*)
 ;
 
 

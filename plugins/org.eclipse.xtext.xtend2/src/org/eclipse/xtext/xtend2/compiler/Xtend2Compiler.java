@@ -35,20 +35,21 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 	protected void compile(XtendClass obj, IAppendable appendable) {
 		//TODO typeparams, inheritance, abstract, final
-		appendable.append("public class ").append(obj.getName()).append(" {\n");
+		appendable.append("public class ").append(obj.getName()).append(" {");
+		appendable.increaseIndentation();
 		for (JvmOperation op : obj.getDeclaredOperations()) {
 			if (op instanceof XtendFunction) {
-				appendable.append("\n");
 				compile((XtendFunction)op,appendable);
 			}
 		}
+		appendable.decreaseIndentation();
 		appendable.append("\n}");
 	}
 
 	protected void compile(XtendFunction obj, IAppendable appendable) {
 		//TODO typeparams, exceptions
 		JvmTypeReference returnType = getTypeProvider().getType(obj);
-		appendable.append("public ").append(returnType.getCanonicalName()).append(" ").append(obj.getName()).append("(");
+		appendable.append("\n").append("public ").append(returnType.getCanonicalName()).append(" ").append(obj.getName()).append("(");
 		final int numParams = obj.getParameters().size();
 		for (int i = 0; i < numParams; i++) {
 			JvmFormalParameter p = obj.getParameters().get(i);
@@ -56,8 +57,10 @@ public class Xtend2Compiler extends XbaseCompiler {
 			if (i!=numParams-1)
 				appendable.append(", ");
 		}
-		appendable.append(") {\n");
+		appendable.append(") {");
+		appendable.increaseIndentation();
 		compile(obj.getExpression(), appendable);
-		appendable.append("}\n");
+		appendable.decreaseIndentation();
+		appendable.append("\n}");
 	}
 }

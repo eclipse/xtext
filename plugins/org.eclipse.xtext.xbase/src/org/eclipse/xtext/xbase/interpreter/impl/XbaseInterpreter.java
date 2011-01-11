@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.interpreter.impl;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
@@ -15,10 +14,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Proxy;
-import java.util.AbstractList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.RandomAccess;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmArrayType;
@@ -67,6 +64,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 
@@ -92,87 +90,6 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			return param.getName().startsWith(methodName) && param.getParameterTypes().length >= minParams
 					&& param.getParameterTypes().length <= maxParams;
 		}
-	}
-	
-	protected static class WrappedArray<T> extends AbstractList<T> implements RandomAccess {
-
-		protected static <T> WrappedArray<T> create(T[] array) {
-			return new WrappedArray<T>(array);
-		}
-		
-		private T[] array;
-
-		protected WrappedArray(T[] array) {
-			this.array = array;
-		}
-
-		@Override
-		public T get(int index) {
-			return array[index];
-		}
-		
-		@Override
-		public T set(int index, T element) {
-			T old = array[index];
-			array[index] = element;
-			modCount++;
-			return old;
-		}
-
-		@Override
-		public int size() {
-			return array.length;
-		}
-		
-		@Override
-		public Object[] toArray() {
-			return array.clone();
-		}
-		
-		public T[] internalToArray() {
-			modCount++;
-			return array;
-		}
-		
-	}
-	
-	protected static class WrappedPrimitiveArray extends AbstractList<Object> implements RandomAccess {
-
-		protected static WrappedPrimitiveArray create(Object array) {
-			return new WrappedPrimitiveArray(array);
-		}
-		
-		private Object array;
-		private int size;
-
-		protected WrappedPrimitiveArray(Object array) {
-			this.array = array;
-			this.size = Array.getLength(array);
-		}
-
-		@Override
-		public Object get(int index) {
-			return Array.get(array, index);
-		}
-		
-		@Override
-		public Object set(int index, Object element) {
-			Object old = get(index);
-			Array.set(array, index, element);
-			modCount++;
-			return old;
-		}
-
-		@Override
-		public int size() {
-			return size;
-		}
-		
-		public Object internalToArray() {
-			modCount++;
-			return array;
-		}
-		
 	}
 	
 	public XbaseInterpreter() {
@@ -430,31 +347,11 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 	
 	protected Object wrapArray(Object result) {
-		if (result != null) {
-			return doWrapArray(result);
-		}
-		return result;
+		return Conversions.doWrapArray(result);
 	}
 	
 	protected Object unwrapArray(Object value) {
-		if (value instanceof WrappedArray<?>)
-			return ((WrappedArray<?>) value).internalToArray();
-		if (value instanceof WrappedPrimitiveArray)
-			return ((WrappedPrimitiveArray) value).internalToArray();
-		return value;
-	}
-	
-	protected Object doWrapArray(Object object) {
-		Class<?> arrayClass = object.getClass();
-		if (arrayClass.isArray()) {
-			if (arrayClass.getComponentType().isPrimitive()) {
-				WrappedPrimitiveArray result = WrappedPrimitiveArray.create(object);
-				return result;
-			}
-			WrappedArray<Object> result = WrappedArray.create((Object[])object);
-			return result;
-		}
-		return object;
+		return Conversions.unwrapArray(value);
 	}
 	
 	public Object _evaluateForLoopExpression(XForLoopExpression forLoop, IEvaluationContext context) {

@@ -12,72 +12,72 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalXbaseLexer extends Lexer {
-    public static final int T__68=68;
-    public static final int RULE_ID=4;
-    public static final int T__66=66;
-    public static final int T__67=67;
-    public static final int T__29=29;
-    public static final int T__64=64;
-    public static final int T__28=28;
-    public static final int T__65=65;
-    public static final int T__27=27;
-    public static final int T__62=62;
-    public static final int T__26=26;
-    public static final int T__63=63;
-    public static final int T__25=25;
-    public static final int T__24=24;
-    public static final int T__23=23;
-    public static final int T__22=22;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int T__21=21;
-    public static final int T__20=20;
-    public static final int T__61=61;
-    public static final int EOF=-1;
-    public static final int T__60=60;
-    public static final int T__55=55;
-    public static final int T__56=56;
-    public static final int T__19=19;
-    public static final int T__57=57;
-    public static final int T__58=58;
-    public static final int T__51=51;
-    public static final int T__16=16;
-    public static final int T__52=52;
-    public static final int T__15=15;
-    public static final int T__53=53;
-    public static final int T__18=18;
-    public static final int T__54=54;
-    public static final int T__17=17;
-    public static final int T__12=12;
-    public static final int T__11=11;
-    public static final int T__14=14;
-    public static final int T__13=13;
-    public static final int T__59=59;
-    public static final int RULE_INT=5;
-    public static final int T__50=50;
     public static final int T__42=42;
-    public static final int T__43=43;
-    public static final int T__40=40;
-    public static final int T__41=41;
-    public static final int T__46=46;
+    public static final int T__12=12;
+    public static final int T__28=28;
+    public static final int T__23=23;
+    public static final int T__57=57;
+    public static final int T__51=51;
+    public static final int T__13=13;
     public static final int T__47=47;
-    public static final int T__44=44;
-    public static final int T__45=45;
-    public static final int T__48=48;
-    public static final int T__49=49;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int RULE_ML_COMMENT=7;
-    public static final int T__30=30;
-    public static final int T__31=31;
-    public static final int T__32=32;
     public static final int RULE_STRING=6;
-    public static final int T__33=33;
-    public static final int T__34=34;
-    public static final int T__35=35;
-    public static final int T__36=36;
-    public static final int T__37=37;
-    public static final int T__38=38;
+    public static final int T__50=50;
+    public static final int T__21=21;
+    public static final int T__19=19;
+    public static final int T__65=65;
+    public static final int T__67=67;
     public static final int T__39=39;
+    public static final int T__30=30;
+    public static final int T__52=52;
+    public static final int T__46=46;
+    public static final int T__68=68;
+    public static final int T__17=17;
+    public static final int T__62=62;
+    public static final int RULE_INT=5;
+    public static final int T__27=27;
+    public static final int T__24=24;
+    public static final int T__49=49;
+    public static final int T__61=61;
+    public static final int T__59=59;
+    public static final int T__54=54;
+    public static final int T__48=48;
+    public static final int T__34=34;
+    public static final int T__56=56;
+    public static final int T__15=15;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T__35=35;
+    public static final int RULE_ID=4;
+    public static final int T__36=36;
+    public static final int T__20=20;
+    public static final int T__58=58;
+    public static final int T__64=64;
+    public static final int T__44=44;
+    public static final int T__66=66;
+    public static final int T__33=33;
+    public static final int T__14=14;
+    public static final int T__11=11;
+    public static final int T__22=22;
+    public static final int T__45=45;
+    public static final int T__29=29;
+    public static final int T__55=55;
+    public static final int T__63=63;
     public static final int RULE_WS=9;
+    public static final int T__43=43;
+    public static final int T__31=31;
+    public static final int T__40=40;
+    public static final int EOF=-1;
+    public static final int T__53=53;
+    public static final int T__32=32;
+    public static final int T__16=16;
+    public static final int T__38=38;
+    public static final int T__37=37;
+    public static final int T__26=26;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int T__25=25;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int T__60=60;
+    public static final int T__41=41;
+    public static final int T__18=18;
 
     // delegates
     // delegators
@@ -2321,7 +2321,7 @@ public class InternalXbaseLexer extends Lexer {
         "\uffff\1\65\1\56\1\uffff\1\50\1\uffff\1\62\2\uffff\1\41\2\uffff"+
         "\1\61\1\uffff\1\70\1\43\1\64\2\uffff\1\7";
     static final String DFA12_specialS =
-        "\1\1\44\uffff\1\0\1\2\u0091\uffff}>";
+        "\1\2\44\uffff\1\0\1\1\u0091\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\50\2\47\2\50\1\47\22\50\1\47\1\5\1\45\1\50\1\43\1\15\1\4"+
             "\1\46\1\21\1\22\1\13\1\2\1\20\1\11\1\12\1\14\12\44\1\31\1\36"+
@@ -2584,6 +2584,16 @@ public class InternalXbaseLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
+                        int LA12_38 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_38>='\u0000' && LA12_38<='\uFFFF')) ) {s = 100;}
+
+                        else s = 40;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -2666,16 +2676,6 @@ public class InternalXbaseLexer extends Lexer {
                         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 39;}
 
                         else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='#'||LA12_0=='@'||LA12_0=='\\'||LA12_0=='`'||(LA12_0>='~' && LA12_0<='\u007F')||(LA12_0>='\uFFFE' && LA12_0<='\uFFFF')) ) {s = 40;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA12_38 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_38>='\u0000' && LA12_38<='\uFFFF')) ) {s = 100;}
-
-                        else s = 40;
 
                         if ( s>=0 ) return s;
                         break;

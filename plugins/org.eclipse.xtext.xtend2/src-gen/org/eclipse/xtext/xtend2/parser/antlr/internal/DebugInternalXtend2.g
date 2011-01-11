@@ -127,9 +127,9 @@ ruleXExpression :
 ruleXAssignment :
 	RULE_ID ruleOpSingleAssign ruleXAssignment |
 	ruleXOrExpression (
-		(
-			ruleOpMultiAssign
-		) => ruleOpMultiAssign ruleXAssignment
+		( (
+		ruleOpMultiAssign
+		) => ruleOpMultiAssign ) ruleXAssignment
 	)?
 ;
 
@@ -146,9 +146,9 @@ ruleOpMultiAssign :
 // Rule XOrExpression
 ruleXOrExpression :
 	ruleXAndExpression (
-		(
-			ruleOpOr
-		) => ruleOpOr ruleXAndExpression
+		( (
+		ruleOpOr
+		) => ruleOpOr ) ruleXAndExpression
 	)*
 ;
 
@@ -160,9 +160,9 @@ ruleOpOr :
 // Rule XAndExpression
 ruleXAndExpression :
 	ruleXEqualityExpression (
-		(
-			ruleOpAnd
-		) => ruleOpAnd ruleXEqualityExpression
+		( (
+		ruleOpAnd
+		) => ruleOpAnd ) ruleXEqualityExpression
 	)*
 ;
 
@@ -174,9 +174,9 @@ ruleOpAnd :
 // Rule XEqualityExpression
 ruleXEqualityExpression :
 	ruleXRelationalExpression (
-		(
-			ruleOpEquality
-		) => ruleOpEquality ruleXRelationalExpression
+		( (
+		ruleOpEquality
+		) => ruleOpEquality ) ruleXRelationalExpression
 	)*
 ;
 
@@ -189,12 +189,12 @@ ruleOpEquality :
 // Rule XRelationalExpression
 ruleXRelationalExpression :
 	ruleXOtherOperatorExpression (
-		(
-			'instanceof'
-		) => 'instanceof' ruleQualifiedName |
-		(
-			ruleOpCompare
-		) => ruleOpCompare ruleXOtherOperatorExpression
+		( (
+		'instanceof'
+		) => 'instanceof' ) ruleQualifiedName |
+		( (
+		ruleOpCompare
+		) => ruleOpCompare ) ruleXOtherOperatorExpression
 	)*
 ;
 
@@ -209,9 +209,9 @@ ruleOpCompare :
 // Rule XOtherOperatorExpression
 ruleXOtherOperatorExpression :
 	ruleXAdditiveExpression (
-		(
-			ruleOpOther
-		) => ruleOpOther ruleXAdditiveExpression
+		( (
+		ruleOpOther
+		) => ruleOpOther ) ruleXAdditiveExpression
 	)*
 ;
 
@@ -224,9 +224,9 @@ ruleOpOther :
 // Rule XAdditiveExpression
 ruleXAdditiveExpression :
 	ruleXMultiplicativeExpression (
-		(
-			ruleOpAdd
-		) => ruleOpAdd ruleXMultiplicativeExpression
+		( (
+		ruleOpAdd
+		) => ruleOpAdd ) ruleXMultiplicativeExpression
 	)*
 ;
 
@@ -239,9 +239,9 @@ ruleOpAdd :
 // Rule XMultiplicativeExpression
 ruleXMultiplicativeExpression :
 	ruleXUnaryOperation (
-		(
-			ruleOpMulti
-		) => ruleOpMulti ruleXUnaryOperation
+		( (
+		ruleOpMulti
+		) => ruleOpMulti ) ruleXUnaryOperation
 	)*
 ;
 
@@ -269,39 +269,39 @@ ruleOpUnary :
 // Rule XCastedExpression
 ruleXCastedExpression :
 	ruleXMemberFeatureCall (
-		(
-			'as'
-		) => 'as' ruleJvmTypeReference
-	)?
+		( (
+		'as'
+		) => 'as' ) ruleJvmTypeReference
+	)*
 ;
 
 // Rule XMemberFeatureCall
 ruleXMemberFeatureCall :
 	ruleXPrimaryExpression (
-		(
-			'.' RULE_ID ruleOpSingleAssign
+		( (
+		'.' RULE_ID ruleOpSingleAssign
 		) => (
 			'.' RULE_ID ruleOpSingleAssign
-		) ruleXAssignment |
-		(
+		) ) ruleXAssignment |
+		( (
+		'.' |
+		'?.' |
+		'*.'
+		) => (
 			'.' |
 			'?.' |
 			'*.'
-		) => (
-			'.' |
-			'?.' |
-			'*.'
-		) (
+		) ) (
 			'<' ruleJvmArgumentTypeReference (
 				',' ruleJvmArgumentTypeReference
 			)* '>'
 		)? RULE_ID (
-			(
-				'('
-			) => '(' (
-				(
-					ruleXShortClosure
-				) => ruleXShortClosure |
+			( (
+			'('
+			) => '(' ) (
+				( (
+				ruleXShortClosure
+				) => ruleXShortClosure ) |
 				ruleXExpression (
 					',' ruleXExpression
 				)*
@@ -362,9 +362,9 @@ ruleXParenthesizedExpression :
 // Rule XIfExpression
 ruleXIfExpression :
 	'if' '(' ruleXExpression ')' ruleXExpression (
-		(
-			'else'
-		) => 'else' ruleXExpression
+		( (
+		'else'
+		) => 'else' ) ruleXExpression
 	)?
 ;
 
@@ -430,12 +430,12 @@ ruleXFeatureCall :
 			',' ruleJvmArgumentTypeReference
 		)* '>'
 	)? RULE_ID (
-		(
-			'('
-		) => '(' (
-			(
-				ruleXShortClosure
-			) => ruleXShortClosure |
+		( (
+		'('
+		) => '(' ) (
+			( (
+			ruleXShortClosure
+			) => ruleXShortClosure ) |
 			ruleXExpression (
 				',' ruleXExpression
 			)*
@@ -450,9 +450,9 @@ ruleXConstructorCall :
 			',' ruleJvmArgumentTypeReference
 		)* '>'
 	)? '(' (
-		(
-			ruleXShortClosure
-		) => ruleXShortClosure |
+		( (
+		ruleXShortClosure
+		) => ruleXShortClosure ) |
 		ruleXExpression (
 			',' ruleXExpression
 		)*
@@ -488,12 +488,12 @@ ruleXThrowExpression :
 // Rule XTryCatchFinallyExpression
 ruleXTryCatchFinallyExpression :
 	'try' ruleXExpression (
-		(
-			ruleXCatchClause
-		) => ruleXCatchClause+ (
-			(
-				'finally'
-			) => 'finally' ruleXExpression
+		( (
+		ruleXCatchClause
+		) => ruleXCatchClause )+ (
+			( (
+			'finally'
+			) => 'finally' ) ruleXExpression
 		)? |
 		'finally' ruleXExpression
 	)
@@ -507,9 +507,9 @@ ruleXCatchClause :
 // Rule QualifiedName
 ruleQualifiedName :
 	RULE_ID (
-		(
-			'.'
-		) => '.' RULE_ID
+		( (
+		'.'
+		) => '.' ) RULE_ID
 	)*
 ;
 
@@ -531,9 +531,9 @@ ruleXFunctionTypeRef :
 // Rule JvmParameterizedTypeReference
 ruleJvmParameterizedTypeReference :
 	ruleQualifiedName (
-		(
-			'<'
-		) => '<' ruleJvmArgumentTypeReference (
+		( (
+		'<'
+		) => '<' ) ruleJvmArgumentTypeReference (
 			',' ruleJvmArgumentTypeReference
 		)* '>'
 	)?
@@ -609,12 +609,16 @@ RULE_ID :
 	'^'? (
 		'a' .. 'z' |
 		'A' .. 'Z' |
-		'_'
+		'_' |
+		'$' |
+		'\u0080' .. '\uFFFD'
 	) (
 		'a' .. 'z' |
 		'A' .. 'Z' |
 		'_' |
-		'0' .. '9'
+		'$' |
+		'0' .. '9' |
+		'\u0080' .. '\uFFFD'
 	)*
 ;
 

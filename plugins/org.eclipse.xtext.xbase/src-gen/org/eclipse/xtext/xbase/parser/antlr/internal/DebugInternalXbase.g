@@ -157,7 +157,7 @@ ruleXCastedExpression :
 		( (
 		'as'
 		) => 'as' ) ruleJvmTypeReference
-	)?
+	)*
 ;
 
 // Rule XMemberFeatureCall

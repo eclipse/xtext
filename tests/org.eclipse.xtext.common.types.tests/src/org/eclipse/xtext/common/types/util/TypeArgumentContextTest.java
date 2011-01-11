@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
+import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -78,9 +79,9 @@ public class TypeArgumentContextTest extends TestCase {
 		TypeArgumentContext context = typeArgCtxProvider.get(reference);
 		JvmOperation jvmOperation = findOperation("java.util.List", "add(E)");
 		
-		assertEquals(null, context.resolveContravariant(jvmOperation.getParameters().get(0).getParameterType()));
+		assertEquals(null, context.getLowerBound(jvmOperation.getParameters().get(0).getParameterType()));
 		JvmOperation get = findOperation("java.util.List", "get(int)");
-		assertEquals("java.lang.CharSequence",context.resolveCovariant(get.getReturnType()).getCanonicalName());
+		assertEquals("java.lang.CharSequence",context.getUpperBound(get.getReturnType()).getCanonicalName());
 	}
 	
 	public void testResolve_1() throws Exception {
@@ -88,10 +89,10 @@ public class TypeArgumentContextTest extends TestCase {
 		TypeArgumentContext context = typeArgCtxProvider.get(reference);
 		JvmOperation jvmOperation = findOperation("java.util.List", "add(E)");
 		
-		JvmTypeReference resolvedParameter = context.resolveContravariant(jvmOperation.getParameters().get(0).getParameterType());
+		JvmTypeReference resolvedParameter = context.getLowerBound(jvmOperation.getParameters().get(0).getParameterType());
 		assertEquals("java.lang.CharSequence", resolvedParameter.getCanonicalName());
 		JvmOperation get = findOperation("java.util.List", "get(int)");
-		assertEquals("java.lang.Object",context.resolveCovariant(get.getReturnType()).getCanonicalName());
+		assertEquals("java.lang.Object",context.getUpperBound(get.getReturnType()).getCanonicalName());
 	}
 	
 	public void testResolve_WithUnResolved() throws Exception {
@@ -99,10 +100,10 @@ public class TypeArgumentContextTest extends TestCase {
 		TypeArgumentContext context = typeArgCtxProvider.get(reference);
 		JvmOperation jvmOperation = findOperation("java.util.List", "add(E)");
 		
-		JvmTypeReference resolvedParameter = context.resolveContravariant(jvmOperation.getParameters().get(0).getParameterType());
+		JvmTypeReference resolvedParameter = context.getLowerBound(jvmOperation.getParameters().get(0).getParameterType());
 		assertEquals("java.lang.Object", resolvedParameter.getCanonicalName());
 		JvmOperation get = findOperation("java.util.List", "get(int)");
-		assertEquals("java.lang.Object", context.resolveCovariant(get.getReturnType()).getCanonicalName());
+		assertEquals("java.lang.Object", context.getUpperBound(get.getReturnType()).getCanonicalName());
 	}
 	
 	public void testResolveDeeplyNested() throws Exception {
@@ -115,7 +116,13 @@ public class TypeArgumentContextTest extends TestCase {
 		TypeArgumentContext context = typeArgCtxProvider.get(reference);
 		
 		JvmOperation get = findOperation("java.util.List", "get(int)");
-		assertEquals("java.util.Map<? super java.lang.String,? extends java.lang.Number>",context.resolveCovariant(get.getReturnType()).getCanonicalName());
+		assertEquals("java.util.Map<? super java.lang.String,? extends java.lang.Number>",context.getUpperBound(get.getReturnType()).getCanonicalName());
+	}
+	
+	public void testResolveArray() throws Exception {
+		JvmArrayType arrayType = TypesFactory.eINSTANCE.createJvmArrayType();
+		arrayType.setComponentType(typeRefs.typeReference("java.lang.String").create());
+		//TODO
 	}
 	
 	protected JvmOperation findOperation(String typeName, String methodSignature) {

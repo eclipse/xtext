@@ -8,60 +8,55 @@
 package org.eclipse.xtext.xbase.tests.compiler;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
+import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class CompilerTest extends AbstractXtextTests {
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		with(new XbaseStandaloneSetup());
-	}
+public class CompilerTest extends AbstractXbaseTestCase {
 	
 	public void testSimple() throws Exception {
-		assertCompilesTo("return \"foo\".length();\n", "'foo'.length");
+		assertCompilesTo("\njava.lang.Integer _var = \"foo\".length();\n" + 
+				"return _var;", "'foo'.length");
 	}
 	
 	public void testBlock() throws Exception {
 		assertCompilesTo(
-				"java.lang.Integer _var;\n" +
+				"\njava.lang.Integer _var = null;\n" +
 				"{\n" +
-				"final java.util.ArrayList<java.lang.String> _this = new java.util.ArrayList<java.lang.String>();\n" +
-				";\n" +
-				"_var = _this.size();\n" +
+				"  final java.util.ArrayList<java.lang.String> _this = new java.util.ArrayList<java.lang.String>();\n" +
+				"  java.lang.Integer _var_1 = _this.size();\n" + 
+				"  _var = (_var_1);\n" +
 				"}\n" +
-				"return _var;\n"
+				"return _var;"
 				, "{ val this = new java.util.ArrayList<String>(); size;}");
 	}
 	
 	public void testIf() throws Exception {
 		assertCompilesTo(
-				"java.lang.Integer _var;\n" +
+				"\njava.lang.Integer _var = null;\n" +
 				"if (true) {\n" +
-				"_var = 42;\n" +
+				"  _var = new Integer(42);\n" +
 				"} else {\n" +
-				"_var = 21;\n}\n" +
-				"return _var;\n"
+				"  _var = new Integer(21);\n}\n" +
+				"return _var;"
 				, "if (true) 42 else 21");
 	}
 
 	public void testForEach() throws Exception {
 		assertCompilesTo(
-				"for (java.lang.String s : new java.util.ArrayList<java.lang.String>()) {\n" +
-				"s.length();\n" +
+				"\nfor (java.lang.String s : new java.util.ArrayList<java.lang.String>()) {\n" +
+				"  s.length();\n" +
 				"}\n" +
-				"return null;\n"
+				"return null;"
 				, "for (String s : new java.util.ArrayList<String>()) " +
 						"s.length");
 	}
 	
 	protected void assertCompilesTo(final String expectedJavaCode, final String xbaseCode) throws Exception {
-		EObject model = getModel(xbaseCode);
+		EObject model = expression(xbaseCode,true);
 		XbaseCompiler compiler = get(XbaseCompiler.class);
 		IAppendable appandable = new IAppendable.StringBuilderBasedAppendable();
 		compiler.compile(model,appandable);
