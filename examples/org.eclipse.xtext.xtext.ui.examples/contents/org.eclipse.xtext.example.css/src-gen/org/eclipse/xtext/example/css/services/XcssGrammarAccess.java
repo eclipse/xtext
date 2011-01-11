@@ -1139,7 +1139,8 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XVariableDeclaration returns XExpression:
-	//	{XVariableDeclaration} (writeable?="var" | "val") type=JvmTypeReference? name=ID "=" right=XExpression;
+	//	{XVariableDeclaration} (writeable?="var" | "val") (=> (type=JvmTypeReference name=ID) | name=ID) ("="
+	//	right=XExpression)?;
 	public XbaseGrammarAccess.XVariableDeclarationElements getXVariableDeclarationAccess() {
 		return gaXbase.getXVariableDeclarationAccess();
 	}
@@ -1365,8 +1366,9 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		return getJvmTypeParameterAccess().getRule();
 	}
 
+	//// uncomment for unicode identifiers
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_" | "$" | "€".."?") ("a".."z" | "A".."Z" | "_" | "$" | "0".."9" | "€".."?")*;
 	public TerminalRule getIDRule() {
 		return gaXbase.getIDRule();
 	} 

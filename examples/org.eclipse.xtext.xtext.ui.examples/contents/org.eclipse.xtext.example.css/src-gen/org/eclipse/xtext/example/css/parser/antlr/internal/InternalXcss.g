@@ -3759,10 +3759,19 @@ ruleXVariableDeclaration returns [EObject current=null]
     {
     	newLeafNode(otherlv_2, grammarAccess.getXVariableDeclarationAccess().getValKeyword_1_1());
     }
+)(((((
+(
+ruleJvmTypeReference
+)
 )(
 (
+RULE_ID
+
+)
+)))=>((
+(
 		{ 
-	        newCompositeNode(grammarAccess.getXVariableDeclarationAccess().getTypeJvmTypeReferenceParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getXVariableDeclarationAccess().getTypeJvmTypeReferenceParserRuleCall_2_0_0_0_0()); 
 	    }
 		lv_type_3_0=ruleJvmTypeReference		{
 	        if ($current==null) {
@@ -3777,11 +3786,11 @@ ruleXVariableDeclaration returns [EObject current=null]
 	    }
 
 )
-)?(
+)(
 (
 		lv_name_4_0=RULE_ID
 		{
-			newLeafNode(lv_name_4_0, grammarAccess.getXVariableDeclarationAccess().getNameIDTerminalRuleCall_3_0()); 
+			newLeafNode(lv_name_4_0, grammarAccess.getXVariableDeclarationAccess().getNameIDTerminalRuleCall_2_0_0_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -3795,29 +3804,48 @@ ruleXVariableDeclaration returns [EObject current=null]
 	    }
 
 )
-)	otherlv_5='=' 
+)))
+    |(
+(
+		lv_name_5_0=RULE_ID
+		{
+			newLeafNode(lv_name_5_0, grammarAccess.getXVariableDeclarationAccess().getNameIDTerminalRuleCall_2_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getXVariableDeclarationRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"name",
+        		lv_name_5_0, 
+        		"ID");
+	    }
+
+)
+))(	otherlv_6='=' 
     {
-    	newLeafNode(otherlv_5, grammarAccess.getXVariableDeclarationAccess().getEqualsSignKeyword_4());
+    	newLeafNode(otherlv_6, grammarAccess.getXVariableDeclarationAccess().getEqualsSignKeyword_3_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXVariableDeclarationAccess().getRightXExpressionParserRuleCall_5_0()); 
+	        newCompositeNode(grammarAccess.getXVariableDeclarationAccess().getRightXExpressionParserRuleCall_3_1_0()); 
 	    }
-		lv_right_6_0=ruleXExpression		{
+		lv_right_7_0=ruleXExpression		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getXVariableDeclarationRule());
 	        }
        		set(
        			$current, 
        			"right",
-        		lv_right_6_0, 
+        		lv_right_7_0, 
         		"XExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))
+))?)
 ;
 
 
@@ -5231,7 +5259,7 @@ ruleJvmLowerBound returns [EObject current=null]
 
 
 
-RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_'|'$'|'\u0080'..'\uFFFD') ('a'..'z'|'A'..'Z'|'_'|'$'|'0'..'9'|'\u0080'..'\uFFFD')*;
 
 RULE_INT : ('0'..'9')+;
 

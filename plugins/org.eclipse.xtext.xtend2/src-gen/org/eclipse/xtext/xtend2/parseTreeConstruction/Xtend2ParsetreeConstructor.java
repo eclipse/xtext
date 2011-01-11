@@ -11927,11 +11927,13 @@ protected class XExpressionInsideBlock_XExpressionParserRuleCall_1 extends RuleC
 /************ begin Rule XVariableDeclaration ****************
  *
  * XVariableDeclaration returns XExpression:
- * 	{XVariableDeclaration} (writeable?="var" | "val") type=JvmTypeReference? name=ID "=" right=XExpression;
+ * 	{XVariableDeclaration} (writeable?="var" | "val") (=> (type=JvmTypeReference name=ID) | name=ID) ("="
+ * 	right=XExpression)?;
  *
  **/
 
-// {XVariableDeclaration} (writeable?="var" | "val") type=JvmTypeReference? name=ID "=" right=XExpression
+// {XVariableDeclaration} (writeable?="var" | "val") (=> (type=JvmTypeReference name=ID) | name=ID) ("="
+// right=XExpression)?
 protected class XVariableDeclaration_Group extends GroupToken {
 	
 	public XVariableDeclaration_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -11946,7 +11948,8 @@ protected class XVariableDeclaration_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XVariableDeclaration_RightAssignment_5(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new XVariableDeclaration_Group_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new XVariableDeclaration_Alternatives_2(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -12066,16 +12069,83 @@ protected class XVariableDeclaration_ValKeyword_1_1 extends KeywordToken  {
 }
 
 
-// type=JvmTypeReference?
-protected class XVariableDeclaration_TypeAssignment_2 extends AssignmentToken  {
+// => (type=JvmTypeReference name=ID) | name=ID
+protected class XVariableDeclaration_Alternatives_2 extends AlternativesToken {
+
+	public XVariableDeclaration_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
 	
-	public XVariableDeclaration_TypeAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getXVariableDeclarationAccess().getAlternatives_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XVariableDeclaration_Group_2_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new XVariableDeclaration_NameAssignment_2_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// => (type=JvmTypeReference name=ID)
+protected class XVariableDeclaration_Group_2_0 extends GroupToken {
+	
+	public XVariableDeclaration_Group_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getXVariableDeclarationAccess().getGroup_2_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XVariableDeclaration_Group_2_0_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// type=JvmTypeReference name=ID
+protected class XVariableDeclaration_Group_2_0_0 extends GroupToken {
+	
+	public XVariableDeclaration_Group_2_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getXVariableDeclarationAccess().getGroup_2_0_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XVariableDeclaration_NameAssignment_2_0_0_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// type=JvmTypeReference
+protected class XVariableDeclaration_TypeAssignment_2_0_0_0 extends AssignmentToken  {
+	
+	public XVariableDeclaration_TypeAssignment_2_0_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getXVariableDeclarationAccess().getTypeAssignment_2();
+		return grammarAccess.getXVariableDeclarationAccess().getTypeAssignment_2_0_0_0();
 	}
 
     @Override
@@ -12088,13 +12158,13 @@ protected class XVariableDeclaration_TypeAssignment_2 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("type",false)) == null) return null;
+		if((value = eObjectConsumer.getConsumable("type",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("type");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getJvmTypeReferenceRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getXVariableDeclarationAccess().getTypeJvmTypeReferenceParserRuleCall_2_0(); 
+				element = grammarAccess.getXVariableDeclarationAccess().getTypeJvmTypeReferenceParserRuleCall_2_0_0_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -12113,22 +12183,21 @@ protected class XVariableDeclaration_TypeAssignment_2 extends AssignmentToken  {
 }
 
 // name=ID
-protected class XVariableDeclaration_NameAssignment_3 extends AssignmentToken  {
+protected class XVariableDeclaration_NameAssignment_2_0_0_1 extends AssignmentToken  {
 	
-	public XVariableDeclaration_NameAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XVariableDeclaration_NameAssignment_2_0_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getXVariableDeclarationAccess().getNameAssignment_3();
+		return grammarAccess.getXVariableDeclarationAccess().getNameAssignment_2_0_0_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XVariableDeclaration_TypeAssignment_2(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new XVariableDeclaration_Alternatives_1(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new XVariableDeclaration_TypeAssignment_2_0_0_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -12137,9 +12206,9 @@ protected class XVariableDeclaration_NameAssignment_3 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getXVariableDeclarationAccess().getNameIDTerminalRuleCall_3_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getXVariableDeclarationAccess().getNameIDTerminalRuleCall_2_0_0_1_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getXVariableDeclarationAccess().getNameIDTerminalRuleCall_3_0();
+			element = grammarAccess.getXVariableDeclarationAccess().getNameIDTerminalRuleCall_2_0_0_1_0();
 			return obj;
 		}
 		return null;
@@ -12147,22 +12216,81 @@ protected class XVariableDeclaration_NameAssignment_3 extends AssignmentToken  {
 
 }
 
-// "="
-protected class XVariableDeclaration_EqualsSignKeyword_4 extends KeywordToken  {
+
+
+// name=ID
+protected class XVariableDeclaration_NameAssignment_2_1 extends AssignmentToken  {
 	
-	public XVariableDeclaration_EqualsSignKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XVariableDeclaration_NameAssignment_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getXVariableDeclarationAccess().getEqualsSignKeyword_4();
+	public Assignment getGrammarElement() {
+		return grammarAccess.getXVariableDeclarationAccess().getNameAssignment_2_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XVariableDeclaration_NameAssignment_3(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new XVariableDeclaration_Alternatives_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getXVariableDeclarationAccess().getNameIDTerminalRuleCall_2_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getXVariableDeclarationAccess().getNameIDTerminalRuleCall_2_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// ("=" right=XExpression)?
+protected class XVariableDeclaration_Group_3 extends GroupToken {
+	
+	public XVariableDeclaration_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getXVariableDeclarationAccess().getGroup_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XVariableDeclaration_RightAssignment_3_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "="
+protected class XVariableDeclaration_EqualsSignKeyword_3_0 extends KeywordToken  {
+	
+	public XVariableDeclaration_EqualsSignKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getXVariableDeclarationAccess().getEqualsSignKeyword_3_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XVariableDeclaration_Alternatives_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -12170,15 +12298,15 @@ protected class XVariableDeclaration_EqualsSignKeyword_4 extends KeywordToken  {
 }
 
 // right=XExpression
-protected class XVariableDeclaration_RightAssignment_5 extends AssignmentToken  {
+protected class XVariableDeclaration_RightAssignment_3_1 extends AssignmentToken  {
 	
-	public XVariableDeclaration_RightAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XVariableDeclaration_RightAssignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getXVariableDeclarationAccess().getRightAssignment_5();
+		return grammarAccess.getXVariableDeclarationAccess().getRightAssignment_3_1();
 	}
 
     @Override
@@ -12191,13 +12319,13 @@ protected class XVariableDeclaration_RightAssignment_5 extends AssignmentToken  
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("right",true)) == null) return null;
+		if((value = eObjectConsumer.getConsumable("right",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("right");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getXExpressionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getXVariableDeclarationAccess().getRightXExpressionParserRuleCall_5_0(); 
+				element = grammarAccess.getXVariableDeclarationAccess().getRightXExpressionParserRuleCall_3_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -12209,11 +12337,12 @@ protected class XVariableDeclaration_RightAssignment_5 extends AssignmentToken  
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new XVariableDeclaration_EqualsSignKeyword_4(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new XVariableDeclaration_EqualsSignKeyword_3_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
+
 
 
 /************ end Rule XVariableDeclaration ****************/

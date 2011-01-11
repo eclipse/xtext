@@ -300,7 +300,16 @@ ruleXVariableDeclaration :
 	(
 		'var' |
 		'val'
-	) ruleJvmTypeReference? RULE_ID '=' ruleXExpression
+	) (
+		( (
+		ruleJvmTypeReference RULE_ID
+		) => (
+			ruleJvmTypeReference RULE_ID
+		) ) |
+		RULE_ID
+	) (
+		'=' ruleXExpression
+	)?
 ;
 
 // Rule JvmFormalParameter

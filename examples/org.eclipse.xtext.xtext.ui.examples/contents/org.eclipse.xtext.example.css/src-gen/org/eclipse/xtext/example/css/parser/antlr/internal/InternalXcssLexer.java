@@ -12,74 +12,74 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalXcssLexer extends Lexer {
-    public static final int T__42=42;
-    public static final int T__12=12;
-    public static final int T__28=28;
-    public static final int T__23=23;
-    public static final int T__57=57;
-    public static final int T__51=51;
-    public static final int T__13=13;
-    public static final int T__47=47;
-    public static final int T__69=69;
-    public static final int RULE_STRING=6;
-    public static final int T__50=50;
-    public static final int T__21=21;
-    public static final int T__19=19;
-    public static final int T__65=65;
-    public static final int T__70=70;
-    public static final int T__67=67;
-    public static final int T__39=39;
-    public static final int T__30=30;
-    public static final int T__52=52;
-    public static final int T__46=46;
     public static final int T__68=68;
-    public static final int T__17=17;
-    public static final int T__62=62;
-    public static final int RULE_INT=5;
-    public static final int T__27=27;
-    public static final int T__24=24;
-    public static final int T__49=49;
-    public static final int T__61=61;
-    public static final int T__59=59;
-    public static final int T__54=54;
-    public static final int T__48=48;
-    public static final int T__34=34;
-    public static final int T__56=56;
-    public static final int T__15=15;
-    public static final int RULE_ML_COMMENT=7;
-    public static final int T__35=35;
+    public static final int T__69=69;
     public static final int RULE_ID=4;
-    public static final int T__36=36;
-    public static final int T__20=20;
-    public static final int T__58=58;
-    public static final int T__64=64;
-    public static final int T__44=44;
     public static final int T__66=66;
-    public static final int T__33=33;
-    public static final int T__14=14;
-    public static final int T__11=11;
-    public static final int T__22=22;
-    public static final int T__45=45;
+    public static final int T__67=67;
     public static final int T__29=29;
-    public static final int T__55=55;
-    public static final int T__63=63;
-    public static final int RULE_WS=9;
-    public static final int T__43=43;
-    public static final int T__31=31;
-    public static final int T__40=40;
-    public static final int EOF=-1;
-    public static final int T__53=53;
-    public static final int T__32=32;
-    public static final int T__16=16;
-    public static final int T__38=38;
-    public static final int T__37=37;
+    public static final int T__64=64;
+    public static final int T__28=28;
+    public static final int T__65=65;
+    public static final int T__27=27;
+    public static final int T__62=62;
     public static final int T__26=26;
-    public static final int RULE_ANY_OTHER=10;
+    public static final int T__63=63;
     public static final int T__25=25;
-    public static final int RULE_SL_COMMENT=8;
+    public static final int T__24=24;
+    public static final int T__23=23;
+    public static final int T__22=22;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int T__21=21;
+    public static final int T__20=20;
+    public static final int T__61=61;
+    public static final int EOF=-1;
     public static final int T__60=60;
-    public static final int T__41=41;
+    public static final int T__55=55;
+    public static final int T__56=56;
+    public static final int T__19=19;
+    public static final int T__57=57;
+    public static final int T__58=58;
+    public static final int T__51=51;
+    public static final int T__16=16;
+    public static final int T__52=52;
+    public static final int T__15=15;
+    public static final int T__53=53;
     public static final int T__18=18;
+    public static final int T__54=54;
+    public static final int T__17=17;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int T__59=59;
+    public static final int RULE_INT=5;
+    public static final int T__50=50;
+    public static final int T__42=42;
+    public static final int T__43=43;
+    public static final int T__40=40;
+    public static final int T__41=41;
+    public static final int T__46=46;
+    public static final int T__47=47;
+    public static final int T__44=44;
+    public static final int T__45=45;
+    public static final int T__48=48;
+    public static final int T__49=49;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int T__32=32;
+    public static final int RULE_STRING=6;
+    public static final int T__33=33;
+    public static final int T__34=34;
+    public static final int T__35=35;
+    public static final int T__36=36;
+    public static final int T__70=70;
+    public static final int T__37=37;
+    public static final int T__38=38;
+    public static final int T__39=39;
+    public static final int RULE_WS=9;
 
     // delegates
     // delegators
@@ -1335,10 +1335,10 @@ public class InternalXcssLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5234:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5234:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5262:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '$' | '\\u0080' .. '\\uFFFD' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '$' | '0' .. '9' | '\\u0080' .. '\\uFFFD' )* )
+            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5262:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '$' | '\\u0080' .. '\\uFFFD' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '$' | '0' .. '9' | '\\u0080' .. '\\uFFFD' )*
             {
-            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5234:11: ( '^' )?
+            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5262:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1347,7 +1347,7 @@ public class InternalXcssLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5234:11: '^'
+                    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5262:11: '^'
                     {
                     match('^'); 
 
@@ -1356,7 +1356,7 @@ public class InternalXcssLexer extends Lexer {
 
             }
 
-            if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
+            if ( input.LA(1)=='$'||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z')||(input.LA(1)>='\u0080' && input.LA(1)<='\uFFFD') ) {
                 input.consume();
 
             }
@@ -1365,13 +1365,13 @@ public class InternalXcssLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5234:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5262:63: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '$' | '0' .. '9' | '\\u0080' .. '\\uFFFD' )*
             loop2:
             do {
                 int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( ((LA2_0>='0' && LA2_0<='9')||(LA2_0>='A' && LA2_0<='Z')||LA2_0=='_'||(LA2_0>='a' && LA2_0<='z')) ) {
+                if ( (LA2_0=='$'||(LA2_0>='0' && LA2_0<='9')||(LA2_0>='A' && LA2_0<='Z')||LA2_0=='_'||(LA2_0>='a' && LA2_0<='z')||(LA2_0>='\u0080' && LA2_0<='\uFFFD')) ) {
                     alt2=1;
                 }
 
@@ -1380,7 +1380,7 @@ public class InternalXcssLexer extends Lexer {
             	case 1 :
             	    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:
             	    {
-            	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
+            	    if ( input.LA(1)=='$'||(input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z')||(input.LA(1)>='\u0080' && input.LA(1)<='\uFFFD') ) {
             	        input.consume();
 
             	    }
@@ -1414,10 +1414,10 @@ public class InternalXcssLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5236:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5236:12: ( '0' .. '9' )+
+            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5264:10: ( ( '0' .. '9' )+ )
+            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5264:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5236:12: ( '0' .. '9' )+
+            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5264:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -1431,7 +1431,7 @@ public class InternalXcssLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5236:13: '0' .. '9'
+            	    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5264:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1463,10 +1463,10 @@ public class InternalXcssLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5238:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5238:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5266:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5266:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5238:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5266:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1484,10 +1484,10 @@ public class InternalXcssLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5238:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5266:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5238:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5266:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -1503,7 +1503,7 @@ public class InternalXcssLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5238:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5266:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -1519,7 +1519,7 @@ public class InternalXcssLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5238:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5266:66: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1544,10 +1544,10 @@ public class InternalXcssLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5238:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5266:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5238:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5266:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -1563,7 +1563,7 @@ public class InternalXcssLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5238:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5266:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -1579,7 +1579,7 @@ public class InternalXcssLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5238:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5266:137: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1622,12 +1622,12 @@ public class InternalXcssLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5240:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5240:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5268:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5268:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5240:24: ( options {greedy=false; } : . )*
+            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5268:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -1652,7 +1652,7 @@ public class InternalXcssLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5240:52: .
+            	    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5268:52: .
             	    {
             	    matchAny(); 
 
@@ -1682,12 +1682,12 @@ public class InternalXcssLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5242:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5242:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5270:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5270:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5242:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5270:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -1700,7 +1700,7 @@ public class InternalXcssLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5242:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5270:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1720,7 +1720,7 @@ public class InternalXcssLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5242:40: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5270:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1729,9 +1729,9 @@ public class InternalXcssLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5242:41: ( '\\r' )? '\\n'
+                    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5270:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5242:41: ( '\\r' )?
+                    // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5270:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1740,7 +1740,7 @@ public class InternalXcssLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5242:41: '\\r'
+                            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5270:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1772,10 +1772,10 @@ public class InternalXcssLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5244:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5244:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5272:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5272:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5244:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5272:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -1829,8 +1829,8 @@ public class InternalXcssLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5246:16: ( . )
-            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5246:18: .
+            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5274:16: ( . )
+            // ../org.eclipse.xtext.example.css/src-gen/org/eclipse/xtext/example/css/parser/antlr/internal/InternalXcss.g:5274:18: .
             {
             matchAny(); 
 
@@ -2326,63 +2326,64 @@ public class InternalXcssLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\4\uffff\1\60\11\uffff\1\74\1\76\1\100\1\102\1\104\1\107\1\111\1"+
-        "\113\1\115\1\117\1\122\1\107\1\125\11\107\1\52\2\uffff\2\52\34\uffff"+
-        "\1\107\1\153\14\uffff\1\154\2\uffff\5\107\1\162\13\107\3\uffff\1"+
-        "\107\2\uffff\5\107\1\uffff\2\107\1\u0089\3\107\1\u008d\1\u008e\1"+
-        "\u008f\2\107\1\u0092\3\107\1\u0096\4\107\1\u009b\1\107\1\uffff\3"+
-        "\107\3\uffff\1\u00a0\1\u00a1\1\uffff\3\107\1\uffff\2\107\1\u00a7"+
-        "\1\107\1\uffff\1\u00a9\1\u00aa\1\107\1\u00ac\2\uffff\1\107\1\u00ae"+
-        "\2\107\1\u00b1\1\uffff\1\107\2\uffff\1\107\1\uffff\1\u00b4\1\uffff"+
-        "\1\107\1\u00b6\1\uffff\1\u00b7\1\u00b8\1\uffff\1\107\3\uffff\1\107"+
-        "\1\u00bb\1\uffff";
+        "\4\uffff\1\60\4\uffff\1\66\4\uffff\1\75\1\77\1\101\1\103\1\105\1"+
+        "\65\1\111\1\113\1\115\1\117\1\122\1\65\1\125\11\65\1\52\2\uffff"+
+        "\2\52\35\uffff\1\65\1\153\13\uffff\1\154\2\uffff\5\65\1\162\13\65"+
+        "\3\uffff\1\65\2\uffff\5\65\1\uffff\2\65\1\u0089\3\65\1\u008d\1\u008e"+
+        "\1\u008f\2\65\1\u0092\3\65\1\u0096\4\65\1\u009b\1\65\1\uffff\3\65"+
+        "\3\uffff\1\u00a0\1\u00a1\1\uffff\3\65\1\uffff\2\65\1\u00a7\1\65"+
+        "\1\uffff\1\u00a9\1\u00aa\1\65\1\u00ac\2\uffff\1\65\1\u00ae\2\65"+
+        "\1\u00b1\1\uffff\1\65\2\uffff\1\65\1\uffff\1\u00b4\1\uffff\1\65"+
+        "\1\u00b6\1\uffff\1\u00b7\1\u00b8\1\uffff\1\65\3\uffff\1\65\1\u00bb"+
+        "\1\uffff";
     static final String DFA12_eofS =
         "\u00bc\uffff";
     static final String DFA12_minS =
-        "\1\0\3\uffff\1\52\11\uffff\2\75\1\174\1\46\1\75\1\146\2\75\1\76"+
-        "\1\56\1\52\1\163\1\56\1\154\1\165\1\145\2\141\1\150\1\141\1\145"+
-        "\1\150\1\101\2\uffff\2\0\34\uffff\1\163\1\60\14\uffff\1\60\2\uffff"+
-        "\1\163\1\164\1\151\1\160\1\146\1\60\1\163\1\162\1\154\1\156\1\151"+
-        "\1\154\1\167\1\154\1\165\1\160\1\162\3\uffff\1\164\2\uffff\2\145"+
-        "\1\164\1\145\1\141\1\uffff\1\145\1\143\1\60\1\163\1\141\1\154\3"+
-        "\60\1\154\1\145\1\60\1\145\1\157\1\141\1\60\1\156\1\143\1\162\1"+
-        "\165\1\60\1\150\1\uffff\1\145\1\154\1\145\3\uffff\2\60\1\uffff\1"+
-        "\157\1\167\1\156\1\uffff\1\144\1\150\1\60\1\154\1\uffff\2\60\1\154"+
-        "\1\60\2\uffff\1\146\1\60\1\143\1\163\1\60\1\uffff\1\164\2\uffff"+
-        "\1\171\1\uffff\1\60\1\uffff\1\145\1\60\1\uffff\2\60\1\uffff\1\157"+
-        "\3\uffff\1\146\1\60\1\uffff";
+        "\1\0\3\uffff\1\52\4\uffff\1\44\4\uffff\2\75\1\174\1\46\1\75\1\146"+
+        "\2\75\1\76\1\56\1\52\1\163\1\56\1\154\1\165\1\145\2\141\1\150\1"+
+        "\141\1\145\1\150\1\44\2\uffff\2\0\35\uffff\1\163\1\44\13\uffff\1"+
+        "\44\2\uffff\1\163\1\164\1\151\1\160\1\146\1\44\1\163\1\162\1\154"+
+        "\1\156\1\151\1\154\1\167\1\154\1\165\1\160\1\162\3\uffff\1\164\2"+
+        "\uffff\2\145\1\164\1\145\1\141\1\uffff\1\145\1\143\1\44\1\163\1"+
+        "\141\1\154\3\44\1\154\1\145\1\44\1\145\1\157\1\141\1\44\1\156\1"+
+        "\143\1\162\1\165\1\44\1\150\1\uffff\1\145\1\154\1\145\3\uffff\2"+
+        "\44\1\uffff\1\157\1\167\1\156\1\uffff\1\144\1\150\1\44\1\154\1\uffff"+
+        "\2\44\1\154\1\44\2\uffff\1\146\1\44\1\143\1\163\1\44\1\uffff\1\164"+
+        "\2\uffff\1\171\1\uffff\1\44\1\uffff\1\145\1\44\1\uffff\2\44\1\uffff"+
+        "\1\157\3\uffff\1\146\1\44\1\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\3\uffff\1\56\11\uffff\1\76\1\75\1\174\1\46\1\75\1\156\2"+
-        "\75\1\76\1\56\1\57\1\163\1\56\1\170\1\167\1\157\1\141\1\157\1\150"+
-        "\1\141\1\165\1\171\1\172\2\uffff\2\uffff\34\uffff\1\163\1\172\14"+
-        "\uffff\1\172\2\uffff\1\163\1\164\1\151\1\160\1\146\1\172\1\164\1"+
-        "\162\1\154\1\156\1\151\1\162\1\167\1\154\1\171\1\160\1\162\3\uffff"+
-        "\1\164\2\uffff\2\145\1\164\1\145\1\141\1\uffff\1\145\1\143\1\172"+
-        "\1\163\1\141\1\154\3\172\1\154\1\145\1\172\1\145\1\157\1\141\1\172"+
-        "\1\156\1\143\1\162\1\165\1\172\1\150\1\uffff\1\145\1\154\1\145\3"+
-        "\uffff\2\172\1\uffff\1\157\1\167\1\156\1\uffff\1\144\1\150\1\172"+
-        "\1\154\1\uffff\2\172\1\154\1\172\2\uffff\1\146\1\172\1\143\1\163"+
-        "\1\172\1\uffff\1\164\2\uffff\1\171\1\uffff\1\172\1\uffff\1\145\1"+
-        "\172\1\uffff\2\172\1\uffff\1\157\3\uffff\1\146\1\172\1\uffff";
+        "\1\uffff\3\uffff\1\56\4\uffff\1\ufffd\4\uffff\1\76\1\75\1\174\1"+
+        "\46\1\75\1\156\2\75\1\76\1\56\1\57\1\163\1\56\1\170\1\167\1\157"+
+        "\1\141\1\157\1\150\1\141\1\165\1\171\1\ufffd\2\uffff\2\uffff\35"+
+        "\uffff\1\163\1\ufffd\13\uffff\1\ufffd\2\uffff\1\163\1\164\1\151"+
+        "\1\160\1\146\1\ufffd\1\164\1\162\1\154\1\156\1\151\1\162\1\167\1"+
+        "\154\1\171\1\160\1\162\3\uffff\1\164\2\uffff\2\145\1\164\1\145\1"+
+        "\141\1\uffff\1\145\1\143\1\ufffd\1\163\1\141\1\154\3\ufffd\1\154"+
+        "\1\145\1\ufffd\1\145\1\157\1\141\1\ufffd\1\156\1\143\1\162\1\165"+
+        "\1\ufffd\1\150\1\uffff\1\145\1\154\1\145\3\uffff\2\ufffd\1\uffff"+
+        "\1\157\1\167\1\156\1\uffff\1\144\1\150\1\ufffd\1\154\1\uffff\2\ufffd"+
+        "\1\154\1\ufffd\2\uffff\1\146\1\ufffd\1\143\1\163\1\ufffd\1\uffff"+
+        "\1\164\2\uffff\1\171\1\uffff\1\ufffd\1\uffff\1\145\1\ufffd\1\uffff"+
+        "\2\ufffd\1\uffff\1\157\3\uffff\1\146\1\ufffd\1\uffff";
     static final String DFA12_acceptS =
-        "\1\uffff\1\1\1\2\1\3\1\uffff\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14"+
-        "\1\15\27\uffff\1\75\1\76\2\uffff\1\102\1\103\1\1\1\2\1\3\1\35\1"+
-        "\43\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\22\1\70\1\16"+
-        "\1\17\1\33\1\20\1\44\1\21\1\73\1\23\1\37\2\uffff\1\75\1\25\1\27"+
-        "\1\26\1\30\1\31\1\34\1\32\1\41\1\100\1\101\1\36\1\uffff\1\42\1\71"+
-        "\21\uffff\1\76\1\77\1\102\1\uffff\1\45\1\40\5\uffff\1\54\26\uffff"+
-        "\1\52\3\uffff\1\55\1\56\1\57\2\uffff\1\65\3\uffff\1\46\4\uffff\1"+
-        "\51\4\uffff\1\62\1\61\5\uffff\1\74\1\uffff\1\67\1\60\1\uffff\1\53"+
-        "\1\uffff\1\64\2\uffff\1\47\2\uffff\1\63\1\uffff\1\72\1\50\1\66\2"+
-        "\uffff\1\24";
+        "\1\uffff\1\1\1\2\1\3\1\uffff\1\5\1\6\1\7\1\10\1\uffff\1\12\1\13"+
+        "\1\14\1\15\27\uffff\1\75\1\76\2\uffff\1\102\1\103\1\1\1\2\1\3\1"+
+        "\35\1\43\1\4\1\5\1\6\1\7\1\10\1\75\1\11\1\12\1\13\1\14\1\15\1\22"+
+        "\1\70\1\16\1\17\1\33\1\20\1\44\1\21\1\73\1\23\1\37\2\uffff\1\25"+
+        "\1\27\1\26\1\30\1\31\1\34\1\32\1\41\1\100\1\101\1\36\1\uffff\1\42"+
+        "\1\71\21\uffff\1\76\1\77\1\102\1\uffff\1\45\1\40\5\uffff\1\54\26"+
+        "\uffff\1\52\3\uffff\1\55\1\56\1\57\2\uffff\1\65\3\uffff\1\46\4\uffff"+
+        "\1\51\4\uffff\1\62\1\61\5\uffff\1\74\1\uffff\1\67\1\60\1\uffff\1"+
+        "\53\1\uffff\1\64\2\uffff\1\47\2\uffff\1\63\1\uffff\1\72\1\50\1\66"+
+        "\2\uffff\1\24";
     static final String DFA12_specialS =
-        "\1\0\46\uffff\1\2\1\1\u0093\uffff}>";
+        "\1\1\46\uffff\1\2\1\0\u0093\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\52\2\51\2\52\1\51\22\52\1\51\1\22\1\47\1\3\1\11\1\15\1\21"+
             "\1\50\1\12\1\14\1\4\1\17\1\13\1\26\1\27\1\30\12\46\1\10\1\7"+
             "\1\25\1\16\1\24\1\32\1\52\32\45\1\5\1\52\1\6\1\44\1\45\1\52"+
             "\1\31\1\45\1\36\1\35\1\33\1\37\2\45\1\23\4\45\1\42\4\45\1\34"+
-            "\1\43\1\45\1\41\1\40\3\45\1\1\1\20\1\2\uff82\52",
+            "\1\43\1\45\1\41\1\40\3\45\1\1\1\20\1\2\2\52\uff7e\45\2\52",
             "",
             "",
             "",
@@ -2391,17 +2392,18 @@ public class InternalXcssLexer extends Lexer {
             "",
             "",
             "",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
             "",
             "",
             "",
             "",
-            "",
-            "\1\72\1\73",
-            "\1\75",
-            "\1\77",
-            "\1\101",
-            "\1\103",
-            "\1\106\7\uffff\1\105",
+            "\1\73\1\74",
+            "\1\76",
+            "\1\100",
+            "\1\102",
+            "\1\104",
+            "\1\107\7\uffff\1\106",
             "\1\110",
             "\1\112",
             "\1\114",
@@ -2418,11 +2420,13 @@ public class InternalXcssLexer extends Lexer {
             "\1\141",
             "\1\142\17\uffff\1\143",
             "\1\146\11\uffff\1\144\6\uffff\1\145",
-            "\32\107\4\uffff\1\107\1\uffff\32\107",
+            "\1\65\34\uffff\32\65\4\uffff\1\65\1\uffff\32\65\5\uffff\uff7e"+
+            "\65",
             "",
             "",
             "\0\150",
             "\0\150",
+            "",
             "",
             "",
             "",
@@ -2452,7 +2456,8 @@ public class InternalXcssLexer extends Lexer {
             "",
             "",
             "\1\152",
-            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
             "",
             "",
             "",
@@ -2464,8 +2469,8 @@ public class InternalXcssLexer extends Lexer {
             "",
             "",
             "",
-            "",
-            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
             "",
             "",
             "\1\155",
@@ -2473,7 +2478,8 @@ public class InternalXcssLexer extends Lexer {
             "\1\157",
             "\1\160",
             "\1\161",
-            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
             "\1\163\1\164",
             "\1\165",
             "\1\166",
@@ -2499,25 +2505,32 @@ public class InternalXcssLexer extends Lexer {
             "",
             "\1\u0087",
             "\1\u0088",
-            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
             "\1\u008a",
             "\1\u008b",
             "\1\u008c",
-            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
-            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
-            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
             "\1\u0090",
             "\1\u0091",
-            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
             "\1\u0093",
             "\1\u0094",
             "\1\u0095",
-            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
             "\1\u0097",
             "\1\u0098",
             "\1\u0099",
             "\1\u009a",
-            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
             "\1\u009c",
             "",
             "\1\u009d",
@@ -2526,8 +2539,10 @@ public class InternalXcssLexer extends Lexer {
             "",
             "",
             "",
-            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
-            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
             "",
             "\1\u00a2",
             "\1\u00a3",
@@ -2535,40 +2550,51 @@ public class InternalXcssLexer extends Lexer {
             "",
             "\1\u00a5",
             "\1\u00a6",
-            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
             "\1\u00a8",
             "",
-            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
-            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
             "\1\u00ab",
-            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
             "",
             "",
             "\1\u00ad",
-            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
             "\1\u00af",
             "\1\u00b0",
-            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
             "",
             "\1\u00b2",
             "",
             "",
             "\1\u00b3",
             "",
-            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
             "",
             "\1\u00b5",
-            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
             "",
-            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
-            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
             "",
             "\1\u00b9",
             "",
             "",
             "",
             "\1\u00ba",
-            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
+            "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
+            "\65\5\uffff\uff7e\65",
             ""
     };
 
@@ -2609,6 +2635,16 @@ public class InternalXcssLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA12_40 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_40>='\u0000' && LA12_40<='\uFFFF')) ) {s = 104;}
+
+                        else s = 42;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -2684,7 +2720,7 @@ public class InternalXcssLexer extends Lexer {
 
                         else if ( (LA12_0=='^') ) {s = 36;}
 
-                        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||LA12_0=='b'||(LA12_0>='g' && LA12_0<='h')||(LA12_0>='j' && LA12_0<='m')||(LA12_0>='o' && LA12_0<='r')||LA12_0=='u'||(LA12_0>='x' && LA12_0<='z')) ) {s = 37;}
+                        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||LA12_0=='b'||(LA12_0>='g' && LA12_0<='h')||(LA12_0>='j' && LA12_0<='m')||(LA12_0>='o' && LA12_0<='r')||LA12_0=='u'||(LA12_0>='x' && LA12_0<='z')||(LA12_0>='\u0080' && LA12_0<='\uFFFD')) ) {s = 37;}
 
                         else if ( ((LA12_0>='0' && LA12_0<='9')) ) {s = 38;}
 
@@ -2694,17 +2730,7 @@ public class InternalXcssLexer extends Lexer {
 
                         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 41;}
 
-                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='@'||LA12_0=='\\'||LA12_0=='`'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 42;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA12_40 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_40>='\u0000' && LA12_40<='\uFFFF')) ) {s = 104;}
-
-                        else s = 42;
+                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='@'||LA12_0=='\\'||LA12_0=='`'||(LA12_0>='~' && LA12_0<='\u007F')||(LA12_0>='\uFFFE' && LA12_0<='\uFFFF')) ) {s = 42;}
 
                         if ( s>=0 ) return s;
                         break;

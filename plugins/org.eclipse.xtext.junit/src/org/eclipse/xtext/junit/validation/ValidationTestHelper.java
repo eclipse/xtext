@@ -57,7 +57,7 @@ public class ValidationTestHelper {
 					EObject object = model.eResource().getResourceSet().getEObject(input.getUriToProblem(), true);
 					if (objectType.isInstance(object)) {
 						for (String messagePart : messageParts) {
-							if (!input.getMessage().contains(messagePart)) {
+							if (!input.getMessage().toLowerCase().contains(messagePart.toLowerCase())) {
 								return false;
 							}
 						}

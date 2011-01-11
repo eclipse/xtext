@@ -26,6 +26,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	public static final String INCOMPATIBLE_TYPES = "xbase.incompatible_types";
 	public static final String ASSIGNMENT_TO_FINAL = "xbase.assignment_to_final";
+	public static final String MISSING_INITIALIZATION = "xbase.missing_initialization";
+	public static final String MISSING_TYPE = "xbase.missing_type";
 
 	@Inject
 	private IXbaseTypeProvider typeProvider;
@@ -43,10 +45,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			if (expectedType == null)
 				return;
 			JvmTypeReference actualType = typeProvider.getType(obj);
-			if (!conformanceComputer.isConformant(expectedType, actualType)) {
+			if (!conformanceComputer.isConformant(expectedType, actualType)) 
 				error("Incompatible types. Expected " + getTypeCanonicalName(expectedType) + " but was "
 						+ getTypeCanonicalName(actualType), obj, -1, INCOMPATIBLE_TYPES);
-			}
 		} catch (TypeResolutionException e) {
 			// do nothing, error should be handled elsewhere
 		}
@@ -56,14 +57,24 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	public void checkTypes(XCatchClause catchClause) {
 		checkTypes(catchClause.getDeclaredParam());
 	}
-	
+
 	@Check
 	public void checkAssignment(XAssignment assignment) {
 		if (assignment.getFeature() instanceof XVariableDeclaration
-				&& !((XVariableDeclaration) assignment.getFeature()).isWriteable()) {
+				&& !((XVariableDeclaration) assignment.getFeature()).isWriteable())
 			error("Assignment to final variable", XbasePackage.XASSIGNMENT__ASSIGNABLE, ASSIGNMENT_TO_FINAL);
-		} else if (assignment.getFeature() instanceof JvmFormalParameter) {
+		else if (assignment.getFeature() instanceof JvmFormalParameter)
 			error("Assignment to final parameter", XbasePackage.XASSIGNMENT__ASSIGNABLE, ASSIGNMENT_TO_FINAL);
+	}
+
+	@Check
+	public void checkVariableDeclaration(XVariableDeclaration declaration) {
+		if (declaration.getRight() == null) {
+			if (!declaration.isWriteable())
+				error("Value must be initialized", XbasePackage.XVARIABLE_DECLARATION, MISSING_INITIALIZATION);
+			if (declaration.getType() == null)
+				error("Type cannot be derived",
+						XbasePackage.XVARIABLE_DECLARATION, MISSING_TYPE);
 		}
 	}
 
@@ -75,7 +86,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	@Override
 	protected List<EPackage> getEPackages() {
-		return singletonList((EPackage)XbasePackage.eINSTANCE);
+		return singletonList((EPackage) XbasePackage.eINSTANCE);
 	}
 
 	protected String getTypeCanonicalName(JvmTypeReference typeRef) {
