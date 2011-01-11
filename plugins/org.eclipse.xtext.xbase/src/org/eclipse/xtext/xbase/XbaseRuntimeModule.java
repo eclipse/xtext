@@ -10,11 +10,9 @@ package org.eclipse.xtext.xbase;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
-import org.eclipse.xtext.conversion.impl.AbstractIDValueConverter;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipse.xtext.xbase.conversion.JavaIdentifierValueConverter;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext;
@@ -71,7 +69,4 @@ public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 		return XbaseTypeConformanceComputer.class;
 	}
 	
-	public Class<? extends AbstractIDValueConverter> bindAbstractIDValueConverter() {
-		return JavaIdentifierValueConverter.class;
-	}
 }

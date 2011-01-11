@@ -559,7 +559,7 @@ ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 
 
 
-RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_'|'$'|'\u0080'..'\uFFFD') ('a'..'z'|'A'..'Z'|'_'|'$'|'0'..'9'|'\u0080'..'\uFFFD')*;
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 
