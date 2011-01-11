@@ -13,7 +13,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
-import org.eclipse.xtext.xtend2.tests.AbstractXtend2Test;
+import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
@@ -23,8 +23,7 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef;
  * @author Sven Efftinge
  *
  */
-public class LinkingTest extends AbstractXtend2Test {
-	
+public class LinkingTest extends AbstractXtend2TestCase {
 	
 	public void testTypeReference_withImport() throws Exception {
 		XtendFunction func = (XtendFunction) clazz("import java.lang.* class X { (String)=>Boolean foo() [|true] }").getMembers().get(0);

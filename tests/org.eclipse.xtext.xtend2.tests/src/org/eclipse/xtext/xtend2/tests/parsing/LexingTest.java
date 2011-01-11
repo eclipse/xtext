@@ -6,27 +6,28 @@ import java.util.Map;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.Token;
-import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.xtend2.Xtend2StandaloneSetup;
+import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 
-import static org.eclipse.xtext.util.Tuples.*;
+import com.google.inject.Inject;
+
+import static org.eclipse.xtext.util.Tuples.pair;
 
 @SuppressWarnings("unchecked")
-public class LexingTest extends AbstractXtextTests {
+public class LexingTest extends AbstractXtend2TestCase {
 	
+	@Inject
 	private Lexer lexer;
+	
+	@Inject
 	private ITokenDefProvider tokenDefProvider;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(new Xtend2StandaloneSetup());
-		lexer = get(Lexer.class);
-		tokenDefProvider = get(ITokenDefProvider.class);
 	}
 	
 	public void testRichString() throws Exception {

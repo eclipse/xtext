@@ -1,17 +1,11 @@
 package org.eclipse.xtext.xtend2.tests.compiler;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
-import org.eclipse.xtext.xtend2.Xtend2StandaloneSetup;
 import org.eclipse.xtext.xtend2.compiler.Xtend2Compiler;
+import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
+import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
-public class Xtend2CompilerTest extends AbstractXtextTests {
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		with(new Xtend2StandaloneSetup());
-	}
+public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 	
 	public void testSimple() throws Exception {
 		final String input = "package foo\n" +
@@ -36,11 +30,10 @@ public class Xtend2CompilerTest extends AbstractXtextTests {
 //		assertCompilesTo("public class X {\n"+expected+"", input)
 	}
 	protected void assertCompilesTo(final String expected, final String input) throws Exception {
-		EObject model = getModel(input);
-
+		XtendFile file = file(input);
 		Xtend2Compiler compiler = get(Xtend2Compiler.class);
 		final IAppendable.StringBuilderBasedAppendable appendable = new IAppendable.StringBuilderBasedAppendable();
-		compiler.compile(model, appendable);
+		compiler.compile(file, appendable);
 		assertEquals(expected,appendable.toString());
 	}
 }
