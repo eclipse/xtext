@@ -44,7 +44,7 @@ public class JvmFeatureSignatureProvider implements Function<JvmFeature, String>
 			builder.append("(");
 			Iterator<JvmFormalParameter> params = object.getParameters().iterator();
 			while (params.hasNext()){
-				JvmTypeReference resolvedParameterType = context.resolveContravariant(params.next().getParameterType());
+				JvmTypeReference resolvedParameterType = context.getLowerBound(params.next().getParameterType());
 				if (resolvedParameterType != null)
 					builder.append(resolvedParameterType.getCanonicalName());
 				else

@@ -12,19 +12,46 @@ package org.eclipse.xtext.xbase.compiler;
  */
 public interface IAppendable {
 	IAppendable append(Object obj);
+	IAppendable increaseIndentation();
+	IAppendable decreaseIndentation();
 	
 	public static class StringBuilderBasedAppendable implements IAppendable {
 		
 		private StringBuilder builder = new StringBuilder(8*1024);
+		private int indentationlevel = 0;
+		private String indentation = "  ";
 
 		public IAppendable append(Object obj) {
-			builder.append(obj);
+			String string = String.valueOf(obj);
+			String replaced = string.replace("\n",getIndentationString());
+			builder.append(replaced);
 			return this;
 		}
 		
+		private CharSequence getIndentationString() {
+			StringBuilder sb = new StringBuilder(10);
+			sb.append("\n");
+			for (int i = 0; i < indentationlevel; i++) {
+				sb.append(indentation);
+			}
+			return sb.toString();
+		}
+
 		@Override
 		public String toString() {
 			return builder.toString();
+		}
+
+		public IAppendable increaseIndentation() {
+			indentationlevel++;
+			return this;
+		}
+
+		public IAppendable decreaseIndentation() {
+			if (indentationlevel==0)
+				throw new IllegalStateException("Can't reduce indentation level. It's already zero.");
+			indentationlevel--;
+			return this;
 		}
 
 	}

@@ -81,7 +81,7 @@ OpUnary:
 	"!" | "-" | "+";
 	
 XCastedExpression returns XExpression:
-	XMemberFeatureCall (=>({XCastedExpression.target=current} 'as') type=JvmTypeReference)?
+	XMemberFeatureCall (=>({XCastedExpression.target=current} 'as') type=JvmTypeReference)*
 ;
 
 XMemberFeatureCall returns XExpression:

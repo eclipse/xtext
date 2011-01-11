@@ -10,9 +10,6 @@ package org.eclipse.xtext.xbase.tests.interpreter;
 import java.util.Collections;
 import java.util.Stack;
 
-import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
-import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 
 import testdata.ExceptionSubclass;
@@ -37,7 +34,7 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 	}
 	
 	public void testNullBlockResult_02() {
-		assertEvaluatesTo(null, "{ 'literal'; null; }");
+		assertEvaluatesTo(null, "{ 'literal'.length; null; }");
 	}
 	
 	public void testStringLiteral_01() {
@@ -72,6 +69,10 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 		assertEvaluatesTo(Void.TYPE, "typeof(void)");
 	}
 	
+	public void testIfExpression_00() {
+		assertEvaluatesTo(null, "if (0==1) 'literal'");
+	}
+	
 	public void testIfExpression_01() {
 		assertEvaluatesTo(null, "if (false) 'literal'");
 	}
@@ -88,9 +89,11 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 		assertEvaluatesTo("else", "if (false) 'then' else 'else'");
 	}
 	
-	public void testVariableDeclaration_01() {
-		assertEvaluatesTo("literal", "{val x = 'literal'}");
-	}
+	
+//TODO Not allowed add a check	
+//	public void testVariableDeclaration_01() {
+//		assertEvaluatesTo("literal", "{val x = 'literal'}");
+//	}
 	
 	public void testFeatureCall_01() {
 		assertEvaluatesTo("literal", "{var x = 'literal' x}");
@@ -233,7 +236,7 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 //	}
 
 	public void testForLoop_03() {
-		assertEvaluatesWithException(ClassCastException.class, "for(x: 'abc') null");
+		assertEvaluatesWithException(ClassCastException.class, "for(x: 'abc' as Object as java.util.List<Character>) null");
 	}
 	
 	public void testWhileLoop_01() {
@@ -324,18 +327,18 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 	}
 	
 	public void testNullSafeOperator_01() {
-		assertEvaluatesWithException(NullPointerException.class, "null.toString()");
-		assertEvaluatesWithException(NullPointerException.class, "null?.toString().toString()");
+		assertEvaluatesWithException(NullPointerException.class, "(null as Object).toString()");
+		assertEvaluatesWithException(NullPointerException.class, "(null as Object)?.toString().toString()");
 	}
 	
 	public void testNullSafeOperator_02() {
-		assertEvaluatesTo(null, "null?.toString()");
-		assertEvaluatesTo(null, "null?.toString()?.toString()");
+		assertEvaluatesTo(null, "(null as Object)?.toString()");
+		assertEvaluatesTo(null, "(null as Object)?.toString()?.toString()");
 	}
 	
 	public void testSpreadOperator_01() {
-		assertEvaluatesWithException(NullPointerException.class, "null*.toString()");
-		assertEvaluatesWithException(ClassCastException.class, "''*.toString()");
+		assertEvaluatesWithException(NullPointerException.class, "(null as java.util.List<Object>)*.toString()");
+		assertEvaluatesWithException(ClassCastException.class, "('' as java.util.List<Object>)*.toString()");
 	}
 	
 	public void testSpreadOperator_02() {
@@ -388,7 +391,7 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 	}
 	
 	public void testCastedExpression_02() {
-		assertEvaluatesWithException(ClassCastException.class, "'literal' as Integer");
+		assertEvaluatesWithException(ClassCastException.class, "'literal' as Object as Integer");
 	}
 	
 	public void testCastedExpression_03() {
@@ -396,7 +399,7 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 	}
 	
 	public void testTryCatch_01() {
-		assertEvaluatesTo("caught", "try { 'literal' as Boolean } catch(ClassCastException e) {'caught'}");
+		assertEvaluatesTo("caught", "try { 'literal' as Object as Boolean } catch(ClassCastException e) {'caught'}");
 	}
 	
 	public void testTryCatch_02() {
@@ -404,24 +407,24 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 	}
 	
 	public void testTryCatch_03() {
-		assertEvaluatesTo("ClassCastException", "try { 'literal' as Boolean } catch(ClassCastException e) {e.getClass().getSimpleName()}");
+		assertEvaluatesTo("ClassCastException", "try { 'literal' as Object as Boolean } catch(ClassCastException e) {e.getClass().getSimpleName()}");
 	}
 	
 	public void testTryCatch_04() {
 		// TODO Fix '==' behavior
-		assertEvaluatesWithException(NullPointerException.class, "try { 'literal' as Boolean } catch(ClassCastException e) null == e");
+		assertEvaluatesWithException(NullPointerException.class, "try { 'literal' as Object as Boolean } catch(ClassCastException e) null as Object == e");
 	}
 	
 	public void testTryCatch_05() {
 		// TODO Fix '==' behavior
 		assertEvaluatesWithException(NullPointerException.class, 
-				"try 'literal' as Boolean" +
-				"  catch(ClassCastException e) null == e // throw new NullPointerException()" +
+				"try 'literal' as Object as Boolean" +
+				"  catch(ClassCastException e) null as Object == e // throw new NullPointerException()" +
 				"  catch(NullPointerException e) 'dont catch subsequent exceptions'");
 	}
 	
 	public void testTryFinally_01() {
-		assertEvaluatesTo("literal", "try 'literal' finally 'finally'");
+		assertEvaluatesTo("literal", "try 'literal' finally 'finally'.toString");
 	}
 	
 	public void testTryFinally_02() {
@@ -449,11 +452,19 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 	}
 	
 	public void testThrowExpression_02() {
-		assertEvaluatesWithException(ClassCastException.class, "throw 'literal'");
+		assertEvaluatesWithException(ClassCastException.class, "throw 'literal' as Object as RuntimeException");
 	}
 	
 	public void testThrowExpression_03() {
 		assertEvaluatesWithException(NullPointerException.class, "throw null");
+	}
+	
+	public void testThrowExpression_04() {
+		assertEvaluatesWithException(NullPointerException.class, "throw new NullPointerException()");
+	}
+	
+	public void testThrowExpression_05() {
+		assertEvaluatesWithException(RuntimeException.class, "if ('foo'=='bar') 'foobar' else throw new RuntimeException()");
 	}
 	
 	public void testInstanceOf_01() {
@@ -465,7 +476,7 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 	}
 	
 	public void testInstanceOf_03() {
-		assertEvaluatesTo(Boolean.FALSE, "'literal' instanceof Boolean");
+		assertEvaluatesTo(Boolean.FALSE, "'literal' as Object instanceof Boolean");
 	}
 	
 	public void testInstanceOf_04() {

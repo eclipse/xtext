@@ -12,6 +12,7 @@ import static com.google.common.collect.Lists.*;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
@@ -19,10 +20,14 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.jdt.core.compiler.batch.BatchCompiler;
+import org.eclipse.jdt.core.compiler.CompilationProgress;
+import org.eclipse.jdt.internal.compiler.batch.FileSystem;
+import org.eclipse.jdt.internal.compiler.batch.Main;
+import org.eclipse.jdt.internal.compiler.env.NameEnvironmentAnswer;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -35,11 +40,62 @@ import com.google.inject.internal.MoreTypes;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class OnTheFlyJavaCompiler {
 	
 	@Inject
 	private ClassLoader parentClassLoader;
 	private List<String> classpath = newArrayList();
+	
+	static class DelegateOutStream extends OutputStream {
+
+		private OutputStream delegate;
+		
+		public void setDelegate(OutputStream delegate) {
+			this.delegate = delegate;
+		}
+
+		@Override
+		public void write(int b) throws IOException {
+			delegate.write(b);
+		}
+
+		@Override
+		public int hashCode() {
+			return delegate.hashCode();
+		}
+
+		@Override
+		public void write(byte[] b) throws IOException {
+			delegate.write(b);
+		}
+
+		@Override
+		public void write(byte[] b, int off, int len) throws IOException {
+			delegate.write(b, off, len);
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			return delegate.equals(obj);
+		}
+
+		@Override
+		public void flush() throws IOException {
+			delegate.flush();
+		}
+
+		@Override
+		public void close() throws IOException {
+			delegate.close();
+		}
+
+		@Override
+		public String toString() {
+			return delegate.toString();
+		}
+		
+	}
 	
 	public void setParentClassLoader(ClassLoader parentClassLoader) {
 		this.parentClassLoader = parentClassLoader;
@@ -106,13 +162,13 @@ public class OnTheFlyJavaCompiler {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <RT, T> Functions.Function1<T,RT> createFunction(String expression, Class<RT> returnType, Class<T> paramType) {
-		return (Functions.Function1<T,RT>) internalCreateFunction(expression, returnType, Tuples.pair((Type) paramType, "p"));
+	public <RT, T> Functions.Function1<T,RT> createFunction(String body, Class<RT> returnType, Class<T> paramType) {
+		return (Functions.Function1<T,RT>) internalCreateFunction(body, returnType, Tuples.pair((Type) paramType, "p"));
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <RT,T1,T2> Functions.Function2<T1,T2,RT> createFunction(String expression, Class<RT> returnType, Class<T1> paramType1, Class<T2> paramType2) {
-		return (Functions.Function2<T1,T2,RT>) internalCreateFunction(expression, returnType, Tuples.pair((Type) paramType2, "p1"), Tuples.pair((Type) paramType2, "p2"));
+	public <RT,T1,T2> Functions.Function2<T1,T2,RT> createFunction(String body, Class<RT> returnType, Class<T1> paramType1, Class<T2> paramType2) {
+		return (Functions.Function2<T1,T2,RT>) internalCreateFunction(body, returnType, Tuples.pair((Type) paramType2, "p1"), Tuples.pair((Type) paramType2, "p2"));
 	}
 
 	protected Object internalCreateFunction(String code, Type returnType, Pair<Type, String>... params) {
@@ -137,14 +193,13 @@ public class OnTheFlyJavaCompiler {
 		final File targetFile = new File(tempDir + classNameAsPath + ".class");
 		try {
 			Files.writeStringIntoFile(srcFile.getCanonicalPath(), code);
-			ByteArrayOutputStream errorStream = new ByteArrayOutputStream();
+			errorStream.setDelegate(new ByteArrayOutputStream());
 			StringBuilder sb = new StringBuilder(getComplianceLevelArg());
 			sb.append(" ");
 			sb.append(getClasspathArgs());
 			sb.append(" ");
 			sb.append(srcFile.getCanonicalPath());
-			boolean compile = BatchCompiler.compile(sb.toString(), new PrintWriter(new OutputStreamWriter(System.out)), new PrintWriter(
-					new OutputStreamWriter(errorStream)), null);
+			boolean compile = compile(sb.toString());
 			if (!compile)
 				throw new IllegalArgumentException("Couldn't compile : " + errorStream.toString());
 			URLClassLoader loader = new URLClassLoader(new URL[] { targetFile.getParentFile().toURI().toURL() }, parentClassLoader);
@@ -160,6 +215,19 @@ public class OnTheFlyJavaCompiler {
 			if (targetFile.exists())
 				targetFile.delete();
 		}
+	}
+
+	protected boolean compile(String arguments) {
+//		return BatchCompiler.compile(sb.toString(), new PrintWriter(new OutputStreamWriter(System.out)), new PrintWriter(
+//				new OutputStreamWriter(errorStream)), null);
+		return getMain().compile(Main.tokenize(arguments));
+	}
+
+	private DelegateOutStream errorStream =  new DelegateOutStream();
+	
+	protected Main getMain() {
+		return new PatchedMain(new PrintWriter(new OutputStreamWriter(System.out)), new PrintWriter(
+				new OutputStreamWriter(errorStream)), false /* systemExit */, null /* options */, null);
 	}
 
 	protected String getComplianceLevelArg() {
@@ -193,5 +261,97 @@ public class OnTheFlyJavaCompiler {
 	protected String toString(Type returnType) {
 		return MoreTypes.toString(returnType);
 	}
+	
+	private static PatchedFileSystem fileSystem;
+	
+	public void clearClassPath() {
+		fileSystem.getDelegate().cleanup();
+		fileSystem = null;
+	}
+	
+	/**
+	 * HACK - reuse the classpath, since it is super expensive to reopen and scan the zips.
+	 * 
+	 * @author Sven Efftinge - Initial contribution and API
+	 */
+	static class PatchedMain extends Main {
 
+		@SuppressWarnings("rawtypes")
+		public PatchedMain(PrintWriter outWriter, PrintWriter errWriter, boolean systemExitWhenFinished,
+				Map customDefaultOptions, CompilationProgress compilationProgress) {
+			super(outWriter, errWriter, systemExitWhenFinished, customDefaultOptions, compilationProgress);
+		}
+
+		@Override
+		public FileSystem getLibraryAccess() {
+			if (fileSystem == null) {
+				fileSystem =  new PatchedFileSystem(super.getLibraryAccess());
+			}
+			return fileSystem;
+		}
+		
+	}
+	
+	static class PatchedFileSystem extends FileSystem {
+		
+		private FileSystem delegate;
+		
+		public PatchedFileSystem(FileSystem delegate) {
+			super(new String[0],new String[0],"ISO-8859-1");
+			this.delegate = delegate;
+		}
+		
+		public FileSystem getDelegate() {
+			return delegate;
+		}
+
+		@Override
+		public void cleanup() {
+			//DO nothing. the original implmentaion closes zips and sets the references to null
+		}
+
+		@Override
+		public int hashCode() {
+			return delegate.hashCode();
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			return delegate.equals(obj);
+		}
+
+		@Override
+		public String toString() {
+			return delegate.toString();
+		}
+
+		@Override
+		public NameEnvironmentAnswer findType(char[][] compoundName) {
+			return delegate.findType(compoundName);
+		}
+
+		@Override
+		public char[][][] findTypeNames(char[][] packageName) {
+			return delegate.findTypeNames(packageName);
+		}
+
+		@Override
+		public NameEnvironmentAnswer findType(char[][] compoundName, boolean asBinaryOnly) {
+			return delegate.findType(compoundName, asBinaryOnly);
+		}
+
+		@Override
+		public NameEnvironmentAnswer findType(char[] typeName, char[][] packageName) {
+			return delegate.findType(typeName, packageName);
+		}
+
+		@Override
+		public boolean isPackage(char[][] compoundName, char[] packageName) {
+			return delegate.isPackage(compoundName, packageName);
+		}
+		
+		
+
+	}
+	
 }

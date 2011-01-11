@@ -19,7 +19,6 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.typing.AbstractExpectedTypeProvider;
-import org.eclipse.xtext.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -45,7 +44,7 @@ import com.google.inject.Inject;
 public class XbaseExpectedTypeProvider extends AbstractExpectedTypeProvider<JvmTypeReference> {
 
 	@Inject
-	private ITypeProvider<JvmTypeReference> typeProvider;
+	private IXbaseTypeProvider typeProvider;
 
 	@Inject
 	private TypesService typeService;
@@ -69,7 +68,7 @@ public class XbaseExpectedTypeProvider extends AbstractExpectedTypeProvider<JvmT
 			TypeArgumentContext context = typeArgCtxProvider.getContext(expr.getMemberCallTarget());
 			JvmExecutable feature = (JvmExecutable) expr.getFeature();
 			JvmFormalParameter parameter = feature.getParameters().get(index);
-			return context.resolveContravariant(parameter.getParameterType());
+			return context.getLowerBound(parameter.getParameterType());
 		} else if(reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) 
 			return null;
 		return getExpectedType(expr);
@@ -80,7 +79,7 @@ public class XbaseExpectedTypeProvider extends AbstractExpectedTypeProvider<JvmT
 			TypeArgumentContext context = typeArgCtxProvider.getContext(expr.getLeftOperand());
 			JvmExecutable feature = (JvmExecutable) expr.getFeature();
 			JvmFormalParameter parameter = feature.getParameters().get(0);
-			return context.resolveContravariant(parameter.getParameterType());
+			return context.getLowerBound(parameter.getParameterType());
 		}
 		return getExpectedType(expr);
 	}
@@ -136,8 +135,8 @@ public class XbaseExpectedTypeProvider extends AbstractExpectedTypeProvider<JvmT
 				final JvmParameterizedTypeReference jvmParameterizedTypeReference = (JvmParameterizedTypeReference)typeForName;
 				jvmParameterizedTypeReference.getArguments().clear();
 				jvmParameterizedTypeReference.getArguments().add(wildCard);
+				return typeForName;
 			}
-			return typeForName;
 		}
 		return null; // no other expectations
 	}

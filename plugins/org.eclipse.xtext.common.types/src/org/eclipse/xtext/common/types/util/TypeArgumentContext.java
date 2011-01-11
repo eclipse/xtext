@@ -48,10 +48,10 @@ public class TypeArgumentContext {
 	}
 	
 	/**
-	 * Resolve the reference for a contravariant location, e.g. a parameter type of a method.
-	 * @return the resolved reference or <code>null</code> if the reference cannot be resolved contravariant.
+	 * Resolve the reference for a contravariant location, i.e. returns the lower bound.
+	 * @return the lower bound of a reference or <code>null</code> if there is no lower bound.
 	 */
-	public JvmTypeReference resolveContravariant(JvmTypeReference element) {
+	public JvmTypeReference getLowerBound(JvmTypeReference element) {
 		JvmTypeReference copy = doGetResolvedCopy(element, Wrapper.wrap(Boolean.FALSE));
 		if (copy instanceof JvmWildcardTypeReference) {
 			for(JvmTypeConstraint constraint: ((JvmWildcardTypeReference) copy).getConstraints()) {
@@ -67,17 +67,17 @@ public class TypeArgumentContext {
 	}
 	
 	/**
-	 * Resolve the reference for a covariant location, e.g. a return type of a method.
-	 * @return the resolved reference or <code>null</code> if the reference cannot be resolved covariant.
+	 * Resolve the reference for a covariant location, i.e. returns the upper bound.
+	 * @return the upper bound of a reference.
 	 */
-	public JvmTypeReference resolveCovariant(JvmTypeReference element) {
+	public JvmTypeReference getUpperBound(JvmTypeReference element) {
 		JvmTypeReference copy = doGetResolvedCopy(element, Wrapper.wrap(Boolean.FALSE));
 		if (copy instanceof JvmWildcardTypeReference) {
 			for(JvmTypeConstraint constraint: ((JvmWildcardTypeReference) copy).getConstraints()) {
 				if (constraint instanceof JvmUpperBound)
 					return constraint.getTypeReference();
 			}
-			// no upperbound given - return object
+			// no explicit upper bound given - return object
 			JvmParameterizedTypeReference result = createTypeReference();
 			result.setType(objectType);
 			return result;
@@ -86,10 +86,10 @@ public class TypeArgumentContext {
 	}
 	
 	/**
-	 * Resolve the reference for an invariant location, e.g. an extends clause
-	 * @return the resolved reference or <code>null</code> if the reference cannot be resolved covariant.
+	 * Resolves and returns the reference
+	 * @return the resolved reference.
 	 */
-	public JvmTypeReference resolveInvariant(JvmTypeReference element) {
+	public JvmTypeReference resolve(JvmTypeReference element) {
 		Wrapper<Boolean> foundRawType = Wrapper.wrap(Boolean.FALSE);
 		JvmTypeReference copy = doGetResolvedCopy(element, foundRawType);
 		if (foundRawType.get()) {
@@ -165,14 +165,16 @@ public class TypeArgumentContext {
 		protected JvmDeclaredType internalComputeContext(JvmTypeReference contextRef, Map<JvmTypeParameter, JvmTypeReference> context) {
 			if (contextRef instanceof JvmParameterizedTypeReference) {
 				JvmParameterizedTypeReference typeRef = (JvmParameterizedTypeReference) contextRef;
-				List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) typeRef.getType()).getTypeParameters();
-				List<JvmTypeReference> typeArguments = typeRef.getArguments();
-				if (!typeArguments.isEmpty()) {
-					// parameterized type reference
-					for (int i = 0; i < typeArguments.size(); i++) {
-						JvmTypeReference argument = typeArguments.get(i);
-						JvmTypeParameter param = typeParameters.get(i);
-						context.put(param, argument);
+				if (typeRef.getType() instanceof JvmTypeParameterDeclarator) {
+					List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) typeRef.getType()).getTypeParameters();
+					List<JvmTypeReference> typeArguments = typeRef.getArguments();
+					if (!typeArguments.isEmpty()) {
+						// parameterized type reference
+						for (int i = 0; i < typeArguments.size(); i++) {
+							JvmTypeReference argument = typeArguments.get(i);
+							JvmTypeParameter param = typeParameters.get(i);
+							context.put(param, argument);
+						}
 					}
 				}
 			}

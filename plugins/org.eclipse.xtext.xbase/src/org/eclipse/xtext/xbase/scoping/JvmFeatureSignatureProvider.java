@@ -43,7 +43,7 @@ public class JvmFeatureSignatureProvider implements Function<JvmFeature, String>
 			builder.append("(");
 			Iterator<JvmFormalParameter> params = object.getParameters().iterator();
 			while (params.hasNext()){
-				builder.append(context.resolveContravariant(params.next().getParameterType()).getCanonicalName());
+				builder.append(context.getLowerBound(params.next().getParameterType()).getCanonicalName());
 				if (params.hasNext())
 					builder.append(",");
 			}

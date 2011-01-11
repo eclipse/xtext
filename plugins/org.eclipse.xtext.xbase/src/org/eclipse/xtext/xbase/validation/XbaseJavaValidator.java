@@ -11,13 +11,14 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.typing.IExpectedTypeProvider;
-import org.eclipse.xtext.typing.ITypeProvider;
 import org.eclipse.xtext.typing.TypeResolutionException;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.typing.IXbaseTypeProvider;
 
 import com.google.inject.Inject;
 
@@ -27,8 +28,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	public static final String ASSIGNMENT_TO_FINAL = "xbase.assignment_to_final";
 
 	@Inject
-	private ITypeProvider<JvmTypeReference> typeProvider;
-
+	private IXbaseTypeProvider typeProvider;
+	
 	@Inject
 	private IExpectedTypeProvider<JvmTypeReference> expectedTypeProvider;
 
@@ -66,6 +67,12 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		}
 	}
 
+	@Check
+	public void checkBlockExpression(XBlockExpression block) {
+		//TODO simple literals are not allowed as an n-1 expression.
+		// also check nested expressions (i.e. if statement's then and else, casts, etc.) for literals
+	}
+	
 	@Override
 	protected List<EPackage> getEPackages() {
 		return singletonList((EPackage)XbasePackage.eINSTANCE);
@@ -74,5 +81,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	protected String getTypeCanonicalName(JvmTypeReference typeRef) {
 		return (typeRef == null) ? "<null>" : notNull(typeRef.getCanonicalName());
 	}
+	
+	
+	
 
 }

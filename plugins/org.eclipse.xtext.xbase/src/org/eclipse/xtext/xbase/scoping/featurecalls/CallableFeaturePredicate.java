@@ -30,6 +30,7 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.typing.IXbaseTypeProvider;
 import org.eclipse.xtext.xbase.typing.TypeConverter;
 
 import com.google.common.base.Predicate;
@@ -71,9 +72,9 @@ public class CallableFeaturePredicate implements Predicate<IEObjectDescription> 
 	private TypeConverter typeConverter;
 	
 	@Inject
-	private ITypeProvider<JvmTypeReference> typeProvider;
+	private IXbaseTypeProvider typeProvider;
 
-	public void setTypeProvider(ITypeProvider<JvmTypeReference> typeProvider) {
+	public void setTypeProvider(IXbaseTypeProvider typeProvider) {
 		this.typeProvider = typeProvider;
 	}
 	
@@ -115,18 +116,18 @@ public class CallableFeaturePredicate implements Predicate<IEObjectDescription> 
 		for (int i = 0; i < numberOfArgs; i++) {
 			JvmFormalParameter parameter = input.getParameters().get(i);
 			XExpression expression = op.getArguments().get(i);
-			JvmTypeReference type = typeProvider.getType(expression);
+			JvmTypeReference type = getTypeProvider().getType(expression);
 			if (!conformance.isConformant(parameter.getParameterType(), type))
 				return false;
 		}
 		return true;
 	}
-	
+
 	protected boolean _case(JvmOperation input, XBinaryOperation op, EReference ref, JvmFeatureDescription jvmFeatureDescription) {
 		if (input.getParameters().size() != 1)
 			return false;
 		if (op.getRightOperand() != null && op.getLeftOperand() != null) {
-			JvmTypeReference type = typeProvider.getType(op.getLeftOperand());
+			JvmTypeReference type = getTypeProvider().getType(op.getLeftOperand());
 			if (!conformance.isConformant(input.getParameters().get(0).getParameterType(), type))
 				return false;
 		}
@@ -137,7 +138,7 @@ public class CallableFeaturePredicate implements Predicate<IEObjectDescription> 
 		if (input.getParameters().size() != 1)
 			return false;
 		if (op.getValue() != null) {
-			JvmTypeReference type = typeProvider.getType(op.getValue());
+			JvmTypeReference type = getTypeProvider().getType(op.getValue());
 			if (!isCompatibleArgument(input.getParameters().get(0).getParameterType(), type, op, jvmFeatureDescription))
 				return false;
 		}
@@ -176,7 +177,7 @@ public class CallableFeaturePredicate implements Predicate<IEObjectDescription> 
 		
 		for (int i = 0; i < arguments.size(); i++) {
 			XExpression expression = arguments.get(i);
-			JvmTypeReference type = typeProvider.getType(expression);
+			JvmTypeReference type = getTypeProvider().getType(expression);
 			JvmTypeReference declaredType = input.getParameters().get(i).getParameterType();
 			if (!isCompatibleArgument(declaredType, type, context, jvmFeatureDescription))
 				return false;
@@ -192,7 +193,7 @@ public class CallableFeaturePredicate implements Predicate<IEObjectDescription> 
 			EObject contextElement, JvmFeatureDescription jvmFeatureDescription) {
 		return actualType == null
 				|| actualType.getCanonicalName().equals("java.lang.Void") // void should be treated as compatible to everything
-				|| conformance.isConformant(typeConverter.convert(jvmFeatureDescription.getContext().resolveContravariant(declaredType), contextElement),
+				|| conformance.isConformant(typeConverter.convert(jvmFeatureDescription.getContext().getLowerBound(declaredType), contextElement),
 						actualType);
 	}
 

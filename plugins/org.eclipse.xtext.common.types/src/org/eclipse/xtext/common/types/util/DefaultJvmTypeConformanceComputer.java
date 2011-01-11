@@ -335,7 +335,7 @@ public class DefaultJvmTypeConformanceComputer implements IJvmTypeConformanceCom
 		}
 		
 		public JvmTypeReference apply(JvmTypeReference from) {
-			JvmTypeReference result = context.resolveInvariant(from);
+			JvmTypeReference result = context.resolve(from);
 			return result;
 		}
 		
@@ -344,6 +344,8 @@ public class DefaultJvmTypeConformanceComputer implements IJvmTypeConformanceCom
 	public JvmTypeReference getCommonSuperType(final List<JvmTypeReference> types) {
 		if (types==null || types.isEmpty())
 			throw new IllegalArgumentException("Types can't be null or empty "+types);
+		if (types.size()==1)
+			return types.get(0);
 
 		// Check the straight forward case - one of the types is a supertype of all the others.
 		for(JvmTypeReference type: types) {
