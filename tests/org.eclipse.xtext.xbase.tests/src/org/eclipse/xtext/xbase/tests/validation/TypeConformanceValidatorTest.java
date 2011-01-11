@@ -9,16 +9,23 @@ package org.eclipse.xtext.xbase.tests.validation;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
+
+import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
  */
-public class TypeConformanceValidatorTest extends AbstractXbaseValidationTest {
+public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 
+	@Inject 
+	protected ValidationTestHelper helper;
+	
 	public void testIfPredicate() throws Exception {
 		assertNoConformanceError("if (true) 'foo'");
 		assertConformanceError("if (27) 'foo'", XbasePackage.Literals.XINT_LITERAL, "java.lang.Integer",
@@ -73,12 +80,12 @@ public class TypeConformanceValidatorTest extends AbstractXbaseValidationTest {
 	protected void assertConformanceError(String expression, EClass objectType, String... messageParts)
 			throws Exception {
 		final XExpression xExpression = expression(expression, true);
-		assertError(xExpression, objectType, XbaseJavaValidator.INCOMPATIBLE_TYPES, messageParts);
+		helper.assertError(xExpression, objectType, XbaseJavaValidator.INCOMPATIBLE_TYPES, messageParts);
 	}
 
 	protected void assertNoConformanceError(String expression) throws Exception {
 		final XExpression xExpression = expression(expression, true);
-		assertNoError(xExpression, XbaseJavaValidator.INCOMPATIBLE_TYPES);
+		helper.assertNoError(xExpression, XbaseJavaValidator.INCOMPATIBLE_TYPES);
 	}
 
 }
