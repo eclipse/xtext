@@ -14,9 +14,6 @@ import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 
-import com.google.common.base.Function;
-import com.google.inject.Provider;
-
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -28,20 +25,17 @@ public class OnTheFlyJavaCompilerTest extends TestCase {
 		compiler.setParentClassLoader(OnTheFlyJavaCompilerTest.class.getClassLoader());
 		compiler.addClassPathOfClass(OnTheFlyJavaCompilerTest.class);
 		compiler.addClassPathOfClass(Functions.class);
-		compiler.addClassPathOfClass(Function.class);
-		compiler.addClassPathOfClass(Provider.class);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public void testCompileToClass() throws Exception {
 		Class<?> class1 = compiler.compileToClass("Foo",
-				"import com.google.inject.Provider; " +
-				"public class Foo implements Provider<String> {" +
-				"   public String get() {\n" + 
+				"public class Foo implements "+Functions.Function0.class.getCanonicalName()+"<String> {" +
+				"   public String apply() {\n" + 
 				"	   return \"foo\";\n" + 
 				"   }" +
 				"}");
-		assertEquals("foo", ((Provider<String>)class1.newInstance()).get());
+		assertEquals("foo", ((Functions.Function0<String>)class1.newInstance()).apply());
 	}
 	
 	public void testGetFunction0() throws Exception {
