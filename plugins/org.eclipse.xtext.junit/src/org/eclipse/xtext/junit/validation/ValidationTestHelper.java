@@ -1,13 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.tests.validation;
+package org.eclipse.xtext.junit.validation;
 
 import static com.google.common.collect.Iterables.*;
+import static junit.framework.Assert.*;
 
 import java.util.List;
 
@@ -19,27 +20,21 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
- * @author Sven Efftinge
  */
-public abstract class AbstractXbaseValidationTest extends AbstractXbaseTestCase {
-
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
+public class ValidationTestHelper {
 
 	protected List<Issue> validate(EObject model) throws Exception {
-		IResourceValidator validator = ((XtextResource)model.eResource()).getResourceServiceProvider().getResourceValidator();
+		IResourceValidator validator = ((XtextResource) model.eResource()).getResourceServiceProvider()
+				.getResourceValidator();
 		return validator.validate(model.eResource(), CheckMode.ALL, CancelIndicator.NullImpl);
 	}
-	
+
 	public void assertNoError(final EObject model, final String issuecode) throws Exception {
 		final List<Issue> validate = validate(model);
 		if (!validate.isEmpty())
@@ -53,7 +48,8 @@ public abstract class AbstractXbaseValidationTest extends AbstractXbaseTestCase 
 			fail("Expected no error '" + issuecode + "' but got " + issues);
 	}
 
-	public void assertError(final EObject model, final EClass objectType, final String code, final String... messageParts) throws Exception {
+	public void assertError(final EObject model, final EClass objectType, final String code,
+			final String... messageParts) throws Exception {
 		final List<Issue> validate = validate(model);
 		Iterable<Issue> matchingErrors = Iterables.filter(validate, new Predicate<Issue>() {
 			public boolean apply(Issue input) {
@@ -74,4 +70,5 @@ public abstract class AbstractXbaseValidationTest extends AbstractXbaseTestCase 
 		if (Iterables.isEmpty(matchingErrors))
 			fail("Expected error '" + code + "' but got " + matchingErrors);
 	}
+
 }

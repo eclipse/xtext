@@ -8,7 +8,7 @@ import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XStringLiteral;
-import org.eclipse.xtext.xtend2.tests.AbstractXtend2Test;
+import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringElseIf;
 import org.eclipse.xtext.xtend2.xtend2.RichStringIf;
@@ -17,7 +17,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
-public class ParserTest extends AbstractXtend2Test {
+public class ParserTest extends AbstractXtend2TestCase {
 	
 	public void testFunction_0() throws Exception {
 		XtendFunction func = function("foo() bar");
