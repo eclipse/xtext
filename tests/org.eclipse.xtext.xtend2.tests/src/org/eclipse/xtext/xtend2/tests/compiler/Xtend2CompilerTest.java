@@ -9,18 +9,17 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 	
 	public void testSimple() throws Exception {
 		final String input = "package foo\n" +
-				"import java.lang.*\n" +
 				"class Bar {\n" +
 				"  Integer doStuff(String x) x.length\n" +
 				"}\n";
-		final String expected = "package foo;\n" +
-				"\n" +
-				"public class Bar {\n" +
-				"\n" +
-				"public java.lang.Integer doStuff(java.lang.String x) {\n" +
-				"return x.length();\n" +
-				"}\n" +
-				"\n}";
+		final String expected = "package foo;\n" + 
+				"\n" + 
+				"public class Bar {\n" + 
+				"  public java.lang.Integer doStuff(java.lang.String x) {\n" + 
+				"    java.lang.Integer _var = x.length();\n" + 
+				"    return _var;\n" + 
+				"  }\n" + 
+				"}";
 		assertCompilesTo(expected, input);
 	}
 	
