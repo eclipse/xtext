@@ -174,7 +174,7 @@ XExpressionInsideBlock returns XExpression:
 
 XVariableDeclaration returns XExpression:
 	{XVariableDeclaration}
-	(writeable?='var'|'val') (type=JvmTypeReference)? name=ID '=' right=XExpression;
+	(writeable?='var'|'val') (=>(type=JvmTypeReference name=ID) | name=ID) ('=' right=XExpression)?;
 
 JvmFormalParameter returns types::JvmFormalParameter:
 	(parameterType=JvmTypeReference)? name=ID;

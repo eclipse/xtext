@@ -213,12 +213,11 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		}
 		if (context.eContainer() instanceof XForLoopExpression) {
 			XForLoopExpression loop = (XForLoopExpression) context.eContainer();
-
-			parentScope = new SingletonScope(createEObjectDescription(loop.getDeclaredParam()), parentScope);
+			parentScope = createLocalScopeForParameter(loop.getDeclaredParam(), parentScope);
 		}
 		if (context.eContainer() instanceof XCatchClause) {
 			XCatchClause catchClause = (XCatchClause) context.eContainer();
-			parentScope = new SingletonScope(createEObjectDescription(catchClause.getDeclaredParam()), parentScope);
+			parentScope = createLocalScopeForParameter(catchClause.getDeclaredParam(), parentScope);
 
 		}
 		if (context instanceof XClosure) {
@@ -229,7 +228,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 
 	protected IScope createLocalVarScopeForCatchClause(XCatchClause catchClause, int indexOfContextExpressionInBlock,
 			IScope parentScope) {
-		return new SingletonScope(createEObjectDescription(catchClause.getDeclaredParam()), parentScope);
+		return createLocalScopeForParameter(catchClause.getDeclaredParam(), parentScope);
 	}
 
 	protected IScope createLocalVarScopeForBlock(XBlockExpression block, int indexOfContextExpressionInBlock,
@@ -239,8 +238,10 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			XExpression expression = block.getExpressions().get(i);
 			if (expression instanceof XVariableDeclaration) {
 				XVariableDeclaration varDecl = (XVariableDeclaration) expression;
-				IEObjectDescription desc = createEObjectDescription(varDecl);
-				descriptions.add(desc);
+				if (varDecl.getName() != null) {
+					IEObjectDescription desc = createEObjectDescription(varDecl);
+					descriptions.add(desc);
+				}
 			}
 		}
 		return MapBasedScope.createScope(parentScope, descriptions);
@@ -250,8 +251,10 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		List<IEObjectDescription> descriptions = Lists.newArrayList();
 		EList<JvmFormalParameter> params = closure.getFormalParameters();
 		for (JvmFormalParameter p : params) {
-			IEObjectDescription desc = createEObjectDescription(p);
-			descriptions.add(desc);
+			if(p.getName() != null) {
+				IEObjectDescription desc = createEObjectDescription(p);
+				descriptions.add(desc);
+			}
 		}
 		return MapBasedScope.createScope(parentScope, descriptions);
 	}
@@ -273,6 +276,10 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		}
 	}
 
+	protected IScope createLocalScopeForParameter(JvmFormalParameter p, IScope parentScope) {
+		return (p.getName() != null) ? new SingletonScope(createEObjectDescription(p), parentScope) : parentScope;
+	}
+	
 	protected IEObjectDescription createEObjectDescription(JvmFormalParameter p) {
 		return EObjectDescription.create(QualifiedName.create(p.getName()), p);
 	}
