@@ -30,6 +30,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
+import org.eclipse.xtext.xbase.XImplicitReceiverCall;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XIntLiteral;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
@@ -252,6 +253,13 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * @generated
 	 */
 	private EClass xAssignmentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass xImplicitReceiverCallEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1149,6 +1157,26 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getXImplicitReceiverCall()
+	{
+		return xImplicitReceiverCallEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXImplicitReceiverCall_ImplicitReceiver()
+	{
+		return (EReference)xImplicitReceiverCallEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public XbaseFactory getXbaseFactory()
 	{
 		return (XbaseFactory)getEFactoryInstance();
@@ -1283,6 +1311,9 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		xAssignmentEClass = createEClass(XASSIGNMENT);
 		createEReference(xAssignmentEClass, XASSIGNMENT__ASSIGNABLE);
 		createEReference(xAssignmentEClass, XASSIGNMENT__VALUE);
+
+		xImplicitReceiverCallEClass = createEClass(XIMPLICIT_RECEIVER_CALL);
+		createEReference(xImplicitReceiverCallEClass, XIMPLICIT_RECEIVER_CALL__IMPLICIT_RECEIVER);
 	}
 
 	/**
@@ -1325,6 +1356,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		xAbstractFeatureCallEClass.getESuperTypes().add(this.getXExpression());
 		xMemberFeatureCallEClass.getESuperTypes().add(this.getXAbstractFeatureCall());
 		xFeatureCallEClass.getESuperTypes().add(this.getXAbstractFeatureCall());
+		xFeatureCallEClass.getESuperTypes().add(this.getXImplicitReceiverCall());
 		xConstructorCallEClass.getESuperTypes().add(this.getXExpression());
 		xBooleanLiteralEClass.getESuperTypes().add(this.getXExpression());
 		xNullLiteralEClass.getESuperTypes().add(this.getXExpression());
@@ -1343,6 +1375,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		xThrowExpressionEClass.getESuperTypes().add(this.getXExpression());
 		xTryCatchFinallyExpressionEClass.getESuperTypes().add(this.getXExpression());
 		xAssignmentEClass.getESuperTypes().add(this.getXAbstractFeatureCall());
+		xAssignmentEClass.getESuperTypes().add(this.getXImplicitReceiverCall());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(xExpressionEClass, XExpression.class, "XExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1454,6 +1487,9 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		initEClass(xAssignmentEClass, XAssignment.class, "XAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXAssignment_Assignable(), this.getXExpression(), null, "assignable", null, 0, 1, XAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXAssignment_Value(), this.getXExpression(), null, "value", null, 0, 1, XAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(xImplicitReceiverCallEClass, XImplicitReceiverCall.class, "XImplicitReceiverCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getXImplicitReceiverCall_ImplicitReceiver(), theTypesPackage.getJvmIdentifyableElement(), null, "implicitReceiver", null, 0, 1, XImplicitReceiverCall.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

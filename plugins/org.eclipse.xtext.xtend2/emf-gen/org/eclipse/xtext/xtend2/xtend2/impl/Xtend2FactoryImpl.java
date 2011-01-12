@@ -121,7 +121,7 @@ public class Xtend2FactoryImpl extends EFactoryImpl implements Xtend2Factory
 	 */
 	public XtendClass createXtendClass()
 	{
-		XtendClassImpl xtendClass = new XtendClassImpl();
+		XtendClassImplCustom xtendClass = new XtendClassImplCustom();
 		return xtendClass;
 	}
 

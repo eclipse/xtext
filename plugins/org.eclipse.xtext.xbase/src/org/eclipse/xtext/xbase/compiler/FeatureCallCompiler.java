@@ -12,8 +12,10 @@ import static java.util.Collections.*;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -26,6 +28,7 @@ import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XImplicitReceiverCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -189,15 +192,25 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			b.append(".");
 			appendFeatureCall(expr.getFeature(), expr.getArguments(), b);
 		} else {
-			if (expr.getFeature() instanceof JvmFormalParameter) {
-				final String name = ((JvmFormalParameter) expr.getFeature()).getName();
-				b.append(makeJavaIdentifier(name));
-			} else if (expr.getFeature() instanceof XVariableDeclaration) {
-				final String name = ((XVariableDeclaration) expr.getFeature()).getName();
-				b.append(makeJavaIdentifier(name));
-			} else {
-				throw new IllegalArgumentException("Couldn't handle feature of type " + expr.getFeature().getClass());
-			}
+			appendJavaReference(expr.getFeature(), b);
+		}
+	}
+
+	protected void appendJavaReference(EObject target, IAppendable b) {
+		if (target instanceof JvmFormalParameter) {
+			final String name = ((JvmFormalParameter) target).getName();
+			b.append(makeJavaIdentifier(name));
+		} else if (target instanceof XVariableDeclaration) {
+			final String name = ((XVariableDeclaration) target).getName();
+			b.append(makeJavaIdentifier(name));
+		} else if (target instanceof JvmField) {
+			final String name = ((JvmField) target).getSimpleName();
+			b.append(makeJavaIdentifier(name));
+		} else if (target instanceof JvmDeclaredType) {
+			//assume this
+			b.append("this");
+		} else {
+			throw new IllegalArgumentException("Couldn't handle feature of type " + target.getClass());
 		}
 	}
 
@@ -218,23 +231,17 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			internalToJavaExpression(expr.getValue(), b);
 			b.append(")");
 		} else {
-			String name = null;
-			if (feature instanceof XVariableDeclaration) {
-				name = ((XVariableDeclaration) feature).getName();
-			} else if (feature instanceof JvmFormalParameter) {
-				name = ((JvmFormalParameter) feature).getName();
-			} else {
-				name = ((JvmField) feature).getSimpleName();
-			}
-			b.append(makeJavaIdentifier(name));
+			appendJavaReference(expr.getFeature(), b);
 			b.append(" = ");
 			internalToJavaExpression(expr.getValue(), b);
 		}
 	}
 
-	protected void compileImplicitReceiver(XExpression expr, IAppendable b) {
-		//TODO Track which implicit receiver it is. could be this, a static class or some other language dependent thing.
-		b.append(makeJavaIdentifier("this"));
+	protected void compileImplicitReceiver(XImplicitReceiverCall expr, IAppendable b) {
+		final JvmIdentifyableElement implicitReceiver = expr.getImplicitReceiver();
+		if (implicitReceiver != null) {
+			appendJavaReference(implicitReceiver, b);
+		}
 	}
 
 	protected void appendFeatureCall(JvmIdentifyableElement feature, List<XExpression> arguments, IAppendable b) {

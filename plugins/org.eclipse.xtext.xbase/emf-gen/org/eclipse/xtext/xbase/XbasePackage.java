@@ -501,13 +501,22 @@ public interface XbasePackage extends EPackage
 	int XFEATURE_CALL__TYPE_ARGUMENTS = XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS;
 
 	/**
+	 * The feature id for the '<em><b>Implicit Receiver</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XFEATURE_CALL__IMPLICIT_RECEIVER = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Feature Call Arguments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XFEATURE_CALL__FEATURE_CALL_ARGUMENTS = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 0;
+	int XFEATURE_CALL__FEATURE_CALL_ARGUMENTS = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Explicit Operation Call</b></em>' attribute.
@@ -516,7 +525,7 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XFEATURE_CALL__EXPLICIT_OPERATION_CALL = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 1;
+	int XFEATURE_CALL__EXPLICIT_OPERATION_CALL = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>XFeature Call</em>' class.
@@ -525,7 +534,7 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XFEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
+	int XFEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl <em>XConstructor Call</em>}' class.
@@ -1267,13 +1276,22 @@ public interface XbasePackage extends EPackage
 	int XASSIGNMENT__TYPE_ARGUMENTS = XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS;
 
 	/**
+	 * The feature id for the '<em><b>Implicit Receiver</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XASSIGNMENT__IMPLICIT_RECEIVER = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Assignable</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XASSIGNMENT__ASSIGNABLE = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 0;
+	int XASSIGNMENT__ASSIGNABLE = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -1282,7 +1300,7 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XASSIGNMENT__VALUE = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 1;
+	int XASSIGNMENT__VALUE = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>XAssignment</em>' class.
@@ -1291,7 +1309,35 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XASSIGNMENT_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
+	int XASSIGNMENT_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XImplicitReceiverCallImpl <em>XImplicit Receiver Call</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XImplicitReceiverCallImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXImplicitReceiverCall()
+	 * @generated
+	 */
+	int XIMPLICIT_RECEIVER_CALL = 28;
+
+	/**
+	 * The feature id for the '<em><b>Implicit Receiver</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XIMPLICIT_RECEIVER_CALL__IMPLICIT_RECEIVER = 0;
+
+	/**
+	 * The number of structural features of the '<em>XImplicit Receiver Call</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XIMPLICIT_RECEIVER_CALL_FEATURE_COUNT = 1;
 
 
 	/**
@@ -2169,6 +2215,27 @@ public interface XbasePackage extends EPackage
 	EReference getXAssignment_Value();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XImplicitReceiverCall <em>XImplicit Receiver Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XImplicit Receiver Call</em>'.
+	 * @see org.eclipse.xtext.xbase.XImplicitReceiverCall
+	 * @generated
+	 */
+	EClass getXImplicitReceiverCall();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xbase.XImplicitReceiverCall#getImplicitReceiver <em>Implicit Receiver</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Implicit Receiver</em>'.
+	 * @see org.eclipse.xtext.xbase.XImplicitReceiverCall#getImplicitReceiver()
+	 * @see #getXImplicitReceiverCall()
+	 * @generated
+	 */
+	EReference getXImplicitReceiverCall_ImplicitReceiver();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2902,6 +2969,24 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XASSIGNMENT__VALUE = eINSTANCE.getXAssignment_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XImplicitReceiverCallImpl <em>XImplicit Receiver Call</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XImplicitReceiverCallImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXImplicitReceiverCall()
+		 * @generated
+		 */
+		EClass XIMPLICIT_RECEIVER_CALL = eINSTANCE.getXImplicitReceiverCall();
+
+		/**
+		 * The meta object literal for the '<em><b>Implicit Receiver</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XIMPLICIT_RECEIVER_CALL__IMPLICIT_RECEIVER = eINSTANCE.getXImplicitReceiverCall_ImplicitReceiver();
 
 	}
 

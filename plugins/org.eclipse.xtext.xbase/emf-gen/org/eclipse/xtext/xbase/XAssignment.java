@@ -23,7 +23,7 @@ package org.eclipse.xtext.xbase;
  * @model
  * @generated
  */
-public interface XAssignment extends XAbstractFeatureCall
+public interface XAssignment extends XAbstractFeatureCall, XImplicitReceiverCall
 {
 	/**
 	 * Returns the value of the '<em><b>Assignable</b></em>' containment reference.

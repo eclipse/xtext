@@ -24,7 +24,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface XFeatureCall extends XAbstractFeatureCall
+public interface XFeatureCall extends XAbstractFeatureCall, XImplicitReceiverCall
 {
 	/**
 	 * Returns the value of the '<em><b>Feature Call Arguments</b></em>' containment reference list.

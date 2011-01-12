@@ -14,8 +14,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.scoping.featurecalls.BestMatchingJvmFeatureScope;
-import org.eclipse.xtext.xbase.scoping.featurecalls.CallableFeaturePredicate;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;

@@ -7,6 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.featurecalls;
 
+import static com.google.common.collect.Lists.*;
+
+import java.util.List;
+
+import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
@@ -16,14 +21,22 @@ import org.eclipse.xtext.scoping.impl.SimpleScope;
  */
 public class JvmFeatureScope extends SimpleScope {
 	
-	private Iterable<JvmFeatureDescription> jvmFeatureDescriptions;
 	private String scopeDescription;
 
-	@SuppressWarnings("unchecked")
 	public JvmFeatureScope(IScope parent, String scopeDescription, final Iterable<JvmFeatureDescription> descriptions) {
-		super(parent, (Iterable<IEObjectDescription>)(Iterable<?>)descriptions);
-		this.jvmFeatureDescriptions = descriptions;
+		super(parent, convertToList(descriptions));
 		this.scopeDescription = scopeDescription;
+	}
+
+	@SuppressWarnings("unchecked")
+	protected static Iterable<IEObjectDescription> convertToList(final Iterable<JvmFeatureDescription> descriptions) {
+		if (descriptions instanceof List) 
+			return (Iterable<IEObjectDescription>)(Iterable<?>)descriptions;
+		List<IEObjectDescription> result = newArrayList();
+		for (IEObjectDescription desc : descriptions) {
+			result.add(desc);
+		}
+		return result;
 	}
 	
 	public String getScopeDescription() {
@@ -35,8 +48,9 @@ public class JvmFeatureScope extends SimpleScope {
 		return ((JvmFeatureDescription)description).getKey();
 	}
 	
-	public Iterable<JvmFeatureDescription> getJvmFeatureDescriptions() {
-		return jvmFeatureDescriptions;
+	@SuppressWarnings("unchecked")
+	public Iterable<? extends JvmFeatureDescription> getJvmFeatureDescriptions() {
+		return (Iterable<? extends JvmFeatureDescription>) getAllLocalElements();
 	}
 	
 	@Override
@@ -44,5 +58,11 @@ public class JvmFeatureScope extends SimpleScope {
 		if (scopeDescription!=null)
 			return "'"+scopeDescription+"'"+getAllLocalElements() + " -> " + getParent().toString();
 		return super.toString();
+	}
+
+	public void setImplicitReceiverOnAllDescriptions(JvmIdentifyableElement implicitReceiver) {
+		for (JvmFeatureDescription description : getJvmFeatureDescriptions()) {
+			description.setImplicitReceiver(implicitReceiver);
+		}
 	}
 }
