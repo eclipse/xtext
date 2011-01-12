@@ -272,7 +272,8 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		return state.get().context;
 	}
 
-	public final boolean validate(EClass class1, EObject object, DiagnosticChain diagnostics,
+	@Override
+	protected final boolean internalValidate(EClass class1, EObject object, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
 		if (checkMethods == null) {
 			synchronized(this) {

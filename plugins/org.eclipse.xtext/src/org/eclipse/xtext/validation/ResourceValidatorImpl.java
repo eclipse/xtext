@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxEValidator;
 
@@ -100,6 +101,9 @@ public class ResourceValidatorImpl implements IResourceValidator {
 					options.put(ConcreteSyntaxEValidator.DISABLE_CONCRETE_SYNTAX_EVALIDATOR, Boolean.TRUE);
 					// see EObjectValidator.getRootEValidator(Map<Object, Object>)
 					options.put(EValidator.class, diagnostician);
+					if (resource instanceof XtextResource) {
+						options.put(AbstractInjectableValidator.CURRENT_LANGUAGE_NAME, ((XtextResource) resource).getLanguageName());						
+					}
 					Diagnostic diagnostic = diagnostician.validate(ele, options);
 					if (!diagnostic.getChildren().isEmpty()) {
 						for (Diagnostic childDiagnostic : diagnostic.getChildren()) {

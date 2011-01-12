@@ -53,12 +53,11 @@ public class ConcreteSyntaxEValidator extends AbstractInjectableValidator {
 		return pkg;
 	}
 
-	public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	@Override
+	protected boolean internalValidate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (Boolean.TRUE.equals(context.get(DISABLE_CONCRETE_SYNTAX_EVALIDATOR)))
 			return true;
 		if (!(eObject.eResource() instanceof XtextResource))
-			return true;
-		if (!validator.equals(((XtextResource) eObject.eResource()).getConcreteSyntaxValidator()))
 			return true;
 		return validator.validateObject(eObject, new DiagnosticChainAcceptor(diagnostics), context);
 	}
