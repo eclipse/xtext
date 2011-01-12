@@ -18,11 +18,13 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.enumrules.EnumRulesTestLanguageStandaloneSetup;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguageFactory;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguagePackage;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.Model;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.validation.CompositeEValidator.EValidatorEqualitySupport;
 
 import com.google.inject.Inject;
@@ -62,7 +64,8 @@ public abstract class AbstractCompositeValidatorTest extends AbstractXtextTests 
 	public static class First extends AbstractInjectableValidator {
 		private final EnumRulesTestLanguagePackage pack;
 
-		public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		@Override
+		protected boolean internalValidate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 			return true;
 		}
 		
@@ -80,7 +83,8 @@ public abstract class AbstractCompositeValidatorTest extends AbstractXtextTests 
 	public static class Second extends AbstractInjectableValidator {
 		private final EnumRulesTestLanguagePackage pack;
 		
-		public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		@Override
+		protected boolean internalValidate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 			return true;
 		}
 		
@@ -123,7 +127,9 @@ public abstract class AbstractCompositeValidatorTest extends AbstractXtextTests 
 		get(Val_279962_04.class);
 		assertEquals(prevSize + 2, composite.getContents().size());
 		assertNotNull(validator);
+		Resource resource = get(XtextResource.class);
 		Model model = EnumRulesTestLanguageFactory.eINSTANCE.createModel();
+		resource.getContents().add(model);
 		// do not expect an exception
 		validator.validate(model, new BasicDiagnostic(), null);
 		assertEquals(prevSize + 4, composite.getContents().size());
