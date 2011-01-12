@@ -21,6 +21,7 @@ import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.issues.MWEDiagnostic;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider.Registry;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
 
@@ -141,21 +142,7 @@ public class Validator {
 		Multimap<URI, MWEDiagnostic> result = Multimaps.newMultimap(
 				Maps.<URI, Collection<MWEDiagnostic>> newLinkedHashMap(), new Supplier<Collection<MWEDiagnostic>>() {
 					public Collection<MWEDiagnostic> get() {
-						return Sets.newTreeSet(new Comparator<MWEDiagnostic>() {
-							public int compare(MWEDiagnostic o1, MWEDiagnostic o2) {
-								Issue issue1 = (Issue) o1.getElement();
-								Issue issue2 = (Issue) o2.getElement();
-								if (issue1.getLineNumber() < issue2.getLineNumber())
-									return -1;
-								if (issue1.getLineNumber() > issue2.getLineNumber())
-									return 1;
-								if (issue1.getOffset() < issue2.getOffset())
-									return -1;
-								if (issue1.getOffset() > issue2.getOffset())
-									return 1;
-								return o1.getMessage().compareTo(o2.getMessage());
-							}
-						});
+						return Sets.newTreeSet(getDiagnosticComparator());
 					}
 				});
 		result.putAll(Multimaps.index(Arrays.asList(diagnostic), new Function<MWEDiagnostic, URI>() {
@@ -172,6 +159,34 @@ public class Validator {
 		@Override
 		public void validate(ResourceSet resourceSet, Registry registry, Issues issues) {
 			// do nothing
+		}
+	}
+
+	protected Comparator<MWEDiagnostic> getDiagnosticComparator() {
+		return new MWEDiagnosticComparator();
+	}
+
+	public static final class MWEDiagnosticComparator implements Comparator<MWEDiagnostic> {
+		public int compare(MWEDiagnostic o1, MWEDiagnostic o2) {
+			Issue issue1 = (Issue) o1.getElement();
+			Issue issue2 = (Issue) o2.getElement();
+			int lineNumberCompare = nullSafeCompare(issue1.getLineNumber(), issue2.getLineNumber());
+			if (lineNumberCompare != 0) {
+				return lineNumberCompare;
+			}
+			int offsetCompare = nullSafeCompare(issue1.getOffset(), issue2.getOffset());
+			if (offsetCompare != 0) {
+				return offsetCompare;
+			}
+			return Strings.notNull(o1.getMessage()).compareTo(Strings.notNull(o2.getMessage()));
+		}
+
+		private int nullSafeCompare(Integer x, Integer y) {
+			return notNull(x).compareTo(notNull(y));
+		}
+
+		private Integer notNull(Integer x) {
+			return x != null ? x : Integer.valueOf(-1);
 		}
 	}
 
