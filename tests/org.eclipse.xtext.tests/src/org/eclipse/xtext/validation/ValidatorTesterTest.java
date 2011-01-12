@@ -25,7 +25,7 @@ import org.eclipse.xtext.junit.validation.ValidatorTester;
 /**
  * @author meysholdt - Initial contribution and API
  */
-public class ValidatorTestingTest extends TestCase {
+public class ValidatorTesterTest extends TestCase {
 
 	private class TestingValidator extends AbstractDeclarativeValidator {
 		@Check
@@ -48,6 +48,11 @@ public class ValidatorTestingTest extends TestCase {
 		@Override
 		protected List<EPackage> getEPackages() {
 			return Arrays.<EPackage>asList(EcorePackage.eINSTANCE);
+		}
+
+		@Override
+		public boolean isLanguageSpecific() {
+			return false;
 		}
 	}
 
