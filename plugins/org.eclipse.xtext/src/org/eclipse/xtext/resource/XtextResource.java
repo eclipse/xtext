@@ -23,6 +23,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.nodemodel.INode;
@@ -42,6 +43,7 @@ import org.eclipse.xtext.validation.IConcreteSyntaxValidator.IDiagnosticAcceptor
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.name.Named;
 
 /**
  * An EMF resource that reads and writes models of an Xtext DSL.
@@ -80,6 +82,9 @@ public class XtextResource extends ResourceImpl {
 
 	@Inject
 	private IFragmentProvider fragmentProvider;
+	
+	@Inject@Named(Constants.LANGUAGE_NAME) 
+	private String languageName;
 	
 	private IFragmentProvider.Fallback fragmentProviderFallback = new IFragmentProvider.Fallback() {
 		
@@ -375,5 +380,9 @@ public class XtextResource extends ResourceImpl {
 	
 	public void setCache(IResourceScopeCache cache) {
 		this.cache = cache;
+	}
+	
+	public String getLanguageName() {
+		return languageName;
 	}
 }

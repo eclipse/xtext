@@ -32,6 +32,7 @@ import org.eclipse.xtext.validation.IConcreteSyntaxDiagnosticProvider;
 import org.eclipse.xtext.validation.IConcreteSyntaxDiagnosticProvider.IConcreteSyntaxDiagnostic;
 import org.eclipse.xtext.validation.IAssignmentQuantityIntervalProvider;
 import org.eclipse.xtext.validation.IAssignmentQuantityAllocator;
+import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 import org.eclipse.xtext.validation.IAssignmentQuantityAllocator.IQuantities;
 
 import com.google.common.collect.Maps;
@@ -40,7 +41,7 @@ import com.google.inject.Inject;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
+public class ConcreteSyntaxValidator implements IConcreteSyntaxValidator {
 
 	@Inject
 	protected IConcreteSyntaxConstraintProvider constraintProvider;
@@ -96,7 +97,6 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		return false;
 	}
 
-	@Override
 	public boolean validateObject(EObject obj, IDiagnosticAcceptor acceptor, Map<Object, Object> context) {
 		if (isEObjectTransient(obj))
 			return true;
@@ -141,7 +141,6 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		return diag;
 	}
 
-	@Override
 	public boolean validateRecursive(EObject obj, IDiagnosticAcceptor acceptor, Map<Object, Object> context) {
 		boolean r = true;
 		r &= validateObject(obj, acceptor, context);
