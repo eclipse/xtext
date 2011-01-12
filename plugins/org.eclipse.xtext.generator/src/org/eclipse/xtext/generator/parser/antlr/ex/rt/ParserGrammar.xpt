@@ -245,12 +245,15 @@ finally {
 «ENDIF»
 «ENDDEFINE»
 
-«DEFINE ebnf2(Grammar grammar, AntlrOptions options) FOR EnumLiteralDeclaration-»
-    «localVar()»=«grammar.getKeywordRuleName(literal.value)»
-	{
+«DEFINE ebnf2(Grammar grammar, AntlrOptions options, boolean writeActions) FOR EnumLiteralDeclaration-»
+«IF writeActions-»
+    «localVar()»=«ENDIF»«grammar.getKeywordRuleName(literal.value)»
+«IF writeActions-»	
+    {
         $current = grammarAccess.«grammarElementAccess(this)».getEnumLiteral().getInstance();
         «EXPAND newLeafNode(localVar())» 
     }
+«ENDIF-»
 «ENDDEFINE»
 
 «DEFINE ebnf(Grammar grammar, AntlrOptions options, boolean writeActions) FOR AbstractElement-»
