@@ -89,11 +89,9 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 		assertEvaluatesTo("else", "if (false) 'then' else 'else'");
 	}
 	
-	
-//TODO Not allowed add a check	
-//	public void testVariableDeclaration_01() {
-//		assertEvaluatesTo("literal", "{val x = 'literal'}");
-//	}
+	public void testVariableDeclaration_01() {
+		assertEvaluatesTo("literal", "{var x = 'literal' x = x}");
+	}
 	
 	public void testFeatureCall_01() {
 		assertEvaluatesTo("literal", "{var x = 'literal' x}");
@@ -225,7 +223,7 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 				"}");
 	}
 	
-//TODO
+//TODO fix equals contract	
 //	public void testForLoop_02() {
 //		assertEvaluatesTo(new Character('b'), 
 //				"{\n" +

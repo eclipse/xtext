@@ -31,15 +31,6 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 		javaCompiler.addClassPathOfClass(Functions.class);
 	}
 	
-	//TODO fix disabled test cases
-	@Override
-	public void testFeatureCall_02() {
-	}
-	
-	@Override
-	public void testFeatureCall_03() {
-	}
-
 	//TODO the on-the-fly compiler cannot declare checked exceptions.
 	@Override
 	public void testThrowExpression_01() {
