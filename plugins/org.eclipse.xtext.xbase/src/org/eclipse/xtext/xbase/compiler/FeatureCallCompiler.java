@@ -43,11 +43,10 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		if (isVoid(expr)) {
 			internalToJavaStatement(expr, b);
 		} else if (isSpreadingMemberFeatureCall(expr)) {
-			prepareMemberFeatureCall((XMemberFeatureCall)expr,b);
+			prepareMemberFeatureCall((XMemberFeatureCall) expr, b);
 		} else {
-			if (expr instanceof XFeatureCall 
-				&& (expr.getFeature() instanceof XVariableDeclaration
-				|| expr.getFeature() instanceof JvmFormalParameter)) {
+			if (expr instanceof XFeatureCall
+					&& (expr.getFeature() instanceof XVariableDeclaration || expr.getFeature() instanceof JvmFormalParameter)) {
 				//do nothing
 			} else {
 				for (XExpression arg : expr.getArguments()) {
@@ -70,9 +69,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		for (XExpression arg : expr.getArguments()) {
 			internalPrepare(arg, b);
 		}
-		declareLocalVariable(expr, b, Lists.class.getCanonicalName()+".newArrayList()");
+		declareLocalVariable(expr, b, Lists.class.getCanonicalName() + ".newArrayList()");
 		b.append("\nfor(");
-		final String varName = getVarName(expr)+"_spread";
+		final String varName = getVarName(expr) + "_spread";
 		b.append(varName).append(" : ");
 		internalToJavaExpression(expr.getMemberCallTarget(), b);
 		b.append(") {");
@@ -83,7 +82,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 
 	protected boolean isSpreadingMemberFeatureCall(XAbstractFeatureCall expr) {
-		return expr instanceof XMemberFeatureCall && ((XMemberFeatureCall)expr).isSpreading();
+		return expr instanceof XMemberFeatureCall && ((XMemberFeatureCall) expr).isSpreading();
 	}
 
 	protected IAppendable doConversion(JvmTypeReference left, JvmTypeReference right, Object expressionAsJavaCode) {
@@ -118,7 +117,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	protected void _toJavaExpression(XAbstractFeatureCall call, IAppendable b) {
 		if (isVoid(call)) {
 			b.append("null");
-		} else if  (isSpreadingMemberFeatureCall(call)) {
+		} else if (isSpreadingMemberFeatureCall(call)) {
 			b.append(getVarName(call));
 		} else {
 			String expression = null;
@@ -130,10 +129,10 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				expression = getVarName(call);
 			}
 			JvmTypeReference expectedType = getExpectedTypeProvider().getExpectedType(call);
-			if (expectedType!=null) {
+			if (expectedType != null) {
 				JvmTypeReference actualType = getTypeProvider().getType(call);
 				if (!EcoreUtil.equals(expectedType, actualType)) {
-					b.append(doConversion(expectedType,actualType, expression));
+					b.append(doConversion(expectedType, actualType, expression));
 					return;
 				}
 			}
@@ -166,13 +165,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 
 	protected void xMemberFeatureCallToJavaExpression(XMemberFeatureCall expr, IAppendable b) {
-//		List<String> x=null;
-//		List<Integer> result = newArrayList();
-//		for (String string : x) {
-//			result.add(string.length());
-//		}
-		
-		//TODO spread operator
 		if (expr.isNullSafe()) {
 			internalToJavaExpression(expr.getMemberCallTarget(), b);
 			b.append("==null?");
@@ -182,7 +174,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			b.append(")null:");
 			internalToJavaExpression(expr.getMemberCallTarget(), b);
 		} else if (expr.isSpreading()) {
-			
+			//TODO spread operator
 		} else {
 			internalToJavaExpression(expr.getMemberCallTarget(), b);
 		}
@@ -197,17 +189,14 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			b.append(".");
 			appendFeatureCall(expr.getFeature(), expr.getArguments(), b);
 		} else {
-			{
-				if (expr.getFeature() instanceof JvmFormalParameter) {
-					final String name = ((JvmFormalParameter) expr.getFeature()).getName();
-					b.append(makeJavaIdentifier(name));
-				} else if (expr.getFeature() instanceof XVariableDeclaration) {
-					final String name = ((XVariableDeclaration) expr.getFeature()).getName();
-					b.append(makeJavaIdentifier(name));
-				} else {
-					throw new IllegalArgumentException("Couldn't handle feature of type "
-							+ expr.getFeature().getClass());
-				}
+			if (expr.getFeature() instanceof JvmFormalParameter) {
+				final String name = ((JvmFormalParameter) expr.getFeature()).getName();
+				b.append(makeJavaIdentifier(name));
+			} else if (expr.getFeature() instanceof XVariableDeclaration) {
+				final String name = ((XVariableDeclaration) expr.getFeature()).getName();
+				b.append(makeJavaIdentifier(name));
+			} else {
+				throw new IllegalArgumentException("Couldn't handle feature of type " + expr.getFeature().getClass());
 			}
 		}
 	}
