@@ -166,7 +166,7 @@ public class Validator {
 		return new MWEDiagnosticComparator();
 	}
 
-	public static final class MWEDiagnosticComparator implements Comparator<MWEDiagnostic> {
+	public static class MWEDiagnosticComparator implements Comparator<MWEDiagnostic> {
 		public int compare(MWEDiagnostic o1, MWEDiagnostic o2) {
 			Issue issue1 = (Issue) o1.getElement();
 			Issue issue2 = (Issue) o2.getElement();
@@ -181,11 +181,11 @@ public class Validator {
 			return Strings.notNull(o1.getMessage()).compareTo(Strings.notNull(o2.getMessage()));
 		}
 
-		private int nullSafeCompare(Integer x, Integer y) {
+		protected int nullSafeCompare(Integer x, Integer y) {
 			return notNull(x).compareTo(notNull(y));
 		}
 
-		private Integer notNull(Integer x) {
+		protected Integer notNull(Integer x) {
 			return x != null ? x : Integer.valueOf(-1);
 		}
 	}
