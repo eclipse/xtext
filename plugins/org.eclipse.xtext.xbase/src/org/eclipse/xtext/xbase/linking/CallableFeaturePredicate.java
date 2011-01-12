@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.scoping.featurecalls;
+package org.eclipse.xtext.xbase.linking;
 
 import java.util.Collections;
 
@@ -30,6 +30,7 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.typing.IXbaseTypeProvider;
 import org.eclipse.xtext.xbase.typing.TypeConverter;
 

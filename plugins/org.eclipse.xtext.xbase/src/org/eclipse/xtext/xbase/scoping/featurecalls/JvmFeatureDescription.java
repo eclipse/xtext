@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.scoping.featurecalls;
 import java.util.Collections;
 
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -22,6 +23,7 @@ public class JvmFeatureDescription extends EObjectDescription {
 	private final TypeArgumentContext context;
 	private final String shadowingString;
 	private final boolean isValid;
+	private JvmIdentifyableElement implicitReceiver;
 
 	public JvmFeatureDescription(QualifiedName qualifiedName, JvmFeature element, TypeArgumentContext context, String shadowingString, boolean isValid) {
 		super(qualifiedName, element, Collections.<String,String>emptyMap());
@@ -49,6 +51,14 @@ public class JvmFeatureDescription extends EObjectDescription {
 	
 	public boolean isValid() {
 		return isValid;
+	}
+	
+	public void setImplicitReceiver(JvmIdentifyableElement implicitReceiver) {
+		this.implicitReceiver = implicitReceiver;
+	}
+	
+	public JvmIdentifyableElement getImplicitReceiver() {
+		return implicitReceiver;
 	}
 	
 }

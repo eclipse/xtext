@@ -5,10 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.scoping.featurecalls;
+package org.eclipse.xtext.xbase.linking;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
@@ -16,6 +17,9 @@ import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.xbase.XImplicitReceiverCall;
+import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -73,7 +77,18 @@ public class BestMatchingJvmFeatureScope implements IScope {
 	
 	public IEObjectDescription getSingleElement(QualifiedName name) {
 		final Iterable<IEObjectDescription> elements = getElements(name);
-		return getBestMatch(elements);
+		return setImplicitReceiver(getBestMatch(elements));
+	}
+
+	protected IEObjectDescription setImplicitReceiver(IEObjectDescription bestMatch) {
+		if (this.context instanceof XImplicitReceiverCall && this.reference==XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE) {
+			if (bestMatch instanceof JvmFeatureDescription) {
+				JvmFeatureDescription featureDesc = (JvmFeatureDescription) bestMatch;
+				final JvmIdentifyableElement implicitReceiver = featureDesc.getImplicitReceiver();
+				((XImplicitReceiverCall)this.context).setImplicitReceiver(implicitReceiver);
+			}
+		}
+		return bestMatch;
 	}
 
 	protected IEObjectDescription getBestMatch(Iterable<IEObjectDescription> iterable) {

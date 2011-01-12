@@ -18,6 +18,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -40,6 +41,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
+import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScopeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentSugarDescriptionProvider;
@@ -163,7 +165,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	}
 
 	/**
-	 * creates the feature scope for {@link XAbstractFeatureCall}, including the local variables in case it is feature
+	 * creates the feature scope for {@link XAbstractFeatureCall}, including the local variables in case it is a feature
 	 * call without receiver (XFeatureCall).
 	 */
 	protected IScope createFeatureCallScope(final XAbstractFeatureCall call, EReference reference) {
@@ -171,15 +173,9 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 				|| ((call instanceof XAssignment) && ((XAssignment) call).getAssignable() == null)) {
 			DelegatingScope implicitThis = new DelegatingScope();
 			IScope localVariableScope = createLocalVarScope(call, reference, implicitThis);
-			IEObjectDescription thisVariable = localVariableScope.getSingleElement(THIS);
-
-			if (thisVariable != null) {
-				EObject thisVal = thisVariable.getEObjectOrProxy();
-				JvmTypeReference type = typeProvider.getType(thisVal);
-				if (type != null) {
-					implicitThis.setDelegate(createFeatureScopeForTypeRef(type, call, getContextType(call)));
-				}
-			}
+			IScope featureScopeForThis = createImplicitFeatureCallScope(call, localVariableScope);
+			if (featureScopeForThis != null)
+				implicitThis.setDelegate(featureScopeForThis);
 			return localVariableScope;
 		}
 		if (call.getArguments().isEmpty())
@@ -192,6 +188,35 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			}
 		}
 		return IScope.NULLSCOPE;
+	}
+
+	/**
+	 * override to add any other implicit feature calls.
+	 */
+	protected IScope createImplicitFeatureCallScope(final XAbstractFeatureCall call, IScope localVariableScope) {
+		JvmFeatureScope featureScopeForThis = null;
+		IEObjectDescription thisVariable = localVariableScope.getSingleElement(THIS);
+		if (thisVariable != null) {
+			EObject thisVal = thisVariable.getEObjectOrProxy();
+			JvmTypeReference type = typeProvider.getType(thisVal);
+			if (type != null) {
+				featureScopeForThis = createFeatureScopeForTypeRef(type, call, getContextType(call));
+				if (featureScopeForThis != null)
+					setImplicitReceiverrecursivly(featureScopeForThis,
+							(JvmIdentifyableElement) thisVariable.getEObjectOrProxy());
+			}
+		}
+		return featureScopeForThis;
+	}
+
+	protected void setImplicitReceiverrecursivly(JvmFeatureScope featureScopeForThis,
+			JvmIdentifyableElement implicitReceiver) {
+		featureScopeForThis.setImplicitReceiverOnAllDescriptions(implicitReceiver);
+		IScope parent = featureScopeForThis.getParent();
+		if (parent instanceof JvmFeatureScope) {
+			JvmFeatureScope parentFeatureScope = (JvmFeatureScope) parent;
+			setImplicitReceiverrecursivly(parentFeatureScope, implicitReceiver);
+		}
 	}
 
 	protected JvmDeclaredType getContextType(XAbstractFeatureCall call) {
@@ -251,7 +276,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		List<IEObjectDescription> descriptions = Lists.newArrayList();
 		EList<JvmFormalParameter> params = closure.getFormalParameters();
 		for (JvmFormalParameter p : params) {
-			if(p.getName() != null) {
+			if (p.getName() != null) {
 				IEObjectDescription desc = createEObjectDescription(p);
 				descriptions.add(desc);
 			}
@@ -259,7 +284,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return MapBasedScope.createScope(parentScope, descriptions);
 	}
 
-	protected IScope createFeatureScopeForTypeRef(JvmTypeReference type, XAbstractFeatureCall call,
+	protected JvmFeatureScope createFeatureScopeForTypeRef(JvmTypeReference type, XAbstractFeatureCall call,
 			JvmDeclaredType currentContext) {
 		if (call instanceof XAssignment) {
 			XAssignmentDescriptionProvider provider1 = assignmentFeatureDescProvider.get();
@@ -279,7 +304,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	protected IScope createLocalScopeForParameter(JvmFormalParameter p, IScope parentScope) {
 		return (p.getName() != null) ? new SingletonScope(createEObjectDescription(p), parentScope) : parentScope;
 	}
-	
+
 	protected IEObjectDescription createEObjectDescription(JvmFormalParameter p) {
 		return EObjectDescription.create(QualifiedName.create(p.getName()), p);
 	}

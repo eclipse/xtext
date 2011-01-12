@@ -53,7 +53,9 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 				"	val this = new java.util.ArrayList<String>(); " +
 				"	size;" +
 				"}");
-		assertEquals("java.util.ArrayList.size()",((XFeatureCall)bop.getExpressions().get(1)).getFeature().getCanonicalName());
+		final XFeatureCall xFeatureCall = (XFeatureCall)bop.getExpressions().get(1);
+		assertEquals("java.util.ArrayList.size()",xFeatureCall.getFeature().getCanonicalName());
+		assertSame(bop.getExpressions().get(0), xFeatureCall.getImplicitReceiver());
 	}
 	
 	public void testImplicitThis_2() throws Exception {
