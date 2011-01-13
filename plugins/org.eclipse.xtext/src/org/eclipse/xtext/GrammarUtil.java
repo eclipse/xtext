@@ -7,11 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext;
 
+import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Sets.*;
 import static org.eclipse.emf.ecore.util.EcoreUtil.*;
 import static org.eclipse.xtext.EcoreUtil2.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,6 +23,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -30,6 +34,9 @@ import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xtext.CurrentTypeFinder;
+
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 
 /**
  * @author Jan Koehnlein
@@ -72,7 +79,7 @@ public class GrammarUtil {
 	public static AbstractRule containingRule(EObject e) {
 		return getContainerOfType(e, AbstractRule.class);
 	}
-	
+
 	public static ParserRule containingParserRule(EObject e) {
 		return getContainerOfType(e, ParserRule.class);
 	}
@@ -88,11 +95,11 @@ public class GrammarUtil {
 	public static Group containingGroup(EObject e) {
 		return getContainerOfType(e, Group.class);
 	}
-	
+
 	public static UnorderedGroup containingUnorderedGroup(EObject e) {
 		return getContainerOfType(e, UnorderedGroup.class);
 	}
-	
+
 	public static CrossReference containingCrossReference(EObject e) {
 		return getContainerOfType(e, CrossReference.class);
 	}
@@ -153,7 +160,7 @@ public class GrammarUtil {
 		}
 		return null;
 	}
-	
+
 	public static List<Grammar> allUsedGrammars(Grammar grammar) {
 		List<Grammar> grammars = new ArrayList<Grammar>();
 		collectAllUsedGrammars(grammars, grammar);
@@ -174,8 +181,8 @@ public class GrammarUtil {
 		return result;
 	}
 
-	private static void collectAllRules(Grammar grammar, List<AbstractRule> result,
-			Set<Grammar> visitedGrammars, Set<String> knownRulenames) {
+	private static void collectAllRules(Grammar grammar, List<AbstractRule> result, Set<Grammar> visitedGrammars,
+			Set<String> knownRulenames) {
 		if (!visitedGrammars.add(grammar))
 			return;
 
@@ -185,7 +192,7 @@ public class GrammarUtil {
 			}
 		}
 
-		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
+		for (Grammar usedGrammar : grammar.getUsedGrammars()) {
 			collectAllRules(usedGrammar, result, visitedGrammars, knownRulenames);
 		}
 	}
@@ -222,7 +229,7 @@ public class GrammarUtil {
 				result.add(decl);
 			}
 		}
-		for(Grammar usedGrammar: grammar.getUsedGrammars())
+		for (Grammar usedGrammar : grammar.getUsedGrammars())
 			collectAllMetamodelDeclarations(usedGrammar, result, knownAliases, visitedGrammars);
 	}
 
@@ -236,7 +243,7 @@ public class GrammarUtil {
 		final ICompositeNode node = NodeModelUtils.getNode(typeRef);
 		if (node != null) {
 			final BidiIterator<INode> leafNodes = node.getAsTreeIterable().iterator();
-			while(leafNodes.hasPrevious()) {
+			while (leafNodes.hasPrevious()) {
 				INode previous = leafNodes.previous();
 				if (previous instanceof ILeafNode && !((ILeafNode) previous).isHidden())
 					return previous.getText();
@@ -303,9 +310,9 @@ public class GrammarUtil {
 	public static boolean isDatatypeRule(ParserRule parserRule) {
 		return parserRule.getType() != null && parserRule.getType().getClassifier() instanceof EDataType;
 	}
-	
+
 	public static boolean isDatatypeRule(AbstractRule abstractRule) {
-		return abstractRule instanceof ParserRule && isDatatypeRule((ParserRule)abstractRule);
+		return abstractRule instanceof ParserRule && isDatatypeRule((ParserRule) abstractRule);
 	}
 
 	// TODO replace me by compiled grammar model
@@ -326,9 +333,25 @@ public class GrammarUtil {
 			return getReference(crossRef, (EClass) referenceOwner);
 		return null;
 	}
-	
+
 	public static EClassifier findCurrentType(final AbstractElement element) {
 		return new CurrentTypeFinder().findCurrentTypeAfter(element);
 	}
 
+	public static Collection<EPackage> allEPackagesToValidate(final Grammar _this) {
+		Iterable<TypeRef> allTypeRefs = concat(transform(allParserRules(_this), new Function<ParserRule, Iterable<TypeRef>>() {
+			public Iterable<TypeRef> apply(ParserRule from) {
+				return EcoreUtil2.eAllOfType(from, TypeRef.class);
+			}
+		}));
+		return newHashSet(transform(filter(allTypeRefs, new Predicate<TypeRef>() {
+			public boolean apply(TypeRef input) {
+				return !(input.eContainer() instanceof CrossReference) && input.getClassifier() instanceof EClass;
+			}
+		}), new Function<TypeRef, EPackage>() {
+			public EPackage apply(TypeRef from) {
+				return from.getClassifier().getEPackage();
+			}
+		}));
+	}
 }
