@@ -9,7 +9,9 @@ package org.eclipse.xtext.xbase.scoping.featurecalls;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.util.JvmVisibilityService;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -20,7 +22,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescriptionProvider {
+public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescriptionProvider, IFeaturesForTypeProvider {
 	
 	@Inject
 	protected JvmVisibilityService visibilityService;
@@ -29,15 +31,35 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 		this.visibilityService = visibilityService;
 	}
 	
+	@Inject
+	protected IFeaturesForTypeProvider featuresForTypeProvider = new DefaultFeaturesForTypeProvider();
+	
+	public void setFeaturesForTypeProvider(IFeaturesForTypeProvider featuresForTypeProvider) {
+		this.featuresForTypeProvider = featuresForTypeProvider;
+	}
+	
+	public Iterable<? extends JvmFeature> getFeaturesForType(JvmDeclaredType declType) {
+		return featuresForTypeProvider.getFeaturesForType(declType);
+	}
+	
 	protected JvmDeclaredType contextType;
+	protected JvmIdentifyableElement implicitReceiver;
 	
 	public void setContextType(JvmDeclaredType contextType) {
 		this.contextType = contextType;
 	}
 	
+	public void setImplicitReceiver(JvmIdentifyableElement implicitReceiver) {
+		this.implicitReceiver = implicitReceiver;
+	}
+	
 	protected JvmFeatureDescription createJvmFeatureDescription(QualifiedName name, JvmFeature jvmFeature,
 			TypeArgumentContext ctx, String shadowingString, boolean isValid) {
-		return new JvmFeatureDescription(name, jvmFeature, ctx, shadowingString, isValid);
+		return new JvmFeatureDescription(name, jvmFeature, ctx, shadowingString, isValid, implicitReceiver, isMemberFeatureContext(jvmFeature));
+	}
+
+	protected boolean isMemberFeatureContext(JvmFeature jvmFeature) {
+		return !(jvmFeature instanceof JvmOperation && ((JvmOperation)jvmFeature).isStatic());
 	}
 
 	protected JvmFeatureDescription createJvmFeatureDescription(JvmFeature jvmFeature, TypeArgumentContext ctx,

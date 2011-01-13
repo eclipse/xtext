@@ -7,16 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
+import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
 
-import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifyableElement;
@@ -28,7 +27,6 @@ import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
-import org.eclipse.xtext.xbase.XImplicitReceiverCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -148,55 +146,119 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 
 	protected void featureCalltoJavaExpression(XAbstractFeatureCall call, IAppendable b) {
-		if (call instanceof XUnaryOperation) {
-			XUnaryOperation expr = (XUnaryOperation) call;
-			internalToJavaExpression((expr).getOperand(), b);
-			b.append(".");
-			appendFeatureCall(expr.getFeature(), Collections.<XExpression> emptyList(), b);
-		} else if (call instanceof XBinaryOperation) {
-			XBinaryOperation expr = (XBinaryOperation) call;
-			internalToJavaExpression((expr).getLeftOperand(), b);
-			b.append(".");
-			appendFeatureCall(expr.getFeature(), singletonList(expr.getRightOperand()), b);
-		} else if (call instanceof XFeatureCall) {
-			xFeatureCallToJavaExpression((XFeatureCall) call, b);
-		} else if (call instanceof XMemberFeatureCall) {
-			xMemberFeatureCallToJavaExpression((XMemberFeatureCall) call, b);
-		} else if (call instanceof XAssignment) {
+		if (call instanceof XAssignment) {
 			xAssignmentToJavaExpression((XAssignment) call, b);
+			return;
 		}
-	}
-
-	protected void xMemberFeatureCallToJavaExpression(XMemberFeatureCall expr, IAppendable b) {
-		if (expr.isNullSafe()) {
-			internalToJavaExpression(expr.getMemberCallTarget(), b);
-			b.append("==null?");
-			b.append("(");
-			JvmTypeReference type = getTypeProvider().getType(expr);
-			b.append(getSerializedForm(type));
-			b.append(")null:");
-			internalToJavaExpression(expr.getMemberCallTarget(), b);
-		} else if (expr.isSpreading()) {
-			//TODO spread operator
-		} else {
-			internalToJavaExpression(expr.getMemberCallTarget(), b);
-		}
-		b.append(".");
-		appendFeatureCall(expr.getFeature(), expr.getMemberCallArguments(), b);
-
-	}
-
-	protected void xFeatureCallToJavaExpression(XFeatureCall expr, IAppendable b) {
-		if (expr.getFeature() instanceof JvmFeature) {
-			compileImplicitReceiver(expr, b);
+		boolean hasReceiver = appendReceiver(call, b);
+		if (hasReceiver)
 			b.append(".");
-			appendFeatureCall(expr.getFeature(), expr.getArguments(), b);
+		appendFeatureCall(call.getFeature(), getJavaArguments(call), b);
+	}
+
+	protected List<XExpression> getJavaArguments(XAbstractFeatureCall call) {
+		final EList<XExpression> arguments = call.getArguments();
+		if (call instanceof XFeatureCall)
+			return newArrayList(arguments);
+		if (isMemberCall(call)) {
+			return arguments.subList(1, arguments.size());
 		} else {
-			appendJavaReference(expr.getFeature(), b);
+			return newArrayList(arguments);
 		}
 	}
 
-	protected void appendJavaReference(EObject target, IAppendable b) {
+	protected boolean appendReceiver(XAbstractFeatureCall call, IAppendable b) {
+		if (isMemberCall(call)) {
+			if (call instanceof XUnaryOperation) {
+				XUnaryOperation expr = (XUnaryOperation) call;
+				internalToJavaExpression((expr).getOperand(), b);
+				return true;
+			} else if (call instanceof XBinaryOperation) {
+				XBinaryOperation expr = (XBinaryOperation) call;
+				internalToJavaExpression((expr).getLeftOperand(), b);
+				return true;
+			} else if (call instanceof XFeatureCall) {
+				if (call.getImplicitReceiver()!=null) {
+					appendFeatureCall(call.getImplicitReceiver(),null,b);
+					return true;
+				}
+				return false;
+			} else if (call instanceof XMemberFeatureCall) {
+				XMemberFeatureCall expr = ((XMemberFeatureCall) call);
+				if (expr.isNullSafe()) {
+					internalToJavaExpression(expr.getMemberCallTarget(), b);
+					b.append("==null?");
+					b.append("(");
+					JvmTypeReference type = getTypeProvider().getType(expr);
+					b.append(getSerializedForm(type));
+					b.append(")null:");
+					internalToJavaExpression(expr.getMemberCallTarget(), b);
+				} else if (expr.isSpreading()) {
+					//TODO spread operator
+				} else {
+					internalToJavaExpression(expr.getMemberCallTarget(), b);
+				}
+				return true;
+			} else if (call instanceof XAssignment) {
+				XExpression assignable = ((XAssignment) call).getAssignable();
+				if (assignable != null) {
+					internalToJavaExpression(assignable, b);
+					return true;
+				}
+				if (call.getImplicitReceiver()!=null) {
+					appendFeatureCall(call.getImplicitReceiver(),null,b);
+					return true;
+				}
+				return false;
+			}
+		} else {
+			if (call.getImplicitReceiver()!=null) {
+				internalToJavaExpression(call.getImplicitReceiver(), b);
+				return true;
+			} else {
+				JvmDeclaredType declaringType = ((JvmMember) call.getFeature()).getDeclaringType();
+				b.append(declaringType.getCanonicalName());
+				return true;
+			}
+		}
+		throw new IllegalArgumentException("couldn't handle " + call);
+	}
+
+	protected boolean isMemberCall(XAbstractFeatureCall call) {
+		return call.isTargetsMemberSyntaxCall();
+	}
+
+	protected boolean isStatic(JvmIdentifyableElement feature) {
+		if (feature instanceof JvmOperation) {
+			return ((JvmOperation) feature).isStatic();
+		} else if (feature instanceof JvmField) {
+			return ((JvmField) feature).isStatic();
+		}
+		return false;
+	}
+
+	protected void xAssignmentToJavaExpression(XAssignment expr, IAppendable b) {
+		final JvmIdentifyableElement feature = expr.getFeature();
+		boolean appendReceiver = appendReceiver(expr, b);
+		if (appendReceiver)
+			b.append(".");
+		if (feature instanceof JvmOperation) {
+			appendFeatureCall(expr.getFeature(), singletonList(expr.getValue()), b);
+		} else {
+			appendFeatureCall(expr.getFeature(), null, b);
+			b.append(" = ");
+			internalToJavaExpression(expr.getValue(), b);
+		}
+	}
+
+	protected void compileImplicitReceiver(XAbstractFeatureCall expr, IAppendable b) {
+		final JvmIdentifyableElement implicitReceiver = expr.getImplicitReceiver();
+		if (implicitReceiver != null) {
+			appendFeatureCall(implicitReceiver, null, b);
+		}
+	}
+
+	protected void appendFeatureCall(JvmIdentifyableElement target, List<? extends XExpression> arguments, IAppendable b) {
 		if (target instanceof JvmFormalParameter) {
 			final String name = ((JvmFormalParameter) target).getName();
 			b.append(makeJavaIdentifier(name));
@@ -206,6 +268,12 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		} else if (target instanceof JvmField) {
 			final String name = ((JvmField) target).getSimpleName();
 			b.append(makeJavaIdentifier(name));
+		} else if (target instanceof JvmOperation) {
+			final String name = ((JvmOperation) target).getSimpleName();
+			b.append(makeJavaIdentifier(name));
+			b.append("(");
+			appendArguments(arguments, b);
+			b.append(")");
 		} else if (target instanceof JvmDeclaredType) {
 			//assume this
 			b.append("this");
@@ -214,48 +282,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 
-	protected void xAssignmentToJavaExpression(XAssignment expr, IAppendable b) {
-		final JvmIdentifyableElement feature = expr.getFeature();
-		if (expr.getAssignable() != null) {
-			internalToJavaExpression(expr.getAssignable(), b);
-			b.append(".");
-		} else {
-			if (expr.getFeature() instanceof JvmFeature) {
-				compileImplicitReceiver(expr, b);
-				b.append(".");
-			}
-		}
-		if (feature instanceof JvmOperation) {
-			b.append(((JvmOperation) feature).getSimpleName());
-			b.append("(");
-			internalToJavaExpression(expr.getValue(), b);
-			b.append(")");
-		} else {
-			appendJavaReference(expr.getFeature(), b);
-			b.append(" = ");
-			internalToJavaExpression(expr.getValue(), b);
-		}
-	}
-
-	protected void compileImplicitReceiver(XImplicitReceiverCall expr, IAppendable b) {
-		final JvmIdentifyableElement implicitReceiver = expr.getImplicitReceiver();
-		if (implicitReceiver != null) {
-			appendJavaReference(implicitReceiver, b);
-		}
-	}
-
-	protected void appendFeatureCall(JvmIdentifyableElement feature, List<XExpression> arguments, IAppendable b) {
-		if (feature instanceof JvmMember) {
-			b.append(((JvmMember) feature).getSimpleName());
-		}
-		if (feature instanceof JvmOperation) {
-			b.append("(");
-			appendArguments(arguments, b);
-			b.append(")");
-		}
-	}
-
-	protected void appendArguments(List<XExpression> eList, IAppendable b) {
+	protected void appendArguments(List<? extends XExpression> eList, IAppendable b) {
+		if (eList==null)
+			return;
 		for (int i = 0; i < eList.size(); i++) {
 			XExpression expression = eList.get(i);
 			internalToJavaExpression(expression, b);

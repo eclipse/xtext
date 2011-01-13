@@ -24,6 +24,10 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 
 	protected abstract void assertEvaluatesTo(Object object, String string);
 	protected abstract void assertEvaluatesWithException(Class<? extends Throwable> class1, String string);
+	
+	public void testAddOnIntegers() throws Exception {
+		assertEvaluatesTo(new Integer(3), "1+2");
+	}
 
 	public void testNull() {
 		assertEvaluatesTo(null, "null");

@@ -17,7 +17,7 @@ import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.xbase.XImplicitReceiverCall;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 
@@ -26,7 +26,7 @@ import com.google.common.collect.Iterables;
 
 /**
  * A scope which goes through all returned EObjectDescriptions in order to find the best fit, if it is asked for the
- * 'first' element. 
+ * 'first' element.
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -51,7 +51,7 @@ public class BestMatchingJvmFeatureScope implements IScope {
 		Iterable<IEObjectDescription> unfiltered = delegate.getAllElements();
 		return filter(unfiltered);
 	}
-	
+
 	public Iterable<IEObjectDescription> getElements(EObject object) {
 		Iterable<IEObjectDescription> unfiltered = delegate.getElements(object);
 		return filter(unfiltered);
@@ -64,28 +64,30 @@ public class BestMatchingJvmFeatureScope implements IScope {
 		}
 		return unfiltered;
 	}
-	
+
 	public Iterable<IEObjectDescription> getElements(QualifiedName name) {
 		Iterable<IEObjectDescription> unfiltered = delegate.getElements(name);
 		return filter(unfiltered);
 	}
-	
+
 	public IEObjectDescription getSingleElement(EObject object) {
 		final Iterable<IEObjectDescription> elements = getElements(object);
 		return getBestMatch(elements);
 	}
-	
+
 	public IEObjectDescription getSingleElement(QualifiedName name) {
 		final Iterable<IEObjectDescription> elements = getElements(name);
 		return setImplicitReceiver(getBestMatch(elements));
 	}
 
 	protected IEObjectDescription setImplicitReceiver(IEObjectDescription bestMatch) {
-		if (this.context instanceof XImplicitReceiverCall && this.reference==XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE) {
-			if (bestMatch instanceof JvmFeatureDescription) {
+		if (bestMatch instanceof JvmFeatureDescription) {
+			if (this.reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE) {
 				JvmFeatureDescription featureDesc = (JvmFeatureDescription) bestMatch;
 				final JvmIdentifyableElement implicitReceiver = featureDesc.getImplicitReceiver();
-				((XImplicitReceiverCall)this.context).setImplicitReceiver(implicitReceiver);
+				final XAbstractFeatureCall featureCall = (XAbstractFeatureCall) this.context;
+				featureCall.setImplicitReceiver(implicitReceiver);
+				featureCall.setTargetsMemberSyntaxCall(featureDesc.isMemberSyntaxContext());
 			}
 		}
 		return bestMatch;
@@ -125,9 +127,9 @@ public class BestMatchingJvmFeatureScope implements IScope {
 		}
 		return a;
 	}
-	
+
 	@Override
 	public String toString() {
-		return getClass().getSimpleName()+" -> "+delegate;
+		return getClass().getSimpleName() + " -> " + delegate;
 	}
 }

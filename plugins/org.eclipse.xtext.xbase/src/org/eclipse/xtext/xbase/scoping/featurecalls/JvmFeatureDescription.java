@@ -24,12 +24,15 @@ public class JvmFeatureDescription extends EObjectDescription {
 	private final String shadowingString;
 	private final boolean isValid;
 	private JvmIdentifyableElement implicitReceiver;
+	private boolean isMemberSyntaxContext = true;
 
-	public JvmFeatureDescription(QualifiedName qualifiedName, JvmFeature element, TypeArgumentContext context, String shadowingString, boolean isValid) {
+	public JvmFeatureDescription(QualifiedName qualifiedName, JvmFeature element, TypeArgumentContext context, String shadowingString, boolean isValid, JvmIdentifyableElement implicitReceiver, boolean isMemberSyntaxContext) {
 		super(qualifiedName, element, Collections.<String,String>emptyMap());
 		this.context = context;
 		this.shadowingString = shadowingString;
 		this.isValid = isValid;
+		this.implicitReceiver = implicitReceiver;
+		this.isMemberSyntaxContext = isMemberSyntaxContext;
 	}
 	
 	public JvmFeature getJvmFeature() {
@@ -59,6 +62,10 @@ public class JvmFeatureDescription extends EObjectDescription {
 	
 	public JvmIdentifyableElement getImplicitReceiver() {
 		return implicitReceiver;
+	}
+	
+	public boolean isMemberSyntaxContext() {
+		return isMemberSyntaxContext;
 	}
 	
 }

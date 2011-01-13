@@ -134,13 +134,7 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 		if (!(type.getType() instanceof JvmDeclaredType))
 			return null;
 		JvmDeclaredType declType = (JvmDeclaredType) type.getType();
-		Iterable<JvmFeature> features = filter(filter(declType.getMembers(), JvmFeature.class),
-				new Predicate<JvmFeature>() {
-
-					public boolean apply(JvmFeature input) {
-						return !(input instanceof JvmConstructor);
-					}
-				});
+		Iterable<? extends JvmFeature> features = getFeaturesForType(declType,jvmFeatureDescriptionProvider);
 		if (!features.iterator().hasNext())
 			return null;
 		final List<JvmFeatureDescription> descriptions = Lists.newArrayList();
@@ -153,6 +147,18 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 			jvmFeatureDescriptionProvider.addFeatureDescriptions(jvmFeature, context, acceptor);
 		}
 		return new JvmFeatureDescriptions(jvmFeatureDescriptionProvider.getText()+" " + type.getCanonicalName(), descriptions);
+	}
+
+	protected Iterable<? extends JvmFeature> getFeaturesForType(JvmDeclaredType declType, IJvmFeatureDescriptionProvider descriptionProvider) {
+		if (descriptionProvider instanceof IFeaturesForTypeProvider) {
+			return ((IFeaturesForTypeProvider)descriptionProvider).getFeaturesForType(declType);
+		}
+		return filter(filter(declType.getMembers(), JvmFeature.class),
+				new Predicate<JvmFeature>() {
+					public boolean apply(JvmFeature input) {
+						return !(input instanceof JvmConstructor);
+					}
+				});
 	}
 
 	/**

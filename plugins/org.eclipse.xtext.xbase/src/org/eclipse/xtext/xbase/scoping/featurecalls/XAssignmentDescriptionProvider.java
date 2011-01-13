@@ -12,7 +12,6 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.util.IAcceptor;
 
-
 /**
  * 
  * creates assignment feature descriptions for fields.
@@ -33,4 +32,5 @@ public class XAssignmentDescriptionProvider extends DefaultJvmFeatureDescription
 	protected boolean isValid(JvmFeature feature) {
 		return !((JvmField)feature).isFinal() && super.isValid(feature);
 	}
+
 }
