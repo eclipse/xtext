@@ -163,9 +163,14 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 		assertExpected("java.lang.String", exp.getDefault());
 	}
 	
-	public void testCastedExpression() throws Exception {
+	public void testCastedExpression_0() throws Exception {
 		XCastedExpression expression = (XCastedExpression) expression("null as java.lang.Class<? extends java.lang.CharSequence>");
 		assertExpected("java.lang.Class<? extends java.lang.CharSequence>", expression.getTarget());
+	}
+
+	public void testCastedExpression_1() throws Exception {
+		XCastedExpression expression = (XCastedExpression) expression("null as Cloneable");
+		assertExpected(null, expression.getTarget());
 	}
 
 	protected void assertExpected(String expectedExpectedType, EObject obj) {

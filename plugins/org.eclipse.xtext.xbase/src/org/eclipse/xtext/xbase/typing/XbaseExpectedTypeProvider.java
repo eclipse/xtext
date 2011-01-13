@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -193,8 +194,13 @@ public class XbaseExpectedTypeProvider extends AbstractExpectedTypeProvider<JvmT
 
 	protected JvmTypeReference _expectedType(XCastedExpression expr, EReference reference, int index) {
 		if (reference == XbasePackage.Literals.XCASTED_EXPRESSION__TARGET) {
-			return expr.getType();
+			if(expr.getType().getType() instanceof JvmGenericType 
+					&& !((JvmGenericType)expr.getType().getType()).isInterface())
+				return expr.getType();
 		}
+		// Corner case: 
+		// If target's type is final, the cast's type must be a subtype of the target's type.
+		// This cannot be expressed in this API so it's handled in a separate validation rule.
 		return null;
 	}
 
