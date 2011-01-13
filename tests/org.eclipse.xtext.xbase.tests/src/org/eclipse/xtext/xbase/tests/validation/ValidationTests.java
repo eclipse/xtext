@@ -59,4 +59,9 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertError(invalidExpression, literalClass, XbaseJavaValidator.LITERAL_NOT_ALLOWED, "block", "literal");
 	}
 	
+	public void testFeatureCallOnVoid() throws Exception {
+		XExpression expression = expression("null.toString()");
+		helper.assertError(expression, XMEMBER_FEATURE_CALL, XbaseJavaValidator.FEATURE_CALL_ON_VOID, "void", "feature", "access");
+	}
+	
 }
