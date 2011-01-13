@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
@@ -15,6 +16,7 @@ import org.eclipse.xtext.typing.TypeResolutionException;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -24,14 +26,17 @@ import com.google.inject.Inject;
 
 public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
-	public static final String INCOMPATIBLE_TYPES = "xbase.incompatible_types";
-	public static final String ASSIGNMENT_TO_FINAL = "xbase.assignment_to_final";
-	public static final String MISSING_INITIALIZATION = "xbase.missing_initialization";
-	public static final String MISSING_TYPE = "xbase.missing_type";
+	public static final String INCOMPATIBLE_TYPES = XbaseJavaValidator.class.getCanonicalName() + ".incompatible_types";
+	public static final String ASSIGNMENT_TO_FINAL = XbaseJavaValidator.class.getCanonicalName()
+			+ ".assignment_to_final";
+	public static final String MISSING_INITIALIZATION = XbaseJavaValidator.class.getCanonicalName()
+			+ ".missing_initialization";
+	public static final String MISSING_TYPE = XbaseJavaValidator.class.getCanonicalName() + ".missing_type";
+	public static final String INVALID_CAST = XbaseJavaValidator.class.getCanonicalName() + ".invalid_cast";
 
 	@Inject
 	private IXbaseTypeProvider typeProvider;
-	
+
 	@Inject
 	private IExpectedTypeProvider<JvmTypeReference> expectedTypeProvider;
 
@@ -45,9 +50,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			if (expectedType == null)
 				return;
 			JvmTypeReference actualType = typeProvider.getType(obj);
-			if (!conformanceComputer.isConformant(expectedType, actualType)) 
-				error("Incompatible types. Expected " + getTypeCanonicalName(expectedType) + " but was "
-						+ getTypeCanonicalName(actualType), obj, -1, INCOMPATIBLE_TYPES);
+			if (!conformanceComputer.isConformant(expectedType, actualType))
+				error("Incompatible types. Expected " + canonicalName(expectedType) + " but was "
+						+ canonicalName(actualType), obj, -1, INCOMPATIBLE_TYPES);
 		} catch (TypeResolutionException e) {
 			// do nothing, error should be handled elsewhere
 		}
@@ -73,8 +78,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			if (!declaration.isWriteable())
 				error("Value must be initialized", XbasePackage.XVARIABLE_DECLARATION, MISSING_INITIALIZATION);
 			if (declaration.getType() == null)
-				error("Type cannot be derived",
-						XbasePackage.XVARIABLE_DECLARATION, MISSING_TYPE);
+				error("Type cannot be derived", XbasePackage.XVARIABLE_DECLARATION__NAME, MISSING_TYPE);
 		}
 	}
 
@@ -83,17 +87,26 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		//TODO simple literals are not allowed as an n-1 expression.
 		// also check nested expressions (i.e. if statement's then and else, casts, etc.) for literals
 	}
-	
+
+	@Check
+	public void checkInvalidCast(XCastedExpression cast) {
+		JvmTypeReference targetTypeRef = typeProvider.getType(cast.getTarget());
+		if (targetTypeRef.getType() instanceof JvmDeclaredType) {
+			if (((JvmDeclaredType) targetTypeRef.getType()).isFinal()
+					&& !conformanceComputer.isConformant(cast.getType(), targetTypeRef)) {
+				error("Element of sealed type " + canonicalName(targetTypeRef) + " cannot be cast to "
+						+ canonicalName(cast.getType()), XbasePackage.XCASTED_EXPRESSION__TYPE, INVALID_CAST);
+			}
+		}
+	}
+
 	@Override
 	protected List<EPackage> getEPackages() {
 		return singletonList((EPackage) XbasePackage.eINSTANCE);
 	}
 
-	protected String getTypeCanonicalName(JvmTypeReference typeRef) {
+	protected String canonicalName(JvmTypeReference typeRef) {
 		return (typeRef == null) ? "<null>" : notNull(typeRef.getCanonicalName());
 	}
-	
-	
-	
 
 }
