@@ -33,30 +33,34 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	}
 	
 	public void testStringLiteralInBlock() throws Exception {
-		checkLiteralsInBlock("'foo'", XSTRING_LITERAL);
+		checkInnerExpressionInBlock("'foo'", XSTRING_LITERAL);
 	}
 	
 	public void testNullLiteralInBlock() throws Exception {
-		checkLiteralsInBlock("null", XNULL_LITERAL);
+		checkInnerExpressionInBlock("null", XNULL_LITERAL);
 	}
 	
 	public void testBooleanLiteralInBlock() throws Exception {
-		checkLiteralsInBlock("true", XBOOLEAN_LITERAL);
+		checkInnerExpressionInBlock("true", XBOOLEAN_LITERAL);
 	}
 	
 	public void testTypeLiteralInBlock() throws Exception {
-		checkLiteralsInBlock("typeof (String)", XTYPE_LITERAL);
+		checkInnerExpressionInBlock("typeof (String)", XTYPE_LITERAL);
 	}
 	
 	public void testClosureInBlock() throws Exception {
-		checkLiteralsInBlock("[a|a]", XCLOSURE);
+		checkInnerExpressionInBlock("[a|a]", XCLOSURE);
 	}
 	
-	protected void checkLiteralsInBlock(String literalExpression, EClass literalClass) throws Exception {
-		XExpression validExpression = expression("{ " + literalExpression + " }");
-		helper.assertNoError(validExpression, XbaseJavaValidator.LITERAL_NOT_ALLOWED);
-		XExpression invalidExpression = expression("{ " + literalExpression + " " + literalExpression + " }");
-		helper.assertError(invalidExpression, literalClass, XbaseJavaValidator.LITERAL_NOT_ALLOWED, "block", "literal");
+	public void testThrowsInBlock() throws Exception {
+		checkInnerExpressionInBlock("throw new Exception()", XTHROW_EXPRESSION);
+	}
+	
+	protected void checkInnerExpressionInBlock(String innerExpression, EClass innerExpressionClass) throws Exception {
+		XExpression validExpression = expression("{ " + innerExpression + " }");
+		helper.assertNoError(validExpression, XbaseJavaValidator.INVALID_INNER_EXPRESSION);
+		XExpression invalidExpression = expression("{ " + innerExpression + " " + innerExpression + " }");
+		helper.assertError(invalidExpression, innerExpressionClass, XbaseJavaValidator.INVALID_INNER_EXPRESSION, "block", "last", "element");
 	}
 	
 	public void testFeatureCallOnVoid() throws Exception {
