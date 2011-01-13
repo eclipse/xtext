@@ -12,20 +12,19 @@ import static org.eclipse.xtext.junit.validation.AssertableDiagnostics.*;
 import java.util.Arrays;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.junit.validation.ValidatorTester;
 
 /**
  * @author meysholdt - Initial contribution and API
  */
-public class ValidatorTesterTest extends TestCase {
+public class ValidatorTesterTest extends AbstractXtextTests {
 
 	private class TestingValidator extends AbstractDeclarativeValidator {
 		@Check
