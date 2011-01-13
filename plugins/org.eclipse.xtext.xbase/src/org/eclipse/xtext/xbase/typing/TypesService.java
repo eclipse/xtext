@@ -105,4 +105,8 @@ public class TypesService {
 		return ref;
 	}
 
+	public boolean isVoid(JvmTypeReference typeRef) {
+		String typeName = typeRef.getCanonicalName();
+		return typeName.equals("java.lang.Void") || typeName.equals("java.lang.void"); 
+	}
 }

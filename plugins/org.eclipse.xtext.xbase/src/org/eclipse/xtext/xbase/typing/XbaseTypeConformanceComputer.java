@@ -19,6 +19,8 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class XbaseTypeConformanceComputer extends DefaultJvmTypeConformanceComputer {
+	@Inject
+	private TypesService typesService;
 
 	@Inject
 	public XbaseTypeConformanceComputer(SuperTypeCollector superTypeCollector, Provider typeArgumentContextProvider,
@@ -28,8 +30,7 @@ public class XbaseTypeConformanceComputer extends DefaultJvmTypeConformanceCompu
 
 	@Override
 	protected Boolean _isConformant(JvmTypeReference left, JvmTypeReference right) {
-		String rightTypeName = right.getType().getCanonicalName();
-		if(rightTypeName.equals("java.lang.Void") || rightTypeName.equals("java.lang.void")) 
+		if (typesService.isVoid(right))
 			return true;
 		return super._isConformant(left, right);
 	}

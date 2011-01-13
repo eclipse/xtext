@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.typing;
+package org.eclipse.xtext.xbase.util;
 
 import static org.eclipse.xtext.xbase.XbasePackage.*;
 
@@ -14,7 +14,7 @@ import org.eclipse.xtext.xbase.XExpression;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class TypeHelper {
+public class XExpressionHelper {
 
 	public boolean isLiteral(XExpression expr) {
 		switch(expr.eClass().getClassifierID()) {

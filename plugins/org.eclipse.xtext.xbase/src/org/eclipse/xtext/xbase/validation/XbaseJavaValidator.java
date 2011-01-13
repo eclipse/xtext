@@ -2,6 +2,7 @@ package org.eclipse.xtext.xbase.validation;
 
 import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
+import static org.eclipse.xtext.xbase.XbasePackage.*;
 
 import java.util.List;
 
@@ -19,10 +20,11 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
-import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typing.IXbaseTypeProvider;
-import org.eclipse.xtext.xbase.typing.TypeHelper;
+import org.eclipse.xtext.xbase.typing.TypesService;
+import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
 import com.google.inject.Inject;
 
@@ -36,6 +38,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	public static final String MISSING_TYPE = XbaseJavaValidator.class.getCanonicalName() + ".missing_type";
 	public static final String INVALID_CAST = XbaseJavaValidator.class.getCanonicalName() + ".invalid_cast";
 	public static final String LITERAL_NOT_ALLOWED = XbaseJavaValidator.class.getCanonicalName() + ".literal_not_allowed";
+	public static final String FEATURE_CALL_ON_VOID = XbaseJavaValidator.class.getCanonicalName() + ".feature_call_on_void";
 	
 	
 	@Inject
@@ -48,7 +51,10 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	private IJvmTypeConformanceComputer conformanceComputer;
 
 	@Inject
-	private TypeHelper typeHelper;
+	private XExpressionHelper expressionHelper;
+	
+	@Inject
+	private TypesService typesService;
 	
 	@Check
 	public void checkTypes(EObject obj) {
@@ -74,26 +80,26 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	public void checkAssignment(XAssignment assignment) {
 		if (assignment.getFeature() instanceof XVariableDeclaration
 				&& !((XVariableDeclaration) assignment.getFeature()).isWriteable())
-			error("Assignment to final variable", XbasePackage.XASSIGNMENT__ASSIGNABLE, ASSIGNMENT_TO_FINAL);
+			error("Assignment to final variable", XASSIGNMENT__ASSIGNABLE, ASSIGNMENT_TO_FINAL);
 		else if (assignment.getFeature() instanceof JvmFormalParameter)
-			error("Assignment to final parameter", XbasePackage.XASSIGNMENT__ASSIGNABLE, ASSIGNMENT_TO_FINAL);
+			error("Assignment to final parameter", XASSIGNMENT__ASSIGNABLE, ASSIGNMENT_TO_FINAL);
 	}
 
 	@Check
 	public void checkVariableDeclaration(XVariableDeclaration declaration) {
 		if (declaration.getRight() == null) {
 			if (!declaration.isWriteable())
-				error("Value must be initialized", XbasePackage.XVARIABLE_DECLARATION, MISSING_INITIALIZATION);
+				error("Value must be initialized", XVARIABLE_DECLARATION, MISSING_INITIALIZATION);
 			if (declaration.getType() == null)
-				error("Type cannot be derived", XbasePackage.XVARIABLE_DECLARATION__NAME, MISSING_TYPE);
+				error("Type cannot be derived", XVARIABLE_DECLARATION__NAME, MISSING_TYPE);
 		}
 	}
 
 	@Check
-	public void checkBlockExpression(XBlockExpression block) {
+	public void checkLiteralsInBlockExpression(XBlockExpression block) {
 		for(int i=0; i< block.getExpressions().size()-1; ++i) {
 			XExpression expr = block.getExpressions().get(i);
-			if(typeHelper.isLiteral(expr)) {
+			if(expressionHelper.isLiteral(expr)) {
 				error("Literals can only appear as the last element of a block expression", expr, -1, LITERAL_NOT_ALLOWED);
 			}
 		}
@@ -106,14 +112,21 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			if (((JvmDeclaredType) targetTypeRef.getType()).isFinal()
 					&& !conformanceComputer.isConformant(cast.getType(), targetTypeRef)) {
 				error("Element of sealed type " + canonicalName(targetTypeRef) + " cannot be cast to "
-						+ canonicalName(cast.getType()), XbasePackage.XCASTED_EXPRESSION__TYPE, INVALID_CAST);
+						+ canonicalName(cast.getType()), XCASTED_EXPRESSION__TYPE, INVALID_CAST);
 			}
 		}
 	}
-
+	
+	@Check
+	public void checkFeatureCallOnVoid(XMemberFeatureCall featureCall) {
+		if(typesService.isVoid(typeProvider.getType(featureCall.getMemberCallTarget()))) {
+			error("Cannot access features of objects of type 'void'", -1, FEATURE_CALL_ON_VOID);
+		}
+	}
+	
 	@Override
 	protected List<EPackage> getEPackages() {
-		return singletonList((EPackage) XbasePackage.eINSTANCE);
+		return singletonList((EPackage) eINSTANCE);
 	}
 
 	protected String canonicalName(JvmTypeReference typeRef) {
