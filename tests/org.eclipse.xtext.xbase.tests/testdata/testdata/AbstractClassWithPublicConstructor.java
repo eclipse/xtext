@@ -5,8 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.tests.validation;
+package testdata;
 
-public class ClassWithFinalAttribute {
-	public final int finalAttribute = 42;
+/**
+ * @author Jan Koehnlein - Initial contribution and API
+ */
+public abstract class AbstractClassWithPublicConstructor {
+
+	public AbstractClassWithPublicConstructor() {
+	}
 }

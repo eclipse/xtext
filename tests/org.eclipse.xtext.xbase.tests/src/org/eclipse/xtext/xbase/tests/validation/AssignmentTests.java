@@ -13,6 +13,8 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
 
+import testdata.FieldAccess;
+
 import com.google.inject.Inject;
 
 /**
@@ -52,8 +54,8 @@ public class AssignmentTests extends AbstractXbaseTestCase {
 //				+ "().finalAttribute=0");
 //		helper.assertError(expression, XbasePackage.Literals.XASSIGNMENT, XbaseJavaValidator.ASSIGNMENT_TO_FINAL);
 		// TODO: link feature even though its final and provide validation instead
-		expressionWithError("new " + ClassWithFinalAttribute.class.getCanonicalName()
-				+ "().finalAttribute=0", 1);
+		expressionWithError("new " + FieldAccess.class.getCanonicalName()
+				+ "().finalField=0", 1);
 	}
 
 	public void testValAssignmentWithoutTypeAndInitialization() throws Exception {

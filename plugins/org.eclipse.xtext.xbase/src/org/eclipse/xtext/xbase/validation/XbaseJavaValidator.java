@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XThrowExpression;
@@ -42,7 +43,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	public static final String INVALID_CAST = XbaseJavaValidator.class.getCanonicalName() + ".invalid_cast";
 	public static final String INVALID_INNER_EXPRESSION = XbaseJavaValidator.class.getCanonicalName() + ".invalid_inner_expression";
 	public static final String FEATURE_CALL_ON_VOID = XbaseJavaValidator.class.getCanonicalName() + ".feature_call_on_void";
-	
+	public static final String ABSTRACT_CLASS_INSTANTIATION = XbaseJavaValidator.class.getCanonicalName() + ".abstract_class_instantiation";
 	
 	@Inject
 	private IXbaseTypeProvider typeProvider;
@@ -129,6 +130,13 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	public void checkFeatureCallOnVoid(XMemberFeatureCall featureCall) {
 		if(typesService.isVoid(typeProvider.getType(featureCall.getMemberCallTarget()))) {
 			error("Cannot access features of objects of type 'void'", -1, FEATURE_CALL_ON_VOID);
+		}
+	}
+	
+	@Check
+	public void checkInstantiationOfAbstractClass(XConstructorCall constructorCall) {
+		if(constructorCall.getConstructor().getDeclaringType().isAbstract()) {
+			error("Cannot instantiate abstract class", -1, ABSTRACT_CLASS_INSTANTIATION);
 		}
 	}
 	

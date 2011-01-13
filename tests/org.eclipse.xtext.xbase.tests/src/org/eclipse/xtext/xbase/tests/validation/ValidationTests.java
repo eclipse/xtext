@@ -68,4 +68,8 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertError(expression, XMEMBER_FEATURE_CALL, XbaseJavaValidator.FEATURE_CALL_ON_VOID, "void", "feature", "access");
 	}
 	
+	public void testNewAbstractClass() throws Exception {
+		XExpression expression = expression("new testdata.AbstractClassWithPublicConstructor()");
+		helper.assertError(expression, XCONSTRUCTOR_CALL, XbaseJavaValidator.ABSTRACT_CLASS_INSTANTIATION, "abstract", "instantiate", "class");
+	}
 }
