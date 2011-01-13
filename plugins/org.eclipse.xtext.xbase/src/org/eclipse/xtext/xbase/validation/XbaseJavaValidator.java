@@ -18,9 +18,11 @@ import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typing.IXbaseTypeProvider;
+import org.eclipse.xtext.xbase.typing.TypeHelper;
 
 import com.google.inject.Inject;
 
@@ -33,7 +35,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			+ ".missing_initialization";
 	public static final String MISSING_TYPE = XbaseJavaValidator.class.getCanonicalName() + ".missing_type";
 	public static final String INVALID_CAST = XbaseJavaValidator.class.getCanonicalName() + ".invalid_cast";
-
+	public static final String LITERAL_NOT_ALLOWED = XbaseJavaValidator.class.getCanonicalName() + ".literal_not_allowed";
+	
+	
 	@Inject
 	private IXbaseTypeProvider typeProvider;
 
@@ -43,6 +47,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	@Inject
 	private IJvmTypeConformanceComputer conformanceComputer;
 
+	@Inject
+	private TypeHelper typeHelper;
+	
 	@Check
 	public void checkTypes(EObject obj) {
 		try {
@@ -84,8 +91,12 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Check
 	public void checkBlockExpression(XBlockExpression block) {
-		//TODO simple literals are not allowed as an n-1 expression.
-		// also check nested expressions (i.e. if statement's then and else, casts, etc.) for literals
+		for(int i=0; i< block.getExpressions().size()-1; ++i) {
+			XExpression expr = block.getExpressions().get(i);
+			if(typeHelper.isLiteral(expr)) {
+				error("Literals can only appear as the last element of a block expression", expr, -1, LITERAL_NOT_ALLOWED);
+			}
+		}
 	}
 
 	@Check
