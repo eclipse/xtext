@@ -12,18 +12,16 @@
 «IMPORT org::eclipse::xtext»
 «EXTENSION org::eclipse::xtext::GrammarUtil»
 
-«DEFINE getEPackages(List[String] packageQNames, boolean isRegisterForImportedPackages) FOR Grammar-»
-@Override
+«DEFINE getEPackages(List[String] packageQNames) FOR Grammar-»
+	@Override
 	protected List<EPackage> getEPackages() {
 	    List<EPackage> result = new ArrayList<EPackage>();
 	    «FOREACH packageQNames AS e-»
 	    result.add(«e».eINSTANCE);
 	    «ENDFOREACH-»
-	    «IF isRegisterForImportedPackages-»
-	    	«FOREACH allMetamodelDeclarations().typeSelect(ReferencedMetamodel).EPackage.nsURI.toSet() AS referencedNsURI-»
+	    «FOREACH allEPackagesToValidate().removeAll(allMetamodelDeclarations().typeSelect(GeneratedMetamodel).EPackage).nsURI AS referencedNsURI-»
 	    result.add(EPackage.Registry.INSTANCE.getEPackage("«referencedNsURI»"));
-	    	«ENDFOREACH-»
-	    «ENDIF-»
+	   	«ENDFOREACH-»
 		return result;
 	}
 «ENDDEFINE»
