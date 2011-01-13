@@ -58,7 +58,8 @@ public class ValidatorTesterTest extends AbstractXtextTests {
 	private ValidatorTester<TestingValidator> tester;
 
 	@Override
-	public void setUp() {
+	public void setUp() throws Exception {
+		super.setUp();
 		TestingValidator val = new TestingValidator();
 		new XtextStandaloneSetup().createInjectorAndDoEMFRegistration().injectMembers(val);
 		tester = new ValidatorTester<TestingValidator>(val);
