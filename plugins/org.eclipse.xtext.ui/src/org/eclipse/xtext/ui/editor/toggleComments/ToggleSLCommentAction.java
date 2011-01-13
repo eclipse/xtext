@@ -34,7 +34,7 @@ import org.eclipse.ui.texteditor.TextEditorAction;
  * This implementation has been copied from org.eclipse.jdt.internal.ui.javaeditor.ToggleCommentAction.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public final class ToggleSLCommentAction extends TextEditorAction {
+public class ToggleSLCommentAction extends TextEditorAction {
 
 	private static Logger log = Logger.getLogger(ToggleSLCommentAction.class);
 	

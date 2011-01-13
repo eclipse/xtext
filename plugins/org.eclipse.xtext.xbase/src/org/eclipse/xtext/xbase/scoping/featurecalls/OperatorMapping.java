@@ -45,24 +45,24 @@ public class OperatorMapping {
 	}
 	
 	protected void initializeMapping() {
-		map.put(PLUS, create("plus"));
-		map.put(MINUS, create("minus"));
-		map.put(POWER, create("power"));
-		map.put(MULTIPLY, create("multiply"));
-		map.put(DIVIDE, create("divide"));
-		map.put(MODULO, create("modulo"));
-		map.put(OR, create("or"));
-		map.put(AND, create("and"));
+		map.put(PLUS, create("_operator_plus"));
+		map.put(MINUS, create("_operator_minus"));
+		map.put(POWER, create("_operator_power"));
+		map.put(MULTIPLY, create("_operator_multiply"));
+		map.put(DIVIDE, create("_operator_divide"));
+		map.put(MODULO, create("_operator_modulo"));
+		map.put(OR, create("_operator_or"));
+		map.put(AND, create("_operator_and"));
 		map.put(ADD, create("add"));
 		map.put(EQUALS, create("equals"));
-		map.put(NOT_EQUALS, create("notEquals"));
-		map.put(LESS_THAN, create("lessThan"));
-		map.put(LESS_EQUALS_THAN, create("lessEqualsThan"));
-		map.put(GREATER_THAN, create("greaterThan"));
-		map.put(GREATER_EQUALS_THAN, create("greaterEqualsThan"));
-		map.put(MAPPED_TO, create("mappedTo"));
-		map.put(UP_TO, create("upTo"));
-		map.put(NOT, create("not"));
+		map.put(NOT_EQUALS, create("_operator_notEquals"));
+		map.put(LESS_THAN, create("_operator_lessThan"));
+		map.put(LESS_EQUALS_THAN, create("_operator_lessEqualsThan"));
+		map.put(GREATER_THAN, create("_operator_greaterThan"));
+		map.put(GREATER_EQUALS_THAN, create("_operator_greaterEqualsThan"));
+		map.put(MAPPED_TO, create("_operator_mappedTo"));
+		map.put(UP_TO, create("_operator_upTo"));
+		map.put(NOT, create("_operator_not"));
 	}
 	
 	public QualifiedName getMethodName(QualifiedName operator) {

@@ -220,11 +220,6 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 				return createXAssignmentAdapter();
 			}
 			@Override
-			public Adapter caseXImplicitReceiverCall(XImplicitReceiverCall object)
-			{
-				return createXImplicitReceiverCallAdapter();
-			}
-			@Override
 			public Adapter caseJvmIdentifyableElement(JvmIdentifyableElement object)
 			{
 				return createJvmIdentifyableElementAdapter();
@@ -667,21 +662,6 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createXAssignmentAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XImplicitReceiverCall <em>XImplicit Receiver Call</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xbase.XImplicitReceiverCall
-	 * @generated
-	 */
-	public Adapter createXImplicitReceiverCallAdapter()
 	{
 		return null;
 	}

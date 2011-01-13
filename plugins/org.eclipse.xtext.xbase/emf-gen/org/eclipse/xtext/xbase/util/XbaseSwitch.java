@@ -166,7 +166,6 @@ public class XbaseSwitch<T>
 				XFeatureCall xFeatureCall = (XFeatureCall)theEObject;
 				T result = caseXFeatureCall(xFeatureCall);
 				if (result == null) result = caseXAbstractFeatureCall(xFeatureCall);
-				if (result == null) result = caseXImplicitReceiverCall(xFeatureCall);
 				if (result == null) result = caseXExpression(xFeatureCall);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -323,15 +322,7 @@ public class XbaseSwitch<T>
 				XAssignment xAssignment = (XAssignment)theEObject;
 				T result = caseXAssignment(xAssignment);
 				if (result == null) result = caseXAbstractFeatureCall(xAssignment);
-				if (result == null) result = caseXImplicitReceiverCall(xAssignment);
 				if (result == null) result = caseXExpression(xAssignment);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case XbasePackage.XIMPLICIT_RECEIVER_CALL:
-			{
-				XImplicitReceiverCall xImplicitReceiverCall = (XImplicitReceiverCall)theEObject;
-				T result = caseXImplicitReceiverCall(xImplicitReceiverCall);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -783,22 +774,6 @@ public class XbaseSwitch<T>
 	 * @generated
 	 */
 	public T caseXAssignment(XAssignment object)
-	{
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>XImplicit Receiver Call</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>XImplicit Receiver Call</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseXImplicitReceiverCall(XImplicitReceiverCall object)
 	{
 		return null;
 	}

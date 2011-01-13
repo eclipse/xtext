@@ -125,25 +125,33 @@ public class CallableFeaturePredicate implements Predicate<IEObjectDescription> 
 	}
 
 	protected boolean _case(JvmOperation input, XBinaryOperation op, EReference ref, JvmFeatureDescription jvmFeatureDescription) {
-		if (input.getParameters().size() != 1)
+		final int callTypeDelta = getCallTypeDelta(jvmFeatureDescription);
+		if (input.getParameters().size() != (1+callTypeDelta))
 			return false;
 		if (op.getRightOperand() != null && op.getLeftOperand() != null) {
-			JvmTypeReference type = getTypeProvider().getType(op.getLeftOperand());
-			if (!conformance.isConformant(input.getParameters().get(0).getParameterType(), type))
+			JvmTypeReference type = getTypeProvider().getType(op.getRightOperand());
+			final JvmFormalParameter rightParam = input.getParameters().get(0+callTypeDelta);
+			if (!conformance.isConformant(rightParam.getParameterType(), type))
 				return false;
 		}
 		return true;
 	}
 
 	protected boolean _case(JvmOperation input, XAssignment op, EReference ref, JvmFeatureDescription jvmFeatureDescription) {
-		if (input.getParameters().size() != 1)
+		final int callTypeDelta = getCallTypeDelta(jvmFeatureDescription);
+		if (input.getParameters().size() != (1+callTypeDelta))
 			return false;
 		if (op.getValue() != null) {
 			JvmTypeReference type = getTypeProvider().getType(op.getValue());
-			if (!isCompatibleArgument(input.getParameters().get(0).getParameterType(), type, op, jvmFeatureDescription))
+			final JvmFormalParameter valueParam = input.getParameters().get(0+callTypeDelta);
+			if (!isCompatibleArgument(valueParam.getParameterType(), type, op, jvmFeatureDescription))
 				return false;
 		}
 		return true;
+	}
+
+	protected int getCallTypeDelta(JvmFeatureDescription jvmFeatureDescription) {
+		return jvmFeatureDescription.isMemberSyntaxContext()?0:1;
 	}
 
 	protected boolean _case(JvmField input, XAssignment op, EReference ref, JvmFeatureDescription jvmFeatureDescription) {
@@ -171,7 +179,8 @@ public class CallableFeaturePredicate implements Predicate<IEObjectDescription> 
 
 	protected boolean checkJvmOperation(JvmOperation input, XAbstractFeatureCall context, boolean isExplicitOperationCall, JvmFeatureDescription jvmFeatureDescription,
 			EList<XExpression> arguments) {
-		if (input.getParameters().size() != arguments.size())
+		final int memberCallDelta = getCallTypeDelta(jvmFeatureDescription);
+		if (input.getParameters().size()+memberCallDelta != arguments.size())
 			return false;
 		if (!isExplicitOperationCall && !isSugaredMethodInvocationWithoutParanthesis(jvmFeatureDescription))
 			return false;
@@ -179,7 +188,7 @@ public class CallableFeaturePredicate implements Predicate<IEObjectDescription> 
 		for (int i = 0; i < arguments.size(); i++) {
 			XExpression expression = arguments.get(i);
 			JvmTypeReference type = getTypeProvider().getType(expression);
-			JvmTypeReference declaredType = input.getParameters().get(i).getParameterType();
+			JvmTypeReference declaredType = input.getParameters().get(i+memberCallDelta).getParameterType();
 			if (!isCompatibleArgument(declaredType, type, context, jvmFeatureDescription))
 				return false;
 		}

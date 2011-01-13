@@ -22,6 +22,8 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getArguments <em>Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getFeature <em>Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getTypeArguments <em>Type Arguments</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getImplicitReceiver <em>Implicit Receiver</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#isTargetsMemberSyntaxCall <em>Targets Member Syntax Call</em>}</li>
  * </ul>
  * </p>
  *
@@ -103,5 +105,58 @@ public interface XAbstractFeatureCall extends XExpression
 	 * @generated
 	 */
 	EList<JvmTypeReference> getTypeArguments();
+
+	/**
+	 * Returns the value of the '<em><b>Implicit Receiver</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Implicit Receiver</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Implicit Receiver</em>' reference.
+	 * @see #setImplicitReceiver(JvmIdentifyableElement)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXAbstractFeatureCall_ImplicitReceiver()
+	 * @model transient="true" derived="true"
+	 * @generated
+	 */
+	JvmIdentifyableElement getImplicitReceiver();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getImplicitReceiver <em>Implicit Receiver</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Implicit Receiver</em>' reference.
+	 * @see #getImplicitReceiver()
+	 * @generated
+	 */
+	void setImplicitReceiver(JvmIdentifyableElement value);
+
+	/**
+	 * Returns the value of the '<em><b>Targets Member Syntax Call</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Targets Member Syntax Call</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Targets Member Syntax Call</em>' attribute.
+	 * @see #setTargetsMemberSyntaxCall(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXAbstractFeatureCall_TargetsMemberSyntaxCall()
+	 * @model default="true" transient="true"
+	 * @generated
+	 */
+	boolean isTargetsMemberSyntaxCall();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#isTargetsMemberSyntaxCall <em>Targets Member Syntax Call</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Targets Member Syntax Call</em>' attribute.
+	 * @see #isTargetsMemberSyntaxCall()
+	 * @generated
+	 */
+	void setTargetsMemberSyntaxCall(boolean value);
 
 } // XAbstractFeatureCall

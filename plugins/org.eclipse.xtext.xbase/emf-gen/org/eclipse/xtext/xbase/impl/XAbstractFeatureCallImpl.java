@@ -39,6 +39,8 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#getArguments <em>Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#getFeature <em>Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#getTypeArguments <em>Type Arguments</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#getImplicitReceiver <em>Implicit Receiver</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#isTargetsMemberSyntaxCall <em>Targets Member Syntax Call</em>}</li>
  * </ul>
  * </p>
  *
@@ -95,6 +97,36 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * @ordered
 	 */
 	protected EList<JvmTypeReference> typeArguments;
+
+	/**
+	 * The cached value of the '{@link #getImplicitReceiver() <em>Implicit Receiver</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImplicitReceiver()
+	 * @generated
+	 * @ordered
+	 */
+	protected JvmIdentifyableElement implicitReceiver;
+
+	/**
+	 * The default value of the '{@link #isTargetsMemberSyntaxCall() <em>Targets Member Syntax Call</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTargetsMemberSyntaxCall()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean TARGETS_MEMBER_SYNTAX_CALL_EDEFAULT = true;
+
+	/**
+	 * The cached value of the '{@link #isTargetsMemberSyntaxCall() <em>Targets Member Syntax Call</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTargetsMemberSyntaxCall()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean targetsMemberSyntaxCall = TARGETS_MEMBER_SYNTAX_CALL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -203,6 +235,72 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public JvmIdentifyableElement getImplicitReceiver()
+	{
+		if (implicitReceiver != null && implicitReceiver.eIsProxy())
+		{
+			InternalEObject oldImplicitReceiver = (InternalEObject)implicitReceiver;
+			implicitReceiver = (JvmIdentifyableElement)eResolveProxy(oldImplicitReceiver);
+			if (implicitReceiver != oldImplicitReceiver)
+			{
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER, oldImplicitReceiver, implicitReceiver));
+			}
+		}
+		return implicitReceiver;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmIdentifyableElement basicGetImplicitReceiver()
+	{
+		return implicitReceiver;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setImplicitReceiver(JvmIdentifyableElement newImplicitReceiver)
+	{
+		JvmIdentifyableElement oldImplicitReceiver = implicitReceiver;
+		implicitReceiver = newImplicitReceiver;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER, oldImplicitReceiver, implicitReceiver));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isTargetsMemberSyntaxCall()
+	{
+		return targetsMemberSyntaxCall;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTargetsMemberSyntaxCall(boolean newTargetsMemberSyntaxCall)
+	{
+		boolean oldTargetsMemberSyntaxCall = targetsMemberSyntaxCall;
+		targetsMemberSyntaxCall = newTargetsMemberSyntaxCall;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL, oldTargetsMemberSyntaxCall, targetsMemberSyntaxCall));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -233,6 +331,11 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 				return basicGetFeature();
 			case XbasePackage.XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS:
 				return getTypeArguments();
+			case XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER:
+				if (resolve) return getImplicitReceiver();
+				return basicGetImplicitReceiver();
+			case XbasePackage.XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL:
+				return isTargetsMemberSyntaxCall();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -255,6 +358,12 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 				getTypeArguments().clear();
 				getTypeArguments().addAll((Collection<? extends JvmTypeReference>)newValue);
 				return;
+			case XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER:
+				setImplicitReceiver((JvmIdentifyableElement)newValue);
+				return;
+			case XbasePackage.XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL:
+				setTargetsMemberSyntaxCall((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -274,6 +383,12 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 				return;
 			case XbasePackage.XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS:
 				getTypeArguments().clear();
+				return;
+			case XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER:
+				setImplicitReceiver((JvmIdentifyableElement)null);
+				return;
+			case XbasePackage.XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL:
+				setTargetsMemberSyntaxCall(TARGETS_MEMBER_SYNTAX_CALL_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -297,6 +412,10 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 				return feature != null;
 			case XbasePackage.XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS:
 				return typeArguments != null && !typeArguments.isEmpty();
+			case XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER:
+				return implicitReceiver != null;
+			case XbasePackage.XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL:
+				return targetsMemberSyntaxCall != TARGETS_MEMBER_SYNTAX_CALL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -314,6 +433,8 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (featureName: ");
 		result.append(featureName);
+		result.append(", targetsMemberSyntaxCall: ");
+		result.append(targetsMemberSyntaxCall);
 		result.append(')');
 		return result.toString();
 	}

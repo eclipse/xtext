@@ -13,11 +13,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
-
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XImplicitReceiverCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 
 /**
@@ -27,7 +24,6 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.xbase.impl.XAssignmentImpl#getImplicitReceiver <em>Implicit Receiver</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAssignmentImpl#getAssignable <em>Assignable</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAssignmentImpl#getValue <em>Value</em>}</li>
  * </ul>
@@ -37,16 +33,6 @@ import org.eclipse.xtext.xbase.XbasePackage;
  */
 public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements XAssignment
 {
-	/**
-	 * The cached value of the '{@link #getImplicitReceiver() <em>Implicit Receiver</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getImplicitReceiver()
-	 * @generated
-	 * @ordered
-	 */
-	protected JvmIdentifyableElement implicitReceiver;
-
 	/**
 	 * The cached value of the '{@link #getAssignable() <em>Assignable</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -86,49 +72,6 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 	protected EClass eStaticClass()
 	{
 		return XbasePackage.Literals.XASSIGNMENT;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmIdentifyableElement getImplicitReceiver()
-	{
-		if (implicitReceiver != null && implicitReceiver.eIsProxy())
-		{
-			InternalEObject oldImplicitReceiver = (InternalEObject)implicitReceiver;
-			implicitReceiver = (JvmIdentifyableElement)eResolveProxy(oldImplicitReceiver);
-			if (implicitReceiver != oldImplicitReceiver)
-			{
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, XbasePackage.XASSIGNMENT__IMPLICIT_RECEIVER, oldImplicitReceiver, implicitReceiver));
-			}
-		}
-		return implicitReceiver;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmIdentifyableElement basicGetImplicitReceiver()
-	{
-		return implicitReceiver;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setImplicitReceiver(JvmIdentifyableElement newImplicitReceiver)
-	{
-		JvmIdentifyableElement oldImplicitReceiver = implicitReceiver;
-		implicitReceiver = newImplicitReceiver;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XASSIGNMENT__IMPLICIT_RECEIVER, oldImplicitReceiver, implicitReceiver));
 	}
 
 	/**
@@ -255,9 +198,6 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XASSIGNMENT__IMPLICIT_RECEIVER:
-				if (resolve) return getImplicitReceiver();
-				return basicGetImplicitReceiver();
 			case XbasePackage.XASSIGNMENT__ASSIGNABLE:
 				return getAssignable();
 			case XbasePackage.XASSIGNMENT__VALUE:
@@ -276,9 +216,6 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XASSIGNMENT__IMPLICIT_RECEIVER:
-				setImplicitReceiver((JvmIdentifyableElement)newValue);
-				return;
 			case XbasePackage.XASSIGNMENT__ASSIGNABLE:
 				setAssignable((XExpression)newValue);
 				return;
@@ -299,9 +236,6 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XASSIGNMENT__IMPLICIT_RECEIVER:
-				setImplicitReceiver((JvmIdentifyableElement)null);
-				return;
 			case XbasePackage.XASSIGNMENT__ASSIGNABLE:
 				setAssignable((XExpression)null);
 				return;
@@ -322,52 +256,12 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XASSIGNMENT__IMPLICIT_RECEIVER:
-				return implicitReceiver != null;
 			case XbasePackage.XASSIGNMENT__ASSIGNABLE:
 				return assignable != null;
 			case XbasePackage.XASSIGNMENT__VALUE:
 				return value != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
-	{
-		if (baseClass == XImplicitReceiverCall.class)
-		{
-			switch (derivedFeatureID)
-			{
-				case XbasePackage.XASSIGNMENT__IMPLICIT_RECEIVER: return XbasePackage.XIMPLICIT_RECEIVER_CALL__IMPLICIT_RECEIVER;
-				default: return -1;
-			}
-		}
-		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
-	{
-		if (baseClass == XImplicitReceiverCall.class)
-		{
-			switch (baseFeatureID)
-			{
-				case XbasePackage.XIMPLICIT_RECEIVER_CALL__IMPLICIT_RECEIVER: return XbasePackage.XASSIGNMENT__IMPLICIT_RECEIVER;
-				default: return -1;
-			}
-		}
-		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 } //XAssignmentImpl

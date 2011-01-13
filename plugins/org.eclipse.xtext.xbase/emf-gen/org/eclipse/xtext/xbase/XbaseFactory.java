@@ -251,15 +251,6 @@ public interface XbaseFactory extends EFactory
 	XAssignment createXAssignment();
 
 	/**
-	 * Returns a new object of class '<em>XImplicit Receiver Call</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>XImplicit Receiver Call</em>'.
-	 * @generated
-	 */
-	XImplicitReceiverCall createXImplicitReceiverCall();
-
-	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

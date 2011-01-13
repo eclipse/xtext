@@ -43,7 +43,7 @@ public class XFeatureCallSugarDescriptionProvider extends DefaultJvmFeatureDescr
 		if (feature instanceof JvmOperation) {
 			JvmOperation op = (JvmOperation) feature;
 			// handle operator mapping
-			if (op.getParameters().size() <= 1) {
+			if (op.getParameters().size() <= 1 + (isMemberFeatureContext(op)?0:1)) {
 				QualifiedName operator = operatorMapping.getOperator(QualifiedName.create(op.getSimpleName()));
 				if (operator != null) {
 					final String shadowingString = getSignature(op, context).replace(op.getSimpleName(),
