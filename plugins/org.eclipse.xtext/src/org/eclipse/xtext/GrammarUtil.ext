@@ -108,3 +108,6 @@ Boolean isMultipleCardinality(AbstractElement e) :
 	
 Boolean isOptionalCardinality(AbstractElement e) :
 	JAVA org.eclipse.xtext.GrammarUtil.isOptionalCardinality(org.eclipse.xtext.AbstractElement);
+
+Collection[EPackage] allEPackagesToValidate(Grammar this):
+	JAVA org.eclipse.xtext.GrammarUtil.allEPackagesToValidate(org.eclipse.xtext.Grammar);

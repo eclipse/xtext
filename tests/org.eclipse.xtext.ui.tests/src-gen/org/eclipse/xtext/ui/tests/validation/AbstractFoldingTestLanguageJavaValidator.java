@@ -8,7 +8,7 @@ import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 
 public class AbstractFoldingTestLanguageJavaValidator extends AbstractDeclarativeValidator {
 
-@Override
+	@Override
 	protected List<EPackage> getEPackages() {
 	    List<EPackage> result = new ArrayList<EPackage>();
 	    result.add(org.eclipse.xtext.ui.tests.folding.FoldingPackage.eINSTANCE);

@@ -553,7 +553,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getDataTypeRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleDataType_in_entryRuleDataType417);
+            pushFollow(FollowSets000.FOLLOW_ruleDataType_in_entryRuleDataType416);
             iv_ruleDataType=ruleDataType();
 
             state._fsp--;
@@ -561,7 +561,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
             if ( state.backtracking==0 ) {
                current =iv_ruleDataType; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDataType427); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDataType426); if (state.failed) return current;
 
             }
 
@@ -602,7 +602,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:243:1: (lv_baseType_0_0= RULE_ID )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:244:3: lv_baseType_0_0= RULE_ID
             {
-            lv_baseType_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleDataType469); if (state.failed) return current;
+            lv_baseType_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleDataType468); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			newLeafNode(lv_baseType_0_0, grammarAccess.getDataTypeAccess().getBaseTypeIDTerminalRuleCall_0_0()); 
@@ -637,7 +637,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
                 case 1 :
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:261:2: otherlv_1= KEYWORD_6 ( (lv_defaultValue_2_0= RULE_STRING ) )
                     {
-                    otherlv_1=(Token)match(input,KEYWORD_6,FollowSets000.FOLLOW_KEYWORD_6_in_ruleDataType488); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,KEYWORD_6,FollowSets000.FOLLOW_KEYWORD_6_in_ruleDataType487); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_1, grammarAccess.getDataTypeAccess().getColonEqualsSignKeyword_1_0());
@@ -649,7 +649,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:266:1: (lv_defaultValue_2_0= RULE_STRING )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:267:3: lv_defaultValue_2_0= RULE_STRING
                     {
-                    lv_defaultValue_2_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleDataType505); if (state.failed) return current;
+                    lv_defaultValue_2_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleDataType503); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       			newLeafNode(lv_defaultValue_2_0, grammarAccess.getDataTypeAccess().getDefaultValueSTRINGTerminalRuleCall_1_1_0()); 
@@ -722,7 +722,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getExpressionRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_entryRuleExpression553);
+            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_entryRuleExpression551);
             iv_ruleExpression=ruleExpression();
 
             state._fsp--;
@@ -730,7 +730,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
             if ( state.backtracking==0 ) {
                current =iv_ruleExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExpression563); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExpression561); if (state.failed) return current;
 
             }
 
@@ -856,7 +856,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:340:16: (otherlv_2= KEYWORD_4 )
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:341:2: otherlv_2= KEYWORD_4
             	    {
-            	    otherlv_2=(Token)match(input,KEYWORD_4,FollowSets000.FOLLOW_KEYWORD_4_in_ruleExpression663); if (state.failed) return current;
+            	    otherlv_2=(Token)match(input,KEYWORD_4,FollowSets000.FOLLOW_KEYWORD_4_in_ruleExpression661); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	newLeafNode(otherlv_2, grammarAccess.getExpressionAccess().getLeftSquareBracketKeyword_1_0());
@@ -905,7 +905,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:358:1: (lv_prefix_3_0= RULE_STRING )
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:359:3: lv_prefix_3_0= RULE_STRING
             	    {
-            	    lv_prefix_3_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleExpression735); if (state.failed) return current;
+            	    lv_prefix_3_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleExpression732); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      			newLeafNode(lv_prefix_3_0, grammarAccess.getExpressionAccess().getPrefixSTRINGTerminalRuleCall_1_1_0()); 
@@ -984,7 +984,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
             	        case 1 :
             	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:390:2: otherlv_4= KEYWORD_4
             	            {
-            	            otherlv_4=(Token)match(input,KEYWORD_4,FollowSets000.FOLLOW_KEYWORD_4_in_ruleExpression795); if (state.failed) return current;
+            	            otherlv_4=(Token)match(input,KEYWORD_4,FollowSets000.FOLLOW_KEYWORD_4_in_ruleExpression792); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	                  	newLeafNode(otherlv_4, grammarAccess.getExpressionAccess().getLeftSquareBracketKeyword_2_0());
@@ -1007,7 +1007,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
             	      	        newCompositeNode(grammarAccess.getExpressionAccess().getTermsSimpleTermParserRuleCall_2_1_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleSimpleTerm_in_ruleExpression818);
+            	    pushFollow(FollowSets000.FOLLOW_ruleSimpleTerm_in_ruleExpression814);
             	    lv_terms_5_0=ruleSimpleTerm();
 
             	    state._fsp--;
@@ -1046,7 +1046,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
             	        case 1 :
             	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:413:2: otherlv_6= KEYWORD_5
             	            {
-            	            otherlv_6=(Token)match(input,KEYWORD_5,FollowSets000.FOLLOW_KEYWORD_5_in_ruleExpression832); if (state.failed) return current;
+            	            otherlv_6=(Token)match(input,KEYWORD_5,FollowSets000.FOLLOW_KEYWORD_5_in_ruleExpression828); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	                  	newLeafNode(otherlv_6, grammarAccess.getExpressionAccess().getRightSquareBracketKeyword_2_2());
@@ -1116,7 +1116,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:431:16: (otherlv_8= KEYWORD_5 )
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:432:2: otherlv_8= KEYWORD_5
             	    {
-            	    otherlv_8=(Token)match(input,KEYWORD_5,FollowSets000.FOLLOW_KEYWORD_5_in_ruleExpression895); if (state.failed) return current;
+            	    otherlv_8=(Token)match(input,KEYWORD_5,FollowSets000.FOLLOW_KEYWORD_5_in_ruleExpression890); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	newLeafNode(otherlv_8, grammarAccess.getExpressionAccess().getRightSquareBracketKeyword_3_0());
@@ -1165,7 +1165,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:449:1: (lv_postfix_9_0= RULE_STRING )
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:450:3: lv_postfix_9_0= RULE_STRING
             	    {
-            	    lv_postfix_9_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleExpression967); if (state.failed) return current;
+            	    lv_postfix_9_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleExpression961); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      			newLeafNode(lv_postfix_9_0, grammarAccess.getExpressionAccess().getPostfixSTRINGTerminalRuleCall_3_1_0()); 
@@ -1258,7 +1258,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getSimpleTermRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleSimpleTerm_in_entryRuleSimpleTerm1051);
+            pushFollow(FollowSets000.FOLLOW_ruleSimpleTerm_in_entryRuleSimpleTerm1045);
             iv_ruleSimpleTerm=ruleSimpleTerm();
 
             state._fsp--;
@@ -1266,7 +1266,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
             if ( state.backtracking==0 ) {
                current =iv_ruleSimpleTerm; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSimpleTerm1061); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSimpleTerm1055); if (state.failed) return current;
 
             }
 
@@ -1331,7 +1331,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:505:1: (lv_lineCount_0_0= RULE_INT )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:506:3: lv_lineCount_0_0= RULE_INT
                     {
-                    lv_lineCount_0_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleSimpleTerm1104); if (state.failed) return current;
+                    lv_lineCount_0_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleSimpleTerm1098); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       			newLeafNode(lv_lineCount_0_0, grammarAccess.getSimpleTermAccess().getLineCountINTTerminalRuleCall_0_0_0()); 
@@ -1366,7 +1366,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
                         case 1 :
                             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:523:2: otherlv_1= KEYWORD_2
                             {
-                            otherlv_1=(Token)match(input,KEYWORD_2,FollowSets000.FOLLOW_KEYWORD_2_in_ruleSimpleTerm1123); if (state.failed) return current;
+                            otherlv_1=(Token)match(input,KEYWORD_2,FollowSets000.FOLLOW_KEYWORD_2_in_ruleSimpleTerm1117); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_1, grammarAccess.getSimpleTermAccess().getAsteriskKeyword_0_1());
@@ -1396,7 +1396,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
                             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:528:1: (lv_charCount_2_0= RULE_INT )
                             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:529:3: lv_charCount_2_0= RULE_INT
                             {
-                            lv_charCount_2_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleSimpleTerm1142); if (state.failed) return current;
+                            lv_charCount_2_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleSimpleTerm1135); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                               			newLeafNode(lv_charCount_2_0, grammarAccess.getSimpleTermAccess().getCharCountINTTerminalRuleCall_0_2_0()); 
@@ -1434,7 +1434,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
                         case 1 :
                             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:546:2: otherlv_3= KEYWORD_1
                             {
-                            otherlv_3=(Token)match(input,KEYWORD_1,FollowSets000.FOLLOW_KEYWORD_1_in_ruleSimpleTerm1162); if (state.failed) return current;
+                            otherlv_3=(Token)match(input,KEYWORD_1,FollowSets000.FOLLOW_KEYWORD_1_in_ruleSimpleTerm1155); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_3, grammarAccess.getSimpleTermAccess().getExclamationMarkKeyword_0_3());
@@ -1464,7 +1464,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
                             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:551:1: (lv_charSet_4_0= RULE_ID )
                             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:552:3: lv_charSet_4_0= RULE_ID
                             {
-                            lv_charSet_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSimpleTerm1181); if (state.failed) return current;
+                            lv_charSet_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSimpleTerm1173); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                               			newLeafNode(lv_charSet_4_0, grammarAccess.getSimpleTermAccess().getCharSetIDTerminalRuleCall_0_4_0()); 
@@ -1506,7 +1506,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:570:1: (lv_refChar_5_0= RULE_ID )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:571:3: lv_refChar_5_0= RULE_ID
                     {
-                    lv_refChar_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSimpleTerm1211); if (state.failed) return current;
+                    lv_refChar_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSimpleTerm1203); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       			newLeafNode(lv_refChar_5_0, grammarAccess.getSimpleTermAccess().getRefCharIDTerminalRuleCall_1_0()); 
@@ -1611,7 +1611,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
         // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:340:16: (otherlv_2= KEYWORD_4 )
         // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:341:2: otherlv_2= KEYWORD_4
         {
-        otherlv_2=(Token)match(input,KEYWORD_4,FollowSets000.FOLLOW_KEYWORD_4_in_synpred4_InternalExBacktrackingBug325745TestLanguageParser663); if (state.failed) return ;
+        otherlv_2=(Token)match(input,KEYWORD_4,FollowSets000.FOLLOW_KEYWORD_4_in_synpred4_InternalExBacktrackingBug325745TestLanguageParser661); if (state.failed) return ;
 
         }
 
@@ -1660,7 +1660,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
         // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:358:1: (lv_prefix_3_0= RULE_STRING )
         // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:359:3: lv_prefix_3_0= RULE_STRING
         {
-        lv_prefix_3_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_synpred5_InternalExBacktrackingBug325745TestLanguageParser735); if (state.failed) return ;
+        lv_prefix_3_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_synpred5_InternalExBacktrackingBug325745TestLanguageParser732); if (state.failed) return ;
 
         }
 
@@ -1688,7 +1688,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
         // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:413:2: (otherlv_6= KEYWORD_5 )
         // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:413:2: otherlv_6= KEYWORD_5
         {
-        otherlv_6=(Token)match(input,KEYWORD_5,FollowSets000.FOLLOW_KEYWORD_5_in_synpred7_InternalExBacktrackingBug325745TestLanguageParser832); if (state.failed) return ;
+        otherlv_6=(Token)match(input,KEYWORD_5,FollowSets000.FOLLOW_KEYWORD_5_in_synpred7_InternalExBacktrackingBug325745TestLanguageParser828); if (state.failed) return ;
 
         }
     }
@@ -1722,7 +1722,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
         // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:431:16: (otherlv_8= KEYWORD_5 )
         // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:432:2: otherlv_8= KEYWORD_5
         {
-        otherlv_8=(Token)match(input,KEYWORD_5,FollowSets000.FOLLOW_KEYWORD_5_in_synpred9_InternalExBacktrackingBug325745TestLanguageParser895); if (state.failed) return ;
+        otherlv_8=(Token)match(input,KEYWORD_5,FollowSets000.FOLLOW_KEYWORD_5_in_synpred9_InternalExBacktrackingBug325745TestLanguageParser890); if (state.failed) return ;
 
         }
 
@@ -1771,7 +1771,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
         // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:449:1: (lv_postfix_9_0= RULE_STRING )
         // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:450:3: lv_postfix_9_0= RULE_STRING
         {
-        lv_postfix_9_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_synpred10_InternalExBacktrackingBug325745TestLanguageParser967); if (state.failed) return ;
+        lv_postfix_9_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_synpred10_InternalExBacktrackingBug325745TestLanguageParser961); if (state.failed) return ;
 
         }
 
@@ -1802,7 +1802,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
         // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:528:1: (lv_charCount_2_0= RULE_INT )
         // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:529:3: lv_charCount_2_0= RULE_INT
         {
-        lv_charCount_2_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_synpred12_InternalExBacktrackingBug325745TestLanguageParser1142); if (state.failed) return ;
+        lv_charCount_2_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_synpred12_InternalExBacktrackingBug325745TestLanguageParser1135); if (state.failed) return ;
 
         }
 
@@ -1821,7 +1821,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
         // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:551:1: (lv_charSet_4_0= RULE_ID )
         // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExBacktrackingBug325745TestLanguageParser.g:552:3: lv_charSet_4_0= RULE_ID
         {
-        lv_charSet_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_synpred14_InternalExBacktrackingBug325745TestLanguageParser1181); if (state.failed) return ;
+        lv_charSet_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_synpred14_InternalExBacktrackingBug325745TestLanguageParser1173); if (state.failed) return ;
 
         }
 
@@ -1962,36 +1962,36 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
         public static final BitSet FOLLOW_ruleDataType_in_ruleElement347 = new BitSet(new long[]{0x0000000000001F80L});
         public static final BitSet FOLLOW_ruleExpression_in_ruleElement369 = new BitSet(new long[]{0x0000000000000080L});
         public static final BitSet FOLLOW_KEYWORD_3_in_ruleElement382 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleDataType_in_entryRuleDataType417 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleDataType427 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleDataType469 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_KEYWORD_6_in_ruleDataType488 = new BitSet(new long[]{0x0000000000001000L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleDataType505 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpression_in_entryRuleExpression553 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleExpression563 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_4_in_ruleExpression663 = new BitSet(new long[]{0x0000000000001F02L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleExpression735 = new BitSet(new long[]{0x0000000000001F02L});
-        public static final BitSet FOLLOW_KEYWORD_4_in_ruleExpression795 = new BitSet(new long[]{0x0000000000000D00L});
-        public static final BitSet FOLLOW_ruleSimpleTerm_in_ruleExpression818 = new BitSet(new long[]{0x0000000000001F02L});
-        public static final BitSet FOLLOW_KEYWORD_5_in_ruleExpression832 = new BitSet(new long[]{0x0000000000001F02L});
-        public static final BitSet FOLLOW_KEYWORD_5_in_ruleExpression895 = new BitSet(new long[]{0x0000000000001202L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleExpression967 = new BitSet(new long[]{0x0000000000001202L});
-        public static final BitSet FOLLOW_ruleSimpleTerm_in_entryRuleSimpleTerm1051 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSimpleTerm1061 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleSimpleTerm1104 = new BitSet(new long[]{0x0000000000000C62L});
-        public static final BitSet FOLLOW_KEYWORD_2_in_ruleSimpleTerm1123 = new BitSet(new long[]{0x0000000000000C22L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleSimpleTerm1142 = new BitSet(new long[]{0x0000000000000422L});
-        public static final BitSet FOLLOW_KEYWORD_1_in_ruleSimpleTerm1162 = new BitSet(new long[]{0x0000000000000402L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleTerm1181 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleTerm1211 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleDataType_in_entryRuleDataType416 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleDataType426 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleDataType468 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_KEYWORD_6_in_ruleDataType487 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_RULE_STRING_in_ruleDataType503 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpression_in_entryRuleExpression551 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleExpression561 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_KEYWORD_4_in_ruleExpression661 = new BitSet(new long[]{0x0000000000001F02L});
+        public static final BitSet FOLLOW_RULE_STRING_in_ruleExpression732 = new BitSet(new long[]{0x0000000000001F02L});
+        public static final BitSet FOLLOW_KEYWORD_4_in_ruleExpression792 = new BitSet(new long[]{0x0000000000000D00L});
+        public static final BitSet FOLLOW_ruleSimpleTerm_in_ruleExpression814 = new BitSet(new long[]{0x0000000000001F02L});
+        public static final BitSet FOLLOW_KEYWORD_5_in_ruleExpression828 = new BitSet(new long[]{0x0000000000001F02L});
+        public static final BitSet FOLLOW_KEYWORD_5_in_ruleExpression890 = new BitSet(new long[]{0x0000000000001202L});
+        public static final BitSet FOLLOW_RULE_STRING_in_ruleExpression961 = new BitSet(new long[]{0x0000000000001202L});
+        public static final BitSet FOLLOW_ruleSimpleTerm_in_entryRuleSimpleTerm1045 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleSimpleTerm1055 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleSimpleTerm1098 = new BitSet(new long[]{0x0000000000000C62L});
+        public static final BitSet FOLLOW_KEYWORD_2_in_ruleSimpleTerm1117 = new BitSet(new long[]{0x0000000000000C22L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleSimpleTerm1135 = new BitSet(new long[]{0x0000000000000422L});
+        public static final BitSet FOLLOW_KEYWORD_1_in_ruleSimpleTerm1155 = new BitSet(new long[]{0x0000000000000402L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleTerm1173 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleTerm1203 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleDataType_in_synpred2_InternalExBacktrackingBug325745TestLanguageParser347 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_4_in_synpred4_InternalExBacktrackingBug325745TestLanguageParser663 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_synpred5_InternalExBacktrackingBug325745TestLanguageParser735 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_5_in_synpred7_InternalExBacktrackingBug325745TestLanguageParser832 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_5_in_synpred9_InternalExBacktrackingBug325745TestLanguageParser895 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_synpred10_InternalExBacktrackingBug325745TestLanguageParser967 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_INT_in_synpred12_InternalExBacktrackingBug325745TestLanguageParser1142 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_synpred14_InternalExBacktrackingBug325745TestLanguageParser1181 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_KEYWORD_4_in_synpred4_InternalExBacktrackingBug325745TestLanguageParser661 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_synpred5_InternalExBacktrackingBug325745TestLanguageParser732 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_KEYWORD_5_in_synpred7_InternalExBacktrackingBug325745TestLanguageParser828 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_KEYWORD_5_in_synpred9_InternalExBacktrackingBug325745TestLanguageParser890 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_synpred10_InternalExBacktrackingBug325745TestLanguageParser961 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_synpred12_InternalExBacktrackingBug325745TestLanguageParser1135 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_synpred14_InternalExBacktrackingBug325745TestLanguageParser1173 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

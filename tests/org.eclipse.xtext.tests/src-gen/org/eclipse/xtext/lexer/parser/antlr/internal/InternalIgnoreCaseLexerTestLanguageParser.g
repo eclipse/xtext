@@ -72,23 +72,23 @@ ruleModel returns [EObject current=null]
     }
     @after { leaveRule(); }:
 (
-	otherlv_0=KEYWORD_2 
+	otherlv_0=KEYWORD_2
     {
     	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getCaseKeyword_0());
     }
 (
-	otherlv_1=KEYWORD_1 
+	otherlv_1=KEYWORD_1
     {
     	newLeafNode(otherlv_1, grammarAccess.getModelAccess().getFooKeyword_1());
     }
 )?(
 (
 		lv_value_2_0=
-	KEYWORD_2 
+	KEYWORD_2
     {
         newLeafNode(lv_value_2_0, grammarAccess.getModelAccess().getValueCaSeKeyword_2_0());
     }
- 
+
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());

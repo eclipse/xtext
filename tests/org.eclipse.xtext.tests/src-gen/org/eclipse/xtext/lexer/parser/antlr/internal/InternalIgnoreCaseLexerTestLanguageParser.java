@@ -137,7 +137,7 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
                 case 1 :
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalIgnoreCaseLexerTestLanguageParser.g:80:2: otherlv_1= KEYWORD_1
                     {
-                    otherlv_1=(Token)match(input,KEYWORD_1,FollowSets000.FOLLOW_KEYWORD_1_in_ruleModel129); 
+                    otherlv_1=(Token)match(input,KEYWORD_1,FollowSets000.FOLLOW_KEYWORD_1_in_ruleModel128); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getModelAccess().getFooKeyword_1());
                         
@@ -153,7 +153,7 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalIgnoreCaseLexerTestLanguageParser.g:85:1: (lv_value_2_0= KEYWORD_2 )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalIgnoreCaseLexerTestLanguageParser.g:86:3: lv_value_2_0= KEYWORD_2
             {
-            lv_value_2_0=(Token)match(input,KEYWORD_2,FollowSets000.FOLLOW_KEYWORD_2_in_ruleModel150); 
+            lv_value_2_0=(Token)match(input,KEYWORD_2,FollowSets000.FOLLOW_KEYWORD_2_in_ruleModel148); 
 
                     newLeafNode(lv_value_2_0, grammarAccess.getModelAccess().getValueCaSeKeyword_2_0());
                 
@@ -198,8 +198,8 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
         public static final BitSet FOLLOW_ruleModel_in_entryRuleModel67 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleModel77 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_KEYWORD_2_in_ruleModel115 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_KEYWORD_1_in_ruleModel129 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_KEYWORD_2_in_ruleModel150 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_KEYWORD_1_in_ruleModel128 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_KEYWORD_2_in_ruleModel148 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

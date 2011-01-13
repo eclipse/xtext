@@ -16,7 +16,7 @@
 «EXTENSION org::eclipse::xtext::generator::validation::JavaValidatorFragment»
 
 
-«DEFINE generate(List[String] packageQNames, boolean isRegisterForImportedPackages, List[String] composedChecks) FOR Grammar»
+«DEFINE generate(List[String] packageQNames, List[String] composedChecks) FOR Grammar»
 «FILE getValidatorName("Abstract").asPath()+".java" SRC_GEN-»
 package «getValidatorName("Abstract").toJavaPackage()»;
  
@@ -34,7 +34,7 @@ import org.eclipse.xtext.validation.ComposedChecks;
 «ENDIF-»
 public class «getValidatorName("Abstract").toSimpleName()» extends AbstractDeclarativeValidator {
 
-   	«EXPAND Common::getEPackages(packageQNames, isRegisterForImportedPackages)-»
+   	«EXPAND Common::getEPackages(packageQNames)-»
 
 }
 «ENDFILE»
@@ -57,14 +57,14 @@ public class «getValidatorName("").toSimpleName()» extends «getValidatorName("Ab
 «ENDDEFINE»
 
 
-«DEFINE addToPluginXmlRt(List[String] packageQNames, boolean isRegisterForImportedPackages, List[String] composedChecks) FOR Grammar»
+«DEFINE addToPluginXmlRt(List[String] packageQNames, List[String] composedChecks) FOR Grammar»
 «ENDDEFINE»
 
 
-«DEFINE addToPluginXmlUi(List[String] packageQNames, boolean isRegisterForImportedPackages, List[String] composedChecks) FOR Grammar»
+«DEFINE addToPluginXmlUi(List[String] packageQNames, List[String] composedChecks) FOR Grammar»
 «ENDDEFINE»
 
 
-«DEFINE addToStandaloneSetup(List[String] packageQNames, boolean isRegisterForImportedPackages, List[String] composedChecks) FOR Grammar»
+«DEFINE addToStandaloneSetup(List[String] packageQNames, List[String] composedChecks) FOR Grammar»
 «ENDDEFINE»
 

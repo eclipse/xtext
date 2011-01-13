@@ -137,7 +137,7 @@ public class InternalBug299237TestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug299237TestLanguageParser.g:80:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug299237TestLanguageParser.g:81:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleModel132); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleModel131); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -157,7 +157,7 @@ public class InternalBug299237TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            otherlv_2=(Token)match(input,KEYWORD_1,FollowSets000.FOLLOW_KEYWORD_1_in_ruleModel150); 
+            otherlv_2=(Token)match(input,KEYWORD_1,FollowSets000.FOLLOW_KEYWORD_1_in_ruleModel149); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getModelAccess().getSemicolonKeyword_2());
                 
@@ -190,8 +190,8 @@ public class InternalBug299237TestLanguageParser extends AbstractInternalAntlrPa
         public static final BitSet FOLLOW_ruleModel_in_entryRuleModel67 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleModel77 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_KEYWORD_2_in_ruleModel115 = new BitSet(new long[]{0x0000000000000040L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleModel132 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_KEYWORD_1_in_ruleModel150 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleModel131 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_KEYWORD_1_in_ruleModel149 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

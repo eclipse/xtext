@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.validation;
 
+import static java.util.Collections.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +21,6 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.util.Strings;
 
-import com.google.common.collect.Lists;
-
 /**
  * Common base class for {@link IGeneratorFragment fragments} generating some validation support classes.
  * 
@@ -28,14 +28,8 @@ import com.google.common.collect.Lists;
  */
 public abstract class AbstractValidatorFragment extends AbstractGeneratorFragment {
 
-	private boolean isRegisterForImportedPackages = false;
-
 	public void setBasePackage(String basePackage) {
 		throw new UnsupportedOperationException();
-	}
-
-	public void setRegisterForImportedPackages(boolean isRegisterForImportedPackages) {
-		this.isRegisterForImportedPackages = isRegisterForImportedPackages;
 	}
 
 	public String getBasePackage(Grammar g, Naming n) {
@@ -63,6 +57,6 @@ public abstract class AbstractValidatorFragment extends AbstractGeneratorFragmen
 		for (GeneratedMetamodel generatedMetamodel : list) {
 			packageQNames.add(getGeneratedEPackageName(grammar, getNaming(), generatedMetamodel.getEPackage()));
 		}
-		return Lists.newArrayList(packageQNames, isRegisterForImportedPackages);
+		return singletonList((Object)packageQNames);
 	}
 }

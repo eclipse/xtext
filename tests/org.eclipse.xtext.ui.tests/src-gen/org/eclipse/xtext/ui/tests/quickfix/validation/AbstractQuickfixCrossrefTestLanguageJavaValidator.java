@@ -8,7 +8,7 @@ import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 
 public class AbstractQuickfixCrossrefTestLanguageJavaValidator extends AbstractDeclarativeValidator {
 
-@Override
+	@Override
 	protected List<EPackage> getEPackages() {
 	    List<EPackage> result = new ArrayList<EPackage>();
 	    result.add(org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefPackage.eINSTANCE);

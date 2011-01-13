@@ -313,13 +313,13 @@ ruleEnumName returns [Enumerator current=null]
     @init { enterRule(); }
     @after { leaveRule(); }:
 ((    enumLiteral_0=KEYWORD_1
-	{
+    {
         $current = grammarAccess.getEnumNameAccess().getAbcEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
         newLeafNode(enumLiteral_0, grammarAccess.getEnumNameAccess().getAbcEnumLiteralDeclaration_0()); 
     }
 )
     |(    enumLiteral_1=KEYWORD_2
-	{
+    {
         $current = grammarAccess.getEnumNameAccess().getEfgEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
         newLeafNode(enumLiteral_1, grammarAccess.getEnumNameAccess().getEfgEnumLiteralDeclaration_1()); 
     }

@@ -825,7 +825,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguageParser.g:321:6: (enumLiteral_1= KEYWORD_2 )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguageParser.g:321:11: enumLiteral_1= KEYWORD_2
                     {
-                    enumLiteral_1=(Token)match(input,KEYWORD_2,FollowSets000.FOLLOW_KEYWORD_2_in_ruleEnumName550); if (state.failed) return current;
+                    enumLiteral_1=(Token)match(input,KEYWORD_2,FollowSets000.FOLLOW_KEYWORD_2_in_ruleEnumName553); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getEnumNameAccess().getEfgEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
@@ -884,7 +884,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
         public static final BitSet FOLLOW_RULE_CHARX_in_ruleXb451 = new BitSet(new long[]{0x0000000000000080L});
         public static final BitSet FOLLOW_RULE_CHARB_in_ruleXb473 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_KEYWORD_1_in_ruleEnumName531 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_2_in_ruleEnumName550 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_KEYWORD_2_in_ruleEnumName553 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

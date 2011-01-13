@@ -78,7 +78,7 @@ ruleModel returns [EObject current=null]
     }
     @after { leaveRule(); }:
 ((
-	otherlv_0=KEYWORD_2 
+	otherlv_0=KEYWORD_2
     {
     	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getModelKeyword_0_0());
     }
@@ -102,7 +102,7 @@ ruleModel returns [EObject current=null]
 )
 )*)
     |(
-	otherlv_2=KEYWORD_3 
+	otherlv_2=KEYWORD_3
     {
     	newLeafNode(otherlv_2, grammarAccess.getModelAccess().getDataTypeKeyword_1_0());
     }
@@ -203,11 +203,11 @@ rulePreop returns [EObject current=null]
 )(
 (
 		lv_functionName_1_0=
-	KEYWORD_1 
+	KEYWORD_1
     {
         newLeafNode(lv_functionName_1_0, grammarAccess.getPreopAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_0());
     }
- 
+
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getPreopRule());
@@ -279,11 +279,11 @@ rulePostop returns [EObject current=null]
 )(
 (
 		lv_functionName_2_0=
-	KEYWORD_1 
+	KEYWORD_1
     {
         newLeafNode(lv_functionName_2_0, grammarAccess.getPostopAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_1_0());
     }
- 
+
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getPostopRule());
