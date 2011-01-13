@@ -43,8 +43,6 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 
 	public void testCast() throws Exception {
 		assertNoConformanceError("'foo' as Object");
-		assertConformanceError("'foo' as Boolean", XbasePackage.Literals.XSTRING_LITERAL, "java.lang.Boolean",
-		"java.lang.String");
 	}
 	
 	public void testVariableDeclaration() throws Exception {
