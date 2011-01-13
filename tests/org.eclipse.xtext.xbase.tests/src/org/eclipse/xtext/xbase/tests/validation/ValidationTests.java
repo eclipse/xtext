@@ -72,4 +72,41 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		XExpression expression = expression("new testdata.AbstractClassWithPublicConstructor()");
 		helper.assertError(expression, XCONSTRUCTOR_CALL, XbaseJavaValidator.ABSTRACT_CLASS_INSTANTIATION, "abstract", "instantiate", "class");
 	}
+	
+	public void testCast_0() throws Exception {
+		XExpression expression = expression("'foo' as String");
+		helper.assertError(expression, XCASTED_EXPRESSION, XbaseJavaValidator.OBSOLETE_CAST, "cast", "obsolete");
+		helper.assertNoError(expression, XbaseJavaValidator.INVALID_CAST);
+	}
+
+	public void testCast_1() throws Exception {
+		XExpression expression = expression("'foo' as Cloneable");
+		helper.assertError(expression, XCASTED_EXPRESSION, XbaseJavaValidator.INVALID_CAST, "sealed", "type");
+		helper.assertNoError(expression, XbaseJavaValidator.OBSOLETE_CAST);
+	}
+
+	public void testCast_2() throws Exception {
+		XExpression expression = expression("new Object() as String");
+		helper.assertError(expression, XCASTED_EXPRESSION, XbaseJavaValidator.INVALID_CAST, "incompatible", "type");
+		helper.assertNoError(expression, XbaseJavaValidator.OBSOLETE_CAST);
+	}
+
+	public void testInstanceOf_0() throws Exception {
+		XExpression expression = expression("'foo' instanceof String");
+		helper.assertError(expression, XINSTANCE_OF_EXPRESSION, XbaseJavaValidator.OBSOLETE_INSTANCEOF, "condition", "always", "true");
+		helper.assertNoError(expression, XbaseJavaValidator.INVALID_INSTANCEOF);
+	}
+
+	public void testInstanceOf_1() throws Exception {
+		XExpression expression = expression("'foo' instanceof Cloneable");
+		helper.assertError(expression, XINSTANCE_OF_EXPRESSION, XbaseJavaValidator.INVALID_INSTANCEOF, "incompatible", "type");
+		helper.assertNoError(expression, XbaseJavaValidator.OBSOLETE_INSTANCEOF);
+	}
+
+	public void testInstanceOf_2() throws Exception {
+		XExpression expression = expression("new Object() instanceof String");
+		helper.assertError(expression, XINSTANCE_OF_EXPRESSION, XbaseJavaValidator.INVALID_INSTANCEOF, "incompatible", "type");
+		helper.assertNoError(expression, XbaseJavaValidator.OBSOLETE_INSTANCEOF);
+	}
+	
 }

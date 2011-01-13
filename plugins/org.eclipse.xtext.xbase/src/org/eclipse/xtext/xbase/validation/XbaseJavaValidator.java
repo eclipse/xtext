@@ -11,8 +11,12 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.typing.IExpectedTypeProvider;
 import org.eclipse.xtext.typing.TypeResolutionException;
@@ -23,6 +27,7 @@ import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -41,10 +46,17 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			+ ".missing_initialization";
 	public static final String MISSING_TYPE = XbaseJavaValidator.class.getCanonicalName() + ".missing_type";
 	public static final String INVALID_CAST = XbaseJavaValidator.class.getCanonicalName() + ".invalid_cast";
-	public static final String INVALID_INNER_EXPRESSION = XbaseJavaValidator.class.getCanonicalName() + ".invalid_inner_expression";
-	public static final String FEATURE_CALL_ON_VOID = XbaseJavaValidator.class.getCanonicalName() + ".feature_call_on_void";
-	public static final String ABSTRACT_CLASS_INSTANTIATION = XbaseJavaValidator.class.getCanonicalName() + ".abstract_class_instantiation";
-	
+	public static final String OBSOLETE_CAST = XbaseJavaValidator.class.getCanonicalName() + ".obsolete_cast";
+	public static final String INVALID_INSTANCEOF = XbaseJavaValidator.class.getCanonicalName() + ".invalid_instanceof";
+	public static final String OBSOLETE_INSTANCEOF = XbaseJavaValidator.class.getCanonicalName()
+			+ ".obsolete_instanceof";
+	public static final String INVALID_INNER_EXPRESSION = XbaseJavaValidator.class.getCanonicalName()
+			+ ".invalid_inner_expression";
+	public static final String FEATURE_CALL_ON_VOID = XbaseJavaValidator.class.getCanonicalName()
+			+ ".feature_call_on_void";
+	public static final String ABSTRACT_CLASS_INSTANTIATION = XbaseJavaValidator.class.getCanonicalName()
+			+ ".abstract_class_instantiation";
+
 	@Inject
 	private IXbaseTypeProvider typeProvider;
 
@@ -56,10 +68,13 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Inject
 	private XExpressionHelper expressionHelper;
-	
+
 	@Inject
 	private TypesService typesService;
-	
+
+	@Inject
+	private TypesFactory factory;
+
 	@Check
 	public void checkTypes(EObject obj) {
 		try {
@@ -88,7 +103,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			error("Assignment to final variable", XASSIGNMENT__ASSIGNABLE, ASSIGNMENT_TO_FINAL);
 		else if (assignmentFeature instanceof JvmFormalParameter)
 			error("Assignment to final parameter", XASSIGNMENT__ASSIGNABLE, ASSIGNMENT_TO_FINAL);
-		else if (assignmentFeature instanceof JvmField && ((JvmField)assignmentFeature).isFinal())
+		else if (assignmentFeature instanceof JvmField && ((JvmField) assignmentFeature).isFinal())
 			error("Assignment to final feature", XASSIGNMENT__ASSIGNABLE, ASSIGNMENT_TO_FINAL);
 	}
 
@@ -104,42 +119,66 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Check
 	public void checkInnerExpressions(XBlockExpression block) {
-		for(int i=0; i< block.getExpressions().size()-1; ++i) {
+		for (int i = 0; i < block.getExpressions().size() - 1; ++i) {
 			XExpression expr = block.getExpressions().get(i);
-			if(expressionHelper.isLiteral(expr)) {
-				error("Literals can only appear as the last element of a block expression", expr, -1, INVALID_INNER_EXPRESSION);
-			} else if(expr instanceof XThrowExpression) {
+			if (expressionHelper.isLiteral(expr)) {
+				error("Literals can only appear as the last element of a block expression", expr, -1,
+						INVALID_INNER_EXPRESSION);
+			} else if (expr instanceof XThrowExpression) {
 				error("Throws clause must be last element of a block expression", expr, -1, INVALID_INNER_EXPRESSION);
 			}
 		}
 	}
-	
+
 	@Check
 	public void checkInvalidCast(XCastedExpression cast) {
 		JvmTypeReference targetTypeRef = typeProvider.getType(cast.getTarget());
 		if (targetTypeRef.getType() instanceof JvmDeclaredType) {
-			if (((JvmDeclaredType) targetTypeRef.getType()).isFinal()
-					&& !conformanceComputer.isConformant(cast.getType(), targetTypeRef)) {
-				error("Element of sealed type " + canonicalName(targetTypeRef) + " cannot be cast to "
-						+ canonicalName(cast.getType()), XCASTED_EXPRESSION__TYPE, INVALID_CAST);
+			JvmDeclaredType targetType = (JvmDeclaredType) targetTypeRef.getType();
+			if (targetType.isFinal() && !conformanceComputer.isConformant(cast.getType(), targetTypeRef)) {
+				error("Cannot cast element of sealed type " + canonicalName(targetTypeRef) + " to "
+						+ canonicalName(cast.getType()), -1, INVALID_CAST);
+			} else if (!isInterface(cast.getType().getType()) && !isInterface(targetType)) {
+				if (conformanceComputer.isConformant(cast.getType(), targetTypeRef))
+					warning("Cast is obsolete", -1, OBSOLETE_CAST);
+				else
+					error("Incompatible types " + canonicalName(targetTypeRef) + " and "
+							+ canonicalName(cast.getType()), -1, INVALID_CAST);
 			}
 		}
 	}
-	
+
+	@Check
+	public void checkInstanceOf(XInstanceOfExpression instanceOfExpression) {
+		JvmTypeReference expressionTypeRef = typeProvider.getType(instanceOfExpression.getExpression());
+		if (expressionTypeRef.getType() instanceof JvmDeclaredType) {
+			JvmDeclaredType targetType = (JvmDeclaredType) expressionTypeRef.getType();
+			boolean isConformant = isConformant(instanceOfExpression.getType(), expressionTypeRef);
+			if (isConformant) {
+				warning("Condition is always true", -1, OBSOLETE_INSTANCEOF);
+			} else {
+				if (!(isInterface(instanceOfExpression.getType()) || isInterface(targetType)) || targetType.isFinal()) {
+					error("Incompatible types " + canonicalName(expressionTypeRef) + " and "
+							+ canonicalName(instanceOfExpression.getType()), -1, INVALID_INSTANCEOF);
+				}
+			}
+		}
+	}
+
 	@Check
 	public void checkFeatureCallOnVoid(XMemberFeatureCall featureCall) {
-		if(typesService.isVoid(typeProvider.getType(featureCall.getMemberCallTarget()))) {
+		if (typesService.isVoid(typeProvider.getType(featureCall.getMemberCallTarget()))) {
 			error("Cannot access features of objects of type 'void'", -1, FEATURE_CALL_ON_VOID);
 		}
 	}
-	
+
 	@Check
 	public void checkInstantiationOfAbstractClass(XConstructorCall constructorCall) {
-		if(constructorCall.getConstructor().getDeclaringType().isAbstract()) {
+		if (constructorCall.getConstructor().getDeclaringType().isAbstract()) {
 			error("Cannot instantiate abstract class", -1, ABSTRACT_CLASS_INSTANTIATION);
 		}
 	}
-	
+
 	@Override
 	protected List<EPackage> getEPackages() {
 		return singletonList((EPackage) eINSTANCE);
@@ -149,4 +188,17 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		return (typeRef == null) ? "<null>" : notNull(typeRef.getCanonicalName());
 	}
 
+	protected String canonicalName(JvmType type) {
+		return (type == null) ? "<null>" : notNull(type.getCanonicalName());
+	}
+
+	protected boolean isInterface(JvmType type) {
+		return type instanceof JvmGenericType && ((JvmGenericType) type).isInterface();
+	}
+
+	protected boolean isConformant(JvmType leftType, JvmTypeReference right) {
+		JvmParameterizedTypeReference left = factory.createJvmParameterizedTypeReference();
+		left.setType(leftType);
+		return conformanceComputer.isConformant(left, right);
+	}
 }
