@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.impl;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.xbase.XExpression;
 
 /**
@@ -24,14 +23,6 @@ public class XFeatureCallImplCustom extends XFeatureCallImpl {
 	@Override
 	public String toString() {
 		return getFeatureName()+getExpressionsAsString(getFeatureCallArguments(),isExplicitOperationCall());
-	}
-	
-	@Override
-	public JvmIdentifyableElement getImplicitReceiver() {
-		// call getFeature(), because the implicitReceiver is set as a side effect of a resolution of the feature.
-		// see {@link org.eclipse.xtext.xbase.linking.BestMatchingJvmFeatureScope#setImplicitReceiver(IEObjectDescription)}
-		getFeature();
-		return super.getImplicitReceiver();
 	}
 	
 }
