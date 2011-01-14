@@ -10,6 +10,7 @@ package org.eclipse.xtext.grammaranalysis.impl;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
@@ -32,6 +33,14 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> {
 	@Override
 	public String caseAbstractElement(AbstractElement object) {
 		return object.eClass().getName() + card(object);
+	}
+
+	@Override
+	public String caseAbstractRule(AbstractRule object) {
+		String classifier = object.getType().getClassifier().getName();
+		if (object.getName().equals(classifier))
+			return object.getName() + ":";
+		return object.getName() + " returns " + classifier + ":";
 	}
 
 	@Override
