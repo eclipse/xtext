@@ -1,0 +1,101 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+grammar org.eclipse.xtext.serializer.SequencerTestLanguage with org.eclipse.xtext.common.Terminals
+
+generate sequencertest "http://www.eclipse.org/2009/tmf/xtext/sequencertestlanguage"
+
+Model:
+	x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities |
+	x5=AlternativeMultiplicities | x6=List1 | x7=List2 | x8=AltList1 | x9=AltList2 |
+	x10=SingleKeywords | x11=SingleKeywordsOrID | x12=SingleTerminals |
+	x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals |
+	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference;
+
+SimpleGroup:
+	"#1" val1=ID val2=ID;
+
+SimpleAlternative:
+	"#2" ("kw1" val1=ID | "kw2" val2=ID);
+
+SimpleMultiplicities:
+	"#3" val1=ID "kw1" val2=ID? "kw2" val3+=ID+ "kw3" val4+=ID*;
+
+GroupMultiplicities:
+	"#4" val1=ID "kw1" (val2=ID val3=ID)? "kw2" (val4+=ID val5+=ID)+ "kw3" (val6+=ID val7+=ID)*;
+
+AlternativeMultiplicities:
+	"#5" (val2=ID | "kw1" val3=ID)? "kw2" (val4+=ID | "kw3" val5+=ID)+ "kw4" (val6+=ID | ("kw5" val7+=ID))*;
+
+List1:
+	"#6" val1+=ID ("," val1+=ID)*;
+
+List2:
+	"#7" {List2} (val1+=ID ("," val1+=ID)*)?;
+
+AltList1:
+	"#8" (val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?);
+
+AltList2:
+	"#9" (val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID);
+
+SingleKeywords:
+	"#10" val=("kw1" | "kw2" | "kw3");
+
+SingleKeywordsOrID:
+	"#11" val=("kw1" | "kw2" | "kw3" | ID);
+
+SingleTerminals:
+	"#12" val=(ID1 | ID2);
+
+terminal ID1:
+	'$1' ID;
+
+terminal ID2:
+	'$2' ID;
+
+terminal ID3:
+	'$3' ID;
+
+SingleEnum:
+	"#13" val=(DefEnum1 | DefEnum2 | DefEnum3);
+
+enum DefEnum1 returns DefEnum:
+	kw1;
+
+enum DefEnum2 returns DefEnum:
+	kw2;
+
+enum DefEnum3 returns DefEnum:
+	kw3;
+
+SingleCrossReference:
+	"#14" name=(ID1 | ID2 | ID3) (ref=[SingleCrossReference|ID1] | ref=[SingleCrossReference|ID2] |
+	ref=[SingleCrossReference|ID3]);
+
+SingleContainmentReference:
+	"#15" child=(SingleContainmentReferenceChild1 | SingleContainmentReferenceChild2 | SingleContainmentReferenceChild3);
+
+SingleContainmentReferenceChild1:
+	val='kw1';
+
+SingleContainmentReferenceChild2:
+	val='kw2';
+
+SingleContainmentReferenceChild3:
+	val='kw3';
+
+MultiKeywords:
+	"#16" val+=("kw1" | "kw2" | "kw3");
+
+MultiKeywordsOrID:
+	"#17" val+=("kw1" | "kw2" | "kw3" | ID);
+
+MultiTerminals:
+	"#18" val+=(ID1 | ID2);
+	
