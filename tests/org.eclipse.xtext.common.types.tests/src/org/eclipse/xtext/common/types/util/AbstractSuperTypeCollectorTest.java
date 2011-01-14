@@ -16,15 +16,21 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.RandomAccess;
+import java.util.Set;
 
 import junit.framework.TestCase;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -84,6 +90,18 @@ public abstract class AbstractSuperTypeCollectorTest extends TestCase {
 		assertEquals(collected.toString(), ImmutableSet.of(
 				Iterable.class.getName(),
 				Collection.class.getName(),Object.class.getName()), collected);
+	}
+	
+	public void testStringBuffer() {
+		Collection<JvmTypeReference> collected = getCollector().collectSuperTypes(getType(StringBuffer.class));
+		assertNotNull(collected);
+		List<JvmType> rawTypes = Lists.newArrayList(Collections2.transform(collected, new Function<JvmTypeReference, JvmType>() {
+			public JvmType apply(JvmTypeReference from) {
+				return from.getType();
+			}
+		}));
+		Set<JvmType> rawTypesWithoutDuplicates = Sets.newHashSet(rawTypes);
+		assertEquals(rawTypesWithoutDuplicates.size(), rawTypes.size());
 	}
 	
 	public void testSortedResultForList() {

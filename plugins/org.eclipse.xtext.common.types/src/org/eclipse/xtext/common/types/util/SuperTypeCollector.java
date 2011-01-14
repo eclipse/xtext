@@ -56,9 +56,15 @@ public class SuperTypeCollector {
 
 	public Set<JvmTypeReference> collectSuperTypes(JvmTypeReference type) {
 		final Set<JvmTypeReference> result = Sets.newLinkedHashSet();
+		final Set<JvmType> rawTypes = Sets.newHashSet();
 		doCollectSupertypeData(type, new SuperTypeAcceptor() {
 			public boolean accept(JvmTypeReference superType, int distance) {
-				return result.add(superType);
+				JvmType rawType = superType.getType();
+				if (rawType != null && !rawType.eIsProxy() && rawTypes.add(superType.getType())) {
+					result.add(superType);
+					return true;
+				}
+				return false;
 			}
 		});
 		return result;
@@ -76,7 +82,12 @@ public class SuperTypeCollector {
 		final Set<JvmType> result = Sets.newLinkedHashSet();
 		doCollectSupertypeData(type, new SuperTypeAcceptor() {
 			public boolean accept(JvmTypeReference superType, int distance) {
-				return result.add(superType.getType());
+				JvmType rawType = superType.getType();
+				if (rawType != null && !rawType.eIsProxy()) {
+					boolean notYetSeen = result.add(superType.getType());
+					return notYetSeen;
+				}
+				return false;
 			}
 		});
 		return result;
@@ -87,14 +98,21 @@ public class SuperTypeCollector {
 		doCollectSupertypeData(type, new SuperTypeAcceptor() {
 			public boolean accept(JvmTypeReference superType, int distance) {
 				String name = getSuperTypeName(superType);
-				return result.add(name);
+				if (name != null)
+					return result.add(name);
+				return false;
 			}
 			
 			public String getSuperTypeName(JvmTypeReference typeReference) {
 				if (typeReference instanceof JvmParameterizedTypeReference) {
-					return ((JvmParameterizedTypeReference) typeReference).getType().getCanonicalName();
+					JvmType rawType = typeReference.getType();
+					if (rawType != null && !rawType.eIsProxy()) {
+						return rawType.getCanonicalName();
+					}
+					return null;
+				} else {
+					return typeReference.getCanonicalName();
 				}
-				return typeReference.getCanonicalName();
 			}
 		});
 		return result;
