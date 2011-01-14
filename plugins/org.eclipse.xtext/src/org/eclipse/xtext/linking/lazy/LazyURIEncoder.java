@@ -20,10 +20,12 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 
+import com.google.inject.Singleton;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
  */
+@Singleton
 public class LazyURIEncoder {
 	
 	private static final String XTEXT_LINK = "xtextLink_";
