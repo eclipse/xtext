@@ -7,9 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.xtend2.impl;
 
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EObjectEList;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
 /**
@@ -40,10 +41,10 @@ public class XtendClassImplCustom extends XtendClassImpl {
 	
 	@Override
 	public EList<JvmTypeReference> getSuperTypes() {
-		BasicEList<JvmTypeReference> basicEList = new BasicEList<JvmTypeReference>();
+		EList<JvmTypeReference> result = new EObjectEList<JvmTypeReference>(JvmTypeReference.class, this, Xtend2Package.XTEND_CLASS__SUPER_TYPES);
 		if (getExtends()!=null)
-			basicEList.add(getExtends());
-		basicEList.addAll(getImplements());
-		return basicEList;
+			result.add(getExtends());
+		result.addAll(getImplements());
+		return result;
 	}
 }
