@@ -67,7 +67,6 @@ public class Bug334456Test extends AbstractBuilderTest {
 	private IProject createPluginProject(String name) throws CoreException {
 		PluginProjectFactory projectFactory = getInstance(PluginProjectFactory.class);
 		projectFactory.setProjectName(name);
-		projectFactory.setLocation(new Path("/" + name));
 		projectFactory.addFolders(Collections.singletonList("src"));
 		projectFactory.addBuilderIds(
 			JavaCore.BUILDER_ID, 
