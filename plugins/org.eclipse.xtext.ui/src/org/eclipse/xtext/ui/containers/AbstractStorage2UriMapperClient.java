@@ -7,9 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.containers;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.util.Pair;
 
 import com.google.inject.Inject;
 
@@ -25,7 +27,7 @@ public class AbstractStorage2UriMapperClient {
 		return mapper.getUri(file);
 	}
 	
-	protected Iterable<IStorage> getStorages(URI uri) {
+	protected Iterable<Pair<IStorage, IProject>> getStorages(URI uri) {
 		return mapper.getStorages(uri);
 	}
 	

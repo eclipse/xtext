@@ -16,11 +16,13 @@ import java.util.Queue;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
@@ -53,15 +55,23 @@ public class QueuedBuildData {
 		}
 	}
 	
+	@Inject
+	IStorage2UriMapper mapper;
+	
 	void queueURI(URI uri) {
 		if (uri.isPlatformResource()) {
 			String projectName = uri.segment(1);
-			LinkedList<URI> list = projectNameToChangedResource.get(projectName);
-			if (list == null) {
-				list = Lists.newLinkedList();
-				projectNameToChangedResource.put(projectName, list);
+			// hidden project for linked bundles from host workspace
+			if (".org.eclipse.jdt.core.external.folders".equals(projectName)) {
+				this.uris.add(uri);
+			} else {
+				LinkedList<URI> list = projectNameToChangedResource.get(projectName);
+				if (list == null) {
+					list = Lists.newLinkedList();
+					projectNameToChangedResource.put(projectName, list);
+				}
+				list.add(uri);
 			}
-			list.add(uri);
 		} else {
 			this.uris.add(uri);
 		}

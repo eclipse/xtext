@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IStorage;
@@ -23,7 +24,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryRegistryImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.SimpleCache;
+import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.base.Function;
 import com.google.inject.Inject;
@@ -65,7 +68,7 @@ public class Storage2UriMapperImpl implements IStorage2UriMapper, IResourceChang
 		resourceSet.setResourceFactoryRegistry(resourceFactoryRegistry);
 	}
 
-	public Iterable<IStorage> getStorages(URI uri) {
+	public Iterable<Pair<IStorage, IProject>> getStorages(URI uri) {
 		synchronized (cache) {
 			return cache.get(uri);
 		}
@@ -98,13 +101,13 @@ public class Storage2UriMapperImpl implements IStorage2UriMapper, IResourceChang
 	}
 	
 	
-	private final SimpleCache<URI, Iterable<IStorage>> cache = new SimpleCache<URI, Iterable<IStorage>>(new Function<URI, Iterable<IStorage>>() {
-		public Iterable<IStorage> apply(URI uri) {
+	private final SimpleCache<URI, Iterable<Pair<IStorage, IProject>>> cache = new SimpleCache<URI, Iterable<Pair<IStorage, IProject>>>(new Function<URI, Iterable<Pair<IStorage, IProject>>>() {
+		public Iterable<Pair<IStorage, IProject>> apply(URI uri) {
 			if (uri.isPlatformResource()) {
 				Path path = new Path(uri.toPlatformString(true));
 				IFile file = getWorkspaceRoot().getFile(path);
 				if (isValidStorageFor(uri, file))
-					return Collections.singleton((IStorage) file);
+					return Collections.singleton(Tuples.<IStorage, IProject>create(file, file.getProject()));
 			}
 			return Collections.emptyList();
 		}

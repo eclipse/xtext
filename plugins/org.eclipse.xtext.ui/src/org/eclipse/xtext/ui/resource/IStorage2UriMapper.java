@@ -7,8 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.resource;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.util.Pair;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -16,11 +18,14 @@ import org.eclipse.emf.common.util.URI;
 public interface IStorage2UriMapper {
 
 	/**
-	 * @return IStorages corresponding to the given URI. It will typically be only on {@link IStorage} but in the case
-	 *         that the same external class folder or jar is referenced in multiple projects multiple {@link IStorage}s
-	 *         are returned.
+	 * Find the storages that can be mapped to the given URI. It will typically 
+	 * be only one {@link IStorage} assiciated with one {@link IProject} but 
+	 * in the case that the same external class folder or jar is referenced in 
+	 * multiple projects multiple {@link IStorage}s are returned.
+	 * @param uri the {@link URI}. May not be <code>null</code>.
+	 * @return IStorages corresponding to the given URI. Never <code>null</code>. 
 	 */
-	Iterable<IStorage> getStorages(URI uri);
+	Iterable<Pair<IStorage, IProject>> getStorages(URI uri);
 
 	/**
 	 * @return returns the URI for the given {@link IStorage}. 

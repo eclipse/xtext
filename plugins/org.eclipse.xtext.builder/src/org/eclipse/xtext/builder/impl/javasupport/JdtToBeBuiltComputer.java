@@ -97,15 +97,6 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 	}
 
 	@Override
-	protected boolean isOnProject(IStorage storage, IProject project) {
-		if (storage instanceof IJarEntryResource) {
-			IPackageFragmentRoot root = ((IJarEntryResource) storage).getPackageFragmentRoot();
-			return root.getJavaProject().getProject().equals(project);
-		}
-		return super.isOnProject(storage, project);
-	}
-	
-	@Override
 	public boolean removeStorage(IProgressMonitor monitor, ToBeBuilt toBeBuilt, IStorage storage) {
 		if (!isHandled(storage))
 			return true;

@@ -9,10 +9,12 @@ package org.eclipse.xtext.ui.label;
 
 import java.util.Iterator;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.util.Pair;
 
 import com.google.inject.Inject;
 
@@ -41,9 +43,9 @@ public class DefaultDescriptionLabelProvider extends DeclarativeLabelProvider {
 	}
 
 	public Object text(IResourceDescription element) {
-		Iterator<IStorage> storages = storage2UriMapper.getStorages(element.getURI()).iterator();
+		Iterator<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(element.getURI()).iterator();
 		if (storages.hasNext()) {
-			IStorage storage = storages.next();
+			IStorage storage = storages.next().getFirst();
 			return storage.getFullPath().toString();
 		}
 		return null;

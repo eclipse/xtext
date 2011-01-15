@@ -32,6 +32,6 @@ public class Storage2UriMapperTest extends TestCase {
 		};
 		URI uri = mapper.getUri(file);
 		assertEquals(URI.createPlatformResourceURI(file.getFullPath().toString(),true),uri);
-		assertEquals(file,mapper.getStorages(uri).iterator().next());
+		assertEquals(file,mapper.getStorages(uri).iterator().next().getFirst());
 	}
 }

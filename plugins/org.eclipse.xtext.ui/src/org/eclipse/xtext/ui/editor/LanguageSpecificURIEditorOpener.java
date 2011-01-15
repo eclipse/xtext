@@ -11,6 +11,7 @@ import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
@@ -29,6 +30,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
@@ -70,10 +72,10 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 	}
 
 	public IEditorPart open(URI uri, EReference crossReference, int indexInList, boolean select) {
-		Iterator<IStorage> storages = mapper.getStorages(uri.trimFragment()).iterator();
+		Iterator<Pair<IStorage, IProject>> storages = mapper.getStorages(uri.trimFragment()).iterator();
 		if (storages != null && storages.hasNext()) {
 			try {
-				IStorage storage = storages.next();
+				IStorage storage = storages.next().getFirst();
 				IEditorInput editorInput = (storage instanceof IFile) ? new FileEditorInput((IFile) storage) : new XtextReadonlyEditorInput(storage);
 				IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();
 				IEditorPart editor = IDE.openEditor(activePage, editorInput, editorID);

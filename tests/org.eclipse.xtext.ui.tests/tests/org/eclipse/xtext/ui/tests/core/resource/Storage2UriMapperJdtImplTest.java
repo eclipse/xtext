@@ -16,12 +16,14 @@ import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.ui.resource.JarEntryLocator;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
@@ -43,11 +45,11 @@ public class Storage2UriMapperJdtImplTest extends TestCase {
 		};
 		impl.setLocator(new JarEntryLocator());
 		URI uri = URI.createURI("archive:platform:/resource/foo/foo.jar!/foo/bar.txt");
-		Iterable<IStorage> storages = impl.getStorages(uri);
-		Iterator<IStorage> iterator = storages.iterator();
-		IStorage next = iterator.next();
+		Iterable<Pair<IStorage, IProject>> storages = impl.getStorages(uri);
+		Iterator<Pair<IStorage, IProject>> iterator = storages.iterator();
+		Pair<IStorage, IProject> next = iterator.next();
 		assertFalse(iterator.hasNext());
-		assertEquals(uri, impl.getUri(next));
+		assertEquals(uri, impl.getUri(next.getFirst()));
 	}
 	
 	public void testResourceInExternalFolder() throws Exception {
@@ -65,10 +67,10 @@ public class Storage2UriMapperJdtImplTest extends TestCase {
 		};
 		impl.setLocator(new JarEntryLocator());
 		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-		Iterable<IStorage> storages = impl.getStorages(uri);
-		Iterator<IStorage> iterator = storages.iterator();
-		IStorage next = iterator.next();
+		Iterable<Pair<IStorage, IProject>> storages = impl.getStorages(uri);
+		Iterator<Pair<IStorage, IProject>> iterator = storages.iterator();
+		Pair<IStorage, IProject> next = iterator.next();
 		assertFalse(iterator.hasNext());
-		assertEquals(uri, impl.getUri(next));
+		assertEquals(uri, impl.getUri(next.getFirst()));
 	}
 }

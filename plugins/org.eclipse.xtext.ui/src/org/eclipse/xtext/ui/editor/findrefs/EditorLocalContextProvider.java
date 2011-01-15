@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.editor.findrefs;
 import static com.google.common.collect.Iterables.*;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
@@ -27,8 +28,11 @@ import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.ILocalContextProvid
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.internal.Nullable;
 
@@ -81,7 +85,12 @@ public class EditorLocalContextProvider implements ILocalContextProvider {
 		if (workbench != null) {
 			IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();
 			if (activePage != null) {
-				Iterable<IStorage> storages = storage2UriMapper.getStorages(targetURI.trimFragment());
+				Iterable<Pair<IStorage, IProject>> storagesToProject = storage2UriMapper.getStorages(targetURI.trimFragment());
+				Iterable<IStorage> storages = Iterables.transform(storagesToProject, new Function<Pair<IStorage, IProject>, IStorage>() {
+					public IStorage apply(Pair<IStorage, IProject> from) {
+						return from.getFirst();
+					}
+				});
 				if (!isEmpty(storages)) {
 					for (IEditorReference editorReference : activePage.getEditorReferences()) {
 						try {

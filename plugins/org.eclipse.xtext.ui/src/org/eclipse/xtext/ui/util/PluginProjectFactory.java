@@ -15,7 +15,10 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkingSet;
 
@@ -64,6 +67,12 @@ public class PluginProjectFactory extends JavaProjectFactory {
 			createManifest(project, subMonitor.newChild(1));
 			createBuildProperties(project, subMonitor.newChild(1));
 		}
+	}
+	
+	@Override
+	protected void addMoreClasspathEntriesTo(List<IClasspathEntry> classpathEntries) {
+		super.addMoreClasspathEntriesTo(classpathEntries);
+		classpathEntries.add(JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins"))); //$NON-NLS-1$
 	}
 	
 	protected void createBuildProperties(IProject project, IProgressMonitor progressMonitor) {

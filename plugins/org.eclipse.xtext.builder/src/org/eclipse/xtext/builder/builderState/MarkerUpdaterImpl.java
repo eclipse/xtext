@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
@@ -25,6 +26,7 @@ import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
@@ -57,14 +59,14 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 			if (subMonitor.isCanceled())
 				throw new OperationCanceledException();
 			if (delta.getNew() != null) {
-				Iterable<IStorage> storages = mapper.getStorages(delta.getNew().getURI());
+				Iterable<Pair<IStorage, IProject>> storages = mapper.getStorages(delta.getNew().getURI());
 				SubMonitor child = subMonitor.newChild(1);
 				child.setWorkRemaining(3);
-				for (IStorage storage : storages) {
+				for (Pair<IStorage, IProject> pair : storages) {
 					child.setWorkRemaining(3);
-					if (storage instanceof IFile) {
-						IFile file = (IFile) storage;
-						if (!file.isReadOnly() && !file.getProject().isHidden()) {
+					if (pair.getFirst() instanceof IFile) {
+						IFile file = (IFile) pair.getFirst();
+						if (!file.isReadOnly() && !pair.getSecond().isHidden()) {
 							Resource resource = resourceSet.getResource(delta.getNew().getURI(), true);
 							addMarkers(file, resource, child.newChild(2));
 						}
@@ -73,10 +75,10 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 					}
 				}
 			} else {
-				Iterable<IStorage> storages = mapper.getStorages(delta.getOld().getURI());
-				for (IStorage storage : storages) {
-					if (storage instanceof IFile) {
-						IFile file = (IFile) storage;
+				Iterable<Pair<IStorage, IProject>> storages = mapper.getStorages(delta.getOld().getURI());
+				for (Pair<IStorage, IProject> pair : storages) {
+					if (pair.getFirst() instanceof IFile) {
+						IFile file = (IFile) pair.getFirst();
 						if (!file.isReadOnly() && file.isAccessible()) {
 							try {
 								file.deleteMarkers(MarkerTypes.FAST_VALIDATION, true, IResource.DEPTH_ZERO);

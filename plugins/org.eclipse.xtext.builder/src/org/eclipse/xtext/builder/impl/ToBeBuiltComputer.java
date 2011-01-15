@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
+import java.util.Iterator;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -21,6 +23,7 @@ import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.UriValidator;
+import org.eclipse.xtext.util.Pair;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -46,25 +49,18 @@ public class ToBeBuiltComputer {
 		ToBeBuilt result = new ToBeBuilt();
 		Iterable<IResourceDescription> allResourceDescriptions = builderState.getAllResourceDescriptions();
 		for (IResourceDescription description : allResourceDescriptions) {
-			Iterable<IStorage> storages = mapper.getStorages(description.getURI());
-			if (!storages.iterator().hasNext()) {
-				result.getToBeDeleted().add(description.getURI());
-			} else {
-				for (IStorage storage : storages) {
-					if (isOnProject(storage, project))
-						result.getToBeDeleted().add(description.getURI());
-				}
+			Iterable<Pair<IStorage, IProject>> storages = mapper.getStorages(description.getURI());
+			boolean onlyOnThisProject = true;
+			Iterator<Pair<IStorage, IProject>> iterator = storages.iterator();
+			while(iterator.hasNext() && onlyOnThisProject) {
+				Pair<IStorage, IProject> storage2Project = iterator.next();
+				onlyOnThisProject = project.equals(storage2Project.getSecond());
 			}
+			if (onlyOnThisProject)
+				result.getToBeDeleted().add(description.getURI());
 			progress.worked(1);
 		}
 		return result;
-	}
-
-	protected boolean isOnProject(IStorage storage, IProject project) {
-		if (storage instanceof IFile) {
-			return project.contains((IFile) storage);
-		}
-		return false;
 	}
 
 	public ToBeBuilt updateProjectNewResourcesOnly(IProject project, IProgressMonitor monitor) throws CoreException {

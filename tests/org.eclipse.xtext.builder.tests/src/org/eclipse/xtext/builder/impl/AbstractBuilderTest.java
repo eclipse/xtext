@@ -14,10 +14,14 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.intro.IIntroManager;
+import org.eclipse.xtext.builder.tests.Activator;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Event;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Injector;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -31,6 +35,10 @@ public abstract class AbstractBuilderTest extends TestCase implements IResourceD
 		super.setUp();
 		assertEquals(0, countResourcesInIndex());
 		assertEquals(0, root().getProjects().length);
+		IIntroManager introManager = PlatformUI.getWorkbench().getIntroManager();
+		if (introManager.getIntro() != null) {
+			introManager.closeIntro(introManager.getIntro());
+		}
 	}
 
 	@Override
@@ -50,5 +58,10 @@ public abstract class AbstractBuilderTest extends TestCase implements IResourceD
 	
 	public List<Event> getEvents() {
 		return events;
+	}
+	
+	public <T> T getInstance(Class<T> type) {
+		Injector injector = Activator.getInstance().getInjector("org.eclipse.xtext.builder.tests.BuilderTestLanguage");
+		return injector.getInstance(type);
 	}
 }

@@ -219,7 +219,13 @@ public class IResourcesSetupUtil {
 	}
 
 	public static void cleanWorkspace() throws CoreException {
-		IProject[] projects = root().getProjects();
+		IProject[] visibleProjects = root().getProjects();
+		deleteProjects(visibleProjects);
+		IProject[] hiddenProjects = root().getProjects(IContainer.INCLUDE_HIDDEN);
+		deleteProjects(hiddenProjects);
+	}
+
+	protected static void deleteProjects(IProject[] projects) throws CoreException {
 		for (IProject iProject : projects) {
 			if (iProject.exists()) {
 				iProject.delete(true,true, monitor());

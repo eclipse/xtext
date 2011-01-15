@@ -30,6 +30,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.PackageFragmentRootWalker;
+import org.eclipse.xtext.util.Pair;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -173,8 +174,9 @@ public class JavaProjectsStateHelper extends AbstractStorage2UriMapperClient {
 	}
 
 	protected IPackageFragmentRoot getJarWithEntry(URI uri) {
-		Iterable<IStorage> storages = getStorages(uri);
-		for (IStorage storage : storages) {
+		Iterable<Pair<IStorage, IProject>> storages = getStorages(uri);
+		for (Pair<IStorage, IProject> storage2Project : storages) {
+			IStorage storage = storage2Project.getFirst();
 			if (storage instanceof IJarEntryResource) {
 				IPackageFragmentRoot fragmentRoot = ((IJarEntryResource) storage).getPackageFragmentRoot();
 				if (fragmentRoot != null)
