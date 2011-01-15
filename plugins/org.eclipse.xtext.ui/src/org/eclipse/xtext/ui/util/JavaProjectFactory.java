@@ -52,7 +52,7 @@ public class JavaProjectFactory extends ProjectFactory {
 				}
 
 				classpathEntries.add(JavaCore.newContainerEntry(new Path("org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"))); //$NON-NLS-1$
-				classpathEntries.add(JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins"))); //$NON-NLS-1$
+				addMoreClasspathEntriesTo(classpathEntries);
 
 				javaProject.setRawClasspath(classpathEntries.toArray(new IClasspathEntry[classpathEntries.size()]),
 						subMonitor.newChild(1));
@@ -61,6 +61,9 @@ public class JavaProjectFactory extends ProjectFactory {
 				logger.error(e.getMessage(), e);
 			}
 		}
+	}
+
+	protected void addMoreClasspathEntriesTo(List<IClasspathEntry> classpathEntries) {
 	}
 
 	@Override

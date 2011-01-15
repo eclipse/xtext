@@ -10,7 +10,8 @@ package org.eclipse.xtext.ui.editor;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IEncodedStorage;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
@@ -18,6 +19,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.service.DispatchingProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.util.Pair;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -45,15 +47,21 @@ public class WorkspaceEncodingProvider implements IEncodingProvider {
 
 	public String getEncoding(URI uri) {
 		if (workspace != null) {
-			Iterator<IStorage> storages = storage2UriMapper.getStorages(uri).iterator();
+			Iterator<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(uri).iterator();
 			while (storages.hasNext()) {
-				IStorage storage = storages.next();
-				if (storage instanceof IFile) {
+				Pair<IStorage,IProject> storage = storages.next();
+				if (storage.getFirst() instanceof IEncodedStorage) {
 					try {
-						return ((IFile) storage).getCharset();
+						return ((IEncodedStorage) storage.getFirst()).getCharset();
 					} catch (CoreException e) {
-						LOG.error("Error gettig file encoding", e);
+						LOG.error("Error getting file encoding", e);
 					}
+				}
+				try {
+					String result = storage.getSecond().getDefaultCharset(true);
+					return result;
+				} catch (CoreException e) {
+					LOG.error("Error getting project's default encoding", e);
 				}
 			}
 		}

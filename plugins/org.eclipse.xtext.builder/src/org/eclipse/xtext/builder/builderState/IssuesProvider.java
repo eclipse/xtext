@@ -12,12 +12,14 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.util.IssueUtil;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.validation.Issue;
 
 import com.google.common.collect.Lists;
@@ -38,8 +40,9 @@ public class IssuesProvider {
 	
 	public List<Issue> getPersistedIssues(URI uri) {
 		List<Issue> result = Lists.newArrayList();
-		Iterable<IStorage> storages = mapper.getStorages(uri);
-		for (IStorage iStorage : storages) {
+		Iterable<Pair<IStorage, IProject>> storages = mapper.getStorages(uri);
+		for (Pair<IStorage, IProject> storageToProject : storages) {
+			IStorage iStorage = storageToProject.getFirst();
 			if (iStorage instanceof IFile) {
 				try {
 					IMarker[] markers;

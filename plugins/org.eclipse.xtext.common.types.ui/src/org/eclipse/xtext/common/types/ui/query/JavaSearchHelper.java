@@ -35,6 +35,7 @@ import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.TextRegion;
 
 import com.google.common.base.Predicate;
@@ -108,12 +109,13 @@ public class JavaSearchHelper {
 
 	protected void accept(IReferenceDescription referenceDescription) {
 		URI sourceResourceURI = referenceDescription.getSourceEObjectUri().trimFragment();
-		Iterable<IStorage> storages = storage2UriMapper.getStorages(sourceResourceURI);
-		Iterator<IStorage> iterator = storages.iterator();
+		Iterable<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(sourceResourceURI);
+		Iterator<Pair<IStorage, IProject>> iterator = storages.iterator();
 		while (iterator.hasNext()) {
-			IStorage storage = iterator.next();
-			IProject project = getProject(storage);
-			if (project != null) {
+			Pair<IStorage, IProject> pair = iterator.next();
+			IStorage storage = pair.getFirst();
+			IProject project = pair.getSecond();
+			if (project != null && !project.isHidden()) {
 				ResourceSet resourceSet = getResourceSet(project);
 				EObject sourceEObject = resourceSet.getEObject(referenceDescription.getSourceEObjectUri(), true);
 				if (sourceEObject != null) {
@@ -149,18 +151,6 @@ public class JavaSearchHelper {
 			projectToResourceSet.put(project, resourceSet);
 		}
 		return resourceSet;
-	}
-
-	protected IProject getProject(IStorage storage) {
-		if (storage instanceof IResource) {
-			return ((IResource) storage).getProject();
-		} else if (storage instanceof IJarEntryResource) {
-			IPackageFragmentRoot packageFragmentRoot = ((IJarEntryResource) storage)
-					.getPackageFragmentRoot();
-			IJavaProject javaProject = packageFragmentRoot.getJavaProject();
-			return javaProject.getProject();
-		}
-		return null;
 	}
 
 	protected void acceptMatch(Object element, ITextRegion region) {

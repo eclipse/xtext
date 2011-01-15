@@ -21,7 +21,9 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.SimpleCache;
+import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Sets;
@@ -54,17 +56,17 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 			}
 		}
 	}
-
-	private SimpleCache<URI, Iterable<IStorage>> cache = new SimpleCache<URI, Iterable<IStorage>>(
-			new Function<URI, Iterable<IStorage>>() {
-				public Iterable<IStorage> apply(URI from) {
+	
+	private SimpleCache<URI, Iterable<Pair<IStorage, IProject>>> cache = new SimpleCache<URI, Iterable<Pair<IStorage, IProject>>>(
+			new Function<URI, Iterable<Pair<IStorage, IProject>>>() {
+				public Iterable<Pair<IStorage, IProject>> apply(URI from) {
 					return findStoragesInJarsOrExternalClassFolders(from);
 				}
 			});
 
 	@Override
-	public Iterable<IStorage> getStorages(URI uri) {
-		Iterable<IStorage> storages = super.getStorages(uri);
+	public Iterable<Pair<IStorage, IProject>> getStorages(URI uri) {
+		Iterable<Pair<IStorage, IProject>> storages = super.getStorages(uri);
 		if (!storages.iterator().hasNext()) {
 			synchronized (cache) {
 				return cache.get(uri);
@@ -91,8 +93,8 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 		return computeUriForStorageInJarOrExternalClassFolder(storage);
 	}
 
-	protected Iterable<IStorage> findStoragesInJarsOrExternalClassFolders(URI uri) {
-		Set<IStorage> result = Sets.newHashSet();
+	protected Iterable<Pair<IStorage, IProject>> findStoragesInJarsOrExternalClassFolders(URI uri) {
+		Set<Pair<IStorage, IProject>> result = Sets.newHashSet();
 		if (uri.isArchive()) {
 			URI toArchive = getPathToArchive(uri);
 			IProject[] projects = getWorkspaceRoot().getProjects();
@@ -115,7 +117,7 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 	}
 
 	protected void findStoragesInExternalFoldersOfProject(URI uri, IJavaProject project,
-			Set<IStorage> storages) {
+			Set<Pair<IStorage, IProject>> storages) {
 		if (project.exists()) {
 			try {
 				IPackageFragmentRoot[] fragmentRoots = project.getAllPackageFragmentRoots();
@@ -123,7 +125,7 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 					if (fragRoot.isExternal() && !fragRoot.isArchive()) {
 						IStorage storage = locator.getJarEntry(uri, fragRoot);
 						if (storage != null)
-							storages.add(storage);
+							storages.add(Tuples.create(storage, project.getProject()));
 					}
 				}
 			} catch (JavaModelException e) {
@@ -134,7 +136,7 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 	}
 	
 	protected void findStoragesInJarsOfProject(URI toArchive, URI uri, IJavaProject project,
-			Set<IStorage> storages) {
+			Set<Pair<IStorage, IProject>> storages) {
 		if (project.exists()) {
 			try {
 				IPackageFragmentRoot[] fragmentRoots = project.getAllPackageFragmentRoots();
@@ -143,8 +145,9 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 							.toString())) {
 						if (JarEntryURIHelper.getUriForPackageFragmentRoot(fragRoot).equals(toArchive)) {
 							IStorage storage = locator.getJarEntry(uri, fragRoot);
-							if (storage != null)
-								storages.add(storage);
+							if (storage != null) {
+								storages.add(Tuples.create(storage, project.getProject()));
+							}
 						}
 					}
 				}

@@ -147,7 +147,7 @@ public class ProjectFactory {
 		// Clean up any old project information.
 		if (project.exists()) {
 			final boolean[] result = new boolean[1];
-			if (workbench!=null) {
+			if (workbench!=null && theShell != null) {
 				workbench.getDisplay().syncExec(new Runnable() {
 					public void run() {
 						result[0] = MessageDialog.openQuestion(theShell, Messages.ProjectFactory_1

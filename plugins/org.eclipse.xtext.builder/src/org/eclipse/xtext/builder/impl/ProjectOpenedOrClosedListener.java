@@ -109,7 +109,9 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 					log.error(e.getMessage(), e);
 				}
 			} else if ((event.getType() == IResourceChangeEvent.PRE_CLOSE || event.getType() == IResourceChangeEvent.PRE_DELETE)) {
-				if (event.getResource() instanceof IProject && XtextProjectHelper.hasNature((IProject) event.getResource())) {
+				if (event.getResource() instanceof IProject && 
+						(XtextProjectHelper.hasNature((IProject) event.getResource()) || 
+								event.getResource().isAccessible() && event.getResource().isHidden())) {
 					scheduleRemoveProjectJob((IProject) event.getResource());
 				}
 			}

@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
@@ -98,9 +100,9 @@ public class FindReferencesHandler extends AbstractHandler {
 				}
 			});
 			String label = Messages.FindReferencesHandler_labelPrefix + qualifiedName;
-			Iterator<IStorage> storages = storage2UriMapper.getStorages(targetElementURI).iterator();
+			Iterator<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(targetElementURI).iterator();
 			if (storages.hasNext()) {
-				label += Messages.FindReferencesHandler_1 + storages.next().getFullPath().toString()
+				label += Messages.FindReferencesHandler_1 + storages.next().getFirst().getFullPath().toString()
 						+ Messages.FindReferencesHandler_2;
 			}
 			referenceQuery.init(targetElementURI, localContextProvider, label);
