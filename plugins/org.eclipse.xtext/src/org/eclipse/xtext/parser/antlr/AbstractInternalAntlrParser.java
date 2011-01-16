@@ -34,12 +34,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
-import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.UnorderedGroup;
-import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -240,20 +238,6 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		nodeBuilder.associateWithSemanticElement(node, astElement);
 	}
 
-	protected void createLeafNode(Token token, EObject grammarElement, String feature) {
-		if (token != null && token.getTokenIndex() > lastConsumedIndex) {
-			int indexOfTokenBefore = lastConsumedIndex;
-			if (indexOfTokenBefore + 1 < token.getTokenIndex()) {
-				for (int x = indexOfTokenBefore + 1; x < token.getTokenIndex(); x++) {
-					Token hidden = input.get(x);
-					createLeafNode(hidden, null);
-				}
-			}
-			lastConsumedIndex = token.getTokenIndex();
-			lastConsumedNode = createLeafNode(token, grammarElement);
-		}
-	}
-	
 	private ILeafNode createLeafNode(Token token, EObject grammarElement) {
 		boolean isHidden = token.getChannel() == HIDDEN;
 		SyntaxErrorMessage error = null;
@@ -681,18 +665,18 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		currentNode = nodeBuilder.newCompositeNode(grammarElement, lookAhead, currentNode);
 	}
 	
-	// createLeafNode(token, grammarElement, featureName)
 	protected void newLeafNode(Token token, EObject grammarElement) {
-		createLeafNode(token, grammarElement, getFeatureName(grammarElement));
-	}
-
-	private String getFeatureName(EObject grammarElement) {
-		while(grammarElement.eClass() == XtextPackage.Literals.RULE_CALL && grammarElement.eClass() == XtextPackage.Literals.ALTERNATIVES) {
-			grammarElement = grammarElement.eContainer();
+		if (token != null && token.getTokenIndex() > lastConsumedIndex) {
+			int indexOfTokenBefore = lastConsumedIndex;
+			if (indexOfTokenBefore + 1 < token.getTokenIndex()) {
+				for (int x = indexOfTokenBefore + 1; x < token.getTokenIndex(); x++) {
+					Token hidden = input.get(x);
+					createLeafNode(hidden, null);
+				}
+			}
+			lastConsumedIndex = token.getTokenIndex();
+			lastConsumedNode = createLeafNode(token, grammarElement);
 		}
-		if (grammarElement.eClass() == XtextPackage.Literals.ASSIGNMENT)
-			return ((Assignment) grammarElement).getFeature();
-		return null;
 	}
 
 	public void setNodeModelBuilder(NodeModelBuilder nodeModelBuilder) {
