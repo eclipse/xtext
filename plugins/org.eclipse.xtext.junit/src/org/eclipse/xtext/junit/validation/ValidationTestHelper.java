@@ -37,8 +37,6 @@ public class ValidationTestHelper {
 
 	public void assertNoError(final EObject model, final String issuecode) throws Exception {
 		final List<Issue> validate = validate(model);
-		if (!validate.isEmpty())
-			System.err.println(validate.toString());
 		Iterable<Issue> issues = filter(validate, new Predicate<Issue>() {
 			public boolean apply(Issue input) {
 				return issuecode.equals(input.getCode());
