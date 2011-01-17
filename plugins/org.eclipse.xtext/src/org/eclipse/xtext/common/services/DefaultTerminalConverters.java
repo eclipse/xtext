@@ -11,6 +11,8 @@ import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractDeclarativeValueConverterService;
 import org.eclipse.xtext.conversion.impl.AbstractIDValueConverter;
+import org.eclipse.xtext.conversion.impl.INTValueConverter;
+import org.eclipse.xtext.conversion.impl.STRINGValueConverter;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -30,7 +32,7 @@ public class DefaultTerminalConverters extends AbstractDeclarativeValueConverter
 	}
 
 	@Inject
-	private org.eclipse.xtext.conversion.impl.INTValueConverter intValueConverter;
+	private INTValueConverter intValueConverter;
 	
 	@ValueConverter(rule = "INT")
 	public IValueConverter<Integer> INT() {
@@ -38,7 +40,7 @@ public class DefaultTerminalConverters extends AbstractDeclarativeValueConverter
 	}
 
 	@Inject
-	private org.eclipse.xtext.conversion.impl.STRINGValueConverter stringValueConverter;
+	private STRINGValueConverter stringValueConverter;
 	
 	@ValueConverter(rule = "STRING")
 	public IValueConverter<String> STRING() {
