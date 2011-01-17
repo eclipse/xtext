@@ -181,7 +181,7 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	 */
 	public XConstructorCall createXConstructorCall()
 	{
-		XConstructorCallImpl xConstructorCall = new XConstructorCallImpl();
+		XConstructorCallImplCustom xConstructorCall = new XConstructorCallImplCustom();
 		return xConstructorCall;
 	}
 

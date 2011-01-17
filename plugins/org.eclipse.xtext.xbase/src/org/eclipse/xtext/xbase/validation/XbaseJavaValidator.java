@@ -21,6 +21,7 @@ import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.typing.IExpectedTypeProvider;
 import org.eclipse.xtext.typing.TypeResolutionException;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCastedExpression;
@@ -37,25 +38,21 @@ import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
 import com.google.inject.Inject;
 
+@ComposedChecks(validators=FeatureCallValidator.class)
 public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
-	public static final String INCOMPATIBLE_TYPES = XbaseJavaValidator.class.getCanonicalName() + ".incompatible_types";
-	public static final String ASSIGNMENT_TO_FINAL = XbaseJavaValidator.class.getCanonicalName()
-			+ ".assignment_to_final";
-	public static final String MISSING_INITIALIZATION = XbaseJavaValidator.class.getCanonicalName()
-			+ ".missing_initialization";
-	public static final String MISSING_TYPE = XbaseJavaValidator.class.getCanonicalName() + ".missing_type";
-	public static final String INVALID_CAST = XbaseJavaValidator.class.getCanonicalName() + ".invalid_cast";
-	public static final String OBSOLETE_CAST = XbaseJavaValidator.class.getCanonicalName() + ".obsolete_cast";
-	public static final String INVALID_INSTANCEOF = XbaseJavaValidator.class.getCanonicalName() + ".invalid_instanceof";
-	public static final String OBSOLETE_INSTANCEOF = XbaseJavaValidator.class.getCanonicalName()
-			+ ".obsolete_instanceof";
-	public static final String INVALID_INNER_EXPRESSION = XbaseJavaValidator.class.getCanonicalName()
-			+ ".invalid_inner_expression";
-	public static final String FEATURE_CALL_ON_VOID = XbaseJavaValidator.class.getCanonicalName()
-			+ ".feature_call_on_void";
-	public static final String ABSTRACT_CLASS_INSTANTIATION = XbaseJavaValidator.class.getCanonicalName()
-			+ ".abstract_class_instantiation";
+	protected static final String ISSUE_CODE_PREFIX = XbaseJavaValidator.class.getCanonicalName() + ".";
+	public static final String INCOMPATIBLE_TYPES = ISSUE_CODE_PREFIX + "incompatible_types";
+	public static final String ASSIGNMENT_TO_FINAL = ISSUE_CODE_PREFIX + "assignment_to_final";
+	public static final String MISSING_INITIALIZATION = ISSUE_CODE_PREFIX + "missing_initialization";
+	public static final String MISSING_TYPE = ISSUE_CODE_PREFIX + "missing_type";
+	public static final String INVALID_CAST = ISSUE_CODE_PREFIX + "invalid_cast";
+	public static final String OBSOLETE_CAST = ISSUE_CODE_PREFIX + "obsolete_cast";
+	public static final String INVALID_INSTANCEOF = ISSUE_CODE_PREFIX + "invalid_instanceof";
+	public static final String OBSOLETE_INSTANCEOF = ISSUE_CODE_PREFIX + "obsolete_instanceof";
+	public static final String INVALID_INNER_EXPRESSION = ISSUE_CODE_PREFIX + "invalid_inner_expression";
+	public static final String FEATURE_CALL_ON_VOID = ISSUE_CODE_PREFIX + "feature_call_on_void";
+	public static final String ABSTRACT_CLASS_INSTANTIATION = ISSUE_CODE_PREFIX + "abstract_class_instantiation";
 
 	@Inject
 	private IXbaseTypeProvider typeProvider;
@@ -181,7 +178,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	//TODO switch expression not of type boolean
 
-	@Override
+		@Override
 	protected List<EPackage> getEPackages() {
 		return singletonList((EPackage) eINSTANCE);
 	}

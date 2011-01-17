@@ -21,6 +21,8 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#getConstructor <em>Constructor</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#getArguments <em>Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#getTypeArguments <em>Type Arguments</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#getInvalidFeatureIssueCode <em>Invalid Feature Issue Code</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#isValidFeature <em>Valid Feature</em>}</li>
  * </ul>
  * </p>
  *
@@ -87,5 +89,46 @@ public interface XConstructorCall extends XExpression
 	 * @generated
 	 */
 	EList<JvmTypeReference> getTypeArguments();
+
+	/**
+	 * Returns the value of the '<em><b>Invalid Feature Issue Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Invalid Feature Issue Code</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Invalid Feature Issue Code</em>' attribute.
+	 * @see #setInvalidFeatureIssueCode(String)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXConstructorCall_InvalidFeatureIssueCode()
+	 * @model transient="true"
+	 * @generated
+	 */
+	String getInvalidFeatureIssueCode();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XConstructorCall#getInvalidFeatureIssueCode <em>Invalid Feature Issue Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Invalid Feature Issue Code</em>' attribute.
+	 * @see #getInvalidFeatureIssueCode()
+	 * @generated
+	 */
+	void setInvalidFeatureIssueCode(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Valid Feature</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Valid Feature</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Valid Feature</em>' attribute.
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXConstructorCall_ValidFeature()
+	 * @model transient="true" changeable="false" derived="true"
+	 * @generated
+	 */
+	boolean isValidFeature();
 
 } // XConstructorCall

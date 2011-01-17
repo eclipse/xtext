@@ -375,13 +375,31 @@ public interface XbasePackage extends EPackage
 	int XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL = XEXPRESSION_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Invalid Feature Issue Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XABSTRACT_FEATURE_CALL__INVALID_FEATURE_ISSUE_CODE = XEXPRESSION_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Valid Feature</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XABSTRACT_FEATURE_CALL__VALID_FEATURE = XEXPRESSION_FEATURE_COUNT + 7;
+
+	/**
 	 * The number of structural features of the '<em>XAbstract Feature Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XABSTRACT_FEATURE_CALL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 6;
+	int XABSTRACT_FEATURE_CALL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl <em>XMember Feature Call</em>}' class.
@@ -446,6 +464,24 @@ public interface XbasePackage extends EPackage
 	 * @ordered
 	 */
 	int XMEMBER_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL = XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL;
+
+	/**
+	 * The feature id for the '<em><b>Invalid Feature Issue Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XMEMBER_FEATURE_CALL__INVALID_FEATURE_ISSUE_CODE = XABSTRACT_FEATURE_CALL__INVALID_FEATURE_ISSUE_CODE;
+
+	/**
+	 * The feature id for the '<em><b>Valid Feature</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XMEMBER_FEATURE_CALL__VALID_FEATURE = XABSTRACT_FEATURE_CALL__VALID_FEATURE;
 
 	/**
 	 * The feature id for the '<em><b>Member Call Target</b></em>' containment reference.
@@ -566,6 +602,24 @@ public interface XbasePackage extends EPackage
 	int XFEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL = XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL;
 
 	/**
+	 * The feature id for the '<em><b>Invalid Feature Issue Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XFEATURE_CALL__INVALID_FEATURE_ISSUE_CODE = XABSTRACT_FEATURE_CALL__INVALID_FEATURE_ISSUE_CODE;
+
+	/**
+	 * The feature id for the '<em><b>Valid Feature</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XFEATURE_CALL__VALID_FEATURE = XABSTRACT_FEATURE_CALL__VALID_FEATURE;
+
+	/**
 	 * The feature id for the '<em><b>Feature Call Arguments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -630,13 +684,31 @@ public interface XbasePackage extends EPackage
 	int XCONSTRUCTOR_CALL__TYPE_ARGUMENTS = XEXPRESSION_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Invalid Feature Issue Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCONSTRUCTOR_CALL__INVALID_FEATURE_ISSUE_CODE = XEXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Valid Feature</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCONSTRUCTOR_CALL__VALID_FEATURE = XEXPRESSION_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>XConstructor Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XCONSTRUCTOR_CALL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 3;
+	int XCONSTRUCTOR_CALL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XBooleanLiteralImpl <em>XBoolean Literal</em>}' class.
@@ -880,6 +952,24 @@ public interface XbasePackage extends EPackage
 	int XBINARY_OPERATION__TARGETS_MEMBER_SYNTAX_CALL = XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL;
 
 	/**
+	 * The feature id for the '<em><b>Invalid Feature Issue Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBINARY_OPERATION__INVALID_FEATURE_ISSUE_CODE = XABSTRACT_FEATURE_CALL__INVALID_FEATURE_ISSUE_CODE;
+
+	/**
+	 * The feature id for the '<em><b>Valid Feature</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBINARY_OPERATION__VALID_FEATURE = XABSTRACT_FEATURE_CALL__VALID_FEATURE;
+
+	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -969,6 +1059,24 @@ public interface XbasePackage extends EPackage
 	 * @ordered
 	 */
 	int XUNARY_OPERATION__TARGETS_MEMBER_SYNTAX_CALL = XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL;
+
+	/**
+	 * The feature id for the '<em><b>Invalid Feature Issue Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XUNARY_OPERATION__INVALID_FEATURE_ISSUE_CODE = XABSTRACT_FEATURE_CALL__INVALID_FEATURE_ISSUE_CODE;
+
+	/**
+	 * The feature id for the '<em><b>Valid Feature</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XUNARY_OPERATION__VALID_FEATURE = XABSTRACT_FEATURE_CALL__VALID_FEATURE;
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -1386,6 +1494,24 @@ public interface XbasePackage extends EPackage
 	int XASSIGNMENT__TARGETS_MEMBER_SYNTAX_CALL = XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL;
 
 	/**
+	 * The feature id for the '<em><b>Invalid Feature Issue Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XASSIGNMENT__INVALID_FEATURE_ISSUE_CODE = XABSTRACT_FEATURE_CALL__INVALID_FEATURE_ISSUE_CODE;
+
+	/**
+	 * The feature id for the '<em><b>Valid Feature</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XASSIGNMENT__VALID_FEATURE = XABSTRACT_FEATURE_CALL__VALID_FEATURE;
+
+	/**
 	 * The feature id for the '<em><b>Assignable</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1715,6 +1841,28 @@ public interface XbasePackage extends EPackage
 	EAttribute getXAbstractFeatureCall_TargetsMemberSyntaxCall();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getInvalidFeatureIssueCode <em>Invalid Feature Issue Code</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Invalid Feature Issue Code</em>'.
+	 * @see org.eclipse.xtext.xbase.XAbstractFeatureCall#getInvalidFeatureIssueCode()
+	 * @see #getXAbstractFeatureCall()
+	 * @generated
+	 */
+	EAttribute getXAbstractFeatureCall_InvalidFeatureIssueCode();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#isValidFeature <em>Valid Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Valid Feature</em>'.
+	 * @see org.eclipse.xtext.xbase.XAbstractFeatureCall#isValidFeature()
+	 * @see #getXAbstractFeatureCall()
+	 * @generated
+	 */
+	EAttribute getXAbstractFeatureCall_ValidFeature();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XMemberFeatureCall <em>XMember Feature Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1853,6 +2001,28 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	EReference getXConstructorCall_TypeArguments();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XConstructorCall#getInvalidFeatureIssueCode <em>Invalid Feature Issue Code</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Invalid Feature Issue Code</em>'.
+	 * @see org.eclipse.xtext.xbase.XConstructorCall#getInvalidFeatureIssueCode()
+	 * @see #getXConstructorCall()
+	 * @generated
+	 */
+	EAttribute getXConstructorCall_InvalidFeatureIssueCode();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XConstructorCall#isValidFeature <em>Valid Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Valid Feature</em>'.
+	 * @see org.eclipse.xtext.xbase.XConstructorCall#isValidFeature()
+	 * @see #getXConstructorCall()
+	 * @generated
+	 */
+	EAttribute getXConstructorCall_ValidFeature();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XBooleanLiteral <em>XBoolean Literal</em>}'.
@@ -2582,6 +2752,22 @@ public interface XbasePackage extends EPackage
 		EAttribute XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL = eINSTANCE.getXAbstractFeatureCall_TargetsMemberSyntaxCall();
 
 		/**
+		 * The meta object literal for the '<em><b>Invalid Feature Issue Code</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XABSTRACT_FEATURE_CALL__INVALID_FEATURE_ISSUE_CODE = eINSTANCE.getXAbstractFeatureCall_InvalidFeatureIssueCode();
+
+		/**
+		 * The meta object literal for the '<em><b>Valid Feature</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XABSTRACT_FEATURE_CALL__VALID_FEATURE = eINSTANCE.getXAbstractFeatureCall_ValidFeature();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl <em>XMember Feature Call</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2690,6 +2876,22 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XCONSTRUCTOR_CALL__TYPE_ARGUMENTS = eINSTANCE.getXConstructorCall_TypeArguments();
+
+		/**
+		 * The meta object literal for the '<em><b>Invalid Feature Issue Code</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XCONSTRUCTOR_CALL__INVALID_FEATURE_ISSUE_CODE = eINSTANCE.getXConstructorCall_InvalidFeatureIssueCode();
+
+		/**
+		 * The meta object literal for the '<em><b>Valid Feature</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XCONSTRUCTOR_CALL__VALID_FEATURE = eINSTANCE.getXConstructorCall_ValidFeature();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XBooleanLiteralImpl <em>XBoolean Literal</em>}' class.

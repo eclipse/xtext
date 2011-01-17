@@ -64,9 +64,13 @@ public class XbaseExpectedTypeProvider extends AbstractExpectedTypeProvider<JvmT
 
 	protected JvmTypeReference _expectedType(XMemberFeatureCall expr, EReference reference, int index) {
 		if (reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS) {
-			TypeArgumentContext context = typeArgCtxProvider.getContext(expr.getMemberCallTarget());
+			if(!(expr.getFeature() instanceof JvmExecutable)) 
+				return null;
 			JvmExecutable feature = (JvmExecutable) expr.getFeature();
+			if(index >= feature.getParameters().size())
+				return null;
 			JvmFormalParameter parameter = feature.getParameters().get(index);
+			TypeArgumentContext context = typeArgCtxProvider.getContext(expr.getMemberCallTarget());
 			return context.getLowerBound(parameter.getParameterType());
 		} else if(reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) 
 			return null;
@@ -75,9 +79,11 @@ public class XbaseExpectedTypeProvider extends AbstractExpectedTypeProvider<JvmT
 
 	protected JvmTypeReference _expectedType(XBinaryOperation expr, EReference reference, int index) {
 		if (reference == XbasePackage.Literals.XBINARY_OPERATION__RIGHT_OPERAND) {
-			TypeArgumentContext context = typeArgCtxProvider.getContext(expr.getLeftOperand());
 			JvmExecutable feature = (JvmExecutable) expr.getFeature();
+			if(index >= feature.getParameters().size())
+				return null;
 			JvmFormalParameter parameter = feature.getParameters().get(0);
+			TypeArgumentContext context = typeArgCtxProvider.getContext(expr.getLeftOperand());
 			return context.getLowerBound(parameter.getParameterType());
 		}
 		return getExpectedType(expr);
@@ -96,6 +102,8 @@ public class XbaseExpectedTypeProvider extends AbstractExpectedTypeProvider<JvmT
 	protected JvmTypeReference _expectedType(XConstructorCall expr, EReference reference, int index) {
 		if (reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS) {
 			JvmExecutable feature = expr.getConstructor();
+			if(index >= feature.getParameters().size())
+				return null;
 			JvmFormalParameter parameter = feature.getParameters().get(index);
 			return parameter.getParameterType();
 		}

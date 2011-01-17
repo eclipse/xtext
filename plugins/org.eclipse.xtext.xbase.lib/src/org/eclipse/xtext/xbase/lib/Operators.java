@@ -8,6 +8,10 @@ public class Operators {
 		return a+b;
 	}
 	
+	public static boolean _operator_not(boolean b) {
+		return !b;
+	}
+	
 	public static boolean _operator_notEquals(Object a, Object b) {
 		return !_operator_equals(a, b);
 	}

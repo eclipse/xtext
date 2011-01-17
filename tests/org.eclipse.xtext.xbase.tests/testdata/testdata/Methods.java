@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,17 +8,15 @@
 package testdata;
 
 /**
- * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
-public class FieldAccess {
+public class Methods {
 
-	public String stringField;
-	public final String finalField;
-	public static String staticField;
+	public void method(int i) {}
+
+	public void sugarMethod() {}
 	
+	public static void staticMethod() {}
 	
-	public FieldAccess() {
-		finalField = "finalField";
-	}
 	
 }

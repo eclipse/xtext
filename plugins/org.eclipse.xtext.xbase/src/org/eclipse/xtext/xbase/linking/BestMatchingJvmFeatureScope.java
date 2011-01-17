@@ -18,11 +18,9 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 
 /**
  * A scope which goes through all returned EObjectDescriptions in order to find the best fit, if it is asked for the
@@ -36,51 +34,46 @@ public class BestMatchingJvmFeatureScope implements IScope {
 	protected final EReference reference;
 	private IJvmTypeConformanceComputer computer;
 	private IScope delegate;
-	private Predicate<IEObjectDescription> filter;
+	private FeatureCallChecker featureCallChecker;
 
 	public BestMatchingJvmFeatureScope(IJvmTypeConformanceComputer computer, EObject context, EReference ref,
-			IScope delegate, Predicate<IEObjectDescription> filter) {
+			IScope delegate, FeatureCallChecker featureCallChecker) {
 		this.computer = computer;
 		this.context = context;
 		this.reference = ref;
 		this.delegate = delegate;
-		this.filter = filter;
+		this.featureCallChecker = featureCallChecker;
 	}
 
+//	protected Iterable<IEObjectDescription> sortByPredicate(Iterable<IEObjectDescription> unsorted) {
+//		if(isCallablePredicate != null) {
+//			return concat(filter(unsorted, isCallablePredicate), filter(unsorted, Predicates.not(isCallablePredicate)));
+//		}
+//		return unsorted;
+//	}
+	
 	public Iterable<IEObjectDescription> getAllElements() {
-		Iterable<IEObjectDescription> unfiltered = delegate.getAllElements();
-		return filter(unfiltered);
+		throw new UnsupportedOperationException();
 	}
 
 	public Iterable<IEObjectDescription> getElements(EObject object) {
-		Iterable<IEObjectDescription> unfiltered = delegate.getElements(object);
-		return filter(unfiltered);
-	}
-
-	protected Iterable<IEObjectDescription> filter(Iterable<IEObjectDescription> unfiltered) {
-		if (filter != null) {
-			Iterable<IEObjectDescription> result = Iterables.filter(unfiltered, filter);
-			return result;
-		}
-		return unfiltered;
+		throw new UnsupportedOperationException();
 	}
 
 	public Iterable<IEObjectDescription> getElements(QualifiedName name) {
-		Iterable<IEObjectDescription> unfiltered = delegate.getElements(name);
-		return filter(unfiltered);
+		throw new UnsupportedOperationException();
 	}
 
 	public IEObjectDescription getSingleElement(EObject object) {
-		final Iterable<IEObjectDescription> elements = getElements(object);
-		return getBestMatch(elements);
+		throw new UnsupportedOperationException();
 	}
 
 	public IEObjectDescription getSingleElement(QualifiedName name) {
-		final Iterable<IEObjectDescription> elements = getElements(name);
-		return setImplicitReceiver(getBestMatch(elements));
+		Iterable<IEObjectDescription> unsorted = delegate.getElements(name);
+		return setImplicitReceiverAndIsValid(getBestMatch(unsorted));
 	}
 
-	protected IEObjectDescription setImplicitReceiver(IEObjectDescription bestMatch) {
+	protected IEObjectDescription setImplicitReceiverAndIsValid(IEObjectDescription bestMatch) {
 		if (bestMatch instanceof JvmFeatureDescription) {
 			if (this.reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE) {
 				JvmFeatureDescription featureDesc = (JvmFeatureDescription) bestMatch;
@@ -88,6 +81,10 @@ public class BestMatchingJvmFeatureScope implements IScope {
 				final XAbstractFeatureCall featureCall = (XAbstractFeatureCall) this.context;
 				featureCall.setImplicitReceiver(implicitReceiver);
 				featureCall.setTargetsMemberSyntaxCall(featureDesc.isMemberSyntaxContext());
+				featureCall.setInvalidFeatureIssueCode(featureDesc.getIssueCode());
+			} else if(this.reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR) {
+				final XConstructorCall constructorCall = (XConstructorCall) this.context;
+				constructorCall.setInvalidFeatureIssueCode(((JvmFeatureDescription) bestMatch).getIssueCode());
 			}
 		}
 		return bestMatch;
@@ -96,6 +93,7 @@ public class BestMatchingJvmFeatureScope implements IScope {
 	protected IEObjectDescription getBestMatch(Iterable<IEObjectDescription> iterable) {
 		IEObjectDescription bestMatch = null;
 		for (IEObjectDescription description : iterable) {
+			featureCallChecker.check(description);
 			if (bestMatch == null) {
 				bestMatch = description;
 			} else {
@@ -107,6 +105,11 @@ public class BestMatchingJvmFeatureScope implements IScope {
 
 	protected IEObjectDescription getBestMatch(IEObjectDescription a, IEObjectDescription b) {
 		if (a instanceof JvmFeatureDescription && b instanceof JvmFeatureDescription) {
+			if(((JvmFeatureDescription) a).isValid()) { 
+				if(!((JvmFeatureDescription)b).isValid())
+					return a;
+			} else if(((JvmFeatureDescription) b).isValid())
+				return b;
 			JvmFeatureDescription descA = (JvmFeatureDescription) a;
 			JvmFeatureDescription descB = (JvmFeatureDescription) b;
 			TypeArgumentContext contextA = descA.getContext();
@@ -114,10 +117,12 @@ public class BestMatchingJvmFeatureScope implements IScope {
 			if (descA.getJvmFeature() instanceof JvmOperation) {
 				if (descB.getJvmFeature() instanceof JvmOperation) {
 					JvmOperation opA = (JvmOperation) descA.getJvmFeature();
+					int numParamsA = opA.getParameters().size();
 					JvmOperation opB = (JvmOperation) descB.getJvmFeature();
-					for (int i = 0; i < opA.getParameters().size(); i++) {
-						JvmTypeReference pA = opA.getParameters().get(i).getParameterType();
-						JvmTypeReference pB = opB.getParameters().get(i).getParameterType();
+					int numParamsB = opB.getParameters().size();
+					for (int i = 0; i < Math.min(numParamsA, numParamsB); i++) {
+						JvmTypeReference pA = opA.getParameters().get(numParamsA-i-1).getParameterType();
+						JvmTypeReference pB = opB.getParameters().get(numParamsB-i-1).getParameterType();
 						if (!computer.isConformant(contextA.getLowerBound(pA), contextB.getLowerBound(pB)))
 							return a;
 					}

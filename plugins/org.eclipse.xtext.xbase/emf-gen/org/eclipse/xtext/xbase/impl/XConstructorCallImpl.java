@@ -37,6 +37,8 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl#getConstructor <em>Constructor</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl#getArguments <em>Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl#getTypeArguments <em>Type Arguments</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl#getInvalidFeatureIssueCode <em>Invalid Feature Issue Code</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl#isValidFeature <em>Valid Feature</em>}</li>
  * </ul>
  * </p>
  *
@@ -73,6 +75,46 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	 * @ordered
 	 */
 	protected EList<JvmTypeReference> typeArguments;
+
+	/**
+	 * The default value of the '{@link #getInvalidFeatureIssueCode() <em>Invalid Feature Issue Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInvalidFeatureIssueCode()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String INVALID_FEATURE_ISSUE_CODE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getInvalidFeatureIssueCode() <em>Invalid Feature Issue Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInvalidFeatureIssueCode()
+	 * @generated
+	 * @ordered
+	 */
+	protected String invalidFeatureIssueCode = INVALID_FEATURE_ISSUE_CODE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isValidFeature() <em>Valid Feature</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isValidFeature()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean VALID_FEATURE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isValidFeature() <em>Valid Feature</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isValidFeature()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean validFeature = VALID_FEATURE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -171,6 +213,39 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getInvalidFeatureIssueCode()
+	{
+		return invalidFeatureIssueCode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInvalidFeatureIssueCode(String newInvalidFeatureIssueCode)
+	{
+		String oldInvalidFeatureIssueCode = invalidFeatureIssueCode;
+		invalidFeatureIssueCode = newInvalidFeatureIssueCode;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XCONSTRUCTOR_CALL__INVALID_FEATURE_ISSUE_CODE, oldInvalidFeatureIssueCode, invalidFeatureIssueCode));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isValidFeature()
+	{
+		return validFeature;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -201,6 +276,10 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 				return getArguments();
 			case XbasePackage.XCONSTRUCTOR_CALL__TYPE_ARGUMENTS:
 				return getTypeArguments();
+			case XbasePackage.XCONSTRUCTOR_CALL__INVALID_FEATURE_ISSUE_CODE:
+				return getInvalidFeatureIssueCode();
+			case XbasePackage.XCONSTRUCTOR_CALL__VALID_FEATURE:
+				return isValidFeature();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -227,6 +306,9 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 				getTypeArguments().clear();
 				getTypeArguments().addAll((Collection<? extends JvmTypeReference>)newValue);
 				return;
+			case XbasePackage.XCONSTRUCTOR_CALL__INVALID_FEATURE_ISSUE_CODE:
+				setInvalidFeatureIssueCode((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -250,6 +332,9 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 			case XbasePackage.XCONSTRUCTOR_CALL__TYPE_ARGUMENTS:
 				getTypeArguments().clear();
 				return;
+			case XbasePackage.XCONSTRUCTOR_CALL__INVALID_FEATURE_ISSUE_CODE:
+				setInvalidFeatureIssueCode(INVALID_FEATURE_ISSUE_CODE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -270,8 +355,31 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 				return arguments != null && !arguments.isEmpty();
 			case XbasePackage.XCONSTRUCTOR_CALL__TYPE_ARGUMENTS:
 				return typeArguments != null && !typeArguments.isEmpty();
+			case XbasePackage.XCONSTRUCTOR_CALL__INVALID_FEATURE_ISSUE_CODE:
+				return INVALID_FEATURE_ISSUE_CODE_EDEFAULT == null ? invalidFeatureIssueCode != null : !INVALID_FEATURE_ISSUE_CODE_EDEFAULT.equals(invalidFeatureIssueCode);
+			case XbasePackage.XCONSTRUCTOR_CALL__VALID_FEATURE:
+				return validFeature != VALID_FEATURE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString()
+	{
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (invalidFeatureIssueCode: ");
+		result.append(invalidFeatureIssueCode);
+		result.append(", validFeature: ");
+		result.append(validFeature);
+		result.append(')');
+		return result.toString();
 	}
 
 } //XConstructorCallImpl

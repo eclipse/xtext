@@ -24,6 +24,8 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getTypeArguments <em>Type Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getImplicitReceiver <em>Implicit Receiver</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#isTargetsMemberSyntaxCall <em>Targets Member Syntax Call</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getInvalidFeatureIssueCode <em>Invalid Feature Issue Code</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#isValidFeature <em>Valid Feature</em>}</li>
  * </ul>
  * </p>
  *
@@ -158,5 +160,46 @@ public interface XAbstractFeatureCall extends XExpression
 	 * @generated
 	 */
 	void setTargetsMemberSyntaxCall(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Invalid Feature Issue Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Invalid Feature Issue Code</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Invalid Feature Issue Code</em>' attribute.
+	 * @see #setInvalidFeatureIssueCode(String)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXAbstractFeatureCall_InvalidFeatureIssueCode()
+	 * @model transient="true"
+	 * @generated
+	 */
+	String getInvalidFeatureIssueCode();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getInvalidFeatureIssueCode <em>Invalid Feature Issue Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Invalid Feature Issue Code</em>' attribute.
+	 * @see #getInvalidFeatureIssueCode()
+	 * @generated
+	 */
+	void setInvalidFeatureIssueCode(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Valid Feature</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Valid Feature</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Valid Feature</em>' attribute.
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXAbstractFeatureCall_ValidFeature()
+	 * @model transient="true" changeable="false" derived="true"
+	 * @generated
+	 */
+	boolean isValidFeature();
 
 } // XAbstractFeatureCall
