@@ -27,6 +27,6 @@ public class Bug283278Test extends AbstractXtextTests {
 		URI uri = URI.createURI(url.toString());
 		Resource resource = rs.getResource(uri, true);
 		EcoreUtil.resolveAll(resource);
-		assertEquals(2,rs.getResources().size());
+		assertEquals(3,rs.getResources().size());
 	}
 }
