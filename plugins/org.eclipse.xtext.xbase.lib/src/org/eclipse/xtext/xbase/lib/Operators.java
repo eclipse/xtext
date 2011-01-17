@@ -1,5 +1,7 @@
 package org.eclipse.xtext.xbase.lib;
 
+import java.util.Collection;
+
 public class Operators {
 	
 	public static int _operator_plus(int a, int b) {
@@ -16,6 +18,10 @@ public class Operators {
 		if (a==null)
 			return false;
 		return a.equals(b);
+	}
+	
+	public static <A extends Collection<B>,B> boolean _operator_add(A a, B b) {
+		return a.add(b);
 	}
 	
 }
