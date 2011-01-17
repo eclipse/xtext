@@ -9,6 +9,7 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.xtend2,
  org.eclipse.xtext.xtend2.compiler,
+ org.eclipse.xtext.xtend2.conversion,
  org.eclipse.xtext.xtend2.formatting,
  org.eclipse.xtext.xtend2.parseTreeConstruction,
  org.eclipse.xtext.xtend2.parser.antlr,

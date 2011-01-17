@@ -21,23 +21,22 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 /**
  * @author Sven Efftinge
- *
  */
 public class LinkingTest extends AbstractXtend2TestCase {
 	
 	public void testTypeReference_withImport() throws Exception {
 		XtendFunction func = (XtendFunction) clazz("import java.lang.* class X { (String)=>Boolean foo() [|true] }").getMembers().get(0);
 		XFunctionTypeRef type = (XFunctionTypeRef) func.getReturnType();
-		JvmTypeReference returnType = (JvmTypeReference) type.getReturnType();
+		JvmTypeReference returnType = type.getReturnType();
 		assertEquals("java.lang.Boolean", returnType.getCanonicalName());
-		JvmTypeReference paramType = (JvmTypeReference) type.getParamTypes().get(0);
+		JvmTypeReference paramType = type.getParamTypes().get(0);
 		assertEquals("java.lang.String", paramType.getCanonicalName());
 	}
 	
 	public void testTypeReference_0() throws Exception {
 		XtendFunction func = function("=>java.lang.Boolean foo() [|true]");
 		XFunctionTypeRef type = (XFunctionTypeRef) func.getReturnType();
-		JvmTypeReference returnType = (JvmTypeReference) type.getReturnType();
+		JvmTypeReference returnType = type.getReturnType();
 		assertEquals("java.lang.Boolean", returnType.getCanonicalName());
 	}
 	

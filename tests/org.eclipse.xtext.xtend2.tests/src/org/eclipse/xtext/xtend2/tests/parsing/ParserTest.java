@@ -150,7 +150,9 @@ public class ParserTest extends AbstractXtend2TestCase {
 
 	public void testRichString_00() throws Exception {
 		XtendFunction function = function("foo() ''' foo '''");
-		assertTrue(function.getExpression() instanceof RichStringLiteral); 
+		assertTrue(function.getExpression() instanceof RichStringLiteral);
+		RichStringLiteral stringLiteral = (RichStringLiteral) function.getExpression();
+		assertEquals(" foo ", stringLiteral.getValue());
 	}
 	
 	public void testRichString_01() throws Exception {
