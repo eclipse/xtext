@@ -8,13 +8,13 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
     editorPluginID="org.eclipse.xtext.tests.editor">
   <genPackages prefix="LexerLang" basePackage="org.eclipse.xtext.testlanguages" disposableProviderFactory="true"
-      ecorePackage="LexerTestLanguage.ecore#/">
-    <genClasses ecoreClass="LexerTestLanguage.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LexerTestLanguage.ecore#//Model/children"/>
+      ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LexerTestLanguage.ecore#/">
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LexerTestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LexerTestLanguage.ecore#//Model/children"/>
     </genClasses>
-    <genClasses ecoreClass="LexerTestLanguage.ecore#//Element">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LexerTestLanguage.ecore#//Element/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LexerTestLanguage.ecore#//Element/h"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LexerTestLanguage.ecore#//Element">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LexerTestLanguage.ecore#//Element/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/LexerTestLanguage.ecore#//Element/h"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

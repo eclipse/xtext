@@ -8,12 +8,12 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
     editorPluginID="org.eclipse.xtext.tests.editor">
   <genPackages prefix="OptionalEmpty" basePackage="org.eclipse.xtext.testlanguages"
-      disposableProviderFactory="true" ecorePackage="OptionalEmptyTestLanguage.ecore#/">
-    <genClasses ecoreClass="OptionalEmptyTestLanguage.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OptionalEmptyTestLanguage.ecore#//Model/child"/>
+      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/OptionalEmptyTestLanguage.ecore#/">
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/OptionalEmptyTestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/OptionalEmptyTestLanguage.ecore#//Model/child"/>
     </genClasses>
-    <genClasses ecoreClass="OptionalEmptyTestLanguage.ecore#//Greeting">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OptionalEmptyTestLanguage.ecore#//Greeting/name"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/OptionalEmptyTestLanguage.ecore#//Greeting">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/OptionalEmptyTestLanguage.ecore#//Greeting/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

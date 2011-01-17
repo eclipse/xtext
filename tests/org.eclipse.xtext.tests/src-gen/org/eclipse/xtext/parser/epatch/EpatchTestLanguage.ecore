@@ -6,103 +6,109 @@
   <eClassifiers xsi:type="ecore:EClass" name="EPatch">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
-        eType="#//Import" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Import"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="resources" upperBound="-1"
-        eType="#//NamedResource" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedResource"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="objects" upperBound="-1"
-        eType="#//ObjectRef" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectRef"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Import"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ModelImport" eSuperTypes="#//Import">
+  <eClassifiers xsi:type="ecore:EClass" name="ModelImport" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Import">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ResourceImport" eSuperTypes="#//ModelImport">
+  <eClassifiers xsi:type="ecore:EClass" name="ResourceImport" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ModelImport">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EPackageImport" eSuperTypes="#//ModelImport">
+  <eClassifiers xsi:type="ecore:EClass" name="EPackageImport" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ModelImport">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nsURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JavaImport" eSuperTypes="#//Import">
+  <eClassifiers xsi:type="ecore:EClass" name="JavaImport" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Import">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExtensionImport" eSuperTypes="#//Import">
+  <eClassifiers xsi:type="ecore:EClass" name="ExtensionImport" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Import">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NamedResource">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="leftRoot" eType="#//CreatedObject"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftRoot" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//CreatedObject"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rightRoot" eType="#//CreatedObject"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightRoot" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//CreatedObject"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NamedObject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="assignments" upperBound="-1"
-        eType="#//Assignment" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="leftMig" eType="#//Migration"
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Assignment"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftMig" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Migration"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ObjectRef" eSuperTypes="#//NamedObject">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="leftRes" eType="#//NamedResource"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectRef" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftRes" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedResource"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftFrag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rightRes" eType="#//NamedResource"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightRes" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedResource"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightFrag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rightMig" eType="#//Migration"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightMig" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Migration"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Assignment">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="feature" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SingleAssignment" eSuperTypes="#//Assignment">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="leftValue" eType="#//AssignmentValue"
+  <eClassifiers xsi:type="ecore:EClass" name="SingleAssignment" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Assignment">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftValue" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rightValue" eType="#//AssignmentValue"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightValue" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ListAssignment" eSuperTypes="#//Assignment">
+  <eClassifiers xsi:type="ecore:EClass" name="ListAssignment" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Assignment">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftValues" upperBound="-1"
-        eType="#//AssignmentValue" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rightValues" upperBound="-1"
-        eType="#//AssignmentValue" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AssignmentValue">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="refObject" eType="#//NamedObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refObject" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="refFeature" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="refIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="newObject" eType="#//CreatedObject"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="newObject" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//CreatedObject"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="import" eType="#//Import"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="import" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Import"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="impFrag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="keyword" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CreatedObject" eSuperTypes="#//NamedObject"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ObjectNew" eSuperTypes="#//CreatedObject">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="import" eType="#//Import"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CreatedObject" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectNew" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//CreatedObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="import" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Import"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="impFrag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ObjectCopy" eSuperTypes="#//CreatedObject">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="resource" eType="#//NamedResource"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectCopy" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//CreatedObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resource" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedResource"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fragment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Migration">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="first" eType="#//Executable"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="first" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Executable"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="asOp" eType="#//Executable"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="asOp" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Executable"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="eachOp" eType="#//Executable"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eachOp" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Executable"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Executable"/>
-  <eClassifiers xsi:type="ecore:EClass" name="JavaExecutable" eSuperTypes="#//Executable">
+  <eClassifiers xsi:type="ecore:EClass" name="JavaExecutable" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Executable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="method" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionExecutable" eSuperTypes="#//Executable">
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionExecutable" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Executable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="exprstr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

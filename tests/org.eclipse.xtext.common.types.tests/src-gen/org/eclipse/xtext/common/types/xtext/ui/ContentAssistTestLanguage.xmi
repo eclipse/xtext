@@ -156,6 +156,7 @@
                 <elements xsi:type="xtext:Keyword" value="n"/>
                 <elements xsi:type="xtext:Keyword" value="f"/>
                 <elements xsi:type="xtext:Keyword" value="r"/>
+                <elements xsi:type="xtext:Keyword" value="u"/>
                 <elements xsi:type="xtext:Keyword" value="&quot;"/>
                 <elements xsi:type="xtext:Keyword" value="'"/>
                 <elements xsi:type="xtext:Keyword" value="\"/>
@@ -181,6 +182,7 @@
                 <elements xsi:type="xtext:Keyword" value="n"/>
                 <elements xsi:type="xtext:Keyword" value="f"/>
                 <elements xsi:type="xtext:Keyword" value="r"/>
+                <elements xsi:type="xtext:Keyword" value="u"/>
                 <elements xsi:type="xtext:Keyword" value="&quot;"/>
                 <elements xsi:type="xtext:Keyword" value="'"/>
                 <elements xsi:type="xtext:Keyword" value="\"/>

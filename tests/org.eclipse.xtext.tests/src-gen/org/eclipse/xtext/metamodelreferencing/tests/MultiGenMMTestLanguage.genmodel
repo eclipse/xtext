@@ -8,16 +8,16 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
     editorPluginID="org.eclipse.xtext.tests.editor">
   <genPackages prefix="SimpleTest" basePackage="org.eclipse.xtext.metamodelreferencing.tests"
-      disposableProviderFactory="true" ecorePackage="MultiGenMMTestLanguage.ecore#/0">
-    <genClasses ecoreClass="MultiGenMMTestLanguage.ecore#/0/Foo">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MultiGenMMTestLanguage.ecore#/0/Foo/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MultiGenMMTestLanguage.ecore#/0/Foo/nameRefs"/>
+      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/MultiGenMMTestLanguage.ecore#/0">
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/MultiGenMMTestLanguage.ecore#/0/Foo">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/MultiGenMMTestLanguage.ecore#/0/Foo/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/MultiGenMMTestLanguage.ecore#/0/Foo/nameRefs"/>
     </genClasses>
   </genPackages>
   <genPackages prefix="OtherTest" basePackage="org.eclipse.xtext.metamodelreferencing.tests"
-      disposableProviderFactory="true" ecorePackage="MultiGenMMTestLanguage.ecore#/1">
-    <genClasses ecoreClass="MultiGenMMTestLanguage.ecore#/1/FooBar">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MultiGenMMTestLanguage.ecore#/1/FooBar/name"/>
+      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/MultiGenMMTestLanguage.ecore#/1">
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/MultiGenMMTestLanguage.ecore#/1/FooBar">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/MultiGenMMTestLanguage.ecore#/1/FooBar/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

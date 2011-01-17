@@ -4,22 +4,23 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="eObjectAtOffsetTestLanguage"
     nsURI="http://www.xtext.org/EObjectAtOffsetTestLanguage" nsPrefix="eObjectAtOffsetTestLanguage">
   <eClassifiers xsi:type="ecore:EClass" name="Model">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="foos" upperBound="-1" eType="#//Foo"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="foos" upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/EObjectAtOffsetTestLanguage.ecore#//Foo"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="bars" upperBound="-1" eType="#//AbstractBar"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bars" upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/EObjectAtOffsetTestLanguage.ecore#//AbstractBar"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractBar">
     <eStructuralFeatures xsi:type="ecore:EReference" name="foo" unique="false" upperBound="-1"
-        eType="#//Foo"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/EObjectAtOffsetTestLanguage.ecore#//Foo"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Bar" eSuperTypes="#//AbstractBar">
+  <eClassifiers xsi:type="ecore:EClass" name="Bar" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/EObjectAtOffsetTestLanguage.ecore#//AbstractBar">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Foo">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FooBar" eSuperTypes="#//AbstractBar">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="bar" eType="#//Bar" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FooBar" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/EObjectAtOffsetTestLanguage.ecore#//AbstractBar">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bar" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/EObjectAtOffsetTestLanguage.ecore#//Bar"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

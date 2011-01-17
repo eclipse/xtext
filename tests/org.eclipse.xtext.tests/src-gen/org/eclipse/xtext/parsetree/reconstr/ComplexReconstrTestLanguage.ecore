@@ -4,14 +4,14 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="complexrewritetest"
     nsURI="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest" nsPrefix="complexrewritetest">
   <eClassifiers xsi:type="ecore:EClass" name="Root"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="#//Root">
+  <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//Root">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="em" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Atom" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="Atom" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeA1"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TypeD" eSuperTypes="#//TypeA1">
+  <eClassifiers xsi:type="ecore:EClass" name="TypeD" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TypeA1">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -44,38 +44,45 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TrickyG" eSuperTypes="#//Root">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="tree" eType="#//TrickyG1"
+  <eClassifiers xsi:type="ecore:EClass" name="TrickyG" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//Root">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tree" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyG1"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TrickyG1" eSuperTypes="#//TrickyG2">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="vals" upperBound="-1" eType="#//TrickyG2"
+  <eClassifiers xsi:type="ecore:EClass" name="TrickyG1" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyG2">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vals" upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyG2"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TrickyG2">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Add" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="Add" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="addOperands" upperBound="-1"
-        eType="#//Expression" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//Expression"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Minus" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="Minus" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="minusOperands" upperBound="-1"
-        eType="#//Expression" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//Expression"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TypeB" eSuperTypes="#//TypeA1">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x" eType="#//TypeD" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeB" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TypeA1">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TypeD"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TypeC" eSuperTypes="#//TypeA1">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x" eType="#//TypeD" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeC" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TypeA1">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TypeD"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="C1" eSuperTypes="#//TrickyC">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x" eType="#//TrickyC" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="C1" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyC">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyC"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="C2" eSuperTypes="#//TrickyC">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="y" eType="#//C1" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="C2" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyC">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="y" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//C1"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="C3" eSuperTypes="#//TrickyC">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="z" eType="#//C2" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="C3" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyC">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="z" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//C2"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

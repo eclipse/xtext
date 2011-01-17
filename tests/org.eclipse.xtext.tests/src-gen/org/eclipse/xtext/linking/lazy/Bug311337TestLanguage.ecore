@@ -4,25 +4,26 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bug311337"
     nsURI="http://xtext.org/testlanguages/bug311337" nsPrefix="bug311337">
   <eClassifiers xsi:type="ecore:EClass" name="Model">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="def" upperBound="-1" eType="#//Definition"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="def" upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/Bug311337TestLanguage.ecore#//Definition"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Definition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="child" upperBound="-1"
-        eType="#//Child" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" upperBound="-1" eType="#//Reference"
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/Bug311337TestLanguage.ecore#//Child"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/Bug311337TestLanguage.ecore#//Reference"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Child">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="link" eType="#//Definition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="link" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/Bug311337TestLanguage.ecore#//Definition"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Reference">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="refChild" eType="#//Child"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refChild" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/Bug311337TestLanguage.ecore#//Child"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NestedRef" eSuperTypes="#//Reference">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Reference"
+  <eClassifiers xsi:type="ecore:EClass" name="NestedRef" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/Bug311337TestLanguage.ecore#//Reference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/lazy/Bug311337TestLanguage.ecore#//Reference"
         containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

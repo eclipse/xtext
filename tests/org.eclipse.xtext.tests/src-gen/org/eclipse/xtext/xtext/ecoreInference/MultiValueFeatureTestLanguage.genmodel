@@ -8,9 +8,9 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
     editorPluginID="org.eclipse.xtext.tests.editor">
   <genPackages prefix="MultiValueFeatureTestLanguage" basePackage="org.eclipse.xtext.xtext.ecoreInference"
-      disposableProviderFactory="true" ecorePackage="MultiValueFeatureTestLanguage.ecore#/">
-    <genClasses ecoreClass="MultiValueFeatureTestLanguage.ecore#//Start">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MultiValueFeatureTestLanguage.ecore#//Start/featureA"/>
+      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/MultiValueFeatureTestLanguage.ecore#/">
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/MultiValueFeatureTestLanguage.ecore#//Start">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/MultiValueFeatureTestLanguage.ecore#//Start/featureA"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

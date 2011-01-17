@@ -4,7 +4,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="optionalEmpty"
     nsURI="http://www.eclipse.org/2008/tmf/xtext/OptionalEmpty" nsPrefix="optionalEmpty">
   <eClassifiers xsi:type="ecore:EClass" name="Model">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="child" eType="#//Greeting"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="child" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/OptionalEmptyTestLanguage.ecore#//Greeting"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Greeting">

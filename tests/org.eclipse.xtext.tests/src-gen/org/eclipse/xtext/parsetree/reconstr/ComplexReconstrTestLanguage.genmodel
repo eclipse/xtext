@@ -8,68 +8,68 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
     editorPluginID="org.eclipse.xtext.tests.editor">
   <genPackages prefix="Complexrewritetest" basePackage="org.eclipse.xtext.parsetree.reconstr"
-      disposableProviderFactory="true" ecorePackage="ComplexReconstrTestLanguage.ecore#/">
-    <genClasses ecoreClass="ComplexReconstrTestLanguage.ecore#//Root"/>
-    <genClasses ecoreClass="ComplexReconstrTestLanguage.ecore#//Expression">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ComplexReconstrTestLanguage.ecore#//Expression/em"/>
+      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#/">
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//Root"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//Expression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//Expression/em"/>
     </genClasses>
-    <genClasses ecoreClass="ComplexReconstrTestLanguage.ecore#//Atom">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ComplexReconstrTestLanguage.ecore#//Atom/name"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//Atom">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//Atom/name"/>
     </genClasses>
-    <genClasses ecoreClass="ComplexReconstrTestLanguage.ecore#//TypeA1"/>
-    <genClasses ecoreClass="ComplexReconstrTestLanguage.ecore#//TypeD">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ComplexReconstrTestLanguage.ecore#//TypeD/name"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TypeA1"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TypeD">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TypeD/name"/>
     </genClasses>
-    <genClasses ecoreClass="ComplexReconstrTestLanguage.ecore#//TrickyB">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ComplexReconstrTestLanguage.ecore#//TrickyB/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ComplexReconstrTestLanguage.ecore#//TrickyB/type"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyB">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyB/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyB/type"/>
     </genClasses>
-    <genClasses ecoreClass="ComplexReconstrTestLanguage.ecore#//TrickyC">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ComplexReconstrTestLanguage.ecore#//TrickyC/name"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyC">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyC/name"/>
     </genClasses>
-    <genClasses ecoreClass="ComplexReconstrTestLanguage.ecore#//TrickyD">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ComplexReconstrTestLanguage.ecore#//TrickyD/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ComplexReconstrTestLanguage.ecore#//TrickyD/foo"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ComplexReconstrTestLanguage.ecore#//TrickyD/type"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyD">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyD/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyD/foo"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyD/type"/>
     </genClasses>
-    <genClasses ecoreClass="ComplexReconstrTestLanguage.ecore#//TrickyE">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ComplexReconstrTestLanguage.ecore#//TrickyE/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ComplexReconstrTestLanguage.ecore#//TrickyE/foo"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ComplexReconstrTestLanguage.ecore#//TrickyE/type"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyE">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyE/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyE/foo"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyE/type"/>
     </genClasses>
-    <genClasses ecoreClass="ComplexReconstrTestLanguage.ecore#//TrickyF">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ComplexReconstrTestLanguage.ecore#//TrickyF/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ComplexReconstrTestLanguage.ecore#//TrickyF/type"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyF">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyF/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyF/type"/>
     </genClasses>
-    <genClasses ecoreClass="ComplexReconstrTestLanguage.ecore#//TrickyG">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ComplexReconstrTestLanguage.ecore#//TrickyG/tree"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyG">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyG/tree"/>
     </genClasses>
-    <genClasses ecoreClass="ComplexReconstrTestLanguage.ecore#//TrickyG1">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ComplexReconstrTestLanguage.ecore#//TrickyG1/vals"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyG1">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyG1/vals"/>
     </genClasses>
-    <genClasses ecoreClass="ComplexReconstrTestLanguage.ecore#//TrickyG2">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ComplexReconstrTestLanguage.ecore#//TrickyG2/val"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyG2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TrickyG2/val"/>
     </genClasses>
-    <genClasses ecoreClass="ComplexReconstrTestLanguage.ecore#//Add">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ComplexReconstrTestLanguage.ecore#//Add/addOperands"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//Add">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//Add/addOperands"/>
     </genClasses>
-    <genClasses ecoreClass="ComplexReconstrTestLanguage.ecore#//Minus">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ComplexReconstrTestLanguage.ecore#//Minus/minusOperands"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//Minus">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//Minus/minusOperands"/>
     </genClasses>
-    <genClasses ecoreClass="ComplexReconstrTestLanguage.ecore#//TypeB">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ComplexReconstrTestLanguage.ecore#//TypeB/x"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TypeB">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TypeB/x"/>
     </genClasses>
-    <genClasses ecoreClass="ComplexReconstrTestLanguage.ecore#//TypeC">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ComplexReconstrTestLanguage.ecore#//TypeC/x"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TypeC">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//TypeC/x"/>
     </genClasses>
-    <genClasses ecoreClass="ComplexReconstrTestLanguage.ecore#//C1">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ComplexReconstrTestLanguage.ecore#//C1/x"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//C1">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//C1/x"/>
     </genClasses>
-    <genClasses ecoreClass="ComplexReconstrTestLanguage.ecore#//C2">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ComplexReconstrTestLanguage.ecore#//C2/y"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//C2">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//C2/y"/>
     </genClasses>
-    <genClasses ecoreClass="ComplexReconstrTestLanguage.ecore#//C3">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ComplexReconstrTestLanguage.ecore#//C3/z"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//C3">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.ecore#//C3/z"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

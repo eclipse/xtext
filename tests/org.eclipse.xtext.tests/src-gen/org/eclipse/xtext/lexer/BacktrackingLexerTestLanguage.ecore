@@ -5,12 +5,12 @@
     nsURI="http://www.eclipse.org/2008/tmf/xtext/BacktrackingLexerTest" nsPrefix="backtrackingTestLanguage">
   <eClassifiers xsi:type="ecore:EClass" name="Model">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="enums" unique="false" upperBound="-1"
-        eType="#//EnumName"/>
+        eType="ecore:EEnum platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.ecore#//EnumName"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ycs" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="abs" upperBound="-1" eType="#//Ab"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="abs" upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.ecore#//Ab"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="xbs" upperBound="-1" eType="#//Xb"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="xbs" upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.ecore#//Xb"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ys" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

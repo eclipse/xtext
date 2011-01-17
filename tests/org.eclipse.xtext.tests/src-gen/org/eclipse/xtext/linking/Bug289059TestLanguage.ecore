@@ -5,9 +5,9 @@
     nsURI="http://eclipse.org/xtext/Bug289059TestLanguage" nsPrefix="bug289059Test">
   <eClassifiers xsi:type="ecore:EClass" name="Model">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="enabled" eType="#//UnassignedAction"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enabled" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/Bug289059TestLanguage.ecore#//UnassignedAction"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//Model"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/Bug289059TestLanguage.ecore#//Model"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnassignedAction"/>
 </ecore:EPackage>

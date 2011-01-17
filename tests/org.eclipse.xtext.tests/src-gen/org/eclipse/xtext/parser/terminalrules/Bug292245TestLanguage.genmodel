@@ -8,11 +8,11 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
     editorPluginID="org.eclipse.xtext.tests.editor">
   <genPackages prefix="Bug292245TestLanguage" basePackage="org.eclipse.xtext.parser.terminalrules"
-      disposableProviderFactory="true" ecorePackage="Bug292245TestLanguage.ecore#/">
-    <genClasses ecoreClass="Bug292245TestLanguage.ecore#//Model">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug292245TestLanguage.ecore#//Model/fix"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug292245TestLanguage.ecore#//Model/error"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug292245TestLanguage.ecore#//Model/tick"/>
+      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/Bug292245TestLanguage.ecore#/">
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/Bug292245TestLanguage.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/Bug292245TestLanguage.ecore#//Model/fix"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/Bug292245TestLanguage.ecore#//Model/error"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/Bug292245TestLanguage.ecore#//Model/tick"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

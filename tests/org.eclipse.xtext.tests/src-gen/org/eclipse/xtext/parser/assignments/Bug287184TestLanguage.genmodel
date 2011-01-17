@@ -8,17 +8,17 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
     editorPluginID="org.eclipse.xtext.tests.editor">
   <genPackages prefix="Bug287184Test" basePackage="org.eclipse.xtext.parser.assignments"
-      disposableProviderFactory="true" ecorePackage="Bug287184TestLanguage.ecore#/">
-    <genClasses ecoreClass="Bug287184TestLanguage.ecore#//Model">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug287184TestLanguage.ecore#//Model/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug287184TestLanguage.ecore#//Model/detail"/>
+      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug287184TestLanguage.ecore#/">
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug287184TestLanguage.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug287184TestLanguage.ecore#//Model/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug287184TestLanguage.ecore#//Model/detail"/>
     </genClasses>
-    <genClasses ecoreClass="Bug287184TestLanguage.ecore#//AbstractDetail">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug287184TestLanguage.ecore#//AbstractDetail/detailClass"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug287184TestLanguage.ecore#//AbstractDetail">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug287184TestLanguage.ecore#//AbstractDetail/detailClass"/>
     </genClasses>
-    <genClasses ecoreClass="Bug287184TestLanguage.ecore#//Detail">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug287184TestLanguage.ecore#//Detail/visibility"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug287184TestLanguage.ecore#//Detail">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug287184TestLanguage.ecore#//Detail/visibility"/>
     </genClasses>
-    <genClasses ecoreClass="Bug287184TestLanguage.ecore#//AssociatedDetail"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug287184TestLanguage.ecore#//AssociatedDetail"/>
   </genPackages>
 </genmodel:GenModel>

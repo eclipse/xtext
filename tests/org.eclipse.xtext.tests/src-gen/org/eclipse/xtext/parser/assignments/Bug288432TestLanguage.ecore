@@ -5,29 +5,30 @@
     nsURI="http://www.eclipse.org/2008/tmf/xtext/Bug288432Test" nsPrefix="bug288432Test">
   <eClassifiers xsi:type="ecore:EClass" name="Body">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" upperBound="-1"
-        eType="#//Parameter" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="content" eType="#//ParameterObject"
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//Parameter"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="foo" upperBound="-1" eType="#//Foo"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="content" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//ParameterObject"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="foo" upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//Foo"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Foo">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fooValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Content" eSuperTypes="#//ParameterObject"/>
-  <eClassifiers xsi:type="ecore:EClass" name="MyElement" eSuperTypes="#//Content">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="bar" eType="#//ParameterObject"
+  <eClassifiers xsi:type="ecore:EClass" name="Content" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//ParameterObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MyElement" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//Content">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bar" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//ParameterObject"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ParameterObject"/>
   <eClassifiers xsi:type="ecore:EClass" name="Parameter">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//ParameterObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//ParameterObject"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ParameterRef" eSuperTypes="#//ParameterObject">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="#//Parameter"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterRef" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//ParameterObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//Parameter"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MyInt" eSuperTypes="#//ParameterObject">
+  <eClassifiers xsi:type="ecore:EClass" name="MyInt" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.ecore#//ParameterObject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="int" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
 </ecore:EPackage>

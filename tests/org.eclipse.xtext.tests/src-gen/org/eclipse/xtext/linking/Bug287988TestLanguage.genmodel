@@ -8,16 +8,16 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
     editorPluginID="org.eclipse.xtext.tests.editor">
   <genPackages prefix="Bug287988Test" basePackage="org.eclipse.xtext.linking" disposableProviderFactory="true"
-      ecorePackage="Bug287988TestLanguage.ecore#/">
-    <genClasses ecoreClass="Bug287988TestLanguage.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug287988TestLanguage.ecore#//Model/attributes"/>
+      ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/Bug287988TestLanguage.ecore#/">
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/Bug287988TestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/Bug287988TestLanguage.ecore#//Model/attributes"/>
     </genClasses>
-    <genClasses ecoreClass="Bug287988TestLanguage.ecore#//BaseAttribute">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug287988TestLanguage.ecore#//BaseAttribute/typeRef"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug287988TestLanguage.ecore#//BaseAttribute/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug287988TestLanguage.ecore#//BaseAttribute/name"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/Bug287988TestLanguage.ecore#//BaseAttribute">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/Bug287988TestLanguage.ecore#//BaseAttribute/typeRef"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/Bug287988TestLanguage.ecore#//BaseAttribute/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/Bug287988TestLanguage.ecore#//BaseAttribute/name"/>
     </genClasses>
-    <genClasses ecoreClass="Bug287988TestLanguage.ecore#//Attribute"/>
-    <genClasses ecoreClass="Bug287988TestLanguage.ecore#//Master"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/Bug287988TestLanguage.ecore#//Attribute"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/Bug287988TestLanguage.ecore#//Master"/>
   </genPackages>
 </genmodel:GenModel>

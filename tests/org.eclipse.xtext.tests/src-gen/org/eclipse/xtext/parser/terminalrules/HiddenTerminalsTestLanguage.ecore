@@ -6,13 +6,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="Model">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="valid" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="WithoutHiddens" eSuperTypes="#//Model">
+  <eClassifiers xsi:type="ecore:EClass" name="WithoutHiddens" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//Model">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="spaces" unique="false"
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="WithHiddens" eSuperTypes="#//Model"/>
-  <eClassifiers xsi:type="ecore:EClass" name="OverridingHiddens" eSuperTypes="#//Model">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="called" eType="#//OverridingHiddensCall"
+  <eClassifiers xsi:type="ecore:EClass" name="WithHiddens" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//Model"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OverridingHiddens" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="called" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//OverridingHiddensCall"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OverridingHiddensCall">
@@ -20,16 +20,16 @@
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="valid" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InheritingHiddens" eSuperTypes="#//Model">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="called" eType="#//InheritingHiddensCall"
+  <eClassifiers xsi:type="ecore:EClass" name="InheritingHiddens" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="called" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//InheritingHiddensCall"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="hidingCalled" eType="#//HidingHiddens"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hidingCalled" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//HidingHiddens"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DatatypeHiddens" eSuperTypes="#//Model"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DatatypeHiddens" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//Model"/>
   <eClassifiers xsi:type="ecore:EClass" name="HidingHiddens">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="space" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="called" eType="#//InheritingHiddensCall"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="called" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//InheritingHiddensCall"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InheritingHiddensCall">

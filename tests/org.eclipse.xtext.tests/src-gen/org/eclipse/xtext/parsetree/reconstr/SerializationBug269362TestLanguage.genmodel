@@ -8,10 +8,10 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
     editorPluginID="org.eclipse.xtext.tests.editor">
   <genPackages prefix="SerializationBug269362TestLanguage" basePackage="org.eclipse.xtext.parsetree.reconstr"
-      disposableProviderFactory="true" ecorePackage="SerializationBug269362TestLanguage.ecore#/">
-    <genClasses ecoreClass="SerializationBug269362TestLanguage.ecore#//Model">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SerializationBug269362TestLanguage.ecore#//Model/foo"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SerializationBug269362TestLanguage.ecore#//Model/bar"/>
+      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/SerializationBug269362TestLanguage.ecore#/">
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/SerializationBug269362TestLanguage.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/SerializationBug269362TestLanguage.ecore#//Model/foo"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/SerializationBug269362TestLanguage.ecore#//Model/bar"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

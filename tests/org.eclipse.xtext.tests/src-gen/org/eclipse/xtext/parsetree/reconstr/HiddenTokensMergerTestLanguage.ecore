@@ -4,12 +4,12 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="hiddentokenmergertest"
     nsURI="http://www.eclipse.org/2009/tmf/xtext/hiddentokensmerger" nsPrefix="hiddentokenmergertest">
   <eClassifiers xsi:type="ecore:EClass" name="Model"/>
-  <eClassifiers xsi:type="ecore:EClass" name="DatatypeBug286557" eSuperTypes="#//Model">
+  <eClassifiers xsi:type="ecore:EClass" name="DatatypeBug286557" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//Model">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//DatatypeBug286557"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//DatatypeBug286557"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EnumBug" eSuperTypes="#//Model">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="return" eType="#//EnumBugEnum"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumBug" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//Model">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="return" eType="ecore:EEnum platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//EnumBugEnum"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="EnumBugEnum">
@@ -18,45 +18,46 @@
     <eLiterals name="resultSet" value="2" literal="resultSet"/>
     <eLiterals name="iterator" value="3" literal="iterator"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Commentable" eSuperTypes="#//Model">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="item" upperBound="-1" eType="#//CommentableItem"
+  <eClassifiers xsi:type="ecore:EClass" name="Commentable" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="item" upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//CommentableItem"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CommentableItem">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ValueList" eSuperTypes="#//Model">
+  <eClassifiers xsi:type="ecore:EClass" name="ValueList" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//Model">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ids" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RefList" eSuperTypes="#//Model">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="objs" upperBound="-1" eType="#//RefObj"
+  <eClassifiers xsi:type="ecore:EClass" name="RefList" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objs" upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//RefObj"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="refs" unique="false" upperBound="-1"
-        eType="#//RefObj"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//RefObj"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RefObj">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SingleRef" eSuperTypes="#//Model">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="obj" eType="#//RefObj"
+  <eClassifiers xsi:type="ecore:EClass" name="SingleRef" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="obj" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//RefObj"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//RefObj"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//RefObj"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AppendToFileEnd" eSuperTypes="#//Model">
+  <eClassifiers xsi:type="ecore:EClass" name="AppendToFileEnd" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//Model">
     <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1"
-        eType="#//AppendToFileEndItem" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//AppendToFileEndItem"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AppendToFileEndItem">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Action1" eSuperTypes="#//Model">
+  <eClassifiers xsi:type="ecore:EClass" name="Action1" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//Model">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actions2" upperBound="-1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Action1Sub1"/>
   <eClassifiers xsi:type="ecore:EClass" name="Action1Sub2"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Action1Sub" eSuperTypes="#//Action1Sub1"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Action1SubClass" eSuperTypes="#//Action1Sub2"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Action1Sub" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//Action1Sub1"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Action1SubClass" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.ecore#//Action1Sub2"/>
 </ecore:EPackage>

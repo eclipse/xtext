@@ -4,21 +4,23 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="sequencertest"
     nsURI="http://www.eclipse.org/2009/tmf/xtext/sequencertestlanguage" nsPrefix="sequencertest">
   <eClassifiers xsi:type="ecore:EClass" name="Model">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x1" eType="#//SimpleGroup"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SequencerTestLanguage.ecore#//SimpleGroup"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x2" eType="#//SimpleAlternative"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x2" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SequencerTestLanguage.ecore#//SimpleAlternative"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x3" eType="#//SimpleMultiplicities"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x3" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SequencerTestLanguage.ecore#//SimpleMultiplicities"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x4" eType="#//GroupMultiplicities"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x4" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SequencerTestLanguage.ecore#//GroupMultiplicities"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x5" eType="#//AlternativeMultiplicities"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x5" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SequencerTestLanguage.ecore#//AlternativeMultiplicities"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x6" eType="#//List1" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x7" eType="#//List2" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x8" eType="#//AltList1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x6" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SequencerTestLanguage.ecore#//List1"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x9" eType="#//AltList2"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x7" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SequencerTestLanguage.ecore#//List2"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x8" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SequencerTestLanguage.ecore#//AltList1"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x9" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SequencerTestLanguage.ecore#//AltList2"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="x10" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         containment="true"/>
@@ -26,11 +28,11 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="x12" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x13" eType="#//SingleEnum"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x13" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SequencerTestLanguage.ecore#//SingleEnum"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x14" eType="#//SingleCrossReference"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x14" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SequencerTestLanguage.ecore#//SingleCrossReference"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x15" eType="#//SingleContainmentReference"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x15" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SequencerTestLanguage.ecore#//SingleContainmentReference"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SimpleGroup">
@@ -104,7 +106,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SingleEnum">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="#//DefEnum"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EEnum platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SequencerTestLanguage.ecore#//DefEnum"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="DefEnum">
     <eLiterals name="kw1" literal="kw1"/>
@@ -113,7 +115,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SingleCrossReference">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//SingleCrossReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SequencerTestLanguage.ecore#//SingleCrossReference"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SingleContainmentReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="child" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"

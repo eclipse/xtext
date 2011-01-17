@@ -8,11 +8,11 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
     editorPluginID="org.eclipse.xtext.tests.editor">
   <genPackages prefix="EcoreTerminalsTestLanguage" basePackage="org.eclipse.xtext.parser.terminalrules"
-      disposableProviderFactory="true" ecorePackage="EcoreTerminalsTestLanguage.ecore#/">
-    <genClasses ecoreClass="EcoreTerminalsTestLanguage.ecore#//Model">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EcoreTerminalsTestLanguage.ecore#//Model/intValues"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EcoreTerminalsTestLanguage.ecore#//Model/doubleValues"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EcoreTerminalsTestLanguage.ecore#//Model/dateValues"/>
+      disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/EcoreTerminalsTestLanguage.ecore#/">
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/EcoreTerminalsTestLanguage.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/EcoreTerminalsTestLanguage.ecore#//Model/intValues"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/EcoreTerminalsTestLanguage.ecore#//Model/doubleValues"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/EcoreTerminalsTestLanguage.ecore#//Model/dateValues"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
