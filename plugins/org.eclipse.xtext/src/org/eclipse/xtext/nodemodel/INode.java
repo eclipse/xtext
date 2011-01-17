@@ -155,8 +155,6 @@ public interface INode {
 	 * Returns a tree iterable that uses this node as its origin and root instance. Its iterator will not return any
 	 * siblings of this root. However, the first element returned by {@link BidiTreeIterator#previous()}
 	 * or {@link BidiTreeIterator#next()} will be this instance.
-	 * 
-	 * {@inheritDoc}
 	 */
 	BidiTreeIterable<INode> getAsTreeIterable();
 
