@@ -4,6 +4,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
@@ -12,7 +13,6 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 public class Xtend2Compiler extends XbaseCompiler {
 	
-	@Override
 	public void compile(EObject obj, IAppendable appendable) {
 		if (obj instanceof XtendClass) {
 			compile((XtendClass) obj, appendable);
@@ -20,8 +20,8 @@ public class Xtend2Compiler extends XbaseCompiler {
 			compile((XtendFunction) obj, appendable);
 		} else if (obj instanceof XtendFile) {
 			compile((XtendFile) obj, appendable);
-		} else {
-			super.compile(obj, appendable);
+		} else if (obj instanceof XExpression){
+			super.compile((XExpression) obj, appendable);
 		}
 	}
 

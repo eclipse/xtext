@@ -12,7 +12,7 @@ package testdata;
  */
 public class GenericType1<T> {
 	private T t;
-	public boolean add(T t) {
+	public boolean _operator_add(T t) {
 		boolean result = this.t == null;
 		this.t = t;
 		return result;
