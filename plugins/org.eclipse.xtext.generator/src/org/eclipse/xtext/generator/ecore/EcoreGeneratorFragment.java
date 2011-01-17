@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.ecore;
 
+import static java.util.Collections.*;
 import static org.eclipse.xtext.EcoreUtil2.*;
 import static org.eclipse.xtext.XtextPackage.*;
 
@@ -44,6 +45,8 @@ import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl;
 import org.eclipse.emf.mwe.core.ConfigurationException;
 import org.eclipse.emf.mwe.core.WorkflowInterruptedException;
 import org.eclipse.emf.mwe.utils.Mapping;
@@ -171,11 +174,28 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 					super.generate(copiedGrammar, ctx);
 				}
 				resolveAll(resourceSet);
-				ePackages.save(null);
+				ePackages.save(singletonMap(XMLResource.OPTION_URI_HANDLER, new ToPlatformResourceDeresolvingURIHandler()));
 			}
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static class ToPlatformResourceDeresolvingURIHandler extends URIHandlerImpl {
+		@Override
+		public URI deresolve(URI uri) {
+			if (uri.isPlatform())
+				return uri;
+			Map<String, URI> map = EcorePlugin.getPlatformResourceMap();
+			for (Entry<String, URI> entries : map.entrySet()) {
+				final URI newPrefix = URI.createURI("platform:/resource/"+entries.getKey()+"/");
+				URI uri2 = uri.replacePrefix(entries.getValue(), newPrefix);
+				if (uri2!=null)
+					return uri2;
+			}
+			return super.deresolve(uri);
+		}
+		
 	}
 
 	protected List<GenPackage> loadReferencedGenModels(ResourceSet rs) {
@@ -467,7 +487,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		genModel.getUsedGenPackages().addAll(usedGenPackages);
 		resolveAll(rs);
 		try {
-			genModel.eResource().save(null);
+			genModel.eResource().save(singletonMap(XMLResource.OPTION_URI_HANDLER, new ToPlatformResourceDeresolvingURIHandler()));
 		} catch (IOException e) {
 			throw new WrappedException(e);
 		}
