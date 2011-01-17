@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler;
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -56,7 +56,7 @@ public class CompilerTest extends AbstractXbaseTestCase {
 	}
 	
 	protected void assertCompilesTo(final String expectedJavaCode, final String xbaseCode) throws Exception {
-		EObject model = expression(xbaseCode,true);
+		XExpression model = expression(xbaseCode,true);
 		XbaseCompiler compiler = get(XbaseCompiler.class);
 		IAppendable appandable = new IAppendable.StringBuilderBasedAppendable();
 		compiler.compile(model,appandable);

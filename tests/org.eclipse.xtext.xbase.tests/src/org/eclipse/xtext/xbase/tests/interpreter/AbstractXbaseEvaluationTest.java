@@ -218,6 +218,14 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 		assertEvaluatesTo("newValue", "{var x = 'literal' { x = 'newValue' } x }");
 	}
 	
+	public void testThrowInBlock() {
+		assertEvaluatesWithException(NullPointerException.class, "{ throw new NullPointerException() }");
+	}
+	
+	public void testThrowInBlock_01() {
+		assertEvaluatesWithException(NullPointerException.class, "{ 42.toString() throw new NullPointerException() }");
+	}
+	
 	public void testForLoop_01() {
 		assertEvaluatesTo(new Character('c'), 
 				"{\n" +
@@ -227,15 +235,14 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 				"}");
 	}
 	
-//TODO fix equals contract	
-//	public void testForLoop_02() {
-//		assertEvaluatesTo(new Character('b'), 
-//				"{\n" +
-//				"  var Character result = null\n" +
-//				"  for(x: 'aba'.toCharArray) if (result == null) result = x\n" +
-//				"  result" +
-//				"}");
-//	}
+	public void testForLoop_02() {
+		assertEvaluatesTo(new Character('a'), 
+				"{\n" +
+				"  var Character result = null\n" +
+				"  for(x: 'aba'.toCharArray) if (result == null) result = x\n" +
+				"  result" +
+				"}");
+	}
 
 	public void testForLoop_03() {
 		assertEvaluatesWithException(ClassCastException.class, "for(x: 'abc' as Object as java.util.List<Character>) null");
@@ -413,16 +420,28 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 	}
 	
 	public void testTryCatch_04() {
-		// TODO Fix '==' behavior
-		assertEvaluatesWithException(NullPointerException.class, "try { 'literal' as Object as Boolean } catch(ClassCastException e) null as Object == e");
+		assertEvaluatesWithException(NullPointerException.class, "try { 'literal' as Object as Boolean } catch(ClassCastException e) throw new NullPointerException()");
 	}
 	
 	public void testTryCatch_05() {
-		// TODO Fix '==' behavior
 		assertEvaluatesWithException(NullPointerException.class, 
 				"try 'literal' as Object as Boolean" +
-				"  catch(ClassCastException e) null as Object == e // throw new NullPointerException()" +
+				"  catch(ClassCastException e) throw new NullPointerException()" +
 				"  catch(NullPointerException e) 'dont catch subsequent exceptions'");
+	}
+	
+	public void testTryCatch_WithThrows() {
+		assertEvaluatesWithException(NullPointerException.class, 
+				"try throw new NullPointerException()" +
+				"  catch(ClassCastException e) throw new NullPointerException()" +
+		"  catch(NullPointerException e) throw new NullPointerException()");
+	}
+	
+	public void testTryCatch_WithThrows_01() {
+		assertEvaluatesTo("x", 
+				"try throw new NullPointerException()" +
+				"  catch(ClassCastException e) throw new NullPointerException()" +
+		"  catch(NullPointerException e) 'x'");
 	}
 	
 	public void testTryFinally_01() {
