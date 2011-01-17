@@ -5,23 +5,25 @@ chosen and it is recommended to stick with the lexical syntax described in the f
 
 section:Identifiers[Identifiers]
 
-Identifiers are used to name all constructs, such as types, methods and variables. They start with a "Java letter", which is a character for which the Java method 
-e[Character.isJavaIdentifierstart(char)]
-returns e[true]. For the other characters also digits (0...9) are allowed. For those the method e[Character.isJavaIdentifierPart(char)] must be true.
-See link[http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.8][§ 3.8 Identifiers] for the original definition in the Java Language Specification.
+Identifiers are used to name all constructs, such as types, methods and variables. Xbase uses the default
+Identifier-Syntax from Xtext - compared to Java, they are slightly simplified to match the common cases
+while having less ambiguities. They start with a letter e[a]-e[z], e[A]-e[Z] or an underscore followed
+by more of these characters or a digit e[0]-e[9]. 
 
-section2[Syntax]
-
-code[
-//TODO
-]
-
-section2[Escaped Identifiers]
+section2:EscapedIdentifiers[Escaped Identifiers]
 
 Identifiers may not have the same spelling as any reserved keyword. 
 However, identifiers starting with a code[^] are so called escaped identifiers. Escaped identifiers are used in cases when there is a 
 conflict with a reserved keyword. Imagine you have introduced a keyword code[service] in your language but want to call a Java property e[service] at some point. 
 In such cases you use an escaped identifier code[^service] to reference the Java property.
+
+section2[Syntax]
+
+code[
+terminal ID: 
+	'^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*
+;
+]
 
 section2[Examples]
 
@@ -81,7 +83,7 @@ terminal INT returns ecore::EInt:
 section:Comments[Comments]
 
 Xbase comes with two different kinds of comments: Single-line comments and multi-line comments.
-The syntax is the same as the one known from Java (see link[http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.7][§ 3.7 Comments])
+The syntax is the same as the one known from Java (see link[http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.7][§ 3.7 Comments]).
 
 section2[Syntax]
 
@@ -120,11 +122,11 @@ ol[
 	item[code[do]]
 	item[code[while]]
 	item[code[for]]
-	item[code[class]]
+	item[code[typeof]]
 	item[code[throw]]
 	item[code[try]]
 	item[code[catch]]
 	item[code[finally]]
 ]
 
-However, in case some of the keywords have to be used as identifiers, the escape character for ref:Identifiers[identifiers] comes in handy. 
+However, in case some of the keywords have to be used as identifiers, the escape character for ref:EscapedIdentifiers[identifiers] comes in handy. 

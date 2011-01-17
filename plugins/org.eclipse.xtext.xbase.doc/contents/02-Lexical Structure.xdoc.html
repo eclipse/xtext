@@ -34,48 +34,16 @@ Identifiers
 
 
 <p>
-Identifiers are used to name all constructs, such as types, methods and variables. They start with a "Java letter", which is a character for which the Java method 
-<em>Character.isJavaIdentifierstart(char)</em>
-returns <em>true</em>. For the other characters also digits (0...9) are allowed. For those the method <em>Character.isJavaIdentifierPart(char)</em> must be true.
-See <a href="http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.8">§ 3.8 Identifiers</a> for the original definition in the Java Language Specification.
+Identifiers are used to name all constructs, such as types, methods and variables. Xbase uses the default
+Identifier-Syntax from Xtext - compared to Java, they are slightly simplified to match the common cases
+while having less ambiguities. They start with a letter <em>a</em>-<em>z</em>, <em>A</em>-<em>Z</em> or an underscore followed
+by more of these characters or a digit <em>0</em>-<em>9</em>. 
 </p>
 
 
+<a name="EscapedIdentifiers"></a>
 
-
-<a name="Identifiers-2"></a>
-<div class="section" title="Syntax">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Syntax
-</h3>
-</div>
-</div>
-</div>
-
-
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-//TODO<br />
-</p>
-</div>
-</div>
-
-
-</p>
-
-
-</div>
-
-
-
-<a name="Identifiers-3"></a>
+<a name="EscapedIdentifiers"></a>
 <div class="section" title="Escaped Identifiers">
 <div class="titlepage">
 <div>
@@ -97,6 +65,38 @@ conflict with a reserved keyword. Imagine you have introduced a keyword <span cl
  in your language but want to call a Java property <em>service</em> at some point. 
 In such cases you use an escaped identifier <span class="inlinecode">^service</span>
  to reference the Java property.
+</p>
+
+
+</div>
+
+
+
+<a name="Identifiers-3"></a>
+<div class="section" title="Syntax">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Syntax
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+terminal&nbsp;ID:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;^&apos;?&nbsp;(&apos;a&apos;..&apos;z&apos;|&apos;A&apos;..&apos;Z&apos;|&apos;_&apos;)&nbsp;(&apos;a&apos;..&apos;z&apos;|&apos;A&apos;..&apos;Z&apos;|&apos;_&apos;|&apos;0&apos;..&apos;9&apos;)*<br />;<br />
+</p>
+</div>
+</div>
+
+
 </p>
 
 
@@ -415,7 +415,7 @@ Comments
 
 <p>
 Xbase comes with two different kinds of comments: Single-line comments and multi-line comments.
-The syntax is the same as the one known from Java (see <a href="http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.7">§ 3.7 Comments</a>)
+The syntax is the same as the one known from Java (see <a href="http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.7">§ 3.7 Comments</a>).
 </p>
 
 
@@ -523,6 +523,15 @@ The following list of words are reserved keywords, thus reducing the set of poss
 
 <p>
 <span class="inlinecode">instanceof</span>
+
+</p>
+
+</li>
+
+<li>
+
+<p>
+<span class="inlinecode">as</span>
 
 </p>
 
@@ -657,7 +666,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 <li>
 
 <p>
-<span class="inlinecode">class</span>
+<span class="inlinecode">typeof</span>
 
 </p>
 
@@ -705,7 +714,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 
 <p>
 However, in case some of the keywords have to be used as identifiers, the escape character for 
-<a href="02-Lexical%20Structure.xdoc.html#Identifiers">identifiers</a> comes in handy. 
+<a href="02-Lexical%20Structure.xdoc.html#EscapedIdentifiers">identifiers</a> comes in handy. 
 
 </p>
 

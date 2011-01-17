@@ -3,9 +3,9 @@
 </topic>
 <topic href="contents/02-Lexical Structure.xdoc.html" label="Lexical Syntax" >
 <topic href="contents/02-Lexical Structure.xdoc.html#Identifiers" label="Identifiers" >
-<topic href="contents/02-Lexical Structure.xdoc.html#Identifiers-2" label="Syntax" >
+<topic href="contents/02-Lexical Structure.xdoc.html#EscapedIdentifiers" label="Escaped Identifiers" >
 </topic>
-<topic href="contents/02-Lexical Structure.xdoc.html#Identifiers-3" label="Escaped Identifiers" >
+<topic href="contents/02-Lexical Structure.xdoc.html#Identifiers-3" label="Syntax" >
 </topic>
 <topic href="contents/02-Lexical Structure.xdoc.html#Identifiers-4" label="Examples" >
 </topic>
@@ -37,9 +37,9 @@
 </topic>
 </topic>
 <topic href="contents/03-Types.xdoc.html#FunctionTypes" label="Function Types" >
-<topic href="contents/03-Types.xdoc.html#FunctionTypes-2" label="Syntax" >
+<topic href="contents/03-Types.xdoc.html#FunctionTypes-3" label="Syntax" >
 </topic>
-<topic href="contents/03-Types.xdoc.html#FunctionTypes-3" label="Examples" >
+<topic href="contents/03-Types.xdoc.html#FunctionTypes-4" label="Examples" >
 </topic>
 </topic>
 <topic href="contents/03-Types.xdoc.html#ParameterizedTypeReference" label="Parameterized Type References" >
@@ -76,6 +76,12 @@
 <topic href="contents/04-Expressions.xdoc.html#TypeLiteral" label="Type Literals" >
 </topic>
 <topic href="contents/04-Expressions.xdoc.html#Literals-11" label="Syntax" >
+</topic>
+</topic>
+<topic href="contents/04-Expressions.xdoc.html#TypeCasts" label="Type Casts" >
+<topic href="contents/04-Expressions.xdoc.html#TypeCasts-2" label="Syntax" >
+</topic>
+<topic href="contents/04-Expressions.xdoc.html#TypeCasts-3" label="Examples" >
 </topic>
 </topic>
 <topic href="contents/04-Expressions.xdoc.html#Operators" label="Infix Operators" >
@@ -131,11 +137,9 @@
 <topic href="contents/04-Expressions.xdoc.html#SwitchExpression" label="Switch Expression" >
 <topic href="contents/04-Expressions.xdoc.html#SwitchExpression-1" label="Syntax" >
 </topic>
-<topic href="contents/04-Expressions.xdoc.html#SwitchExpression-2" label="Leaving out the main expression" >
+<topic href="contents/04-Expressions.xdoc.html#SwitchExpression-2" label="Type guards" >
 </topic>
-<topic href="contents/04-Expressions.xdoc.html#SwitchExpression-3" label="Type guards" >
-</topic>
-<topic href="contents/04-Expressions.xdoc.html#SwitchExpression-4" label="Typing" >
+<topic href="contents/04-Expressions.xdoc.html#SwitchExpression-3" label="Typing" >
 </topic>
 </topic>
 <topic href="contents/04-Expressions.xdoc.html#VariableDeclaration" label="Variable Declarations" >

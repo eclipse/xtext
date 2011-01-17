@@ -8,7 +8,8 @@ IDE features coming with Xbase.
 
 section:Literals[Literals]
 
-A literal denotes a fixed unchangeable value. Xbase comes with the following literals
+A literal denotes a fixed unchangeable value. Xbase comes with literals for string, integers, booleans,
+null and types.
 
 section2:ExpressionsStringLiterals[String Literals]
 
@@ -54,21 +55,21 @@ section2[Syntax]
 
 code[
 XNullLiteral:
-	{XNullLiteral} 'null';
+	'null';
 ]
 
 section2:TypeLiteral[Type Literals]
 
 Type literals are specified using the keyword e[typeof], e.g.
 ul[
-  item[typeof (java.lang.String) // yields java.lang.String.class]
+  item[code[typeof(java.lang.String)] which yields java.lang.String.class]
 ]
 
 section2[Syntax]
 
 code[
 XTypeLiteral:
-	{XTypeLiteral} 'typeof' '(' QualifiedName ')';
+	'typeof' '(' QualifiedName ')';
 ]
 
 section:TypeCasts[Type Casts]
@@ -107,7 +108,6 @@ table[
 	tr[td[code[e1 && e2]]				td[code[e1._operator_and(e2)]]]
 	tr[td[code[ ]]						td[code[ ]]]
 	
-	tr[td[code[e1 instanceof RawTypeRef]]td[code[e1 instanceof RawTypeRef /* direct translation to Java */]]]
 	tr[td[code[e1 == e2]]				td[code[e1._operator_equals(e2)]]]
 	tr[td[code[e1 != e2]]				td[code[e1._operator_notEquals(e2)]]]
 	tr[td[code[e1 < e2]]				td[code[e1._operator_lessThan(e2)]]]
@@ -136,7 +136,8 @@ table[
 ]
 		
 The table above also defines the operator precedence in ascending order. The blank lines separate precedence levels. 
-The two assignment operators code[=] and code[+=] are right-to-left associative, that is a = b = c is executed as a = (b = c), all other
+The assignment operator code[+=] is right-to-left associative in the same way as the plain assignment
+operator code[=] is. That is a = b = c is executed as a = (b = c), all other
 operators are left-to-right associative. Parenthesis can be used to adjust the default precedence and associativity. 
 
 section2:propertyAssignment[Property Assignment]
@@ -166,6 +167,8 @@ As a result the compiler translates to :
 code[Java][
 	myObj.setMyProperty("foo")
 ]
+
+todo[if the return type is null, a = b = c will assign null to a.]
 
 section2[Short-Circuit Boolean Operators]
 
@@ -240,11 +243,11 @@ Xbase itself comes with a standard library of such extension methods adding supp
 for the common types, such as java.lang.String, java.util.List, etc.
 
 These extension methods are declared in separate Java classes. There are various ways how extension methods
-can be added. The simplest is, that the langauge designer predefines, which extension methods are available.
+can be added. The simplest is, that the language designer predefines, which extension methods are available.
 This means, that language users cannot add additional library functions using this mechanism.
 
-Another alternative is to have them lookedup by a certain nameing convention. Also for more general languages
-it is possible to let users add extenstion methods using imports or the like. This approach can be seen in the
+Another alternative is to have them looked up by a certain naming convention. Also for more general languages
+it is possible to let users add extension methods using imports or the like. This approach can be seen in the
 language Xtend2, where extension methods are lexically imported through static imports and/or dependency
 injection.
 
@@ -264,8 +267,8 @@ ul[
 
 section:spreadOperator[Spread Operator]
 
-Xbase provides a special sugared notation to invoke a certain feature on each element of a collect
-and obtain the results as another iterable. This is essentially a short cut notation for a higher order function on code[java.lang.Iterable].
+Xbase provides a special sugared notation to invoke a certain feature on each element of an iterable
+and obtain the results as a list. This is essentially a short cut notation for a higher order function on code[java.lang.Iterable].
 If you for instance want the names of all persons in a code[List] you could write the following using a higher order function and a closures:
 
 code[
@@ -280,11 +283,11 @@ code[
 ]
 
 Note that we decided to come up with an explicit operator (*.) because overloading the '.' operator as it is the case in Xpand,
-has caused a lot of surprises in the past. With an explicit operator the tooling as well as the user always can distinct whether you
+has caused a lot of surprises in the past. With an explicit operator the tooling as well as the user always can distinguish whether you
 invoke a feature on the iterables elements or on the iterable itself.
 Also note that this really is just a shortcut for collect. It doesn't do any flattening, when you invoke it on iterables containing iterables.
 
-The operator works on all members of code[java.lang.Iterable]. the return type is always an code[java.lang.Iterable<T>] where code[T]
+The operator works on all members of code[java.lang.Iterable]. the return type is always an code[java.util.List<T>] where code[T]
 is the return type of the called feature.
 
 e[TODO: Discuss, whether we want do an eager transformation of the iterable (and thereby provide a suiteable return type such as list if 
