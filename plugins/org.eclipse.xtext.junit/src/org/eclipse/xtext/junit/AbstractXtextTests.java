@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,9 +19,6 @@ import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EValidator;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.XtendFacade;
@@ -34,6 +30,7 @@ import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.formatting.INodeModelFormatter;
+import org.eclipse.xtext.junit.GlobalRegistries.GlobalStateMemento;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -43,7 +40,6 @@ import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.resource.IResourceFactory;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -66,66 +62,25 @@ import com.google.inject.name.Names;
 public abstract class AbstractXtextTests extends TestCase {
 
 	private Injector injector;
-	private HashMap<EPackage, Object> validatorReg;
-	private HashMap<String, Object> epackageReg;
 	private boolean canCreateInjector;
-	private HashMap<String, Object> protocolToFactoryMap;
-	private HashMap<String, Object> extensionToFactoryMap;
-	private HashMap<String, Object> contentTypeIdentifierToFactoryMap;
-	private HashMap<String, Object> protocolToServiceProviderMap;
-	private HashMap<String, Object> extensionToServiceProviderMap;
-	private HashMap<String, Object> contentTypeIdentifierToServiceProviderMap;
 	private List<String> testGrammarPaths;
+	private GlobalStateMemento globalStateMemento;
 	
 	static {
-		//EMF Standalone setup
-		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("ecore"))
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"ecore", new org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl());
-		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xmi"))
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"xmi", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
-		if (!EPackage.Registry.INSTANCE.containsKey(org.eclipse.xtext.XtextPackage.eNS_URI))
-			EPackage.Registry.INSTANCE.put(org.eclipse.xtext.XtextPackage.eNS_URI, org.eclipse.xtext.XtextPackage.eINSTANCE);
+		GlobalRegistries.initializeDefaults();
 	}
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		canCreateInjector = true;
-		this.validatorReg = new HashMap<EPackage, Object>(EValidator.Registry.INSTANCE);
-		this.epackageReg = new HashMap<String, Object>(EPackage.Registry.INSTANCE);
-		this.protocolToFactoryMap = new HashMap<String, Object>(Resource.Factory.Registry.INSTANCE.getProtocolToFactoryMap());
-		this.extensionToFactoryMap = new HashMap<String, Object>(Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap());
-		this.contentTypeIdentifierToFactoryMap = new HashMap<String, Object>(Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap());
-
-		this.protocolToServiceProviderMap = new HashMap<String, Object>(IResourceServiceProvider.Registry.INSTANCE.getProtocolToFactoryMap());
-		this.extensionToServiceProviderMap = new HashMap<String, Object>(IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap());
-		this.contentTypeIdentifierToServiceProviderMap = new HashMap<String, Object>(IResourceServiceProvider.Registry.INSTANCE.getContentTypeToFactoryMap());
+		globalStateMemento = GlobalRegistries.makeCopyOfGlobalState();
 	}
 
 	@Override
 	protected void tearDown() throws Exception {
 		injector = null;
-		EValidator.Registry.INSTANCE.clear();
-		EValidator.Registry.INSTANCE.putAll(validatorReg);
-
-		EPackage.Registry.INSTANCE.clear();
-		EPackage.Registry.INSTANCE.putAll(epackageReg);
-		
-		Resource.Factory.Registry.INSTANCE.getProtocolToFactoryMap().clear();
-		Resource.Factory.Registry.INSTANCE.getProtocolToFactoryMap().putAll(protocolToFactoryMap);
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().clear();
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().putAll(extensionToFactoryMap);
-		Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap().clear();
-		Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap().putAll(contentTypeIdentifierToFactoryMap);
-		
-		IResourceServiceProvider.Registry.INSTANCE.getProtocolToFactoryMap().clear();
-		IResourceServiceProvider.Registry.INSTANCE.getProtocolToFactoryMap().putAll(protocolToServiceProviderMap);
-		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().clear();
-		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().putAll(extensionToServiceProviderMap);
-		IResourceServiceProvider.Registry.INSTANCE.getContentTypeToFactoryMap().clear();
-		IResourceServiceProvider.Registry.INSTANCE.getContentTypeToFactoryMap().putAll(contentTypeIdentifierToServiceProviderMap);
+		globalStateMemento.restoreGlobalState();
 		super.tearDown();
 	}
 
