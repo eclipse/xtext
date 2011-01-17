@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.featurecalls;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import java.util.Collections;
 
 import org.eclipse.xtext.common.types.JvmFeature;
@@ -25,6 +27,7 @@ public class JvmFeatureDescription extends EObjectDescription {
 	private final boolean isValid;
 	private JvmIdentifyableElement implicitReceiver;
 	private boolean isMemberSyntaxContext = true;
+	private String issueCode;
 
 	public JvmFeatureDescription(QualifiedName qualifiedName, JvmFeature element, TypeArgumentContext context, String shadowingString, boolean isValid, JvmIdentifyableElement implicitReceiver, boolean isMemberSyntaxContext) {
 		super(qualifiedName, element, Collections.<String,String>emptyMap());
@@ -53,7 +56,7 @@ public class JvmFeatureDescription extends EObjectDescription {
 	}
 	
 	public boolean isValid() {
-		return isValid;
+		return isValid && isEmpty(issueCode);
 	}
 	
 	public void setImplicitReceiver(JvmIdentifyableElement implicitReceiver) {
@@ -68,4 +71,11 @@ public class JvmFeatureDescription extends EObjectDescription {
 		return isMemberSyntaxContext;
 	}
 	
+	public void setIssueCode(String issueCode) {
+		this.issueCode = issueCode;
+	}
+	
+	public String getIssueCode() {
+		return issueCode;
+	}
 }

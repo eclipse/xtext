@@ -27,10 +27,5 @@ public class XAssignmentDescriptionProvider extends DefaultJvmFeatureDescription
 			super.addFeatureDescriptions(feature, context, acceptor);
 		}
 	}
-	
-	@Override
-	protected boolean isValid(JvmFeature feature) {
-		return !((JvmField)feature).isFinal() && super.isValid(feature);
-	}
 
 }

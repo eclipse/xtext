@@ -33,15 +33,13 @@ public class XAssignmentDescriptionProviderTest extends AbstractJvmFeatureScopeP
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,
 				newXAssignmentDescriptionProvider(),newXAssignmentSugarDescriptionProvider());
 		
-		assertEquals(4, numberOfScopes(scope));
+		assertEquals(3, numberOfScopes(scope));
 		
 		assertSetsEqual(newHashSet("stringField"),	getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("stringField"),	getSignatures(scope));
+		assertSetsEqual(newHashSet("stringField", "staticField", "finalField"), getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
 		assertSetsEqual(newHashSet("privateField"),	getSignatures(scope));
-		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("finalField"),	getSignatures(scope));
 		assertSame(IScope.NULLSCOPE, scope.getParent());
 	}
 	

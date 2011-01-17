@@ -1,0 +1,147 @@
+/*******************************************************************************
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.xbase.tests.validation;
+
+import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
+import static org.eclipse.xtext.xbase.validation.FeatureCallValidator.*;
+
+import org.eclipse.xtext.junit.validation.ValidationTestHelper;
+import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+
+import com.google.inject.Inject;
+
+/**
+ * @author Jan Koehnlein - Initial contribution and API
+ */
+public class FeatureCallValidationTest extends AbstractXbaseTestCase {
+
+	@Inject
+	protected ValidationTestHelper helper;
+
+	public void testConstructorCall_0() throws Exception {
+		XExpression expression = expression("new testdata.Constructors()");
+		helper.assertError(expression, XCONSTRUCTOR_CALL, INVALID_NUMBER_OF_ARGUMENTS);
+	}
+
+	public void testConstructorCall_1() throws Exception {
+		XExpression expression = expression("new testdata.Constructors(1)");
+		helper.assertError(expression, XCONSTRUCTOR_CALL, INVALID_ARGUMENT_TYPES);
+	}
+
+	public void testConstructorCall_2() throws Exception {
+		XExpression expression = expression("new testdata.Constructors('foo', 'bar')");
+		helper.assertError(expression, XCONSTRUCTOR_CALL, INVALID_NUMBER_OF_ARGUMENTS);
+	}
+
+	// TODO: constructor type arguments
+
+	public void testBinaryOperation_0() throws Exception {
+		XExpression expression = expression("1 + 'foo'");
+		helper.assertError(expression, XBINARY_OPERATION, INVALID_ARGUMENT_TYPES);
+	}
+
+	public void testAssignment_0() throws Exception {
+		XExpression expression = expression("new testdata.Properties1().prop3 = 'foo'");
+		helper.assertError(expression, XASSIGNMENT, INVALID_ARGUMENT_TYPES);
+	}
+
+	public void testAssignmentToFinalField() throws Exception {
+		XExpression expression = expression("new testdata.FieldAccess().finalField = 'foo'");
+		helper.assertError(expression, XASSIGNMENT, ASSIGNMENT_TARGET_IS_NOT_WRITEABLE);
+	}
+
+	public void testAssignmentToStaticField() throws Exception {
+		XExpression expression = expression("new testdata.FieldAccess().staticField = 'foo'");
+		helper.assertError(expression, XASSIGNMENT, INSTANCE_ACCESS_TO_STATIC_MEMBER);
+	}
+
+	public void testField_0() throws Exception {
+		XExpression expression = expression("new testdata.FieldAccess().finalField()");
+		helper.assertError(expression, XMEMBER_FEATURE_CALL, FIELD_ACCESS_WITH_PARENTHESES);
+	}
+
+	public void testField_1() throws Exception {
+		XExpression expression = expression("new testdata.FieldAccess().finalField('foo')");
+		helper.assertError(expression, XMEMBER_FEATURE_CALL, INVALID_NUMBER_OF_ARGUMENTS);
+	}
+
+	public void testField_2() throws Exception {
+		XExpression expression = expression("new testdata.FieldAccess().staticField");
+		helper.assertError(expression, XMEMBER_FEATURE_CALL, INSTANCE_ACCESS_TO_STATIC_MEMBER);
+	}
+
+	public void testField_3() throws Exception {
+		XExpression expression = expression("{ var this = new testdata.FieldAccess() staticField }");
+		helper.assertError(((XBlockExpression) expression).getExpressions().get(1), XFEATURE_CALL,
+				INSTANCE_ACCESS_TO_STATIC_MEMBER);
+	}
+
+	public void testField_4() throws Exception {
+		XExpression expression = expression("{ var this = new testdata.FieldAccess() finalField() }");
+		helper.assertError(((XBlockExpression) expression).getExpressions().get(1), XFEATURE_CALL,
+				FIELD_ACCESS_WITH_PARENTHESES);
+	}
+
+	public void testOperationMemberFeatureCall_0() throws Exception {
+		XExpression expression = expression("new testdata.Methods().staticMethod()");
+		helper.assertError(expression, XMEMBER_FEATURE_CALL, INSTANCE_ACCESS_TO_STATIC_MEMBER);
+	}
+
+	public void testOperationMemberFeatureCall_1() throws Exception {
+		XExpression expression = expression("new testdata.Methods().method()");
+		helper.assertError(expression, XMEMBER_FEATURE_CALL, INVALID_NUMBER_OF_ARGUMENTS);
+	}
+
+	public void testOperationMemberFeatureCall_2() throws Exception {
+		XExpression expression = expression("new testdata.Methods().method('foo', 'bar')");
+		helper.assertError(expression, XMEMBER_FEATURE_CALL, INVALID_NUMBER_OF_ARGUMENTS);
+	}
+
+	public void testOperationMemberFeatureCall_3() throws Exception {
+		XExpression expression = expression("new testdata.Methods().method('foo')");
+		helper.assertError(expression, XMEMBER_FEATURE_CALL, INVALID_ARGUMENT_TYPES);
+	}
+
+	public void testOperationMemberFeatureCall_4() throws Exception {
+		XExpression expression = expression("new testdata.Methods().sugarMethod");
+		helper.assertNoError(expression, METHOD_ACCESS_WITHOUT_PARENTHESES);
+	}
+
+	public void testOperationFeatureCall_0() throws Exception {
+		XExpression expression = expression("{ var this = new testdata.Methods() staticMethod() }");
+		helper.assertNoError(((XBlockExpression) expression).getExpressions().get(1), 
+				INSTANCE_ACCESS_TO_STATIC_MEMBER);
+	}
+
+	public void testOperationFeatureCall_1() throws Exception {
+		XExpression expression = expression("{ var this = new testdata.Methods() method() }");
+		helper.assertError(((XBlockExpression) expression).getExpressions().get(1), XFEATURE_CALL,
+				INVALID_NUMBER_OF_ARGUMENTS);
+	}
+
+	public void testOperationFeatureCall_2() throws Exception {
+		XExpression expression = expression("{ var this = new testdata.Methods() method('foo', 'bar') }");
+		helper.assertError(((XBlockExpression) expression).getExpressions().get(1), XFEATURE_CALL,
+				INVALID_NUMBER_OF_ARGUMENTS);
+	}
+
+	public void testOperationFeatureCall_3() throws Exception {
+		XExpression expression = expression("{ var this = new testdata.Methods() method('foo') }");
+		helper.assertError(((XBlockExpression) expression).getExpressions().get(1), XFEATURE_CALL,
+				INVALID_ARGUMENT_TYPES);
+	}
+
+	public void testOperationFeatureCall_4() throws Exception {
+		XExpression expression = expression("{ var this = new testdata.Methods() sugarMethod }");
+		helper.assertNoError(((XBlockExpression) expression).getExpressions().get(1), 
+				METHOD_ACCESS_WITHOUT_PARENTHESES);
+	}
+	
+}

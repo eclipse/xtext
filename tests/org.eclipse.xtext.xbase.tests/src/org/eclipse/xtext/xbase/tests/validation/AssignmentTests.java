@@ -50,12 +50,9 @@ public class AssignmentTests extends AbstractXbaseTestCase {
 	}
 
 	public void testFinalFeatureAssignment() throws Exception {
-//		XExpression expression = expression("new " + ClassWithFinalAttribute.class.getCanonicalName()
-//				+ "().finalAttribute=0");
-//		helper.assertError(expression, XbasePackage.Literals.XASSIGNMENT, XbaseJavaValidator.ASSIGNMENT_TO_FINAL);
-		// TODO: link feature even though its final and provide validation instead
-		expressionWithError("new " + FieldAccess.class.getCanonicalName()
-				+ "().finalField=0", 1);
+		XExpression expression = expression("new " + FieldAccess.class.getCanonicalName()
+				+ "().finalField=0");
+		helper.assertError(expression, XbasePackage.Literals.XASSIGNMENT, XbaseJavaValidator.ASSIGNMENT_TO_FINAL);
 	}
 
 	public void testValAssignmentWithoutTypeAndInitialization() throws Exception {

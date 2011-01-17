@@ -135,7 +135,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 							public IEObjectDescription apply(IEObjectDescription from) {
 								final JvmConstructor constructor = (JvmConstructor) from.getEObjectOrProxy();
 								return new JvmFeatureDescription(from.getQualifiedName(), constructor, null,
-										constructor.getCanonicalName(), false, null, false);
+										constructor.getCanonicalName(), true, null, false);
 							}
 						});
 				return result;

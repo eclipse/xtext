@@ -46,7 +46,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 		assertSetsEqual(newHashSet("privateField", "privateField()", "stringField", "stringField()"),
 				getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("finalField", "stringField"), getSignatures(scope));
+		assertSetsEqual(newHashSet("finalField", "stringField", "staticField"), getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
 		assertSetsEqual(
 				newHashSet("registerNatives()", "wait(long)", "clone()", "toString()", "getClass()", "hashCode()",
@@ -66,7 +66,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 				});
 		assertSetsEqual(newHashSet("privateField()", "stringField", "stringField()"), getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("finalField", "stringField"), getSignatures(scope));
+		assertSetsEqual(newHashSet("finalField", "stringField", "staticField"), getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
 		assertSetsEqual(
 				newHashSet("wait(long)", "clone()", "toString()", "getClass()", "hashCode()", "notify()",
@@ -100,7 +100,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 
 		assertSetsEqual(newHashSet("privateField()", "stringField", "stringField()"), getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("finalField", "stringField"), getSignatures(scope));
+		assertSetsEqual(newHashSet("finalField", "stringField", "staticField"), getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
 		assertSetsEqual(newHashSet("privateField"), getSignatures(scope));
 		assertSame(IScope.NULLSCOPE, scope.getParent());
@@ -143,7 +143,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 
 		assertSetsEqual(newHashSet("privateField()", "stringField", "stringField()"), getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("finalField", "stringField"), getSignatures(scope));
+		assertSetsEqual(newHashSet("finalField", "stringField", "staticField"), getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
 		assertSetsEqual(newHashSet("wait(long)", "toString()", "getClass()", /*filtered : "hashCode()", */
 		"notify()", "wait(long,int)", "equals(java.lang.Object)", "wait()", "notifyAll()", "clone()", "finalize()"),

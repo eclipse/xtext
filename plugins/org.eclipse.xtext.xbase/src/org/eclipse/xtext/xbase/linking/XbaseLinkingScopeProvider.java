@@ -10,12 +10,10 @@ package org.eclipse.xtext.xbase.linking;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.XbasePackage;
 
-import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -28,7 +26,7 @@ public class XbaseLinkingScopeProvider implements IScopeProvider {
 	private IScopeProvider delegate;
 	
 	@Inject
-	private Provider<CallableFeaturePredicate> featurePredicateProvider;
+	private Provider<FeatureCallChecker> featureCallCheckerProvider;
 	
 	@Inject
 	private IJvmTypeConformanceComputer conformanceChecker;
@@ -42,16 +40,16 @@ public class XbaseLinkingScopeProvider implements IScopeProvider {
 	}
 
 	protected IScope wrapFeatureCallScope(IScope scope, EObject context, EReference reference) {
-		final Predicate<IEObjectDescription> filter = getFeaturePredicateSelector(context, reference);
-		return new BestMatchingJvmFeatureScope(conformanceChecker, context, reference, scope, filter);
+		final FeatureCallChecker featureCallChecker = getFeatureCallChecker(context, reference);
+		return new BestMatchingJvmFeatureScope(conformanceChecker, context, reference, scope, featureCallChecker);
 	}
 
 	protected boolean isFeatureCallScope(EReference reference) {
 		return reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE || reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR;
 	}
 	
-	protected Predicate<IEObjectDescription> getFeaturePredicateSelector(final EObject context, final EReference reference) {
-		final CallableFeaturePredicate predicate = featurePredicateProvider.get();
+	protected FeatureCallChecker getFeatureCallChecker(final EObject context, final EReference reference) {
+		final FeatureCallChecker predicate = featureCallCheckerProvider.get();
 		predicate.initialize(context, reference);
 		return predicate;
 	}
