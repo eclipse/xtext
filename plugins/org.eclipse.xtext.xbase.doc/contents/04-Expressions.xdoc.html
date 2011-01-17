@@ -12,11 +12,11 @@
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Expressions</h1>
 
 <p>
-Expressions are the main language constructs which are used to express behavior and computation of values. Xbase does not support the concept of a statement, but instead comes with powerful 
-expressions to handle situations in which the imperative nature of statements are a better fit. An expression always results in a value (might be the value &apos;null&apos; though). In addition expressions can
-be statically typed. By default it is assumed that languages making use of Xbase provide enough static context information for static type analysis, which is the basis of a lot of
-IDE features coming with Xbase. However, the static typing is not mandatory and might be completely skipped if not wished. The openness of the compiler even allows to change the generation of 
-concrete feature invocations to reflective calls, such that the language can be fully dynamically typed.
+Expressions are the main language constructs which are used to express behavior and computation of values. Xbase does not support the concept of a 
+statement, but instead comes with powerful expressions to handle situations in which the imperative nature of statements are a better fit. An 
+expression always results in a value (might be the value &apos;null&apos; though). In addition expressions can be statically typed. By default it is assumed 
+that languages making use of Xbase provide enough static context information for static type analysis, which is the basis of a lot of
+IDE features coming with Xbase.
 </p>
 
 
@@ -37,7 +37,8 @@ Literals
 
 
 <p>
-A literal denotes a fixed unchangeable value. Xbase comes with the following literals
+A literal denotes a fixed unchangeable value. Xbase comes with literals for string, integers, booleans,
+null and types.
 </p>
 
 
@@ -116,8 +117,10 @@ Integer Literals
 
 <p>
 An integer literal as defined in 
-<a href="02-Lexical%20Structure.xdoc.html#IntegerLiterals">section IntegerLiterals</a> creates an instance of <span class="inlinecode">Integer</span>
+<a href="02-Lexical%20Structure.xdoc.html#IntegerLiterals">section IntegerLiterals</a> creates an <span class="inlinecode">int</span>
 .
+There is no signed int. If you put a minus operator in front of an int literal it is taken as a UnaryOperator
+with one argument (the positive int literal).
 </p>
 
 
@@ -174,7 +177,7 @@ Boolean Literals
 <p>
 There are two boolean literals, <span class="inlinecode">true</span>
  and <span class="inlinecode">false</span>
- which correspond to their Java counterpart of type <em>java.lang.Boolean</em>. 
+ which correspond to their Java counterpart of type <em>boolean</em>. 
 </p>
 
 
@@ -259,7 +262,7 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XNullLiteral:<br />&nbsp;&nbsp;&nbsp;&nbsp;{XNullLiteral}&nbsp;&apos;null&apos;;<br />
+XNullLiteral:<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;null&apos;;<br />
 </p>
 </div>
 </div>
@@ -287,8 +290,21 @@ Type Literals
 
 
 <p>
-Type literals are written like in Java. They consist of a reference to a raw type suffixed with a dot and the keyword <span class="inlinecode">class</span>
-.
+Type literals are specified using the keyword <em>typeof</em>, e.g.
+
+<ul>
+
+<li>
+
+<p>
+<span class="inlinecode">typeof(java.lang.String)</span>
+ which yields java.lang.String.class
+</p>
+
+</li>
+
+</ul>
+
 </p>
 
 
@@ -315,11 +331,112 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XTypeLiteral:<br />&nbsp;&nbsp;&nbsp;&nbsp;QualifiedName&nbsp;&apos;.&apos;&nbsp;&apos;class&apos;;<br />
+XTypeLiteral:<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;typeof&apos;&nbsp;&apos;(&apos;&nbsp;QualifiedName&nbsp;&apos;)&apos;;<br />
 </p>
 </div>
 </div>
 
+
+</p>
+
+
+</div>
+
+</div>
+
+<a name="TypeCasts"></a>
+
+<a name="TypeCasts"></a>
+<div class="section" title="Type Casts">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+Type Casts
+</h2>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Type cast behave like casts in Java, but have a slightly more readable syntax.
+Type casts bind stronger than any other operator but weaker than feature calls.
+</p>
+
+
+
+
+<a name="TypeCasts-2"></a>
+<div class="section" title="Syntax">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Syntax
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+XCastedExpression:<br />&nbsp;&nbsp;&nbsp;&nbsp;Expression&nbsp;&apos;as&apos;&nbsp;JvmTypeReference;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+</div>
+
+
+
+<a name="TypeCasts-3"></a>
+<div class="section" title="Examples">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Examples
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+
+<ul>
+
+<li>
+
+<p>
+<span class="inlinecode">my.foo&nbsp;as&nbsp;MyType</span>
+
+</p>
+
+</li>
+
+<li>
+
+<p>
+<span class="inlinecode">(1&nbsp;+&nbsp;3&nbsp;*&nbsp;5&nbsp;*&nbsp;(-&nbsp;23))&nbsp;as&nbsp;BigInteger</span>
+
+</p>
+
+</li>
+
+</ul>
 
 </p>
 
@@ -356,505 +473,282 @@ The following defines the operators and the corresponding Java method signatures
 <table>
 <tr>
 <td>
-
-<span class="inlinecode">e1.someProp&nbsp;=&nbsp;e2</span>
-
-
-</td>
-<td>
-
-<span class="inlinecode">e1.someProp&nbsp;=&nbsp;e2</span>
-
-
-</td>
-
-</tr>
-<tr>
-<td>
-
-
-
-</td>
-<td>
-
-<span class="inlinecode">e1.someProp(e2)</span>
-
-
-</td>
-
-</tr>
-<tr>
-<td>
-
-
-
-</td>
-<td>
-
-<span class="inlinecode">e1.setSomeProp(e2)</span>
-
-
-</td>
-
-</tr>
-<tr>
-<td>
-
 <span class="inlinecode">e1&nbsp;+=&nbsp;e2</span>
 
-
 </td>
 <td>
-
-<span class="inlinecode">e1.add(e2)</span>
-
+<span class="inlinecode">e1._operator_add(e2)</span>
 
 </td>
-
 </tr>
 <tr>
 <td>
-
-<span class="inlinecode">e1.someFeature&nbsp;+=&nbsp;e2</span>
-
-
-</td>
-<td>
-
-<span class="inlinecode">e1.addSomeFeature(e2)</span>
-
-
-</td>
-
-</tr>
-<tr>
-<td>
-
 <span class="inlinecode">&nbsp;</span>
 
-
 </td>
 <td>
-
 <span class="inlinecode">&nbsp;</span>
 
-
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">e1&nbsp;||&nbsp;e2</span>
 
-
 </td>
 <td>
-
-<span class="inlinecode">e1.or(e2)</span>
-
+<span class="inlinecode">e1._operator_or(e2)</span>
 
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">&nbsp;</span>
-
 
 </td>
 <td>
-
 <span class="inlinecode">&nbsp;</span>
 
-
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">e1&nbsp;&amp;&amp;&nbsp;e2</span>
 
-
 </td>
 <td>
-
-<span class="inlinecode">e1.and(e2)</span>
-
+<span class="inlinecode">e1._operator_and(e2)</span>
 
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">&nbsp;</span>
 
-
 </td>
 <td>
-
 <span class="inlinecode">&nbsp;</span>
 
-
 </td>
-
 </tr>
 <tr>
 <td>
-
-<span class="inlinecode">e1&nbsp;instanceof&nbsp;RawTypeRef</span>
-
-
-</td>
-<td>
-
-<span class="inlinecode">e1&nbsp;instanceof&nbsp;RawTypeRef&nbsp;/*&nbsp;direct&nbsp;translation&nbsp;to&nbsp;Java&nbsp;*/</span>
-
-
-</td>
-
-</tr>
-<tr>
-<td>
-
 <span class="inlinecode">e1&nbsp;==&nbsp;e2</span>
 
-
 </td>
 <td>
-
-<span class="inlinecode">e1.equals(e2)</span>
-
+<span class="inlinecode">e1._operator_equals(e2)</span>
 
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">e1&nbsp;!=&nbsp;e2</span>
 
-
 </td>
 <td>
-
-<span class="inlinecode">e1.notEquals(e2)</span>
-
+<span class="inlinecode">e1._operator_notEquals(e2)</span>
 
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">e1&nbsp;&lt;&nbsp;e2</span>
 
-
 </td>
 <td>
-
-<span class="inlinecode">e1.lessThan(e2)</span>
-
+<span class="inlinecode">e1._operator_lessThan(e2)</span>
 
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">e1&nbsp;&gt;&nbsp;e2</span>
 
-
 </td>
 <td>
-
-<span class="inlinecode">e1.greaterThan(e2)</span>
-
+<span class="inlinecode">e1._operator_greaterThan(e2)</span>
 
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">e1&nbsp;&lt;=&nbsp;e2</span>
 
-
 </td>
 <td>
-
-<span class="inlinecode">e1.lessEqualsThan(e2)</span>
-
+<span class="inlinecode">e1._operator_lessEqualsThan(e2)</span>
 
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">e1&nbsp;&gt;=&nbsp;e2</span>
 
-
 </td>
 <td>
-
-<span class="inlinecode">e1.greaterEqualsThan(e2)</span>
-
+<span class="inlinecode">e1._operator_greaterEqualsThan(e2)</span>
 
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">&nbsp;</span>
-
 
 </td>
 <td>
-
 <span class="inlinecode">&nbsp;</span>
 
-
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">e1&nbsp;-&gt;&nbsp;e2</span>
 
-
 </td>
 <td>
-
-<span class="inlinecode">e1.mappedTo(e2)</span>
-
+<span class="inlinecode">e1._operator_mappedTo(e2)</span>
 
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">e1&nbsp;..&nbsp;e2</span>
 
-
 </td>
 <td>
-
-<span class="inlinecode">e1.upTo(e2)</span>
-
+<span class="inlinecode">e1._operator_upTo(e2)</span>
 
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">&nbsp;</span>
-
 
 </td>
 <td>
-
 <span class="inlinecode">&nbsp;</span>
 
-
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">e1&nbsp;+&nbsp;e2</span>
 
-
 </td>
 <td>
-
-<span class="inlinecode">e1.plus(e2)</span>
-
+<span class="inlinecode">e1._operator_plus(e2)</span>
 
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">e1&nbsp;-&nbsp;e2</span>
 
-
 </td>
 <td>
-
-<span class="inlinecode">e1.minus(e2)</span>
-
+<span class="inlinecode">e1._operator_minus(e2)</span>
 
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">&nbsp;</span>
-
 
 </td>
 <td>
-
 <span class="inlinecode">&nbsp;</span>
 
-
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">e1&nbsp;*&nbsp;e2</span>
 
-
 </td>
 <td>
-
-<span class="inlinecode">e1.multiply(e2)</span>
-
+<span class="inlinecode">e1._operator_multiply(e2)</span>
 
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">e1&nbsp;/&nbsp;e2</span>
 
-
 </td>
 <td>
-
-<span class="inlinecode">e1.divide(e2)</span>
-
+<span class="inlinecode">e1._operator_divide(e2)</span>
 
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">e1&nbsp;%&nbsp;e2</span>
 
-
 </td>
 <td>
-
-<span class="inlinecode">e1.modulo(e2)</span>
-
+<span class="inlinecode">e1._operator_modulo(e2)</span>
 
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">e1&nbsp;**&nbsp;e2</span>
 
-
 </td>
 <td>
-
-<span class="inlinecode">e1.power(e2)</span>
-
+<span class="inlinecode">e1._operator_power(e2)</span>
 
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">&nbsp;</span>
-
 
 </td>
 <td>
-
 <span class="inlinecode">&nbsp;</span>
 
-
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">!&nbsp;e1</span>
 
-
 </td>
 <td>
-
-<span class="inlinecode">e1.not()</span>
-
+<span class="inlinecode">e1._operator_not()</span>
 
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">-&nbsp;e1</span>
 
-
 </td>
 <td>
-
-<span class="inlinecode">e1.minus()</span>
-
+<span class="inlinecode">e1._operator_minus()</span>
 
 </td>
-
 </tr>
 <tr>
 <td>
-
 <span class="inlinecode">&nbsp;</span>
 
-
 </td>
 <td>
-
 <span class="inlinecode">&nbsp;</span>
 
-
 </td>
-
 </tr>
-<tr>
-<td>
-
-<span class="inlinecode">e1[e2]</span>
-
-
-</td>
-<td>
-
-<span class="inlinecode">e1.apply(&lt;Exp2)</span>
-
-
-</td>
-
-</tr>
-
 </table>
 
 		
 The table above also defines the operator precedence in ascending order. The blank lines separate precedence levels. 
-The two assignment operators <span class="inlinecode">=</span>
- and <span class="inlinecode">+=</span>
- are right-to-left associative, that is a = b = c is executed as a = (b = c), all other
+The assignment operator <span class="inlinecode">+=</span>
+ is right-to-left associative in the same way as the plain assignment
+operator <span class="inlinecode">=</span>
+ is. That is a = b = c is executed as a = (b = c), all other
 operators are left-to-right associative. Parenthesis can be used to adjust the default precedence and associativity. 
 </p>
 
@@ -920,10 +814,10 @@ Java expression, which is the assigned value.
 </p>
 
 <p>
-If there is no accessible field on the left operand&apos;s type, first a method called <span class="inlinecode">myProperty(OneArg)</span>
- and then <span class="inlinecode">setMyProperty(OneArg)</span>
- is looked up. It has to take 
-one argument of the type (or a super type) of the right hand operand. The return value will be whatever the setter method returns (which usually is <span class="inlinecode">null</span>
+If there is no accessible field on the left operand&apos;s type, a method called <span class="inlinecode">setMyProperty(OneArg)</span>
+ (JavaBeans
+setter method) is looked up. It has to take one argument of the type (or a super type) of the right hand operand. The return value will be whatever the 
+setter method returns (which usually is <span class="inlinecode">null</span>
 ). 
 As a result the compiler translates to :
 </p>
@@ -941,73 +835,8 @@ myObj.setMyProperty("foo")<br />
 
 </p>
 
-
-</div>
-
-<a name="addAssignment"></a>
-
-<a name="addAssignment"></a>
-<div class="section" title="Add Assignment">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Add Assignment
-</h3>
-</div>
-</div>
-</div>
-
-
-
-<p>
-The translation rule for the add assignment operator <span class="inlinecode">+=</span>
- is as follows:
-Given the expression 
-</p>
-
 <p>
 
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-myObj.myProperty&nbsp;+=&nbsp;"foo"<br />
-</p>
-</div>
-</div>
-
-
-</p>
-
-<p>
-The compiler first looks up whether, the left hand side operand is of some type providing a method <span class="inlinecode">add(StringOrSuperType)</span>
-. 
-In that case the expression translates to the following Java expression :
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-myObj.myProperty.add("foo");<br />
-</p>
-</div>
-</div>
-
-
-</p>
-
-<p>
-If there is no such method, the compiler looks for a method called <span class="inlinecode">addMyProperty(OneArg)</span>
- on the type of the target expression
-of the feature call. That is it looks whether the type of <span class="inlinecode">myObj</span>
- provides a method called <span class="inlinecode">addMyProperty(StringOrSuperType)</span>
-.
-</p>
-
-<p>
-The return value and compile-time type will be whatever the invoked Java method returns.
 </p>
 
 
@@ -1015,7 +844,7 @@ The return value and compile-time type will be whatever the invoked Java method 
 
 
 
-<a name="Operators-5"></a>
+<a name="Operators-4"></a>
 <div class="section" title="Short-Circuit Boolean Operators">
 <div class="titlepage">
 <div>
@@ -1059,7 +888,6 @@ in the case of <span class="inlinecode">&amp;&amp;</span>
 
 </ol>
 
-
 </p>
 
 
@@ -1067,7 +895,7 @@ in the case of <span class="inlinecode">&amp;&amp;</span>
 
 
 
-<a name="Operators-6"></a>
+<a name="Operators-5"></a>
 <div class="section" title="Examples">
 <div class="titlepage">
 <div>
@@ -1184,7 +1012,7 @@ Feature Calls
 
 <p>
 A feature call is used to invoke members of objects, such as fields and methods, but also can refer to local variables and parameters, 
-which are made available for the current expression&apos;s scope (TODO define how scopes are declared around expressions). 
+which are made available for the current expression&apos;s scope. 
 </p>
 
 
@@ -1298,7 +1126,7 @@ this.myProperty<br />
 </div>
 
 
-if a valid expression
+is a valid expression
 
 <div class="literallayout">
 <div class="incode">
@@ -1309,7 +1137,62 @@ myProperty<br />
 </div>
 
 
-is valid as well and is equivalent. 
+is valid as well and is equivalent, as long as there is no local variable &apos;myProperty&apos; on the scope,
+which would have higher precedence.
+</p>
+
+
+</div>
+
+<a name="Extensions"></a>
+
+<a name="Extensions"></a>
+<div class="section" title="Extensions">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Extensions
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Languages extending Xbase might want to contribute to the feature scope. Besides that one can of course
+change the whole implementation as it seems fit there is a special hook, which can be used to add so
+called extension methods to existing types. 
+</p>
+
+<p>
+Xbase itself comes with a standard library of such extension methods adding support for various operators
+for the common types, such as java.lang.String, java.util.List, etc.
+</p>
+
+<p>
+These extension methods are declared in separate Java classes. There are various ways how extension methods
+can be added. The simplest is, that the language designer predefines, which extension methods are available.
+This means, that language users cannot add additional library functions using this mechanism.
+</p>
+
+<p>
+Another alternative is to have them looked up by a certain naming convention. Also for more general languages
+it is possible to let users add extension methods using imports or the like. This approach can be seen in the
+language Xtend2, where extension methods are lexically imported through static imports and/or dependency
+injection.
+</p>
+
+<p>
+The precedence of extension methods is always lower than real member methods, that is you cannot override
+member features. Also the extension members are not invoked polymorphic. If you have two extension methods
+on the scope (<span class="inlinecode">foo(Object)</span>
+ and <span class="inlinecode">foo(String)</span>
+) the expression <span class="inlinecode">(foo&nbsp;as&nbsp;Object).foo</span>
+ would
+bind and invoke <span class="inlinecode">foo(Object)</span>
+.
 </p>
 
 
@@ -1317,7 +1200,7 @@ is valid as well and is equivalent.
 
 
 
-<a name="FeatureCalls-5"></a>
+<a name="FeatureCalls-6"></a>
 <div class="section" title="Examples">
 <div class="titlepage">
 <div>
@@ -1397,8 +1280,8 @@ Spread Operator
 
 
 <p>
-Xbase provides a special sugared notation to invoke a certain feature on each element of a collect
-and obtain the results as another iterable. This is essentially a short cut notation for a higher order function on <span class="inlinecode">java.lang.Iterable</span>
+Xbase provides a special sugared notation to invoke a certain feature on each element of an iterable
+and obtain the results as a list. This is essentially a short cut notation for a higher order function on <span class="inlinecode">java.lang.Iterable</span>
 .
 If you for instance want the names of all persons in a <span class="inlinecode">List</span>
  you could write the following using a higher order function and a closures:
@@ -1436,15 +1319,15 @@ listOfPersons*.name<br />
 </p>
 
 <p>
-Note that we decided to come up with an explicit operator (.*) because overloading the &apos;.&apos; operator as it is the case in Xpand,
-has caused a lot of surprises in the past. With an explicit operator the tooling as well as the user always can distinct whether you
+Note that we decided to come up with an explicit operator (*.) because overloading the &apos;.&apos; operator as it is the case in Xpand,
+has caused a lot of surprises in the past. With an explicit operator the tooling as well as the user always can distinguish whether you
 invoke a feature on the iterables elements or on the iterable itself.
 Also note that this really is just a shortcut for collect. It doesn&apos;t do any flattening, when you invoke it on iterables containing iterables.
 </p>
 
 <p>
 The operator works on all members of <span class="inlinecode">java.lang.Iterable</span>
-. the return type is always an <span class="inlinecode">java.lang.Iterable&lt;T&gt;</span>
+. the return type is always an <span class="inlinecode">java.util.List&lt;T&gt;</span>
  where <span class="inlinecode">T</span>
 
 is the return type of the called feature.
@@ -1545,7 +1428,7 @@ Safe Navigation Featurecall
 
 <p>
 Checking for null references can make code very unreadable. In many situations it is ok for an expression to return null if a receiver was null.
-Xbase supports the safe navigatioj operator <span class="inlinecode">?.</span>
+Xbase supports the safe navigation operator <span class="inlinecode">?.</span>
  to make such code more readable.
 </p>
 
@@ -1639,7 +1522,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode">myListOfPersons.name</span>
+<span class="inlinecode">person?.address?.name</span>
 
 </p>
 
@@ -1671,8 +1554,8 @@ Closures
 
 
 <p>
-A closure is a literal that defines an anonymous function. A closure also captures the current scope, so that any final variables and parameters visible at construction time 
-can be referred to in the closure&apos;s expression. 
+A closure is a literal that defines an anonymous function. A closure also captures the current scope,
+so that any final variables and parameters visible at construction time can be referred to in the closure&apos;s expression. 
 </p>
 
 
@@ -1697,7 +1580,41 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XClosure:<br />&nbsp;&nbsp;&nbsp;&nbsp;(JvmFormalParameter&nbsp;(&apos;,&apos;&nbsp;JvmFormalParameter)*)?&nbsp;&apos;|&apos;&nbsp;XExpression;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />JvmFormalParameter:<br />&nbsp;&nbsp;&nbsp;&nbsp;JvmTypeReference?&nbsp;ID;<br />
+XClosure:<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;[&apos;&nbsp;(JvmFormalParameter&nbsp;(&apos;,&apos;&nbsp;JvmFormalParameter)*)?&nbsp;&apos;|&apos;&nbsp;XExpression&nbsp;&apos;]&apos;;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />JvmFormalParameter:<br />&nbsp;&nbsp;&nbsp;&nbsp;JvmTypeReference?&nbsp;ID;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+The surrounding square brackets are optional if the closure is directly passed to function call.
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myList.find(e|e.name==null)<br />myList.find([e|e.name==null])<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+But in all other cases the square brackets are mandatory:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+val&nbsp;func&nbsp;=&nbsp;[String&nbsp;s|&nbsp;s.length&gt;3]<br />
 </p>
 </div>
 </div>
@@ -1725,8 +1642,8 @@ Function Mapping
 
 
 <p>
-An Xbase closure is a Java object of one of the <em>Function</em> interfaces shipped with the runtime library of Xbase. There is an interface for each number of parameters.
-The names of the interfaces are 
+An Xbase closure is a Java object of one of the <em>Function</em> interfaces shipped with the runtime library of Xbase. There is an interface 
+for each number of parameters. The names of the interfaces are 
 
 <ul>
 
@@ -1775,20 +1692,28 @@ The names of the interfaces are
 </p>
 
 <p>
-In order to allow seamless integration with Google Guava (formerly known as Google Collect) the type <span class="inlinecode">Function1</span>
- 
-extends <span class="inlinecode">com.google.common.base.Function&lt;F,&nbsp;T&gt;</span>
- and the type <em>Function0</em> extends <span class="inlinecode">com.google.common.base.Supplier&lt;T&gt;</span>
-. 
-There is also an auto-coercion for any <span class="inlinecode">Function1&lt;T,Boolean&gt;</span>
- to <span class="inlinecode">com.google.common.base.Predicate&lt;T&gt;</span>
-.
+In order to allow seamless integration with existing libraries such as Google Guava (formerly known as Google Collect) closures
+are auto coerced to expected types if those types declare only one method (methods from java.lang.Object
+don&apos;t count).
 </p>
 
 <p>
-<em>TODO: Discuss, whether we want to go a step further and do auto conversion to any type declaring only one method. That would allow to pass
-closures also to methods expecting other such types like e.g. <span class="inlinecode">Iterable</span>
-. This would avoid a fixed dependency to Google Guava, too.</em>
+As a result given the method <span class="inlinecode">java.util.Collections.sort(List&lt;T&gt;,&nbsp;Comparator&lt;?&nbsp;super&nbsp;T&gt;)</span>
+ is available
+as an extension method, it can be invoked like this
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+newArrayList(&apos;aaa&apos;,&apos;bb&apos;,&apos;c&apos;).sort(<br />&nbsp;&nbsp;&nbsp;&nbsp;e1,e2|&nbsp;if&nbsp;e1.length&gt;e2.length&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if&nbsp;e1.length&lt;e2.length&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0)<br />
+</p>
+</div>
+</div>
+
+
 </p>
 
 
@@ -1973,10 +1898,10 @@ An expression <span class="inlinecode">if&nbsp;(p)&nbsp;e1&nbsp;else&nbsp;e2</sp
  results to either the value <span class="inlinecode">e1</span>
  or <span class="inlinecode">e2</span>
  depending on whether the predicate <span class="inlinecode">p</span>
- evaluates to <span class="inlinecode">true</span>
+ 
+evaluates to <span class="inlinecode">true</span>
  or <span class="inlinecode">false</span>
-. 
-The else part is optional which is a shorthand for <span class="inlinecode">else&nbsp;null</span>
+. The else part is optional which is a shorthand for <span class="inlinecode">else&nbsp;null</span>
 .
 That is 
 
@@ -2117,7 +2042,7 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XSwitchExpression:<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;switch&apos;&nbsp;XExpressionOrVariableDeclaration?&nbsp;&apos;{&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCasePart+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&apos;default&apos;&nbsp;&apos;:&apos;&nbsp;(XBlockExpression&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;XExpression&nbsp;&apos;;&apos;))?<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;}&apos;;<br /><br />XCasePart:<br />&nbsp;&nbsp;&nbsp;&nbsp;JvmTypeReference?&nbsp;(&apos;case&apos;&nbsp;XExpression)?&nbsp;&apos;:&apos;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(XBlockExpression&nbsp;|&nbsp;XExpression&nbsp;&apos;;&apos;);<br />
+XSwitchExpression:<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;switch&apos;&nbsp;XExpressionOrVariableDeclaration&nbsp;&apos;{&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCasePart+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&apos;default&apos;&nbsp;&apos;:&apos;&nbsp;XExpression))?<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;}&apos;;<br /><br />XCasePart:<br />&nbsp;&nbsp;&nbsp;&nbsp;JvmTypeReference?&nbsp;(&apos;case&apos;&nbsp;XExpression)?&nbsp;&apos;:&apos;&nbsp;XExpression&nbsp;);<br />
 </p>
 </div>
 </div>
@@ -2160,30 +2085,6 @@ A case clause is taken if the switch value equals the result of the case&apos;s 
 
 
 <a name="SwitchExpression-2"></a>
-<div class="section" title="Leaving out the main expression">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Leaving out the main expression
-</h3>
-</div>
-</div>
-</div>
-
-
-
-<p>
-It is possible to leave out the main expression. Then the first case clause for which its guard returns <span class="inlinecode">true</span>
- is taken and executed.
-</p>
-
-
-</div>
-
-
-
-<a name="SwitchExpression-3"></a>
 <div class="section" title="Type guards">
 <div class="titlepage">
 <div>
@@ -2199,8 +2100,8 @@ Type guards
 
 <p>
 In addition to the case predicate one can add a so called <em>Type Guard</em> which is syntactically just 
-<a href="03-Types.xdoc.html#TypeReferences">type reference</a> in front of the case keyword.  
-The compiler will use that type for the switch expression in subsequent expressions.
+<a href="03-Types.xdoc.html#TypeReferences">type reference</a> in 
+front of the case keyword. The compiler will use that type for the switch expression in subsequent expressions.
 Example:
 
 <div class="literallayout">
@@ -2225,7 +2126,7 @@ previously. Statically the type guard acts like a cast, that is all references t
 
 
 
-<a name="SwitchExpression-4"></a>
+<a name="SwitchExpression-3"></a>
 <div class="section" title="Typing">
 <div class="titlepage">
 <div>
@@ -2296,7 +2197,7 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XVariableDeclaration:<br />&nbsp;&nbsp;&nbsp;&nbsp;(&apos;val&apos;&nbsp;|&nbsp;&apos;var&apos;)&nbsp;JvmTypeReference&nbsp;ID&nbsp;&apos;=&apos;&nbsp;XExpression;<br />
+XVariableDeclaration:<br />&nbsp;&nbsp;&nbsp;&nbsp;(&apos;val&apos;&nbsp;|&nbsp;&apos;var&apos;)&nbsp;JvmTypeReference?&nbsp;ID&nbsp;&apos;=&apos;&nbsp;XExpression;<br />
 </p>
 </div>
 </div>
@@ -2946,7 +2847,7 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XConstructorCall:<br />&nbsp;&nbsp;&apos;new&apos;&nbsp;(QualifiedName&nbsp;(&apos;&lt;&apos;&nbsp;JvmTypeArgument&nbsp;(&apos;,&apos;&nbsp;JvmTypeArgument)*&nbsp;&apos;&gt;&apos;)?&nbsp;&apos;(&apos;(XExpression&nbsp;(&apos;,&apos;&nbsp;XExpression)*)?&apos;)&apos;)?;<br />
+XConstructorCall:<br />&nbsp;&nbsp;&apos;new&apos;&nbsp;QualifiedName&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&apos;&lt;&apos;&nbsp;JvmTypeArgument&nbsp;(&apos;,&apos;&nbsp;JvmTypeArgument)*&nbsp;&apos;&gt;&apos;)?&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&apos;(&apos;(XExpression&nbsp;(&apos;,&apos;&nbsp;XExpression)*)?&apos;)&apos;)?;<br />
 </p>
 </div>
 </div>

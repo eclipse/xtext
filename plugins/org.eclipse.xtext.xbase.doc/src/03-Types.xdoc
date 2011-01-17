@@ -4,8 +4,11 @@ Xbase binds to the Java Virtual Machine. This means that expressions written in 
 defined in the Java language, such as classes, interfaces, annotations and enums. It also supports Java generics and shares the known syntax. In addition 
 to Java, Xbase comes with the notion of function types. 
 
-Xbase does not bind to Arrays but translates any references to e[java.util.List]s: An 
-array e[int\[\]] binds to e[java.util.List<java.lang.Integer>] (in short e[List<Integer>]). 
+Xbase does not allow to define arrays or references to arrays. Instead, any references to arrays will
+be transparently converted to lists and vice versa. The return type of an external function that calculates
+an array e[int\[\]] can be directly assigned to a variable of type e[java.util.List<java.lang.Integer>] 
+(in short e[List<Integer>]). Any function, that takes an array as argument can be invoked with a e[List]
+instead. 
 
 section:TypeReferences[Simple Type References]
 
@@ -31,8 +34,9 @@ ul[
 
 section:FunctionTypes[Function Types]
 
-Xbase introduces e[closures], and therefore an additional function type signature. On the JVM-Level a closure (or more generally any function object) is just an instance of one of the 
-types in code[org.eclipse.xtext.xbase.lib.Function*], depending on the number of arguments. However, as closures are a very important language feature, 
+Xbase introduces e[closures], and therefore an additional function type signature. On the JVM-Level a closure (or more
+generally any function object) is just an instance of one of the types in code[org.eclipse.xtext.xbase.lib.Function*], 
+depending on the number of arguments. However, as closures are a very important language feature, 
 a special sugared syntax for function types has been introduced.  
 So instead of writing code[Function1<String,Boolean>] one can write code[(String)=>Boolean].
 
@@ -52,7 +56,7 @@ ul[
 	item[code[=>Boolean // predicate without parameters]]
 	item[code[(String)=>Boolean // One argument predicate]]
 	item[code[(Mutable)=>Void // A method doing side effects only - returns null]]
-	item[code[(List<String>)=>String]]
+	item[code[(List<String>, int)=>String]]
 ]
 
 section:ParameterizedTypeReference[Parameterized Type References]
@@ -111,7 +115,7 @@ section:VoidType[The type java.lang.Void]
 The code[null] reference is the only valid value of the type code[Void], which gets some special treatment in Xbase. Every Java method which is declared 
 e[void] (i.e. without a return value) is translated to a method with return type e[java.lang.Void]. At runtime such method invocations will result in 
 e[null]. The specialty is that while it is allowed to pass code[null] everywhere todo[discuss use of nullable annotation] instead of any other value, 
-this does not mean that e[java.lang.Void] is a subtype of any other type. The code[instanceOf] operator as well as the type matchers in 
+this does not mean that e[java.lang.Void] is a subtype of any other type. The code[instanceof] operator as well as the type matchers in 
 the ref:SwitchExpression do not match code[null].
 
 section:ConformanceRules[Conformance Rules]
@@ -128,10 +132,16 @@ ul[
 
 e[T1<T1P,..T1Pn>] conforms to e[T2<T2P, ... T2Pn>] if e[T1] conforms to e[T2] and each upper bound of a e[T1Pn] conforms to the corresponding upper bound of e[T2Pn].
 
+todo[Is the type conformance for generic types correct? List<String> does not conform to Collection<CharSequence>]
+
 section2:CommonSuperType[Common Super Type]
 
 For a set e[\[T1,T2,...Tn\]] of types the common super type is computed by using the linear type inheritance sequence of e[T1] and is iterated until one type
 conforms to each e[T2,..,Tn]. The linear type inheritance sequence of e[T1] is computed by ordering all types which are part if the type hierarchy of e[T1]
-by their specificity. A type e[T1] is considered more specific than e[T2] if e[T1] is a subtype of e[T2]. Any types with equal specificity will be sorted 
-by their qualified name just to ensure deterministic results. 
+by their specificity. A type e[T1] is considered more specific than e[T2] if e[T1] is a subtype of e[T2]. Any types with equal specificity will be sorted by
+the maximal distance to the originating subtype. e[CharSequence] has distance 2 to e[StringBuilder] because
+the supertype e[AbstractStringBuilder] implements the interface. Even if e[StringBuilder] implements
+e[CharSequence] directly, the interface gets distance 2 in the ordering because it is not the first class
+in the type hierarchy that implements the interface. If the distances for to classes are the same int
+he hierarchy, their qualified name is used to ensure deterministic results. 
 
