@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -302,5 +303,10 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	public void testConstructorCall_00() throws Exception {
 		XConstructorCall expression = (XConstructorCall) expression("new java.util.ArrayList<String>(42)");
 		assertEquals("java.util.ArrayList.ArrayList(int)", expression.getConstructor().getCanonicalName());
+	}
+	
+	public void testEscapedQualifiedName() throws Exception {
+		XCastedExpression expression = (XCastedExpression) expression("null as ^testdata/* foobar */.^FieldAccessSub");
+		assertFalse(expression.getType().getType().eIsProxy());
 	}
 }
