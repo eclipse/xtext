@@ -6,6 +6,7 @@ package org.eclipse.xtext.ui;
 import org.eclipse.jface.text.source.DefaultCharacterPairMatcher;
 import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
@@ -28,6 +29,7 @@ import org.eclipse.xtext.xtext.ui.editor.outline.FilterTerminalRulesContribution
 import org.eclipse.xtext.xtext.ui.editor.outline.HideReturnTypesContribution;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextOutlineNodeComparator;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextOutlineNodeLabelProvider;
+import org.eclipse.xtext.xtext.ui.editor.outline.XtextOutlinePage;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextOutlineTreeProvider;
 import org.eclipse.xtext.xtext.ui.editor.quickfix.XtextGrammarQuickfixProvider;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingCalculator;
@@ -77,6 +79,11 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 
 	public Class<? extends IFoldingRegionProvider> bindIFoldingRegionProvider() {
 		return XtextGrammarFoldingRegionProvider.class;
+	}
+	
+	@Override
+	public Class<? extends IContentOutlinePage> bindIContentOutlinePage() {
+		return XtextOutlinePage.class;
 	}
 
 	public Class<? extends IOutlineTreeProvider> bindIOutlineTreeProvider() {
