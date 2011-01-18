@@ -344,7 +344,7 @@ public class GrammarUtil {
 				return EcoreUtil2.eAllOfType(from, TypeRef.class);
 			}
 		}));
-		return newHashSet(transform(filter(allTypeRefs, new Predicate<TypeRef>() {
+		return newLinkedHashSet(transform(filter(allTypeRefs, new Predicate<TypeRef>() {
 			public boolean apply(TypeRef input) {
 				return !(input.eContainer() instanceof CrossReference) && input.getClassifier() instanceof EClass;
 			}
