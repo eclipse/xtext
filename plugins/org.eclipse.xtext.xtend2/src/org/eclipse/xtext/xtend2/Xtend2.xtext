@@ -44,8 +44,14 @@ XStringLiteral returns xbase::XExpression:
 ;
 		
 RichString returns xbase::XExpression:
-	{RichStringLiteral} value=RICH_TEXT |
-	{RichString} elements+=RichStringLiteralStart elements+=RichStringPart (elements+=RichStringLiteralInbetween elements+=RichStringPart)* elements+=RichStringLiteralEnd
+	{RichString} ( 
+	  elements+=RichStringLiteral |
+	  elements+=RichStringLiteralStart elements+=RichStringPart (elements+=RichStringLiteralInbetween elements+=RichStringPart)* elements+=RichStringLiteralEnd
+	)
+;
+
+RichStringLiteral returns xbase::XExpression :
+	{RichStringLiteral} value=RICH_TEXT
 ;
 
 RichStringLiteralStart returns xbase::XExpression :
@@ -61,8 +67,15 @@ RichStringLiteralEnd returns xbase::XExpression :
 ; 
 
 InternalRichString returns xbase::XExpression:
-	{RichStringLiteral} value=RICH_TEXT_INBETWEEN |
-	{RichString} elements+=RichStringLiteralInbetween (elements+=RichStringPart elements+=RichStringLiteralInbetween)+;
+	{RichString} (
+		elements+=InternalRichStringLiteral |
+		elements+=RichStringLiteralInbetween (elements+=RichStringPart elements+=RichStringLiteralInbetween)+
+	)
+;
+
+InternalRichStringLiteral returns xbase::XExpression :
+	{RichStringLiteral} value=RICH_TEXT_INBETWEEN
+;
 
 RichStringPart returns xbase::XExpression:
 	XExpression |

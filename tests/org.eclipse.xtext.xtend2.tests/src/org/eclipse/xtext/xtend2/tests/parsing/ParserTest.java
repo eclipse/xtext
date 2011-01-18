@@ -150,8 +150,10 @@ public class ParserTest extends AbstractXtend2TestCase {
 
 	public void testRichString_00() throws Exception {
 		XtendFunction function = function("foo() ''' foo '''");
-		assertTrue(function.getExpression() instanceof RichStringLiteral);
-		RichStringLiteral stringLiteral = (RichStringLiteral) function.getExpression();
+		assertTrue(function.getExpression() instanceof RichString);
+		RichString richString = (RichString) function.getExpression();
+		assertEquals(1, richString.getElements().size());
+		RichStringLiteral stringLiteral = (RichStringLiteral) richString.getElements().get(0);
 		assertEquals(" foo ", stringLiteral.getValue());
 	}
 	
@@ -165,7 +167,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	
 	public void testRichString_02() throws Exception {
 		XtendFunction function = function("foo() ''''''");
-		assertTrue(function.getExpression() instanceof RichStringLiteral); 
+		assertTrue(function.getExpression() instanceof RichString); 
 	}
 	
 	public void testRichStringIF_00() throws Exception {
@@ -175,14 +177,14 @@ public class ParserTest extends AbstractXtend2TestCase {
 		
 		final RichStringIf rsIf = (RichStringIf) richString.getElements().get(1);
 		assertTrue(rsIf.getIf() instanceof XBooleanLiteral); 
-		assertTrue(rsIf.getThen() instanceof RichStringLiteral);
+		assertTrue(rsIf.getThen() instanceof RichString);
 		assertEquals(1,rsIf.getElseIfs().size());
 		
 		RichStringElseIf elseIf = rsIf.getElseIfs().get(0);
 		assertTrue(elseIf.getIf() instanceof XBinaryOperation);
-		assertTrue(elseIf.getThen() instanceof RichStringLiteral);
+		assertTrue(elseIf.getThen() instanceof RichString);
 		
-		assertTrue(rsIf.getElse() instanceof RichStringLiteral);
+		assertTrue(rsIf.getElse() instanceof RichString);
 		
 		assertTrue(richString.getElements().get(2) instanceof RichStringLiteral); 
 	}
@@ -199,7 +201,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 		assertEquals(3,then.getElements().size());
 		RichStringIf innerIf = (RichStringIf) then.getElements().get(1);
 		assertTrue(innerIf.getIf() instanceof XBooleanLiteral);
-		assertTrue(innerIf.getElse() instanceof RichStringLiteral);
+		assertTrue(innerIf.getElse() instanceof RichString);
 		
 		assertTrue(rsIf.getElse()==null);
 		

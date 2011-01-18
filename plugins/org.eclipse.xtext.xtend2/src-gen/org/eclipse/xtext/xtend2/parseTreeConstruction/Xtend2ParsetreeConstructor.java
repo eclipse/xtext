@@ -37,60 +37,62 @@ protected class ThisRootNode extends RootToken {
 			case 3: return new Member_FunctionParserRuleCall(this, this, 3, inst);
 			case 4: return new Function_Group(this, this, 4, inst);
 			case 5: return new XStringLiteral_Alternatives(this, this, 5, inst);
-			case 6: return new RichString_Alternatives(this, this, 6, inst);
-			case 7: return new RichStringLiteralStart_Group(this, this, 7, inst);
-			case 8: return new RichStringLiteralInbetween_Group(this, this, 8, inst);
-			case 9: return new RichStringLiteralEnd_Group(this, this, 9, inst);
-			case 10: return new InternalRichString_Alternatives(this, this, 10, inst);
-			case 11: return new RichStringPart_Alternatives(this, this, 11, inst);
-			case 12: return new RichStringForLoop_Group(this, this, 12, inst);
-			case 13: return new RichStringIf_Group(this, this, 13, inst);
-			case 14: return new RichStringElseIf_Group(this, this, 14, inst);
-			case 15: return new XExpression_XAssignmentParserRuleCall(this, this, 15, inst);
-			case 16: return new XAssignment_Alternatives(this, this, 16, inst);
-			case 17: return new XOrExpression_Group(this, this, 17, inst);
-			case 18: return new XAndExpression_Group(this, this, 18, inst);
-			case 19: return new XEqualityExpression_Group(this, this, 19, inst);
-			case 20: return new XRelationalExpression_Group(this, this, 20, inst);
-			case 21: return new XOtherOperatorExpression_Group(this, this, 21, inst);
-			case 22: return new XAdditiveExpression_Group(this, this, 22, inst);
-			case 23: return new XMultiplicativeExpression_Group(this, this, 23, inst);
-			case 24: return new XUnaryOperation_Alternatives(this, this, 24, inst);
-			case 25: return new XCastedExpression_Group(this, this, 25, inst);
-			case 26: return new XMemberFeatureCall_Group(this, this, 26, inst);
-			case 27: return new XPrimaryExpression_Alternatives(this, this, 27, inst);
-			case 28: return new XLiteral_Alternatives(this, this, 28, inst);
-			case 29: return new XClosure_Group(this, this, 29, inst);
-			case 30: return new XShortClosure_Group(this, this, 30, inst);
-			case 31: return new XParenthesizedExpression_Group(this, this, 31, inst);
-			case 32: return new XIfExpression_Group(this, this, 32, inst);
-			case 33: return new XSwitchExpression_Group(this, this, 33, inst);
-			case 34: return new XCasePart_Group(this, this, 34, inst);
-			case 35: return new XForLoopExpression_Group(this, this, 35, inst);
-			case 36: return new XWhileExpression_Group(this, this, 36, inst);
-			case 37: return new XDoWhileExpression_Group(this, this, 37, inst);
-			case 38: return new XBlockExpression_Group(this, this, 38, inst);
-			case 39: return new XExpressionInsideBlock_Alternatives(this, this, 39, inst);
-			case 40: return new XVariableDeclaration_Group(this, this, 40, inst);
-			case 41: return new JvmFormalParameter_Group(this, this, 41, inst);
-			case 42: return new XFeatureCall_Group(this, this, 42, inst);
-			case 43: return new XConstructorCall_Group(this, this, 43, inst);
-			case 44: return new XBooleanLiteral_Group(this, this, 44, inst);
-			case 45: return new XNullLiteral_Group(this, this, 45, inst);
-			case 46: return new XIntLiteral_Group(this, this, 46, inst);
-			case 47: return new XTypeLiteral_Group(this, this, 47, inst);
-			case 48: return new XThrowExpression_Group(this, this, 48, inst);
-			case 49: return new XTryCatchFinallyExpression_Group(this, this, 49, inst);
-			case 50: return new XCatchClause_Group(this, this, 50, inst);
-			case 51: return new JvmTypeReference_Alternatives(this, this, 51, inst);
-			case 52: return new XFunctionTypeRef_Group(this, this, 52, inst);
-			case 53: return new JvmParameterizedTypeReference_Group(this, this, 53, inst);
-			case 54: return new JvmArgumentTypeReference_Alternatives(this, this, 54, inst);
-			case 55: return new JvmWildcardTypeReference_Group(this, this, 55, inst);
-			case 56: return new JvmUpperBound_Group(this, this, 56, inst);
-			case 57: return new JvmUpperBoundAnded_Group(this, this, 57, inst);
-			case 58: return new JvmLowerBound_Group(this, this, 58, inst);
-			case 59: return new JvmTypeParameter_Group(this, this, 59, inst);
+			case 6: return new RichString_Group(this, this, 6, inst);
+			case 7: return new RichStringLiteral_Group(this, this, 7, inst);
+			case 8: return new RichStringLiteralStart_Group(this, this, 8, inst);
+			case 9: return new RichStringLiteralInbetween_Group(this, this, 9, inst);
+			case 10: return new RichStringLiteralEnd_Group(this, this, 10, inst);
+			case 11: return new InternalRichString_Group(this, this, 11, inst);
+			case 12: return new InternalRichStringLiteral_Group(this, this, 12, inst);
+			case 13: return new RichStringPart_Alternatives(this, this, 13, inst);
+			case 14: return new RichStringForLoop_Group(this, this, 14, inst);
+			case 15: return new RichStringIf_Group(this, this, 15, inst);
+			case 16: return new RichStringElseIf_Group(this, this, 16, inst);
+			case 17: return new XExpression_XAssignmentParserRuleCall(this, this, 17, inst);
+			case 18: return new XAssignment_Alternatives(this, this, 18, inst);
+			case 19: return new XOrExpression_Group(this, this, 19, inst);
+			case 20: return new XAndExpression_Group(this, this, 20, inst);
+			case 21: return new XEqualityExpression_Group(this, this, 21, inst);
+			case 22: return new XRelationalExpression_Group(this, this, 22, inst);
+			case 23: return new XOtherOperatorExpression_Group(this, this, 23, inst);
+			case 24: return new XAdditiveExpression_Group(this, this, 24, inst);
+			case 25: return new XMultiplicativeExpression_Group(this, this, 25, inst);
+			case 26: return new XUnaryOperation_Alternatives(this, this, 26, inst);
+			case 27: return new XCastedExpression_Group(this, this, 27, inst);
+			case 28: return new XMemberFeatureCall_Group(this, this, 28, inst);
+			case 29: return new XPrimaryExpression_Alternatives(this, this, 29, inst);
+			case 30: return new XLiteral_Alternatives(this, this, 30, inst);
+			case 31: return new XClosure_Group(this, this, 31, inst);
+			case 32: return new XShortClosure_Group(this, this, 32, inst);
+			case 33: return new XParenthesizedExpression_Group(this, this, 33, inst);
+			case 34: return new XIfExpression_Group(this, this, 34, inst);
+			case 35: return new XSwitchExpression_Group(this, this, 35, inst);
+			case 36: return new XCasePart_Group(this, this, 36, inst);
+			case 37: return new XForLoopExpression_Group(this, this, 37, inst);
+			case 38: return new XWhileExpression_Group(this, this, 38, inst);
+			case 39: return new XDoWhileExpression_Group(this, this, 39, inst);
+			case 40: return new XBlockExpression_Group(this, this, 40, inst);
+			case 41: return new XExpressionInsideBlock_Alternatives(this, this, 41, inst);
+			case 42: return new XVariableDeclaration_Group(this, this, 42, inst);
+			case 43: return new JvmFormalParameter_Group(this, this, 43, inst);
+			case 44: return new XFeatureCall_Group(this, this, 44, inst);
+			case 45: return new XConstructorCall_Group(this, this, 45, inst);
+			case 46: return new XBooleanLiteral_Group(this, this, 46, inst);
+			case 47: return new XNullLiteral_Group(this, this, 47, inst);
+			case 48: return new XIntLiteral_Group(this, this, 48, inst);
+			case 49: return new XTypeLiteral_Group(this, this, 49, inst);
+			case 50: return new XThrowExpression_Group(this, this, 50, inst);
+			case 51: return new XTryCatchFinallyExpression_Group(this, this, 51, inst);
+			case 52: return new XCatchClause_Group(this, this, 52, inst);
+			case 53: return new JvmTypeReference_Alternatives(this, this, 53, inst);
+			case 54: return new XFunctionTypeRef_Group(this, this, 54, inst);
+			case 55: return new JvmParameterizedTypeReference_Group(this, this, 55, inst);
+			case 56: return new JvmArgumentTypeReference_Alternatives(this, this, 56, inst);
+			case 57: return new JvmWildcardTypeReference_Group(this, this, 57, inst);
+			case 58: return new JvmUpperBound_Group(this, this, 58, inst);
+			case 59: return new JvmUpperBoundAnded_Group(this, this, 59, inst);
+			case 60: return new JvmLowerBound_Group(this, this, 60, inst);
+			case 61: return new JvmTypeParameter_Group(this, this, 61, inst);
 			default: return null;
 		}	
 	}	
@@ -1693,8 +1695,7 @@ protected class XStringLiteral_Alternatives extends AlternativesToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXStringLiteralAccess().getXStringLiteralAction_0_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
@@ -1807,17 +1808,16 @@ protected class XStringLiteral_RichStringParserRuleCall_1 extends RuleCallToken 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new RichString_Alternatives(this, this, 0, inst);
+			case 0: return new RichString_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier())
 			return null;
-		if(checkForRecursion(RichString_Alternatives.class, eObjectConsumer)) return null;
+		if(checkForRecursion(RichString_Group.class, eObjectConsumer)) return null;
 		return eObjectConsumer;
 	}
 	
@@ -1836,157 +1836,35 @@ protected class XStringLiteral_RichStringParserRuleCall_1 extends RuleCallToken 
 /************ begin Rule RichString ****************
  *
  * RichString returns xbase::XExpression:
- * 	{RichStringLiteral} value=RICH_TEXT | {RichString} elements+=RichStringLiteralStart elements+=RichStringPart
- * 	(elements+=RichStringLiteralInbetween elements+=RichStringPart)* elements+=RichStringLiteralEnd;
+ * 	{RichString} (elements+=RichStringLiteral | elements+=RichStringLiteralStart elements+=RichStringPart
+ * 	(elements+=RichStringLiteralInbetween elements+=RichStringPart)* elements+=RichStringLiteralEnd);
  *
  **/
 
-// {RichStringLiteral} value=RICH_TEXT | {RichString} elements+=RichStringLiteralStart elements+=RichStringPart
-// (elements+=RichStringLiteralInbetween elements+=RichStringPart)* elements+=RichStringLiteralEnd
-protected class RichString_Alternatives extends AlternativesToken {
-
-	public RichString_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
+// {RichString} (elements+=RichStringLiteral | elements+=RichStringLiteralStart elements+=RichStringPart
+// (elements+=RichStringLiteralInbetween elements+=RichStringPart)* elements+=RichStringLiteralEnd)
+protected class RichString_Group extends GroupToken {
 	
-	@Override
-	public Alternatives getGrammarElement() {
-		return grammarAccess.getRichStringAccess().getAlternatives();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new RichString_Group_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new RichString_Group_1(lastRuleCallOrigin, this, 1, inst);
-			default: return null;
-		}	
-	}
-
-    @Override
-	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier())
-			return null;
-		return eObjectConsumer;
-	}
-
-}
-
-// {RichStringLiteral} value=RICH_TEXT
-protected class RichString_Group_0 extends GroupToken {
-	
-	public RichString_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RichString_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getRichStringAccess().getGroup_0();
+		return grammarAccess.getRichStringAccess().getGroup();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new RichString_ValueAssignment_0_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new RichString_Alternatives_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier())
-			return null;
-		return eObjectConsumer;
-	}
-
-}
-
-// {RichStringLiteral}
-protected class RichString_RichStringLiteralAction_0_0 extends ActionToken  {
-
-	public RichString_RichStringLiteralAction_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Action getGrammarElement() {
-		return grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
-		}	
-	}
-
-    @Override
-	public IEObjectConsumer tryConsume() {
-		if(!eObjectConsumer.isConsumed()) return null;
-		return eObjectConsumer;
-	}
-}
-
-// value=RICH_TEXT
-protected class RichString_ValueAssignment_0_1 extends AssignmentToken  {
-	
-	public RichString_ValueAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getRichStringAccess().getValueAssignment_0_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new RichString_RichStringLiteralAction_0_0(lastRuleCallOrigin, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-    @Override	
-	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("value",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getRichStringAccess().getValueRICH_TEXTTerminalRuleCall_0_1_0(), value, null)) {
-			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getRichStringAccess().getValueRICH_TEXTTerminalRuleCall_0_1_0();
-			return obj;
-		}
-		return null;
-	}
-
-}
-
-
-// {RichString} elements+=RichStringLiteralStart elements+=RichStringPart (elements+=RichStringLiteralInbetween
-// elements+=RichStringPart)* elements+=RichStringLiteralEnd
-protected class RichString_Group_1 extends GroupToken {
-	
-	public RichString_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.getRichStringAccess().getGroup_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new RichString_ElementsAssignment_1_4(lastRuleCallOrigin, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-    @Override
-	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
@@ -1994,15 +1872,15 @@ protected class RichString_Group_1 extends GroupToken {
 }
 
 // {RichString}
-protected class RichString_RichStringAction_1_0 extends ActionToken  {
+protected class RichString_RichStringAction_0 extends ActionToken  {
 
-	public RichString_RichStringAction_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RichString_RichStringAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getRichStringAccess().getRichStringAction_1_0();
+		return grammarAccess.getRichStringAccess().getRichStringAction_0();
 	}
 
     @Override
@@ -2019,16 +1897,109 @@ protected class RichString_RichStringAction_1_0 extends ActionToken  {
 	}
 }
 
-// elements+=RichStringLiteralStart
-protected class RichString_ElementsAssignment_1_1 extends AssignmentToken  {
+// elements+=RichStringLiteral | elements+=RichStringLiteralStart elements+=RichStringPart
+// (elements+=RichStringLiteralInbetween elements+=RichStringPart)* elements+=RichStringLiteralEnd
+protected class RichString_Alternatives_1 extends AlternativesToken {
+
+	public RichString_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
 	
-	public RichString_ElementsAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getRichStringAccess().getAlternatives_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new RichString_ElementsAssignment_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new RichString_Group_1_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// elements+=RichStringLiteral
+protected class RichString_ElementsAssignment_1_0 extends AssignmentToken  {
+	
+	public RichString_ElementsAssignment_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getRichStringAccess().getElementsAssignment_1_1();
+		return grammarAccess.getRichStringAccess().getElementsAssignment_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new RichStringLiteral_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("elements",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("elements");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getRichStringLiteralRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getRichStringAccess().getElementsRichStringLiteralParserRuleCall_1_0_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new RichString_RichStringAction_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+// elements+=RichStringLiteralStart elements+=RichStringPart (elements+=RichStringLiteralInbetween
+// elements+=RichStringPart)* elements+=RichStringLiteralEnd
+protected class RichString_Group_1_1 extends GroupToken {
+	
+	public RichString_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getRichStringAccess().getGroup_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new RichString_ElementsAssignment_1_1_3(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// elements+=RichStringLiteralStart
+protected class RichString_ElementsAssignment_1_1_0 extends AssignmentToken  {
+	
+	public RichString_ElementsAssignment_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getRichStringAccess().getElementsAssignment_1_1_0();
 	}
 
     @Override
@@ -2047,7 +2018,7 @@ protected class RichString_ElementsAssignment_1_1 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getRichStringLiteralStartRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getRichStringAccess().getElementsRichStringLiteralStartParserRuleCall_1_1_0(); 
+				element = grammarAccess.getRichStringAccess().getElementsRichStringLiteralStartParserRuleCall_1_1_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2059,22 +2030,22 @@ protected class RichString_ElementsAssignment_1_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new RichString_RichStringAction_1_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new RichString_RichStringAction_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // elements+=RichStringPart
-protected class RichString_ElementsAssignment_1_2 extends AssignmentToken  {
+protected class RichString_ElementsAssignment_1_1_1 extends AssignmentToken  {
 	
-	public RichString_ElementsAssignment_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RichString_ElementsAssignment_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getRichStringAccess().getElementsAssignment_1_2();
+		return grammarAccess.getRichStringAccess().getElementsAssignment_1_1_1();
 	}
 
     @Override
@@ -2093,7 +2064,7 @@ protected class RichString_ElementsAssignment_1_2 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getRichStringPartRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getRichStringAccess().getElementsRichStringPartParserRuleCall_1_2_0(); 
+				element = grammarAccess.getRichStringAccess().getElementsRichStringPartParserRuleCall_1_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2105,28 +2076,28 @@ protected class RichString_ElementsAssignment_1_2 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new RichString_ElementsAssignment_1_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new RichString_ElementsAssignment_1_1_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // (elements+=RichStringLiteralInbetween elements+=RichStringPart)*
-protected class RichString_Group_1_3 extends GroupToken {
+protected class RichString_Group_1_1_2 extends GroupToken {
 	
-	public RichString_Group_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RichString_Group_1_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getRichStringAccess().getGroup_1_3();
+		return grammarAccess.getRichStringAccess().getGroup_1_1_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new RichString_ElementsAssignment_1_3_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new RichString_ElementsAssignment_1_1_2_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2134,15 +2105,15 @@ protected class RichString_Group_1_3 extends GroupToken {
 }
 
 // elements+=RichStringLiteralInbetween
-protected class RichString_ElementsAssignment_1_3_0 extends AssignmentToken  {
+protected class RichString_ElementsAssignment_1_1_2_0 extends AssignmentToken  {
 	
-	public RichString_ElementsAssignment_1_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RichString_ElementsAssignment_1_1_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getRichStringAccess().getElementsAssignment_1_3_0();
+		return grammarAccess.getRichStringAccess().getElementsAssignment_1_1_2_0();
 	}
 
     @Override
@@ -2161,7 +2132,7 @@ protected class RichString_ElementsAssignment_1_3_0 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getRichStringLiteralInbetweenRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getRichStringAccess().getElementsRichStringLiteralInbetweenParserRuleCall_1_3_0_0(); 
+				element = grammarAccess.getRichStringAccess().getElementsRichStringLiteralInbetweenParserRuleCall_1_1_2_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2173,23 +2144,23 @@ protected class RichString_ElementsAssignment_1_3_0 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new RichString_Group_1_3(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new RichString_ElementsAssignment_1_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new RichString_Group_1_1_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new RichString_ElementsAssignment_1_1_1(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // elements+=RichStringPart
-protected class RichString_ElementsAssignment_1_3_1 extends AssignmentToken  {
+protected class RichString_ElementsAssignment_1_1_2_1 extends AssignmentToken  {
 	
-	public RichString_ElementsAssignment_1_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RichString_ElementsAssignment_1_1_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getRichStringAccess().getElementsAssignment_1_3_1();
+		return grammarAccess.getRichStringAccess().getElementsAssignment_1_1_2_1();
 	}
 
     @Override
@@ -2208,7 +2179,7 @@ protected class RichString_ElementsAssignment_1_3_1 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getRichStringPartRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getRichStringAccess().getElementsRichStringPartParserRuleCall_1_3_1_0(); 
+				element = grammarAccess.getRichStringAccess().getElementsRichStringPartParserRuleCall_1_1_2_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2220,7 +2191,7 @@ protected class RichString_ElementsAssignment_1_3_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new RichString_ElementsAssignment_1_3_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new RichString_ElementsAssignment_1_1_2_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -2228,15 +2199,15 @@ protected class RichString_ElementsAssignment_1_3_1 extends AssignmentToken  {
 
 
 // elements+=RichStringLiteralEnd
-protected class RichString_ElementsAssignment_1_4 extends AssignmentToken  {
+protected class RichString_ElementsAssignment_1_1_3 extends AssignmentToken  {
 	
-	public RichString_ElementsAssignment_1_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RichString_ElementsAssignment_1_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getRichStringAccess().getElementsAssignment_1_4();
+		return grammarAccess.getRichStringAccess().getElementsAssignment_1_1_3();
 	}
 
     @Override
@@ -2255,7 +2226,7 @@ protected class RichString_ElementsAssignment_1_4 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getRichStringLiteralEndRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getRichStringAccess().getElementsRichStringLiteralEndParserRuleCall_1_4_0(); 
+				element = grammarAccess.getRichStringAccess().getElementsRichStringLiteralEndParserRuleCall_1_1_3_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2267,8 +2238,8 @@ protected class RichString_ElementsAssignment_1_4 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new RichString_Group_1_3(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new RichString_ElementsAssignment_1_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new RichString_Group_1_1_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new RichString_ElementsAssignment_1_1_1(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -2276,7 +2247,108 @@ protected class RichString_ElementsAssignment_1_4 extends AssignmentToken  {
 
 
 
+
 /************ end Rule RichString ****************/
+
+
+/************ begin Rule RichStringLiteral ****************
+ *
+ * RichStringLiteral returns xbase::XExpression:
+ * 	{RichStringLiteral} value=RICH_TEXT;
+ *
+ **/
+
+// {RichStringLiteral} value=RICH_TEXT
+protected class RichStringLiteral_Group extends GroupToken {
+	
+	public RichStringLiteral_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getRichStringLiteralAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new RichStringLiteral_ValueAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getRichStringLiteralAccess().getRichStringLiteralAction_0().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// {RichStringLiteral}
+protected class RichStringLiteral_RichStringLiteralAction_0 extends ActionToken  {
+
+	public RichStringLiteral_RichStringLiteralAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getRichStringLiteralAccess().getRichStringLiteralAction_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
+}
+
+// value=RICH_TEXT
+protected class RichStringLiteral_ValueAssignment_1 extends AssignmentToken  {
+	
+	public RichStringLiteral_ValueAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getRichStringLiteralAccess().getValueAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new RichStringLiteral_RichStringLiteralAction_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("value",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getRichStringLiteralAccess().getValueRICH_TEXTTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getRichStringLiteralAccess().getValueRICH_TEXTTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule RichStringLiteral ****************/
 
 
 /************ begin Rule RichStringLiteralStart ****************
@@ -2582,156 +2654,35 @@ protected class RichStringLiteralEnd_ValueAssignment_1 extends AssignmentToken  
 /************ begin Rule InternalRichString ****************
  *
  * InternalRichString returns xbase::XExpression:
- * 	{RichStringLiteral} value=RICH_TEXT_INBETWEEN | {RichString} elements+=RichStringLiteralInbetween
- * 	(elements+=RichStringPart elements+=RichStringLiteralInbetween)+;
+ * 	{RichString} (elements+=InternalRichStringLiteral | elements+=RichStringLiteralInbetween (elements+=RichStringPart
+ * 	elements+=RichStringLiteralInbetween)+);
  *
  **/
 
-// {RichStringLiteral} value=RICH_TEXT_INBETWEEN | {RichString} elements+=RichStringLiteralInbetween
-// (elements+=RichStringPart elements+=RichStringLiteralInbetween)+
-protected class InternalRichString_Alternatives extends AlternativesToken {
-
-	public InternalRichString_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
+// {RichString} (elements+=InternalRichStringLiteral | elements+=RichStringLiteralInbetween (elements+=RichStringPart
+// elements+=RichStringLiteralInbetween)+)
+protected class InternalRichString_Group extends GroupToken {
 	
-	@Override
-	public Alternatives getGrammarElement() {
-		return grammarAccess.getInternalRichStringAccess().getAlternatives();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new InternalRichString_Group_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new InternalRichString_Group_1(lastRuleCallOrigin, this, 1, inst);
-			default: return null;
-		}	
-	}
-
-    @Override
-	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getInternalRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getInternalRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier())
-			return null;
-		return eObjectConsumer;
-	}
-
-}
-
-// {RichStringLiteral} value=RICH_TEXT_INBETWEEN
-protected class InternalRichString_Group_0 extends GroupToken {
-	
-	public InternalRichString_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public InternalRichString_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getInternalRichStringAccess().getGroup_0();
+		return grammarAccess.getInternalRichStringAccess().getGroup();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new InternalRichString_ValueAssignment_0_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new InternalRichString_Alternatives_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getInternalRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier())
-			return null;
-		return eObjectConsumer;
-	}
-
-}
-
-// {RichStringLiteral}
-protected class InternalRichString_RichStringLiteralAction_0_0 extends ActionToken  {
-
-	public InternalRichString_RichStringLiteralAction_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Action getGrammarElement() {
-		return grammarAccess.getInternalRichStringAccess().getRichStringLiteralAction_0_0();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
-		}	
-	}
-
-    @Override
-	public IEObjectConsumer tryConsume() {
-		if(!eObjectConsumer.isConsumed()) return null;
-		return eObjectConsumer;
-	}
-}
-
-// value=RICH_TEXT_INBETWEEN
-protected class InternalRichString_ValueAssignment_0_1 extends AssignmentToken  {
-	
-	public InternalRichString_ValueAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getInternalRichStringAccess().getValueAssignment_0_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new InternalRichString_RichStringLiteralAction_0_0(lastRuleCallOrigin, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-    @Override	
-	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("value",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getInternalRichStringAccess().getValueRICH_TEXT_INBETWEENTerminalRuleCall_0_1_0(), value, null)) {
-			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getInternalRichStringAccess().getValueRICH_TEXT_INBETWEENTerminalRuleCall_0_1_0();
-			return obj;
-		}
-		return null;
-	}
-
-}
-
-
-// {RichString} elements+=RichStringLiteralInbetween (elements+=RichStringPart elements+=RichStringLiteralInbetween)+
-protected class InternalRichString_Group_1 extends GroupToken {
-	
-	public InternalRichString_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.getInternalRichStringAccess().getGroup_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new InternalRichString_Group_1_2(lastRuleCallOrigin, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-    @Override
-	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getInternalRichStringAccess().getRichStringAction_1_0().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getInternalRichStringAccess().getRichStringAction_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
@@ -2739,15 +2690,15 @@ protected class InternalRichString_Group_1 extends GroupToken {
 }
 
 // {RichString}
-protected class InternalRichString_RichStringAction_1_0 extends ActionToken  {
+protected class InternalRichString_RichStringAction_0 extends ActionToken  {
 
-	public InternalRichString_RichStringAction_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public InternalRichString_RichStringAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getInternalRichStringAccess().getRichStringAction_1_0();
+		return grammarAccess.getInternalRichStringAccess().getRichStringAction_0();
 	}
 
     @Override
@@ -2764,16 +2715,108 @@ protected class InternalRichString_RichStringAction_1_0 extends ActionToken  {
 	}
 }
 
-// elements+=RichStringLiteralInbetween
-protected class InternalRichString_ElementsAssignment_1_1 extends AssignmentToken  {
+// elements+=InternalRichStringLiteral | elements+=RichStringLiteralInbetween (elements+=RichStringPart
+// elements+=RichStringLiteralInbetween)+
+protected class InternalRichString_Alternatives_1 extends AlternativesToken {
+
+	public InternalRichString_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
 	
-	public InternalRichString_ElementsAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getInternalRichStringAccess().getAlternatives_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new InternalRichString_ElementsAssignment_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new InternalRichString_Group_1_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// elements+=InternalRichStringLiteral
+protected class InternalRichString_ElementsAssignment_1_0 extends AssignmentToken  {
+	
+	public InternalRichString_ElementsAssignment_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getInternalRichStringAccess().getElementsAssignment_1_1();
+		return grammarAccess.getInternalRichStringAccess().getElementsAssignment_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new InternalRichStringLiteral_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("elements",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("elements");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getInternalRichStringLiteralRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getInternalRichStringAccess().getElementsInternalRichStringLiteralParserRuleCall_1_0_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new InternalRichString_RichStringAction_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+// elements+=RichStringLiteralInbetween (elements+=RichStringPart elements+=RichStringLiteralInbetween)+
+protected class InternalRichString_Group_1_1 extends GroupToken {
+	
+	public InternalRichString_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getInternalRichStringAccess().getGroup_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new InternalRichString_Group_1_1_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// elements+=RichStringLiteralInbetween
+protected class InternalRichString_ElementsAssignment_1_1_0 extends AssignmentToken  {
+	
+	public InternalRichString_ElementsAssignment_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getInternalRichStringAccess().getElementsAssignment_1_1_0();
 	}
 
     @Override
@@ -2792,7 +2835,7 @@ protected class InternalRichString_ElementsAssignment_1_1 extends AssignmentToke
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getRichStringLiteralInbetweenRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getInternalRichStringAccess().getElementsRichStringLiteralInbetweenParserRuleCall_1_1_0(); 
+				element = grammarAccess.getInternalRichStringAccess().getElementsRichStringLiteralInbetweenParserRuleCall_1_1_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2804,28 +2847,28 @@ protected class InternalRichString_ElementsAssignment_1_1 extends AssignmentToke
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new InternalRichString_RichStringAction_1_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new InternalRichString_RichStringAction_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // (elements+=RichStringPart elements+=RichStringLiteralInbetween)+
-protected class InternalRichString_Group_1_2 extends GroupToken {
+protected class InternalRichString_Group_1_1_1 extends GroupToken {
 	
-	public InternalRichString_Group_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public InternalRichString_Group_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getInternalRichStringAccess().getGroup_1_2();
+		return grammarAccess.getInternalRichStringAccess().getGroup_1_1_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new InternalRichString_ElementsAssignment_1_2_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new InternalRichString_ElementsAssignment_1_1_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2833,15 +2876,15 @@ protected class InternalRichString_Group_1_2 extends GroupToken {
 }
 
 // elements+=RichStringPart
-protected class InternalRichString_ElementsAssignment_1_2_0 extends AssignmentToken  {
+protected class InternalRichString_ElementsAssignment_1_1_1_0 extends AssignmentToken  {
 	
-	public InternalRichString_ElementsAssignment_1_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public InternalRichString_ElementsAssignment_1_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getInternalRichStringAccess().getElementsAssignment_1_2_0();
+		return grammarAccess.getInternalRichStringAccess().getElementsAssignment_1_1_1_0();
 	}
 
     @Override
@@ -2860,7 +2903,7 @@ protected class InternalRichString_ElementsAssignment_1_2_0 extends AssignmentTo
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getRichStringPartRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getInternalRichStringAccess().getElementsRichStringPartParserRuleCall_1_2_0_0(); 
+				element = grammarAccess.getInternalRichStringAccess().getElementsRichStringPartParserRuleCall_1_1_1_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2872,23 +2915,23 @@ protected class InternalRichString_ElementsAssignment_1_2_0 extends AssignmentTo
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new InternalRichString_Group_1_2(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new InternalRichString_ElementsAssignment_1_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new InternalRichString_Group_1_1_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new InternalRichString_ElementsAssignment_1_1_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // elements+=RichStringLiteralInbetween
-protected class InternalRichString_ElementsAssignment_1_2_1 extends AssignmentToken  {
+protected class InternalRichString_ElementsAssignment_1_1_1_1 extends AssignmentToken  {
 	
-	public InternalRichString_ElementsAssignment_1_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public InternalRichString_ElementsAssignment_1_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getInternalRichStringAccess().getElementsAssignment_1_2_1();
+		return grammarAccess.getInternalRichStringAccess().getElementsAssignment_1_1_1_1();
 	}
 
     @Override
@@ -2907,7 +2950,7 @@ protected class InternalRichString_ElementsAssignment_1_2_1 extends AssignmentTo
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getRichStringLiteralInbetweenRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getInternalRichStringAccess().getElementsRichStringLiteralInbetweenParserRuleCall_1_2_1_0(); 
+				element = grammarAccess.getInternalRichStringAccess().getElementsRichStringLiteralInbetweenParserRuleCall_1_1_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2919,7 +2962,7 @@ protected class InternalRichString_ElementsAssignment_1_2_1 extends AssignmentTo
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new InternalRichString_ElementsAssignment_1_2_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new InternalRichString_ElementsAssignment_1_1_1_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -2928,7 +2971,108 @@ protected class InternalRichString_ElementsAssignment_1_2_1 extends AssignmentTo
 
 
 
+
 /************ end Rule InternalRichString ****************/
+
+
+/************ begin Rule InternalRichStringLiteral ****************
+ *
+ * InternalRichStringLiteral returns xbase::XExpression:
+ * 	{RichStringLiteral} value=RICH_TEXT_INBETWEEN;
+ *
+ **/
+
+// {RichStringLiteral} value=RICH_TEXT_INBETWEEN
+protected class InternalRichStringLiteral_Group extends GroupToken {
+	
+	public InternalRichStringLiteral_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getInternalRichStringLiteralAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new InternalRichStringLiteral_ValueAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getInternalRichStringLiteralAccess().getRichStringLiteralAction_0().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// {RichStringLiteral}
+protected class InternalRichStringLiteral_RichStringLiteralAction_0 extends ActionToken  {
+
+	public InternalRichStringLiteral_RichStringLiteralAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getInternalRichStringLiteralAccess().getRichStringLiteralAction_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
+}
+
+// value=RICH_TEXT_INBETWEEN
+protected class InternalRichStringLiteral_ValueAssignment_1 extends AssignmentToken  {
+	
+	public InternalRichStringLiteral_ValueAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getInternalRichStringLiteralAccess().getValueAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new InternalRichStringLiteral_RichStringLiteralAction_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("value",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getInternalRichStringLiteralAccess().getValueRICH_TEXT_INBETWEENTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getInternalRichStringLiteralAccess().getValueRICH_TEXT_INBETWEENTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule InternalRichStringLiteral ****************/
 
 
 /************ begin Rule RichStringPart ****************
@@ -2962,10 +3106,9 @@ protected class RichStringPart_Alternatives extends AlternativesToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getRichStringForLoopAccess().getRichStringForLoopAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getRichStringIfAccess().getRichStringIfAction_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionAccess().getXBlockExpressionAction_0().getType().getClassifier() && 
@@ -3016,8 +3159,7 @@ protected class RichStringPart_XExpressionParserRuleCall_0 extends RuleCallToken
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionAccess().getXBlockExpressionAction_0().getType().getClassifier() && 
@@ -3344,7 +3486,7 @@ protected class RichStringForLoop_EachExpressionAssignment_5 extends AssignmentT
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new InternalRichString_Alternatives(this, this, 0, inst);
+			case 0: return new InternalRichString_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3548,7 +3690,7 @@ protected class RichStringIf_ThenAssignment_3 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new InternalRichString_Alternatives(this, this, 0, inst);
+			case 0: return new InternalRichString_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3686,7 +3828,7 @@ protected class RichStringIf_ElseAssignment_5_1 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new InternalRichString_Alternatives(this, this, 0, inst);
+			case 0: return new InternalRichString_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3864,7 +4006,7 @@ protected class RichStringElseIf_ThenAssignment_2 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new InternalRichString_Alternatives(this, this, 0, inst);
+			case 0: return new InternalRichString_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3928,8 +4070,7 @@ protected class XExpression_XAssignmentParserRuleCall extends RuleCallToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionAccess().getXBlockExpressionAction_0().getType().getClassifier() && 
@@ -4002,8 +4143,7 @@ protected class XAssignment_Alternatives extends AlternativesToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionAccess().getXBlockExpressionAction_0().getType().getClassifier() && 
@@ -4479,8 +4619,7 @@ protected class XOrExpression_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXAssignmentAction_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionAccess().getXBlockExpressionAction_0().getType().getClassifier() && 
@@ -4769,8 +4908,7 @@ protected class XAndExpression_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXAssignmentAction_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXOrExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionAccess().getXBlockExpressionAction_0().getType().getClassifier() && 
@@ -5060,8 +5198,7 @@ protected class XEqualityExpression_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXAssignmentAction_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXAndExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionAccess().getXBlockExpressionAction_0().getType().getClassifier() && 
@@ -5353,8 +5490,7 @@ protected class XRelationalExpression_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXAssignmentAction_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionAccess().getXBlockExpressionAction_0().getType().getClassifier() && 
@@ -5843,8 +5979,7 @@ protected class XOtherOperatorExpression_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXAssignmentAction_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionAccess().getXBlockExpressionAction_0().getType().getClassifier() && 
@@ -6134,8 +6269,7 @@ protected class XAdditiveExpression_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXAssignmentAction_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXOtherOperatorExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionAccess().getXBlockExpressionAction_0().getType().getClassifier() && 
@@ -6425,8 +6559,7 @@ protected class XMultiplicativeExpression_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXAssignmentAction_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionAccess().getXBlockExpressionAction_0().getType().getClassifier() && 
@@ -6714,8 +6847,7 @@ protected class XUnaryOperation_Alternatives extends AlternativesToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXAssignmentAction_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionAccess().getXBlockExpressionAction_0().getType().getClassifier() && 
@@ -6952,8 +7084,7 @@ protected class XCastedExpression_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXAssignmentAction_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionAccess().getXBlockExpressionAction_0().getType().getClassifier() && 
@@ -7232,8 +7363,7 @@ protected class XMemberFeatureCall_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXAssignmentAction_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionAccess().getXBlockExpressionAction_0().getType().getClassifier() && 
@@ -8393,8 +8523,7 @@ protected class XPrimaryExpression_Alternatives extends AlternativesToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXAssignmentAction_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionAccess().getXBlockExpressionAction_0().getType().getClassifier() && 
@@ -8589,8 +8718,7 @@ protected class XPrimaryExpression_XLiteralParserRuleCall_4 extends RuleCallToke
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBooleanLiteralAccess().getXBooleanLiteralAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralAccess().getXIntLiteralAction_0().getType().getClassifier() && 
@@ -8898,8 +9026,7 @@ protected class XLiteral_Alternatives extends AlternativesToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBooleanLiteralAccess().getXBooleanLiteralAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralAccess().getXIntLiteralAction_0().getType().getClassifier() && 
@@ -9078,8 +9205,7 @@ protected class XLiteral_XStringLiteralParserRuleCall_4 extends RuleCallToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXStringLiteralAccess().getXStringLiteralAction_0_0().getType().getClassifier())
 			return null;
 		if(checkForRecursion(XStringLiteral_Alternatives.class, eObjectConsumer)) return null;
@@ -9805,8 +9931,7 @@ protected class XParenthesizedExpression_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionAccess().getXBlockExpressionAction_0().getType().getClassifier() && 
@@ -11794,8 +11919,7 @@ protected class XExpressionInsideBlock_Alternatives extends AlternativesToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionAccess().getXBlockExpressionAction_0().getType().getClassifier() && 
@@ -11883,8 +12007,7 @@ protected class XExpressionInsideBlock_XExpressionParserRuleCall_1 extends RuleC
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_1_0().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringLiteralAction_0_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getRichStringAccess().getRichStringAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionAccess().getXBlockExpressionAction_0().getType().getClassifier() && 

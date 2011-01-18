@@ -64,10 +64,15 @@ ruleXStringLiteral :
 
 // Rule RichString
 ruleRichString :
-	RULE_RICH_TEXT |
+	ruleRichStringLiteral |
 	ruleRichStringLiteralStart ruleRichStringPart (
 		ruleRichStringLiteralInbetween ruleRichStringPart
 	)* ruleRichStringLiteralEnd
+;
+
+// Rule RichStringLiteral
+ruleRichStringLiteral :
+	RULE_RICH_TEXT
 ;
 
 // Rule RichStringLiteralStart
@@ -87,10 +92,15 @@ ruleRichStringLiteralEnd :
 
 // Rule InternalRichString
 ruleInternalRichString :
-	RULE_RICH_TEXT_INBETWEEN |
+	ruleInternalRichStringLiteral |
 	ruleRichStringLiteralInbetween (
 		ruleRichStringPart ruleRichStringLiteralInbetween
 	)+
+;
+
+// Rule InternalRichStringLiteral
+ruleInternalRichStringLiteral :
+	RULE_RICH_TEXT_INBETWEEN
 ;
 
 // Rule RichStringPart
