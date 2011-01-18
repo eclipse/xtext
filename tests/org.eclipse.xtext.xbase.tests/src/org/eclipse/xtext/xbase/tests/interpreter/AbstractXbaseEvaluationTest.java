@@ -93,9 +93,27 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 		assertEvaluatesTo("else", "if (false) 'then' else 'else'");
 	}
 	
+	public void testIfExpression_withThrowExpression_00() {
+		assertEvaluatesWithException(NullPointerException.class, "if (false) throw new NullPointerException() else throw new NullPointerException()");
+	}
+	
+	public void testIfExpression_withThrowExpression_01() {
+		assertEvaluatesWithException(NullPointerException.class, "if (false) 'then' else throw new NullPointerException()");
+	}
+	
+	public void testIfExpression_withThrowExpression_02() {
+		assertEvaluatesTo("then", "if (true) 'then' else throw new NullPointerException()");
+	}
+	
 	public void testVariableDeclaration_01() {
 		assertEvaluatesTo("literal", "{var x = 'literal' x = x}");
 	}
+	
+//TODO support overloading of local variables
+//	
+//	public void testVariableDeclaration_02() {
+//		assertEvaluatesTo(true, "{var x = 'literal' { val x = true x}}");
+//	}
 	
 	public void testFeatureCall_01() {
 		assertEvaluatesTo("literal", "{var x = 'literal' x}");
