@@ -124,6 +124,7 @@ public class XbaseSwitch<T>
 			{
 				XCasePart xCasePart = (XCasePart)theEObject;
 				T result = caseXCasePart(xCasePart);
+				if (result == null) result = caseJvmIdentifyableElement(xCasePart);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

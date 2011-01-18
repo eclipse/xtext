@@ -12,9 +12,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
+
+import org.eclipse.xtext.common.types.impl.JvmIdentifyableElementImpl;
 
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
@@ -35,7 +36,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *
  * @generated
  */
-public class XCasePartImpl extends MinimalEObjectImpl.Container implements XCasePart
+public class XCasePartImpl extends JvmIdentifyableElementImpl implements XCasePart
 {
 	/**
 	 * The cached value of the '{@link #getCase() <em>Case</em>}' containment reference.

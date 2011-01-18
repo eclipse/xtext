@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -309,4 +310,22 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		XCastedExpression expression = (XCastedExpression) expression("null as ^testdata/* foobar */.^FieldAccessSub");
 		assertFalse(expression.getType().getType().eIsProxy());
 	}
+	
+	public void testSwitchExpression_00() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{ " +
+				"  val Object x = new testdata.MethodOverrides2(); " +
+				"  switch x { " +
+				"    testdata.Properties1 : x" +
+				"    testdata.MethodOverrides2 case x : 'bar'" +
+				"    default : 'baz'" +
+				"  }" +
+				"}");
+		XSwitchExpression switchExpr = (XSwitchExpression) block.getExpressions().get(1);
+		XFeatureCall feature = (XFeatureCall) switchExpr.getCases().get(0).getThen();
+		assertEquals(switchExpr.getCases().get(0), feature.getFeature());
+		feature = (XFeatureCall) switchExpr.getCases().get(1).getCase();
+		assertEquals(switchExpr.getCases().get(1), feature.getFeature());
+	}
+	
 }
