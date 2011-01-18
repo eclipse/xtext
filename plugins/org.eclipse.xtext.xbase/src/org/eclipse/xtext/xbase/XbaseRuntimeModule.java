@@ -37,6 +37,10 @@ public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 		return IJvmTypeConformanceComputer.class;
 	}
 	
+	public Class<? extends IJvmTypeConformanceComputer> bindIJvmTypeConformanceComputer() {
+		return XbaseTypeConformanceComputer.class;
+	}
+	
 	public Class<? extends org.eclipse.xtext.typing.ITypeProvider<JvmTypeReference>> bindITypeProvider() {
 		return XbaseTypeProvider.class;
 	}
@@ -65,10 +69,6 @@ public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 	@Override
 	public void configureIScopeProviderDelegate(Binder binder) {
 		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(XbaseImportedNamespaceScopeProvider.class);
-	}
-	
-	public Class<? extends IJvmTypeConformanceComputer> bindIJvmTypeConformanceComputer() {
-		return XbaseTypeConformanceComputer.class;
 	}
 	
 	@Override
