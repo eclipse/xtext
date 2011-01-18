@@ -1358,25 +1358,29 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cXSwitchExpressionAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cSwitchKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cSwitchAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cSwitchXExpressionInsideBlockParserRuleCall_2_0 = (RuleCall)cSwitchAssignment_2.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cCasesAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cCasesXCasePartParserRuleCall_4_0 = (RuleCall)cCasesAssignment_4.eContents().get(0);
-		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
-		private final Keyword cDefaultKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
-		private final Keyword cColonKeyword_5_1 = (Keyword)cGroup_5.eContents().get(1);
-		private final Assignment cDefaultAssignment_5_2 = (Assignment)cGroup_5.eContents().get(2);
-		private final RuleCall cDefaultXExpressionParserRuleCall_5_2_0 = (RuleCall)cDefaultAssignment_5_2.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Assignment cLocalVarNameAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
+		private final RuleCall cLocalVarNameIDTerminalRuleCall_2_0_0 = (RuleCall)cLocalVarNameAssignment_2_0.eContents().get(0);
+		private final Keyword cColonKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
+		private final Assignment cSwitchAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cSwitchXExpressionParserRuleCall_3_0 = (RuleCall)cSwitchAssignment_3.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cCasesAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cCasesXCasePartParserRuleCall_5_0 = (RuleCall)cCasesAssignment_5.eContents().get(0);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cDefaultKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Keyword cColonKeyword_6_1 = (Keyword)cGroup_6.eContents().get(1);
+		private final Assignment cDefaultAssignment_6_2 = (Assignment)cGroup_6.eContents().get(2);
+		private final RuleCall cDefaultXExpressionParserRuleCall_6_2_0 = (RuleCall)cDefaultAssignment_6_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//XSwitchExpression returns XExpression:
-		//	{XSwitchExpression} "switch" switch=XExpressionInsideBlock "{" cases+=XCasePart+ ("default" ":" default=XExpression)?
-		//	"}";
+		//	{XSwitchExpression} "switch" (localVarName=ID ":")? switch=XExpression "{" cases+=XCasePart+ ("default" ":"
+		//	default=XExpression)? "}";
 		public ParserRule getRule() { return rule; }
 
-		//{XSwitchExpression} "switch" switch=XExpressionInsideBlock "{" cases+=XCasePart+ ("default" ":" default=XExpression)?
-		//"}"
+		//{XSwitchExpression} "switch" (localVarName=ID ":")? switch=XExpression "{" cases+=XCasePart+ ("default" ":"
+		//default=XExpression)? "}"
 		public Group getGroup() { return cGroup; }
 
 		//{XSwitchExpression}
@@ -1385,38 +1389,50 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//"switch"
 		public Keyword getSwitchKeyword_1() { return cSwitchKeyword_1; }
 
-		//switch=XExpressionInsideBlock
-		public Assignment getSwitchAssignment_2() { return cSwitchAssignment_2; }
+		//(localVarName=ID ":")?
+		public Group getGroup_2() { return cGroup_2; }
 
-		//XExpressionInsideBlock
-		public RuleCall getSwitchXExpressionInsideBlockParserRuleCall_2_0() { return cSwitchXExpressionInsideBlockParserRuleCall_2_0; }
+		//localVarName=ID
+		public Assignment getLocalVarNameAssignment_2_0() { return cLocalVarNameAssignment_2_0; }
 
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
-
-		//cases+=XCasePart+
-		public Assignment getCasesAssignment_4() { return cCasesAssignment_4; }
-
-		//XCasePart
-		public RuleCall getCasesXCasePartParserRuleCall_4_0() { return cCasesXCasePartParserRuleCall_4_0; }
-
-		//("default" ":" default=XExpression)?
-		public Group getGroup_5() { return cGroup_5; }
-
-		//"default"
-		public Keyword getDefaultKeyword_5_0() { return cDefaultKeyword_5_0; }
+		//ID
+		public RuleCall getLocalVarNameIDTerminalRuleCall_2_0_0() { return cLocalVarNameIDTerminalRuleCall_2_0_0; }
 
 		//":"
-		public Keyword getColonKeyword_5_1() { return cColonKeyword_5_1; }
+		public Keyword getColonKeyword_2_1() { return cColonKeyword_2_1; }
 
-		//default=XExpression
-		public Assignment getDefaultAssignment_5_2() { return cDefaultAssignment_5_2; }
+		//switch=XExpression
+		public Assignment getSwitchAssignment_3() { return cSwitchAssignment_3; }
 
 		//XExpression
-		public RuleCall getDefaultXExpressionParserRuleCall_5_2_0() { return cDefaultXExpressionParserRuleCall_5_2_0; }
+		public RuleCall getSwitchXExpressionParserRuleCall_3_0() { return cSwitchXExpressionParserRuleCall_3_0; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
+
+		//cases+=XCasePart+
+		public Assignment getCasesAssignment_5() { return cCasesAssignment_5; }
+
+		//XCasePart
+		public RuleCall getCasesXCasePartParserRuleCall_5_0() { return cCasesXCasePartParserRuleCall_5_0; }
+
+		//("default" ":" default=XExpression)?
+		public Group getGroup_6() { return cGroup_6; }
+
+		//"default"
+		public Keyword getDefaultKeyword_6_0() { return cDefaultKeyword_6_0; }
+
+		//":"
+		public Keyword getColonKeyword_6_1() { return cColonKeyword_6_1; }
+
+		//default=XExpression
+		public Assignment getDefaultAssignment_6_2() { return cDefaultAssignment_6_2; }
+
+		//XExpression
+		public RuleCall getDefaultXExpressionParserRuleCall_6_2_0() { return cDefaultXExpressionParserRuleCall_6_2_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
 	}
 
 	public class XCasePartElements extends AbstractParserRuleElementFinder {
@@ -2720,8 +2736,8 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XSwitchExpression returns XExpression:
-	//	{XSwitchExpression} "switch" switch=XExpressionInsideBlock "{" cases+=XCasePart+ ("default" ":" default=XExpression)?
-	//	"}";
+	//	{XSwitchExpression} "switch" (localVarName=ID ":")? switch=XExpression "{" cases+=XCasePart+ ("default" ":"
+	//	default=XExpression)? "}";
 	public XSwitchExpressionElements getXSwitchExpressionAccess() {
 		return (pXSwitchExpression != null) ? pXSwitchExpression : (pXSwitchExpression = new XSwitchExpressionElements());
 	}

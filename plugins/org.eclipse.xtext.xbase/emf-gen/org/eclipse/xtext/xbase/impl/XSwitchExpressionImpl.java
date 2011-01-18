@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XSwitchExpressionImpl#getSwitch <em>Switch</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XSwitchExpressionImpl#getCases <em>Cases</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XSwitchExpressionImpl#getDefault <em>Default</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XSwitchExpressionImpl#getLocalVarName <em>Local Var Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -71,6 +72,26 @@ public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExp
 	 * @ordered
 	 */
 	protected XExpression default_;
+
+	/**
+	 * The default value of the '{@link #getLocalVarName() <em>Local Var Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocalVarName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String LOCAL_VAR_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLocalVarName() <em>Local Var Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocalVarName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String localVarName = LOCAL_VAR_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -208,6 +229,29 @@ public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getLocalVarName()
+	{
+		return localVarName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLocalVarName(String newLocalVarName)
+	{
+		String oldLocalVarName = localVarName;
+		localVarName = newLocalVarName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XSWITCH_EXPRESSION__LOCAL_VAR_NAME, oldLocalVarName, localVarName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -239,6 +283,8 @@ public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExp
 				return getCases();
 			case XbasePackage.XSWITCH_EXPRESSION__DEFAULT:
 				return getDefault();
+			case XbasePackage.XSWITCH_EXPRESSION__LOCAL_VAR_NAME:
+				return getLocalVarName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -264,6 +310,9 @@ public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExp
 			case XbasePackage.XSWITCH_EXPRESSION__DEFAULT:
 				setDefault((XExpression)newValue);
 				return;
+			case XbasePackage.XSWITCH_EXPRESSION__LOCAL_VAR_NAME:
+				setLocalVarName((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -287,6 +336,9 @@ public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExp
 			case XbasePackage.XSWITCH_EXPRESSION__DEFAULT:
 				setDefault((XExpression)null);
 				return;
+			case XbasePackage.XSWITCH_EXPRESSION__LOCAL_VAR_NAME:
+				setLocalVarName(LOCAL_VAR_NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -307,8 +359,27 @@ public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExp
 				return cases != null && !cases.isEmpty();
 			case XbasePackage.XSWITCH_EXPRESSION__DEFAULT:
 				return default_ != null;
+			case XbasePackage.XSWITCH_EXPRESSION__LOCAL_VAR_NAME:
+				return LOCAL_VAR_NAME_EDEFAULT == null ? localVarName != null : !LOCAL_VAR_NAME_EDEFAULT.equals(localVarName);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString()
+	{
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (localVarName: ");
+		result.append(localVarName);
+		result.append(')');
+		return result.toString();
 	}
 
 } //XSwitchExpressionImpl

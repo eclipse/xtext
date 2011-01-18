@@ -162,13 +162,22 @@ public interface XbasePackage extends EPackage
 	int XSWITCH_EXPRESSION__DEFAULT = XEXPRESSION_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Local Var Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XSWITCH_EXPRESSION__LOCAL_VAR_NAME = XEXPRESSION_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>XSwitch Expression</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XSWITCH_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 3;
+	int XSWITCH_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XCasePartImpl <em>XCase Part</em>}' class.
@@ -1499,6 +1508,17 @@ public interface XbasePackage extends EPackage
 	EReference getXSwitchExpression_Default();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XSwitchExpression#getLocalVarName <em>Local Var Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Local Var Name</em>'.
+	 * @see org.eclipse.xtext.xbase.XSwitchExpression#getLocalVarName()
+	 * @see #getXSwitchExpression()
+	 * @generated
+	 */
+	EAttribute getXSwitchExpression_LocalVarName();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XCasePart <em>XCase Part</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2398,6 +2418,14 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XSWITCH_EXPRESSION__DEFAULT = eINSTANCE.getXSwitchExpression_Default();
+
+		/**
+		 * The meta object literal for the '<em><b>Local Var Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XSWITCH_EXPRESSION__LOCAL_VAR_NAME = eINSTANCE.getXSwitchExpression_LocalVarName();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XCasePartImpl <em>XCase Part</em>}' class.

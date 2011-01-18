@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.xtext.xbase.XSwitchExpression#getSwitch <em>Switch</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XSwitchExpression#getCases <em>Cases</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XSwitchExpression#getDefault <em>Default</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XSwitchExpression#getLocalVarName <em>Local Var Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -94,5 +95,31 @@ public interface XSwitchExpression extends XExpression
 	 * @generated
 	 */
 	void setDefault(XExpression value);
+
+	/**
+	 * Returns the value of the '<em><b>Local Var Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Local Var Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Local Var Name</em>' attribute.
+	 * @see #setLocalVarName(String)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXSwitchExpression_LocalVarName()
+	 * @model
+	 * @generated
+	 */
+	String getLocalVarName();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XSwitchExpression#getLocalVarName <em>Local Var Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Local Var Name</em>' attribute.
+	 * @see #getLocalVarName()
+	 * @generated
+	 */
+	void setLocalVarName(String value);
 
 } // XSwitchExpression

@@ -2042,7 +2042,7 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XSwitchExpression:<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;switch&apos;&nbsp;XExpressionOrVariableDeclaration&nbsp;&apos;{&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCasePart+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&apos;default&apos;&nbsp;&apos;:&apos;&nbsp;XExpression))?<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;}&apos;;<br /><br />XCasePart:<br />&nbsp;&nbsp;&nbsp;&nbsp;JvmTypeReference?&nbsp;(&apos;case&apos;&nbsp;XExpression)?&nbsp;&apos;:&apos;&nbsp;XExpression&nbsp;);<br />
+XSwitchExpression:<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;switch&apos;&nbsp;(ID&nbsp;&apos;:&apos;)?&nbsp;XExpression&nbsp;&apos;{&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCasePart+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&apos;default&apos;&nbsp;&apos;:&apos;&nbsp;XExpression))?<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;}&apos;;<br /><br />XCasePart:<br />&nbsp;&nbsp;&nbsp;&nbsp;JvmTypeReference?&nbsp;(&apos;case&apos;&nbsp;XExpression)?&nbsp;&apos;:&apos;&nbsp;XExpression&nbsp;);<br />
 </p>
 </div>
 </div>
@@ -2068,15 +2068,17 @@ switch&nbsp;e&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;e1&nbsp;:&nbsp;er1<b
 
 <p>
 the main expression <span class="inlinecode">e</span>
- is evaluated first and then each case sequentially. The result of the main expression, further called the switch value, is bound (and possibly shadows) the implicit
-<span class="inlinecode">this</span>
- variable. In order to avoid shadowing, a 
-<a href="04-Expressions.xdoc.html#VariableDeclaration">variable declaration</a> can be used.
+ is evaluated first and then each case sequentially. If the switch expression
+contains a variable declaration using the syntax known from 
+<a href="04-Expressions.xdoc.html#ForLoop">section ForLoop</a>, the value is bound to the given name.
+Expressions of type <span class="inlinecode">java.lang.Boolean</span>
+ are not allowed in a switch expression.
 </p>
 
 <p>
-A case clause is taken if the switch value equals the result of the case&apos;s guard expression or if the case&apos;s guard expression evaluates to <span class="inlinecode">true</span>
+The guard of each case clause is evaluated until the switch value equals the result of the case&apos;s guard expression or if the case&apos;s guard expression evaluates to <span class="inlinecode">true</span>
 .
+Then the right hand expression of the case evaluated and the result is returned.
 </p>
 
 
@@ -2099,7 +2101,7 @@ Type guards
 
 
 <p>
-In addition to the case predicate one can add a so called <em>Type Guard</em> which is syntactically just 
+In addition to the case guards one can add a so called <em>Type Guard</em> which is syntactically just 
 <a href="03-Types.xdoc.html#TypeReferences">type reference</a> in 
 front of the case keyword. The compiler will use that type for the switch expression in subsequent expressions.
 Example:
@@ -2118,7 +2120,9 @@ Example:
 <p>
 Only if the switch value passes a type guard, i.e. an instanceof operation returns <span class="inlinecode">true</span>
 , the case&apos;s guard expression is executed using the same semantics explained in
-previously. Statically the type guard acts like a cast, that is all references to the switch value will be of the type specified in the type guard.
+previously. 
+If the switch expression contains an explicit declaration of a local variable or the expression references a local variable,
+the type guard acts like a cast, that is all references to the switch value will be of the type specified in the type guard.
 </p>
 
 
@@ -2145,6 +2149,61 @@ The return type of a switch expression is computed using the rules defined in
 <a href="03-Types.xdoc.html#CommonSuperType">section CommonSuperType</a>. The set of types from which the common super type is 
 computed corresponds to the types of each case&apos;s result expression. In case a switch expression&apos;s type is
 computed using the expected type form the context, it is sufficient to return the expected type if all case branches types conform to the expected type.
+</p>
+
+
+</div>
+
+
+
+<a name="SwitchExpression-4"></a>
+<div class="section" title="Examples">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Examples
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+
+<ul>
+
+<li>
+
+<p>
+
+	switch foo {
+		Entity : foo.superType.name
+		Datatype : foo.name
+		default : throw new IllegalStateException
+	}
+
+</p>
+
+</li>
+
+<li>
+
+<p>
+
+	switch x : foo.bar.complicated(&apos;hello&apos;,42) {
+		case "hello42" : ...
+		case x.length&lt;2 : ...
+		default : ....
+	}
+
+</p>
+
+</li>
+
+</ul>
+
 </p>
 
 

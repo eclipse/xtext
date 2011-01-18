@@ -463,7 +463,7 @@ section2[Syntax]
 
 code[
 XSwitchExpression:
-	'switch' XExpressionOrVariableDeclaration '{'
+	'switch' (ID ':')? XExpression '{'
 		XCasePart+
 		('default' ':' XExpression))?
 	'}';
@@ -485,14 +485,16 @@ code[
 	}
 ]
 
-the main expression code[e] is evaluated first and then each case sequentially. The result of the main expression, further called the switch value, is bound (and possibly shadows) the implicit
-code[this] variable. In order to avoid shadowing, a ref:VariableDeclaration[variable declaration] can be used.
+the main expression code[e] is evaluated first and then each case sequentially. If the switch expression
+contains a variable declaration using the syntax known from ref:ForLoop, the value is bound to the given name.
+Expressions of type code[java.lang.Boolean] are not allowed in a switch expression.
 
-A case clause is taken if the switch value equals the result of the case's guard expression or if the case's guard expression evaluates to code[true].
+The guard of each case clause is evaluated until the switch value equals the result of the case's guard expression or if the case's guard expression evaluates to code[true].
+Then the right hand expression of the case evaluated and the result is returned.
 
 section2[Type guards]
 
-In addition to the case predicate one can add a so called e[Type Guard] which is syntactically just ref:TypeReferences[type reference] in 
+In addition to the case guards one can add a so called e[Type Guard] which is syntactically just ref:TypeReferences[type reference] in 
 front of the case keyword. The compiler will use that type for the switch expression in subsequent expressions.
 Example:
 code[
@@ -506,13 +508,35 @@ code[
 ]
 
 Only if the switch value passes a type guard, i.e. an instanceof operation returns code[true], the case's guard expression is executed using the same semantics explained in
-previously. Statically the type guard acts like a cast, that is all references to the switch value will be of the type specified in the type guard.
+previously. 
+If the switch expression contains an explicit declaration of a local variable or the expression references a local variable,
+the type guard acts like a cast, that is all references to the switch value will be of the type specified in the type guard.
 
 section2[Typing]
 
 The return type of a switch expression is computed using the rules defined in ref:CommonSuperType. The set of types from which the common super type is 
 computed corresponds to the types of each case's result expression. In case a switch expression's type is
 computed using the expected type form the context, it is sufficient to return the expected type if all case branches types conform to the expected type.
+
+section2[Examples]
+
+ul[
+	item[
+	switch foo {
+		Entity : foo.superType.name
+		Datatype : foo.name
+		default : throw new IllegalStateException
+	}
+	]
+	item[
+	switch x : foo.bar.complicated('hello',42) {
+		case "hello42" : ...
+		case x.length<2 : ...
+		default : ....
+	}
+	]
+]
+
 
 section:VariableDeclaration[Variable Declarations]
 
