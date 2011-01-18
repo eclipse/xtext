@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.outline.impl;
 
+import static com.google.common.collect.Lists.*;
+
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.text.IDocument;
@@ -73,15 +76,33 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 		treeViewer.setLabelProvider(labelProvider);
 		treeViewer.setContentProvider(contentProvider);
 		treeViewer.setUseHashlookup(true);
-		IOutlineNode rootNode = xtextDocument.readOnly(new IUnitOfWork<IOutlineNode, XtextResource>() {
-			public IOutlineNode exec(XtextResource resource) throws Exception {
-				IOutlineNode rootNode = treeProvider.createRoot(xtextDocument);
-				// precompute visible root nodes
-				rootNode.getChildren();
-				return rootNode;
-			}
-		});
-		refreshViewer(rootNode, Collections.singleton(rootNode), Collections.<IOutlineNode> emptySet());
+		List<IOutlineNode> initiallyExpandedNodes = xtextDocument
+				.readOnly(new IUnitOfWork<List<IOutlineNode>, XtextResource>() {
+					public List<IOutlineNode> exec(XtextResource resource) throws Exception {
+						return getInitiallyExpandedNodes();
+					}
+				});
+		refreshViewer(initiallyExpandedNodes.get(0), initiallyExpandedNodes, Collections.<IOutlineNode> emptySet());
+	}
+
+	protected List<IOutlineNode> getInitiallyExpandedNodes() {
+		IOutlineNode rootNode = treeProvider.createRoot(xtextDocument);
+		List<IOutlineNode> result = newArrayList(rootNode);
+		addChildren(Collections.singletonList(rootNode), result, getDefaultExpansionLevel());
+		return result;
+	}
+	
+	protected int getDefaultExpansionLevel() {
+		return 1;
+	}
+
+	protected void addChildren(List<IOutlineNode> nodes, List<IOutlineNode> allChildren, int depth) {
+		for (IOutlineNode node : nodes) {
+			List<IOutlineNode> children = node.getChildren();
+			allChildren.addAll(children);
+			if (depth > 0)
+				addChildren(children, allChildren, depth - 1);
+		}
 	}
 
 	protected void configureModelListener() {
@@ -150,7 +171,7 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 					TreeViewer treeViewer = getTreeViewer();
 					if (!treeViewer.getTree().isDisposed()) {
 						treeViewer.setInput(rootNode);
-						treeViewer.expandToLevel(1);
+						treeViewer.expandToLevel(getDefaultExpansionLevel());
 						treeViewer.setExpandedElements(Iterables.toArray(nodesToBeExpanded, IOutlineNode.class));
 						treeViewer.setSelection(new StructuredSelection(Iterables.toArray(selectedNodes,
 								IOutlineNode.class)));
