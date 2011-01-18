@@ -32,11 +32,13 @@ import org.eclipse.xtext.typing.TypeResolutionException;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
+import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
@@ -234,12 +236,32 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		if (context.eContainer() instanceof XCatchClause) {
 			XCatchClause catchClause = (XCatchClause) context.eContainer();
 			parentScope = createLocalScopeForParameter(catchClause.getDeclaredParam(), parentScope);
-
 		}
 		if (context instanceof XClosure) {
 			parentScope = createLocalVarScopeForClosure((XClosure) context, parentScope);
 		}
+		if (context instanceof XCasePart) {
+			parentScope = createLocalVarScopeForTypeGuardedCase((XCasePart)context, parentScope);
+		}
 		return parentScope;
+	}
+
+	protected IScope createLocalVarScopeForTypeGuardedCase(XCasePart context, IScope parentScope) {
+		JvmTypeReference guard = context.getTypeGuard();
+		if (guard==null) {
+			return parentScope;
+		}
+		XSwitchExpression switchExpr = (XSwitchExpression) context.eContainer();
+		String varName = switchExpr.getLocalVarName();
+		if (varName==null) {
+			if (switchExpr.getSwitch() instanceof XFeatureCall) {
+				varName = ((XFeatureCall)switchExpr.getSwitch()).getFeatureName();
+			}
+		}
+		if (varName==null) {
+			return parentScope;
+		}
+		return new SingletonScope(EObjectDescription.create(QualifiedName.create(varName), context), parentScope);
 	}
 
 	protected IScope createLocalVarScopeForCatchClause(XCatchClause catchClause, int indexOfContextExpressionInBlock,
