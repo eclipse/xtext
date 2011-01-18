@@ -52,12 +52,7 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 	@Override
 	public void testSwitchExpression_02() {
 	}
-	@Override
-	public void testSwitchExpression_03() {
-	}
-	@Override
-	public void testSwitchExpression_04() {
-	}
+	
 	@Override
 	public void testSwitchExpression_05() {
 	}

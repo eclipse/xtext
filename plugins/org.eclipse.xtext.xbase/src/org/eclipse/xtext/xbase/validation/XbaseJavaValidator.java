@@ -178,6 +178,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			error("Cannot instantiate abstract class", -1, ABSTRACT_CLASS_INSTANTIATION);
 		}
 	}
+	
+	//TODO switch expression not of type boolean
 
 	@Override
 	protected List<EPackage> getEPackages() {

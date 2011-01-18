@@ -117,6 +117,7 @@ public class XbaseSwitch<T>
 				XSwitchExpression xSwitchExpression = (XSwitchExpression)theEObject;
 				T result = caseXSwitchExpression(xSwitchExpression);
 				if (result == null) result = caseXExpression(xSwitchExpression);
+				if (result == null) result = caseJvmIdentifyableElement(xSwitchExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
