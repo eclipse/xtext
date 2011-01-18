@@ -1387,8 +1387,8 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XSwitchExpression returns XExpression:
-	//	{XSwitchExpression} "switch" switch=XExpressionInsideBlock "{" cases+=XCasePart+ ("default" ":" default=XExpression)?
-	//	"}";
+	//	{XSwitchExpression} "switch" (localVarName=ID ":")? switch=XExpression "{" cases+=XCasePart+ ("default" ":"
+	//	default=XExpression)? "}";
 	public XbaseGrammarAccess.XSwitchExpressionElements getXSwitchExpressionAccess() {
 		return gaXbase.getXSwitchExpressionAccess();
 	}

@@ -1234,7 +1234,7 @@ Rich Strings
 Of course there is the template expression, which is used to write readable string concatenation, which
 is the main thing you do when writing a code generator. Xtend2 reuses the syntax known from the well
 known and widely used Xpand template language (in fact Xtend2 is considered the successor to Xpand and
-Xtend). Let&apos;s have a look at an example of how a typical function with template expressions look like:
+Xtend). Let&apos;s have a look at an example of how a typical function with template expressions looks like:
 </p>
 
 <p>
@@ -1242,7 +1242,7 @@ Xtend). Let&apos;s have a look at an example of how a typical function with temp
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-toClass(Entity&nbsp;this)&nbsp;:»<br />&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;«packageName»;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;«placeImports»<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;«name»&nbsp;«IF&nbsp;extendedType!=null»extends&nbsp;«extendedType»«ENDIF»{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«FOREACH&nbsp;members»<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«member.toMember»<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«ENDFOREACH»<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;«;<br />
+toClass(Entity&nbsp;this)&nbsp;:&apos;&apos;&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;«packageName»;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;«placeImports»<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;«name»&nbsp;«IF&nbsp;extendedType!=null»extends&nbsp;«extendedType»«ENDIF»{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«FOREACH&nbsp;members»<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«member.toMember»<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«ENDFOREACH»<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;;<br />
 </p>
 </div>
 </div>
@@ -1261,7 +1261,7 @@ expected. For instance in conjunction the powerful switch expression from Xbase:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-toMember(Member&nbsp;this)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;switch(this)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Field&nbsp;:»private&nbsp;«type»&nbsp;«name»&nbsp;;«;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;case&nbsp;isAbstract&nbsp;:»&nbsp;abstract&nbsp;«...;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Method:»&nbsp;.....&nbsp;«;<br />&nbsp;&nbsp;&nbsp;&nbsp;};<br />
+toMember(Member&nbsp;this)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;switch(this)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Field&nbsp;:&apos;&apos;&apos;private&nbsp;«type»&nbsp;«name»&nbsp;;&apos;&apos;&apos;;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;case&nbsp;isAbstract&nbsp;:&apos;&apos;&apos;&nbsp;abstract&nbsp;«...&apos;&apos;&apos;;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Method:&apos;&apos;&apos;&nbsp;.....&nbsp;&apos;&apos;&apos;;<br />&nbsp;&nbsp;&nbsp;&nbsp;};<br />
 </p>
 </div>
 </div>
@@ -1321,14 +1321,6 @@ It also supports the <span class="inlinecode">SEPARATOR</span>
  declaration from Xpand.
 </p>
 
-<p>
-
-</p>
-
-<p>
-
-</p>
-
 
 </div>
 
@@ -1352,7 +1344,7 @@ Typing
 The rich string is translated to an efficient string concatenation and the return type of a rich string
 is 
 <em>java.lang.CharSequence</em>
- which allows much room for efficient implementation.
+ which allows room for efficient implementation.
 </p>
 
 
@@ -1444,7 +1436,7 @@ nested nodes.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-class&nbsp;Template&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;print(Node&nbsp;this)&nbsp;"""<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;«name»&nbsp;{}<br />&nbsp;&nbsp;&nbsp;&nbsp;"""<br />}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+class&nbsp;Template&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;print(Node&nbsp;this)&nbsp;&apos;&apos;&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;«name»&nbsp;{}<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;<br />}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 </div>
 </div>
@@ -1488,7 +1480,7 @@ for readability of the template itself.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-class&nbsp;Template&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;print(Node&nbsp;this)&nbsp;"""<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;«name»&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«IF&nbsp;hasChildren»<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«children*.print»<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«ENDIF»<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;"""<br />}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+class&nbsp;Template&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;print(Node&nbsp;this)&nbsp;&apos;&apos;&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;«name»&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«IF&nbsp;hasChildren»<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«children*.print»<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«ENDIF»<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;<br />}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 </div>
 </div>

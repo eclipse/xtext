@@ -380,7 +380,9 @@ ruleXIfExpression :
 
 // Rule XSwitchExpression
 ruleXSwitchExpression :
-	'switch' ruleXExpressionInsideBlock '{' ruleXCasePart+ (
+	'switch' (
+		RULE_ID ':'
+	)? ruleXExpression '{' ruleXCasePart+ (
 		'default' ':' ruleXExpression
 	)? '}'
 ;
