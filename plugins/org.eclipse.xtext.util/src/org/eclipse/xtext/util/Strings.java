@@ -377,4 +377,13 @@ public class Strings {
 		}
 		return line;
 	}
+	
+	public static String getLeadingWhiteSpace(String original) {
+		for(int i=0; i < original.length(); i++) {
+			if (!Character.isWhitespace(original.charAt(i))) {
+				return original.substring(0, i);
+			}
+		}
+		return original;
+	}
 }

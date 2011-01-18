@@ -1,0 +1,81 @@
+/*******************************************************************************
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.xtend2.richstring;
+
+import java.util.List;
+
+import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xtend2.xtend2.RichString;
+import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
+import org.eclipse.xtext.xtend2.xtend2.util.Xtend2Switch;
+
+public class InitialTemplateIndentationComputer extends Xtend2Switch<String> {
+	
+	@Override
+	public String caseRichString(RichString object) {
+		String result = null;
+		List<XExpression> elements = object.getElements();
+		for(int i= 0; i< elements.size(); i++) {
+			XExpression element = elements.get(i);
+			String elementResult = doSwitch(element);
+			if (elementResult == null && i == 0)
+				return "";
+			result = getBetterString(result, elementResult);
+			if (Strings.isEmpty(result))
+				return result;
+		}
+		return result;
+	}
+
+	protected String getBetterString(String current, String candidate) {
+		if (candidate == null)
+			return current;
+		if (candidate.length() == 0)
+			return candidate;
+		if (current == null || current.length() > candidate.length())
+			current = candidate;
+		return current;
+	}
+	
+	@Override
+	public String caseRichStringLiteral(RichStringLiteral object) {
+		String value = object.getValue();
+		String[] split = value.split("\\r?\\n");
+		// single line break
+		if (split.length == 0) {
+			return null;
+		}
+		// no line breaks == no initial indentation
+		if (split.length == 1) {
+			return null;
+		}
+		String firstLine = split[0];
+		// first line has content == no initial indentation
+		if (firstLine != Strings.getLeadingWhiteSpace(firstLine)) { 
+			return null;
+		}
+		String result = null;
+		for (int i = 1; i < split.length; i++) {
+			String leadingWS = Strings.getLeadingWhiteSpace(split[i]);
+			if (leadingWS != split[i]) {
+				if (Strings.isEmpty(leadingWS))
+					return leadingWS;
+				result = getBetterString(result, leadingWS);
+			} else {
+				RichString completeString = (RichString) object.eContainer();
+				List<XExpression> siblings = completeString.getElements();
+				if (siblings.get(siblings.size() - 1) != object) {
+					result = getBetterString(result, leadingWS);	
+				}
+			}
+		}
+		return result;
+	}
+	
+}
