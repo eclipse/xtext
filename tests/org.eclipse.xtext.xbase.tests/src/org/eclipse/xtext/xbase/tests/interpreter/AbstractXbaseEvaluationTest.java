@@ -374,35 +374,27 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 	}
 	
 	public void testSwitchExpression_01() {
-		assertEvaluatesTo(null, "switch true { case false: 'literal' }");
+		assertEvaluatesTo(null, "switch 'x' { case false: 'literal' }");
 	}
 	
 	public void testSwitchExpression_02() {
-		assertEvaluatesTo("literal", "switch false { case false: 'literal' }");
-	}
-	
-	public void testSwitchExpression_03() {
-		assertEvaluatesTo(Boolean.FALSE, "{ var this = true switch false { case true: this } }");
-	}
-	
-	public void testSwitchExpression_04() {
-		assertEvaluatesTo(Boolean.TRUE, "{ var this = false switch true { case true: this } }");
+		assertEvaluatesTo("literal", "switch 'x' { case 'x': 'literal' }");
 	}
 	
 	public void testSwitchExpression_05() {
-		assertEvaluatesTo(null, "switch true { String : 'literal' }");
+		assertEvaluatesTo(null, "switch new Object() { String : 'literal' }");
 	}
 	
 	public void testSwitchExpression_06() {
-		assertEvaluatesTo("literal", "switch true { Boolean : 'literal' }");
+		assertEvaluatesTo("literal", "switch new Object() { Object : 'literal' }");
 	}
 	
 	public void testSwitchExpression_07() {
-		assertEvaluatesTo("literal", "switch true { case false: null default: 'literal' }");
+		assertEvaluatesTo("literal", "switch new Object() { case false: null default: 'literal' }");
 	}
 	
 	public void testSwitchExpression_08() {
-		assertEvaluatesTo("literal", "switch true { case false: null case true: 'literal' }");
+		assertEvaluatesTo("literal", "switch x : new Object() { case false: null case x!=null: 'literal' }");
 	}
 	
 	public void testSwitchExpression_09() {

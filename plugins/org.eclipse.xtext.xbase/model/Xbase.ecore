@@ -12,7 +12,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="else" eType="#//XExpression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XSwitchExpression" eSuperTypes="#//XExpression">
+  <eClassifiers xsi:type="ecore:EClass" name="XSwitchExpression" eSuperTypes="#//XExpression ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmIdentifyableElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="switch" eType="#//XExpression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="cases" upperBound="-1"

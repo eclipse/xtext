@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
@@ -326,6 +327,25 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		assertEquals(switchExpr.getCases().get(0), feature.getFeature());
 		feature = (XFeatureCall) switchExpr.getCases().get(1).getCase();
 		assertEquals(switchExpr.getCases().get(1), feature.getFeature());
+	}
+	
+	public void testSwitchExpression_01() throws Exception {
+		XSwitchExpression switchExpr = (XSwitchExpression) expression(
+				"switch x : new Object() { " +
+				"   case x : x" +
+		"}");
+		final XCasePart xCasePart = switchExpr.getCases().get(0);
+		assertEquals(switchExpr, ((XFeatureCall) xCasePart.getThen()).getFeature());
+		assertEquals(switchExpr, ((XFeatureCall)xCasePart.getCase()).getFeature());
+	}
+	
+	public void testSwitchExpression_02() throws Exception {
+		XSwitchExpression switchExpr = (XSwitchExpression) expression(
+				"switch x : new Object() { " +
+				"    case true : true "+
+				"    default : x" +
+				"}");
+		assertEquals(switchExpr, ((XFeatureCall)switchExpr.getDefault()).getFeature());
 	}
 	
 }

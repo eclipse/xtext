@@ -231,14 +231,9 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	
 	public Object _evaluateSwitchExpression(XSwitchExpression switchExpression, IEvaluationContext context) {
 		IEvaluationContext forkedContext = context.fork();
-		Object conditionResult = null;
-		if (switchExpression.getSwitch() != null) {
-			conditionResult = internalEvaluate(switchExpression.getSwitch(), forkedContext);
-			if (!(switchExpression.getSwitch() instanceof XVariableDeclaration)) {
-				forkedContext.newValue(XbaseScopeProvider.THIS, conditionResult);
-			}
-		} else {
-			conditionResult = forkedContext.getValue(XbaseScopeProvider.THIS);
+		Object conditionResult = internalEvaluate(switchExpression.getSwitch(), forkedContext);
+		if (switchExpression.getLocalVarName() != null) {
+			forkedContext.newValue(QualifiedName.create(switchExpression.getLocalVarName()), conditionResult);
 		}
 		for(XCasePart casePart: switchExpression.getCases()) {
 			Class<?> expectedType = null;
@@ -465,6 +460,19 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	
 	public Object _evaluateFeatureCall(XFeatureCall featureCall, IEvaluationContext context) {
 		return featureCallDispatcher.invoke(featureCall.getFeature(), featureCall, null, context);
+	}
+	
+	public Object _featureCallSwitchExpression(XSwitchExpression switchExpre, XFeatureCall featureCall, Object receiver, IEvaluationContext context) {
+		String localVarName = switchExpre.getLocalVarName();
+		if (localVarName==null) {
+			localVarName = ((XFeatureCall)switchExpre.getSwitch()).getFeatureName();
+		}
+		Object value = context.getValue(QualifiedName.create(localVarName));
+		return value;
+	}
+	
+	public Object _featureCallCasePart(XCasePart casePart, XFeatureCall featureCall, Object receiver, IEvaluationContext context) {
+		return _featureCallSwitchExpression((XSwitchExpression) casePart.eContainer(), featureCall, receiver, context);
 	}
 	
 	public Object _featureCallVariableDeclaration(XVariableDeclaration variableDeclaration, XAbstractFeatureCall featureCall, Object receiver, IEvaluationContext context) {

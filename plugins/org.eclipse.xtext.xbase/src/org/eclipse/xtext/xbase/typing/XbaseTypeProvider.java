@@ -94,7 +94,7 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 		List<JvmTypeReference> returnTypes = Lists.newArrayList();
 		EList<XCasePart> cases = object.getCases();
 		for (XCasePart xCasePart : cases) {
-			returnTypes.add(getType(xCasePart));
+			returnTypes.add(getType(xCasePart.getThen()));
 		}
 		if (object.getDefault() != null)
 			returnTypes.add(getType(object.getDefault()));
@@ -102,7 +102,10 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 	}
 
 	protected JvmTypeReference _type(XCasePart object) {
-		return getType(object.getThen());
+		if (object.getTypeGuard()!=null) {
+			return object.getTypeGuard();
+		}
+		return null;
 	}
 
 	protected JvmTypeReference _type(XBlockExpression object) {
@@ -117,8 +120,10 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 
 	protected JvmTypeReference _type(XAbstractFeatureCall object) {
 		//TODO use expectedType to infer type args
-		JvmIdentifyableElement eobject = object.getFeature();
-		JvmTypeReference featureType = getType(eobject);
+		JvmIdentifyableElement feature = object.getFeature();
+		//TODO it'S not the same to ask for the type of a referenced 'thing' or to ask ofr the return type of an expression.
+		// We should not call getType(feature) but call getTypeOfReference(feature) and implement it differently is needed.
+		JvmTypeReference featureType = getType(feature);
 		if (object instanceof XMemberFeatureCall) {
 			JvmTypeReference targetType = getType(((XMemberFeatureCall) object).getMemberCallTarget());
 			JvmTypeReference converted = typeConverter.convert(targetType, object);

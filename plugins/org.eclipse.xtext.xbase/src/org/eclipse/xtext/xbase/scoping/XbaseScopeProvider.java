@@ -243,6 +243,16 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		if (context instanceof XCasePart) {
 			parentScope = createLocalVarScopeForTypeGuardedCase((XCasePart)context, parentScope);
 		}
+		if (context instanceof XSwitchExpression) {
+			parentScope = createLocalVarScopeForSwitchExpression((XSwitchExpression)context, parentScope);
+		}
+		return parentScope;
+	}
+
+	protected IScope createLocalVarScopeForSwitchExpression(XSwitchExpression context, IScope parentScope) {
+		if (context.getLocalVarName()!=null) {
+			return new SingletonScope(EObjectDescription.create(QualifiedName.create(context.getLocalVarName()), context), parentScope);
+		}
 		return parentScope;
 	}
 
