@@ -138,7 +138,7 @@ XIfExpression returns XExpression:
 
 XSwitchExpression returns XExpression:
 	{XSwitchExpression}
-	'switch' switch=XExpressionInsideBlock '{'
+	'switch' (localVarName=ID ':')? switch=XExpression '{'
 	(cases+=XCasePart)+
 	('default' ':' default=XExpression )?
 	'}';
