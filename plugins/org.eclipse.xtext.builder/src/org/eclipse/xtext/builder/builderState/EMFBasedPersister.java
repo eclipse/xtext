@@ -24,8 +24,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchListener;
 import org.eclipse.xtext.builder.impl.BuildScheduler;
 import org.eclipse.xtext.builder.impl.IBuildFlag;
 import org.eclipse.xtext.builder.internal.Activator;
@@ -34,7 +32,6 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
-import com.google.inject.internal.Nullable;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
