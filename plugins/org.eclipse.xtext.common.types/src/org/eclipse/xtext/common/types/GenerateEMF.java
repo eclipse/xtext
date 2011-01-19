@@ -36,7 +36,7 @@ public class GenerateEMF {
 		new EcoreGenerator() {{
 			setGenerateEdit(true);
 			setGenModel("platform:/resource/"+projectName+"/model/JavaVMTypes.genmodel");
-			setSrcPath("platform:/resource/"+projectName+"/src");
+			addSrcPath("platform:/resource/"+projectName+"/src");
 		}}.invoke(null);
 	}
 }
