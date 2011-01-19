@@ -13,7 +13,10 @@ import java.util.Collections;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ISaveContext;
+import org.eclipse.core.resources.ISaveParticipant;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
@@ -40,10 +43,6 @@ import com.google.inject.internal.Nullable;
 public class EMFBasedPersister implements PersistedStateProvider {
 
 	private final static Logger log = Logger.getLogger(EMFBasedPersister.class);
-
-	@Inject(optional=true)
-	@Nullable
-	private IWorkbench workbench;
 
 	@Inject
 	private IWorkspace workspace;
@@ -86,17 +85,24 @@ public class EMFBasedPersister implements PersistedStateProvider {
 			scheduleRecoveryBuild();
 			throw new WrappedException(e);
 		} finally {
-			if (workbench != null) {
-				workbench.addWorkbenchListener(new IWorkbenchListener() {
-					public boolean preShutdown(IWorkbench workbench, boolean forced) {
+			try {
+				workspace.addSaveParticipant(Activator.getDefault(), new ISaveParticipant() {
+
+					public void saving(ISaveContext context) throws CoreException {
 						save(builderState.getAllResourceDescriptions());
-						return true;
 					}
 
-					public void postShutdown(IWorkbench workbench) {
-						// do nothing.
+					public void rollback(ISaveContext context) {
+					}
+
+					public void prepareToSave(ISaveContext context) throws CoreException {
+					}
+
+					public void doneSaving(ISaveContext context) {
 					}
 				});
+			} catch (CoreException e) {
+				log.error("Error adding builder state save participant", e);
 			}
 		}
 		return Collections.emptySet();
