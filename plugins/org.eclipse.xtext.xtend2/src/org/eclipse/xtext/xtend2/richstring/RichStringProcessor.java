@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtend2.richstring;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringElseIf;
@@ -57,7 +56,8 @@ public class RichStringProcessor {
 		@Override
 		public Boolean caseRichStringForLoop(RichStringForLoop object) {
 			acceptor.acceptForLoop(object.getDeclaredParam(), object.getForExpression());
-			doSwitch(object.getEachExpression());
+			while(acceptor.forLoopHasNext())
+				doSwitch(object.getEachExpression());
 			acceptor.acceptEndFor();
 			return Boolean.TRUE;
 		}
@@ -92,64 +92,102 @@ public class RichStringProcessor {
 		@Override
 		public Boolean caseRichStringLiteral(RichStringLiteral object) {
 			String value = object.getValue();
-			String[] split = value.split("\\r?\\n");
+			List<TextLine> lines = TextLines.splitString(value);
 			// only one line - everything is semantic
-			if (split.length == 1) {
-				String line = split[0];
-				if (!firstEventInLine) {
-					announceSemanticText(line);
-				} else {
-					String leadingWS = Strings.getLeadingWhiteSpace(line);
-					pushSemanticIndentation(leadingWS);
-					String tail = line.substring(leadingWS.length());
-					announceSemanticText(tail);
-				}
+			if (lines.size() == 1) {
+				TextLine line = lines.get(0);
+				handleOnlyLine(object, line);
 				return Boolean.TRUE;
 			}
-			for(int i = 0; i < split.length; i++) {
-				String line = split[i];
-				String leadingWS = Strings.getLeadingWhiteSpace(line);
+			for(int i = 0; i < lines.size(); i++) {
+				TextLine line = lines.get(i);
 				if (i == 0) {
 					// first line contains only WS
-					if (leadingWS == line) {
+					if (line.containsOnlyWhitespace()) {
 						acceptor.acceptTemplateText(line);
-						acceptor.acceptTemplateLineBreak();
+						if (firstEventInLine) {
+							acceptor.acceptTemplateLineBreak();
+						} else {
+							announceSemanticLinebreak();
+							indentationHandler.popIndentation();
+						}
 					} else {
 						acceptor.acceptSemanticText(line);
 						acceptor.acceptSemanticLineBreak();
 					}
-				} else if (i == split.length - 1) {
+				} else {
+					CharSequence leadingWS = line.getLeadingWhiteSpace();
 					pushSemanticIndentation(leadingWS);
-					String tail = line.substring(leadingWS.length());
+					CharSequence tail = line.subSequence(leadingWS.length(), line.length());
 					announceSemanticText(tail);
-					// "\n zonk\n".split(..) == { "", " zonk" }
-					if (value.endsWith("\n")) {
+					if (line.hasTrailingLineBreak()) {
 						announceSemanticLinebreak();
 						indentationHandler.popIndentation();
+					} else if (isLastRichStringPart(object)) {
+						indentationHandler.popIndentation();
 					}
-				} else {
-					pushSemanticIndentation(leadingWS);
-					String tail = line.substring(leadingWS.length());
-					announceSemanticText(tail);
-					announceSemanticLinebreak();
-					indentationHandler.popIndentation();
 				}
 			}
 			return Boolean.TRUE;
 		}
 
-		protected void pushSemanticIndentation(String line) {
+		protected void handleOnlyLine(RichStringLiteral object, TextLine line) {
+			if (!line.hasTrailingLineBreak()) {
+				if (!firstEventInLine) {
+					announceSemanticText(line);
+				} else {
+					CharSequence leadingWS = line.getLeadingWhiteSpace();
+					pushSemanticIndentation(leadingWS);
+					CharSequence tail = line.subSequence(leadingWS.length(), line.length());
+					doAnnounceSemanticText(tail);
+					if (isLastRichStringPart(object)) {
+						indentationHandler.popIndentation();
+					}
+				}
+			} else {
+				if (!firstEventInLine) {
+					announceSemanticText(line);
+					announceSemanticLinebreak();
+					indentationHandler.popIndentation();
+				} else {
+					if (line.containsOnlyWhitespace()) {
+						acceptor.acceptTemplateText(line);
+						acceptor.acceptTemplateLineBreak();
+					} else {
+						CharSequence leadingWS = line.getLeadingWhiteSpace();
+						pushSemanticIndentation(leadingWS);
+						CharSequence tail = line.subSequence(leadingWS.length(), line.length());
+						announceSemanticText(tail);
+						announceSemanticLinebreak();
+						indentationHandler.popIndentation();
+					}
+				}
+			}
+		}
+
+		protected boolean isLastRichStringPart(RichStringLiteral object) {
+			RichString richString = (RichString) object.eContainer();
+			List<XExpression> siblings = richString.getElements();
+			boolean result = object == siblings.get(siblings.size()-1);
+			return result;
+		}
+
+		protected void pushSemanticIndentation(CharSequence line) {
 			indentationHandler.pushSemanticIndentation(line);
 		}
 		
-		public void announceSemanticText(String text) {
+		public void announceSemanticText(CharSequence text) {
 			if (text.length() != 0) {
-				announceIndentation();
-				acceptor.acceptSemanticText(text);
+				doAnnounceSemanticText(text);
 			}
 		}
+
+		protected void doAnnounceSemanticText(CharSequence text) {
+			announceIndentation();
+			acceptor.acceptSemanticText(text);
+		}
 		
-		public void announceTemplateText(String text) {
+		public void announceTemplateText(CharSequence text) {
 			announceIndentation();
 			acceptor.acceptSemanticText(text);
 		}
@@ -167,18 +205,11 @@ public class RichStringProcessor {
 			firstEventInLine = true;
 		}
 		
-		public void announceTemplateLinebreak() {
-			announceIndentation();
-			acceptor.acceptTemplateLineBreak();
-//			firstEventInLine = true;
-		}
-	
 		public String computeInitialIndentation(RichString object) {
 			InitialTemplateIndentationComputer computer = new InitialTemplateIndentationComputer();
 			String result = computer.doSwitch(object);
 			return result;
 		}
-		
 	}
 	
 }
