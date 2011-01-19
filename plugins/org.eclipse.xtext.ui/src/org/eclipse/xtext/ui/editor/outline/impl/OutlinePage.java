@@ -99,9 +99,10 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 	protected void addChildren(List<IOutlineNode> nodes, List<IOutlineNode> allChildren, int depth) {
 		for (IOutlineNode node : nodes) {
 			List<IOutlineNode> children = node.getChildren();
-			allChildren.addAll(children);
-			if (depth > 0)
+			if (depth > 1) {
+				allChildren.addAll(children);
 				addChildren(children, allChildren, depth - 1);
+			}
 		}
 	}
 
@@ -171,7 +172,7 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 					TreeViewer treeViewer = getTreeViewer();
 					if (!treeViewer.getTree().isDisposed()) {
 						treeViewer.setInput(rootNode);
-						treeViewer.expandToLevel(getDefaultExpansionLevel());
+						treeViewer.expandToLevel(1);
 						treeViewer.setExpandedElements(Iterables.toArray(nodesToBeExpanded, IOutlineNode.class));
 						treeViewer.setSelection(new StructuredSelection(Iterables.toArray(selectedNodes,
 								IOutlineNode.class)));
