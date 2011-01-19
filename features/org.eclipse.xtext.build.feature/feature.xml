@@ -22,11 +22,6 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    <license url="%licenseURL">
       %license
    </license>
-
-   <url>
-      <update label="%updateSiteName" url="http://download.eclipse.org/modeling/tmf/updates/"/>
-   </url>
-
    <includes
          id="org.eclipse.xtext.sdk"
          version="0.0.0"/>
