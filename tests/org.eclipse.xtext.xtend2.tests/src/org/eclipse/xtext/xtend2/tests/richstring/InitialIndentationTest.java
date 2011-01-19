@@ -31,6 +31,14 @@ public class InitialIndentationTest extends AbstractRichStringTest {
 		assertInitialIndentation("", "'''\r\n'''");
 	}
 	
+	public void testEmptyLastLine_01() throws Exception {
+		assertInitialIndentation("		", 
+				"'''\n" +
+				"		foobar\n" +
+				"\n" +
+				"'''");
+	}
+	
 	public void testSingleLineTemplate() throws Exception {
 		assertInitialIndentation("", "'''name'''");
 		assertInitialIndentation("", "'''«name»'''");
@@ -93,7 +101,7 @@ public class InitialIndentationTest extends AbstractRichStringTest {
 				"'''");
 	}
 	
-	public void testEmptyLine() throws Exception {
+	public void testEmptyLine_01() throws Exception {
 		assertInitialIndentation("  ", "'''\n" +
 				"\n" +
 				"  name\n" +
@@ -102,7 +110,33 @@ public class InitialIndentationTest extends AbstractRichStringTest {
 		assertInitialIndentation("  ", "'''\r\n" +
 				"\r\n" +
 				"  name\r\n" +
-				"\r\n" +
+				" \r\n" +
+				"'''");
+	}
+	
+	public void testEmptyLine_02() throws Exception {
+		assertInitialIndentation("   ", "'''\n" +
+				" \n" +
+				"   name\n" +
+				"  \n" +
+				"'''");
+		assertInitialIndentation("   ", "'''\r\n" +
+				" \r\n" +
+				"   name\r\n" +
+				"  \r\n" +
+				"'''");
+	}
+	
+	public void testEmptyLine_03() throws Exception {
+		assertInitialIndentation("   ", "'''\n" +
+				"  \n" +
+				"   name\n" +
+				" \n" +
+				"'''");
+		assertInitialIndentation("   ", "'''\r\n" +
+				"  \r\n" +
+				"   name\r\n" +
+				" \r\n" +
 				"'''");
 	}
 	

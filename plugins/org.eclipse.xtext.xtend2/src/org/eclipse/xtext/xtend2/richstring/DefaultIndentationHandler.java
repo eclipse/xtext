@@ -17,9 +17,9 @@ import com.google.common.collect.Lists;
 public class DefaultIndentationHandler implements IRichStringIndentationHandler {
 
 	protected static abstract class IndentationData {
-		protected String value;
+		protected CharSequence value;
 		
-		protected IndentationData(String value) {
+		protected IndentationData(CharSequence value) {
 			this.value = value;
 		}
 		
@@ -33,7 +33,7 @@ public class DefaultIndentationHandler implements IRichStringIndentationHandler 
 	
 	protected static class SemanticIndentationData extends IndentationData {
 
-		protected SemanticIndentationData(String value) {
+		protected SemanticIndentationData(CharSequence value) {
 			super(value);
 		}
 
@@ -46,7 +46,7 @@ public class DefaultIndentationHandler implements IRichStringIndentationHandler 
 
 	protected static class TemplateIndentationData extends IndentationData {
 
-		protected TemplateIndentationData(String value) {
+		protected TemplateIndentationData(CharSequence value) {
 			super(value);
 		}
 
@@ -70,42 +70,53 @@ public class DefaultIndentationHandler implements IRichStringIndentationHandler 
 		indentationData.removeLast();
 		if (indentationData.isEmpty() && indentationDataStack.size() > 1) {
 			indentationDataStack.removeLast();
+			indentationData = indentationDataStack.getLast();
 		}
 	}
 
-	public void pushTemplateIndentation(String indentation) {
+	public void pushTemplateIndentation(CharSequence indentation) {
 		if (indentationData.isEmpty()) {
 			indentationData.add(new TemplateIndentationData(indentation));
 		} else {
-			IndentationData head = indentationData.getLast();
-			if (indentation.startsWith(head.value)) {
-				String trimmedIndentation = indentation.substring(head.value.length());
+			String currentIndentation = getCompleteCurrentIndentation();
+			if (indentation.toString().startsWith(currentIndentation)) {
+				String trimmedIndentation = indentation.toString().substring(currentIndentation.length());
 				indentationData.add(new TemplateIndentationData(trimmedIndentation));
 			} else {
 				LinkedList<IndentationData> newIndentationData = Lists.newLinkedList();
 				newIndentationData.add(new TemplateIndentationData(indentation));
 				indentationDataStack.add(newIndentationData);
+				indentationData = newIndentationData;
 			}
 		}
 	}
 	
-	public void pushSemanticIndentation(String indentation) {
+	public void pushSemanticIndentation(CharSequence indentation) {
 		if (indentationData.isEmpty()) {
 			indentationData.add(new SemanticIndentationData(indentation));
 		} else {
-			IndentationData head = indentationData.getLast();
-			if (indentation.startsWith(head.value)) {
-				String trimmedIndentation = indentation.substring(head.value.length());
+			String currentIndentation = getCompleteCurrentIndentation();
+			if (indentation.toString().startsWith(currentIndentation)) {
+				String trimmedIndentation = indentation.toString().substring(currentIndentation.length());
 				indentationData.add(new SemanticIndentationData(trimmedIndentation));
 			} else {
 				LinkedList<IndentationData> newIndentationData = Lists.newLinkedList();
 				newIndentationData.add(new SemanticIndentationData(indentation));
 				indentationDataStack.add(newIndentationData);
+				indentationData = newIndentationData;
 			}
 		}
 	}
 	
-	public String getTotalSemanticIndentation() {
+	protected String getCompleteCurrentIndentation() {
+		StringBuilder result = new StringBuilder();
+		for(IndentationData data: indentationData) {
+			result.append(data.value);
+		}
+		return result.toString();
+	}
+	
+	public CharSequence getTotalSemanticIndentation() {
 		StringBuilder result = new StringBuilder();
 		for(IndentationData data: indentationData) {
 			if (data instanceof SemanticIndentationData)

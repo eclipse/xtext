@@ -46,32 +46,32 @@ public class InitialTemplateIndentationComputer extends Xtend2Switch<String> {
 	@Override
 	public String caseRichStringLiteral(RichStringLiteral object) {
 		String value = object.getValue();
-		String[] split = value.split("\\r?\\n");
-		// single line break
-		if (split.length == 0) {
+		List<TextLine> lines = TextLines.splitString(value);
+		// no line breaks or immediately closed string literal => no initial indentation
+		if (lines.size() <= 1) {
 			return null;
 		}
-		// no line breaks == no initial indentation
-		if (split.length == 1) {
-			return null;
-		}
-		String firstLine = split[0];
+		TextLine firstLine = lines.get(0);
 		// first line has content == no initial indentation
-		if (firstLine != Strings.getLeadingWhiteSpace(firstLine)) { 
+		if (!firstLine.containsOnlyWhitespace()) { 
 			return null;
 		}
 		String result = null;
-		for (int i = 1; i < split.length; i++) {
-			String leadingWS = Strings.getLeadingWhiteSpace(split[i]);
-			if (leadingWS != split[i]) {
-				if (Strings.isEmpty(leadingWS))
-					return leadingWS;
-				result = getBetterString(result, leadingWS);
+		for (int i = 1; i < lines.size(); i++) {
+			TextLine line = lines.get(i);
+			CharSequence leadingWS = line.getLeadingWhiteSpace();
+			// line is not empty
+			if (leadingWS.length() != line.length()) {
+				if (leadingWS.length() == 0)
+					return "";
+				result = getBetterString(result, leadingWS.toString());
 			} else {
+				// some tools tend to right trim text files by default (git)
+				// that's why we ignore empty lines
 				RichString completeString = (RichString) object.eContainer();
 				List<XExpression> siblings = completeString.getElements();
 				if (siblings.get(siblings.size() - 1) != object) {
-					result = getBetterString(result, leadingWS);	
+					result = getBetterString(result, leadingWS.toString());	
 				}
 			}
 		}

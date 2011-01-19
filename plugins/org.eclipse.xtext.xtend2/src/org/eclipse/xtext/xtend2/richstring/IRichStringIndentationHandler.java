@@ -12,14 +12,14 @@ package org.eclipse.xtext.xtend2.richstring;
  */
 public interface IRichStringIndentationHandler {
 
-	void pushTemplateIndentation(String completeIndentation);
+	void pushTemplateIndentation(CharSequence completeIndentation);
 	
-	void pushSemanticIndentation(String completeIndentation);
+	void pushSemanticIndentation(CharSequence completeIndentation);
 	
 	void popIndentation();
 	
 	void accept(IRichStringPartAcceptor acceptor);
 	
-	String getTotalSemanticIndentation();
+	CharSequence getTotalSemanticIndentation();
 	
 }

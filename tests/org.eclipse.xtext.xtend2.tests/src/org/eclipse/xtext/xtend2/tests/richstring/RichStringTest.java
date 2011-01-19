@@ -12,7 +12,9 @@ import java.util.Stack;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XIntLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xtend2.richstring.DefaultIndentationHandler;
 import org.eclipse.xtext.xtend2.richstring.IRichStringPartAcceptor;
 import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
@@ -26,15 +28,20 @@ public class RichStringTest extends AbstractRichStringTest {
 	public static class StringBuilderBasedAcceptor implements IRichStringPartAcceptor {
 
 		private StringBuilder builder;
+		private StringBuilder currentLine;
+		private boolean controlStructureSeen;
 		private Stack<Boolean> printNext;
 		private Stack<Boolean> printElse;
 		private Stack<Boolean> ignoreStack;
+		private Stack<Integer> forLoopStack;
 
 		public StringBuilderBasedAcceptor() {
 			builder = new StringBuilder();
+			currentLine = new StringBuilder();
 			printNext = new Stack<Boolean>();
 			printElse = new Stack<Boolean>();
 			ignoreStack = new Stack<Boolean>();
+			forLoopStack = new Stack<Integer>();
 		}
 		
 		public boolean internalIgnore() {
@@ -52,26 +59,34 @@ public class RichStringTest extends AbstractRichStringTest {
 			return ignoreStack.peek().booleanValue();
 		}
 		
-		public void acceptSemanticText(String text) {
+		public void acceptSemanticText(CharSequence text) {
 			if (!ignore())
-				builder.append(text);
+				currentLine.append(text);
 		}
 
-		public void acceptTemplateText(String text) {
+		public void acceptTemplateText(CharSequence text) {
 		}
 
 		public void acceptSemanticLineBreak() {
-			if (!ignore())
-				builder.append('\n');
+			if (!ignore()) {
+				String newLine = currentLine.append('\n').toString();
+				if (!controlStructureSeen || newLine.trim().length() != 0) {
+					builder.append(newLine);	
+				}
+				currentLine = new StringBuilder();
+			}
+			controlStructureSeen = false;
 		}
 
 		public void acceptTemplateLineBreak() {
+			controlStructureSeen = false;
 		}
 
 		public void acceptIfCondition(XExpression condition) {
 			if (ignore()) {
 				ignoreStack.push(Boolean.TRUE);
 			} else {
+				controlStructureSeen = true;
 				printElse.push(Boolean.TRUE);
 				XBooleanLiteral literal = (XBooleanLiteral) condition;
 				boolean conditionResult = literal.isIsTrue();
@@ -93,6 +108,7 @@ public class RichStringTest extends AbstractRichStringTest {
 				}
 				printNext.pop();
 				printNext.push(conditionResult);
+				controlStructureSeen = true;
 			}
 		}
 
@@ -102,6 +118,7 @@ public class RichStringTest extends AbstractRichStringTest {
 					printNext.pop();
 					printNext.push(Boolean.TRUE);
 				}
+				controlStructureSeen = true;
 			}
 		}
 
@@ -110,26 +127,57 @@ public class RichStringTest extends AbstractRichStringTest {
 				ignoreStack.pop();
 			} else {
 				printNext.pop();
-				printElse.pop();				
+				printElse.pop();
+				controlStructureSeen = true;
 			}
 		}
 
 		public void acceptForLoop(JvmFormalParameter parameter, XExpression expression) {
+			if (!ignore()) {
+				controlStructureSeen = true;
+				if (expression.eClass() != XbasePackage.Literals.XNULL_LITERAL) {
+					forLoopStack.push(((XIntLiteral)expression).getValue());
+				} else
+					forLoopStack.push(0);
+			}
 		}
 
 		public void acceptEndFor() {
+			if (!ignore()) {
+				controlStructureSeen = true;
+				forLoopStack.pop();
+			}
+		}
+		
+		public boolean forLoopHasNext() {
+			if (!ignore()) {
+				int remaining = forLoopStack.peek();
+				if (remaining > 0) {
+					forLoopStack.set(forLoopStack.size() - 1, remaining - 1);
+					return true;
+				}
+			}
+			return false;
 		}
 
-		public void acceptExpression(XExpression expression, String indentation) {
+		public void acceptExpression(XExpression expression, CharSequence indentation) {
 			XStringLiteral literal = (XStringLiteral) expression;
 			String value = literal.getValue();
 			value = value.replaceAll("\\n", "\n" + indentation);
-			builder.append(value);
+			currentLine.append(value);
+			controlStructureSeen = true;
 		}
 		
 		@Override
 		public String toString() {
-			return builder.toString();
+			StringBuilder result = new StringBuilder(builder.toString());
+			if (currentLine.length() != 0) {
+				String newLine = currentLine.toString();
+				if (!controlStructureSeen || newLine.trim().length() != 0) {
+					result.append(newLine);	
+				}
+			}
+			return result.toString();
 		}
 	}
 	
@@ -302,6 +350,72 @@ public class RichStringTest extends AbstractRichStringTest {
 		assertOutput(
 				"foobar\n", 
 				"'''\n" +
+				"	«IF true»\n" +
+				"		«IF true»\n" +
+				"				foobar\n" +
+				"		«ENDIF»\n" +
+				"	«ENDIF»\n" +
+				"'''");
+	}
+	
+	public void testNestedIf_02() throws Exception {
+		assertOutput(
+				"foobar\n", 
+				"'''\n" +
+				"	«IF true»\n" +
+				"		«IF true»foobar«ENDIF»\n" +
+				"	«ENDIF»\n" +
+				"'''");
+	}
+	
+	public void testNestedIf_03() throws Exception {
+		assertOutput(
+				"", 
+				"'''\n" +
+				"	«IF true»\n" +
+				"		«IF false»foobar«ENDIF»\n" +
+				"	«ENDIF»\n" +
+				"'''");
+	}
+	
+	public void testNestedIf_04() throws Exception {
+		assertOutput(
+				"", 
+				"'''\n" +
+				"	«IF true»\n" +
+				"		«IF false»\n" +
+				"				foobar\n" +
+				"		«ENDIF»\n" +
+				"	«ENDIF»\n" +
+				"'''");
+	}
+	
+	public void testNestedIf_05() throws Exception {
+		assertOutput(
+				"", 
+				"'''\n" +
+				"	«IF false»\n" +
+				"		«IF true»foobar«ENDIF»\n" +
+				"	«ENDIF»\n" +
+				"'''");
+	}
+	
+	public void testNestedIf_06() throws Exception {
+		assertOutput(
+				"", 
+				"'''\n" +
+				"	«IF false»\n" +
+				"		«IF true»\n" +
+				"				foobar\n" +
+				"		«ENDIF»\n" +
+				"	«ENDIF»\n" +
+				"'''");
+	}
+	
+	public void testInconsistentWhitespace_01() throws Exception {
+		assertOutput(
+				"foobar\n", 
+				"'''\n" +
 				"  «IF true»\n" +
 				"		«IF true»\n" +
 				"				foobar\n" +
@@ -310,13 +424,246 @@ public class RichStringTest extends AbstractRichStringTest {
 				"'''");
 	}
 	
-	public void testNestedIf_02() throws Exception {
+	public void testTrailingEmptyLine_01() throws Exception {
 		assertOutput(
-				"foobar", 
+				"\n", 
 				"'''\n" +
-				"  «IF true»\n" +
-				"		«IF true»foobar«ENDIF»\n" +
-				"  «ENDIF»\n" +
+				"		«IF false»\n" +
+				"				foobar\n" +
+				"		«ENDIF»\n" +
+				"\n" +
 				"'''");
 	}
+	
+	public void testTrailingEmptyLine_02() throws Exception {
+		assertOutput(
+				"foobar\n"+
+				"\n", 
+				"'''\n" +
+				"		«IF true»\n" +
+				"				foobar\n" +
+				"		«ENDIF»\n" +
+				"\n" +
+				"'''");
+	}
+	
+	public void testTrailingEmptyLine_03() throws Exception {
+		assertOutput(
+				"foobar\n"+
+				"\n", 
+				"'''\n" +
+				"		«IF true»\n" +
+				"				foobar\n" +
+				"		«ENDIF»\n" +
+				"		\n" +
+				"'''");
+	}
+	
+	public void testTrailingEmptyLine_04() throws Exception {
+		assertOutput(
+				"foobar\n"+
+				"\n", 
+				"'''\n" +
+				"		«IF true»\n" +
+				"				foobar\n" +
+				"		«ENDIF»\n" +
+				"		\n" +
+				"'''");
+	}
+	
+	public void testTrailingEmptyLine_05() throws Exception {
+		assertOutput(
+				"foobar\n"+
+				"  \n", 
+				"'''\n" +
+				"		«IF true»\n" +
+				"				foobar\n" +
+				"		«ENDIF»\n" +
+				"		  \n" +
+				"'''");
+	}
+	
+	public void testTrailingEmptyLine_06() throws Exception {
+		assertOutput(
+				"foobar\n"+
+				"  \n", 
+				"'''\n" +
+				"		foobar\n" +
+				"		  \n" +
+				"'''");
+	}
+	
+	public void testTrailingEmptyLine_07() throws Exception {
+		assertOutput(
+				"foobar\n"+
+				"  \n", 
+				"'''\n" +
+				"		«IF true»foobar«ENDIF»\n" +
+				"		  \n" +
+				"'''");
+	}
+	
+	public void testForLoop_01() throws Exception {
+		assertOutput(
+				"",
+				"'''«FOR a:null»foobar«ENDFOR»'''");
+	}
+	
+	public void testForLoop_02() throws Exception {
+		assertOutput(
+				"",
+				"'''\n" +
+				"  «FOR a:null»\n" +
+				"    foobar\n" +
+				"  «ENDFOR»\n" +
+				"'''");
+	}
+	
+	public void testForLoop_03() throws Exception {
+		assertOutput(
+				"",
+				"'''«FOR a:1»«FOR a:null»foobar«ENDFOR»«ENDFOR»'''");
+	}
+	
+	public void testForLoop_04() throws Exception {
+		assertOutput(
+				"",
+				"'''\n" +
+				"  «FOR a:1»\n" +
+				"    «FOR a:null»\n" +
+				"      foobar\n" +
+				"    «ENDFOR»\n" +
+				"  «ENDFOR»\n" +
+				"'''");
+	}
+	
+	public void testForLoop_05() throws Exception {
+		assertOutput(
+				"foobar",
+				"'''«FOR a:1»foobar«ENDFOR»'''");
+	}
+	
+	public void testForLoop_06() throws Exception {
+		assertOutput(
+				"foobar\n",
+				"'''\n" +
+				"  «FOR a:1»\n" +
+				"    foobar\n" +
+				"  «ENDFOR»\n" +
+				"'''");
+	}
+	
+	public void testForLoop_07() throws Exception {
+		assertOutput(
+				"  foobar",
+				"'''  «FOR a:1»«FOR a:1»foobar«ENDFOR»«ENDFOR»'''");
+	}
+	
+	public void testForLoop_08() throws Exception {
+		assertOutput(
+				"foobar\n",
+				"'''\n" +
+				"  «FOR a:1»\n" +
+				"    «FOR a:1»\n" +
+				"      foobar\n" +
+				"    «ENDFOR»\n" +
+				"  «ENDFOR»\n" +
+				"'''");
+	}
+	
+	public void testForLoop_10() throws Exception {
+		assertOutput(
+				"foobar\n",
+				"'''\n" +
+				"  «FOR a:1»\n" +
+				"    «FOR a:1»foobar«ENDFOR»\n" +
+				"  «ENDFOR»\n" +
+				"'''");
+	}
+	
+	public void testForLoop_11() throws Exception {
+		assertOutput(
+				"foobarfoobar\n",
+				"'''\n" +
+				"  «FOR a:1»\n" +
+				"    «FOR a:2»foobar«ENDFOR»\n" +
+				"  «ENDFOR»\n" +
+				"'''");
+	}
+	
+	public void testForLoop_12() throws Exception {
+		assertOutput(
+				"foobar\n" +
+				"foobar\n",
+				"'''\n" +
+				"  «FOR a:2»\n" +
+				"    «FOR a:1»foobar«ENDFOR»\n" +
+				"  «ENDFOR»\n" +
+				"'''");
+	}
+	
+	public void testForLoop_13() throws Exception {
+		assertOutput(
+				"foobar\n" +
+				"foobar\n" +
+				"foobar\n" +
+				"foobar\n",
+				"'''\n" +
+				"  «FOR a:2»\n" +
+				"    «FOR a:2»\n" +
+				"      foobar\n" +
+				"    «ENDFOR»\n" +
+				"  «ENDFOR»\n" +
+				"'''");
+	}
+	
+	public void testForLoop_14() throws Exception {
+		assertOutput(
+				"foobar\n" +
+				"foobar\n" +
+				"foobar\n" +
+				"foobar\n",
+				"'''\n" +
+				"  «FOR a:1»\n" +
+				"    «FOR a:2»\n" +
+				"      «'foobar\nfoobar'»\n" +
+				"    «ENDFOR»\n" +
+				"  «ENDFOR»\n" +
+				"'''");
+	}
+	
+	public void testForLoop_15() throws Exception {
+		assertOutput(
+				"  foobar\n" +
+				"foobar\n" +
+				"  foobar\n" +
+				"foobar\n",
+				"'''\n" +
+				"  «FOR a:2»\n" +
+				"    «FOR a:1»\n" +
+				"      «'  foobar\nfoobar'»\n" +
+				"    «ENDFOR»\n" +
+				"  «ENDFOR»\n" +
+				"'''");
+	}
+	
+	public void testForLoop_16() throws Exception {
+		assertOutput(
+				"foobar\n" +
+				"  foobar\n" +
+				"foobar\n" +
+				"  foobar\n" +
+				"foobar\n" +
+				"  foobar\n" +
+				"foobar\n" +
+				"  foobar\n",
+				"'''\n" +
+				"  «FOR a:2»\n" +
+				"    «FOR a:2»\n" +
+				"      «'foobar\n  foobar'»\n" +
+				"    «ENDFOR»\n" +
+				"  «ENDFOR»\n" +
+				"'''");
+	}
+	
 }

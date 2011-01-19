@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtend2.richstring;
 
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -16,18 +17,30 @@ import org.eclipse.xtext.xbase.XExpression;
 public interface IRichStringPartAcceptor {
 
 	/**
-	 * @param text the semantic text. May not be <code>null</code>
+	 * @param text the semantic text. May not be <code>null</code>.
+	 * @param relativeOffset the offset relative to the beginning of the origin's value.
+	 * @param origin the instance holding the complete text value.
 	 */
-	void acceptSemanticText(String text);
+	void acceptSemanticText(CharSequence text /*, int relativeOffset, RichStringLiteral origin */);
 	
 	/**
-	 * @param text the semantic text. May not be <code>null</code>
+	 * @param text the template text. May not be <code>null</code>.
+	 * @param relativeOffset the offset relative to the beginning of the origin's value.
+	 * @param origin the instance holding the complete text value.
 	 */
-	void acceptTemplateText(String text);
+	void acceptTemplateText(CharSequence text /*, int relativeOffset, RichStringLiteral origin */);
+
+	/**
+	 * @param relativeOffset the offset relative to the beginning of the origin's value.
+	 * @param origin the instance holding the complete text value.
+	 */
+	void acceptSemanticLineBreak(/*, int relativeOffset, RichStringLiteral origin */);
 	
-	void acceptSemanticLineBreak();
-	
-	void acceptTemplateLineBreak();
+	/**
+	 * @param relativeOffset the offset relative to the beginning of the origin's value.
+	 * @param origin the instance holding the complete text value.
+	 */
+	void acceptTemplateLineBreak(/*, int relativeOffset, RichStringLiteral origin */);
 	
 	void acceptIfCondition(XExpression condition);
 	
@@ -39,8 +52,10 @@ public interface IRichStringPartAcceptor {
 	
 	void acceptForLoop(JvmFormalParameter parameter, XExpression expression);
 	
+	boolean forLoopHasNext();
+	
 	void acceptEndFor();
 	
-	void acceptExpression(XExpression expression, String indentation);
+	void acceptExpression(XExpression expression, CharSequence indentation);
 	
 }
