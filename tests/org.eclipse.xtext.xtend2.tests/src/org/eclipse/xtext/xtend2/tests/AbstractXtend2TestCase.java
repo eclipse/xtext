@@ -48,7 +48,7 @@ public abstract class AbstractXtend2TestCase extends TestCase {
 	
 	protected XtendFile file(String string) throws Exception {
 		XtextResourceSet set = get(XtextResourceSet.class);
-		Resource resource = set.createResource(URI.createURI("Test.xtd"));
+		Resource resource = set.createResource(URI.createURI("Test.xtend"));
 		resource.load(new StringInputStream(string), null);
 		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
 		XtendFile file = (XtendFile) resource.getContents().get(0);
