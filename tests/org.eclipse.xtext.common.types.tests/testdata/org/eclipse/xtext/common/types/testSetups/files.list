@@ -1,3 +1,5 @@
+AnnotatedClassWithStringDefault.java.txt
+AnnotatedInterfaceWithStringDefault.java.txt
 EmptyAbstractClass.java.txt
 Fields.java.txt
 InitializerWithConstructor.java.txt
@@ -7,6 +9,7 @@ ParameterizedMethods.java.txt
 ParameterizedTypes.java.txt
 StaticNestedTypes.java.txt
 TestAnnotation.java.txt
+TestAnnotationWithStringDefault.java.txt
 TestEnum.java.txt
 TestScenario.java.txt
 TypeWithInnerAnnotation.java.txt

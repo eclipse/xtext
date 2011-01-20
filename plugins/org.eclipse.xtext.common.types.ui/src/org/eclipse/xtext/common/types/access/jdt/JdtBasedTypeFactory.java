@@ -139,7 +139,8 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		JvmAnnotationReference annotationReference = TypesFactory.eINSTANCE.createJvmAnnotationReference();
 		result.getAnnotations().add(annotationReference);
 		annotationReference.setAnnotation(createAnnotationProxy(annotation.getAnnotationType()));
-		for (IMemberValuePairBinding memberValuePair : annotation.getAllMemberValuePairs()) {
+		IMemberValuePairBinding[] allMemberValuePairs = annotation.getAllMemberValuePairs();
+		for (IMemberValuePairBinding memberValuePair : allMemberValuePairs) {
 			ITypeBinding originalTypeBinding = memberValuePair.getMethodBinding().getReturnType();
 			ITypeBinding typeBinding = originalTypeBinding;
 			if (typeBinding.isArray()) {
@@ -159,45 +160,47 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	public JvmAnnotationValue createArrayAnnotationValue(IMemberValuePairBinding memberValuePair,
 			JvmAnnotationValue result) {
 		Object value = memberValuePair.getValue();
-		boolean valueIsArray = value.getClass().isArray();
-		int length = valueIsArray ? Array.getLength(value) : 1;
-		if (length > 0) {
-			List<Object> valuesAsList = Lists.newArrayListWithExpectedSize(length);
-			if (result instanceof JvmTypeAnnotationValue) {
-				for (int i = 0; i < length; i++) {
-					ITypeBinding referencedType = (ITypeBinding) (valueIsArray ? Array.get(value, i) : value);
-					JvmTypeReference typeReference = createTypeReference(referencedType);
-					valuesAsList.add(typeReference);
-				}
-			} else if (result instanceof JvmAnnotationAnnotationValue) {
-				for (int i = 0; i < length; i++) {
-					IAnnotationBinding nestedAnnotation = (IAnnotationBinding) (valueIsArray ? Array.get(value, i)
-							: value);
-					createAnnotationReference((JvmAnnotationTarget) result, nestedAnnotation);
-				}
-			} else if (result instanceof JvmEnumAnnotationValue) {
-				for (int i = 0; i < length; i++) {
-					IVariableBinding variableBinding = (IVariableBinding) (valueIsArray ? Array.get(value, i) : value);
-					JvmEnumerationLiteral proxy = createEnumLiteralProxy(variableBinding);
-					valuesAsList.add(proxy);
-				}
-			} else {
-				for (int i = 0; i < length; i++) {
-					valuesAsList.add(valueIsArray ? Array.get(value, i) : value);
-				}
-			}
-			if (!(result instanceof JvmAnnotationAnnotationValue)) {
-				EStructuralFeature structuralFeature = result.eClass().getEStructuralFeature("values");
-				if (structuralFeature.getEType() instanceof EDataType) {
-					List<Object> convertedValues = Lists.newArrayListWithExpectedSize(valuesAsList.size());
-					for (Object wrongType : valuesAsList) {
-						Object convertedValue = EcoreFactory.eINSTANCE.createFromString((EDataType) structuralFeature
-								.getEType(), wrongType.toString());
-						convertedValues.add(convertedValue);
+		if (value != null) {
+			boolean valueIsArray = value.getClass().isArray();
+			int length = valueIsArray ? Array.getLength(value) : 1;
+			if (length > 0) {
+				List<Object> valuesAsList = Lists.newArrayListWithExpectedSize(length);
+				if (result instanceof JvmTypeAnnotationValue) {
+					for (int i = 0; i < length; i++) {
+						ITypeBinding referencedType = (ITypeBinding) (valueIsArray ? Array.get(value, i) : value);
+						JvmTypeReference typeReference = createTypeReference(referencedType);
+						valuesAsList.add(typeReference);
 					}
-					result.eSet(structuralFeature, convertedValues);
+				} else if (result instanceof JvmAnnotationAnnotationValue) {
+					for (int i = 0; i < length; i++) {
+						IAnnotationBinding nestedAnnotation = (IAnnotationBinding) (valueIsArray ? Array.get(value, i)
+								: value);
+						createAnnotationReference((JvmAnnotationTarget) result, nestedAnnotation);
+					}
+				} else if (result instanceof JvmEnumAnnotationValue) {
+					for (int i = 0; i < length; i++) {
+						IVariableBinding variableBinding = (IVariableBinding) (valueIsArray ? Array.get(value, i) : value);
+						JvmEnumerationLiteral proxy = createEnumLiteralProxy(variableBinding);
+						valuesAsList.add(proxy);
+					}
 				} else {
-					result.eSet(structuralFeature, valuesAsList);
+					for (int i = 0; i < length; i++) {
+						valuesAsList.add(valueIsArray ? Array.get(value, i) : value);
+					}
+				}
+				if (!(result instanceof JvmAnnotationAnnotationValue)) {
+					EStructuralFeature structuralFeature = result.eClass().getEStructuralFeature("values");
+					if (structuralFeature.getEType() instanceof EDataType) {
+						List<Object> convertedValues = Lists.newArrayListWithExpectedSize(valuesAsList.size());
+						for (Object wrongType : valuesAsList) {
+							Object convertedValue = EcoreFactory.eINSTANCE.createFromString((EDataType) structuralFeature
+									.getEType(), wrongType.toString());
+							convertedValues.add(convertedValue);
+						}
+						result.eSet(structuralFeature, convertedValues);
+					} else {
+						result.eSet(structuralFeature, valuesAsList);
+					}
 				}
 			}
 		}
@@ -231,7 +234,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			IVariableBinding variableBinding = (IVariableBinding) value;
 			JvmEnumerationLiteral proxy = createEnumLiteralProxy(variableBinding);
 			result.eSet(result.eClass().getEStructuralFeature("values"), Collections.singleton(proxy));
-		} else {
+		} else if (value != null){
 			EStructuralFeature structuralFeature = result.eClass().getEStructuralFeature("values");
 			Object convertedValue = EcoreFactory.eINSTANCE.createFromString((EDataType) structuralFeature.getEType(),
 					value.toString());
