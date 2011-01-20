@@ -6,7 +6,7 @@ import org.eclipse.xtext.ui.generator.*
 import org.eclipse.xtext.generator.parser.antlr.*
 
 var grammarURI = "classpath:/org/eclipse/xtext/xtend2/Xtend2.xtext"
-var file.extensions = "xtd"
+var file.extensions = "xtend"
 var projectName = "org.eclipse.xtext.xtend2"
 var runtimeProject = "../${projectName}"
 
