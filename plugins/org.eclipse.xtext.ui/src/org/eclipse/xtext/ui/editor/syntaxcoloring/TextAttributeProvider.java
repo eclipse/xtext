@@ -34,9 +34,9 @@ public class TextAttributeProvider implements ITextAttributeProvider, IHighlight
 	private final IHighlightingConfiguration highlightingConfig;
 
 	@Inject
-	public TextAttributeProvider(IHighlightingConfiguration lexical,
+	public TextAttributeProvider(IHighlightingConfiguration highlightingConfig,
 			IPreferenceStoreAccess preferenceStoreAccess, PreferenceStoreAccessor prefStoreAccessor) {
-		this.highlightingConfig = lexical;
+		this.highlightingConfig = highlightingConfig;
 		this.preferencesAccessor = prefStoreAccessor;
 		this.attributes = new HashMap<String, TextAttribute>();
 		preferenceStoreAccess.getPreferenceStore().addPropertyChangeListener(this);

@@ -45,12 +45,6 @@ public class SyntaxColoringPreferencePage extends AbstractPreferencePage impleme
 		configuration.configure(this);
 	}
 	
-	@Inject(optional=true)
-	@Deprecated
-	public void collectSemanticHighlightings(ISemanticHighlightingConfiguration configuration) {
-		configuration.configure(this);
-	}
-	
 	public void acceptDefaultHighlighting(String id, String name, TextStyle style) {
 		highlightings.add(Tuples.create(id, name, style));
 	}
