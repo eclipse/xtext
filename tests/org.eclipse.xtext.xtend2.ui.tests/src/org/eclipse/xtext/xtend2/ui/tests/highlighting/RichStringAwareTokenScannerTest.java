@@ -37,6 +37,51 @@ public class RichStringAwareTokenScannerTest extends AbstractXtend2UITestCase {
 		assertNotSame(Token.EOF, scanner.nextToken());
 		assertEquals(0, scanner.getTokenOffset());
 		assertEquals("'''foobar'''".length(), scanner.getTokenLength());
+		assertSame(Token.EOF, scanner.nextToken());
+	}
+	
+	public void testRichStringStart() {
+		initializeScanner("'''foobar«");
+		assertNotSame(Token.EOF, scanner.nextToken());
+		assertEquals(0, scanner.getTokenOffset());
+		assertEquals("'''foobar".length(), scanner.getTokenLength());
+		assertNotSame(Token.EOF, scanner.nextToken());
+		assertEquals("'''foobar".length(), scanner.getTokenOffset());
+		assertEquals(1, scanner.getTokenLength());
+		assertSame(Token.EOF, scanner.nextToken());
+	}
+	
+	public void testRichStringEnd() {
+		initializeScanner("»foobar'''");
+		assertNotSame(Token.EOF, scanner.nextToken());
+		assertEquals(0, scanner.getTokenOffset());
+		assertEquals(1, scanner.getTokenLength());
+		assertNotSame(Token.EOF, scanner.nextToken());
+		assertEquals(1, scanner.getTokenOffset());
+		assertEquals("foobar'''".length(), scanner.getTokenLength());
+		assertSame(Token.EOF, scanner.nextToken());
+	}
+	
+	public void testRichStringBetween_01() {
+		initializeScanner("»«");
+		assertNotSame(Token.EOF, scanner.nextToken());
+		assertEquals(0, scanner.getTokenOffset());
+		assertEquals(2, scanner.getTokenLength());
+		assertSame(Token.EOF, scanner.nextToken());
+	}
+	
+	public void testRichStringBetween_02() {
+		initializeScanner("»foobar«");
+		assertNotSame(Token.EOF, scanner.nextToken());
+		assertEquals(0, scanner.getTokenOffset());
+		assertEquals(1, scanner.getTokenLength());
+		assertNotSame(Token.EOF, scanner.nextToken());
+		assertEquals(1, scanner.getTokenOffset());
+		assertEquals("foobar".length(), scanner.getTokenLength());
+		assertNotSame(Token.EOF, scanner.nextToken());
+		assertEquals("»foobar".length(), scanner.getTokenOffset());
+		assertEquals(1, scanner.getTokenLength());
+		assertSame(Token.EOF, scanner.nextToken());
 	}
 	
 }
