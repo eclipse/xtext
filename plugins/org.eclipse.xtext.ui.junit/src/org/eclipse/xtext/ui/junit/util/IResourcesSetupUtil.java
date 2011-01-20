@@ -131,6 +131,27 @@ public class IResourcesSetupUtil {
 		}.run(monitor());
 	}
 
+	public static IFolder createFolder(String wsRelativePath) throws InvocationTargetException, InterruptedException {
+		return createFolder(new Path(wsRelativePath));
+	}
+	
+	public static IFolder createFolder(IPath wsRelativePath) throws InvocationTargetException, InterruptedException {
+		final IFolder folder = root().getFolder(wsRelativePath);
+		new WorkspaceModifyOperation() {
+
+			@Override
+			protected void execute(IProgressMonitor monitor)
+					throws CoreException, InvocationTargetException,
+					InterruptedException {
+				create(folder.getParent());
+				folder.delete(true, monitor());
+				folder.create(true, true, monitor());
+			}
+
+		}.run(monitor());
+		return folder;
+	}
+	
 	public static IFile createFile(String wsRelativePath, String s)
 			throws CoreException, InvocationTargetException,
 			InterruptedException {

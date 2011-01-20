@@ -18,7 +18,10 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.Pair;
 
@@ -31,9 +34,6 @@ public class CompilationFileProvider {
 	@Inject
 	private IStorage2UriMapper storage2UriMapper;
 	
-	@Inject
-	private JDTUtil jdtUtils;
-
 	public IFile getFile(URI fileURI, IProject project) {
 		Iterable<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(fileURI);
 		if(isEmpty(storages)) {
@@ -53,24 +53,60 @@ public class CompilationFileProvider {
 	
 	public IFile getTargetFile(URI sourceFileURI, IProject project, SubMonitor monitor) throws CoreException {
 		IFile sourceFile = getFile(sourceFileURI, project);
-		IPath sourceClasspathRelativePath = jdtUtils.getClasspathRelativePath(sourceFile, jdtUtils.getJavaProject(project));
+		IPath sourceClasspathRelativePath = getClasspathRelativePath(sourceFile, getJavaProject(project));
 		IPath targetClasspathRelativePath = sourceClasspathRelativePath.removeFileExtension().addFileExtension(TARGET_FILE_EXTENSION);
 		IFile targetFile = getTargetFolder(project, monitor).getFile(targetClasspathRelativePath);
 		return targetFile;
 	}
 	
 	public IFolder getTargetFolder(IProject project, SubMonitor monitor) throws CoreException {
-		IJavaProject javaProject = jdtUtils.getJavaProject(project);
+		IJavaProject javaProject = getJavaProject(project);
 		IFolder targetFolder = javaProject.getProject().getFolder(getTargetFolderName());
 		if(!targetFolder.exists()) {
 			targetFolder.create(true, true, monitor);
-			jdtUtils.makeSrcFolder(targetFolder, javaProject); 
+			makeSrcFolder(targetFolder, javaProject); 
 		}
 		return targetFolder;
 	}
 	
-	protected String getTargetFolderName() {
+	public String getTargetFolderName() {
 		return "xtend2-gen";
+	}
+
+	protected void makeSrcFolder(IFolder folder, IJavaProject javaProject) throws JavaModelException {
+		IClasspathEntry newSourceEntry = JavaCore.newSourceEntry(folder.getFullPath());
+		IClasspathEntry[] newClassPath;
+		IClasspathEntry[] classPath = javaProject.getRawClasspath();
+		for (IClasspathEntry classPathEntry : classPath) {
+			if (classPathEntry.equals(newSourceEntry)) {
+				return;
+			}
+		}
+		newClassPath = new IClasspathEntry[classPath.length + 1];
+		System.arraycopy(classPath, 0, newClassPath, 1, classPath.length);
+		newClassPath[0] = newSourceEntry;
+		javaProject.setRawClasspath(newClassPath, null);
+	}
+	
+	protected IPath getClasspathRelativePath(IFile file, IJavaProject javaProject) throws JavaModelException {
+		IPath filePath = file.getFullPath();
+		for(IClasspathEntry classpathEntry : javaProject.getResolvedClasspath(true)) {
+			if(IClasspathEntry.CPE_SOURCE == classpathEntry.getEntryKind()) {
+				IPath path = classpathEntry.getPath();
+				if(path.isPrefixOf(filePath)) {
+					return filePath.makeRelativeTo(path);
+				}
+			}
+		}
+		return null;
+	}
+	
+	protected IJavaProject getJavaProject(IProject project) throws CoreException {
+		if(!project.hasNature(JavaCore.NATURE_ID)) {
+			throw new IllegalStateException("Xtend2 files must reside in a Java project");
+		}
+		IJavaProject javaProject = JavaCore.create(project);
+		return javaProject;
 	}
 	
 }

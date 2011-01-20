@@ -84,8 +84,8 @@ public class Xtend2BuilderParticipant implements IXtextBuilderParticipant {
 					processDelta(delta, context, progress.newChild(1));
 				}
 				workspaceUtil.removeEmptySubFolders(targetFolder, progress.newChild(1));
+				context.needRebuild();
 			}
-			context.needRebuild();
 		} catch (CoreException ce) {
 			throw ce;
 		} catch (Exception e) {
@@ -100,7 +100,7 @@ public class Xtend2BuilderParticipant implements IXtextBuilderParticipant {
 		IFile sourceFile = null;
 		try {
 			sourceFile = compilationFileProvider.getFile(sourceURI, context.getBuiltProject());
-			if (hasErrors(sourceFile))
+			if (sourceFile.exists() && hasErrors(sourceFile))
 				return;
 			IFile targetFile = compilationFileProvider.getTargetFile(sourceURI, context.getBuiltProject(),
 					progress.newChild(10));
@@ -151,6 +151,8 @@ public class Xtend2BuilderParticipant implements IXtextBuilderParticipant {
 			targetFile.setContents(new StringInputStream(appendable.toString(), encoding), true, false, progress.newChild(40));
 		else
 			targetFile.create(new StringInputStream(appendable.toString(), encoding), true, progress.newChild(40));
+		if(!equal(targetFile.getCharset(), encoding))
+			targetFile.setCharset(encoding, progress);
 	}
 
 }
