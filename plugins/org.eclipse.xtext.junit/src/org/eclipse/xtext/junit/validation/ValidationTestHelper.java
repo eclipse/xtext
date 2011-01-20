@@ -66,7 +66,7 @@ public class ValidationTestHelper {
 			}
 		});
 		if (Iterables.isEmpty(matchingErrors))
-			fail("Expected error '" + code + "' but got " + matchingErrors);
+			fail("Expected error '" + code + "' but got " + validate);
 	}
 
 }
