@@ -31,6 +31,7 @@ import org.eclipse.xtext.util.SimpleCache;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
@@ -141,7 +142,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		}
 	}
 
-	private volatile HashSet<MethodWrapper> checkMethods = null;
+	private volatile Set<MethodWrapper> checkMethods = null;
 	
 	private ValidationMessageAcceptor messageAcceptor;
 
@@ -278,7 +279,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		if (checkMethods == null) {
 			synchronized(this) {
 				if (checkMethods == null) {
-					HashSet<MethodWrapper> checkMethods = new HashSet<MethodWrapper>();
+					Set<MethodWrapper> checkMethods = Sets.newLinkedHashSet();
 					checkMethods.addAll(collectMethods(getClass()));
 					this.checkMethods = checkMethods;
 				}
