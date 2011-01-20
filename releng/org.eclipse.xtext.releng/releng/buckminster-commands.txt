@@ -1,8 +1,8 @@
 setpref targetPlatformPath="${WORKSPACE}/buildroot/target.platform"
 
-import "${checkout.location}org.eclipse.xtext.releng/releng/xtext-platform.mspec"
+import -Declipse.download="file:/home/data/httpd/download.eclipse.org" "${checkout.location}/releng/org.eclipse.xtext.releng/releng/xtext-platform.mspec"
 
-resolve "${checkout.location}org.eclipse.xtext.releng/releng/xtext.cquery"
+resolve "${checkout.location}/releng/org.eclipse.xtext.releng/releng/xtext.cquery"
 
 build
 
@@ -16,5 +16,7 @@ junit --launch "org.eclipse.xtext.ui.tests/org.eclipse.xtext.ui.tests.launch" --
 junit --launch "org.eclipse.xtext.xtext.ui.tests/org.eclipse.xtext.xtext.ui.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.xtext.ui.tests.xml"
 junit --launch "org.eclipse.xtext.example.domainmodel.ui.tests/org.eclipse.xtext.example.domainmodel.ui.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.example.domainmodel.ui.tests.xml"
 
+perform -DtargetPlatformPath="${WORKSPACE}/buildroot/target.platform" --properties "${WORKSPACE}/buildroot/build.properties" "org.eclipse.xtext.releng#create.javadoc"
 perform --properties "${WORKSPACE}/buildroot/build.properties" "org.eclipse.xtext.build#build"
 perform --properties "${WORKSPACE}/buildroot/build.properties" "org.eclipse.xtext.releng#setup.promoter"
+
