@@ -27,7 +27,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
       <import feature="org.eclipse.xtext.sdk" version="2.0.0" match="equivalent"/>
       <import feature="org.eclipse.xtext.examples" version="2.0.0" match="equivalent"/>
       <import feature="org.eclipse.xtext.ui" version="2.0.0" match="equivalent"/>
-      <import feature="org.eclipse.xtext.xbase" version="1.0.1" match="equivalent"/>
+      <import feature="org.eclipse.xtext.xbase" version="2.0.0" match="equivalent"/>
    </requires>
 
    <plugin
@@ -126,5 +126,19 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+         
+   <plugin
+         id="org.eclipse.xtext.xtend2.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
+   <plugin
+         id="org.eclipse.xtext.xtend2.ui.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
 </feature>

@@ -10,6 +10,8 @@ junit --launch "org.eclipse.xtext.tests/org.eclipse.xtext.tests.launch" --flatXM
 junit --launch "org.eclipse.xtext.builder.tests/org.eclipse.xtext.builder.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.builder.tests.xml"
 junit --launch "org.eclipse.xtext.common.types.tests/org.eclipse.xtext.common.types.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.common.types.tests.xml"
 junit --launch "org.eclipse.xtext.xbase.tests/org.eclipse.xtext.xbase.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.xbase.tests.xml"
+junit --launch "org.eclipse.xtext.xtend2.tests/org.eclipse.xtext.xtend2.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.xtend2.tests.xml"
+junit --launch "org.eclipse.xtext.xtend2.ui.tests/org.eclipse.xtext.xtend2.ui.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.xtend2.ui.tests.xml"
 junit --launch "org.eclipse.xtext.ui.tests/org.eclipse.xtext.ui.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.ui.tests.xml"
 junit --launch "org.eclipse.xtext.xtext.ui.tests/org.eclipse.xtext.xtext.ui.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.xtext.ui.tests.xml"
 junit --launch "org.eclipse.xtext.example.domainmodel.ui.tests/org.eclipse.xtext.example.domainmodel.ui.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.example.domainmodel.ui.tests.xml"

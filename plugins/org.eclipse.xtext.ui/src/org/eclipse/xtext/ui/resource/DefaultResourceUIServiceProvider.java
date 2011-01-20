@@ -73,7 +73,7 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 		return encodingProvider;
 	}
 	
-	@Inject
+	@Inject(optional=true)
 	@LanguageSpecific
 	private IURIEditorOpener uriEditorOpener;
 
