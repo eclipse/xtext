@@ -18,7 +18,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
@@ -144,9 +144,9 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 				return createJvmAnnotationTargetAdapter();
 			}
 			@Override
-			public Adapter caseJvmIdentifyableElement(JvmIdentifyableElement object)
+			public Adapter caseJvmIdentifiableElement(JvmIdentifiableElement object)
 			{
-				return createJvmIdentifyableElementAdapter();
+				return createJvmIdentifiableElementAdapter();
 			}
 			@Override
 			public Adapter caseJvmMember(JvmMember object)
@@ -381,16 +381,16 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmIdentifyableElement <em>Jvm Identifyable Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmIdentifiableElement <em>Jvm Identifiable Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.JvmIdentifyableElement
+	 * @see org.eclipse.xtext.common.types.JvmIdentifiableElement
 	 * @generated
 	 */
-	public Adapter createJvmIdentifyableElementAdapter()
+	public Adapter createJvmIdentifiableElementAdapter()
 	{
 		return null;
 	}
