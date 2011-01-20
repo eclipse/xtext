@@ -38,7 +38,7 @@ import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
 import com.google.inject.Inject;
 
-@ComposedChecks(validators=FeatureCallValidator.class)
+@ComposedChecks(validators = FeatureCallValidator.class)
 public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	protected static final String ISSUE_CODE_PREFIX = XbaseJavaValidator.class.getCanonicalName() + ".";
@@ -76,9 +76,11 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	public void checkTypes(EObject obj) {
 		try {
 			JvmTypeReference expectedType = expectedTypeProvider.getExpectedType(obj);
-			if (expectedType == null)
+			if (expectedType == null || expectedType.getType() == null)
 				return;
 			JvmTypeReference actualType = typeProvider.getType(obj);
+			if (actualType == null || actualType.getType() == null)
+				return;
 			if (!conformanceComputer.isConformant(expectedType, actualType))
 				error("Incompatible types. Expected " + canonicalName(expectedType) + " but was "
 						+ canonicalName(actualType), obj, -1, INCOMPATIBLE_TYPES);
@@ -175,10 +177,10 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			error("Cannot instantiate abstract class", -1, ABSTRACT_CLASS_INSTANTIATION);
 		}
 	}
-	
+
 	//TODO switch expression not of type boolean
 
-		@Override
+	@Override
 	protected List<EPackage> getEPackages() {
 		return singletonList((EPackage) eINSTANCE);
 	}
