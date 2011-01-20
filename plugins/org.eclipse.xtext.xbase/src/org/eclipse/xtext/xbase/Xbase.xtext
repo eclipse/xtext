@@ -15,9 +15,9 @@ XExpression returns XExpression :
 	XAssignment;
 
 XAssignment returns XExpression :
-	{XAssignment} feature=[types::JvmIdentifyableElement|ID] OpSingleAssign value=XAssignment |	
+	{XAssignment} feature=[types::JvmIdentifiableElement|ID] OpSingleAssign value=XAssignment |	
 	XOrExpression (
-		=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpMultiAssign]) rightOperand=XAssignment)?;
+		=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment)?;
 
 OpSingleAssign:
 	'='
@@ -27,19 +27,19 @@ OpMultiAssign:
 	'+=';
 
 XOrExpression returns XExpression:
-	XAndExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpOr]) rightOperand=XAndExpression)*;
+	XAndExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpOr]) rightOperand=XAndExpression)*;
 
 OpOr:
 	'||';
 
 XAndExpression returns XExpression:
-	XEqualityExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpAnd]) rightOperand=XEqualityExpression)*;
+	XEqualityExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAnd]) rightOperand=XEqualityExpression)*;
 
 OpAnd:
 	'&&';
 
 XEqualityExpression returns XExpression:
-	XRelationalExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpEquality])
+	XRelationalExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpEquality])
 	rightOperand=XRelationalExpression)*;
 
 OpEquality:
@@ -48,33 +48,33 @@ OpEquality:
 XRelationalExpression returns XExpression:
 	XOtherOperatorExpression
 	(=>({XInstanceOfExpression.expression=current} 'instanceof') type=[types::JvmType|QualifiedName] |
-	 =>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpCompare]) rightOperand=XOtherOperatorExpression)*;
+	 =>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpCompare]) rightOperand=XOtherOperatorExpression)*;
 
 OpCompare:
 	'>=' | '<=' | '>' | '<';
 
 XOtherOperatorExpression returns XExpression:
-	XAdditiveExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpOther])
+	XAdditiveExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpOther])
 	rightOperand=XAdditiveExpression)*;
 
 OpOther:
 	'->' | '..';
 
 XAdditiveExpression returns XExpression:
-	XMultiplicativeExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpAdd])
+	XMultiplicativeExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAdd])
 	rightOperand=XMultiplicativeExpression)*;
 
 OpAdd:
 	'+' | '-';
 
 XMultiplicativeExpression returns XExpression:
-	XUnaryOperation (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpMulti]) rightOperand=XUnaryOperation)*;
+	XUnaryOperation (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMulti]) rightOperand=XUnaryOperation)*;
 
 OpMulti:
 	'*' | '**' | '/' | '%';
 
 XUnaryOperation returns XExpression:
-	{XUnaryOperation} feature=[types::JvmIdentifyableElement|OpUnary] operand=XCastedExpression
+	{XUnaryOperation} feature=[types::JvmIdentifiableElement|OpUnary] operand=XCastedExpression
 	| XCastedExpression;
 
 OpUnary:
@@ -86,10 +86,10 @@ XCastedExpression returns XExpression:
 
 XMemberFeatureCall returns XExpression:
 	XPrimaryExpression
-	(=>({XAssignment.assignable=current} '.' feature=[types::JvmIdentifyableElement] OpSingleAssign) value=XAssignment
+	(=>({XAssignment.assignable=current} '.' feature=[types::JvmIdentifiableElement] OpSingleAssign) value=XAssignment
 	|=>({XMemberFeatureCall.memberCallTarget=current} ("."|nullSafe?="?."|spreading?="*.")) 
 		('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?  
-		feature=[types::JvmIdentifyableElement] (
+		feature=[types::JvmIdentifiableElement] (
 			=>explicitOperationCall?='(' 
 				(
 				    =>memberCallArguments+=XShortClosure
@@ -182,7 +182,7 @@ JvmFormalParameter returns types::JvmFormalParameter:
 XFeatureCall returns XExpression:
 	{XFeatureCall}
 	('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')? 
-	feature=[types::JvmIdentifyableElement] 
+	feature=[types::JvmIdentifiableElement] 
 	(=>explicitOperationCall?='(' 
 		(
 		    =>featureCallArguments+=XShortClosure

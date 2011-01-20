@@ -93,8 +93,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmVoidAdapter()
 	{
-		if (jvmVoidItemProvider == null)
-		{
+		if (jvmVoidItemProvider == null) {
 			jvmVoidItemProvider = new JvmVoidItemProvider(this);
 		}
 
@@ -118,8 +117,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmPrimitiveTypeAdapter()
 	{
-		if (jvmPrimitiveTypeItemProvider == null)
-		{
+		if (jvmPrimitiveTypeItemProvider == null) {
 			jvmPrimitiveTypeItemProvider = new JvmPrimitiveTypeItemProvider(this);
 		}
 
@@ -143,8 +141,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmArrayTypeAdapter()
 	{
-		if (jvmArrayTypeItemProvider == null)
-		{
+		if (jvmArrayTypeItemProvider == null) {
 			jvmArrayTypeItemProvider = new JvmArrayTypeItemProvider(this);
 		}
 
@@ -168,8 +165,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmTypeParameterAdapter()
 	{
-		if (jvmTypeParameterItemProvider == null)
-		{
+		if (jvmTypeParameterItemProvider == null) {
 			jvmTypeParameterItemProvider = new JvmTypeParameterItemProvider(this);
 		}
 
@@ -193,8 +189,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmUpperBoundAdapter()
 	{
-		if (jvmUpperBoundItemProvider == null)
-		{
+		if (jvmUpperBoundItemProvider == null) {
 			jvmUpperBoundItemProvider = new JvmUpperBoundItemProvider(this);
 		}
 
@@ -218,8 +213,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmLowerBoundAdapter()
 	{
-		if (jvmLowerBoundItemProvider == null)
-		{
+		if (jvmLowerBoundItemProvider == null) {
 			jvmLowerBoundItemProvider = new JvmLowerBoundItemProvider(this);
 		}
 
@@ -243,8 +237,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmAnnotationTypeAdapter()
 	{
-		if (jvmAnnotationTypeItemProvider == null)
-		{
+		if (jvmAnnotationTypeItemProvider == null) {
 			jvmAnnotationTypeItemProvider = new JvmAnnotationTypeItemProvider(this);
 		}
 
@@ -268,8 +261,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmEnumerationTypeAdapter()
 	{
-		if (jvmEnumerationTypeItemProvider == null)
-		{
+		if (jvmEnumerationTypeItemProvider == null) {
 			jvmEnumerationTypeItemProvider = new JvmEnumerationTypeItemProvider(this);
 		}
 
@@ -293,8 +285,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmEnumerationLiteralAdapter()
 	{
-		if (jvmEnumerationLiteralItemProvider == null)
-		{
+		if (jvmEnumerationLiteralItemProvider == null) {
 			jvmEnumerationLiteralItemProvider = new JvmEnumerationLiteralItemProvider(this);
 		}
 
@@ -318,8 +309,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmGenericTypeAdapter()
 	{
-		if (jvmGenericTypeItemProvider == null)
-		{
+		if (jvmGenericTypeItemProvider == null) {
 			jvmGenericTypeItemProvider = new JvmGenericTypeItemProvider(this);
 		}
 
@@ -343,8 +333,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmParameterizedTypeReferenceAdapter()
 	{
-		if (jvmParameterizedTypeReferenceItemProvider == null)
-		{
+		if (jvmParameterizedTypeReferenceItemProvider == null) {
 			jvmParameterizedTypeReferenceItemProvider = new JvmParameterizedTypeReferenceItemProvider(this);
 		}
 
@@ -368,8 +357,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmGenericArrayTypeReferenceAdapter()
 	{
-		if (jvmGenericArrayTypeReferenceItemProvider == null)
-		{
+		if (jvmGenericArrayTypeReferenceItemProvider == null) {
 			jvmGenericArrayTypeReferenceItemProvider = new JvmGenericArrayTypeReferenceItemProvider(this);
 		}
 
@@ -393,8 +381,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmWildcardTypeReferenceAdapter()
 	{
-		if (jvmWildcardTypeReferenceItemProvider == null)
-		{
+		if (jvmWildcardTypeReferenceItemProvider == null) {
 			jvmWildcardTypeReferenceItemProvider = new JvmWildcardTypeReferenceItemProvider(this);
 		}
 
@@ -418,8 +405,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmFieldAdapter()
 	{
-		if (jvmFieldItemProvider == null)
-		{
+		if (jvmFieldItemProvider == null) {
 			jvmFieldItemProvider = new JvmFieldItemProvider(this);
 		}
 
@@ -443,8 +429,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmConstructorAdapter()
 	{
-		if (jvmConstructorItemProvider == null)
-		{
+		if (jvmConstructorItemProvider == null) {
 			jvmConstructorItemProvider = new JvmConstructorItemProvider(this);
 		}
 
@@ -468,8 +453,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmOperationAdapter()
 	{
-		if (jvmOperationItemProvider == null)
-		{
+		if (jvmOperationItemProvider == null) {
 			jvmOperationItemProvider = new JvmOperationItemProvider(this);
 		}
 
@@ -493,8 +477,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmFormalParameterAdapter()
 	{
-		if (jvmFormalParameterItemProvider == null)
-		{
+		if (jvmFormalParameterItemProvider == null) {
 			jvmFormalParameterItemProvider = new JvmFormalParameterItemProvider(this);
 		}
 
@@ -518,8 +501,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmAnnotationReferenceAdapter()
 	{
-		if (jvmAnnotationReferenceItemProvider == null)
-		{
+		if (jvmAnnotationReferenceItemProvider == null) {
 			jvmAnnotationReferenceItemProvider = new JvmAnnotationReferenceItemProvider(this);
 		}
 
@@ -543,8 +525,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmIntAnnotationValueAdapter()
 	{
-		if (jvmIntAnnotationValueItemProvider == null)
-		{
+		if (jvmIntAnnotationValueItemProvider == null) {
 			jvmIntAnnotationValueItemProvider = new JvmIntAnnotationValueItemProvider(this);
 		}
 
@@ -568,8 +549,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmBooleanAnnotationValueAdapter()
 	{
-		if (jvmBooleanAnnotationValueItemProvider == null)
-		{
+		if (jvmBooleanAnnotationValueItemProvider == null) {
 			jvmBooleanAnnotationValueItemProvider = new JvmBooleanAnnotationValueItemProvider(this);
 		}
 
@@ -593,8 +573,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmByteAnnotationValueAdapter()
 	{
-		if (jvmByteAnnotationValueItemProvider == null)
-		{
+		if (jvmByteAnnotationValueItemProvider == null) {
 			jvmByteAnnotationValueItemProvider = new JvmByteAnnotationValueItemProvider(this);
 		}
 
@@ -618,8 +597,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmShortAnnotationValueAdapter()
 	{
-		if (jvmShortAnnotationValueItemProvider == null)
-		{
+		if (jvmShortAnnotationValueItemProvider == null) {
 			jvmShortAnnotationValueItemProvider = new JvmShortAnnotationValueItemProvider(this);
 		}
 
@@ -643,8 +621,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmLongAnnotationValueAdapter()
 	{
-		if (jvmLongAnnotationValueItemProvider == null)
-		{
+		if (jvmLongAnnotationValueItemProvider == null) {
 			jvmLongAnnotationValueItemProvider = new JvmLongAnnotationValueItemProvider(this);
 		}
 
@@ -668,8 +645,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmDoubleAnnotationValueAdapter()
 	{
-		if (jvmDoubleAnnotationValueItemProvider == null)
-		{
+		if (jvmDoubleAnnotationValueItemProvider == null) {
 			jvmDoubleAnnotationValueItemProvider = new JvmDoubleAnnotationValueItemProvider(this);
 		}
 
@@ -693,8 +669,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmFloatAnnotationValueAdapter()
 	{
-		if (jvmFloatAnnotationValueItemProvider == null)
-		{
+		if (jvmFloatAnnotationValueItemProvider == null) {
 			jvmFloatAnnotationValueItemProvider = new JvmFloatAnnotationValueItemProvider(this);
 		}
 
@@ -718,8 +693,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmCharAnnotationValueAdapter()
 	{
-		if (jvmCharAnnotationValueItemProvider == null)
-		{
+		if (jvmCharAnnotationValueItemProvider == null) {
 			jvmCharAnnotationValueItemProvider = new JvmCharAnnotationValueItemProvider(this);
 		}
 
@@ -743,8 +717,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmStringAnnotationValueAdapter()
 	{
-		if (jvmStringAnnotationValueItemProvider == null)
-		{
+		if (jvmStringAnnotationValueItemProvider == null) {
 			jvmStringAnnotationValueItemProvider = new JvmStringAnnotationValueItemProvider(this);
 		}
 
@@ -768,8 +741,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmTypeAnnotationValueAdapter()
 	{
-		if (jvmTypeAnnotationValueItemProvider == null)
-		{
+		if (jvmTypeAnnotationValueItemProvider == null) {
 			jvmTypeAnnotationValueItemProvider = new JvmTypeAnnotationValueItemProvider(this);
 		}
 
@@ -793,8 +765,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmAnnotationAnnotationValueAdapter()
 	{
-		if (jvmAnnotationAnnotationValueItemProvider == null)
-		{
+		if (jvmAnnotationAnnotationValueItemProvider == null) {
 			jvmAnnotationAnnotationValueItemProvider = new JvmAnnotationAnnotationValueItemProvider(this);
 		}
 
@@ -818,8 +789,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Adapter createJvmEnumAnnotationValueAdapter()
 	{
-		if (jvmEnumAnnotationValueItemProvider == null)
-		{
+		if (jvmEnumAnnotationValueItemProvider == null) {
 			jvmEnumAnnotationValueItemProvider = new JvmEnumAnnotationValueItemProvider(this);
 		}
 
@@ -879,11 +849,9 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	@Override
 	public Object adapt(Object object, Object type)
 	{
-		if (isFactoryForType(type))
-		{
+		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter)))
-			{
+			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
 				return adapter;
 			}
 		}
@@ -923,8 +891,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	{
 		changeNotifier.fireNotifyChanged(notification);
 
-		if (parentAdapterFactory != null)
-		{
+		if (parentAdapterFactory != null) {
 			parentAdapterFactory.fireNotifyChanged(notification);
 		}
 	}

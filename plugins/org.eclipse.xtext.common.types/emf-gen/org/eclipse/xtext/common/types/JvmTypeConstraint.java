@@ -23,7 +23,7 @@ package org.eclipse.xtext.common.types;
  * @model abstract="true"
  * @generated
  */
-public interface JvmTypeConstraint extends JvmIdentifyableElement
+public interface JvmTypeConstraint extends JvmIdentifiableElement
 {
 	/**
 	 * Returns the value of the '<em><b>Type Reference</b></em>' containment reference.

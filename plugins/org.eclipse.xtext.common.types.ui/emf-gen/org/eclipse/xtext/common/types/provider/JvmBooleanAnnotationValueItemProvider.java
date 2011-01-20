@@ -60,8 +60,7 @@ public class JvmBooleanAnnotationValueItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addValuesPropertyDescriptor(object);
@@ -128,8 +127,7 @@ public class JvmBooleanAnnotationValueItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(JvmBooleanAnnotationValue.class))
-		{
+		switch (notification.getFeatureID(JvmBooleanAnnotationValue.class)) {
 			case TypesPackage.JVM_BOOLEAN_ANNOTATION_VALUE__VALUES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

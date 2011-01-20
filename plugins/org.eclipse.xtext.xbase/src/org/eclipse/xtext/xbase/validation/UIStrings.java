@@ -11,7 +11,7 @@ import static com.google.common.collect.Iterables.*;
 
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.typing.ITypeProvider;
@@ -32,7 +32,7 @@ public class UIStrings {
 	@Inject
 	private ITypeProvider<JvmTypeReference> typeProvider;
 
-	public String parameters(JvmIdentifyableElement element) {
+	public String parameters(JvmIdentifiableElement element) {
 		if (element instanceof JvmExecutable) {
 			return "(" + parameterTypes(((JvmExecutable) element).getParameters()) + ")";
 		}
@@ -47,7 +47,7 @@ public class UIStrings {
 		return "(" + expressionTypes(constructorCall.getArguments()) + ")";
 	}
 
-	public String typeParameters(JvmIdentifyableElement element) {
+	public String typeParameters(JvmIdentifiableElement element) {
 		if (element instanceof JvmTypeParameterDeclarator) {
 			return "<" + toString(((JvmTypeParameterDeclarator) element).getTypeParameters()) + ">";
 		}
@@ -62,10 +62,10 @@ public class UIStrings {
 		return "<" + toString(constructorCall.getTypeArguments()) + ">";
 	}
 
-	protected String toString(Iterable<? extends JvmIdentifyableElement> elements) {
+	protected String toString(Iterable<? extends JvmIdentifiableElement> elements) {
 		StringBuilder buffer = new StringBuilder();
 		boolean needsSeparator = false;
-		for (JvmIdentifyableElement typeRef : elements) {
+		for (JvmIdentifiableElement typeRef : elements) {
 			if (needsSeparator)
 				buffer.append(", ");
 			needsSeparator = true;
@@ -75,7 +75,7 @@ public class UIStrings {
 	}
 
 	protected String expressionTypes(Iterable<XExpression> expressions) {
-		return toString(transform(expressions, new Function<XExpression, JvmIdentifyableElement>() {
+		return toString(transform(expressions, new Function<XExpression, JvmIdentifiableElement>() {
 			public JvmTypeReference apply(XExpression from) {
 				return typeProvider.getType(from);
 			}
@@ -83,7 +83,7 @@ public class UIStrings {
 	}
 
 	protected String parameterTypes(Iterable<JvmFormalParameter> parameters) {
-		return toString(transform(parameters, new Function<JvmFormalParameter, JvmIdentifyableElement>() {
+		return toString(transform(parameters, new Function<JvmFormalParameter, JvmIdentifiableElement>() {
 			public JvmTypeReference apply(JvmFormalParameter from) {
 				return from.getParameterType();
 			}

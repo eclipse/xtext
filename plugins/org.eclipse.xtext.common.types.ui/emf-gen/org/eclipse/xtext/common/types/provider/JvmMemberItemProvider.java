@@ -60,8 +60,7 @@ public class JvmMemberItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addVisibilityPropertyDescriptor(object);
@@ -143,8 +142,7 @@ public class JvmMemberItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(JvmMember.class))
-		{
+		switch (notification.getFeatureID(JvmMember.class)) {
 			case TypesPackage.JVM_MEMBER__VISIBILITY:
 			case TypesPackage.JVM_MEMBER__FULLY_QUALIFIED_NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

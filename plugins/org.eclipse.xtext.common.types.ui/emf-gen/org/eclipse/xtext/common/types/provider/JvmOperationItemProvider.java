@@ -63,8 +63,7 @@ public class JvmOperationItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addStaticPropertyDescriptor(object);
@@ -154,8 +153,7 @@ public class JvmOperationItemProvider
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.JVM_OPERATION__RETURN_TYPE);
 		}
@@ -215,8 +213,7 @@ public class JvmOperationItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(JvmOperation.class))
-		{
+		switch (notification.getFeatureID(JvmOperation.class)) {
 			case TypesPackage.JVM_OPERATION__STATIC:
 			case TypesPackage.JVM_OPERATION__FINAL:
 			case TypesPackage.JVM_OPERATION__ABSTRACT:
@@ -273,8 +270,7 @@ public class JvmOperationItemProvider
 			childFeature == TypesPackage.Literals.JVM_EXECUTABLE__EXCEPTIONS ||
 			childFeature == TypesPackage.Literals.JVM_OPERATION__RETURN_TYPE;
 
-		if (qualify)
-		{
+		if (qualify) {
 			return getString
 				("_UI_CreateChild_text2",
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });

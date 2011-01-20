@@ -60,8 +60,7 @@ public class JvmDoubleAnnotationValueItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addValuesPropertyDescriptor(object);
@@ -128,8 +127,7 @@ public class JvmDoubleAnnotationValueItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(JvmDoubleAnnotationValue.class))
-		{
+		switch (notification.getFeatureID(JvmDoubleAnnotationValue.class)) {
 			case TypesPackage.JVM_DOUBLE_ANNOTATION_VALUE__VALUES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

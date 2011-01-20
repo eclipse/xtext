@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xbase.tests.linking;
 
 import org.eclipse.xtext.common.types.JvmField;
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmVisibility;
@@ -95,7 +95,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 				"	val size = 23;" +
 				"	size;" +
 				"}", false);
-		final JvmIdentifyableElement feature = ((XFeatureCall)bop.getExpressions().get(2)).getFeature();
+		final JvmIdentifiableElement feature = ((XFeatureCall)bop.getExpressions().get(2)).getFeature();
 		assertTrue(feature.getClass().getName(), feature instanceof XVariableDeclaration);
 		
 		XConstructorCall xConstructorCall = (XConstructorCall)((XVariableDeclaration)bop.getExpressions().get(0)).getRight();

@@ -7,7 +7,7 @@ package org.eclipse.xtext.xbase;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
@@ -75,12 +75,12 @@ public interface XAbstractFeatureCall extends XExpression
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Feature</em>' reference.
-	 * @see #setFeature(JvmIdentifyableElement)
+	 * @see #setFeature(JvmIdentifiableElement)
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXAbstractFeatureCall_Feature()
 	 * @model
 	 * @generated
 	 */
-	JvmIdentifyableElement getFeature();
+	JvmIdentifiableElement getFeature();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getFeature <em>Feature</em>}' reference.
@@ -90,7 +90,7 @@ public interface XAbstractFeatureCall extends XExpression
 	 * @see #getFeature()
 	 * @generated
 	 */
-	void setFeature(JvmIdentifyableElement value);
+	void setFeature(JvmIdentifiableElement value);
 
 	/**
 	 * Returns the value of the '<em><b>Type Arguments</b></em>' containment reference list.
@@ -117,12 +117,12 @@ public interface XAbstractFeatureCall extends XExpression
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Implicit Receiver</em>' reference.
-	 * @see #setImplicitReceiver(JvmIdentifyableElement)
+	 * @see #setImplicitReceiver(JvmIdentifiableElement)
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXAbstractFeatureCall_ImplicitReceiver()
 	 * @model transient="true" derived="true"
 	 * @generated
 	 */
-	JvmIdentifyableElement getImplicitReceiver();
+	JvmIdentifiableElement getImplicitReceiver();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getImplicitReceiver <em>Implicit Receiver</em>}' reference.
@@ -132,7 +132,7 @@ public interface XAbstractFeatureCall extends XExpression
 	 * @see #getImplicitReceiver()
 	 * @generated
 	 */
-	void setImplicitReceiver(JvmIdentifyableElement value);
+	void setImplicitReceiver(JvmIdentifiableElement value);
 
 	/**
 	 * Returns the value of the '<em><b>Targets Member Syntax Call</b></em>' attribute.

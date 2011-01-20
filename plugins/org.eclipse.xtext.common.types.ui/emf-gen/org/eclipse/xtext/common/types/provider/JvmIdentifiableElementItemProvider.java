@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+ * $Id$
  */
 package org.eclipse.xtext.common.types.provider;
 
@@ -23,28 +24,26 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.xtext.common.types.JvmIdentifyableElement} object.
+ * This is the item provider adapter for a {@link org.eclipse.xtext.common.types.JvmIdentifiableElement} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmIdentifyableElementItemProvider
+public class JvmIdentifiableElementItemProvider
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
 		ITreeItemContentProvider,
 		IItemLabelProvider,
-		IItemPropertySource
-{
+		IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmIdentifyableElementItemProvider(AdapterFactory adapterFactory)
-	{
+	public JvmIdentifiableElementItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -55,10 +54,8 @@ public class JvmIdentifyableElementItemProvider
 	 * @generated
 	 */
 	@Override
-	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
-	{
-		if (itemPropertyDescriptors == null)
-		{
+	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 		}
@@ -72,9 +69,8 @@ public class JvmIdentifyableElementItemProvider
 	 * @generated
 	 */
 	@Override
-	public String getText(Object object)
-	{
-		return getString("_UI_JvmIdentifyableElement_type");
+	public String getText(Object object) {
+		return getString("_UI_JvmIdentifiableElement_type");
 	}
 
 	/**
@@ -85,8 +81,7 @@ public class JvmIdentifyableElementItemProvider
 	 * @generated
 	 */
 	@Override
-	public void notifyChanged(Notification notification)
-	{
+	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -99,8 +94,7 @@ public class JvmIdentifyableElementItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object)
-	{
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
@@ -111,8 +105,7 @@ public class JvmIdentifyableElementItemProvider
 	 * @generated
 	 */
 	@Override
-	public ResourceLocator getResourceLocator()
-	{
+	public ResourceLocator getResourceLocator() {
 		return TypesEditPlugin.INSTANCE;
 	}
 

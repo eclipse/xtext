@@ -34,7 +34,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *
  * @generated
  */
-public abstract class JvmTypeConstraintImpl extends JvmIdentifyableElementImplCustom implements JvmTypeConstraint
+public abstract class JvmTypeConstraintImpl extends JvmIdentifiableElementImplCustom implements JvmTypeConstraint
 {
 	/**
 	 * The cached value of the '{@link #getTypeReference() <em>Type Reference</em>}' containment reference.

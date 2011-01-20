@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * @model abstract="true"
  * @generated
  */
-public interface JvmConstraintOwner extends JvmIdentifyableElement
+public interface JvmConstraintOwner extends JvmIdentifiableElement
 {
 	/**
 	 * Returns the value of the '<em><b>Constraints</b></em>' containment reference list.

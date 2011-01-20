@@ -41,7 +41,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *
  * @generated
  */
-public class JvmFormalParameterImpl extends JvmIdentifyableElementImplCustom implements JvmFormalParameter
+public class JvmFormalParameterImpl extends JvmIdentifiableElementImplCustom implements JvmFormalParameter
 {
 	/**
 	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.

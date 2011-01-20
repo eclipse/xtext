@@ -7,7 +7,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.xtext.common.types.JvmField;
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.util.JavaReflectAccess;
 import org.eclipse.xtext.example.css.runtime.BackgroundGradient;
@@ -116,7 +116,7 @@ public class XcssInterpreter extends XbaseInterpreter  {
 	}
 	
 	public Object _evaluateColorConstant(ColorConstant colorConstant, IEvaluationContext context) {
-		JvmIdentifyableElement constant = colorConstant.getConstant();
+		JvmIdentifiableElement constant = colorConstant.getConstant();
 		if (constant instanceof JvmField) {
 			Field field = getJavaReflectAccess().getField((JvmField) constant);
 			if (field != null) {

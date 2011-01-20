@@ -9,15 +9,15 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Jvm Identifyable Element</b></em>'.
+ * A representation of the model object '<em><b>Jvm Identifiable Element</b></em>'.
  * <!-- end-user-doc -->
  *
  *
- * @see org.eclipse.xtext.common.types.TypesPackage#getJvmIdentifyableElement()
+ * @see org.eclipse.xtext.common.types.TypesPackage#getJvmIdentifiableElement()
  * @model abstract="true"
  * @generated
  */
-public interface JvmIdentifyableElement extends EObject
+public interface JvmIdentifiableElement extends EObject
 {
 	/**
 	 * <!-- begin-user-doc -->
@@ -27,4 +27,4 @@ public interface JvmIdentifyableElement extends EObject
 	 */
 	String getCanonicalName();
 
-} // JvmIdentifyableElement
+} // JvmIdentifiableElement

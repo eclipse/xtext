@@ -62,8 +62,7 @@ public class JvmParameterizedTypeReferenceItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addTypePropertyDescriptor(object);
@@ -105,8 +104,7 @@ public class JvmParameterizedTypeReferenceItemProvider
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS);
 		}
@@ -163,8 +161,7 @@ public class JvmParameterizedTypeReferenceItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(JvmParameterizedTypeReference.class))
-		{
+		switch (notification.getFeatureID(JvmParameterizedTypeReference.class)) {
 			case TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;

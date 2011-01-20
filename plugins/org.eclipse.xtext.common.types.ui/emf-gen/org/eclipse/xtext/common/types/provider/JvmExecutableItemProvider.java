@@ -61,8 +61,7 @@ public class JvmExecutableItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 		}
@@ -80,8 +79,7 @@ public class JvmExecutableItemProvider
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.JVM_TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS);
 			childrenFeatures.add(TypesPackage.Literals.JVM_EXECUTABLE__PARAMETERS);
@@ -131,8 +129,7 @@ public class JvmExecutableItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(JvmExecutable.class))
-		{
+		switch (notification.getFeatureID(JvmExecutable.class)) {
 			case TypesPackage.JVM_EXECUTABLE__TYPE_PARAMETERS:
 			case TypesPackage.JVM_EXECUTABLE__PARAMETERS:
 			case TypesPackage.JVM_EXECUTABLE__EXCEPTIONS:

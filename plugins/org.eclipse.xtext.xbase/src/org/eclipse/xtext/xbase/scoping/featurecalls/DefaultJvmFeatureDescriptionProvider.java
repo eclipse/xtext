@@ -9,7 +9,7 @@ package org.eclipse.xtext.xbase.scoping.featurecalls;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.util.JvmVisibilityService;
@@ -43,13 +43,13 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 	}
 	
 	protected JvmDeclaredType contextType;
-	protected JvmIdentifyableElement implicitReceiver;
+	protected JvmIdentifiableElement implicitReceiver;
 	
 	public void setContextType(JvmDeclaredType contextType) {
 		this.contextType = contextType;
 	}
 	
-	public void setImplicitReceiver(JvmIdentifyableElement implicitReceiver) {
+	public void setImplicitReceiver(JvmIdentifiableElement implicitReceiver) {
 		this.implicitReceiver = implicitReceiver;
 	}
 	

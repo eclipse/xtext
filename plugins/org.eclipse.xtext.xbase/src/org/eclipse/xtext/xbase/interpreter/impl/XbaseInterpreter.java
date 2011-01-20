@@ -24,7 +24,7 @@ import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -624,7 +624,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return assign;
 	}
 	
-	public Object assignValue(JvmIdentifyableElement feature, XAssignment assignment, Object value, IEvaluationContext context) {
+	public Object assignValue(JvmIdentifiableElement feature, XAssignment assignment, Object value, IEvaluationContext context) {
 		return assignmentDispatcher.invoke(feature, assignment, value, context);
 	}
 	

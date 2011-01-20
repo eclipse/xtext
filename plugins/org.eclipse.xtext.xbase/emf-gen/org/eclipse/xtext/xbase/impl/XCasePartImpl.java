@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
-import org.eclipse.xtext.common.types.impl.JvmIdentifyableElementImpl;
+import org.eclipse.xtext.common.types.impl.JvmIdentifiableElementImpl;
 
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
@@ -36,7 +36,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *
  * @generated
  */
-public class XCasePartImpl extends JvmIdentifyableElementImpl implements XCasePart
+public class XCasePartImpl extends JvmIdentifiableElementImpl implements XCasePart
 {
 	/**
 	 * The cached value of the '{@link #getCase() <em>Case</em>}' containment reference.

@@ -7,7 +7,7 @@ package org.eclipse.xtext.xbase;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,7 +28,7 @@ import org.eclipse.xtext.common.types.JvmIdentifyableElement;
  * @model
  * @generated
  */
-public interface XSwitchExpression extends XExpression, JvmIdentifyableElement
+public interface XSwitchExpression extends XExpression, JvmIdentifiableElement
 {
 	/**
 	 * Returns the value of the '<em><b>Switch</b></em>' containment reference.

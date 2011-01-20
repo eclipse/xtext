@@ -16,7 +16,7 @@ package org.eclipse.xtext.common.types;
  * @model abstract="true"
  * @generated
  */
-public interface JvmTypeReference extends JvmIdentifyableElement
+public interface JvmTypeReference extends JvmIdentifiableElement
 {
 	/**
 	 * <!-- begin-user-doc -->

@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
@@ -120,7 +120,7 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 
 	protected JvmTypeReference _type(XAbstractFeatureCall object) {
 		//TODO use expectedType to infer type args
-		JvmIdentifyableElement feature = object.getFeature();
+		JvmIdentifiableElement feature = object.getFeature();
 		//TODO it'S not the same to ask for the type of a referenced 'thing' or to ask ofr the return type of an expression.
 		// We should not call getType(feature) but call getTypeOfReference(feature) and implement it differently is needed.
 		JvmTypeReference featureType = getType(feature);

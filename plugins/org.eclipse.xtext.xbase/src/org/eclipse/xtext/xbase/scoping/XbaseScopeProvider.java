@@ -18,7 +18,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -206,7 +206,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			EObject thisVal = thisVariable.getEObjectOrProxy();
 			JvmTypeReference type = typeProvider.getType(thisVal);
 			if (type != null) {
-				featureScopeForThis = createFeatureScopeForTypeRef(type, call, getContextType(call),(JvmIdentifyableElement) thisVariable.getEObjectOrProxy());
+				featureScopeForThis = createFeatureScopeForTypeRef(type, call, getContextType(call),(JvmIdentifiableElement) thisVariable.getEObjectOrProxy());
 			}
 		}
 		return featureScopeForThis;
@@ -308,7 +308,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	}
 
 	protected JvmFeatureScope createFeatureScopeForTypeRef(JvmTypeReference type, XAbstractFeatureCall call,
-			JvmDeclaredType currentContext, JvmIdentifyableElement implicitReceiver) {
+			JvmDeclaredType currentContext, JvmIdentifiableElement implicitReceiver) {
 		if (call instanceof XAssignment) {
 			XAssignmentDescriptionProvider provider1 = assignmentFeatureDescProvider.get();
 			XAssignmentSugarDescriptionProvider provider2 = assignmentSugarFeatureDescProvider.get();

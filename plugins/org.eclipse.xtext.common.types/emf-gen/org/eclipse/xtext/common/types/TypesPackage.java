@@ -62,23 +62,23 @@ public interface TypesPackage extends EPackage
 	TypesPackage eINSTANCE = org.eclipse.xtext.common.types.impl.TypesPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmIdentifyableElementImpl <em>Jvm Identifyable Element</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmIdentifiableElementImpl <em>Jvm Identifiable Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.JvmIdentifyableElementImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmIdentifyableElement()
+	 * @see org.eclipse.xtext.common.types.impl.JvmIdentifiableElementImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmIdentifiableElement()
 	 * @generated
 	 */
-	int JVM_IDENTIFYABLE_ELEMENT = 0;
+	int JVM_IDENTIFIABLE_ELEMENT = 0;
 
 	/**
-	 * The number of structural features of the '<em>Jvm Identifyable Element</em>' class.
+	 * The number of structural features of the '<em>Jvm Identifiable Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT = 0;
+	int JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeImpl <em>Jvm Type</em>}' class.
@@ -97,7 +97,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_TYPE_FEATURE_COUNT = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
+	int JVM_TYPE_FEATURE_COUNT = JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmVoidImpl <em>Jvm Void</em>}' class.
@@ -429,7 +429,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_CONSTRAINT_OWNER__CONSTRAINTS = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
+	int JVM_CONSTRAINT_OWNER__CONSTRAINTS = JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Constraint Owner</em>' class.
@@ -438,7 +438,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_CONSTRAINT_OWNER_FEATURE_COUNT = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 1;
+	int JVM_CONSTRAINT_OWNER_FEATURE_COUNT = JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeConstraintImpl <em>Jvm Type Constraint</em>}' class.
@@ -457,7 +457,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_TYPE_CONSTRAINT__TYPE_REFERENCE = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
+	int JVM_TYPE_CONSTRAINT__TYPE_REFERENCE = JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' container reference.
@@ -466,7 +466,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_TYPE_CONSTRAINT__OWNER = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 1;
+	int JVM_TYPE_CONSTRAINT__OWNER = JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Type Constraint</em>' class.
@@ -475,7 +475,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_TYPE_CONSTRAINT_FEATURE_COUNT = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 2;
+	int JVM_TYPE_CONSTRAINT_FEATURE_COUNT = JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmUpperBoundImpl <em>Jvm Upper Bound</em>}' class.
@@ -1224,7 +1224,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_TYPE_REFERENCE_FEATURE_COUNT = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
+	int JVM_TYPE_REFERENCE_FEATURE_COUNT = JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmParameterizedTypeReferenceImpl <em>Jvm Parameterized Type Reference</em>}' class.
@@ -1618,7 +1618,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_FORMAL_PARAMETER__ANNOTATIONS = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
+	int JVM_FORMAL_PARAMETER__ANNOTATIONS = JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1627,7 +1627,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_FORMAL_PARAMETER__NAME = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 1;
+	int JVM_FORMAL_PARAMETER__NAME = JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Parameter Type</b></em>' containment reference.
@@ -1636,7 +1636,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_FORMAL_PARAMETER__PARAMETER_TYPE = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 2;
+	int JVM_FORMAL_PARAMETER__PARAMETER_TYPE = JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Formal Parameter</em>' class.
@@ -1645,7 +1645,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_FORMAL_PARAMETER_FEATURE_COUNT = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 3;
+	int JVM_FORMAL_PARAMETER_FEATURE_COUNT = JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmAnnotationReferenceImpl <em>Jvm Annotation Reference</em>}' class.
@@ -2196,14 +2196,14 @@ public interface TypesPackage extends EPackage
 
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmIdentifyableElement <em>Jvm Identifyable Element</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmIdentifiableElement <em>Jvm Identifiable Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Jvm Identifyable Element</em>'.
-	 * @see org.eclipse.xtext.common.types.JvmIdentifyableElement
+	 * @return the meta object for class '<em>Jvm Identifiable Element</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmIdentifiableElement
 	 * @generated
 	 */
-	EClass getJvmIdentifyableElement();
+	EClass getJvmIdentifiableElement();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmType <em>Jvm Type</em>}'.
@@ -3220,14 +3220,14 @@ public interface TypesPackage extends EPackage
 	interface Literals
 	{
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmIdentifyableElementImpl <em>Jvm Identifyable Element</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmIdentifiableElementImpl <em>Jvm Identifiable Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.JvmIdentifyableElementImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmIdentifyableElement()
+		 * @see org.eclipse.xtext.common.types.impl.JvmIdentifiableElementImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmIdentifiableElement()
 		 * @generated
 		 */
-		EClass JVM_IDENTIFYABLE_ELEMENT = eINSTANCE.getJvmIdentifyableElement();
+		EClass JVM_IDENTIFIABLE_ELEMENT = eINSTANCE.getJvmIdentifiableElement();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeImpl <em>Jvm Type</em>}' class.

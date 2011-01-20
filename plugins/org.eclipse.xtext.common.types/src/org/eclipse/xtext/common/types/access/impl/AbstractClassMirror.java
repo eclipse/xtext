@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -35,8 +35,8 @@ public abstract class AbstractClassMirror implements IClassMirror {
 			return getFragment(obj.eContainer(), fallback) + "/" + ((JvmTypeParameter) obj).getName();
 		if (obj instanceof JvmTypeReference)
 			return fallback.getFragment(obj);
-		if (obj instanceof JvmIdentifyableElement)
-			return ((JvmIdentifyableElement) obj).getCanonicalName();
+		if (obj instanceof JvmIdentifiableElement)
+			return ((JvmIdentifiableElement) obj).getCanonicalName();
 		return fallback.getFragment(obj);
 	}
 	

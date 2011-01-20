@@ -42,7 +42,7 @@ import org.eclipse.xtext.common.types.JvmFloatAnnotationValue;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
 import org.eclipse.xtext.common.types.JvmLongAnnotationValue;
 import org.eclipse.xtext.common.types.JvmLowerBound;
@@ -78,7 +78,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass jvmIdentifyableElementEClass = null;
+	private EClass jvmIdentifiableElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -456,9 +456,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getJvmIdentifyableElement()
+	public EClass getJvmIdentifiableElement()
 	{
-		return jvmIdentifyableElementEClass;
+		return jvmIdentifiableElementEClass;
 	}
 
 	/**
@@ -1431,7 +1431,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		isCreated = true;
 
 		// Create classes and their features
-		jvmIdentifyableElementEClass = createEClass(JVM_IDENTIFYABLE_ELEMENT);
+		jvmIdentifiableElementEClass = createEClass(JVM_IDENTIFIABLE_ELEMENT);
 
 		jvmTypeEClass = createEClass(JVM_TYPE);
 
@@ -1604,7 +1604,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		jvmTypeEClass.getESuperTypes().add(this.getJvmIdentifyableElement());
+		jvmTypeEClass.getESuperTypes().add(this.getJvmIdentifiableElement());
 		jvmVoidEClass.getESuperTypes().add(this.getJvmType());
 		jvmComponentTypeEClass.getESuperTypes().add(this.getJvmType());
 		jvmPrimitiveTypeEClass.getESuperTypes().add(this.getJvmComponentType());
@@ -1613,8 +1613,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		jvmDeclaredTypeEClass.getESuperTypes().add(this.getJvmMember());
 		jvmTypeParameterEClass.getESuperTypes().add(this.getJvmComponentType());
 		jvmTypeParameterEClass.getESuperTypes().add(this.getJvmConstraintOwner());
-		jvmConstraintOwnerEClass.getESuperTypes().add(this.getJvmIdentifyableElement());
-		jvmTypeConstraintEClass.getESuperTypes().add(this.getJvmIdentifyableElement());
+		jvmConstraintOwnerEClass.getESuperTypes().add(this.getJvmIdentifiableElement());
+		jvmTypeConstraintEClass.getESuperTypes().add(this.getJvmIdentifiableElement());
 		jvmUpperBoundEClass.getESuperTypes().add(this.getJvmTypeConstraint());
 		jvmLowerBoundEClass.getESuperTypes().add(this.getJvmTypeConstraint());
 		jvmAnnotationTypeEClass.getESuperTypes().add(this.getJvmDeclaredType());
@@ -1622,20 +1622,20 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		jvmEnumerationLiteralEClass.getESuperTypes().add(this.getJvmField());
 		jvmGenericTypeEClass.getESuperTypes().add(this.getJvmDeclaredType());
 		jvmGenericTypeEClass.getESuperTypes().add(this.getJvmTypeParameterDeclarator());
-		jvmTypeReferenceEClass.getESuperTypes().add(this.getJvmIdentifyableElement());
+		jvmTypeReferenceEClass.getESuperTypes().add(this.getJvmIdentifiableElement());
 		jvmParameterizedTypeReferenceEClass.getESuperTypes().add(this.getJvmTypeReference());
 		jvmGenericArrayTypeReferenceEClass.getESuperTypes().add(this.getJvmTypeReference());
 		jvmWildcardTypeReferenceEClass.getESuperTypes().add(this.getJvmConstraintOwner());
 		jvmWildcardTypeReferenceEClass.getESuperTypes().add(this.getJvmTypeReference());
 		jvmMemberEClass.getESuperTypes().add(this.getJvmAnnotationTarget());
-		jvmMemberEClass.getESuperTypes().add(this.getJvmIdentifyableElement());
+		jvmMemberEClass.getESuperTypes().add(this.getJvmIdentifiableElement());
 		jvmFeatureEClass.getESuperTypes().add(this.getJvmMember());
 		jvmFieldEClass.getESuperTypes().add(this.getJvmFeature());
 		jvmExecutableEClass.getESuperTypes().add(this.getJvmFeature());
 		jvmExecutableEClass.getESuperTypes().add(this.getJvmTypeParameterDeclarator());
 		jvmConstructorEClass.getESuperTypes().add(this.getJvmExecutable());
 		jvmOperationEClass.getESuperTypes().add(this.getJvmExecutable());
-		jvmFormalParameterEClass.getESuperTypes().add(this.getJvmIdentifyableElement());
+		jvmFormalParameterEClass.getESuperTypes().add(this.getJvmIdentifiableElement());
 		jvmFormalParameterEClass.getESuperTypes().add(this.getJvmAnnotationTarget());
 		jvmIntAnnotationValueEClass.getESuperTypes().add(this.getJvmAnnotationValue());
 		jvmBooleanAnnotationValueEClass.getESuperTypes().add(this.getJvmAnnotationValue());
@@ -1652,9 +1652,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		jvmEnumAnnotationValueEClass.getESuperTypes().add(this.getJvmAnnotationValue());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(jvmIdentifyableElementEClass, JvmIdentifyableElement.class, "JvmIdentifyableElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(jvmIdentifiableElementEClass, JvmIdentifiableElement.class, "JvmIdentifiableElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		addEOperation(jvmIdentifyableElementEClass, ecorePackage.getEString(), "getCanonicalName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(jvmIdentifiableElementEClass, ecorePackage.getEString(), "getCanonicalName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(jvmTypeEClass, JvmType.class, "JvmType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -65,8 +65,7 @@ public class JvmAnnotationReferenceItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addAnnotationPropertyDescriptor(object);
@@ -108,8 +107,7 @@ public class JvmAnnotationReferenceItemProvider
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__VALUES);
 		}
@@ -166,8 +164,7 @@ public class JvmAnnotationReferenceItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(JvmAnnotationReference.class))
-		{
+		switch (notification.getFeatureID(JvmAnnotationReference.class)) {
 			case TypesPackage.JVM_ANNOTATION_REFERENCE__VALUES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;

@@ -20,7 +20,7 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
@@ -37,7 +37,7 @@ public class JavaElementFinder implements IJavaElementFinder {
 	@Inject
 	private IJavaProjectProvider projectProvider;
 	
-	public IJavaElement findElementFor(JvmIdentifyableElement element) {
+	public IJavaElement findElementFor(JvmIdentifiableElement element) {
 		if (element == null || element.eResource() == null)
 			return null;
 		Implementation implementation = new Implementation(projectProvider.getJavaProject(element.eResource().getResourceSet()));

@@ -5,7 +5,7 @@
  */
 package org.eclipse.xtext.example.css.xcss;
 
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,12 +34,12 @@ public interface ColorConstant extends ColorLiteral
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Constant</em>' reference.
-   * @see #setConstant(JvmIdentifyableElement)
+   * @see #setConstant(JvmIdentifiableElement)
    * @see org.eclipse.xtext.example.css.xcss.XcssPackage#getColorConstant_Constant()
    * @model
    * @generated
    */
-  JvmIdentifyableElement getConstant();
+  JvmIdentifiableElement getConstant();
 
   /**
    * Sets the value of the '{@link org.eclipse.xtext.example.css.xcss.ColorConstant#getConstant <em>Constant</em>}' reference.
@@ -49,6 +49,6 @@ public interface ColorConstant extends ColorLiteral
    * @see #getConstant()
    * @generated
    */
-  void setConstant(JvmIdentifyableElement value);
+  void setConstant(JvmIdentifiableElement value);
 
 } // ColorConstant

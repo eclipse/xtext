@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 
 import org.eclipse.xtext.example.css.xcss.ColorConstant;
 import org.eclipse.xtext.example.css.xcss.XcssPackage;
@@ -40,7 +40,7 @@ public class ColorConstantImpl extends ColorLiteralImpl implements ColorConstant
    * @generated
    * @ordered
    */
-  protected JvmIdentifyableElement constant;
+  protected JvmIdentifiableElement constant;
 
   /**
    * <!-- begin-user-doc -->
@@ -68,12 +68,12 @@ public class ColorConstantImpl extends ColorLiteralImpl implements ColorConstant
    * <!-- end-user-doc -->
    * @generated
    */
-  public JvmIdentifyableElement getConstant()
+  public JvmIdentifiableElement getConstant()
   {
     if (constant != null && constant.eIsProxy())
     {
       InternalEObject oldConstant = (InternalEObject)constant;
-      constant = (JvmIdentifyableElement)eResolveProxy(oldConstant);
+      constant = (JvmIdentifiableElement)eResolveProxy(oldConstant);
       if (constant != oldConstant)
       {
         if (eNotificationRequired())
@@ -88,7 +88,7 @@ public class ColorConstantImpl extends ColorLiteralImpl implements ColorConstant
    * <!-- end-user-doc -->
    * @generated
    */
-  public JvmIdentifyableElement basicGetConstant()
+  public JvmIdentifiableElement basicGetConstant()
   {
     return constant;
   }
@@ -98,9 +98,9 @@ public class ColorConstantImpl extends ColorLiteralImpl implements ColorConstant
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setConstant(JvmIdentifyableElement newConstant)
+  public void setConstant(JvmIdentifiableElement newConstant)
   {
-    JvmIdentifyableElement oldConstant = constant;
+    JvmIdentifiableElement oldConstant = constant;
     constant = newConstant;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, XcssPackage.COLOR_CONSTANT__CONSTANT, oldConstant, constant));
@@ -134,7 +134,7 @@ public class ColorConstantImpl extends ColorLiteralImpl implements ColorConstant
     switch (featureID)
     {
       case XcssPackage.COLOR_CONSTANT__CONSTANT:
-        setConstant((JvmIdentifyableElement)newValue);
+        setConstant((JvmIdentifiableElement)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -151,7 +151,7 @@ public class ColorConstantImpl extends ColorLiteralImpl implements ColorConstant
     switch (featureID)
     {
       case XcssPackage.COLOR_CONSTANT__CONSTANT:
-        setConstant((JvmIdentifyableElement)null);
+        setConstant((JvmIdentifiableElement)null);
         return;
     }
     super.eUnset(featureID);

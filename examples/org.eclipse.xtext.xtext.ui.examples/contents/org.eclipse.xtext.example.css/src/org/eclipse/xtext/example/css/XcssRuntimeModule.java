@@ -7,12 +7,12 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.example.css.conversion.XcssValueConverterService;
-import org.eclipse.xtext.example.css.scoping.XcssCallableFeaturePredicate;
+import org.eclipse.xtext.example.css.scoping.XcssFeatureCallChecker;
 import org.eclipse.xtext.example.css.scoping.XcssGlobalScopeDelegatingScopeProvider;
 import org.eclipse.xtext.example.css.scoping.XcssTypeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipse.xtext.xbase.scoping.featurecalls.CallableFeaturePredicate;
+import org.eclipse.xtext.xbase.linking.FeatureCallChecker;
 
 import com.google.inject.name.Names;
 
@@ -36,8 +36,8 @@ public class XcssRuntimeModule extends org.eclipse.xtext.example.css.AbstractXcs
 						XcssGlobalScopeDelegatingScopeProvider.class);
 	}
 	
-	public Class<? extends CallableFeaturePredicate> bindCallableFeaturePredicate() {
-		return XcssCallableFeaturePredicate.class;
+	public Class<? extends FeatureCallChecker> bindFeatureCallChecker() {
+		return XcssFeatureCallChecker.class;
 	}
 	
 	@Override

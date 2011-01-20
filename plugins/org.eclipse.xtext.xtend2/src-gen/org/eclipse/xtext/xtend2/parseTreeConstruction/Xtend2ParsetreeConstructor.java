@@ -4112,14 +4112,14 @@ protected class XExpression_XAssignmentParserRuleCall extends RuleCallToken {
 /************ begin Rule XAssignment ****************
  *
  * XAssignment returns XExpression:
- * 	{XAssignment} feature=[types::JvmIdentifyableElement] OpSingleAssign value=XAssignment | XOrExpression (=>
- * 	({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpMultiAssign])
+ * 	{XAssignment} feature=[types::JvmIdentifiableElement] OpSingleAssign value=XAssignment | XOrExpression (=>
+ * 	({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign])
  * 	rightOperand=XAssignment)?;
  *
  **/
 
-// {XAssignment} feature=[types::JvmIdentifyableElement] OpSingleAssign value=XAssignment | XOrExpression (=>
-// ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpMultiAssign])
+// {XAssignment} feature=[types::JvmIdentifiableElement] OpSingleAssign value=XAssignment | XOrExpression (=>
+// ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign])
 // rightOperand=XAssignment)?
 protected class XAssignment_Alternatives extends AlternativesToken {
 
@@ -4172,7 +4172,7 @@ protected class XAssignment_Alternatives extends AlternativesToken {
 
 }
 
-// {XAssignment} feature=[types::JvmIdentifyableElement] OpSingleAssign value=XAssignment
+// {XAssignment} feature=[types::JvmIdentifiableElement] OpSingleAssign value=XAssignment
 protected class XAssignment_Group_0 extends GroupToken {
 	
 	public XAssignment_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4227,7 +4227,7 @@ protected class XAssignment_XAssignmentAction_0_0 extends ActionToken  {
 	}
 }
 
-// feature=[types::JvmIdentifyableElement]
+// feature=[types::JvmIdentifiableElement]
 protected class XAssignment_FeatureAssignment_0_1 extends AssignmentToken  {
 	
 	public XAssignment_FeatureAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4253,9 +4253,9 @@ protected class XAssignment_FeatureAssignment_0_1 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("feature");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifyableElementCrossReference_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifyableElementCrossReference_0_1_0(), (EObject)value , null)) {
+			if(param.isInstanceOf(grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifiableElementCrossReference_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifiableElementCrossReference_0_1_0(), (EObject)value , null)) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifyableElementCrossReference_0_1_0(); 
+				element = grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifiableElementCrossReference_0_1_0(); 
 				return obj;
 			}
 		}
@@ -4333,7 +4333,7 @@ protected class XAssignment_ValueAssignment_0_3 extends AssignmentToken  {
 }
 
 
-// XOrExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpMultiAssign])
+// XOrExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign])
 // rightOperand=XAssignment)?
 protected class XAssignment_Group_1 extends GroupToken {
 	
@@ -4391,7 +4391,7 @@ protected class XAssignment_XOrExpressionParserRuleCall_1_0 extends RuleCallToke
 	}	
 }
 
-// (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpMultiAssign])
+// (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign])
 // rightOperand=XAssignment)?
 protected class XAssignment_Group_1_1 extends GroupToken {
 	
@@ -4421,7 +4421,7 @@ protected class XAssignment_Group_1_1 extends GroupToken {
 
 }
 
-// => ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpMultiAssign])
+// => ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign])
 protected class XAssignment_Group_1_1_0 extends GroupToken {
 	
 	public XAssignment_Group_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4443,7 +4443,7 @@ protected class XAssignment_Group_1_1_0 extends GroupToken {
 
 }
 
-// {XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpMultiAssign]
+// {XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign]
 protected class XAssignment_Group_1_1_0_0 extends GroupToken {
 	
 	public XAssignment_Group_1_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4494,7 +4494,7 @@ protected class XAssignment_XBinaryOperationLeftOperandAction_1_1_0_0_0 extends 
 	}
 }
 
-// feature=[types::JvmIdentifyableElement|OpMultiAssign]
+// feature=[types::JvmIdentifiableElement|OpMultiAssign]
 protected class XAssignment_FeatureAssignment_1_1_0_0_1 extends AssignmentToken  {
 	
 	public XAssignment_FeatureAssignment_1_1_0_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4520,9 +4520,9 @@ protected class XAssignment_FeatureAssignment_1_1_0_0_1 extends AssignmentToken 
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("feature");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0_0_1_0(), (EObject)value , null)) {
+			if(param.isInstanceOf(grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifiableElementCrossReference_1_1_0_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifiableElementCrossReference_1_1_0_0_1_0(), (EObject)value , null)) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0_0_1_0(); 
+				element = grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifiableElementCrossReference_1_1_0_0_1_0(); 
 				return obj;
 			}
 		}
@@ -4590,12 +4590,12 @@ protected class XAssignment_RightOperandAssignment_1_1_1 extends AssignmentToken
 /************ begin Rule XOrExpression ****************
  *
  * XOrExpression returns XExpression:
- * 	XAndExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpOr])
+ * 	XAndExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpOr])
  * 	rightOperand=XAndExpression)*;
  *
  **/
 
-// XAndExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpOr])
+// XAndExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpOr])
 // rightOperand=XAndExpression)*
 protected class XOrExpression_Group extends GroupToken {
 	
@@ -4682,7 +4682,7 @@ protected class XOrExpression_XAndExpressionParserRuleCall_0 extends RuleCallTok
 	}	
 }
 
-// (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpOr]) rightOperand=XAndExpression)*
+// (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpOr]) rightOperand=XAndExpression)*
 protected class XOrExpression_Group_1 extends GroupToken {
 	
 	public XOrExpression_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4711,7 +4711,7 @@ protected class XOrExpression_Group_1 extends GroupToken {
 
 }
 
-// => ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpOr])
+// => ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpOr])
 protected class XOrExpression_Group_1_0 extends GroupToken {
 	
 	public XOrExpression_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4733,7 +4733,7 @@ protected class XOrExpression_Group_1_0 extends GroupToken {
 
 }
 
-// {XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpOr]
+// {XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpOr]
 protected class XOrExpression_Group_1_0_0 extends GroupToken {
 	
 	public XOrExpression_Group_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4785,7 +4785,7 @@ protected class XOrExpression_XBinaryOperationLeftOperandAction_1_0_0_0 extends 
 	}
 }
 
-// feature=[types::JvmIdentifyableElement|OpOr]
+// feature=[types::JvmIdentifiableElement|OpOr]
 protected class XOrExpression_FeatureAssignment_1_0_0_1 extends AssignmentToken  {
 	
 	public XOrExpression_FeatureAssignment_1_0_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4811,9 +4811,9 @@ protected class XOrExpression_FeatureAssignment_1_0_0_1 extends AssignmentToken 
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("feature");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXOrExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_0_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXOrExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_0_0_1_0(), (EObject)value , null)) {
+			if(param.isInstanceOf(grammarAccess.getXOrExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXOrExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0(), (EObject)value , null)) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getXOrExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_0_0_1_0(); 
+				element = grammarAccess.getXOrExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0(); 
 				return obj;
 			}
 		}
@@ -4879,12 +4879,12 @@ protected class XOrExpression_RightOperandAssignment_1_1 extends AssignmentToken
 /************ begin Rule XAndExpression ****************
  *
  * XAndExpression returns XExpression:
- * 	XEqualityExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpAnd])
+ * 	XEqualityExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAnd])
  * 	rightOperand=XEqualityExpression)*;
  *
  **/
 
-// XEqualityExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpAnd])
+// XEqualityExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAnd])
 // rightOperand=XEqualityExpression)*
 protected class XAndExpression_Group extends GroupToken {
 	
@@ -4971,7 +4971,7 @@ protected class XAndExpression_XEqualityExpressionParserRuleCall_0 extends RuleC
 	}	
 }
 
-// (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpAnd])
+// (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAnd])
 // rightOperand=XEqualityExpression)*
 protected class XAndExpression_Group_1 extends GroupToken {
 	
@@ -5001,7 +5001,7 @@ protected class XAndExpression_Group_1 extends GroupToken {
 
 }
 
-// => ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpAnd])
+// => ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAnd])
 protected class XAndExpression_Group_1_0 extends GroupToken {
 	
 	public XAndExpression_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5023,7 +5023,7 @@ protected class XAndExpression_Group_1_0 extends GroupToken {
 
 }
 
-// {XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpAnd]
+// {XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAnd]
 protected class XAndExpression_Group_1_0_0 extends GroupToken {
 	
 	public XAndExpression_Group_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5075,7 +5075,7 @@ protected class XAndExpression_XBinaryOperationLeftOperandAction_1_0_0_0 extends
 	}
 }
 
-// feature=[types::JvmIdentifyableElement|OpAnd]
+// feature=[types::JvmIdentifiableElement|OpAnd]
 protected class XAndExpression_FeatureAssignment_1_0_0_1 extends AssignmentToken  {
 	
 	public XAndExpression_FeatureAssignment_1_0_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5101,9 +5101,9 @@ protected class XAndExpression_FeatureAssignment_1_0_0_1 extends AssignmentToken
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("feature");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXAndExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_0_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXAndExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_0_0_1_0(), (EObject)value , null)) {
+			if(param.isInstanceOf(grammarAccess.getXAndExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXAndExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0(), (EObject)value , null)) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getXAndExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_0_0_1_0(); 
+				element = grammarAccess.getXAndExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0(); 
 				return obj;
 			}
 		}
@@ -5169,12 +5169,12 @@ protected class XAndExpression_RightOperandAssignment_1_1 extends AssignmentToke
 /************ begin Rule XEqualityExpression ****************
  *
  * XEqualityExpression returns XExpression:
- * 	XRelationalExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpEquality])
+ * 	XRelationalExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpEquality])
  * 	rightOperand=XRelationalExpression)*;
  *
  **/
 
-// XRelationalExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpEquality])
+// XRelationalExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpEquality])
 // rightOperand=XRelationalExpression)*
 protected class XEqualityExpression_Group extends GroupToken {
 	
@@ -5261,7 +5261,7 @@ protected class XEqualityExpression_XRelationalExpressionParserRuleCall_0 extend
 	}	
 }
 
-// (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpEquality])
+// (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpEquality])
 // rightOperand=XRelationalExpression)*
 protected class XEqualityExpression_Group_1 extends GroupToken {
 	
@@ -5291,7 +5291,7 @@ protected class XEqualityExpression_Group_1 extends GroupToken {
 
 }
 
-// => ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpEquality])
+// => ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpEquality])
 protected class XEqualityExpression_Group_1_0 extends GroupToken {
 	
 	public XEqualityExpression_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5313,7 +5313,7 @@ protected class XEqualityExpression_Group_1_0 extends GroupToken {
 
 }
 
-// {XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpEquality]
+// {XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpEquality]
 protected class XEqualityExpression_Group_1_0_0 extends GroupToken {
 	
 	public XEqualityExpression_Group_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5365,7 +5365,7 @@ protected class XEqualityExpression_XBinaryOperationLeftOperandAction_1_0_0_0 ex
 	}
 }
 
-// feature=[types::JvmIdentifyableElement|OpEquality]
+// feature=[types::JvmIdentifiableElement|OpEquality]
 protected class XEqualityExpression_FeatureAssignment_1_0_0_1 extends AssignmentToken  {
 	
 	public XEqualityExpression_FeatureAssignment_1_0_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5391,9 +5391,9 @@ protected class XEqualityExpression_FeatureAssignment_1_0_0_1 extends Assignment
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("feature");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXEqualityExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_0_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXEqualityExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_0_0_1_0(), (EObject)value , null)) {
+			if(param.isInstanceOf(grammarAccess.getXEqualityExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXEqualityExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0(), (EObject)value , null)) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getXEqualityExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_0_0_1_0(); 
+				element = grammarAccess.getXEqualityExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0(); 
 				return obj;
 			}
 		}
@@ -5461,13 +5461,13 @@ protected class XEqualityExpression_RightOperandAssignment_1_1 extends Assignmen
  * XRelationalExpression returns XExpression:
  * 	XOtherOperatorExpression (=> ({XInstanceOfExpression.expression=current} "instanceof")
  * 	type=[types::JvmType|QualifiedName] | => ({XBinaryOperation.leftOperand=current}
- * 	feature=[types::JvmIdentifyableElement|OpCompare]) rightOperand=XOtherOperatorExpression)*;
+ * 	feature=[types::JvmIdentifiableElement|OpCompare]) rightOperand=XOtherOperatorExpression)*;
  *
  **/
 
 // XOtherOperatorExpression (=> ({XInstanceOfExpression.expression=current} "instanceof")
 // type=[types::JvmType|QualifiedName] | => ({XBinaryOperation.leftOperand=current}
-// feature=[types::JvmIdentifyableElement|OpCompare]) rightOperand=XOtherOperatorExpression)*
+// feature=[types::JvmIdentifiableElement|OpCompare]) rightOperand=XOtherOperatorExpression)*
 protected class XRelationalExpression_Group extends GroupToken {
 	
 	public XRelationalExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5554,7 +5554,7 @@ protected class XRelationalExpression_XOtherOperatorExpressionParserRuleCall_0 e
 }
 
 // (=> ({XInstanceOfExpression.expression=current} "instanceof") type=[types::JvmType|QualifiedName] | =>
-// ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpCompare])
+// ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpCompare])
 // rightOperand=XOtherOperatorExpression)*
 protected class XRelationalExpression_Alternatives_1 extends AlternativesToken {
 
@@ -5751,7 +5751,7 @@ protected class XRelationalExpression_TypeAssignment_1_0_1 extends AssignmentTok
 }
 
 
-// => ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpCompare])
+// => ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpCompare])
 // rightOperand=XOtherOperatorExpression
 protected class XRelationalExpression_Group_1_1 extends GroupToken {
 	
@@ -5781,7 +5781,7 @@ protected class XRelationalExpression_Group_1_1 extends GroupToken {
 
 }
 
-// => ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpCompare])
+// => ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpCompare])
 protected class XRelationalExpression_Group_1_1_0 extends GroupToken {
 	
 	public XRelationalExpression_Group_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5803,7 +5803,7 @@ protected class XRelationalExpression_Group_1_1_0 extends GroupToken {
 
 }
 
-// {XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpCompare]
+// {XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpCompare]
 protected class XRelationalExpression_Group_1_1_0_0 extends GroupToken {
 	
 	public XRelationalExpression_Group_1_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5855,7 +5855,7 @@ protected class XRelationalExpression_XBinaryOperationLeftOperandAction_1_1_0_0_
 	}
 }
 
-// feature=[types::JvmIdentifyableElement|OpCompare]
+// feature=[types::JvmIdentifiableElement|OpCompare]
 protected class XRelationalExpression_FeatureAssignment_1_1_0_0_1 extends AssignmentToken  {
 	
 	public XRelationalExpression_FeatureAssignment_1_1_0_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5881,9 +5881,9 @@ protected class XRelationalExpression_FeatureAssignment_1_1_0_0_1 extends Assign
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("feature");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXRelationalExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXRelationalExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0_0_1_0(), (EObject)value , null)) {
+			if(param.isInstanceOf(grammarAccess.getXRelationalExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_1_0_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXRelationalExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_1_0_0_1_0(), (EObject)value , null)) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getXRelationalExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0_0_1_0(); 
+				element = grammarAccess.getXRelationalExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_1_0_0_1_0(); 
 				return obj;
 			}
 		}
@@ -5950,12 +5950,12 @@ protected class XRelationalExpression_RightOperandAssignment_1_1_1 extends Assig
 /************ begin Rule XOtherOperatorExpression ****************
  *
  * XOtherOperatorExpression returns XExpression:
- * 	XAdditiveExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpOther])
+ * 	XAdditiveExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpOther])
  * 	rightOperand=XAdditiveExpression)*;
  *
  **/
 
-// XAdditiveExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpOther])
+// XAdditiveExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpOther])
 // rightOperand=XAdditiveExpression)*
 protected class XOtherOperatorExpression_Group extends GroupToken {
 	
@@ -6042,7 +6042,7 @@ protected class XOtherOperatorExpression_XAdditiveExpressionParserRuleCall_0 ext
 	}	
 }
 
-// (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpOther])
+// (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpOther])
 // rightOperand=XAdditiveExpression)*
 protected class XOtherOperatorExpression_Group_1 extends GroupToken {
 	
@@ -6072,7 +6072,7 @@ protected class XOtherOperatorExpression_Group_1 extends GroupToken {
 
 }
 
-// => ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpOther])
+// => ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpOther])
 protected class XOtherOperatorExpression_Group_1_0 extends GroupToken {
 	
 	public XOtherOperatorExpression_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6094,7 +6094,7 @@ protected class XOtherOperatorExpression_Group_1_0 extends GroupToken {
 
 }
 
-// {XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpOther]
+// {XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpOther]
 protected class XOtherOperatorExpression_Group_1_0_0 extends GroupToken {
 	
 	public XOtherOperatorExpression_Group_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6146,7 +6146,7 @@ protected class XOtherOperatorExpression_XBinaryOperationLeftOperandAction_1_0_0
 	}
 }
 
-// feature=[types::JvmIdentifyableElement|OpOther]
+// feature=[types::JvmIdentifiableElement|OpOther]
 protected class XOtherOperatorExpression_FeatureAssignment_1_0_0_1 extends AssignmentToken  {
 	
 	public XOtherOperatorExpression_FeatureAssignment_1_0_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6172,9 +6172,9 @@ protected class XOtherOperatorExpression_FeatureAssignment_1_0_0_1 extends Assig
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("feature");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXOtherOperatorExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_0_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXOtherOperatorExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_0_0_1_0(), (EObject)value , null)) {
+			if(param.isInstanceOf(grammarAccess.getXOtherOperatorExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXOtherOperatorExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0(), (EObject)value , null)) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getXOtherOperatorExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_0_0_1_0(); 
+				element = grammarAccess.getXOtherOperatorExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0(); 
 				return obj;
 			}
 		}
@@ -6240,12 +6240,12 @@ protected class XOtherOperatorExpression_RightOperandAssignment_1_1 extends Assi
 /************ begin Rule XAdditiveExpression ****************
  *
  * XAdditiveExpression returns XExpression:
- * 	XMultiplicativeExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpAdd])
+ * 	XMultiplicativeExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAdd])
  * 	rightOperand=XMultiplicativeExpression)*;
  *
  **/
 
-// XMultiplicativeExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpAdd])
+// XMultiplicativeExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAdd])
 // rightOperand=XMultiplicativeExpression)*
 protected class XAdditiveExpression_Group extends GroupToken {
 	
@@ -6332,7 +6332,7 @@ protected class XAdditiveExpression_XMultiplicativeExpressionParserRuleCall_0 ex
 	}	
 }
 
-// (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpAdd])
+// (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAdd])
 // rightOperand=XMultiplicativeExpression)*
 protected class XAdditiveExpression_Group_1 extends GroupToken {
 	
@@ -6362,7 +6362,7 @@ protected class XAdditiveExpression_Group_1 extends GroupToken {
 
 }
 
-// => ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpAdd])
+// => ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAdd])
 protected class XAdditiveExpression_Group_1_0 extends GroupToken {
 	
 	public XAdditiveExpression_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6384,7 +6384,7 @@ protected class XAdditiveExpression_Group_1_0 extends GroupToken {
 
 }
 
-// {XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpAdd]
+// {XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAdd]
 protected class XAdditiveExpression_Group_1_0_0 extends GroupToken {
 	
 	public XAdditiveExpression_Group_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6436,7 +6436,7 @@ protected class XAdditiveExpression_XBinaryOperationLeftOperandAction_1_0_0_0 ex
 	}
 }
 
-// feature=[types::JvmIdentifyableElement|OpAdd]
+// feature=[types::JvmIdentifiableElement|OpAdd]
 protected class XAdditiveExpression_FeatureAssignment_1_0_0_1 extends AssignmentToken  {
 	
 	public XAdditiveExpression_FeatureAssignment_1_0_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6462,9 +6462,9 @@ protected class XAdditiveExpression_FeatureAssignment_1_0_0_1 extends Assignment
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("feature");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXAdditiveExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_0_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXAdditiveExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_0_0_1_0(), (EObject)value , null)) {
+			if(param.isInstanceOf(grammarAccess.getXAdditiveExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXAdditiveExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0(), (EObject)value , null)) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getXAdditiveExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_0_0_1_0(); 
+				element = grammarAccess.getXAdditiveExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0(); 
 				return obj;
 			}
 		}
@@ -6530,12 +6530,12 @@ protected class XAdditiveExpression_RightOperandAssignment_1_1 extends Assignmen
 /************ begin Rule XMultiplicativeExpression ****************
  *
  * XMultiplicativeExpression returns XExpression:
- * 	XUnaryOperation (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpMulti])
+ * 	XUnaryOperation (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMulti])
  * 	rightOperand=XUnaryOperation)*;
  *
  **/
 
-// XUnaryOperation (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpMulti])
+// XUnaryOperation (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMulti])
 // rightOperand=XUnaryOperation)*
 protected class XMultiplicativeExpression_Group extends GroupToken {
 	
@@ -6622,7 +6622,7 @@ protected class XMultiplicativeExpression_XUnaryOperationParserRuleCall_0 extend
 	}	
 }
 
-// (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpMulti])
+// (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMulti])
 // rightOperand=XUnaryOperation)*
 protected class XMultiplicativeExpression_Group_1 extends GroupToken {
 	
@@ -6652,7 +6652,7 @@ protected class XMultiplicativeExpression_Group_1 extends GroupToken {
 
 }
 
-// => ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpMulti])
+// => ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMulti])
 protected class XMultiplicativeExpression_Group_1_0 extends GroupToken {
 	
 	public XMultiplicativeExpression_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6674,7 +6674,7 @@ protected class XMultiplicativeExpression_Group_1_0 extends GroupToken {
 
 }
 
-// {XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpMulti]
+// {XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMulti]
 protected class XMultiplicativeExpression_Group_1_0_0 extends GroupToken {
 	
 	public XMultiplicativeExpression_Group_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6726,7 +6726,7 @@ protected class XMultiplicativeExpression_XBinaryOperationLeftOperandAction_1_0_
 	}
 }
 
-// feature=[types::JvmIdentifyableElement|OpMulti]
+// feature=[types::JvmIdentifiableElement|OpMulti]
 protected class XMultiplicativeExpression_FeatureAssignment_1_0_0_1 extends AssignmentToken  {
 	
 	public XMultiplicativeExpression_FeatureAssignment_1_0_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6752,9 +6752,9 @@ protected class XMultiplicativeExpression_FeatureAssignment_1_0_0_1 extends Assi
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("feature");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXMultiplicativeExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_0_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXMultiplicativeExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_0_0_1_0(), (EObject)value , null)) {
+			if(param.isInstanceOf(grammarAccess.getXMultiplicativeExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXMultiplicativeExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0(), (EObject)value , null)) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getXMultiplicativeExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_0_0_1_0(); 
+				element = grammarAccess.getXMultiplicativeExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0(); 
 				return obj;
 			}
 		}
@@ -6820,11 +6820,11 @@ protected class XMultiplicativeExpression_RightOperandAssignment_1_1 extends Ass
 /************ begin Rule XUnaryOperation ****************
  *
  * XUnaryOperation returns XExpression:
- * 	{XUnaryOperation} feature=[types::JvmIdentifyableElement|OpUnary] operand=XCastedExpression | XCastedExpression;
+ * 	{XUnaryOperation} feature=[types::JvmIdentifiableElement|OpUnary] operand=XCastedExpression | XCastedExpression;
  *
  **/
 
-// {XUnaryOperation} feature=[types::JvmIdentifyableElement|OpUnary] operand=XCastedExpression | XCastedExpression
+// {XUnaryOperation} feature=[types::JvmIdentifiableElement|OpUnary] operand=XCastedExpression | XCastedExpression
 protected class XUnaryOperation_Alternatives extends AlternativesToken {
 
 	public XUnaryOperation_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6876,7 +6876,7 @@ protected class XUnaryOperation_Alternatives extends AlternativesToken {
 
 }
 
-// {XUnaryOperation} feature=[types::JvmIdentifyableElement|OpUnary] operand=XCastedExpression
+// {XUnaryOperation} feature=[types::JvmIdentifiableElement|OpUnary] operand=XCastedExpression
 protected class XUnaryOperation_Group_0 extends GroupToken {
 	
 	public XUnaryOperation_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6931,7 +6931,7 @@ protected class XUnaryOperation_XUnaryOperationAction_0_0 extends ActionToken  {
 	}
 }
 
-// feature=[types::JvmIdentifyableElement|OpUnary]
+// feature=[types::JvmIdentifiableElement|OpUnary]
 protected class XUnaryOperation_FeatureAssignment_0_1 extends AssignmentToken  {
 	
 	public XUnaryOperation_FeatureAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6957,9 +6957,9 @@ protected class XUnaryOperation_FeatureAssignment_0_1 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("feature");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXUnaryOperationAccess().getFeatureJvmIdentifyableElementCrossReference_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXUnaryOperationAccess().getFeatureJvmIdentifyableElementCrossReference_0_1_0(), (EObject)value , null)) {
+			if(param.isInstanceOf(grammarAccess.getXUnaryOperationAccess().getFeatureJvmIdentifiableElementCrossReference_0_1_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXUnaryOperationAccess().getFeatureJvmIdentifiableElementCrossReference_0_1_0(), (EObject)value , null)) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getXUnaryOperationAccess().getFeatureJvmIdentifyableElementCrossReference_0_1_0(); 
+				element = grammarAccess.getXUnaryOperationAccess().getFeatureJvmIdentifiableElementCrossReference_0_1_0(); 
 				return obj;
 			}
 		}
@@ -7328,18 +7328,18 @@ protected class XCastedExpression_TypeAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule XMemberFeatureCall ****************
  *
  * XMemberFeatureCall returns XExpression:
- * 	XPrimaryExpression (=> ({XAssignment.assignable=current} "." feature=[types::JvmIdentifyableElement] OpSingleAssign)
+ * 	XPrimaryExpression (=> ({XAssignment.assignable=current} "." feature=[types::JvmIdentifiableElement] OpSingleAssign)
  * 	value=XAssignment | => ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | spreading?="*.")) ("<"
  * 	typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
- * 	feature=[types::JvmIdentifyableElement] (=> explicitOperationCall?="(" (=> memberCallArguments+=XShortClosure |
+ * 	feature=[types::JvmIdentifiableElement] (=> explicitOperationCall?="(" (=> memberCallArguments+=XShortClosure |
  * 	memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")?)*;
  *
  **/
 
-// XPrimaryExpression (=> ({XAssignment.assignable=current} "." feature=[types::JvmIdentifyableElement] OpSingleAssign)
+// XPrimaryExpression (=> ({XAssignment.assignable=current} "." feature=[types::JvmIdentifiableElement] OpSingleAssign)
 // value=XAssignment | => ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | spreading?="*.")) ("<"
 // typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
-// feature=[types::JvmIdentifyableElement] (=> explicitOperationCall?="(" (=> memberCallArguments+=XShortClosure |
+// feature=[types::JvmIdentifiableElement] (=> explicitOperationCall?="(" (=> memberCallArguments+=XShortClosure |
 // memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")?)*
 protected class XMemberFeatureCall_Group extends GroupToken {
 	
@@ -7426,10 +7426,10 @@ protected class XMemberFeatureCall_XPrimaryExpressionParserRuleCall_0 extends Ru
 	}	
 }
 
-// (=> ({XAssignment.assignable=current} "." feature=[types::JvmIdentifyableElement] OpSingleAssign) value=XAssignment | =>
+// (=> ({XAssignment.assignable=current} "." feature=[types::JvmIdentifiableElement] OpSingleAssign) value=XAssignment | =>
 // ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | spreading?="*.")) ("<"
 // typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
-// feature=[types::JvmIdentifyableElement] (=> explicitOperationCall?="(" (=> memberCallArguments+=XShortClosure |
+// feature=[types::JvmIdentifiableElement] (=> explicitOperationCall?="(" (=> memberCallArguments+=XShortClosure |
 // memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")?)*
 protected class XMemberFeatureCall_Alternatives_1 extends AlternativesToken {
 
@@ -7461,7 +7461,7 @@ protected class XMemberFeatureCall_Alternatives_1 extends AlternativesToken {
 
 }
 
-// => ({XAssignment.assignable=current} "." feature=[types::JvmIdentifyableElement] OpSingleAssign) value=XAssignment
+// => ({XAssignment.assignable=current} "." feature=[types::JvmIdentifiableElement] OpSingleAssign) value=XAssignment
 protected class XMemberFeatureCall_Group_1_0 extends GroupToken {
 	
 	public XMemberFeatureCall_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7490,7 +7490,7 @@ protected class XMemberFeatureCall_Group_1_0 extends GroupToken {
 
 }
 
-// => ({XAssignment.assignable=current} "." feature=[types::JvmIdentifyableElement] OpSingleAssign)
+// => ({XAssignment.assignable=current} "." feature=[types::JvmIdentifiableElement] OpSingleAssign)
 protected class XMemberFeatureCall_Group_1_0_0 extends GroupToken {
 	
 	public XMemberFeatureCall_Group_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7512,7 +7512,7 @@ protected class XMemberFeatureCall_Group_1_0_0 extends GroupToken {
 
 }
 
-// {XAssignment.assignable=current} "." feature=[types::JvmIdentifyableElement] OpSingleAssign
+// {XAssignment.assignable=current} "." feature=[types::JvmIdentifiableElement] OpSingleAssign
 protected class XMemberFeatureCall_Group_1_0_0_0 extends GroupToken {
 	
 	public XMemberFeatureCall_Group_1_0_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7586,7 +7586,7 @@ protected class XMemberFeatureCall_FullStopKeyword_1_0_0_0_1 extends KeywordToke
 
 }
 
-// feature=[types::JvmIdentifyableElement]
+// feature=[types::JvmIdentifiableElement]
 protected class XMemberFeatureCall_FeatureAssignment_1_0_0_0_2 extends AssignmentToken  {
 	
 	public XMemberFeatureCall_FeatureAssignment_1_0_0_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7612,9 +7612,9 @@ protected class XMemberFeatureCall_FeatureAssignment_1_0_0_0_2 extends Assignmen
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("feature");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifyableElementCrossReference_1_0_0_0_2_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifyableElementCrossReference_1_0_0_0_2_0(), (EObject)value , null)) {
+			if(param.isInstanceOf(grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_0_2_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_0_2_0(), (EObject)value , null)) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifyableElementCrossReference_1_0_0_0_2_0(); 
+				element = grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_0_2_0(); 
 				return obj;
 			}
 		}
@@ -7696,7 +7696,7 @@ protected class XMemberFeatureCall_ValueAssignment_1_0_1 extends AssignmentToken
 
 // => ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | spreading?="*.")) ("<"
 // typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
-// feature=[types::JvmIdentifyableElement] (=> explicitOperationCall?="(" (=> memberCallArguments+=XShortClosure |
+// feature=[types::JvmIdentifiableElement] (=> explicitOperationCall?="(" (=> memberCallArguments+=XShortClosure |
 // memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")?
 protected class XMemberFeatureCall_Group_1_1 extends GroupToken {
 	
@@ -8124,7 +8124,7 @@ protected class XMemberFeatureCall_GreaterThanSignKeyword_1_1_1_3 extends Keywor
 }
 
 
-// feature=[types::JvmIdentifyableElement]
+// feature=[types::JvmIdentifiableElement]
 protected class XMemberFeatureCall_FeatureAssignment_1_1_2 extends AssignmentToken  {
 	
 	public XMemberFeatureCall_FeatureAssignment_1_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8151,9 +8151,9 @@ protected class XMemberFeatureCall_FeatureAssignment_1_1_2 extends AssignmentTok
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("feature");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_2_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_2_0(), (EObject)value , null)) {
+			if(param.isInstanceOf(grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_1_1_2_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_1_1_2_0(), (EObject)value , null)) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_2_0(); 
+				element = grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_1_1_2_0(); 
 				return obj;
 			}
 		}
@@ -12674,13 +12674,13 @@ protected class JvmFormalParameter_NameAssignment_1 extends AssignmentToken  {
  *
  * XFeatureCall returns XExpression:
  * 	{XFeatureCall} ("<" typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
- * 	feature=[types::JvmIdentifyableElement] (=> explicitOperationCall?="(" (=> featureCallArguments+=XShortClosure |
+ * 	feature=[types::JvmIdentifiableElement] (=> explicitOperationCall?="(" (=> featureCallArguments+=XShortClosure |
  * 	featureCallArguments+=XExpression ("," featureCallArguments+=XExpression)*)? ")")?;
  *
  **/
 
 // {XFeatureCall} ("<" typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
-// feature=[types::JvmIdentifyableElement] (=> explicitOperationCall?="(" (=> featureCallArguments+=XShortClosure |
+// feature=[types::JvmIdentifiableElement] (=> explicitOperationCall?="(" (=> featureCallArguments+=XShortClosure |
 // featureCallArguments+=XExpression ("," featureCallArguments+=XExpression)*)? ")")?
 protected class XFeatureCall_Group extends GroupToken {
 	
@@ -12943,7 +12943,7 @@ protected class XFeatureCall_GreaterThanSignKeyword_1_3 extends KeywordToken  {
 }
 
 
-// feature=[types::JvmIdentifyableElement]
+// feature=[types::JvmIdentifiableElement]
 protected class XFeatureCall_FeatureAssignment_2 extends AssignmentToken  {
 	
 	public XFeatureCall_FeatureAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -12970,9 +12970,9 @@ protected class XFeatureCall_FeatureAssignment_2 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("feature");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifyableElementCrossReference_2_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifyableElementCrossReference_2_0(), (EObject)value , null)) {
+			if(param.isInstanceOf(grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_2_0().getType().getClassifier()) && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_2_0(), (EObject)value , null)) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifyableElementCrossReference_2_0(); 
+				element = grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_2_0(); 
 				return obj;
 			}
 		}

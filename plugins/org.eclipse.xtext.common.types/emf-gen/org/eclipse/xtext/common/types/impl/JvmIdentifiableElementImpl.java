@@ -9,26 +9,26 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Jvm Identifyable Element</b></em>'.
+ * An implementation of the model object '<em><b>Jvm Identifiable Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public abstract class JvmIdentifyableElementImpl extends MinimalEObjectImpl.Container implements JvmIdentifyableElement
+public abstract class JvmIdentifiableElementImpl extends MinimalEObjectImpl.Container implements JvmIdentifiableElement
 {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected JvmIdentifyableElementImpl()
+	protected JvmIdentifiableElementImpl()
 	{
 		super();
 	}
@@ -41,7 +41,7 @@ public abstract class JvmIdentifyableElementImpl extends MinimalEObjectImpl.Cont
 	@Override
 	protected EClass eStaticClass()
 	{
-		return TypesPackage.Literals.JVM_IDENTIFYABLE_ELEMENT;
+		return TypesPackage.Literals.JVM_IDENTIFIABLE_ELEMENT;
 	}
 
 	/**
@@ -56,4 +56,4 @@ public abstract class JvmIdentifyableElementImpl extends MinimalEObjectImpl.Cont
 		throw new UnsupportedOperationException();
 	}
 
-} //JvmIdentifyableElementImpl
+} //JvmIdentifiableElementImpl

@@ -19,7 +19,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *
  * @generated
  */
-public abstract class JvmTypeImpl extends JvmIdentifyableElementImplCustom implements JvmType
+public abstract class JvmTypeImpl extends JvmIdentifiableElementImplCustom implements JvmType
 {
 	/**
 	 * <!-- begin-user-doc -->

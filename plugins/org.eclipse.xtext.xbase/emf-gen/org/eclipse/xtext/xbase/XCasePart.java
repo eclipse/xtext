@@ -5,7 +5,7 @@
  */
 package org.eclipse.xtext.xbase;
 
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
@@ -26,7 +26,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * @model
  * @generated
  */
-public interface XCasePart extends JvmIdentifyableElement
+public interface XCasePart extends JvmIdentifiableElement
 {
 	/**
 	 * Returns the value of the '<em><b>Case</b></em>' containment reference.

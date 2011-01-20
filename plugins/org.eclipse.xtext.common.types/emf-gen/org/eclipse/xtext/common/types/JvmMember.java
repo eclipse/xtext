@@ -24,7 +24,7 @@ package org.eclipse.xtext.common.types;
  * @model abstract="true"
  * @generated
  */
-public interface JvmMember extends JvmAnnotationTarget, JvmIdentifyableElement
+public interface JvmMember extends JvmAnnotationTarget, JvmIdentifiableElement
 {
 	/**
 	 * Returns the value of the '<em><b>Declaring Type</b></em>' container reference.

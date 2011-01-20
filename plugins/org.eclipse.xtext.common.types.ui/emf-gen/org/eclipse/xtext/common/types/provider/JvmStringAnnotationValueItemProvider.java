@@ -60,8 +60,7 @@ public class JvmStringAnnotationValueItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addValuesPropertyDescriptor(object);
@@ -128,8 +127,7 @@ public class JvmStringAnnotationValueItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(JvmStringAnnotationValue.class))
-		{
+		switch (notification.getFeatureID(JvmStringAnnotationValue.class)) {
 			case TypesPackage.JVM_STRING_ANNOTATION_VALUE__VALUES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

@@ -12,7 +12,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 
 import org.eclipse.xtext.xbase.*;
 
@@ -220,9 +220,9 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 				return createXAssignmentAdapter();
 			}
 			@Override
-			public Adapter caseJvmIdentifyableElement(JvmIdentifyableElement object)
+			public Adapter caseJvmIdentifiableElement(JvmIdentifiableElement object)
 			{
-				return createJvmIdentifyableElementAdapter();
+				return createJvmIdentifiableElementAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object)
@@ -667,16 +667,16 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmIdentifyableElement <em>Jvm Identifyable Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmIdentifiableElement <em>Jvm Identifiable Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.JvmIdentifyableElement
+	 * @see org.eclipse.xtext.common.types.JvmIdentifiableElement
 	 * @generated
 	 */
-	public Adapter createJvmIdentifyableElementAdapter()
+	public Adapter createJvmIdentifiableElementAdapter()
 	{
 		return null;
 	}

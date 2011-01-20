@@ -34,7 +34,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *
  * @generated
  */
-public abstract class JvmConstraintOwnerImpl extends JvmIdentifyableElementImplCustom implements JvmConstraintOwner
+public abstract class JvmConstraintOwnerImpl extends JvmIdentifiableElementImplCustom implements JvmConstraintOwner
 {
 	/**
 	 * The cached value of the '{@link #getConstraints() <em>Constraints</em>}' containment reference list.

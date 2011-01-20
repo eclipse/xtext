@@ -16,7 +16,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
@@ -135,7 +135,7 @@ public class Xtend2Switch<T>
 				if (result == null) result = caseJvmTypeParameterDeclarator(xtendFunction);
 				if (result == null) result = caseJvmMember(xtendFunction);
 				if (result == null) result = caseJvmAnnotationTarget(xtendFunction);
-				if (result == null) result = caseJvmIdentifyableElement(xtendFunction);
+				if (result == null) result = caseJvmIdentifiableElement(xtendFunction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -150,7 +150,7 @@ public class Xtend2Switch<T>
 				if (result == null) result = caseJvmMember(xtendClass);
 				if (result == null) result = caseJvmType(xtendClass);
 				if (result == null) result = caseJvmAnnotationTarget(xtendClass);
-				if (result == null) result = caseJvmIdentifyableElement(xtendClass);
+				if (result == null) result = caseJvmIdentifiableElement(xtendClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -360,17 +360,17 @@ public class Xtend2Switch<T>
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Jvm Identifyable Element</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Identifiable Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Jvm Identifyable Element</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Identifiable Element</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseJvmIdentifyableElement(JvmIdentifyableElement object)
+	public T caseJvmIdentifiableElement(JvmIdentifiableElement object)
 	{
 		return null;
 	}

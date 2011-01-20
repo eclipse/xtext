@@ -198,7 +198,7 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XCASE_PART__CASE = TypesPackage.JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
+	int XCASE_PART__CASE = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Then</b></em>' containment reference.
@@ -207,7 +207,7 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XCASE_PART__THEN = TypesPackage.JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 1;
+	int XCASE_PART__THEN = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Type Guard</b></em>' containment reference.
@@ -216,7 +216,7 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XCASE_PART__TYPE_GUARD = TypesPackage.JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 2;
+	int XCASE_PART__TYPE_GUARD = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>XCase Part</em>' class.
@@ -225,7 +225,7 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XCASE_PART_FEATURE_COUNT = TypesPackage.JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 3;
+	int XCASE_PART_FEATURE_COUNT = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XBlockExpressionImpl <em>XBlock Expression</em>}' class.

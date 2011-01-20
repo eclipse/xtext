@@ -60,8 +60,7 @@ public class JvmPrimitiveTypeItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
@@ -131,8 +130,7 @@ public class JvmPrimitiveTypeItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(JvmPrimitiveType.class))
-		{
+		switch (notification.getFeatureID(JvmPrimitiveType.class)) {
 			case TypesPackage.JVM_PRIMITIVE_TYPE__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

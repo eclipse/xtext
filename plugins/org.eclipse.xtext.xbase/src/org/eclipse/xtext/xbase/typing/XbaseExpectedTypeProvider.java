@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
@@ -56,7 +56,7 @@ public class XbaseExpectedTypeProvider extends AbstractExpectedTypeProvider<JvmT
 
 	protected JvmTypeReference _expectedType(XAssignment assignment, EReference reference, int index) {
 		if (reference == XbasePackage.Literals.XASSIGNMENT__VALUE) {
-			JvmIdentifyableElement feature = assignment.getFeature();
+			JvmIdentifiableElement feature = assignment.getFeature();
 			return typeProvider.getType(feature);
 		}
 		return getExpectedType(assignment);
