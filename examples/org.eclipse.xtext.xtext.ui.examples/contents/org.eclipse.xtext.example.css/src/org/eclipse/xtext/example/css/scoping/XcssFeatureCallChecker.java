@@ -4,12 +4,12 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.example.css.xcss.TypeSelector;
 import org.eclipse.xtext.xbase.XFeatureCall;
-import org.eclipse.xtext.xbase.scoping.featurecalls.CallableFeaturePredicate;
+import org.eclipse.xtext.xbase.linking.FeatureCallChecker;
 
-public class XcssCallableFeaturePredicate extends CallableFeaturePredicate {
+public class XcssFeatureCallChecker extends FeatureCallChecker {
 
-	protected boolean _case(TypeSelector input, XFeatureCall context, EReference reference,
+	protected String _case(TypeSelector input, XFeatureCall context, EReference reference,
 			TypeArgumentContext typeArgContext) {
-		return true;
+		return null;
 	}
 }

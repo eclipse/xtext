@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.ui.JavaElementLabels;
 import org.eclipse.jface.text.Region;
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkAcceptor;
@@ -31,11 +31,11 @@ public class JdtHyperlinkFactory {
 	private Provider<JdtHyperlink> jdtHyperlinkProvider;
 	
 	public boolean canHandle(EObject to) {
-		return to instanceof JvmIdentifyableElement && to.eResource() instanceof TypeResource;
+		return to instanceof JvmIdentifiableElement && to.eResource() instanceof TypeResource;
 	}
 
 	public void createHyperlink(Region region, EObject to, IHyperlinkAcceptor acceptor) {
-		JvmIdentifyableElement element = (JvmIdentifyableElement) to;
+		JvmIdentifiableElement element = (JvmIdentifiableElement) to;
 		IJavaElement javaElement = javaElementFinder.findElementFor(element);
 		if (javaElement == null)
 			return;

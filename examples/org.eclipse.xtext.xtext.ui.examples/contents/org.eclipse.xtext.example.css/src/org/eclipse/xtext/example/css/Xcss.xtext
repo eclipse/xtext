@@ -36,19 +36,19 @@ Filter returns XExpression:
 
 Setting returns XExpression:
 	  XExpression ';' 
-	| {XAssignment} assignable=FeatureReference feature=[JvmIdentifyableElement|OpSettingAssign] value=XExpression ';';
+	| {XAssignment} assignable=FeatureReference feature=[JvmIdentifiableElement|OpSettingAssign] value=XExpression ';';
 
 OpSettingAssign:
 	':';
 
 FeatureReference returns XFeatureCall:
-	feature=[JvmIdentifyableElement];
+	feature=[JvmIdentifiableElement];
 
 ColorLiteral:
 	(RGB | ColorConstant) ({Gradient.colors+=current} colors+=(RGB | ColorConstant)+ percents+=Percent*)?;
 
 ColorConstant:
-	'$' constant=[JvmIdentifyableElement];
+	'$' constant=[JvmIdentifiableElement];
 
 RGB:
 	hex?='#' value = HEXINT

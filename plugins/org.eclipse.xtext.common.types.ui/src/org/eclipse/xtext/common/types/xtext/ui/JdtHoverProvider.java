@@ -16,7 +16,7 @@ import org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover;
 import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 
@@ -35,9 +35,9 @@ public class JdtHoverProvider implements IEObjectHoverProvider {
 	private JavadocHoverWrapper javadocHover = new JavadocHoverWrapper ();
 	
 	public IInformationControlCreatorProvider getHoverInfo(EObject eObject, ITextViewer viewer, IRegion region) {
-		if (eObject instanceof JvmIdentifyableElement) {
-			JvmIdentifyableElement jvmIdentifyableElement = (JvmIdentifyableElement) eObject;
-			IJavaElement javaElement = javaElementFinder.findElementFor(jvmIdentifyableElement);
+		if (eObject instanceof JvmIdentifiableElement) {
+			JvmIdentifiableElement jvmIdentifiableElement = (JvmIdentifiableElement) eObject;
+			IJavaElement javaElement = javaElementFinder.findElementFor(jvmIdentifiableElement);
 			if (javaElement!=null) {
 				javadocHover.setJavaElement(javaElement);
 				final Object hoverInfo2 = javadocHover.getHoverInfo2(viewer, region);

@@ -95,12 +95,12 @@ public class XcssScopeProvider extends XbaseScopeProvider {
 			for(JvmTypeConstraint constraint: wildcard.getConstraints()) {
 				if (constraint instanceof JvmUpperBound) {
 					JvmTypeReference upperBound = constraint.getTypeReference();
-					parent = createFeatureScopeForTypeRef(upperBound, context, getContextType(context));
+					parent = createFeatureScopeForTypeRef(upperBound, context, getContextType(context), context.getImplicitReceiver());
 				}
 			}
 			return parent;
 		} else {
-			return super.createFeatureScopeForTypeRef(type, context, getContextType(context));
+			return super.createFeatureScopeForTypeRef(type, context, getContextType(context), context.getImplicitReceiver());
 		}
 	}
 	
