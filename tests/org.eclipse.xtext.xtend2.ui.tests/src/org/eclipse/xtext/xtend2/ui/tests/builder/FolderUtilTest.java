@@ -5,15 +5,15 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtend2.tests.ui.builder;
+package org.eclipse.xtext.xtend2.ui.tests.builder;
 
 import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.xtext.xtend2.tests.ui.AbstractXtend2WorkspaceTestCase;
 import org.eclipse.xtext.xtend2.ui.builder.FolderUtil;
+import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 
 import com.google.inject.Inject;
 
@@ -21,7 +21,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class FolderUtilTest extends AbstractXtend2WorkspaceTestCase {
+public class FolderUtilTest extends AbstractXtend2UITestCase {
 
 	@Inject
 	protected FolderUtil folderUtil;

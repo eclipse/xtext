@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtend2.tests.ui.builder;
+package org.eclipse.xtext.xtend2.ui.tests.builder;
 
 import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
@@ -19,12 +19,12 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.eclipse.xtext.xtend2.tests.ui.AbstractXtend2WorkspaceTestCase;
+import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class Xtend2BuilderParticipantTest extends AbstractXtend2WorkspaceTestCase {
+public class Xtend2BuilderParticipantTest extends AbstractXtend2UITestCase {
 
 	public void testBuild() throws Exception {
 		IJavaProject javaProject = createJavaProject("test");

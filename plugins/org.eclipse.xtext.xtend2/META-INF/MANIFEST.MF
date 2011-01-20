@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.xtend2;singleton:=true
-Bundle-Version: 1.0.1
+Bundle-Version: 2.0.0
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -25,7 +25,7 @@ Export-Package: org.eclipse.xtext.xtend2,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.xtext.common.types;bundle-version="2.0.0";visibility:=reexport,
- org.eclipse.xtext.xbase;bundle-version="1.0.1";visibility:=reexport,
+ org.eclipse.xtext.xbase;bundle-version="2.0.0";visibility:=reexport,
  org.eclipse.xtext;bundle-version="2.0.0",
  org.eclipse.xtext.util;bundle-version="2.0.0",
  org.eclipse.emf.mwe2.launch;bundle-version="2.0.0";resolution:=optional,

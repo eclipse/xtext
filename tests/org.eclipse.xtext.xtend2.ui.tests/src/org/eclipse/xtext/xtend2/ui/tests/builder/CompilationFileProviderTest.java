@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtend2.tests.ui.builder;
+package org.eclipse.xtext.xtend2.ui.tests.builder;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -18,15 +18,15 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
-import org.eclipse.xtext.xtend2.tests.ui.AbstractXtend2WorkspaceTestCase;
 import org.eclipse.xtext.xtend2.ui.builder.CompilationFileProvider;
+import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 
 import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class CompilationFileProviderTest extends AbstractXtend2WorkspaceTestCase {
+public class CompilationFileProviderTest extends AbstractXtend2UITestCase {
 
 	@Inject
 	protected CompilationFileProvider compilationFileProvider;
