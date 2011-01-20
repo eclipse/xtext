@@ -29,6 +29,102 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 		assertEvaluatesTo(new Integer(3), "1+2");
 	}
 
+	public void testSubtractionOnIntegers() throws Exception {
+		assertEvaluatesTo(new Integer(1), "2-1");
+	}
+
+	public void testMultiplicationOnIntegers() throws Exception {
+		assertEvaluatesTo(new Integer(42), "6*7");
+	}
+
+	public void testDivisionOnIntegers_01() throws Exception {
+		assertEvaluatesTo(new Integer(2), "6/3");
+	}
+
+	public void testDivisionOnIntegers_02() throws Exception {
+		assertEvaluatesTo(new Integer(2), "7/3");
+	}
+
+	public void testModuloOnIntegers() throws Exception {
+		assertEvaluatesTo(new Integer(1), "7%3");
+	}
+
+	public void testPowerOnIntegers() throws Exception {
+		assertEvaluatesTo(new Integer(8), "2**3");
+	}
+
+	public void testLessThanOnIntegers_01() throws Exception {
+		assertEvaluatesTo(new Boolean(true), "3<4");
+	}
+
+	public void testLessThanOnIntegers_02() throws Exception {
+		assertEvaluatesTo(new Boolean(false), "4<3");
+	}
+
+	public void testGreaterThanOnIntegers_01() throws Exception {
+		assertEvaluatesTo(new Boolean(true), "4>3");
+	}
+
+	public void testGreaterThanOnIntegers_02() throws Exception {
+		assertEvaluatesTo(new Boolean(false), "3>4");
+	}
+
+	public void testLessEqualsThanOnIntegers_01() throws Exception {
+		assertEvaluatesTo(new Boolean(true), "3<=3");
+	}
+
+	public void testLessEqualsThanOnIntegers_02() throws Exception {
+		assertEvaluatesTo(new Boolean(true), "3<=4");
+	}
+
+	public void testLessEqualsThanOnIntegers_03() throws Exception {
+		assertEvaluatesTo(new Boolean(false), "4<=3");
+	}
+
+	public void testGreaterEqualsThanOnIntegers_01() throws Exception {
+		assertEvaluatesTo(new Boolean(true), "3>=3");
+	}
+
+	public void testGreaterEqualsThanOnIntegers_02() throws Exception {
+		assertEvaluatesTo(new Boolean(true), "4>=3");
+	}
+
+	public void testGreaterEqualsThanOnIntegers_03() throws Exception {
+		assertEvaluatesTo(new Boolean(false), "3>=4");
+	}
+
+	public void testOrOnBooleans_01() throws Exception {
+		assertEvaluatesTo(new Boolean(true), "true||false");
+	}
+
+	public void testOrOnBooleans_02() throws Exception {
+		assertEvaluatesTo(new Boolean(true), "false||true");
+	}
+
+	public void testOrOnBooleans_03() throws Exception {
+		assertEvaluatesTo(new Boolean(true), "true||true");
+	}
+
+	public void testOrOnBooleans_04() throws Exception {
+		assertEvaluatesTo(new Boolean(false), "false||false");
+	}
+
+	public void testAndOnBooleans_01() throws Exception {
+		assertEvaluatesTo(new Boolean(true), "true&&true");
+	}
+
+	public void testAndOnBooleans_02() throws Exception {
+		assertEvaluatesTo(new Boolean(false), "false&&true");
+	}
+
+	public void testAndOnBooleans_03() throws Exception {
+		assertEvaluatesTo(new Boolean(false), "true&&false");
+	}
+
+	public void testAndOnBooleans_04() throws Exception {
+		assertEvaluatesTo(new Boolean(false), "false&&false");
+	}
+
 	public void testNull() {
 		assertEvaluatesTo(null, "null");
 	}
