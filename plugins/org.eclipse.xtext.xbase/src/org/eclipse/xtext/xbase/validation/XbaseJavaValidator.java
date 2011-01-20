@@ -6,6 +6,7 @@ import static org.eclipse.xtext.xbase.XbasePackage.*;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -86,6 +87,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 						+ canonicalName(actualType), obj, -1, INCOMPATIBLE_TYPES);
 		} catch (TypeResolutionException e) {
 			// do nothing, error should be handled elsewhere
+		} catch (WrappedException e) {
+			throw new WrappedException("XbaseJavaValidator#checkTypes for " + obj + " caused: " + e.getCause().getMessage(), e);
 		}
 	}
 
