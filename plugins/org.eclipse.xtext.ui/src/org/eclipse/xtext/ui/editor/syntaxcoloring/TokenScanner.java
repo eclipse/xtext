@@ -67,5 +67,21 @@ public class TokenScanner extends AbstractTokenScanner {
 	public int getTokenLength() {
 		return currentToken.getLength();
 	}
+	
+	protected Iterator<ILexerTokenRegion> getIterator() {
+		return iterator;
+	}
+	
+	protected ILexerTokenRegion getCurrentToken() {
+		return currentToken;
+	}
+	
+	protected void setCurrentToken(ILexerTokenRegion currentToken) {
+		this.currentToken = currentToken;
+	}
+	
+	protected AbstractAntlrTokenToAttributeIdMapper getTokenIdMapper() {
+		return tokenIdMapper;
+	}
 
 }
