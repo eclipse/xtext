@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
-public abstract class JvmIdentifyableElementImplCustom extends JvmIdentifyableElementImpl {
+public abstract class JvmIdentifiableElementImplCustom extends JvmIdentifiableElementImpl {
 	
 	@Override
 	public String getCanonicalName() {

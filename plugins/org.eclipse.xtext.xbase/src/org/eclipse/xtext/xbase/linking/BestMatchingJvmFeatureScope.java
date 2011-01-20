@@ -9,7 +9,7 @@ package org.eclipse.xtext.xbase.linking;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
@@ -77,7 +77,7 @@ public class BestMatchingJvmFeatureScope implements IScope {
 		if (bestMatch instanceof JvmFeatureDescription) {
 			if (this.reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE) {
 				JvmFeatureDescription featureDesc = (JvmFeatureDescription) bestMatch;
-				final JvmIdentifyableElement implicitReceiver = featureDesc.getImplicitReceiver();
+				final JvmIdentifiableElement implicitReceiver = featureDesc.getImplicitReceiver();
 				final XAbstractFeatureCall featureCall = (XAbstractFeatureCall) this.context;
 				featureCall.setImplicitReceiver(implicitReceiver);
 				featureCall.setTargetsMemberSyntaxCall(featureDesc.isMemberSyntaxContext());

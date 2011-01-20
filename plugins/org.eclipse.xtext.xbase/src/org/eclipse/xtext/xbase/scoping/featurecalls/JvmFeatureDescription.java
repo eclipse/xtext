@@ -12,7 +12,7 @@ import static org.eclipse.xtext.util.Strings.*;
 import java.util.Collections;
 
 import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -25,11 +25,11 @@ public class JvmFeatureDescription extends EObjectDescription {
 	private final TypeArgumentContext context;
 	private final String shadowingString;
 	private final boolean isValid;
-	private JvmIdentifyableElement implicitReceiver;
+	private JvmIdentifiableElement implicitReceiver;
 	private boolean isMemberSyntaxContext = true;
 	private String issueCode;
 
-	public JvmFeatureDescription(QualifiedName qualifiedName, JvmFeature element, TypeArgumentContext context, String shadowingString, boolean isValid, JvmIdentifyableElement implicitReceiver, boolean isMemberSyntaxContext) {
+	public JvmFeatureDescription(QualifiedName qualifiedName, JvmFeature element, TypeArgumentContext context, String shadowingString, boolean isValid, JvmIdentifiableElement implicitReceiver, boolean isMemberSyntaxContext) {
 		super(qualifiedName, element, Collections.<String,String>emptyMap());
 		this.context = context;
 		this.shadowingString = shadowingString;
@@ -59,11 +59,11 @@ public class JvmFeatureDescription extends EObjectDescription {
 		return isValid && isEmpty(issueCode);
 	}
 	
-	public void setImplicitReceiver(JvmIdentifyableElement implicitReceiver) {
+	public void setImplicitReceiver(JvmIdentifiableElement implicitReceiver) {
 		this.implicitReceiver = implicitReceiver;
 	}
 	
-	public JvmIdentifyableElement getImplicitReceiver() {
+	public JvmIdentifiableElement getImplicitReceiver() {
 		return implicitReceiver;
 	}
 	

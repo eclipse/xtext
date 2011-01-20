@@ -39,7 +39,7 @@ import com.google.inject.Inject;
 
 /**
  * <p>
- * Checks whether a given {@link org.eclipse.xtext.common.types.JvmIdentifyableElement} can possibly be called by a
+ * Checks whether a given {@link org.eclipse.xtext.common.types.JvmIdentifiableElement} can possibly be called by a
  * given {@link XAbstractFeatureCall}.
  * </p>
  * <p>

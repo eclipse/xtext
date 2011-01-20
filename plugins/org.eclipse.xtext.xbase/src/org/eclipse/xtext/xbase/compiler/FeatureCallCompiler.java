@@ -18,7 +18,7 @@ import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -228,7 +228,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		return call.isTargetsMemberSyntaxCall();
 	}
 
-	protected boolean isStatic(JvmIdentifyableElement feature) {
+	protected boolean isStatic(JvmIdentifiableElement feature) {
 		if (feature instanceof JvmOperation) {
 			return ((JvmOperation) feature).isStatic();
 		} else if (feature instanceof JvmField) {
@@ -238,7 +238,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 
 	protected void xAssignmentToJavaExpression(XAssignment expr, IAppendable b) {
-		final JvmIdentifyableElement feature = expr.getFeature();
+		final JvmIdentifiableElement feature = expr.getFeature();
 		boolean appendReceiver = appendReceiver(expr, b);
 		if (appendReceiver)
 			b.append(".");
@@ -252,13 +252,13 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 
 	protected void compileImplicitReceiver(XAbstractFeatureCall expr, IAppendable b) {
-		final JvmIdentifyableElement implicitReceiver = expr.getImplicitReceiver();
+		final JvmIdentifiableElement implicitReceiver = expr.getImplicitReceiver();
 		if (implicitReceiver != null) {
 			appendFeatureCall(implicitReceiver, null, b);
 		}
 	}
 
-	protected void appendFeatureCall(JvmIdentifyableElement target, List<? extends XExpression> arguments, IAppendable b) {
+	protected void appendFeatureCall(JvmIdentifiableElement target, List<? extends XExpression> arguments, IAppendable b) {
 		if (target instanceof JvmFormalParameter) {
 			final String name = ((JvmFormalParameter) target).getName();
 			b.append(makeJavaIdentifier(name));

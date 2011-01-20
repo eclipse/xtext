@@ -12,7 +12,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -74,7 +74,7 @@ public class XAbstractFeatureCallImplCustom extends XAbstractFeatureCallImpl {
 	}
 	
 	@Override
-	public JvmIdentifyableElement getImplicitReceiver() {
+	public JvmIdentifiableElement getImplicitReceiver() {
 		// call getFeature(), because the implicitReceiver is set as a side effect of a resolution of the feature.
 		// see {@link org.eclipse.xtext.xbase.linking.BestMatchingJvmFeatureScope#setImplicitReceiver(IEObjectDescription)}
 		getFeature();

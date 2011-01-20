@@ -12,7 +12,7 @@ import static java.util.Collections.*;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.TypeNotFoundException;
@@ -74,9 +74,9 @@ public abstract class AbstractTypeScope extends AbstractScope {
 	
 	@Override
 	public Iterable<IEObjectDescription> getElements(EObject object) {
-		if (object instanceof JvmIdentifyableElement) {
+		if (object instanceof JvmIdentifiableElement) {
 			final Set<IEObjectDescription> result = singleton(EObjectDescription.create(
-					qualifiedNameConverter.toQualifiedName(((JvmIdentifyableElement) object).getCanonicalName()),
+					qualifiedNameConverter.toQualifiedName(((JvmIdentifiableElement) object).getCanonicalName()),
 					object));
 			return filterResult(result);
 		}
