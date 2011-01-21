@@ -8,10 +8,12 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.xtend2.ui.highlighting.HighlightingConfiguration;
 import org.eclipse.xtext.xtend2.ui.highlighting.RichStringAwareTokenScanner;
 import org.eclipse.xtext.xtend2.ui.highlighting.RichStringHighlightingCalculator;
 import org.eclipse.xtext.xtend2.ui.highlighting.TokenToAttributeIdMapper;
+import org.eclipse.xtext.xtend2.ui.refactoring.Xtend2RenameStrategy;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -36,5 +38,10 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 	
 	public Class<? extends ISemanticHighlightingCalculator> bindSemanticHighlightingCalculator() {
 		return RichStringHighlightingCalculator.class;
+	}
+	
+	public Class<? extends IRenameStrategy.Provider> bindIRenameStrategy$Provider() {
+		return Xtend2RenameStrategy.Provider.class;
+		
 	}
 }
