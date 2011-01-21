@@ -7,14 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.typing;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * 
  * Represents the function ASTNode -> Type, which is the main concept of a type system. 
  */
-public interface ITypeProvider<T> {
+public interface ITypeProvider<T,P> {
 
 	/**
 	 * computes the type of the given astNode.
@@ -23,6 +22,6 @@ public interface ITypeProvider<T> {
 	 * @return the type T or null if the type cannot be determined
 	 * @throws TypeResolutionException if there is a problem with type resolution. 
 	 */
-	public T getType(EObject astNode);
+	public T getType(P astNode);
 	
 }

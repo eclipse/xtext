@@ -13,28 +13,16 @@ import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.Tuples;
 
-import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class AbstractTypeProvider<T> implements ITypeProvider<T> {
+public class AbstractTypeProvider<T, P extends EObject> implements ITypeProvider<T, P> {
 
 	private final PolymorphicDispatcher<T> typeDispatcher = PolymorphicDispatcher.createForSingleTarget("_type", this);
 
-	@Inject(optional = true)
-	private IExpectedTypeProvider<T> expectedTypeProvider;
-
-	public void setExpectedTypeProvider(IExpectedTypeProvider<T> expectedTypeProvider) {
-		this.expectedTypeProvider = expectedTypeProvider;
-	}
-
-	protected T getExpectedType(EObject astNode) {
-		return expectedTypeProvider != null ? expectedTypeProvider.getExpectedType(astNode) : null;
-	}
-
-	public T getType(final EObject astNode) {
+	public T getType(final P astNode) {
 		if (astNode == null)
 			throw new TypeResolutionException("expression is null");
 		if (astNode.eIsProxy())
@@ -58,13 +46,12 @@ public class AbstractTypeProvider<T> implements ITypeProvider<T> {
 		return ((XtextResource) astNode.eResource()).getCache();
 	}
 
-	protected T doConversion(T actualType, EObject context) {
+	protected T doConversion(T actualType, P context) {
 		return actualType;
 	}
 
 	public T _type(EObject stNode) {
-		throw new TypeResolutionException("Type computation is not implemented for AST nodes of type "
-				+ stNode.getClass().getCanonicalName());
+		throw new TypeResolutionException("Type computation is not implemented for " + stNode);
 	}
 
 	protected String getName(T actual) {

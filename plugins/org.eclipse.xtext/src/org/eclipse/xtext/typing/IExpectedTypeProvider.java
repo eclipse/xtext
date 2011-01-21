@@ -13,12 +13,12 @@ import org.eclipse.emf.ecore.EReference;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public interface IExpectedTypeProvider<T> {
+public interface IExpectedTypeProvider<T,P extends EObject> {
 	
 	/**
 	 * computes the expected type for the given obj
 	 */
-	public T getExpectedType(EObject obj);
+	public T getExpectedType(P obj);
 	
 	/**
 	 * computes the expected type for the given reference, index and container object

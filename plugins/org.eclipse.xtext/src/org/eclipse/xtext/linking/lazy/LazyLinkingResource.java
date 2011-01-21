@@ -106,6 +106,8 @@ public class LazyLinkingResource extends XtextResource {
 	}
 
 	protected void resolveLazyCrossReference(InternalEObject source, EStructuralFeature crossRef) {
+		if (crossRef.isDerived())
+			return;
 		if (crossRef.isMany()) {
 			@SuppressWarnings("unchecked")
 			InternalEList<EObject> list = (InternalEList<EObject>) source.eGet(crossRef);

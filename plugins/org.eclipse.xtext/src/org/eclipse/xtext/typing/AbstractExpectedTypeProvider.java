@@ -21,9 +21,9 @@ import com.google.inject.Provider;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class AbstractExpectedTypeProvider<T> implements IExpectedTypeProvider<T> {
+public class AbstractExpectedTypeProvider<T,P extends EObject> implements IExpectedTypeProvider<T,P> {
 
-	public T getExpectedType(EObject obj) {
+	public T getExpectedType(P obj) {
 		EReference containmentReference = obj.eContainmentFeature();
 		if(containmentReference == null)
 			return null;
