@@ -157,6 +157,8 @@ public class TypeArgumentContext {
 		}
 		
 		public TypeArgumentContext get(JvmTypeReference contextRef) {
+			if (contextRef==null)
+				throw new NullPointerException("contextReference");
 			Map<JvmTypeParameter, JvmTypeReference> context = Maps.newHashMap();
 			JvmDeclaredType objectType = internalComputeContext(contextRef, context);
 			return new TypeArgumentContext(context, objectType);

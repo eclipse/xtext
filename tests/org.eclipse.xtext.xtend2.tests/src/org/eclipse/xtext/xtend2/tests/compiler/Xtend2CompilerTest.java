@@ -16,8 +16,8 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 				"\n" + 
 				"public class Bar {\n" + 
 				"  public java.lang.Integer doStuff(java.lang.String x) {\n" + 
-				"    java.lang.Integer _var = x.length();\n" + 
-				"    return _var;\n" + 
+				"    java.lang.Integer length = x.length();\n" + 
+				"    return length;\n" + 
 				"  }\n" + 
 				"}";
 		assertCompilesTo(expected, input);

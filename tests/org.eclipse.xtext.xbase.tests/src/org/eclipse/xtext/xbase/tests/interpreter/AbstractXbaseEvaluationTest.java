@@ -25,6 +25,36 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 	protected abstract void assertEvaluatesTo(Object object, String string);
 	protected abstract void assertEvaluatesWithException(Class<? extends Throwable> class1, String string);
 	
+	public void testUpToOperator() throws Exception {
+		assertEvaluatesTo(new Integer(9),"(9..13).iterator().next()");
+	}
+	
+	public void testOverriddenLocalVariables() throws Exception {
+		assertEvaluatesTo(new Integer(3),
+				"{" +
+				" val x = 3 " +
+				" var y = 2 " +
+				" {" +
+				"  var x = y " +
+				"  val y = 1 " +
+				"  x+y" +
+				"  }" +
+				"}");
+	}
+	
+	public void testOverriddenLocalVariables_0() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE,
+				"{" +
+				" var x = 1 " +
+				" val y = 4 " +
+				" for (y : 1..3) {" +
+				"  x = x+y" +
+				" }" +
+				" x == y" +
+				"}"
+			);
+	}
+	
 	public void testAddOnIntegers() throws Exception {
 		assertEvaluatesTo(new Integer(3), "1+2");
 	}

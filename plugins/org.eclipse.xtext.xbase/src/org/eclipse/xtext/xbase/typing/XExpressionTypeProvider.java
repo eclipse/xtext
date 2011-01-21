@@ -112,10 +112,14 @@ public class XExpressionTypeProvider extends AbstractTypeProvider<JvmTypeReferen
 	protected JvmTypeReference _type(XAbstractFeatureCall object) {
 		//TODO use expectedType to infer type args
 		JvmIdentifiableElement feature = object.getFeature();
+		if (feature==null || feature.eIsProxy())
+			return null;
 		JvmTypeReference featureType = identifiableTypeProvider.getType(feature);
 		final XExpression receiver = object.getActualReceiver();
 		if (receiver!=null) {
 			JvmTypeReference receiverType = getConvertedType(receiver);
+			if (receiverType==null)
+				return null;
 			JvmTypeReference converted = typeConverter.convert(receiverType, object);
 			return typeArgCtxProvider.get(converted).getUpperBound(featureType);
 		} else {

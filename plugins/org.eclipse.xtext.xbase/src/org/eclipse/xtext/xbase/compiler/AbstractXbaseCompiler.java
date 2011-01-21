@@ -8,14 +8,17 @@
 package org.eclipse.xtext.xbase.compiler;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
 import org.eclipse.xtext.xbase.typing.XExpressionExpectedTypeProvider;
@@ -157,26 +160,72 @@ public abstract class AbstractXbaseCompiler {
 		return type.getCanonicalName();
 	}
 
-	protected String getVarName(EObject ex) {
-		if (ex.eContainer() instanceof XExpression || ex.eContainer() instanceof XCatchClause) {
-			return getVarName(ex.eContainer()) + "_" + ex.eContainer().eContents().indexOf(ex);
+	protected String getJavaVarName(EObject ex, IAppendable appendable) {
+		final String varName = getVarName(ex, appendable);
+		if (varName==null) {
+			return null;
 		}
-		return "_var";
+		return makeJavaIdentifier(varName);
+	}
+	
+	protected String getVarName(EObject ex, IAppendable appendable) {
+		String name = appendable.getName(ex);
+		return name;
+	}
+	
+	protected String declareNameInVariableScope(EObject declaration, IAppendable appendable) {
+		final String favoriteVariableName = getFavoriteVariableName(declaration);
+		final String varName = appendable.declareVariable(declaration, favoriteVariableName);
+		return makeJavaIdentifier(varName);
+	}
+
+	protected String getFavoriteVariableName(EObject ex) {
+		if (ex instanceof XVariableDeclaration) {
+			return ((XVariableDeclaration) ex).getName();
+		}
+		if (ex instanceof JvmFormalParameter) {
+			return ((JvmFormalParameter) ex).getName();
+		}
+		if (ex instanceof XAbstractFeatureCall) {
+			String name = ((XAbstractFeatureCall) ex).getFeature().getCanonicalName();
+			int indexOf = name.indexOf('(');
+			if (indexOf !=-1) {
+				name = name.substring(0,indexOf);
+			}
+			indexOf = name.lastIndexOf('.');
+			if (indexOf !=-1) {
+				name = name.substring(indexOf+1);
+			}
+			if (name.startsWith("get") && name.length()>3)
+				return name.substring(2);
+			return name;
+		}
+		return ex.eClass().getName().toLowerCase();
 	}
 
 	protected String makeJavaIdentifier(String name) {
+		//TODO escape all Java keywords
 		return name.equals("this") ? "_this" : name;
 	}
 
-	protected void declareLocalVariable(XExpression expr, IAppendable b) {
+	protected void declareLocalVariable(XExpression expr, final IAppendable b) {
 		declareLocalVariable(expr, b, "null");
 	}
 
-	protected void declareLocalVariable(XExpression expr, IAppendable b, Object serializedExpression) {
+	protected void declareLocalVariable(XExpression expr,final IAppendable b, final String expression) {
+		declareLocalVariable(expr, b, new Later() {
+			@Override
+			public void exec() {
+				b.append(expression);
+			}});
+	}
+	protected void declareLocalVariable(XExpression expr, IAppendable b, Later expression) {
 		JvmTypeReference type = getExpectedTypeProvider().getExpectedType(expr);
 		if (type == null || type.getCanonicalName().equals(Object.class.getCanonicalName()))
 			type = getTypeProvider().getConvertedType(expr);
-		b.append("\n").append(getSerializedForm(type)).append(" ").append(getVarName(expr)).append(" = ")
-				.append(serializedExpression).append(";");
+		final String varName = declareNameInVariableScope(expr, b);
+		b.append("\n").append(getSerializedForm(type)).append(" ").append(varName).append(" = ");
+		expression.exec();
+		b.append(";");
 	}
 }

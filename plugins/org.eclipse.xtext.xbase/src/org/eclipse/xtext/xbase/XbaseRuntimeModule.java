@@ -12,6 +12,7 @@ import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.xbase.conversion.XbaseValueConverterService;
@@ -24,9 +25,9 @@ import org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider;
 import org.eclipse.xtext.xbase.typing.IXExpressionExpectedTypeProvider;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
 import org.eclipse.xtext.xbase.typing.XExpressionExpectedTypeProvider;
+import org.eclipse.xtext.xbase.typing.XExpressionTypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
-import org.eclipse.xtext.xbase.typing.XExpressionTypeProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -35,6 +36,11 @@ import com.google.inject.name.Names;
  * Use this class to register components to be used within the IDE.
  */
 public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
+	
+	public Class<? extends IQualifiedNameConverter> bindIQualifiedNameConverter() {
+		return XbaseQualifiedNameConverter.class;
+	}
+	
 	public Class<? extends org.eclipse.xtext.typing.ITypeConformanceComputer<JvmTypeReference>> bindITypeService() {
 		return IJvmTypeConformanceComputer.class;
 	}
