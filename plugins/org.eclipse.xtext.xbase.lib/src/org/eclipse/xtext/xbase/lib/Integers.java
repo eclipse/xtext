@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import java.util.Iterator;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -39,6 +41,49 @@ public class Integers {
 	
 	public static int _operator_power(Integer a, Number b) {
 		return (int) Math.pow(a, b.intValue());
+	}
+
+	/**
+	 * implementation for the upTo operator on {@link Integer} 
+	 */
+	public static Iterable<Integer> _operator_upTo(final Integer a, Number b) {
+		final int upTo = b.intValue();
+		return new Iterable<Integer>() {
+			public Iterator<Integer> iterator() {
+				return new IntIterator(a, upTo);
+			}
+		};
+	}
+	
+	static class IntIterator implements Iterator<Integer> {
+			private int current;
+			private int upTo;
+			private boolean increases;
+			
+			public IntIterator(int start, int upTo) {
+				super();
+				this.current = start;
+				this.upTo = upTo;
+				this.increases = start<upTo;
+			}
+
+			public boolean hasNext() {
+				if (increases)
+					return current<upTo;
+				else
+					return current>upTo;
+			}
+
+			public Integer next() {
+				if (increases)
+					return current++;
+				else
+					return current--;
+			}
+
+			public void remove() {
+				throw new UnsupportedOperationException();
+			}
 	}
 	
 }
