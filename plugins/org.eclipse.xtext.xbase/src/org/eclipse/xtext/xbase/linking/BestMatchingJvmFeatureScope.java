@@ -47,13 +47,6 @@ public class BestMatchingJvmFeatureScope implements IScope {
 		this.featureCallChecker = featureCallChecker;
 	}
 
-//	protected Iterable<IEObjectDescription> sortByPredicate(Iterable<IEObjectDescription> unsorted) {
-//		if(isCallablePredicate != null) {
-//			return concat(filter(unsorted, isCallablePredicate), filter(unsorted, Predicates.not(isCallablePredicate)));
-//		}
-//		return unsorted;
-//	}
-	
 	public Iterable<IEObjectDescription> getAllElements() {
 		throw new UnsupportedOperationException();
 	}

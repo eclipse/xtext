@@ -23,7 +23,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
-import org.eclipse.xtext.xbase.compiler.IAppendable.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.lib.Conversions;
 
@@ -35,7 +34,7 @@ import com.google.inject.Inject;
  */
 public class FeatureCallCompiler extends LiteralsCompiler {
 
-	protected void _prepare(XAbstractFeatureCall expr, IAppendable b) {
+	protected void _prepare(final XAbstractFeatureCall expr, final IAppendable b) {
 		if (isVoid(expr)) {
 			internalToJavaStatement(expr, b);
 		} else if (isSpreadingMemberFeatureCall(expr)) {
@@ -48,15 +47,19 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				for (XExpression arg : expr.getAllArguments()) {
 					internalPrepare(arg, b);
 				}
-				IAppendable appendable = new IAppendable.StringBuilderBasedAppendable();
-				featureCalltoJavaExpression(expr, appendable);
+				Later later = new Later() {
+					@Override
+					public void exec() {
+						featureCalltoJavaExpression(expr, b);
+					}
+				};
 				JvmTypeReference original = getTypeProvider().getType(expr);
 				JvmTypeReference converted = getTypeProvider().getConvertedType(expr);
 				final boolean noConversion = EcoreUtil.equals(converted, original);
 				if (!noConversion) {
-					appendable = doConversion(converted, original, appendable);
+					later = doConversion(converted, original, b, later);
 				}
-				declareLocalVariable(expr, b, appendable);
+				declareLocalVariable(expr, b, later);
 			}
 		}
 	}
@@ -67,11 +70,11 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 		declareLocalVariable(expr, b, Lists.class.getCanonicalName() + ".newArrayList()");
 		b.append("\nfor(");
-		final String varName = getVarName(expr) + "_spread";
-		b.append(varName).append(" : ");
+		final String varName = getJavaVarName(expr,b) + "_spread";
+		b.append(makeJavaIdentifier(varName)).append(" : ");
 		internalToJavaExpression(expr.getMemberCallTarget(), b);
 		b.append(") {");
-		b.append("\n").append(getVarName(expr)).append("add(");
+		b.append("\n").append(getJavaVarName(expr,b)).append("add(");
 		b.append(varName).append(".");
 		appendFeatureCall(expr.getFeature(), expr.getActualArguments(), b);
 		b.append(";");
@@ -81,20 +84,34 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		return expr instanceof XMemberFeatureCall && ((XMemberFeatureCall) expr).isSpreading();
 	}
 
-	protected IAppendable doConversion(JvmTypeReference left, JvmTypeReference right, Object expressionAsJavaCode) {
-		StringBuilderBasedAppendable appendable = new IAppendable.StringBuilderBasedAppendable();
-		if (right.getType() instanceof JvmArrayType) {
-			appendable.append("(").append(getSerializedForm(left)).append(")");
-			appendable.append(Conversions.class.getCanonicalName()).append(".doWrapArray(")
-					.append(expressionAsJavaCode).append(")");
-		} else if (left != null && left.getType() instanceof JvmArrayType) {
-			appendable.append("(").append(getSerializedForm(left)).append(")");
-			appendable.append(Conversions.class.getCanonicalName()).append(".unwrapArray(")
-					.append(expressionAsJavaCode).append(")");
-		} else {
-			appendable.append(expressionAsJavaCode);
-		}
-		return appendable;
+	protected Later doConversion(final JvmTypeReference left, final JvmTypeReference right, final IAppendable appendable, final String expression) {
+		return doConversion(left, right, appendable, new Later() {
+			@Override
+			public void exec() {
+				appendable.append(expression);
+			}});
+	}
+	
+	protected Later doConversion(final JvmTypeReference left, final JvmTypeReference right, final IAppendable appendable, final Later expression) {
+		return new Later() {
+			@Override
+			public void exec() {
+				if (right.getType() instanceof JvmArrayType) {
+					appendable.append("(").append(getSerializedForm(left)).append(")");
+					appendable.append(Conversions.class.getCanonicalName()).append(".doWrapArray(");
+					expression.exec();
+					appendable.append(")");
+				} else if (left != null && left.getType() instanceof JvmArrayType) {
+					appendable.append("(").append(getSerializedForm(left)).append(")");
+					appendable.append(Conversions.class.getCanonicalName()).append(".unwrapArray(");
+					expression.exec();
+					appendable.append(")");
+				} else {
+					expression.exec();
+				}
+			}
+			
+		};
 	}
 
 	protected void _toJavaStatement(XAbstractFeatureCall expr, IAppendable b) {
@@ -114,21 +131,22 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		if (isVoid(call)) {
 			b.append("null");
 		} else if (isSpreadingMemberFeatureCall(call)) {
-			b.append(getVarName(call));
+			throw new UnsupportedOperationException();
+//			b.append(getVarName(call));
 		} else {
 			String expression = null;
-			if (call.getFeature() instanceof XVariableDeclaration) {
-				expression = makeJavaIdentifier(((XVariableDeclaration) call.getFeature()).getName());
-			} else if (call.getFeature() instanceof JvmFormalParameter) {
-				expression = makeJavaIdentifier(((JvmFormalParameter) call.getFeature()).getName());
+			if (call instanceof XFeatureCall
+					&& (call.getFeature() instanceof XVariableDeclaration || call.getFeature() instanceof JvmFormalParameter)) {
+				expression = getJavaVarName(call.getFeature(), b);
 			} else {
-				expression = getVarName(call);
+				expression = getJavaVarName(call, b);
 			}
 			JvmTypeReference expectedType = getExpectedTypeProvider().getExpectedType(call);
 			if (expectedType != null) {
 				JvmTypeReference actualType = getTypeProvider().getConvertedType(call);
 				if (!EcoreUtil.equals(expectedType, actualType)) {
-					b.append(doConversion(expectedType, actualType, expression));
+					final Later doConversion = doConversion(expectedType, actualType, b, expression);
+					doConversion.exec();
 					return;
 				}
 			}

@@ -150,15 +150,20 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 	}
 
 	protected Iterable<? extends JvmFeature> getFeaturesForType(JvmDeclaredType declType, IJvmFeatureDescriptionProvider descriptionProvider) {
+		final Predicate<JvmFeature> predicate = new Predicate<JvmFeature>() {
+			public boolean apply(JvmFeature input) {
+				return isValidFeature(input);
+			}
+		};
 		if (descriptionProvider instanceof IFeaturesForTypeProvider) {
-			return ((IFeaturesForTypeProvider)descriptionProvider).getFeaturesForType(declType);
+			return filter(((IFeaturesForTypeProvider)descriptionProvider).getFeaturesForType(declType),predicate);
 		}
 		return filter(filter(declType.getMembers(), JvmFeature.class),
-				new Predicate<JvmFeature>() {
-					public boolean apply(JvmFeature input) {
-						return !(input instanceof JvmConstructor);
-					}
-				});
+				predicate);
+	}
+	
+	protected boolean isValidFeature(JvmFeature input) {
+		return input!=null && input.getSimpleName()!=null && input.getDeclaringType()!=null && !(input instanceof JvmConstructor);
 	}
 
 	/**
@@ -168,6 +173,7 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 	public Iterable<JvmTypeReference> linearizeTypeHierarchy(JvmTypeReference typeRef) {
 		return concat(singleton(typeRef), superTypeCollector.collectSuperTypes(typeRef));
 	}
+
 
 	protected static class JvmFeatureDescriptions {
 		private String text;

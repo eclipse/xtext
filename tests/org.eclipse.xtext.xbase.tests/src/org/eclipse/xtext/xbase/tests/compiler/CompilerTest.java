@@ -18,30 +18,30 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 public class CompilerTest extends AbstractXbaseTestCase {
 	
 	public void testSimple() throws Exception {
-		assertCompilesTo("\njava.lang.Integer _var = \"foo\".length();\n" + 
-				"return _var;", "'foo'.length");
+		assertCompilesTo("\njava.lang.Integer length = \"foo\".length();\n" + 
+				"return length;", "'foo'.length");
 	}
 	
 	public void testBlock() throws Exception {
 		assertCompilesTo(
-				"\njava.lang.Integer _var = null;\n" +
+				"\njava.lang.Integer xblockexpression = null;\n" +
 				"{\n" +
 				"  final java.util.ArrayList<java.lang.String> _this = new java.util.ArrayList<java.lang.String>();\n" +
-				"  java.lang.Integer _var_1 = _this.size();\n" + 
-				"  _var = (_var_1);\n" +
+				"  java.lang.Integer size = _this.size();\n" + 
+				"  xblockexpression = (size);\n" +
 				"}\n" +
-				"return _var;"
+				"return xblockexpression;"
 				, "{ val this = new java.util.ArrayList<String>(); size;}");
 	}
 	
 	public void testIf() throws Exception {
 		assertCompilesTo(
-				"\njava.lang.Integer _var = null;\n" +
+				"\njava.lang.Integer xifexpression = null;\n" +
 				"if (true) {\n" +
-				"  _var = new Integer(42);\n" +
+				"  xifexpression = new Integer(42);\n" +
 				"} else {\n" +
-				"  _var = new Integer(21);\n}\n" +
-				"return _var;"
+				"  xifexpression = new Integer(21);\n}\n" +
+				"return xifexpression;"
 				, "if (true) 42 else 21");
 	}
 
