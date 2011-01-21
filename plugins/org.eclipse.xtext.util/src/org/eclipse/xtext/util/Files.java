@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -115,23 +116,42 @@ public class Files {
 	}
 
 	public static String readFileIntoString(String filename) {
+		FileInputStream inputStream;
 		try {
-			FileInputStream inputStream = new FileInputStream(filename);
-			try {
-				byte[] buffer = new byte[2048];
-				int bytesRead = 0;
-				StringBuffer b = new StringBuffer();
-				do {
-					bytesRead = inputStream.read(buffer);
-					if (bytesRead != -1)
-						b.append(new String(buffer, 0, bytesRead));
-				} while (bytesRead != -1);
-				return b.toString();
-			} finally {
-				inputStream.close();
-			}
+			inputStream = new FileInputStream(filename);
+			return readStreamIntoString(inputStream);
+		} catch (FileNotFoundException e) {
+			throw new WrappedException(e);
+		}
+	}
+
+	public static String readStreamIntoString(InputStream inputStream) {
+		if (inputStream==null)
+			throw new NullPointerException("inputStream");
+		BufferedInputStream source = null;
+		if (inputStream instanceof BufferedInputStream) {
+			source = (BufferedInputStream) inputStream;
+		} else {
+			source = new BufferedInputStream(inputStream);
+		}
+		try {
+			byte[] buffer = new byte[2048];
+			int bytesRead = 0;
+			StringBuffer b = new StringBuffer();
+			do {
+				bytesRead = source.read(buffer);
+				if (bytesRead != -1)
+					b.append(new String(buffer, 0, bytesRead));
+			} while (bytesRead != -1);
+			return b.toString();
 		} catch (IOException e) {
 			throw new WrappedException(e);
+		} finally {
+			try {
+				source.close();
+			} catch (IOException e) {
+				throw new WrappedException(e);
+			}
 		}
 	}
 
