@@ -85,8 +85,6 @@ public class DefaultRenameStrategy implements IRenameStrategy {
 	}
 
 	protected EObject setName(URI targetElementURI, String newName, ResourceSet resourceSet) {
-		for(Resource resource: resourceSet.getResources())
-			EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
 		EObject targetElement = resourceSet.getEObject(targetElementURI, false);
 		if(targetElement == null) {
 			throw new RefactoringStatusException("Target element not loaded.", true);
