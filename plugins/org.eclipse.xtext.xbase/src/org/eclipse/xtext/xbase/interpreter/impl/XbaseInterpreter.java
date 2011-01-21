@@ -562,7 +562,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			i++;
 		}
 	}
-
+	
 	protected Object coerceArgumentType(Object value, JvmTypeReference expectedType) {
 		if (value == null)
 			return null;

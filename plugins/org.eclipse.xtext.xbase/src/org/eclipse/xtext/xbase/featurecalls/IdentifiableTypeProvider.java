@@ -23,7 +23,6 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.typing.AbstractTypeProvider;
-import org.eclipse.xtext.typing.TypeResolutionException;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
@@ -97,8 +96,7 @@ public class IdentifiableTypeProvider extends AbstractTypeProvider<JvmTypeRefere
 									}
 								});
 					} catch (NoSuchElementException e) {
-						throw new TypeResolutionException("The return type of the for expression wasn't of type "
-								+ TypesService.JAVA_LANG_ITERABLE);
+						return null;
 					}
 				}
 				final JvmTypeReference resolveContravariant = context.getUpperBound((reference).getArguments().get(0));

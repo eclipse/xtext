@@ -19,7 +19,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
-import org.eclipse.xtext.typing.TypeResolutionException;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.xbase.XAssignment;
@@ -85,8 +84,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			if (!conformanceComputer.isConformant(expectedType, actualType))
 				error("Incompatible types. Expected " + canonicalName(expectedType) + " but was "
 						+ canonicalName(actualType), obj, -1, INCOMPATIBLE_TYPES);
-		} catch (TypeResolutionException e) {
-			// do nothing, error should be handled elsewhere
 		} catch (WrappedException e) {
 			throw new WrappedException("XbaseJavaValidator#checkTypes for " + obj + " caused: " + e.getCause().getMessage(), e);
 		}
