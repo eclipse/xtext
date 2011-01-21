@@ -28,7 +28,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
 import org.eclipse.xtext.scoping.impl.SingletonScope;
-import org.eclipse.xtext.typing.TypeResolutionException;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -64,7 +63,7 @@ import com.google.inject.internal.Lists;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XbaseScopeProvider extends XtypeScopeProvider {
-	
+
 	private final static Logger log = Logger.getLogger(XbaseScopeProvider.class);
 
 	public static final QualifiedName THIS = QualifiedName.create("this");
@@ -79,10 +78,10 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 
 	@Inject
 	private Provider<XFeatureCallSugarDescriptionProvider> sugarFeatureDescProvider;
-	
+
 	@Inject
 	private Provider<StaticMethodsFeatureForTypeProvider> staticExtensionMethodsFeaturesForTypeProvider;
-	
+
 	@Inject
 	private Provider<XAssignmentDescriptionProvider> assignmentFeatureDescProvider;
 
@@ -94,10 +93,10 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 
 	@Inject
 	private IdentifiableTypeProvider identifiableTypeProvider;
-	
+
 	@Inject
 	private IdentifiableSimpleNameProvider featureNameProvider;
-	
+
 	public void setFeatureNameProvider(IdentifiableSimpleNameProvider featureNameProvider) {
 		this.featureNameProvider = featureNameProvider;
 	}
@@ -120,19 +119,14 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
-		try {
-			if (isFeatureCallScope(reference)) {
-				if (!(context instanceof XAbstractFeatureCall)) {
-					return IScope.NULLSCOPE;
-				}
-				return createFeatureCallScope((XAbstractFeatureCall) context, reference);
+		if (isFeatureCallScope(reference)) {
+			if (!(context instanceof XAbstractFeatureCall)) {
+				return IScope.NULLSCOPE;
 			}
-			if (isConstructorCallScope(reference)) {
-				return createConstructorCallScope(context, reference);
-			}
-		} catch (TypeResolutionException exception) {
-			log.error("Type resolution error for context :"+context, exception);
-			return IScope.NULLSCOPE;
+			return createFeatureCallScope((XAbstractFeatureCall) context, reference);
+		}
+		if (isConstructorCallScope(reference)) {
+			return createConstructorCallScope(context, reference);
 		}
 		return super.getScope(context, reference);
 	}
@@ -202,7 +196,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			return localVariableScope;
 		}
 		final XExpression syntacticalReceiver = getSyntacticalReceiver(call);
-		if (syntacticalReceiver==null)
+		if (syntacticalReceiver == null)
 			return IScope.NULLSCOPE;
 		if (!syntacticalReceiver.eIsProxy()) {
 			JvmTypeReference jvmTypeReference = typeProvider.getConvertedType(syntacticalReceiver);
@@ -236,7 +230,8 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			EObject thisVal = thisVariable.getEObjectOrProxy();
 			JvmTypeReference type = identifiableTypeProvider.getType((JvmIdentifiableElement) thisVal);
 			if (type != null) {
-				featureScopeForThis = createFeatureScopeForTypeRef(type, call, getContextType(call),(JvmIdentifiableElement) thisVariable.getEObjectOrProxy());
+				featureScopeForThis = createFeatureScopeForTypeRef(type, call, getContextType(call),
+						(JvmIdentifiableElement) thisVariable.getEObjectOrProxy());
 			}
 		}
 		return featureScopeForThis;
@@ -271,28 +266,29 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			parentScope = createLocalVarScopeForClosure((XClosure) context, parentScope);
 		}
 		if (context instanceof XCasePart) {
-			parentScope = createLocalVarScopeForTypeGuardedCase((XCasePart)context, parentScope);
+			parentScope = createLocalVarScopeForTypeGuardedCase((XCasePart) context, parentScope);
 		}
 		if (context instanceof XSwitchExpression) {
-			parentScope = createLocalVarScopeForSwitchExpression((XSwitchExpression)context, parentScope);
+			parentScope = createLocalVarScopeForSwitchExpression((XSwitchExpression) context, parentScope);
 		}
 		return parentScope;
 	}
 
 	protected IScope createLocalVarScopeForSwitchExpression(XSwitchExpression context, IScope parentScope) {
-		if (context.getLocalVarName()!=null) {
-			return new SingletonScope(EObjectDescription.create(QualifiedName.create(context.getLocalVarName()), context), parentScope);
+		if (context.getLocalVarName() != null) {
+			return new SingletonScope(EObjectDescription.create(QualifiedName.create(context.getLocalVarName()),
+					context), parentScope);
 		}
 		return parentScope;
 	}
 
 	protected IScope createLocalVarScopeForTypeGuardedCase(XCasePart context, IScope parentScope) {
 		JvmTypeReference guard = context.getTypeGuard();
-		if (guard==null) {
+		if (guard == null) {
 			return parentScope;
 		}
 		String varName = featureNameProvider.getSimpleName(context);
-		if (varName==null) {
+		if (varName == null) {
 			return parentScope;
 		}
 		return new SingletonScope(EObjectDescription.create(QualifiedName.create(varName), context), parentScope);
@@ -356,7 +352,8 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			provider3.setImplicitReceiver(implicitReceiver);
 			provider4.setContextType(currentContext);
 			provider4.setImplicitReceiver(implicitReceiver);
-			return jvmFeatureScopeProvider.createFeatureScopeForTypeRef(type, provider1, provider2, provider3, provider4);
+			return jvmFeatureScopeProvider.createFeatureScopeForTypeRef(type, provider1, provider2, provider3,
+					provider4);
 		}
 	}
 
