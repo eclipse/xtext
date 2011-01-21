@@ -119,16 +119,21 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
-		if (isFeatureCallScope(reference)) {
-			if (!(context instanceof XAbstractFeatureCall)) {
-				return IScope.NULLSCOPE;
+		try {
+			if (isFeatureCallScope(reference)) {
+				if (!(context instanceof XAbstractFeatureCall)) {
+					return IScope.NULLSCOPE;
+				}
+				return createFeatureCallScope((XAbstractFeatureCall) context, reference);
 			}
-			return createFeatureCallScope((XAbstractFeatureCall) context, reference);
+			if (isConstructorCallScope(reference)) {
+				return createConstructorCallScope(context, reference);
+			}
+			return super.getScope(context, reference);
+		} catch (RuntimeException e) {
+			log.error("error during scoping", e);
+			throw e;
 		}
-		if (isConstructorCallScope(reference)) {
-			return createConstructorCallScope(context, reference);
-		}
-		return super.getScope(context, reference);
 	}
 
 	protected IScope createConstructorCallScope(EObject context, EReference reference) {
@@ -341,9 +346,11 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			final DefaultJvmFeatureDescriptionProvider provider1 = defaultFeatureDescProvider.get();
 			final XFeatureCallSugarDescriptionProvider provider2 = sugarFeatureDescProvider.get();
 			final DefaultJvmFeatureDescriptionProvider provider3 = defaultFeatureDescProvider.get();
-			provider3.setFeaturesForTypeProvider(staticExtensionMethodsFeaturesForTypeProvider.get());
+			final StaticMethodsFeatureForTypeProvider featuresForTypeProvider = staticExtensionMethodsFeaturesForTypeProvider.get();
+			featuresForTypeProvider.setContext(call);
+			provider3.setFeaturesForTypeProvider(featuresForTypeProvider);
 			final XFeatureCallSugarDescriptionProvider provider4 = sugarFeatureDescProvider.get();
-			provider4.setFeaturesForTypeProvider(staticExtensionMethodsFeaturesForTypeProvider.get());
+			provider4.setFeaturesForTypeProvider(featuresForTypeProvider);
 			provider1.setContextType(currentContext);
 			provider1.setImplicitReceiver(implicitReceiver);
 			provider2.setContextType(currentContext);

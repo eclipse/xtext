@@ -15,6 +15,7 @@ import static java.util.Collections.*;
 import java.util.Collection;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -24,13 +25,11 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.util.IResourceScopeCache;
-import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.typing.TypesService;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -43,25 +42,12 @@ public class StaticMethodsFeatureForTypeProvider implements IFeaturesForTypeProv
 	@Inject
 	private TypesFactory typesFactory;
 
-	@Inject(optional = true)
-	private IResourceScopeCache cache = IResourceScopeCache.NullImpl.INSTANCE;
-
 	@Inject
 	private IJvmTypeConformanceComputer conformanceComputer;
 
+	private EObject context;
+
 	public Iterable<? extends JvmFeature> getFeaturesForType(final JvmDeclaredType declType) {
-		return cache.get(Tuples.pair(declType, "staticExtensionMethods"), declType.eResource(),
-				new Provider<Iterable<? extends JvmFeature>>() {
-					public Iterable<? extends JvmFeature> get() {
-						return internalUnCachedGetFeaturesForType(declType);
-					}
-
-				});
-
-	}
-	
-	protected Iterable<? extends JvmFeature> internalUnCachedGetFeaturesForType(
-			final JvmDeclaredType declType) {
 		final JvmParameterizedTypeReference reference = typesFactory
 		.createJvmParameterizedTypeReference();
 		reference.setType(declType);
@@ -69,7 +55,7 @@ public class StaticMethodsFeatureForTypeProvider implements IFeaturesForTypeProv
 				.getCanonicalName());
 		Iterable<JvmOperation> staticMethods = emptySet();
 		for (QualifiedName qualifiedName : operators) {
-			JvmTypeReference typeReference = typeService.getTypeForName(qualifiedName, declType);
+			JvmTypeReference typeReference = typeService.getTypeForName(qualifiedName, context);
 			if (typeReference == null) {
 				throw new IllegalStateException("couldn't find type " + operators.toString());
 			}
@@ -108,6 +94,10 @@ public class StaticMethodsFeatureForTypeProvider implements IFeaturesForTypeProv
 		if (o != null)
 			return singleton(o);
 		return emptyList();
+	}
+
+	public void setContext(EObject context) {
+		this.context = context;
 	}
 
 }
