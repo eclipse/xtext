@@ -45,13 +45,14 @@ public class RichStringHighlightingCalculator implements ISemanticHighlightingCa
 
 	@Inject
 	private Provider<DefaultIndentationHandler> indentationHandlerProvider;
-	
+
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		if (resource == null || resource.getParseResult() == null || resource.getParseResult().getRootASTElement() == null)
+		if (resource == null || resource.getParseResult() == null
+				|| resource.getParseResult().getRootASTElement() == null)
 			return;
 		XtendFile file = (XtendFile) resource.getContents().get(0);
-		if(file.getXtendClass() != null) {
-			for(JvmMember member: file.getXtendClass().getMembers()) {
+		if (file.getXtendClass() != null) {
+			for (JvmMember member : file.getXtendClass().getMembers()) {
 				if (member.eClass() == Xtend2Package.Literals.XTEND_FUNCTION) {
 					XtendFunction function = (XtendFunction) member;
 					XExpression rootExpression = function.getExpression();
@@ -62,28 +63,30 @@ public class RichStringHighlightingCalculator implements ISemanticHighlightingCa
 	}
 
 	protected void highlightRichStrings(XExpression expression, IHighlightedPositionAcceptor acceptor) {
-		TreeIterator<EObject> iterator = EcoreUtil2.eAll(expression);
-		while(iterator.hasNext()) {
-			EObject object = iterator.next();
-			if (object instanceof RichString) {
-				RichStringHighlighter highlighter = createRichStringHighlighter(acceptor);
-				processor.process((RichString) object, highlighter, indentationHandlerProvider.get());
-				iterator.prune();
+		if (expression != null) {
+			TreeIterator<EObject> iterator = EcoreUtil2.eAll(expression);
+			while (iterator.hasNext()) {
+				EObject object = iterator.next();
+				if (object instanceof RichString) {
+					RichStringHighlighter highlighter = createRichStringHighlighter(acceptor);
+					processor.process((RichString) object, highlighter, indentationHandlerProvider.get());
+					iterator.prune();
+				}
 			}
 		}
 	}
-	
+
 	protected RichStringHighlighter createRichStringHighlighter(IHighlightedPositionAcceptor acceptor) {
 		return new RichStringHighlighter(acceptor);
 	}
-	
+
 	protected void highlightNode(INode node, String id, IHighlightedPositionAcceptor acceptor) {
 		if (node == null)
 			return;
 		if (node instanceof ILeafNode) {
 			acceptor.addPosition(node.getOffset(), node.getLength(), id);
 		} else {
-			for (ILeafNode leaf: node.getLeafNodes()) {
+			for (ILeafNode leaf : node.getLeafNodes()) {
 				if (!leaf.isHidden()) {
 					acceptor.addPosition(leaf.getOffset(), leaf.getLength(), id);
 				}
@@ -98,7 +101,7 @@ public class RichStringHighlightingCalculator implements ISemanticHighlightingCa
 		private int currentOffset = -1;
 		private RichStringLiteral recent = null;
 		private final IHighlightedPositionAcceptor acceptor;
-		
+
 		public RichStringHighlighter(IHighlightedPositionAcceptor acceptor) {
 			this.acceptor = acceptor;
 		}
@@ -107,24 +110,25 @@ public class RichStringHighlightingCalculator implements ISemanticHighlightingCa
 			if (currentOffset == -1)
 				resetCurrentOffset(object);
 		}
-		
+
 		public void acceptSemanticText(CharSequence text, RichStringLiteral origin) {
 			resetCurrentOffset(origin);
-			currentOffset+=text.length();
+			currentOffset += text.length();
 		}
 
 		protected void resetCurrentOffset(RichStringLiteral origin) {
 			if (origin != null && origin != recent) {
 				// no actions are involved, we are interested in the real node
 				recent = origin;
-				List<INode> featureNodes = NodeModelUtils.findNodesForFeature(origin, XbasePackage.Literals.XSTRING_LITERAL__VALUE);
+				List<INode> featureNodes = NodeModelUtils.findNodesForFeature(origin,
+						XbasePackage.Literals.XSTRING_LITERAL__VALUE);
 				if (featureNodes.size() == 1) {
 					INode node = featureNodes.get(0);
 					currentOffset = node.getOffset();
 					if (node.getText().charAt(0) == '\'') {
-						currentOffset+=3;
+						currentOffset += 3;
 					} else {
-						currentOffset+=1;
+						currentOffset += 1;
 					}
 				}
 			}
@@ -133,17 +137,17 @@ public class RichStringHighlightingCalculator implements ISemanticHighlightingCa
 		public void acceptTemplateText(CharSequence text, RichStringLiteral origin) {
 			resetCurrentOffset(origin);
 			acceptor.addPosition(currentOffset, text.length(), HighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
-			currentOffset+=text.length();
+			currentOffset += text.length();
 		}
 
 		public void acceptSemanticLineBreak(int charCount, RichStringLiteral origin) {
 			resetCurrentOffset(origin);
-			currentOffset+=charCount;
+			currentOffset += charCount;
 		}
 
 		public void acceptTemplateLineBreak(int charCount, RichStringLiteral origin) {
 			resetCurrentOffset(origin);
-			currentOffset+=charCount;
+			currentOffset += charCount;
 		}
 
 		public void acceptIfCondition(XExpression condition) {
@@ -183,7 +187,7 @@ public class RichStringHighlightingCalculator implements ISemanticHighlightingCa
 		public void acceptExpression(XExpression expression, CharSequence indentation) {
 			highlightRichStrings(expression, acceptor);
 		}
-		
+
 	}
-	
+
 }
