@@ -129,10 +129,10 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 	}
 
 	protected EStructuralFeatureNode createEStructuralFeatureNode(IOutlineNode parentNode, EObject owner, EStructuralFeature feature,
-			Image image, Object text) {
+			Image image, Object text, boolean isLeaf) {
 		boolean isFeatureSet = owner.eIsSet(feature);
 		EStructuralFeatureNode eStructuralFeatureNode = new EStructuralFeatureNode(owner, feature, parentNode, image,
-				text, !isFeatureSet);
+				text, isLeaf || !isFeatureSet);
 		if (isFeatureSet) {
 			ITextRegion region = locationInFileProvider.getFullTextRegion(owner, feature, 0);
 			if (feature.isMany()) {
