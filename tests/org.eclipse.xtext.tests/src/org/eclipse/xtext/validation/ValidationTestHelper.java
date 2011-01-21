@@ -17,16 +17,17 @@ import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ValidationTestHelper {
 
-	public void assertMatch(TestChain chain, Integer... expectedFeatureIds) {
-		List<Integer> asList = Arrays.asList(expectedFeatureIds);
-		Assert.assertEquals("expected : " + asList + " , but was " + chain.integers, expectedFeatureIds.length, chain.integers.size());
-		Assert.assertTrue("expected : " + asList + " , but was " + chain.integers, asList.containsAll(chain.integers));
+	public void assertMatch(TestChain chain, EStructuralFeature... expectedFeatures) {
+		List<EStructuralFeature> asList = Arrays.asList(expectedFeatures);
+		Assert.assertEquals("expected : " + asList + " , but was " + chain.features, expectedFeatures.length, chain.features.size());
+		Assert.assertTrue("expected : " + asList + " , but was " + chain.features, asList.containsAll(chain.features));
 	}
 
 	public TestChain chain() {
@@ -38,15 +39,15 @@ public class ValidationTestHelper {
 	}
 
 	public final class TestChain implements DiagnosticChain {
-		private final List<Integer> integers = new ArrayList<Integer>();
+		private final List<EStructuralFeature> features = new ArrayList<EStructuralFeature>();
 
 		public boolean isEmpty() {
-			return integers.isEmpty();
+			return features.isEmpty();
 		}
 
 		public void add(org.eclipse.emf.common.util.Diagnostic diagnostic) {
 			Assert.assertTrue(diagnostic.getData().get(0) instanceof EObject);
-			integers.add((Integer) diagnostic.getData().get(1));
+			features.add((EStructuralFeature) diagnostic.getData().get(1));
 		}
 
 		public void addAll(org.eclipse.emf.common.util.Diagnostic diagnostic) {
@@ -59,7 +60,7 @@ public class ValidationTestHelper {
 
 		@Override
 		public String toString() {
-			return integers.toString();
+			return features.toString();
 		}
 	}
 
@@ -67,12 +68,12 @@ public class ValidationTestHelper {
 	public static class TestValidator extends AbstractDeclarativeValidator {
 		@Check
 		protected void foo(EStructuralFeature x) {
-			error("fooInteger", 2);
+			error("fooInteger", EcorePackage.Literals.ESTRUCTURAL_FEATURE__CHANGEABLE);
 		}
 
 		@Check
 		public void foo(Object x) {
-			error("fooObject", 3);
+			error("fooObject", EcorePackage.Literals.ENAMED_ELEMENT__NAME);
 		}
 	}
 
@@ -81,7 +82,7 @@ public class ValidationTestHelper {
 		@SuppressWarnings("unused")
 		@Check
 		private void foo(EClass x) {
-			error("fooString", 1);
+			error("fooString", EcorePackage.Literals.ECLASS__ABSTRACT);
 		}
 	}
 

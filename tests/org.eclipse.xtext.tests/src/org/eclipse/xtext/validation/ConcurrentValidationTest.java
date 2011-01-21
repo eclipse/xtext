@@ -87,7 +87,7 @@ public class ConcurrentValidationTest extends AbstractXtextTests {
 			try {
 				TestChain diagnostics = helper.chain();
 				validator.validate(EcorePackage.eINSTANCE.getEClass(), diagnostics, null);
-				helper.assertMatch(diagnostics, 1, 3);
+				helper.assertMatch(diagnostics, EcorePackage.Literals.ENAMED_ELEMENT__NAME, EcorePackage.Literals.ECLASS__ABSTRACT);
 			} catch(IllegalStateException e) {
 				lastEx = e;
 			} catch(AssertionFailedError error) {

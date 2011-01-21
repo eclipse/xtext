@@ -16,14 +16,14 @@ public class EntitiesJavaValidator extends AbstractEntitiesJavaValidator {
 	@Check
 	public void checkEntityNameStartsWithCapital(Entity entity) {
 		if (!Character.isUpperCase(entity.getName().charAt(0))) {
-			warning("Name should start with a capital letter", EntitiesPackage.ENTITY__NAME);
+			warning("Name should start with a capital letter", EntitiesPackage.Literals.TYPE__NAME);
 		}
 	}
 
 	@Check
 	public void checkPropertyNameStartsWithCapital(Property property) {
 		if (!Character.isLowerCase(property.getName().charAt(0))) {
-			warning("Name should start with a lower case letter", EntitiesPackage.ENTITY__NAME);
+			warning("Name should start with a lower case letter", EntitiesPackage.Literals.TYPE__NAME);
 		}
 	}
 
@@ -41,7 +41,7 @@ public class EntitiesJavaValidator extends AbstractEntitiesJavaValidator {
 		String name = (String) eObject.eGet(nameFeature);
 		for (EObject sibling : siblings) {
 			if(name.equals(sibling.eGet(nameFeature)) && eObject != sibling) {
-				error("Duplicate name", nameFeature.getFeatureID());
+				error("Duplicate name", nameFeature);
 			}
 		}
 	}
@@ -49,7 +49,7 @@ public class EntitiesJavaValidator extends AbstractEntitiesJavaValidator {
 	@Check 
 	public void simplePropertyTypeIsSet(SimpleProperty s) {
 		if(s.getType() == null) {
-			error("Property must have a type", EntitiesPackage.SIMPLE_PROPERTY__NAME);
+			error("Property must have a type", EntitiesPackage.Literals.PROPERTY__NAME);
 		}
 	}
 }

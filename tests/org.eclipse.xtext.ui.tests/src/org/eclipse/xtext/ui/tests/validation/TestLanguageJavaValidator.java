@@ -11,7 +11,7 @@ public class TestLanguageJavaValidator extends AbstractTestLanguageJavaValidator
 	@Check(CheckType.EXPENSIVE)
 	public void checkTypeNameStartsWithCapital(Stuff stuff) {
 		if ("foo".equalsIgnoreCase(stuff.getName())) {
-			error("Invalid Stuff name", FooPackage.STUFF__NAME);
+			error("Invalid Stuff name", FooPackage.Literals.STUFF__NAME);
 		}
 	}
 

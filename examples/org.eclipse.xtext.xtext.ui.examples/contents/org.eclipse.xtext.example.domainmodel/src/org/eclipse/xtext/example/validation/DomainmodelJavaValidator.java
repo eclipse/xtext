@@ -6,6 +6,7 @@ import org.eclipse.xtext.example.domainmodel.PackageDeclaration;
 import org.eclipse.xtext.example.domainmodel.Type;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
+import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 public class DomainmodelJavaValidator extends AbstractDomainmodelJavaValidator {
 
@@ -14,7 +15,8 @@ public class DomainmodelJavaValidator extends AbstractDomainmodelJavaValidator {
     public void checkTypeNameStartsWithCapital(Type type) {
         if (!Character.isUpperCase(type.getName().charAt(0))) {
             warning("Name should start with a capital", 
-            		DomainmodelPackage.TYPE__NAME, 
+            		DomainmodelPackage.Literals.TYPE__NAME,
+            		ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
             		INVALID_TYPE_NAME, 
             		type.getName());
         }
@@ -25,8 +27,10 @@ public class DomainmodelJavaValidator extends AbstractDomainmodelJavaValidator {
     public void checkFeatureNameStartsWithLowercase(Feature feature) {
         if (!Character.isLowerCase(feature.getName().charAt(0))) {
             warning("Name should start with a lowercase", 
-            		DomainmodelPackage.FEATURE__NAME, 
-            		INVALID_FEATURE_NAME, feature.getName());
+            		DomainmodelPackage.Literals.TYPED_ELEMENT__NAME,
+            		ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+            		INVALID_FEATURE_NAME, 
+            		feature.getName());
         }
     }
     
@@ -34,7 +38,7 @@ public class DomainmodelJavaValidator extends AbstractDomainmodelJavaValidator {
     public void checkPackage(PackageDeclaration packages) {
         if (packages.getName().equals("java")) {
             error("Invalid package name", 
-            		DomainmodelPackage.PACKAGE_DECLARATION__NAME);
+            		DomainmodelPackage.Literals.PACKAGE_DECLARATION__NAME);
         }
     }
 }

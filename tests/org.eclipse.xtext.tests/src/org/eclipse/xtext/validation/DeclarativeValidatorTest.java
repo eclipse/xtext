@@ -18,7 +18,6 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.xtext.validation.AbstractDeclarativeValidator.DiagnosticImpl;
 import org.eclipse.xtext.validation.ValidationTestHelper.TestChain;
 
 /**
@@ -45,7 +44,9 @@ public class DeclarativeValidatorTest extends TestCase {
 		AbstractDeclarativeValidator test = helper.validator();
 		TestChain chain = helper.chain();
 		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, null);
-		helper.assertMatch(chain, 1, 3);
+		helper.assertMatch(chain, 
+				EcorePackage.Literals.ENAMED_ELEMENT__NAME, 
+				EcorePackage.Literals.ECLASS__ABSTRACT);
 	}
 
 	public void testDeeperHierarchyWithOverwrittenJavaMethods() throws Exception {
@@ -53,12 +54,14 @@ public class DeclarativeValidatorTest extends TestCase {
 			@Override
 			@Check
 			public void foo(Object x) {
-				error("fooObject", 5);
+				error("fooObject", EcorePackage.Literals.ECLASS__EALL_ATTRIBUTES);
 			}
 		};
 		TestChain chain = helper.chain();
 		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, null);
-		helper.assertMatch(chain, 1, 5);
+		helper.assertMatch(chain, 
+				EcorePackage.Literals.ECLASS__ABSTRACT, 
+				EcorePackage.Literals.ECLASS__EALL_ATTRIBUTES);
 	}
 
 	@SuppressWarnings("serial")
@@ -67,7 +70,7 @@ public class DeclarativeValidatorTest extends TestCase {
 			@SuppressWarnings("unused")
 			@Check(CheckType.EXPENSIVE)
 			public void bar(Object x) {
-				error("fooObject", 27);
+				error("fooObject", EcorePackage.Literals.ECLASS__EALL_ATTRIBUTES);
 			}
 		};
 		TestChain chain = helper.chain();
@@ -76,7 +79,9 @@ public class DeclarativeValidatorTest extends TestCase {
 				put(CheckMode.KEY, CheckMode.NORMAL_AND_FAST);
 			}
 		});
-		helper.assertMatch(chain, 1, 3);
+		helper.assertMatch(chain, 
+				EcorePackage.Literals.ENAMED_ELEMENT__NAME, 
+				EcorePackage.Literals.ECLASS__ABSTRACT);
 
 		chain = helper.chain();
 		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, new HashMap<Object, Object>() {
@@ -84,11 +89,17 @@ public class DeclarativeValidatorTest extends TestCase {
 				put(CheckMode.KEY, CheckMode.ALL);
 			}
 		});
-		helper.assertMatch(chain, 1, 3, 27);
+		helper.assertMatch(chain, 
+				EcorePackage.Literals.ENAMED_ELEMENT__NAME, 
+				EcorePackage.Literals.ECLASS__ABSTRACT, 
+				EcorePackage.Literals.ECLASS__EALL_ATTRIBUTES);
 
 		chain = helper.chain();
 		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, null);
-		helper.assertMatch(chain, 1, 3, 27);
+		helper.assertMatch(chain, 
+				EcorePackage.Literals.ENAMED_ELEMENT__NAME, 
+				EcorePackage.Literals.ECLASS__ABSTRACT, 
+				EcorePackage.Literals.ECLASS__EALL_ATTRIBUTES);
 	}
 
 	public void testGuard() throws Exception {
@@ -188,7 +199,7 @@ public class DeclarativeValidatorTest extends TestCase {
 			@Check
 			@SuppressWarnings("unused")
 			public void foo(Object x) {
-				error("Error Message", 1);
+				error("Error Message", EcorePackage.Literals.ENAMED_ELEMENT__NAME);
 			}
 		};
 		BasicDiagnostic chain = new BasicDiagnostic();
@@ -206,7 +217,11 @@ public class DeclarativeValidatorTest extends TestCase {
 			@Check
 			@SuppressWarnings("unused")
 			public void foo(Object x) {
-				error("Error Message", EcorePackage.eINSTANCE.getEAnnotation(), 1);
+				error(
+						"Error Message", 
+						EcorePackage.eINSTANCE.getEAnnotation(), 
+						EcorePackage.Literals.ENAMED_ELEMENT__NAME,
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
 			}
 		};
 		BasicDiagnostic chain = new BasicDiagnostic();
@@ -224,7 +239,11 @@ public class DeclarativeValidatorTest extends TestCase {
 			@Check
 			@SuppressWarnings("unused")
 			public void foo(Object x) {
-				error("Error Message", 1, "42");
+				error(
+						"Error Message", 
+						EcorePackage.Literals.ENAMED_ELEMENT__NAME,
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+						"42");
 			}
 		};
 		BasicDiagnostic chain = new BasicDiagnostic();
@@ -234,8 +253,8 @@ public class DeclarativeValidatorTest extends TestCase {
 		Diagnostic diag = chain.getChildren().get(0);
 		assertEquals("Error Message", diag.getMessage());
 		assertEquals(0, diag.getCode());
-		assertTrue(diag instanceof DiagnosticImpl);
-		assertEquals("42", ((DiagnosticImpl)diag).getIssueCode());
+		assertTrue(diag instanceof FeatureBasedDiagnostic);
+		assertEquals("42", ((FeatureBasedDiagnostic)diag).getIssueCode());
 		assertEquals(Diagnostic.ERROR, diag.getSeverity());
 	}
 
@@ -244,7 +263,7 @@ public class DeclarativeValidatorTest extends TestCase {
 			@Check
 			@SuppressWarnings("unused")
 			public void foo(Object x) {
-				warning("Error Message", 1);
+				warning("Error Message", EcorePackage.Literals.ENAMED_ELEMENT__NAME);
 			}
 		};
 		BasicDiagnostic chain = new BasicDiagnostic();
@@ -262,7 +281,11 @@ public class DeclarativeValidatorTest extends TestCase {
 			@Check
 			@SuppressWarnings("unused")
 			public void foo(Object x) {
-				warning("Error Message", EcorePackage.eINSTANCE.getEAnnotation(), 1);
+				warning(
+						"Error Message", 
+						EcorePackage.eINSTANCE.getEAnnotation(), 
+						EcorePackage.Literals.ENAMED_ELEMENT__NAME,
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
 			}
 		};
 		BasicDiagnostic chain = new BasicDiagnostic();
@@ -280,7 +303,11 @@ public class DeclarativeValidatorTest extends TestCase {
 			@Check
 			@SuppressWarnings("unused")
 			public void foo(Object x) {
-				warning("Error Message", 1, "42");
+				warning(
+						"Error Message", 
+						EcorePackage.Literals.ENAMED_ELEMENT__NAME,
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+						"42");
 			}
 		};
 		BasicDiagnostic chain = new BasicDiagnostic();
@@ -290,432 +317,9 @@ public class DeclarativeValidatorTest extends TestCase {
 		Diagnostic diag = chain.getChildren().get(0);
 		assertEquals("Error Message", diag.getMessage());
 		assertEquals(0, diag.getCode());
-		assertTrue(diag instanceof DiagnosticImpl);
-		assertEquals("42", ((DiagnosticImpl)diag).getIssueCode());
+		assertTrue(diag instanceof FeatureBasedDiagnostic);
+		assertEquals("42", ((FeatureBasedDiagnostic)diag).getIssueCode());
 		assertEquals(Diagnostic.WARNING, diag.getSeverity());
-	}
-
-	public void testAssertTrue1() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertTrue("Error Message", 1, true);
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(0, chain.getChildren().size());
-	}
-
-	public void testAssertTrue2() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertTrue("Error Message", 1, false);
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(1, chain.getChildren().size());
-
-		Diagnostic diag = chain.getChildren().get(0);
-		assertEquals("Error Message", diag.getMessage());
-		assertEquals(EcorePackage.eINSTANCE.getEClass().toString(), diag.getSource());
-		assertEquals(Diagnostic.ERROR, diag.getSeverity());
-	}
-
-	public void testAssertTrueWithSource() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertTrue("Error Message", EcorePackage.eINSTANCE.getEAnnotation(), 1, false);
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(1, chain.getChildren().size());
-
-		Diagnostic diag = chain.getChildren().get(0);
-		assertEquals("Error Message", diag.getMessage());
-		assertEquals(EcorePackage.eINSTANCE.getEAnnotation().toString(), diag.getSource());
-		assertEquals(Diagnostic.ERROR, diag.getSeverity());
-	}
-
-	public void testAssertFalse1() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertFalse("Error Message", 1, false);
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(0, chain.getChildren().size());
-	}
-
-	public void testAssertFalse2() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertFalse("Error Message", 1, true);
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(1, chain.getChildren().size());
-
-		Diagnostic diag = chain.getChildren().get(0);
-		assertEquals("Error Message", diag.getMessage());
-		assertEquals(EcorePackage.eINSTANCE.getEClass().toString(), diag.getSource());
-		assertEquals(Diagnostic.ERROR, diag.getSeverity());
-	}
-
-	public void testAssertFalseWithSource() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertFalse("Error Message", EcorePackage.eINSTANCE.getEAnnotation(), 1, true);
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(1, chain.getChildren().size());
-
-		Diagnostic diag = chain.getChildren().get(0);
-		assertEquals("Error Message", diag.getMessage());
-		assertEquals(EcorePackage.eINSTANCE.getEAnnotation().toString(), diag.getSource());
-		assertEquals(Diagnostic.ERROR, diag.getSeverity());
-	}
-
-	public void testAssertNull1() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertNull("Error Message", 1, null);
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(0, chain.getChildren().size());
-	}
-
-	public void testAssertNull2() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertNull("Error Message", 1, "");
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(1, chain.getChildren().size());
-
-		Diagnostic diag = chain.getChildren().get(0);
-		assertEquals("Error Message", diag.getMessage());
-		assertEquals(EcorePackage.eINSTANCE.getEClass().toString(), diag.getSource());
-		assertEquals(Diagnostic.ERROR, diag.getSeverity());
-	}
-
-	public void testAssertNullWithSource() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertNull("Error Message", EcorePackage.eINSTANCE.getEAnnotation(), 1, "");
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(1, chain.getChildren().size());
-
-		Diagnostic diag = chain.getChildren().get(0);
-		assertEquals("Error Message", diag.getMessage());
-		assertEquals(EcorePackage.eINSTANCE.getEAnnotation().toString(), diag.getSource());
-		assertEquals(Diagnostic.ERROR, diag.getSeverity());
-	}
-
-	public void testAssertNotNull1() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertNotNull("Error Message", 1, "");
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(0, chain.getChildren().size());
-	}
-
-	public void testAssertNotNull2() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertNotNull("Error Message", 1, null);
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(1, chain.getChildren().size());
-
-		Diagnostic diag = chain.getChildren().get(0);
-		assertEquals("Error Message", diag.getMessage());
-		assertEquals(EcorePackage.eINSTANCE.getEClass().toString(), diag.getSource());
-		assertEquals(Diagnostic.ERROR, diag.getSeverity());
-	}
-
-	public void testAssertNotNullWithSource() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertNotNull("Error Message", EcorePackage.eINSTANCE.getEAnnotation(), 1, null);
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(1, chain.getChildren().size());
-
-		Diagnostic diag = chain.getChildren().get(0);
-		assertEquals("Error Message", diag.getMessage());
-		assertEquals(EcorePackage.eINSTANCE.getEAnnotation().toString(), diag.getSource());
-		assertEquals(Diagnostic.ERROR, diag.getSeverity());
-	}
-
-	public void testAssertEquals1() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertEquals("Error Message", 1, "abc", "abc");
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(0, chain.getChildren().size());
-	}
-
-	public void testAssertEquals2() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertEquals("Error Message", 1, "abc", "xyz");
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(1, chain.getChildren().size());
-
-		Diagnostic diag = chain.getChildren().get(0);
-		assertEquals("Error Message", diag.getMessage());
-		assertEquals(EcorePackage.eINSTANCE.getEClass().toString(), diag.getSource());
-		assertEquals(Diagnostic.ERROR, diag.getSeverity());
-	}
-
-	public void testAssertEqualsWithSource() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertEquals("Error Message", EcorePackage.eINSTANCE.getEAnnotation(), 1, "abc", "xyz");
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(1, chain.getChildren().size());
-
-		Diagnostic diag = chain.getChildren().get(0);
-		assertEquals("Error Message", diag.getMessage());
-		assertEquals(EcorePackage.eINSTANCE.getEAnnotation().toString(), diag.getSource());
-		assertEquals(Diagnostic.ERROR, diag.getSeverity());
-	}
-
-	public void testAssertNotEquals1() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertNotEquals("Error Message", 1, "abc", "xyz");
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(0, chain.getChildren().size());
-	}
-
-	public void testAssertNotEquals2() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertNotEquals("Error Message", 1, "abc", "abc");
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(1, chain.getChildren().size());
-
-		Diagnostic diag = chain.getChildren().get(0);
-		assertEquals("Error Message", diag.getMessage());
-		assertEquals(EcorePackage.eINSTANCE.getEClass().toString(), diag.getSource());
-		assertEquals(Diagnostic.ERROR, diag.getSeverity());
-	}
-
-	public void testAssertNotEqualsWithSource() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertNotEquals("Error Message", EcorePackage.eINSTANCE.getEAnnotation(), 1, "abc", "abc");
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(1, chain.getChildren().size());
-
-		Diagnostic diag = chain.getChildren().get(0);
-		assertEquals("Error Message", diag.getMessage());
-		assertEquals(EcorePackage.eINSTANCE.getEAnnotation().toString(), diag.getSource());
-		assertEquals(Diagnostic.ERROR, diag.getSeverity());
-	}
-
-	public void testAssertEmpty1() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertEmpty("Error Message", 1, null);
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(0, chain.getChildren().size());
-	}
-
-	public void testAssertEmpty2() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertEmpty("Error Message", 1, " ");
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(0, chain.getChildren().size());
-	}
-
-	public void testAssertEmpty3() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertEmpty("Error Message", 1, "abc");
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(1, chain.getChildren().size());
-
-		Diagnostic diag = chain.getChildren().get(0);
-		assertEquals("Error Message", diag.getMessage());
-		assertEquals(EcorePackage.eINSTANCE.getEClass().toString(), diag.getSource());
-		assertEquals(Diagnostic.ERROR, diag.getSeverity());
-	}
-
-	public void testAssertEmptyWithSource() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertEmpty("Error Message", EcorePackage.eINSTANCE.getEAnnotation(), 1, "abc");
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(1, chain.getChildren().size());
-
-		Diagnostic diag = chain.getChildren().get(0);
-		assertEquals("Error Message", diag.getMessage());
-		assertEquals(EcorePackage.eINSTANCE.getEAnnotation().toString(), diag.getSource());
-		assertEquals(Diagnostic.ERROR, diag.getSeverity());
-	}
-
-	public void testAssertNotEmpty1() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertNotEmpty("Error Message", 1, "abc");
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(0, chain.getChildren().size());
-	}
-
-	public void testAssertNotEmpty2() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertNotEmpty("Error Message", 1, null);
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(1, chain.getChildren().size());
-
-		Diagnostic diag = chain.getChildren().get(0);
-		assertEquals("Error Message", diag.getMessage());
-		assertEquals(EcorePackage.eINSTANCE.getEClass().toString(), diag.getSource());
-		assertEquals(Diagnostic.ERROR, diag.getSeverity());
-	}
-
-	public void testAssertNotEmpty3() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertNotEmpty("Error Message", 1, " ");
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(1, chain.getChildren().size());
-
-		Diagnostic diag = chain.getChildren().get(0);
-		assertEquals("Error Message", diag.getMessage());
-		assertEquals(EcorePackage.eINSTANCE.getEClass().toString(), diag.getSource());
-		assertEquals(Diagnostic.ERROR, diag.getSeverity());
-	}
-
-	public void testAssertNotEmptyWithSource() {
-		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
-			@Check
-			@SuppressWarnings("unused")
-			public void foo(Object x) {
-				assertNotEmpty("Error Message", EcorePackage.eINSTANCE.getEAnnotation(), 1, " ");
-			}
-		};
-		BasicDiagnostic chain = new BasicDiagnostic();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
-		assertEquals(1, chain.getChildren().size());
-
-		Diagnostic diag = chain.getChildren().get(0);
-		assertEquals("Error Message", diag.getMessage());
-		assertEquals(EcorePackage.eINSTANCE.getEAnnotation().toString(), diag.getSource());
-		assertEquals(Diagnostic.ERROR, diag.getSeverity());
 	}
 
 }

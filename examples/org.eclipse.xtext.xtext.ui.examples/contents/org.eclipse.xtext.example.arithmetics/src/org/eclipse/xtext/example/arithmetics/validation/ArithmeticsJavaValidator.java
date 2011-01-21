@@ -21,6 +21,7 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.FunctionCall;
 import org.eclipse.xtext.example.arithmetics.arithmetics.NumberLiteral;
 import org.eclipse.xtext.example.arithmetics.interpreter.Calculator;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 import com.google.inject.Inject;
  
@@ -37,7 +38,7 @@ public class ArithmeticsJavaValidator extends AbstractArithmeticsJavaValidator {
 	public void checkDivByZero(Div div) {
 		BigDecimal bigDecimal = calculator.evaluate(div.getRight());
 		if (bigDecimal.doubleValue()==0.0) 
-			error("Division by zero detected.",ArithmeticsPackage.DIV__RIGHT);
+			error("Division by zero detected.", ArithmeticsPackage.Literals.DIV__RIGHT);
 	}
 	
 	public final static String NORMALIZABLE = "normalizable-expression";
@@ -61,7 +62,12 @@ public class ArithmeticsJavaValidator extends AbstractArithmeticsJavaValidator {
 		}
 		BigDecimal decimal = calculator.evaluate(expr);
 		if (decimal.toString().length()<=8) {
-			warning("Expression could be normalized to constant '"+decimal+"'", -1,NORMALIZABLE,decimal.toString());
+			warning(
+					"Expression could be normalized to constant '"+decimal+"'", 
+					null,
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+					NORMALIZABLE,
+					decimal.toString());
 		}
 	}
 
