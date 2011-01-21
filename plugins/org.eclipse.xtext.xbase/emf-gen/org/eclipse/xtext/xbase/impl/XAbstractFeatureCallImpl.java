@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -26,6 +25,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 
 /**
@@ -35,8 +35,6 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#getFeatureName <em>Feature Name</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#getArguments <em>Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#getFeature <em>Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#getTypeArguments <em>Type Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#getImplicitReceiver <em>Implicit Receiver</em>}</li>
@@ -50,36 +48,6 @@ import org.eclipse.xtext.xbase.XbasePackage;
  */
 public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implements XAbstractFeatureCall
 {
-	/**
-	 * The default value of the '{@link #getFeatureName() <em>Feature Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFeatureName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String FEATURE_NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getFeatureName() <em>Feature Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFeatureName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String featureName = FEATURE_NAME_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getArguments()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<XExpression> arguments;
-
 	/**
 	 * The cached value of the '{@link #getFeature() <em>Feature</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -101,14 +69,14 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	protected EList<JvmTypeReference> typeArguments;
 
 	/**
-	 * The cached value of the '{@link #getImplicitReceiver() <em>Implicit Receiver</em>}' reference.
+	 * The cached value of the '{@link #getImplicitReceiver() <em>Implicit Receiver</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getImplicitReceiver()
 	 * @generated
 	 * @ordered
 	 */
-	protected JvmIdentifiableElement implicitReceiver;
+	protected XFeatureCall implicitReceiver;
 
 	/**
 	 * The default value of the '{@link #isTargetsMemberSyntaxCall() <em>Targets Member Syntax Call</em>}' attribute.
@@ -196,30 +164,6 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getFeatureName()
-	{
-		return featureName;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<XExpression> getArguments()
-	{
-		if (arguments == null)
-		{
-			arguments = new EObjectResolvingEList<XExpression>(XExpression.class, this, XbasePackage.XABSTRACT_FEATURE_CALL__ARGUMENTS);
-		}
-		return arguments;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public JvmIdentifiableElement getFeature()
 	{
 		if (feature != null && feature.eIsProxy())
@@ -277,27 +221,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmIdentifiableElement getImplicitReceiver()
-	{
-		if (implicitReceiver != null && implicitReceiver.eIsProxy())
-		{
-			InternalEObject oldImplicitReceiver = (InternalEObject)implicitReceiver;
-			implicitReceiver = (JvmIdentifiableElement)eResolveProxy(oldImplicitReceiver);
-			if (implicitReceiver != oldImplicitReceiver)
-			{
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER, oldImplicitReceiver, implicitReceiver));
-			}
-		}
-		return implicitReceiver;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmIdentifiableElement basicGetImplicitReceiver()
+	public XFeatureCall getImplicitReceiver()
 	{
 		return implicitReceiver;
 	}
@@ -307,12 +231,37 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setImplicitReceiver(JvmIdentifiableElement newImplicitReceiver)
+	public NotificationChain basicSetImplicitReceiver(XFeatureCall newImplicitReceiver, NotificationChain msgs)
 	{
-		JvmIdentifiableElement oldImplicitReceiver = implicitReceiver;
+		XFeatureCall oldImplicitReceiver = implicitReceiver;
 		implicitReceiver = newImplicitReceiver;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER, oldImplicitReceiver, implicitReceiver));
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER, oldImplicitReceiver, newImplicitReceiver);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setImplicitReceiver(XFeatureCall newImplicitReceiver)
+	{
+		if (newImplicitReceiver != implicitReceiver)
+		{
+			NotificationChain msgs = null;
+			if (implicitReceiver != null)
+				msgs = ((InternalEObject)implicitReceiver).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER, null, msgs);
+			if (newImplicitReceiver != null)
+				msgs = ((InternalEObject)newImplicitReceiver).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER, null, msgs);
+			msgs = basicSetImplicitReceiver(newImplicitReceiver, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER, newImplicitReceiver, newImplicitReceiver));
 	}
 
 	/**
@@ -376,6 +325,54 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public XExpression getActualReceiver()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<XExpression> getActualArguments()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<XExpression> getAllArguments()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getConcreteSyntaxFeatureName()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -383,6 +380,8 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 		{
 			case XbasePackage.XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS:
 				return ((InternalEList<?>)getTypeArguments()).basicRemove(otherEnd, msgs);
+			case XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER:
+				return basicSetImplicitReceiver(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -397,18 +396,13 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE_NAME:
-				return getFeatureName();
-			case XbasePackage.XABSTRACT_FEATURE_CALL__ARGUMENTS:
-				return getArguments();
 			case XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE:
 				if (resolve) return getFeature();
 				return basicGetFeature();
 			case XbasePackage.XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS:
 				return getTypeArguments();
 			case XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER:
-				if (resolve) return getImplicitReceiver();
-				return basicGetImplicitReceiver();
+				return getImplicitReceiver();
 			case XbasePackage.XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL:
 				return isTargetsMemberSyntaxCall();
 			case XbasePackage.XABSTRACT_FEATURE_CALL__INVALID_FEATURE_ISSUE_CODE:
@@ -438,7 +432,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 				getTypeArguments().addAll((Collection<? extends JvmTypeReference>)newValue);
 				return;
 			case XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER:
-				setImplicitReceiver((JvmIdentifiableElement)newValue);
+				setImplicitReceiver((XFeatureCall)newValue);
 				return;
 			case XbasePackage.XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL:
 				setTargetsMemberSyntaxCall((Boolean)newValue);
@@ -467,7 +461,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 				getTypeArguments().clear();
 				return;
 			case XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER:
-				setImplicitReceiver((JvmIdentifiableElement)null);
+				setImplicitReceiver((XFeatureCall)null);
 				return;
 			case XbasePackage.XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL:
 				setTargetsMemberSyntaxCall(TARGETS_MEMBER_SYNTAX_CALL_EDEFAULT);
@@ -489,10 +483,6 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE_NAME:
-				return FEATURE_NAME_EDEFAULT == null ? featureName != null : !FEATURE_NAME_EDEFAULT.equals(featureName);
-			case XbasePackage.XABSTRACT_FEATURE_CALL__ARGUMENTS:
-				return arguments != null && !arguments.isEmpty();
 			case XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE:
 				return feature != null;
 			case XbasePackage.XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS:
@@ -520,9 +510,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (featureName: ");
-		result.append(featureName);
-		result.append(", targetsMemberSyntaxCall: ");
+		result.append(" (targetsMemberSyntaxCall: ");
 		result.append(targetsMemberSyntaxCall);
 		result.append(", invalidFeatureIssueCode: ");
 		result.append(invalidFeatureIssueCode);

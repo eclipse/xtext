@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.compiler;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -18,6 +19,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
+import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -27,6 +29,8 @@ import org.eclipse.xtext.xbase.XWhileExpression;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XbaseCompiler extends FeatureCallCompiler {
+	
+	
 	protected void openBlock(XExpression xExpression, IAppendable b) {
 		if (xExpression instanceof XBlockExpression) {
 			return;
@@ -92,7 +96,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected void appendCatchAndFinally(XTryCatchFinallyExpression expr, IAppendable b) {
 		for (XCatchClause catchClause : expr.getCatchClauses()) {
-			JvmTypeReference type = getTypeProvider().getType(catchClause.getDeclaredParam());
+			JvmTypeReference type = catchClause.getDeclaredParam().getParameterType();
 			b.append(" catch (").append(getSerializedForm(type)).append(" ")
 					.append(catchClause.getDeclaredParam().getName()).append(") { ");
 			b.increaseIndentation();
@@ -247,7 +251,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	public void _toJavaStatement(XForLoopExpression expr, IAppendable b) {
 		internalPrepare(expr.getForExpression(), b);
 		b.append("\nfor (");
-		JvmTypeReference paramType = getTypeProvider().getType(expr.getDeclaredParam());
+		JvmTypeReference paramType = getIdentifiableTypeProvider().getType(expr.getDeclaredParam());
 		b.append(paramType.getCanonicalName());
 		b.append(" ");
 		b.append(expr.getDeclaredParam().getName());
@@ -358,6 +362,35 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			internalToJavaStatement(expr.getElse(), b);
 			closeBlock(expr.getElse(), b);
 		}
+	}
+	
+	public void _prepare(XSwitchExpression expr, IAppendable b) {
+		declareLocalVariable(expr, b);
+		internalPrepare(expr.getSwitch(), b);
+		for (XCasePart casePart : expr.getCases()) {
+			if (casePart.getTypeGuard()!=null) {
+				b.append("\nif (");
+				internalToJavaExpression(expr.getSwitch(), b);
+				b.append(" instanceof ");
+				b.append(getSerializedForm(casePart.getTypeGuard()));
+				b.append(") {");
+			}
+			if (casePart.getCase()!=null) {
+				internalPrepare(casePart.getCase(), b);
+			}
+			if (casePart.getTypeGuard()!=null) {
+				b.decreaseIndentation().append("\n}");
+			}
+		}
+		
+	}
+	
+	public void _toJavaExpression(XSwitchExpression expr, IAppendable b) {
+		
+	}
+	
+	public void _toJavaStatement(XSwitchExpression expr, IAppendable b) {
+		
 	}
 
 }

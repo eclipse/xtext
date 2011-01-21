@@ -43,16 +43,16 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XAbstractFeatureCall" abstract="true"
       eSuperTypes="#//XExpression">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        changeable="false" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
-        eType="#//XExpression" changeable="false" derived="true"/>
+    <eOperations name="getActualReceiver" eType="#//XExpression"/>
+    <eOperations name="getActualArguments" upperBound="-1" eType="#//XExpression"/>
+    <eOperations name="getAllArguments" upperBound="-1" eType="#//XExpression"/>
+    <eOperations name="getConcreteSyntaxFeatureName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmIdentifiableElement"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeArguments" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="implicitReceiver" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmIdentifiableElement"
-        transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="implicitReceiver" eType="#//XFeatureCall"
+        transient="true" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetsMemberSyntaxCall"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" transient="true"
         defaultValueLiteral="true"/>

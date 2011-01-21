@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.compiler;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.typing.IExpectedTypeProvider;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
@@ -17,7 +16,9 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
-import org.eclipse.xtext.xbase.typing.IXbaseTypeProvider;
+import org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider;
+import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
+import org.eclipse.xtext.xbase.typing.XExpressionExpectedTypeProvider;
 
 import com.google.inject.Inject;
 
@@ -115,29 +116,40 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	@Inject
-	private IXbaseTypeProvider typeProvider;
+	private IXExpressionTypeProvider typeProvider;
 
-	public void setTypeProvider(IXbaseTypeProvider typeProvider) {
+	public void setTypeProvider(IXExpressionTypeProvider typeProvider) {
 		this.typeProvider = typeProvider;
 	}
 
-	protected IXbaseTypeProvider getTypeProvider() {
+	protected IXExpressionTypeProvider getTypeProvider() {
 		return typeProvider;
+	}
+	
+	@Inject
+	private IdentifiableTypeProvider identifiableTypeProvider;
+	
+	public void setIdentifiableTypeProvider(IdentifiableTypeProvider identifiableTypeProvider) {
+		this.identifiableTypeProvider = identifiableTypeProvider;
+	}
+	
+	protected IdentifiableTypeProvider getIdentifiableTypeProvider() {
+		return identifiableTypeProvider;
 	}
 
 	@Inject
-	private IExpectedTypeProvider<JvmTypeReference> expectedTypeProvider;
+	private XExpressionExpectedTypeProvider expectedTypeProvider;
 
-	public void setExpectedTypeProvider(IExpectedTypeProvider<JvmTypeReference> expectedTypeProvider) {
+	public void setExpectedTypeProvider(XExpressionExpectedTypeProvider expectedTypeProvider) {
 		this.expectedTypeProvider = expectedTypeProvider;
 	}
 
-	public IExpectedTypeProvider<JvmTypeReference> getExpectedTypeProvider() {
+	public XExpressionExpectedTypeProvider getExpectedTypeProvider() {
 		return expectedTypeProvider;
 	}
 
 	protected String getReturnTypeName(XExpression expr) {
-		final JvmTypeReference type = typeProvider.getType(expr);
+		final JvmTypeReference type = typeProvider.getConvertedType(expr);
 		return getSerializedForm(type);
 	}
 
@@ -163,7 +175,7 @@ public abstract class AbstractXbaseCompiler {
 	protected void declareLocalVariable(XExpression expr, IAppendable b, Object serializedExpression) {
 		JvmTypeReference type = getExpectedTypeProvider().getExpectedType(expr);
 		if (type == null || type.getCanonicalName().equals(Object.class.getCanonicalName()))
-			type = getTypeProvider().getType(expr);
+			type = getTypeProvider().getConvertedType(expr);
 		b.append("\n").append(getSerializedForm(type)).append(" ").append(getVarName(expr)).append(" = ")
 				.append(serializedExpression).append(";");
 	}

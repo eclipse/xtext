@@ -5,23 +5,20 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.typing;
+package org.eclipse.xtext.xbase.typing;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.XExpression;
+
+import com.google.inject.ImplementedBy;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public interface IExpectedTypeProvider<T,P extends EObject> {
+@ImplementedBy(XExpressionTypeProvider.class)
+public interface IXExpressionTypeProvider extends ITypeProvider<JvmTypeReference, XExpression> {
+
+	public JvmTypeReference getConvertedType(XExpression astNode);
 	
-	/**
-	 * computes the expected type for the given obj
-	 */
-	public T getExpectedType(P obj);
-	
-	/**
-	 * computes the expected type for the given reference, index and container object
-	 */
-	public T getExpectedType(EObject container, EReference reference, int index);
 }

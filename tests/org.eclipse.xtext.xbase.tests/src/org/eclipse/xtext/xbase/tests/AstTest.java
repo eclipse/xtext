@@ -19,25 +19,25 @@ import org.eclipse.xtext.xbase.XUnaryOperation;
 public class AstTest extends AbstractXbaseTestCase {
 	
 	public void testFeatureCall() throws Exception {
-		assertEquals(0, ((XFeatureCall) expression("foo")).getArguments().size());
-		assertEquals(1, ((XFeatureCall) expression("foo(2)")).getArguments().size());
-		assertEquals(2, ((XFeatureCall) expression("foo(3,4)")).getArguments().size());
+		assertEquals(0, ((XFeatureCall) expression("foo")).getAllArguments().size());
+		assertEquals(1, ((XFeatureCall) expression("foo(2)")).getAllArguments().size());
+		assertEquals(2, ((XFeatureCall) expression("foo(3,4)")).getAllArguments().size());
 	}
 	
 	public void testMemberFeatureCall() throws Exception {
-		assertEquals(1, ((XMemberFeatureCall) expression("foo.bar")).getArguments().size());
-		assertEquals(2, ((XMemberFeatureCall) expression("foo.bar(2)")).getArguments().size());
-		assertEquals(3, ((XMemberFeatureCall) expression("foo.bar(3,4)")).getArguments().size());
+		assertEquals(1, ((XMemberFeatureCall) expression("foo.bar")).getAllArguments().size());
+		assertEquals(2, ((XMemberFeatureCall) expression("foo.bar(2)")).getAllArguments().size());
+		assertEquals(3, ((XMemberFeatureCall) expression("foo.bar(3,4)")).getAllArguments().size());
 	}
 	
 	public void testBinaryOperation() throws Exception {
 //		assertEquals(2, ((XBinaryOperation) expression("foo + bar")).getArguments().size());
-		assertEquals(2, ((XBinaryOperation) expression("foo - bar + baz")).getArguments().size());
-		assertEquals(2, ((XBinaryOperation) expression("a + b * c + d")).getArguments().size());
+		assertEquals(2, ((XBinaryOperation) expression("foo - bar + baz")).getAllArguments().size());
+		assertEquals(2, ((XBinaryOperation) expression("a + b * c + d")).getAllArguments().size());
 	}
 	
 	public void testUnaryOperation() throws Exception {
-		assertEquals(1, ((XUnaryOperation) expression("- bar")).getArguments().size());
+		assertEquals(1, ((XUnaryOperation) expression("- bar")).getAllArguments().size());
 	}
 	
 	@Override

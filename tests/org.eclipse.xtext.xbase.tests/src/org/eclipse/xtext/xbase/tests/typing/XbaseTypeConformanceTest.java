@@ -12,7 +12,7 @@ import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.typing.IXbaseTypeProvider;
+import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
 import org.eclipse.xtext.xbase.typing.TypesService;
 
 import com.google.inject.Inject;
@@ -26,7 +26,7 @@ public class XbaseTypeConformanceTest extends AbstractXbaseTestCase {
 	private TypesService typeService;
 
 	@Inject
-	private IXbaseTypeProvider typeProvider;
+	private IXExpressionTypeProvider typeProvider;
 
 	@Inject
 	private IJvmTypeConformanceComputer typeConformanceComputer;
@@ -45,7 +45,7 @@ public class XbaseTypeConformanceTest extends AbstractXbaseTestCase {
 
 	protected void assertIsConformant(QualifiedName leftTypeName, XExpression rightExpression) throws Exception {
 		JvmTypeReference leftType = typeService.getTypeForName(leftTypeName, rightExpression);
-		typeConformanceComputer.isConformant(leftType, typeProvider.getType(rightExpression));
+		typeConformanceComputer.isConformant(leftType, typeProvider.getConvertedType(rightExpression));
 	}
 
 }

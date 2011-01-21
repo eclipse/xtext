@@ -7,15 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typing;
 
-import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -24,10 +20,8 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
-import org.eclipse.xtext.common.types.util.JvmTypesTypeProvider;
-import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
-import org.eclipse.xtext.typing.TypeResolutionException;
+import org.eclipse.xtext.typing.AbstractTypeProvider;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -37,27 +31,26 @@ import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XIntLiteral;
-import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
-import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge
  */
-public class XbaseTypeProvider extends JvmTypesTypeProvider {
+public class XExpressionTypeProvider extends AbstractTypeProvider<JvmTypeReference, XExpression> implements IXExpressionTypeProvider {
 
 	@Inject
 	private TypesService typesService;
@@ -73,70 +66,68 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 
 	@Inject
 	private TypeArgumentContext.Provider typeArgCtxProvider;
-
+	
 	@Inject
-	private SuperTypeCollector collector;
+	private IdentifiableTypeProvider identifiableTypeProvider;
+	
+	public JvmTypeReference getConvertedType(XExpression astNode) {
+		JvmTypeReference unconvertedType = getType(astNode);
+		JvmTypeReference converted = typeConverter.convert(unconvertedType, astNode);
+		return converted;
+	}
+	
+	@Override
+	public JvmTypeReference getType(XExpression astNode) {
+		return super.getType(astNode);
+	}
 
 	@Override
-	protected JvmTypeReference doConversion(JvmTypeReference actualType, EObject context) {
+	protected JvmTypeReference doConversion(JvmTypeReference actualType, XExpression context) {
 		return typeConverter.convert(actualType, context);
 	}
 
 	protected JvmTypeReference _type(XIfExpression object) {
 		if (object.getElse() != null)
-			return typeConformanceComputer.getCommonSuperType(Lists.newArrayList(getType(object.getThen()),
-					getType(object.getElse())));
+			return typeConformanceComputer.getCommonSuperType(Lists.newArrayList(getConvertedType(object.getThen()),
+					getConvertedType(object.getElse())));
 		else
-			return getType(object.getThen());
+			return getConvertedType(object.getThen());
 	}
 
 	protected JvmTypeReference _type(XSwitchExpression object) {
 		List<JvmTypeReference> returnTypes = Lists.newArrayList();
 		EList<XCasePart> cases = object.getCases();
 		for (XCasePart xCasePart : cases) {
-			returnTypes.add(getType(xCasePart.getThen()));
+			returnTypes.add(getConvertedType(xCasePart.getThen()));
 		}
 		if (object.getDefault() != null)
-			returnTypes.add(getType(object.getDefault()));
+			returnTypes.add(getConvertedType(object.getDefault()));
 		return typeConformanceComputer.getCommonSuperType(returnTypes);
 	}
 
-	protected JvmTypeReference _type(XCasePart object) {
-		if (object.getTypeGuard()!=null) {
-			return object.getTypeGuard();
-		}
-		return null;
-	}
-
 	protected JvmTypeReference _type(XBlockExpression object) {
-		return getType(object.getExpressions().get(object.getExpressions().size() - 1));
-	}
-
-	protected JvmTypeReference _type(XVariableDeclaration object) {
-		if (object.getType() != null)
-			return object.getType();
-		return getType(object.getRight());
+		return getConvertedType(object.getExpressions().get(object.getExpressions().size() - 1));
 	}
 
 	protected JvmTypeReference _type(XAbstractFeatureCall object) {
 		//TODO use expectedType to infer type args
 		JvmIdentifiableElement feature = object.getFeature();
-		//TODO it'S not the same to ask for the type of a referenced 'thing' or to ask ofr the return type of an expression.
-		// We should not call getType(feature) but call getTypeOfReference(feature) and implement it differently is needed.
-		JvmTypeReference featureType = getType(feature);
-		if (object instanceof XMemberFeatureCall) {
-			JvmTypeReference targetType = getType(((XMemberFeatureCall) object).getMemberCallTarget());
-			JvmTypeReference converted = typeConverter.convert(targetType, object);
+		JvmTypeReference featureType = identifiableTypeProvider.getType(feature);
+		final XExpression receiver = object.getActualReceiver();
+		if (receiver!=null) {
+			JvmTypeReference receiverType = getConvertedType(receiver);
+			JvmTypeReference converted = typeConverter.convert(receiverType, object);
 			return typeArgCtxProvider.get(converted).getUpperBound(featureType);
+		} else {
+			return featureType;
 		}
-		return featureType;
 	}
 
 	protected JvmTypeReference _type(XConstructorCall object) {
 		JvmConstructor constructor = object.getConstructor();
 		if (constructor.eIsProxy())
 			return null;
-		final JvmParameterizedTypeReference type = (JvmParameterizedTypeReference) getType(object.getConstructor());
+		final JvmParameterizedTypeReference type = (JvmParameterizedTypeReference) identifiableTypeProvider.getType(object.getConstructor());
 		for (JvmTypeReference typeArg : object.getTypeArguments()) {
 			JvmTypeReference copy = EcoreUtil2.clone(typeArg);
 			type.getArguments().add(copy);
@@ -161,7 +152,7 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 	}
 
 	protected JvmTypeReference _type(XClosure object) {
-		JvmTypeReference returnType = getType(object.getExpression());
+		JvmTypeReference returnType = getConvertedType(object.getExpression());
 		List<JvmTypeReference> parameterTypes = Lists.newArrayList();
 		EList<JvmFormalParameter> params = object.getFormalParameters();
 		for (JvmFormalParameter param : params) {
@@ -202,49 +193,17 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 
 	protected JvmTypeReference _type(XTryCatchFinallyExpression object) {
 		List<JvmTypeReference> returnTypes = newArrayList();
-		returnTypes.add(getType(object.getExpression()));
+		returnTypes.add(getConvertedType(object.getExpression()));
 		for (XCatchClause catchClause : object.getCatchClauses()) {
-			JvmTypeReference type = getType(catchClause);
+			JvmTypeReference type = getConvertedType(catchClause.getExpression());
 			returnTypes.add(type);
 		}
 		JvmTypeReference commonSuperType = typeConformanceComputer.getCommonSuperType(returnTypes);
 		return commonSuperType;
 	}
-
-	protected JvmTypeReference _type(XCatchClause object) {
-		return getType(object.getExpression());
-	}
-
-	@Override
-	protected JvmTypeReference _type(JvmFormalParameter parameter) {
-		
-		if (parameter.getParameterType() == null) {
-			if (parameter.eContainer() instanceof XForLoopExpression) {
-				XForLoopExpression forLoop = (XForLoopExpression) parameter.eContainer();
-				JvmParameterizedTypeReference reference = (JvmParameterizedTypeReference) getType(forLoop
-						.getForExpression());
-				reference = (JvmParameterizedTypeReference) typeConverter.convert(reference, parameter);
-				TypeArgumentContext context = typeArgCtxProvider.get(reference);
-				final String iterableName = TypesService.JAVA_LANG_ITERABLE.toString();
-				if (!reference.getType().getCanonicalName().equals(iterableName)) {
-					try {
-						final Set<JvmTypeReference> collectSuperTypes = collector.collectSuperTypes(reference);
-						reference = (JvmParameterizedTypeReference) find(collectSuperTypes,
-								new Predicate<JvmTypeReference>() {
-									public boolean apply(JvmTypeReference input) {
-										return input.getType().getCanonicalName().equals(iterableName);
-									}
-								});
-					} catch (NoSuchElementException e) {
-						throw new TypeResolutionException("The return type of the for expression wasn't of type "
-								+ TypesService.JAVA_LANG_ITERABLE);
-					}
-				}
-				final JvmTypeReference resolveContravariant = context.getUpperBound((reference).getArguments().get(0));
-				return resolveContravariant;
-			}
-		}
-		return super._type(parameter);
+	
+	protected JvmTypeReference _type(XCatchClause object, XAbstractFeatureCall call) {
+		return getConvertedType(object.getExpression());
 	}
 
 	public TypesFactory getTypesFactory() {

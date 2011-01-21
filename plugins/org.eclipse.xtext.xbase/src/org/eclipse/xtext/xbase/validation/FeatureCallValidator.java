@@ -12,6 +12,7 @@ import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.EValidatorRegistrar;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 
 import com.google.inject.Inject;
 
@@ -22,6 +23,9 @@ public class FeatureCallValidator extends AbstractDeclarativeValidator {
 
 	@Inject
 	protected UIStrings uiStrings;
+	
+	@Inject
+	private IdentifiableSimpleNameProvider nameProvider; 
 
 	protected static final String ISSUE_CODE_PREFIX = FeatureCallValidator.class.getCanonicalName() + ".";
 	public static final String INVALID_NUMBER_OF_ARGUMENTS = ISSUE_CODE_PREFIX + "invalid_number_of_arguments";
@@ -62,11 +66,11 @@ public class FeatureCallValidator extends AbstractDeclarativeValidator {
 			message = "Invalid argument types. Expected " + uiStrings.parameters(featureCall.getFeature())
 					+ " but got " + uiStrings.arguments(featureCall);
 		} else if (ASSIGNMENT_TARGET_IS_NOT_WRITEABLE.equals(issueCode)) {
-			message = "Feature " + featureCall.getFeatureName() + " is not writeable.";
+			message = "Feature " + nameProvider.getSimpleName(featureCall.getFeature()) + " is not writeable.";
 		} else if (INSTANCE_ACCESS_TO_STATIC_MEMBER.equals(issueCode)) {
-			message = "Instance access to static member " + featureCall.getFeatureName();
+			message = "Instance access to static member " + nameProvider.getSimpleName(featureCall.getFeature());
 		} else if (FIELD_ACCESS_WITH_PARENTHESES.equals(issueCode)) {
-			message = "Cannot access field " + featureCall.getFeatureName() + " with parentheses";
+			message = "Cannot access field " + nameProvider.getSimpleName(featureCall.getFeature()) + " with parentheses";
 		} else if (METHOD_ACCESS_WITHOUT_PARENTHESES.equals(issueCode)) {
 			message = "Missing parentheses for calling method " + featureCall.getFeature().getCanonicalName();
 		} else {

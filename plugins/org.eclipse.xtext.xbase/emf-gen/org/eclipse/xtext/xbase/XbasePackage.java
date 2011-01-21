@@ -321,31 +321,13 @@ public interface XbasePackage extends EPackage
 	int XABSTRACT_FEATURE_CALL = 6;
 
 	/**
-	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XABSTRACT_FEATURE_CALL__FEATURE_NAME = XEXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XABSTRACT_FEATURE_CALL__ARGUMENTS = XEXPRESSION_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Feature</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XABSTRACT_FEATURE_CALL__FEATURE = XEXPRESSION_FEATURE_COUNT + 2;
+	int XABSTRACT_FEATURE_CALL__FEATURE = XEXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Type Arguments</b></em>' containment reference list.
@@ -354,16 +336,16 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS = XEXPRESSION_FEATURE_COUNT + 3;
+	int XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS = XEXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Implicit Receiver</b></em>' reference.
+	 * The feature id for the '<em><b>Implicit Receiver</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER = XEXPRESSION_FEATURE_COUNT + 4;
+	int XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER = XEXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Targets Member Syntax Call</b></em>' attribute.
@@ -372,7 +354,7 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL = XEXPRESSION_FEATURE_COUNT + 5;
+	int XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL = XEXPRESSION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Invalid Feature Issue Code</b></em>' attribute.
@@ -381,7 +363,7 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XABSTRACT_FEATURE_CALL__INVALID_FEATURE_ISSUE_CODE = XEXPRESSION_FEATURE_COUNT + 6;
+	int XABSTRACT_FEATURE_CALL__INVALID_FEATURE_ISSUE_CODE = XEXPRESSION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Valid Feature</b></em>' attribute.
@@ -390,7 +372,7 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XABSTRACT_FEATURE_CALL__VALID_FEATURE = XEXPRESSION_FEATURE_COUNT + 7;
+	int XABSTRACT_FEATURE_CALL__VALID_FEATURE = XEXPRESSION_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>XAbstract Feature Call</em>' class.
@@ -399,7 +381,7 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XABSTRACT_FEATURE_CALL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 8;
+	int XABSTRACT_FEATURE_CALL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl <em>XMember Feature Call</em>}' class.
@@ -410,24 +392,6 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	int XMEMBER_FEATURE_CALL = 7;
-
-	/**
-	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XMEMBER_FEATURE_CALL__FEATURE_NAME = XABSTRACT_FEATURE_CALL__FEATURE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XMEMBER_FEATURE_CALL__ARGUMENTS = XABSTRACT_FEATURE_CALL__ARGUMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' reference.
@@ -448,7 +412,7 @@ public interface XbasePackage extends EPackage
 	int XMEMBER_FEATURE_CALL__TYPE_ARGUMENTS = XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Implicit Receiver</b></em>' reference.
+	 * The feature id for the '<em><b>Implicit Receiver</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -548,24 +512,6 @@ public interface XbasePackage extends EPackage
 	int XFEATURE_CALL = 8;
 
 	/**
-	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XFEATURE_CALL__FEATURE_NAME = XABSTRACT_FEATURE_CALL__FEATURE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XFEATURE_CALL__ARGUMENTS = XABSTRACT_FEATURE_CALL__ARGUMENTS;
-
-	/**
 	 * The feature id for the '<em><b>Feature</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -584,7 +530,7 @@ public interface XbasePackage extends EPackage
 	int XFEATURE_CALL__TYPE_ARGUMENTS = XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Implicit Receiver</b></em>' reference.
+	 * The feature id for the '<em><b>Implicit Receiver</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -898,24 +844,6 @@ public interface XbasePackage extends EPackage
 	int XBINARY_OPERATION = 16;
 
 	/**
-	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XBINARY_OPERATION__FEATURE_NAME = XABSTRACT_FEATURE_CALL__FEATURE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XBINARY_OPERATION__ARGUMENTS = XABSTRACT_FEATURE_CALL__ARGUMENTS;
-
-	/**
 	 * The feature id for the '<em><b>Feature</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -934,7 +862,7 @@ public interface XbasePackage extends EPackage
 	int XBINARY_OPERATION__TYPE_ARGUMENTS = XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Implicit Receiver</b></em>' reference.
+	 * The feature id for the '<em><b>Implicit Receiver</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1007,24 +935,6 @@ public interface XbasePackage extends EPackage
 	int XUNARY_OPERATION = 17;
 
 	/**
-	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XUNARY_OPERATION__FEATURE_NAME = XABSTRACT_FEATURE_CALL__FEATURE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XUNARY_OPERATION__ARGUMENTS = XABSTRACT_FEATURE_CALL__ARGUMENTS;
-
-	/**
 	 * The feature id for the '<em><b>Feature</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1043,7 +953,7 @@ public interface XbasePackage extends EPackage
 	int XUNARY_OPERATION__TYPE_ARGUMENTS = XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Implicit Receiver</b></em>' reference.
+	 * The feature id for the '<em><b>Implicit Receiver</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1440,24 +1350,6 @@ public interface XbasePackage extends EPackage
 	int XASSIGNMENT = 27;
 
 	/**
-	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XASSIGNMENT__FEATURE_NAME = XABSTRACT_FEATURE_CALL__FEATURE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XASSIGNMENT__ARGUMENTS = XABSTRACT_FEATURE_CALL__ARGUMENTS;
-
-	/**
 	 * The feature id for the '<em><b>Feature</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1476,7 +1368,7 @@ public interface XbasePackage extends EPackage
 	int XASSIGNMENT__TYPE_ARGUMENTS = XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Implicit Receiver</b></em>' reference.
+	 * The feature id for the '<em><b>Implicit Receiver</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1775,28 +1667,6 @@ public interface XbasePackage extends EPackage
 	EClass getXAbstractFeatureCall();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getFeatureName <em>Feature Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Feature Name</em>'.
-	 * @see org.eclipse.xtext.xbase.XAbstractFeatureCall#getFeatureName()
-	 * @see #getXAbstractFeatureCall()
-	 * @generated
-	 */
-	EAttribute getXAbstractFeatureCall_FeatureName();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getArguments <em>Arguments</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Arguments</em>'.
-	 * @see org.eclipse.xtext.xbase.XAbstractFeatureCall#getArguments()
-	 * @see #getXAbstractFeatureCall()
-	 * @generated
-	 */
-	EReference getXAbstractFeatureCall_Arguments();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getFeature <em>Feature</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1819,10 +1689,10 @@ public interface XbasePackage extends EPackage
 	EReference getXAbstractFeatureCall_TypeArguments();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getImplicitReceiver <em>Implicit Receiver</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getImplicitReceiver <em>Implicit Receiver</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Implicit Receiver</em>'.
+	 * @return the meta object for the containment reference '<em>Implicit Receiver</em>'.
 	 * @see org.eclipse.xtext.xbase.XAbstractFeatureCall#getImplicitReceiver()
 	 * @see #getXAbstractFeatureCall()
 	 * @generated
@@ -2704,22 +2574,6 @@ public interface XbasePackage extends EPackage
 		EClass XABSTRACT_FEATURE_CALL = eINSTANCE.getXAbstractFeatureCall();
 
 		/**
-		 * The meta object literal for the '<em><b>Feature Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute XABSTRACT_FEATURE_CALL__FEATURE_NAME = eINSTANCE.getXAbstractFeatureCall_FeatureName();
-
-		/**
-		 * The meta object literal for the '<em><b>Arguments</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XABSTRACT_FEATURE_CALL__ARGUMENTS = eINSTANCE.getXAbstractFeatureCall_Arguments();
-
-		/**
 		 * The meta object literal for the '<em><b>Feature</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2736,7 +2590,7 @@ public interface XbasePackage extends EPackage
 		EReference XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS = eINSTANCE.getXAbstractFeatureCall_TypeArguments();
 
 		/**
-		 * The meta object literal for the '<em><b>Implicit Receiver</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Implicit Receiver</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

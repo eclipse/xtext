@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.impl;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -15,14 +16,18 @@ import org.eclipse.xtext.xbase.XExpression;
  */
 public class XMemberFeatureCallImplCustom extends XMemberFeatureCallImpl {
 	@Override
-	public EList<XExpression> getArguments() {
-		EList<XExpression> args = asArguments(getMemberCallTarget());
-		args.addAll(getMemberCallArguments());
-		return args;
+	public EList<XExpression> getAllArguments() {
+		EList<XExpression> result = new BasicEList<XExpression>();
+		if (getImplicitReceiver()!=null) {
+			result.add(getImplicitReceiver());
+		}
+		result.add(getMemberCallTarget());
+		result.addAll(getMemberCallArguments());
+		return result;
 	}
 	
 	@Override
 	public String toString() {
-		return getExpressionAsString(getMemberCallTarget())+"."+getFeatureName()+getExpressionsAsString(getMemberCallArguments(),isExplicitOperationCall());
+		return getExpressionAsString(getMemberCallTarget())+"."+getConcreteSyntaxFeatureName()+getExpressionsAsString(getMemberCallArguments(),isExplicitOperationCall());
 	}
 }

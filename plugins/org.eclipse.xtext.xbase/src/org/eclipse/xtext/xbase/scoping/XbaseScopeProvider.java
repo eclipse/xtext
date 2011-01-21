@@ -11,6 +11,7 @@ import static com.google.common.collect.Iterables.*;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -27,10 +28,10 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
 import org.eclipse.xtext.scoping.impl.SingletonScope;
-import org.eclipse.xtext.typing.ITypeProvider;
 import org.eclipse.xtext.typing.TypeResolutionException;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCatchClause;
@@ -38,9 +39,12 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
+import org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
@@ -49,7 +53,7 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.StaticMethodsFeatureForTypeP
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentSugarDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
-import org.eclipse.xtext.xbase.typing.IXbaseTypeProvider;
+import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
 
 import com.google.common.base.Function;
 import com.google.inject.Inject;
@@ -60,6 +64,8 @@ import com.google.inject.internal.Lists;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XbaseScopeProvider extends XtypeScopeProvider {
+	
+	private final static Logger log = Logger.getLogger(XbaseScopeProvider.class);
 
 	public static final QualifiedName THIS = QualifiedName.create("this");
 	public static final QualifiedName ASSIGN = QualifiedName.create("=");
@@ -84,13 +90,23 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	private Provider<XAssignmentSugarDescriptionProvider> assignmentSugarFeatureDescProvider;
 
 	@Inject
-	private IXbaseTypeProvider typeProvider;
+	private IXExpressionTypeProvider typeProvider;
 
-	public void setTypeProvider(IXbaseTypeProvider typeProvider) {
+	@Inject
+	private IdentifiableTypeProvider identifiableTypeProvider;
+	
+	@Inject
+	private IdentifiableSimpleNameProvider featureNameProvider;
+	
+	public void setFeatureNameProvider(IdentifiableSimpleNameProvider featureNameProvider) {
+		this.featureNameProvider = featureNameProvider;
+	}
+
+	public void setTypeProvider(IXExpressionTypeProvider typeProvider) {
 		this.typeProvider = typeProvider;
 	}
 
-	protected ITypeProvider<JvmTypeReference> getTypeProvider() {
+	protected IXExpressionTypeProvider getTypeProvider() {
 		return typeProvider;
 	}
 
@@ -115,6 +131,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 				return createConstructorCallScope(context, reference);
 			}
 		} catch (TypeResolutionException exception) {
+			log.error("Type resolution error for context :"+context, exception);
 			return IScope.NULLSCOPE;
 		}
 		return super.getScope(context, reference);
@@ -184,16 +201,29 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 				implicitThis.setDelegate(featureScopeForThis);
 			return localVariableScope;
 		}
-		if (call.getArguments().isEmpty())
+		final XExpression syntacticalReceiver = getSyntacticalReceiver(call);
+		if (syntacticalReceiver==null)
 			return IScope.NULLSCOPE;
-		XExpression target = call.getArguments().get(0);
-		if (target != null && !target.eIsProxy()) {
-			JvmTypeReference jvmTypeReference = typeProvider.getType(target);
+		if (!syntacticalReceiver.eIsProxy()) {
+			JvmTypeReference jvmTypeReference = typeProvider.getConvertedType(syntacticalReceiver);
 			if (jvmTypeReference != null) {
 				return createFeatureScopeForTypeRef(jvmTypeReference, call, getContextType(call), null);
 			}
 		}
 		return IScope.NULLSCOPE;
+	}
+
+	protected XExpression getSyntacticalReceiver(final XAbstractFeatureCall call) {
+		if (call instanceof XMemberFeatureCall) {
+			return ((XMemberFeatureCall) call).getMemberCallTarget();
+		}
+		if (call instanceof XBinaryOperation) {
+			return ((XBinaryOperation) call).getLeftOperand();
+		}
+		if (call instanceof XAssignment) {
+			return ((XAssignment) call).getAssignable();
+		}
+		return null;
 	}
 
 	/**
@@ -204,7 +234,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		IEObjectDescription thisVariable = localVariableScope.getSingleElement(THIS);
 		if (thisVariable != null) {
 			EObject thisVal = thisVariable.getEObjectOrProxy();
-			JvmTypeReference type = typeProvider.getType(thisVal);
+			JvmTypeReference type = identifiableTypeProvider.getType((JvmIdentifiableElement) thisVal);
 			if (type != null) {
 				featureScopeForThis = createFeatureScopeForTypeRef(type, call, getContextType(call),(JvmIdentifiableElement) thisVariable.getEObjectOrProxy());
 			}
@@ -261,13 +291,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		if (guard==null) {
 			return parentScope;
 		}
-		XSwitchExpression switchExpr = (XSwitchExpression) context.eContainer();
-		String varName = switchExpr.getLocalVarName();
-		if (varName==null) {
-			if (switchExpr.getSwitch() instanceof XFeatureCall) {
-				varName = ((XFeatureCall)switchExpr.getSwitch()).getFeatureName();
-			}
-		}
+		String varName = featureNameProvider.getSimpleName(context);
 		if (varName==null) {
 			return parentScope;
 		}

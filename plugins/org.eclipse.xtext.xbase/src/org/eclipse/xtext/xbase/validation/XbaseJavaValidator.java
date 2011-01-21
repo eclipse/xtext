@@ -7,7 +7,6 @@ import static org.eclipse.xtext.xbase.XbasePackage.*;
 import java.util.List;
 
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
@@ -18,8 +17,8 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
-import org.eclipse.xtext.typing.IExpectedTypeProvider;
 import org.eclipse.xtext.typing.TypeResolutionException;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
@@ -33,8 +32,9 @@ import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
-import org.eclipse.xtext.xbase.typing.IXbaseTypeProvider;
+import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
 import org.eclipse.xtext.xbase.typing.TypesService;
+import org.eclipse.xtext.xbase.typing.XExpressionExpectedTypeProvider;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
 import com.google.inject.Inject;
@@ -56,10 +56,10 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	public static final String ABSTRACT_CLASS_INSTANTIATION = ISSUE_CODE_PREFIX + "abstract_class_instantiation";
 
 	@Inject
-	private IXbaseTypeProvider typeProvider;
+	private IXExpressionTypeProvider typeProvider;
 
 	@Inject
-	private IExpectedTypeProvider<JvmTypeReference> expectedTypeProvider;
+	private XExpressionExpectedTypeProvider expectedTypeProvider;
 
 	@Inject
 	private IJvmTypeConformanceComputer conformanceComputer;
@@ -74,12 +74,12 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	private TypesFactory factory;
 
 	@Check
-	public void checkTypes(EObject obj) {
+	public void checkTypes(XExpression obj) {
 		try {
 			JvmTypeReference expectedType = expectedTypeProvider.getExpectedType(obj);
 			if (expectedType == null || expectedType.getType() == null)
 				return;
-			JvmTypeReference actualType = typeProvider.getType(obj);
+			JvmTypeReference actualType = typeProvider.getConvertedType(obj);
 			if (actualType == null || actualType.getType() == null)
 				return;
 			if (!conformanceComputer.isConformant(expectedType, actualType))
@@ -94,7 +94,14 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Check
 	public void checkTypes(XCatchClause catchClause) {
-		checkTypes(catchClause.getDeclaredParam());
+		JvmTypeReference parameterType = catchClause.getDeclaredParam().getParameterType();
+		JvmTypeReference throwable = typesService.getTypeForName(TypesService.JAVA_LANG_THROWABLE, catchClause);
+		if (!conformanceComputer.isConformant(throwable, parameterType)) {
+			error("No exception of type "+parameterType.getCanonicalName()+" can be thrown; an exception type must be a subclass of Throwable",
+					catchClause.getDeclaredParam(),
+					TypesPackage.JVM_FORMAL_PARAMETER__PARAMETER_TYPE,
+					INCOMPATIBLE_TYPES);
+		}
 	}
 
 	@Check
@@ -134,7 +141,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Check
 	public void checkInvalidCast(XCastedExpression cast) {
-		JvmTypeReference targetTypeRef = typeProvider.getType(cast.getTarget());
+		JvmTypeReference targetTypeRef = typeProvider.getConvertedType(cast.getTarget());
 		if (targetTypeRef.getType() instanceof JvmDeclaredType) {
 			JvmDeclaredType targetType = (JvmDeclaredType) targetTypeRef.getType();
 			if (targetType.isFinal() && !conformanceComputer.isConformant(cast.getType(), targetTypeRef)) {
@@ -152,7 +159,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Check
 	public void checkInstanceOf(XInstanceOfExpression instanceOfExpression) {
-		JvmTypeReference expressionTypeRef = typeProvider.getType(instanceOfExpression.getExpression());
+		JvmTypeReference expressionTypeRef = typeProvider.getConvertedType(instanceOfExpression.getExpression());
 		if (expressionTypeRef.getType() instanceof JvmDeclaredType) {
 			JvmDeclaredType targetType = (JvmDeclaredType) expressionTypeRef.getType();
 			boolean isConformant = isConformant(instanceOfExpression.getType(), expressionTypeRef);
@@ -169,7 +176,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Check
 	public void checkFeatureCallOnVoid(XMemberFeatureCall featureCall) {
-		if (typesService.isVoid(typeProvider.getType(featureCall.getMemberCallTarget()))) {
+		if (typesService.isVoid(typeProvider.getConvertedType(featureCall.getMemberCallTarget()))) {
 			error("Cannot access features of objects of type 'void'", -1, FEATURE_CALL_ON_VOID);
 		}
 	}

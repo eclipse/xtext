@@ -58,7 +58,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 				"}");
 		final XFeatureCall xFeatureCall = (XFeatureCall)bop.getExpressions().get(1);
 		assertEquals("java.util.ArrayList.size()",xFeatureCall.getFeature().getCanonicalName());
-		assertSame(bop.getExpressions().get(0), xFeatureCall.getImplicitReceiver());
+		assertSame(bop.getExpressions().get(0), xFeatureCall.getImplicitReceiver().getFeature());
 	}
 	
 	public void testImplicitThis_2() throws Exception {
