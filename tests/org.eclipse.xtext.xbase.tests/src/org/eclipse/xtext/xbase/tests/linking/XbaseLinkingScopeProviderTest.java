@@ -39,7 +39,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	
 	public void testAssignment_1() throws Exception {
 		XBinaryOperation assignment = (XBinaryOperation) expression("new java.util.ArrayList<String>() += 'foo'", true);
-		assertEquals("org.eclipse.xtext.xbase.lib.Operators._operator_add(A,B)",assignment.getFeature().getCanonicalName());
+		assertEquals("org.eclipse.xtext.xbase.lib.Collections._operator_add(A,B)",assignment.getFeature().getCanonicalName());
 	}
 	
 	public void testLocalVarAssignment_1() throws Exception {

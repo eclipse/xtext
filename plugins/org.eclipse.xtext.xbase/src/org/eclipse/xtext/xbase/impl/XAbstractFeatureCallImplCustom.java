@@ -95,18 +95,29 @@ public class XAbstractFeatureCallImplCustom extends XAbstractFeatureCallImpl {
 	
 	@Override
 	public XFeatureCall getImplicitReceiver() {
-		// call getFeature(), because the implicitReceiver is set as a side effect of a resolution of the feature.
-		// see {@link org.eclipse.xtext.xbase.linking.BestMatchingJvmFeatureScope#setImplicitReceiver(IEObjectDescription)}
-		getFeature();
+		if (!isFeatureLinked())
+			return null;
 		return super.getImplicitReceiver();
 	}
 	
 	@Override
 	public boolean isTargetsMemberSyntaxCall() {
-		// call getFeature(), because the implicitReceiver is set as a side effect of a resolution of the feature.
-		// see {@link org.eclipse.xtext.xbase.linking.BestMatchingJvmFeatureScope#setImplicitReceiver(IEObjectDescription)}
-		getFeature();
+		if (!isFeatureLinked())
+			return true;
 		return super.isTargetsMemberSyntaxCall();
+	}
+	
+	/**
+	 * checks whether the feature was successfully linked
+	 * Any features which rely on side effects done during linking of feature should call this method.
+	 */
+	protected boolean isFeatureLinked() {
+		JvmIdentifiableElement feature2 = getFeature();
+		if (feature2==null)
+			return false;
+		if (feature2.eIsProxy())
+			return false;
+		return true;
 	}
 	
 	@Override
@@ -116,9 +127,8 @@ public class XAbstractFeatureCallImplCustom extends XAbstractFeatureCallImpl {
 	
 	@Override
 	public String getInvalidFeatureIssueCode() {
-		// call getFeature(), because the implicitReceiver is set as a side effect of a resolution of the feature.
-		// see {@link org.eclipse.xtext.xbase.linking.BestMatchingJvmFeatureScope#setImplicitReceiver(IEObjectDescription)}
-		getFeature();
+		if (!isFeatureLinked())
+			return null;
 		return super.getInvalidFeatureIssueCode();
 	}
 	

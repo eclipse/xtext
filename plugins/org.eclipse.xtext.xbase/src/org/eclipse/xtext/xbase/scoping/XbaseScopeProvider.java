@@ -81,7 +81,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	private Provider<XFeatureCallSugarDescriptionProvider> sugarFeatureDescProvider;
 	
 	@Inject
-	private Provider<StaticMethodsFeatureForTypeProvider> staticMethodsFeaturesForTypeProvider;
+	private Provider<StaticMethodsFeatureForTypeProvider> staticExtensionMethodsFeaturesForTypeProvider;
 	
 	@Inject
 	private Provider<XAssignmentDescriptionProvider> assignmentFeatureDescProvider;
@@ -345,9 +345,9 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			final DefaultJvmFeatureDescriptionProvider provider1 = defaultFeatureDescProvider.get();
 			final XFeatureCallSugarDescriptionProvider provider2 = sugarFeatureDescProvider.get();
 			final DefaultJvmFeatureDescriptionProvider provider3 = defaultFeatureDescProvider.get();
-			provider3.setFeaturesForTypeProvider(staticMethodsFeaturesForTypeProvider.get());
+			provider3.setFeaturesForTypeProvider(staticExtensionMethodsFeaturesForTypeProvider.get());
 			final XFeatureCallSugarDescriptionProvider provider4 = sugarFeatureDescProvider.get();
-			provider4.setFeaturesForTypeProvider(staticMethodsFeaturesForTypeProvider.get());
+			provider4.setFeaturesForTypeProvider(staticExtensionMethodsFeaturesForTypeProvider.get());
 			provider1.setContextType(currentContext);
 			provider1.setImplicitReceiver(implicitReceiver);
 			provider2.setContextType(currentContext);
