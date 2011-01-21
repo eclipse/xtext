@@ -1,7 +1,8 @@
 package org.eclipse.xtext.xtend2.tests.parsing;
 
+import static org.eclipse.xtext.util.Tuples.*;
+
 import java.util.List;
-import java.util.Map;
 
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CharStream;
@@ -13,8 +14,6 @@ import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 
 import com.google.inject.Inject;
-
-import static org.eclipse.xtext.util.Tuples.pair;
 
 @SuppressWarnings("unchecked")
 public class LexingTest extends AbstractXtend2TestCase {
@@ -31,36 +30,35 @@ public class LexingTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testRichString() throws Exception {
-		assertLexing("''' foo bar '''", pair("''' foo bar '''",6));
-		assertLexing("''' foo bar «", pair("''' foo bar «",7));
-		assertLexing("» foo bar «", pair("» foo bar «",8));
-		assertLexing("» foo bar '''", pair("» foo bar '''",9));
+		assertLexing("''' foo bar '''", pair("''' foo bar '''","RULE_RICH_TEXT"));
+		assertLexing("''' foo bar «", pair("''' foo bar «","RULE_RICH_TEXT_START"));
+		assertLexing("» foo bar «", pair("» foo bar «","RULE_RICH_TEXT_INBETWEEN"));
+		assertLexing("» foo bar '''", pair("» foo bar '''","RULE_RICH_TEXT_END"));
 	}
 	
 	public void testRichString_01() throws Exception {
-		assertLexing("''''''}", pair("''''''",6),pair("}",27));
+		assertLexing("''''''}", pair("''''''","RULE_RICH_TEXT"),pair("}","'}'"));
 	}
 	
 	public void testFunctionSig() throws Exception {
-		//TODO use tokentype mapper
 		assertLexing("class X { foo() ''' foo ''' }",
-				pair("class",20),
-				pair(" ",14),
-				pair("X",4),
-				pair(" ",14),
-				pair("{",26),
-				pair(" ",14),
-				pair("foo",4),
-				pair("(",28),
-				pair(")",29),
-				pair(" ",14),
-				pair("''' foo '''",6),
-				pair(" ",14),
-				pair("}",27)
+				pair("class","'class'"),
+				pair(" ","RULE_WS"),
+				pair("X","RULE_ID"),
+				pair(" ","RULE_WS"),
+				pair("{","'{'"),
+				pair(" ","RULE_WS"),
+				pair("foo","RULE_ID"),
+				pair("(","'('"),
+				pair(")","')'"),
+				pair(" ","RULE_WS"),
+				pair("''' foo '''","RULE_RICH_TEXT"),
+				pair(" ","RULE_WS"),
+				pair("}","'}'")
 				);
 	}
 	
-	protected void assertLexing(String input, Pair<String,Integer>... expectedTokens) {
+	protected void assertLexing(String input, Pair<String,String>... expectedTokens) {
 		CharStream stream = new ANTLRStringStream(input);
 		lexer.setCharStream(stream);
 		XtextTokenStream tokenStream = new XtextTokenStream(lexer, tokenDefProvider);
@@ -69,8 +67,9 @@ public class LexingTest extends AbstractXtend2TestCase {
 		for(int i = 0;i < tokens.size(); i++) {
 			Token token = (Token) tokens.get(i);
 			assertEquals(token.toString(), expectedTokens[i].getFirst(), token.getText());
-			final Map<Integer, String> types = tokenDefProvider.getTokenDefMap();
-			assertEquals(types.get(expectedTokens[i].getSecond())+" but was "+types.get(token.getType()), expectedTokens[i].getSecond(), (Integer)token.getType());
+			final String expected = expectedTokens[i].getSecond();
+			String actual = tokenDefProvider.getTokenDefMap().get(token.getType());
+			assertEquals("expected "+expected+" but was "+actual, expected, actual);
 		}
 	}
 }
