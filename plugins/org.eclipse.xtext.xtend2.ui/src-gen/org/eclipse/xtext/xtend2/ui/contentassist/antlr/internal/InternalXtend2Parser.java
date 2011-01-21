@@ -6681,11 +6681,11 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             if ( (LA4_0==RULE_RICH_TEXT_INBETWEEN) ) {
                 int LA4_1 = input.LA(2);
 
-                if ( ((LA4_1>=RULE_ID && LA4_1<=RULE_RICH_TEXT_START)||LA4_1==RULE_INT||LA4_1==26||(LA4_1>=29 && LA4_1<=30)||LA4_1==35||LA4_1==38||LA4_1==42||LA4_1==47||LA4_1==49||LA4_1==52||LA4_1==58||LA4_1==61||LA4_1==63||(LA4_1>=66 && LA4_1<=73)||LA4_1==83) ) {
-                    alt4=2;
-                }
-                else if ( (LA4_1==EOF||LA4_1==51||(LA4_1>=53 && LA4_1<=55)) ) {
+                if ( (LA4_1==EOF||LA4_1==51||(LA4_1>=53 && LA4_1<=55)) ) {
                     alt4=1;
+                }
+                else if ( ((LA4_1>=RULE_ID && LA4_1<=RULE_RICH_TEXT_START)||LA4_1==RULE_INT||LA4_1==26||(LA4_1>=29 && LA4_1<=30)||LA4_1==35||LA4_1==38||LA4_1==42||LA4_1==47||LA4_1==49||LA4_1==52||LA4_1==58||LA4_1==61||LA4_1==63||(LA4_1>=66 && LA4_1<=73)||LA4_1==83) ) {
+                    alt4=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -6935,11 +6935,11 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             if ( (LA6_0==RULE_ID) ) {
                 int LA6_1 = input.LA(2);
 
-                if ( (LA6_1==16) ) {
-                    alt6=1;
-                }
-                else if ( (LA6_1==EOF||(LA6_1>=RULE_ID && LA6_1<=RULE_INT)||(LA6_1>=17 && LA6_1<=38)||(LA6_1>=42 && LA6_1<=44)||(LA6_1>=47 && LA6_1<=48)||LA6_1==50||(LA6_1>=56 && LA6_1<=58)||(LA6_1>=60 && LA6_1<=76)||(LA6_1>=80 && LA6_1<=83)) ) {
+                if ( (LA6_1==EOF||(LA6_1>=RULE_ID && LA6_1<=RULE_INT)||(LA6_1>=17 && LA6_1<=38)||(LA6_1>=42 && LA6_1<=44)||(LA6_1>=47 && LA6_1<=48)||LA6_1==50||(LA6_1>=56 && LA6_1<=58)||(LA6_1>=60 && LA6_1<=76)||(LA6_1>=80 && LA6_1<=83)) ) {
                     alt6=2;
+                }
+                else if ( (LA6_1==16) ) {
+                    alt6=1;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -7861,11 +7861,11 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                 else if ( (LA15_1==RULE_ID) ) {
                     int LA15_3 = input.LA(3);
 
-                    if ( (LA15_3==EOF||(LA15_3>=RULE_ID && LA15_3<=RULE_INT)||(LA15_3>=17 && LA15_3<=38)||(LA15_3>=42 && LA15_3<=44)||(LA15_3>=47 && LA15_3<=48)||LA15_3==50||(LA15_3>=56 && LA15_3<=58)||(LA15_3>=60 && LA15_3<=76)||(LA15_3>=80 && LA15_3<=83)) ) {
-                        alt15=2;
-                    }
-                    else if ( (LA15_3==16) ) {
+                    if ( (LA15_3==16) ) {
                         alt15=1;
+                    }
+                    else if ( (LA15_3==EOF||(LA15_3>=RULE_ID && LA15_3<=RULE_INT)||(LA15_3>=17 && LA15_3<=38)||(LA15_3>=42 && LA15_3<=44)||(LA15_3>=47 && LA15_3<=48)||LA15_3==50||(LA15_3>=56 && LA15_3<=58)||(LA15_3>=60 && LA15_3<=76)||(LA15_3>=80 && LA15_3<=83)) ) {
+                        alt15=2;
                     }
                     else {
                         if (state.backtracking>0) {state.failed=true; return ;}
@@ -10042,52 +10042,45 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__File__Group__2__Impl"
-    // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3041:1: rule__File__Group__2__Impl : ( ( rule__File__ClassesAssignment_2 )* ) ;
+    // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3041:1: rule__File__Group__2__Impl : ( ( rule__File__XtendClassAssignment_2 )? ) ;
     public final void rule__File__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3045:1: ( ( ( rule__File__ClassesAssignment_2 )* ) )
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3046:1: ( ( rule__File__ClassesAssignment_2 )* )
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3045:1: ( ( ( rule__File__XtendClassAssignment_2 )? ) )
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3046:1: ( ( rule__File__XtendClassAssignment_2 )? )
             {
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3046:1: ( ( rule__File__ClassesAssignment_2 )* )
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3047:1: ( rule__File__ClassesAssignment_2 )*
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3046:1: ( ( rule__File__XtendClassAssignment_2 )? )
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3047:1: ( rule__File__XtendClassAssignment_2 )?
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getFileAccess().getClassesAssignment_2()); 
+               before(grammarAccess.getFileAccess().getXtendClassAssignment_2()); 
             }
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3048:1: ( rule__File__ClassesAssignment_2 )*
-            loop33:
-            do {
-                int alt33=2;
-                int LA33_0 = input.LA(1);
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3048:1: ( rule__File__XtendClassAssignment_2 )?
+            int alt33=2;
+            int LA33_0 = input.LA(1);
 
-                if ( (LA33_0==26||LA33_0==41) ) {
-                    alt33=1;
-                }
+            if ( (LA33_0==26||LA33_0==41) ) {
+                alt33=1;
+            }
+            switch (alt33) {
+                case 1 :
+                    // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3048:2: rule__File__XtendClassAssignment_2
+                    {
+                    pushFollow(FOLLOW_rule__File__XtendClassAssignment_2_in_rule__File__Group__2__Impl6590);
+                    rule__File__XtendClassAssignment_2();
 
+                    state._fsp--;
+                    if (state.failed) return ;
 
-                switch (alt33) {
-            	case 1 :
-            	    // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3048:2: rule__File__ClassesAssignment_2
-            	    {
-            	    pushFollow(FOLLOW_rule__File__ClassesAssignment_2_in_rule__File__Group__2__Impl6590);
-            	    rule__File__ClassesAssignment_2();
+                    }
+                    break;
 
-            	    state._fsp--;
-            	    if (state.failed) return ;
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop33;
-                }
-            } while (true);
+            }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getFileAccess().getClassesAssignment_2()); 
+               after(grammarAccess.getFileAccess().getXtendClassAssignment_2()); 
             }
 
             }
@@ -42656,9 +42649,9 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__File__ImportsAssignment_1"
 
 
-    // $ANTLR start "rule__File__ClassesAssignment_2"
-    // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:14920:1: rule__File__ClassesAssignment_2 : ( ruleClass ) ;
-    public final void rule__File__ClassesAssignment_2() throws RecognitionException {
+    // $ANTLR start "rule__File__XtendClassAssignment_2"
+    // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:14920:1: rule__File__XtendClassAssignment_2 : ( ruleClass ) ;
+    public final void rule__File__XtendClassAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -42670,15 +42663,15 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:14926:1: ruleClass
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getFileAccess().getClassesClassParserRuleCall_2_0()); 
+               before(grammarAccess.getFileAccess().getXtendClassClassParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleClass_in_rule__File__ClassesAssignment_229933);
+            pushFollow(FOLLOW_ruleClass_in_rule__File__XtendClassAssignment_229933);
             ruleClass();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getFileAccess().getClassesClassParserRuleCall_2_0()); 
+               after(grammarAccess.getFileAccess().getXtendClassClassParserRuleCall_2_0()); 
             }
 
             }
@@ -42698,7 +42691,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__File__ClassesAssignment_2"
+    // $ANTLR end "rule__File__XtendClassAssignment_2"
 
 
     // $ANTLR start "rule__Import__ImportedNamespaceAssignment_1"
@@ -50983,7 +50976,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__File__Group__2_in_rule__File__Group__16505 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__File__ImportsAssignment_1_in_rule__File__Group__1__Impl6532 = new BitSet(new long[]{0x0000010000000002L});
     public static final BitSet FOLLOW_rule__File__Group__2__Impl_in_rule__File__Group__26563 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__File__ClassesAssignment_2_in_rule__File__Group__2__Impl6590 = new BitSet(new long[]{0x0000020004000002L});
+    public static final BitSet FOLLOW_rule__File__XtendClassAssignment_2_in_rule__File__Group__2__Impl6590 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__File__Group_0__0__Impl_in_rule__File__Group_0__06627 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_rule__File__Group_0__1_in_rule__File__Group_0__06630 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_39_in_rule__File__Group_0__0__Impl6658 = new BitSet(new long[]{0x0000000000000002L});
@@ -51933,7 +51926,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__JvmTypeParameter__ConstraintsAssignment_1_0_1_in_rule__JvmTypeParameter__Group_1_0__1__Impl29831 = new BitSet(new long[]{0x0000000000000002L,0x0000000000004000L});
     public static final BitSet FOLLOW_ruleQualifiedName_in_rule__File__PackageAssignment_0_129871 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleImport_in_rule__File__ImportsAssignment_129902 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleClass_in_rule__File__ClassesAssignment_229933 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleClass_in_rule__File__XtendClassAssignment_229933 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleQualifiedNameWithWildCard_in_rule__Import__ImportedNamespaceAssignment_129964 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmTypeParameter_in_rule__Class__TypeParametersAssignment_0_129995 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmTypeParameter_in_rule__Class__TypeParametersAssignment_0_2_130026 = new BitSet(new long[]{0x0000000000000002L});

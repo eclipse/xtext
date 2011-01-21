@@ -43,7 +43,7 @@ public abstract class AbstractXtend2TestCase extends TestCase {
 	}
 
 	protected XtendClass clazz(String string) throws Exception {
-		return file(string).getClasses().get(0);
+		return file(string).getXtendClass();
 	}
 	
 	protected XtendFile file(String string) throws Exception {

@@ -34,7 +34,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendImport;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFileImpl#getImports <em>Imports</em>}</li>
- *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFileImpl#getClasses <em>Classes</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFileImpl#getXtendClass <em>Xtend Class</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFileImpl#getPackage <em>Package</em>}</li>
  * </ul>
  * </p>
@@ -54,14 +54,14 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 	protected EList<XtendImport> imports;
 
 	/**
-	 * The cached value of the '{@link #getClasses() <em>Classes</em>}' containment reference list.
+	 * The cached value of the '{@link #getXtendClass() <em>Xtend Class</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getClasses()
+	 * @see #getXtendClass()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<XtendClass> classes;
+	protected XtendClass xtendClass;
 
 	/**
 	 * The default value of the '{@link #getPackage() <em>Package</em>}' attribute.
@@ -123,13 +123,47 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<XtendClass> getClasses()
+	public XtendClass getXtendClass()
 	{
-		if (classes == null)
+		return xtendClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetXtendClass(XtendClass newXtendClass, NotificationChain msgs)
+	{
+		XtendClass oldXtendClass = xtendClass;
+		xtendClass = newXtendClass;
+		if (eNotificationRequired())
 		{
-			classes = new EObjectContainmentEList<XtendClass>(XtendClass.class, this, Xtend2Package.XTEND_FILE__CLASSES);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FILE__XTEND_CLASS, oldXtendClass, newXtendClass);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
-		return classes;
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setXtendClass(XtendClass newXtendClass)
+	{
+		if (newXtendClass != xtendClass)
+		{
+			NotificationChain msgs = null;
+			if (xtendClass != null)
+				msgs = ((InternalEObject)xtendClass).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_FILE__XTEND_CLASS, null, msgs);
+			if (newXtendClass != null)
+				msgs = ((InternalEObject)newXtendClass).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_FILE__XTEND_CLASS, null, msgs);
+			msgs = basicSetXtendClass(newXtendClass, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FILE__XTEND_CLASS, newXtendClass, newXtendClass));
 	}
 
 	/**
@@ -167,8 +201,8 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 		{
 			case Xtend2Package.XTEND_FILE__IMPORTS:
 				return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
-			case Xtend2Package.XTEND_FILE__CLASSES:
-				return ((InternalEList<?>)getClasses()).basicRemove(otherEnd, msgs);
+			case Xtend2Package.XTEND_FILE__XTEND_CLASS:
+				return basicSetXtendClass(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -185,8 +219,8 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 		{
 			case Xtend2Package.XTEND_FILE__IMPORTS:
 				return getImports();
-			case Xtend2Package.XTEND_FILE__CLASSES:
-				return getClasses();
+			case Xtend2Package.XTEND_FILE__XTEND_CLASS:
+				return getXtendClass();
 			case Xtend2Package.XTEND_FILE__PACKAGE:
 				return getPackage();
 		}
@@ -208,9 +242,8 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 				getImports().clear();
 				getImports().addAll((Collection<? extends XtendImport>)newValue);
 				return;
-			case Xtend2Package.XTEND_FILE__CLASSES:
-				getClasses().clear();
-				getClasses().addAll((Collection<? extends XtendClass>)newValue);
+			case Xtend2Package.XTEND_FILE__XTEND_CLASS:
+				setXtendClass((XtendClass)newValue);
 				return;
 			case Xtend2Package.XTEND_FILE__PACKAGE:
 				setPackage((String)newValue);
@@ -232,8 +265,8 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 			case Xtend2Package.XTEND_FILE__IMPORTS:
 				getImports().clear();
 				return;
-			case Xtend2Package.XTEND_FILE__CLASSES:
-				getClasses().clear();
+			case Xtend2Package.XTEND_FILE__XTEND_CLASS:
+				setXtendClass((XtendClass)null);
 				return;
 			case Xtend2Package.XTEND_FILE__PACKAGE:
 				setPackage(PACKAGE_EDEFAULT);
@@ -254,8 +287,8 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 		{
 			case Xtend2Package.XTEND_FILE__IMPORTS:
 				return imports != null && !imports.isEmpty();
-			case Xtend2Package.XTEND_FILE__CLASSES:
-				return classes != null && !classes.isEmpty();
+			case Xtend2Package.XTEND_FILE__XTEND_CLASS:
+				return xtendClass != null;
 			case Xtend2Package.XTEND_FILE__PACKAGE:
 				return PACKAGE_EDEFAULT == null ? package_ != null : !PACKAGE_EDEFAULT.equals(package_);
 		}

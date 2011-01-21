@@ -15,7 +15,7 @@ import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecor
 File returns XtendFile : 
     ('package' package=QualifiedName)?
 	(imports+=Import)*
-	(classes+=Class)*
+	(xtendClass=Class)?
 ;
 
 Import returns XtendImport : 

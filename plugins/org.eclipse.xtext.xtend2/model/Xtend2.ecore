@@ -6,8 +6,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="XtendFile">
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
         eType="#//XtendImport" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="classes" upperBound="-1"
-        eType="#//XtendClass" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="xtendClass" eType="#//XtendClass"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="package" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XtendImport">

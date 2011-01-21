@@ -33,7 +33,7 @@ public class Xtend2JavaValidatorTest extends AbstractXtend2TestCase {
 	
 	public void testFileNamingConventions_1() throws Exception {
 		XtendFile xtendFile = loadExampleXtendFile();
-			xtendFile.getClasses().get(0).setName("Bar");
+			xtendFile.getXtendClass().setName("Bar");
 		helper.assertNoError(xtendFile, Xtend2JavaValidator.WRONG_PACKAGE);
 		helper.assertError(xtendFile, Xtend2Package.Literals.XTEND_CLASS, Xtend2JavaValidator.WRONG_FILE);
 	}

@@ -7,7 +7,7 @@ grammar DebugInternalXtend2 ;
 ruleFile :
 	(
 		'package' ruleQualifiedName
-	)? ruleImport* ruleClass*
+	)? ruleImport* ruleClass?
 ;
 
 // Rule Import

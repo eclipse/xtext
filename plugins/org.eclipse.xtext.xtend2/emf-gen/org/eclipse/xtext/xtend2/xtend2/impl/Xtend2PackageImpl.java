@@ -190,7 +190,7 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getXtendFile_Classes()
+	public EReference getXtendFile_XtendClass()
 	{
 		return (EReference)xtendFileEClass.getEStructuralFeatures().get(1);
 	}
@@ -457,7 +457,7 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		// Create classes and their features
 		xtendFileEClass = createEClass(XTEND_FILE);
 		createEReference(xtendFileEClass, XTEND_FILE__IMPORTS);
-		createEReference(xtendFileEClass, XTEND_FILE__CLASSES);
+		createEReference(xtendFileEClass, XTEND_FILE__XTEND_CLASS);
 		createEAttribute(xtendFileEClass, XTEND_FILE__PACKAGE);
 
 		xtendImportEClass = createEClass(XTEND_IMPORT);
@@ -534,7 +534,7 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		// Initialize classes and features; add operations and parameters
 		initEClass(xtendFileEClass, XtendFile.class, "XtendFile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXtendFile_Imports(), this.getXtendImport(), null, "imports", null, 0, -1, XtendFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getXtendFile_Classes(), this.getXtendClass(), null, "classes", null, 0, -1, XtendFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXtendFile_XtendClass(), this.getXtendClass(), null, "xtendClass", null, 0, 1, XtendFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXtendFile_Package(), ecorePackage.getEString(), "package", null, 0, 1, XtendFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xtendImportEClass, XtendImport.class, "XtendImport", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
