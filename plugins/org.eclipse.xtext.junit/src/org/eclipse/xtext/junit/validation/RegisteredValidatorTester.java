@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
- * 
  */
 public class RegisteredValidatorTester extends AbstractValidatorTester {
 	public static AssertableDiagnostics validateObj(EObject obj) {

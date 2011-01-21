@@ -20,6 +20,13 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 /**
+ * <p>Simple implementation of a check for keywords that collide with terminal rules.</p>
+ * It identifies cases like
+ * <pre>
+ * Rule: op='+';
+ * PLUS: '+';
+ * </pre>
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class KeywordInspector {
@@ -42,7 +49,7 @@ public class KeywordInspector {
 				String value = ((Keyword) element).getValue();
 				if (value.equals(keyword.getValue()))
 				acceptor.acceptError("The keyword '" + value + "' hides the terminal rule " + rule.getName()+ ".", 
-						keyword, XtextPackage.KEYWORD__VALUE, null);
+						keyword, XtextPackage.Literals.KEYWORD__VALUE, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
 			}
 		}
 	}

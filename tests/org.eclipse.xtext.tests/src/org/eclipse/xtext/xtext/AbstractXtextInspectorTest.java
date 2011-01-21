@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
@@ -25,8 +26,9 @@ import com.google.common.collect.Lists;
  */
 public abstract class AbstractXtextInspectorTest extends AbstractXtextTests implements ValidationMessageAcceptor  {
 
-	protected List<Triple<String, EObject, Integer>> warnings;
-	protected List<Triple<String, EObject, Integer>> errors;
+	protected List<Triple<String, EObject, EStructuralFeature>> warnings;
+	protected List<Triple<String, EObject, EStructuralFeature>> errors;
+	protected List<Triple<String, EObject, EStructuralFeature>> infos;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -34,10 +36,12 @@ public abstract class AbstractXtextInspectorTest extends AbstractXtextTests impl
 		with(XtextStandaloneSetup.class);
 		warnings = Lists.newArrayList();
 		errors = Lists.newArrayList();
+		infos = Lists.newArrayList();
 	}
 
 	@Override
 	protected void tearDown() throws Exception {
+		infos = null;
 		warnings = null;
 		errors = null;
 		super.tearDown();
@@ -46,19 +50,28 @@ public abstract class AbstractXtextInspectorTest extends AbstractXtextTests impl
 	protected abstract boolean isExpectingErrors();
 	
 	protected abstract boolean isExpectingWarnings();
+	
+	protected abstract boolean isExpectingInfos();
 
-	public void acceptError(String message, EObject object, Integer feature, String code, String... issueData) {
+	public void acceptError(String message, EObject object, EStructuralFeature feature, int index, String code, String... issueData) {
 		if (!isExpectingErrors())
 			fail("unexpected call to acceptError");
-		Triple<String,EObject,Integer> error = Tuples.create(message, object, feature);
+		Triple<String,EObject,EStructuralFeature> error = Tuples.create(message, object, feature);
 		errors.add(error);
 	}
 
-	public void acceptWarning(String message, EObject object, Integer feature, String code, String... issueData) {
+	public void acceptWarning(String message, EObject object, EStructuralFeature feature, int index, String code, String... issueData) {
 		if (!isExpectingWarnings())
 			fail("unexpected call to acceptWarning");
-		Triple<String,EObject,Integer> warning = Tuples.create(message, object, feature);
+		Triple<String,EObject,EStructuralFeature> warning = Tuples.create(message, object, feature);
 		warnings.add(warning);
+	}
+	
+	public void acceptInfo(String message, EObject object, EStructuralFeature feature, int index, String code, String... issueData) {
+		if (!isExpectingInfos())
+			fail("unexpected call to acceptInfo");
+		Triple<String,EObject,EStructuralFeature> warning = Tuples.create(message, object, feature);
+		infos.add(warning);
 	}
 
 	protected Grammar getGrammar(String grammar) throws Exception {
@@ -72,4 +85,16 @@ public abstract class AbstractXtextInspectorTest extends AbstractXtextTests impl
 		return (Grammar) resourceFromString.getContents().get(0);
 	}
 
+	public void acceptError(String message, EObject object, int offset, int length, String code, String... issueData) {
+		fail(message);
+	}
+	
+	public void acceptWarning(String message, EObject object, int offset, int length, String code, String... issueData) {
+		fail(message);
+	}
+	
+	public void acceptInfo(String message, EObject object, int offset, int length, String code, String... issueData) {
+		fail(message);
+	}
+	
 }

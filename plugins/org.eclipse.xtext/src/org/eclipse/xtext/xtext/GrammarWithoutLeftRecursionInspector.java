@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
@@ -157,12 +158,12 @@ public class GrammarWithoutLeftRecursionInspector extends XtextSwitch<Boolean> i
 		acceptError(
 				"The rule '" + object.getRule().getName() + "' is left recursive.", 
 				object.getRule(), 
-				XtextPackage.ABSTRACT_RULE__NAME, 
+				XtextPackage.Literals.ABSTRACT_RULE__NAME, 
 				null);
 		acceptError(
 				"This rule call is part of a left recursive call graph.", 
 				object, 
-				XtextPackage.RULE_CALL__RULE, 
+				XtextPackage.Literals.RULE_CALL__RULE, 
 				null);
 		for(int i = callStack.size() - 1; i >= 0; i--) {
 			RuleCall call = callStack.get(i);
@@ -172,17 +173,44 @@ public class GrammarWithoutLeftRecursionInspector extends XtextSwitch<Boolean> i
 			acceptError(
 					"This rule call is part of a left recursive call graph.", 
 					call, 
-					XtextPackage.RULE_CALL__RULE, 
+					XtextPackage.Literals.RULE_CALL__RULE, 
 					null);
 		}
 	}
 
-	public void acceptError(String message, EObject object, Integer feature, String code, String... issueData) {
+	public void acceptError(String message, EObject object, EStructuralFeature feature, String code, String... issueData) {
 		if (erroneousElements.add(object) && EcoreUtil.isAncestor(inspectedGrammar, object))
-			validationMessageAcceptor.acceptError(message, object, feature, code, issueData);			
+			validationMessageAcceptor.acceptError(message, object, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code, issueData);			
 	}
 
-	public void acceptWarning(String message, EObject object, Integer feature, String code, String... issueData) {
+	public void acceptWarning(String message, EObject object, EStructuralFeature feature, String code, String... issueData) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void acceptError(String message, EObject object, EStructuralFeature feature, int index, String code,
+			String... issueData) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void acceptError(String message, EObject object, int offset, int length, String code, String... issueData) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void acceptWarning(String message, EObject object, EStructuralFeature feature, int index, String code,
+			String... issueData) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void acceptWarning(String message, EObject object, int offset, int length, String code, String... issueData) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void acceptInfo(String message, EObject object, EStructuralFeature feature, int index, String code,
+			String... issueData) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void acceptInfo(String message, EObject object, int offset, int length, String code, String... issueData) {
 		throw new UnsupportedOperationException();
 	}
 

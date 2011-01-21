@@ -10,7 +10,7 @@ public class FowlerDslJavaValidator extends AbstractFowlerDslJavaValidator {
 	@Check
 	public void checkStatesExist(Statemachine sm) {
 		if (sm.getStates().isEmpty()) {
-			warning("A Statemachine should have at least one state", FowlerdslPackage.STATEMACHINE__STATES);
+			warning("A Statemachine should have at least one state", FowlerdslPackage.Literals.STATEMACHINE__STATES);
 		}
 	}
 

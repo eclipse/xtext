@@ -22,26 +22,26 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.junit.validation.ValidatorTester;
 
 /**
- * @author meysholdt - Initial contribution and API
+ * @author Moritz Eysholdt - Initial contribution and API
  */
 public class ValidatorTesterTest extends AbstractXtextTests {
 
-	private class TestingValidator extends AbstractDeclarativeValidator {
+	protected static class TestingValidator extends AbstractDeclarativeValidator {
 		@Check
 		public void someError(EAnnotation dummy) {
-			error("someError message", dummy, 1, "101");
+			error("someError message", dummy, EcorePackage.Literals.EANNOTATION__DETAILS, -1, "101");
 		}
 
 		@Check
 		public void someWarning(EClass dummy) {
-			warning("someWarning message", dummy, 1, "102");
+			warning("someWarning message", dummy, EcorePackage.Literals.ECLASS__ABSTRACT, -1, "102");
 		}
 
 		@Check
 		public void manyMessages(EClass dummy) {
-			error("ErrorOne message", dummy, 1, "103");
-			error("ErrorTwo message", dummy, 1, "104");
-			warning("WarningOne message", dummy, 1, "105");
+			error("ErrorOne message", dummy, EcorePackage.Literals.ECLASS__ABSTRACT, -1, "103");
+			error("ErrorTwo message", dummy, EcorePackage.Literals.ECLASS__ABSTRACT, -1, "104");
+			warning("WarningOne message", dummy, EcorePackage.Literals.ECLASS__ABSTRACT, -1, "105");
 		}
 
 		@Override
@@ -60,9 +60,9 @@ public class ValidatorTesterTest extends AbstractXtextTests {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		TestingValidator val = new TestingValidator();
-		new XtextStandaloneSetup().createInjectorAndDoEMFRegistration().injectMembers(val);
-		tester = new ValidatorTester<TestingValidator>(val);
+		with(XtextStandaloneSetup.class);
+		TestingValidator validator = get(TestingValidator.class);
+		tester = new ValidatorTester<TestingValidator>(validator, get(EValidatorRegistrar.class));
 	}
 
 	public void testError() {

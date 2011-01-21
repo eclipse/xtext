@@ -20,7 +20,7 @@ import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.xtext.validation.AbstractDeclarativeValidator.DiagnosticImpl;
+import org.eclipse.xtext.validation.FeatureBasedDiagnostic;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
@@ -87,8 +87,8 @@ public class AssertableDiagnostics {
 				return false;
 			if (code != null && !code.equals(d.getCode()))
 				return false;
-			if (issueCode != null && d instanceof DiagnosticImpl
-					&& !((DiagnosticImpl) d).getIssueCode().equals(issueCode))
+			if (issueCode != null && d instanceof FeatureBasedDiagnostic
+					&& !((FeatureBasedDiagnostic) d).getIssueCode().equals(issueCode))
 				return false;
 			if (msg != null && d.getMessage() != null && !d.getMessage().contains(msg))
 				return false;
@@ -99,7 +99,7 @@ public class AssertableDiagnostics {
 		public String toString() {
 			List<String> r = new ArrayList<String>();
 			if (severity != null)
-				r.add(DiagnosticImpl.severityToStr(severity));
+				r.add(FeatureBasedDiagnostic.severityToStr(severity));
 			if (issueCode != null)
 				r.add("issueCode=" + issueCode);
 			if (code != null)

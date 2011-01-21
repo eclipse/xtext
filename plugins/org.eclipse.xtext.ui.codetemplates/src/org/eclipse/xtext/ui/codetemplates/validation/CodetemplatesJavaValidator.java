@@ -8,7 +8,8 @@ public class CodetemplatesJavaValidator extends AbstractCodetemplatesJavaValidat
 
 	@Check
 	public void checkDollarEscaped(Dollar dollar) {
-		assertTrue("Invalid escape sequence '$'", null, dollar.isEscaped());
+		if (!dollar.isEscaped())
+			error("Invalid escape sequence '$'", null);
 	}
 
 }

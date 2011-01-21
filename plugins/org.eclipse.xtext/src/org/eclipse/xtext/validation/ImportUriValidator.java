@@ -26,7 +26,7 @@ public class ImportUriValidator extends AbstractDeclarativeValidator {
 	public void checkImportUriIsValid(EObject object) {
 		String importURI = getResolver().resolve(object);
 		if (importURI != null && !EcoreUtil2.isValidUri(object, URI.createURI(importURI))) {
-			error("Imported resource could not be found.", getResolver().getAttribute(object).getFeatureID());
+			error("Imported resource could not be found.", getResolver().getAttribute(object));
 		}
 	}
 

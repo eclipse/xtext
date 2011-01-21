@@ -19,6 +19,10 @@ import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 /**
+ * Checks if a parser rule ensures object instantiation. A rule that can be consumed
+ * without instantiating an object or providing an object that was instantiated by 
+ * another unassigned called rule, is considered to be invalid as it leads to surprises 
+ * when clients traverse the model.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class RuleWithoutInstantiationInspector extends XtextRuleInspector<Boolean, ParserRule> {
@@ -40,9 +44,11 @@ public class RuleWithoutInstantiationInspector extends XtextRuleInspector<Boolea
 	@Override
 	protected void handleResult(Boolean r, ParserRule rule) {
 		if (!r.booleanValue())
-			acceptWarning("The rule '" + rule.getName() + "' may be consumed without object instantiation. " +
+			acceptWarning(
+					"The rule '" + rule.getName() + "' may be consumed without object instantiation. " +
 					"Add an action to ensure object creation, e.g. '{" + getTypeRefName(rule.getType()) + "}'." , 
-					rule, XtextPackage.ABSTRACT_RULE__NAME);
+					rule, 
+					XtextPackage.Literals.ABSTRACT_RULE__NAME);
 	}
 
 	@Override

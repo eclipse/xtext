@@ -15,6 +15,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.Diagnostician;
@@ -38,9 +39,9 @@ import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.validation.ValidationMessageAcceptor;
+import org.eclipse.xtext.validation.AbstractValidationMessageAcceptingTestCase;
+import org.eclipse.xtext.validation.AbstractValidationMessageAcceptor;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
@@ -50,7 +51,7 @@ import com.google.common.collect.Sets;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Michael Clay
  */
-public class XtextValidationTest extends AbstractXtextTests implements ValidationMessageAcceptor {
+public class XtextValidationTest extends AbstractValidationMessageAcceptingTestCase {
 
 	private String lastMessage;
 	
@@ -1357,11 +1358,12 @@ public class XtextValidationTest extends AbstractXtextTests implements Validatio
 		messageAcceptor.validate();
 	}
 	
-	public class ValidatingMessageAcceptor implements ValidationMessageAcceptor {
+	public class ValidatingMessageAcceptor extends AbstractValidationMessageAcceptor {
 
 		private final Set<EObject> contexts;
 		private boolean error;
 		private boolean warning;
+		private boolean info;
 
 		public ValidatingMessageAcceptor(EObject context, boolean error, boolean warning) {
 			this.contexts = Sets.newHashSet();
@@ -1377,30 +1379,38 @@ public class XtextValidationTest extends AbstractXtextTests implements Validatio
 		
 		public void validate() {
 			assertTrue(contexts.toString(), contexts.isEmpty());
+			assertFalse(info);
 			assertFalse(warning);
 			assertFalse(error);
 		}
 
-		public void acceptError(String message, EObject object, Integer feature, String code, String... issueData) {
+		@Override
+		public void acceptError(String message, EObject object, EStructuralFeature feature, int index, String code, String... issueData) {
 			assertTrue(error);
 			assertTrue(String.valueOf(object) + " but expected: " + contexts.toString(), contexts.remove(object));
 			error = contexts.size() > 0;
 		}
 
-		public void acceptWarning(String message, EObject object, Integer feature, String code, String... issueData) {
+		@Override
+		public void acceptWarning(String message, EObject object, EStructuralFeature feature, int index, String code, String... issueData) {
 			assertTrue(warning);
 			assertTrue(object.toString(), contexts.remove(object));
 			warning = contexts.size() > 0;
 		}
 		
+		@Override
+		public void acceptInfo(String message, EObject object, EStructuralFeature feature, int index, String code, String... issueData) {
+			assertTrue(warning);
+			assertTrue(object.toString(), contexts.remove(object));
+			info = contexts.size() > 0;
+		}
+		
 	}
 	
-	public void acceptError(String message, EObject object, Integer feature, String code, String... issueData) {
+	@Override
+	public void acceptError(String message, EObject object, EStructuralFeature feature, int index, String code, String... issueData) {
 		assertNull(lastMessage);
 		lastMessage = message;
 	}
 
-	public void acceptWarning(String message, EObject object, Integer feature, String code, String... issueData) {
-		fail("Unexpected call to acceptWarning(..)");
-	}
 }

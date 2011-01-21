@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext;
 import java.util.Collection;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
@@ -55,12 +56,12 @@ public class XtextRuleInspector<Result, RuleType extends AbstractRule> extends X
 		// clients may override
 	}
 
-	public void acceptError(String message, EObject object, Integer feature) {
-		acceptor.acceptError(message, object, feature, null);
+	public void acceptError(String message, EObject object, EStructuralFeature feature) {
+		acceptor.acceptError(message, object, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
 	}
 
-	public void acceptWarning(String message, EObject object, Integer feature) {
-		acceptor.acceptWarning(message, object, feature, null);
+	public void acceptWarning(String message, EObject object, EStructuralFeature feature) {
+		acceptor.acceptWarning(message, object, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
 	}
 	
 	public boolean addVisited(AbstractRule rule) {

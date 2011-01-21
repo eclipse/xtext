@@ -43,12 +43,12 @@ public abstract class InspectableTemplateVariableResolverDecorator implements II
 		if (!canHaveParameters()) {
 			if (variable.getParameters().size() > 0)
 				validationMessageAcceptor.acceptError(getUnexpectedParametersMessage(), 
-						variable, variable.eClass().getFeatureID(TemplatesPackage.Literals.VARIABLE__PARAMETERS), null);
+						variable, TemplatesPackage.Literals.VARIABLE__PARAMETERS, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
 		}
 		if (hasMandatoryParameters()) {
 			if (variable.getParameters().isEmpty()) {
 				validationMessageAcceptor.acceptError(getMandatorParametersMessage(), 
-						variable, variable.eClass().getFeatureID(TemplatesPackage.Literals.VARIABLE__TYPE), null);
+						variable, TemplatesPackage.Literals.VARIABLE__TYPE, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
 			}
 		}
 	}

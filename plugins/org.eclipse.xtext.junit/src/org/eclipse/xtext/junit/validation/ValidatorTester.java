@@ -18,7 +18,6 @@ import org.eclipse.xtext.validation.AbstractDeclarativeValidator.State;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
- * 
  */
 public class ValidatorTester<T extends AbstractDeclarativeValidator> extends AbstractValidatorTester {
 
@@ -26,14 +25,14 @@ public class ValidatorTester<T extends AbstractDeclarativeValidator> extends Abs
 
 	protected boolean validatorCalled;
 
-	public ValidatorTester(T validator) {
+	public ValidatorTester(T validator, EValidatorRegistrar registrar) {
 		this.validator = validator;
-		EValidatorRegistrar regis = this.validator.getInjector().getInstance(EValidatorRegistrar.class);
-		EValidator.Registry reg = regis.getRegistry();
-		regis.setRegistry(new EValidatorRegistryImpl());
-		this.validator.register(regis);
-		diagnostician = new Diagnostician(regis.getRegistry());
-		regis.setRegistry(reg);
+		EValidator.Registry originalRegistry = registrar.getRegistry();
+		EValidatorRegistryImpl newRegistry = new EValidatorRegistryImpl();
+		registrar.setRegistry(newRegistry);
+		this.validator.register(registrar);
+		diagnostician = new Diagnostician(newRegistry);
+		registrar.setRegistry(originalRegistry);
 		validatorCalled = false;
 	}
 
