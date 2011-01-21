@@ -132,7 +132,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 			"}");
 		XtendFunction f1 = (XtendFunction) clazz.getMembers().get(0);
 		XtendFunction f2 = (XtendFunction) clazz.getMembers().get(1);
-		assertEquals("String",((XFeatureCall)f1.getExpression()).getFeatureName());
+		assertEquals("String",((XFeatureCall)f1.getExpression()).getConcreteSyntaxFeatureName());
 		assertNull(f2.getReturnType());
 	}
 	
@@ -144,7 +144,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 		"}");
 		XtendFunction f1 = (XtendFunction) clazz.getMembers().get(0);
 		XtendFunction f2 = (XtendFunction) clazz.getMembers().get(1);
-		assertEquals("String",((XFeatureCall)f1.getExpression()).getFeatureName());
+		assertEquals("String",((XFeatureCall)f1.getExpression()).getConcreteSyntaxFeatureName());
 		assertNotNull(f2.getReturnType());
 	}
 

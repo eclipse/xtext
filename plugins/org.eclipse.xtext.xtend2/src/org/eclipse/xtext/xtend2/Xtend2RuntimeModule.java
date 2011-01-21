@@ -9,11 +9,15 @@ import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider;
 import org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider;
+import org.eclipse.xtext.xbase.typing.IXExpressionExpectedTypeProvider;
+import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
-import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
+import org.eclipse.xtext.xbase.typing.XExpressionTypeProvider;
 import org.eclipse.xtext.xtend2.conversion.Xtend2ValueConverterService;
+import org.eclipse.xtext.xtend2.featurecalls.Xtend2IdentifiableTypeProvider;
 import org.eclipse.xtext.xtend2.typing.Xtend2ExpectedTypeProvider;
 import org.eclipse.xtext.xtend2.typing.Xtend2TypeProvider;
 
@@ -32,16 +36,20 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 		return XbaseTypeConformanceComputer.class;
 	}
 	
-	public Class<? extends org.eclipse.xtext.typing.ITypeProvider<JvmTypeReference>> bindITypeProvider() {
-		return XbaseTypeProvider.class;
+	public Class<? extends IXExpressionTypeProvider> bindITypeProvider() {
+		return XExpressionTypeProvider.class;
 	}
 	
-	public Class<? extends XbaseTypeProvider> bindXbaseTypeProvider() {
+	public Class<? extends XExpressionTypeProvider> bindXbaseTypeProvider() {
 		return Xtend2TypeProvider.class;
 	}
 	
-	public Class<? extends org.eclipse.xtext.typing.IExpectedTypeProvider<JvmTypeReference>> bindIExpectedTypeProvider() {
+	public Class<? extends IXExpressionExpectedTypeProvider> bindIExpectedTypeProvider() {
 		return Xtend2ExpectedTypeProvider.class;
+	}
+	
+	public Class<? extends IdentifiableTypeProvider> bindIdentifiableTypeProvider() {
+		return Xtend2IdentifiableTypeProvider.class;
 	}
 
 	public Class<? extends TypeArgumentContext.Provider> bindTypeArgumentContextProvider() {

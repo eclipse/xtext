@@ -9,14 +9,14 @@ package org.eclipse.xtext.xtend2.typing;
 
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.typing.XbaseExpectedTypeProvider;
+import org.eclipse.xtext.xbase.typing.XExpressionExpectedTypeProvider;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class Xtend2ExpectedTypeProvider extends XbaseExpectedTypeProvider {
+public class Xtend2ExpectedTypeProvider extends XExpressionExpectedTypeProvider {
 
 	protected JvmTypeReference _expectedType(XtendFunction function, EReference reference, int index) {
 		if (reference==Xtend2Package.Literals.XTEND_FUNCTION__EXPRESSION) {
