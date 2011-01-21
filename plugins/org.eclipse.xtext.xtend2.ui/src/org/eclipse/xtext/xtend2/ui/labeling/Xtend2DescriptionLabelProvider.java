@@ -3,7 +3,14 @@
 */
 package org.eclipse.xtext.xtend2.ui.labeling;
 
+import static org.eclipse.xtext.xtend2.xtend2.Xtend2Package.Literals.*;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
+
+import com.google.inject.Inject;
 
 /**
  * Provides labels for a IEObjectDescriptions and IResourceDescriptions.
@@ -12,16 +19,22 @@ import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
  */
 public class Xtend2DescriptionLabelProvider extends DefaultDescriptionLabelProvider {
 
-/*
-	//Labels and icons can be computed like this:
+	@Inject
+	private Xtend2Images images;
 	
-	String text(IEObjectDescription ele) {
-	  return "my "+ele.getName();
+	@Override
+	public Image image(IEObjectDescription element) {
+		EClass eClass = element.getEClass();
+		if (eClass == XTEND_FILE)
+			return images.forFile();
+		else if (eClass == XTEND_IMPORT)
+			return images.forImport();
+		else if (eClass == XTEND_CLASS)
+			return images.forClass(0);
+		else if (eClass == XTEND_FUNCTION)
+			return images.forFunction(0);
+		else
+			return super.getImage(element);
 	}
-	 
-    String image(IEObjectDescription ele) {
-      return ele.getEClass().getName() + ".gif";
-    }	 
-*/
 
 }
