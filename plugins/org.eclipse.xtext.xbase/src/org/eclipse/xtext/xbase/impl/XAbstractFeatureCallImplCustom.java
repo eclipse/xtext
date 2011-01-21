@@ -10,14 +10,16 @@ package org.eclipse.xtext.xbase.impl;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 
 /**
@@ -25,12 +27,11 @@ import org.eclipse.xtext.xbase.XbasePackage;
  */
 public class XAbstractFeatureCallImplCustom extends XAbstractFeatureCallImpl {
 	
-	
 	@Override
-	public String getFeatureName() {
+	public String getConcreteSyntaxFeatureName() {
 		List<INode> list = NodeModelUtils.findNodesForFeature(this, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
 		if (list.size()!=1) {
-			throw new IllegalStateException("A feature call should have exactly one leafnode for the 'feature' reference, but was "+list.size());
+			return "<unkown>";
 		}
 		INode node = list.get(0);
 		if (node instanceof ILeafNode) {
@@ -63,18 +64,37 @@ public class XAbstractFeatureCallImplCustom extends XAbstractFeatureCallImpl {
 		return "<"+x.getClass().getSimpleName()+">";
 	}
 
-	protected EList<XExpression> asArguments(XExpression... arguments) {
-		EList<XExpression> result = new EObjectResolvingEList<XExpression>(XExpression.class, this, XbasePackage.XABSTRACT_FEATURE_CALL__ARGUMENTS);
-		for (XExpression arg : arguments) {
-			if(arg != null){
-				result.add(arg);
-			}
+	protected boolean isStaticJavaFeature(JvmIdentifiableElement feature) {
+		if (feature instanceof JvmOperation) {
+			return ((JvmOperation) feature).isStatic();
 		}
-		return result;
+		return false;
 	}
 	
 	@Override
-	public JvmIdentifiableElement getImplicitReceiver() {
+	public XExpression getActualReceiver() {
+		if (isStaticJavaFeature(getFeature())) {
+			return null;
+		}
+		final List<XExpression> allArguments = getAllArguments();
+		if (allArguments.isEmpty())
+			return null;
+		return allArguments.get(0);
+	}
+	
+	@Override
+	public EList<XExpression> getActualArguments() {
+		final List<XExpression> allArguments = getAllArguments();
+		if (isStaticJavaFeature(getFeature())) {
+			return new BasicEList<XExpression>(allArguments);
+		}
+		if (allArguments.size()<=1)
+			return new BasicEList<XExpression>(0);
+		return new BasicEList<XExpression>(allArguments.subList(1, allArguments.size()));
+	}
+	
+	@Override
+	public XFeatureCall getImplicitReceiver() {
 		// call getFeature(), because the implicitReceiver is set as a side effect of a resolution of the feature.
 		// see {@link org.eclipse.xtext.xbase.linking.BestMatchingJvmFeatureScope#setImplicitReceiver(IEObjectDescription)}
 		getFeature();

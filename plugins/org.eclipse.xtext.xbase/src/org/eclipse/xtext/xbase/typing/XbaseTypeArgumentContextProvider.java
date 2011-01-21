@@ -13,6 +13,7 @@ import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xbase.XExpression;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -23,12 +24,12 @@ import com.google.inject.Provider;
 public class XbaseTypeArgumentContextProvider extends TypeArgumentContext.Provider {
 	
 	@Inject
-	private IXbaseTypeProvider typeProvider;
+	private IXExpressionTypeProvider typeProvider;
 	
-	public TypeArgumentContext getContext(final EObject obj) {
+	public TypeArgumentContext getContext(final XExpression obj) {
 		Provider<TypeArgumentContext> provider = new Provider<TypeArgumentContext>() {
 			public TypeArgumentContext get() {
-				JvmTypeReference type = typeProvider.getType(obj);
+				JvmTypeReference type = typeProvider.getConvertedType(obj);
 				return XbaseTypeArgumentContextProvider.this.get(type);
 			}
 		};

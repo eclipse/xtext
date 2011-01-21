@@ -477,6 +477,14 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 		assertEvaluatesTo("literal", "switch 'x' { case 'x': 'literal' }");
 	}
 	
+	public void testSwitchExpression_03() {
+		assertEvaluatesTo("literal", "switch 'x' { case 'y': 'foo' default : 'literal' }");
+	}
+	
+	public void testSwitchExpression_04() {
+		assertEvaluatesTo("x", "switch x:'x' { case x.length==3 : 'xxx' default : 'x' }");
+	}
+	
 	public void testSwitchExpression_05() {
 		assertEvaluatesTo(null, "switch new Object() { String : 'literal' }");
 	}

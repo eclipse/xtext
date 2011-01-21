@@ -21,10 +21,12 @@ import org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
 import org.eclipse.xtext.xbase.linking.XbaseLinkingScopeProvider;
 import org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider;
-import org.eclipse.xtext.xbase.typing.XbaseExpectedTypeProvider;
+import org.eclipse.xtext.xbase.typing.IXExpressionExpectedTypeProvider;
+import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
+import org.eclipse.xtext.xbase.typing.XExpressionExpectedTypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
-import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
+import org.eclipse.xtext.xbase.typing.XExpressionTypeProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -41,12 +43,12 @@ public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 		return XbaseTypeConformanceComputer.class;
 	}
 	
-	public Class<? extends org.eclipse.xtext.typing.ITypeProvider<JvmTypeReference>> bindITypeProvider() {
-		return XbaseTypeProvider.class;
+	public Class<? extends IXExpressionTypeProvider> bindITypeProvider() {
+		return XExpressionTypeProvider.class;
 	}
 	
-	public Class<? extends org.eclipse.xtext.typing.IExpectedTypeProvider<JvmTypeReference>> bindIExpectedTypeProvider() {
-		return XbaseExpectedTypeProvider.class;
+	public Class<? extends IXExpressionExpectedTypeProvider> bindIExpectedTypeProvider() {
+		return XExpressionExpectedTypeProvider.class;
 	}
 	
 	public Class<? extends TypeArgumentContext.Provider> bindTypeArgumentContextProvider() {

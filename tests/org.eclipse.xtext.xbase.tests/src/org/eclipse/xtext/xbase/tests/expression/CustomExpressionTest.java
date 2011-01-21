@@ -10,17 +10,16 @@ package org.eclipse.xtext.xbase.tests.expression;
 import java.io.IOException;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XUnaryOperation;
-import org.eclipse.xtext.xbase.tests.interpreter.XbaseInterpreterTest;
+import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 
 /**
  * @author Sebastian Benz - Initial contribution and API
  */
-public class CustomExpressionTest extends XbaseInterpreterTest {
+public class CustomExpressionTest extends AbstractXbaseTestCase {
 
 	public void testBinaryExpressionsShouldReturnArgumentsInInternalEList() throws Exception {
 		assertResolvingCrossReferencesThrowsNoException("1 == 1");
@@ -38,17 +37,11 @@ public class CustomExpressionTest extends XbaseInterpreterTest {
 		assertResolvingCrossReferencesThrowsNoException("'literal'.toUpperCase()");
 	}
 	
-	public void testUnaryOperationShouldReturnArgumentsInInternalEList() throws Exception {
-		//unary operations are not implemented yet
-		XUnaryOperation expression = (XUnaryOperation) expression("!true", false);
-		assertTrue(expression.getArguments() instanceof InternalEList);
-	}
-	
 	public void testNullValuesShouldBeIgnored() throws Exception {
 		//unary operations are not implemented yet
 		String input = "!";
 		XUnaryOperation expression = (XUnaryOperation) incompleteExpression(input);
-		expression.getArguments(); // throws exception if null value is added to result list
+		expression.getAllArguments(); // throws exception if null value is added to result list
 	}
 
 	private XExpression incompleteExpression(String input) throws IOException {

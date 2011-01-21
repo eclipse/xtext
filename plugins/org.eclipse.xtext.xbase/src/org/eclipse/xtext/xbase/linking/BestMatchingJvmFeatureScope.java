@@ -19,6 +19,8 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 
@@ -76,10 +78,14 @@ public class BestMatchingJvmFeatureScope implements IScope {
 	protected IEObjectDescription setImplicitReceiverAndIsValid(IEObjectDescription bestMatch) {
 		if (bestMatch instanceof JvmFeatureDescription) {
 			if (this.reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE) {
+				final XAbstractFeatureCall featureCall = (XAbstractFeatureCall) this.context;
 				JvmFeatureDescription featureDesc = (JvmFeatureDescription) bestMatch;
 				final JvmIdentifiableElement implicitReceiver = featureDesc.getImplicitReceiver();
-				final XAbstractFeatureCall featureCall = (XAbstractFeatureCall) this.context;
-				featureCall.setImplicitReceiver(implicitReceiver);
+				if (implicitReceiver!=null) {
+					XFeatureCall call = XbaseFactory.eINSTANCE.createXFeatureCall();
+					call.setFeature(implicitReceiver);
+					featureCall.setImplicitReceiver(call);
+				}
 				featureCall.setTargetsMemberSyntaxCall(featureDesc.isMemberSyntaxContext());
 				featureCall.setInvalidFeatureIssueCode(featureDesc.getIssueCode());
 			} else if(this.reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR) {

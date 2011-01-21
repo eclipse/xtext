@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
@@ -34,16 +35,17 @@ import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider;
 
 import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class XbaseExpectedTypeProvider extends AbstractExpectedTypeProvider<JvmTypeReference> {
+public class XExpressionExpectedTypeProvider extends AbstractExpectedTypeProvider<JvmTypeReference, XExpression> implements IXExpressionExpectedTypeProvider {
 
 	@Inject
-	private IXbaseTypeProvider typeProvider;
+	private IdentifiableTypeProvider identifiableTypeProvider;
 
 	@Inject
 	private TypesService typeService;
@@ -57,7 +59,7 @@ public class XbaseExpectedTypeProvider extends AbstractExpectedTypeProvider<JvmT
 	protected JvmTypeReference _expectedType(XAssignment assignment, EReference reference, int index) {
 		if (reference == XbasePackage.Literals.XASSIGNMENT__VALUE) {
 			JvmIdentifiableElement feature = assignment.getFeature();
-			return typeProvider.getType(feature);
+			return identifiableTypeProvider.getType(feature);
 		}
 		return getExpectedType(assignment);
 	}
@@ -193,7 +195,7 @@ public class XbaseExpectedTypeProvider extends AbstractExpectedTypeProvider<JvmT
 			return null;
 		}
 		if (reference == XbasePackage.Literals.XCASE_PART__THEN) {
-			return getExpectedType(expr);
+			return getExpectedType((XSwitchExpression)expr.eContainer());
 		}
 		return null;
 	}

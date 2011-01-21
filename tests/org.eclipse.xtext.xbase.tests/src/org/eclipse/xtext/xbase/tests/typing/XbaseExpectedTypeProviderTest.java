@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.typing;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -27,7 +26,7 @@ import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.typing.XbaseExpectedTypeProvider;
+import org.eclipse.xtext.xbase.typing.XExpressionExpectedTypeProvider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -89,7 +88,6 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 
 		assertExpected("java.lang.Iterable<? extends java.lang.String>", loop.getForExpression());
 		assertExpected(null, loop.getEachExpression());
-		assertExpected(null, loop.getDeclaredParam());
 	}
 
 	public void testForLoopExpression_1() throws Exception {
@@ -98,7 +96,6 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 		//TODO create special validation rule to check Iterable type
 		assertExpected(null, loop.getForExpression());
 		assertExpected(null, loop.getEachExpression());
-		assertExpected(null, loop.getDeclaredParam());
 	}
 
 	public void testWhileExpression_0() throws Exception {
@@ -122,7 +119,6 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 		assertExpected("java.lang.String", exp.getExpression());
 		for (XCatchClause cc : exp.getCatchClauses()) {
 			assertExpected(null, cc.getExpression());
-			assertExpected("java.lang.Throwable", cc.getDeclaredParam());
 		}
 		assertExpected(null, exp.getFinallyExpression());
 	}
@@ -140,7 +136,6 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 				"}", "String");
 		assertExpected(null,exp.getSwitch());
 		for (XCasePart cp : exp.getCases()) {
-			assertExpected("java.lang.Class", cp.getTypeGuard());
 			assertExpected(null, cp.getCase());
 			assertExpected("java.lang.String", cp.getThen());
 		}
@@ -154,7 +149,6 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 				"  default : null" +
 				"}", "String");
 		for (XCasePart cp : exp.getCases()) {
-			assertExpected("java.lang.Class", cp.getTypeGuard());
 			assertExpected(null, cp.getCase());
 			assertExpected("java.lang.String", cp.getThen());
 		}
@@ -166,8 +160,8 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 		assertExpected(null, expression.getTarget());
 	}
 
-	protected void assertExpected(String expectedExpectedType, EObject obj) {
-		JvmTypeReference reference = get(XbaseExpectedTypeProvider.class).getExpectedType(obj);
+	protected void assertExpected(String expectedExpectedType, XExpression obj) {
+		JvmTypeReference reference = get(XExpressionExpectedTypeProvider.class).getExpectedType(obj);
 		if (reference == null)
 			assertNull("expected " + expectedExpectedType + " for " + obj + " but was null", expectedExpectedType);
 		else

@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.impl;
 
+import static java.util.Collections.*;
+
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -16,12 +19,30 @@ import org.eclipse.xtext.xbase.XExpression;
 public class XAssignmentImplCustom extends XAssignmentImpl {
 	
 	@Override
-	public EList<XExpression> getArguments() {
-		return asArguments(getAssignable(), getValue());
+	public EList<XExpression> getAllArguments() {
+		EList<XExpression> result = new BasicEList<XExpression>(3);
+		XExpression receiver = getActualReceiver();
+		if (receiver!=null)
+			result.add(receiver);
+		result.add(getValue());
+		return result;
+	}
+	
+	@Override
+	public EList<XExpression> getActualArguments() {
+		return new BasicEList<XExpression>(singleton(getValue()));
+	}
+	
+	@Override
+	public XExpression getActualReceiver() {
+		if (getImplicitReceiver()!=null) {
+			return getImplicitReceiver();
+		}
+		return getAssignable();
 	}
 	
 	@Override
 	public String toString() {
-		return getExpressionAsString(getAssignable())+" "+getFeatureName()+" "+getExpressionAsString(getValue());
+		return getExpressionAsString(getAssignable())+" "+getConcreteSyntaxFeatureName()+" "+getExpressionAsString(getValue());
 	}
 }

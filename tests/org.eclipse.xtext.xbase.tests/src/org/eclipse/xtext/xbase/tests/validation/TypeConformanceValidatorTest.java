@@ -56,7 +56,7 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 		assertNoConformanceError("try 'foo' catch (java.lang.Exception foo) 'bar'");
 		assertNoConformanceError("try 'foo' catch (java.lang.IllegalArgumentException foo) 'bar'");
 		assertConformanceError("try 'foo' catch (java.lang.String foo) 'bar'",
-				TypesPackage.Literals.JVM_FORMAL_PARAMETER, "java.lang.Throwable", "java.lang.String");
+				TypesPackage.Literals.JVM_FORMAL_PARAMETER, "Throwable", "java.lang.String");
 	}
 
 	public void testThrowsExpression() throws Exception {
