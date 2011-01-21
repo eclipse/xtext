@@ -16,6 +16,7 @@ import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguageFactory;
 import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 /**
  * @author Michael Clay - Initial contribution and API
@@ -32,12 +33,20 @@ public class IndexTestLanguageJavaValidator extends AbstractDeclarativeValidator
 	@Check
 	public void createErrorContextObjectWithoutNodeModel(Entity entity) {
 		Entity contextObjectWithoutLocation = IndexTestLanguageFactory.eINSTANCE.createEntity();
-		error("test for bugfix https://bugs.eclipse.org/bugs/show_bug.cgi?id=315249", contextObjectWithoutLocation, IndexTestLanguagePackage.ENTITY__NAME);
+		error("test for bugfix https://bugs.eclipse.org/bugs/show_bug.cgi?id=315249", 
+				contextObjectWithoutLocation, 
+				IndexTestLanguagePackage.Literals.TYPE__NAME,
+				ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+				null);
 	}
 	
 	@Check
 	public void createWarningContextObjectWithoutNodeModel(Entity entity) {
 		Entity contextObjectWithoutLocation = IndexTestLanguageFactory.eINSTANCE.createEntity();
-		warning("test for bugfix https://bugs.eclipse.org/bugs/show_bug.cgi?id=315249", contextObjectWithoutLocation, IndexTestLanguagePackage.ENTITY__NAME);
+		warning("test for bugfix https://bugs.eclipse.org/bugs/show_bug.cgi?id=315249", 
+				contextObjectWithoutLocation, 
+				IndexTestLanguagePackage.Literals.TYPE__NAME,
+				ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+				null);
 	}
 }

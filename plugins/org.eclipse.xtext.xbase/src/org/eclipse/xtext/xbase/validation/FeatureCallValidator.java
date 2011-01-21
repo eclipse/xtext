@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.validation;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.EValidatorRegistrar;
+import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
@@ -76,7 +77,7 @@ public class FeatureCallValidator extends AbstractDeclarativeValidator {
 		} else {
 			message = "Missig error message for " + issueCode;
 		}
-		error(message, -1, issueCode);
+		error(message, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, issueCode);
 	}
 	
 	protected void error(XConstructorCall constructorCall, String issueCode) {
@@ -91,7 +92,7 @@ public class FeatureCallValidator extends AbstractDeclarativeValidator {
 			message = "Invalid argument types. Expected " + uiStrings.parameters(constructorCall.getConstructor())
 					+ " but got " + uiStrings.arguments(constructorCall);
 		} 
-		error(message, -1, issueCode);
+		error(message, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, issueCode);
 	}
 
 	@Override

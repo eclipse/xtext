@@ -7,16 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.validation.ValidationMessageAcceptor;
+import org.eclipse.xtext.validation.AbstractValidationMessageAcceptingTestCase;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class Bug290919Test extends AbstractXtextTests implements ValidationMessageAcceptor {
+public class Bug290919Test extends AbstractValidationMessageAcceptingTestCase {
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -60,14 +58,6 @@ public class Bug290919Test extends AbstractXtextTests implements ValidationMessa
 		Grammar grammar = (Grammar) getModel(grammarAsString);
 		GrammarWithoutLeftRecursionInspector inspector = new GrammarWithoutLeftRecursionInspector(this);
 		inspector.inspect(grammar);
-	}
-
-	public void acceptError(String message, EObject object, Integer feature, String code, String... issueData) {
-		fail(message);
-	}
-
-	public void acceptWarning(String message, EObject object, Integer feature, String code, String... issueData) {
-		fail(message);
 	}
 
 }

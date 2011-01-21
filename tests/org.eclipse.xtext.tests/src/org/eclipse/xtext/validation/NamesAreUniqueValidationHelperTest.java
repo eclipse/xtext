@@ -16,9 +16,9 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -32,7 +32,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class NamesAreUniqueValidationHelperTest extends AbstractXtextTests implements CancelIndicator, ValidationMessageAcceptor {
+public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessageAcceptingTestCase implements CancelIndicator {
 	
 	private NamesAreUniqueValidationHelper helper;
 	private int callCount;
@@ -276,16 +276,14 @@ public class NamesAreUniqueValidationHelperTest extends AbstractXtextTests imple
 		return false;
 	}
 
-	public void acceptError(String message, EObject object, Integer feature, String code, String... issueData) {
+	@Override
+	public void acceptError(String message, EObject object, EStructuralFeature feature, int index, String code, String... issueData) {
 		assertFalse("Did not expected: " + message, expected.isEmpty());
 		assertSame(expected.remove(0), object);
-		assertEquals(EcorePackage.ENAMED_ELEMENT__NAME, feature.intValue());
+		assertEquals(EcorePackage.ENAMED_ELEMENT__NAME, object.eClass().getFeatureID(feature));
+		assertEquals(EcorePackage.Literals.ENAMED_ELEMENT__NAME, feature);
 		assertNull(code);
 		assertNotNull(message);
-	}
-
-	public void acceptWarning(String message, EObject object, Integer feature, String code, String... issueData) {
-		fail("unexpected");
 	}
 
 }
