@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.Stack;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
@@ -156,13 +157,15 @@ public class PredicateUsesUnorderedGroupInspector extends XtextSwitch<Boolean> i
 		acceptError(
 				"Cannot use unordered groups in syntactic predicates.", 
 				object, 
-				null, 
+				null,
+				ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
 				null);
 		for(AbstractElement element: elementStack) {
 			acceptError(
 					"A predicate may not use an unordered group.", 
 					element, 
-					XtextPackage.ABSTRACT_ELEMENT__PREDICATED, 
+					XtextPackage.Literals.ABSTRACT_ELEMENT__PREDICATED,
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
 					null);
 		}
 		for(RuleCall ruleCall: callHierarchy) {
@@ -170,17 +173,35 @@ public class PredicateUsesUnorderedGroupInspector extends XtextSwitch<Boolean> i
 				acceptError(
 						"The rule call is part of a call hierarchy that leads to a predicated unordered group.", 
 						ruleCall, 
-						XtextPackage.RULE_CALL__RULE, 
+						XtextPackage.Literals.RULE_CALL__RULE,
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
 						null);
 		}
 	}
 
-	public void acceptError(String message, EObject object, Integer feature, String code, String... issueData) {
+	public void acceptError(String message, EObject object, EStructuralFeature feature, int index, String code, String... issueData) {
 		if (erroneousElements.add(object) && EcoreUtil.isAncestor(inspectedGrammar, object))
-			validationMessageAcceptor.acceptError(message, object, feature, code, issueData);			
+			validationMessageAcceptor.acceptError(message, object, feature, index, code, issueData);			
 	}
 
-	public void acceptWarning(String message, EObject object, Integer feature, String code, String... issueData) {
+	public void acceptWarning(String message, EObject object, EStructuralFeature feature, int index, String code, String... issueData) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void acceptError(String message, EObject object, int offset, int length, String code, String... issueData) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void acceptWarning(String message, EObject object, int offset, int length, String code, String... issueData) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void acceptInfo(String message, EObject object, EStructuralFeature feature, int index, String code,
+			String... issueData) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void acceptInfo(String message, EObject object, int offset, int length, String code, String... issueData) {
 		throw new UnsupportedOperationException();
 	}
 

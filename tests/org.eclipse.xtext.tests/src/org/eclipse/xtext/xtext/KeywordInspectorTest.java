@@ -24,6 +24,11 @@ import com.google.common.collect.Iterators;
 public class KeywordInspectorTest extends AbstractXtextInspectorTest {
 
 	@Override
+	protected boolean isExpectingInfos() {
+		return false;
+	}
+	
+	@Override
 	protected boolean isExpectingWarnings() {
 		return false;
 	}

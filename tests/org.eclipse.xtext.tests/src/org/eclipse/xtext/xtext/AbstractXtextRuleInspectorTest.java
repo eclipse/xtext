@@ -32,4 +32,9 @@ public abstract class AbstractXtextRuleInspectorTest<Result, Rule extends Abstra
 	protected boolean isExpectingWarnings() {
 		return true;
 	}
+	
+	@Override
+	protected boolean isExpectingInfos() {
+		return false;
+	}
 }

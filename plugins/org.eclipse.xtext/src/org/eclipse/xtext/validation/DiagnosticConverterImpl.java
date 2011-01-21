@@ -19,7 +19,6 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
-import org.eclipse.xtext.validation.AbstractDeclarativeValidator.DiagnosticImpl;
 import org.eclipse.xtext.validation.Issue.IssueImpl;
 
 /**
@@ -74,8 +73,8 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 		final EObject causer = getCauser(diagnostic);
 		if (causer != null)
 			issue.setUriToProblem(EcoreUtil.getURI(causer));
-		if (diagnostic instanceof DiagnosticImpl) {
-			DiagnosticImpl diagnosticImpl = (DiagnosticImpl) diagnostic;
+		if (diagnostic instanceof FeatureBasedDiagnostic) {
+			FeatureBasedDiagnostic diagnosticImpl = (FeatureBasedDiagnostic) diagnostic;
 			issue.setType(diagnosticImpl.getCheckType());
 			issue.setCode(diagnosticImpl.getIssueCode());
 			issue.setData(diagnosticImpl.getIssueData());

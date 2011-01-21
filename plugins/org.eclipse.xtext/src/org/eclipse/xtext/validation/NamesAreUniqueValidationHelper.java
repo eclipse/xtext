@@ -99,7 +99,12 @@ public class NamesAreUniqueValidationHelper implements INamesAreUniqueValidation
 	protected void createDuplicateNameError(IEObjectDescription description, EClass clusterType, ValidationMessageAcceptor acceptor) {
 		EObject object = description.getEObjectOrProxy();
 		EStructuralFeature feature = getNameFeature(object);
-		acceptor.acceptError(getDuplicateNameErrorMessage(description, clusterType, feature), object, feature.getFeatureID(), getErrorCode());
+		acceptor.acceptError(
+				getDuplicateNameErrorMessage(description, clusterType, feature), 
+				object, 
+				feature,
+				ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+				getErrorCode());
 	}
 
 	/**

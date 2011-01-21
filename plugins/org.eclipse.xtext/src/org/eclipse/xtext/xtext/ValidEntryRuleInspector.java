@@ -21,12 +21,12 @@ import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 /**
+ * Checks the entry rule for validity. A rule is considered to be a valid entry rule
+ * if it either accepts the empty input or if it ensures that a model is instantiated.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ValidEntryRuleInspector extends XtextRuleInspector<Pair<Boolean, Boolean>, ParserRule>{
 
-	// valid, instantiated
-	
 	public ValidEntryRuleInspector(ValidationMessageAcceptor acceptor) {
 		super(acceptor);
 	}
@@ -43,9 +43,10 @@ public class ValidEntryRuleInspector extends XtextRuleInspector<Pair<Boolean, Bo
 	@Override
 	protected void handleResult(Pair<Boolean, Boolean> r, ParserRule rule) {
 		if (!r.getFirst().booleanValue())
-			acceptWarning("The entry rule '" + rule.getName() + "' may consume non empty input without object instantiation. " +
+			acceptWarning(
+					"The entry rule '" + rule.getName() + "' may consume non empty input without object instantiation. " +
 					"Add an action to ensure object creation, e.g. '{" + getTypeRefName(rule.getType()) + "}'." , 
-					rule, XtextPackage.ABSTRACT_RULE__NAME);
+					rule, XtextPackage.Literals.ABSTRACT_RULE__NAME);
 	}
 
 	@Override

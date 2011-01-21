@@ -12,7 +12,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -21,16 +20,13 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.util.Arrays;
-import org.eclipse.xtext.util.EmfFormatter;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.SimpleCache;
 
 import com.google.common.base.Function;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -53,7 +49,7 @@ import com.google.inject.Injector;
  */
 public abstract class AbstractDeclarativeValidator extends AbstractInjectableValidator implements ValidationMessageAcceptor {
 
-	public static final Logger log = Logger.getLogger(AbstractDeclarativeValidator.class);
+	private static final Logger log = Logger.getLogger(AbstractDeclarativeValidator.class);
 	
 	public static class StateAccess {
 		
@@ -299,120 +295,71 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 
 		return !state.hasErrors;
 	}
+	
+	////////////////////////////
+	// Convenience methods below
+	////////////////////////////
 
-	protected void warning(String string, Integer feature) {
-		warning(string, feature, null);
-	}
-
-	protected void warning(String string, Integer feature, String code, String... issueData) {
-		warning(string, state.get().currentObject, feature, code, issueData);
-	}
-
-	protected void warning(String string, EObject source, Integer feature) {
-		warning(string, source, feature, null);
-	}
-
-	protected void warning(String string, EObject source, Integer feature, String code, String... issueData) {
-		getMessageAcceptor().acceptWarning(string, source, feature, code, issueData);
+	protected void info(String message, EStructuralFeature feature) {
+		info(message, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
 	}
 	
-	public void acceptWarning(String message, EObject object, Integer feature, String code, String... issueData) {
-		state.get().chain.add(new DiagnosticImpl(Diagnostic.WARNING, message, object, feature, state.get().currentCheckType, code, issueData));
+	protected void info(String message, EStructuralFeature feature, int index) {
+		info(message, feature, index, null);
 	}
 
-	protected void error(String string, Integer feature) {
-		error(string, feature, null);
-	}
-
-	protected void error(String string, Integer feature, String code, String... issueData) {
-		error(string, state.get().currentObject, feature, code, issueData);
-	}
-
-	protected void error(String string, EObject source, Integer feature) {
-		error(string, source, feature, null);
-	}
-
-	protected void error(String string, EObject source, Integer feature, String code, String... issueData) {
-		getMessageAcceptor().acceptError(string, source, feature, code, issueData);
+	protected void info(String message, EStructuralFeature feature, int index, String code, String... issueData) {
+		info(message, state.get().currentObject, feature, index, code, issueData);
 	}
 	
-	public void acceptError(String message, EObject object, Integer feature, String code, String... issueData) {
-		this.state.get().hasErrors = true;
-		state.get().chain.add(new DiagnosticImpl(Diagnostic.ERROR, message, object, feature, state.get().currentCheckType, code, issueData));
+	protected void info(String message, EObject source, EStructuralFeature feature, int index) {
+		info(message, source, feature, index, null);
 	}
 
-	protected void assertTrue(String message, Integer feature, boolean executedPredicate) {
-		assertTrue(message, state.get().currentObject, feature, executedPredicate);
+	protected void info(String message, EObject source, EStructuralFeature feature, int index, String code, String... issueData) {
+		getMessageAcceptor().acceptInfo(message, source, feature, index, code, issueData);
+	}
+	
+	protected void warning(String message, EStructuralFeature feature) {
+		warning(message, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
+	}
+	
+	protected void warning(String message, EStructuralFeature feature, int index) {
+		warning(message, feature, index, null);
 	}
 
-	protected void assertTrue(String message, EObject source, Integer feature, boolean executedPredicate) {
-		if (!executedPredicate)
-			error(message, source, feature);
+	protected void warning(String message, EStructuralFeature feature, int index, String code, String... issueData) {
+		warning(message, state.get().currentObject, feature, index, code, issueData);
+	}
+	
+	protected void warning(String message, EObject source, EStructuralFeature feature, int index) {
+		warning(message, source, feature, index, null);
 	}
 
-	protected void assertFalse(String message, Integer feature, boolean executedPredicate) {
-		assertFalse(message, state.get().currentObject, feature, executedPredicate);
+	protected void warning(String message, EObject source, EStructuralFeature feature, int index, String code, String... issueData) {
+		getMessageAcceptor().acceptWarning(message, source, feature, index, code, issueData);
+	}
+	
+	protected void error(String message, EStructuralFeature feature) {
+		error(message, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
+	}
+	
+	protected void error(String message, EStructuralFeature feature, int index) {
+		error(message, feature, index, null);
 	}
 
-	protected void assertFalse(String message, EObject source, Integer feature, boolean executedPredicate) {
-		if (executedPredicate)
-			error(message, source, feature);
+	protected void error(String message, EStructuralFeature feature, int index, String code, String... issueData) {
+		error(message, state.get().currentObject, feature, index, code, issueData);
+	}
+	
+	protected void error(String message, EObject source, EStructuralFeature feature, int index) {
+		error(message, source, feature, index, null);
 	}
 
-	protected void assertNull(String message, int feature, Object object) {
-		assertNull(message, state.get().currentObject, feature, object);
+	protected void error(String message, EObject source, EStructuralFeature feature, int index, String code, String... issueData) {
+		getMessageAcceptor().acceptError(message, source, feature, index, code, issueData);
 	}
-
-	protected void assertNull(String message, EObject source, int feature, Object object) {
-		if (object != null)
-			error(message, source, feature);
-	}
-
-	protected void assertNotNull(String message, int feature, Object object) {
-		assertNotNull(message, state.get().currentObject, feature, object);
-	}
-
-	protected void assertNotNull(String message, EObject source, int feature, Object object) {
-		if (object == null)
-			error(message, source, feature);
-	}
-
-	protected void assertEquals(String message, int feature, Object expected, Object actual) {
-		assertEquals(message, state.get().currentObject, feature, expected, actual);
-	}
-
-	protected void assertEquals(String message, EObject source, int feature, Object expected, Object actual) {
-		if (!expected.equals(actual))
-			error(message, source, feature);
-	}
-
-	protected void assertNotEquals(String message, int feature, Object expected, Object actual) {
-		assertNotEquals(message, state.get().currentObject, feature, expected, actual);
-	}
-
-	protected void assertNotEquals(String message, EObject source, int feature, Object expected, Object actual) {
-		if (expected.equals(actual))
-			error(message, source, feature);
-	}
-
-	protected void assertEmpty(String message, int feature, String string) {
-		assertEmpty(message, state.get().currentObject, feature, string);
-	}
-
-	protected void assertEmpty(String message, EObject source, int feature, String string) {
-		if (string != null && string.trim().length() > 0)
-			error(message, source, feature);
-	}
-
-	protected void assertNotEmpty(String message, int feature, String string) {
-		assertNotEmpty(message, state.get().currentObject, feature, string);
-	}
-
-	protected void assertNotEmpty(String message, EObject source, int feature, String string) {
-		if (string == null || string.trim().length() == 0)
-			error(message, source, feature);
-	}
-
+	
 	protected void guard(boolean guardExpression) {
 		if (!guardExpression) {
 			throw new GuardException();
@@ -423,14 +370,60 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		throw new GuardException();
 	}
 
-	public void setInjector(Injector injector) {
-		this.injector = injector;
+	//////////////////////////////////////////////////////////
+	// Implementation of the Validation message acceptor below
+	//////////////////////////////////////////////////////////
+	
+	public void acceptError(String message, EObject object, EStructuralFeature feature, int index, String code, String... issueData) {
+		this.state.get().hasErrors = true;
+		state.get().chain.add(createDiagnostic(Severity.ERROR, message, object, feature, index, code, issueData));
+	}
+	
+	public void acceptWarning(String message, EObject object, EStructuralFeature feature, int index, String code, String... issueData) {
+		state.get().chain.add(createDiagnostic(Severity.WARNING, message, object, feature, index, code, issueData));
+	}
+	
+	public void acceptInfo(String message, EObject object, EStructuralFeature feature, int index, String code,
+			String... issueData) {
+		state.get().chain.add(createDiagnostic(Severity.INFO, message, object, feature, index, code, issueData));
+	}
+	
+	public void acceptError(String message, EObject object, int offset, int length, String code, String... issueData) {
+		this.state.get().hasErrors = true;
+		state.get().chain.add(createDiagnostic(Severity.ERROR, message, object, offset, length, code, issueData));
 	}
 
-	public Injector getInjector() {
-		return injector;
+	public void acceptWarning(String message, EObject object, int offset, int length, String code, String... issueData) {
+		state.get().chain.add(createDiagnostic(Severity.WARNING, message, object, offset, length, code, issueData));
+	}
+	
+	public void acceptInfo(String message, EObject object, int offset, int length, String code, String... issueData) {
+		state.get().chain.add(createDiagnostic(Severity.INFO, message, object, offset, length, code, issueData));
+	}
+	
+	protected Diagnostic createDiagnostic(Severity severity, String message, EObject object, EStructuralFeature feature, int index, String code, String... issueData) {
+		int diagnosticSeverity = toDiagnosticSeverity(severity);
+		Diagnostic result = new FeatureBasedDiagnostic(diagnosticSeverity, message, object, feature, index, state.get().currentCheckType, code, issueData);
+		return result;
 	}
 
+	protected Diagnostic createDiagnostic(Severity severity, String message, EObject object, int offset, int length, String code, String... issueData) {
+		int diagnosticSeverity = toDiagnosticSeverity(severity);
+		Diagnostic result = new RangeBasedDiagnostic(diagnosticSeverity, message, object, offset, length, state.get().currentCheckType, code, issueData);
+		return result;
+	}
+	
+	protected int toDiagnosticSeverity(Severity severity) {
+		int diagnosticSeverity = -1;
+		switch(severity) {
+			case ERROR: diagnosticSeverity = Diagnostic.ERROR; break;
+			case WARNING: diagnosticSeverity = Diagnostic.WARNING; break;
+			case INFO: diagnosticSeverity = Diagnostic.INFO; break;
+			default: throw new IllegalArgumentException("Unknow severity " + severity);
+		}
+		return diagnosticSeverity;
+	}
+	
 	public StateAccess setMessageAcceptor(ValidationMessageAcceptor messageAcceptor) {
 		this.messageAcceptor = messageAcceptor;
 		return new StateAccess(this);
@@ -439,144 +432,5 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	public ValidationMessageAcceptor getMessageAcceptor() {
 		return messageAcceptor;
 	}
-
-	public static class DiagnosticImpl implements Diagnostic {
-
-		/**
-		 * @param data optional user data. May not contain <code>null</code> entries.
-		 * @throws NullPointerException if node is <code>null</code> or data contains <code>null</code>.
-		 */
-		public DiagnosticImpl(int severity, String message, EObject source, Integer feature, CheckType checkType, String issueCode, String... issueData) {
-			super();
-			if (Arrays.contains(issueData, null)) {
-				throw new NullPointerException("issueData may not contain null");
-			}
-			this.severity = severity;
-			this.message = message;
-			this.source = source;
-			this.feature = feature;
-			this.issueCode = issueCode;
-			this.checkType = checkType;
-			this.issueData = issueData;
-		}
-
-		private final String message;
-		private final EObject source;
-		private final Integer feature;
-		private final int severity;
-		private final CheckType checkType;
-		private final String issueCode;
-		private final String[] issueData;
-
-		public List<Diagnostic> getChildren() {
-			return Collections.emptyList();
-		}
-
-		// it turns out, the EMF Diagnostic works well with 0,
-		// look at getIssueCode() to retrieve the string-based
-		// code
-		public int getCode() {
-			return 0;
-		}
-
-		public List<?> getData() {
-			List<Object> result = Lists.newArrayList();
-			result.add(source);
-			if (feature != null)
-				result.add(feature);
-			if(issueData != null) {
-				result.add(issueData);
-			}
-			return result;
-		}
-
-		public Throwable getException() {
-			return null;
-		}
-
-		public String getMessage() {
-			return message;
-		}
-
-		public int getSeverity() {
-			return severity;
-		}
-
-		public String getSource() {
-			return source == null ? "" : source.toString();
-		}
-		
-		public int getFeature() {
-			return feature;
-		}
-		
-		public String getIssueCode() {
-			return issueCode;
-		}
-		
-		public String[] getIssueData() {
-			return issueData;
-		}
-		
-		public CheckType getCheckType() {
-			return checkType;
-		}
-		
-		public static String severityToStr(int severity) {
-			switch (severity) {
-				case OK:
-					return "OK";
-				case INFO:
-					return "INFO";
-				case WARNING:
-					return "WARNING";
-				case ERROR:
-					return "ERROR";
-				case CANCEL:
-					return "CANCEL";
-				default:
-					return Integer.toHexString(severity);
-			}
-		}
-
-		@Override
-		public String toString() {
-			StringBuilder result = new StringBuilder();
-			result.append("Diagnostic ");
-			result.append(severityToStr(severity));
-			if (issueCode != null) {
-				result.append(" code=");
-				result.append(issueCode);
-			}
-			result.append(" \"");
-			result.append(message);
-			result.append("\"");
-			if (source != null) {
-				result.append(" at ");
-				result.append(EmfFormatter.objPath(source));
-				if (feature != null && feature >= 0) {
-					EStructuralFeature feat = source.eClass().getEStructuralFeature(feature);
-					if (feat != null) {
-						result.append(".");
-						result.append(feat.getName());
-						if (!feat.isMany()) { // we don't have the item's index it its a list :/
-							if (feat instanceof EAttribute) {
-								result.append("==\"");
-								result.append(source.eGet(feat));
-								result.append("\"");
-							}
-							else {
-								result.append("==(");
-								result.append(((EObject) source.eGet(feat)).eClass().getName());
-								result.append(")");
-
-							}
-						}
-					}
-				}
-			}
-			return result.toString();
-		}
-
-	}
+	
 }
