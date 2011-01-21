@@ -102,11 +102,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule File ****************
  *
  * File returns XtendFile:
- * 	("package" package=QualifiedName)? imports+=Import* classes+=Class*;
+ * 	("package" package=QualifiedName)? imports+=Import* xtendClass=Class?;
  *
  **/
 
-// ("package" package=QualifiedName)? imports+=Import* classes+=Class*
+// ("package" package=QualifiedName)? imports+=Import* xtendClass=Class?
 protected class File_Group extends GroupToken {
 	
 	public File_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -121,7 +121,7 @@ protected class File_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new File_ClassesAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new File_XtendClassAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new File_ImportsAssignment_1(lastRuleCallOrigin, this, 1, inst);
 			case 2: return new File_Group_0(lastRuleCallOrigin, this, 2, inst);
 			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 3, inst);
@@ -262,16 +262,16 @@ protected class File_ImportsAssignment_1 extends AssignmentToken  {
 	}	
 }
 
-// classes+=Class*
-protected class File_ClassesAssignment_2 extends AssignmentToken  {
+// xtendClass=Class?
+protected class File_XtendClassAssignment_2 extends AssignmentToken  {
 	
-	public File_ClassesAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public File_XtendClassAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getFileAccess().getClassesAssignment_2();
+		return grammarAccess.getFileAccess().getXtendClassAssignment_2();
 	}
 
     @Override
@@ -284,13 +284,13 @@ protected class File_ClassesAssignment_2 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("classes",false)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("classes");
+		if((value = eObjectConsumer.getConsumable("xtendClass",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("xtendClass");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getClassRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getFileAccess().getClassesClassParserRuleCall_2_0(); 
+				element = grammarAccess.getFileAccess().getXtendClassClassParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -302,10 +302,9 @@ protected class File_ClassesAssignment_2 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new File_ClassesAssignment_2(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new File_ImportsAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
-			case 2: return new File_Group_0(lastRuleCallOrigin, next, actIndex, consumed);
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 3, consumed);
+			case 0: return new File_ImportsAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new File_Group_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 2, consumed);
 		}	
 	}	
 }

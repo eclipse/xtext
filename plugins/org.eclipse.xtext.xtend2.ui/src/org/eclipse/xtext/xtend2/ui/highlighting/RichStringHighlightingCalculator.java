@@ -29,7 +29,6 @@ import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
-import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
@@ -51,8 +50,8 @@ public class RichStringHighlightingCalculator implements ISemanticHighlightingCa
 		if (resource == null || resource.getParseResult() == null || resource.getParseResult().getRootASTElement() == null)
 			return;
 		XtendFile file = (XtendFile) resource.getContents().get(0);
-		for(XtendClass clazz: file.getClasses()) {
-			for(JvmMember member: clazz.getMembers()) {
+		if(file.getXtendClass() != null) {
+			for(JvmMember member: file.getXtendClass().getMembers()) {
 				if (member.eClass() == Xtend2Package.Literals.XTEND_FUNCTION) {
 					XtendFunction function = (XtendFunction) member;
 					XExpression rootExpression = function.getExpression();

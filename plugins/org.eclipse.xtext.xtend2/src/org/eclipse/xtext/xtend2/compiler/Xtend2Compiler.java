@@ -27,9 +27,9 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 	protected void compile(XtendFile obj, IAppendable appendable) {
 		appendable.append("package ").append(obj.getPackage()).append(";\n");
-		for (XtendClass clazz: obj.getClasses()) {
+		if(obj.getXtendClass() != null) {
 			appendable.append("\n");
-			compile(clazz,appendable);
+			compile(obj.getXtendClass(),appendable);
 		}
 	}
 

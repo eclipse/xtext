@@ -48,7 +48,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 		} catch(ClasspathUriResolutionException e) {
 			reportInvalidPackage(packageName, classpathURI);
 		}
-		XtendClass xtendClass = xtendFile.getClasses().get(0);
+		XtendClass xtendClass = xtendFile.getXtendClass();
 		if (xtendClass != null && xtendClass.getName() != null
 				&& !equal(resourceURI.trimFileExtension().lastSegment(), xtendClass.getName()))
 			error("The class '" + notNull(packageName) + "." + xtendClass.getName() + "' must be defined in its own file",

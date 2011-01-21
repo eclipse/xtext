@@ -52,7 +52,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testTypeParameterReference_0() throws Exception {
-		XtendFunction func = (XtendFunction) file("import java.lang.* class X { <String> String foo(String x) x}").getClasses().get(0).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("import java.lang.* class X { <String> String foo(String x) x}").getXtendClass().getMembers().get(0);
 		JvmTypeReference returnType = func.getReturnType();
 		JvmTypeParameter typeParamDecl = (JvmTypeParameter) returnType.getType();
 		assertEquals("String", typeParamDecl.getCanonicalName());
@@ -64,7 +64,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 	
 	public void testTypeParameterReference_1() throws Exception {
 		XtendFunction func = (XtendFunction) file("import java.lang.* class X { <String> String foo(java.lang.String x) x}")
-				.getClasses().get(0).getMembers().get(0);
+				.getXtendClass().getMembers().get(0);
 		JvmTypeReference returnType = func.getReturnType();
 		JvmTypeParameter typeParamDecl = (JvmTypeParameter) returnType.getType();
 		assertEquals("String", typeParamDecl.getCanonicalName());
@@ -88,7 +88,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 	
 	public void testFeatureScope_1() throws Exception {
 		XtendFile file = file ("class X { String foo() 'hello world' String bar(String foo) foo}");
-		XtendClass xClass = file.getClasses().get(0);
+		XtendClass xClass = file.getXtendClass();
 		XtendFunction func  = (XtendFunction) xClass.getMembers().get(1);
 		XAbstractFeatureCall featureCall1 = (XAbstractFeatureCall) func.getExpression();
 		assertEquals(func.getParameters().get(0), featureCall1.getFeature());
@@ -105,7 +105,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 	
 	public void testFeatureScope_3() throws Exception {
 		XtendFile file = file ("import java.lang.String class X { String foo(String foo) [String foo|foo]}");
-		XtendClass xClass = file.getClasses().get(0);
+		XtendClass xClass = file.getXtendClass();
 		XtendFunction func  = (XtendFunction) xClass.getMembers().get(0);
 		XClosure closure = (XClosure) func.getExpression();
 		XAbstractFeatureCall featureCall1 = (XAbstractFeatureCall) closure.getExpression();
@@ -114,7 +114,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 	
 	public void testMemberFeatureScope_0() throws Exception {
 		XtendFile file = file ("import java.lang.String class X { String foo(String foo) foo.length()}");
-		XtendClass xClass = file.getClasses().get(0);
+		XtendClass xClass = file.getXtendClass();
 		XtendFunction func  = (XtendFunction) xClass.getMembers().get(0);
 		XMemberFeatureCall call = (XMemberFeatureCall) func.getExpression();
 		assertEquals("length", ((JvmOperation)call.getFeature()).getSimpleName());
