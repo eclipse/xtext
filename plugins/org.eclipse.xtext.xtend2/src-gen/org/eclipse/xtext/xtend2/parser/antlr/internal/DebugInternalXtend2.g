@@ -24,11 +24,11 @@ ruleQualifiedNameWithWildCard :
 
 // Rule Class
 ruleClass :
-	(
+	'class' RULE_ID (
 		'<' ruleJvmTypeParameter (
 			',' ruleJvmTypeParameter
 		)* '>'
-	)? 'class' RULE_ID (
+	)? (
 		'extends' ruleJvmTypeReference
 	)? (
 		'implements' ruleJvmTypeReference
