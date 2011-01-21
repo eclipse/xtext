@@ -7,8 +7,10 @@ import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.xtend2.ui.highlighting.HighlightingConfiguration;
 import org.eclipse.xtext.xtend2.ui.highlighting.RichStringAwareTokenScanner;
+import org.eclipse.xtext.xtend2.ui.highlighting.RichStringHighlightingCalculator;
 import org.eclipse.xtext.xtend2.ui.highlighting.TokenToAttributeIdMapper;
 
 /**
@@ -30,5 +32,9 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 	@Override
 	public Class<? extends ITokenScanner> bindITokenScanner() {
 		return RichStringAwareTokenScanner.class;
+	}
+	
+	public Class<? extends ISemanticHighlightingCalculator> bindSemanticHighlightingCalculator() {
+		return RichStringHighlightingCalculator.class;
 	}
 }

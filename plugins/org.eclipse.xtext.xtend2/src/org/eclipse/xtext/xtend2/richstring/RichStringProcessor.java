@@ -36,6 +36,8 @@ public class RichStringProcessor {
 		
 		private boolean firstEventInLine = true;
 		
+		private RichString rootObject = null;
+		
 		public Implementation(IRichStringPartAcceptor acceptor, IRichStringIndentationHandler indentationHandler) {
 			this.acceptor = acceptor;
 			this.indentationHandler = indentationHandler;
@@ -43,6 +45,8 @@ public class RichStringProcessor {
 		
 		@Override
 		public Boolean caseRichString(RichString object) {
+			if (rootObject == null)
+				rootObject = object;
 			String indentation = computeInitialIndentation(object);
 			indentationHandler.pushTemplateIndentation(indentation);
 			List<XExpression> elements = object.getElements();
@@ -84,112 +88,134 @@ public class RichStringProcessor {
 				// caseXExpression does not work since object.ePackage != Xtend2Switch.modelPackage
 				announceIndentation();
 				acceptor.acceptExpression((XExpression) object, indentationHandler.getTotalSemanticIndentation());
-				return Boolean.TRUE;
 			}
 			return Boolean.TRUE;
 		}
 		
 		@Override
 		public Boolean caseRichStringLiteral(RichStringLiteral object) {
+			acceptor.announceNextLiteral(object);
 			String value = object.getValue();
 			List<TextLine> lines = TextLines.splitString(value);
-			// only one line - everything is semantic
-			if (lines.size() == 1) {
-				TextLine line = lines.get(0);
-				handleOnlyLine(object, line);
-				return Boolean.TRUE;
+			switch(lines.size()) {
+				case 0: 
+					return Boolean.TRUE;
+				case 1: 
+					handleOnlyLine(object, lines.get(0)); 
+					return Boolean.TRUE;
+				case 2: 
+					handleFirstLine(object, lines.get(0));
+					handleLastLine(object, lines.get(1));
+					return Boolean.TRUE;
+				default:
+					handleFirstLine(object, lines.get(0));
+					handleMiddleLines(object, lines.subList(1, lines.size() - 1));
+					handleLastLine(object, lines.get(lines.size() - 1));
+					return Boolean.TRUE;
 			}
-			for(int i = 0; i < lines.size(); i++) {
-				TextLine line = lines.get(i);
-				if (i == 0) {
-					// first line contains only WS
-					if (line.containsOnlyWhitespace()) {
-						acceptor.acceptTemplateText(line);
-						if (firstEventInLine) {
-							acceptor.acceptTemplateLineBreak();
-						} else {
-							announceSemanticLinebreak();
-							indentationHandler.popIndentation();
-						}
-					} else {
-						acceptor.acceptSemanticText(line);
-						acceptor.acceptSemanticLineBreak();
-					}
-				} else {
-					CharSequence leadingWS = line.getLeadingWhiteSpace();
-					pushSemanticIndentation(leadingWS);
-					CharSequence tail = line.subSequence(leadingWS.length(), line.length());
-					announceSemanticText(tail);
-					if (line.hasTrailingLineBreak()) {
-						announceSemanticLinebreak();
-						indentationHandler.popIndentation();
-					} else if (isLastRichStringPart(object)) {
-						indentationHandler.popIndentation();
-					}
+		}
+		
+		protected void handleMiddleLines(RichStringLiteral object, List<TextLine> lines) {
+			for(TextLine line: lines) {
+				pushIndentationAndAnnounceContent(object, line);
+				announceSemanticLinebreak(line.getDelimiterLength(), object);
+				indentationHandler.popIndentation();
+			}
+		}
+
+		// we are sure to have a trailing line break
+		protected void handleFirstLine(RichStringLiteral object, TextLine line) {
+			if (firstEventInLine) {
+				if (line.containsOnlyWhitespace()) {
+					acceptor.acceptTemplateText(line, object);
+					acceptor.acceptTemplateLineBreak(line.getDelimiterLength(), object);
+				} else { // line has semantic data
+					announceSemanticText(line, object);
+					announceSemanticLinebreak(line.getDelimiterLength(), object);
 				}
+			} else { // line is not the first with data
+				if (line.containsOnlyWhitespace()) {
+					acceptor.acceptTemplateText(line, object);
+					announceSemanticLinebreak(line.getDelimiterLength(), object);
+				} else {
+					announceSemanticText(line, object);
+					announceSemanticLinebreak(line.getDelimiterLength(), object);
+				}
+				RichString container = (RichString) object.eContainer();
+				if (container.getElements().get(0) != object)
+					indentationHandler.popIndentation();
 			}
-			return Boolean.TRUE;
 		}
 
 		protected void handleOnlyLine(RichStringLiteral object, TextLine line) {
 			if (!line.hasTrailingLineBreak()) {
-				if (!firstEventInLine) {
-					announceSemanticText(line);
-				} else {
-					CharSequence leadingWS = line.getLeadingWhiteSpace();
-					pushSemanticIndentation(leadingWS);
-					CharSequence tail = line.subSequence(leadingWS.length(), line.length());
-					doAnnounceSemanticText(tail);
-					if (isLastRichStringPart(object)) {
-						indentationHandler.popIndentation();
-					}
+				if (firstEventInLine) {
+					pushIndentationAndAnnounceContent(object, line);
+				} else { // !firstEventInLine
+					announceSemanticText(line, object);
 				}
-			} else {
-				if (!firstEventInLine) {
-					announceSemanticText(line);
-					announceSemanticLinebreak();
-					indentationHandler.popIndentation();
-				} else {
+			} else { // trailing line break
+				if (firstEventInLine) {
 					if (line.containsOnlyWhitespace()) {
-						acceptor.acceptTemplateText(line);
-						acceptor.acceptTemplateLineBreak();
-					} else {
-						CharSequence leadingWS = line.getLeadingWhiteSpace();
-						pushSemanticIndentation(leadingWS);
-						CharSequence tail = line.subSequence(leadingWS.length(), line.length());
-						announceSemanticText(tail);
-						announceSemanticLinebreak();
-						indentationHandler.popIndentation();
+						acceptor.acceptTemplateText(line, object);
+						acceptor.acceptTemplateLineBreak(line.getDelimiterLength(), object);
+					} else { // line has semantic data
+						announceSemanticText(line, object);
+						announceSemanticLinebreak(line.getDelimiterLength(), object);
 					}
+				} else { // line is not the first with data
+					if (line.containsOnlyWhitespace()) {
+						acceptor.acceptTemplateText(line, object);
+						announceSemanticLinebreak(line.getDelimiterLength(), object);
+					} else {
+						announceSemanticText(line, object);
+						announceSemanticLinebreak(line.getDelimiterLength(), object);
+					}
+					RichString container = (RichString) object.eContainer();
+					List<XExpression> siblings = container.getElements();
+					if (siblings.get(siblings.size() - 1) != object)
+						indentationHandler.popIndentation();
 				}
 			}
 		}
-
-		protected boolean isLastRichStringPart(RichStringLiteral object) {
-			RichString richString = (RichString) object.eContainer();
-			List<XExpression> siblings = richString.getElements();
-			boolean result = object == siblings.get(siblings.size()-1);
-			return result;
+		
+		protected void handleLastLine(RichStringLiteral object, TextLine line) {
+			if (line.hasTrailingLineBreak()) {
+				pushIndentationAndAnnounceContent(object, line);
+				announceSemanticLinebreak(line.getDelimiterLength(), object);
+				indentationHandler.popIndentation();
+			} else {
+				if (line.containsOnlyWhitespace()) {
+					RichString container = (RichString) object.eContainer();
+					if (container != rootObject) {
+						List<XExpression> siblings = container.getElements();
+						if (siblings.get(siblings.size() - 1) == object)
+							indentationHandler.popIndentation();
+					}
+				}
+				pushIndentationAndAnnounceContent(object, line);
+			}
 		}
 
+		protected void pushIndentationAndAnnounceContent(RichStringLiteral object, TextLine line) {
+			CharSequence leadingWS = line.getLeadingWhiteSpace();
+			pushSemanticIndentation(leadingWS);
+			CharSequence tail = line.subSequence(leadingWS.length(), line.length());
+			announceSemanticText(tail, object);
+		}
+	
 		protected void pushSemanticIndentation(CharSequence line) {
 			indentationHandler.pushSemanticIndentation(line);
 		}
 		
-		public void announceSemanticText(CharSequence text) {
-			if (text.length() != 0) {
-				doAnnounceSemanticText(text);
-			}
-		}
-
-		protected void doAnnounceSemanticText(CharSequence text) {
+		protected void announceSemanticText(CharSequence text, RichStringLiteral origin) {
 			announceIndentation();
-			acceptor.acceptSemanticText(text);
+			acceptor.acceptSemanticText(text, origin);
 		}
 		
-		public void announceTemplateText(CharSequence text) {
+		public void announceTemplateText(CharSequence text, RichStringLiteral origin) {
 			announceIndentation();
-			acceptor.acceptSemanticText(text);
+			acceptor.acceptSemanticText(text, origin);
 		}
 		
 		public void announceIndentation() {
@@ -199,9 +225,9 @@ public class RichStringProcessor {
 			}
 		}
 		
-		public void announceSemanticLinebreak() {
+		public void announceSemanticLinebreak(int delimiterLength, RichStringLiteral origin) {
 			announceIndentation();
-			acceptor.acceptSemanticLineBreak();
+			acceptor.acceptSemanticLineBreak(delimiterLength, origin);
 			firstEventInLine = true;
 		}
 		

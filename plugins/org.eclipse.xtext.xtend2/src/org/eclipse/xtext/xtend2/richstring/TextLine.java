@@ -95,6 +95,10 @@ public class TextLine implements CharSequence {
 		return completeText.charAt(index + offset);
 	}
 	
+	public int getDelimiterLength() {
+		return delimiterLength;
+	}
+	
 	@Override
 	public String toString() {
 		return completeText.substring(offset, offset + length);
