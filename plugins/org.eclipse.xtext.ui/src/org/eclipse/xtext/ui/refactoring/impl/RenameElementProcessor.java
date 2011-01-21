@@ -21,7 +21,6 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
@@ -30,15 +29,13 @@ import org.eclipse.ltk.core.refactoring.participants.ParticipantManager;
 import org.eclipse.ltk.core.refactoring.participants.RefactoringParticipant;
 import org.eclipse.ltk.core.refactoring.participants.RenameParticipant;
 import org.eclipse.ltk.core.refactoring.participants.SharableParticipants;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
-import org.eclipse.xtext.ui.refactoring.IRenamedElementTracker;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
+import org.eclipse.xtext.ui.refactoring.IRenamedElementTracker;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
@@ -93,7 +90,6 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 			if (targetElement == null) {
 				throw new RefactoringStatusException("Rename target element can not be resolved", true);
 			}
-			resolveProxies(targetElement.eResource());
 			this.renameStrategy = strategyProvider.get(targetElement, renameElementContext);
 		} catch (Exception e) {
 			handleException(status, e);
@@ -196,10 +192,5 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 			LOG.error("Error during refactoring", exc);
 		}
 	}
-
-	protected void resolveProxies(Resource resource) {
-		EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
-	}
-
 
 }

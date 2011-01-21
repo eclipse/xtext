@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.refactoring.impl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
@@ -42,6 +41,9 @@ public class DefaultRenameStrategy implements IRenameStrategy {
 			return new DefaultRenameStrategy(targetElement, locationInFileProvider);
 		}
 
+		protected ILocationInFileProvider getLocationInFileProvider() {
+			return locationInFileProvider;
+		}
 	}
 
 	protected String originalName;
@@ -70,8 +72,14 @@ public class DefaultRenameStrategy implements IRenameStrategy {
 	}
 
 	public void applyDeclarationChange(String newName, ResourceSet resourceSet) {
+		resolveProxies(resourceSet);
 		EObject renamedElement = setName(targetElementOriginalURI, newName, resourceSet);
 		targetElementNewURI = EcoreUtil.getURI(renamedElement);
+	}
+
+	protected void resolveProxies(ResourceSet resourceSet) {
+		for(int i=0; i< resourceSet.getResources().size(); ++i) 
+			EcoreUtil2.resolveLazyCrossReferences(resourceSet.getResources().get(i), CancelIndicator.NullImpl);
 	}
 
 	public void revertDeclarationChange(ResourceSet resourceSet) {
