@@ -73,6 +73,8 @@ public class TypesService {
 	}
 	
 	public JvmTypeReference getTypeForName(QualifiedName qualifiedName, EObject context, JvmTypeReference... params) {
+		if (qualifiedName==null)
+			throw new NullPointerException("qualifiedName");
 		IScope scope = scopeProvider.getScope(context, syntheticReference);
 		IEObjectDescription contentByName = scope.getSingleElement(qualifiedName);
 		if (contentByName != null) {
