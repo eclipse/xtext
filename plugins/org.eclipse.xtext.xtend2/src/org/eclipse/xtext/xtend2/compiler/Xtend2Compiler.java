@@ -53,7 +53,8 @@ public class Xtend2Compiler extends XbaseCompiler {
 		final int numParams = obj.getParameters().size();
 		for (int i = 0; i < numParams; i++) {
 			JvmFormalParameter p = obj.getParameters().get(i);
-			appendable.append(p.getParameterType().getCanonicalName()).append(" ").append(makeJavaIdentifier(p.getName()));
+			String varName = declareNameInVariableScope(p, appendable);
+			appendable.append(p.getParameterType().getCanonicalName()).append(" ").append(varName);
 			if (i!=numParams-1)
 				appendable.append(", ");
 		}

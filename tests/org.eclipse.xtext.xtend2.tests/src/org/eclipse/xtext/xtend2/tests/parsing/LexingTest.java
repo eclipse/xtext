@@ -42,8 +42,9 @@ public class LexingTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testFunctionSig() throws Exception {
+		//TODO use tokentype mapper
 		assertLexing("class X { foo() ''' foo ''' }",
-				pair("class",23),
+				pair("class",20),
 				pair(" ",14),
 				pair("X",4),
 				pair(" ",14),
