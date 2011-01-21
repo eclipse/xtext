@@ -3,7 +3,17 @@
 */
 package org.eclipse.xtext.xtend2.ui.outline;
 
+import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
+import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
+import org.eclipse.xtext.xtend2.ui.labeling.Xtend2Images;
+import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
+import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendFile;
+import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+
+import com.google.inject.Inject;
 
 /**
  * customization of the default outline structure
@@ -11,4 +21,24 @@ import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
  */
 public class Xtend2OutlineTreeProvider extends DefaultOutlineTreeProvider {
 	
+	@Inject
+	private Xtend2Images images;
+	
+	protected void _createChildren(DocumentRootNode parentNode, XtendFile xtendFile) {
+		if(xtendFile.getPackage() != null) 
+			createEStructuralFeatureNode(parentNode, xtendFile, Xtend2Package.Literals.XTEND_FILE__PACKAGE, images.forPackage(), xtendFile.getPackage(), true);
+		createEStructuralFeatureNode(parentNode, xtendFile, Xtend2Package.Literals.XTEND_FILE__IMPORTS, images.forImportContainer(), "import declarations", false);
+		if(xtendFile.getXtendClass() != null) 
+			createEObjectNode(parentNode, xtendFile.getXtendClass());
+	}
+	
+	protected void _createChildren(IOutlineNode parentNode, XtendClass xtendClass) {
+		for(JvmMember member: xtendClass.getMembers())
+			createEObjectNode(parentNode, member);
+			
+	}
+	
+	protected boolean _isLeaf(XtendFunction function) {
+		return true;
+	}
 }

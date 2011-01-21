@@ -4,7 +4,13 @@
 package org.eclipse.xtext.xtend2.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
+import org.eclipse.xtext.xbase.validation.UIStrings;
+import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendFile;
+import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.eclipse.xtext.xtend2.xtend2.XtendImport;
 
 import com.google.inject.Inject;
 
@@ -16,19 +22,45 @@ import com.google.inject.Inject;
 public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 
 	@Inject
+	private UIStrings uiStrings;
+
+	@Inject Xtend2Images images;
+	
+	@Inject
 	public Xtend2LabelProvider(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
 
-/*
-	//Labels and icons can be computed like this:
-	
-	String text(MyModel ele) {
-	  return "my "+ele.getName();
+	public Image image(XtendFile element) {
+		return images.forFile();
 	}
-	 
-    String image(MyModel ele) {
-      return "MyModel.gif";
-    }
-*/
+
+	public Image image(XtendImport element) {
+		return images.forImport();
+	}
+
+	public Image image(XtendClass element) {
+		return images.forClass(0);
+	}
+
+	public Image image(XtendFunction element) {
+		return images.forFunction(0);
+	}
+
+	public String text(XtendFile element) {
+		return element.eResource().getURI().trimFileExtension().lastSegment();
+	}
+
+	public String text(XtendImport element) {
+		return element.getImportedNamespace();
+	}
+
+	public String text(XtendClass element) {
+		return element.getName() + ((element.getTypeParameters().isEmpty()) ? "" : uiStrings.typeParameters(element));
+	}
+
+	public String text(XtendFunction element) {
+		return element.getName() + uiStrings.parameters(element) + " : " + element.getReturnType().getCanonicalName();
+	}
+
 }
