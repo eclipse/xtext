@@ -73,8 +73,8 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getQualifiedNameWithWildCardAccess().getGroup(), "rule__QualifiedNameWithWildCard__Group__0");
 					put(grammarAccess.getQualifiedNameWithWildCardAccess().getGroup_1(), "rule__QualifiedNameWithWildCard__Group_1__0");
 					put(grammarAccess.getClassAccess().getGroup(), "rule__Class__Group__0");
-					put(grammarAccess.getClassAccess().getGroup_0(), "rule__Class__Group_0__0");
-					put(grammarAccess.getClassAccess().getGroup_0_2(), "rule__Class__Group_0_2__0");
+					put(grammarAccess.getClassAccess().getGroup_2(), "rule__Class__Group_2__0");
+					put(grammarAccess.getClassAccess().getGroup_2_2(), "rule__Class__Group_2_2__0");
 					put(grammarAccess.getClassAccess().getGroup_3(), "rule__Class__Group_3__0");
 					put(grammarAccess.getClassAccess().getGroup_4(), "rule__Class__Group_4__0");
 					put(grammarAccess.getFunctionAccess().getGroup(), "rule__Function__Group__0");
@@ -214,9 +214,9 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getFileAccess().getImportsAssignment_1(), "rule__File__ImportsAssignment_1");
 					put(grammarAccess.getFileAccess().getXtendClassAssignment_2(), "rule__File__XtendClassAssignment_2");
 					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1(), "rule__Import__ImportedNamespaceAssignment_1");
-					put(grammarAccess.getClassAccess().getTypeParametersAssignment_0_1(), "rule__Class__TypeParametersAssignment_0_1");
-					put(grammarAccess.getClassAccess().getTypeParametersAssignment_0_2_1(), "rule__Class__TypeParametersAssignment_0_2_1");
-					put(grammarAccess.getClassAccess().getNameAssignment_2(), "rule__Class__NameAssignment_2");
+					put(grammarAccess.getClassAccess().getNameAssignment_1(), "rule__Class__NameAssignment_1");
+					put(grammarAccess.getClassAccess().getTypeParametersAssignment_2_1(), "rule__Class__TypeParametersAssignment_2_1");
+					put(grammarAccess.getClassAccess().getTypeParametersAssignment_2_2_1(), "rule__Class__TypeParametersAssignment_2_2_1");
 					put(grammarAccess.getClassAccess().getSuperTypesAssignment_3_1(), "rule__Class__SuperTypesAssignment_3_1");
 					put(grammarAccess.getClassAccess().getSuperTypesAssignment_4_1(), "rule__Class__SuperTypesAssignment_4_1");
 					put(grammarAccess.getClassAccess().getMembersAssignment_6(), "rule__Class__MembersAssignment_6");
