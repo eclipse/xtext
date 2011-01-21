@@ -39,7 +39,7 @@ public class DefaultIndentationHandler implements IRichStringIndentationHandler 
 
 		@Override
 		protected void accept(IRichStringPartAcceptor acceptor) {
-			acceptor.acceptSemanticText(value);
+			acceptor.acceptSemanticText(value, null);
 		}
 		
 	}
@@ -52,7 +52,7 @@ public class DefaultIndentationHandler implements IRichStringIndentationHandler 
 
 		@Override
 		protected void accept(IRichStringPartAcceptor acceptor) {
-			acceptor.acceptTemplateText(value);
+			acceptor.acceptTemplateText(value, null);
 		}
 		
 	}
@@ -79,6 +79,8 @@ public class DefaultIndentationHandler implements IRichStringIndentationHandler 
 			indentationData.add(new TemplateIndentationData(indentation));
 		} else {
 			String currentIndentation = getCompleteCurrentIndentation();
+			if (indentation == null)
+				indentation = "";
 			if (indentation.toString().startsWith(currentIndentation)) {
 				String trimmedIndentation = indentation.toString().substring(currentIndentation.length());
 				indentationData.add(new TemplateIndentationData(trimmedIndentation));
@@ -96,6 +98,8 @@ public class DefaultIndentationHandler implements IRichStringIndentationHandler 
 			indentationData.add(new SemanticIndentationData(indentation));
 		} else {
 			String currentIndentation = getCompleteCurrentIndentation();
+			if (indentation == null)
+				indentation = "";
 			if (indentation.toString().startsWith(currentIndentation)) {
 				String trimmedIndentation = indentation.toString().substring(currentIndentation.length());
 				indentationData.add(new SemanticIndentationData(trimmedIndentation));

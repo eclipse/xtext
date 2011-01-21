@@ -19,6 +19,7 @@ import org.eclipse.xtext.xtend2.richstring.DefaultIndentationHandler;
 import org.eclipse.xtext.xtend2.richstring.IRichStringPartAcceptor;
 import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
+import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -59,15 +60,18 @@ public class RichStringTest extends AbstractRichStringTest {
 			return ignoreStack.peek().booleanValue();
 		}
 		
-		public void acceptSemanticText(CharSequence text) {
+		public void acceptSemanticText(CharSequence text, RichStringLiteral origin) {
 			if (!ignore())
 				currentLine.append(text);
 		}
 
-		public void acceptTemplateText(CharSequence text) {
+		public void acceptTemplateText(CharSequence text, RichStringLiteral origin) {
+		}
+		
+		public void announceNextLiteral(RichStringLiteral object) {
 		}
 
-		public void acceptSemanticLineBreak() {
+		public void acceptSemanticLineBreak(int length, RichStringLiteral origin) {
 			if (!ignore()) {
 				String newLine = currentLine.append('\n').toString();
 				if (!controlStructureSeen || newLine.trim().length() != 0) {
@@ -78,7 +82,7 @@ public class RichStringTest extends AbstractRichStringTest {
 			controlStructureSeen = false;
 		}
 
-		public void acceptTemplateLineBreak() {
+		public void acceptTemplateLineBreak(int length, RichStringLiteral origin) {
 			controlStructureSeen = false;
 		}
 
@@ -152,6 +156,7 @@ public class RichStringTest extends AbstractRichStringTest {
 		public boolean forLoopHasNext() {
 			if (!ignore()) {
 				int remaining = forLoopStack.peek();
+				controlStructureSeen = true;
 				if (remaining > 0) {
 					forLoopStack.set(forLoopStack.size() - 1, remaining - 1);
 					return true;
@@ -286,6 +291,22 @@ public class RichStringTest extends AbstractRichStringTest {
 	
 	public void testIf_05() throws Exception {
 		assertOutput("zonk", "'''«IF false»foobar«ELSEIF false»foobar«ELSE»zonk«ENDIF»'''");
+	}
+	
+	public void testIf_06() throws Exception {
+		assertOutput("foobar\n", 
+				"'''\n"+
+				"«IF true»\n"+
+				"	foobar«ENDIF»\n"+
+				"'''");
+	}
+	
+	public void testIf_07() throws Exception {
+		assertOutput("foobar\n", 
+				"'''\n"+
+				"  «IF true»\n"+
+				"	  foobar«ENDIF»\n"+
+				"'''");
 	}
 	
 	public void testMultilineIf_01() throws Exception {
@@ -475,7 +496,7 @@ public class RichStringTest extends AbstractRichStringTest {
 		assertOutput(
 				"foobar\n"+
 				"  \n", 
-				"'''\n" +
+				"'''    \n" +
 				"		«IF true»\n" +
 				"				foobar\n" +
 				"		«ENDIF»\n" +

@@ -18,29 +18,25 @@ public interface IRichStringPartAcceptor {
 
 	/**
 	 * @param text the semantic text. May not be <code>null</code>.
-	 * @param relativeOffset the offset relative to the beginning of the origin's value.
-	 * @param origin the instance holding the complete text value.
+	 * @param origin the value holder for the full text or null, if unknown.
 	 */
-	void acceptSemanticText(CharSequence text /*, int relativeOffset, RichStringLiteral origin */);
+	void acceptSemanticText(CharSequence text, RichStringLiteral origin);
 	
 	/**
 	 * @param text the template text. May not be <code>null</code>.
-	 * @param relativeOffset the offset relative to the beginning of the origin's value.
-	 * @param origin the instance holding the complete text value.
+	 * @param origin the value holder for the full text or null, if unknown.
 	 */
-	void acceptTemplateText(CharSequence text /*, int relativeOffset, RichStringLiteral origin */);
+	void acceptTemplateText(CharSequence text, RichStringLiteral origin);
 
 	/**
-	 * @param relativeOffset the offset relative to the beginning of the origin's value.
-	 * @param origin the instance holding the complete text value.
+	 * @param origin the instance holding the complete text value that contains the line break.
 	 */
-	void acceptSemanticLineBreak(/*, int relativeOffset, RichStringLiteral origin */);
+	void acceptSemanticLineBreak(int charCount, RichStringLiteral origin);
 	
 	/**
-	 * @param relativeOffset the offset relative to the beginning of the origin's value.
-	 * @param origin the instance holding the complete text value.
+	 * @param origin the instance holding the complete text value that contains the line break.
 	 */
-	void acceptTemplateLineBreak(/*, int relativeOffset, RichStringLiteral origin */);
+	void acceptTemplateLineBreak(int charCount, RichStringLiteral origin);
 	
 	void acceptIfCondition(XExpression condition);
 	
@@ -57,5 +53,7 @@ public interface IRichStringPartAcceptor {
 	void acceptEndFor();
 	
 	void acceptExpression(XExpression expression, CharSequence indentation);
+
+	void announceNextLiteral(RichStringLiteral object);
 	
 }

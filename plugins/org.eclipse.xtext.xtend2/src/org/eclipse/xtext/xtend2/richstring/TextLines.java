@@ -27,6 +27,8 @@ public class TextLines {
 	 * adapted from org.eclipse.jface.text.DefaultLineTracker.nextDelimiterInfo(String, int)
 	 */
 	public static void appendLines(String text, List<TextLine> result) {
+		if (text == null)
+			return;
 		int length= text.length();
 		int nextLineOffset = 0;
 		int idx = 0;
