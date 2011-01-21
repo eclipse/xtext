@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtext.resource.ClasspathUriResolutionException;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
@@ -52,10 +53,11 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 		if (xtendClass != null && xtendClass.getName() != null
 				&& !equal(resourceURI.trimFileExtension().lastSegment(), xtendClass.getName()))
 			error("The class '" + notNull(packageName) + "." + xtendClass.getName() + "' must be defined in its own file",
-					xtendClass, XTEND_CLASS__NAME, WRONG_FILE);
+					xtendClass, Literals.XTEND_CLASS__NAME, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, WRONG_FILE);
 	}
 
 	protected void reportInvalidPackage(String packageName, URI classpathURI) {
-		error("The declared package '" + notNull(packageName) + "' does not match the expected package", XTEND_FILE__PACKAGE, WRONG_PACKAGE);
+		error("The declared package '" + notNull(packageName) + "' does not match the expected package", 
+				Literals.XTEND_FILE__PACKAGE, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, WRONG_PACKAGE);
 	}
 }
