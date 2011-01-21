@@ -24,9 +24,9 @@ public class AbstractTypeProvider<T, P extends EObject> implements ITypeProvider
 
 	public T getType(final P astNode) {
 		if (astNode == null)
-			throw new TypeResolutionException("expression is null");
+			return null;
 		if (astNode.eIsProxy())
-			throw new TypeResolutionException("expression is an unresolved proxy");
+			return null;
 		final Provider<T> provider = new Provider<T>() {
 			public T get() {
 				final T invoke = typeDispatcher.invoke(astNode);
@@ -51,7 +51,7 @@ public class AbstractTypeProvider<T, P extends EObject> implements ITypeProvider
 	}
 
 	public T _type(EObject stNode) {
-		throw new TypeResolutionException("Type computation is not implemented for " + stNode);
+		throw new IllegalArgumentException("Type computation is not implemented for " + stNode);
 	}
 
 	protected String getName(T actual) {

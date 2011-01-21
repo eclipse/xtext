@@ -24,6 +24,10 @@ import com.google.inject.Provider;
 public class AbstractExpectedTypeProvider<T,P extends EObject> implements IExpectedTypeProvider<T,P> {
 
 	public T getExpectedType(P obj) {
+		if (obj == null)
+			return null;
+		if (obj.eIsProxy())
+			return null;
 		EReference containmentReference = obj.eContainmentFeature();
 		if(containmentReference == null)
 			return null;
