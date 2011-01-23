@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarToDot;
@@ -33,6 +34,8 @@ import com.google.inject.internal.Join;
  */
 public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTests {
 
+	private static final Logger log = Logger.getLogger(GrammarConstraintProviderAssignedActionTest.class);
+	
 	private static class ActionFilter2Dot extends GrammarToDot {
 		protected IGrammarNFAProvider<ActionFilterState, ActionFilterTransition> nfaProvider = new ActionFilterNFAProvider();
 
@@ -84,7 +87,8 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		try {
 			new ActionFilter2Dot().draw(grammar, getName() + ".pdf", "-T pdf");
 		} catch (IOException e) {
-			e.printStackTrace();
+			if (log.isDebugEnabled())
+				log.debug(e.getMessage(), e);
 		}
 
 		List<IConstraintContext> ctxts = gcp.getConstraints(grammar);
@@ -105,7 +109,8 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		try {
 			new ActionFilter2Dot().draw(getGrammarAccess().getGrammar(), getName() + ".pdf", "-T pdf");
 		} catch (IOException e) {
-			e.printStackTrace();
+			if (log.isDebugEnabled())
+				log.debug(e.getMessage(), e);
 		}
 		List<String> result = Lists.newArrayList();
 		Set<IConstraint> visited = Sets.newHashSet();
@@ -115,7 +120,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 				if (visited.add(c))
 					result.add("  " + c.toString());
 		}
-		System.out.println(Join.join("\n", result));
+//		System.out.println(Join.join("\n", result));
 	}
 
 	public void testAssignedActionMandatory1() throws Exception {

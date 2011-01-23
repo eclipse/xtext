@@ -18,9 +18,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.xtext.validation.FeatureBasedDiagnostic;
+import org.eclipse.xtext.validation.AbstractValidationDiagnostic;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
@@ -87,8 +86,8 @@ public class AssertableDiagnostics {
 				return false;
 			if (code != null && !code.equals(d.getCode()))
 				return false;
-			if (issueCode != null && d instanceof FeatureBasedDiagnostic
-					&& !((FeatureBasedDiagnostic) d).getIssueCode().equals(issueCode))
+			if (issueCode != null && d instanceof AbstractValidationDiagnostic
+					&& !((AbstractValidationDiagnostic) d).getIssueCode().equals(issueCode))
 				return false;
 			if (msg != null && d.getMessage() != null && !d.getMessage().contains(msg))
 				return false;
@@ -99,7 +98,7 @@ public class AssertableDiagnostics {
 		public String toString() {
 			List<String> r = new ArrayList<String>();
 			if (severity != null)
-				r.add(FeatureBasedDiagnostic.severityToStr(severity));
+				r.add(AbstractValidationDiagnostic.severityToStr(severity));
 			if (issueCode != null)
 				r.add("issueCode=" + issueCode);
 			if (code != null)
@@ -109,8 +108,6 @@ public class AssertableDiagnostics {
 			return "(" + Joiner.on(" ").join(r) + ")";
 		}
 	}
-
-	public static final Logger log = Logger.getLogger(AssertableDiagnostics.class);
 
 	public static Pred diagnostic(int severity, String issueCode, String messageFragment) {
 		return new Pred(severity, null, issueCode, messageFragment);
@@ -272,7 +269,6 @@ public class AssertableDiagnostics {
 	}
 
 	public void fail(String message) {
-		log.error(message + "\nCurrent Diagnostics:\n" + toString());
 		throw new AssertionError(message);
 	}
 
