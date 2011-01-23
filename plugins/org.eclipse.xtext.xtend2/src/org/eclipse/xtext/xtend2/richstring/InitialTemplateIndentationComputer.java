@@ -15,7 +15,25 @@ import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 import org.eclipse.xtext.xtend2.xtend2.util.Xtend2Switch;
 
+/**
+ * Computes the initial indentation of a rich string according to
+ * the semantics in the Xtend2 language specification. That is, especially
+ * the first and the last line have to be ignored if they only consist whitespace.
+ * 
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 public class InitialTemplateIndentationComputer extends Xtend2Switch<String> {
+	
+	private final String initial;
+
+	/**
+	 * @param initial the assumed indentation if the first line contains text. May not be <code>null</code>.
+	 */
+	public InitialTemplateIndentationComputer(CharSequence initial) {
+		if (initial == null)
+			throw new IllegalArgumentException("Initial indentation must not be null.");
+		this.initial = initial.toString();
+	}
 	
 	@Override
 	public String caseRichString(RichString object) {
@@ -25,7 +43,7 @@ public class InitialTemplateIndentationComputer extends Xtend2Switch<String> {
 			XExpression element = elements.get(i);
 			String elementResult = doSwitch(element);
 			if (elementResult == null && i == 0)
-				return "";
+				return initial;
 			result = getBetterString(result, elementResult);
 			if (Strings.isEmpty(result))
 				return result;
@@ -66,7 +84,7 @@ public class InitialTemplateIndentationComputer extends Xtend2Switch<String> {
 					return "";
 				result = getBetterString(result, leadingWS.toString());
 			} else {
-				// some tools tend to right trim text files by default (git)
+				// some tools tend to right trim text files by default (e.g. git)
 				// that's why we ignore empty lines
 				RichString completeString = (RichString) object.eContainer();
 				List<XExpression> siblings = completeString.getElements();

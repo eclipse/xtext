@@ -15,8 +15,8 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XIntLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xtend2.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtext.xtend2.richstring.DefaultIndentationHandler;
-import org.eclipse.xtext.xtend2.richstring.IRichStringPartAcceptor;
 import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
@@ -26,7 +26,7 @@ import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
  */
 public class RichStringTest extends AbstractRichStringTest {
 
-	public static class StringBuilderBasedAcceptor implements IRichStringPartAcceptor {
+	public static class StringBuilderBasedAcceptor extends AbstractRichStringPartAcceptor {
 
 		private StringBuilder builder;
 		private StringBuilder currentLine;
@@ -60,17 +60,13 @@ public class RichStringTest extends AbstractRichStringTest {
 			return ignoreStack.peek().booleanValue();
 		}
 		
+		@Override
 		public void acceptSemanticText(CharSequence text, RichStringLiteral origin) {
 			if (!ignore())
 				currentLine.append(text);
 		}
 
-		public void acceptTemplateText(CharSequence text, RichStringLiteral origin) {
-		}
-		
-		public void announceNextLiteral(RichStringLiteral object) {
-		}
-
+		@Override
 		public void acceptSemanticLineBreak(int length, RichStringLiteral origin) {
 			if (!ignore()) {
 				String newLine = currentLine.append('\n').toString();
@@ -82,10 +78,12 @@ public class RichStringTest extends AbstractRichStringTest {
 			controlStructureSeen = false;
 		}
 
+		@Override
 		public void acceptTemplateLineBreak(int length, RichStringLiteral origin) {
 			controlStructureSeen = false;
 		}
 
+		@Override
 		public void acceptIfCondition(XExpression condition) {
 			if (ignore()) {
 				ignoreStack.push(Boolean.TRUE);
@@ -102,6 +100,7 @@ public class RichStringTest extends AbstractRichStringTest {
 			}
 		}
 
+		@Override
 		public void acceptElseIfCondition(XExpression condition) {
 			if (!internalIgnore()) {
 				XBooleanLiteral literal = (XBooleanLiteral) condition;
@@ -116,6 +115,7 @@ public class RichStringTest extends AbstractRichStringTest {
 			}
 		}
 
+		@Override
 		public void acceptElse() {
 			if (!internalIgnore()) {
 				if (printElse.peek()) {
@@ -126,6 +126,7 @@ public class RichStringTest extends AbstractRichStringTest {
 			}
 		}
 
+		@Override
 		public void acceptEndIf() {
 			if (internalIgnore()) {
 				ignoreStack.pop();
@@ -136,6 +137,7 @@ public class RichStringTest extends AbstractRichStringTest {
 			}
 		}
 
+		@Override
 		public void acceptForLoop(JvmFormalParameter parameter, XExpression expression) {
 			if (!ignore()) {
 				controlStructureSeen = true;
@@ -146,6 +148,7 @@ public class RichStringTest extends AbstractRichStringTest {
 			}
 		}
 
+		@Override
 		public void acceptEndFor() {
 			if (!ignore()) {
 				controlStructureSeen = true;
@@ -153,6 +156,7 @@ public class RichStringTest extends AbstractRichStringTest {
 			}
 		}
 		
+		@Override
 		public boolean forLoopHasNext() {
 			if (!ignore()) {
 				int remaining = forLoopStack.peek();
@@ -165,6 +169,7 @@ public class RichStringTest extends AbstractRichStringTest {
 			return false;
 		}
 
+		@Override
 		public void acceptExpression(XExpression expression, CharSequence indentation) {
 			XStringLiteral literal = (XStringLiteral) expression;
 			String value = literal.getValue();

@@ -23,8 +23,8 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xtend2.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtext.xtend2.richstring.DefaultIndentationHandler;
-import org.eclipse.xtext.xtend2.richstring.IRichStringPartAcceptor;
 import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
@@ -94,7 +94,7 @@ public class RichStringHighlightingCalculator implements ISemanticHighlightingCa
 		}
 	}
 
-	protected class RichStringHighlighter implements IRichStringPartAcceptor {
+	protected class RichStringHighlighter extends AbstractRichStringPartAcceptor {
 
 		private BitSet forLoopStack = new BitSet();
 		private int forLoopStackPointer = -1;
@@ -106,11 +106,13 @@ public class RichStringHighlightingCalculator implements ISemanticHighlightingCa
 			this.acceptor = acceptor;
 		}
 
+		@Override
 		public void announceNextLiteral(RichStringLiteral object) {
 			if (currentOffset == -1)
 				resetCurrentOffset(object);
 		}
 
+		@Override
 		public void acceptSemanticText(CharSequence text, RichStringLiteral origin) {
 			resetCurrentOffset(origin);
 			currentOffset += text.length();
@@ -134,44 +136,43 @@ public class RichStringHighlightingCalculator implements ISemanticHighlightingCa
 			}
 		}
 
+		@Override
 		public void acceptTemplateText(CharSequence text, RichStringLiteral origin) {
 			resetCurrentOffset(origin);
 			acceptor.addPosition(currentOffset, text.length(), HighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
 			currentOffset += text.length();
 		}
 
+		@Override
 		public void acceptSemanticLineBreak(int charCount, RichStringLiteral origin) {
 			resetCurrentOffset(origin);
 			currentOffset += charCount;
 		}
 
+		@Override
 		public void acceptTemplateLineBreak(int charCount, RichStringLiteral origin) {
 			resetCurrentOffset(origin);
 			currentOffset += charCount;
 		}
 
+		@Override
 		public void acceptIfCondition(XExpression condition) {
 			highlightRichStrings(condition, acceptor);
 		}
 
+		@Override
 		public void acceptElseIfCondition(XExpression condition) {
 			highlightRichStrings(condition, acceptor);
 		}
 
-		public void acceptElse() {
-			// ignore
-		}
-
-		public void acceptEndIf() {
-			// ignore
-		}
-
+		@Override
 		public void acceptForLoop(JvmFormalParameter parameter, XExpression expression) {
 			highlightRichStrings(expression, acceptor);
 			forLoopStackPointer++;
 			forLoopStack.set(forLoopStackPointer);
 		}
 
+		@Override
 		public boolean forLoopHasNext() {
 			if (forLoopStack.get(forLoopStackPointer)) {
 				forLoopStack.set(forLoopStackPointer, false);
@@ -180,10 +181,12 @@ public class RichStringHighlightingCalculator implements ISemanticHighlightingCa
 			return false;
 		}
 
+		@Override
 		public void acceptEndFor() {
 			forLoopStackPointer--;
 		}
 
+		@Override
 		public void acceptExpression(XExpression expression, CharSequence indentation) {
 			highlightRichStrings(expression, acceptor);
 		}
