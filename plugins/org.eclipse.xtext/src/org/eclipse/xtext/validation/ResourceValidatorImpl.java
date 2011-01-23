@@ -21,6 +21,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxEValidator;
 
 import com.google.common.collect.Lists;
@@ -35,7 +36,7 @@ public class ResourceValidatorImpl implements IResourceValidator {
 	/**
 	 * @author Sebastian Zarnekow - Initial contribution and API
 	 */
-	protected static class ListBasedMarkerAcceptor implements IDiagnosticConverter.Acceptor {
+	protected static class ListBasedMarkerAcceptor implements IAcceptor<Issue> {
 		private final List<Issue> result;
 
 		protected ListBasedMarkerAcceptor(List<Issue> result) {
@@ -62,29 +63,29 @@ public class ResourceValidatorImpl implements IResourceValidator {
 		if (monitor.isCanceled())
 			return null;
 
-		final List<Issue> markers = Lists.newArrayListWithExpectedSize(resource.getErrors().size()
+		final List<Issue> result = Lists.newArrayListWithExpectedSize(resource.getErrors().size()
 				+ resource.getWarnings().size());
-		IDiagnosticConverter.Acceptor acceptor = createAcceptor(markers);
 		try {
+			IAcceptor<Issue> acceptor = createAcceptor(result);
 			// Syntactical and linking errors
 			// Collect EMF Resource Diagnostics
 			if (mode.shouldCheck(CheckType.FAST)) {
 				for (int i = 0; i < resource.getErrors().size(); i++) {
 					if (monitor.isCanceled())
 						return null;
-					markerFromXtextResourceDiagnostic(resource.getErrors().get(i), Severity.ERROR, acceptor);
+					issueFromXtextResourceDiagnostic(resource.getErrors().get(i), Severity.ERROR, acceptor);
 				}
 
 				for (int i = 0; i < resource.getWarnings().size(); i++) {
 					if (monitor.isCanceled())
 						return null;
-					markerFromXtextResourceDiagnostic(resource.getWarnings().get(i), Severity.WARNING, acceptor);
+					issueFromXtextResourceDiagnostic(resource.getWarnings().get(i), Severity.WARNING, acceptor);
 				}
 			}
 
 			if (monitor.isCanceled())
 				return null;
-			boolean syntaxDiagFail = !markers.isEmpty();
+			boolean syntaxDiagFail = !result.isEmpty();
 			logCheckStatus(resource, syntaxDiagFail, "Syntax");
 
 			// Validation errors
@@ -107,10 +108,10 @@ public class ResourceValidatorImpl implements IResourceValidator {
 					Diagnostic diagnostic = diagnostician.validate(ele, options);
 					if (!diagnostic.getChildren().isEmpty()) {
 						for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
-							markerFromEValidatorDiagnostic(childDiagnostic, acceptor);
+							issueFromEValidatorDiagnostic(childDiagnostic, acceptor);
 						}
 					} else {
-						markerFromEValidatorDiagnostic(diagnostic, acceptor);
+						issueFromEValidatorDiagnostic(diagnostic, acceptor);
 					}
 				} catch (RuntimeException e) {
 					log.error(e.getMessage(), e);
@@ -119,14 +120,14 @@ public class ResourceValidatorImpl implements IResourceValidator {
 		} catch (RuntimeException e) {
 			log.error(e.getMessage(), e);
 		}
-		return markers;
+		return result;
 	}
 
 	protected void resolveProxies(final Resource resource, final CancelIndicator monitor) {
 		EcoreUtil2.resolveLazyCrossReferences(resource, monitor);
 	}
 
-	protected IDiagnosticConverter.Acceptor createAcceptor(final List<Issue> result) {
+	protected IAcceptor<Issue> createAcceptor(final List<Issue> result) {
 		return new ListBasedMarkerAcceptor(result);
 	}
 
@@ -136,12 +137,12 @@ public class ResourceValidatorImpl implements IResourceValidator {
 		}
 	}
 
-	protected void markerFromXtextResourceDiagnostic(org.eclipse.emf.ecore.resource.Resource.Diagnostic diagnostic,
-			Severity severity, IDiagnosticConverter.Acceptor acceptor) {
+	protected void issueFromXtextResourceDiagnostic(org.eclipse.emf.ecore.resource.Resource.Diagnostic diagnostic,
+			Severity severity, IAcceptor<Issue> acceptor) {
 		converter.convertResourceDiagnostic(diagnostic, severity, acceptor);
 	}
 
-	protected void markerFromEValidatorDiagnostic(Diagnostic diagnostic, IDiagnosticConverter.Acceptor acceptor) {
+	protected void issueFromEValidatorDiagnostic(Diagnostic diagnostic, IAcceptor<Issue> acceptor) {
 		converter.convertValidatorDiagnostic(diagnostic, acceptor);
 	}
 

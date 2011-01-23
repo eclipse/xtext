@@ -22,26 +22,13 @@ import com.google.inject.ImplementedBy;
 public interface IDiagnosticConverter {
 
 	/**
-	 * Accepts the created issues.
-	 * @author Sebastian Zarnekow - Initial contribution and API
-	 */
-	interface Acceptor extends IAcceptor<Issue> {
-		
-		/**
-		 * Accepts the created issues. Implementors should ignore any null values that are passed to this method.
-		 * @param the issue to be accepted. May be null.
-		 */
-		void accept(Issue issue);
-	}
-	
-	/**
 	 * Convert a resource diagnostic to zero, one or more markers.
 	 */
 	void convertResourceDiagnostic(
-			org.eclipse.emf.ecore.resource.Resource.Diagnostic diagnostic, Severity severity, Acceptor acceptor);
+			org.eclipse.emf.ecore.resource.Resource.Diagnostic diagnostic, Severity severity, IAcceptor<Issue> acceptor);
 	
 	/**
 	 * Convert a validation diagnostic to zero, one or more markers.
 	 */
-	void convertValidatorDiagnostic(org.eclipse.emf.common.util.Diagnostic diagnostic, Acceptor acceptor);
+	void convertValidatorDiagnostic(org.eclipse.emf.common.util.Diagnostic diagnostic, IAcceptor<Issue> acceptor);
 }

@@ -31,9 +31,17 @@ public class RangeBasedDiagnostic extends AbstractValidationDiagnostic {
 
 	public List<?> getData() {
 		if (getIssueData() == null)
-			return ImmutableList.of(offset, length);
+			return ImmutableList.of(getSourceEObject(), offset, length);
 		else
-			return ImmutableList.of(offset, length, getIssueData());
+			return ImmutableList.of(getSourceEObject(), offset, length, getIssueData());
+	}
+	
+	public int getOffset() {
+		return offset;
+	}
+	
+	public int getLength() {
+		return length;
 	}
 
 	@Override

@@ -17,8 +17,8 @@ import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.util.Triple;
-import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Issue.IssueImpl;
 
 /**
@@ -26,8 +26,16 @@ import org.eclipse.xtext.validation.Issue.IssueImpl;
  */
 public class DiagnosticConverterImpl implements IDiagnosticConverter {
 
-	public void convertResourceDiagnostic(Diagnostic diagnostic, Severity severity,
-			IDiagnosticConverter.Acceptor acceptor) {
+	protected static class IssueLocation {
+		
+		public IssueLocation() {}
+		
+		public Integer lineNumber;
+		public Integer offset;
+		public Integer length;
+	}
+	
+	public void convertResourceDiagnostic(Diagnostic diagnostic, Severity severity,	IAcceptor<Issue> acceptor) {
 		IssueImpl issue = new Issue.IssueImpl();
 		issue.setSyntaxError(true);
 		issue.setSeverity(severity);
@@ -41,17 +49,17 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 			issue.setLength(xtextDiagnostic.getLength());
 		}
 		if (diagnostic instanceof AbstractDiagnostic) {
-			AbstractDiagnostic xtextDiagnostic = (AbstractDiagnostic)diagnostic;
-			issue.setUriToProblem(xtextDiagnostic.getUriToProblem());
-			issue.setCode(xtextDiagnostic.getCode());
-			issue.setData(xtextDiagnostic.getData());
+			AbstractDiagnostic castedDiagnostic = (AbstractDiagnostic)diagnostic;
+			issue.setUriToProblem(castedDiagnostic.getUriToProblem());
+			issue.setCode(castedDiagnostic.getCode());
+			issue.setData(castedDiagnostic.getData());
 		}
 		issue.setType(CheckType.FAST);
 		acceptor.accept(issue);
 	}
 
 	public void convertValidatorDiagnostic(org.eclipse.emf.common.util.Diagnostic diagnostic,
-			IDiagnosticConverter.Acceptor acceptor) {
+			IAcceptor<Issue> acceptor) {
 		if (diagnostic.getSeverity() == org.eclipse.emf.common.util.Diagnostic.OK)
 			return;
 		IssueImpl issue = new Issue.IssueImpl();
@@ -64,17 +72,17 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 				issue.setSeverity(Severity.INFO);
 				break;
 		}
-		Triple<Integer, Integer, Integer> locationData = getLocationData(diagnostic);
+		IssueLocation locationData = getLocationData(diagnostic);
 		if (locationData != null) {
-			issue.setLineNumber(locationData.getFirst());
-			issue.setOffset(locationData.getSecond());
-			issue.setLength(locationData.getThird() - issue.getOffset());
+			issue.setLineNumber(locationData.lineNumber);
+			issue.setOffset(locationData.offset);
+			issue.setLength(locationData.length);
 		}
 		final EObject causer = getCauser(diagnostic);
 		if (causer != null)
 			issue.setUriToProblem(EcoreUtil.getURI(causer));
-		if (diagnostic instanceof FeatureBasedDiagnostic) {
-			FeatureBasedDiagnostic diagnosticImpl = (FeatureBasedDiagnostic) diagnostic;
+		if (diagnostic instanceof AbstractValidationDiagnostic) {
+			AbstractValidationDiagnostic diagnosticImpl = (AbstractValidationDiagnostic) diagnostic;
 			issue.setType(diagnosticImpl.getCheckType());
 			issue.setCode(diagnosticImpl.getIssueCode());
 			issue.setData(diagnosticImpl.getIssueData());
@@ -105,27 +113,34 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 	 *         <li>Third: Offset of last char (exclusive).</li>
 	 *         </ol>
 	 */
-	protected Triple<Integer, Integer, Integer> getLocationData(org.eclipse.emf.common.util.Diagnostic diagnostic) {
+	protected IssueLocation getLocationData(org.eclipse.emf.common.util.Diagnostic diagnostic) {
 		EObject causer = getCauser(diagnostic);
 		if (causer != null) {
-			// feature is the second element see Diagnostician.getData
-			List<?> data = diagnostic.getData();
-			Object feature = data.size() > 1 ? data.get(1) : null;
-			EStructuralFeature structuralFeature = resolveStructuralFeature(causer, feature);
-			return getLocationData(causer, structuralFeature);
+			if (diagnostic instanceof RangeBasedDiagnostic) {
+				RangeBasedDiagnostic castedDiagnostic = (RangeBasedDiagnostic) diagnostic;
+				INode parserNode = NodeModelUtils.getNode(causer);
+				String completeText = parserNode.getRootNode().getText();
+				int startLine = Strings.countLines(completeText.substring(0, castedDiagnostic.getOffset())) + 1;
+				IssueLocation result = new IssueLocation();
+				result.lineNumber = startLine;
+				result.offset = castedDiagnostic.getOffset();
+				result.length = castedDiagnostic.getLength();
+				return result;
+			} else {
+				// feature is the second element see Diagnostician.getData
+				List<?> data = diagnostic.getData();
+				Object feature = data.size() > 1 ? data.get(1) : null;
+				EStructuralFeature structuralFeature = resolveStructuralFeature(causer, feature);
+				return getLocationData(causer, structuralFeature);
+			}
 		}
 		return null;
 	}
 
 	/**
 	 * @return the location data for the given diagnostic.
-	 *         <ol>
-	 *         <li>First: line number,</li>
-	 *         <li>Second: Offset of first char (inclusive), and</li>
-	 *         <li>Third: Offset of last char (exclusive).</li>
-	 *         </ol>
 	 */
-	protected Triple<Integer, Integer, Integer> getLocationData(EObject obj, EStructuralFeature structuralFeature) {
+	protected IssueLocation getLocationData(EObject obj, EStructuralFeature structuralFeature) {
 		INode parserNode = NodeModelUtils.getNode(obj);
 		if (parserNode != null) {
 			if (structuralFeature != null) {
@@ -133,23 +148,23 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 				if (!nodes.isEmpty())
 					parserNode = nodes.iterator().next();
 			}
-			Integer lineNumber = Integer.valueOf(parserNode.getStartLine());
-			int offset = parserNode.getOffset();
-			Integer charStart = Integer.valueOf(Integer.valueOf(offset));
-			Integer charEnd = Integer.valueOf(offset + parserNode.getLength());
-			return Tuples.create(lineNumber, charStart, charEnd);
+			return getLocationForNode(parserNode);
 		}
 		return null;
 	}
 
+	protected IssueLocation getLocationForNode(INode node) {
+		IssueLocation result = new IssueLocation();
+		result.lineNumber = node.getStartLine();
+		result.offset = node.getOffset();
+		result.length = node.getLength();
+		return result;
+	}
+
 	protected EStructuralFeature resolveStructuralFeature(EObject ele, Object feature) {
-		if (feature instanceof String) {
-			return ele.eClass().getEStructuralFeature((String) feature);
-		} else if (feature instanceof EStructuralFeature) {
+		if (feature instanceof EStructuralFeature) {
 			return (EStructuralFeature) feature;
-		} else if (feature instanceof Integer) {
-			return ele.eClass().getEStructuralFeature((Integer) feature);
-		}
+		} 
 		return null;
 	}
 
