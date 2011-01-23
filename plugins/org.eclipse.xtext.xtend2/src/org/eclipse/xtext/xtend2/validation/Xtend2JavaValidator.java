@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.xtend2.validation;
 
 import static com.google.common.collect.Lists.*;
@@ -16,12 +23,26 @@ import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
+import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
+import org.eclipse.xtext.xtend2.xtend2.RichString;
+import org.eclipse.xtext.xtend2.xtend2.RichStringElseIf;
+import org.eclipse.xtext.xtend2.xtend2.RichStringForLoop;
+import org.eclipse.xtext.xtend2.xtend2.RichStringIf;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
+import com.google.inject.Inject;
+
+/**
+ * @author Jan Koehnlein - Initial contribution and API
+ * @author Sebastian Zarnekow
+ */
 public class Xtend2JavaValidator extends XbaseJavaValidator {
 
+	@Inject
+	private RichStringProcessor richStringProcessor;
+	
 	public static final String WRONG_PACKAGE = Xtend2JavaValidator.class.getName() + ".wrong_package";
 	public static final String WRONG_FILE = Xtend2JavaValidator.class.getName() + ".wrong_file";
 
@@ -59,5 +80,32 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 	protected void reportInvalidPackage(String packageName, URI classpathURI) {
 		error("The declared package '" + notNull(packageName) + "' does not match the expected package", 
 				Literals.XTEND_FILE__PACKAGE, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, WRONG_PACKAGE);
+	}
+	
+	@Check
+	public void checkWhitespaceInRichStrings(RichString richString) {
+		// don't check the indentation of nested rich strings in 
+		// IF and FOR individually
+		if (richString.eContainer() instanceof RichStringIf) {
+			RichStringIf container = (RichStringIf) richString.eContainer();
+			if (container.getThen() == richString || container.getElse() == richString)
+				return;
+		}
+		if (richString.eContainer() instanceof RichStringElseIf) {
+			RichStringElseIf container = (RichStringElseIf) richString.eContainer();
+			if (container.getThen() == richString)
+				return;
+		}
+		if (richString.eContainer() instanceof RichStringForLoop) {
+			RichStringForLoop container = (RichStringForLoop) richString.eContainer();
+			if (container.getEachExpression() == richString)
+				return;
+		}
+		doCheckWhitespaceIn(richString);
+	}
+
+	protected void doCheckWhitespaceIn(RichString richString) {
+		ValidatingRichStringAcceptor helper = new ValidatingRichStringAcceptor(this);
+		richStringProcessor.process(richString, helper, helper);
 	}
 }
