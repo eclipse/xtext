@@ -46,8 +46,8 @@ public class SequencerTest extends AbstractXtextTests {
 		ISequencer sequencer = get(ISequencer.class);
 		EObject ctx = sequencer.findContexts(model, null).iterator().next();
 		String actual = sequenceRecursively(sequencer, ctx, model, true);
-		System.out.println(actual);
-
+//		System.out.println(actual);
+		assertNotNull(actual);
 	}
 
 	private EObject getContext(IGrammarValuePair pair) {
