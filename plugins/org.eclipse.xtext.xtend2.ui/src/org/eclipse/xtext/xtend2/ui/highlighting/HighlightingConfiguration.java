@@ -30,8 +30,8 @@ public class HighlightingConfiguration extends DefaultHighlightingConfiguration 
 	}
 	
 	public TextStyle richTextStyle() {
-		TextStyle textStyle = defaultTextStyle().copy();
-		textStyle.setColor(new RGB(0, 128, 0));
+		TextStyle textStyle = stringTextStyle().copy();
+		textStyle.setBackgroundColor(new RGB(220, 220, 220));
 		return textStyle;
 	}
 	
@@ -42,7 +42,7 @@ public class HighlightingConfiguration extends DefaultHighlightingConfiguration 
 	
 	public TextStyle insignificantTemplateTextStyle() {
 		TextStyle textStyle = defaultTextStyle().copy();
-		textStyle.setBackgroundColor(new RGB(255, 255, 220));
+		textStyle.setBackgroundColor(new RGB(255, 255, 255));
 		return textStyle;
 	}
 }
