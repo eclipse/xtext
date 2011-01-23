@@ -12,6 +12,8 @@ import java.util.LinkedList;
 import com.google.common.collect.Lists;
 
 /**
+ * Default indentation handler for rich strings. Tries to be graceful with
+ * inconsistent indentation.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class DefaultIndentationHandler implements IRichStringIndentationHandler {
@@ -78,7 +80,7 @@ public class DefaultIndentationHandler implements IRichStringIndentationHandler 
 		if (indentationData.isEmpty()) {
 			indentationData.add(new TemplateIndentationData(indentation));
 		} else {
-			String currentIndentation = getCompleteCurrentIndentation();
+			String currentIndentation = getTotalIndentation();
 			if (indentation == null)
 				indentation = "";
 			if (indentation.toString().startsWith(currentIndentation)) {
@@ -97,7 +99,7 @@ public class DefaultIndentationHandler implements IRichStringIndentationHandler 
 		if (indentationData.isEmpty()) {
 			indentationData.add(new SemanticIndentationData(indentation));
 		} else {
-			String currentIndentation = getCompleteCurrentIndentation();
+			String currentIndentation = getTotalIndentation();
 			if (indentation == null)
 				indentation = "";
 			if (indentation.toString().startsWith(currentIndentation)) {
@@ -112,19 +114,19 @@ public class DefaultIndentationHandler implements IRichStringIndentationHandler 
 		}
 	}
 	
-	protected String getCompleteCurrentIndentation() {
-		StringBuilder result = new StringBuilder();
-		for(IndentationData data: indentationData) {
-			result.append(data.value);
-		}
-		return result.toString();
-	}
-	
 	public CharSequence getTotalSemanticIndentation() {
 		StringBuilder result = new StringBuilder();
 		for(IndentationData data: indentationData) {
 			if (data instanceof SemanticIndentationData)
 				result.append(data.value);
+		}
+		return result.toString();
+	}
+	
+	public String getTotalIndentation() {
+		StringBuilder result = new StringBuilder();
+		for(IndentationData data: indentationData) {
+			result.append(data.value);
 		}
 		return result.toString();
 	}

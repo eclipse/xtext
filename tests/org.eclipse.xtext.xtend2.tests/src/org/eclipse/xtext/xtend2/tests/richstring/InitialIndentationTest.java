@@ -16,14 +16,19 @@ import org.eclipse.xtext.xtend2.xtend2.RichString;
 public class InitialIndentationTest extends AbstractRichStringTest {
 
 	public void assertInitialIndentation(String expectedIndentation, String richString) throws Exception {
+		assertInitialIndentation(expectedIndentation, richString, "");
+	}
+	
+	public void assertInitialIndentation(String expectedIndentation, String richString, String initial) throws Exception {
 		RichString parsedString = richString(richString);
-		InitialTemplateIndentationComputer computer = new InitialTemplateIndentationComputer();
+		InitialTemplateIndentationComputer computer = new InitialTemplateIndentationComputer(initial);
 		String actualIndentation = computer.doSwitch(parsedString);
 		assertEquals(richString, expectedIndentation, actualIndentation);
 	}
 	
 	public void testEmptyTemplate_01() throws Exception {
 		assertInitialIndentation("", "''''''");
+		assertInitialIndentation("foobar", "''''''", "foobar");
 	}
 	
 	public void testEmptyTemplate_02() throws Exception {
@@ -44,12 +49,20 @@ public class InitialIndentationTest extends AbstractRichStringTest {
 		assertInitialIndentation("", "'''«name»'''");
 	}
 	
-	public void testTextInFirstLine() throws Exception {
+	public void testTextInFirstLine_01() throws Exception {
 		assertInitialIndentation("", "'''  name'''");
 		assertInitialIndentation("", "'''  name\n" +
 				"  '''");
 		assertInitialIndentation("", "'''  name\r\n" +
 		"  '''");
+	}
+	
+	public void testTextInFirstLine_02() throws Exception {
+		assertInitialIndentation("initial", "'''  name'''", "initial");
+		assertInitialIndentation("initial", "'''  name\n" +
+				"  '''", "initial");
+		assertInitialIndentation("initial", "'''  name\r\n" +
+		"  '''", "initial");
 	}
 	
 	public void testExpressionInFirstLine() throws Exception {
@@ -60,11 +73,18 @@ public class InitialIndentationTest extends AbstractRichStringTest {
 		"  '''");
 	}
 	
-	public void testTextInLastLine() throws Exception {
+	public void testTextInLastLine_01() throws Exception {
 		assertInitialIndentation("  ", "'''\n" +
 				"  name'''");
 		assertInitialIndentation("  ", "'''\r\n" +
 				"  name'''");
+	}
+	
+	public void testTextInLastLine_02() throws Exception {
+		assertInitialIndentation("  ", "'''\n" +
+				"  name'''", "initial");
+		assertInitialIndentation("  ", "'''\r\n" +
+				"  name'''", "initial");
 	}
 	
 	public void testExpressionInLastLine() throws Exception {

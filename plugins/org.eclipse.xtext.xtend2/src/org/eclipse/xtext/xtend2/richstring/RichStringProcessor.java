@@ -232,7 +232,8 @@ public class RichStringProcessor {
 		}
 		
 		public String computeInitialIndentation(RichString object) {
-			InitialTemplateIndentationComputer computer = new InitialTemplateIndentationComputer();
+			InitialTemplateIndentationComputer computer = new InitialTemplateIndentationComputer(
+					indentationHandler.getTotalIndentation());
 			String result = computer.doSwitch(object);
 			return result;
 		}
