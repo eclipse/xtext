@@ -157,7 +157,8 @@ public class Files {
 
 	public static void writeStringIntoFile(String filename, String content) {
 		try {
-			FileWriter writer = new FileWriter(filename);
+			final File file = new File(filename);
+			FileWriter writer = new FileWriter(file);
 			try {
 				writer.append(content);
 			} finally {

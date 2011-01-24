@@ -42,37 +42,14 @@ import com.google.inject.internal.MoreTypes;
  */
 @SuppressWarnings("restriction")
 public class OnTheFlyJavaCompiler {
-	
-	@Inject
-	private ClassLoader parentClassLoader;
-	private List<String> classpath = newArrayList();
-	
+
 	static class DelegateOutStream extends OutputStream {
 
 		private OutputStream delegate;
-		
-		public void setDelegate(OutputStream delegate) {
-			this.delegate = delegate;
-		}
 
 		@Override
-		public void write(int b) throws IOException {
-			delegate.write(b);
-		}
-
-		@Override
-		public int hashCode() {
-			return delegate.hashCode();
-		}
-
-		@Override
-		public void write(byte[] b) throws IOException {
-			delegate.write(b);
-		}
-
-		@Override
-		public void write(byte[] b, int off, int len) throws IOException {
-			delegate.write(b, off, len);
+		public void close() throws IOException {
+			delegate.close();
 		}
 
 		@Override
@@ -86,24 +63,142 @@ public class OnTheFlyJavaCompiler {
 		}
 
 		@Override
-		public void close() throws IOException {
-			delegate.close();
+		public int hashCode() {
+			return delegate.hashCode();
+		}
+
+		public void setDelegate(OutputStream delegate) {
+			this.delegate = delegate;
 		}
 
 		@Override
 		public String toString() {
 			return delegate.toString();
 		}
-		
+
+		@Override
+		public void write(byte[] b) throws IOException {
+			delegate.write(b);
+		}
+
+		@Override
+		public void write(byte[] b, int off, int len) throws IOException {
+			delegate.write(b, off, len);
+		}
+
+		@Override
+		public void write(int b) throws IOException {
+			delegate.write(b);
+		}
+
 	}
-	
-	public void setParentClassLoader(ClassLoader parentClassLoader) {
-		this.parentClassLoader = parentClassLoader;
+
+	public static class EclipseRuntimeDependentJavaCompiler extends OnTheFlyJavaCompiler {
+		@Override
+		protected URL resolveBundleResourceURL(URL url) throws IOException {
+			return FileLocator.resolve(url);
+		}
 	}
-	
+
+	public static class PatchedFileSystem extends FileSystem {
+
+		private FileSystem delegate;
+
+		public PatchedFileSystem(FileSystem delegate) {
+			super(new String[0], new String[0], "ISO-8859-1");
+			this.delegate = delegate;
+		}
+
+		@Override
+		public void cleanup() {
+			//DO nothing. the original implmentaion closes zips and sets the references to null
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			return delegate.equals(obj);
+		}
+
+		@Override
+		public NameEnvironmentAnswer findType(char[] typeName, char[][] packageName) {
+			return delegate.findType(typeName, packageName);
+		}
+
+		@Override
+		public NameEnvironmentAnswer findType(char[][] compoundName) {
+			return delegate.findType(compoundName);
+		}
+
+		@Override
+		public NameEnvironmentAnswer findType(char[][] compoundName, boolean asBinaryOnly) {
+			return delegate.findType(compoundName, asBinaryOnly);
+		}
+
+		@Override
+		public char[][][] findTypeNames(char[][] packageName) {
+			return delegate.findTypeNames(packageName);
+		}
+
+		public FileSystem getDelegate() {
+			return delegate;
+		}
+
+		@Override
+		public int hashCode() {
+			return delegate.hashCode();
+		}
+
+		@Override
+		public boolean isPackage(char[][] compoundName, char[] packageName) {
+			return delegate.isPackage(compoundName, packageName);
+		}
+
+		@Override
+		public String toString() {
+			return delegate.toString();
+		}
+
+	}
+
+	/**
+	 * HACK - reuse the classpath, since it is super expensive to reopen and scan the zips.
+	 * 
+	 * @author Sven Efftinge - Initial contribution and API
+	 */
+	static class PatchedMain extends Main {
+
+		@SuppressWarnings("rawtypes")
+		public PatchedMain(PrintWriter outWriter, PrintWriter errWriter, boolean systemExitWhenFinished,
+				Map customDefaultOptions, CompilationProgress compilationProgress) {
+			super(outWriter, errWriter, systemExitWhenFinished, customDefaultOptions, compilationProgress);
+		}
+
+		@Override
+		public FileSystem getLibraryAccess() {
+			if (fileSystem == null) {
+				fileSystem = new PatchedFileSystem(super.getLibraryAccess());
+			}
+			return fileSystem;
+		}
+
+	}
+
+	private static PatchedFileSystem fileSystem;
+
+	private List<String> classpath = newArrayList();
+
+	private DelegateOutStream errorStream = new DelegateOutStream();
+
+	@Inject
+	private ClassLoader parentClassLoader;
+
+	public void addClassPath(String classpath) {
+		this.classpath.add(classpath);
+	}
+
 	public void addClassPathOfClass(Class<?> clazz) {
-		final String classNameAsPath = File.separator+clazz.getCanonicalName().replace('.', File.separatorChar);
-		URL url = clazz.getResource(classNameAsPath+".class");
+		final String classNameAsPath = File.separator + clazz.getCanonicalName().replace('.', File.separatorChar);
+		URL url = clazz.getResource(classNameAsPath + ".class");
 		String pathToFolderOrJar = null;
 		if (url.getProtocol().startsWith("bundleresource")) {
 			try {
@@ -114,7 +209,8 @@ public class OnTheFlyJavaCompiler {
 		}
 		if (url.getProtocol().startsWith("jar")) {
 			try {
-				pathToFolderOrJar = new URL(url.getPath().substring(0,url.getPath().indexOf('!'))).toURI().getRawPath();
+				pathToFolderOrJar = new URL(url.getPath().substring(0, url.getPath().indexOf('!'))).toURI()
+						.getRawPath();
 			} catch (Exception e) {
 				throw new WrappedException(e);
 			}
@@ -125,62 +221,22 @@ public class OnTheFlyJavaCompiler {
 			} catch (URISyntaxException e) {
 				throw new WrappedException(e);
 			}
-			pathToFolderOrJar = resolvedRawPath.substring(0,resolvedRawPath.indexOf(classNameAsPath));
+			pathToFolderOrJar = resolvedRawPath.substring(0, resolvedRawPath.indexOf(classNameAsPath));
 		}
 		this.classpath.add(pathToFolderOrJar);
 	}
 
-	protected URL resolveBundleResourceURL(URL url) throws IOException {
-		throw new UnsupportedOperationException();
-	}
-	
-	public static class EclipseRuntimeDependentJavaCompiler extends OnTheFlyJavaCompiler {
-		@Override
-		protected URL resolveBundleResourceURL(URL url) throws IOException {
-			return FileLocator.resolve(url);
-		}
+	public void clearClassPath() {
+		if (fileSystem != null && fileSystem.getDelegate() != null)
+			fileSystem.getDelegate().cleanup();
+		classpath.clear();
+		fileSystem = null;
 	}
 
-	public void addClassPath(String classpath) {
-		this.classpath.add(classpath);
-	}
-	
-	public String getClasspathArgs() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("-classpath ");
-		for (int i = 0; i < classpath.size(); i++) {
-			sb.append(classpath.get(i));
-			if (i+1<classpath.size())
-				sb.append(File.pathSeparator);
-		}
-		return sb.toString();
-	}
-
-	@SuppressWarnings("unchecked")
-	public <RT> Functions.Function0<RT> createFunction(String expression, Class<RT> returnType) {
-		return (Function0<RT>) internalCreateFunction(expression, returnType);
-	}
-	
-	@SuppressWarnings("unchecked")
-	public <RT, T> Functions.Function1<T,RT> createFunction(String body, Class<RT> returnType, Class<T> paramType) {
-		return (Functions.Function1<T,RT>) internalCreateFunction(body, returnType, Tuples.pair((Type) paramType, "p"));
-	}
-	
-	@SuppressWarnings("unchecked")
-	public <RT,T1,T2> Functions.Function2<T1,T2,RT> createFunction(String body, Class<RT> returnType, Class<T1> paramType1, Class<T2> paramType2) {
-		return (Functions.Function2<T1,T2,RT>) internalCreateFunction(body, returnType, Tuples.pair((Type) paramType2, "p1"), Tuples.pair((Type) paramType2, "p2"));
-	}
-
-	protected Object internalCreateFunction(String code, Type returnType, Pair<Type, String>... params) {
-		Pair<String, String> fullCode = createFullCode(code, returnType, params);
-		Class<?> class1 = compileToClass(fullCode.getFirst(), fullCode.getSecond());
-		try {
-			return class1.newInstance();
-		} catch (RuntimeException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new WrappedException(e);
-		}
+	protected boolean compile(String arguments) {
+		//		return BatchCompiler.compile(sb.toString(), new PrintWriter(new OutputStreamWriter(System.out)), new PrintWriter(
+		//				new OutputStreamWriter(errorStream)), null);
+		return getMain().compile(Main.tokenize(arguments));
 	}
 
 	public Class<?> compileToClass(String classname, String code) {
@@ -225,23 +281,6 @@ public class OnTheFlyJavaCompiler {
 		parent.mkdirs();
 	}
 
-	protected boolean compile(String arguments) {
-//		return BatchCompiler.compile(sb.toString(), new PrintWriter(new OutputStreamWriter(System.out)), new PrintWriter(
-//				new OutputStreamWriter(errorStream)), null);
-		return getMain().compile(Main.tokenize(arguments));
-	}
-
-	private DelegateOutStream errorStream =  new DelegateOutStream();
-	
-	protected Main getMain() {
-		return new PatchedMain(new PrintWriter(new OutputStreamWriter(System.out)), new PrintWriter(
-				new OutputStreamWriter(errorStream)), false /* systemExit */, null /* options */, null);
-	}
-
-	protected String getComplianceLevelArg() {
-		return "-1.5";
-	}
-
 	protected Pair<String, String> createFullCode(String statementCode, Type returnType, Pair<Type, String>... params) {
 		String className = "_$GeneratedClass";
 		StringBuilder sb = new StringBuilder("public class ").append(className).append(" implements ")
@@ -266,100 +305,65 @@ public class OnTheFlyJavaCompiler {
 		return Tuples.pair(className, sb.toString());
 	}
 
+	@SuppressWarnings("unchecked")
+	public <RT> Functions.Function0<RT> createFunction(String expression, Class<RT> returnType) {
+		return (Function0<RT>) internalCreateFunction(expression, returnType);
+	}
+
+	@SuppressWarnings("unchecked")
+	public <RT, T> Functions.Function1<T, RT> createFunction(String body, Class<RT> returnType, Class<T> paramType) {
+		return (Functions.Function1<T, RT>) internalCreateFunction(body, returnType, Tuples.pair((Type) paramType, "p"));
+	}
+
+	@SuppressWarnings("unchecked")
+	public <RT, T1, T2> Functions.Function2<T1, T2, RT> createFunction(String body, Class<RT> returnType,
+			Class<T1> paramType1, Class<T2> paramType2) {
+		return (Functions.Function2<T1, T2, RT>) internalCreateFunction(body, returnType,
+				Tuples.pair((Type) paramType2, "p1"), Tuples.pair((Type) paramType2, "p2"));
+	}
+
+	public String getClasspathArgs() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("-classpath ");
+		for (int i = 0; i < classpath.size(); i++) {
+			sb.append(classpath.get(i));
+			if (i + 1 < classpath.size())
+				sb.append(File.pathSeparator);
+		}
+		return sb.toString();
+	}
+
+	protected String getComplianceLevelArg() {
+		return "-1.5";
+	}
+
+	protected Main getMain() {
+		return new PatchedMain(new PrintWriter(new OutputStreamWriter(System.out)), new PrintWriter(
+				new OutputStreamWriter(errorStream)), false /* systemExit */, null /* options */, null);
+	}
+
+	protected Object internalCreateFunction(String code, Type returnType, Pair<Type, String>... params) {
+		Pair<String, String> fullCode = createFullCode(code, returnType, params);
+		Class<?> class1 = compileToClass(fullCode.getFirst(), fullCode.getSecond());
+		try {
+			return class1.newInstance();
+		} catch (RuntimeException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new WrappedException(e);
+		}
+	}
+
+	protected URL resolveBundleResourceURL(URL url) throws IOException {
+		throw new UnsupportedOperationException();
+	}
+
+	public void setParentClassLoader(ClassLoader parentClassLoader) {
+		this.parentClassLoader = parentClassLoader;
+	}
+
 	protected String toString(Type returnType) {
 		return MoreTypes.toString(returnType);
 	}
-	
-	private static PatchedFileSystem fileSystem;
-	
-	public void clearClassPath() {
-		fileSystem.getDelegate().cleanup();
-		fileSystem = null;
-	}
-	
-	/**
-	 * HACK - reuse the classpath, since it is super expensive to reopen and scan the zips.
-	 * 
-	 * @author Sven Efftinge - Initial contribution and API
-	 */
-	static class PatchedMain extends Main {
 
-		@SuppressWarnings("rawtypes")
-		public PatchedMain(PrintWriter outWriter, PrintWriter errWriter, boolean systemExitWhenFinished,
-				Map customDefaultOptions, CompilationProgress compilationProgress) {
-			super(outWriter, errWriter, systemExitWhenFinished, customDefaultOptions, compilationProgress);
-		}
-
-		@Override
-		public FileSystem getLibraryAccess() {
-			if (fileSystem == null) {
-				fileSystem =  new PatchedFileSystem(super.getLibraryAccess());
-			}
-			return fileSystem;
-		}
-		
-	}
-	
-	static class PatchedFileSystem extends FileSystem {
-		
-		private FileSystem delegate;
-		
-		public PatchedFileSystem(FileSystem delegate) {
-			super(new String[0],new String[0],"ISO-8859-1");
-			this.delegate = delegate;
-		}
-		
-		public FileSystem getDelegate() {
-			return delegate;
-		}
-
-		@Override
-		public void cleanup() {
-			//DO nothing. the original implmentaion closes zips and sets the references to null
-		}
-
-		@Override
-		public int hashCode() {
-			return delegate.hashCode();
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			return delegate.equals(obj);
-		}
-
-		@Override
-		public String toString() {
-			return delegate.toString();
-		}
-
-		@Override
-		public NameEnvironmentAnswer findType(char[][] compoundName) {
-			return delegate.findType(compoundName);
-		}
-
-		@Override
-		public char[][][] findTypeNames(char[][] packageName) {
-			return delegate.findTypeNames(packageName);
-		}
-
-		@Override
-		public NameEnvironmentAnswer findType(char[][] compoundName, boolean asBinaryOnly) {
-			return delegate.findType(compoundName, asBinaryOnly);
-		}
-
-		@Override
-		public NameEnvironmentAnswer findType(char[] typeName, char[][] packageName) {
-			return delegate.findType(typeName, packageName);
-		}
-
-		@Override
-		public boolean isPackage(char[][] compoundName, char[] packageName) {
-			return delegate.isPackage(compoundName, packageName);
-		}
-		
-		
-
-	}
-	
 }

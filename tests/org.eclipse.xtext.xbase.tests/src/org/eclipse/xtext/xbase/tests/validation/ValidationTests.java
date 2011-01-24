@@ -86,14 +86,14 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	}
 
 	public void testCast_2() throws Exception {
-		XExpression expression = expression("new Object() as String");
-		helper.assertError(expression, XCASTED_EXPRESSION, XbaseJavaValidator.INVALID_CAST, "incompatible", "type");
+		XExpression expression = expression("new String() as Boolean");
+		helper.assertError(expression, XCASTED_EXPRESSION, XbaseJavaValidator.INVALID_CAST, "Cannot", "cast");
 		helper.assertNoError(expression, XbaseJavaValidator.OBSOLETE_CAST);
 	}
 
 	public void testInstanceOf_0() throws Exception {
 		XExpression expression = expression("'foo' instanceof String");
-		helper.assertError(expression, XINSTANCE_OF_EXPRESSION, XbaseJavaValidator.OBSOLETE_INSTANCEOF, "condition", "always", "true");
+		helper.assertError(expression, XINSTANCE_OF_EXPRESSION, XbaseJavaValidator.OBSOLETE_INSTANCEOF, "already", "java.lang.String");
 		helper.assertNoError(expression, XbaseJavaValidator.INVALID_INSTANCEOF);
 	}
 
@@ -104,7 +104,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	}
 
 	public void testInstanceOf_2() throws Exception {
-		XExpression expression = expression("new Object() instanceof String");
+		XExpression expression = expression("new String() instanceof Boolean");
 		helper.assertError(expression, XINSTANCE_OF_EXPRESSION, XbaseJavaValidator.INVALID_INSTANCEOF, "incompatible", "type");
 		helper.assertNoError(expression, XbaseJavaValidator.OBSOLETE_INSTANCEOF);
 	}

@@ -42,6 +42,7 @@ import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider;
 
 import com.google.common.collect.Lists;
@@ -107,6 +108,10 @@ public class XExpressionTypeProvider extends AbstractTypeProvider<JvmTypeReferen
 
 	protected JvmTypeReference _type(XBlockExpression object) {
 		return getConvertedType(object.getExpressions().get(object.getExpressions().size() - 1));
+	}
+	
+	protected JvmTypeReference _type(XVariableDeclaration object) {
+		return typesService.getTypeForName(TypesService.VOID_TYPE_NAME, object);
 	}
 
 	protected JvmTypeReference _type(XAbstractFeatureCall object) {

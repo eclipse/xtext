@@ -41,8 +41,24 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 				"java.lang.Boolean");
 	}
 
-	public void testCast() throws Exception {
+	public void testCast_00() throws Exception {
 		assertNoConformanceError("'foo' as Object");
+	}
+	
+	public void testCast_01() throws Exception {
+		assertCastError("'foo' as Boolean", XbasePackage.Literals.XCASTED_EXPRESSION,"Cannot","Boolean");
+	}
+	
+	public void testCast_02() throws Exception {
+		assertCastError("new NullPointerException() as StringBuilder", XbasePackage.Literals.XCASTED_EXPRESSION,"cannot","StringBuilder");
+	}
+	
+	public void testCast_03() throws Exception {
+		assertNoConformanceError("new NullPointerException() as CharSequence");
+	}
+	
+	public void testCast_04() throws Exception {
+		assertCastError("('foo' as CharSequence) as NullPointerException", XbasePackage.Literals.XCASTED_EXPRESSION,"cannot","CharSequence","NullPointerException");
 	}
 	
 	public void testVariableDeclaration() throws Exception {
@@ -79,6 +95,12 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 			throws Exception {
 		final XExpression xExpression = expression(expression, true);
 		helper.assertError(xExpression, objectType, XbaseJavaValidator.INCOMPATIBLE_TYPES, messageParts);
+	}
+	
+	protected void assertCastError(String expression, EClass objectType, String... messageParts)
+	throws Exception {
+		final XExpression xExpression = expression(expression, true);
+		helper.assertError(xExpression, objectType, XbaseJavaValidator.INVALID_CAST, messageParts);
 	}
 
 	protected void assertNoConformanceError(String expression) throws Exception {

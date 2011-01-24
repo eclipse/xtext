@@ -12,6 +12,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
@@ -42,23 +43,30 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class XExpressionExpectedTypeProvider extends AbstractExpectedTypeProvider<JvmTypeReference, XExpression> implements IXExpressionExpectedTypeProvider {
+public class XExpressionExpectedTypeProvider extends AbstractExpectedTypeProvider<JvmTypeReference, XExpression>
+		implements IXExpressionExpectedTypeProvider {
 
 	@Inject
 	private IdentifiableTypeProvider identifiableTypeProvider;
 
 	@Inject
 	private TypesService typeService;
-	
+
 	@Inject
 	private XbaseTypeArgumentContextProvider typeArgCtxProvider;
-	
+
 	@Inject
 	private TypesFactory factory;
 
 	protected JvmTypeReference _expectedType(XAssignment assignment, EReference reference, int index) {
 		if (reference == XbasePackage.Literals.XASSIGNMENT__VALUE) {
 			JvmIdentifiableElement feature = assignment.getFeature();
+			if (feature instanceof JvmOperation) {
+				final JvmOperation op = (JvmOperation) feature;
+				if (op.getParameters().size() == 1)
+					return op.getParameters().get(0).getParameterType();
+				return null;
+			}
 			return identifiableTypeProvider.getType(feature);
 		}
 		return getExpectedType(assignment);
@@ -66,29 +74,32 @@ public class XExpressionExpectedTypeProvider extends AbstractExpectedTypeProvide
 
 	protected JvmTypeReference _expectedType(XMemberFeatureCall expr, EReference reference, int index) {
 		if (reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS) {
-			if(!(expr.getFeature() instanceof JvmExecutable)) 
+			if (!(expr.getFeature() instanceof JvmExecutable))
 				return null;
 			JvmExecutable feature = (JvmExecutable) expr.getFeature();
-			if(index >= feature.getParameters().size())
+			if (index >= feature.getParameters().size())
 				return null;
 			JvmFormalParameter parameter = feature.getParameters().get(index);
 			TypeArgumentContext context = typeArgCtxProvider.getContext(expr.getMemberCallTarget());
 			return context.getLowerBound(parameter.getParameterType());
-		} else if(reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) 
+		} else if (reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET)
 			return null;
 		return getExpectedType(expr);
 	}
 
 	protected JvmTypeReference _expectedType(XBinaryOperation expr, EReference reference, int index) {
-		if (reference == XbasePackage.Literals.XBINARY_OPERATION__RIGHT_OPERAND && expr.getFeature() instanceof JvmExecutable) {
-			JvmExecutable feature = (JvmExecutable) expr.getFeature();
-			if(index >= feature.getParameters().size())
-				return null;
-			JvmFormalParameter parameter = feature.getParameters().get(0);
+		if (reference == XbasePackage.Literals.XBINARY_OPERATION__RIGHT_OPERAND
+				&& expr.getFeature() instanceof JvmOperation) {
+			JvmOperation feature = (JvmOperation) expr.getFeature();
 			TypeArgumentContext context = typeArgCtxProvider.getContext(expr.getLeftOperand());
+			JvmFormalParameter parameter = feature.getParameters().get(0);
+			// don't call isTargetsMemberFeatureCall, since we might still be in linking
+			if (feature.getParameters().size() == 2) {
+				parameter = feature.getParameters().get(1);
+			}
 			return context.getLowerBound(parameter.getParameterType());
 		}
-		return getExpectedType(expr);
+		return null;
 	}
 
 	protected JvmTypeReference _expectedType(XVariableDeclaration expr, EReference reference, int index) {
@@ -104,7 +115,7 @@ public class XExpressionExpectedTypeProvider extends AbstractExpectedTypeProvide
 	protected JvmTypeReference _expectedType(XConstructorCall expr, EReference reference, int index) {
 		if (reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS) {
 			JvmExecutable feature = expr.getConstructor();
-			if(index >= feature.getParameters().size())
+			if (index >= feature.getParameters().size())
 				return null;
 			JvmFormalParameter parameter = feature.getParameters().get(index);
 			return parameter.getParameterType();
@@ -135,13 +146,13 @@ public class XExpressionExpectedTypeProvider extends AbstractExpectedTypeProvide
 		if (reference == XbasePackage.Literals.XFOR_LOOP_EXPRESSION__FOR_EXPRESSION) {
 			final JvmTypeReference typeForName = typeService.getTypeForName(TypesService.JAVA_LANG_ITERABLE, expr);
 			// infer the type argument for the iterable if a type has been specified
-			if (expr.getDeclaredParam().getParameterType()!=null) {
+			if (expr.getDeclaredParam().getParameterType() != null) {
 				JvmTypeReference paramType = EcoreUtil2.clone(expr.getDeclaredParam().getParameterType());
 				JvmWildcardTypeReference wildCard = factory.createJvmWildcardTypeReference();
 				JvmUpperBound upperBound = factory.createJvmUpperBound();
 				upperBound.setTypeReference(paramType);
 				wildCard.getConstraints().add(upperBound);
-				final JvmParameterizedTypeReference jvmParameterizedTypeReference = (JvmParameterizedTypeReference)typeForName;
+				final JvmParameterizedTypeReference jvmParameterizedTypeReference = (JvmParameterizedTypeReference) typeForName;
 				jvmParameterizedTypeReference.getArguments().clear();
 				jvmParameterizedTypeReference.getArguments().add(wildCard);
 				return typeForName;
@@ -195,9 +206,9 @@ public class XExpressionExpectedTypeProvider extends AbstractExpectedTypeProvide
 			return null;
 		}
 		if (reference == XbasePackage.Literals.XCASE_PART__THEN) {
-			return getExpectedType((XSwitchExpression)expr.eContainer());
+			return getExpectedType((XSwitchExpression) expr.eContainer());
 		}
 		return null;
 	}
-		
+
 }
