@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.typing.IXExpressionExpectedTypeProvider;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
+import org.eclipse.xtext.xbase.typing.TypeConverter;
 import org.eclipse.xtext.xbase.typing.TypesService;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
@@ -73,6 +74,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Inject
 	private TypesFactory factory;
+	
+	@Inject
+	private TypeConverter converter;
 
 	@Check
 	public void checkTypes(XExpression obj) {
@@ -80,6 +84,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			JvmTypeReference expectedType = expectedTypeProvider.getExpectedType(obj);
 			if (expectedType == null || expectedType.getType() == null)
 				return;
+			expectedType = converter.convert(expectedType, obj);
 			JvmTypeReference actualType = typeProvider.getConvertedType(obj);
 			if (actualType == null || actualType.getType() == null)
 				return;
@@ -143,19 +148,19 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 
 	@Check
-	public void checkInvalidCast(XCastedExpression cast) {
+	public void checkCasts(XCastedExpression cast) {
 		JvmTypeReference targetTypeRef = typeProvider.getConvertedType(cast.getTarget());
 		if (targetTypeRef.getType() instanceof JvmDeclaredType) {
 			JvmDeclaredType targetType = (JvmDeclaredType) targetTypeRef.getType();
 			if (targetType.isFinal() && !conformanceComputer.isConformant(cast.getType(), targetTypeRef)) {
 				error("Cannot cast element of sealed type " + canonicalName(targetTypeRef) + " to "
 						+ canonicalName(cast.getType()), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_CAST);
-			} else if (!isInterface(cast.getType().getType()) && !isInterface(targetType)) {
-				if (conformanceComputer.isConformant(cast.getType(), targetTypeRef))
+			} else {
+				if (conformanceComputer.isConformant(cast.getType(), targetTypeRef)) {
 					warning("Cast is obsolete", null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, OBSOLETE_CAST);
-				else
-					error("Incompatible types " + canonicalName(targetTypeRef) + " and "
-							+ canonicalName(cast.getType()), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_CAST);
+				} else if (!conformanceComputer.isConformant(targetTypeRef, cast.getType())) {
+					error("type mismatch: cannot convert from "+canonicalName(targetTypeRef)+" to "+canonicalName(cast.getType()),null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_CAST);
+				}
 			}
 		}
 	}
@@ -164,17 +169,21 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	public void checkInstanceOf(XInstanceOfExpression instanceOfExpression) {
 		JvmTypeReference expressionTypeRef = typeProvider.getConvertedType(instanceOfExpression.getExpression());
 		if (expressionTypeRef.getType() instanceof JvmDeclaredType) {
-			JvmDeclaredType targetType = (JvmDeclaredType) expressionTypeRef.getType();
 			boolean isConformant = isConformant(instanceOfExpression.getType(), expressionTypeRef);
 			if (isConformant) {
-				warning("Condition is always true", null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, OBSOLETE_INSTANCEOF);
+				warning("The expression of type " + canonicalName(expressionTypeRef) + " is already of type "
+						+ canonicalName(instanceOfExpression.getType()), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, OBSOLETE_INSTANCEOF);
 			} else {
-				if (!(isInterface(instanceOfExpression.getType()) || isInterface(targetType)) || targetType.isFinal()) {
-					error("Incompatible types " + canonicalName(expressionTypeRef) + " and "
+				if (isFinal(expressionTypeRef)) {
+					error("Incompatible conditional operand types " + canonicalName(expressionTypeRef) + " and "
 							+ canonicalName(instanceOfExpression.getType()), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_INSTANCEOF);
 				}
 			}
 		}
+	}
+
+	protected boolean isFinal(JvmTypeReference expressionTypeRef) {
+		return expressionTypeRef.getType() instanceof JvmDeclaredType && ((JvmDeclaredType)expressionTypeRef.getType()).isFinal();
 	}
 
 	@Check
