@@ -20,12 +20,12 @@ public class IgnoreCaseLinkingWithNamespaceImportsTest extends AbstractIgnoreCas
 	
 	@Override
 	public void testWithImports() throws Exception {
-		String input = "'b.*' a C { b a { c B {} c a {} } }";
+		String input = "'a.b.*' a C { b a { c B {} d a {} } }";
 		getModel(input);
 	}
 	
-	public void testWithImportsIgnoreCase() throws Exception {
-		String input = "'B.*' a C { b a { c B {} c a {} } }";
+	public void testWithImportsIgnoreCase_01() throws Exception {
+		String input = "'A.B.*' a C { b a { c B {} d a {} } }";
 		getModel(input);
 	}
 	
