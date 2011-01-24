@@ -32,6 +32,9 @@ import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
  * don't throw exceptions on invalid models.
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
+ * 
+ * TODO connect all model listeners (highlighting, outline) and compiler to
+ * verify that they do not throw any exceptions.
  */
 public class LinkingErrornessModelTest extends AbstractXtend2TestCase {
 	
