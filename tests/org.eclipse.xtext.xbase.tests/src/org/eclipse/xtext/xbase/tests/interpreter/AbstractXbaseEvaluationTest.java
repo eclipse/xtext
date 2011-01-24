@@ -260,6 +260,10 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 		assertEvaluatesTo(new Integer("literal".length()), "{ var this = 'literal' length }");
 	}
 	
+	public void testConstructorCall_00() throws Exception {
+		assertEvaluatesTo("", "new String()");
+	}
+	
 	public void testAssignment_01() {
 		assertEvaluatesTo("newValue", "{var x = 'literal' x = 'newValue'}");
 	}

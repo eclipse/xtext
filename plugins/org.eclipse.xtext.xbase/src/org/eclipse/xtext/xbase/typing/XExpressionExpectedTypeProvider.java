@@ -80,7 +80,7 @@ public class XExpressionExpectedTypeProvider extends AbstractExpectedTypeProvide
 	}
 
 	protected JvmTypeReference _expectedType(XBinaryOperation expr, EReference reference, int index) {
-		if (reference == XbasePackage.Literals.XBINARY_OPERATION__RIGHT_OPERAND) {
+		if (reference == XbasePackage.Literals.XBINARY_OPERATION__RIGHT_OPERAND && expr.getFeature() instanceof JvmExecutable) {
 			JvmExecutable feature = (JvmExecutable) expr.getFeature();
 			if(index >= feature.getParameters().size())
 				return null;
