@@ -60,8 +60,16 @@ public class Xtend2Compiler extends XbaseCompiler {
 		}
 		appendable.append(") {");
 		appendable.increaseIndentation();
+		declareThis(obj, appendable);
 		compile(obj.getExpression(), appendable);
 		appendable.decreaseIndentation();
 		appendable.append("\n}");
+	}
+
+	protected void declareThis(XtendFunction obj, IAppendable appendable) {
+		appendable.append("\nfinal ");
+		final XtendClass clazz = (XtendClass) obj.eContainer();
+		appendable.append(clazz.getName()).append(" _this = this;");
+		appendable.declareVariable(clazz, "_this");
 	}
 }
