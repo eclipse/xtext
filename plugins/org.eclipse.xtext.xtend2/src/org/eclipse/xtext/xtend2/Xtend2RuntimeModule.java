@@ -7,9 +7,11 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider;
+import org.eclipse.xtext.xbase.linking.XbaseLinkingScopeProvider;
 import org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider;
 import org.eclipse.xtext.xbase.typing.IXExpressionExpectedTypeProvider;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
@@ -59,6 +61,11 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 	@Override
 	public void configureIScopeProviderDelegate(Binder binder) {
 		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(XbaseImportedNamespaceScopeProvider.class);
+	}
+	
+	@Override
+	public void configureLinkingIScopeProvider(Binder binder) {
+		binder.bind(IScopeProvider.class).annotatedWith(LinkingScopeProviderBinding.class).to(XbaseLinkingScopeProvider.class);
 	}
 	
 	@Override
