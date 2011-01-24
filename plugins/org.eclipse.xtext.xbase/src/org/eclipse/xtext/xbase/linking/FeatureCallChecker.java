@@ -217,6 +217,8 @@ public class FeatureCallChecker {
 			XExpression expression = arguments.get(i);
 			JvmTypeReference type = getTypeProvider().getConvertedType(expression);
 			JvmTypeReference declaredType = input.getParameters().get(i + memberCallDelta).getParameterType();
+			if (declaredType==null) 
+				return null;
 			if (!isCompatibleArgument(declaredType, type, context, jvmFeatureDescription))
 				return INVALID_ARGUMENT_TYPES;
 		}

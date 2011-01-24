@@ -11,7 +11,9 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider;
+import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 import com.google.inject.Inject;
 
@@ -22,10 +24,19 @@ public class Xtend2IdentifiableTypeProvider extends IdentifiableTypeProvider {
 	
 	@Inject
 	private TypesFactory factory;
+	
+	@Inject
+	private IXExpressionTypeProvider typeProvider;
 
 	protected JvmTypeReference _type(XtendClass clazz) {
 		JvmParameterizedTypeReference typeReference = factory.createJvmParameterizedTypeReference();
 		typeReference.setType(clazz);
 		return typeReference;
+	}
+	
+	protected JvmTypeReference _type(XtendFunction func) {
+		if (func.getReturnType()!=null)
+			return func.getReturnType();
+		return typeProvider.getType(func.getExpression());
 	}
 }

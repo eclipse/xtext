@@ -23,13 +23,28 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		assertCompilesTo(expected, input);
 	}
 	
-	
+	public void testConstructor() throws Exception {
+		final String input = 
+		"package foo\n" +
+		"class Bar {\n" +
+		"  foo() new String()\n" +
+		"}\n";
+		final String expected =  
+		"package foo;\n" +
+		"\n" + 
+		"public class Bar {\n" + 
+		"  public java.lang.String foo() {\n" + 
+		"    return new java.lang.String();\n" + 
+		"  }\n" + 
+		"}";
+		assertCompilesTo(expected, input);
+	}
 
 	protected void assertFunctionCompilesTo(final String expected, final String input) throws Exception {
 //		assertCompilesTo("public class X {\n"+expected+"", input)
 	}
 	protected void assertCompilesTo(final String expected, final String input) throws Exception {
-		XtendFile file = file(input);
+		XtendFile file = file(input,true);
 		Xtend2Compiler compiler = get(Xtend2Compiler.class);
 		final IAppendable.StringBuilderBasedAppendable appendable = new IAppendable.StringBuilderBasedAppendable();
 		compiler.compile(file, appendable);

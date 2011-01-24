@@ -23,9 +23,11 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.util.Wrapper;
 
 import com.google.common.collect.Maps;
+import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -38,6 +40,10 @@ public class TypeArgumentContext {
 	private JvmDeclaredType objectType;
 
 	public TypeArgumentContext(Map<JvmTypeParameter, JvmTypeReference> context, JvmDeclaredType objectType) {
+		if (context==null)
+			throw new NullPointerException("context");
+		if (objectType==null)
+			throw new NullPointerException("objectType");
 		this.context = context;
 		this.objectType = objectType;
 	}
@@ -153,6 +159,13 @@ public class TypeArgumentContext {
 
 	public static class Provider {
 		
+		@Inject
+		private IJvmTypeProvider.Factory typeProviderFactory;
+
+		public void setTypeProviderFactory(IJvmTypeProvider.Factory typeProviderFactory) {
+			this.typeProviderFactory = typeProviderFactory;
+		}
+		
 		public Provider() {
 		}
 		
@@ -161,6 +174,10 @@ public class TypeArgumentContext {
 				throw new NullPointerException("contextReference");
 			Map<JvmTypeParameter, JvmTypeReference> context = Maps.newHashMap();
 			JvmDeclaredType objectType = internalComputeContext(contextRef, context);
+			if (objectType==null) {
+				IJvmTypeProvider provider = typeProviderFactory.createTypeProvider(contextRef.getType().eResource().getResourceSet());
+				objectType = (JvmDeclaredType) provider.findTypeByName(Object.class.getCanonicalName());
+			}
 			return new TypeArgumentContext(context, objectType);
 		}
 
@@ -183,9 +200,11 @@ public class TypeArgumentContext {
 			JvmType type = contextRef.getType();
 			if (type instanceof JvmDeclaredType) {
 				JvmDeclaredType declaredType = (JvmDeclaredType) type;
-				if ("java.lang.Object".equals(declaredType.getCanonicalName()))
+				if (Object.class.getCanonicalName().equals(declaredType.getCanonicalName()))
 					return declaredType;
 				List<JvmTypeReference> superTypes = declaredType.getSuperTypes();
+				if (superTypes.isEmpty())
+					return null;
 				JvmDeclaredType result = null;
 				for (JvmTypeReference jvmTypeReference : superTypes) {
 					JvmDeclaredType temp = internalComputeContext(jvmTypeReference, context);
@@ -194,7 +213,7 @@ public class TypeArgumentContext {
 				}
 				return result;
 			}
-			return null;
+			throw new IllegalArgumentException("contextRef didn't point to a declared type : "+contextRef);
 		}
 	}
 }
