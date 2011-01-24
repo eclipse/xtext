@@ -29,6 +29,16 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 		assertEvaluatesTo(new Integer(9),"(9..13).iterator().next()");
 	}
 	
+	public void testStringConcatenation_00() throws Exception {
+		assertEvaluatesTo("foobar", "'foo'+('bar' as Object)");
+	}
+	public void testStringConcatenation_01() throws Exception {
+		assertEvaluatesTo("foo3", "'foo'+3");
+	}
+	public void testStringConcatenation_2() throws Exception {
+		assertEvaluatesTo("footrue", "'foo'+true");
+	}
+	
 	public void testOverriddenLocalVariables() throws Exception {
 		assertEvaluatesTo(new Integer(3),
 				"{" +
