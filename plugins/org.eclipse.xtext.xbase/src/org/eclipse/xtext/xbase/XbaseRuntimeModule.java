@@ -37,41 +37,41 @@ import com.google.inject.name.Names;
  */
 public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 	
-	public Class<? extends IQualifiedNameConverter> bindIQualifiedNameConverter() {
-		return XbaseQualifiedNameConverter.class;
-	}
-	
-	public Class<? extends org.eclipse.xtext.typing.ITypeConformanceComputer<JvmTypeReference>> bindITypeService() {
-		return IJvmTypeConformanceComputer.class;
-	}
-	
-	public Class<? extends IJvmTypeConformanceComputer> bindIJvmTypeConformanceComputer() {
-		return XbaseTypeConformanceComputer.class;
-	}
-	
-	public Class<? extends IXExpressionTypeProvider> bindITypeProvider() {
-		return XExpressionTypeProvider.class;
+	public Class<? extends IEvaluationContext> bindEvaluationContext() {
+		return DefaultEvaluationContext.class;
 	}
 	
 	public Class<? extends IXExpressionExpectedTypeProvider> bindIExpectedTypeProvider() {
 		return XExpressionExpectedTypeProvider.class;
 	}
 	
-	public Class<? extends TypeArgumentContext.Provider> bindTypeArgumentContextProvider() {
-		return XbaseTypeArgumentContextProvider.class;
+	public Class<? extends IJvmTypeConformanceComputer> bindIJvmTypeConformanceComputer() {
+		return XbaseTypeConformanceComputer.class;
 	}
 	
 	public Class<? extends IExpressionInterpreter> bindInterpreter() {
 		return XbaseInterpreter.class;
 	}
 	
-	public Class<? extends IEvaluationContext> bindEvaluationContext() {
-		return DefaultEvaluationContext.class;
+	public Class<? extends IQualifiedNameConverter> bindIQualifiedNameConverter() {
+		return XbaseQualifiedNameConverter.class;
+	}
+	
+	public Class<? extends IXExpressionTypeProvider> bindITypeProvider() {
+		return XExpressionTypeProvider.class;
+	}
+	
+	public Class<? extends org.eclipse.xtext.typing.ITypeConformanceComputer<JvmTypeReference>> bindITypeConformanceComputer() {
+		return IJvmTypeConformanceComputer.class;
 	}
 	
 	@Override
-	public void configureLinkingIScopeProvider(Binder binder) {
-		binder.bind(IScopeProvider.class).annotatedWith(LinkingScopeProviderBinding.class).to(XbaseLinkingScopeProvider.class);
+	public Class<? extends IValueConverterService> bindIValueConverterService() {
+		return XbaseValueConverterService.class;
+	}
+	
+	public Class<? extends TypeArgumentContext.Provider> bindTypeArgumentContextProvider() {
+		return XbaseTypeArgumentContextProvider.class;
 	}
 
 	@Override
@@ -80,8 +80,8 @@ public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 	}
 	
 	@Override
-	public Class<? extends IValueConverterService> bindIValueConverterService() {
-		return XbaseValueConverterService.class;
+	public void configureLinkingIScopeProvider(Binder binder) {
+		binder.bind(IScopeProvider.class).annotatedWith(LinkingScopeProviderBinding.class).to(XbaseLinkingScopeProvider.class);
 	}
 	
 }

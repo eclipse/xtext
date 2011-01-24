@@ -32,9 +32,10 @@ import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.XbasePackage.Literals;
+import org.eclipse.xtext.xbase.typing.IXExpressionExpectedTypeProvider;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
 import org.eclipse.xtext.xbase.typing.TypesService;
-import org.eclipse.xtext.xbase.typing.XExpressionExpectedTypeProvider;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
 import com.google.inject.Inject;
@@ -59,7 +60,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	private IXExpressionTypeProvider typeProvider;
 
 	@Inject
-	private XExpressionExpectedTypeProvider expectedTypeProvider;
+	private IXExpressionExpectedTypeProvider expectedTypeProvider;
 
 	@Inject
 	private IJvmTypeConformanceComputer conformanceComputer;
