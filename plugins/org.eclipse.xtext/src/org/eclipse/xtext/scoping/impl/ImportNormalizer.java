@@ -17,9 +17,12 @@ public class ImportNormalizer {
 
 	private final QualifiedName importedNamespacePrefix;
 
-	private boolean hasWildCard;
+	private final boolean hasWildCard;
 
-	public ImportNormalizer(QualifiedName importedNamespace, boolean wildCard) {
+	private final boolean ignoreCase;
+
+	public ImportNormalizer(QualifiedName importedNamespace, boolean wildCard, boolean ignoreCase) {
+		this.ignoreCase = ignoreCase;
 		if (importedNamespace == null || importedNamespace.getSegmentCount() < 1) {
 			throw new IllegalArgumentException("Imported namespace must not be null / empty");
 		}
@@ -29,12 +32,25 @@ public class ImportNormalizer {
 
 	public QualifiedName deresolve(QualifiedName fullyQualifiedName) {
 		if (hasWildCard) {
-			if (fullyQualifiedName.startsWith(importedNamespacePrefix)
-					&& fullyQualifiedName.getSegmentCount() != importedNamespacePrefix.getSegmentCount())
-				return fullyQualifiedName.skipFirst(importedNamespacePrefix.getSegmentCount());
+			if (!ignoreCase) {
+				if (fullyQualifiedName.startsWith(importedNamespacePrefix) 
+						&& fullyQualifiedName.getSegmentCount() != importedNamespacePrefix.getSegmentCount()) {
+					return fullyQualifiedName.skipFirst(importedNamespacePrefix.getSegmentCount());
+				}
+			} else {
+				if (fullyQualifiedName.startsWithIgnoreCase(importedNamespacePrefix) 
+					&& fullyQualifiedName.getSegmentCount() != importedNamespacePrefix.getSegmentCount()) {
+					return fullyQualifiedName.skipFirst(importedNamespacePrefix.getSegmentCount());
+				}
+			}
 		} else {
-			if (fullyQualifiedName.equals(importedNamespacePrefix))
-				return QualifiedName.create(fullyQualifiedName.getLastSegment());
+			if (!ignoreCase) {
+				if (fullyQualifiedName.equals(importedNamespacePrefix))
+					return QualifiedName.create(fullyQualifiedName.getLastSegment());
+			} else {
+				if (fullyQualifiedName.equalsIgnoreCase(importedNamespacePrefix))
+					return QualifiedName.create(fullyQualifiedName.getLastSegment());
+			}
 		}
 		return null;
 	}
@@ -42,8 +58,16 @@ public class ImportNormalizer {
 	public QualifiedName resolve(QualifiedName relativeName) {
 		if (hasWildCard) {
 			return importedNamespacePrefix.append(relativeName);
-		} else if (relativeName.getSegmentCount()==1 && relativeName.getLastSegment().equals(importedNamespacePrefix.getLastSegment())) {
-			return importedNamespacePrefix;
+		} else {
+			if (!ignoreCase) {
+				if (relativeName.getSegmentCount()==1 && relativeName.getLastSegment().equals(importedNamespacePrefix.getLastSegment())) {
+					return importedNamespacePrefix;
+				}
+			} else {
+				if (relativeName.getSegmentCount()==1 && relativeName.getLastSegment().equalsIgnoreCase(importedNamespacePrefix.getLastSegment())) {
+					return importedNamespacePrefix.skipLast(1).append(relativeName.getLastSegment());
+				}
+			}
 		}
 		return null;
 	}
@@ -62,7 +86,9 @@ public class ImportNormalizer {
 		if (obj instanceof ImportNormalizer) {
 			ImportNormalizer other = (ImportNormalizer)obj;
 			//TODO not ignore case aware
-			return other.hasWildCard==hasWildCard && other.importedNamespacePrefix.equals(importedNamespacePrefix);
+			return other.hasWildCard==hasWildCard &&
+				other.ignoreCase==ignoreCase &&
+				other.importedNamespacePrefix.equals(importedNamespacePrefix);
 		}
 		return false;
 	}

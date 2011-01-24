@@ -92,14 +92,14 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 	protected IScope getResourceScope(Resource res, EReference reference) {
 		EObject context = res.getContents().get(0);
 		IScope globalScope = getGlobalScope(res, reference);
-		List<ImportNormalizer> normalizers = getImplicitImports();
+		List<ImportNormalizer> normalizers = getImplicitImports(isIgnoreCase(reference));
 		if (!normalizers.isEmpty()) {
 			globalScope = createImportScope(globalScope, normalizers, null, reference.getEReferenceType(), isIgnoreCase(reference));
 		}
 		return getResourceScope(globalScope, context, reference);
 	}
 
-	protected List<ImportNormalizer> getImplicitImports() {
+	protected List<ImportNormalizer> getImplicitImports(boolean ignoreCase) {
 		return emptyList();
 	}
 
@@ -115,15 +115,15 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		return Tuples.create(ImportedNamespaceAwareLocalScopeProvider.class, context, reference);
 	}
 
-	protected List<ImportNormalizer> getImportedNamespaceResolvers(final EObject context) {
-		return cache.get(Tuples.pair(context, "imports"), context.eResource(), new Provider<List<ImportNormalizer>>() {
+	protected List<ImportNormalizer> getImportedNamespaceResolvers(final EObject context, final boolean ignoreCase) {
+		return cache.get(Tuples.create(context, ignoreCase, "imports"), context.eResource(), new Provider<List<ImportNormalizer>>() {
 			public List<ImportNormalizer> get() {
-				return internalGetImportedNamespaceResolvers(context);
+				return internalGetImportedNamespaceResolvers(context, ignoreCase);
 			}
 		});
 	}
 
-	protected List<ImportNormalizer> internalGetImportedNamespaceResolvers(final EObject context) {
+	protected List<ImportNormalizer> internalGetImportedNamespaceResolvers(final EObject context, boolean ignoreCase) {
 		List<ImportNormalizer> importedNamespaceResolvers = Lists.newArrayList();
 		SimpleAttributeResolver<EObject, String> importResolver = SimpleAttributeResolver.newResolver(String.class,
 				"importedNamespace");
@@ -131,22 +131,24 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		for (EObject child : eContents) {
 			String value = importResolver.getValue(child);
 			if (value != null) {
-				importedNamespaceResolvers.add(createImportedNamespaceResolver(value));
+				importedNamespaceResolvers.add(createImportedNamespaceResolver(value, ignoreCase));
 			}
 		}
 		return importedNamespaceResolvers;
 	}
 
-	protected ImportNormalizer createImportedNamespaceResolver(final String namespace) {
+	protected ImportNormalizer createImportedNamespaceResolver(final String namespace, boolean ignoreCase) {
 		QualifiedName importedNamespace = qualifiedNameConverter.toQualifiedName(namespace);
 		if (importedNamespace == null || importedNamespace.getSegmentCount() < 1) {
 			throw new IllegalArgumentException("Imported namespace must not be null / empty");
 		}
-		boolean hasWildCard = importedNamespace.getLastSegment().equals(getWildCard());
+		boolean hasWildCard = ignoreCase ? 
+				importedNamespace.getLastSegment().equalsIgnoreCase(getWildCard()) :
+				importedNamespace.getLastSegment().equals(getWildCard());
 		if (hasWildCard) {
-			return new ImportNormalizer(importedNamespace.skipLast(1), true);
+			return new ImportNormalizer(importedNamespace.skipLast(1), true, ignoreCase);
 		} else {
-			return new ImportNormalizer(importedNamespace, false);
+			return new ImportNormalizer(importedNamespace, false, ignoreCase);
 		}
 	}
 
@@ -155,16 +157,17 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		IScope result = parent;
 		ISelectable allDescriptions = getAllDescriptions(context.eResource());
 		QualifiedName name = getQualifiedNameOfLocalElement(context);
-		final List<ImportNormalizer> namespaceResolvers = getImportedNamespaceResolvers(context);
+		boolean ignoreCase = isIgnoreCase(reference);
+		final List<ImportNormalizer> namespaceResolvers = getImportedNamespaceResolvers(context, ignoreCase);
 		if (!namespaceResolvers.isEmpty()) {
 			if (isRelativeImport() && name!=null) {
-				ImportNormalizer localNormalizer = new ImportNormalizer(name, true); 
+				ImportNormalizer localNormalizer = new ImportNormalizer(name, true, ignoreCase); 
 				result = createImportScope(result, singletonList(localNormalizer), allDescriptions, reference.getEReferenceType(), isIgnoreCase(reference));
 			}
 			result = createImportScope(result, namespaceResolvers, null, reference.getEReferenceType(), isIgnoreCase(reference));
 		}
 		if (name!=null) {
-			ImportNormalizer localNormalizer = new ImportNormalizer(name, true); 
+			ImportNormalizer localNormalizer = new ImportNormalizer(name, true, ignoreCase); 
 			result = createImportScope(result, singletonList(localNormalizer), allDescriptions, reference.getEReferenceType(), isIgnoreCase(reference));
 		}
 		return result;
