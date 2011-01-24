@@ -152,14 +152,23 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		JvmTypeReference targetTypeRef = typeProvider.getConvertedType(cast.getTarget());
 		if (targetTypeRef.getType() instanceof JvmDeclaredType) {
 			JvmDeclaredType targetType = (JvmDeclaredType) targetTypeRef.getType();
-			if (targetType.isFinal() && !conformanceComputer.isConformant(cast.getType(), targetTypeRef)) {
-				error("Cannot cast element of sealed type " + canonicalName(targetTypeRef) + " to "
-						+ canonicalName(cast.getType()), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_CAST);
+			if (targetType.isFinal()) {
+				if (!conformanceComputer.isConformant(cast.getType(), targetTypeRef)) {
+					error("Cannot cast element of sealed type " + canonicalName(targetTypeRef) + " to "
+							+ canonicalName(cast.getType()), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_CAST);
+				} else if (conformanceComputer.isConformant(cast.getType(), targetTypeRef)) {
+					warning("Cast is obsolete", null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, OBSOLETE_CAST);
+				}
 			} else {
 				if (conformanceComputer.isConformant(cast.getType(), targetTypeRef)) {
 					warning("Cast is obsolete", null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, OBSOLETE_CAST);
-				} else if (!conformanceComputer.isConformant(targetTypeRef, cast.getType())) {
-					error("type mismatch: cannot convert from "+canonicalName(targetTypeRef)+" to "+canonicalName(cast.getType()),null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_CAST);
+				} else {
+					JvmType type = cast.getType().getType();
+					if (type instanceof JvmGenericType && !((JvmGenericType) type).isInterface()) {
+						if (!conformanceComputer.isConformant(targetTypeRef, cast.getType())) {
+							error("type mismatch: cannot convert from "+canonicalName(targetTypeRef)+" to "+canonicalName(cast.getType()),null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_CAST);
+						}
+					}
 				}
 			}
 		}

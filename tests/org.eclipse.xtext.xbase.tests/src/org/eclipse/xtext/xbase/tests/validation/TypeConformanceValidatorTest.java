@@ -23,9 +23,9 @@ import com.google.inject.Inject;
  */
 public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 
-	@Inject 
+	@Inject
 	protected ValidationTestHelper helper;
-	
+
 	public void testIfPredicate() throws Exception {
 		assertNoConformanceError("if (true) 'foo'");
 		assertConformanceError("if (27) 'foo'", XbasePackage.Literals.XINT_LITERAL, "java.lang.Integer",
@@ -44,23 +44,32 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 	public void testCast_00() throws Exception {
 		assertNoConformanceError("'foo' as Object");
 	}
-	
+
 	public void testCast_01() throws Exception {
-		assertCastError("'foo' as Boolean", XbasePackage.Literals.XCASTED_EXPRESSION,"Cannot","Boolean");
+		assertCastError("'foo' as Boolean", XbasePackage.Literals.XCASTED_EXPRESSION, "Cannot", "Boolean");
 	}
-	
+
 	public void testCast_02() throws Exception {
-		assertCastError("new NullPointerException() as StringBuilder", XbasePackage.Literals.XCASTED_EXPRESSION,"cannot","StringBuilder");
+		assertCastError("new NullPointerException() as StringBuilder", XbasePackage.Literals.XCASTED_EXPRESSION,
+				"cannot", "StringBuilder");
 	}
-	
+
 	public void testCast_03() throws Exception {
 		assertNoConformanceError("new NullPointerException() as CharSequence");
 	}
-	
+
 	public void testCast_04() throws Exception {
-		assertCastError("('foo' as CharSequence) as NullPointerException", XbasePackage.Literals.XCASTED_EXPRESSION,"cannot","CharSequence","NullPointerException");
+		// class MyNPE extends NullPointerException implements CharSequence {}
+		// TODO: should we check the actual type in case the a casted expression
+		// is an upcast?
+		assertNoConformanceError("('foo' as CharSequence) as NullPointerException");
 	}
-	
+
+	public void testCast_05() throws Exception {
+		assertCastError("('foo' as CharSequence) as Integer", XbasePackage.Literals.XCASTED_EXPRESSION, "cannot",
+				"CharSequence", "Integer");
+	}
+
 	public void testVariableDeclaration() throws Exception {
 		assertNoConformanceError("{ var s = 'foo' }");
 		assertNoConformanceError("{ var java.lang.String s = 'foo' }");
@@ -96,9 +105,8 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 		final XExpression xExpression = expression(expression, true);
 		helper.assertError(xExpression, objectType, XbaseJavaValidator.INCOMPATIBLE_TYPES, messageParts);
 	}
-	
-	protected void assertCastError(String expression, EClass objectType, String... messageParts)
-	throws Exception {
+
+	protected void assertCastError(String expression, EClass objectType, String... messageParts) throws Exception {
 		final XExpression xExpression = expression(expression, true);
 		helper.assertError(xExpression, objectType, XbaseJavaValidator.INVALID_CAST, messageParts);
 	}
@@ -107,5 +115,5 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 		final XExpression xExpression = expression(expression, true);
 		helper.assertNoError(xExpression, XbaseJavaValidator.INCOMPATIBLE_TYPES);
 	}
-	
+
 }
