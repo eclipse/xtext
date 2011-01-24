@@ -38,8 +38,8 @@ import com.google.inject.Inject;
 public class NamesAreUniqueValidator extends AbstractDeclarativeValidator {
 
 	@Inject
-	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
-
+	private IResourceServiceProvider.Registry resourceServiceProviderRegistry = IResourceServiceProvider.Registry.INSTANCE;
+	
 	@Inject
 	private INamesAreUniqueValidationHelper helper;
 
