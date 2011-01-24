@@ -37,6 +37,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		//TODO typeparams, inheritance, abstract, final
 		appendable.append("public class ").append(obj.getName()).append(" {");
 		appendable.increaseIndentation();
+		declareThis(obj, appendable);
 		for (JvmOperation op : obj.getDeclaredOperations()) {
 			if (op instanceof XtendFunction) {
 				compile((XtendFunction)op,appendable);
@@ -60,15 +61,13 @@ public class Xtend2Compiler extends XbaseCompiler {
 		}
 		appendable.append(") {");
 		appendable.increaseIndentation();
-		declareThis(obj, appendable);
 		compile(obj.getExpression(), appendable);
 		appendable.decreaseIndentation();
 		appendable.append("\n}");
 	}
 
-	protected void declareThis(XtendFunction obj, IAppendable appendable) {
-		appendable.append("\nfinal ");
-		final XtendClass clazz = (XtendClass) obj.eContainer();
+	protected void declareThis(XtendClass clazz, IAppendable appendable) {
+		appendable.append("\nprotected final ");
 		appendable.append(clazz.getName()).append(" _this = this;");
 		appendable.declareVariable(clazz, "_this");
 	}
