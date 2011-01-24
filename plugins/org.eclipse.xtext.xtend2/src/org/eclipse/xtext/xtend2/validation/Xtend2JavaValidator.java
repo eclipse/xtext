@@ -51,8 +51,12 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 		return newArrayList(Xtend2Package.eINSTANCE, XbasePackage.eINSTANCE);
 	}
 
+	public boolean executeClassPathDependentValidation = true;
+	
 	@Check
 	public void checkFileNamingConventions(XtendFile xtendFile) {
+		if (!executeClassPathDependentValidation)
+			return;
 		Resource resource = xtendFile.eResource();
 		URI resourceURI = resource.getURI();
 		String packageName = xtendFile.getPackage();
@@ -73,7 +77,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 		XtendClass xtendClass = xtendFile.getXtendClass();
 		if (xtendClass != null && xtendClass.getName() != null
 				&& !equal(resourceURI.trimFileExtension().lastSegment(), xtendClass.getName()))
-			error("The class '" + notNull(packageName) + "." + xtendClass.getName() + "' must be defined in its own file",
+			error("The class '" + (packageName!=null ? notNull(packageName) + ".":"") + xtendClass.getName() + "' must be defined in its own file",
 					xtendClass, Literals.XTEND_CLASS__NAME, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, WRONG_FILE);
 	}
 

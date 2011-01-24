@@ -48,10 +48,28 @@ public class Xtend2JavaValidatorTest extends AbstractXtend2TestCase {
 		helper.assertNoError(xtendFile, Xtend2JavaValidator.WRONG_FILE);
 	}
 	
+	public void testFileNamingConventions_3() throws Exception {
+		XtendFile xtendFile = loadExampleXtendFile();
+		xtendFile.setPackage(null);
+		helper.assertError(xtendFile, Xtend2Package.Literals.XTEND_FILE, Xtend2JavaValidator.WRONG_PACKAGE);
+		helper.assertNoError(xtendFile, Xtend2JavaValidator.WRONG_FILE);
+	}
+	
+	public void testFileNamingConventions_4() throws Exception {
+		XtendFile xtendFile = loadXtendFile("classpath:/NoPackage.xtend");
+		helper.assertNoError(xtendFile, Xtend2JavaValidator.WRONG_PACKAGE);
+		helper.assertNoError(xtendFile, Xtend2JavaValidator.WRONG_FILE);
+	}
+	
 	protected XtendFile loadExampleXtendFile() {
+		final String uri = "classpath:/test/Foo.xtend";
+		return loadXtendFile(uri);
+	}
+
+	protected XtendFile loadXtendFile(final String uri) {
 		XtextResourceSet resourceSet = new XtextResourceSet();
 		resourceSet.setClasspathURIContext(this);
-		URI classpathURI = URI.createURI("classpath:/test/Foo.xtend");
+		URI classpathURI = URI.createURI(uri);
 		URI normalizedURI = resourceSet.getURIConverter().normalize(classpathURI);
 		Resource resource = resourceSet.getResource(normalizedURI, true);
 		return (XtendFile) resource.getContents().get(0);
