@@ -11,7 +11,11 @@ import java.util.HashMap;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 
 /**
@@ -72,18 +76,21 @@ public class GlobalRegistries {
 		IResourceServiceProvider.Registry.INSTANCE.getProtocolToFactoryMap().clear();
 		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().clear();
 		IResourceServiceProvider.Registry.INSTANCE.getContentTypeToFactoryMap().clear();
+		initializeDefaults();
 	}
 	
 	public static void initializeDefaults() {
 		//EMF Standalone setup
 		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("ecore"))
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"ecore", new org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl());
+				"ecore", new EcoreResourceFactoryImpl());
 		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xmi"))
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"xmi", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
-		if (!EPackage.Registry.INSTANCE.containsKey(org.eclipse.xtext.XtextPackage.eNS_URI))
-			EPackage.Registry.INSTANCE.put(org.eclipse.xtext.XtextPackage.eNS_URI, org.eclipse.xtext.XtextPackage.eINSTANCE);
+				"xmi", new XMIResourceFactoryImpl());
+		if (!EPackage.Registry.INSTANCE.containsKey(EcorePackage.eNS_URI))
+			EPackage.Registry.INSTANCE.put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
+		if (!EPackage.Registry.INSTANCE.containsKey(XtextPackage.eNS_URI))
+			EPackage.Registry.INSTANCE.put(XtextPackage.eNS_URI, XtextPackage.eINSTANCE);
 	}
 	
 }

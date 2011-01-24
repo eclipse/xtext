@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Strings;
@@ -26,16 +27,34 @@ import com.google.common.collect.Iterables;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Sven Efftinge
  */
 public class ValidationTestHelper {
 
-	protected List<Issue> validate(EObject model) throws Exception {
+	public List<Issue> validate(EObject model) {
 		IResourceValidator validator = ((XtextResource) model.eResource()).getResourceServiceProvider()
 				.getResourceValidator();
 		return validator.validate(model.eResource(), CheckMode.ALL, CancelIndicator.NullImpl);
 	}
+	
+	public void assertNoIssues(final EObject model) {
+		final List<Issue> validate = validate(model);
+		if (!isEmpty(validate))
+			fail("Expected no issues, but got :" + validate);
+	}
+	
+	public void assertNoErrors(final EObject model) {
+		final List<Issue> validate = validate(model);
+		Iterable<Issue> issues = filter(validate, new Predicate<Issue>() {
+			public boolean apply(Issue input) {
+				return Severity.ERROR == input.getSeverity();
+			}
+		});
+		if (!isEmpty(issues))
+			fail("Expected no errors, but got :" + issues);
+	}
 
-	public void assertNoError(final EObject model, final String issuecode) throws Exception {
+	public void assertNoError(final EObject model, final String issuecode) {
 		final List<Issue> validate = validate(model);
 		Iterable<Issue> issues = filter(validate, new Predicate<Issue>() {
 			public boolean apply(Issue input) {
@@ -47,7 +66,7 @@ public class ValidationTestHelper {
 	}
 
 	public void assertError(final EObject model, final EClass objectType, final String code,
-			final String... messageParts) throws Exception {
+			final String... messageParts) {
 		final List<Issue> validate = validate(model);
 		Iterable<Issue> matchingErrors = Iterables.filter(validate, new Predicate<Issue>() {
 			public boolean apply(Issue input) {
