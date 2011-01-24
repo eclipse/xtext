@@ -20,6 +20,14 @@ public class XtendFunctionImplCustom extends XtendFunctionImpl {
 	}
 	
 	@Override
+	public String getCanonicalName() {
+		String typeName = getDeclaringType().getCanonicalName();
+		if (typeName!=null)
+			return typeName+"."+getSimpleName();
+		return getSimpleName();
+	}
+
+	@Override
 	public String toString() {
 		return EmfFormatter.objToStr(this, Xtend2Package.Literals.XTEND_FUNCTION__EXPRESSION);
 	}
