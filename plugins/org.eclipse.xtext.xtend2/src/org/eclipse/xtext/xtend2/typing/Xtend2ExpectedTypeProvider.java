@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtend2.typing;
 
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.xbase.typing.XExpressionExpectedTypeProvider;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
@@ -20,6 +21,8 @@ public class Xtend2ExpectedTypeProvider extends XExpressionExpectedTypeProvider 
 
 	protected JvmTypeReference _expectedType(XtendFunction function, EReference reference, int index) {
 		if (reference==Xtend2Package.Literals.XTEND_FUNCTION__EXPRESSION) {
+			if (function.getReturnType()==null || function.getReturnType().getType() instanceof JvmVoid)
+				return null;
 			return function.getReturnType();
 		}
 		return null;

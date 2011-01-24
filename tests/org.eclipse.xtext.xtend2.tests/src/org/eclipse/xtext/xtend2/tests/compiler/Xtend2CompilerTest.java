@@ -6,7 +6,7 @@ import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
 public class Xtend2CompilerTest extends AbstractXtend2TestCase {
-	
+
 	public void testSimple() throws Exception {
 		final String input = "package foo\n" +
 				"class Bar {\n" +
@@ -50,4 +50,6 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		compiler.compile(file, appendable);
 		assertEquals(expected,appendable.toString());
 	}
+	
+	
 }

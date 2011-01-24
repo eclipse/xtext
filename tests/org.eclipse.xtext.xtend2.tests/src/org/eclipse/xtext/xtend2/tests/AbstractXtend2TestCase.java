@@ -16,7 +16,7 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xtend2.Xtend2RuntimeModule;
 import org.eclipse.xtext.xtend2.Xtend2StandaloneSetup;
-import org.eclipse.xtext.xtend2.validation.Xtend2JavaValidator;
+import org.eclipse.xtext.xtend2.validation.ClasspathBasedChecks;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
@@ -26,7 +26,10 @@ import com.google.inject.Injector;
 
 public abstract class AbstractXtend2TestCase extends TestCase {
 
-	static Injector injector = new Xtend2StandaloneSetup() {
+	static Injector injector = new TestSetup().createInjectorAndDoEMFRegistration();
+
+	public static class TestSetup extends Xtend2StandaloneSetup {
+		
 		@Override
 		public Injector createInjector() {
 			return Guice.createInjector(new Xtend2RuntimeModule() {
@@ -35,9 +38,19 @@ public abstract class AbstractXtend2TestCase extends TestCase {
 					return AbstractXtend2TestCase.class.getClassLoader();
 				}
 
+				@SuppressWarnings("unused")
+				public ClasspathBasedChecks bindClassPathBasedChecks() {
+					return new ClasspathBasedChecks() {
+						@Override
+						public void checkFileNamingConventions(XtendFile xtendFile) {
+							// disabled
+						}
+					};
+				}
+
 			});
 		}
-	}.createInjectorAndDoEMFRegistration();
+	}
 
 	@Override
 	protected void setUp() throws Exception {
@@ -67,18 +80,12 @@ public abstract class AbstractXtend2TestCase extends TestCase {
 		resource.load(new StringInputStream(string), null);
 		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
 		if (validate) {
-			setTestModeValidation(true);
 			List<Issue> issues = ((XtextResource) resource).getResourceServiceProvider().getResourceValidator()
 					.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
 			assertTrue("Resource contained errors : " + issues.toString(), issues.isEmpty());
-			setTestModeValidation(false);
 		}
 		XtendFile file = (XtendFile) resource.getContents().get(0);
 		return file;
-	}
-
-	protected void setTestModeValidation(boolean b) {
-		get(Xtend2JavaValidator.class).executeClassPathDependentValidation = !b;
 	}
 
 	protected String getFileName(String string) {

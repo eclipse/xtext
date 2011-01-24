@@ -8,16 +8,18 @@ import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.xbase.XbaseQualifiedNameConverter;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider;
 import org.eclipse.xtext.xbase.linking.XbaseLinkingScopeProvider;
 import org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider;
 import org.eclipse.xtext.xbase.typing.IXExpressionExpectedTypeProvider;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
+import org.eclipse.xtext.xbase.typing.XExpressionTypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
-import org.eclipse.xtext.xbase.typing.XExpressionTypeProvider;
 import org.eclipse.xtext.xtend2.conversion.Xtend2ValueConverterService;
 import org.eclipse.xtext.xtend2.featurecalls.Xtend2IdentifiableTypeProvider;
 import org.eclipse.xtext.xtend2.typing.Xtend2ExpectedTypeProvider;
@@ -30,32 +32,42 @@ import com.google.inject.name.Names;
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2RuntimeModule {
-	public Class<? extends org.eclipse.xtext.typing.ITypeConformanceComputer<JvmTypeReference>> bindITypeService() {
-		return IJvmTypeConformanceComputer.class;
-	}
 	
-	public Class<? extends IJvmTypeConformanceComputer> bindIJvmTypeConformanceComputer() {
-		return XbaseTypeConformanceComputer.class;
-	}
-	
-	public Class<? extends IXExpressionTypeProvider> bindITypeProvider() {
-		return XExpressionTypeProvider.class;
-	}
-	
-	public Class<? extends XExpressionTypeProvider> bindXbaseTypeProvider() {
-		return Xtend2TypeProvider.class;
+	public Class<? extends IdentifiableTypeProvider> bindIdentifiableTypeProvider() {
+		return Xtend2IdentifiableTypeProvider.class;
 	}
 	
 	public Class<? extends IXExpressionExpectedTypeProvider> bindIExpectedTypeProvider() {
 		return Xtend2ExpectedTypeProvider.class;
 	}
 	
-	public Class<? extends IdentifiableTypeProvider> bindIdentifiableTypeProvider() {
-		return Xtend2IdentifiableTypeProvider.class;
+	public Class<? extends IJvmTypeConformanceComputer> bindIJvmTypeConformanceComputer() {
+		return XbaseTypeConformanceComputer.class;
+	}
+	
+	public Class<? extends IQualifiedNameConverter> bindIQualifiedNameConverter() {
+		return XbaseQualifiedNameConverter.class;
+	}
+	
+	public Class<? extends IXExpressionTypeProvider> bindITypeProvider() {
+		return XExpressionTypeProvider.class;
+	}
+	
+	public Class<? extends org.eclipse.xtext.typing.ITypeConformanceComputer<JvmTypeReference>> bindITypeConformanceComputer() {
+		return IJvmTypeConformanceComputer.class;
+	}
+	
+	@Override
+	public Class<? extends IValueConverterService> bindIValueConverterService() {
+		return Xtend2ValueConverterService.class;
 	}
 
 	public Class<? extends TypeArgumentContext.Provider> bindTypeArgumentContextProvider() {
 		return XbaseTypeArgumentContextProvider.class;
+	}
+	
+	public Class<? extends XExpressionTypeProvider> bindXExpressionTypeProvider() {
+		return Xtend2TypeProvider.class;
 	}
 	
 	@Override
@@ -66,11 +78,6 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 	@Override
 	public void configureLinkingIScopeProvider(Binder binder) {
 		binder.bind(IScopeProvider.class).annotatedWith(LinkingScopeProviderBinding.class).to(XbaseLinkingScopeProvider.class);
-	}
-	
-	@Override
-	public Class<? extends IValueConverterService> bindIValueConverterService() {
-		return Xtend2ValueConverterService.class;
 	}
 	
 }
