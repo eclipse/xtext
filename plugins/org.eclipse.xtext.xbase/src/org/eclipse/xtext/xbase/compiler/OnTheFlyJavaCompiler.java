@@ -190,6 +190,7 @@ public class OnTheFlyJavaCompiler {
 		tempDir += File.separator;
 		final String classNameAsPath = classname.replace('.', File.separatorChar);
 		final File srcFile = new File(tempDir + classNameAsPath + ".java");
+		createFolderStructure(srcFile.getParentFile());
 		final File targetFile = new File(tempDir + classNameAsPath + ".class");
 		try {
 			Files.writeStringIntoFile(srcFile.getCanonicalPath(), code);
@@ -202,7 +203,8 @@ public class OnTheFlyJavaCompiler {
 			boolean compile = compile(sb.toString());
 			if (!compile)
 				throw new IllegalArgumentException("Couldn't compile : " + errorStream.toString());
-			URLClassLoader loader = new URLClassLoader(new URL[] { targetFile.getParentFile().toURI().toURL() }, parentClassLoader);
+			final URL url = new File(tempDir).toURI().toURL();
+			URLClassLoader loader = new URLClassLoader(new URL[] { url }, parentClassLoader);
 			Class<?> class1 = loader.loadClass(classname);
 			return class1;
 		} catch (RuntimeException e) {
@@ -215,6 +217,12 @@ public class OnTheFlyJavaCompiler {
 			if (targetFile.exists())
 				targetFile.delete();
 		}
+	}
+
+	protected void createFolderStructure(File parent) {
+		if (parent.exists())
+			return;
+		parent.mkdirs();
 	}
 
 	protected boolean compile(String arguments) {

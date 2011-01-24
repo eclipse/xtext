@@ -5,13 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.tests.interpreter;
+package org.eclipse.xtext.xbase.junit.evaluation;
 
 import java.util.Collections;
 import java.util.Stack;
 
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-
+import junit.framework.TestCase;
 import testdata.ExceptionSubclass;
 
 import com.google.inject.internal.Lists;
@@ -20,7 +19,7 @@ import com.google.inject.internal.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
  */
-public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase {
+public abstract class AbstractXbaseEvaluationTest extends TestCase {
 
 	protected abstract void assertEvaluatesTo(Object object, String string);
 	protected abstract void assertEvaluatesWithException(Class<? extends Throwable> class1, String string);
@@ -30,7 +29,7 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 	}
 	
 	public void testStringConcatenation_00() throws Exception {
-		assertEvaluatesTo("foobar", "'foo'+('bar' as Object)");
+		assertEvaluatesTo("foobar", "'foo'+ ('bar' as Object)");
 	}
 	public void testStringConcatenation_01() throws Exception {
 		assertEvaluatesTo("foo3", "'foo'+3");
@@ -505,7 +504,7 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 	
 	public void testSpreadOperator_01() {
 		assertEvaluatesWithException(NullPointerException.class, "(null as java.util.List<Object>)*.toString()");
-		assertEvaluatesWithException(ClassCastException.class, "('' as java.util.List<Object>)*.toString()");
+		assertEvaluatesWithException(ClassCastException.class, "(new Object() as java.util.List<Object>)*.toString()");
 	}
 	
 	public void testSpreadOperator_02() {
@@ -631,7 +630,7 @@ public abstract class AbstractXbaseEvaluationTest extends AbstractXbaseTestCase 
 	}
 	
 	public void testThrowExpression_02() {
-		assertEvaluatesWithException(ClassCastException.class, "throw 'literal' as Object as RuntimeException");
+		assertEvaluatesWithException(ClassCastException.class, "throw (new Object() as RuntimeException)");
 	}
 	
 	public void testThrowExpression_03() {
