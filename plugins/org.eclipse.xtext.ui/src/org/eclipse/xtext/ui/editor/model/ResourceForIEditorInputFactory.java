@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IStorageEditorInput;
 import org.eclipse.xtext.resource.IExternalContentSupport;
+import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
@@ -31,6 +32,9 @@ public class ResourceForIEditorInputFactory implements IResourceForEditorInputFa
 
 	@Inject
 	private IResourceSetProvider resourceSetProvider;
+	
+	@Inject
+	private IResourceFactory resourceFactory;
 
 	@Inject
 	private IExternalContentSupport externalContentSupport;
@@ -66,12 +70,15 @@ public class ResourceForIEditorInputFactory implements IResourceForEditorInputFa
 		ResourceSet resourceSet = getResourceSet(storage);
 		URI uri = URI.createPlatformResourceURI(storage.getFullPath().toString(), true);
 		configureResourceSet(resourceSet, uri);
-		XtextResource resource = createResource(resourceSet, uri);
+		URI normalized = resourceSet.getURIConverter().normalize(uri);
+		XtextResource resource = (XtextResource) resourceFactory.createResource(normalized);
+		resourceSet.getResources().add(resource);
 		resource.setValidationDisabled(false);
 		return resource;
 	}
 
 	protected XtextResource createResource(ResourceSet resourceSet, URI uri) {
+		//TODO use the resource factory directly (injected), since the use might open any file with this editor.
 		Resource aResource = resourceSet.createResource(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		if (!(aResource instanceof XtextResource))
 			throw new IllegalStateException("The resource factory registered for " + uri
