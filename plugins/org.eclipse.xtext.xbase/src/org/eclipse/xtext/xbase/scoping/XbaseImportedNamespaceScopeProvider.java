@@ -21,7 +21,7 @@ import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 public class XbaseImportedNamespaceScopeProvider extends ImportedNamespaceAwareLocalScopeProvider {
 	
 	@Override
-	protected List<ImportNormalizer> getImplicitImports() {
-		return singletonList(new ImportNormalizer(QualifiedName.create("java","lang"), true));
+	protected List<ImportNormalizer> getImplicitImports(boolean ignoreCase) {
+		return singletonList(new ImportNormalizer(QualifiedName.create("java","lang"), true, ignoreCase));
 	}
 }
