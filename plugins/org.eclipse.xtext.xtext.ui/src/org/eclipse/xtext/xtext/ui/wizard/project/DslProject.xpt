@@ -26,7 +26,7 @@ import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
 var grammarURI = "classpath:/«this.basePackagePath»/«this.languageNameAbbreviation».xtext"
-var file.extensions = "«this.firstFileExtension»"
+var file.extensions = "«this.fileExtension»"
 var projectName = "«this.projectName»"
 var runtimeProject = "../${projectName}"
 
