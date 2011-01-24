@@ -72,9 +72,27 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 	@Override
 	public void checkConfiguration(Issues issues) {
 		super.checkConfiguration(issues);
+		if (isCheckFileExtension()) {
+			for (String extension : fileExtensions) {
+				char[] charArray = extension.toCharArray();
+				if (!Character.isJavaIdentifierPart(charArray[0])) {
+					issues.addError("file extension '"+extension+"' starts with a non identifier letter : '"+charArray[0]+"'", this);
+				}
+				for (int i = 1; i < charArray.length; i++) {
+					char c = charArray[i];
+					if (!Character.isJavaIdentifierPart(c)) {
+						issues.addError("file extension '"+extension+"' contains non identifier letter : '"+c+"'", this);
+					}
+				}
+			}
+		}
 		if (getGrammar() == null) {
 			issues.addError("property 'uri' is mandatory for element 'language'.", this);
 		}
+	}
+	
+	protected boolean isCheckFileExtension() {
+		return true;
 	}
 
 	public void setFileExtensions(String fileExtensions) {
