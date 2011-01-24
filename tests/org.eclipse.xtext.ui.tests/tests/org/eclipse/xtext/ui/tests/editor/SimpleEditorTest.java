@@ -68,6 +68,12 @@ public class SimpleEditorTest extends AbstractEditorTest {
 		});
 		openedEditor.close(false);
 	}
+	
+	public void testOpenFileWithWrongFileExtension() throws Exception {
+		IFile file = createFile("foo/y.unkownextension", "/* multi line */\n" + "stuff foo\n" + "stuff bar\n" + "// end");
+		XtextEditor openEditor = openEditor(file);
+		assertNotNull(openEditor);
+	}
 
 	public void testOpenFileReadModifyRead() throws Exception {
 		IFile file = createFile("foo/y.testlanguage", "/* multi line */\n" + "stuff foo\n" + "stuff bar\n" + "// end");
