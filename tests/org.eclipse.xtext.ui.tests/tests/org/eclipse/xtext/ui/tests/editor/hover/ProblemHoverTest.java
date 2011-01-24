@@ -76,9 +76,15 @@ public class ProblemHoverTest extends AbstractEditorTest {
 	public void testAnnotations () {	
 		assertNull(hover.getHoverInfo(editor.getInternalSourceViewer(), new Region(34, 1)));
 		assertEquals("Couldn't resolve reference to Stuff '_mystuff'.", hover.getHoverInfo(editor.getInternalSourceViewer(), new Region(35, 7)));
-		assertEquals ("Multiple markers at this line\n"+
-				"- Couldn't resolve reference to Stuff '_mystuff'.\n"+
-				"- Couldn't resolve reference to Stuff '_yourstuff'.", hover.getHoverInfo(editor.getInternalSourceViewer(), 1));
+		
+		//The order of annotations in the annotation model is not stable
+		final String hoverInfo = hover.getHoverInfo(editor.getInternalSourceViewer(), 1);
+		String expected1 = "Multiple markers at this line\n";
+		String expected2 = "- Couldn't resolve reference to Stuff '_mystuff'.";
+		String expected3 = "- Couldn't resolve reference to Stuff '_yourstuff'.";
+		assertTrue(hoverInfo.startsWith(expected1));
+		assertTrue(hoverInfo.contains(expected2));
+		assertTrue(hoverInfo.contains(expected3));
 	}
 
 	protected void activate(IWorkbenchPart part) {
