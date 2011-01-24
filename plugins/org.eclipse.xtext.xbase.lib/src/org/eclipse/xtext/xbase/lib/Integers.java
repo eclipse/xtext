@@ -55,7 +55,7 @@ public class Integers {
 		};
 	}
 	
-	static class IntIterator implements Iterator<Integer> {
+	protected static class IntIterator implements Iterator<Integer> {
 			private int current;
 			private int upTo;
 			private boolean increases;
