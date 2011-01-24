@@ -14,7 +14,8 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 				"}\n";
 		final String expected = "package foo;\n" + 
 				"\n" + 
-				"public class Bar {\n" + 
+				"public class Bar {\n" +
+				"  protected final Bar _this = this;\n" + 
 				"  public java.lang.Integer doStuff(java.lang.String x) {\n" + 
 				"    java.lang.Integer length = x.length();\n" + 
 				"    return length;\n" + 
@@ -32,7 +33,8 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		final String expected =  
 		"package foo;\n" +
 		"\n" + 
-		"public class Bar {\n" + 
+		"public class Bar {\n" +
+		"  protected final Bar _this = this;\n" + 
 		"  public java.lang.String foo() {\n" + 
 		"    return new java.lang.String();\n" + 
 		"  }\n" + 
