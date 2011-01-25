@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -145,6 +144,10 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	@Inject
 	private Injector injector;
 	
+	public void setInjector(Injector injector) {
+		this.injector = injector;
+	}
+	
 	public AbstractDeclarativeValidator() {
 		this.state = new ThreadLocal<State>();
 		this.messageAcceptor = this;
@@ -194,26 +197,10 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		if (!visitedClasses.add(clazz))
 			return;
 		AbstractDeclarativeValidator instanceToUse;
-		try {
 			instanceToUse = instance;
 			if (instanceToUse == null) {
-				if (injector == null)
-					instanceToUse = clazz.newInstance();
-				else
-					instanceToUse = injector.getInstance(clazz);
+				instanceToUse = newInstance(clazz);
 			}
-		}
-		catch (Exception e) {
-			try {
-				Constructor<? extends AbstractDeclarativeValidator> constr = null;
-				constr = clazz.getDeclaredConstructor();
-				constr.setAccessible(true);
-				instanceToUse = constr.newInstance();
-			}
-			catch (Exception ex) {
-				return;
-			}
-		}
 		Method[] methods = clazz.getDeclaredMethods();
 		for (Method method : methods) {
 			if (method.getAnnotation(Check.class) != null && method.getParameterTypes().length == 1) {
@@ -223,6 +210,14 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		Class<? extends AbstractDeclarativeValidator> superClass = getSuperClass(clazz);
 		if (superClass != null)
 			collectMethodsImpl(instanceToUse, superClass, visitedClasses, result);
+	}
+
+	protected AbstractDeclarativeValidator newInstance(Class<? extends AbstractDeclarativeValidator> clazz) {
+		AbstractDeclarativeValidator instanceToUse;
+		if (injector == null)
+			throw new IllegalStateException("the class is not configured with an injector.");
+		instanceToUse = injector.getInstance(clazz);
+		return instanceToUse;
 	}
 
 	private final SimpleCache<Class<?>, List<MethodWrapper>> methodsForType = new SimpleCache<Class<?>, List<MethodWrapper>>(
