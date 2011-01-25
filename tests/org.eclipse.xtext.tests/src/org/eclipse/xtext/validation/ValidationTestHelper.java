@@ -35,7 +35,8 @@ public class ValidationTestHelper {
 	}
 
 	public TestValidator validator() {
-		return new TestValidator();
+		final TestValidator testValidator =  new TestValidator();
+		return testValidator;
 	}
 
 	public final class TestChain implements DiagnosticChain {
@@ -66,6 +67,16 @@ public class ValidationTestHelper {
 
 	@ComposedChecks(validators = { ExternalValidator.class })
 	public static class TestValidator extends AbstractDeclarativeValidator {
+		
+		@Override
+		protected AbstractDeclarativeValidator newInstance(Class<? extends AbstractDeclarativeValidator> clazz) {
+			try {
+				return clazz.newInstance();
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
+		
 		@Check
 		protected void foo(EStructuralFeature x) {
 			error("fooInteger", EcorePackage.Literals.ESTRUCTURAL_FEATURE__CHANGEABLE);
@@ -78,7 +89,17 @@ public class ValidationTestHelper {
 	}
 
 	@ComposedChecks(validators = { TestValidator.class })
-	private static class ExternalValidator extends AbstractDeclarativeValidator {
+	protected static class ExternalValidator extends AbstractDeclarativeValidator {
+		
+		@Override
+		protected AbstractDeclarativeValidator newInstance(Class<? extends AbstractDeclarativeValidator> clazz) {
+			try {
+				return clazz.newInstance();
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
+		
 		@SuppressWarnings("unused")
 		@Check
 		private void foo(EClass x) {
