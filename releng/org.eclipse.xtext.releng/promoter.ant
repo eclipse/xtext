@@ -180,7 +180,7 @@
 		<delete verbose="true">
 			<fileset dir="${downloads.area}/downloads/drops/${version}/">
 				<type type="dir" />
-				<filename name="N*" />
+				<include name="N*"/>
 			</fileset>
 		</delete>
 
