@@ -74,47 +74,6 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 	public void testSpreadOperator_02() {
 	}
 
-	//TODO implement switch expression
-	@Override
-	public void testSwitchExpression_01() {
-	}
-
-	@Override
-	public void testSwitchExpression_02() {
-	}
-
-	@Override
-	public void testSwitchExpression_03() {
-	}
-
-	@Override
-	public void testSwitchExpression_04() {
-	}
-
-	@Override
-	public void testSwitchExpression_05() {
-	}
-
-	@Override
-	public void testSwitchExpression_06() {
-	}
-
-	@Override
-	public void testSwitchExpression_07() {
-	}
-
-	@Override
-	public void testSwitchExpression_08() {
-	}
-
-	@Override
-	public void testSwitchExpression_09() {
-	}
-
-	@Override
-	public void testSwitchExpression_10() {
-	}
-
 	@Override
 	protected void assertEvaluatesTo(Object object, String string) {
 		final String compileToJavaCode = compileToJavaCode(string);

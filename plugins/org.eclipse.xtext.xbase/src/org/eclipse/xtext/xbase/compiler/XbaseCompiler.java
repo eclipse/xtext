@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.compiler;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
@@ -24,13 +25,13 @@ import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
+import org.eclipse.xtext.xbase.lib.Objects;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XbaseCompiler extends FeatureCallCompiler {
-	
-	
+
 	protected void openBlock(XExpression xExpression, IAppendable b) {
 		if (xExpression instanceof XBlockExpression) {
 			return;
@@ -56,7 +57,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			} else {
 				internalPrepare(ex, b);
 				if (!isEarlyMethodInterruption(ex)) {
-					b.append("\n").append(getJavaVarName(expr,b)).append(" = (");
+					b.append("\n").append(getJavaVarName(expr, b)).append(" = (");
 					internalToJavaExpression(ex, b);
 					b.append(");");
 				}
@@ -66,7 +67,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	public void _toJavaExpression(XBlockExpression expr, IAppendable b) {
-		b.append(getJavaVarName(expr,b));
+		b.append(getJavaVarName(expr, b));
 	}
 
 	public void _toJavaStatement(XBlockExpression expr, IAppendable b) {
@@ -86,7 +87,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append("\ntry {").increaseIndentation();
 		internalPrepare(expr.getExpression(), b);
 		if (!isEarlyMethodInterruption(expr.getExpression())) {
-			b.append("\n").append(getJavaVarName(expr,b)).append(" = ");
+			b.append("\n").append(getJavaVarName(expr, b)).append(" = ");
 			internalToJavaExpression(expr.getExpression(), b);
 			b.append(";");
 		}
@@ -98,12 +99,11 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		for (XCatchClause catchClause : expr.getCatchClauses()) {
 			JvmTypeReference type = catchClause.getDeclaredParam().getParameterType();
 			final String name = declareNameInVariableScope(catchClause.getDeclaredParam(), b);
-			b.append(" catch (").append(getSerializedForm(type)).append(" ")
-					.append(name).append(") { ");
+			b.append(" catch (").append(getSerializedForm(type)).append(" ").append(name).append(") { ");
 			b.increaseIndentation();
 			internalPrepare(catchClause.getExpression(), b);
 			if (!isEarlyMethodInterruption(catchClause.getExpression())) {
-				b.append("\n").append(getJavaVarName(expr,b)).append(" = ");
+				b.append("\n").append(getJavaVarName(expr, b)).append(" = ");
 				internalToJavaExpression(catchClause.getExpression(), b);
 				b.append(";");
 			}
@@ -118,9 +118,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			closeBlock(finallyExp, b);
 		}
 	}
-	
+
 	public void _toJavaExpression(XTryCatchFinallyExpression expr, IAppendable b) {
-		b.append(getJavaVarName(expr,b));
+		b.append(getJavaVarName(expr, b));
 	}
 
 	public void _toJavaStatement(XTryCatchFinallyExpression expr, IAppendable b) {
@@ -181,7 +181,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.append(getReturnTypeName(expr.getRight()));
 		}
 		b.append(" ");
-		b.append(declareNameInVariableScope(expr,b));
+		b.append(declareNameInVariableScope(expr, b));
 		b.append(" = ");
 		internalToJavaExpression(expr.getRight(), b);
 		b.append(";");
@@ -197,16 +197,16 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	public void _toJavaStatement(XWhileExpression expr, IAppendable b) {
 		internalPrepare(expr.getPredicate(), b);
-		b.append("\nBoolean ").append(declareNameInVariableScope(expr,b)).append(" = ");
+		b.append("\nBoolean ").append(declareNameInVariableScope(expr, b)).append(" = ");
 		internalToJavaExpression(expr.getPredicate(), b);
 		b.append(";");
 		b.append("\nwhile (");
-		b.append(getJavaVarName(expr,b));
+		b.append(getJavaVarName(expr, b));
 		b.append(") { ");
 		openBlock(expr.getBody(), b);
 		internalToJavaStatement(expr.getBody(), b);
 		closeBlock(expr.getBody(), b);
-		b.append("\n").append(getJavaVarName(expr,b)).append(" = ");
+		b.append("\n").append(getJavaVarName(expr, b)).append(" = ");
 		internalToJavaExpression(expr.getPredicate(), b);
 		b.append(";");
 		b.append("\n}");
@@ -221,15 +221,15 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	public void _toJavaStatement(XDoWhileExpression expr, IAppendable b) {
-		b.append("\nBoolean ").append(declareNameInVariableScope(expr,b)).append(";");
+		b.append("\nBoolean ").append(declareNameInVariableScope(expr, b)).append(";");
 		b.append("\ndo {");
 		internalToJavaStatement(expr.getBody(), b);
 		internalPrepare(expr.getPredicate(), b);
-		b.append("\n").append(getJavaVarName(expr,b)).append(" = ");
+		b.append("\n").append(getJavaVarName(expr, b)).append(" = ");
 		internalToJavaExpression(expr.getPredicate(), b);
 		b.append(";");
 		b.append("\n} while(");
-		b.append(getJavaVarName(expr,b));
+		b.append(getJavaVarName(expr, b));
 		b.append(");");
 	}
 
@@ -325,7 +325,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		internalPrepare(expr.getThen(), b);
 		if (!isEarlyMethodInterruption(expr.getThen())) {
 			b.append("\n");
-			b.append(getJavaVarName(expr,b));
+			b.append(getJavaVarName(expr, b));
 			b.append(" = ");
 			internalToJavaExpression(expr.getThen(), b);
 			b.append(";");
@@ -337,7 +337,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			internalPrepare(expr.getElse(), b);
 			if (!isEarlyMethodInterruption(expr.getElse())) {
 				b.append("\n");
-				b.append(getJavaVarName(expr,b));
+				b.append(getJavaVarName(expr, b));
 				b.append(" = ");
 				internalToJavaExpression(expr.getElse(), b);
 				b.append(";");
@@ -347,7 +347,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	public void _toJavaExpression(XIfExpression expr, IAppendable b) {
-		b.append(getJavaVarName(expr,b));
+		b.append(getJavaVarName(expr, b));
 	}
 
 	public void _toJavaStatement(XIfExpression expr, IAppendable b) {
@@ -365,34 +365,106 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			closeBlock(expr.getElse(), b);
 		}
 	}
-	
+
 	public void _prepare(XSwitchExpression expr, IAppendable b) {
-		declareLocalVariable(expr, b);
+		// declare variable
+		JvmTypeReference type = getTypeProvider().getConvertedType(expr);
+		String switchResultName = makeJavaIdentifier(b.declareVariable(Tuples.pair(expr,"result"), "switchResult"));
+		b.append("\n").append(getSerializedForm(type)).append(" ").append(switchResultName).append(" = null;");
+		
 		internalPrepare(expr.getSwitch(), b);
+
+		// declare local var for the switch expression
+		String name = getNameProvider().getSimpleName(expr);
+		if (name == null) {
+			// define synthetic name
+			name = "__valOfSwitchOver";
+		}
+		b.append("\nfinal ").append(getReturnTypeName(expr.getSwitch())).append(" ");
+		String variableName = b.declareVariable(expr, name);
+		b.append(variableName);
+		b.append(" = ");
+		internalToJavaExpression(expr.getSwitch(), b);
+		b.append(";");
+
+		// declare 'boolean matched' to check whether a case has matched already
+		b.append("\nboolean ");
+		String matchedVariable = b.declareVariable(Tuples.pair(expr, "matches"), "matched");
+		b.append(matchedVariable).append(" = false;");
+
 		for (XCasePart casePart : expr.getCases()) {
-			if (casePart.getTypeGuard()!=null) {
+			b.append("\nif (!").append(matchedVariable).append(") {");
+			b.increaseIndentation();
+			if (casePart.getTypeGuard() != null) {
+				final String guardType = getSerializedForm(casePart.getTypeGuard());
 				b.append("\nif (");
-				internalToJavaExpression(expr.getSwitch(), b);
+				b.append(variableName);
 				b.append(" instanceof ");
-				b.append(getSerializedForm(casePart.getTypeGuard()));
+				b.append(guardType);
 				b.append(") {");
+				b.increaseIndentation();
+
+				// declare local var for case
+				String simpleName = getNameProvider().getSimpleName(casePart);
+				if (simpleName != null) {
+					b.append("\nfinal ").append(guardType).append(" ");
+					String typeGuardName = b.declareVariable(casePart, simpleName);
+					b.append(typeGuardName);
+					b.append(" = (").append(guardType).append(") ").append(variableName).append(";");
+				}
 			}
-			if (casePart.getCase()!=null) {
+			if (casePart.getCase() != null) {
 				internalPrepare(casePart.getCase(), b);
+				b.append("\nif (");
+				JvmTypeReference convertedType = getTypeProvider().getConvertedType(casePart.getCase());
+				if (Boolean.class.getName().equals(convertedType.getCanonicalName())) {
+					internalToJavaExpression(casePart.getCase(), b);
+				} else {
+					b.append(Objects.class.getCanonicalName()).append("._operator_equals(").append(variableName).append(",");
+					internalToJavaExpression(casePart.getCase(), b);
+					b.append(")");
+				}
+				b.append(") {");
+				b.increaseIndentation();
 			}
-			if (casePart.getTypeGuard()!=null) {
+			// set matched to true
+			b.append("\n").append(matchedVariable).append("=true;");
+
+			// execute then part
+			internalPrepare(casePart.getThen(), b);
+			b.append("\n").append(switchResultName).append(" = ");
+			internalToJavaExpression(casePart.getThen(), b);
+			b.append(";");
+
+			// close surrounding if statements
+			if (casePart.getCase() != null) {
 				b.decreaseIndentation().append("\n}");
 			}
+			if (casePart.getTypeGuard() != null) {
+				b.decreaseIndentation().append("\n}");
+			}
+			b.decreaseIndentation();
+			b.append("\n}");
 		}
-		
+		if (expr.getDefault()!=null) {
+			b.append("\nif (!").append(matchedVariable).append(") {");
+			b.increaseIndentation();
+			internalPrepare(expr.getDefault(), b);
+			b.append("\n").append(switchResultName).append(" = ");
+			internalToJavaExpression(expr.getDefault(), b);
+			b.append(";");
+			b.decreaseIndentation();
+			b.append("\n}");
+		}
+
 	}
-	
+
 	public void _toJavaExpression(XSwitchExpression expr, IAppendable b) {
-		
+		b.append(getJavaVarName(Tuples.pair(expr,"result"), b));
 	}
-	
+
 	public void _toJavaStatement(XSwitchExpression expr, IAppendable b) {
-		
+		_prepare(expr, b);
 	}
 
 }
