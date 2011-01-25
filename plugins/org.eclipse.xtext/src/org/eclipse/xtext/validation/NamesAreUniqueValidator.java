@@ -52,6 +52,8 @@ public class NamesAreUniqueValidator extends AbstractDeclarativeValidator {
 	public void checkUniqueNamesInResourceOf(EObject eObject) {
 		Map<Object, Object> context = getContext();
 		Resource resource = eObject.eResource();
+		if (resource==null)
+			return;
 		CancelIndicator cancelIndicator = null;
 		if (context != null) {
 			if (context.containsKey(resource))
@@ -63,8 +65,7 @@ public class NamesAreUniqueValidator extends AbstractDeclarativeValidator {
 	}
 
 	public void doCheckUniqueNames(Resource resource, CancelIndicator cancelIndicator) {
-		final IResourceServiceProvider resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(
-				resource.getURI());
+		final IResourceServiceProvider resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(resource.getURI());
 		if (resourceServiceProvider==null)
 			return;
 		IResourceDescription.Manager manager = resourceServiceProvider.getResourceDescriptionManager();
