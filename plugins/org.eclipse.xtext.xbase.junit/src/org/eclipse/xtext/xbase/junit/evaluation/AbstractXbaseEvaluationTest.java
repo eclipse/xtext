@@ -549,7 +549,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	}
 	
 	public void testSwitchExpression_10() {
-		assertEvaluatesTo(Integer.valueOf(3), "switch 'foo' { Boolean case 'foo': 4 String: 3 }");
+		assertEvaluatesTo(Integer.valueOf(3), "switch 'foo' as Object { Boolean case 'foo': 4 String: 3 }");
 	}
 	
 	public void testCastedExpression_01() {

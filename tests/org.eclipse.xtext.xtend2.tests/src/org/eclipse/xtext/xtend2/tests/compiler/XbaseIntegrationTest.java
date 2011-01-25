@@ -42,45 +42,6 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	public void testSpreadOperator_02() {
 	}
 
-	@Override
-	public void testSwitchExpression_01() {
-	}
-
-	@Override
-	public void testSwitchExpression_02() {
-	}
-
-	@Override
-	public void testSwitchExpression_03() {
-	}
-
-	@Override
-	public void testSwitchExpression_04() {
-	}
-
-	@Override
-	public void testSwitchExpression_05() {
-	}
-
-	@Override
-	public void testSwitchExpression_06() {
-	}
-
-	@Override
-	public void testSwitchExpression_07() {
-	}
-
-	@Override
-	public void testSwitchExpression_08() {
-	}
-
-	@Override
-	public void testSwitchExpression_09() {
-	}
-
-	@Override
-	public void testSwitchExpression_10() {
-	}
 
 	static Injector injector = new TestSetup().createInjectorAndDoEMFRegistration();
 	
@@ -153,7 +114,8 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	protected String compileToJavaCode(String xtendCode) {
 		IAppendable appandable = new IAppendable.StringBuilderBasedAppendable();
 		try {
-			final XtendFile file = parseHelper.parse("package foo class Test { Object foo() " + xtendCode + " }");
+			final String text = "package foo class Test { Object foo() " + xtendCode + " }";
+			final XtendFile file = parseHelper.parse(text);
 			validationHelper.assertNoErrors(file);
 			Xtend2Compiler compiler = injector.getInstance(Xtend2Compiler.class);
 			compiler.compile(file, appandable);

@@ -59,8 +59,10 @@ public class IdentifiableTypeProvider extends AbstractTypeProvider<JvmTypeRefere
 	}
 	
 	protected JvmTypeReference _type(XSwitchExpression object) {
-		if (object.getLocalVarName() != null)
-			return expressionTypeProvider.getConvertedType(object.getSwitch());
+		if (object.getLocalVarName() != null) {
+			final JvmTypeReference convertedType = expressionTypeProvider.getConvertedType(object.getSwitch());
+			return convertedType;
+		}
 		return null;
 	}
 

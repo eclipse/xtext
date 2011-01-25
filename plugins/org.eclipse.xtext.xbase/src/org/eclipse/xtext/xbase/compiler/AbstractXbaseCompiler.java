@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
 import org.eclipse.xtext.xbase.typing.XExpressionExpectedTypeProvider;
@@ -59,11 +60,11 @@ public abstract class AbstractXbaseCompiler {
 	 */
 	protected boolean isEarlyMethodInterruption(XExpression obj) {
 		if (obj instanceof XBlockExpression) {
-			XBlockExpression block = (XBlockExpression)obj;
-			return isEarlyMethodInterruption(block.getExpressions().get(block.getExpressions().size()-1));
+			XBlockExpression block = (XBlockExpression) obj;
+			return isEarlyMethodInterruption(block.getExpressions().get(block.getExpressions().size() - 1));
 		}
 		if (obj instanceof XTryCatchFinallyExpression) {
-			XTryCatchFinallyExpression tryCatch = (XTryCatchFinallyExpression)obj;
+			XTryCatchFinallyExpression tryCatch = (XTryCatchFinallyExpression) obj;
 			boolean isExit = isEarlyMethodInterruption(tryCatch.getExpression());
 			for (XCatchClause catchClause : tryCatch.getCatchClauses()) {
 				if (!isExit)
@@ -74,7 +75,8 @@ public abstract class AbstractXbaseCompiler {
 		}
 		if (obj instanceof XIfExpression) {
 			XIfExpression ifExpr = (XIfExpression) obj;
-			return isEarlyMethodInterruption(ifExpr.getThen()) && ifExpr.getElse()!=null && isEarlyMethodInterruption(ifExpr.getElse());
+			return isEarlyMethodInterruption(ifExpr.getThen()) && ifExpr.getElse() != null
+					&& isEarlyMethodInterruption(ifExpr.getElse());
 		}
 		return obj instanceof XThrowExpression;
 	}
@@ -128,14 +130,14 @@ public abstract class AbstractXbaseCompiler {
 	protected IXExpressionTypeProvider getTypeProvider() {
 		return typeProvider;
 	}
-	
+
 	@Inject
 	private IdentifiableTypeProvider identifiableTypeProvider;
-	
+
 	public void setIdentifiableTypeProvider(IdentifiableTypeProvider identifiableTypeProvider) {
 		this.identifiableTypeProvider = identifiableTypeProvider;
 	}
-	
+
 	protected IdentifiableTypeProvider getIdentifiableTypeProvider() {
 		return identifiableTypeProvider;
 	}
@@ -160,23 +162,34 @@ public abstract class AbstractXbaseCompiler {
 		return type.getCanonicalName();
 	}
 
-	protected String getJavaVarName(EObject ex, IAppendable appendable) {
+	protected String getJavaVarName(Object ex, IAppendable appendable) {
 		final String varName = getVarName(ex, appendable);
-		if (varName==null) {
+		if (varName == null) {
 			return null;
 		}
 		return makeJavaIdentifier(varName);
 	}
-	
-	protected String getVarName(EObject ex, IAppendable appendable) {
+
+	protected String getVarName(Object ex, IAppendable appendable) {
 		String name = appendable.getName(ex);
 		return name;
 	}
-	
+
 	protected String declareNameInVariableScope(EObject declaration, IAppendable appendable) {
 		final String favoriteVariableName = getFavoriteVariableName(declaration);
 		final String varName = appendable.declareVariable(declaration, favoriteVariableName);
 		return makeJavaIdentifier(varName);
+	}
+
+	@Inject
+	private IdentifiableSimpleNameProvider nameProvider;
+
+	public void setNameProvider(IdentifiableSimpleNameProvider nameProvider) {
+		this.nameProvider = nameProvider;
+	}
+
+	protected IdentifiableSimpleNameProvider getNameProvider() {
+		return nameProvider;
 	}
 
 	protected String getFavoriteVariableName(EObject ex) {
@@ -187,16 +200,18 @@ public abstract class AbstractXbaseCompiler {
 			return ((JvmFormalParameter) ex).getName();
 		}
 		if (ex instanceof XAbstractFeatureCall) {
-			String name = ((XAbstractFeatureCall) ex).getFeature().getCanonicalName();
+			String name = nameProvider.getSimpleName(((XAbstractFeatureCall) ex).getFeature());
 			int indexOf = name.indexOf('(');
-			if (indexOf !=-1) {
-				name = name.substring(0,indexOf);
+			if (indexOf != -1) {
+				name = name.substring(0, indexOf);
 			}
 			indexOf = name.lastIndexOf('.');
-			if (indexOf !=-1) {
-				name = name.substring(indexOf+1);
+			if (indexOf != -1) {
+				name = name.substring(indexOf + 1);
 			}
-			if (name.startsWith("get") && name.length()>3)
+			if (name.startsWith("get") && name.length() > 3)
+				return name.substring(3);
+			if (name.startsWith("to") && name.length() > 2)
 				return name.substring(2);
 			return name;
 		}
@@ -212,17 +227,19 @@ public abstract class AbstractXbaseCompiler {
 		declareLocalVariable(expr, b, "null");
 	}
 
-	protected void declareLocalVariable(XExpression expr,final IAppendable b, final String expression) {
+	protected void declareLocalVariable(XExpression expr, final IAppendable b, final String expression) {
 		declareLocalVariable(expr, b, new Later() {
 			@Override
 			public void exec() {
 				b.append(expression);
-			}});
+			}
+		});
 	}
+
 	protected void declareLocalVariable(XExpression expr, IAppendable b, Later expression) {
-		JvmTypeReference type = getExpectedTypeProvider().getExpectedType(expr);
-		if (type == null || type.getCanonicalName().equals(Object.class.getCanonicalName()))
-			type = getTypeProvider().getConvertedType(expr);
+//		JvmTypeReference type = getExpectedTypeProvider().getExpectedType(expr);
+//		if (type == null || type.getCanonicalName().equals(Object.class.getCanonicalName()))
+		JvmTypeReference type = getTypeProvider().getConvertedType(expr);
 		final String varName = declareNameInVariableScope(expr, b);
 		b.append("\n").append(getSerializedForm(type)).append(" ").append(varName).append(" = ");
 		expression.exec();

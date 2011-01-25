@@ -210,6 +210,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 
 	//TODO switch expression not of type boolean
+	//TODO apply cast rules case's type guards
 
 	@Override
 	protected List<EPackage> getEPackages() {

@@ -68,7 +68,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 	protected void declareThis(XtendClass clazz, IAppendable appendable) {
 		appendable.append("\nprotected final ");
-		appendable.append(clazz.getName()).append(" _this = this;");
-		appendable.declareVariable(clazz, "_this");
+		String variable = makeJavaIdentifier(appendable.declareVariable(clazz, "this"));
+		appendable.append(clazz.getName()).append(" ").append(variable).append(" = this;");
 	}
 }

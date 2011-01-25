@@ -19,9 +19,11 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -40,8 +42,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		} else if (isSpreadingMemberFeatureCall(expr)) {
 			prepareMemberFeatureCall((XMemberFeatureCall) expr, b);
 		} else {
-			if (expr instanceof XFeatureCall
-					&& (expr.getFeature() instanceof XVariableDeclaration || expr.getFeature() instanceof JvmFormalParameter)) {
+			if (isLocalVarReference(expr)) {
 				//do nothing
 			} else {
 				for (XExpression arg : expr.getAllArguments()) {
@@ -62,6 +63,18 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				declareLocalVariable(expr, b, later);
 			}
 		}
+	}
+
+	protected boolean isLocalVarReference(XAbstractFeatureCall expr) {
+		if (expr instanceof XFeatureCall) {
+			JvmIdentifiableElement feature = expr.getFeature();
+			if (feature instanceof XVariableDeclaration
+				|| feature instanceof JvmFormalParameter
+				|| feature instanceof XCasePart
+				|| feature instanceof XSwitchExpression)
+				return true;
+		}
+		return false;
 	}
 
 	protected void prepareMemberFeatureCall(XMemberFeatureCall expr, IAppendable b) {
@@ -135,8 +148,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 //			b.append(getVarName(call));
 		} else {
 			String expression = null;
-			if (call instanceof XFeatureCall
-					&& (call.getFeature() instanceof XVariableDeclaration || call.getFeature() instanceof JvmFormalParameter)) {
+			if (isLocalVarReference(call)) {
 				expression = getJavaVarName(call.getFeature(), b);
 			} else {
 				expression = getJavaVarName(call, b);
