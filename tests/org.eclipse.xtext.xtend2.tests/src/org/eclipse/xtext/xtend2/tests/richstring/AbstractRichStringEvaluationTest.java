@@ -7,199 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.tests.richstring;
 
-import java.util.Stack;
-
-import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.xbase.XBooleanLiteral;
-import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XIntLiteral;
-import org.eclipse.xtext.xbase.XStringLiteral;
-import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xtend2.richstring.AbstractRichStringPartAcceptor;
-import org.eclipse.xtext.xtend2.richstring.DefaultIndentationHandler;
-import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
-import org.eclipse.xtext.xtend2.xtend2.RichString;
-import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
+import junit.framework.TestCase;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class RichStringTest extends AbstractRichStringTest {
+public abstract class AbstractRichStringEvaluationTest extends TestCase {
 
-	public static class StringBuilderBasedAcceptor extends AbstractRichStringPartAcceptor {
-
-		private StringBuilder builder;
-		private StringBuilder currentLine;
-		private boolean controlStructureSeen;
-		private Stack<Boolean> printNext;
-		private Stack<Boolean> printElse;
-		private Stack<Boolean> ignoreStack;
-		private Stack<Integer> forLoopStack;
-
-		public StringBuilderBasedAcceptor() {
-			builder = new StringBuilder();
-			currentLine = new StringBuilder();
-			printNext = new Stack<Boolean>();
-			printElse = new Stack<Boolean>();
-			ignoreStack = new Stack<Boolean>();
-			forLoopStack = new Stack<Integer>();
-		}
-		
-		public boolean internalIgnore() {
-			if (ignoreStack.isEmpty())
-				return false;
-			return ignoreStack.peek().booleanValue();
-		}
-		
-		public boolean ignore() {
-			if (ignoreStack.isEmpty()) {
-				if (printNext.isEmpty())
-					return false;
-				return !printNext.peek().booleanValue();
-			}
-			return ignoreStack.peek().booleanValue();
-		}
-		
-		@Override
-		public void acceptSemanticText(CharSequence text, RichStringLiteral origin) {
-			if (!ignore())
-				currentLine.append(text);
-		}
-
-		@Override
-		public void acceptSemanticLineBreak(int length, RichStringLiteral origin) {
-			if (!ignore()) {
-				String newLine = currentLine.append('\n').toString();
-				if (!controlStructureSeen || newLine.trim().length() != 0) {
-					builder.append(newLine);	
-				}
-				currentLine = new StringBuilder();
-			}
-			controlStructureSeen = false;
-		}
-
-		@Override
-		public void acceptTemplateLineBreak(int length, RichStringLiteral origin) {
-			controlStructureSeen = false;
-		}
-
-		@Override
-		public void acceptIfCondition(XExpression condition) {
-			if (ignore()) {
-				ignoreStack.push(Boolean.TRUE);
-			} else {
-				controlStructureSeen = true;
-				printElse.push(Boolean.TRUE);
-				XBooleanLiteral literal = (XBooleanLiteral) condition;
-				boolean conditionResult = literal.isIsTrue();
-				if (conditionResult) {
-					printElse.pop();
-					printElse.push(Boolean.FALSE);
-				}
-				printNext.push(conditionResult);
-			}
-		}
-
-		@Override
-		public void acceptElseIfCondition(XExpression condition) {
-			if (!internalIgnore()) {
-				XBooleanLiteral literal = (XBooleanLiteral) condition;
-				boolean conditionResult = literal.isIsTrue();
-				if (conditionResult) {
-					printElse.pop();
-					printElse.push(Boolean.FALSE);
-				}
-				printNext.pop();
-				printNext.push(conditionResult);
-				controlStructureSeen = true;
-			}
-		}
-
-		@Override
-		public void acceptElse() {
-			if (!internalIgnore()) {
-				if (printElse.peek()) {
-					printNext.pop();
-					printNext.push(Boolean.TRUE);
-				}
-				controlStructureSeen = true;
-			}
-		}
-
-		@Override
-		public void acceptEndIf() {
-			if (internalIgnore()) {
-				ignoreStack.pop();
-			} else {
-				printNext.pop();
-				printElse.pop();
-				controlStructureSeen = true;
-			}
-		}
-
-		@Override
-		public void acceptForLoop(JvmFormalParameter parameter, XExpression expression) {
-			if (!ignore()) {
-				controlStructureSeen = true;
-				if (expression.eClass() != XbasePackage.Literals.XNULL_LITERAL) {
-					forLoopStack.push(((XIntLiteral)expression).getValue());
-				} else
-					forLoopStack.push(0);
-			}
-		}
-
-		@Override
-		public void acceptEndFor() {
-			if (!ignore()) {
-				controlStructureSeen = true;
-				forLoopStack.pop();
-			}
-		}
-		
-		@Override
-		public boolean forLoopHasNext() {
-			if (!ignore()) {
-				int remaining = forLoopStack.peek();
-				controlStructureSeen = true;
-				if (remaining > 0) {
-					forLoopStack.set(forLoopStack.size() - 1, remaining - 1);
-					return true;
-				}
-			}
-			return false;
-		}
-
-		@Override
-		public void acceptExpression(XExpression expression, CharSequence indentation) {
-			XStringLiteral literal = (XStringLiteral) expression;
-			String value = literal.getValue();
-			value = value.replaceAll("\\n", "\n" + indentation);
-			currentLine.append(value);
-			controlStructureSeen = true;
-		}
-		
-		@Override
-		public String toString() {
-			StringBuilder result = new StringBuilder(builder.toString());
-			if (currentLine.length() != 0) {
-				String newLine = currentLine.toString();
-				if (!controlStructureSeen || newLine.trim().length() != 0) {
-					result.append(newLine);	
-				}
-			}
-			return result.toString();
-		}
-	}
-	
-	public void assertOutput(String expectedOutput, String richString) throws Exception {
-		RichString parsedString = richString(richString);
-		StringBuilderBasedAcceptor acceptor = new StringBuilderBasedAcceptor();
-		DefaultIndentationHandler handler = new DefaultIndentationHandler();
-		RichStringProcessor processor = new RichStringProcessor();
-		processor.process(parsedString, acceptor, handler);
-		String actualOutput = acceptor.toString();
-		assertEquals(richString, expectedOutput, actualOutput);
-	}
+	public abstract void assertOutput(String expectedOutput, String richString) throws Exception;
 	
 	public void testSimpleTemplate() throws Exception {
 		assertOutput("foobar", "'''foobar'''");
@@ -532,14 +347,14 @@ public class RichStringTest extends AbstractRichStringTest {
 	public void testForLoop_01() throws Exception {
 		assertOutput(
 				"",
-				"'''«FOR a:null»foobar«ENDFOR»'''");
+				"'''«FOR a: ''.toCharArray»foobar«ENDFOR»'''");
 	}
 	
 	public void testForLoop_02() throws Exception {
 		assertOutput(
 				"",
 				"'''\n" +
-				"  «FOR a:null»\n" +
+				"  «FOR a:''.toCharArray»\n" +
 				"    foobar\n" +
 				"  «ENDFOR»\n" +
 				"'''");
@@ -548,15 +363,15 @@ public class RichStringTest extends AbstractRichStringTest {
 	public void testForLoop_03() throws Exception {
 		assertOutput(
 				"",
-				"'''«FOR a:1»«FOR a:null»foobar«ENDFOR»«ENDFOR»'''");
+				"'''«FOR a:'1'.toCharArray»«FOR a:''.toCharArray»foobar«ENDFOR»«ENDFOR»'''");
 	}
 	
 	public void testForLoop_04() throws Exception {
 		assertOutput(
 				"",
 				"'''\n" +
-				"  «FOR a:1»\n" +
-				"    «FOR a:null»\n" +
+				"  «FOR a:'1'.toCharArray»\n" +
+				"    «FOR a:''.toCharArray»\n" +
 				"      foobar\n" +
 				"    «ENDFOR»\n" +
 				"  «ENDFOR»\n" +
@@ -566,14 +381,14 @@ public class RichStringTest extends AbstractRichStringTest {
 	public void testForLoop_05() throws Exception {
 		assertOutput(
 				"foobar",
-				"'''«FOR a:1»foobar«ENDFOR»'''");
+				"'''«FOR a:'1'.toCharArray»foobar«ENDFOR»'''");
 	}
 	
 	public void testForLoop_06() throws Exception {
 		assertOutput(
 				"foobar\n",
 				"'''\n" +
-				"  «FOR a:1»\n" +
+				"  «FOR a:'1'.toCharArray»\n" +
 				"    foobar\n" +
 				"  «ENDFOR»\n" +
 				"'''");
@@ -582,15 +397,15 @@ public class RichStringTest extends AbstractRichStringTest {
 	public void testForLoop_07() throws Exception {
 		assertOutput(
 				"  foobar",
-				"'''  «FOR a:1»«FOR a:1»foobar«ENDFOR»«ENDFOR»'''");
+				"'''  «FOR a:'1'.toCharArray»«FOR a:'1'.toCharArray»foobar«ENDFOR»«ENDFOR»'''");
 	}
 	
 	public void testForLoop_08() throws Exception {
 		assertOutput(
 				"foobar\n",
 				"'''\n" +
-				"  «FOR a:1»\n" +
-				"    «FOR a:1»\n" +
+				"  «FOR a:'1'.toCharArray»\n" +
+				"    «FOR a:'1'.toCharArray»\n" +
 				"      foobar\n" +
 				"    «ENDFOR»\n" +
 				"  «ENDFOR»\n" +
@@ -601,8 +416,8 @@ public class RichStringTest extends AbstractRichStringTest {
 		assertOutput(
 				"foobar\n",
 				"'''\n" +
-				"  «FOR a:1»\n" +
-				"    «FOR a:1»foobar«ENDFOR»\n" +
+				"  «FOR a:'1'.toCharArray»\n" +
+				"    «FOR a:'1'.toCharArray»foobar«ENDFOR»\n" +
 				"  «ENDFOR»\n" +
 				"'''");
 	}
@@ -611,8 +426,8 @@ public class RichStringTest extends AbstractRichStringTest {
 		assertOutput(
 				"foobarfoobar\n",
 				"'''\n" +
-				"  «FOR a:1»\n" +
-				"    «FOR a:2»foobar«ENDFOR»\n" +
+				"  «FOR a:'1'.toCharArray»\n" +
+				"    «FOR a:'12'.toCharArray»foobar«ENDFOR»\n" +
 				"  «ENDFOR»\n" +
 				"'''");
 	}
@@ -622,8 +437,8 @@ public class RichStringTest extends AbstractRichStringTest {
 				"foobar\n" +
 				"foobar\n",
 				"'''\n" +
-				"  «FOR a:2»\n" +
-				"    «FOR a:1»foobar«ENDFOR»\n" +
+				"  «FOR a:'12'.toCharArray»\n" +
+				"    «FOR a:'1'.toCharArray»foobar«ENDFOR»\n" +
 				"  «ENDFOR»\n" +
 				"'''");
 	}
@@ -635,8 +450,8 @@ public class RichStringTest extends AbstractRichStringTest {
 				"foobar\n" +
 				"foobar\n",
 				"'''\n" +
-				"  «FOR a:2»\n" +
-				"    «FOR a:2»\n" +
+				"  «FOR a:'12'.toCharArray»\n" +
+				"    «FOR a:'12'.toCharArray»\n" +
 				"      foobar\n" +
 				"    «ENDFOR»\n" +
 				"  «ENDFOR»\n" +
@@ -650,8 +465,8 @@ public class RichStringTest extends AbstractRichStringTest {
 				"foobar\n" +
 				"foobar\n",
 				"'''\n" +
-				"  «FOR a:1»\n" +
-				"    «FOR a:2»\n" +
+				"  «FOR a:'1'.toCharArray»\n" +
+				"    «FOR a:'12'.toCharArray»\n" +
 				"      «'foobar\nfoobar'»\n" +
 				"    «ENDFOR»\n" +
 				"  «ENDFOR»\n" +
@@ -665,8 +480,8 @@ public class RichStringTest extends AbstractRichStringTest {
 				"  foobar\n" +
 				"foobar\n",
 				"'''\n" +
-				"  «FOR a:2»\n" +
-				"    «FOR a:1»\n" +
+				"  «FOR a:'12'.toCharArray»\n" +
+				"    «FOR a:'1'.toCharArray»\n" +
 				"      «'  foobar\nfoobar'»\n" +
 				"    «ENDFOR»\n" +
 				"  «ENDFOR»\n" +
@@ -684,12 +499,12 @@ public class RichStringTest extends AbstractRichStringTest {
 				"foobar\n" +
 				"  foobar\n",
 				"'''\n" +
-				"  «FOR a:2»\n" +
-				"    «FOR a:2»\n" +
+				"  «FOR a:'12'.toCharArray»\n" +
+				"    «FOR a:'12'.toCharArray»\n" +
 				"      «'foobar\n  foobar'»\n" +
 				"    «ENDFOR»\n" +
 				"  «ENDFOR»\n" +
 				"'''");
 	}
-	
+
 }

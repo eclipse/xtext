@@ -7,15 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.validation;
 
-import java.util.BitSet;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
-import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xtend2.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtext.xtend2.richstring.IRichStringIndentationHandler;
@@ -27,11 +24,9 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor implements IRichStringIndentationHandler {
+public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor.ForLoopOnce implements IRichStringIndentationHandler {
 
 	private final ValidationMessageAcceptor acceptor;
-	private BitSet forLoopStack = new BitSet();
-	private int forLoopStackPointer = -1;
 	private int currentOffset = -1;
 	private RichStringLiteral recent = null;
 	private RichStringLiteral root = null;
@@ -91,26 +86,6 @@ public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor
 	public void acceptTemplateLineBreak(int charCount, RichStringLiteral origin) {
 		resetCurrentOffset(origin);
 		currentOffset += charCount;
-	}
-
-	@Override
-	public void acceptForLoop(JvmFormalParameter parameter, XExpression expression) {
-		forLoopStackPointer++;
-		forLoopStack.set(forLoopStackPointer);
-	}
-
-	@Override
-	public boolean forLoopHasNext() {
-		if (forLoopStack.get(forLoopStackPointer)) {
-			forLoopStack.set(forLoopStackPointer, false);
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public void acceptEndFor() {
-		forLoopStackPointer--;
 	}
 
 	public void pushTemplateIndentation(CharSequence completeIndentation) {

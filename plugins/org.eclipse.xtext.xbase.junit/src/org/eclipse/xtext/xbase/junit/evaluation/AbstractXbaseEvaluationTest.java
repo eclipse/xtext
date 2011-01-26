@@ -184,6 +184,10 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo("literal", "'literal'");
 	}
 	
+	public void testStringLiteral_03() {
+		assertEvaluatesTo("lite\r\nr\\al", "'lite\r\nr\\\\al'");
+	}
+	
 	public void testBooleanLiteral_01() {
 		assertEvaluatesTo(Boolean.TRUE, "true");
 	}
