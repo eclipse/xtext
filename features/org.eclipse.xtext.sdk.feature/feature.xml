@@ -79,7 +79,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    <requires>
       <import plugin="org.eclipse.xpand.ui" version="1.0.1" match="equivalent"/>
       <import plugin="org.eclipse.xtend.ui" version="1.0.1" match="equivalent"/>
-      <import plugin="org.eclipse.emf.mwe.ui.simpleEditor" version="1.0.0" match="equivalent"/>
+      <import plugin="org.eclipse.emf.mwe.ui.simpleEditor" version="1.1.0" match="equivalent"/>
    </requires>
 
    <plugin
