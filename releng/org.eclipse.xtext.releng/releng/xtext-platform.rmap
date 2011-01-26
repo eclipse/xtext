@@ -9,6 +9,7 @@
   <rm:locator pattern="^org\.eclipse\.emf\.(?:mwe2\.runtime|mwe2\.lib|mwe)(?:\..+)?$" searchPathRef="mwe"/>
   <rm:locator pattern="^org\.eclipse\.(?:emf|xsd)(?:\..+)?$" searchPathRef="emf"/>
   <rm:locator pattern="^org\.eclipse\.(?:xpand|xtend)(?:\..+)?$" searchPathRef="xpand"/>
+  <rm:locator pattern="^org\.apache\.log4j$" searchPathRef="mwe" failOnError="false"/>
   <rm:locator pattern="^org\.apache(?:\..+)?$" searchPathRef="orbit" failOnError="false"/>
   <rm:locator pattern="^com\.google(?:\..+)?$" searchPathRef="mwe"/>
   <rm:locator pattern="^org\.(?:aopalliance|easymock)$" searchPathRef="orbit"/>

@@ -41,6 +41,9 @@ public abstract class AbstractHover implements ITextHover, ITextHoverExtension, 
 	}
 
 
+	/**
+	 *@deprecated Use {@link #getHoverInfo2(ITextViewer, IRegion)} instead
+	 */
 	@Deprecated
 	public String getHoverInfo(final ITextViewer textViewer, final IRegion hoverRegion) {
 		Object o = getHoverInfo2(textViewer, hoverRegion);
