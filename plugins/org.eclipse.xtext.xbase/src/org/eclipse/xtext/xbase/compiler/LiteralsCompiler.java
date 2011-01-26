@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XIntLiteral;
 import org.eclipse.xtext.xbase.XNullLiteral;
@@ -23,7 +24,7 @@ public class LiteralsCompiler extends AbstractXbaseCompiler {
 	}
 
 	public void _toJavaExpression(XStringLiteral expr, IAppendable b) {
-		String javaString = expr.getValue().replace("\"", "\\\"");
+		String javaString = Strings.convertToJavaString(expr.getValue());
 		b.append('"').append(javaString).append('"');
 	}
 	
