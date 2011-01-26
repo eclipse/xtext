@@ -24,7 +24,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
 
    <requires>
       <import feature="org.eclipse.xtext.runtime" version="2.0.0" match="equivalent"/>
-      <import feature="org.eclipse.emf.mwe.ui" version="1.0.0" match="equivalent"/>
+      <import feature="org.eclipse.emf.mwe.ui" version="1.1.0" match="equivalent"/>
       <import feature="org.eclipse.xpand.ui" version="1.1.0" match="equivalent"/>
    </requires>
 
