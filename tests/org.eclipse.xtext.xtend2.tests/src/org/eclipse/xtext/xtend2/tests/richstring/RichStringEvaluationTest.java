@@ -1,0 +1,261 @@
+/*******************************************************************************
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.xtend2.tests.richstring;
+
+import java.util.List;
+import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.XBooleanLiteral;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XStringLiteral;
+import org.eclipse.xtext.xtend2.richstring.AbstractRichStringPartAcceptor;
+import org.eclipse.xtext.xtend2.richstring.DefaultIndentationHandler;
+import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
+import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase.TestSetup;
+import org.eclipse.xtext.xtend2.xtend2.RichString;
+import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
+import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendFile;
+import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+
+import com.google.inject.Injector;
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
+
+	public static class StringBuilderBasedAcceptor extends AbstractRichStringPartAcceptor {
+
+		private StringBuilder builder;
+		private StringBuilder currentLine;
+		private boolean controlStructureSeen;
+		private Stack<Boolean> printNext;
+		private Stack<Boolean> printElse;
+		private Stack<Boolean> ignoreStack;
+		private Stack<Integer> forLoopStack;
+
+		public StringBuilderBasedAcceptor() {
+			builder = new StringBuilder();
+			currentLine = new StringBuilder();
+			printNext = new Stack<Boolean>();
+			printElse = new Stack<Boolean>();
+			ignoreStack = new Stack<Boolean>();
+			forLoopStack = new Stack<Integer>();
+		}
+		
+		public boolean internalIgnore() {
+			if (ignoreStack.isEmpty())
+				return false;
+			return ignoreStack.peek().booleanValue();
+		}
+		
+		public boolean ignore() {
+			if (ignoreStack.isEmpty()) {
+				if (printNext.isEmpty())
+					return false;
+				return !printNext.peek().booleanValue();
+			}
+			return ignoreStack.peek().booleanValue();
+		}
+		
+		@Override
+		public void acceptSemanticText(CharSequence text, RichStringLiteral origin) {
+			if (!ignore())
+				currentLine.append(text);
+		}
+
+		@Override
+		public void acceptSemanticLineBreak(int length, RichStringLiteral origin) {
+			if (!ignore()) {
+				String newLine = currentLine.append('\n').toString();
+				if (!controlStructureSeen || newLine.trim().length() != 0) {
+					builder.append(newLine);	
+				}
+				currentLine = new StringBuilder();
+			}
+			controlStructureSeen = false;
+		}
+
+		@Override
+		public void acceptTemplateLineBreak(int length, RichStringLiteral origin) {
+			controlStructureSeen = false;
+		}
+
+		@Override
+		public void acceptIfCondition(XExpression condition) {
+			if (ignore()) {
+				ignoreStack.push(Boolean.TRUE);
+			} else {
+				controlStructureSeen = true;
+				printElse.push(Boolean.TRUE);
+				XBooleanLiteral literal = (XBooleanLiteral) condition;
+				boolean conditionResult = literal.isIsTrue();
+				if (conditionResult) {
+					printElse.pop();
+					printElse.push(Boolean.FALSE);
+				}
+				printNext.push(conditionResult);
+			}
+		}
+
+		@Override
+		public void acceptElseIfCondition(XExpression condition) {
+			if (!internalIgnore()) {
+				XBooleanLiteral literal = (XBooleanLiteral) condition;
+				boolean conditionResult = literal.isIsTrue();
+				if (conditionResult) {
+					printElse.pop();
+					printElse.push(Boolean.FALSE);
+				}
+				printNext.pop();
+				printNext.push(conditionResult);
+				controlStructureSeen = true;
+			}
+		}
+
+		@Override
+		public void acceptElse() {
+			if (!internalIgnore()) {
+				if (printElse.peek()) {
+					printNext.pop();
+					printNext.push(Boolean.TRUE);
+				}
+				controlStructureSeen = true;
+			}
+		}
+
+		@Override
+		public void acceptEndIf() {
+			if (internalIgnore()) {
+				ignoreStack.pop();
+			} else {
+				printNext.pop();
+				printElse.pop();
+				controlStructureSeen = true;
+			}
+		}
+
+		@Override
+		public void acceptForLoop(JvmFormalParameter parameter, XExpression expression) {
+			if (!ignore()) {
+				controlStructureSeen = true;
+				XMemberFeatureCall featureCall = (XMemberFeatureCall) expression;
+				XStringLiteral receiver = (XStringLiteral) featureCall.getActualReceiver();
+				forLoopStack.push(receiver.getValue().length());
+			}
+		}
+
+		@Override
+		public void acceptEndFor() {
+			if (!ignore()) {
+				controlStructureSeen = true;
+				forLoopStack.pop();
+			}
+		}
+		
+		@Override
+		public boolean forLoopHasNext() {
+			if (!ignore()) {
+				int remaining = forLoopStack.peek();
+				controlStructureSeen = true;
+				if (remaining > 0) {
+					forLoopStack.set(forLoopStack.size() - 1, remaining - 1);
+					return true;
+				}
+			}
+			return false;
+		}
+
+		@Override
+		public void acceptExpression(XExpression expression, CharSequence indentation) {
+			XStringLiteral literal = (XStringLiteral) expression;
+			String value = literal.getValue();
+			value = value.replaceAll("\\n", "\n" + indentation);
+			currentLine.append(value);
+			controlStructureSeen = true;
+		}
+		
+		@Override
+		public String toString() {
+			StringBuilder result = new StringBuilder(builder.toString());
+			if (currentLine.length() != 0) {
+				String newLine = currentLine.toString();
+				if (!controlStructureSeen || newLine.trim().length() != 0) {
+					result.append(newLine);	
+				}
+			}
+			return result.toString();
+		}
+	}
+	
+	static Injector injector = new TestSetup().createInjectorAndDoEMFRegistration();
+	
+	@Override
+	public void assertOutput(String expectedOutput, String richString) throws Exception {
+		RichString parsedString = richString(richString);
+		StringBuilderBasedAcceptor acceptor = new StringBuilderBasedAcceptor();
+		DefaultIndentationHandler handler = new DefaultIndentationHandler();
+		RichStringProcessor processor = new RichStringProcessor();
+		processor.process(parsedString, acceptor, handler);
+		String actualOutput = acceptor.toString();
+		assertEquals(richString, expectedOutput, actualOutput);
+	}
+	
+	protected RichString richString(String string) throws Exception {
+		XtendClass clazz = clazz("class Foo { foo() "+string+"}");
+		XtendFunction function = (XtendFunction) clazz.getMembers().get(0);
+		return (RichString) function.getExpression();
+	}
+	
+	protected XtendClass clazz(String string) throws Exception {
+		return file(string).getXtendClass();
+	}
+
+	protected XtendFile file(String string) throws Exception {
+		return file(string, false);
+	}
+
+	protected XtendFile file(String string, boolean validate) throws Exception {
+		XtextResourceSet set = injector.getInstance(XtextResourceSet.class);
+		String fileName = getFileName(string);
+		Resource resource = set.createResource(URI.createURI(fileName + ".xtend"));
+		resource.load(new StringInputStream(string), null);
+		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
+		if (validate) {
+			List<Issue> issues = ((XtextResource) resource).getResourceServiceProvider().getResourceValidator()
+					.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
+			assertTrue("Resource contained errors : " + issues.toString(), issues.isEmpty());
+		}
+		XtendFile file = (XtendFile) resource.getContents().get(0);
+		return file;
+	}
+
+	protected String getFileName(String string) {
+		Matcher packMatcher = Pattern.compile("package (\\S+)").matcher(string);
+		Matcher classMatcher = Pattern.compile("class (\\w+)").matcher(string);
+		String pathName = "";
+		if (packMatcher.find()) {
+			pathName = packMatcher.group(1).replace('.', '/') + "/";
+		}
+		classMatcher.find();
+		return pathName + classMatcher.group(1);
+	}
+}

@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.highlighting;
 
-import java.util.BitSet;
 import java.util.List;
 
 import org.eclipse.emf.common.util.TreeIterator;
@@ -94,10 +93,8 @@ public class RichStringHighlightingCalculator implements ISemanticHighlightingCa
 		}
 	}
 
-	protected class RichStringHighlighter extends AbstractRichStringPartAcceptor {
+	protected class RichStringHighlighter extends AbstractRichStringPartAcceptor.ForLoopOnce {
 
-		private BitSet forLoopStack = new BitSet();
-		private int forLoopStackPointer = -1;
 		private int currentOffset = -1;
 		private RichStringLiteral recent = null;
 		private final IHighlightedPositionAcceptor acceptor;
@@ -168,22 +165,7 @@ public class RichStringHighlightingCalculator implements ISemanticHighlightingCa
 		@Override
 		public void acceptForLoop(JvmFormalParameter parameter, XExpression expression) {
 			highlightRichStrings(expression, acceptor);
-			forLoopStackPointer++;
-			forLoopStack.set(forLoopStackPointer);
-		}
-
-		@Override
-		public boolean forLoopHasNext() {
-			if (forLoopStack.get(forLoopStackPointer)) {
-				forLoopStack.set(forLoopStackPointer, false);
-				return true;
-			}
-			return false;
-		}
-
-		@Override
-		public void acceptEndFor() {
-			forLoopStackPointer--;
+			super.acceptForLoop(parameter, expression);
 		}
 
 		@Override

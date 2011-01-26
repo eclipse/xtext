@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.richstring;
 
+import java.util.BitSet;
+
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
@@ -58,4 +60,30 @@ public abstract class AbstractRichStringPartAcceptor implements IRichStringPartA
 	public void announceNextLiteral(RichStringLiteral object) {
 	}
 
+	public static class ForLoopOnce extends AbstractRichStringPartAcceptor {
+
+		private BitSet forLoopStack = new BitSet();
+		private int forLoopStackPointer = -1;
+
+		@Override
+		public void acceptForLoop(JvmFormalParameter parameter, XExpression expression) {
+			forLoopStackPointer++;
+			forLoopStack.set(forLoopStackPointer);
+		}
+
+		@Override
+		public boolean forLoopHasNext() {
+			if (forLoopStack.get(forLoopStackPointer)) {
+				forLoopStack.set(forLoopStackPointer, false);
+				return true;
+			}
+			return false;
+		}
+
+		@Override
+		public void acceptEndFor() {
+			forLoopStackPointer--;
+		}
+		
+	}
 }
