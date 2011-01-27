@@ -18,7 +18,7 @@ import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.validation.ValidationJob;
-import org.eclipse.xtext.ui.tests.editor.AbstractEditorTest;
+import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
 
 /**
  * @author Michael Clay - Initial contribution and API

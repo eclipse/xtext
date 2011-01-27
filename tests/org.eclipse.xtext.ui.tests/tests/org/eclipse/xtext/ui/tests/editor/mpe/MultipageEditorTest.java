@@ -15,7 +15,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.commands.ICommandService;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.tests.editor.AbstractEditorTest;
+import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
 
 /**
  * @author Peter Friese

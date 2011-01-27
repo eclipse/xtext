@@ -16,7 +16,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.tests.editor.AbstractEditorTest;
+import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
