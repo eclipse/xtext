@@ -103,6 +103,8 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 
 	@SuppressWarnings("unchecked")
 	protected Severity getSeverity(XtextEditor xtextEditor) {
+		if (xtextEditor == null || xtextEditor.getInternalSourceViewer() == null)
+			return null;
 		IAnnotationModel model = xtextEditor.getInternalSourceViewer().getAnnotationModel();
 		if (model != null) {
 			Iterator<Annotation> iterator = model.getAnnotationIterator();
