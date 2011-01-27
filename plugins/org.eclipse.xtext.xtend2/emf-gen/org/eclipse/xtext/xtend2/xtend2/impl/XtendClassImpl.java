@@ -86,7 +86,7 @@ public class XtendClassImpl extends JvmIdentifiableElementImpl implements XtendC
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getExtends() <em>Extends</em>}' reference.
+	 * The cached value of the '{@link #getExtends() <em>Extends</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getExtends()
@@ -96,7 +96,7 @@ public class XtendClassImpl extends JvmIdentifiableElementImpl implements XtendC
 	protected JvmTypeReference extends_;
 
 	/**
-	 * The cached value of the '{@link #getImplements() <em>Implements</em>}' reference list.
+	 * The cached value of the '{@link #getImplements() <em>Implements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getImplements()
@@ -106,7 +106,7 @@ public class XtendClassImpl extends JvmIdentifiableElementImpl implements XtendC
 	protected EList<JvmTypeReference> implements_;
 
 	/**
-	 * The cached value of the '{@link #getSuperTypes() <em>Super Types</em>}' containment reference list.
+	 * The cached value of the '{@link #getSuperTypes() <em>Super Types</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSuperTypes()
@@ -200,16 +200,6 @@ public class XtendClassImpl extends JvmIdentifiableElementImpl implements XtendC
 	 */
 	public JvmTypeReference getExtends()
 	{
-		if (extends_ != null && extends_.eIsProxy())
-		{
-			InternalEObject oldExtends = (InternalEObject)extends_;
-			extends_ = (JvmTypeReference)eResolveProxy(oldExtends);
-			if (extends_ != oldExtends)
-			{
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Xtend2Package.XTEND_CLASS__EXTENDS, oldExtends, extends_));
-			}
-		}
 		return extends_;
 	}
 
@@ -218,9 +208,37 @@ public class XtendClassImpl extends JvmIdentifiableElementImpl implements XtendC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmTypeReference basicGetExtends()
+	public NotificationChain basicSetExtends(JvmTypeReference newExtends, NotificationChain msgs)
 	{
-		return extends_;
+		JvmTypeReference oldExtends = extends_;
+		extends_ = newExtends;
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_CLASS__EXTENDS, oldExtends, newExtends);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExtends(JvmTypeReference newExtends)
+	{
+		if (newExtends != extends_)
+		{
+			NotificationChain msgs = null;
+			if (extends_ != null)
+				msgs = ((InternalEObject)extends_).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_CLASS__EXTENDS, null, msgs);
+			if (newExtends != null)
+				msgs = ((InternalEObject)newExtends).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_CLASS__EXTENDS, null, msgs);
+			msgs = basicSetExtends(newExtends, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_CLASS__EXTENDS, newExtends, newExtends));
 	}
 
 	/**
@@ -232,7 +250,7 @@ public class XtendClassImpl extends JvmIdentifiableElementImpl implements XtendC
 	{
 		if (implements_ == null)
 		{
-			implements_ = new EObjectResolvingEList<JvmTypeReference>(JvmTypeReference.class, this, Xtend2Package.XTEND_CLASS__IMPLEMENTS);
+			implements_ = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, Xtend2Package.XTEND_CLASS__IMPLEMENTS);
 		}
 		return implements_;
 	}
@@ -246,7 +264,7 @@ public class XtendClassImpl extends JvmIdentifiableElementImpl implements XtendC
 	{
 		if (superTypes == null)
 		{
-			superTypes = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, Xtend2Package.XTEND_CLASS__SUPER_TYPES);
+			superTypes = new EObjectResolvingEList<JvmTypeReference>(JvmTypeReference.class, this, Xtend2Package.XTEND_CLASS__SUPER_TYPES);
 		}
 		return superTypes;
 	}
@@ -363,8 +381,10 @@ public class XtendClassImpl extends JvmIdentifiableElementImpl implements XtendC
 		{
 			case Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS:
 				return ((InternalEList<?>)getTypeParameters()).basicRemove(otherEnd, msgs);
-			case Xtend2Package.XTEND_CLASS__SUPER_TYPES:
-				return ((InternalEList<?>)getSuperTypes()).basicRemove(otherEnd, msgs);
+			case Xtend2Package.XTEND_CLASS__EXTENDS:
+				return basicSetExtends(null, msgs);
+			case Xtend2Package.XTEND_CLASS__IMPLEMENTS:
+				return ((InternalEList<?>)getImplements()).basicRemove(otherEnd, msgs);
 			case Xtend2Package.XTEND_CLASS__MEMBERS:
 				return ((InternalEList<?>)getMembers()).basicRemove(otherEnd, msgs);
 		}
@@ -386,8 +406,7 @@ public class XtendClassImpl extends JvmIdentifiableElementImpl implements XtendC
 			case Xtend2Package.XTEND_CLASS__NAME:
 				return getName();
 			case Xtend2Package.XTEND_CLASS__EXTENDS:
-				if (resolve) return getExtends();
-				return basicGetExtends();
+				return getExtends();
 			case Xtend2Package.XTEND_CLASS__IMPLEMENTS:
 				return getImplements();
 			case Xtend2Package.XTEND_CLASS__SUPER_TYPES:
@@ -419,6 +438,13 @@ public class XtendClassImpl extends JvmIdentifiableElementImpl implements XtendC
 			case Xtend2Package.XTEND_CLASS__NAME:
 				setName((String)newValue);
 				return;
+			case Xtend2Package.XTEND_CLASS__EXTENDS:
+				setExtends((JvmTypeReference)newValue);
+				return;
+			case Xtend2Package.XTEND_CLASS__IMPLEMENTS:
+				getImplements().clear();
+				getImplements().addAll((Collection<? extends JvmTypeReference>)newValue);
+				return;
 			case Xtend2Package.XTEND_CLASS__SUPER_TYPES:
 				getSuperTypes().clear();
 				getSuperTypes().addAll((Collection<? extends JvmTypeReference>)newValue);
@@ -449,6 +475,12 @@ public class XtendClassImpl extends JvmIdentifiableElementImpl implements XtendC
 				return;
 			case Xtend2Package.XTEND_CLASS__NAME:
 				setName(NAME_EDEFAULT);
+				return;
+			case Xtend2Package.XTEND_CLASS__EXTENDS:
+				setExtends((JvmTypeReference)null);
+				return;
+			case Xtend2Package.XTEND_CLASS__IMPLEMENTS:
+				getImplements().clear();
 				return;
 			case Xtend2Package.XTEND_CLASS__SUPER_TYPES:
 				getSuperTypes().clear();

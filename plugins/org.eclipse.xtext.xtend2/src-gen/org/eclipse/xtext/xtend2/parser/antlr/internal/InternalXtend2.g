@@ -320,16 +320,16 @@ ruleClass returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getClassAccess().getSuperTypesJvmTypeReferenceParserRuleCall_3_1_0()); 
+	        newCompositeNode(grammarAccess.getClassAccess().getExtendsJvmTypeReferenceParserRuleCall_3_1_0()); 
 	    }
-		lv_superTypes_8_0=ruleJvmTypeReference		{
+		lv_extends_8_0=ruleJvmTypeReference		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getClassRule());
 	        }
-       		add(
+       		set(
        			$current, 
-       			"superTypes",
-        		lv_superTypes_8_0, 
+       			"extends",
+        		lv_extends_8_0, 
         		"JvmTypeReference");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -342,16 +342,16 @@ ruleClass returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getClassAccess().getSuperTypesJvmTypeReferenceParserRuleCall_4_1_0()); 
+	        newCompositeNode(grammarAccess.getClassAccess().getImplementsJvmTypeReferenceParserRuleCall_4_1_0()); 
 	    }
-		lv_superTypes_10_0=ruleJvmTypeReference		{
+		lv_implements_10_0=ruleJvmTypeReference		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getClassRule());
 	        }
        		add(
        			$current, 
-       			"superTypes",
-        		lv_superTypes_10_0, 
+       			"implements",
+        		lv_implements_10_0, 
         		"JvmTypeReference");
 	        afterParserOrEnumRuleCall();
 	    }
