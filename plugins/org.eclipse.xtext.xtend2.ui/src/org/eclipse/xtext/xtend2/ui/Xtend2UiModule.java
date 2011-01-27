@@ -5,10 +5,14 @@ package org.eclipse.xtext.xtend2.ui;
 
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
+import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
+import org.eclipse.xtext.xtend2.ui.autoedit.AutoEditStrategyProvider;
+import org.eclipse.xtext.xtend2.ui.autoedit.TokenTypeToPartitionMapper;
 import org.eclipse.xtext.xtend2.ui.highlighting.HighlightingConfiguration;
 import org.eclipse.xtext.xtend2.ui.highlighting.RichStringAwareTokenScanner;
 import org.eclipse.xtext.xtend2.ui.highlighting.RichStringHighlightingCalculator;
@@ -42,6 +46,14 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 	
 	public Class<? extends IRenameStrategy.Provider> bindIRenameStrategy$Provider() {
 		return Xtend2RenameStrategy.Provider.class;
-		
+	}
+	
+	public Class<? extends ITokenTypeToPartitionTypeMapper> bindTokenTypeToPartitionTypeMapper() {
+		return TokenTypeToPartitionMapper.class;
+	}
+	
+	@Override
+	public Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
+		return AutoEditStrategyProvider.class;
 	}
 }

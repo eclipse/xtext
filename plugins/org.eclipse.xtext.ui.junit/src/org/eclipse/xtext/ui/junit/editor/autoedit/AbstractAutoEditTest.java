@@ -81,4 +81,7 @@ public abstract class AbstractAutoEditTest extends AbstractEditorTest {
 		}
 	}
 
+	protected List<IFile> getFiles() {
+		return files;
+	}
 }

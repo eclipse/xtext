@@ -7,41 +7,40 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.model;
 
-import java.util.Map;
-
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
-import org.eclipse.xtext.ui.LexerUIBindings;
 
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
+import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class TerminalsTokenTypeToPartitionMapper implements ITokenTypeToPartitionTypeMapper {
+@Singleton
+public class TerminalsTokenTypeToPartitionMapper extends TokenTypeToStringMapper implements ITokenTypeToPartitionTypeMapper {
 	public final static String COMMENT_PARTITION = "__comment";
 	public final static String STRING_LITERAL_PARTITION = "__string";
 	
-	private Map<Integer, String> tokenDefs;
-
-	@Inject
-	public void setTokenDefProvider(@Named(LexerUIBindings.HIGHLIGHTING) ITokenDefProvider tokenDefProvider) {
-		this.tokenDefs = tokenDefProvider.getTokenDefMap();
-	}
-
+	protected static final String[] SUPPORTED_PARTITIONS = new String[]{
+		COMMENT_PARTITION,
+		STRING_LITERAL_PARTITION,
+		IDocument.DEFAULT_CONTENT_TYPE
+	};
+	
 	public String getPartitionType(int antlrTokenType) {
-		String string = tokenDefs.get(antlrTokenType);
-		if ("RULE_ML_COMMENT".equals(string) || "RULE_SL_COMMENT".equals(string)) {
+		return getMappedValue(antlrTokenType);
+	}
+	
+	@Override
+	protected String calculateId(String tokenName, int tokenType) {
+		if ("RULE_ML_COMMENT".equals(tokenName) || "RULE_SL_COMMENT".equals(tokenName)) {
 			return COMMENT_PARTITION;
-		} else if ("RULE_STRING".equals(string)) {
+		} else if ("RULE_STRING".equals(tokenName)) {
 			return STRING_LITERAL_PARTITION;
 		}
 		return IDocument.DEFAULT_CONTENT_TYPE;
 	}
 
 	public String[] getSupportedPartitionTypes() {
-		return new String[]{COMMENT_PARTITION,STRING_LITERAL_PARTITION,IDocument.DEFAULT_CONTENT_TYPE};
+		return SUPPORTED_PARTITIONS;
 	}
 
 }

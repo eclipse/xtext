@@ -82,6 +82,12 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends AbstractAutoEdi
 		pressKey(editor, ')');
 		assertState("((()))|", editor);
 	}
+	
+	public void testParenthesis_8() throws Exception {
+		XtextEditor editor = openEditor("(foobar|)");
+		pressKey(editor, ')');
+		assertState("(foobar)|", editor);
+	}
 
 	public void testSingleQuotedStringLiteral_1() throws Exception {
 		XtextEditor editor = openEditor("|");
