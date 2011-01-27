@@ -13,8 +13,8 @@ import java.lang.reflect.Method;
 import junit.framework.Assert;
 
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
-import org.eclipse.xtext.parser.ParseHelper;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
