@@ -31,7 +31,7 @@ public abstract class AbstractTerminalsEditStrategy extends AbstractEditStrategy
 	public AbstractTerminalsEditStrategy(String leftTerminal, String rightTerminal) {
 		if (leftTerminal==null || rightTerminal==null)
 			throw new IllegalArgumentException("The terminals must not be null.");
-		if (leftTerminal.equals(rightTerminal)) {
+		if (!allowsEqualTerminals() && leftTerminal.equals(rightTerminal)) {
 			throw new IllegalArgumentException("The left and right terminal have to be different.");
 		}
 		this.leftTerminal = leftTerminal;
@@ -44,6 +44,14 @@ public abstract class AbstractTerminalsEditStrategy extends AbstractEditStrategy
 	
 	public String getRightTerminal() {
 		return rightTerminal;
+	}
+	
+	protected boolean allowsEqualTerminals() {
+		return false;
+	}
+	
+	protected DocumentUtil getDocumentUtil() {
+		return util;
 	}
 
 	/**

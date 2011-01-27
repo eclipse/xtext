@@ -7,43 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.syntaxcoloring;
 
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.antlr.runtime.Token;
-import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
-import org.eclipse.xtext.ui.LexerUIBindings;
+import org.eclipse.xtext.ui.editor.model.TokenTypeToStringMapper;
 
 import com.google.inject.ImplementedBy;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @ImplementedBy(DefaultAntlrTokenToAttributeIdMapper.class)
-public abstract class AbstractAntlrTokenToAttributeIdMapper {
+public abstract class AbstractAntlrTokenToAttributeIdMapper extends TokenTypeToStringMapper {
 
-	private String[] ids;
-	
-	@Inject
-	public void setTokenDefProvider(@Named(LexerUIBindings.HIGHLIGHTING) ITokenDefProvider tokenDefProvider) {
-		initIds(tokenDefProvider.getTokenDefMap());
-	}
-
-	protected void initIds(Map<Integer, String> tokenDefMap) {
-		ids = new String[tokenDefMap.size()];
-		for (Entry<Integer, String> entry : tokenDefMap.entrySet()) {
-			if (entry.getKey() >= Token.MIN_TOKEN_TYPE)
-				ids[entry.getKey() - Token.MIN_TOKEN_TYPE] = calculateId(entry.getValue(), entry.getKey());
-		}
-	}
-
-	protected abstract String calculateId(String tokenName, int tokenType);
-	
 	public String getId(int tokenType) {
-		if (tokenType == Token.INVALID_TOKEN_TYPE)
-			return DefaultHighlightingConfiguration.INVALID_TOKEN_ID;
-		return ids[tokenType-Token.MIN_TOKEN_TYPE];
+		return getMappedValue(tokenType);
 	}
 }

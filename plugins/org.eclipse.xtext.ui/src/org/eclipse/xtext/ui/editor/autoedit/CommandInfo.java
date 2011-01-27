@@ -9,12 +9,12 @@ package org.eclipse.xtext.ui.editor.autoedit;
 
 import org.eclipse.jface.text.DocumentCommand;
 
-class CommandInfo {
-	String text = "";
-	int offset = -1;
-	int length = 0;
-	int cursorOffset = -1;
-	boolean isChange = false;
+public class CommandInfo {
+	public String text = "";
+	public int offset = -1;
+	public int length = 0;
+	public int cursorOffset = -1;
+	public boolean isChange = false;
 
 	public void modifyCommand(DocumentCommand command) {
 		if (!isChange)

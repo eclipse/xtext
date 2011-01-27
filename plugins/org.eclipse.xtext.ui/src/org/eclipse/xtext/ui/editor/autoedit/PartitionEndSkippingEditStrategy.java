@@ -20,14 +20,31 @@ import org.eclipse.jface.text.ITypedRegion;
  */
 public class PartitionEndSkippingEditStrategy extends AbstractEditStrategy {
 
+	private String end;
+
+	public PartitionEndSkippingEditStrategy withRightDelimiter(String end) {
+		this.end = end;
+		return this;
+	}
+	
 	@Override
 	protected void internalCustomizeDocumentCommand(IDocument document, DocumentCommand command)
 			throws BadLocationException {
 		if (command.length == 0 && command.text.length() > 0) {
 			ITypedRegion partition = document.getPartition(command.offset);
 			String part = document.get(partition.getOffset(), partition.getLength());
-			if (part.substring(command.offset - partition.getOffset()).equals(command.text))
-				command.length = command.text.length();
+			if (end != null) {
+				int relativeOffset = command.offset - partition.getOffset();
+				if (relativeOffset < partition.getLength() - end.length())
+					return;
+				if (!part.endsWith(end))
+					return;
+				if (part.substring(command.offset - partition.getOffset(), command.offset - partition.getOffset() + command.text.length()).equals(command.text))
+					command.length = command.text.length();
+			} else {
+				if (part.substring(command.offset - partition.getOffset()).equals(command.text))
+					command.length = command.text.length();
+			}
 		}
 	}
 
