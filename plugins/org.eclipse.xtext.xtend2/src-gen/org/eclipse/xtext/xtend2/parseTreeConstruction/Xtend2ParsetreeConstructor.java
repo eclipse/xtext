@@ -413,12 +413,12 @@ protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
  *
  * Class returns XtendClass:
  * 	"class" name=ID ("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? ("extends"
- * 	superTypes+=JvmTypeReference)? ("implements" superTypes+=JvmTypeReference)* "{" members+=Member* "}";
+ * 	extends=JvmTypeReference)? ("implements" implements+=JvmTypeReference)* "{" members+=Member* "}";
  *
  **/
 
 // "class" name=ID ("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? ("extends"
-// superTypes+=JvmTypeReference)? ("implements" superTypes+=JvmTypeReference)* "{" members+=Member* "}"
+// extends=JvmTypeReference)? ("implements" implements+=JvmTypeReference)* "{" members+=Member* "}"
 protected class Class_Group extends GroupToken {
 	
 	public Class_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -708,7 +708,7 @@ protected class Class_GreaterThanSignKeyword_2_3 extends KeywordToken  {
 }
 
 
-// ("extends" superTypes+=JvmTypeReference)?
+// ("extends" extends=JvmTypeReference)?
 protected class Class_Group_3 extends GroupToken {
 	
 	public Class_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -723,7 +723,7 @@ protected class Class_Group_3 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Class_SuperTypesAssignment_3_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Class_ExtendsAssignment_3_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -753,16 +753,16 @@ protected class Class_ExtendsKeyword_3_0 extends KeywordToken  {
 
 }
 
-// superTypes+=JvmTypeReference
-protected class Class_SuperTypesAssignment_3_1 extends AssignmentToken  {
+// extends=JvmTypeReference
+protected class Class_ExtendsAssignment_3_1 extends AssignmentToken  {
 	
-	public Class_SuperTypesAssignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Class_ExtendsAssignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getClassAccess().getSuperTypesAssignment_3_1();
+		return grammarAccess.getClassAccess().getExtendsAssignment_3_1();
 	}
 
     @Override
@@ -775,13 +775,13 @@ protected class Class_SuperTypesAssignment_3_1 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("superTypes",false)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("superTypes");
+		if((value = eObjectConsumer.getConsumable("extends",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("extends");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getJvmTypeReferenceRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getClassAccess().getSuperTypesJvmTypeReferenceParserRuleCall_3_1_0(); 
+				element = grammarAccess.getClassAccess().getExtendsJvmTypeReferenceParserRuleCall_3_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -800,7 +800,7 @@ protected class Class_SuperTypesAssignment_3_1 extends AssignmentToken  {
 }
 
 
-// ("implements" superTypes+=JvmTypeReference)*
+// ("implements" implements+=JvmTypeReference)*
 protected class Class_Group_4 extends GroupToken {
 	
 	public Class_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -815,7 +815,7 @@ protected class Class_Group_4 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Class_SuperTypesAssignment_4_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Class_ImplementsAssignment_4_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -847,16 +847,16 @@ protected class Class_ImplementsKeyword_4_0 extends KeywordToken  {
 
 }
 
-// superTypes+=JvmTypeReference
-protected class Class_SuperTypesAssignment_4_1 extends AssignmentToken  {
+// implements+=JvmTypeReference
+protected class Class_ImplementsAssignment_4_1 extends AssignmentToken  {
 	
-	public Class_SuperTypesAssignment_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Class_ImplementsAssignment_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getClassAccess().getSuperTypesAssignment_4_1();
+		return grammarAccess.getClassAccess().getImplementsAssignment_4_1();
 	}
 
     @Override
@@ -869,13 +869,13 @@ protected class Class_SuperTypesAssignment_4_1 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("superTypes",false)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("superTypes");
+		if((value = eObjectConsumer.getConsumable("implements",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("implements");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getJvmTypeReferenceRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getClassAccess().getSuperTypesJvmTypeReferenceParserRuleCall_4_1_0(); 
+				element = grammarAccess.getClassAccess().getImplementsJvmTypeReferenceParserRuleCall_4_1_0(); 
 				consumed = obj;
 				return param;
 			}

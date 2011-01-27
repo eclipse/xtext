@@ -175,7 +175,7 @@ public interface Xtend2Package extends EPackage
 	int XTEND_CLASS__NAME = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Extends</b></em>' reference.
+	 * The feature id for the '<em><b>Extends</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -184,7 +184,7 @@ public interface Xtend2Package extends EPackage
 	int XTEND_CLASS__EXTENDS = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Implements</b></em>' reference list.
+	 * The feature id for the '<em><b>Implements</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -193,7 +193,7 @@ public interface Xtend2Package extends EPackage
 	int XTEND_CLASS__IMPLEMENTS = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -639,10 +639,10 @@ public interface Xtend2Package extends EPackage
 	EAttribute getXtendClass_Name();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getExtends <em>Extends</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getExtends <em>Extends</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Extends</em>'.
+	 * @return the meta object for the containment reference '<em>Extends</em>'.
 	 * @see org.eclipse.xtext.xtend2.xtend2.XtendClass#getExtends()
 	 * @see #getXtendClass()
 	 * @generated
@@ -650,10 +650,10 @@ public interface Xtend2Package extends EPackage
 	EReference getXtendClass_Extends();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getImplements <em>Implements</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getImplements <em>Implements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Implements</em>'.
+	 * @return the meta object for the containment reference list '<em>Implements</em>'.
 	 * @see org.eclipse.xtext.xtend2.xtend2.XtendClass#getImplements()
 	 * @see #getXtendClass()
 	 * @generated
@@ -661,10 +661,10 @@ public interface Xtend2Package extends EPackage
 	EReference getXtendClass_Implements();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getSuperTypes <em>Super Types</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getSuperTypes <em>Super Types</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Super Types</em>'.
+	 * @return the meta object for the reference list '<em>Super Types</em>'.
 	 * @see org.eclipse.xtext.xtend2.xtend2.XtendClass#getSuperTypes()
 	 * @see #getXtendClass()
 	 * @generated
@@ -1008,7 +1008,7 @@ public interface Xtend2Package extends EPackage
 		EAttribute XTEND_CLASS__NAME = eINSTANCE.getXtendClass_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Extends</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Extends</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1016,7 +1016,7 @@ public interface Xtend2Package extends EPackage
 		EReference XTEND_CLASS__EXTENDS = eINSTANCE.getXtendClass_Extends();
 
 		/**
-		 * The meta object literal for the '<em><b>Implements</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Implements</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1024,7 +1024,7 @@ public interface Xtend2Package extends EPackage
 		EReference XTEND_CLASS__IMPLEMENTS = eINSTANCE.getXtendClass_Implements();
 
 		/**
-		 * The meta object literal for the '<em><b>Super Types</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Super Types</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

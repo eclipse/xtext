@@ -3804,9 +3804,9 @@ rule__Class__Group_3__1__Impl
     }
 :
 (
-{ before(grammarAccess.getClassAccess().getSuperTypesAssignment_3_1()); }
-(rule__Class__SuperTypesAssignment_3_1)
-{ after(grammarAccess.getClassAccess().getSuperTypesAssignment_3_1()); }
+{ before(grammarAccess.getClassAccess().getExtendsAssignment_3_1()); }
+(rule__Class__ExtendsAssignment_3_1)
+{ after(grammarAccess.getClassAccess().getExtendsAssignment_3_1()); }
 )
 
 ;
@@ -3867,9 +3867,9 @@ rule__Class__Group_4__1__Impl
     }
 :
 (
-{ before(grammarAccess.getClassAccess().getSuperTypesAssignment_4_1()); }
-(rule__Class__SuperTypesAssignment_4_1)
-{ after(grammarAccess.getClassAccess().getSuperTypesAssignment_4_1()); }
+{ before(grammarAccess.getClassAccess().getImplementsAssignment_4_1()); }
+(rule__Class__ImplementsAssignment_4_1)
+{ after(grammarAccess.getClassAccess().getImplementsAssignment_4_1()); }
 )
 
 ;
@@ -14992,14 +14992,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Class__SuperTypesAssignment_3_1
+rule__Class__ExtendsAssignment_3_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getClassAccess().getSuperTypesJvmTypeReferenceParserRuleCall_3_1_0()); }
-	ruleJvmTypeReference{ after(grammarAccess.getClassAccess().getSuperTypesJvmTypeReferenceParserRuleCall_3_1_0()); }
+{ before(grammarAccess.getClassAccess().getExtendsJvmTypeReferenceParserRuleCall_3_1_0()); }
+	ruleJvmTypeReference{ after(grammarAccess.getClassAccess().getExtendsJvmTypeReferenceParserRuleCall_3_1_0()); }
 )
 
 ;
@@ -15007,14 +15007,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Class__SuperTypesAssignment_4_1
+rule__Class__ImplementsAssignment_4_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getClassAccess().getSuperTypesJvmTypeReferenceParserRuleCall_4_1_0()); }
-	ruleJvmTypeReference{ after(grammarAccess.getClassAccess().getSuperTypesJvmTypeReferenceParserRuleCall_4_1_0()); }
+{ before(grammarAccess.getClassAccess().getImplementsJvmTypeReferenceParserRuleCall_4_1_0()); }
+	ruleJvmTypeReference{ after(grammarAccess.getClassAccess().getImplementsJvmTypeReferenceParserRuleCall_4_1_0()); }
 )
 
 ;

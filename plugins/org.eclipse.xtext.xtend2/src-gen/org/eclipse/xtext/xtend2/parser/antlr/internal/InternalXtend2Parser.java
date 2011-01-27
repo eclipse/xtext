@@ -678,7 +678,7 @@ public class InternalXtend2Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleClass"
-    // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:242:1: ruleClass returns [EObject current=null] : (otherlv_0= 'class' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '<' ( (lv_typeParameters_3_0= ruleJvmTypeParameter ) ) (otherlv_4= ',' ( (lv_typeParameters_5_0= ruleJvmTypeParameter ) ) )* otherlv_6= '>' )? (otherlv_7= 'extends' ( (lv_superTypes_8_0= ruleJvmTypeReference ) ) )? (otherlv_9= 'implements' ( (lv_superTypes_10_0= ruleJvmTypeReference ) ) )* otherlv_11= '{' ( (lv_members_12_0= ruleMember ) )* otherlv_13= '}' ) ;
+    // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:242:1: ruleClass returns [EObject current=null] : (otherlv_0= 'class' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '<' ( (lv_typeParameters_3_0= ruleJvmTypeParameter ) ) (otherlv_4= ',' ( (lv_typeParameters_5_0= ruleJvmTypeParameter ) ) )* otherlv_6= '>' )? (otherlv_7= 'extends' ( (lv_extends_8_0= ruleJvmTypeReference ) ) )? (otherlv_9= 'implements' ( (lv_implements_10_0= ruleJvmTypeReference ) ) )* otherlv_11= '{' ( (lv_members_12_0= ruleMember ) )* otherlv_13= '}' ) ;
     public final EObject ruleClass() throws RecognitionException {
         EObject current = null;
 
@@ -695,9 +695,9 @@ public class InternalXtend2Parser extends AbstractInternalAntlrParser {
 
         EObject lv_typeParameters_5_0 = null;
 
-        EObject lv_superTypes_8_0 = null;
+        EObject lv_extends_8_0 = null;
 
-        EObject lv_superTypes_10_0 = null;
+        EObject lv_implements_10_0 = null;
 
         EObject lv_members_12_0 = null;
 
@@ -705,11 +705,11 @@ public class InternalXtend2Parser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:245:28: ( (otherlv_0= 'class' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '<' ( (lv_typeParameters_3_0= ruleJvmTypeParameter ) ) (otherlv_4= ',' ( (lv_typeParameters_5_0= ruleJvmTypeParameter ) ) )* otherlv_6= '>' )? (otherlv_7= 'extends' ( (lv_superTypes_8_0= ruleJvmTypeReference ) ) )? (otherlv_9= 'implements' ( (lv_superTypes_10_0= ruleJvmTypeReference ) ) )* otherlv_11= '{' ( (lv_members_12_0= ruleMember ) )* otherlv_13= '}' ) )
-            // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:246:1: (otherlv_0= 'class' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '<' ( (lv_typeParameters_3_0= ruleJvmTypeParameter ) ) (otherlv_4= ',' ( (lv_typeParameters_5_0= ruleJvmTypeParameter ) ) )* otherlv_6= '>' )? (otherlv_7= 'extends' ( (lv_superTypes_8_0= ruleJvmTypeReference ) ) )? (otherlv_9= 'implements' ( (lv_superTypes_10_0= ruleJvmTypeReference ) ) )* otherlv_11= '{' ( (lv_members_12_0= ruleMember ) )* otherlv_13= '}' )
+            // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:245:28: ( (otherlv_0= 'class' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '<' ( (lv_typeParameters_3_0= ruleJvmTypeParameter ) ) (otherlv_4= ',' ( (lv_typeParameters_5_0= ruleJvmTypeParameter ) ) )* otherlv_6= '>' )? (otherlv_7= 'extends' ( (lv_extends_8_0= ruleJvmTypeReference ) ) )? (otherlv_9= 'implements' ( (lv_implements_10_0= ruleJvmTypeReference ) ) )* otherlv_11= '{' ( (lv_members_12_0= ruleMember ) )* otherlv_13= '}' ) )
+            // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:246:1: (otherlv_0= 'class' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '<' ( (lv_typeParameters_3_0= ruleJvmTypeParameter ) ) (otherlv_4= ',' ( (lv_typeParameters_5_0= ruleJvmTypeParameter ) ) )* otherlv_6= '>' )? (otherlv_7= 'extends' ( (lv_extends_8_0= ruleJvmTypeReference ) ) )? (otherlv_9= 'implements' ( (lv_implements_10_0= ruleJvmTypeReference ) ) )* otherlv_11= '{' ( (lv_members_12_0= ruleMember ) )* otherlv_13= '}' )
             {
-            // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:246:1: (otherlv_0= 'class' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '<' ( (lv_typeParameters_3_0= ruleJvmTypeParameter ) ) (otherlv_4= ',' ( (lv_typeParameters_5_0= ruleJvmTypeParameter ) ) )* otherlv_6= '>' )? (otherlv_7= 'extends' ( (lv_superTypes_8_0= ruleJvmTypeReference ) ) )? (otherlv_9= 'implements' ( (lv_superTypes_10_0= ruleJvmTypeReference ) ) )* otherlv_11= '{' ( (lv_members_12_0= ruleMember ) )* otherlv_13= '}' )
-            // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:246:3: otherlv_0= 'class' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '<' ( (lv_typeParameters_3_0= ruleJvmTypeParameter ) ) (otherlv_4= ',' ( (lv_typeParameters_5_0= ruleJvmTypeParameter ) ) )* otherlv_6= '>' )? (otherlv_7= 'extends' ( (lv_superTypes_8_0= ruleJvmTypeReference ) ) )? (otherlv_9= 'implements' ( (lv_superTypes_10_0= ruleJvmTypeReference ) ) )* otherlv_11= '{' ( (lv_members_12_0= ruleMember ) )* otherlv_13= '}'
+            // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:246:1: (otherlv_0= 'class' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '<' ( (lv_typeParameters_3_0= ruleJvmTypeParameter ) ) (otherlv_4= ',' ( (lv_typeParameters_5_0= ruleJvmTypeParameter ) ) )* otherlv_6= '>' )? (otherlv_7= 'extends' ( (lv_extends_8_0= ruleJvmTypeReference ) ) )? (otherlv_9= 'implements' ( (lv_implements_10_0= ruleJvmTypeReference ) ) )* otherlv_11= '{' ( (lv_members_12_0= ruleMember ) )* otherlv_13= '}' )
+            // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:246:3: otherlv_0= 'class' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '<' ( (lv_typeParameters_3_0= ruleJvmTypeParameter ) ) (otherlv_4= ',' ( (lv_typeParameters_5_0= ruleJvmTypeParameter ) ) )* otherlv_6= '>' )? (otherlv_7= 'extends' ( (lv_extends_8_0= ruleJvmTypeReference ) ) )? (otherlv_9= 'implements' ( (lv_implements_10_0= ruleJvmTypeReference ) ) )* otherlv_11= '{' ( (lv_members_12_0= ruleMember ) )* otherlv_13= '}'
             {
             otherlv_0=(Token)match(input,20,FOLLOW_20_in_ruleClass510); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -876,7 +876,7 @@ public class InternalXtend2Parser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:316:3: (otherlv_7= 'extends' ( (lv_superTypes_8_0= ruleJvmTypeReference ) ) )?
+            // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:316:3: (otherlv_7= 'extends' ( (lv_extends_8_0= ruleJvmTypeReference ) ) )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -885,7 +885,7 @@ public class InternalXtend2Parser extends AbstractInternalAntlrParser {
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:316:5: otherlv_7= 'extends' ( (lv_superTypes_8_0= ruleJvmTypeReference ) )
+                    // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:316:5: otherlv_7= 'extends' ( (lv_extends_8_0= ruleJvmTypeReference ) )
                     {
                     otherlv_7=(Token)match(input,24,FOLLOW_24_in_ruleClass629); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -893,19 +893,19 @@ public class InternalXtend2Parser extends AbstractInternalAntlrParser {
                           	newLeafNode(otherlv_7, grammarAccess.getClassAccess().getExtendsKeyword_3_0());
                           
                     }
-                    // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:320:1: ( (lv_superTypes_8_0= ruleJvmTypeReference ) )
-                    // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:321:1: (lv_superTypes_8_0= ruleJvmTypeReference )
+                    // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:320:1: ( (lv_extends_8_0= ruleJvmTypeReference ) )
+                    // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:321:1: (lv_extends_8_0= ruleJvmTypeReference )
                     {
-                    // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:321:1: (lv_superTypes_8_0= ruleJvmTypeReference )
-                    // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:322:3: lv_superTypes_8_0= ruleJvmTypeReference
+                    // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:321:1: (lv_extends_8_0= ruleJvmTypeReference )
+                    // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:322:3: lv_extends_8_0= ruleJvmTypeReference
                     {
                     if ( state.backtracking==0 ) {
                        
-                      	        newCompositeNode(grammarAccess.getClassAccess().getSuperTypesJvmTypeReferenceParserRuleCall_3_1_0()); 
+                      	        newCompositeNode(grammarAccess.getClassAccess().getExtendsJvmTypeReferenceParserRuleCall_3_1_0()); 
                       	    
                     }
                     pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleClass650);
-                    lv_superTypes_8_0=ruleJvmTypeReference();
+                    lv_extends_8_0=ruleJvmTypeReference();
 
                     state._fsp--;
                     if (state.failed) return current;
@@ -914,10 +914,10 @@ public class InternalXtend2Parser extends AbstractInternalAntlrParser {
                       	        if (current==null) {
                       	            current = createModelElementForParent(grammarAccess.getClassRule());
                       	        }
-                             		add(
+                             		set(
                              			current, 
-                             			"superTypes",
-                              		lv_superTypes_8_0, 
+                             			"extends",
+                              		lv_extends_8_0, 
                               		"JvmTypeReference");
                       	        afterParserOrEnumRuleCall();
                       	    
@@ -934,7 +934,7 @@ public class InternalXtend2Parser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:338:4: (otherlv_9= 'implements' ( (lv_superTypes_10_0= ruleJvmTypeReference ) ) )*
+            // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:338:4: (otherlv_9= 'implements' ( (lv_implements_10_0= ruleJvmTypeReference ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -947,7 +947,7 @@ public class InternalXtend2Parser extends AbstractInternalAntlrParser {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:338:6: otherlv_9= 'implements' ( (lv_superTypes_10_0= ruleJvmTypeReference ) )
+            	    // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:338:6: otherlv_9= 'implements' ( (lv_implements_10_0= ruleJvmTypeReference ) )
             	    {
             	    otherlv_9=(Token)match(input,25,FOLLOW_25_in_ruleClass665); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -955,19 +955,19 @@ public class InternalXtend2Parser extends AbstractInternalAntlrParser {
             	          	newLeafNode(otherlv_9, grammarAccess.getClassAccess().getImplementsKeyword_4_0());
             	          
             	    }
-            	    // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:342:1: ( (lv_superTypes_10_0= ruleJvmTypeReference ) )
-            	    // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:343:1: (lv_superTypes_10_0= ruleJvmTypeReference )
+            	    // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:342:1: ( (lv_implements_10_0= ruleJvmTypeReference ) )
+            	    // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:343:1: (lv_implements_10_0= ruleJvmTypeReference )
             	    {
-            	    // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:343:1: (lv_superTypes_10_0= ruleJvmTypeReference )
-            	    // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:344:3: lv_superTypes_10_0= ruleJvmTypeReference
+            	    // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:343:1: (lv_implements_10_0= ruleJvmTypeReference )
+            	    // ../org.eclipse.xtext.xtend2/src-gen/org/eclipse/xtext/xtend2/parser/antlr/internal/InternalXtend2.g:344:3: lv_implements_10_0= ruleJvmTypeReference
             	    {
             	    if ( state.backtracking==0 ) {
             	       
-            	      	        newCompositeNode(grammarAccess.getClassAccess().getSuperTypesJvmTypeReferenceParserRuleCall_4_1_0()); 
+            	      	        newCompositeNode(grammarAccess.getClassAccess().getImplementsJvmTypeReferenceParserRuleCall_4_1_0()); 
             	      	    
             	    }
             	    pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleClass686);
-            	    lv_superTypes_10_0=ruleJvmTypeReference();
+            	    lv_implements_10_0=ruleJvmTypeReference();
 
             	    state._fsp--;
             	    if (state.failed) return current;
@@ -978,8 +978,8 @@ public class InternalXtend2Parser extends AbstractInternalAntlrParser {
             	      	        }
             	             		add(
             	             			current, 
-            	             			"superTypes",
-            	              		lv_superTypes_10_0, 
+            	             			"implements",
+            	              		lv_implements_10_0, 
             	              		"JvmTypeReference");
             	      	        afterParserOrEnumRuleCall();
             	      	    

@@ -10,6 +10,7 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.xbase.XbaseQualifiedNameConverter;
@@ -26,6 +27,7 @@ import org.eclipse.xtext.xtend2.conversion.Xtend2ValueConverterService;
 import org.eclipse.xtext.xtend2.featurecalls.Xtend2IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xtend2.featurecalls.Xtend2IdentifiableTypeProvider;
 import org.eclipse.xtext.xtend2.linking.Xtend2LazyLinker;
+import org.eclipse.xtext.xtend2.naming.Xtend2QualifiedNameProvider;
 import org.eclipse.xtext.xtend2.typing.Xtend2ExpectedTypeProvider;
 import org.eclipse.xtext.xtend2.typing.Xtend2TypeProvider;
 
@@ -91,6 +93,11 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 
 	public Class<? extends IdentifiableSimpleNameProvider> bindIdentifiableSimpleNameProvider() {
 		return Xtend2IdentifiableSimpleNameProvider.class;
+	}
+	
+	@Override
+	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
+		return Xtend2QualifiedNameProvider.class;
 	}
 }
 

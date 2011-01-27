@@ -12120,26 +12120,26 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Class__Group_3__1__Impl"
-    // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3801:1: rule__Class__Group_3__1__Impl : ( ( rule__Class__SuperTypesAssignment_3_1 ) ) ;
+    // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3801:1: rule__Class__Group_3__1__Impl : ( ( rule__Class__ExtendsAssignment_3_1 ) ) ;
     public final void rule__Class__Group_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3805:1: ( ( ( rule__Class__SuperTypesAssignment_3_1 ) ) )
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3806:1: ( ( rule__Class__SuperTypesAssignment_3_1 ) )
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3805:1: ( ( ( rule__Class__ExtendsAssignment_3_1 ) ) )
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3806:1: ( ( rule__Class__ExtendsAssignment_3_1 ) )
             {
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3806:1: ( ( rule__Class__SuperTypesAssignment_3_1 ) )
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3807:1: ( rule__Class__SuperTypesAssignment_3_1 )
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3806:1: ( ( rule__Class__ExtendsAssignment_3_1 ) )
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3807:1: ( rule__Class__ExtendsAssignment_3_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getClassAccess().getSuperTypesAssignment_3_1()); 
+               before(grammarAccess.getClassAccess().getExtendsAssignment_3_1()); 
             }
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3808:1: ( rule__Class__SuperTypesAssignment_3_1 )
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3808:2: rule__Class__SuperTypesAssignment_3_1
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3808:1: ( rule__Class__ExtendsAssignment_3_1 )
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3808:2: rule__Class__ExtendsAssignment_3_1
             {
-            pushFollow(FOLLOW_rule__Class__SuperTypesAssignment_3_1_in_rule__Class__Group_3__1__Impl8084);
-            rule__Class__SuperTypesAssignment_3_1();
+            pushFollow(FOLLOW_rule__Class__ExtendsAssignment_3_1_in_rule__Class__Group_3__1__Impl8084);
+            rule__Class__ExtendsAssignment_3_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -12147,7 +12147,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getClassAccess().getSuperTypesAssignment_3_1()); 
+               after(grammarAccess.getClassAccess().getExtendsAssignment_3_1()); 
             }
 
             }
@@ -12283,26 +12283,26 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Class__Group_4__1__Impl"
-    // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3864:1: rule__Class__Group_4__1__Impl : ( ( rule__Class__SuperTypesAssignment_4_1 ) ) ;
+    // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3864:1: rule__Class__Group_4__1__Impl : ( ( rule__Class__ImplementsAssignment_4_1 ) ) ;
     public final void rule__Class__Group_4__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3868:1: ( ( ( rule__Class__SuperTypesAssignment_4_1 ) ) )
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3869:1: ( ( rule__Class__SuperTypesAssignment_4_1 ) )
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3868:1: ( ( ( rule__Class__ImplementsAssignment_4_1 ) ) )
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3869:1: ( ( rule__Class__ImplementsAssignment_4_1 ) )
             {
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3869:1: ( ( rule__Class__SuperTypesAssignment_4_1 ) )
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3870:1: ( rule__Class__SuperTypesAssignment_4_1 )
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3869:1: ( ( rule__Class__ImplementsAssignment_4_1 ) )
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3870:1: ( rule__Class__ImplementsAssignment_4_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getClassAccess().getSuperTypesAssignment_4_1()); 
+               before(grammarAccess.getClassAccess().getImplementsAssignment_4_1()); 
             }
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3871:1: ( rule__Class__SuperTypesAssignment_4_1 )
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3871:2: rule__Class__SuperTypesAssignment_4_1
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3871:1: ( rule__Class__ImplementsAssignment_4_1 )
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:3871:2: rule__Class__ImplementsAssignment_4_1
             {
-            pushFollow(FOLLOW_rule__Class__SuperTypesAssignment_4_1_in_rule__Class__Group_4__1__Impl8207);
-            rule__Class__SuperTypesAssignment_4_1();
+            pushFollow(FOLLOW_rule__Class__ImplementsAssignment_4_1_in_rule__Class__Group_4__1__Impl8207);
+            rule__Class__ImplementsAssignment_4_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -12310,7 +12310,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getClassAccess().getSuperTypesAssignment_4_1()); 
+               after(grammarAccess.getClassAccess().getImplementsAssignment_4_1()); 
             }
 
             }
@@ -42870,9 +42870,9 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__Class__TypeParametersAssignment_2_2_1"
 
 
-    // $ANTLR start "rule__Class__SuperTypesAssignment_3_1"
-    // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:14995:1: rule__Class__SuperTypesAssignment_3_1 : ( ruleJvmTypeReference ) ;
-    public final void rule__Class__SuperTypesAssignment_3_1() throws RecognitionException {
+    // $ANTLR start "rule__Class__ExtendsAssignment_3_1"
+    // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:14995:1: rule__Class__ExtendsAssignment_3_1 : ( ruleJvmTypeReference ) ;
+    public final void rule__Class__ExtendsAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -42884,15 +42884,15 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:15001:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getClassAccess().getSuperTypesJvmTypeReferenceParserRuleCall_3_1_0()); 
+               before(grammarAccess.getClassAccess().getExtendsJvmTypeReferenceParserRuleCall_3_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__Class__SuperTypesAssignment_3_130088);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__Class__ExtendsAssignment_3_130088);
             ruleJvmTypeReference();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getClassAccess().getSuperTypesJvmTypeReferenceParserRuleCall_3_1_0()); 
+               after(grammarAccess.getClassAccess().getExtendsJvmTypeReferenceParserRuleCall_3_1_0()); 
             }
 
             }
@@ -42912,12 +42912,12 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Class__SuperTypesAssignment_3_1"
+    // $ANTLR end "rule__Class__ExtendsAssignment_3_1"
 
 
-    // $ANTLR start "rule__Class__SuperTypesAssignment_4_1"
-    // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:15010:1: rule__Class__SuperTypesAssignment_4_1 : ( ruleJvmTypeReference ) ;
-    public final void rule__Class__SuperTypesAssignment_4_1() throws RecognitionException {
+    // $ANTLR start "rule__Class__ImplementsAssignment_4_1"
+    // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:15010:1: rule__Class__ImplementsAssignment_4_1 : ( ruleJvmTypeReference ) ;
+    public final void rule__Class__ImplementsAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -42929,15 +42929,15 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:15016:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getClassAccess().getSuperTypesJvmTypeReferenceParserRuleCall_4_1_0()); 
+               before(grammarAccess.getClassAccess().getImplementsJvmTypeReferenceParserRuleCall_4_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__Class__SuperTypesAssignment_4_130119);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__Class__ImplementsAssignment_4_130119);
             ruleJvmTypeReference();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getClassAccess().getSuperTypesJvmTypeReferenceParserRuleCall_4_1_0()); 
+               after(grammarAccess.getClassAccess().getImplementsJvmTypeReferenceParserRuleCall_4_1_0()); 
             }
 
             }
@@ -42957,7 +42957,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Class__SuperTypesAssignment_4_1"
+    // $ANTLR end "rule__Class__ImplementsAssignment_4_1"
 
 
     // $ANTLR start "rule__Class__MembersAssignment_6"
@@ -51040,12 +51040,12 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__Class__Group_3__1_in_rule__Class__Group_3__07998 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_45_in_rule__Class__Group_3__0__Impl8026 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Class__Group_3__1__Impl_in_rule__Class__Group_3__18057 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Class__SuperTypesAssignment_3_1_in_rule__Class__Group_3__1__Impl8084 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Class__ExtendsAssignment_3_1_in_rule__Class__Group_3__1__Impl8084 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Class__Group_4__0__Impl_in_rule__Class__Group_4__08118 = new BitSet(new long[]{0x0000800000000010L,0x0000000000001000L});
     public static final BitSet FOLLOW_rule__Class__Group_4__1_in_rule__Class__Group_4__08121 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_46_in_rule__Class__Group_4__0__Impl8149 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Class__Group_4__1__Impl_in_rule__Class__Group_4__18180 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Class__SuperTypesAssignment_4_1_in_rule__Class__Group_4__1__Impl8207 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Class__ImplementsAssignment_4_1_in_rule__Class__Group_4__1__Impl8207 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Function__Group__0__Impl_in_rule__Function__Group__08241 = new BitSet(new long[]{0x0000800004000010L,0x0000000000001000L});
     public static final BitSet FOLLOW_rule__Function__Group__1_in_rule__Function__Group__08244 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Function__Group_0__0_in_rule__Function__Group__0__Impl8271 = new BitSet(new long[]{0x0000000000000002L});
@@ -51931,8 +51931,8 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_RULE_ID_in_rule__Class__NameAssignment_129995 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmTypeParameter_in_rule__Class__TypeParametersAssignment_2_130026 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmTypeParameter_in_rule__Class__TypeParametersAssignment_2_2_130057 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__Class__SuperTypesAssignment_3_130088 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__Class__SuperTypesAssignment_4_130119 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__Class__ExtendsAssignment_3_130088 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__Class__ImplementsAssignment_4_130119 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleMember_in_rule__Class__MembersAssignment_630150 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmTypeParameter_in_rule__Function__TypeParametersAssignment_0_130181 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmTypeParameter_in_rule__Function__TypeParametersAssignment_0_2_130212 = new BitSet(new long[]{0x0000000000000002L});
