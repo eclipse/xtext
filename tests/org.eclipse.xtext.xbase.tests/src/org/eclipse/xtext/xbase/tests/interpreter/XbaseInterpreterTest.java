@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.interpreter;
 
+import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
-import org.eclipse.xtext.parser.ParseHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;

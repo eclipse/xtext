@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parser;
+package org.eclipse.xtext.junit.util;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,7 +23,6 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
- * 
  * Some convenience methods for parsing (i.e. testing, etc.) 
  * 
  * @author Sven Efftinge - Initial contribution and API

@@ -9,8 +9,8 @@ package org.eclipse.xtext.xtend2.tests.compiler;
 
 import java.lang.reflect.Method;
 
+import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
-import org.eclipse.xtext.parser.ParseHelper;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
 import org.eclipse.xtext.xbase.lib.Strings;
