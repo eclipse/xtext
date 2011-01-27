@@ -4,7 +4,6 @@ import java.util.LinkedList;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XExpression;
@@ -19,6 +18,7 @@ import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -57,9 +57,9 @@ public class Xtend2Compiler extends XbaseCompiler {
 		appendable.append("public class ").append(obj.getName()).append(" {");
 		appendable.increaseIndentation();
 		declareThis(obj, appendable);
-		for (JvmOperation op : obj.getDeclaredOperations()) {
-			if (op instanceof XtendFunction) {
-				compile((XtendFunction)op,appendable);
+		for (XtendMember member : obj.getMembers()) {
+			if (member instanceof XtendFunction) {
+				compile((XtendFunction)member,appendable);
 			}
 		}
 		appendable.decreaseIndentation();

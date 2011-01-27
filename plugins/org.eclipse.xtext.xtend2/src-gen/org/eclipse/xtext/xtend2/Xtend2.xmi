@@ -97,8 +97,8 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Member">
-      <type metamodel="/0/@metamodelDeclarations.3">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmMember"/>
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/Xtend2#//XtendMember"/>
       </type>
       <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
     </rules>

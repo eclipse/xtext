@@ -69,8 +69,8 @@ public class Xtend2FactoryImpl extends EFactoryImpl implements Xtend2Factory
 		{
 			case Xtend2Package.XTEND_FILE: return createXtendFile();
 			case Xtend2Package.XTEND_IMPORT: return createXtendImport();
-			case Xtend2Package.XTEND_FUNCTION: return createXtendFunction();
 			case Xtend2Package.XTEND_CLASS: return createXtendClass();
+			case Xtend2Package.XTEND_FUNCTION: return createXtendFunction();
 			case Xtend2Package.RICH_STRING: return createRichString();
 			case Xtend2Package.RICH_STRING_LITERAL: return createRichStringLiteral();
 			case Xtend2Package.RICH_STRING_FOR_LOOP: return createRichStringForLoop();
@@ -108,10 +108,10 @@ public class Xtend2FactoryImpl extends EFactoryImpl implements Xtend2Factory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public XtendFunction createXtendFunction()
+	public XtendClass createXtendClass()
 	{
-		XtendFunctionImplCustom xtendFunction = new XtendFunctionImplCustom();
-		return xtendFunction;
+		XtendClassImplCustom xtendClass = new XtendClassImplCustom();
+		return xtendClass;
 	}
 
 	/**
@@ -119,10 +119,10 @@ public class Xtend2FactoryImpl extends EFactoryImpl implements Xtend2Factory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public XtendClass createXtendClass()
+	public XtendFunction createXtendFunction()
 	{
-		XtendClassImplCustom xtendClass = new XtendClassImplCustom();
-		return xtendClass;
+		XtendFunctionImplCustom xtendFunction = new XtendFunctionImplCustom();
+		return xtendFunction;
 	}
 
 	/**

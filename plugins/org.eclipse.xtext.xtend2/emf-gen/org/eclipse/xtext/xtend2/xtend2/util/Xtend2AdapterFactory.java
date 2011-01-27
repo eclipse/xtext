@@ -12,16 +12,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.common.types.JvmAnnotationTarget;
-import org.eclipse.xtext.common.types.JvmComponentType;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmExecutable;
-import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 
 import org.eclipse.xtext.xbase.XExpression;
@@ -104,14 +95,19 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 				return createXtendImportAdapter();
 			}
 			@Override
-			public Adapter caseXtendFunction(XtendFunction object)
-			{
-				return createXtendFunctionAdapter();
-			}
-			@Override
 			public Adapter caseXtendClass(XtendClass object)
 			{
 				return createXtendClassAdapter();
+			}
+			@Override
+			public Adapter caseXtendMember(XtendMember object)
+			{
+				return createXtendMemberAdapter();
+			}
+			@Override
+			public Adapter caseXtendFunction(XtendFunction object)
+			{
+				return createXtendFunctionAdapter();
 			}
 			@Override
 			public Adapter caseRichString(RichString object)
@@ -139,59 +135,14 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 				return createRichStringElseIfAdapter();
 			}
 			@Override
-			public Adapter caseJvmAnnotationTarget(JvmAnnotationTarget object)
-			{
-				return createJvmAnnotationTargetAdapter();
-			}
-			@Override
 			public Adapter caseJvmIdentifiableElement(JvmIdentifiableElement object)
 			{
 				return createJvmIdentifiableElementAdapter();
 			}
 			@Override
-			public Adapter caseJvmMember(JvmMember object)
-			{
-				return createJvmMemberAdapter();
-			}
-			@Override
-			public Adapter caseJvmFeature(JvmFeature object)
-			{
-				return createJvmFeatureAdapter();
-			}
-			@Override
 			public Adapter caseJvmTypeParameterDeclarator(JvmTypeParameterDeclarator object)
 			{
 				return createJvmTypeParameterDeclaratorAdapter();
-			}
-			@Override
-			public Adapter caseJvmExecutable(JvmExecutable object)
-			{
-				return createJvmExecutableAdapter();
-			}
-			@Override
-			public Adapter caseJvmOperation(JvmOperation object)
-			{
-				return createJvmOperationAdapter();
-			}
-			@Override
-			public Adapter caseJvmType(JvmType object)
-			{
-				return createJvmTypeAdapter();
-			}
-			@Override
-			public Adapter caseJvmComponentType(JvmComponentType object)
-			{
-				return createJvmComponentTypeAdapter();
-			}
-			@Override
-			public Adapter caseJvmDeclaredType(JvmDeclaredType object)
-			{
-				return createJvmDeclaredTypeAdapter();
-			}
-			@Override
-			public Adapter caseJvmGenericType(JvmGenericType object)
-			{
-				return createJvmGenericTypeAdapter();
 			}
 			@Override
 			public Adapter caseXExpression(XExpression object)
@@ -261,21 +212,6 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction <em>Xtend Function</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xtend2.xtend2.XtendFunction
-	 * @generated
-	 */
-	public Adapter createXtendFunctionAdapter()
-	{
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtend2.xtend2.XtendClass <em>Xtend Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -286,6 +222,36 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createXtendClassAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtend2.xtend2.XtendMember <em>Xtend Member</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendMember
+	 * @generated
+	 */
+	public Adapter createXtendMemberAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction <em>Xtend Function</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendFunction
+	 * @generated
+	 */
+	public Adapter createXtendFunctionAdapter()
 	{
 		return null;
 	}
@@ -366,21 +332,6 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmAnnotationTarget <em>Jvm Annotation Target</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.JvmAnnotationTarget
-	 * @generated
-	 */
-	public Adapter createJvmAnnotationTargetAdapter()
-	{
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmIdentifiableElement <em>Jvm Identifiable Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -396,36 +347,6 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmMember <em>Jvm Member</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.JvmMember
-	 * @generated
-	 */
-	public Adapter createJvmMemberAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmFeature <em>Jvm Feature</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.JvmFeature
-	 * @generated
-	 */
-	public Adapter createJvmFeatureAdapter()
-	{
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmTypeParameterDeclarator <em>Jvm Type Parameter Declarator</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -436,96 +357,6 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createJvmTypeParameterDeclaratorAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmExecutable <em>Jvm Executable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.JvmExecutable
-	 * @generated
-	 */
-	public Adapter createJvmExecutableAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmOperation <em>Jvm Operation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.JvmOperation
-	 * @generated
-	 */
-	public Adapter createJvmOperationAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmType <em>Jvm Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.JvmType
-	 * @generated
-	 */
-	public Adapter createJvmTypeAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmComponentType <em>Jvm Component Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.JvmComponentType
-	 * @generated
-	 */
-	public Adapter createJvmComponentTypeAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmDeclaredType <em>Jvm Declared Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.JvmDeclaredType
-	 * @generated
-	 */
-	public Adapter createJvmDeclaredTypeAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmGenericType <em>Jvm Generic Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.JvmGenericType
-	 * @generated
-	 */
-	public Adapter createJvmGenericTypeAdapter()
 	{
 		return null;
 	}

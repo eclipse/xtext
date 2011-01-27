@@ -8,6 +8,8 @@ package org.eclipse.xtext.xtend2.xtend2;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
@@ -21,6 +23,9 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getImplements <em>Implements</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getSuperTypes <em>Super Types</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getMembers <em>Members</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getInferredJvmType <em>Inferred Jvm Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -28,7 +33,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * @model
  * @generated
  */
-public interface XtendClass extends JvmGenericType
+public interface XtendClass extends JvmIdentifiableElement, JvmTypeParameterDeclarator
 {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -86,5 +91,81 @@ public interface XtendClass extends JvmGenericType
 	 * @generated
 	 */
 	EList<JvmTypeReference> getImplements();
+
+	/**
+	 * Returns the value of the '<em><b>Super Types</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeReference}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Super Types</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Super Types</em>' containment reference list.
+	 * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getXtendClass_SuperTypes()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<JvmTypeReference> getSuperTypes();
+
+	/**
+	 * Returns the value of the '<em><b>Members</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.xtend2.xtend2.XtendMember}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.xtend2.xtend2.XtendMember#getDeclaringType <em>Declaring Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Members</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Members</em>' containment reference list.
+	 * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getXtendClass_Members()
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendMember#getDeclaringType
+	 * @model opposite="declaringType" containment="true"
+	 * @generated
+	 */
+	EList<XtendMember> getMembers();
+
+	/**
+	 * Returns the value of the '<em><b>Inferred Jvm Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Inferred Jvm Type</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Inferred Jvm Type</em>' reference.
+	 * @see #setInferredJvmType(JvmGenericType)
+	 * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getXtendClass_InferredJvmType()
+	 * @model transient="true"
+	 * @generated
+	 */
+	JvmGenericType getInferredJvmType();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getInferredJvmType <em>Inferred Jvm Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Inferred Jvm Type</em>' reference.
+	 * @see #getInferredJvmType()
+	 * @generated
+	 */
+	void setInferredJvmType(JvmGenericType value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	String getPackageName();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	String getSimpleName();
 
 } // XtendClass

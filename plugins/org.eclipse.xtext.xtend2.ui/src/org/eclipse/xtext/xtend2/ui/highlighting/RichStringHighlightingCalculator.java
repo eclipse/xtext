@@ -13,7 +13,6 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -30,6 +29,7 @@ import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -51,7 +51,7 @@ public class RichStringHighlightingCalculator implements ISemanticHighlightingCa
 			return;
 		XtendFile file = (XtendFile) resource.getContents().get(0);
 		if (file.getXtendClass() != null) {
-			for (JvmMember member : file.getXtendClass().getMembers()) {
+			for (XtendMember member : file.getXtendClass().getMembers()) {
 				if (member.eClass() == Xtend2Package.Literals.XTEND_FUNCTION) {
 					XtendFunction function = (XtendFunction) member;
 					XExpression rootExpression = function.getExpression();

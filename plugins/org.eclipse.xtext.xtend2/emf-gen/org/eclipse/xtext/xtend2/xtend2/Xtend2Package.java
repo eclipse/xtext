@@ -147,142 +147,6 @@ public interface Xtend2Package extends EPackage
 	int XTEND_IMPORT_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl <em>Xtend Function</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl
-	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getXtendFunction()
-	 * @generated
-	 */
-	int XTEND_FUNCTION = 2;
-
-	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__ANNOTATIONS = TypesPackage.JVM_OPERATION__ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__DECLARING_TYPE = TypesPackage.JVM_OPERATION__DECLARING_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__VISIBILITY = TypesPackage.JVM_OPERATION__VISIBILITY;
-
-	/**
-	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__FULLY_QUALIFIED_NAME = TypesPackage.JVM_OPERATION__FULLY_QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__TYPE_PARAMETERS = TypesPackage.JVM_OPERATION__TYPE_PARAMETERS;
-
-	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__PARAMETERS = TypesPackage.JVM_OPERATION__PARAMETERS;
-
-	/**
-	 * The feature id for the '<em><b>Exceptions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__EXCEPTIONS = TypesPackage.JVM_OPERATION__EXCEPTIONS;
-
-	/**
-	 * The feature id for the '<em><b>Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__STATIC = TypesPackage.JVM_OPERATION__STATIC;
-
-	/**
-	 * The feature id for the '<em><b>Final</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__FINAL = TypesPackage.JVM_OPERATION__FINAL;
-
-	/**
-	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__ABSTRACT = TypesPackage.JVM_OPERATION__ABSTRACT;
-
-	/**
-	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__RETURN_TYPE = TypesPackage.JVM_OPERATION__RETURN_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__NAME = TypesPackage.JVM_OPERATION_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__EXPRESSION = TypesPackage.JVM_OPERATION_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Xtend Function</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION_FEATURE_COUNT = TypesPackage.JVM_OPERATION_FEATURE_COUNT + 2;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl <em>Xtend Class</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -290,97 +154,7 @@ public interface Xtend2Package extends EPackage
 	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getXtendClass()
 	 * @generated
 	 */
-	int XTEND_CLASS = 3;
-
-	/**
-	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__ARRAY_TYPE = TypesPackage.JVM_GENERIC_TYPE__ARRAY_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__ANNOTATIONS = TypesPackage.JVM_GENERIC_TYPE__ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__DECLARING_TYPE = TypesPackage.JVM_GENERIC_TYPE__DECLARING_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__VISIBILITY = TypesPackage.JVM_GENERIC_TYPE__VISIBILITY;
-
-	/**
-	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__FULLY_QUALIFIED_NAME = TypesPackage.JVM_GENERIC_TYPE__FULLY_QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__SUPER_TYPES = TypesPackage.JVM_GENERIC_TYPE__SUPER_TYPES;
-
-	/**
-	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__MEMBERS = TypesPackage.JVM_GENERIC_TYPE__MEMBERS;
-
-	/**
-	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__ABSTRACT = TypesPackage.JVM_GENERIC_TYPE__ABSTRACT;
-
-	/**
-	 * The feature id for the '<em><b>Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__STATIC = TypesPackage.JVM_GENERIC_TYPE__STATIC;
-
-	/**
-	 * The feature id for the '<em><b>Final</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__FINAL = TypesPackage.JVM_GENERIC_TYPE__FINAL;
+	int XTEND_CLASS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
@@ -389,16 +163,7 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CLASS__TYPE_PARAMETERS = TypesPackage.JVM_GENERIC_TYPE__TYPE_PARAMETERS;
-
-	/**
-	 * The feature id for the '<em><b>Interface</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__INTERFACE = TypesPackage.JVM_GENERIC_TYPE__INTERFACE;
+	int XTEND_CLASS__TYPE_PARAMETERS = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -407,7 +172,7 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CLASS__NAME = TypesPackage.JVM_GENERIC_TYPE_FEATURE_COUNT + 0;
+	int XTEND_CLASS__NAME = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Extends</b></em>' reference.
@@ -416,7 +181,7 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CLASS__EXTENDS = TypesPackage.JVM_GENERIC_TYPE_FEATURE_COUNT + 1;
+	int XTEND_CLASS__EXTENDS = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Implements</b></em>' reference list.
@@ -425,7 +190,34 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CLASS__IMPLEMENTS = TypesPackage.JVM_GENERIC_TYPE_FEATURE_COUNT + 2;
+	int XTEND_CLASS__IMPLEMENTS = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS__SUPER_TYPES = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS__MEMBERS = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Inferred Jvm Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS__INFERRED_JVM_TYPE = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Xtend Class</em>' class.
@@ -434,7 +226,126 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CLASS_FEATURE_COUNT = TypesPackage.JVM_GENERIC_TYPE_FEATURE_COUNT + 3;
+	int XTEND_CLASS_FEATURE_COUNT = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 7;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendMemberImpl <em>Xtend Member</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xtend2.xtend2.impl.XtendMemberImpl
+	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getXtendMember()
+	 * @generated
+	 */
+	int XTEND_MEMBER = 3;
+
+	/**
+	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_MEMBER__DECLARING_TYPE = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Inferred Jvm Member</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_MEMBER__INFERRED_JVM_MEMBER = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Xtend Member</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_MEMBER_FEATURE_COUNT = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl <em>Xtend Function</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl
+	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getXtendFunction()
+	 * @generated
+	 */
+	int XTEND_FUNCTION = 4;
+
+	/**
+	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FUNCTION__DECLARING_TYPE = XTEND_MEMBER__DECLARING_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Inferred Jvm Member</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FUNCTION__INFERRED_JVM_MEMBER = XTEND_MEMBER__INFERRED_JVM_MEMBER;
+
+	/**
+	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FUNCTION__TYPE_PARAMETERS = XTEND_MEMBER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FUNCTION__NAME = XTEND_MEMBER_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FUNCTION__EXPRESSION = XTEND_MEMBER_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FUNCTION__RETURN_TYPE = XTEND_MEMBER_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FUNCTION__PARAMETERS = XTEND_MEMBER_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of structural features of the '<em>Xtend Function</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FUNCTION_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.RichStringImpl <em>Rich String</em>}' class.
@@ -444,7 +355,7 @@ public interface Xtend2Package extends EPackage
 	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getRichString()
 	 * @generated
 	 */
-	int RICH_STRING = 4;
+	int RICH_STRING = 5;
 
 	/**
 	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -472,7 +383,7 @@ public interface Xtend2Package extends EPackage
 	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getRichStringLiteral()
 	 * @generated
 	 */
-	int RICH_STRING_LITERAL = 5;
+	int RICH_STRING_LITERAL = 6;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -500,7 +411,7 @@ public interface Xtend2Package extends EPackage
 	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getRichStringForLoop()
 	 * @generated
 	 */
-	int RICH_STRING_FOR_LOOP = 6;
+	int RICH_STRING_FOR_LOOP = 7;
 
 	/**
 	 * The feature id for the '<em><b>For Expression</b></em>' containment reference.
@@ -546,7 +457,7 @@ public interface Xtend2Package extends EPackage
 	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getRichStringIf()
 	 * @generated
 	 */
-	int RICH_STRING_IF = 7;
+	int RICH_STRING_IF = 8;
 
 	/**
 	 * The feature id for the '<em><b>If</b></em>' containment reference.
@@ -601,7 +512,7 @@ public interface Xtend2Package extends EPackage
 	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getRichStringElseIf()
 	 * @generated
 	 */
-	int RICH_STRING_ELSE_IF = 8;
+	int RICH_STRING_ELSE_IF = 9;
 
 	/**
 	 * The feature id for the '<em><b>If</b></em>' containment reference.
@@ -707,38 +618,6 @@ public interface Xtend2Package extends EPackage
 	EAttribute getXtendImport_Wildcard();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction <em>Xtend Function</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Xtend Function</em>'.
-	 * @see org.eclipse.xtext.xtend2.xtend2.XtendFunction
-	 * @generated
-	 */
-	EClass getXtendFunction();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.xtext.xtend2.xtend2.XtendFunction#getName()
-	 * @see #getXtendFunction()
-	 * @generated
-	 */
-	EAttribute getXtendFunction_Name();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#getExpression <em>Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Expression</em>'.
-	 * @see org.eclipse.xtext.xtend2.xtend2.XtendFunction#getExpression()
-	 * @see #getXtendFunction()
-	 * @generated
-	 */
-	EReference getXtendFunction_Expression();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.XtendClass <em>Xtend Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -780,6 +659,125 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 */
 	EReference getXtendClass_Implements();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getSuperTypes <em>Super Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Super Types</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendClass#getSuperTypes()
+	 * @see #getXtendClass()
+	 * @generated
+	 */
+	EReference getXtendClass_SuperTypes();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getMembers <em>Members</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Members</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendClass#getMembers()
+	 * @see #getXtendClass()
+	 * @generated
+	 */
+	EReference getXtendClass_Members();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getInferredJvmType <em>Inferred Jvm Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Inferred Jvm Type</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendClass#getInferredJvmType()
+	 * @see #getXtendClass()
+	 * @generated
+	 */
+	EReference getXtendClass_InferredJvmType();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.XtendMember <em>Xtend Member</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Xtend Member</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendMember
+	 * @generated
+	 */
+	EClass getXtendMember();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.xtend2.xtend2.XtendMember#getDeclaringType <em>Declaring Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Declaring Type</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendMember#getDeclaringType()
+	 * @see #getXtendMember()
+	 * @generated
+	 */
+	EReference getXtendMember_DeclaringType();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xtend2.xtend2.XtendMember#getInferredJvmMember <em>Inferred Jvm Member</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Inferred Jvm Member</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendMember#getInferredJvmMember()
+	 * @see #getXtendMember()
+	 * @generated
+	 */
+	EReference getXtendMember_InferredJvmMember();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction <em>Xtend Function</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Xtend Function</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendFunction
+	 * @generated
+	 */
+	EClass getXtendFunction();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendFunction#getName()
+	 * @see #getXtendFunction()
+	 * @generated
+	 */
+	EAttribute getXtendFunction_Name();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendFunction#getExpression()
+	 * @see #getXtendFunction()
+	 * @generated
+	 */
+	EReference getXtendFunction_Expression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#getReturnType <em>Return Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Return Type</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendFunction#getReturnType()
+	 * @see #getXtendFunction()
+	 * @generated
+	 */
+	EReference getXtendFunction_ReturnType();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#getParameters <em>Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendFunction#getParameters()
+	 * @see #getXtendFunction()
+	 * @generated
+	 */
+	EReference getXtendFunction_Parameters();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.RichString <em>Rich String</em>}'.
@@ -992,32 +990,6 @@ public interface Xtend2Package extends EPackage
 		EAttribute XTEND_IMPORT__WILDCARD = eINSTANCE.getXtendImport_Wildcard();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl <em>Xtend Function</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl
-		 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getXtendFunction()
-		 * @generated
-		 */
-		EClass XTEND_FUNCTION = eINSTANCE.getXtendFunction();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute XTEND_FUNCTION__NAME = eINSTANCE.getXtendFunction_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XTEND_FUNCTION__EXPRESSION = eINSTANCE.getXtendFunction_Expression();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl <em>Xtend Class</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1050,6 +1022,98 @@ public interface Xtend2Package extends EPackage
 		 * @generated
 		 */
 		EReference XTEND_CLASS__IMPLEMENTS = eINSTANCE.getXtendClass_Implements();
+
+		/**
+		 * The meta object literal for the '<em><b>Super Types</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTEND_CLASS__SUPER_TYPES = eINSTANCE.getXtendClass_SuperTypes();
+
+		/**
+		 * The meta object literal for the '<em><b>Members</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTEND_CLASS__MEMBERS = eINSTANCE.getXtendClass_Members();
+
+		/**
+		 * The meta object literal for the '<em><b>Inferred Jvm Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTEND_CLASS__INFERRED_JVM_TYPE = eINSTANCE.getXtendClass_InferredJvmType();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendMemberImpl <em>Xtend Member</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xtend2.xtend2.impl.XtendMemberImpl
+		 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getXtendMember()
+		 * @generated
+		 */
+		EClass XTEND_MEMBER = eINSTANCE.getXtendMember();
+
+		/**
+		 * The meta object literal for the '<em><b>Declaring Type</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTEND_MEMBER__DECLARING_TYPE = eINSTANCE.getXtendMember_DeclaringType();
+
+		/**
+		 * The meta object literal for the '<em><b>Inferred Jvm Member</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTEND_MEMBER__INFERRED_JVM_MEMBER = eINSTANCE.getXtendMember_InferredJvmMember();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl <em>Xtend Function</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl
+		 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getXtendFunction()
+		 * @generated
+		 */
+		EClass XTEND_FUNCTION = eINSTANCE.getXtendFunction();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XTEND_FUNCTION__NAME = eINSTANCE.getXtendFunction_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTEND_FUNCTION__EXPRESSION = eINSTANCE.getXtendFunction_Expression();
+
+		/**
+		 * The meta object literal for the '<em><b>Return Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTEND_FUNCTION__RETURN_TYPE = eINSTANCE.getXtendFunction_ReturnType();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTEND_FUNCTION__PARAMETERS = eINSTANCE.getXtendFunction_Parameters();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.RichStringImpl <em>Rich String</em>}' class.
