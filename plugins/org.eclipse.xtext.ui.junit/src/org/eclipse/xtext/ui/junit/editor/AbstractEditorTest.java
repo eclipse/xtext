@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.tests.editor;
+package org.eclipse.xtext.ui.junit.editor;
 
 import java.lang.reflect.Field;
 
@@ -19,7 +19,6 @@ import org.eclipse.ui.internal.ErrorEditorPart;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
-import org.eclipse.xtext.ui.tests.workbench.AbstractWorkbenchTest;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -31,11 +30,11 @@ public abstract class AbstractEditorTest extends AbstractWorkbenchTest {
 	
 	protected abstract String getEditorId();
 
-	public AbstractEditorTest() {
+	protected AbstractEditorTest() {
 		super();
 	}
 
-	public AbstractEditorTest(String name) {
+	protected AbstractEditorTest(String name) {
 		super(name);
 	}
 

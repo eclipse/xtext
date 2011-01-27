@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.tests.editor.autoedit;
+package org.eclipse.xtext.ui.junit.editor.autoedit;
 
 import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 
@@ -16,9 +16,8 @@ import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Event;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.tests.editor.AbstractEditorTest;
+import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
 
 import com.google.common.collect.Lists;
 
@@ -29,29 +28,26 @@ public abstract class AbstractAutoEditTest extends AbstractEditorTest {
 
 	private List<IFile> files = Lists.newArrayList();
 
-	public AbstractAutoEditTest() {
+	protected AbstractAutoEditTest() {
 		super();
 	}
 
-	@Override
-	protected String getEditorId() {
-		return "org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage";
-	}
-
-	public AbstractAutoEditTest(String name) {
+	protected AbstractAutoEditTest(String name) {
 		super(name);
 	}
 
 	@Override
 	protected void tearDown() throws Exception {
-		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
 		files.clear();
 		super.tearDown();
 	}
+	
+	protected abstract String getFileExtension();
 
 	protected XtextEditor openEditor(String string) throws Exception {
 		int cursor = string.indexOf('|');
-		IFile file = createFile("foo/myfile" + files.size() + ".bmtestlanguage", string.replace("|", ""));
+		String fileExtension = getFileExtension();
+		IFile file = createFile("foo/myfile" + files.size() + "." + fileExtension, string.replace("|", ""));
 		files.add(file);
 		XtextEditor editor = openEditor(file);
 		editor.getInternalSourceViewer().setSelectedRange(cursor, 0);

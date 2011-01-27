@@ -26,8 +26,8 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.IOutlineNodeComparer;
+import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
 import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.tests.editor.AbstractEditorTest;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API

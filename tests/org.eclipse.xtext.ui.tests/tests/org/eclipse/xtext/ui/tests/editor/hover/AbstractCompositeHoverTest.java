@@ -20,8 +20,8 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.hover.AbstractCompositeHover;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
 import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.tests.editor.AbstractEditorTest;
 import com.google.inject.internal.Lists;
 
 /**

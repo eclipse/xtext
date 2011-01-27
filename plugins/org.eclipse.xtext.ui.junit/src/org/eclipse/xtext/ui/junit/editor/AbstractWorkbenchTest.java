@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.tests.workbench;
+package org.eclipse.xtext.ui.junit.editor;
 
 import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 import junit.framework.TestCase;
@@ -42,10 +42,10 @@ public abstract class AbstractWorkbenchTest extends TestCase {
 	
 	@Override
 	protected void tearDown() throws Exception {
-		super.tearDown();
 		closeEditors();
 		cleanWorkspace();
 		waitForAutoBuild();
+		super.tearDown();
 	}
 	
 	protected void closeEditors() {

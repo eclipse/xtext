@@ -23,6 +23,7 @@ import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
 import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRefactoringDocumentProvider.EditorDocument;
@@ -30,7 +31,6 @@ import org.eclipse.xtext.ui.refactoring.impl.DefaultRefactoringDocumentProvider.
 import org.eclipse.xtext.ui.refactoring.impl.DisplayChangeWrapper;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 import org.eclipse.xtext.ui.tests.Activator;
-import org.eclipse.xtext.ui.tests.editor.AbstractEditorTest;
 
 import com.google.inject.Injector;
 
