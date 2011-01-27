@@ -44,15 +44,6 @@ public interface Xtend2Factory extends EFactory
 	XtendImport createXtendImport();
 
 	/**
-	 * Returns a new object of class '<em>Xtend Function</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Xtend Function</em>'.
-	 * @generated
-	 */
-	XtendFunction createXtendFunction();
-
-	/**
 	 * Returns a new object of class '<em>Xtend Class</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -60,6 +51,15 @@ public interface Xtend2Factory extends EFactory
 	 * @generated
 	 */
 	XtendClass createXtendClass();
+
+	/**
+	 * Returns a new object of class '<em>Xtend Function</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Xtend Function</em>'.
+	 * @generated
+	 */
+	XtendFunction createXtendFunction();
 
 	/**
 	 * Returns a new object of class '<em>Rich String</em>'.

@@ -228,7 +228,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Member");
 		private final RuleCall cFunctionParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//Member returns types::JvmMember:
+		//Member returns XtendMember:
 		//	Function;
 		public ParserRule getRule() { return rule; }
 
@@ -913,7 +913,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		return getClassAccess().getRule();
 	}
 
-	//Member returns types::JvmMember:
+	//Member returns XtendMember:
 	//	Function;
 	public MemberElements getMemberAccess() {
 		return (pMember != null) ? pMember : (pMember = new MemberElements());

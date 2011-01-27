@@ -47,4 +47,5 @@ public class XtendClassImplCustom extends XtendClassImpl {
 		result.addAll(getImplements());
 		return result;
 	}
+	
 }

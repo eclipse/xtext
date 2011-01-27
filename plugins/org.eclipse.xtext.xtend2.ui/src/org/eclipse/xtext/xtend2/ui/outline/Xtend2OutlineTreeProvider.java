@@ -3,7 +3,6 @@
 */
 package org.eclipse.xtext.xtend2.ui.outline;
 
-import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
@@ -12,6 +11,7 @@ import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 
 import com.google.inject.Inject;
 
@@ -33,7 +33,7 @@ public class Xtend2OutlineTreeProvider extends DefaultOutlineTreeProvider {
 	}
 	
 	protected void _createChildren(IOutlineNode parentNode, XtendClass xtendClass) {
-		for(JvmMember member: xtendClass.getMembers())
+		for(XtendMember member: xtendClass.getMembers())
 			createEObjectNode(parentNode, member);
 			
 	}

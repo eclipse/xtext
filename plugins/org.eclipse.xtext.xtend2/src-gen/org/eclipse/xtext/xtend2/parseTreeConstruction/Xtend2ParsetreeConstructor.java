@@ -995,7 +995,7 @@ protected class Class_RightCurlyBracketKeyword_7 extends KeywordToken  {
 
 /************ begin Rule Member ****************
  *
- * Member returns types::JvmMember:
+ * Member returns XtendMember:
  * 	Function;
  *
  **/

@@ -10,16 +10,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.common.types.JvmAnnotationTarget;
-import org.eclipse.xtext.common.types.JvmComponentType;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmExecutable;
-import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 
 import org.eclipse.xtext.xbase.XExpression;
@@ -125,32 +116,30 @@ public class Xtend2Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case Xtend2Package.XTEND_FUNCTION:
-			{
-				XtendFunction xtendFunction = (XtendFunction)theEObject;
-				T result = caseXtendFunction(xtendFunction);
-				if (result == null) result = caseJvmOperation(xtendFunction);
-				if (result == null) result = caseJvmExecutable(xtendFunction);
-				if (result == null) result = caseJvmFeature(xtendFunction);
-				if (result == null) result = caseJvmTypeParameterDeclarator(xtendFunction);
-				if (result == null) result = caseJvmMember(xtendFunction);
-				if (result == null) result = caseJvmAnnotationTarget(xtendFunction);
-				if (result == null) result = caseJvmIdentifiableElement(xtendFunction);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case Xtend2Package.XTEND_CLASS:
 			{
 				XtendClass xtendClass = (XtendClass)theEObject;
 				T result = caseXtendClass(xtendClass);
-				if (result == null) result = caseJvmGenericType(xtendClass);
-				if (result == null) result = caseJvmDeclaredType(xtendClass);
-				if (result == null) result = caseJvmTypeParameterDeclarator(xtendClass);
-				if (result == null) result = caseJvmComponentType(xtendClass);
-				if (result == null) result = caseJvmMember(xtendClass);
-				if (result == null) result = caseJvmType(xtendClass);
-				if (result == null) result = caseJvmAnnotationTarget(xtendClass);
 				if (result == null) result = caseJvmIdentifiableElement(xtendClass);
+				if (result == null) result = caseJvmTypeParameterDeclarator(xtendClass);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Xtend2Package.XTEND_MEMBER:
+			{
+				XtendMember xtendMember = (XtendMember)theEObject;
+				T result = caseXtendMember(xtendMember);
+				if (result == null) result = caseJvmIdentifiableElement(xtendMember);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Xtend2Package.XTEND_FUNCTION:
+			{
+				XtendFunction xtendFunction = (XtendFunction)theEObject;
+				T result = caseXtendFunction(xtendFunction);
+				if (result == null) result = caseXtendMember(xtendFunction);
+				if (result == null) result = caseJvmTypeParameterDeclarator(xtendFunction);
+				if (result == null) result = caseJvmIdentifiableElement(xtendFunction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -232,22 +221,6 @@ public class Xtend2Switch<T>
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Xtend Function</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Xtend Function</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseXtendFunction(XtendFunction object)
-	{
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Xtend Class</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -259,6 +232,38 @@ public class Xtend2Switch<T>
 	 * @generated
 	 */
 	public T caseXtendClass(XtendClass object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Xtend Member</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Xtend Member</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXtendMember(XtendMember object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Xtend Function</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Xtend Function</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXtendFunction(XtendFunction object)
 	{
 		return null;
 	}
@@ -344,22 +349,6 @@ public class Xtend2Switch<T>
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Jvm Annotation Target</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Jvm Annotation Target</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseJvmAnnotationTarget(JvmAnnotationTarget object)
-	{
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Jvm Identifiable Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -376,38 +365,6 @@ public class Xtend2Switch<T>
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Jvm Member</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Jvm Member</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseJvmMember(JvmMember object)
-	{
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Jvm Feature</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Jvm Feature</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseJvmFeature(JvmFeature object)
-	{
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Jvm Type Parameter Declarator</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -419,102 +376,6 @@ public class Xtend2Switch<T>
 	 * @generated
 	 */
 	public T caseJvmTypeParameterDeclarator(JvmTypeParameterDeclarator object)
-	{
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Jvm Executable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Jvm Executable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseJvmExecutable(JvmExecutable object)
-	{
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Jvm Operation</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Jvm Operation</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseJvmOperation(JvmOperation object)
-	{
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Jvm Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Jvm Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseJvmType(JvmType object)
-	{
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Jvm Component Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Jvm Component Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseJvmComponentType(JvmComponentType object)
-	{
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Jvm Declared Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Jvm Declared Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseJvmDeclaredType(JvmDeclaredType object)
-	{
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Jvm Generic Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Jvm Generic Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseJvmGenericType(JvmGenericType object)
 	{
 		return null;
 	}

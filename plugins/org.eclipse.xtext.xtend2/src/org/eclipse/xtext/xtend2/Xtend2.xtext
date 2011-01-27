@@ -25,12 +25,12 @@ Import returns XtendImport :
 QualifiedNameWithWildCard :
 	QualifiedName  ('.' '*')?;
 	
-Class  returns XtendClass :
+Class returns XtendClass :
    "class" name=ID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  ("extends" superTypes+=JvmTypeReference)? ('implements' superTypes+=JvmTypeReference)* '{'
 	   (members+=Member)*
    '}';
 
-Member returns types::JvmMember:
+Member returns XtendMember:
 	Function;
 
 Function returns XtendFunction :

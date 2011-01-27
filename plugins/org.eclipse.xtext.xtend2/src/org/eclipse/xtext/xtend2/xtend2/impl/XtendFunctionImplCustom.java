@@ -31,4 +31,5 @@ public class XtendFunctionImplCustom extends XtendFunctionImpl {
 	public String toString() {
 		return EmfFormatter.objToStr(this, Xtend2Package.Literals.XTEND_FUNCTION__EXPRESSION);
 	}
+	
 }
