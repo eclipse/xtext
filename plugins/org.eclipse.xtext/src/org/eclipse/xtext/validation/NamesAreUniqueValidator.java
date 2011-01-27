@@ -7,18 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
-import java.util.Collections;
-
-import java.util.List;
 import java.util.Map;
 
-import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.inject.Inject;
 
@@ -44,8 +40,8 @@ public class NamesAreUniqueValidator extends AbstractDeclarativeValidator {
 	private INamesAreUniqueValidationHelper helper;
 
 	@Override
-	protected List<EPackage> getEPackages() {
-		return Collections.emptyList();
+	public void register(EValidatorRegistrar registrar) {
+		// library validator is not registered for a specific language
 	}
 
 	@Check
