@@ -7,6 +7,7 @@ import static org.eclipse.xtext.xtend2.xtend2.Xtend2Package.Literals.*;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
 
@@ -23,18 +24,18 @@ public class Xtend2DescriptionLabelProvider extends DefaultDescriptionLabelProvi
 	private Xtend2Images images;
 	
 	@Override
-	public Image image(IEObjectDescription element) {
+	public Object image(IEObjectDescription element) {
 		EClass eClass = element.getEClass();
 		if (eClass == XTEND_FILE)
 			return images.forFile();
 		else if (eClass == XTEND_IMPORT)
 			return images.forImport();
-		else if (eClass == XTEND_CLASS)
+		else if (eClass == XTEND_CLASS || eClass == TypesPackage.Literals.JVM_GENERIC_TYPE)
 			return images.forClass(0);
-		else if (eClass == XTEND_FUNCTION)
+		else if (eClass == XTEND_FUNCTION || eClass == TypesPackage.Literals.JVM_OPERATION)
 			return images.forFunction(0);
 		else
-			return super.getImage(element);
+			return super.image(element);
 	}
 
 }
