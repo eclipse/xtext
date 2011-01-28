@@ -56,7 +56,7 @@
                   The filter implementation
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.xtext.ui.dialog.IXtextSearchFilter"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.xtext.ui.search.IXtextSearchFilter"/>
                </appInfo>
             </annotation>
          </attribute>
