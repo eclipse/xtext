@@ -51,7 +51,7 @@ public class ValidatorTesterTest extends AbstractXtextTests {
 
 		@Override
 		public boolean isLanguageSpecific() {
-			return false;
+			return true;
 		}
 	}
 
@@ -62,7 +62,7 @@ public class ValidatorTesterTest extends AbstractXtextTests {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 		TestingValidator validator = get(TestingValidator.class);
-		tester = new ValidatorTester<TestingValidator>(validator, get(EValidatorRegistrar.class));
+		tester = new ValidatorTester<TestingValidator>(validator, getInjector());
 	}
 
 	public void testError() {
