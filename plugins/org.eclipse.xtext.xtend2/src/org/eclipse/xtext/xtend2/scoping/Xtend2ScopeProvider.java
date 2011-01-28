@@ -3,7 +3,7 @@
  */
 package org.eclipse.xtext.xtend2.scoping;
 
-import static java.util.Collections.singleton;
+import static java.util.Collections.*;
 
 import java.util.List;
 
@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -30,21 +31,32 @@ import com.google.inject.internal.Lists;
  * @author Sven Efftinge
  */
 public class Xtend2ScopeProvider extends XbaseScopeProvider {
-	
+
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		IScope parent = super.getScope(context, reference);
 		if (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(reference.getEReferenceType())) {
-			XtendFunction type = EcoreUtil2.getContainerOfType(context, XtendFunction.class);
-			if (type!=null && !type.getTypeParameters().isEmpty()) {
-				List<IEObjectDescription> descriptions = Lists.newArrayList();
-				for (JvmTypeParameter param : type.getTypeParameters()) {
-					QualifiedName qn = QualifiedName.create(param.getName());
-					descriptions.add(EObjectDescription.create(qn, param));
+			List<IEObjectDescription> descriptions = null;
+			XtendFunction function = EcoreUtil2.getContainerOfType(context, XtendFunction.class);
+			if (function != null) {
+				if (!function.getTypeParameters().isEmpty()) {
+					descriptions = Lists.newArrayList();
+					for (JvmTypeParameter param : function.getTypeParameters()) {
+						QualifiedName qn = QualifiedName.create(param.getName());
+						descriptions.add(EObjectDescription.create(qn, param));
+					}
 				}
-				return MapBasedScope.createScope(parent, descriptions);
 			}
-				
+			XtendClass clazz = EcoreUtil2.getContainerOfType(context, XtendClass.class);
+			if (clazz != null) {
+				if(descriptions == null)  
+					descriptions = Lists.newArrayList();
+				JvmGenericType inferredType = clazz.getInferredJvmType();
+				QualifiedName inferredDeclaringTypeName = QualifiedName.create(inferredType.getSimpleName());
+				descriptions.add(EObjectDescription.create(inferredDeclaringTypeName, inferredType));
+			}
+			if(descriptions != null)
+				return MapBasedScope.createScope(parent, descriptions);
 		}
 		return parent;
 	}
@@ -53,7 +65,7 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 	protected IScope createLocalVarScope(EObject context, EReference reference, IScope parent) {
 		if (context instanceof XtendClass) {
 			return new SimpleScope(parent, singleton(EObjectDescription.create(THIS, context)));
-		} else if  (context instanceof XtendFunction) {
+		} else if (context instanceof XtendFunction) {
 			XtendFunction func = (XtendFunction) context;
 			EList<JvmFormalParameter> list = func.getParameters();
 			List<IEObjectDescription> descriptions = Lists.newArrayList();
