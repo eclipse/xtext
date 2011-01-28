@@ -17,8 +17,16 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
  */
 public abstract class AbstractRichStringTest extends AbstractXtend2TestCase {
 
+	protected String getPrefix() {
+		return "class Foo { foo() ";
+	}
+	
+	protected int getPrefixLength() {
+		return getPrefix().length();
+	}
+	
 	protected RichString richString(String string) throws Exception {
-		XtendClass clazz = clazz("class Foo { foo() "+string+"}");
+		XtendClass clazz = clazz(getPrefix()+string+"}");
 		XtendFunction function = (XtendFunction) clazz.getMembers().get(0);
 		return (RichString) function.getExpression();
 	}
