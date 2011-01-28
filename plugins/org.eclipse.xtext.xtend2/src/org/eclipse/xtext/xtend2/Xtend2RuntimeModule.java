@@ -11,6 +11,7 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.xbase.XbaseQualifiedNameConverter;
@@ -38,31 +39,31 @@ import com.google.inject.name.Names;
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2RuntimeModule {
-	
+
 	public Class<? extends IdentifiableTypeProvider> bindIdentifiableTypeProvider() {
 		return Xtend2IdentifiableTypeProvider.class;
 	}
-	
+
 	public Class<? extends IXExpressionExpectedTypeProvider> bindIExpectedTypeProvider() {
 		return Xtend2ExpectedTypeProvider.class;
 	}
-	
+
 	public Class<? extends IJvmTypeConformanceComputer> bindIJvmTypeConformanceComputer() {
 		return XbaseTypeConformanceComputer.class;
 	}
-	
+
 	public Class<? extends IQualifiedNameConverter> bindIQualifiedNameConverter() {
 		return XbaseQualifiedNameConverter.class;
 	}
-	
+
 	public Class<? extends IXExpressionTypeProvider> bindITypeProvider() {
 		return XExpressionTypeProvider.class;
 	}
-	
+
 	public Class<? extends org.eclipse.xtext.typing.ITypeConformanceComputer<JvmTypeReference>> bindITypeConformanceComputer() {
 		return IJvmTypeConformanceComputer.class;
 	}
-	
+
 	@Override
 	public Class<? extends IValueConverterService> bindIValueConverterService() {
 		return Xtend2ValueConverterService.class;
@@ -71,21 +72,23 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 	public Class<? extends TypeArgumentContext.Provider> bindTypeArgumentContextProvider() {
 		return XbaseTypeArgumentContextProvider.class;
 	}
-	
+
 	public Class<? extends XExpressionTypeProvider> bindXExpressionTypeProvider() {
 		return Xtend2TypeProvider.class;
 	}
-	
+
 	@Override
 	public void configureIScopeProviderDelegate(Binder binder) {
-		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(XbaseImportedNamespaceScopeProvider.class);
+		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
+				.to(XbaseImportedNamespaceScopeProvider.class);
 	}
-	
+
 	@Override
 	public void configureLinkingIScopeProvider(Binder binder) {
-		binder.bind(IScopeProvider.class).annotatedWith(LinkingScopeProviderBinding.class).to(XbaseLinkingScopeProvider.class);
+		binder.bind(IScopeProvider.class).annotatedWith(LinkingScopeProviderBinding.class)
+				.to(XbaseLinkingScopeProvider.class);
 	}
-	
+
 	@Override
 	public Class<? extends ILinker> bindILinker() {
 		return Xtend2LazyLinker.class;
@@ -94,11 +97,13 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 	public Class<? extends IdentifiableSimpleNameProvider> bindIdentifiableSimpleNameProvider() {
 		return Xtend2IdentifiableSimpleNameProvider.class;
 	}
-	
+
 	@Override
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return Xtend2QualifiedNameProvider.class;
 	}
+
+	public Class<? extends IReferableElementsUnloader> bindIReferableElementsUnloader() {
+		return IReferableElementsUnloader.GenericUnloader.class;
+	}
 }
-
-

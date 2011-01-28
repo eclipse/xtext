@@ -7,11 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.linking;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.linking.lazy.LazyLinker;
+import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
@@ -25,12 +29,20 @@ public class Xtend2LazyLinker extends LazyLinker {
 	@Inject
 	private JvmModelInferrer jvmModelInferrer;
 
+	@Inject
+	private IReferableElementsUnloader.GenericUnloader unloader; 
+	
 	@Override
 	protected void beforeModelLinked(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
 		super.beforeModelLinked(model, diagnosticsConsumer);
 		EList<EObject> rootElements = model.eResource().getContents();
-		while (rootElements.size() > 1)
-			rootElements.remove(rootElements.size() - 1);
+		for(Iterator<EObject> i=rootElements.iterator(); i.hasNext();) {
+			EObject rootElement = i.next();
+			if(rootElement instanceof JvmGenericType) {
+				unloader.unloadRoot(rootElement);
+				i.remove();
+			}
+		}
 	}
 
 	@Override
