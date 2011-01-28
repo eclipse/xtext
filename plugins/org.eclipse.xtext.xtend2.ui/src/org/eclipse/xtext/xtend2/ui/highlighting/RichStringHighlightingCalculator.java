@@ -98,15 +98,14 @@ public class RichStringHighlightingCalculator implements ISemanticHighlightingCa
 		private int currentOffset = -1;
 		private RichStringLiteral recent = null;
 		private final IHighlightedPositionAcceptor acceptor;
-
+		
 		public RichStringHighlighter(IHighlightedPositionAcceptor acceptor) {
 			this.acceptor = acceptor;
 		}
 
 		@Override
 		public void announceNextLiteral(RichStringLiteral object) {
-			if (currentOffset == -1)
-				resetCurrentOffset(object);
+			resetCurrentOffset(object);
 		}
 
 		@Override
@@ -125,19 +124,30 @@ public class RichStringHighlightingCalculator implements ISemanticHighlightingCa
 					INode node = featureNodes.get(0);
 					currentOffset = node.getOffset();
 					if (node.getText().charAt(0) == '\'') {
+						acceptor.addPosition(currentOffset, 3, HighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
+						highlightClosingQuotes(node);
 						currentOffset += 3;
 					} else {
+						highlightClosingQuotes(node);
 						currentOffset += 1;
 					}
 				}
 			}
 		}
 
+		protected void highlightClosingQuotes(INode node) {
+			if (node.getText().endsWith("'")) {
+				acceptor.addPosition(currentOffset + node.getLength() - 3, 3, HighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
+			}
+		}
+
 		@Override
 		public void acceptTemplateText(CharSequence text, RichStringLiteral origin) {
 			resetCurrentOffset(origin);
-			acceptor.addPosition(currentOffset, text.length(), HighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
-			currentOffset += text.length();
+			if (text.length() > 0) {
+				acceptor.addPosition(currentOffset, text.length(), HighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
+				currentOffset += text.length();
+			}
 		}
 
 		@Override

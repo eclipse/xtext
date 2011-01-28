@@ -40,8 +40,7 @@ public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor
 
 	@Override
 	public void announceNextLiteral(RichStringLiteral object) {
-		if (currentOffset == -1)
-			resetCurrentOffset(object);
+		resetCurrentOffset(object);
 	}
 
 	@Override

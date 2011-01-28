@@ -40,6 +40,17 @@ public abstract class AbstractRichStringEvaluationTest extends TestCase {
 		assertOutput("foobar   ", "'''«'foobar'»   '''");
 	}
 	
+	public void testExpressionTemplateWithTrailingLiteral() throws Exception {
+		assertOutput(
+			"start\n"+
+			"  first line\n" +
+			"  second line\n",
+			"'''«'start'»\n" +
+			"  first line\n" +
+			"  second line\n" +
+			"		'''");
+	}
+	
 	public void testMLExpressionTemplate() throws Exception {
 		assertOutput("foo\nbar", "'''«'foo\nbar'»'''");
 	}
@@ -506,5 +517,5 @@ public abstract class AbstractRichStringEvaluationTest extends TestCase {
 				"  «ENDFOR»\n" +
 				"'''");
 	}
-
+	
 }

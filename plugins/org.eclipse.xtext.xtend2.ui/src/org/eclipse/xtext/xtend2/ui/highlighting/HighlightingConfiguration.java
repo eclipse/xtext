@@ -41,7 +41,7 @@ public class HighlightingConfiguration extends DefaultHighlightingConfiguration 
 	}
 	
 	public TextStyle insignificantTemplateTextStyle() {
-		TextStyle textStyle = defaultTextStyle().copy();
+		TextStyle textStyle = stringTextStyle().copy();
 		textStyle.setBackgroundColor(new RGB(255, 255, 255));
 		return textStyle;
 	}

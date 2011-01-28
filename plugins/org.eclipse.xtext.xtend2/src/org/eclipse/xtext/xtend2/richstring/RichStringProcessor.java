@@ -187,13 +187,24 @@ public class RichStringProcessor {
 			} else {
 				if (line.containsOnlyWhitespace()) {
 					RichString container = (RichString) object.eContainer();
+					List<XExpression> siblings = container.getElements();
 					if (container != rootObject) {
-						List<XExpression> siblings = container.getElements();
 						if (siblings.get(siblings.size() - 1) == object)
 							indentationHandler.popIndentation();
+						pushIndentationAndAnnounceContent(object, line);
+					} else {
+						if (siblings.get(siblings.size() - 1) == object) {
+							CharSequence leadingWS = line.getLeadingWhiteSpace();
+							indentationHandler.pushTemplateIndentation(leadingWS);
+							CharSequence tail = line.subSequence(leadingWS.length(), line.length());
+							announceTemplateText(tail, object);
+						} else {
+							pushIndentationAndAnnounceContent(object, line);	
+						}
 					}
+				} else {
+					pushIndentationAndAnnounceContent(object, line);
 				}
-				pushIndentationAndAnnounceContent(object, line);
 			}
 		}
 
