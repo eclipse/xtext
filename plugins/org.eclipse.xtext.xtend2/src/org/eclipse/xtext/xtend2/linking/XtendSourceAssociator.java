@@ -38,6 +38,10 @@ public class XtendSourceAssociator {
 		return getAssociatedElement(inferredOperation);
 	}
 	
+	public EObject getXtendSource(EObject element) {
+		return getAssociatedElement(element);
+	}
+	
 	protected void setAdapter(EObject jvmElement, EObject xtendElement) {
 		jvmElement.eAdapters().add(new AssociationAdapter(xtendElement));
 	}
