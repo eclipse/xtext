@@ -26,7 +26,7 @@ import org.eclipse.xtext.util.XtextSwitch;
  */
 public class GrammarElementTitleSwitch extends XtextSwitch<String> {
 
-	private String card(AbstractElement ele) {
+	protected String card(AbstractElement ele) {
 		return ele.getCardinality() == null ? "" : ele.getCardinality();
 	}
 
@@ -76,7 +76,7 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> {
 
 	@Override
 	public String caseKeyword(Keyword object) {
-		return "\"" + object.getValue() + "\"" + card(object);
+		return "'" + object.getValue() + "'" + card(object);
 	}
 
 	@Override
