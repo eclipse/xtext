@@ -11,7 +11,6 @@ import static com.google.common.collect.Iterables.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -25,9 +24,9 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.parser.IEncodingProvider;
+import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.compiler.IAppendable.StringBuilderBasedAppendable;
@@ -35,9 +34,7 @@ import org.eclipse.xtext.xtend2.compiler.Xtend2Compiler;
 import org.eclipse.xtext.xtend2.ui.internal.Xtend2Activator;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Sets;
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -46,7 +43,8 @@ public class Xtend2BuilderParticipant implements IXtextBuilderParticipant {
 
 	private static final Logger LOG = Logger.getLogger(Xtend2BuilderParticipant.class);
 
-	private Set<String> fileExtensions;
+	@Inject 
+	private FileExtensionProvider fileExtensionProvider;
 
 	@Inject
 	private Xtend2Compiler compiler;
@@ -60,20 +58,11 @@ public class Xtend2BuilderParticipant implements IXtextBuilderParticipant {
 	@Inject
 	private FolderUtil workspaceUtil;
 
-	@Inject
-	public void setExtensions(@Named(Constants.FILE_EXTENSIONS) String extensions) {
-		String[] split = extensions.split(",");
-		this.fileExtensions = Sets.newHashSet();
-		for (String string : split) {
-			this.fileExtensions.add(string);
-		}
-	}
-
 	public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		try {
 			Iterable<Delta> xtendDeltas = filter(context.getDeltas(), new Predicate<Delta>() {
 				public boolean apply(Delta input) {
-					return fileExtensions.contains(input.getUri().fileExtension());
+					return fileExtensionProvider.isValid(input.getUri().fileExtension());
 				}
 			});
 			if (!isEmpty(xtendDeltas)) {
