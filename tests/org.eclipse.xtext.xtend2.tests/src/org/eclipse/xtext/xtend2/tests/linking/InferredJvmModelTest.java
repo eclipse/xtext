@@ -14,7 +14,10 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xtend2.linking.XtendSourceAssociator;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
@@ -80,6 +83,17 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		assertEquals(xtendClass.getTypeParameters().get(0).getCanonicalName(), inferredType.getTypeParameters().get(0).getCanonicalName());
 	}
 	
+	public void testInferredTypeWithSelfReferringTypeParameter() throws Exception {
+		XtendFile xtendFile = file("package foo class Foo <T extends Foo> {}");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		assertEquals(1, inferredType.getTypeParameters().size());
+		JvmTypeParameter typeParameter = inferredType.getTypeParameters().get(0);
+		assertEquals(1, typeParameter.getConstraints().size());
+		JvmTypeConstraint typeConstraint = typeParameter.getConstraints().get(0);
+		assertTrue(typeConstraint instanceof JvmUpperBound);
+		assertEquals(inferredType, ((JvmUpperBound)typeConstraint).getTypeReference().getType());
+	}
+
 	public void testInferredFunction() throws Exception {
 		XtendFile xtendFile = file("class Foo { bar() true }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
@@ -116,10 +130,12 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testInferredFunctionWithSelfTypeReference() throws Exception {
-		XtendFile xtendFile = file("class Foo { Foo bar() this }");
+		XtendFile xtendFile = file("package foo class Foo { Foo bar() this }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(0);
 		assertEquals(inferredType, jvmOperation.getReturnType().getType());
+		XtendFunction xtendFunction = (XtendFunction) xtendFile.getXtendClass().getMembers().get(0);
+		assertEquals(inferredType, xtendFunction.getReturnType().getType());
 	}
 
 	protected JvmGenericType getInferredType(XtendFile xtendFile) {

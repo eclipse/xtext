@@ -6,7 +6,6 @@ package org.eclipse.xtext.xtend2.ui.labeling;
 import static org.eclipse.xtext.xtend2.xtend2.Xtend2Package.Literals.*;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
