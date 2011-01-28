@@ -36,6 +36,6 @@ public class FileExtensionProvider {
 	}
 
 	public boolean isValid(String fileExtension) {
-		return fileExtension.contains(fileExtension);
+		return fileExtensions.contains(fileExtension);
 	}
 }
