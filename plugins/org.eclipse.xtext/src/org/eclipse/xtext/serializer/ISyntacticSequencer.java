@@ -14,7 +14,7 @@ import org.eclipse.xtext.ParserRule;
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface ISequenceParser {
+public interface ISyntacticSequencer {
 
 	/**
 	 * Serializes the semanticRoot.
