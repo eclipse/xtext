@@ -104,10 +104,6 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return Xtend2QualifiedNameProvider.class;
 	}
-
-	public Class<? extends IReferableElementsUnloader> bindIReferableElementsUnloader() {
-		return IReferableElementsUnloader.GenericUnloader.class;
-	}
 	
 	@Override
 	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
