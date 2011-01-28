@@ -12,6 +12,8 @@ import static com.google.common.collect.Lists.*;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -22,6 +24,7 @@ import org.eclipse.xtext.xtend2.xtend2.RichStringElseIf;
 import org.eclipse.xtext.xtend2.xtend2.RichStringForLoop;
 import org.eclipse.xtext.xtend2.xtend2.RichStringIf;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
+import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 
 import com.google.inject.Inject;
 
@@ -32,6 +35,9 @@ import com.google.inject.Inject;
 @ComposedChecks(validators= {ClasspathBasedChecks.class})
 public class Xtend2JavaValidator extends XbaseJavaValidator {
 
+	public static final String CLASS_EXPECTED = Xtend2JavaValidator.class.getName() + ".class_expected";
+	public static final String INTERFACE_EXPECTED = Xtend2JavaValidator.class.getName() + ".interface_expected";
+	
 	@Inject
 	private RichStringProcessor richStringProcessor;
 
@@ -65,5 +71,21 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 	protected void doCheckWhitespaceIn(RichString richString) {
 		ValidatingRichStringAcceptor helper = new ValidatingRichStringAcceptor(this);
 		richStringProcessor.process(richString, helper, helper);
+	}
+	
+	@Check 
+	public void checkSuperTypes(XtendClass xtendClass) {
+		JvmTypeReference superClass = xtendClass.getExtends();
+		if(superClass != null && superClass.getType() != null) {
+			if(!(superClass.getType() instanceof JvmGenericType) || ((JvmGenericType)superClass.getType()).isInterface()) {
+				error("Superclass must be a class", Xtend2Package.Literals.XTEND_CLASS__EXTENDS, CLASS_EXPECTED);
+			}
+		}
+		for(int i=0; i<xtendClass.getImplements().size(); ++i) {
+			JvmTypeReference implementedType =  xtendClass.getImplements().get(i);
+			if(!(implementedType.getType() instanceof JvmGenericType) || !((JvmGenericType)implementedType.getType()).isInterface()) {
+				error("Implemented interface must be an interface", Xtend2Package.Literals.XTEND_CLASS__IMPLEMENTS, i, INTERFACE_EXPECTED);
+			}
+		}
 	}
 }

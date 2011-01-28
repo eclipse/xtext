@@ -72,7 +72,7 @@ public interface XtendClass extends JvmIdentifiableElement, JvmTypeParameterDecl
 	 * @return the value of the '<em>Extends</em>' containment reference.
 	 * @see #setExtends(JvmTypeReference)
 	 * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getXtendClass_Extends()
-	 * @model containment="true" derived="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	JvmTypeReference getExtends();
@@ -98,7 +98,7 @@ public interface XtendClass extends JvmIdentifiableElement, JvmTypeParameterDecl
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Implements</em>' containment reference list.
 	 * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getXtendClass_Implements()
-	 * @model containment="true" derived="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<JvmTypeReference> getImplements();
