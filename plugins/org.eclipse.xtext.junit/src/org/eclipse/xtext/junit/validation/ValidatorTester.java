@@ -12,9 +12,16 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EValidatorRegistryImpl;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
+import org.eclipse.xtext.validation.AbstractInjectableValidator;
 import org.eclipse.xtext.validation.EValidatorRegistrar;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator.State;
+
+import com.google.common.collect.ImmutableMap;
+import com.google.inject.Injector;
+import com.google.inject.Key;
+import com.google.inject.name.Names;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -25,17 +32,28 @@ public class ValidatorTester<T extends AbstractDeclarativeValidator> extends Abs
 
 	protected boolean validatorCalled;
 
-	public ValidatorTester(T validator, EValidatorRegistrar registrar) {
+	public ValidatorTester(T validator, Injector injector) {
+		this(validator,
+			injector.getInstance(EValidatorRegistrar.class),
+			injector.getInstance(Key.get(String.class, Names.named(Constants.LANGUAGE_NAME))));
+	}
+	
+	public ValidatorTester(T validator, EValidatorRegistrar registrar, final String languageName) {
 		this.validator = validator;
 		EValidator.Registry originalRegistry = registrar.getRegistry();
 		EValidatorRegistryImpl newRegistry = new EValidatorRegistryImpl();
 		registrar.setRegistry(newRegistry);
 		this.validator.register(registrar);
-		diagnostician = new Diagnostician(newRegistry);
+		diagnostician = new Diagnostician(newRegistry) {
+			@Override
+			public java.util.Map<Object,Object> createDefaultContext() {
+				return ImmutableMap.<Object, Object>of(AbstractInjectableValidator.CURRENT_LANGUAGE_NAME, languageName);
+			}
+		};
 		registrar.setRegistry(originalRegistry);
 		validatorCalled = false;
 	}
-
+	
 	public AssertableDiagnostics diagnose() {
 		if (!validatorCalled)
 			throw new IllegalStateException("You have to call validator() before you call diagnose()");
