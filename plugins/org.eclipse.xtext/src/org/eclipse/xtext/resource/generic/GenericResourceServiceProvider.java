@@ -7,20 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.generic;
 
-import java.util.Set;
-
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.parser.IEncodingProvider;
+import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.validation.IResourceValidator;
 
-import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.internal.Nullable;
-import com.google.inject.name.Named;
 
 /**
  * An {@link IResourceServiceProvider} for non-Xtext resources. 
@@ -53,19 +49,11 @@ public class GenericResourceServiceProvider implements IResourceServiceProvider 
 		return resourceValidator;
 	}
 
-	private Set<String> extensions;
-	
 	@Inject
-	public void setExtensions(@Named(Constants.FILE_EXTENSIONS)String extensions) {
-		String[] split = extensions.split(",");
-		this.extensions = Sets.newHashSet();
-		for (String string : split) {
-			this.extensions.add(string);
-		}
-	}
+	private FileExtensionProvider fileExtensionProvider;
 	
 	public boolean canHandle(URI uri) {
-		return extensions.contains(uri.fileExtension());
+		return fileExtensionProvider.isValid(uri.fileExtension());
 	}
 	
 	@Inject

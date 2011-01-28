@@ -9,14 +9,13 @@ package org.eclipse.xtext.resource.generic;
 
 import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent;
 import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;
-import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.name.Named;
 
 /**
  * 
@@ -31,8 +30,7 @@ import com.google.inject.name.Named;
 public abstract class AbstractGenericResourceSupport implements IWorkflowComponent {
 
 	@Inject
-	@Named(Constants.FILE_EXTENSIONS)
-	private String fileExtension;
+	private FileExtensionProvider fileExtensionProvider;
 
 	@Inject
 	private IResourceServiceProvider resourceServiceProvider;
@@ -61,7 +59,8 @@ public abstract class AbstractGenericResourceSupport implements IWorkflowCompone
 	protected abstract Module createGuiceModule();
 
 	protected void registerInRegistry() {
-		registry.getExtensionToFactoryMap().put(fileExtension, resourceServiceProvider);
+		for(String fileExtension: fileExtensionProvider.getFileExtensions())
+			registry.getExtensionToFactoryMap().put(fileExtension, resourceServiceProvider);
 	}
 
 	public void invoke(IWorkflowContext ctx) {
