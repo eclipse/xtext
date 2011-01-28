@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtend2.ui.highlighting;
 
 import java.util.Map;
 
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
@@ -101,6 +102,11 @@ public class RichStringAwareTokenScanner extends TokenScanner {
 		}
 	}
 	
+	@Override
+	public void setRange(IDocument document, int offset, int length) {
+		currentRichTextToken = null;
+		super.setRange(document, offset, length);
+	}
 	
 	@Override
 	public IToken nextToken() {
