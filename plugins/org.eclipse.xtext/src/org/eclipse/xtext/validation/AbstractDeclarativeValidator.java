@@ -323,6 +323,10 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		warning(message, feature, index, null);
 	}
 
+	protected void warning(String message, EStructuralFeature feature, String code) {
+		warning(message, state.get().currentObject, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code);
+	}
+
 	protected void warning(String message, EStructuralFeature feature, int index, String code, String... issueData) {
 		warning(message, state.get().currentObject, feature, index, code, issueData);
 	}
@@ -341,6 +345,10 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	
 	protected void error(String message, EStructuralFeature feature, int index) {
 		error(message, feature, index, null);
+	}
+
+	protected void error(String message, EStructuralFeature feature, String code) {
+		error(message, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code);
 	}
 
 	protected void error(String message, EStructuralFeature feature, int index, String code, String... issueData) {
