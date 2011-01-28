@@ -41,8 +41,11 @@ public class PresentationDamager implements IPresentationDamager {
 			return computeInterSection(partition, e, document);
 		}
 		
-		if (!TextUtilities.overlaps(partition, lastDamage) && lastDamage.getOffset()<e.getDocument().getLength())
-			return new Region(0,0);
+		if (!TextUtilities.overlaps(partition, lastDamage) && lastDamage.getOffset()<e.getDocument().getLength()) {
+			if (documentPartitioningChanged)
+				return partition;
+			return lastDamage;
+		}
 		
 		int offset = Math.max(lastDamage.getOffset(),partition.getOffset());
 		int endOffset = Math.min(lastDamage.getOffset()+lastDamage.getLength(),partition.getOffset()+partition.getLength());
