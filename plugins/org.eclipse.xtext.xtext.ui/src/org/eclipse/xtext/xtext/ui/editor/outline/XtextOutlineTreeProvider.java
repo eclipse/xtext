@@ -47,13 +47,13 @@ public class XtextOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	protected Object _text(AbstractRule rule) {
 		StyledString ruleText = null;
 		if (!calledRules.isEmpty() && !calledRules.contains(rule))
-			ruleText = new StyledString(rule.getName(),
+			ruleText = new StyledString(safeName(rule.getName()),
 					stylerFactory.createXtextStyleAdapterStyler(semanticHighlightingConfiguration.unusedRule()));
 		else if (GrammarUtil.isDatatypeRule(rule))
-			ruleText = new StyledString(rule.getName(),
+			ruleText = new StyledString(safeName(rule.getName()),
 					stylerFactory.createXtextStyleAdapterStyler(semanticHighlightingConfiguration.dataTypeRule()));
 		else
-			ruleText = new StyledString(rule.getName());
+			ruleText = new StyledString(safeName(rule.getName()));
 		return ruleText;
 	}
 
@@ -65,9 +65,9 @@ public class XtextOutlineTreeProvider extends DefaultOutlineTreeProvider {
 				typeName.append(alias);
 				typeName.append(ALIAS_TYPE_SEPARATOR);
 			}
-			typeName.append(rule.getType().getClassifier().getName());
+			typeName.append(safeName(rule.getType().getClassifier().getName()));
 		} else {
-			typeName.append(rule.getName());
+			typeName.append(safeName(rule.getName()));
 		}
 		StyledString styledType = new StyledString(typeName.toString(),
 				stylerFactory.createXtextStyleAdapterStyler(semanticHighlightingConfiguration.typeReference()));
@@ -108,4 +108,7 @@ public class XtextOutlineTreeProvider extends DefaultOutlineTreeProvider {
 		return true;
 	}
 
+	protected String safeName(String s) {
+		return (s == null) ? "<unnamed>" : ""; 
+	}
 }
