@@ -11,5 +11,16 @@ package org.eclipse.xtext.xbase.lib;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class Iterables {
-	
+
+	/**
+	 * @return the first element from the iterable for which the given predicate returns <code>true</code>, returns null
+	 *         if no element matches the predicate or the iterable is empty.
+	 */
+	public static <T> T find(Iterable<? extends T> iterable, Functions.Function1<T, Boolean> predicate) {
+		for (T t : iterable) {
+			if (predicate.apply(t))
+				return t;
+		}
+		return null;
+	}
 }
