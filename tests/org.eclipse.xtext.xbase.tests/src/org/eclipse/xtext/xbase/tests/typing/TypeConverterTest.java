@@ -9,11 +9,14 @@ package org.eclipse.xtext.xbase.tests.typing;
 
 import java.io.IOException;
 
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.TypeConverter;
-import org.eclipse.xtext.xbase.typing.TypesService;
 
 import com.google.inject.Inject;
 
@@ -25,10 +28,7 @@ public class TypeConverterTest extends AbstractXbaseTestCase {
 	private TypeConverter converter;
 	
 	@Inject
-	private TypesService typesService;
-	
-	@Inject
-	private IQualifiedNameConverter nameConverter;
+	private IJvmTypeProvider.Factory typeProviderFactory;
 	
 	public void testConvertPrimitives() throws Exception {
 		XExpression ctx = expression("foo", false);
@@ -49,6 +49,15 @@ public class TypeConverterTest extends AbstractXbaseTestCase {
 	}
 	
 	protected void assertMappedTypeCanonicalNameEquals(String typeName, String expectedMappedCanonicalName, XExpression ctx) throws IOException {
-		assertEquals(expectedMappedCanonicalName, converter.convert(typesService.getTypeForName(nameConverter.toQualifiedName(typeName), ctx), ctx).getCanonicalName());
+		IJvmTypeProvider provider = typeProviderFactory.createTypeProvider(ctx.eResource().getResourceSet());
+		JvmType type = provider.findTypeByName(typeName);
+		JvmParameterizedTypeReference reference = null;
+		if (type instanceof JvmTypeReference) {
+			reference = (JvmParameterizedTypeReference) type;
+		} else {
+			reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+			reference.setType(type);
+		}
+		assertEquals(expectedMappedCanonicalName, converter.convert(reference, ctx).getCanonicalName());
 	}
 }

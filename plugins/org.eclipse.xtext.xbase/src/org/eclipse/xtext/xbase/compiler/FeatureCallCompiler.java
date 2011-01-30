@@ -153,7 +153,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			} else {
 				expression = getJavaVarName(call, b);
 			}
-			JvmTypeReference expectedType = getExpectedTypeProvider().getExpectedType(call);
+			JvmTypeReference expectedType = getTypeProvider().getExpectedType(call);
 			if (expectedType != null) {
 				JvmTypeReference actualType = getTypeProvider().getConvertedType(call);
 				if (!EcoreUtil.equals(expectedType, actualType)) {

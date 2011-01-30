@@ -138,7 +138,7 @@ public class TypeArgumentContext {
 							// raw type - return object reference
 							foundRawType.set(Boolean.TRUE);
 							JvmParameterizedTypeReference result = createTypeReference();
-							result.setType(objectType);
+							result.setType(type);
 							return result;
 						}
 					}
@@ -169,6 +169,10 @@ public class TypeArgumentContext {
 		public Provider() {
 		}
 		
+		public TypeArgumentContext get(Map<JvmTypeParameter,JvmTypeReference> context, JvmDeclaredType javaLangObjectType) {
+			return new TypeArgumentContext(context, javaLangObjectType);
+		}
+		
 		public TypeArgumentContext get(JvmTypeReference contextRef) {
 			if (contextRef==null)
 				throw new NullPointerException("contextReference");
@@ -178,7 +182,7 @@ public class TypeArgumentContext {
 				IJvmTypeProvider provider = typeProviderFactory.createTypeProvider(contextRef.getType().eResource().getResourceSet());
 				objectType = (JvmDeclaredType) provider.findTypeByName(Object.class.getCanonicalName());
 			}
-			return new TypeArgumentContext(context, objectType);
+			return get(context, objectType);
 		}
 
 		protected JvmDeclaredType internalComputeContext(JvmTypeReference contextRef, Map<JvmTypeParameter, JvmTypeReference> context) {

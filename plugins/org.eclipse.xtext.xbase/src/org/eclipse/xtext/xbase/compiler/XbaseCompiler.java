@@ -7,13 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XDoWhileExpression;
 import org.eclipse.xtext.xbase.XExpression;
@@ -25,7 +31,10 @@ import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
+import org.eclipse.xtext.xbase.functions.FunctionConversion;
 import org.eclipse.xtext.xbase.lib.Objects;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -465,6 +474,51 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	public void _toJavaStatement(XSwitchExpression expr, IAppendable b) {
 		_prepare(expr, b);
+	}
+	
+	@Inject
+	private FunctionConversion functionConversion;
+	@Inject
+	private TypeArgumentContext.Provider ctxProvider;
+	
+	protected void _prepare(final XClosure call, final IAppendable b) {
+		JvmTypeReference type = getTypeProvider().getConvertedType(call);
+		TypeArgumentContext context = ctxProvider.get(type);
+		final String serializedForm = getSerializedForm(type);
+		b.append("\n").append("final ").append(serializedForm);
+		b.append(" ");
+		String variableName = makeJavaIdentifier(b.declareVariable(call, "function"));
+		b.append(variableName).append(" = ");
+		b.append("new ").append(serializedForm).append("() {");
+		b.increaseIndentation().increaseIndentation();
+		JvmOperation operation = functionConversion.findSingleMethod(type);
+		final JvmTypeReference returnType = context.resolve(operation.getReturnType());
+		b.append("\npublic ").append(getSerializedForm(returnType)).append(" ").append(operation.getSimpleName());
+		b.append("(");
+		for (Iterator<JvmFormalParameter> iter = operation.getParameters().iterator(); iter.hasNext();) {
+			JvmFormalParameter param = iter.next();
+			final JvmTypeReference parameterType = context.resolve(param.getParameterType());
+			b.append(getSerializedForm(parameterType)).append(" ").append(param.getName());
+			if (iter.hasNext())
+				b.append(" , ");
+		}
+		b.append(") {");
+		b.increaseIndentation();
+		internalPrepare(call.getExpression(), b);
+		b.append("\nreturn ");
+		internalToJavaExpression(call.getExpression(), b);
+		b.append(";");
+		b.decreaseIndentation();
+		b.append("\n}");
+		b.decreaseIndentation().append("\n};").decreaseIndentation();
+	}
+	
+	protected void _toJavaExpression(XClosure call, IAppendable b) {
+		b.append(getJavaVarName(call, b));
+	}
+	
+	protected void _toJavaStatement(XClosure call, IAppendable b) {
+		_prepare(call, b);
 	}
 
 }
