@@ -8,10 +8,9 @@
 package org.eclipse.xtext.xtend2.ui.tests.autoedit;
 
 import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.swt.SWT;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -36,9 +35,9 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 	protected XtextEditor openEditor(String string) throws Exception {
 		int cursor = string.indexOf('|');
 		String fileExtension = getFileExtension();
-		IJavaProject javaProject = createJavaProject("foo");
-		addNature(javaProject.getProject(), XtextProjectHelper.NATURE_ID);
-		IFile file = createFile("foo/src/myfile" + getFiles().size() + "." + fileExtension, string.replace("|", ""));
+		IProject project = createProject("foo");
+		addNature(project, XtextProjectHelper.NATURE_ID);
+		IFile file = createFile("foo/myfile" + getFiles().size() + "." + fileExtension, string.replace("|", ""));
 		getFiles().add(file);
 		XtextEditor editor = openEditor(file);
 		editor.getInternalSourceViewer().setSelectedRange(cursor, 0);

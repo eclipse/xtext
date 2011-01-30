@@ -64,6 +64,20 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 			if (startTerminal == null)
 				return;
 			IRegion stopTerminal = findStopTerminal(document, command.offset);
+			// check whether this is our stop terminal
+			if (stopTerminal != null) {
+				IRegion previousStart = startTerminal;
+				IRegion previousStop = stopTerminal;
+				while(stopTerminal != null && previousStart != null && previousStop != null) {
+					previousStart = findStartTerminal(document, previousStart.getOffset() - 1);
+					if (previousStart != null) {
+						previousStop = findStopTerminal(document, previousStop.getOffset() + 1);
+						if (previousStop == null) {
+							stopTerminal = null;
+						}
+					}
+				}
+			}
 			if (util.isSameLine(document, startTerminal.getOffset(), command.offset)) {
 				CommandInfo newC = handleCursorInFirstLine(document, command, startTerminal, stopTerminal);
 				if (newC != null)
