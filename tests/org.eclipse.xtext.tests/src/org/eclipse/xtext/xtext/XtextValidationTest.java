@@ -1277,6 +1277,44 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
+	public void testRuleCallAllowed_08_335692() throws Exception {
+		String grammarAsText =
+			"grammar test with org.eclipse.xtext.common.Terminals\n" +
+			"generate test 'http://test'\n" +
+			"Model : value=ID FRAGMENT;\n"+
+			"SubModel : FRAGMENT;\n"+
+			"terminal fragment FRAGMENT: ';';";
+		
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		ParserRule datatypeRule = (ParserRule) grammar.getRules().get(1);
+		RuleCall ruleCall = (RuleCall) datatypeRule.getAlternatives();
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(ruleCall, true, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkUnassignedRuleCallAllowed(ruleCall);
+		validator.checkTerminalFragmentCalledFromTerminalRule(ruleCall);
+		messageAcceptor.validate();
+	}
+	
+	public void testRuleCallAllowed_09_335692() throws Exception {
+		String grammarAsText =
+			"grammar test with org.eclipse.xtext.common.Terminals\n" +
+			"generate test 'http://test'\n" +
+			"Model : value=ID FRAGMENT;\n"+
+			"SubModel : FRAGMENT;\n"+
+			"terminal fragment FRAGMENT: ';';";
+		
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		ParserRule rule = (ParserRule) grammar.getRules().get(0);
+		RuleCall ruleCall = (RuleCall) ((Group) rule.getAlternatives()).getElements().get(1);
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(ruleCall, true, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkUnassignedRuleCallAllowed(ruleCall);
+		validator.checkTerminalFragmentCalledFromTerminalRule(ruleCall);
+		messageAcceptor.validate();
+	}
+	
 	public void testPredicatedUnorderedGroup_01() throws Exception {
 		String grammarAsText =
 				"grammar test with org.eclipse.xtext.common.Terminals\n" +
