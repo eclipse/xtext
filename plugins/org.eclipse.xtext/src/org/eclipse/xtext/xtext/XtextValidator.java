@@ -605,7 +605,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	
 	@Check
 	public void checkTerminalFragmentCalledFromTerminalRule(final RuleCall call) {
-		if (call.getRule() != null && !call.getRule().eIsProxy() && GrammarUtil.containingAssignment(call) != null) {
+		if (call.getRule() != null && !call.getRule().eIsProxy()) {
 			if (call.getRule() instanceof TerminalRule && ((TerminalRule) call.getRule()).isFragment()) {
 				AbstractRule container = EcoreUtil2.getContainerOfType(call, AbstractRule.class);
 				if (!(container instanceof TerminalRule)) {
