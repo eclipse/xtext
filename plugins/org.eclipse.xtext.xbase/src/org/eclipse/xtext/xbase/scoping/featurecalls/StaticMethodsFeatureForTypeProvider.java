@@ -24,7 +24,13 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
-import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.xbase.lib.Booleans;
+import org.eclipse.xtext.xbase.lib.Collections;
+import org.eclipse.xtext.xbase.lib.Comparables;
+import org.eclipse.xtext.xbase.lib.Integers;
+import org.eclipse.xtext.xbase.lib.Iterables;
+import org.eclipse.xtext.xbase.lib.Objects;
+import org.eclipse.xtext.xbase.lib.Strings;
 import org.eclipse.xtext.xbase.typing.TypesService;
 
 import com.google.common.base.Predicate;
@@ -50,13 +56,13 @@ public class StaticMethodsFeatureForTypeProvider implements IFeaturesForTypeProv
 		final JvmParameterizedTypeReference reference = typesFactory
 		.createJvmParameterizedTypeReference();
 		reference.setType(declType);
-		final Iterable<QualifiedName> operators = getClassesContainingStaticMethods(declType
+		final Iterable<Class<?>> operators = getClassesContainingStaticMethods(declType
 				.getCanonicalName());
 		Iterable<JvmOperation> staticMethods = emptySet();
-		for (QualifiedName qualifiedName : operators) {
-			JvmTypeReference typeReference = typeService.getTypeForName(qualifiedName, context);
+		for (Class<?> clazz : operators) {
+			JvmTypeReference typeReference = typeService.getTypeForName(clazz, context);
 			if (typeReference == null) {
-				throw new IllegalStateException("couldn't find type " + operators.toString());
+				throw new IllegalStateException("couldn't find type " + clazz.getCanonicalName()+" on classpath.");
 			}
 			final JvmDeclaredType type = (JvmDeclaredType) typeReference.getType();
 			Iterable<JvmOperation> operations = type.getDeclaredOperations();
@@ -76,22 +82,22 @@ public class StaticMethodsFeatureForTypeProvider implements IFeaturesForTypeProv
 		return newArrayList(staticMethods);
 	}
 
-	private static Map<String, QualifiedName> classes = newHashMap();
+	private static Map<String, Class<?>> classes = newHashMap();
 	{
-		final QualifiedName create = QualifiedName.create("org", "eclipse", "xtext", "xbase", "lib");
-		classes.put(Boolean.class.getCanonicalName(), create.append("Booleans"));
-		classes.put(String.class.getCanonicalName(), create.append("Strings"));
-		classes.put(Integer.class.getCanonicalName(), create.append("Integers"));
-		classes.put(Comparable.class.getCanonicalName(), create.append("Comparables"));
-		classes.put(Object.class.getCanonicalName(), create.append("Objects"));
-		classes.put(Collection.class.getCanonicalName(), create.append("Collections"));
-		classes.put(Iterable.class.getCanonicalName(), create.append("Iterables"));
+		classes.put(Boolean.class.getCanonicalName(), Booleans.class);
+		classes.put(String.class.getCanonicalName(), Strings.class);
+		classes.put(Integer.class.getCanonicalName(), Integers.class);
+		classes.put(Comparable.class.getCanonicalName(), Comparables.class);
+		classes.put(Object.class.getCanonicalName(), Objects.class);
+		classes.put(Collection.class.getCanonicalName(), Collections.class);
+		classes.put(Iterable.class.getCanonicalName(), Iterables.class);
 	}
 
-	protected Iterable<QualifiedName> getClassesContainingStaticMethods(String canonicalTypeName) {
-		final QualifiedName o = classes.get(canonicalTypeName);
+	@SuppressWarnings("unchecked")
+	protected Iterable<Class<?>> getClassesContainingStaticMethods(String canonicalTypeName) {
+		final Class<?> o = classes.get(canonicalTypeName);
 		if (o != null)
-			return singleton(o);
+			return (Iterable<Class<?>>)(Iterable<?>)singleton(o);
 		return emptyList();
 	}
 

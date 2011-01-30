@@ -1,30 +1,32 @@
 package org.eclipse.xtext.xtend2.typing;
 
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.xbase.typing.TypesService;
+import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.xbase.typing.XExpressionTypeProvider;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
+import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 public class Xtend2TypeProvider extends XExpressionTypeProvider {
 	
-	public static final QualifiedName STRING_CONCATENATION_TYPE_NAME;
-	
-	static {
-		IQualifiedNameConverter.DefaultImpl nameConverter = new IQualifiedNameConverter.DefaultImpl();
-		STRING_CONCATENATION_TYPE_NAME = nameConverter.toQualifiedName(StringConcatenation.class.getName());
+	protected JvmTypeReference _expectedType(XtendFunction function, EReference reference, int index) {
+		if (reference==Xtend2Package.Literals.XTEND_FUNCTION__EXPRESSION) {
+			if (function.getReturnType()==null || function.getReturnType().getType() instanceof JvmVoid)
+				return null;
+			return function.getReturnType();
+		}
+		return null;
 	}
 	
 	protected JvmTypeReference _type(RichString richString) {
-		return getTypesService().getTypeForName(STRING_CONCATENATION_TYPE_NAME, richString);
+		return getTypesService().getTypeForName(StringConcatenation.class, richString);
 	}
 	
 	protected JvmTypeReference _type(RichStringLiteral stringLiteral) {
-		return getTypesService().getTypeForName(TypesService.STRING_TYPE_NAME, stringLiteral);
+		return getTypesService().getTypeForName(String.class, stringLiteral);
 	}
 	
 	protected JvmTypeReference _type(XtendFunction function) {

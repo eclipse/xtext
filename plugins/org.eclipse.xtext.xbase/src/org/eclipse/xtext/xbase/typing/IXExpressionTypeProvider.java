@@ -8,17 +8,17 @@
 package org.eclipse.xtext.xbase.typing;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.XExpression;
-
-import com.google.inject.ImplementedBy;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@ImplementedBy(XExpressionTypeProvider.class)
-public interface IXExpressionTypeProvider extends ITypeProvider<JvmTypeReference, XExpression> {
+public interface IXExpressionTypeProvider {
 
 	public JvmTypeReference getConvertedType(XExpression astNode);
+	public JvmTypeReference getType(XExpression astNode);
+	
+	public JvmTypeReference getConvertedExpectedType(XExpression astNode);
+	public JvmTypeReference getExpectedType(XExpression astNode);
 	
 }

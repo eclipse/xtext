@@ -9,12 +9,12 @@ package org.eclipse.xtext.xbase.tests.typing;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
-import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
-import org.eclipse.xtext.xbase.typing.TypesService;
+import org.eclipse.xtext.xbase.typing.XExpressionTypeProvider;
 
+import com.google.common.base.Function;
 import com.google.inject.Inject;
 
 /**
@@ -23,29 +23,43 @@ import com.google.inject.Inject;
 public class XbaseTypeConformanceTest extends AbstractXbaseTestCase {
 
 	@Inject
-	private TypesService typeService;
-
-	@Inject
-	private IXExpressionTypeProvider typeProvider;
-
-	@Inject
 	private IJvmTypeConformanceComputer typeConformanceComputer;
+	
+	@Inject
+	private XExpressionTypeProvider typeProvider;
+	
+	@Inject
+	private ParseHelper<XExpression> parseHelper;
 
-	public void testEverythingConformsToVoid() throws Exception {
-		XExpression nullExpression = expression("null");
-		assertIsConformant(TypesService.JAVA_LANG_CLASS, nullExpression);
-		assertIsConformant(TypesService.INTEGER_TYPE_NAME, nullExpression);
-		assertIsConformant(TypesService.VOID_TYPE_NAME, nullExpression);
-		assertIsConformant(TypesService.BOOLEAN_TYPE_NAME, nullExpression);
-		assertIsConformant(TypesService.STRING_TYPE_NAME, nullExpression);
-		assertIsConformant(TypesService.OBJECT_TYPE_NAME, nullExpression);
-		assertIsConformant(TypesService.JAVA_LANG_THROWABLE, nullExpression);
-		assertIsConformant(TypesService.JAVA_LANG_ITERABLE, nullExpression);
+	public void testVoidConformsWithEverything() throws Exception {
+		assertIsConformant(Class.class.getName(),Void.class.getName());
+		assertIsConformant(Integer.TYPE.getName(),Void.class.getName());
+		assertIsConformant(Object.class.getName(),Void.class.getName());
+		assertIsConformant(Void.class.getName(),Void.class.getName());
+		assertIsConformant(CharSequence.class.getName(),Void.class.getName());
+		assertIsConformant(XbaseTypeConformanceTest.class.getName(),Void.class.getName());
+	}
+	
+	public void testFunctionConformance_00() throws Exception {
+		assertIsConformant(Function.class.getName()+"<String,String>", "(String)=>String");
+	}
+	
+	protected void assertIsConformant(String left, String right) throws Exception {
+		boolean conformant = isConformant(left, right);
+		assertTrue(left+" <= "+right+" is not conformant",conformant);
+	}
+	
+	protected void assertNotConformant(String left, String right) throws Exception {
+		boolean conformant = isConformant(left, right);
+		assertFalse(left+" <= "+right+" is conformant",conformant);
 	}
 
-	protected void assertIsConformant(QualifiedName leftTypeName, XExpression rightExpression) throws Exception {
-		JvmTypeReference leftType = typeService.getTypeForName(leftTypeName, rightExpression);
-		typeConformanceComputer.isConformant(leftType, typeProvider.getConvertedType(rightExpression));
+	protected boolean isConformant(String left, String right) throws Exception {
+		final XExpression parse = parseHelper.parse("null as "+left);
+		JvmTypeReference leftType = typeProvider.getConvertedType(parse);
+		JvmTypeReference rightType = typeProvider.getConvertedType(parseHelper.parse("null as "+right,parse.eResource().getResourceSet()));
+		boolean conformant = typeConformanceComputer.isConformant(leftType, rightType);
+		return conformant;
 	}
 
 }

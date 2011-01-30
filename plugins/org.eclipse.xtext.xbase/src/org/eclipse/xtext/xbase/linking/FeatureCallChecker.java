@@ -126,6 +126,8 @@ public class FeatureCallChecker {
 			return INVALID_NUMBER_OF_ARGUMENTS;
 		if (context.getRightOperand() != null && context.getLeftOperand() != null) {
 			JvmTypeReference type = getTypeProvider().getConvertedType(context.getRightOperand());
+			if (type == null)
+				return INVALID_ARGUMENT_TYPES;
 			final JvmFormalParameter rightParam = input.getParameters().get(0 + callTypeDelta);
 			if (!conformance.isConformant(rightParam.getParameterType(), type))
 				return INVALID_ARGUMENT_TYPES;

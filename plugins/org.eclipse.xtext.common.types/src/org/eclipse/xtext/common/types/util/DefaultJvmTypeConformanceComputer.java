@@ -37,8 +37,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
-import com.google.common.collect.Sets;
 import com.google.common.collect.Multiset.Entry;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -50,25 +50,32 @@ public class DefaultJvmTypeConformanceComputer implements IJvmTypeConformanceCom
 	private PolymorphicDispatcher<Boolean> isConformantDispatcher = 
 		PolymorphicDispatcher.createForSingleTarget("_isConformant", 2, 4, this);
 	
-	private SuperTypeCollector superTypeCollector;
+	@Inject
+	protected SuperTypeCollector superTypeCollector;
 	
-	private TypesFactory factory;
-
-	private final TypeArgumentContext.Provider typeArgumentContextProvider;
+	@Inject
+	protected TypesFactory factory = TypesFactory.eINSTANCE;
 
 	@Inject
-	public DefaultJvmTypeConformanceComputer(
-			SuperTypeCollector superTypeCollector,
-			TypeArgumentContext.Provider typeArgumentContextProvider,
-			TypesFactory factory) {
+	protected TypeArgumentContext.Provider typeArgumentContextProvider;
+	
+	public void setSuperTypeCollector(SuperTypeCollector superTypeCollector) {
 		this.superTypeCollector = superTypeCollector;
-		this.typeArgumentContextProvider = typeArgumentContextProvider;
+	}
+	
+	public void setFactory(TypesFactory factory) {
 		this.factory = factory;
+	}
+	
+	public void setTypeArgumentContextProvider(TypeArgumentContext.Provider typeArgumentContextProvider) {
+		this.typeArgumentContextProvider = typeArgumentContextProvider;
 	}
 
 	public boolean isConformant(JvmTypeReference left, JvmTypeReference right) {
 		if (left == right)
 			return left != null;
+		if (left.getType().getCanonicalName().equals(Object.class.getCanonicalName()))
+			return true;
 		Boolean result = isConformantDispatcher.invoke(left, right);
 		return result.booleanValue();
 	}

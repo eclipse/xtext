@@ -33,7 +33,6 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
-import org.eclipse.xtext.xbase.typing.IXExpressionExpectedTypeProvider;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
 import org.eclipse.xtext.xbase.typing.TypeConverter;
 import org.eclipse.xtext.xbase.typing.TypesService;
@@ -61,9 +60,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	private IXExpressionTypeProvider typeProvider;
 
 	@Inject
-	private IXExpressionExpectedTypeProvider expectedTypeProvider;
-
-	@Inject
 	private IJvmTypeConformanceComputer conformanceComputer;
 
 	@Inject
@@ -81,11 +77,11 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	@Check
 	public void checkTypes(XExpression obj) {
 		try {
-			JvmTypeReference expectedType = expectedTypeProvider.getExpectedType(obj);
+			JvmTypeReference expectedType = typeProvider.getExpectedType(obj);
 			if (expectedType == null || expectedType.getType() == null)
 				return;
 			expectedType = converter.convert(expectedType, obj);
-			JvmTypeReference actualType = typeProvider.getConvertedType(obj);
+			JvmTypeReference actualType = typeProvider.getType(obj);
 			if (actualType == null || actualType.getType() == null)
 				return;
 			if (!conformanceComputer.isConformant(expectedType, actualType))
@@ -99,7 +95,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	@Check
 	public void checkTypes(XCatchClause catchClause) {
 		JvmTypeReference parameterType = catchClause.getDeclaredParam().getParameterType();
-		JvmTypeReference throwable = typesService.getTypeForName(TypesService.JAVA_LANG_THROWABLE, catchClause);
+		JvmTypeReference throwable = typesService.getTypeForName(Throwable.class, catchClause);
 		if (!conformanceComputer.isConformant(throwable, parameterType)) {
 			error("No exception of type "+parameterType.getCanonicalName()+" can be thrown; an exception type must be a subclass of Throwable",
 					catchClause.getDeclaredParam(),

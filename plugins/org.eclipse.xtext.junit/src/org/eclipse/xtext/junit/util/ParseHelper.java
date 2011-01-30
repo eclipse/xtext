@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
@@ -36,8 +37,7 @@ public class ParseHelper<T extends EObject> {
 	private IResourceFactory resourceFactory;
 
 	@SuppressWarnings("unchecked")
-	public T parse(InputStream in, URI uriToUse, Map<?,?> options) {
-		XtextResourceSet resourceSet = resourceSetProvider.get();
+	public T parse(InputStream in, URI uriToUse, Map<?,?> options, ResourceSet resourceSet) {
 		Resource resource = resourceFactory.createResource(uriToUse);
 		resourceSet.getResources().add(resource);
 		try {
@@ -50,9 +50,23 @@ public class ParseHelper<T extends EObject> {
 	}
 	
 	public T parse(String text) throws Exception {
-		return parse(getAsStream(text), URI.createURI("no.uri"),null);
+		return parse(text, resourceSetProvider.get());
 	}
 	
+	public T parse(String text, ResourceSet resourceSetToUse) throws Exception {
+		return parse(getAsStream(text), computeUnusedUri(resourceSetToUse),null, resourceSetToUse);
+	}
+	
+	protected URI computeUnusedUri(ResourceSet resourceSet) {
+		String name = "__synthetic";
+		for (int i = 0; i < Integer.MAX_VALUE; i++) {
+			URI syntheticUri = URI.createURI(name+i+".uri");
+			if (resourceSet.getResource(syntheticUri, false)==null)
+				return syntheticUri;
+		}
+		throw new IllegalStateException();
+	}
+
 	protected InputStream getAsStream(String text) {
 		return new StringInputStream(text);
 	}

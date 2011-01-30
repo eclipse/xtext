@@ -24,12 +24,13 @@ import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.typing.AbstractTypeProvider;
 import org.eclipse.xtext.xbase.XCasePart;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.functions.FunctionConversion;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
 import org.eclipse.xtext.xbase.typing.TypeConverter;
-import org.eclipse.xtext.xbase.typing.TypesService;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
@@ -50,6 +51,9 @@ public class IdentifiableTypeProvider extends AbstractTypeProvider<JvmTypeRefere
 	
 	@Inject
 	private SuperTypeCollector collector;
+	
+	@Inject
+	private FunctionConversion functionConversion;
 	
 	@Inject
 	private TypesFactory factory;
@@ -81,13 +85,24 @@ public class IdentifiableTypeProvider extends AbstractTypeProvider<JvmTypeRefere
 
 	protected JvmTypeReference _type(JvmFormalParameter parameter) {
 		if (parameter.getParameterType() == null) {
-			if (parameter.eContainer() instanceof XForLoopExpression) {
+			if (parameter.eContainer() instanceof XClosure) {
+				final XClosure closure = (XClosure)parameter.eContainer();
+				JvmTypeReference type = expressionTypeProvider.getExpectedType(closure);
+				int indexOf = closure.getFormalParameters().indexOf(parameter);
+				JvmOperation operation = functionConversion.findSingleMethod(type);
+				if (indexOf < operation.getParameters().size()) {
+					JvmFormalParameter declaredParam = operation.getParameters().get(indexOf);
+					TypeArgumentContext context = typeArgCtxProvider.get(type);
+					return context.resolve(declaredParam.getParameterType());
+				}
+				return null;
+			} else if (parameter.eContainer() instanceof XForLoopExpression) {
 				XForLoopExpression forLoop = (XForLoopExpression) parameter.eContainer();
 				JvmParameterizedTypeReference reference = (JvmParameterizedTypeReference) expressionTypeProvider.getConvertedType(forLoop
 						.getForExpression());
 				reference = (JvmParameterizedTypeReference) typeConverter.convert(reference, parameter);
 				TypeArgumentContext context = typeArgCtxProvider.get(reference);
-				final String iterableName = TypesService.JAVA_LANG_ITERABLE.toString();
+				final String iterableName = Iterable.class.getName();
 				if (!reference.getType().getCanonicalName().equals(iterableName)) {
 					try {
 						final Set<JvmTypeReference> collectSuperTypes = collector.collectSuperTypes(reference);

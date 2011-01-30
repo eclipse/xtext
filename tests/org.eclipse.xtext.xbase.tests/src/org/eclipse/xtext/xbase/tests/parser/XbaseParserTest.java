@@ -340,7 +340,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		XCasePart c1 = se.getCases().get(0);
 		assertEquals("java.lang.String",c1.getTypeGuard().getCanonicalName());
 		assertFeatureCall("length",c1.getCase());
-		assertFeatureCall("foo",((XMemberFeatureCall)c1.getCase()).getAllArguments().get(0));
+		assertFeatureCall("foo",((XMemberFeatureCall)c1.getCase()).getMemberCallTarget());
 		assertFeatureCall("bar",c1.getThen());
 		
 		XCasePart c2 = se.getCases().get(1);

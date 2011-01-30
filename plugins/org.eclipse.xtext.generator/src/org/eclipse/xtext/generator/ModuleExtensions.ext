@@ -5,4 +5,4 @@ bindMethodName(Binding this) :
 		+simpleMethodName(key.type)+(value.expression!=null?(!value.provider?'ToInstance':''):'');
 	
 private simpleMethodName(String qn) :
-	qn.split('\\.').select(e|e.matches('[A-Z].*')).toString('$');
+	qn.replaceAll('<','\\.').replaceAll('>','\\.').split('\\.').select(e|e.matches('[A-Z].*')).toString('$');

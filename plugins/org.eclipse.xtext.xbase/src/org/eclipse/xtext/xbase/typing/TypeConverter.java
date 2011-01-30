@@ -7,14 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typing;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 import com.google.inject.Inject;
 
@@ -23,13 +30,14 @@ import com.google.inject.Inject;
  */
 public class TypeConverter {
 
-	private static final QualifiedName JAVA_UTIL_LIST = QualifiedName.create("java", "util", "List");
-
 	@Inject
 	private TypesService typesService;
 	
 	@Inject
-	private IQualifiedNameConverter nameConverter;
+	private IJvmTypeProvider.Factory typeProviderFactory;
+	
+	@Inject
+	private TypesFactory factory;
 
 	/**
 	 * converts the toBeConverter type to something different.
@@ -40,6 +48,10 @@ public class TypeConverter {
 	public JvmTypeReference convert(JvmTypeReference type, final EObject context) {
 		if (type == null)
 			return null;
+		
+		if (type instanceof XFunctionTypeRef) {
+			type = convertFunctionType((XFunctionTypeRef)type,context);
+		}
 
 		@SuppressWarnings("serial")
 		EcoreUtil.Copier copier = new EcoreUtil.Copier(false, true) {
@@ -48,8 +60,7 @@ public class TypeConverter {
 				if (object instanceof JvmTypeReference) {
 					JvmTypeReference typeRef = (JvmTypeReference) object;
 					if (typeRef.getType() instanceof JvmVoid) {
-						return typesService.getTypeForName(
-								nameConverter.toQualifiedName(Void.class.getCanonicalName()), context);
+						return typesService.getTypeForName(Void.class, context);
 					}
 					if (typeRef.getType() instanceof JvmPrimitiveType) {
 						return convertPrimitiveToWrapper((JvmPrimitiveType) typeRef.getType(), context);
@@ -66,33 +77,44 @@ public class TypeConverter {
 		return copy;
 	}
 	
+	protected JvmTypeReference convertFunctionType(XFunctionTypeRef functionType, EObject context) {
+		IJvmTypeProvider provider = typeProviderFactory.createTypeProvider(context.eResource().getResourceSet());
+		JvmType function = provider.findTypeByName(Functions.class.getName()+"$Function"+functionType.getParamTypes().size());
+		JvmParameterizedTypeReference reference = factory.createJvmParameterizedTypeReference();
+		reference.setType(function);
+		for (JvmTypeReference ref : functionType.getParamTypes()) {
+			reference.getArguments().add(EcoreUtil2.clone(ref));
+		}
+		reference.getArguments().add(EcoreUtil2.clone(functionType.getReturnType()));
+		return reference;
+	}
+
 	protected JvmTypeReference convertArrayToList(JvmArrayType jvmArrayType, EObject context) {
-		return typesService.getTypeForName(JAVA_UTIL_LIST, context, convert(jvmArrayType.getComponentType(), context));
+		return typesService.getTypeForName(List.class, context, convert(jvmArrayType.getComponentType(), context));
 	}
 
 	protected JvmTypeReference convertPrimitiveToWrapper(JvmPrimitiveType type, EObject context) {
-		// TODO: extract constants
-		return typesService.getTypeForName(nameConverter.toQualifiedName(getWrapperTypeName(type.getCanonicalName())),
+		return typesService.getTypeForName(getWrapperTypeName(type.getCanonicalName()),
 				context);
 	}
 
-	protected String getWrapperTypeName(String primitiveTypeName) {
+	protected Class<?> getWrapperTypeName(String primitiveTypeName) {
 		if (primitiveTypeName.equals(Boolean.TYPE.getCanonicalName())) {
-			return Boolean.class.getCanonicalName();
+			return Boolean.class;
 		} else if (primitiveTypeName.equals(Integer.TYPE.getCanonicalName())) {
-			return Integer.class.getCanonicalName();
+			return Integer.class;
 		} else if (primitiveTypeName.equals(Long.TYPE.getCanonicalName())) {
-			return Long.class.getCanonicalName();
+			return Long.class;
 		} else if (primitiveTypeName.equals(Double.TYPE.getCanonicalName())) {
-			return Double.class.getCanonicalName();
+			return Double.class;
 		} else if (primitiveTypeName.equals(Float.TYPE.getCanonicalName())) {
-			return Float.class.getCanonicalName();
+			return Float.class;
 		} else if (primitiveTypeName.equals(Byte.TYPE.getCanonicalName())) {
-			return Byte.class.getCanonicalName();
+			return Byte.class;
 		} else if (primitiveTypeName.equals(Short.TYPE.getCanonicalName())) {
-			return Short.class.getCanonicalName();
+			return Short.class;
 		} else if (primitiveTypeName.equals(Character.TYPE.getCanonicalName())) {
-			return Character.class.getCanonicalName();
+			return Character.class;
 		} else {
 			throw new IllegalArgumentException("Not a primitive : " + primitiveTypeName);
 		}

@@ -22,7 +22,6 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
-import org.eclipse.xtext.xbase.typing.XExpressionExpectedTypeProvider;
 
 import com.google.inject.Inject;
 
@@ -142,24 +141,13 @@ public abstract class AbstractXbaseCompiler {
 		return identifiableTypeProvider;
 	}
 
-	@Inject
-	private XExpressionExpectedTypeProvider expectedTypeProvider;
-
-	public void setExpectedTypeProvider(XExpressionExpectedTypeProvider expectedTypeProvider) {
-		this.expectedTypeProvider = expectedTypeProvider;
-	}
-
-	public XExpressionExpectedTypeProvider getExpectedTypeProvider() {
-		return expectedTypeProvider;
-	}
-
 	protected String getReturnTypeName(XExpression expr) {
 		final JvmTypeReference type = typeProvider.getConvertedType(expr);
 		return getSerializedForm(type);
 	}
 
 	protected String getSerializedForm(final JvmTypeReference type) {
-		return type.getCanonicalName();
+		return type.getCanonicalName().replace('$', '.');
 	}
 
 	protected String getJavaVarName(Object ex, IAppendable appendable) {

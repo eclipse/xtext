@@ -8,31 +8,30 @@
 package org.eclipse.xtext.xbase.typing;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.DefaultJvmTypeConformanceComputer;
-import org.eclipse.xtext.common.types.util.SuperTypeCollector;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext.Provider;
+import org.eclipse.xtext.xbase.functions.FunctionConversion;
 
 import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Sven Efftinge
  */
 public class XbaseTypeConformanceComputer extends DefaultJvmTypeConformanceComputer {
+	
+	@Inject 
+	private FunctionConversion functionConversion;
+	
 	@Inject
 	private TypesService typesService;
 
-	@Inject
-	public XbaseTypeConformanceComputer(SuperTypeCollector superTypeCollector, Provider typeArgumentContextProvider,
-			TypesFactory factory) {
-		super(superTypeCollector, typeArgumentContextProvider, factory);
-	}
-
 	@Override
-	protected Boolean _isConformant(JvmTypeReference left, JvmTypeReference right) {
+	public boolean isConformant(JvmTypeReference left, JvmTypeReference right) {
 		if (typesService.isVoid(right))
 			return true;
-		return super._isConformant(left, right);
+		if (functionConversion.isFunction(left) || functionConversion.isFunction(right))
+			return functionConversion.isConformant(left, right);
+		return super.isConformant(left, right);
 	}
-
+	
 }

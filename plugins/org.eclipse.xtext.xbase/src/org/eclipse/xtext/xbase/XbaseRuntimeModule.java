@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -22,11 +21,8 @@ import org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
 import org.eclipse.xtext.xbase.linking.XbaseLinkingScopeProvider;
 import org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider;
-import org.eclipse.xtext.xbase.typing.IXExpressionExpectedTypeProvider;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
-import org.eclipse.xtext.xbase.typing.XExpressionExpectedTypeProvider;
 import org.eclipse.xtext.xbase.typing.XExpressionTypeProvider;
-import org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
 import com.google.inject.Binder;
@@ -39,10 +35,6 @@ public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 	
 	public Class<? extends IEvaluationContext> bindEvaluationContext() {
 		return DefaultEvaluationContext.class;
-	}
-	
-	public Class<? extends IXExpressionExpectedTypeProvider> bindIExpectedTypeProvider() {
-		return XExpressionExpectedTypeProvider.class;
 	}
 	
 	public Class<? extends IJvmTypeConformanceComputer> bindIJvmTypeConformanceComputer() {
@@ -70,10 +62,6 @@ public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 		return XbaseValueConverterService.class;
 	}
 	
-	public Class<? extends TypeArgumentContext.Provider> bindTypeArgumentContextProvider() {
-		return XbaseTypeArgumentContextProvider.class;
-	}
-
 	@Override
 	public void configureIScopeProviderDelegate(Binder binder) {
 		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(XbaseImportedNamespaceScopeProvider.class);
