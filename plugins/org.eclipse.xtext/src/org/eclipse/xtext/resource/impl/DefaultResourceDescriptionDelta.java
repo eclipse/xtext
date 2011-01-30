@@ -21,20 +21,21 @@ import com.google.common.collect.Lists;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class DefaultResourceDescriptionDelta implements IResourceDescription.Delta {
-	
+
 	private IResourceDescription _new;
 	private IResourceDescription old;
-	
+
 	public DefaultResourceDescriptionDelta(IResourceDescription old, IResourceDescription _new) {
 		super();
-		if (old==_new) {
+		if (old == _new) {
 			throw new AssertionError("'old!=_new' constraint violated");
 		}
-		if (_new!=null && old!=null && !old.getURI().equals(_new.getURI())) {
+		if (_new != null && old != null && !old.getURI().equals(_new.getURI())) {
 			URI oldURI = old.getURI();
 			URI newURI = _new.getURI();
-			throw new AssertionError("'_new!=null && old!=null && !old.getURI().equals(_new.getURI())' constraint violated, old was " + 
-					oldURI + " new was: " + newURI);
+			throw new AssertionError(
+					"'_new!=null && old!=null && !old.getURI().equals(_new.getURI())' constraint violated, old was "
+							+ oldURI + " new was: " + newURI);
 		}
 		this.old = old;
 		this._new = _new;
@@ -47,29 +48,29 @@ public class DefaultResourceDescriptionDelta implements IResourceDescription.Del
 	public IResourceDescription getOld() {
 		return old;
 	}
-	
+
 	private Boolean hasChanges;
 
 	public boolean haveEObjectDescriptionsChanged() {
-		if (hasChanges==null) {
+		if (hasChanges == null) {
 			hasChanges = internalHasChanges();
 		}
 		return hasChanges.booleanValue();
 	}
-	
+
 	protected boolean internalHasChanges() {
-		if (_new==null || old==null)
+		if (_new == null || old == null)
 			return true;
-		
+
 		Collection<IEObjectDescription> oldEObjects = Lists.newArrayList(old.getExportedObjects());
 		Collection<IEObjectDescription> newEObjects = Lists.newArrayList(_new.getExportedObjects());
-		if (oldEObjects.size()!=newEObjects.size())
+		if (oldEObjects.size() != newEObjects.size())
 			return true;
-		
+
 		Iterator<IEObjectDescription> iterator1 = oldEObjects.iterator();
 		Iterator<IEObjectDescription> iterator2 = newEObjects.iterator();
 		while (iterator1.hasNext()) {
-			if (!equals(iterator1.next(),iterator2.next()))
+			if (!equals(iterator1.next(), iterator2.next()))
 				return true;
 		}
 		return false;
@@ -78,13 +79,13 @@ public class DefaultResourceDescriptionDelta implements IResourceDescription.Del
 	protected boolean equals(IEObjectDescription next, IEObjectDescription next2) {
 		if (next == next2)
 			return true;
-		if (next.getEClass()!=next2.getEClass())
+		if (next.getEClass() != next2.getEClass())
 			return false;
-		if (next.getName()!=null && !next.getName().equals(next2.getName()))
+		if (next.getName() != null && !next.getName().equals(next2.getName()))
 			return false;
 		if (!next.getEObjectURI().equals(next2.getEObjectURI()))
 			return false;
-		if (!Arrays.equals(next.getUserDataKeys(),next2.getUserDataKeys()))
+		if (!Arrays.equals(next.getUserDataKeys(), next2.getUserDataKeys()))
 			return false;
 		for (String key : next.getUserDataKeys()) {
 			String userData = next.getUserData(key);
@@ -100,11 +101,12 @@ public class DefaultResourceDescriptionDelta implements IResourceDescription.Del
 	}
 
 	public URI getUri() {
-		return old==null?_new.getURI():old.getURI();
+		return old == null ? _new.getURI() : old.getURI();
 	}
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName()+" for "+getUri()+" old :"+(getOld()!=null)+",new :"+(getNew()!=null);
+		return getClass().getSimpleName() + " for " + getUri() + " old :" + (getOld() != null) + ",new :"
+				+ (getNew() != null);
 	}
 }

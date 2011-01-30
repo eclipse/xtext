@@ -37,7 +37,11 @@ public class AbstractTypeProvider<T, P extends EObject> implements ITypeProvider
 		if (cache == null)
 			return provider.get();
 		else
-			return cache.get(Tuples.create(getClass(), astNode), astNode.eResource(), provider);
+			return cache.get(getCachKey(astNode), astNode.eResource(), provider);
+	}
+
+	protected Object getCachKey(final P astNode) {
+		return Tuples.create(getClass(), astNode);
 	}
 
 	private IResourceScopeCache getCache(EObject astNode) {
