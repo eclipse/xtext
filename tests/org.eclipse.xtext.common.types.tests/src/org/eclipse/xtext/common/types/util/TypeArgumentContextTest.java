@@ -101,9 +101,9 @@ public class TypeArgumentContextTest extends TestCase {
 		JvmOperation jvmOperation = findOperation("java.util.List", "add(E)");
 		
 		JvmTypeReference resolvedParameter = context.getLowerBound(jvmOperation.getParameters().get(0).getParameterType());
-		assertEquals("java.lang.Object", resolvedParameter.getCanonicalName());
+		assertEquals("E", resolvedParameter.getCanonicalName());
 		JvmOperation get = findOperation("java.util.List", "get(int)");
-		assertEquals("java.lang.Object", context.getUpperBound(get.getReturnType()).getCanonicalName());
+		assertEquals("E", context.getUpperBound(get.getReturnType()).getCanonicalName());
 	}
 	
 	public void testResolveDeeplyNested() throws Exception {

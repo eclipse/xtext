@@ -248,11 +248,9 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo("literal", "{var x = 'literal' x = x}");
 	}
 	
-//TODO support overloading of local variables
-//	
-//	public void testVariableDeclaration_02() {
-//		assertEvaluatesTo(true, "{var x = 'literal' { val x = true x}}");
-//	}
+	public void testVariableDeclaration_02() {
+		assertEvaluatesTo(true, "{var x = 'literal' { val x = true x}}");
+	}
 	
 	public void testFeatureCall_01() {
 		assertEvaluatesTo("literal", "{var x = 'literal' x}");
@@ -665,25 +663,25 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(Boolean.FALSE, "null instanceof Boolean");
 	}
 	
-//	public void testClosure_01() {
-//		assertEvaluatesTo("literal", "new testdata.ClosureClient().invoke0(|'literal')");
-//	}
-//	
-//	public void testClosure_02() {
-//		assertEvaluatesTo("literal", 
-//				"{" +
-//				"  var result = 'literal'" +
-//				"  new testdata.ClosureClient().invoke0(|result)" +
-//				"}");
-//	}
-//	
-//	public void testClosure_03() {
-//		assertEvaluatesTo("literal", 
-//				"{" +
-//				"  var closure = |'literal'" +
-//				"  new testdata.ClosureClient().invoke0(closure)" +
-//				"}");
-//	}
+	public void testClosure_01() {
+		assertEvaluatesTo("literal", "new testdata.ClosureClient().invoke0(|'literal')");
+	}
+	
+	public void testClosure_02() {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  val result = 'literal'" +
+				"  new testdata.ClosureClient().invoke0(|result)" +
+				"}");
+	}
+	
+	public void testClosure_03() {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var closure = [|'literal']" +
+				"  new testdata.ClosureClient().invoke0(closure)" +
+				"}");
+	}
 //	
 //	public void testClosure_05() {
 //		assertEvaluatesTo("LITERAL", 

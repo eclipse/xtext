@@ -400,10 +400,10 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 
 	protected IJvmTypeConformanceComputer getComputer() {
 		if (computer == null) {
-			computer = new DefaultJvmTypeConformanceComputer(
-				new SuperTypeCollector(TypesFactory.eINSTANCE),
-				new TypeArgumentContext.Provider(), 
-				TypesFactory.eINSTANCE);
+			final DefaultJvmTypeConformanceComputer newOne = new DefaultJvmTypeConformanceComputer();
+			newOne.setSuperTypeCollector(new SuperTypeCollector(TypesFactory.eINSTANCE));
+			newOne.setTypeArgumentContextProvider(new TypeArgumentContext.Provider());
+			computer = newOne;
 		}
 		return computer;
 	}
