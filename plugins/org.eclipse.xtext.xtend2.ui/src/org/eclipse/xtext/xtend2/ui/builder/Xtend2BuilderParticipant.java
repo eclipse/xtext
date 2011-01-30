@@ -24,6 +24,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.FileExtensionProvider;
@@ -60,6 +61,8 @@ public class Xtend2BuilderParticipant implements IXtextBuilderParticipant {
 
 	public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		try {
+			if (!JavaCore.create(context.getBuiltProject()).exists())
+				return;
 			Iterable<Delta> xtendDeltas = filter(context.getDeltas(), new Predicate<Delta>() {
 				public boolean apply(Delta input) {
 					return fileExtensionProvider.isValid(input.getUri().fileExtension());
