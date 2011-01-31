@@ -225,6 +225,8 @@ public abstract class AbstractXtextTests extends TestCase implements ResourceLoa
 	public final XtextResource getResourceFor(InputStream stream) {
 		try {
 			return getResourceAndExpect(stream, AbstractXtextTests.UNKNOWN_EXPECTATION);
+		} catch (RuntimeException e) {
+			throw e;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
