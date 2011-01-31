@@ -34,9 +34,9 @@ public class UIStrings {
 
 	public String parameters(JvmIdentifiableElement element) {
 		if (element instanceof JvmExecutable) {
-			return "(" + parameterTypes(((JvmExecutable) element).getParameters()) + ")";
+			return "(" + parameterTypes(((JvmExecutable)element).getParameters()) + ")";
 		}
-		return element.toString();
+		return "";
 	}
 
 	public String arguments(XAbstractFeatureCall featureCall) {
@@ -51,7 +51,7 @@ public class UIStrings {
 		if (element instanceof JvmTypeParameterDeclarator) {
 			return "<" + toString(((JvmTypeParameterDeclarator) element).getTypeParameters()) + ">";
 		}
-		return element.toString();
+		return "";
 	}
 	
 	public String typeArguments(XAbstractFeatureCall featureCall) {
