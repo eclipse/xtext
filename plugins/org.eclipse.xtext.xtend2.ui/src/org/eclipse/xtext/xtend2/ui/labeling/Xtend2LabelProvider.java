@@ -5,7 +5,9 @@ package org.eclipse.xtext.xtend2.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
+import org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
@@ -24,8 +26,12 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 	@Inject
 	private UIStrings uiStrings;
 
-	@Inject Xtend2Images images;
-	
+	@Inject
+	private Xtend2Images images;
+
+	@Inject
+	private IdentifiableTypeProvider identifiableTypeProvider;
+
 	@Inject
 	public Xtend2LabelProvider(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
@@ -60,7 +66,9 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	public String text(XtendFunction element) {
-		return element.getName() + uiStrings.parameters(element) + " : " + element.getReturnType().getCanonicalName();
+		JvmTypeReference returnType = identifiableTypeProvider.getType(element);
+		return element.getName() + uiStrings.parameters(element.getInferredJvmMember()) + " : "
+				+ ((returnType != null) ? returnType.getCanonicalName() : "void");
 	}
-
+	
 }

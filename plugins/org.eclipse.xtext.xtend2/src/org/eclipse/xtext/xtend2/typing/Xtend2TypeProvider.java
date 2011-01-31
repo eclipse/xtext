@@ -29,11 +29,4 @@ public class Xtend2TypeProvider extends XExpressionTypeProvider {
 		return getTypesService().getTypeForName(String.class, stringLiteral);
 	}
 	
-	protected JvmTypeReference _type(XtendFunction function) {
-		JvmTypeReference returnType = function.getReturnType();
-		if (returnType!=null)
-			return returnType;
-		return getConvertedType(function.getExpression());
-	}
-	
 }
