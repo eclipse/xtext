@@ -17,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XtypeFactory;
@@ -33,6 +34,9 @@ public class TypesService {
 	
 	@Inject
 	private ClassURIHelper uriHelper;
+	
+	@Inject
+	private IJvmTypeProvider.Factory typeProviderFactory;
 
 	protected URI toCommonTypesUri(Class<?> clazz) {
 		URI result = uriHelper.getFullURI(clazz);
@@ -49,6 +53,8 @@ public class TypesService {
 		final ResourceSet resourceSet = context.eResource().getResourceSet();
 		if (resourceSet == null)
 			throw new NullPointerException("context must be contained in a resource set");
+		// make sure a type provider is configured in the resource set. 
+		typeProviderFactory.findOrCreateTypeProvider(resourceSet);
 		URI uri = toCommonTypesUri(clazz);
 		JvmDeclaredType declaredType = (JvmDeclaredType) resourceSet.getEObject(uri, true);
 		if (declaredType==null)
