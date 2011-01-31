@@ -26,7 +26,8 @@ QualifiedNameWithWildCard :
 	QualifiedName  ('.' '*')?;
 	
 Class returns XtendClass :
-   "class" name=ID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  ("extends" extends=JvmTypeReference)? ('implements' implements+=JvmTypeReference)*'{'
+   "class" name=ID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  
+   ("extends" extends=JvmTypeReference)? ('implements' implements+=JvmTypeReference (',' implements+=JvmTypeReference)*)?'{'
 	   (members+=Member)*
    '}';
 

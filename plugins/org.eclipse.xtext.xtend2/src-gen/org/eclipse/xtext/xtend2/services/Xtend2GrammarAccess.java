@@ -137,6 +137,10 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cImplementsKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
 		private final Assignment cImplementsAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
 		private final RuleCall cImplementsJvmTypeReferenceParserRuleCall_4_1_0 = (RuleCall)cImplementsAssignment_4_1.eContents().get(0);
+		private final Group cGroup_4_2 = (Group)cGroup_4.eContents().get(2);
+		private final Keyword cCommaKeyword_4_2_0 = (Keyword)cGroup_4_2.eContents().get(0);
+		private final Assignment cImplementsAssignment_4_2_1 = (Assignment)cGroup_4_2.eContents().get(1);
+		private final RuleCall cImplementsJvmTypeReferenceParserRuleCall_4_2_1_0 = (RuleCall)cImplementsAssignment_4_2_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		private final Assignment cMembersAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall cMembersMemberParserRuleCall_6_0 = (RuleCall)cMembersAssignment_6.eContents().get(0);
@@ -144,11 +148,13 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Class returns XtendClass:
 		//	"class" name=ID ("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? ("extends"
-		//	extends=JvmTypeReference)? ("implements" implements+=JvmTypeReference)* "{" members+=Member* "}";
+		//	extends=JvmTypeReference)? ("implements" implements+=JvmTypeReference ("," implements+=JvmTypeReference)*)? "{"
+		//	members+=Member* "}";
 		public ParserRule getRule() { return rule; }
 
 		//"class" name=ID ("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? ("extends"
-		//extends=JvmTypeReference)? ("implements" implements+=JvmTypeReference)* "{" members+=Member* "}"
+		//extends=JvmTypeReference)? ("implements" implements+=JvmTypeReference ("," implements+=JvmTypeReference)*)? "{"
+		//members+=Member* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"class"
@@ -199,7 +205,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		//JvmTypeReference
 		public RuleCall getExtendsJvmTypeReferenceParserRuleCall_3_1_0() { return cExtendsJvmTypeReferenceParserRuleCall_3_1_0; }
 
-		//("implements" implements+=JvmTypeReference)*
+		//("implements" implements+=JvmTypeReference ("," implements+=JvmTypeReference)*)?
 		public Group getGroup_4() { return cGroup_4; }
 
 		//"implements"
@@ -210,6 +216,18 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 
 		//JvmTypeReference
 		public RuleCall getImplementsJvmTypeReferenceParserRuleCall_4_1_0() { return cImplementsJvmTypeReferenceParserRuleCall_4_1_0; }
+
+		//("," implements+=JvmTypeReference)*
+		public Group getGroup_4_2() { return cGroup_4_2; }
+
+		//","
+		public Keyword getCommaKeyword_4_2_0() { return cCommaKeyword_4_2_0; }
+
+		//implements+=JvmTypeReference
+		public Assignment getImplementsAssignment_4_2_1() { return cImplementsAssignment_4_2_1; }
+
+		//JvmTypeReference
+		public RuleCall getImplementsJvmTypeReferenceParserRuleCall_4_2_1_0() { return cImplementsJvmTypeReferenceParserRuleCall_4_2_1_0; }
 
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_5() { return cLeftCurlyBracketKeyword_5; }
@@ -904,7 +922,8 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 
 	//Class returns XtendClass:
 	//	"class" name=ID ("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? ("extends"
-	//	extends=JvmTypeReference)? ("implements" implements+=JvmTypeReference)* "{" members+=Member* "}";
+	//	extends=JvmTypeReference)? ("implements" implements+=JvmTypeReference ("," implements+=JvmTypeReference)*)? "{"
+	//	members+=Member* "}";
 	public ClassElements getClassAccess() {
 		return (pClass != null) ? pClass : (pClass = new ClassElements());
 	}
