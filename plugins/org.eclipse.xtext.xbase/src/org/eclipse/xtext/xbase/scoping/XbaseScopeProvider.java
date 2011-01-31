@@ -40,6 +40,7 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
@@ -218,6 +219,9 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		}
 		if (call instanceof XBinaryOperation) {
 			return ((XBinaryOperation) call).getLeftOperand();
+		}
+		if (call instanceof XUnaryOperation) {
+			return ((XUnaryOperation) call).getOperand();
 		}
 		if (call instanceof XAssignment) {
 			return ((XAssignment) call).getAssignable();

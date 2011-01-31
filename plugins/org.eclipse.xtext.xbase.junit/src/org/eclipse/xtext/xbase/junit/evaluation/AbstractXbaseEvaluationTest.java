@@ -24,6 +24,18 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	protected abstract void assertEvaluatesTo(Object object, String string);
 	protected abstract void assertEvaluatesWithException(Class<? extends Throwable> class1, String string);
 	
+	public void testUnaryOperator_00() throws Exception {
+		assertEvaluatesTo(new Integer(-19),"-19");
+	}
+	
+	public void testUnaryOperator_01() throws Exception {
+		assertEvaluatesTo(false,"!true");
+	}
+	
+	public void testUnaryOperator_02() throws Exception {
+		assertEvaluatesTo("-1","(-1).toString()");
+	}
+	
 	public void testUpToOperator() throws Exception {
 		assertEvaluatesTo(new Integer(9),"(9..13).iterator().next()");
 	}
