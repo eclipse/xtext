@@ -53,8 +53,16 @@ public class Xtend2Compiler extends XbaseCompiler {
 	}
 
 	protected void compile(XtendClass obj, IAppendable appendable) {
-		//TODO typeparams, inheritance, abstract, final
-		appendable.append("public class ").append(obj.getName()).append(" {");
+		//TODO typeparams, abstract, final
+		appendable.append("public class ").append(obj.getName());
+		if(obj.getExtends() != null)
+			appendable.append(" extends ").append(obj.getExtends().getCanonicalName());
+		if(!obj.getImplements().isEmpty()) {
+			appendable.append(" implements ").append(obj.getImplements().get(0).getCanonicalName());
+			for(int i=1; i< obj.getImplements().size(); ++i) 
+				appendable.append(", ").append(obj.getImplements().get(i).getCanonicalName());
+		}
+		appendable.append(" {");
 		appendable.increaseIndentation();
 		declareThis(obj, appendable);
 		for (XtendMember member : obj.getMembers()) {
@@ -69,7 +77,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 	protected void compile(XtendFunction obj, IAppendable appendable) {
 		//TODO typeparams, exceptions
 		JvmTypeReference returnType = getIdentifiableTypeProvider().getType(obj);
-		appendable.append("\n").append("public ").append(returnType.getCanonicalName()).append(" ").append(obj.getName()).append("(");
+		appendable.append("\n\n").append("public ").append(returnType.getCanonicalName()).append(" ").append(obj.getName()).append("(");
 		final int numParams = obj.getParameters().size();
 		for (int i = 0; i < numParams; i++) {
 			JvmFormalParameter p = obj.getParameters().get(i);
