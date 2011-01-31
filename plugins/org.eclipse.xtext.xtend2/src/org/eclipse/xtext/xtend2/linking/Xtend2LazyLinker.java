@@ -34,7 +34,6 @@ public class Xtend2LazyLinker extends LazyLinker {
 	
 	@Override
 	protected void beforeModelLinked(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
-		super.beforeModelLinked(model, diagnosticsConsumer);
 		EList<EObject> rootElements = model.eResource().getContents();
 		for(Iterator<EObject> i=rootElements.iterator(); i.hasNext();) {
 			EObject rootElement = i.next();
@@ -43,6 +42,7 @@ public class Xtend2LazyLinker extends LazyLinker {
 				i.remove();
 			}
 		}
+		super.beforeModelLinked(model, diagnosticsConsumer);
 	}
 
 	@Override
