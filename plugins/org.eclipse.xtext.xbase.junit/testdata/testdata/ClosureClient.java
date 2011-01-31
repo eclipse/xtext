@@ -48,4 +48,13 @@ public class ClosureClient {
 		return predicate.apply(value);
 	}
 	
+	public <T> Functions.Function1<T, T> getIdentityFunction() {
+		return new Functions.Function1<T, T>() {
+			public T apply(T p) {
+				return p;
+			}
+			
+		};
+	}
+	
 }
