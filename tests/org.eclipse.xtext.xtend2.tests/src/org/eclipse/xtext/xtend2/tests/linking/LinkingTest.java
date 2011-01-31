@@ -7,7 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.tests.linking;
 
+import java.util.List;
+
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -129,4 +133,12 @@ public class LinkingTest extends AbstractXtend2TestCase {
 //		assertEquals("add", ((JvmOperation)call.getFeature()).getSimpleName());
 //	}
 	
+	public void testImplicitPackageImport() throws Exception {
+		XtendFile file = file("package java.io class Foo implements Serializable {}");
+		List<JvmTypeReference> implementedInterfaces = file.getXtendClass().getImplements();
+		assertFalse(implementedInterfaces.isEmpty());
+		JvmType implementedInterface = implementedInterfaces.get(0).getType();
+		assertNotNull(implementedInterface);
+		assertEquals("java.io.Serializable", implementedInterface.getCanonicalName());
+	}
 }
