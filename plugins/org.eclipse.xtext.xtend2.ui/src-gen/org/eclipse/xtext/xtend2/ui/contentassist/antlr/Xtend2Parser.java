@@ -77,6 +77,7 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getClassAccess().getGroup_2_2(), "rule__Class__Group_2_2__0");
 					put(grammarAccess.getClassAccess().getGroup_3(), "rule__Class__Group_3__0");
 					put(grammarAccess.getClassAccess().getGroup_4(), "rule__Class__Group_4__0");
+					put(grammarAccess.getClassAccess().getGroup_4_2(), "rule__Class__Group_4_2__0");
 					put(grammarAccess.getFunctionAccess().getGroup(), "rule__Function__Group__0");
 					put(grammarAccess.getFunctionAccess().getGroup_0(), "rule__Function__Group_0__0");
 					put(grammarAccess.getFunctionAccess().getGroup_0_2(), "rule__Function__Group_0_2__0");
@@ -219,6 +220,7 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getClassAccess().getTypeParametersAssignment_2_2_1(), "rule__Class__TypeParametersAssignment_2_2_1");
 					put(grammarAccess.getClassAccess().getExtendsAssignment_3_1(), "rule__Class__ExtendsAssignment_3_1");
 					put(grammarAccess.getClassAccess().getImplementsAssignment_4_1(), "rule__Class__ImplementsAssignment_4_1");
+					put(grammarAccess.getClassAccess().getImplementsAssignment_4_2_1(), "rule__Class__ImplementsAssignment_4_2_1");
 					put(grammarAccess.getClassAccess().getMembersAssignment_6(), "rule__Class__MembersAssignment_6");
 					put(grammarAccess.getFunctionAccess().getTypeParametersAssignment_0_1(), "rule__Function__TypeParametersAssignment_0_1");
 					put(grammarAccess.getFunctionAccess().getTypeParametersAssignment_0_2_1(), "rule__Function__TypeParametersAssignment_0_2_1");

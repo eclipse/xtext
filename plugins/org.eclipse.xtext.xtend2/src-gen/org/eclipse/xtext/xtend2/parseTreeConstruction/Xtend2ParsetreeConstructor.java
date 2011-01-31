@@ -413,12 +413,14 @@ protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
  *
  * Class returns XtendClass:
  * 	"class" name=ID ("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? ("extends"
- * 	extends=JvmTypeReference)? ("implements" implements+=JvmTypeReference)* "{" members+=Member* "}";
+ * 	extends=JvmTypeReference)? ("implements" implements+=JvmTypeReference ("," implements+=JvmTypeReference)*)? "{"
+ * 	members+=Member* "}";
  *
  **/
 
 // "class" name=ID ("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? ("extends"
-// extends=JvmTypeReference)? ("implements" implements+=JvmTypeReference)* "{" members+=Member* "}"
+// extends=JvmTypeReference)? ("implements" implements+=JvmTypeReference ("," implements+=JvmTypeReference)*)? "{"
+// members+=Member* "}"
 protected class Class_Group extends GroupToken {
 	
 	public Class_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -800,7 +802,7 @@ protected class Class_ExtendsAssignment_3_1 extends AssignmentToken  {
 }
 
 
-// ("implements" implements+=JvmTypeReference)*
+// ("implements" implements+=JvmTypeReference ("," implements+=JvmTypeReference)*)?
 protected class Class_Group_4 extends GroupToken {
 	
 	public Class_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -815,7 +817,8 @@ protected class Class_Group_4 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Class_ImplementsAssignment_4_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Class_Group_4_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Class_ImplementsAssignment_4_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -837,10 +840,9 @@ protected class Class_ImplementsKeyword_4_0 extends KeywordToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Class_Group_4(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new Class_Group_3(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new Class_Group_2(lastRuleCallOrigin, this, 2, inst);
-			case 3: return new Class_NameAssignment_1(lastRuleCallOrigin, this, 3, inst);
+			case 0: return new Class_Group_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Class_Group_2(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Class_NameAssignment_1(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
@@ -869,7 +871,7 @@ protected class Class_ImplementsAssignment_4_1 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("implements",false)) == null) return null;
+		if((value = eObjectConsumer.getConsumable("implements",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("implements");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
@@ -892,6 +894,98 @@ protected class Class_ImplementsAssignment_4_1 extends AssignmentToken  {
 		}	
 	}	
 }
+
+// ("," implements+=JvmTypeReference)*
+protected class Class_Group_4_2 extends GroupToken {
+	
+	public Class_Group_4_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getClassAccess().getGroup_4_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Class_ImplementsAssignment_4_2_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// ","
+protected class Class_CommaKeyword_4_2_0 extends KeywordToken  {
+	
+	public Class_CommaKeyword_4_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getClassAccess().getCommaKeyword_4_2_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Class_Group_4_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Class_ImplementsAssignment_4_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// implements+=JvmTypeReference
+protected class Class_ImplementsAssignment_4_2_1 extends AssignmentToken  {
+	
+	public Class_ImplementsAssignment_4_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getClassAccess().getImplementsAssignment_4_2_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new JvmTypeReference_Alternatives(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("implements",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("implements");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getJvmTypeReferenceRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getClassAccess().getImplementsJvmTypeReferenceParserRuleCall_4_2_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Class_CommaKeyword_4_2_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
 
 
 // "{"
