@@ -495,10 +495,14 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		final JvmTypeReference returnType = context.resolve(operation.getReturnType());
 		b.append("\npublic ").append(getSerializedForm(returnType)).append(" ").append(operation.getSimpleName());
 		b.append("(");
-		for (Iterator<JvmFormalParameter> iter = operation.getParameters().iterator(); iter.hasNext();) {
+		EList<JvmFormalParameter> closureParams = call.getFormalParameters();
+		for (Iterator<JvmFormalParameter> iter = closureParams.iterator(); iter.hasNext();) {
 			JvmFormalParameter param = iter.next();
-			final JvmTypeReference parameterType = context.resolve(param.getParameterType());
-			b.append(getSerializedForm(parameterType)).append(" ").append(param.getName());
+			final JvmTypeReference parameterType2 = getIdentifiableTypeProvider().getType(param);
+			final JvmTypeReference parameterType = context.resolve(parameterType2);
+			b.append(getSerializedForm(parameterType)).append(" ");
+			String name = makeJavaIdentifier(b.declareVariable(param, param.getName()));
+			b.append(name);
 			if (iter.hasNext())
 				b.append(" , ");
 		}
@@ -513,8 +517,10 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.decreaseIndentation().append("\n};").decreaseIndentation();
 	}
 	
-	protected void _toJavaExpression(XClosure call, IAppendable b) {
-		b.append(getJavaVarName(call, b));
+	protected void _toJavaExpression(final XClosure call, final IAppendable b) {
+		final JvmTypeReference type = getTypeProvider().getConvertedType(call);
+		final JvmTypeReference expectedType = getTypeProvider().getConvertedExpectedType(call);
+		doConversion(expectedType, type, b, getJavaVarName(call, b)).exec();
 	}
 	
 	protected void _toJavaStatement(XClosure call, IAppendable b) {

@@ -682,74 +682,69 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"  new testdata.ClosureClient().invoke0(closure)" +
 				"}");
 	}
+	
+	public void testClosure_05() {
+		assertEvaluatesTo("LITERAL", 
+				"new testdata.ClosureClient().invoke1([String s|s.toUpperCase], 'literal')");
+	}
+	
+	public void testClosure_06() {
+		assertEvaluatesTo("LITERAL", 
+				"new testdata.ClosureClient().invoke2(" +
+				"[Void p1, String s|s.toUpperCase], null, 'literal')");
+	}
+	
 //	
-//	public void testClosure_05() {
-//		assertEvaluatesTo("LITERAL", 
-//				"new testdata.ClosureClient().invoke1(String s|s.toUpperCase, 'literal')");
-//	}
-//	
-//	public void testClosure_06() {
+//	public void testClosure_06_1() {
 //		assertEvaluatesTo("LITERAL", 
 //				"new testdata.ClosureClient().invoke2(" +
-//				"  p1, String s|s.toUpperCase, null, 'literal')");
+//		"[p1, s|s.toUpperCase], null, 'literal')");
 //	}
-//	
-//	public void testClosure_07() {
-//		assertEvaluatesTo("LITERAL", 
-//				"new testdata.ClosureClient().invoke3(" +
-//				"  p1, p2, String s|s.toUpperCase, null, null, 'literal')");
-//	}
-//	
-//	public void testClosure_08() {
-//		assertEvaluatesTo("LITERAL", 
-//				"new testdata.ClosureClient().invoke4(" +
-//				"  p1, p2, p3, String s|s.toUpperCase, null, null, null, 'literal')");
-//	}
-//	
-//	public void testClosure_09() {
-//		assertEvaluatesTo("LITERAL", 
-//				"new testdata.ClosureClient().invoke5(" +
-//				"  p1, p2, p3, p4, String s|s.toUpperCase, null, null, null, null, 'literal')");
-//	}
-//	
+	
+	public void testClosure_07() {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  val func = [|'literal']" +
+				"  new testdata.ClosureClient().useProvider(func)" +
+				"}");
+	}
+	
+	public void testClosure_07_01() {
+		assertEvaluatesTo("literal", 
+		"new testdata.ClosureClient().useProvider(|'literal')");
+	}
+	
+	public void testClosure_08() {
+		assertEvaluatesTo("literal", 
+				"new testdata.ClosureClient().useSupplier(|'literal')");
+	}
+	
+	public void testClosure_09() {
+		assertEvaluatesTo("LITERAL", 
+		"new testdata.ClosureClient().useGoogleCollectFunction([String s|s.toUpperCase], 'literal')");
+	}
+	
 //	public void testClosure_10() {
 //		assertEvaluatesTo("LITERAL", 
-//				"new testdata.ClosureClient().invoke6(" +
-//				"  p1, p2, p3, p4, p5, String s|s.toUpperCase, null, null, null, null, null, 'literal')");
+//		"new testdata.ClosureClient().useGoogleCollectFunction([s|s.toUpperCase], 'literal')");
 //	}
-//	
-//	public void testClosure_11() {
-//		assertEvaluatesTo(new Character('a'), 
-//				"new testdata.ClosureClient().invokeX(" +
-//				"  Character c1, c2, c3, c4, c5, c6, c7|c1, 'abcdefg'.toCharArray)");
-//	}
-//	
+	
+	public void testClosure_11() {
+		assertEvaluatesTo(Boolean.TRUE, 
+		"new testdata.ClosureClient().useGoogleCollectPredicate([String s|'literal'.equals(s)], 'literal')");
+	}
+	
 //	public void testClosure_12() {
-//		assertEvaluatesTo("literal", 
-//				"new testdata.ClosureClient().useProvider(|'literal')");
+//		assertEvaluatesTo(Boolean.TRUE, 
+//		"new testdata.ClosureClient().useGoogleCollectPredicate([s|'literal'.equals(s)], 'literal')");
 //	}
 //	
 //	public void testClosure_13() {
-//		assertEvaluatesTo("literal", 
-//				"new testdata.ClosureClient().useSupplier(|'literal')");
+//		assertEvaluatesTo(Boolean.FALSE, 
+//				"new testdata.ClosureClient().useGoogleCollectPredicate([s|'literal'.equals(s)], 'false')");
 //	}
 //	
 //	public void testClosure_14() {
-//		assertEvaluatesTo("LITERAL", 
-//				"new testdata.ClosureClient().useGoogleCollectFunction(String s|s.toUpperCase, 'literal')");
-//	}
-//	
-//	public void testClosure_15() {
-//		assertEvaluatesTo(Boolean.TRUE, 
-//				"new testdata.ClosureClient().useGoogleCollectPredicate(String s|'literal'.equals(s), 'literal')");
-//	}
-//	
-//	public void testClosure_16() {
-//		assertEvaluatesTo(Boolean.FALSE, 
-//				"new testdata.ClosureClient().useGoogleCollectPredicate(String s|'literal'.equals(s), 'false')");
-//	}
-//	
-//	public void testClosure_17() {
 //		assertEvaluatesTo("literal", 
 //				"{" +
 //				"  var client = new testdata.ClosureClient()" +

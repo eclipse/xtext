@@ -20,9 +20,11 @@ import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 
+import com.google.common.base.Supplier;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -58,6 +60,8 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 		javaCompiler.addClassPathOfClass(getClass());
 		javaCompiler.addClassPathOfClass(AbstractXbaseEvaluationTest.class);
 		javaCompiler.addClassPathOfClass(Functions.class);
+		javaCompiler.addClassPathOfClass(Provider.class);
+		javaCompiler.addClassPathOfClass(Supplier.class);
 	}
 
 	//TODO the on-the-fly compiler cannot declare checked exceptions.
