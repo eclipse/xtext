@@ -283,7 +283,10 @@ public class XExpressionTypeProvider extends AbstractXExpressionTypeProvider {
 	}
 
 	protected JvmTypeReference _type(XBlockExpression object) {
-		final JvmTypeReference getType = getType(object.getExpressions().get(object.getExpressions().size() - 1));
+		List<XExpression> expressions = object.getExpressions();
+		if (expressions.isEmpty())
+			return typesService.getTypeForName(Void.class, object);
+		final JvmTypeReference getType = getType(expressions.get(expressions.size() - 1));
 		return getType;
 	}
 

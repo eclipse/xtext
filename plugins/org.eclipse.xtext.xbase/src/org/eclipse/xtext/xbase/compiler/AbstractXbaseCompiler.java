@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -60,7 +62,10 @@ public abstract class AbstractXbaseCompiler {
 	protected boolean isEarlyMethodInterruption(XExpression obj) {
 		if (obj instanceof XBlockExpression) {
 			XBlockExpression block = (XBlockExpression) obj;
-			return isEarlyMethodInterruption(block.getExpressions().get(block.getExpressions().size() - 1));
+			List<XExpression> expressions = block.getExpressions();
+			if (expressions.isEmpty())
+				return false;
+			return isEarlyMethodInterruption(expressions.get(expressions.size() - 1));
 		}
 		if (obj instanceof XTryCatchFinallyExpression) {
 			XTryCatchFinallyExpression tryCatch = (XTryCatchFinallyExpression) obj;
