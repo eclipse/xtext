@@ -24,8 +24,10 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase.TestSetup;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
+import com.google.common.base.Supplier;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -48,6 +50,8 @@ public class CompilerTestHelper {
 		javaCompiler.addClassPathOfClass(AbstractXbaseEvaluationTest.class);
 		javaCompiler.addClassPathOfClass(Functions.class);
 		javaCompiler.addClassPathOfClass(StringConcatenation.class);
+		javaCompiler.addClassPathOfClass(Provider.class);
+		javaCompiler.addClassPathOfClass(Supplier.class);
 	}
 	
 	public void assertEvaluatesTo(Object object, String string) {
