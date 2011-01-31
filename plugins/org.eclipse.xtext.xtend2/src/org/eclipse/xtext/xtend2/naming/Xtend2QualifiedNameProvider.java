@@ -14,9 +14,6 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.xtend2.xtend2.XtendClass;
-import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
-import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 
 import com.google.inject.Inject;
 /**
@@ -29,7 +26,7 @@ public class Xtend2QualifiedNameProvider extends IQualifiedNameProvider.Abstract
 	
 	public QualifiedName getFullyQualifiedName(EObject obj) {
 		// TODO: find a better criterion what elements have names
-		if (obj instanceof XtendClass || obj instanceof XtendFunction || obj instanceof JvmType || obj instanceof JvmMember) {
+		if (obj instanceof JvmType || obj instanceof JvmMember) {
 			return qualifiedNameConverter.toQualifiedName(((JvmIdentifiableElement) obj).getCanonicalName());
 		}
 		return null;
