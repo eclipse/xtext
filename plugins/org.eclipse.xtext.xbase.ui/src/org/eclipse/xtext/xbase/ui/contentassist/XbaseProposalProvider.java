@@ -5,6 +5,7 @@ package org.eclipse.xtext.xbase.ui.contentassist;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 /**
@@ -30,5 +31,13 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 				return;
 		}
 		super.completeXTypeLiteral_Type(model, assignment, context, acceptor);
+	}
+	
+	@Override
+	public void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
+			ICompletionProposalAcceptor acceptor) {
+		if (keyword.getValue().length() > 1 && Character.isLetter(keyword.getValue().charAt(0))) { 
+			super.completeKeyword(keyword, contentAssistContext, acceptor);
+		}
 	}
 }
