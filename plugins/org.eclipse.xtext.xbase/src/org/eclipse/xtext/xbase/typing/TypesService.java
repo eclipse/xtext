@@ -17,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XtypeFactory;
 
@@ -29,17 +30,18 @@ public class TypesService {
 
 	@Inject
 	private TypesFactory factory;
+	
+	@Inject
+	private ClassURIHelper uriHelper;
 
 	protected URI toCommonTypesUri(Class<?> clazz) {
-		if (clazz.isPrimitive()) {
-			URI.createURI("java:/Primitives#"+clazz.getName());
-		}
-		return URI.createURI("java:/Objects/"+clazz.getName()+"#"+clazz.getName());
+		URI result = uriHelper.getFullURI(clazz);
+		return result;
 	}
 	
 	public JvmTypeReference getTypeForName(Class<?> clazz, EObject context, JvmTypeReference... params) {
 		if (clazz==null)
-			throw new NullPointerException("qualifiedName");
+			throw new NullPointerException("clazz");
 		if (context == null)
 			throw new NullPointerException("context");
 		if (context.eResource() == null)
@@ -70,6 +72,6 @@ public class TypesService {
 
 	public boolean isVoid(JvmTypeReference typeRef) {
 		String typeName = typeRef.getCanonicalName();
-		return typeName.equals("java.lang.Void") || typeName.equals("java.lang.void"); 
+		return typeName.equals(Void.TYPE.getCanonicalName()) || typeName.equals(Void.class.getCanonicalName()); 
 	}
 }
