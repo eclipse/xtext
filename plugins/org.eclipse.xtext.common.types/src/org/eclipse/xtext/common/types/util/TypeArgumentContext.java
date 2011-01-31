@@ -21,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
@@ -202,6 +203,8 @@ public class TypeArgumentContext {
 				}
 			}
 			JvmType type = contextRef.getType();
+			if(type instanceof JvmVoid) 
+				return null;
 			if (type instanceof JvmDeclaredType) {
 				JvmDeclaredType declaredType = (JvmDeclaredType) type;
 				if (Object.class.getCanonicalName().equals(declaredType.getCanonicalName()))
