@@ -7,8 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
+import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmFeature;
@@ -17,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -26,7 +29,9 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
+import org.eclipse.xtext.xbase.functions.FunctionConversion;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Functions;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -35,6 +40,12 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class FeatureCallCompiler extends LiteralsCompiler {
+
+	@Inject
+	private FunctionConversion funcConversion;
+
+	@Inject
+	private TypeArgumentContext.Provider contextProvider;
 
 	protected void _prepare(final XAbstractFeatureCall expr, final IAppendable b) {
 		if (isVoid(expr)) {
@@ -68,10 +79,8 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	protected boolean isLocalVarReference(XAbstractFeatureCall expr) {
 		if (expr instanceof XFeatureCall) {
 			JvmIdentifiableElement feature = expr.getFeature();
-			if (feature instanceof XVariableDeclaration
-				|| feature instanceof JvmFormalParameter
-				|| feature instanceof XCasePart
-				|| feature instanceof XSwitchExpression)
+			if (feature instanceof XVariableDeclaration || feature instanceof JvmFormalParameter
+					|| feature instanceof XCasePart || feature instanceof XSwitchExpression)
 				return true;
 		}
 		return false;
@@ -83,11 +92,11 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 		declareLocalVariable(expr, b, Lists.class.getCanonicalName() + ".newArrayList()");
 		b.append("\nfor(");
-		final String varName = getJavaVarName(expr,b) + "_spread";
+		final String varName = getJavaVarName(expr, b) + "_spread";
 		b.append(makeJavaIdentifier(varName)).append(" : ");
 		internalToJavaExpression(expr.getMemberCallTarget(), b);
 		b.append(") {");
-		b.append("\n").append(getJavaVarName(expr,b)).append("add(");
+		b.append("\n").append(getJavaVarName(expr, b)).append("add(");
 		b.append(varName).append(".");
 		appendFeatureCall(expr.getFeature(), expr.getActualArguments(), b);
 		b.append(";");
@@ -97,15 +106,20 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		return expr instanceof XMemberFeatureCall && ((XMemberFeatureCall) expr).isSpreading();
 	}
 
-	protected Later doConversion(final JvmTypeReference left, final JvmTypeReference right, final IAppendable appendable, final String expression) {
+	protected Later doConversion(final JvmTypeReference left, final JvmTypeReference right,
+			final IAppendable appendable, final String expression) {
 		return doConversion(left, right, appendable, new Later() {
 			@Override
 			public void exec() {
 				appendable.append(expression);
-			}});
+			}
+		});
 	}
-	
-	protected Later doConversion(final JvmTypeReference left, final JvmTypeReference right, final IAppendable appendable, final Later expression) {
+
+	protected Later doConversion(final JvmTypeReference left, final JvmTypeReference right,
+			final IAppendable appendable, final Later expression) {
+		if (left == null)
+			return expression;
 		return new Later() {
 			@Override
 			public void exec() {
@@ -114,16 +128,58 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					appendable.append(Conversions.class.getCanonicalName()).append(".doWrapArray(");
 					expression.exec();
 					appendable.append(")");
-				} else if (left != null && left.getType() instanceof JvmArrayType) {
+				} else if (left.getType() instanceof JvmArrayType) {
 					appendable.append("(").append(getSerializedForm(left)).append(")");
 					appendable.append(Conversions.class.getCanonicalName()).append(".unwrapArray(");
 					expression.exec();
 					appendable.append(")");
+				} else if (right.getType().getCanonicalName().startsWith(Functions.class.getCanonicalName())) {
+					JvmTypeReference resolvedLeft = funcConversion.getResolvedExpectedType(left, right);
+					if (resolvedLeft == null || resolvedLeft.getCanonicalName().equals(Object.class.getName()) || EcoreUtil.equals(resolvedLeft, right)) {
+						expression.exec();
+						return;
+					}
+					JvmOperation operation = funcConversion.findSingleMethod(left);
+					if (operation == null) {
+						throw new IllegalStateException("expected type "+resolvedLeft+" not mappable from "+right);
+					}
+					TypeArgumentContext context = contextProvider.get(resolvedLeft);
+					appendable.append("new ").append(getSerializedForm(resolvedLeft)).append("() {");
+					appendable.increaseIndentation().increaseIndentation();
+					appendable.append("\npublic ")
+							.append(getSerializedForm(context.resolve(operation.getReturnType())));
+					appendable.append(" ").append(operation.getSimpleName()).append("(");
+					EList<JvmFormalParameter> params = operation.getParameters();
+					for (Iterator<JvmFormalParameter> iterator = params.iterator(); iterator.hasNext();) {
+						JvmFormalParameter p = iterator.next();
+						final String name = p.getName();
+						appendable.append(getSerializedForm(context.resolve(p.getParameterType()))).append(" ")
+								.append(name);
+						if (iterator.hasNext())
+							appendable.append(",");
+					}
+					appendable.append(") {");
+					appendable.increaseIndentation();
+					appendable.append("\nreturn ");
+					expression.exec();
+					appendable.append(".apply(");
+					for (Iterator<JvmFormalParameter> iterator = params.iterator(); iterator.hasNext();) {
+						JvmFormalParameter p = iterator.next();
+						final String name = p.getName();
+						appendable.append(name);
+						if (iterator.hasNext())
+							appendable.append(",");
+					}
+					appendable.append(");");
+					appendable.decreaseIndentation();
+					appendable.append("\n}");
+					appendable.decreaseIndentation().decreaseIndentation();
+					appendable.append("\n}");
 				} else {
 					expression.exec();
 				}
 			}
-			
+
 		};
 	}
 
@@ -145,7 +201,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			b.append("null");
 		} else if (isSpreadingMemberFeatureCall(call)) {
 			throw new UnsupportedOperationException();
-//			b.append(getVarName(call));
+			//			b.append(getVarName(call));
 		} else {
 			String expression = null;
 			if (isLocalVarReference(call)) {
@@ -183,7 +239,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 
 	protected boolean appendReceiver(XAbstractFeatureCall call, IAppendable b) {
 		if (isStatic(call.getFeature())) {
-			b.append(((JvmFeature)call.getFeature()).getDeclaringType().getCanonicalName());
+			b.append(((JvmFeature) call.getFeature()).getDeclaringType().getCanonicalName());
 			return true;
 		}
 		if (call instanceof XMemberFeatureCall) {
@@ -202,7 +258,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			}
 		}
 		XExpression receiver = call.getActualReceiver();
-		if (receiver!=null) {
+		if (receiver != null) {
 			internalToJavaExpression(receiver, b);
 			return true;
 		} else {
@@ -236,7 +292,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			internalToJavaExpression(expr.getValue(), b);
 		}
 	}
-	
+
 	@Inject
 	private IdentifiableSimpleNameProvider featureNameProvider;
 
@@ -251,7 +307,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 
 	protected void appendArguments(List<? extends XExpression> eList, IAppendable b) {
-		if (eList==null)
+		if (eList == null)
 			return;
 		for (int i = 0; i < eList.size(); i++) {
 			XExpression expression = eList.get(i);
