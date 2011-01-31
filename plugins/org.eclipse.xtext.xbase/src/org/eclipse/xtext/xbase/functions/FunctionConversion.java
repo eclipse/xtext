@@ -176,7 +176,7 @@ public class FunctionConversion {
 	}
 
 	public boolean isFunction(JvmTypeReference right) {
-		return right.getCanonicalName().startsWith(Functions.class.getCanonicalName());
+		return right != null && right.getCanonicalName().startsWith(Functions.class.getCanonicalName());
 	}
 
 	public JvmTypeReference getResolvedExpectedType(JvmTypeReference expectedType, JvmTypeReference actualType) {

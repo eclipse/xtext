@@ -69,7 +69,10 @@ public class UIStrings {
 			if (needsSeparator)
 				buffer.append(", ");
 			needsSeparator = true;
-			buffer.append(typeRef.getCanonicalName());
+			if(typeRef != null)
+				buffer.append(typeRef.getCanonicalName());
+			else 
+				buffer.append("[null]");
 		}
 		return buffer.toString();
 	}
