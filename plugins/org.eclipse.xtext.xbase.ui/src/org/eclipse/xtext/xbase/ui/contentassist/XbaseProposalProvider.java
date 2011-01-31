@@ -40,4 +40,19 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 			super.completeKeyword(keyword, contentAssistContext, acceptor);
 		}
 	}
+	
+	@Override
+	protected boolean doCreateIntProposals() {
+		return false;
+	}
+	
+	@Override
+	protected boolean doCreateIdProposals() {
+		return false;
+	}
+	
+	@Override
+	protected boolean doCreateStringProposals() {
+		return false;
+	}
 }

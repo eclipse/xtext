@@ -1,10 +1,4 @@
 /*******************************************************************************
- * __  ___            _
- * \ \/ / |_ _____  __ |_
- *  \  /| __/ _ \ \/ / __|
- *  /  \| |_  __/>  <| |_
- * /_/\_\\__\___/_/\_\\__|
- *
  * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -32,6 +26,7 @@ import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit.util.ResourceLoadHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
@@ -44,6 +39,8 @@ import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Strings;
 
+import com.google.inject.Injector;
+
 /**
  * Represents a builder for <code>IContentAssistProcessor</code> tests.
  *
@@ -55,13 +52,18 @@ public class ContentAssistProcessorTestBuilder {
 
 	private String model;
 	private int cursorPosition;
-	private final ISetup setupClazz;
-	private final AbstractXtextTests tests;
+	private Injector injector;
+	private final ResourceLoadHelper loadHelper;
 
 	public ContentAssistProcessorTestBuilder(ISetup setupClazz, AbstractXtextTests tests) throws Exception {
-		this.setupClazz = setupClazz;
-		this.tests = tests;
 		tests.with(setupClazz);
+		injector = tests.getInjector();
+		this.loadHelper = tests;
+	}
+	
+	public ContentAssistProcessorTestBuilder(Injector injector, ResourceLoadHelper helper) throws Exception {
+		this.injector = injector;
+		this.loadHelper = helper;
 	}
 
 	public ContentAssistProcessorTestBuilder reset() throws Exception {
@@ -164,14 +166,14 @@ public class ContentAssistProcessorTestBuilder {
 	public ContentAssistProcessorTestBuilder assertMatchString(String matchString)
 			throws Exception {
 		String currentModelToParse = getModel();
-		final XtextResource xtextResource = tests.getResourceAndExpect(new StringInputStream(currentModelToParse), AbstractXtextTests.UNKNOWN_EXPECTATION);
+		final XtextResource xtextResource = loadHelper.getResourceFor(new StringInputStream(currentModelToParse));
 		final IXtextDocument xtextDocument = getDocument(xtextResource, currentModelToParse);
 		XtextSourceViewerConfiguration configuration = get(XtextSourceViewerConfiguration.class);
 		ISourceViewer sourceViewer = getSourceViewer(xtextDocument, configuration);
 		IContentAssistant contentAssistant = configuration.getContentAssistant(sourceViewer);
 		String contentType = xtextDocument.getContentType(currentModelToParse.length());
 		if (contentAssistant.getContentAssistProcessor(contentType) != null) {
-			ContentAssistContext.Factory factory = tests.get(ContentAssistContext.Factory.class);
+			ContentAssistContext.Factory factory = get(ContentAssistContext.Factory.class);
 			ContentAssistContext[] contexts = factory.create(sourceViewer, currentModelToParse.length(), xtextResource);
 			for(ContentAssistContext context: contexts) {
 				Assert.assertTrue("matchString = '" + matchString + "', actual: '" + context.getPrefix() + "'",
@@ -228,7 +230,7 @@ public class ContentAssistProcessorTestBuilder {
 
 	public ICompletionProposal[] computeCompletionProposals(final String currentModelToParse, int cursorPosition)
 			throws Exception {
-		final XtextResource xtextResource = tests.getResourceAndExpect(new StringInputStream(currentModelToParse), AbstractXtextTests.UNKNOWN_EXPECTATION);
+		final XtextResource xtextResource = loadHelper.getResourceFor(new StringInputStream(currentModelToParse));
 		final IXtextDocument xtextDocument = getDocument(xtextResource, currentModelToParse);
 		
 		XtextSourceViewerConfiguration configuration = get(XtextSourceViewerConfiguration.class);
@@ -277,27 +279,6 @@ public class ContentAssistProcessorTestBuilder {
 		partitioner.connect(document);
 		document.setDocumentPartitioner(partitioner);
 		return document;
-//		final IXtextDocument xtextDocument = (IXtextDocument) Proxy.newProxyInstance(getClass().getClassLoader(),
-//				new Class[] { IXtextDocument.class }, new InvocationHandler() {
-//
-//					@SuppressWarnings("unchecked")
-//					public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-//						if (args!=null && args[0] instanceof IUnitOfWork<?,?>)
-//							return ((IUnitOfWork<?,XtextResource>) args[0]).exec(xtextResource);
-//						if (method.getName().equals("get")) {
-//							if (args != null && args.length == 2) {
-//								int from = (Integer) args[0];
-//								int length = (Integer) args[1];
-//								return model.substring(from, length - from);
-//							}
-//							return model;
-//						}
-//						if (method.getName().equals("getLength"))
-//							return Integer.MAX_VALUE;
-//						throw new UnsupportedOperationException("The test mock IXtextDocument does not support the operation "+method);
-//					}
-//				});
-//		return xtextDocument;
 	}
 
 	public ITextViewer getSourceViewer(final String currentModelToParse, final IXtextDocument xtextDocument) {
@@ -321,14 +302,14 @@ public class ContentAssistProcessorTestBuilder {
 	}
 
 	protected ContentAssistProcessorTestBuilder clone(String model, int offset) throws Exception {
-		ContentAssistProcessorTestBuilder builder = new ContentAssistProcessorTestBuilder(setupClazz, tests);
+		ContentAssistProcessorTestBuilder builder = new ContentAssistProcessorTestBuilder(injector, loadHelper);
 		builder.model = model;
 		builder.cursorPosition = offset;
 		return builder;
 	}
 
 	public <T> T get(Class<T> clazz) {
-		return tests.get(clazz);
+		return injector.getInstance(clazz);
 	}
 
 	protected int getCursorPosition() {
