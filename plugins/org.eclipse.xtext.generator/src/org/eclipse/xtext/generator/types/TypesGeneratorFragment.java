@@ -14,14 +14,12 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
-import org.eclipse.xtext.common.types.access.TypesResourceSet;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
 import org.eclipse.xtext.common.types.xtext.ClasspathBasedTypeScopeProvider;
 import org.eclipse.xtext.common.types.xtext.TypesAwareDefaultGlobalScopeProvider;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.DefaultGeneratorFragment;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 
 /**
@@ -41,7 +39,6 @@ public class TypesGeneratorFragment extends DefaultGeneratorFragment {
 			 .addTypeToType(IJvmTypeProvider.Factory.class.getName(), ClasspathTypeProviderFactory.class.getName())
 			 .addTypeToType(AbstractTypeScopeProvider.class.getName(), ClasspathBasedTypeScopeProvider.class.getName())
 			 .addfinalTypeToType(IGlobalScopeProvider.class.getName(), TypesAwareDefaultGlobalScopeProvider.class.getName())
-			 .addfinalTypeToType(XtextResourceSet.class.getName(), TypesResourceSet.class.getName())
 			 .getBindings();
 	}
 	
