@@ -36,7 +36,7 @@ public class TestCaseCompiler {
 
 	public void compile(String qualifiedName) throws IOException {
 		ResourceSet set = injector.getInstance(ResourceSet.class);
-		final String from = "src/" + qualifiedName.replace('.', '/') + ".xtd";
+		final String from = "src/" + qualifiedName.replace('.', '/') + ".xtend";
 		final String to = "src-gen/" + qualifiedName.replace('.', '/') + ".java";
 
 		Resource res = set.getResource(org.eclipse.emf.common.util.URI.createFileURI(from), true);
