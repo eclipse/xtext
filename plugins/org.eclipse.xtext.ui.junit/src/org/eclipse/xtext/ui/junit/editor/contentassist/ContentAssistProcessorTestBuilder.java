@@ -48,7 +48,7 @@ import com.google.inject.Injector;
  * @author Sven Efftinge
  * @author Sebastian Zarnekow
  */
-public class ContentAssistProcessorTestBuilder {
+public class ContentAssistProcessorTestBuilder implements Cloneable {
 
 	private String model;
 	private int cursorPosition;
@@ -302,7 +302,7 @@ public class ContentAssistProcessorTestBuilder {
 	}
 
 	protected ContentAssistProcessorTestBuilder clone(String model, int offset) throws Exception {
-		ContentAssistProcessorTestBuilder builder = new ContentAssistProcessorTestBuilder(injector, loadHelper);
+		ContentAssistProcessorTestBuilder builder = (ContentAssistProcessorTestBuilder) clone();
 		builder.model = model;
 		builder.cursorPosition = offset;
 		return builder;
