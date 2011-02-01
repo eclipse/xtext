@@ -163,7 +163,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 				currentNode = lastCompleteNode;
 			lastVisibleNode = getLastCompleteNodeByOffset(rootNode, completionOffset);
 			datatypeNode = getContainingDatatypeRuleNode(lastCompleteNode);
-			currentModel = lastVisibleNode.getSemanticElement();
+			currentModel = NodeModelUtils.findActualSemanticObjectFor(lastVisibleNode);
 		}
 
 		protected void initializeAndAdjustCompletionOffset(int offset) {
