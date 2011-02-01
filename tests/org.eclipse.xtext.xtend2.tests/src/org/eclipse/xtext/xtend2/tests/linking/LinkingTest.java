@@ -9,7 +9,6 @@ package org.eclipse.xtext.xtend2.tests.linking;
 
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
