@@ -183,7 +183,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return reference.getEReferenceType() == TypesPackage.Literals.JVM_CONSTRUCTOR;
 	}
 
-	protected boolean isFeatureCallScope(EReference reference) {
+	public boolean isFeatureCallScope(EReference reference) {
 		return reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE;
 	}
 
@@ -202,13 +202,24 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			return localVariableScope;
 		}
 		final XExpression syntacticalReceiver = getSyntacticalReceiver(call);
-		if (syntacticalReceiver == null)
+		IScope result = createFeatureCallScopeForReceiver(call, syntacticalReceiver, reference);
+		return result;
+	}
+
+	/**
+	 * This method serves as an entry point for the content assist scoping for features.
+	 * @param context the context provides access to the resource set. If it is an assignment, it 
+	 *   will be used to restrict scoping.
+	 * @param receiver the receiver of the feature call.
+	 */
+	public IScope createFeatureCallScopeForReceiver(final XExpression context, final XExpression receiver, EReference reference) {
+		if (!isFeatureCallScope(reference))
 			return IScope.NULLSCOPE;
-		if (!syntacticalReceiver.eIsProxy()) {
-			JvmTypeReference jvmTypeReference = typeProvider.getConvertedType(syntacticalReceiver);
-			if (jvmTypeReference != null) {
-				return createFeatureScopeForTypeRef(jvmTypeReference, call, getContextType(call), null);
-			}
+		if (receiver == null || receiver.eIsProxy())
+			return IScope.NULLSCOPE;
+		JvmTypeReference receiverType = typeProvider.getConvertedType(receiver);
+		if (receiverType != null) {
+			return createFeatureScopeForTypeRef(receiverType, context, getContextType(context), null);
 		}
 		return IScope.NULLSCOPE;
 	}
@@ -246,7 +257,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return featureScopeForThis;
 	}
 
-	protected JvmDeclaredType getContextType(XAbstractFeatureCall call) {
+	protected JvmDeclaredType getContextType(XExpression call) {
 		return EcoreUtil2.getContainerOfType(call, JvmDeclaredType.class);
 	}
 
@@ -336,9 +347,9 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return MapBasedScope.createScope(parentScope, descriptions);
 	}
 
-	protected JvmFeatureScope createFeatureScopeForTypeRef(JvmTypeReference type, XAbstractFeatureCall call,
+	protected JvmFeatureScope createFeatureScopeForTypeRef(JvmTypeReference type, XExpression expression,
 			JvmDeclaredType currentContext, JvmIdentifiableElement implicitReceiver) {
-		if (call instanceof XAssignment) {
+		if (expression instanceof XAssignment) {
 			XAssignmentDescriptionProvider provider1 = assignmentFeatureDescProvider.get();
 			XAssignmentSugarDescriptionProvider provider2 = assignmentSugarFeatureDescProvider.get();
 			provider1.setContextType(currentContext);
@@ -351,7 +362,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			final XFeatureCallSugarDescriptionProvider provider2 = sugarFeatureDescProvider.get();
 			final DefaultJvmFeatureDescriptionProvider provider3 = defaultFeatureDescProvider.get();
 			final StaticMethodsFeatureForTypeProvider featuresForTypeProvider = staticExtensionMethodsFeaturesForTypeProvider.get();
-			featuresForTypeProvider.setContext(call);
+			featuresForTypeProvider.setContext(expression);
 			provider3.setFeaturesForTypeProvider(featuresForTypeProvider);
 			final XFeatureCallSugarDescriptionProvider provider4 = sugarFeatureDescProvider.get();
 			provider4.setFeaturesForTypeProvider(featuresForTypeProvider);
