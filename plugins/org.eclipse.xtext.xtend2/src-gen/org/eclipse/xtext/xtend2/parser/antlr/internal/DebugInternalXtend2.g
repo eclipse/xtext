@@ -44,7 +44,7 @@ ruleMember :
 
 // Rule Function
 ruleFunction :
-	(
+	'override'? (
 		'<' ruleJvmTypeParameter (
 			',' ruleJvmTypeParameter
 		)* '>'

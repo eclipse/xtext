@@ -257,120 +257,129 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	public class FunctionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Function");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
-		private final Keyword cLessThanSignKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
-		private final Assignment cTypeParametersAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
-		private final RuleCall cTypeParametersJvmTypeParameterParserRuleCall_0_1_0 = (RuleCall)cTypeParametersAssignment_0_1.eContents().get(0);
-		private final Group cGroup_0_2 = (Group)cGroup_0.eContents().get(2);
-		private final Keyword cCommaKeyword_0_2_0 = (Keyword)cGroup_0_2.eContents().get(0);
-		private final Assignment cTypeParametersAssignment_0_2_1 = (Assignment)cGroup_0_2.eContents().get(1);
-		private final RuleCall cTypeParametersJvmTypeParameterParserRuleCall_0_2_1_0 = (RuleCall)cTypeParametersAssignment_0_2_1.eContents().get(0);
-		private final Keyword cGreaterThanSignKeyword_0_3 = (Keyword)cGroup_0.eContents().get(3);
-		private final Assignment cReturnTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cReturnTypeJvmTypeReferenceParserRuleCall_1_0 = (RuleCall)cReturnTypeAssignment_1.eContents().get(0);
-		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Assignment cParametersAssignment_4_0 = (Assignment)cGroup_4.eContents().get(0);
-		private final RuleCall cParametersJvmFormalParameterParserRuleCall_4_0_0 = (RuleCall)cParametersAssignment_4_0.eContents().get(0);
-		private final Group cGroup_4_1 = (Group)cGroup_4.eContents().get(1);
-		private final Keyword cCommaKeyword_4_1_0 = (Keyword)cGroup_4_1.eContents().get(0);
-		private final Assignment cParametersAssignment_4_1_1 = (Assignment)cGroup_4_1.eContents().get(1);
-		private final RuleCall cParametersJvmFormalParameterParserRuleCall_4_1_1_0 = (RuleCall)cParametersAssignment_4_1_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Alternatives cAlternatives_6 = (Alternatives)cGroup.eContents().get(6);
-		private final Assignment cExpressionAssignment_6_0 = (Assignment)cAlternatives_6.eContents().get(0);
-		private final RuleCall cExpressionXExpressionParserRuleCall_6_0_0 = (RuleCall)cExpressionAssignment_6_0.eContents().get(0);
-		private final Keyword cSemicolonKeyword_6_1 = (Keyword)cAlternatives_6.eContents().get(1);
+		private final Assignment cOverrideAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cOverrideOverrideKeyword_0_0 = (Keyword)cOverrideAssignment_0.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cLessThanSignKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cTypeParametersAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cTypeParametersJvmTypeParameterParserRuleCall_1_1_0 = (RuleCall)cTypeParametersAssignment_1_1.eContents().get(0);
+		private final Group cGroup_1_2 = (Group)cGroup_1.eContents().get(2);
+		private final Keyword cCommaKeyword_1_2_0 = (Keyword)cGroup_1_2.eContents().get(0);
+		private final Assignment cTypeParametersAssignment_1_2_1 = (Assignment)cGroup_1_2.eContents().get(1);
+		private final RuleCall cTypeParametersJvmTypeParameterParserRuleCall_1_2_1_0 = (RuleCall)cTypeParametersAssignment_1_2_1.eContents().get(0);
+		private final Keyword cGreaterThanSignKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
+		private final Assignment cReturnTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cReturnTypeJvmTypeReferenceParserRuleCall_2_0 = (RuleCall)cReturnTypeAssignment_2.eContents().get(0);
+		private final Assignment cNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cNameIDTerminalRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Assignment cParametersAssignment_5_0 = (Assignment)cGroup_5.eContents().get(0);
+		private final RuleCall cParametersJvmFormalParameterParserRuleCall_5_0_0 = (RuleCall)cParametersAssignment_5_0.eContents().get(0);
+		private final Group cGroup_5_1 = (Group)cGroup_5.eContents().get(1);
+		private final Keyword cCommaKeyword_5_1_0 = (Keyword)cGroup_5_1.eContents().get(0);
+		private final Assignment cParametersAssignment_5_1_1 = (Assignment)cGroup_5_1.eContents().get(1);
+		private final RuleCall cParametersJvmFormalParameterParserRuleCall_5_1_1_0 = (RuleCall)cParametersAssignment_5_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Alternatives cAlternatives_7 = (Alternatives)cGroup.eContents().get(7);
+		private final Assignment cExpressionAssignment_7_0 = (Assignment)cAlternatives_7.eContents().get(0);
+		private final RuleCall cExpressionXExpressionParserRuleCall_7_0_0 = (RuleCall)cExpressionAssignment_7_0.eContents().get(0);
+		private final Keyword cSemicolonKeyword_7_1 = (Keyword)cAlternatives_7.eContents().get(1);
 		
 		//Function returns XtendFunction:
-		//	("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference?
-		//	name=ID "(" (parameters+=JvmFormalParameter ("," parameters+=JvmFormalParameter)*)? ")" (expression=XExpression |
-		//	";");
+		//	override?="override"? ("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")?
+		//	returnType=JvmTypeReference? name=ID "(" (parameters+=JvmFormalParameter ("," parameters+=JvmFormalParameter)*)? ")"
+		//	(expression=XExpression | ";");
 		public ParserRule getRule() { return rule; }
 
-		//("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference? name=ID
-		//"(" (parameters+=JvmFormalParameter ("," parameters+=JvmFormalParameter)*)? ")" (expression=XExpression | ";")
+		//override?="override"? ("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")?
+		//returnType=JvmTypeReference? name=ID "(" (parameters+=JvmFormalParameter ("," parameters+=JvmFormalParameter)*)? ")"
+		//(expression=XExpression | ";")
 		public Group getGroup() { return cGroup; }
 
+		//override?="override"?
+		public Assignment getOverrideAssignment_0() { return cOverrideAssignment_0; }
+
+		//"override"
+		public Keyword getOverrideOverrideKeyword_0_0() { return cOverrideOverrideKeyword_0_0; }
+
 		//("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")?
-		public Group getGroup_0() { return cGroup_0; }
+		public Group getGroup_1() { return cGroup_1; }
 
 		//"<"
-		public Keyword getLessThanSignKeyword_0_0() { return cLessThanSignKeyword_0_0; }
+		public Keyword getLessThanSignKeyword_1_0() { return cLessThanSignKeyword_1_0; }
 
 		//typeParameters+=JvmTypeParameter
-		public Assignment getTypeParametersAssignment_0_1() { return cTypeParametersAssignment_0_1; }
+		public Assignment getTypeParametersAssignment_1_1() { return cTypeParametersAssignment_1_1; }
 
 		//JvmTypeParameter
-		public RuleCall getTypeParametersJvmTypeParameterParserRuleCall_0_1_0() { return cTypeParametersJvmTypeParameterParserRuleCall_0_1_0; }
+		public RuleCall getTypeParametersJvmTypeParameterParserRuleCall_1_1_0() { return cTypeParametersJvmTypeParameterParserRuleCall_1_1_0; }
 
 		//("," typeParameters+=JvmTypeParameter)*
-		public Group getGroup_0_2() { return cGroup_0_2; }
+		public Group getGroup_1_2() { return cGroup_1_2; }
 
 		//","
-		public Keyword getCommaKeyword_0_2_0() { return cCommaKeyword_0_2_0; }
+		public Keyword getCommaKeyword_1_2_0() { return cCommaKeyword_1_2_0; }
 
 		//typeParameters+=JvmTypeParameter
-		public Assignment getTypeParametersAssignment_0_2_1() { return cTypeParametersAssignment_0_2_1; }
+		public Assignment getTypeParametersAssignment_1_2_1() { return cTypeParametersAssignment_1_2_1; }
 
 		//JvmTypeParameter
-		public RuleCall getTypeParametersJvmTypeParameterParserRuleCall_0_2_1_0() { return cTypeParametersJvmTypeParameterParserRuleCall_0_2_1_0; }
+		public RuleCall getTypeParametersJvmTypeParameterParserRuleCall_1_2_1_0() { return cTypeParametersJvmTypeParameterParserRuleCall_1_2_1_0; }
 
 		//">"
-		public Keyword getGreaterThanSignKeyword_0_3() { return cGreaterThanSignKeyword_0_3; }
+		public Keyword getGreaterThanSignKeyword_1_3() { return cGreaterThanSignKeyword_1_3; }
 
 		//returnType=JvmTypeReference?
-		public Assignment getReturnTypeAssignment_1() { return cReturnTypeAssignment_1; }
+		public Assignment getReturnTypeAssignment_2() { return cReturnTypeAssignment_2; }
 
 		//JvmTypeReference
-		public RuleCall getReturnTypeJvmTypeReferenceParserRuleCall_1_0() { return cReturnTypeJvmTypeReferenceParserRuleCall_1_0; }
+		public RuleCall getReturnTypeJvmTypeReferenceParserRuleCall_2_0() { return cReturnTypeJvmTypeReferenceParserRuleCall_2_0; }
 
 		//name=ID
-		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		public Assignment getNameAssignment_3() { return cNameAssignment_3; }
 
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
+		public RuleCall getNameIDTerminalRuleCall_3_0() { return cNameIDTerminalRuleCall_3_0; }
 
 		//"("
-		public Keyword getLeftParenthesisKeyword_3() { return cLeftParenthesisKeyword_3; }
+		public Keyword getLeftParenthesisKeyword_4() { return cLeftParenthesisKeyword_4; }
 
 		//(parameters+=JvmFormalParameter ("," parameters+=JvmFormalParameter)*)?
-		public Group getGroup_4() { return cGroup_4; }
+		public Group getGroup_5() { return cGroup_5; }
 
 		//parameters+=JvmFormalParameter
-		public Assignment getParametersAssignment_4_0() { return cParametersAssignment_4_0; }
+		public Assignment getParametersAssignment_5_0() { return cParametersAssignment_5_0; }
 
 		//JvmFormalParameter
-		public RuleCall getParametersJvmFormalParameterParserRuleCall_4_0_0() { return cParametersJvmFormalParameterParserRuleCall_4_0_0; }
+		public RuleCall getParametersJvmFormalParameterParserRuleCall_5_0_0() { return cParametersJvmFormalParameterParserRuleCall_5_0_0; }
 
 		//("," parameters+=JvmFormalParameter)*
-		public Group getGroup_4_1() { return cGroup_4_1; }
+		public Group getGroup_5_1() { return cGroup_5_1; }
 
 		//","
-		public Keyword getCommaKeyword_4_1_0() { return cCommaKeyword_4_1_0; }
+		public Keyword getCommaKeyword_5_1_0() { return cCommaKeyword_5_1_0; }
 
 		//parameters+=JvmFormalParameter
-		public Assignment getParametersAssignment_4_1_1() { return cParametersAssignment_4_1_1; }
+		public Assignment getParametersAssignment_5_1_1() { return cParametersAssignment_5_1_1; }
 
 		//JvmFormalParameter
-		public RuleCall getParametersJvmFormalParameterParserRuleCall_4_1_1_0() { return cParametersJvmFormalParameterParserRuleCall_4_1_1_0; }
+		public RuleCall getParametersJvmFormalParameterParserRuleCall_5_1_1_0() { return cParametersJvmFormalParameterParserRuleCall_5_1_1_0; }
 
 		//")"
-		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
+		public Keyword getRightParenthesisKeyword_6() { return cRightParenthesisKeyword_6; }
 
 		//expression=XExpression | ";"
-		public Alternatives getAlternatives_6() { return cAlternatives_6; }
+		public Alternatives getAlternatives_7() { return cAlternatives_7; }
 
 		//expression=XExpression
-		public Assignment getExpressionAssignment_6_0() { return cExpressionAssignment_6_0; }
+		public Assignment getExpressionAssignment_7_0() { return cExpressionAssignment_7_0; }
 
 		//XExpression
-		public RuleCall getExpressionXExpressionParserRuleCall_6_0_0() { return cExpressionXExpressionParserRuleCall_6_0_0; }
+		public RuleCall getExpressionXExpressionParserRuleCall_7_0_0() { return cExpressionXExpressionParserRuleCall_7_0_0; }
 
 		//";"
-		public Keyword getSemicolonKeyword_6_1() { return cSemicolonKeyword_6_1; }
+		public Keyword getSemicolonKeyword_7_1() { return cSemicolonKeyword_7_1; }
 	}
 
 	public class XStringLiteralElements extends AbstractParserRuleElementFinder {
@@ -943,9 +952,9 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Function returns XtendFunction:
-	//	("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference?
-	//	name=ID "(" (parameters+=JvmFormalParameter ("," parameters+=JvmFormalParameter)*)? ")" (expression=XExpression |
-	//	";");
+	//	override?="override"? ("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")?
+	//	returnType=JvmTypeReference? name=ID "(" (parameters+=JvmFormalParameter ("," parameters+=JvmFormalParameter)*)? ")"
+	//	(expression=XExpression | ";");
 	public FunctionElements getFunctionAccess() {
 		return (pFunction != null) ? pFunction : (pFunction = new FunctionElements());
 	}
