@@ -125,7 +125,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 	}
 
 	@Check
-	public void checkIllegalFunctionOverride(XtendClass xtendClass) {
+	public void checkDuplicateAndOverridenFunctions(XtendClass xtendClass) {
 		JvmParameterizedTypeReference typeReference = typesFactory.createJvmParameterizedTypeReference();
 		typeReference.setType(xtendClass.getInferredJvmType());
 		TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.get(typeReference);
