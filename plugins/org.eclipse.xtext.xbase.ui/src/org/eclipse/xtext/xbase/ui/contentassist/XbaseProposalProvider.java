@@ -3,15 +3,57 @@
 */
 package org.eclipse.xtext.xbase.ui.contentassist;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
+import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
+import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
+
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.inject.Inject;
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */
 public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
+	
+	@Inject
+	private ValidFeatureDescription featureDescriptionPredicate;
+	
+	public static class ValidFeatureDescription implements Predicate<IEObjectDescription> {
+
+		@Inject
+		private OperatorMapping operatorMapping;
+		
+		public boolean apply(IEObjectDescription input) {
+			if (input instanceof JvmFeatureDescription) {
+				if (!((JvmFeatureDescription) input).isValid())
+					return false;
+				// filter operator method names from CA
+				return operatorMapping.getOperator(input.getName()) == null;
+			}
+			return true;
+		}
+		
+	}
 	
 	@Override
 	public void completeJvmParameterizedTypeReference_Type(EObject model, Assignment assignment,
@@ -55,4 +97,130 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 	protected boolean doCreateStringProposals() {
 		return false;
 	}
+	
+	@Override
+	public XbaseScopeProvider getScopeProvider() {
+		return (XbaseScopeProvider) super.getScopeProvider();
+	}
+	
+	@Override
+	protected void lookupCrossReference(CrossReference crossReference, ContentAssistContext contentAssistContext,
+			ICompletionProposalAcceptor acceptor) {
+		lookupCrossReference(crossReference, contentAssistContext, acceptor, featureDescriptionPredicate);
+	}
+	
+	/**
+	 * Customized to be able to treat binary operations in a special way with respect to scoping.
+	 * Since the operator is a cross reference, we have to be careful to choose the right context for
+	 * the scope provider. On the other hand it's important to filter "impossible" syntactical situations.
+	 */
+	@Override
+	protected void lookupCrossReference(CrossReference crossReference, EReference reference,
+			ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor,
+			Predicate<IEObjectDescription> filter) {
+		// guard for feature call scopes
+		if (!getScopeProvider().isFeatureCallScope(reference)) {
+			super.lookupCrossReference(crossReference, reference, contentAssistContext, acceptor, filter);
+			return;
+		}
+		EObject model = contentAssistContext.getCurrentModel();
+		if (model == contentAssistContext.getPreviousModel() || 
+				!(contentAssistContext.getPreviousModel() instanceof XExpression)) {
+			// check whether we have a binary operation that was already linked
+			if (model instanceof XBinaryOperation) {
+				XBinaryOperation binaryOperation = (XBinaryOperation) model;
+				if (doNotProposeFeatureOfBinaryOperation(contentAssistContext, binaryOperation)) {
+					return;
+				}
+			} else if (model instanceof XAbstractFeatureCall) {
+				XAbstractFeatureCall memberFeatureCall = (XAbstractFeatureCall) model;
+				List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(memberFeatureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+				if (!nodesForFeature.isEmpty()) {
+					INode node = nodesForFeature.get(0);
+					if (node.getOffset() + node.getLength() <= contentAssistContext.getOffset() - contentAssistContext.getPrefix().length()) {
+						createReceiverProposals(memberFeatureCall, crossReference, reference, contentAssistContext,	acceptor, filter);
+						return;
+					}
+				}
+			} 
+			super.lookupCrossReference(crossReference, reference, contentAssistContext, acceptor, filter);
+			return;
+		}
+		if (model instanceof XBinaryOperation) {
+			XBinaryOperation binaryOperation = (XBinaryOperation) model;
+			if (contentAssistContext.getPreviousModel() == binaryOperation.getRightOperand()) {
+				createReceiverProposals(binaryOperation.getRightOperand(), crossReference, reference, contentAssistContext,	acceptor, filter);
+				return;
+			}
+		}
+		if (model instanceof XAbstractFeatureCall) {
+			ICompositeNode node = NodeModelUtils.findActualNodeFor(model);
+			int offset = node.getOffset();
+			int length = node.getLength();
+			if (offset + length >= contentAssistContext.getOffset()) {
+				super.lookupCrossReference(crossReference, reference, contentAssistContext, acceptor, filter);
+				return;
+			}
+		}
+		if (model != null && !(model instanceof XExpression)) {
+			super.lookupCrossReference(crossReference, reference, contentAssistContext, acceptor, filter);
+			return;
+		}
+		
+		if(contentAssistContext.getPreviousModel() instanceof XExpression) {
+			createReceiverProposals((XExpression) contentAssistContext.getPreviousModel(), crossReference, reference, contentAssistContext,	acceptor, filter);
+		} else {
+			super.lookupCrossReference(crossReference, reference, contentAssistContext, acceptor, filter);
+			return;
+		}
+	}
+
+	protected void createReceiverProposals(XExpression receiver, CrossReference crossReference,
+			EReference reference, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor,
+			Predicate<IEObjectDescription> filter) {
+		String ruleName = null;
+		if (crossReference.getTerminal() instanceof RuleCall) {
+			ruleName = ((RuleCall) crossReference.getTerminal()).getRule().getName();
+		}
+		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory(ruleName, contentAssistContext);
+		IScope scope = getScopeProvider().createFeatureCallScopeForReceiver(receiver, receiver, reference);
+		Iterable<IEObjectDescription> candidates = scope.getAllElements();
+		for (IEObjectDescription candidate : candidates) {
+			if (!acceptor.canAcceptMoreProposals())
+				return;
+			if (filter.apply(candidate)) {
+				acceptor.accept(proposalFactory.apply(candidate));
+			}
+		}
+		return;
+	}
+
+	protected boolean doNotProposeFeatureOfBinaryOperation(ContentAssistContext contentAssistContext,
+			XBinaryOperation binaryOperation) {
+		List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(binaryOperation, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+		if (!nodesForFeature.isEmpty()) {
+			INode node = nodesForFeature.get(0);
+			if (node.getOffset() < contentAssistContext.getOffset() - contentAssistContext.getPrefix().length()) {
+				XExpression rightOperand = binaryOperation.getRightOperand();
+				if (rightOperand == null)
+					return true;
+				ICompositeNode rightOperandNode = NodeModelUtils.findActualNodeFor(rightOperand);
+				if (rightOperandNode.getOffset() >= contentAssistContext.getOffset())
+					return true;
+				if (isParentOf(rightOperandNode, contentAssistContext.getLastCompleteNode()))
+					return true;
+			}
+		}
+		return false;
+	}
+	
+	protected boolean isParentOf(INode node, INode child) {
+		if (node == null)
+			return false;
+		while(child != null && node.equals(child)) {
+			child = child.getParent();
+		}
+		return node.equals(child);
+	}
+	
 }
