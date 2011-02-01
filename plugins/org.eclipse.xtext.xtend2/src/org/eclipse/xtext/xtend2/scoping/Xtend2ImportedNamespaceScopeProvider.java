@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtend2.scoping;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider;
@@ -23,15 +22,16 @@ import com.google.inject.Inject;
  */
 public class Xtend2ImportedNamespaceScopeProvider extends XbaseImportedNamespaceScopeProvider {
 
-	@Inject 
+	@Inject
 	private IQualifiedNameConverter nameConverter;
-	
+
 	@Override
 	protected List<ImportNormalizer> internalGetImportedNamespaceResolvers(EObject context, boolean ignoreCase) {
-		XtendFile xtendFile = EcoreUtil2.getContainerOfType(context, XtendFile.class);
-		List<ImportNormalizer> importedNamespaceResolvers = super.internalGetImportedNamespaceResolvers(context, ignoreCase);
-		if(xtendFile != null && xtendFile.getPackage() != null) {
-			importedNamespaceResolvers.add(new ImportNormalizer(nameConverter.toQualifiedName(xtendFile.getPackage()), true, ignoreCase));
+		List<ImportNormalizer> importedNamespaceResolvers = super.internalGetImportedNamespaceResolvers(context,
+				ignoreCase);
+		if (context instanceof XtendFile && ((XtendFile) context).getPackage() != null) {
+			importedNamespaceResolvers.add(new ImportNormalizer(nameConverter.toQualifiedName(((XtendFile) context)
+					.getPackage()), true, ignoreCase));
 		}
 		return importedNamespaceResolvers;
 	}
