@@ -65,7 +65,7 @@ public class JvmFeatureOverridesService {
         Set<JvmFeature> operation = Sets.newHashSet(result);
         for (JvmFeature op1 : result) {
             for (JvmFeature op2 : result) {
-                if (isOverridden(op1, op2, ctx))
+                if (isOverridden(op1, op2, ctx, true))
                     operation.remove(op2);
             }
         }
@@ -85,12 +85,12 @@ public class JvmFeatureOverridesService {
         return allOps;
     }
 
-    public boolean isOverridden(JvmFeature overriding, JvmFeature overridden, TypeArgumentContext context) {
+    public boolean isOverridden(JvmFeature overriding, JvmFeature overridden, TypeArgumentContext context, boolean isCheckInheritance) {
         if (overridden.getClass() != overriding.getClass())
             return false;
         if (!isNameEqual(overriding, overridden))
             return false;
-        if (!isInheritanceRelation(overriding, overridden))
+        if (isCheckInheritance && !isInheritanceRelation(overriding, overridden))
             return false;
         if (overriding instanceof JvmOperation && overridden instanceof JvmOperation) {
             JvmOperation overridingOp = (JvmOperation) overriding;
@@ -108,7 +108,7 @@ public class JvmFeatureOverridesService {
         }
         return true;
     }
-
+    
     protected boolean isNameEqual(JvmFeature overriding, JvmFeature overridden) {
         return overriding.getSimpleName().equals(overridden.getSimpleName());
     }
