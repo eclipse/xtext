@@ -8,18 +8,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.parseerrorhandling;
 
+import java.io.StringReader;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.TreeTestLanguageStandaloneSetup;
@@ -95,6 +101,20 @@ public class ParseErrorHandlingTest extends AbstractXtextTests {
 		Keyword stuff = (Keyword) secondRule.getAlternatives();
 		assertEquals("stuff", stuff.getValue());
 //		assertWithXtend("'stuff'", "rules.get(1).eAllContents().typeSelect(Keyword).first().value", grammar);
+	}
+	
+	public void testExpectNoSuchMethodException() throws Exception {
+		IParser parser = get(IParser.class);
+		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
+		parserRule.setName("ruleDoesNotExist");
+		try {
+			parser.parse(parserRule, new StringReader("empty"));
+			fail("Expected WrappedException");
+		} catch(ParseException e) {
+			assertTrue(e.getCause() instanceof WrappedException);
+			WrappedException cause = (WrappedException) e.getCause();
+			assertTrue(cause.getCause() instanceof NoSuchMethodException);
+		}
 	}
 
 

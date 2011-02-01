@@ -516,38 +516,41 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	public final IParseResult parse(String entryRuleName) throws RecognitionException {
 		IParseResult result = null;
 		EObject current = null;
+		String completeContent = input.toString();
+		if (completeContent == null) // who had the crazy idea to return null from toString() ...
+			completeContent = "";
+		currentNode = nodeBuilder.newRootNode(completeContent);
+		String antlrEntryRuleName = normalizeEntryRuleName(entryRuleName);
 		try {
-			String completeContent = input.toString();
-			if (completeContent == null) // who had the crazy idea to return null from toString() ...
-				completeContent = "";
-			currentNode = nodeBuilder.newRootNode(completeContent);
-			String antlrEntryRuleName = normalizeEntryRuleName(entryRuleName);
-			try {
-				Method method = this.getClass().getMethod(antlrEntryRuleName);
-				Object parseResult = method.invoke(this);
-				if (parseResult instanceof EObject)
-					current = (EObject) parseResult;
-			} catch (InvocationTargetException ite) {
-				Throwable targetException = ite.getTargetException();
-				if (targetException instanceof RecognitionException) {
-					throw (RecognitionException) targetException;
-				}
-				if (targetException instanceof Exception) {
-					throw new WrappedException((Exception) targetException);
-				}
-				throw new RuntimeException(targetException);
-			} catch (Exception e) {
-				throw new WrappedException(e);
-			}
+			Method method = this.getClass().getMethod(antlrEntryRuleName);
+			Object parseResult = method.invoke(this);
+			if (parseResult instanceof EObject)
+				current = (EObject) parseResult;
 			appendSkippedTokens();
 			appendTrailingHiddenTokens();
-		} finally {
 			try {
 				appendAllTokens();
 			} finally {
 				ICompositeNode root = nodeBuilder.compressAndReturnParent(currentNode);
 				result = new ParseResult(current, root, hadErrors);
 			}
+		} catch (InvocationTargetException ite) {
+			Throwable targetException = ite.getTargetException();
+			if (targetException instanceof RecognitionException) {
+				try {
+					appendAllTokens();
+				} finally {
+					ICompositeNode root = nodeBuilder.compressAndReturnParent(currentNode);
+					result = new ParseResult(current, root, hadErrors);
+				}
+				throw (RecognitionException) targetException;
+			}
+			if (targetException instanceof Exception) {
+				throw new WrappedException((Exception) targetException);
+			}
+			throw new RuntimeException(targetException);
+		} catch (Exception e) {
+			throw new WrappedException(e);
 		}
 		return result;
 	}
