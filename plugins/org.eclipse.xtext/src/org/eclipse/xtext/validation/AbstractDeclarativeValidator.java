@@ -323,7 +323,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		warning(message, feature, index, null);
 	}
 
-	protected void warning(String message, EStructuralFeature feature, String code) {
+	protected void warning(String message, EStructuralFeature feature, String code, String... issueData) {
 		warning(message, state.get().currentObject, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code);
 	}
 
@@ -339,6 +339,10 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		getMessageAcceptor().acceptWarning(message, source, feature, index, code, issueData);
 	}
 	
+	protected void warning(String message, EObject source, EStructuralFeature feature, String code, String... issueData) {
+		getMessageAcceptor().acceptWarning(message, source, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code, issueData);
+	}
+	
 	protected void error(String message, EStructuralFeature feature) {
 		error(message, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
 	}
@@ -347,7 +351,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		error(message, feature, index, null);
 	}
 
-	protected void error(String message, EStructuralFeature feature, String code) {
+	protected void error(String message, EStructuralFeature feature, String code, String... issueData) {
 		error(message, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code);
 	}
 
@@ -359,6 +363,10 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		error(message, source, feature, index, null);
 	}
 
+	protected void error(String message, EObject source, EStructuralFeature feature, String code, String... issueData) {
+		getMessageAcceptor().acceptError(message, source, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code, issueData);
+	}
+	
 	protected void error(String message, EObject source, EStructuralFeature feature, int index, String code, String... issueData) {
 		getMessageAcceptor().acceptError(message, source, feature, index, code, issueData);
 	}
