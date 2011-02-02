@@ -342,7 +342,7 @@ public class XExpressionTypeProvider extends AbstractXExpressionTypeProvider {
 				parameterTypes.add(resolve);
 			}
 		}
-		return typesService.createFunctionTypeRef(parameterTypes, returnType);
+		return typesService.createFunctionTypeRef(object, parameterTypes, returnType);
 	}
 
 	protected JvmTypeReference _type(XCastedExpression object) {

@@ -7,13 +7,44 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtype.impl;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
+import static com.google.common.collect.Lists.*;
 
+import java.util.ArrayList;
+
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.BasicInternalEList;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.xbase.lib.Functions;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
+	
+	@Override
+	public JvmType getType() {
+		if (this.type == null) {
+			type = TypesFactory.eINSTANCE.createJvmVoid();
+			((InternalEObject)type).eSetProxyURI(computeTypeUri());
+		}
+		return super.getType();
+	}
+	
+	@Override
+	public EList<JvmTypeReference> getArguments() {
+		ArrayList<JvmTypeReference> list = newArrayList(getParamTypes());
+		list.add(getReturnType());
+		BasicInternalEList<JvmTypeReference> ref = new BasicInternalEList<JvmTypeReference>(JvmTypeReference.class, list);
+		return ref;
+	}
+
+	protected URI computeTypeUri() {
+		return URI.createURI("java:/Objects/"+Functions.class.getCanonicalName()+"#"+Functions.class.getCanonicalName()+"$Function"+getParamTypes().size());
+	}
 	
 	@Override
 	public String getCanonicalName() {
