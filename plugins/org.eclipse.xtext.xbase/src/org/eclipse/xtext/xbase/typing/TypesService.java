@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typing;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
@@ -19,8 +20,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
-import org.eclipse.xtext.xtype.XFunctionTypeRef;
-import org.eclipse.xtext.xtype.XtypeFactory;
+import org.eclipse.xtext.xbase.lib.Functions;
 
 import com.google.inject.Inject;
 
@@ -46,6 +46,18 @@ public class TypesService {
 	public JvmTypeReference getTypeForName(Class<?> clazz, EObject context, JvmTypeReference... params) {
 		if (clazz == null)
 			throw new NullPointerException("clazz");
+		JvmDeclaredType declaredType = findDeclaredType(clazz, context);
+		if (declaredType == null)
+			return null;
+		JvmParameterizedTypeReference simpleType = factory.createJvmParameterizedTypeReference();
+		simpleType.setType(declaredType);
+		for (JvmTypeReference xTypeRef : params) {
+			simpleType.getArguments().add(EcoreUtil2.clone(xTypeRef));
+		}
+		return simpleType;
+	}
+
+	protected JvmDeclaredType findDeclaredType(Class<?> clazz, EObject context) {
 		if (context == null)
 			throw new NullPointerException("context");
 		if (context.eResource() == null)
@@ -57,23 +69,28 @@ public class TypesService {
 		typeProviderFactory.findOrCreateTypeProvider(resourceSet);
 		URI uri = toCommonTypesUri(clazz);
 		JvmDeclaredType declaredType = (JvmDeclaredType) resourceSet.getEObject(uri, true);
-		if (declaredType == null)
-			return null;
-		JvmParameterizedTypeReference simpleType = factory.createJvmParameterizedTypeReference();
-		simpleType.setType(declaredType);
-		for (JvmTypeReference xTypeRef : params) {
-			simpleType.getArguments().add(EcoreUtil2.clone(xTypeRef));
-		}
-		return simpleType;
+		return declaredType;
 	}
 
-	public XFunctionTypeRef createFunctionTypeRef(List<JvmTypeReference> parameterTypes, JvmTypeReference returnType) {
-		XFunctionTypeRef ref = XtypeFactory.eINSTANCE.createXFunctionTypeRef();
+	public JvmParameterizedTypeReference createFunctionTypeRef(EObject context, List<JvmTypeReference> parameterTypes, JvmTypeReference returnType) {
+		JvmParameterizedTypeReference ref = factory.createJvmParameterizedTypeReference();
+		final Class<?> loadFunctionClass = loadFunctionClass("Function"+parameterTypes.size());
+		JvmDeclaredType declaredType = findDeclaredType(loadFunctionClass, context);
+		ref.setType(declaredType);
+		
 		for (JvmTypeReference xTypeRef : parameterTypes) {
-			ref.getParamTypes().add(EcoreUtil2.clone(xTypeRef));
+			ref.getArguments().add(EcoreUtil2.clone(xTypeRef));
 		}
-		ref.setReturnType(EcoreUtil2.clone(returnType));
+		ref.getArguments().add(EcoreUtil2.clone(returnType));
 		return ref;
+	}
+
+	protected Class<?> loadFunctionClass(String simpleFunctionName) {
+		try {
+			return Functions.class.getClassLoader().loadClass(Functions.class.getCanonicalName()+"$"+simpleFunctionName);
+		} catch (ClassNotFoundException e) {
+			throw new WrappedException(e);
+		}
 	}
 
 	public boolean isVoid(JvmTypeReference typeRef) {
