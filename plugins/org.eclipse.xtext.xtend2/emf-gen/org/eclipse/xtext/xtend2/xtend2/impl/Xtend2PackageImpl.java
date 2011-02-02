@@ -398,6 +398,16 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getXtendFunction_Override()
+	{
+		return (EAttribute)xtendFunctionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRichString()
 	{
 		return richStringEClass;
@@ -569,6 +579,7 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		createEReference(xtendFunctionEClass, XTEND_FUNCTION__EXPRESSION);
 		createEReference(xtendFunctionEClass, XTEND_FUNCTION__RETURN_TYPE);
 		createEReference(xtendFunctionEClass, XTEND_FUNCTION__PARAMETERS);
+		createEAttribute(xtendFunctionEClass, XTEND_FUNCTION__OVERRIDE);
 
 		richStringEClass = createEClass(RICH_STRING);
 		createEReference(richStringEClass, RICH_STRING__ELEMENTS);
@@ -664,6 +675,7 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		initEReference(getXtendFunction_Expression(), theXbasePackage.getXExpression(), null, "expression", null, 0, 1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendFunction_ReturnType(), theTypesPackage.getJvmTypeReference(), null, "returnType", null, 0, 1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendFunction_Parameters(), theTypesPackage.getJvmFormalParameter(), null, "parameters", null, 0, -1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXtendFunction_Override(), ecorePackage.getEBoolean(), "override", null, 0, 1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(richStringEClass, RichString.class, "RichString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRichString_Elements(), theXbasePackage.getXExpression(), null, "elements", null, 0, -1, RichString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

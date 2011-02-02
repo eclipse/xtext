@@ -16,6 +16,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 				"\n" + 
 				"public class Bar {\n" +
 				"  protected final Bar _this = this;\n" + 
+				"  \n" +
 				"  public java.lang.Integer doStuff(java.lang.String x) {\n" + 
 				"    java.lang.Integer length = x.length();\n" + 
 				"    return length;\n" + 
@@ -35,9 +36,38 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		"\n" + 
 		"public class Bar {\n" +
 		"  protected final Bar _this = this;\n" + 
+		"  \n" + 
 		"  public java.lang.String foo() {\n" + 
 		"    return new java.lang.String();\n" + 
 		"  }\n" + 
+		"}";
+		assertCompilesTo(expected, input);
+	}
+
+	public void testExtends() throws Exception {
+		final String input = 
+		"package foo\n" +
+		"class Bar extends Object {\n" +
+		"}\n";
+		final String expected =  
+		"package foo;\n" +
+		"\n" + 
+		"public class Bar extends java.lang.Object {\n" +
+		"  protected final Bar _this = this;\n" + 
+		"}";
+		assertCompilesTo(expected, input);
+	}
+
+	public void testImplements() throws Exception {
+		final String input = 
+		"package foo\n" +
+		"class Bar implements Cloneable, java.io.Serializable {\n" +
+		"}\n";
+		final String expected =  
+		"package foo;\n" +
+		"\n" + 
+		"public class Bar implements java.lang.Cloneable, java.io.Serializable {\n" +
+		"  protected final Bar _this = this;\n" + 
 		"}";
 		assertCompilesTo(expected, input);
 	}
