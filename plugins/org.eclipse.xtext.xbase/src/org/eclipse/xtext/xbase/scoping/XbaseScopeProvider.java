@@ -231,7 +231,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			return IScope.NULLSCOPE;
 		if (receiver == null || receiver.eIsProxy())
 			return IScope.NULLSCOPE;
-		JvmTypeReference receiverType = typeProvider.getConvertedType(receiver);
+		JvmTypeReference receiverType = typeProvider.getType(receiver);
 		if (receiverType != null) {
 			return createFeatureScopeForTypeRef(receiverType, context, getContextType(context), null);
 		}

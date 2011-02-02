@@ -248,14 +248,12 @@ public class XExpressionTypeProvider extends AbstractXExpressionTypeProvider {
 		}
 			
 		List<JvmTypeReference> returnTypes = newArrayList();
-		JvmTypeReference unconverted = getType(object.getThen());
-		JvmTypeReference converted = convert(unconverted,object);
-		if (converted!=null)
-			returnTypes.add(converted);
-		JvmTypeReference unconvertedElse = getType(object.getElse());
-		JvmTypeReference convertedElse = convert(unconvertedElse,object);
-		if (convertedElse!=null)
-			returnTypes.add(convertedElse);
+		JvmTypeReference thenType = getType(object.getThen());
+		if (thenType!=null)
+			returnTypes.add(thenType);
+		JvmTypeReference elseType = getType(object.getElse());
+		if (elseType!=null)
+			returnTypes.add(elseType);
 		return getCommonType(returnTypes);
 	}
 
@@ -273,11 +271,11 @@ public class XExpressionTypeProvider extends AbstractXExpressionTypeProvider {
 		EList<XCasePart> cases = object.getCases();
 		for (XCasePart xCasePart : cases) {
 			final JvmTypeReference unconverted = getType(xCasePart.getThen());
-			returnTypes.add(convert(unconverted,object));
+			returnTypes.add(unconverted);
 		}
 		if (object.getDefault() != null) {
 			final JvmTypeReference unconverted = getType(object.getDefault());
-			returnTypes.add(convert(unconverted,object));
+			returnTypes.add(unconverted);
 		}
 		return getCommonType(returnTypes);
 	}
@@ -324,8 +322,7 @@ public class XExpressionTypeProvider extends AbstractXExpressionTypeProvider {
 	}
 
 	protected JvmTypeReference _type(XClosure object) {
-		final JvmTypeReference unconvertedReturnType = getType(object.getExpression());
-		JvmTypeReference returnType = convert(unconvertedReturnType,object);
+		final JvmTypeReference returnType = getType(object.getExpression());
 		List<JvmTypeReference> parameterTypes = Lists.newArrayList();
 		EList<JvmFormalParameter> params = object.getFormalParameters();
 		for (JvmFormalParameter param : params) {
@@ -335,7 +332,7 @@ public class XExpressionTypeProvider extends AbstractXExpressionTypeProvider {
 		}
 		// inferred argument types?
 		if (parameterTypes.isEmpty() && !params.isEmpty()) {
-			JvmTypeReference expectedType = convert(getExpectedType(object),object);
+			JvmTypeReference expectedType = getExpectedType(object);
 			if (expectedType == null)
 				return typesService.getTypeForName(Object.class, object);
 			JvmOperation singleMethod = functionConverter.findSingleMethod(expectedType);
@@ -377,9 +374,9 @@ public class XExpressionTypeProvider extends AbstractXExpressionTypeProvider {
 	protected JvmTypeReference _type(XTryCatchFinallyExpression object) {
 		List<JvmTypeReference> returnTypes = newArrayList();
 		final JvmTypeReference getType = getType(object.getExpression());
-		returnTypes.add(convert(getType,object));
+		returnTypes.add(getType);
 		for (XCatchClause catchClause : object.getCatchClauses()) {
-			JvmTypeReference type = convert(getType(catchClause.getExpression()),catchClause);
+			JvmTypeReference type = getType(catchClause.getExpression());
 			returnTypes.add(type);
 		}
 		JvmTypeReference commonSuperType = typeConformanceComputer.getCommonSuperType(returnTypes);
@@ -393,8 +390,8 @@ public class XExpressionTypeProvider extends AbstractXExpressionTypeProvider {
 		JvmTypeReference featureType = identifiableTypeProvider.getType(feature);
 		XExpression receiver = object.getActualReceiver();
 		if (receiver!=null) {
-			JvmTypeReference convert = convert(getType(receiver),object);
-			featureType = typeArgCtxProvider.get(convert).getUpperBound(featureType);
+			JvmTypeReference receiverType = getType(receiver);
+			featureType = typeArgCtxProvider.get(receiverType).getUpperBound(featureType);
 		}
 		TypeArgumentContext methodTypeArgContext = functionConverter.getMethodTypeArgContext(object);
 		return methodTypeArgContext.getUpperBound(featureType);

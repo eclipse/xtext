@@ -377,7 +377,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	public void _prepare(XSwitchExpression expr, IAppendable b) {
 		// declare variable
-		JvmTypeReference type = getTypeProvider().getConvertedType(expr);
+		JvmTypeReference type = getTypeProvider().getType(expr);
 		String switchResultName = makeJavaIdentifier(b.declareVariable(Tuples.pair(expr,"result"), "switchResult"));
 		b.append("\n").append(getSerializedForm(type)).append(" ").append(switchResultName).append(" = null;");
 		
@@ -425,7 +425,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			if (casePart.getCase() != null) {
 				internalPrepare(casePart.getCase(), b);
 				b.append("\nif (");
-				JvmTypeReference convertedType = getTypeProvider().getConvertedType(casePart.getCase());
+				JvmTypeReference convertedType = getTypeProvider().getType(casePart.getCase());
 				if (Boolean.class.getName().equals(convertedType.getCanonicalName())) {
 					internalToJavaExpression(casePart.getCase(), b);
 				} else {
@@ -482,7 +482,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	private TypeArgumentContext.Provider ctxProvider;
 	
 	protected void _prepare(final XClosure call, final IAppendable b) {
-		JvmTypeReference type = getTypeProvider().getConvertedType(call);
+		JvmTypeReference type = getTypeProvider().getType(call);
 		TypeArgumentContext context = ctxProvider.get(type);
 		final String serializedForm = getSerializedForm(type);
 		b.append("\n").append("final ").append(serializedForm);
@@ -518,8 +518,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 	
 	protected void _toJavaExpression(final XClosure call, final IAppendable b) {
-		final JvmTypeReference type = getTypeProvider().getConvertedType(call);
-		final JvmTypeReference expectedType = getTypeProvider().getConvertedExpectedType(call);
+		final JvmTypeReference type = getTypeProvider().getType(call);
+		final JvmTypeReference expectedType = getTypeProvider().getExpectedType(call);
 		doConversion(expectedType, type, b, getJavaVarName(call, b)).exec();
 	}
 	

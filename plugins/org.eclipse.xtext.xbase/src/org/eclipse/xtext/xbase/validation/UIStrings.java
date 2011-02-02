@@ -80,7 +80,7 @@ public class UIStrings {
 	protected String expressionTypes(Iterable<XExpression> expressions) {
 		return toString(transform(expressions, new Function<XExpression, JvmIdentifiableElement>() {
 			public JvmTypeReference apply(XExpression from) {
-				return typeProvider.getConvertedType(from);
+				return typeProvider.getType(from);
 			}
 		}));
 	}

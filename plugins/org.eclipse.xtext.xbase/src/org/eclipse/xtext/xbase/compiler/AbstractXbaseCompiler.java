@@ -147,7 +147,7 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	protected String getReturnTypeName(XExpression expr) {
-		final JvmTypeReference type = typeProvider.getConvertedType(expr);
+		final JvmTypeReference type = typeProvider.getType(expr);
 		return getSerializedForm(type);
 	}
 
@@ -232,7 +232,7 @@ public abstract class AbstractXbaseCompiler {
 	protected void declareLocalVariable(XExpression expr, IAppendable b, Later expression) {
 //		JvmTypeReference type = getExpectedTypeProvider().getExpectedType(expr);
 //		if (type == null || type.getCanonicalName().equals(Object.class.getCanonicalName()))
-		JvmTypeReference type = getTypeProvider().getConvertedType(expr);
+		JvmTypeReference type = getTypeProvider().getType(expr);
 		final String varName = declareNameInVariableScope(expr, b);
 		b.append("\n").append(getSerializedForm(type)).append(" ").append(varName).append(" = ");
 		expression.exec();

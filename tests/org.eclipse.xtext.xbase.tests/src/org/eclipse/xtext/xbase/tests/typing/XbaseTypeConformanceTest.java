@@ -56,8 +56,8 @@ public class XbaseTypeConformanceTest extends AbstractXbaseTestCase {
 
 	protected boolean isConformant(String left, String right) throws Exception {
 		final XExpression parse = parseHelper.parse("null as "+left);
-		JvmTypeReference leftType = typeProvider.getConvertedType(parse);
-		JvmTypeReference rightType = typeProvider.getConvertedType(parseHelper.parse("null as "+right,parse.eResource().getResourceSet()));
+		JvmTypeReference leftType = typeProvider.getType(parse);
+		JvmTypeReference rightType = typeProvider.getType(parseHelper.parse("null as "+right,parse.eResource().getResourceSet()));
 		boolean conformant = typeConformanceComputer.isConformant(leftType, rightType);
 		return conformant;
 	}

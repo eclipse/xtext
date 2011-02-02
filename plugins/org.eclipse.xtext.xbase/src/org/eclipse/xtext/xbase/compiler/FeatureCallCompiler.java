@@ -66,10 +66,10 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					}
 				};
 				JvmTypeReference original = getTypeProvider().getType(expr);
-				JvmTypeReference converted = getTypeProvider().getConvertedType(expr);
-				final boolean noConversion = EcoreUtil.equals(converted, original);
+				JvmTypeReference expectedType = getTypeProvider().getExpectedType(expr);
+				final boolean noConversion = EcoreUtil.equals(expectedType, original);
 				if (!noConversion) {
-					later = doConversion(converted, original, b, later);
+					later = doConversion(expectedType, original, b, later);
 				}
 				declareLocalVariable(expr, b, later);
 			}
@@ -211,7 +211,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			}
 			JvmTypeReference expectedType = getTypeProvider().getExpectedType(call);
 			if (expectedType != null) {
-				JvmTypeReference actualType = getTypeProvider().getConvertedType(call);
+				JvmTypeReference actualType = getTypeProvider().getType(call);
 				if (!EcoreUtil.equals(expectedType, actualType)) {
 					final Later doConversion = doConversion(expectedType, actualType, b, expression);
 					doConversion.exec();
@@ -223,7 +223,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 
 	protected boolean isVoid(XAbstractFeatureCall expr) {
-		return getTypeProvider().getConvertedType(expr).getCanonicalName().equals(Void.class.getCanonicalName());
+		return getTypeProvider().getType(expr).getCanonicalName().equals(Void.class.getCanonicalName());
 	}
 
 	protected void featureCalltoJavaExpression(XAbstractFeatureCall call, IAppendable b) {
@@ -248,7 +248,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				internalToJavaExpression(expr.getMemberCallTarget(), b);
 				b.append("==null?");
 				b.append("(");
-				JvmTypeReference type = getTypeProvider().getConvertedType(expr);
+				JvmTypeReference type = getTypeProvider().getType(expr);
 				b.append(getSerializedForm(type));
 				b.append(")null:");
 				internalToJavaExpression(expr.getMemberCallTarget(), b);
