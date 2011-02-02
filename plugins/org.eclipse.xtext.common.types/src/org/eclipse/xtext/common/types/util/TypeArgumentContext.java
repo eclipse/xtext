@@ -7,24 +7,29 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
-import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory;
 import org.eclipse.xtext.util.Wrapper;
 
 import com.google.common.collect.Maps;
@@ -37,16 +42,15 @@ import com.google.inject.Inject;
 public class TypeArgumentContext {
 
 	private Map<JvmTypeParameter, JvmTypeReference> context;
+	private Factory typeProviderFactory;
+	private TypesFactory typesFactory;
 	
-	private JvmDeclaredType objectType;
-
-	public TypeArgumentContext(Map<JvmTypeParameter, JvmTypeReference> context, JvmDeclaredType objectType) {
+	public TypeArgumentContext(Map<JvmTypeParameter, JvmTypeReference> context, IJvmTypeProvider.Factory typeProviderFactory, TypesFactory factory) {
 		if (context==null)
 			throw new NullPointerException("context");
-		if (objectType==null)
-			throw new NullPointerException("objectType");
 		this.context = context;
-		this.objectType = objectType;
+		this.typeProviderFactory = typeProviderFactory;
+		this.typesFactory = factory;  
 	}
 
 	public JvmTypeReference getBoundArgument(JvmTypeParameter param) {
@@ -77,7 +81,7 @@ public class TypeArgumentContext {
 	 * Resolve the reference for a covariant location, i.e. returns the upper bound.
 	 * @return the upper bound of a reference.
 	 */
-	public JvmTypeReference getUpperBound(JvmTypeReference element) {
+	public JvmTypeReference getUpperBound(JvmTypeReference element, Notifier context) {
 		JvmTypeReference copy = doGetResolvedCopy(element, Wrapper.wrap(Boolean.FALSE));
 		if (copy instanceof JvmWildcardTypeReference) {
 			for(JvmTypeConstraint constraint: ((JvmWildcardTypeReference) copy).getConstraints()) {
@@ -86,12 +90,23 @@ public class TypeArgumentContext {
 			}
 			// no explicit upper bound given - return object
 			JvmParameterizedTypeReference result = createTypeReference();
+			IJvmTypeProvider provider = typeProviderFactory.createTypeProvider(getResourceSet(context));
+			JvmType objectType = provider.findTypeByName(Object.class.getCanonicalName());
 			result.setType(objectType);
 			return result;
 		}
 		return copy;
 	}
 	
+	protected ResourceSet getResourceSet(Notifier context2) {
+		if (context2 == null)
+			throw new NullPointerException("the passed context needs to be a or be contained in a ResourceSet.");
+		ResourceSet resourceSet = EcoreUtil2.getResourceSet(context2);
+		if (resourceSet!=null)
+			return resourceSet;
+		throw new IllegalArgumentException(" a notifier must be either an EObject, a Resource or a ResourceSet");
+	}
+
 	/**
 	 * Resolves and returns the reference
 	 * @return the resolved reference.
@@ -153,40 +168,47 @@ public class TypeArgumentContext {
 	}
 	
 	protected JvmParameterizedTypeReference createTypeReference() {
-		TypesFactory factory = (TypesFactory) objectType.eClass().getEPackage().getEFactoryInstance();
-		JvmParameterizedTypeReference result = factory.createJvmParameterizedTypeReference();
+		JvmParameterizedTypeReference result = typesFactory.createJvmParameterizedTypeReference();
 		return result;
 	}
 
+	
 	public static class Provider {
 		
 		@Inject
 		private IJvmTypeProvider.Factory typeProviderFactory;
-
+		
+		@Inject
+		private TypesFactory typesFactory = TypesFactory.eINSTANCE;
+		
 		public void setTypeProviderFactory(IJvmTypeProvider.Factory typeProviderFactory) {
 			this.typeProviderFactory = typeProviderFactory;
 		}
+		 
+		public final TypeArgumentContext getNullContext() {
+			return get(Collections.<JvmTypeParameter,JvmTypeReference>emptyMap());
+		}
+
 		
 		public Provider() {
 		}
 		
-		public TypeArgumentContext get(Map<JvmTypeParameter,JvmTypeReference> context, JvmDeclaredType javaLangObjectType) {
-			return new TypeArgumentContext(context, javaLangObjectType);
+		public TypeArgumentContext get(Map<JvmTypeParameter,JvmTypeReference> context) {
+			return new TypeArgumentContext(context, typeProviderFactory, typesFactory);
 		}
 		
 		public TypeArgumentContext get(JvmTypeReference contextRef) {
 			if (contextRef==null)
 				throw new NullPointerException("contextReference");
-			Map<JvmTypeParameter, JvmTypeReference> context = Maps.newHashMap();
-			JvmDeclaredType objectType = internalComputeContext(contextRef, context);
-			if (objectType==null) {
-				IJvmTypeProvider provider = typeProviderFactory.createTypeProvider(contextRef.getType().eResource().getResourceSet());
-				objectType = (JvmDeclaredType) provider.findTypeByName(Object.class.getCanonicalName());
+			if (contextRef.getType() instanceof JvmPrimitiveType) {
+				return getNullContext();
 			}
-			return get(context, objectType);
+			Map<JvmTypeParameter, JvmTypeReference> context = Maps.newHashMap();
+			internalComputeContext(contextRef, context);
+			return get(context);
 		}
 
-		protected JvmDeclaredType internalComputeContext(JvmTypeReference contextRef, Map<JvmTypeParameter, JvmTypeReference> context) {
+		protected void internalComputeContext(JvmTypeReference contextRef, Map<JvmTypeParameter, JvmTypeReference> context) {
 			if (contextRef instanceof JvmParameterizedTypeReference) {
 				JvmParameterizedTypeReference typeRef = (JvmParameterizedTypeReference) contextRef;
 				if (typeRef.getType() instanceof JvmTypeParameterDeclarator) {
@@ -203,24 +225,15 @@ public class TypeArgumentContext {
 				}
 			}
 			JvmType type = contextRef.getType();
-			if(type instanceof JvmVoid) 
-				return null;
 			if (type instanceof JvmDeclaredType) {
 				JvmDeclaredType declaredType = (JvmDeclaredType) type;
-				if (Object.class.getCanonicalName().equals(declaredType.getCanonicalName()))
-					return declaredType;
 				List<JvmTypeReference> superTypes = declaredType.getSuperTypes();
 				if (superTypes.isEmpty())
-					return null;
-				JvmDeclaredType result = null;
+					return;
 				for (JvmTypeReference jvmTypeReference : superTypes) {
-					JvmDeclaredType temp = internalComputeContext(jvmTypeReference, context);
-					if (temp != null)
-						result = temp;
+					internalComputeContext(jvmTypeReference, context);
 				}
-				return result;
 			}
-			throw new IllegalArgumentException("contextRef didn't point to a declared type : "+contextRef);
 		}
 	}
 }
