@@ -9,11 +9,9 @@ package org.eclipse.xtext.xbase.scoping.featurecalls;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
-import static com.google.common.collect.Maps.*;
 import static java.util.Collections.*;
 
 import java.util.Collection;
-import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -34,6 +32,8 @@ import org.eclipse.xtext.xbase.lib.Strings;
 import org.eclipse.xtext.xbase.typing.TypesService;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
 /**
@@ -82,7 +82,7 @@ public class StaticMethodsFeatureForTypeProvider implements IFeaturesForTypeProv
 		return newArrayList(staticMethods);
 	}
 
-	private static Map<String, Class<?>> classes = newHashMap();
+	private static Multimap<String, Class<?>> classes = HashMultimap.create();
 	{
 		classes.put(Boolean.class.getCanonicalName(), Booleans.class);
 		classes.put(String.class.getCanonicalName(), Strings.class);
@@ -93,11 +93,10 @@ public class StaticMethodsFeatureForTypeProvider implements IFeaturesForTypeProv
 		classes.put(Iterable.class.getCanonicalName(), Iterables.class);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected Iterable<Class<?>> getClassesContainingStaticMethods(String canonicalTypeName) {
-		final Class<?> o = classes.get(canonicalTypeName);
+		final Collection<Class<?>> o = classes.get(canonicalTypeName);
 		if (o != null)
-			return (Iterable<Class<?>>)(Iterable<?>)singleton(o);
+			return o;
 		return emptyList();
 	}
 

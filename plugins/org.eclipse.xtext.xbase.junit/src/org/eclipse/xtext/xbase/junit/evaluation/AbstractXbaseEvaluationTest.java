@@ -523,7 +523,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	
 	public void testSpreadOperator_02() {
 		assertEvaluatesTo(Lists.newArrayList(
-				"A", "B", "C"), "'abc'.toCharArray*.toString*.toUpperCase");
+				"A", "B", "C"), "('abc'.toCharArray as Iterable<Character>)*.toString*.toUpperCase");
 	}
 	
 	public void testSwitchExpression_01() {

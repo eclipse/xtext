@@ -12,12 +12,19 @@ import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.scoping.IScope;
@@ -44,6 +51,12 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 
 	@Inject
 	private SuperTypeCollector superTypeCollector;
+	
+	@Inject
+	private Primitives primitives;
+	
+	@Inject
+	private TypesFactory typesFactory = TypesFactory.eINSTANCE;
 
 	public void setTypeArgumentContextProvider(TypeArgumentContext.Provider typeArgumentContextProvider) {
 		this.typeArgumentContextProvider = typeArgumentContextProvider;
@@ -52,6 +65,11 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 	public void setSuperTypeCollector(SuperTypeCollector superTypeCollector) {
 		this.superTypeCollector = superTypeCollector;
 	}
+	
+	public void setPrimitives(Primitives primitives) {
+		this.primitives = primitives;
+	}
+	
 
 	/**
 	 * <p>
@@ -113,6 +131,8 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 				current = createJvmFeatureScope(current, featureDescs);
 			}
 		}
+		if (current == null)
+			return new JvmFeatureScope(IScope.NULLSCOPE, "No features for type "+jvmTypeRef, Collections.<JvmFeatureDescription>emptyList());
 		return (JvmFeatureScope) current;
 	}
 
@@ -168,10 +188,20 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 
 	/**
 	 * @return an iterable containing the given type and all its super types in a deterministic order. The order is more
-	 *         specific types come first.
+	 *         specific types come first. This method also adds any convertable types e.g. wrapper types for primitives
 	 */
 	public Iterable<JvmTypeReference> linearizeTypeHierarchy(JvmTypeReference typeRef) {
-		return concat(singleton(typeRef), superTypeCollector.collectSuperTypes(typeRef));
+		final Iterable<JvmTypeReference> result = concat(singleton(typeRef), superTypeCollector.collectSuperTypes(typeRef));
+		if (typeRef.getType() instanceof JvmPrimitiveType) {
+			JvmType jvmType = primitives.getWrapperType((JvmPrimitiveType) typeRef.getType());
+			JvmParameterizedTypeReference wrapperReference = typesFactory.createJvmParameterizedTypeReference();
+			wrapperReference.setType(jvmType);
+			return concat(result,concat(singleton(wrapperReference), superTypeCollector.collectSuperTypes(wrapperReference)));
+		}
+		if (typeRef.getType() instanceof JvmArrayType) {
+			//TODO add the hierarchy of Iterable<componenttype> to the sequence.
+		}
+		return result;
 	}
 
 
