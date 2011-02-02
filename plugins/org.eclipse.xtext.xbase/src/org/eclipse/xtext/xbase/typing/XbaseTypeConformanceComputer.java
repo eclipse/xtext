@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typing;
 
+import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.DefaultJvmTypeConformanceComputer;
 import org.eclipse.xtext.xbase.functions.FunctionConversion;
@@ -31,7 +34,19 @@ public class XbaseTypeConformanceComputer extends DefaultJvmTypeConformanceCompu
 			return true;
 		if (functionConversion.isFunction(left) || functionConversion.isFunction(right))
 			return functionConversion.isConformant(left, right);
+		if (right!=null && right.getType() instanceof JvmArrayType) {
+			JvmArrayType array = (JvmArrayType) right.getType();
+			if (isIterable(left.getType())) {
+				JvmTypeReference newLeft = ((JvmParameterizedTypeReference)left).getArguments().get(0);
+				return isConformant(newLeft, array.getComponentType());
+			}
+			return false;
+		}
 		return super.isConformant(left, right);
+	}
+
+	protected boolean isIterable(JvmType type) {
+		return type.getCanonicalName().equals(Iterable.class.getName());
 	}
 	
 }
