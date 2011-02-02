@@ -33,6 +33,7 @@ import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Holger Schill
  */
 public class DefaultReferenceFinderTest extends AbstractXtextTests {
 
@@ -73,7 +74,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 	public void testLocalRefs() throws Exception {
 		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementB)));
-		referenceFinder.findLocalReferences(elementA, acceptor, new NullProgressMonitor());
+		referenceFinder.findLocalReferences(elementA.eResource(), elementA, acceptor, new NullProgressMonitor());
 		acceptor.assertFinished();
 		referenceFinder.findIndexedReferences(singleton(EcoreUtil.getURI(elementA)), acceptor, new NullProgressMonitor());
 		acceptor.assertFinished();
@@ -89,7 +90,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 		Resource refResource = loadResource("ref.refactoringtestlanguage", "D { ref C }");
 		EObject elementD = refResource.getContents().get(0).eContents().get(0);
 		
-		referenceFinder.findLocalReferences(elementC, acceptor, new NullProgressMonitor());
+		referenceFinder.findLocalReferences(elementC.eResource(), elementC, acceptor, new NullProgressMonitor());
 		acceptor.assertFinished();
 		acceptor.expect(new DefaultReferenceDescription(elementD, elementC,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
@@ -109,7 +110,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 		
 		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementB)));
-		referenceFinder.findLocalReferences(elementA, acceptor, new NullProgressMonitor());
+		referenceFinder.findLocalReferences(elementA.eResource(), elementA, acceptor, new NullProgressMonitor());
 		acceptor.assertFinished();
 		acceptor.expect(new DefaultReferenceDescription(elementD, elementA,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
