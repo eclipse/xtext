@@ -133,13 +133,13 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	public void testNull() throws Exception {
-		assertNull(typeProvider.getConvertedType(null));
+		assertNull(typeProvider.getType(null));
 	}
 
 	public void testProxy() throws Exception {
 		XFeatureCall proxy = XbaseFactory.eINSTANCE.createXFeatureCall();
 		((InternalEObject) proxy).eSetProxyURI(URI.createURI("path#fragment"));
-		assertNull(typeProvider.getConvertedType(proxy));
+		assertNull(typeProvider.getType(proxy));
 	}
 	
 	public void testMethodTypeParamInference_00() throws Exception {
@@ -154,7 +154,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	private IXExpressionTypeProvider typeProvider;
 
 	public void assertResolvedReturnType(String typeName, String expression) throws Exception {
-		JvmTypeReference typeRef = typeProvider.getConvertedType(expression(expression, true));
+		JvmTypeReference typeRef = typeProvider.getType(expression(expression, true));
 		assertNotNull("type ref was null for " + expression, typeRef);
 		assertEquals(typeName, toString(typeRef));
 	}

@@ -30,7 +30,6 @@ import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.functions.FunctionConversion;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
-import org.eclipse.xtext.xbase.typing.TypeConverter;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
@@ -43,9 +42,6 @@ public class IdentifiableTypeProvider extends AbstractTypeProvider<JvmTypeRefere
 	@Inject
 	private IXExpressionTypeProvider expressionTypeProvider;
 	
-	@Inject
-	private TypeConverter typeConverter;
-
 	@Inject
 	private TypeArgumentContext.Provider typeArgCtxProvider;
 	
@@ -64,7 +60,7 @@ public class IdentifiableTypeProvider extends AbstractTypeProvider<JvmTypeRefere
 	
 	protected JvmTypeReference _type(XSwitchExpression object) {
 		if (object.getLocalVarName() != null) {
-			final JvmTypeReference convertedType = expressionTypeProvider.getConvertedType(object.getSwitch());
+			final JvmTypeReference convertedType = expressionTypeProvider.getType(object.getSwitch());
 			return convertedType;
 		}
 		return null;
@@ -80,7 +76,7 @@ public class IdentifiableTypeProvider extends AbstractTypeProvider<JvmTypeRefere
 	protected JvmTypeReference _type(XVariableDeclaration object) {
 		if (object.getType() != null)
 			return object.getType();
-		return expressionTypeProvider.getConvertedType(object.getRight());
+		return expressionTypeProvider.getType(object.getRight());
 	}
 
 	protected JvmTypeReference _type(JvmFormalParameter parameter) {
@@ -98,9 +94,8 @@ public class IdentifiableTypeProvider extends AbstractTypeProvider<JvmTypeRefere
 				return null;
 			} else if (parameter.eContainer() instanceof XForLoopExpression) {
 				XForLoopExpression forLoop = (XForLoopExpression) parameter.eContainer();
-				JvmParameterizedTypeReference reference = (JvmParameterizedTypeReference) expressionTypeProvider.getConvertedType(forLoop
+				JvmParameterizedTypeReference reference = (JvmParameterizedTypeReference) expressionTypeProvider.getType(forLoop
 						.getForExpression());
-				reference = (JvmParameterizedTypeReference) typeConverter.convert(reference, parameter);
 				TypeArgumentContext context = typeArgCtxProvider.get(reference);
 				final String iterableName = Iterable.class.getName();
 				if (!reference.getType().getCanonicalName().equals(iterableName)) {

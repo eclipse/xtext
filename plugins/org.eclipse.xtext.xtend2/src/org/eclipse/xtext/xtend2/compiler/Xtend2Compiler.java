@@ -221,7 +221,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 	
 	public void _prepare(RichString richString, IAppendable b) {
 		// declare variable
-		JvmTypeReference type = getTypeProvider().getConvertedType(richString);
+		JvmTypeReference type = getTypeProvider().getType(richString);
 		String variableName = makeJavaIdentifier(b.declareVariable(Tuples.pair(richString, "result"), "builder"));
 		String typeName = getSerializedForm(type);
 		b.append("\n");

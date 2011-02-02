@@ -35,7 +35,6 @@ import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
-import org.eclipse.xtext.xbase.typing.TypeConverter;
 import org.eclipse.xtext.xbase.typing.TypesService;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
@@ -59,16 +58,12 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	@Inject
 	private TypesFactory factory;
 
-	@Inject
-	private TypeConverter converter;
-
 	@Check
 	public void checkTypes(XExpression obj) {
 		try {
 			JvmTypeReference expectedType = typeProvider.getExpectedType(obj);
 			if (expectedType == null || expectedType.getType() == null)
 				return;
-			expectedType = converter.convert(expectedType, obj);
 			JvmTypeReference actualType = typeProvider.getType(obj);
 			if (actualType == null || actualType.getType() == null)
 				return;
@@ -137,7 +132,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Check
 	public void checkCasts(XCastedExpression cast) {
-		JvmTypeReference targetTypeRef = typeProvider.getConvertedType(cast.getTarget());
+		JvmTypeReference targetTypeRef = typeProvider.getType(cast.getTarget());
 		if (targetTypeRef.getType() instanceof JvmDeclaredType) {
 			JvmDeclaredType targetType = (JvmDeclaredType) targetTypeRef.getType();
 			if (targetType.isFinal()) {
@@ -167,7 +162,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Check
 	public void checkInstanceOf(XInstanceOfExpression instanceOfExpression) {
-		JvmTypeReference expressionTypeRef = typeProvider.getConvertedType(instanceOfExpression.getExpression());
+		JvmTypeReference expressionTypeRef = typeProvider.getType(instanceOfExpression.getExpression());
 		if (expressionTypeRef.getType() instanceof JvmDeclaredType) {
 			boolean isConformant = isConformant(instanceOfExpression.getType(), expressionTypeRef);
 			if (isConformant) {
@@ -191,7 +186,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Check
 	public void checkFeatureCallOnVoid(XMemberFeatureCall featureCall) {
-		if (typesService.isVoid(typeProvider.getConvertedType(featureCall.getMemberCallTarget()))) {
+		if (typesService.isVoid(typeProvider.getType(featureCall.getMemberCallTarget()))) {
 			error("Cannot access features of objects of type 'void'", null,
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, FEATURE_CALL_ON_VOID);
 		}

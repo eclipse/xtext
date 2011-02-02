@@ -36,7 +36,6 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
-import org.eclipse.xtext.xbase.typing.TypeConverter;
 import org.eclipse.xtext.xbase.typing.TypesService;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
@@ -62,9 +61,6 @@ public class FunctionConversion {
 	
 	@Inject
 	private TypesService typesService;
-	
-	@Inject
-	private TypeConverter converter;
 	
 	private interface FuncDesc {
 		JvmTypeReference getReturnType();
@@ -299,7 +295,7 @@ public class FunctionConversion {
 					for (JvmTypeParameter jvmTypeParameter : typeParameters) {
 						//first try infer from the context type
 						if (isReferenced(jvmTypeParameter, op.getReturnType())) {
-							JvmTypeReference expectedType = typeProvider.getConvertedExpectedType(object);
+							JvmTypeReference expectedType = typeProvider.getExpectedType(object);
 							if (expectedType != null) {
 								JvmTypeReference ref = findMatch(jvmTypeParameter, op.getReturnType(), expectedType);
 								if (ref != null) {
@@ -314,10 +310,9 @@ public class FunctionConversion {
 							JvmFormalParameter p = params.get(i);
 							if (isReferenced(jvmTypeParameter, p.getParameterType())) {
 								final XExpression expression = object.getActualArguments().get(i);
-								final JvmTypeReference type = typeProvider.getConvertedType(expression);
-								JvmTypeReference converted = converter.convert(type,object);
-								if (converted != null) {
-									JvmTypeReference ref = findMatch(jvmTypeParameter, p.getParameterType(), converted);
+								final JvmTypeReference type = typeProvider.getType(expression);
+								if (type != null) {
+									JvmTypeReference ref = findMatch(jvmTypeParameter, p.getParameterType(), type);
 									if (ref != null) {
 										map.put(jvmTypeParameter, ref);
 									}

@@ -15,10 +15,8 @@ import org.eclipse.xtext.xbase.XExpression;
  */
 public interface IXExpressionTypeProvider {
 
-	public JvmTypeReference getConvertedType(XExpression astNode);
 	public JvmTypeReference getType(XExpression astNode);
 	
-	public JvmTypeReference getConvertedExpectedType(XExpression astNode);
 	public JvmTypeReference getExpectedType(XExpression astNode);
 	
 }

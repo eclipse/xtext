@@ -19,8 +19,6 @@ import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XExpression;
 
-import com.google.inject.Inject;
-
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -32,9 +30,6 @@ public abstract class AbstractXExpressionTypeProvider implements IXExpressionTyp
 
 	private final PolymorphicDispatcher<JvmTypeReference> expectedTypeDispatcher = PolymorphicDispatcher
 			.createForSingleTarget("_expectedType", 3, 3, this);
-
-	@Inject
-	private TypeConverter typeConverter;
 
 	private final PolymorphicDispatcher<JvmTypeReference> typeDispatcher = PolymorphicDispatcher.createForSingleTarget(
 			"_type", this);
@@ -60,13 +55,6 @@ public abstract class AbstractXExpressionTypeProvider implements IXExpressionTyp
 		}
 	}
 
-	protected JvmTypeReference convert(JvmTypeReference toBeConverted, EObject context) {
-		if (toBeConverted == null)
-			return null;
-		JvmTypeReference converted = typeConverter.convert(toBeConverted, context);
-		return converted;
-	}
-
 	protected Triple<EObject, EReference, Integer> getContainingInfo(XExpression obj) {
 		if (obj == null)
 			return null;
@@ -82,16 +70,6 @@ public abstract class AbstractXExpressionTypeProvider implements IXExpressionTyp
 		return triple;
 	}
 
-	public JvmTypeReference getConvertedExpectedType(XExpression astNode) {
-		JvmTypeReference type = getExpectedType(astNode);
-		return convert(type, astNode);
-	}
-
-	public JvmTypeReference getConvertedType(XExpression astNode) {
-		JvmTypeReference type = getType(astNode);
-		return convert(type, astNode);
-	}
-	
 // TODO activate caching, but beware of the different local state.
 //	private IResourceScopeCache getCache(EObject astNode) {
 //		if (!(astNode.eResource() instanceof XtextResource))
@@ -132,7 +110,4 @@ public abstract class AbstractXExpressionTypeProvider implements IXExpressionTyp
 		}
 	}
 
-	public void setTypeConverter(TypeConverter typeConverter) {
-		this.typeConverter = typeConverter;
-	}
 }
