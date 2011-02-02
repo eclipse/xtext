@@ -14,6 +14,7 @@ import static java.util.Collections.*;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.CrossReferencer;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -42,6 +44,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Holger Schill
  */
 public class DefaultReferenceFinder implements IReferenceFinder {
 
@@ -56,29 +59,48 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 			final IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor) {
 		findAllReferences(singleton(targetURI), localContextProvider, acceptor, monitor);
 	}
-			
+
+	public void findLocalReferences(Resource resource, URI targetURI,
+			ILocalContextProvider localContextProvider, IAcceptor<IReferenceDescription> acceptor,
+			IProgressMonitor monitor) {
+		findLocalReferences(null, singleton(targetURI), localContextProvider, acceptor, monitor);
+
+	}
+
 	public void findAllReferences(Iterable<URI> targetURIs, ILocalContextProvider localContextProvider,
 			final IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor) {
+		final IProgressMonitor realMonitor = (monitor == null) ? new NullProgressMonitor() : monitor;
+		Iterator<URI> iterator = targetURIs.iterator();
+		if (iterator.hasNext()) {
+			findLocalReferences(null, targetURIs, localContextProvider, acceptor, realMonitor);
+			findIndexedReferences(targetURIs, acceptor, new SubProgressMonitor(realMonitor, 1));
+		}
+
+	}
+
+	public void findLocalReferences(final Resource resource, Iterable<URI> targetURIs,
+			ILocalContextProvider localContextProvider, final IAcceptor<IReferenceDescription> acceptor,
+			IProgressMonitor monitor) {
 		final IProgressMonitor realMonitor = (monitor == null) ? new NullProgressMonitor() : monitor;
 		realMonitor.beginTask("Find references", 2);
 		for (URI targetURI : targetURIs) {
 			localContextProvider.readOnly(targetURI, new IUnitOfWork<Boolean, EObject>() {
 				public Boolean exec(EObject state) throws Exception {
-					findLocalReferences(state, acceptor, new SubProgressMonitor(realMonitor, 1));
+						findLocalReferences(resource!=null?resource:state.eResource(), state, acceptor, new SubProgressMonitor(realMonitor, 1));
 					return true;
 				}
 			});
 		}
-		findIndexedReferences(targetURIs, acceptor, new SubProgressMonitor(realMonitor, 1));
 		realMonitor.done();
 	}
 
-	public void findLocalReferences(EObject target, IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor) {
+	public void findLocalReferences(Resource resource, EObject target,
+			IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor) {
 		if (monitor.isCanceled())
 			return;
 		if (target != null) {
 			Map<EObject, Collection<Setting>> targetResourceInternalCrossRefs = CrossReferencer.find(Collections
-					.singletonList(target.eResource()));
+					.singletonList(resource));
 			Collection<Setting> crossRefSettings = targetResourceInternalCrossRefs.get(target);
 			if (crossRefSettings != null) {
 				monitor.beginTask(Messages.ReferenceQuery_monitor, crossRefSettings.size());
@@ -107,6 +129,7 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 			}
 		}
 		monitor.done();
+
 	}
 
 	protected URI findClosestExportedParentURI(EObject element) {
@@ -130,7 +153,8 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 			return parentURIs.get(currentBestIndex);
 	}
 
-	public void findIndexedReferences(Iterable<URI> targetURIs, IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor) {
+	public void findIndexedReferences(Iterable<URI> targetURIs, IAcceptor<IReferenceDescription> acceptor,
+			IProgressMonitor monitor) {
 		Set<URI> targetResourceURIs = newHashSet(transform(targetURIs, new Function<URI, URI>() {
 			public URI apply(URI from) {
 				return from.trimFragment();
@@ -154,5 +178,4 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 		}
 		monitor.done();
 	}
-	
 }
