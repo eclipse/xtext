@@ -17,7 +17,14 @@ public class Collections {
 	/**
 	 * operator mapping for {@link Collection#add(Object)} to +=
 	 */
-	public static <A extends Collection<B>,B> boolean _operator_add(A a, B b) {
+	public static <A extends Collection<? super B>,B> boolean _operator_add(A a, B b) {
 		return a.add(b);
+	}
+	
+	/**
+	 * operator mapping for {@link Collection#addAll(Collection)} to +
+	 */
+	public static <Item, A extends Collection<Item>, B extends Collection<? extends Item>> boolean _operator_plus(A a, B b) {
+		return a.addAll(b);
 	}
 }

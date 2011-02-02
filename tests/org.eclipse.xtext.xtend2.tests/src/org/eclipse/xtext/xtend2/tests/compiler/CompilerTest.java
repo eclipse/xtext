@@ -43,7 +43,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	public void testFunctionCall_00() throws Exception {
 		invokeAndExpect("foobar", "(String x) bar(x) bar(String x) 'foo'+x","bar");
 	}
-
+	
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
 
@@ -65,7 +65,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	
 	
 	protected void invokeAndExpect(Object expectation, String functionDef, Object...args) throws Exception {
-		if (!functionDef.startsWith("(")) {
+		if (!functionDef.trim().startsWith("(")) {
 			throw new IllegalArgumentException("the functiondef should start with parameter delcarations");
 		}
 		String fullClass = "package x class Y { Object foo"+functionDef+" }";

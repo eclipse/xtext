@@ -14,7 +14,6 @@ import java.util.Iterator;
  */
 public class Integers {
 
-	// TODO: Linking for unary minus operator
 	public static int _operator_minus(Integer a) {
 		return -a;
 	}

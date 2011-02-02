@@ -175,6 +175,8 @@ public class NodeModelUtils {
 	 *         handles {@link Action Actions} and {@link RuleCall unassigned rule calls}.
 	 */
 	public static EObject findActualSemanticObjectFor(INode node) {
+		if (node == null)
+			return null;
 		if (node.hasDirectSemanticElement())
 			return node.getSemanticElement();
 		EObject grammarElement = node.getGrammarElement();
@@ -184,32 +186,45 @@ public class NodeModelUtils {
 		if (assignment != null) {
 			return findActualSemanticObjectFor(node.getParent());
 		} else {
-			AbstractRule rule = null;
-			if (grammarElement instanceof RuleCall) {
-				rule = ((RuleCall) grammarElement).getRule();
-			} else if (grammarElement instanceof AbstractRule) {
-				rule = (AbstractRule) grammarElement;
-			}
-			if (rule instanceof ParserRule && !GrammarUtil.isDatatypeRule(rule)) {
-				if (node instanceof ICompositeNode) {
-					for (INode child : ((ICompositeNode) node).getChildren()) {
-						if (child instanceof ICompositeNode) {
-							EObject childGrammarElement = child.getGrammarElement();
-							if (childGrammarElement instanceof Action) {
-								return findActualSemanticObjectFor(child);
-							} else if (childGrammarElement instanceof RuleCall) {
-								RuleCall childRuleCall = (RuleCall) childGrammarElement;
-								if (childRuleCall.getRule() instanceof ParserRule
-										&& !GrammarUtil.isDatatypeRule(childRuleCall.getRule())) {
-									return findActualSemanticObjectFor(child);
-								}
+			EObject result = findActualSemanticObjectInChildren(node, grammarElement);
+			if (result != null)
+				return result;
+		}
+		return findActualSemanticObjectFor(node.getParent());
+	}
+	
+	private static EObject findActualSemanticObjectInChildren(INode node, EObject grammarElement) {
+		if (node.hasDirectSemanticElement())
+			return node.getSemanticElement();
+		AbstractRule rule = null;
+		if (grammarElement instanceof RuleCall) {
+			rule = ((RuleCall) grammarElement).getRule();
+		} else if (grammarElement instanceof AbstractRule) {
+			rule = (AbstractRule) grammarElement;
+		}
+		if (rule instanceof ParserRule && !GrammarUtil.isDatatypeRule(rule)) {
+			if (node instanceof ICompositeNode) {
+				for (INode child : ((ICompositeNode) node).getChildren()) {
+					if (child instanceof ICompositeNode) {
+						EObject childGrammarElement = child.getGrammarElement();
+						if (childGrammarElement instanceof Action) {
+							EObject result = findActualSemanticObjectInChildren(child, childGrammarElement);
+							if (result != null)
+								return result;
+						} else if (childGrammarElement instanceof RuleCall) {
+							RuleCall childRuleCall = (RuleCall) childGrammarElement;
+							if (childRuleCall.getRule() instanceof ParserRule
+									&& !GrammarUtil.isDatatypeRule(childRuleCall.getRule())) {
+								EObject result = findActualSemanticObjectInChildren(child, childRuleCall);
+								if (result != null)
+									return result;
 							}
 						}
 					}
 				}
 			}
 		}
-		return findActualSemanticObjectFor(node.getParent());
+		return null;
 	}
 
 	public static String compactDump(INode node, boolean showHidden) {

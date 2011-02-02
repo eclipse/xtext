@@ -86,7 +86,7 @@ public interface XAbstractFeatureCall extends XExpression
 	 * @return the value of the '<em>Implicit Receiver</em>' containment reference.
 	 * @see #setImplicitReceiver(XFeatureCall)
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXAbstractFeatureCall_ImplicitReceiver()
-	 * @model containment="true" transient="true"
+	 * @model containment="true" transient="true" derived="true"
 	 * @generated
 	 */
 	XFeatureCall getImplicitReceiver();

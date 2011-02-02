@@ -193,5 +193,63 @@
             class="org.eclipse.xtext.xtend2.ui.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.xtend2.ui.search.Xtend2SearchFilter">
       </filter>
    </extension>
-
+   
+   <extension point="org.eclipse.ui.commands">
+   	  <command
+            description="Inserts an opening french quote"
+            id="org.eclipse.xtext.xtend2.ui.insertLeftGuillemet"
+            name="Insert left guillemet"/>
+   	  <command
+            description="Inserts an closing french quote"
+            id="org.eclipse.xtext.xtend2.ui.insertRightGuillemet"
+            name="Insert right guillemet"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+&lt;"
+            commandId="org.eclipse.xtext.xtend2.ui.insertLeftGuillemet">
+      </key>
+      <key
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+&gt;"
+            commandId="org.eclipse.xtext.xtend2.ui.insertRightGuillemet">
+      </key>
+      <key
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M4+&lt;"
+            commandId="org.eclipse.xtext.xtend2.ui.insertLeftGuillemet">
+      </key>
+      <key
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M4+&gt;"
+            commandId="org.eclipse.xtext.xtend2.ui.insertRightGuillemet">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.eclipse.xtext.xtend2.ui.edit.InsertStringHandler$LeftGuillemet"
+            commandId="org.eclipse.xtext.xtend2.ui.insertLeftGuillemet">
+            <activeWhen>
+				<reference
+					definitionId="org.eclipse.xtext.xtend2.Xtend2.Editor.opened">
+				</reference>
+			</activeWhen>
+      </handler>
+      <handler
+            class="org.eclipse.xtext.xtend2.ui.edit.InsertStringHandler$RightGuillemet"
+            commandId="org.eclipse.xtext.xtend2.ui.insertRightGuillemet">
+           	<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtext.xtend2.Xtend2.Editor.opened">
+				</reference>
+			</activeWhen>
+      </handler>
+   </extension>
 </plugin>

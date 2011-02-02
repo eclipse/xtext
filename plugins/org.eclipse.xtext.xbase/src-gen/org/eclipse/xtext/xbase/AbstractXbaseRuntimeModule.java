@@ -124,11 +124,6 @@ public abstract class AbstractXbaseRuntimeModule extends DefaultRuntimeModule {
 		return org.eclipse.xtext.common.types.xtext.TypesAwareDefaultGlobalScopeProvider.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.types.TypesGeneratorFragment
-	public Class<? extends org.eclipse.xtext.resource.XtextResourceSet> bindXtextResourceSet() {
-		return org.eclipse.xtext.common.types.access.TypesResourceSet.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
 	public Class<? extends org.eclipse.xtext.resource.IContainer.Manager> bindIContainer$Manager() {
 		return org.eclipse.xtext.resource.containers.StateBasedContainerManager.class;

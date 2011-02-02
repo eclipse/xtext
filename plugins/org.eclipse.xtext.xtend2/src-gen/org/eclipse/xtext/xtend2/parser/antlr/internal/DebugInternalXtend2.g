@@ -31,8 +31,10 @@ ruleClass :
 	)? (
 		'extends' ruleJvmTypeReference
 	)? (
-		'implements' ruleJvmTypeReference
-	)* '{' ruleMember* '}'
+		'implements' ruleJvmTypeReference (
+			',' ruleJvmTypeReference
+		)*
+	)? '{' ruleMember* '}'
 ;
 
 // Rule Member
@@ -42,7 +44,7 @@ ruleMember :
 
 // Rule Function
 ruleFunction :
-	(
+	'override'? (
 		'<' ruleJvmTypeParameter (
 			',' ruleJvmTypeParameter
 		)* '>'

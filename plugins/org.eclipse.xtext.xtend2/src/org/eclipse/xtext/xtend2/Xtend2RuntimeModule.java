@@ -17,7 +17,6 @@ import org.eclipse.xtext.xbase.XbaseQualifiedNameConverter;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider;
 import org.eclipse.xtext.xbase.linking.XbaseLinkingScopeProvider;
-import org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
 import org.eclipse.xtext.xbase.typing.XExpressionTypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
@@ -27,6 +26,7 @@ import org.eclipse.xtext.xtend2.featurecalls.Xtend2IdentifiableTypeProvider;
 import org.eclipse.xtext.xtend2.linking.Xtend2LazyLinker;
 import org.eclipse.xtext.xtend2.linking.Xtend2LocationInFileProvider;
 import org.eclipse.xtext.xtend2.naming.Xtend2QualifiedNameProvider;
+import org.eclipse.xtext.xtend2.scoping.Xtend2ImportedNamespaceScopeProvider;
 import org.eclipse.xtext.xtend2.typing.Xtend2TypeProvider;
 
 import com.google.inject.Binder;
@@ -67,12 +67,6 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 	}
 
 	@Override
-	public void configureIScopeProviderDelegate(Binder binder) {
-		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
-				.to(XbaseImportedNamespaceScopeProvider.class);
-	}
-
-	@Override
 	public void configureLinkingIScopeProvider(Binder binder) {
 		binder.bind(IScopeProvider.class).annotatedWith(LinkingScopeProviderBinding.class)
 				.to(XbaseLinkingScopeProvider.class);
@@ -96,4 +90,10 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
 		return Xtend2LocationInFileProvider.class;
 	}
+	
+	@Override
+	public void configureIScopeProviderDelegate(Binder binder) {
+		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(Xtend2ImportedNamespaceScopeProvider.class);
+	}
+	
 }

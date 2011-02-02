@@ -31,6 +31,7 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.formatting.INodeModelFormatter;
 import org.eclipse.xtext.junit.GlobalRegistries.GlobalStateMemento;
+import org.eclipse.xtext.junit.util.ResourceLoadHelper;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -59,7 +60,7 @@ import com.google.inject.name.Names;
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public abstract class AbstractXtextTests extends TestCase {
+public abstract class AbstractXtextTests extends TestCase implements ResourceLoadHelper {
 
 	private Injector injector;
 	private boolean canCreateInjector;
@@ -107,7 +108,7 @@ public abstract class AbstractXtextTests extends TestCase {
 		injector = setup.createInjectorAndDoEMFRegistration();
 	}
 	
-	protected Injector getInjector() {
+	public Injector getInjector() {
 		if (injector==null)
 			throw new IllegalStateException("No injector set. Did you forget to call something like 'with(new YourStadaloneSetup())'?");
 		return injector;
@@ -220,7 +221,17 @@ public abstract class AbstractXtextTests extends TestCase {
 			return instance;
 		return instance.split(",")[0];
 	}
-
+	
+	public final XtextResource getResourceFor(InputStream stream) {
+		try {
+			return getResourceAndExpect(stream, AbstractXtextTests.UNKNOWN_EXPECTATION);
+		} catch (RuntimeException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 	public final XtextResource getResourceAndExpect(InputStream in, int errors) throws Exception {
 		return getResourceAndExpect(in, URI.createURI("mytestmodel."+getCurrentFileExtension()), errors);
 	}

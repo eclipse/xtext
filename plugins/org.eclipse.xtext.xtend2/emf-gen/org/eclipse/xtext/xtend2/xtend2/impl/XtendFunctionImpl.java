@@ -44,6 +44,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#isOverride <em>Override</em>}</li>
  * </ul>
  * </p>
  *
@@ -110,6 +111,26 @@ public class XtendFunctionImpl extends XtendMemberImpl implements XtendFunction
 	 * @ordered
 	 */
 	protected EList<JvmFormalParameter> parameters;
+
+	/**
+	 * The default value of the '{@link #isOverride() <em>Override</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOverride()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean OVERRIDE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isOverride() <em>Override</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOverride()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean override = OVERRIDE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -284,6 +305,29 @@ public class XtendFunctionImpl extends XtendMemberImpl implements XtendFunction
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isOverride()
+	{
+		return override;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOverride(boolean newOverride)
+	{
+		boolean oldOverride = override;
+		override = newOverride;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FUNCTION__OVERRIDE, oldOverride, override));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
@@ -338,6 +382,8 @@ public class XtendFunctionImpl extends XtendMemberImpl implements XtendFunction
 				return getReturnType();
 			case Xtend2Package.XTEND_FUNCTION__PARAMETERS:
 				return getParameters();
+			case Xtend2Package.XTEND_FUNCTION__OVERRIDE:
+				return isOverride();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -370,6 +416,9 @@ public class XtendFunctionImpl extends XtendMemberImpl implements XtendFunction
 				getParameters().clear();
 				getParameters().addAll((Collection<? extends JvmFormalParameter>)newValue);
 				return;
+			case Xtend2Package.XTEND_FUNCTION__OVERRIDE:
+				setOverride((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -399,6 +448,9 @@ public class XtendFunctionImpl extends XtendMemberImpl implements XtendFunction
 			case Xtend2Package.XTEND_FUNCTION__PARAMETERS:
 				getParameters().clear();
 				return;
+			case Xtend2Package.XTEND_FUNCTION__OVERRIDE:
+				setOverride(OVERRIDE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -423,6 +475,8 @@ public class XtendFunctionImpl extends XtendMemberImpl implements XtendFunction
 				return returnType != null;
 			case Xtend2Package.XTEND_FUNCTION__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
+			case Xtend2Package.XTEND_FUNCTION__OVERRIDE:
+				return override != OVERRIDE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -478,6 +532,8 @@ public class XtendFunctionImpl extends XtendMemberImpl implements XtendFunction
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", override: ");
+		result.append(override);
 		result.append(')');
 		return result.toString();
 	}
