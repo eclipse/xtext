@@ -28,6 +28,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector.SuperTypeAcceptor;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
@@ -60,8 +61,15 @@ public class DefaultJvmTypeConformanceComputer implements IJvmTypeConformanceCom
 	@Inject
 	protected TypeArgumentContext.Provider typeArgumentContextProvider;
 	
+	@Inject 
+	protected Primitives primitives;
+	
 	public void setSuperTypeCollector(SuperTypeCollector superTypeCollector) {
 		this.superTypeCollector = superTypeCollector;
+	}
+	
+	public void setPrimitives(Primitives primitives) {
+		this.primitives = primitives;
 	}
 	
 	public void setFactory(TypesFactory factory) {
@@ -177,40 +185,8 @@ public class DefaultJvmTypeConformanceComputer implements IJvmTypeConformanceCom
 		}
 	}
 	
-	enum Primitive {
-		Byte,Short,Char,Int,Long,Float,Double,Void, Boolean
-	}
-	
 	protected Primitive primitiveKind(JvmPrimitiveType primitiveType) {
-		final String name = primitiveType.getCanonicalName();
-		if (Boolean.TYPE.getName().equals(name)) {
-			return Primitive.Boolean;
-		}
-		if (Integer.TYPE.getName().equals(name)) {
-			return Primitive.Int;
-		}
-		if (Byte.TYPE.getName().equals(name)) {
-			return Primitive.Byte;
-		}
-		if (Short.TYPE.getName().equals(name)) {
-			return Primitive.Short;
-		}
-		if (Character.TYPE.getName().equals(name)) {
-			return Primitive.Char;
-		}
-		if (Long.TYPE.getName().equals(name)) {
-			return Primitive.Long;
-		}
-		if (Float.TYPE.getName().equals(name)) {
-			return Primitive.Float;
-		}
-		if (Double.TYPE.getName().equals(name)) {
-			return Primitive.Double;
-		}
-		if (Void.TYPE.getName().equals(name)) {
-			return Primitive.Void;
-		}
-		throw new IllegalArgumentException("Unkown primitive "+name);
+		return primitives.primitiveKind(primitiveType);
 	}
 
 	protected Boolean _isConformant(JvmPrimitiveType leftType, JvmType rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right) {
