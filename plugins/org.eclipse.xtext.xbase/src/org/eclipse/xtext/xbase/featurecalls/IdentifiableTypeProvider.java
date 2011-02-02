@@ -111,7 +111,7 @@ public class IdentifiableTypeProvider extends AbstractTypeProvider<JvmTypeRefere
 						return null;
 					}
 				}
-				final JvmTypeReference resolveContravariant = context.getUpperBound((reference).getArguments().get(0));
+				final JvmTypeReference resolveContravariant = context.getUpperBound((reference).getArguments().get(0), parameter);
 				return resolveContravariant;
 			}
 		}

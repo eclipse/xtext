@@ -40,4 +40,11 @@ public class ArrayClient {
 		}
 	}
 	
+	public int[] getArray() {
+		return new int[]{1,2};
+	}
+	
+	public int[][] getMultiArray() {
+		return new int[][]{getArray(),getArray()};
+	}
 }

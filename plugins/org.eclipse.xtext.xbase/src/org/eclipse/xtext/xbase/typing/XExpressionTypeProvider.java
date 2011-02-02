@@ -391,10 +391,10 @@ public class XExpressionTypeProvider extends AbstractXExpressionTypeProvider {
 		XExpression receiver = object.getActualReceiver();
 		if (receiver!=null) {
 			JvmTypeReference receiverType = getType(receiver);
-			featureType = typeArgCtxProvider.get(receiverType).getUpperBound(featureType);
+			featureType = typeArgCtxProvider.get(receiverType).getUpperBound(featureType, object);
 		}
 		TypeArgumentContext methodTypeArgContext = functionConverter.getMethodTypeArgContext(object);
-		return methodTypeArgContext.getUpperBound(featureType);
+		return methodTypeArgContext.getUpperBound(featureType, object);
 	}
 
 }

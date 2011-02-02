@@ -35,7 +35,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testTypeArgs() throws Exception {
-		assertResolvedReturnType("java.lang.Boolean", "new java.util.ArrayList<String>() += 'foo'");
+		assertResolvedReturnType("boolean", "new java.util.ArrayList<String>() += 'foo'");
 	}
 
 	public void testIfExpression() throws Exception {
@@ -94,23 +94,22 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	public void testFeatureCall() throws Exception {
-		assertResolvedReturnType("java.lang.Integer", "'foo'.length");
+		assertResolvedReturnType("int", "'foo'.length");
 	}
 
 	public void testFeatureCall_1() throws Exception {
-		assertResolvedReturnType("java.util.List<java.lang.Byte>", "'foo'.getBytes()");
-		assertResolvedReturnType("java.lang.Boolean", "'foo'.getBytes().add(null)");
-		//		assertResolvedReturnType("java.lang.String", "new java.util.ArrayList<java.lang.String>().get(23)");
+		assertResolvedReturnType("byte[]", "'foo'.getBytes()");
+		assertResolvedReturnType("java.lang.String", "new java.util.ArrayList<java.lang.String>().get(23)");
 	}
 
-	public void testFeatureCallWithOperatorOverloading2() throws Exception {
-		assertResolvedReturnType("java.lang.Boolean", "'foo'.getBytes() += null");
-		assertResolvedReturnType("java.lang.Boolean", "'foo'.getBytes() += 'x'.getBytes().get(0)");
-	}
+// TODO
+//	public void testFeatureCallWithOperatorOverloading2() throws Exception {
+//		assertResolvedReturnType("boolean", "new java.util.ArrayList<Byte>('foo'.getBytes()) += null");
+//		assertResolvedReturnType("boolean", "new java.util.ArrayList<Byte>('foo'.getBytes()) += 'x'.getBytes().get(0)");
+//	}
 
 	public void testFeatureCallOnThis() throws Exception {
-		assertResolvedReturnType("java.lang.Boolean", "{ val this = 'foo'; getBytes() += null;}");
-		assertResolvedReturnType("java.lang.Boolean", "{ var this = 'foo'; this.getBytes() += getBytes().get(0);}");
+		assertResolvedReturnType("boolean", "{ val this = 'foo'; length == 3;}");
 	}
 
 	public void testThrowExpression() throws Exception {

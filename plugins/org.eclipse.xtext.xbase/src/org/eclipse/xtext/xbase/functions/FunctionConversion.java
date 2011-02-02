@@ -18,7 +18,6 @@ import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -36,7 +35,6 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
-import org.eclipse.xtext.xbase.typing.TypesService;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
 import com.google.common.base.Function;
@@ -58,9 +56,6 @@ public class FunctionConversion {
 	
 	@Inject
 	private IXExpressionTypeProvider typeProvider;
-	
-	@Inject
-	private TypesService typesService;
 	
 	private interface FuncDesc {
 		JvmTypeReference getReturnType();
@@ -210,8 +205,7 @@ public class FunctionConversion {
 					resolutions.put(jvmTypeParameter, result);
 			}
 		}
-		final JvmDeclaredType objectType = (JvmDeclaredType) typesService.getTypeForName(Object.class, actualType.getType()).getType();
-		TypeArgumentContext typeArgContext = contextProvider.get(resolutions, objectType);
+		TypeArgumentContext typeArgContext = contextProvider.get(resolutions);
 		return typeArgContext.resolve(resultType);
 	}
 	
@@ -323,8 +317,7 @@ public class FunctionConversion {
 				}
 			}
 		}
-		final JvmDeclaredType type = (JvmDeclaredType) typesService.getTypeForName(Object.class, object).getType();
-		TypeArgumentContext methodTypeArgContext = contextProvider.get(map, type);
+		TypeArgumentContext methodTypeArgContext = contextProvider.get(map);
 		return methodTypeArgContext;
 	}
 
