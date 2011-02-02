@@ -148,7 +148,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 		boolean overriddenOperationFound = false;
 		if (function.getDeclaringType().getExtends() != null) {
 			JvmTypeReference returnType = identifiableTypeProvider.getType(inferredJvmOperation);
-			JvmTypeReference returnTypeUpperBound = typeArgumentContext.getUpperBound(returnType);
+			JvmTypeReference returnTypeUpperBound = typeArgumentContext.getUpperBound(returnType, function);
 			for (JvmFeature superFeature : featureOverridesService.getAllJvmFeatures(function.getDeclaringType()
 					.getExtends())) {
 				if (superFeature.getVisibility() != JvmVisibility.PRIVATE && superFeature instanceof JvmOperation) {
@@ -160,7 +160,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 							error("Missing 'override'. Function overrides " + canonicalName(superOperation),
 									function, Xtend2Package.Literals.XTEND_FUNCTION__NAME, MISSING_OVERRIDE);
 						JvmTypeReference superReturnTypeUpperBound = typeArgumentContext.getUpperBound(superOperation
-								.getReturnType());
+								.getReturnType(), function);
 						if (!conformanceComputer.isConformant(superReturnTypeUpperBound, returnTypeUpperBound)) {
 							error("The return type is incompatible with "
 									+ canonicalName(superOperation.getReturnType()) + " "
