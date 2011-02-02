@@ -8,9 +8,11 @@
 package org.eclipse.xtext.xtext.ui.editor.syntaxcoloring;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
@@ -22,7 +24,6 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -52,7 +53,7 @@ public class SemanticHighlightingCalculator implements ISemanticHighlightingCalc
 					usedRulesFinder.compute(grammar);
 				}
 			} else if (current instanceof AbstractRule) {
-				INode node = getFirstFeatureNode(current, XtextPackage.Literals.ABSTRACT_RULE__NAME.getName());
+				INode node = getFirstFeatureNode(current, XtextPackage.Literals.ABSTRACT_RULE__NAME);
 				highlightNode(node, SemanticHighlightingConfiguration.RULE_DECLARATION_ID, acceptor);
 				if (current instanceof ParserRule && GrammarUtil.isDatatypeRule((ParserRule) current)) {
 					highlightNode(node, SemanticHighlightingConfiguration.DATA_TYPE_RULE_ID, acceptor);	
@@ -70,7 +71,7 @@ public class SemanticHighlightingCalculator implements ISemanticHighlightingCalc
 					EcoreUtil2.getContainerOfType(call, Assignment.class) == null) {
 					ParserRule container = GrammarUtil.containingParserRule(call);
 					if (container != null && !GrammarUtil.isDatatypeRule(container)) {
-						INode node = getFirstFeatureNode(call, null);
+						INode node = getFirstFeatureNode(call, XtextPackage.Literals.RULE_CALL__RULE);
 						highlightNode(node, SemanticHighlightingConfiguration.UNUSED_VALUE_ID, acceptor);
 					}
 				}
@@ -92,31 +93,12 @@ public class SemanticHighlightingCalculator implements ISemanticHighlightingCalc
 		}
 	}
 
-	public INode getFirstFeatureNode(EObject semantic, String feature) {
-		ICompositeNode node = NodeModelUtils.getNode(semantic);
-		if (node != null) {
-			if (feature == null)
-				return node;
-			for (INode child: node.getChildren()) {
-				if (child instanceof ILeafNode) {
-					if (feature.equals(getFeatureName((ILeafNode) child))) {
-						return child;
-					}
-				}
-			}
-		}
-		return null;
-	}
-	
-	private String getFeatureName(ILeafNode leaf) {
-		EObject grammarElement = leaf.getGrammarElement();
-		if (grammarElement != null) {
-			while(grammarElement.eClass() == XtextPackage.Literals.RULE_CALL && grammarElement.eClass() == XtextPackage.Literals.ALTERNATIVES) {
-				grammarElement = grammarElement.eContainer();
-			}
-			if (grammarElement.eClass() == XtextPackage.Literals.ASSIGNMENT)
-				return ((Assignment) grammarElement).getFeature();
-		}
+	public INode getFirstFeatureNode(EObject semantic, EStructuralFeature feature) {
+		if (feature == null)
+			return NodeModelUtils.findActualNodeFor(semantic);
+		List<INode> nodes = NodeModelUtils.findNodesForFeature(semantic, feature);
+		if (!nodes.isEmpty())
+			return nodes.get(0);
 		return null;
 	}
 }

@@ -109,6 +109,6 @@ public class XtextOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	}
 
 	protected String safeName(String s) {
-		return (s == null) ? "<unnamed>" : ""; 
+		return (s == null) ? "<unnamed>" : s; 
 	}
 }
