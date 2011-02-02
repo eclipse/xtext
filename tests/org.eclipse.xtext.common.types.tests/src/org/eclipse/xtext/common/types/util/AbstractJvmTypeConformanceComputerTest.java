@@ -247,9 +247,26 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 		assertFalse(getComputer().isConformant(ref(String.class), ref(CharSequence.class)));
 	}
 
-	public void testAutoBoxingInteger() throws Exception {
+	public void testAutoBoxingInteger_00() throws Exception {
 		assertTrue(getComputer().isConformant(ref(Integer.TYPE), ref(Integer.class)));
+	}
+	public void testAutoBoxingInteger_01() throws Exception {
 		assertTrue(getComputer().isConformant(ref(Integer.class), ref(Integer.TYPE)));
+	}
+	public void testAutoBoxingInteger_02() throws Exception {
+		assertTrue(getComputer().isConformant(ref(Serializable.class), ref(Integer.TYPE)));
+	}
+	public void testAutoBoxingInteger_03() throws Exception {
+		assertTrue(getComputer().isConformant(ref(Comparable.class), ref(Integer.TYPE)));
+	}
+	public void testAutoBoxingInteger_04() throws Exception {
+		assertTrue(getComputer().isConformant(ref(Number.class), ref(Integer.TYPE)));
+	}
+	public void testAutoBoxingInteger_05() throws Exception {
+		assertTrue(getComputer().isConformant(ref(Object.class), ref(Integer.TYPE)));
+	}
+	public void testAutoBoxingInteger_06() throws Exception {
+		assertFalse(getComputer().isConformant(ref(String.class), ref(Integer.TYPE)));
 	}
 
 	public void testAutoBoxingBoolean() throws Exception {

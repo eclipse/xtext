@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -74,7 +75,7 @@ public class DefaultJvmTypeConformanceComputer implements IJvmTypeConformanceCom
 	public boolean isConformant(JvmTypeReference left, JvmTypeReference right) {
 		if (left == right)
 			return left != null;
-		if (left.getType().getCanonicalName().equals(Object.class.getCanonicalName()))
+		if (left.getType()!=null && left.getType().getCanonicalName().equals(Object.class.getCanonicalName()))
 			return true;
 		Boolean result = isConformantDispatcher.invoke(left, right);
 		return result.booleanValue();
@@ -133,9 +134,85 @@ public class DefaultJvmTypeConformanceComputer implements IJvmTypeConformanceCom
 	}
 	
 	protected Boolean _isConformant(JvmPrimitiveType leftType, JvmPrimitiveType rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right) {
-		return leftType == rightType;
+		if (leftType == rightType)
+			return true;
+		return isWideningConversion(leftType, rightType);
 	}
 	
+	/**
+	 * See Java Language Specification <a href="http://java.sun.com/docs/books/jls/third_edition/html/conversions.html#5.1.2">§{5.1.2} Widening Primitive Conversion</a>
+	 */
+	protected Boolean isWideningConversion(JvmPrimitiveType leftType, JvmPrimitiveType rightType) {
+		Primitive right = primitiveKind(rightType);
+		final Primitive left = primitiveKind(leftType);
+		switch (left) {
+			case Byte :
+				return right == Primitive.Short 
+					|| right == Primitive.Char // listed in section 5.1.4
+					|| right == Primitive.Int
+					|| right == Primitive.Long
+					|| right == Primitive.Float
+					|| right == Primitive.Double;
+			case Short :
+				return right == Primitive.Int
+				|| right == Primitive.Long
+				|| right == Primitive.Float
+				|| right == Primitive.Double;
+			case Char :
+				return right == Primitive.Int
+				|| right == Primitive.Long
+				|| right == Primitive.Float
+				|| right == Primitive.Double;
+			case Int :
+				return right == Primitive.Long
+				|| right == Primitive.Float
+				|| right == Primitive.Double;
+			case Long :
+				return right == Primitive.Float
+				|| right == Primitive.Double;
+			case Float :
+				return right == Primitive.Double;
+			default :
+				return false;
+		}
+	}
+	
+	enum Primitive {
+		Byte,Short,Char,Int,Long,Float,Double,Void, Boolean
+	}
+	
+	protected Primitive primitiveKind(JvmPrimitiveType primitiveType) {
+		final String name = primitiveType.getCanonicalName();
+		if (Boolean.TYPE.getName().equals(name)) {
+			return Primitive.Boolean;
+		}
+		if (Integer.TYPE.getName().equals(name)) {
+			return Primitive.Int;
+		}
+		if (Byte.TYPE.getName().equals(name)) {
+			return Primitive.Byte;
+		}
+		if (Short.TYPE.getName().equals(name)) {
+			return Primitive.Short;
+		}
+		if (Character.TYPE.getName().equals(name)) {
+			return Primitive.Char;
+		}
+		if (Long.TYPE.getName().equals(name)) {
+			return Primitive.Long;
+		}
+		if (Float.TYPE.getName().equals(name)) {
+			return Primitive.Float;
+		}
+		if (Double.TYPE.getName().equals(name)) {
+			return Primitive.Double;
+		}
+		if (Void.TYPE.getName().equals(name)) {
+			return Primitive.Void;
+		}
+		throw new IllegalArgumentException("Unkown primitive "+name);
+	}
+
 	protected Boolean _isConformant(JvmPrimitiveType leftType, JvmType rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right) {
 		return isUnBoxing(leftType, rightType);
 	}
@@ -255,28 +332,67 @@ public class DefaultJvmTypeConformanceComputer implements IJvmTypeConformanceCom
 		return null;
 	}
 
-	protected boolean isBoxing(JvmType typeA, JvmType typeB) {
-		return is(typeA, Integer.class) && is(typeB, Integer.TYPE) 
-			|| is(typeA, Boolean.class) && is(typeB, Boolean.TYPE) 
-			|| is(typeA, Long.class) && is(typeB, Long.TYPE) 
-			|| is(typeA, Float.class) && is(typeB, Float.TYPE) 
-			|| is(typeA, Double.class) && is(typeB, Double.TYPE) 
-			|| is(typeA, Byte.class) && is(typeB, Byte.TYPE) 
-			|| is(typeA, Character.class) && is(typeB,Character.TYPE);
+	/**
+	 * see <a href="http://java.sun.com/docs/books/jls/third_edition/html/conversions.html#5.1.7">§ 5.1.7</a>
+	 */
+	protected boolean isBoxing(JvmType typeA, JvmPrimitiveType typeB) {
+		Primitive primitive = primitiveKind(typeB);
+		switch (primitive) {
+			case Byte :
+				return is(typeA, Byte.class, Serializable.class, Comparable.class, Number.class, Object.class);
+			case Short :
+				return is(typeA, Short.class, Serializable.class, Comparable.class, Number.class, Object.class);
+			case Char :
+				return is(typeA, Character.class, Serializable.class, Comparable.class, Object.class);
+			case Int :
+				return is(typeA, Integer.class, Serializable.class, Comparable.class, Number.class, Object.class);
+			case Long :
+				return is(typeA, Long.class, Serializable.class, Comparable.class, Number.class, Object.class);
+			case Float :
+				return is(typeA, Float.class, Serializable.class, Comparable.class, Number.class, Object.class);
+			case Double :
+				return is(typeA, Double.class, Serializable.class, Comparable.class, Number.class, Object.class);
+			case Boolean :
+				return is(typeA, Boolean.class, Serializable.class, Comparable.class, Object.class);
+			default :
+				return false;
+		}
 	}
 
-	protected boolean isUnBoxing(JvmType typeA, JvmType typeB) {
-		return is(typeB, Integer.class) && is(typeA, Integer.TYPE) 
-			|| is(typeB, Boolean.class) && is(typeA, Boolean.TYPE) 
-			|| is(typeB, Long.class) && is(typeA, Long.TYPE) 
-			|| is(typeB, Float.class) && is(typeA, Float.TYPE) 
-			|| is(typeB, Double.class) && is(typeA, Double.TYPE) 
-			|| is(typeB, Byte.class) && is(typeA, Byte.TYPE) 
-			|| is(typeB, Character.class) && is(typeA,Character.TYPE);
+	/**
+	 * see <a href="http://java.sun.com/docs/books/jls/third_edition/html/conversions.html#5.1.8">§ 5.1.8</a>
+	 */
+	protected boolean isUnBoxing(JvmPrimitiveType typeA, JvmType typeB) {
+		Primitive primitive = primitiveKind(typeA);
+		switch (primitive) {
+			case Byte :
+				return is(typeB, Byte.class);
+			case Short :
+				return is(typeB, Short.class);
+			case Char :
+				return is(typeB, Character.class);
+			case Int :
+				return is(typeB, Integer.class);
+			case Long :
+				return is(typeB, Long.class);
+			case Float :
+				return is(typeB, Float.class);
+			case Double :
+				return is(typeB, Double.class);
+			case Boolean :
+				return is(typeB, Boolean.class);
+			default :
+				return false;
+		}
 	}
 
-	protected boolean is(JvmType typeA, Class<?> class1) {
-		return typeA.getCanonicalName().equals(class1.getCanonicalName());
+	protected boolean is(JvmType typeA, Class<?> ...class1) {
+		for (Class<?> class2 : class1) {
+			boolean result = typeA.getCanonicalName().equals(class2.getCanonicalName());
+			if (result)
+				return true;
+		}
+		return false;
 	}
 
 	public String getName(JvmTypeReference actual) {
