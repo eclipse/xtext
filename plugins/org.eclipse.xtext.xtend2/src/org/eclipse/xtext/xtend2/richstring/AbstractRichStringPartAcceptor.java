@@ -14,9 +14,8 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 
 /**
- * No-op implementation of the {@link IRichStringPartAcceptor}. Clients should
- * inherit from this class if they do not want to implement all methods.
- * It is mandatory to implement {@link #forLoopHasNext()}.
+ * No-op implementation of the {@link IRichStringPartAcceptor}. Clients should inherit from this class if they do not
+ * want to implement all methods. It is mandatory to implement {@link #forLoopHasNext()}.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -28,7 +27,7 @@ public abstract class AbstractRichStringPartAcceptor implements IRichStringPartA
 	public void acceptTemplateText(CharSequence text, RichStringLiteral origin) {
 	}
 
-	public void acceptSemanticLineBreak(int charCount, RichStringLiteral origin) {
+	public void acceptSemanticLineBreak(int charCount, RichStringLiteral origin, boolean controlStructureSeen) {
 	}
 
 	public void acceptTemplateLineBreak(int charCount, RichStringLiteral origin) {
@@ -84,6 +83,6 @@ public abstract class AbstractRichStringPartAcceptor implements IRichStringPartA
 		public void acceptEndFor() {
 			forLoopStackPointer--;
 		}
-		
 	}
+
 }

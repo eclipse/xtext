@@ -46,7 +46,6 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 
 		private StringBuilder builder;
 		private StringBuilder currentLine;
-		private boolean controlStructureSeen;
 		private Stack<Boolean> printNext;
 		private Stack<Boolean> printElse;
 		private Stack<Boolean> ignoreStack;
@@ -83,7 +82,7 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 		}
 
 		@Override
-		public void acceptSemanticLineBreak(int length, RichStringLiteral origin) {
+		public void acceptSemanticLineBreak(int length, RichStringLiteral origin, boolean controlStructureSeen) {
 			if (!ignore()) {
 				String newLine = currentLine.append('\n').toString();
 				if (!controlStructureSeen || newLine.trim().length() != 0) {
@@ -91,12 +90,6 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 				}
 				currentLine = new StringBuilder();
 			}
-			controlStructureSeen = false;
-		}
-
-		@Override
-		public void acceptTemplateLineBreak(int length, RichStringLiteral origin) {
-			controlStructureSeen = false;
 		}
 
 		@Override
@@ -104,7 +97,6 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 			if (ignore()) {
 				ignoreStack.push(Boolean.TRUE);
 			} else {
-				controlStructureSeen = true;
 				printElse.push(Boolean.TRUE);
 				XBooleanLiteral literal = (XBooleanLiteral) condition;
 				boolean conditionResult = literal.isIsTrue();
@@ -127,7 +119,6 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 				}
 				printNext.pop();
 				printNext.push(conditionResult);
-				controlStructureSeen = true;
 			}
 		}
 
@@ -138,7 +129,6 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 					printNext.pop();
 					printNext.push(Boolean.TRUE);
 				}
-				controlStructureSeen = true;
 			}
 		}
 
@@ -149,14 +139,12 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 			} else {
 				printNext.pop();
 				printElse.pop();
-				controlStructureSeen = true;
 			}
 		}
 
 		@Override
 		public void acceptForLoop(JvmFormalParameter parameter, XExpression expression) {
 			if (!ignore()) {
-				controlStructureSeen = true;
 				XMemberFeatureCall featureCall = (XMemberFeatureCall) expression;
 				XStringLiteral receiver = (XStringLiteral) featureCall.getActualReceiver();
 				forLoopStack.push(receiver.getValue().length());
@@ -166,7 +154,6 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 		@Override
 		public void acceptEndFor() {
 			if (!ignore()) {
-				controlStructureSeen = true;
 				forLoopStack.pop();
 			}
 		}
@@ -175,7 +162,6 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 		public boolean forLoopHasNext() {
 			if (!ignore()) {
 				int remaining = forLoopStack.peek();
-				controlStructureSeen = true;
 				if (remaining > 0) {
 					forLoopStack.set(forLoopStack.size() - 1, remaining - 1);
 					return true;
@@ -190,7 +176,6 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 			String value = literal.getValue();
 			value = value.replaceAll("\\n", "\n" + indentation);
 			currentLine.append(value);
-			controlStructureSeen = true;
 		}
 		
 		@Override
@@ -198,7 +183,7 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 			StringBuilder result = new StringBuilder(builder.toString());
 			if (currentLine.length() != 0) {
 				String newLine = currentLine.toString();
-				if (!controlStructureSeen || newLine.trim().length() != 0) {
+				if (newLine.trim().length() != 0) {
 					result.append(newLine);	
 				}
 			}

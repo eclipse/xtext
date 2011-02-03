@@ -7,7 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.tests.editor.highlighting;
 
-import java.util.Set;
+import static com.google.common.collect.Maps.*;
+
+import java.util.Map;
 
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
@@ -17,7 +19,6 @@ import org.eclipse.xtext.xtend2.ui.highlighting.HighlightingConfiguration;
 import org.eclipse.xtext.xtend2.ui.highlighting.RichStringHighlightingCalculator;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 
-import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -28,12 +29,12 @@ public class RichStringHighlightingCalculatorTest extends AbstractRichStringTest
 	@Inject
 	private RichStringHighlightingCalculator calculator;
 	
-	private Set<TextRegion> expectedRegions;
+	private Map<TextRegion, String> expectedRegions;
 	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		expectedRegions = Sets.newLinkedHashSet();
+		expectedRegions = newHashMap();
 	}
 	
 	public void testEmptyString() {
@@ -60,6 +61,7 @@ public class RichStringHighlightingCalculatorTest extends AbstractRichStringTest
 		expect(3, 2);
 		expect(6, 1);
 		expect(15,3);
+		expect(14,1,HighlightingConfiguration.TEMPLATE_LINE_BREAK);
 		highlight(
 				"'''  \n" +
 				" foobar \n" +
@@ -76,6 +78,7 @@ public class RichStringHighlightingCalculatorTest extends AbstractRichStringTest
 		expect(model.indexOf(' '), 1);
 		expect(model.indexOf("  "), 2);
 		expect(model.lastIndexOf("'''"), 3);
+		expect(17,1,HighlightingConfiguration.POTENTIAL_LINE_BREAK);
 		highlight(model);
 	}
 	
@@ -97,15 +100,20 @@ public class RichStringHighlightingCalculatorTest extends AbstractRichStringTest
 	}
 
 	protected void expect(int offset, int length) {
-		expectedRegions.add(new TextRegion(offset, length));
+		expect(offset, length, HighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
+	}
+
+	protected void expect(int offset, int length, String highlightID) {
+		expectedRegions.put(new TextRegion(offset, length), highlightID);
 	}
 
 	public void addPosition(int offset, int length, String... id) {
 		TextRegion region = new TextRegion(offset - getPrefixLength(), length);
 		assertEquals(1, id.length);
-		assertEquals(HighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT, id[0]);
 		assertFalse(region.toString(), expectedRegions.isEmpty());
-		assertTrue("expected: " + expectedRegions.toString() + " but was: " + region, expectedRegions.remove(region));
+		String expectedID = expectedRegions.remove(region);
+		assertNotNull("expected: " + expectedRegions.toString() + " but was: " + region, expectedID);
+		assertEquals(expectedID, id[0]);
 	}
 	
 }

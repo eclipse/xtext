@@ -22,27 +22,30 @@ import org.eclipse.xtext.xtend2.xtend2.util.Xtend2Switch;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class RichStringProcessor {
-	
-	public void process(RichString richString, IRichStringPartAcceptor acceptor, IRichStringIndentationHandler indentationHandler) {
+
+	public void process(RichString richString, IRichStringPartAcceptor acceptor,
+			IRichStringIndentationHandler indentationHandler) {
 		Implementation implementation = new Implementation(acceptor, indentationHandler);
 		implementation.doSwitch(richString);
 	}
-	
+
 	public static class Implementation extends Xtend2Switch<Boolean> {
-	
+
 		private final IRichStringPartAcceptor acceptor;
 
 		private final IRichStringIndentationHandler indentationHandler;
-		
+
 		private boolean firstEventInLine = true;
-		
+
+		private boolean controlStructureSeen = false;
+
 		private RichString rootObject = null;
-		
+
 		public Implementation(IRichStringPartAcceptor acceptor, IRichStringIndentationHandler indentationHandler) {
 			this.acceptor = acceptor;
 			this.indentationHandler = indentationHandler;
 		}
-		
+
 		@Override
 		public Boolean caseRichString(RichString object) {
 			if (rootObject == null)
@@ -50,60 +53,69 @@ public class RichStringProcessor {
 			String indentation = computeInitialIndentation(object);
 			indentationHandler.pushTemplateIndentation(indentation);
 			List<XExpression> elements = object.getElements();
-			for(XExpression element: elements) {
+			for (XExpression element : elements) {
 				doSwitch(element);
 			}
 			indentationHandler.popIndentation();
 			return Boolean.TRUE;
 		}
-		
+
 		@Override
 		public Boolean caseRichStringForLoop(RichStringForLoop object) {
 			acceptor.acceptForLoop(object.getDeclaredParam(), object.getForExpression());
-			while(acceptor.forLoopHasNext())
+			controlStructureSeen = true;
+			while (acceptor.forLoopHasNext()) {
+				controlStructureSeen = true;
 				doSwitch(object.getEachExpression());
+			}
 			acceptor.acceptEndFor();
+			controlStructureSeen = true;
 			return Boolean.TRUE;
 		}
-		
+
 		@Override
 		public Boolean caseRichStringIf(RichStringIf object) {
 			acceptor.acceptIfCondition(object.getIf());
+			controlStructureSeen = true;
 			doSwitch(object.getThen());
-			for(RichStringElseIf elseIf: object.getElseIfs()) {
+			for (RichStringElseIf elseIf : object.getElseIfs()) {
 				acceptor.acceptElseIfCondition(elseIf.getIf());
+				controlStructureSeen = true;
 				doSwitch(elseIf.getThen());
 			}
 			if (object.getElse() != null) {
 				acceptor.acceptElse();
+				controlStructureSeen = true;
 				doSwitch(object.getElse());
 			}
 			acceptor.acceptEndIf();
+			controlStructureSeen = true;
 			return Boolean.TRUE;
 		}
-		
+
 		@Override
 		public Boolean defaultCase(EObject object) {
 			if (object instanceof XExpression) {
 				// caseXExpression does not work since object.ePackage != Xtend2Switch.modelPackage
 				announceIndentation();
 				acceptor.acceptExpression((XExpression) object, indentationHandler.getTotalSemanticIndentation());
+				controlStructureSeen = true;
 			}
 			return Boolean.TRUE;
 		}
-		
+
 		@Override
 		public Boolean caseRichStringLiteral(RichStringLiteral object) {
 			acceptor.announceNextLiteral(object);
 			String value = object.getValue();
 			List<TextLine> lines = TextLines.splitString(value);
-			switch(lines.size()) {
-				case 0: 
+			switch (lines.size()) {
+				case 0:
 					return Boolean.TRUE;
-				case 1: 
-					handleOnlyLine(object, lines.get(0)); 
+				case 1:
+					handleOnlyLine(object, lines.get(0));
 					return Boolean.TRUE;
-				case 2: 
+				case 2:
 					handleFirstLine(object, lines.get(0));
 					handleLastLine(object, lines.get(1));
 					return Boolean.TRUE;
@@ -114,9 +126,9 @@ public class RichStringProcessor {
 					return Boolean.TRUE;
 			}
 		}
-		
+
 		protected void handleMiddleLines(RichStringLiteral object, List<TextLine> lines) {
-			for(TextLine line: lines) {
+			for (TextLine line : lines) {
 				pushIndentationAndAnnounceContent(object, line);
 				announceSemanticLinebreak(line.getDelimiterLength(), object);
 				indentationHandler.popIndentation();
@@ -129,6 +141,7 @@ public class RichStringProcessor {
 				if (line.containsOnlyWhitespace()) {
 					acceptor.acceptTemplateText(line, object);
 					acceptor.acceptTemplateLineBreak(line.getDelimiterLength(), object);
+					controlStructureSeen = false;
 				} else { // line has semantic data
 					announceSemanticText(line, object);
 					announceSemanticLinebreak(line.getDelimiterLength(), object);
@@ -159,6 +172,7 @@ public class RichStringProcessor {
 					if (line.containsOnlyWhitespace()) {
 						acceptor.acceptTemplateText(line, object);
 						acceptor.acceptTemplateLineBreak(line.getDelimiterLength(), object);
+						controlStructureSeen = false;
 					} else { // line has semantic data
 						announceSemanticText(line, object);
 						announceSemanticLinebreak(line.getDelimiterLength(), object);
@@ -178,7 +192,7 @@ public class RichStringProcessor {
 				}
 			}
 		}
-		
+
 		protected void handleLastLine(RichStringLiteral object, TextLine line) {
 			if (line.hasTrailingLineBreak()) {
 				pushIndentationAndAnnounceContent(object, line);
@@ -199,7 +213,7 @@ public class RichStringProcessor {
 							CharSequence tail = line.subSequence(leadingWS.length(), line.length());
 							announceTemplateText(tail, object);
 						} else {
-							pushIndentationAndAnnounceContent(object, line);	
+							pushIndentationAndAnnounceContent(object, line);
 						}
 					}
 				} else {
@@ -214,34 +228,35 @@ public class RichStringProcessor {
 			CharSequence tail = line.subSequence(leadingWS.length(), line.length());
 			announceSemanticText(tail, object);
 		}
-	
+
 		protected void pushSemanticIndentation(CharSequence line) {
 			indentationHandler.pushSemanticIndentation(line);
 		}
-		
+
 		protected void announceSemanticText(CharSequence text, RichStringLiteral origin) {
 			announceIndentation();
 			acceptor.acceptSemanticText(text, origin);
 		}
-		
+
 		public void announceTemplateText(CharSequence text, RichStringLiteral origin) {
 			announceIndentation();
 			acceptor.acceptSemanticText(text, origin);
 		}
-		
+
 		public void announceIndentation() {
 			if (firstEventInLine) {
 				indentationHandler.accept(acceptor);
 				firstEventInLine = false;
 			}
 		}
-		
+
 		public void announceSemanticLinebreak(int delimiterLength, RichStringLiteral origin) {
 			announceIndentation();
-			acceptor.acceptSemanticLineBreak(delimiterLength, origin);
+			acceptor.acceptSemanticLineBreak(delimiterLength, origin, controlStructureSeen);
+			controlStructureSeen = false;
 			firstEventInLine = true;
 		}
-		
+
 		public String computeInitialIndentation(RichString object) {
 			InitialTemplateIndentationComputer computer = new InitialTemplateIndentationComputer(
 					indentationHandler.getTotalIndentation());
@@ -249,5 +264,5 @@ public class RichStringProcessor {
 			return result;
 		}
 	}
-	
+
 }
