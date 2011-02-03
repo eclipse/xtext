@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.tests.validation;
 
-import static org.eclipse.xtext.xtend2.validation.Xtend2JavaValidator.*;
+import static org.eclipse.xtext.xtend2.validation.IssueCodes.*;
 import static org.eclipse.xtext.xtend2.xtend2.Xtend2Package.Literals.*;
 
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
@@ -19,7 +19,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class OverrideValidationTest extends AbstractXtend2TestCase{
+public class OverrideValidationTest extends AbstractXtend2TestCase {
 
 	@Inject
 	private ValidationTestHelper helper;
@@ -53,7 +53,7 @@ public class OverrideValidationTest extends AbstractXtend2TestCase{
 		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { override privateMethod() true }");
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, OBSOLETE_OVERRIDE);
 	}
-	
+
 	public void testMissingOverride_0() throws Exception {
 		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { string() null }");
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, MISSING_OVERRIDE);
@@ -98,6 +98,5 @@ public class OverrideValidationTest extends AbstractXtend2TestCase{
 		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { override java.util.ArrayList<String> returnsListExtendsObject() '' }");
 		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_RETURN_TYPE);
 	}
-
 
 }
