@@ -7,13 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.validation;
 
+import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
 
 import com.google.inject.Inject;
 
@@ -103,17 +104,17 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 	protected void assertConformanceError(String expression, EClass objectType, String... messageParts)
 			throws Exception {
 		final XExpression xExpression = expression(expression, true);
-		helper.assertError(xExpression, objectType, XbaseJavaValidator.INCOMPATIBLE_TYPES, messageParts);
+		helper.assertError(xExpression, objectType, INCOMPATIBLE_TYPES, messageParts);
 	}
 
 	protected void assertCastError(String expression, EClass objectType, String... messageParts) throws Exception {
 		final XExpression xExpression = expression(expression, true);
-		helper.assertError(xExpression, objectType, XbaseJavaValidator.INVALID_CAST, messageParts);
+		helper.assertError(xExpression, objectType, INVALID_CAST, messageParts);
 	}
 
 	protected void assertNoConformanceError(String expression) throws Exception {
 		final XExpression xExpression = expression(expression, true);
-		helper.assertNoError(xExpression, XbaseJavaValidator.INCOMPATIBLE_TYPES);
+		helper.assertNoError(xExpression, INCOMPATIBLE_TYPES);
 	}
 
 }

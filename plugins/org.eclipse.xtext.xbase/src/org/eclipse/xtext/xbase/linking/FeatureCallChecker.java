@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.linking;
 
-import static org.eclipse.xtext.xbase.validation.FeatureCallValidator.*;
+import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.util.Collections;
 

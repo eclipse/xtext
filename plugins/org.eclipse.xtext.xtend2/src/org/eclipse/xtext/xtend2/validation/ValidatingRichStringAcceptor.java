@@ -31,7 +31,7 @@ public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor
 	private RichStringLiteral recent = null;
 	private RichStringLiteral root = null;
 	private LinkedList<String> indentationStack;
-	private boolean wasInconsistent;
+	private String unfulfilledIndentationExpectation = null;
 	
 	public ValidatingRichStringAcceptor(ValidationMessageAcceptor acceptor) {
 		this.acceptor = acceptor;
@@ -102,7 +102,7 @@ public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor
 			String indentationString = completeIndentation.toString();
 			String previous = indentationStack.getLast();
 			if (!indentationString.startsWith(previous)) {
-				wasInconsistent = true;
+				unfulfilledIndentationExpectation = previous;
 			}
 			indentationStack.add(indentationString);
 		}
@@ -116,9 +116,10 @@ public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor
 		if (indentationStack.isEmpty())
 			return;
 		String indentation = indentationStack.getLast();
-		if (wasInconsistent) {
-			this.acceptor.acceptWarning("Inconsistent indentation", root, currentOffset, indentation.length(), null);
-			wasInconsistent = false;
+		if (unfulfilledIndentationExpectation != null) {
+			this.acceptor.acceptWarning("Inconsistent indentation", root, currentOffset, indentation.length(), 
+					IssueCodes.INCONSISTENT_INDENTATION, unfulfilledIndentationExpectation);
+			unfulfilledIndentationExpectation = null;
 		}
 		currentOffset+=indentation.length();
 	}

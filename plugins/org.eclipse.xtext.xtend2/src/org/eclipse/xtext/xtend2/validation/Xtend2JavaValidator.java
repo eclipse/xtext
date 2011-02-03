@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtend2.validation;
 
 import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.util.Strings.*;
+import static org.eclipse.xtext.xtend2.validation.IssueCodes.*;
 
 import java.util.List;
 
@@ -46,14 +47,6 @@ import com.google.inject.Inject;
  */
 @ComposedChecks(validators = { ClasspathBasedChecks.class })
 public class Xtend2JavaValidator extends XbaseJavaValidator {
-
-	public static final String CLASS_EXPECTED = Xtend2JavaValidator.class.getName() + ".class_expected";
-	public static final String INTERFACE_EXPECTED = Xtend2JavaValidator.class.getName() + ".interface_expected";
-	public static final String DUPLICATE_METHOD = Xtend2JavaValidator.class.getName() + ".duplicate_method";
-	public static final String INCOMPATIBLE_RETURN_TYPE = Xtend2JavaValidator.class.getName()
-			+ ".incomptible_return_type";
-	public static final String MISSING_OVERRIDE = Xtend2JavaValidator.class.getName() + ".missing_override";
-	public static final String OBSOLETE_OVERRIDE = Xtend2JavaValidator.class.getName() + ".obsolete_override";
 
 	@Inject
 	private JvmFeatureOverridesService featureOverridesService;
