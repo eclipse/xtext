@@ -7,11 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.validation;
 
+import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
+
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
 
 import testdata.FieldAccess;
 
@@ -27,60 +28,57 @@ public class AssignmentTests extends AbstractXbaseTestCase {
 
 	public void testAssignmentToVal() throws Exception {
 		XExpression expression = expression("{ val x = true; x = false }");
-		helper.assertError(expression, XbasePackage.Literals.XASSIGNMENT, XbaseJavaValidator.ASSIGNMENT_TO_FINAL,
-				"Assignment", "final", "variable");
+		helper.assertError(expression, XbasePackage.Literals.XASSIGNMENT, ASSIGNMENT_TO_FINAL, "Assignment", "final",
+				"variable");
 	}
 
 	public void testAssignmentToParameter() throws Exception {
 		XExpression expression = expression("[foo|foo=false]");
-		helper.assertError(expression, XbasePackage.Literals.XASSIGNMENT, XbaseJavaValidator.ASSIGNMENT_TO_FINAL,
-				"Assignment", "final", "parameter");
+		helper.assertError(expression, XbasePackage.Literals.XASSIGNMENT, ASSIGNMENT_TO_FINAL, "Assignment", "final",
+				"parameter");
 	}
 
 	public void testAssignmentToCaughtException() throws Exception {
 		XExpression expression = expression("try { true } catch(Exception e) { e=null }");
-		helper.assertError(expression, XbasePackage.Literals.XASSIGNMENT, XbaseJavaValidator.ASSIGNMENT_TO_FINAL,
-				"Assignment", "final", "parameter");
+		helper.assertError(expression, XbasePackage.Literals.XASSIGNMENT, ASSIGNMENT_TO_FINAL, "Assignment", "final",
+				"parameter");
 	}
 
 	public void testAssignmentToForVariable() throws Exception {
 		XExpression expression = expression("for(String foo: new java.util.ArrayList<String>()) foo=null");
-		helper.assertError(expression, XbasePackage.Literals.XASSIGNMENT, XbaseJavaValidator.ASSIGNMENT_TO_FINAL,
-				"Assignment", "final", "parameter");
+		helper.assertError(expression, XbasePackage.Literals.XASSIGNMENT, ASSIGNMENT_TO_FINAL, "Assignment", "final",
+				"parameter");
 	}
 
 	public void testFinalFeatureAssignment() throws Exception {
-		XExpression expression = expression("new " + FieldAccess.class.getCanonicalName()
-				+ "().finalField=0");
-		helper.assertError(expression, XbasePackage.Literals.XASSIGNMENT, XbaseJavaValidator.ASSIGNMENT_TO_FINAL);
+		XExpression expression = expression("new " + FieldAccess.class.getCanonicalName() + "().finalField=0");
+		helper.assertError(expression, XbasePackage.Literals.XASSIGNMENT, ASSIGNMENT_TO_FINAL);
 	}
 
 	public void testValAssignmentWithoutTypeAndInitialization() throws Exception {
 		XExpression expression = expression("{ val foo }");
-		helper.assertError(expression, XbasePackage.Literals.XVARIABLE_DECLARATION,
-				XbaseJavaValidator.MISSING_INITIALIZATION, "initialized");
-		helper.assertError(expression, XbasePackage.Literals.XVARIABLE_DECLARATION, XbaseJavaValidator.MISSING_TYPE,
-				"type", "derived");
+		helper.assertError(expression, XbasePackage.Literals.XVARIABLE_DECLARATION, MISSING_INITIALIZATION,
+				"initialized");
+		helper.assertError(expression, XbasePackage.Literals.XVARIABLE_DECLARATION, MISSING_TYPE, "type", "derived");
 	}
 
 	public void testValAssignmentWithoutInitialization() throws Exception {
 		XExpression expression = expression("{ val String foo }");
-		helper.assertError(expression, XbasePackage.Literals.XVARIABLE_DECLARATION,
-				XbaseJavaValidator.MISSING_INITIALIZATION, "initialized");
-		helper.assertNoError(expression, XbaseJavaValidator.MISSING_TYPE);
+		helper.assertError(expression, XbasePackage.Literals.XVARIABLE_DECLARATION, MISSING_INITIALIZATION,
+				"initialized");
+		helper.assertNoError(expression, MISSING_TYPE);
 	}
 
 	public void testVarAssignmentWitoutTypeAndInitialization() throws Exception {
 		XExpression expression = expression("{ var foo }");
-		helper.assertNoError(expression, XbaseJavaValidator.MISSING_INITIALIZATION);
-		helper.assertError(expression, XbasePackage.Literals.XVARIABLE_DECLARATION, XbaseJavaValidator.MISSING_TYPE,
-				"type", "derived");
+		helper.assertNoError(expression, MISSING_INITIALIZATION);
+		helper.assertError(expression, XbasePackage.Literals.XVARIABLE_DECLARATION, MISSING_TYPE, "type", "derived");
 	}
 
 	public void testVarAssignmentDerivedVoidType() throws Exception {
 		XExpression expression = expression("{ val foo = while(true) 'bar' }");
-		helper.assertNoError(expression, XbaseJavaValidator.MISSING_INITIALIZATION);
-		helper.assertNoError(expression, XbaseJavaValidator.MISSING_TYPE);
+		helper.assertNoError(expression, MISSING_INITIALIZATION);
+		helper.assertNoError(expression, MISSING_TYPE);
 	}
 
 }

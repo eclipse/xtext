@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.validation;
 
+import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
+
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.EValidatorRegistrar;
@@ -27,19 +29,6 @@ public class FeatureCallValidator extends AbstractDeclarativeValidator {
 	
 	@Inject
 	private IdentifiableSimpleNameProvider nameProvider; 
-
-	protected static final String ISSUE_CODE_PREFIX = FeatureCallValidator.class.getCanonicalName() + ".";
-	public static final String INVALID_NUMBER_OF_ARGUMENTS = ISSUE_CODE_PREFIX + "invalid_number_of_arguments";
-	public static final String INVALID_NUMBER_OF_TYPE_ARGUMENTS = ISSUE_CODE_PREFIX
-			+ "invalid_number_of_type_arguments";
-	public static final String INVALID_ARGUMENT_TYPES = ISSUE_CODE_PREFIX + "invalid_argument_types";
-	public static final String ASSIGNMENT_TARGET_IS_NOT_WRITEABLE = ISSUE_CODE_PREFIX
-			+ "assignment_target_is_not_writeable";
-	public static final String INSTANCE_ACCESS_TO_STATIC_MEMBER = ISSUE_CODE_PREFIX
-			+ "instance_access_to_static_member";
-	public static final String FIELD_ACCESS_WITH_PARENTHESES = ISSUE_CODE_PREFIX + "field_access_with_parentheses";
-	public static final String METHOD_ACCESS_WITHOUT_PARENTHESES = ISSUE_CODE_PREFIX
-			+ "method_access_without_parentheses";
 
 	@Check
 	public void checkInvalidFeatureLinked(XAbstractFeatureCall featureCall) {

@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xbase.tests.validation;
 
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
-import static org.eclipse.xtext.xbase.validation.FeatureCallValidator.*;
+import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -116,8 +116,7 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 
 	public void testOperationFeatureCall_0() throws Exception {
 		XExpression expression = expression("{ var this = new testdata.Methods() staticMethod() }");
-		helper.assertNoError(((XBlockExpression) expression).getExpressions().get(1), 
-				INSTANCE_ACCESS_TO_STATIC_MEMBER);
+		helper.assertNoError(((XBlockExpression) expression).getExpressions().get(1), INSTANCE_ACCESS_TO_STATIC_MEMBER);
 	}
 
 	public void testOperationFeatureCall_1() throws Exception {
@@ -140,8 +139,7 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 
 	public void testOperationFeatureCall_4() throws Exception {
 		XExpression expression = expression("{ var this = new testdata.Methods() sugarMethod }");
-		helper.assertNoError(((XBlockExpression) expression).getExpressions().get(1), 
-				METHOD_ACCESS_WITHOUT_PARENTHESES);
+		helper.assertNoError(((XBlockExpression) expression).getExpressions().get(1), METHOD_ACCESS_WITHOUT_PARENTHESES);
 	}
-	
+
 }
