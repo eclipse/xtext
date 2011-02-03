@@ -14,6 +14,7 @@ import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.typing.ITypeConformanceComputer;
 import org.eclipse.xtext.xbase.conversion.XbaseValueConverterService;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
@@ -33,7 +34,7 @@ import com.google.inject.name.Names;
  */
 public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 	
-	public Class<? extends IEvaluationContext> bindEvaluationContext() {
+	public Class<? extends IEvaluationContext> bindIEvaluationContext() {
 		return DefaultEvaluationContext.class;
 	}
 	
@@ -49,11 +50,11 @@ public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 		return XbaseQualifiedNameConverter.class;
 	}
 	
-	public Class<? extends IXExpressionTypeProvider> bindITypeProvider() {
+	public Class<? extends IXExpressionTypeProvider> bindIXExpressionTypeProvider() {
 		return XExpressionTypeProvider.class;
 	}
 	
-	public Class<? extends org.eclipse.xtext.typing.ITypeConformanceComputer<JvmTypeReference>> bindITypeConformanceComputer() {
+	public Class<? extends ITypeConformanceComputer<JvmTypeReference>> bindITypeConformanceComputer() {
 		return IJvmTypeConformanceComputer.class;
 	}
 	

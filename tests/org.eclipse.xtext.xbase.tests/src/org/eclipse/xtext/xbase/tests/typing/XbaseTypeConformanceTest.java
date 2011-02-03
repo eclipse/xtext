@@ -12,7 +12,7 @@ import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.typing.XExpressionTypeProvider;
+import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
 
 import com.google.common.base.Function;
 import com.google.inject.Inject;
@@ -26,7 +26,7 @@ public class XbaseTypeConformanceTest extends AbstractXbaseTestCase {
 	private IJvmTypeConformanceComputer typeConformanceComputer;
 	
 	@Inject
-	private XExpressionTypeProvider typeProvider;
+	private IXExpressionTypeProvider typeProvider;
 	
 	@Inject
 	private ParseHelper<XExpression> parseHelper;
