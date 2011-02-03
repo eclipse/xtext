@@ -35,7 +35,7 @@ public interface IRichStringPartAcceptor {
 	/**
 	 * @param origin the instance holding the complete text value that contains the line break.
 	 */
-	void acceptSemanticLineBreak(int charCount, RichStringLiteral origin);
+	void acceptSemanticLineBreak(int charCount, RichStringLiteral origin, boolean controlStructureSeen);
 	
 	/**
 	 * @param origin the instance holding the complete text value that contains the line break.

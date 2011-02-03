@@ -20,6 +20,8 @@ public class HighlightingConfiguration extends DefaultHighlightingConfiguration 
 	public static final String RICH_TEXT_ID = "xtend2.richText";
 	public static final String RICH_TEXT_DELIMITER_ID = "xtend2.richText.delimiter";
 	public static final String INSIGNIFICANT_TEMPLATE_TEXT = "xtend2.insignificant.template.text";
+	public static final String POTENTIAL_LINE_BREAK = "xtend2.potential.line.break";
+	public static final String TEMPLATE_LINE_BREAK = "xtend2.template.line.break";
 	
 	@Override
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
@@ -27,6 +29,8 @@ public class HighlightingConfiguration extends DefaultHighlightingConfiguration 
 		acceptor.acceptDefaultHighlighting(RICH_TEXT_ID, "Template Text", richTextStyle());
 		acceptor.acceptDefaultHighlighting(RICH_TEXT_DELIMITER_ID, "Template Delimiter", richTextDelimiterStyle());
 		acceptor.acceptDefaultHighlighting(INSIGNIFICANT_TEMPLATE_TEXT, "Insignificant Template Text", insignificantTemplateTextStyle());
+		acceptor.acceptDefaultHighlighting(POTENTIAL_LINE_BREAK, "Potential Line Break (if line is not empty)", insignificantTemplateTextStyle());
+		acceptor.acceptDefaultHighlighting(TEMPLATE_LINE_BREAK, "Template Line Break", richTextStyle());
 	}
 	
 	public TextStyle richTextStyle() {
@@ -41,8 +45,7 @@ public class HighlightingConfiguration extends DefaultHighlightingConfiguration 
 	}
 	
 	public TextStyle insignificantTemplateTextStyle() {
-		TextStyle textStyle = stringTextStyle().copy();
-		textStyle.setBackgroundColor(new RGB(255, 255, 255));
+		TextStyle textStyle = defaultTextStyle().copy();
 		return textStyle;
 	}
 }

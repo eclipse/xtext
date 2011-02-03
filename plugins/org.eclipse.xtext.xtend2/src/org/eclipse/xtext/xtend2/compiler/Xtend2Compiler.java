@@ -104,7 +104,6 @@ public class Xtend2Compiler extends XbaseCompiler {
 		private final LinkedList<RichStringIf> ifStack;
 		private final IAppendable appendable;
 		private final String variableName;
-		private boolean controlStructureSeen = false;
 
 		public RichStringPrepareCompiler(IAppendable appendable, String variableName) {
 			this.ifStack = Lists.newLinkedList();
@@ -113,19 +112,17 @@ public class Xtend2Compiler extends XbaseCompiler {
 		}
 		
 		@Override
-		public void acceptSemanticLineBreak(int charCount, RichStringLiteral origin) {
+		public void acceptSemanticLineBreak(int charCount, RichStringLiteral origin, boolean controlStructureSeen) {
 			appendable.append(variableName);
 			if (!controlStructureSeen) {
 				appendable.append(".newLine();\n");
 			} else {
 				appendable.append(".newLineIfNotEmpty();\n");
 			}
-			controlStructureSeen = false;
 		}
 		
 		@Override
 		public void acceptTemplateLineBreak(int charCount, RichStringLiteral origin) {
-			controlStructureSeen = false;
 		}
 		
 		@Override
@@ -143,14 +140,12 @@ public class Xtend2Compiler extends XbaseCompiler {
 			ifStack.add((RichStringIf) condition.eContainer());
 			appendable.append("{").increaseIndentation().append("\n");
 			writeIf(condition);
-			controlStructureSeen = true;
 		}
 		
 		@Override
 		public void acceptElseIfCondition(XExpression condition) {
 			writeElse();
 			writeIf(condition);
-			controlStructureSeen = true;
 		}
 
 		protected void writeIf(XExpression condition) {
@@ -170,7 +165,6 @@ public class Xtend2Compiler extends XbaseCompiler {
 		@Override
 		public void acceptElse() {
 			writeElse();
-			controlStructureSeen = true;
 		}
 		
 		@Override
@@ -182,7 +176,6 @@ public class Xtend2Compiler extends XbaseCompiler {
 				appendable.append("}");
 			}
 			appendable.append("\n");
-			controlStructureSeen = true;
 		}
 		
 		@Override
@@ -199,7 +192,6 @@ public class Xtend2Compiler extends XbaseCompiler {
 			appendable.append(" : ");
 			internalToJavaExpression(expression, appendable);
 			appendable.append(") {").increaseIndentation().append("\n");
-			controlStructureSeen = true;
 		}
 		
 		@Override
@@ -212,7 +204,6 @@ public class Xtend2Compiler extends XbaseCompiler {
 			appendable.append("\n");
 			appendable.append("}");
 			appendable.append("\n");
-			controlStructureSeen = true;
 		}
 		
 		@Override
@@ -224,7 +215,6 @@ public class Xtend2Compiler extends XbaseCompiler {
 			appendable.append(", \"");
 			appendable.append(indentation.toString());
 			appendable.append("\");\n");
-			controlStructureSeen = true;
 		}
 		
 	}

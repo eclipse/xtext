@@ -5,6 +5,7 @@ package org.eclipse.xtext.xtend2.ui;
 
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
@@ -16,8 +17,12 @@ import org.eclipse.xtext.xtend2.ui.autoedit.TokenTypeToPartitionMapper;
 import org.eclipse.xtext.xtend2.ui.highlighting.HighlightingConfiguration;
 import org.eclipse.xtext.xtend2.ui.highlighting.RichStringAwareTokenScanner;
 import org.eclipse.xtext.xtend2.ui.highlighting.RichStringHighlightingCalculator;
+import org.eclipse.xtext.xtend2.ui.highlighting.ShowWhitespaceCharactersActionContributor;
 import org.eclipse.xtext.xtend2.ui.highlighting.TokenToAttributeIdMapper;
 import org.eclipse.xtext.xtend2.ui.refactoring.Xtend2RenameStrategy;
+
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -55,5 +60,9 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 	@Override
 	public Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
 		return AutoEditStrategyProvider.class;
+	}
+	
+	public void configureIShowWhitespaceCharactersActionContributor(Binder binder) {
+		binder.bind(IActionContributor.class).annotatedWith(Names.named("Show Whitespace")).to(ShowWhitespaceCharactersActionContributor.class);
 	}
 }

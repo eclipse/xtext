@@ -98,7 +98,7 @@ public class RichStringHighlightingCalculator implements ISemanticHighlightingCa
 		private int currentOffset = -1;
 		private RichStringLiteral recent = null;
 		private final IHighlightedPositionAcceptor acceptor;
-		
+
 		public RichStringHighlighter(IHighlightedPositionAcceptor acceptor) {
 			this.acceptor = acceptor;
 		}
@@ -137,7 +137,8 @@ public class RichStringHighlightingCalculator implements ISemanticHighlightingCa
 
 		protected void highlightClosingQuotes(INode node) {
 			if (node.getText().endsWith("'")) {
-				acceptor.addPosition(currentOffset + node.getLength() - 3, 3, HighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
+				acceptor.addPosition(currentOffset + node.getLength() - 3, 3,
+						HighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
 			}
 		}
 
@@ -145,14 +146,19 @@ public class RichStringHighlightingCalculator implements ISemanticHighlightingCa
 		public void acceptTemplateText(CharSequence text, RichStringLiteral origin) {
 			resetCurrentOffset(origin);
 			if (text.length() > 0) {
-				acceptor.addPosition(currentOffset, text.length(), HighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
+				acceptor.addPosition(currentOffset, text.length(),
+						HighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
 				currentOffset += text.length();
 			}
 		}
 
 		@Override
-		public void acceptSemanticLineBreak(int charCount, RichStringLiteral origin) {
+		public void acceptSemanticLineBreak(int charCount, RichStringLiteral origin, boolean controlStructureSeen) {
 			resetCurrentOffset(origin);
+			if (controlStructureSeen)
+				acceptor.addPosition(currentOffset, charCount, HighlightingConfiguration.POTENTIAL_LINE_BREAK);
+			else
+				acceptor.addPosition(currentOffset, charCount, HighlightingConfiguration.TEMPLATE_LINE_BREAK);
 			currentOffset += charCount;
 		}
 
@@ -182,7 +188,6 @@ public class RichStringHighlightingCalculator implements ISemanticHighlightingCa
 		public void acceptExpression(XExpression expression, CharSequence indentation) {
 			highlightRichStrings(expression, acceptor);
 		}
-
 	}
 
 }

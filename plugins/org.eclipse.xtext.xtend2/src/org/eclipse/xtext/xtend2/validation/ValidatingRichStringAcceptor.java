@@ -76,7 +76,7 @@ public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor
 	}
 
 	@Override
-	public void acceptSemanticLineBreak(int charCount, RichStringLiteral origin) {
+	public void acceptSemanticLineBreak(int charCount, RichStringLiteral origin, boolean controlStructureSeen) {
 		resetCurrentOffset(origin);
 		currentOffset += charCount;
 	}
