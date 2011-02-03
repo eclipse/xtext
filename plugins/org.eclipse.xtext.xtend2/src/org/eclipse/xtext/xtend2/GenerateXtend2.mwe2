@@ -58,6 +58,7 @@ Workflow {
 			fragment = validation.JavaValidatorFragment {}
 			fragment = scoping.ImportNamespacesScopingFragment {}
 			fragment = types.TypesGeneratorFragment {}
+			fragment = xbase.XbaseGeneratorFragment {}
 			fragment = builder.BuilderIntegrationFragment {}
 			fragment = formatting.FormatterFragment {}
 			fragment = quickfix.QuickfixProviderFragment {}

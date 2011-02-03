@@ -32,11 +32,12 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 		super(plugin);
 	}
 	
-	public Class<? extends IHighlightingConfiguration> bindHighlightingConfiguration() {
+	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
 		return HighlightingConfiguration.class;
 	}
 	
-	public Class<? extends AbstractAntlrTokenToAttributeIdMapper> bindTokenToAttributeIdMapper() {
+	@Override
+	public Class<? extends AbstractAntlrTokenToAttributeIdMapper> bindAbstractAntlrTokenToAttributeIdMapper() {
 		return TokenToAttributeIdMapper.class;
 	}
 	
