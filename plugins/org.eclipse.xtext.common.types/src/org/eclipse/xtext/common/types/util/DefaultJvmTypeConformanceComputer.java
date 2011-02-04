@@ -59,7 +59,7 @@ public class DefaultJvmTypeConformanceComputer implements IJvmTypeConformanceCom
 	protected TypesFactory factory = TypesFactory.eINSTANCE;
 
 	@Inject
-	protected TypeArgumentContext.Provider typeArgumentContextProvider;
+	protected TypeArgumentContextProvider typeArgumentContextProvider;
 	
 	@Inject 
 	protected Primitives primitives;
@@ -76,7 +76,7 @@ public class DefaultJvmTypeConformanceComputer implements IJvmTypeConformanceCom
 		this.factory = factory;
 	}
 	
-	public void setTypeArgumentContextProvider(TypeArgumentContext.Provider typeArgumentContextProvider) {
+	public void setTypeArgumentContextProvider(TypeArgumentContextProvider typeArgumentContextProvider) {
 		this.typeArgumentContextProvider = typeArgumentContextProvider;
 	}
 
@@ -527,7 +527,7 @@ public class DefaultJvmTypeConformanceComputer implements IJvmTypeConformanceCom
 
 	protected void initializeDistance(JvmTypeReference firstType, Multimap<JvmType, JvmTypeReference> all,
 			Multiset<JvmType> cumulatedDistance) {
-		TypeArgumentContext firstContext = typeArgumentContextProvider.get(firstType);
+		TypeArgumentContext firstContext = typeArgumentContextProvider.getReceiverContext(firstType);
 		superTypeCollector.collectSuperTypes(firstType, new MaxDistanceRawTypeAcceptor(
 				cumulatedDistance, all, new ArgumentResolver(firstContext)));
 	}

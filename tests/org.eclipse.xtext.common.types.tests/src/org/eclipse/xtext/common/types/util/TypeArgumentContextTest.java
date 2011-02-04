@@ -7,8 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
+import static com.google.common.collect.Iterables.*;
+
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import junit.framework.TestCase;
 
@@ -18,15 +22,20 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext.Provider;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -35,7 +44,7 @@ public class TypeArgumentContextTest extends TestCase {
 
 	private ClasspathTypeProvider typeProvider;
 	private JvmTypeReferences typeRefs;
-	private Provider typeArgCtxProvider;
+	private TypeArgumentContextProvider typeArgCtxProvider;
 	private ResourceSetImpl resourceSet;
 
 	@Override
@@ -44,11 +53,12 @@ public class TypeArgumentContextTest extends TestCase {
 		resourceSet = new ResourceSetImpl();
 		Resource resource = new XMLResourceImpl(URI.createURI("http://synthetic.resource"));
 		resourceSet.getResources().add(resource);
-		typeArgCtxProvider = new TypeArgumentContext.Provider();
+		typeArgCtxProvider = new TypeArgumentContextProvider();
 		final ClasspathTypeProviderFactory typeProviderFactory = new ClasspathTypeProviderFactory(getClass().getClassLoader());
 		typeProvider = typeProviderFactory.createTypeProvider(resourceSet);
 		assertNotNull(typeProvider);
 		typeArgCtxProvider.setTypeProviderFactory(typeProviderFactory);
+		typeArgCtxProvider.setTypeReferences(new TypeReferences());
 		typeRefs = new JvmTypeReferences(TypesFactory.eINSTANCE, typeProvider);
 	}
 	
@@ -61,16 +71,69 @@ public class TypeArgumentContextTest extends TestCase {
 		super.tearDown();
 	}
 	
+	/**
+	 * test case: "Iterable<? extends String> = newArrayList();"
+	 */
+	public void testInferredMethodContext_00() throws Exception {
+		JvmParameterizedTypeReference lists = typeRefs.typeReference(Lists.class.getCanonicalName()).create();
+		JvmOperation operation = find(((JvmDeclaredType)lists.getType()).getDeclaredOperations(), new Predicate<JvmOperation>(){
+			public boolean apply(JvmOperation input) {
+				return input.getSimpleName().equals("newArrayList") && input.getParameters().isEmpty();
+			}
+		});
+		JvmTypeReference expected = typeRefs.typeReference("java.lang.Iterable").wildCardExtends("java.lang.String").create();
+		
+		Map<JvmTypeParameter, JvmTypeReference> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, expected);
+		assertEquals(1,map.size());
+		assertEquals("? extends java.lang.String",map.values().iterator().next().getCanonicalName());
+	}
+	
+	/**
+	 * test case: "val x = singleton("foo");"
+	 */
+	public void testInferredMethodContext_01() throws Exception {
+		JvmParameterizedTypeReference lists = typeRefs.typeReference(Collections.class.getCanonicalName()).create();
+		JvmOperation operation = find(((JvmDeclaredType)lists.getType()).getDeclaredOperations(), new Predicate<JvmOperation>(){
+			public boolean apply(JvmOperation input) {
+				return input.getSimpleName().equals("singleton");
+			}
+		});
+		JvmTypeReference actualArg = typeRefs.typeReference("java.lang.String").create();
+		
+		Map<JvmTypeParameter, JvmTypeReference> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, null, actualArg);
+		assertEquals(1,map.size());
+		assertEquals("java.lang.String",map.values().iterator().next().getCanonicalName());
+	}
+	
+	/**
+	 * test case: "val Object x = getLast(newArrayList("foo"));"
+	 */
+	public void testInferredMethodContext_02() throws Exception {
+		
+		JvmParameterizedTypeReference lists = typeRefs.typeReference(Iterables.class.getCanonicalName()).create();
+		JvmOperation operation = find(((JvmDeclaredType)lists.getType()).getDeclaredOperations(), new Predicate<JvmOperation>(){
+			public boolean apply(JvmOperation input) {
+				return input.getSimpleName().equals("getLast");
+			}
+		});
+		JvmTypeReference actualArg = typeRefs.typeReference("java.util.List").wildCardExtends("java.lang.String").create();
+		JvmTypeReference expectation = typeRefs.typeReference("java.lang.Object").create();
+		
+		Map<JvmTypeParameter, JvmTypeReference> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, expectation, actualArg);
+		assertEquals(1,map.size());
+		assertEquals("? extends java.lang.String",map.values().iterator().next().getCanonicalName());
+	}
+	
 	public void testSimple() throws Exception {
 		JvmTypeReference reference = typeRefs.typeReference("java.util.List").wildCardExtends("java.lang.CharSequence").create();
-		TypeArgumentContext typeArgumentContext = typeArgCtxProvider.get(reference);
+		TypeArgumentContext typeArgumentContext = typeArgCtxProvider.getReceiverContext(reference);
 		JvmTypeReference argument = typeArgumentContext.getBoundArgument(((JvmGenericType)reference.getType()).getTypeParameters().get(0));
 		assertTrue(EcoreUtil.equals(((JvmParameterizedTypeReference)reference).getArguments().get(0), argument));
 	}
 	
 	public void testPrimitive() throws Exception {
 		JvmTypeReference primitiveRef = typeRefs.typeReference("int").create();
-		TypeArgumentContext typeArgumentContext = typeArgCtxProvider.get(primitiveRef);
+		TypeArgumentContext typeArgumentContext = typeArgCtxProvider.getReceiverContext(primitiveRef);
 		JvmTypeReference reference = typeRefs.typeReference("java.util.List").wildCardExtends("java.lang.CharSequence").create();
 		JvmTypeReference argument = typeArgumentContext.getBoundArgument(((JvmGenericType)reference.getType()).getTypeParameters().get(0));
 		assertNull(argument);
@@ -80,7 +143,7 @@ public class TypeArgumentContextTest extends TestCase {
 		JvmTypeReference reference = typeRefs.typeReference("java.util.List").wildCardExtends("java.lang.CharSequence").create();
 		
 		JvmGenericType collType = (JvmGenericType) typeProvider.findTypeByName(Collection.class.getCanonicalName());
-		JvmTypeReference collArgument = typeArgCtxProvider.get(reference).getBoundArgument(collType.getTypeParameters().get(0));
+		JvmTypeReference collArgument = typeArgCtxProvider.getReceiverContext(reference).getBoundArgument(collType.getTypeParameters().get(0));
 		
 		JvmGenericType listType = (JvmGenericType) typeProvider.findTypeByName(List.class.getCanonicalName());
 		JvmTypeReference listArgument = ((JvmParameterizedTypeReference)listType.getSuperTypes().get(0)).getArguments().get(0);
@@ -90,7 +153,7 @@ public class TypeArgumentContextTest extends TestCase {
 	
 	public void testResolve_0() throws Exception {
 		JvmTypeReference reference = typeRefs.typeReference("java.util.ArrayList").wildCardExtends("java.lang.CharSequence").create();
-		TypeArgumentContext context = typeArgCtxProvider.get(reference);
+		TypeArgumentContext context = typeArgCtxProvider.getReceiverContext(reference);
 		JvmOperation jvmOperation = findOperation("java.util.List", "add(E)");
 		
 		assertEquals(null, context.getLowerBound(jvmOperation.getParameters().get(0).getParameterType()));
@@ -100,7 +163,7 @@ public class TypeArgumentContextTest extends TestCase {
 	
 	public void testResolve_1() throws Exception {
 		JvmTypeReference reference = typeRefs.typeReference("java.util.ArrayList").wildCardSuper("java.lang.CharSequence").create();
-		TypeArgumentContext context = typeArgCtxProvider.get(reference);
+		TypeArgumentContext context = typeArgCtxProvider.getReceiverContext(reference);
 		JvmOperation jvmOperation = findOperation("java.util.List", "add(E)");
 		
 		JvmTypeReference resolvedParameter = context.getLowerBound(jvmOperation.getParameters().get(0).getParameterType());
@@ -111,7 +174,7 @@ public class TypeArgumentContextTest extends TestCase {
 	
 	public void testResolve_WithUnResolved() throws Exception {
 		JvmTypeReference reference = typeRefs.typeReference("java.util.ArrayList").create();
-		TypeArgumentContext context = typeArgCtxProvider.get(reference);
+		TypeArgumentContext context = typeArgCtxProvider.getReceiverContext(reference);
 		JvmOperation jvmOperation = findOperation("java.util.List", "add(E)");
 		
 		JvmTypeReference resolvedParameter = context.getLowerBound(jvmOperation.getParameters().get(0).getParameterType());
@@ -127,7 +190,7 @@ public class TypeArgumentContextTest extends TestCase {
 					.wildCardSuper("java.lang.String").x()
 					.wildCardExtends("java.lang.Number").x()
 				.create();
-		TypeArgumentContext context = typeArgCtxProvider.get(reference);
+		TypeArgumentContext context = typeArgCtxProvider.getReceiverContext(reference);
 		
 		JvmOperation get = findOperation("java.util.List", "get(int)");
 		assertEquals("java.util.Map<? super java.lang.String,? extends java.lang.Number>",context.getUpperBound(get.getReturnType(),resourceSet).getCanonicalName());

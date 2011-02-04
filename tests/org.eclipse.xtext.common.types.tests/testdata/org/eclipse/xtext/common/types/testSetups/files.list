@@ -2,12 +2,16 @@ AnnotatedClassWithStringDefault.java.txt
 AnnotatedInterfaceWithStringDefault.java.txt
 EmptyAbstractClass.java.txt
 Fields.java.txt
+GenericSuperClass.java.txt
 InitializerWithConstructor.java.txt
 InitializerWithoutConstructor.java.txt
 NestedTypes.java.txt
 ParameterizedMethods.java.txt
 ParameterizedTypes.java.txt
 StaticNestedTypes.java.txt
+SubClass.java.txt
+SubOfGenericClass.java.txt
+SuperClass.java.txt
 TestAnnotation.java.txt
 TestAnnotationWithStringDefault.java.txt
 TestEnum.java.txt

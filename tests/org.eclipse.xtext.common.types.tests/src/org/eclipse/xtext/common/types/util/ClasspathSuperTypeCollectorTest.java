@@ -9,7 +9,12 @@ package org.eclipse.xtext.common.types.util;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory;
+import org.eclipse.xtext.common.types.tests.ClasspathBasedModule;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -17,13 +22,15 @@ import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 public class ClasspathSuperTypeCollectorTest extends AbstractSuperTypeCollectorTest {
 
 	private ResourceSet resourceSet;
-	private ClasspathTypeProvider typeProvider;
+	private IJvmTypeProvider typeProvider;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		resourceSet = new ResourceSetImpl();
-		typeProvider = new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet);
+		Injector injector = Guice.createInjector(new ClasspathBasedModule());
+		Factory instance = injector.getInstance(IJvmTypeProvider.Factory.class);
+		typeProvider = instance.findOrCreateTypeProvider(resourceSet);
 	}
 	
 	@Override
@@ -34,7 +41,7 @@ public class ClasspathSuperTypeCollectorTest extends AbstractSuperTypeCollectorT
 	}
 	
 	@Override
-	protected ClasspathTypeProvider getTypeProvider() {
+	protected IJvmTypeProvider getTypeProvider() {
 		return typeProvider;
 	}
 }
