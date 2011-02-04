@@ -49,6 +49,7 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -58,6 +59,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 	private final static Logger log = Logger.getLogger(DeclaredTypeFactory.class);
 	private final ClassURIHelper uriHelper;
 
+	@Inject
 	public DeclaredTypeFactory(ClassURIHelper uriHelper) {
 		this.uriHelper = uriHelper;
 	}
@@ -88,9 +90,9 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 	}
 
 	private static final Object[] EMPTY_ARRAY = new Object[0];
-	
+
 	protected void createAnnotationValues(AnnotatedElement annotated, JvmAnnotationTarget result) {
-		for(Annotation annotation: annotated.getDeclaredAnnotations()) {
+		for (Annotation annotation : annotated.getDeclaredAnnotations()) {
 			createAnnotationReference(result, annotation);
 		}
 	}
@@ -100,7 +102,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		result.getAnnotations().add(annotationReference);
 		Class<? extends Annotation> type = annotation.annotationType();
 		annotationReference.setAnnotation(createAnnotationProxy(type));
-		for(Method method: type.getDeclaredMethods()) {
+		for (Method method : type.getDeclaredMethods()) {
 			try {
 				Object value = method.invoke(annotation, EMPTY_ARRAY);
 				if (method.getReturnType().isArray()) {
@@ -112,13 +114,13 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 					annotationReference.getValues().add(annotationValue);
 					annotationValue.setOperation(createMethodProxy(method));
 				}
-			} catch(Exception e) {
+			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 			}
 		}
 		return annotationReference;
 	}
-	
+
 	protected JvmEnumerationLiteral createEnumLiteralProxy(Enum<?> e) {
 		JvmEnumerationLiteral enumLiteralProxy = TypesFactory.eINSTANCE.createJvmEnumerationLiteral();
 		InternalEObject internalEObject = (InternalEObject) enumLiteralProxy;
@@ -142,21 +144,21 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		if (length > 0) {
 			List<Object> valuesAsList = Lists.newArrayListWithExpectedSize(length);
 			if (componentType.isPrimitive() || String.class.equals(componentType)) {
-				for(int i = 0; i < length; i++) {
+				for (int i = 0; i < length; i++) {
 					valuesAsList.add(Array.get(value, i));
 				}
-			} else if(componentType.equals(Class.class)) {
-				for(int i = 0; i < length; i++) {
+			} else if (componentType.equals(Class.class)) {
+				for (int i = 0; i < length; i++) {
 					Class<?> referencedClass = (Class<?>) Array.get(value, i);
 					valuesAsList.add(createTypeReference(referencedClass));
 				}
-			} else if(componentType.isAnnotation()) {
-				for(int i = 0; i < length; i++) {
+			} else if (componentType.isAnnotation()) {
+				for (int i = 0; i < length; i++) {
 					Annotation nestedAnnotation = (Annotation) Array.get(value, i);
 					createAnnotationReference((JvmAnnotationTarget) result, nestedAnnotation);
 				}
 			} else if (componentType.isEnum()) {
-				for(int i = 0; i < length; i++) {
+				for (int i = 0; i < length; i++) {
 					Enum<?> e = (Enum<?>) Array.get(value, i);
 					JvmEnumerationLiteral proxy = createEnumLiteralProxy(e);
 					valuesAsList.add(proxy);
@@ -167,16 +169,16 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		}
 		return result;
 	}
-	
+
 	protected JvmAnnotationValue createAnnotationValue(Object value, Class<?> type) {
 		JvmAnnotationValue result = createAnnotationValue(type);
 		if (type.isPrimitive() || String.class.equals(type)) {
 			result.eSet(result.eClass().getEStructuralFeature("values"), Collections.singleton(value));
-		} else if(type.equals(Class.class)) {
+		} else if (type.equals(Class.class)) {
 			Class<?> referencedClass = (Class<?>) value;
 			JvmTypeReference reference = createTypeReference(referencedClass);
 			result.eSet(result.eClass().getEStructuralFeature("values"), Collections.singleton(reference));
-		} else if(type.isAnnotation()) {
+		} else if (type.isAnnotation()) {
 			Annotation nestedAnnotation = (Annotation) value;
 			createAnnotationReference((JvmAnnotationTarget) result, nestedAnnotation);
 		} else if (type.isEnum()) {
@@ -186,7 +188,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		}
 		return result;
 	}
-	
+
 	protected JvmAnnotationValue createAnnotationValue(Class<?> type) {
 		if (String.class.equals(type)) {
 			return TypesFactory.eINSTANCE.createJvmStringAnnotationValue();
@@ -222,7 +224,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		proxy.eSetProxyURI(uri);
 		return (JvmAnnotationType) proxy;
 	}
-	
+
 	protected JvmOperation createMethodProxy(Method method) {
 		InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createJvmOperation();
 		URI uri = uriHelper.getFullURI(method);
@@ -243,7 +245,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			}
 		}
 	}
-	
+
 	public JvmAnnotationType createAnnotationType(Class<?> clazz) {
 		JvmAnnotationType result = TypesFactory.eINSTANCE.createJvmAnnotationType();
 		result.setFullyQualifiedName(clazz.getName());
@@ -267,7 +269,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			result.getSuperTypes().add(createTypeReference(Object.class));
 		}
 	}
-	
+
 	protected void createFields(Class<?> clazz, JvmDeclaredType result) {
 		for (Field field : clazz.getDeclaredFields()) {
 			if (!field.isSynthetic())
@@ -357,8 +359,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		}
 	}
 
-	public JvmTypeReference createTypeArgument(Type actualTypeArgument,
-			Type rawType, int i) {
+	public JvmTypeReference createTypeArgument(Type actualTypeArgument, Type rawType, int i) {
 		if (actualTypeArgument instanceof WildcardType) {
 			WildcardType wildcardType = (WildcardType) actualTypeArgument;
 			JvmWildcardTypeReference result = TypesFactory.eINSTANCE.createJvmWildcardTypeReference();
@@ -379,8 +380,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 				result.getConstraints().add(lowerBound);
 			}
 			return result;
-		}
-		else {
+		} else {
 			JvmTypeReference result = createTypeReference(actualTypeArgument);
 			return result;
 		}
@@ -410,7 +410,8 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 
 	public <T> org.eclipse.xtext.common.types.JvmConstructor createConstructor(Constructor<T> constructor) {
 		org.eclipse.xtext.common.types.JvmConstructor result = TypesFactory.eINSTANCE.createJvmConstructor();
-		enhanceExecutable(result, constructor, constructor.getDeclaringClass().getSimpleName(), constructor.getGenericParameterTypes(), constructor.getParameterAnnotations());
+		enhanceExecutable(result, constructor, constructor.getDeclaringClass().getSimpleName(),
+				constructor.getGenericParameterTypes(), constructor.getParameterAnnotations());
 		enhanceGenericDeclaration(result, constructor);
 		for (Type parameterType : constructor.getGenericExceptionTypes()) {
 			result.getExceptions().add(createTypeReference(parameterType));
@@ -418,7 +419,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		createAnnotationValues(constructor, result);
 		return result;
 	}
-	
+
 	public void setVisibility(org.eclipse.xtext.common.types.JvmMember result, int modifiers) {
 		if (Modifier.isPrivate(modifiers))
 			result.setVisibility(JvmVisibility.PRIVATE);
@@ -430,7 +431,8 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			result.setVisibility(JvmVisibility.DEFAULT);
 	}
 
-	public void enhanceExecutable(JvmExecutable result, Member member, String simpleName, Type[] parameterTypes, Annotation[][] annotations) {
+	public void enhanceExecutable(JvmExecutable result, Member member, String simpleName, Type[] parameterTypes,
+			Annotation[][] annotations) {
 		StringBuilder fqName = new StringBuilder(48);
 		fqName.append(member.getDeclaringClass().getName());
 		fqName.append('.');
@@ -459,7 +461,8 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 
 	public JvmOperation createOperation(Method method) {
 		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
-		enhanceExecutable(result, method, method.getName(), method.getGenericParameterTypes(), method.getParameterAnnotations());
+		enhanceExecutable(result, method, method.getName(), method.getGenericParameterTypes(),
+				method.getParameterAnnotations());
 		enhanceGenericDeclaration(result, method);
 		result.setFinal(Modifier.isFinal(method.getModifiers()));
 		result.setStatic(Modifier.isStatic(method.getModifiers()));
@@ -476,7 +479,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		JvmFormalParameter result = TypesFactory.eINSTANCE.createJvmFormalParameter();
 		result.setName(paramName);
 		result.setParameterType(createTypeReference(parameterType));
-		for(Annotation annotation: annotations) {
+		for (Annotation annotation : annotations) {
 			createAnnotationReference(result, annotation);
 		}
 		return result;

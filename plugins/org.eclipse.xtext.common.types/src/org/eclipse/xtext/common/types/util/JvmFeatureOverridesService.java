@@ -35,16 +35,16 @@ public class JvmFeatureOverridesService {
     private SuperTypeCollector superTypeCollector;
     
     @Inject
-    private TypeArgumentContext.Provider contextProvider;
+    private TypeArgumentContextProvider contextProvider;
     
     protected JvmFeatureOverridesService() {}
-    public JvmFeatureOverridesService(SuperTypeCollector superTypeCollector, TypeArgumentContext.Provider contextProvider) {
+    public JvmFeatureOverridesService(SuperTypeCollector superTypeCollector, TypeArgumentContextProvider contextProvider) {
         this.superTypeCollector = superTypeCollector;
         this.contextProvider = contextProvider;
     }
     
     public Iterable<JvmFeature> getAllJvmFeatures(JvmTypeReference type) {
-        TypeArgumentContext context = contextProvider.get(type);
+        TypeArgumentContext context = contextProvider.getReceiverContext(type);
         return getAllJvmFeatures((JvmDeclaredType)type.getType(), context);
     }
     

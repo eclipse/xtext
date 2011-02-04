@@ -5,20 +5,26 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.util;
-
-import org.eclipse.xtext.common.types.tests.ClasspathBasedModule;
-
-import com.google.inject.Module;
+package org.eclipse.xtext.common.types.testSetups;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class ClasspathConformanceComputerTest extends AbstractJvmTypeConformanceComputerTest {
-
+@SuppressWarnings("unused")
+public class SubClass extends SuperClass {
+	private String privateField;
+	protected String protectedField;
+	public String publicField;
+	
 	@Override
-	protected Module getModule() {
-		return new ClasspathBasedModule();
+	public String publicMethod() {
+		return privateField;
 	}
-
+	
+	private String privateMethod(String s) {
+		return privateField;
+	}
+	private String privateMethod(Object x) {
+		return privateField;
+	}
 }

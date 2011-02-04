@@ -24,6 +24,10 @@ public class Primitives {
 	@Inject
 	private IJvmTypeProvider.Factory typeProviderFactory;
 	
+	public void setTypeProviderFactory(IJvmTypeProvider.Factory typeProviderFactory) {
+		this.typeProviderFactory = typeProviderFactory;
+	}
+	
 	public static enum Primitive {
 		Byte,Short,Char,Int,Long,Float,Double,Void, Boolean
 	}
