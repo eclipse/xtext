@@ -17,8 +17,11 @@ import java.util.Set;
 
 import junit.framework.TestCase;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -30,9 +33,12 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
-import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
 import org.eclipse.xtext.common.types.access.impl.DeclaredTypeFactory;
 
+import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.google.inject.internal.Lists;
 
 /**
@@ -40,12 +46,39 @@ import com.google.inject.internal.Lists;
  */
 public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 
-	private IJvmTypeConformanceComputer computer = null;
-	private DeclaredTypeFactory factory = new DeclaredTypeFactory(new ClassURIHelper());
+	@Inject
+	private IJvmTypeConformanceComputer computer;
+	
+	@Inject
+	private DeclaredTypeFactory factory;
 
+	@Inject
+	private ResourceSetImpl resourceSet;
+	
+	@Inject
+	private IJvmTypeProvider.Factory typeProviderFactory;
+
+	private XMLResourceImpl syntheticResource;
+
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		Injector injector = Guice.createInjector(getModule());
+		injector.injectMembers(this);
+		typeProviderFactory.findOrCreateTypeProvider(resourceSet);
+		syntheticResource = new XMLResourceImpl(URI.createURI("http://synthetic.resource"));
+		resourceSet.getResources().add(syntheticResource);
+	}
+	
+	protected abstract Module getModule();
+	
 	@Override
 	protected void tearDown() throws Exception {
 		computer = null;
+		factory = null;
+		resourceSet = null;
+		syntheticResource = null;
+		typeProviderFactory = null;
 		super.tearDown();
 	}
 	
@@ -95,9 +128,13 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 		return result;
 	}
 
-	protected abstract IJvmTypeProvider getTypeProvider();
+	protected IJvmTypeProvider getTypeProvider() {
+		return typeProviderFactory.findOrCreateTypeProvider(resourceSet);
+	}
 
-	protected abstract Resource getSyntheticResource();
+	protected Resource getSyntheticResource() {
+		return syntheticResource;
+	}
 
 	/**
 	 * List <= List<? super CharSequence>
@@ -410,18 +447,8 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 		assertTrue(getComputer().isConformant(reference, ref(CharSequence.class)));
 		assertTrue(getComputer().isConformant(reference, ref(Serializable.class)));
 	}
-
-	protected void setComputer(IJvmTypeConformanceComputer computer) {
-		this.computer = computer;
-	}
-
-	protected IJvmTypeConformanceComputer getComputer() {
-		if (computer == null) {
-			final DefaultJvmTypeConformanceComputer newOne = new DefaultJvmTypeConformanceComputer();
-			newOne.setSuperTypeCollector(new SuperTypeCollector(TypesFactory.eINSTANCE));
-			newOne.setTypeArgumentContextProvider(new TypeArgumentContext.Provider());
-			computer = newOne;
-		}
+	
+	public IJvmTypeConformanceComputer getComputer() {
 		return computer;
 	}
 

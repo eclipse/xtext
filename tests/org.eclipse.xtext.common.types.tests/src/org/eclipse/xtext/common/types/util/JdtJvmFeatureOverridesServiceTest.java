@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -16,7 +16,7 @@ import com.google.inject.Module;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class JdtConformanceComputerTest extends AbstractJvmTypeConformanceComputerTest {
+public class JdtJvmFeatureOverridesServiceTest extends AbstractJvmFeatureOverridesServiceTest {
 
 	@Override
 	protected Module getModule() {
@@ -28,4 +28,16 @@ public class JdtConformanceComputerTest extends AbstractJvmTypeConformanceComput
 		};
 	}
 
+	//TODO disabled since types are not visible on the Mock project
+//	@Override
+//	public void testContainsFields() throws Exception {
+//	}
+//	
+//	@Override
+//	public void testGenerics_00() throws Exception {
+//	}
+//	
+//	@Override
+//	public void testGenerics_01() throws Exception {
+//	}
 }

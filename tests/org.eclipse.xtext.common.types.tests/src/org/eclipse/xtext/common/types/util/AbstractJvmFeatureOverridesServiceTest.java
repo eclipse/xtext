@@ -20,24 +20,27 @@ import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
-import org.eclipse.xtext.common.types.memberoverrides.GenericSuperClass;
-import org.eclipse.xtext.common.types.memberoverrides.SubClass;
-import org.eclipse.xtext.common.types.memberoverrides.SubOfGenericClass;
-import org.eclipse.xtext.common.types.memberoverrides.SuperClass;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext.Provider;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.common.types.testSetups.GenericSuperClass;
+import org.eclipse.xtext.common.types.testSetups.SubClass;
+import org.eclipse.xtext.common.types.testSetups.SubOfGenericClass;
+import org.eclipse.xtext.common.types.testSetups.SuperClass;
 
 import com.google.common.collect.Sets;
+import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+import com.google.inject.Module;
 
 /**
  * @author Sven Efftinge  Initial contribution and API
  */
-public class JvmFeatureOverridesServiceTest extends TestCase {
+public abstract class AbstractJvmFeatureOverridesServiceTest extends TestCase {
     
-    private ClasspathTypeProvider typeProvider;
+    private IJvmTypeProvider typeProvider;
     private JvmTypeReferences typeRefs;
+	@Inject
     private JvmFeatureOverridesService service;
-    private Provider typeArgCtxProvider;
 
     @Override
     protected void setUp() throws Exception {
@@ -45,16 +48,19 @@ public class JvmFeatureOverridesServiceTest extends TestCase {
         ResourceSet resourceSet = new ResourceSetImpl();
         Resource syntheticResource = new XMLResourceImpl(URI.createURI("http://synthetic.resource"));
         resourceSet.getResources().add(syntheticResource);
-        typeProvider = new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet);
-        typeRefs = new JvmTypeReferences(TypesFactory.eINSTANCE, typeProvider);
-        typeArgCtxProvider = new TypeArgumentContext.Provider();
-        service = new JvmFeatureOverridesService(new SuperTypeCollector(TypesFactory.eINSTANCE), typeArgCtxProvider);
+        Injector injector = Guice.createInjector(getModule());
+        injector.injectMembers(this);
+        typeProvider = injector.getInstance(IJvmTypeProvider.Factory.class).findOrCreateTypeProvider(resourceSet);
+        typeRefs = new JvmTypeReferences(injector.getInstance(TypesFactory.class), typeProvider);
     }
+
+	protected abstract Module getModule();
     
     @Override
     protected void tearDown() throws Exception {
         typeProvider = null;
         typeRefs = null;
+        service = null;
         super.tearDown();
     }
     
