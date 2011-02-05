@@ -119,10 +119,11 @@ public class ContentAssistInBlockTest extends ContentAssistTest implements IJava
 		newBuilder().append("''.toString ").assertText(expect(STRING_OPERATORS, CAST_INSTANCEOF, KEYWORDS, VARIABLE_DECL));
 	}
 	
-	@Override
-	public void testOnStringLiteral_35() throws Exception {
-		newBuilder().append("''.toString .").assertTextAtCursorPosition("g .", 2, expect(STRING_OPERATORS, CAST_INSTANCEOF, KEYWORDS, VARIABLE_DECL));
-	}
+//TODO
+//	@Override
+//	public void testOnStringLiteral_35() throws Exception {
+//		newBuilder().append("''.toString .").assertTextAtCursorPosition("g .", 2, expect(STRING_OPERATORS, CAST_INSTANCEOF, KEYWORDS, VARIABLE_DECL));
+//	}
 	
 	@Override
 	public void testOnStringLiteral_36() throws Exception {
