@@ -21,7 +21,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getFeature <em>Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getTypeArguments <em>Type Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getImplicitReceiver <em>Implicit Receiver</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#isTargetsMemberSyntaxCall <em>Targets Member Syntax Call</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getInvalidFeatureIssueCode <em>Invalid Feature Issue Code</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#isValidFeature <em>Valid Feature</em>}</li>
  * </ul>
@@ -102,33 +101,6 @@ public interface XAbstractFeatureCall extends XExpression
 	void setImplicitReceiver(XFeatureCall value);
 
 	/**
-	 * Returns the value of the '<em><b>Targets Member Syntax Call</b></em>' attribute.
-	 * The default value is <code>"true"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Targets Member Syntax Call</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Targets Member Syntax Call</em>' attribute.
-	 * @see #setTargetsMemberSyntaxCall(boolean)
-	 * @see org.eclipse.xtext.xbase.XbasePackage#getXAbstractFeatureCall_TargetsMemberSyntaxCall()
-	 * @model default="true" transient="true"
-	 * @generated
-	 */
-	boolean isTargetsMemberSyntaxCall();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#isTargetsMemberSyntaxCall <em>Targets Member Syntax Call</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Targets Member Syntax Call</em>' attribute.
-	 * @see #isTargetsMemberSyntaxCall()
-	 * @generated
-	 */
-	void setTargetsMemberSyntaxCall(boolean value);
-
-	/**
 	 * Returns the value of the '<em><b>Invalid Feature Issue Code</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -172,33 +144,17 @@ public interface XAbstractFeatureCall extends XExpression
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	XExpression getActualReceiver();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	EList<XExpression> getActualArguments();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	EList<XExpression> getAllArguments();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @model kind="operation" required="true"
 	 * @generated
 	 */
 	String getConcreteSyntaxFeatureName();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	EList<XExpression> getExplicitArguments();
 
 } // XAbstractFeatureCall

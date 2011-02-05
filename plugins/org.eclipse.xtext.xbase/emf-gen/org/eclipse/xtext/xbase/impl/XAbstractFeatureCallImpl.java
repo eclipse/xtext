@@ -38,7 +38,6 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#getFeature <em>Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#getTypeArguments <em>Type Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#getImplicitReceiver <em>Implicit Receiver</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#isTargetsMemberSyntaxCall <em>Targets Member Syntax Call</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#getInvalidFeatureIssueCode <em>Invalid Feature Issue Code</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#isValidFeature <em>Valid Feature</em>}</li>
  * </ul>
@@ -77,26 +76,6 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * @ordered
 	 */
 	protected XFeatureCall implicitReceiver;
-
-	/**
-	 * The default value of the '{@link #isTargetsMemberSyntaxCall() <em>Targets Member Syntax Call</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isTargetsMemberSyntaxCall()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean TARGETS_MEMBER_SYNTAX_CALL_EDEFAULT = true;
-
-	/**
-	 * The cached value of the '{@link #isTargetsMemberSyntaxCall() <em>Targets Member Syntax Call</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isTargetsMemberSyntaxCall()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean targetsMemberSyntaxCall = TARGETS_MEMBER_SYNTAX_CALL_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getInvalidFeatureIssueCode() <em>Invalid Feature Issue Code</em>}' attribute.
@@ -269,29 +248,6 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isTargetsMemberSyntaxCall()
-	{
-		return targetsMemberSyntaxCall;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTargetsMemberSyntaxCall(boolean newTargetsMemberSyntaxCall)
-	{
-		boolean oldTargetsMemberSyntaxCall = targetsMemberSyntaxCall;
-		targetsMemberSyntaxCall = newTargetsMemberSyntaxCall;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL, oldTargetsMemberSyntaxCall, targetsMemberSyntaxCall));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getInvalidFeatureIssueCode()
 	{
 		return invalidFeatureIssueCode;
@@ -325,43 +281,19 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public XExpression getActualReceiver()
-	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<XExpression> getActualArguments()
-	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<XExpression> getAllArguments()
-	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getConcreteSyntaxFeatureName()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<XExpression> getExplicitArguments()
 	{
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -403,8 +335,6 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 				return getTypeArguments();
 			case XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER:
 				return getImplicitReceiver();
-			case XbasePackage.XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL:
-				return isTargetsMemberSyntaxCall();
 			case XbasePackage.XABSTRACT_FEATURE_CALL__INVALID_FEATURE_ISSUE_CODE:
 				return getInvalidFeatureIssueCode();
 			case XbasePackage.XABSTRACT_FEATURE_CALL__VALID_FEATURE:
@@ -434,9 +364,6 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 			case XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER:
 				setImplicitReceiver((XFeatureCall)newValue);
 				return;
-			case XbasePackage.XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL:
-				setTargetsMemberSyntaxCall((Boolean)newValue);
-				return;
 			case XbasePackage.XABSTRACT_FEATURE_CALL__INVALID_FEATURE_ISSUE_CODE:
 				setInvalidFeatureIssueCode((String)newValue);
 				return;
@@ -463,9 +390,6 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 			case XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER:
 				setImplicitReceiver((XFeatureCall)null);
 				return;
-			case XbasePackage.XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL:
-				setTargetsMemberSyntaxCall(TARGETS_MEMBER_SYNTAX_CALL_EDEFAULT);
-				return;
 			case XbasePackage.XABSTRACT_FEATURE_CALL__INVALID_FEATURE_ISSUE_CODE:
 				setInvalidFeatureIssueCode(INVALID_FEATURE_ISSUE_CODE_EDEFAULT);
 				return;
@@ -489,8 +413,6 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 				return typeArguments != null && !typeArguments.isEmpty();
 			case XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER:
 				return implicitReceiver != null;
-			case XbasePackage.XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL:
-				return targetsMemberSyntaxCall != TARGETS_MEMBER_SYNTAX_CALL_EDEFAULT;
 			case XbasePackage.XABSTRACT_FEATURE_CALL__INVALID_FEATURE_ISSUE_CODE:
 				return INVALID_FEATURE_ISSUE_CODE_EDEFAULT == null ? invalidFeatureIssueCode != null : !INVALID_FEATURE_ISSUE_CODE_EDEFAULT.equals(invalidFeatureIssueCode);
 			case XbasePackage.XABSTRACT_FEATURE_CALL__VALID_FEATURE:
@@ -510,9 +432,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (targetsMemberSyntaxCall: ");
-		result.append(targetsMemberSyntaxCall);
-		result.append(", invalidFeatureIssueCode: ");
+		result.append(" (invalidFeatureIssueCode: ");
 		result.append(invalidFeatureIssueCode);
 		result.append(", validFeature: ");
 		result.append(validFeature);

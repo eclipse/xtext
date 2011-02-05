@@ -348,22 +348,13 @@ public interface XbasePackage extends EPackage
 	int XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER = XEXPRESSION_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Targets Member Syntax Call</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL = XEXPRESSION_FEATURE_COUNT + 3;
-
-	/**
 	 * The feature id for the '<em><b>Invalid Feature Issue Code</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XABSTRACT_FEATURE_CALL__INVALID_FEATURE_ISSUE_CODE = XEXPRESSION_FEATURE_COUNT + 4;
+	int XABSTRACT_FEATURE_CALL__INVALID_FEATURE_ISSUE_CODE = XEXPRESSION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Valid Feature</b></em>' attribute.
@@ -372,7 +363,7 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XABSTRACT_FEATURE_CALL__VALID_FEATURE = XEXPRESSION_FEATURE_COUNT + 5;
+	int XABSTRACT_FEATURE_CALL__VALID_FEATURE = XEXPRESSION_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>XAbstract Feature Call</em>' class.
@@ -381,7 +372,7 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XABSTRACT_FEATURE_CALL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 6;
+	int XABSTRACT_FEATURE_CALL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl <em>XMember Feature Call</em>}' class.
@@ -419,15 +410,6 @@ public interface XbasePackage extends EPackage
 	 * @ordered
 	 */
 	int XMEMBER_FEATURE_CALL__IMPLICIT_RECEIVER = XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER;
-
-	/**
-	 * The feature id for the '<em><b>Targets Member Syntax Call</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XMEMBER_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL = XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL;
 
 	/**
 	 * The feature id for the '<em><b>Invalid Feature Issue Code</b></em>' attribute.
@@ -537,15 +519,6 @@ public interface XbasePackage extends EPackage
 	 * @ordered
 	 */
 	int XFEATURE_CALL__IMPLICIT_RECEIVER = XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER;
-
-	/**
-	 * The feature id for the '<em><b>Targets Member Syntax Call</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XFEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL = XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL;
 
 	/**
 	 * The feature id for the '<em><b>Invalid Feature Issue Code</b></em>' attribute.
@@ -871,15 +844,6 @@ public interface XbasePackage extends EPackage
 	int XBINARY_OPERATION__IMPLICIT_RECEIVER = XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER;
 
 	/**
-	 * The feature id for the '<em><b>Targets Member Syntax Call</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XBINARY_OPERATION__TARGETS_MEMBER_SYNTAX_CALL = XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL;
-
-	/**
 	 * The feature id for the '<em><b>Invalid Feature Issue Code</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -960,15 +924,6 @@ public interface XbasePackage extends EPackage
 	 * @ordered
 	 */
 	int XUNARY_OPERATION__IMPLICIT_RECEIVER = XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER;
-
-	/**
-	 * The feature id for the '<em><b>Targets Member Syntax Call</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XUNARY_OPERATION__TARGETS_MEMBER_SYNTAX_CALL = XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL;
 
 	/**
 	 * The feature id for the '<em><b>Invalid Feature Issue Code</b></em>' attribute.
@@ -1377,15 +1332,6 @@ public interface XbasePackage extends EPackage
 	int XASSIGNMENT__IMPLICIT_RECEIVER = XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER;
 
 	/**
-	 * The feature id for the '<em><b>Targets Member Syntax Call</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XASSIGNMENT__TARGETS_MEMBER_SYNTAX_CALL = XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL;
-
-	/**
 	 * The feature id for the '<em><b>Invalid Feature Issue Code</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1698,17 +1644,6 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	EReference getXAbstractFeatureCall_ImplicitReceiver();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#isTargetsMemberSyntaxCall <em>Targets Member Syntax Call</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Targets Member Syntax Call</em>'.
-	 * @see org.eclipse.xtext.xbase.XAbstractFeatureCall#isTargetsMemberSyntaxCall()
-	 * @see #getXAbstractFeatureCall()
-	 * @generated
-	 */
-	EAttribute getXAbstractFeatureCall_TargetsMemberSyntaxCall();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getInvalidFeatureIssueCode <em>Invalid Feature Issue Code</em>}'.
@@ -2596,14 +2531,6 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER = eINSTANCE.getXAbstractFeatureCall_ImplicitReceiver();
-
-		/**
-		 * The meta object literal for the '<em><b>Targets Member Syntax Call</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute XABSTRACT_FEATURE_CALL__TARGETS_MEMBER_SYNTAX_CALL = eINSTANCE.getXAbstractFeatureCall_TargetsMemberSyntaxCall();
 
 		/**
 		 * The meta object literal for the '<em><b>Invalid Feature Issue Code</b></em>' attribute feature.
