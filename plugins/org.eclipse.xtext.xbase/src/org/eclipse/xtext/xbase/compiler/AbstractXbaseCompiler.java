@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -85,15 +86,15 @@ public abstract class AbstractXbaseCompiler {
 		return obj instanceof XThrowExpression;
 	}
 
-	protected void internalPrepare(EObject obj, IAppendable builder) {
+	protected void internalPrepare(XExpression obj, IAppendable builder) {
 		prepareExpressionDispatcher.invoke(obj, builder);
 	}
 
-	protected void internalToJavaExpression(final EObject obj, final IAppendable appendable) {
+	protected void internalToJavaExpression(final XExpression obj, final IAppendable appendable) {
 		toJavaExprDispatcher.invoke(obj, appendable);
 	}
 
-	protected void internalToJavaStatement(EObject obj, IAppendable builder) {
+	protected void internalToJavaStatement(XExpression obj, IAppendable builder) {
 		toJavaStatementDispatcher.invoke(obj, builder);
 	}
 
@@ -217,7 +218,20 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	protected void declareLocalVariable(XExpression expr, final IAppendable b) {
-		declareLocalVariable(expr, b, "null");
+		declareLocalVariable(expr, b, getDefaultValueLiteral(expr));
+	}
+
+	protected String getDefaultValueLiteral(XExpression expr) {
+		JvmTypeReference type = getTypeProvider().getType(expr);
+		if (type.getType() instanceof JvmPrimitiveType) {
+			String name = type.getCanonicalName();
+			if ("boolean".equals(name)) {
+				return "false";
+			} else {
+				return "("+name+")-1";
+			}
+		}
+		return "null";
 	}
 
 	protected void declareLocalVariable(XExpression expr, final IAppendable b, final String expression) {
