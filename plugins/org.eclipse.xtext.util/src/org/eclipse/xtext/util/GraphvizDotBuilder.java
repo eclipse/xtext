@@ -202,9 +202,11 @@ public abstract class GraphvizDotBuilder {
 	}
 
 	protected String id(Object cls) {
+		if (cls == null)
+			return null;
 		if (cls instanceof EPackage)
 			return "cluster" + cls.hashCode();
-		else if (cls instanceof EObject)
+		if (cls instanceof EObject)
 			return ((EObject) cls).eClass().getName().toLowerCase() + cls.hashCode();
 		return cls.getClass().getSimpleName().toLowerCase() + cls.hashCode();
 	}
