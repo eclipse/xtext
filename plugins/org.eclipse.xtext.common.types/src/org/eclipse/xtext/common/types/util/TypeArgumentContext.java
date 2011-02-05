@@ -139,6 +139,9 @@ public class TypeArgumentContext {
 					if (type instanceof JvmTypeParameter) {
 						JvmTypeReference resolved = TypeArgumentContext.this.getBoundArgument((JvmTypeParameter) type);
 						if (resolved!=null) {
+							if (resolved.getType() == type) {
+								return resolved;
+							}
 							return resolveTypeParameters(resolved);
 						} else {
 							// raw type - return object reference
