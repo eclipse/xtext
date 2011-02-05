@@ -148,6 +148,14 @@ public class GrammarUtil {
 		}
 		return false;
 	}
+	
+	public static boolean isDatatypeRuleCall(EObject grammarElement) {
+		if (grammarElement instanceof RuleCall) {
+			AbstractRule calledRule = ((RuleCall) grammarElement).getRule();
+			return calledRule != null && (calledRule instanceof EDataType);
+		}
+		return false;
+	}
 
 	public static AbstractRule findRuleForName(Grammar grammar, String ruleName) {
 		if (ruleName == null)
@@ -254,6 +262,10 @@ public class GrammarUtil {
 
 	public static boolean isAssigned(EObject e) {
 		return containingAssignment(e) != null;
+	}
+	
+	public static boolean isAssignedAction(EObject e) {
+		return e instanceof Action && ((Action) e).getFeature() != null;
 	}
 
 	public static Set<String> getAllKeywords(Grammar g) {
