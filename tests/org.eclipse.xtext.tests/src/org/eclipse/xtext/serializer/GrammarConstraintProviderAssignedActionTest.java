@@ -35,7 +35,7 @@ import com.google.inject.internal.Join;
 public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTests {
 
 	private static final Logger log = Logger.getLogger(GrammarConstraintProviderAssignedActionTest.class);
-	
+
 	private static class ActionFilter2Dot extends GrammarToDot {
 		protected IGrammarNFAProvider<ActionFilterState, ActionFilterTransition> nfaProvider = new ActionFilterNFAProvider();
 
@@ -103,25 +103,25 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		return Join.join("\n", result);
 	}
 
-	public void testXtext() {
-		IGrammarConstraintProvider gcp = new GrammarConstraintProvider();
-		List<IConstraintContext> ctxts = gcp.getConstraints(getGrammarAccess().getGrammar());
-		try {
-			new ActionFilter2Dot().draw(getGrammarAccess().getGrammar(), getName() + ".pdf", "-T pdf");
-		} catch (IOException e) {
-			if (log.isDebugEnabled())
-				log.debug(e.getMessage(), e);
-		}
-		List<String> result = Lists.newArrayList();
-		Set<IConstraint> visited = Sets.newHashSet();
-		for (IConstraintContext ctx : ctxts) {
-			result.add(ctx.toString());
-			for (IConstraint c : ctx.getConstraints())
-				if (visited.add(c))
-					result.add("  " + c.toString());
-		}
-//		System.out.println(Join.join("\n", result));
-	}
+	//	public void testXtext() {
+	//		IGrammarConstraintProvider gcp = new GrammarConstraintProvider();
+	//		List<IConstraintContext> ctxts = gcp.getConstraints(getGrammarAccess().getGrammar());
+	//		try {
+	//			new ActionFilter2Dot().draw(getGrammarAccess().getGrammar(), getName() + ".pdf", "-T pdf");
+	//		} catch (IOException e) {
+	//			if (log.isDebugEnabled())
+	//				log.debug(e.getMessage(), e);
+	//		}
+	//		List<String> result = Lists.newArrayList();
+	//		Set<IConstraint> visited = Sets.newHashSet();
+	//		for (IConstraintContext ctx : ctxts) {
+	//			result.add(ctx.toString());
+	//			for (IConstraint c : ctx.getConstraints())
+	//				if (visited.add(c))
+	//					result.add("  " + c.toString());
+	//		}
+	//		System.out.println(Join.join("\n", result));
+	//	}
 
 	public void testAssignedActionMandatory1() throws Exception {
 		String actual = getParserRule("Rule: Foo {Bar.left=current} '+' right=ID; Foo: val=ID;");
