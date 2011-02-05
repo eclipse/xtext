@@ -17,7 +17,7 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class LiteralsCompiler extends AbstractXbaseCompiler {
+public class LiteralsCompiler extends TypeConvertingCompiler {
 
 	public void _prepare(XStringLiteral expr, IAppendable b) {
 		//Always inline as expression

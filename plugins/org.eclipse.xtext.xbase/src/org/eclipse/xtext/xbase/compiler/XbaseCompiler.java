@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -261,7 +262,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	public void _toJavaStatement(XForLoopExpression expr, IAppendable b) {
 		internalPrepare(expr.getForExpression(), b);
 		b.append("\nfor (");
-		JvmTypeReference paramType = getIdentifiableTypeProvider().getType(expr.getDeclaredParam());
+		JvmTypeReference paramType = getIdentifiableTypeProvider().getType(expr.getDeclaredParam(), false);
 		b.append(paramType.getCanonicalName());
 		b.append(" ");
 		String varName = declareNameInVariableScope(expr.getDeclaredParam(), b);
@@ -479,11 +480,11 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	@Inject
 	private FunctionConversion functionConversion;
 	@Inject
-	private TypeArgumentContext.Provider ctxProvider;
+	private TypeArgumentContextProvider ctxProvider;
 	
 	protected void _prepare(final XClosure call, final IAppendable b) {
 		JvmTypeReference type = getTypeProvider().getType(call);
-		TypeArgumentContext context = ctxProvider.get(type);
+		TypeArgumentContext context = ctxProvider.getReceiverContext(type);
 		final String serializedForm = getSerializedForm(type);
 		b.append("\n").append("final ").append(serializedForm);
 		b.append(" ");
@@ -498,7 +499,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		EList<JvmFormalParameter> closureParams = call.getFormalParameters();
 		for (Iterator<JvmFormalParameter> iter = closureParams.iterator(); iter.hasNext();) {
 			JvmFormalParameter param = iter.next();
-			final JvmTypeReference parameterType2 = getIdentifiableTypeProvider().getType(param);
+			final JvmTypeReference parameterType2 = getIdentifiableTypeProvider().getType(param, false);
 			final JvmTypeReference parameterType = context.resolve(parameterType2);
 			b.append(getSerializedForm(parameterType)).append(" ");
 			String name = makeJavaIdentifier(b.declareVariable(param, param.getName()));
@@ -518,9 +519,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 	
 	protected void _toJavaExpression(final XClosure call, final IAppendable b) {
-		final JvmTypeReference type = getTypeProvider().getType(call);
-		final JvmTypeReference expectedType = getTypeProvider().getExpectedType(call);
-		doConversion(expectedType, type, b, getJavaVarName(call, b)).exec();
+		b.append(getJavaVarName(call, b));
 	}
 	
 	protected void _toJavaStatement(XClosure call, IAppendable b) {
