@@ -156,8 +156,7 @@ public class LazyLinkingResource extends XtextResource {
 				Triple<EObject, EReference, INode> triple = getEncoder().decode(this, uriFragment);
 				try {
 					if (!resolving.add(triple))
-						throw new AssertionError("Cyclic resolution of lazy links : "
-								+ getReferences(triple, resolving));
+						return handleCyclicResolution(triple);
 					Set<String> unresolveableProxies = getCache().get("UNRESOLVEABLE_PROXIES", this,
 							new Provider<Set<String>>() {
 								public Set<String> get() {
@@ -203,7 +202,12 @@ public class LazyLinkingResource extends XtextResource {
 		return super.getEObject(uriFragment);
 	}
 
-	private String getReferences(Triple<EObject, EReference, INode> triple,
+	protected EObject handleCyclicResolution(Triple<EObject, EReference, INode> triple) throws AssertionError {
+		throw new AssertionError("Cyclic resolution of lazy links : "
+				+ getReferences(triple, resolving));
+	}
+
+	protected String getReferences(Triple<EObject, EReference, INode> triple,
 			LinkedHashSet<Triple<EObject, EReference, INode>> resolving2) {
 		StringBuffer buffer = new StringBuffer();
 		boolean found = false;
