@@ -43,19 +43,14 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XAbstractFeatureCall" abstract="true"
       eSuperTypes="#//XExpression">
-    <eOperations name="getActualReceiver" eType="#//XExpression"/>
-    <eOperations name="getActualArguments" upperBound="-1" eType="#//XExpression"/>
-    <eOperations name="getAllArguments" upperBound="-1" eType="#//XExpression"/>
     <eOperations name="getConcreteSyntaxFeatureName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getExplicitArguments" upperBound="-1" eType="#//XExpression"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmIdentifiableElement"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeArguments" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="implicitReceiver" eType="#//XFeatureCall"
         transient="true" derived="true" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetsMemberSyntaxCall"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" transient="true"
-        defaultValueLiteral="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="invalidFeatureIssueCode"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" transient="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="validFeature" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"

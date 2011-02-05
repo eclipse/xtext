@@ -11,24 +11,22 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.XExpression;
 
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XFeatureCallImplCustom extends XFeatureCallImpl {
 	
 	@Override
-	public EList<XExpression> getAllArguments() {
-		EList<XExpression> result = new BasicEList<XExpression>();
-		if (getImplicitReceiver()!=null) {
-			result.add(getImplicitReceiver());
-		}
-		result.addAll(getFeatureCallArguments());
-		return result;
+	public String toString() {
+		return getConcreteSyntaxFeatureName()+getExpressionsAsString(getFeatureCallArguments(),isExplicitOperationCall());
 	}
 	
 	@Override
-	public String toString() {
-		return getConcreteSyntaxFeatureName()+getExpressionsAsString(getFeatureCallArguments(),isExplicitOperationCall());
+	public EList<XExpression> getExplicitArguments() {
+		BasicEList<XExpression> result = new BasicEList<XExpression>();
+		result.addAll(getFeatureCallArguments());
+		return result;
 	}
 	
 }

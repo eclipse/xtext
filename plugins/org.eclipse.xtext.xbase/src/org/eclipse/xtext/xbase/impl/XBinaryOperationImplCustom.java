@@ -11,24 +11,24 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.XExpression;
 
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XBinaryOperationImplCustom extends XBinaryOperationImpl {
 	
 	@Override
-	public EList<XExpression> getAllArguments() {
-		EList<XExpression> result = new BasicEList<XExpression>(3);
-		if (getImplicitReceiver()!=null) {
-			result.add(getImplicitReceiver());
-		}
-		result.add(getLeftOperand());
-		result.add(getRightOperand());
-		return result;
-	}
-
-	@Override
 	public String toString() {
 		return getExpressionAsString(getLeftOperand())+" "+getConcreteSyntaxFeatureName()+" "+getExpressionAsString(getLeftOperand());
+	}
+	
+	@Override
+	public EList<XExpression> getExplicitArguments() {
+		BasicEList<XExpression> result = new BasicEList<XExpression>();
+		if (getLeftOperand()!=null)
+			result.add(getLeftOperand());
+		if (getRightOperand()!=null)
+			result.add(getRightOperand());
+		return result;
 	}
 }

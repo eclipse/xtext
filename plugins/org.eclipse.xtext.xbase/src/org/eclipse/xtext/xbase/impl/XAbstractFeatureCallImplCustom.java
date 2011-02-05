@@ -10,10 +10,7 @@ package org.eclipse.xtext.xbase.impl;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -64,47 +61,11 @@ public class XAbstractFeatureCallImplCustom extends XAbstractFeatureCallImpl {
 		return "<"+x.getClass().getSimpleName()+">";
 	}
 
-	protected boolean isStaticJavaFeature(JvmIdentifiableElement feature) {
-		if (feature instanceof JvmOperation) {
-			return ((JvmOperation) feature).isStatic();
-		}
-		return false;
-	}
-	
-	@Override
-	public XExpression getActualReceiver() {
-		if (isStaticJavaFeature(getFeature())) {
-			return null;
-		}
-		final List<XExpression> allArguments = getAllArguments();
-		if (allArguments.isEmpty())
-			return null;
-		return allArguments.get(0);
-	}
-	
-	@Override
-	public EList<XExpression> getActualArguments() {
-		final List<XExpression> allArguments = getAllArguments();
-		if (isStaticJavaFeature(getFeature())) {
-			return new BasicEList<XExpression>(allArguments);
-		}
-		if (allArguments.size()<=1)
-			return new BasicEList<XExpression>(0);
-		return new BasicEList<XExpression>(allArguments.subList(1, allArguments.size()));
-	}
-	
 	@Override
 	public XFeatureCall getImplicitReceiver() {
 		if (!isFeatureLinked())
 			return null;
 		return super.getImplicitReceiver();
-	}
-	
-	@Override
-	public boolean isTargetsMemberSyntaxCall() {
-		if (!isFeatureLinked())
-			return true;
-		return super.isTargetsMemberSyntaxCall();
 	}
 	
 	/**
