@@ -12,6 +12,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.serializer.impl.GrammarConstraintProvider;
+import org.eclipse.xtext.util.Pair;
 
 import com.google.inject.ImplementedBy;
 
@@ -46,6 +47,7 @@ public interface IGrammarConstraintProvider {
 		ASSIGNED_DATATYPE_RULE_CALL, //
 		ASSIGNED_ENUM_RULE_CALL, //
 		ASSIGNED_KEYWORD, //
+		ASSIGNED_BOOLEAN_KEYWORD, //
 		ASSIGNED_PARSER_RULE_CALL, //
 		ASSIGNED_TERMINAL_RULE_CALL, //
 		GROUP, //
@@ -88,6 +90,10 @@ public interface IGrammarConstraintProvider {
 		 *         {@link EStructuralFeature} in this constraint, the array's item is null.
 		 */
 		IFeatureInfo[] getFeatures();
+
+		Iterable<IFeatureInfo> getSingleAssignementFeatures();
+
+		Iterable<IFeatureInfo> getMultiAssignementFeatures();
 
 		/**
 		 * @return a name that is unique for a grammar and that aims to be human-readable.
@@ -173,7 +179,11 @@ public interface IGrammarConstraintProvider {
 
 		ConstraintElementType getType();
 
-		public boolean isCardinalityOneForFeature();
+		List<Pair<IConstraintElement, AssignmentDependencyKind>> getDependingAssignment();
+
+		List<IConstraintElement> getContainedAssignments();
+
+		boolean isCardinalityOneAmongAssignments(List<IConstraintElement> assignments);
 
 		boolean isMany();
 
@@ -183,6 +193,8 @@ public interface IGrammarConstraintProvider {
 		boolean isManyRecursive(IConstraintElement root);
 
 		boolean isOptional();
+
+		boolean isRoot();
 
 		/**
 		 * @return true, if this element or one of its containers is optional. Also true, if one of the containers is an
@@ -204,6 +216,38 @@ public interface IGrammarConstraintProvider {
 		 *         refer to different keywords, rulecalls or cross references.
 		 */
 		boolean isContentValidationNeeded();
+	}
+
+	enum AssignmentDependencyKind {
+		/**
+		 * (b >= 1) => (a == 0)
+		 */
+		EXCLUDE_IF_SET,
+
+		/**
+		 * (b == 0) => (a == 0)
+		 */
+		EXCLUDE_IF_UNSET,
+
+		/**
+		 * (b >= 1) => (a >= 0)
+		 */
+		MANDATORY_IF_SET,
+
+		/**
+		 * a == b
+		 */
+		SAME,
+
+		/**
+		 * a => b
+		 */
+		SAME_OR_MORE,
+
+		/**
+		 * a => b
+		 */
+		SAME_OR_LESS
 	}
 
 	final int MAX = Integer.MAX_VALUE;

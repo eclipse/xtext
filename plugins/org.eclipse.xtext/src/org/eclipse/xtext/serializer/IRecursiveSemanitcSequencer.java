@@ -8,29 +8,15 @@
 package org.eclipse.xtext.serializer;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.serializer.impl.RecursiveSemanticSequencer;
+
+import com.google.inject.ImplementedBy;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface ISerializationDiagnostic {
-
-	public interface Acceptor {
-		void accept(ISerializationDiagnostic diagnostic);
-	}
-
-	public class ExceptionThrowingAcceptor implements Acceptor {
-		public void accept(ISerializationDiagnostic diagnostic) {
-			if (diagnostic == null || diagnostic.getMessage() == null)
-				throw new RuntimeException();
-			throw new RuntimeException(diagnostic.getMessage());
-		}
-	}
-
-	public Acceptor EXCEPTION_ACCEPTOR = new ExceptionThrowingAcceptor();
-
-	boolean breaksSyntax();
-
-	String getMessage();
-
-	EObject getSemanitcObject();
+@ImplementedBy(RecursiveSemanticSequencer.class)
+public interface IRecursiveSemanitcSequencer {
+	void createSequence(ISemanticSequencer delegate, EObject context, EObject semanticObject,
+			IRecursiveSemanticSequenceAcceptor sequenceAcceptor, ISerializationDiagnostic.Acceptor errorAcceptor);
 }
