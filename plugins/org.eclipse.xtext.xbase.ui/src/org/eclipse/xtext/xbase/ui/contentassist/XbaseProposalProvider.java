@@ -21,11 +21,14 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
+import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -37,6 +40,9 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 	
 	@Inject
 	private ValidFeatureDescription featureDescriptionPredicate;
+	
+	@Inject
+	private XbaseGrammarAccess grammarAccess;
 	
 	public static class ValidFeatureDescription implements Predicate<IEObjectDescription> {
 
@@ -59,20 +65,18 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 	public void completeJvmParameterizedTypeReference_Type(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		if (context.getPrefix().length() > 0) {
-			if (!Character.isJavaIdentifierStart(context.getPrefix().charAt(0)))
-				return;
+			if (Character.isJavaIdentifierStart(context.getPrefix().charAt(0)))
+				super.completeJvmParameterizedTypeReference_Type(model, assignment, context, acceptor);
 		}
-		super.completeJvmParameterizedTypeReference_Type(model, assignment, context, acceptor);
 	}
 	
 	@Override
 	public void completeXTypeLiteral_Type(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		if (context.getPrefix().length() > 0) {
-			if (!Character.isJavaIdentifierStart(context.getPrefix().charAt(0)))
-				return;
+			if (Character.isJavaIdentifierStart(context.getPrefix().charAt(0)))
+				super.completeXTypeLiteral_Type(model, assignment, context, acceptor);
 		}
-		super.completeXTypeLiteral_Type(model, assignment, context, acceptor);
 	}
 	
 	@Override
@@ -109,6 +113,58 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 		lookupCrossReference(crossReference, contentAssistContext, acceptor, featureDescriptionPredicate);
 	}
 	
+	@Override
+	public void completeXAssignment_Feature(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		if (assignment == grammarAccess.getXAssignmentAccess().getFeatureAssignment_1_1_0_0_1())
+			super.completeXAssignment_Feature(model, assignment, context, acceptor);
+	}
+	
+	@Override
+	public void completeXFeatureCall_Feature(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		if (model instanceof XBlockExpression) {
+			XBlockExpression block = (XBlockExpression) model;
+			if (!block.getExpressions().isEmpty()) {
+				EObject previousModel = context.getPreviousModel();
+				if (context.getPreviousModel() == model) {
+					for(XExpression expression: block.getExpressions()) {
+						ICompositeNode node = NodeModelUtils.findActualNodeFor(expression);
+						if (node.getOffset() >= context.getOffset())
+							break;
+						previousModel = expression;
+					}
+				} else {
+					while(previousModel.eContainer() != block) {
+						previousModel = previousModel.eContainer();
+					}
+				}
+				int idx = block.getExpressions().indexOf(previousModel);
+				createBlockProposals(block, idx + 1, context, acceptor);
+				return;
+			}
+		} 
+		if (model instanceof XExpression || model instanceof XCatchClause)
+			createLocalVariableAndImplicitProposals(model, context, acceptor);
+	}
+	
+	@Override
+	public void completeXBlockExpression_Expressions(EObject model, Assignment assignment,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		super.completeXBlockExpression_Expressions(model, assignment, context, acceptor);
+		if (!(model instanceof XBlockExpression)) {
+			EObject local = model;
+			while(!(local.eContainer() instanceof XBlockExpression)) {
+				local = local.eContainer();
+				if (local == null)
+					return;
+			}
+			XBlockExpression block = (XBlockExpression) local.eContainer();
+			int idx = block.getExpressions().indexOf(local);
+			createBlockProposals(block, idx + 1, context, acceptor);
+		}
+	}
+	
 	/**
 	 * Customized to be able to treat binary operations in a special way with respect to scoping.
 	 * Since the operator is a cross reference, we have to be careful to choose the right context for
@@ -142,7 +198,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 						return;
 					}
 				}
-			} 
+			}
 			super.lookupCrossReference(crossReference, reference, contentAssistContext, acceptor, filter);
 			return;
 		}
@@ -171,8 +227,34 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 			createReceiverProposals((XExpression) contentAssistContext.getPreviousModel(), crossReference, reference, contentAssistContext,	acceptor, filter);
 		} else {
 			super.lookupCrossReference(crossReference, reference, contentAssistContext, acceptor, filter);
-			return;
 		}
+	}
+	
+	protected void createBlockProposals(EObject context, int idx, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
+		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory("ID", contentAssistContext);
+		IScope scope = getScopeProvider().createSimpleFeatureCallScope(context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, true, idx);
+		createProposalsForScope(acceptor, featureDescriptionPredicate, proposalFactory, scope);
+	}
+	
+	/**
+	 * Create proposal for {@link XAbstractFeatureCall#getFeature() simple feature calls} that use an <code>ID</code>
+	 * as concrete syntax.
+	 */
+	protected void createLocalVariableAndImplicitProposals(EObject context, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
+		createBlockProposals(context, -1, contentAssistContext, acceptor);
+	}
+
+	protected void createProposalsForScope(ICompletionProposalAcceptor acceptor, Predicate<IEObjectDescription> filter,
+			Function<IEObjectDescription, ICompletionProposal> proposalFactory, IScope scope) {
+		Iterable<IEObjectDescription> candidates = scope.getAllElements();
+		for (IEObjectDescription candidate : candidates) {
+			if (!acceptor.canAcceptMoreProposals())
+				return;
+			if (filter.apply(candidate)) {
+				acceptor.accept(proposalFactory.apply(candidate));
+			}
+		}
+		return;
 	}
 
 	protected void createReceiverProposals(XExpression receiver, CrossReference crossReference,
@@ -184,15 +266,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 		}
 		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory(ruleName, contentAssistContext);
 		IScope scope = getScopeProvider().createFeatureCallScopeForReceiver(receiver, receiver, reference);
-		Iterable<IEObjectDescription> candidates = scope.getAllElements();
-		for (IEObjectDescription candidate : candidates) {
-			if (!acceptor.canAcceptMoreProposals())
-				return;
-			if (filter.apply(candidate)) {
-				acceptor.accept(proposalFactory.apply(candidate));
-			}
-		}
-		return;
+		createProposalsForScope(acceptor, filter, proposalFactory, scope);
 	}
 
 	protected boolean doNotProposeFeatureOfBinaryOperation(ContentAssistContext contentAssistContext,
