@@ -66,7 +66,7 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	public String text(XtendFunction element) {
-		JvmTypeReference returnType = identifiableTypeProvider.getType(element);
+		JvmTypeReference returnType = identifiableTypeProvider.getType(element, false);
 		return element.getName() + uiStrings.parameters(element.getInferredJvmMember()) + " : "
 				+ ((returnType != null) ? returnType.getCanonicalName() : "void");
 	}

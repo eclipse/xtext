@@ -21,11 +21,11 @@ public class Xtend2TypeProvider extends XExpressionTypeProvider {
 		return null;
 	}
 	
-	protected JvmTypeReference _type(RichString richString) {
+	protected JvmTypeReference _type(RichString richString, boolean selfContained) {
 		return getTypesService().getTypeForName(StringConcatenation.class, richString);
 	}
 	
-	protected JvmTypeReference _type(RichStringLiteral stringLiteral) {
+	protected JvmTypeReference _type(RichStringLiteral stringLiteral, boolean selfContained) {
 		return getTypesService().getTypeForName(String.class, stringLiteral);
 	}
 	

@@ -20,7 +20,7 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef;
 public class ParserTest extends AbstractXtend2TestCase {
 	
 	public void testFunction_0() throws Exception {
-		XtendFunction func = function("foo() bar");
+		XtendFunction func = function("foo() foo");
 		assertEquals("foo", func.getName());
 		assertTrue(func.getExpression() instanceof XFeatureCall);
 		assertEquals(0, func.getParameters().size());
@@ -29,7 +29,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 
 	public void testFunction_1() throws Exception {
-		XtendFunction func = function("String foo() bar");
+		XtendFunction func = function("String foo() foo");
 		assertEquals("foo", func.getName());
 		assertTrue(func.getExpression() instanceof XFeatureCall);
 		assertEquals(0, func.getParameters().size());
@@ -38,7 +38,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 
 	public void testFunction_2() throws Exception {
-		XtendFunction func = function("foo(String s) bar");
+		XtendFunction func = function("foo(String s) s");
 		assertEquals("foo", func.getName());
 		assertTrue(func.getExpression() instanceof XFeatureCall);
 		assertEquals(1, func.getParameters().size());
@@ -49,7 +49,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 
 	public void testFunction_3() throws Exception {
-		XtendFunction func = function("foo(String s, Integer i) bar");
+		XtendFunction func = function("foo(String s, Integer i) s");
 		assertEquals("foo", func.getName());
 		assertTrue(func.getExpression() instanceof XFeatureCall);
 		assertEquals(2, func.getParameters().size());
@@ -62,7 +62,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 
 	public void testFunction_4() throws Exception {
-		XtendFunction func = function("foo() bar");
+		XtendFunction func = function("foo() foo");
 		assertEquals("foo", func.getName());
 		assertTrue(func.getExpression() instanceof XFeatureCall);
 		assertEquals(0, func.getParameters().size());
@@ -73,7 +73,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 
 
 	public void testTypeParams_1() throws Exception {
-		XtendFunction func = function("<T> foo(T t) bar");
+		XtendFunction func = function("<T> foo(T t) t");
 		assertEquals(1, func.getTypeParameters().size());
 		JvmTypeParameter tp = func.getTypeParameters().get(0);
 		assertEquals("T", tp.getName());
@@ -81,7 +81,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 
 	public void testTypeParams_2() throws Exception {
-		XtendFunction func = function("<T extends Bar> foo(T t) bar");
+		XtendFunction func = function("<T extends Bar> foo(T t) t");
 		assertEquals(1, func.getTypeParameters().size());
 		JvmTypeParameter tp = func.getTypeParameters().get(0);
 		assertEquals("T", tp.getName());
@@ -90,7 +90,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 
 	public void testTypeParams_3() throws Exception {
-		XtendFunction func = function("<T extends Foo & Bar> foo(T t) bar");
+		XtendFunction func = function("<T extends Foo & Bar> foo(T t) t");
 		assertEquals(1, func.getTypeParameters().size());
 		JvmTypeParameter tp = func.getTypeParameters().get(0);
 		assertEquals("T", tp.getName());
@@ -101,7 +101,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 
 	public void testTypeParams_4() throws Exception {
-		XtendFunction func = function("<T super Foo> foo(T t) bar");
+		XtendFunction func = function("<T super Foo> foo(T t) t");
 		assertEquals(1, func.getTypeParameters().size());
 		JvmTypeParameter tp = func.getTypeParameters().get(0);
 		assertEquals("T", tp.getName());
@@ -127,8 +127,8 @@ public class ParserTest extends AbstractXtend2TestCase {
 	public void testUnambiguity_00() throws Exception {
 		XtendClass clazz = clazz("package x\n" +
 			"class Foo {\n" +
-			"  String x(Foo bar) String\n" +
-			"  x(Baz x) baz\n" +
+			"  String x(String bar) String\n" +
+			"  String(String x) x\n" +
 			"}");
 		XtendFunction f1 = (XtendFunction) clazz.getMembers().get(0);
 		XtendFunction f2 = (XtendFunction) clazz.getMembers().get(1);

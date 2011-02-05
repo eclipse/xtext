@@ -3,15 +3,21 @@
  */
 package org.eclipse.xtext.xtend2;
 
+import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.linking.ILinker;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.xbase.XbaseQualifiedNameConverter;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider;
+import org.eclipse.xtext.xbase.resource.XbaseResource;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
+import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 import org.eclipse.xtext.xtend2.conversion.Xtend2ValueConverterService;
 import org.eclipse.xtext.xtend2.featurecalls.Xtend2IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xtend2.featurecalls.Xtend2IdentifiableTypeProvider;
@@ -33,6 +39,26 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 	public Class<? extends IXExpressionTypeProvider> bindIXExpressionTypeProvider() {
 		return Xtend2TypeProvider.class;
 	}
+	
+	@Override
+	public Class<? extends XtextResource> bindXtextResource() {
+		return XbaseResource.class;
+	}
+	
+	@Override
+	public Class<? extends IdentifiableTypeProvider> bindIdentifiableTypeProvider() {
+		return Xtend2IdentifiableTypeProvider.class;
+	}
+
+	@Override
+	public Class<? extends IJvmTypeConformanceComputer> bindIJvmTypeConformanceComputer() {
+		return XbaseTypeConformanceComputer.class;
+	}
+
+	@Override
+	public Class<? extends IQualifiedNameConverter> bindIQualifiedNameConverter() {
+		return XbaseQualifiedNameConverter.class;
+	}
 
 	@Override
 	public Class<? extends IValueConverterService> bindIValueConverterService() {
@@ -43,11 +69,6 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 	public void configureIScopeProviderDelegate(Binder binder) {
 		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
 		.to(Xtend2ImportedNamespaceScopeProvider.class);
-	}
-
-	@Override
-	public Class<? extends IdentifiableTypeProvider> bindIdentifiableTypeProvider() {
-		return Xtend2IdentifiableTypeProvider.class;
 	}
 
 	@Override

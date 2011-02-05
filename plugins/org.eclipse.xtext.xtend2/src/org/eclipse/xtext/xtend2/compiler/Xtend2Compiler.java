@@ -76,7 +76,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 	protected void compile(XtendFunction obj, IAppendable appendable) {
 		//TODO typeparams, exceptions
-		JvmTypeReference returnType = getIdentifiableTypeProvider().getType(obj);
+		JvmTypeReference returnType = getIdentifiableTypeProvider().getType(obj, false);
 		appendable.append("\n\n").append("public ").append(returnType.getCanonicalName()).append(" ").append(obj.getName()).append("(");
 		final int numParams = obj.getParameters().size();
 		for (int i = 0; i < numParams; i++) {
@@ -184,7 +184,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 			appendable.append("{").increaseIndentation().append("\n");
 			internalPrepare(expression, appendable);
 			appendable.append("for(");
-			JvmTypeReference paramType = getIdentifiableTypeProvider().getType(parameter);
+			JvmTypeReference paramType = getIdentifiableTypeProvider().getType(parameter, false);
 			appendable.append(paramType.getCanonicalName());
 			appendable.append(" ");
 			String loopParam = declareNameInVariableScope(parameter, appendable);

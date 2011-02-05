@@ -12,7 +12,6 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.linking.lazy.LazyLinker;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
@@ -50,8 +49,9 @@ public class Xtend2LazyLinker extends LazyLinker {
 		super.afterModelLinked(model, diagnosticsConsumer);
 		XtendClass xtendClass = getXtendClass(model);
 		if (xtendClass != null) {
-			JvmType inferredJvmType = jvmModelInferrer.inferJvmGenericType(xtendClass);
+			JvmGenericType inferredJvmType = jvmModelInferrer.inferJvmGenericType(xtendClass);
 			model.eResource().getContents().add(inferredJvmType);
+			jvmModelInferrer.computeInferredReturnTypes(inferredJvmType);
 		}
 	}
 
