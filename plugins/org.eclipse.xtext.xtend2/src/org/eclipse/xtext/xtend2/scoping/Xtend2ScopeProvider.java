@@ -62,7 +62,7 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 	}
 
 	@Override
-	protected IScope createLocalVarScope(EObject context, EReference reference, IScope parent) {
+	protected IScope createLocalVarScope(EObject context, EReference reference, IScope parent, boolean includeCurrentBlock, int idx) {
 		if (context instanceof XtendClass) {
 			return new SimpleScope(parent, singleton(EObjectDescription.create(THIS, context)));
 		} else if (context instanceof XtendFunction) {
@@ -73,9 +73,9 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 				IEObjectDescription desc = createIEObjectDescription(jvmFormalParameter);
 				descriptions.add(desc);
 			}
-			return MapBasedScope.createScope(super.createLocalVarScope(context, reference, parent), descriptions);
+			return MapBasedScope.createScope(super.createLocalVarScope(context, reference, parent, includeCurrentBlock, idx), descriptions);
 		}
-		return super.createLocalVarScope(context, reference, parent);
+		return super.createLocalVarScope(context, reference, parent, includeCurrentBlock, idx);
 	}
 
 	protected IEObjectDescription createIEObjectDescription(JvmFormalParameter jvmFormalParameter) {
