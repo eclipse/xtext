@@ -30,6 +30,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX13 <em>X13</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX14 <em>X14</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX15 <em>X15</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX19 <em>X19</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX20 <em>X20</em>}</li>
  * </ul>
  * </p>
  *
@@ -428,5 +430,57 @@ public interface Model extends EObject
    * @generated
    */
   void setX15(SingleContainmentReference value);
+
+  /**
+   * Returns the value of the '<em><b>X19</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X19</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X19</em>' containment reference.
+   * @see #setX19(DependentAlternative1)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X19()
+   * @model containment="true"
+   * @generated
+   */
+  DependentAlternative1 getX19();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX19 <em>X19</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X19</em>' containment reference.
+   * @see #getX19()
+   * @generated
+   */
+  void setX19(DependentAlternative1 value);
+
+  /**
+   * Returns the value of the '<em><b>X20</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X20</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X20</em>' containment reference.
+   * @see #setX20(DependentAlternative2)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X20()
+   * @model containment="true"
+   * @generated
+   */
+  DependentAlternative2 getX20();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX20 <em>X20</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X20</em>' containment reference.
+   * @see #getX20()
+   * @generated
+   */
+  void setX20(DependentAlternative2 value);
 
 } // Model

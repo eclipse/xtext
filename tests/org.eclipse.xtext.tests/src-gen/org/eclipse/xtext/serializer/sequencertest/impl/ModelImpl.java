@@ -18,6 +18,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.xtext.serializer.sequencertest.AltList1;
 import org.eclipse.xtext.serializer.sequencertest.AltList2;
 import org.eclipse.xtext.serializer.sequencertest.AlternativeMultiplicities;
+import org.eclipse.xtext.serializer.sequencertest.DependentAlternative1;
+import org.eclipse.xtext.serializer.sequencertest.DependentAlternative2;
 import org.eclipse.xtext.serializer.sequencertest.GroupMultiplicities;
 import org.eclipse.xtext.serializer.sequencertest.List1;
 import org.eclipse.xtext.serializer.sequencertest.List2;
@@ -52,6 +54,8 @@ import org.eclipse.xtext.serializer.sequencertest.SingleEnum;
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX13 <em>X13</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX14 <em>X14</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX15 <em>X15</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX19 <em>X19</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX20 <em>X20</em>}</li>
  * </ul>
  * </p>
  *
@@ -208,6 +212,26 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected SingleContainmentReference x15;
+
+  /**
+   * The cached value of the '{@link #getX19() <em>X19</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX19()
+   * @generated
+   * @ordered
+   */
+  protected DependentAlternative1 x19;
+
+  /**
+   * The cached value of the '{@link #getX20() <em>X20</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX20()
+   * @generated
+   * @ordered
+   */
+  protected DependentAlternative2 x20;
 
   /**
    * <!-- begin-user-doc -->
@@ -955,6 +979,102 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public DependentAlternative1 getX19()
+  {
+    return x19;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX19(DependentAlternative1 newX19, NotificationChain msgs)
+  {
+    DependentAlternative1 oldX19 = x19;
+    x19 = newX19;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X19, oldX19, newX19);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX19(DependentAlternative1 newX19)
+  {
+    if (newX19 != x19)
+    {
+      NotificationChain msgs = null;
+      if (x19 != null)
+        msgs = ((InternalEObject)x19).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X19, null, msgs);
+      if (newX19 != null)
+        msgs = ((InternalEObject)newX19).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X19, null, msgs);
+      msgs = basicSetX19(newX19, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X19, newX19, newX19));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DependentAlternative2 getX20()
+  {
+    return x20;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX20(DependentAlternative2 newX20, NotificationChain msgs)
+  {
+    DependentAlternative2 oldX20 = x20;
+    x20 = newX20;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X20, oldX20, newX20);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX20(DependentAlternative2 newX20)
+  {
+    if (newX20 != x20)
+    {
+      NotificationChain msgs = null;
+      if (x20 != null)
+        msgs = ((InternalEObject)x20).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X20, null, msgs);
+      if (newX20 != null)
+        msgs = ((InternalEObject)newX20).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X20, null, msgs);
+      msgs = basicSetX20(newX20, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X20, newX20, newX20));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -990,6 +1110,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return basicSetX14(null, msgs);
       case SequencertestPackage.MODEL__X15:
         return basicSetX15(null, msgs);
+      case SequencertestPackage.MODEL__X19:
+        return basicSetX19(null, msgs);
+      case SequencertestPackage.MODEL__X20:
+        return basicSetX20(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -1034,6 +1158,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return getX14();
       case SequencertestPackage.MODEL__X15:
         return getX15();
+      case SequencertestPackage.MODEL__X19:
+        return getX19();
+      case SequencertestPackage.MODEL__X20:
+        return getX20();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -1092,6 +1220,12 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return;
       case SequencertestPackage.MODEL__X15:
         setX15((SingleContainmentReference)newValue);
+        return;
+      case SequencertestPackage.MODEL__X19:
+        setX19((DependentAlternative1)newValue);
+        return;
+      case SequencertestPackage.MODEL__X20:
+        setX20((DependentAlternative2)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -1152,6 +1286,12 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case SequencertestPackage.MODEL__X15:
         setX15((SingleContainmentReference)null);
         return;
+      case SequencertestPackage.MODEL__X19:
+        setX19((DependentAlternative1)null);
+        return;
+      case SequencertestPackage.MODEL__X20:
+        setX20((DependentAlternative2)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -1196,6 +1336,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return x14 != null;
       case SequencertestPackage.MODEL__X15:
         return x15 != null;
+      case SequencertestPackage.MODEL__X19:
+        return x19 != null;
+      case SequencertestPackage.MODEL__X20:
+        return x20 != null;
     }
     return super.eIsSet(featureID);
   }

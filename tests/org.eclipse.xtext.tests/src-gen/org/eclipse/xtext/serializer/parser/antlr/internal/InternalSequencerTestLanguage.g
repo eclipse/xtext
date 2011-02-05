@@ -419,6 +419,44 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX19DependentAlternative1ParserRuleCall_18_0()); 
+	    }
+		lv_x19_18_0=ruleDependentAlternative1		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x19",
+        		lv_x19_18_0, 
+        		"DependentAlternative1");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX20DependentAlternative2ParserRuleCall_19_0()); 
+	    }
+		lv_x20_19_0=ruleDependentAlternative2		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x20",
+        		lv_x20_19_0, 
+        		"DependentAlternative2");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 ))
 ;
 
@@ -2179,6 +2217,178 @@ ruleMultiTerminals returns [EObject current=null]
 
 )
 ))
+;
+
+
+
+
+
+// Entry rule entryRuleDependentAlternative1
+entryRuleDependentAlternative1 returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getDependentAlternative1Rule()); }
+	 iv_ruleDependentAlternative1=ruleDependentAlternative1 
+	 { $current=$iv_ruleDependentAlternative1.current; } 
+	 EOF 
+;
+
+// Rule DependentAlternative1
+ruleDependentAlternative1 returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#19' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getDependentAlternative1Access().getNumberSignDigitOneDigitNineKeyword_0());
+    }
+((
+(
+		lv_val_1_0=RULE_ID
+		{
+			newLeafNode(lv_val_1_0, grammarAccess.getDependentAlternative1Access().getValIDTerminalRuleCall_1_0_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getDependentAlternative1Rule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val",
+        		lv_val_1_0, 
+        		"ID");
+	    }
+
+)
+)
+    |((
+(
+		lv_val_2_0=RULE_ID
+		{
+			newLeafNode(lv_val_2_0, grammarAccess.getDependentAlternative1Access().getValIDTerminalRuleCall_1_1_0_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getDependentAlternative1Rule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val",
+        		lv_val_2_0, 
+        		"ID");
+	    }
+
+)
+)(
+(
+		lv_flag_3_0=	'kw1' 
+    {
+        newLeafNode(lv_flag_3_0, grammarAccess.getDependentAlternative1Access().getFlagKw1Keyword_1_1_1_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getDependentAlternative1Rule());
+	        }
+       		setWithLastConsumed($current, "flag", true, "kw1");
+	    }
+
+)
+))))
+;
+
+
+
+
+
+// Entry rule entryRuleDependentAlternative2
+entryRuleDependentAlternative2 returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getDependentAlternative2Rule()); }
+	 iv_ruleDependentAlternative2=ruleDependentAlternative2 
+	 { $current=$iv_ruleDependentAlternative2.current; } 
+	 EOF 
+;
+
+// Rule DependentAlternative2
+ruleDependentAlternative2 returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#20' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getDependentAlternative2Access().getNumberSignDigitTwoDigitZeroKeyword_0());
+    }
+(((
+(
+		lv_val_1_0=RULE_ID
+		{
+			newLeafNode(lv_val_1_0, grammarAccess.getDependentAlternative2Access().getValIDTerminalRuleCall_1_0_0_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getDependentAlternative2Rule());
+	        }
+       		addWithLastConsumed(
+       			$current, 
+       			"val",
+        		lv_val_1_0, 
+        		"ID");
+	    }
+
+)
+)(
+(
+		lv_val_2_0=RULE_ID
+		{
+			newLeafNode(lv_val_2_0, grammarAccess.getDependentAlternative2Access().getValIDTerminalRuleCall_1_0_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getDependentAlternative2Rule());
+	        }
+       		addWithLastConsumed(
+       			$current, 
+       			"val",
+        		lv_val_2_0, 
+        		"ID");
+	    }
+
+)
+)+)
+    |((
+(
+		lv_val_3_0=RULE_ID
+		{
+			newLeafNode(lv_val_3_0, grammarAccess.getDependentAlternative2Access().getValIDTerminalRuleCall_1_1_0_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getDependentAlternative2Rule());
+	        }
+       		addWithLastConsumed(
+       			$current, 
+       			"val",
+        		lv_val_3_0, 
+        		"ID");
+	    }
+
+)
+)+(
+(
+		lv_flag_4_0=	'kw1' 
+    {
+        newLeafNode(lv_flag_4_0, grammarAccess.getDependentAlternative2Access().getFlagKw1Keyword_1_1_1_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getDependentAlternative2Rule());
+	        }
+       		setWithLastConsumed($current, "flag", true, "kw1");
+	    }
+
+)
+))))
 ;
 
 

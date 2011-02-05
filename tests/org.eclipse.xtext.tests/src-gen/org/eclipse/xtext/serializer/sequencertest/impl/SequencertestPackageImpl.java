@@ -17,6 +17,8 @@ import org.eclipse.xtext.serializer.sequencertest.AltList1;
 import org.eclipse.xtext.serializer.sequencertest.AltList2;
 import org.eclipse.xtext.serializer.sequencertest.AlternativeMultiplicities;
 import org.eclipse.xtext.serializer.sequencertest.DefEnum;
+import org.eclipse.xtext.serializer.sequencertest.DependentAlternative1;
+import org.eclipse.xtext.serializer.sequencertest.DependentAlternative2;
 import org.eclipse.xtext.serializer.sequencertest.GroupMultiplicities;
 import org.eclipse.xtext.serializer.sequencertest.List1;
 import org.eclipse.xtext.serializer.sequencertest.List2;
@@ -200,6 +202,20 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * @generated
    */
   private EClass multiTerminalsEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass dependentAlternative1EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass dependentAlternative2EClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -429,6 +445,26 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
   public EReference getModel_X15()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(14);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X19()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(15);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X20()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(16);
   }
 
   /**
@@ -1076,6 +1112,66 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getDependentAlternative1()
+  {
+    return dependentAlternative1EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getDependentAlternative1_Val()
+  {
+    return (EAttribute)dependentAlternative1EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getDependentAlternative1_Flag()
+  {
+    return (EAttribute)dependentAlternative1EClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getDependentAlternative2()
+  {
+    return dependentAlternative2EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getDependentAlternative2_Val()
+  {
+    return (EAttribute)dependentAlternative2EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getDependentAlternative2_Flag()
+  {
+    return (EAttribute)dependentAlternative2EClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getDefEnum()
   {
     return defEnumEEnum;
@@ -1127,6 +1223,8 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     createEReference(modelEClass, MODEL__X13);
     createEReference(modelEClass, MODEL__X14);
     createEReference(modelEClass, MODEL__X15);
+    createEReference(modelEClass, MODEL__X19);
+    createEReference(modelEClass, MODEL__X20);
 
     simpleGroupEClass = createEClass(SIMPLE_GROUP);
     createEAttribute(simpleGroupEClass, SIMPLE_GROUP__VAL1);
@@ -1213,6 +1311,14 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     multiTerminalsEClass = createEClass(MULTI_TERMINALS);
     createEAttribute(multiTerminalsEClass, MULTI_TERMINALS__VAL);
 
+    dependentAlternative1EClass = createEClass(DEPENDENT_ALTERNATIVE1);
+    createEAttribute(dependentAlternative1EClass, DEPENDENT_ALTERNATIVE1__VAL);
+    createEAttribute(dependentAlternative1EClass, DEPENDENT_ALTERNATIVE1__FLAG);
+
+    dependentAlternative2EClass = createEClass(DEPENDENT_ALTERNATIVE2);
+    createEAttribute(dependentAlternative2EClass, DEPENDENT_ALTERNATIVE2__VAL);
+    createEAttribute(dependentAlternative2EClass, DEPENDENT_ALTERNATIVE2__FLAG);
+
     // Create enums
     defEnumEEnum = createEEnum(DEF_ENUM);
   }
@@ -1264,6 +1370,8 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     initEReference(getModel_X13(), this.getSingleEnum(), null, "x13", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X14(), this.getSingleCrossReference(), null, "x14", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X15(), this.getSingleContainmentReference(), null, "x15", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X19(), this.getDependentAlternative1(), null, "x19", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X20(), this.getDependentAlternative2(), null, "x20", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(simpleGroupEClass, SimpleGroup.class, "SimpleGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSimpleGroup_Val1(), ecorePackage.getEString(), "val1", null, 0, 1, SimpleGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1349,6 +1457,14 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
 
     initEClass(multiTerminalsEClass, MultiTerminals.class, "MultiTerminals", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMultiTerminals_Val(), ecorePackage.getEString(), "val", null, 0, -1, MultiTerminals.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(dependentAlternative1EClass, DependentAlternative1.class, "DependentAlternative1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getDependentAlternative1_Val(), ecorePackage.getEString(), "val", null, 0, 1, DependentAlternative1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDependentAlternative1_Flag(), ecorePackage.getEBoolean(), "flag", null, 0, 1, DependentAlternative1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(dependentAlternative2EClass, DependentAlternative2.class, "DependentAlternative2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getDependentAlternative2_Val(), ecorePackage.getEString(), "val", null, 0, -1, DependentAlternative2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDependentAlternative2_Flag(), ecorePackage.getEBoolean(), "flag", null, 0, 1, DependentAlternative2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(defEnumEEnum, DefEnum.class, "DefEnum");

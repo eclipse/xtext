@@ -188,6 +188,16 @@ public class SequencertestAdapterFactory extends AdapterFactoryImpl
         return createMultiTerminalsAdapter();
       }
       @Override
+      public Adapter caseDependentAlternative1(DependentAlternative1 object)
+      {
+        return createDependentAlternative1Adapter();
+      }
+      @Override
+      public Adapter caseDependentAlternative2(DependentAlternative2 object)
+      {
+        return createDependentAlternative2Adapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -535,6 +545,36 @@ public class SequencertestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createMultiTerminalsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.DependentAlternative1 <em>Dependent Alternative1</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.DependentAlternative1
+   * @generated
+   */
+  public Adapter createDependentAlternative1Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.DependentAlternative2 <em>Dependent Alternative2</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.DependentAlternative2
+   * @generated
+   */
+  public Adapter createDependentAlternative2Adapter()
   {
     return null;
   }

@@ -249,6 +249,20 @@ public class SequencertestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case SequencertestPackage.DEPENDENT_ALTERNATIVE1:
+      {
+        DependentAlternative1 dependentAlternative1 = (DependentAlternative1)theEObject;
+        T result = caseDependentAlternative1(dependentAlternative1);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SequencertestPackage.DEPENDENT_ALTERNATIVE2:
+      {
+        DependentAlternative2 dependentAlternative2 = (DependentAlternative2)theEObject;
+        T result = caseDependentAlternative2(dependentAlternative2);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -601,6 +615,38 @@ public class SequencertestSwitch<T>
    * @generated
    */
   public T caseMultiTerminals(MultiTerminals object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Dependent Alternative1</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Dependent Alternative1</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDependentAlternative1(DependentAlternative1 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Dependent Alternative2</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Dependent Alternative2</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDependentAlternative2(DependentAlternative2 object)
   {
     return null;
   }

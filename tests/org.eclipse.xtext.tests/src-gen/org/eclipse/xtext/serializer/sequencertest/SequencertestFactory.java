@@ -224,6 +224,24 @@ public interface SequencertestFactory extends EFactory
   MultiTerminals createMultiTerminals();
 
   /**
+   * Returns a new object of class '<em>Dependent Alternative1</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Dependent Alternative1</em>'.
+   * @generated
+   */
+  DependentAlternative1 createDependentAlternative1();
+
+  /**
+   * Returns a new object of class '<em>Dependent Alternative2</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Dependent Alternative2</em>'.
+   * @generated
+   */
+  DependentAlternative2 createDependentAlternative2();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

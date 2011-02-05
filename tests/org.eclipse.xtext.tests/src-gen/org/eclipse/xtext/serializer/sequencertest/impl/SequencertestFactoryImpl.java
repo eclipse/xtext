@@ -90,6 +90,8 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
       case SequencertestPackage.MULTI_KEYWORDS: return createMultiKeywords();
       case SequencertestPackage.MULTI_KEYWORDS_OR_ID: return createMultiKeywordsOrID();
       case SequencertestPackage.MULTI_TERMINALS: return createMultiTerminals();
+      case SequencertestPackage.DEPENDENT_ALTERNATIVE1: return createDependentAlternative1();
+      case SequencertestPackage.DEPENDENT_ALTERNATIVE2: return createDependentAlternative2();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -369,6 +371,28 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
   {
     MultiTerminalsImpl multiTerminals = new MultiTerminalsImpl();
     return multiTerminals;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DependentAlternative1 createDependentAlternative1()
+  {
+    DependentAlternative1Impl dependentAlternative1 = new DependentAlternative1Impl();
+    return dependentAlternative1;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DependentAlternative2 createDependentAlternative2()
+  {
+    DependentAlternative2Impl dependentAlternative2 = new DependentAlternative2Impl();
+    return dependentAlternative2;
   }
 
   /**

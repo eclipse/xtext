@@ -206,13 +206,31 @@ public interface SequencertestPackage extends EPackage
   int MODEL__X15 = 14;
 
   /**
+   * The feature id for the '<em><b>X19</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X19 = 15;
+
+  /**
+   * The feature id for the '<em><b>X20</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X20 = 16;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 15;
+  int MODEL_FEATURE_COUNT = 17;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -1001,6 +1019,80 @@ public interface SequencertestPackage extends EPackage
   int MULTI_TERMINALS_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.DependentAlternative1Impl <em>Dependent Alternative1</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.DependentAlternative1Impl
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getDependentAlternative1()
+   * @generated
+   */
+  int DEPENDENT_ALTERNATIVE1 = 22;
+
+  /**
+   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DEPENDENT_ALTERNATIVE1__VAL = 0;
+
+  /**
+   * The feature id for the '<em><b>Flag</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DEPENDENT_ALTERNATIVE1__FLAG = 1;
+
+  /**
+   * The number of structural features of the '<em>Dependent Alternative1</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DEPENDENT_ALTERNATIVE1_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.DependentAlternative2Impl <em>Dependent Alternative2</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.DependentAlternative2Impl
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getDependentAlternative2()
+   * @generated
+   */
+  int DEPENDENT_ALTERNATIVE2 = 23;
+
+  /**
+   * The feature id for the '<em><b>Val</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DEPENDENT_ALTERNATIVE2__VAL = 0;
+
+  /**
+   * The feature id for the '<em><b>Flag</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DEPENDENT_ALTERNATIVE2__FLAG = 1;
+
+  /**
+   * The number of structural features of the '<em>Dependent Alternative2</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DEPENDENT_ALTERNATIVE2_FEATURE_COUNT = 2;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1008,7 +1100,7 @@ public interface SequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getDefEnum()
    * @generated
    */
-  int DEF_ENUM = 22;
+  int DEF_ENUM = 24;
 
 
   /**
@@ -1185,6 +1277,28 @@ public interface SequencertestPackage extends EPackage
    * @generated
    */
   EReference getModel_X15();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX19 <em>X19</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X19</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Model#getX19()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X19();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX20 <em>X20</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X20</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Model#getX20()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X20();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.SimpleGroup <em>Simple Group</em>}'.
@@ -1870,6 +1984,70 @@ public interface SequencertestPackage extends EPackage
   EAttribute getMultiTerminals_Val();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.DependentAlternative1 <em>Dependent Alternative1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Dependent Alternative1</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.DependentAlternative1
+   * @generated
+   */
+  EClass getDependentAlternative1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.DependentAlternative1#getVal <em>Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.DependentAlternative1#getVal()
+   * @see #getDependentAlternative1()
+   * @generated
+   */
+  EAttribute getDependentAlternative1_Val();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.DependentAlternative1#isFlag <em>Flag</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Flag</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.DependentAlternative1#isFlag()
+   * @see #getDependentAlternative1()
+   * @generated
+   */
+  EAttribute getDependentAlternative1_Flag();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.DependentAlternative2 <em>Dependent Alternative2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Dependent Alternative2</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.DependentAlternative2
+   * @generated
+   */
+  EClass getDependentAlternative2();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.serializer.sequencertest.DependentAlternative2#getVal <em>Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Val</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.DependentAlternative2#getVal()
+   * @see #getDependentAlternative2()
+   * @generated
+   */
+  EAttribute getDependentAlternative2_Val();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.DependentAlternative2#isFlag <em>Flag</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Flag</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.DependentAlternative2#isFlag()
+   * @see #getDependentAlternative2()
+   * @generated
+   */
+  EAttribute getDependentAlternative2_Flag();
+
+  /**
    * Returns the meta object for enum '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2031,6 +2209,22 @@ public interface SequencertestPackage extends EPackage
      * @generated
      */
     EReference MODEL__X15 = eINSTANCE.getModel_X15();
+
+    /**
+     * The meta object literal for the '<em><b>X19</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X19 = eINSTANCE.getModel_X19();
+
+    /**
+     * The meta object literal for the '<em><b>X20</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X20 = eINSTANCE.getModel_X20();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -2585,6 +2779,58 @@ public interface SequencertestPackage extends EPackage
      * @generated
      */
     EAttribute MULTI_TERMINALS__VAL = eINSTANCE.getMultiTerminals_Val();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.DependentAlternative1Impl <em>Dependent Alternative1</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.DependentAlternative1Impl
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getDependentAlternative1()
+     * @generated
+     */
+    EClass DEPENDENT_ALTERNATIVE1 = eINSTANCE.getDependentAlternative1();
+
+    /**
+     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DEPENDENT_ALTERNATIVE1__VAL = eINSTANCE.getDependentAlternative1_Val();
+
+    /**
+     * The meta object literal for the '<em><b>Flag</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DEPENDENT_ALTERNATIVE1__FLAG = eINSTANCE.getDependentAlternative1_Flag();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.DependentAlternative2Impl <em>Dependent Alternative2</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.DependentAlternative2Impl
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getDependentAlternative2()
+     * @generated
+     */
+    EClass DEPENDENT_ALTERNATIVE2 = eINSTANCE.getDependentAlternative2();
+
+    /**
+     * The meta object literal for the '<em><b>Val</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DEPENDENT_ALTERNATIVE2__VAL = eINSTANCE.getDependentAlternative2_Val();
+
+    /**
+     * The meta object literal for the '<em><b>Flag</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DEPENDENT_ALTERNATIVE2__FLAG = eINSTANCE.getDependentAlternative2_Flag();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}' enum.
