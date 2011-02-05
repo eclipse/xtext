@@ -1,0 +1,47 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+grammar org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage with org.eclipse.xtext.common.Terminals
+
+generate syntacticsequencertest "http://www.eclipse.org/2009/tmf/xtext/syntacticsequencertestlanguage"
+
+Model:
+	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2;
+
+MandatoryKeywords:
+	"#1" val1=ID "kw1" val2=ID "kw2" "kw3" val3=ID "kw4";
+
+Exp0:
+	"#2" Addition0;
+
+Addition0 returns Exp0:
+	Prim0 ({Add0.left=current} '+' right=Prim0)*;
+
+Prim0 returns Exp0:
+	{Val0} name=ID;
+
+Exp1:
+	"#3" Addition1;
+
+Addition1 returns Exp1:
+	Prim1 ({Add1.left=current} '+' right=Prim1)*;
+
+Prim1 returns Exp1:
+	{Val1} name=ID | '(' Addition1 ')';
+
+Exp2:
+	"#4" Addition2;
+
+Addition2 returns Exp2:
+	Multiplication2 ({Add2.left=current} '+' right=Multiplication2)*;
+
+Multiplication2 returns Exp2:
+	Prim2 ({Mult2.left=current} '*' right=Prim2)*;
+
+Prim2 returns Exp2:
+	{Val2} name=ID | '(' Addition2 ')';
