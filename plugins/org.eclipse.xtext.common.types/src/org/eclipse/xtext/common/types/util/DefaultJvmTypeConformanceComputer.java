@@ -26,6 +26,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
@@ -83,10 +84,20 @@ public class DefaultJvmTypeConformanceComputer implements IJvmTypeConformanceCom
 	public boolean isConformant(JvmTypeReference left, JvmTypeReference right) {
 		if (left == right)
 			return left != null;
-		if (left.getType()!=null && left.getType().getCanonicalName().equals(Object.class.getCanonicalName()))
+		if (isObject(left))
 			return true;
+		if (isVoid(left))
+			return false;
 		Boolean result = isConformantDispatcher.invoke(left, right);
 		return result.booleanValue();
+	}
+
+	protected boolean isVoid(JvmTypeReference left) {
+		return left!=null && left.getType() instanceof JvmVoid;
+	}
+
+	protected boolean isObject(JvmTypeReference left) {
+		return left!=null && left.getType()!=null && left.getType().getCanonicalName().equals(Object.class.getCanonicalName());
 	}
 	
 	protected Boolean _isConformant(JvmTypeReference left, JvmTypeReference right) {

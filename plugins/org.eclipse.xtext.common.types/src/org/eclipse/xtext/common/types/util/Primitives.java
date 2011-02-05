@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 
 import com.google.inject.Inject;
@@ -95,5 +96,9 @@ public class Primitives {
 			throw new NullPointerException("context not contained in ResourceSet");
 		IJvmTypeProvider provider = typeProviderFactory.createTypeProvider(resourceSet);
 		return provider.findTypeByName(class1.getCanonicalName());
+	}
+
+	public boolean isPrimitive(JvmTypeReference componentType) {
+		return componentType.getType() instanceof JvmPrimitiveType;
 	}
 }

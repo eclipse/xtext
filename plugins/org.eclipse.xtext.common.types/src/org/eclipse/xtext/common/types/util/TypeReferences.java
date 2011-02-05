@@ -57,7 +57,7 @@ public class TypeReferences {
 		JvmParameterizedTypeReference reference = factory.createJvmParameterizedTypeReference();
 		reference.setType(type);
 		if (!typeReferences.isEmpty())
-			reference.getArguments().addAll(EcoreUtil.copyAll(Arrays.asList(typeArgs)));
+			reference.getArguments().addAll(typeReferences);
 		return reference;
 	}
 
@@ -79,4 +79,5 @@ public class TypeReferences {
 		}
 		throw new IllegalArgumentException(left.getType().getCanonicalName() + " is not generic.");
 	}
+	
 }
