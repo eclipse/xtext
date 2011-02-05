@@ -15,7 +15,8 @@ Model:
 	x5=AlternativeMultiplicities | x6=List1 | x7=List2 | x8=AltList1 | x9=AltList2 |
 	x10=SingleKeywords | x11=SingleKeywordsOrID | x12=SingleTerminals |
 	x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals |
-	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference;
+	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference |
+	x19=DependentAlternative1 | x20=DependentAlternative2;
 
 SimpleGroup:
 	"#1" val1=ID val2=ID;
@@ -98,4 +99,10 @@ MultiKeywordsOrID:
 
 MultiTerminals:
 	"#18" val+=(ID1 | ID2);
+	
+DependentAlternative1:
+	"#19" (val=ID | val=ID flag?="kw1");
+	
+DependentAlternative2:
+	"#20" (val+=ID val+=ID+| val+=ID+ flag?="kw1");
 	

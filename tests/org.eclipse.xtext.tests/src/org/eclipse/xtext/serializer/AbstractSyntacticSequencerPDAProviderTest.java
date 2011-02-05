@@ -13,17 +13,23 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarToDot;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.grammaranalysis.IPDAState;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.IPDAAbsorberState;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.IPDAEmitterState;
-import org.eclipse.xtext.serializer.impl.SequenceParserPDAProvider;
-import org.eclipse.xtext.serializer.impl.SequenceParserPDAProvider.SequenceParserNFAProvider;
-import org.eclipse.xtext.serializer.impl.SequenceParserPDAProvider.SequenceParserState;
-import org.eclipse.xtext.serializer.impl.SequenceParserPDAProvider.SequenceParserTransition;
+import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider;
+import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider.SequencerNFAProvider;
+import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider.SequencerNFAState;
+import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider.SequencerNFATransition;
+import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider.SequencerPDAProvider;
 import org.eclipse.xtext.util.GraphvizDotBuilder;
 
 import com.google.common.collect.Lists;
@@ -35,16 +41,16 @@ import com.google.inject.internal.Join;
  */
 public abstract class AbstractSyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 	protected class SequenceParserNDA2Dot extends GrammarToDot {
-		protected SequenceParserNFAProvider nfaProvider = createSequenceParserPDAProvider().new SequenceParserNFAProvider();
+		protected SequencerNFAProvider nfaProvider = new SequencerNFAProvider();
 
 		@Override
 		protected Node drawAbstractElementTree(AbstractElement ele, Digraph d) {
 			Node n = super.drawAbstractElementTree(ele, d);
-			SequenceParserState nfas = nfaProvider.getNFA(ele);
+			SequencerNFAState nfas = nfaProvider.getNFA(ele);
 
-			for (SequenceParserTransition t : nfas.getOutgoing())
+			for (SequencerNFATransition t : nfas.getOutgoing())
 				d.add(drawFollowerEdge(ele, t, false));
-			for (SequenceParserTransition t : nfas.getOutgoingAfterReturn())
+			for (SequencerNFATransition t : nfas.getOutgoingAfterReturn())
 				d.add(drawFollowerEdge(ele, t, true));
 
 			if (nfas.getOutgoing().size() == 0 && nfas.getOutgoingAfterReturn().size() == 0 && !nfas.isEndState())
@@ -54,7 +60,7 @@ public abstract class AbstractSyntacticSequencerPDAProviderTest extends Abstract
 			return n;
 		}
 
-		protected Edge drawFollowerEdge(AbstractElement ele, SequenceParserTransition t, boolean isParent) {
+		protected Edge drawFollowerEdge(AbstractElement ele, SequencerNFATransition t, boolean isParent) {
 			Edge e = new Edge(ele, t.getTarget().getGrammarElement());
 			e.setLabel(String.valueOf(t.getPrecedence()));
 			e.setStyle("dotted");
@@ -68,34 +74,46 @@ public abstract class AbstractSyntacticSequencerPDAProviderTest extends Abstract
 		}
 	}
 
-	protected class SequenceParserPDA2Dot extends GraphvizDotBuilder {
-		protected SequenceParserPDAProvider pdaProvider = createSequenceParserPDAProvider();
+	protected static class SequencePDA2Dot extends GraphvizDotBuilder {
+		protected SequencerPDAProvider pdaProvider = new SequencerPDAProvider(new SequencerNFAProvider());
+
+		public static void drawGrammar(String path, Grammar grammar) {
+			try {
+				for (ParserRule pr : GrammarUtil.allParserRules(grammar))
+					new SequencePDA2Dot().draw(pr, path + "-" + pr.getName() + "-simple-PDA.pdf", "-T pdf");
+				for (Action a : GrammarUtil.containedActions(grammar))
+					if (a.getFeature() != null)
+						new SequencePDA2Dot().draw(a, path + "-" + GrammarUtil.containingRule(a).getName() + "_"
+								+ a.getType().getClassifier().getName() + "_" + a.getFeature() + "-PDA.pdf", "-T pdf");
+			} catch (IOException e) {
+			}
+		}
 
 		@Override
 		protected Props drawObject(Object obj) {
-			if (obj instanceof Grammar)
-				return drawGrammar((Grammar) obj);
+			if (obj instanceof ParserRule)
+				return drawGrammar(pdaProvider.getPDA((ParserRule) obj));
+			if (obj instanceof Action)
+				return drawGrammar(pdaProvider.getPDA((Action) obj));
 			return null;
 		}
 
-		protected Digraph drawGrammar(Grammar grammar) {
+		protected Digraph drawGrammar(IPDAState pr) {
 			Digraph d = new Digraph();
-			Set<IPDAEmitterState> visited = Sets.newHashSet();
-			drawState(d, pdaProvider.getPDA(grammar), visited);
+			Set<IPDAState> visited = Sets.newHashSet();
+			drawState(d, pr, visited);
 			return d;
 		}
 
-		protected void drawState(Digraph d, IPDAEmitterState state, Set<IPDAEmitterState> visited) {
-			if (!visited.add(state))
+		protected void drawState(Digraph d, IPDAState state, Set<IPDAState> visited) {
+			if (state == null || !visited.add(state))
 				return;
 			Node n = new Node(state, state.toString());
-			if (!(state instanceof IPDAAbsorberState))
-				n.setStyle("dotted");
 			d.add(n);
-			for (IPDAEmitterState trans : state.getFollowers()) {
-				Edge edge = new Edge(state, trans);
+			for (IPDAState follower : state.getFollowers()) {
+				Edge edge = new Edge(state, follower);
 				d.add(edge);
-				drawState(d, trans, visited);
+				drawState(d, follower, visited);
 			}
 		}
 	}
@@ -114,24 +132,38 @@ public abstract class AbstractSyntacticSequencerPDAProviderTest extends Abstract
 		Grammar grammar = (Grammar) getModel(HEADER + body);
 		try {
 			new SequenceParserNDA2Dot().draw(grammar, "pdf/" + getName() + "-NFA.pdf", "-T pdf");
-			new SequenceParserPDA2Dot().draw(grammar, "pdf/" + getName() + "-PDA.pdf", "-T pdf");
+			SequencePDA2Dot.drawGrammar("pdf/" + getName(), grammar);
+			SequenceParserPDA2Dot.drawGrammar(createSequenceParserPDAProvider(), "pdf/" + getName(), grammar);
 			//			System.out.println(new SequenceParserPDA2Dot().draw(grammar));
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 
-		IPDAAbsorberState start = createSequenceParserPDAProvider().getPDA(grammar);
-		Set<IPDAAbsorberState> states = Sets.newHashSet(start);
-		collectAbsorberStates(start, Sets.<IPDAEmitterState> newHashSet(), states);
 		List<String> result = Lists.newArrayList();
-		for (IPDAAbsorberState state : states)
-			for (IPDAEmitterState child : state.getFollowers())
-				result.add(state + " " + pathToStr(child));
-		Collections.sort(result);
+		for (ParserRule pr : GrammarUtil.allParserRules(grammar))
+			if (pr.getType().getClassifier() instanceof EClass) {
+				result.add(pr.getName() + ":");
+				result.addAll(pda2lines(createSequenceParserPDAProvider().getPDA(pr)));
+			}
+		for (Action act : GrammarUtil.containedActions(grammar))
+			if (act.getFeature() != null) {
+				result.add("{" + act.getType().getClassifier().getName() + "." + act.getFeature() + "}" + ":");
+				result.addAll(pda2lines(createSequenceParserPDAProvider().getPDA(act)));
+			}
 		return Join.join("\n", result);
 	}
 
-	protected abstract SequenceParserPDAProvider createSequenceParserPDAProvider();
+	private List<String> pda2lines(IPDAAbsorberState start) {
+		Set<IPDAAbsorberState> states = Sets.newHashSet(start);
+		collectAbsorberStates(start, Sets.<IPDAEmitterState> newHashSet(), states);
+		List<String> pdalines = Lists.newArrayList();
+		for (IPDAAbsorberState state : states)
+			for (IPDAEmitterState child : state.getFollowers())
+				pdalines.add("  " + state + " " + pathToStr(child));
+		Collections.sort(pdalines);
+		return pdalines;
+	}
+
+	protected abstract SyntacticSequencerPDAProvider createSequenceParserPDAProvider();
 
 	private void collectAbsorberStates(IPDAEmitterState state, Set<IPDAEmitterState> visited,
 			Set<IPDAAbsorberState> result) {
