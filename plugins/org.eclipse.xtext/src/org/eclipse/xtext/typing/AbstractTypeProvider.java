@@ -20,16 +20,16 @@ import com.google.inject.Provider;
  */
 public class AbstractTypeProvider<T, P extends EObject> implements ITypeProvider<T, P> {
 
-	private final PolymorphicDispatcher<T> typeDispatcher = PolymorphicDispatcher.createForSingleTarget("_type", this);
-
-	public T getType(final P astNode) {
+	private final PolymorphicDispatcher<T> typeDispatcher = PolymorphicDispatcher.createForSingleTarget("_type",2,2, this);
+	
+	public T getType(final P astNode, final boolean selfContained) {
 		if (astNode == null)
 			return null;
 		if (astNode.eIsProxy())
 			return null;
 		final Provider<T> provider = new Provider<T>() {
 			public T get() {
-				final T invoke = typeDispatcher.invoke(astNode);
+				final T invoke = typeDispatcher.invoke(astNode, selfContained);
 				return invoke;
 			}
 		};
@@ -37,11 +37,11 @@ public class AbstractTypeProvider<T, P extends EObject> implements ITypeProvider
 		if (cache == null)
 			return provider.get();
 		else
-			return cache.get(getCachKey(astNode), astNode.eResource(), provider);
+			return cache.get(getCachKey(astNode, selfContained), astNode.eResource(), provider);
 	}
 
-	protected Object getCachKey(final P astNode) {
-		return Tuples.create(getClass(), astNode);
+	protected Object getCachKey(final P astNode, boolean selfContained) {
+		return Tuples.create(getClass(), astNode, selfContained);
 	}
 
 	private IResourceScopeCache getCache(EObject astNode) {
@@ -50,14 +50,10 @@ public class AbstractTypeProvider<T, P extends EObject> implements ITypeProvider
 		return ((XtextResource) astNode.eResource()).getCache();
 	}
 
-	protected T doConversion(T actualType, P context) {
-		return actualType;
-	}
-
-	public T _type(EObject stNode) {
+	public T _type(EObject stNode, boolean selfContained) {
 		throw new IllegalArgumentException("Type computation is not implemented for " + stNode);
 	}
-
+	
 	protected String getName(T actual) {
 		return actual != null ? actual.toString() : "null";
 	}
