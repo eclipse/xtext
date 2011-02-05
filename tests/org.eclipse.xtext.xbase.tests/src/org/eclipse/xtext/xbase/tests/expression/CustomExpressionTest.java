@@ -41,7 +41,7 @@ public class CustomExpressionTest extends AbstractXbaseTestCase {
 		//unary operations are not implemented yet
 		String input = "!";
 		XUnaryOperation expression = (XUnaryOperation) incompleteExpression(input);
-		expression.getAllArguments(); // throws exception if null value is added to result list
+		assertTrue(expression.getExplicitArguments().isEmpty()); // throws exception if null value is added to result list
 	}
 
 	private XExpression incompleteExpression(String input) throws IOException {

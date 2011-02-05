@@ -16,11 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -31,10 +28,8 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.JvmFeatureOverridesService;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.xbase.lib.Functions;
-import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
 import com.google.common.base.Function;
@@ -44,78 +39,80 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class FunctionConversion {
-	
+
 	@Inject
 	private XbaseTypeConformanceComputer conformanceComputer;
-	
+
 	@Inject
-	private TypeArgumentContext.Provider contextProvider;
-	
+	private TypeArgumentContextProvider contextProvider;
+
 	@Inject
 	private TypesFactory factory = TypesFactory.eINSTANCE;
-	
-	@Inject
-	private IXExpressionTypeProvider typeProvider;
-	
+
 	private interface FuncDesc {
 		JvmTypeReference getReturnType();
+
 		Iterable<? extends JvmTypeReference> getParamTypes();
 	}
-	
+
 	private static class FunctionRefFuncDef implements FuncDesc {
 		private List<? extends JvmTypeReference> arguments;
-		
+
 		public JvmTypeReference getReturnType() {
-			return arguments.get(arguments.size()-1);
+			return arguments.get(arguments.size() - 1);
 		}
+
 		public Iterable<? extends JvmTypeReference> getParamTypes() {
-			if (arguments.size()==1) {
+			if (arguments.size() == 1) {
 				return emptyList();
 			} else {
-				return arguments.subList(0, arguments.size()-1);
+				return arguments.subList(0, arguments.size() - 1);
 			}
 		}
 	}
-	
+
 	private static class JvmOperationFuncDef implements FuncDesc {
 		private JvmOperation delegate;
+
 		public JvmTypeReference getReturnType() {
 			return delegate.getReturnType();
 		}
+
 		public Iterable<JvmTypeReference> getParamTypes() {
-			return transform(delegate.getParameters(), new Function<JvmFormalParameter,JvmTypeReference>() {
+			return transform(delegate.getParameters(), new Function<JvmFormalParameter, JvmTypeReference>() {
 				public JvmTypeReference apply(JvmFormalParameter from) {
 					return from.getParameterType();
 				}
 			});
 		}
 	}
-	
+
 	public boolean isConformant(JvmTypeReference left, JvmTypeReference right) {
 		FuncDesc leftDesc = toFuncDesc(left);
 		FuncDesc rightDesc = toFuncDesc(right);
-		if (leftDesc==null || rightDesc==null)
+		if (leftDesc == null || rightDesc == null)
 			return false;
-		TypeArgumentContext leftCtx = contextProvider.get(left);
-		TypeArgumentContext rightCtx = contextProvider.get(right);
-		return isConformant(leftDesc,leftCtx,rightDesc,rightCtx);
+		TypeArgumentContext leftCtx = contextProvider.getReceiverContext(left);
+		TypeArgumentContext rightCtx = contextProvider.getReceiverContext(right);
+		return isConformant(leftDesc, leftCtx, rightDesc, rightCtx);
 	}
-	
+
 	protected FuncDesc toFuncDesc(JvmTypeReference left) {
 		if (isFunction(left)) {
 			FunctionRefFuncDef result = new FunctionRefFuncDef();
 			result.arguments = ((JvmParameterizedTypeReference) left).getArguments();
 			return result;
-		} 
+		}
 		JvmOperation operation = findSingleMethod(left);
-		if (operation==null)
+		if (operation == null)
 			return null;
 		JvmOperationFuncDef result = new JvmOperationFuncDef();
 		result.delegate = operation;
 		return result;
 	}
 
-	protected boolean isConformant(FuncDesc left, TypeArgumentContext leftCtx, FuncDesc right, TypeArgumentContext rightCtx) {
+	protected boolean isConformant(FuncDesc left, TypeArgumentContext leftCtx, FuncDesc right,
+			TypeArgumentContext rightCtx) {
 		final Iterable<? extends JvmTypeReference> paramTypes = left.getParamTypes();
 		Iterator<? extends JvmTypeReference> leftIter = paramTypes.iterator();
 		final Iterable<? extends JvmTypeReference> paramTypes2 = right.getParamTypes();
@@ -130,16 +127,17 @@ public class FunctionConversion {
 		}
 		if (leftIter.hasNext() || rightIter.hasNext()) // params left?
 			return false;
-		return conformanceComputer.isConformant(leftCtx.resolve(left.getReturnType()),rightCtx.resolve(right.getReturnType()));
+		return conformanceComputer.isConformant(leftCtx.resolve(left.getReturnType()),
+				rightCtx.resolve(right.getReturnType()));
 	}
 
 	@Inject
 	private JvmFeatureOverridesService overridesService;
-	
+
 	public JvmOperation findSingleMethod(JvmTypeReference type) {
-		Iterable<JvmOperation> features = filter(overridesService.getAllJvmFeatures(type),JvmOperation.class);
+		Iterable<JvmOperation> features = filter(overridesService.getAllJvmFeatures(type), JvmOperation.class);
 		JvmOperation operation = null;
-		for (JvmOperation op: features) {
+		for (JvmOperation op : features) {
 			if (isValidFunction(op)) {
 				if (operation == null)
 					operation = op;
@@ -157,7 +155,7 @@ public class FunctionConversion {
 			final String name = op.getSimpleName();
 			if (name.equals("toString") && op.getParameters().isEmpty())
 				return false;
-			if (name.equals("equals") && op.getParameters().size()==1)
+			if (name.equals("equals") && op.getParameters().size() == 1)
 				return false;
 			if (name.equals("hashCode") && op.getParameters().isEmpty())
 				return false;
@@ -170,18 +168,21 @@ public class FunctionConversion {
 		return right != null && right.getCanonicalName().startsWith(Functions.class.getCanonicalName());
 	}
 
+	/**
+	 * parameterizes the expected type with the type arguments from the actualType
+	 */
 	public JvmTypeReference getResolvedExpectedType(JvmTypeReference expectedType, JvmTypeReference actualType) {
-		if (expectedType== null) {
+		if (expectedType == null) {
 			return actualType;
 		}
 		if (!(expectedType instanceof JvmParameterizedTypeReference)) {
 			return actualType;
 		}
 		JvmGenericType expectedTypeDeclaration = (JvmGenericType) expectedType.getType();
-		TypeArgumentContext context = contextProvider.get(actualType);
+		TypeArgumentContext context = contextProvider.getReceiverContext(actualType);
 		JvmOperation from = findSingleMethod(actualType);
 		JvmOperation to = findSingleMethod(expectedType);
-		Map<JvmTypeParameter,JvmTypeReference> resolutions = newHashMap();
+		Map<JvmTypeParameter, JvmTypeReference> resolutions = newHashMap();
 		EList<JvmTypeParameter> list = expectedTypeDeclaration.getTypeParameters();
 		JvmParameterizedTypeReference resultType = factory.createJvmParameterizedTypeReference();
 		resultType.setType(expectedTypeDeclaration);
@@ -192,16 +193,17 @@ public class FunctionConversion {
 			resultType.getArguments().add(reference);
 			// fill with default values (wildcards)
 			resolutions.put(jvmTypeParameter, factory.createJvmWildcardTypeReference());
-			JvmTypeReference result = findMatch(jvmTypeParameter, to.getReturnType(), context.resolve(from.getReturnType()));
-			if (result!=null)
+			JvmTypeReference result = findMatch(jvmTypeParameter, to.getReturnType(),
+					context.resolve(from.getReturnType()));
+			if (result != null)
 				resolutions.put(jvmTypeParameter, result);
 			final EList<JvmFormalParameter> fromParams = from.getParameters();
 			final EList<JvmFormalParameter> toParams = to.getParameters();
-			for (int i=0;i<fromParams.size();i++) {
+			for (int i = 0; i < fromParams.size(); i++) {
 				final JvmTypeReference toParamType = toParams.get(i).getParameterType();
 				final JvmTypeReference fromParamType = fromParams.get(i).getParameterType();
 				result = findMatch(jvmTypeParameter, toParamType, context.resolve(fromParamType));
-				if (result!=null)
+				if (result != null)
 					resolutions.put(jvmTypeParameter, result);
 			}
 		}
@@ -239,25 +241,7 @@ public class FunctionConversion {
 		return null;
 	}
 	
-	/**
-	 * @return whether the passed {@link JvmTypeReference} references the {@link JvmTypeParameter}.
-	 */
-	public boolean isReferenced(JvmTypeParameter typeParam, JvmTypeReference jvmTypeReference) {
-		if (isTypeParamReference(typeParam, jvmTypeReference)) {
-			return true;
-		}
-		TreeIterator<EObject> contents = jvmTypeReference.eAllContents();
-		while (contents.hasNext()) {
-			EObject eObject = contents.next();
-			if (eObject instanceof JvmTypeReference) {
-				if (((JvmTypeReference) eObject).getType() == typeParam)
-					return true;
-			}
-		}
-		return false;
-	}
-	
-	protected boolean isTypeParamReference(JvmTypeParameter jvmTypeParameter, JvmTypeReference declaration) {
+	private boolean isTypeParamReference(JvmTypeParameter jvmTypeParameter, JvmTypeReference declaration) {
 		if (declaration.getType() == jvmTypeParameter) {
 			return true;
 		}
@@ -272,53 +256,4 @@ public class FunctionConversion {
 		return false;
 	}
 	
-	public TypeArgumentContext getMethodTypeArgContext(XAbstractFeatureCall object) {
-		JvmIdentifiableElement feature = object.getFeature();
-		Map<JvmTypeParameter, JvmTypeReference> map = newHashMap();
-		if (feature instanceof JvmOperation) {
-			JvmOperation op = (JvmOperation) feature;
-			final EList<JvmTypeParameter> typeParameters = op.getTypeParameters();
-			if (!typeParameters.isEmpty()) {
-				if (object.getTypeArguments().size() == typeParameters.size()) {
-					for (int i = 0; i < typeParameters.size(); i++) {
-						JvmTypeParameter parameter = typeParameters.get(i);
-						JvmTypeReference reference = object.getTypeArguments().get(i);
-						map.put(parameter, reference);
-					}
-				} else {
-					for (JvmTypeParameter jvmTypeParameter : typeParameters) {
-						//first try infer from the context type
-						if (isReferenced(jvmTypeParameter, op.getReturnType())) {
-							JvmTypeReference expectedType = typeProvider.getExpectedType(object);
-							if (expectedType != null) {
-								JvmTypeReference ref = findMatch(jvmTypeParameter, op.getReturnType(), expectedType);
-								if (ref != null) {
-									map.put(jvmTypeParameter, ref);
-									break;
-								}
-							}
-						}
-						// check arguments
-						final EList<JvmFormalParameter> params = op.getParameters();
-						for (int i = 0; i < params.size(); i++) {
-							JvmFormalParameter p = params.get(i);
-							if (isReferenced(jvmTypeParameter, p.getParameterType())) {
-								final XExpression expression = object.getActualArguments().get(i);
-								final JvmTypeReference type = typeProvider.getType(expression);
-								if (type != null) {
-									JvmTypeReference ref = findMatch(jvmTypeParameter, p.getParameterType(), type);
-									if (ref != null) {
-										map.put(jvmTypeParameter, ref);
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		TypeArgumentContext methodTypeArgContext = contextProvider.get(map);
-		return methodTypeArgContext;
-	}
-
 }

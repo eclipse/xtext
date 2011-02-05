@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.linking;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XUnaryOperation;
+import org.eclipse.xtext.xbase.impl.AbstractFeatureCallToJavaMapping;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
 
@@ -65,6 +67,9 @@ public class FeatureCallChecker {
 
 	@Inject
 	private IXExpressionTypeProvider typeProvider;
+	
+	@Inject
+	private AbstractFeatureCallToJavaMapping featureCall2JavaMapping;
 
 	public void setTypeProvider(IXExpressionTypeProvider typeProvider) {
 		this.typeProvider = typeProvider;
@@ -108,7 +113,7 @@ public class FeatureCallChecker {
 		for (int i = 0; i < numberOfArgs; i++) {
 			JvmFormalParameter parameter = input.getParameters().get(i);
 			XExpression expression = context.getArguments().get(i);
-			JvmTypeReference type = getTypeProvider().getType(expression);
+			JvmTypeReference type = getTypeProvider().getSelfContainedType(expression);
 			if (!conformance.isConformant(parameter.getParameterType(), type))
 				return INVALID_ARGUMENT_TYPES;
 		}
@@ -121,7 +126,7 @@ public class FeatureCallChecker {
 		if (input.getParameters().size() != (1 + callTypeDelta))
 			return INVALID_NUMBER_OF_ARGUMENTS;
 		if (context.getRightOperand() != null && context.getLeftOperand() != null) {
-			JvmTypeReference type = getTypeProvider().getType(context.getRightOperand());
+			JvmTypeReference type = getTypeProvider().getSelfContainedType(context.getRightOperand());
 			if (type == null)
 				return INVALID_ARGUMENT_TYPES;
 			final JvmFormalParameter rightParam = input.getParameters().get(0 + callTypeDelta);
@@ -137,7 +142,7 @@ public class FeatureCallChecker {
 		if (input.getParameters().size() != (1 + callTypeDelta))
 			return INVALID_NUMBER_OF_ARGUMENTS;
 		if (context.getValue() != null) {
-			JvmTypeReference type = getTypeProvider().getType(context.getValue());
+			JvmTypeReference type = getTypeProvider().getSelfContainedType(context.getValue());
 			final JvmFormalParameter valueParam = input.getParameters().get(0 + callTypeDelta);
 			if (!isCompatibleArgument(valueParam.getParameterType(), type, context, jvmFeatureDescription))
 				return INVALID_ARGUMENT_TYPES;
@@ -195,7 +200,7 @@ public class FeatureCallChecker {
 		if (input.getParameters().size() != 1)
 			return INVALID_NUMBER_OF_ARGUMENTS;
 		if (context.getOperand() != null) {
-			JvmTypeReference operandType = getTypeProvider().getType(context.getOperand());
+			JvmTypeReference operandType = getTypeProvider().getSelfContainedType(context.getOperand());
 			final JvmFormalParameter param = input.getParameters().get(0);
 			if (!conformance.isConformant(param.getParameterType(), operandType))
 				return INVALID_ARGUMENT_TYPES;
@@ -205,16 +210,16 @@ public class FeatureCallChecker {
 
 	protected String checkJvmOperation(JvmOperation input, XAbstractFeatureCall context,
 			boolean isExplicitOperationCall, JvmFeatureDescription jvmFeatureDescription, EList<XExpression> arguments) {
-		final int memberCallDelta = getCallTypeDelta(jvmFeatureDescription);
-		if (input.getParameters().size() + memberCallDelta != arguments.size())
+		List<XExpression> actualArguments = featureCall2JavaMapping.getActualArguments(context, input, jvmFeatureDescription.getImplicitReceiver());
+		if (input.getParameters().size() != actualArguments.size())
 			return INVALID_NUMBER_OF_ARGUMENTS;
 		if (!(isExplicitOperationCall ^ isSugaredMethodInvocationWithoutParanthesis(jvmFeatureDescription)))
 			return METHOD_ACCESS_WITHOUT_PARENTHESES;
 
-		for (int i = 0; i < arguments.size(); i++) {
-			XExpression expression = arguments.get(i);
-			JvmTypeReference type = getTypeProvider().getType(expression);
-			JvmTypeReference declaredType = input.getParameters().get(i + memberCallDelta).getParameterType();
+		for (int i = 0; i < actualArguments.size(); i++) {
+			XExpression expression = actualArguments.get(i);
+			JvmTypeReference type = getTypeProvider().getSelfContainedType(expression);
+			JvmTypeReference declaredType = input.getParameters().get(i).getParameterType();
 			if (declaredType==null) 
 				return null;
 			if (!isCompatibleArgument(declaredType, type, context, jvmFeatureDescription))

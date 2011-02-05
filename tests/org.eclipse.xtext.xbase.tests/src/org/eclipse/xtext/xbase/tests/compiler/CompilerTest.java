@@ -18,16 +18,16 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 public class CompilerTest extends AbstractXbaseTestCase {
 	
 	public void testSimple() throws Exception {
-		assertCompilesTo("\njava.lang.Integer length = \"foo\".length();\n" + 
+		assertCompilesTo("\nint length = \"foo\".length();\n" + 
 				"return length;", "'foo'.length");
 	}
 	
 	public void testBlock() throws Exception {
 		assertCompilesTo(
-				"\njava.lang.Integer xblockexpression = null;\n" +
+				"\nint xblockexpression = (int)-1;\n" +
 				"{\n" +
 				"  final java.util.ArrayList<java.lang.String> _this = new java.util.ArrayList<java.lang.String>();\n" +
-				"  java.lang.Integer size = _this.size();\n" + 
+				"  int size = _this.size();\n" + 
 				"  xblockexpression = (size);\n" +
 				"}\n" +
 				"return xblockexpression;"

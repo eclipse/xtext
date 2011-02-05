@@ -64,7 +64,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			JvmTypeReference expectedType = typeProvider.getExpectedType(obj);
 			if (expectedType == null || expectedType.getType() == null)
 				return;
-			JvmTypeReference actualType = typeProvider.getType(obj);
+			JvmTypeReference actualType = typeProvider.getSelfContainedType(obj);
 			if (actualType == null || actualType.getType() == null)
 				return;
 			if (!conformanceComputer.isConformant(expectedType, actualType))

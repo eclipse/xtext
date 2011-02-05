@@ -17,8 +17,6 @@ import java.lang.reflect.Proxy;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
@@ -61,12 +59,15 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
+import org.eclipse.xtext.xbase.impl.AbstractFeatureCallToJavaMapping;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
+import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
+import org.eclipse.xtext.xbase.typing.TypesService;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -114,6 +115,15 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 
 	@Inject
 	private JavaReflectAccess javaReflectAccess;
+	
+	@Inject
+	private AbstractFeatureCallToJavaMapping callToJavaMapping;
+	
+	@Inject
+	private IXExpressionTypeProvider typeProvider;
+	
+	@Inject
+	private TypesService typeService;
 
 	private ClassFinder classFinder;
 
@@ -141,7 +151,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return PolymorphicDispatcher.createForSingleTarget(new PrefixMethodFilter("_featureCall", 4, 4), this);
 	}
 
-	public IEvaluationResult evaluate(EObject expression) {
+	public IEvaluationResult evaluate(XExpression expression) {
 		return evaluate(expression, createContext());
 	}
 
@@ -149,7 +159,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return contextProvider.get();
 	}
 
-	public IEvaluationResult evaluate(EObject expression, IEvaluationContext context) {
+	public IEvaluationResult evaluate(XExpression expression, IEvaluationContext context) {
 		try {
 			Object result = internalEvaluate(expression, context);
 			// TODO: should we unwrap the array?
@@ -160,9 +170,10 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 	}
 
-	protected Object internalEvaluate(EObject expression, IEvaluationContext context) throws EvaluationException {
+	protected Object internalEvaluate(XExpression expression, IEvaluationContext context) throws EvaluationException {
 		Object result = evaluateDispatcher.invoke(expression, context);
-		result = wrapArray(result);
+		final JvmTypeReference expectedType = typeProvider.getExpectedType(expression);
+		result = wrapArray(result, expectedType);
 		return result;
 	}
 
@@ -292,6 +303,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 
 	public Object _evaluateCastedExpression(XCastedExpression castedExpression, IEvaluationContext context) {
 		Object result = internalEvaluate(castedExpression.getTarget(), context);
+		result = wrapArray(result, castedExpression.getType());
 		String typeName = castedExpression.getType().getType().getCanonicalName();
 		Class<?> expectedType = null;
 		try {
@@ -365,12 +377,11 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 				+ " but got: " + result.getClass().getCanonicalName()));
 	}
 
-	protected Object wrapArray(Object result) {
-		return Conversions.doWrapArray(result);
-	}
-
-	protected Object unwrapArray(Object value) {
-		return Conversions.unwrapArray(value);
+	protected Object wrapArray(Object result, JvmTypeReference jvmTypeReference) {
+		if (typeService.isInstanceOfIterable(jvmTypeReference)) {
+			return Conversions.doWrapArray(result);
+		}
+		return result;
 	}
 
 	public Object _evaluateForLoopExpression(XForLoopExpression forLoop, IEvaluationContext context) {
@@ -449,7 +460,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 						java.lang.Iterable.class);
 			}
 		} else {
-			XExpression receiver = featureCall.getActualReceiver();
+			XExpression receiver = callToJavaMapping.getActualReceiver(featureCall, featureCall.getFeature(), featureCall.getImplicitReceiver());
 			Object receiverObj = receiver==null?null:internalEvaluate(receiver, context);
 			if (featureCall.isNullSafe() && receiverObj==null) {
 				return null;
@@ -480,7 +491,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 
 	public Object _evaluateAbstractFeatureCall(XAbstractFeatureCall featureCall, IEvaluationContext context) {
-		XExpression receiver = featureCall.getActualReceiver();
+		XExpression receiver = callToJavaMapping.getActualReceiver(featureCall, featureCall.getFeature(), featureCall.getImplicitReceiver());
 		Object receiverObj = receiver==null?null:internalEvaluate(receiver, context);
 		return internalFeatureCallDispatch(featureCall, receiverObj, context);
 	}
@@ -520,7 +531,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 
 	public Object _featureCallOperation(JvmOperation operation, XAbstractFeatureCall featureCall, Object receiver,
 			IEvaluationContext context) {
-		List<XExpression> operationArguments = featureCall.getActualArguments();
+		List<XExpression> operationArguments = callToJavaMapping.getActualArguments(featureCall, featureCall.getFeature(), featureCall.getImplicitReceiver());
 		List<Object> argumentValues = Lists.newArrayList();
 		evaluateArgumentExpressions(operation, operationArguments, argumentValues, context);
 		return invokeOperation(operation, receiver, argumentValues);
@@ -566,8 +577,8 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	protected Object coerceArgumentType(Object value, JvmTypeReference expectedType) {
 		if (value == null)
 			return null;
-		if (expectedType.getType() instanceof JvmArrayType)
-			return unwrapArray(value);
+//		if (expectedType.getType() instanceof JvmArrayType)
+//			return unwrapArray(value);
 		if (expectedType.getType() instanceof JvmGenericType && ((JvmGenericType) expectedType.getType()).isInterface()) {
 			try {
 				JvmType type = expectedType.getType();

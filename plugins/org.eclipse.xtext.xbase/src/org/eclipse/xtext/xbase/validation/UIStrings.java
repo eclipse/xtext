@@ -31,7 +31,7 @@ public class UIStrings {
 
 	@Inject
 	private IXExpressionTypeProvider typeProvider;
-
+	
 	public String parameters(JvmIdentifiableElement element) {
 		if (element instanceof JvmExecutable) {
 			return "(" + parameterTypes(((JvmExecutable)element).getParameters()) + ")";
@@ -40,7 +40,7 @@ public class UIStrings {
 	}
 
 	public String arguments(XAbstractFeatureCall featureCall) {
-		return "(" + expressionTypes(featureCall.getActualArguments()) + ")";
+		return "(" + expressionTypes(featureCall.getExplicitArguments()) + ")";
 	}
 
 	public String arguments(XConstructorCall constructorCall) {

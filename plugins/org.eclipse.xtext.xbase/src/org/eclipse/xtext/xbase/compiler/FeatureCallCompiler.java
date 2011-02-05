@@ -189,8 +189,15 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				b.append(".");
 			appendFeatureCall(expr, b);
 		} else {
-			String name = featureNameProvider.getSimpleName(expr.getFeature());
-			b.append(makeJavaIdentifier(name));
+			if (feature instanceof JvmField) {
+				boolean appendReceiver = appendReceiver(expr, b);
+				if (appendReceiver)
+					b.append(".");
+				appendFeatureCall(expr, b);
+			} else {
+				String name = featureNameProvider.getSimpleName(expr.getFeature());
+				b.append(makeJavaIdentifier(name));
+			}
 			b.append(" = ");
 			internalToJavaExpression(expr.getValue(), b);
 		}

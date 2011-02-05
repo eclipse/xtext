@@ -7,7 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typing;
 
+import static com.google.common.collect.Iterables.*;
+
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
@@ -15,11 +18,15 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
+import org.eclipse.xtext.common.types.util.SuperTypeCollector;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.Functions;
 
 import com.google.inject.Inject;
@@ -37,6 +44,12 @@ public class TypesService {
 	
 	@Inject
 	private IJvmTypeProvider.Factory typeProviderFactory;
+	
+	@Inject
+	private SuperTypeCollector superTypeCollector;
+	
+	@Inject
+	private TypeReferences typeReferences;
 
 	protected URI toCommonTypesUri(Class<?> clazz) {
 		URI result = uriHelper.getFullURI(clazz);
@@ -49,15 +62,11 @@ public class TypesService {
 		JvmDeclaredType declaredType = findDeclaredType(clazz, context);
 		if (declaredType == null)
 			return null;
-		JvmParameterizedTypeReference simpleType = factory.createJvmParameterizedTypeReference();
-		simpleType.setType(declaredType);
-		for (JvmTypeReference xTypeRef : params) {
-			simpleType.getArguments().add(EcoreUtil2.clone(xTypeRef));
-		}
-		return simpleType;
+		JvmParameterizedTypeReference result = typeReferences.createTypeRef(declaredType, params);
+		return result;
 	}
 
-	protected JvmDeclaredType findDeclaredType(Class<?> clazz, EObject context) {
+	public JvmDeclaredType findDeclaredType(Class<?> clazz, EObject context) {
 		if (context == null)
 			throw new NullPointerException("context");
 		if (context.eResource() == null)
@@ -75,13 +84,28 @@ public class TypesService {
 	public JvmParameterizedTypeReference createFunctionTypeRef(EObject context, List<JvmTypeReference> parameterTypes, JvmTypeReference returnType) {
 		JvmParameterizedTypeReference ref = factory.createJvmParameterizedTypeReference();
 		final Class<?> loadFunctionClass = loadFunctionClass("Function"+parameterTypes.size());
-		JvmDeclaredType declaredType = findDeclaredType(loadFunctionClass, context);
+		JvmGenericType declaredType = (JvmGenericType) findDeclaredType(loadFunctionClass, context);
 		ref.setType(declaredType);
 		
-		for (JvmTypeReference xTypeRef : parameterTypes) {
-			ref.getArguments().add(EcoreUtil2.clone(xTypeRef));
+		for (int i = 0; i< parameterTypes.size();i++) {
+			JvmTypeReference xTypeRef = parameterTypes.get(i);
+			if (xTypeRef == null) {
+				JvmParameterizedTypeReference reference = factory.createJvmParameterizedTypeReference();
+				JvmTypeParameter typeParameter = declaredType.getTypeParameters().get(i);
+				reference.setType(typeParameter);
+				ref.getArguments().add(reference);
+			} else {
+				ref.getArguments().add(EcoreUtil2.clone(xTypeRef));
+			}
 		}
-		ref.getArguments().add(EcoreUtil2.clone(returnType));
+		if (returnType!=null) {
+			ref.getArguments().add(EcoreUtil2.clone(returnType));
+		} else {
+			JvmParameterizedTypeReference reference = factory.createJvmParameterizedTypeReference();
+			JvmTypeParameter typeParameter = getLast(declaredType.getTypeParameters());
+			reference.setType(typeParameter);
+			ref.getArguments().add(reference);
+		}
 		return ref;
 	}
 
@@ -97,6 +121,28 @@ public class TypesService {
 		if (typeRef != null) {
 			String typeName = typeRef.getCanonicalName();
 			return typeName.equals(Void.TYPE.getCanonicalName()) || typeName.equals(Void.class.getCanonicalName());
+		}
+		return false;
+	}
+
+	public boolean isObject(JvmTypeReference typeRef) {
+		if (typeRef != null) {
+			String typeName = typeRef.getCanonicalName();
+			return typeName.equals(Object.class.getCanonicalName()) || typeName.equals(Void.class.getCanonicalName());
+		}
+		return false;
+	}
+	public boolean isIterable(JvmTypeReference reference) {
+		return reference !=null && Iterable.class.getName().equals(reference.getType().getCanonicalName());
+	}
+
+	public boolean isInstanceOfIterable(JvmTypeReference jvmTypeReference) {
+		if (isIterable(jvmTypeReference))
+			return true;
+		Set<JvmTypeReference> types = superTypeCollector.collectSuperTypes(jvmTypeReference);
+		for (JvmTypeReference superType : types) {
+			if (isIterable(superType))
+				return true;
 		}
 		return false;
 	}

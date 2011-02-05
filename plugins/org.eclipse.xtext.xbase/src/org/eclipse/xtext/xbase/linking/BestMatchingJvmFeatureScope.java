@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.linking;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
@@ -20,7 +19,6 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XFeatureCall;
-import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 
@@ -73,13 +71,10 @@ public class BestMatchingJvmFeatureScope implements IScope {
 			if (this.reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE) {
 				final XAbstractFeatureCall featureCall = (XAbstractFeatureCall) this.context;
 				JvmFeatureDescription featureDesc = (JvmFeatureDescription) bestMatch;
-				final JvmIdentifiableElement implicitReceiver = featureDesc.getImplicitReceiver();
+				final XFeatureCall implicitReceiver = featureDesc.getImplicitReceiver();
 				if (implicitReceiver!=null) {
-					XFeatureCall call = XbaseFactory.eINSTANCE.createXFeatureCall();
-					call.setFeature(implicitReceiver);
-					featureCall.setImplicitReceiver(call);
+					featureCall.setImplicitReceiver(implicitReceiver);
 				}
-				featureCall.setTargetsMemberSyntaxCall(featureDesc.isMemberSyntaxContext());
 				featureCall.setInvalidFeatureIssueCode(featureDesc.getIssueCode());
 			} else if(this.reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR) {
 				final XConstructorCall constructorCall = (XConstructorCall) this.context;

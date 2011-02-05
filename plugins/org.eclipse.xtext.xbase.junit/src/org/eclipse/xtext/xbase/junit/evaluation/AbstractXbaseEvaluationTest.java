@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.junit.evaluation;
 
-import java.util.Collections;
 import java.util.Stack;
 
 import junit.framework.TestCase;
@@ -269,15 +268,16 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	}
 	
 	public void testFeatureCall_02() {
-		assertEvaluatesTo(Collections.singletonList(new Character('a')), "'a'.toCharArray");
+		assertEvaluatesTo(new Character('a'), "'a'.toCharArray.iterator.next");
 	}
 	
-	public void testFeatureCall_03() {
-		assertEvaluatesTo(Lists.newArrayList(
-				new Character('a'), 
-				new Character('b'),
-				new Character('c')), "'abc'.toCharArray");
-	}
+//TODO invalid	
+//	public void testFeatureCall_03() {
+//		assertEvaluatesTo(Lists.newArrayList(
+//				new Character('a'), 
+//				new Character('b'),
+//				new Character('c')), "'abc'.toCharArray");
+//	}
 	
 	public void testFeatureCall_04() {
 		assertEvaluatesTo(new Integer("literal".length()), "{ var this = 'literal' length }");
@@ -771,7 +771,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"  var client = new testdata.ArrayClient()" +
 				"  var stringArray = client.toStringArray('literal', 'other')" +
 				"  client.inplaceToUpperCase(stringArray)" +
-				"  stringArray.get(0)" +
+				"  (stringArray as Iterable<String>).iterator.next()" +
 				"}");
 	}
 	
@@ -781,7 +781,9 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"  var client = new testdata.ArrayClient()" +
 				"  var stringArray = client.toStringArray('literal', 'other')" +
 				"  client.inplaceToUpperCase(stringArray)" +
-				"  stringArray.get(1)" +
+				"  var iter = (stringArray as Iterable<String>).iterator" +
+				"  iter.next" +
+				"  iter.next" +
 				"}");
 	}
 	
@@ -791,7 +793,8 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"  var client = new testdata.ArrayClient()" +
 				"  var intArray = client.toIntArray(32, 7)" +
 				"  client.inplaceAdd10(intArray)" +
-				"  intArray.get(0)" +
+				"  var iter = (intArray as Iterable<String>).iterator" +
+				"  iter.next" +
 				"}");
 	}
 	
@@ -801,7 +804,9 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"  var client = new testdata.ArrayClient()" +
 				"  var intArray = client.toIntArray(32, 7)" +
 				"  client.inplaceAdd10(intArray)" +
-				"  intArray.get(1)" +
+				"  var iter = (intArray as Iterable<String>).iterator" +
+				"  iter.next" +
+				"  iter.next" +
 				"}");
 	}
 	
@@ -811,7 +816,9 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"  var client = new testdata.ArrayClient()" +
 				"  var stringArray = client.toStringArray('literal', 'other')" +
 				"  client.inplaceSwap(stringArray)" +
-				"  stringArray.get(1)" +
+				"  var iter = (stringArray as Iterable<String>).iterator" +
+				"  iter.next" +
+				"  iter.next" +
 				"}");
 	}
 }

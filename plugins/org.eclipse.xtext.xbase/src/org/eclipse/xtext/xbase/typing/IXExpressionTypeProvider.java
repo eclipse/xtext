@@ -15,8 +15,27 @@ import org.eclipse.xtext.xbase.XExpression;
  */
 public interface IXExpressionTypeProvider {
 
-	public JvmTypeReference getType(XExpression astNode);
+	/**
+	 * implementers assure that they never call {@link #getExpectedType(XExpression)} for the given expression.
+	 * This method is mostly used from linking and from within implementations of {@link #getType(XExpression)}.
+	 * 
+	 * @return the type of expression - which might not be fully resolved (i.e. has unbound TypeParameters).
+	 */
+	public JvmTypeReference getSelfContainedType(XExpression expression);
 	
-	public JvmTypeReference getExpectedType(XExpression astNode);
+	/**
+	 * implementers assure that they never call {@link #getType(XExpression)} on the given expression, to avoid
+	 * stack over flows.
+	 * This method is mostly used from linking and from within implementations of {@link #getType(XExpression)}.
+	 * 
+	 * @return the expected type of the given expression - might not be fully resolved
+	 */
+	public JvmTypeReference getExpectedType(XExpression expression);
+	
+	/**
+	 * @return the fully-resolved type of this expression, given a correct, fully-linkable model is given.
+	 */
+	public JvmTypeReference getType(XExpression expression);
+	
 	
 }

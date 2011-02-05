@@ -146,7 +146,7 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 		public void acceptForLoop(JvmFormalParameter parameter, XExpression expression) {
 			if (!ignore()) {
 				XMemberFeatureCall featureCall = (XMemberFeatureCall) expression;
-				XStringLiteral receiver = (XStringLiteral) featureCall.getActualReceiver();
+				XStringLiteral receiver = (XStringLiteral) featureCall.getMemberCallTarget();
 				forLoopStack.push(receiver.getValue().length());
 			}
 		}

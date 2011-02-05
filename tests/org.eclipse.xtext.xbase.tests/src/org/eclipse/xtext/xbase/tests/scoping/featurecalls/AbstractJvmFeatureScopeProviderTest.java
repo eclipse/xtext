@@ -11,18 +11,12 @@ import static com.google.common.collect.Sets.*;
 
 import java.util.Set;
 
-import junit.framework.TestCase;
-
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
-import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
-import org.eclipse.xtext.common.types.util.JvmVisibilityService;
-import org.eclipse.xtext.common.types.util.SuperTypeCollector;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext.Provider;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
@@ -30,28 +24,35 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScopeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
+import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public abstract class AbstractJvmFeatureScopeProviderTest extends TestCase {
+public abstract class AbstractJvmFeatureScopeProviderTest extends AbstractXbaseTestCase {
 
-	protected ClasspathTypeProvider typesProvider = new ClasspathTypeProviderFactory(getClass().getClassLoader())
-			.createTypeProvider();
+	@Inject
+	protected IJvmTypeProvider.Factory typeProviderFactory;
+	
+	@Inject
 	protected TypesFactory typesFactory = TypesFactory.eINSTANCE;
 
+	@Inject
 	protected OperatorMapping opMapping = new OperatorMapping();
+	
+	@Inject
+	protected JvmFeatureScopeProvider featureScopeProvider; 
+	
+	@Inject
+	protected ResourceSet resourceSet;
 
 	protected JvmFeatureScopeProvider getFeatureProvider() {
-		Provider provider = new TypeArgumentContext.Provider();
-		SuperTypeCollector collector = new SuperTypeCollector(typesFactory);
-		JvmFeatureScopeProvider descriptionsProvider = new JvmFeatureScopeProvider();
-		descriptionsProvider.setTypeArgumentContextProvider(provider);
-		descriptionsProvider.setSuperTypeCollector(collector);
-		return descriptionsProvider;
+		return featureScopeProvider;
 	}
 	
 	protected Set<String> getSignatures(JvmFeatureScope scope) {
@@ -72,9 +73,10 @@ public abstract class AbstractJvmFeatureScopeProviderTest extends TestCase {
 		}
 		return i;
 	}
-
+	
 	protected JvmTypeReference getTypeRef(String name) {
-		JvmType type = typesProvider.findTypeByName(name);
+		IJvmTypeProvider typeProvider = typeProviderFactory.findOrCreateTypeProvider(resourceSet);
+		JvmType type = typeProvider.findTypeByName(name);
 		JvmParameterizedTypeReference reference = typesFactory.createJvmParameterizedTypeReference();
 		reference.setType(type);
 		return reference;
@@ -90,27 +92,15 @@ public abstract class AbstractJvmFeatureScopeProviderTest extends TestCase {
 			}
 		}
 	}
+	
+	@Inject Provider<XFeatureCallSugarDescriptionProvider> featureSugarProvider;
+	@Inject Provider<DefaultJvmFeatureDescriptionProvider> defaultFeatureProvider;
 
 	protected XFeatureCallSugarDescriptionProvider createXFeatureCallSugaringJvmFeatureDescriptionProvider() {
-		final XFeatureCallSugarDescriptionProvider result = new XFeatureCallSugarDescriptionProvider();
-		JvmVisibilityService service = createVisibilityService();
-		result.setVisibilityService(service);
-		result.setOperatorMapping(new OperatorMapping());
-		return result;
+		return featureSugarProvider.get();
 	}
 
-	protected JvmVisibilityService createVisibilityService() {
-		SuperTypeCollector collector = new SuperTypeCollector(TypesFactory.eINSTANCE);
-		JvmVisibilityService service = new JvmVisibilityService();
-		service.setSuperTypeCollector(collector);
-		service.setTypesFactory(TypesFactory.eINSTANCE);
-		return service;
-	}
-	
 	protected DefaultJvmFeatureDescriptionProvider createDefaultJvmFeatureDescriptionProvider() {
-		final DefaultJvmFeatureDescriptionProvider result = new DefaultJvmFeatureDescriptionProvider();
-		JvmVisibilityService service = createVisibilityService();
-		result.setVisibilityService(service);
-		return result;
+		return defaultFeatureProvider.get();
 	}
 }

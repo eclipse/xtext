@@ -18,10 +18,11 @@ public interface ITypeProvider<T,P> {
 	/**
 	 * computes the type of the given astNode.
 	 * @param astNode - the node for which to compute the type T
+	 * @param selfContained - whether the implementation is allowed to ask the context (i.e. upwards in the AST)
 	 * 
-	 * @return the type T or null if the type cannot be determined
+	 * @return the type T, which might not be fully resolved is  or null if the type cannot be determined
 	 * @throws TypeResolutionException if there is a problem with type resolution. 
 	 */
-	public T getType(P astNode);
+	public T getType(P astNode, boolean selfContained);
 	
 }
