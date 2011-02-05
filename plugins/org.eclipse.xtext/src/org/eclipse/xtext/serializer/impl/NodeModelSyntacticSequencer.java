@@ -1,7 +1,6 @@
 package org.eclipse.xtext.serializer.impl;
 
 import java.util.Collections;
-import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -10,20 +9,20 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.serializer.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.ISerializationDiagnostic.Acceptor;
 
-import com.google.common.collect.Lists;
+public class NodeModelSyntacticSequencer extends AbstractSequencer {
 
-public class NodeModelSequencer extends AbstractSequencer {
-
-	public Iterable<IGrammarValuePair> createSequence(EObject context, EObject semanticObject, Acceptor errorAcceptor) {
-		List<IGrammarValuePair> result = Lists.newArrayList();
+	public void createSequence(EObject context, EObject semanticObject, ISemanticSequenceAcceptor acceptor,
+			Acceptor errorAcceptor) {
 		BidiTreeIterator<INode> ti = NodeModelUtils.findActualNodeFor(semanticObject).getAsTreeIterable().iterator();
 		while (ti.hasNext()) {
 			INode node = ti.next();
@@ -35,33 +34,32 @@ public class NodeModelSequencer extends AbstractSequencer {
 				if (rc.getRule() == context)
 					continue;
 				if (rc.getRule().getType().getClassifier() instanceof EClass)
-					result.add(newPair(rc, node.getSemanticElement()));
+					acceptSemantic(acceptor, rc, node.getSemanticElement());
 				else
-					result.add(newPair(rc, NodeModelUtils.getTextWithoutHidden(node)));
-				if (node.getSemanticElement() != semanticObject) {
-					ti.prune();
-					continue;
-				}
+					acceptSemantic(acceptor, rc, NodeModelUtils.getTextWithoutHidden(node));
+				//				if (node.getSemanticElement() != semanticObject) {
+				//					ti.prune();
+				//					continue;
+				//				}
 			} else if (ge instanceof Keyword) {
 				Keyword kw = (Keyword) ge;
-				if (GrammarUtil.containingAssignment(kw) != null)
-					result.add(newPair(kw, node.getText()));
+				//				if (GrammarUtil.containingAssignment(kw) != null)
+				acceptSemantic(acceptor, kw, node.getText());
 			} else if (ge instanceof Action) {
 				Action a = (Action) ge;
-				if (a.getFeature() != null)
-					result.add(newPair(a, node.getSemanticElement()));
-				if (node.getSemanticElement() != semanticObject) {
-					ti.prune();
-					continue;
-				}
+				//				if (a.getFeature() != null)
+				acceptSemantic(acceptor, a, node.getSemanticElement());
+				//				if (node.getSemanticElement() != semanticObject) {
+				//					ti.prune();
+				//					continue;
+				//				}
 			} else if (ge instanceof CrossReference) {
 				CrossReference cr = (CrossReference) ge;
 				RuleCall rc = (RuleCall) cr.getTerminal();
 				EReference ref = GrammarUtil.getReference(cr);
-				result.add(newPair(rc, (EObject) node.getSemanticElement().eGet(ref)));
+				acceptSemantic(acceptor, rc, node.getSemanticElement().eGet(ref));
 			}
 		}
-		return result;
 	}
 
 	private INode findContextNode(EObject semanticObject) {
@@ -71,12 +69,17 @@ public class NodeModelSequencer extends AbstractSequencer {
 			INode next = nodes.next();
 			if (next.getGrammarElement() instanceof RuleCall)
 				return next;
+			if (next.getGrammarElement() instanceof ParserRule
+					&& ((ParserRule) next.getGrammarElement()).getType().getClassifier() instanceof EClass)
+				return next;
 		}
 		throw new RuntimeException("no context found");
 	}
 
 	public Iterable<EObject> findContexts(EObject semanitcObject, Iterable<EObject> contextCandidates) {
-		return Collections.singletonList((EObject) (((RuleCall) findContextNode(semanitcObject).getGrammarElement())
-				.getRule()));
+		EObject ctx = findContextNode(semanitcObject).getGrammarElement();
+		if (ctx instanceof RuleCall)
+			return Collections.singletonList((EObject) (((RuleCall) ctx).getRule()));
+		return Collections.singletonList(ctx);
 	}
 }

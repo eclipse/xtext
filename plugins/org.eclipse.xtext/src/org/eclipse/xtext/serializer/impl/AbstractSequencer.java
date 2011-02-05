@@ -7,142 +7,122 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.impl;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.EnumRule;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintElement;
-import org.eclipse.xtext.serializer.ISequencer;
+import org.eclipse.xtext.serializer.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.ISemanticSequencer;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public abstract class AbstractSequencer implements ISequencer {
-	protected static class EObjectActionPair extends GrammarValuePair implements IEObjectActionPair {
-		protected Action action;
-		protected EObject value;
+public abstract class AbstractSequencer implements ISemanticSequencer {
 
-		public EObjectActionPair(Action action, EObject value) {
-			super();
-			this.action = action;
-			this.value = value;
+	protected boolean acceptSemantic(ISemanticSequenceAcceptor acceptor, AbstractElement ele, Object value) {
+		Assignment ass;
+		if (ele instanceof Action) {
+			if (((Action) ele).getFeature() != null) {
+				acceptor.acceptAssignedAction(((Action) ele), (EObject) value);
+				return true;
+			}
+		} else if (GrammarUtil.containingCrossReference(ele) != null) {
+			if (ele instanceof RuleCall) {
+				RuleCall rc = (RuleCall) ele;
+				if (rc.getRule() instanceof ParserRule) {
+					acceptor.acceptAssignedCrossRefDatatype(rc, (EObject) value);
+					return true;
+				}
+				if (rc.getRule() instanceof TerminalRule) {
+					acceptor.acceptAssignedCrossRefTerminal(rc, (EObject) value);
+					return true;
+				}
+				if (rc.getRule() instanceof EnumRule) {
+					acceptor.acceptAssignedCrossRefEnum(rc, (EObject) value);
+					return true;
+				}
+			} else if (ele instanceof Keyword) {
+				acceptor.acceptAssignedCrossRefKeyword((Keyword) ele, (EObject) value);
+				return true;
+			}
+		} else if ((ass = GrammarUtil.containingAssignment(ele)) != null) {
+			if (ele instanceof RuleCall) {
+				RuleCall rc = (RuleCall) ele;
+				if (rc.getRule() instanceof ParserRule) {
+					if (rc.getRule().getType().getClassifier() instanceof EClass)
+						acceptor.acceptAssignedParserRuleCall(rc, (EObject) value);
+					else
+						acceptor.acceptAssignedDatatype(rc, value);
+					return true;
+				}
+				if (rc.getRule() instanceof TerminalRule) {
+					acceptor.acceptAssignedTerminal(rc, value);
+					return true;
+				}
+				if (rc.getRule() instanceof EnumRule) {
+					acceptor.acceptAssignedEnum(rc, value);
+					return true;
+				}
+			} else if (ele instanceof Keyword) {
+				if (GrammarUtil.isBooleanAssignment(ass))
+					acceptor.acceptAssignedKeyword((Keyword) ele, true);
+				else
+					acceptor.acceptAssignedKeyword((Keyword) ele, (String) value);
+				return true;
+			}
 		}
-
-		public Action getGrammarElement() {
-			return this.action;
-		}
-
-		public EObject getValue() {
-			return this.value;
-		}
-
+		return false;
 	}
 
-	protected static class EObjectRuleCallPair extends GrammarValuePair implements IEObjectRuleCallPair {
-		protected RuleCall ruleCall;
-		protected EObject value;
-
-		public EObjectRuleCallPair(RuleCall ruleCall, EObject value) {
-			super();
-			this.ruleCall = ruleCall;
-			this.value = value;
-		}
-
-		public RuleCall getGrammarElement() {
-			return this.ruleCall;
-		}
-
-		public EObject getValue() {
-			return this.value;
-		}
-
-	}
-
-	protected abstract static class GrammarValuePair implements IGrammarValuePair {
-		@Override
-		public String toString() {
-			return PairFormatter.toStr(this);
-		}
-	}
-
-	protected static class KeywordValuePair extends GrammarValuePair implements IKeywordValuePair {
-		protected Keyword keyword;
-		protected String value;
-
-		public KeywordValuePair(Keyword keyword, String value) {
-			super();
-			this.keyword = keyword;
-			this.value = value;
-		}
-
-		public Keyword getGrammarElement() {
-			return this.keyword;
-		}
-
-		public String getValue() {
-			return this.value;
-		}
-
-	}
-
-	protected static class ValueRuleCallPair extends GrammarValuePair implements IValueRuleCallPair {
-		protected RuleCall ruleCall;
-		protected Object value;
-
-		public ValueRuleCallPair(RuleCall ruleCall, Object value) {
-			super();
-			this.ruleCall = ruleCall;
-			this.value = value;
-		}
-
-		public RuleCall getGrammarElement() {
-			return this.ruleCall;
-		}
-
-		public Object getValue() {
-			return this.value;
-		}
-
-	}
-
-	protected IEObjectActionPair newPair(Action action, EObject value) {
-		return new EObjectActionPair(action, value);
-	}
-
-	protected IGrammarValuePair newPair(IConstraintElement constraint, Object value) {
+	protected boolean acceptSemantic(ISemanticSequenceAcceptor acceptor, IConstraintElement constraint, Object value) {
 		switch (constraint.getType()) {
 			case ASSIGNED_ACTION_CALL:
-				return newPair(constraint.getAction(), (EObject) value);
+				acceptor.acceptAssignedAction(constraint.getAction(), (EObject) value);
+				return true;
 			case ASSIGNED_PARSER_RULE_CALL:
+				acceptor.acceptAssignedParserRuleCall(constraint.getRuleCall(), (EObject) value);
+				return true;
 			case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
-			case ASSIGNED_CROSSREF_ENUM_RULE_CALL:
+				acceptor.acceptAssignedCrossRefDatatype(constraint.getRuleCall(), (EObject) value);
+				return true;
 			case ASSIGNED_CROSSREF_TERMINAL_RULE_CALL:
-				return newPair(constraint.getRuleCall(), (EObject) value);
-			case ASSIGNED_DATATYPE_RULE_CALL:
-			case ASSIGNED_ENUM_RULE_CALL:
-			case ASSIGNED_TERMINAL_RULE_CALL:
-			case UNASSIGNED_DATATYPE_RULE_CALL:
-			case UNASSIGNED_TERMINAL_RULE_CALL:
-				return newPair(constraint.getRuleCall(), value);
-			case ASSIGNED_KEYWORD:
+				acceptor.acceptAssignedCrossRefTerminal(constraint.getRuleCall(), (EObject) value);
+				return true;
 			case ASSIGNED_CROSSREF_KEYWORD:
-				return newPair(constraint.getKeyword(), (String) value);
+				acceptor.acceptAssignedCrossRefKeyword(constraint.getKeyword(), (EObject) value);
+				return true;
+			case ASSIGNED_CROSSREF_ENUM_RULE_CALL:
+				acceptor.acceptAssignedCrossRefEnum(constraint.getRuleCall(), (EObject) value);
+				return true;
+			case ASSIGNED_DATATYPE_RULE_CALL:
+				acceptor.acceptAssignedDatatype(constraint.getRuleCall(), value);
+				return true;
+			case ASSIGNED_ENUM_RULE_CALL:
+				acceptor.acceptAssignedEnum(constraint.getRuleCall(), value);
+				return true;
+			case ASSIGNED_TERMINAL_RULE_CALL:
+				acceptor.acceptAssignedTerminal(constraint.getRuleCall(), value);
+				return true;
+			case ASSIGNED_KEYWORD:
+				acceptor.acceptAssignedKeyword(constraint.getKeyword(), (String) value);
+				return true;
+			case ASSIGNED_BOOLEAN_KEYWORD:
+				acceptor.acceptAssignedKeyword(constraint.getKeyword(), (Boolean) value);
+				return true;
 			case ALTERNATIVE:
 			case GROUP:
-				return null;
+			case UNASSIGNED_DATATYPE_RULE_CALL:
+			case UNASSIGNED_TERMINAL_RULE_CALL:
+				return false;
 		}
-		return null;
-	}
-
-	protected IKeywordValuePair newPair(Keyword keyword, String value) {
-		return new KeywordValuePair(keyword, value);
-	}
-
-	protected IEObjectRuleCallPair newPair(RuleCall ruleCall, EObject value) {
-		return new EObjectRuleCallPair(ruleCall, value);
-	}
-
-	protected IValueRuleCallPair newPair(RuleCall ruleCall, Object value) {
-		return new ValueRuleCallPair(ruleCall, value);
+		return false;
 	}
 }

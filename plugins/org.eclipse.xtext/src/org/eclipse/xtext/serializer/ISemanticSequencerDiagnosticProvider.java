@@ -5,24 +5,23 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.serializer.impl;
+package org.eclipse.xtext.serializer;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
-import org.eclipse.xtext.serializer.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.ISerializationDiagnostic;
+import org.eclipse.xtext.serializer.impl.SequencerDiagnosticProvider;
+
+import com.google.inject.ImplementedBy;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnosticProvider {
+@ImplementedBy(SequencerDiagnosticProvider.class)
+public interface ISemanticSequencerDiagnosticProvider {
 
-	public ISerializationDiagnostic createInvalidContextOrTypeDiagnostic(EObject semanticObject, EObject context,
-			List<IConstraintContext> constraints, Grammar grammar) {
-		return new SerializationDiagnostic(semanticObject, "foo bar");
-	}
-
+	ISerializationDiagnostic createInvalidContextOrTypeDiagnostic(EObject semanticObject, EObject context,
+			List<IConstraintContext> constraints, Grammar grammar);
 }

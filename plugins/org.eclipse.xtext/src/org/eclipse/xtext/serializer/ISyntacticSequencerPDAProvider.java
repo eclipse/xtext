@@ -11,40 +11,90 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.grammaranalysis.IPDAState;
+import org.eclipse.xtext.grammaranalysis.IPDAState.PDAStateType;
+import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider;
+
+import com.google.inject.ImplementedBy;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@ImplementedBy(SyntacticSequencerPDAProvider.class)
 public interface ISyntacticSequencerPDAProvider {
 
 	interface IPDAAbsorberState extends IPDAEmitterState {
-		Map<AbstractElement, List<IPDAEmitterState>> getFollowersByElement();
+		List<IPDATransition> getOutTransitions();
 
-		Map<AbstractElement, List<IPDAEmitterState>> getFollowersByRuleCallEnter();
+		Map<AbstractElement, IPDATransition> getOutTransitionsByElement();
 
-		Map<AbstractElement, List<IPDAEmitterState>> getFollowersByRuleCallExit();
+		Map<AbstractElement, IPDATransition> getOutTransitionsByRuleCallEnter();
+
+		Map<AbstractElement, IPDATransition> getOutTransitionsByRuleCallExit();
 	}
 
 	interface IPDAEmitterState {
-		PDAEmitterStateType getType();
+
+		List<IPDAEmitterState> getFollowers();
 
 		AbstractElement getGrammarElement();
 
-		List<IPDAEmitterState> getFollowers();
+		PDAEmitterStateType getType();
+	}
+
+	interface IPDATransition {
+		List<IPDAEmitterState> getDirectEmittersAndAbsorber();
+
+		List<IPDAEmitterState> getShortestPathToAbsorber();
+
+		IPDAAbsorberState getSource();
+
+		IPDAAbsorberState getTarget();
+
+		boolean involvesRuleExit();
+
+		boolean involvesUnassignedTokenRuleCalls();
+
+		boolean isSyntacticallyAmbiguous();
 	}
 
 	enum PDAEmitterStateType {
-		START, //
-		STOP, //
-		PARSER_RULE_ENTER, //
-		PARSER_RULE_EXIT, //
-		PASS_ACTION, // 
-		PASS_KEYWORD, //
-		UNKNOWN
-		// TODO: use real types
+		ASSIGNED_ACTION_CALL(PDAStateType.ELEMENT), //
+		ASSIGNED_BOOLEAN_KEYWORD(PDAStateType.ELEMENT), //
+		ASSIGNED_CROSSREF_DATATYPE_RULE_CALL(PDAStateType.ELEMENT), //
+		ASSIGNED_CROSSREF_ENUM_RULE_CALL(PDAStateType.ELEMENT), //  
+		ASSIGNED_CROSSREF_KEYWORD(PDAStateType.ELEMENT), // 
+		ASSIGNED_CROSSREF_TERMINAL_RULE_CALL(PDAStateType.ELEMENT), //
+		ASSIGNED_DATATYPE_RULE_CALL(PDAStateType.ELEMENT), //
+		ASSIGNED_ENUM_RULE_CALL(PDAStateType.ELEMENT), //
+		ASSIGNED_KEYWORD(PDAStateType.ELEMENT), //
+		ASSIGNED_PARSER_RULE_CALL(PDAStateType.ELEMENT), //
+		ASSIGNED_TERMINAL_RULE_CALL(PDAStateType.ELEMENT), //
+		START(PDAStateType.START), //
+		STOP(PDAStateType.STOP), //
+		UNASSIGEND_ACTION_CALL(PDAStateType.ELEMENT), //
+		UNASSIGEND_KEYWORD(PDAStateType.ELEMENT), //
+		UNASSIGNED_DATATYPE_RULE_CALL(PDAStateType.ELEMENT), //
+		UNASSIGNED_PARSER_RULE_ENTER(PDAStateType.RULECALL_ENTER), //
+		UNASSIGNED_PARSER_RULE_EXIT(PDAStateType.RULECALL_EXIT), //
+		UNASSIGNED_TERMINAL_RULE_CALL(PDAStateType.ELEMENT);
+
+		protected IPDAState.PDAStateType simpleType;
+
+		private PDAEmitterStateType(PDAStateType simpleType) {
+			this.simpleType = simpleType;
+		}
+
+		public IPDAState.PDAStateType getSimpleType() {
+			return simpleType;
+		}
+
 	}
 
-	IPDAEmitterState getPDA(Grammar grammar);
+	IPDAAbsorberState getPDA(Action contet);
+
+	IPDAAbsorberState getPDA(ParserRule context);
 
 }

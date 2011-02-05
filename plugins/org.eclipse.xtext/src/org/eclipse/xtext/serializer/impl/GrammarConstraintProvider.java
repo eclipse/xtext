@@ -42,6 +42,7 @@ import org.eclipse.xtext.grammaranalysis.impl.AbstractNFAState;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractNFATransition;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider;
 import org.eclipse.xtext.util.EmfFormatter;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.base.Function;
@@ -234,6 +235,22 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				this.body.setContainingConstraint(this);
 		}
 
+		public Iterable<IFeatureInfo> getMultiAssignementFeatures() {
+			List<IFeatureInfo> result = Lists.newArrayList();
+			for (IFeatureInfo info : features)
+				if (info != null && info.getAssignments().length > 1)
+					result.add(info);
+			return result;
+		}
+
+		public Iterable<IFeatureInfo> getSingleAssignementFeatures() {
+			List<IFeatureInfo> result = Lists.newArrayList();
+			for (IFeatureInfo info : features)
+				if (info != null && info.getAssignments().length == 1)
+					result.add(info);
+			return result;
+		}
+
 		protected void collectElements(ConstraintElement ele, List<IConstraintElement> elements,
 				List<IConstraintElement> assignments, List<IConstraintElement>[] assignmentsByFeature) {
 			ele.setElementId(elements.size());
@@ -247,6 +264,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				case ASSIGNED_DATATYPE_RULE_CALL:
 				case ASSIGNED_ENUM_RULE_CALL:
 				case ASSIGNED_KEYWORD:
+				case ASSIGNED_BOOLEAN_KEYWORD:
 				case ASSIGNED_PARSER_RULE_CALL:
 				case ASSIGNED_TERMINAL_RULE_CALL:
 					EClass type = ele.getContainingConstraint().getType();
@@ -347,13 +365,17 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 		protected int assignmentId = -1;
 
-		protected Boolean cardinalityOneForFeature;
+		//		protected Boolean cardinalityOneForFeature;
 
 		protected List<IConstraintElement> children;
 
 		protected ConstraintElement container;
 
+		//		protected IConstraintElement excludingAlternative = UNINTITIALIZED;
+
 		protected IConstraint containingConstraint;
+
+		protected List<IConstraintElement> containedAssignments = null;
 
 		protected EObject context;
 
@@ -429,16 +451,16 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			return element == ce.element && ((children == null && ce.children == null) || children.equals(ce.children));
 		}
 
-		protected IConstraintElement findCommonContainer(IConstraintElement[] elements) {
-			if (elements.length == 0)
+		protected IConstraintElement findCommonContainer(List<IConstraintElement> elements) {
+			if (elements.size() == 0)
 				return null;
-			if (elements.length == 1)
-				return elements[0];
-			IConstraintElement result = elements[0];
-			for (int i = 1; i < elements.length; i++) {
+			if (elements.size() == 1)
+				return elements.get(0);
+			IConstraintElement result = elements.get(0);
+			for (int i = 1; i < elements.size(); i++) {
 				boolean found = false;
 				while (!found && result != null) {
-					IConstraintElement cand = elements[i];
+					IConstraintElement cand = elements.get(i);
 					while (!found && cand != null)
 						if (cand == result)
 							found = true;
@@ -570,15 +592,12 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			this.children.add(0, child);
 		}
 
-		public boolean isCardinalityOneForFeature() {
-			if (cardinalityOneForFeature != null)
-				return cardinalityOneForFeature;
-			IConstraintElement[] assignments = featureInfo.getAssignments();
-			if (assignments.length < 2)
-				return cardinalityOneForFeature = false;
+		public boolean isCardinalityOneAmongAssignments(List<IConstraintElement> assignments) {
+			if (assignments.size() < 2)
+				return false;
 			IConstraintElement commonContainer = findCommonContainer(assignments);
-			return cardinalityOneForFeature = !isOptionalRecursive(commonContainer)
-					&& !isManyRecursive(commonContainer);
+			return commonContainer.getType() != ConstraintElementType.ALTERNATIVE
+					&& !isOptionalRecursive(commonContainer) && !isManyRecursive(commonContainer);
 		}
 
 		public boolean isMany() {
@@ -667,6 +686,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 							+ getCardinality();
 				case ASSIGNED_CROSSREF_KEYWORD:
 				case ASSIGNED_KEYWORD:
+				case ASSIGNED_BOOLEAN_KEYWORD:
 					return getFeatureName() + getAssignmentOperator() + "'" + getKeyword().getValue() + "'"
 							+ getCardinality();
 				case UNASSIGNED_DATATYPE_RULE_CALL:
@@ -678,6 +698,111 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 		protected void typeMatch() {
 			this.typeMatch = true;
+		}
+
+		public boolean isRoot() {
+			return container == null;
+		}
+
+		//
+		//		public IConstraintElement getExcludingAlternative() {
+		//			if (excludingAlternative == UNINTITIALIZED) {
+		//				IConstraintElement ele = getContainer();
+		//				while (ele != null) {
+		//					if (ele.getType() == ConstraintElementType.ALTERNATIVE) {
+		//						if (ele.isManyRecursive(null))
+		//							return excludingAlternative = null;
+		//						else
+		//							return excludingAlternative = ele;
+		//
+		//					} else
+		//						ele = ele.getContainer();
+		//				}
+		//				return excludingAlternative = null;
+		//			}
+		//			return excludingAlternative;
+		//		}
+
+		public List<IConstraintElement> getContainedAssignments() {
+			if (containedAssignments == null) {
+				containedAssignments = Lists.newArrayList();
+				if (assignmentId >= 0)
+					containedAssignments.add(this);
+				if (getChildren() != null)
+					for (IConstraintElement child : getChildren())
+						containedAssignments.addAll(child.getContainedAssignments());
+			}
+			return containedAssignments;
+		}
+
+		protected List<Pair<IConstraintElement, AssignmentDependencyKind>> dependingAssignments;
+
+		public List<Pair<IConstraintElement, AssignmentDependencyKind>> getDependingAssignment() {
+			if (assignmentId < 0)
+				return null;
+			if (dependingAssignments == null) {
+				dependingAssignments = Lists.newArrayList();
+				collectDependingAssignmentsByContainer(this, dependingAssignments, isMany(), isOptional());
+			}
+			return dependingAssignments;
+		}
+
+		protected void collectDependingAssignmentsByContainer(IConstraintElement child,
+				List<Pair<IConstraintElement, AssignmentDependencyKind>> result, boolean childMany,
+				boolean childOptional) {
+			IConstraintElement container = child.getContainer();
+			if (container == null)
+				return;
+			boolean cntOptional = container.isOptionalRecursive(null);
+			boolean cntMany = container.isManyRecursive(null);
+			switch (container.getType()) {
+				case ALTERNATIVE:
+					if (!container.isManyRecursive(null))
+						for (IConstraintElement choice : container.getChildren())
+							if (choice != child)
+								for (IConstraintElement ass : choice.getContainedAssignments())
+									result.add(Tuples.create(ass, AssignmentDependencyKind.EXCLUDE_IF_SET));
+					break;
+				case GROUP:
+					if (!cntOptional && !cntMany)
+						return;
+					for (IConstraintElement choice : container.getChildren())
+						if (choice != child)
+							for (IConstraintElement ass : choice.getContainedAssignments()) {
+								boolean assMany = ass.isManyRecursive(container);
+								boolean assOptional = ass.isOptionalRecursive(container);
+								boolean exclude_if_unset = !assOptional;
+								boolean mandatory_if_set = !childOptional;
+								boolean same = false, same_or_less = false, same_or_more = false;
+								if (cntMany) {
+									if (!assMany && !assOptional && !childMany && !childOptional)
+										same = true;
+									else if ((childOptional && !childMany && !assOptional)
+											|| (!assOptional && !childMany && !assOptional && assMany))
+										same_or_less = true;
+									else if ((!childOptional && !childMany && assOptional && !assMany)
+											|| (!childOptional && childMany && !assOptional && !assMany)
+											|| (!childOptional && childMany && assOptional && !assMany))
+										same_or_more = true;
+								}
+								if (exclude_if_unset && !same_or_less && !same)
+									result.add(Tuples.create(ass, AssignmentDependencyKind.EXCLUDE_IF_UNSET));
+								if (mandatory_if_set && !same_or_more && !same)
+									result.add(Tuples.create(ass, AssignmentDependencyKind.MANDATORY_IF_SET));
+								if (same)
+									result.add(Tuples.create(ass, AssignmentDependencyKind.SAME));
+								if (same_or_less)
+									result.add(Tuples.create(ass, AssignmentDependencyKind.SAME_OR_LESS));
+								if (same_or_more)
+									result.add(Tuples.create(ass, AssignmentDependencyKind.SAME_OR_MORE));
+							}
+					break;
+				default:
+			}
+			childMany = childMany || container.isMany();
+			childOptional = childOptional || container.isOptional()
+					|| container.getType() == ConstraintElementType.ALTERNATIVE;
+			collectDependingAssignmentsByContainer(container, result, childMany, childOptional);
 		}
 	}
 
@@ -772,6 +897,8 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 	}
 
 	protected final static ConstraintElement INVALID = new ConstraintElement();
+
+	protected final static ConstraintElement UNINTITIALIZED = new ConstraintElement();
 
 	protected final static ConstraintElement TYPEMATCH = new ConstraintElement();
 
@@ -1135,6 +1262,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 	}
 
 	protected ConstraintElementType getConstraintElementType(AbstractElement ele) {
+		Assignment ass;
 		if (ele instanceof Action) {
 			if (((Action) ele).getFeature() != null)
 				return ConstraintElementType.ASSIGNED_ACTION_CALL;
@@ -1153,7 +1281,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 					return ConstraintElementType.ASSIGNED_CROSSREF_ENUM_RULE_CALL;
 			} else if (ele instanceof Keyword)
 				return ConstraintElementType.ASSIGNED_CROSSREF_KEYWORD;
-		} else if (GrammarUtil.containingAssignment(ele) != null) {
+		} else if ((ass = GrammarUtil.containingAssignment(ele)) != null) {
 			if (ele instanceof RuleCall) {
 				RuleCall rc = (RuleCall) ele;
 				if (rc.getRule() instanceof ParserRule) {
@@ -1166,8 +1294,12 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				if (rc.getRule() instanceof EnumRule)
 					return ConstraintElementType.ASSIGNED_ENUM_RULE_CALL;
 
-			} else if (ele instanceof Keyword)
-				return ConstraintElementType.ASSIGNED_KEYWORD;
+			} else if (ele instanceof Keyword) {
+				if (GrammarUtil.isBooleanAssignment(ass))
+					return ConstraintElementType.ASSIGNED_BOOLEAN_KEYWORD;
+				else
+					return ConstraintElementType.ASSIGNED_KEYWORD;
+			}
 		} else {
 			if (ele instanceof RuleCall) {
 				RuleCall rc = (RuleCall) ele;

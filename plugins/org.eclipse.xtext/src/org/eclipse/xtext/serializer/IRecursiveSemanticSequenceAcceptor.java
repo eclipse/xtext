@@ -8,29 +8,19 @@
 package org.eclipse.xtext.serializer;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.RuleCall;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface ISerializationDiagnostic {
+public interface IRecursiveSemanticSequenceAcceptor extends IAssignedTokenSequenceAcceptor {
 
-	public interface Acceptor {
-		void accept(ISerializationDiagnostic diagnostic);
-	}
+	void enterAssignedAction(Action action, EObject semanticChild);
 
-	public class ExceptionThrowingAcceptor implements Acceptor {
-		public void accept(ISerializationDiagnostic diagnostic) {
-			if (diagnostic == null || diagnostic.getMessage() == null)
-				throw new RuntimeException();
-			throw new RuntimeException(diagnostic.getMessage());
-		}
-	}
+	void enterAssignedParserRuleCall(RuleCall rc, EObject newCurrent);
 
-	public Acceptor EXCEPTION_ACCEPTOR = new ExceptionThrowingAcceptor();
+	void leaveAssignedAction(Action action, EObject semanticChild);
 
-	boolean breaksSyntax();
-
-	String getMessage();
-
-	EObject getSemanitcObject();
+	void leaveAssignedParserRuleCall(RuleCall rc);
 }

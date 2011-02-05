@@ -7,21 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
-import org.eclipse.xtext.serializer.impl.SequencerDiagnosticProvider;
+import org.eclipse.xtext.serializer.impl.RecursiveSyntacticSequencer;
 
 import com.google.inject.ImplementedBy;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@ImplementedBy(SequencerDiagnosticProvider.class)
-public interface ISequencerDiagnosticProvider {
-
-	ISerializationDiagnostic createInvalidContextOrTypeDiagnostic(EObject semanticObject, EObject context,
-			List<IConstraintContext> constraints, Grammar grammar);
+@ImplementedBy(RecursiveSyntacticSequencer.class)
+public interface IRecursiveSyntacticSequencer {
+	void createSequence(ISyntacticSequencer syndelegate, ISemanticSequencer semdelegate, EObject context,
+			EObject semanticObject, IRecursiveSyntacticSequenceAcceptor sequenceAcceptor,
+			ISerializationDiagnostic.Acceptor errorAcceptor);
 }

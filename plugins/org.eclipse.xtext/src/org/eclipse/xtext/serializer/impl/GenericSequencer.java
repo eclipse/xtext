@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.impl;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -26,11 +27,13 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider;
+import org.eclipse.xtext.serializer.IGrammarConstraintProvider.AssignmentDependencyKind;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintElement;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IFeatureInfo;
-import org.eclipse.xtext.serializer.ISequencerDiagnosticProvider;
+import org.eclipse.xtext.serializer.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.ITransientValueService;
 import org.eclipse.xtext.util.EmfFormatter;
@@ -54,12 +57,16 @@ public class GenericSequencer extends AbstractSequencer {
 			super();
 		}
 
-		public abstract void collectGrammarValuePairs(IConstraintElement constraint, List<IGrammarValuePair> result);
+		public abstract void collectGrammarValuePairs(IConstraintElement constraint, ISemanticSequenceAcceptor acceptor);
 
 		@Override
 		public String toString() {
 			return toString("");
 		}
+
+		public abstract int minValues(IConstraintElement constraint);
+
+		public abstract int maxValues(IConstraintElement constraint);
 
 		public abstract String toString(String prefix);
 	}
@@ -73,8 +80,9 @@ public class GenericSequencer extends AbstractSequencer {
 		}
 
 		@Override
-		public void collectGrammarValuePairs(IConstraintElement constraint, List<IGrammarValuePair> result) {
-			result.add(newPair(constraint, value));
+		public void collectGrammarValuePairs(IConstraintElement constraint, ISemanticSequenceAcceptor acceptor) {
+			acceptSemantic(acceptor, constraint, value);
+			//			result.add(newPair(constraint, value));
 		}
 
 		public Object getValue() {
@@ -84,6 +92,16 @@ public class GenericSequencer extends AbstractSequencer {
 		@Override
 		public String toString(String prefix) {
 			return value instanceof EObject ? EmfFormatter.objPath((EObject) value) : value.toString();
+		}
+
+		@Override
+		public int minValues(IConstraintElement constraint) {
+			return 1;
+		}
+
+		@Override
+		public int maxValues(IConstraintElement constraint) {
+			return 1;
 		}
 	}
 
@@ -96,14 +114,28 @@ public class GenericSequencer extends AbstractSequencer {
 		}
 
 		@Override
-		public void collectGrammarValuePairs(IConstraintElement constraint, List<IGrammarValuePair> result) {
-			child.collectGrammarValuePairs(result);
+		public void collectGrammarValuePairs(IConstraintElement constraint, ISemanticSequenceAcceptor acceptor) {
+			child.collectGrammarValuePairs(acceptor);
+		}
+
+		protected Quantity getChild() {
+			return child;
 		}
 
 		@Override
 		public String toString(String prefix) {
 			String newPrefix = "  " + prefix;
-			return "Alternative {\n" + newPrefix + child.toString(newPrefix) + "\n" + prefix + "}";
+			return "Alt-Choice {\n" + newPrefix + child.toString(newPrefix) + "\n" + prefix + "}";
+		}
+
+		@Override
+		public int minValues(IConstraintElement constraint) {
+			return 0;
+		}
+
+		@Override
+		public int maxValues(IConstraintElement constraint) {
+			return 0;
 		}
 	}
 
@@ -121,7 +153,11 @@ public class GenericSequencer extends AbstractSequencer {
 
 		public abstract List<AllocationValue> getValuesFor(IConstraintElement assignment);
 
-		public abstract boolean isUnambiguous();
+		public abstract int getQuantity(IConstraintElement assignment);
+
+		public abstract void setQuantity(IConstraintElement assignment, int quantity);
+
+		public abstract boolean isAmbiguous();
 
 		@Override
 		public String toString() {
@@ -150,9 +186,9 @@ public class GenericSequencer extends AbstractSequencer {
 		}
 
 		@Override
-		public void collectGrammarValuePairs(IConstraintElement constraint, List<IGrammarValuePair> result) {
+		public void collectGrammarValuePairs(IConstraintElement constraint, ISemanticSequenceAcceptor acceptor) {
 			for (Quantity q : children)
-				q.collectGrammarValuePairs(result);
+				q.collectGrammarValuePairs(acceptor);
 		}
 
 		public List<Quantity> getChildren() {
@@ -163,17 +199,28 @@ public class GenericSequencer extends AbstractSequencer {
 		public String toString(String prefix) {
 			String newPrefix = "  " + prefix;
 			StringBuilder r = new StringBuilder();
-			r.append("Group {\n");
+			r.append("Group {");
 			for (Quantity child : children) {
+				r.append("\n");
 				r.append(newPrefix);
 				r.append(child.getConstraintElement());
 				r.append(" => ");
 				r.append(child.toString(newPrefix));
-				r.append("\n");
 			}
+			r.append("\n");
 			r.append(prefix);
 			r.append("}");
 			return r.toString();
+		}
+
+		@Override
+		public int minValues(IConstraintElement constraint) {
+			return 0;
+		}
+
+		@Override
+		public int maxValues(IConstraintElement constraint) {
+			return 0;
 		}
 
 	}
@@ -183,10 +230,13 @@ public class GenericSequencer extends AbstractSequencer {
 
 		protected List<AllocationValue> values;
 
+		protected int[] quantities; //TODO: implement
+
 		public MVFeature2AssignmentAmbiguous(List<IConstraintElement> assignments, List<AllocationValue> values) {
 			super();
 			this.assignments = assignments;
 			this.values = values;
+			this.quantities = new int[assignments.get(0).getFeatureInfo().getAssignments().length];
 		}
 
 		@Override
@@ -200,8 +250,24 @@ public class GenericSequencer extends AbstractSequencer {
 		}
 
 		@Override
-		public boolean isUnambiguous() {
-			return true;
+		public boolean isAmbiguous() {
+			int undefs = 0;
+			for (IConstraintElement ass : assignments)
+				if (quantities[ass.getFeatureAssignmentID()] == UNDEFINED_QUANTITY)
+					undefs++;
+			return undefs > 1;
+		}
+
+		@Override
+		public int getQuantity(IConstraintElement assignment) {
+			if (isAmbiguous())
+				return UNDEF;
+			return UNDEF; // TODO: implement
+		}
+
+		@Override
+		public void setQuantity(IConstraintElement assignment, int quantity) {
+			// TODO: implement			
 		}
 	}
 
@@ -228,8 +294,17 @@ public class GenericSequencer extends AbstractSequencer {
 		}
 
 		@Override
-		public boolean isUnambiguous() {
-			return true;
+		public boolean isAmbiguous() {
+			return false;
+		}
+
+		@Override
+		public int getQuantity(IConstraintElement assignment) {
+			return assignment == this.assignment ? values.size() : UNDEF;
+		}
+
+		@Override
+		public void setQuantity(IConstraintElement assignment, int quantity) {
 		}
 
 	}
@@ -250,10 +325,10 @@ public class GenericSequencer extends AbstractSequencer {
 			this.constraintElement = constraintElement;
 		}
 
-		public void collectGrammarValuePairs(List<IGrammarValuePair> result) {
+		public void collectGrammarValuePairs(ISemanticSequenceAcceptor acceptor) {
 			if (instances != null)
 				for (Allocation a : instances)
-					a.collectGrammarValuePairs(constraintElement, result);
+					a.collectGrammarValuePairs(constraintElement, acceptor);
 		}
 
 		public List<? extends Allocation> getAllocations() {
@@ -272,10 +347,22 @@ public class GenericSequencer extends AbstractSequencer {
 		public String toString(String prefix) {
 			if (instances == null)
 				return "(null)";
+			if (instances.isEmpty())
+				return "(empty)";
 			else if (!constraintElement.isMany() && instances.size() < 2) {
-				return instances.isEmpty() ? "(empty)" : instances.get(0).toString();
+				return instances.get(0).toString(prefix);
 			} else {
-				return instances.isEmpty() ? "(empty)" : "[" + Join.join("\n" + prefix, instances) + "]";
+				StringBuilder buf = new StringBuilder();
+				buf.append("[");
+				for (Allocation a : instances) {
+					buf.append("\n");
+					buf.append(prefix + "  ");
+					buf.append(a.toString(prefix + "  "));
+				}
+				buf.append("\n");
+				buf.append(prefix);
+				buf.append("]");
+				return buf.toString();
 			}
 		}
 	}
@@ -294,14 +381,21 @@ public class GenericSequencer extends AbstractSequencer {
 
 	}
 
+	protected final static int UNDEFINED_QUANTITY = -1;
+	protected final static int NO_ASSIGNMENT = -2;
+
 	protected class SVFeature2AssignmentAmbiguous extends SVFeature2Assignment {
 
 		protected List<IConstraintElement> assignments;
+
+		protected Boolean[] enabled;
 
 		public SVFeature2AssignmentAmbiguous(List<IConstraintElement> assignments, boolean optional,
 				AllocationValue value) {
 			super(optional, value);
 			this.assignments = assignments;
+			this.enabled = new Boolean[assignments.get(0).getFeatureInfo().getAssignments().length];
+			Arrays.fill(this.enabled, null);
 		}
 
 		@Override
@@ -310,15 +404,41 @@ public class GenericSequencer extends AbstractSequencer {
 		}
 
 		@Override
+		public void setQuantity(IConstraintElement assignment, int quantity) {
+			this.enabled[assignment.getFeatureAssignmentID()] = quantity != 0;
+		}
+
+		@Override
 		public List<AllocationValue> getValuesFor(IConstraintElement assignment) {
-			if (assignments.contains(assignment))
-				return Collections.singletonList(value);
+			if (assignments.contains(assignment)) {
+				Boolean en = enabled[assignment.getFeatureAssignmentID()];
+				if (en == null && !isAmbiguous()) {
+					for (IConstraintElement ass : assignments)
+						if (enabled[ass.getFeatureAssignmentID()] == Boolean.TRUE)
+							return Collections.emptyList();
+					return Collections.singletonList(value);
+				}
+				if (en != null && en)
+					return Collections.singletonList(value);
+			}
 			return Collections.emptyList();
 		}
 
 		@Override
-		public boolean isUnambiguous() {
-			return true;
+		public boolean isAmbiguous() {
+			int undefined = 0;
+			for (IConstraintElement ass : assignments)
+				if (enabled[ass.getFeatureAssignmentID()] == null)
+					undefined++;
+			return undefined > 1;
+		}
+
+		@Override
+		public int getQuantity(IConstraintElement assignment) {
+			if (isAmbiguous() || !assignments.contains(assignment))
+				return UNDEF;
+			Boolean en = enabled[assignment.getFeatureAssignmentID()];
+			return en != null && en ? 1 : 0;
 		}
 	}
 
@@ -344,8 +464,17 @@ public class GenericSequencer extends AbstractSequencer {
 		}
 
 		@Override
-		public boolean isUnambiguous() {
-			return true;
+		public boolean isAmbiguous() {
+			return false;
+		}
+
+		@Override
+		public int getQuantity(IConstraintElement assignment) {
+			return 1;
+		}
+
+		@Override
+		public void setQuantity(IConstraintElement assignment, int quantity) {
 		}
 	}
 
@@ -357,7 +486,7 @@ public class GenericSequencer extends AbstractSequencer {
 	protected ITokenSerializer.ICrossReferenceSerializer crossRefSerializer;
 
 	@Inject
-	protected ISequencerDiagnosticProvider diagnosticProvider;
+	protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
 
 	@Inject
 	protected ITokenSerializer.IEnumLiteralSerializer enumLiteralSerializer;
@@ -377,96 +506,70 @@ public class GenericSequencer extends AbstractSequencer {
 	@Inject
 	protected ITokenSerializer.IValueSerializer valueSerializer;
 
-	public Iterable<IGrammarValuePair> createSequence(EObject context, EObject semanticObject,
-			ISerializationDiagnostic.Acceptor errorAcceptor) {
+	public void createSequence(EObject context, EObject semanticObject,
+			ISemanticSequenceAcceptor sequenceAcceptorProvider, ISerializationDiagnostic.Acceptor errorAcceptor) {
 		initConstraints();
 		IConstraint constraint = getConstraint(context, semanticObject.eClass());
-		//		System.out.println("Constraint: " + constraint);
+//		System.out.println("Constraint: " + constraint);
 		if (constraint == null) {
-			if (errorAcceptor != null)
-				errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context,
-						constraintContexts, grammarAccess.getGrammar()));
-			return Collections.emptyList();
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context,
+					constraintContexts, grammarAccess.getGrammar()));
+			return;
 		}
 		Feature2Assignment[] values = createValues(semanticObject, constraint);
-		//		System.out.println("Values: " + f2aToStr(constraint.getBody(), values));
+//		System.out.println("Values: " + f2aToStr(constraint.getBody(), values));
+		applydeterministicQuantities(constraint, values);
+		//		System.out.println("Values (Disambiguated): " + f2aToStr(constraint.getBody(), values));
 		Quantity quant = new Quantity(constraint.getBody(), createUnambiguousAllocation(constraint.getBody(), values));
-		//		System.out.println("Quantity: " + quant);
-		List<IGrammarValuePair> result = Lists.newArrayList();
-		quant.collectGrammarValuePairs(result);
-		return result;
+		//		System.out.println("Quantity: " + quant + " EndQuantity");
+		//		List<IGrammarValuePair> result = Lists.newArrayList();
+		quant.collectGrammarValuePairs(sequenceAcceptorProvider);
 	}
 
-	//	protected Iterable<Quantity> createIndependentlyDecideableQuantity(List<IConstraintElement> assignments,
-	//			List<AllocationValue> values) {
-	//		return null;
-	//	}
+	protected void applydeterministicQuantities(IConstraint constraint, Feature2Assignment[] values) {
+		boolean changed;
+		do {
+			changed = false;
+			for (IConstraintElement assignment : constraint.getAssignments())
+				if (values[assignment.getAssignmentID()] != null && values[assignment.getAssignmentID()].isAmbiguous()) {
+					int min = getMin(values, assignment);
+					int max = getMax(values, assignment);
+					if (min == max && min != UNDEF) {
+						values[assignment.getAssignmentID()].setQuantity(assignment, min);
+						changed = true;
+						//						System.out.println("Setting quantity of " + assignment + " to " + min);
+					}
+				}
+		} while (changed);
+	}
 
-	//	protected int[] createQuantities(IConstraint constraint, Feature2Assignment[] values) {
-	//		int[] quantities = new int[constraint.getAllElements().size()];
-	//	}
+	protected boolean isAmbiguous(Feature2Assignment[] allocations) {
+		for (Feature2Assignment feat : allocations)
+			if (feat.isAmbiguous())
+				return true;
+		return false;
+	}
 
-	//	final static int UNDEF = -1;
-	//
-	//	protected int getQuantity(IConstraintElement constraint, Feature2Assignment[] values) {
-	//		switch (constraint.getType()) {
+	//	protected boolean disableInvalidAlternativeChoices(Quantity quant, Feature2Assignment[] values) {
+	//		if (quant.getConstraintElement().isMany())
+	//			return false;
+	//		switch (quant.getConstraintElement().getType()) {
 	//			case ALTERNATIVE:
-	//				int result1 = 0;
-	//				for (IConstraintElement child : constraint.getChildren()) {
-	//					int quant = getQuantity(child, values);
-	//					if (quant == UNDEF)
-	//						return UNDEF;
-	//					if (quant > 0) {
-	//						if (child.isMany())
-	//							result1 += 1;
-	//						else
-	//							result1 += quant;
-	//					}
+	//				if (quant.getAllocations().size() == 1) {
+	//					Quantity child = ((AlternativeAllocation) quant.getAllocations().get(0)).getChild();
+	//					return disableInvalidAlternativeChoices(child, values);
 	//				}
-	//				return result1;
+	//				return;
 	//			case GROUP:
-	//				int min = 0;
-	//				int max = Integer.MAX_VALUE;
-	//				for (IConstraintElement child : constraint.getChildren()) {
-	//					int quant = getQuantity(child, values);
-	//					if (quant == UNDEF)
-	//						return UNDEF;
-	//					if (quant > 0)
-	//						min = Math.max(min, constraint.isMany() ? 1 : quant);
-	//					if (!child.isOptional())
-	//						max = Math.max(max, quant);
-	//				}
-	//				if (min <= max)
-	//					return min;
-	//				return UNDEF; // TODO: handle this error
-	//			case ASSIGNED_ACTION_CALL:
-	//			case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
-	//			case ASSIGNED_CROSSREF_ENUM_RULE_CALL:
-	//			case ASSIGNED_CROSSREF_KEYWORD:
-	//			case ASSIGNED_CROSSREF_TERMINAL_RULE_CALL:
-	//			case ASSIGNED_DATATYPE_RULE_CALL:
-	//			case ASSIGNED_ENUM_RULE_CALL:
-	//			case ASSIGNED_KEYWORD:
-	//			case ASSIGNED_PARSER_RULE_CALL:
-	//			case ASSIGNED_TERMINAL_RULE_CALL:
-	//				Feature2Assignment f2a = values[constraint.getID()];
-	//				if (f2a.isUnambiguous())
-	//					return f2a.getValuesFor(constraint).size();
-	//				else
-	//					return UNDEF;
-	//			case UNASSIGNED_DATATYPE_RULE_CALL:
-	//			case UNASSIGNED_TERMINAL_RULE_CALL:
-	//				return UNDEF;
+	//				boolean changed = false;
+	//				for (Allocation alloc : quant.getAllocations())
+	//					for (Quantity child : ((GroupAllocation) alloc).getChildren())
+	//						changed = changed || disableInvalidAlternativeChoices(child, values);
+	//				return changed;
+	//			default:
+	//				return false;
 	//		}
-	//		return UNDEF;
-	//	}
-
-	//	protected Quantity createUnambiguousQuantity(IConstraintElement constraint, Feature2Assignment[] values) {
-	//		int quantity = getQuantity(constraint, values);
-	//		Quantity result = new Quantity();
-	//		for (int i = 0; i < quantity; i++)
-	//			result.addAllocation(createUnambiguousAllocation(constraint, values));
-	//		return result;
+	//		return false;
 	//	}
 
 	protected List<? extends Allocation> createUnambiguousAllocation(IConstraintElement constraint,
@@ -531,12 +634,15 @@ public class GenericSequencer extends AbstractSequencer {
 			case ASSIGNED_KEYWORD:
 			case ASSIGNED_PARSER_RULE_CALL:
 			case ASSIGNED_TERMINAL_RULE_CALL:
+			case ASSIGNED_BOOLEAN_KEYWORD:
 				Feature2Assignment f2a = values[constraint.getAssignmentID()];
 				if (f2a == null)
 					return Collections.emptyList();
-				else if (f2a.isUnambiguous())
+				else if (!f2a.isAmbiguous()) {
 					return f2a.getValuesFor(constraint);
-				else
+					//					List<? extends Allocation> r = f2a.getValuesFor(constraint);
+					//					return r.isEmpty() ? null : r;
+				} else
 					return null;
 			case UNASSIGNED_DATATYPE_RULE_CALL:
 			case UNASSIGNED_TERMINAL_RULE_CALL:
@@ -587,37 +693,61 @@ public class GenericSequencer extends AbstractSequencer {
 
 	protected Feature2Assignment[] createValues(EObject semanticObject, IConstraint constraint) {
 		Feature2Assignment[] result = new Feature2Assignment[constraint.getAssignments().length];
-		for (int featureID = 0; featureID < constraint.getFeatures().length; featureID++) {
-			IFeatureInfo feature = constraint.getFeatures()[featureID];
-			if (feature != null) {
-				if (feature.getFeature().isMany()) {
-					Iterable<Object> values = transientValueService.getNonTransientValues(semanticObject,
-							feature.getFeature());
-					List<AllocationValue> allocs = Lists.newArrayList();
-					for (Object v : values)
-						allocs.add(new AssignedAllocationValue(feature.getFeature(), v));
-					if (!allocs.isEmpty())
-						createValues(feature, allocs, result);
-				} else {
-					if (!transientValueService.isTransient(semanticObject, feature.getFeature())) {
-						Object value = semanticObject.eGet(feature.getFeature());
-						AllocationValue alloc = new AssignedAllocationValue(feature.getFeature(), value);
-						boolean optional = transientValueService.isOptional(feature.getFeature(), feature.getFeature());
-						createValues(semanticObject, feature, optional, alloc, result);
-					}
+		for (IFeatureInfo feature : constraint.getSingleAssignementFeatures()) {
+			if (feature.getFeature().isMany()) {
+				List<AllocationValue> allocs = getNonTransientValuesForMVFeature(semanticObject, feature);
+				if (!allocs.isEmpty()) {
+					IConstraintElement ass = feature.getAssignments()[0];
+					result[ass.getAssignmentID()] = new MVFeature2AssignmentUnambiguous(ass, allocs);
+				}
+			} else {
+				AllocationValue alloc = getNonTransientValuesForSVFeature(semanticObject, feature);
+				if (alloc != null) {
+					boolean optional = transientValueService.isOptional(feature.getFeature(), feature.getFeature());
+					IConstraintElement ass = feature.getAssignments()[0];
+					result[ass.getAssignmentID()] = new SVFeature2AssignmentUnambiguous(ass, optional, alloc);
+				}
+			}
+		}
+		for (IFeatureInfo feature : constraint.getMultiAssignementFeatures()) {
+			if (feature.getFeature().isMany()) {
+				List<AllocationValue> allocs = getNonTransientValuesForMVFeature(semanticObject, feature);
+				if (!allocs.isEmpty())
+					createValues(feature, allocs, result);
+			} else {
+				AllocationValue alloc = getNonTransientValuesForSVFeature(semanticObject, feature);
+				if (alloc != null) {
+					boolean optional = transientValueService.isOptional(feature.getFeature(), feature.getFeature());
+					createValues(semanticObject, feature, optional, alloc, result);
 				}
 			}
 		}
 		return result;
 	}
 
+	protected AllocationValue getNonTransientValuesForSVFeature(EObject semanticObject, IFeatureInfo feature) {
+		if (!transientValueService.isTransient(semanticObject, feature.getFeature())) {
+			Object value = semanticObject.eGet(feature.getFeature());
+			return new AssignedAllocationValue(feature.getFeature(), value);
+		}
+		return null;
+	}
+
+	protected List<AllocationValue> getNonTransientValuesForMVFeature(EObject semanticObject, IFeatureInfo feature) {
+		Iterable<Object> values = transientValueService.getNonTransientValues(semanticObject, feature.getFeature());
+		List<AllocationValue> allocs = Lists.newArrayList();
+		for (Object v : values)
+			allocs.add(new AssignedAllocationValue(feature.getFeature(), v));
+		return allocs;
+	}
+
 	protected void createValues(EObject semanticObj, IFeatureInfo feature, boolean optional, AllocationValue value,
 			Feature2Assignment[] target) {
-		if (feature.getAssignments().length == 1) {
-			IConstraintElement ass = feature.getAssignments()[0];
-			target[ass.getAssignmentID()] = new SVFeature2AssignmentUnambiguous(ass, optional, value);
-			return;
-		}
+		//		if (feature.getAssignments().length == 1) {
+		//			IConstraintElement ass = feature.getAssignments()[0];
+		//			target[ass.getAssignmentID()] = new SVFeature2AssignmentUnambiguous(ass, optional, value);
+		//			return;
+		//		}
 		List<IConstraintElement> validAssignments = null;
 		if (feature.isContentValidationNeeded()) {
 			validAssignments = findValidAssignments(semanticObj, feature.getAssignments(), value.getValue());
@@ -636,13 +766,41 @@ public class GenericSequencer extends AbstractSequencer {
 			target[ass.getAssignmentID()] = f2a;
 	}
 
+	protected boolean isExcludedByDependees(IConstraintElement assignments, Feature2Assignment[] target) {
+		List<Pair<IConstraintElement, AssignmentDependencyKind>> dependees = assignments.getDependingAssignment();
+		if (dependees == null || dependees.isEmpty())
+			return false;
+		for (Pair<IConstraintElement, AssignmentDependencyKind> e : dependees)
+			switch (e.getSecond()) {
+				case EXCLUDE_IF_SET:
+					if (target[e.getFirst().getAssignmentID()] != null)
+						return true;
+					break;
+				case SAME:
+				case SAME_OR_LESS:
+				case EXCLUDE_IF_UNSET:
+					if (target[e.getFirst().getAssignmentID()] == null
+							&& e.getFirst().getFeatureInfo().getAssignments().length == 1)
+						return true;
+					break;
+				case MANDATORY_IF_SET:
+				case SAME_OR_MORE:
+			}
+		return false;
+	}
+
 	protected void createValues(IFeatureInfo feature, List<AllocationValue> values, Feature2Assignment[] target) {
-		if (feature.getAssignments().length == 1) {
-			IConstraintElement ass = feature.getAssignments()[0];
+		List<IConstraintElement> remainingAssignments = Lists.newArrayList();
+		for (IConstraintElement ass : feature.getAssignments())
+			if (!isExcludedByDependees(ass, target))
+				remainingAssignments.add(ass);
+		if (remainingAssignments.size() == 0)
+			throw new RuntimeException("no valid assignments"); // TODO: handle this better
+		if (remainingAssignments.size() == 1) {
+			IConstraintElement ass = remainingAssignments.get(0);
 			target[ass.getAssignmentID()] = new MVFeature2AssignmentUnambiguous(ass, values);
 			return;
 		}
-		List<IConstraintElement> remainingAssignments = Lists.newArrayList(feature.getAssignments());
 		List<AllocationValue> remainingValues = Lists.newArrayList(values);
 		distributeValuesByQuantity(remainingAssignments, remainingValues, target);
 		if (remainingAssignments.size() == 1) {
@@ -657,28 +815,28 @@ public class GenericSequencer extends AbstractSequencer {
 
 	protected void distributeValuesByQuantity(List<IConstraintElement> assignments, List<AllocationValue> values,
 			Feature2Assignment[] target) {
-		for (int i = 0; i < assignments.size() && !values.isEmpty(); i++) {
-			IConstraintElement ass = assignments.get(i);
-			if (ass.isCardinalityOneForFeature()) {
+		while (true) {
+			IConstraintElement ass = assignments.get(0);
+			if (ass.isCardinalityOneAmongAssignments(assignments)) {
 				target[ass.getAssignmentID()] = new SVFeature2AssignmentUnambiguous(ass, false, values.get(0));
 				values.remove(0);
-				assignments.set(i, null);
+				assignments.remove(0);
 			} else
 				break;
 		}
 		for (int i = assignments.size() - 1; i >= 0 && !values.isEmpty(); i--) {
 			IConstraintElement ass = assignments.get(i);
-			if (ass != null && ass.isCardinalityOneForFeature()) {
+			if (ass != null && ass.isCardinalityOneAmongAssignments(assignments)) {
 				target[ass.getAssignmentID()] = new SVFeature2AssignmentUnambiguous(ass, false, values.get(values
 						.size() - 1));
 				values.remove(values.size() - 1);
-				assignments.set(i, null);
+				assignments.remove(i);
 			} else
 				break;
 		}
-		for (int i = assignments.size() - 1; i >= 0; i--)
-			if (assignments.get(i) == null)
-				assignments.remove(i);
+		//		for (int i = assignments.size() - 1; i >= 0; i--)
+		//			if (assignments.get(i) == null)
+		//				assignments.remove(i);
 	}
 
 	protected String f2aToStr(IConstraintElement ele, Feature2Assignment[] values) {
@@ -702,8 +860,18 @@ public class GenericSequencer extends AbstractSequencer {
 		} else if (ele.getAssignmentID() >= 0) {
 			result.append(ele.toString());
 			result.append(" => ");
-			if (values[ele.getAssignmentID()] != null)
+			Feature2Assignment value = values[ele.getAssignmentID()];
+			if (value != null) {
+				if (value.isAmbiguous()) {
+					result.append("[");
+					result.append(getMin(values, ele));
+					result.append(", ");
+					result.append(getMax(values, ele));
+					result.append("] ");
+
+				}
 				result.append(Join.join(", ", values[ele.getAssignmentID()].getValuesFor(ele)));
+			}
 			result.append("\n");
 		}
 	}
@@ -831,4 +999,223 @@ public class GenericSequencer extends AbstractSequencer {
 					constraints.put(Tuples.create(ctx.getContext(), constraint.getType()), constraint);
 		}
 	}
+
+	protected boolean containsUnavailableFeature(Feature2Assignment[] values, IConstraintElement element,
+			IConstraintElement excludeAssignment) {
+		if (element.isOptional())
+			return false;
+		switch (element.getType()) {
+			case GROUP:
+				for (IConstraintElement a : element.getChildren())
+					if (containsUnavailableFeature(values, a, excludeAssignment))
+						return true;
+				return false;
+			case ALTERNATIVE:
+				for (IConstraintElement a : element.getChildren())
+					if (!containsUnavailableFeature(values, a, excludeAssignment))
+						return false;
+				return true;
+			case ASSIGNED_ACTION_CALL:
+			case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
+			case ASSIGNED_CROSSREF_ENUM_RULE_CALL:
+			case ASSIGNED_CROSSREF_KEYWORD:
+			case ASSIGNED_CROSSREF_TERMINAL_RULE_CALL:
+			case ASSIGNED_DATATYPE_RULE_CALL:
+			case ASSIGNED_ENUM_RULE_CALL:
+			case ASSIGNED_KEYWORD:
+			case ASSIGNED_PARSER_RULE_CALL:
+			case ASSIGNED_TERMINAL_RULE_CALL:
+			case ASSIGNED_BOOLEAN_KEYWORD:
+				Feature2Assignment f2a = values[element.getAssignmentID()];
+				if (f2a == null)
+					return true;
+				if (f2a.isAmbiguous())
+					return false;
+				if (f2a.getValuesFor(element).isEmpty())
+					return true;
+				return false;
+			case UNASSIGNED_DATATYPE_RULE_CALL:
+			case UNASSIGNED_TERMINAL_RULE_CALL:
+				return false;
+		}
+		return false;
+	}
+
+	protected int getMax(Feature2Assignment[] values, IConstraintElement element) {
+		int result = element.isRoot() ? 1 : getMaxByParent(values, element.getContainer(), element, null);
+		return element.isMany() && result > 0 ? MAX : result;
+	}
+
+	/**
+	 * max occurrences of a child with this parent
+	 */
+	protected int getMaxByParent(Feature2Assignment[] values, IConstraintElement parent, IConstraintElement exclude,
+			IConstraintElement excludeAssignment) {
+		int result;
+		if (parent.isRoot())
+			result = parent.isMany() ? MAX : 1;
+		else {
+			result = getMaxByParent(values, parent.getContainer(), parent, excludeAssignment);
+			if (result == 0)
+				return 0;
+		}
+		switch (parent.getType()) {
+			case GROUP:
+				if (parent.isMany())
+					result = MAX;
+				for (IConstraintElement a : parent.getChildren())
+					if (a != exclude) {
+						int count = getMaxForChild(values, a);
+						if (count != UNDEF && (count < result))
+							result = count;
+					}
+				return result;
+			case ALTERNATIVE:
+				if (parent.isMany())
+					return MAX;
+				for (IConstraintElement a : parent.getChildren())
+					if (a != exclude) {
+						int count = getMinForChild(values, a);
+						if (count != UNDEF && count > 0)
+							return 0;
+					} else if (excludeAssignment != null && containsUnavailableFeature(values, a, excludeAssignment))
+						return 0;
+				return result;
+			default:
+				return 1;
+		}
+	}
+
+	public final static int MAX = Integer.MAX_VALUE;
+	public final static int UNDEF = -1;
+
+	/**
+	 * max occurrences of a parent with this child
+	 */
+	protected int getMaxForChild(Feature2Assignment[] values, IConstraintElement child) {
+		if (child.isOptional())
+			return MAX;
+		switch (child.getType()) {
+			case GROUP:
+				int count1 = MAX;
+				for (IConstraintElement a : child.getChildren()) {
+					int c = getMaxForChild(values, a);
+					if (c != UNDEF && c < count1)
+						count1 = c;
+				}
+				return count1;
+			case ALTERNATIVE:
+				int count2 = UNDEF;
+				for (IConstraintElement a : child.getChildren()) {
+					int c = getMaxForChild(values, a);
+					if (c == MAX)
+						return MAX;
+					if (c != UNDEF)
+						count2 = count2 == UNDEF ? c : count2 + c;
+				}
+				return count2;
+			case ASSIGNED_ACTION_CALL:
+			case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
+			case ASSIGNED_CROSSREF_ENUM_RULE_CALL:
+			case ASSIGNED_CROSSREF_KEYWORD:
+			case ASSIGNED_CROSSREF_TERMINAL_RULE_CALL:
+			case ASSIGNED_DATATYPE_RULE_CALL:
+			case ASSIGNED_ENUM_RULE_CALL:
+			case ASSIGNED_KEYWORD:
+			case ASSIGNED_PARSER_RULE_CALL:
+			case ASSIGNED_TERMINAL_RULE_CALL:
+			case ASSIGNED_BOOLEAN_KEYWORD:
+				Feature2Assignment f2a = values[child.getAssignmentID()];
+				return f2a == null ? 0 : f2a.getQuantity(child);
+			case UNASSIGNED_DATATYPE_RULE_CALL:
+			case UNASSIGNED_TERMINAL_RULE_CALL:
+				return UNDEF;
+		}
+		return UNDEF;
+	}
+
+	protected int getMin(Feature2Assignment[] values, IConstraintElement assignment) {
+		if (assignment.isOptional())
+			return 0;
+		if (assignment.isRoot())
+			return 1;
+		return getMinByParent(values, assignment.getContainer(), assignment);
+	}
+
+	/**
+	 * min occurrences of a child within this parent
+	 */
+	protected int getMinByParent(Feature2Assignment[] values, IConstraintElement parent, IConstraintElement exclude) {
+		if (parent == null)
+			return 1;
+		switch (parent.getType()) {
+			case GROUP:
+				if (!parent.isManyRecursive(null) && !parent.isOptionalRecursive(null))
+					return 1;
+				int count1 = getMinByParent(values, parent.getContainer(), parent);
+				for (IConstraintElement a : parent.getChildren())
+					if (a != exclude) {
+						int c = getMinForChild(values, a);
+						if (c != UNDEF && c > count1)
+							count1 = c;
+					}
+				return count1;
+			case ALTERNATIVE:
+				if (parent.isOptional())
+					return 0;
+				boolean isUndef = false;
+				for (IConstraintElement a : parent.getChildren())
+					if (a != exclude) {
+						int count2 = getMinForChild(values, a);
+						if (count2 == UNDEF)
+							isUndef = true;
+						else if (count2 > 0)
+							return 0;
+					}
+				if (isUndef)
+					return UNDEF;
+				return getMinByParent(values, parent.getContainer(), parent);
+			default:
+				return UNDEF;
+		}
+	}
+
+	protected int getMinForChild(Feature2Assignment[] values, IConstraintElement child) {
+		int count = UNDEF;
+		switch (child.getType()) {
+			case GROUP:
+				for (IConstraintElement a : child.getChildren()) {
+					int c = getMinForChild(values, a);
+					if (c > count)
+						count = c;
+				}
+				break;
+			case ALTERNATIVE:
+				for (IConstraintElement a : child.getChildren()) {
+					int c = getMinForChild(values, a);
+					count = count == UNDEF ? c : c + count;
+				}
+				break;
+			case ASSIGNED_ACTION_CALL:
+			case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
+			case ASSIGNED_CROSSREF_ENUM_RULE_CALL:
+			case ASSIGNED_CROSSREF_KEYWORD:
+			case ASSIGNED_CROSSREF_TERMINAL_RULE_CALL:
+			case ASSIGNED_DATATYPE_RULE_CALL:
+			case ASSIGNED_ENUM_RULE_CALL:
+			case ASSIGNED_KEYWORD:
+			case ASSIGNED_PARSER_RULE_CALL:
+			case ASSIGNED_TERMINAL_RULE_CALL:
+			case ASSIGNED_BOOLEAN_KEYWORD:
+				Feature2Assignment f2a = values[child.getAssignmentID()];
+				return f2a == null ? 0 : f2a.getQuantity(child);
+			case UNASSIGNED_DATATYPE_RULE_CALL:
+			case UNASSIGNED_TERMINAL_RULE_CALL:
+				return UNDEF;
+		}
+		if (child.isMany() && count > 1)
+			count = 1;
+		return count;
+	}
+
 }

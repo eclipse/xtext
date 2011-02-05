@@ -1,7 +1,9 @@
 package org.eclipse.xtext.serializer;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.impl.SyntacticSequencer;
+
+import com.google.inject.ImplementedBy;
 
 /**
  * The ISequenceParser (1) recursively traverses the semanticRoot, (2) creates a token sequence for each EObject using
@@ -14,6 +16,7 @@ import org.eclipse.xtext.ParserRule;
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@ImplementedBy(SyntacticSequencer.class)
 public interface ISyntacticSequencer {
 
 	/**
@@ -27,5 +30,6 @@ public interface ISyntacticSequencer {
 	 *            A handler that accepts a sequence of parse-events and does something useful with it. For example: Mix
 	 *            in white-spaces and comments and compose all the tokens to a document.
 	 */
-	void parseSequences(ParserRule rootRule, EObject semanticRoot, IParseEventsAcceptor constructor);
+	ISemanticSequenceAcceptor createAcceptor(EObject context, EObject semanticRoot,
+			ISyntacticSequenceAcceptor constructor, ISerializationDiagnostic.Acceptor errorAcceptor);
 }

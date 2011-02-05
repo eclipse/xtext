@@ -1,44 +1,12 @@
 package org.eclipse.xtext.serializer;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.Action;
-import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.serializer.impl.GenericSequencer;
 
 import com.google.inject.ImplementedBy;
 
 @ImplementedBy(GenericSequencer.class)
-public interface ISequencer {
-
-	interface IEObjectActionPair extends IGrammarValuePair {
-		Action getGrammarElement();
-
-		EObject getValue();
-	}
-
-	interface IEObjectRuleCallPair extends IGrammarValuePair {
-		RuleCall getGrammarElement();
-
-		EObject getValue();
-	}
-
-	interface IGrammarValuePair {
-		AbstractElement getGrammarElement();
-
-		Object getValue();
-	}
-
-	interface IKeywordValuePair extends IGrammarValuePair {
-		Keyword getGrammarElement();
-
-		String getValue();
-	}
-
-	interface IValueRuleCallPair extends IGrammarValuePair {
-		RuleCall getGrammarElement();
-	}
+public interface ISemanticSequencer {
 
 	/**
 	 * An implementation of this interface converts all direct children of a semantic object into a sequence of
@@ -76,7 +44,7 @@ public interface ISequencer {
 	 * 
 	 *         (DatatypeRuleCall, ReferencedEObject) for assigned cross references.
 	 */
-	Iterable<IGrammarValuePair> createSequence(EObject context, EObject semanticObject,
+	void createSequence(EObject context, EObject semanticObject, ISemanticSequenceAcceptor sequenceAcceptor,
 			ISerializationDiagnostic.Acceptor errorAcceptor);
 
 	Iterable<EObject> findContexts(EObject semanitcObject, Iterable<EObject> contextCandidates);
