@@ -262,7 +262,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		IEObjectDescription thisVariable = localVariableScope.getSingleElement(THIS);
 		if (thisVariable != null) {
 			EObject thisVal = thisVariable.getEObjectOrProxy();
-			JvmTypeReference type = identifiableTypeProvider.getType((JvmIdentifiableElement) thisVal);
+			JvmTypeReference type = identifiableTypeProvider.getType((JvmIdentifiableElement) thisVal, true);
 			if (type != null) {
 				featureScopeForThis = createFeatureScopeForTypeRef(type, call, getContextType(call),
 						(JvmIdentifiableElement) thisVariable.getEObjectOrProxy());

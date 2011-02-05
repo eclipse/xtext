@@ -8,10 +8,10 @@
 package org.eclipse.xtext.xbase.typing;
 
 import org.eclipse.xtext.common.types.JvmArrayType;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.DefaultJvmTypeConformanceComputer;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.functions.FunctionConversion;
 
 import com.google.inject.Inject;
@@ -27,9 +27,14 @@ public class XbaseTypeConformanceComputer extends DefaultJvmTypeConformanceCompu
 	
 	@Inject
 	private TypesService typesService;
+	
+	@Inject
+	private TypeReferences typeReferences;
 
 	@Override
 	public boolean isConformant(JvmTypeReference left, JvmTypeReference right) {
+		if (left == null || typesService.isObject(left))
+			return true;
 		if (typesService.isVoid(right))
 			return true;
 		if (functionConversion.isFunction(left) || functionConversion.isFunction(right))
@@ -37,10 +42,9 @@ public class XbaseTypeConformanceComputer extends DefaultJvmTypeConformanceCompu
 		if (right!=null && right.getType() instanceof JvmArrayType) {
 			JvmArrayType array = (JvmArrayType) right.getType();
 			if (isIterable(left.getType())) {
-				JvmTypeReference newLeft = ((JvmParameterizedTypeReference)left).getArguments().get(0);
+				JvmTypeReference newLeft = typeReferences.getArgument(left,0);
 				return isConformant(newLeft, array.getComponentType());
 			}
-			return false;
 		}
 		return super.isConformant(left, right);
 	}

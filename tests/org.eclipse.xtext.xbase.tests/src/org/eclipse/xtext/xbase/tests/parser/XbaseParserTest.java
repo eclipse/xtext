@@ -49,14 +49,14 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	
 	public void testAssignment_RightAssociativity() throws Exception {
 		XAssignment ass = (XAssignment) expression("foo = bar += baz");
-		assertEquals(1,ass.getAllArguments().size());
+		assertEquals(1,ass.getExplicitArguments().size());
 		assertEquals("foo", ass.getConcreteSyntaxFeatureName());
 		assertNull(ass.getAssignable());
-		XBinaryOperation op = (XBinaryOperation) ass.getAllArguments().get(0);
-		assertEquals(2,op.getAllArguments().size());
+		XBinaryOperation op = (XBinaryOperation) ass.getExplicitArguments().get(0);
+		assertEquals(2,op.getExplicitArguments().size());
 		assertEquals("+=", op.getConcreteSyntaxFeatureName());
-		assertEquals("bar", ((XFeatureCall)op.getAllArguments().get(0)).getConcreteSyntaxFeatureName());
-		assertEquals("baz", ((XFeatureCall)op.getAllArguments().get(1)).getConcreteSyntaxFeatureName());
+		assertEquals("bar", ((XFeatureCall)op.getExplicitArguments().get(0)).getConcreteSyntaxFeatureName());
+		assertEquals("baz", ((XFeatureCall)op.getExplicitArguments().get(1)).getConcreteSyntaxFeatureName());
 	}
 	
 	public void testAssignments_00() throws Exception {
@@ -65,26 +65,26 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	
 	public void testOrAndAndPrecedence() throws Exception {
 		XBinaryOperation or = (XBinaryOperation) expression("foo && bar || baz");
-		assertEquals(2,or.getAllArguments().size());
+		assertEquals(2,or.getExplicitArguments().size());
 		assertEquals("||", or.getConcreteSyntaxFeatureName());
-		assertEquals("baz", ((XFeatureCall)or.getAllArguments().get(1)).getConcreteSyntaxFeatureName());
-		XBinaryOperation and = (XBinaryOperation) or.getAllArguments().get(0);
-		assertEquals(2,and.getAllArguments().size());
+		assertEquals("baz", ((XFeatureCall)or.getExplicitArguments().get(1)).getConcreteSyntaxFeatureName());
+		XBinaryOperation and = (XBinaryOperation) or.getExplicitArguments().get(0);
+		assertEquals(2,and.getExplicitArguments().size());
 		assertEquals("&&", and.getConcreteSyntaxFeatureName());
-		assertEquals("foo", ((XFeatureCall)and.getAllArguments().get(0)).getConcreteSyntaxFeatureName());
-		assertEquals("bar", ((XFeatureCall)and.getAllArguments().get(1)).getConcreteSyntaxFeatureName());
+		assertEquals("foo", ((XFeatureCall)and.getExplicitArguments().get(0)).getConcreteSyntaxFeatureName());
+		assertEquals("bar", ((XFeatureCall)and.getExplicitArguments().get(1)).getConcreteSyntaxFeatureName());
 	}
 	
 	public void testAddition_1() throws Exception {
 		XBinaryOperation operation = (XBinaryOperation) expression("3 + 4");
-		assertEquals(3, ((XIntLiteral) operation.getAllArguments().get(0)).getValue());
-		assertEquals(4, ((XIntLiteral) operation.getAllArguments().get(1)).getValue());
+		assertEquals(3, ((XIntLiteral) operation.getExplicitArguments().get(0)).getValue());
+		assertEquals(4, ((XIntLiteral) operation.getExplicitArguments().get(1)).getValue());
 	}
 
 	public void testAddition_2() throws Exception {
 		XBinaryOperation operation = (XBinaryOperation) expression("foo + 'bar'");
-		assertEquals("foo", ((XFeatureCall) operation.getAllArguments().get(0)).getConcreteSyntaxFeatureName());
-		assertEquals("bar", ((XStringLiteral) operation.getAllArguments().get(1)).getValue());
+		assertEquals("foo", ((XFeatureCall) operation.getExplicitArguments().get(0)).getConcreteSyntaxFeatureName());
+		assertEquals("bar", ((XStringLiteral) operation.getExplicitArguments().get(1)).getValue());
 	}
 
 	public void testStringLiteral() throws Exception {
@@ -151,9 +151,9 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 
 	public void testShortClosure_1() throws Exception {
 		XFeatureCall featureCall = (XFeatureCall) expression("foo(a,b|a+b)");
-		assertEquals(1, featureCall.getAllArguments().size());
-		assertTrue(featureCall.getAllArguments().get(0) instanceof XClosure);
-		XClosure closure = (XClosure) featureCall.getAllArguments().get(0);
+		assertEquals(1, featureCall.getExplicitArguments().size());
+		assertTrue(featureCall.getExplicitArguments().get(0) instanceof XClosure);
+		XClosure closure = (XClosure) featureCall.getExplicitArguments().get(0);
 		assertEquals(2, closure.getFormalParameters().size());
 	}
 	
@@ -186,8 +186,8 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 
 	public void testCastedExpression_2() throws Exception {
 		XBinaryOperation binary = (XBinaryOperation) expression("bar.baz as Foo + zonk");
-		assertTrue(binary.getAllArguments().get(0) instanceof XCastedExpression);
-		assertTrue(binary.getAllArguments().get(1) instanceof XFeatureCall);
+		assertTrue(binary.getExplicitArguments().get(0) instanceof XCastedExpression);
+		assertTrue(binary.getExplicitArguments().get(1) instanceof XFeatureCall);
 	}
 	
 	public void testUnaryOperation() throws Exception {
@@ -201,10 +201,10 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	public void testUnaryOperation_3() throws Exception {
 		XBinaryOperation call = (XBinaryOperation) expression("foo+-bar");
 		assertEquals("+",call.getConcreteSyntaxFeatureName());
-		assertEquals(2,call.getAllArguments().size());
-		XUnaryOperation unary = (XUnaryOperation) call.getAllArguments().get(1);
+		assertEquals(2,call.getExplicitArguments().size());
+		XUnaryOperation unary = (XUnaryOperation) call.getExplicitArguments().get(1);
 		assertEquals("-", unary.getConcreteSyntaxFeatureName());
-		assertEquals("bar", ((XFeatureCall)unary.getAllArguments().get(0)).getConcreteSyntaxFeatureName());
+		assertEquals("bar", ((XFeatureCall)unary.getExplicitArguments().get(0)).getConcreteSyntaxFeatureName());
 	}
 
 	public void testFeatureCall_0() throws Exception {
@@ -215,41 +215,41 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	public void testFeatureCall_1() throws Exception {
 		XMemberFeatureCall call = (XMemberFeatureCall) expression("foo.bar");
 		assertNotNull(call);
-		assertTrue(call.getAllArguments().get(0) instanceof XFeatureCall);
+		assertTrue(call.getExplicitArguments().get(0) instanceof XFeatureCall);
 	}
 
 	public void testFeatureCall_2() throws Exception {
 		XMemberFeatureCall call = (XMemberFeatureCall) expression("'holla'.bar()");
 		assertNotNull(call);
-		assertEquals(1, call.getAllArguments().size());
-		assertTrue(call.getAllArguments().get(0) instanceof XStringLiteral);
+		assertEquals(1, call.getExplicitArguments().size());
+		assertTrue(call.getExplicitArguments().get(0) instanceof XStringLiteral);
 	}
 
 	public void testFeatureCall_3() throws Exception {
 		XMemberFeatureCall call = (XMemberFeatureCall) expression("'holla'.bar(4)");
 		assertNotNull(call);
-		assertEquals(2, call.getAllArguments().size());
-		assertEquals(4, ((XIntLiteral) call.getAllArguments().get(1)).getValue());
-		assertTrue(call.getAllArguments().get(0) instanceof XStringLiteral);
+		assertEquals(2, call.getExplicitArguments().size());
+		assertEquals(4, ((XIntLiteral) call.getExplicitArguments().get(1)).getValue());
+		assertTrue(call.getExplicitArguments().get(0) instanceof XStringLiteral);
 	}
 
 	public void testFeatureCall_4() throws Exception {
 		XFeatureCall call = (XFeatureCall) expression("bar(0,1,2)");
 		assertNotNull(call);
 		assertEquals("bar",call.getConcreteSyntaxFeatureName());
-		assertEquals(3, call.getAllArguments().size());
+		assertEquals(3, call.getExplicitArguments().size());
 		for (int i = 0; i < 3; i++)
-			assertEquals(i, ((XIntLiteral) call.getAllArguments().get(i)).getValue());
+			assertEquals(i, ((XIntLiteral) call.getExplicitArguments().get(i)).getValue());
 	}
 	
 	public void testFeatureCall_5() throws Exception {
 		XFeatureCall call = (XFeatureCall) expression("foo(bar(baz(1)))");
 		assertEquals("foo",call.getConcreteSyntaxFeatureName());
-		call = (XFeatureCall) call.getAllArguments().get(0);
+		call = (XFeatureCall) call.getExplicitArguments().get(0);
 		assertEquals("bar",call.getConcreteSyntaxFeatureName());
-		call = (XFeatureCall) call.getAllArguments().get(0);
+		call = (XFeatureCall) call.getExplicitArguments().get(0);
 		assertEquals("baz",call.getConcreteSyntaxFeatureName());
-		assertTrue(call.getAllArguments().get(0) instanceof XIntLiteral);
+		assertTrue(call.getExplicitArguments().get(0) instanceof XIntLiteral);
 	}
 	
 	public void testMemberFeatureCall_00() throws Exception {
@@ -299,13 +299,13 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	
 	public void testIfWithAdd() throws Exception {
 		XBinaryOperation bo = (XBinaryOperation) expression("1 + if (foo) bar + 2");
-		assertTrue(bo.getAllArguments().get(1) instanceof XIfExpression);
+		assertTrue(bo.getExplicitArguments().get(1) instanceof XIfExpression);
 	}
 	
 	public void testIfWithAdd_2() throws Exception {
 		XBinaryOperation bo = (XBinaryOperation) expression("1 + (if (foo) bar) + 2");
-		assertTrue(bo.getAllArguments().get(0) instanceof XBinaryOperation);
-		assertTrue(bo.getAllArguments().get(1) instanceof XIntLiteral);
+		assertTrue(bo.getExplicitArguments().get(0) instanceof XBinaryOperation);
+		assertTrue(bo.getExplicitArguments().get(1) instanceof XIntLiteral);
 	}
 
 	public void testSwitch_0() throws Exception {

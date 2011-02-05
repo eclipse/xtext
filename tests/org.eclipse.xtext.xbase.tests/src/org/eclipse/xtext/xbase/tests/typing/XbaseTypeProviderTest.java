@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.tests.typing;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.lib.Functions;
@@ -22,6 +23,10 @@ import com.google.inject.Inject;
  * @author Sven Efftinge
  */
 public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
+//TODO	
+//	public void testFeatureCallWithArrayToIterableConversion() throws Exception {
+//		assertResolvedReturnType("java.util.Iterator<? extends Character>", "'foo'.toCharArray.iterator");
+//	}
 
 	public void testClosure_00() throws Exception {
 		assertResolvedReturnType("java.lang.String", "[|'literal'].apply()");
@@ -142,18 +147,19 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testMethodTypeParamInference_00() throws Exception {
-		assertResolvedReturnType("java.lang.String", "new java.util.ArrayList<String>().find(e|true)");
+		assertResolvedReturnType("java.lang.String", "new java.util.ArrayList<? extends String>().find(e|true)");
 	}
 	
 	public void testMethodTypeParamInference_01() throws Exception {
-		assertResolvedReturnType("java.lang.String", "new java.util.ArrayList<? extends String>().find(e|e == 'foo')");
+		assertResolvedReturnType("java.lang.String", "new java.util.ArrayList<String>().find(e|e == 'foo')");
 	}
 
 	@Inject
 	private IXExpressionTypeProvider typeProvider;
 
 	public void assertResolvedReturnType(String typeName, String expression) throws Exception {
-		JvmTypeReference typeRef = typeProvider.getType(expression(expression, true));
+		final XExpression expression2 = expression(expression, true);
+		JvmTypeReference typeRef = typeProvider.getType(expression2);
 		assertNotNull("type ref was null for " + expression, typeRef);
 		assertEquals(typeName, toString(typeRef));
 	}

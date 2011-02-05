@@ -25,6 +25,7 @@ import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
+import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
 
@@ -42,13 +43,18 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	public void testMemberFeatureCall() throws Exception {
 		XMemberFeatureCall fc = (XMemberFeatureCall) expression("'foo'.charAt(null)");
 		assertExpected("int", fc.getMemberCallArguments().get(0));
-		assertExpected(null, fc.getMemberCallTarget());
+		assertExpected("java.lang.String", fc.getMemberCallTarget());
 	}
 
 	public void testBinaryOperationCall() throws Exception {
 		XBinaryOperation fc = (XBinaryOperation) expression("new java.util.ArrayList<String>() += null");
-		//TODO should be java.lang.String
-		assertExpected("B", fc.getRightOperand());
+		assertExpected("java.lang.String", fc.getRightOperand());
+	}
+	
+	public void testTypeParamInference() throws Exception {
+		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1([e|e],'foo')");
+		final XExpression closure = fc.getMemberCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,T>", closure);
 	}
 	
 	public void testVariableDeclaration_0() throws Exception {
@@ -92,9 +98,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 
 	public void testForLoopExpression_1() throws Exception {
 		XForLoopExpression loop = (XForLoopExpression) expression("for (x : null) null");
-
-		//TODO create special validation rule to check Iterable type
-		assertExpected(null, loop.getForExpression());
+		assertExpected("java.lang.Iterable<? extends java.lang.Object>", loop.getForExpression());
 		assertExpected(null, loop.getEachExpression());
 	}
 

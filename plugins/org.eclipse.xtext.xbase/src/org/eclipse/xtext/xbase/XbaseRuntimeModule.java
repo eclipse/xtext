@@ -12,6 +12,7 @@ import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.typing.ITypeConformanceComputer;
@@ -21,6 +22,7 @@ import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
 import org.eclipse.xtext.xbase.linking.XbaseLinkingScopeProvider;
+import org.eclipse.xtext.xbase.resource.XbaseResource;
 import org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
 import org.eclipse.xtext.xbase.typing.XExpressionTypeProvider;
@@ -34,7 +36,12 @@ import com.google.inject.name.Names;
  */
 public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 	
-	public Class<? extends IEvaluationContext> bindIEvaluationContext() {
+	@Override
+	public Class<? extends XtextResource> bindXtextResource() {
+		return XbaseResource.class;
+	}
+	
+	public Class<? extends IEvaluationContext> bindEvaluationContext() {
 		return DefaultEvaluationContext.class;
 	}
 	

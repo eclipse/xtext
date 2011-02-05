@@ -69,10 +69,6 @@ public class XbaseTypeConformanceTest extends AbstractXbaseTestCase {
 		assertTrue(isConformantReturnTypes("null as "+Iterable.class.getName(), "new testdata.ArrayClient().getArray"));
 	}
 	
-	public void testArrayConformsToIterable_00() throws Exception {
-		assertIsConformant(Iterable.class.getName()+"<?>", "String[]");
-	}
-	
 	protected void assertIsConformant(String left, String right) throws Exception {
 		boolean conformant = isConformant(left, right);
 		assertTrue(left+" <= "+right+" is not conformant",conformant);

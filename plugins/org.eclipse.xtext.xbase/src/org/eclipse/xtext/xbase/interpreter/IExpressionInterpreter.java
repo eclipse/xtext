@@ -7,15 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.interpreter;
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.xbase.XExpression;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface IExpressionInterpreter {
 
-	IEvaluationResult evaluate(EObject expression);
+	IEvaluationResult evaluate(XExpression expression);
 	
-	IEvaluationResult evaluate(EObject expression, IEvaluationContext context);
+	IEvaluationResult evaluate(XExpression expression, IEvaluationContext context);
 	
 }

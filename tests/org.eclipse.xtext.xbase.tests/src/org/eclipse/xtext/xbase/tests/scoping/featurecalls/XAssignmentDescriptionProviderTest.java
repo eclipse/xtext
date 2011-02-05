@@ -13,13 +13,14 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
-import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentSugarDescriptionProvider;
-import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
 
 import testdata.FieldAccessSub;
 import testdata.VisibilitySubClass;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -28,8 +29,6 @@ public class XAssignmentDescriptionProviderTest extends AbstractJvmFeatureScopeP
 	
 	public void testFinalFields() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
-		final XFeatureCallSugarDescriptionProvider sugarProvider = new XFeatureCallSugarDescriptionProvider();
-		sugarProvider.setOperatorMapping(new OperatorMapping());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,
 				newXAssignmentDescriptionProvider(),newXAssignmentSugarDescriptionProvider());
 		
@@ -45,8 +44,6 @@ public class XAssignmentDescriptionProviderTest extends AbstractJvmFeatureScopeP
 	
 	public void testAssignments() throws Exception {
 		JvmTypeReference reference = getTypeRef(VisibilitySubClass.class.getCanonicalName());
-		final XFeatureCallSugarDescriptionProvider sugarProvider = new XFeatureCallSugarDescriptionProvider();
-		sugarProvider.setOperatorMapping(new OperatorMapping());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,
 				newXAssignmentDescriptionProvider(),newXAssignmentSugarDescriptionProvider());
 		
@@ -64,8 +61,6 @@ public class XAssignmentDescriptionProviderTest extends AbstractJvmFeatureScopeP
 	
 	public void testAssignments_01() throws Exception {
 		JvmTypeReference reference = getTypeRef(VisibilitySubClass.class.getCanonicalName());
-		final XFeatureCallSugarDescriptionProvider sugarProvider = new XFeatureCallSugarDescriptionProvider();
-		sugarProvider.setOperatorMapping(new OperatorMapping());
 		final XAssignmentDescriptionProvider newXAssignmentDescriptionProvider = newXAssignmentDescriptionProvider();
 		final XAssignmentSugarDescriptionProvider newXAssignmentSugarDescriptionProvider = newXAssignmentSugarDescriptionProvider();
 		
@@ -86,16 +81,15 @@ public class XAssignmentDescriptionProviderTest extends AbstractJvmFeatureScopeP
 		assertSetsEqual(newHashSet("privateProperty"),	getSignatures(scope));
 		assertSame(IScope.NULLSCOPE, scope.getParent());
 	}
+	
+	@Inject Provider<XAssignmentDescriptionProvider> descProvider;
+	@Inject Provider<XAssignmentSugarDescriptionProvider> sugarProvider;
 
 	protected XAssignmentSugarDescriptionProvider newXAssignmentSugarDescriptionProvider() {
-		final XAssignmentSugarDescriptionProvider xAssignmentSugarDescriptionProvider = new XAssignmentSugarDescriptionProvider();
-		xAssignmentSugarDescriptionProvider.setVisibilityService(createVisibilityService());
-		return xAssignmentSugarDescriptionProvider;
+		return sugarProvider.get();
 	}
 
 	protected XAssignmentDescriptionProvider newXAssignmentDescriptionProvider() {
-		final XAssignmentDescriptionProvider xAssignmentDescriptionProvider = new XAssignmentDescriptionProvider();
-		xAssignmentDescriptionProvider.setVisibilityService(createVisibilityService());
-		return xAssignmentDescriptionProvider;
+		return descProvider.get();
 	}
 }

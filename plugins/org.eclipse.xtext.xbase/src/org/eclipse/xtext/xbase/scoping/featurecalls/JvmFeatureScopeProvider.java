@@ -25,10 +25,13 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.Primitives;
+import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xbase.typing.TypesService;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -47,7 +50,7 @@ import com.google.inject.Inject;
 public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 
 	@Inject
-	private TypeArgumentContext.Provider typeArgumentContextProvider;
+	private TypeArgumentContextProvider typeArgumentContextProvider;
 
 	@Inject
 	private SuperTypeCollector superTypeCollector;
@@ -57,8 +60,14 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 	
 	@Inject
 	private TypesFactory typesFactory = TypesFactory.eINSTANCE;
+	
+	@Inject
+	private TypesService typeService;
+	
+	@Inject
+	private TypeReferences typeRefs;
 
-	public void setTypeArgumentContextProvider(TypeArgumentContext.Provider typeArgumentContextProvider) {
+	public void setTypeArgumentContextProvider(TypeArgumentContextProvider typeArgumentContextProvider) {
 		this.typeArgumentContextProvider = typeArgumentContextProvider;
 	}
 
@@ -86,7 +95,7 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 	 * </p>
 	 */
 	public JvmFeatureScope createFeatureScopeForTypeRef(JvmTypeReference jvmTypeRef, IJvmFeatureDescriptionProvider... jvmFeatureDescriptionProviders) {
-		TypeArgumentContext context = typeArgumentContextProvider.get(jvmTypeRef);
+		TypeArgumentContext context = typeArgumentContextProvider.getReceiverContext(jvmTypeRef);
 		Iterable<JvmTypeReference> hierarchy = linearizeTypeHierarchy(jvmTypeRef);
 
 		// standard features
@@ -199,9 +208,24 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 			return concat(result,concat(singleton(wrapperReference), superTypeCollector.collectSuperTypes(wrapperReference)));
 		}
 		if (typeRef.getType() instanceof JvmArrayType) {
-			//TODO add the hierarchy of Iterable<componenttype> to the sequence.
+			JvmArrayType arrayType = (JvmArrayType) typeRef.getType();
+			JvmTypeReference componentType = arrayType.getComponentType();
+			if (primitives.isPrimitive(componentType)) {
+				JvmType wrapperType = primitives.getWrapperType((JvmPrimitiveType) componentType.getType());
+				componentType = typeRefs.createTypeRef(wrapperType);
+			}
+			JvmTypeReference iterable = typeService.getTypeForName(Iterable.class, getRealComponentType(arrayType), componentType);
+			return concat(result,linearizeTypeHierarchy(iterable));
 		}
 		return result;
+	}
+
+	protected JvmType getRealComponentType(JvmArrayType arrayType) {
+		final JvmType type = arrayType.getComponentType().getType();
+		if (type instanceof JvmArrayType) {
+			return getRealComponentType((JvmArrayType) type);
+		}
+		return type;
 	}
 
 

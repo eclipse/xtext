@@ -12,6 +12,7 @@ import static com.google.common.collect.Iterables.*;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -20,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.typing.AbstractTypeProvider;
@@ -43,7 +45,7 @@ public class IdentifiableTypeProvider extends AbstractTypeProvider<JvmTypeRefere
 	private IXExpressionTypeProvider expressionTypeProvider;
 	
 	@Inject
-	private TypeArgumentContext.Provider typeArgCtxProvider;
+	private TypeArgumentContextProvider typeArgCtxProvider;
 	
 	@Inject
 	private SuperTypeCollector collector;
@@ -58,46 +60,58 @@ public class IdentifiableTypeProvider extends AbstractTypeProvider<JvmTypeRefere
 		this.expressionTypeProvider = expressionTypeProvider;
 	}
 	
-	protected JvmTypeReference _type(XSwitchExpression object) {
+	protected JvmTypeReference _type(XSwitchExpression object, boolean selfContained) {
 		if (object.getLocalVarName() != null) {
-			final JvmTypeReference convertedType = expressionTypeProvider.getType(object.getSwitch());
-			return convertedType;
+			final JvmTypeReference result = expressionTypeProvider.getSelfContainedType(object.getSwitch());
+			return result;
 		}
 		return null;
 	}
 
-	protected JvmTypeReference _type(XCasePart object) {
+	protected JvmTypeReference _type(XCasePart object, boolean selfContained) {
 		if (object.getTypeGuard() != null) {
 			return object.getTypeGuard();
 		}
 		return null;
 	}
 
-	protected JvmTypeReference _type(XVariableDeclaration object) {
+	protected JvmTypeReference _type(XVariableDeclaration object, boolean selfContained) {
 		if (object.getType() != null)
 			return object.getType();
-		return expressionTypeProvider.getType(object.getRight());
+		return expressionTypeProvider.getSelfContainedType(object.getRight());
 	}
 
-	protected JvmTypeReference _type(JvmFormalParameter parameter) {
+	protected JvmTypeReference _type(JvmFormalParameter parameter, boolean selfContained) {
 		if (parameter.getParameterType() == null) {
 			if (parameter.eContainer() instanceof XClosure) {
 				final XClosure closure = (XClosure)parameter.eContainer();
-				JvmTypeReference type = expressionTypeProvider.getExpectedType(closure);
-				int indexOf = closure.getFormalParameters().indexOf(parameter);
-				JvmOperation operation = functionConversion.findSingleMethod(type);
-				if (indexOf < operation.getParameters().size()) {
-					JvmFormalParameter declaredParam = operation.getParameters().get(indexOf);
-					TypeArgumentContext context = typeArgCtxProvider.get(type);
-					return context.resolve(declaredParam.getParameterType());
+				if (selfContained) {
+					return null;
+				} else {
+					JvmTypeReference type = expressionTypeProvider.getExpectedType(closure);
+					int indexOf = closure.getFormalParameters().indexOf(parameter);
+					if (type==null) {
+						return null;
+					}
+					JvmOperation operation = functionConversion.findSingleMethod(type);
+					if (indexOf < operation.getParameters().size()) {
+						JvmFormalParameter declaredParam = operation.getParameters().get(indexOf);
+						TypeArgumentContext context = typeArgCtxProvider.getReceiverContext(type);
+						return context.resolve(declaredParam.getParameterType());
+					}
+					return null;
 				}
-				return null;
 			} else if (parameter.eContainer() instanceof XForLoopExpression) {
 				XForLoopExpression forLoop = (XForLoopExpression) parameter.eContainer();
-				JvmParameterizedTypeReference reference = (JvmParameterizedTypeReference) expressionTypeProvider.getType(forLoop
+				JvmParameterizedTypeReference reference = (JvmParameterizedTypeReference) expressionTypeProvider.getSelfContainedType(forLoop
 						.getForExpression());
-				TypeArgumentContext context = typeArgCtxProvider.get(reference);
+				TypeArgumentContext context = typeArgCtxProvider.getReceiverContext(reference);
 				final String iterableName = Iterable.class.getName();
+				// TODO remove the special array treatment and put into some generic facility
+				if (reference.getType() instanceof JvmArrayType) {
+					JvmTypeReference type = ((JvmArrayType)reference.getType()).getComponentType();
+					return type;
+				}
 				if (!reference.getType().getCanonicalName().equals(iterableName)) {
 					try {
 						final Set<JvmTypeReference> collectSuperTypes = collector.collectSuperTypes(reference);
@@ -118,17 +132,17 @@ public class IdentifiableTypeProvider extends AbstractTypeProvider<JvmTypeRefere
 		return parameter.getParameterType();
 	}
 
-	protected JvmTypeReference _type(JvmConstructor constructor) {
+	protected JvmTypeReference _type(JvmConstructor constructor, boolean selfContained) {
 		JvmParameterizedTypeReference reference = factory.createJvmParameterizedTypeReference();
 		reference.setType(constructor.getDeclaringType());
 		return reference;
 	}
 
-	protected JvmTypeReference _type(JvmField field) {
+	protected JvmTypeReference _type(JvmField field, boolean selfContained) {
 		return field.getType();
 	}
 
-	protected JvmTypeReference _type(JvmOperation operation) {
+	protected JvmTypeReference _type(JvmOperation operation, boolean selfContained) {
 		return operation.getReturnType();
 	}
 }

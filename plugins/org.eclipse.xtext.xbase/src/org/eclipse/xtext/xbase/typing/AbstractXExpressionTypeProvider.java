@@ -7,9 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typing;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -24,15 +22,11 @@ import org.eclipse.xtext.xbase.XExpression;
  */
 public abstract class AbstractXExpressionTypeProvider implements IXExpressionTypeProvider {
 
-	private ThreadLocal<Set<XExpression>> dontAskForExpectedType = new ThreadLocal<Set<XExpression>>();
-
-	private ThreadLocal<Set<XExpression>> dontAskForType = new ThreadLocal<Set<XExpression>>();
-
 	private final PolymorphicDispatcher<JvmTypeReference> expectedTypeDispatcher = PolymorphicDispatcher
 			.createForSingleTarget("_expectedType", 3, 3, this);
 
 	private final PolymorphicDispatcher<JvmTypeReference> typeDispatcher = PolymorphicDispatcher.createForSingleTarget(
-			"_type", this);
+			"_type",2,2, this);
 
 	protected JvmTypeReference _expectedType(EObject container, EReference reference, int index) {
 		return null;
@@ -46,15 +40,30 @@ public abstract class AbstractXExpressionTypeProvider implements IXExpressionTyp
 		throw new NullPointerException("expression");
 	}
 
-	protected void checkInit() {
-		if (dontAskForType.get() == null) {
-			dontAskForType.set(new HashSet<XExpression>());
-		}
-		if (dontAskForExpectedType.get() == null) {
-			dontAskForExpectedType.set(new HashSet<XExpression>());
-		}
+	public JvmTypeReference getSelfContainedType(XExpression expression) {
+		return getType(expression,true);
 	}
 
+	public JvmTypeReference getType(final XExpression expression) {
+		return getType(expression, false);
+	}
+	
+	public JvmTypeReference getType(final XExpression expression, boolean selfContained) {
+		if (expression == null)
+			return null;
+		if (expression.eIsProxy())
+			return null;
+		final JvmTypeReference invoke = typeDispatcher.invoke(expression, selfContained);
+		return invoke;
+	}
+	
+	public JvmTypeReference getExpectedType(final XExpression expression) {
+		Triple<EObject, EReference, Integer> triple = getContainingInfo(expression);
+		if (triple == null)
+			return null;
+		return expectedTypeDispatcher.invoke(triple.getFirst(), triple.getSecond(), triple.getThird());
+	}
+	
 	protected Triple<EObject, EReference, Integer> getContainingInfo(XExpression obj) {
 		if (obj == null)
 			return null;
@@ -70,44 +79,11 @@ public abstract class AbstractXExpressionTypeProvider implements IXExpressionTyp
 		return triple;
 	}
 
-// TODO activate caching, but beware of the different local state.
-//	private IResourceScopeCache getCache(EObject astNode) {
-//		if (!(astNode.eResource() instanceof XtextResource))
-//			return null;
-//		return ((XtextResource) astNode.eResource()).getCache();
-//	}
-
-
-	public JvmTypeReference getType(final XExpression expression) {
-		if (expression == null)
-			return null;
-		if (expression.eIsProxy())
-			return null;
-		checkInit();
-		if (dontAskForType.get().contains(expression))
-			return null;
-		try {
-			dontAskForExpectedType.get().add(expression);
-			final JvmTypeReference invoke = typeDispatcher.invoke(expression);
-			return invoke;
-		} finally {
-			dontAskForExpectedType.get().remove(expression);
-		}
-	}
-
-	public JvmTypeReference getExpectedType(final XExpression expression) {
-		checkInit();
-		if (dontAskForExpectedType.get().contains(expression))
-			return null;
-		try {
-			dontAskForType.get().add(expression);
-			Triple<EObject, EReference, Integer> triple = getContainingInfo(expression);
-			if (triple == null)
-				return null;
-			return expectedTypeDispatcher.invoke(triple.getFirst(), triple.getSecond(), triple.getThird());
-		} finally {
-			dontAskForType.get().remove(expression);
-		}
-	}
+	// TODO activate caching
+	//	private IResourceScopeCache getCache(EObject astNode) {
+	//		if (!(astNode.eResource() instanceof XtextResource))
+	//			return null;
+	//		return ((XtextResource) astNode.eResource()).getCache();
+	//	}
 
 }
