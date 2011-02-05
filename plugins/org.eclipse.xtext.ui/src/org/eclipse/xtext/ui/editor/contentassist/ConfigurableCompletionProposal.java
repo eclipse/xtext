@@ -488,4 +488,9 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 		}
 		return additionalProposalInfo != null ? additionalProposalInfo : null;
 	}
+	
+	@Override
+	public String toString() {
+		return "Proposal: " + getDisplayString().toString();
+	}
 }

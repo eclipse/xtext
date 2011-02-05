@@ -14,7 +14,6 @@ import java.util.Collections;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.clustering.CopiedResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;

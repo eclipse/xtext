@@ -84,6 +84,14 @@ public class JavaProjectSetupUtil {
 		IJavaProject javaProject = makeJavaProject(project);
 		return javaProject;
 	}
+	
+	public static IJavaProject findJavaProject(String projectName) {
+		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		IProject project = root.getProject(projectName);
+		if (project != null)
+			return JavaCore.create(project);
+		return null;
+	}
 
 	public static IProject createSimpleProject(String projectName) throws CoreException {
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();

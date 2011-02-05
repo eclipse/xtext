@@ -194,16 +194,30 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	protected IScope createFeatureCallScope(final XAbstractFeatureCall call, EReference reference) {
 		if (call instanceof XFeatureCall
 				|| ((call instanceof XAssignment) && ((XAssignment) call).getAssignable() == null)) {
-			DelegatingScope implicitThis = new DelegatingScope();
-			IScope localVariableScope = createLocalVarScope(call, reference, implicitThis);
-			IScope featureScopeForThis = createImplicitFeatureCallScope(call, localVariableScope);
-			if (featureScopeForThis != null)
-				implicitThis.setDelegate(featureScopeForThis);
-			return localVariableScope;
+			IScope result = createSimpleFeatureCallScope(call, reference, false, -1);
+			return result;
 		}
 		final XExpression syntacticalReceiver = getSyntacticalReceiver(call);
 		IScope result = createFeatureCallScopeForReceiver(call, syntacticalReceiver, reference);
 		return result;
+	}
+
+	/**
+	 * This method serves as an entry point for the content assist scoping for simple feature calls.
+	 * @param context the context e.g. a for loop expression, a block or a catch clause
+	 * @param reference the reference who's value shall be scoped. Not necessarily a feature of the context.
+	 * @param includeCurrentBlock <code>false</code> in the context of scoping but content assist will not have the
+	 *   actual value holder of the reference at hand so it passes its container to this method and expects the 
+	 *   declared variables to be exposed in the scope.
+	 * @param idx the index in an expression list of a block. Otherwise to be ignored.
+	 */
+	public IScope createSimpleFeatureCallScope(final EObject context, EReference reference, boolean includeCurrentBlock, int idx) {
+		DelegatingScope implicitThis = new DelegatingScope();
+		IScope localVariableScope = createLocalVarScope(context, reference, implicitThis, includeCurrentBlock, idx);
+		IScope featureScopeForThis = createImplicitFeatureCallScope(context, localVariableScope);
+		if (featureScopeForThis != null)
+			implicitThis.setDelegate(featureScopeForThis);
+		return localVariableScope;
 	}
 
 	/**
@@ -243,7 +257,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	/**
 	 * override to add any other implicit feature calls.
 	 */
-	protected IScope createImplicitFeatureCallScope(final XAbstractFeatureCall call, IScope localVariableScope) {
+	protected IScope createImplicitFeatureCallScope(final EObject call, IScope localVariableScope) {
 		JvmFeatureScope featureScopeForThis = null;
 		IEObjectDescription thisVariable = localVariableScope.getSingleElement(THIS);
 		if (thisVariable != null) {
@@ -257,7 +271,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return featureScopeForThis;
 	}
 
-	protected JvmDeclaredType getContextType(XExpression call) {
+	protected JvmDeclaredType getContextType(EObject call) {
 		return EcoreUtil2.getContainerOfType(call, JvmDeclaredType.class);
 	}
 
@@ -265,11 +279,11 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return ASSIGN;
 	}
 
-	protected IScope createLocalVarScope(EObject context, EReference reference, IScope parentScope) {
+	protected IScope createLocalVarScope(EObject context, EReference reference, IScope parentScope, boolean includeCurrentBlock, int idx) {
 		if (context == null)
 			return parentScope;
 		if (context.eContainer() != null)
-			parentScope = createLocalVarScope(context.eContainer(), reference, parentScope);
+			parentScope = createLocalVarScope(context.eContainer(), reference, parentScope, false, -1);
 		if (context.eContainer() instanceof XBlockExpression) {
 			XBlockExpression block = (XBlockExpression) context.eContainer();
 			parentScope = createLocalVarScopeForBlock(block, block.getExpressions().indexOf(context), parentScope);
@@ -290,6 +304,20 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		}
 		if (context instanceof XSwitchExpression) {
 			parentScope = createLocalVarScopeForSwitchExpression((XSwitchExpression) context, parentScope);
+		}
+		if (includeCurrentBlock) {
+			if (context instanceof XBlockExpression) {
+				XBlockExpression block = (XBlockExpression) context;
+				if (!block.getExpressions().isEmpty()) {
+					parentScope = createLocalVarScopeForBlock(block, idx, parentScope);
+				}
+			}
+			if (context instanceof XForLoopExpression) {
+				parentScope = createLocalScopeForParameter(((XForLoopExpression) context).getDeclaredParam(), parentScope);
+			}
+			if (context instanceof XCatchClause) {
+				parentScope = createLocalScopeForParameter(((XCatchClause) context).getDeclaredParam(), parentScope);
+			}
 		}
 		return parentScope;
 	}
@@ -347,7 +375,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return MapBasedScope.createScope(parentScope, descriptions);
 	}
 
-	protected JvmFeatureScope createFeatureScopeForTypeRef(JvmTypeReference type, XExpression expression,
+	protected JvmFeatureScope createFeatureScopeForTypeRef(JvmTypeReference type, EObject expression,
 			JvmDeclaredType currentContext, JvmIdentifiableElement implicitReceiver) {
 		if (expression instanceof XAssignment) {
 			XAssignmentDescriptionProvider provider1 = assignmentFeatureDescProvider.get();

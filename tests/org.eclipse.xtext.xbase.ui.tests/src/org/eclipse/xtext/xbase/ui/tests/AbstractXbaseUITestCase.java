@@ -46,8 +46,13 @@ public abstract class AbstractXbaseUITestCase extends TestCase implements Resour
 
 	@Override
 	protected void tearDown() throws Exception {
-		IResourcesSetupUtil.cleanWorkspace();
+		if (doCleanWorkspace())
+			IResourcesSetupUtil.cleanWorkspace();
 		super.tearDown();
+	}
+	
+	protected boolean doCleanWorkspace() {
+		return true;
 	}
 	
 	public Injector getInjector() {

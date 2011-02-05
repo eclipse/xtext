@@ -30,11 +30,16 @@ import com.google.common.collect.Sets;
  */
 public class ContentAssistTest extends AbstractXbaseUITestCase {
 
+	@Override
+	protected boolean doCleanWorkspace() {
+		return false;
+	}
+	
 	public void testEmptyInput() throws Exception {
 		newBuilder().assertText(KEYWORDS);
 	}
 	
-	private static String[] KEYWORDS = {
+	protected static String[] KEYWORDS = {
 		"if", 
 		"while", "for", "do",
 		"true", "false",
@@ -46,17 +51,17 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 		"null"
 	};
 	
-	private static String[] STRING_OPERATORS = {
+	protected static String[] STRING_OPERATORS = {
 		"==", "!=",
 		"+",
 		"<=", ">=", "<", ">"
 	};
 	
-	private static String[] CAST_INSTANCEOF = {
+	protected static String[] CAST_INSTANCEOF = {
 		"as", "instanceof"
 	};
 	
-	private static final String[] STRING_FEATURES;
+	protected static final String[] STRING_FEATURES;
 	
 	static {
 		Set<String> features = Sets.newHashSet();
@@ -157,9 +162,6 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	
 	public void testOnStringLiteral_19() throws Exception {
 		newBuilder().append("''.toString").assertText(expect(STRING_OPERATORS, new String[]{"toString"}));
-		newBuilder().append("(''.toString)").assertText(expect(STRING_OPERATORS, CAST_INSTANCEOF));
-		newBuilder().append("(''.toString )").assertTextAtCursorPosition(")", expect(STRING_OPERATORS, CAST_INSTANCEOF));
-		newBuilder().append("''.toString ").assertText(expect(STRING_OPERATORS, CAST_INSTANCEOF));
 	}
 	
 	public void testOnStringLiteral_20() throws Exception {
@@ -168,12 +170,10 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	
 	public void testOnStringLiteral_21() throws Exception {
 		newBuilder().append("''.toString.").assertTextAtCursorPosition("g.", 1, expect(STRING_OPERATORS, new String[]{"toString"}));
-		newBuilder().append("''.toString .").assertTextAtCursorPosition("g .", 2, expect(STRING_OPERATORS, CAST_INSTANCEOF));
 	}
 	
 	public void testOnStringLiteral_22() throws Exception {
 		newBuilder().append("''.toString+''").assertTextAtCursorPosition("+", expect(STRING_OPERATORS, new String[]{"toString"}));
-		newBuilder().append("''.toString +''").assertTextAtCursorPosition("+", expect(STRING_OPERATORS, CAST_INSTANCEOF));
 	}
 	
 	public void testOnStringLiteral_23() throws Exception {
@@ -182,7 +182,6 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	
 	public void testOnStringLiteral_24() throws Exception {
 		newBuilder().append("''.toString==''").assertTextAtCursorPosition("==", 1, expect(new String[] {"=="}, KEYWORDS));
-		newBuilder().append("''.toString ==''").assertTextAtCursorPosition("==", 1, expect(new String[] {"=="}, KEYWORDS));
 	}
 	
 	public void testOnStringLiteral_25() throws Exception {
@@ -199,7 +198,6 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	
 	public void testOnStringLiteral_28() throws Exception {
 		newBuilder().append("''.toString.toString").assertTextAtCursorPosition(".", expect(STRING_OPERATORS, CAST_INSTANCEOF));
-		newBuilder().append("''.toString.toString").assertTextAtCursorPosition("g.", 1, expect(STRING_OPERATORS, new String[]{"toString"}));
 	}
 	
 	public void testOnStringLiteral_29() throws Exception {
@@ -212,6 +210,34 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	
 	public void testOnStringLiteral_31() throws Exception {
 		newBuilder().append("('').").assertText(STRING_FEATURES);
+	}
+	
+	public void testOnStringLiteral_32() throws Exception {
+		newBuilder().append("(''.toString)").assertText(expect(STRING_OPERATORS, CAST_INSTANCEOF));
+	}
+	
+	public void testOnStringLiteral_33() throws Exception {
+		newBuilder().append("(''.toString )").assertTextAtCursorPosition(")", expect(STRING_OPERATORS, CAST_INSTANCEOF));
+	}
+	
+	public void testOnStringLiteral_34() throws Exception {
+		newBuilder().append("''.toString ").assertText(expect(STRING_OPERATORS, CAST_INSTANCEOF));
+	}
+	
+	public void testOnStringLiteral_35() throws Exception {
+		newBuilder().append("''.toString .").assertTextAtCursorPosition("g .", 2, expect(STRING_OPERATORS, CAST_INSTANCEOF));
+	}
+	
+	public void testOnStringLiteral_36() throws Exception {
+		newBuilder().append("''.toString +''").assertTextAtCursorPosition("+", expect(STRING_OPERATORS, CAST_INSTANCEOF));
+	}
+	
+	public void testOnStringLiteral_37() throws Exception {
+		newBuilder().append("''.toString ==''").assertTextAtCursorPosition("==", 1, expect(new String[] {"=="}, KEYWORDS));
+	}
+	
+	public void testOnStringLiteral_38() throws Exception {
+		newBuilder().append("''.toString.toString").assertTextAtCursorPosition("g.", 1, expect(STRING_OPERATORS, new String[]{"toString"}));
 	}
 	
 	public void testAfterBinaryOperation_01() throws Exception {
@@ -258,6 +284,31 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 		newBuilder().append("null").assertText("null", "!=", "==");
 	}
 	
+	public void testForLoop_01() throws Exception {
+		newBuilder().append("for (String s: null) ").assertText(expect(new String[]{"s"}, KEYWORDS));
+	}
+	
+	public void testForLoop_02() throws Exception {
+		newBuilder().append("for (String string: null) string").assertTextAtCursorPosition(") string", 6, "string");
+	}
+	
+	public void testForLoop_03() throws Exception {
+		newBuilder().append("for (String string: null) ''+").assertText(expect(new String[] {"string", "+"}, KEYWORDS));
+	}
+	
+	public void testClosure_01() throws Exception {
+		newBuilder().append("[String a, String b|").assertText(expect(new String[]{"a", "b"}, KEYWORDS));
+	}
+	
+	public void testCatchParameter_01() throws Exception {
+		newBuilder().append("try {} catch(NullPointerException e) e").assertTextAtCursorPosition(") e", 2, expect(new String[]{"e"}, KEYWORDS));
+	}
+	
+	// TODO: FixMe when semantic predicates are properly propagated
+//	public void testCatchParameter_02() throws Exception {
+//		newBuilder().append("try {} catch(NullPointerException e) ").assertText(expect(new String[]{"e"}, KEYWORDS));
+//	}
+	
 	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
 		return new ContentAssistProcessorTestBuilder(getInjector(), this);
 	}
@@ -265,9 +316,13 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	@Override
 	public XtextResource getResourceFor(InputStream stream) {
 		XtextResource result = super.getResourceFor(stream);
+		initializeTypeProvider(result);
+		return result;
+	}
+
+	protected void initializeTypeProvider(XtextResource result) {
 		XtextResourceSet resourceSet = (XtextResourceSet) result.getResourceSet();
 		IJvmTypeProvider.Factory typeProviderFactory = new ClasspathTypeProviderFactory(getClass().getClassLoader());
 		typeProviderFactory.findOrCreateTypeProvider(resourceSet);
-		return result;
 	}
 }
