@@ -304,10 +304,9 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 		newBuilder().append("try {} catch(NullPointerException e) e").assertTextAtCursorPosition(") e", 2, expect(new String[]{"e"}, KEYWORDS));
 	}
 	
-	// TODO: FixMe when semantic predicates are properly propagated
-//	public void testCatchParameter_02() throws Exception {
-//		newBuilder().append("try {} catch(NullPointerException e) ").assertText(expect(new String[]{"e"}, KEYWORDS));
-//	}
+	public void testCatchParameter_02() throws Exception {
+		newBuilder().append("try {} catch(NullPointerException e) ").assertText(expect(new String[]{"e"}, KEYWORDS));
+	}
 	
 	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
 		return new ContentAssistProcessorTestBuilder(getInjector(), this);
