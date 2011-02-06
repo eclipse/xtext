@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
@@ -346,6 +347,15 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	
 	public void testTryCatch_1() throws Exception {
 		expression("try { 'literal' as Boolean } catch(ClassCastException e) {e.getClass().getSimpleName()}", true);
+	}
+	
+	public void testForLoop_01() throws Exception {
+		XForLoopExpression forLoop = (XForLoopExpression) expressionWithError("for(String s: s) s", 1);
+		XFeatureCall forFeatureCall = (XFeatureCall) forLoop.getForExpression();
+		assertTrue(forFeatureCall.getFeature().eIsProxy());
+		XFeatureCall eachFeatureCall = (XFeatureCall) forLoop.getEachExpression();
+		assertFalse(eachFeatureCall.getFeature().eIsProxy());
+		assertSame(forLoop.getDeclaredParam(), eachFeatureCall.getFeature());
 	}
 	
 }

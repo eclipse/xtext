@@ -288,7 +288,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			XBlockExpression block = (XBlockExpression) context.eContainer();
 			parentScope = createLocalVarScopeForBlock(block, block.getExpressions().indexOf(context), parentScope);
 		}
-		if (context.eContainer() instanceof XForLoopExpression) {
+		if (context.eContainer() instanceof XForLoopExpression && context.eContainingFeature() == XbasePackage.Literals.XFOR_LOOP_EXPRESSION__EACH_EXPRESSION) {
 			XForLoopExpression loop = (XForLoopExpression) context.eContainer();
 			parentScope = createLocalScopeForParameter(loop.getDeclaredParam(), parentScope);
 		}
