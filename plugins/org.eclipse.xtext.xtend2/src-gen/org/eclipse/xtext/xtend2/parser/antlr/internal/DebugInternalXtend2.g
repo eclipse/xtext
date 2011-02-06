@@ -312,7 +312,11 @@ ruleXMemberFeatureCall :
 			'('
 			) => '(' ) (
 				( (
-				ruleXShortClosure
+				(
+					ruleJvmFormalParameter (
+						',' ruleJvmFormalParameter
+					)*
+				)? '|'
 				) => ruleXShortClosure ) |
 				ruleXExpression (
 					',' ruleXExpression
@@ -359,11 +363,19 @@ ruleXClosure :
 
 // Rule XShortClosure
 ruleXShortClosure :
+	( (
 	(
 		ruleJvmFormalParameter (
 			',' ruleJvmFormalParameter
 		)*
-	)? '|' ruleXExpression
+	)? '|'
+	) => (
+		(
+			ruleJvmFormalParameter (
+				',' ruleJvmFormalParameter
+			)*
+		)? '|'
+	) ) ruleXExpression
 ;
 
 // Rule XParenthesizedExpression
@@ -457,7 +469,11 @@ ruleXFeatureCall :
 		'('
 		) => '(' ) (
 			( (
-			ruleXShortClosure
+			(
+				ruleJvmFormalParameter (
+					',' ruleJvmFormalParameter
+				)*
+			)? '|'
 			) => ruleXShortClosure ) |
 			ruleXExpression (
 				',' ruleXExpression
@@ -474,7 +490,11 @@ ruleXConstructorCall :
 		)* '>'
 	)? '(' (
 		( (
-		ruleXShortClosure
+		(
+			ruleJvmFormalParameter (
+				',' ruleJvmFormalParameter
+			)*
+		)? '|'
 		) => ruleXShortClosure ) |
 		ruleXExpression (
 			',' ruleXExpression
@@ -512,7 +532,7 @@ ruleXThrowExpression :
 ruleXTryCatchFinallyExpression :
 	'try' ruleXExpression (
 		( (
-		ruleXCatchClause
+		'catch'
 		) => ruleXCatchClause )+ (
 			( (
 			'finally'
@@ -524,7 +544,9 @@ ruleXTryCatchFinallyExpression :
 
 // Rule XCatchClause
 ruleXCatchClause :
-	'catch' '(' ruleJvmFormalParameter ')' ruleXExpression
+	( (
+	'catch'
+	) => 'catch' ) '(' ruleJvmFormalParameter ')' ruleXExpression
 ;
 
 // Rule QualifiedName

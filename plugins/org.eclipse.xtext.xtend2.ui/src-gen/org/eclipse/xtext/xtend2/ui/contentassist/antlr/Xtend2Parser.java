@@ -156,8 +156,10 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getXClosureAccess().getGroup_2(), "rule__XClosure__Group_2__0");
 					put(grammarAccess.getXClosureAccess().getGroup_2_1(), "rule__XClosure__Group_2_1__0");
 					put(grammarAccess.getXShortClosureAccess().getGroup(), "rule__XShortClosure__Group__0");
-					put(grammarAccess.getXShortClosureAccess().getGroup_1(), "rule__XShortClosure__Group_1__0");
-					put(grammarAccess.getXShortClosureAccess().getGroup_1_1(), "rule__XShortClosure__Group_1_1__0");
+					put(grammarAccess.getXShortClosureAccess().getGroup_0(), "rule__XShortClosure__Group_0__0");
+					put(grammarAccess.getXShortClosureAccess().getGroup_0_0(), "rule__XShortClosure__Group_0_0__0");
+					put(grammarAccess.getXShortClosureAccess().getGroup_0_0_1(), "rule__XShortClosure__Group_0_0_1__0");
+					put(grammarAccess.getXShortClosureAccess().getGroup_0_0_1_1(), "rule__XShortClosure__Group_0_0_1_1__0");
 					put(grammarAccess.getXParenthesizedExpressionAccess().getGroup(), "rule__XParenthesizedExpression__Group__0");
 					put(grammarAccess.getXIfExpressionAccess().getGroup(), "rule__XIfExpression__Group__0");
 					put(grammarAccess.getXIfExpressionAccess().getGroup_6(), "rule__XIfExpression__Group_6__0");
@@ -291,9 +293,9 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getXClosureAccess().getFormalParametersAssignment_2_0(), "rule__XClosure__FormalParametersAssignment_2_0");
 					put(grammarAccess.getXClosureAccess().getFormalParametersAssignment_2_1_1(), "rule__XClosure__FormalParametersAssignment_2_1_1");
 					put(grammarAccess.getXClosureAccess().getExpressionAssignment_4(), "rule__XClosure__ExpressionAssignment_4");
-					put(grammarAccess.getXShortClosureAccess().getFormalParametersAssignment_1_0(), "rule__XShortClosure__FormalParametersAssignment_1_0");
-					put(grammarAccess.getXShortClosureAccess().getFormalParametersAssignment_1_1_1(), "rule__XShortClosure__FormalParametersAssignment_1_1_1");
-					put(grammarAccess.getXShortClosureAccess().getExpressionAssignment_3(), "rule__XShortClosure__ExpressionAssignment_3");
+					put(grammarAccess.getXShortClosureAccess().getFormalParametersAssignment_0_0_1_0(), "rule__XShortClosure__FormalParametersAssignment_0_0_1_0");
+					put(grammarAccess.getXShortClosureAccess().getFormalParametersAssignment_0_0_1_1_1(), "rule__XShortClosure__FormalParametersAssignment_0_0_1_1_1");
+					put(grammarAccess.getXShortClosureAccess().getExpressionAssignment_1(), "rule__XShortClosure__ExpressionAssignment_1");
 					put(grammarAccess.getXIfExpressionAccess().getIfAssignment_3(), "rule__XIfExpression__IfAssignment_3");
 					put(grammarAccess.getXIfExpressionAccess().getThenAssignment_5(), "rule__XIfExpression__ThenAssignment_5");
 					put(grammarAccess.getXIfExpressionAccess().getElseAssignment_6_1(), "rule__XIfExpression__ElseAssignment_6_1");

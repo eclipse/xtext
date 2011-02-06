@@ -92,7 +92,7 @@ XMemberFeatureCall returns XExpression:
 		feature=[types::JvmIdentifiableElement] (
 			=>explicitOperationCall?='(' 
 				(
-				    =>memberCallArguments+=XShortClosure
+				    memberCallArguments+=XShortClosure
 				  |	memberCallArguments+=XExpression (',' memberCallArguments+=XExpression)*
 				)? 
 			')')?
@@ -125,7 +125,7 @@ XClosure returns XExpression:
 	{XClosure} '[' (formalParameters+=JvmFormalParameter (',' formalParameters+=JvmFormalParameter)*)? '|' expression=XExpression ']';
 
 XShortClosure returns XExpression:
-	{XClosure} (formalParameters+=JvmFormalParameter (',' formalParameters+=JvmFormalParameter)*)? '|' expression=XExpression;
+	=>({XClosure} (formalParameters+=JvmFormalParameter (',' formalParameters+=JvmFormalParameter)*)? '|') expression=XExpression;
 
 XParenthesizedExpression returns XExpression:
 	'(' XExpression ')';
@@ -185,7 +185,7 @@ XFeatureCall returns XExpression:
 	feature=[types::JvmIdentifiableElement] 
 	(=>explicitOperationCall?='(' 
 		(
-		    =>featureCallArguments+=XShortClosure
+		    featureCallArguments+=XShortClosure
 		  |	featureCallArguments+=XExpression (',' featureCallArguments+=XExpression)*
 		)? 
 	')')?;
@@ -196,7 +196,7 @@ XConstructorCall returns XExpression:
 	('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
 	'(' 
 		(
-		    =>arguments+=XShortClosure
+		    arguments+=XShortClosure
 		  |	arguments+=XExpression (',' arguments+=XExpression)*
 		)? 
 	')';
@@ -215,7 +215,6 @@ XStringLiteral returns XExpression:
 
 XTypeLiteral returns XExpression :
 	{XTypeLiteral} 'typeof' '(' type=[types::JvmType|QualifiedName] ')'
-//	{XTypeLiteral} type=[types::JvmType|QualifiedName] '.' 'class'
 ;
 	
 XThrowExpression returns XExpression :
@@ -226,13 +225,13 @@ XTryCatchFinallyExpression returns XExpression:
 	'try' 
 		expression=XExpression
 	(
-		(=>catchClauses+=XCatchClause)+
+		catchClauses+=XCatchClause+
 		(=>'finally' finallyExpression=XExpression)?
 	|	'finally' finallyExpression=XExpression
 	);
 	
 XCatchClause :
-	'catch' '(' declaredParam=JvmFormalParameter ')' expression=XExpression;
+	=>'catch' '(' declaredParam=JvmFormalParameter ')' expression=XExpression;
 
 QualifiedName:
   ID (=>'.' ID)*;
