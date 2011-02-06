@@ -296,6 +296,15 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 		newBuilder().append("for (String string: null) ''+").assertText(expect(new String[] {"string", "+"}, KEYWORDS));
 	}
 	
+	// ContentAssistInBlockTest defines testForLoop_0[45]
+	public void testForLoop_06() throws Exception {
+		newBuilder().append("for (String string: ").assertText(KEYWORDS);
+	}
+	
+	public void testForLoop_07() throws Exception {
+		newBuilder().append("for (String string: )").assertTextAtCursorPosition(")", KEYWORDS);
+	}
+	
 	public void testClosure_01() throws Exception {
 		newBuilder().append("[String a, String b|").assertText(expect(new String[]{"a", "b"}, KEYWORDS));
 	}
