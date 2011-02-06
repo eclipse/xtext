@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
@@ -140,10 +141,26 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 					}
 				}
 				int idx = block.getExpressions().indexOf(previousModel);
-				createBlockProposals(block, idx + 1, context, acceptor);
+				createLocalVariableAndImplicitProposals(block, idx + 1, context, acceptor);
 				return;
 			}
 		} 
+		if (model instanceof XForLoopExpression) {
+			ICompositeNode node = NodeModelUtils.getNode(model);
+			boolean eachExpression = false;
+			for(INode leaf: node.getLeafNodes()) {
+				if (leaf.getOffset() >= context.getOffset())
+					break;
+				if (leaf.getGrammarElement() == grammarAccess.getXForLoopExpressionAccess().getRightParenthesisKeyword_6()) {
+					eachExpression = true;
+					break;
+				}
+			}
+			if (!eachExpression) {
+				createLocalVariableAndImplicitProposals(model, false, -1, context, acceptor);
+				return;
+			}
+		}
 		if (model instanceof XExpression || model instanceof XCatchClause)
 			createLocalVariableAndImplicitProposals(model, context, acceptor);
 	}
@@ -161,7 +178,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 			}
 			XBlockExpression block = (XBlockExpression) local.eContainer();
 			int idx = block.getExpressions().indexOf(local);
-			createBlockProposals(block, idx + 1, context, acceptor);
+			createLocalVariableAndImplicitProposals(block, idx + 1, context, acceptor);
 		}
 	}
 	
@@ -230,9 +247,13 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 		}
 	}
 	
-	protected void createBlockProposals(EObject context, int idx, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
+	protected void createLocalVariableAndImplicitProposals(EObject context, int idx, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
+		createLocalVariableAndImplicitProposals(context, true, idx, contentAssistContext, acceptor);
+	}
+	
+	protected void createLocalVariableAndImplicitProposals(EObject context, boolean includeCurrentObject, int idx, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
 		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory("ID", contentAssistContext);
-		IScope scope = getScopeProvider().createSimpleFeatureCallScope(context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, true, idx);
+		IScope scope = getScopeProvider().createSimpleFeatureCallScope(context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, includeCurrentObject, idx);
 		createProposalsForScope(acceptor, featureDescriptionPredicate, proposalFactory, scope);
 	}
 	
@@ -241,7 +262,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 	 * as concrete syntax.
 	 */
 	protected void createLocalVariableAndImplicitProposals(EObject context, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
-		createBlockProposals(context, -1, contentAssistContext, acceptor);
+		createLocalVariableAndImplicitProposals(context, -1, contentAssistContext, acceptor);
 	}
 
 	protected void createProposalsForScope(ICompletionProposalAcceptor acceptor, Predicate<IEObjectDescription> filter,
