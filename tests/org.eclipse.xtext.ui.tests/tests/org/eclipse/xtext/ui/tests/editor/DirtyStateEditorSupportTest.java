@@ -346,6 +346,11 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 	public String getContents() {
 		return "otherContents";
 	}
+	
+	public String getActualContents() {
+		fail("Unexpected call");
+		return null;
+	}
 
 	public IResourceDescription getDescription() {
 		fail("Unexpected call");

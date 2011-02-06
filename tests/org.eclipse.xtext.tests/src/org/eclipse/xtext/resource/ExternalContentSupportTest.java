@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider;
 
 import com.google.common.collect.Maps;
 
@@ -51,6 +52,10 @@ public class ExternalContentSupportTest extends AbstractXtextTests implements IE
 
 	public boolean hasContent(URI uri) {
 		return uriToContent.containsKey(uri);
+	}
+	
+	public IExternalContentProvider getActualContentProvider() {
+		return this;
 	}
 	
 	public void testConfigureConverter() {

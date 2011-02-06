@@ -38,6 +38,6 @@ public class RefactoringResourceSetProvider {
 	protected void configure(ResourceSet resourceSet) {
 		resourceSet.getLoadOptions().put(org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider.LIVE_SCOPE,
 				Boolean.TRUE);
-		externalContentSupport.configureResourceSet(resourceSet, dirtyStateManager);
+		externalContentSupport.configureResourceSet(resourceSet, dirtyStateManager.getActualContentProvider());
 	}
 }

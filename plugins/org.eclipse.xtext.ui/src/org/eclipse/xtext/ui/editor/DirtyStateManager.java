@@ -18,6 +18,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
@@ -124,6 +125,26 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 		if (dirtyResource != null)
 			return dirtyResource.getContents();
 		return null;
+	}
+	
+	public IExternalContentProvider getActualContentProvider() {
+		return new IExternalContentProvider() {
+			
+			public boolean hasContent(URI uri) {
+				return DirtyStateManager.this.hasContent(uri);
+			}
+			
+			public String getContent(URI uri) {
+				IDirtyResource dirtyResource = managedResources.get(uri);
+				if (dirtyResource != null)
+					return dirtyResource.getActualContents();
+				return null;
+			}
+			
+			public IExternalContentProvider getActualContentProvider() {
+				return this;
+			}
+		};
 	}
 
 	public boolean hasContent(URI uri) {

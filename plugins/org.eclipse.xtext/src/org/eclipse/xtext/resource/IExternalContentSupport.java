@@ -22,7 +22,8 @@ import com.google.inject.ImplementedBy;
 public interface IExternalContentSupport {
 
 	/**
-	 * Lightweight abstraction for a contributor of external state.
+	 * Lightweight abstraction for a contributor of external state. The state is not necessary up to date
+	 * with respect to the open documents or the persisted resources. It may be a snapshot from a given point in time.
 	 */
 	interface IExternalContentProvider {
 		
@@ -36,6 +37,14 @@ public interface IExternalContentSupport {
 		 * @return <code>true</code> if and only if external content should be used instead of the persistent one.
 		 */
 		boolean hasContent(URI uri);
+		
+		/**
+		 * Some use cases may require the latest and most up to date content - mostly in a secured, transactional
+		 * context such as a rename refactoring.
+		 * 
+		 * @return a view on the content provider that reflects always the latest state.
+		 */
+		IExternalContentProvider getActualContentProvider();
 	}
 	
 	/**
