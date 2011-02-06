@@ -69,6 +69,10 @@ public class RefactoringResourceSetProviderTest extends TestCase {
 			public String getContents() {
 				return testModel;
 			}
+			
+			public String getActualContents() {
+				return testModel;
+			}
 
 			public IResourceDescription getDescription() {
 				return new URIBasedTestResourceDescription(dirtyResourceURI);

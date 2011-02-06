@@ -14,10 +14,12 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.inject.Provider;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DocumentBasedDirtyResource implements IDirtyResource {
+public class DocumentBasedDirtyResource implements IDirtyResource, Provider<IResourceDescription> {
 	
 	private IXtextDocument document;
 	private IResourceDescription description;
@@ -63,8 +65,32 @@ public class DocumentBasedDirtyResource implements IDirtyResource {
 		content = null;
 	}
 	
+	/**
+	 * Callback method for the copied resource description. Is triggered as soon as somebody is 
+	 * interested in the reference descriptions which shall be up to date all the time.
+	 * This allows for lazy resolution of proxies instead of eager copying.
+	 * @return the current resource description of the associated document. May be <code>null</code>.
+	 */
+	public IResourceDescription get() {
+		IResourceDescription result = document.readOnly(new IUnitOfWork<IResourceDescription, XtextResource>() {
+			public IResourceDescription exec(XtextResource resource) {
+				if (resource != null) {
+					IResourceServiceProvider serviceProvider = resource.getResourceServiceProvider();
+					if (serviceProvider != null) {
+						IResourceDescription.Manager manager = serviceProvider.getResourceDescriptionManager();
+						if (manager != null) {
+							return manager.getResourceDescription(resource);
+						}
+					}
+				}
+				return null;
+			}
+		});
+		return result;
+	}
+	
 	public synchronized void copyState(IResourceDescription original) {
-		description = new StatefulResourceDescription(original);
+		description = new StatefulResourceDescription(original, this);
 		content = getUnderlyingDocument().get();
 	}
 	
@@ -98,6 +124,12 @@ public class DocumentBasedDirtyResource implements IDirtyResource {
 		if (content == null)
 			throw new IllegalStateException("Cannot use getContents if this dirty resource is currently not mementoed");
 		return content;
+	}
+	
+	public String getActualContents() {
+		if (document == null)
+			throw new IllegalStateException("Cannot use getActualContents if this dirty resource is not connected to a document");
+		return document.get();
 	}
 
 }

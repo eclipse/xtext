@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -32,12 +34,16 @@ public class StatefulResourceDescription extends AbstractResourceDescription {
 
 	private URI uri;
 	private ImmutableList<IEObjectDescription> exported;
-	private ImmutableList<IReferenceDescription> references;
+	private final Provider<IResourceDescription> snapShotProvider;
 	
-	
-	public StatefulResourceDescription(IResourceDescription original) {
+	public StatefulResourceDescription(IResourceDescription original, Provider<IResourceDescription> snapShotProvider) {
+		this.snapShotProvider = snapShotProvider;
 		this.uri = original.getURI();
-		this.exported = ImmutableList.copyOf(Iterables.transform(original.getExportedObjects(), new Function<IEObjectDescription, IEObjectDescription>() {
+		this.exported = copyExportedObjects(original);
+	}
+
+	protected ImmutableList<IEObjectDescription> copyExportedObjects(IResourceDescription original) {
+		return ImmutableList.copyOf(Iterables.transform(original.getExportedObjects(), new Function<IEObjectDescription, IEObjectDescription>() {
 			public IEObjectDescription apply(IEObjectDescription from) {
 				if (from.getEObjectOrProxy().eIsProxy())
 					return from;
@@ -53,7 +59,6 @@ public class StatefulResourceDescription extends AbstractResourceDescription {
 				return EObjectDescription.create(from.getName(), result, userData);
 			}
 		}));
-		this.references = ImmutableList.copyOf(original.getReferenceDescriptions());
 	}
 
 	@Override
@@ -66,7 +71,14 @@ public class StatefulResourceDescription extends AbstractResourceDescription {
 	}
 
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
-		return references;
+		// find references was triggered - use up-to-date reference descriptions
+		// the content of this copied description is updated as soon as the exported
+		// objects of a resource change thus the default algorithm of the find 
+		// references ui for the display string should work
+		IResourceDescription snapShot = snapShotProvider.get();
+		if (snapShot != null)
+			return snapShot.getReferenceDescriptions();
+		return Collections.emptyList();
 	}
 
 	public URI getURI() {

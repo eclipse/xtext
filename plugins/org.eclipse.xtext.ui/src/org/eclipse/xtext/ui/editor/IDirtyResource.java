@@ -19,9 +19,15 @@ import org.eclipse.xtext.resource.IResourceDescription;
 public interface IDirtyResource {
 
 	/**
-	 * @return the content of the resource as text, never <code>null</code>.
+	 * @return the content of the resource as text, never <code>null</code>. May be the content of a 
+	 * snapshot.
 	 */
 	String getContents();
+	
+	/**
+	 * @return the current content of the underlying document or resource as text, never <code>null</code>.
+	 */
+	String getActualContents();
 	
 	/**
 	 * @return the description of the resource, never <code>null</code>.

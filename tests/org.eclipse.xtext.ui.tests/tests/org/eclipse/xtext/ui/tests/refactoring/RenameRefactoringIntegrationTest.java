@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
+import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
@@ -121,6 +122,25 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		assertTrue(editor1.isDirty());
 		assertEquals(initialModel0, editor0.getDocument().get());
 		assertEquals(initialModel1, editor1.getDocument().get());
+	}
+	
+	public void testDirtyEditorRename() throws Exception {
+		XtextEditor editor0 = openEditor(testFile0);
+		XtextEditor editor1 = openEditor(testFile1);
+		new ReplaceEdit(0,0," ").apply(editor0.getDocument());
+		new ReplaceEdit(0,0," ").apply(editor1.getDocument());
+		assertTrue(editor0.isDirty());
+		assertTrue(editor1.isDirty());
+		doRename();
+		assertTrue(editor0.isDirty());
+		assertTrue(editor1.isDirty());
+		assertEquals(" " + initialModel0.replaceAll("B", "C"), editor0.getDocument().get());
+		assertEquals(" " + initialModel1.replaceAll("B", "C"), editor1.getDocument().get());
+		undoRename();
+		assertTrue(editor0.isDirty());
+		assertTrue(editor1.isDirty());
+		assertEquals(" " + initialModel0, editor0.getDocument().get());
+		assertEquals(" " + initialModel1, editor1.getDocument().get());
 	}
 
 	public void testFileEditorRename() throws Exception {
