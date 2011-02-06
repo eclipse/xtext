@@ -1341,7 +1341,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	//	XPrimaryExpression (=> ({XAssignment.assignable=current} "." feature=[types::JvmIdentifiableElement] OpSingleAssign)
 	//	value=XAssignment | => ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | spreading?="*.")) ("<"
 	//	typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
-	//	feature=[types::JvmIdentifiableElement] (=> explicitOperationCall?="(" (=> memberCallArguments+=XShortClosure |
+	//	feature=[types::JvmIdentifiableElement] (=> explicitOperationCall?="(" (memberCallArguments+=XShortClosure |
 	//	memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")?)*;
 	public XbaseGrammarAccess.XMemberFeatureCallElements getXMemberFeatureCallAccess() {
 		return gaXbase.getXMemberFeatureCallAccess();
@@ -1384,7 +1384,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XShortClosure returns XExpression:
-	//	{XClosure} (formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)? "|"
+	//	=> ({XClosure} (formalParameters+=JvmFormalParameter ("," formalParameters+=JvmFormalParameter)*)? "|")
 	//	expression=XExpression;
 	public XbaseGrammarAccess.XShortClosureElements getXShortClosureAccess() {
 		return gaXbase.getXShortClosureAccess();
@@ -1509,7 +1509,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 
 	//XFeatureCall returns XExpression:
 	//	{XFeatureCall} ("<" typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
-	//	feature=[types::JvmIdentifiableElement] (=> explicitOperationCall?="(" (=> featureCallArguments+=XShortClosure |
+	//	feature=[types::JvmIdentifiableElement] (=> explicitOperationCall?="(" (featureCallArguments+=XShortClosure |
 	//	featureCallArguments+=XExpression ("," featureCallArguments+=XExpression)*)? ")")?;
 	public XbaseGrammarAccess.XFeatureCallElements getXFeatureCallAccess() {
 		return gaXbase.getXFeatureCallAccess();
@@ -1521,8 +1521,8 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 
 	//XConstructorCall returns XExpression:
 	//	{XConstructorCall} "new" constructor=[types::JvmConstructor|QualifiedName] ("<"
-	//	typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")? "(" (=>
-	//	arguments+=XShortClosure | arguments+=XExpression ("," arguments+=XExpression)*)? ")";
+	//	typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")? "("
+	//	(arguments+=XShortClosure | arguments+=XExpression ("," arguments+=XExpression)*)? ")";
 	public XbaseGrammarAccess.XConstructorCallElements getXConstructorCallAccess() {
 		return gaXbase.getXConstructorCallAccess();
 	}
@@ -1561,7 +1561,6 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		return getXIntLiteralAccess().getRule();
 	}
 
-	////	{XTypeLiteral} type=[types::JvmType|QualifiedName] '.' 'class'
 	//XTypeLiteral returns XExpression:
 	//	{XTypeLiteral} "typeof" "(" type=[types::JvmType|QualifiedName] ")";
 	public XbaseGrammarAccess.XTypeLiteralElements getXTypeLiteralAccess() {
@@ -1583,7 +1582,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XTryCatchFinallyExpression returns XExpression:
-	//	{XTryCatchFinallyExpression} "try" expression=XExpression (=> catchClauses+=XCatchClause+ ("finally"
+	//	{XTryCatchFinallyExpression} "try" expression=XExpression (catchClauses+=XCatchClause+ ("finally"
 	//	finallyExpression=XExpression)? | "finally" finallyExpression=XExpression);
 	public XbaseGrammarAccess.XTryCatchFinallyExpressionElements getXTryCatchFinallyExpressionAccess() {
 		return gaXbase.getXTryCatchFinallyExpressionAccess();

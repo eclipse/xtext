@@ -2857,11 +2857,18 @@ ruleOpSingleAssign
 	    }
 
 )
-)(((
+)(((((
+)((
 (
-ruleXShortClosure
+ruleJvmFormalParameter
 )
-)=>
+)(	',' 
+(
+(
+ruleJvmFormalParameter
+)
+))*)?	'|' 
+))=>
 (
 		{ 
 	        newCompositeNode(grammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsXShortClosureParserRuleCall_1_1_3_1_0_0()); 
@@ -3262,16 +3269,27 @@ ruleXShortClosure returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-((
+(((((
+)((
+(
+ruleJvmFormalParameter
+)
+)(	',' 
+(
+(
+ruleJvmFormalParameter
+)
+))*)?	'|' 
+))=>((
     {
         $current = forceCreateModelElement(
-            grammarAccess.getXShortClosureAccess().getXClosureAction_0(),
+            grammarAccess.getXShortClosureAccess().getXClosureAction_0_0_0(),
             $current);
     }
 )((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXShortClosureAccess().getFormalParametersJvmFormalParameterParserRuleCall_1_0_0()); 
+	        newCompositeNode(grammarAccess.getXShortClosureAccess().getFormalParametersJvmFormalParameterParserRuleCall_0_0_1_0_0()); 
 	    }
 		lv_formalParameters_1_0=ruleJvmFormalParameter		{
 	        if ($current==null) {
@@ -3288,12 +3306,12 @@ ruleXShortClosure returns [EObject current=null]
 )
 )(	otherlv_2=',' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getXShortClosureAccess().getCommaKeyword_1_1_0());
+    	newLeafNode(otherlv_2, grammarAccess.getXShortClosureAccess().getCommaKeyword_0_0_1_1_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXShortClosureAccess().getFormalParametersJvmFormalParameterParserRuleCall_1_1_1_0()); 
+	        newCompositeNode(grammarAccess.getXShortClosureAccess().getFormalParametersJvmFormalParameterParserRuleCall_0_0_1_1_1_0()); 
 	    }
 		lv_formalParameters_3_0=ruleJvmFormalParameter		{
 	        if ($current==null) {
@@ -3310,12 +3328,12 @@ ruleXShortClosure returns [EObject current=null]
 )
 ))*)?	otherlv_4='|' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getXShortClosureAccess().getVerticalLineKeyword_2());
+    	newLeafNode(otherlv_4, grammarAccess.getXShortClosureAccess().getVerticalLineKeyword_0_0_2());
     }
-(
+))(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXShortClosureAccess().getExpressionXExpressionParserRuleCall_3_0()); 
+	        newCompositeNode(grammarAccess.getXShortClosureAccess().getExpressionXExpressionParserRuleCall_1_0()); 
 	    }
 		lv_expression_5_0=ruleXExpression		{
 	        if ($current==null) {
@@ -4319,11 +4337,18 @@ ruleXFeatureCall returns [EObject current=null]
 	    }
 
 )
-)(((
+)(((((
+)((
 (
-ruleXShortClosure
+ruleJvmFormalParameter
 )
-)=>
+)(	',' 
+(
+(
+ruleJvmFormalParameter
+)
+))*)?	'|' 
+))=>
 (
 		{ 
 	        newCompositeNode(grammarAccess.getXFeatureCallAccess().getFeatureCallArgumentsXShortClosureParserRuleCall_3_1_0_0()); 
@@ -4484,11 +4509,18 @@ ruleXConstructorCall returns [EObject current=null]
     {
     	newLeafNode(otherlv_8, grammarAccess.getXConstructorCallAccess().getLeftParenthesisKeyword_4());
     }
-(((
+(((((
+)((
 (
-ruleXShortClosure
+ruleJvmFormalParameter
 )
-)=>
+)(	',' 
+(
+(
+ruleJvmFormalParameter
+)
+))*)?	'|' 
+))=>
 (
 		{ 
 	        newCompositeNode(grammarAccess.getXConstructorCallAccess().getArgumentsXShortClosureParserRuleCall_5_0_0()); 
@@ -4826,10 +4858,7 @@ ruleXTryCatchFinallyExpression returns [EObject current=null]
 	    }
 
 )
-)((((
-(
-ruleXCatchClause
-)
+)((((	'catch' 
 )=>
 (
 		{ 
@@ -4915,11 +4944,12 @@ ruleXCatchClause returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(	otherlv_0='catch' 
+(((	'catch' 
+)=>	otherlv_0='catch' 
     {
     	newLeafNode(otherlv_0, grammarAccess.getXCatchClauseAccess().getCatchKeyword_0());
     }
-	otherlv_1='(' 
+)	otherlv_1='(' 
     {
     	newLeafNode(otherlv_1, grammarAccess.getXCatchClauseAccess().getLeftParenthesisKeyword_1());
     }
