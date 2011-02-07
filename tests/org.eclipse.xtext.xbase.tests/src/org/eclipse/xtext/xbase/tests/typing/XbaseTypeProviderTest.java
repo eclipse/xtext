@@ -118,7 +118,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	public void testThrowExpression() throws Exception {
-		assertResolvedReturnType("java.lang.Void", "throw new java.lang.Exception()");
+		assertResolvedReturnType("void", "throw new java.lang.Exception()");
 	}
 
 	//TODO
@@ -133,7 +133,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	//	}
 
 	public void testForExpression() throws Exception {
-		assertResolvedReturnType("java.lang.Void", "for(java.lang.String x : new java.util.ArrayList()) 'foo'");
+		assertResolvedReturnType("void", "for(java.lang.String x : new java.util.ArrayList()) 'foo'");
 	}
 
 	public void testNull() throws Exception {

@@ -7,6 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typing;
 
+import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Lists.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -14,6 +20,7 @@ import org.eclipse.xtext.common.types.util.DefaultJvmTypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.functions.FunctionConversion;
 
+import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 
 /**
@@ -35,11 +42,13 @@ public class XbaseTypeConformanceComputer extends DefaultJvmTypeConformanceCompu
 	public boolean isConformant(JvmTypeReference left, JvmTypeReference right) {
 		if (left == null || typesService.isObject(left))
 			return true;
+		if (left.eIsProxy() || right == null || right.eIsProxy())
+			return false;
 		if (typesService.isVoid(right))
 			return true;
 		if (functionConversion.isFunction(left) || functionConversion.isFunction(right))
 			return functionConversion.isConformant(left, right);
-		if (right!=null && right.getType() instanceof JvmArrayType) {
+		if (right.getType() instanceof JvmArrayType) {
 			JvmArrayType array = (JvmArrayType) right.getType();
 			if (isIterable(left.getType())) {
 				JvmTypeReference newLeft = typeReferences.getArgument(left,0);
@@ -53,4 +62,38 @@ public class XbaseTypeConformanceComputer extends DefaultJvmTypeConformanceCompu
 		return type.getCanonicalName().equals(Iterable.class.getName());
 	}
 	
+	@Override
+	public JvmTypeReference getCommonSuperType(List<JvmTypeReference> types) {
+		ArrayList<JvmTypeReference> list = newArrayList(filter(types, new Predicate<JvmTypeReference>() {
+			public boolean apply(JvmTypeReference input) {
+				return input!=null && input.getType()!=null && !input.getType().eIsProxy();
+			}
+		}));
+		// filter out Void.TYPE
+		JvmTypeReference voidType = null;
+		for (JvmTypeReference jvmTypeReference : types) {
+			if (isPrimitiveVoid(jvmTypeReference)) {
+				voidType = jvmTypeReference;
+				list.remove(jvmTypeReference);
+			}
+		}
+		if (list.isEmpty()) {
+			return voidType;
+		}
+		// filter out Void.class
+		for (JvmTypeReference jvmTypeReference : types) {
+			if (isWrapperVoid(jvmTypeReference)) {
+				voidType = jvmTypeReference;
+				list.remove(jvmTypeReference);
+			}
+		}
+		if (list.isEmpty()) {
+			return voidType;
+		}
+		return super.getCommonSuperType(list);
+	}
+
+	protected boolean isWrapperVoid(JvmTypeReference jvmTypeReference) {
+		return jvmTypeReference!=null && Void.class.getName().equals(jvmTypeReference.getType().getCanonicalName());
+	}
 }

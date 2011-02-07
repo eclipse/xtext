@@ -13,8 +13,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -34,6 +34,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.functions.FunctionConversion;
 import org.eclipse.xtext.xbase.lib.Objects;
+import org.eclipse.xtext.xbase.typing.TypesService;
 
 import com.google.inject.Inject;
 
@@ -41,6 +42,8 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XbaseCompiler extends FeatureCallCompiler {
+	
+	@Inject private TypesService typeService;
 
 	protected void openBlock(XExpression xExpression, IAppendable b) {
 		if (xExpression instanceof XBlockExpression) {
@@ -56,17 +59,18 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.decreaseIndentation().append("\n}");
 	}
 
-	public void _prepare(XBlockExpression expr, IAppendable b) {
-		declareLocalVariable(expr, b);
+	public void _toJavaStatement(XBlockExpression expr, IAppendable b, boolean isReferenced) {
+		if (isReferenced)
+			declareLocalVariable(expr, b);
 		b.append("\n{").increaseIndentation();
 		final EList<XExpression> expressions = expr.getExpressions();
 		for (int i = 0; i < expressions.size(); i++) {
 			XExpression ex = expressions.get(i);
 			if (i < expressions.size() - 1) {
-				internalToJavaStatement(ex, b);
+				internalToJavaStatement(ex, b, false);
 			} else {
-				internalPrepare(ex, b);
-				if (!isEarlyMethodInterruption(ex)) {
+				internalToJavaStatement(ex, b, isReferenced);
+				if (isReferenced) {
 					b.append("\n").append(getJavaVarName(expr, b)).append(" = (");
 					internalToJavaExpression(ex, b);
 					b.append(");");
@@ -80,39 +84,29 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(getJavaVarName(expr, b));
 	}
 
-	public void _toJavaStatement(XBlockExpression expr, IAppendable b) {
-		b.append("\n{").increaseIndentation();
-		final EList<XExpression> expressions = expr.getExpressions();
-		for (int i = 0; i < expressions.size(); i++) {
-			XExpression ex = expressions.get(i);
-			internalToJavaStatement(ex, b);
-		}
-		b.decreaseIndentation().append("\n}");
-	}
-
-	public void _prepare(XTryCatchFinallyExpression expr, IAppendable b) {
-		if (!isEarlyMethodInterruption(expr)) {
+	public void _toJavaStatement(XTryCatchFinallyExpression expr, IAppendable b, boolean isReferenced) {
+		if (isReferenced && !isPrimitiveVoid(expr)) {
 			declareLocalVariable(expr, b);
 		}
 		b.append("\ntry {").increaseIndentation();
-		internalPrepare(expr.getExpression(), b);
-		if (!isEarlyMethodInterruption(expr.getExpression())) {
+		internalToJavaStatement(expr.getExpression(), b, true);
+		if (isReferenced && !isPrimitiveVoid(expr.getExpression())) {
 			b.append("\n").append(getJavaVarName(expr, b)).append(" = ");
 			internalToJavaExpression(expr.getExpression(), b);
 			b.append(";");
 		}
 		b.decreaseIndentation().append("\n}");
-		appendCatchAndFinally(expr, b);
+		appendCatchAndFinally(expr, b, isReferenced);
 	}
 
-	protected void appendCatchAndFinally(XTryCatchFinallyExpression expr, IAppendable b) {
+	protected void appendCatchAndFinally(XTryCatchFinallyExpression expr, IAppendable b, boolean isReferenced) {
 		for (XCatchClause catchClause : expr.getCatchClauses()) {
 			JvmTypeReference type = catchClause.getDeclaredParam().getParameterType();
 			final String name = declareNameInVariableScope(catchClause.getDeclaredParam(), b);
 			b.append(" catch (").append(getSerializedForm(type)).append(" ").append(name).append(") { ");
 			b.increaseIndentation();
-			internalPrepare(catchClause.getExpression(), b);
-			if (!isEarlyMethodInterruption(catchClause.getExpression())) {
+			internalToJavaStatement(catchClause.getExpression(), b, true);
+			if (isReferenced && ! isPrimitiveVoid(catchClause.getExpression())) {
 				b.append("\n").append(getJavaVarName(expr, b)).append(" = ");
 				internalToJavaExpression(catchClause.getExpression(), b);
 				b.append(";");
@@ -124,7 +118,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (finallyExp != null) {
 			b.append(" finally ");
 			openBlock(finallyExp, b);
-			internalToJavaStatement(finallyExp, b);
+			internalToJavaStatement(finallyExp, b, false);
 			closeBlock(finallyExp, b);
 		}
 	}
@@ -133,30 +127,15 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(getJavaVarName(expr, b));
 	}
 
-	public void _toJavaStatement(XTryCatchFinallyExpression expr, IAppendable b) {
-		b.append("\ntry ");
-		openBlock(expr.getExpression(), b);
-		internalToJavaStatement(expr.getExpression(), b);
-		closeBlock(expr.getExpression(), b);
-		appendCatchAndFinally(expr, b);
-	}
-
-	public void _prepare(XThrowExpression expr, IAppendable b) {
-		internalPrepare(expr.getExpression(), b);
+	public void _toJavaStatement(XThrowExpression expr, IAppendable b, boolean isReferenced) {
+		internalToJavaStatement(expr.getExpression(), b, true);
 		b.append("\nthrow ");
 		internalToJavaExpression(expr.getExpression(), b);
 		b.append(";");
 	}
 
 	public void _toJavaExpression(XThrowExpression expr, IAppendable b) {
-	}
-
-	public void _toJavaStatement(XThrowExpression expr, IAppendable b) {
-		internalPrepare(expr, b);
-	}
-
-	public void _prepare(XInstanceOfExpression expr, IAppendable b) {
-		internalPrepare(expr.getExpression(), b);
+		throw new UnsupportedOperationException("throw expression has no result");
 	}
 
 	public void _toJavaExpression(XInstanceOfExpression expr, IAppendable b) {
@@ -165,22 +144,16 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(" instanceof ").append(expr.getType().getCanonicalName()).append(")");
 	}
 
-	public void _toJavaStatement(XInstanceOfExpression expr, IAppendable b) {
-		b.append("\n/*");
-		internalPrepare(expr, b);
-		internalToJavaExpression(expr, b);
-		b.append("*/;");
-	}
-
-	public void _prepare(XVariableDeclaration expr, IAppendable b) {
-		throw new IllegalArgumentException("A variable declaration cannot occure in this context.");
+	public void _toJavaStatement(XInstanceOfExpression expr, IAppendable b, boolean isReferenced) {
+		internalToJavaStatement(expr.getExpression(), b, true);
 	}
 
 	public void _toJavaExpression(XVariableDeclaration expr, IAppendable b) {
+		throw new UnsupportedOperationException("var declaration has no result");
 	}
 
-	public void _toJavaStatement(XVariableDeclaration expr, IAppendable b) {
-		internalPrepare(expr.getRight(), b);
+	public void _toJavaStatement(XVariableDeclaration expr, IAppendable b, boolean isReferenced) {
+		internalToJavaStatement(expr.getRight(), b, true);
 		b.append("\n");
 		if (!expr.isWriteable()) {
 			b.append("final ");
@@ -197,16 +170,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(";");
 	}
 
-	public void _prepare(XWhileExpression expr, IAppendable b) {
-		_toJavaStatement(expr, b);
-	}
-
 	public void _toJavaExpression(XWhileExpression expr, IAppendable b) {
-		b.append("null");
+		throw new UnsupportedOperationException("while loop has no result");
 	}
 
-	public void _toJavaStatement(XWhileExpression expr, IAppendable b) {
-		internalPrepare(expr.getPredicate(), b);
+	public void _toJavaStatement(XWhileExpression expr, IAppendable b, boolean isReferenced) {
+		internalToJavaStatement(expr.getPredicate(), b, true);
 		b.append("\nBoolean ").append(declareNameInVariableScope(expr, b)).append(" = ");
 		internalToJavaExpression(expr.getPredicate(), b);
 		b.append(";");
@@ -214,7 +183,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(getJavaVarName(expr, b));
 		b.append(") { ");
 		openBlock(expr.getBody(), b);
-		internalToJavaStatement(expr.getBody(), b);
+		internalToJavaStatement(expr.getBody(), b, false);
 		closeBlock(expr.getBody(), b);
 		b.append("\n").append(getJavaVarName(expr, b)).append(" = ");
 		internalToJavaExpression(expr.getPredicate(), b);
@@ -222,19 +191,19 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append("\n}");
 	}
 
-	public void _prepare(XDoWhileExpression expr, IAppendable b) {
+	public void _toJavaStatement(XDoWhileExpression expr, IAppendable b) {
 		_toJavaStatement(expr, b);
 	}
 
 	public void _toJavaExpression(XDoWhileExpression expr, IAppendable b) {
-		b.append("null");
+		throw new UnsupportedOperationException("while loop has no result");
 	}
 
-	public void _toJavaStatement(XDoWhileExpression expr, IAppendable b) {
+	public void _toJavaStatement(XDoWhileExpression expr, IAppendable b, boolean isReferenced) {
 		b.append("\nBoolean ").append(declareNameInVariableScope(expr, b)).append(";");
 		b.append("\ndo {");
-		internalToJavaStatement(expr.getBody(), b);
-		internalPrepare(expr.getPredicate(), b);
+		internalToJavaStatement(expr.getBody(), b, false);
+		internalToJavaStatement(expr.getPredicate(), b, true);
 		b.append("\n").append(getJavaVarName(expr, b)).append(" = ");
 		internalToJavaExpression(expr.getPredicate(), b);
 		b.append(";");
@@ -243,24 +212,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(");");
 	}
 
-	public void testname() throws Exception {
-		boolean x = true;
-		while (x) {
-			Boolean condition = false;
-			x = condition;
-		}
-	}
-
-	public void _prepare(XForLoopExpression expr, IAppendable b) {
-		_toJavaStatement(expr, b);
-	}
-
 	public void _toJavaExpression(XForLoopExpression expr, IAppendable b) {
-		b.append("null");
+		throw new UnsupportedOperationException("for each has no result");
 	}
 
-	public void _toJavaStatement(XForLoopExpression expr, IAppendable b) {
-		internalPrepare(expr.getForExpression(), b);
+	public void _toJavaStatement(XForLoopExpression expr, IAppendable b, boolean isReferenced) {
+		internalToJavaStatement(expr.getForExpression(), b, true);
 		b.append("\nfor (");
 		JvmTypeReference paramType = getIdentifiableTypeProvider().getType(expr.getDeclaredParam(), false);
 		b.append(paramType.getCanonicalName());
@@ -268,16 +225,19 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		String varName = declareNameInVariableScope(expr.getDeclaredParam(), b);
 		b.append(varName);
 		b.append(" : ");
-		internalToJavaExpression(expr.getForExpression(), b);
+		JvmTypeReference type = getTypeProvider().getType(expr.getForExpression());
+		if (typeService.isArray(type))
+			type = typeService.getIterableForArrayType(type, expr);
+		internalToConvertedExpression(expr.getForExpression(), b, type);
 		b.append(") ");
 		openBlock(expr.getEachExpression(), b);
-		internalToJavaStatement(expr.getEachExpression(), b);
+		internalToJavaStatement(expr.getEachExpression(), b, false);
 		closeBlock(expr.getEachExpression(), b);
 	}
 
-	public void _prepare(XConstructorCall expr, IAppendable b) {
+	public void _toJavaStatement(XConstructorCall expr, IAppendable b, boolean isReferenced) {
 		for (XExpression arg : expr.getArguments()) {
-			internalPrepare(arg, b);
+			internalToJavaStatement(arg, b, true);
 		}
 	}
 
@@ -299,41 +259,28 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(")");
 	}
 
-	public void _toJavaStatement(XConstructorCall expr, IAppendable b) {
-		internalPrepare(expr, b);
-		b.append("\n");
-		internalToJavaStatement(expr, b);
-		b.append(";");
-	}
-
-	public void _prepare(XCastedExpression expr, IAppendable b) {
-		internalPrepare(expr.getTarget(), b);
-	}
-
 	public void _toJavaExpression(XCastedExpression expr, IAppendable b) {
 		b.append("((");
 		b.append(expr.getType().getCanonicalName());
 		b.append(") ");
-		internalToJavaExpression(expr.getTarget(), b);
+		internalToConvertedExpression(expr.getTarget(), b, expr.getType());
 		b.append(")");
 	}
 
-	public void _toJavaStatement(XCastedExpression expr, IAppendable b) {
-		internalPrepare(expr, b);
-		b.append("\n");
-		internalToJavaStatement(expr, b);
-		b.append(";");
+	public void _toJavaStatement(XCastedExpression expr, IAppendable b, boolean isReferenced) {
+		internalToJavaStatement(expr.getTarget(), b, true);
 	}
 
-	public void _prepare(XIfExpression expr, IAppendable b) {
-		declareLocalVariable(expr, b);
-		internalPrepare(expr.getIf(), b);
+	public void _toJavaStatement(XIfExpression expr, IAppendable b, boolean isReferenced) {
+		if (isReferenced)
+			declareLocalVariable(expr, b);
+		internalToJavaStatement(expr.getIf(), b, true);
 		b.append("\nif (");
 		internalToJavaExpression(expr.getIf(), b);
 		b.append(") ");
 		openBlock(expr.getThen(), b);
-		internalPrepare(expr.getThen(), b);
-		if (!isEarlyMethodInterruption(expr.getThen())) {
+		internalToJavaStatement(expr.getThen(), b, isReferenced);
+		if (isReferenced && !isPrimitiveVoid(expr.getThen())) {
 			b.append("\n");
 			b.append(getJavaVarName(expr, b));
 			b.append(" = ");
@@ -344,8 +291,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (expr.getElse() != null) {
 			b.append(" else ");
 			openBlock(expr.getElse(), b);
-			internalPrepare(expr.getElse(), b);
-			if (!isEarlyMethodInterruption(expr.getElse())) {
+			internalToJavaStatement(expr.getElse(), b, isReferenced);
+			if (isReferenced && !isPrimitiveVoid(expr.getElse())) {
 				b.append("\n");
 				b.append(getJavaVarName(expr, b));
 				b.append(" = ");
@@ -360,29 +307,15 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(getJavaVarName(expr, b));
 	}
 
-	public void _toJavaStatement(XIfExpression expr, IAppendable b) {
-		internalPrepare(expr.getIf(), b);
-		b.append("\nif (");
-		internalToJavaExpression(expr.getIf(), b);
-		b.append(") ");
-		openBlock(expr.getThen(), b);
-		internalToJavaStatement(expr.getThen(), b);
-		closeBlock(expr.getThen(), b);
-		if (expr.getElse() != null) {
-			b.append(" else ");
-			openBlock(expr.getElse(), b);
-			internalToJavaStatement(expr.getElse(), b);
-			closeBlock(expr.getElse(), b);
-		}
-	}
-
-	public void _prepare(XSwitchExpression expr, IAppendable b) {
+	public void _toJavaStatement(XSwitchExpression expr, IAppendable b, boolean isReferenced) {
 		// declare variable
 		JvmTypeReference type = getTypeProvider().getType(expr);
 		String switchResultName = makeJavaIdentifier(b.declareVariable(Tuples.pair(expr,"result"), "switchResult"));
-		b.append("\n").append(getSerializedForm(type)).append(" ").append(switchResultName).append(" = null;");
+		if (isReferenced) {
+			b.append("\n").append(getSerializedForm(type)).append(" ").append(switchResultName).append(" = null;");
+		}
 		
-		internalPrepare(expr.getSwitch(), b);
+		internalToJavaStatement(expr.getSwitch(), b, true);
 
 		// declare local var for the switch expression
 		String name = getNameProvider().getSimpleName(expr);
@@ -424,10 +357,10 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				}
 			}
 			if (casePart.getCase() != null) {
-				internalPrepare(casePart.getCase(), b);
+				internalToJavaStatement(casePart.getCase(), b, true);
 				b.append("\nif (");
 				JvmTypeReference convertedType = getTypeProvider().getType(casePart.getCase());
-				if (Boolean.class.getName().equals(convertedType.getCanonicalName())) {
+				if (typeService.isBoolean(convertedType)) {
 					internalToJavaExpression(casePart.getCase(), b);
 				} else {
 					b.append(Objects.class.getCanonicalName()).append("._operator_equals(").append(variableName).append(",");
@@ -441,10 +374,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.append("\n").append(matchedVariable).append("=true;");
 
 			// execute then part
-			internalPrepare(casePart.getThen(), b);
-			b.append("\n").append(switchResultName).append(" = ");
-			internalToJavaExpression(casePart.getThen(), b);
-			b.append(";");
+			internalToJavaStatement(casePart.getThen(), b, isReferenced);
+			if (isReferenced) {
+				b.append("\n").append(switchResultName).append(" = ");
+				internalToJavaExpression(casePart.getThen(), b);
+				b.append(";");
+			}
 
 			// close surrounding if statements
 			if (casePart.getCase() != null) {
@@ -459,30 +394,29 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (expr.getDefault()!=null) {
 			b.append("\nif (!").append(matchedVariable).append(") {");
 			b.increaseIndentation();
-			internalPrepare(expr.getDefault(), b);
-			b.append("\n").append(switchResultName).append(" = ");
-			internalToJavaExpression(expr.getDefault(), b);
-			b.append(";");
+			internalToJavaStatement(expr.getDefault(), b, isReferenced);
+			if (isReferenced) {
+				b.append("\n").append(switchResultName).append(" = ");
+				internalToJavaExpression(expr.getDefault(), b);
+				b.append(";");
+			}
 			b.decreaseIndentation();
 			b.append("\n}");
 		}
-
 	}
 
 	public void _toJavaExpression(XSwitchExpression expr, IAppendable b) {
 		b.append(getJavaVarName(Tuples.pair(expr,"result"), b));
 	}
 
-	public void _toJavaStatement(XSwitchExpression expr, IAppendable b) {
-		_prepare(expr, b);
-	}
-	
 	@Inject
 	private FunctionConversion functionConversion;
 	@Inject
 	private TypeArgumentContextProvider ctxProvider;
 	
-	protected void _prepare(final XClosure call, final IAppendable b) {
+	protected void _toJavaStatement(final XClosure call, final IAppendable b, boolean isReferenced) {
+		if (!isReferenced)
+			throw new IllegalArgumentException("a closure definition does not cause any sideffeccts");
 		JvmTypeReference type = getTypeProvider().getType(call);
 		TypeArgumentContext context = ctxProvider.getReceiverContext(type);
 		final String serializedForm = getSerializedForm(type);
@@ -509,7 +443,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		b.append(") {");
 		b.increaseIndentation();
-		internalPrepare(call.getExpression(), b);
+		internalToJavaStatement(call.getExpression(), b, true);
 		b.append("\nreturn ");
 		internalToJavaExpression(call.getExpression(), b);
 		b.append(";");
@@ -522,8 +456,4 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(getJavaVarName(call, b));
 	}
 	
-	protected void _toJavaStatement(XClosure call, IAppendable b) {
-		_prepare(call, b);
-	}
-
 }
