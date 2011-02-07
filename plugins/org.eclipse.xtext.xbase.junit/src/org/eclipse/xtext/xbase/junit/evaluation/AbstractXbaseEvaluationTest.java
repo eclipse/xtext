@@ -341,6 +341,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"{" +
 				"  var this = new testdata.Properties1()" +
 				"  this.prop2 = 'literal'" +
+				"  null" +
 				"}");
 	}
 	
@@ -349,6 +350,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"{" +
 				"  var this = new testdata.Properties1()" +
 				"  this.prop2 = 1" +
+				"  null" +
 				"}");
 	}
 	
@@ -416,7 +418,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	}
 
 	public void testForLoop_03() {
-		assertEvaluatesWithException(ClassCastException.class, "for(x: 'abc' as Object as java.util.List<Character>) null");
+		assertEvaluatesWithException(ClassCastException.class, "{for(x: 'abc' as Object as java.util.List<Character>) null null}");
 	}
 	
 	public void testWhileLoop_01() {
@@ -771,7 +773,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"  var client = new testdata.ArrayClient()" +
 				"  var stringArray = client.toStringArray('literal', 'other')" +
 				"  client.inplaceToUpperCase(stringArray)" +
-				"  (stringArray as Iterable<String>).iterator.next()" +
+				"  stringArray.iterator.next()" +
 				"}");
 	}
 	
@@ -793,7 +795,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"  var client = new testdata.ArrayClient()" +
 				"  var intArray = client.toIntArray(32, 7)" +
 				"  client.inplaceAdd10(intArray)" +
-				"  var iter = (intArray as Iterable<String>).iterator" +
+				"  var iter = (intArray as Iterable<Integer>).iterator" +
 				"  iter.next" +
 				"}");
 	}
@@ -804,7 +806,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"  var client = new testdata.ArrayClient()" +
 				"  var intArray = client.toIntArray(32, 7)" +
 				"  client.inplaceAdd10(intArray)" +
-				"  var iter = (intArray as Iterable<String>).iterator" +
+				"  var iter = (intArray as Iterable<Integer>).iterator" +
 				"  iter.next" +
 				"  iter.next" +
 				"}");
