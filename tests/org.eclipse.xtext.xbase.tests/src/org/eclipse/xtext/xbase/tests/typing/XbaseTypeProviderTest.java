@@ -23,10 +23,10 @@ import com.google.inject.Inject;
  * @author Sven Efftinge
  */
 public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
-//TODO	
-//	public void testFeatureCallWithArrayToIterableConversion() throws Exception {
-//		assertResolvedReturnType("java.util.Iterator<? extends Character>", "'foo'.toCharArray.iterator");
-//	}
+	
+	public void testFeatureCallWithArrayToIterableConversion() throws Exception {
+		assertResolvedReturnType("java.util.Iterator<? extends java.lang.Character>", "'foo'.toCharArray.iterator");
+	}
 
 	public void testClosure_00() throws Exception {
 		assertResolvedReturnType("java.lang.String", "[|'literal'].apply()");
