@@ -77,6 +77,40 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
+	public void testBug322875_01() throws Exception {
+		String testGrammar = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
+				" import 'classpath:/org/eclipse/xtext/xtext/XtextValidationTest.ecore'  " +
+				" import 'http://www.eclipse.org/2008/Xtext' as xtext\n" +
+				"Bug322875 returns Bug322875: referencesETypeFromClasspathPackage=[xtext::Grammar];";
+		XtextResource resource = getResourceFromStringAndExpect(testGrammar,1);
+		assertFalse(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.toString(), 1, diag.getChildren().size());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
+	public void testBug322875_02() throws Exception {
+		String testGrammar = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
+				" import 'platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore'  " +
+				"Model returns EClass: name=ID;";
+		XtextResource resource = getResourceFromString(testGrammar);
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.toString(), 1, diag.getChildren().size());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
+	public void testBug322875_03() throws Exception {
+		String testGrammar = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
+				" import 'http://www.eclipse.org/emf/2002/Ecore'  " +
+				"Model returns EClass: name=ID;";
+		XtextResource resource = getResourceFromString(testGrammar);
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.toString(), 0, diag.getChildren().size());
+	}
+	
 	public void testBug_282852_01() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +

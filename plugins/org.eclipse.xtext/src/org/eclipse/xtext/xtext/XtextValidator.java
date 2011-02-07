@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreValidator;
 import org.eclipse.xtext.AbstractElement;
@@ -73,6 +74,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -82,7 +84,7 @@ import com.google.inject.Inject;
  * @author Michael Clay
  */
 public class XtextValidator extends AbstractDeclarativeValidator {
-//	public static final String INVALID_METAMODEL_ALIAS = "org.eclipse.xtext.grammar.InvalidMetaModelAlias";
+
 	public static final String INVALID_METAMODEL_NAME = "org.eclipse.xtext.grammar.InvalidMetaModelName";
 	public static final String INVALID_ACTION_USAGE = "org.eclipse.xtext.grammar.InvalidActionUsage";
 	public static final String EMPTY_ENUM_LITERAL= "org.eclipse.xtext.grammar.EmptyEnumLiteral";
@@ -447,25 +449,65 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 					XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE);
 		}
 	}
-//
-// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=324566
-//	@Check
-//	public void checkReferencedMetamodelAlias(final ReferencedMetamodel declaration) {
-//		if (declaration.getAlias() != null) {
-//			Grammar grammar = GrammarUtil.getGrammar(declaration);
-//			Iterable<ReferencedMetamodel> result = Iterables.filter(grammar.getMetamodelDeclarations(),
-//					ReferencedMetamodel.class);
-//			int count = Iterables.size(Iterables.filter(result, new Predicate<ReferencedMetamodel>() {
-//				public boolean apply(ReferencedMetamodel param) {
-//					return param.getAlias() != null && param.getAlias().equals(declaration.getAlias());
-//				}
-//			}));
-//			if (count != 1) {
-//				error("Referenced Metamodel alias used twice.", XtextPackage.REFERENCED_METAMODEL__ALIAS,
-//						INVALID_METAMODEL_ALIAS, declaration.getAlias());
-//			}
-//		}
-//	}
+
+	@Check
+	public void checkPackageImport(Grammar grammar) {
+		Map<String, ReferencedMetamodel> nsUriToImportedMetamodel = Maps.newHashMap();
+		for(AbstractMetamodelDeclaration metamodel: grammar.getMetamodelDeclarations()) {
+			if (metamodel instanceof ReferencedMetamodel) {
+				if (metamodel.getEPackage() != null && !metamodel.getEPackage().eIsProxy()) {
+					// nested EPackages
+					nsUriToImportedMetamodel.put(metamodel.getEPackage().getNsURI(), (ReferencedMetamodel) metamodel);
+				}
+			}
+		}
+		if (nsUriToImportedMetamodel.isEmpty())
+			return;
+		if (grammar.eResource() == null || grammar.eResource().getResourceSet() == null)
+			return;
+		for(AbstractMetamodelDeclaration declaration: GrammarUtil.allMetamodelDeclarations(grammar)) {
+			if (declaration.eContainer() != grammar) {
+				if (declaration instanceof GeneratedMetamodel) { // checked by another validation rule
+					nsUriToImportedMetamodel.remove(declaration.getEPackage().getNsURI());
+				} else {
+					if (declaration.getEPackage() != null && !declaration.getEPackage().eIsProxy()) {
+						EPackage pack = declaration.getEPackage();
+						if (nsUriToImportedMetamodel.containsKey(pack.getNsURI())) {
+							if (nsUriToImportedMetamodel.get(pack.getNsURI()).getEPackage() != pack) {
+								String location = pack.getNsURI();
+								if (pack.eResource() != null)
+									location = pack.eResource().getURI().toString();
+								error("The package '" + pack.getNsURI() + "' was imported more than once from a different location: '" +
+											location, 
+										nsUriToImportedMetamodel.get(pack.getNsURI()),
+										XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE,
+										ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
+								nsUriToImportedMetamodel.remove(pack.getNsURI());
+							}
+						}
+					}
+				}
+			}
+		}
+		// we are sure that proxies are already resolved thus every referenced EPackage was loaded
+		for(Resource resource: grammar.eResource().getResourceSet().getResources()) {
+			if (!resource.getContents().isEmpty()) {
+				EObject rootContent = resource.getContents().get(0);
+				if (rootContent instanceof EPackage) {
+					EPackage pack = (EPackage) rootContent;
+					if (nsUriToImportedMetamodel.containsKey(pack.getNsURI())) {
+						if (nsUriToImportedMetamodel.get(pack.getNsURI()).getEPackage() != pack) {
+							error("The package '" + pack.getNsURI() + "' was imported more than once from a different location: '" +
+										resource.getURI(), 
+									nsUriToImportedMetamodel.get(pack.getNsURI()),
+									XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE,
+									ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
+						}
+					}
+				}
+			}
+		}
+	}
 
 	@Check
 	public void checkCrossReferenceTerminal(CrossReference reference) {
