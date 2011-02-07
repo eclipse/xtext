@@ -35,11 +35,15 @@ public abstract class AbstractAutoEditTest extends AbstractEditorTest {
 	protected AbstractAutoEditTest(String name) {
 		super(name);
 	}
-
+	@Override
+	protected void setUp() throws Exception {
+		closeWelcomePage();
+	}
 	@Override
 	protected void tearDown() throws Exception {
 		files.clear();
-		super.tearDown();
+		closeEditors();
+//		super.tearDown();
 	}
 	
 	protected abstract String getFileExtension();

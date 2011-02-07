@@ -7,12 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.autoedit;
 
+import junit.framework.Test;
+
 import org.eclipse.xtext.ui.editor.XtextEditor;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class AutoEditInCodeBlockTest extends AutoEditTest {
+	
+	public static Test suite() {
+		return suite(AutoEditInCodeBlockTest.class);
+	}
 
 	private static String PREFIX = "class Foo {\n\tfoo() ";
 	
