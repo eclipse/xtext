@@ -134,6 +134,9 @@ public class DebugSequenceAcceptor implements ISyntacticSequenceAcceptor, IRecur
 		indentation++;
 	}
 
+	public void finish() {
+	}
+
 	public List<String> getList() {
 		int col1Width = 0;
 		for (Pair<String, String> line : table)

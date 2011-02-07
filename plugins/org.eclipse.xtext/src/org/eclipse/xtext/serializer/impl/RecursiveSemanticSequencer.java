@@ -22,15 +22,13 @@ import org.eclipse.xtext.serializer.ISerializationDiagnostic.Acceptor;
  */
 public class RecursiveSemanticSequencer implements IRecursiveSemanitcSequencer {
 
-	protected ISemanticSequencer delegate;
-
 	protected static class SemanitcAcceptor implements ISemanticSequenceAcceptor {
+
+		protected IRecursiveSemanticSequenceAcceptor delegateAcceptor;
 
 		protected ISemanticSequencer delegateSequencer;
 
 		protected Acceptor errorAcceptor;
-
-		protected IRecursiveSemanticSequenceAcceptor delegateAcceptor;
 
 		public SemanitcAcceptor(ISemanticSequencer sequencer, IRecursiveSemanticSequenceAcceptor acceptor,
 				Acceptor errors) {
@@ -45,14 +43,12 @@ public class RecursiveSemanticSequencer implements IRecursiveSemanitcSequencer {
 			delegateAcceptor.leaveAssignedAction(action, semanticChild);
 		}
 
-		public void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild) {
-			delegateAcceptor.enterAssignedParserRuleCall(ruleCall, semanticChild);
-			delegateSequencer.createSequence(ruleCall.getRule(), semanticChild, this, errorAcceptor);
-			delegateAcceptor.leaveAssignedParserRuleCall(ruleCall);
-		}
-
 		public void acceptAssignedCrossRefDatatype(RuleCall datatypeRC, EObject value) {
 			delegateAcceptor.acceptAssignedCrossRefDatatype(datatypeRC, value);
+		}
+
+		public void acceptAssignedCrossRefEnum(RuleCall enumRC, EObject value) {
+			delegateAcceptor.acceptAssignedCrossRefEnum(enumRC, value);
 		}
 
 		public void acceptAssignedCrossRefKeyword(Keyword keyword, EObject value) {
@@ -71,23 +67,30 @@ public class RecursiveSemanticSequencer implements IRecursiveSemanitcSequencer {
 			delegateAcceptor.acceptAssignedEnum(enumRC, value);
 		}
 
+		public void acceptAssignedKeyword(Keyword keyword, Boolean value) {
+			delegateAcceptor.acceptAssignedKeyword(keyword, value);
+		}
+
 		public void acceptAssignedKeyword(Keyword keyword, String value) {
 			delegateAcceptor.acceptAssignedKeyword(keyword, value);
+		}
+
+		public void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild) {
+			delegateAcceptor.enterAssignedParserRuleCall(ruleCall, semanticChild);
+			delegateSequencer.createSequence(ruleCall.getRule(), semanticChild, this, errorAcceptor);
+			delegateAcceptor.leaveAssignedParserRuleCall(ruleCall);
 		}
 
 		public void acceptAssignedTerminal(RuleCall terminalRC, Object value) {
 			delegateAcceptor.acceptAssignedTerminal(terminalRC, value);
 		}
 
-		public void acceptAssignedCrossRefEnum(RuleCall enumRC, EObject value) {
-			delegateAcceptor.acceptAssignedCrossRefEnum(enumRC, value);
-		}
-
-		public void acceptAssignedKeyword(Keyword keyword, Boolean value) {
-			delegateAcceptor.acceptAssignedKeyword(keyword, value);
+		public void finish() {
 		}
 
 	}
+
+	protected ISemanticSequencer delegate;
 
 	public void createSequence(ISemanticSequencer delegate, EObject context, EObject semanticObject,
 			IRecursiveSemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {

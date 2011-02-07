@@ -27,12 +27,12 @@ public class RecursiveSyntacticSequencer implements IRecursiveSyntacticSequencer
 
 	protected static class SemanitcAcceptor implements ISyntacticSequenceAcceptor {
 
-		protected ISyntacticSequencer delegateSynSequencer;
+		protected IRecursiveSyntacticSequenceAcceptor delegateAcceptor;
 		protected ISemanticSequencer delegateSemSequencer;
 
-		protected Acceptor errorAcceptor;
+		protected ISyntacticSequencer delegateSynSequencer;
 
-		protected IRecursiveSyntacticSequenceAcceptor delegateAcceptor;
+		protected Acceptor errorAcceptor;
 
 		public SemanitcAcceptor(ISyntacticSequencer syndelegate, ISemanticSequencer semdelegate,
 				IRecursiveSyntacticSequenceAcceptor acceptor, Acceptor errors) {
@@ -49,16 +49,12 @@ public class RecursiveSyntacticSequencer implements IRecursiveSyntacticSequencer
 			delegateAcceptor.leaveAssignedAction(action, eobject);
 		}
 
-		public void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild) {
-			ParserRule pr = (ParserRule) ruleCall.getRule();
-			delegateAcceptor.enterAssignedParserRuleCall(ruleCall, semanticChild);
-			ISemanticSequenceAcceptor acc = delegateSynSequencer.createAcceptor(pr, semanticChild, this, errorAcceptor);
-			delegateSemSequencer.createSequence(pr, semanticChild, acc, errorAcceptor);
-			delegateAcceptor.leaveAssignedParserRuleCall(ruleCall);
-		}
-
 		public void acceptAssignedCrossRefDatatype(RuleCall datatypeRC, EObject value) {
 			delegateAcceptor.acceptAssignedCrossRefDatatype(datatypeRC, value);
+		}
+
+		public void acceptAssignedCrossRefEnum(RuleCall enumRC, EObject value) {
+			delegateAcceptor.acceptAssignedCrossRefEnum(enumRC, value);
 		}
 
 		public void acceptAssignedCrossRefKeyword(Keyword keyword, EObject value) {
@@ -77,20 +73,24 @@ public class RecursiveSyntacticSequencer implements IRecursiveSyntacticSequencer
 			delegateAcceptor.acceptAssignedEnum(enumRC, value);
 		}
 
+		public void acceptAssignedKeyword(Keyword keyword, Boolean value) {
+			delegateAcceptor.acceptAssignedKeyword(keyword, value);
+		}
+
 		public void acceptAssignedKeyword(Keyword keyword, String value) {
 			delegateAcceptor.acceptAssignedKeyword(keyword, value);
 		}
 
+		public void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild) {
+			ParserRule pr = (ParserRule) ruleCall.getRule();
+			delegateAcceptor.enterAssignedParserRuleCall(ruleCall, semanticChild);
+			ISemanticSequenceAcceptor acc = delegateSynSequencer.createAcceptor(pr, semanticChild, this, errorAcceptor);
+			delegateSemSequencer.createSequence(pr, semanticChild, acc, errorAcceptor);
+			delegateAcceptor.leaveAssignedParserRuleCall(ruleCall);
+		}
+
 		public void acceptAssignedTerminal(RuleCall terminalRC, Object value) {
 			delegateAcceptor.acceptAssignedTerminal(terminalRC, value);
-		}
-
-		public void acceptAssignedCrossRefEnum(RuleCall enumRC, EObject value) {
-			delegateAcceptor.acceptAssignedCrossRefEnum(enumRC, value);
-		}
-
-		public void acceptAssignedKeyword(Keyword keyword, Boolean value) {
-			delegateAcceptor.acceptAssignedKeyword(keyword, value);
 		}
 
 		public void acceptUnassignedAction(Action action) {
@@ -115,6 +115,9 @@ public class RecursiveSyntacticSequencer implements IRecursiveSyntacticSequencer
 
 		public void enterUnassignedParserRuleCall(RuleCall rc) {
 			delegateAcceptor.enterUnassignedParserRuleCall(rc);
+		}
+
+		public void finish() {
 		}
 
 		public void leaveUnssignedParserRuleCall(RuleCall rc) {

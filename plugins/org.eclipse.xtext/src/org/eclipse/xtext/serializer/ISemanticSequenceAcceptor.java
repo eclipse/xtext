@@ -20,4 +20,6 @@ public interface ISemanticSequenceAcceptor extends IAssignedTokenSequenceAccepto
 
 	void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild);
 
+	void finish();
+
 }
