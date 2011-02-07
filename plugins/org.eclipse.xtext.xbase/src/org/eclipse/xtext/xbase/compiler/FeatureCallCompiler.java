@@ -102,17 +102,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		return expr instanceof XMemberFeatureCall && ((XMemberFeatureCall) expr).isSpreading();
 	}
 
-	protected void _toJavaStatement(XAbstractFeatureCall expr, IAppendable b) {
-		if (isSpreadingMemberFeatureCall(expr)) {
-			prepareSpreadingMemberFeatureCall((XMemberFeatureCall) expr, b);
-		} else {
-			prepareAllArguments(expr, b);
-			b.append("\n");
-			featureCalltoJavaExpression(expr, b);
-			b.append(";");
-		}
-	}
-
 	protected void _toJavaExpression(XAbstractFeatureCall call, IAppendable b) {
 		if (isPrimitiveVoid(call)) {
 			b.append("null");

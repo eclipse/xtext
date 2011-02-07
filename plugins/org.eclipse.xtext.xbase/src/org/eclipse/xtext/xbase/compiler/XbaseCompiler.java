@@ -135,7 +135,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	public void _toJavaExpression(XThrowExpression expr, IAppendable b) {
-		throw new UnsupportedOperationException("throw expression has no result");
 	}
 
 	public void _toJavaExpression(XInstanceOfExpression expr, IAppendable b) {
@@ -149,7 +148,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	public void _toJavaExpression(XVariableDeclaration expr, IAppendable b) {
-		throw new UnsupportedOperationException("var declaration has no result");
 	}
 
 	public void _toJavaStatement(XVariableDeclaration expr, IAppendable b, boolean isReferenced) {
@@ -171,7 +169,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	public void _toJavaExpression(XWhileExpression expr, IAppendable b) {
-		throw new UnsupportedOperationException("while loop has no result");
 	}
 
 	public void _toJavaStatement(XWhileExpression expr, IAppendable b, boolean isReferenced) {
@@ -196,7 +193,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	public void _toJavaExpression(XDoWhileExpression expr, IAppendable b) {
-		throw new UnsupportedOperationException("while loop has no result");
 	}
 
 	public void _toJavaStatement(XDoWhileExpression expr, IAppendable b, boolean isReferenced) {
@@ -213,7 +209,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	public void _toJavaExpression(XForLoopExpression expr, IAppendable b) {
-		throw new UnsupportedOperationException("for each has no result");
 	}
 
 	public void _toJavaStatement(XForLoopExpression expr, IAppendable b, boolean isReferenced) {
