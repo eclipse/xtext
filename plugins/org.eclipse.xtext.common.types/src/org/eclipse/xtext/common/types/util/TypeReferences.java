@@ -9,17 +9,17 @@ package org.eclipse.xtext.common.types.util;
 
 import static com.google.common.collect.Lists.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 
 import com.google.inject.Inject;
@@ -78,6 +78,14 @@ public class TypeReferences {
 			return createTypeRef(jvmTypeParameter);
 		}
 		throw new IllegalArgumentException(left.getType().getCanonicalName() + " is not generic.");
+	}
+
+	public JvmTypeReference wildCardExtends(JvmTypeReference clone) {
+		JvmWildcardTypeReference result = factory.createJvmWildcardTypeReference();
+		JvmUpperBound upperBound = factory.createJvmUpperBound();
+		upperBound.setTypeReference(clone);
+		result.getConstraints().add(upperBound);
+		return result;
 	}
 	
 }

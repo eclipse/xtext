@@ -16,18 +16,23 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
+import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -91,6 +96,9 @@ public class XExpressionTypeProvider extends AbstractXExpressionTypeProvider {
 	
 	@Inject
 	private TypeReferences typeReferences;
+	
+	@Inject
+	private Primitives primitives;
 	
 	public TypesService getTypesService() {
 		return typesService;
@@ -474,7 +482,7 @@ public class XExpressionTypeProvider extends AbstractXExpressionTypeProvider {
 		if (feature == null || feature.eIsProxy())
 			return null;
 		JvmTypeReference featureType = identifiableTypeProvider.getType(feature, false);
-		JvmTypeReference receiverType = getReceiverType(object);
+		JvmTypeReference receiverType = convertIfNeccessary(object, getReceiverType(object), feature);
 		if (feature instanceof JvmOperation) {
 			JvmTypeReference expectedType = null;
 			if (!selfContained)
@@ -486,6 +494,23 @@ public class XExpressionTypeProvider extends AbstractXExpressionTypeProvider {
 			TypeArgumentContext context = typeArgCtxProvider.getReceiverContext(receiverType);
 			return context.getUpperBound(featureType, object);
 		}
+	}
+
+	protected JvmTypeReference convertIfNeccessary(XAbstractFeatureCall context, JvmTypeReference toBeConverted, JvmIdentifiableElement feature) {
+		if (toBeConverted != null && feature instanceof JvmMember) {
+			JvmDeclaredType declaringType = ((JvmMember) feature).getDeclaringType();
+			if (declaringType.getCanonicalName().equals(Iterable.class.getName()) && toBeConverted.getType() instanceof JvmArrayType) {
+				final JvmArrayType type2 = (JvmArrayType)toBeConverted.getType();
+				JvmTypeReference type = type2.getComponentType();
+				if (primitives.isPrimitive(type)) {
+					type = typeReferences.createTypeRef(primitives.getWrapperType((JvmPrimitiveType) type.getType()));
+				}
+				JvmTypeReference clone = EcoreUtil2.clone(type);
+				final JvmTypeReference wildCardExtends = typeReferences.wildCardExtends(clone);
+				return typeReferences.createTypeRef(declaringType, wildCardExtends);
+			}
+		}
+		return toBeConverted;
 	}
 
 }
