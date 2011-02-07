@@ -149,7 +149,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		}
 
 		protected void writeIf(XExpression condition) {
-			internalPrepare(condition, appendable);
+			internalToJavaStatement(condition, appendable, true);
 			appendable.append("if (");
 			internalToJavaExpression(condition, appendable);
 			appendable.append(") {").increaseIndentation().append("\n");
@@ -182,7 +182,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		public void acceptForLoop(JvmFormalParameter parameter, XExpression expression) {
 			super.acceptForLoop(parameter, expression);
 			appendable.append("{").increaseIndentation().append("\n");
-			internalPrepare(expression, appendable);
+			internalToJavaStatement(expression, appendable, true);
 			appendable.append("for(");
 			JvmTypeReference paramType = getIdentifiableTypeProvider().getType(parameter, false);
 			appendable.append(paramType.getCanonicalName());
@@ -208,7 +208,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		
 		@Override
 		public void acceptExpression(XExpression expression, CharSequence indentation) {
-			internalPrepare(expression, appendable);
+			internalToJavaStatement(expression, appendable, true);
 			appendable.append(variableName);
 			appendable.append(".append(");
 			internalToJavaExpression(expression, appendable);
@@ -219,7 +219,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		
 	}
 	
-	public void _prepare(RichString richString, IAppendable b) {
+	public void _toJavaStatement(RichString richString, IAppendable b, boolean isReferenced) {
 		// declare variable
 		JvmTypeReference type = getTypeProvider().getType(richString);
 		String variableName = makeJavaIdentifier(b.declareVariable(Tuples.pair(richString, "result"), "builder"));
@@ -233,100 +233,10 @@ public class Xtend2Compiler extends XbaseCompiler {
 		b.append("();\n");
 		RichStringPrepareCompiler compiler = new RichStringPrepareCompiler(b, variableName);
 		richStringProcessor.process(richString, compiler, indentationHandler.get());
-//		
-//		internalPrepare(expr.getSwitch(), b);
-//
-//		// declare local var for the switch expression
-//		String name = getNameProvider().getSimpleName(expr);
-//		if (name == null) {
-//			// define synthetic name
-//			name = "__valOfSwitchOver";
-//		}
-//		b.append("\nfinal ").append(getReturnTypeName(expr.getSwitch())).append(" ");
-//		String variableName = b.declareVariable(expr, name);
-//		b.append(variableName);
-//		b.append(" = ");
-//		internalToJavaExpression(expr.getSwitch(), b);
-//		b.append(";");
-//
-//		// declare 'boolean matched' to check whether a case has matched already
-//		b.append("\nboolean ");
-//		String matchedVariable = b.declareVariable(Tuples.pair(expr, "matches"), "matched");
-//		b.append(matchedVariable).append(" = false;");
-//
-//		for (XCasePart casePart : expr.getCases()) {
-//			b.append("\nif (!").append(matchedVariable).append(") {");
-//			b.increaseIndentation();
-//			if (casePart.getTypeGuard() != null) {
-//				final String guardType = getSerializedForm(casePart.getTypeGuard());
-//				b.append("\nif (");
-//				b.append(variableName);
-//				b.append(" instanceof ");
-//				b.append(guardType);
-//				b.append(") {");
-//				b.increaseIndentation();
-//
-//				// declare local var for case
-//				String simpleName = getNameProvider().getSimpleName(casePart);
-//				if (simpleName != null) {
-//					b.append("\nfinal ").append(guardType).append(" ");
-//					String typeGuardName = b.declareVariable(casePart, simpleName);
-//					b.append(typeGuardName);
-//					b.append(" = (").append(guardType).append(") ").append(variableName).append(";");
-//				}
-//			}
-//			if (casePart.getCase() != null) {
-//				internalPrepare(casePart.getCase(), b);
-//				b.append("\nif (");
-//				JvmTypeReference convertedType = getTypeProvider().getConvertedType(casePart.getCase());
-//				if (Boolean.class.getName().equals(convertedType.getCanonicalName())) {
-//					internalToJavaExpression(casePart.getCase(), b);
-//				} else {
-//					b.append(Objects.class.getCanonicalName()).append("._operator_equals(").append(variableName).append(",");
-//					internalToJavaExpression(casePart.getCase(), b);
-//					b.append(")");
-//				}
-//				b.append(") {");
-//				b.increaseIndentation();
-//			}
-//			// set matched to true
-//			b.append("\n").append(matchedVariable).append("=true;");
-//
-//			// execute then part
-//			internalPrepare(casePart.getThen(), b);
-//			b.append("\n").append(switchResultName).append(" = ");
-//			internalToJavaExpression(casePart.getThen(), b);
-//			b.append(";");
-//
-//			// close surrounding if statements
-//			if (casePart.getCase() != null) {
-//				b.decreaseIndentation().append("\n}");
-//			}
-//			if (casePart.getTypeGuard() != null) {
-//				b.decreaseIndentation().append("\n}");
-//			}
-//			b.decreaseIndentation();
-//			b.append("\n}");
-//		}
-//		if (expr.getDefault()!=null) {
-//			b.append("\nif (!").append(matchedVariable).append(") {");
-//			b.increaseIndentation();
-//			internalPrepare(expr.getDefault(), b);
-//			b.append("\n").append(switchResultName).append(" = ");
-//			internalToJavaExpression(expr.getDefault(), b);
-//			b.append(";");
-//			b.decreaseIndentation();
-//			b.append("\n}");
-//		}
-
 	}
 
 	public void _toJavaExpression(RichString richString, IAppendable b) {
 		b.append(getJavaVarName(Tuples.pair(richString, "result"), b));
-	}
-
-	public void _toJavaStatement(RichString richString, IAppendable b) {
-		_prepare(richString, b);
 	}
 
 }
