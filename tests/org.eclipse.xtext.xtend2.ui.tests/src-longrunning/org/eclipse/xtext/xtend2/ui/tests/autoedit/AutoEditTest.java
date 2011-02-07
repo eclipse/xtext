@@ -7,19 +7,39 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.autoedit;
 
+import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+
+import java.util.Collections;
+
+import junit.extensions.TestSetup;
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.swt.SWT;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.junit.editor.autoedit.AbstractCStyleLanguageAutoEditTest;
+import org.eclipse.xtext.ui.util.PluginProjectFactory;
+import org.eclipse.xtext.xtend2.ui.internal.Xtend2Activator;
+
+import com.google.inject.Injector;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
+
+	public static Test suite() {
+		return suite(AutoEditTest.class);
+	}
+	
+	private static final String TESTPROJECT_NAME = "foo";
 
 	@Override
 	protected String getEditorId() {
@@ -35,14 +55,55 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 	protected XtextEditor openEditor(String string) throws Exception {
 		int cursor = string.indexOf('|');
 		String fileExtension = getFileExtension();
-		IProject project = createProject("foo");
-		addNature(project, XtextProjectHelper.NATURE_ID);
-		IFile file = createFile("foo/myfile" + getFiles().size() + "." + fileExtension, string.replace("|", ""));
+		IFile file = createFile(TESTPROJECT_NAME+"/myfile" + getFiles().size() + "." + fileExtension, string.replace("|", ""));
 		getFiles().add(file);
 		XtextEditor editor = openEditor(file);
 		editor.getInternalSourceViewer().setSelectedRange(cursor, 0);
 		editor.getInternalSourceViewer().getTextWidget().setFocus();
 		return editor;
+	}
+	
+	public static Test suite(Class<? extends AutoEditTest> clazz) {
+		return new TestSetup(new TestSuite(clazz, clazz.getCanonicalName())) {
+			private IProject project;
+			
+			@Override
+			protected void setUp() throws Exception {
+				super.setUp();
+				project = createPluginProject(TESTPROJECT_NAME);
+
+			}
+			@Override
+			protected void tearDown() throws Exception {
+				deleteProject(project);
+				super.tearDown();
+			}
+		};
+	}
+	
+	protected static IProject createPluginProject(String name) throws CoreException {
+		Injector injector = Xtend2Activator.getInstance().getInjector("org.eclipse.xtext.xtend2.Xtend2");
+		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
+		projectFactory.setProjectName(name);
+		projectFactory.addFolders(Collections.singletonList("src"));
+		projectFactory.addBuilderIds(
+			JavaCore.BUILDER_ID, 
+			"org.eclipse.pde.ManifestBuilder",
+			"org.eclipse.pde.SchemaBuilder",
+			XtextProjectHelper.BUILDER_ID);
+		projectFactory.addProjectNatures(JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature", XtextProjectHelper.NATURE_ID);
+		projectFactory.addRequiredBundles(newArrayList("org.eclipse.xtext.xbase.lib", "org.eclipse.xtext.xtend2.lib"));
+		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
+		return result;
+	}
+	
+	public static void deleteProject(IProject project) throws CoreException {
+		if (project.exists()) {
+			if (project.isOpen()) {
+				project.close(null);
+			}
+			project.delete(true, true, null);
+		}
 	}
 	
 	public void testIndentationEdit_1() throws Exception {

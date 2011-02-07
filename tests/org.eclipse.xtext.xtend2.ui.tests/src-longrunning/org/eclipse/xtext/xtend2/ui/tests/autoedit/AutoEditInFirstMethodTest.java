@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.autoedit;
 
+import junit.framework.Test;
+
 import org.eclipse.xtext.ui.editor.XtextEditor;
 
 /**
@@ -14,6 +16,10 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
  */
 public class AutoEditInFirstMethodTest extends AutoEditTest {
 
+	public static Test suite() {
+		return suite(AutoEditInFirstMethodTest.class);
+	}
+	
 	private static String PREFIX = "class Foo {\n\tfoo()\n";
 	
 	private static String SUFFIX = "\n\tbar() '''} zonk'''\n}";
