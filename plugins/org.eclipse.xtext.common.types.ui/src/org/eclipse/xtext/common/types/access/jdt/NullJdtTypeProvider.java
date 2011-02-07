@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.jdt;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.common.types.JvmType;
@@ -16,7 +18,7 @@ import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class NullJdtTypeProvider implements IJdtTypeProvider {
+public class NullJdtTypeProvider implements IJdtTypeProvider, Resource.Factory {
 
 	private ResourceSet resourceSet;
 	private TypeURIHelper typeURIHelper;
@@ -41,6 +43,10 @@ public class NullJdtTypeProvider implements IJdtTypeProvider {
 
 	public IJavaProject getJavaProject() {
 		return null;
+	}
+
+	public Resource createResource(URI uri) {
+		throw new UnsupportedOperationException();
 	}
 
 }
