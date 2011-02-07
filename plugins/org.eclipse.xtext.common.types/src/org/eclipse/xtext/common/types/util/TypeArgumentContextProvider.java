@@ -74,12 +74,13 @@ public class TypeArgumentContextProvider {
 	}
 	
 	public TypeArgumentContext getInferredMethodInvocationContext(JvmOperation op, JvmTypeReference receiverType, JvmTypeReference expectedReturnType, JvmTypeReference ... actualArgumentTypes) {
-		Map<JvmTypeParameter, JvmTypeReference> map = newHashMap();
+		Multimap<JvmTypeParameter, JvmTypeReference> map = HashMultimap.create();
 		if (receiverType!=null) {
-			map.putAll(resolveReceiver(receiverType));
+			map.putAll(Multimaps.forMap(resolveReceiver(receiverType)));
 		}
-		map.putAll(resolveInferredMethodTypeArgContext(op, expectedReturnType, actualArgumentTypes));
-		return get(map);
+		map.putAll(Multimaps.forMap(resolveInferredMethodTypeArgContext(op, expectedReturnType, actualArgumentTypes)));
+		Map<JvmTypeParameter, JvmTypeReference> result = findBestMatches(map);
+		return get(result);
 	}
 	
 	
