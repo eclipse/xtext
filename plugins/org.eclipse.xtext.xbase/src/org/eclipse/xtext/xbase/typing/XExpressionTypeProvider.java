@@ -328,7 +328,6 @@ public class XExpressionTypeProvider extends AbstractXExpressionTypeProvider {
 		if (object.getElse() == null) {
 			return getType(object.getThen(), true);
 		}
-			
 		List<JvmTypeReference> returnTypes = newArrayList();
 		JvmTypeReference thenType = getType(object.getThen(), true);
 		if (thenType!=null)
@@ -371,7 +370,7 @@ public class XExpressionTypeProvider extends AbstractXExpressionTypeProvider {
 	}
 
 	protected JvmTypeReference _type(XVariableDeclaration object, boolean selfContained) {
-		return typesService.getTypeForName(Void.class, object);
+		return getPrimitiveVoid(object);
 	}
 
 	protected JvmTypeReference _type(XConstructorCall object, boolean selfContained) {
@@ -392,7 +391,8 @@ public class XExpressionTypeProvider extends AbstractXExpressionTypeProvider {
 	}
 
 	protected JvmTypeReference _type(XNullLiteral object, boolean selfContained) {
-		return typesService.getTypeForName(Void.class, object);
+		final JvmTypeReference typeForName = typesService.getTypeForName(Void.class, object);
+		return typeForName;
 	}
 
 	protected JvmTypeReference _type(XIntLiteral object, boolean selfContained) {
@@ -444,11 +444,11 @@ public class XExpressionTypeProvider extends AbstractXExpressionTypeProvider {
 	}
 
 	protected JvmTypeReference _type(XForLoopExpression object, boolean selfContained) {
-		return typesService.getTypeForName(Void.class, object);
+		return getPrimitiveVoid(object);
 	}
 
 	protected JvmTypeReference _type(XAbstractWhileExpression object, boolean selfContained) {
-		return typesService.getTypeForName(Void.class, object);
+		return getPrimitiveVoid(object);
 	}
 
 	protected JvmTypeReference _type(XTypeLiteral object, boolean selfContained) {
@@ -462,7 +462,12 @@ public class XExpressionTypeProvider extends AbstractXExpressionTypeProvider {
 	}
 
 	protected JvmTypeReference _type(XThrowExpression object, boolean selfContained) {
-		return typesService.getTypeForName(Void.class, object);
+		final JvmTypeReference typeForName = getPrimitiveVoid(object);
+		return typeForName;
+	}
+
+	protected JvmTypeReference getPrimitiveVoid(XExpression object) {
+		return typesService.getTypeForName(Void.TYPE, object);
 	}
 
 	protected JvmTypeReference _type(XTryCatchFinallyExpression object, boolean selfContained) {

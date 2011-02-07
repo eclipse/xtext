@@ -18,30 +18,30 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 public class CompilerTest extends AbstractXbaseTestCase {
 	
 	public void testSimple() throws Exception {
-		assertCompilesTo("\nint length = \"foo\".length();\n" + 
-				"return length;", "'foo'.length");
+		assertCompilesTo("\nint _length = \"foo\".length();\n" + 
+				"return _length;", "'foo'.length");
 	}
 	
 	public void testBlock() throws Exception {
 		assertCompilesTo(
-				"\nint xblockexpression = (int)-1;\n" +
+				"\nint _xblockexpression = (int)-1;\n" +
 				"{\n" +
 				"  final java.util.ArrayList<java.lang.String> _this = new java.util.ArrayList<java.lang.String>();\n" +
-				"  int size = _this.size();\n" + 
-				"  xblockexpression = (size);\n" +
+				"  int _size = _this.size();\n" + 
+				"  _xblockexpression = (_size);\n" +
 				"}\n" +
-				"return xblockexpression;"
+				"return _xblockexpression;"
 				, "{ val this = new java.util.ArrayList<String>(); size;}");
 	}
 	
 	public void testIf() throws Exception {
 		assertCompilesTo(
-				"\njava.lang.Integer xifexpression = null;\n" +
+				"\njava.lang.Integer _xifexpression = null;\n" +
 				"if (true) {\n" +
-				"  xifexpression = new Integer(42);\n" +
+				"  _xifexpression = new Integer(42);\n" +
 				"} else {\n" +
-				"  xifexpression = new Integer(21);\n}\n" +
-				"return xifexpression;"
+				"  _xifexpression = new Integer(21);\n}\n" +
+				"return _xifexpression;"
 				, "if (true) 42 else 21");
 	}
 
@@ -49,8 +49,7 @@ public class CompilerTest extends AbstractXbaseTestCase {
 		assertCompilesTo(
 				"\nfor (java.lang.String s : new java.util.ArrayList<java.lang.String>()) {\n" +
 				"  s.length();\n" +
-				"}\n" +
-				"return null;"
+				"}"
 				, "for (String s : new java.util.ArrayList<String>()) " +
 						"s.length");
 	}

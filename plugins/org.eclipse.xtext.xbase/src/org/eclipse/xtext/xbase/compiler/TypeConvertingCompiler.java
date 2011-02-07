@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.functions.FunctionConversion;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.typing.TypesService;
 
 import com.google.inject.Inject;
 
@@ -35,14 +36,22 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 
 	@Inject
 	private TypeArgumentContextProvider contextProvider;
+	
+	@Inject
+	private TypesService typesService;
 
 	@Override
 	protected void internalToJavaExpression(final XExpression obj, final IAppendable appendable) {
 		JvmTypeReference expectedType = getTypeProvider().getExpectedType(obj);
-		if (expectedType != null) {
+		internalToConvertedExpression(obj, appendable, expectedType);
+	}
+
+	protected void internalToConvertedExpression(final XExpression obj, final IAppendable appendable,
+			JvmTypeReference toBeConvertedTo) {
+		if (toBeConvertedTo != null) {
 			JvmTypeReference actualType = getTypeProvider().getType(obj);
-			if (!EcoreUtil.equals(expectedType, actualType)) {
-				doConversion(expectedType, actualType, appendable, new Later() {
+			if (!EcoreUtil.equals(toBeConvertedTo, actualType)) {
+				doConversion(toBeConvertedTo, actualType, appendable, new Later() {
 					@Override
 					public void exec() {
 						TypeConvertingCompiler.super.internalToJavaExpression(obj, appendable);
@@ -60,7 +69,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 			appendable.append("((").append(getSerializedForm(left)).append(")");
 			expression.exec();
 			appendable.append(")");
-		} else if (right.getType() instanceof JvmArrayType) {
+		} else if (right.getType() instanceof JvmArrayType && typesService.isIterable(left)) {
 			appendable.append("((");
 			appendable.append(getSerializedForm(left));
 			appendable.append(")");

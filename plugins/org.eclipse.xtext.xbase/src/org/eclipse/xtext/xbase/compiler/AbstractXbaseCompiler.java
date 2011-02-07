@@ -7,24 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.XBlockExpression;
-import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XIfExpression;
-import org.eclipse.xtext.xbase.XThrowExpression;
-import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
+import org.eclipse.xtext.xbase.typing.TypesService;
 
 import com.google.inject.Inject;
 
@@ -37,92 +32,11 @@ public abstract class AbstractXbaseCompiler {
 		void execute();
 	}
 
-	private PolymorphicDispatcher<Void> prepareExpressionDispatcher = PolymorphicDispatcher.createForSingleTarget(
-			"_prepare", 2, 2, this);
+	@Inject
+	private TypesService typesService;
 
-	private PolymorphicDispatcher<Void> toJavaExprDispatcher = PolymorphicDispatcher.createForSingleTarget(
-			"_toJavaExpression", 2, 2, this);
-
-	private PolymorphicDispatcher<Void> toJavaStatementDispatcher = PolymorphicDispatcher.createForSingleTarget(
-			"_toJavaStatement", 2, 2, this);
-
-	public void compile(XExpression obj, IAppendable appendable) {
-		if (isEarlyMethodInterruption(obj)) {
-			internalToJavaStatement(obj, appendable);
-		} else {
-			internalPrepare(obj, appendable);
-			appendable.append("\nreturn ");
-			internalToJavaExpression(obj, appendable);
-			appendable.append(";");
-		}
-	}
-
-	/**
-	 * whether the given expression compiles to a java statement that leaves the method (i.e. return or throw statement)
-	 */
-	protected boolean isEarlyMethodInterruption(XExpression obj) {
-		if (obj instanceof XBlockExpression) {
-			XBlockExpression block = (XBlockExpression) obj;
-			List<XExpression> expressions = block.getExpressions();
-			if (expressions.isEmpty())
-				return false;
-			return isEarlyMethodInterruption(expressions.get(expressions.size() - 1));
-		}
-		if (obj instanceof XTryCatchFinallyExpression) {
-			XTryCatchFinallyExpression tryCatch = (XTryCatchFinallyExpression) obj;
-			boolean isExit = isEarlyMethodInterruption(tryCatch.getExpression());
-			for (XCatchClause catchClause : tryCatch.getCatchClauses()) {
-				if (!isExit)
-					return false;
-				isExit = isEarlyMethodInterruption(catchClause.getExpression());
-			}
-			return isExit;
-		}
-		if (obj instanceof XIfExpression) {
-			XIfExpression ifExpr = (XIfExpression) obj;
-			return isEarlyMethodInterruption(ifExpr.getThen()) && ifExpr.getElse() != null
-					&& isEarlyMethodInterruption(ifExpr.getElse());
-		}
-		return obj instanceof XThrowExpression;
-	}
-
-	protected void internalPrepare(XExpression obj, IAppendable builder) {
-		prepareExpressionDispatcher.invoke(obj, builder);
-	}
-
-	protected void internalToJavaExpression(final XExpression obj, final IAppendable appendable) {
-		toJavaExprDispatcher.invoke(obj, appendable);
-	}
-
-	protected void internalToJavaStatement(XExpression obj, IAppendable builder) {
-		toJavaStatementDispatcher.invoke(obj, builder);
-	}
-
-	public void _prepare(XExpression func, IAppendable b) {
-		throw new UnsupportedOperationException("Coudn't find a compilation strategy for expressions of type "
-				+ func.getClass().getCanonicalName());
-	}
-
-	public void _toJavaExpression(XExpression func, IAppendable b) {
-		throw new UnsupportedOperationException("Coudn't find a compilation strategy for expressions of type "
-				+ func.getClass().getCanonicalName());
-	}
-
-	public void _toJavaStatement(XExpression func, IAppendable b) {
-		throw new UnsupportedOperationException("Coudn't find a compilation strategy for expressions of type "
-				+ func.getClass().getCanonicalName());
-	}
-
-	public void _prepare(Void func, IAppendable b) {
-		throw new NullPointerException();
-	}
-
-	public void _toJavaExpression(Void func, IAppendable b) {
-		throw new NullPointerException();
-	}
-
-	public void _toJavaStatement(Void func, IAppendable b) {
-		throw new NullPointerException();
+	public void setTypesService(TypesService typesService) {
+		this.typesService = typesService;
 	}
 
 	@Inject
@@ -145,6 +59,53 @@ public abstract class AbstractXbaseCompiler {
 
 	protected IdentifiableTypeProvider getIdentifiableTypeProvider() {
 		return identifiableTypeProvider;
+	}
+
+	private PolymorphicDispatcher<Void> toJavaExprDispatcher = PolymorphicDispatcher.createForSingleTarget(
+			"_toJavaExpression", 2, 2, this);
+
+	private PolymorphicDispatcher<Void> toJavaStatementDispatcher = PolymorphicDispatcher.createForSingleTarget(
+			"_toJavaStatement", 3, 3, this);
+
+	public void compile(XExpression obj, IAppendable appendable) {
+		boolean isReferenced = !isPrimitiveVoid(obj);
+		internalToJavaStatement(obj, appendable, isReferenced);
+		if (isReferenced) {
+			appendable.append("\nreturn ");
+			internalToJavaExpression(obj, appendable);
+			appendable.append(";");
+		}
+	}
+	
+	protected boolean isPrimitiveVoid(XExpression xExpression) {
+		JvmTypeReference type = getTypeProvider().getType(xExpression);
+		return typesService.isPrimitiveVoid(type);
+	}
+
+	protected void internalToJavaStatement(XExpression obj, IAppendable builder, boolean isReferenced) {
+		toJavaStatementDispatcher.invoke(obj, builder, isReferenced);
+	}
+
+	protected void internalToJavaExpression(final XExpression obj, final IAppendable appendable) {
+		toJavaExprDispatcher.invoke(obj, appendable);
+	}
+
+	public void _toJavaStatement(XExpression func, IAppendable b, boolean isReferenced) {
+		throw new UnsupportedOperationException("Coudn't find a compilation strategy for expressions of type "
+				+ func.getClass().getCanonicalName());
+	}
+
+	public void _toJavaExpression(XExpression func, IAppendable b) {
+		throw new UnsupportedOperationException("Coudn't find a compilation strategy for expressions of type "
+				+ func.getClass().getCanonicalName());
+	}
+
+	public void _toJavaStatement(Void func, IAppendable b, boolean isReferenced) {
+		throw new NullPointerException();
+	}
+
+	public void _toJavaExpression(Void func, IAppendable b) {
+		throw new NullPointerException();
 	}
 
 	protected String getReturnTypeName(XExpression expr) {
@@ -204,12 +165,12 @@ public abstract class AbstractXbaseCompiler {
 				name = name.substring(indexOf + 1);
 			}
 			if (name.startsWith("get") && name.length() > 3)
-				return name.substring(3);
+				name = Strings.toFirstLower(name.substring(3));
 			if (name.startsWith("to") && name.length() > 2)
-				return name.substring(2);
-			return name;
+				name = Strings.toFirstLower(name.substring(2));
+			return "_"+name;
 		}
-		return ex.eClass().getName().toLowerCase();
+		return "_"+Strings.toFirstLower(ex.eClass().getName().toLowerCase());
 	}
 
 	protected String makeJavaIdentifier(String name) {
@@ -228,7 +189,7 @@ public abstract class AbstractXbaseCompiler {
 			if ("boolean".equals(name)) {
 				return "false";
 			} else {
-				return "("+name+")-1";
+				return "(" + name + ")-1";
 			}
 		}
 		return "null";
@@ -244,8 +205,8 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	protected void declareLocalVariable(XExpression expr, IAppendable b, Later expression) {
-//		JvmTypeReference type = getExpectedTypeProvider().getExpectedType(expr);
-//		if (type == null || type.getCanonicalName().equals(Object.class.getCanonicalName()))
+		//		JvmTypeReference type = getExpectedTypeProvider().getExpectedType(expr);
+		//		if (type == null || type.getCanonicalName().equals(Object.class.getCanonicalName()))
 		JvmTypeReference type = getTypeProvider().getType(expr);
 		final String varName = declareNameInVariableScope(expr, b);
 		b.append("\n").append(getSerializedForm(type)).append(" ").append(varName).append(" = ");

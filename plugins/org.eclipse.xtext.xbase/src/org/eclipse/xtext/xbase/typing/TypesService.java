@@ -17,14 +17,18 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
+import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.Functions;
@@ -50,6 +54,9 @@ public class TypesService {
 	
 	@Inject
 	private TypeReferences typeReferences;
+	
+	@Inject
+	private Primitives primitives;
 
 	protected URI toCommonTypesUri(Class<?> clazz) {
 		URI result = uriHelper.getFullURI(clazz);
@@ -59,14 +66,14 @@ public class TypesService {
 	public JvmTypeReference getTypeForName(Class<?> clazz, EObject context, JvmTypeReference... params) {
 		if (clazz == null)
 			throw new NullPointerException("clazz");
-		JvmDeclaredType declaredType = findDeclaredType(clazz, context);
+		JvmType declaredType = findDeclaredType(clazz, context);
 		if (declaredType == null)
 			return null;
 		JvmParameterizedTypeReference result = typeReferences.createTypeRef(declaredType, params);
 		return result;
 	}
 
-	public JvmDeclaredType findDeclaredType(Class<?> clazz, EObject context) {
+	public JvmType findDeclaredType(Class<?> clazz, EObject context) {
 		if (context == null)
 			throw new NullPointerException("context");
 		if (context.eResource() == null)
@@ -77,7 +84,7 @@ public class TypesService {
 		// make sure a type provider is configured in the resource set. 
 		typeProviderFactory.findOrCreateTypeProvider(resourceSet);
 		URI uri = toCommonTypesUri(clazz);
-		JvmDeclaredType declaredType = (JvmDeclaredType) resourceSet.getEObject(uri, true);
+		JvmType declaredType = (JvmType) resourceSet.getEObject(uri, true);
 		return declaredType;
 	}
 
@@ -95,10 +102,12 @@ public class TypesService {
 				reference.setType(typeParameter);
 				ref.getArguments().add(reference);
 			} else {
+				xTypeRef = toObjectReference(xTypeRef);
 				ref.getArguments().add(EcoreUtil2.clone(xTypeRef));
 			}
 		}
 		if (returnType!=null) {
+			returnType = toObjectReference(returnType);
 			ref.getArguments().add(EcoreUtil2.clone(returnType));
 		} else {
 			JvmParameterizedTypeReference reference = factory.createJvmParameterizedTypeReference();
@@ -107,6 +116,16 @@ public class TypesService {
 			ref.getArguments().add(reference);
 		}
 		return ref;
+	}
+
+	protected JvmTypeReference toObjectReference(JvmTypeReference xTypeRef) {
+		if (primitives.isPrimitive(xTypeRef)) {
+			JvmType wrapperType = primitives.getWrapperType((JvmPrimitiveType) xTypeRef.getType());
+			JvmParameterizedTypeReference wrapperTypeRef = factory.createJvmParameterizedTypeReference();
+			wrapperTypeRef.setType(wrapperType);
+			xTypeRef = wrapperTypeRef;
+		}
+		return xTypeRef;
 	}
 
 	protected Class<?> loadFunctionClass(String simpleFunctionName) {
@@ -120,9 +139,13 @@ public class TypesService {
 	public boolean isVoid(JvmTypeReference typeRef) {
 		if (typeRef != null) {
 			String typeName = typeRef.getCanonicalName();
-			return typeName.equals(Void.TYPE.getCanonicalName()) || typeName.equals(Void.class.getCanonicalName());
+			return typeName.equals(Void.class.getCanonicalName());
 		}
 		return false;
+	}
+	
+	public boolean isPrimitiveVoid(JvmTypeReference typeRef) {
+		return typeRef != null && typeRef.getType()!=null && !typeRef.getType().eIsProxy() && typeRef.getType() instanceof JvmVoid;
 	}
 
 	public boolean isObject(JvmTypeReference typeRef) {
@@ -145,5 +168,25 @@ public class TypesService {
 				return true;
 		}
 		return false;
+	}
+
+	public boolean isBoolean(JvmTypeReference type) {
+		if (type==null || type.getType()==null || type.getType().eIsProxy())
+			return false;
+		String name = type.getCanonicalName();
+		return Boolean.class.getCanonicalName().equals(name) || Boolean.TYPE.getCanonicalName().equals(name);
+	}
+
+	public boolean isArray(JvmTypeReference type) {
+		if (type==null || type.getType()==null || type.getType().eIsProxy())
+			return false;
+		return type.getType() instanceof JvmArrayType;
+	}
+	
+	public JvmTypeReference getIterableForArrayType(JvmTypeReference arrayType, EObject context) {
+		if (!isArray(arrayType))
+			throw new IllegalArgumentException(arrayType+" not an array.");
+		final JvmTypeReference componentType = ((JvmArrayType)arrayType.getType()).getComponentType();
+		return getTypeForName(Iterable.class, context, toObjectReference(componentType));
 	}
 }

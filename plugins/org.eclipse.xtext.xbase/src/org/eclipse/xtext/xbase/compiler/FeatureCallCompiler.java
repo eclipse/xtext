@@ -39,23 +39,27 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	@Inject
 	private IdentifiableSimpleNameProvider featureNameProvider;
 	
-	protected void _prepare(final XAbstractFeatureCall expr, final IAppendable b) {
-		if (isVoid(expr)) {
-			internalToJavaStatement(expr, b);
-		} else if (isSpreadingMemberFeatureCall(expr)) {
+	protected void _toJavaStatement(final XAbstractFeatureCall expr, final IAppendable b, boolean isReferenced) {
+		if (isSpreadingMemberFeatureCall(expr)) {
 			prepareSpreadingMemberFeatureCall((XMemberFeatureCall) expr, b);
 		} else {
 			if (isLocalVarReference(expr)) {
 				//do nothing
 			} else {
 				prepareAllArguments(expr, b);
-				Later later = new Later() {
-					@Override
-					public void exec() {
-						featureCalltoJavaExpression(expr, b);
-					}
-				};
-				declareLocalVariable(expr, b, later);
+				if (isReferenced && !isPrimitiveVoid(expr)) {
+					Later later = new Later() {
+						@Override
+						public void exec() {
+							featureCalltoJavaExpression(expr, b);
+						}
+					};
+					declareLocalVariable(expr, b, later);
+				} else {
+					b.append("\n");
+					featureCalltoJavaExpression(expr, b);
+					b.append(";");
+				}
 			}
 		}
 	}
@@ -87,10 +91,10 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 
 	protected void prepareAllArguments(XAbstractFeatureCall expr, IAppendable b) {
 		if (expr.getImplicitReceiver()!=null) {
-			internalPrepare(expr.getImplicitReceiver(), b);
+			internalToJavaStatement(expr.getImplicitReceiver(), b, true);
 		}
 		for (XExpression arg : expr.getExplicitArguments()) {
-			internalPrepare(arg, b);
+			internalToJavaStatement(arg, b, true);
 		}
 	}
 
@@ -110,7 +114,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 
 	protected void _toJavaExpression(XAbstractFeatureCall call, IAppendable b) {
-		if (isVoid(call)) {
+		if (isPrimitiveVoid(call)) {
 			b.append("null");
 		} else if (isSpreadingMemberFeatureCall(call)) {
 			throw new UnsupportedOperationException();
@@ -122,10 +126,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				b.append(getJavaVarName(call, b));
 			}
 		}
-	}
-
-	protected boolean isVoid(XAbstractFeatureCall expr) {
-		return getTypeProvider().getType(expr).getCanonicalName().equals(Void.class.getCanonicalName());
 	}
 
 	protected void featureCalltoJavaExpression(XAbstractFeatureCall call, IAppendable b) {

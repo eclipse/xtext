@@ -86,14 +86,14 @@ public class DefaultJvmTypeConformanceComputer implements IJvmTypeConformanceCom
 			return left != null;
 		if (isObject(left))
 			return true;
-		if (isVoid(left))
+		if (isPrimitiveVoid(left) || left!=null && left.getType()!=null && left.getType().eIsProxy())
 			return false;
 		Boolean result = isConformantDispatcher.invoke(left, right);
 		return result.booleanValue();
 	}
 
-	protected boolean isVoid(JvmTypeReference left) {
-		return left!=null && left.getType() instanceof JvmVoid;
+	protected boolean isPrimitiveVoid(JvmTypeReference left) {
+		return left!=null && left.getType()!=null && !left.getType().eIsProxy() && left.getType() instanceof JvmVoid;
 	}
 
 	protected boolean isObject(JvmTypeReference left) {
@@ -488,6 +488,10 @@ public class DefaultJvmTypeConformanceComputer implements IJvmTypeConformanceCom
 				return result;
 		}
 		throw new IllegalStateException("java.lang.Object does not have type parameters and should be contained in list");
+	}
+
+	protected boolean isNullOrProxy(JvmTypeReference type) {
+		return type==null || type.getType()==null || type.eIsProxy();
 	}
 
 	protected JvmTypeReference getTypeParametersForSupertype(Multimap<JvmType, JvmTypeReference> all, JvmType rawType) {
