@@ -54,6 +54,10 @@ public class TypeArgumentContextProvider {
 	public void setTypeReferences(TypeReferences typeReferences) {
 		this.typeReferences = typeReferences;
 	}
+	
+	public void setConformanceComputer(IJvmTypeConformanceComputer conformanceComputer) {
+		this.conformanceComputer = conformanceComputer;
+	}
 	 
 	public final TypeArgumentContext getNullContext() {
 		return get(Collections.<JvmTypeParameter,JvmTypeReference>emptyMap());

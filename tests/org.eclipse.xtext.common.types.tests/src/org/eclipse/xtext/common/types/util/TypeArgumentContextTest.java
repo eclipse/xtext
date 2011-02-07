@@ -30,35 +30,38 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
-import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.common.types.tests.ClasspathBasedModule;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class TypeArgumentContextTest extends TestCase {
 
-	private ClasspathTypeProvider typeProvider;
+	private IJvmTypeProvider typeProvider;
 	private JvmTypeReferences typeRefs;
+	@Inject
 	private TypeArgumentContextProvider typeArgCtxProvider;
+	
+	@Inject
 	private ResourceSetImpl resourceSet;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		resourceSet = new ResourceSetImpl();
+		
+		Injector injector = Guice.createInjector(new ClasspathBasedModule());
+		injector.injectMembers(this);
 		Resource resource = new XMLResourceImpl(URI.createURI("http://synthetic.resource"));
 		resourceSet.getResources().add(resource);
-		typeArgCtxProvider = new TypeArgumentContextProvider();
-		final ClasspathTypeProviderFactory typeProviderFactory = new ClasspathTypeProviderFactory(getClass().getClassLoader());
-		typeProvider = typeProviderFactory.createTypeProvider(resourceSet);
-		assertNotNull(typeProvider);
-		typeArgCtxProvider.setTypeProviderFactory(typeProviderFactory);
-		typeArgCtxProvider.setTypeReferences(new TypeReferences());
+		typeProvider = injector.getInstance(IJvmTypeProvider.Factory.class).findOrCreateTypeProvider(resourceSet);
 		typeRefs = new JvmTypeReferences(TypesFactory.eINSTANCE, typeProvider);
 	}
 	
