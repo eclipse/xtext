@@ -5,10 +5,13 @@ import java.util.LinkedList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
+import org.eclipse.xtext.xbase.typing.TypesService;
 import org.eclipse.xtext.xtend2.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtext.xtend2.richstring.DefaultIndentationHandler;
 import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
@@ -32,6 +35,9 @@ public class Xtend2Compiler extends XbaseCompiler {
 	@Inject
 	private Provider<DefaultIndentationHandler> indentationHandler;
 	
+	@Inject
+	private TypesService typesService;
+	
 	public void compile(EObject obj, IAppendable appendable) {
 		if (obj instanceof XtendClass) {
 			compile((XtendClass) obj, appendable);
@@ -42,6 +48,14 @@ public class Xtend2Compiler extends XbaseCompiler {
 		} else if (obj instanceof XExpression){
 			super.compile((XExpression) obj, appendable);
 		}
+	}
+	
+	@Override
+	protected boolean isLocalVarReference(XAbstractFeatureCall expr) {
+		if (expr.getFeature() instanceof XtendClass) {
+			return true;
+		}
+		return super.isLocalVarReference(expr);
 	}
 
 	protected void compile(XtendFile obj, IAppendable appendable) {
@@ -77,25 +91,30 @@ public class Xtend2Compiler extends XbaseCompiler {
 	protected void compile(XtendFunction obj, IAppendable appendable) {
 		//TODO typeparams, exceptions
 		JvmTypeReference returnType = getIdentifiableTypeProvider().getType(obj, false);
-		appendable.append("\n\n").append("public ").append(returnType.getCanonicalName()).append(" ").append(obj.getName()).append("(");
+		appendable.append("\n\n").append("public ").append(getSerializedForm(returnType)).append(" ").append(obj.getName()).append("(");
 		final int numParams = obj.getParameters().size();
 		for (int i = 0; i < numParams; i++) {
 			JvmFormalParameter p = obj.getParameters().get(i);
 			String varName = declareNameInVariableScope(p, appendable);
-			appendable.append(p.getParameterType().getCanonicalName()).append(" ").append(varName);
+			appendable.append(getSerializedForm(p.getParameterType())).append(" ").append(varName);
 			if (i!=numParams-1)
 				appendable.append(", ");
 		}
 		appendable.append(") {");
 		appendable.increaseIndentation();
-		compile(obj.getExpression(), appendable);
+		boolean isReferenced = !typesService.isPrimitiveVoid(obj.getReturnType());
+		if (obj.getReturnType()==null) {
+			final JvmTypeReference type = getTypeProvider().getType(obj.getExpression());
+			isReferenced = !typesService.isPrimitiveVoid(type);
+		}
+		compile(obj.getExpression(), appendable, isReferenced);
 		appendable.decreaseIndentation();
 		appendable.append("\n}");
 	}
 
 	protected void declareThis(XtendClass clazz, IAppendable appendable) {
 		appendable.append("\nprotected final ");
-		String variable = makeJavaIdentifier(appendable.declareVariable(clazz, "this"));
+		String variable = appendable.declareVariable(clazz, "_this");
 		appendable.append(clazz.getName()).append(" ").append(variable).append(" = this;");
 	}
 	
@@ -131,7 +150,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 				return;
 			appendable.append(variableName);
 			appendable.append(".append(\"");
-			appendable.append(text.toString());
+			appendable.append(Strings.convertToJavaString(text.toString()));
 			appendable.append("\");\n");
 		}
 		
