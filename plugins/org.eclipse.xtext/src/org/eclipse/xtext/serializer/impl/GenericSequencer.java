@@ -506,24 +506,25 @@ public class GenericSequencer extends AbstractSequencer {
 	@Inject
 	protected ITokenSerializer.IValueSerializer valueSerializer;
 
-	public void createSequence(EObject context, EObject semanticObject,
-			ISemanticSequenceAcceptor sequenceAcceptorProvider, ISerializationDiagnostic.Acceptor errorAcceptor) {
+	public void createSequence(EObject context, EObject semanticObject, ISemanticSequenceAcceptor sequenceAcceptor,
+			ISerializationDiagnostic.Acceptor errorAcceptor) {
 		initConstraints();
 		IConstraint constraint = getConstraint(context, semanticObject.eClass());
-//		System.out.println("Constraint: " + constraint);
+		//		System.out.println("Constraint: " + constraint);
 		if (constraint == null) {
 			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context,
 					constraintContexts, grammarAccess.getGrammar()));
 			return;
 		}
 		Feature2Assignment[] values = createValues(semanticObject, constraint);
-//		System.out.println("Values: " + f2aToStr(constraint.getBody(), values));
+		//		System.out.println("Values: " + f2aToStr(constraint.getBody(), values));
 		applydeterministicQuantities(constraint, values);
 		//		System.out.println("Values (Disambiguated): " + f2aToStr(constraint.getBody(), values));
 		Quantity quant = new Quantity(constraint.getBody(), createUnambiguousAllocation(constraint.getBody(), values));
 		//		System.out.println("Quantity: " + quant + " EndQuantity");
 		//		List<IGrammarValuePair> result = Lists.newArrayList();
-		quant.collectGrammarValuePairs(sequenceAcceptorProvider);
+		quant.collectGrammarValuePairs(sequenceAcceptor);
+		sequenceAcceptor.finish();
 	}
 
 	protected void applydeterministicQuantities(IConstraint constraint, Feature2Assignment[] values) {

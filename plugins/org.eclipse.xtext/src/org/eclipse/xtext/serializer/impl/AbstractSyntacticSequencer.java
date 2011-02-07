@@ -34,6 +34,8 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer 
 
 	protected class Acceptor implements ISemanticSequenceAcceptor {
 
+		protected EObject context;
+
 		protected ISyntacticSequenceAcceptor delegate;
 
 		protected ISerializationDiagnostic.Acceptor errorAcceptor;
@@ -42,8 +44,6 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer 
 
 		protected Stack<RuleCall> stack;
 
-		protected EObject context;
-
 		public Acceptor(EObject context, IPDAAbsorberState previousState, ISyntacticSequenceAcceptor delegate,
 				ISerializationDiagnostic.Acceptor errorAcceptor) {
 			this.context = context;
@@ -51,6 +51,11 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer 
 			this.delegate = delegate;
 			this.errorAcceptor = errorAcceptor;
 			this.stack = new Stack<RuleCall>();
+		}
+
+		public void acceptAssignedAction(Action action, EObject semanticChild) {
+			previousState = emitForElement(previousState, action, stack, delegate, errorAcceptor);
+			delegate.acceptAssignedAction(action, semanticChild);
 		}
 
 		public void acceptAssignedCrossRefDatatype(RuleCall datatypeRC, EObject value) {
@@ -83,9 +88,19 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer 
 			delegate.acceptAssignedEnum(enumRC, value);
 		}
 
+		public void acceptAssignedKeyword(Keyword keyword, Boolean value) {
+			previousState = emitForElement(previousState, keyword, stack, delegate, errorAcceptor);
+			delegate.acceptAssignedKeyword(keyword, value);
+		}
+
 		public void acceptAssignedKeyword(Keyword keyword, String value) {
 			previousState = emitForElement(previousState, keyword, stack, delegate, errorAcceptor);
 			delegate.acceptAssignedKeyword(keyword, value);
+		}
+
+		public void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild) {
+			previousState = emitForElement(previousState, ruleCall, stack, delegate, errorAcceptor);
+			delegate.acceptAssignedParserRuleCall(ruleCall, semanticChild);
 		}
 
 		public void acceptAssignedTerminal(RuleCall terminalRC, Object value) {
@@ -93,19 +108,9 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer 
 			delegate.acceptAssignedTerminal(terminalRC, value);
 		}
 
-		public void acceptAssignedKeyword(Keyword keyword, Boolean value) {
-			previousState = emitForElement(previousState, keyword, stack, delegate, errorAcceptor);
-			delegate.acceptAssignedKeyword(keyword, value);
-		}
-
-		public void acceptAssignedAction(Action action, EObject semanticChild) {
-			previousState = emitForElement(previousState, action, stack, delegate, errorAcceptor);
-			delegate.acceptAssignedAction(action, semanticChild);
-		}
-
-		public void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild) {
-			previousState = emitForElement(previousState, ruleCall, stack, delegate, errorAcceptor);
-			delegate.acceptAssignedParserRuleCall(ruleCall, semanticChild);
+		public void finish() {
+			previousState = emitForElement(previousState, null, stack, delegate, errorAcceptor);
+			delegate.finish();
 		}
 
 	}
