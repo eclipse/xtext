@@ -426,7 +426,7 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 	
 	public void testCommonSuperType_9() throws Exception {
 		assertCommonSuperType(
-				"java.util.Collection", // one raw type - super type is raw type
+				"java.util.Collection<? extends E>", // one raw type - super type is raw type
 				ref(Set.class, ref(String.class)),
 				ref(List.class));
 	}
