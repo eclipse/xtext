@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XIntLiteral;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
@@ -548,6 +549,33 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertFeatureCall("bar", clause.getExpression());
 		assertEquals("java.lang.Exception", clause.getDeclaredParam().getParameterType().getCanonicalName());
 		assertEquals("e", clause.getDeclaredParam().getName());
+	}
+	
+	public void testReturnExpressionInBlock_1() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+			"{ return 1 2 }");
+		assertEquals(2, block.getExpressions().size());
+		assertTrue(block.getExpressions().get(0) instanceof XReturnExpression);
+		XReturnExpression returnExpression = (XReturnExpression) block.getExpressions().get(0);
+		assertTrue(returnExpression.getExpression() instanceof XIntLiteral);
+	}
+	
+	public void testReturnExpressionInBlock_2() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+			"{ return }");
+		assertEquals(1, block.getExpressions().size());
+		assertTrue(block.getExpressions().get(0) instanceof XReturnExpression);
+		XReturnExpression returnExpression = (XReturnExpression) block.getExpressions().get(0);
+		assertNull(returnExpression.getExpression());
+	}
+	
+	public void testReturnExpressionInBlock_3() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+			"{ return; 1 2 }");
+		assertEquals(3, block.getExpressions().size());
+		assertTrue(block.getExpressions().get(0) instanceof XReturnExpression);
+		XReturnExpression returnExpression = (XReturnExpression) block.getExpressions().get(0);
+		assertNull(returnExpression.getExpression());
 	}
 	
 }
