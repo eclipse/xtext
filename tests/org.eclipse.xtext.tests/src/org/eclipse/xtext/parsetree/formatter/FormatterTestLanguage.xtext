@@ -11,7 +11,7 @@ grammar org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage with org.ecl
 generate formattertestlanguage "http://simple/formattertestlanguage"
 
 Root:
-	"test" (TestLinewrap | TestIndentation | TestLinewrapMinMax);
+	"test" (TestLinewrap | TestIndentation | TestLinewrapMinMax | WrappingDataTypeTest);
 	
 Line:
 	(Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes) ";";
@@ -71,3 +71,10 @@ Datatype2: FQN;
 Datatype3: FQN;
 
 Datatypes: "datatypes" val1=Datatype1 "kw1" val2=Datatype2 val3=Datatype3 "kw3";
+
+
+WrappingDataTypeTest:
+	"wrappingdt" datatype=WrappingDataType "kw1";
+	
+WrappingDataType:
+	ID+; 
