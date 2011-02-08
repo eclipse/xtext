@@ -11,9 +11,7 @@ package org.eclipse.xtext.xtext.ecoreInference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +30,8 @@ import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xtext.ecoreInference.EClassifierInfo.EClassInfo;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 /**
  * A possible extension would be to normalize the type hierarchy and remove
@@ -55,7 +55,7 @@ public class EClassifierInfos {
 
 	public EClassifierInfos(Grammar grammar) {
 		this.grammar = grammar;
-		infoMap = new LinkedHashMap<Triple<String, String, String>, EClassifierInfo>();
+		infoMap = Maps.newLinkedHashMap();
 		parents = Lists.newArrayList();
 	}
 
@@ -164,7 +164,7 @@ public class EClassifierInfos {
 	}
 
 	public EClassifier getCompatibleTypeNameOf(Collection<EClassifier> classifiers, boolean useParent) {
-		final Collection<EClassifierInfo> types = new HashSet<EClassifierInfo>();
+		final Collection<EClassifierInfo> types = Sets.newLinkedHashSet();
 		for (EClassifier classifier : classifiers) {
 			final EClassifierInfo info = getInfoOrNull(classifier);
 			if (info == null)

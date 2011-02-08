@@ -11,10 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -134,7 +131,7 @@ public class Xtext2EcoreTransformer {
 	 */
 	public void transform() {
 		eClassifierInfos = new EClassifierInfos(grammar);
-		generatedEPackages = new HashMap<String, EPackage>();
+		generatedEPackages = Maps.newLinkedHashMap();
 
 		collectEClassInfosOfUsedGrammars();
 		collectEPackages();
@@ -510,7 +507,7 @@ public class Xtext2EcoreTransformer {
 		if (rule.getType() != null && rule.getType().getClassifier() != null)
 			return rule.getType().getClassifier();
 		if (rule instanceof TerminalRule || rule instanceof ParserRule && DatatypeRuleUtil.isDatatypeRule((ParserRule) rule)) {
-			if (isEcorePackageUsed(grammar, new HashSet<Grammar>()))
+			if (isEcorePackageUsed(grammar, Sets.<Grammar>newLinkedHashSet()))
 				return EcorePackage.Literals.ESTRING;
 		}
 		return null;
@@ -703,7 +700,7 @@ public class Xtext2EcoreTransformer {
 
 	private void collectEPackages() {
 		final List<AbstractMetamodelDeclaration> metamodelDeclarations = grammar.getMetamodelDeclarations();
-		final Map<String, GeneratedMetamodel> generateUs = new LinkedHashMap<String, GeneratedMetamodel>();
+		final Map<String, GeneratedMetamodel> generateUs = Maps.newLinkedHashMap();
 
 		for (AbstractMetamodelDeclaration metamodelDeclaration : metamodelDeclarations) {
 			try {
@@ -754,7 +751,7 @@ public class Xtext2EcoreTransformer {
 	}
 
 	private void collectEClassInfosOfUsedGrammars() {
-		Set<Grammar> visitedGrammars = new HashSet<Grammar>();
+		Set<Grammar> visitedGrammars = Sets.newLinkedHashSet();
 		visitedGrammars.add(grammar);
 		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
 			EClassifierInfos parent = createClassifierInfosFor(usedGrammar, visitedGrammars);
@@ -804,12 +801,9 @@ public class Xtext2EcoreTransformer {
 		}
 	}
 
-	/**
-	 * @return
-	 */
 	private Set<String> getGeneratedEPackageURIs() {
 		List<GeneratedMetamodel> list = EcoreUtil2.typeSelect(grammar.getMetamodelDeclarations(), GeneratedMetamodel.class);
-		return Sets.newHashSet(Iterables.transform(list, new Function<GeneratedMetamodel, String>() {
+		return Sets.newLinkedHashSet(Iterables.transform(list, new Function<GeneratedMetamodel, String>() {
 			public String apply(GeneratedMetamodel from) {
 				return from.getEPackage()!=null?from.getEPackage().getNsURI() : null;
 			}

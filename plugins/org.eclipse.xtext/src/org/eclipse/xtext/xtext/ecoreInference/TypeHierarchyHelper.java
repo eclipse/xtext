@@ -8,10 +8,7 @@
 package org.eclipse.xtext.xtext.ecoreInference;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -21,22 +18,23 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.EcoreUtil2.FindResult;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.xtext.ecoreInference.EClassifierInfo.EClassInfo;
+import org.eclipse.xtext.xtext.ecoreInference.EClassifierInfo.EClassInfo.FindResult;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
 public class TypeHierarchyHelper {
 	private final EClassifierInfos infos;
-	private final Map<EClassInfo, Set<EClassInfo>> subTypesMap = new HashMap<EClassInfo, Set<EClassInfo>>();
-	private final Set<EClassInfo> rootInfos = new LinkedHashSet<EClassInfo>();
-	private final Set<EClassInfo> traversedTypes = new HashSet<EClassInfo>();
+	private final Map<EClassInfo, Set<EClassInfo>> subTypesMap = Maps.newLinkedHashMap();
+	private final Set<EClassInfo> rootInfos = Sets.newLinkedHashSet();
+	private final Set<EClassInfo> traversedTypes = Sets.newLinkedHashSet();
 	private final ErrorAcceptor errorAcceptor;
 	private final Grammar grammar;
 
@@ -69,7 +67,7 @@ public class TypeHierarchyHelper {
 	public Set<EClassInfo> getSubTypesOf(EClassInfo info) {
 		Set<EClassInfo> result = subTypesMap.get(info);
 		if (result == null) {
-			result = new HashSet<EClassInfo>();
+			result = Sets.newLinkedHashSet();
 			subTypesMap.put(info, result);
 		}
 		return result;
@@ -117,10 +115,10 @@ public class TypeHierarchyHelper {
 	private void removeFeatures(EClassInfo info, Collection<EStructuralFeature> features, Map<EClass, Collection<EStructuralFeature>> featuresToRemove) {
 		EClass clazz = info.getEClass();
 		Collection<EStructuralFeature> featuresToBeModified = clazz.getEStructuralFeatures();
-		Collection<EStructuralFeature> removeUs = new HashSet<EStructuralFeature>();
+		Collection<EStructuralFeature> removeUs = Sets.newLinkedHashSet();
 		for (Iterator<EStructuralFeature> iterator = featuresToBeModified.iterator(); iterator.hasNext();) {
 			EStructuralFeature feature = iterator.next();
-			if (EcoreUtil2.containsSemanticallyEqualFeature(features, feature) == FindResult.FeatureExists)
+			if (info.containsSemanticallyEqualFeature(features, feature) == FindResult.FeatureExists)
 				removeUs.add(feature);
 		}
 		if (!removeUs.isEmpty() ) {
@@ -136,9 +134,9 @@ public class TypeHierarchyHelper {
 
 	private Collection<EStructuralFeature> joinFeaturesInto(Collection<EStructuralFeature> commonFeatures,
 			EClassInfo info) {
-		Collection<EStructuralFeature> result = new LinkedHashSet<EStructuralFeature>();
+		Collection<EStructuralFeature> result = Sets.newLinkedHashSet();
 		for (EStructuralFeature feature : commonFeatures) {
-			FindResult findResult = EcoreUtil2.containsSemanticallyEqualFeature(info.getEClass(), feature);
+			FindResult findResult = info.containsSemanticallyEqualFeature(feature);
 			if (findResult == FindResult.FeatureDoesNotExist) {
 				info.addFeature(feature);
 				result.add(feature);
@@ -150,7 +148,7 @@ public class TypeHierarchyHelper {
 	}
 
 	private Collection<EStructuralFeature> getCommonDirectFeatures(Collection<EClassInfo> infos) {
-		Collection<EStructuralFeature> result = new LinkedHashSet<EStructuralFeature>();
+		Collection<EStructuralFeature> result = Sets.newLinkedHashSet();
 
 		Iterator<EClassInfo> iterator = infos.iterator();
 		if (iterator.hasNext()) {
@@ -165,10 +163,10 @@ public class TypeHierarchyHelper {
 	}
 
 	public Collection<EStructuralFeature> getCommonFeatures(EClassInfo info, Collection<EStructuralFeature> features) {
-		Collection<EStructuralFeature> result = new LinkedHashSet<EStructuralFeature>();
+		Collection<EStructuralFeature> result = Sets.newLinkedHashSet();
 
 		for (EStructuralFeature f : features) {
-			if (EcoreUtil2.containsSemanticallyEqualFeature(info.getEClass(), f) == FindResult.FeatureExists) {
+			if (info.containsSemanticallyEqualFeature(f) == FindResult.FeatureExists) {
 				EStructuralFeature equalFeature = info.getEClass().getEStructuralFeature(f.getName());
 				SourceAdapter otherAdapter = SourceAdapter.find(equalFeature);
 				if (otherAdapter != null) {
@@ -185,7 +183,7 @@ public class TypeHierarchyHelper {
 
 	public void liftUpFeaturesRecursively() {
 		traversedTypes.clear();
-		final Map<EClass, Collection<EStructuralFeature>> featuresToRemove = new HashMap<EClass, Collection<EStructuralFeature>>();
+		final Map<EClass, Collection<EStructuralFeature>> featuresToRemove = Maps.newLinkedHashMap();
 		liftUpFeaturesRecursively(rootInfos, featuresToRemove);
 		for(Map.Entry<EClass, Collection<EStructuralFeature>> entry: featuresToRemove.entrySet()) {
 			entry.getKey().getEStructuralFeatures().removeAll(entry.getValue());
@@ -195,7 +193,7 @@ public class TypeHierarchyHelper {
 	}
 
 	private void pushFeaturesUp(Collection<EClassInfo> infos) {
-		Set<EClass> traversedClasses = Sets.newHashSet();
+		Set<EClass> traversedClasses = Sets.newLinkedHashSet();
 		for(EClassInfo info: infos)
 			pushFeaturesUp(info, traversedClasses);
 	}
@@ -210,8 +208,8 @@ public class TypeHierarchyHelper {
 					EClassInfo superInfo = (EClassInfo) infos.getInfoOrNull(superType);
 					pushFeaturesUp(superInfo, traversedClasses);
 				}
-				Map<String, EStructuralFeature> allFeatures = Maps.newHashMap();
-				Set<String> skippedNames = Sets.newHashSet();
+				Map<String, EStructuralFeature> allFeatures = Maps.newLinkedHashMap();
+				Set<String> skippedNames = Sets.newLinkedHashSet();
 				for(EStructuralFeature feature: eClass.getEAllStructuralFeatures()) {
 					if (feature.getEContainingClass() != eClass) {
 						if (allFeatures.containsKey(feature.getName())) {
@@ -254,27 +252,17 @@ public class TypeHierarchyHelper {
 
 		Collection<EStructuralFeature> features = classInfo.getEClass().getEStructuralFeatures();
 		for (Iterator<EStructuralFeature> iterator = features.iterator(); iterator.hasNext();)
-			if (anySuperTypeContainsSemanticallyEqualFeature(classInfo.getEClass(), iterator.next()))
+			if (anySuperTypeContainsSemanticallyEqualFeature(classInfo, iterator.next()))
 				iterator.remove();
 	}
 
-	private boolean anySuperTypeContainsSemanticallyEqualFeature(EClass eClass, EStructuralFeature feature) {
-		Collection<EStructuralFeature> allSupertypesFeatures = new LinkedHashSet<EStructuralFeature>();
-		for (EClass superType : eClass.getEAllSuperTypes())
+	private boolean anySuperTypeContainsSemanticallyEqualFeature(EClassInfo classInfo, EStructuralFeature feature) {
+		Collection<EStructuralFeature> allSupertypesFeatures = Sets.newLinkedHashSet();
+		for (EClass superType : classInfo.getEClass().getEAllSuperTypes())
 			allSupertypesFeatures.addAll(superType.getEAllStructuralFeatures());
 
-		return EcoreUtil2.containsSemanticallyEqualFeature(allSupertypesFeatures, feature) == FindResult.FeatureExists;
+		return classInfo.containsSemanticallyEqualFeature(allSupertypesFeatures, feature) == FindResult.FeatureExists;
 	}
-
-//	public void detectEClassesWithCyclesInTypeHierachy() {
-//		for (EClassInfo info : infos.getAllEClassInfos()) {
-//			EClass eClass = info.getEClass();
-//			Collection<EClass> allSuperTypes = EcoreUtil2.getAllSuperTypes(eClass);
-//			if (allSuperTypes.contains(eClass)) {
-//				reportError(info, TransformationErrorCode.TypeWithCycleInHierarchy, "Type with cycle in hierarchy: " + eClass.getName());
-//			}
-//		}
-//	}
 
 	private void reportError(EClassifierInfo info, TransformationErrorCode errorCode, String message) {
 		if (grammar == null) {

@@ -28,15 +28,12 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -46,7 +43,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.ReflectionUtil;
 
 import com.google.common.collect.MapMaker;
 
@@ -292,102 +288,6 @@ public class EcoreUtil2 extends EcoreUtil {
 		List<EClass> ca = new ArrayList<EClass>(eClass.getEAllSuperTypes());
 		ca.add(eClass);
 		return ca;
-	}
-
-	public static boolean isFeatureSemanticallyEqualApartFromType(EStructuralFeature f1, EStructuralFeature f2) {
-		boolean result = f1.getName().equals(f2.getName());
-		result &= f1.isMany() == f2.isMany();
-		if (f1 instanceof EReference && f2 instanceof EReference)
-			result &= ((EReference) f1).isContainment() == ((EReference) f2).isContainment();
-		return result;
-	}
-
-	public static boolean isFeatureSemanticallyEqualTo(EStructuralFeature f1, EStructuralFeature f2) {
-		boolean result = isFeatureSemanticallyEqualApartFromType(f1, f2);
-		if (f1 instanceof EReference && f2 instanceof EReference) {
-			EClass f1Type = (EClass) f1.getEType();
-			EClass f2Type = (EClass) f2.getEType();
-			result &= f1Type.isSuperTypeOf(f2Type);
-			result &= ((EReference) f1).isContainment() == ((EReference) f2).isContainment();
-			result &= ((EReference) f1).isContainer() == ((EReference) f2).isContainer();
-		} else
-			result &= f1.getEType().equals(f2.getEType());
-		return result;
-	}
-
-	public enum FindResult {
-		FeatureDoesNotExist, FeatureExists, DifferentFeatureWithSameNameExists
-	}
-
-	public static EStructuralFeature findFeatureByName(Collection<EStructuralFeature> features, String name) {
-		if (name == null)
-			return null;
-		for (EStructuralFeature feature : features)
-			if (name.equals(feature.getName()))
-				return feature;
-
-		return null;
-	}
-
-	public static boolean containsCompatibleFeature(EClass clazz, String name, boolean isMulti, boolean isContainment,
-			EClassifier type) {
-		EStructuralFeature existingFeature = clazz.getEStructuralFeature(name);
-		if (existingFeature != null) {
-			boolean many = existingFeature.isMany();
-			if (many == isMulti) {
-				if (type instanceof EClass && existingFeature.getEType() instanceof EClass) {
-					EClass expected = (EClass) type;
-					EClass actual = (EClass) existingFeature.getEType();
-					boolean result = isAssignableFrom(actual, expected);
-					result &= isContainment == ((EReference) existingFeature).isContainment();
-					result &= !((EReference) existingFeature).isContainer();
-					return result;
-				} else if (type instanceof EDataType && existingFeature.getEType() instanceof EDataType) {
-					EDataType expected = (EDataType) type;
-					EDataType actual = (EDataType) existingFeature.getEType();
-					Class<?> expectedInstanceClass = ReflectionUtil.getObjectType(expected.getInstanceClass());
-					Class<?> actualInstanceClass = ReflectionUtil.getObjectType(actual.getInstanceClass());
-					return actual.equals(expected) || expectedInstanceClass != null && actualInstanceClass != null
-							&& actualInstanceClass.isAssignableFrom(expectedInstanceClass);
-				}
-			}
-		}
-		return false;
-	}
-
-	public static FindResult containsSemanticallyEqualFeature(EClass eClass, EStructuralFeature feature) {
-		return containsSemanticallyEqualFeature(eClass.getEAllStructuralFeatures(), feature);
-	}
-
-	public static FindResult containsSemanticallyEqualFeature(Collection<EStructuralFeature> features,
-			EStructuralFeature feature) {
-		EStructuralFeature potentiallyEqualFeature = findFeatureByName(features, feature.getName());
-		if (potentiallyEqualFeature == null)
-			return FindResult.FeatureDoesNotExist;
-		else if (isFeatureSemanticallyEqualTo(potentiallyEqualFeature, feature))
-			return FindResult.FeatureExists;
-		else
-			return FindResult.DifferentFeatureWithSameNameExists;
-	}
-
-	public static EStructuralFeature createFeatureAsCloneOf(EStructuralFeature prototype) {
-		EStructuralFeature result;
-		if (prototype instanceof EReference) {
-			EReference prototypeAsReference = (EReference) prototype;
-			EReference resultAsReference = EcoreFactory.eINSTANCE.createEReference();
-			resultAsReference.setContainment(prototypeAsReference.isContainment());
-			result = resultAsReference;
-		} else if (prototype instanceof EAttribute)
-			result = EcoreFactory.eINSTANCE.createEAttribute();
-		else
-			throw new IllegalArgumentException("Unsupported feature type " + prototype);
-
-		result.setName(prototype.getName());
-		result.setEType(prototype.getEType());
-		result.setLowerBound(prototype.getLowerBound());
-		result.setUpperBound(prototype.getUpperBound());
-
-		return result;
 	}
 
 	private static void collectAllSuperTypes(Set<EClass> collectedTypes, EClass eClass) {
