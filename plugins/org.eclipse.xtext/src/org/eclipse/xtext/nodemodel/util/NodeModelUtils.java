@@ -111,7 +111,7 @@ public class NodeModelUtils {
 		return Collections.emptyList();
 	}
 
-	private static List<INode> findNodesForFeature(EObject semanticElement, INode node,
+	public static List<INode> findNodesForFeature(EObject semanticElement, INode node,
 			EStructuralFeature structuralFeature) {
 		List<INode> result = Lists.newArrayList();
 		String featureName = structuralFeature.getName();
