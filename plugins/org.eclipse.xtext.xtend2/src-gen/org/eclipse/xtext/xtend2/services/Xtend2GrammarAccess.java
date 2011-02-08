@@ -1353,7 +1353,8 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 
 	//XPrimaryExpression returns XExpression:
 	//	XConstructorCall | XBlockExpression | XSwitchExpression | XFeatureCall | XLiteral | XIfExpression | XForLoopExpression
-	//	| XWhileExpression | XDoWhileExpression | XThrowExpression | XTryCatchFinallyExpression | XParenthesizedExpression;
+	//	| XWhileExpression | XDoWhileExpression | XThrowExpression | XReturnExpression | XTryCatchFinallyExpression |
+	//	XParenthesizedExpression;
 	public XbaseGrammarAccess.XPrimaryExpressionElements getXPrimaryExpressionAccess() {
 		return gaXbase.getXPrimaryExpressionAccess();
 	}
@@ -1579,6 +1580,16 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getXThrowExpressionRule() {
 		return getXThrowExpressionAccess().getRule();
+	}
+
+	//XReturnExpression returns XExpression:
+	//	{XReturnExpression} "return" => expression=XExpression?;
+	public XbaseGrammarAccess.XReturnExpressionElements getXReturnExpressionAccess() {
+		return gaXbase.getXReturnExpressionAccess();
+	}
+	
+	public ParserRule getXReturnExpressionRule() {
+		return getXReturnExpressionAccess().getRule();
 	}
 
 	//XTryCatchFinallyExpression returns XExpression:
