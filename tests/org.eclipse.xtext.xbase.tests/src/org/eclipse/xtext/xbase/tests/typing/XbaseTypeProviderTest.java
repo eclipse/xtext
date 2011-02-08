@@ -27,7 +27,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	public void testFeatureCallWithArrayToIterableConversion() throws Exception {
 		assertResolvedReturnType("java.util.Iterator<? extends java.lang.Character>", "'foo'.toCharArray.iterator");
 	}
-
+	
 	public void testClosure_00() throws Exception {
 		assertResolvedReturnType("java.lang.String", "[|'literal'].apply()");
 	}
@@ -107,11 +107,10 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedReturnType("java.lang.String", "new java.util.ArrayList<java.lang.String>().get(23)");
 	}
 
-// TODO
-//	public void testFeatureCallWithOperatorOverloading2() throws Exception {
-//		assertResolvedReturnType("boolean", "new java.util.ArrayList<Byte>('foo'.getBytes()) += null");
-//		assertResolvedReturnType("boolean", "new java.util.ArrayList<Byte>('foo'.getBytes()) += 'x'.getBytes().get(0)");
-//	}
+	public void testFeatureCallWithOperatorOverloading2() throws Exception {
+		assertResolvedReturnType("boolean", "new java.util.ArrayList<Byte>('foo'.getBytes()) += null");
+		assertResolvedReturnType("boolean", "new java.util.ArrayList<Byte>('foo'.getBytes()) += 'x'.getBytes().iterator.next");
+	}
 
 	public void testFeatureCallOnThis() throws Exception {
 		assertResolvedReturnType("boolean", "{ val this = 'foo'; length == 3;}");
@@ -121,16 +120,17 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedReturnType("void", "throw new java.lang.Exception()");
 	}
 
-	//TODO
-	//	public void testTryCatchFinallyExpression_0() throws Exception {
-	//		assertResolvedReturnType("java.lang.String", "try 'foo' catch (java.lang.Exception e) 42"); 
-	//	}
-	//	public void testTryCatchFinallyExpression_1() throws Exception {
-	//		assertResolvedReturnType("java.lang.String", "try 'foo' catch (java.lang.Exception e) 42 catch(java.lang.RuntimeException e) 43");	
-	//	}
-	//	public void testTryCatchFinallyExpression_2() throws Exception {
-	//		assertResolvedReturnType("java.lang.String", "try 'foo' catch (java.lang.Exception e) 42 catch(java.lang.RuntimeException e) 43 finally true");	
-	//	}
+	public void testTryCatchFinallyExpression_0() throws Exception {
+		assertResolvedReturnType("java.lang.String", "try 'foo' catch (java.lang.Exception e) 'bar'"); 
+	}
+	
+	public void testTryCatchFinallyExpression_1() throws Exception {
+		assertResolvedReturnType("java.lang.String", "try 'foo' catch (java.lang.Exception e) 'bar' catch(java.lang.RuntimeException e) 'baz'");	
+	}
+	
+	public void testTryCatchFinallyExpression_2() throws Exception {
+		assertResolvedReturnType("java.lang.String", "try 'foo' catch (java.lang.Exception e) 'bar' catch(java.lang.RuntimeException e) 'baz' finally true");	
+	}
 
 	public void testForExpression() throws Exception {
 		assertResolvedReturnType("void", "for(java.lang.String x : new java.util.ArrayList()) 'foo'");

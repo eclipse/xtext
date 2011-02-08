@@ -403,16 +403,6 @@ public class XExpressionTypeProvider extends AbstractXExpressionTypeProvider {
 		return typesService.getTypeForName(String.class, object);
 	}
 
-	protected JvmTypeReference _selfContainedType(XClosure object, boolean selfContained) {
-		final JvmTypeReference returnType = getSelfContainedType(object.getExpression());
-		List<JvmTypeReference> parameterTypes = Lists.newArrayList();
-		EList<JvmFormalParameter> params = object.getFormalParameters();
-		for (JvmFormalParameter param : params) {
-			parameterTypes.add(param.getParameterType());
-		}
-		return typesService.createFunctionTypeRef(object, parameterTypes, returnType);
-	}
-	
 	protected JvmTypeReference _type(XClosure object, boolean selfContained) {
 		final JvmTypeReference returnType = getType(object.getExpression(), true);
 		List<JvmTypeReference> parameterTypes = Lists.newArrayList();
