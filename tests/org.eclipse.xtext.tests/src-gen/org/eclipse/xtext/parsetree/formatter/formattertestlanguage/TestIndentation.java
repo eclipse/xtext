@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentation#getSub <em>Sub</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentation#getItems <em>Items</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentation#isSemi <em>Semi</em>}</li>
  * </ul>
  * </p>
@@ -41,6 +42,22 @@ public interface TestIndentation extends Root
    * @generated
    */
   EList<TestIndentation> getSub();
+
+  /**
+   * Returns the value of the '<em><b>Items</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Line}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Items</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Items</em>' containment reference list.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguagePackage#getTestIndentation_Items()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Line> getItems();
 
   /**
    * Returns the value of the '<em><b>Semi</b></em>' attribute.

@@ -49,6 +49,7 @@ protected class ThisRootNode extends RootToken {
 			case 15: return new SuppressedHiddenSubSub_Group(this, this, 15, inst);
 			case 16: return new SuppressedHiddenSubID_IdvalAssignment(this, this, 16, inst);
 			case 17: return new Datatypes_Group(this, this, 17, inst);
+			case 18: return new WrappingDataTypeTest_Group(this, this, 18, inst);
 			default: return null;
 		}	
 	}	
@@ -58,11 +59,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Root ****************
  *
  * Root:
- * 	"test" (TestLinewrap | TestIndentation | TestLinewrapMinMax);
+ * 	"test" (TestLinewrap | TestIndentation | TestLinewrapMinMax | WrappingDataTypeTest);
  *
  **/
 
-// "test" (TestLinewrap | TestIndentation | TestLinewrapMinMax)
+// "test" (TestLinewrap | TestIndentation | TestLinewrapMinMax | WrappingDataTypeTest)
 protected class Root_Group extends GroupToken {
 	
 	public Root_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -86,7 +87,8 @@ protected class Root_Group extends GroupToken {
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getTestIndentationRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getTestLinewrapRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getTestLinewrapMinMaxRule().getType().getClassifier())
+		   getEObject().eClass() != grammarAccess.getTestLinewrapMinMaxRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getWrappingDataTypeTestRule().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
@@ -114,7 +116,7 @@ protected class Root_TestKeyword_0 extends KeywordToken  {
 
 }
 
-// TestLinewrap | TestIndentation | TestLinewrapMinMax
+// TestLinewrap | TestIndentation | TestLinewrapMinMax | WrappingDataTypeTest
 protected class Root_Alternatives_1 extends AlternativesToken {
 
 	public Root_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -132,6 +134,7 @@ protected class Root_Alternatives_1 extends AlternativesToken {
 			case 0: return new Root_TestLinewrapParserRuleCall_1_0(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new Root_TestIndentationParserRuleCall_1_1(lastRuleCallOrigin, this, 1, inst);
 			case 2: return new Root_TestLinewrapMinMaxParserRuleCall_1_2(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new Root_WrappingDataTypeTestParserRuleCall_1_3(lastRuleCallOrigin, this, 3, inst);
 			default: return null;
 		}	
 	}
@@ -237,6 +240,43 @@ protected class Root_TestLinewrapMinMaxParserRuleCall_1_2 extends RuleCallToken 
 		if(getEObject().eClass() != grammarAccess.getTestLinewrapMinMaxRule().getType().getClassifier())
 			return null;
 		if(checkForRecursion(TestLinewrapMinMax_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Root_TestKeyword_0(lastRuleCallOrigin, next, actIndex, inst);
+			default: return null;
+		}	
+	}	
+}
+
+// WrappingDataTypeTest
+protected class Root_WrappingDataTypeTestParserRuleCall_1_3 extends RuleCallToken {
+	
+	public Root_WrappingDataTypeTestParserRuleCall_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getRootAccess().getWrappingDataTypeTestParserRuleCall_1_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new WrappingDataTypeTest_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getWrappingDataTypeTestRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(WrappingDataTypeTest_Group.class, eObjectConsumer)) return null;
 		return eObjectConsumer;
 	}
 	
@@ -3262,5 +3302,123 @@ protected class Datatypes_Kw3Keyword_5 extends KeywordToken  {
 
 
 /************ end Rule Datatypes ****************/
+
+
+/************ begin Rule WrappingDataTypeTest ****************
+ *
+ * WrappingDataTypeTest:
+ * 	"wrappingdt" datatype=WrappingDataType "kw1";
+ *
+ **/
+
+// "wrappingdt" datatype=WrappingDataType "kw1"
+protected class WrappingDataTypeTest_Group extends GroupToken {
+	
+	public WrappingDataTypeTest_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getWrappingDataTypeTestAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new WrappingDataTypeTest_Kw1Keyword_2(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getWrappingDataTypeTestRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "wrappingdt"
+protected class WrappingDataTypeTest_WrappingdtKeyword_0 extends KeywordToken  {
+	
+	public WrappingDataTypeTest_WrappingdtKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getWrappingDataTypeTestAccess().getWrappingdtKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// datatype=WrappingDataType
+protected class WrappingDataTypeTest_DatatypeAssignment_1 extends AssignmentToken  {
+	
+	public WrappingDataTypeTest_DatatypeAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getWrappingDataTypeTestAccess().getDatatypeAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new WrappingDataTypeTest_WrappingdtKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("datatype",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("datatype");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getWrappingDataTypeTestAccess().getDatatypeWrappingDataTypeParserRuleCall_1_0(), value, null)) {
+			type = AssignmentType.DATATYPE_RULE_CALL;
+			element = grammarAccess.getWrappingDataTypeTestAccess().getDatatypeWrappingDataTypeParserRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// "kw1"
+protected class WrappingDataTypeTest_Kw1Keyword_2 extends KeywordToken  {
+	
+	public WrappingDataTypeTest_Kw1Keyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getWrappingDataTypeTestAccess().getKw1Keyword_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new WrappingDataTypeTest_DatatypeAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+
+/************ end Rule WrappingDataTypeTest ****************/
+
 
 }

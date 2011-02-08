@@ -25,18 +25,19 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cTestLinewrapParserRuleCall_1_0 = (RuleCall)cAlternatives_1.eContents().get(0);
 		private final RuleCall cTestIndentationParserRuleCall_1_1 = (RuleCall)cAlternatives_1.eContents().get(1);
 		private final RuleCall cTestLinewrapMinMaxParserRuleCall_1_2 = (RuleCall)cAlternatives_1.eContents().get(2);
+		private final RuleCall cWrappingDataTypeTestParserRuleCall_1_3 = (RuleCall)cAlternatives_1.eContents().get(3);
 		
 		//Root:
-		//	"test" (TestLinewrap | TestIndentation | TestLinewrapMinMax);
+		//	"test" (TestLinewrap | TestIndentation | TestLinewrapMinMax | WrappingDataTypeTest);
 		public ParserRule getRule() { return rule; }
 
-		//"test" (TestLinewrap | TestIndentation | TestLinewrapMinMax)
+		//"test" (TestLinewrap | TestIndentation | TestLinewrapMinMax | WrappingDataTypeTest)
 		public Group getGroup() { return cGroup; }
 
 		//"test"
 		public Keyword getTestKeyword_0() { return cTestKeyword_0; }
 
-		//TestLinewrap | TestIndentation | TestLinewrapMinMax
+		//TestLinewrap | TestIndentation | TestLinewrapMinMax | WrappingDataTypeTest
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//TestLinewrap
@@ -47,6 +48,9 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 		//TestLinewrapMinMax
 		public RuleCall getTestLinewrapMinMaxParserRuleCall_1_2() { return cTestLinewrapMinMaxParserRuleCall_1_2; }
+
+		//WrappingDataTypeTest
+		public RuleCall getWrappingDataTypeTestParserRuleCall_1_3() { return cWrappingDataTypeTestParserRuleCall_1_3; }
 	}
 
 	public class LineElements extends AbstractParserRuleElementFinder {
@@ -748,6 +752,46 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"kw3"
 		public Keyword getKw3Keyword_5() { return cKw3Keyword_5; }
 	}
+
+	public class WrappingDataTypeTestElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WrappingDataTypeTest");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cWrappingdtKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cDatatypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cDatatypeWrappingDataTypeParserRuleCall_1_0 = (RuleCall)cDatatypeAssignment_1.eContents().get(0);
+		private final Keyword cKw1Keyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//WrappingDataTypeTest:
+		//	"wrappingdt" datatype=WrappingDataType "kw1";
+		public ParserRule getRule() { return rule; }
+
+		//"wrappingdt" datatype=WrappingDataType "kw1"
+		public Group getGroup() { return cGroup; }
+
+		//"wrappingdt"
+		public Keyword getWrappingdtKeyword_0() { return cWrappingdtKeyword_0; }
+
+		//datatype=WrappingDataType
+		public Assignment getDatatypeAssignment_1() { return cDatatypeAssignment_1; }
+
+		//WrappingDataType
+		public RuleCall getDatatypeWrappingDataTypeParserRuleCall_1_0() { return cDatatypeWrappingDataTypeParserRuleCall_1_0; }
+
+		//"kw1"
+		public Keyword getKw1Keyword_2() { return cKw1Keyword_2; }
+	}
+
+	public class WrappingDataTypeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WrappingDataType");
+		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//WrappingDataType:
+		//	ID+;
+		public ParserRule getRule() { return rule; }
+
+		//ID+
+		public RuleCall getIDTerminalRuleCall() { return cIDTerminalRuleCall; }
+	}
 	
 	
 	public class Enum1Elements extends AbstractEnumRuleElementFinder {
@@ -809,6 +853,8 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private Datatype2Elements pDatatype2;
 	private Datatype3Elements pDatatype3;
 	private DatatypesElements pDatatypes;
+	private WrappingDataTypeTestElements pWrappingDataTypeTest;
+	private WrappingDataTypeElements pWrappingDataType;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -832,7 +878,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Root:
-	//	"test" (TestLinewrap | TestIndentation | TestLinewrapMinMax);
+	//	"test" (TestLinewrap | TestIndentation | TestLinewrapMinMax | WrappingDataTypeTest);
 	public RootElements getRootAccess() {
 		return (pRoot != null) ? pRoot : (pRoot = new RootElements());
 	}
@@ -1059,6 +1105,26 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	public ParserRule getDatatypesRule() {
 		return getDatatypesAccess().getRule();
+	}
+
+	//WrappingDataTypeTest:
+	//	"wrappingdt" datatype=WrappingDataType "kw1";
+	public WrappingDataTypeTestElements getWrappingDataTypeTestAccess() {
+		return (pWrappingDataTypeTest != null) ? pWrappingDataTypeTest : (pWrappingDataTypeTest = new WrappingDataTypeTestElements());
+	}
+	
+	public ParserRule getWrappingDataTypeTestRule() {
+		return getWrappingDataTypeTestAccess().getRule();
+	}
+
+	//WrappingDataType:
+	//	ID+;
+	public WrappingDataTypeElements getWrappingDataTypeAccess() {
+		return (pWrappingDataType != null) ? pWrappingDataType : (pWrappingDataType = new WrappingDataTypeElements());
+	}
+	
+	public ParserRule getWrappingDataTypeRule() {
+		return getWrappingDataTypeAccess().getRule();
 	}
 
 	//terminal ID:

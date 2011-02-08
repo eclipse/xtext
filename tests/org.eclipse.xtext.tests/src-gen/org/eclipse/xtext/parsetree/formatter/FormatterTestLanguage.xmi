@@ -14,6 +14,7 @@
           <elements xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
           <elements xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
           <elements xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
+          <elements xsi:type="xtext:RuleCall" rule="/0/@rules.23"/>
         </elements>
       </alternatives>
     </rules>
@@ -338,6 +339,24 @@
         </elements>
         <elements xsi:type="xtext:Keyword" value="kw3"/>
       </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="WrappingDataTypeTest">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://simple/formattertestlanguage#//WrappingDataTypeTest"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="wrappingdt"/>
+        <elements xsi:type="xtext:Assignment" feature="datatype" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.24"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="kw1"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="WrappingDataType">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" cardinality="+" rule="/1/@rules.0"/>
     </rules>
   </xtext:Grammar>
   <xtext:Grammar name="org.eclipse.xtext.common.Terminals" definesHiddenTokens="true" hiddenTokens="/1/@rules.5 /1/@rules.3 /1/@rules.4">

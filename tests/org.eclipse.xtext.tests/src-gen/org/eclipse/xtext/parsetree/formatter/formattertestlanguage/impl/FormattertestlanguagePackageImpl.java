@@ -34,6 +34,7 @@ import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHid
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentation;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestLinewrap;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestLinewrapMinMax;
+import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.WrappingDataTypeTest;
 
 /**
  * <!-- begin-user-doc -->
@@ -174,6 +175,13 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass wrappingDataTypeTestEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EEnum enum1EEnum = null;
 
   /**
@@ -247,16 +255,6 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
   public EClass getRoot()
   {
     return rootEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getRoot_Items()
-  {
-    return (EReference)rootEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -434,9 +432,29 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getTestLinewrap_Items()
+  {
+    return (EReference)testLinewrapEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getTestLinewrapMinMax()
   {
     return testLinewrapMinMaxEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTestLinewrapMinMax_Items()
+  {
+    return (EReference)testLinewrapMinMaxEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -464,9 +482,19 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getTestIndentation_Items()
+  {
+    return (EReference)testIndentationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EAttribute getTestIndentation_Semi()
   {
-    return (EAttribute)testIndentationEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)testIndentationEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -634,6 +662,26 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getWrappingDataTypeTest()
+  {
+    return wrappingDataTypeTestEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getWrappingDataTypeTest_Datatype()
+  {
+    return (EAttribute)wrappingDataTypeTestEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getEnum1()
   {
     return enum1EEnum;
@@ -670,7 +718,6 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
 
     // Create classes and their features
     rootEClass = createEClass(ROOT);
-    createEReference(rootEClass, ROOT__ITEMS);
 
     lineEClass = createEClass(LINE);
 
@@ -695,11 +742,14 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     createEAttribute(spaceEClass, SPACE__VAL);
 
     testLinewrapEClass = createEClass(TEST_LINEWRAP);
+    createEReference(testLinewrapEClass, TEST_LINEWRAP__ITEMS);
 
     testLinewrapMinMaxEClass = createEClass(TEST_LINEWRAP_MIN_MAX);
+    createEReference(testLinewrapMinMaxEClass, TEST_LINEWRAP_MIN_MAX__ITEMS);
 
     testIndentationEClass = createEClass(TEST_INDENTATION);
     createEReference(testIndentationEClass, TEST_INDENTATION__SUB);
+    createEReference(testIndentationEClass, TEST_INDENTATION__ITEMS);
     createEAttribute(testIndentationEClass, TEST_INDENTATION__SEMI);
 
     fqnObjEClass = createEClass(FQN_OBJ);
@@ -725,6 +775,9 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     createEAttribute(datatypesEClass, DATATYPES__VAL1);
     createEAttribute(datatypesEClass, DATATYPES__VAL2);
     createEAttribute(datatypesEClass, DATATYPES__VAL3);
+
+    wrappingDataTypeTestEClass = createEClass(WRAPPING_DATA_TYPE_TEST);
+    createEAttribute(wrappingDataTypeTestEClass, WRAPPING_DATA_TYPE_TEST__DATATYPE);
 
     // Create enums
     enum1EEnum = createEEnum(ENUM1);
@@ -773,10 +826,10 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     suppressedHiddenSubSubEClass.getESuperTypes().add(this.getSuppressedHiddenSub());
     suppressedHiddenSubIDEClass.getESuperTypes().add(this.getSuppressedHiddenSub());
     datatypesEClass.getESuperTypes().add(this.getLine());
+    wrappingDataTypeTestEClass.getESuperTypes().add(this.getRoot());
 
     // Initialize classes and features; add operations and parameters
     initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getRoot_Items(), this.getLine(), null, "items", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(lineEClass, Line.class, "Line", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -801,11 +854,14 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     initEAttribute(getSpace_Val(), ecorePackage.getEString(), "val", null, 0, 1, Space.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(testLinewrapEClass, TestLinewrap.class, "TestLinewrap", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getTestLinewrap_Items(), this.getLine(), null, "items", null, 0, -1, TestLinewrap.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(testLinewrapMinMaxEClass, TestLinewrapMinMax.class, "TestLinewrapMinMax", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getTestLinewrapMinMax_Items(), this.getLine(), null, "items", null, 0, -1, TestLinewrapMinMax.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(testIndentationEClass, TestIndentation.class, "TestIndentation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTestIndentation_Sub(), this.getTestIndentation(), null, "sub", null, 0, -1, TestIndentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTestIndentation_Items(), this.getLine(), null, "items", null, 0, -1, TestIndentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTestIndentation_Semi(), ecorePackage.getEBoolean(), "semi", null, 0, 1, TestIndentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(fqnObjEClass, FqnObj.class, "FqnObj", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -831,6 +887,9 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     initEAttribute(getDatatypes_Val1(), ecorePackage.getEString(), "val1", null, 0, 1, Datatypes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getDatatypes_Val2(), ecorePackage.getEString(), "val2", null, 0, 1, Datatypes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getDatatypes_Val3(), ecorePackage.getEString(), "val3", null, 0, 1, Datatypes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(wrappingDataTypeTestEClass, WrappingDataTypeTest.class, "WrappingDataTypeTest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getWrappingDataTypeTest_Datatype(), ecorePackage.getEString(), "datatype", null, 0, 1, WrappingDataTypeTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(enum1EEnum, Enum1.class, "Enum1");

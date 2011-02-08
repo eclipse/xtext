@@ -68,7 +68,7 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 			this.totalLength = leftover;
 			this.entries = initialEntries == null ? new ArrayList<LineEntry>() : initialEntries;
 			this.lastBreakableEntryIndex = -1;
-			this.startWithNL = initialEntries != null;
+			this.startWithNL = initialEntries != null || leftover > 0;
 			if (initialEntries != null && initialEntries.size() > 0)
 				indent = getIndentation(initialEntries.get(0).indent);
 			for (int i = 0; i < this.entries.size(); i++) {

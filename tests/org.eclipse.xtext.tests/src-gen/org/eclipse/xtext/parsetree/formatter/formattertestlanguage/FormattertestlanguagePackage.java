@@ -71,22 +71,13 @@ public interface FormattertestlanguagePackage extends EPackage
   int ROOT = 0;
 
   /**
-   * The feature id for the '<em><b>Items</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ROOT__ITEMS = 0;
-
-  /**
    * The number of structural features of the '<em>Root</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ROOT_FEATURE_COUNT = 1;
+  int ROOT_FEATURE_COUNT = 0;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.LineImpl <em>Line</em>}' class.
@@ -309,7 +300,7 @@ public interface FormattertestlanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int TEST_LINEWRAP__ITEMS = ROOT__ITEMS;
+  int TEST_LINEWRAP__ITEMS = ROOT_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Test Linewrap</em>' class.
@@ -318,7 +309,7 @@ public interface FormattertestlanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int TEST_LINEWRAP_FEATURE_COUNT = ROOT_FEATURE_COUNT + 0;
+  int TEST_LINEWRAP_FEATURE_COUNT = ROOT_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestLinewrapMinMaxImpl <em>Test Linewrap Min Max</em>}' class.
@@ -337,7 +328,7 @@ public interface FormattertestlanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int TEST_LINEWRAP_MIN_MAX__ITEMS = ROOT__ITEMS;
+  int TEST_LINEWRAP_MIN_MAX__ITEMS = ROOT_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Test Linewrap Min Max</em>' class.
@@ -346,7 +337,7 @@ public interface FormattertestlanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int TEST_LINEWRAP_MIN_MAX_FEATURE_COUNT = ROOT_FEATURE_COUNT + 0;
+  int TEST_LINEWRAP_MIN_MAX_FEATURE_COUNT = ROOT_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestIndentationImpl <em>Test Indentation</em>}' class.
@@ -359,15 +350,6 @@ public interface FormattertestlanguagePackage extends EPackage
   int TEST_INDENTATION = 9;
 
   /**
-   * The feature id for the '<em><b>Items</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TEST_INDENTATION__ITEMS = ROOT__ITEMS;
-
-  /**
    * The feature id for the '<em><b>Sub</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -377,13 +359,22 @@ public interface FormattertestlanguagePackage extends EPackage
   int TEST_INDENTATION__SUB = ROOT_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Items</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TEST_INDENTATION__ITEMS = ROOT_FEATURE_COUNT + 1;
+
+  /**
    * The feature id for the '<em><b>Semi</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TEST_INDENTATION__SEMI = ROOT_FEATURE_COUNT + 1;
+  int TEST_INDENTATION__SEMI = ROOT_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Test Indentation</em>' class.
@@ -392,7 +383,7 @@ public interface FormattertestlanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int TEST_INDENTATION_FEATURE_COUNT = ROOT_FEATURE_COUNT + 2;
+  int TEST_INDENTATION_FEATURE_COUNT = ROOT_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FqnObjImpl <em>Fqn Obj</em>}' class.
@@ -637,6 +628,34 @@ public interface FormattertestlanguagePackage extends EPackage
   int DATATYPES_FEATURE_COUNT = LINE_FEATURE_COUNT + 3;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.WrappingDataTypeTestImpl <em>Wrapping Data Type Test</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.WrappingDataTypeTestImpl
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getWrappingDataTypeTest()
+   * @generated
+   */
+  int WRAPPING_DATA_TYPE_TEST = 18;
+
+  /**
+   * The feature id for the '<em><b>Datatype</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WRAPPING_DATA_TYPE_TEST__DATATYPE = ROOT_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Wrapping Data Type Test</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WRAPPING_DATA_TYPE_TEST_FEATURE_COUNT = ROOT_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enum1 <em>Enum1</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -644,7 +663,7 @@ public interface FormattertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getEnum1()
    * @generated
    */
-  int ENUM1 = 18;
+  int ENUM1 = 19;
 
 
   /**
@@ -656,17 +675,6 @@ public interface FormattertestlanguagePackage extends EPackage
    * @generated
    */
   EClass getRoot();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Root#getItems <em>Items</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Items</em>'.
-   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Root#getItems()
-   * @see #getRoot()
-   * @generated
-   */
-  EReference getRoot_Items();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Line <em>Line</em>}'.
@@ -849,6 +857,17 @@ public interface FormattertestlanguagePackage extends EPackage
   EClass getTestLinewrap();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestLinewrap#getItems <em>Items</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Items</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestLinewrap#getItems()
+   * @see #getTestLinewrap()
+   * @generated
+   */
+  EReference getTestLinewrap_Items();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestLinewrapMinMax <em>Test Linewrap Min Max</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -857,6 +876,17 @@ public interface FormattertestlanguagePackage extends EPackage
    * @generated
    */
   EClass getTestLinewrapMinMax();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestLinewrapMinMax#getItems <em>Items</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Items</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestLinewrapMinMax#getItems()
+   * @see #getTestLinewrapMinMax()
+   * @generated
+   */
+  EReference getTestLinewrapMinMax_Items();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentation <em>Test Indentation</em>}'.
@@ -878,6 +908,17 @@ public interface FormattertestlanguagePackage extends EPackage
    * @generated
    */
   EReference getTestIndentation_Sub();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentation#getItems <em>Items</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Items</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentation#getItems()
+   * @see #getTestIndentation()
+   * @generated
+   */
+  EReference getTestIndentation_Items();
 
   /**
    * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentation#isSemi <em>Semi</em>}'.
@@ -1059,6 +1100,27 @@ public interface FormattertestlanguagePackage extends EPackage
   EAttribute getDatatypes_Val3();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.WrappingDataTypeTest <em>Wrapping Data Type Test</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Wrapping Data Type Test</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.WrappingDataTypeTest
+   * @generated
+   */
+  EClass getWrappingDataTypeTest();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.WrappingDataTypeTest#getDatatype <em>Datatype</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Datatype</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.WrappingDataTypeTest#getDatatype()
+   * @see #getWrappingDataTypeTest()
+   * @generated
+   */
+  EAttribute getWrappingDataTypeTest_Datatype();
+
+  /**
    * Returns the meta object for enum '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enum1 <em>Enum1</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1100,14 +1162,6 @@ public interface FormattertestlanguagePackage extends EPackage
      * @generated
      */
     EClass ROOT = eINSTANCE.getRoot();
-
-    /**
-     * The meta object literal for the '<em><b>Items</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ROOT__ITEMS = eINSTANCE.getRoot_Items();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.LineImpl <em>Line</em>}' class.
@@ -1260,6 +1314,14 @@ public interface FormattertestlanguagePackage extends EPackage
     EClass TEST_LINEWRAP = eINSTANCE.getTestLinewrap();
 
     /**
+     * The meta object literal for the '<em><b>Items</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TEST_LINEWRAP__ITEMS = eINSTANCE.getTestLinewrap_Items();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestLinewrapMinMaxImpl <em>Test Linewrap Min Max</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1268,6 +1330,14 @@ public interface FormattertestlanguagePackage extends EPackage
      * @generated
      */
     EClass TEST_LINEWRAP_MIN_MAX = eINSTANCE.getTestLinewrapMinMax();
+
+    /**
+     * The meta object literal for the '<em><b>Items</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TEST_LINEWRAP_MIN_MAX__ITEMS = eINSTANCE.getTestLinewrapMinMax_Items();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestIndentationImpl <em>Test Indentation</em>}' class.
@@ -1286,6 +1356,14 @@ public interface FormattertestlanguagePackage extends EPackage
      * @generated
      */
     EReference TEST_INDENTATION__SUB = eINSTANCE.getTestIndentation_Sub();
+
+    /**
+     * The meta object literal for the '<em><b>Items</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TEST_INDENTATION__ITEMS = eINSTANCE.getTestIndentation_Items();
 
     /**
      * The meta object literal for the '<em><b>Semi</b></em>' attribute feature.
@@ -1438,6 +1516,24 @@ public interface FormattertestlanguagePackage extends EPackage
      * @generated
      */
     EAttribute DATATYPES__VAL3 = eINSTANCE.getDatatypes_Val3();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.WrappingDataTypeTestImpl <em>Wrapping Data Type Test</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.WrappingDataTypeTestImpl
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getWrappingDataTypeTest()
+     * @generated
+     */
+    EClass WRAPPING_DATA_TYPE_TEST = eINSTANCE.getWrappingDataTypeTest();
+
+    /**
+     * The meta object literal for the '<em><b>Datatype</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute WRAPPING_DATA_TYPE_TEST__DATATYPE = eINSTANCE.getWrappingDataTypeTest_Datatype();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enum1 <em>Enum1</em>}' enum.

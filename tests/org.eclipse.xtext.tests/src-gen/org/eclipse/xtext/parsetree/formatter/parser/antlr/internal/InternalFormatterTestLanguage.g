@@ -111,6 +111,16 @@ ruleRoot returns [EObject current=null]
         $current = $this_TestLinewrapMinMax_3.current; 
         afterParserOrEnumRuleCall();
     }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getRootAccess().getWrappingDataTypeTestParserRuleCall_1_3()); 
+    }
+    this_WrappingDataTypeTest_4=ruleWrappingDataTypeTest
+    { 
+        $current = $this_WrappingDataTypeTest_4.current; 
+        afterParserOrEnumRuleCall();
+    }
 ))
 ;
 
@@ -1364,6 +1374,81 @@ ruleDatatypes returns [EObject current=null]
     }
 )
 ;
+
+
+
+
+
+// Entry rule entryRuleWrappingDataTypeTest
+entryRuleWrappingDataTypeTest returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getWrappingDataTypeTestRule()); }
+	 iv_ruleWrappingDataTypeTest=ruleWrappingDataTypeTest 
+	 { $current=$iv_ruleWrappingDataTypeTest.current; } 
+	 EOF 
+;
+
+// Rule WrappingDataTypeTest
+ruleWrappingDataTypeTest returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='wrappingdt' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getWrappingDataTypeTestAccess().getWrappingdtKeyword_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getWrappingDataTypeTestAccess().getDatatypeWrappingDataTypeParserRuleCall_1_0()); 
+	    }
+		lv_datatype_1_0=ruleWrappingDataType		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getWrappingDataTypeTestRule());
+	        }
+       		set(
+       			$current, 
+       			"datatype",
+        		lv_datatype_1_0, 
+        		"WrappingDataType");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_2='kw1' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getWrappingDataTypeTestAccess().getKw1Keyword_2());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleWrappingDataType
+entryRuleWrappingDataType returns [String current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getWrappingDataTypeRule()); } 
+	 iv_ruleWrappingDataType=ruleWrappingDataType 
+	 { $current=$iv_ruleWrappingDataType.current.getText(); }  
+	 EOF 
+;
+
+// Rule WrappingDataType
+ruleWrappingDataType returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(    this_ID_0=RULE_ID    {
+		$current.merge(this_ID_0);
+    }
+
+    { 
+    newLeafNode(this_ID_0, grammarAccess.getWrappingDataTypeAccess().getIDTerminalRuleCall()); 
+    }
+)+
+    ;
 
 
 

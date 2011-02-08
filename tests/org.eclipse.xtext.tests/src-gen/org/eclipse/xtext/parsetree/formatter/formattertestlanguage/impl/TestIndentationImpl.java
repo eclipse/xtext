@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguagePackage;
+import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Line;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentation;
 
 /**
@@ -31,6 +32,7 @@ import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentati
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestIndentationImpl#getSub <em>Sub</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestIndentationImpl#getItems <em>Items</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestIndentationImpl#isSemi <em>Semi</em>}</li>
  * </ul>
  * </p>
@@ -48,6 +50,16 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
    * @ordered
    */
   protected EList<TestIndentation> sub;
+
+  /**
+   * The cached value of the '{@link #getItems() <em>Items</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getItems()
+   * @generated
+   * @ordered
+   */
+  protected EList<Line> items;
 
   /**
    * The default value of the '{@link #isSemi() <em>Semi</em>}' attribute.
@@ -109,6 +121,20 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<Line> getItems()
+  {
+    if (items == null)
+    {
+      items = new EObjectContainmentEList<Line>(Line.class, this, FormattertestlanguagePackage.TEST_INDENTATION__ITEMS);
+    }
+    return items;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public boolean isSemi()
   {
     return semi;
@@ -139,6 +165,8 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
     {
       case FormattertestlanguagePackage.TEST_INDENTATION__SUB:
         return ((InternalEList<?>)getSub()).basicRemove(otherEnd, msgs);
+      case FormattertestlanguagePackage.TEST_INDENTATION__ITEMS:
+        return ((InternalEList<?>)getItems()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -155,6 +183,8 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
     {
       case FormattertestlanguagePackage.TEST_INDENTATION__SUB:
         return getSub();
+      case FormattertestlanguagePackage.TEST_INDENTATION__ITEMS:
+        return getItems();
       case FormattertestlanguagePackage.TEST_INDENTATION__SEMI:
         return isSemi();
     }
@@ -176,6 +206,10 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
         getSub().clear();
         getSub().addAll((Collection<? extends TestIndentation>)newValue);
         return;
+      case FormattertestlanguagePackage.TEST_INDENTATION__ITEMS:
+        getItems().clear();
+        getItems().addAll((Collection<? extends Line>)newValue);
+        return;
       case FormattertestlanguagePackage.TEST_INDENTATION__SEMI:
         setSemi((Boolean)newValue);
         return;
@@ -196,6 +230,9 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
       case FormattertestlanguagePackage.TEST_INDENTATION__SUB:
         getSub().clear();
         return;
+      case FormattertestlanguagePackage.TEST_INDENTATION__ITEMS:
+        getItems().clear();
+        return;
       case FormattertestlanguagePackage.TEST_INDENTATION__SEMI:
         setSemi(SEMI_EDEFAULT);
         return;
@@ -215,6 +252,8 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
     {
       case FormattertestlanguagePackage.TEST_INDENTATION__SUB:
         return sub != null && !sub.isEmpty();
+      case FormattertestlanguagePackage.TEST_INDENTATION__ITEMS:
+        return items != null && !items.isEmpty();
       case FormattertestlanguagePackage.TEST_INDENTATION__SEMI:
         return semi != SEMI_EDEFAULT;
     }
