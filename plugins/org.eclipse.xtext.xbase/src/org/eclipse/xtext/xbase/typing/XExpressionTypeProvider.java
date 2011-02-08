@@ -62,8 +62,7 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider;
-import org.eclipse.xtext.xbase.functions.FunctionConversion;
-import org.eclipse.xtext.xbase.impl.AbstractFeatureCallToJavaMapping;
+import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -77,10 +76,16 @@ public class XExpressionTypeProvider extends AbstractXExpressionTypeProvider {
 	private TypesService typesService;
 
 	@Inject
-	private IJvmTypeConformanceComputer typeConformanceComputer;
-
+	private TypeReferences typeReferences;
+	
+	@Inject
+	private Primitives primitives;
+	
 	@Inject
 	private TypesFactory factory;
+
+	@Inject
+	private IJvmTypeConformanceComputer typeConformanceComputer;
 
 	@Inject
 	private TypeArgumentContextProvider typeArgCtxProvider;
@@ -92,13 +97,8 @@ public class XExpressionTypeProvider extends AbstractXExpressionTypeProvider {
 	private FunctionConversion functionConverter;
 	
 	@Inject
-	private AbstractFeatureCallToJavaMapping featureCall2javaMapping;
+	private FeatureCallToJavaMapping featureCall2javaMapping;
 	
-	@Inject
-	private TypeReferences typeReferences;
-	
-	@Inject
-	private Primitives primitives;
 	
 	public TypesService getTypesService() {
 		return typesService;

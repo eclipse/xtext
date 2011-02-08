@@ -29,7 +29,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge  Initial contribution and API
  */
-public class JvmFeatureOverridesService {
+public class FeatureOverridesService {
 
     @Inject
     private SuperTypeCollector superTypeCollector;
@@ -37,8 +37,8 @@ public class JvmFeatureOverridesService {
     @Inject
     private TypeArgumentContextProvider contextProvider;
     
-    protected JvmFeatureOverridesService() {}
-    public JvmFeatureOverridesService(SuperTypeCollector superTypeCollector, TypeArgumentContextProvider contextProvider) {
+    protected FeatureOverridesService() {}
+    public FeatureOverridesService(SuperTypeCollector superTypeCollector, TypeArgumentContextProvider contextProvider) {
         this.superTypeCollector = superTypeCollector;
         this.contextProvider = contextProvider;
     }

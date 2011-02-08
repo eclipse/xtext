@@ -67,6 +67,7 @@ public class TypesService {
 		return result;
 	}
 
+	//MOVE TO TypeReferences
 	public JvmTypeReference getTypeForName(Class<?> clazz, EObject context, JvmTypeReference... params) {
 		if (clazz == null)
 			throw new NullPointerException("clazz");
@@ -77,6 +78,7 @@ public class TypesService {
 		return result;
 	}
 
+	//MOVE TO TypeReferences
 	public JvmType findDeclaredType(Class<?> clazz, EObject context) {
 		if (context == null)
 			throw new NullPointerException("context");
@@ -97,6 +99,7 @@ public class TypesService {
 		}
 	}
 
+	//MOVETO FunctionConversion
 	public JvmParameterizedTypeReference createFunctionTypeRef(EObject context, List<JvmTypeReference> parameterTypes,
 			JvmTypeReference returnType) {
 		JvmParameterizedTypeReference ref = factory.createJvmParameterizedTypeReference();
@@ -127,7 +130,17 @@ public class TypesService {
 		}
 		return ref;
 	}
+	
+	protected Class<?> loadFunctionClass(String simpleFunctionName) {
+		try {
+			return Functions.class.getClassLoader().loadClass(
+					Functions.class.getCanonicalName() + "$" + simpleFunctionName);
+		} catch (ClassNotFoundException e) {
+			throw new WrappedException(e);
+		}
+	}
 
+	//MOVETO Primitives
 	protected JvmTypeReference toObjectReference(JvmTypeReference xTypeRef) {
 		if (primitives.isPrimitive(xTypeRef)) {
 			JvmType wrapperType = primitives.getWrapperType((JvmPrimitiveType) xTypeRef.getType());
@@ -138,15 +151,7 @@ public class TypesService {
 		return xTypeRef;
 	}
 
-	protected Class<?> loadFunctionClass(String simpleFunctionName) {
-		try {
-			return Functions.class.getClassLoader().loadClass(
-					Functions.class.getCanonicalName() + "$" + simpleFunctionName);
-		} catch (ClassNotFoundException e) {
-			throw new WrappedException(e);
-		}
-	}
-
+	//MOVE is* toTypeReferences (make generic)
 	public boolean isVoid(JvmTypeReference typeRef) {
 		if (typeRef != null) {
 			String typeName = typeRef.getCanonicalName();

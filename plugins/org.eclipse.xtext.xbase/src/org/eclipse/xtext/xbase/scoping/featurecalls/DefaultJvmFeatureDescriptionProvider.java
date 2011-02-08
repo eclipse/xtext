@@ -12,7 +12,7 @@ import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.util.JvmVisibilityService;
+import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.IAcceptor;
@@ -25,9 +25,9 @@ import com.google.inject.Inject;
 public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescriptionProvider, IFeaturesForTypeProvider {
 	
 	@Inject
-	protected JvmVisibilityService visibilityService;
+	protected VisibilityService visibilityService;
 	
-	public void setVisibilityService(JvmVisibilityService visibilityService) {
+	public void setVisibilityService(VisibilityService visibilityService) {
 		this.visibilityService = visibilityService;
 	}
 	

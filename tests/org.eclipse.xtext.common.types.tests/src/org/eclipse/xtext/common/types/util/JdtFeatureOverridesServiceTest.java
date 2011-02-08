@@ -16,7 +16,7 @@ import com.google.inject.Module;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class JdtJvmFeatureOverridesServiceTest extends AbstractJvmFeatureOverridesServiceTest {
+public class JdtFeatureOverridesServiceTest extends AbstractFeatureOverridesServiceTest {
 
 	@Override
 	protected Module getModule() {

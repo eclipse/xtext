@@ -30,7 +30,7 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
-import org.eclipse.xtext.xbase.functions.FunctionConversion;
+import org.eclipse.xtext.xbase.typing.FunctionConversion;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
 
 import com.google.common.base.Predicate;

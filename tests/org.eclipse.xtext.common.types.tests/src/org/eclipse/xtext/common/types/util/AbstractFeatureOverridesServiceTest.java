@@ -35,12 +35,12 @@ import com.google.inject.Module;
 /**
  * @author Sven Efftinge  Initial contribution and API
  */
-public abstract class AbstractJvmFeatureOverridesServiceTest extends TestCase {
+public abstract class AbstractFeatureOverridesServiceTest extends TestCase {
     
     private IJvmTypeProvider typeProvider;
     private JvmTypeReferences typeRefs;
 	@Inject
-    private JvmFeatureOverridesService service;
+    private FeatureOverridesService service;
 
     @Override
     protected void setUp() throws Exception {

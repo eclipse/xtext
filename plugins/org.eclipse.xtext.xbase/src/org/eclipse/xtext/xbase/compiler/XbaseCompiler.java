@@ -32,8 +32,8 @@ import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
-import org.eclipse.xtext.xbase.functions.FunctionConversion;
 import org.eclipse.xtext.xbase.lib.Objects;
+import org.eclipse.xtext.xbase.typing.FunctionConversion;
 import org.eclipse.xtext.xbase.typing.TypesService;
 
 import com.google.inject.Inject;

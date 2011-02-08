@@ -48,7 +48,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-public class DefaultJvmTypeConformanceComputer implements IJvmTypeConformanceComputer{
+public class TypeConformanceComputer implements IJvmTypeConformanceComputer{
 
 	private PolymorphicDispatcher<Boolean> isConformantDispatcher = 
 		PolymorphicDispatcher.createForSingleTarget("_isConformant", 2, 4, this);
