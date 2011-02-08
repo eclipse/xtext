@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.impl;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EObject;
@@ -28,31 +25,35 @@ public class TransientValueService implements org.eclipse.xtext.serializer.ITran
 	protected ITransientValueService legacy;
 
 	protected boolean defaultValueIsSerializeable(EStructuralFeature feature) {
+		// TODO: this needs a generic implementation
 		if (feature instanceof EAttribute) {
 			return feature.getEType() == EcorePackage.eINSTANCE.getEInt() || feature.getEType() instanceof EEnum;
 		}
 		return false;
 	}
 
-	@SuppressWarnings("unchecked")
-	public <T> List<T> getNonTransientValues(EObject semanticObject, EStructuralFeature multiValueFeature) {
-		if (multiValueFeature.isTransient())
-			return Collections.emptyList();
-		return (List<T>) semanticObject.eGet(multiValueFeature);
+	public ListTransient isListTransient(EObject semanitcObject, EStructuralFeature feature) {
+		if (legacy.isCheckElementsIndividually(semanitcObject, feature))
+			return ListTransient.SOME;
+		if (legacy.isTransient(semanitcObject, feature, -1))
+			return ListTransient.YES;
+		else
+			return ListTransient.NO;
 	}
 
-	public boolean isOptional(EObject semanticObject, EStructuralFeature singelValueFeature) {
-		return semanticObject.eIsSet(singelValueFeature);
+	public boolean isValueInListTransient(EObject semanitcObject, int index, EStructuralFeature feature) {
+		return legacy.isTransient(semanitcObject, feature, index);
 	}
 
-	public boolean isTransient(EObject semanticObject, EStructuralFeature singelValueFeature) {
-		if (singelValueFeature.isTransient())
-			return true;
-		if (defaultValueIsSerializeable(singelValueFeature))
-			return false;
-		if (legacy.isTransient(semanticObject, singelValueFeature, 0))
-			return true;
-		return !semanticObject.eIsSet(singelValueFeature);
+	public ValueTransient isValueTransient(EObject semanitcObject, EStructuralFeature feature) {
+		if (feature.isTransient())
+			return ValueTransient.YES;
+		boolean isSet = semanitcObject.eIsSet(feature);
+		if (defaultValueIsSerializeable(feature) && !isSet)
+			return ValueTransient.PREFERABLY;
+		if (legacy.isTransient(semanitcObject, feature, 0))
+			return ValueTransient.YES;
+		return isSet ? ValueTransient.NO : ValueTransient.YES;
 	}
 
 }

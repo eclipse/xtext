@@ -25,6 +25,9 @@ import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.AssignmentDependencyKind;
@@ -32,10 +35,15 @@ import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintElement;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IFeatureInfo;
+import org.eclipse.xtext.serializer.ISemanticNodeProvider;
+import org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.ITransientValueService;
+import org.eclipse.xtext.serializer.ITransientValueService.ListTransient;
+import org.eclipse.xtext.serializer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -49,7 +57,7 @@ import com.google.inject.internal.Join;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class GenericSequencer extends AbstractSequencer {
+public class GenericSequencer implements ISemanticSequencer {
 
 	protected abstract class Allocation {
 
@@ -74,14 +82,17 @@ public class GenericSequencer extends AbstractSequencer {
 	protected class AllocationValue extends Allocation {
 		protected Object value;
 
-		public AllocationValue(Object value) {
+		protected INode node;
+
+		public AllocationValue(Object value, INode node) {
 			super();
 			this.value = value;
+			this.node = node;
 		}
 
 		@Override
 		public void collectGrammarValuePairs(IConstraintElement constraint, ISemanticSequenceAcceptor acceptor) {
-			acceptSemantic(acceptor, constraint, value);
+			acceptSemantic(acceptor, constraint, value, node);
 			//			result.add(newPair(constraint, value));
 		}
 
@@ -139,14 +150,14 @@ public class GenericSequencer extends AbstractSequencer {
 		}
 	}
 
-	protected class AssignedAllocationValue extends AllocationValue {
-		protected EStructuralFeature feature;
-
-		public AssignedAllocationValue(EStructuralFeature feature, Object value) {
-			super(value);
-			this.feature = feature;
-		}
-	}
+	//	protected class AssignedAllocationValue extends AllocationValue {
+	//		protected EStructuralFeature feature;
+	//
+	//		public AssignedAllocationValue(EStructuralFeature feature, Object value) {
+	//			super(value);
+	//			this.feature = feature;
+	//		}
+	//	}
 
 	protected abstract class Feature2Assignment {
 		public abstract IFeatureInfo getFeature();
@@ -506,6 +517,9 @@ public class GenericSequencer extends AbstractSequencer {
 	@Inject
 	protected ITokenSerializer.IValueSerializer valueSerializer;
 
+	@Inject
+	protected ISemanticNodeProvider nodeProvider;
+
 	public void createSequence(EObject context, EObject semanticObject, ISemanticSequenceAcceptor sequenceAcceptor,
 			ISerializationDiagnostic.Acceptor errorAcceptor) {
 		initConstraints();
@@ -516,7 +530,8 @@ public class GenericSequencer extends AbstractSequencer {
 					constraintContexts, grammarAccess.getGrammar()));
 			return;
 		}
-		Feature2Assignment[] values = createValues(semanticObject, constraint);
+		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
+		Feature2Assignment[] values = createValues(semanticObject, constraint, nodes);
 		//		System.out.println("Values: " + f2aToStr(constraint.getBody(), values));
 		applydeterministicQuantities(constraint, values);
 		//		System.out.println("Values (Disambiguated): " + f2aToStr(constraint.getBody(), values));
@@ -692,54 +707,125 @@ public class GenericSequencer extends AbstractSequencer {
 	//			}
 	//	}
 
-	protected Feature2Assignment[] createValues(EObject semanticObject, IConstraint constraint) {
+	protected Feature2Assignment[] createValues(EObject semanticObject, IConstraint constraint,
+			INodesForEObjectProvider nodes) {
 		Feature2Assignment[] result = new Feature2Assignment[constraint.getAssignments().length];
 		for (IFeatureInfo feature : constraint.getSingleAssignementFeatures()) {
 			if (feature.getFeature().isMany()) {
-				List<AllocationValue> allocs = getNonTransientValuesForMVFeature(semanticObject, feature);
+				List<AllocationValue> allocs = getNonTransientValuesForMVFeature(semanticObject, feature, nodes);
 				if (!allocs.isEmpty()) {
 					IConstraintElement ass = feature.getAssignments()[0];
 					result[ass.getAssignmentID()] = new MVFeature2AssignmentUnambiguous(ass, allocs);
 				}
 			} else {
-				AllocationValue alloc = getNonTransientValuesForSVFeature(semanticObject, feature);
-				if (alloc != null) {
-					boolean optional = transientValueService.isOptional(feature.getFeature(), feature.getFeature());
+				ValueTransient trans = transientValueService.isValueTransient(semanticObject, feature.getFeature());
+				if (trans != ValueTransient.YES) {
+					Object value = semanticObject.eGet(feature.getFeature());
+					INode node = nodes.getNodeForSingelValue(feature.getFeature(), value);
 					IConstraintElement ass = feature.getAssignments()[0];
-					result[ass.getAssignmentID()] = new SVFeature2AssignmentUnambiguous(ass, optional, alloc);
+					AllocationValue alloc = new AllocationValue(value, node);
+					result[ass.getAssignmentID()] = new SVFeature2AssignmentUnambiguous(ass,
+							trans == ValueTransient.PREFERABLY, alloc);
 				}
 			}
 		}
 		for (IFeatureInfo feature : constraint.getMultiAssignementFeatures()) {
 			if (feature.getFeature().isMany()) {
-				List<AllocationValue> allocs = getNonTransientValuesForMVFeature(semanticObject, feature);
+				List<AllocationValue> allocs = getNonTransientValuesForMVFeature(semanticObject, feature, nodes);
 				if (!allocs.isEmpty())
 					createValues(feature, allocs, result);
 			} else {
-				AllocationValue alloc = getNonTransientValuesForSVFeature(semanticObject, feature);
-				if (alloc != null) {
-					boolean optional = transientValueService.isOptional(feature.getFeature(), feature.getFeature());
-					createValues(semanticObject, feature, optional, alloc, result);
+				ValueTransient trans = transientValueService.isValueTransient(semanticObject, feature.getFeature());
+				if (trans != ValueTransient.YES) {
+					Object value = semanticObject.eGet(feature.getFeature());
+					INode node = nodes.getNodeForSingelValue(feature.getFeature(), value);
+					AllocationValue alloc = new AllocationValue(value, node);
+					createValues(semanticObject, feature, trans == ValueTransient.PREFERABLY, alloc, result);
 				}
 			}
 		}
 		return result;
 	}
 
-	protected AllocationValue getNonTransientValuesForSVFeature(EObject semanticObject, IFeatureInfo feature) {
-		if (!transientValueService.isTransient(semanticObject, feature.getFeature())) {
-			Object value = semanticObject.eGet(feature.getFeature());
-			return new AssignedAllocationValue(feature.getFeature(), value);
+	protected boolean acceptSemantic(ISemanticSequenceAcceptor out, IConstraintElement constr, Object value, INode node) {
+		switch (constr.getType()) {
+			case ASSIGNED_ACTION_CALL:
+				out.acceptAssignedAction(constr.getAction(), (EObject) value);
+				return true;
+			case ASSIGNED_PARSER_RULE_CALL:
+				out.acceptAssignedParserRuleCall(constr.getRuleCall(), (EObject) value);
+				return true;
+			case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
+				out.acceptAssignedCrossRefDatatype(constr.getRuleCall(), (EObject) value, (ICompositeNode) node);
+				return true;
+			case ASSIGNED_CROSSREF_TERMINAL_RULE_CALL:
+				out.acceptAssignedCrossRefTerminal(constr.getRuleCall(), (EObject) value, (ILeafNode) node);
+				return true;
+			case ASSIGNED_CROSSREF_KEYWORD:
+				out.acceptAssignedCrossRefKeyword(constr.getKeyword(), (EObject) value, (ILeafNode) node);
+				return true;
+			case ASSIGNED_CROSSREF_ENUM_RULE_CALL:
+				out.acceptAssignedCrossRefEnum(constr.getRuleCall(), (EObject) value, (ICompositeNode) node);
+				return true;
+			case ASSIGNED_DATATYPE_RULE_CALL:
+				out.acceptAssignedDatatype(constr.getRuleCall(), value, (ICompositeNode) node);
+				return true;
+			case ASSIGNED_ENUM_RULE_CALL:
+				out.acceptAssignedEnum(constr.getRuleCall(), value, (ICompositeNode) node);
+				return true;
+			case ASSIGNED_TERMINAL_RULE_CALL:
+				out.acceptAssignedTerminal(constr.getRuleCall(), value, (ILeafNode) node);
+				return true;
+			case ASSIGNED_KEYWORD:
+				out.acceptAssignedKeyword(constr.getKeyword(), (String) value, (ILeafNode) node);
+				return true;
+			case ASSIGNED_BOOLEAN_KEYWORD:
+				out.acceptAssignedKeyword(constr.getKeyword(), (Boolean) value, (ILeafNode) node);
+				return true;
+			case ALTERNATIVE:
+			case GROUP:
+			case UNASSIGNED_DATATYPE_RULE_CALL:
+			case UNASSIGNED_TERMINAL_RULE_CALL:
+				return false;
 		}
-		return null;
+		return false;
 	}
 
-	protected List<AllocationValue> getNonTransientValuesForMVFeature(EObject semanticObject, IFeatureInfo feature) {
-		Iterable<Object> values = transientValueService.getNonTransientValues(semanticObject, feature.getFeature());
-		List<AllocationValue> allocs = Lists.newArrayList();
-		for (Object v : values)
-			allocs.add(new AssignedAllocationValue(feature.getFeature(), v));
-		return allocs;
+	//	protected AllocationValue getNonTransientValuesForSVFeature(EObject semanticObject, IFeatureInfo feature,
+	//			INodesForEObjectProvider nodes) {
+	//		if (transientValueService.isValueTransient(semanticObject, feature.getFeature()) != ValueTransient.NO) {
+	//			Object value = semanticObject.eGet(feature.getFeature());
+	//			INode node = nodes.getNodeForSingelValue(feature.getFeature(), value);
+	//			return new AllocationValue(value, node);
+	//		}
+	//		return null;
+	//	}
+
+	protected List<AllocationValue> getNonTransientValuesForMVFeature(EObject semanticObject, IFeatureInfo feature,
+			INodesForEObjectProvider nodes) {
+		switch (transientValueService.isListTransient(semanticObject, feature.getFeature())) {
+			case NO:
+				List<AllocationValue> allocs1 = Lists.newArrayList();
+				List<?> values1 = (List<?>) semanticObject.eGet(feature.getFeature());
+				for (int i = 0; i < values1.size(); i++) {
+					Object value = values1.get(i);
+					INode node = nodes.getNodeForMultiValue(feature.getFeature(), i, i, value);
+					allocs1.add(new AllocationValue(value, node));
+				}
+				return allocs1;
+			case SOME:
+				List<AllocationValue> allocs2 = Lists.newArrayList();
+				List<?> values2 = (List<?>) semanticObject.eGet(feature.getFeature());
+				for (int i = 0, j = 0; i < values2.size(); i++)
+					if (!transientValueService.isValueInListTransient(semanticObject, i, feature.getFeature())) {
+						Object value = values2.get(i);
+						INode node = nodes.getNodeForMultiValue(feature.getFeature(), i, j++, value);
+						allocs2.add(new AllocationValue(value, node));
+					}
+				return allocs2;
+			case YES:
+		}
+		return Collections.emptyList();
 	}
 
 	protected void createValues(EObject semanticObj, IFeatureInfo feature, boolean optional, AllocationValue value,

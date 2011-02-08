@@ -15,6 +15,8 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.serializer.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.ISerializationDiagnostic;
@@ -58,44 +60,44 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer 
 			delegate.acceptAssignedAction(action, semanticChild);
 		}
 
-		public void acceptAssignedCrossRefDatatype(RuleCall datatypeRC, EObject value) {
+		public void acceptAssignedCrossRefDatatype(RuleCall datatypeRC, EObject value, ICompositeNode node) {
 			previousState = emitForElement(previousState, datatypeRC, stack, delegate, errorAcceptor);
-			delegate.acceptAssignedCrossRefDatatype(datatypeRC, value);
+			delegate.acceptAssignedCrossRefDatatype(datatypeRC, value, node);
 		}
 
-		public void acceptAssignedCrossRefEnum(RuleCall enumRC, EObject value) {
+		public void acceptAssignedCrossRefEnum(RuleCall enumRC, EObject value, ICompositeNode node) {
 			previousState = emitForElement(previousState, enumRC, stack, delegate, errorAcceptor);
-			delegate.acceptAssignedCrossRefEnum(enumRC, value);
+			delegate.acceptAssignedCrossRefEnum(enumRC, value, node);
 		}
 
-		public void acceptAssignedCrossRefKeyword(Keyword keyword, EObject value) {
+		public void acceptAssignedCrossRefKeyword(Keyword keyword, EObject value, ILeafNode node) {
 			previousState = emitForElement(previousState, keyword, stack, delegate, errorAcceptor);
-			delegate.acceptAssignedCrossRefKeyword(keyword, value);
+			delegate.acceptAssignedCrossRefKeyword(keyword, value, node);
 		}
 
-		public void acceptAssignedCrossRefTerminal(RuleCall terminalRC, EObject value) {
+		public void acceptAssignedCrossRefTerminal(RuleCall terminalRC, EObject value, ILeafNode node) {
 			previousState = emitForElement(previousState, terminalRC, stack, delegate, errorAcceptor);
-			delegate.acceptAssignedCrossRefTerminal(terminalRC, value);
+			delegate.acceptAssignedCrossRefTerminal(terminalRC, value, node);
 		}
 
-		public void acceptAssignedDatatype(RuleCall datatypeRC, Object value) {
+		public void acceptAssignedDatatype(RuleCall datatypeRC, Object value, ICompositeNode node) {
 			previousState = emitForElement(previousState, datatypeRC, stack, delegate, errorAcceptor);
-			delegate.acceptAssignedDatatype(datatypeRC, value);
+			delegate.acceptAssignedDatatype(datatypeRC, value, node);
 		}
 
-		public void acceptAssignedEnum(RuleCall enumRC, Object value) {
+		public void acceptAssignedEnum(RuleCall enumRC, Object value, ICompositeNode node) {
 			previousState = emitForElement(previousState, enumRC, stack, delegate, errorAcceptor);
-			delegate.acceptAssignedEnum(enumRC, value);
+			delegate.acceptAssignedEnum(enumRC, value, node);
 		}
 
-		public void acceptAssignedKeyword(Keyword keyword, Boolean value) {
+		public void acceptAssignedKeyword(Keyword keyword, Boolean value, ILeafNode node) {
 			previousState = emitForElement(previousState, keyword, stack, delegate, errorAcceptor);
-			delegate.acceptAssignedKeyword(keyword, value);
+			delegate.acceptAssignedKeyword(keyword, value, node);
 		}
 
-		public void acceptAssignedKeyword(Keyword keyword, String value) {
+		public void acceptAssignedKeyword(Keyword keyword, String value, ILeafNode node) {
 			previousState = emitForElement(previousState, keyword, stack, delegate, errorAcceptor);
-			delegate.acceptAssignedKeyword(keyword, value);
+			delegate.acceptAssignedKeyword(keyword, value, node);
 		}
 
 		public void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild) {
@@ -103,9 +105,9 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer 
 			delegate.acceptAssignedParserRuleCall(ruleCall, semanticChild);
 		}
 
-		public void acceptAssignedTerminal(RuleCall terminalRC, Object value) {
+		public void acceptAssignedTerminal(RuleCall terminalRC, Object value, ILeafNode node) {
 			previousState = emitForElement(previousState, terminalRC, stack, delegate, errorAcceptor);
-			delegate.acceptAssignedTerminal(terminalRC, value);
+			delegate.acceptAssignedTerminal(terminalRC, value, node);
 		}
 
 		public void finish() {

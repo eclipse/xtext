@@ -1,7 +1,5 @@
 package org.eclipse.xtext.serializer;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.serializer.impl.TransientValueService;
@@ -28,20 +26,17 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(TransientValueService.class)
 public interface ITransientValueService {
 
-	/**
-	 * @return All values contained by multiValueFeature that should be serialized.
-	 */
-	<T> List<T> getNonTransientValues(EObject semanticObject, EStructuralFeature multiValueFeature);
+	enum ListTransient {
+		NO, SOME, YES
+	}
 
-	/**
-	 * @return true, if the value of singleValueFeature can be omitted during serialization. It is recommended to mark
-	 *         values as optional if omitting them doesn't lead to the loss of semantic information. For example, if the
-	 *         values equals its default value.
-	 */
-	boolean isOptional(EObject semanticObject, EStructuralFeature singelValueFeature);
+	enum ValueTransient {
+		NO, PREFERABLY, YES
+	}
 
-	/**
-	 * @return true, if the value of singleValueFeature must not be serialized.
-	 */
-	boolean isTransient(EObject semanticObject, EStructuralFeature singelValueFeature);
+	public ListTransient isListTransient(EObject semanitcObject, EStructuralFeature feature);
+
+	public boolean isValueInListTransient(EObject semanitcObject, int index, EStructuralFeature feature);
+
+	public ValueTransient isValueTransient(EObject semanitcObject, EStructuralFeature feature);
 }

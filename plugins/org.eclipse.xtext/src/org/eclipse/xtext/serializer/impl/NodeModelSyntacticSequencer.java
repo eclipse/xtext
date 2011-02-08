@@ -19,7 +19,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.serializer.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.ISerializationDiagnostic.Acceptor;
 
-public class NodeModelSyntacticSequencer extends AbstractSequencer {
+public class NodeModelSyntacticSequencer extends AbstractNodeModelSequencer {
 
 	public void createSequence(EObject context, EObject semanticObject, ISemanticSequenceAcceptor acceptor,
 			Acceptor errorAcceptor) {
@@ -34,9 +34,9 @@ public class NodeModelSyntacticSequencer extends AbstractSequencer {
 				if (rc.getRule() == context)
 					continue;
 				if (rc.getRule().getType().getClassifier() instanceof EClass)
-					acceptSemantic(acceptor, rc, node.getSemanticElement());
+					acceptSemantic(acceptor, rc, node.getSemanticElement(), node);
 				else
-					acceptSemantic(acceptor, rc, NodeModelUtils.getTextWithoutHidden(node));
+					acceptSemantic(acceptor, rc, NodeModelUtils.getTextWithoutHidden(node), node);
 				//				if (node.getSemanticElement() != semanticObject) {
 				//					ti.prune();
 				//					continue;
@@ -44,11 +44,11 @@ public class NodeModelSyntacticSequencer extends AbstractSequencer {
 			} else if (ge instanceof Keyword) {
 				Keyword kw = (Keyword) ge;
 				//				if (GrammarUtil.containingAssignment(kw) != null)
-				acceptSemantic(acceptor, kw, node.getText());
+				acceptSemantic(acceptor, kw, node.getText(), node);
 			} else if (ge instanceof Action) {
 				Action a = (Action) ge;
 				//				if (a.getFeature() != null)
-				acceptSemantic(acceptor, a, node.getSemanticElement());
+				acceptSemantic(acceptor, a, node.getSemanticElement(), node);
 				//				if (node.getSemanticElement() != semanticObject) {
 				//					ti.prune();
 				//					continue;
@@ -57,7 +57,7 @@ public class NodeModelSyntacticSequencer extends AbstractSequencer {
 				CrossReference cr = (CrossReference) ge;
 				RuleCall rc = (RuleCall) cr.getTerminal();
 				EReference ref = GrammarUtil.getReference(cr);
-				acceptSemantic(acceptor, rc, node.getSemanticElement().eGet(ref));
+				acceptSemantic(acceptor, rc, node.getSemanticElement().eGet(ref), node);
 			}
 		}
 	}
