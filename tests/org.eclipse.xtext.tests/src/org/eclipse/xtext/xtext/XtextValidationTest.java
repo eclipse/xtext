@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreValidator;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
@@ -40,6 +41,7 @@ import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.validation.AbstractValidationMessageAcceptingTestCase;
 import org.eclipse.xtext.validation.AbstractValidationMessageAcceptor;
 
@@ -109,6 +111,25 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
 		assertNotNull("diag", diag);
 		assertEquals(diag.toString(), 0, diag.getChildren().size());
+	}
+	
+	public void testBug322875_04() throws Exception {
+		String testGrammarOk = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
+				" import 'http://www.eclipse.org/emf/2002/Ecore'  " +
+				"Model returns EClass: name=ID;";
+		String testGrammarWithError = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
+		" import 'platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore'  " +
+		"Model returns EClass: name=ID;";
+		XtextResource resourceOk = getResourceFromString(testGrammarOk);
+		XtextResource resourceError = (XtextResource) resourceOk.getResourceSet().createResource(URI.createURI("unused.xtext"));
+		resourceError.load(new StringInputStream(testGrammarWithError), null);
+		Diagnostic diagOK = Diagnostician.INSTANCE.validate(resourceOk.getContents().get(0));
+		assertNotNull("diag", diagOK);
+		assertEquals(diagOK.toString(), 0, diagOK.getChildren().size());
+		Diagnostic diagError = Diagnostician.INSTANCE.validate(resourceError.getContents().get(0));
+		assertNotNull("diag", diagError);
+		assertEquals(diagError.toString(), 1, diagError.getChildren().size());
+		assertEquals("diag.isError", diagError.getSeverity(), Diagnostic.ERROR);
 	}
 	
 	public void testBug_282852_01() throws Exception {
