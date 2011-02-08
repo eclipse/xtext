@@ -24,7 +24,7 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
-import org.eclipse.xtext.xbase.impl.AbstractFeatureCallToJavaMapping;
+import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
 
 import com.google.inject.Inject;
 
@@ -34,7 +34,7 @@ import com.google.inject.Inject;
 public class FeatureCallCompiler extends LiteralsCompiler {
 
 	@Inject
-	private AbstractFeatureCallToJavaMapping featureCallToJavaMapping;
+	private FeatureCallToJavaMapping featureCallToJavaMapping;
 
 	@Inject
 	private IdentifiableSimpleNameProvider featureNameProvider;

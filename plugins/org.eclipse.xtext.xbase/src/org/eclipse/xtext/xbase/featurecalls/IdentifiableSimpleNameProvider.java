@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.featurecalls;
 
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -50,10 +49,6 @@ public class IdentifiableSimpleNameProvider {
 		if (element instanceof XCasePart) {
 			XCasePart casePart = (XCasePart) element;
 			return getSimpleName((XSwitchExpression)casePart.eContainer());
-		}
-		//TODO move to Xtend2 
-		if (element instanceof JvmDeclaredType) {
-			return "this";
 		}
 		throw new IllegalArgumentException("No name strategy for elements of type "+element.getClass());
 	}

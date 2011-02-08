@@ -16,9 +16,8 @@ import java.util.List;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.DefaultJvmTypeConformanceComputer;
+import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.xbase.functions.FunctionConversion;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
@@ -27,7 +26,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
  */
-public class XbaseTypeConformanceComputer extends DefaultJvmTypeConformanceComputer {
+public class XbaseTypeConformanceComputer extends TypeConformanceComputer {
 	
 	@Inject 
 	private FunctionConversion functionConversion;

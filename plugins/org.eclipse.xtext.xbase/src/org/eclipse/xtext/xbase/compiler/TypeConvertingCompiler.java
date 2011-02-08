@@ -19,9 +19,9 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.functions.FunctionConversion;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.typing.FunctionConversion;
 import org.eclipse.xtext.xbase.typing.TypesService;
 
 import com.google.inject.Inject;

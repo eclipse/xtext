@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.functions;
+package org.eclipse.xtext.xbase.typing;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Maps.*;
@@ -26,11 +26,10 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.util.JvmFeatureOverridesService;
+import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.xbase.lib.Functions;
-import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
 import com.google.common.base.Function;
 import com.google.inject.Inject;
@@ -132,7 +131,7 @@ public class FunctionConversion {
 	}
 
 	@Inject
-	private JvmFeatureOverridesService overridesService;
+	private FeatureOverridesService overridesService;
 
 	public JvmOperation findSingleMethod(JvmTypeReference type) {
 		Iterable<JvmOperation> features = filter(overridesService.getAllJvmFeatures(type), JvmOperation.class);

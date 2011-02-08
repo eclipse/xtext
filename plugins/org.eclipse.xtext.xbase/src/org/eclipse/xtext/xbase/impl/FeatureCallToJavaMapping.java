@@ -20,7 +20,7 @@ import org.eclipse.xtext.xbase.XExpression;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class AbstractFeatureCallToJavaMapping {
+public class FeatureCallToJavaMapping {
 	
 	protected boolean isStaticJavaFeature(JvmIdentifiableElement feature) {
 		if (feature instanceof JvmOperation) {

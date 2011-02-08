@@ -59,7 +59,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
-import org.eclipse.xtext.xbase.impl.AbstractFeatureCallToJavaMapping;
+import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
@@ -117,7 +117,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	private JavaReflectAccess javaReflectAccess;
 	
 	@Inject
-	private AbstractFeatureCallToJavaMapping callToJavaMapping;
+	private FeatureCallToJavaMapping callToJavaMapping;
 	
 	@Inject
 	private IXExpressionTypeProvider typeProvider;

@@ -17,7 +17,8 @@ import com.google.inject.ImplementedBy;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@ImplementedBy(DefaultJvmTypeConformanceComputer.class)
+//TODO DELETE ME
+@ImplementedBy(TypeConformanceComputer.class)
 public interface IJvmTypeConformanceComputer extends ITypeConformanceComputer<JvmTypeReference> {
 
 	/**

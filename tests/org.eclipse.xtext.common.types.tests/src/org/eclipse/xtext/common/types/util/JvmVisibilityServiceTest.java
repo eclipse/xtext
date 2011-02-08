@@ -35,7 +35,7 @@ public class JvmVisibilityServiceTest extends TestCase {
 	private JvmField privateField;
 	private JvmField protectedField;
 	private JvmField publicField;
-	private JvmVisibilityService provider;
+	private VisibilityService provider;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -60,7 +60,7 @@ public class JvmVisibilityServiceTest extends TestCase {
 			}
 		});
 
-		provider = new JvmVisibilityService();
+		provider = new VisibilityService();
 		provider.setSuperTypeCollector(new SuperTypeCollector(TypesFactory.eINSTANCE));
 		provider.setTypesFactory(TypesFactory.eINSTANCE);
 	}

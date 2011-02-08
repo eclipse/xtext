@@ -31,7 +31,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XUnaryOperation;
-import org.eclipse.xtext.xbase.impl.AbstractFeatureCallToJavaMapping;
+import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
 
@@ -69,7 +69,7 @@ public class FeatureCallChecker {
 	private IXExpressionTypeProvider typeProvider;
 	
 	@Inject
-	private AbstractFeatureCallToJavaMapping featureCall2JavaMapping;
+	private FeatureCallToJavaMapping featureCall2JavaMapping;
 
 	public void setTypeProvider(IXExpressionTypeProvider typeProvider) {
 		this.typeProvider = typeProvider;
