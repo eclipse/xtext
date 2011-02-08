@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ecoreInference;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
@@ -26,6 +25,7 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -87,7 +87,7 @@ final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Fu
 
 	@Override
 	public EClassifier caseAlternatives(Alternatives object) {
-		final Set<EClassifier> types = new HashSet<EClassifier>();
+		final Set<EClassifier> types = Sets.newLinkedHashSet();
 		for (AbstractElement group : object.getElements())
 			types.add(doSwitch(group));
 		try {

@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ecoreInference;
 
-import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -27,6 +27,7 @@ import org.eclipse.xtext.util.XtextSwitch;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterators;
+import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -119,10 +120,10 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 
 	}
 
-	protected final HashSet<AbstractRule> visitedRules;
+	protected final Set<AbstractRule> visitedRules;
 
 	protected DatatypeRuleUtil() {
-		this.visitedRules = new HashSet<AbstractRule>();
+		this.visitedRules = Sets.newHashSet();
 	}
 
 	@Override

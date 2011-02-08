@@ -9,7 +9,6 @@
 package org.eclipse.xtext.xtext.ecoreInference;
 
 import java.util.Collection;
-import java.util.LinkedHashSet;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClassifier;
@@ -25,6 +24,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.XtextSwitch;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Sets;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
@@ -38,7 +38,7 @@ public class Xtext2EcoreInterpretationContext {
 
 	private final Function<AbstractElement, EClassifier> classifierCalculator;
 
-	private final Collection<EClassifierInfo> currentTypes = new LinkedHashSet<EClassifierInfo>();
+	private final Collection<EClassifierInfo> currentTypes = Sets.newLinkedHashSet();
 
 	boolean isRuleCallAllowed = true;
 
