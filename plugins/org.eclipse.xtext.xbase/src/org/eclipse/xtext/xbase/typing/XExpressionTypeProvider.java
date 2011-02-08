@@ -125,17 +125,18 @@ public class XExpressionTypeProvider extends AbstractXExpressionTypeProvider {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
 	protected XExpression getExpression(EObject object, EReference reference, int index) {
 		if (index == -1) {
 			return (XExpression)object.eGet(reference, true);
 		} else {
-			return ((List<? extends XExpression>)object.eGet(reference, true)).get(index);
+			List<?> expressions = (List<?>) object.eGet(reference, true);
+			XExpression result = (XExpression) expressions.get(index);
+			return result;
 		}
 	}
 
 	protected JvmTypeReference _expectedType(XMemberFeatureCall expr, EReference reference, int index) {
-		if (expr.getFeature().eIsProxy())
+		if (expr.getFeature() == null || expr.getFeature().eIsProxy())
 			return null;
 		if (reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS ||
 			reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) {
