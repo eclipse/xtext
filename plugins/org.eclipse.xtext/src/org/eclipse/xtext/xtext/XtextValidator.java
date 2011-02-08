@@ -21,16 +21,18 @@ import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreValidator;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
@@ -463,15 +465,15 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		}
 		if (nsUriToImportedMetamodel.isEmpty())
 			return;
-		if (grammar.eResource() == null || grammar.eResource().getResourceSet() == null)
-			return;
 		for(AbstractMetamodelDeclaration declaration: GrammarUtil.allMetamodelDeclarations(grammar)) {
-			if (declaration.eContainer() != grammar) {
-				if (declaration instanceof GeneratedMetamodel) { // checked by another validation rule
+			if (declaration instanceof GeneratedMetamodel) { // checked by another validation rule
+				if (declaration.eContainer() != grammar) {
 					nsUriToImportedMetamodel.remove(declaration.getEPackage().getNsURI());
-				} else {
-					if (declaration.getEPackage() != null && !declaration.getEPackage().eIsProxy()) {
-						EPackage pack = declaration.getEPackage();
+				}
+			} else {
+				if (declaration.getEPackage() != null && !declaration.getEPackage().eIsProxy()) {
+					EPackage pack = declaration.getEPackage();
+					if (declaration.eContainer() != grammar) {
 						if (nsUriToImportedMetamodel.containsKey(pack.getNsURI())) {
 							if (nsUriToImportedMetamodel.get(pack.getNsURI()).getEPackage() != pack) {
 								String location = pack.getNsURI();
@@ -486,27 +488,60 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 							}
 						}
 					}
-				}
-			}
-		}
-		// we are sure that proxies are already resolved thus every referenced EPackage was loaded
-		for(Resource resource: grammar.eResource().getResourceSet().getResources()) {
-			if (!resource.getContents().isEmpty()) {
-				EObject rootContent = resource.getContents().get(0);
-				if (rootContent instanceof EPackage) {
-					EPackage pack = (EPackage) rootContent;
-					if (nsUriToImportedMetamodel.containsKey(pack.getNsURI())) {
-						if (nsUriToImportedMetamodel.get(pack.getNsURI()).getEPackage() != pack) {
-							error("The package '" + pack.getNsURI() + "' was imported more than once from a different location: '" +
-										resource.getURI(), 
-									nsUriToImportedMetamodel.get(pack.getNsURI()),
-									XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE,
-									ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
+					Set<EPackage> referencedEPackages = findReferencedPackages(pack);
+					for(EPackage referencedEPackage: referencedEPackages) {
+						if (referencedEPackage.eResource() != null && nsUriToImportedMetamodel.containsKey(referencedEPackage.getNsURI())) {
+							if (nsUriToImportedMetamodel.get(referencedEPackage.getNsURI()).getEPackage() != referencedEPackage) {
+								error("The referenced package '" + referencedEPackage.getNsURI() + "' was imported from a different location. Here: '" +
+										referencedEPackage.eResource().getURI(), 
+										nsUriToImportedMetamodel.get(pack.getNsURI()),
+										XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE,
+										ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
+							}
 						}
 					}
 				}
 			}
 		}
+	}
+
+	protected Set<EPackage> findReferencedPackages(EPackage pack) {
+		Collection<Collection<Setting>> externalCrossReferences = EcoreUtil.ExternalCrossReferencer.find(pack).values();
+		Set<EPackage> referencedEPackages = Sets.newLinkedHashSet();
+		for(Setting setting: Iterables.concat(externalCrossReferences)) {
+			if (setting.getEStructuralFeature().isMany()) {
+				List<?> referenced = (List<?>) setting.get(true);
+				for(Object object: referenced) {
+					if (object instanceof EObject) {
+						EPackage referencedPack = EcoreUtil2.getContainerOfType((EObject)object, EPackage.class);
+						if (referencedPack != null) {
+							if (object instanceof EDataType) {
+								if (referencedPack != EcorePackage.eINSTANCE) {
+									referencedEPackages.add(referencedPack);	
+								}
+							} else {
+								referencedEPackages.add(referencedPack);
+							}
+						}
+					}
+				}
+			} else {
+				Object referenced = setting.get(true);
+				if (referenced instanceof EObject) {
+					EPackage referencedPack = EcoreUtil2.getContainerOfType((EObject)referenced, EPackage.class);
+					if (referencedPack != null) {
+						if (referenced instanceof EDataType) {
+							if (referencedPack != EcorePackage.eINSTANCE) {
+								referencedEPackages.add(referencedPack);	
+							}
+						} else {
+							referencedEPackages.add(referencedPack);
+						}
+					}
+				}
+			}
+		}
+		return referencedEPackages;
 	}
 
 	@Check
