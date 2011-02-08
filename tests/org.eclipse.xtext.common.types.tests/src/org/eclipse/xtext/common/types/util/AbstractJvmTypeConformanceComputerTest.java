@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
+import static com.google.common.collect.Lists.*;
+
 import java.io.Serializable;
 import java.nio.CharBuffer;
 import java.util.Arrays;
@@ -190,6 +192,21 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 		JvmTypeReference objectType = ref(Object.class);
 		assertTrue(getComputer().isConformant(objectType, interfaceType));
 	}
+	
+	public void testStringAndInteger() throws Exception {
+		JvmTypeReference stringType = ref(String.class);
+		JvmTypeReference integerType = ref(Integer.class);
+		assertFalse(getComputer().isConformant(integerType, stringType));
+		assertFalse(getComputer().isConformant(integerType, stringType));
+	}
+//TODO this is broken, because the common type argument for Comparable<Integer> and Comparable<String> cannot be computed -> StackOverflow
+//	
+//	public void testStringAndInteger_01() throws Exception {
+//		JvmTypeReference stringType = ref(String.class);
+//		JvmTypeReference integerType = ref(Integer.class);
+//		JvmTypeReference superType = getComputer().getCommonSuperType(newArrayList(stringType,integerType));
+//		assertEquals(Object.class.getName(), superType.getCanonicalName());
+//	}
 	
 	/**
 	 * List<? super String> <= List<? super CharSequence> (but not vice versa)
