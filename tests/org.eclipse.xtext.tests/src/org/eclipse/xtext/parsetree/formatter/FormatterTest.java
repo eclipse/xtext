@@ -309,4 +309,31 @@ public class FormatterTest extends AbstractXtextTests {
 		assertPreserved(model);
 	}
 
+	public void testWrappingdatatype1() throws Exception {
+		final String model = "test wrappingdt foo kw1";
+		final String expected = "test wrappingdt foo kw1";
+		assertFormattedPTC(expected, model);
+		assertFormattedNM(expected, model, 0, model.length());
+		assertEqualTokenStreams(model);
+		assertPreserved(model);
+	}
+
+	public void testWrappingdatatype2() throws Exception {
+		final String model = "test wrappingdt foo bar kw1";
+		final String expected = "test wrappingdt foo bar kw1";
+		assertFormattedPTC(expected, model);
+		assertFormattedNM(expected, model, 0, model.length());
+		assertEqualTokenStreams(model);
+		assertPreserved(model);
+	}
+
+	public void testWrappingdatatype3() throws Exception {
+		final String model = "test wrappingdt f\nb kw1";
+		final String expected = "test wrappingdt f\nb kw1";
+		assertFormattedPTC(expected, model);
+		assertFormattedNM(expected, model, 0, model.length());
+		assertEqualTokenStreams(model);
+		assertPreserved(model);
+	}
+
 }
