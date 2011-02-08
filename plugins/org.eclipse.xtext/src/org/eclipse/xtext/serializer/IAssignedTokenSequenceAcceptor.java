@@ -10,26 +10,28 @@ package org.eclipse.xtext.serializer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public interface IAssignedTokenSequenceAcceptor {
-	void acceptAssignedCrossRefDatatype(RuleCall datatypeRC, EObject value);
+	void acceptAssignedCrossRefDatatype(RuleCall datatypeRC, EObject value, ICompositeNode node);
 
-	void acceptAssignedCrossRefKeyword(Keyword keyword, EObject value);
+	void acceptAssignedCrossRefKeyword(Keyword keyword, EObject value, ILeafNode node);
 
-	void acceptAssignedCrossRefTerminal(RuleCall terminalRC, EObject value);
+	void acceptAssignedCrossRefTerminal(RuleCall terminalRC, EObject value, ILeafNode node);
 
-	void acceptAssignedCrossRefEnum(RuleCall enumRC, EObject value);
+	void acceptAssignedCrossRefEnum(RuleCall enumRC, EObject value, ICompositeNode node);
 
-	void acceptAssignedDatatype(RuleCall datatypeRC, Object value);
+	void acceptAssignedDatatype(RuleCall datatypeRC, Object value, ICompositeNode node);
 
-	void acceptAssignedEnum(RuleCall enumRC, Object value);
+	void acceptAssignedEnum(RuleCall enumRC, Object value, ICompositeNode node);
 
-	void acceptAssignedKeyword(Keyword keyword, String value);
+	void acceptAssignedKeyword(Keyword keyword, String value, ILeafNode node);
 
-	void acceptAssignedKeyword(Keyword keyword, Boolean value);
+	void acceptAssignedKeyword(Keyword keyword, Boolean value, ILeafNode node);
 
-	void acceptAssignedTerminal(RuleCall terminalRC, Object value);
+	void acceptAssignedTerminal(RuleCall terminalRC, Object value, ILeafNode node);
 }

@@ -12,6 +12,8 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.serializer.IRecursiveSyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.IRecursiveSyntacticSequencer;
 import org.eclipse.xtext.serializer.ISemanticSequenceAcceptor;
@@ -49,36 +51,36 @@ public class RecursiveSyntacticSequencer implements IRecursiveSyntacticSequencer
 			delegateAcceptor.leaveAssignedAction(action, eobject);
 		}
 
-		public void acceptAssignedCrossRefDatatype(RuleCall datatypeRC, EObject value) {
-			delegateAcceptor.acceptAssignedCrossRefDatatype(datatypeRC, value);
+		public void acceptAssignedCrossRefDatatype(RuleCall datatypeRC, EObject value, ICompositeNode node) {
+			delegateAcceptor.acceptAssignedCrossRefDatatype(datatypeRC, value, node);
 		}
 
-		public void acceptAssignedCrossRefEnum(RuleCall enumRC, EObject value) {
-			delegateAcceptor.acceptAssignedCrossRefEnum(enumRC, value);
+		public void acceptAssignedCrossRefEnum(RuleCall enumRC, EObject value, ICompositeNode node) {
+			delegateAcceptor.acceptAssignedCrossRefEnum(enumRC, value, node);
 		}
 
-		public void acceptAssignedCrossRefKeyword(Keyword keyword, EObject value) {
-			delegateAcceptor.acceptAssignedCrossRefKeyword(keyword, value);
+		public void acceptAssignedCrossRefKeyword(Keyword keyword, EObject value, ILeafNode node) {
+			delegateAcceptor.acceptAssignedCrossRefKeyword(keyword, value, node);
 		}
 
-		public void acceptAssignedCrossRefTerminal(RuleCall terminalRC, EObject value) {
-			delegateAcceptor.acceptAssignedCrossRefTerminal(terminalRC, value);
+		public void acceptAssignedCrossRefTerminal(RuleCall terminalRC, EObject value, ILeafNode node) {
+			delegateAcceptor.acceptAssignedCrossRefTerminal(terminalRC, value, node);
 		}
 
-		public void acceptAssignedDatatype(RuleCall datatypeRC, Object value) {
-			delegateAcceptor.acceptAssignedDatatype(datatypeRC, value);
+		public void acceptAssignedDatatype(RuleCall datatypeRC, Object value, ICompositeNode node) {
+			delegateAcceptor.acceptAssignedDatatype(datatypeRC, value, node);
 		}
 
-		public void acceptAssignedEnum(RuleCall enumRC, Object value) {
-			delegateAcceptor.acceptAssignedEnum(enumRC, value);
+		public void acceptAssignedEnum(RuleCall enumRC, Object value, ICompositeNode node) {
+			delegateAcceptor.acceptAssignedEnum(enumRC, value, node);
 		}
 
-		public void acceptAssignedKeyword(Keyword keyword, Boolean value) {
-			delegateAcceptor.acceptAssignedKeyword(keyword, value);
+		public void acceptAssignedKeyword(Keyword keyword, Boolean value, ILeafNode node) {
+			delegateAcceptor.acceptAssignedKeyword(keyword, value, node);
 		}
 
-		public void acceptAssignedKeyword(Keyword keyword, String value) {
-			delegateAcceptor.acceptAssignedKeyword(keyword, value);
+		public void acceptAssignedKeyword(Keyword keyword, String value, ILeafNode node) {
+			delegateAcceptor.acceptAssignedKeyword(keyword, value, node);
 		}
 
 		public void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild) {
@@ -89,8 +91,8 @@ public class RecursiveSyntacticSequencer implements IRecursiveSyntacticSequencer
 			delegateAcceptor.leaveAssignedParserRuleCall(ruleCall);
 		}
 
-		public void acceptAssignedTerminal(RuleCall terminalRC, Object value) {
-			delegateAcceptor.acceptAssignedTerminal(terminalRC, value);
+		public void acceptAssignedTerminal(RuleCall terminalRC, Object value, ILeafNode node) {
+			delegateAcceptor.acceptAssignedTerminal(terminalRC, value, node);
 		}
 
 		public void acceptUnassignedAction(Action action) {
