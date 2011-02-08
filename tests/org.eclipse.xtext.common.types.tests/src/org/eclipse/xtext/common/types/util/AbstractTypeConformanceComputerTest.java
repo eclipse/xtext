@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
-import static com.google.common.collect.Lists.*;
-
 import java.io.Serializable;
 import java.nio.CharBuffer;
 import java.util.Arrays;
@@ -46,7 +44,7 @@ import com.google.inject.internal.Lists;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
+public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 
 	@Inject
 	private IJvmTypeConformanceComputer computer;

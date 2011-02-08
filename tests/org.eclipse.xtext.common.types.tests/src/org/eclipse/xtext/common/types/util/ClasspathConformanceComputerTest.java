@@ -14,7 +14,7 @@ import com.google.inject.Module;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class ClasspathConformanceComputerTest extends AbstractJvmTypeConformanceComputerTest {
+public class ClasspathConformanceComputerTest extends AbstractTypeConformanceComputerTest {
 
 	@Override
 	protected Module getModule() {
