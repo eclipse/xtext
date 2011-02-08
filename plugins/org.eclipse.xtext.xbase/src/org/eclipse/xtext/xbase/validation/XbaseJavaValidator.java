@@ -31,7 +31,6 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
-import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
@@ -40,7 +39,7 @@ import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
 import com.google.inject.Inject;
 
-@ComposedChecks(validators = FeatureCallValidator.class)
+@ComposedChecks(validators = { FeatureCallValidator.class, EarlyExitValidator.class })
 public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Inject
@@ -122,9 +121,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			XExpression expr = block.getExpressions().get(i);
 			if (expressionHelper.isLiteral(expr)) {
 				error("Literals can only appear as the last element of a block expression", expr, null,
-						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_INNER_EXPRESSION);
-			} else if (expr instanceof XThrowExpression) {
-				error("Throws clause must be last element of a block expression", expr, null,
 						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_INNER_EXPRESSION);
 			}
 		}

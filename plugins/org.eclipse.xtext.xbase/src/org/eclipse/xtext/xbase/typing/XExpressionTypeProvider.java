@@ -54,6 +54,7 @@ import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XIntLiteral;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNullLiteral;
+import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
@@ -300,6 +301,10 @@ public class XExpressionTypeProvider extends AbstractXExpressionTypeProvider {
 	protected JvmTypeReference _expectedType(XThrowExpression expr, EReference reference, int index) {
 		return typesService.getTypeForName(Throwable.class, expr);
 	}
+	
+	protected JvmTypeReference _expectedType(XReturnExpression expr, EReference reference, int index) {
+		return null; // no expectations!
+	}
 
 	protected JvmTypeReference _expectedType(XSwitchExpression expr, EReference reference, int index) {
 		if (reference == XbasePackage.Literals.XSWITCH_EXPRESSION__SWITCH) {
@@ -453,6 +458,11 @@ public class XExpressionTypeProvider extends AbstractXExpressionTypeProvider {
 	}
 
 	protected JvmTypeReference _type(XThrowExpression object, boolean selfContained) {
+		final JvmTypeReference typeForName = getPrimitiveVoid(object);
+		return typeForName;
+	}
+	
+	protected JvmTypeReference _type(XReturnExpression object, boolean selfContained) {
 		final JvmTypeReference typeForName = getPrimitiveVoid(object);
 		return typeForName;
 	}

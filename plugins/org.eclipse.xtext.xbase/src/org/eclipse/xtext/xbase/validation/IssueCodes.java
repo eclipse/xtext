@@ -39,5 +39,7 @@ public class IssueCodes {
 	public static final String INVALID_INNER_EXPRESSION = ISSUE_CODE_PREFIX + "invalid_inner_expression";
 	public static final String FEATURE_CALL_ON_VOID = ISSUE_CODE_PREFIX + "feature_call_on_void";
 	public static final String ABSTRACT_CLASS_INSTANTIATION = ISSUE_CODE_PREFIX + "abstract_class_instantiation";
+	public static final String INVALID_EARLY_EXIT = ISSUE_CODE_PREFIX + "invalid_early_exit";
+	public static final String UNREACHABLE_CODE = ISSUE_CODE_PREFIX + "unreachable_code";
 
 }

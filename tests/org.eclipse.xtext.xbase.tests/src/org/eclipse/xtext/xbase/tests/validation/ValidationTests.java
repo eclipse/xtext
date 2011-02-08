@@ -13,6 +13,7 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 
 import com.google.inject.Inject;
@@ -52,8 +53,24 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		checkInnerExpressionInBlock("[a|a]", XCLOSURE);
 	}
 
-	public void testThrowsInBlock() throws Exception {
-		checkInnerExpressionInBlock("throw new Exception()", XTHROW_EXPRESSION);
+	public void testThrowsInBlock_01() throws Exception {
+		XExpression block = expression("{ throw new Exception() }");
+		helper.assertNoErrors(block);
+	}
+	
+	public void testThrowsInBlock_02() throws Exception {
+		XExpression block = expression("{ throw new Exception() new Object()}");
+		helper.assertError(block, XbasePackage.Literals.XCONSTRUCTOR_CALL, UNREACHABLE_CODE, "unreachable", "expression");
+	}
+	
+	public void testThrowsInBlock_03() throws Exception {
+		XExpression block = expression("{ if (true) throw new Exception() new Object()}");
+		helper.assertNoErrors(block);
+	}
+	
+	public void testThrowsInBlock_04() throws Exception {
+		XExpression block = expression("{ if (true) throw new Exception() else throw new Exception() new Object()}");
+		helper.assertError(block, XbasePackage.Literals.XCONSTRUCTOR_CALL, UNREACHABLE_CODE, "unreachable", "expression");
 	}
 
 	protected void checkInnerExpressionInBlock(String innerExpression, EClass innerExpressionClass) throws Exception {
@@ -62,6 +79,31 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		XExpression invalidExpression = expression("{ " + innerExpression + " " + innerExpression + " }");
 		helper.assertError(invalidExpression, innerExpressionClass, INVALID_INNER_EXPRESSION, "block", "last",
 				"element");
+	}
+	
+	public void testInvalidEarlyExit_01() throws Exception {
+		XExpression expression = expression("try {} finally throw new Exception()");
+		helper.assertError(expression, XbasePackage.Literals.XTHROW_EXPRESSION, INVALID_EARLY_EXIT, "early", "return", "context");
+	}
+	
+	public void testInvalidEarlyExit_02() throws Exception {
+		XExpression expression = expression("if (throw new Exception()) {}");
+		helper.assertError(expression, XbasePackage.Literals.XTHROW_EXPRESSION, INVALID_EARLY_EXIT, "early", "return", "context");
+	}
+	
+	public void testInvalidEarlyExit_03() throws Exception {
+		XExpression expression = expression("try {} finally return null");
+		helper.assertError(expression, XbasePackage.Literals.XRETURN_EXPRESSION, INVALID_EARLY_EXIT, "early", "return", "context");
+	}
+	
+	public void testInvalidEarlyExit_04() throws Exception {
+		XExpression expression = expression("if (return 1) {}");
+		helper.assertError(expression, XbasePackage.Literals.XRETURN_EXPRESSION, INVALID_EARLY_EXIT, "early", "return", "context");
+	}
+	
+	public void testInvalidEarlyExit_05() throws Exception {
+		XExpression expression = expression("if (true) return 1 else throw new Exception()");
+		helper.assertNoErrors(expression);
 	}
 
 	public void testFeatureCallOnVoid() throws Exception {
