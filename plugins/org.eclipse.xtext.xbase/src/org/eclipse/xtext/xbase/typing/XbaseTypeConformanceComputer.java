@@ -49,7 +49,7 @@ public class XbaseTypeConformanceComputer extends TypeConformanceComputer {
 			return functionConversion.isConformant(left, right);
 		if (right.getType() instanceof JvmArrayType) {
 			JvmArrayType array = (JvmArrayType) right.getType();
-			if (isIterable(left.getType())) {
+			if (typesService.isIterable(left)) {
 				JvmTypeReference newLeft = typeReferences.getArgument(left,0);
 				return isConformant(newLeft, array.getComponentType());
 			}
