@@ -84,18 +84,18 @@ public class IdentifiableTypeProvider extends AbstractTypeProvider<JvmTypeRefere
 	protected JvmTypeReference _type(JvmFormalParameter parameter, boolean selfContained) {
 		if (parameter.getParameterType() == null) {
 			if (parameter.eContainer() instanceof XClosure) {
-				final XClosure closure = (XClosure)parameter.eContainer();
 				if (selfContained) {
 					return null;
 				} else {
+					final XClosure closure = (XClosure)parameter.eContainer();
 					JvmTypeReference type = expressionTypeProvider.getExpectedType(closure);
-					int indexOf = closure.getFormalParameters().indexOf(parameter);
 					if (type==null) {
 						return null;
 					}
 					JvmOperation operation = functionConversion.findSingleMethod(type);
-					if (indexOf < operation.getParameters().size()) {
-						JvmFormalParameter declaredParam = operation.getParameters().get(indexOf);
+					int paramIndex = closure.getFormalParameters().indexOf(parameter);
+					if (paramIndex < operation.getParameters().size()) {
+						JvmFormalParameter declaredParam = operation.getParameters().get(paramIndex);
 						TypeArgumentContext context = typeArgCtxProvider.getReceiverContext(type);
 						return context.resolve(declaredParam.getParameterType());
 					}
@@ -125,8 +125,8 @@ public class IdentifiableTypeProvider extends AbstractTypeProvider<JvmTypeRefere
 						return null;
 					}
 				}
-				final JvmTypeReference resolveContravariant = context.getUpperBound((reference).getArguments().get(0), parameter);
-				return resolveContravariant;
+				final JvmTypeReference upperBound = context.getUpperBound((reference).getArguments().get(0), parameter);
+				return upperBound;
 			}
 		}
 		return parameter.getParameterType();
