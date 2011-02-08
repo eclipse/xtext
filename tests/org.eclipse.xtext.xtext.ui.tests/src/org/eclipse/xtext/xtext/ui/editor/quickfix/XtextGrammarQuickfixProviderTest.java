@@ -129,7 +129,7 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 		IssueResolution resolution = resolutions.iterator().next();
 		assertEquals(resolutionLabel, resolution.getLabel());
 		resolution.apply();
-		assertEquals(isCleanAfterApply, getIssues(document).isEmpty());
+		assertEquals(getIssues(document).toString(), isCleanAfterApply, getIssues(document).isEmpty());
 		xtextEditor.doSave(new NullProgressMonitor());
 
 	}
