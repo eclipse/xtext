@@ -1376,6 +1376,34 @@ public interface XbasePackage extends EPackage
 	 */
 	int XASSIGNMENT_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
 
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XReturnExpressionImpl <em>XReturn Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XReturnExpressionImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXReturnExpression()
+	 * @generated
+	 */
+	int XRETURN_EXPRESSION = 28;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XRETURN_EXPRESSION__EXPRESSION = XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>XReturn Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XRETURN_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 1;
+
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XExpression <em>XExpression</em>}'.
@@ -2296,6 +2324,27 @@ public interface XbasePackage extends EPackage
 	EReference getXAssignment_Value();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XReturnExpression <em>XReturn Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XReturn Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XReturnExpression
+	 * @generated
+	 */
+	EClass getXReturnExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XReturnExpression#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XReturnExpression#getExpression()
+	 * @see #getXReturnExpression()
+	 * @generated
+	 */
+	EReference getXReturnExpression_Expression();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3061,6 +3110,24 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XASSIGNMENT__VALUE = eINSTANCE.getXAssignment_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XReturnExpressionImpl <em>XReturn Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XReturnExpressionImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXReturnExpression()
+		 * @generated
+		 */
+		EClass XRETURN_EXPRESSION = eINSTANCE.getXReturnExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XRETURN_EXPRESSION__EXPRESSION = eINSTANCE.getXReturnExpression_Expression();
 
 	}
 

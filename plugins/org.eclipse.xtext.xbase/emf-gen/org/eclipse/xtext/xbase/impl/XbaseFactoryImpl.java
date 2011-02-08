@@ -92,6 +92,7 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 			case XbasePackage.XTRY_CATCH_FINALLY_EXPRESSION: return createXTryCatchFinallyExpression();
 			case XbasePackage.XCATCH_CLAUSE: return createXCatchClause();
 			case XbasePackage.XASSIGNMENT: return createXAssignment();
+			case XbasePackage.XRETURN_EXPRESSION: return createXReturnExpression();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -370,6 +371,17 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	{
 		XAssignmentImplCustom xAssignment = new XAssignmentImplCustom();
 		return xAssignment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XReturnExpression createXReturnExpression()
+	{
+		XReturnExpressionImpl xReturnExpression = new XReturnExpressionImpl();
+		return xReturnExpression;
 	}
 
 	/**

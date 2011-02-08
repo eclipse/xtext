@@ -48,6 +48,7 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 		"switch",
 		"new",
 		"throw",
+		"return",
 		"null"
 	};
 	

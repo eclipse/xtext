@@ -328,6 +328,14 @@ public class XbaseSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case XbasePackage.XRETURN_EXPRESSION:
+			{
+				XReturnExpression xReturnExpression = (XReturnExpression)theEObject;
+				T result = caseXReturnExpression(xReturnExpression);
+				if (result == null) result = caseXExpression(xReturnExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -776,6 +784,22 @@ public class XbaseSwitch<T>
 	 * @generated
 	 */
 	public T caseXAssignment(XAssignment object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XReturn Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XReturn Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXReturnExpression(XReturnExpression object)
 	{
 		return null;
 	}

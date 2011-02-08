@@ -211,6 +211,7 @@ ruleXPrimaryExpression :
 	ruleXWhileExpression |
 	ruleXDoWhileExpression |
 	ruleXThrowExpression |
+	ruleXReturnExpression |
 	ruleXTryCatchFinallyExpression |
 	ruleXParenthesizedExpression
 ;
@@ -404,6 +405,13 @@ ruleXTypeLiteral :
 // Rule XThrowExpression
 ruleXThrowExpression :
 	'throw' ruleXExpression
+;
+
+// Rule XReturnExpression
+ruleXReturnExpression :
+	'return' ( (
+	ruleXExpression
+	) => ruleXExpression )?
 ;
 
 // Rule XTryCatchFinallyExpression

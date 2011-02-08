@@ -220,6 +220,11 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 				return createXAssignmentAdapter();
 			}
 			@Override
+			public Adapter caseXReturnExpression(XReturnExpression object)
+			{
+				return createXReturnExpressionAdapter();
+			}
+			@Override
 			public Adapter caseJvmIdentifiableElement(JvmIdentifiableElement object)
 			{
 				return createJvmIdentifiableElementAdapter();
@@ -662,6 +667,21 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createXAssignmentAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XReturnExpression <em>XReturn Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xbase.XReturnExpression
+	 * @generated
+	 */
+	public Adapter createXReturnExpressionAdapter()
 	{
 		return null;
 	}
