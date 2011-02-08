@@ -23,7 +23,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
-import org.eclipse.xtext.common.types.util.JvmFeatureOverridesService;
+import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.validation.Check;
@@ -50,7 +50,7 @@ import com.google.inject.Inject;
 public class Xtend2JavaValidator extends XbaseJavaValidator {
 
 	@Inject
-	private JvmFeatureOverridesService featureOverridesService;
+	private FeatureOverridesService featureOverridesService;
 
 	@Inject
 	private TypeArgumentContextProvider typeArgumentContextProvider;
