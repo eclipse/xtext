@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext;
 
-import static org.eclipse.xtext.EcoreUtil2.*;
-
 import java.util.List;
 import java.util.Set;
 
@@ -184,27 +182,6 @@ public class EcoreUtil2Test extends AbstractXtextTests {
 		res = EcoreUtil2.getAllReferencedObjects(objA, ref);
 		assertNotNull(res);
 		objA.eSet(ref, objB);
-	}
-	
-	public void testContainsCompatibleFeature() throws Exception {
-		EcorePackage pack = EcorePackage.eINSTANCE;
-		EClass eClass = pack.getEClass();
-		assertEquals(true,containsCompatibleFeature(eClass, "name", false, true, pack.getEString()));
-		assertEquals(false,containsCompatibleFeature(eClass, "name", true, true, pack.getEString()));
-		assertEquals(false,containsCompatibleFeature(eClass, "name", true, true, pack.getEAnnotation()));
-		assertEquals(false,containsCompatibleFeature(eClass, "name", true, true, pack.getEShort()));
-		assertEquals(false,containsCompatibleFeature(eClass, "names", false, true, pack.getEString()));
-		
-		assertEquals(true,containsCompatibleFeature(eClass, "eStructuralFeatures", true, true, pack.getEAttribute()));
-		assertEquals(true,containsCompatibleFeature(eClass, "eStructuralFeatures", true, true, pack.getEReference()));
-		assertEquals(true,containsCompatibleFeature(eClass, "eStructuralFeatures", true, true, pack.getEStructuralFeature()));
-		assertEquals(false,containsCompatibleFeature(eClass, "eStructuralFeatures", false, true, pack.getEStructuralFeature()));
-		assertEquals(false,containsCompatibleFeature(eClass, "eStructuralFeatures", true, true, pack.getEAnnotation()));
-		
-		eClass = pack.getEAttribute();
-		assertEquals(true, containsCompatibleFeature(eClass, "lowerBound", false, true, pack.getEInt()));
-		assertEquals(true, containsCompatibleFeature(eClass, "lowerBound", false, true, pack.getEIntegerObject()));
-		assertEquals(false, containsCompatibleFeature(eClass, "lowerBound", false, true, pack.getELong()));
 	}
 	
 	public void testExternalFormOfEReference() throws Exception {

@@ -1403,4 +1403,69 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 			"enum ExistingEnum: SameName;"; 
 		getResourceFromString(grammarAsString);
 	}
+	
+	public void testMultiInheritance_01() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
+			"import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types\n" +
+			"generate myDsl \"http://example.xtext.org/MyDsl\" as mydsl\n" +
+			"Array returns mydsl::Array: componentType=ComponentType componentType=DeclaredType;\n" +
+			"DeclaredType returns types::JvmDeclaredType: members+=DeclaredType;\n"+ 
+			"ComponentType returns types::JvmComponentType: 'ignore';\n"; 
+		XtextResource resource = getResourceFromString(grammarAsString);
+		Grammar grammar = (Grammar) resource.getContents().get(0);
+		EClass array = (EClass) grammar.getRules().get(0).getType().getClassifier();
+		assertEquals("JvmComponentType", array.getEStructuralFeature("componentType").getEType().getName());
+	}
+	
+	public void testMultiInheritance_02() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
+			"import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types\n" +
+			"generate myDsl \"http://example.xtext.org/MyDsl\" as mydsl\n" +
+			"Array returns mydsl::Array: componentType=DeclaredType componentType=ComponentType;\n" +
+			"DeclaredType returns types::JvmDeclaredType: members+=DeclaredType;\n"+ 
+			"ComponentType returns types::JvmComponentType: 'ignore';\n"; 
+		XtextResource resource = getResourceFromString(grammarAsString);
+		Grammar grammar = (Grammar) resource.getContents().get(0);
+		EClass array = (EClass) grammar.getRules().get(0).getType().getClassifier();
+		assertEquals("JvmComponentType", array.getEStructuralFeature("componentType").getEType().getName());
+	}
+	
+	public void testBug316610_01() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
+			"import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types\n" +
+			"Array returns types::JvmArrayType: componentType=Array;"; 
+		XtextResource resource = getResourceFromStringAndExpect(grammarAsString, 1);
+		assertTrue(resource.getErrors().get(0).getMessage().contains("JvmTypeReference"));
+	}
+	
+	public void testBug316610_02() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
+			"import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types\n" +
+			"Array returns types::JvmArrayType: componentType=STRING;"; 
+		XtextResource resource = getResourceFromStringAndExpect(grammarAsString, 1);
+		assertTrue(resource.getErrors().get(0).getMessage().contains("JvmTypeReference"));
+	}
+	
+	public void testBug316610_03() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
+			"import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types\n" +
+			"Array returns types::JvmArrayType: componentType+=TypeRef;\n" +
+			"TypeRef returns types::JvmTypeReference: 'void'"; 
+		XtextResource resource = getResourceFromStringAndExpect(grammarAsString, 1);
+		assertTrue(resource.getErrors().get(0).getMessage().contains("cardinality"));
+	}
+	
+	public void testBug316610_04() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
+			"import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types\n" +
+			"Array returns types::JvmArrayType: componentType=[types::JvmTypeReference];"; 
+		XtextResource resource = getResourceFromStringAndExpect(grammarAsString, 1);
+		assertTrue(resource.getErrors().get(0).getMessage().contains("containment"));
+	}
 }
