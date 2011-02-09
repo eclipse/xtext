@@ -106,9 +106,12 @@ RichStringElseIf returns RichStringElseIf:
 ;
 
 terminal RICH_TEXT : "'''" IN_DOUBLE_QUOTE_RICH_STRING* "'''";
-terminal RICH_TEXT_START : "'''" IN_DOUBLE_QUOTE_RICH_STRING* '«';
+terminal RICH_TEXT_START : "'''" IN_DOUBLE_QUOTE_RICH_STRING* ("'" "'"?)? '«';
 terminal RICH_TEXT_END : '»' IN_DOUBLE_QUOTE_RICH_STRING* "'''" ;
-terminal RICH_TEXT_INBETWEEN : '»' IN_DOUBLE_QUOTE_RICH_STRING* '«'; 
+terminal RICH_TEXT_INBETWEEN : '»' IN_DOUBLE_QUOTE_RICH_STRING* ("'" "'"?)? '«'; 
 
-terminal fragment IN_DOUBLE_QUOTE_RICH_STRING : "''" !"'" |"'" !"'"| !('«'|"'");
+terminal fragment IN_DOUBLE_QUOTE_RICH_STRING : 
+	  "''" !('«'|"'") 
+	| "'" !('«'|"'")
+	| !('«'|"'");
 

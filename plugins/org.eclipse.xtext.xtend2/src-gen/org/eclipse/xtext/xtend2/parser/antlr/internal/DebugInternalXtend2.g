@@ -634,7 +634,9 @@ RULE_RICH_TEXT :
 ;
 
 RULE_RICH_TEXT_START :
-	'\'\'\'' RULE_IN_DOUBLE_QUOTE_RICH_STRING* '\u00AB'
+	'\'\'\'' RULE_IN_DOUBLE_QUOTE_RICH_STRING* (
+		'\'' '\''?
+	)? '\u00AB'
 ;
 
 RULE_RICH_TEXT_END :
@@ -642,14 +644,18 @@ RULE_RICH_TEXT_END :
 ;
 
 RULE_RICH_TEXT_INBETWEEN :
-	'\u00BB' RULE_IN_DOUBLE_QUOTE_RICH_STRING* '\u00AB'
+	'\u00BB' RULE_IN_DOUBLE_QUOTE_RICH_STRING* (
+		'\'' '\''?
+	)? '\u00AB'
 ;
 
 fragment RULE_IN_DOUBLE_QUOTE_RICH_STRING :
 	'\'\'' ~ (
+		'\u00AB' |
 		'\''
 	) |
 	'\'' ~ (
+		'\u00AB' |
 		'\''
 	) |
 	~ (
