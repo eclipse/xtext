@@ -5,13 +5,13 @@ import java.util.LinkedList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
-import org.eclipse.xtext.xbase.typing.TypesService;
 import org.eclipse.xtext.xtend2.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtext.xtend2.richstring.DefaultIndentationHandler;
 import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
@@ -36,7 +36,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 	private Provider<DefaultIndentationHandler> indentationHandler;
 	
 	@Inject
-	private TypesService typesService;
+	private TypeReferences typeRefs;
 	
 	public void compile(EObject obj, IAppendable appendable) {
 		if (obj instanceof XtendClass) {
@@ -102,10 +102,10 @@ public class Xtend2Compiler extends XbaseCompiler {
 		}
 		appendable.append(") {");
 		appendable.increaseIndentation();
-		boolean isReferenced = !typesService.isPrimitiveVoid(obj.getReturnType());
+		boolean isReferenced = !typeRefs.is(obj.getReturnType(), Void.TYPE);
 		if (obj.getReturnType()==null) {
 			final JvmTypeReference type = getTypeProvider().getType(obj.getExpression());
-			isReferenced = !typesService.isPrimitiveVoid(type);
+			isReferenced = !typeRefs.is(type, Void.TYPE);
 		}
 		compile(obj.getExpression(), appendable, isReferenced);
 		appendable.decreaseIndentation();
