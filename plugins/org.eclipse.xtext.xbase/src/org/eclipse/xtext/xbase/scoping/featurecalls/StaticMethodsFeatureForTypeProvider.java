@@ -21,7 +21,6 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.xbase.lib.Booleans;
 import org.eclipse.xtext.xbase.lib.Collections;
 import org.eclipse.xtext.xbase.lib.Comparables;
@@ -30,6 +29,7 @@ import org.eclipse.xtext.xbase.lib.Iterables;
 import org.eclipse.xtext.xbase.lib.Objects;
 import org.eclipse.xtext.xbase.lib.Strings;
 import org.eclipse.xtext.xbase.typing.TypesService;
+import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.HashMultimap;
@@ -48,7 +48,7 @@ public class StaticMethodsFeatureForTypeProvider implements IFeaturesForTypeProv
 	private TypesFactory typesFactory;
 
 	@Inject
-	private IJvmTypeConformanceComputer conformanceComputer;
+	private XbaseTypeConformanceComputer conformanceComputer;
 
 	private EObject context;
 

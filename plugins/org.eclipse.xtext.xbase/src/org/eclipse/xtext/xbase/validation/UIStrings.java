@@ -17,7 +17,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 import com.google.common.base.Function;
 import com.google.inject.Inject;
@@ -30,7 +30,7 @@ import com.google.inject.Inject;
 public class UIStrings {
 
 	@Inject
-	private IXExpressionTypeProvider typeProvider;
+	private ITypeProvider typeProvider;
 	
 	public String parameters(JvmIdentifiableElement element) {
 		if (element instanceof JvmExecutable) {

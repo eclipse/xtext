@@ -20,7 +20,6 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -33,7 +32,8 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
-import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
 import com.google.inject.Inject;
 
@@ -63,19 +63,19 @@ public class FeatureCallChecker {
 			Collections.singletonList(this));
 
 	@Inject
-	private IJvmTypeConformanceComputer conformance;
+	private XbaseTypeConformanceComputer conformance;
 
 	@Inject
-	private IXExpressionTypeProvider typeProvider;
+	private ITypeProvider typeProvider;
 	
 	@Inject
 	private FeatureCallToJavaMapping featureCall2JavaMapping;
 
-	public void setTypeProvider(IXExpressionTypeProvider typeProvider) {
+	public void setTypeProvider(ITypeProvider typeProvider) {
 		this.typeProvider = typeProvider;
 	}
 
-	protected IXExpressionTypeProvider getTypeProvider() {
+	protected ITypeProvider getTypeProvider() {
 		return typeProvider;
 	}
 
@@ -113,7 +113,7 @@ public class FeatureCallChecker {
 		for (int i = 0; i < numberOfArgs; i++) {
 			JvmFormalParameter parameter = input.getParameters().get(i);
 			XExpression expression = context.getArguments().get(i);
-			JvmTypeReference type = getTypeProvider().getSelfContainedType(expression);
+			JvmTypeReference type = getTypeProvider().getType(expression);
 			if (!conformance.isConformant(parameter.getParameterType(), type))
 				return INVALID_ARGUMENT_TYPES;
 		}
@@ -126,7 +126,7 @@ public class FeatureCallChecker {
 		if (input.getParameters().size() != (1 + callTypeDelta))
 			return INVALID_NUMBER_OF_ARGUMENTS;
 		if (context.getRightOperand() != null && context.getLeftOperand() != null) {
-			JvmTypeReference type = getTypeProvider().getSelfContainedType(context.getRightOperand());
+			JvmTypeReference type = getTypeProvider().getType(context.getRightOperand());
 			if (type == null)
 				return INVALID_ARGUMENT_TYPES;
 			final JvmFormalParameter rightParam = input.getParameters().get(0 + callTypeDelta);
@@ -142,7 +142,7 @@ public class FeatureCallChecker {
 		if (input.getParameters().size() != (1 + callTypeDelta))
 			return INVALID_NUMBER_OF_ARGUMENTS;
 		if (context.getValue() != null) {
-			JvmTypeReference type = getTypeProvider().getSelfContainedType(context.getValue());
+			JvmTypeReference type = getTypeProvider().getType(context.getValue());
 			final JvmFormalParameter valueParam = input.getParameters().get(0 + callTypeDelta);
 			if (!isCompatibleArgument(valueParam.getParameterType(), type, context, jvmFeatureDescription))
 				return INVALID_ARGUMENT_TYPES;
@@ -200,7 +200,7 @@ public class FeatureCallChecker {
 		if (input.getParameters().size() != 1)
 			return INVALID_NUMBER_OF_ARGUMENTS;
 		if (context.getOperand() != null) {
-			JvmTypeReference operandType = getTypeProvider().getSelfContainedType(context.getOperand());
+			JvmTypeReference operandType = getTypeProvider().getType(context.getOperand());
 			final JvmFormalParameter param = input.getParameters().get(0);
 			if (!conformance.isConformant(param.getParameterType(), operandType))
 				return INVALID_ARGUMENT_TYPES;
@@ -218,7 +218,7 @@ public class FeatureCallChecker {
 
 		for (int i = 0; i < actualArguments.size(); i++) {
 			XExpression expression = actualArguments.get(i);
-			JvmTypeReference type = getTypeProvider().getSelfContainedType(expression);
+			JvmTypeReference type = getTypeProvider().getType(expression);
 			JvmTypeReference declaredType = input.getParameters().get(i).getParameterType();
 			if (declaredType==null) 
 				return null;
@@ -234,6 +234,7 @@ public class FeatureCallChecker {
 
 	protected boolean isCompatibleArgument(JvmTypeReference declaredType, JvmTypeReference actualType,
 			EObject contextElement, JvmFeatureDescription jvmFeatureDescription) {
+		//TODO is actualType is reference to TypeParam, it's ok let the validation figure that out.
 		return actualType == null
 				|| actualType.getCanonicalName().equals("java.lang.Void") // void should be treated as compatible to everything
 				|| conformance.isConformant(jvmFeatureDescription.getContext().getLowerBound(declaredType), actualType);

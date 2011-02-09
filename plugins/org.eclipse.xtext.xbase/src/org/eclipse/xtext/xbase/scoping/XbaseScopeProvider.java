@@ -44,7 +44,6 @@ import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
-import org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
@@ -53,7 +52,7 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.StaticMethodsFeatureForTypeP
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentSugarDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
-import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 import com.google.common.base.Function;
 import com.google.inject.Inject;
@@ -90,10 +89,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	private Provider<XAssignmentSugarDescriptionProvider> assignmentSugarFeatureDescProvider;
 
 	@Inject
-	private IXExpressionTypeProvider typeProvider;
-
-	@Inject
-	private IdentifiableTypeProvider identifiableTypeProvider;
+	private ITypeProvider typeProvider;
 
 	@Inject
 	private IdentifiableSimpleNameProvider featureNameProvider;
@@ -102,11 +98,11 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		this.featureNameProvider = featureNameProvider;
 	}
 
-	public void setTypeProvider(IXExpressionTypeProvider typeProvider) {
+	public void setTypeProvider(ITypeProvider typeProvider) {
 		this.typeProvider = typeProvider;
 	}
 
-	protected IXExpressionTypeProvider getTypeProvider() {
+	protected ITypeProvider getTypeProvider() {
 		return typeProvider;
 	}
 
@@ -262,7 +258,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		IEObjectDescription thisVariable = localVariableScope.getSingleElement(THIS);
 		if (thisVariable != null) {
 			EObject thisVal = thisVariable.getEObjectOrProxy();
-			JvmTypeReference type = identifiableTypeProvider.getType((JvmIdentifiableElement) thisVal, true);
+			JvmTypeReference type = typeProvider.getTypeForIdentifiable((JvmIdentifiableElement) thisVal);
 			if (type != null) {
 				featureScopeForThis = createFeatureScopeForTypeRef(type, call, getContextType(call),
 						(JvmIdentifiableElement) thisVariable.getEObjectOrProxy());

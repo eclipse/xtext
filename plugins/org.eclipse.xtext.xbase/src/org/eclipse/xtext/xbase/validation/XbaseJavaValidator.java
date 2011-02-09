@@ -19,7 +19,6 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
@@ -33,8 +32,9 @@ import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
-import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.TypesService;
+import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
 import com.google.inject.Inject;
@@ -43,10 +43,10 @@ import com.google.inject.Inject;
 public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Inject
-	private IXExpressionTypeProvider typeProvider;
+	private ITypeProvider typeProvider;
 
 	@Inject
-	private IJvmTypeConformanceComputer conformanceComputer;
+	private XbaseTypeConformanceComputer conformanceComputer;
 
 	@Inject
 	private XExpressionHelper expressionHelper;
@@ -63,7 +63,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			JvmTypeReference expectedType = typeProvider.getExpectedType(obj);
 			if (expectedType == null || expectedType.getType() == null)
 				return;
-			JvmTypeReference actualType = typeProvider.getSelfContainedType(obj);
+			JvmTypeReference actualType = typeProvider.getType(obj);
 			if (actualType == null || actualType.getType() == null)
 				return;
 			if (!conformanceComputer.isConformant(expectedType, actualType))

@@ -10,11 +10,11 @@ package org.eclipse.xtext.xbase.tests.typing;
 import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
 import com.google.inject.Inject;
 
@@ -24,10 +24,10 @@ import com.google.inject.Inject;
 public class XbaseTypeConformanceTest extends AbstractXbaseTestCase {
 
 	@Inject
-	private IJvmTypeConformanceComputer typeConformanceComputer;
+	private XbaseTypeConformanceComputer typeConformanceComputer;
 	
 	@Inject
-	private IXExpressionTypeProvider typeProvider;
+	private ITypeProvider typeProvider;
 	
 	@Inject
 	private ParseHelper<XExpression> parseHelper;

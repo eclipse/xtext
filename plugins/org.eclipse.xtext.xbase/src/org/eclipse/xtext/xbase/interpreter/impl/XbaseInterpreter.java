@@ -66,7 +66,7 @@ import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
-import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.TypesService;
 
 import com.google.common.base.Function;
@@ -120,7 +120,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	private FeatureCallToJavaMapping callToJavaMapping;
 	
 	@Inject
-	private IXExpressionTypeProvider typeProvider;
+	private ITypeProvider typeProvider;
 	
 	@Inject
 	private TypesService typeService;

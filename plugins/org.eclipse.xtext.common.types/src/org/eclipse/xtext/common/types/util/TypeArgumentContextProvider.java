@@ -45,7 +45,7 @@ public class TypeArgumentContextProvider {
 	private TypeReferences typeReferences;
 	
 	@Inject
-	private IJvmTypeConformanceComputer conformanceComputer;
+	private TypeConformanceComputer conformanceComputer;
 	
 	public void setTypeProviderFactory(IJvmTypeProvider.Factory typeProviderFactory) {
 		this.typeProviderFactory = typeProviderFactory;
@@ -55,7 +55,7 @@ public class TypeArgumentContextProvider {
 		this.typeReferences = typeReferences;
 	}
 	
-	public void setConformanceComputer(IJvmTypeConformanceComputer conformanceComputer) {
+	public void setConformanceComputer(TypeConformanceComputer conformanceComputer) {
 		this.conformanceComputer = conformanceComputer;
 	}
 	 

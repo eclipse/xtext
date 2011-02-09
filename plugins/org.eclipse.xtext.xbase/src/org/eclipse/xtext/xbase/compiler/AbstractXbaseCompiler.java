@@ -17,8 +17,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
-import org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider;
-import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.TypesService;
 
 import com.google.inject.Inject;
@@ -40,25 +39,14 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	@Inject
-	private IXExpressionTypeProvider typeProvider;
+	private ITypeProvider typeProvider;
 
-	public void setTypeProvider(IXExpressionTypeProvider typeProvider) {
+	public void setTypeProvider(ITypeProvider typeProvider) {
 		this.typeProvider = typeProvider;
 	}
 
-	protected IXExpressionTypeProvider getTypeProvider() {
+	protected ITypeProvider getTypeProvider() {
 		return typeProvider;
-	}
-
-	@Inject
-	private IdentifiableTypeProvider identifiableTypeProvider;
-
-	public void setIdentifiableTypeProvider(IdentifiableTypeProvider identifiableTypeProvider) {
-		this.identifiableTypeProvider = identifiableTypeProvider;
-	}
-
-	protected IdentifiableTypeProvider getIdentifiableTypeProvider() {
-		return identifiableTypeProvider;
 	}
 
 	private PolymorphicDispatcher<Void> toJavaExprDispatcher = PolymorphicDispatcher.createForSingleTarget(

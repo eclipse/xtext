@@ -10,7 +10,6 @@ package org.eclipse.xtext.generator.xbase;
 import java.util.Set;
 
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
@@ -34,15 +33,10 @@ public class XbaseGeneratorFragment extends DefaultGeneratorFragment {
 						"org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext")
 				.addTypeToType("org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter",
 						"org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter")
-
-				.addTypeToType("org.eclipse.xtext.typing.ITypeConformanceComputer<org.eclipse.xtext.common.types.JvmTypeReference>",
-						IJvmTypeConformanceComputer.class.getName())
-				.addTypeToType(IJvmTypeConformanceComputer.class.getName(),
-						"org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer")
 				.addTypeToType(IQualifiedNameConverter.class.getName(),
 						"org.eclipse.xtext.xbase.XbaseQualifiedNameConverter")
-				.addTypeToType("org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider",
-						"org.eclipse.xtext.xbase.typing.XExpressionTypeProvider")
+				.addTypeToType("org.eclipse.xtext.xbase.typing.ITypeProvider",
+						"org.eclipse.xtext.xbase.typing.TypeProvider")
 				.addTypeToType(IValueConverterService.class.getName(),
 						"org.eclipse.xtext.xbase.conversion.XbaseValueConverterService")
 				.addConfiguredBinding(
@@ -59,8 +53,6 @@ public class XbaseGeneratorFragment extends DefaultGeneratorFragment {
 								+ ".NAMED_DELEGATE)).to(org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider.class)")
 								
 				// obsolete convenience bindings
-				.addTypeToType("org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider",
-						"org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider")
 				.addTypeToType("org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider",
 						"org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider").getBindings();
 	}
