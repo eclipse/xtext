@@ -25,6 +25,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
+import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.XtextResource;
@@ -39,12 +40,15 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
-	
+
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
 
 	@Inject
 	private ITokenSerializer.ICrossReferenceSerializer crossReferenceSerializer;
+
+	@Inject
+	private ITransientValueService transientValueService;
 
 	@Override
 	protected void createReferenceUpdates(ElementRenameArguments elementRenameArguments,
@@ -53,7 +57,7 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 		SubMonitor progress = SubMonitor.convert(monitor, "Creating reference updates", resource2references.keySet()
 				.size());
 		for (URI referringResourceURI : resource2references.keySet()) {
-			if(progress.isCanceled())
+			if (progress.isCanceled())
 				return;
 			Resource referringResource = resourceSet.getResource(referringResourceURI, false);
 			if (!(referringResource instanceof XtextResource)) {
@@ -77,15 +81,17 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 
 	protected void createReferenceUpdate(EObject referringElement, URI referringResourceURI, EReference reference,
 			int indexInList, EObject newTargetElement, IRefactoringUpdateAcceptor updateAcceptor) {
-		ITextRegion referenceTextRegion = locationInFileProvider.getFullTextRegion(referringElement, reference,
-				indexInList);
-		CrossReference crossReference = getCrossReference(referringElement, referenceTextRegion.getOffset());
-		String newReferenceText = crossReferenceSerializer.serializeCrossRef(referringElement, crossReference,
-				newTargetElement, null);
-		// TODO: add import hook
-		TextEdit referenceEdit = new ReplaceEdit(referenceTextRegion.getOffset(), referenceTextRegion.getLength(),
-				newReferenceText);
-		updateAcceptor.accept(referringResourceURI, referenceEdit);
+		if (!transientValueService.isTransient(referringElement, reference, indexInList)) {
+			ITextRegion referenceTextRegion = locationInFileProvider.getFullTextRegion(referringElement, reference,
+					indexInList);
+			CrossReference crossReference = getCrossReference(referringElement, referenceTextRegion.getOffset());
+			String newReferenceText = crossReferenceSerializer.serializeCrossRef(referringElement, crossReference,
+					newTargetElement, null);
+			// TODO: add import hook
+			TextEdit referenceEdit = new ReplaceEdit(referenceTextRegion.getOffset(), referenceTextRegion.getLength(),
+					newReferenceText);
+			updateAcceptor.accept(referringResourceURI, referenceEdit);
+		}
 	}
 
 	protected CrossReference getCrossReference(EObject referringElement, int offset) {

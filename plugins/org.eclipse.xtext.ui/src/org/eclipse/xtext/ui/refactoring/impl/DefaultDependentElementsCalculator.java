@@ -26,7 +26,7 @@ import com.google.inject.internal.Lists;
  */
 public class DefaultDependentElementsCalculator implements IDependentElementsCalculator {
 
-	public Iterable<URI> getDependentElementURIs(EObject baseElement, IProgressMonitor monitor) {
+	public List<URI> getDependentElementURIs(EObject baseElement, IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, 10);
 		List<URI> elementURIs = Lists.newArrayList();
 		for (Iterator<EObject> i = EcoreUtil.getAllProperContents(baseElement, false); i.hasNext();) {
