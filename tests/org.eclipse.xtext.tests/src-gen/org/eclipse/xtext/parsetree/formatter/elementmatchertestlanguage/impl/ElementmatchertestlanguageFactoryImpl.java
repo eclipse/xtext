@@ -81,6 +81,10 @@ public class ElementmatchertestlanguageFactoryImpl extends EFactoryImpl implemen
       case ElementmatchertestlanguagePackage.RECURSION_SUB: return createRecursionSub();
       case ElementmatchertestlanguagePackage.LOOP: return createLoop();
       case ElementmatchertestlanguagePackage.EXPRESSION: return createExpression();
+      case ElementmatchertestlanguagePackage.RULE_CALLS12: return createRuleCalls12();
+      case ElementmatchertestlanguagePackage.CONSTRUCTOR: return createConstructor();
+      case ElementmatchertestlanguagePackage.FIELD: return createField();
+      case ElementmatchertestlanguagePackage.PARAMETER: return createParameter();
       case ElementmatchertestlanguagePackage.ADD: return createAdd();
       case ElementmatchertestlanguagePackage.MULT: return createMult();
       case ElementmatchertestlanguagePackage.VALUE: return createValue();
@@ -243,6 +247,50 @@ public class ElementmatchertestlanguageFactoryImpl extends EFactoryImpl implemen
   {
     ExpressionImpl expression = new ExpressionImpl();
     return expression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RuleCalls12 createRuleCalls12()
+  {
+    RuleCalls12Impl ruleCalls12 = new RuleCalls12Impl();
+    return ruleCalls12;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Constructor createConstructor()
+  {
+    ConstructorImpl constructor = new ConstructorImpl();
+    return constructor;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Field createField()
+  {
+    FieldImpl field = new FieldImpl();
+    return field;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Parameter createParameter()
+  {
+    ParameterImpl parameter = new ParameterImpl();
+    return parameter;
   }
 
   /**

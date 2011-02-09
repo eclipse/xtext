@@ -26,12 +26,13 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cRecursionParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		private final RuleCall cLoopParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		private final RuleCall cExpressionParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall cRuleCalls12ParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
 		
 		//Model:
-		//	Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression;
+		//	Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression | RuleCalls12;
 		public ParserRule getRule() { return rule; }
 
-		//Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression
+		//Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression | RuleCalls12
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Simple
@@ -51,6 +52,9 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 
 		//Expression
 		public RuleCall getExpressionParserRuleCall_5() { return cExpressionParserRuleCall_5; }
+
+		//RuleCalls12
+		public RuleCall getRuleCalls12ParserRuleCall_6() { return cRuleCalls12ParserRuleCall_6; }
 	}
 
 	public class SimpleElements extends AbstractParserRuleElementFinder {
@@ -692,6 +696,110 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		//")"
 		public Keyword getRightParenthesisKeyword_3_2() { return cRightParenthesisKeyword_3_2; }
 	}
+
+	public class RuleCalls12Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RuleCalls12");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitSevenKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cConstructorAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cConstructorConstructorParserRuleCall_1_0 = (RuleCall)cConstructorAssignment_1.eContents().get(0);
+		private final Assignment cFieldsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cFieldsFieldParserRuleCall_2_0 = (RuleCall)cFieldsAssignment_2.eContents().get(0);
+		private final Keyword cKw3Keyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		//RuleCalls12:
+		//	"#7" constructor=Constructor fields+=Field "kw3";
+		public ParserRule getRule() { return rule; }
+
+		//"#7" constructor=Constructor fields+=Field "kw3"
+		public Group getGroup() { return cGroup; }
+
+		//"#7"
+		public Keyword getNumberSignDigitSevenKeyword_0() { return cNumberSignDigitSevenKeyword_0; }
+
+		//constructor=Constructor
+		public Assignment getConstructorAssignment_1() { return cConstructorAssignment_1; }
+
+		//Constructor
+		public RuleCall getConstructorConstructorParserRuleCall_1_0() { return cConstructorConstructorParserRuleCall_1_0; }
+
+		//fields+=Field
+		public Assignment getFieldsAssignment_2() { return cFieldsAssignment_2; }
+
+		//Field
+		public RuleCall getFieldsFieldParserRuleCall_2_0() { return cFieldsFieldParserRuleCall_2_0; }
+
+		//"kw3"
+		public Keyword getKw3Keyword_3() { return cKw3Keyword_3; }
+	}
+
+	public class ConstructorElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Constructor");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cConstructorAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cKw1Assignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Keyword cKw1Kw1Keyword_1_0 = (Keyword)cKw1Assignment_1.eContents().get(0);
+		
+		//Constructor:
+		//	{Constructor} kw1?="kw1"?;
+		public ParserRule getRule() { return rule; }
+
+		//{Constructor} kw1?="kw1"?
+		public Group getGroup() { return cGroup; }
+
+		//{Constructor}
+		public Action getConstructorAction_0() { return cConstructorAction_0; }
+
+		//kw1?="kw1"?
+		public Assignment getKw1Assignment_1() { return cKw1Assignment_1; }
+
+		//"kw1"
+		public Keyword getKw1Kw1Keyword_1_0() { return cKw1Kw1Keyword_1_0; }
+	}
+
+	public class FieldElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Field");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final RuleCall cParameterParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		
+		//Field:
+		//	ID Parameter;
+		public ParserRule getRule() { return rule; }
+
+		//ID Parameter
+		public Group getGroup() { return cGroup; }
+
+		//ID
+		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
+
+		//Parameter
+		public RuleCall getParameterParserRuleCall_1() { return cParameterParserRuleCall_1; }
+	}
+
+	public class ParameterElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parameter");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cParameterAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cKw2Assignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Keyword cKw2Kw2Keyword_1_0 = (Keyword)cKw2Assignment_1.eContents().get(0);
+		
+		//Parameter:
+		//	{Parameter} kw2?="kw2"?;
+		public ParserRule getRule() { return rule; }
+
+		//{Parameter} kw2?="kw2"?
+		public Group getGroup() { return cGroup; }
+
+		//{Parameter}
+		public Action getParameterAction_0() { return cParameterAction_0; }
+
+		//kw2?="kw2"?
+		public Assignment getKw2Assignment_1() { return cKw2Assignment_1; }
+
+		//"kw2"
+		public Keyword getKw2Kw2Keyword_1_0() { return cKw2Kw2Keyword_1_0; }
+	}
 	
 	
 	private ModelElements pModel;
@@ -712,6 +820,10 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	private AddElements pAdd;
 	private MultElements pMult;
 	private PrimElements pPrim;
+	private RuleCalls12Elements pRuleCalls12;
+	private ConstructorElements pConstructor;
+	private FieldElements pField;
+	private ParameterElements pParameter;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -735,7 +847,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 
 	
 	//Model:
-	//	Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression;
+	//	Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression | RuleCalls12;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -912,6 +1024,46 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	
 	public ParserRule getPrimRule() {
 		return getPrimAccess().getRule();
+	}
+
+	//RuleCalls12:
+	//	"#7" constructor=Constructor fields+=Field "kw3";
+	public RuleCalls12Elements getRuleCalls12Access() {
+		return (pRuleCalls12 != null) ? pRuleCalls12 : (pRuleCalls12 = new RuleCalls12Elements());
+	}
+	
+	public ParserRule getRuleCalls12Rule() {
+		return getRuleCalls12Access().getRule();
+	}
+
+	//Constructor:
+	//	{Constructor} kw1?="kw1"?;
+	public ConstructorElements getConstructorAccess() {
+		return (pConstructor != null) ? pConstructor : (pConstructor = new ConstructorElements());
+	}
+	
+	public ParserRule getConstructorRule() {
+		return getConstructorAccess().getRule();
+	}
+
+	//Field:
+	//	ID Parameter;
+	public FieldElements getFieldAccess() {
+		return (pField != null) ? pField : (pField = new FieldElements());
+	}
+	
+	public ParserRule getFieldRule() {
+		return getFieldAccess().getRule();
+	}
+
+	//Parameter:
+	//	{Parameter} kw2?="kw2"?;
+	public ParameterElements getParameterAccess() {
+		return (pParameter != null) ? pParameter : (pParameter = new ParameterElements());
+	}
+	
+	public ParserRule getParameterRule() {
+		return getParameterAccess().getRule();
 	}
 
 	//terminal ID:

@@ -136,6 +136,16 @@ ruleModel returns [EObject current=null]
         $current = $this_Expression_5.current; 
         afterParserOrEnumRuleCall();
     }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getModelAccess().getRuleCalls12ParserRuleCall_6()); 
+    }
+    this_RuleCalls12_6=ruleRuleCalls12
+    { 
+        $current = $this_RuleCalls12_6.current; 
+        afterParserOrEnumRuleCall();
+    }
 )
 ;
 
@@ -1229,6 +1239,189 @@ rulePrim returns [EObject current=null]
     	newLeafNode(otherlv_14, grammarAccess.getPrimAccess().getRightParenthesisKeyword_3_2());
     }
 ))
+;
+
+
+
+
+
+// Entry rule entryRuleRuleCalls12
+entryRuleRuleCalls12 returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getRuleCalls12Rule()); }
+	 iv_ruleRuleCalls12=ruleRuleCalls12 
+	 { $current=$iv_ruleRuleCalls12.current; } 
+	 EOF 
+;
+
+// Rule RuleCalls12
+ruleRuleCalls12 returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#7' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getRuleCalls12Access().getNumberSignDigitSevenKeyword_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getRuleCalls12Access().getConstructorConstructorParserRuleCall_1_0()); 
+	    }
+		lv_constructor_1_0=ruleConstructor		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getRuleCalls12Rule());
+	        }
+       		set(
+       			$current, 
+       			"constructor",
+        		lv_constructor_1_0, 
+        		"Constructor");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getRuleCalls12Access().getFieldsFieldParserRuleCall_2_0()); 
+	    }
+		lv_fields_2_0=ruleField		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getRuleCalls12Rule());
+	        }
+       		add(
+       			$current, 
+       			"fields",
+        		lv_fields_2_0, 
+        		"Field");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_3='kw3' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getRuleCalls12Access().getKw3Keyword_3());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleConstructor
+entryRuleConstructor returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getConstructorRule()); }
+	 iv_ruleConstructor=ruleConstructor 
+	 { $current=$iv_ruleConstructor.current; } 
+	 EOF 
+;
+
+// Rule Constructor
+ruleConstructor returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getConstructorAccess().getConstructorAction_0(),
+            $current);
+    }
+)(
+(
+		lv_kw1_1_0=	'kw1' 
+    {
+        newLeafNode(lv_kw1_1_0, grammarAccess.getConstructorAccess().getKw1Kw1Keyword_1_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getConstructorRule());
+	        }
+       		setWithLastConsumed($current, "kw1", true, "kw1");
+	    }
+
+)
+)?)
+;
+
+
+
+
+
+// Entry rule entryRuleField
+entryRuleField returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getFieldRule()); }
+	 iv_ruleField=ruleField 
+	 { $current=$iv_ruleField.current; } 
+	 EOF 
+;
+
+// Rule Field
+ruleField returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(this_ID_0=RULE_ID
+    { 
+    newLeafNode(this_ID_0, grammarAccess.getFieldAccess().getIDTerminalRuleCall_0()); 
+    }
+
+    { 
+        newCompositeNode(grammarAccess.getFieldAccess().getParameterParserRuleCall_1()); 
+    }
+    this_Parameter_1=ruleParameter
+    { 
+        $current = $this_Parameter_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleParameter
+entryRuleParameter returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getParameterRule()); }
+	 iv_ruleParameter=ruleParameter 
+	 { $current=$iv_ruleParameter.current; } 
+	 EOF 
+;
+
+// Rule Parameter
+ruleParameter returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getParameterAccess().getParameterAction_0(),
+            $current);
+    }
+)(
+(
+		lv_kw2_1_0=	'kw2' 
+    {
+        newLeafNode(lv_kw2_1_0, grammarAccess.getParameterAccess().getKw2Kw2Keyword_1_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getParameterRule());
+	        }
+       		setWithLastConsumed($current, "kw2", true, "kw2");
+	    }
+
+)
+)?)
 ;
 
 

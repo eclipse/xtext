@@ -148,6 +148,26 @@ public class ElementmatchertestlanguageAdapterFactory extends AdapterFactoryImpl
         return createExpressionAdapter();
       }
       @Override
+      public Adapter caseRuleCalls12(RuleCalls12 object)
+      {
+        return createRuleCalls12Adapter();
+      }
+      @Override
+      public Adapter caseConstructor(Constructor object)
+      {
+        return createConstructorAdapter();
+      }
+      @Override
+      public Adapter caseField(Field object)
+      {
+        return createFieldAdapter();
+      }
+      @Override
+      public Adapter caseParameter(Parameter object)
+      {
+        return createParameterAdapter();
+      }
+      @Override
       public Adapter caseAdd(Add object)
       {
         return createAddAdapter();
@@ -400,6 +420,66 @@ public class ElementmatchertestlanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCalls12 <em>Rule Calls12</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCalls12
+   * @generated
+   */
+  public Adapter createRuleCalls12Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Constructor <em>Constructor</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Constructor
+   * @generated
+   */
+  public Adapter createConstructorAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Field <em>Field</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Field
+   * @generated
+   */
+  public Adapter createFieldAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Parameter <em>Parameter</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Parameter
+   * @generated
+   */
+  public Adapter createParameterAdapter()
   {
     return null;
   }

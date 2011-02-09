@@ -203,6 +203,36 @@ public class ElementmatchertestlanguageSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case ElementmatchertestlanguagePackage.RULE_CALLS12:
+      {
+        RuleCalls12 ruleCalls12 = (RuleCalls12)theEObject;
+        T result = caseRuleCalls12(ruleCalls12);
+        if (result == null) result = caseModel(ruleCalls12);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ElementmatchertestlanguagePackage.CONSTRUCTOR:
+      {
+        Constructor constructor = (Constructor)theEObject;
+        T result = caseConstructor(constructor);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ElementmatchertestlanguagePackage.FIELD:
+      {
+        Field field = (Field)theEObject;
+        T result = caseField(field);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ElementmatchertestlanguagePackage.PARAMETER:
+      {
+        Parameter parameter = (Parameter)theEObject;
+        T result = caseParameter(parameter);
+        if (result == null) result = caseField(parameter);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case ElementmatchertestlanguagePackage.ADD:
       {
         Add add = (Add)theEObject;
@@ -472,6 +502,70 @@ public class ElementmatchertestlanguageSwitch<T>
    * @generated
    */
   public T caseExpression(Expression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Rule Calls12</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Rule Calls12</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRuleCalls12(RuleCalls12 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Constructor</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Constructor</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseConstructor(Constructor object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Field</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Field</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseField(Field object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Parameter</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Parameter</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseParameter(Parameter object)
   {
     return null;
   }

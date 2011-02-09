@@ -524,6 +524,118 @@ public interface ElementmatchertestlanguagePackage extends EPackage
   int EXPRESSION_FEATURE_COUNT = MODEL_FEATURE_COUNT + 0;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCalls12Impl <em>Rule Calls12</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCalls12Impl
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getRuleCalls12()
+   * @generated
+   */
+  int RULE_CALLS12 = 14;
+
+  /**
+   * The feature id for the '<em><b>Constructor</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_CALLS12__CONSTRUCTOR = MODEL_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Fields</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_CALLS12__FIELDS = MODEL_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Rule Calls12</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_CALLS12_FEATURE_COUNT = MODEL_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ConstructorImpl <em>Constructor</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ConstructorImpl
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getConstructor()
+   * @generated
+   */
+  int CONSTRUCTOR = 15;
+
+  /**
+   * The feature id for the '<em><b>Kw1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONSTRUCTOR__KW1 = 0;
+
+  /**
+   * The number of structural features of the '<em>Constructor</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONSTRUCTOR_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.FieldImpl <em>Field</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.FieldImpl
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getField()
+   * @generated
+   */
+  int FIELD = 16;
+
+  /**
+   * The number of structural features of the '<em>Field</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FIELD_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ParameterImpl <em>Parameter</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ParameterImpl
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getParameter()
+   * @generated
+   */
+  int PARAMETER = 17;
+
+  /**
+   * The feature id for the '<em><b>Kw2</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAMETER__KW2 = FIELD_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Parameter</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAMETER_FEATURE_COUNT = FIELD_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.AddImpl <em>Add</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -531,7 +643,7 @@ public interface ElementmatchertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getAdd()
    * @generated
    */
-  int ADD = 14;
+  int ADD = 18;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -568,7 +680,7 @@ public interface ElementmatchertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getMult()
    * @generated
    */
-  int MULT = 15;
+  int MULT = 19;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -605,7 +717,7 @@ public interface ElementmatchertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getValue()
    * @generated
    */
-  int VALUE = 16;
+  int VALUE = 20;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' attribute.
@@ -633,7 +745,7 @@ public interface ElementmatchertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getFunction()
    * @generated
    */
-  int FUNCTION = 17;
+  int FUNCTION = 21;
 
   /**
    * The feature id for the '<em><b>Func</b></em>' attribute.
@@ -670,7 +782,7 @@ public interface ElementmatchertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getPointer()
    * @generated
    */
-  int POINTER = 18;
+  int POINTER = 22;
 
   /**
    * The feature id for the '<em><b>Target</b></em>' containment reference.
@@ -1072,6 +1184,90 @@ public interface ElementmatchertestlanguagePackage extends EPackage
    * @generated
    */
   EClass getExpression();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCalls12 <em>Rule Calls12</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Rule Calls12</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCalls12
+   * @generated
+   */
+  EClass getRuleCalls12();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCalls12#getConstructor <em>Constructor</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Constructor</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCalls12#getConstructor()
+   * @see #getRuleCalls12()
+   * @generated
+   */
+  EReference getRuleCalls12_Constructor();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCalls12#getFields <em>Fields</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Fields</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCalls12#getFields()
+   * @see #getRuleCalls12()
+   * @generated
+   */
+  EReference getRuleCalls12_Fields();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Constructor <em>Constructor</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Constructor</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Constructor
+   * @generated
+   */
+  EClass getConstructor();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Constructor#isKw1 <em>Kw1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Kw1</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Constructor#isKw1()
+   * @see #getConstructor()
+   * @generated
+   */
+  EAttribute getConstructor_Kw1();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Field <em>Field</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Field</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Field
+   * @generated
+   */
+  EClass getField();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Parameter <em>Parameter</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Parameter</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Parameter
+   * @generated
+   */
+  EClass getParameter();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Parameter#isKw2 <em>Kw2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Kw2</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Parameter#isKw2()
+   * @see #getParameter()
+   * @generated
+   */
+  EAttribute getParameter_Kw2();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Add <em>Add</em>}'.
@@ -1549,6 +1745,78 @@ public interface ElementmatchertestlanguagePackage extends EPackage
      * @generated
      */
     EClass EXPRESSION = eINSTANCE.getExpression();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCalls12Impl <em>Rule Calls12</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCalls12Impl
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getRuleCalls12()
+     * @generated
+     */
+    EClass RULE_CALLS12 = eINSTANCE.getRuleCalls12();
+
+    /**
+     * The meta object literal for the '<em><b>Constructor</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RULE_CALLS12__CONSTRUCTOR = eINSTANCE.getRuleCalls12_Constructor();
+
+    /**
+     * The meta object literal for the '<em><b>Fields</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RULE_CALLS12__FIELDS = eINSTANCE.getRuleCalls12_Fields();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ConstructorImpl <em>Constructor</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ConstructorImpl
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getConstructor()
+     * @generated
+     */
+    EClass CONSTRUCTOR = eINSTANCE.getConstructor();
+
+    /**
+     * The meta object literal for the '<em><b>Kw1</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute CONSTRUCTOR__KW1 = eINSTANCE.getConstructor_Kw1();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.FieldImpl <em>Field</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.FieldImpl
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getField()
+     * @generated
+     */
+    EClass FIELD = eINSTANCE.getField();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ParameterImpl <em>Parameter</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ParameterImpl
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getParameter()
+     * @generated
+     */
+    EClass PARAMETER = eINSTANCE.getParameter();
+
+    /**
+     * The meta object literal for the '<em><b>Kw2</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PARAMETER__KW2 = eINSTANCE.getParameter_Kw2();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.AddImpl <em>Add</em>}' class.

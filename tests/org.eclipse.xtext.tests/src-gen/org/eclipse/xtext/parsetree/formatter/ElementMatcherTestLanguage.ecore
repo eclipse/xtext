@@ -60,6 +60,20 @@
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Model"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RuleCalls12" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constructor" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Constructor"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fields" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Field"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Constructor">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kw1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Field"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Field">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kw2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Add" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Expression"
         containment="true"/>

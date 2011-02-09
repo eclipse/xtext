@@ -853,7 +853,7 @@ protected class Parens_EmAssignment_3 extends AssignmentToken  {
  * / * TODO not working yet
  * StrangeStuff :
  * 	'->' (foo=ID)? ({OtherStuff.strangeStuff=current} ',' bla=ID)? ({OtherStuff2.stuff=current} ',' bla2=ID)?;
- * * /TrickyA returns TypeA1:
+ * * / TrickyA returns TypeA1:
  * 	"TA" TrickyA1 name+=ID* ({TypeB.x=current} "x" | {TypeC.x=current} "y")? name+=STRING;
  *
  **/

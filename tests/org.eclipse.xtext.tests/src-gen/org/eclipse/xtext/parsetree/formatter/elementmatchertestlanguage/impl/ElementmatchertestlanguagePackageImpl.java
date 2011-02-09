@@ -13,9 +13,11 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Add;
+import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Constructor;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.ElementmatchertestlanguageFactory;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.ElementmatchertestlanguagePackage;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Expression;
+import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Field;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Function;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Loop;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Model;
@@ -24,10 +26,12 @@ import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Optional
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCallsSub1;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCallsSub2;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCallsSub3;
+import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Parameter;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Pointer;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Recursion;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RecursionSub;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCalls;
+import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCalls12;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsAss1;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsAss2;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsSub;
@@ -139,6 +143,34 @@ public class ElementmatchertestlanguagePackageImpl extends EPackageImpl implemen
    * @generated
    */
   private EClass expressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass ruleCalls12EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass constructorEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass fieldEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass parameterEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -603,6 +635,86 @@ public class ElementmatchertestlanguagePackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getRuleCalls12()
+  {
+    return ruleCalls12EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRuleCalls12_Constructor()
+  {
+    return (EReference)ruleCalls12EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRuleCalls12_Fields()
+  {
+    return (EReference)ruleCalls12EClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getConstructor()
+  {
+    return constructorEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getConstructor_Kw1()
+  {
+    return (EAttribute)constructorEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getField()
+  {
+    return fieldEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getParameter()
+  {
+    return parameterEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getParameter_Kw2()
+  {
+    return (EAttribute)parameterEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getAdd()
   {
     return addEClass;
@@ -808,6 +920,18 @@ public class ElementmatchertestlanguagePackageImpl extends EPackageImpl implemen
 
     expressionEClass = createEClass(EXPRESSION);
 
+    ruleCalls12EClass = createEClass(RULE_CALLS12);
+    createEReference(ruleCalls12EClass, RULE_CALLS12__CONSTRUCTOR);
+    createEReference(ruleCalls12EClass, RULE_CALLS12__FIELDS);
+
+    constructorEClass = createEClass(CONSTRUCTOR);
+    createEAttribute(constructorEClass, CONSTRUCTOR__KW1);
+
+    fieldEClass = createEClass(FIELD);
+
+    parameterEClass = createEClass(PARAMETER);
+    createEAttribute(parameterEClass, PARAMETER__KW2);
+
     addEClass = createEClass(ADD);
     createEReference(addEClass, ADD__LEFT);
     createEReference(addEClass, ADD__RIGHT);
@@ -864,6 +988,8 @@ public class ElementmatchertestlanguagePackageImpl extends EPackageImpl implemen
     recursionSubEClass.getESuperTypes().add(this.getRecursion());
     loopEClass.getESuperTypes().add(this.getModel());
     expressionEClass.getESuperTypes().add(this.getModel());
+    ruleCalls12EClass.getESuperTypes().add(this.getModel());
+    parameterEClass.getESuperTypes().add(this.getField());
     addEClass.getESuperTypes().add(this.getExpression());
     multEClass.getESuperTypes().add(this.getExpression());
     valueEClass.getESuperTypes().add(this.getExpression());
@@ -920,6 +1046,18 @@ public class ElementmatchertestlanguagePackageImpl extends EPackageImpl implemen
     initEAttribute(getLoop_Strings(), ecorePackage.getEString(), "strings", null, 0, -1, Loop.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(ruleCalls12EClass, RuleCalls12.class, "RuleCalls12", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getRuleCalls12_Constructor(), this.getConstructor(), null, "constructor", null, 0, 1, RuleCalls12.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRuleCalls12_Fields(), this.getField(), null, "fields", null, 0, -1, RuleCalls12.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(constructorEClass, Constructor.class, "Constructor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getConstructor_Kw1(), ecorePackage.getEBoolean(), "kw1", null, 0, 1, Constructor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(fieldEClass, Field.class, "Field", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getParameter_Kw2(), ecorePackage.getEBoolean(), "kw2", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(addEClass, Add.class, "Add", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAdd_Left(), this.getExpression(), null, "left", null, 0, 1, Add.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
