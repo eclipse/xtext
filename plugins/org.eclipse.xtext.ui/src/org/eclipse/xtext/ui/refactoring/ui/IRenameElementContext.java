@@ -16,10 +16,13 @@ import org.eclipse.ui.IEditorPart;
  * The context information of a rename element refactoring.
  *  
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Holger Schill
  */
 public interface IRenameElementContext {
-
+	
 	URI getTargetElementURI();
+	
+	URI getContextResourceURI();
 	
 	EClass getTargetElementEClass();
 	
@@ -31,19 +34,26 @@ public interface IRenameElementContext {
 
 		private URI targetElementURI;
 		
+		private URI contextResourceURI;
+		
 		private EClass targetElementEClass;
 		
 		private IEditorPart triggeringEditor;
 
 		private final ISelection triggeringEditorSelection;
 
-		public Impl(URI targetElementURI, EClass targetElementEClass, IEditorPart triggeringEditor, ISelection triggeringEditorSelection) {
+		public Impl(URI targetElementURI, EClass targetElementEClass, IEditorPart triggeringEditor, ISelection triggeringEditorSelection, URI contextResourceURI) {
 			this.targetElementURI = targetElementURI;
 			this.targetElementEClass = targetElementEClass;
 			this.triggeringEditor = triggeringEditor;
 			this.triggeringEditorSelection = triggeringEditorSelection;
+			this.contextResourceURI = contextResourceURI;
 		}
 
+		public URI getContextResourceURI() {
+			return contextResourceURI;
+		}
+		
 		public URI getTargetElementURI() {
 			return targetElementURI;
 		}

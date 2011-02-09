@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -29,6 +29,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Holger Schill
  */
 public class DefaultRenameStrategy implements IRenameStrategy {
 
@@ -65,6 +66,7 @@ public class DefaultRenameStrategy implements IRenameStrategy {
 	}
 
 	public RefactoringStatus validateNewName(String newName) {
+		//TODO: Validate if name ist valid in the meaning of the DataTypeRule / Terminal
 		RefactoringStatus newRefactoringStatus = new RefactoringStatus();
 		if (Strings.equal(newName, originalName))
 			newRefactoringStatus.addWarning("Name should be different");
