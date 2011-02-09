@@ -133,9 +133,9 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 						if (featureOverridesService.isOverridden(inferredJvmOperation,
 								(JvmFeature) otherFunction.getInferredJvmMember(), typeArgumentContext, false)) {
 							error("Duplicate method " + canonicalName(function), function,
-									Xtend2Package.Literals.XTEND_FUNCTION__NAME, DUPLICATE_METHOD);
+									Xtend2Package.Literals.XTEND_MEMBER__NAME, DUPLICATE_METHOD);
 							error("Duplicate method " + canonicalName(otherFunction), otherFunction,
-									Xtend2Package.Literals.XTEND_FUNCTION__NAME, DUPLICATE_METHOD);
+									Xtend2Package.Literals.XTEND_MEMBER__NAME, DUPLICATE_METHOD);
 						}
 					}
 				}
@@ -159,7 +159,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 						overriddenOperationFound = true;
 						if (!function.isOverride())
 							error("Missing 'override'. Function overrides " + canonicalName(superOperation),
-									function, Xtend2Package.Literals.XTEND_FUNCTION__NAME, MISSING_OVERRIDE);
+									function, Xtend2Package.Literals.XTEND_MEMBER__NAME, MISSING_OVERRIDE);
 						JvmTypeReference superReturnTypeUpperBound = typeArgumentContext.getUpperBound(superOperation
 								.getReturnType(), function);
 						if (!conformanceComputer.isConformant(superReturnTypeUpperBound, returnTypeUpperBound)) {

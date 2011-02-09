@@ -40,7 +40,6 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getTypeParameters <em>Type Parameters</em>}</li>
- *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getParameters <em>Parameters</em>}</li>
@@ -61,26 +60,6 @@ public class XtendFunctionImpl extends XtendMemberImpl implements XtendFunction
 	 * @ordered
 	 */
 	protected EList<JvmTypeParameter> typeParameters;
-
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
@@ -165,29 +144,6 @@ public class XtendFunctionImpl extends XtendMemberImpl implements XtendFunction
 			typeParameters = new EObjectContainmentWithInverseEList<JvmTypeParameter>(JvmTypeParameter.class, this, Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS, TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR);
 		}
 		return typeParameters;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName()
-	{
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName)
-	{
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FUNCTION__NAME, oldName, name));
 	}
 
 	/**
@@ -374,8 +330,6 @@ public class XtendFunctionImpl extends XtendMemberImpl implements XtendFunction
 		{
 			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
 				return getTypeParameters();
-			case Xtend2Package.XTEND_FUNCTION__NAME:
-				return getName();
 			case Xtend2Package.XTEND_FUNCTION__EXPRESSION:
 				return getExpression();
 			case Xtend2Package.XTEND_FUNCTION__RETURN_TYPE:
@@ -402,9 +356,6 @@ public class XtendFunctionImpl extends XtendMemberImpl implements XtendFunction
 			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
 				getTypeParameters().clear();
 				getTypeParameters().addAll((Collection<? extends JvmTypeParameter>)newValue);
-				return;
-			case Xtend2Package.XTEND_FUNCTION__NAME:
-				setName((String)newValue);
 				return;
 			case Xtend2Package.XTEND_FUNCTION__EXPRESSION:
 				setExpression((XExpression)newValue);
@@ -436,9 +387,6 @@ public class XtendFunctionImpl extends XtendMemberImpl implements XtendFunction
 			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
 				getTypeParameters().clear();
 				return;
-			case Xtend2Package.XTEND_FUNCTION__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case Xtend2Package.XTEND_FUNCTION__EXPRESSION:
 				setExpression((XExpression)null);
 				return;
@@ -467,8 +415,6 @@ public class XtendFunctionImpl extends XtendMemberImpl implements XtendFunction
 		{
 			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
 				return typeParameters != null && !typeParameters.isEmpty();
-			case Xtend2Package.XTEND_FUNCTION__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case Xtend2Package.XTEND_FUNCTION__EXPRESSION:
 				return expression != null;
 			case Xtend2Package.XTEND_FUNCTION__RETURN_TYPE:
@@ -530,9 +476,7 @@ public class XtendFunctionImpl extends XtendMemberImpl implements XtendFunction
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", override: ");
+		result.append(" (override: ");
 		result.append(override);
 		result.append(')');
 		return result.toString();

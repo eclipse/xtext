@@ -32,6 +32,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendMember;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendMemberImpl#getDeclaringType <em>Declaring Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendMemberImpl#getInferredJvmMember <em>Inferred Jvm Member</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendMemberImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -48,6 +49,26 @@ public abstract class XtendMemberImpl extends JvmIdentifiableElementImpl impleme
 	 * @ordered
 	 */
 	protected JvmMember inferredJvmMember;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -163,6 +184,29 @@ public abstract class XtendMemberImpl extends JvmIdentifiableElementImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName()
+	{
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName)
+	{
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_MEMBER__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getSimpleName()
 	{
 		// TODO: implement this method
@@ -235,6 +279,8 @@ public abstract class XtendMemberImpl extends JvmIdentifiableElementImpl impleme
 			case Xtend2Package.XTEND_MEMBER__INFERRED_JVM_MEMBER:
 				if (resolve) return getInferredJvmMember();
 				return basicGetInferredJvmMember();
+			case Xtend2Package.XTEND_MEMBER__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -254,6 +300,9 @@ public abstract class XtendMemberImpl extends JvmIdentifiableElementImpl impleme
 				return;
 			case Xtend2Package.XTEND_MEMBER__INFERRED_JVM_MEMBER:
 				setInferredJvmMember((JvmMember)newValue);
+				return;
+			case Xtend2Package.XTEND_MEMBER__NAME:
+				setName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -275,6 +324,9 @@ public abstract class XtendMemberImpl extends JvmIdentifiableElementImpl impleme
 			case Xtend2Package.XTEND_MEMBER__INFERRED_JVM_MEMBER:
 				setInferredJvmMember((JvmMember)null);
 				return;
+			case Xtend2Package.XTEND_MEMBER__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -293,8 +345,27 @@ public abstract class XtendMemberImpl extends JvmIdentifiableElementImpl impleme
 				return getDeclaringType() != null;
 			case Xtend2Package.XTEND_MEMBER__INFERRED_JVM_MEMBER:
 				return inferredJvmMember != null;
+			case Xtend2Package.XTEND_MEMBER__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString()
+	{
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //XtendMemberImpl

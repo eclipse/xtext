@@ -348,6 +348,16 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getXtendMember_Name()
+	{
+		return (EAttribute)xtendMemberEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getXtendFunction()
 	{
 		return xtendFunctionEClass;
@@ -358,19 +368,9 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getXtendFunction_Name()
-	{
-		return (EAttribute)xtendFunctionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getXtendFunction_Expression()
 	{
-		return (EReference)xtendFunctionEClass.getEStructuralFeatures().get(1);
+		return (EReference)xtendFunctionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -380,7 +380,7 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 	 */
 	public EReference getXtendFunction_ReturnType()
 	{
-		return (EReference)xtendFunctionEClass.getEStructuralFeatures().get(2);
+		return (EReference)xtendFunctionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -390,7 +390,7 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 	 */
 	public EReference getXtendFunction_Parameters()
 	{
-		return (EReference)xtendFunctionEClass.getEStructuralFeatures().get(3);
+		return (EReference)xtendFunctionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -400,7 +400,7 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 	 */
 	public EAttribute getXtendFunction_Override()
 	{
-		return (EAttribute)xtendFunctionEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)xtendFunctionEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -573,9 +573,9 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		xtendMemberEClass = createEClass(XTEND_MEMBER);
 		createEReference(xtendMemberEClass, XTEND_MEMBER__DECLARING_TYPE);
 		createEReference(xtendMemberEClass, XTEND_MEMBER__INFERRED_JVM_MEMBER);
+		createEAttribute(xtendMemberEClass, XTEND_MEMBER__NAME);
 
 		xtendFunctionEClass = createEClass(XTEND_FUNCTION);
-		createEAttribute(xtendFunctionEClass, XTEND_FUNCTION__NAME);
 		createEReference(xtendFunctionEClass, XTEND_FUNCTION__EXPRESSION);
 		createEReference(xtendFunctionEClass, XTEND_FUNCTION__RETURN_TYPE);
 		createEReference(xtendFunctionEClass, XTEND_FUNCTION__PARAMETERS);
@@ -667,11 +667,11 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		initEClass(xtendMemberEClass, XtendMember.class, "XtendMember", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXtendMember_DeclaringType(), this.getXtendClass(), this.getXtendClass_Members(), "declaringType", null, 0, 1, XtendMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendMember_InferredJvmMember(), theTypesPackage.getJvmMember(), null, "inferredJvmMember", null, 0, 1, XtendMember.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXtendMember_Name(), ecorePackage.getEString(), "name", null, 0, 1, XtendMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(xtendMemberEClass, ecorePackage.getEString(), "getSimpleName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(xtendFunctionEClass, XtendFunction.class, "XtendFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getXtendFunction_Name(), ecorePackage.getEString(), "name", null, 0, 1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendFunction_Expression(), theXbasePackage.getXExpression(), null, "expression", null, 0, 1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendFunction_ReturnType(), theTypesPackage.getJvmTypeReference(), null, "returnType", null, 0, 1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendFunction_Parameters(), theTypesPackage.getJvmFormalParameter(), null, "parameters", null, 0, -1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
