@@ -1094,7 +1094,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal RICH_TEXT_START:
-	//	"\'\'\'" IN_DOUBLE_QUOTE_RICH_STRING* "«";
+	//	"\'\'\'" IN_DOUBLE_QUOTE_RICH_STRING* ("\'" "\'"?)? "«";
 	public TerminalRule getRICH_TEXT_STARTRule() {
 		return (tRICH_TEXT_START != null) ? tRICH_TEXT_START : (tRICH_TEXT_START = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "RICH_TEXT_START"));
 	} 
@@ -1106,13 +1106,13 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal RICH_TEXT_INBETWEEN:
-	//	"»" IN_DOUBLE_QUOTE_RICH_STRING* "«";
+	//	"»" IN_DOUBLE_QUOTE_RICH_STRING* ("\'" "\'"?)? "«";
 	public TerminalRule getRICH_TEXT_INBETWEENRule() {
 		return (tRICH_TEXT_INBETWEEN != null) ? tRICH_TEXT_INBETWEEN : (tRICH_TEXT_INBETWEEN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "RICH_TEXT_INBETWEEN"));
 	} 
 
 	//terminal fragment IN_DOUBLE_QUOTE_RICH_STRING:
-	//	"\'\'" !"\'" | "\'" !"\'" | !("«" | "\'");
+	//	"\'\'" !("«" | "\'") | "\'" !("«" | "\'") | !("«" | "\'");
 	public TerminalRule getIN_DOUBLE_QUOTE_RICH_STRINGRule() {
 		return (tIN_DOUBLE_QUOTE_RICH_STRING != null) ? tIN_DOUBLE_QUOTE_RICH_STRING : (tIN_DOUBLE_QUOTE_RICH_STRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "IN_DOUBLE_QUOTE_RICH_STRING"));
 	} 

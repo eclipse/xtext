@@ -5655,13 +5655,13 @@ ruleJvmTypeParameter returns [EObject current=null]
 
 RULE_RICH_TEXT : '\'\'\'' RULE_IN_DOUBLE_QUOTE_RICH_STRING* '\'\'\'';
 
-RULE_RICH_TEXT_START : '\'\'\'' RULE_IN_DOUBLE_QUOTE_RICH_STRING* '\u00AB';
+RULE_RICH_TEXT_START : '\'\'\'' RULE_IN_DOUBLE_QUOTE_RICH_STRING* ('\'' '\''?)? '\u00AB';
 
 RULE_RICH_TEXT_END : '\u00BB' RULE_IN_DOUBLE_QUOTE_RICH_STRING* '\'\'\'';
 
-RULE_RICH_TEXT_INBETWEEN : '\u00BB' RULE_IN_DOUBLE_QUOTE_RICH_STRING* '\u00AB';
+RULE_RICH_TEXT_INBETWEEN : '\u00BB' RULE_IN_DOUBLE_QUOTE_RICH_STRING* ('\'' '\''?)? '\u00AB';
 
-fragment RULE_IN_DOUBLE_QUOTE_RICH_STRING : ('\'\'' ~('\'')|'\'' ~('\'')|~(('\u00AB'|'\'')));
+fragment RULE_IN_DOUBLE_QUOTE_RICH_STRING : ('\'\'' ~(('\u00AB'|'\''))|'\'' ~(('\u00AB'|'\''))|~(('\u00AB'|'\'')));
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

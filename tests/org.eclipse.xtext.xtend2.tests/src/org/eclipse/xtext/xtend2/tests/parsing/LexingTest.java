@@ -40,6 +40,51 @@ public class LexingTest extends AbstractXtend2TestCase {
 		assertLexing("''''''}", pair("''''''","RULE_RICH_TEXT"),pair("}","'}'"));
 	}
 	
+	public void testRichString_02() throws Exception {
+		assertLexing("'''«", pair("'''«", "RULE_RICH_TEXT_START"));
+	}
+	
+	public void testRichString_03() throws Exception {
+		assertLexing("''''«", pair("''''«", "RULE_RICH_TEXT_START"));
+		assertLexing("'''' «", pair("'''' «", "RULE_RICH_TEXT_START"));
+		assertLexing("''' '«", pair("''' '«", "RULE_RICH_TEXT_START"));
+	}
+	
+	public void testRichString_04() throws Exception {
+		assertLexing("'''''«", pair("'''''«", "RULE_RICH_TEXT_START"));
+		assertLexing("''''' «", pair("''''' «", "RULE_RICH_TEXT_START"));
+		assertLexing("''' ''«", pair("''' ''«", "RULE_RICH_TEXT_START"));
+	}
+	
+	public void testRichString_05() throws Exception {
+		assertLexing("»«", pair("»«", "RULE_RICH_TEXT_INBETWEEN"));
+	}
+	
+	public void testRichString_06() throws Exception {
+		assertLexing("»'«", pair("»'«", "RULE_RICH_TEXT_INBETWEEN"));
+		assertLexing("»' «", pair("»' «", "RULE_RICH_TEXT_INBETWEEN"));
+		assertLexing("» '«", pair("» '«", "RULE_RICH_TEXT_INBETWEEN"));
+	}
+	
+	public void testRichString_07() throws Exception {
+		assertLexing("»''«", pair("»''«", "RULE_RICH_TEXT_INBETWEEN"));
+		assertLexing("»'' «", pair("»'' «", "RULE_RICH_TEXT_INBETWEEN"));
+		assertLexing("» ''«", pair("» ''«", "RULE_RICH_TEXT_INBETWEEN"));
+	}
+	
+	public void testRichString_08() throws Exception {
+		assertLexing("»''««", pair("»''«", "RULE_RICH_TEXT_INBETWEEN"), pair("«", "RULE_ANY_OTHER"));
+		assertLexing("»'' ««", pair("»'' «", "RULE_RICH_TEXT_INBETWEEN"), pair("«", "RULE_ANY_OTHER"));
+		assertLexing("» ''««", pair("» ''«", "RULE_RICH_TEXT_INBETWEEN"), pair("«", "RULE_ANY_OTHER"));
+	}
+	
+	public void testRichString_09() throws Exception {
+		assertLexing("»«'", pair("»«", "RULE_RICH_TEXT_INBETWEEN"), pair("'", "RULE_ANY_OTHER"));
+		assertLexing("»'«'", pair("»'«", "RULE_RICH_TEXT_INBETWEEN"), pair("'", "RULE_ANY_OTHER"));
+		assertLexing("»' «'", pair("»' «", "RULE_RICH_TEXT_INBETWEEN"), pair("'", "RULE_ANY_OTHER"));
+		assertLexing("» '«'", pair("» '«", "RULE_RICH_TEXT_INBETWEEN"), pair("'", "RULE_ANY_OTHER"));
+	}
+	
 	public void testFunctionSig() throws Exception {
 		assertLexing("class X { foo() ''' foo ''' }",
 				pair("class","'class'"),
@@ -63,7 +108,7 @@ public class LexingTest extends AbstractXtend2TestCase {
 		lexer.setCharStream(stream);
 		XtextTokenStream tokenStream = new XtextTokenStream(lexer, tokenDefProvider);
 		List<?> tokens = tokenStream.getTokens();
-		assertEquals(input, expectedTokens.length, tokens.size());
+		assertEquals(input + " / " + tokens, expectedTokens.length, tokens.size());
 		for(int i = 0;i < tokens.size(); i++) {
 			Token token = (Token) tokens.get(i);
 			assertEquals(token.toString(), expectedTokens[i].getFirst(), token.getText());
