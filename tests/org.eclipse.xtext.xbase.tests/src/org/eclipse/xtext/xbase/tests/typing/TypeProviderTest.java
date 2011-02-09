@@ -22,10 +22,14 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge
  */
-public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
+public class TypeProviderTest extends AbstractXbaseTestCase {
 	
 	public void testFeatureCallWithArrayToIterableConversion() throws Exception {
 		assertResolvedReturnType("java.util.Iterator<? extends java.lang.Character>", "'foo'.toCharArray.iterator");
+	}
+	
+	public void testReturnType() throws Exception {
+		assertResolvedReturnType("void", "return 'foo'");
 	}
 	
 	public void testClosure_00() throws Exception {
