@@ -64,6 +64,12 @@ public class CondititionSimplifierTest extends AbstractXtextTests {
 		String expectation = "if (a&&b) {";
 		check(expectation, model);
 	}
+	
+	public void testNotAorBorBorNotAorB() throws Exception {
+		String model = "if (!(a||b)||b||!(a||b)) {";
+		String expectation = "if (!(a||b)||b) {";
+		check(expectation, model);
+	}
 
 	public void check(String expectation, String model) throws Exception {
 		EObject parsedModel = getModel(model);
