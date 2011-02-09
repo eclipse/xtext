@@ -12,7 +12,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
-import org.eclipse.xtext.xbase.typing.TypeProvider;
+import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xtend2.linking.XtendSourceAssociator;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
@@ -25,7 +25,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-public class Xtend2TypeProvider extends TypeProvider {
+public class Xtend2TypeProvider extends XbaseTypeProvider {
 	
 	@Inject
 	private TypeReferences typeRefs;

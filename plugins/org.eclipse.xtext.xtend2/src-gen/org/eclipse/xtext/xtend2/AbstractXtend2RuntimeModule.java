@@ -136,7 +136,7 @@ public abstract class AbstractXtend2RuntimeModule extends DefaultRuntimeModule {
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.xbase.typing.ITypeProvider> bindITypeProvider() {
-		return org.eclipse.xtext.xbase.typing.TypeProvider.class;
+		return org.eclipse.xtext.xbase.typing.XbaseTypeProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
