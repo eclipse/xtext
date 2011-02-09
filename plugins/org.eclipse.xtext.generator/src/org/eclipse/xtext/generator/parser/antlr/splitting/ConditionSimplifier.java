@@ -67,6 +67,17 @@ public class ConditionSimplifier extends SimpleExpressionsSwitch<Expression>{
 				|| areSemanticallyEqual(rightAsAnd.getRight(), left))
 				return left;
 		}
+		if (left instanceof OrExpression) {
+			OrExpression leftAsOr = (OrExpression) left;
+			if (areSemanticallyEqual(leftAsOr.getLeft(), right)
+				|| areSemanticallyEqual(leftAsOr.getRight(), right))
+				return left;
+		} else if (right instanceof OrExpression) {
+			OrExpression rightAsOr = (OrExpression) right;
+			if (areSemanticallyEqual(rightAsOr.getLeft(), left)
+				|| areSemanticallyEqual(rightAsOr.getRight(), left))
+				return right;
+		}
 		object.setLeft(left);
 		object.setRight(right);
 		return object;
