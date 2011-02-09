@@ -7,6 +7,7 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -17,6 +18,7 @@ import org.eclipse.xtext.xbase.resource.XbaseResource;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xtend2.conversion.Xtend2ValueConverterService;
 import org.eclipse.xtext.xtend2.featurecalls.Xtend2IdentifiableSimpleNameProvider;
+import org.eclipse.xtext.xtend2.linking.Xtend2EObjectAtOffsetHelper;
 import org.eclipse.xtext.xtend2.linking.Xtend2LazyLinker;
 import org.eclipse.xtext.xtend2.linking.Xtend2LocationInFileProvider;
 import org.eclipse.xtext.xtend2.naming.Xtend2QualifiedNameProvider;
@@ -77,5 +79,8 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 		return Xtend2LocationInFileProvider.class;
 	}
 
+	public Class<? extends EObjectAtOffsetHelper> bindEObjectAtOffsetHelper() {
+		return Xtend2EObjectAtOffsetHelper.class;
+	}
 
 }

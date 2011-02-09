@@ -11,6 +11,7 @@ import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.xtend2.ui.autoedit.AutoEditStrategyProvider;
 import org.eclipse.xtext.xtend2.ui.autoedit.TokenTypeToPartitionMapper;
@@ -19,6 +20,7 @@ import org.eclipse.xtext.xtend2.ui.highlighting.RichStringAwareTokenScanner;
 import org.eclipse.xtext.xtend2.ui.highlighting.RichStringHighlightingCalculator;
 import org.eclipse.xtext.xtend2.ui.highlighting.ShowWhitespaceCharactersActionContributor;
 import org.eclipse.xtext.xtend2.ui.highlighting.TokenToAttributeIdMapper;
+import org.eclipse.xtext.xtend2.ui.refactoring.Xtend2DependentElementsCalculator;
 import org.eclipse.xtext.xtend2.ui.refactoring.Xtend2RenameStrategy;
 
 import com.google.inject.Binder;
@@ -65,5 +67,9 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 	
 	public void configureIShowWhitespaceCharactersActionContributor(Binder binder) {
 		binder.bind(IActionContributor.class).annotatedWith(Names.named("Show Whitespace")).to(ShowWhitespaceCharactersActionContributor.class);
+	}
+	
+	public Class<? extends IDependentElementsCalculator> bindIDependentElementsCalculator() {
+		return Xtend2DependentElementsCalculator.class;
 	}
 }
