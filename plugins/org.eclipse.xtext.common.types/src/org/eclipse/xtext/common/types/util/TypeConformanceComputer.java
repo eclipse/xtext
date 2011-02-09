@@ -65,6 +65,9 @@ public class TypeConformanceComputer {
 	@Inject 
 	protected Primitives primitives;
 	
+	@Inject
+	protected TypeReferences typeReferences;
+	
 	public void setSuperTypeCollector(SuperTypeCollector superTypeCollector) {
 		this.superTypeCollector = superTypeCollector;
 	}
@@ -79,6 +82,10 @@ public class TypeConformanceComputer {
 	
 	public void setTypeArgumentContextProvider(TypeArgumentContextProvider typeArgumentContextProvider) {
 		this.typeArgumentContextProvider = typeArgumentContextProvider;
+	}
+	
+	public void setTypeReferences(TypeReferences typeReferences) {
+		this.typeReferences = typeReferences;
 	}
 
 	public boolean isConformant(JvmTypeReference left, JvmTypeReference right) {
@@ -483,7 +490,7 @@ public class TypeConformanceComputer {
 		// try to find a matching parameterized type for the raw types in ascending order
 		for(Entry<JvmType> rawTypeCandidate: candidates) {
 			JvmType rawType = rawTypeCandidate.getElement();
-			JvmTypeReference result = getTypeParametersForSupertype(all, rawType);
+			JvmTypeReference result = getTypeParametersForSupertype(all, rawType, types);
 			if (result != null)
 				return result;
 		}
@@ -494,7 +501,7 @@ public class TypeConformanceComputer {
 		return type==null || type.getType()==null || type.eIsProxy();
 	}
 
-	protected JvmTypeReference getTypeParametersForSupertype(Multimap<JvmType, JvmTypeReference> all, JvmType rawType) {
+	protected JvmTypeReference getTypeParametersForSupertype(Multimap<JvmType, JvmTypeReference> all, JvmType rawType, List<JvmTypeReference> initiallyRequested) {
 		if (rawType instanceof JvmTypeParameterDeclarator) {
 			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) rawType).getTypeParameters();
 			// if we do not declare any parameters it is safe to return the first candidate
@@ -518,7 +525,7 @@ public class TypeConformanceComputer {
 						return null;
 					}
 				}
-				JvmTypeReference parameterSuperType = getCommonParameterSuperType(parameterReferences);
+				JvmTypeReference parameterSuperType = getCommonParameterSuperType(parameterReferences, initiallyRequested);
 				if (parameterSuperType == null) {
 					return null;
 				} else {
@@ -577,14 +584,23 @@ public class TypeConformanceComputer {
 		});
 	}
 	
-	public JvmTypeReference getCommonParameterSuperType(final List<JvmTypeReference> types) {
-		Set<String> allNames = Sets.newHashSet(Iterables.transform(types, new Function<JvmTypeReference, String>() {
+	public JvmTypeReference getCommonParameterSuperType(final List<JvmTypeReference> types, List<JvmTypeReference> initiallyRequested) {
+		Function<JvmTypeReference, String> getCanonicalName = new Function<JvmTypeReference, String>() {
 			public String apply(JvmTypeReference from) {
 				return from.getCanonicalName();
 			}
-		}));
+		};
+		Set<String> allNames = Sets.newHashSet(Iterables.transform(types, getCanonicalName));
 		if (allNames.size() == 1)
 			return types.get(0);
+		if (types.size() == initiallyRequested.size()) {
+			Set<String> initiallyRequestedNames = Sets.newHashSet(Iterables.transform(initiallyRequested, getCanonicalName));
+			if (initiallyRequestedNames.equals(allNames)) {
+				// recursion - return object wildcard
+				JvmTypeReference objectTypeReference = typeReferences.getTypeForName(Object.class, types.get(0).getType());
+				return typeReferences.wildCardExtends(objectTypeReference);
+			}
+		}
 		JvmTypeReference superType = getCommonSuperType(types);
 		if (superType instanceof JvmWildcardTypeReference)
 			return superType;
