@@ -11,7 +11,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -21,6 +20,7 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
+import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
 /**
  * A scope which goes through all returned EObjectDescriptions in order to find the best fit, if it is asked for the
@@ -32,11 +32,11 @@ public class BestMatchingJvmFeatureScope implements IScope {
 
 	protected final EObject context;
 	protected final EReference reference;
-	private IJvmTypeConformanceComputer computer;
+	private XbaseTypeConformanceComputer computer;
 	private IScope delegate;
 	private FeatureCallChecker featureCallChecker;
 
-	public BestMatchingJvmFeatureScope(IJvmTypeConformanceComputer computer, EObject context, EReference ref,
+	public BestMatchingJvmFeatureScope(XbaseTypeConformanceComputer computer, EObject context, EReference ref,
 			IScope delegate, FeatureCallChecker featureCallChecker) {
 		this.computer = computer;
 		this.context = context;

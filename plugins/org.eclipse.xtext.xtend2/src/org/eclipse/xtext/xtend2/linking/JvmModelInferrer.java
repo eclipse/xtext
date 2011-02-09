@@ -19,7 +19,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
@@ -38,7 +38,7 @@ public class JvmModelInferrer {
 	private XtendSourceAssociator associator;
 	
 	@Inject
-	private IXExpressionTypeProvider typeProvider;
+	private ITypeProvider typeProvider;
 	
 	public JvmGenericType inferJvmGenericType(XtendClass xtendClass) {
 		return transform(xtendClass);
@@ -87,7 +87,7 @@ public class JvmModelInferrer {
 		for (JvmOperation jvmOperation : operations) {
 			if (jvmOperation.getReturnType()==null) {
 				XtendFunction func = associator.getAssociatedElement(jvmOperation);
-				JvmTypeReference reference = typeProvider.getSelfContainedType(func.getExpression());
+				JvmTypeReference reference = typeProvider.getType(func.getExpression());
 				jvmOperation.setReturnType(reference);
 			}
 		}

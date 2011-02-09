@@ -9,10 +9,10 @@ package org.eclipse.xtext.xbase.linking;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -29,7 +29,7 @@ public class XbaseLinkingScopeProvider implements IScopeProvider {
 	private Provider<FeatureCallChecker> featureCallCheckerProvider;
 	
 	@Inject
-	private IJvmTypeConformanceComputer conformanceChecker;
+	private XbaseTypeConformanceComputer conformanceChecker;
 
 	public IScope getScope(EObject context, EReference reference) {
 		final IScope scope = delegate.getScope(context, reference);

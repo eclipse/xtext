@@ -47,7 +47,7 @@ import com.google.inject.internal.Lists;
 public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 
 	@Inject
-	private IJvmTypeConformanceComputer computer;
+	private TypeConformanceComputer computer;
 	
 	@Inject
 	private DeclaredTypeFactory factory;
@@ -463,7 +463,7 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 		assertTrue(getComputer().isConformant(reference, ref(Serializable.class)));
 	}
 	
-	public IJvmTypeConformanceComputer getComputer() {
+	public TypeConformanceComputer getComputer() {
 		return computer;
 	}
 

@@ -22,14 +22,14 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
-import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
+import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
 import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
@@ -59,13 +59,13 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 	private TypesFactory typesFactory;
 
 	@Inject
-	private IdentifiableTypeProvider identifiableTypeProvider;
+	private ITypeProvider typeProvider;
 
 	@Inject
 	private RichStringProcessor richStringProcessor;
 
 	@Inject
-	private IJvmTypeConformanceComputer conformanceComputer;
+	private TypeConformanceComputer conformanceComputer;
 
 	@Override
 	protected List<EPackage> getEPackages() {
@@ -148,7 +148,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 		JvmOperation inferredJvmOperation = (JvmOperation) function.getInferredJvmMember();
 		boolean overriddenOperationFound = false;
 		if (function.getDeclaringType().getExtends() != null) {
-			JvmTypeReference returnType = identifiableTypeProvider.getType(inferredJvmOperation, false);
+			JvmTypeReference returnType = typeProvider.getTypeForIdentifiable(inferredJvmOperation);
 			JvmTypeReference returnTypeUpperBound = typeArgumentContext.getUpperBound(returnType, function);
 			for (JvmFeature superFeature : featureOverridesService.getAllJvmFeatures(function.getDeclaringType()
 					.getExtends())) {

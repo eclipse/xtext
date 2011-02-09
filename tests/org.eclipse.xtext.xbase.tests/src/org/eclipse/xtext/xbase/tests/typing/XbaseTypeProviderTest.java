@@ -15,7 +15,7 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 import com.google.inject.Inject;
 
@@ -155,7 +155,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	@Inject
-	private IXExpressionTypeProvider typeProvider;
+	private ITypeProvider typeProvider;
 
 	public void assertResolvedReturnType(String typeName, String expression) throws Exception {
 		final XExpression expression2 = expression(expression, true);

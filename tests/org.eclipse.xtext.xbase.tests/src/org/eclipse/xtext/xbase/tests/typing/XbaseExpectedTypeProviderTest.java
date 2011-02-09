@@ -27,7 +27,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -165,7 +165,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	protected void assertExpected(String expectedExpectedType, XExpression obj) {
-		JvmTypeReference reference = get(IXExpressionTypeProvider.class).getExpectedType(obj);
+		JvmTypeReference reference = get(ITypeProvider.class).getExpectedType(obj);
 		if (reference == null)
 			assertNull("expected " + expectedExpectedType + " for " + obj + " but was null", expectedExpectedType);
 		else

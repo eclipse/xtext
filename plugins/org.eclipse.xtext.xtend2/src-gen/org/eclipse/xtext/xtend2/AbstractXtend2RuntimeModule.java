@@ -130,23 +130,13 @@ public abstract class AbstractXtend2RuntimeModule extends DefaultRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
-	public Class<? extends org.eclipse.xtext.typing.ITypeConformanceComputer<org.eclipse.xtext.common.types.JvmTypeReference>> bindITypeConformanceComputer$JvmTypeReference() {
-		return org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
-	public Class<? extends org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer> bindIJvmTypeConformanceComputer() {
-		return org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.naming.IQualifiedNameConverter> bindIQualifiedNameConverter() {
 		return org.eclipse.xtext.xbase.XbaseQualifiedNameConverter.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
-	public Class<? extends org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider> bindIXExpressionTypeProvider() {
-		return org.eclipse.xtext.xbase.typing.XExpressionTypeProvider.class;
+	public Class<? extends org.eclipse.xtext.xbase.typing.ITypeProvider> bindITypeProvider() {
+		return org.eclipse.xtext.xbase.typing.TypeProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
@@ -162,11 +152,6 @@ public abstract class AbstractXtend2RuntimeModule extends DefaultRuntimeModule {
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(Names.named(org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider.class);
-	}
-
-	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
-	public Class<? extends org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider> bindIdentifiableTypeProvider() {
-		return org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment

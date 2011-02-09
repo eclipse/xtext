@@ -214,7 +214,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	public void _toJavaStatement(XForLoopExpression expr, IAppendable b, boolean isReferenced) {
 		internalToJavaStatement(expr.getForExpression(), b, true);
 		b.append("\nfor (");
-		JvmTypeReference paramType = getIdentifiableTypeProvider().getType(expr.getDeclaredParam(), false);
+		JvmTypeReference paramType = getTypeProvider().getTypeForIdentifiable(expr.getDeclaredParam());
 		b.append(paramType.getCanonicalName());
 		b.append(" ");
 		String varName = declareNameInVariableScope(expr.getDeclaredParam(), b);
@@ -428,7 +428,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		EList<JvmFormalParameter> closureParams = call.getFormalParameters();
 		for (Iterator<JvmFormalParameter> iter = closureParams.iterator(); iter.hasNext();) {
 			JvmFormalParameter param = iter.next();
-			final JvmTypeReference parameterType2 = getIdentifiableTypeProvider().getType(param, false);
+			final JvmTypeReference parameterType2 = getTypeProvider().getTypeForIdentifiable(param);
 			final JvmTypeReference parameterType = context.resolve(parameterType2);
 			b.append(getSerializedForm(parameterType)).append(" ");
 			String name = makeJavaIdentifier(b.declareVariable(param, param.getName()));
