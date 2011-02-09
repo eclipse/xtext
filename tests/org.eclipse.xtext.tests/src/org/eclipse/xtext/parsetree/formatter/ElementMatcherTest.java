@@ -19,6 +19,7 @@ import org.eclipse.xtext.formatting.IElementMatcherProvider.IBetweenElements;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementMatcher;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementPattern;
 import org.eclipse.xtext.formatting.impl.AbstractTokenStream;
+import org.eclipse.xtext.formatting.impl.ElementMatcherToDot;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.formatter.services.ElementMatcherTestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.formatter.services.ElementMatcherTestLanguageGrammarAccess.LoopElements;
@@ -247,6 +248,13 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		assertEquals("#2 sub foo ass1 bar ! ass2 zonk !", match("#2 sub foo ass1 bar ass2 zonk", pattern));
 	}
 
+	public void testRuleCalls9() throws Exception {
+		Patterns pattern = new Patterns();
+		pattern.before(g.getRuleCallsSubAccess().getSubAssignment());
+		pattern.after(g.getRuleCallsSubAccess().getSubAssignment());
+		assertEquals("#2 ! sub ! foo", match("#2 sub foo", pattern));
+	}
+
 	public void testOptionalCalls1() throws Exception {
 		OptionalCallsElements oce = g.getOptionalCallsAccess();
 		Patterns pattern = new Patterns();
@@ -412,5 +420,35 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		Patterns p = new Patterns();
 		p.between(g.getPrimAccess().getRightParenthesisKeyword_3_2(), g.getMultAccess().getAsteriskKeyword_1_1());
 		assertEquals("#6 ( 5 + 4 ) ! * 7", match("#6 (5 + 4) * 7", p));
+	}
+
+	public void testRuleCalls2a() throws Exception {
+		Patterns p = new Patterns();
+		p.before(g.getConstructorRule().getAlternatives());
+		p.after(g.getConstructorRule().getAlternatives());
+		assertEquals("#7 ! kw1 ! foo kw2 kw3", match("#7 kw1 foo kw2 kw3", p));
+		assertEquals("#7 ! kw1 ! foo kw3", match("#7 kw1 foo kw3", p));
+		//		assertEquals("#7 ! ! foo kw2 kw3", match("#7 foo kw2 kw3", p));
+		//		assertEquals("#7 ! ! foo kw3", match("#7 foo kw3", p));
+	}
+
+	public void testRuleCalls2b() throws Exception {
+		Patterns p = new Patterns();
+		p.before(g.getFieldRule().getAlternatives());
+		p.after(g.getFieldRule().getAlternatives());
+		assertEquals("#7 kw1 ! foo kw2 ! kw3", match("#7 kw1 foo kw2 kw3", p));
+		assertEquals("#7 kw1 ! foo ! kw3", match("#7 kw1 foo kw3", p));
+		assertEquals("#7 ! foo kw2 ! kw3", match("#7 foo kw2 kw3", p));
+		assertEquals("#7 ! foo ! kw3", match("#7 foo kw3", p));
+	}
+
+	public void testRuleCalls2c() throws Exception {
+		Patterns p = new Patterns();
+		p.before(g.getParameterRule().getAlternatives());
+		p.after(g.getParameterRule().getAlternatives());
+		assertEquals("#7 kw1 foo ! kw2 ! kw3", match("#7 kw1 foo kw2 kw3", p));
+		//		assertEquals("#7 kw1 foo ! ! kw3", match("#7 kw1 foo kw3", p));
+		assertEquals("#7 foo ! kw2 ! kw3", match("#7 foo kw2 kw3", p));
+		//		assertEquals("#7 foo ! ! kw3", match("#7 foo kw3", p));
 	}
 }
