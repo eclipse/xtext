@@ -3,7 +3,6 @@
  */
 package org.eclipse.xtext.xtend2;
 
-import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -14,13 +13,10 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.xbase.XbaseQualifiedNameConverter;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
-import org.eclipse.xtext.xbase.featurecalls.IdentifiableTypeProvider;
 import org.eclipse.xtext.xbase.resource.XbaseResource;
-import org.eclipse.xtext.xbase.typing.IXExpressionTypeProvider;
-import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xtend2.conversion.Xtend2ValueConverterService;
 import org.eclipse.xtext.xtend2.featurecalls.Xtend2IdentifiableSimpleNameProvider;
-import org.eclipse.xtext.xtend2.featurecalls.Xtend2IdentifiableTypeProvider;
 import org.eclipse.xtext.xtend2.linking.Xtend2LazyLinker;
 import org.eclipse.xtext.xtend2.linking.Xtend2LocationInFileProvider;
 import org.eclipse.xtext.xtend2.naming.Xtend2QualifiedNameProvider;
@@ -36,7 +32,7 @@ import com.google.inject.name.Names;
 public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2RuntimeModule {
 
 	@Override
-	public Class<? extends IXExpressionTypeProvider> bindIXExpressionTypeProvider() {
+	public Class<? extends ITypeProvider> bindITypeProvider() {
 		return Xtend2TypeProvider.class;
 	}
 	
@@ -45,16 +41,6 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 		return XbaseResource.class;
 	}
 	
-	@Override
-	public Class<? extends IdentifiableTypeProvider> bindIdentifiableTypeProvider() {
-		return Xtend2IdentifiableTypeProvider.class;
-	}
-
-	@Override
-	public Class<? extends IJvmTypeConformanceComputer> bindIJvmTypeConformanceComputer() {
-		return XbaseTypeConformanceComputer.class;
-	}
-
 	@Override
 	public Class<? extends IQualifiedNameConverter> bindIQualifiedNameConverter() {
 		return XbaseQualifiedNameConverter.class;
