@@ -9,7 +9,9 @@ package org.eclipse.xtext.xtend2.tests.validation;
 
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.xtend2.tests.richstring.AbstractRichStringTest;
+import org.eclipse.xtext.xtend2.validation.IssueCodes;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
+import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 
 import com.google.inject.Inject;
 
@@ -21,10 +23,50 @@ public class RichStringValidationTest extends AbstractRichStringTest {
 	@Inject
 	private ValidationTestHelper validationTestHelper;
 	
-	public void testRichStringValidation() throws Exception {
+	public void testRichStringValidation_01() throws Exception {
 		RichString richString = richString("'''\n"
 				+ "\tindentedLine\n"
 				+ "'''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testRichStringValidation_02() throws Exception {
+		RichString richString = richString("'''  \n"
+				+ "\t\tindentedLine\n"
+				+ "\t\tindentedLine\n"
+				+ "  '''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testRichStringValidation_03() throws Exception {
+		RichString richString = richString("'''  \n"
+				+ "  \tindentedLine\n"
+				+ "  \tindentedLine\n"
+				+ "  '''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testRichStringValidation_04() throws Exception {
+		RichString richString = richString("'''  \n"
+				+ "\t\tindentedLine\n"
+				+ "  \tindentedLine\n"
+				+ "  '''");
+		validationTestHelper.assertError(richString, Xtend2Package.Literals.RICH_STRING_LITERAL, IssueCodes.INCONSISTENT_INDENTATION, "inconsistent", "indentation");
+	}
+	
+	public void testRichStringValidation_05() throws Exception {
+		RichString richString = richString("'''    \n"
+				+ "\t\tindentedLine\n"
+				+ "\t\tindentedLine\n"
+				+ "  last line'''");
+		validationTestHelper.assertError(richString, Xtend2Package.Literals.RICH_STRING_LITERAL, IssueCodes.INCONSISTENT_INDENTATION, "inconsistent", "indentation");
+	}
+	
+	public void testRichStringValidation_06() throws Exception {
+		RichString richString = richString("'''        \n"
+				+ "  \tindentedLine\n"
+				+ "  \tindentedLine\n"
+				+ "  last line '''");
 		validationTestHelper.assertNoIssues(richString);
 	}
 }

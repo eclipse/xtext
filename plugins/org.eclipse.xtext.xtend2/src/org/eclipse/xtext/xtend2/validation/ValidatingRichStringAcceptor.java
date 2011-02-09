@@ -32,6 +32,7 @@ public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor
 	private RichStringLiteral root = null;
 	private LinkedList<String> indentationStack;
 	private String unfulfilledIndentationExpectation = null;
+	private int lastOffsetOfLiteral = -1;
 	
 	public ValidatingRichStringAcceptor(ValidationMessageAcceptor acceptor) {
 		this.acceptor = acceptor;
@@ -60,7 +61,11 @@ public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor
 			if (featureNodes.size() == 1) {
 				INode node = featureNodes.get(0);
 				currentOffset = node.getOffset();
-				if (node.getText().charAt(0) == '\'') {
+				String nodeText = node.getText();
+				if (nodeText.endsWith("'''")) {
+					lastOffsetOfLiteral = currentOffset + node.getLength() - 3;
+				}
+				if (nodeText.charAt(0) == '\'') {
 					currentOffset += 3;
 				} else {
 					currentOffset += 1;
@@ -117,8 +122,10 @@ public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor
 			return;
 		String indentation = indentationStack.getLast();
 		if (unfulfilledIndentationExpectation != null) {
-			this.acceptor.acceptWarning("Inconsistent indentation", root, currentOffset, indentation.length(), 
-					IssueCodes.INCONSISTENT_INDENTATION, unfulfilledIndentationExpectation);
+			if (currentOffset + indentation.length() != lastOffsetOfLiteral) {
+				this.acceptor.acceptWarning("Inconsistent indentation", root, currentOffset, indentation.length(), 
+						IssueCodes.INCONSISTENT_INDENTATION, unfulfilledIndentationExpectation);
+			}
 			unfulfilledIndentationExpectation = null;
 		}
 		currentOffset+=indentation.length();
