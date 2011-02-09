@@ -50,7 +50,7 @@ public class DefaultRenameStrategy implements IRenameStrategy {
 	protected String originalName;
 	protected URI targetElementOriginalURI;
 	protected ITextRegion originalNameRegion;
-	private URI targetElementNewURI;
+	protected URI targetElementNewURI;
 
 	protected DefaultRenameStrategy(EObject targetElement, ILocationInFileProvider locationInFileProvider) {
 		this.targetElementOriginalURI = EcoreUtil.getURI(targetElement);
