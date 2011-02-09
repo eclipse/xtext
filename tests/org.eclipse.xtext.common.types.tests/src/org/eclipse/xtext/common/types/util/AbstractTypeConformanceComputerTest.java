@@ -35,11 +35,11 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.DeclaredTypeFactory;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.internal.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -197,14 +197,6 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 		assertFalse(getComputer().isConformant(integerType, stringType));
 		assertFalse(getComputer().isConformant(integerType, stringType));
 	}
-//TODO this is broken, because the common type argument for Comparable<Integer> and Comparable<String> cannot be computed -> StackOverflow
-//	
-//	public void testStringAndInteger_01() throws Exception {
-//		JvmTypeReference stringType = ref(String.class);
-//		JvmTypeReference integerType = ref(Integer.class);
-//		JvmTypeReference superType = getComputer().getCommonSuperType(newArrayList(stringType,integerType));
-//		assertEquals(Object.class.getName(), superType.getCanonicalName());
-//	}
 	
 	/**
 	 * List<? super String> <= List<? super CharSequence> (but not vice versa)
@@ -451,6 +443,13 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 				"java.util.Collection<? extends java.lang.CharSequence>",
 				ref(Set.class, ref(String.class)),
 				ref(List.class, ref(CharSequence.class)));
+	}
+	
+	public void testCommonSuperType_11() throws Exception {
+		assertCommonSuperType(
+				"java.lang.Comparable<? extends java.lang.Object>",
+				ref(String.class),
+				ref(Integer.class));
 	}
 	
 	public void testConformanceWithTypeParameter() throws Exception {
