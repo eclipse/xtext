@@ -144,7 +144,7 @@ public class TypeProvider extends AbstractTypeProvider {
 	}
 
 	protected JvmTypeReference _expectedType(XMemberFeatureCall expr, EReference reference, int index) {
-		if (expr.getFeature().eIsProxy())
+		if (expr.getFeature() ==null || expr.getFeature().eIsProxy())
 			return null;
 		if (reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS ||
 			reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) {
@@ -468,7 +468,7 @@ public class TypeProvider extends AbstractTypeProvider {
 		return typeForName;
 	}
 	
-	protected JvmTypeReference _type(XReturnExpression object, boolean selfContained) {
+	protected JvmTypeReference _type(XReturnExpression object) {
 		final JvmTypeReference typeForName = getPrimitiveVoid(object);
 		return typeForName;
 	}
