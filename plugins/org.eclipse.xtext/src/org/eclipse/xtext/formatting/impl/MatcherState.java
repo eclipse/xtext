@@ -7,10 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting.impl;
 
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IAfterElement;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IBeforeElement;
@@ -32,6 +36,8 @@ public class MatcherState extends AbstractNFAState<MatcherState, MatcherTransiti
 	protected Set<IBetweenElements> beforeBetweenElements;
 
 	protected Set<IBeforeElement> beforePatterns;
+
+	protected Boolean ruleCallOptional = null;
 
 	public MatcherState(AbstractElement element, NFABuilder<MatcherState, MatcherTransition> builder) {
 		super(element, builder);
@@ -65,9 +71,32 @@ public class MatcherState extends AbstractNFAState<MatcherState, MatcherTransiti
 		return isEndState() || !getOutgoing().isEmpty();
 	}
 
+	protected boolean isOptional(AbstractElement ele) {
+		if (GrammarUtil.isOptionalCardinality(ele))
+			return true;
+		List<EObject> children = ele.eContents();
+		if (children.isEmpty() && getBuilder().filter(ele))
+			return true;
+		if (ele instanceof Alternatives) {
+			for (AbstractElement a : ((Alternatives) ele).getElements())
+				if (isOptional(a))
+					return true;
+			return false;
+		}
+		for (EObject e : children)
+			if (e instanceof AbstractElement && !isOptional((AbstractElement) e))
+				return false;
+		return true;
+	}
+
 	public boolean isParserRuleCall() {
 		return element instanceof RuleCall
 				&& ((RuleCall) element).getRule().getType().getClassifier() instanceof EClass;
 	}
 
+	public boolean isParserRuleCallOptional() {
+		if (ruleCallOptional == null)
+			ruleCallOptional = isParserRuleCall() && isOptional(((RuleCall) element).getRule().getAlternatives());
+		return ruleCallOptional;
+	}
 }

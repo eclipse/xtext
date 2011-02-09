@@ -12,7 +12,7 @@ common.Terminals
 generate elementmatchertestlanguage 'http://simple/elementmatchertestlanguage'
 
 Model:
-  Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression;
+  Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression | RuleCalls12;
 
 Simple:
   '#1' name=ID ('kw1' optional=ID)? datatype=FQN;
@@ -67,3 +67,15 @@ Prim returns Expression:
 	{Function} func=ID '(' param+=Add (',' param+=Add)* ')' |
 	{Pointer} '=>' target=Prim |
 	'(' Add ')';	
+
+RuleCalls12:
+	"#7" constructor=Constructor fields+=Field "kw3";
+	
+Constructor:
+	{Constructor} kw1?="kw1"?;
+	
+Field:
+	ID Parameter;
+	
+Parameter:
+	{Parameter} kw2?="kw2"?;
