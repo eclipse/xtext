@@ -78,9 +78,6 @@ import com.google.inject.Singleton;
 public class TypeProvider extends AbstractTypeProvider {
 
 	@Inject
-	private TypesService typesService;
-
-	@Inject
 	private TypeReferences typeReferences;
 	
 	@Inject
@@ -107,11 +104,6 @@ public class TypeProvider extends AbstractTypeProvider {
 	@Inject
 	private SuperTypeCollector collector;
 	
-	
-	public TypesService getTypesService() {
-		return typesService;
-	}
-
 	protected JvmTypeReference _expectedType(XAssignment assignment, EReference reference, int index) {
 		if (reference == XbasePackage.Literals.XASSIGNMENT__VALUE) {
 			JvmIdentifiableElement feature = assignment.getFeature();
@@ -223,7 +215,7 @@ public class TypeProvider extends AbstractTypeProvider {
 			final JvmTypeReference type = expr.getType();
 			if (type != null)
 				return type;
-			return typesService.getTypeForName(Object.class, expr);
+			return typeReferences.getTypeForName(Object.class, expr);
 		}
 		return null; // no expectations
 	}
@@ -253,14 +245,14 @@ public class TypeProvider extends AbstractTypeProvider {
 
 	protected JvmTypeReference _expectedType(XIfExpression expr, EReference reference, int index) {
 		if (reference == XbasePackage.Literals.XIF_EXPRESSION__IF) {
-			return typesService.getTypeForName(Boolean.class, expr);
+			return typeReferences.getTypeForName(Boolean.class, expr);
 		}
 		return getExpectedType(expr);
 	}
 
 	protected JvmTypeReference _expectedType(XForLoopExpression expr, EReference reference, int index) {
 		if (reference == XbasePackage.Literals.XFOR_LOOP_EXPRESSION__FOR_EXPRESSION) {
-			final JvmParameterizedTypeReference typeForName = (JvmParameterizedTypeReference) typesService.getTypeForName(Iterable.class, expr);
+			final JvmParameterizedTypeReference typeForName = (JvmParameterizedTypeReference) typeReferences.getTypeForName(Iterable.class, expr);
 			typeForName.getArguments().clear();
 			JvmWildcardTypeReference wildCard = factory.createJvmWildcardTypeReference();
 			JvmUpperBound upperBound = factory.createJvmUpperBound();
@@ -271,7 +263,7 @@ public class TypeProvider extends AbstractTypeProvider {
 				JvmTypeReference paramType = EcoreUtil2.clone(expr.getDeclaredParam().getParameterType());
 				upperBound.setTypeReference(paramType);
 			} else {
-				JvmTypeReference objectType = typesService.getTypeForName(Object.class,expr);
+				JvmTypeReference objectType = typeReferences.getTypeForName(Object.class,expr);
 				upperBound.setTypeReference(objectType);
 			}
 			return typeForName;
@@ -281,7 +273,7 @@ public class TypeProvider extends AbstractTypeProvider {
 
 	protected JvmTypeReference _expectedType(XAbstractWhileExpression expr, EReference reference, int index) {
 		if (reference == XbasePackage.Literals.XABSTRACT_WHILE_EXPRESSION__PREDICATE) {
-			final JvmTypeReference typeForName = typesService.getTypeForName(Boolean.class, expr);
+			final JvmTypeReference typeForName = typeReferences.getTypeForName(Boolean.class, expr);
 			return typeForName;
 		}
 		return null; // no other expectations
@@ -296,7 +288,7 @@ public class TypeProvider extends AbstractTypeProvider {
 
 	protected JvmTypeReference _expectedType(XCatchClause expr, EReference reference, int index) {
 		if (reference == XbasePackage.Literals.XCATCH_CLAUSE__DECLARED_PARAM) {
-			return typesService.getTypeForName(Throwable.class, expr);
+			return typeReferences.getTypeForName(Throwable.class, expr);
 		}
 		return null; // no other expectations
 	}
@@ -306,7 +298,7 @@ public class TypeProvider extends AbstractTypeProvider {
 	}
 
 	protected JvmTypeReference _expectedType(XThrowExpression expr, EReference reference, int index) {
-		return typesService.getTypeForName(Throwable.class, expr);
+		return typeReferences.getTypeForName(Throwable.class, expr);
 	}
 	
 	protected JvmTypeReference _expectedType(XReturnExpression expr, EReference reference, int index) {
@@ -322,12 +314,12 @@ public class TypeProvider extends AbstractTypeProvider {
 
 	protected JvmTypeReference _expectedType(XCasePart expr, EReference reference, int index) {
 		if (reference == XbasePackage.Literals.XCASE_PART__TYPE_GUARD) {
-			return typesService.getTypeForName(Class.class, expr);
+			return typeReferences.getTypeForName(Class.class, expr);
 		}
 		if (reference == XbasePackage.Literals.XCASE_PART__CASE) {
 			final XSwitchExpression switchExpr = (XSwitchExpression) expr.eContainer();
 			if (switchExpr.getSwitch() == null) {
-				return typesService.getTypeForName(Boolean.class, expr);
+				return typeReferences.getTypeForName(Boolean.class, expr);
 			}
 			return null;
 		}
@@ -377,7 +369,7 @@ public class TypeProvider extends AbstractTypeProvider {
 	protected JvmTypeReference _type(XBlockExpression object) {
 		List<XExpression> expressions = object.getExpressions();
 		if (expressions.isEmpty())
-			return typesService.getTypeForName(Void.class, object);
+			return typeReferences.getTypeForName(Void.class, object);
 		final JvmTypeReference getType = getType(expressions.get(expressions.size() - 1));
 		return getType;
 	}
@@ -399,20 +391,20 @@ public class TypeProvider extends AbstractTypeProvider {
 	}
 
 	protected JvmTypeReference _type(XBooleanLiteral object) {
-		return typesService.getTypeForName(Boolean.class, object);
+		return typeReferences.getTypeForName(Boolean.class, object);
 	}
 
 	protected JvmTypeReference _type(XNullLiteral object) {
-		final JvmTypeReference typeForName = typesService.getTypeForName(Void.class, object);
+		final JvmTypeReference typeForName = typeReferences.getTypeForName(Void.class, object);
 		return typeForName;
 	}
 
 	protected JvmTypeReference _type(XIntLiteral object) {
-		return typesService.getTypeForName(Integer.class, object);
+		return typeReferences.getTypeForName(Integer.class, object);
 	}
 
 	protected JvmTypeReference _type(XStringLiteral object) {
-		return typesService.getTypeForName(String.class, object);
+		return typeReferences.getTypeForName(String.class, object);
 	}
 
 	protected JvmTypeReference _type(XClosure object) {
@@ -438,7 +430,7 @@ public class TypeProvider extends AbstractTypeProvider {
 				}
 			}
 		}
-		return typesService.createFunctionTypeRef(object, parameterTypes, returnType);
+		return functionConversion.createFunctionTypeRef(object, parameterTypes, returnType);
 	}
 
 	protected JvmTypeReference _type(XCastedExpression object) {
@@ -456,11 +448,11 @@ public class TypeProvider extends AbstractTypeProvider {
 	protected JvmTypeReference _type(XTypeLiteral object) {
 		JvmParameterizedTypeReference typeRef = factory.createJvmParameterizedTypeReference();
 		typeRef.setType(object.getType());
-		return typesService.getTypeForName(Class.class, object, typeRef);
+		return typeReferences.getTypeForName(Class.class, object, typeRef);
 	}
 
 	protected JvmTypeReference _type(XInstanceOfExpression object) {
-		return typesService.getTypeForName(Boolean.class, object);
+		return typeReferences.getTypeForName(Boolean.class, object);
 	}
 
 	protected JvmTypeReference _type(XThrowExpression object) {
@@ -474,7 +466,7 @@ public class TypeProvider extends AbstractTypeProvider {
 	}
 
 	protected JvmTypeReference getPrimitiveVoid(XExpression object) {
-		return typesService.getTypeForName(Void.TYPE, object);
+		return typeReferences.getTypeForName(Void.TYPE, object);
 	}
 
 	protected JvmTypeReference _type(XTryCatchFinallyExpression object) {

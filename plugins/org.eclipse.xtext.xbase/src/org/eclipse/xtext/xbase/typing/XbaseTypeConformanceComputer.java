@@ -32,24 +32,21 @@ public class XbaseTypeConformanceComputer extends TypeConformanceComputer {
 	private FunctionConversion functionConversion;
 	
 	@Inject
-	private TypesService typesService;
-	
-	@Inject
 	private TypeReferences typeReferences;
 
 	@Override
 	public boolean isConformant(JvmTypeReference left, JvmTypeReference right) {
-		if (left == null || typesService.isObject(left))
+		if (left == null || typeReferences.is(left, Object.class))
 			return true;
 		if (left.eIsProxy() || right == null || right.eIsProxy())
 			return false;
-		if (typesService.isVoid(right))
+		if (typeReferences.is(right, Void.class))
 			return true;
 		if (functionConversion.isFunction(left) || functionConversion.isFunction(right))
 			return functionConversion.isConformant(left, right);
 		if (right.getType() instanceof JvmArrayType) {
 			JvmArrayType array = (JvmArrayType) right.getType();
-			if (typesService.isIterable(left)) {
+			if (typeReferences.is(left, Iterable.class)) {
 				JvmTypeReference newLeft = typeReferences.getArgument(left,0);
 				return isConformant(newLeft, array.getComponentType());
 			}

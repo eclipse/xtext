@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
@@ -33,7 +34,6 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
-import org.eclipse.xtext.xbase.typing.TypesService;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
@@ -52,7 +52,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	private XExpressionHelper expressionHelper;
 
 	@Inject
-	private TypesService typesService;
+	private TypeReferences typeRefs;
 
 	@Inject
 	private TypesFactory factory;
@@ -79,7 +79,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	@Check
 	public void checkTypes(XCatchClause catchClause) {
 		JvmTypeReference parameterType = catchClause.getDeclaredParam().getParameterType();
-		JvmTypeReference throwable = typesService.getTypeForName(Throwable.class, catchClause);
+		JvmTypeReference throwable = typeRefs.getTypeForName(Throwable.class, catchClause);
 		if (!conformanceComputer.isConformant(throwable, parameterType)) {
 			error("No exception of type " + parameterType.getCanonicalName()
 					+ " can be thrown; an exception type must be a subclass of Throwable",
@@ -182,7 +182,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Check
 	public void checkFeatureCallOnVoid(XMemberFeatureCall featureCall) {
-		if (typesService.isVoid(typeProvider.getType(featureCall.getMemberCallTarget()))) {
+		if (typeRefs.is(typeProvider.getType(featureCall.getMemberCallTarget()), Void.class)) {
 			error("Cannot access features of objects of type 'void'", null,
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, FEATURE_CALL_ON_VOID);
 		}

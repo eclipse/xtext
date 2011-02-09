@@ -10,11 +10,15 @@ package org.eclipse.xtext.xbase.compiler;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -34,7 +38,6 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.lib.Objects;
 import org.eclipse.xtext.xbase.typing.FunctionConversion;
-import org.eclipse.xtext.xbase.typing.TypesService;
 
 import com.google.inject.Inject;
 
@@ -43,7 +46,11 @@ import com.google.inject.Inject;
  */
 public class XbaseCompiler extends FeatureCallCompiler {
 	
-	@Inject private TypesService typeService;
+	@Inject 
+	private TypeReferences typeRefs;
+	
+	@Inject 
+	private Primitives primitives;
 
 	protected void openBlock(XExpression xExpression, IAppendable b) {
 		if (xExpression instanceof XBlockExpression) {
@@ -221,13 +228,20 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(varName);
 		b.append(" : ");
 		JvmTypeReference type = getTypeProvider().getType(expr.getForExpression());
-		if (typeService.isArray(type))
-			type = typeService.getIterableForArrayType(type, expr);
+		if (typeRefs.isArray(type))
+			type = getIterableForArrayType(type, expr);
 		internalToConvertedExpression(expr.getForExpression(), b, type);
 		b.append(") ");
 		openBlock(expr.getEachExpression(), b);
 		internalToJavaStatement(expr.getEachExpression(), b, false);
 		closeBlock(expr.getEachExpression(), b);
+	}
+	
+	protected JvmTypeReference getIterableForArrayType(JvmTypeReference arrayType, EObject context) {
+		if (!typeRefs.isArray(arrayType))
+			throw new IllegalArgumentException(arrayType + " not an array.");
+		final JvmTypeReference componentType = ((JvmArrayType) arrayType.getType()).getComponentType();
+		return typeRefs.getTypeForName(Iterable.class, context, primitives.toObjectReference(componentType));
 	}
 
 	public void _toJavaStatement(XConstructorCall expr, IAppendable b, boolean isReferenced) {
@@ -355,7 +369,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				internalToJavaStatement(casePart.getCase(), b, true);
 				b.append("\nif (");
 				JvmTypeReference convertedType = getTypeProvider().getType(casePart.getCase());
-				if (typeService.isBoolean(convertedType)) {
+				if (typeRefs.is(convertedType, Boolean.TYPE) || typeRefs.is(convertedType, Boolean.class)) {
 					internalToJavaExpression(casePart.getCase(), b);
 				} else {
 					b.append(Objects.class.getCanonicalName()).append("._operator_equals(").append(variableName).append(",");

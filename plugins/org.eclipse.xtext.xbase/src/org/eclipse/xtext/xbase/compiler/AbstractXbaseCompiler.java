@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -18,7 +19,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
-import org.eclipse.xtext.xbase.typing.TypesService;
 
 import com.google.inject.Inject;
 
@@ -32,18 +32,14 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	@Inject
-	private TypesService typesService;
-
-	public void setTypesService(TypesService typesService) {
-		this.typesService = typesService;
+	private TypeReferences typeReferences;
+	
+	protected TypeReferences getTypeReferences() {
+		return typeReferences;
 	}
 
 	@Inject
 	private ITypeProvider typeProvider;
-
-	public void setTypeProvider(ITypeProvider typeProvider) {
-		this.typeProvider = typeProvider;
-	}
 
 	protected ITypeProvider getTypeProvider() {
 		return typeProvider;
@@ -71,7 +67,7 @@ public abstract class AbstractXbaseCompiler {
 	
 	protected boolean isPrimitiveVoid(XExpression xExpression) {
 		JvmTypeReference type = getTypeProvider().getType(xExpression);
-		return typesService.isPrimitiveVoid(type);
+		return typeReferences.is(type, Void.TYPE);
 	}
 
 	protected void internalToJavaStatement(XExpression obj, IAppendable builder, boolean isReferenced) {

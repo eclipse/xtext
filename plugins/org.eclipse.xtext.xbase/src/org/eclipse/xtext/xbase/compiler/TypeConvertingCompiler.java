@@ -18,11 +18,11 @@ import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.typing.FunctionConversion;
-import org.eclipse.xtext.xbase.typing.TypesService;
 
 import com.google.inject.Inject;
 
@@ -38,7 +38,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	private TypeArgumentContextProvider contextProvider;
 	
 	@Inject
-	private TypesService typesService;
+	private TypeReferences typeRefs;
 
 	@Override
 	protected void internalToJavaExpression(final XExpression obj, final IAppendable appendable) {
@@ -69,7 +69,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 			appendable.append("((").append(getSerializedForm(left)).append(")");
 			expression.exec();
 			appendable.append(")");
-		} else if (right.getType() instanceof JvmArrayType && typesService.isIterable(left)) {
+		} else if (right.getType() instanceof JvmArrayType && typeRefs.is(left, Iterable.class)) {
 			appendable.append("((");
 			appendable.append(getSerializedForm(left));
 			appendable.append(")");

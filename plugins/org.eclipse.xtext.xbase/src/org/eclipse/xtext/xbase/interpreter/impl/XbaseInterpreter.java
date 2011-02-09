@@ -28,6 +28,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.access.impl.ClassFinder;
 import org.eclipse.xtext.common.types.util.JavaReflectAccess;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -67,7 +68,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
-import org.eclipse.xtext.xbase.typing.TypesService;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -123,7 +123,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	private ITypeProvider typeProvider;
 	
 	@Inject
-	private TypesService typeService;
+	private TypeReferences typeRefs;
 
 	private ClassFinder classFinder;
 
@@ -378,7 +378,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 
 	protected Object wrapArray(Object result, JvmTypeReference jvmTypeReference) {
-		if (typeService.isInstanceOfIterable(jvmTypeReference)) {
+		if (typeRefs.isInstanceOf(jvmTypeReference, Iterable.class)) {
 			return Conversions.doWrapArray(result);
 		}
 		return result;
