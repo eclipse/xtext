@@ -25,6 +25,9 @@ public class Primitives {
 	@Inject
 	private IJvmTypeProvider.Factory typeProviderFactory;
 	
+	@Inject
+	private TypeReferences typeReferences;
+	
 	public void setTypeProviderFactory(IJvmTypeProvider.Factory typeProviderFactory) {
 		this.typeProviderFactory = typeProviderFactory;
 	}
@@ -96,6 +99,14 @@ public class Primitives {
 			throw new NullPointerException("context not contained in ResourceSet");
 		IJvmTypeProvider provider = typeProviderFactory.createTypeProvider(resourceSet);
 		return provider.findTypeByName(class1.getCanonicalName());
+	}
+	
+	public JvmTypeReference toObjectReference(JvmTypeReference xTypeRef) {
+		if (isPrimitive(xTypeRef)) {
+			JvmType wrapperType = getWrapperType((JvmPrimitiveType) xTypeRef.getType());
+			xTypeRef = typeReferences.createTypeRef(wrapperType);
+		}
+		return xTypeRef;
 	}
 
 	public boolean isPrimitive(JvmTypeReference componentType) {

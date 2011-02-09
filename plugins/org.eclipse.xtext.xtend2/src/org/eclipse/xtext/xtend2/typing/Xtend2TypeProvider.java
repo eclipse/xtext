@@ -10,8 +10,8 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
-import org.eclipse.xtext.xbase.typing.TypesService;
 import org.eclipse.xtext.xbase.typing.TypeProvider;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xtend2.linking.XtendSourceAssociator;
@@ -28,7 +28,7 @@ import com.google.inject.Singleton;
 public class Xtend2TypeProvider extends TypeProvider {
 	
 	@Inject
-	private TypesService typeService;
+	private TypeReferences typeRefs;
 	
 	@Inject
 	private TypesFactory factory;
@@ -41,7 +41,7 @@ public class Xtend2TypeProvider extends TypeProvider {
 	
 	protected JvmTypeReference _expectedType(XtendFunction function, EReference reference, int index) {
 		if (reference==Xtend2Package.Literals.XTEND_FUNCTION__EXPRESSION) {
-			if (function.getReturnType()==null || typeService.isPrimitiveVoid(function.getReturnType()))
+			if (function.getReturnType()==null || typeRefs.is(function.getReturnType(), Void.TYPE))
 				return null;
 			return function.getReturnType();
 		}
@@ -49,11 +49,11 @@ public class Xtend2TypeProvider extends TypeProvider {
 	}
 	
 	protected JvmTypeReference _type(RichString richString) {
-		return getTypesService().getTypeForName(StringConcatenation.class, richString);
+		return typeRefs.getTypeForName(StringConcatenation.class, richString);
 	}
 	
 	protected JvmTypeReference _type(RichStringLiteral stringLiteral) {
-		return getTypesService().getTypeForName(String.class, stringLiteral);
+		return typeRefs.getTypeForName(String.class, stringLiteral);
 	}
 	
 	protected JvmTypeReference _typeForIdentifiable(XtendClass clazz) {
@@ -75,7 +75,7 @@ public class Xtend2TypeProvider extends TypeProvider {
 				computations.remove(func);
 			}
 		} else {
-			return typeService.getTypeForName(Object.class, func);
+			return typeRefs.getTypeForName(Object.class, func);
 		}
 	}
 

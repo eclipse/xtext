@@ -16,6 +16,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -27,8 +30,10 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
+import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.Functions;
 
 import com.google.common.base.Function;
@@ -47,6 +52,12 @@ public class FunctionConversion {
 
 	@Inject
 	private TypesFactory factory = TypesFactory.eINSTANCE;
+	
+	@Inject
+	private TypeReferences typeRefs;
+
+	@Inject
+	private Primitives primitives;
 
 	private interface FuncDesc {
 		JvmTypeReference getReturnType();
@@ -253,6 +264,46 @@ public class FunctionConversion {
 			}
 		}
 		return false;
+	}
+	
+	public JvmParameterizedTypeReference createFunctionTypeRef(EObject context, List<JvmTypeReference> parameterTypes,
+			JvmTypeReference returnType) {
+		JvmParameterizedTypeReference ref = factory.createJvmParameterizedTypeReference();
+		final Class<?> loadFunctionClass = loadFunctionClass("Function" + parameterTypes.size());
+		JvmGenericType declaredType = (JvmGenericType) typeRefs.findDeclaredType(loadFunctionClass, context);
+		ref.setType(declaredType);
+
+		for (int i = 0; i < parameterTypes.size(); i++) {
+			JvmTypeReference xTypeRef = parameterTypes.get(i);
+			if (xTypeRef == null) {
+				JvmParameterizedTypeReference reference = factory.createJvmParameterizedTypeReference();
+				JvmTypeParameter typeParameter = declaredType.getTypeParameters().get(i);
+				reference.setType(typeParameter);
+				ref.getArguments().add(reference);
+			} else {
+				xTypeRef = primitives.toObjectReference(xTypeRef);
+				ref.getArguments().add(EcoreUtil2.clone(xTypeRef));
+			}
+		}
+		if (returnType != null) {
+			returnType = primitives.toObjectReference(returnType);
+			ref.getArguments().add(EcoreUtil2.clone(returnType));
+		} else {
+			JvmParameterizedTypeReference reference = factory.createJvmParameterizedTypeReference();
+			JvmTypeParameter typeParameter = getLast(declaredType.getTypeParameters());
+			reference.setType(typeParameter);
+			ref.getArguments().add(reference);
+		}
+		return ref;
+	}
+	
+	protected Class<?> loadFunctionClass(String simpleFunctionName) {
+		try {
+			return Functions.class.getClassLoader().loadClass(
+					Functions.class.getCanonicalName() + "$" + simpleFunctionName);
+		} catch (ClassNotFoundException e) {
+			throw new WrappedException(e);
+		}
 	}
 	
 }

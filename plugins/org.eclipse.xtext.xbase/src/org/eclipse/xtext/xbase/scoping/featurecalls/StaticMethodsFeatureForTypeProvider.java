@@ -21,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.Booleans;
 import org.eclipse.xtext.xbase.lib.Collections;
 import org.eclipse.xtext.xbase.lib.Comparables;
@@ -28,7 +29,6 @@ import org.eclipse.xtext.xbase.lib.Integers;
 import org.eclipse.xtext.xbase.lib.Iterables;
 import org.eclipse.xtext.xbase.lib.Objects;
 import org.eclipse.xtext.xbase.lib.Strings;
-import org.eclipse.xtext.xbase.typing.TypesService;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
 import com.google.common.base.Predicate;
@@ -42,13 +42,13 @@ import com.google.inject.Inject;
 public class StaticMethodsFeatureForTypeProvider implements IFeaturesForTypeProvider {
 
 	@Inject
-	private TypesService typeService;
-
-	@Inject
 	private TypesFactory typesFactory;
 
 	@Inject
 	private XbaseTypeConformanceComputer conformanceComputer;
+	
+	@Inject
+	private TypeReferences typeRefs;
 
 	private EObject context;
 
@@ -60,7 +60,7 @@ public class StaticMethodsFeatureForTypeProvider implements IFeaturesForTypeProv
 				.getCanonicalName());
 		Iterable<JvmOperation> staticMethods = emptySet();
 		for (Class<?> clazz : operators) {
-			JvmTypeReference typeReference = typeService.getTypeForName(clazz, context);
+			JvmTypeReference typeReference = typeRefs.getTypeForName(clazz, context);
 			if (typeReference == null) {
 				throw new IllegalStateException("couldn't find type " + clazz.getCanonicalName()+" on classpath.");
 			}

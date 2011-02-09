@@ -25,13 +25,12 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.Primitives;
-import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.IAcceptor;
-import org.eclipse.xtext.xbase.typing.TypesService;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -60,9 +59,6 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 	
 	@Inject
 	private TypesFactory typesFactory = TypesFactory.eINSTANCE;
-	
-	@Inject
-	private TypesService typeService;
 	
 	@Inject
 	private TypeReferences typeRefs;
@@ -214,7 +210,7 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 				JvmType wrapperType = primitives.getWrapperType((JvmPrimitiveType) componentType.getType());
 				componentType = typeRefs.createTypeRef(wrapperType);
 			}
-			JvmTypeReference iterable = typeService.getTypeForName(Iterable.class, getRealComponentType(arrayType), componentType);
+			JvmTypeReference iterable = typeRefs.getTypeForName(Iterable.class, getRealComponentType(arrayType), componentType);
 			return concat(result,linearizeTypeHierarchy(iterable));
 		}
 		return result;
