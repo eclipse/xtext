@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting.impl;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +57,7 @@ public class MatcherTransition extends AbstractNFATransition<MatcherState, Match
 		return guardedPatterns == null ? Collections.<MatcherState, Set<IElementPattern>> emptyMap() : guardedPatterns;
 	}
 
-	public List<IElementPattern> getPatterns(List<MatcherState> from) {
+	public List<IElementPattern> getPatterns(Collection<MatcherState> from) {
 		if (guardedPatterns == null && commonPatterns == null)
 			return Collections.<IElementPattern> emptyList();
 		List<IElementPattern> result = Lists.newArrayList();

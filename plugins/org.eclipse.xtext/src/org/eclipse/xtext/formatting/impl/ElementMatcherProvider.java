@@ -82,7 +82,9 @@ public class ElementMatcherProvider implements IElementMatcherProvider {
 		}
 
 		protected Pair<List<MatcherTransition>, List<MatcherState>> findTransitionPath(MatcherState from,
-				AbstractElement to, boolean returning, boolean canReturn) {
+				AbstractElement to, boolean returning, boolean canReturn, Set<Pair<Boolean, MatcherState>> visited) {
+			if (!visited.add(Tuples.create(returning, from)))
+				return null;
 			if (from != null) {
 				for (MatcherTransition transition : returning ? from.getOutgoingAfterReturn() : from.getOutgoing()) {
 					if (transition.getTarget().getGrammarElement() == to)
@@ -90,7 +92,8 @@ public class ElementMatcherProvider implements IElementMatcherProvider {
 					else if (transition.getTarget().isParserRuleCall()) {
 						ruleCallStack.push(transition.getTarget());
 						Pair<List<MatcherTransition>, List<MatcherState>> next = findTransitionPath(
-								transition.getTarget(), to, false, false);
+								transition.getTarget(), to, false, transition.getTarget().isParserRuleCallOptional(),
+								visited);
 						if (next != null) {
 							List<MatcherTransition> trans = Lists.newArrayList(transition);
 							trans.addAll(next.getFirst());
@@ -104,7 +107,7 @@ public class ElementMatcherProvider implements IElementMatcherProvider {
 				if (canReturn && from.isEndState() && !ruleCallStack.isEmpty()) {
 					MatcherState lastRuleCall = ruleCallStack.pop();
 					Pair<List<MatcherTransition>, List<MatcherState>> next = findTransitionPath(lastRuleCall, to, true,
-							true);
+							true, visited);
 					if (next != null) {
 						List<MatcherState> result = Lists.newArrayList(from);
 						result.addAll(next.getSecond());
@@ -125,7 +128,8 @@ public class ElementMatcherProvider implements IElementMatcherProvider {
 			List<MatcherTransition> result = Lists.newArrayList();
 			for (MatcherTransition transition : returning ? from.getOutgoingAfterReturn() : from.getOutgoing()) {
 				if (transition.getTarget().isParserRuleCall())
-					result.addAll(findTransitionsToToken(transition.getTarget(), targets, false, false, visited));
+					result.addAll(findTransitionsToToken(transition.getTarget(), targets, false, transition.getTarget()
+							.isParserRuleCallOptional(), visited));
 				else if (targets == null || targets.contains(transition.getTarget()))
 					result.add(transition);
 			}
@@ -250,7 +254,7 @@ public class ElementMatcherProvider implements IElementMatcherProvider {
 
 		public Collection<T> matchNext(AbstractElement nextElement) {
 			Pair<List<MatcherTransition>, List<MatcherState>> path = findTransitionPath(lastState, nextElement, false,
-					true);
+					true, Sets.<Pair<Boolean, MatcherState>> newHashSet());
 			if (path == null) {
 				MatcherState previousState = lastState;
 				lastState = nfaProvider.getNFA(nextElement);
@@ -266,8 +270,9 @@ public class ElementMatcherProvider implements IElementMatcherProvider {
 		@SuppressWarnings("unchecked")
 		protected Collection<T> patternsForTransition(Pair<List<MatcherTransition>, List<MatcherState>> transition) {
 			List<IElementPattern> result = Lists.newArrayList();
+			Set<MatcherState> exits = Sets.newHashSet(transition.getSecond());
 			for (MatcherTransition transitio : transition.getFirst())
-				result.addAll(transitio.getPatterns(transition.getSecond()));
+				result.addAll(transitio.getPatterns(exits));
 			return (Collection<T>) result;
 		}
 
