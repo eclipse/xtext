@@ -16,7 +16,7 @@ import com.google.inject.ImplementedBy;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@ImplementedBy(TypeProvider.class)
+@ImplementedBy(XbaseTypeProvider.class)
 public interface ITypeProvider {
 
 	/**

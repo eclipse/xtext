@@ -75,7 +75,7 @@ import com.google.inject.Singleton;
  * @author Sven Efftinge
  */
 @Singleton
-public class TypeProvider extends AbstractTypeProvider {
+public class XbaseTypeProvider extends AbstractTypeProvider {
 
 	@Inject
 	private TypeReferences typeReferences;
@@ -145,6 +145,7 @@ public class TypeProvider extends AbstractTypeProvider {
 				XExpression caller = getExpression(expr, reference, index);
 				List<XExpression> arguments = featureCall2javaMapping.getActualArguments(expr);
 				TypeArgumentContext context = getFeatureCallTypeArgContext(expr, reference, index);
+				//TODO map arguments correctly
 				if (reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS) {
 					int paramIndex = arguments.indexOf(caller);
 					if (paramIndex<0 || paramIndex>=feature.getParameters().size())

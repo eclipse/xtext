@@ -22,7 +22,7 @@ import org.eclipse.xtext.xbase.linking.XbaseLinkingScopeProvider;
 import org.eclipse.xtext.xbase.resource.XbaseResource;
 import org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
-import org.eclipse.xtext.xbase.typing.TypeProvider;
+import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -50,7 +50,7 @@ public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 	}
 	
 	public Class<? extends ITypeProvider> bindIXExpressionTypeProvider() {
-		return TypeProvider.class;
+		return XbaseTypeProvider.class;
 	}
 	
 	@Override
