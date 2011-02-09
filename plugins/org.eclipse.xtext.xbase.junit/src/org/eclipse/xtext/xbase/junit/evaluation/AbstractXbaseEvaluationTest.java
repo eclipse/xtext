@@ -9,9 +9,12 @@ package org.eclipse.xtext.xbase.junit.evaluation;
 
 import java.util.Stack;
 
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
+
 import junit.framework.TestCase;
 import testdata.ExceptionSubclass;
 
+import com.google.inject.Inject;
 import com.google.inject.internal.Lists;
 
 /**
@@ -34,6 +37,8 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	public void testUnaryOperator_02() throws Exception {
 		assertEvaluatesTo("-1","(-1).toString()");
 	}
+	
+	@Inject ITypeProvider typeProvider;
 	
 	public void testUpToOperator() throws Exception {
 		assertEvaluatesTo(new Integer(9),"(9..13).iterator().next()");
