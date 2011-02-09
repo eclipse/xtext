@@ -36,7 +36,7 @@ public class XbaseGeneratorFragment extends DefaultGeneratorFragment {
 				.addTypeToType(IQualifiedNameConverter.class.getName(),
 						"org.eclipse.xtext.xbase.XbaseQualifiedNameConverter")
 				.addTypeToType("org.eclipse.xtext.xbase.typing.ITypeProvider",
-						"org.eclipse.xtext.xbase.typing.TypeProvider")
+						"org.eclipse.xtext.xbase.typing.XbaseTypeProvider")
 				.addTypeToType(IValueConverterService.class.getName(),
 						"org.eclipse.xtext.xbase.conversion.XbaseValueConverterService")
 				.addConfiguredBinding(
