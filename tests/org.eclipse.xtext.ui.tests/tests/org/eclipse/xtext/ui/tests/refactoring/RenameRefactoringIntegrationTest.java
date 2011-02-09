@@ -222,7 +222,7 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 
 	protected Change createChange(URI targetElementURI, String newName) throws Exception {
 		RenameElementProcessor processor = processorProvider.get();
-		processor.initialize(new IRenameElementContext.Impl(targetElementURI, RefactoringPackage.Literals.ELEMENT, null, null));
+		processor.initialize(new IRenameElementContext.Impl(targetElementURI, RefactoringPackage.Literals.ELEMENT, null, null,null));
 		RefactoringStatus initialStatus = processor.checkInitialConditions(new NullProgressMonitor());
 		assertTrue(initialStatus.isOK());
 		processor.setNewName(newName);

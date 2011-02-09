@@ -17,18 +17,30 @@ import org.eclipse.ltk.core.refactoring.participants.RenameArguments;
  * Stores information on an element to be renamed and elements whose names change as a consequence.
  * 
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Holger Schill
  */
 public class ElementRenameArguments extends RenameArguments {
 
-	private final URI baseElementURI;
+	private URI contextResourceURI = null;
+	private final URI targetElementURI;
 	private final Map<URI,URI> original2newElementURIs;
 	private final IRenameStrategy renameStrategy;
 
-	public ElementRenameArguments(URI baseElementURI, String newName, IRenameStrategy renameStrategy,
+	public ElementRenameArguments(URI targetElementURI, String newName, IRenameStrategy renameStrategy,
+			Map<URI,URI> original2newElementURIs,
+			boolean updateReferences, URI contextResourceURI) {
+		super(newName, updateReferences);
+		this.targetElementURI = targetElementURI;
+		this.renameStrategy = renameStrategy;
+		this.original2newElementURIs = original2newElementURIs;
+		this.contextResourceURI = contextResourceURI;
+	}
+	
+	public ElementRenameArguments(URI targetElementURI, String newName, IRenameStrategy renameStrategy,
 			Map<URI,URI> original2newElementURIs,
 			boolean updateReferences) {
 		super(newName, updateReferences);
-		this.baseElementURI = baseElementURI;
+		this.targetElementURI = targetElementURI;
 		this.renameStrategy = renameStrategy;
 		this.original2newElementURIs = original2newElementURIs;
 	}
@@ -37,8 +49,12 @@ public class ElementRenameArguments extends RenameArguments {
 		return original2newElementURIs.keySet();
 	}
 	
-	public URI getBaseElementURI() {
-		return baseElementURI;
+	public URI getTargetElementURI() {
+		return targetElementURI;
+	}
+	
+	public URI getContextResourceURI(){
+		return contextResourceURI;
 	}
 	
 	public URI getNewElementURI(URI originalElementURI) {

@@ -45,6 +45,7 @@ import com.google.inject.Inject;
  * refactoring.
  * 
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Holger Schill
  */
 public class RenameElementProcessor extends AbstractRenameProcessor {
 
@@ -136,6 +137,11 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	@Override
 	public void setNewName(String newName) {
 		this.newName = newName;
+	}
+	
+	@Override
+	public String getNewName() {
+		return newName;
 	}
 
 	@Override

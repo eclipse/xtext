@@ -27,6 +27,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Holger Schill
  */
 public abstract class AbstractReferenceUpdater implements IReferenceUpdater {
 	@Inject
@@ -64,7 +65,7 @@ public abstract class AbstractReferenceUpdater implements IReferenceUpdater {
 	protected XtextResource loadTargetResource(ResourceSet resourceSet, ElementRenameArguments elementRenameArguments,
 			IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, "Loading target resource", 1);
-		Resource targetResource = resourceSet.getResource(elementRenameArguments.getBaseElementURI().trimFragment(),
+		Resource targetResource = resourceSet.getResource(elementRenameArguments.getTargetElementURI().trimFragment(),
 				true);
 		if (!(targetResource instanceof XtextResource)) {
 			throw new RefactoringStatusException("Cannot load target resource", true);

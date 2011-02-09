@@ -25,6 +25,7 @@ import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Holger Schill
  */
 public class RenameElementWizard extends RefactoringWizard {
 
@@ -44,12 +45,14 @@ public class RenameElementWizard extends RefactoringWizard {
 	protected static class UserInputPage extends UserInputWizardPage {
 
 		private final AbstractRenameProcessor renameElementProcessor;
-
 		private Text nameField;
+		private String currentName;
 
 		public UserInputPage(AbstractRenameProcessor processor) {
 			super("RenameElementResourceRefactoringInputPage"); //$NON-NLS-1$
 			renameElementProcessor = processor;
+			currentName = renameElementProcessor.getNewName() != null ? renameElementProcessor.getNewName()
+					: renameElementProcessor.getRenameElementStrategy().getOriginalName();
 		}
 
 		public void createControl(Composite parent) {
@@ -58,10 +61,11 @@ public class RenameElementWizard extends RefactoringWizard {
 			composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			composite.setFont(parent.getFont());
 			Label label = new Label(composite, SWT.NONE);
-			label.setText("New name");
+			label.setText("New name");//$NON-NLS-1$
 			label.setLayoutData(new GridData());
 			nameField = new Text(composite, SWT.BORDER);
-			nameField.setText(renameElementProcessor.getRenameElementStrategy().getOriginalName());
+
+			nameField.setText(currentName);
 			nameField.setFont(composite.getFont());
 			nameField.setLayoutData(new GridData(GridData.FILL, GridData.BEGINNING, true, false));
 			nameField.addModifyListener(new ModifyListener() {
@@ -70,7 +74,7 @@ public class RenameElementWizard extends RefactoringWizard {
 				}
 			});
 			nameField.selectAll();
-			setPageComplete(false);
+			setPageComplete(renameElementProcessor.getRenameElementStrategy().validateNewName(currentName));
 			setControl(composite);
 		}
 
