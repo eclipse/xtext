@@ -23,10 +23,10 @@ import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.eclipse.xtext.xtend2.linking.XtendSourceAssociator;
+import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 
 import com.google.common.base.Predicate;
-import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -34,38 +34,36 @@ import com.google.inject.Inject;
 public class Xtend2FindReferencesHandler extends FindReferencesHandler {
 
 	private static final Logger LOG = Logger.getLogger(Xtend2FindReferencesHandler.class);
-	
-	@Inject
-	private XtendSourceAssociator xtendSourceAssociator;
-	
+
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
 			XtextEditor editor = EditorUtils.getActiveXtextEditor(event);
 			if (editor != null) {
 				final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
-				Pair<URI, Predicate<IReferenceDescription>> queryData = editor.getDocument().readOnly(new IUnitOfWork<Pair<URI, Predicate<IReferenceDescription>>, XtextResource>() {
-					public Pair<URI, Predicate<IReferenceDescription>> exec(XtextResource state) throws Exception {
-						EObject element = eObjectAtOffsetHelper.resolveElementAt(state, selection.getOffset());
-						if (element != null) {
-							EObject xtendSource = xtendSourceAssociator.getXtendSource(element);
-							Predicate<IReferenceDescription> filter = null;
-							if(xtendSource != null) {
-								final URI xtendSourceURI = EcoreUtil.getURI(xtendSource);
-								filter = new Predicate<IReferenceDescription>() {
-									public boolean apply(IReferenceDescription input) {
-										return !xtendSourceURI.equals(input.getSourceEObjectUri());
+				Pair<URI, Filter> queryData = editor.getDocument().readOnly(
+						new IUnitOfWork<Pair<URI, Filter>, XtextResource>() {
+							public Pair<URI, Filter> exec(XtextResource state)
+									throws Exception {
+								EObject element = eObjectAtOffsetHelper.resolveElementAt(state, selection.getOffset());
+								if (element != null) {
+									Filter filter = new Filter();
+									if (element instanceof XtendClass) {
+										filter.setFilteredXtendSource(element);
+										element = ((XtendClass) element).getInferredJvmType();
+									} else if (element instanceof XtendMember) {
+										filter.setFilteredXtendSource(element);
+										element = ((XtendMember) element).getInferredJvmMember();
 									}
-								};
+									return Tuples.create(EcoreUtil.getURI(element), filter);
+								}
+								return null;
 							}
-							return Tuples.create(EcoreUtil.getURI(element), filter);
-						}
-						return null;
-					}
-				});
+
+						});
 				if (queryData != null) {
-					QueryExecutor queryExecutor = globalServiceProvider.findService(queryData.getFirst().trimFragment(),
-							QueryExecutor.class);
+					QueryExecutor queryExecutor = globalServiceProvider.findService(
+							queryData.getFirst().trimFragment(), QueryExecutor.class);
 					if (queryExecutor != null) {
 						queryExecutor.execute(queryData.getFirst(), localContextProvider, queryData.getSecond());
 					}
@@ -77,4 +75,19 @@ public class Xtend2FindReferencesHandler extends FindReferencesHandler {
 		return null;
 	}
 
+	protected static class Filter implements Predicate<IReferenceDescription> {
+		private URI xtendSourceURI;
+
+		public void setFilteredXtendSource(EObject xtendSource) {
+			xtendSourceURI = EcoreUtil.getURI(xtendSource);
+		}
+
+		public boolean apply(IReferenceDescription input) {
+			return !isInferredJvmElement(input.getSourceEObjectUri()) && (xtendSourceURI == null || !xtendSourceURI.equals(input.getSourceEObjectUri()));
+		}
+
+		protected boolean isInferredJvmElement(URI elementURI) {
+			return elementURI.fragment().startsWith("/1/");
+		}
+	}
 }
