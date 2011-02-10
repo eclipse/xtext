@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -69,6 +70,9 @@ public class FeatureCallChecker {
 	private ITypeProvider typeProvider;
 	
 	@Inject
+	private TypeReferences typeRefs;
+	
+	@Inject
 	private FeatureCallToJavaMapping featureCall2JavaMapping;
 
 	public void setTypeProvider(ITypeProvider typeProvider) {
@@ -114,7 +118,7 @@ public class FeatureCallChecker {
 			JvmFormalParameter parameter = input.getParameters().get(i);
 			XExpression expression = context.getArguments().get(i);
 			JvmTypeReference type = getTypeProvider().getType(expression);
-			if (!conformance.isConformant(parameter.getParameterType(), type))
+			if (!conformance.isConformant(parameter.getParameterType(), type, true))
 				return INVALID_ARGUMENT_TYPES;
 		}
 		return null;
@@ -181,7 +185,8 @@ public class FeatureCallChecker {
 
 	protected String _case(JvmOperation input, XMemberFeatureCall context, EReference ref,
 			JvmFeatureDescription jvmFeatureDescription) {
-		if (input.isStatic() && !jvmFeatureDescription.isMemberSyntaxContext()) {
+		if (input.isStatic() && !jvmFeatureDescription.isMemberSyntaxContext() 
+				&& input.getParameters().size()==context.getMemberCallArguments().size()) {
 			return INSTANCE_ACCESS_TO_STATIC_MEMBER;
 		} else {
 			return checkJvmOperation(input, context, context.isExplicitOperationCall(), jvmFeatureDescription,
@@ -235,9 +240,9 @@ public class FeatureCallChecker {
 	protected boolean isCompatibleArgument(JvmTypeReference declaredType, JvmTypeReference actualType,
 			EObject contextElement, JvmFeatureDescription jvmFeatureDescription) {
 		//TODO is actualType is reference to TypeParam, it's ok let the validation figure that out.
-		return actualType == null
-				|| actualType.getCanonicalName().equals("java.lang.Void") // void should be treated as compatible to everything
-				|| conformance.isConformant(jvmFeatureDescription.getContext().getLowerBound(declaredType), actualType);
+		if (actualType == null || typeRefs.is(actualType, Void.class))
+			return true;
+		return conformance.isConformant(declaredType, actualType, true);
 	}
 
 	protected int getCallTypeDelta(JvmFeatureDescription jvmFeatureDescription) {

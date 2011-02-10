@@ -135,7 +135,39 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 	protected Resource getSyntheticResource() {
 		return syntheticResource;
 	}
+	
+	public void testWildCardWithDefaultUpper() throws Exception {
+		JvmTypeReference left = ref(Iterable.class, wc_extends(ref(Object.class)));
+		JvmTypeReference right = ref(List.class, wc());
+		assertTrue(getComputer().isConformant(left, right, true));
+		assertTrue(getComputer().isConformant(left, right, false));
+	}
 
+	public void testIgnoreGenrics_00() throws Exception {
+		JvmTypeReference list = ref(List.class, wc_super(ref(Integer.class)));
+		JvmTypeReference iterable = ref(Iterable.class, wc_super(ref(String.class)));
+		assertTrue(getComputer().isConformant(iterable, list, true));
+		assertFalse(getComputer().isConformant(iterable, list, false));
+	}
+	public void testIgnoreGenrics_01() throws Exception {
+		JvmTypeReference list = ref(List.class, wc_super(ref(Integer.class)));
+		JvmTypeReference list2 = ref(List.class, wc_super(ref(String.class)));
+		assertTrue(getComputer().isConformant(list2, list, true));
+		assertFalse(getComputer().isConformant(list2, list, false));
+	}
+	public void testIgnoreGenrics_02() throws Exception {
+		JvmTypeReference left = ref(CharSequence.class);
+		JvmTypeReference right = ref(List.class, wc_super(ref(Integer.class)));
+		assertFalse(getComputer().isConformant(left, right, true));
+		assertFalse(getComputer().isConformant(left, right, false));
+	}
+	public void testIgnoreGenrics_03() throws Exception {
+		JvmTypeReference left = ref(Integer.TYPE);
+		JvmTypeReference right = ref(Long.TYPE);
+		assertTrue(getComputer().isConformant(left, right, false));
+		assertTrue(getComputer().isConformant(left, right, true));
+	}
+	
 	/**
 	 * List <= List<? super CharSequence>
 	 * and

@@ -143,17 +143,18 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			if (expr.getFeature() instanceof JvmOperation) {
 				JvmOperation feature = (JvmOperation) expr.getFeature();
 				XExpression caller = getExpression(expr, reference, index);
-				List<XExpression> arguments = featureCall2javaMapping.getActualArguments(expr);
+				List<XExpression> actualArguments = featureCall2javaMapping.getActualArguments(expr);
 				TypeArgumentContext context = getFeatureCallTypeArgContext(expr, reference, index);
-				//TODO map arguments correctly
-				if (reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS) {
-					int paramIndex = arguments.indexOf(caller);
+				if (actualArguments.contains(caller)) {
+					int paramIndex = actualArguments.indexOf(caller);
 					if (paramIndex<0 || paramIndex>=feature.getParameters().size())
 						return null;
 					JvmFormalParameter parameter = feature.getParameters().get(paramIndex);
-					return context.getLowerBound(parameter.getParameterType());
+					final JvmTypeReference parameterType = parameter.getParameterType();
+					return context.getLowerBound(parameterType);
 				} else {
-					return context.getLowerBound(typeReferences.createTypeRef(feature.getDeclaringType()));
+					final JvmParameterizedTypeReference createTypeRef = typeReferences.createTypeRef(feature.getDeclaringType());
+					return context.getLowerBound(createTypeRef);
 				}
 			} else if (expr.getFeature() instanceof JvmField) {
 				JvmField field = (JvmField) expr.getFeature();

@@ -75,7 +75,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	public void testBlockExpression() throws Exception {
-		XBlockExpression target = (XBlockExpression) expressionWithExpectedType("{ true false null }", "Boolean");
+		XBlockExpression target = (XBlockExpression) expressionWithExpectedType("{ true.toString false.toString null }", "Boolean");
 		assertExpected(null, target.getExpressions().get(0));
 		assertExpected(null, target.getExpressions().get(1));
 		assertExpected("java.lang.Boolean", target.getExpressions().get(2));

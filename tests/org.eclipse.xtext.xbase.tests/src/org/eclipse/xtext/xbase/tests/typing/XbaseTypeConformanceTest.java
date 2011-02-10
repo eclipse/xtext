@@ -82,16 +82,41 @@ public class XbaseTypeConformanceTest extends AbstractXbaseTestCase {
 	protected boolean isConformant(String left, String right) throws Exception {
 		final String leftExpression = "null as "+left;
 		final String rightExpression = "null as "+right;
-		return isConformantReturnTypes(leftExpression, rightExpression);
+		return isConformantReturnTypes(leftExpression, rightExpression, false);
 	}
 
-	protected boolean isConformantReturnTypes(final String leftExpression, final String rightExpression)
+	protected boolean isConformantReturnTypes(final String leftExpression, final String rightExpression) throws Exception {
+		return isConformantReturnTypes(leftExpression, rightExpression, false);
+	}
+	
+	protected boolean isConformantReturnTypes(final String leftExpression, final String rightExpression, boolean ignoreGenerics)
 			throws Exception {
 		final XExpression parse = parseHelper.parse(leftExpression);
 		JvmTypeReference leftType = typeProvider.getType(parse);
 		JvmTypeReference rightType = typeProvider.getType(parseHelper.parse(rightExpression,parse.eResource().getResourceSet()));
-		boolean conformant = typeConformanceComputer.isConformant(leftType, rightType);
+		boolean conformant = typeConformanceComputer.isConformant(leftType, rightType, ignoreGenerics);
 		return conformant;
+	}
+	
+	public void testIgnoreGenerics_00() throws Exception {
+		String left = "null as Iterable<String>";
+		String right = "null as Iterable<Integer>";
+		assertTrue(isConformantReturnTypes(left, right, true));
+		assertFalse(isConformantReturnTypes(left, right, false));
+	}
+	
+	public void testIgnoreGenerics_01() throws Exception {
+		String left = "null as (String)=>Boolean";
+		String right = "null as (Integer)=>Integer";
+		assertTrue(isConformantReturnTypes(left, right, true));
+		assertFalse(isConformantReturnTypes(left, right, false));
+	}
+	
+	public void testIgnoreGenerics_02() throws Exception {
+		String left = "null as (String,String)=>Boolean";
+		String right = "null as (String)=>Boolean";
+		assertFalse(isConformantReturnTypes(left, right, true));
+		assertFalse(isConformantReturnTypes(left, right, false));
 	}
 
 }
