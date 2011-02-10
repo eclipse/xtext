@@ -66,17 +66,24 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 			}
 			((XtextResource) referringResource).getCache().clear(referringResource);
 			for (IReferenceDescription referenceDescription : resource2references.get(referringResourceURI)) {
-				URI referringElementNewURI = elementRenameArguments.getNewElementURI(referenceDescription
-						.getSourceEObjectUri());
-				EObject referringElement = resourceSet.getEObject(referringElementNewURI, false);
-				URI targetElementNewURI = elementRenameArguments.getNewElementURI(referenceDescription
-						.getTargetEObjectUri());
-				EObject newTargetElement = resourceSet.getEObject(targetElementNewURI, false);
-				createReferenceUpdate(referringElement, referringResourceURI, referenceDescription.getEReference(),
-						referenceDescription.getIndexInList(), newTargetElement, updateAcceptor);
+				createReferenceUpdate(referenceDescription, referringResourceURI, elementRenameArguments, resourceSet,
+						updateAcceptor);
 			}
 			progress.worked(1);
 		}
+	}
+
+	protected void createReferenceUpdate(IReferenceDescription referenceDescription, URI referringResourceURI,
+			ElementRenameArguments elementRenameArguments, ResourceSet resourceSet,
+			IRefactoringUpdateAcceptor updateAcceptor) {
+		URI referringElementNewURI = elementRenameArguments.getNewElementURI(referenceDescription
+				.getSourceEObjectUri());
+		EObject referringElement = resourceSet.getEObject(referringElementNewURI, false);
+		URI targetElementNewURI = elementRenameArguments.getNewElementURI(referenceDescription
+				.getTargetEObjectUri());
+		EObject newTargetElement = resourceSet.getEObject(targetElementNewURI, false);
+		createReferenceUpdate(referringElement, referringResourceURI, referenceDescription.getEReference(),
+				referenceDescription.getIndexInList(), newTargetElement, updateAcceptor);
 	}
 
 	protected void createReferenceUpdate(EObject referringElement, URI referringResourceURI, EReference reference,

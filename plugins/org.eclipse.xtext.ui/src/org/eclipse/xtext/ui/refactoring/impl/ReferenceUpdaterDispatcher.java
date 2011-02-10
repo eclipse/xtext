@@ -46,9 +46,8 @@ public class ReferenceUpdaterDispatcher {
 	public void createReferenceUpdates(ElementRenameArguments elementRenameArguments, ResourceSet resourceSet,
 			IRefactoringUpdateAcceptor updateAcceptor, IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, "Updating references", 100);
-		ResourceSetLocalContextProvider localContextProvider = new ResourceSetLocalContextProvider(resourceSet);
-		ReferenceDescriptionAcceptor referenceDescriptionAcceptor = new ReferenceDescriptionAcceptor(
-				resourceServiceProviderRegistry, updateAcceptor.getRefactoringStatus());
+		ResourceSetLocalContextProvider localContextProvider = createResourceSetLocalContextProvider(resourceSet);
+		ReferenceDescriptionAcceptor referenceDescriptionAcceptor = createFindReferenceAcceptor(updateAcceptor);
 		referenceFinder.findAllReferences(elementRenameArguments.getRenamedElementURIs(), localContextProvider,
 				referenceDescriptionAcceptor, progress.newChild(2));
 		Multimap<IReferenceUpdater, IReferenceDescription> updater2descriptions = referenceDescriptionAcceptor
@@ -60,6 +59,15 @@ public class ReferenceUpdaterDispatcher {
 			referenceUpdater.createReferenceUpdates(elementRenameArguments, updater2descriptions.get(referenceUpdater),
 					updateAcceptor, updaterProgress.newChild(1));
 		}
+	}
+
+	protected ResourceSetLocalContextProvider createResourceSetLocalContextProvider(ResourceSet resourceSet) {
+		return new ResourceSetLocalContextProvider(resourceSet);
+	}
+
+	protected ReferenceDescriptionAcceptor createFindReferenceAcceptor(IRefactoringUpdateAcceptor updateAcceptor) {
+		return new ReferenceDescriptionAcceptor(
+				resourceServiceProviderRegistry, updateAcceptor.getRefactoringStatus());
 	}
 
 	public static class ReferenceDescriptionAcceptor implements IAcceptor<IReferenceDescription> {

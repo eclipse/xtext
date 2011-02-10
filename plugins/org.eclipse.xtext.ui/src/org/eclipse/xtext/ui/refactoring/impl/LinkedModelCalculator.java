@@ -48,6 +48,7 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
@@ -107,18 +108,21 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 	public LinkedPositionGroup getLinkedPositionGroup() {
 		Iterable<TextEdit> edits = computeTextEdits();
 		LinkedPositionGroup group = new LinkedPositionGroup();
-		Iterable<LinkedPosition> linkedPositions = Iterables.transform(edits, new Function<TextEdit, LinkedPosition>() {
+		Iterable<LinkedPosition> linkedPositions = filter(Iterables.transform(edits, new Function<TextEdit, LinkedPosition>() {
 			public LinkedPosition apply(TextEdit textEdit) {
 				if (textEdit instanceof ReplaceEdit) {
 					String originalName = getOriginalName();
 					ReplaceEdit edit = (ReplaceEdit) textEdit;
 					String textToReplace = edit.getText();
-					int calculatedOffset = edit.getOffset() + textToReplace.indexOf(originalName);
-					return new LinkedPosition(getDocument(), calculatedOffset, originalName.length());
+					int indexOf = textToReplace.indexOf(originalName);
+					if (indexOf != -1) {
+						int calculatedOffset = edit.getOffset() + indexOf;
+						return new LinkedPosition(getDocument(), calculatedOffset, originalName.length());
+					}
 				}
 				return null;
 			}
-		});
+		}), Predicates.notNull());
 		final int invocationOffset = getInvocationOffset();
 		int i = 0;
 		for (LinkedPosition position : sortPositions(linkedPositions, invocationOffset)) {
@@ -194,7 +198,7 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 	protected String getOriginalName() {
 		return renameStrategy.getOriginalName();
 	}
-	
+
 	protected int getInvocationOffset() {
 		return viewer.getSelectedRange().x;
 	}
