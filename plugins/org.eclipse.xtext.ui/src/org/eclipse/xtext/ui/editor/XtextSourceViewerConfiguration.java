@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.ITextDoubleClickStrategy;
 import org.eclipse.jface.text.ITextHover;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
@@ -28,6 +29,7 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.contentassist.IContentAssistantFactory;
+import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper;
 import org.eclipse.xtext.ui.editor.quickfix.XtextQuickAssistAssistant;
@@ -205,6 +207,13 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	public IAutoEditStrategy[] getAutoEditStrategies(ISourceViewer sourceViewer, String contentType) {
 		List<IAutoEditStrategy> strategies = editStrategyProvider.getStrategies(sourceViewer, contentType);
 		return strategies.toArray(new IAutoEditStrategy[strategies.size()]);
+	}
+	
+	@Inject
+	private DoubleClickStrategyProvider doubleClickStrategyProvider;
+	@Override
+	public ITextDoubleClickStrategy getDoubleClickStrategy(ISourceViewer sourceViewer, String contentType) {
+		return doubleClickStrategyProvider.getStrategy(sourceViewer, contentType, getConfiguredDocumentPartitioning(sourceViewer));
 	}
 
 	

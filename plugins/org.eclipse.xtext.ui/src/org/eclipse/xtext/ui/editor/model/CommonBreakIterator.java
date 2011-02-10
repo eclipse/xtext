@@ -366,10 +366,10 @@ public class CommonBreakIterator extends BreakIterator {
 	}
 
 
-	protected Run whitespace= new Whitespace();
-	protected Run delimiter= new LineDelimiter();
-	protected Run camelcase= new CamelCaseIdentifier();
-	protected Run other= new Other();
+	protected Run whitespace;
+	protected Run delimiter;
+	protected Run identifier;
+	protected Run other;
 
 	/** The platform break iterator (word instance) used as a base. */
 	protected final BreakIterator fIterator;
@@ -381,9 +381,16 @@ public class CommonBreakIterator extends BreakIterator {
 	/**
 	 * Creates a new break iterator.
 	 */
-	public CommonBreakIterator() {
+	public CommonBreakIterator(boolean camelCase) {
 		fIterator= BreakIterator.getWordInstance();
 		fIndex= fIterator.current();
+		whitespace= new Whitespace();
+		delimiter= new LineDelimiter();
+		if (camelCase)
+			identifier= new CamelCaseIdentifier();
+		else
+			identifier = new Identifier();
+		other= new Other();
 	}
 
 	/*
@@ -456,8 +463,8 @@ public class CommonBreakIterator extends BreakIterator {
 			run= whitespace;
 		else if (delimiter.isValid(ch))
 			run= delimiter;
-		else if (camelcase.isValid(ch))
-			run= camelcase;
+		else if (identifier.isValid(ch))
+			run= identifier;
 		else if (other.isValid(ch))
 			run= other;
 		else {

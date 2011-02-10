@@ -31,13 +31,13 @@ public class CommonWordIterator extends BreakIterator {
 	/**
 	 * Creates a new word iterator.
 	 */
-	public CommonWordIterator() {
-		fIterator= createIteratorDelegate();
+	public CommonWordIterator(boolean camelCase) {
+		fIterator= createIteratorDelegate(camelCase);
 		first();
 	}
 
-	protected CommonBreakIterator createIteratorDelegate() {
-		return new CommonBreakIterator();
+	protected CommonBreakIterator createIteratorDelegate(boolean camelCase) {
+		return new CommonBreakIterator(camelCase);
 	}
 
 	/*
