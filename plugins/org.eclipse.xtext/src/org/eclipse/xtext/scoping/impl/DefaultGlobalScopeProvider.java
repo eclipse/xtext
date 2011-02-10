@@ -42,9 +42,8 @@ public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 	@Inject
 	private IResourceDescription.Manager descriptionManager;
 	
-	@Override
-	protected IScope getScope(final Resource context, boolean ignoreCase, EClass type, Predicate<IEObjectDescription> filter) {
-		IScope result = IScope.NULLSCOPE;
+	protected IScope getScope(IScope parent, final Resource context, boolean ignoreCase, EClass type, Predicate<IEObjectDescription> filter) {
+		IScope result = parent;
 		List<IContainer> containers = Lists.newArrayList(getVisibleContainers(context));
 		Collections.reverse(containers);
 		Iterator<IContainer> iter = containers.iterator();
@@ -53,6 +52,11 @@ public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 			result = createContainerScopeWithContext(context, result, container, filter, type, ignoreCase);
 		}
 		return result;
+	}
+	
+	@Override
+	protected IScope getScope(final Resource context, boolean ignoreCase, EClass type, Predicate<IEObjectDescription> filter) {
+		return getScope(IScope.NULLSCOPE, context, ignoreCase, type, filter);
 	}
 
 	protected List<IContainer> getVisibleContainers(Resource resource) {
