@@ -24,29 +24,26 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultReferenceFinder.class)
 public interface IReferenceFinder {
 
+	/**
+	 * Executes <code>work</code> on the element referred to by the <code>targetURI</code>. That involves reloading the
+	 * element if it is proxified or the editor it belonged to has been closed.
+	 */
 	@ImplementedBy(EditorLocalContextProvider.class)
 	interface ILocalContextProvider {
 		<R> R readOnly(URI targetURI, IUnitOfWork<R, EObject> work);
 	}
+
 	/**
-	 * <p>Finds all References for a given URI.</p>
+	 * Finds all References for given URIs.
 	 */
-	void findAllReferences(URI target, ILocalContextProvider localContextProvider, IAcceptor<IReferenceDescription> acceptor,
-			IProgressMonitor monitor);
+	void findAllReferences(Iterable<URI> targetURIs, ILocalContextProvider localContextProvider,
+			IAcceptor<IReferenceDescription> acceptor, IProgressMonitor progressMonitor);
+
 	/**
-	 * <p>Finds all References for given URIs.</p>
+	 * Finds all local references for the given URIs in a given Resource. If the Resource is null the Resource
+	 * corresponding to given URIs is used.
 	 */
-	void findAllReferences(Iterable<URI> targetURIs, ILocalContextProvider localContextProvider, IAcceptor<IReferenceDescription> acceptor,
-			IProgressMonitor progressMonitor);
-	/**
-	 * <p>Finds all local references for a given URI in a given Resource for. If the Resource is null the Resource corresponding to given URI is used.</p>
-	 */
-	void findLocalReferences(Resource resource, URI targetURI, ILocalContextProvider localContextProvider, IAcceptor<IReferenceDescription> acceptor,
-			IProgressMonitor monitor);
-	/**
-	 * <p>Finds all local references for the given URIs in a given Resource. If the Resource is null the Resource corresponding to given URIs is used.</p>
-	 */
-	void findLocalReferences(Resource resource, Iterable<URI> targetURIs, ILocalContextProvider localContextProvider, IAcceptor<IReferenceDescription> acceptor,
-			IProgressMonitor progressMonitor);
+	void findLocalReferences(Resource resource, Iterable<URI> targetURIs, ILocalContextProvider localContextProvider,
+			IAcceptor<IReferenceDescription> acceptor, IProgressMonitor progressMonitor);
 
 }

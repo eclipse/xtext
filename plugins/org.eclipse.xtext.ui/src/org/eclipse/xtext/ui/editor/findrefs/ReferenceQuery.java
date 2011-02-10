@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.findrefs;
 
+import java.util.Collections;
+
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
@@ -14,8 +16,10 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.search.ui.ISearchQuery;
 import org.eclipse.search.ui.ISearchResult;
+import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.ILocalContextProvider;
 
+import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 
 /**
@@ -34,14 +38,17 @@ public class ReferenceQuery implements ISearchQuery {
 
 	private ILocalContextProvider localContextProvider;
 
+	private Predicate<IReferenceDescription> filter;
+
 	public ReferenceQuery() {
 	}
 
-	public void init(URI targetURI, IReferenceFinder.ILocalContextProvider localContextProvider, String label) {
+	public void init(URI targetURI, IReferenceFinder.ILocalContextProvider localContextProvider, Predicate<IReferenceDescription> filter, String label) {
 		this.targetURI = targetURI;
 		this.localContextProvider = localContextProvider;
 		this.label = label;
-		this.searchResult = new ReferenceSearchResult(this);
+		this.filter = filter;
+		this.searchResult = createSearchResult();
 	}
 
 	public boolean canRerun() {
@@ -62,8 +69,12 @@ public class ReferenceQuery implements ISearchQuery {
 
 	public IStatus run(IProgressMonitor monitor) throws OperationCanceledException {
 		searchResult.reset();
-		finder.findAllReferences(targetURI, localContextProvider, searchResult, monitor);
+		finder.findAllReferences(Collections.singleton(targetURI), localContextProvider, searchResult, monitor);
 		return (monitor.isCanceled()) ? Status.CANCEL_STATUS : Status.OK_STATUS;
 	}
 
+	protected ReferenceSearchResult createSearchResult() {
+		return new ReferenceSearchResult(this, filter);
+	}
+	
 }

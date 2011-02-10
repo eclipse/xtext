@@ -24,6 +24,7 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
+import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
@@ -31,6 +32,7 @@ import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -41,13 +43,13 @@ import com.google.inject.Provider;
 public class FindReferencesHandler extends AbstractHandler {
 
 	@Inject
-	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
+	protected EObjectAtOffsetHelper eObjectAtOffsetHelper;
 
 	@Inject
-	private IGlobalServiceProvider globalServiceProvider;
+	protected IGlobalServiceProvider globalServiceProvider;
 
 	@Inject
-	private IReferenceFinder.ILocalContextProvider localContextProvider;
+	protected IReferenceFinder.ILocalContextProvider localContextProvider;
 
 	private static final Logger LOG = Logger.getLogger(FindReferencesHandler.class);
 
@@ -69,7 +71,7 @@ public class FindReferencesHandler extends AbstractHandler {
 					QueryExecutor queryExecutor = globalServiceProvider.findService(targetURI.trimFragment(),
 							QueryExecutor.class);
 					if (queryExecutor != null) {
-						queryExecutor.execute(targetURI, localContextProvider);
+						queryExecutor.execute(targetURI, localContextProvider, null);
 					}
 				}
 			}
@@ -78,7 +80,7 @@ public class FindReferencesHandler extends AbstractHandler {
 		}
 		return null;
 	}
-
+	
 	public static class QueryExecutor {
 		@Inject
 		private IStorage2UriMapper storage2UriMapper;
@@ -92,7 +94,7 @@ public class FindReferencesHandler extends AbstractHandler {
 		@Inject
 		private IQualifiedNameConverter qualifiedNameConverter;
 
-		public void execute(URI targetElementURI, IReferenceFinder.ILocalContextProvider localContextProvider) {
+		public void execute(URI targetElementURI, IReferenceFinder.ILocalContextProvider localContextProvider, Predicate<IReferenceDescription> filter) {
 			ReferenceQuery referenceQuery = queryProvider.get();
 			String qualifiedName = localContextProvider.readOnly(targetElementURI, new IUnitOfWork<String, EObject>() {
 				public String exec(EObject target) throws Exception {
@@ -105,7 +107,7 @@ public class FindReferencesHandler extends AbstractHandler {
 				label += Messages.FindReferencesHandler_1 + storages.next().getFirst().getFullPath().toString()
 						+ Messages.FindReferencesHandler_2;
 			}
-			referenceQuery.init(targetElementURI, localContextProvider, label);
+			referenceQuery.init(targetElementURI, localContextProvider, filter, label);
 			NewSearchUI.activateSearchResultView();
 			NewSearchUI.runQueryInBackground(referenceQuery);
 		}
