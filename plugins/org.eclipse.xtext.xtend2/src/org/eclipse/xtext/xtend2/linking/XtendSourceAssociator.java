@@ -48,6 +48,8 @@ public class XtendSourceAssociator {
 
 	@SuppressWarnings("unchecked")
 	protected <T> T getAssociatedElement(EObject element) {
+		if(element == null)
+			return null;
 		AssociationAdapter associationAdapter = (AssociationAdapter) EcoreUtil.getAdapter(element.eAdapters(), AssociationAdapter.class);
 		return (associationAdapter != null) ? (T) associationAdapter.getXtendSource() : null;
 	}
