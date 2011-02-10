@@ -600,7 +600,7 @@ public class XtextEditor extends TextEditor {
 	}
 	
 	protected CommonWordIterator createWordIterator() {
-		return new CommonWordIterator();
+		return new CommonWordIterator(true);
 	}
 	
 	protected DeleteNextSubWordAction createDeleteNextSubWordAction() {
