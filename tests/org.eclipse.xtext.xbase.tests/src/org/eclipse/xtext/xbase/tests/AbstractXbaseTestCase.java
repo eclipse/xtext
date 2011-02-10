@@ -13,14 +13,15 @@ import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.junit.util.ParseHelper;
+import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 
 import com.google.inject.Guice;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 /**
@@ -55,24 +56,19 @@ public abstract class AbstractXbaseTestCase extends TestCase {
 	}
 
 	protected XExpression expression(String string) throws Exception {
-		return expression(string, true);
+		return expression(string, false);
 	}
 
+	@Inject
+	private ParseHelper<XExpression> parseHelper;
+	@Inject
+	private ValidationTestHelper validationHelper;
+
 	protected XExpression expression(String string, boolean resolve) throws Exception {
-		Resource resource = newResource(string);
+		XExpression parse = parseHelper.parse(string);
 		if (resolve)
-			EcoreUtil2.resolveAll(resource, CancelIndicator.NullImpl);
-		assertTrue("Errors: " + resource.getErrors(), resource.getErrors().isEmpty());
-		XExpression exp = (XExpression) resource.getContents().get(0);
-		return exp;
-	}
-	
-	protected XExpression expressionWithError(String string, int expectedErrors) throws Exception {
-		Resource resource = newResource(string);
-		EcoreUtil2.resolveAll(resource, CancelIndicator.NullImpl);
-		assertEquals("Errors: " + resource.getErrors(), expectedErrors, resource.getErrors().size());
-		XExpression exp = (XExpression) resource.getContents().get(0);
-		return exp;
+			validationHelper.assertNoErrors(parse);
+		return parse;
 	}
 
 	protected Resource newResource(String input) throws IOException {

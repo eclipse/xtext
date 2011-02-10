@@ -6,7 +6,6 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typing;
-
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 
@@ -35,23 +34,25 @@ public class XbaseTypeConformanceComputer extends TypeConformanceComputer {
 	private TypeReferences typeReferences;
 
 	@Override
-	public boolean isConformant(JvmTypeReference left, JvmTypeReference right) {
+	public boolean isConformant(JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
 		if (left == null || typeReferences.is(left, Object.class))
 			return true;
-		if (left.eIsProxy() || right == null || right.eIsProxy())
+		if (right == null)
 			return false;
 		if (typeReferences.is(right, Void.class))
 			return true;
 		if (functionConversion.isFunction(left) || functionConversion.isFunction(right))
-			return functionConversion.isConformant(left, right);
+			return functionConversion.isConformant(left, right, ignoreGenerics);
 		if (right.getType() instanceof JvmArrayType) {
 			JvmArrayType array = (JvmArrayType) right.getType();
 			if (typeReferences.is(left, Iterable.class)) {
+				if (ignoreGenerics)
+					return true;
 				JvmTypeReference newLeft = typeReferences.getArgument(left,0);
-				return isConformant(newLeft, array.getComponentType());
+				return isConformant(newLeft, array.getComponentType(), ignoreGenerics);
 			}
 		}
-		return super.isConformant(left, right);
+		return super.isConformant(left, right, ignoreGenerics);
 	}
 
 	protected boolean isIterable(JvmType type) {

@@ -97,11 +97,14 @@ public class FunctionConversion {
 		}
 	}
 
-	public boolean isConformant(JvmTypeReference left, JvmTypeReference right) {
+	public boolean isConformant(JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
 		FuncDesc leftDesc = toFuncDesc(left);
 		FuncDesc rightDesc = toFuncDesc(right);
 		if (leftDesc == null || rightDesc == null)
 			return false;
+		if (ignoreGenerics) {
+			return size(leftDesc.getParamTypes()) == size(rightDesc.getParamTypes());
+		}
 		TypeArgumentContext leftCtx = contextProvider.getReceiverContext(left);
 		TypeArgumentContext rightCtx = contextProvider.getReceiverContext(right);
 		return isConformant(leftDesc, leftCtx, rightDesc, rightCtx);
@@ -174,8 +177,8 @@ public class FunctionConversion {
 		return false;
 	}
 
-	public boolean isFunction(JvmTypeReference right) {
-		return right != null && right.getCanonicalName().startsWith(Functions.class.getCanonicalName());
+	public boolean isFunction(JvmTypeReference type) {
+		return type != null && type.getType()!=null && type.getType().getCanonicalName().startsWith(Functions.class.getCanonicalName());
 	}
 
 	/**

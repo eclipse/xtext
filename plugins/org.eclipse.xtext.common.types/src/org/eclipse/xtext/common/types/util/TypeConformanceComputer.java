@@ -51,7 +51,7 @@ import com.google.inject.Inject;
 public class TypeConformanceComputer {
 
 	private PolymorphicDispatcher<Boolean> isConformantDispatcher = 
-		PolymorphicDispatcher.createForSingleTarget("_isConformant", 2, 4, this);
+		PolymorphicDispatcher.createForSingleTarget("_isConformant", 3, 5, this);
 	
 	@Inject
 	protected SuperTypeCollector superTypeCollector;
@@ -89,13 +89,17 @@ public class TypeConformanceComputer {
 	}
 
 	public boolean isConformant(JvmTypeReference left, JvmTypeReference right) {
+		return isConformant(left, right, false);
+	}
+	
+	public boolean isConformant(JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
 		if (left == right)
 			return left != null;
 		if (isObject(left))
 			return true;
 		if (isPrimitiveVoid(left) || left!=null && left.getType()!=null && left.getType().eIsProxy())
 			return false;
-		Boolean result = isConformantDispatcher.invoke(left, right);
+		Boolean result = isConformantDispatcher.invoke(left, right, ignoreGenerics);
 		return result.booleanValue();
 	}
 
@@ -107,12 +111,12 @@ public class TypeConformanceComputer {
 		return left!=null && left.getType()!=null && left.getType().getCanonicalName().equals(Object.class.getCanonicalName());
 	}
 	
-	protected Boolean _isConformant(JvmTypeReference left, JvmTypeReference right) {
-		Boolean result = isConformantDispatcher.invoke(left.getType(), right.getType(), left, right);
+	protected Boolean _isConformant(JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
+		Boolean result = isConformantDispatcher.invoke(left.getType(), right.getType(), left, right, ignoreGenerics);
 		return result;
 	}
 	
-	protected Boolean _isConformant(JvmWildcardTypeReference left, JvmParameterizedTypeReference right) {
+	protected Boolean _isConformant(JvmWildcardTypeReference left, JvmParameterizedTypeReference right, boolean ignoreGenerics) {
 		for (JvmTypeConstraint constraint: left.getConstraints()) {
 			if (constraint instanceof JvmUpperBound) {
 				JvmTypeReference upperBound = constraint.getTypeReference();
@@ -131,11 +135,11 @@ public class TypeConformanceComputer {
 		return Boolean.TRUE;
 	}
 	
-	protected Boolean _isConformant(JvmParameterizedTypeReference left, JvmWildcardTypeReference right) {
+	protected Boolean _isConformant(JvmParameterizedTypeReference left, JvmWildcardTypeReference right, boolean ignoreGenerics) {
 		return Boolean.FALSE;
 	}
 	
-	protected Boolean _isConformant(JvmWildcardTypeReference left, JvmWildcardTypeReference right) {
+	protected Boolean _isConformant(JvmWildcardTypeReference left, JvmWildcardTypeReference right, boolean ignoreGenerics) {
 		List<JvmTypeConstraint> leftConstraints = left.getConstraints();
 		List<JvmTypeConstraint> rightConstraints = right.getConstraints();
 		if (leftConstraints.size() != rightConstraints.size())
@@ -159,7 +163,7 @@ public class TypeConformanceComputer {
 		return Boolean.TRUE;
 	}
 	
-	protected Boolean _isConformant(JvmPrimitiveType leftType, JvmPrimitiveType rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right) {
+	protected Boolean _isConformant(JvmPrimitiveType leftType, JvmPrimitiveType rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right, boolean ignoreGenerics) {
 		if (leftType == rightType)
 			return true;
 		return isWideningConversion(leftType, rightType);
@@ -207,48 +211,48 @@ public class TypeConformanceComputer {
 		return primitives.primitiveKind(primitiveType);
 	}
 
-	protected Boolean _isConformant(JvmPrimitiveType leftType, JvmType rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right) {
+	protected Boolean _isConformant(JvmPrimitiveType leftType, JvmType rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right, boolean ignoreGenerics) {
 		return isUnBoxing(leftType, rightType);
 	}
 	
-	protected Boolean _isConformant(JvmDeclaredType leftType, JvmPrimitiveType rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right) {
+	protected Boolean _isConformant(JvmDeclaredType leftType, JvmPrimitiveType rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right, boolean ignoreGenerics) {
 		return isBoxing(leftType, rightType);
 	}
 	
-	protected Boolean _isConformant(JvmDeclaredType leftType, JvmDeclaredType rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right) {
+	protected Boolean _isConformant(JvmDeclaredType leftType, JvmDeclaredType rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right, boolean ignoreGenerics) {
 		if (leftType == rightType || superTypeCollector.collectSuperTypesAsRawTypes(right).contains(leftType)) {
-			return areArgumentsAssignableFrom(left, right);
+			return ignoreGenerics || areArgumentsAssignableFrom(left, right);
 		}
 		return Boolean.FALSE;
 	}
 	
-	protected Boolean _isConformant(JvmDeclaredType leftType, JvmType rightType, JvmTypeReference left, JvmTypeReference right) {
+	protected Boolean _isConformant(JvmDeclaredType leftType, JvmType rightType, JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
 		return Boolean.FALSE;
 	}
 	
-	protected Boolean _isConformant(JvmTypeParameter leftType, JvmTypeParameter rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right) {
+	protected Boolean _isConformant(JvmTypeParameter leftType, JvmTypeParameter rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right, boolean ignoreGenerics) {
 		return leftType == rightType;
 	}
 	
-	protected Boolean _isConformant(JvmTypeParameter leftType, JvmType rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right) {
+	protected Boolean _isConformant(JvmTypeParameter leftType, JvmType rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right, boolean ignoreGenerics) {
 		List<JvmTypeConstraint> list = leftType.getConstraints();
 		for (JvmTypeConstraint jvmTypeConstraint : list) {
 			if (jvmTypeConstraint instanceof JvmUpperBound) {
 				JvmTypeReference typeReference = jvmTypeConstraint.getTypeReference();
-				if (isConformant(typeReference, right))
+				if (isConformant(typeReference, right, ignoreGenerics))
 					return true;
 			}
 		}
 		return list.isEmpty();
 	}
 	
-	protected Boolean _isConformant(JvmArrayType leftType, JvmArrayType rightType, JvmTypeReference left, JvmTypeReference right) {
+	protected Boolean _isConformant(JvmArrayType leftType, JvmArrayType rightType, JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
 		JvmTypeReference leftComponentType = leftType.getComponentType();
 		JvmTypeReference rightComponentType = rightType.getComponentType();
 		return isConformant(leftComponentType, rightComponentType);
 	}
 	
-	protected Boolean _isConformant(JvmArrayType leftType, JvmType rightType, JvmTypeReference left, JvmTypeReference right) {
+	protected Boolean _isConformant(JvmArrayType leftType, JvmType rightType, JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
 		return Boolean.FALSE;
 	}
 
@@ -298,8 +302,18 @@ public class TypeConformanceComputer {
 	}
 
 	protected boolean isUnconstrainedWildcard(JvmTypeReference argumentA) {
-		return argumentA instanceof JvmWildcardTypeReference
-				&& ((JvmWildcardTypeReference) argumentA).getConstraints().isEmpty();
+		if (argumentA instanceof JvmWildcardTypeReference) {
+			JvmWildcardTypeReference wc = (JvmWildcardTypeReference) argumentA;
+			if (wc.getConstraints().isEmpty()) {
+				return true;
+			}
+			if (wc.getConstraints().size()==1 && wc.getConstraints().get(0) instanceof JvmUpperBound) {
+				JvmUpperBound upper = (JvmUpperBound) wc.getConstraints().get(0);
+				if (typeReferences.is(upper.getTypeReference(), Object.class))
+					return true;
+			}
+		}
+		return false;
 	}
 
 	protected JvmTypeReference getLower(JvmTypeReference argumentA) {
@@ -319,7 +333,8 @@ public class TypeConformanceComputer {
 			EList<JvmTypeConstraint> list = ((JvmWildcardTypeReference) argumentA).getConstraints();
 			for (JvmTypeConstraint constraint : list) {
 				if (constraint instanceof JvmUpperBound) {
-					return constraint.getTypeReference();
+					final JvmTypeReference typeReference = constraint.getTypeReference();
+					return typeReference;
 				}
 			}
 		}

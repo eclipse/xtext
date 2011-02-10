@@ -28,8 +28,8 @@ public class FeatureCallValidator extends AbstractDeclarativeValidator {
 	protected UIStrings uiStrings;
 	
 	@Inject
-	private IdentifiableSimpleNameProvider nameProvider; 
-
+	private IdentifiableSimpleNameProvider nameProvider;
+	
 	@Check
 	public void checkInvalidFeatureLinked(XAbstractFeatureCall featureCall) {
 		if (!featureCall.isValidFeature()) {

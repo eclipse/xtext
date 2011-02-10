@@ -346,13 +346,14 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testTryCatch_1() throws Exception {
-		expression("try { 'literal' as Boolean } catch(ClassCastException e) {e.getClass().getSimpleName()}", true);
+		expression("try { null as Boolean } catch(ClassCastException e) {e.getClass().getSimpleName()}", true);
 	}
 	
 	public void testForLoop_01() throws Exception {
-		XForLoopExpression forLoop = (XForLoopExpression) expressionWithError("for(String s: s) s", 1);
+		final XBlockExpression block = (XBlockExpression) expression("{val s = null as Iterable<String>; for(String s: s) s}");
+		XForLoopExpression forLoop = (XForLoopExpression) block.getExpressions().get(1);
 		XFeatureCall forFeatureCall = (XFeatureCall) forLoop.getForExpression();
-		assertTrue(forFeatureCall.getFeature().eIsProxy());
+		assertEquals(block.getExpressions().get(0), forFeatureCall.getFeature());
 		XFeatureCall eachFeatureCall = (XFeatureCall) forLoop.getEachExpression();
 		assertFalse(eachFeatureCall.getFeature().eIsProxy());
 		assertSame(forLoop.getDeclaredParam(), eachFeatureCall.getFeature());

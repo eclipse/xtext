@@ -61,8 +61,8 @@ public class TypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	public void testBlockExpression() throws Exception {
-		assertResolvedReturnType(Integer.class.getName(), "{true;4;}");
-		assertResolvedReturnType(Boolean.class.getName(), "{4;true;}");
+		assertResolvedReturnType(Integer.class.getName(), "{''.toString;4;}");
+		assertResolvedReturnType(Boolean.class.getName(), "{''.toString;true;}");
 		assertResolvedReturnType(Void.class.getName(), "{null;}");
 	}
 
@@ -86,7 +86,7 @@ public class TypeProviderTest extends AbstractXbaseTestCase {
 
 	public void testCastExpression() throws Exception {
 		assertResolvedReturnType(String.class.getName(), "null as String");
-		assertResolvedReturnType(Boolean.class.getName(), "'foo' as Boolean");
+		assertResolvedReturnType(Boolean.class.getName(), "null as Boolean");
 	}
 
 	public void testConstructorCall() throws Exception {
@@ -112,8 +112,8 @@ public class TypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	public void testFeatureCallWithOperatorOverloading2() throws Exception {
-		assertResolvedReturnType("boolean", "new java.util.ArrayList<Byte>('foo'.getBytes()) += null");
-		assertResolvedReturnType("boolean", "new java.util.ArrayList<Byte>('foo'.getBytes()) += 'x'.getBytes().iterator.next");
+		assertResolvedReturnType("boolean", "new java.util.ArrayList<Byte>() += null");
+		assertResolvedReturnType("boolean", "new java.util.ArrayList<Byte>() += 'x'.getBytes().iterator.next");
 	}
 
 	public void testFeatureCallOnThis() throws Exception {

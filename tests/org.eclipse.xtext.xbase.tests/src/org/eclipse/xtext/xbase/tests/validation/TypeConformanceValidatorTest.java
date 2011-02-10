@@ -103,17 +103,17 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 
 	protected void assertConformanceError(String expression, EClass objectType, String... messageParts)
 			throws Exception {
-		final XExpression xExpression = expression(expression, true);
+		final XExpression xExpression = expression(expression, false);
 		helper.assertError(xExpression, objectType, INCOMPATIBLE_TYPES, messageParts);
 	}
 
 	protected void assertCastError(String expression, EClass objectType, String... messageParts) throws Exception {
-		final XExpression xExpression = expression(expression, true);
+		final XExpression xExpression = expression(expression, false);
 		helper.assertError(xExpression, objectType, INVALID_CAST, messageParts);
 	}
 
 	protected void assertNoConformanceError(String expression) throws Exception {
-		final XExpression xExpression = expression(expression, true);
+		final XExpression xExpression = expression(expression, false);
 		helper.assertNoError(xExpression, INCOMPATIBLE_TYPES);
 	}
 

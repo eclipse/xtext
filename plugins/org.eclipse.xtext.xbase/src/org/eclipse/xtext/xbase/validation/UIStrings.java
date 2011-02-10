@@ -9,6 +9,8 @@ package org.eclipse.xtext.xbase.validation;
 
 import static com.google.common.collect.Iterables.*;
 
+import java.util.List;
+
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -17,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 import com.google.common.base.Function;
@@ -32,6 +35,9 @@ public class UIStrings {
 	@Inject
 	private ITypeProvider typeProvider;
 	
+	@Inject
+	private FeatureCallToJavaMapping featureCallToJavaMapping;
+	
 	public String parameters(JvmIdentifiableElement element) {
 		if (element instanceof JvmExecutable) {
 			return "(" + parameterTypes(((JvmExecutable)element).getParameters()) + ")";
@@ -40,7 +46,8 @@ public class UIStrings {
 	}
 
 	public String arguments(XAbstractFeatureCall featureCall) {
-		return "(" + expressionTypes(featureCall.getExplicitArguments()) + ")";
+		List<XExpression> arguments = featureCallToJavaMapping.getActualArguments(featureCall);
+		return "(" + expressionTypes(arguments) + ")";
 	}
 
 	public String arguments(XConstructorCall constructorCall) {
