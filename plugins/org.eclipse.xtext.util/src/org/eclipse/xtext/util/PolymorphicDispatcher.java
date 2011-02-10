@@ -34,6 +34,8 @@ public class PolymorphicDispatcher<RT> {
 	private final List<? extends Object> targets;
 	private final Predicate<Method> methodFilter;
 
+	private List<MethodDesc> declaredMethodsOrderedBySpecificParameterType;
+
 	public static class DefaultErrorHandler<RT> implements ErrorHandler<RT> {
 		public RT handle(Object[] params, Throwable e) {
 			return Exceptions.throwUncheckedException(e);
@@ -158,6 +160,7 @@ public class PolymorphicDispatcher<RT> {
 		this.targets = targets;
 		this.methodFilter = methodFilter;
 		this.handler = handler;
+		declaredMethodsOrderedBySpecificParameterType = getDeclaredMethodsOrderedBySpecificParameterType();
 	}
 
 	protected class MethodDesc {
@@ -244,7 +247,7 @@ public class PolymorphicDispatcher<RT> {
 			new Function<List<Class<?>>, List<MethodDesc>>() {
 				public List<MethodDesc> apply(List<Class<?>> paramTypes) {
 					List<MethodDesc> result = new ArrayList<MethodDesc>();
-					Iterator<MethodDesc> iterator = getDeclaredMethodsOrderedBySpecificParameterType().iterator();
+					Iterator<MethodDesc> iterator = declaredMethodsOrderedBySpecificParameterType.iterator();
 					while (iterator.hasNext()) {
 						MethodDesc methodDesc = iterator.next();
 						if (methodDesc.isInvokeable(paramTypes)) {
@@ -328,12 +331,8 @@ public class PolymorphicDispatcher<RT> {
 		return Void.class;
 	}
 
-	private List<MethodDesc> cachedDescriptors;
-
 	private List<MethodDesc> getDeclaredMethodsOrderedBySpecificParameterType() {
-		if (cachedDescriptors != null)
-			return cachedDescriptors;
-		cachedDescriptors = new ArrayList<MethodDesc>();
+		ArrayList<MethodDesc> cachedDescriptors = new ArrayList<MethodDesc>();
 		for (Object target : targets) {
 			Class<?> current = target.getClass();
 			while (current != Object.class) {
@@ -347,14 +346,13 @@ public class PolymorphicDispatcher<RT> {
 			}
 		}
 		Collections.sort(cachedDescriptors, new Comparator<MethodDesc>() {
-
 			public int compare(MethodDesc o1, MethodDesc o2) {
 				return PolymorphicDispatcher.this.compare(o1, o2);
 			}
 		});
 		return cachedDescriptors;
 	}
-
+	
 	protected MethodDesc createMethodDesc(Object target, Method method) {
 		return new MethodDesc(target, method);
 	}
