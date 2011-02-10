@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor;
 
+import java.text.BreakIterator;
+import java.text.CharacterIterator;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
@@ -20,8 +22,14 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IDocumentExtension3;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.Position;
+import org.eclipse.jface.text.TextUtilities;
+import org.eclipse.jface.text.link.LinkedModeModel;
+import org.eclipse.jface.text.link.LinkedPosition;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.AnnotationPainter;
 import org.eclipse.jface.text.source.IAnnotationAccess;
@@ -39,8 +47,11 @@ import org.eclipse.jface.viewers.IPostSelectionProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.ST;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IEditorInput;
@@ -52,9 +63,12 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.texteditor.DefaultMarkerAnnotationAccess;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
+import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
+import org.eclipse.ui.texteditor.IUpdate;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.ui.texteditor.SelectMarkerRulerAction;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
+import org.eclipse.ui.texteditor.TextNavigationAction;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.Constants;
@@ -62,7 +76,10 @@ import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.editor.bracketmatching.BracketMatchingPreferencesInitializer;
 import org.eclipse.xtext.ui.editor.folding.IFoldingStructureProvider;
+import org.eclipse.xtext.ui.editor.model.CommonWordIterator;
+import org.eclipse.xtext.ui.editor.model.DocumentCharacterIterator;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
@@ -294,7 +311,7 @@ public class XtextEditor extends TextEditor {
 		actioncontributor.contributeActions(this);
 	}
 
-	private void configureToggleCommentAction(ToggleSLCommentAction action) {
+	protected void configureToggleCommentAction(ToggleSLCommentAction action) {
 		ISourceViewer sourceViewer = getSourceViewer();
 		SourceViewerConfiguration configuration = getSourceViewerConfiguration();
 		action.configure(sourceViewer, configuration);
@@ -580,6 +597,585 @@ public class XtextEditor extends TextEditor {
 			markInNavigationHistory();
 		}
 		widget.setRedraw(true);
+	}
+	
+	protected CommonWordIterator createWordIterator() {
+		return new CommonWordIterator();
+	}
+	
+	protected DeleteNextSubWordAction createDeleteNextSubWordAction() {
+		return new DeleteNextSubWordAction();
+	}
+
+	protected DeletePreviousSubWordAction createDeletePreviousSubWordAction() {
+		return new DeletePreviousSubWordAction();
+	}
+
+	protected SelectNextSubWordAction createSelectNextSubWordAction() {
+		return new SelectNextSubWordAction();
+	}
+
+	protected SelectPreviousSubWordAction createSelectPreviousSubWordAction() {
+		return new SelectPreviousSubWordAction();
+	}
+
+	protected NavigateNextSubWordAction createNavigateNextSubWordAction() {
+		return new NavigateNextSubWordAction();
+	}
+
+	protected NavigatePreviousSubWordAction createNavigatePreviousSubWordAction() {
+		return new NavigatePreviousSubWordAction();
+	}
+
+	protected SmartLineStartAction createSmartLineStartAction(final StyledText textWidget, boolean doSelect) {
+		return new SmartLineStartAction(textWidget, doSelect);
+	}
+	
+	// CODE BELOW WAS INITIALLY COPIED FROM JavaEditor
+	
+	@Override
+	protected void createNavigationActions() {
+		super.createNavigationActions();
+		
+		final StyledText textWidget= getSourceViewer().getTextWidget();
+
+		IAction action = createSmartLineStartAction(textWidget, false);
+		action.setActionDefinitionId(ITextEditorActionDefinitionIds.LINE_START);
+		setAction(ITextEditorActionDefinitionIds.LINE_START, action);
+
+		action = createSmartLineStartAction(textWidget, true);
+		action.setActionDefinitionId(ITextEditorActionDefinitionIds.SELECT_LINE_START);
+		setAction(ITextEditorActionDefinitionIds.SELECT_LINE_START, action);
+
+		action = createNavigatePreviousSubWordAction();
+		action.setActionDefinitionId(ITextEditorActionDefinitionIds.WORD_PREVIOUS);
+		setAction(ITextEditorActionDefinitionIds.WORD_PREVIOUS, action);
+		textWidget.setKeyBinding(SWT.CTRL | SWT.ARROW_LEFT, SWT.NULL);
+
+		action = createNavigateNextSubWordAction();
+		action.setActionDefinitionId(ITextEditorActionDefinitionIds.WORD_NEXT);
+		setAction(ITextEditorActionDefinitionIds.WORD_NEXT, action);
+		textWidget.setKeyBinding(SWT.CTRL | SWT.ARROW_RIGHT, SWT.NULL);
+
+		action = createSelectPreviousSubWordAction();
+		action.setActionDefinitionId(ITextEditorActionDefinitionIds.SELECT_WORD_PREVIOUS);
+		setAction(ITextEditorActionDefinitionIds.SELECT_WORD_PREVIOUS, action);
+		textWidget.setKeyBinding(SWT.CTRL | SWT.SHIFT | SWT.ARROW_LEFT, SWT.NULL);
+
+		action = createSelectNextSubWordAction();
+		action.setActionDefinitionId(ITextEditorActionDefinitionIds.SELECT_WORD_NEXT);
+		setAction(ITextEditorActionDefinitionIds.SELECT_WORD_NEXT, action);
+		textWidget.setKeyBinding(SWT.CTRL | SWT.SHIFT | SWT.ARROW_RIGHT, SWT.NULL);
+
+		action = createDeletePreviousSubWordAction();
+		action.setActionDefinitionId(ITextEditorActionDefinitionIds.DELETE_PREVIOUS_WORD);
+		setAction(ITextEditorActionDefinitionIds.DELETE_PREVIOUS_WORD, action);
+		textWidget.setKeyBinding(SWT.CTRL | SWT.BS, SWT.NULL);
+		markAsStateDependentAction(ITextEditorActionDefinitionIds.DELETE_PREVIOUS_WORD, true);
+
+		action = createDeleteNextSubWordAction();
+		action.setActionDefinitionId(ITextEditorActionDefinitionIds.DELETE_NEXT_WORD);
+		setAction(ITextEditorActionDefinitionIds.DELETE_NEXT_WORD, action);
+		textWidget.setKeyBinding(SWT.CTRL | SWT.DEL, SWT.NULL);
+		markAsStateDependentAction(ITextEditorActionDefinitionIds.DELETE_NEXT_WORD, true);
+	}
+
+	/**
+	 * Text navigation action to navigate to the next sub-word.
+	 */
+	protected abstract class NextSubWordAction extends TextNavigationAction {
+
+		protected CommonWordIterator fIterator = createWordIterator();
+
+		/**
+		 * Creates a new next sub-word action.
+		 * 
+		 * @param code
+		 *            Action code for the default operation. Must be an action code from @see org.eclipse.swt.custom.ST.
+		 */
+		protected NextSubWordAction(int code) {
+			super(getSourceViewer().getTextWidget(), code);
+		}
+
+		/*
+		 * @see org.eclipse.jface.action.IAction#run()
+		 */
+		@Override
+		public void run() {
+			// TODO preferences
+			// Check whether we are in a java code partition and the preference is enabled
+			//			final IPreferenceStore store= getPreferenceStore();
+			//			if (!store.getBoolean(PreferenceConstants.EDITOR_SUB_WORD_NAVIGATION)) {
+			//				super.run();
+			//				return;
+			//			}
+
+			final ISourceViewer viewer = getSourceViewer();
+			final IDocument document = viewer.getDocument();
+			try {
+				fIterator.setText((CharacterIterator) new DocumentCharacterIterator(document));
+				int position = widgetOffset2ModelOffset(viewer, viewer.getTextWidget().getCaretOffset());
+				if (position == -1)
+					return;
+
+				int next = findNextPosition(position);
+				if (isBlockSelectionModeEnabled()
+						&& document.getLineOfOffset(next) != document.getLineOfOffset(position)) {
+					super.run(); // may navigate into virtual white space
+				} else if (next != BreakIterator.DONE) {
+					setCaretPosition(next);
+					getTextWidget().showSelection();
+					fireSelectionChanged();
+				}
+			} catch (BadLocationException x) {
+				// ignore
+			}
+		}
+
+		/**
+		 * Finds the next position after the given position.
+		 * 
+		 * @param position
+		 *            the current position
+		 * @return the next position
+		 */
+		protected int findNextPosition(int position) {
+			ISourceViewer viewer = getSourceViewer();
+			int widget = -1;
+			int next = position;
+			while (next != BreakIterator.DONE && widget == -1) {
+				next = fIterator.following(next);
+				if (next != BreakIterator.DONE)
+					widget = modelOffset2WidgetOffset(viewer, next);
+			}
+
+			IDocument document = viewer.getDocument();
+			LinkedModeModel model = LinkedModeModel.getModel(document, position);
+			if (model != null) {
+				LinkedPosition linkedPosition = model.findPosition(new LinkedPosition(document, position, 0));
+				if (linkedPosition != null) {
+					int linkedPositionEnd = linkedPosition.getOffset() + linkedPosition.getLength();
+					if (position != linkedPositionEnd && linkedPositionEnd < next)
+						next = linkedPositionEnd;
+				} else {
+					LinkedPosition nextLinkedPosition = model.findPosition(new LinkedPosition(document, next, 0));
+					if (nextLinkedPosition != null) {
+						int nextLinkedPositionOffset = nextLinkedPosition.getOffset();
+						if (position != nextLinkedPositionOffset && nextLinkedPositionOffset < next)
+							next = nextLinkedPositionOffset;
+					}
+				}
+			}
+
+			return next;
+		}
+
+		/**
+		 * Sets the caret position to the sub-word boundary given with <code>position</code>.
+		 * 
+		 * @param position
+		 *            Position where the action should move the caret
+		 */
+		protected abstract void setCaretPosition(int position);
+	}
+
+	/**
+	 * Text navigation action to navigate to the next sub-word.
+	 * 
+	 * @since 3.0
+	 */
+	protected class NavigateNextSubWordAction extends NextSubWordAction {
+
+		/**
+		 * Creates a new navigate next sub-word action.
+		 */
+		public NavigateNextSubWordAction() {
+			super(ST.WORD_NEXT);
+		}
+
+		/*
+		 * @see org.eclipse.xtext.ui.editor.XtextEditor.NextSubWordAction#setCaretPosition(int)
+		 */
+		@Override
+		protected void setCaretPosition(final int position) {
+			getTextWidget().setCaretOffset(modelOffset2WidgetOffset(getSourceViewer(), position));
+		}
+	}
+
+	/**
+	 * Text operation action to delete the next sub-word.
+	 * 
+	 * @since 3.0
+	 */
+	protected class DeleteNextSubWordAction extends NextSubWordAction implements IUpdate {
+
+		/**
+		 * Creates a new delete next sub-word action.
+		 */
+		public DeleteNextSubWordAction() {
+			super(ST.DELETE_WORD_NEXT);
+		}
+
+		/*
+		 * @see org.eclipse.xtext.ui.editor.XtextEditor.NextSubWordAction#setCaretPosition(int)
+		 */
+		@Override
+		protected void setCaretPosition(final int position) {
+			if (!validateEditorInputState())
+				return;
+
+			final ISourceViewer viewer = getSourceViewer();
+			StyledText text = viewer.getTextWidget();
+			Point widgetSelection = text.getSelection();
+			if (isBlockSelectionModeEnabled() && widgetSelection.y != widgetSelection.x) {
+				final int caret = text.getCaretOffset();
+				final int offset = modelOffset2WidgetOffset(viewer, position);
+
+				if (caret == widgetSelection.x)
+					text.setSelectionRange(widgetSelection.y, offset - widgetSelection.y);
+				else
+					text.setSelectionRange(widgetSelection.x, offset - widgetSelection.x);
+				text.invokeAction(ST.DELETE_NEXT);
+			} else {
+				Point selection = viewer.getSelectedRange();
+				final int caret, length;
+				if (selection.y != 0) {
+					caret = selection.x;
+					length = selection.y;
+				} else {
+					caret = widgetOffset2ModelOffset(viewer, text.getCaretOffset());
+					length = position - caret;
+				}
+
+				try {
+					viewer.getDocument().replace(caret, length, ""); //$NON-NLS-1$
+				} catch (BadLocationException exception) {
+					// Should not happen
+				}
+			}
+		}
+
+		/*
+		 * @see org.eclipse.ui.texteditor.IUpdate#update()
+		 */
+		public void update() {
+			setEnabled(isEditorInputModifiable());
+		}
+	}
+
+	/**
+	 * Text operation action to select the next sub-word.
+	 */
+	protected class SelectNextSubWordAction extends NextSubWordAction {
+
+		/**
+		 * Creates a new select next sub-word action.
+		 */
+		public SelectNextSubWordAction() {
+			super(ST.SELECT_WORD_NEXT);
+		}
+
+		/*
+		 * @see org.eclipse.xtext.ui.editor.XtextEditor.NextSubWordAction#setCaretPosition(int)
+		 */
+		@Override
+		protected void setCaretPosition(final int position) {
+			final ISourceViewer viewer = getSourceViewer();
+
+			final StyledText text = viewer.getTextWidget();
+			if (text != null && !text.isDisposed()) {
+
+				final Point selection = text.getSelection();
+				final int caret = text.getCaretOffset();
+				final int offset = modelOffset2WidgetOffset(viewer, position);
+
+				if (caret == selection.x)
+					text.setSelectionRange(selection.y, offset - selection.y);
+				else
+					text.setSelectionRange(selection.x, offset - selection.x);
+			}
+		}
+	}
+
+	/**
+	 * Text navigation action to navigate to the previous sub-word.
+	 */
+	protected abstract class PreviousSubWordAction extends TextNavigationAction {
+
+		protected CommonWordIterator fIterator = createWordIterator();
+
+		/**
+		 * Creates a new previous sub-word action.
+		 * 
+		 * @param code
+		 *            Action code for the default operation. Must be an action code from @see org.eclipse.swt.custom.ST.
+		 */
+		protected PreviousSubWordAction(final int code) {
+			super(getSourceViewer().getTextWidget(), code);
+		}
+
+		/*
+		 * @see org.eclipse.jface.action.IAction#run()
+		 */
+		@Override
+		public void run() {
+			// TODO preferences
+			// Check whether we are in a java code partition and the preference is enabled
+			//			final IPreferenceStore store= getPreferenceStore();
+			//			if (!store.getBoolean(PreferenceConstants.EDITOR_SUB_WORD_NAVIGATION)) {
+			//				super.run();
+			//				return;
+			//			}
+
+			final ISourceViewer viewer = getSourceViewer();
+			final IDocument document = viewer.getDocument();
+			try {
+				fIterator.setText((CharacterIterator) new DocumentCharacterIterator(document));
+				int position = widgetOffset2ModelOffset(viewer, viewer.getTextWidget().getCaretOffset());
+				if (position == -1)
+					return;
+
+				int previous = findPreviousPosition(position);
+				if (isBlockSelectionModeEnabled()
+						&& document.getLineOfOffset(previous) != document.getLineOfOffset(position)) {
+					super.run(); // may navigate into virtual white space
+				} else if (previous != BreakIterator.DONE) {
+					setCaretPosition(previous);
+					getTextWidget().showSelection();
+					fireSelectionChanged();
+				}
+			} catch (BadLocationException x) {
+				// ignore - getLineOfOffset failed
+			}
+
+		}
+
+		/**
+		 * Finds the previous position before the given position.
+		 * 
+		 * @param position
+		 *            the current position
+		 * @return the previous position
+		 */
+		protected int findPreviousPosition(int position) {
+			ISourceViewer viewer = getSourceViewer();
+			int widget = -1;
+			int previous = position;
+			while (previous != BreakIterator.DONE && widget == -1) { // XXX: optimize
+				previous = fIterator.preceding(previous);
+				if (previous != BreakIterator.DONE)
+					widget = modelOffset2WidgetOffset(viewer, previous);
+			}
+
+			IDocument document = viewer.getDocument();
+			LinkedModeModel model = LinkedModeModel.getModel(document, position);
+			if (model != null) {
+				LinkedPosition linkedPosition = model.findPosition(new LinkedPosition(document, position, 0));
+				if (linkedPosition != null) {
+					int linkedPositionOffset = linkedPosition.getOffset();
+					if (position != linkedPositionOffset && previous < linkedPositionOffset)
+						previous = linkedPositionOffset;
+				} else {
+					LinkedPosition previousLinkedPosition = model
+							.findPosition(new LinkedPosition(document, previous, 0));
+					if (previousLinkedPosition != null) {
+						int previousLinkedPositionEnd = previousLinkedPosition.getOffset()
+								+ previousLinkedPosition.getLength();
+						if (position != previousLinkedPositionEnd && previous < previousLinkedPositionEnd)
+							previous = previousLinkedPositionEnd;
+					}
+				}
+			}
+
+			return previous;
+		}
+
+		/**
+		 * Sets the caret position to the sub-word boundary given with <code>position</code>.
+		 * 
+		 * @param position
+		 *            Position where the action should move the caret
+		 */
+		protected abstract void setCaretPosition(int position);
+	}
+
+	/**
+	 * Text navigation action to navigate to the previous sub-word.
+	 * 
+	 * @since 3.0
+	 */
+	protected class NavigatePreviousSubWordAction extends PreviousSubWordAction {
+
+		/**
+		 * Creates a new navigate previous sub-word action.
+		 */
+		public NavigatePreviousSubWordAction() {
+			super(ST.WORD_PREVIOUS);
+		}
+
+		/*
+		 * @see org.eclipse.xtext.ui.editor.XtextEditor.PreviousSubWordAction#setCaretPosition(int)
+		 */
+		@Override
+		protected void setCaretPosition(final int position) {
+			getTextWidget().setCaretOffset(modelOffset2WidgetOffset(getSourceViewer(), position));
+		}
+	}
+
+	/**
+	 * Text operation action to delete the previous sub-word.
+	 * 
+	 * @since 3.0
+	 */
+	protected class DeletePreviousSubWordAction extends PreviousSubWordAction implements IUpdate {
+
+		/**
+		 * Creates a new delete previous sub-word action.
+		 */
+		public DeletePreviousSubWordAction() {
+			super(ST.DELETE_WORD_PREVIOUS);
+		}
+
+		/*
+		 * @see org.eclipse.xtext.ui.editor.XtextEditor.PreviousSubWordAction#setCaretPosition(int)
+		 */
+		@Override
+		protected void setCaretPosition(int position) {
+			if (!validateEditorInputState())
+				return;
+
+			final int length;
+			final ISourceViewer viewer = getSourceViewer();
+			StyledText text = viewer.getTextWidget();
+			Point widgetSelection = text.getSelection();
+			if (isBlockSelectionModeEnabled() && widgetSelection.y != widgetSelection.x) {
+				final int caret = text.getCaretOffset();
+				final int offset = modelOffset2WidgetOffset(viewer, position);
+
+				if (caret == widgetSelection.x)
+					text.setSelectionRange(widgetSelection.y, offset - widgetSelection.y);
+				else
+					text.setSelectionRange(widgetSelection.x, offset - widgetSelection.x);
+				text.invokeAction(ST.DELETE_PREVIOUS);
+			} else {
+				Point selection = viewer.getSelectedRange();
+				if (selection.y != 0) {
+					position = selection.x;
+					length = selection.y;
+				} else {
+					length = widgetOffset2ModelOffset(viewer, text.getCaretOffset()) - position;
+				}
+
+				try {
+					viewer.getDocument().replace(position, length, ""); //$NON-NLS-1$
+				} catch (BadLocationException exception) {
+					// Should not happen
+				}
+			}
+		}
+
+		/*
+		 * @see org.eclipse.ui.texteditor.IUpdate#update()
+		 */
+		public void update() {
+			setEnabled(isEditorInputModifiable());
+		}
+	}
+
+	/**
+	 * Text operation action to select the previous sub-word.
+	 */
+	protected class SelectPreviousSubWordAction extends PreviousSubWordAction {
+
+		/**
+		 * Creates a new select previous sub-word action.
+		 */
+		public SelectPreviousSubWordAction() {
+			super(ST.SELECT_WORD_PREVIOUS);
+		}
+
+		/*
+		 * @see org.eclipse.xtext.ui.editor.XtextEditor.PreviousSubWordAction#setCaretPosition(int)
+		 */
+		@Override
+		protected void setCaretPosition(final int position) {
+			final ISourceViewer viewer = getSourceViewer();
+
+			final StyledText text = viewer.getTextWidget();
+			if (text != null && !text.isDisposed()) {
+
+				final Point selection = text.getSelection();
+				final int caret = text.getCaretOffset();
+				final int offset = modelOffset2WidgetOffset(viewer, position);
+
+				if (caret == selection.x)
+					text.setSelectionRange(selection.y, offset - selection.y);
+				else
+					text.setSelectionRange(selection.x, offset - selection.x);
+			}
+		}
+	}
+
+	/**
+	 * This action implements smart home.
+	 * 
+	 * Instead of going to the start of a line it does the following:
+	 * 
+	 * - if smart home/end is enabled and the caret is after the line's first non-whitespace then the caret is moved
+	 * directly before it, taking comments into account. 
+	 * - if the caret is before the line's first non-whitespace the caret is moved to the beginning of the line 
+	 * - if the caret is at the beginning of the line see first case.
+	 */
+	protected class SmartLineStartAction extends LineStartAction {
+
+		/**
+		 * Creates a new smart line start action
+		 * 
+		 * @param textWidget
+		 *            the styled text widget
+		 * @param doSelect
+		 *            a boolean flag which tells if the text up to the beginning of the line should be selected
+		 */
+		public SmartLineStartAction(final StyledText textWidget, final boolean doSelect) {
+			super(textWidget, doSelect);
+		}
+
+		/*
+		 * @see org.eclipse.ui.texteditor.AbstractTextEditor.LineStartAction#getLineStartPosition(java.lang.String, int, java.lang.String)
+		 */
+		@Override
+		protected int getLineStartPosition(final IDocument document, final String line, final int length,
+				final int offset) {
+
+			String type = IDocument.DEFAULT_CONTENT_TYPE;
+			try {
+				type = TextUtilities.getContentType(document, IDocumentExtension3.DEFAULT_PARTITIONING, offset, false);
+			} catch (BadLocationException exception) {
+				// Should not happen
+			}
+
+			int index = super.getLineStartPosition(document, line, length, offset);
+			if (type.equals(TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION)) {
+				if (index < length - 1 && line.charAt(index) == '*' && line.charAt(index + 1) != '/') {
+					do {
+						++index;
+					} while (index < length && Character.isWhitespace(line.charAt(index)));
+				} else if (index < length - 1 && line.charAt(index) == '/' && (line.charAt(index + 1) == '/' || line.charAt(index + 1) == '*')) {
+					index++;
+					do { 
+						++index;
+					} while (index < length && Character.isWhitespace(line.charAt(index)));
+				}
+			} else if (type.equals(IDocument.DEFAULT_CONTENT_TYPE)) {
+				if (index < length - 1 && line.charAt(index) == '/' && (line.charAt(index + 1) == '/' || line.charAt(index + 1) == '*')) {
+					index++;
+					do {
+						++index;
+					} while (index < length && Character.isWhitespace(line.charAt(index)));
+				}
+			}
+			return index;
+		}
 	}
 
 }
