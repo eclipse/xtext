@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.editor.findrefs;
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
-import static java.util.Collections.*;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -55,18 +54,6 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 		this.index = index;
 	}
 
-	public void findAllReferences(URI targetURI, ILocalContextProvider localContextProvider,
-			final IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor) {
-		findAllReferences(singleton(targetURI), localContextProvider, acceptor, monitor);
-	}
-
-	public void findLocalReferences(Resource resource, URI targetURI,
-			ILocalContextProvider localContextProvider, IAcceptor<IReferenceDescription> acceptor,
-			IProgressMonitor monitor) {
-		findLocalReferences(null, singleton(targetURI), localContextProvider, acceptor, monitor);
-
-	}
-
 	public void findAllReferences(Iterable<URI> targetURIs, ILocalContextProvider localContextProvider,
 			final IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor) {
 		final IProgressMonitor realMonitor = (monitor == null) ? new NullProgressMonitor() : monitor;
@@ -75,7 +62,6 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 			findLocalReferences(null, targetURIs, localContextProvider, acceptor, realMonitor);
 			findIndexedReferences(targetURIs, acceptor, new SubProgressMonitor(realMonitor, 1));
 		}
-
 	}
 
 	public void findLocalReferences(final Resource resource, Iterable<URI> targetURIs,
