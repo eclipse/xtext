@@ -19,8 +19,12 @@ import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
+
+import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -28,14 +32,20 @@ import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 public class Xtend2RenameStrategy extends DefaultRenameStrategy {
 
 	public static class Provider extends DefaultRenameStrategy.Provider {
+		@Inject
+		private IXtend2JvmAssociations xtend2jvmAssociations;
+
 		@Override
 		public IRenameStrategy get(EObject targetElement, IRenameElementContext renameElementContext) {
-			return new Xtend2RenameStrategy(targetElement, getLocationInFileProvider());
+			return new Xtend2RenameStrategy(targetElement, getLocationInFileProvider(), xtend2jvmAssociations);
 		}
 	}
 	
-	protected Xtend2RenameStrategy(EObject targetElement, ILocationInFileProvider locationInFileProvider) {
+	private IXtend2JvmAssociations xtend2jvmAssociations;
+
+	protected Xtend2RenameStrategy(EObject targetElement, ILocationInFileProvider locationInFileProvider, IXtend2JvmAssociations xtend2jvmAssociations) {
 		super(targetElement, locationInFileProvider);
+		this.xtend2jvmAssociations = xtend2jvmAssociations;
 	}
 
 	@Override
@@ -62,11 +72,11 @@ public class Xtend2RenameStrategy extends DefaultRenameStrategy {
 	protected void setInferredJvmElementName(ResourceSet resourceSet) {
 		EObject renamedElement = resourceSet.getEObject(targetElementNewURI, false);
 		if (renamedElement instanceof XtendClass) {
-			JvmGenericType inferredJvmType = ((XtendClass) renamedElement).getInferredJvmType();
+			JvmGenericType inferredJvmType = xtend2jvmAssociations.getInferredType((XtendClass) renamedElement);
 			if(inferredJvmType != null)
 				inferredJvmType.setFullyQualifiedName(((XtendClass)renamedElement).getCanonicalName());
-		} else if(renamedElement instanceof XtendMember) {
-			JvmMember inferredJvmMember = ((XtendMember) renamedElement).getInferredJvmMember();
+		} else if(renamedElement instanceof XtendFunction) {
+			JvmMember inferredJvmMember = xtend2jvmAssociations.getDirectlyInferredOperation(((XtendFunction) renamedElement));
 			if(inferredJvmMember != null) {
 				inferredJvmMember.setFullyQualifiedName(((XtendMember) renamedElement).getCanonicalName());
 			}

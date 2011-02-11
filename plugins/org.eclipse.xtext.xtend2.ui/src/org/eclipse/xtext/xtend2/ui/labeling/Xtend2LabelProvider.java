@@ -9,6 +9,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.validation.UIStrings;
+import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
@@ -32,6 +33,9 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 	@Inject
 	private ITypeProvider typeProvider;
 
+	@Inject
+	private IXtend2JvmAssociations xtend2jvmAssociations;
+	
 	@Inject
 	public Xtend2LabelProvider(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
@@ -67,7 +71,7 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 
 	public String text(XtendFunction element) {
 		JvmTypeReference returnType = typeProvider.getTypeForIdentifiable(element);
-		return element.getName() + uiStrings.parameters(element.getInferredJvmMember()) + " : "
+		return element.getName() + uiStrings.parameters(xtend2jvmAssociations.getDirectlyInferredOperation(element)) + " : "
 				+ ((returnType != null) ? returnType.getCanonicalName() : "void");
 	}
 	

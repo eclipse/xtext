@@ -308,16 +308,6 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getXtendClass_InferredJvmType()
-	{
-		return (EReference)xtendClassEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getXtendMember()
 	{
 		return xtendMemberEClass;
@@ -338,19 +328,9 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getXtendMember_InferredJvmMember()
-	{
-		return (EReference)xtendMemberEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getXtendMember_Name()
 	{
-		return (EAttribute)xtendMemberEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)xtendMemberEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -578,11 +558,9 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		createEReference(xtendClassEClass, XTEND_CLASS__IMPLEMENTS);
 		createEReference(xtendClassEClass, XTEND_CLASS__SUPER_TYPES);
 		createEReference(xtendClassEClass, XTEND_CLASS__MEMBERS);
-		createEReference(xtendClassEClass, XTEND_CLASS__INFERRED_JVM_TYPE);
 
 		xtendMemberEClass = createEClass(XTEND_MEMBER);
 		createEReference(xtendMemberEClass, XTEND_MEMBER__DECLARING_TYPE);
-		createEReference(xtendMemberEClass, XTEND_MEMBER__INFERRED_JVM_MEMBER);
 		createEAttribute(xtendMemberEClass, XTEND_MEMBER__NAME);
 
 		xtendFunctionEClass = createEClass(XTEND_FUNCTION);
@@ -669,7 +647,6 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		initEReference(getXtendClass_Implements(), theTypesPackage.getJvmTypeReference(), null, "implements", null, 0, -1, XtendClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendClass_SuperTypes(), theTypesPackage.getJvmTypeReference(), null, "superTypes", null, 0, -1, XtendClass.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendClass_Members(), this.getXtendMember(), this.getXtendMember_DeclaringType(), "members", null, 0, -1, XtendClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getXtendClass_InferredJvmType(), theTypesPackage.getJvmGenericType(), null, "inferredJvmType", null, 0, 1, XtendClass.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(xtendClassEClass, ecorePackage.getEString(), "getPackageName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -677,7 +654,6 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 
 		initEClass(xtendMemberEClass, XtendMember.class, "XtendMember", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXtendMember_DeclaringType(), this.getXtendClass(), this.getXtendClass_Members(), "declaringType", null, 0, 1, XtendMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getXtendMember_InferredJvmMember(), theTypesPackage.getJvmMember(), null, "inferredJvmMember", null, 0, 1, XtendMember.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXtendMember_Name(), ecorePackage.getEString(), "name", null, 0, 1, XtendMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(xtendMemberEClass, ecorePackage.getEString(), "getSimpleName", 0, 1, IS_UNIQUE, IS_ORDERED);

@@ -6,7 +6,6 @@
 package org.eclipse.xtext.xtend2.xtend2;
 
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmMember;
 
 /**
  * <!-- begin-user-doc -->
@@ -17,7 +16,6 @@ import org.eclipse.xtext.common.types.JvmMember;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendMember#getDeclaringType <em>Declaring Type</em>}</li>
- *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendMember#getInferredJvmMember <em>Inferred Jvm Member</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendMember#getName <em>Name</em>}</li>
  * </ul>
  * </p>
@@ -55,32 +53,6 @@ public interface XtendMember extends JvmIdentifiableElement
 	 * @generated
 	 */
 	void setDeclaringType(XtendClass value);
-
-	/**
-	 * Returns the value of the '<em><b>Inferred Jvm Member</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Inferred Jvm Member</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Inferred Jvm Member</em>' reference.
-	 * @see #setInferredJvmMember(JvmMember)
-	 * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getXtendMember_InferredJvmMember()
-	 * @model transient="true"
-	 * @generated
-	 */
-	JvmMember getInferredJvmMember();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.xtend2.xtend2.XtendMember#getInferredJvmMember <em>Inferred Jvm Member</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Inferred Jvm Member</em>' reference.
-	 * @see #getInferredJvmMember()
-	 * @generated
-	 */
-	void setInferredJvmMember(JvmMember value);
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

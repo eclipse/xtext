@@ -7,7 +7,6 @@ package org.eclipse.xtext.xtend2.xtend2;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -25,7 +24,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getImplements <em>Implements</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getSuperTypes <em>Super Types</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getMembers <em>Members</em>}</li>
- *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getInferredJvmType <em>Inferred Jvm Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -136,32 +134,6 @@ public interface XtendClass extends JvmIdentifiableElement, JvmTypeParameterDecl
 	 * @generated
 	 */
 	EList<XtendMember> getMembers();
-
-	/**
-	 * Returns the value of the '<em><b>Inferred Jvm Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Inferred Jvm Type</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Inferred Jvm Type</em>' reference.
-	 * @see #setInferredJvmType(JvmGenericType)
-	 * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getXtendClass_InferredJvmType()
-	 * @model transient="true"
-	 * @generated
-	 */
-	JvmGenericType getInferredJvmType();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getInferredJvmType <em>Inferred Jvm Type</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Inferred Jvm Type</em>' reference.
-	 * @see #getInferredJvmType()
-	 * @generated
-	 */
-	void setInferredJvmType(JvmGenericType value);
 
 	/**
 	 * <!-- begin-user-doc -->

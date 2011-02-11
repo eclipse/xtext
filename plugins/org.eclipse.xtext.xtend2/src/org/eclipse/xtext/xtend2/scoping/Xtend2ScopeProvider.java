@@ -22,9 +22,11 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
+import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
+import com.google.inject.Inject;
 import com.google.inject.internal.Lists;
 
 /**
@@ -32,6 +34,9 @@ import com.google.inject.internal.Lists;
  */
 public class Xtend2ScopeProvider extends XbaseScopeProvider {
 
+	@Inject
+	private IXtend2JvmAssociations xtend2jvmAssociations;
+	
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		IScope parent = super.getScope(context, reference);
@@ -51,7 +56,7 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 			if (clazz != null) {
 				if(descriptions == null)  
 					descriptions = Lists.newArrayList();
-				JvmGenericType inferredType = clazz.getInferredJvmType();
+				JvmGenericType inferredType = xtend2jvmAssociations.getInferredType(clazz);
 				QualifiedName inferredDeclaringTypeName = QualifiedName.create(inferredType.getSimpleName());
 				descriptions.add(EObjectDescription.create(inferredDeclaringTypeName, inferredType));
 			}

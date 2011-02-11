@@ -29,14 +29,14 @@ public class Xtend2LazyLinker extends LazyLinker {
 	private JvmModelInferrer jvmModelInferrer;
 
 	@Inject
-	private IReferableElementsUnloader.GenericUnloader unloader; 
-	
+	private IReferableElementsUnloader.GenericUnloader unloader;
+
 	@Override
 	protected void beforeModelLinked(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
 		EList<EObject> rootElements = model.eResource().getContents();
-		for(Iterator<EObject> i=rootElements.iterator(); i.hasNext();) {
+		for (Iterator<EObject> i = rootElements.iterator(); i.hasNext();) {
 			EObject rootElement = i.next();
-			if(rootElement instanceof JvmGenericType) {
+			if (rootElement instanceof JvmGenericType) {
 				unloader.unloadRoot(rootElement);
 				i.remove();
 			}
@@ -49,13 +49,12 @@ public class Xtend2LazyLinker extends LazyLinker {
 		super.afterModelLinked(model, diagnosticsConsumer);
 		XtendClass xtendClass = getXtendClass(model);
 		if (xtendClass != null) {
-			JvmGenericType inferredJvmType = jvmModelInferrer.inferJvmGenericType(xtendClass);
-			model.eResource().getContents().add(inferredJvmType);
-			jvmModelInferrer.computeInferredReturnTypes(inferredJvmType);
+			jvmModelInferrer.inferJvmGenericType(xtendClass);
 		}
 	}
 
 	protected XtendClass getXtendClass(EObject root) {
 		return (root instanceof XtendFile) ? ((XtendFile) root).getXtendClass() : null;
 	}
+ 
 }
