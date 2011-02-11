@@ -43,7 +43,7 @@ public class EditorLocalContextProvider implements ILocalContextProvider {
 
 	private static final Logger LOG = Logger.getLogger(EditorLocalContextProvider.class);
 
-	@Inject
+	@Inject(optional=true)
 	@Nullable
 	private IWorkbench workbench;
 
