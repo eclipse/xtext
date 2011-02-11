@@ -292,6 +292,10 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo("", "new String()");
 	}
 	
+	public void testConstructorCall_02() throws Exception {
+		assertEvaluatesTo("foobar", "new String('foobar')");
+	}
+	
 	public void testAssignment_01() {
 		assertEvaluatesTo("newValue", "{var x = 'literal' x = 'newValue'}");
 	}
