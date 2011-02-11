@@ -72,6 +72,15 @@ public class EcoreUtil2 extends EcoreUtil {
 	public static <T extends EObject> T clone(T eObject) {
 		return (T) EcoreUtil.copy(eObject);
 	}
+	
+	/**
+	 * only clones the element if it is contained in another {@link EObject} or another {@link Resource}
+	 */
+	public static <T extends EObject> T cloneIfContained(T eObject) {
+		if (eObject.eContainer()!=null || eObject.eResource()!=null)
+			return clone(eObject);
+		return eObject;
+	}
 
 	/**
 	 * copies contents of a resource set into a new one
