@@ -30,7 +30,7 @@ public interface IReferableElementsUnloader {
 		
 	}
 	
-	final class GenericUnloader implements IReferableElementsUnloader {
+	class GenericUnloader implements IReferableElementsUnloader {
 
 		public void unloadRoot(EObject root) {
 			for(Iterator<EObject> i = EcoreUtil.getAllProperContents(root, false); i.hasNext();) {

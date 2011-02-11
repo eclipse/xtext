@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.linking;
 
+import static com.google.common.collect.Iterables.*;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
@@ -19,7 +21,7 @@ import com.google.inject.Inject;
 public class Xtend2EObjectAtOffsetHelper extends EObjectAtOffsetHelper {
 
 	@Inject
-	private XtendSourceAssociator xtendSourceAssociator;
+	private IXtend2JvmAssociations xtend2JvmAssociations;
 
 	@Override
 	public EObject resolveCrossReferencedElementAt(XtextResource resource, int offset) {
@@ -32,8 +34,10 @@ public class Xtend2EObjectAtOffsetHelper extends EObjectAtOffsetHelper {
 	}
 	
 	protected EObject convertToXtendSource(EObject element) {
-		EObject xtendSource = xtendSourceAssociator.getXtendSource(element);
-		return (xtendSource != null) ? xtendSource : element;
+		if(element == null)
+			return null;
+		Iterable<EObject> xtendSources = xtend2JvmAssociations.getXtendElements(element);
+		return (isEmpty(xtendSources)) ? element : xtendSources.iterator().next();
 	}
 
 }

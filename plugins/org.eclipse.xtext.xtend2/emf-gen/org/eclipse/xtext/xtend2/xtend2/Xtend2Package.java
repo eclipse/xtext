@@ -211,22 +211,13 @@ public interface Xtend2Package extends EPackage
 	int XTEND_CLASS__MEMBERS = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>Inferred Jvm Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__INFERRED_JVM_TYPE = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 6;
-
-	/**
 	 * The number of structural features of the '<em>Xtend Class</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CLASS_FEATURE_COUNT = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 7;
+	int XTEND_CLASS_FEATURE_COUNT = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendMemberImpl <em>Xtend Member</em>}' class.
@@ -248,22 +239,13 @@ public interface Xtend2Package extends EPackage
 	int XTEND_MEMBER__DECLARING_TYPE = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Inferred Jvm Member</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_MEMBER__INFERRED_JVM_MEMBER = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_MEMBER__NAME = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 2;
+	int XTEND_MEMBER__NAME = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Xtend Member</em>' class.
@@ -272,7 +254,7 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_MEMBER_FEATURE_COUNT = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 3;
+	int XTEND_MEMBER_FEATURE_COUNT = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl <em>Xtend Function</em>}' class.
@@ -292,15 +274,6 @@ public interface Xtend2Package extends EPackage
 	 * @ordered
 	 */
 	int XTEND_FUNCTION__DECLARING_TYPE = XTEND_MEMBER__DECLARING_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Inferred Jvm Member</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__INFERRED_JVM_MEMBER = XTEND_MEMBER__INFERRED_JVM_MEMBER;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -710,17 +683,6 @@ public interface Xtend2Package extends EPackage
 	EReference getXtendClass_Members();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getInferredJvmType <em>Inferred Jvm Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Inferred Jvm Type</em>'.
-	 * @see org.eclipse.xtext.xtend2.xtend2.XtendClass#getInferredJvmType()
-	 * @see #getXtendClass()
-	 * @generated
-	 */
-	EReference getXtendClass_InferredJvmType();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.XtendMember <em>Xtend Member</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -740,17 +702,6 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 */
 	EReference getXtendMember_DeclaringType();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xtend2.xtend2.XtendMember#getInferredJvmMember <em>Inferred Jvm Member</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Inferred Jvm Member</em>'.
-	 * @see org.eclipse.xtext.xtend2.xtend2.XtendMember#getInferredJvmMember()
-	 * @see #getXtendMember()
-	 * @generated
-	 */
-	EReference getXtendMember_InferredJvmMember();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtend2.xtend2.XtendMember#getName <em>Name</em>}'.
@@ -1089,14 +1040,6 @@ public interface Xtend2Package extends EPackage
 		EReference XTEND_CLASS__MEMBERS = eINSTANCE.getXtendClass_Members();
 
 		/**
-		 * The meta object literal for the '<em><b>Inferred Jvm Type</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XTEND_CLASS__INFERRED_JVM_TYPE = eINSTANCE.getXtendClass_InferredJvmType();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendMemberImpl <em>Xtend Member</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1113,14 +1056,6 @@ public interface Xtend2Package extends EPackage
 		 * @generated
 		 */
 		EReference XTEND_MEMBER__DECLARING_TYPE = eINSTANCE.getXtendMember_DeclaringType();
-
-		/**
-		 * The meta object literal for the '<em><b>Inferred Jvm Member</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XTEND_MEMBER__INFERRED_JVM_MEMBER = eINSTANCE.getXtendMember_InferredJvmMember();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.

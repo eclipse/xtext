@@ -31,6 +31,7 @@ import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
+import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringElseIf;
@@ -66,6 +67,9 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 
 	@Inject
 	private TypeConformanceComputer conformanceComputer;
+
+	@Inject
+	private IXtend2JvmAssociations xtend2jvmAssociations;
 
 	@Override
 	protected List<EPackage> getEPackages() {
@@ -121,17 +125,19 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 	@Check
 	public void checkDuplicateAndOverridenFunctions(XtendClass xtendClass) {
 		JvmParameterizedTypeReference typeReference = typesFactory.createJvmParameterizedTypeReference();
-		typeReference.setType(xtendClass.getInferredJvmType());
+		typeReference.setType(xtend2jvmAssociations.getInferredType(xtendClass));
 		TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(typeReference);
 		for (int i = 0; i < xtendClass.getMembers().size(); ++i) {
 			if (xtendClass.getMembers().get(i) instanceof XtendFunction) {
 				XtendFunction function = (XtendFunction) xtendClass.getMembers().get(i);
-				JvmOperation inferredJvmOperation = (JvmOperation) function.getInferredJvmMember();
+				// TODO: revise for polymorphic dispatch: there might be more than one JvmOperation associated with an XtendFunction
+				JvmOperation inferredJvmOperation = xtend2jvmAssociations.getDirectlyInferredOperation(function);
 				for (int j = i + 1; j < xtendClass.getMembers().size(); j++) {
 					if (xtendClass.getMembers().get(j) instanceof XtendFunction) {
 						XtendFunction otherFunction = (XtendFunction) xtendClass.getMembers().get(j);
 						if (featureOverridesService.isOverridden(inferredJvmOperation,
-								(JvmFeature) otherFunction.getInferredJvmMember(), typeArgumentContext, false)) {
+								xtend2jvmAssociations.getDirectlyInferredOperation(otherFunction),
+								typeArgumentContext, false)) {
 							error("Duplicate method " + canonicalName(function), function,
 									Xtend2Package.Literals.XTEND_MEMBER__NAME, DUPLICATE_METHOD);
 							error("Duplicate method " + canonicalName(otherFunction), otherFunction,
@@ -145,7 +151,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 	}
 
 	protected void checkFunctionOverride(XtendFunction function, TypeArgumentContext typeArgumentContext) {
-		JvmOperation inferredJvmOperation = (JvmOperation) function.getInferredJvmMember();
+		JvmOperation inferredJvmOperation = xtend2jvmAssociations.getDirectlyInferredOperation(function);
 		boolean overriddenOperationFound = false;
 		if (function.getDeclaringType().getExtends() != null) {
 			JvmTypeReference returnType = typeProvider.getTypeForIdentifiable(inferredJvmOperation);
@@ -158,10 +164,10 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 							false)) {
 						overriddenOperationFound = true;
 						if (!function.isOverride())
-							error("Missing 'override'. Function overrides " + canonicalName(superOperation),
-									function, Xtend2Package.Literals.XTEND_MEMBER__NAME, MISSING_OVERRIDE);
-						JvmTypeReference superReturnTypeUpperBound = typeArgumentContext.getUpperBound(superOperation
-								.getReturnType(), function);
+							error("Missing 'override'. Function overrides " + canonicalName(superOperation), function,
+									Xtend2Package.Literals.XTEND_MEMBER__NAME, MISSING_OVERRIDE);
+						JvmTypeReference superReturnTypeUpperBound = typeArgumentContext.getUpperBound(
+								superOperation.getReturnType(), function);
 						if (!conformanceComputer.isConformant(superReturnTypeUpperBound, returnTypeUpperBound)) {
 							error("The return type is incompatible with "
 									+ canonicalName(superOperation.getReturnType()) + " "

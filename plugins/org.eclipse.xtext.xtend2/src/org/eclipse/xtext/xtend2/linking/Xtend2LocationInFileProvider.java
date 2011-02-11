@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.linking;
 
+import static com.google.common.collect.Iterables.*;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.resource.DefaultLocationInFileProvider;
@@ -20,7 +22,7 @@ import com.google.inject.Inject;
 public class Xtend2LocationInFileProvider extends DefaultLocationInFileProvider {
 
 	@Inject
-	private XtendSourceAssociator xtendSourceAssociator;
+	private IXtend2JvmAssociations xtend2JvmAssociations;
 	
 	@Override
 	public ITextRegion getFullTextRegion(EObject element) {
@@ -43,7 +45,9 @@ public class Xtend2LocationInFileProvider extends DefaultLocationInFileProvider 
 	}
 	
 	protected EObject convertToXtendSource(EObject element) {
-		EObject xtendSource = xtendSourceAssociator.getXtendSource(element);
-		return (xtendSource != null) ? xtendSource : element;
+		if(element == null)
+			return null;
+		Iterable<EObject> xtendSources = xtend2JvmAssociations.getXtendElements(element);
+		return (isEmpty(xtendSources)) ? element : xtendSources.iterator().next();
 	}
 }

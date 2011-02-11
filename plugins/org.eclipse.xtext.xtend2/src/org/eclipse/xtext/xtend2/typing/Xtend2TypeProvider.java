@@ -14,7 +14,8 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xtend2.linking.XtendSourceAssociator;
+import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
+import org.eclipse.xtext.xtend2.linking.JvmModelInferrer;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
@@ -37,7 +38,10 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 	private ITypeProvider typeProvider;
 
 	@Inject
-	private XtendSourceAssociator xtend2SourceAssociator;
+	private IXtend2JvmAssociations xtend2jvmAssociations;
+	
+	@Inject
+	private JvmModelInferrer jvmModelInferrer;
 	
 	protected JvmTypeReference _expectedType(XtendFunction function, EReference reference, int index) {
 		if (reference==Xtend2Package.Literals.XTEND_FUNCTION__EXPRESSION) {
@@ -58,7 +62,7 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 	
 	protected JvmTypeReference _typeForIdentifiable(XtendClass clazz) {
 		JvmParameterizedTypeReference typeReference = factory.createJvmParameterizedTypeReference();
-		typeReference.setType(clazz.getInferredJvmType());
+		typeReference.setType(xtend2jvmAssociations.getInferredType(clazz));
 		return typeReference;
 	}
 
@@ -89,14 +93,15 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 	}
 
 	protected JvmTypeReference _typeForIdentifiable(JvmGenericType type) {
-		XtendClass xtendClass = xtend2SourceAssociator.getXtendSource(type);
+		XtendClass xtendClass = xtend2jvmAssociations.getXtendClass(type);
 		return (xtendClass != null) ? _typeForIdentifiable(xtendClass) : null;
 	}
 
 	@Override
 	protected JvmTypeReference _typeForIdentifiable(JvmOperation operation) {
-		XtendFunction xtendFunction = xtend2SourceAssociator.getXtendSource(operation);
-		return (xtendFunction != null) ? _typeForIdentifiable(xtendFunction) : super._typeForIdentifiable(operation);
+		if(operation.getReturnType() != null) 
+			return operation.getReturnType();
+		return jvmModelInferrer.inferReturnType(operation);
 	}
 	
 }

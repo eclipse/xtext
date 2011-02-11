@@ -23,10 +23,12 @@ import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
-import org.eclipse.xtext.xtend2.xtend2.XtendMember;
+import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 import com.google.common.base.Predicate;
+import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -35,6 +37,9 @@ public class Xtend2FindReferencesHandler extends FindReferencesHandler {
 
 	private static final Logger LOG = Logger.getLogger(Xtend2FindReferencesHandler.class);
 
+	@Inject
+	private IXtend2JvmAssociations xtend2jvmAssociations;
+	
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
@@ -50,10 +55,10 @@ public class Xtend2FindReferencesHandler extends FindReferencesHandler {
 									Filter filter = new Filter();
 									if (element instanceof XtendClass) {
 										filter.setFilteredXtendSource(element);
-										element = ((XtendClass) element).getInferredJvmType();
-									} else if (element instanceof XtendMember) {
+										element = xtend2jvmAssociations.getInferredType((XtendClass) element);
+									} else if (element instanceof XtendFunction) {
 										filter.setFilteredXtendSource(element);
-										element = ((XtendMember) element).getInferredJvmMember();
+										element = xtend2jvmAssociations.getDirectlyInferredOperation((XtendFunction) element);
 									}
 									return Tuples.create(EcoreUtil.getURI(element), filter);
 								}

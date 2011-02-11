@@ -28,15 +28,11 @@
         transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
         eType="#//XtendMember" containment="true" eOpposite="#//XtendMember/declaringType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="inferredJvmType" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmGenericType"
-        transient="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XtendMember" abstract="true" eSuperTypes="../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmIdentifiableElement">
     <eOperations name="getSimpleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="declaringType" eType="#//XtendClass"
         eOpposite="#//XtendClass/members"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="inferredJvmMember" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmMember"
-        transient="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XtendFunction" eSuperTypes="#//XtendMember ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeParameterDeclarator">

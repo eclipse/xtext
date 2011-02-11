@@ -20,12 +20,11 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.xtend2.linking.XtendSourceAssociator;
+import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
-import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 
 import com.google.inject.Inject;
 
@@ -35,14 +34,14 @@ import com.google.inject.Inject;
 public class InferredJvmModelTest extends AbstractXtend2TestCase {
 
 	@Inject
-	private XtendSourceAssociator sourceAssociator;
+	private IXtend2JvmAssociations associations;
 	
 	public void testInferredJvmType() throws Exception {
 		XtendFile xtendFile = file("class Foo { }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		XtendClass xtendClass = xtendFile.getXtendClass();
-		assertEquals(xtendClass.getInferredJvmType(), inferredType);
-		assertEquals(xtendClass, sourceAssociator.getXtendSource(inferredType));
+		assertEquals(associations.getInferredType(xtendClass), inferredType);
+		assertEquals(xtendClass, associations.getXtendClass(inferredType));
 		assertEquals(xtendClass.getCanonicalName(), inferredType.getCanonicalName());
 		assertEquals(JvmVisibility.PUBLIC, inferredType.getVisibility());
 	}
@@ -105,10 +104,10 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		assertEquals(2, jvmMembers.size());
 		JvmMember jvmMember = jvmMembers.get(1);
 		assertTrue(jvmMember instanceof JvmOperation);
-		XtendMember xtendMember = xtendClass.getMembers().get(0);
-		assertEquals(xtendMember.getCanonicalName(), jvmMember.getCanonicalName());
-		assertEquals(jvmMember, xtendMember.getInferredJvmMember());
-		assertEquals(xtendMember, sourceAssociator.getXtendSource((JvmOperation) inferredType.getMembers().get(1)));
+		XtendFunction xtendFunction = (XtendFunction) xtendClass.getMembers().get(0);
+		assertEquals(xtendFunction.getCanonicalName(), jvmMember.getCanonicalName());
+		assertEquals(jvmMember, associations.getDirectlyInferredOperation(xtendFunction));
+		assertEquals(xtendFunction, associations.getXtendFunction((JvmOperation) inferredType.getMembers().get(1)));
 	}
 	
 	public void testInferredFunctionWithReturnType() throws Exception {

@@ -15,8 +15,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import org.eclipse.xtext.common.types.JvmMember;
-
 import org.eclipse.xtext.common.types.impl.JvmIdentifiableElementImpl;
 
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
@@ -31,7 +29,6 @@ import org.eclipse.xtext.xtend2.xtend2.XtendMember;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendMemberImpl#getDeclaringType <em>Declaring Type</em>}</li>
- *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendMemberImpl#getInferredJvmMember <em>Inferred Jvm Member</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendMemberImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
@@ -40,16 +37,6 @@ import org.eclipse.xtext.xtend2.xtend2.XtendMember;
  */
 public abstract class XtendMemberImpl extends JvmIdentifiableElementImpl implements XtendMember
 {
-	/**
-	 * The cached value of the '{@link #getInferredJvmMember() <em>Inferred Jvm Member</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInferredJvmMember()
-	 * @generated
-	 * @ordered
-	 */
-	protected JvmMember inferredJvmMember;
-
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -134,49 +121,6 @@ public abstract class XtendMemberImpl extends JvmIdentifiableElementImpl impleme
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_MEMBER__DECLARING_TYPE, newDeclaringType, newDeclaringType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmMember getInferredJvmMember()
-	{
-		if (inferredJvmMember != null && inferredJvmMember.eIsProxy())
-		{
-			InternalEObject oldInferredJvmMember = (InternalEObject)inferredJvmMember;
-			inferredJvmMember = (JvmMember)eResolveProxy(oldInferredJvmMember);
-			if (inferredJvmMember != oldInferredJvmMember)
-			{
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Xtend2Package.XTEND_MEMBER__INFERRED_JVM_MEMBER, oldInferredJvmMember, inferredJvmMember));
-			}
-		}
-		return inferredJvmMember;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmMember basicGetInferredJvmMember()
-	{
-		return inferredJvmMember;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setInferredJvmMember(JvmMember newInferredJvmMember)
-	{
-		JvmMember oldInferredJvmMember = inferredJvmMember;
-		inferredJvmMember = newInferredJvmMember;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_MEMBER__INFERRED_JVM_MEMBER, oldInferredJvmMember, inferredJvmMember));
 	}
 
 	/**
@@ -276,9 +220,6 @@ public abstract class XtendMemberImpl extends JvmIdentifiableElementImpl impleme
 		{
 			case Xtend2Package.XTEND_MEMBER__DECLARING_TYPE:
 				return getDeclaringType();
-			case Xtend2Package.XTEND_MEMBER__INFERRED_JVM_MEMBER:
-				if (resolve) return getInferredJvmMember();
-				return basicGetInferredJvmMember();
 			case Xtend2Package.XTEND_MEMBER__NAME:
 				return getName();
 		}
@@ -297,9 +238,6 @@ public abstract class XtendMemberImpl extends JvmIdentifiableElementImpl impleme
 		{
 			case Xtend2Package.XTEND_MEMBER__DECLARING_TYPE:
 				setDeclaringType((XtendClass)newValue);
-				return;
-			case Xtend2Package.XTEND_MEMBER__INFERRED_JVM_MEMBER:
-				setInferredJvmMember((JvmMember)newValue);
 				return;
 			case Xtend2Package.XTEND_MEMBER__NAME:
 				setName((String)newValue);
@@ -321,9 +259,6 @@ public abstract class XtendMemberImpl extends JvmIdentifiableElementImpl impleme
 			case Xtend2Package.XTEND_MEMBER__DECLARING_TYPE:
 				setDeclaringType((XtendClass)null);
 				return;
-			case Xtend2Package.XTEND_MEMBER__INFERRED_JVM_MEMBER:
-				setInferredJvmMember((JvmMember)null);
-				return;
 			case Xtend2Package.XTEND_MEMBER__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -343,8 +278,6 @@ public abstract class XtendMemberImpl extends JvmIdentifiableElementImpl impleme
 		{
 			case Xtend2Package.XTEND_MEMBER__DECLARING_TYPE:
 				return getDeclaringType() != null;
-			case Xtend2Package.XTEND_MEMBER__INFERRED_JVM_MEMBER:
-				return inferredJvmMember != null;
 			case Xtend2Package.XTEND_MEMBER__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}

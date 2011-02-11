@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -47,7 +46,6 @@ import org.eclipse.xtext.xtend2.xtend2.XtendMember;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl#getImplements <em>Implements</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl#getSuperTypes <em>Super Types</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl#getMembers <em>Members</em>}</li>
- *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl#getInferredJvmType <em>Inferred Jvm Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -124,16 +122,6 @@ public class XtendClassImpl extends JvmIdentifiableElementImpl implements XtendC
 	 * @ordered
 	 */
 	protected EList<XtendMember> members;
-
-	/**
-	 * The cached value of the '{@link #getInferredJvmType() <em>Inferred Jvm Type</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInferredJvmType()
-	 * @generated
-	 * @ordered
-	 */
-	protected JvmGenericType inferredJvmType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -288,49 +276,6 @@ public class XtendClassImpl extends JvmIdentifiableElementImpl implements XtendC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmGenericType getInferredJvmType()
-	{
-		if (inferredJvmType != null && inferredJvmType.eIsProxy())
-		{
-			InternalEObject oldInferredJvmType = (InternalEObject)inferredJvmType;
-			inferredJvmType = (JvmGenericType)eResolveProxy(oldInferredJvmType);
-			if (inferredJvmType != oldInferredJvmType)
-			{
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Xtend2Package.XTEND_CLASS__INFERRED_JVM_TYPE, oldInferredJvmType, inferredJvmType));
-			}
-		}
-		return inferredJvmType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmGenericType basicGetInferredJvmType()
-	{
-		return inferredJvmType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setInferredJvmType(JvmGenericType newInferredJvmType)
-	{
-		JvmGenericType oldInferredJvmType = inferredJvmType;
-		inferredJvmType = newInferredJvmType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_CLASS__INFERRED_JVM_TYPE, oldInferredJvmType, inferredJvmType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getPackageName()
 	{
 		// TODO: implement this method
@@ -413,9 +358,6 @@ public class XtendClassImpl extends JvmIdentifiableElementImpl implements XtendC
 				return getSuperTypes();
 			case Xtend2Package.XTEND_CLASS__MEMBERS:
 				return getMembers();
-			case Xtend2Package.XTEND_CLASS__INFERRED_JVM_TYPE:
-				if (resolve) return getInferredJvmType();
-				return basicGetInferredJvmType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -453,9 +395,6 @@ public class XtendClassImpl extends JvmIdentifiableElementImpl implements XtendC
 				getMembers().clear();
 				getMembers().addAll((Collection<? extends XtendMember>)newValue);
 				return;
-			case Xtend2Package.XTEND_CLASS__INFERRED_JVM_TYPE:
-				setInferredJvmType((JvmGenericType)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -488,9 +427,6 @@ public class XtendClassImpl extends JvmIdentifiableElementImpl implements XtendC
 			case Xtend2Package.XTEND_CLASS__MEMBERS:
 				getMembers().clear();
 				return;
-			case Xtend2Package.XTEND_CLASS__INFERRED_JVM_TYPE:
-				setInferredJvmType((JvmGenericType)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -517,8 +453,6 @@ public class XtendClassImpl extends JvmIdentifiableElementImpl implements XtendC
 				return superTypes != null && !superTypes.isEmpty();
 			case Xtend2Package.XTEND_CLASS__MEMBERS:
 				return members != null && !members.isEmpty();
-			case Xtend2Package.XTEND_CLASS__INFERRED_JVM_TYPE:
-				return inferredJvmType != null;
 		}
 		return super.eIsSet(featureID);
 	}

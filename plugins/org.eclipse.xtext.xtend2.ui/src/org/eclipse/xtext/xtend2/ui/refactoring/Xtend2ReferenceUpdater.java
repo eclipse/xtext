@@ -7,13 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.refactoring;
 
+import static com.google.common.collect.Iterables.*;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultReferenceUpdater;
-import org.eclipse.xtext.xtend2.linking.XtendSourceAssociator;
+import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
 
 import com.google.inject.Inject;
 
@@ -23,7 +25,7 @@ import com.google.inject.Inject;
 public class Xtend2ReferenceUpdater extends DefaultReferenceUpdater {
 
 	@Inject
-	private XtendSourceAssociator xtendSourceAssociator;
+	private IXtend2JvmAssociations xtend2jvmAssociations;
 
 	@Override
 	protected void createReferenceUpdate(EObject referringElement, URI referringResourceURI, EReference reference,
@@ -35,6 +37,6 @@ public class Xtend2ReferenceUpdater extends DefaultReferenceUpdater {
 	
 	protected boolean isInferredJvmModelElement(EObject element) {
 		EObject rootContainer = EcoreUtil.getRootContainer(element);
-		return xtendSourceAssociator.getXtendSource(rootContainer) != null;
+		return !isEmpty(xtend2jvmAssociations.getXtendElements(rootContainer));
 	}
 }
