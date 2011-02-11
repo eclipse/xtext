@@ -49,6 +49,11 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		assertEquals("java.util.ArrayList.ArrayList(int)", expression.getConstructor().getCanonicalName());
 	}
 	
+	public void testConstructorCall_01() throws Exception {
+		XConstructorCall expression = (XConstructorCall) expression("new java.util.ArrayList<String>()");
+		assertEquals("java.util.ArrayList.ArrayList()", expression.getConstructor().getCanonicalName());
+	}
+	
 	public void testEscapedQualifiedName() throws Exception {
 		XCastedExpression expression = (XCastedExpression) expression("null as ^testdata/* foobar */.^FieldAccessSub");
 		assertFalse(expression.getType().getType().eIsProxy());
