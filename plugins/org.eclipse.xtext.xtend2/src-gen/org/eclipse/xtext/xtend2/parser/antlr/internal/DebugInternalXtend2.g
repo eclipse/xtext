@@ -44,7 +44,10 @@ ruleMember :
 
 // Rule Function
 ruleFunction :
-	'override'? (
+	(
+		'override'? |
+		'case'?
+	)* (
 		'<' ruleJvmTypeParameter (
 			',' ruleJvmTypeParameter
 		)* '>'

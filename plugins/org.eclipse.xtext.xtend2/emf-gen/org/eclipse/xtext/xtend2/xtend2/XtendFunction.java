@@ -25,6 +25,7 @@ import org.eclipse.xtext.xbase.XExpression;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#isOverride <em>Override</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#isDispatch <em>Dispatch</em>}</li>
  * </ul>
  * </p>
  *
@@ -127,5 +128,31 @@ public interface XtendFunction extends XtendMember, JvmTypeParameterDeclarator
 	 * @generated
 	 */
 	void setOverride(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Dispatch</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Dispatch</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Dispatch</em>' attribute.
+	 * @see #setDispatch(boolean)
+	 * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getXtendFunction_Dispatch()
+	 * @model
+	 * @generated
+	 */
+	boolean isDispatch();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#isDispatch <em>Dispatch</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Dispatch</em>' attribute.
+	 * @see #isDispatch()
+	 * @generated
+	 */
+	void setDispatch(boolean value);
 
 } // XtendFunction

@@ -225,7 +225,8 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getClassAccess().getImplementsAssignment_4_1(), "rule__Class__ImplementsAssignment_4_1");
 					put(grammarAccess.getClassAccess().getImplementsAssignment_4_2_1(), "rule__Class__ImplementsAssignment_4_2_1");
 					put(grammarAccess.getClassAccess().getMembersAssignment_6(), "rule__Class__MembersAssignment_6");
-					put(grammarAccess.getFunctionAccess().getOverrideAssignment_0(), "rule__Function__OverrideAssignment_0");
+					put(grammarAccess.getFunctionAccess().getOverrideAssignment_0_0(), "rule__Function__OverrideAssignment_0_0");
+					put(grammarAccess.getFunctionAccess().getDispatchAssignment_0_1(), "rule__Function__DispatchAssignment_0_1");
 					put(grammarAccess.getFunctionAccess().getTypeParametersAssignment_1_1(), "rule__Function__TypeParametersAssignment_1_1");
 					put(grammarAccess.getFunctionAccess().getTypeParametersAssignment_1_2_1(), "rule__Function__TypeParametersAssignment_1_2_1");
 					put(grammarAccess.getFunctionAccess().getReturnTypeAssignment_2(), "rule__Function__ReturnTypeAssignment_2");
@@ -361,6 +362,7 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getJvmTypeParameterAccess().getConstraintsAssignment_1_0_0(), "rule__JvmTypeParameter__ConstraintsAssignment_1_0_0");
 					put(grammarAccess.getJvmTypeParameterAccess().getConstraintsAssignment_1_0_1(), "rule__JvmTypeParameter__ConstraintsAssignment_1_0_1");
 					put(grammarAccess.getJvmTypeParameterAccess().getConstraintsAssignment_1_1(), "rule__JvmTypeParameter__ConstraintsAssignment_1_1");
+					put(grammarAccess.getFunctionAccess().getUnorderedGroup_0(), "rule__Function__UnorderedGroup_0");
 				}
 			};
 		}
