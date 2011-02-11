@@ -55,7 +55,7 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 	private final static Logger log = Logger.getLogger(AbstractJavaBasedContentProposalProvider.class);
 
 	@Inject
-	IEObjectHover hover;
+	private IEObjectHover hover;
 	
 	protected class DefaultProposalCreator implements Function<IEObjectDescription, ICompletionProposal> {
 
@@ -104,18 +104,31 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 		@Inject
 		private IScopeProvider scopeProvider;
 
-		public void lookupCrossReference(EObject model, EReference reference, ICompletionProposalAcceptor acceptor,
+		public final void lookupCrossReference(EObject model, EReference reference, ICompletionProposalAcceptor acceptor,
 				Predicate<IEObjectDescription> filter,
 				Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
 			if (model != null) {
 				IScope scope = getScopeProvider().getScope(model, reference);
-				Iterable<IEObjectDescription> candidates = queryScope(scope, model, reference, filter);
-				for (IEObjectDescription candidate : candidates) {
-					if (!acceptor.canAcceptMoreProposals())
-						return;
-					if (filter.apply(candidate)) {
-						acceptor.accept(proposalFactory.apply(candidate));
-					}
+				lookupCrossReference(scope, model, reference, acceptor, filter, proposalFactory);
+			}
+		}
+		
+		protected Function<IEObjectDescription, ICompletionProposal> getWrappedFactory(
+				EObject model, EReference reference,
+				Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
+			return proposalFactory;
+		}
+
+		public void lookupCrossReference(IScope scope, EObject model, EReference reference,
+				ICompletionProposalAcceptor acceptor, Predicate<IEObjectDescription> filter,
+				Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
+			Function<IEObjectDescription, ICompletionProposal> wrappedFactory = getWrappedFactory(model, reference, proposalFactory);
+			Iterable<IEObjectDescription> candidates = queryScope(scope, model, reference, filter);
+			for (IEObjectDescription candidate : candidates) {
+				if (!acceptor.canAcceptMoreProposals())
+					return;
+				if (filter.apply(candidate)) {
+					acceptor.accept(wrappedFactory.apply(candidate));
 				}
 			}
 		}
@@ -144,7 +157,6 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 	protected AbstractJavaBasedContentProposalProvider() {
 		dispatchers = new HashMap<String, PolymorphicDispatcher<Void>>();
 	}
-
 
 	@Override
 	public void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
@@ -273,6 +285,10 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 
 	public ReferenceProposalCreator getCrossReferenceProposalCreator() {
 		return crossReferenceProposalCreator;
+	}
+	
+	public IEObjectHover getHover() {
+		return hover;
 	}
 	
 }
