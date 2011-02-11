@@ -556,8 +556,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 					return null;
 			} else if (parameter.eContainer() instanceof XForLoopExpression) {
 				XForLoopExpression forLoop = (XForLoopExpression) parameter.eContainer();
-				JvmParameterizedTypeReference reference = (JvmParameterizedTypeReference) getType(forLoop
+				JvmTypeReference reference = getType(forLoop
 						.getForExpression());
+				if (reference==null)
+					return null;
 				TypeArgumentContext context = typeArgCtxProvider.getReceiverContext(reference);
 				final String iterableName = Iterable.class.getName();
 				// TODO remove the special array treatment and put into some generic facility
@@ -568,7 +570,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 				if (!reference.getType().getCanonicalName().equals(iterableName)) {
 					try {
 						final Set<JvmTypeReference> collectSuperTypes = collector.collectSuperTypes(reference);
-						reference = (JvmParameterizedTypeReference) find(collectSuperTypes,
+						reference = find(collectSuperTypes,
 								new Predicate<JvmTypeReference>() {
 									public boolean apply(JvmTypeReference input) {
 										return input.getType().getCanonicalName().equals(iterableName);
@@ -578,7 +580,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 						return null;
 					}
 				}
-				final JvmTypeReference resolveContravariant = context.getUpperBound((reference).getArguments().get(0), parameter);
+				final JvmTypeReference resolveContravariant = context.getUpperBound(((JvmParameterizedTypeReference)reference).getArguments().get(0), parameter);
 				return resolveContravariant;
 			}
 		}

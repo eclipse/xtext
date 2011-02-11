@@ -22,8 +22,8 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 public class IdentifiableSimpleNameProvider {
 	
 	public String getSimpleName(JvmIdentifiableElement element) {
-		if (element == null) {
-			throw new NullPointerException("element");
+		if (element == null || element.eIsProxy()) {
+			return null;
 		}
 		if (element instanceof JvmFeature) {
 			return ((JvmFeature) element).getSimpleName();

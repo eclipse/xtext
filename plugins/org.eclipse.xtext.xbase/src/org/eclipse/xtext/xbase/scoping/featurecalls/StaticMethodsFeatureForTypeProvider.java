@@ -61,23 +61,22 @@ public class StaticMethodsFeatureForTypeProvider implements IFeaturesForTypeProv
 		Iterable<JvmOperation> staticMethods = emptySet();
 		for (Class<?> clazz : operators) {
 			JvmTypeReference typeReference = typeRefs.getTypeForName(clazz, context);
-			if (typeReference == null) {
-				throw new IllegalStateException("couldn't find type " + clazz.getCanonicalName()+" on classpath.");
-			}
-			final JvmDeclaredType type = (JvmDeclaredType) typeReference.getType();
-			Iterable<JvmOperation> operations = type.getDeclaredOperations();
-			staticMethods = concat(staticMethods, filter(operations, new Predicate<JvmOperation>() {
-				public boolean apply(JvmOperation input) {
-					if (input.isStatic()) {
-						if (input.getParameters().size() > 0) {
-							JvmFormalParameter firstParam = input.getParameters().get(0);
-							return conformanceComputer.isConformant(firstParam.getParameterType(),
-									reference);
+			if (typeReference != null) {
+				final JvmDeclaredType type = (JvmDeclaredType) typeReference.getType();
+				Iterable<JvmOperation> operations = type.getDeclaredOperations();
+				staticMethods = concat(staticMethods, filter(operations, new Predicate<JvmOperation>() {
+					public boolean apply(JvmOperation input) {
+						if (input.isStatic()) {
+							if (input.getParameters().size() > 0) {
+								JvmFormalParameter firstParam = input.getParameters().get(0);
+								return conformanceComputer.isConformant(firstParam.getParameterType(),
+										reference);
+							}
 						}
+						return false;
 					}
-					return false;
-				}
-			}));
+				}));
+			}
 		}
 		return newArrayList(staticMethods);
 	}
