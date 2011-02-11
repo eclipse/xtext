@@ -124,7 +124,7 @@ public class JdtBasedConstructorScope extends AbstractConstructorScope {
 			if (proxy == null) {
 				proxy = createProxy();
 			}
-			return null;
+			return proxy;
 		}
 
 		public URI getEObjectURI() {
