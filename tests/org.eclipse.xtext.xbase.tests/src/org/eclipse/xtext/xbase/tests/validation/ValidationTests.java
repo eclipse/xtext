@@ -119,7 +119,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 
 	public void testCast_0() throws Exception {
 		XExpression expression = expression("'foo' as String");
-		helper.assertError(expression, XCASTED_EXPRESSION, OBSOLETE_CAST, "cast", "obsolete");
+		helper.assertWarning(expression, XCASTED_EXPRESSION, OBSOLETE_CAST, "cast", "obsolete");
 		helper.assertNoError(expression, INVALID_CAST);
 	}
 
@@ -137,7 +137,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 
 	public void testInstanceOf_0() throws Exception {
 		XExpression expression = expression("'foo' instanceof String");
-		helper.assertError(expression, XINSTANCE_OF_EXPRESSION, OBSOLETE_INSTANCEOF, "already", "java.lang.String");
+		helper.assertWarning(expression, XINSTANCE_OF_EXPRESSION, OBSOLETE_INSTANCEOF, "already", "java.lang.String");
 		helper.assertNoError(expression, INVALID_INSTANCEOF);
 	}
 
