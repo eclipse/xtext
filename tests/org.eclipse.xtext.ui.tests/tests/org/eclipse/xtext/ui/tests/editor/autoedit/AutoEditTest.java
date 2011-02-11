@@ -46,5 +46,11 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 		pressKey(editor, SWT.ESC);
 		assertState("fbb|", editor);
 	}
+	
+	public void testClosingTerminalNextToDifferentPartition() throws Exception {
+		XtextEditor editor = openEditor("{|\n}'foo'");
+		pressKey(editor, '\n');
+		assertState("{\n\t|\n}'foo'", editor);
+	}
 
 }

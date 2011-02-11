@@ -18,6 +18,7 @@ import junit.framework.TestSuite;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.JavaCore;
@@ -71,7 +72,6 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 			protected void setUp() throws Exception {
 				super.setUp();
 				project = createPluginProject(TESTPROJECT_NAME);
-
 			}
 			@Override
 			protected void tearDown() throws Exception {
@@ -79,6 +79,14 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 				super.tearDown();
 			}
 		};
+	}
+	
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(TESTPROJECT_NAME);
+		if (!project.exists())
+			createPluginProject(TESTPROJECT_NAME);
 	}
 	
 	protected static IProject createPluginProject(String name) throws CoreException {
@@ -104,6 +112,12 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 			}
 			project.delete(true, true, null);
 		}
+	}
+	
+	public void testCurlyBraceBlockAndRichStrings_0() throws Exception {
+		XtextEditor editor = openEditor("\n{|\n'''«{null}»'''}");
+		pressKey(editor, '\n');
+		assertState("\n{\n\t|\n'''«{null}»'''}", editor);
 	}
 	
 	public void testIndentationEdit_1() throws Exception {

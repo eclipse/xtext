@@ -69,4 +69,14 @@ public class DocumentUtil {
 	public boolean isSameLine(IDocument doc, int offset, int offset2) throws BadLocationException {
 		return doc.getLineOfOffset(offset)==doc.getLineOfOffset(offset2);
 	}
+	
+	public int findNextOffSetInPartition(IDocument doc, int partitionOffSet, int minIndex) throws BadLocationException {
+		ITypedRegion partition = doc.getPartition(partitionOffSet);
+		ITypedRegion partition2 = doc.getPartition(minIndex);
+		if (partition.getType().equals(partition2.getType())) {
+			return minIndex;
+		} else {
+			return findNextOffSetInPartition(doc, partitionOffSet, minIndex+partition2.getLength());
+		}
+	}
 }
