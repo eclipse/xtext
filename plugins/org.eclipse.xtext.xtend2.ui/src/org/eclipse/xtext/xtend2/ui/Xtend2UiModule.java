@@ -7,6 +7,7 @@ import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
+import org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider.ReferenceProposalCreator;
 import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider;
 import org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler;
 import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper;
@@ -16,6 +17,7 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculato
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
+import org.eclipse.xtext.xbase.ui.contentassist.XbaseReferenceProposalCreator;
 import org.eclipse.xtext.xtend2.ui.autoedit.AutoEditStrategyProvider;
 import org.eclipse.xtext.xtend2.ui.autoedit.TokenTypeToPartitionMapper;
 import org.eclipse.xtext.xtend2.ui.doubleClicking.Xtend2DoubleClickStrategyProvider;
@@ -89,5 +91,10 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 	
 	public Class<? extends DoubleClickStrategyProvider> bindDoubleClickStrategyProvider() {
 		return Xtend2DoubleClickStrategyProvider.class;
+	}
+	
+	@Override
+	public Class<? extends ReferenceProposalCreator> bindAbstractJavaBasedContentProposalProvider$ReferenceProposalCreator() {
+		return XbaseReferenceProposalCreator.class;
 	}
 }
