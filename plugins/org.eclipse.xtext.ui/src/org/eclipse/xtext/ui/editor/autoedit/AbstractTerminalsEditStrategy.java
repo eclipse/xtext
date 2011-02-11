@@ -68,8 +68,8 @@ public abstract class AbstractTerminalsEditStrategy extends AbstractEditStrategy
 			if (start==null || start.getOffset()>stop.getOffset()) {
 				return stop;
 			}
-			stopOffset = stop.getOffset()+stop.getLength();
-			startOffset = start.getOffset()+start.getLength();
+			stopOffset = util.findNextOffSetInPartition(document, stopOffset, stop.getOffset()+stop.getLength());
+			startOffset = util.findNextOffSetInPartition(document, startOffset, start.getOffset()+start.getLength());
 		}
 	}
 
