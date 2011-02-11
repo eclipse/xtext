@@ -19,10 +19,8 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider.ReferenceProposalCreator;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
-import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -31,11 +29,11 @@ import com.google.common.base.Predicate;
 public class TypeAwareReferenceProposalCreator extends ReferenceProposalCreator {
 
 	@Override
-	public void lookupCrossReference(EObject model, EReference reference, ICompletionProposalAcceptor acceptor,
-			Predicate<IEObjectDescription> filter, final Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
+	protected Function<IEObjectDescription, ICompletionProposal> getWrappedFactory(EObject model, EReference reference,
+			final Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
 		if (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(getEReferenceType(model, reference))) {
-			super.lookupCrossReference(model, reference, acceptor, filter, new Function<IEObjectDescription, ICompletionProposal>() {
-
+			return new Function<IEObjectDescription, ICompletionProposal>() {
+	
 				public ICompletionProposal apply(IEObjectDescription from) {
 					ICompletionProposal result = proposalFactory.apply(from);
 					if (result instanceof ConfigurableCompletionProposal) {
@@ -48,11 +46,9 @@ public class TypeAwareReferenceProposalCreator extends ReferenceProposalCreator 
 					}
 					return result;
 				}
-				
-			});
-		} else {
-			super.lookupCrossReference(model, reference, acceptor, filter, proposalFactory);
+			};
 		}
+		return super.getWrappedFactory(model, reference, proposalFactory);
 	}
 	
 	protected Image computeImage(boolean isInnerType, int modifiers) {

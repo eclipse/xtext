@@ -5,18 +5,40 @@ package org.eclipse.xtext.xbase.ui.contentassist;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.jface.viewers.StyledString.Styler;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
+import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -34,10 +56,16 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
+
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */
 public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
+	
+	private final static Logger log = Logger.getLogger(XbaseProposalProvider.class);
+	
+	@Inject
+	private ITypesProposalProvider typeProposalProvider;
 	
 	@Inject
 	private ValidFeatureDescription featureDescriptionPredicate;
@@ -66,8 +94,9 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 	public void completeJvmParameterizedTypeReference_Type(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		if (context.getPrefix().length() > 0) {
-			if (Character.isJavaIdentifierStart(context.getPrefix().charAt(0)))
-				super.completeJvmParameterizedTypeReference_Type(model, assignment, context, acceptor);
+			if (Character.isJavaIdentifierStart(context.getPrefix().charAt(0))) {
+				typeProposalProvider.createTypeProposals(this, context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, acceptor);
+			}
 		}
 	}
 	
@@ -75,8 +104,11 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 	public void completeXTypeLiteral_Type(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		if (context.getPrefix().length() > 0) {
-			if (Character.isJavaIdentifierStart(context.getPrefix().charAt(0)))
-				super.completeXTypeLiteral_Type(model, assignment, context, acceptor);
+			if (Character.isJavaIdentifierStart(context.getPrefix().charAt(0))) {
+				typeProposalProvider.createTypeProposals(this, context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, acceptor);
+			}
+		} else {
+			typeProposalProvider.createTypeProposals(this, context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, acceptor);
 		}
 	}
 	
@@ -254,7 +286,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 	protected void createLocalVariableAndImplicitProposals(EObject context, boolean includeCurrentObject, int idx, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
 		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory("ID", contentAssistContext);
 		IScope scope = getScopeProvider().createSimpleFeatureCallScope(context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, includeCurrentObject, idx);
-		createProposalsForScope(acceptor, featureDescriptionPredicate, proposalFactory, scope);
+		getCrossReferenceProposalCreator().lookupCrossReference(scope, context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, acceptor, featureDescriptionPredicate, proposalFactory);
 	}
 	
 	/**
@@ -263,19 +295,6 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 	 */
 	protected void createLocalVariableAndImplicitProposals(EObject context, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
 		createLocalVariableAndImplicitProposals(context, -1, contentAssistContext, acceptor);
-	}
-
-	protected void createProposalsForScope(ICompletionProposalAcceptor acceptor, Predicate<IEObjectDescription> filter,
-			Function<IEObjectDescription, ICompletionProposal> proposalFactory, IScope scope) {
-		Iterable<IEObjectDescription> candidates = scope.getAllElements();
-		for (IEObjectDescription candidate : candidates) {
-			if (!acceptor.canAcceptMoreProposals())
-				return;
-			if (filter.apply(candidate)) {
-				acceptor.accept(proposalFactory.apply(candidate));
-			}
-		}
-		return;
 	}
 
 	protected void createReceiverProposals(XExpression receiver, CrossReference crossReference,
@@ -287,7 +306,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 		}
 		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory(ruleName, contentAssistContext);
 		IScope scope = getScopeProvider().createFeatureCallScopeForReceiver(receiver, receiver, reference);
-		createProposalsForScope(acceptor, filter, proposalFactory, scope);
+		getCrossReferenceProposalCreator().lookupCrossReference(scope, receiver, reference, acceptor, filter, proposalFactory);
 	}
 
 	protected boolean doNotProposeFeatureOfBinaryOperation(ContentAssistContext contentAssistContext,
@@ -316,6 +335,150 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 			child = child.getParent();
 		}
 		return node.equals(child);
+	}
+
+	@Override
+	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(final String ruleName,
+			final ContentAssistContext contentAssistContext) {
+		return new DefaultProposalCreator(contentAssistContext, ruleName, getQualifiedNameConverter()) {
+			@Override
+			public ICompletionProposal apply(IEObjectDescription candidate) {
+				if (candidate instanceof JvmFeatureDescription && "ID".equals(ruleName)) {
+					ICompletionProposal result = null;
+					String key = ((JvmFeatureDescription) candidate).getKey();
+					boolean withParenths = key.endsWith(")");
+					String proposal = getQualifiedNameConverter().toString(candidate.getName());
+					if (ruleName != null) {
+						try {
+							proposal = getValueConverter().toString(proposal, ruleName);
+						} catch (ValueConverterException e) {
+							log.debug(e.getMessage(), e);
+							return null;
+						}
+					}
+					if (withParenths) {
+						proposal = proposal + "()";
+					}
+					EObject objectOrProxy = candidate.getEObjectOrProxy();
+					StyledString displayString = getStyledDisplayString((JvmFeature)objectOrProxy,
+							withParenths,
+							getQualifiedNameConverter().toString(candidate.getQualifiedName()),
+							getQualifiedNameConverter().toString(candidate.getName()));
+					result = createCompletionProposal(proposal, displayString, null, contentAssistContext);
+					if (result instanceof ConfigurableCompletionProposal) {
+						ConfigurableCompletionProposal casted = (ConfigurableCompletionProposal) result;
+						casted.setAdditionalProposalInfo(objectOrProxy);
+						casted.setHover(getHover());
+						if (withParenths) {
+							casted.setCursorPosition(proposal.length() - 1);
+						}
+					}
+					getPriorityHelper().adjustCrossReferencePriority(result, contentAssistContext.getPrefix());
+					return result;
+				}
+				return super.apply(candidate);
+			}
+		};
+	}
+	
+	protected StyledString getStyledDisplayString(JvmFeature feature, boolean withParenths, String qualifiedNameAsString, String shortName) {
+		StyledString result = new StyledString(shortName);
+		if (feature instanceof JvmOperation) {
+			if (withParenths) {
+				result.append('(');
+				appendParameters(result, (JvmExecutable)feature);
+				result.append(')');
+			}
+			result.append(" : ");
+			appendType(result, null, ((JvmOperation) feature).getReturnType());
+			result.append(" - ", StyledString.QUALIFIER_STYLER);
+			appendType(result, StyledString.QUALIFIER_STYLER, feature.getDeclaringType());
+			if (!withParenths) {
+				result.append(".", StyledString.QUALIFIER_STYLER);
+				result.append(feature.getSimpleName(), StyledString.QUALIFIER_STYLER);
+				result.append("()", StyledString.QUALIFIER_STYLER);
+			}
+		} else if (feature instanceof JvmField) {
+			result.append(" : ");
+			appendType(result, null, ((JvmField) feature).getType());
+			result.append(" - ", StyledString.QUALIFIER_STYLER);
+			appendType(result, StyledString.QUALIFIER_STYLER, feature.getDeclaringType());
+		} else if (feature instanceof JvmConstructor) {
+			if (withParenths) {
+				result.append('(');
+				appendParameters(result, (JvmExecutable)feature);
+				result.append(')');
+			}
+		}
+		return result;
+	}
+
+	protected void appendParameters(StyledString result, JvmExecutable executable) {
+		boolean first = true;
+		for(JvmFormalParameter parameter: executable.getParameters()) {
+			if (!first)
+				result.append(", ");
+			first = false;
+			appendType(result, null, parameter.getParameterType());
+			result.append(' ');
+			result.append(parameter.getName());
+		}
+	}
+
+	protected void appendType(StyledString result, Styler styler, JvmTypeReference parameterType) {
+		JvmType type = parameterType.getType();
+		appendType(result, styler, type);
+		if (parameterType instanceof JvmParameterizedTypeReference) {
+			if (!((JvmParameterizedTypeReference) parameterType).getArguments().isEmpty()) {
+				result.append('<', styler);
+				boolean first = true;
+				for(JvmTypeReference argument: ((JvmParameterizedTypeReference) parameterType).getArguments()) {
+					if (!first)
+						result.append(", ", styler);
+					appendType(result, styler, argument);
+				}
+				result.append('>', styler);
+			}
+			if (type instanceof JvmArrayType) {
+				result.append("[]", styler);
+			}
+		} else if (parameterType instanceof JvmWildcardTypeReference) {
+			JvmWildcardTypeReference wildcard = (JvmWildcardTypeReference) parameterType;
+			result.append("?", styler);
+			boolean first = true;
+			for(JvmTypeConstraint typeConstraint: wildcard.getConstraints()) {
+				if (typeConstraint instanceof JvmUpperBound) {
+					if (first) {
+						result.append(" extends ", styler);
+					} else {
+						result.append(" & ");
+					}
+				} else {
+					if (first) {
+						result.append(" super ", styler);
+					} else {
+						result.append(" & ");
+					}
+				}
+				first = false;
+				appendType(result, styler, typeConstraint.getTypeReference());
+			}
+		}
+		if (parameterType instanceof JvmGenericArrayTypeReference) {
+			result.append("[]", styler);
+		}
+	}
+
+	protected void appendType(StyledString result, Styler styler, JvmType type) {
+		if (type != null) {
+			if (type instanceof JvmDeclaredType) {
+				result.append(((JvmDeclaredType) type).getSimpleName(), styler);
+			} else if (type instanceof JvmArrayType) {
+				appendType(result, styler, ((JvmArrayType) type).getComponentType());
+			} else {
+				result.append(type.getCanonicalName(), styler);
+			}
+		}
 	}
 	
 }
