@@ -15,17 +15,31 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
+import com.google.inject.Inject;
+
 /**
  * @author Sven Efftinge
  */
 public class LinkingTest extends AbstractXtend2TestCase {
+	
+	@Inject
+	private IXtend2JvmAssociations associator;
+	
+	public void testCaseFunction_00() throws Exception {
+		XtendFunction function = function("case String foo(String s) _foo(s)");
+		final JvmOperation feature = (JvmOperation) ((XFeatureCall)function.getExpression()).getFeature();
+		XtendFunction xtendFunction = (XtendFunction) associator.getAssociatedElements(feature).iterator().next();
+		assertSame(function,xtendFunction);
+	}
 	
 	public void testTypeReference_withImport() throws Exception {
 		XtendFunction func = (XtendFunction) clazz("import java.lang.* class X { (String)=>Boolean foo() [|true] }").getMembers().get(0);

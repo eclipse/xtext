@@ -11,6 +11,7 @@ import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.util.Strings.*;
 import static org.eclipse.xtext.xtend2.validation.IssueCodes.*;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -26,11 +27,14 @@ import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
+import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
 import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
@@ -41,6 +45,7 @@ import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
+import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
 /**
@@ -136,8 +141,8 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 					if (xtendClass.getMembers().get(j) instanceof XtendFunction) {
 						XtendFunction otherFunction = (XtendFunction) xtendClass.getMembers().get(j);
 						if (featureOverridesService.isOverridden(inferredJvmOperation,
-								xtend2jvmAssociations.getDirectlyInferredOperation(otherFunction),
-								typeArgumentContext, false)) {
+								xtend2jvmAssociations.getDirectlyInferredOperation(otherFunction), typeArgumentContext,
+								false)) {
 							error("Duplicate method " + canonicalName(function), function,
 									Xtend2Package.Literals.XTEND_MEMBER__NAME, DUPLICATE_METHOD);
 							error("Duplicate method " + canonicalName(otherFunction), otherFunction,
@@ -186,5 +191,44 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 
 	protected String canonicalName(JvmIdentifiableElement element) {
 		return (element != null) ? notNull(element.getCanonicalName()) : null;
+	}
+
+	@Check
+	public void caseFuncWithoutParams(XtendFunction func) {
+		if (func.isDispatch()) {
+			if (func.getParameters().isEmpty()) {
+				error("A case function mus at least have one parameter declared.", func,
+						Xtend2Package.Literals.XTEND_FUNCTION__DISPATCH, IssueCodes.CASE_FUNC_WITHOUT_PARAMS);
+			}
+		}
+	}
+
+	@Check
+	public void caseFuncWithTypeParams(XtendFunction func) {
+		if (func.isDispatch()) {
+			if (!func.getTypeParameters().isEmpty()) {
+				error("A case function must not declare any type parameters.", func,
+						Xtend2Package.Literals.XTEND_FUNCTION__DISPATCH, IssueCodes.CASE_FUNC_WITH_TYPE_PARAMS);
+			}
+		}
+	}
+
+	@Inject
+	private DispatchingSupport dispatchingSupport;
+	@Inject
+	private IXtend2JvmAssociations associations;
+
+	@Check
+	public void singleCaseFunction(XtendFunction func) {
+		if (func.isDispatch()) {
+			JvmGenericType type = associations.getInferredType((XtendClass) func.eContainer());
+			Multimap<Pair<String, Integer>, JvmOperation> dispatchMethods = dispatchingSupport.getDispatchMethods(type);
+			Collection<JvmOperation> collection = dispatchMethods.get(Tuples.create(func.getName(), func
+					.getParameters().size()));
+			if (collection.size() == 1) {
+				warning("Single case function.", func, Xtend2Package.Literals.XTEND_FUNCTION__DISPATCH,
+						IssueCodes.SINGLE_CASE_FUNCTION);
+			}
+		}
 	}
 }

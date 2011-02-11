@@ -13,6 +13,7 @@ import static org.eclipse.xtext.xtend2.validation.IssueCodes.*;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
+import org.eclipse.xtext.xtend2.validation.IssueCodes;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
@@ -42,5 +43,20 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 		XtendClass clazz = clazz("class Foo implements Object {}");
 		helper.assertError(clazz, Xtend2Package.Literals.XTEND_CLASS, INTERFACE_EXPECTED,
 				"Implemented", "interface");
+	}
+	
+	public void testCaseFunctionNoParameters() throws Exception {
+		XtendFunction function = function("case foo() null");
+		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.CASE_FUNC_WITHOUT_PARAMS);
+	}
+	
+	public void testCaseFunctionWithTypeParams() throws Exception {
+		XtendFunction function = function("case <T> foo(T s) null");
+		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.CASE_FUNC_WITH_TYPE_PARAMS);
+	}
+	
+	public void testSingleCaseFunction() throws Exception {
+		XtendFunction function = function("case foo(String s) null");
+		helper.assertWarning(function, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.SINGLE_CASE_FUNCTION);
 	}
 }

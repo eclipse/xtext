@@ -51,7 +51,7 @@ public class RichStringValidationTest extends AbstractRichStringTest {
 				+ "\t\tindentedLine\n"
 				+ "  \tindentedLine\n"
 				+ "  '''");
-		validationTestHelper.assertError(richString, Xtend2Package.Literals.RICH_STRING_LITERAL, IssueCodes.INCONSISTENT_INDENTATION, "inconsistent", "indentation");
+		validationTestHelper.assertWarning(richString, Xtend2Package.Literals.RICH_STRING_LITERAL, IssueCodes.INCONSISTENT_INDENTATION, "inconsistent", "indentation");
 	}
 	
 	public void testRichStringValidation_05() throws Exception {
@@ -59,7 +59,7 @@ public class RichStringValidationTest extends AbstractRichStringTest {
 				+ "\t\tindentedLine\n"
 				+ "\t\tindentedLine\n"
 				+ "  last line'''");
-		validationTestHelper.assertError(richString, Xtend2Package.Literals.RICH_STRING_LITERAL, IssueCodes.INCONSISTENT_INDENTATION, "inconsistent", "indentation");
+		validationTestHelper.assertWarning(richString, Xtend2Package.Literals.RICH_STRING_LITERAL, IssueCodes.INCONSISTENT_INDENTATION, "inconsistent", "indentation");
 	}
 	
 	public void testRichStringValidation_06() throws Exception {
