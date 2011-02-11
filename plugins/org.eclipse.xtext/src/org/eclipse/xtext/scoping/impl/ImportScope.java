@@ -9,12 +9,13 @@ package org.eclipse.xtext.scoping.impl;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Sets.*;
 import static java.util.Collections.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -25,11 +26,9 @@ import org.eclipse.xtext.resource.ISelectable;
 import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
 /**
@@ -70,17 +69,20 @@ public class ImportScope extends AbstractScope {
 	public Iterable<IEObjectDescription> getAllElements() {
 		final Iterable<IEObjectDescription> globalElements = getParent().getAllElements();
 		Iterable<IEObjectDescription> aliased = getAllLocalElements();
-		final Map<QualifiedName, IEObjectDescription> elements = Maps.uniqueIndex(aliased,
-				new Function<IEObjectDescription, QualifiedName>() {
-					public QualifiedName apply(IEObjectDescription from) {
-						return isIgnoreCase() ? from.getName().toLowerCase() : from.getName();
-					}
-				});
+		final Set<QualifiedName> elements = newHashSet();
+		for (IEObjectDescription from : aliased) {
+			QualifiedName qn = getIgnoreCaseAwareQualifiedName(from);
+			elements.add(qn);
+		}
 		return concat(aliased, filter(globalElements, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
-				return !elements.containsKey(isIgnoreCase() ? input.getName().toLowerCase() : input.getName());
+				return !elements.contains(getIgnoreCaseAwareQualifiedName(input));
 			}
 		}));
+	}
+
+	protected QualifiedName getIgnoreCaseAwareQualifiedName(IEObjectDescription from) {
+		return isIgnoreCase() ? from.getName().toLowerCase() : from.getName();
 	}
 
 	@Override

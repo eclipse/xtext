@@ -56,6 +56,15 @@ public class ImportScopeTest extends TestCase {
 		
 	}
 	
+	public void testGetAllWithDuplicates() throws Exception {
+		final IEObjectDescription desc1 = EObjectDescription.create(QualifiedName.create("com","foo","bar"), EcorePackage.Literals.EANNOTATION);
+		final IEObjectDescription desc2 = EObjectDescription.create(QualifiedName.create("com","foo","bar"), EcorePackage.Literals.EATTRIBUTE);
+		SimpleScope outer = new SimpleScope(newArrayList(desc1,desc2), false);
+		ImportNormalizer n1 = new ImportNormalizer(QualifiedName.create("com"), true, false);
+		TestableImportScope scope = new TestableImportScope(newArrayList(n1), outer, new ScopeBasedSelectable(outer), EcorePackage.Literals.EOBJECT, false);
+		assertEquals(4,size(scope.getAllElements()));
+	}
+	
 	public void testImports_01() throws Exception {
 		final IEObjectDescription desc1 = EObjectDescription.create(QualifiedName.create("com","foo","bar"), EcorePackage.Literals.EANNOTATION);
 		final IEObjectDescription desc2 = EObjectDescription.create(QualifiedName.create("de","foo"), EcorePackage.Literals.EATTRIBUTE);
