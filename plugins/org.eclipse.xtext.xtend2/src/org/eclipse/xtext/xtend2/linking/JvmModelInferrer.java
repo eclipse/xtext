@@ -11,6 +11,7 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -48,6 +49,7 @@ public class JvmModelInferrer {
 		JvmGenericType target = typesFactory.createJvmGenericType();
 		target.setFullyQualifiedName(source.getCanonicalName());
 		target.setVisibility(JvmVisibility.PUBLIC);
+		addConstructor(source, target);
 		for(JvmTypeReference superType: source.getSuperTypes()) 
 			target.getSuperTypes().add(cloneWithProxies(superType));
 		for(JvmTypeParameter typeParameter: source.getTypeParameters()) 
@@ -58,6 +60,12 @@ public class JvmModelInferrer {
 		return target;
 	}
 	
+	protected void addConstructor(XtendClass source, JvmGenericType target) {
+		JvmConstructor constructor = typesFactory.createJvmConstructor();
+		target.getMembers().add(constructor);
+		constructor.setFullyQualifiedName(source.getCanonicalName());
+	}
+
 	protected JvmMember transform(XtendMember sourceMember) {
 		if(sourceMember instanceof XtendFunction) {
 			XtendFunction source = (XtendFunction) sourceMember;
