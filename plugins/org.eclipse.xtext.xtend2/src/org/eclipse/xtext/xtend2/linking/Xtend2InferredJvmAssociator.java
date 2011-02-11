@@ -89,6 +89,14 @@ public class Xtend2InferredJvmAssociator implements IXtend2JvmAssociations {
 		});
 	}
 	
+	protected <T> T find(Iterable<? extends T> iterable, Predicate<T> predicate) {
+		for (T t : iterable) {
+			if (predicate.apply(t))
+				return t;
+		}
+		return null;
+	}
+	
 	public XtendClass getXtendClass(JvmGenericType inferredType) {
 		return getFirstAssociatedElement(inferredType, XtendClass.class);
 	}

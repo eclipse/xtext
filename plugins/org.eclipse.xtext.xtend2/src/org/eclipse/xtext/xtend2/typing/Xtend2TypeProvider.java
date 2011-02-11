@@ -15,7 +15,6 @@ import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
-import org.eclipse.xtext.xtend2.linking.JvmModelInferrer;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
@@ -39,9 +38,6 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 
 	@Inject
 	private IXtend2JvmAssociations xtend2jvmAssociations;
-	
-	@Inject
-	private JvmModelInferrer jvmModelInferrer;
 	
 	protected JvmTypeReference _expectedType(XtendFunction function, EReference reference, int index) {
 		if (reference==Xtend2Package.Literals.XTEND_FUNCTION__EXPRESSION) {
@@ -99,9 +95,7 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 
 	@Override
 	protected JvmTypeReference _typeForIdentifiable(JvmOperation operation) {
-		if(operation.getReturnType() != null) 
-			return operation.getReturnType();
-		return jvmModelInferrer.inferReturnType(operation);
+		return operation.getReturnType();
 	}
 	
 }

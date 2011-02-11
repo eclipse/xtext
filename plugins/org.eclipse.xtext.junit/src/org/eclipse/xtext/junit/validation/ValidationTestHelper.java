@@ -67,10 +67,15 @@ public class ValidationTestHelper {
 
 	public void assertError(final EObject model, final EClass objectType, final String code,
 			final String... messageParts) {
+		assertIssue(model, objectType, code, Severity.ERROR, messageParts);
+	}
+	
+	public void assertIssue(final EObject model, final EClass objectType, final String code, final Severity severity,
+			final String... messageParts) {
 		final List<Issue> validate = validate(model);
 		Iterable<Issue> matchingErrors = Iterables.filter(validate, new Predicate<Issue>() {
 			public boolean apply(Issue input) {
-				if (Strings.equal(input.getCode(), code)) {
+				if (Strings.equal(input.getCode(), code) && input.getSeverity()==severity) {
 					EObject object = model.eResource().getResourceSet().getEObject(input.getUriToProblem(), true);
 					if (objectType.isInstance(object)) {
 						for (String messagePart : messageParts) {
@@ -85,7 +90,12 @@ public class ValidationTestHelper {
 			}
 		});
 		if (Iterables.isEmpty(matchingErrors))
-			fail("Expected error '" + code + "' but got " + validate);
+			fail("Expected "+severity+" '" + code + "' but got " + validate);
+	}
+
+	public void assertWarning(final EObject model, final EClass objectType, final String code,
+			final String... messageParts) {
+		assertIssue(model, objectType, code, Severity.WARNING, messageParts);
 	}
 
 }
