@@ -54,7 +54,8 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		assertEquals(1, inferredType.getSuperTypes().size());
 		assertFalse(xtendClass.getSuperTypes().get(0) == inferredType.getSuperTypes().get(0));
 		assertEquals(xtendClass.getSuperTypes().get(0).getType(), inferredType.getSuperTypes().get(0).getType());
-		assertEquals(1, xtendClass.getMembers().size());
+		assertEquals(0, xtendClass.getMembers().size());
+		assertEquals(1, inferredType.getMembers().size());
 	}
 
 	public void testInferredSuperTypeTypeArgument() throws Exception {

@@ -67,7 +67,39 @@ public class ParserTest extends AbstractXtend2TestCase {
 		assertTrue(func.getExpression() instanceof XFeatureCall);
 		assertEquals(0, func.getParameters().size());
 		assertNull(func.getReturnType());
-//		assertTrue(func.getVisibility() == JvmVisibility.PRIVATE);
+		assertFalse(func.isDispatch());
+		assertEquals(0, func.getTypeParameters().size());
+	}
+	
+	public void testFunction_5() throws Exception {
+		XtendFunction func = function("case foo() foo");
+		assertEquals("foo", func.getName());
+		assertTrue(func.getExpression() instanceof XFeatureCall);
+		assertEquals(0, func.getParameters().size());
+		assertNull(func.getReturnType());
+		assertTrue(func.isDispatch());
+		assertEquals(0, func.getTypeParameters().size());
+	}
+	
+	public void testFunction_6() throws Exception {
+		XtendFunction func = function("override case foo() foo");
+		assertEquals("foo", func.getName());
+		assertTrue(func.getExpression() instanceof XFeatureCall);
+		assertEquals(0, func.getParameters().size());
+		assertNull(func.getReturnType());
+		assertTrue(func.isOverride());
+		assertTrue(func.isDispatch());
+		assertEquals(0, func.getTypeParameters().size());
+	}
+	
+	public void testFunction_7() throws Exception {
+		XtendFunction func = function("override foo() foo");
+		assertEquals("foo", func.getName());
+		assertTrue(func.getExpression() instanceof XFeatureCall);
+		assertEquals(0, func.getParameters().size());
+		assertNull(func.getReturnType());
+		assertTrue(func.isOverride());
+		assertFalse(func.isDispatch());
 		assertEquals(0, func.getTypeParameters().size());
 	}
 

@@ -4028,9 +4028,9 @@ rule__Function__Group__0__Impl
     }
 :
 (
-{ before(grammarAccess.getFunctionAccess().getOverrideAssignment_0()); }
-(rule__Function__OverrideAssignment_0)?
-{ after(grammarAccess.getFunctionAccess().getOverrideAssignment_0()); }
+{ before(grammarAccess.getFunctionAccess().getUnorderedGroup_0()); }
+(rule__Function__UnorderedGroup_0)
+{ after(grammarAccess.getFunctionAccess().getUnorderedGroup_0()); }
 )
 
 ;
@@ -15202,6 +15202,102 @@ finally {
 
 
 
+rule__Function__UnorderedGroup_0
+    @init {
+    	int stackSize = keepStackSize();
+		getUnorderedGroupHelper().enter(grammarAccess.getFunctionAccess().getUnorderedGroup_0());
+    }
+:
+	rule__Function__UnorderedGroup_0__0
+	?
+	
+;
+finally {
+	getUnorderedGroupHelper().leave(grammarAccess.getFunctionAccess().getUnorderedGroup_0());
+	restoreStackSize(stackSize);
+}
+
+
+rule__Function__UnorderedGroup_0__Impl
+	@init {
+		int stackSize = keepStackSize();
+		boolean selected = false;
+    }
+:
+		(
+
+			( 
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getFunctionAccess().getUnorderedGroup_0(), 0)}?=>(
+					{ 
+	 				  getUnorderedGroupHelper().select(grammarAccess.getFunctionAccess().getUnorderedGroup_0(), 0);
+	 				}
+	 				{
+	 				  selected = true;
+	 				}
+					(
+					
+						{ before(grammarAccess.getFunctionAccess().getOverrideAssignment_0_0()); }
+						(rule__Function__OverrideAssignment_0_0)
+						{ after(grammarAccess.getFunctionAccess().getOverrideAssignment_0_0()); }
+					)
+ 				)
+			)  |
+
+			( 
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getFunctionAccess().getUnorderedGroup_0(), 1)}?=>(
+					{ 
+	 				  getUnorderedGroupHelper().select(grammarAccess.getFunctionAccess().getUnorderedGroup_0(), 1);
+	 				}
+	 				{
+	 				  selected = true;
+	 				}
+					(
+					
+						{ before(grammarAccess.getFunctionAccess().getDispatchAssignment_0_1()); }
+						(rule__Function__DispatchAssignment_0_1)
+						{ after(grammarAccess.getFunctionAccess().getDispatchAssignment_0_1()); }
+					)
+ 				)
+			)  
+
+		)
+;
+finally {
+	if (selected)
+		getUnorderedGroupHelper().returnFromSelection(grammarAccess.getFunctionAccess().getUnorderedGroup_0());
+	restoreStackSize(stackSize);
+}
+
+
+rule__Function__UnorderedGroup_0__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__Function__UnorderedGroup_0__Impl
+	rule__Function__UnorderedGroup_0__1?
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__Function__UnorderedGroup_0__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__Function__UnorderedGroup_0__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+
+
+
 rule__File__PackageAssignment_0_1
     @init {
 		int stackSize = keepStackSize();
@@ -15367,22 +15463,45 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Function__OverrideAssignment_0
+rule__Function__OverrideAssignment_0_0
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getFunctionAccess().getOverrideOverrideKeyword_0_0()); }
+{ before(grammarAccess.getFunctionAccess().getOverrideOverrideKeyword_0_0_0()); }
 (
-{ before(grammarAccess.getFunctionAccess().getOverrideOverrideKeyword_0_0()); }
+{ before(grammarAccess.getFunctionAccess().getOverrideOverrideKeyword_0_0_0()); }
 
 	'override' 
 
-{ after(grammarAccess.getFunctionAccess().getOverrideOverrideKeyword_0_0()); }
+{ after(grammarAccess.getFunctionAccess().getOverrideOverrideKeyword_0_0_0()); }
 )
 
-{ after(grammarAccess.getFunctionAccess().getOverrideOverrideKeyword_0_0()); }
+{ after(grammarAccess.getFunctionAccess().getOverrideOverrideKeyword_0_0_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Function__DispatchAssignment_0_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getFunctionAccess().getDispatchCaseKeyword_0_1_0()); }
+(
+{ before(grammarAccess.getFunctionAccess().getDispatchCaseKeyword_0_1_0()); }
+
+	'case' 
+
+{ after(grammarAccess.getFunctionAccess().getDispatchCaseKeyword_0_1_0()); }
+)
+
+{ after(grammarAccess.getFunctionAccess().getDispatchCaseKeyword_0_1_0()); }
 )
 
 ;
