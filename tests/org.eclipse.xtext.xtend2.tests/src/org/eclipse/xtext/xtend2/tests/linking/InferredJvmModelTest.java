@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtend2.tests.linking;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -53,6 +54,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		assertEquals(1, inferredType.getSuperTypes().size());
 		assertFalse(xtendClass.getSuperTypes().get(0) == inferredType.getSuperTypes().get(0));
 		assertEquals(xtendClass.getSuperTypes().get(0).getType(), inferredType.getSuperTypes().get(0).getType());
+		assertEquals(1, xtendClass.getMembers().size());
 	}
 
 	public void testInferredSuperTypeTypeArgument() throws Exception {
@@ -99,19 +101,20 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		XtendClass xtendClass = xtendFile.getXtendClass();
 		EList<JvmMember> jvmMembers = inferredType.getMembers();
-		assertEquals(1, jvmMembers.size());
-		JvmMember jvmMember = jvmMembers.get(0);
+		assertEquals(2, jvmMembers.size());
+		JvmMember jvmMember = jvmMembers.get(1);
 		assertTrue(jvmMember instanceof JvmOperation);
 		XtendMember xtendMember = xtendClass.getMembers().get(0);
 		assertEquals(xtendMember.getCanonicalName(), jvmMember.getCanonicalName());
 		assertEquals(jvmMember, xtendMember.getInferredJvmMember());
-		assertEquals(xtendMember, sourceAssociator.getXtendSource((JvmOperation) inferredType.getMembers().get(0)));
+		assertEquals(xtendMember, sourceAssociator.getXtendSource((JvmOperation) inferredType.getMembers().get(1)));
 	}
 	
 	public void testInferredFunctionWithReturnType() throws Exception {
 		XtendFile xtendFile = file("class Foo { Boolean bar() true }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
-		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(0);
+		assertTrue(inferredType.getMembers().get(0) instanceof JvmConstructor);
+		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
 		XtendFunction xtendFunction = (XtendFunction) xtendFile.getXtendClass().getMembers().get(0);
 		assertFalse(xtendFunction.getReturnType() == jvmOperation.getReturnType());
 		assertEquals(xtendFunction.getReturnType().getType(), jvmOperation.getReturnType().getType());
@@ -120,7 +123,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 	public void testInferredFunctionWithParameter() throws Exception {
 		XtendFile xtendFile = file("class Foo { bar(Boolean baz) true }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
-		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(0);
+		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
 		XtendFunction xtendFunction = (XtendFunction) xtendFile.getXtendClass().getMembers().get(0);
 		assertEquals(1, jvmOperation.getParameters().size());
 		JvmFormalParameter jvmParameter = jvmOperation.getParameters().get(0);
@@ -132,7 +135,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 	public void testInferredFunctionWithSelfTypeReference() throws Exception {
 		XtendFile xtendFile = file("package foo class Foo { Foo bar() this }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
-		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(0);
+		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
 		assertEquals(inferredType, jvmOperation.getReturnType().getType());
 		XtendFunction xtendFunction = (XtendFunction) xtendFile.getXtendClass().getMembers().get(0);
 		assertEquals(inferredType, xtendFunction.getReturnType().getType());
