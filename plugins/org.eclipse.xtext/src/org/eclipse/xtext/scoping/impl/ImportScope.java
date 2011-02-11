@@ -87,7 +87,7 @@ public class ImportScope extends AbstractScope {
 
 	@Override
 	protected Iterable<IEObjectDescription> getAllLocalElements() {
-		final Iterable<IEObjectDescription> exportedObjects = getImportFrom().getExportedObjects();
+		final Iterable<IEObjectDescription> exportedObjects = getImportFrom().getExportedObjectsByType(type);
 		return getAliasedElements(exportedObjects);
 	}
 
