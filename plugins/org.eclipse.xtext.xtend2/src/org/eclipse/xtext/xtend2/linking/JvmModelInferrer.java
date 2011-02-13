@@ -27,6 +27,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
@@ -55,10 +56,12 @@ public class JvmModelInferrer {
 	@Inject
 	private TypeConformanceComputer typeConformanceComputer;
 
-	
+	@Inject
+	private TypeReferences typeRefs;
+
 	@Inject
 	private DispatchingSupport dispatchingSupport;
-	
+
 	public JvmGenericType inferJvmGenericType(XtendClass xtendClass) {
 		associator.disassociate(xtendClass);
 		JvmGenericType inferredJvmType = transform(xtendClass);
@@ -76,38 +79,37 @@ public class JvmModelInferrer {
 			target.getSuperTypes().add(cloneWithProxies(superType));
 		for (JvmTypeParameter typeParameter : source.getTypeParameters())
 			target.getTypeParameters().add(cloneWithProxies(typeParameter));
-		for(XtendMember member: source.getMembers()) 
+		for (XtendMember member : source.getMembers())
 			target.getMembers().add(transform(member));
-		appendSyntheticDispatchMethods(source,target);
-		associator.associate(target, source);
+		appendSyntheticDispatchMethods(source, target);
 		computeInferredReturnTypes(target);
 		return target;
 	}
-	
+
 	protected void appendSyntheticDispatchMethods(XtendClass source, JvmGenericType target) {
 		Multimap<Pair<String, Integer>, JvmOperation> methods = dispatchingSupport.getDispatchMethods(target);
 		for (Pair<String, Integer> key : methods.keySet()) {
 			Collection<JvmOperation> operations = methods.get(key);
 			JvmOperation operation = deriveGenericDispatchOperationSignature(operations);
-			operation.setFullyQualifiedName(target.getCanonicalName()+"."+key.getFirst());
+			operation.setFullyQualifiedName(target.getCanonicalName() + "." + key.getFirst());
 			target.getMembers().add(operation);
 		}
 	}
-	
+
 	/**
 	 * @return a {@link JvmOperation} with common denominator argument types of all given operations
 	 */
 	protected JvmOperation deriveGenericDispatchOperationSignature(Collection<JvmOperation> operations) {
 		if (operations.isEmpty())
 			return null;
-		JvmOperation result = null; 
+		JvmOperation result = null;
 		final Iterator<JvmOperation> iterator = operations.iterator();
 		JvmOperation first = iterator.next();
-		if (operations.size()==1) {
+		if (operations.size() == 1) {
 			result = EcoreUtil2.clone(first);
 		} else {
 			result = typesFactory.createJvmOperation();
-			for (int i = 0;i< first.getParameters().size();i++) {
+			for (int i = 0; i < first.getParameters().size(); i++) {
 				JvmFormalParameter parameter2 = first.getParameters().get(i);
 				final int index = i;
 				JvmTypeReference commonType = commonType(operations, new Function<JvmOperation, JvmTypeReference>() {
@@ -129,11 +131,13 @@ public class JvmModelInferrer {
 		}
 		return result;
 	}
-	
-	protected <T> JvmTypeReference commonType(Iterable<? extends T> iterable, Function<T,JvmTypeReference> mapping) {
+
+	protected <T> JvmTypeReference commonType(Iterable<? extends T> iterable, Function<T, JvmTypeReference> mapping) {
 		List<JvmTypeReference> references = newArrayList();
 		for (T element : iterable) {
-			references.add(mapping.apply(element));
+			final JvmTypeReference apply = mapping.apply(element);
+			if (!typeRefs.isNullOrProxy(apply))
+				references.add(apply);
 		}
 		return typeConformanceComputer.getCommonSuperType(references);
 	}
@@ -152,12 +156,12 @@ public class JvmModelInferrer {
 			String canonicalName = source.getCanonicalName();
 			if (source.isDispatch()) {
 				int lastDot = canonicalName.lastIndexOf('.');
-				canonicalName = canonicalName.substring(0, lastDot+1)+"_"+canonicalName.substring(lastDot+1);
+				canonicalName = canonicalName.substring(0, lastDot + 1) + "_" + canonicalName.substring(lastDot + 1);
 				target.setFullyQualifiedName(canonicalName);
 			} else {
 				target.setFullyQualifiedName(canonicalName);
 			}
-			for(JvmFormalParameter parameter: source.getParameters())
+			for (JvmFormalParameter parameter : source.getParameters())
 				target.getParameters().add(cloneWithProxies(parameter));
 			target.setReturnType(cloneWithProxies(source.getReturnType()));
 			for (JvmTypeParameter typeParameter : source.getTypeParameters())

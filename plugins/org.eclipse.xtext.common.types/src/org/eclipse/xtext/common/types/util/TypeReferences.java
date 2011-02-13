@@ -150,7 +150,7 @@ public class TypeReferences {
 		return equals;
 	}
 
-	protected boolean isNullOrProxy(final JvmTypeReference reference) {
+	public boolean isNullOrProxy(final JvmTypeReference reference) {
 		return reference==null || reference.getType()==null || reference.getType().eIsProxy();
 	}
 	
