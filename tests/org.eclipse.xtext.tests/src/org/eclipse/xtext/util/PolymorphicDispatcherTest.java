@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
+import java.io.Serializable;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -19,6 +20,7 @@ import junit.framework.TestCase;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
+import com.ibm.icu.math.BigDecimal;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -96,6 +98,22 @@ public class PolymorphicDispatcherTest extends TestCase {
 		assertEquals("Number_from_superclass_3", dispatcher.invoke(new Long(3)));
 		assertEquals("BigInteger_3", dispatcher.invoke(BigInteger.valueOf(3)));
 		assertEquals("Object_foo", dispatcher.invoke("foo"));
+	}
+	
+	public void testSimple_01() throws Exception {
+		Object o1 = new Object() {
+			String label(CharSequence x) {return "c";}
+			String label(Comparable<?> x) {return "comp";}
+			String label(Serializable x) {return "seri";}
+			String label(Integer x) {return "i";}
+			String label(String x) {return "s";}
+			String label(Number x) {return "n";}
+			String label(Object x) {return "o";}
+		};
+		PolymorphicDispatcher<String> target = PolymorphicDispatcher.createForSingleTarget("label", o1);
+		assertEquals("s",target.invoke("Foo"));
+		assertEquals("i",target.invoke(42));
+		assertEquals("n",target.invoke(new BigDecimal(0)));
 	}
 
 	public void testMixedTypes() throws Exception {
