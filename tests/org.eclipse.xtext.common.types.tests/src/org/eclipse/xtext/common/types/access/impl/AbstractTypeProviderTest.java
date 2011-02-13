@@ -43,6 +43,7 @@ import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFloatAnnotationValue;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
 import org.eclipse.xtext.common.types.JvmLongAnnotationValue;
@@ -66,6 +67,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.testSetups.AnnotatedClassWithStringDefault;
 import org.eclipse.xtext.common.types.testSetups.AnnotatedInterfaceWithStringDefault;
+import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs;
 import org.eclipse.xtext.common.types.testSetups.EmptyAbstractClass;
 import org.eclipse.xtext.common.types.testSetups.Fields;
 import org.eclipse.xtext.common.types.testSetups.InitializerWithConstructor;
@@ -1978,6 +1980,32 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 			assertEquals(defaultValue, castedValue.getValues().get(0));
 		}
 		assertTrue(nameToValue.isEmpty());
+	}
+	
+	public void testVarArgs_01() {
+		String typeName = ClassWithVarArgs.class.getName();
+		JvmType type = getTypeProvider().findTypeByName(typeName);
+		assertNotNull(type);
+		diagnose(type);
+	}
+	
+	public void testVarArgs_02() {
+		String typeName = ClassWithVarArgs.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmOperation method = getMethodFromType(type, ClassWithVarArgs.class, "method(java.lang.String[])");
+		assertTrue(method.isVarArgs());
+		assertEquals(1, method.getParameters().size());
+		assertTrue(method.getParameters().get(0).getParameterType() instanceof JvmGenericArrayTypeReference);
+	}
+	
+	public void testVarArgs_03() {
+		String typeName = ClassWithVarArgs.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmConstructor constructor = getConstructorFromType(type, ClassWithVarArgs.class, "ClassWithVarArgs(int,java.lang.String[])");
+		assertTrue(constructor.isVarArgs());
+		assertEquals(2, constructor.getParameters().size());
+		assertTrue(constructor.getParameters().get(0).getParameterType() instanceof JvmParameterizedTypeReference);
+		assertTrue(constructor.getParameters().get(1).getParameterType() instanceof JvmGenericArrayTypeReference);
 	}
 	
 	protected abstract String getCollectionParamName();

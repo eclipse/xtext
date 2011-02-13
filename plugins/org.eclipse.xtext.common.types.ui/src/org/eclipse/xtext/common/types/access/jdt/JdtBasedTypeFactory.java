@@ -500,6 +500,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 					log.warn("IMethod.getParameterNames failed", ex);
 			}
 		}
+		result.setVarArgs(method.isVarargs());
 		for (int i = 0; i < parameterTypes.length; i++) {
 			String parameterName = parameterNames != null ? parameterNames[i] : "p" + i;
 			IAnnotationBinding[] parameterAnnotations = method.getParameterAnnotations(i);
