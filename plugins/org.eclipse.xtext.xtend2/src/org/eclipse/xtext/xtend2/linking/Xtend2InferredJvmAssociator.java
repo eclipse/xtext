@@ -104,11 +104,9 @@ public class Xtend2InferredJvmAssociator implements IXtend2JvmAssociations {
 	}
 
 	public XtendFunction getXtendFunction(final JvmOperation inferredOperation) {
-		final String inferredName = inferredOperation.getSimpleName();
 		return (XtendFunction) find(getAssociatedElements(inferredOperation), new Predicate<EObject>() {
 			public boolean apply(EObject input) {
-				return input instanceof XtendFunction
-						&& !(((XtendFunction) input).getSimpleName().startsWith("_") ^ inferredName.startsWith("_"));
+				return input instanceof XtendFunction;
 			}
 		});
 	}

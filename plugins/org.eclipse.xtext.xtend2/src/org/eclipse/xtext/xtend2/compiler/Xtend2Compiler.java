@@ -12,6 +12,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
@@ -52,6 +53,9 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 	@Inject
 	private DispatchingSupport dispatchingSupport;
+	
+	@Inject
+	private Primitives primitives;
 
 	@Inject
 	private IXtend2JvmAssociations associations;
@@ -144,7 +148,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 					a.append("(").append(p1.getName()).append(" == null)");
 				} else {
 					a.append("(").append(p1.getName()).append(" instanceof ");
-					a.append(getSerializedForm(type.getType())).append(")");
+					a.append(getSerializedForm(primitives.asWrapperTypeIfPrimitive(type).getType())).append(")");
 				}
 				if (iter2.hasNext()) {
 					a.append("\n && ");
@@ -161,8 +165,12 @@ public class Xtend2Compiler extends XbaseCompiler {
 			for (Iterator<JvmFormalParameter> iter2 = operation.getParameters().iterator(); iter2.hasNext();) {
 				JvmFormalParameter p1 = iter1.next();
 				JvmFormalParameter p2 = iter2.next();
-				a.append("(").append(getSerializedForm(p2.getParameterType())).append(")");
-				a.append(p1.getName());
+				a.append("(").append(getSerializedForm(primitives.asWrapperTypeIfPrimitive(p2.getParameterType()))).append(")");
+				if (typeRefs.is(p2.getParameterType(), Void.class)) {
+					a.append("null");
+				} else {
+					a.append(p1.getName());
+				}
 				if (iter2.hasNext()) {
 					a.append(", ");
 				}
