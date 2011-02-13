@@ -332,16 +332,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		if (type instanceof GenericArrayType) {
 			GenericArrayType arrayType = (GenericArrayType) type;
 			Type componentType = arrayType.getGenericComponentType();
-			JvmTypeReference componentTypeReference = createTypeReference(componentType);
-			if (componentTypeReference != null) {
-				JvmGenericArrayTypeReference result = TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference();
-				JvmArrayType resultArray = TypesFactory.eINSTANCE.createJvmArrayType();
-				result.setType(resultArray);
-				resultArray.setComponentType(componentTypeReference);
-				return result;
-			} else {
-				return null;
-			}
+			return createArrayTypeReference(componentType);
 		} else if (type instanceof ParameterizedType) {
 			ParameterizedType parameterizedType = (ParameterizedType) type;
 			JvmParameterizedTypeReference result = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
@@ -352,10 +343,27 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 				result.getArguments().add(argument);
 			}
 			return result;
+		} else if (type instanceof Class<?> && ((Class<?>) type).isArray()){
+			Class<?> arrayType = (Class<?>) type;
+			Type componentType = arrayType.getComponentType();
+			return createArrayTypeReference(componentType);
 		} else {
 			JvmParameterizedTypeReference result = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
 			result.setType(createProxy(type));
 			return result;
+		}
+	}
+
+	protected JvmTypeReference createArrayTypeReference(Type componentType) {
+		JvmTypeReference componentTypeReference = createTypeReference(componentType);
+		if (componentTypeReference != null) {
+			JvmGenericArrayTypeReference result = TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference();
+			JvmArrayType resultArray = TypesFactory.eINSTANCE.createJvmArrayType();
+			result.setType(resultArray);
+			resultArray.setComponentType(componentTypeReference);
+			return result;
+		} else {
+			return null;
 		}
 	}
 
@@ -412,6 +420,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		org.eclipse.xtext.common.types.JvmConstructor result = TypesFactory.eINSTANCE.createJvmConstructor();
 		enhanceExecutable(result, constructor, constructor.getDeclaringClass().getSimpleName(),
 				constructor.getGenericParameterTypes(), constructor.getParameterAnnotations());
+		result.setVarArgs(constructor.isVarArgs());
 		enhanceGenericDeclaration(result, constructor);
 		for (Type parameterType : constructor.getGenericExceptionTypes()) {
 			result.getExceptions().add(createTypeReference(parameterType));
@@ -463,6 +472,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
 		enhanceExecutable(result, method, method.getName(), method.getGenericParameterTypes(),
 				method.getParameterAnnotations());
+		result.setVarArgs(method.isVarArgs());
 		enhanceGenericDeclaration(result, method);
 		result.setFinal(Modifier.isFinal(method.getModifiers()));
 		result.setStatic(Modifier.isStatic(method.getModifiers()));

@@ -1,5 +1,6 @@
 AnnotatedClassWithStringDefault.java.txt
 AnnotatedInterfaceWithStringDefault.java.txt
+ClassWithVarArgs.java.txt
 EmptyAbstractClass.java.txt
 Fields.java.txt
 GenericSuperClass.java.txt
