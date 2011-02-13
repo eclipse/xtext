@@ -128,6 +128,7 @@
         eType="#//JvmFormalParameter" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exceptions" upperBound="-1"
         eType="#//JvmTypeReference" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="varArgs" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmConstructor" eSuperTypes="#//JvmExecutable"/>
   <eClassifiers xsi:type="ecore:EClass" name="JvmOperation" eSuperTypes="#//JvmExecutable">
