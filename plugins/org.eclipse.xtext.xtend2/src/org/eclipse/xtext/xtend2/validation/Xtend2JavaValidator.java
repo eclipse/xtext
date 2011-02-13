@@ -8,11 +8,14 @@
 package org.eclipse.xtext.xtend2.validation;
 
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Sets.*;
 import static org.eclipse.xtext.util.Strings.*;
 import static org.eclipse.xtext.xtend2.validation.IssueCodes.*;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.common.types.JvmFeature;
@@ -20,6 +23,7 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
@@ -130,32 +134,31 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 	@Check
 	public void checkDuplicateAndOverridenFunctions(XtendClass xtendClass) {
 		JvmParameterizedTypeReference typeReference = typesFactory.createJvmParameterizedTypeReference();
-		typeReference.setType(xtend2jvmAssociations.getInferredType(xtendClass));
+		final JvmGenericType inferredType = xtend2jvmAssociations.getInferredType(xtendClass);
+		typeReference.setType(inferredType);
 		TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(typeReference);
-		for (int i = 0; i < xtendClass.getMembers().size(); ++i) {
-			if (xtendClass.getMembers().get(i) instanceof XtendFunction) {
-				XtendFunction function = (XtendFunction) xtendClass.getMembers().get(i);
-				// TODO: revise for polymorphic dispatch: there might be more than one JvmOperation associated with an XtendFunction
-				JvmOperation inferredJvmOperation = xtend2jvmAssociations.getDirectlyInferredOperation(function);
-				for (int j = i + 1; j < xtendClass.getMembers().size(); j++) {
-					if (xtendClass.getMembers().get(j) instanceof XtendFunction) {
-						XtendFunction otherFunction = (XtendFunction) xtendClass.getMembers().get(j);
-						if (featureOverridesService.isOverridden(inferredJvmOperation,
-								xtend2jvmAssociations.getDirectlyInferredOperation(otherFunction), typeArgumentContext,
-								false)) {
-							error("Duplicate method " + canonicalName(function), function,
-									Xtend2Package.Literals.XTEND_MEMBER__NAME, DUPLICATE_METHOD);
-							error("Duplicate method " + canonicalName(otherFunction), otherFunction,
-									Xtend2Package.Literals.XTEND_MEMBER__NAME, DUPLICATE_METHOD);
-						}
+		Set<JvmOperation> checked = newHashSet();
+		for (JvmOperation operation : inferredType.getDeclaredOperations()) {
+			checked.add(operation);
+			for (JvmOperation operation2 : inferredType.getDeclaredOperations()) {
+				if (!checked.contains(operation2)) {
+					if (featureOverridesService.isOverridden(operation,
+								operation2, typeArgumentContext, false)) {
+						XtendFunction func1 = xtend2jvmAssociations.getXtendFunction(operation);
+						XtendFunction func2 = xtend2jvmAssociations.getXtendFunction(operation2);
+						error("Duplicate method " + canonicalName(func1), func1,
+								Xtend2Package.Literals.XTEND_MEMBER__NAME, DUPLICATE_METHOD);
+						error("Duplicate method " + canonicalName(func2), func2,
+								Xtend2Package.Literals.XTEND_MEMBER__NAME, DUPLICATE_METHOD);
 					}
 				}
-				checkFunctionOverride(function, typeArgumentContext);
 			}
 		}
 	}
 
-	protected void checkFunctionOverride(XtendFunction function, TypeArgumentContext typeArgumentContext) {
+	@Check
+	protected void checkFunctionOverride(XtendFunction function) {
+		TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.get(new HashMap<JvmTypeParameter, JvmTypeReference>());
 		JvmOperation inferredJvmOperation = xtend2jvmAssociations.getDirectlyInferredOperation(function);
 		boolean overriddenOperationFound = false;
 		if (function.getDeclaringType().getExtends() != null) {

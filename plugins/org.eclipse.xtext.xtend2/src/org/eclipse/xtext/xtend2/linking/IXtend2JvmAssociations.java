@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.linking;
 
-import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -24,7 +24,7 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(Xtend2InferredJvmAssociator.class)
 public interface IXtend2JvmAssociations {
 
-	List<EObject> getAssociatedElements(EObject inferredJvmOrXtendElement);
+	Set<EObject> getAssociatedElements(EObject inferredJvmOrXtendElement);
 
 	<T> Iterable<T> getAssociatedElements(EObject inferredJvmOrXtendElement, Class<T> type);
 	

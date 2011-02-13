@@ -8,10 +8,10 @@
 package org.eclipse.xtext.xtend2.linking;
 
 import static com.google.common.collect.Iterables.*;
-import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Sets.*;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -48,9 +48,9 @@ public class Xtend2InferredJvmAssociator implements IXtend2JvmAssociations {
 		}
 	}
 
-	public List<EObject> getAssociatedElements(EObject inferredJvmOrXtendElement) {
+	public Set<EObject> getAssociatedElements(EObject inferredJvmOrXtendElement) {
 		AssociationAdapter adapter = getAssociationAdapter(inferredJvmOrXtendElement);
-		return (adapter == null) ? Collections.<EObject> emptyList() : adapter.getAssociatedElements();
+		return (adapter == null) ? Collections.<EObject> emptySet() : adapter.getAssociatedElements();
 	}
 
 	public <T> Iterable<T> getAssociatedElements(EObject inferredJvmOrXtendElement, Class<T> type) {
@@ -132,7 +132,7 @@ public class Xtend2InferredJvmAssociator implements IXtend2JvmAssociations {
 	}
 
 	protected static class AssociationAdapter extends AdapterImpl {
-		private List<EObject> associatedElements;
+		private Set<EObject> associatedElements;
 
 		public AssociationAdapter() {
 			super();
@@ -140,12 +140,12 @@ public class Xtend2InferredJvmAssociator implements IXtend2JvmAssociations {
 
 		protected boolean addAssociation(EObject associatedElement) {
 			if (associatedElements == null)
-				associatedElements = newArrayList();
+				associatedElements = newLinkedHashSet();
 			return associatedElements.add(associatedElement);
 		}
 
-		public List<EObject> getAssociatedElements() {
-			return (associatedElements == null) ? Collections.<EObject> emptyList() : associatedElements;
+		public Set<EObject> getAssociatedElements() {
+			return (associatedElements == null) ? Collections.<EObject> emptySet() : associatedElements;
 		}
 
 		@Override
