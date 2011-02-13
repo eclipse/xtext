@@ -119,6 +119,10 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 		return labelProvider;
 	}
 	
+	protected XtextElementLinks getElementLinks () {
+		return elementLinks;
+	}
+	
 	@Inject
 	private IURIEditorOpener uriEditorOpener;
 
