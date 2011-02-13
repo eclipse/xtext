@@ -38,16 +38,16 @@ public class Xtend2InferredJvmAssociator implements IXtend2JvmAssociations {
 		setAdapter(xtendElement, inferredJvmElement);
 		setAdapter(inferredJvmElement, xtendElement);
 	}
-	
+
 	public void disassociate(EObject rootElement) {
-		for(TreeIterator<EObject> content=EcoreUtil2.eAll(rootElement); content.hasNext();) {
+		for (TreeIterator<EObject> content = EcoreUtil2.eAll(rootElement); content.hasNext();) {
 			EObject element = content.next();
 			AssociationAdapter associationAdapter = getAssociationAdapter(element);
-			if(associationAdapter != null)
+			if (associationAdapter != null)
 				element.eAdapters().remove(associationAdapter);
 		}
 	}
-	
+
 	public List<EObject> getAssociatedElements(EObject inferredJvmOrXtendElement) {
 		AssociationAdapter adapter = getAssociationAdapter(inferredJvmOrXtendElement);
 		return (adapter == null) ? Collections.<EObject> emptyList() : adapter.getAssociatedElements();
@@ -64,7 +64,7 @@ public class Xtend2InferredJvmAssociator implements IXtend2JvmAssociations {
 			}
 		});
 	}
-	
+
 	public Iterable<EObject> getInferredJvmElements(EObject xtendElement) {
 		return filter(getAssociatedElements(xtendElement), new Predicate<EObject>() {
 			public boolean apply(EObject input) {
@@ -72,7 +72,7 @@ public class Xtend2InferredJvmAssociator implements IXtend2JvmAssociations {
 			}
 		});
 	}
-	
+
 	public JvmGenericType getInferredType(XtendClass xtendClass) {
 		return getFirstAssociatedElement(xtendClass, JvmGenericType.class);
 	}
@@ -82,9 +82,11 @@ public class Xtend2InferredJvmAssociator implements IXtend2JvmAssociations {
 	}
 
 	public JvmOperation getDirectlyInferredOperation(final XtendFunction xtendFunction) {
+		final String xtendName = xtendFunction.getSimpleName();
 		return (JvmOperation) find(getAssociatedElements(xtendFunction), new Predicate<EObject>() {
 			public boolean apply(EObject input) {
-				return input instanceof JvmOperation && ((JvmOperation) input).getCanonicalName().equals(xtendFunction.getCanonicalName());
+				return input instanceof JvmOperation
+						&& !(xtendName.startsWith("_") ^ ((JvmOperation) input).getSimpleName().startsWith("_"));
 			}
 		});
 	}
@@ -96,24 +98,26 @@ public class Xtend2InferredJvmAssociator implements IXtend2JvmAssociations {
 		}
 		return null;
 	}
-	
+
 	public XtendClass getXtendClass(JvmGenericType inferredType) {
 		return getFirstAssociatedElement(inferredType, XtendClass.class);
 	}
-	
+
 	public XtendFunction getXtendFunction(final JvmOperation inferredOperation) {
+		final String inferredName = inferredOperation.getSimpleName();
 		return (XtendFunction) find(getAssociatedElements(inferredOperation), new Predicate<EObject>() {
 			public boolean apply(EObject input) {
-				return input instanceof XtendFunction && ((XtendFunction) input).getCanonicalName().equals(inferredOperation.getCanonicalName());
+				return input instanceof XtendFunction
+						&& !(((XtendFunction) input).getSimpleName().startsWith("_") ^ inferredName.startsWith("_"));
 			}
 		});
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private <T> T getFirstAssociatedElement(EObject element, Class<T> type) {
 		return (T) find(getAssociatedElements(element), Predicates.instanceOf(type));
 	}
-	
+
 	protected void setAdapter(EObject targetElement, EObject associatedElement) {
 		AssociationAdapter adapter = getAssociationAdapter(targetElement);
 		if (adapter == null) {

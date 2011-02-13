@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.access.TypeResource;
@@ -75,6 +76,9 @@ public class Xtend2RenameStrategy extends DefaultRenameStrategy {
 			JvmGenericType inferredJvmType = xtend2jvmAssociations.getInferredType((XtendClass) renamedElement);
 			if(inferredJvmType != null)
 				inferredJvmType.setFullyQualifiedName(((XtendClass)renamedElement).getCanonicalName());
+			JvmConstructor inferredConstructor = xtend2jvmAssociations.getInferredConstructor((XtendClass) renamedElement);
+			if(inferredConstructor != null)
+				inferredConstructor.setFullyQualifiedName(((XtendClass)renamedElement).getCanonicalName());
 		} else if(renamedElement instanceof XtendFunction) {
 			JvmMember inferredJvmMember = xtend2jvmAssociations.getDirectlyInferredOperation(((XtendFunction) renamedElement));
 			if(inferredJvmMember != null) {

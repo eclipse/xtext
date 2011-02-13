@@ -159,6 +159,17 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		assertEquals(JvmVisibility.PUBLIC, inferredType.getVisibility());
 	}
 
+	public void testInferredJvmConstructor() throws Exception {
+		XtendFile xtendFile = file("class Foo { }");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		XtendClass xtendClass = xtendFile.getXtendClass();
+		assertEquals(1, inferredType.getMembers().size());
+		JvmMember inferredFirstMember = inferredType.getMembers().get(0);
+		assertTrue(inferredFirstMember instanceof JvmConstructor);
+		assertEquals(associations.getInferredConstructor(xtendClass), inferredFirstMember);
+		assertEquals(xtendClass.getCanonicalName(), inferredFirstMember.getCanonicalName());
+	}
+
 	public void testInferredSuperType() throws Exception {
 		XtendFile xtendFile = file("class Foo extends Object { }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
