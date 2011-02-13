@@ -68,6 +68,13 @@ public class Primitives {
 		throw new IllegalArgumentException("Unkown primitive "+name);
 	}
 	
+	public JvmTypeReference asWrapperTypeIfPrimitive(JvmTypeReference primitive) {
+		if (!isPrimitive(primitive)) {
+			return primitive;
+		}
+		return typeReferences.createTypeRef(getWrapperType((JvmPrimitiveType) primitive.getType()));
+	}
+	
 	public JvmType getWrapperType(JvmPrimitiveType primitive) {
 		switch (primitiveKind(primitive)) {
 			case Byte :
