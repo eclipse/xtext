@@ -19,20 +19,22 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
+import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -49,6 +51,9 @@ import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
@@ -218,20 +223,58 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 
 	@Inject
 	private DispatchingSupport dispatchingSupport;
+	
 	@Inject
 	private IXtend2JvmAssociations associations;
+	
+	@Inject
+	private Primitives primitives;
 
 	@Check
-	public void singleCaseFunction(XtendFunction func) {
-		if (func.isDispatch()) {
-			JvmGenericType type = associations.getInferredType((XtendClass) func.eContainer());
-			Multimap<Pair<String, Integer>, JvmOperation> dispatchMethods = dispatchingSupport.getDispatchMethods(type);
-			Collection<JvmOperation> collection = dispatchMethods.get(Tuples.create(func.getName(), func
-					.getParameters().size()));
+	public void checkCaseFunctions(XtendClass clazz) {
+		JvmGenericType type = associations.getInferredType(clazz);
+		Multimap<Pair<String, Integer>, JvmOperation> dispatchMethods = dispatchingSupport.getDispatchMethods(type);
+		for (Pair<String, Integer> key : dispatchMethods.keySet()) {
+			Collection<JvmOperation> collection = dispatchMethods.get(key);
 			if (collection.size() == 1) {
-				warning("Single case function.", func, Xtend2Package.Literals.XTEND_FUNCTION__DISPATCH,
+				JvmOperation singleOp = collection.iterator().next();
+				XtendFunction function = associations.getXtendFunction(singleOp);
+				warning("Single case function.", function, Xtend2Package.Literals.XTEND_FUNCTION__DISPATCH,
 						IssueCodes.SINGLE_CASE_FUNCTION);
+			} else {
+				Multimap<List<JvmType>,JvmOperation> signatures = HashMultimap.create();
+				for (JvmOperation jvmOperation : collection) {
+					signatures.put(getParamTypes(jvmOperation, true), jvmOperation);
+				}
+				for (final List<JvmType> paramTypes : signatures.keySet()) {
+					Collection<JvmOperation> ops = signatures.get(paramTypes);
+					if (ops.size()>1) {
+						if (Iterables.any(ops, new Predicate<JvmOperation>() {
+							public boolean apply(JvmOperation input) {
+								return !getParamTypes(input, false).equals(paramTypes);
+							}
+						})) {
+							for (JvmOperation jvmOperation : ops) {
+								XtendFunction function = associations.getXtendFunction(jvmOperation);
+								error("Duplicate case method. Primitives cannot overload their wrapper types in case functions.", 
+										function, null, DUPLICATE_METHOD);
+							}
+						}
+					}
+				}
 			}
-		}
+		}	
 	}
+
+	protected List<JvmType> getParamTypes(JvmOperation jvmOperation, boolean wrapPrimitives) {
+		List<JvmType> types = newArrayList();
+		for (JvmFormalParameter p : jvmOperation.getParameters()) {
+			JvmTypeReference reference = wrapPrimitives 
+					? primitives.asWrapperTypeIfPrimitive(p.getParameterType()) 
+					: p.getParameterType();
+			types.add(reference.getType());
+		}
+		return types;
+	}
+	
 }

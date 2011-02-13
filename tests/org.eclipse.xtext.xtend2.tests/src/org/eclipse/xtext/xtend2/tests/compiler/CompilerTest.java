@@ -70,18 +70,13 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testCaseFunction_02() throws Exception {
-		final String definition = "x(p1)" +
+		final String definition = "x(p1 as String)" +
 				" case x(Void s) 'null'" +
 				" case x(String s) 'string'";
 		invokeAndExpect("string", definition,"bar");
 		invokeAndExpect("null", definition,new Object[]{null});
-		try {
-			invokeAndExpect(null, definition, 42);
-			fail();
-		} catch (InvocationTargetException e) {
-			assertTrue(e.getCause() instanceof IllegalArgumentException);
-		}
 	}
+	
 //TODO test fails, when run as plug-in test. The EMF jars cannot be resolved.
 //
 //	public void testCaseFunction_03() throws Exception {
@@ -94,6 +89,23 @@ public class CompilerTest extends AbstractXtend2TestCase {
 //		invokeAndExpect(EAttribute.class, definition,Xtend2Package.Literals.XTEND_FILE__PACKAGE);
 //		invokeAndExpect(ETypedElement.class, definition,EcoreFactory.eINSTANCE.createEOperation());
 //	}
+	
+	public void testCaseFunction_04() throws Exception {
+		final String definition = "x(p1)" +
+		" case x(int s) 'int'" +
+		" case x(boolean s) 'boolean'" +
+		" case x(double s) 'double'";
+		invokeAndExpect("int", definition,42);
+		invokeAndExpect("double", definition,42d);
+		invokeAndExpect("boolean", definition,true);
+		invokeAndExpect("boolean", definition,Boolean.TRUE);
+		try {
+			invokeAndExpect(null, definition, "String");
+			fail();
+		} catch (InvocationTargetException e) {
+			assertTrue(e.getCause() instanceof IllegalArgumentException);
+		}
+	}
 
 	public void testFunctionCall_00() throws Exception {
 		invokeAndExpect("foobar", "bar(p1) bar(String x) 'foo'+x","bar");
@@ -128,7 +140,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		for (int i = 0; i < args.length; i++) {
 			Object object = args[i];
 			if (object == null) {
-				fullClass+= Void.class.getCanonicalName()+" p"+(i+1);
+				fullClass+= Object.class.getCanonicalName()+" p"+(i+1);
 			} else {
 				fullClass+= object.getClass().getCanonicalName()+" p"+(i+1);
 			}
@@ -148,7 +160,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		Class<?>[] argTypes = new Class[args.length];
 		for (int i = 0; i < argTypes.length; i++) {
 			if (args[i] == null) {
-				argTypes[i] = Void.class;
+				argTypes[i] = Object.class;
 			} else {
 				argTypes[i] = args[i].getClass();
 			}

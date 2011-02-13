@@ -30,7 +30,7 @@ public class DispatchingSupportTest extends AbstractXtend2TestCase {
 	@Inject
 	private DispatchingSupport dispatchingSupport;
 	
-	public void testSort() throws Exception {
+	public void testSort_00() throws Exception {
 		XtendClass clazz = clazz("class X {\n" +
 				"  case foo(Integer i) null" +
 				"  case foo(Comparable<?> i) null" +
@@ -43,9 +43,6 @@ public class DispatchingSupportTest extends AbstractXtend2TestCase {
 		Multimap<Pair<String, Integer>, JvmOperation> multimap = dispatchingSupport.getDispatchMethods((JvmGenericType) clazz.eResource().getContents().get(1));
 		Collection<JvmOperation> collection = multimap.values();
 		List<JvmOperation> list = dispatchingSupport.sort(collection);
-		for (JvmOperation jvmOperation : list) {
-			System.out.println(jvmOperation.getParameters().get(0).getParameterType());
-		}
 		Iterator<JvmOperation> i = list.iterator();
 		assertEquals(Integer.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
 		assertEquals(Number.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
@@ -53,6 +50,36 @@ public class DispatchingSupportTest extends AbstractXtend2TestCase {
 		assertEquals(Serializable.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
 		assertEquals(CharSequence.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
 		assertEquals(Comparable.class.getName(), i.next().getParameters().get(0).getParameterType().getType().getCanonicalName());
+		assertEquals(Object.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
+	}
+	
+	public void testSort_01() throws Exception {
+		XtendClass clazz = clazz("class X {\n" +
+				"  case foo(Integer i) null" +
+				"  case foo(Boolean i) null" +
+				"  case foo(String i) null" +
+		"}");
+		Multimap<Pair<String, Integer>, JvmOperation> multimap = dispatchingSupport.getDispatchMethods((JvmGenericType) clazz.eResource().getContents().get(1));
+		Collection<JvmOperation> collection = multimap.values();
+		List<JvmOperation> list = dispatchingSupport.sort(collection);
+		Iterator<JvmOperation> i = list.iterator();
+		assertEquals(Boolean.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
+		assertEquals(Integer.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
+		assertEquals(String.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
+	}
+	
+	public void testSort_02() throws Exception {
+		XtendClass clazz = clazz("class X {\n" +
+				"  case foo(int a, String b) null" +
+				"  case foo(Boolean i, Object b) null" +
+				"  case foo(Object i, String b) null" +
+		"}");
+		Multimap<Pair<String, Integer>, JvmOperation> multimap = dispatchingSupport.getDispatchMethods((JvmGenericType) clazz.eResource().getContents().get(1));
+		Collection<JvmOperation> collection = multimap.values();
+		List<JvmOperation> list = dispatchingSupport.sort(collection);
+		Iterator<JvmOperation> i = list.iterator();
+		assertEquals(Integer.TYPE.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
+		assertEquals(Boolean.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
 		assertEquals(Object.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
 	}
 }

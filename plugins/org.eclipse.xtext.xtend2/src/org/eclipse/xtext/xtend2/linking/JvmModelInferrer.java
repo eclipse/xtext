@@ -26,10 +26,11 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
+import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
@@ -54,10 +55,13 @@ public class JvmModelInferrer {
 	private ITypeProvider typeProvider;
 
 	@Inject
-	private TypeConformanceComputer typeConformanceComputer;
+	private XbaseTypeConformanceComputer typeConformanceComputer;
 
 	@Inject
 	private TypeReferences typeRefs;
+	
+	@Inject
+	private Primitives primitives;
 
 	@Inject
 	private DispatchingSupport dispatchingSupport;
@@ -135,9 +139,11 @@ public class JvmModelInferrer {
 	protected <T> JvmTypeReference commonType(Iterable<? extends T> iterable, Function<T, JvmTypeReference> mapping) {
 		List<JvmTypeReference> references = newArrayList();
 		for (T element : iterable) {
-			final JvmTypeReference apply = mapping.apply(element);
-			if (!typeRefs.isNullOrProxy(apply))
+			JvmTypeReference apply = mapping.apply(element);
+			if (!typeRefs.isNullOrProxy(apply)) {
+				apply = primitives.asWrapperTypeIfPrimitive(apply); 
 				references.add(apply);
+			}
 		}
 		return typeConformanceComputer.getCommonSuperType(references);
 	}

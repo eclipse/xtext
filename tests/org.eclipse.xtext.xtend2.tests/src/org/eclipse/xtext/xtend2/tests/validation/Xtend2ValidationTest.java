@@ -59,4 +59,9 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 		XtendFunction function = function("case foo(String s) null");
 		helper.assertWarning(function, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.SINGLE_CASE_FUNCTION);
 	}
+	
+	public void testDuplicateCaseFunction() throws Exception {
+		XtendFunction function = function("case foo(Integer s) null case foo(int s) null");
+		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.DUPLICATE_METHOD, "case");
+	}
 }
