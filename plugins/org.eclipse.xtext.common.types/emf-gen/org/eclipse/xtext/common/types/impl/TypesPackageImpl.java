@@ -976,6 +976,16 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getJvmExecutable_VarArgs()
+	{
+		return (EAttribute)jvmExecutableEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getJvmConstructor()
 	{
 		return jvmConstructorEClass;
@@ -1507,6 +1517,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		jvmExecutableEClass = createEClass(JVM_EXECUTABLE);
 		createEReference(jvmExecutableEClass, JVM_EXECUTABLE__PARAMETERS);
 		createEReference(jvmExecutableEClass, JVM_EXECUTABLE__EXCEPTIONS);
+		createEAttribute(jvmExecutableEClass, JVM_EXECUTABLE__VAR_ARGS);
 
 		jvmConstructorEClass = createEClass(JVM_CONSTRUCTOR);
 
@@ -1774,6 +1785,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		initEClass(jvmExecutableEClass, JvmExecutable.class, "JvmExecutable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getJvmExecutable_Parameters(), this.getJvmFormalParameter(), null, "parameters", null, 0, -1, JvmExecutable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getJvmExecutable_Exceptions(), this.getJvmTypeReference(), null, "exceptions", null, 0, -1, JvmExecutable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJvmExecutable_VarArgs(), ecorePackage.getEBoolean(), "varArgs", null, 0, 1, JvmExecutable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(jvmConstructorEClass, JvmConstructor.class, "JvmConstructor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -60,7 +60,8 @@ public class JvmIntAnnotationValueItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addValuesPropertyDescriptor(object);
@@ -127,7 +128,8 @@ public class JvmIntAnnotationValueItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(JvmIntAnnotationValue.class)) {
+		switch (notification.getFeatureID(JvmIntAnnotationValue.class))
+		{
 			case TypesPackage.JVM_INT_ANNOTATION_VALUE__VALUES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

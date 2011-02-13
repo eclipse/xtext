@@ -1393,13 +1393,22 @@ public interface TypesPackage extends EPackage
 	int JVM_EXECUTABLE__EXCEPTIONS = JVM_FEATURE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Var Args</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_EXECUTABLE__VAR_ARGS = JVM_FEATURE_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Jvm Executable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_EXECUTABLE_FEATURE_COUNT = JVM_FEATURE_FEATURE_COUNT + 3;
+	int JVM_EXECUTABLE_FEATURE_COUNT = JVM_FEATURE_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmConstructorImpl <em>Jvm Constructor</em>}' class.
@@ -1473,6 +1482,15 @@ public interface TypesPackage extends EPackage
 	 * @ordered
 	 */
 	int JVM_CONSTRUCTOR__EXCEPTIONS = JVM_EXECUTABLE__EXCEPTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Var Args</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_CONSTRUCTOR__VAR_ARGS = JVM_EXECUTABLE__VAR_ARGS;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Constructor</em>' class.
@@ -1555,6 +1573,15 @@ public interface TypesPackage extends EPackage
 	 * @ordered
 	 */
 	int JVM_OPERATION__EXCEPTIONS = JVM_EXECUTABLE__EXCEPTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Var Args</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_OPERATION__VAR_ARGS = JVM_EXECUTABLE__VAR_ARGS;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -2743,6 +2770,17 @@ public interface TypesPackage extends EPackage
 	EReference getJvmExecutable_Exceptions();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmExecutable#isVarArgs <em>Var Args</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Var Args</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmExecutable#isVarArgs()
+	 * @see #getJvmExecutable()
+	 * @generated
+	 */
+	EAttribute getJvmExecutable_VarArgs();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmConstructor <em>Jvm Constructor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3684,6 +3722,14 @@ public interface TypesPackage extends EPackage
 		 * @generated
 		 */
 		EReference JVM_EXECUTABLE__EXCEPTIONS = eINSTANCE.getJvmExecutable_Exceptions();
+
+		/**
+		 * The meta object literal for the '<em><b>Var Args</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JVM_EXECUTABLE__VAR_ARGS = eINSTANCE.getJvmExecutable_VarArgs();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmConstructorImpl <em>Jvm Constructor</em>}' class.

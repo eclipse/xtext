@@ -43,7 +43,8 @@ public final class TypesEditPlugin extends EMFPlugin
 	public TypesEditPlugin()
 	{
 		super
-		  (new ResourceLocator [] {
+		  (new ResourceLocator [] 
+		   {
 		   });
 	}
 

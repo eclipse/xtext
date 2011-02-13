@@ -60,7 +60,8 @@ public class JvmCharAnnotationValueItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addValuesPropertyDescriptor(object);
@@ -127,7 +128,8 @@ public class JvmCharAnnotationValueItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(JvmCharAnnotationValue.class)) {
+		switch (notification.getFeatureID(JvmCharAnnotationValue.class))
+		{
 			case TypesPackage.JVM_CHAR_ANNOTATION_VALUE__VALUES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

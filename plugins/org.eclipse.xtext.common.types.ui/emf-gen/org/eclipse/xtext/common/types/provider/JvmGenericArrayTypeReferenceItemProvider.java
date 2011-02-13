@@ -61,7 +61,8 @@ public class JvmGenericArrayTypeReferenceItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -79,7 +80,8 @@ public class JvmGenericArrayTypeReferenceItemProvider
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE);
 		}
@@ -136,7 +138,8 @@ public class JvmGenericArrayTypeReferenceItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(JvmGenericArrayTypeReference.class)) {
+		switch (notification.getFeatureID(JvmGenericArrayTypeReference.class))
+		{
 			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;

@@ -63,7 +63,8 @@ public class JvmFormalParameterItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
@@ -105,7 +106,8 @@ public class JvmFormalParameterItemProvider
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.JVM_ANNOTATION_TARGET__ANNOTATIONS);
 			childrenFeatures.add(TypesPackage.Literals.JVM_FORMAL_PARAMETER__PARAMETER_TYPE);
@@ -166,7 +168,8 @@ public class JvmFormalParameterItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(JvmFormalParameter.class)) {
+		switch (notification.getFeatureID(JvmFormalParameter.class))
+		{
 			case TypesPackage.JVM_FORMAL_PARAMETER__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

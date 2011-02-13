@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmExecutable#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmExecutable#getExceptions <em>Exceptions</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmExecutable#isVarArgs <em>Var Args</em>}</li>
  * </ul>
  * </p>
  *
@@ -57,5 +58,31 @@ public interface JvmExecutable extends JvmFeature, JvmTypeParameterDeclarator
 	 * @generated
 	 */
 	EList<JvmTypeReference> getExceptions();
+
+	/**
+	 * Returns the value of the '<em><b>Var Args</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Var Args</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Var Args</em>' attribute.
+	 * @see #setVarArgs(boolean)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmExecutable_VarArgs()
+	 * @model
+	 * @generated
+	 */
+	boolean isVarArgs();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmExecutable#isVarArgs <em>Var Args</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Var Args</em>' attribute.
+	 * @see #isVarArgs()
+	 * @generated
+	 */
+	void setVarArgs(boolean value);
 
 } // JvmExecutable

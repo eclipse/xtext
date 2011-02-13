@@ -63,7 +63,8 @@ public class JvmGenericTypeItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addInterfacePropertyDescriptor(object);
@@ -105,7 +106,8 @@ public class JvmGenericTypeItemProvider
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.JVM_TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS);
 		}
@@ -165,7 +167,8 @@ public class JvmGenericTypeItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(JvmGenericType.class)) {
+		switch (notification.getFeatureID(JvmGenericType.class))
+		{
 			case TypesPackage.JVM_GENERIC_TYPE__INTERFACE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

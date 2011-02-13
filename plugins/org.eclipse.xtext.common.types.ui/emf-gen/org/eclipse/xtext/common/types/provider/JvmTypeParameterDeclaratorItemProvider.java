@@ -64,7 +64,8 @@ public class JvmTypeParameterDeclaratorItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -82,7 +83,8 @@ public class JvmTypeParameterDeclaratorItemProvider
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.JVM_TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS);
 		}
@@ -127,7 +129,8 @@ public class JvmTypeParameterDeclaratorItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(JvmTypeParameterDeclarator.class)) {
+		switch (notification.getFeatureID(JvmTypeParameterDeclarator.class))
+		{
 			case TypesPackage.JVM_TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;

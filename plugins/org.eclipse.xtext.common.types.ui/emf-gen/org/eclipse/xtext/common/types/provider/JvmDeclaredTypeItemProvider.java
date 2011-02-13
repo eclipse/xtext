@@ -63,7 +63,8 @@ public class JvmDeclaredTypeItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addVisibilityPropertyDescriptor(object);
@@ -201,7 +202,8 @@ public class JvmDeclaredTypeItemProvider
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.JVM_ANNOTATION_TARGET__ANNOTATIONS);
 			childrenFeatures.add(TypesPackage.Literals.JVM_DECLARED_TYPE__SUPER_TYPES);
@@ -251,7 +253,8 @@ public class JvmDeclaredTypeItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(JvmDeclaredType.class)) {
+		switch (notification.getFeatureID(JvmDeclaredType.class))
+		{
 			case TypesPackage.JVM_DECLARED_TYPE__VISIBILITY:
 			case TypesPackage.JVM_DECLARED_TYPE__FULLY_QUALIFIED_NAME:
 			case TypesPackage.JVM_DECLARED_TYPE__ABSTRACT:

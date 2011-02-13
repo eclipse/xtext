@@ -61,7 +61,8 @@ public class JvmComponentTypeItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -79,7 +80,8 @@ public class JvmComponentTypeItemProvider
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.JVM_COMPONENT_TYPE__ARRAY_TYPE);
 		}
@@ -124,7 +126,8 @@ public class JvmComponentTypeItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(JvmComponentType.class)) {
+		switch (notification.getFeatureID(JvmComponentType.class))
+		{
 			case TypesPackage.JVM_COMPONENT_TYPE__ARRAY_TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;

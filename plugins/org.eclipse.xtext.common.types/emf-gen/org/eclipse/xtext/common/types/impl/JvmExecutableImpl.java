@@ -7,12 +7,15 @@ package org.eclipse.xtext.common.types.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
@@ -35,6 +38,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmExecutableImpl#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmExecutableImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmExecutableImpl#getExceptions <em>Exceptions</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmExecutableImpl#isVarArgs <em>Var Args</em>}</li>
  * </ul>
  * </p>
  *
@@ -71,6 +75,26 @@ public abstract class JvmExecutableImpl extends JvmFeatureImpl implements JvmExe
 	 * @ordered
 	 */
 	protected EList<JvmTypeReference> exceptions;
+
+	/**
+	 * The default value of the '{@link #isVarArgs() <em>Var Args</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVarArgs()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean VAR_ARGS_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isVarArgs() <em>Var Args</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVarArgs()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean varArgs = VAR_ARGS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -140,6 +164,29 @@ public abstract class JvmExecutableImpl extends JvmFeatureImpl implements JvmExe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isVarArgs()
+	{
+		return varArgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVarArgs(boolean newVarArgs)
+	{
+		boolean oldVarArgs = varArgs;
+		varArgs = newVarArgs;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_EXECUTABLE__VAR_ARGS, oldVarArgs, varArgs));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
@@ -188,6 +235,8 @@ public abstract class JvmExecutableImpl extends JvmFeatureImpl implements JvmExe
 				return getParameters();
 			case TypesPackage.JVM_EXECUTABLE__EXCEPTIONS:
 				return getExceptions();
+			case TypesPackage.JVM_EXECUTABLE__VAR_ARGS:
+				return isVarArgs();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -215,6 +264,9 @@ public abstract class JvmExecutableImpl extends JvmFeatureImpl implements JvmExe
 				getExceptions().clear();
 				getExceptions().addAll((Collection<? extends JvmTypeReference>)newValue);
 				return;
+			case TypesPackage.JVM_EXECUTABLE__VAR_ARGS:
+				setVarArgs((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -238,6 +290,9 @@ public abstract class JvmExecutableImpl extends JvmFeatureImpl implements JvmExe
 			case TypesPackage.JVM_EXECUTABLE__EXCEPTIONS:
 				getExceptions().clear();
 				return;
+			case TypesPackage.JVM_EXECUTABLE__VAR_ARGS:
+				setVarArgs(VAR_ARGS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -258,6 +313,8 @@ public abstract class JvmExecutableImpl extends JvmFeatureImpl implements JvmExe
 				return parameters != null && !parameters.isEmpty();
 			case TypesPackage.JVM_EXECUTABLE__EXCEPTIONS:
 				return exceptions != null && !exceptions.isEmpty();
+			case TypesPackage.JVM_EXECUTABLE__VAR_ARGS:
+				return varArgs != VAR_ARGS_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -298,6 +355,23 @@ public abstract class JvmExecutableImpl extends JvmFeatureImpl implements JvmExe
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString()
+	{
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (varArgs: ");
+		result.append(varArgs);
+		result.append(')');
+		return result.toString();
 	}
 
 } //JvmExecutableImpl
