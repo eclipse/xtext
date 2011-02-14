@@ -303,19 +303,22 @@ public class RenameLinkedMode {
 	}
 
 	protected void startDirectRefactoring() {
-		RenameRefactoringExecuter renameRefactoringExecuter = renameRefactoringExecuterProvider.get();
-		try {
-			renameRefactoringExecuter.configure(renameRefactoring);
-			renameRefactoringExecuter.perform(editor.getSite());
-		} catch (CoreException e) {
-			log.error(e.getMessage(), e);
+		if(renameProcessor.getNewName() == null) {
 			restoreOriginalSelection();
-		} catch (InterruptedException e) {
-			// User canceled operation
-			log.error(e.getMessage(), e);
-			restoreOriginalSelection();
+		} else {
+			RenameRefactoringExecuter renameRefactoringExecuter = renameRefactoringExecuterProvider.get();
+			try {
+				renameRefactoringExecuter.configure(renameRefactoring);
+				renameRefactoringExecuter.perform(editor.getSite());
+			} catch (CoreException e) {
+				log.error(e.getMessage(), e);
+				restoreOriginalSelection();
+			} catch (InterruptedException e) {
+				// User canceled operation
+				log.error(e.getMessage(), e);
+				restoreOriginalSelection();
+			}
 		}
-
 	}
 
 	protected void startRefactoringWithDialog(final boolean previewOnly) {
