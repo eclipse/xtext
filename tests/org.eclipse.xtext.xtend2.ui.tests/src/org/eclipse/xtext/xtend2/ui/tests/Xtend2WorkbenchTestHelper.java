@@ -22,6 +22,7 @@ import junit.framework.TestSuite;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
@@ -31,6 +32,8 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.internal.ErrorEditorPart;
 import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
@@ -40,6 +43,7 @@ import org.eclipse.xtext.xtend2.ui.internal.Xtend2Activator;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.name.Named;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -47,23 +51,25 @@ import com.google.inject.Injector;
 @SuppressWarnings("restriction")
 public class Xtend2WorkbenchTestHelper extends Assert {
 
-	public static final String TESTPROJECT_NAME = "foo";
+	public static final String TESTPROJECT_NAME = "test.project";
 
-	public static final String EDITOR_ID = "org.eclipse.xtext.xtend2.Xtend2";
-
-	public static final String FILE_EXTENSION = "xtend";
-	
 	private Set<IFile> files = newHashSet();
+
+	@Inject@Named(Constants.LANGUAGE_NAME)
+	private String languageName;
+	
+	@Inject
+	private FileExtensionProvider fileExtensionProvider;
 	
 	@Inject
 	private IWorkbench workbench;
-	
+
 	public void tearDown() {
 		workbench.getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
-		for(IFile file: getFiles()) {
+		for (IFile file : getFiles()) {
 			try {
 				file.delete(true, null);
-			} catch(Exception exc) {
+			} catch (Exception exc) {
 				exc.printStackTrace();
 			}
 		}
@@ -81,12 +87,21 @@ public class Xtend2WorkbenchTestHelper extends Assert {
 		editor.getInternalSourceViewer().getTextWidget().setFocus();
 		return editor;
 	}
-	
 
 	public IFile createFile(String fileName, String content) throws Exception {
-		IFile file = IResourcesSetupUtil.createFile(TESTPROJECT_NAME + "/src/" + fileName + "." + FILE_EXTENSION, content);
+		IFile file = IResourcesSetupUtil.createFile(TESTPROJECT_NAME + "/src/" + fileName + "." + getFileExtension(),
+				content);
 		getFiles().add(file);
+		file.refreshLocal(IResource.DEPTH_ZERO, null);
 		return file;
+	}
+
+	public String getFileExtension() {
+		return fileExtensionProvider.getFileExtensions().iterator().next();
+	}
+	
+	public String getEditorID() {
+		return languageName;
 	}
 	
 	public String getContents(IFile file) throws Exception {
@@ -148,7 +163,7 @@ public class Xtend2WorkbenchTestHelper extends Assert {
 	}
 
 	protected XtextEditor openEditor(IFile file) throws Exception {
-		IEditorPart openEditor = openEditor(file, EDITOR_ID);
+		IEditorPart openEditor = openEditor(file, getEditorID());
 		XtextEditor xtextEditor = EditorUtils.getXtextEditor(openEditor);
 		if (xtextEditor != null) {
 			return xtextEditor;
@@ -158,14 +173,13 @@ public class Xtend2WorkbenchTestHelper extends Assert {
 			throw new IllegalStateException("Couldn't open the editor.",
 					((Status) field.get(openEditor)).getException());
 		} else {
-			fail("Opened Editor with id:" + EDITOR_ID + ", is not an XtextEditor");
+			fail("Opened Editor with id:" + getEditorID() + ", is not an XtextEditor");
 		}
 		return null;
 	}
 
 	protected IEditorPart openEditor(IFile file, String editorId) throws PartInitException {
-		return workbench.getActiveWorkbenchWindow().getActivePage()
-				.openEditor(new FileEditorInput(file), editorId);
+		return workbench.getActiveWorkbenchWindow().getActivePage().openEditor(new FileEditorInput(file), editorId);
 	}
 
 }
