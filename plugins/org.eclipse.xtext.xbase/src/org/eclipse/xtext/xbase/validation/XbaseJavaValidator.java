@@ -81,7 +81,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		JvmTypeReference parameterType = catchClause.getDeclaredParam().getParameterType();
 		JvmTypeReference throwable = typeRefs.getTypeForName(Throwable.class, catchClause);
 		if (!conformanceComputer.isConformant(throwable, parameterType)) {
-			error("No exception of type " + parameterType.getCanonicalName()
+			error("No exception of type " + parameterType.getIdentifier()
 					+ " can be thrown; an exception type must be a subclass of Throwable",
 					catchClause.getDeclaredParam(), TypesPackage.Literals.JVM_FORMAL_PARAMETER__PARAMETER_TYPE,
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_TYPES);
@@ -205,11 +205,11 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 
 	protected String canonicalName(JvmTypeReference typeRef) {
-		return (typeRef == null) ? "<null>" : notNull(typeRef.getCanonicalName());
+		return (typeRef == null) ? "<null>" : notNull(typeRef.getIdentifier());
 	}
 
 	protected String canonicalName(JvmType type) {
-		return (type == null) ? "<null>" : notNull(type.getCanonicalName());
+		return (type == null) ? "<null>" : notNull(type.getIdentifier());
 	}
 
 	protected boolean isInterface(JvmType type) {

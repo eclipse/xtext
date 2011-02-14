@@ -157,7 +157,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 								TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(null);
 								final JvmConstructor constructor = (JvmConstructor) from.getEObjectOrProxy();
 								return new JvmFeatureDescription(from.getQualifiedName(), constructor, typeArgumentContext,
-										constructor.getCanonicalName(), true, null, false);
+										constructor.getIdentifier(), true, null, false);
 							}
 						});
 				return result;

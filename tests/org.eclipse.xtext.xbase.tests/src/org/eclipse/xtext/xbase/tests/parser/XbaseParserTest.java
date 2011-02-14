@@ -339,13 +339,13 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertEquals(2,se.getCases().size());
 		assertNull(se.getDefault());
 		XCasePart c1 = se.getCases().get(0);
-		assertEquals("java.lang.String",c1.getTypeGuard().getCanonicalName());
+		assertEquals("java.lang.String",c1.getTypeGuard().getIdentifier());
 		assertFeatureCall("length",c1.getCase());
 		assertFeatureCall("foo",((XMemberFeatureCall)c1.getCase()).getMemberCallTarget());
 		assertFeatureCall("bar",c1.getThen());
 		
 		XCasePart c2 = se.getCases().get(1);
-		assertEquals("java.lang.String",c2.getTypeGuard().getCanonicalName());
+		assertEquals("java.lang.String",c2.getTypeGuard().getIdentifier());
 		assertNull(c2.getCase());
 		assertFeatureCall("baz",((XBlockExpression)c2.getThen()).getExpressions().get(0));
 	}
@@ -474,7 +474,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		XForLoopExpression forExp = (XForLoopExpression) expression("for(String s : foo) bar");
 		assertFeatureCall("foo",forExp.getForExpression());
 		assertEquals("s",forExp.getDeclaredParam().getName());
-		assertEquals("java.lang.String", forExp.getDeclaredParam().getParameterType().getCanonicalName());
+		assertEquals("java.lang.String", forExp.getDeclaredParam().getParameterType().getIdentifier());
 		assertFeatureCall("bar",forExp.getEachExpression());
 	}
 
@@ -497,19 +497,19 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 
 	public void testTypeLiteral() throws Exception {
 		XTypeLiteral expression = (XTypeLiteral) expression("typeof(String)");
-		assertEquals("java.lang.String",expression.getType().getCanonicalName());
+		assertEquals("java.lang.String",expression.getType().getIdentifier());
 	}
 	
 	public void testInstanceOf() throws Exception {
 		XInstanceOfExpression expression = (XInstanceOfExpression) expression("true instanceof Boolean");
-		assertEquals("java.lang.Boolean",expression.getType().getCanonicalName());
+		assertEquals("java.lang.Boolean",expression.getType().getIdentifier());
 		assertTrue(expression.getExpression() instanceof XBooleanLiteral);
 	}
 	
 	public void testInstanceOf_1() throws Exception {
 		XClosure closure = (XClosure) expression("[|true instanceof Boolean]");
 		XInstanceOfExpression expression = (XInstanceOfExpression) closure.getExpression();
-		assertEquals("java.lang.Boolean",expression.getType().getCanonicalName());
+		assertEquals("java.lang.Boolean",expression.getType().getIdentifier());
 		assertTrue(expression.getExpression() instanceof XBooleanLiteral);
 	}
 	
@@ -527,7 +527,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertEquals(1,tryEx.getCatchClauses().size());
 		XCatchClause clause = tryEx.getCatchClauses().get(0);
 		assertFeatureCall("bar", clause.getExpression());
-		assertEquals("java.lang.Exception", clause.getDeclaredParam().getParameterType().getCanonicalName());
+		assertEquals("java.lang.Exception", clause.getDeclaredParam().getParameterType().getIdentifier());
 		assertEquals("e", clause.getDeclaredParam().getName());
 	}
 	
@@ -547,7 +547,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertEquals(1,tryEx.getCatchClauses().size());
 		XCatchClause clause = tryEx.getCatchClauses().get(0);
 		assertFeatureCall("bar", clause.getExpression());
-		assertEquals("java.lang.Exception", clause.getDeclaredParam().getParameterType().getCanonicalName());
+		assertEquals("java.lang.Exception", clause.getDeclaredParam().getParameterType().getIdentifier());
 		assertEquals("e", clause.getDeclaredParam().getName());
 	}
 	

@@ -23,6 +23,6 @@ public class JvmUpperBoundTest extends TestCase {
 	}
 	
 	public void testCanonicalName_01() {
-		assertNull(upperBound.getCanonicalName());
+		assertNull(upperBound.getIdentifier());
 	}
 }

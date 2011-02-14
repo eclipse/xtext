@@ -111,7 +111,7 @@ public class JvmEnumerationTypeItemProvider
 	@Override
 	public String getText(Object object)
 	{
-		String label = ((JvmEnumerationType)object).getFullyQualifiedName();
+		String label = ((JvmEnumerationType)object).getSimpleName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_JvmEnumerationType_type") :
 			getString("_UI_JvmEnumerationType_type") + " " + label;

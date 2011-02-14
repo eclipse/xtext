@@ -20,7 +20,7 @@ public class PrimitiveTypeFactory implements ITypeFactory<Class<?>> {
 		if (Void.TYPE.equals(clazz))
 			return TypesFactory.eINSTANCE.createJvmVoid();
 		JvmPrimitiveType result = TypesFactory.eINSTANCE.createJvmPrimitiveType();
-		result.setName(clazz.getName());
+		result.setSimpleName(clazz.getName());
 		return result;
 	}
 

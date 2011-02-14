@@ -149,7 +149,7 @@ public class JvmGenericTypeItemProvider
 	@Override
 	public String getText(Object object)
 	{
-		String label = ((JvmGenericType)object).getFullyQualifiedName();
+		String label = ((JvmGenericType)object).getSimpleName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_JvmGenericType_type") :
 			getString("_UI_JvmGenericType_type") + " " + label;

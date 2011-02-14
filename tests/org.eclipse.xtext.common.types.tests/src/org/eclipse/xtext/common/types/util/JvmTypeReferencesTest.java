@@ -50,18 +50,18 @@ public class JvmTypeReferencesTest extends TestCase {
 	public void testReferenceConstruction() throws Exception {
 		assertEquals("java.util.List<? extends java.lang.CharSequence>",
 				jvmTypes().typeReference("java.util.List")
-						  .wildCardExtends("java.lang.CharSequence").create().getCanonicalName());
+						  .wildCardExtends("java.lang.CharSequence").create().getIdentifier());
 	}
 	
 	public void testReferenceConstruction_1() throws Exception {
 		assertEquals("java.util.Map<? super java.lang.String,? extends java.util.List<java.lang.Object>>",
 				jvmTypes().typeReference("java.util.Map")
 						.wildCardSuper("java.lang.String").x()
-						.wildCardExtends("java.util.List").arg("java.lang.Object").create().getCanonicalName());
+						.wildCardExtends("java.util.List").arg("java.lang.Object").create().getIdentifier());
 	}
 	
 	public void testReferenceConstruction_2() throws Exception {
-		assertEquals("java.util.List",jvmTypes().typeReference("java.util.List").create().getCanonicalName());
+		assertEquals("java.util.List",jvmTypes().typeReference("java.util.List").create().getIdentifier());
 	}
 
 }

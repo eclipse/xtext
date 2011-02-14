@@ -232,7 +232,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 		if (reference == null)
 			assertNull("expected " + expectedExpectedType + " for " + obj + " but was null", expectedExpectedType);
 		else
-			assertEquals("expression yielded unexpected type: " + obj, expectedExpectedType, reference.getCanonicalName());
+			assertEquals("expression yielded unexpected type: " + obj, expectedExpectedType, reference.getIdentifier());
 	}
 	
 	protected XExpression expressionWithExpectedType(String expression, String expectedType) throws Exception {

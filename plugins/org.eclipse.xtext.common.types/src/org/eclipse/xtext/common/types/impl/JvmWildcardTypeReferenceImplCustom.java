@@ -7,32 +7,26 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
-import java.util.List;
-
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeConstraint;
 
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 public class JvmWildcardTypeReferenceImplCustom extends JvmWildcardTypeReferenceImpl {
-	static void appendConstraintsCanonicalName(StringBuilder result, List<JvmTypeConstraint> constraints) {
-		if (constraints == null || constraints.isEmpty())
-			return;
-		int wasLength = result.length();
-		for (JvmTypeConstraint constraint : constraints) {
-			if (result.length() != wasLength)
-				result.append(" & ");
-			result.append(constraint.getCanonicalName());
-		}
-	}
-
+	
 	@Override
-	public String getCanonicalName() {
-		if (constraints != null && !constraints.isEmpty()) {
-			StringBuilder mutableResult = new StringBuilder(64);
-			mutableResult.append("? ");
-			appendConstraintsCanonicalName(mutableResult, constraints);
-			return mutableResult.toString();
-		}
-		return "?";
+	public String getIdentifier() {
+		return NameConcatHelper.computeFor(this, NameConcatHelper.NameType.ID);
+	}
+	
+	@Override
+	public String getQualifiedName() {
+		return NameConcatHelper.computeFor(this, NameConcatHelper.NameType.QUALIFIED);
+	}
+	
+	@Override
+	public String getSimpleName() {
+		return NameConcatHelper.computeFor(this, NameConcatHelper.NameType.SIMPLE);
 	}
 	
 	@Override

@@ -48,7 +48,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		JvmField next = iterable.iterator().next();
 		assertEquals("string",next.getSimpleName());
 		assertEquals(JvmVisibility.PRIVATE, next.getVisibility());
-		assertEquals("java.lang.String", next.getType().getCanonicalName());
+		assertEquals("java.lang.String", next.getType().getIdentifier());
 	}
 	
 	public void testCaseFunction_00() throws Exception {
@@ -60,24 +60,24 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		JvmOperation dispatch = find(operations, new Predicate<JvmOperation>() {
 			public boolean apply(JvmOperation input) {
 				return input.getSimpleName().equals("foo")
-						&& input.getParameters().get(0).getParameterType().getCanonicalName()
+						&& input.getParameters().get(0).getParameterType().getIdentifier()
 								.equals(Object.class.getName());
 			}
 		});
-		assertEquals(Void.class.getName(), dispatch.getReturnType().getCanonicalName());
+		assertEquals(Void.class.getName(), dispatch.getReturnType().getIdentifier());
 		
 		// two internal case methods
 		find(operations, new Predicate<JvmOperation>() {
 			public boolean apply(JvmOperation input) {
 				return input.getSimpleName().equals("_foo")
-				&& input.getParameters().get(0).getParameterType().getCanonicalName()
+				&& input.getParameters().get(0).getParameterType().getIdentifier()
 				.equals(Object.class.getName());
 			}
 		});
 		find(operations, new Predicate<JvmOperation>() {
 			public boolean apply(JvmOperation input) {
 				return input.getSimpleName().equals("_foo")
-				&& input.getParameters().get(0).getParameterType().getCanonicalName()
+				&& input.getParameters().get(0).getParameterType().getIdentifier()
 				.equals(String.class.getName());
 			}
 		});
@@ -92,30 +92,30 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		JvmOperation dispatch = find(operations, new Predicate<JvmOperation>() {
 			public boolean apply(JvmOperation input) {
 				return input.getSimpleName().equals("foo")
-				&& input.getParameters().get(0).getParameterType().getCanonicalName()
+				&& input.getParameters().get(0).getParameterType().getIdentifier()
 				.equals(Object.class.getName());
 			}
 		});
-		assertEquals(Void.class.getName(), dispatch.getReturnType().getCanonicalName());
+		assertEquals(Void.class.getName(), dispatch.getReturnType().getIdentifier());
 		assertEquals(2, dispatch.getParameters().size());
 		
 		dispatch = find(operations, new Predicate<JvmOperation>() {
 			public boolean apply(JvmOperation input) {
 				return input.getSimpleName().equals("foo")
-				&& input.getParameters().get(0).getParameterType().getCanonicalName()
+				&& input.getParameters().get(0).getParameterType().getIdentifier()
 				.equals(String.class.getName());
 			}
 		});
-		assertEquals(Void.class.getName(), dispatch.getReturnType().getCanonicalName());
+		assertEquals(Void.class.getName(), dispatch.getReturnType().getIdentifier());
 		assertEquals(1, dispatch.getParameters().size());
 		
 		// two internal case methods
 		find(operations, new Predicate<JvmOperation>() {
 			public boolean apply(JvmOperation input) {
 				return input.getSimpleName().equals("_foo")
-				&& input.getParameters().get(0).getParameterType().getCanonicalName()
+				&& input.getParameters().get(0).getParameterType().getIdentifier()
 				.equals(Object.class.getName())
-				&& input.getParameters().get(1).getParameterType().getCanonicalName()
+				&& input.getParameters().get(1).getParameterType().getIdentifier()
 				.equals(String.class.getName())
 				;
 			}
@@ -123,7 +123,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		find(operations, new Predicate<JvmOperation>() {
 			public boolean apply(JvmOperation input) {
 				return input.getSimpleName().equals("_foo")
-				&& input.getParameters().get(0).getParameterType().getCanonicalName()
+				&& input.getParameters().get(0).getParameterType().getIdentifier()
 				.equals(String.class.getName());
 			}
 		});
@@ -138,24 +138,24 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		JvmOperation dispatch = find(operations, new Predicate<JvmOperation>() {
 			public boolean apply(JvmOperation input) {
 				return input.getSimpleName().equals("foo")
-				&& input.getParameters().get(0).getParameterType().getCanonicalName()
+				&& input.getParameters().get(0).getParameterType().getIdentifier()
 				.equals(Object.class.getName());
 			}
 		});
-		assertEquals(String.class.getName(), dispatch.getReturnType().getCanonicalName());
+		assertEquals(String.class.getName(), dispatch.getReturnType().getIdentifier());
 		
 		// two internal case methods
 		find(operations, new Predicate<JvmOperation>() {
 			public boolean apply(JvmOperation input) {
 				return input.getSimpleName().equals("_foo")
-				&& input.getParameters().get(0).getParameterType().getCanonicalName()
+				&& input.getParameters().get(0).getParameterType().getIdentifier()
 				.equals(Object.class.getName());
 			}
 		});
 		find(operations, new Predicate<JvmOperation>() {
 			public boolean apply(JvmOperation input) {
 				return input.getSimpleName().equals("_foo")
-				&& input.getParameters().get(0).getParameterType().getCanonicalName()
+				&& input.getParameters().get(0).getParameterType().getIdentifier()
 				.equals(String.class.getName());
 			}
 		});
@@ -167,7 +167,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		XtendClass xtendClass = xtendFile.getXtendClass();
 		assertEquals(associations.getInferredType(xtendClass), inferredType);
 		assertEquals(xtendClass, associations.getXtendClass(inferredType));
-		assertEquals(xtendClass.getCanonicalName(), inferredType.getCanonicalName());
+		assertEquals(xtendClass.getIdentifier(), inferredType.getIdentifier());
 		assertEquals(JvmVisibility.PUBLIC, inferredType.getVisibility());
 	}
 
@@ -179,7 +179,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		JvmMember inferredFirstMember = inferredType.getMembers().get(0);
 		assertTrue(inferredFirstMember instanceof JvmConstructor);
 		assertEquals(associations.getInferredConstructor(xtendClass), inferredFirstMember);
-		assertEquals(xtendClass.getCanonicalName(), inferredFirstMember.getCanonicalName());
+		assertEquals(xtendClass.getIdentifier() + "." + xtendClass.getName() + "()", inferredFirstMember.getIdentifier());
 	}
 
 	public void testInferredSuperType() throws Exception {
@@ -218,8 +218,8 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		XtendClass xtendClass = xtendFile.getXtendClass();
 		assertEquals(1, inferredType.getTypeParameters().size());
 		assertFalse(xtendClass.getTypeParameters().get(0) == inferredType.getTypeParameters().get(0));
-		assertEquals(xtendClass.getTypeParameters().get(0).getCanonicalName(), inferredType.getTypeParameters().get(0)
-				.getCanonicalName());
+		assertEquals(xtendClass.getTypeParameters().get(0).getIdentifier(), inferredType.getTypeParameters().get(0)
+				.getIdentifier());
 	}
 
 	public void testInferredTypeWithSelfReferringTypeParameter() throws Exception {
@@ -242,7 +242,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		JvmMember jvmMember = jvmMembers.get(1);
 		assertTrue(jvmMember instanceof JvmOperation);
 		XtendFunction xtendFunction = (XtendFunction) xtendClass.getMembers().get(0);
-		assertEquals(xtendFunction.getCanonicalName(), jvmMember.getCanonicalName());
+		assertEquals(xtendFunction.getIdentifier() + "()", jvmMember.getIdentifier());
 		assertEquals(jvmMember, associations.getDirectlyInferredOperation(xtendFunction));
 		assertEquals(xtendFunction, associations.getXtendFunction((JvmOperation) inferredType.getMembers().get(1)));
 	}
@@ -265,7 +265,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		assertEquals(1, jvmOperation.getParameters().size());
 		JvmFormalParameter jvmParameter = jvmOperation.getParameters().get(0);
 		JvmFormalParameter xtendParameter = xtendFunction.getParameters().get(0);
-		assertEquals(xtendParameter.getCanonicalName(), jvmParameter.getCanonicalName());
+		assertEquals(xtendParameter.getIdentifier(), jvmParameter.getIdentifier());
 		assertEquals(xtendParameter.getParameterType().getType(), jvmParameter.getParameterType().getType());
 	}
 

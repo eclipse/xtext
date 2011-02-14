@@ -63,7 +63,7 @@ public class TypeReferences {
 		if (type instanceof JvmGenericType) {
 			EList<JvmTypeParameter> list = ((JvmGenericType) type).getTypeParameters();
 			if (!typeReferences.isEmpty() && list.size() != typeReferences.size()) {
-				throw new IllegalArgumentException("The type " + type.getCanonicalName() + " expects " + list.size()
+				throw new IllegalArgumentException("The type " + type.getIdentifier() + " expects " + list.size()
 						+ " type arguments, but was " + typeReferences.size()
 						+ ". Either pass zero arguments (raw type) or the correct number.");
 			}
@@ -85,7 +85,7 @@ public class TypeReferences {
 		if (left.getType() instanceof JvmGenericType) {
 			EList<JvmTypeParameter> typeParameters = ((JvmGenericType) left.getType()).getTypeParameters();
 			if (typeParameters.size() <= index) {
-				throw new IllegalArgumentException("The type " + left.getType().getCanonicalName()
+				throw new IllegalArgumentException("The type " + left.getType().getIdentifier()
 						+ " cannot be parameterized with more than " + typeParameters.size() + " type arguments.");
 			}
 			if (left instanceof JvmParameterizedTypeReference) {
@@ -97,7 +97,7 @@ public class TypeReferences {
 			final JvmTypeParameter jvmTypeParameter = typeParameters.get(index);
 			return createTypeRef(jvmTypeParameter);
 		}
-		throw new IllegalArgumentException(left.getType().getCanonicalName() + " is not generic.");
+		throw new IllegalArgumentException(left.getType().getIdentifier() + " is not generic.");
 	}
 
 	public JvmTypeReference wildCardExtends(JvmTypeReference clone) {
@@ -146,7 +146,7 @@ public class TypeReferences {
 	public boolean is(final JvmTypeReference reference, final Class<?> clazz) {
 		if (isNullOrProxy(reference))
 			return false;
-		final boolean equals = clazz.getCanonicalName().equals(reference.getType().getCanonicalName());
+		final boolean equals = clazz.getCanonicalName().equals(reference.getType().getIdentifier());
 		return equals;
 	}
 

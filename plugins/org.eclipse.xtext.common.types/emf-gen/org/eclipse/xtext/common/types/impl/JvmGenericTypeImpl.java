@@ -24,9 +24,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
@@ -138,7 +138,7 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Iterable<JvmType> getExtendedInterfaces()
+	public Iterable<JvmTypeReference> getExtendedInterfaces()
 	{
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -150,7 +150,7 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Iterable<JvmType> getExtendedClasses()
+	public JvmTypeReference getExtendedClass()
 	{
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT

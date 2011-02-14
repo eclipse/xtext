@@ -73,7 +73,7 @@ public class JvmFeatureItemProvider
 	@Override
 	public String getText(Object object)
 	{
-		String label = ((JvmFeature)object).getFullyQualifiedName();
+		String label = ((JvmFeature)object).getSimpleName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_JvmFeature_type") :
 			getString("_UI_JvmFeature_type") + " " + label;

@@ -29,7 +29,8 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl#getDeclaringType <em>Declaring Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl#getVisibility <em>Visibility</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl#getFullyQualifiedName <em>Fully Qualified Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl#getSimpleName <em>Simple Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl#getIdentifier <em>Identifier</em>}</li>
  * </ul>
  * </p>
  *
@@ -58,24 +59,44 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImpl implements J
 	protected JvmVisibility visibility = VISIBILITY_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getFullyQualifiedName() <em>Fully Qualified Name</em>}' attribute.
+	 * The default value of the '{@link #getSimpleName() <em>Simple Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFullyQualifiedName()
+	 * @see #getSimpleName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String FULLY_QUALIFIED_NAME_EDEFAULT = null;
+	protected static final String SIMPLE_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getFullyQualifiedName() <em>Fully Qualified Name</em>}' attribute.
+	 * The cached value of the '{@link #getSimpleName() <em>Simple Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFullyQualifiedName()
+	 * @see #getSimpleName()
 	 * @generated
 	 * @ordered
 	 */
-	protected String fullyQualifiedName = FULLY_QUALIFIED_NAME_EDEFAULT;
+	protected String simpleName = SIMPLE_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIdentifier()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String IDENTIFIER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIdentifier()
+	 * @generated
+	 * @ordered
+	 */
+	protected String identifier = IDENTIFIER_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -171,30 +192,40 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImpl implements J
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getFullyQualifiedName()
-	{
-		return fullyQualifiedName;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setFullyQualifiedName(String newFullyQualifiedName)
-	{
-		String oldFullyQualifiedName = fullyQualifiedName;
-		fullyQualifiedName = newFullyQualifiedName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_MEMBER__FULLY_QUALIFIED_NAME, oldFullyQualifiedName, fullyQualifiedName));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getSimpleName()
+	{
+		return simpleName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSimpleName(String newSimpleName)
+	{
+		String oldSimpleName = simpleName;
+		simpleName = newSimpleName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_MEMBER__SIMPLE_NAME, oldSimpleName, simpleName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getIdentifier()
+	{
+		return identifier;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void internalSetIdentifier(String identifier)
 	{
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -206,7 +237,7 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImpl implements J
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getCanonicalName()
+	public String getQualifiedName()
 	{
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -277,8 +308,10 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImpl implements J
 				return getDeclaringType();
 			case TypesPackage.JVM_MEMBER__VISIBILITY:
 				return getVisibility();
-			case TypesPackage.JVM_MEMBER__FULLY_QUALIFIED_NAME:
-				return getFullyQualifiedName();
+			case TypesPackage.JVM_MEMBER__SIMPLE_NAME:
+				return getSimpleName();
+			case TypesPackage.JVM_MEMBER__IDENTIFIER:
+				return getIdentifier();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -299,8 +332,8 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImpl implements J
 			case TypesPackage.JVM_MEMBER__VISIBILITY:
 				setVisibility((JvmVisibility)newValue);
 				return;
-			case TypesPackage.JVM_MEMBER__FULLY_QUALIFIED_NAME:
-				setFullyQualifiedName((String)newValue);
+			case TypesPackage.JVM_MEMBER__SIMPLE_NAME:
+				setSimpleName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -322,8 +355,8 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImpl implements J
 			case TypesPackage.JVM_MEMBER__VISIBILITY:
 				setVisibility(VISIBILITY_EDEFAULT);
 				return;
-			case TypesPackage.JVM_MEMBER__FULLY_QUALIFIED_NAME:
-				setFullyQualifiedName(FULLY_QUALIFIED_NAME_EDEFAULT);
+			case TypesPackage.JVM_MEMBER__SIMPLE_NAME:
+				setSimpleName(SIMPLE_NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -343,8 +376,10 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImpl implements J
 				return getDeclaringType() != null;
 			case TypesPackage.JVM_MEMBER__VISIBILITY:
 				return visibility != VISIBILITY_EDEFAULT;
-			case TypesPackage.JVM_MEMBER__FULLY_QUALIFIED_NAME:
-				return FULLY_QUALIFIED_NAME_EDEFAULT == null ? fullyQualifiedName != null : !FULLY_QUALIFIED_NAME_EDEFAULT.equals(fullyQualifiedName);
+			case TypesPackage.JVM_MEMBER__SIMPLE_NAME:
+				return SIMPLE_NAME_EDEFAULT == null ? simpleName != null : !SIMPLE_NAME_EDEFAULT.equals(simpleName);
+			case TypesPackage.JVM_MEMBER__IDENTIFIER:
+				return IDENTIFIER_EDEFAULT == null ? identifier != null : !IDENTIFIER_EDEFAULT.equals(identifier);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -362,8 +397,10 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImpl implements J
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (visibility: ");
 		result.append(visibility);
-		result.append(", fullyQualifiedName: ");
-		result.append(fullyQualifiedName);
+		result.append(", simpleName: ");
+		result.append(simpleName);
+		result.append(", identifier: ");
+		result.append(identifier);
 		result.append(')');
 		return result.toString();
 	}

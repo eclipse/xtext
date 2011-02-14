@@ -173,7 +173,7 @@ public class JvmFieldItemProvider
 	@Override
 	public String getText(Object object)
 	{
-		String label = ((JvmField)object).getFullyQualifiedName();
+		String label = ((JvmField)object).getSimpleName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_JvmField_type") :
 			getString("_UI_JvmField_type") + " " + label;

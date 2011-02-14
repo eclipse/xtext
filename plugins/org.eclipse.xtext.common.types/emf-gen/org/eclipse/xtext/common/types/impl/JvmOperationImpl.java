@@ -33,7 +33,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *
  * @generated
  */
-public class JvmOperationImpl extends JvmExecutableImpl implements JvmOperation
+public class JvmOperationImpl extends JvmExecutableImplCustom implements JvmOperation
 {
 	/**
 	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.

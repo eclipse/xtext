@@ -46,7 +46,7 @@ public class JvmFeatureSignatureProvider implements Function<JvmFeature, String>
 			while (params.hasNext()){
 				JvmTypeReference resolvedParameterType = context.getLowerBound(params.next().getParameterType());
 				if (resolvedParameterType != null)
-					builder.append(resolvedParameterType.getCanonicalName());
+					builder.append(resolvedParameterType.getIdentifier());
 				else
 					builder.append("null");
 				if (params.hasNext())

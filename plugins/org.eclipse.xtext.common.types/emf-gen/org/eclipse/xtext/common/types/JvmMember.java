@@ -16,7 +16,8 @@ package org.eclipse.xtext.common.types;
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmMember#getDeclaringType <em>Declaring Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmMember#getVisibility <em>Visibility</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.JvmMember#getFullyQualifiedName <em>Fully Qualified Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmMember#getSimpleName <em>Simple Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmMember#getIdentifier <em>Identifier</em>}</li>
  * </ul>
  * </p>
  *
@@ -84,37 +85,52 @@ public interface JvmMember extends JvmAnnotationTarget, JvmIdentifiableElement
 	void setVisibility(JvmVisibility value);
 
 	/**
-	 * Returns the value of the '<em><b>Fully Qualified Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>Simple Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Fully Qualified Name</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Simple Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Fully Qualified Name</em>' attribute.
-	 * @see #setFullyQualifiedName(String)
-	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmMember_FullyQualifiedName()
+	 * @return the value of the '<em>Simple Name</em>' attribute.
+	 * @see #setSimpleName(String)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmMember_SimpleName()
 	 * @model
 	 * @generated
 	 */
-	String getFullyQualifiedName();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmMember#getFullyQualifiedName <em>Fully Qualified Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Fully Qualified Name</em>' attribute.
-	 * @see #getFullyQualifiedName()
-	 * @generated
-	 */
-	void setFullyQualifiedName(String value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
 	String getSimpleName();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmMember#getSimpleName <em>Simple Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Simple Name</em>' attribute.
+	 * @see #getSimpleName()
+	 * @generated
+	 */
+	void setSimpleName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Identifier</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Identifier</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Identifier</em>' attribute.
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmMember_Identifier()
+	 * @model transient="true" changeable="false" derived="true"
+	 * @generated
+	 */
+	String getIdentifier();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void internalSetIdentifier(String identifier);
 
 } // JvmMember

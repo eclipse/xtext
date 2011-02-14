@@ -65,7 +65,8 @@ public class JvmMemberItemProvider
 			super.getPropertyDescriptors(object);
 
 			addVisibilityPropertyDescriptor(object);
-			addFullyQualifiedNamePropertyDescriptor(object);
+			addSimpleNamePropertyDescriptor(object);
+			addIdentifierPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -94,21 +95,44 @@ public class JvmMemberItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Fully Qualified Name feature.
+	 * This adds a property descriptor for the Simple Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addFullyQualifiedNamePropertyDescriptor(Object object)
+	protected void addSimpleNamePropertyDescriptor(Object object)
 	{
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_JvmMember_fullyQualifiedName_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_JvmMember_fullyQualifiedName_feature", "_UI_JvmMember_type"),
-				 TypesPackage.Literals.JVM_MEMBER__FULLY_QUALIFIED_NAME,
+				 getString("_UI_JvmMember_simpleName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_JvmMember_simpleName_feature", "_UI_JvmMember_type"),
+				 TypesPackage.Literals.JVM_MEMBER__SIMPLE_NAME,
 				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Identifier feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIdentifierPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_JvmMember_identifier_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_JvmMember_identifier_feature", "_UI_JvmMember_type"),
+				 TypesPackage.Literals.JVM_MEMBER__IDENTIFIER,
+				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
@@ -125,7 +149,7 @@ public class JvmMemberItemProvider
 	@Override
 	public String getText(Object object)
 	{
-		String label = ((JvmMember)object).getFullyQualifiedName();
+		String label = ((JvmMember)object).getSimpleName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_JvmMember_type") :
 			getString("_UI_JvmMember_type") + " " + label;
@@ -146,7 +170,8 @@ public class JvmMemberItemProvider
 		switch (notification.getFeatureID(JvmMember.class))
 		{
 			case TypesPackage.JVM_MEMBER__VISIBILITY:
-			case TypesPackage.JVM_MEMBER__FULLY_QUALIFIED_NAME:
+			case TypesPackage.JVM_MEMBER__SIMPLE_NAME:
+			case TypesPackage.JVM_MEMBER__IDENTIFIER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

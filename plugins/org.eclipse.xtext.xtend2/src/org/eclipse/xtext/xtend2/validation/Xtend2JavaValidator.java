@@ -199,7 +199,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 	}
 
 	protected String canonicalName(JvmIdentifiableElement element) {
-		return (element != null) ? notNull(element.getCanonicalName()) : null;
+		return (element != null) ? notNull(element.getIdentifier()) : null;
 	}
 
 	@Check

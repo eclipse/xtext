@@ -12,21 +12,20 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 public class JvmGenericTypeImplCustom extends JvmGenericTypeImpl {
 	
-	protected Iterable<JvmType> extendedInterfaces;
-
-	protected Iterable<JvmType> extendedClasses;
+	protected Iterable<JvmTypeReference> extendedInterfaces;
 
 	@Override
-	public Iterable<JvmType> getExtendedInterfaces() {
+	public Iterable<JvmTypeReference> getExtendedInterfaces() {
 		if (extendedInterfaces == null) {
-			extendedInterfaces = Iterables.transform(
-					Iterables.filter(getSuperTypes(), new Predicate<JvmTypeReference>() {
+			extendedInterfaces = Iterables.filter(getSuperTypes(), new Predicate<JvmTypeReference>() {
 						public boolean apply(JvmTypeReference typeReference) {
 							JvmType type = typeReference.getType();
 							if (type instanceof JvmGenericType) {
@@ -34,33 +33,18 @@ public class JvmGenericTypeImplCustom extends JvmGenericTypeImpl {
 							}
 							return false;
 						}
-					}), new Function<JvmTypeReference, JvmType>() {
-						public JvmType apply(JvmTypeReference from) {
-							return from.getType();
-						}
 					});
 		}
 		return extendedInterfaces;
 	}
 
 	@Override
-	public Iterable<JvmType> getExtendedClasses() {
-		if (extendedClasses == null) {
-			extendedClasses = Iterables.transform(Iterables.filter(getSuperTypes(), new Predicate<JvmTypeReference>() {
-				public boolean apply(JvmTypeReference typeReference) {
-					JvmType type = typeReference.getType();
-					if (type instanceof JvmGenericType) {
-						return !((JvmGenericType) type).isInterface();
-					}
-					return false;
-				}
-			}), new Function<JvmTypeReference, JvmType>() {
-				public JvmType apply(JvmTypeReference from) {
-					return from.getType();
-				}
-			});
+	public JvmTypeReference getExtendedClass() {
+		for(JvmTypeReference candidate: getSuperTypes()) {
+			if (candidate.getType() instanceof JvmGenericType && !((JvmGenericType) candidate.getType()).isInterface())
+				return candidate;
 		}
-		return extendedClasses;
+		return null;
 	}
 
 	@Override
@@ -68,11 +52,6 @@ public class JvmGenericTypeImplCustom extends JvmGenericTypeImpl {
 		return !isAbstract() && !isInterface();
 	}
 
-	@Override
-	public String getCanonicalName() {
-		return fullyQualifiedName;
-	}
-	
 	@Override
 	public Iterable<JvmConstructor> getDeclaredConstructors() {
 		return Iterables.filter(getMembers(), JvmConstructor.class);

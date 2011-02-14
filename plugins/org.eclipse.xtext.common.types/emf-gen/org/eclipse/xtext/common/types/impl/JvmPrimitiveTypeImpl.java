@@ -21,7 +21,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.impl.JvmPrimitiveTypeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmPrimitiveTypeImpl#getSimpleName <em>Simple Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -30,24 +30,24 @@ import org.eclipse.xtext.common.types.TypesPackage;
 public class JvmPrimitiveTypeImpl extends JvmComponentTypeImpl implements JvmPrimitiveType
 {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The default value of the '{@link #getSimpleName() <em>Simple Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getSimpleName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
+	protected static final String SIMPLE_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getSimpleName() <em>Simple Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getSimpleName()
 	 * @generated
 	 * @ordered
 	 */
-	protected String name = NAME_EDEFAULT;
+	protected String simpleName = SIMPLE_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -75,9 +75,9 @@ public class JvmPrimitiveTypeImpl extends JvmComponentTypeImpl implements JvmPri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName()
+	public String getSimpleName()
 	{
-		return name;
+		return simpleName;
 	}
 
 	/**
@@ -85,12 +85,12 @@ public class JvmPrimitiveTypeImpl extends JvmComponentTypeImpl implements JvmPri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setName(String newName)
+	public void setSimpleName(String newSimpleName)
 	{
-		String oldName = name;
-		name = newName;
+		String oldSimpleName = simpleName;
+		simpleName = newSimpleName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_PRIMITIVE_TYPE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_PRIMITIVE_TYPE__SIMPLE_NAME, oldSimpleName, simpleName));
 	}
 
 	/**
@@ -103,8 +103,8 @@ public class JvmPrimitiveTypeImpl extends JvmComponentTypeImpl implements JvmPri
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_PRIMITIVE_TYPE__NAME:
-				return getName();
+			case TypesPackage.JVM_PRIMITIVE_TYPE__SIMPLE_NAME:
+				return getSimpleName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -119,8 +119,8 @@ public class JvmPrimitiveTypeImpl extends JvmComponentTypeImpl implements JvmPri
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_PRIMITIVE_TYPE__NAME:
-				setName((String)newValue);
+			case TypesPackage.JVM_PRIMITIVE_TYPE__SIMPLE_NAME:
+				setSimpleName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -136,8 +136,8 @@ public class JvmPrimitiveTypeImpl extends JvmComponentTypeImpl implements JvmPri
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_PRIMITIVE_TYPE__NAME:
-				setName(NAME_EDEFAULT);
+			case TypesPackage.JVM_PRIMITIVE_TYPE__SIMPLE_NAME:
+				setSimpleName(SIMPLE_NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -153,8 +153,8 @@ public class JvmPrimitiveTypeImpl extends JvmComponentTypeImpl implements JvmPri
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_PRIMITIVE_TYPE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case TypesPackage.JVM_PRIMITIVE_TYPE__SIMPLE_NAME:
+				return SIMPLE_NAME_EDEFAULT == null ? simpleName != null : !SIMPLE_NAME_EDEFAULT.equals(simpleName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -170,8 +170,8 @@ public class JvmPrimitiveTypeImpl extends JvmComponentTypeImpl implements JvmPri
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
+		result.append(" (simpleName: ");
+		result.append(simpleName);
 		result.append(')');
 		return result.toString();
 	}

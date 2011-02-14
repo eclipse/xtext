@@ -10,6 +10,9 @@ package org.eclipse.xtext.common.types.impl;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 public class JvmArrayTypeImplCustom extends JvmArrayTypeImpl {
 
 	@Override
@@ -28,9 +31,23 @@ public class JvmArrayTypeImplCustom extends JvmArrayTypeImpl {
 	}
 
 	@Override
-	public String getCanonicalName() {
+	public String getIdentifier() {
 		if (componentType != null)
-			return getComponentType().getCanonicalName() + "[]";
+			return getComponentType().getIdentifier() + "[]";
+		return null;
+	}
+	
+	@Override
+	public String getSimpleName() {
+		if (componentType != null)
+			return getComponentType().getSimpleName() + "[]";
+		return null;
+	}
+	
+	@Override
+	public String getQualifiedName() {
+		if (componentType != null)
+			return getComponentType().getQualifiedName() + "[]";
 		return null;
 	}
 

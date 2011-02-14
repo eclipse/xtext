@@ -139,7 +139,7 @@ public class JvmExecutableItemProvider
 	@Override
 	public String getText(Object object)
 	{
-		String label = ((JvmExecutable)object).getFullyQualifiedName();
+		String label = ((JvmExecutable)object).getSimpleName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_JvmExecutable_type") :
 			getString("_UI_JvmExecutable_type") + " " + label;

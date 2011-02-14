@@ -54,18 +54,18 @@ public interface JvmGenericType extends JvmDeclaredType, JvmTypeParameterDeclara
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="org.eclipse.xtext.common.types.Iterable<org.eclipse.xtext.common.types.JvmType>"
+	 * @model kind="operation" dataType="org.eclipse.xtext.common.types.Iterable<org.eclipse.xtext.common.types.JvmTypeReference>"
 	 * @generated
 	 */
-	Iterable<JvmType> getExtendedInterfaces();
+	Iterable<JvmTypeReference> getExtendedInterfaces();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="org.eclipse.xtext.common.types.Iterable<org.eclipse.xtext.common.types.JvmType>"
+	 * @model kind="operation"
 	 * @generated
 	 */
-	Iterable<JvmType> getExtendedClasses();
+	JvmTypeReference getExtendedClass();
 
 	/**
 	 * <!-- begin-user-doc -->

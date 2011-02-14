@@ -10,7 +10,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
@@ -105,7 +104,6 @@ public class XtypeSwitch<T>
 				T result = caseXFunctionTypeRef(xFunctionTypeRef);
 				if (result == null) result = caseJvmParameterizedTypeReference(xFunctionTypeRef);
 				if (result == null) result = caseJvmTypeReference(xFunctionTypeRef);
-				if (result == null) result = caseJvmIdentifiableElement(xFunctionTypeRef);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -125,22 +123,6 @@ public class XtypeSwitch<T>
 	 * @generated
 	 */
 	public T caseXFunctionTypeRef(XFunctionTypeRef object)
-	{
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Jvm Identifiable Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Jvm Identifiable Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseJvmIdentifiableElement(JvmIdentifiableElement object)
 	{
 		return null;
 	}

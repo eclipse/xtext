@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
+import org.eclipse.xtext.common.types.impl.JvmFieldImpl;
+
 import junit.framework.TestCase;
 
 /**
@@ -23,20 +25,20 @@ public class JvmFieldTest extends TestCase {
 	}
 	
 	public void testCanonicalName_01() {
-		assertNull(field.getCanonicalName(), field.getCanonicalName());
+		assertNull(field.getIdentifier(), field.getIdentifier());
 	}
 	
 	public void testCanonicalName_02() {
-		field.setFullyQualifiedName("java.lang.String.name");
-		assertEquals("java.lang.String.name", field.getCanonicalName());
+		field.internalSetIdentifier("java.lang.String.name");
+		assertEquals("java.lang.String.name", field.getIdentifier());
 	}
 	
-	public void testGetSimpleName_01() {
-		assertNull(field.getSimpleName());
-	}
-	
-	public void testGetSimpleName_02() {
-		field.setFullyQualifiedName("java.lang.String.name");
-		assertEquals("name", field.getSimpleName());
-	}
+//	public void testGetSimpleName_01() {
+//		assertNull(field.getSimpleName());
+//	}
+//	
+//	public void testGetSimpleName_02() {
+//		field.setCanonicalName("java.lang.String.name");
+//		assertEquals("name", field.getSimpleName());
+//	}
 }

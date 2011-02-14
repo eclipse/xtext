@@ -23,7 +23,12 @@ public class XtendClassImplCustom extends XtendClassImpl {
 	}
 	
 	@Override
-	public String getCanonicalName() {
+	public String getIdentifier() {
+		return getQualifiedName();
+	}
+	
+	@Override
+	public String getQualifiedName() {
 		String packageName = getPackageName();
 		if (packageName!=null)
 			return packageName+"."+getSimpleName();

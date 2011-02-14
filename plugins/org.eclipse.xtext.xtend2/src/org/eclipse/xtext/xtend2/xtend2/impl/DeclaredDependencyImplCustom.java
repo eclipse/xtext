@@ -71,8 +71,14 @@ public class DeclaredDependencyImplCustom extends DeclaredDependencyImpl {
 	}
 
 	@Override
-	public String getCanonicalName() {
-		return eContainer != null ? ((XtendClass) eContainer()).getCanonicalName() + "." + getSimpleName()
+	public String getIdentifier() {
+		return eContainer != null ? ((XtendClass) eContainer()).getIdentifier() + "." + getSimpleName()
+				: getSimpleName();
+	}
+	
+	@Override
+	public String getQualifiedName() {
+		return eContainer != null ? ((XtendClass) eContainer()).getQualifiedName() + "." + getSimpleName()
 				: getSimpleName();
 	}
 }

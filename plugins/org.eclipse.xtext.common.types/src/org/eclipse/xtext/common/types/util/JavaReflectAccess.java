@@ -114,7 +114,7 @@ public class JavaReflectAccess {
 			return Object.class;
 		}
 		try {
-			return getClassFinder().forName(type.getCanonicalName());
+			return getClassFinder().forName(type.getIdentifier());
 		} catch (ClassNotFoundException e) {
 			if (log.isDebugEnabled())
 				log.debug(e.getMessage(), e);

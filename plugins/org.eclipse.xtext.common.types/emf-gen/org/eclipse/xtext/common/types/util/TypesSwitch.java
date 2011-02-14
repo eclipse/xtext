@@ -152,10 +152,10 @@ public class TypesSwitch<T>
 			{
 				JvmDeclaredType jvmDeclaredType = (JvmDeclaredType)theEObject;
 				T result = caseJvmDeclaredType(jvmDeclaredType);
-				if (result == null) result = caseJvmComponentType(jvmDeclaredType);
 				if (result == null) result = caseJvmMember(jvmDeclaredType);
-				if (result == null) result = caseJvmType(jvmDeclaredType);
+				if (result == null) result = caseJvmComponentType(jvmDeclaredType);
 				if (result == null) result = caseJvmAnnotationTarget(jvmDeclaredType);
+				if (result == null) result = caseJvmType(jvmDeclaredType);
 				if (result == null) result = caseJvmIdentifiableElement(jvmDeclaredType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -190,7 +190,6 @@ public class TypesSwitch<T>
 			{
 				JvmTypeConstraint jvmTypeConstraint = (JvmTypeConstraint)theEObject;
 				T result = caseJvmTypeConstraint(jvmTypeConstraint);
-				if (result == null) result = caseJvmIdentifiableElement(jvmTypeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -199,7 +198,6 @@ public class TypesSwitch<T>
 				JvmUpperBound jvmUpperBound = (JvmUpperBound)theEObject;
 				T result = caseJvmUpperBound(jvmUpperBound);
 				if (result == null) result = caseJvmTypeConstraint(jvmUpperBound);
-				if (result == null) result = caseJvmIdentifiableElement(jvmUpperBound);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -208,7 +206,6 @@ public class TypesSwitch<T>
 				JvmLowerBound jvmLowerBound = (JvmLowerBound)theEObject;
 				T result = caseJvmLowerBound(jvmLowerBound);
 				if (result == null) result = caseJvmTypeConstraint(jvmLowerBound);
-				if (result == null) result = caseJvmIdentifiableElement(jvmLowerBound);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -217,10 +214,10 @@ public class TypesSwitch<T>
 				JvmAnnotationType jvmAnnotationType = (JvmAnnotationType)theEObject;
 				T result = caseJvmAnnotationType(jvmAnnotationType);
 				if (result == null) result = caseJvmDeclaredType(jvmAnnotationType);
-				if (result == null) result = caseJvmComponentType(jvmAnnotationType);
 				if (result == null) result = caseJvmMember(jvmAnnotationType);
-				if (result == null) result = caseJvmType(jvmAnnotationType);
+				if (result == null) result = caseJvmComponentType(jvmAnnotationType);
 				if (result == null) result = caseJvmAnnotationTarget(jvmAnnotationType);
+				if (result == null) result = caseJvmType(jvmAnnotationType);
 				if (result == null) result = caseJvmIdentifiableElement(jvmAnnotationType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -230,10 +227,10 @@ public class TypesSwitch<T>
 				JvmEnumerationType jvmEnumerationType = (JvmEnumerationType)theEObject;
 				T result = caseJvmEnumerationType(jvmEnumerationType);
 				if (result == null) result = caseJvmDeclaredType(jvmEnumerationType);
-				if (result == null) result = caseJvmComponentType(jvmEnumerationType);
 				if (result == null) result = caseJvmMember(jvmEnumerationType);
-				if (result == null) result = caseJvmType(jvmEnumerationType);
+				if (result == null) result = caseJvmComponentType(jvmEnumerationType);
 				if (result == null) result = caseJvmAnnotationTarget(jvmEnumerationType);
+				if (result == null) result = caseJvmType(jvmEnumerationType);
 				if (result == null) result = caseJvmIdentifiableElement(jvmEnumerationType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -256,10 +253,10 @@ public class TypesSwitch<T>
 				T result = caseJvmGenericType(jvmGenericType);
 				if (result == null) result = caseJvmDeclaredType(jvmGenericType);
 				if (result == null) result = caseJvmTypeParameterDeclarator(jvmGenericType);
-				if (result == null) result = caseJvmComponentType(jvmGenericType);
 				if (result == null) result = caseJvmMember(jvmGenericType);
-				if (result == null) result = caseJvmType(jvmGenericType);
+				if (result == null) result = caseJvmComponentType(jvmGenericType);
 				if (result == null) result = caseJvmAnnotationTarget(jvmGenericType);
+				if (result == null) result = caseJvmType(jvmGenericType);
 				if (result == null) result = caseJvmIdentifiableElement(jvmGenericType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -268,7 +265,6 @@ public class TypesSwitch<T>
 			{
 				JvmTypeReference jvmTypeReference = (JvmTypeReference)theEObject;
 				T result = caseJvmTypeReference(jvmTypeReference);
-				if (result == null) result = caseJvmIdentifiableElement(jvmTypeReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -277,7 +273,6 @@ public class TypesSwitch<T>
 				JvmParameterizedTypeReference jvmParameterizedTypeReference = (JvmParameterizedTypeReference)theEObject;
 				T result = caseJvmParameterizedTypeReference(jvmParameterizedTypeReference);
 				if (result == null) result = caseJvmTypeReference(jvmParameterizedTypeReference);
-				if (result == null) result = caseJvmIdentifiableElement(jvmParameterizedTypeReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -286,7 +281,6 @@ public class TypesSwitch<T>
 				JvmGenericArrayTypeReference jvmGenericArrayTypeReference = (JvmGenericArrayTypeReference)theEObject;
 				T result = caseJvmGenericArrayTypeReference(jvmGenericArrayTypeReference);
 				if (result == null) result = caseJvmTypeReference(jvmGenericArrayTypeReference);
-				if (result == null) result = caseJvmIdentifiableElement(jvmGenericArrayTypeReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

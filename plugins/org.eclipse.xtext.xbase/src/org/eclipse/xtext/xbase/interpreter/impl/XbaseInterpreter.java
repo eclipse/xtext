@@ -205,7 +205,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			throw new EvaluationException(new ClassNotFoundException(nodesForFeature.get(0).getText()));
 		}
 		try {
-			Class<?> result = classFinder.forName(literal.getType().getCanonicalName());
+			Class<?> result = classFinder.forName(literal.getType().getIdentifier());
 			return result;
 		} catch (ClassNotFoundException cnfe) {
 			throw new EvaluationException(cnfe);
@@ -276,7 +276,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		for (XCasePart casePart : switchExpression.getCases()) {
 			Class<?> expectedType = null;
 			if (casePart.getTypeGuard() != null) {
-				String typeName = casePart.getTypeGuard().getType().getCanonicalName();
+				String typeName = casePart.getTypeGuard().getType().getIdentifier();
 				try {
 					expectedType = classFinder.forName(typeName);
 				} catch (ClassNotFoundException e) {
@@ -306,7 +306,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	public Object _evaluateCastedExpression(XCastedExpression castedExpression, IEvaluationContext context) {
 		Object result = internalEvaluate(castedExpression.getTarget(), context);
 		result = wrapArray(result, castedExpression.getType());
-		String typeName = castedExpression.getType().getType().getCanonicalName();
+		String typeName = castedExpression.getType().getType().getIdentifier();
 		Class<?> expectedType = null;
 		try {
 			expectedType = classFinder.forName(typeName);
@@ -341,7 +341,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			Throwable cause = evaluationException.getCause();
 			for (XCatchClause catchClause : tryCatchFinally.getCatchClauses()) {
 				JvmFormalParameter exception = catchClause.getDeclaredParam();
-				String exceptionTypeName = exception.getParameterType().getType().getCanonicalName();
+				String exceptionTypeName = exception.getParameterType().getType().getIdentifier();
 				try {
 					Class<?> exceptionType = classFinder.forName(exceptionTypeName);
 					if (!exceptionType.isInstance(cause))
@@ -431,14 +431,14 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		Constructor<?> constructor = javaReflectAccess.getConstructor(jvmConstructor);
 		try {
 			if (constructor == null)
-				throw new NoSuchMethodException("Could not find constructor " + jvmConstructor.getFullyQualifiedName());
+				throw new NoSuchMethodException("Could not find constructor " + jvmConstructor.getIdentifier());
 			constructor.setAccessible(true);
 			Object result = constructor.newInstance(arguments.toArray(new Object[arguments.size()]));
 			return result;
 		} catch (InvocationTargetException targetException) {
 			throw new EvaluationException(targetException.getTargetException());
 		} catch (Exception e) {
-			throw new IllegalStateException("Could not invoke constructor: " + jvmConstructor.getCanonicalName(), e);
+			throw new IllegalStateException("Could not invoke constructor: " + jvmConstructor.getIdentifier(), e);
 		}
 	}
 
@@ -476,7 +476,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			return Boolean.FALSE;
 
 		Class<?> expectedType = null;
-		String className = instanceOf.getType().getCanonicalName();
+		String className = instanceOf.getType().getIdentifier();
 		try {
 			expectedType = classFinder.forName(className);
 		} catch (ClassNotFoundException cnfe) {
@@ -519,13 +519,13 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		Field field = javaReflectAccess.getField(jvmField);
 		try {
 			if (field == null) {
-				throw new NoSuchFieldException("Could not find field " + jvmField.getFullyQualifiedName());
+				throw new NoSuchFieldException("Could not find field " + jvmField.getIdentifier());
 			}
 			field.setAccessible(true);
 			Object result = field.get(receiver);
 			return result;
 		} catch (Exception e) {
-			throw new IllegalStateException("Could not access field: " + jvmField.getFullyQualifiedName()
+			throw new IllegalStateException("Could not access field: " + jvmField.getIdentifier()
 					+ " on instance: " + receiver, e);
 		}
 	}
@@ -541,7 +541,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		Method method = javaReflectAccess.getMethod(operation);
 		try {
 			if (method == null) {
-				throw new NoSuchMethodException("Could not find method " + operation.getFullyQualifiedName());
+				throw new NoSuchMethodException("Could not find method " + operation.getIdentifier());
 			}
 			method.setAccessible(true);
 			if (!Modifier.isStatic(method.getModifiers()) && receiver==null) {
@@ -557,7 +557,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		} catch (InvocationTargetException targetException) {
 			throw new EvaluationException(targetException.getTargetException());
 		} catch (Exception e) {
-			throw new IllegalStateException("Could not invoke method: " + operation.getFullyQualifiedName()
+			throw new IllegalStateException("Could not invoke method: " + operation.getIdentifier()
 					+ " on instance: " + receiver, e);
 		}
 	}
@@ -578,7 +578,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		if (executable.isVarArgs()) {
 			JvmTypeReference lastParameterType = executable.getParameters().get(paramCount).getParameterType();
 			JvmTypeReference componentTypeReference = ((JvmArrayType) lastParameterType.getType()).getComponentType();
-			String typeName = componentTypeReference.getType().getCanonicalName();
+			String typeName = componentTypeReference.getType().getIdentifier();
 			Class<?> componentType = null;
 			try {
 				componentType = classFinder.forName(typeName);
@@ -614,7 +614,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		if (expectedType.getType() instanceof JvmGenericType && ((JvmGenericType) expectedType.getType()).isInterface()) {
 			try {
 				JvmType type = expectedType.getType();
-				Class<?> functionIntf = classFinder.forName(type.getCanonicalName());
+				Class<?> functionIntf = classFinder.forName(type.getIdentifier());
 				if (!functionIntf.isInstance(value)) {
 					InvocationHandler invocationHandler = null;
 					if (Proxy.isProxyClass(value.getClass())) {
@@ -669,17 +669,17 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		Object receiver = getReceiver(assignment, context);
 		if (receiver == null)
 			throw new EvaluationException(new NullPointerException("Cannot assign value to field: "
-					+ jvmField.getCanonicalName() + " on null instance"));
+					+ jvmField.getIdentifier() + " on null instance"));
 		Field field = javaReflectAccess.getField(jvmField);
 		try {
 			if (field == null) {
-				throw new NoSuchFieldException("Could not find field " + jvmField.getFullyQualifiedName());
+				throw new NoSuchFieldException("Could not find field " + jvmField.getIdentifier());
 			}
 			field.setAccessible(true);
 			field.set(receiver, value);
 			return value;
 		} catch (Exception e) {
-			throw new IllegalStateException("Could not access field: " + jvmField.getFullyQualifiedName()
+			throw new IllegalStateException("Could not access field: " + jvmField.getIdentifier()
 					+ " on instance: " + receiver, e);
 		}
 	}
@@ -700,7 +700,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		Object receiver = getReceiver(assignment, context);
 		if (receiver == null)
 			throw new EvaluationException(new NullPointerException("Cannot invoke instance method: "
-					+ jvmOperation.getCanonicalName() + " without receiver"));
+					+ jvmOperation.getIdentifier() + " without receiver"));
 		List<Object> argumentValues = Lists.newArrayList(value);
 		Object result = invokeOperation(jvmOperation, receiver, argumentValues);
 		return result;

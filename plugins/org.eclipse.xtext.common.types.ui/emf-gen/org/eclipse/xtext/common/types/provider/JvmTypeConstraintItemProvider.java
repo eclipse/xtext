@@ -12,6 +12,8 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -20,6 +22,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -33,7 +36,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * @generated
  */
 public class JvmTypeConstraintItemProvider
-	extends JvmIdentifiableElementItemProvider
+	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -161,6 +164,18 @@ public class JvmTypeConstraintItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE,
 				 TypesFactory.eINSTANCE.createJvmWildcardTypeReference()));
+	}
+
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator()
+	{
+		return TypesEditPlugin.INSTANCE;
 	}
 
 }

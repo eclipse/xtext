@@ -32,10 +32,12 @@ import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -76,7 +78,10 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		result.setInterface(clazz.isInterface());
 		setTypeModifiers(clazz, result);
 		setVisibility(clazz, result);
-		result.setFullyQualifiedName(clazz.getName());
+		result.internalSetIdentifier(clazz.getName());
+		result.setSimpleName(clazz.getSimpleName());
+		if (clazz.getDeclaringClass() == null)
+			result.setPackageName(clazz.getPackage().getName());
 		createNestedTypes(clazz, result);
 		createMethods(clazz, result);
 		createConstructors(clazz, result);
@@ -248,7 +253,10 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 
 	public JvmAnnotationType createAnnotationType(Class<?> clazz) {
 		JvmAnnotationType result = TypesFactory.eINSTANCE.createJvmAnnotationType();
-		result.setFullyQualifiedName(clazz.getName());
+		result.internalSetIdentifier(clazz.getName());
+		result.setSimpleName(clazz.getSimpleName());
+		if (clazz.getDeclaringClass() == null)
+			result.setPackageName(clazz.getPackage().getName());
 		setVisibility(clazz, result);
 		setTypeModifiers(clazz, result);
 		createNestedTypes(clazz, result);
@@ -293,7 +301,10 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 
 	public JvmEnumerationType createEnumerationType(Class<?> clazz) {
 		JvmEnumerationType result = TypesFactory.eINSTANCE.createJvmEnumerationType();
-		result.setFullyQualifiedName(clazz.getName());
+		result.internalSetIdentifier(clazz.getName());
+		result.setSimpleName(clazz.getSimpleName());
+		if (clazz.getDeclaringClass() == null)
+			result.setPackageName(clazz.getPackage().getName());
 		setVisibility(clazz, result);
 		setTypeModifiers(clazz, result);
 		createNestedTypes(clazz, result);
@@ -402,12 +413,13 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 	}
 
 	public org.eclipse.xtext.common.types.JvmField createField(Field field) {
-		org.eclipse.xtext.common.types.JvmField result;
+		JvmField result;
 		if (!field.isEnumConstant())
 			result = TypesFactory.eINSTANCE.createJvmField();
 		else
 			result = TypesFactory.eINSTANCE.createJvmEnumerationLiteral();
-		result.setFullyQualifiedName(field.getDeclaringClass().getName() + "." + field.getName());
+		result.internalSetIdentifier(field.getDeclaringClass().getName() + "." + field.getName());
+		result.setSimpleName(field.getName());
 		result.setFinal(Modifier.isFinal(field.getModifiers()));
 		result.setStatic(Modifier.isStatic(field.getModifiers()));
 		setVisibility(result, field.getModifiers());
@@ -417,7 +429,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 	}
 
 	public <T> org.eclipse.xtext.common.types.JvmConstructor createConstructor(Constructor<T> constructor) {
-		org.eclipse.xtext.common.types.JvmConstructor result = TypesFactory.eINSTANCE.createJvmConstructor();
+		JvmConstructor result = TypesFactory.eINSTANCE.createJvmConstructor();
 		enhanceExecutable(result, constructor, constructor.getDeclaringClass().getSimpleName(),
 				constructor.getGenericParameterTypes(), constructor.getParameterAnnotations());
 		result.setVarArgs(constructor.isVarArgs());
@@ -453,7 +465,8 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			uriHelper.computeTypeName(parameterTypes[i], fqName);
 		}
 		fqName.append(')');
-		result.setFullyQualifiedName(fqName.toString());
+		result.internalSetIdentifier(fqName.toString());
+		result.setSimpleName(simpleName);
 		setVisibility(result, member.getModifiers());
 		int i = 0;
 		for (Type parameterType : parameterTypes) {

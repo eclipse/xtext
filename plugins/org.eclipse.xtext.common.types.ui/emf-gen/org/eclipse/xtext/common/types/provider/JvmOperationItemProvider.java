@@ -197,7 +197,7 @@ public class JvmOperationItemProvider
 	@Override
 	public String getText(Object object)
 	{
-		String label = ((JvmOperation)object).getFullyQualifiedName();
+		String label = ((JvmOperation)object).getSimpleName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_JvmOperation_type") :
 			getString("_UI_JvmOperation_type") + " " + label;

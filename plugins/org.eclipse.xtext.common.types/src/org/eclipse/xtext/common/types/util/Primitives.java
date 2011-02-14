@@ -37,7 +37,7 @@ public class Primitives {
 	}
 	
 	public Primitive primitiveKind(JvmPrimitiveType primitiveType) {
-		final String name = primitiveType.getCanonicalName();
+		final String name = primitiveType.getIdentifier();
 		if (Boolean.TYPE.getName().equals(name)) {
 			return Primitive.Boolean;
 		}
