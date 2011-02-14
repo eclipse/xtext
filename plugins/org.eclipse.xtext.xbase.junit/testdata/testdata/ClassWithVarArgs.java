@@ -17,7 +17,12 @@ import com.google.common.collect.Lists;
 public class ClassWithVarArgs {
 
 	private boolean varArgConstructor;
+	private boolean defaultConstructor;
 
+	public ClassWithVarArgs() {
+		defaultConstructor = true;
+	}
+	
 	public ClassWithVarArgs(int i, String... strings) {
 		this.varArgConstructor = true;
 	}
@@ -32,7 +37,15 @@ public class ClassWithVarArgs {
 		return Lists.newArrayList(strings);
 	}
 	
+	public List<String> stringsToList(String s1, String s2) {
+		return Lists.newArrayList("foo", s1, s2);
+	}
+	
 	public boolean isVarArgConstructor() {
 		return varArgConstructor;
+	}
+	
+	public boolean isDefaultConstructor() {
+		return defaultConstructor;
 	}
 }
