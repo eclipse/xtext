@@ -37,6 +37,14 @@ public class ClassWithVarArgs {
 		return Lists.newArrayList(strings);
 	}
 	
+	public <T> List<T> toList(T... args) {
+		return Lists.newArrayList(args);
+	}
+	
+	public <T extends Number> List<T> toNumberList(T... args) {
+		return Lists.newArrayList(args);
+	}
+	
 	public List<String> stringsToList(String s1, String s2) {
 		return Lists.newArrayList("foo", s1, s2);
 	}
