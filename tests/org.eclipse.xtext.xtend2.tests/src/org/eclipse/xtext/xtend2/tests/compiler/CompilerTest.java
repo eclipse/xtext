@@ -30,6 +30,9 @@ import com.google.inject.Inject;
  */
 public class CompilerTest extends AbstractXtend2TestCase {
 	
+	public void testDependencyDeclaration() throws Exception {
+		invokeAndExpect(null, "list @Inject java.util.List");
+	}
 	
 	public void testNoArgFunction() throws Exception {
 		invokeAndExpect("foo", "'foo'");
@@ -132,6 +135,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		javaCompiler.addClassPathOfClass(EcorePackage.class);
 		javaCompiler.addClassPathOfClass(XbasePackage.class);
 		javaCompiler.addClassPathOfClass(Xtend2Package.class);
+		javaCompiler.addClassPathOfClass(Inject.class);
 	}
 	
 	
