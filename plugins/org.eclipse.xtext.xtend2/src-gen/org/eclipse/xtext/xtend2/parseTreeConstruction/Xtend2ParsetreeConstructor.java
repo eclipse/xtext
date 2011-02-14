@@ -1137,13 +1137,13 @@ protected class Member_FunctionParserRuleCall extends RuleCallToken {
 /************ begin Rule Function ****************
  *
  * Function returns XtendFunction:
- * 	(override?="override"? & dispatch?="case"?) ("<" typeParameters+=JvmTypeParameter (","
+ * 	(override?="override"? & dispatch?="dispatch"?) ("<" typeParameters+=JvmTypeParameter (","
  * 	typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference? name=ID "(" (parameters+=JvmFormalParameter (","
  * 	parameters+=JvmFormalParameter)*)? ")" (expression=XExpression | ";");
  *
  **/
 
-// (override?="override"? & dispatch?="case"?) ("<" typeParameters+=JvmTypeParameter (","
+// (override?="override"? & dispatch?="dispatch"?) ("<" typeParameters+=JvmTypeParameter (","
 // typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference? name=ID "(" (parameters+=JvmFormalParameter (","
 // parameters+=JvmFormalParameter)*)? ")" (expression=XExpression | ";")
 protected class Function_Group extends GroupToken {
@@ -1174,7 +1174,7 @@ protected class Function_Group extends GroupToken {
 
 }
 
-// override?="override"? & dispatch?="case"?
+// override?="override"? & dispatch?="dispatch"?
 protected class Function_UnorderedGroup_0 extends UnorderedGroupToken {
 	
 	public Function_UnorderedGroup_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1230,7 +1230,7 @@ protected class Function_OverrideAssignment_0_0 extends AssignmentToken  {
 
 }
 
-// dispatch?="case"?
+// dispatch?="dispatch"?
 protected class Function_DispatchAssignment_0_1 extends AssignmentToken  {
 	
 	public Function_DispatchAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1256,7 +1256,7 @@ protected class Function_DispatchAssignment_0_1 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("dispatch");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KEYWORD;
-			element = grammarAccess.getFunctionAccess().getDispatchCaseKeyword_0_1_0();
+			element = grammarAccess.getFunctionAccess().getDispatchDispatchKeyword_0_1_0();
 			return obj;
 		}
 		return null;

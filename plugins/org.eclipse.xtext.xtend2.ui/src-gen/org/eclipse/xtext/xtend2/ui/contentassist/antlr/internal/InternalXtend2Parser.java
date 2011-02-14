@@ -24,9 +24,10 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_RICH_TEXT", "RULE_RICH_TEXT_START", "RULE_RICH_TEXT_INBETWEEN", "RULE_RICH_TEXT_END", "RULE_INT", "RULE_IN_DOUBLE_QUOTE_RICH_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'='", "'+='", "'||'", "'&&'", "';'", "'=='", "'!='", "'>='", "'<='", "'>'", "'<'", "'->'", "'..'", "'+'", "'-'", "'*'", "'**'", "'/'", "'%'", "'!'", "'.'", "'val'", "'false'", "'package'", "'import'", "'class'", "'{'", "'}'", "','", "'extends'", "'implements'", "'('", "')'", "'FOR'", "':'", "'ENDFOR'", "'IF'", "'ENDIF'", "'ELSE'", "'ELSEIF'", "'instanceof'", "'as'", "'['", "'|'", "']'", "'if'", "'else'", "'switch'", "'default'", "'case'", "'for'", "'while'", "'do'", "'new'", "'null'", "'typeof'", "'throw'", "'return'", "'try'", "'finally'", "'catch'", "'=>'", "'?'", "'&'", "'super'", "'override'", "'?.'", "'*.'", "'var'", "'true'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_RICH_TEXT", "RULE_RICH_TEXT_START", "RULE_RICH_TEXT_INBETWEEN", "RULE_RICH_TEXT_END", "RULE_INT", "RULE_IN_DOUBLE_QUOTE_RICH_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'='", "'+='", "'||'", "'&&'", "';'", "'=='", "'!='", "'>='", "'<='", "'>'", "'<'", "'->'", "'..'", "'+'", "'-'", "'*'", "'**'", "'/'", "'%'", "'!'", "'.'", "'val'", "'false'", "'package'", "'import'", "'class'", "'{'", "'}'", "','", "'extends'", "'implements'", "'('", "')'", "'FOR'", "':'", "'ENDFOR'", "'IF'", "'ENDIF'", "'ELSE'", "'ELSEIF'", "'instanceof'", "'as'", "'['", "'|'", "']'", "'if'", "'else'", "'switch'", "'default'", "'case'", "'for'", "'while'", "'do'", "'new'", "'null'", "'typeof'", "'throw'", "'return'", "'try'", "'finally'", "'catch'", "'=>'", "'?'", "'&'", "'super'", "'override'", "'dispatch'", "'?.'", "'*.'", "'var'", "'true'"
     };
     public static final int T__42=42;
+    public static final int T__86=86;
     public static final int T__28=28;
     public static final int T__57=57;
     public static final int T__23=23;
@@ -6481,7 +6482,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             int alt1=2;
             int LA1_0 = input.LA(1);
 
-            if ( ((LA1_0>=RULE_ID && LA1_0<=RULE_RICH_TEXT_START)||LA1_0==RULE_INT||LA1_0==26||(LA1_0>=29 && LA1_0<=30)||LA1_0==35||LA1_0==38||LA1_0==42||LA1_0==47||LA1_0==58||LA1_0==61||LA1_0==63||(LA1_0>=66 && LA1_0<=74)||LA1_0==85) ) {
+            if ( ((LA1_0>=RULE_ID && LA1_0<=RULE_RICH_TEXT_START)||LA1_0==RULE_INT||LA1_0==26||(LA1_0>=29 && LA1_0<=30)||LA1_0==35||LA1_0==38||LA1_0==42||LA1_0==47||LA1_0==58||LA1_0==61||LA1_0==63||(LA1_0>=66 && LA1_0<=74)||LA1_0==86) ) {
                 alt1=1;
             }
             else if ( (LA1_0==20) ) {
@@ -6771,7 +6772,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                 if ( (LA4_1==EOF||LA4_1==51||(LA4_1>=53 && LA4_1<=55)) ) {
                     alt4=1;
                 }
-                else if ( ((LA4_1>=RULE_ID && LA4_1<=RULE_RICH_TEXT_START)||LA4_1==RULE_INT||LA4_1==26||(LA4_1>=29 && LA4_1<=30)||LA4_1==35||LA4_1==38||LA4_1==42||LA4_1==47||LA4_1==49||LA4_1==52||LA4_1==58||LA4_1==61||LA4_1==63||(LA4_1>=66 && LA4_1<=74)||LA4_1==85) ) {
+                else if ( ((LA4_1>=RULE_ID && LA4_1<=RULE_RICH_TEXT_START)||LA4_1==RULE_INT||LA4_1==26||(LA4_1>=29 && LA4_1<=30)||LA4_1==35||LA4_1==38||LA4_1==42||LA4_1==47||LA4_1==49||LA4_1==52||LA4_1==58||LA4_1==61||LA4_1==63||(LA4_1>=66 && LA4_1<=74)||LA4_1==86) ) {
                     alt4=2;
                 }
                 else {
@@ -6899,7 +6900,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             case 72:
             case 73:
             case 74:
-            case 85:
+            case 86:
                 {
                 alt5=1;
                 }
@@ -7023,7 +7024,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             if ( (LA6_0==RULE_ID) ) {
                 int LA6_1 = input.LA(2);
 
-                if ( (LA6_1==EOF||(LA6_1>=RULE_ID && LA6_1<=RULE_INT)||(LA6_1>=17 && LA6_1<=38)||(LA6_1>=42 && LA6_1<=44)||(LA6_1>=47 && LA6_1<=48)||LA6_1==50||(LA6_1>=56 && LA6_1<=58)||(LA6_1>=60 && LA6_1<=77)||(LA6_1>=81 && LA6_1<=85)) ) {
+                if ( (LA6_1==EOF||(LA6_1>=RULE_ID && LA6_1<=RULE_INT)||(LA6_1>=17 && LA6_1<=38)||(LA6_1>=42 && LA6_1<=44)||(LA6_1>=47 && LA6_1<=48)||LA6_1==50||(LA6_1>=56 && LA6_1<=58)||(LA6_1>=60 && LA6_1<=77)||(LA6_1>=81 && LA6_1<=86)) ) {
                     alt6=2;
                 }
                 else if ( (LA6_1==16) ) {
@@ -7037,7 +7038,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                     throw nvae;
                 }
             }
-            else if ( ((LA6_0>=RULE_STRING && LA6_0<=RULE_RICH_TEXT_START)||LA6_0==RULE_INT||LA6_0==26||(LA6_0>=29 && LA6_0<=30)||LA6_0==35||LA6_0==38||LA6_0==42||LA6_0==47||LA6_0==58||LA6_0==61||LA6_0==63||(LA6_0>=66 && LA6_0<=74)||LA6_0==85) ) {
+            else if ( ((LA6_0>=RULE_STRING && LA6_0<=RULE_RICH_TEXT_START)||LA6_0==RULE_INT||LA6_0==26||(LA6_0>=29 && LA6_0<=30)||LA6_0==35||LA6_0==38||LA6_0==42||LA6_0==47||LA6_0==58||LA6_0==61||LA6_0==63||(LA6_0>=66 && LA6_0<=74)||LA6_0==86) ) {
                 alt6=2;
             }
             else {
@@ -7741,7 +7742,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             if ( ((LA13_0>=29 && LA13_0<=30)||LA13_0==35) ) {
                 alt13=1;
             }
-            else if ( ((LA13_0>=RULE_ID && LA13_0<=RULE_RICH_TEXT_START)||LA13_0==RULE_INT||LA13_0==26||LA13_0==38||LA13_0==42||LA13_0==47||LA13_0==58||LA13_0==61||LA13_0==63||(LA13_0>=66 && LA13_0<=74)||LA13_0==85) ) {
+            else if ( ((LA13_0>=RULE_ID && LA13_0<=RULE_RICH_TEXT_START)||LA13_0==RULE_INT||LA13_0==26||LA13_0==38||LA13_0==42||LA13_0==47||LA13_0==58||LA13_0==61||LA13_0==63||(LA13_0>=66 && LA13_0<=74)||LA13_0==86) ) {
                 alt13=2;
             }
             else {
@@ -7949,7 +7950,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                     if ( (LA15_3==16) ) {
                         alt15=1;
                     }
-                    else if ( (LA15_3==EOF||(LA15_3>=RULE_ID && LA15_3<=RULE_INT)||(LA15_3>=17 && LA15_3<=38)||(LA15_3>=42 && LA15_3<=44)||(LA15_3>=47 && LA15_3<=48)||LA15_3==50||(LA15_3>=56 && LA15_3<=58)||(LA15_3>=60 && LA15_3<=77)||(LA15_3>=81 && LA15_3<=85)) ) {
+                    else if ( (LA15_3==EOF||(LA15_3>=RULE_ID && LA15_3<=RULE_INT)||(LA15_3>=17 && LA15_3<=38)||(LA15_3>=42 && LA15_3<=44)||(LA15_3>=47 && LA15_3<=48)||LA15_3==50||(LA15_3>=56 && LA15_3<=58)||(LA15_3>=60 && LA15_3<=77)||(LA15_3>=81 && LA15_3<=86)) ) {
                         alt15=2;
                     }
                     else {
@@ -7971,7 +7972,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                     throw nvae;
                 }
             }
-            else if ( ((LA15_0>=82 && LA15_0<=83)) ) {
+            else if ( ((LA15_0>=83 && LA15_0<=84)) ) {
                 alt15=2;
             }
             else {
@@ -8072,12 +8073,12 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                 alt16=1;
                 }
                 break;
-            case 82:
+            case 83:
                 {
                 alt16=2;
                 }
                 break;
-            case 83:
+            case 84:
                 {
                 alt16=3;
                 }
@@ -8310,7 +8311,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             case 58:
             case 70:
             case 71:
-            case 85:
+            case 86:
                 {
                 alt18=5;
                 }
@@ -8696,7 +8697,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                 }
                 break;
             case 38:
-            case 85:
+            case 86:
                 {
                 alt19=2;
                 }
@@ -8898,10 +8899,10 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             int alt20=2;
             int LA20_0 = input.LA(1);
 
-            if ( (LA20_0==37||LA20_0==84) ) {
+            if ( (LA20_0==37||LA20_0==85) ) {
                 alt20=1;
             }
-            else if ( ((LA20_0>=RULE_ID && LA20_0<=RULE_RICH_TEXT_START)||LA20_0==RULE_INT||LA20_0==26||(LA20_0>=29 && LA20_0<=30)||LA20_0==35||LA20_0==38||LA20_0==42||LA20_0==47||LA20_0==58||LA20_0==61||LA20_0==63||(LA20_0>=66 && LA20_0<=74)||LA20_0==85) ) {
+            else if ( ((LA20_0>=RULE_ID && LA20_0<=RULE_RICH_TEXT_START)||LA20_0==RULE_INT||LA20_0==26||(LA20_0>=29 && LA20_0<=30)||LA20_0==35||LA20_0==38||LA20_0==42||LA20_0==47||LA20_0==58||LA20_0==61||LA20_0==63||(LA20_0>=66 && LA20_0<=74)||LA20_0==86) ) {
                 alt20=2;
             }
             else {
@@ -8986,7 +8987,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             int alt21=2;
             int LA21_0 = input.LA(1);
 
-            if ( (LA21_0==84) ) {
+            if ( (LA21_0==85) ) {
                 alt21=1;
             }
             else if ( (LA21_0==37) ) {
@@ -9365,7 +9366,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             if ( (LA25_0==38) ) {
                 alt25=1;
             }
-            else if ( (LA25_0==85) ) {
+            else if ( (LA25_0==86) ) {
                 alt25=2;
             }
             else {
@@ -11483,7 +11484,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                 int alt38=2;
                 int LA38_0 = input.LA(1);
 
-                if ( (LA38_0==RULE_ID||LA38_0==26||LA38_0==47||LA38_0==65||LA38_0==77||LA38_0==81) ) {
+                if ( (LA38_0==RULE_ID||LA38_0==26||LA38_0==47||LA38_0==77||(LA38_0>=81 && LA38_0<=82)) ) {
                     alt38=1;
                 }
 
@@ -16158,7 +16159,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                 int alt47=2;
                 int LA47_0 = input.LA(1);
 
-                if ( ((LA47_0>=RULE_ID && LA47_0<=RULE_RICH_TEXT_START)||LA47_0==RULE_INT||LA47_0==26||(LA47_0>=29 && LA47_0<=30)||LA47_0==35||LA47_0==38||LA47_0==42||LA47_0==47||LA47_0==49||LA47_0==52||LA47_0==58||LA47_0==61||LA47_0==63||(LA47_0>=66 && LA47_0<=74)||LA47_0==85) ) {
+                if ( ((LA47_0>=RULE_ID && LA47_0<=RULE_RICH_TEXT_START)||LA47_0==RULE_INT||LA47_0==26||(LA47_0>=29 && LA47_0<=30)||LA47_0==35||LA47_0==38||LA47_0==42||LA47_0==47||LA47_0==49||LA47_0==52||LA47_0==58||LA47_0==61||LA47_0==63||(LA47_0>=66 && LA47_0<=74)||LA47_0==86) ) {
                     alt47=1;
                 }
 
@@ -24887,7 +24888,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
 
                     }
                     break;
-                case 82:
+                case 83:
                     {
                     int LA59_3 = input.LA(2);
 
@@ -24898,7 +24899,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
 
                     }
                     break;
-                case 83:
+                case 84:
                     {
                     int LA59_4 = input.LA(2);
 
@@ -26811,7 +26812,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             int alt63=2;
             int LA63_0 = input.LA(1);
 
-            if ( ((LA63_0>=RULE_ID && LA63_0<=RULE_RICH_TEXT_START)||LA63_0==RULE_INT||LA63_0==26||(LA63_0>=29 && LA63_0<=30)||LA63_0==35||LA63_0==38||LA63_0==42||LA63_0==47||(LA63_0>=58 && LA63_0<=59)||LA63_0==61||LA63_0==63||(LA63_0>=66 && LA63_0<=74)||LA63_0==77||LA63_0==85) ) {
+            if ( ((LA63_0>=RULE_ID && LA63_0<=RULE_RICH_TEXT_START)||LA63_0==RULE_INT||LA63_0==26||(LA63_0>=29 && LA63_0<=30)||LA63_0==35||LA63_0==38||LA63_0==42||LA63_0==47||(LA63_0>=58 && LA63_0<=59)||LA63_0==61||LA63_0==63||(LA63_0>=66 && LA63_0<=74)||LA63_0==77||LA63_0==86) ) {
                 alt63=1;
             }
             switch (alt63) {
@@ -33600,7 +33601,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                 int alt75=2;
                 int LA75_0 = input.LA(1);
 
-                if ( ((LA75_0>=RULE_ID && LA75_0<=RULE_RICH_TEXT_START)||LA75_0==RULE_INT||LA75_0==26||(LA75_0>=29 && LA75_0<=30)||LA75_0==35||(LA75_0>=37 && LA75_0<=38)||LA75_0==42||LA75_0==47||LA75_0==58||LA75_0==61||LA75_0==63||(LA75_0>=66 && LA75_0<=74)||(LA75_0>=84 && LA75_0<=85)) ) {
+                if ( ((LA75_0>=RULE_ID && LA75_0<=RULE_RICH_TEXT_START)||LA75_0==RULE_INT||LA75_0==26||(LA75_0>=29 && LA75_0<=30)||LA75_0==35||(LA75_0>=37 && LA75_0<=38)||LA75_0==42||LA75_0==47||LA75_0==58||LA75_0==61||LA75_0==63||(LA75_0>=66 && LA75_0<=74)||(LA75_0>=85 && LA75_0<=86)) ) {
                     alt75=1;
                 }
 
@@ -35882,7 +35883,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             int alt82=2;
             int LA82_0 = input.LA(1);
 
-            if ( ((LA82_0>=RULE_ID && LA82_0<=RULE_RICH_TEXT_START)||LA82_0==RULE_INT||LA82_0==26||(LA82_0>=29 && LA82_0<=30)||LA82_0==35||LA82_0==38||LA82_0==42||LA82_0==47||(LA82_0>=58 && LA82_0<=59)||LA82_0==61||LA82_0==63||(LA82_0>=66 && LA82_0<=74)||LA82_0==77||LA82_0==85) ) {
+            if ( ((LA82_0>=RULE_ID && LA82_0<=RULE_RICH_TEXT_START)||LA82_0==RULE_INT||LA82_0==26||(LA82_0>=29 && LA82_0<=30)||LA82_0==35||LA82_0==38||LA82_0==42||LA82_0==47||(LA82_0>=58 && LA82_0<=59)||LA82_0==61||LA82_0==63||(LA82_0>=66 && LA82_0<=74)||LA82_0==77||LA82_0==86) ) {
                 alt82=1;
             }
             switch (alt82) {
@@ -36836,7 +36837,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             int alt85=2;
             int LA85_0 = input.LA(1);
 
-            if ( ((LA85_0>=RULE_ID && LA85_0<=RULE_RICH_TEXT_START)||LA85_0==RULE_INT||LA85_0==26||(LA85_0>=29 && LA85_0<=30)||LA85_0==35||LA85_0==38||LA85_0==42||LA85_0==47||(LA85_0>=58 && LA85_0<=59)||LA85_0==61||LA85_0==63||(LA85_0>=66 && LA85_0<=74)||LA85_0==77||LA85_0==85) ) {
+            if ( ((LA85_0>=RULE_ID && LA85_0<=RULE_RICH_TEXT_START)||LA85_0==RULE_INT||LA85_0==26||(LA85_0>=29 && LA85_0<=30)||LA85_0==35||LA85_0==38||LA85_0==42||LA85_0==47||(LA85_0>=58 && LA85_0<=59)||LA85_0==61||LA85_0==63||(LA85_0>=66 && LA85_0<=74)||LA85_0==77||LA85_0==86) ) {
                 alt85=1;
             }
             switch (alt85) {
@@ -43468,7 +43469,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             if ( LA99_0 ==81 && getUnorderedGroupHelper().canSelect(grammarAccess.getFunctionAccess().getUnorderedGroup_0(), 0) ) {
                 alt99=1;
             }
-            else if ( LA99_0 ==65 && getUnorderedGroupHelper().canSelect(grammarAccess.getFunctionAccess().getUnorderedGroup_0(), 1) ) {
+            else if ( LA99_0 ==82 && getUnorderedGroupHelper().canSelect(grammarAccess.getFunctionAccess().getUnorderedGroup_0(), 1) ) {
                 alt99=1;
             }
             switch (alt99) {
@@ -43523,7 +43524,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             if ( LA100_0 ==81 && getUnorderedGroupHelper().canSelect(grammarAccess.getFunctionAccess().getUnorderedGroup_0(), 0) ) {
                 alt100=1;
             }
-            else if ( LA100_0 ==65 && getUnorderedGroupHelper().canSelect(grammarAccess.getFunctionAccess().getUnorderedGroup_0(), 1) ) {
+            else if ( LA100_0 ==82 && getUnorderedGroupHelper().canSelect(grammarAccess.getFunctionAccess().getUnorderedGroup_0(), 1) ) {
                 alt100=2;
             }
             else {
@@ -43673,7 +43674,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             if ( LA101_0 ==81 && getUnorderedGroupHelper().canSelect(grammarAccess.getFunctionAccess().getUnorderedGroup_0(), 0) ) {
                 alt101=1;
             }
-            else if ( LA101_0 ==65 && getUnorderedGroupHelper().canSelect(grammarAccess.getFunctionAccess().getUnorderedGroup_0(), 1) ) {
+            else if ( LA101_0 ==82 && getUnorderedGroupHelper().canSelect(grammarAccess.getFunctionAccess().getUnorderedGroup_0(), 1) ) {
                 alt101=1;
             }
             switch (alt101) {
@@ -44287,36 +44288,36 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Function__DispatchAssignment_0_1"
-    // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:15489:1: rule__Function__DispatchAssignment_0_1 : ( ( 'case' ) ) ;
+    // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:15489:1: rule__Function__DispatchAssignment_0_1 : ( ( 'dispatch' ) ) ;
     public final void rule__Function__DispatchAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:15493:1: ( ( ( 'case' ) ) )
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:15494:1: ( ( 'case' ) )
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:15493:1: ( ( ( 'dispatch' ) ) )
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:15494:1: ( ( 'dispatch' ) )
             {
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:15494:1: ( ( 'case' ) )
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:15495:1: ( 'case' )
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:15494:1: ( ( 'dispatch' ) )
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:15495:1: ( 'dispatch' )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getFunctionAccess().getDispatchCaseKeyword_0_1_0()); 
+               before(grammarAccess.getFunctionAccess().getDispatchDispatchKeyword_0_1_0()); 
             }
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:15496:1: ( 'case' )
-            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:15497:1: 'case'
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:15496:1: ( 'dispatch' )
+            // ../org.eclipse.xtext.xtend2.ui/src-gen/org/eclipse/xtext/xtend2/ui/contentassist/antlr/internal/InternalXtend2.g:15497:1: 'dispatch'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getFunctionAccess().getDispatchCaseKeyword_0_1_0()); 
+               before(grammarAccess.getFunctionAccess().getDispatchDispatchKeyword_0_1_0()); 
             }
-            match(input,65,FOLLOW_65_in_rule__Function__DispatchAssignment_0_131186); if (state.failed) return ;
+            match(input,82,FOLLOW_82_in_rule__Function__DispatchAssignment_0_131186); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getFunctionAccess().getDispatchCaseKeyword_0_1_0()); 
+               after(grammarAccess.getFunctionAccess().getDispatchDispatchKeyword_0_1_0()); 
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getFunctionAccess().getDispatchCaseKeyword_0_1_0()); 
+               after(grammarAccess.getFunctionAccess().getDispatchDispatchKeyword_0_1_0()); 
             }
 
             }
@@ -46989,7 +46990,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getNullSafeQuestionMarkFullStopKeyword_1_1_0_0_1_1_0()); 
             }
-            match(input,82,FOLLOW_82_in_rule__XMemberFeatureCall__NullSafeAssignment_1_1_0_0_1_133062); if (state.failed) return ;
+            match(input,83,FOLLOW_83_in_rule__XMemberFeatureCall__NullSafeAssignment_1_1_0_0_1_133062); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXMemberFeatureCallAccess().getNullSafeQuestionMarkFullStopKeyword_1_1_0_0_1_1_0()); 
             }
@@ -47042,7 +47043,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getSpreadingAsteriskFullStopKeyword_1_1_0_0_1_2_0()); 
             }
-            match(input,83,FOLLOW_83_in_rule__XMemberFeatureCall__SpreadingAssignment_1_1_0_0_1_233106); if (state.failed) return ;
+            match(input,84,FOLLOW_84_in_rule__XMemberFeatureCall__SpreadingAssignment_1_1_0_0_1_233106); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXMemberFeatureCallAccess().getSpreadingAsteriskFullStopKeyword_1_1_0_0_1_2_0()); 
             }
@@ -48502,7 +48503,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXVariableDeclarationAccess().getWriteableVarKeyword_1_0_0()); 
             }
-            match(input,84,FOLLOW_84_in_rule__XVariableDeclaration__WriteableAssignment_1_034132); if (state.failed) return ;
+            match(input,85,FOLLOW_85_in_rule__XVariableDeclaration__WriteableAssignment_1_034132); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXVariableDeclarationAccess().getWriteableVarKeyword_1_0_0()); 
             }
@@ -49426,7 +49427,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXBooleanLiteralAccess().getIsTrueTrueKeyword_1_1_0()); 
             }
-            match(input,85,FOLLOW_85_in_rule__XBooleanLiteral__IsTrueAssignment_1_134794); if (state.failed) return ;
+            match(input,86,FOLLOW_86_in_rule__XBooleanLiteral__IsTrueAssignment_1_134794); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXBooleanLiteralAccess().getIsTrueTrueKeyword_1_1_0()); 
             }
@@ -51432,7 +51433,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     static final String DFA17_minS =
         "\1\4\2\0\31\uffff";
     static final String DFA17_maxS =
-        "\1\125\2\0\31\uffff";
+        "\1\126\2\0\31\uffff";
     static final String DFA17_acceptS =
         "\3\uffff\1\1\1\uffff\1\2\26\uffff";
     static final String DFA17_specialS =
@@ -51440,7 +51441,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     static final String[] DFA17_transitionS = {
             "\1\1\3\5\2\uffff\1\5\17\uffff\1\5\2\uffff\2\5\4\uffff\1\5\2"+
             "\uffff\1\5\3\uffff\1\5\4\uffff\1\2\12\uffff\1\5\1\3\1\uffff"+
-            "\1\5\1\uffff\1\5\2\uffff\11\5\2\uffff\1\3\7\uffff\1\5",
+            "\1\5\1\uffff\1\5\2\uffff\11\5\2\uffff\1\3\10\uffff\1\5",
             "\1\uffff",
             "\1\uffff",
             "",
@@ -51551,7 +51552,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     static final String DFA23_minS =
         "\1\4\2\0\31\uffff";
     static final String DFA23_maxS =
-        "\1\125\2\0\31\uffff";
+        "\1\126\2\0\31\uffff";
     static final String DFA23_acceptS =
         "\3\uffff\1\1\1\uffff\1\2\26\uffff";
     static final String DFA23_specialS =
@@ -51559,7 +51560,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     static final String[] DFA23_transitionS = {
             "\1\1\3\5\2\uffff\1\5\17\uffff\1\5\2\uffff\2\5\4\uffff\1\5\2"+
             "\uffff\1\5\3\uffff\1\5\4\uffff\1\2\12\uffff\1\5\1\3\1\uffff"+
-            "\1\5\1\uffff\1\5\2\uffff\11\5\2\uffff\1\3\7\uffff\1\5",
+            "\1\5\1\uffff\1\5\2\uffff\11\5\2\uffff\1\3\10\uffff\1\5",
             "\1\uffff",
             "\1\uffff",
             "",
@@ -51670,7 +51671,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     static final String DFA24_minS =
         "\1\4\2\0\31\uffff";
     static final String DFA24_maxS =
-        "\1\125\2\0\31\uffff";
+        "\1\126\2\0\31\uffff";
     static final String DFA24_acceptS =
         "\3\uffff\1\1\1\uffff\1\2\26\uffff";
     static final String DFA24_specialS =
@@ -51678,7 +51679,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     static final String[] DFA24_transitionS = {
             "\1\1\3\5\2\uffff\1\5\17\uffff\1\5\2\uffff\2\5\4\uffff\1\5\2"+
             "\uffff\1\5\3\uffff\1\5\4\uffff\1\2\12\uffff\1\5\1\3\1\uffff"+
-            "\1\5\1\uffff\1\5\2\uffff\11\5\2\uffff\1\3\7\uffff\1\5",
+            "\1\5\1\uffff\1\5\2\uffff\11\5\2\uffff\1\3\10\uffff\1\5",
             "\1\uffff",
             "\1\uffff",
             "",
@@ -51783,21 +51784,22 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
         }
     }
     static final String DFA61_eotS =
-        "\100\uffff";
+        "\101\uffff";
     static final String DFA61_eofS =
-        "\1\2\77\uffff";
+        "\1\2\100\uffff";
     static final String DFA61_minS =
-        "\1\4\1\0\76\uffff";
+        "\1\4\1\0\77\uffff";
     static final String DFA61_maxS =
-        "\1\125\1\0\76\uffff";
+        "\1\126\1\0\77\uffff";
     static final String DFA61_acceptS =
-        "\2\uffff\1\2\74\uffff\1\1";
+        "\2\uffff\1\2\75\uffff\1\1";
     static final String DFA61_specialS =
-        "\1\uffff\1\0\76\uffff}>";
+        "\1\uffff\1\0\77\uffff}>";
     static final String[] DFA61_transitionS = {
             "\7\2\6\uffff\26\2\3\uffff\3\2\2\uffff\1\1\1\2\1\uffff\1\2\5"+
-            "\uffff\3\2\1\uffff\22\2\3\uffff\5\2",
+            "\uffff\3\2\1\uffff\22\2\3\uffff\6\2",
             "\1\uffff",
+            "",
             "",
             "",
             "",
@@ -51905,7 +51907,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index61_1 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred83_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred83_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 2;}
 
@@ -51922,21 +51924,22 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
         }
     }
     static final String DFA80_eotS =
-        "\100\uffff";
+        "\101\uffff";
     static final String DFA80_eofS =
-        "\1\2\77\uffff";
+        "\1\2\100\uffff";
     static final String DFA80_minS =
-        "\1\4\1\0\76\uffff";
+        "\1\4\1\0\77\uffff";
     static final String DFA80_maxS =
-        "\1\125\1\0\76\uffff";
+        "\1\126\1\0\77\uffff";
     static final String DFA80_acceptS =
-        "\2\uffff\1\2\74\uffff\1\1";
+        "\2\uffff\1\2\75\uffff\1\1";
     static final String DFA80_specialS =
-        "\1\uffff\1\0\76\uffff}>";
+        "\1\uffff\1\0\77\uffff}>";
     static final String[] DFA80_transitionS = {
             "\7\2\6\uffff\26\2\3\uffff\3\2\2\uffff\1\1\1\2\1\uffff\1\2\5"+
-            "\uffff\3\2\1\uffff\22\2\3\uffff\5\2",
+            "\uffff\3\2\1\uffff\22\2\3\uffff\6\2",
             "\1\uffff",
+            "",
             "",
             "",
             "",
@@ -52044,7 +52047,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index80_1 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred102_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred102_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 2;}
 
@@ -52061,24 +52064,24 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
         }
     }
     static final String DFA88_eotS =
-        "\100\uffff";
+        "\101\uffff";
     static final String DFA88_eofS =
-        "\1\32\77\uffff";
+        "\1\32\100\uffff";
     static final String DFA88_minS =
-        "\1\4\31\0\46\uffff";
+        "\1\4\31\0\47\uffff";
     static final String DFA88_maxS =
-        "\1\125\31\0\46\uffff";
+        "\1\126\31\0\47\uffff";
     static final String DFA88_acceptS =
-        "\32\uffff\1\2\44\uffff\1\1";
+        "\32\uffff\1\2\45\uffff\1\1";
     static final String DFA88_specialS =
         "\1\uffff\1\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14"+
-        "\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27\1\30\46"+
+        "\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27\1\30\47"+
         "\uffff}>";
     static final String[] DFA88_transitionS = {
             "\1\1\1\16\1\17\1\20\2\32\1\14\6\uffff\11\32\1\10\2\32\1\4\1"+
             "\3\4\32\1\2\2\32\1\12\3\uffff\1\6\2\32\2\uffff\1\31\1\32\1\uffff"+
             "\1\32\5\uffff\2\32\1\11\1\uffff\1\32\1\22\1\32\1\7\2\32\1\23"+
-            "\1\24\1\25\1\5\1\15\1\21\1\26\1\27\1\30\3\32\3\uffff\4\32\1"+
+            "\1\24\1\25\1\5\1\15\1\21\1\26\1\27\1\30\3\32\3\uffff\5\32\1"+
             "\13",
             "\1\uffff",
             "\1\uffff",
@@ -52105,6 +52108,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             "\1\uffff",
             "\1\uffff",
             "\1\uffff",
+            "",
             "",
             "",
             "",
@@ -52188,7 +52192,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_1 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52203,7 +52207,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_2 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52218,7 +52222,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_3 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52233,7 +52237,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_4 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52248,7 +52252,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_5 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52263,7 +52267,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_6 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52278,7 +52282,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_7 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52293,7 +52297,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_8 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52308,7 +52312,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_9 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52323,7 +52327,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_10 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52338,7 +52342,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_11 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52353,7 +52357,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_12 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52368,7 +52372,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_13 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52383,7 +52387,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_14 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52398,7 +52402,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_15 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52413,7 +52417,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_16 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52428,7 +52432,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_17 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52443,7 +52447,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_18 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52458,7 +52462,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_19 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52473,7 +52477,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_20 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52488,7 +52492,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_21 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52503,7 +52507,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_22 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52518,7 +52522,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_23 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52533,7 +52537,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_24 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52548,7 +52552,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index88_25 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred110_InternalXtend2()) ) {s = 63;}
+                        if ( (synpred110_InternalXtend2()) ) {s = 64;}
 
                         else if ( (true) ) {s = 26;}
 
@@ -52565,21 +52569,22 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
         }
     }
     static final String DFA94_eotS =
-        "\102\uffff";
+        "\103\uffff";
     static final String DFA94_eofS =
-        "\1\2\101\uffff";
+        "\1\2\102\uffff";
     static final String DFA94_minS =
-        "\1\4\1\0\100\uffff";
+        "\1\4\1\0\101\uffff";
     static final String DFA94_maxS =
-        "\1\125\1\0\100\uffff";
+        "\1\126\1\0\101\uffff";
     static final String DFA94_acceptS =
-        "\2\uffff\1\2\76\uffff\1\1";
+        "\2\uffff\1\2\77\uffff\1\1";
     static final String DFA94_specialS =
-        "\1\uffff\1\0\100\uffff}>";
+        "\1\uffff\1\0\101\uffff}>";
     static final String[] DFA94_transitionS = {
             "\7\2\6\uffff\11\2\1\1\14\2\3\uffff\3\2\1\uffff\3\2\1\uffff\1"+
-            "\2\5\uffff\3\2\1\uffff\22\2\1\uffff\1\2\1\uffff\5\2",
+            "\2\5\uffff\3\2\1\uffff\22\2\1\uffff\1\2\1\uffff\6\2",
             "\1\uffff",
+            "",
             "",
             "",
             "",
@@ -52689,7 +52694,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                         int index94_1 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred116_InternalXtend2()) ) {s = 65;}
+                        if ( (synpred116_InternalXtend2()) ) {s = 66;}
 
                         else if ( (true) ) {s = 2;}
 
@@ -53057,12 +53062,12 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__Class__Group__4__Impl_in_rule__Class__Group__47440 = new BitSet(new long[]{0x0000640004000000L});
     public static final BitSet FOLLOW_rule__Class__Group__5_in_rule__Class__Group__47443 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Class__Group_4__0_in_rule__Class__Group__4__Impl7470 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Class__Group__5__Impl_in_rule__Class__Group__57501 = new BitSet(new long[]{0x0000080000000000L,0x0000000000020002L});
+    public static final BitSet FOLLOW_rule__Class__Group__5__Impl_in_rule__Class__Group__57501 = new BitSet(new long[]{0x0000080000000000L,0x0000000000060000L});
     public static final BitSet FOLLOW_rule__Class__Group__6_in_rule__Class__Group__57504 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_42_in_rule__Class__Group__5__Impl7532 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Class__Group__6__Impl_in_rule__Class__Group__67563 = new BitSet(new long[]{0x0000080000000000L,0x0000000000020002L});
+    public static final BitSet FOLLOW_rule__Class__Group__6__Impl_in_rule__Class__Group__67563 = new BitSet(new long[]{0x0000080000000000L,0x0000000000060000L});
     public static final BitSet FOLLOW_rule__Class__Group__7_in_rule__Class__Group__67566 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Class__MembersAssignment_6_in_rule__Class__Group__6__Impl7593 = new BitSet(new long[]{0x0000000000000002L,0x0000000000020002L});
+    public static final BitSet FOLLOW_rule__Class__MembersAssignment_6_in_rule__Class__Group__6__Impl7593 = new BitSet(new long[]{0x0000000000000002L,0x0000000000060000L});
     public static final BitSet FOLLOW_rule__Class__Group__7__Impl_in_rule__Class__Group__77624 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_43_in_rule__Class__Group__7__Impl7652 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Class__Group_2__0__Impl_in_rule__Class__Group_2__07699 = new BitSet(new long[]{0x0000000000000010L});
@@ -53117,7 +53122,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__Function__Group__5__Impl_in_rule__Function__Group__58808 = new BitSet(new long[]{0x0001800000000010L,0x0000000000002000L});
     public static final BitSet FOLLOW_rule__Function__Group__6_in_rule__Function__Group__58811 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Function__Group_5__0_in_rule__Function__Group__5__Impl8838 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Function__Group__6__Impl_in_rule__Function__Group__68869 = new BitSet(new long[]{0xA4008448641004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__Function__Group__6__Impl_in_rule__Function__Group__68869 = new BitSet(new long[]{0xA4008448641004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__Function__Group__7_in_rule__Function__Group__68872 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_48_in_rule__Function__Group__6__Impl8900 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Function__Group__7__Impl_in_rule__Function__Group__78931 = new BitSet(new long[]{0x0000000000000002L});
@@ -53156,7 +53161,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__RichString__Group__1_in_rule__RichString__Group__09747 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RichString__Group__1__Impl_in_rule__RichString__Group__19805 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RichString__Alternatives_1_in_rule__RichString__Group__1__Impl9832 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RichString__Group_1_1__0__Impl_in_rule__RichString__Group_1_1__09866 = new BitSet(new long[]{0xA4128448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__RichString__Group_1_1__0__Impl_in_rule__RichString__Group_1_1__09866 = new BitSet(new long[]{0xA4128448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__RichString__Group_1_1__1_in_rule__RichString__Group_1_1__09869 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RichString__ElementsAssignment_1_1_0_in_rule__RichString__Group_1_1__0__Impl9896 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RichString__Group_1_1__1__Impl_in_rule__RichString__Group_1_1__19926 = new BitSet(new long[]{0x0000000000000300L});
@@ -53167,7 +53172,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__RichString__Group_1_1_2__0_in_rule__RichString__Group_1_1__2__Impl10016 = new BitSet(new long[]{0x0000000000000102L});
     public static final BitSet FOLLOW_rule__RichString__Group_1_1__3__Impl_in_rule__RichString__Group_1_1__310047 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RichString__ElementsAssignment_1_1_3_in_rule__RichString__Group_1_1__3__Impl10074 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RichString__Group_1_1_2__0__Impl_in_rule__RichString__Group_1_1_2__010112 = new BitSet(new long[]{0xA4128448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__RichString__Group_1_1_2__0__Impl_in_rule__RichString__Group_1_1_2__010112 = new BitSet(new long[]{0xA4128448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__RichString__Group_1_1_2__1_in_rule__RichString__Group_1_1_2__010115 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RichString__ElementsAssignment_1_1_2_0_in_rule__RichString__Group_1_1_2__0__Impl10142 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RichString__Group_1_1_2__1__Impl_in_rule__RichString__Group_1_1_2__110172 = new BitSet(new long[]{0x0000000000000002L});
@@ -53192,12 +53197,12 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__InternalRichString__Group__1_in_rule__InternalRichString__Group__010724 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__InternalRichString__Group__1__Impl_in_rule__InternalRichString__Group__110782 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__InternalRichString__Alternatives_1_in_rule__InternalRichString__Group__1__Impl10809 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__InternalRichString__Group_1_1__0__Impl_in_rule__InternalRichString__Group_1_1__010843 = new BitSet(new long[]{0xA4128448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__InternalRichString__Group_1_1__0__Impl_in_rule__InternalRichString__Group_1_1__010843 = new BitSet(new long[]{0xA4128448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__InternalRichString__Group_1_1__1_in_rule__InternalRichString__Group_1_1__010846 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__InternalRichString__ElementsAssignment_1_1_0_in_rule__InternalRichString__Group_1_1__0__Impl10873 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__InternalRichString__Group_1_1__1__Impl_in_rule__InternalRichString__Group_1_1__110903 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__InternalRichString__Group_1_1_1__0_in_rule__InternalRichString__Group_1_1__1__Impl10932 = new BitSet(new long[]{0xA4128448640004F2L,0x00000000002007FCL});
-    public static final BitSet FOLLOW_rule__InternalRichString__Group_1_1_1__0_in_rule__InternalRichString__Group_1_1__1__Impl10944 = new BitSet(new long[]{0xA4128448640004F2L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__InternalRichString__Group_1_1_1__0_in_rule__InternalRichString__Group_1_1__1__Impl10932 = new BitSet(new long[]{0xA4128448640004F2L,0x00000000004007FCL});
+    public static final BitSet FOLLOW_rule__InternalRichString__Group_1_1_1__0_in_rule__InternalRichString__Group_1_1__1__Impl10944 = new BitSet(new long[]{0xA4128448640004F2L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__InternalRichString__Group_1_1_1__0__Impl_in_rule__InternalRichString__Group_1_1_1__010981 = new BitSet(new long[]{0x0000000000000100L});
     public static final BitSet FOLLOW_rule__InternalRichString__Group_1_1_1__1_in_rule__InternalRichString__Group_1_1_1__010984 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__InternalRichString__ElementsAssignment_1_1_1_0_in_rule__InternalRichString__Group_1_1_1__0__Impl11011 = new BitSet(new long[]{0x0000000000000002L});
@@ -53215,7 +53220,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__RichStringForLoop__Group__2__Impl_in_rule__RichStringForLoop__Group__211347 = new BitSet(new long[]{0x0004000000000000L});
     public static final BitSet FOLLOW_rule__RichStringForLoop__Group__3_in_rule__RichStringForLoop__Group__211350 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RichStringForLoop__DeclaredParamAssignment_2_in_rule__RichStringForLoop__Group__2__Impl11377 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RichStringForLoop__Group__3__Impl_in_rule__RichStringForLoop__Group__311407 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__RichStringForLoop__Group__3__Impl_in_rule__RichStringForLoop__Group__311407 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__RichStringForLoop__Group__4_in_rule__RichStringForLoop__Group__311410 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_50_in_rule__RichStringForLoop__Group__3__Impl11438 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RichStringForLoop__Group__4__Impl_in_rule__RichStringForLoop__Group__411469 = new BitSet(new long[]{0x0000000000000100L});
@@ -53226,9 +53231,9 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__RichStringForLoop__EachExpressionAssignment_5_in_rule__RichStringForLoop__Group__5__Impl11559 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RichStringForLoop__Group__6__Impl_in_rule__RichStringForLoop__Group__611589 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_51_in_rule__RichStringForLoop__Group__6__Impl11617 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RichStringIf__Group__0__Impl_in_rule__RichStringIf__Group__011662 = new BitSet(new long[]{0xA4128448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__RichStringIf__Group__0__Impl_in_rule__RichStringIf__Group__011662 = new BitSet(new long[]{0xA4128448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__RichStringIf__Group__1_in_rule__RichStringIf__Group__011665 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RichStringIf__Group__1__Impl_in_rule__RichStringIf__Group__111723 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__RichStringIf__Group__1__Impl_in_rule__RichStringIf__Group__111723 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__RichStringIf__Group__2_in_rule__RichStringIf__Group__111726 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_52_in_rule__RichStringIf__Group__1__Impl11754 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RichStringIf__Group__2__Impl_in_rule__RichStringIf__Group__211785 = new BitSet(new long[]{0x0000000000000100L});
@@ -53250,7 +53255,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_54_in_rule__RichStringIf__Group_5__0__Impl12131 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RichStringIf__Group_5__1__Impl_in_rule__RichStringIf__Group_5__112162 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RichStringIf__ElseAssignment_5_1_in_rule__RichStringIf__Group_5__1__Impl12189 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RichStringElseIf__Group__0__Impl_in_rule__RichStringElseIf__Group__012223 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__RichStringElseIf__Group__0__Impl_in_rule__RichStringElseIf__Group__012223 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__RichStringElseIf__Group__1_in_rule__RichStringElseIf__Group__012226 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_55_in_rule__RichStringElseIf__Group__0__Impl12254 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RichStringElseIf__Group__1__Impl_in_rule__RichStringElseIf__Group__112285 = new BitSet(new long[]{0x0000000000000100L});
@@ -53263,7 +53268,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XAssignment__Group_0__1__Impl_in_rule__XAssignment__Group_0__112469 = new BitSet(new long[]{0x0000000000010000L});
     public static final BitSet FOLLOW_rule__XAssignment__Group_0__2_in_rule__XAssignment__Group_0__112472 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAssignment__FeatureAssignment_0_1_in_rule__XAssignment__Group_0__1__Impl12499 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XAssignment__Group_0__2__Impl_in_rule__XAssignment__Group_0__212529 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XAssignment__Group_0__2__Impl_in_rule__XAssignment__Group_0__212529 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XAssignment__Group_0__3_in_rule__XAssignment__Group_0__212532 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleOpSingleAssign_in_rule__XAssignment__Group_0__2__Impl12559 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAssignment__Group_0__3__Impl_in_rule__XAssignment__Group_0__312588 = new BitSet(new long[]{0x0000000000000002L});
@@ -53273,7 +53278,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleXOrExpression_in_rule__XAssignment__Group_1__0__Impl12683 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAssignment__Group_1__1__Impl_in_rule__XAssignment__Group_1__112712 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAssignment__Group_1_1__0_in_rule__XAssignment__Group_1__1__Impl12739 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XAssignment__Group_1_1__0__Impl_in_rule__XAssignment__Group_1_1__012774 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XAssignment__Group_1_1__0__Impl_in_rule__XAssignment__Group_1_1__012774 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XAssignment__Group_1_1__1_in_rule__XAssignment__Group_1_1__012777 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAssignment__Group_1_1_0__0_in_rule__XAssignment__Group_1_1__0__Impl12804 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAssignment__Group_1_1__1__Impl_in_rule__XAssignment__Group_1_1__112834 = new BitSet(new long[]{0x0000000000000002L});
@@ -53289,7 +53294,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleXAndExpression_in_rule__XOrExpression__Group__0__Impl13106 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XOrExpression__Group__1__Impl_in_rule__XOrExpression__Group__113135 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XOrExpression__Group_1__0_in_rule__XOrExpression__Group__1__Impl13162 = new BitSet(new long[]{0x0000000000040002L});
-    public static final BitSet FOLLOW_rule__XOrExpression__Group_1__0__Impl_in_rule__XOrExpression__Group_1__013197 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XOrExpression__Group_1__0__Impl_in_rule__XOrExpression__Group_1__013197 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XOrExpression__Group_1__1_in_rule__XOrExpression__Group_1__013200 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XOrExpression__Group_1_0__0_in_rule__XOrExpression__Group_1__0__Impl13227 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XOrExpression__Group_1__1__Impl_in_rule__XOrExpression__Group_1__113257 = new BitSet(new long[]{0x0000000000000002L});
@@ -53305,7 +53310,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleXEqualityExpression_in_rule__XAndExpression__Group__0__Impl13529 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAndExpression__Group__1__Impl_in_rule__XAndExpression__Group__113558 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAndExpression__Group_1__0_in_rule__XAndExpression__Group__1__Impl13585 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_rule__XAndExpression__Group_1__0__Impl_in_rule__XAndExpression__Group_1__013620 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XAndExpression__Group_1__0__Impl_in_rule__XAndExpression__Group_1__013620 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XAndExpression__Group_1__1_in_rule__XAndExpression__Group_1__013623 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAndExpression__Group_1_0__0_in_rule__XAndExpression__Group_1__0__Impl13650 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAndExpression__Group_1__1__Impl_in_rule__XAndExpression__Group_1__113680 = new BitSet(new long[]{0x0000000000000002L});
@@ -53321,7 +53326,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleXRelationalExpression_in_rule__XEqualityExpression__Group__0__Impl13952 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XEqualityExpression__Group__1__Impl_in_rule__XEqualityExpression__Group__113981 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XEqualityExpression__Group_1__0_in_rule__XEqualityExpression__Group__1__Impl14008 = new BitSet(new long[]{0x0000000000600002L});
-    public static final BitSet FOLLOW_rule__XEqualityExpression__Group_1__0__Impl_in_rule__XEqualityExpression__Group_1__014043 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XEqualityExpression__Group_1__0__Impl_in_rule__XEqualityExpression__Group_1__014043 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XEqualityExpression__Group_1__1_in_rule__XEqualityExpression__Group_1__014046 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XEqualityExpression__Group_1_0__0_in_rule__XEqualityExpression__Group_1__0__Impl14073 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XEqualityExpression__Group_1__1__Impl_in_rule__XEqualityExpression__Group_1__114103 = new BitSet(new long[]{0x0000000000000002L});
@@ -53348,7 +53353,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XRelationalExpression__Group_1_0_0_0__1_in_rule__XRelationalExpression__Group_1_0_0_0__014649 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XRelationalExpression__Group_1_0_0_0__1__Impl_in_rule__XRelationalExpression__Group_1_0_0_0__114707 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_56_in_rule__XRelationalExpression__Group_1_0_0_0__1__Impl14735 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XRelationalExpression__Group_1_1__0__Impl_in_rule__XRelationalExpression__Group_1_1__014770 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XRelationalExpression__Group_1_1__0__Impl_in_rule__XRelationalExpression__Group_1_1__014770 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XRelationalExpression__Group_1_1__1_in_rule__XRelationalExpression__Group_1_1__014773 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XRelationalExpression__Group_1_1_0__0_in_rule__XRelationalExpression__Group_1_1__0__Impl14800 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XRelationalExpression__Group_1_1__1__Impl_in_rule__XRelationalExpression__Group_1_1__114830 = new BitSet(new long[]{0x0000000000000002L});
@@ -53364,7 +53369,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleXAdditiveExpression_in_rule__XOtherOperatorExpression__Group__0__Impl15102 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XOtherOperatorExpression__Group__1__Impl_in_rule__XOtherOperatorExpression__Group__115131 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XOtherOperatorExpression__Group_1__0_in_rule__XOtherOperatorExpression__Group__1__Impl15158 = new BitSet(new long[]{0x0000000018000002L});
-    public static final BitSet FOLLOW_rule__XOtherOperatorExpression__Group_1__0__Impl_in_rule__XOtherOperatorExpression__Group_1__015193 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XOtherOperatorExpression__Group_1__0__Impl_in_rule__XOtherOperatorExpression__Group_1__015193 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XOtherOperatorExpression__Group_1__1_in_rule__XOtherOperatorExpression__Group_1__015196 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XOtherOperatorExpression__Group_1_0__0_in_rule__XOtherOperatorExpression__Group_1__0__Impl15223 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XOtherOperatorExpression__Group_1__1__Impl_in_rule__XOtherOperatorExpression__Group_1__115253 = new BitSet(new long[]{0x0000000000000002L});
@@ -53380,7 +53385,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleXMultiplicativeExpression_in_rule__XAdditiveExpression__Group__0__Impl15525 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAdditiveExpression__Group__1__Impl_in_rule__XAdditiveExpression__Group__115554 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAdditiveExpression__Group_1__0_in_rule__XAdditiveExpression__Group__1__Impl15581 = new BitSet(new long[]{0x0000000060000002L});
-    public static final BitSet FOLLOW_rule__XAdditiveExpression__Group_1__0__Impl_in_rule__XAdditiveExpression__Group_1__015616 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XAdditiveExpression__Group_1__0__Impl_in_rule__XAdditiveExpression__Group_1__015616 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XAdditiveExpression__Group_1__1_in_rule__XAdditiveExpression__Group_1__015619 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAdditiveExpression__Group_1_0__0_in_rule__XAdditiveExpression__Group_1__0__Impl15646 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAdditiveExpression__Group_1__1__Impl_in_rule__XAdditiveExpression__Group_1__115676 = new BitSet(new long[]{0x0000000000000002L});
@@ -53396,7 +53401,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleXUnaryOperation_in_rule__XMultiplicativeExpression__Group__0__Impl15948 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMultiplicativeExpression__Group__1__Impl_in_rule__XMultiplicativeExpression__Group__115977 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMultiplicativeExpression__Group_1__0_in_rule__XMultiplicativeExpression__Group__1__Impl16004 = new BitSet(new long[]{0x0000000780000002L});
-    public static final BitSet FOLLOW_rule__XMultiplicativeExpression__Group_1__0__Impl_in_rule__XMultiplicativeExpression__Group_1__016039 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XMultiplicativeExpression__Group_1__0__Impl_in_rule__XMultiplicativeExpression__Group_1__016039 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XMultiplicativeExpression__Group_1__1_in_rule__XMultiplicativeExpression__Group_1__016042 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMultiplicativeExpression__Group_1_0__0_in_rule__XMultiplicativeExpression__Group_1__0__Impl16069 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMultiplicativeExpression__Group_1__1__Impl_in_rule__XMultiplicativeExpression__Group_1__116099 = new BitSet(new long[]{0x0000000000000002L});
@@ -53409,7 +53414,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XMultiplicativeExpression__FeatureAssignment_1_0_0_1_in_rule__XMultiplicativeExpression__Group_1_0_0__1__Impl16307 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XUnaryOperation__Group_0__0__Impl_in_rule__XUnaryOperation__Group_0__016341 = new BitSet(new long[]{0x0000000860000000L});
     public static final BitSet FOLLOW_rule__XUnaryOperation__Group_0__1_in_rule__XUnaryOperation__Group_0__016344 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XUnaryOperation__Group_0__1__Impl_in_rule__XUnaryOperation__Group_0__116402 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XUnaryOperation__Group_0__1__Impl_in_rule__XUnaryOperation__Group_0__116402 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XUnaryOperation__Group_0__2_in_rule__XUnaryOperation__Group_0__116405 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XUnaryOperation__FeatureAssignment_0_1_in_rule__XUnaryOperation__Group_0__1__Impl16432 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XUnaryOperation__Group_0__2__Impl_in_rule__XUnaryOperation__Group_0__216462 = new BitSet(new long[]{0x0000000000000002L});
@@ -53430,12 +53435,12 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XCastedExpression__Group_1_0_0__1_in_rule__XCastedExpression__Group_1_0_0__016829 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XCastedExpression__Group_1_0_0__1__Impl_in_rule__XCastedExpression__Group_1_0_0__116887 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_57_in_rule__XCastedExpression__Group_1_0_0__1__Impl16915 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group__0__Impl_in_rule__XMemberFeatureCall__Group__016950 = new BitSet(new long[]{0x0000001000000000L,0x00000000000C0000L});
+    public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group__0__Impl_in_rule__XMemberFeatureCall__Group__016950 = new BitSet(new long[]{0x0000001000000000L,0x0000000000180000L});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group__1_in_rule__XMemberFeatureCall__Group__016953 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXPrimaryExpression_in_rule__XMemberFeatureCall__Group__0__Impl16980 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group__1__Impl_in_rule__XMemberFeatureCall__Group__117009 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XMemberFeatureCall__Alternatives_1_in_rule__XMemberFeatureCall__Group__1__Impl17036 = new BitSet(new long[]{0x0000001000000002L,0x00000000000C0000L});
-    public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_0__0__Impl_in_rule__XMemberFeatureCall__Group_1_0__017071 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XMemberFeatureCall__Alternatives_1_in_rule__XMemberFeatureCall__Group__1__Impl17036 = new BitSet(new long[]{0x0000001000000002L,0x0000000000180000L});
+    public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_0__0__Impl_in_rule__XMemberFeatureCall__Group_1_0__017071 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_0__1_in_rule__XMemberFeatureCall__Group_1_0__017074 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_0_0__0_in_rule__XMemberFeatureCall__Group_1_0__0__Impl17101 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_0__1__Impl_in_rule__XMemberFeatureCall__Group_1_0__117131 = new BitSet(new long[]{0x0000000000000002L});
@@ -53465,7 +53470,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_1_3__0_in_rule__XMemberFeatureCall__Group_1_1__3__Impl17706 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_1_0__0__Impl_in_rule__XMemberFeatureCall__Group_1_1_0__017745 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_1_0_0__0_in_rule__XMemberFeatureCall__Group_1_1_0__0__Impl17772 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_1_0_0__0__Impl_in_rule__XMemberFeatureCall__Group_1_1_0_0__017804 = new BitSet(new long[]{0x0000001000000000L,0x00000000000C0000L});
+    public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_1_0_0__0__Impl_in_rule__XMemberFeatureCall__Group_1_1_0_0__017804 = new BitSet(new long[]{0x0000001000000000L,0x0000000000180000L});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_1_0_0__1_in_rule__XMemberFeatureCall__Group_1_1_0_0__017807 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_1_0_0__1__Impl_in_rule__XMemberFeatureCall__Group_1_1_0_0__117865 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__Alternatives_1_1_0_0_1_in_rule__XMemberFeatureCall__Group_1_1_0_0__1__Impl17892 = new BitSet(new long[]{0x0000000000000002L});
@@ -53485,10 +53490,10 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_44_in_rule__XMemberFeatureCall__Group_1_1_1_2__0__Impl18207 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_1_1_2__1__Impl_in_rule__XMemberFeatureCall__Group_1_1_1_2__118238 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_2_1_in_rule__XMemberFeatureCall__Group_1_1_1_2__1__Impl18265 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_1_3__0__Impl_in_rule__XMemberFeatureCall__Group_1_1_3__018299 = new BitSet(new long[]{0xAC018448640004F0L,0x00000000002027FCL});
+    public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_1_3__0__Impl_in_rule__XMemberFeatureCall__Group_1_1_3__018299 = new BitSet(new long[]{0xAC018448640004F0L,0x00000000004027FCL});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_1_3__1_in_rule__XMemberFeatureCall__Group_1_1_3__018302 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__ExplicitOperationCallAssignment_1_1_3_0_in_rule__XMemberFeatureCall__Group_1_1_3__0__Impl18329 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_1_3__1__Impl_in_rule__XMemberFeatureCall__Group_1_1_3__118359 = new BitSet(new long[]{0xAC018448640004F0L,0x00000000002027FCL});
+    public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_1_3__1__Impl_in_rule__XMemberFeatureCall__Group_1_1_3__118359 = new BitSet(new long[]{0xAC018448640004F0L,0x00000000004027FCL});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_1_3__2_in_rule__XMemberFeatureCall__Group_1_1_3__118362 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__Alternatives_1_1_3_1_in_rule__XMemberFeatureCall__Group_1_1_3__1__Impl18389 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_1_3__2__Impl_in_rule__XMemberFeatureCall__Group_1_1_3__218420 = new BitSet(new long[]{0x0000000000000002L});
@@ -53498,7 +53503,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_0_in_rule__XMemberFeatureCall__Group_1_1_3_1_1__0__Impl18515 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_1_3_1_1__1__Impl_in_rule__XMemberFeatureCall__Group_1_1_3_1_1__118545 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_1_3_1_1_1__0_in_rule__XMemberFeatureCall__Group_1_1_3_1_1__1__Impl18572 = new BitSet(new long[]{0x0000100000000002L});
-    public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_1_3_1_1_1__0__Impl_in_rule__XMemberFeatureCall__Group_1_1_3_1_1_1__018607 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_1_3_1_1_1__0__Impl_in_rule__XMemberFeatureCall__Group_1_1_3_1_1_1__018607 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_1_3_1_1_1__1_in_rule__XMemberFeatureCall__Group_1_1_3_1_1_1__018610 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_44_in_rule__XMemberFeatureCall__Group_1_1_3_1_1_1__0__Impl18638 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_1_3_1_1_1__1__Impl_in_rule__XMemberFeatureCall__Group_1_1_3_1_1_1__118669 = new BitSet(new long[]{0x0000000000000002L});
@@ -53511,7 +53516,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XClosure__Group__2__Impl_in_rule__XClosure__Group__218853 = new BitSet(new long[]{0x0800800000000010L,0x0000000000002000L});
     public static final BitSet FOLLOW_rule__XClosure__Group__3_in_rule__XClosure__Group__218856 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XClosure__Group_2__0_in_rule__XClosure__Group__2__Impl18883 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XClosure__Group__3__Impl_in_rule__XClosure__Group__318914 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XClosure__Group__3__Impl_in_rule__XClosure__Group__318914 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XClosure__Group__4_in_rule__XClosure__Group__318917 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_59_in_rule__XClosure__Group__3__Impl18945 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XClosure__Group__4__Impl_in_rule__XClosure__Group__418976 = new BitSet(new long[]{0x1000000000000000L});
@@ -53529,7 +53534,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_44_in_rule__XClosure__Group_2_1__0__Impl19260 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XClosure__Group_2_1__1__Impl_in_rule__XClosure__Group_2_1__119291 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XClosure__FormalParametersAssignment_2_1_1_in_rule__XClosure__Group_2_1__1__Impl19318 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XShortClosure__Group__0__Impl_in_rule__XShortClosure__Group__019352 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XShortClosure__Group__0__Impl_in_rule__XShortClosure__Group__019352 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XShortClosure__Group__1_in_rule__XShortClosure__Group__019355 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XShortClosure__Group_0__0_in_rule__XShortClosure__Group__0__Impl19382 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XShortClosure__Group__1__Impl_in_rule__XShortClosure__Group__119412 = new BitSet(new long[]{0x0000000000000002L});
@@ -53553,7 +53558,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_44_in_rule__XShortClosure__Group_0_0_1_1__0__Impl19872 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XShortClosure__Group_0_0_1_1__1__Impl_in_rule__XShortClosure__Group_0_0_1_1__119903 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XShortClosure__FormalParametersAssignment_0_0_1_1_1_in_rule__XShortClosure__Group_0_0_1_1__1__Impl19930 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XParenthesizedExpression__Group__0__Impl_in_rule__XParenthesizedExpression__Group__019964 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XParenthesizedExpression__Group__0__Impl_in_rule__XParenthesizedExpression__Group__019964 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XParenthesizedExpression__Group__1_in_rule__XParenthesizedExpression__Group__019967 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_47_in_rule__XParenthesizedExpression__Group__0__Impl19995 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XParenthesizedExpression__Group__1__Impl_in_rule__XParenthesizedExpression__Group__120026 = new BitSet(new long[]{0x0001000000000000L});
@@ -53566,13 +53571,13 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XIfExpression__Group__1__Impl_in_rule__XIfExpression__Group__120211 = new BitSet(new long[]{0x0000800000000000L});
     public static final BitSet FOLLOW_rule__XIfExpression__Group__2_in_rule__XIfExpression__Group__120214 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_61_in_rule__XIfExpression__Group__1__Impl20242 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XIfExpression__Group__2__Impl_in_rule__XIfExpression__Group__220273 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XIfExpression__Group__2__Impl_in_rule__XIfExpression__Group__220273 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XIfExpression__Group__3_in_rule__XIfExpression__Group__220276 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_47_in_rule__XIfExpression__Group__2__Impl20304 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XIfExpression__Group__3__Impl_in_rule__XIfExpression__Group__320335 = new BitSet(new long[]{0x0001000000000000L});
     public static final BitSet FOLLOW_rule__XIfExpression__Group__4_in_rule__XIfExpression__Group__320338 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XIfExpression__IfAssignment_3_in_rule__XIfExpression__Group__3__Impl20365 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XIfExpression__Group__4__Impl_in_rule__XIfExpression__Group__420395 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XIfExpression__Group__4__Impl_in_rule__XIfExpression__Group__420395 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XIfExpression__Group__5_in_rule__XIfExpression__Group__420398 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_48_in_rule__XIfExpression__Group__4__Impl20426 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XIfExpression__Group__5__Impl_in_rule__XIfExpression__Group__520457 = new BitSet(new long[]{0x4000000000000000L});
@@ -53580,17 +53585,17 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XIfExpression__ThenAssignment_5_in_rule__XIfExpression__Group__5__Impl20487 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XIfExpression__Group__6__Impl_in_rule__XIfExpression__Group__620517 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XIfExpression__Group_6__0_in_rule__XIfExpression__Group__6__Impl20544 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XIfExpression__Group_6__0__Impl_in_rule__XIfExpression__Group_6__020589 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XIfExpression__Group_6__0__Impl_in_rule__XIfExpression__Group_6__020589 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XIfExpression__Group_6__1_in_rule__XIfExpression__Group_6__020592 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_62_in_rule__XIfExpression__Group_6__0__Impl20621 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XIfExpression__Group_6__1__Impl_in_rule__XIfExpression__Group_6__120653 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XIfExpression__ElseAssignment_6_1_in_rule__XIfExpression__Group_6__1__Impl20680 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XSwitchExpression__Group__0__Impl_in_rule__XSwitchExpression__Group__020714 = new BitSet(new long[]{0x8000000000000000L});
     public static final BitSet FOLLOW_rule__XSwitchExpression__Group__1_in_rule__XSwitchExpression__Group__020717 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group__1__Impl_in_rule__XSwitchExpression__Group__120775 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group__1__Impl_in_rule__XSwitchExpression__Group__120775 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XSwitchExpression__Group__2_in_rule__XSwitchExpression__Group__120778 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_63_in_rule__XSwitchExpression__Group__1__Impl20806 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group__2__Impl_in_rule__XSwitchExpression__Group__220837 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group__2__Impl_in_rule__XSwitchExpression__Group__220837 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XSwitchExpression__Group__3_in_rule__XSwitchExpression__Group__220840 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2__0_in_rule__XSwitchExpression__Group__2__Impl20867 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XSwitchExpression__Group__3__Impl_in_rule__XSwitchExpression__Group__320898 = new BitSet(new long[]{0x0000040000000000L});
@@ -53616,7 +53621,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XSwitchExpression__Group_6__0__Impl_in_rule__XSwitchExpression__Group_6__021356 = new BitSet(new long[]{0x0004000000000000L});
     public static final BitSet FOLLOW_rule__XSwitchExpression__Group_6__1_in_rule__XSwitchExpression__Group_6__021359 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_64_in_rule__XSwitchExpression__Group_6__0__Impl21387 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_6__1__Impl_in_rule__XSwitchExpression__Group_6__121418 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_6__1__Impl_in_rule__XSwitchExpression__Group_6__121418 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XSwitchExpression__Group_6__2_in_rule__XSwitchExpression__Group_6__121421 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_50_in_rule__XSwitchExpression__Group_6__1__Impl21449 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XSwitchExpression__Group_6__2__Impl_in_rule__XSwitchExpression__Group_6__221480 = new BitSet(new long[]{0x0000000000000002L});
@@ -53627,12 +53632,12 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XCasePart__Group__1__Impl_in_rule__XCasePart__Group__121604 = new BitSet(new long[]{0x0004800000000010L,0x0000000000002002L});
     public static final BitSet FOLLOW_rule__XCasePart__Group__2_in_rule__XCasePart__Group__121607 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XCasePart__Group_1__0_in_rule__XCasePart__Group__1__Impl21634 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XCasePart__Group__2__Impl_in_rule__XCasePart__Group__221665 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XCasePart__Group__2__Impl_in_rule__XCasePart__Group__221665 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XCasePart__Group__3_in_rule__XCasePart__Group__221668 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_50_in_rule__XCasePart__Group__2__Impl21696 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XCasePart__Group__3__Impl_in_rule__XCasePart__Group__321727 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XCasePart__ThenAssignment_3_in_rule__XCasePart__Group__3__Impl21754 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XCasePart__Group_1__0__Impl_in_rule__XCasePart__Group_1__021792 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XCasePart__Group_1__0__Impl_in_rule__XCasePart__Group_1__021792 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XCasePart__Group_1__1_in_rule__XCasePart__Group_1__021795 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_65_in_rule__XCasePart__Group_1__0__Impl21823 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XCasePart__Group_1__1__Impl_in_rule__XCasePart__Group_1__121854 = new BitSet(new long[]{0x0000000000000002L});
@@ -53648,13 +53653,13 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XForLoopExpression__Group__3__Impl_in_rule__XForLoopExpression__Group__322100 = new BitSet(new long[]{0x0004000000000000L});
     public static final BitSet FOLLOW_rule__XForLoopExpression__Group__4_in_rule__XForLoopExpression__Group__322103 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XForLoopExpression__DeclaredParamAssignment_3_in_rule__XForLoopExpression__Group__3__Impl22130 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XForLoopExpression__Group__4__Impl_in_rule__XForLoopExpression__Group__422160 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XForLoopExpression__Group__4__Impl_in_rule__XForLoopExpression__Group__422160 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XForLoopExpression__Group__5_in_rule__XForLoopExpression__Group__422163 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_50_in_rule__XForLoopExpression__Group__4__Impl22191 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XForLoopExpression__Group__5__Impl_in_rule__XForLoopExpression__Group__522222 = new BitSet(new long[]{0x0001000000000000L});
     public static final BitSet FOLLOW_rule__XForLoopExpression__Group__6_in_rule__XForLoopExpression__Group__522225 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XForLoopExpression__ForExpressionAssignment_5_in_rule__XForLoopExpression__Group__5__Impl22252 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XForLoopExpression__Group__6__Impl_in_rule__XForLoopExpression__Group__622282 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XForLoopExpression__Group__6__Impl_in_rule__XForLoopExpression__Group__622282 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XForLoopExpression__Group__7_in_rule__XForLoopExpression__Group__622285 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_48_in_rule__XForLoopExpression__Group__6__Impl22313 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XForLoopExpression__Group__7__Impl_in_rule__XForLoopExpression__Group__722344 = new BitSet(new long[]{0x0000000000000002L});
@@ -53664,20 +53669,20 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XWhileExpression__Group__1__Impl_in_rule__XWhileExpression__Group__122478 = new BitSet(new long[]{0x0000800000000000L});
     public static final BitSet FOLLOW_rule__XWhileExpression__Group__2_in_rule__XWhileExpression__Group__122481 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_67_in_rule__XWhileExpression__Group__1__Impl22509 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XWhileExpression__Group__2__Impl_in_rule__XWhileExpression__Group__222540 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XWhileExpression__Group__2__Impl_in_rule__XWhileExpression__Group__222540 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XWhileExpression__Group__3_in_rule__XWhileExpression__Group__222543 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_47_in_rule__XWhileExpression__Group__2__Impl22571 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XWhileExpression__Group__3__Impl_in_rule__XWhileExpression__Group__322602 = new BitSet(new long[]{0x0001000000000000L});
     public static final BitSet FOLLOW_rule__XWhileExpression__Group__4_in_rule__XWhileExpression__Group__322605 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XWhileExpression__PredicateAssignment_3_in_rule__XWhileExpression__Group__3__Impl22632 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XWhileExpression__Group__4__Impl_in_rule__XWhileExpression__Group__422662 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XWhileExpression__Group__4__Impl_in_rule__XWhileExpression__Group__422662 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XWhileExpression__Group__5_in_rule__XWhileExpression__Group__422665 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_48_in_rule__XWhileExpression__Group__4__Impl22693 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XWhileExpression__Group__5__Impl_in_rule__XWhileExpression__Group__522724 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XWhileExpression__BodyAssignment_5_in_rule__XWhileExpression__Group__5__Impl22751 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XDoWhileExpression__Group__0__Impl_in_rule__XDoWhileExpression__Group__022793 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000010L});
     public static final BitSet FOLLOW_rule__XDoWhileExpression__Group__1_in_rule__XDoWhileExpression__Group__022796 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XDoWhileExpression__Group__1__Impl_in_rule__XDoWhileExpression__Group__122854 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XDoWhileExpression__Group__1__Impl_in_rule__XDoWhileExpression__Group__122854 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XDoWhileExpression__Group__2_in_rule__XDoWhileExpression__Group__122857 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_68_in_rule__XDoWhileExpression__Group__1__Impl22885 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XDoWhileExpression__Group__2__Impl_in_rule__XDoWhileExpression__Group__222916 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
@@ -53686,7 +53691,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XDoWhileExpression__Group__3__Impl_in_rule__XDoWhileExpression__Group__322976 = new BitSet(new long[]{0x0000800000000000L});
     public static final BitSet FOLLOW_rule__XDoWhileExpression__Group__4_in_rule__XDoWhileExpression__Group__322979 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_67_in_rule__XDoWhileExpression__Group__3__Impl23007 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XDoWhileExpression__Group__4__Impl_in_rule__XDoWhileExpression__Group__423038 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XDoWhileExpression__Group__4__Impl_in_rule__XDoWhileExpression__Group__423038 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XDoWhileExpression__Group__5_in_rule__XDoWhileExpression__Group__423041 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_47_in_rule__XDoWhileExpression__Group__4__Impl23069 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XDoWhileExpression__Group__5__Impl_in_rule__XDoWhileExpression__Group__523100 = new BitSet(new long[]{0x0001000000000000L});
@@ -53696,12 +53701,12 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_48_in_rule__XDoWhileExpression__Group__6__Impl23188 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XBlockExpression__Group__0__Impl_in_rule__XBlockExpression__Group__023233 = new BitSet(new long[]{0x0000040000000000L});
     public static final BitSet FOLLOW_rule__XBlockExpression__Group__1_in_rule__XBlockExpression__Group__023236 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XBlockExpression__Group__1__Impl_in_rule__XBlockExpression__Group__123294 = new BitSet(new long[]{0xA4008C68640004F0L,0x00000000003007FCL});
+    public static final BitSet FOLLOW_rule__XBlockExpression__Group__1__Impl_in_rule__XBlockExpression__Group__123294 = new BitSet(new long[]{0xA4008C68640004F0L,0x00000000006007FCL});
     public static final BitSet FOLLOW_rule__XBlockExpression__Group__2_in_rule__XBlockExpression__Group__123297 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_42_in_rule__XBlockExpression__Group__1__Impl23325 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XBlockExpression__Group__2__Impl_in_rule__XBlockExpression__Group__223356 = new BitSet(new long[]{0xA4008C68640004F0L,0x00000000003007FCL});
+    public static final BitSet FOLLOW_rule__XBlockExpression__Group__2__Impl_in_rule__XBlockExpression__Group__223356 = new BitSet(new long[]{0xA4008C68640004F0L,0x00000000006007FCL});
     public static final BitSet FOLLOW_rule__XBlockExpression__Group__3_in_rule__XBlockExpression__Group__223359 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XBlockExpression__Group_2__0_in_rule__XBlockExpression__Group__2__Impl23386 = new BitSet(new long[]{0xA4008468640004F2L,0x00000000003007FCL});
+    public static final BitSet FOLLOW_rule__XBlockExpression__Group_2__0_in_rule__XBlockExpression__Group__2__Impl23386 = new BitSet(new long[]{0xA4008468640004F2L,0x00000000006007FCL});
     public static final BitSet FOLLOW_rule__XBlockExpression__Group__3__Impl_in_rule__XBlockExpression__Group__323417 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_43_in_rule__XBlockExpression__Group__3__Impl23445 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XBlockExpression__Group_2__0__Impl_in_rule__XBlockExpression__Group_2__023484 = new BitSet(new long[]{0x0000000000100000L});
@@ -53709,7 +53714,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XBlockExpression__ExpressionsAssignment_2_0_in_rule__XBlockExpression__Group_2__0__Impl23514 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XBlockExpression__Group_2__1__Impl_in_rule__XBlockExpression__Group_2__123544 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_20_in_rule__XBlockExpression__Group_2__1__Impl23573 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XVariableDeclaration__Group__0__Impl_in_rule__XVariableDeclaration__Group__023610 = new BitSet(new long[]{0x0000002000000000L,0x0000000000100000L});
+    public static final BitSet FOLLOW_rule__XVariableDeclaration__Group__0__Impl_in_rule__XVariableDeclaration__Group__023610 = new BitSet(new long[]{0x0000002000000000L,0x0000000000200000L});
     public static final BitSet FOLLOW_rule__XVariableDeclaration__Group__1_in_rule__XVariableDeclaration__Group__023613 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XVariableDeclaration__Group__1__Impl_in_rule__XVariableDeclaration__Group__123671 = new BitSet(new long[]{0x0000800000000010L,0x0000000000002000L});
     public static final BitSet FOLLOW_rule__XVariableDeclaration__Group__2_in_rule__XVariableDeclaration__Group__123674 = new BitSet(new long[]{0x0000000000000002L});
@@ -53726,7 +53731,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XVariableDeclaration__TypeAssignment_2_0_0_0_in_rule__XVariableDeclaration__Group_2_0_0__0__Impl23946 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XVariableDeclaration__Group_2_0_0__1__Impl_in_rule__XVariableDeclaration__Group_2_0_0__123976 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XVariableDeclaration__NameAssignment_2_0_0_1_in_rule__XVariableDeclaration__Group_2_0_0__1__Impl24003 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XVariableDeclaration__Group_3__0__Impl_in_rule__XVariableDeclaration__Group_3__024037 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XVariableDeclaration__Group_3__0__Impl_in_rule__XVariableDeclaration__Group_3__024037 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XVariableDeclaration__Group_3__1_in_rule__XVariableDeclaration__Group_3__024040 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_16_in_rule__XVariableDeclaration__Group_3__0__Impl24068 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XVariableDeclaration__Group_3__1__Impl_in_rule__XVariableDeclaration__Group_3__124099 = new BitSet(new long[]{0x0000000000000002L});
@@ -53762,10 +53767,10 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_44_in_rule__XFeatureCall__Group_1_2__0__Impl24811 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XFeatureCall__Group_1_2__1__Impl_in_rule__XFeatureCall__Group_1_2__124842 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XFeatureCall__TypeArgumentsAssignment_1_2_1_in_rule__XFeatureCall__Group_1_2__1__Impl24869 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_3__0__Impl_in_rule__XFeatureCall__Group_3__024903 = new BitSet(new long[]{0xAC018448640004F0L,0x00000000002027FCL});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_3__0__Impl_in_rule__XFeatureCall__Group_3__024903 = new BitSet(new long[]{0xAC018448640004F0L,0x00000000004027FCL});
     public static final BitSet FOLLOW_rule__XFeatureCall__Group_3__1_in_rule__XFeatureCall__Group_3__024906 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XFeatureCall__ExplicitOperationCallAssignment_3_0_in_rule__XFeatureCall__Group_3__0__Impl24933 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_3__1__Impl_in_rule__XFeatureCall__Group_3__124963 = new BitSet(new long[]{0xAC018448640004F0L,0x00000000002027FCL});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_3__1__Impl_in_rule__XFeatureCall__Group_3__124963 = new BitSet(new long[]{0xAC018448640004F0L,0x00000000004027FCL});
     public static final BitSet FOLLOW_rule__XFeatureCall__Group_3__2_in_rule__XFeatureCall__Group_3__124966 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XFeatureCall__Alternatives_3_1_in_rule__XFeatureCall__Group_3__1__Impl24993 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XFeatureCall__Group_3__2__Impl_in_rule__XFeatureCall__Group_3__225024 = new BitSet(new long[]{0x0000000000000002L});
@@ -53775,7 +53780,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_0_in_rule__XFeatureCall__Group_3_1_1__0__Impl25119 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XFeatureCall__Group_3_1_1__1__Impl_in_rule__XFeatureCall__Group_3_1_1__125149 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XFeatureCall__Group_3_1_1_1__0_in_rule__XFeatureCall__Group_3_1_1__1__Impl25176 = new BitSet(new long[]{0x0000100000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_3_1_1_1__0__Impl_in_rule__XFeatureCall__Group_3_1_1_1__025211 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_3_1_1_1__0__Impl_in_rule__XFeatureCall__Group_3_1_1_1__025211 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XFeatureCall__Group_3_1_1_1__1_in_rule__XFeatureCall__Group_3_1_1_1__025214 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_44_in_rule__XFeatureCall__Group_3_1_1_1__0__Impl25242 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XFeatureCall__Group_3_1_1_1__1__Impl_in_rule__XFeatureCall__Group_3_1_1_1__125273 = new BitSet(new long[]{0x0000000000000002L});
@@ -53791,10 +53796,10 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XConstructorCall__Group__3__Impl_in_rule__XConstructorCall__Group__325517 = new BitSet(new long[]{0x0000800004000000L});
     public static final BitSet FOLLOW_rule__XConstructorCall__Group__4_in_rule__XConstructorCall__Group__325520 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XConstructorCall__Group_3__0_in_rule__XConstructorCall__Group__3__Impl25547 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group__4__Impl_in_rule__XConstructorCall__Group__425578 = new BitSet(new long[]{0xAC018448640004F0L,0x00000000002027FCL});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group__4__Impl_in_rule__XConstructorCall__Group__425578 = new BitSet(new long[]{0xAC018448640004F0L,0x00000000004027FCL});
     public static final BitSet FOLLOW_rule__XConstructorCall__Group__5_in_rule__XConstructorCall__Group__425581 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_47_in_rule__XConstructorCall__Group__4__Impl25609 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group__5__Impl_in_rule__XConstructorCall__Group__525640 = new BitSet(new long[]{0xAC018448640004F0L,0x00000000002027FCL});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group__5__Impl_in_rule__XConstructorCall__Group__525640 = new BitSet(new long[]{0xAC018448640004F0L,0x00000000004027FCL});
     public static final BitSet FOLLOW_rule__XConstructorCall__Group__6_in_rule__XConstructorCall__Group__525643 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XConstructorCall__Alternatives_5_in_rule__XConstructorCall__Group__5__Impl25670 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XConstructorCall__Group__6__Impl_in_rule__XConstructorCall__Group__625701 = new BitSet(new long[]{0x0000000000000002L});
@@ -53820,12 +53825,12 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XConstructorCall__ArgumentsAssignment_5_1_0_in_rule__XConstructorCall__Group_5_1__0__Impl26177 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XConstructorCall__Group_5_1__1__Impl_in_rule__XConstructorCall__Group_5_1__126207 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XConstructorCall__Group_5_1_1__0_in_rule__XConstructorCall__Group_5_1__1__Impl26234 = new BitSet(new long[]{0x0000100000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group_5_1_1__0__Impl_in_rule__XConstructorCall__Group_5_1_1__026269 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_5_1_1__0__Impl_in_rule__XConstructorCall__Group_5_1_1__026269 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XConstructorCall__Group_5_1_1__1_in_rule__XConstructorCall__Group_5_1_1__026272 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_44_in_rule__XConstructorCall__Group_5_1_1__0__Impl26300 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XConstructorCall__Group_5_1_1__1__Impl_in_rule__XConstructorCall__Group_5_1_1__126331 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XConstructorCall__ArgumentsAssignment_5_1_1_1_in_rule__XConstructorCall__Group_5_1_1__1__Impl26358 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XBooleanLiteral__Group__0__Impl_in_rule__XBooleanLiteral__Group__026392 = new BitSet(new long[]{0x0000004000000000L,0x0000000000200000L});
+    public static final BitSet FOLLOW_rule__XBooleanLiteral__Group__0__Impl_in_rule__XBooleanLiteral__Group__026392 = new BitSet(new long[]{0x0000004000000000L,0x0000000000400000L});
     public static final BitSet FOLLOW_rule__XBooleanLiteral__Group__1_in_rule__XBooleanLiteral__Group__026395 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XBooleanLiteral__Group__1__Impl_in_rule__XBooleanLiteral__Group__126453 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XBooleanLiteral__Alternatives_1_in_rule__XBooleanLiteral__Group__1__Impl26480 = new BitSet(new long[]{0x0000000000000002L});
@@ -53837,7 +53842,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XIntLiteral__Group__1_in_rule__XIntLiteral__Group__026641 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XIntLiteral__Group__1__Impl_in_rule__XIntLiteral__Group__126699 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XIntLiteral__ValueAssignment_1_in_rule__XIntLiteral__Group__1__Impl26726 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTypeLiteral__Group__0__Impl_in_rule__XTypeLiteral__Group__026760 = new BitSet(new long[]{0x04000040000004E0L,0x00000000002000C0L});
+    public static final BitSet FOLLOW_rule__XTypeLiteral__Group__0__Impl_in_rule__XTypeLiteral__Group__026760 = new BitSet(new long[]{0x04000040000004E0L,0x00000000004000C0L});
     public static final BitSet FOLLOW_rule__XTypeLiteral__Group__1_in_rule__XTypeLiteral__Group__026763 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XTypeLiteral__Group__1__Impl_in_rule__XTypeLiteral__Group__126821 = new BitSet(new long[]{0x0000800000000000L});
     public static final BitSet FOLLOW_rule__XTypeLiteral__Group__2_in_rule__XTypeLiteral__Group__126824 = new BitSet(new long[]{0x0000000000000002L});
@@ -53852,21 +53857,21 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_48_in_rule__XTypeLiteral__Group__4__Impl27033 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XThrowExpression__Group__0__Impl_in_rule__XThrowExpression__Group__027074 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
     public static final BitSet FOLLOW_rule__XThrowExpression__Group__1_in_rule__XThrowExpression__Group__027077 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XThrowExpression__Group__1__Impl_in_rule__XThrowExpression__Group__127135 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XThrowExpression__Group__1__Impl_in_rule__XThrowExpression__Group__127135 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XThrowExpression__Group__2_in_rule__XThrowExpression__Group__127138 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_72_in_rule__XThrowExpression__Group__1__Impl27166 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XThrowExpression__Group__2__Impl_in_rule__XThrowExpression__Group__227197 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XThrowExpression__ExpressionAssignment_2_in_rule__XThrowExpression__Group__2__Impl27224 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XReturnExpression__Group__0__Impl_in_rule__XReturnExpression__Group__027260 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000200L});
     public static final BitSet FOLLOW_rule__XReturnExpression__Group__1_in_rule__XReturnExpression__Group__027263 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XReturnExpression__Group__1__Impl_in_rule__XReturnExpression__Group__127321 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XReturnExpression__Group__1__Impl_in_rule__XReturnExpression__Group__127321 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XReturnExpression__Group__2_in_rule__XReturnExpression__Group__127324 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_73_in_rule__XReturnExpression__Group__1__Impl27352 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XReturnExpression__Group__2__Impl_in_rule__XReturnExpression__Group__227383 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XReturnExpression__ExpressionAssignment_2_in_rule__XReturnExpression__Group__2__Impl27410 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__0__Impl_in_rule__XTryCatchFinallyExpression__Group__027447 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000400L});
     public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__1_in_rule__XTryCatchFinallyExpression__Group__027450 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__1__Impl_in_rule__XTryCatchFinallyExpression__Group__127508 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__1__Impl_in_rule__XTryCatchFinallyExpression__Group__127508 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__2_in_rule__XTryCatchFinallyExpression__Group__127511 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_74_in_rule__XTryCatchFinallyExpression__Group__1__Impl27539 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__2__Impl_in_rule__XTryCatchFinallyExpression__Group__227570 = new BitSet(new long[]{0x0000000000000000L,0x0000000000001800L});
@@ -53880,12 +53885,12 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_3_0_0_in_rule__XTryCatchFinallyExpression__Group_3_0__0__Impl27739 = new BitSet(new long[]{0x0000000000000002L,0x0000000000001000L});
     public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_3_0__1__Impl_in_rule__XTryCatchFinallyExpression__Group_3_0__127772 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_3_0_1__0_in_rule__XTryCatchFinallyExpression__Group_3_0__1__Impl27799 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_3_0_1__0__Impl_in_rule__XTryCatchFinallyExpression__Group_3_0_1__027834 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_3_0_1__0__Impl_in_rule__XTryCatchFinallyExpression__Group_3_0_1__027834 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_3_0_1__1_in_rule__XTryCatchFinallyExpression__Group_3_0_1__027837 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_75_in_rule__XTryCatchFinallyExpression__Group_3_0_1__0__Impl27866 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_3_0_1__1__Impl_in_rule__XTryCatchFinallyExpression__Group_3_0_1__127898 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_0_1_1_in_rule__XTryCatchFinallyExpression__Group_3_0_1__1__Impl27925 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_3_1__0__Impl_in_rule__XTryCatchFinallyExpression__Group_3_1__027959 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_3_1__0__Impl_in_rule__XTryCatchFinallyExpression__Group_3_1__027959 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_3_1__1_in_rule__XTryCatchFinallyExpression__Group_3_1__027962 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_75_in_rule__XTryCatchFinallyExpression__Group_3_1__0__Impl27990 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_3_1__1__Impl_in_rule__XTryCatchFinallyExpression__Group_3_1__128021 = new BitSet(new long[]{0x0000000000000002L});
@@ -53899,7 +53904,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XCatchClause__Group__2__Impl_in_rule__XCatchClause__Group__228208 = new BitSet(new long[]{0x0001000000000000L});
     public static final BitSet FOLLOW_rule__XCatchClause__Group__3_in_rule__XCatchClause__Group__228211 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XCatchClause__DeclaredParamAssignment_2_in_rule__XCatchClause__Group__2__Impl28238 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XCatchClause__Group__3__Impl_in_rule__XCatchClause__Group__328268 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000002007FCL});
+    public static final BitSet FOLLOW_rule__XCatchClause__Group__3__Impl_in_rule__XCatchClause__Group__328268 = new BitSet(new long[]{0xA4008448640004F0L,0x00000000004007FCL});
     public static final BitSet FOLLOW_rule__XCatchClause__Group__4_in_rule__XCatchClause__Group__328271 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_48_in_rule__XCatchClause__Group__3__Impl28299 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XCatchClause__Group__4__Impl_in_rule__XCatchClause__Group__428330 = new BitSet(new long[]{0x0000000000000002L});
@@ -53994,7 +53999,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__Function__UnorderedGroup_0__0_in_rule__Function__UnorderedGroup_030499 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Function__OverrideAssignment_0_0_in_rule__Function__UnorderedGroup_0__Impl30586 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Function__DispatchAssignment_0_1_in_rule__Function__UnorderedGroup_0__Impl30677 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Function__UnorderedGroup_0__Impl_in_rule__Function__UnorderedGroup_0__030736 = new BitSet(new long[]{0x0000000000000002L,0x0000000000020002L});
+    public static final BitSet FOLLOW_rule__Function__UnorderedGroup_0__Impl_in_rule__Function__UnorderedGroup_0__030736 = new BitSet(new long[]{0x0000000000000002L,0x0000000000060000L});
     public static final BitSet FOLLOW_rule__Function__UnorderedGroup_0__1_in_rule__Function__UnorderedGroup_0__030739 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Function__UnorderedGroup_0__Impl_in_rule__Function__UnorderedGroup_0__130764 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleQualifiedName_in_rule__File__PackageAssignment_0_130796 = new BitSet(new long[]{0x0000000000000002L});
@@ -54009,7 +54014,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__Class__ImplementsAssignment_4_2_131075 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleMember_in_rule__Class__MembersAssignment_631106 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_81_in_rule__Function__OverrideAssignment_0_031142 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_65_in_rule__Function__DispatchAssignment_0_131186 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_82_in_rule__Function__DispatchAssignment_0_131186 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmTypeParameter_in_rule__Function__TypeParametersAssignment_1_131225 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmTypeParameter_in_rule__Function__TypeParametersAssignment_1_2_131256 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__Function__ReturnTypeAssignment_231287 = new BitSet(new long[]{0x0000000000000002L});
@@ -54066,8 +54071,8 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XCastedExpression__TypeAssignment_1_132956 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__XMemberFeatureCall__FeatureAssignment_1_0_0_0_232991 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXAssignment_in_rule__XMemberFeatureCall__ValueAssignment_1_0_133026 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_82_in_rule__XMemberFeatureCall__NullSafeAssignment_1_1_0_0_1_133062 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_83_in_rule__XMemberFeatureCall__SpreadingAssignment_1_1_0_0_1_233106 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_83_in_rule__XMemberFeatureCall__NullSafeAssignment_1_1_0_0_1_133062 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_84_in_rule__XMemberFeatureCall__SpreadingAssignment_1_1_0_0_1_233106 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_133145 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_2_133176 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__XMemberFeatureCall__FeatureAssignment_1_1_233211 = new BitSet(new long[]{0x0000000000000002L});
@@ -54099,7 +54104,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__BodyAssignment_234034 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__PredicateAssignment_534065 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXExpressionInsideBlock_in_rule__XBlockExpression__ExpressionsAssignment_2_034096 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_84_in_rule__XVariableDeclaration__WriteableAssignment_1_034132 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_85_in_rule__XVariableDeclaration__WriteableAssignment_1_034132 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XVariableDeclaration__TypeAssignment_2_0_0_034171 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__XVariableDeclaration__NameAssignment_2_0_0_134202 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__XVariableDeclaration__NameAssignment_2_134233 = new BitSet(new long[]{0x0000000000000002L});
@@ -54119,7 +54124,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleXShortClosure_in_rule__XConstructorCall__ArgumentsAssignment_5_034696 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_5_1_034727 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_5_1_1_134758 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_85_in_rule__XBooleanLiteral__IsTrueAssignment_1_134794 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_86_in_rule__XBooleanLiteral__IsTrueAssignment_1_134794 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_INT_in_rule__XIntLiteral__ValueAssignment_134833 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XTypeLiteral__TypeAssignment_334868 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXExpression_in_rule__XThrowExpression__ExpressionAssignment_234903 = new BitSet(new long[]{0x0000000000000002L});

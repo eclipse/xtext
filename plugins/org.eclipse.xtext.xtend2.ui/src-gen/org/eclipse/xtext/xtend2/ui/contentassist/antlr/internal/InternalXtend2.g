@@ -15492,16 +15492,16 @@ rule__Function__DispatchAssignment_0_1
     }
 :
 (
-{ before(grammarAccess.getFunctionAccess().getDispatchCaseKeyword_0_1_0()); }
+{ before(grammarAccess.getFunctionAccess().getDispatchDispatchKeyword_0_1_0()); }
 (
-{ before(grammarAccess.getFunctionAccess().getDispatchCaseKeyword_0_1_0()); }
+{ before(grammarAccess.getFunctionAccess().getDispatchDispatchKeyword_0_1_0()); }
 
-	'case' 
+	'dispatch' 
 
-{ after(grammarAccess.getFunctionAccess().getDispatchCaseKeyword_0_1_0()); }
+{ after(grammarAccess.getFunctionAccess().getDispatchDispatchKeyword_0_1_0()); }
 )
 
-{ after(grammarAccess.getFunctionAccess().getDispatchCaseKeyword_0_1_0()); }
+{ after(grammarAccess.getFunctionAccess().getDispatchDispatchKeyword_0_1_0()); }
 )
 
 ;

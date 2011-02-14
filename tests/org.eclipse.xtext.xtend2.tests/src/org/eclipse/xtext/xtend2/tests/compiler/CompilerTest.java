@@ -46,17 +46,17 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testCaseFunction_00() throws Exception {
-		final String definition = "x(p1) case x(String s) 'string' case x(Object o) 'object'";
+		final String definition = "x(p1) dispatch x(String s) 'string' dispatch x(Object o) 'object'";
 		invokeAndExpect("string", definition,"bar");
 		invokeAndExpect("object", definition,42);
 	}
 	
 	public void testCaseFunction_01() throws Exception {
 		final String definition = "x(p1) " +
-				" case x(Comparable<Boolean> s) 'comparable'" +
-				" case x(String s) 'string'" +
-				" case x(CharSequence o) 'charSeq'" +
-				" case x(Integer o) 'integer'";
+				" dispatch x(Comparable<Boolean> s) 'comparable'" +
+				" dispatch x(String s) 'string'" +
+				" dispatch x(CharSequence o) 'charSeq'" +
+				" dispatch x(Integer o) 'integer'";
 		invokeAndExpect("string", definition,"bar");
 		invokeAndExpect("integer", definition,42);
 		invokeAndExpect("charSeq", definition,new StringBuilder());
@@ -71,8 +71,8 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	
 	public void testCaseFunction_02() throws Exception {
 		final String definition = "x(p1 as String)" +
-				" case x(Void s) 'null'" +
-				" case x(String s) 'string'";
+				" dispatch x(Void s) 'null'" +
+				" dispatch x(String s) 'string'";
 		invokeAndExpect("string", definition,"bar");
 		invokeAndExpect("null", definition,new Object[]{null});
 	}
@@ -92,9 +92,9 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	
 	public void testCaseFunction_04() throws Exception {
 		final String definition = "x(p1)" +
-		" case x(int s) 'int'" +
-		" case x(boolean s) 'boolean'" +
-		" case x(double s) 'double'";
+		" dispatch x(int s) 'int'" +
+		" dispatch x(boolean s) 'boolean'" +
+		" dispatch x(double s) 'double'";
 		invokeAndExpect("int", definition,42);
 		invokeAndExpect("double", definition,42d);
 		invokeAndExpect("boolean", definition,true);

@@ -40,7 +40,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 	private IXtend2JvmAssociations associations;
 	
 	public void testCaseFunction_00() throws Exception {
-		XtendFile xtendFile = file("class Foo { case foo(Object x) null case foo(String x) null}");
+		XtendFile xtendFile = file("class Foo { dispatch foo(Object x) null dispatch foo(String x) null}");
 		JvmGenericType inferredType = getInferredType(xtendFile);
 
 		// one main dispatch
@@ -72,7 +72,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testCaseFunction_01() throws Exception {
-		XtendFile xtendFile = file("class Foo { case foo(Object x, String y) null case foo(String x) null}");
+		XtendFile xtendFile = file("class Foo { dispatch foo(Object x, String y) null dispatch foo(String x) null}");
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		
 		// two dispatch methods
@@ -118,7 +118,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testCaseFunction_02() throws Exception {
-		XtendFile xtendFile = file("class Foo { case foo(Object x) 'foo' case foo(String x) 'bar'}");
+		XtendFile xtendFile = file("class Foo { dispatch foo(Object x) 'foo' dispatch foo(String x) 'bar'}");
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		
 		// one main dispatch

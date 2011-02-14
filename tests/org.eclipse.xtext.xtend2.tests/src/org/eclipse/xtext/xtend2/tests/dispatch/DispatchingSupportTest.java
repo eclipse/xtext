@@ -32,13 +32,13 @@ public class DispatchingSupportTest extends AbstractXtend2TestCase {
 	
 	public void testSort_00() throws Exception {
 		XtendClass clazz = clazz("class X {\n" +
-				"  case foo(Integer i) null" +
-				"  case foo(Comparable<?> i) null" +
-				"  case foo(java.io.Serializable i) null" +
-				"  case foo(String i) null" +
-				"  case foo(Number i) null" +
-				"  case foo(Object i) null" +
-				"  case foo(CharSequence i) null" +
+				"  dispatch foo(Integer i) null" +
+				"  dispatch foo(Comparable<?> i) null" +
+				"  dispatch foo(java.io.Serializable i) null" +
+				"  dispatch foo(String i) null" +
+				"  dispatch foo(Number i) null" +
+				"  dispatch foo(Object i) null" +
+				"  dispatch foo(CharSequence i) null" +
 			"}");
 		Multimap<Pair<String, Integer>, JvmOperation> multimap = dispatchingSupport.getDispatchMethods((JvmGenericType) clazz.eResource().getContents().get(1));
 		Collection<JvmOperation> collection = multimap.values();
@@ -55,9 +55,9 @@ public class DispatchingSupportTest extends AbstractXtend2TestCase {
 	
 	public void testSort_01() throws Exception {
 		XtendClass clazz = clazz("class X {\n" +
-				"  case foo(Integer i) null" +
-				"  case foo(Boolean i) null" +
-				"  case foo(String i) null" +
+				"  dispatch foo(Integer i) null" +
+				"  dispatch foo(Boolean i) null" +
+				"  dispatch foo(String i) null" +
 		"}");
 		Multimap<Pair<String, Integer>, JvmOperation> multimap = dispatchingSupport.getDispatchMethods((JvmGenericType) clazz.eResource().getContents().get(1));
 		Collection<JvmOperation> collection = multimap.values();
@@ -70,9 +70,9 @@ public class DispatchingSupportTest extends AbstractXtend2TestCase {
 	
 	public void testSort_02() throws Exception {
 		XtendClass clazz = clazz("class X {\n" +
-				"  case foo(int a, String b) null" +
-				"  case foo(Boolean i, Object b) null" +
-				"  case foo(Object i, String b) null" +
+				"  dispatch foo(int a, String b) null" +
+				"  dispatch foo(Boolean i, Object b) null" +
+				"  dispatch foo(Object i, String b) null" +
 		"}");
 		Multimap<Pair<String, Integer>, JvmOperation> multimap = dispatchingSupport.getDispatchMethods((JvmGenericType) clazz.eResource().getContents().get(1));
 		Collection<JvmOperation> collection = multimap.values();
