@@ -14,6 +14,8 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.serializer.IRecursiveSyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.IRecursiveSyntacticSequencer;
 import org.eclipse.xtext.serializer.ISemanticSequenceAcceptor;
@@ -29,109 +31,133 @@ public class RecursiveSyntacticSequencer implements IRecursiveSyntacticSequencer
 
 	protected static class SemanitcAcceptor implements ISyntacticSequenceAcceptor {
 
-		protected IRecursiveSyntacticSequenceAcceptor delegateAcceptor;
-		protected ISemanticSequencer delegateSemSequencer;
-
-		protected ISyntacticSequencer delegateSynSequencer;
+		protected IRecursiveSyntacticSequenceAcceptor delegate;
 
 		protected Acceptor errorAcceptor;
 
-		public SemanitcAcceptor(ISyntacticSequencer syndelegate, ISemanticSequencer semdelegate,
+		protected INode lastNode;
+
+		protected ISemanticSequencer semanticSeq;
+
+		protected ISyntacticSequencer syntacticSeq;
+
+		public SemanitcAcceptor(ISyntacticSequencer syndelegate, ISemanticSequencer semdelegate, INode lastNode,
 				IRecursiveSyntacticSequenceAcceptor acceptor, Acceptor errors) {
-			this.delegateAcceptor = acceptor;
-			this.delegateSynSequencer = syndelegate;
-			this.delegateSemSequencer = semdelegate;
+			this.delegate = acceptor;
+			this.syntacticSeq = syndelegate;
+			this.semanticSeq = semdelegate;
 			this.errorAcceptor = errors;
+			this.lastNode = lastNode;
 		}
 
-		public void acceptAssignedAction(Action action, EObject eobject) {
-			delegateAcceptor.enterAssignedAction(action, eobject);
-			ISemanticSequenceAcceptor acc = delegateSynSequencer.createAcceptor(action, eobject, this, errorAcceptor);
-			delegateSemSequencer.createSequence(action, eobject, acc, errorAcceptor);
-			delegateAcceptor.leaveAssignedAction(action, eobject);
+		public INode acceptAssignedAction2(Action action, EObject eobject) {
+			delegate.enterAssignedAction(action, eobject);
+			ISemanticSequenceAcceptor acc = syntacticSeq.createAcceptor(action, eobject, lastNode, this, errorAcceptor);
+			semanticSeq.createSequence(action, eobject, acc, errorAcceptor);
+			delegate.leaveAssignedAction(action, eobject);
+			return lastNode;
 		}
 
 		public void acceptAssignedCrossRefDatatype(RuleCall datatypeRC, EObject value, ICompositeNode node) {
-			delegateAcceptor.acceptAssignedCrossRefDatatype(datatypeRC, value, node);
+			delegate.acceptAssignedCrossRefDatatype(datatypeRC, value, node);
+			lastNode = node;
 		}
 
 		public void acceptAssignedCrossRefEnum(RuleCall enumRC, EObject value, ICompositeNode node) {
-			delegateAcceptor.acceptAssignedCrossRefEnum(enumRC, value, node);
+			delegate.acceptAssignedCrossRefEnum(enumRC, value, node);
+			lastNode = node;
 		}
 
 		public void acceptAssignedCrossRefKeyword(Keyword keyword, EObject value, ILeafNode node) {
-			delegateAcceptor.acceptAssignedCrossRefKeyword(keyword, value, node);
+			delegate.acceptAssignedCrossRefKeyword(keyword, value, node);
+			lastNode = node;
 		}
 
 		public void acceptAssignedCrossRefTerminal(RuleCall terminalRC, EObject value, ILeafNode node) {
-			delegateAcceptor.acceptAssignedCrossRefTerminal(terminalRC, value, node);
+			delegate.acceptAssignedCrossRefTerminal(terminalRC, value, node);
+			lastNode = node;
 		}
 
 		public void acceptAssignedDatatype(RuleCall datatypeRC, Object value, ICompositeNode node) {
-			delegateAcceptor.acceptAssignedDatatype(datatypeRC, value, node);
+			delegate.acceptAssignedDatatype(datatypeRC, value, node);
+			lastNode = node;
 		}
 
 		public void acceptAssignedEnum(RuleCall enumRC, Object value, ICompositeNode node) {
-			delegateAcceptor.acceptAssignedEnum(enumRC, value, node);
+			delegate.acceptAssignedEnum(enumRC, value, node);
+			lastNode = node;
 		}
 
 		public void acceptAssignedKeyword(Keyword keyword, Boolean value, ILeafNode node) {
-			delegateAcceptor.acceptAssignedKeyword(keyword, value, node);
+			delegate.acceptAssignedKeyword(keyword, value, node);
+			lastNode = node;
 		}
 
 		public void acceptAssignedKeyword(Keyword keyword, String value, ILeafNode node) {
-			delegateAcceptor.acceptAssignedKeyword(keyword, value, node);
+			delegate.acceptAssignedKeyword(keyword, value, node);
+			lastNode = node;
 		}
 
-		public void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild) {
+		public INode acceptAssignedParserRuleCall2(RuleCall ruleCall, EObject semanticChild) {
 			ParserRule pr = (ParserRule) ruleCall.getRule();
-			delegateAcceptor.enterAssignedParserRuleCall(ruleCall, semanticChild);
-			ISemanticSequenceAcceptor acc = delegateSynSequencer.createAcceptor(pr, semanticChild, this, errorAcceptor);
-			delegateSemSequencer.createSequence(pr, semanticChild, acc, errorAcceptor);
-			delegateAcceptor.leaveAssignedParserRuleCall(ruleCall);
+			delegate.enterAssignedParserRuleCall(ruleCall, semanticChild);
+			ISemanticSequenceAcceptor acc = syntacticSeq.createAcceptor(pr, semanticChild, lastNode, this,
+					errorAcceptor);
+			semanticSeq.createSequence(pr, semanticChild, acc, errorAcceptor);
+			delegate.leaveAssignedParserRuleCall(ruleCall);
+			return lastNode;
 		}
 
 		public void acceptAssignedTerminal(RuleCall terminalRC, Object value, ILeafNode node) {
-			delegateAcceptor.acceptAssignedTerminal(terminalRC, value, node);
+			delegate.acceptAssignedTerminal(terminalRC, value, node);
+			lastNode = node;
 		}
 
 		public void acceptUnassignedAction(Action action) {
-			delegateAcceptor.acceptUnassignedAction(action);
+			delegate.acceptUnassignedAction(action);
 		}
 
-		public void acceptUnassignedDatatype(RuleCall datatypeRC, Object value) {
-			delegateAcceptor.acceptUnassignedDatatype(datatypeRC, value);
+		public void acceptUnassignedDatatype(RuleCall datatypeRC, String value, ICompositeNode node) {
+			delegate.acceptUnassignedDatatype(datatypeRC, value, node);
+			lastNode = node;
 		}
 
-		public void acceptUnassignedEnum(RuleCall enumRC, Object value) {
-			delegateAcceptor.acceptUnassignedEnum(enumRC, value);
+		public void acceptUnassignedEnum(RuleCall enumRC, String value, ICompositeNode node) {
+			delegate.acceptUnassignedEnum(enumRC, value, node);
+			lastNode = node;
 		}
 
-		public void acceptUnassignedKeyword(Keyword keyword) {
-			delegateAcceptor.acceptUnassignedKeyword(keyword);
+		public void acceptUnassignedKeyword(Keyword keyword, ILeafNode node) {
+			delegate.acceptUnassignedKeyword(keyword, node);
+			lastNode = node;
 		}
 
-		public void acceptUnassignedTerminal(RuleCall terminalRC, Object value) {
-			delegateAcceptor.acceptUnassignedTerminal(terminalRC, value);
+		public void acceptUnassignedTerminal(RuleCall terminalRC, String value, ILeafNode node) {
+			delegate.acceptUnassignedTerminal(terminalRC, value, node);
+			lastNode = node;
 		}
 
 		public void enterUnassignedParserRuleCall(RuleCall rc) {
-			delegateAcceptor.enterUnassignedParserRuleCall(rc);
+			delegate.enterUnassignedParserRuleCall(rc);
 		}
 
-		public void finish() {
+		public void finish(INode node) {
+			lastNode = node;
 		}
 
 		public void leaveUnssignedParserRuleCall(RuleCall rc) {
-			delegateAcceptor.leaveUnssignedParserRuleCall(rc);
+			delegate.leaveUnssignedParserRuleCall(rc);
 		}
 
 	}
 
 	public void createSequence(ISyntacticSequencer syndelegate, ISemanticSequencer semdelegate, EObject context,
 			EObject semanticObject, IRecursiveSyntacticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		SemanitcAcceptor acceptor = new SemanitcAcceptor(syndelegate, semdelegate, sequenceAcceptor, errorAcceptor);
-		ISemanticSequenceAcceptor acc = syndelegate.createAcceptor(context, semanticObject, acceptor, errorAcceptor);
+		INode node = NodeModelUtils.findActualNodeFor(semanticObject);
+		SemanitcAcceptor acceptor = new SemanitcAcceptor(syndelegate, semdelegate, node, sequenceAcceptor,
+				errorAcceptor);
+		ISemanticSequenceAcceptor acc = syndelegate.createAcceptor(context, semanticObject, node, acceptor,
+				errorAcceptor);
 		semdelegate.createSequence(context, semanticObject, acc, errorAcceptor);
 	}
 

@@ -13,6 +13,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.IRecursiveSemanitcSequencer;
 import org.eclipse.xtext.serializer.IRecursiveSemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.ISemanticSequenceAcceptor;
@@ -88,6 +89,11 @@ public class RecursiveSemanticSequencer implements IRecursiveSemanitcSequencer {
 		}
 
 		public void finish() {
+		}
+
+		public INode getLastNode() {
+			// TODO Auto-generated method stub
+			return null;
 		}
 
 	}

@@ -7,8 +7,8 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.IPDAAbsorberState;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.IPDAEmitterState;
+import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynAbsorberState;
+import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.util.GraphvizDotBuilder;
 
 import com.google.common.collect.Sets;
@@ -44,21 +44,21 @@ public class SequenceParserPDA2Dot extends GraphvizDotBuilder {
 		return null;
 	}
 
-	protected Digraph drawGrammar(IPDAEmitterState pr) {
+	protected Digraph drawGrammar(ISynState pr) {
 		Digraph d = new Digraph();
-		Set<IPDAEmitterState> visited = Sets.newHashSet();
+		Set<ISynState> visited = Sets.newHashSet();
 		drawState(d, pr, visited);
 		return d;
 	}
 
-	protected void drawState(Digraph d, IPDAEmitterState state, Set<IPDAEmitterState> visited) {
+	protected void drawState(Digraph d, ISynState state, Set<ISynState> visited) {
 		if (!visited.add(state))
 			return;
 		Node n = new Node(state, state.toString());
-		if (!(state instanceof IPDAAbsorberState))
+		if (!(state instanceof ISynAbsorberState))
 			n.setStyle("dotted");
 		d.add(n);
-		for (IPDAEmitterState trans : state.getFollowers()) {
+		for (ISynState trans : state.getFollowers()) {
 			Edge edge = new Edge(state, trans);
 			d.add(edge);
 			drawState(d, trans, visited);

@@ -10,6 +10,8 @@ package org.eclipse.xtext.serializer;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -17,12 +19,12 @@ import org.eclipse.xtext.RuleCall;
 public interface IUnassignedTokenSequenceAcceptor {
 	void acceptUnassignedAction(Action action);
 
-	void acceptUnassignedDatatype(RuleCall datatypeRC, Object value);
+	void acceptUnassignedDatatype(RuleCall datatypeRC, String value, ICompositeNode node);
 
-	void acceptUnassignedEnum(RuleCall enumRC, Object value);
+	void acceptUnassignedEnum(RuleCall enumRC, String value, ICompositeNode node);
 
-	void acceptUnassignedKeyword(Keyword keyword);
+	void acceptUnassignedKeyword(Keyword keyword, ILeafNode node);
 
-	void acceptUnassignedTerminal(RuleCall terminalRC, Object value);
+	void acceptUnassignedTerminal(RuleCall terminalRC, String value, ILeafNode node);
 
 }

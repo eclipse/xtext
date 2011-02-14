@@ -13,10 +13,13 @@ import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.IPDAState;
 import org.eclipse.xtext.grammaranalysis.IPDAState.PDAStateType;
+import org.eclipse.xtext.serializer.impl.RCStack;
 import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider;
 
+import com.google.common.base.Predicate;
 import com.google.inject.ImplementedBy;
 
 /**
@@ -25,42 +28,124 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(SyntacticSequencerPDAProvider.class)
 public interface ISyntacticSequencerPDAProvider {
 
-	interface IPDAAbsorberState extends IPDAEmitterState {
-		List<IPDATransition> getOutTransitions();
+	interface ISynAbsorberState extends ISynState {
+		List<ISynTransition> getOutTransitions();
 
-		Map<AbstractElement, IPDATransition> getOutTransitionsByElement();
+		Map<AbstractElement, ISynTransition> getOutTransitionsByElement();
 
-		Map<AbstractElement, IPDATransition> getOutTransitionsByRuleCallEnter();
+		Map<AbstractElement, ISynTransition> getOutTransitionsByRuleCallEnter();
 
-		Map<AbstractElement, IPDATransition> getOutTransitionsByRuleCallExit();
+		Map<AbstractElement, ISynTransition> getOutTransitionsByRuleCallExit();
 	}
 
-	interface IPDAEmitterState {
-
-		List<IPDAEmitterState> getFollowers();
-
-		AbstractElement getGrammarElement();
-
-		PDAEmitterStateType getType();
+	interface ISynEmitterState extends ISynState, ISynNavigable {
 	}
 
-	interface IPDATransition {
-		List<IPDAEmitterState> getDirectEmittersAndAbsorber();
+	interface ISynFollowerOwner {
+		List<ISynState> getFollowers();
+	}
 
-		List<IPDAEmitterState> getShortestPathToAbsorber();
+	interface ISynNavigable extends ISynFollowerOwner {
+		ISynAbsorberState getTarget();
 
-		IPDAAbsorberState getSource();
+		int getDistanceTo(Predicate<ISynState> matches, Predicate<ISynState> bounds, RCStack stack);
 
-		IPDAAbsorberState getTarget();
+		int getDistanceWithStackToAbsorber(RCStack stack);
 
-		boolean involvesRuleExit();
+		List<ISynState> getShortestPathTo(Predicate<ISynState> matches, Predicate<ISynState> bounds, RCStack stack,
+				boolean addMatch);
+
+		List<ISynState> getShortestPathTo(AbstractElement ele, RCStack stack, boolean addMatch);
+
+		List<ISynState> getShortestPathToAbsorber(RCStack stack);
 
 		boolean involvesUnassignedTokenRuleCalls();
 
 		boolean isSyntacticallyAmbiguous();
+
+		boolean hasEmitters();
 	}
 
-	enum PDAEmitterStateType {
+	interface ISynState extends ISynFollowerOwner {
+
+		AbstractElement getGrammarElement();
+
+		SynStateType getType();
+	}
+
+	interface ISynTransition extends ISynNavigable {
+
+		ISynAbsorberState getSource();
+
+	}
+
+	class SynPredicates {
+		public static Predicate<ISynState> absorber(final AbstractElement ele) {
+			return new Predicate<ISynState>() {
+				public boolean apply(ISynState input) {
+					return input.getGrammarElement() == ele && input instanceof ISynAbsorberState;
+				}
+			};
+		}
+
+		public static Predicate<ISynState> element(final AbstractElement ele) {
+			return new Predicate<ISynState>() {
+				public boolean apply(ISynState input) {
+					return input.getGrammarElement() == ele;
+				}
+			};
+		}
+
+		public static Predicate<ISynState> emitter(final AbstractElement ele) {
+			return new Predicate<ISynState>() {
+				public boolean apply(ISynState input) {
+					return input.getGrammarElement() == ele && input instanceof ISynEmitterState;
+				}
+			};
+		}
+
+		public static Predicate<ISynState> ruleCallEnter(final RuleCall ele) {
+			return new Predicate<ISynState>() {
+				public boolean apply(ISynState input) {
+					return input.getGrammarElement() == ele && input.getType().isRuleCallEnter();
+				}
+			};
+		}
+
+		public static Predicate<ISynState> ruleCallExit(final RuleCall ele) {
+			return new Predicate<ISynState>() {
+				public boolean apply(ISynState input) {
+					return input.getGrammarElement() == ele && input.getType().isRuleCallExit();
+				}
+			};
+		}
+
+		public static Predicate<ISynState> ruleCallExits() {
+			return new Predicate<ISynState>() {
+				public boolean apply(ISynState input) {
+					return input.getType().isRuleCallExit();
+				}
+			};
+		}
+
+		public static Predicate<ISynState> ruleCallExitsOrAbsorber() {
+			return new Predicate<ISynState>() {
+				public boolean apply(ISynState input) {
+					return input.getType().isRuleCallExit() || input instanceof ISynAbsorberState;
+				}
+			};
+		}
+
+		public static Predicate<ISynState> absorber() {
+			return new Predicate<ISynState>() {
+				public boolean apply(ISynState input) {
+					return input instanceof ISynAbsorberState;
+				}
+			};
+		}
+	}
+
+	enum SynStateType {
 		ASSIGNED_ACTION_CALL(PDAStateType.ELEMENT), //
 		ASSIGNED_BOOLEAN_KEYWORD(PDAStateType.ELEMENT), //
 		ASSIGNED_CROSSREF_DATATYPE_RULE_CALL(PDAStateType.ELEMENT), //
@@ -74,6 +159,7 @@ public interface ISyntacticSequencerPDAProvider {
 		ASSIGNED_TERMINAL_RULE_CALL(PDAStateType.ELEMENT), //
 		START(PDAStateType.START), //
 		STOP(PDAStateType.STOP), //
+		TRANSITION(null), //
 		UNASSIGEND_ACTION_CALL(PDAStateType.ELEMENT), //
 		UNASSIGEND_KEYWORD(PDAStateType.ELEMENT), //
 		UNASSIGNED_DATATYPE_RULE_CALL(PDAStateType.ELEMENT), //
@@ -83,7 +169,7 @@ public interface ISyntacticSequencerPDAProvider {
 
 		protected IPDAState.PDAStateType simpleType;
 
-		private PDAEmitterStateType(PDAStateType simpleType) {
+		private SynStateType(PDAStateType simpleType) {
 			this.simpleType = simpleType;
 		}
 
@@ -91,10 +177,30 @@ public interface ISyntacticSequencerPDAProvider {
 			return simpleType;
 		}
 
+		public boolean isElement() {
+			return simpleType == PDAStateType.ELEMENT;
+		}
+
+		public boolean isRuleCallEnter() {
+			return simpleType == PDAStateType.RULECALL_ENTER;
+		}
+
+		public boolean isRuleCallExit() {
+			return simpleType == PDAStateType.RULECALL_EXIT;
+		}
+
+		public boolean isStart() {
+			return simpleType == PDAStateType.START;
+		}
+
+		public boolean isStop() {
+			return simpleType == PDAStateType.STOP;
+		}
+
 	}
 
-	IPDAAbsorberState getPDA(Action contet);
+	ISynAbsorberState getPDA(Action contet);
 
-	IPDAAbsorberState getPDA(ParserRule context);
+	ISynAbsorberState getPDA(ParserRule context);
 
 }

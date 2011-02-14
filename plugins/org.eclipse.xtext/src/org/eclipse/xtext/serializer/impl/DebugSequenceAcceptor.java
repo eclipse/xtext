@@ -18,6 +18,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.IRecursiveSyntacticSequenceAcceptor;
+import org.eclipse.xtext.serializer.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.Pair;
@@ -30,7 +31,8 @@ import com.google.inject.internal.Join;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class DebugSequenceAcceptor implements ISyntacticSequenceAcceptor, IRecursiveSyntacticSequenceAcceptor {
+public class DebugSequenceAcceptor implements ISyntacticSequenceAcceptor, IRecursiveSyntacticSequenceAcceptor,
+		ISemanticSequenceAcceptor {
 
 	protected int indentation = 0;
 
@@ -51,6 +53,11 @@ public class DebugSequenceAcceptor implements ISyntacticSequenceAcceptor, IRecur
 
 	public void acceptAssignedAction(Action action, EObject semanticChild) {
 		add(titleSwitch.doSwitch(action), EmfFormatter.objPath(semanticChild));
+	}
+
+	public INode acceptAssignedAction2(Action action, EObject semanticChild) {
+		add(titleSwitch.doSwitch(action), EmfFormatter.objPath(semanticChild));
+		return null;
 	}
 
 	public void acceptAssignedCrossRefDatatype(RuleCall datatypeRC, EObject value, ICompositeNode node) {
@@ -92,6 +99,11 @@ public class DebugSequenceAcceptor implements ISyntacticSequenceAcceptor, IRecur
 		add(titleSwitch.doSwitch(ruleCall), EmfFormatter.objPath(semanticChild));
 	}
 
+	public INode acceptAssignedParserRuleCall2(RuleCall ruleCall, EObject semanticChild) {
+		add(titleSwitch.doSwitch(ruleCall), EmfFormatter.objPath(semanticChild));
+		return null;
+	}
+
 	public void acceptAssignedTerminal(RuleCall terminalRC, Object value, ILeafNode node) {
 		add(titleSwitch.doSwitch(terminalRC), "'" + value + "'", node2text(node));
 	}
@@ -100,20 +112,20 @@ public class DebugSequenceAcceptor implements ISyntacticSequenceAcceptor, IRecur
 		add(titleSwitch.doSwitch(action), "");
 	}
 
-	public void acceptUnassignedDatatype(RuleCall datatypeRC, Object value) {
-		add(titleSwitch.doSwitch(datatypeRC), "'" + value + "'");
+	public void acceptUnassignedDatatype(RuleCall datatypeRC, String value, ICompositeNode node) {
+		add(titleSwitch.doSwitch(datatypeRC), "'" + value + "'", node2text(node));
 	}
 
-	public void acceptUnassignedEnum(RuleCall enumRC, Object value) {
-		add(titleSwitch.doSwitch(enumRC), "'" + value + "'");
+	public void acceptUnassignedEnum(RuleCall enumRC, String value, ICompositeNode node) {
+		add(titleSwitch.doSwitch(enumRC), "'" + value + "'", node2text(node));
 	}
 
-	public void acceptUnassignedKeyword(Keyword keyword) {
-		add(titleSwitch.doSwitch(keyword), "'" + keyword.getValue() + "'");
+	public void acceptUnassignedKeyword(Keyword keyword, ILeafNode node) {
+		add(titleSwitch.doSwitch(keyword), "'" + keyword.getValue() + "'", node2text(node));
 	}
 
-	public void acceptUnassignedTerminal(RuleCall terminalRC, Object value) {
-		add(titleSwitch.doSwitch(terminalRC), "'" + value + "'");
+	public void acceptUnassignedTerminal(RuleCall terminalRC, String value, ILeafNode node) {
+		add(titleSwitch.doSwitch(terminalRC), "'" + value + "'", node2text(node));
 	}
 
 	protected void add(String col1, String col2) {
@@ -127,7 +139,7 @@ public class DebugSequenceAcceptor implements ISyntacticSequenceAcceptor, IRecur
 		buf.append(col1);
 		table.add(Tuples.create(buf.toString(), col2, col3));
 		if (printInstantly)
-			System.out.println(buf.toString() + "\t" + col2);
+			System.out.println(buf.toString() + "\t" + col2 + "\t" + col3);
 	}
 
 	public void enterAssignedAction(Action action, EObject semanticChild) {
@@ -148,6 +160,10 @@ public class DebugSequenceAcceptor implements ISyntacticSequenceAcceptor, IRecur
 	public void finish() {
 	}
 
+	public void finish(INode node) {
+
+	}
+
 	public List<String> getList() {
 		int col1Width = 0, col2Width = 0;
 		for (Pair<String, String> line : table) {
@@ -159,6 +175,14 @@ public class DebugSequenceAcceptor implements ISyntacticSequenceAcceptor, IRecur
 		for (Triple<String, String, String> line : table)
 			lines.add(String.format(format, line.getFirst(), line.getSecond(), line.getThird()));
 		return lines;
+	}
+
+	public List<String> getNodesColumn() {
+		List<String> result = Lists.newArrayList();
+		for (Triple<String, String, String> line : table)
+			if (line.getThird() != null && line.getThird().length() > 0)
+				result.add(line.getThird());
+		return result;
 	}
 
 	public List<Triple<String, String, String>> getTable() {
@@ -181,6 +205,8 @@ public class DebugSequenceAcceptor implements ISyntacticSequenceAcceptor, IRecur
 	}
 
 	protected String node2text(INode node) {
+		if (node == null)
+			return "(node is null)";
 		if (node instanceof ILeafNode)
 			return titleSwitch.doSwitch(node.getGrammarElement()) + " -> " + node.getText();
 		if (node instanceof ICompositeNode)
