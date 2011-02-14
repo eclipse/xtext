@@ -152,7 +152,7 @@ public class GrammarUtil {
 	public static boolean isDatatypeRuleCall(EObject grammarElement) {
 		if (grammarElement instanceof RuleCall) {
 			AbstractRule calledRule = ((RuleCall) grammarElement).getRule();
-			return calledRule != null && (calledRule instanceof EDataType);
+			return calledRule != null && calledRule.getType().getClassifier() instanceof EDataType;
 		}
 		return false;
 	}
