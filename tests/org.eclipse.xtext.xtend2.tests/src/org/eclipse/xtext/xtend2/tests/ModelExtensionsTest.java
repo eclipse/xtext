@@ -19,7 +19,7 @@ public class ModelExtensionsTest extends AbstractXtend2TestCase {
 	public void testXtendClass() throws Exception {
 		XtendFile file = file("package foo class Bar extends Object implements java.io.Serializable {}");
 		XtendClass xtendClass = file.getXtendClass();
-		assertEquals("foo.Bar", xtendClass.getCanonicalName());
+		assertEquals("foo.Bar", xtendClass.getIdentifier());
 		assertEquals("foo", xtendClass.getPackageName());
 		assertEquals("Bar", xtendClass.getSimpleName());
 		// TODO: enable supertypes
@@ -34,6 +34,6 @@ public class ModelExtensionsTest extends AbstractXtend2TestCase {
 		XtendFile file = file("package foo class Bar { int foo() 1}");
 		XtendFunction xtendFunction = (XtendFunction) file.getXtendClass().getMembers().get(0);
 		assertEquals("foo", xtendFunction.getSimpleName());
-		assertEquals("foo.Bar.foo", xtendFunction.getCanonicalName());
+		assertEquals("foo.Bar.foo", xtendFunction.getIdentifier());
 	}
 }

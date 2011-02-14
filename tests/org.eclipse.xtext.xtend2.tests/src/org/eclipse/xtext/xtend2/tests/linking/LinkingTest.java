@@ -57,23 +57,23 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		XtendFunction func = (XtendFunction) clazz("import java.lang.* class X { (String)=>Boolean foo() [|true] }").getMembers().get(0);
 		XFunctionTypeRef type = (XFunctionTypeRef) func.getReturnType();
 		JvmTypeReference returnType = type.getReturnType();
-		assertEquals("java.lang.Boolean", returnType.getCanonicalName());
+		assertEquals("java.lang.Boolean", returnType.getIdentifier());
 		JvmTypeReference paramType = type.getParamTypes().get(0);
-		assertEquals("java.lang.String", paramType.getCanonicalName());
+		assertEquals("java.lang.String", paramType.getIdentifier());
 	}
 	
 	public void testTypeReference_0() throws Exception {
 		XtendFunction func = function("=>java.lang.Boolean foo() [|true]");
 		XFunctionTypeRef type = (XFunctionTypeRef) func.getReturnType();
 		JvmTypeReference returnType = type.getReturnType();
-		assertEquals("java.lang.Boolean", returnType.getCanonicalName());
+		assertEquals("java.lang.Boolean", returnType.getIdentifier());
 	}
 	
 	public void testTypeParameterReference() throws Exception {
 		XtendFunction func = function("<X> X foo(X x) x");
 		JvmTypeReference returnType = func.getReturnType();
 		JvmTypeParameter typeParamDecl = (JvmTypeParameter) returnType.getType();
-		assertEquals("X", typeParamDecl.getCanonicalName());
+		assertEquals("X", typeParamDecl.getIdentifier());
 		assertEquals("X", typeParamDecl.getName());
 		
 		JvmTypeReference paramType = func.getParameters().get(0).getParameterType();
@@ -84,7 +84,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		XtendFunction func = (XtendFunction) file("import java.lang.* class X { <String> String foo(String x) x}").getXtendClass().getMembers().get(0);
 		JvmTypeReference returnType = func.getReturnType();
 		JvmTypeParameter typeParamDecl = (JvmTypeParameter) returnType.getType();
-		assertEquals("String", typeParamDecl.getCanonicalName());
+		assertEquals("String", typeParamDecl.getIdentifier());
 		assertEquals("String", typeParamDecl.getName());
 		
 		JvmTypeReference paramType = func.getParameters().get(0).getParameterType();
@@ -96,7 +96,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 				.getXtendClass().getMembers().get(0);
 		JvmTypeReference returnType = func.getReturnType();
 		JvmTypeParameter typeParamDecl = (JvmTypeParameter) returnType.getType();
-		assertEquals("String", typeParamDecl.getCanonicalName());
+		assertEquals("String", typeParamDecl.getIdentifier());
 		assertEquals("String", typeParamDecl.getName());
 		
 		JvmTypeReference paramType = func.getParameters().get(0).getParameterType();
@@ -164,6 +164,6 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertFalse(implementedInterfaces.isEmpty());
 		JvmType implementedInterface = implementedInterfaces.get(0).getType();
 		assertNotNull(implementedInterface);
-		assertEquals("java.io.Serializable", implementedInterface.getCanonicalName());
+		assertEquals("java.io.Serializable", implementedInterface.getIdentifier());
 	}
 }
