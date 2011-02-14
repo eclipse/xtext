@@ -62,6 +62,6 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testDuplicateCaseFunction() throws Exception {
 		XtendFunction function = function("dispatch foo(Integer s) null dispatch foo(int s) null");
-		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.DUPLICATE_METHOD, "case");
+		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.DUPLICATE_METHOD, "dispatch");
 	}
 }
