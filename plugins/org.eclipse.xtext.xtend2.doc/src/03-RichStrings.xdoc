@@ -7,16 +7,16 @@ Xtend). Let's have a look at an example of how a typical function with template 
 
 code[
 toClass(Entity this) :'''
-	package «packageName»;
-	
-	«placeImports»
-	
-	public class «name» «IF extendedType!=null»extends «extendedType»«ENDIF»{
-		«FOREACH members»
-			«member.toMember»
-		«ENDFOREACH»
-	}
-	''';
+  package «packageName»;
+
+  «placeImports»
+
+  public class «name» «IF extendedType!=null»extends «extendedType»«ENDIF» {
+    «FOREACH members»
+      «member.toMember»
+    «ENDFOREACH»
+  }
+''';
 ]
 
 If you are familiar with Xpand, you'll notice that it is exactly the same syntax. The difference is, that

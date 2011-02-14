@@ -18,7 +18,7 @@ class MyClass {
 section:packageDecl[Package Declaration]
 
 Package declarations are like in Java, with the small difference, that an identifier can be escaped with a  e[^] in case it conflicts with a keyword.
-Also you don't terminate a package decalaration with a semicolon.
+Also you don't terminate a package declaration with a semicolon.
 
 section2[Syntax]
 
@@ -208,7 +208,7 @@ Visibility : 'public'|'protected'|'private';
 section:Functions[Functions]
 
 Xtend2 functions are declared within a class and are usually translated to a corresponding Java method with the exact same signature. 
-The only exception is case methods, which compile to a single method. This is explained in the section about ref:polymorphicDispatch. 
+The only exceptions are dispatch methods, which compile to a single method. This is explained in the section about ref:polymorphicDispatch. 
 
 An example of a function declaration
 code[
@@ -273,33 +273,32 @@ a wild card.
 
 That is code[List] is the same as  code[List<?>]
 
-section2:polymorphicDispatch[Polymorphic Method Overloading]
+section2:polymorphicDispatch[Dispatch Functions]
 
-It is possible to overload methods like in Java, and the resolution is also like in Java based on the
+It is possible to overload functions like in Java, and the resolution is also like in Java based on the
 static type of the arguments and only dynamic polymorphic on the receiver.
-However Xtend2 supports the special notion of case methods, which makes such overloaded methods polymorphic
+However Xtend2 supports the special notion of dispatch functions, which makes such overloaded functions polymorphicly
 dispatched.
 
-Such methods get the keyword code[case] and all methods with the same name and the same number of arguments
-need either be marked with code[case] or not.
+Such methods have the keyword code[dispatch] preceding the declaration.
 
-If they are marked as case methods, the compiler will infer one method with the most common argument
-types which contains an if else cascade dispatching between the different case methods based on the actual
+If they are marked as dispatch functions, the compiler will use or infer the function with the most common argument
+types and generates Java method made up of if-else cascaded dispatching between the different dispatch functions based on the actual
 runtime types of the arguments. This has a lot of advantages and is a very convenient way 
-to add functionality to heterogenous data structures especially with deeper type hierarchies (i.e. EMF models and other typed domain models).
-It essentially eleminates the problem the visitor pattern is trying to solve.
+to add functionality to heterogeneous data structures especially with deeper type hierarchies (i.e. EMF models and other typed domain models).
+It essentially eliminates the problem the visitor pattern is trying to solve.
 
 This allows you to write a code generator by defining a function for all kinds of AST elements you want to process.
 
 code[
 	class MyCompiler {
-		case compile(CompilationUnit cu) :
+		dispatch compile(CompilationUnit cu) :
 			... cu.types.compile() ...;
-		case compile(Interface interface) :
+		dispatch compile(Interface interface) :
 			... cu.members.compile() ...;
-		case compile(Class cu) :
+		dispatch compile(Class cu) :
 			... cu.members.compile() ...;
-		case compile(Field cu) :
+		dispatch compile(Field cu) :
 			...;
 		...
 	}
@@ -307,11 +306,11 @@ code[
 
 section3[How case methods are translated to Java]
 
-The polymorphic behavior of case methods shall be transparently work no matter you call such a function from Java, Xtend2 or any other JVM language.
+The polymorphic behavior of dispatch functions shall be transparently work no matter you call such a function from Java, Xtend2 or any other JVM language.
 Therefore the runtime dispatch is not done on the caller's side but on the declaration side. 
 For each set of case methods where the name is equal and the number of arguments is equal, the most common denominator signature is taken 
 or computed if there is no most common denominator. Only for that signature a Java method with the given
-name is generated, all the case methods are generated to protected methods where the name is prefixed with an
+name is generated, all the dispatch functions are generated to protected methods where the name is prefixed with an
 underscore. 
 
 Within the implementation of the dispatch method the correct case method is looked up at runtime using if else cascades.
@@ -319,8 +318,8 @@ This is done by sorting the methods from most specific to least specific and gen
 
 Example: The following functions
 code[
-	foo(Number x) : 'it's a number';
-	foo(Integer x) : 'it's an int';
+	dispatch foo(Number x) : 'it's a number';
+	dispatch foo(Integer x) : 'it's an int';
 ] 
 
 compile to the following Java method:
@@ -350,8 +349,8 @@ different overloaded methods are matched in the order they are declared within t
 Example:
 
 code[
-	foo(Number x, Integer y) : "it's some number and an int";
-	foo(Integer x, Number x) : "it's an int and a number";
+	dispatch foo(Number x, Integer y) : "it's some number and an int";
+	dispatch foo(Integer x, Number x) : "it's an int and a number";
 ]
 
 code[Java][
@@ -372,9 +371,9 @@ code[Java][
 As you can see a null reference is never a match. If you want to fetch null you can declare a parameter using the type code[java.lang.Void].
 
 code[
-	foo(Number x) : 'it's some number';
-	foo(Integer x) : 'it's an int';
-	foo(Void x) : throw new NullPointerException("x");
+	dispatch foo(Number x) : 'it's some number';
+	dispatch foo(Integer x) : 'it's an int';
+	dispatch foo(Void x) : throw new NullPointerException("x");
 ]
 
 Which compiles to the following Java code:
@@ -396,7 +395,7 @@ public String foo(Number x) {
 
 section3[Overloading Functions from Super Types]
 
-Any methods from super types conforming to the compiled form of a case method are also included in the
+Any Java methods from super types conforming to the compiled form of a dispatch method are also included in the
 dispatch. Conforming means they have the right number of arguments and start with an underscore.
 
 Example:
@@ -414,9 +413,14 @@ and the following xtend class extends it like this:
 
 code[
 	class MyLabelProvider extends AbstractLabelProvider {
-	   case label(Entity this) name
-	   case label(Method this) name+"("+params.toString(",")+"):"+type
-	   case label(Field this) name+type
+	   dispatch label(Entity this) 
+	     name
+	     
+	   dispatch label(Method this) 
+	     name+"("+params.toString(",")+"):"+type
+	     
+	   dispatch label(Field this) 
+	     name+type
 	}
 ]
 

@@ -88,7 +88,8 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XStringLiteral:<br />&nbsp;&nbsp;&nbsp;&nbsp;STRING;<br />
+XStringLiteral:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;STRING;
 </p>
 </div>
 </div>
@@ -147,7 +148,8 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XIntegerLiteral:<br />&nbsp;&nbsp;&nbsp;&nbsp;INT;<br />
+XIntegerLiteral:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;INT;
 </p>
 </div>
 </div>
@@ -204,7 +206,8 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XBooleanLiteral:<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;false&apos;&nbsp;|&nbsp;&apos;true&apos;;<br />
+XBooleanLiteral:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;false&apos;&nbsp;|&nbsp;&apos;true&apos;;
 </p>
 </div>
 </div>
@@ -262,7 +265,8 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XNullLiteral:<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;null&apos;;<br />
+XNullLiteral:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;null&apos;;
 </p>
 </div>
 </div>
@@ -331,7 +335,8 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XTypeLiteral:<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;typeof&apos;&nbsp;&apos;(&apos;&nbsp;QualifiedName&nbsp;&apos;)&apos;;<br />
+XTypeLiteral:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;typeof&apos;&nbsp;&apos;(&apos;&nbsp;QualifiedName&nbsp;&apos;)&apos;;
 </p>
 </div>
 </div>
@@ -387,7 +392,8 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XCastedExpression:<br />&nbsp;&nbsp;&nbsp;&nbsp;Expression&nbsp;&apos;as&apos;&nbsp;JvmTypeReference;<br />
+XCastedExpression:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Expression&nbsp;&apos;as&apos;&nbsp;JvmTypeReference;
 </p>
 </div>
 </div>
@@ -780,7 +786,7 @@ Given the expression
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myObj.myProperty&nbsp;=&nbsp;"foo"<br />
+myObj.myProperty&nbsp;=&nbsp;"foo"
 </p>
 </div>
 </div>
@@ -800,7 +806,7 @@ the following Java expression :
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myObj.myProperty&nbsp;=&nbsp;"foo";<br />
+myObj.myProperty&nbsp;=&nbsp;<span class="string" >"foo"</span>;
 </p>
 </div>
 </div>
@@ -827,7 +833,7 @@ As a result the compiler translates to :
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myObj.setMyProperty("foo")<br />
+myObj.setMyProperty(<span class="string" >"foo"</span>)
 </p>
 </div>
 </div>
@@ -1038,7 +1044,9 @@ The following snippet is a simplification of the real Xtext rules, which cover m
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-FeatureCall&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;ID&nbsp;|<br />&nbsp;&nbsp;&nbsp;&nbsp;Expression&nbsp;(&apos;.&apos;&nbsp;ID&nbsp;(&apos;(&apos;&nbsp;Expression&nbsp;(&apos;,&apos;&nbsp;Expression)*&nbsp;&apos;)&apos;)?)*<br />
+FeatureCall&nbsp;:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ID&nbsp;|<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Expression&nbsp;(&apos;.&apos;&nbsp;ID&nbsp;(&apos;(&apos;&nbsp;Expression&nbsp;(&apos;,&apos;&nbsp;Expression)*&nbsp;&apos;)&apos;)?)*
 </p>
 </div>
 </div>
@@ -1077,7 +1085,7 @@ That is, for the following expression
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myObj.myProperty<br />
+myObj.myProperty
 </p>
 </div>
 </div>
@@ -1120,7 +1128,7 @@ That is if
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-this.myProperty<br />
+this.myProperty
 </p>
 </div>
 </div>
@@ -1131,7 +1139,7 @@ is a valid expression
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myProperty<br />
+myProperty
 </p>
 </div>
 </div>
@@ -1292,7 +1300,7 @@ If you for instance want the names of all persons in a <span class="inlinecode">
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-listOfPersons.collect(e|e.name)<br />
+listOfPersons.collect(e|e.name)
 </p>
 </div>
 </div>
@@ -1310,7 +1318,7 @@ So alternatively to the code above you can write:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-listOfPersons*.name<br />
+listOfPersons*.name
 </p>
 </div>
 </div>
@@ -1361,7 +1369,8 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XIterableFeatureCall:<br />&nbsp;&nbsp;&nbsp;&nbsp;PrimaryExpression&nbsp;(&apos;*.&apos;)&nbsp;FeatureCall;<br />
+XIterableFeatureCall:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PrimaryExpression&nbsp;(&apos;*.&apos;)&nbsp;FeatureCall;
 </p>
 </div>
 </div>
@@ -1441,7 +1450,7 @@ Instead of writing
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-if&nbsp;(myRef==null)&nbsp;null&nbsp;else&nbsp;myRef.doStuff()<br />
+if&nbsp;(myRef==null)&nbsp;null&nbsp;else&nbsp;myRef.doStuff()
 </p>
 </div>
 </div>
@@ -1458,7 +1467,7 @@ one can write
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myRef?.doStuff()<br />
+myRef?.doStuff()
 </p>
 </div>
 </div>
@@ -1488,7 +1497,8 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XSafeFeatureCall:<br />&nbsp;&nbsp;&nbsp;&nbsp;PrimaryExpression&nbsp;(&apos;?.&apos;)&nbsp;FeatureCall;<br />
+XSafeFeatureCall:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PrimaryExpression&nbsp;(&apos;?.&apos;)&nbsp;FeatureCall;
 </p>
 </div>
 </div>
@@ -1580,7 +1590,12 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XClosure:<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;[&apos;&nbsp;(JvmFormalParameter&nbsp;(&apos;,&apos;&nbsp;JvmFormalParameter)*)?&nbsp;&apos;|&apos;&nbsp;XExpression&nbsp;&apos;]&apos;;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />JvmFormalParameter:<br />&nbsp;&nbsp;&nbsp;&nbsp;JvmTypeReference?&nbsp;ID;<br />
+XClosure:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;[&apos;&nbsp;(JvmFormalParameter&nbsp;(&apos;,&apos;&nbsp;JvmFormalParameter)*)?&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&apos;|&apos;&nbsp;XExpression&nbsp;&apos;]&apos;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+JvmFormalParameter:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JvmTypeReference?&nbsp;ID;
 </p>
 </div>
 </div>
@@ -1597,7 +1612,8 @@ The surrounding square brackets are optional if the closure is directly passed t
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myList.find(e|e.name==null)<br />myList.find([e|e.name==null])<br />
+myList.find(e|e.name==null)<br />
+myList.find([e|e.name==null])
 </p>
 </div>
 </div>
@@ -1614,7 +1630,7 @@ But in all other cases the square brackets are mandatory:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-val&nbsp;func&nbsp;=&nbsp;[String&nbsp;s|&nbsp;s.length&gt;3]<br />
+val&nbsp;func&nbsp;=&nbsp;[String&nbsp;s|&nbsp;s.length&gt;3]
 </p>
 </div>
 </div>
@@ -1708,7 +1724,13 @@ as an extension method, it can be invoked like this
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-newArrayList(&apos;aaa&apos;,&apos;bb&apos;,&apos;c&apos;).sort(<br />&nbsp;&nbsp;&nbsp;&nbsp;e1,e2|&nbsp;if&nbsp;e1.length&gt;e2.length&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if&nbsp;e1.length&lt;e2.length&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0)<br />
+newArrayList(&apos;aaa&apos;,&apos;bb&apos;,&apos;c&apos;).sort(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;e1,e2|&nbsp;if&nbsp;e1.length&gt;e2.length&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if&nbsp;e1.length&lt;e2.length&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0)
 </p>
 </div>
 </div>
@@ -1748,7 +1770,7 @@ For instance, given the following Java method signature:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-public&nbsp;T&nbsp;&lt;T&gt;getFirst(List&lt;T&gt;&nbsp;list,&nbsp;Function0&lt;T,Boolean&gt;&nbsp;predicate)&nbsp;<br />
+public&nbsp;T&nbsp;&lt;T&gt;getFirst(List&lt;T&gt;&nbsp;list,&nbsp;Function0&lt;T,Boolean&gt;&nbsp;predicate)
 </p>
 </div>
 </div>
@@ -1762,7 +1784,7 @@ the type of the parameter can be inferred. Which allows users to write:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-getFirst(arrayList("Foo","Bar"),&nbsp;e|e=="Bar")<br />
+getFirst(arrayList("Foo","Bar"),&nbsp;e|e=="Bar")
 </p>
 </div>
 </div>
@@ -1773,7 +1795,7 @@ instead of
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-getFirst(arrayList("Foo","Bar"),&nbsp;String&nbsp;e|e=="Bar")<br />
+getFirst(arrayList("Foo","Bar"),&nbsp;String&nbsp;e|e=="Bar")
 </p>
 </div>
 </div>
@@ -1885,7 +1907,10 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XIfExpression:<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;if&apos;&nbsp;&apos;(&apos;&nbsp;XExpression&nbsp;&apos;)&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XExpression<br />&nbsp;&nbsp;&nbsp;&nbsp;(&apos;else&apos;&nbsp;XExpression)?;<br />
+XIfExpression:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;if&apos;&nbsp;&apos;(&apos;&nbsp;XExpression&nbsp;&apos;)&apos;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XExpression<br />
+&nbsp;&nbsp;&nbsp;&nbsp;(&apos;else&apos;&nbsp;XExpression)?;
 </p>
 </div>
 </div>
@@ -1908,7 +1933,7 @@ That is
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-if&nbsp;(foo)&nbsp;x&nbsp;//&nbsp;is&nbsp;the&nbsp;same&nbsp;as&nbsp;&apos;if&nbsp;(foo)&nbsp;x&nbsp;else&nbsp;null&apos;<br />
+if&nbsp;(foo)&nbsp;x&nbsp;//&nbsp;is&nbsp;the&nbsp;same&nbsp;as&nbsp;&apos;if&nbsp;(foo)&nbsp;x&nbsp;else&nbsp;null&apos;
 </p>
 </div>
 </div>
@@ -2042,7 +2067,14 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XSwitchExpression:<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;switch&apos;&nbsp;(ID&nbsp;&apos;:&apos;)?&nbsp;XExpression&nbsp;&apos;{&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCasePart+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&apos;default&apos;&nbsp;&apos;:&apos;&nbsp;XExpression))?<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;}&apos;;<br /><br />XCasePart:<br />&nbsp;&nbsp;&nbsp;&nbsp;JvmTypeReference?&nbsp;(&apos;case&apos;&nbsp;XExpression)?&nbsp;&apos;:&apos;&nbsp;XExpression&nbsp;);<br />
+XSwitchExpression:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;switch&apos;&nbsp;(ID&nbsp;&apos;:&apos;)?&nbsp;XExpression&nbsp;&apos;{&apos;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCasePart+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&apos;default&apos;&nbsp;&apos;:&apos;&nbsp;XExpression))?<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;}&apos;;<br />
+<br />
+XCasePart:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JvmTypeReference?&nbsp;(&apos;case&apos;&nbsp;XExpression)?&nbsp;&apos;:&apos;&nbsp;XExpression&nbsp;);
 </p>
 </div>
 </div>
@@ -2058,7 +2090,13 @@ For a switch expression
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-switch&nbsp;e&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;e1&nbsp;:&nbsp;er1<br />&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;e2&nbsp;:&nbsp;er2<br />&nbsp;&nbsp;&nbsp;&nbsp;...<br />&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;en&nbsp;:&nbsp;ern<br />&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;:&nbsp;er<br />}<br />
+switch&nbsp;e&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;e1&nbsp;:&nbsp;er1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;e2&nbsp;:&nbsp;er2<br />
+&nbsp;&nbsp;&nbsp;&nbsp;...<br />
+&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;en&nbsp;:&nbsp;ern<br />
+&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;:&nbsp;er<br />
+}
 </p>
 </div>
 </div>
@@ -2109,7 +2147,13 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-{<br />var&nbsp;Object&nbsp;x&nbsp;=&nbsp;...;<br />switch&nbsp;x&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;case&nbsp;x.length()&gt;0&nbsp;:&nbsp;x.length()<br />&nbsp;&nbsp;&nbsp;&nbsp;List&lt;?&gt;&nbsp;:&nbsp;x.size()<br />&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;:&nbsp;-1<br />}<br />
+{<br />
+var&nbsp;Object&nbsp;x&nbsp;=&nbsp;...;<br />
+switch&nbsp;x&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;case&nbsp;x.length()&gt;0&nbsp;:&nbsp;x.length()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;List&lt;?&gt;&nbsp;:&nbsp;x.size()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;:&nbsp;-1<br />
+}
 </p>
 </div>
 </div>
@@ -2256,7 +2300,8 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XVariableDeclaration:<br />&nbsp;&nbsp;&nbsp;&nbsp;(&apos;val&apos;&nbsp;|&nbsp;&apos;var&apos;)&nbsp;JvmTypeReference?&nbsp;ID&nbsp;&apos;=&apos;&nbsp;XExpression;<br />
+XVariableDeclaration:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;(&apos;val&apos;&nbsp;|&nbsp;&apos;var&apos;)&nbsp;JvmTypeReference?&nbsp;ID&nbsp;&apos;=&apos;&nbsp;XExpression;
 </p>
 </div>
 </div>
@@ -2279,7 +2324,16 @@ needs to update the value of a reference. In such situations the variable needs 
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-{<br />&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;i&nbsp;=&nbsp;0<br />&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;(i&gt;MAX)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Hi&nbsp;there!")<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;myFoo&nbsp;=&nbsp;my.complex(expression)<br />&nbsp;&nbsp;&nbsp;&nbsp;myFoo.call(myFoo)<br />}<br />
+{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;i&nbsp;=&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;(i&gt;MAX)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Hi&nbsp;there!")<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}<br />
+{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;myFoo&nbsp;=&nbsp;my.complex(expression)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;myFoo.call(myFoo)<br />
+}
 </p>
 </div>
 </div>
@@ -2315,7 +2369,7 @@ Here is an example for an explicitly declared type:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-var&nbsp;List&lt;String&gt;&nbsp;msg&nbsp;=&nbsp;new&nbsp;ArrayList&lt;String&gt;();&nbsp;<br />
+var&nbsp;List&lt;String&gt;&nbsp;msg&nbsp;=&nbsp;new&nbsp;ArrayList&lt;String&gt;();
 </p>
 </div>
 </div>
@@ -2331,7 +2385,7 @@ Alternatively the type can be left out and will be inferred from the initializat
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-var&nbsp;msg&nbsp;=&nbsp;new&nbsp;ArrayList&lt;String&gt;();&nbsp;//&nbsp;-&gt;&nbsp;type&nbsp;ArrayList&lt;String&gt;&nbsp;&nbsp;<br />
+var&nbsp;msg&nbsp;=&nbsp;new&nbsp;ArrayList&lt;String&gt;();&nbsp;//&nbsp;-&gt;&nbsp;type&nbsp;ArrayList&lt;String&gt;
 </p>
 </div>
 </div>
@@ -2390,7 +2444,10 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XBlockExpression:<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;{&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(XExpressionInsideBlock&nbsp;&apos;;&apos;?)*<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;}&apos;;<br />
+XBlockExpression:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;{&apos;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(XExpressionInsideBlock&nbsp;&apos;;&apos;?)*<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;}&apos;;
 </p>
 </div>
 </div>
@@ -2514,7 +2571,9 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XWhileExpression:<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;while&apos;&nbsp;&apos;(&apos;&nbsp;predicate=XExpression&nbsp;&apos;)&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XExpression;<br />
+XWhileExpression:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;while&apos;&nbsp;&apos;(&apos;&nbsp;predicate=XExpression&nbsp;&apos;)&apos;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XExpression;
 </p>
 </div>
 </div>
@@ -2552,7 +2611,9 @@ Examples
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-while&nbsp;(true)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect("foo");<br />}<br />
+while&nbsp;(true)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect("foo");<br />
+}
 </p>
 </div>
 </div>
@@ -2569,7 +2630,7 @@ while&nbsp;(true)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect("foo");<br />
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-while&nbsp;((i=i+1)&lt;max)&nbsp;doSideEffect("foo")<br />
+while&nbsp;((i=i+1)&lt;max)&nbsp;doSideEffect("foo")
 </p>
 </div>
 </div>
@@ -2639,7 +2700,10 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XDoWhileExpression:<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;do&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XExpression<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;while&apos;&nbsp;&apos;(&apos;&nbsp;predicate=XExpression&nbsp;&apos;)&apos;;<br />
+XDoWhileExpression:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;do&apos;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XExpression<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;while&apos;&nbsp;&apos;(&apos;&nbsp;predicate=XExpression&nbsp;&apos;)&apos;;
 </p>
 </div>
 </div>
@@ -2677,7 +2741,9 @@ Examples
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-do&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect("foo");<br />}&nbsp;while&nbsp;(true)<br />
+do&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect("foo");<br />
+}&nbsp;while&nbsp;(true)
 </p>
 </div>
 </div>
@@ -2694,7 +2760,7 @@ do&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect("foo");<br />}&nbsp;while&nb
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-do&nbsp;doSideEffect("foo")&nbsp;while&nbsp;((i=i+1)&lt;max)<br />
+do&nbsp;doSideEffect("foo")&nbsp;while&nbsp;((i=i+1)&lt;max)
 </p>
 </div>
 </div>
@@ -2760,7 +2826,10 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XForExpression:<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;for&apos;&nbsp;&apos;(&apos;&nbsp;JvmFormalParameter&nbsp;&apos;:&apos;&nbsp;XExpression&nbsp;&apos;)&apos;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XExpression<br />&nbsp;&nbsp;&nbsp;&nbsp;;<br />
+XForExpression:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;for&apos;&nbsp;&apos;(&apos;&nbsp;JvmFormalParameter&nbsp;&apos;:&apos;&nbsp;XExpression&nbsp;&apos;)&apos;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XExpression<br />
+&nbsp;&nbsp;&nbsp;&nbsp;;
 </p>
 </div>
 </div>
@@ -2825,7 +2894,9 @@ Examples
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-for&nbsp;(String&nbsp;s&nbsp;:&nbsp;myStrings)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(s);<br />}
+for&nbsp;(String&nbsp;s&nbsp;:&nbsp;myStrings)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(s);<br />
+}
 </p>
 </div>
 </div>
@@ -2843,7 +2914,8 @@ for&nbsp;(String&nbsp;s&nbsp;:&nbsp;myStrings)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nb
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-for&nbsp;(s&nbsp;:&nbsp;myStrings)<br />&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(s)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+for&nbsp;(s&nbsp;:&nbsp;myStrings)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(s)
 </p>
 </div>
 </div>
@@ -2906,7 +2978,10 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XConstructorCall:<br />&nbsp;&nbsp;&apos;new&apos;&nbsp;QualifiedName&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&apos;&lt;&apos;&nbsp;JvmTypeArgument&nbsp;(&apos;,&apos;&nbsp;JvmTypeArgument)*&nbsp;&apos;&gt;&apos;)?&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&apos;(&apos;(XExpression&nbsp;(&apos;,&apos;&nbsp;XExpression)*)?&apos;)&apos;)?;<br />
+XConstructorCall:<br />
+&nbsp;&nbsp;&apos;new&apos;&nbsp;QualifiedName&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&apos;&lt;&apos;&nbsp;JvmTypeArgument&nbsp;(&apos;,&apos;&nbsp;JvmTypeArgument)*&nbsp;&apos;&gt;&apos;)?&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&apos;(&apos;(XExpression&nbsp;(&apos;,&apos;&nbsp;XExpression)*)?&apos;)&apos;)?;
 </p>
 </div>
 </div>
@@ -2938,7 +3013,7 @@ Example
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-new&nbsp;Foo()<br />
+new&nbsp;Foo()
 </p>
 </div>
 </div>
@@ -2994,7 +3069,8 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XThrow:<br />&nbsp;&nbsp;&apos;throw&apos;&nbsp;XExpression;<br />
+XThrow:<br />
+&nbsp;&nbsp;&apos;throw&apos;&nbsp;XExpression;
 </p>
 </div>
 </div>
@@ -3053,7 +3129,7 @@ Example
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-throw&nbsp;new&nbsp;RuntimeException()<br />
+throw&nbsp;new&nbsp;RuntimeException()
 </p>
 </div>
 </div>
@@ -3110,7 +3186,17 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XTryCatchFinally:<br />&nbsp;&nbsp;&apos;try&apos;&nbsp;XBlockExpression<br />&nbsp;&nbsp;CatchClause*<br />&nbsp;&nbsp;FinallyClause?;<br />&nbsp;&nbsp;<br />CatchClause:<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;catch&apos;&nbsp;XDeclaredParameter&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XBlockExpression&nbsp;&nbsp;<br /><br />FinallyClause:<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;finally&apos;&nbsp;XBlockExpression&nbsp;&nbsp;<br />
+XTryCatchFinally:<br />
+&nbsp;&nbsp;&apos;try&apos;&nbsp;XBlockExpression<br />
+&nbsp;&nbsp;CatchClause*<br />
+&nbsp;&nbsp;FinallyClause?;<br />
+&nbsp;&nbsp;<br />
+CatchClause:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;catch&apos;&nbsp;XDeclaredParameter&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XBlockExpression&nbsp;&nbsp;<br />
+<br />
+FinallyClause:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;finally&apos;&nbsp;XBlockExpression
 </p>
 </div>
 </div>
@@ -3142,7 +3228,13 @@ Example
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-try&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;RuntimeException()<br />}&nbsp;catch&nbsp;(NullPointerException&nbsp;e)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;handle&nbsp;e<br />}&nbsp;finally&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;do&nbsp;stuff<br />}<br />
+try&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;RuntimeException()<br />
+}&nbsp;catch&nbsp;(NullPointerException&nbsp;e)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;handle&nbsp;e<br />
+}&nbsp;finally&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;do&nbsp;stuff<br />
+}
 </p>
 </div>
 </div>
