@@ -7,27 +7,29 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.impl;
 
-import java.util.Stack;
-
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.serializer.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.ISyntacticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.IPDAAbsorberState;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.IPDAEmitterState;
+import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynAbsorberState;
+import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynNavigable;
+import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynState;
 
 /**
- * @author meysholdt - Initial contribution and API
+ * @author Moritz Eysholdt - Initial contribution and API
  */
 public class SyntacticSequencerDiagnosticProvider implements ISyntacticSequencerDiagnosticProvider {
 
-	public ISerializationDiagnostic createInvalidFollowingAbsorberDiagnostic(IPDAAbsorberState from,
+	public ISerializationDiagnostic createInvalidFollowingAbsorberDiagnostic(ISynAbsorberState from,
 			AbstractElement to, boolean toReturning) {
 		return null;
 	}
 
-	public ISerializationDiagnostic createUnexpectedStackStateDiagnostic(IPDAEmitterState toConsume,
-			Stack<RuleCall> stack) {
+	public ISerializationDiagnostic createUnexpectedStackStateDiagnostic(ISynState toConsume, RCStack stack) {
+		return null;
+	}
+
+	public ISerializationDiagnostic createUnexpectedEmitterDiagnostic(ISynNavigable currentState,
+			AbstractElement target, RCStack stack) {
 		return null;
 	}
 

@@ -21,8 +21,9 @@ public interface ISerializationDiagnostic {
 	public class ExceptionThrowingAcceptor implements Acceptor {
 		public void accept(ISerializationDiagnostic diagnostic) {
 			if (diagnostic == null || diagnostic.getMessage() == null)
-				throw new RuntimeException();
-			throw new RuntimeException(diagnostic.getMessage());
+				System.err.println("error");
+			else
+				System.err.println("error " + diagnostic.getMessage());
 		}
 	}
 

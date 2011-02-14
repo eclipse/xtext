@@ -1,6 +1,7 @@
 package org.eclipse.xtext.serializer;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.impl.SyntacticSequencer;
 
 import com.google.inject.ImplementedBy;
@@ -30,6 +31,6 @@ public interface ISyntacticSequencer {
 	 *            A handler that accepts a sequence of parse-events and does something useful with it. For example: Mix
 	 *            in white-spaces and comments and compose all the tokens to a document.
 	 */
-	ISemanticSequenceAcceptor createAcceptor(EObject context, EObject semanticRoot,
+	ISemanticSequenceAcceptor createAcceptor(EObject context, EObject semanticRoot, INode previousNode,
 			ISyntacticSequenceAcceptor constructor, ISerializationDiagnostic.Acceptor errorAcceptor);
 }
