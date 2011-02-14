@@ -95,11 +95,11 @@ public class Xtend2Compiler extends XbaseCompiler {
 		//TODO typeparams, abstract, final
 		appendable.append("public class ").append(obj.getName());
 		if (obj.getExtends() != null)
-			appendable.append(" extends ").append(obj.getExtends().getCanonicalName());
+			appendable.append(" extends ").append(obj.getExtends().getIdentifier());
 		if (!obj.getImplements().isEmpty()) {
-			appendable.append(" implements ").append(obj.getImplements().get(0).getCanonicalName());
+			appendable.append(" implements ").append(obj.getImplements().get(0).getIdentifier());
 			for (int i = 1; i < obj.getImplements().size(); ++i)
-				appendable.append(", ").append(obj.getImplements().get(i).getCanonicalName());
+				appendable.append(", ").append(obj.getImplements().get(i).getIdentifier());
 		}
 		appendable.append(" {");
 		appendable.increaseIndentation();
@@ -323,7 +323,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 			internalToJavaStatement(expression, appendable, true);
 			appendable.append("for(");
 			JvmTypeReference paramType = getTypeProvider().getTypeForIdentifiable(parameter);
-			appendable.append(paramType.getCanonicalName());
+			appendable.append(paramType.getIdentifier());
 			appendable.append(" ");
 			String loopParam = declareNameInVariableScope(parameter, appendable);
 			appendable.append(loopParam);

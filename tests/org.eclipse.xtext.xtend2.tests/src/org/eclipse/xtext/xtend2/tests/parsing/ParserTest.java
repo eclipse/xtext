@@ -27,10 +27,10 @@ public class ParserTest extends AbstractXtend2TestCase {
 			"}");
 		assertEquals(1, clazz.getMembers().size());
 		DeclaredDependency dependency = (DeclaredDependency) clazz.getMembers().get(0);
-		assertEquals("java.util.Map",dependency.getType().getType().getCanonicalName());
+		assertEquals("java.util.Map",dependency.getType().getType().getIdentifier());
 		assertEquals("map",dependency.getName());
 		assertEquals("map",dependency.getSimpleName());
-		assertEquals("java.util.Map<java.lang.String,java.lang.String>", dependency.getType().getCanonicalName());
+		assertEquals("java.util.Map<java.lang.String,java.lang.String>", dependency.getType().getIdentifier());
 	}
 	
 	public void testDeclaredDependency_01() throws Exception {
@@ -40,10 +40,10 @@ public class ParserTest extends AbstractXtend2TestCase {
 		"}");
 		assertEquals(1, clazz.getMembers().size());
 		DeclaredDependency dependency = (DeclaredDependency) clazz.getMembers().get(0);
-		assertEquals("java.util.Map",dependency.getType().getType().getCanonicalName());
+		assertEquals("java.util.Map",dependency.getType().getType().getIdentifier());
 		assertEquals("map",dependency.getName());
 		assertEquals("map",dependency.getSimpleName());
-		assertEquals("java.util.Map<java.lang.String,java.lang.String>", dependency.getType().getCanonicalName());
+		assertEquals("java.util.Map<java.lang.String,java.lang.String>", dependency.getType().getIdentifier());
 	}
 	
 	public void testDeclaredDependency_02() throws Exception {
@@ -53,10 +53,10 @@ public class ParserTest extends AbstractXtend2TestCase {
 		"}");
 		assertEquals(2, clazz.getMembers().size());
 		DeclaredDependency dependency = (DeclaredDependency) clazz.getMembers().get(0);
-		assertEquals("java.util.Map",dependency.getType().getType().getCanonicalName());
+		assertEquals("java.util.Map",dependency.getType().getType().getIdentifier());
 		assertEquals("map",dependency.getName());
 		assertEquals("map",dependency.getSimpleName());
-		assertEquals("java.util.Map<java.lang.String,java.lang.String>", dependency.getType().getCanonicalName());
+		assertEquals("java.util.Map<java.lang.String,java.lang.String>", dependency.getType().getIdentifier());
 		assertTrue(clazz.getMembers().get(1) instanceof XtendFunction);
 	}
 	
@@ -68,15 +68,15 @@ public class ParserTest extends AbstractXtend2TestCase {
 		"}");
 		assertEquals(2, clazz.getMembers().size());
 		DeclaredDependency dependency = (DeclaredDependency) clazz.getMembers().get(0);
-		assertEquals("java.util.Map",dependency.getType().getType().getCanonicalName());
+		assertEquals("java.util.Map",dependency.getType().getType().getIdentifier());
 		assertEquals("map",dependency.getName());
 		assertEquals("map",dependency.getSimpleName());
-		assertEquals("java.util.Map<java.lang.String,java.lang.String>", dependency.getType().getCanonicalName());
+		assertEquals("java.util.Map<java.lang.String,java.lang.String>", dependency.getType().getIdentifier());
 		dependency = (DeclaredDependency) clazz.getMembers().get(1);
-		assertEquals("java.util.List",dependency.getType().getType().getCanonicalName());
+		assertEquals("java.util.List",dependency.getType().getType().getIdentifier());
 		assertEquals("myList",dependency.getName());
 		assertEquals("myList",dependency.getSimpleName());
-		assertEquals("java.util.List", dependency.getType().getCanonicalName());
+		assertEquals("java.util.List", dependency.getType().getIdentifier());
 	}
 	
 	public void testFunction_0() throws Exception {

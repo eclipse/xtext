@@ -20,8 +20,16 @@ public class XtendFunctionImplCustom extends XtendFunctionImpl {
 	}
 	
 	@Override
-	public String getCanonicalName() {
-		String typeName = getDeclaringType().getCanonicalName();
+	public String getIdentifier() {
+		String typeName = getDeclaringType().getIdentifier();
+		if (typeName!=null)
+			return typeName+"."+getSimpleName();
+		return getSimpleName();
+	}
+	
+	@Override
+	public String getQualifiedName() {
+		String typeName = getDeclaringType().getQualifiedName();
 		if (typeName!=null)
 			return typeName+"."+getSimpleName();
 		return getSimpleName();
