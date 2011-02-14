@@ -23,8 +23,8 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.grammaranalysis.IPDAState;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.IPDAAbsorberState;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.IPDAEmitterState;
+import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynAbsorberState;
+import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider.SequencerNFAProvider;
 import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider.SequencerNFAState;
@@ -152,12 +152,12 @@ public abstract class AbstractSyntacticSequencerPDAProviderTest extends Abstract
 		return Join.join("\n", result);
 	}
 
-	private List<String> pda2lines(IPDAAbsorberState start) {
-		Set<IPDAAbsorberState> states = Sets.newHashSet(start);
-		collectAbsorberStates(start, Sets.<IPDAEmitterState> newHashSet(), states);
+	private List<String> pda2lines(ISynAbsorberState start) {
+		Set<ISynAbsorberState> states = Sets.newHashSet(start);
+		collectAbsorberStates(start, Sets.<ISynState> newHashSet(), states);
 		List<String> pdalines = Lists.newArrayList();
-		for (IPDAAbsorberState state : states)
-			for (IPDAEmitterState child : state.getFollowers())
+		for (ISynAbsorberState state : states)
+			for (ISynState child : state.getFollowers())
 				pdalines.add("  " + state + " " + pathToStr(child));
 		Collections.sort(pdalines);
 		return pdalines;
@@ -165,37 +165,37 @@ public abstract class AbstractSyntacticSequencerPDAProviderTest extends Abstract
 
 	protected abstract SyntacticSequencerPDAProvider createSequenceParserPDAProvider();
 
-	private void collectAbsorberStates(IPDAEmitterState state, Set<IPDAEmitterState> visited,
-			Set<IPDAAbsorberState> result) {
+	private void collectAbsorberStates(ISynState state, Set<ISynState> visited,
+			Set<ISynAbsorberState> result) {
 		if (!visited.add(state))
 			return;
-		if (state instanceof IPDAAbsorberState)
-			result.add((IPDAAbsorberState) state);
-		for (IPDAEmitterState follower : state.getFollowers())
+		if (state instanceof ISynAbsorberState)
+			result.add((ISynAbsorberState) state);
+		for (ISynState follower : state.getFollowers())
 			collectAbsorberStates(follower, visited, result);
 	}
 
-	private void pathToStr(IPDAEmitterState state, Set<IPDAEmitterState> visited, List<String> result) {
+	private void pathToStr(ISynState state, Set<ISynState> visited, List<String> result) {
 		if (!visited.add(state))
 			result.add("!" + state);
-		else if (state instanceof IPDAAbsorberState)
+		else if (state instanceof ISynAbsorberState)
 			result.add(state.toString());
 		else {
 			result.add(state.toString());
-			List<IPDAEmitterState> follower = state.getFollowers();
-			Collections.sort(follower, new Comparator<IPDAEmitterState>() {
-				public int compare(IPDAEmitterState o1, IPDAEmitterState o2) {
+			List<ISynState> follower = state.getFollowers();
+			Collections.sort(follower, new Comparator<ISynState>() {
+				public int compare(ISynState o1, ISynState o2) {
 					return o1.toString().compareTo(o2.toString());
 				}
 			});
-			for (IPDAEmitterState child : follower)
+			for (ISynState child : follower)
 				pathToStr(child, visited, result);
 		}
 	}
 
-	private String pathToStr(IPDAEmitterState state) {
+	private String pathToStr(ISynState state) {
 		List<String> result = Lists.newArrayList();
-		pathToStr(state, Sets.<IPDAEmitterState> newHashSet(), result);
+		pathToStr(state, Sets.<ISynState> newHashSet(), result);
 		return Join.join(" ", result);
 	}
 }
