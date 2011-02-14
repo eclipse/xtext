@@ -426,9 +426,9 @@ ruleMember returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-
+(
     { 
-        newCompositeNode(grammarAccess.getMemberAccess().getFunctionParserRuleCall()); 
+        newCompositeNode(grammarAccess.getMemberAccess().getFunctionParserRuleCall_0()); 
     }
     this_Function_0=ruleFunction
     { 
@@ -436,6 +436,81 @@ ruleMember returns [EObject current=null]
         afterParserOrEnumRuleCall();
     }
 
+    |
+    { 
+        newCompositeNode(grammarAccess.getMemberAccess().getDeclaredDependencyParserRuleCall_1()); 
+    }
+    this_DeclaredDependency_1=ruleDeclaredDependency
+    { 
+        $current = $this_DeclaredDependency_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleDeclaredDependency
+entryRuleDeclaredDependency returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getDeclaredDependencyRule()); }
+	 iv_ruleDeclaredDependency=ruleDeclaredDependency 
+	 { $current=$iv_ruleDeclaredDependency.current; } 
+	 EOF 
+;
+
+// Rule DeclaredDependency
+ruleDeclaredDependency returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='@Inject' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getDeclaredDependencyAccess().getInjectKeyword_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getDeclaredDependencyAccess().getTypeJvmTypeReferenceParserRuleCall_1_0()); 
+	    }
+		lv_type_1_0=ruleJvmTypeReference		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getDeclaredDependencyRule());
+	        }
+       		set(
+       			$current, 
+       			"type",
+        		lv_type_1_0, 
+        		"JvmTypeReference");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_2='as' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getDeclaredDependencyAccess().getAsKeyword_2_0());
+    }
+(
+(
+		lv_name_3_0=RULE_ID
+		{
+			newLeafNode(lv_name_3_0, grammarAccess.getDeclaredDependencyAccess().getNameIDTerminalRuleCall_2_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getDeclaredDependencyRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"name",
+        		lv_name_3_0, 
+        		"ID");
+	    }
+
+)
+))?)
 ;
 
 

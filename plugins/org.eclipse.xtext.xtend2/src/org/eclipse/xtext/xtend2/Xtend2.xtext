@@ -32,7 +32,11 @@ Class returns XtendClass :
    '}';
 
 Member returns XtendMember:
-	Function;
+	Function | DeclaredDependency;
+	
+DeclaredDependency returns DeclaredDependency :
+	'@Inject' type=JvmTypeReference ('as' name=ID)?
+;
 
 Function returns XtendFunction :
 	(override?='override'? & dispatch?='dispatch'?) ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?

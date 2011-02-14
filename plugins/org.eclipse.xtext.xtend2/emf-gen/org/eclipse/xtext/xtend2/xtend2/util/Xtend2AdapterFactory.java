@@ -135,6 +135,11 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 				return createRichStringElseIfAdapter();
 			}
 			@Override
+			public Adapter caseDeclaredDependency(DeclaredDependency object)
+			{
+				return createDeclaredDependencyAdapter();
+			}
+			@Override
 			public Adapter caseJvmIdentifiableElement(JvmIdentifiableElement object)
 			{
 				return createJvmIdentifiableElementAdapter();
@@ -327,6 +332,21 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createRichStringElseIfAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtend2.xtend2.DeclaredDependency <em>Declared Dependency</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xtend2.xtend2.DeclaredDependency
+	 * @generated
+	 */
+	public Adapter createDeclaredDependencyAdapter()
 	{
 		return null;
 	}

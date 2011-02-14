@@ -39,7 +39,15 @@ ruleClass :
 
 // Rule Member
 ruleMember :
-	ruleFunction
+	ruleFunction |
+	ruleDeclaredDependency
+;
+
+// Rule DeclaredDependency
+ruleDeclaredDependency :
+	'@Inject' ruleJvmTypeReference (
+		'as' RULE_ID
+	)?
 ;
 
 // Rule Function

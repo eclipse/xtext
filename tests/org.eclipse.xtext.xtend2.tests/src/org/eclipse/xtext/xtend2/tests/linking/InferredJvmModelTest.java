@@ -12,6 +12,7 @@ import static com.google.common.collect.Iterables.*;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -33,11 +34,22 @@ import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Sven Efftinge
  */
 public class InferredJvmModelTest extends AbstractXtend2TestCase {
 
 	@Inject
 	private IXtend2JvmAssociations associations;
+	
+	public void testDeclaredDependency_00() throws Exception {
+		XtendFile xtendFile = file("class Foo { @Inject String }");
+		JvmGenericType type = getInferredType(xtendFile);
+		Iterable<JvmField> iterable = type.getDeclaredFields();
+		JvmField next = iterable.iterator().next();
+		assertEquals("string",next.getSimpleName());
+		assertEquals(JvmVisibility.PRIVATE, next.getVisibility());
+		assertEquals("java.lang.String", next.getType().getCanonicalName());
+	}
 	
 	public void testCaseFunction_00() throws Exception {
 		XtendFile xtendFile = file("class Foo { dispatch foo(Object x) null dispatch foo(String x) null}");
