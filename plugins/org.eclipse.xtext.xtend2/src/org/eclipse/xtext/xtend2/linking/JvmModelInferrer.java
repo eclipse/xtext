@@ -77,7 +77,8 @@ public class JvmModelInferrer {
 	protected JvmGenericType transform(XtendClass source) {
 		JvmGenericType target = typesFactory.createJvmGenericType();
 		source.eResource().getContents().add(target);
-		target.setFullyQualifiedName(source.getCanonicalName());
+		target.setPackageName(source.getPackageName());
+		target.setSimpleName(source.getName());
 		target.setVisibility(JvmVisibility.PUBLIC);
 		associator.associate(target, source);
 		addConstructor(source, target);
@@ -97,7 +98,7 @@ public class JvmModelInferrer {
 		for (Pair<String, Integer> key : methods.keySet()) {
 			Collection<JvmOperation> operations = methods.get(key);
 			JvmOperation operation = deriveGenericDispatchOperationSignature(operations);
-			operation.setFullyQualifiedName(target.getCanonicalName() + "." + key.getFirst());
+			operation.setSimpleName(key.getFirst());
 			target.getMembers().add(operation);
 		}
 	}
@@ -154,21 +155,18 @@ public class JvmModelInferrer {
 		JvmConstructor constructor = typesFactory.createJvmConstructor();
 		target.getMembers().add(constructor);
 		associator.associate(source, constructor);
-		constructor.setFullyQualifiedName(source.getCanonicalName());
+		constructor.setSimpleName(source.getName());
 	}
 
 	protected JvmMember transform(XtendMember sourceMember) {
 		if (sourceMember instanceof XtendFunction) {
 			XtendFunction source = (XtendFunction) sourceMember;
 			JvmOperation target = typesFactory.createJvmOperation();
-			String canonicalName = source.getCanonicalName();
+			String sourceName = source.getName();
 			if (source.isDispatch()) {
-				int lastDot = canonicalName.lastIndexOf('.');
-				canonicalName = canonicalName.substring(0, lastDot + 1) + "_" + canonicalName.substring(lastDot + 1);
-				target.setFullyQualifiedName(canonicalName);
-			} else {
-				target.setFullyQualifiedName(canonicalName);
+				sourceName = "_" + sourceName;
 			}
+			target.setSimpleName(sourceName);
 			for (JvmFormalParameter parameter : source.getParameters())
 				target.getParameters().add(cloneWithProxies(parameter));
 			target.setReturnType(cloneWithProxies(source.getReturnType()));
@@ -180,7 +178,7 @@ public class JvmModelInferrer {
 			DeclaredDependency dep = (DeclaredDependency) sourceMember;
 			JvmField field = typesFactory.createJvmField();
 			field.setVisibility(JvmVisibility.PRIVATE);
-			field.setFullyQualifiedName(((XtendClass)dep.eContainer()).getCanonicalName()+"."+dep.getName());
+			field.setSimpleName(dep.getName());
 			field.setType(cloneWithProxies(dep.getType()));
 			associator.associate(field, dep);
 			return field;

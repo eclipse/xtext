@@ -50,4 +50,20 @@ public interface JvmGenericArrayTypeReference extends JvmTypeReference
 	 */
 	void setType(JvmArrayType value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	JvmTypeReference getComponentType();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	int getDimensions();
+
 } // JvmGenericArrayTypeReference

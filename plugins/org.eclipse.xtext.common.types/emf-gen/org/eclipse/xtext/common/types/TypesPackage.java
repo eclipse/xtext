@@ -166,13 +166,13 @@ public interface TypesPackage extends EPackage
 	int JVM_PRIMITIVE_TYPE__ARRAY_TYPE = JVM_COMPONENT_TYPE__ARRAY_TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Simple Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_PRIMITIVE_TYPE__NAME = JVM_COMPONENT_TYPE_FEATURE_COUNT + 0;
+	int JVM_PRIMITIVE_TYPE__SIMPLE_NAME = JVM_COMPONENT_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Primitive Type</em>' class.
@@ -221,6 +221,98 @@ public interface TypesPackage extends EPackage
 	int JVM_ARRAY_TYPE_FEATURE_COUNT = JVM_COMPONENT_TYPE_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmAnnotationTargetImpl <em>Jvm Annotation Target</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmAnnotationTargetImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationTarget()
+	 * @generated
+	 */
+	int JVM_ANNOTATION_TARGET = 28;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ANNOTATION_TARGET__ANNOTATIONS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Annotation Target</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ANNOTATION_TARGET_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl <em>Jvm Member</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmMemberImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmMember()
+	 * @generated
+	 */
+	int JVM_MEMBER = 21;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_MEMBER__ANNOTATIONS = JVM_ANNOTATION_TARGET__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_MEMBER__DECLARING_TYPE = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_MEMBER__VISIBILITY = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Simple Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_MEMBER__SIMPLE_NAME = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_MEMBER__IDENTIFIER = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Member</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_MEMBER_FEATURE_COUNT = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 4;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl <em>Jvm Declared Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -231,22 +323,13 @@ public interface TypesPackage extends EPackage
 	int JVM_DECLARED_TYPE = 6;
 
 	/**
-	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_DECLARED_TYPE__ARRAY_TYPE = JVM_COMPONENT_TYPE__ARRAY_TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_DECLARED_TYPE__ANNOTATIONS = JVM_COMPONENT_TYPE_FEATURE_COUNT + 0;
+	int JVM_DECLARED_TYPE__ANNOTATIONS = JVM_MEMBER__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
@@ -255,7 +338,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_DECLARED_TYPE__DECLARING_TYPE = JVM_COMPONENT_TYPE_FEATURE_COUNT + 1;
+	int JVM_DECLARED_TYPE__DECLARING_TYPE = JVM_MEMBER__DECLARING_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -264,16 +347,34 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_DECLARED_TYPE__VISIBILITY = JVM_COMPONENT_TYPE_FEATURE_COUNT + 2;
+	int JVM_DECLARED_TYPE__VISIBILITY = JVM_MEMBER__VISIBILITY;
 
 	/**
-	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Simple Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_DECLARED_TYPE__FULLY_QUALIFIED_NAME = JVM_COMPONENT_TYPE_FEATURE_COUNT + 3;
+	int JVM_DECLARED_TYPE__SIMPLE_NAME = JVM_MEMBER__SIMPLE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_DECLARED_TYPE__IDENTIFIER = JVM_MEMBER__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_DECLARED_TYPE__ARRAY_TYPE = JVM_MEMBER_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
@@ -282,7 +383,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_DECLARED_TYPE__SUPER_TYPES = JVM_COMPONENT_TYPE_FEATURE_COUNT + 4;
+	int JVM_DECLARED_TYPE__SUPER_TYPES = JVM_MEMBER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
@@ -291,7 +392,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_DECLARED_TYPE__MEMBERS = JVM_COMPONENT_TYPE_FEATURE_COUNT + 5;
+	int JVM_DECLARED_TYPE__MEMBERS = JVM_MEMBER_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -300,7 +401,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_DECLARED_TYPE__ABSTRACT = JVM_COMPONENT_TYPE_FEATURE_COUNT + 6;
+	int JVM_DECLARED_TYPE__ABSTRACT = JVM_MEMBER_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -309,7 +410,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_DECLARED_TYPE__STATIC = JVM_COMPONENT_TYPE_FEATURE_COUNT + 7;
+	int JVM_DECLARED_TYPE__STATIC = JVM_MEMBER_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Final</b></em>' attribute.
@@ -318,7 +419,16 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_DECLARED_TYPE__FINAL = JVM_COMPONENT_TYPE_FEATURE_COUNT + 8;
+	int JVM_DECLARED_TYPE__FINAL = JVM_MEMBER_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Package Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_DECLARED_TYPE__PACKAGE_NAME = JVM_MEMBER_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Declared Type</em>' class.
@@ -327,7 +437,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_DECLARED_TYPE_FEATURE_COUNT = JVM_COMPONENT_TYPE_FEATURE_COUNT + 9;
+	int JVM_DECLARED_TYPE_FEATURE_COUNT = JVM_MEMBER_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeParameterImpl <em>Jvm Type Parameter</em>}' class.
@@ -457,7 +567,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_TYPE_CONSTRAINT__TYPE_REFERENCE = JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 0;
+	int JVM_TYPE_CONSTRAINT__TYPE_REFERENCE = 0;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' container reference.
@@ -466,7 +576,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_TYPE_CONSTRAINT__OWNER = JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 1;
+	int JVM_TYPE_CONSTRAINT__OWNER = 1;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Type Constraint</em>' class.
@@ -475,7 +585,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_TYPE_CONSTRAINT_FEATURE_COUNT = JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 2;
+	int JVM_TYPE_CONSTRAINT_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmUpperBoundImpl <em>Jvm Upper Bound</em>}' class.
@@ -562,15 +672,6 @@ public interface TypesPackage extends EPackage
 	int JVM_ANNOTATION_TYPE = 13;
 
 	/**
-	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_ANNOTATION_TYPE__ARRAY_TYPE = JVM_DECLARED_TYPE__ARRAY_TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -598,13 +699,31 @@ public interface TypesPackage extends EPackage
 	int JVM_ANNOTATION_TYPE__VISIBILITY = JVM_DECLARED_TYPE__VISIBILITY;
 
 	/**
-	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Simple Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_ANNOTATION_TYPE__FULLY_QUALIFIED_NAME = JVM_DECLARED_TYPE__FULLY_QUALIFIED_NAME;
+	int JVM_ANNOTATION_TYPE__SIMPLE_NAME = JVM_DECLARED_TYPE__SIMPLE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ANNOTATION_TYPE__IDENTIFIER = JVM_DECLARED_TYPE__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ANNOTATION_TYPE__ARRAY_TYPE = JVM_DECLARED_TYPE__ARRAY_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
@@ -652,6 +771,15 @@ public interface TypesPackage extends EPackage
 	int JVM_ANNOTATION_TYPE__FINAL = JVM_DECLARED_TYPE__FINAL;
 
 	/**
+	 * The feature id for the '<em><b>Package Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ANNOTATION_TYPE__PACKAGE_NAME = JVM_DECLARED_TYPE__PACKAGE_NAME;
+
+	/**
 	 * The number of structural features of the '<em>Jvm Annotation Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -669,15 +797,6 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 */
 	int JVM_ENUMERATION_TYPE = 14;
-
-	/**
-	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_ENUMERATION_TYPE__ARRAY_TYPE = JVM_DECLARED_TYPE__ARRAY_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -707,13 +826,31 @@ public interface TypesPackage extends EPackage
 	int JVM_ENUMERATION_TYPE__VISIBILITY = JVM_DECLARED_TYPE__VISIBILITY;
 
 	/**
-	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Simple Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_ENUMERATION_TYPE__FULLY_QUALIFIED_NAME = JVM_DECLARED_TYPE__FULLY_QUALIFIED_NAME;
+	int JVM_ENUMERATION_TYPE__SIMPLE_NAME = JVM_DECLARED_TYPE__SIMPLE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUMERATION_TYPE__IDENTIFIER = JVM_DECLARED_TYPE__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUMERATION_TYPE__ARRAY_TYPE = JVM_DECLARED_TYPE__ARRAY_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
@@ -761,6 +898,15 @@ public interface TypesPackage extends EPackage
 	int JVM_ENUMERATION_TYPE__FINAL = JVM_DECLARED_TYPE__FINAL;
 
 	/**
+	 * The feature id for the '<em><b>Package Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUMERATION_TYPE__PACKAGE_NAME = JVM_DECLARED_TYPE__PACKAGE_NAME;
+
+	/**
 	 * The feature id for the '<em><b>Literals</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -777,89 +923,6 @@ public interface TypesPackage extends EPackage
 	 * @ordered
 	 */
 	int JVM_ENUMERATION_TYPE_FEATURE_COUNT = JVM_DECLARED_TYPE_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmAnnotationTargetImpl <em>Jvm Annotation Target</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.JvmAnnotationTargetImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationTarget()
-	 * @generated
-	 */
-	int JVM_ANNOTATION_TARGET = 28;
-
-	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_ANNOTATION_TARGET__ANNOTATIONS = 0;
-
-	/**
-	 * The number of structural features of the '<em>Jvm Annotation Target</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_ANNOTATION_TARGET_FEATURE_COUNT = 1;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl <em>Jvm Member</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.JvmMemberImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmMember()
-	 * @generated
-	 */
-	int JVM_MEMBER = 21;
-
-	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_MEMBER__ANNOTATIONS = JVM_ANNOTATION_TARGET__ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_MEMBER__DECLARING_TYPE = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_MEMBER__VISIBILITY = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_MEMBER__FULLY_QUALIFIED_NAME = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Jvm Member</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_MEMBER_FEATURE_COUNT = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmFeatureImpl <em>Jvm Feature</em>}' class.
@@ -899,13 +962,22 @@ public interface TypesPackage extends EPackage
 	int JVM_FEATURE__VISIBILITY = JVM_MEMBER__VISIBILITY;
 
 	/**
-	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Simple Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_FEATURE__FULLY_QUALIFIED_NAME = JVM_MEMBER__FULLY_QUALIFIED_NAME;
+	int JVM_FEATURE__SIMPLE_NAME = JVM_MEMBER__SIMPLE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_FEATURE__IDENTIFIER = JVM_MEMBER__IDENTIFIER;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Feature</em>' class.
@@ -954,13 +1026,22 @@ public interface TypesPackage extends EPackage
 	int JVM_FIELD__VISIBILITY = JVM_FEATURE__VISIBILITY;
 
 	/**
-	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Simple Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_FIELD__FULLY_QUALIFIED_NAME = JVM_FEATURE__FULLY_QUALIFIED_NAME;
+	int JVM_FIELD__SIMPLE_NAME = JVM_FEATURE__SIMPLE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_FIELD__IDENTIFIER = JVM_FEATURE__IDENTIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -1036,13 +1117,22 @@ public interface TypesPackage extends EPackage
 	int JVM_ENUMERATION_LITERAL__VISIBILITY = JVM_FIELD__VISIBILITY;
 
 	/**
-	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Simple Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_ENUMERATION_LITERAL__FULLY_QUALIFIED_NAME = JVM_FIELD__FULLY_QUALIFIED_NAME;
+	int JVM_ENUMERATION_LITERAL__SIMPLE_NAME = JVM_FIELD__SIMPLE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUMERATION_LITERAL__IDENTIFIER = JVM_FIELD__IDENTIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -1091,15 +1181,6 @@ public interface TypesPackage extends EPackage
 	int JVM_GENERIC_TYPE = 16;
 
 	/**
-	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_GENERIC_TYPE__ARRAY_TYPE = JVM_DECLARED_TYPE__ARRAY_TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1127,13 +1208,31 @@ public interface TypesPackage extends EPackage
 	int JVM_GENERIC_TYPE__VISIBILITY = JVM_DECLARED_TYPE__VISIBILITY;
 
 	/**
-	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Simple Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_GENERIC_TYPE__FULLY_QUALIFIED_NAME = JVM_DECLARED_TYPE__FULLY_QUALIFIED_NAME;
+	int JVM_GENERIC_TYPE__SIMPLE_NAME = JVM_DECLARED_TYPE__SIMPLE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_GENERIC_TYPE__IDENTIFIER = JVM_DECLARED_TYPE__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_GENERIC_TYPE__ARRAY_TYPE = JVM_DECLARED_TYPE__ARRAY_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
@@ -1181,6 +1280,15 @@ public interface TypesPackage extends EPackage
 	int JVM_GENERIC_TYPE__FINAL = JVM_DECLARED_TYPE__FINAL;
 
 	/**
+	 * The feature id for the '<em><b>Package Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_GENERIC_TYPE__PACKAGE_NAME = JVM_DECLARED_TYPE__PACKAGE_NAME;
+
+	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1224,7 +1332,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_TYPE_REFERENCE_FEATURE_COUNT = JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 0;
+	int JVM_TYPE_REFERENCE_FEATURE_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmParameterizedTypeReferenceImpl <em>Jvm Parameterized Type Reference</em>}' class.
@@ -1357,13 +1465,22 @@ public interface TypesPackage extends EPackage
 	int JVM_EXECUTABLE__VISIBILITY = JVM_FEATURE__VISIBILITY;
 
 	/**
-	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Simple Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_EXECUTABLE__FULLY_QUALIFIED_NAME = JVM_FEATURE__FULLY_QUALIFIED_NAME;
+	int JVM_EXECUTABLE__SIMPLE_NAME = JVM_FEATURE__SIMPLE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_EXECUTABLE__IDENTIFIER = JVM_FEATURE__IDENTIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
@@ -1448,13 +1565,22 @@ public interface TypesPackage extends EPackage
 	int JVM_CONSTRUCTOR__VISIBILITY = JVM_EXECUTABLE__VISIBILITY;
 
 	/**
-	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Simple Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_CONSTRUCTOR__FULLY_QUALIFIED_NAME = JVM_EXECUTABLE__FULLY_QUALIFIED_NAME;
+	int JVM_CONSTRUCTOR__SIMPLE_NAME = JVM_EXECUTABLE__SIMPLE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_CONSTRUCTOR__IDENTIFIER = JVM_EXECUTABLE__IDENTIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
@@ -1539,13 +1665,22 @@ public interface TypesPackage extends EPackage
 	int JVM_OPERATION__VISIBILITY = JVM_EXECUTABLE__VISIBILITY;
 
 	/**
-	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Simple Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_OPERATION__FULLY_QUALIFIED_NAME = JVM_EXECUTABLE__FULLY_QUALIFIED_NAME;
+	int JVM_OPERATION__SIMPLE_NAME = JVM_EXECUTABLE__SIMPLE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_OPERATION__IDENTIFIER = JVM_EXECUTABLE__IDENTIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
@@ -2284,15 +2419,15 @@ public interface TypesPackage extends EPackage
 	EClass getJvmPrimitiveType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmPrimitiveType#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmPrimitiveType#getSimpleName <em>Simple Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.xtext.common.types.JvmPrimitiveType#getName()
+	 * @return the meta object for the attribute '<em>Simple Name</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmPrimitiveType#getSimpleName()
 	 * @see #getJvmPrimitiveType()
 	 * @generated
 	 */
-	EAttribute getJvmPrimitiveType_Name();
+	EAttribute getJvmPrimitiveType_SimpleName();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmArrayType <em>Jvm Array Type</em>}'.
@@ -2379,6 +2514,17 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 */
 	EAttribute getJvmDeclaredType_Final();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmDeclaredType#getPackageName <em>Package Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Package Name</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmDeclaredType#getPackageName()
+	 * @see #getJvmDeclaredType()
+	 * @generated
+	 */
+	EAttribute getJvmDeclaredType_PackageName();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmTypeParameter <em>Jvm Type Parameter</em>}'.
@@ -2674,15 +2820,26 @@ public interface TypesPackage extends EPackage
 	EAttribute getJvmMember_Visibility();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmMember#getFullyQualifiedName <em>Fully Qualified Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmMember#getSimpleName <em>Simple Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Fully Qualified Name</em>'.
-	 * @see org.eclipse.xtext.common.types.JvmMember#getFullyQualifiedName()
+	 * @return the meta object for the attribute '<em>Simple Name</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmMember#getSimpleName()
 	 * @see #getJvmMember()
 	 * @generated
 	 */
-	EAttribute getJvmMember_FullyQualifiedName();
+	EAttribute getJvmMember_SimpleName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmMember#getIdentifier <em>Identifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Identifier</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmMember#getIdentifier()
+	 * @see #getJvmMember()
+	 * @generated
+	 */
+	EAttribute getJvmMember_Identifier();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmFeature <em>Jvm Feature</em>}'.
@@ -3316,12 +3473,12 @@ public interface TypesPackage extends EPackage
 		EClass JVM_PRIMITIVE_TYPE = eINSTANCE.getJvmPrimitiveType();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Simple Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute JVM_PRIMITIVE_TYPE__NAME = eINSTANCE.getJvmPrimitiveType_Name();
+		EAttribute JVM_PRIMITIVE_TYPE__SIMPLE_NAME = eINSTANCE.getJvmPrimitiveType_SimpleName();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmArrayTypeImpl <em>Jvm Array Type</em>}' class.
@@ -3390,6 +3547,14 @@ public interface TypesPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute JVM_DECLARED_TYPE__FINAL = eINSTANCE.getJvmDeclaredType_Final();
+
+		/**
+		 * The meta object literal for the '<em><b>Package Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JVM_DECLARED_TYPE__PACKAGE_NAME = eINSTANCE.getJvmDeclaredType_PackageName();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeParameterImpl <em>Jvm Type Parameter</em>}' class.
@@ -3646,12 +3811,20 @@ public interface TypesPackage extends EPackage
 		EAttribute JVM_MEMBER__VISIBILITY = eINSTANCE.getJvmMember_Visibility();
 
 		/**
-		 * The meta object literal for the '<em><b>Fully Qualified Name</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Simple Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute JVM_MEMBER__FULLY_QUALIFIED_NAME = eINSTANCE.getJvmMember_FullyQualifiedName();
+		EAttribute JVM_MEMBER__SIMPLE_NAME = eINSTANCE.getJvmMember_SimpleName();
+
+		/**
+		 * The meta object literal for the '<em><b>Identifier</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JVM_MEMBER__IDENTIFIER = eINSTANCE.getJvmMember_Identifier();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmFeatureImpl <em>Jvm Feature</em>}' class.

@@ -74,15 +74,18 @@ public class Xtend2RenameStrategy extends DefaultRenameStrategy {
 		EObject renamedElement = resourceSet.getEObject(targetElementNewURI, false);
 		if (renamedElement instanceof XtendClass) {
 			JvmGenericType inferredJvmType = xtend2jvmAssociations.getInferredType((XtendClass) renamedElement);
-			if(inferredJvmType != null)
-				inferredJvmType.setFullyQualifiedName(((XtendClass)renamedElement).getCanonicalName());
+			if(inferredJvmType != null) {
+				inferredJvmType.setSimpleName(((XtendClass)renamedElement).getName());
+				inferredJvmType.setPackageName(((XtendClass)renamedElement).getPackageName());
+			}
 			JvmConstructor inferredConstructor = xtend2jvmAssociations.getInferredConstructor((XtendClass) renamedElement);
-			if(inferredConstructor != null)
-				inferredConstructor.setFullyQualifiedName(((XtendClass)renamedElement).getCanonicalName());
+			if(inferredConstructor != null) {
+				inferredConstructor.setSimpleName(((XtendClass)renamedElement).getName());
+			}
 		} else if(renamedElement instanceof XtendFunction) {
 			JvmMember inferredJvmMember = xtend2jvmAssociations.getDirectlyInferredOperation(((XtendFunction) renamedElement));
 			if(inferredJvmMember != null) {
-				inferredJvmMember.setFullyQualifiedName(((XtendMember) renamedElement).getCanonicalName());
+				inferredJvmMember.setSimpleName(((XtendMember) renamedElement).getName());
 			}
 		}
 	}

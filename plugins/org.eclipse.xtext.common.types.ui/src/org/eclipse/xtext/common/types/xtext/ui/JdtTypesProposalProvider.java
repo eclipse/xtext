@@ -120,7 +120,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 		if (project == null)
 			return;
 		
-		String fqn = superType.getCanonicalName();
+		String fqn = superType.getIdentifier();
 		// java.lang.Object - no need to create hierarchy scope
 		if (Object.class.getName().equals(fqn)) {
 			createTypeProposals(project, proposalFactory, context, typeReference, filter, acceptor);

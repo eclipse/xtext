@@ -22,6 +22,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.xtext.common.types.JvmDeclaredType#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmDeclaredType#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmDeclaredType#isFinal <em>Final</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmDeclaredType#getPackageName <em>Package Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -29,7 +30,7 @@ import org.eclipse.emf.common.util.EList;
  * @model abstract="true"
  * @generated
  */
-public interface JvmDeclaredType extends JvmComponentType, JvmMember
+public interface JvmDeclaredType extends JvmMember, JvmComponentType
 {
 	/**
 	 * Returns the value of the '<em><b>Super Types</b></em>' containment reference list.
@@ -144,12 +145,30 @@ public interface JvmDeclaredType extends JvmComponentType, JvmMember
 	void setFinal(boolean value);
 
 	/**
+	 * Returns the value of the '<em><b>Package Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Package Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
+	 * @return the value of the '<em>Package Name</em>' attribute.
+	 * @see #setPackageName(String)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmDeclaredType_PackageName()
+	 * @model
 	 * @generated
 	 */
 	String getPackageName();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmDeclaredType#getPackageName <em>Package Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Package Name</em>' attribute.
+	 * @see #getPackageName()
+	 * @generated
+	 */
+	void setPackageName(String value);
 
 	/**
 	 * <!-- begin-user-doc -->

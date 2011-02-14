@@ -21,17 +21,16 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtext.common.types.JvmAnnotationReference;
-import org.eclipse.xtext.common.types.JvmAnnotationTarget;
+import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
@@ -41,71 +40,29 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl#getAnnotations <em>Annotations</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl#getDeclaringType <em>Declaring Type</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl#getVisibility <em>Visibility</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl#getFullyQualifiedName <em>Fully Qualified Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl#getArrayType <em>Array Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl#getSuperTypes <em>Super Types</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl#getMembers <em>Members</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl#isFinal <em>Final</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl#getPackageName <em>Package Name</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class JvmDeclaredTypeImpl extends JvmComponentTypeImpl implements JvmDeclaredType
+public abstract class JvmDeclaredTypeImpl extends JvmMemberImplCustom implements JvmDeclaredType
 {
 	/**
-	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
+	 * The cached value of the '{@link #getArrayType() <em>Array Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAnnotations()
+	 * @see #getArrayType()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<JvmAnnotationReference> annotations;
-
-	/**
-	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVisibility()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final JvmVisibility VISIBILITY_EDEFAULT = JvmVisibility.DEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVisibility()
-	 * @generated
-	 * @ordered
-	 */
-	protected JvmVisibility visibility = VISIBILITY_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getFullyQualifiedName() <em>Fully Qualified Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFullyQualifiedName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String FULLY_QUALIFIED_NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getFullyQualifiedName() <em>Fully Qualified Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFullyQualifiedName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String fullyQualifiedName = FULLY_QUALIFIED_NAME_EDEFAULT;
+	protected JvmArrayType arrayType;
 
 	/**
 	 * The cached value of the '{@link #getSuperTypes() <em>Super Types</em>}' containment reference list.
@@ -188,6 +145,26 @@ public abstract class JvmDeclaredTypeImpl extends JvmComponentTypeImpl implement
 	protected boolean final_ = FINAL_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getPackageName() <em>Package Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPackageName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PACKAGE_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getPackageName() <em>Package Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPackageName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String packageName = PACKAGE_NAME_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -213,34 +190,25 @@ public abstract class JvmDeclaredTypeImpl extends JvmComponentTypeImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<JvmAnnotationReference> getAnnotations()
+	public JvmArrayType getArrayType()
 	{
-		if (annotations == null)
+		return arrayType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetArrayType(JvmArrayType newArrayType, NotificationChain msgs)
+	{
+		JvmArrayType oldArrayType = arrayType;
+		arrayType = newArrayType;
+		if (eNotificationRequired())
 		{
-			annotations = new EObjectContainmentWithInverseEList<JvmAnnotationReference>(JvmAnnotationReference.class, this, TypesPackage.JVM_DECLARED_TYPE__ANNOTATIONS, TypesPackage.JVM_ANNOTATION_REFERENCE__TARGET);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_DECLARED_TYPE__ARRAY_TYPE, oldArrayType, newArrayType);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
-		return annotations;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmDeclaredType getDeclaringType()
-	{
-		if (eContainerFeatureID() != TypesPackage.JVM_DECLARED_TYPE__DECLARING_TYPE) return null;
-		return (JvmDeclaredType)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetDeclaringType(JvmDeclaredType newDeclaringType, NotificationChain msgs)
-	{
-		msgs = eBasicSetContainer((InternalEObject)newDeclaringType, TypesPackage.JVM_DECLARED_TYPE__DECLARING_TYPE, msgs);
 		return msgs;
 	}
 
@@ -249,68 +217,20 @@ public abstract class JvmDeclaredTypeImpl extends JvmComponentTypeImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDeclaringType(JvmDeclaredType newDeclaringType)
+	public void setArrayType(JvmArrayType newArrayType)
 	{
-		if (newDeclaringType != eInternalContainer() || (eContainerFeatureID() != TypesPackage.JVM_DECLARED_TYPE__DECLARING_TYPE && newDeclaringType != null))
+		if (newArrayType != arrayType)
 		{
-			if (EcoreUtil.isAncestor(this, newDeclaringType))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newDeclaringType != null)
-				msgs = ((InternalEObject)newDeclaringType).eInverseAdd(this, TypesPackage.JVM_DECLARED_TYPE__MEMBERS, JvmDeclaredType.class, msgs);
-			msgs = basicSetDeclaringType(newDeclaringType, msgs);
+			if (arrayType != null)
+				msgs = ((InternalEObject)arrayType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_DECLARED_TYPE__ARRAY_TYPE, null, msgs);
+			if (newArrayType != null)
+				msgs = ((InternalEObject)newArrayType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_DECLARED_TYPE__ARRAY_TYPE, null, msgs);
+			msgs = basicSetArrayType(newArrayType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_DECLARED_TYPE__DECLARING_TYPE, newDeclaringType, newDeclaringType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmVisibility getVisibility()
-	{
-		return visibility;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setVisibility(JvmVisibility newVisibility)
-	{
-		JvmVisibility oldVisibility = visibility;
-		visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_DECLARED_TYPE__VISIBILITY, oldVisibility, visibility));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getFullyQualifiedName()
-	{
-		return fullyQualifiedName;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setFullyQualifiedName(String newFullyQualifiedName)
-	{
-		String oldFullyQualifiedName = fullyQualifiedName;
-		fullyQualifiedName = newFullyQualifiedName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_DECLARED_TYPE__FULLY_QUALIFIED_NAME, oldFullyQualifiedName, fullyQualifiedName));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_DECLARED_TYPE__ARRAY_TYPE, newArrayType, newArrayType));
 	}
 
 	/**
@@ -417,9 +337,20 @@ public abstract class JvmDeclaredTypeImpl extends JvmComponentTypeImpl implement
 	 */
 	public String getPackageName()
 	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return packageName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPackageName(String newPackageName)
+	{
+		String oldPackageName = packageName;
+		packageName = newPackageName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_DECLARED_TYPE__PACKAGE_NAME, oldPackageName, packageName));
 	}
 
 	/**
@@ -451,30 +382,12 @@ public abstract class JvmDeclaredTypeImpl extends JvmComponentTypeImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getSimpleName()
-	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_DECLARED_TYPE__ANNOTATIONS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAnnotations()).basicAdd(otherEnd, msgs);
-			case TypesPackage.JVM_DECLARED_TYPE__DECLARING_TYPE:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetDeclaringType((JvmDeclaredType)otherEnd, msgs);
 			case TypesPackage.JVM_DECLARED_TYPE__MEMBERS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getMembers()).basicAdd(otherEnd, msgs);
 		}
@@ -491,10 +404,8 @@ public abstract class JvmDeclaredTypeImpl extends JvmComponentTypeImpl implement
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_DECLARED_TYPE__ANNOTATIONS:
-				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
-			case TypesPackage.JVM_DECLARED_TYPE__DECLARING_TYPE:
-				return basicSetDeclaringType(null, msgs);
+			case TypesPackage.JVM_DECLARED_TYPE__ARRAY_TYPE:
+				return basicSetArrayType(null, msgs);
 			case TypesPackage.JVM_DECLARED_TYPE__SUPER_TYPES:
 				return ((InternalEList<?>)getSuperTypes()).basicRemove(otherEnd, msgs);
 			case TypesPackage.JVM_DECLARED_TYPE__MEMBERS:
@@ -509,34 +420,12 @@ public abstract class JvmDeclaredTypeImpl extends JvmComponentTypeImpl implement
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs)
-	{
-		switch (eContainerFeatureID())
-		{
-			case TypesPackage.JVM_DECLARED_TYPE__DECLARING_TYPE:
-				return eInternalContainer().eInverseRemove(this, TypesPackage.JVM_DECLARED_TYPE__MEMBERS, JvmDeclaredType.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_DECLARED_TYPE__ANNOTATIONS:
-				return getAnnotations();
-			case TypesPackage.JVM_DECLARED_TYPE__DECLARING_TYPE:
-				return getDeclaringType();
-			case TypesPackage.JVM_DECLARED_TYPE__VISIBILITY:
-				return getVisibility();
-			case TypesPackage.JVM_DECLARED_TYPE__FULLY_QUALIFIED_NAME:
-				return getFullyQualifiedName();
+			case TypesPackage.JVM_DECLARED_TYPE__ARRAY_TYPE:
+				return getArrayType();
 			case TypesPackage.JVM_DECLARED_TYPE__SUPER_TYPES:
 				return getSuperTypes();
 			case TypesPackage.JVM_DECLARED_TYPE__MEMBERS:
@@ -547,6 +436,8 @@ public abstract class JvmDeclaredTypeImpl extends JvmComponentTypeImpl implement
 				return isStatic();
 			case TypesPackage.JVM_DECLARED_TYPE__FINAL:
 				return isFinal();
+			case TypesPackage.JVM_DECLARED_TYPE__PACKAGE_NAME:
+				return getPackageName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -562,18 +453,8 @@ public abstract class JvmDeclaredTypeImpl extends JvmComponentTypeImpl implement
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_DECLARED_TYPE__ANNOTATIONS:
-				getAnnotations().clear();
-				getAnnotations().addAll((Collection<? extends JvmAnnotationReference>)newValue);
-				return;
-			case TypesPackage.JVM_DECLARED_TYPE__DECLARING_TYPE:
-				setDeclaringType((JvmDeclaredType)newValue);
-				return;
-			case TypesPackage.JVM_DECLARED_TYPE__VISIBILITY:
-				setVisibility((JvmVisibility)newValue);
-				return;
-			case TypesPackage.JVM_DECLARED_TYPE__FULLY_QUALIFIED_NAME:
-				setFullyQualifiedName((String)newValue);
+			case TypesPackage.JVM_DECLARED_TYPE__ARRAY_TYPE:
+				setArrayType((JvmArrayType)newValue);
 				return;
 			case TypesPackage.JVM_DECLARED_TYPE__SUPER_TYPES:
 				getSuperTypes().clear();
@@ -592,6 +473,9 @@ public abstract class JvmDeclaredTypeImpl extends JvmComponentTypeImpl implement
 			case TypesPackage.JVM_DECLARED_TYPE__FINAL:
 				setFinal((Boolean)newValue);
 				return;
+			case TypesPackage.JVM_DECLARED_TYPE__PACKAGE_NAME:
+				setPackageName((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -606,17 +490,8 @@ public abstract class JvmDeclaredTypeImpl extends JvmComponentTypeImpl implement
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_DECLARED_TYPE__ANNOTATIONS:
-				getAnnotations().clear();
-				return;
-			case TypesPackage.JVM_DECLARED_TYPE__DECLARING_TYPE:
-				setDeclaringType((JvmDeclaredType)null);
-				return;
-			case TypesPackage.JVM_DECLARED_TYPE__VISIBILITY:
-				setVisibility(VISIBILITY_EDEFAULT);
-				return;
-			case TypesPackage.JVM_DECLARED_TYPE__FULLY_QUALIFIED_NAME:
-				setFullyQualifiedName(FULLY_QUALIFIED_NAME_EDEFAULT);
+			case TypesPackage.JVM_DECLARED_TYPE__ARRAY_TYPE:
+				setArrayType((JvmArrayType)null);
 				return;
 			case TypesPackage.JVM_DECLARED_TYPE__SUPER_TYPES:
 				getSuperTypes().clear();
@@ -633,6 +508,9 @@ public abstract class JvmDeclaredTypeImpl extends JvmComponentTypeImpl implement
 			case TypesPackage.JVM_DECLARED_TYPE__FINAL:
 				setFinal(FINAL_EDEFAULT);
 				return;
+			case TypesPackage.JVM_DECLARED_TYPE__PACKAGE_NAME:
+				setPackageName(PACKAGE_NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -647,14 +525,8 @@ public abstract class JvmDeclaredTypeImpl extends JvmComponentTypeImpl implement
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_DECLARED_TYPE__ANNOTATIONS:
-				return annotations != null && !annotations.isEmpty();
-			case TypesPackage.JVM_DECLARED_TYPE__DECLARING_TYPE:
-				return getDeclaringType() != null;
-			case TypesPackage.JVM_DECLARED_TYPE__VISIBILITY:
-				return visibility != VISIBILITY_EDEFAULT;
-			case TypesPackage.JVM_DECLARED_TYPE__FULLY_QUALIFIED_NAME:
-				return FULLY_QUALIFIED_NAME_EDEFAULT == null ? fullyQualifiedName != null : !FULLY_QUALIFIED_NAME_EDEFAULT.equals(fullyQualifiedName);
+			case TypesPackage.JVM_DECLARED_TYPE__ARRAY_TYPE:
+				return arrayType != null;
 			case TypesPackage.JVM_DECLARED_TYPE__SUPER_TYPES:
 				return superTypes != null && !superTypes.isEmpty();
 			case TypesPackage.JVM_DECLARED_TYPE__MEMBERS:
@@ -665,6 +537,8 @@ public abstract class JvmDeclaredTypeImpl extends JvmComponentTypeImpl implement
 				return static_ != STATIC_EDEFAULT;
 			case TypesPackage.JVM_DECLARED_TYPE__FINAL:
 				return final_ != FINAL_EDEFAULT;
+			case TypesPackage.JVM_DECLARED_TYPE__PACKAGE_NAME:
+				return PACKAGE_NAME_EDEFAULT == null ? packageName != null : !PACKAGE_NAME_EDEFAULT.equals(packageName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -677,21 +551,18 @@ public abstract class JvmDeclaredTypeImpl extends JvmComponentTypeImpl implement
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
 	{
-		if (baseClass == JvmAnnotationTarget.class)
+		if (baseClass == JvmType.class)
 		{
 			switch (derivedFeatureID)
 			{
-				case TypesPackage.JVM_DECLARED_TYPE__ANNOTATIONS: return TypesPackage.JVM_ANNOTATION_TARGET__ANNOTATIONS;
 				default: return -1;
 			}
 		}
-		if (baseClass == JvmMember.class)
+		if (baseClass == JvmComponentType.class)
 		{
 			switch (derivedFeatureID)
 			{
-				case TypesPackage.JVM_DECLARED_TYPE__DECLARING_TYPE: return TypesPackage.JVM_MEMBER__DECLARING_TYPE;
-				case TypesPackage.JVM_DECLARED_TYPE__VISIBILITY: return TypesPackage.JVM_MEMBER__VISIBILITY;
-				case TypesPackage.JVM_DECLARED_TYPE__FULLY_QUALIFIED_NAME: return TypesPackage.JVM_MEMBER__FULLY_QUALIFIED_NAME;
+				case TypesPackage.JVM_DECLARED_TYPE__ARRAY_TYPE: return TypesPackage.JVM_COMPONENT_TYPE__ARRAY_TYPE;
 				default: return -1;
 			}
 		}
@@ -706,21 +577,18 @@ public abstract class JvmDeclaredTypeImpl extends JvmComponentTypeImpl implement
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
 	{
-		if (baseClass == JvmAnnotationTarget.class)
+		if (baseClass == JvmType.class)
 		{
 			switch (baseFeatureID)
 			{
-				case TypesPackage.JVM_ANNOTATION_TARGET__ANNOTATIONS: return TypesPackage.JVM_DECLARED_TYPE__ANNOTATIONS;
 				default: return -1;
 			}
 		}
-		if (baseClass == JvmMember.class)
+		if (baseClass == JvmComponentType.class)
 		{
 			switch (baseFeatureID)
 			{
-				case TypesPackage.JVM_MEMBER__DECLARING_TYPE: return TypesPackage.JVM_DECLARED_TYPE__DECLARING_TYPE;
-				case TypesPackage.JVM_MEMBER__VISIBILITY: return TypesPackage.JVM_DECLARED_TYPE__VISIBILITY;
-				case TypesPackage.JVM_MEMBER__FULLY_QUALIFIED_NAME: return TypesPackage.JVM_DECLARED_TYPE__FULLY_QUALIFIED_NAME;
+				case TypesPackage.JVM_COMPONENT_TYPE__ARRAY_TYPE: return TypesPackage.JVM_DECLARED_TYPE__ARRAY_TYPE;
 				default: return -1;
 			}
 		}
@@ -738,16 +606,14 @@ public abstract class JvmDeclaredTypeImpl extends JvmComponentTypeImpl implement
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (visibility: ");
-		result.append(visibility);
-		result.append(", fullyQualifiedName: ");
-		result.append(fullyQualifiedName);
-		result.append(", abstract: ");
+		result.append(" (abstract: ");
 		result.append(abstract_);
 		result.append(", static: ");
 		result.append(static_);
 		result.append(", final: ");
 		result.append(final_);
+		result.append(", packageName: ");
+		result.append(packageName);
 		result.append(')');
 		return result.toString();
 	}

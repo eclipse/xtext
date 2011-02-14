@@ -85,7 +85,7 @@ public class JvmEnumerationLiteralItemProvider
 	@Override
 	public String getText(Object object)
 	{
-		String label = ((JvmEnumerationLiteral)object).getFullyQualifiedName();
+		String label = ((JvmEnumerationLiteral)object).getSimpleName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_JvmEnumerationLiteral_type") :
 			getString("_UI_JvmEnumerationLiteral_type") + " " + label;

@@ -44,13 +44,13 @@ public class DispatchingSupportTest extends AbstractXtend2TestCase {
 		Collection<JvmOperation> collection = multimap.values();
 		List<JvmOperation> list = dispatchingSupport.sort(collection);
 		Iterator<JvmOperation> i = list.iterator();
-		assertEquals(Integer.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
-		assertEquals(Number.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
-		assertEquals(String.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
-		assertEquals(Serializable.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
-		assertEquals(CharSequence.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
-		assertEquals(Comparable.class.getName(), i.next().getParameters().get(0).getParameterType().getType().getCanonicalName());
-		assertEquals(Object.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
+		assertEquals(Integer.class.getName(), i.next().getParameters().get(0).getParameterType().getIdentifier());
+		assertEquals(Number.class.getName(), i.next().getParameters().get(0).getParameterType().getIdentifier());
+		assertEquals(String.class.getName(), i.next().getParameters().get(0).getParameterType().getIdentifier());
+		assertEquals(Serializable.class.getName(), i.next().getParameters().get(0).getParameterType().getIdentifier());
+		assertEquals(CharSequence.class.getName(), i.next().getParameters().get(0).getParameterType().getIdentifier());
+		assertEquals(Comparable.class.getName(), i.next().getParameters().get(0).getParameterType().getType().getIdentifier());
+		assertEquals(Object.class.getName(), i.next().getParameters().get(0).getParameterType().getIdentifier());
 	}
 	
 	public void testSort_01() throws Exception {
@@ -63,9 +63,9 @@ public class DispatchingSupportTest extends AbstractXtend2TestCase {
 		Collection<JvmOperation> collection = multimap.values();
 		List<JvmOperation> list = dispatchingSupport.sort(collection);
 		Iterator<JvmOperation> i = list.iterator();
-		assertEquals(Integer.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
-		assertEquals(Boolean.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
-		assertEquals(String.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
+		assertEquals(Integer.class.getName(), i.next().getParameters().get(0).getParameterType().getIdentifier());
+		assertEquals(Boolean.class.getName(), i.next().getParameters().get(0).getParameterType().getIdentifier());
+		assertEquals(String.class.getName(), i.next().getParameters().get(0).getParameterType().getIdentifier());
 	}
 	
 	public void testSort_02() throws Exception {
@@ -78,8 +78,8 @@ public class DispatchingSupportTest extends AbstractXtend2TestCase {
 		Collection<JvmOperation> collection = multimap.values();
 		List<JvmOperation> list = dispatchingSupport.sort(collection);
 		Iterator<JvmOperation> i = list.iterator();
-		assertEquals(Integer.TYPE.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
-		assertEquals(Boolean.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
-		assertEquals(Object.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
+		assertEquals(Integer.TYPE.getName(), i.next().getParameters().get(0).getParameterType().getIdentifier());
+		assertEquals(Boolean.class.getName(), i.next().getParameters().get(0).getParameterType().getIdentifier());
+		assertEquals(Object.class.getName(), i.next().getParameters().get(0).getParameterType().getIdentifier());
 	}
 }

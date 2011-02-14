@@ -56,7 +56,7 @@ public class XbaseTypeConformanceComputer extends TypeConformanceComputer {
 	}
 
 	protected boolean isIterable(JvmType type) {
-		return type.getCanonicalName().equals(Iterable.class.getName());
+		return type.getIdentifier().equals(Iterable.class.getName());
 	}
 	
 	@Override
@@ -91,6 +91,6 @@ public class XbaseTypeConformanceComputer extends TypeConformanceComputer {
 	}
 
 	protected boolean isWrapperVoid(JvmTypeReference jvmTypeReference) {
-		return jvmTypeReference!=null && Void.class.getName().equals(jvmTypeReference.getType().getCanonicalName());
+		return jvmTypeReference!=null && Void.class.getName().equals(jvmTypeReference.getType().getIdentifier());
 	}
 }

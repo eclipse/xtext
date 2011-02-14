@@ -39,7 +39,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *
  * @generated
  */
-public class JvmParameterizedTypeReferenceImpl extends JvmTypeReferenceImpl implements JvmParameterizedTypeReference
+public class JvmParameterizedTypeReferenceImpl extends JvmTypeReferenceImplCustom implements JvmParameterizedTypeReference
 {
 	/**
 	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' containment reference list.

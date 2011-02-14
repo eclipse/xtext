@@ -23,6 +23,6 @@ public class JvmLowerBoundTest extends TestCase {
 	}
 	
 	public void testCanonicalName_01() {
-		assertNull(lowerBound.getCanonicalName());
+		assertNull(lowerBound.getIdentifier());
 	}
 }

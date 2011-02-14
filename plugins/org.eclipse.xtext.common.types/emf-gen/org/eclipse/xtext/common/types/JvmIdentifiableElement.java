@@ -25,6 +25,22 @@ public interface JvmIdentifiableElement extends EObject
 	 * @model kind="operation"
 	 * @generated
 	 */
-	String getCanonicalName();
+	String getIdentifier();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	String getSimpleName();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	String getQualifiedName();
 
 } // JvmIdentifiableElement

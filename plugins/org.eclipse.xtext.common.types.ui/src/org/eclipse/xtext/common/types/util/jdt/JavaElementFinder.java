@@ -118,7 +118,7 @@ public class JavaElementFinder implements IJavaElementFinder {
 											}
 										}
 									}
-									if (!readable.equals(formalParameter.getParameterType().getCanonicalName()))
+									if (!readable.equals(formalParameter.getParameterType().getIdentifier()))
 										match = false;
 								}
 								if (match)
@@ -149,7 +149,7 @@ public class JavaElementFinder implements IJavaElementFinder {
 								JvmFormalParameter formalParameter = object.getParameters().get(i);
 								String parameterType = parameterTypes[i];
 								String readable = Signature.toString(parameterType);
-								if (!readable.equals(formalParameter.getParameterType().getCanonicalName()))
+								if (!readable.equals(formalParameter.getParameterType().getIdentifier()))
 									match = false;
 							}
 							if (match)
@@ -167,8 +167,8 @@ public class JavaElementFinder implements IJavaElementFinder {
 		@Override
 		public IJavaElement caseJvmDeclaredType(JvmDeclaredType object) {
 			try {
-				String fullyQualifiedName = object.getFullyQualifiedName();
-				IType result = javaProject.findType(fullyQualifiedName);
+				String canonicalName = object.getIdentifier();
+				IType result = javaProject.findType(canonicalName);
 				return result;
 			}
 			catch (JavaModelException e) {

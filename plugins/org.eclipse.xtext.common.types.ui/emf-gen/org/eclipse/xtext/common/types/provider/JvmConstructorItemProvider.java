@@ -85,7 +85,7 @@ public class JvmConstructorItemProvider
 	@Override
 	public String getText(Object object)
 	{
-		String label = ((JvmConstructor)object).getFullyQualifiedName();
+		String label = ((JvmConstructor)object).getSimpleName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_JvmConstructor_type") :
 			getString("_UI_JvmConstructor_type") + " " + label;

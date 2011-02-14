@@ -11,8 +11,19 @@ package org.eclipse.xtext.xbase.impl;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XVariableDeclarationImplCustom extends XVariableDeclarationImpl {
+	
 	@Override
-	public String getCanonicalName() {
-		return getName();
+	public String getIdentifier() {
+		return name;
+	}
+	
+	@Override
+	public String getSimpleName() {
+		return name;
+	}
+	
+	@Override
+	public String getQualifiedName() {
+		return name;
 	}
 }

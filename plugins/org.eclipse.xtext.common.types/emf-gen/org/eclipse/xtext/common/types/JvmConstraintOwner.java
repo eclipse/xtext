@@ -43,12 +43,4 @@ public interface JvmConstraintOwner extends JvmIdentifiableElement
 	 */
 	EList<JvmTypeConstraint> getConstraints();
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	String getCanonicalName();
-
 } // JvmConstraintOwner

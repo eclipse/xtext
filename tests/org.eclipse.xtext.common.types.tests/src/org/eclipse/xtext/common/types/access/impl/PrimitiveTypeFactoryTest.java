@@ -26,35 +26,35 @@ public class PrimitiveTypeFactoryTest extends TestCase implements ITypeFactory<C
 	}
 	
 	public void testByte() {
-		assertEquals("byte", createType(Byte.TYPE).getCanonicalName());
+		assertEquals("byte", createType(Byte.TYPE).getIdentifier());
 	}
 	
 	public void testShort() {
-		assertEquals("short", createType(Short.TYPE).getCanonicalName());
+		assertEquals("short", createType(Short.TYPE).getIdentifier());
 	}
 	
 	public void testInt() {
-		assertEquals("int", createType(Integer.TYPE).getCanonicalName());
+		assertEquals("int", createType(Integer.TYPE).getIdentifier());
 	}
 	
 	public void testLong() {
-		assertEquals("long", createType(Long.TYPE).getCanonicalName());
+		assertEquals("long", createType(Long.TYPE).getIdentifier());
 	}
 	
 	public void testFloat() {
-		assertEquals("float", createType(Float.TYPE).getCanonicalName());
+		assertEquals("float", createType(Float.TYPE).getIdentifier());
 	}
 	
 	public void testDouble() {
-		assertEquals("double", createType(Double.TYPE).getCanonicalName());
+		assertEquals("double", createType(Double.TYPE).getIdentifier());
 	}
 	
 	public void testChar() {
-		assertEquals("char", createType(Character.TYPE).getCanonicalName());
+		assertEquals("char", createType(Character.TYPE).getIdentifier());
 	}
 	
 	public void testBoolean() {
-		assertEquals("boolean", createType(Boolean.TYPE).getCanonicalName());
+		assertEquals("boolean", createType(Boolean.TYPE).getIdentifier());
 	}
 	
 	public void testVoid() {

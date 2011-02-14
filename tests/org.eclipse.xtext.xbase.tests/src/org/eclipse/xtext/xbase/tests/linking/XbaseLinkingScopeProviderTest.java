@@ -35,23 +35,23 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	
 	public void testAssignment_1() throws Exception {
 		XBinaryOperation assignment = (XBinaryOperation) expression("new java.util.ArrayList<String>() += 'foo'", true);
-		assertEquals("org.eclipse.xtext.xbase.lib.Collections._operator_add(A,B)",assignment.getFeature().getCanonicalName());
+		assertEquals("org.eclipse.xtext.xbase.lib.Collections._operator_add(A,B)",assignment.getFeature().getIdentifier());
 	}
 	
 	public void testAssignmentToInvisibleElements() throws Exception {
 		XAssignment expression = (XAssignment) expression("new testdata.GenericType1<String>().t = 'foo'");
-		assertEquals("testdata.GenericType1.t", expression.getFeature().getCanonicalName());
+		assertEquals("testdata.GenericType1.t", expression.getFeature().getIdentifier());
 		assertTrue(((JvmMember)expression.getFeature()).getVisibility()==JvmVisibility.PRIVATE);
 	}
 	
 	public void testConstructorCall_00() throws Exception {
 		XConstructorCall expression = (XConstructorCall) expression("new java.util.ArrayList<String>(42)");
-		assertEquals("java.util.ArrayList.ArrayList(int)", expression.getConstructor().getCanonicalName());
+		assertEquals("java.util.ArrayList.ArrayList(int)", expression.getConstructor().getIdentifier());
 	}
 	
 	public void testConstructorCall_01() throws Exception {
 		XConstructorCall expression = (XConstructorCall) expression("new java.util.ArrayList<String>()");
-		assertEquals("java.util.ArrayList.ArrayList()", expression.getConstructor().getCanonicalName());
+		assertEquals("java.util.ArrayList.ArrayList()", expression.getConstructor().getIdentifier());
 	}
 	
 	public void testEscapedQualifiedName() throws Exception {
@@ -67,8 +67,8 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 				"}");
 		XFeatureCall call1 = (XFeatureCall) block.getExpressions().get(1);
 		XFeatureCall call2 = (XFeatureCall) block.getExpressions().get(2);
-		assertEquals("testdata.FieldAccessSub.stringField",call1.getFeature().getCanonicalName());
-		assertEquals("testdata.FieldAccess.finalField",call2.getFeature().getCanonicalName());
+		assertEquals("testdata.FieldAccessSub.stringField",call1.getFeature().getIdentifier());
+		assertEquals("testdata.FieldAccess.finalField",call2.getFeature().getIdentifier());
 	}
 	
 	public void testFeatureCall_1() throws Exception {
@@ -79,8 +79,8 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 				"}");
 		XFeatureCall call1 = (XFeatureCall) block.getExpressions().get(1);
 		XFeatureCall call2 = (XFeatureCall) block.getExpressions().get(2);
-		assertEquals("testdata.FieldAccessSub.stringField",call1.getFeature().getCanonicalName());
-		assertEquals("testdata.FieldAccessSub.stringField()",((JvmOperation)call2.getFeature()).getCanonicalName());
+		assertEquals("testdata.FieldAccessSub.stringField",call1.getFeature().getIdentifier());
+		assertEquals("testdata.FieldAccessSub.stringField()",((JvmOperation)call2.getFeature()).getIdentifier());
 	}
 	
 	public void testFeatureCall_2() throws Exception {
@@ -91,7 +91,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		"}");
 		XFeatureCall call1 = (XFeatureCall) block.getExpressions().get(1);
 		XFeatureCall call2 = (XFeatureCall) block.getExpressions().get(2);
-		assertEquals("testdata.FieldAccessSub.privateField()",((JvmOperation)call1.getFeature()).getCanonicalName());
+		assertEquals("testdata.FieldAccessSub.privateField()",((JvmOperation)call1.getFeature()).getIdentifier());
 		assertSame(call1.getFeature(),call2.getFeature());
 	}
 	
@@ -103,8 +103,8 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		"}");
 		XFeatureCall call1 = (XFeatureCall) block.getExpressions().get(1);
 		XFeatureCall call2 = (XFeatureCall) block.getExpressions().get(2);
-		assertEquals("testdata.MethodOverrides1.m1(java.lang.String)",((JvmOperation)call1.getFeature()).getCanonicalName());
-		assertEquals("testdata.MethodOverrides1.m1(java.lang.CharSequence)",((JvmOperation)call2.getFeature()).getCanonicalName());
+		assertEquals("testdata.MethodOverrides1.m1(java.lang.String)",((JvmOperation)call1.getFeature()).getIdentifier());
+		assertEquals("testdata.MethodOverrides1.m1(java.lang.CharSequence)",((JvmOperation)call2.getFeature()).getIdentifier());
 	}
 	
 	public void testFeatureCall_4() throws Exception {
@@ -117,9 +117,9 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		XFeatureCall call1 = (XFeatureCall) block.getExpressions().get(1);
 		XFeatureCall call2 = (XFeatureCall) block.getExpressions().get(2);
 		XFeatureCall call3 = (XFeatureCall) block.getExpressions().get(3);
-		assertEquals("testdata.MethodOverrides1.m1(java.lang.String)",((JvmOperation)call1.getFeature()).getCanonicalName());
-		assertEquals("testdata.MethodOverrides1.m1(java.lang.CharSequence)",((JvmOperation)call2.getFeature()).getCanonicalName());
-		assertEquals("testdata.MethodOverrides2.m1(java.lang.Object)",((JvmOperation)call3.getFeature()).getCanonicalName());
+		assertEquals("testdata.MethodOverrides1.m1(java.lang.String)",((JvmOperation)call1.getFeature()).getIdentifier());
+		assertEquals("testdata.MethodOverrides1.m1(java.lang.CharSequence)",((JvmOperation)call2.getFeature()).getIdentifier());
+		assertEquals("testdata.MethodOverrides2.m1(java.lang.Object)",((JvmOperation)call3.getFeature()).getIdentifier());
 	}
 	
 	public void testGenerics() throws Exception {
@@ -142,7 +142,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 				"	size;" +
 				"}");
 		final XFeatureCall xFeatureCall = (XFeatureCall)bop.getExpressions().get(1);
-		assertEquals("java.util.ArrayList.size()",xFeatureCall.getFeature().getCanonicalName());
+		assertEquals("java.util.ArrayList.size()",xFeatureCall.getFeature().getIdentifier());
 		assertSame(bop.getExpressions().get(0), xFeatureCall.getImplicitReceiver().getFeature());
 	}
 	
@@ -152,7 +152,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 				"	val this = new java.util.ArrayList<String>(); " +
 				"	size();" +
 				"}");
-		assertEquals("java.util.ArrayList.size()",((XFeatureCall)bop.getExpressions().get(1)).getFeature().getCanonicalName());
+		assertEquals("java.util.ArrayList.size()",((XFeatureCall)bop.getExpressions().get(1)).getFeature().getIdentifier());
 	}
 	
 	public void testImplicitThis_3() throws Exception {
@@ -161,7 +161,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 				"	val java.util.List this = new java.util.ArrayList<String>(); " +
 				"	size;" +
 				"}");
-		assertEquals("java.util.List.size()",((XFeatureCall)bop.getExpressions().get(1)).getFeature().getCanonicalName());
+		assertEquals("java.util.List.size()",((XFeatureCall)bop.getExpressions().get(1)).getFeature().getIdentifier());
 	}
 	
 	public void testImplicitThis_4() throws Exception {
@@ -170,12 +170,12 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 				"	val java.util.List this = new java.util.ArrayList<String>(); " +
 				"	size();" +
 				"}");
-		assertEquals("java.util.List.size()",((XFeatureCall)bop.getExpressions().get(1)).getFeature().getCanonicalName());
+		assertEquals("java.util.List.size()",((XFeatureCall)bop.getExpressions().get(1)).getFeature().getIdentifier());
 	}
 	
 	public void testLinkingToInvisibleElements() throws Exception {
 		XMemberFeatureCall expression = (XMemberFeatureCall) expression("new testdata.GenericType1<String>().t.offset");
-		assertEquals("java.lang.String.offset", expression.getFeature().getCanonicalName());
+		assertEquals("java.lang.String.offset", expression.getFeature().getIdentifier());
 		assertTrue(((JvmMember)expression.getFeature()).getVisibility()==JvmVisibility.PRIVATE);
 	}
 	
@@ -189,31 +189,31 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	
 	public void testMemberCall() throws Exception {
 		XMemberFeatureCall expression = (XMemberFeatureCall) expression("'x'.length()");
-		assertEquals("java.lang.String.length()",expression.getFeature().getCanonicalName());
+		assertEquals("java.lang.String.length()",expression.getFeature().getIdentifier());
 	}
 	
 	public void testPropertyAccess_1() throws Exception {
 		XMemberFeatureCall exp = (XMemberFeatureCall) expression("new testdata.Properties1().prop1");
 		assertTrue(exp.getFeature() instanceof JvmField);
-		assertEquals("testdata.Properties1.prop1",exp.getFeature().getCanonicalName());
+		assertEquals("testdata.Properties1.prop1",exp.getFeature().getIdentifier());
 	}
 	
 	public void testPropertyAccess_2() throws Exception {
 		XMemberFeatureCall exp1 = (XMemberFeatureCall) expression("new testdata.Properties1().getProp1");
 		XMemberFeatureCall exp2 = (XMemberFeatureCall) expression("new testdata.Properties1().getProp1()");
-		assertEquals(exp1.getFeature().getCanonicalName(),exp2.getFeature().getCanonicalName());
+		assertEquals(exp1.getFeature().getIdentifier(),exp2.getFeature().getIdentifier());
 	}
 	
 	public void testPropertyAccess_4() throws Exception {
 		XMemberFeatureCall exp = (XMemberFeatureCall) expression("new testdata.Properties1().prop2");
 		assertTrue(exp.getFeature() instanceof JvmOperation);
-		assertEquals("testdata.Properties1.getProp2()",exp.getFeature().getCanonicalName());
+		assertEquals("testdata.Properties1.getProp2()",exp.getFeature().getIdentifier());
 	}
 	
 	public void testPropertyAccess_5() throws Exception {
 		XMemberFeatureCall exp1 = (XMemberFeatureCall) expression("new testdata.Properties1().getProp2");
 		XMemberFeatureCall exp2 = (XMemberFeatureCall) expression("new testdata.Properties1().getProp2()");
-		assertEquals(exp1.getFeature().getCanonicalName(),exp2.getFeature().getCanonicalName());
+		assertEquals(exp1.getFeature().getIdentifier(),exp2.getFeature().getIdentifier());
 	}
 	
 	public void testPropertySetter_1() throws Exception {
@@ -223,7 +223,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	
 	public void testPropertySetter_2() throws Exception {
 		XAssignment exp = (XAssignment) expression("new testdata.Properties1().prop2 = 'Text'");
-		assertEquals("testdata.Properties1.setProp2(java.lang.String)", exp.getFeature().getCanonicalName());
+		assertEquals("testdata.Properties1.setProp2(java.lang.String)", exp.getFeature().getIdentifier());
 	}
 	
 	public void testShadowing_1() throws Exception {

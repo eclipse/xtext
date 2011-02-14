@@ -85,7 +85,7 @@ public class JvmAnnotationTypeItemProvider
 	@Override
 	public String getText(Object object)
 	{
-		String label = ((JvmAnnotationType)object).getFullyQualifiedName();
+		String label = ((JvmAnnotationType)object).getSimpleName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_JvmAnnotationType_type") :
 			getString("_UI_JvmAnnotationType_type") + " " + label;

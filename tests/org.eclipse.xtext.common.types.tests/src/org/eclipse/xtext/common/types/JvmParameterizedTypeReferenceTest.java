@@ -23,44 +23,44 @@ public class JvmParameterizedTypeReferenceTest extends TestCase {
 	}
 	
 	public void testCanonicalName_01() {
-		assertNull(parameterizedType.getCanonicalName());
+		assertNull(parameterizedType.getIdentifier());
 	}
 	
 	public void testCanonicalName_02() {
 		JvmPrimitiveType primitiveType = TypesFactory.eINSTANCE.createJvmPrimitiveType();
-		primitiveType.setName("int");
+		primitiveType.setSimpleName("int");
 		parameterizedType.setType(primitiveType);
-		assertEquals("int", parameterizedType.getCanonicalName());
+		assertEquals("int", parameterizedType.getIdentifier());
 	}
 	
 	public void testCanonicalName_03() {
 		JvmGenericType genericType = TypesFactory.eINSTANCE.createJvmGenericType();
-		genericType.setFullyQualifiedName("java.util.List");
+		genericType.internalSetIdentifier("java.util.List");
 		parameterizedType.setType(genericType);
-		assertEquals("java.util.List", parameterizedType.getCanonicalName());
+		assertEquals("java.util.List", parameterizedType.getIdentifier());
 	}
 	
 	public void testCanonicalName_04() {
 		JvmGenericType genericType = TypesFactory.eINSTANCE.createJvmGenericType();
-		genericType.setFullyQualifiedName("java.util.List");
+		genericType.internalSetIdentifier("java.util.List");
 		parameterizedType.setType(genericType);
 		JvmParameterizedTypeReference argumentReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
 		JvmGenericType argumentType = TypesFactory.eINSTANCE.createJvmGenericType();
-		argumentType.setFullyQualifiedName("java.lang.String");
+		argumentType.internalSetIdentifier("java.lang.String");
 		argumentReference.setType(argumentType);
 		parameterizedType.getArguments().add(argumentReference);
-		assertEquals("java.util.List<java.lang.String>", parameterizedType.getCanonicalName());
+		assertEquals("java.util.List<java.lang.String>", parameterizedType.getIdentifier());
 	}
 	
 	public void testCanonicalName_05() {
 		JvmPrimitiveType primitiveType = TypesFactory.eINSTANCE.createJvmPrimitiveType();
-		primitiveType.setName("int");
+		primitiveType.setSimpleName("int");
 		JvmArrayType arrayType = TypesFactory.eINSTANCE.createJvmArrayType();
 		JvmParameterizedTypeReference componentTypeRef = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
 		componentTypeRef.setType(primitiveType);
 		arrayType.setComponentType(componentTypeRef);
 		primitiveType.setArrayType(arrayType);
 		parameterizedType.setType(arrayType);
-		assertEquals("int[]", parameterizedType.getCanonicalName());
+		assertEquals("int[]", parameterizedType.getIdentifier());
 	}
 }

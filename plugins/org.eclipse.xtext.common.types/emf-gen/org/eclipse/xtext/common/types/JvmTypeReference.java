@@ -5,6 +5,7 @@
  */
 package org.eclipse.xtext.common.types;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,7 +17,7 @@ package org.eclipse.xtext.common.types;
  * @model abstract="true"
  * @generated
  */
-public interface JvmTypeReference extends JvmIdentifiableElement
+public interface JvmTypeReference extends EObject
 {
 	/**
 	 * <!-- begin-user-doc -->
@@ -25,5 +26,29 @@ public interface JvmTypeReference extends JvmIdentifiableElement
 	 * @generated
 	 */
 	JvmType getType();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	String getIdentifier();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	String getSimpleName();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	String getQualifiedName();
 
 } // JvmTypeReference

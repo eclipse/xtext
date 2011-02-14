@@ -19,7 +19,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *
  * @generated
  */
-public class JvmConstructorImpl extends JvmExecutableImpl implements JvmConstructor
+public class JvmConstructorImpl extends JvmExecutableImplCustom implements JvmConstructor
 {
 	/**
 	 * <!-- begin-user-doc -->

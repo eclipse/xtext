@@ -5,6 +5,7 @@
  */
 package org.eclipse.xtext.common.types;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +24,7 @@ package org.eclipse.xtext.common.types;
  * @model abstract="true"
  * @generated
  */
-public interface JvmTypeConstraint extends JvmIdentifiableElement
+public interface JvmTypeConstraint extends EObject
 {
 	/**
 	 * Returns the value of the '<em><b>Type Reference</b></em>' containment reference.
@@ -78,5 +79,29 @@ public interface JvmTypeConstraint extends JvmIdentifiableElement
 	 * @generated
 	 */
 	void setOwner(JvmConstraintOwner value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	String getIdentifier();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	String getSimpleName();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	String getQualifiedName();
 
 } // JvmTypeConstraint

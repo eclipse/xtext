@@ -116,7 +116,7 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	 */
 	public XSwitchExpression createXSwitchExpression()
 	{
-		XSwitchExpressionImpl xSwitchExpression = new XSwitchExpressionImpl();
+		XSwitchExpressionImplCustom xSwitchExpression = new XSwitchExpressionImplCustom();
 		return xSwitchExpression;
 	}
 

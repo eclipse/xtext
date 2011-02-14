@@ -103,10 +103,10 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	protected String getSerializedForm(final JvmTypeReference type) {
-		return type.getCanonicalName().replace('$', '.');
+		return type.getIdentifier().replace('$', '.');
 	}
 	protected String getSerializedForm(final JvmType type) {
-		return type.getCanonicalName().replace('$', '.');
+		return type.getIdentifier().replace('$', '.');
 	}
 
 	protected String getJavaVarName(Object ex, IAppendable appendable) {
@@ -177,7 +177,7 @@ public abstract class AbstractXbaseCompiler {
 	protected String getDefaultValueLiteral(XExpression expr) {
 		JvmTypeReference type = getTypeProvider().getType(expr);
 		if (type.getType() instanceof JvmPrimitiveType) {
-			String name = type.getCanonicalName();
+			String name = type.getIdentifier();
 			if ("boolean".equals(name)) {
 				return "false";
 			} else {

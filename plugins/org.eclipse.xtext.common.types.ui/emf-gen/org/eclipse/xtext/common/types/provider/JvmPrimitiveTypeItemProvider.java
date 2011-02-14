@@ -64,26 +64,26 @@ public class JvmPrimitiveTypeItemProvider
 		{
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
+			addSimpleNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature.
+	 * This adds a property descriptor for the Simple Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addNamePropertyDescriptor(Object object)
+	protected void addSimpleNamePropertyDescriptor(Object object)
 	{
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_JvmPrimitiveType_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_JvmPrimitiveType_name_feature", "_UI_JvmPrimitiveType_type"),
-				 TypesPackage.Literals.JVM_PRIMITIVE_TYPE__NAME,
+				 getString("_UI_JvmPrimitiveType_simpleName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_JvmPrimitiveType_simpleName_feature", "_UI_JvmPrimitiveType_type"),
+				 TypesPackage.Literals.JVM_PRIMITIVE_TYPE__SIMPLE_NAME,
 				 true,
 				 false,
 				 false,
@@ -113,7 +113,7 @@ public class JvmPrimitiveTypeItemProvider
 	@Override
 	public String getText(Object object)
 	{
-		String label = ((JvmPrimitiveType)object).getName();
+		String label = ((JvmPrimitiveType)object).getSimpleName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_JvmPrimitiveType_type") :
 			getString("_UI_JvmPrimitiveType_type") + " " + label;
@@ -133,7 +133,7 @@ public class JvmPrimitiveTypeItemProvider
 
 		switch (notification.getFeatureID(JvmPrimitiveType.class))
 		{
-			case TypesPackage.JVM_PRIMITIVE_TYPE__NAME:
+			case TypesPackage.JVM_PRIMITIVE_TYPE__SIMPLE_NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

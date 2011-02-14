@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,26 +7,35 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import org.eclipse.xtext.common.types.JvmType;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JvmVoidImplCustom extends JvmVoidImpl {
+public class JvmTypeReferenceImplCustom extends JvmTypeReferenceImpl {
 
-	private static final String VOID = "void"; 
-	
 	@Override
 	public String getIdentifier() {
-		return VOID;
+		JvmType type = getType();
+		if (type != null)
+			return type.getIdentifier();
+		return null;
 	}
 	
 	@Override
 	public String getSimpleName() {
-		return VOID;
+		JvmType type = getType();
+		if (type != null)
+			return type.getSimpleName();
+		return null;
 	}
 	
 	@Override
 	public String getQualifiedName() {
-		return VOID;
+		JvmType type = getType();
+		if (type != null)
+			return type.getQualifiedName();
+		return null;
 	}
-
+	
 }

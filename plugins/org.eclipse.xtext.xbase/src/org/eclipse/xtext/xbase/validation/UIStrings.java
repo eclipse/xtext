@@ -62,11 +62,11 @@ public class UIStrings {
 	}
 	
 	public String typeArguments(XAbstractFeatureCall featureCall) {
-		return "<" + toString(featureCall.getTypeArguments()) + ">";
+		return "<" + referencesToString(featureCall.getTypeArguments()) + ">";
 	}
 
 	public String typeArguments(XConstructorCall constructorCall) {
-		return "<" + toString(constructorCall.getTypeArguments()) + ">";
+		return "<" + referencesToString(constructorCall.getTypeArguments()) + ">";
 	}
 
 	protected String toString(Iterable<? extends JvmIdentifiableElement> elements) {
@@ -77,7 +77,22 @@ public class UIStrings {
 				buffer.append(", ");
 			needsSeparator = true;
 			if(typeRef != null)
-				buffer.append(typeRef.getCanonicalName());
+				buffer.append(typeRef.getSimpleName());
+			else 
+				buffer.append("[null]");
+		}
+		return buffer.toString();
+	}
+	
+	protected String referencesToString(Iterable<? extends JvmTypeReference> elements) {
+		StringBuilder buffer = new StringBuilder();
+		boolean needsSeparator = false;
+		for (JvmTypeReference typeRef : elements) {
+			if (needsSeparator)
+				buffer.append(", ");
+			needsSeparator = true;
+			if(typeRef != null)
+				buffer.append(typeRef.getSimpleName());
 			else 
 				buffer.append("[null]");
 		}
@@ -85,7 +100,7 @@ public class UIStrings {
 	}
 
 	protected String expressionTypes(Iterable<XExpression> expressions) {
-		return toString(transform(expressions, new Function<XExpression, JvmIdentifiableElement>() {
+		return referencesToString(transform(expressions, new Function<XExpression, JvmTypeReference>() {
 			public JvmTypeReference apply(XExpression from) {
 				return typeProvider.getType(from);
 			}
@@ -93,7 +108,7 @@ public class UIStrings {
 	}
 
 	protected String parameterTypes(Iterable<JvmFormalParameter> parameters) {
-		return toString(transform(parameters, new Function<JvmFormalParameter, JvmIdentifiableElement>() {
+		return referencesToString(transform(parameters, new Function<JvmFormalParameter, JvmTypeReference>() {
 			public JvmTypeReference apply(JvmFormalParameter from) {
 				return from.getParameterType();
 			}

@@ -57,7 +57,7 @@ public class StaticMethodsFeatureForTypeProvider implements IFeaturesForTypeProv
 		.createJvmParameterizedTypeReference();
 		reference.setType(declType);
 		final Iterable<Class<?>> operators = getClassesContainingStaticMethods(declType
-				.getCanonicalName());
+				.getIdentifier());
 		Iterable<JvmOperation> staticMethods = emptySet();
 		for (Class<?> clazz : operators) {
 			JvmTypeReference typeReference = typeRefs.getTypeForName(clazz, context);
