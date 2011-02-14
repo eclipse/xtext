@@ -29,6 +29,7 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
@@ -135,29 +136,35 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		}
 	}
 
-	protected JvmTypeReference _expectedType(XMemberFeatureCall expr, EReference reference, int index) {
-		if (expr.getFeature() ==null || expr.getFeature().eIsProxy())
+	protected JvmTypeReference _expectedType(XMemberFeatureCall featureCall, EReference reference, int index) {
+		if (featureCall.getFeature() ==null || featureCall.getFeature().eIsProxy())
 			return null;
 		if (reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS ||
 			reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) {
-			if (expr.getFeature() instanceof JvmOperation) {
-				JvmOperation feature = (JvmOperation) expr.getFeature();
-				XExpression caller = getExpression(expr, reference, index);
-				List<XExpression> actualArguments = featureCall2javaMapping.getActualArguments(expr);
-				TypeArgumentContext context = getFeatureCallTypeArgContext(expr, reference, index);
-				if (actualArguments.contains(caller)) {
-					int paramIndex = actualArguments.indexOf(caller);
-					if (paramIndex<0 || paramIndex>=feature.getParameters().size())
+			if (featureCall.getFeature() instanceof JvmOperation) {
+				JvmOperation operation = (JvmOperation) featureCall.getFeature();
+				XExpression argumentExpression = getExpression(featureCall, reference, index);
+				List<XExpression> actualArguments = featureCall2javaMapping.getActualArguments(featureCall);
+				TypeArgumentContext context = getFeatureCallTypeArgContext(featureCall, reference, index);
+				int argumentIndex = actualArguments.indexOf(argumentExpression);
+				if (argumentIndex >= 0) {
+					if (operation.isVarArgs()) {
+						if (argumentIndex >= operation.getParameters().size() - 1) {
+							JvmTypeReference result = getExpectedVarArgType(operation, context);
+							return result;
+						}
+					}
+					if (argumentIndex>=operation.getParameters().size())
 						return null;
-					JvmFormalParameter parameter = feature.getParameters().get(paramIndex);
+					JvmFormalParameter parameter = operation.getParameters().get(argumentIndex);
 					final JvmTypeReference parameterType = parameter.getParameterType();
 					return context.getLowerBound(parameterType);
 				} else {
-					final JvmParameterizedTypeReference createTypeRef = typeReferences.createTypeRef(feature.getDeclaringType());
-					return context.getLowerBound(createTypeRef);
+					final JvmTypeReference declaringType = typeReferences.createTypeRef(operation.getDeclaringType());
+					return context.getLowerBound(declaringType);
 				}
-			} else if (expr.getFeature() instanceof JvmField) {
-				JvmField field = (JvmField) expr.getFeature();
+			} else if (featureCall.getFeature() instanceof JvmField) {
+				JvmField field = (JvmField) featureCall.getFeature();
 				return typeReferences.createTypeRef(field.getDeclaringType());
 			}
 		}
@@ -225,12 +232,32 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	protected JvmTypeReference _expectedType(XConstructorCall expr, EReference reference, int index) {
 		if (reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS) {
 			JvmExecutable feature = expr.getConstructor();
-			if (index >= feature.getParameters().size())
+			 TypeArgumentContext typeArgumentContext = typeArgCtxProvider.getReceiverContext(null);
+			if (index >= feature.getParameters().size()) {
+				if (feature.isVarArgs()) {
+					return getExpectedVarArgType(feature, typeArgumentContext);
+				}
 				return null;
+			}
+			if (feature.isVarArgs() && index == feature.getParameters().size() - 1) {
+				return getExpectedVarArgType(feature, typeArgumentContext);
+			}
 			JvmFormalParameter parameter = feature.getParameters().get(index);
-			return parameter.getParameterType();
+			JvmTypeReference parameterType = parameter.getParameterType();
+			return typeArgumentContext.getLowerBound(parameterType);
 		}
 		return getExpectedType(expr);
+	}
+
+	protected JvmTypeReference getExpectedVarArgType(JvmExecutable feature, TypeArgumentContext typeArgumentContext) {
+		JvmFormalParameter lastParameter = feature.getParameters().get(feature.getParameters().size() - 1);
+		JvmType parameterType = lastParameter.getParameterType().getType();
+		if (parameterType instanceof JvmArrayType) {
+			JvmTypeReference componentType = ((JvmArrayType) parameterType).getComponentType();
+			return typeArgumentContext.getLowerBound(componentType);
+		} else {
+			throw new IllegalStateException("Var arg parameter has to be an array type");
+		}
 	}
 
 	protected JvmTypeReference _expectedType(XBlockExpression expr, EReference reference, int index) {

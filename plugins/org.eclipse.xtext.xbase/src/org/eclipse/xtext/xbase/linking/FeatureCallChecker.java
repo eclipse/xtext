@@ -15,10 +15,13 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -108,19 +111,17 @@ public class FeatureCallChecker {
 
 	protected String _case(JvmConstructor input, XConstructorCall context, EReference ref,
 			JvmFeatureDescription jvmFeatureDescription) {
-		final int numberOfArgs = input.getParameters().size();
-		if (numberOfArgs != context.getArguments().size())
+		List<XExpression> arguments = context.getArguments();
+		if (!isValidNumberOfArguments(input, arguments))
 			return INVALID_NUMBER_OF_ARGUMENTS;
-		if (!context.getTypeArguments().isEmpty()
-				&& input.getTypeParameters().size() == context.getTypeArguments().size())
+		// expected constructor type argument count is the sum of the declaring type's type parameters and the constructors type parameters 
+		int expectedTypeArguments = input.getTypeParameters().size() + ((JvmTypeParameterDeclarator) input.getDeclaringType()).getTypeParameters().size();
+		if ((!context.getTypeArguments().isEmpty()) // raw type or inferred arguments
+				&& expectedTypeArguments != context.getTypeArguments().size())
 			return INVALID_NUMBER_OF_TYPE_ARGUMENTS;
-		for (int i = 0; i < numberOfArgs; i++) {
-			JvmFormalParameter parameter = input.getParameters().get(i);
-			XExpression expression = context.getArguments().get(i);
-			JvmTypeReference type = getTypeProvider().getType(expression);
-			if (!conformance.isConformant(parameter.getParameterType(), type, true))
-				return INVALID_ARGUMENT_TYPES;
-		}
+		// TODO check type parameter bounds against type arguments 
+		if (!areArgumentTypesValid(input, arguments))
+			return INVALID_ARGUMENT_TYPES;
 		return null;
 	}
 
@@ -148,7 +149,7 @@ public class FeatureCallChecker {
 		if (context.getValue() != null) {
 			JvmTypeReference type = getTypeProvider().getType(context.getValue());
 			final JvmFormalParameter valueParam = input.getParameters().get(0 + callTypeDelta);
-			if (!isCompatibleArgument(valueParam.getParameterType(), type, context, jvmFeatureDescription))
+			if (!isCompatibleArgument(valueParam.getParameterType(), type))
 				return INVALID_ARGUMENT_TYPES;
 		}
 		return null;
@@ -216,29 +217,72 @@ public class FeatureCallChecker {
 	protected String checkJvmOperation(JvmOperation input, XAbstractFeatureCall context,
 			boolean isExplicitOperationCall, JvmFeatureDescription jvmFeatureDescription, EList<XExpression> arguments) {
 		List<XExpression> actualArguments = featureCall2JavaMapping.getActualArguments(context, input, jvmFeatureDescription.getImplicitReceiver());
-		if (input.getParameters().size() != actualArguments.size())
+		if (!isValidNumberOfArguments(input, actualArguments))
 			return INVALID_NUMBER_OF_ARGUMENTS;
 		if (!(isExplicitOperationCall ^ isSugaredMethodInvocationWithoutParanthesis(jvmFeatureDescription)))
 			return METHOD_ACCESS_WITHOUT_PARENTHESES;
-
-		for (int i = 0; i < actualArguments.size(); i++) {
-			XExpression expression = actualArguments.get(i);
-			JvmTypeReference type = getTypeProvider().getType(expression);
-			JvmTypeReference declaredType = input.getParameters().get(i).getParameterType();
-			if (declaredType==null) 
-				return null;
-			if (!isCompatibleArgument(declaredType, type, context, jvmFeatureDescription))
-				return INVALID_ARGUMENT_TYPES;
-		}
+		if (!context.getTypeArguments().isEmpty() // raw type or type inference
+				&& input.getTypeParameters().size() != context.getTypeArguments().size())
+			return INVALID_NUMBER_OF_TYPE_ARGUMENTS;
+		// TODO check type parameter bounds against type arguments
+		if (!areArgumentTypesValid(input, actualArguments))
+			return INVALID_ARGUMENT_TYPES;
 		return null;
 	}
-
+	
+	protected boolean areArgumentTypesValid(JvmExecutable exectuable, List<XExpression> arguments) {
+		int numberOfParameters = exectuable.getParameters().size();
+		int parametersToCheck = exectuable.isVarArgs() ? numberOfParameters - 1 : numberOfParameters;
+		for (int i = 0; i < parametersToCheck; i++) {
+			JvmTypeReference parameterType = exectuable.getParameters().get(i).getParameterType();
+			XExpression argument = arguments.get(i);
+			JvmTypeReference argumentType = getTypeProvider().getType(argument);
+			if (parameterType==null) 
+				return true;
+			if (!isCompatibleArgument(parameterType, argumentType))
+				return false;
+		}
+		if (exectuable.isVarArgs()) {
+			int lastParamIndex = numberOfParameters - 1;
+			JvmTypeReference lastParameterType = exectuable.getParameters().get(lastParamIndex).getParameterType();
+			if (!(lastParameterType.getType() instanceof JvmArrayType))
+				throw new IllegalStateException("Unexpected var arg type: " + lastParameterType);
+			JvmTypeReference varArgType = ((JvmArrayType) lastParameterType.getType()).getComponentType();
+			if (arguments.size() == numberOfParameters) {
+				XExpression lastArgument = arguments.get(lastParamIndex);
+				JvmTypeReference lastArgumentType = getTypeProvider().getType(lastArgument);
+				if (isCompatibleArgument(lastParameterType, lastArgumentType))
+					return true;
+				if (!isCompatibleArgument(varArgType, lastArgumentType))
+					return false;
+			} else {
+				for(int i = lastParamIndex; i < arguments.size(); i++) {
+					XExpression argumentExpression = arguments.get(i);
+					JvmTypeReference argumentType = getTypeProvider().getType(argumentExpression);
+					if (!isCompatibleArgument(varArgType, argumentType))
+						return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	protected boolean isValidNumberOfArguments(JvmExecutable executable, List<XExpression> arguments) {
+		final int numberOfParameters = executable.getParameters().size();
+		if (executable.getParameters().size() != arguments.size()) {
+			if (!executable.isVarArgs())
+				return false;
+			else if (numberOfParameters - 1 > arguments.size())
+				return false;
+		}
+		return true;
+	}
+	
 	protected boolean isSugaredMethodInvocationWithoutParanthesis(JvmFeatureDescription jvmFeatureDescription) {
 		return jvmFeatureDescription.getKey().indexOf('(') == -1;
 	}
 
-	protected boolean isCompatibleArgument(JvmTypeReference declaredType, JvmTypeReference actualType,
-			EObject contextElement, JvmFeatureDescription jvmFeatureDescription) {
+	protected boolean isCompatibleArgument(JvmTypeReference declaredType, JvmTypeReference actualType) {
 		//TODO is actualType is reference to TypeParam, it's ok let the validation figure that out.
 		if (actualType == null || typeRefs.is(actualType, Void.class))
 			return true;

@@ -22,6 +22,8 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -93,6 +95,9 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 
 	@Inject
 	private IdentifiableSimpleNameProvider featureNameProvider;
+	
+	@Inject
+	private TypeArgumentContextProvider typeArgumentContextProvider;
 
 	public void setFeatureNameProvider(IdentifiableSimpleNameProvider featureNameProvider) {
 		this.featureNameProvider = featureNameProvider;
@@ -146,8 +151,9 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 				Iterable<IEObjectDescription> result = transform(original,
 						new Function<IEObjectDescription, IEObjectDescription>() {
 							public IEObjectDescription apply(IEObjectDescription from) {
+								TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(null);
 								final JvmConstructor constructor = (JvmConstructor) from.getEObjectOrProxy();
-								return new JvmFeatureDescription(from.getQualifiedName(), constructor, null,
+								return new JvmFeatureDescription(from.getQualifiedName(), constructor, typeArgumentContext,
 										constructor.getCanonicalName(), true, null, false);
 							}
 						});
