@@ -114,6 +114,11 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 		helper.assertNoError(expression, METHOD_ACCESS_WITHOUT_PARENTHESES);
 	}
 
+	public void testOperationMemberFeatureCall_5() throws Exception {
+		XExpression expression = expression("new testdata.Methods().sugarMethod()");
+		helper.assertNoError(expression, METHOD_ACCESS_WITHOUT_PARENTHESES);
+	}
+
 	public void testOperationFeatureCall_0() throws Exception {
 		XExpression expression = expression("{ var this = new testdata.Methods() staticMethod() }");
 		helper.assertNoError(((XBlockExpression) expression).getExpressions().get(1), INSTANCE_ACCESS_TO_STATIC_MEMBER);
