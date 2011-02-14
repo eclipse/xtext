@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtend2.tests.linking;
 
 import java.util.List;
 
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -33,6 +34,17 @@ public class LinkingTest extends AbstractXtend2TestCase {
 	
 	@Inject
 	private IXtend2JvmAssociations associator;
+	
+	public void testDeclaredDependency_00() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo {" +
+				"  @Inject java.util.ArrayList<String>" +
+				"  foo() arrayList" +
+				"}");
+		XtendFunction func = (XtendFunction) clazz.getMembers().get(1);
+		JvmField field = (JvmField) associator.getInferredJvmElements(clazz.getMembers().get(0)).iterator().next();
+		assertSame(field, ((XFeatureCall)func.getExpression()).getFeature());
+	}
 	
 	public void testCaseFunction_00() throws Exception {
 		XtendFunction function = function("dispatch String foo(String s) _foo(s)");

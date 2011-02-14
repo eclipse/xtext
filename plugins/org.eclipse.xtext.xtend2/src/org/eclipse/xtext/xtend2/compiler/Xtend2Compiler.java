@@ -26,6 +26,7 @@ import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtext.xtend2.richstring.DefaultIndentationHandler;
 import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
+import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringIf;
 import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
@@ -106,11 +107,19 @@ public class Xtend2Compiler extends XbaseCompiler {
 		for (XtendMember member : obj.getMembers()) {
 			if (member instanceof XtendFunction) {
 				compile((XtendFunction) member, appendable);
+			} else if (member instanceof DeclaredDependency) {
+				compile((DeclaredDependency)member, appendable);
 			}
 		}
 		generateDispatchMethods(obj, appendable);
 		appendable.decreaseIndentation();
 		appendable.append("\n}");
+	}
+	
+	protected void compile(DeclaredDependency dependency, IAppendable appendable) {
+		appendable.append("\n@com.google.inject.Inject private ");
+		appendable.append(getSerializedForm(dependency.getType())).append(" ");
+		appendable.append(appendable.declareVariable(dependency, dependency.getSimpleName())).append(";");
 	}
 
 	protected void generateDispatchMethods(XtendClass obj, IAppendable appendable) {
