@@ -147,7 +147,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	public void _toJavaExpression(XInstanceOfExpression expr, IAppendable b) {
 		b.append("(");
 		internalToJavaExpression(expr.getExpression(), b);
-		b.append(" instanceof ").append(expr.getType().getCanonicalName()).append(")");
+		b.append(" instanceof ").append(expr.getType().getIdentifier()).append(")");
 	}
 
 	public void _toJavaStatement(XInstanceOfExpression expr, IAppendable b, boolean isReferenced) {
@@ -164,7 +164,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.append("final ");
 		}
 		if (expr.getType() != null) {
-			b.append(expr.getType().getCanonicalName());
+			b.append(expr.getType().getIdentifier());
 		} else {
 			b.append(getReturnTypeName(expr.getRight()));
 		}
@@ -222,7 +222,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		internalToJavaStatement(expr.getForExpression(), b, true);
 		b.append("\nfor (");
 		JvmTypeReference paramType = getTypeProvider().getTypeForIdentifiable(expr.getDeclaredParam());
-		b.append(paramType.getCanonicalName());
+		b.append(paramType.getIdentifier());
 		b.append(" ");
 		String varName = declareNameInVariableScope(expr.getDeclaredParam(), b);
 		b.append(varName);
@@ -252,12 +252,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	public void _toJavaExpression(XConstructorCall expr, IAppendable b) {
 		b.append("new ");
-		b.append(expr.getConstructor().getDeclaringType().getCanonicalName());
+		b.append(expr.getConstructor().getDeclaringType().getIdentifier());
 		if (!expr.getTypeArguments().isEmpty()) {
 			b.append("<");
 			for (int i = 0; i < expr.getTypeArguments().size(); i++) {
 				JvmTypeReference arg = expr.getTypeArguments().get(i);
-				b.append(arg.getCanonicalName());
+				b.append(arg.getIdentifier());
 				if (i + 1 < expr.getTypeArguments().size())
 					b.append(", ");
 			}
@@ -270,7 +270,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	public void _toJavaExpression(XCastedExpression expr, IAppendable b) {
 		b.append("((");
-		b.append(expr.getType().getCanonicalName());
+		b.append(expr.getType().getIdentifier());
 		b.append(") ");
 		internalToConvertedExpression(expr.getTarget(), b, expr.getType());
 		b.append(")");

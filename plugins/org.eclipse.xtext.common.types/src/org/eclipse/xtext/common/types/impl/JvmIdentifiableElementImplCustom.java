@@ -7,13 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 public abstract class JvmIdentifiableElementImplCustom extends JvmIdentifiableElementImpl {
 	
-	@Override
-	public String getCanonicalName() {
-		return super.toString();
-	}
-
 	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder(eClass().getName());
@@ -23,8 +21,9 @@ public abstract class JvmIdentifiableElementImplCustom extends JvmIdentifiableEl
 			result.append(eProxyURI());
 			result.append(')');
 		} else {
-			result.append(getCanonicalName());
+			result.append(getIdentifier());
 		}
 		return result.toString();
 	}
+	
 }

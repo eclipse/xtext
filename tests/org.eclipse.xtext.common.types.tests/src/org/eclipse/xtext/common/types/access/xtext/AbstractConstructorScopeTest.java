@@ -62,11 +62,11 @@ public abstract class AbstractConstructorScopeTest extends TestCase {
 	
 	public void testGetElementByInstance_01() {
 		JvmConstructor constructor = TypesFactory.eINSTANCE.createJvmConstructor();
-		constructor.setFullyQualifiedName("java.lang.Object");
+		constructor.internalSetIdentifier("java.lang.Object.Object()");
 		IEObjectDescription element = getConstructorScope().getSingleElement(constructor);
 		assertNotNull(element);
-		assertEquals(new IQualifiedNameConverter.DefaultImpl().toQualifiedName("java.lang.Object"), element.getName());
-		assertEquals(new IQualifiedNameConverter.DefaultImpl().toQualifiedName("java.lang.Object"), element.getQualifiedName());
+		assertEquals(new IQualifiedNameConverter.DefaultImpl().toQualifiedName("java.lang.Object.Object()"), element.getName());
+		assertEquals(new IQualifiedNameConverter.DefaultImpl().toQualifiedName("java.lang.Object.Object()"), element.getQualifiedName());
 	}
 	
 	public void testGetElementByInstance_02() {

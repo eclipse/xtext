@@ -392,7 +392,7 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 	
 	protected void assertCommonSuperType(String expected, List<JvmTypeReference> refs) {
 		JvmTypeReference type = getComputer().getCommonSuperType(refs);
-		assertEquals(expected, type.getCanonicalName());
+		assertEquals(expected, type.getIdentifier());
 	}
 	
 	public void testCommonSuperType_0() throws Exception {

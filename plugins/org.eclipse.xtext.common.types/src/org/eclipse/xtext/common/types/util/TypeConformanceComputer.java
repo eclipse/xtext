@@ -109,7 +109,7 @@ public class TypeConformanceComputer {
 	}
 
 	protected boolean isObject(JvmTypeReference left) {
-		return left!=null && left.getType()!=null && left.getType().getCanonicalName().equals(Object.class.getCanonicalName());
+		return left!=null && left.getType()!=null && left.getType().getIdentifier().equals(Object.class.getCanonicalName());
 	}
 	
 	protected Boolean _isConformant(JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
@@ -398,7 +398,7 @@ public class TypeConformanceComputer {
 
 	protected boolean is(JvmType typeA, Class<?> ...class1) {
 		for (Class<?> class2 : class1) {
-			boolean result = typeA.getCanonicalName().equals(class2.getCanonicalName());
+			boolean result = typeA.getIdentifier().equals(class2.getCanonicalName());
 			if (result)
 				return true;
 		}
@@ -406,7 +406,7 @@ public class TypeConformanceComputer {
 	}
 
 	public String getName(JvmTypeReference actual) {
-		return actual.getCanonicalName();
+		return actual.getIdentifier();
 	}
 	
 	/**
@@ -623,7 +623,7 @@ public class TypeConformanceComputer {
 							}
 						}
 					}
-					return o1.getElement().getCanonicalName().compareTo(o2.getElement().getCanonicalName());
+					return o1.getElement().getIdentifier().compareTo(o2.getElement().getIdentifier());
 				}
 				if (o1.getCount() < o2.getCount())
 					return -1;
@@ -635,7 +635,7 @@ public class TypeConformanceComputer {
 	public JvmTypeReference getCommonParameterSuperType(final List<JvmTypeReference> types, List<JvmTypeReference> initiallyRequested) {
 		Function<JvmTypeReference, String> getCanonicalName = new Function<JvmTypeReference, String>() {
 			public String apply(JvmTypeReference from) {
-				return from.getCanonicalName();
+				return from.getIdentifier();
 			}
 		};
 		Set<String> allNames = Sets.newHashSet(Iterables.transform(types, getCanonicalName));

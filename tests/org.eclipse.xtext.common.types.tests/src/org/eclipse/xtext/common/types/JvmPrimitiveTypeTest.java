@@ -23,11 +23,11 @@ public class JvmPrimitiveTypeTest extends TestCase {
 	}
 	
 	public void testCanonicalName_01() {
-		assertNull(primitiveType.getCanonicalName());
+		assertNull(primitiveType.getIdentifier());
 	}
 	
 	public void testCanonicalName_02() {
-		primitiveType.setName("int");
-		assertEquals("int", primitiveType.getCanonicalName());
+		primitiveType.setSimpleName("int");
+		assertEquals("int", primitiveType.getIdentifier());
 	}
 }

@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -33,10 +34,10 @@ public abstract class AbstractClassMirror implements IClassMirror {
 	public String getFragment(EObject obj, IFragmentProvider.Fallback fallback) {
 		if (obj instanceof JvmTypeParameter)
 			return getFragment(obj.eContainer(), fallback) + "/" + ((JvmTypeParameter) obj).getName();
-		if (obj instanceof JvmTypeReference)
+		if (obj instanceof JvmTypeReference || obj instanceof JvmFormalParameter)
 			return fallback.getFragment(obj);
 		if (obj instanceof JvmIdentifiableElement)
-			return ((JvmIdentifiableElement) obj).getCanonicalName();
+			return ((JvmIdentifiableElement) obj).getIdentifier();
 		return fallback.getFragment(obj);
 	}
 	
@@ -76,7 +77,7 @@ public abstract class AbstractClassMirror implements IClassMirror {
 			if (container instanceof JvmDeclaredType) {
 				EList<JvmMember> members = ((JvmDeclaredType) container).getMembers();
 				for(JvmMember member: members) {
-					String name = member.getCanonicalName();
+					String name = member.getIdentifier();
 					if (name.equals(fragment))
 						return member;
 				}

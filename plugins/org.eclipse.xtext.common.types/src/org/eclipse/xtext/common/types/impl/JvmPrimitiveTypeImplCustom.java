@@ -7,12 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
-
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 public class JvmPrimitiveTypeImplCustom extends JvmPrimitiveTypeImpl {
 	
 	@Override
-	public String getCanonicalName() {
-		return name;
+	public String getIdentifier() {
+		return simpleName;
 	}
-
+	
+	@Override
+	public String getQualifiedName() {
+		return simpleName;
+	}
+	
 }

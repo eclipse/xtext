@@ -7,36 +7,28 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
-import java.util.List;
+import org.eclipse.xtext.common.types.impl.NameConcatHelper.NameType;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
-
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 public class JvmParameterizedTypeReferenceImplCustom extends JvmParameterizedTypeReferenceImpl {
 
 	@Override
-	public String getCanonicalName() {
-		if (type == null)
-			return null;
-		String result = getType().getCanonicalName();
-		if (arguments != null && !arguments.isEmpty()) {
-			StringBuilder mutableResult = new StringBuilder(result);
-			mutableResult.append("<");
-			appendCanonicalArguments(mutableResult, arguments);
-			mutableResult.append(">");
-			return mutableResult.toString();
-		}
-		return result;
+	public String getIdentifier() {
+		return NameConcatHelper.computeFor(this, NameType.ID);
+	}
+	
+	@Override
+	public String getSimpleName() {
+		return NameConcatHelper.computeFor(this, NameType.SIMPLE);
+	}
+	
+	@Override
+	public String getQualifiedName() {
+		return NameConcatHelper.computeFor(this, NameType.QUALIFIED);
 	}
 
-	void appendCanonicalArguments(StringBuilder result, List<JvmTypeReference> arguments) {
-		if (arguments == null || arguments.isEmpty())
-			return;
-		int wasLength = result.length();
-		for (JvmTypeReference argument : arguments) {
-			if (result.length() != wasLength)
-				result.append(",");
-			result.append(argument.getCanonicalName());
-		}
-	}
+	
 
 }

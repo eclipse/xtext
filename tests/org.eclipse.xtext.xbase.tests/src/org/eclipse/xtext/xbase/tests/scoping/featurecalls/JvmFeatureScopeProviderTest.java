@@ -87,7 +87,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 					@Override
 					public void addFeatureDescriptions(JvmFeature feature, TypeArgumentContext context,
 							IAcceptor<JvmFeatureDescription> acceptor) {
-						if (((JvmMember) feature).getDeclaringType().getCanonicalName().equals("java.lang.Object"))
+						if (((JvmMember) feature).getDeclaringType().getIdentifier().equals("java.lang.Object"))
 							return;
 						super.addFeatureDescriptions(feature, context, acceptor);
 					}
@@ -162,9 +162,9 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 	public void testTypeHierarchyLinearization() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
 		Iterator<JvmTypeReference> hierarchy = getFeatureProvider().linearizeTypeHierarchy(reference).iterator();
-		assertEquals(FieldAccessSub.class.getCanonicalName(), hierarchy.next().getType().getCanonicalName());
-		assertEquals(FieldAccess.class.getCanonicalName(), hierarchy.next().getType().getCanonicalName());
-		assertEquals(Object.class.getCanonicalName(), hierarchy.next().getType().getCanonicalName());
+		assertEquals(FieldAccessSub.class.getCanonicalName(), hierarchy.next().getType().getIdentifier());
+		assertEquals(FieldAccess.class.getCanonicalName(), hierarchy.next().getType().getIdentifier());
+		assertEquals(Object.class.getCanonicalName(), hierarchy.next().getType().getIdentifier());
 		assertFalse(hierarchy.hasNext());
 	}
 	

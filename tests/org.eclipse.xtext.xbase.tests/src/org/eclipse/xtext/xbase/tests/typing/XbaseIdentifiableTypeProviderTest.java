@@ -25,16 +25,16 @@ public class XbaseIdentifiableTypeProviderTest extends AbstractXbaseTestCase {
 	public void testVariableDeclaration_in_ForExpression_0() throws Exception {
 		XForLoopExpression expression = (XForLoopExpression) expression("for(x : null as java.util.List<String>) 'foo'", true);
 		JvmTypeReference typeRef = typeProvider.getTypeForIdentifiable(expression.getDeclaredParam());
-		assertEquals("java.lang.String", typeRef.getCanonicalName());
+		assertEquals("java.lang.String", typeRef.getIdentifier());
 	}
 	public void testVariableDeclaration_in_ForExpression_1() throws Exception {
 		XForLoopExpression expression = (XForLoopExpression) expression("for(x : null as Iterable<?>) 'foo'", true);
 		JvmTypeReference typeRef = typeProvider.getTypeForIdentifiable(expression.getDeclaredParam());
-		assertEquals("java.lang.Object", typeRef.getCanonicalName());
+		assertEquals("java.lang.Object", typeRef.getIdentifier());
 	}
 	public void testVariableDeclaration_in_ForExpression_2() throws Exception {
 		XForLoopExpression expression = (XForLoopExpression) expression("for(x : null as java.util.ArrayList<? extends java.util.List<Integer>>) 'foo'", true);
 		JvmTypeReference typeRef = typeProvider.getTypeForIdentifiable(expression.getDeclaredParam());
-		assertEquals("java.util.List<java.lang.Integer>", typeRef.getCanonicalName());
+		assertEquals("java.util.List<java.lang.Integer>", typeRef.getIdentifier());
 	}
 }
