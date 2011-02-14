@@ -15,9 +15,11 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -71,10 +73,10 @@ public class FeatureCallChecker {
 
 	@Inject
 	private ITypeProvider typeProvider;
-	
+
 	@Inject
 	private TypeReferences typeRefs;
-	
+
 	@Inject
 	private FeatureCallToJavaMapping featureCall2JavaMapping;
 
@@ -97,8 +99,11 @@ public class FeatureCallChecker {
 	public String check(IEObjectDescription input) {
 		if (input instanceof JvmFeatureDescription) {
 			final JvmFeatureDescription jvmFeatureDescription = (JvmFeatureDescription) input;
-			String issueCode = dispatcher.invoke(jvmFeatureDescription.getJvmFeature(), context, reference,
-					jvmFeatureDescription);
+			JvmFeature jvmFeature = jvmFeatureDescription.getJvmFeature();
+			if (jvmFeature.eIsProxy())
+				jvmFeature = (JvmFeature) EcoreUtil.resolve(jvmFeature, context);
+			String issueCode = jvmFeature.eIsProxy() ? UNRESOLVABLE_PROXY : dispatcher.invoke(jvmFeature, context,
+					reference, jvmFeatureDescription);
 			jvmFeatureDescription.setIssueCode(issueCode);
 			return issueCode;
 		}
@@ -115,7 +120,8 @@ public class FeatureCallChecker {
 		if (!isValidNumberOfArguments(input, arguments))
 			return INVALID_NUMBER_OF_ARGUMENTS;
 		// expected constructor type argument count is the sum of the declaring type's type parameters and the constructors type parameters 
-		int expectedTypeArguments = input.getTypeParameters().size() + ((JvmTypeParameterDeclarator) input.getDeclaringType()).getTypeParameters().size();
+		int expectedTypeArguments = input.getTypeParameters().size()
+				+ ((JvmTypeParameterDeclarator) input.getDeclaringType()).getTypeParameters().size();
 		if ((!context.getTypeArguments().isEmpty()) // raw type or inferred arguments
 				&& expectedTypeArguments != context.getTypeArguments().size())
 			return INVALID_NUMBER_OF_TYPE_ARGUMENTS;
@@ -186,8 +192,8 @@ public class FeatureCallChecker {
 
 	protected String _case(JvmOperation input, XMemberFeatureCall context, EReference ref,
 			JvmFeatureDescription jvmFeatureDescription) {
-		if (input.isStatic() && !jvmFeatureDescription.isMemberSyntaxContext() 
-				&& input.getParameters().size()==context.getMemberCallArguments().size()) {
+		if (input.isStatic() && !jvmFeatureDescription.isMemberSyntaxContext()
+				&& input.getParameters().size() == context.getMemberCallArguments().size()) {
 			return INSTANCE_ACCESS_TO_STATIC_MEMBER;
 		} else {
 			return checkJvmOperation(input, context, context.isExplicitOperationCall(), jvmFeatureDescription,
@@ -216,10 +222,11 @@ public class FeatureCallChecker {
 
 	protected String checkJvmOperation(JvmOperation input, XAbstractFeatureCall context,
 			boolean isExplicitOperationCall, JvmFeatureDescription jvmFeatureDescription, EList<XExpression> arguments) {
-		List<XExpression> actualArguments = featureCall2JavaMapping.getActualArguments(context, input, jvmFeatureDescription.getImplicitReceiver());
+		List<XExpression> actualArguments = featureCall2JavaMapping.getActualArguments(context, input,
+				jvmFeatureDescription.getImplicitReceiver());
 		if (!isValidNumberOfArguments(input, actualArguments))
 			return INVALID_NUMBER_OF_ARGUMENTS;
-		if (!(isExplicitOperationCall ^ isSugaredMethodInvocationWithoutParanthesis(jvmFeatureDescription)))
+		if (!isExplicitOperationCall && !isSugaredMethodInvocationWithoutParanthesis(jvmFeatureDescription))
 			return METHOD_ACCESS_WITHOUT_PARENTHESES;
 		if (!context.getTypeArguments().isEmpty() // raw type or type inference
 				&& input.getTypeParameters().size() != context.getTypeArguments().size())
@@ -229,7 +236,7 @@ public class FeatureCallChecker {
 			return INVALID_ARGUMENT_TYPES;
 		return null;
 	}
-	
+
 	protected boolean areArgumentTypesValid(JvmExecutable exectuable, List<XExpression> arguments) {
 		int numberOfParameters = exectuable.getParameters().size();
 		int parametersToCheck = exectuable.isVarArgs() ? numberOfParameters - 1 : numberOfParameters;
@@ -237,7 +244,7 @@ public class FeatureCallChecker {
 			JvmTypeReference parameterType = exectuable.getParameters().get(i).getParameterType();
 			XExpression argument = arguments.get(i);
 			JvmTypeReference argumentType = getTypeProvider().getType(argument);
-			if (parameterType==null) 
+			if (parameterType == null)
 				return true;
 			if (!isCompatibleArgument(parameterType, argumentType))
 				return false;
@@ -256,7 +263,7 @@ public class FeatureCallChecker {
 				if (!isCompatibleArgument(varArgType, lastArgumentType))
 					return false;
 			} else {
-				for(int i = lastParamIndex; i < arguments.size(); i++) {
+				for (int i = lastParamIndex; i < arguments.size(); i++) {
 					XExpression argumentExpression = arguments.get(i);
 					JvmTypeReference argumentType = getTypeProvider().getType(argumentExpression);
 					if (!isCompatibleArgument(varArgType, argumentType))
@@ -266,7 +273,7 @@ public class FeatureCallChecker {
 		}
 		return true;
 	}
-	
+
 	protected boolean isValidNumberOfArguments(JvmExecutable executable, List<XExpression> arguments) {
 		final int numberOfParameters = executable.getParameters().size();
 		if (executable.getParameters().size() != arguments.size()) {
@@ -277,7 +284,7 @@ public class FeatureCallChecker {
 		}
 		return true;
 	}
-	
+
 	protected boolean isSugaredMethodInvocationWithoutParanthesis(JvmFeatureDescription jvmFeatureDescription) {
 		return jvmFeatureDescription.getKey().indexOf('(') == -1;
 	}
