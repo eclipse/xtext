@@ -499,16 +499,16 @@ ruleFunction returns [EObject current=null]
 	 				}
 					({true}?=>(
 (
-		lv_dispatch_2_0=	'case' 
+		lv_dispatch_2_0=	'dispatch' 
     {
-        newLeafNode(lv_dispatch_2_0, grammarAccess.getFunctionAccess().getDispatchCaseKeyword_0_1_0());
+        newLeafNode(lv_dispatch_2_0, grammarAccess.getFunctionAccess().getDispatchDispatchKeyword_0_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getFunctionRule());
 	        }
-       		setWithLastConsumed($current, "dispatch", true, "case");
+       		setWithLastConsumed($current, "dispatch", true, "dispatch");
 	    }
 
 )

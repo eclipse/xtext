@@ -35,7 +35,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 	private IXtend2JvmAssociations associator;
 	
 	public void testCaseFunction_00() throws Exception {
-		XtendFunction function = function("case String foo(String s) _foo(s)");
+		XtendFunction function = function("dispatch String foo(String s) _foo(s)");
 		final JvmOperation feature = (JvmOperation) ((XFeatureCall)function.getExpression()).getFeature();
 		XtendFunction xtendFunction = (XtendFunction) associator.getAssociatedElements(feature).iterator().next();
 		assertSame(function,xtendFunction);

@@ -46,7 +46,7 @@ ruleMember :
 ruleFunction :
 	(
 		'override'? |
-		'case'?
+		'dispatch'?
 	)* (
 		'<' ruleJvmTypeParameter (
 			',' ruleJvmTypeParameter

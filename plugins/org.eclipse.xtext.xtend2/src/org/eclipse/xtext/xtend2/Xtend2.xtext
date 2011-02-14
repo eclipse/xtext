@@ -35,7 +35,7 @@ Member returns XtendMember:
 	Function;
 
 Function returns XtendFunction :
-	(override?='override'? & dispatch?='case'?) ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
+	(override?='override'? & dispatch?='dispatch'?) ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
 	(returnType=JvmTypeReference)? name=ID '(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
 		(expression=XExpression | ';');
 		

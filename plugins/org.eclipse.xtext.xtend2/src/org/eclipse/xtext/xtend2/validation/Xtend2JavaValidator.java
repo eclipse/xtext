@@ -60,6 +60,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sebastian Zarnekow
+ * @author Sven Efftinge
  */
 @ComposedChecks(validators = { ClasspathBasedChecks.class })
 public class Xtend2JavaValidator extends XbaseJavaValidator {
@@ -192,7 +193,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 			}
 		}
 		if (!overriddenOperationFound && function.isOverride()) {
-			error("Function does not override any operation", function,
+			error("Function does not override any function", function,
 					Xtend2Package.Literals.XTEND_FUNCTION__OVERRIDE, OBSOLETE_OVERRIDE);
 		}
 	}
@@ -205,7 +206,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 	public void caseFuncWithoutParams(XtendFunction func) {
 		if (func.isDispatch()) {
 			if (func.getParameters().isEmpty()) {
-				error("A case function mus at least have one parameter declared.", func,
+				error("A dispatch function mus at least have one parameter declared.", func,
 						Xtend2Package.Literals.XTEND_FUNCTION__DISPATCH, IssueCodes.CASE_FUNC_WITHOUT_PARAMS);
 			}
 		}
@@ -215,7 +216,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 	public void caseFuncWithTypeParams(XtendFunction func) {
 		if (func.isDispatch()) {
 			if (!func.getTypeParameters().isEmpty()) {
-				error("A case function must not declare any type parameters.", func,
+				error("A dispatch function must not declare any type parameters.", func,
 						Xtend2Package.Literals.XTEND_FUNCTION__DISPATCH, IssueCodes.CASE_FUNC_WITH_TYPE_PARAMS);
 			}
 		}
@@ -239,7 +240,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 			if (collection.size() == 1) {
 				JvmOperation singleOp = collection.iterator().next();
 				XtendFunction function = associations.getXtendFunction(singleOp);
-				warning("Single case function.", function, Xtend2Package.Literals.XTEND_FUNCTION__DISPATCH,
+				warning("Single dispatch function.", function, Xtend2Package.Literals.XTEND_FUNCTION__DISPATCH,
 						IssueCodes.SINGLE_CASE_FUNCTION);
 			} else {
 				Multimap<List<JvmType>,JvmOperation> signatures = HashMultimap.create();
@@ -256,7 +257,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 						})) {
 							for (JvmOperation jvmOperation : ops) {
 								XtendFunction function = associations.getXtendFunction(jvmOperation);
-								error("Duplicate case method. Primitives cannot overload their wrapper types in case functions.", 
+								error("Duplicate dispatch function. Primitives cannot overload their wrapper types in dispatch functions.", 
 										function, null, DUPLICATE_METHOD);
 							}
 						}

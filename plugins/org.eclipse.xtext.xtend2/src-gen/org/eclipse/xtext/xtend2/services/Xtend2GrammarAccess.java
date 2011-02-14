@@ -261,7 +261,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOverrideAssignment_0_0 = (Assignment)cUnorderedGroup_0.eContents().get(0);
 		private final Keyword cOverrideOverrideKeyword_0_0_0 = (Keyword)cOverrideAssignment_0_0.eContents().get(0);
 		private final Assignment cDispatchAssignment_0_1 = (Assignment)cUnorderedGroup_0.eContents().get(1);
-		private final Keyword cDispatchCaseKeyword_0_1_0 = (Keyword)cDispatchAssignment_0_1.eContents().get(0);
+		private final Keyword cDispatchDispatchKeyword_0_1_0 = (Keyword)cDispatchAssignment_0_1.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cLessThanSignKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cTypeParametersAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
@@ -290,17 +290,17 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_7_1 = (Keyword)cAlternatives_7.eContents().get(1);
 		
 		//Function returns XtendFunction:
-		//	(override?="override"? & dispatch?="case"?) ("<" typeParameters+=JvmTypeParameter (","
+		//	(override?="override"? & dispatch?="dispatch"?) ("<" typeParameters+=JvmTypeParameter (","
 		//	typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference? name=ID "(" (parameters+=JvmFormalParameter (","
 		//	parameters+=JvmFormalParameter)*)? ")" (expression=XExpression | ";");
 		public ParserRule getRule() { return rule; }
 
-		//(override?="override"? & dispatch?="case"?) ("<" typeParameters+=JvmTypeParameter (","
+		//(override?="override"? & dispatch?="dispatch"?) ("<" typeParameters+=JvmTypeParameter (","
 		//typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference? name=ID "(" (parameters+=JvmFormalParameter (","
 		//parameters+=JvmFormalParameter)*)? ")" (expression=XExpression | ";")
 		public Group getGroup() { return cGroup; }
 
-		//override?="override"? & dispatch?="case"?
+		//override?="override"? & dispatch?="dispatch"?
 		public UnorderedGroup getUnorderedGroup_0() { return cUnorderedGroup_0; }
 
 		//override?="override"?
@@ -309,11 +309,11 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		//"override"
 		public Keyword getOverrideOverrideKeyword_0_0_0() { return cOverrideOverrideKeyword_0_0_0; }
 
-		//dispatch?="case"?
+		//dispatch?="dispatch"?
 		public Assignment getDispatchAssignment_0_1() { return cDispatchAssignment_0_1; }
 
-		//"case"
-		public Keyword getDispatchCaseKeyword_0_1_0() { return cDispatchCaseKeyword_0_1_0; }
+		//"dispatch"
+		public Keyword getDispatchDispatchKeyword_0_1_0() { return cDispatchDispatchKeyword_0_1_0; }
 
 		//("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")?
 		public Group getGroup_1() { return cGroup_1; }
@@ -964,7 +964,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Function returns XtendFunction:
-	//	(override?="override"? & dispatch?="case"?) ("<" typeParameters+=JvmTypeParameter (","
+	//	(override?="override"? & dispatch?="dispatch"?) ("<" typeParameters+=JvmTypeParameter (","
 	//	typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference? name=ID "(" (parameters+=JvmFormalParameter (","
 	//	parameters+=JvmFormalParameter)*)? ")" (expression=XExpression | ";");
 	public FunctionElements getFunctionAccess() {
