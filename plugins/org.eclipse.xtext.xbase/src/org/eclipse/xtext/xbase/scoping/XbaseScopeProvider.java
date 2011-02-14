@@ -171,7 +171,8 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			}
 
 			public IEObjectDescription getSingleElement(EObject object) {
-				throw new UnsupportedOperationException();
+				Iterable<IEObjectDescription> elements = getElements(object);
+				return (isEmpty(elements)) ? null : elements.iterator().next();
 			}
 
 			public IEObjectDescription getSingleElement(QualifiedName name) {
