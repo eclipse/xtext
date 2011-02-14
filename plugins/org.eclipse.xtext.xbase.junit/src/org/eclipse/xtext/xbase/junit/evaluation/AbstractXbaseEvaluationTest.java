@@ -7,15 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.junit.evaluation;
 
+import java.util.Collections;
 import java.util.Stack;
-
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 import junit.framework.TestCase;
 import testdata.ExceptionSubclass;
 
-import com.google.inject.Inject;
-import com.google.inject.internal.Lists;
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -37,8 +35,6 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	public void testUnaryOperator_02() throws Exception {
 		assertEvaluatesTo("-1","(-1).toString()");
 	}
-	
-	@Inject ITypeProvider typeProvider;
 	
 	public void testUpToOperator() throws Exception {
 		assertEvaluatesTo(new Integer(9),"(9..13).iterator().next()");
@@ -831,5 +827,57 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"  iter.next" +
 				"  iter.next" +
 				"}");
+	}
+	
+	public void testConstructorVarArgs_01() {
+		assertEvaluatesTo(Boolean.TRUE, "new testdata.ClassWithVarArgs().defaultConstructor");
+	}
+	
+	public void testConstructorVarArgs_02() {
+		assertEvaluatesTo(Boolean.TRUE, "new testdata.ClassWithVarArgs(1).varArgConstructor");
+	}
+	
+	public void testConstructorVarArgs_03() {
+		assertEvaluatesTo(Boolean.TRUE, "new testdata.ClassWithVarArgs(1, '').varArgConstructor");
+	}
+	
+	public void testConstructorVarArgs_04() {
+		assertEvaluatesTo(Boolean.FALSE, "new testdata.ClassWithVarArgs(1, '', '').varArgConstructor");
+	}
+	
+	public void testConstructorVarArgs_05() {
+		assertEvaluatesTo(Boolean.TRUE, "new testdata.ClassWithVarArgs(1, '', '', '').varArgConstructor");
+	}
+	
+	public void testMethodVarArgs_01() {
+		assertEvaluatesTo(Collections.emptyList(), "new testdata.ClassWithVarArgs().stringsToList()");
+	}
+	
+	public void testMethodVarArgs_02() {
+		assertEvaluatesTo(Collections.singletonList("s1"), "new testdata.ClassWithVarArgs().stringsToList('s1')");
+	}
+	
+	public void testMethodVarArgs_03() {
+		assertEvaluatesTo(Lists.newArrayList("foo", "s1", "s2"), "new testdata.ClassWithVarArgs().stringsToList('s1', 's2')");
+	}
+	
+	public void testMethodVarArgs_04() {
+		assertEvaluatesTo(Lists.newArrayList("s1", "s2", "s3"), "new testdata.ClassWithVarArgs().stringsToList('s1', 's2', 's3')");
+	}
+	
+	public void testMethodVarArgs_05() {
+		assertEvaluatesTo(Collections.emptyList(), "{ var this = new testdata.ClassWithVarArgs() stringsToList() }");
+	}
+	
+	public void testMethodVarArgs_06() {
+		assertEvaluatesTo(Collections.singletonList("s1"), "{ var this = new testdata.ClassWithVarArgs() stringsToList('s1') }");
+	}
+	
+	public void testMethodVarArgs_07() {
+		assertEvaluatesTo(Lists.newArrayList("foo", "s1", "s2"), "{ var this = new testdata.ClassWithVarArgs() stringsToList('s1', 's2') }");
+	}
+	
+	public void testMethodVarArgs_08() {
+		assertEvaluatesTo(Lists.newArrayList("s1", "s2", "s3"), "{ var this = new testdata.ClassWithVarArgs() stringsToList('s1', 's2', 's3') }");
 	}
 }

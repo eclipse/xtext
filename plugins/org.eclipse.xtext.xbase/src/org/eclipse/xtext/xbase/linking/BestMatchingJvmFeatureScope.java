@@ -9,7 +9,7 @@ package org.eclipse.xtext.xbase.linking;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -108,11 +108,20 @@ public class BestMatchingJvmFeatureScope implements IScope {
 			JvmFeatureDescription descB = (JvmFeatureDescription) b;
 			TypeArgumentContext contextA = descA.getContext();
 			TypeArgumentContext contextB = descB.getContext();
-			if (descA.getJvmFeature() instanceof JvmOperation) {
-				if (descB.getJvmFeature() instanceof JvmOperation) {
-					JvmOperation opA = (JvmOperation) descA.getJvmFeature();
+			if (descA.getJvmFeature() instanceof JvmExecutable) {
+				if (descB.getJvmFeature() instanceof JvmExecutable) {
+					JvmExecutable opA = (JvmExecutable) descA.getJvmFeature();
+					JvmExecutable opB = (JvmExecutable) descB.getJvmFeature();
+					if (descA.isValid() && descB.isValid()) {
+						if (opA.isVarArgs()) {
+							if (!opB.isVarArgs()) {
+								return b;
+							}
+						} else if (opB.isVarArgs()) {
+							return a;
+						}
+					}
 					int numParamsA = opA.getParameters().size();
-					JvmOperation opB = (JvmOperation) descB.getJvmFeature();
 					int numParamsB = opB.getParameters().size();
 					for (int i = 0; i < Math.min(numParamsA, numParamsB); i++) {
 						JvmTypeReference pA = opA.getParameters().get(numParamsA-i-1).getParameterType();

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.interpreter.impl;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
@@ -17,6 +18,7 @@ import java.lang.reflect.Proxy;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
@@ -424,9 +426,8 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 
 	public Object _evaluateConstructorCall(XConstructorCall constructorCall, IEvaluationContext context) {
-		List<Object> arguments = Lists.newArrayList();
 		JvmConstructor jvmConstructor = constructorCall.getConstructor();
-		evaluateArgumentExpressions(jvmConstructor, constructorCall.getArguments(), arguments, context);
+		List<Object> arguments = evaluateArgumentExpressions(jvmConstructor, constructorCall.getArguments(), context);
 		Constructor<?> constructor = javaReflectAccess.getConstructor(jvmConstructor);
 		try {
 			if (constructor == null)
@@ -532,8 +533,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	public Object _featureCallOperation(JvmOperation operation, XAbstractFeatureCall featureCall, Object receiver,
 			IEvaluationContext context) {
 		List<XExpression> operationArguments = callToJavaMapping.getActualArguments(featureCall, featureCall.getFeature(), featureCall.getImplicitReceiver());
-		List<Object> argumentValues = Lists.newArrayList();
-		evaluateArgumentExpressions(operation, operationArguments, argumentValues, context);
+		List<Object> argumentValues = evaluateArgumentExpressions(operation, operationArguments, context);
 		return invokeOperation(operation, receiver, argumentValues);
 	}
 
@@ -562,23 +562,55 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 	}
 
-	protected void evaluateArgumentExpressions(JvmExecutable executable, List<XExpression> expressions,
-			List<Object> result, IEvaluationContext context) {
-		int i = 0;
-		for (XExpression arg : expressions) {
+	protected List<Object> evaluateArgumentExpressions(JvmExecutable executable, List<XExpression> expressions,
+			IEvaluationContext context) {
+		List<Object> result = Lists.newArrayList();
+		int paramCount = executable.getParameters().size();
+		if (executable.isVarArgs())
+			paramCount--;
+		for (int i = 0; i < paramCount; i++) {
+			XExpression arg = expressions.get(i);
 			Object argResult = internalEvaluate(arg, context);
 			JvmTypeReference parameterType = executable.getParameters().get(i).getParameterType();
 			Object argumentValue = coerceArgumentType(argResult, parameterType);
 			result.add(argumentValue);
-			i++;
 		}
+		if (executable.isVarArgs()) {
+			JvmTypeReference lastParameterType = executable.getParameters().get(paramCount).getParameterType();
+			JvmTypeReference componentTypeReference = ((JvmArrayType) lastParameterType.getType()).getComponentType();
+			String typeName = componentTypeReference.getType().getCanonicalName();
+			Class<?> componentType = null;
+			try {
+				componentType = classFinder.forName(typeName);
+			} catch (ClassNotFoundException e) {
+				throw new EvaluationException(new NoClassDefFoundError(typeName));
+			}
+			if (expressions.size() == executable.getParameters().size()) {
+				XExpression arg = expressions.get(paramCount);
+				Object lastArgResult = internalEvaluate(arg, context);
+				if (componentType.isInstance(lastArgResult)) {
+					Object array = Array.newInstance(componentType, 1);
+					Array.set(array, 0, lastArgResult);
+					result.add(array);
+				} else {
+					result.add(lastArgResult);
+				}
+			} else {
+				Object array = Array.newInstance(componentType, expressions.size() - paramCount);
+				for(int i = paramCount; i < expressions.size(); i++) {
+					XExpression arg = expressions.get(i);
+					Object argValue = internalEvaluate(arg, context);
+					Array.set(array, i - paramCount, argValue);
+				}
+				result.add(array);
+			}
+		}
+		return result;
 	}
 	
 	protected Object coerceArgumentType(Object value, JvmTypeReference expectedType) {
 		if (value == null)
 			return null;
-//		if (expectedType.getType() instanceof JvmArrayType)
-//			return unwrapArray(value);
 		if (expectedType.getType() instanceof JvmGenericType && ((JvmGenericType) expectedType.getType()).isInterface()) {
 			try {
 				JvmType type = expectedType.getType();
