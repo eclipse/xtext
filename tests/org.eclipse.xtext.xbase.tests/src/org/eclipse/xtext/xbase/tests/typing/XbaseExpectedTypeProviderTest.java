@@ -17,6 +17,7 @@ import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XDoWhileExpression;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
@@ -51,10 +52,72 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 		assertExpected("java.lang.String", fc.getRightOperand());
 	}
 	
-	public void testTypeParamInference() throws Exception {
+	public void testTypeParamInference_01() throws Exception {
 		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1([e|e],'foo')");
 		final XExpression closure = fc.getMemberCallArguments().get(0);
-		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,T>", closure);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,java.lang.String>", closure);
+	}
+	
+	public void testTypeParamInference_02() throws Exception {
+		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1([e|e.length],'foo')");
+		final XExpression closure = fc.getMemberCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,java.lang.Integer>", closure);
+	}
+	
+	public void testTypeParamInference_03() throws Exception {
+		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1([e|null],'foo')");
+		final XExpression closure = fc.getMemberCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,java.lang.Void>", closure);
+	}
+	
+	public void testTypeParamInference_04() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var Integer i = new testdata.ClosureClient().invoke1([e|null],'foo') }");
+		XVariableDeclaration var = (XVariableDeclaration) block.getExpressions().get(0);
+		XMemberFeatureCall fc = (XMemberFeatureCall) var.getRight();
+		final XExpression closure = fc.getMemberCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,java.lang.Integer>", closure);
+	}
+	
+	public void testTypeParamInference_05() throws Exception {
+		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().<CharSequence, Number>invoke1([e|null],'foo')");
+		final XExpression closure = fc.getMemberCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.CharSequence,java.lang.Number>", closure);
+	}
+	
+	public void testTypeParamInference_06() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var this = new testdata.ClosureClient() invoke1([e|e],'foo') }");
+		XFeatureCall fc = (XFeatureCall) block.getExpressions().get(1);
+		final XExpression closure = fc.getFeatureCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,java.lang.String>", closure);
+	}
+	
+	public void testTypeParamInference_07() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var this = new testdata.ClosureClient() invoke1([e|e.length],'foo') }");
+		XFeatureCall fc = (XFeatureCall) block.getExpressions().get(1);
+		final XExpression closure = fc.getFeatureCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,java.lang.Integer>", closure);
+	}
+	
+	public void testTypeParamInference_08() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var this = new testdata.ClosureClient() invoke1([e|null],'foo') }");
+		XFeatureCall fc = (XFeatureCall) block.getExpressions().get(1);
+		final XExpression closure = fc.getFeatureCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,java.lang.Void>", closure);
+	}
+	
+	public void testTypeParamInference_09() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var this = new testdata.ClosureClient() var Integer i = invoke1([e|null],'foo') }");
+		XVariableDeclaration var = (XVariableDeclaration) block.getExpressions().get(1);
+		XFeatureCall fc = (XFeatureCall) var.getRight();
+		final XExpression closure = fc.getFeatureCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,java.lang.Integer>", closure);
+	}
+	
+	public void testTypeParamInference_10() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var this = new testdata.ClosureClient(); <CharSequence, Number>invoke1([e|null],'foo') }");
+		XFeatureCall fc = (XFeatureCall) block.getExpressions().get(1);
+		final XExpression closure = fc.getFeatureCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.CharSequence,java.lang.Number>", closure);
 	}
 	
 	public void testVariableDeclaration_0() throws Exception {

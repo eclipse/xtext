@@ -484,6 +484,13 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 				ref(Integer.class));
 	}
 	
+	public void testCommonSuperType_12() throws Exception {
+		assertCommonSuperType(
+				"java.lang.Number",
+				ref(Double.class),
+				ref(Integer.class));
+	}
+	
 	public void testConformanceWithTypeParameter() throws Exception {
 		JvmTypeParameter typeParam = ((JvmGenericType)ref(List.class).getType()).getTypeParameters().get(0);
 		JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
