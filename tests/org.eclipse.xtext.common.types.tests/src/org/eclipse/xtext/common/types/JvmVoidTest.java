@@ -23,7 +23,7 @@ public class JvmVoidTest extends TestCase {
 	}
 	
 	public void testCanonicalName_01() {
-		assertEquals("void", _void.getCanonicalName());
+		assertEquals("void", _void.getIdentifier());
 	}
 	
 }

@@ -107,11 +107,11 @@ public class SuperTypeCollector {
 				if (typeReference instanceof JvmParameterizedTypeReference) {
 					JvmType rawType = typeReference.getType();
 					if (rawType != null && !rawType.eIsProxy()) {
-						return rawType.getCanonicalName();
+						return rawType.getIdentifier();
 					}
 					return null;
 				} else {
-					return typeReference.getCanonicalName();
+					return typeReference.getIdentifier();
 				}
 			}
 		});

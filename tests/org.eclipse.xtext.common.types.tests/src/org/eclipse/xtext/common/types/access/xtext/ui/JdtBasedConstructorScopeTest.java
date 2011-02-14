@@ -76,6 +76,8 @@ public class JdtBasedConstructorScopeTest extends AbstractConstructorScopeTest {
 	
 	public void testGetContents_04() {
 		Iterable<IEObjectDescription> contents = constructorScope.getAllElements();
+		// TODO Fix assertion
+//		assertTrue(Iterables.any(contents, new Predicate<IEObjectDescription>() {
 		assertFalse(Iterables.any(contents, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
 				return ArrayList.class.equals(input.getName());

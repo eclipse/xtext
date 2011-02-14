@@ -7,25 +7,44 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 
-
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 public abstract class JvmMemberImplCustom extends JvmMemberImpl {
 	
 	@Override
-	public String getCanonicalName() {
-		return getFullyQualifiedName();
+	public final String getIdentifier() {
+		if (identifier != null)
+			return identifier;
+		String identifier = computeIdentifier();
+		this.identifier = identifier;
+		return identifier;
 	}
 	
 	@Override
-	public String getSimpleName() {
-		if (fullyQualifiedName == null)
+	public String getQualifiedName() {
+		if (simpleName == null)
 			return null;
-		int parenIdx = fullyQualifiedName.indexOf('(');
-		if (parenIdx < 0)
-			parenIdx = fullyQualifiedName.length();
-		int dotIdx = fullyQualifiedName.lastIndexOf('.', parenIdx);
-		return fullyQualifiedName.substring(dotIdx + 1, parenIdx);
+		JvmDeclaredType declaringType = getDeclaringType();
+		if (declaringType == null)
+			return simpleName;
+		return declaringType.getQualifiedName() + "." + simpleName;
 	}
-
+	
+	@Override
+	public void internalSetIdentifier(String identifier) {
+		this.identifier = identifier;
+	}
+	
+	protected String computeIdentifier() {
+		if (simpleName == null)
+			return null;
+		JvmDeclaredType declaringType = getDeclaringType();
+		if (declaringType == null)
+			return null;
+		return declaringType.getIdentifier() + "." + simpleName;
+	}
 
 }

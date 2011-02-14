@@ -7,11 +7,31 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 public class JvmLowerBoundImplCustom extends JvmLowerBoundImpl {
+	
+	private static final String SUPER = "super ";
+
 	@Override
-	public String getCanonicalName() {
+	public String getIdentifier() {
 		if (typeReference != null)
-			return "super " + super.getCanonicalName();
+			return SUPER + super.getIdentifier();
+		return null;
+	}
+	
+	@Override
+	public String getSimpleName() {
+		if (typeReference != null)
+			return SUPER + super.getSimpleName();
+		return null;
+	}
+	
+	@Override
+	public String getQualifiedName() {
+		if (typeReference != null)
+			return SUPER + super.getQualifiedName();
 		return null;
 	}
 }

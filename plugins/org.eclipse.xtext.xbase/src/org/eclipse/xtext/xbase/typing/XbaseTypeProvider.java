@@ -553,7 +553,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	protected JvmTypeReference convertIfNeccessary(XAbstractFeatureCall context, JvmTypeReference toBeConverted, JvmIdentifiableElement feature) {
 		if (toBeConverted != null && feature instanceof JvmMember) {
 			JvmDeclaredType declaringType = ((JvmMember) feature).getDeclaringType();
-			if (declaringType.getCanonicalName().equals(Iterable.class.getName()) && toBeConverted.getType() instanceof JvmArrayType) {
+			if (declaringType.getIdentifier().equals(Iterable.class.getName()) && toBeConverted.getType() instanceof JvmArrayType) {
 				final JvmArrayType type2 = (JvmArrayType)toBeConverted.getType();
 				JvmTypeReference type = type2.getComponentType();
 				if (primitives.isPrimitive(type)) {
@@ -617,13 +617,13 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 					JvmTypeReference type = ((JvmArrayType)reference.getType()).getComponentType();
 					return type;
 				}
-				if (!reference.getType().getCanonicalName().equals(iterableName)) {
+				if (!reference.getType().getIdentifier().equals(iterableName)) {
 					try {
 						final Set<JvmTypeReference> collectSuperTypes = collector.collectSuperTypes(reference);
 						reference = find(collectSuperTypes,
 								new Predicate<JvmTypeReference>() {
 									public boolean apply(JvmTypeReference input) {
-										return input.getType().getCanonicalName().equals(iterableName);
+										return input.getType().getIdentifier().equals(iterableName);
 									}
 								});
 					} catch (NoSuchElementException e) {

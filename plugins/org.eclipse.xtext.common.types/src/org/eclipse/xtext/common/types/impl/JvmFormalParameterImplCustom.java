@@ -7,13 +7,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 public class JvmFormalParameterImplCustom extends JvmFormalParameterImpl {
 
 	@Override
-	public String getCanonicalName() {
-		if (parameterType != null)
-			return getParameterType().getCanonicalName();
-		return null;
+	public String getIdentifier() {
+		return name;
+	}
+	
+	@Override
+	public String getSimpleName() {
+		return name;
+	}
+	
+	@Override
+	public String getQualifiedName() {
+		return name;
 	}
 
 }

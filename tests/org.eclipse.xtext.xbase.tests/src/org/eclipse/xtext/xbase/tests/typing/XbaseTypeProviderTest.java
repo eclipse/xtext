@@ -187,7 +187,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	protected String toString(JvmTypeReference typeref) {
-		return typeref.getCanonicalName();
+		return typeref.getIdentifier();
 	}
 
 }

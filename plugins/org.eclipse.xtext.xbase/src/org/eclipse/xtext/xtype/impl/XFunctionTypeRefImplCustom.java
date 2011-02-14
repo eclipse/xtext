@@ -49,17 +49,47 @@ public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
 	}
 	
 	@Override
-	public String getCanonicalName() {
+	public String getIdentifier() {
 		StringBuilder result = new StringBuilder("(");
 		for (int i = 0;i< getParamTypes().size();i++) {
 			JvmTypeReference reference = getParamTypes().get(i);
-			result.append(reference.getCanonicalName());
+			result.append(reference.getType().getIdentifier());
 			if (i<getParamTypes().size()-1)
 				result.append(", ");
 		}
 		result.append(") => ");
 		if (getReturnType()!=null)
-			result.append(getReturnType().getCanonicalName());
+			result.append(getReturnType().getType().getIdentifier());
+		return result.toString();
+	}
+	
+	@Override
+	public String getQualifiedName() {
+		StringBuilder result = new StringBuilder("(");
+		for (int i = 0;i< getParamTypes().size();i++) {
+			JvmTypeReference reference = getParamTypes().get(i);
+			result.append(reference.getType().getQualifiedName());
+			if (i<getParamTypes().size()-1)
+				result.append(", ");
+		}
+		result.append(") => ");
+		if (getReturnType()!=null)
+			result.append(getReturnType().getType().getQualifiedName());
+		return result.toString();
+	}
+	
+	@Override
+	public String getSimpleName() {
+		StringBuilder result = new StringBuilder("(");
+		for (int i = 0;i< getParamTypes().size();i++) {
+			JvmTypeReference reference = getParamTypes().get(i);
+			result.append(reference.getType().getSimpleName());
+			if (i<getParamTypes().size()-1)
+				result.append(", ");
+		}
+		result.append(") => ");
+		if (getReturnType()!=null)
+			result.append(getReturnType().getType().getSimpleName());
 		return result.toString();
 	}
 }

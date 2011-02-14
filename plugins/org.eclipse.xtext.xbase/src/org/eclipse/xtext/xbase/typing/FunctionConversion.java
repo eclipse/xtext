@@ -163,7 +163,7 @@ public class FunctionConversion {
 
 	protected boolean isValidFunction(JvmOperation op) {
 		if (op.getVisibility() == JvmVisibility.PUBLIC) {
-			if (Object.class.getName().equals(op.getDeclaringType().getCanonicalName()))
+			if (Object.class.getName().equals(op.getDeclaringType().getIdentifier()))
 				return false;
 			final String name = op.getSimpleName();
 			if (name.equals("toString") && op.getParameters().isEmpty())
@@ -178,7 +178,7 @@ public class FunctionConversion {
 	}
 
 	public boolean isFunction(JvmTypeReference type) {
-		return type != null && type.getType()!=null && type.getType().getCanonicalName().startsWith(Functions.class.getCanonicalName());
+		return type != null && type.getType()!=null && type.getType().getIdentifier().startsWith(Functions.class.getCanonicalName());
 	}
 
 	/**

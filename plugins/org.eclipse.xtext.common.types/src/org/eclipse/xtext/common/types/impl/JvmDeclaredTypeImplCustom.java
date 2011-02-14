@@ -7,38 +7,39 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Iterables;
 
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 
 	@Override
-	public String getSimpleName() {
-		if (fullyQualifiedName == null)
-			return null;
-		int dollarIdx = fullyQualifiedName.lastIndexOf('$');
-		if (dollarIdx != -1) {
-			return fullyQualifiedName.substring(dollarIdx + 1);
-		}
-		int dotIdx = fullyQualifiedName.lastIndexOf('.');
-		return fullyQualifiedName.substring(dotIdx + 1);
-	}
-
-	@Override
 	public String getPackageName() {
-		if (fullyQualifiedName == null)
-			return null;
-		int dotIdx = fullyQualifiedName.lastIndexOf('.');
-		if (dotIdx == -1)
-			return "";
-		return fullyQualifiedName.substring(0, dotIdx);
+		if (getDeclaringType() != null)
+			return getDeclaringType().getPackageName();
+		return packageName;
 	}
 
 	@Override
-	public String getCanonicalName() {
-		return getFullyQualifiedName();
+	protected String computeIdentifier() {
+		if (simpleName == null)
+			return null;
+		JvmDeclaredType declaringType = getDeclaringType();
+		if (declaringType == null) {
+			if (Strings.isEmpty(packageName))
+				return simpleName;
+			return packageName + "." + simpleName;
+		}
+		String parentName = declaringType.getIdentifier();
+		if (parentName == null)
+			return null;
+		return parentName + "$" + simpleName;
 	}
 	
 	@Override

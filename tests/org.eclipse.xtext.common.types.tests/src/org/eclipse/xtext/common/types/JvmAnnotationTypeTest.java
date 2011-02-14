@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
+import org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl;
+
 import junit.framework.TestCase;
 
 /**
@@ -23,19 +25,19 @@ public class JvmAnnotationTypeTest extends TestCase {
 	}
 	
 	public void testCanonicalName_01() {
-		assertNull(annotationType.getCanonicalName());
+		assertNull(annotationType.getIdentifier());
 	}
 	
 	public void testCanonicalName_02() {
-		annotationType.setFullyQualifiedName("java.lang.Override");
-		assertEquals("java.lang.Override", annotationType.getCanonicalName());
+		annotationType.internalSetIdentifier("java.lang.Override");
+		assertEquals("java.lang.Override", annotationType.getIdentifier());
 	}
 	
 	public void testCanonicalName_03() {
 		JvmGenericType outerType = TypesFactory.eINSTANCE.createJvmGenericType();
 		outerType.getMembers().add(annotationType);
-		annotationType.setFullyQualifiedName("java.lang.Override.Something");
-		assertEquals("java.lang.Override.Something", annotationType.getCanonicalName());
+		annotationType.internalSetIdentifier("java.lang.Override.Something");
+		assertEquals("java.lang.Override.Something", annotationType.getIdentifier());
 	}
 	
 }

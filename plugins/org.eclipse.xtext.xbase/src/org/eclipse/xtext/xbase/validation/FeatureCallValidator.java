@@ -62,7 +62,7 @@ public class FeatureCallValidator extends AbstractDeclarativeValidator {
 		} else if (FIELD_ACCESS_WITH_PARENTHESES.equals(issueCode)) {
 			message = "Cannot access field " + nameProvider.getSimpleName(featureCall.getFeature()) + " with parentheses";
 		} else if (METHOD_ACCESS_WITHOUT_PARENTHESES.equals(issueCode)) {
-			message = "Missing parentheses for calling method " + featureCall.getFeature().getCanonicalName();
+			message = "Missing parentheses for calling method " + featureCall.getFeature().getIdentifier();
 		} else {
 			message = "Missig error message for " + issueCode;
 		}

@@ -171,7 +171,7 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 		for (JvmFeature jvmFeature : features) {
 			jvmFeatureDescriptionProvider.addFeatureDescriptions(jvmFeature, context, acceptor);
 		}
-		return new JvmFeatureDescriptions(jvmFeatureDescriptionProvider.getText()+" " + type.getCanonicalName(), descriptions);
+		return new JvmFeatureDescriptions(jvmFeatureDescriptionProvider.getText()+" " + type.getIdentifier(), descriptions);
 	}
 
 	protected Iterable<? extends JvmFeature> getFeaturesForType(JvmDeclaredType declType, IJvmFeatureDescriptionProvider descriptionProvider) {

@@ -7,11 +7,31 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 public class JvmUpperBoundImplCustom extends JvmUpperBoundImpl {
+
+	private static final String EXTENDS = "extends ";
+
 	@Override
-	public String getCanonicalName() {
+	public String getIdentifier() {
 		if (typeReference != null)
-			return "extends " + super.getCanonicalName();
+			return EXTENDS + super.getIdentifier();
+		return null;
+	}
+	
+	@Override
+	public String getSimpleName() {
+		if (typeReference != null)
+			return EXTENDS + super.getSimpleName();
+		return null;
+	}
+	
+	@Override
+	public String getQualifiedName() {
+		if (typeReference != null)
+			return EXTENDS + super.getQualifiedName();
 		return null;
 	}
 }

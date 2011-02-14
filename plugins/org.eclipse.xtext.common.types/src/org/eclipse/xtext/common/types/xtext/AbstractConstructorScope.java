@@ -46,7 +46,7 @@ public abstract class AbstractConstructorScope extends AbstractScope {
 	@Override
 	public Iterable<IEObjectDescription> getElements(EObject object) {
 		if (object instanceof JvmConstructor) {
-			final Set<IEObjectDescription> result = singleton(EObjectDescription.create(getQualifiedNameConverter().toQualifiedName(((JvmIdentifiableElement) object).getCanonicalName()), object));
+			final Set<IEObjectDescription> result = singleton(EObjectDescription.create(getQualifiedNameConverter().toQualifiedName(((JvmIdentifiableElement) object).getIdentifier()), object));
 			return result;
 		}
 		return emptySet();
