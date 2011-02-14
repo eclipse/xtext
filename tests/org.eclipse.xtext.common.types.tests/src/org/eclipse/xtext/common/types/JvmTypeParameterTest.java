@@ -23,12 +23,12 @@ public class JvmTypeParameterTest extends TestCase {
 	}
 	
 	public void testCanonicalName_01() {
-		assertNull(typeParameter.getCanonicalName());
+		assertNull(typeParameter.getIdentifier());
 	}
 	
 	public void testCanonicalName_02() {
 		String name = "T";
 		typeParameter.setName(name);
-		assertEquals("T", typeParameter.getCanonicalName());
+		assertEquals("T", typeParameter.getIdentifier());
 	}
 }

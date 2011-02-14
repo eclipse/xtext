@@ -49,7 +49,7 @@ public abstract class AbstractTypeScopeTest extends TestCase {
 		JvmVoid voidType = TypesFactory.eINSTANCE.createJvmVoid();
 		IEObjectDescription element = getTypeScope().getSingleElement(voidType);
 		assertNotNull(element);
-		assertEquals(voidType.getCanonicalName(), element.getName().toString());
+		assertEquals(voidType.getIdentifier(), element.getName().toString());
 	}
 	
 	public void testGetElementByInstance_02() {

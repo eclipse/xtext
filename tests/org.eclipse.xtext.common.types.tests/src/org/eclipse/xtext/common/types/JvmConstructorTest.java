@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
+import org.eclipse.xtext.common.types.impl.JvmConstructorImpl;
+
 import junit.framework.TestCase;
 
 /**
@@ -23,12 +25,12 @@ public class JvmConstructorTest extends TestCase {
 	}
 	
 	public void testCanonicalName_01() {
-		assertNull(constructor.getCanonicalName(), constructor.getCanonicalName());
+		assertNull(constructor.getIdentifier(), constructor.getIdentifier());
 	}
 	
 	public void testCanonicalName_02() {
-		constructor.setFullyQualifiedName("java.lang.String()");
-		assertEquals("java.lang.String()", constructor.getCanonicalName());
+		constructor.internalSetIdentifier("java.lang.String.String()");
+		assertEquals("java.lang.String.String()", constructor.getIdentifier());
 	}
 	
 }

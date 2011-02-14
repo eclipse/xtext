@@ -23,21 +23,21 @@ public class JvmArrayTypeTest extends TestCase {
 	}	
 	
 	public void testCanonicalName_01() {
-		assertNull(arrayType.getCanonicalName());
+		assertNull(arrayType.getIdentifier());
 	}
 	
 	public void testCanonicalName_02() {
 		JvmPrimitiveType primitiveType = TypesFactory.eINSTANCE.createJvmPrimitiveType();
-		primitiveType.setName("int");
+		primitiveType.setSimpleName("int");
 		JvmParameterizedTypeReference componentType = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
 		componentType.setType(primitiveType);
 		arrayType.setComponentType(componentType);
-		assertEquals("int[]", arrayType.getCanonicalName());
+		assertEquals("int[]", arrayType.getIdentifier());
 	}
 	
 	public void testCanonicalName_03() {
 		JvmPrimitiveType primitiveType = TypesFactory.eINSTANCE.createJvmPrimitiveType();
-		primitiveType.setName("int");
+		primitiveType.setSimpleName("int");
 		JvmParameterizedTypeReference componentType = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
 		componentType.setType(primitiveType);
 		JvmArrayType arrayType = TypesFactory.eINSTANCE.createJvmArrayType();
@@ -45,12 +45,12 @@ public class JvmArrayTypeTest extends TestCase {
 		componentType = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
 		componentType.setType(arrayType);
 		this.arrayType.setComponentType(componentType);
-		assertEquals("int[][]", this.arrayType.getCanonicalName());
+		assertEquals("int[][]", this.arrayType.getIdentifier());
 	}
 	
 	public void testGetDimension_01() {
 		JvmPrimitiveType primitiveType = TypesFactory.eINSTANCE.createJvmPrimitiveType();
-		primitiveType.setName("int");
+		primitiveType.setSimpleName("int");
 		JvmParameterizedTypeReference componentType = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
 		componentType.setType(primitiveType);
 		arrayType.setComponentType(componentType);
@@ -59,7 +59,7 @@ public class JvmArrayTypeTest extends TestCase {
 	
 	public void testGetDimension_02() {
 		JvmPrimitiveType primitiveType = TypesFactory.eINSTANCE.createJvmPrimitiveType();
-		primitiveType.setName("int");
+		primitiveType.setSimpleName("int");
 		JvmParameterizedTypeReference componentType = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
 		componentType.setType(primitiveType);
 		JvmArrayType arrayType = TypesFactory.eINSTANCE.createJvmArrayType();

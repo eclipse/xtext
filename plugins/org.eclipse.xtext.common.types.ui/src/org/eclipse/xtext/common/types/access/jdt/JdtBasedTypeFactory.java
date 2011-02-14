@@ -104,7 +104,10 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		result.setInterface(typeBinding.isInterface());
 		setTypeModifiers(typeBinding, result);
 		setVisibility(result, typeBinding.getModifiers());
-		result.setFullyQualifiedName(getQualifiedName(typeBinding));
+		result.internalSetIdentifier(getQualifiedName(typeBinding));
+		result.setSimpleName(typeBinding.getName());
+		if (typeBinding.getDeclaringClass() == null)
+			result.setPackageName(typeBinding.getPackage().getName());
 		createNestedTypes(typeBinding, result);
 		createMethods(typeBinding, result);
 		createFields(typeBinding, result);
@@ -333,7 +336,10 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 
 	public JvmAnnotationType createAnnotationType(ITypeBinding binding) {
 		JvmAnnotationType result = TypesFactory.eINSTANCE.createJvmAnnotationType();
-		result.setFullyQualifiedName(getQualifiedName(binding));
+		result.internalSetIdentifier(getQualifiedName(binding));
+		result.setSimpleName(binding.getName());
+		if (binding.getDeclaringClass() == null)
+			result.setPackageName(binding.getPackage().getName());
 		setVisibility(result, binding.getModifiers());
 		setTypeModifiers(binding, result);
 		createNestedTypes(binding, result);
@@ -345,7 +351,10 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 
 	public JvmEnumerationType createEnumerationType(ITypeBinding binding) {
 		JvmEnumerationType result = TypesFactory.eINSTANCE.createJvmEnumerationType();
-		result.setFullyQualifiedName(getQualifiedName(binding));
+		result.internalSetIdentifier(getQualifiedName(binding));
+		result.setSimpleName(binding.getName());
+		if (binding.getDeclaringClass() == null)
+			result.setPackageName(binding.getPackage().getName());
 		setVisibility(result, binding.getModifiers());
 		setTypeModifiers(binding, result);
 		createNestedTypes(binding, result);
@@ -446,7 +455,8 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			result = TypesFactory.eINSTANCE.createJvmEnumerationLiteral();
 		String typeName = getQualifiedName(field.getDeclaringClass());
 		String fqn = typeName + "." + field.getName();
-		result.setFullyQualifiedName(fqn);
+		result.internalSetIdentifier(fqn);
+		result.setSimpleName(field.getName());
 		result.setFinal(Modifier.isFinal(field.getModifiers()));
 		result.setStatic(Modifier.isStatic(field.getModifiers()));
 		setVisibility(result, field.getModifiers());
@@ -487,7 +497,8 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			fqName.append(getQualifiedName(parameterTypes[i]));
 		}
 		fqName.append(')');
-		result.setFullyQualifiedName(fqName.toString());
+		result.internalSetIdentifier(fqName.toString());
+		result.setSimpleName(method.getName());
 		setVisibility(result, method.getModifiers());
 
 		IMethod javaMethod = (IMethod) method.getJavaElement();

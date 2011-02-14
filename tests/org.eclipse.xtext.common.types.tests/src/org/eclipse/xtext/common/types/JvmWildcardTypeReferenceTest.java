@@ -23,7 +23,7 @@ public class JvmWildcardTypeReferenceTest extends TestCase {
 	}
 	
 	public void testCanonicalName_01() {
-		assertEquals("?", typeArgument.getCanonicalName());
+		assertEquals("?", typeArgument.getIdentifier());
 	}
 	
 }
