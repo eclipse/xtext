@@ -23,23 +23,23 @@ public class JvmFormalParameterTest extends TestCase {
 	}
 	
 	public void testCanonicalName_01() {
-		assertNull(formalParameter.getCanonicalName());
+		assertNull(formalParameter.getIdentifier());
 	}
 	
-	public void testCanonicalName_02() {
-		formalParameter.setName("param");
-		assertNull(formalParameter.getCanonicalName());
-	}
+//	public void testCanonicalName_02() {
+//		formalParameter.setName("param");
+//		assertNull(formalParameter.getCanonicalName());
+//	}
 	
-	public void testCanonicalName_03() {
-		JvmTypeParameter typeParameter = TypesFactory.eINSTANCE.createJvmTypeParameter();
-		typeParameter.setName("T");
-		formalParameter.setName("param");
-		JvmParameterizedTypeReference typeReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-		typeReference.setType(typeParameter);
-		formalParameter.setParameterType(typeReference);
-		assertEquals("T", formalParameter.getCanonicalName());
-	}
+//	public void testCanonicalName_03() {
+//		JvmTypeParameter typeParameter = TypesFactory.eINSTANCE.createJvmTypeParameter();
+//		typeParameter.setName("T");
+//		formalParameter.setName("param");
+//		JvmParameterizedTypeReference typeReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+//		typeReference.setType(typeParameter);
+//		formalParameter.setParameterType(typeReference);
+//		assertEquals("T", formalParameter.getCanonicalName());
+//	}
 	
 	public void testToString_01() {
 		assertNotNull("toString() should not throw NPE and not return null", formalParameter.toString());

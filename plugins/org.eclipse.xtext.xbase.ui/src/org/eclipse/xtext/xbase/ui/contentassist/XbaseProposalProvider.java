@@ -476,7 +476,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 			} else if (type instanceof JvmArrayType) {
 				appendType(result, styler, ((JvmArrayType) type).getComponentType());
 			} else {
-				result.append(type.getCanonicalName(), styler);
+				result.append(type.getIdentifier(), styler);
 			}
 		}
 	}

@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
+import org.eclipse.xtext.common.types.impl.JvmEnumerationTypeImpl;
+
 import junit.framework.TestCase;
 
 /**
@@ -14,28 +16,28 @@ import junit.framework.TestCase;
  */
 public class JvmEnumerationTypeTest extends TestCase {
 
-	private JvmEnumerationType enumerationType;
+	private JvmEnumerationTypeImpl enumerationType;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		enumerationType = TypesFactory.eINSTANCE.createJvmEnumerationType();
+		enumerationType = (JvmEnumerationTypeImpl) TypesFactory.eINSTANCE.createJvmEnumerationType();
 	}
 	
 	public void testCanonicalName_01() {
-		assertNull(enumerationType.getCanonicalName());
+		assertNull(enumerationType.getIdentifier());
 	}
 	
 	public void testCanonicalName_02() {
-		enumerationType.setFullyQualifiedName("java.lang.annotation.RetentionPolicy");
-		assertEquals("java.lang.annotation.RetentionPolicy", enumerationType.getCanonicalName());
+		enumerationType.internalSetIdentifier("java.lang.annotation.RetentionPolicy");
+		assertEquals("java.lang.annotation.RetentionPolicy", enumerationType.getIdentifier());
 	}
 	
 	public void testCanonicalName_03() {
 		JvmGenericType outerType = TypesFactory.eINSTANCE.createJvmGenericType();
 		outerType.getMembers().add(enumerationType);
-		enumerationType.setFullyQualifiedName("java.lang.annotation.RetentionPolicy.Something");
-		assertEquals("java.lang.annotation.RetentionPolicy.Something", enumerationType.getCanonicalName());
+		enumerationType.internalSetIdentifier("java.lang.annotation.RetentionPolicy.Something");
+		assertEquals("java.lang.annotation.RetentionPolicy.Something", enumerationType.getIdentifier());
 	}
 	
 }

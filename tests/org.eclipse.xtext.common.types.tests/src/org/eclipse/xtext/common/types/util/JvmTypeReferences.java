@@ -30,7 +30,7 @@ public class JvmTypeReferences {
 	}
 	
 	public boolean equals(JvmTypeReference ref1, JvmTypeReference ref2) {
-		return ref1.getCanonicalName().equals(ref2.getCanonicalName());
+		return ref1.getIdentifier().equals(ref2.getIdentifier());
 	}
 	
 	public JvmParameterizedTypeReferenceConstructor typeReference(String qualifiedName) {

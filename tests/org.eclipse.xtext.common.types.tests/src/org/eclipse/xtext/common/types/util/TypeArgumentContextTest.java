@@ -88,7 +88,7 @@ public class TypeArgumentContextTest extends TestCase {
 		
 		Map<JvmTypeParameter, JvmTypeReference> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, expected);
 		assertEquals(1,map.size());
-		assertEquals("? extends java.lang.String",map.values().iterator().next().getCanonicalName());
+		assertEquals("? extends java.lang.String",map.values().iterator().next().getIdentifier());
 	}
 	
 	/**
@@ -105,7 +105,7 @@ public class TypeArgumentContextTest extends TestCase {
 		
 		Map<JvmTypeParameter, JvmTypeReference> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, null, actualArg);
 		assertEquals(1,map.size());
-		assertEquals("java.lang.String",map.values().iterator().next().getCanonicalName());
+		assertEquals("java.lang.String",map.values().iterator().next().getIdentifier());
 	}
 	
 	/**
@@ -124,7 +124,7 @@ public class TypeArgumentContextTest extends TestCase {
 		
 		Map<JvmTypeParameter, JvmTypeReference> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, expectation, actualArg);
 		assertEquals(1,map.size());
-		assertEquals("? extends java.lang.String",map.values().iterator().next().getCanonicalName());
+		assertEquals("? extends java.lang.String",map.values().iterator().next().getIdentifier());
 	}
 	
 	public void testSimple() throws Exception {
@@ -161,7 +161,7 @@ public class TypeArgumentContextTest extends TestCase {
 		
 		assertEquals(null, context.getLowerBound(jvmOperation.getParameters().get(0).getParameterType()));
 		JvmOperation get = findOperation("java.util.List", "get(int)");
-		assertEquals("java.lang.CharSequence",context.getUpperBound(get.getReturnType(), resourceSet).getCanonicalName());
+		assertEquals("java.lang.CharSequence",context.getUpperBound(get.getReturnType(), resourceSet).getIdentifier());
 	}
 	
 	public void testResolve_1() throws Exception {
@@ -170,9 +170,9 @@ public class TypeArgumentContextTest extends TestCase {
 		JvmOperation jvmOperation = findOperation("java.util.List", "add(E)");
 		
 		JvmTypeReference resolvedParameter = context.getLowerBound(jvmOperation.getParameters().get(0).getParameterType());
-		assertEquals("java.lang.CharSequence", resolvedParameter.getCanonicalName());
+		assertEquals("java.lang.CharSequence", resolvedParameter.getIdentifier());
 		JvmOperation get = findOperation("java.util.List", "get(int)");
-		assertEquals("java.lang.Object",context.getUpperBound(get.getReturnType(),resourceSet).getCanonicalName());
+		assertEquals("java.lang.Object",context.getUpperBound(get.getReturnType(),resourceSet).getIdentifier());
 	}
 	
 	public void testResolve_WithUnResolved() throws Exception {
@@ -181,9 +181,9 @@ public class TypeArgumentContextTest extends TestCase {
 		JvmOperation jvmOperation = findOperation("java.util.List", "add(E)");
 		
 		JvmTypeReference resolvedParameter = context.getLowerBound(jvmOperation.getParameters().get(0).getParameterType());
-		assertEquals("E", resolvedParameter.getCanonicalName());
+		assertEquals("E", resolvedParameter.getIdentifier());
 		JvmOperation get = findOperation("java.util.List", "get(int)");
-		assertEquals("E", context.getUpperBound(get.getReturnType(),resourceSet).getCanonicalName());
+		assertEquals("E", context.getUpperBound(get.getReturnType(),resourceSet).getIdentifier());
 	}
 	
 	public void testResolveDeeplyNested() throws Exception {
@@ -196,7 +196,7 @@ public class TypeArgumentContextTest extends TestCase {
 		TypeArgumentContext context = typeArgCtxProvider.getReceiverContext(reference);
 		
 		JvmOperation get = findOperation("java.util.List", "get(int)");
-		assertEquals("java.util.Map<? super java.lang.String,? extends java.lang.Number>",context.getUpperBound(get.getReturnType(),resourceSet).getCanonicalName());
+		assertEquals("java.util.Map<? super java.lang.String,? extends java.lang.Number>",context.getUpperBound(get.getReturnType(),resourceSet).getIdentifier());
 	}
 	
 	public void testResolveArray() throws Exception {
