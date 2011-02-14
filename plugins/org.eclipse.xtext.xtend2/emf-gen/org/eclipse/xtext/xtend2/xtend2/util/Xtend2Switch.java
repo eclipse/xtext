@@ -184,6 +184,15 @@ public class Xtend2Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case Xtend2Package.DECLARED_DEPENDENCY:
+			{
+				DeclaredDependency declaredDependency = (DeclaredDependency)theEObject;
+				T result = caseDeclaredDependency(declaredDependency);
+				if (result == null) result = caseXtendMember(declaredDependency);
+				if (result == null) result = caseJvmIdentifiableElement(declaredDependency);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -344,6 +353,22 @@ public class Xtend2Switch<T>
 	 * @generated
 	 */
 	public T caseRichStringElseIf(RichStringElseIf object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Declared Dependency</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Declared Dependency</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDeclaredDependency(DeclaredDependency object)
 	{
 		return null;
 	}

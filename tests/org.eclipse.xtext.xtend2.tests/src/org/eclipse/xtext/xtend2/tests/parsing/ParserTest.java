@@ -9,6 +9,7 @@ import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
+import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringElseIf;
 import org.eclipse.xtext.xtend2.xtend2.RichStringIf;
@@ -18,6 +19,65 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 public class ParserTest extends AbstractXtend2TestCase {
+	
+	public void testDeclaredDependency_00() throws Exception {
+		XtendClass clazz = clazz(
+			"class Foo { " +
+			"  @Inject java.util.Map<String,String>" +
+			"}");
+		assertEquals(1, clazz.getMembers().size());
+		DeclaredDependency dependency = (DeclaredDependency) clazz.getMembers().get(0);
+		assertEquals("java.util.Map",dependency.getType().getType().getCanonicalName());
+		assertEquals("map",dependency.getName());
+		assertEquals("map",dependency.getSimpleName());
+		assertEquals("java.util.Map<java.lang.String,java.lang.String>", dependency.getType().getCanonicalName());
+	}
+	
+	public void testDeclaredDependency_01() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo { " +
+				"  @Inject java.util.Map<String,String> as map" +
+		"}");
+		assertEquals(1, clazz.getMembers().size());
+		DeclaredDependency dependency = (DeclaredDependency) clazz.getMembers().get(0);
+		assertEquals("java.util.Map",dependency.getType().getType().getCanonicalName());
+		assertEquals("map",dependency.getName());
+		assertEquals("map",dependency.getSimpleName());
+		assertEquals("java.util.Map<java.lang.String,java.lang.String>", dependency.getType().getCanonicalName());
+	}
+	
+	public void testDeclaredDependency_02() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo { " +
+				"  @Inject java.util.Map<String,String> map() null as String" +
+		"}");
+		assertEquals(2, clazz.getMembers().size());
+		DeclaredDependency dependency = (DeclaredDependency) clazz.getMembers().get(0);
+		assertEquals("java.util.Map",dependency.getType().getType().getCanonicalName());
+		assertEquals("map",dependency.getName());
+		assertEquals("map",dependency.getSimpleName());
+		assertEquals("java.util.Map<java.lang.String,java.lang.String>", dependency.getType().getCanonicalName());
+		assertTrue(clazz.getMembers().get(1) instanceof XtendFunction);
+	}
+	
+	public void testDeclaredDependency_03() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo { " +
+				"  @Inject java.util.Map<String,String>" +
+				"  @Inject java.util.List as myList" +
+		"}");
+		assertEquals(2, clazz.getMembers().size());
+		DeclaredDependency dependency = (DeclaredDependency) clazz.getMembers().get(0);
+		assertEquals("java.util.Map",dependency.getType().getType().getCanonicalName());
+		assertEquals("map",dependency.getName());
+		assertEquals("map",dependency.getSimpleName());
+		assertEquals("java.util.Map<java.lang.String,java.lang.String>", dependency.getType().getCanonicalName());
+		dependency = (DeclaredDependency) clazz.getMembers().get(1);
+		assertEquals("java.util.List",dependency.getType().getType().getCanonicalName());
+		assertEquals("myList",dependency.getName());
+		assertEquals("myList",dependency.getSimpleName());
+		assertEquals("java.util.List", dependency.getType().getCanonicalName());
+	}
 	
 	public void testFunction_0() throws Exception {
 		XtendFunction func = function("foo() foo");

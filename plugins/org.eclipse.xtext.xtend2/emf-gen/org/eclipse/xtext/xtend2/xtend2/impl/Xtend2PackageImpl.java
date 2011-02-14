@@ -16,6 +16,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
 
 import org.eclipse.xtext.xbase.XbasePackage;
 
+import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringElseIf;
 import org.eclipse.xtext.xtend2.xtend2.RichStringForLoop;
@@ -106,6 +107,13 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 	 * @generated
 	 */
 	private EClass richStringElseIfEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass declaredDependencyEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -518,6 +526,26 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDeclaredDependency()
+	{
+		return declaredDependencyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDeclaredDependency_Type()
+	{
+		return (EReference)declaredDependencyEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Xtend2Factory getXtend2Factory()
 	{
 		return (Xtend2Factory)getEFactoryInstance();
@@ -586,6 +614,9 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		richStringElseIfEClass = createEClass(RICH_STRING_ELSE_IF);
 		createEReference(richStringElseIfEClass, RICH_STRING_ELSE_IF__IF);
 		createEReference(richStringElseIfEClass, RICH_STRING_ELSE_IF__THEN);
+
+		declaredDependencyEClass = createEClass(DECLARED_DEPENDENCY);
+		createEReference(declaredDependencyEClass, DECLARED_DEPENDENCY__TYPE);
 	}
 
 	/**
@@ -630,6 +661,7 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		richStringLiteralEClass.getESuperTypes().add(theXbasePackage.getXStringLiteral());
 		richStringForLoopEClass.getESuperTypes().add(theXbasePackage.getXForLoopExpression());
 		richStringIfEClass.getESuperTypes().add(theXbasePackage.getXExpression());
+		declaredDependencyEClass.getESuperTypes().add(this.getXtendMember());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(xtendFileEClass, XtendFile.class, "XtendFile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -681,6 +713,9 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		initEClass(richStringElseIfEClass, RichStringElseIf.class, "RichStringElseIf", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRichStringElseIf_If(), theXbasePackage.getXExpression(), null, "if", null, 0, 1, RichStringElseIf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRichStringElseIf_Then(), theXbasePackage.getXExpression(), null, "then", null, 0, 1, RichStringElseIf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(declaredDependencyEClass, DeclaredDependency.class, "DeclaredDependency", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDeclaredDependency_Type(), theTypesPackage.getJvmTypeReference(), null, "type", null, 0, 1, DeclaredDependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

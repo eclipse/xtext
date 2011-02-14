@@ -244,14 +244,62 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 
 	public class MemberElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Member");
-		private final RuleCall cFunctionParserRuleCall = (RuleCall)rule.eContents().get(1);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cFunctionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cDeclaredDependencyParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Member returns XtendMember:
-		//	Function;
+		//	Function | DeclaredDependency;
 		public ParserRule getRule() { return rule; }
 
+		//Function | DeclaredDependency
+		public Alternatives getAlternatives() { return cAlternatives; }
+
 		//Function
-		public RuleCall getFunctionParserRuleCall() { return cFunctionParserRuleCall; }
+		public RuleCall getFunctionParserRuleCall_0() { return cFunctionParserRuleCall_0; }
+
+		//DeclaredDependency
+		public RuleCall getDeclaredDependencyParserRuleCall_1() { return cDeclaredDependencyParserRuleCall_1; }
+	}
+
+	public class DeclaredDependencyElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DeclaredDependency");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cInjectKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cAsKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cNameAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_2_1_0 = (RuleCall)cNameAssignment_2_1.eContents().get(0);
+		
+		//DeclaredDependency:
+		//	"@Inject" type=JvmTypeReference ("as" name=ID)?;
+		public ParserRule getRule() { return rule; }
+
+		//"@Inject" type=JvmTypeReference ("as" name=ID)?
+		public Group getGroup() { return cGroup; }
+
+		//"@Inject"
+		public Keyword getInjectKeyword_0() { return cInjectKeyword_0; }
+
+		//type=JvmTypeReference
+		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
+
+		//JvmTypeReference
+		public RuleCall getTypeJvmTypeReferenceParserRuleCall_1_0() { return cTypeJvmTypeReferenceParserRuleCall_1_0; }
+
+		//("as" name=ID)?
+		public Group getGroup_2() { return cGroup_2; }
+
+		//"as"
+		public Keyword getAsKeyword_2_0() { return cAsKeyword_2_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_2_1() { return cNameAssignment_2_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_2_1_0() { return cNameIDTerminalRuleCall_2_1_0; }
 	}
 
 	public class FunctionElements extends AbstractParserRuleElementFinder {
@@ -871,6 +919,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	private QualifiedNameWithWildCardElements pQualifiedNameWithWildCard;
 	private ClassElements pClass;
 	private MemberElements pMember;
+	private DeclaredDependencyElements pDeclaredDependency;
 	private FunctionElements pFunction;
 	private XStringLiteralElements pXStringLiteral;
 	private RichStringElements pRichString;
@@ -954,13 +1003,23 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Member returns XtendMember:
-	//	Function;
+	//	Function | DeclaredDependency;
 	public MemberElements getMemberAccess() {
 		return (pMember != null) ? pMember : (pMember = new MemberElements());
 	}
 	
 	public ParserRule getMemberRule() {
 		return getMemberAccess().getRule();
+	}
+
+	//DeclaredDependency:
+	//	"@Inject" type=JvmTypeReference ("as" name=ID)?;
+	public DeclaredDependencyElements getDeclaredDependencyAccess() {
+		return (pDeclaredDependency != null) ? pDeclaredDependency : (pDeclaredDependency = new DeclaredDependencyElements());
+	}
+	
+	public ParserRule getDeclaredDependencyRule() {
+		return getDeclaredDependencyAccess().getRule();
 	}
 
 	//Function returns XtendFunction:

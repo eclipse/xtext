@@ -541,6 +541,52 @@ public interface Xtend2Package extends EPackage
 	 */
 	int RICH_STRING_ELSE_IF_FEATURE_COUNT = 2;
 
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.DeclaredDependencyImpl <em>Declared Dependency</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xtend2.xtend2.impl.DeclaredDependencyImpl
+	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getDeclaredDependency()
+	 * @generated
+	 */
+	int DECLARED_DEPENDENCY = 10;
+
+	/**
+	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARED_DEPENDENCY__DECLARING_TYPE = XTEND_MEMBER__DECLARING_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARED_DEPENDENCY__NAME = XTEND_MEMBER__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARED_DEPENDENCY__TYPE = XTEND_MEMBER_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Declared Dependency</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARED_DEPENDENCY_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 1;
+
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.XtendFile <em>Xtend File</em>}'.
@@ -907,6 +953,27 @@ public interface Xtend2Package extends EPackage
 	EReference getRichStringElseIf_Then();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.DeclaredDependency <em>Declared Dependency</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Declared Dependency</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.DeclaredDependency
+	 * @generated
+	 */
+	EClass getDeclaredDependency();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtend2.xtend2.DeclaredDependency#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Type</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.DeclaredDependency#getType()
+	 * @see #getDeclaredDependency()
+	 * @generated
+	 */
+	EReference getDeclaredDependency_Type();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1220,6 +1287,24 @@ public interface Xtend2Package extends EPackage
 		 * @generated
 		 */
 		EReference RICH_STRING_ELSE_IF__THEN = eINSTANCE.getRichStringElseIf_Then();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.DeclaredDependencyImpl <em>Declared Dependency</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xtend2.xtend2.impl.DeclaredDependencyImpl
+		 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getDeclaredDependency()
+		 * @generated
+		 */
+		EClass DECLARED_DEPENDENCY = eINSTANCE.getDeclaredDependency();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DECLARED_DEPENDENCY__TYPE = eINSTANCE.getDeclaredDependency_Type();
 
 	}
 

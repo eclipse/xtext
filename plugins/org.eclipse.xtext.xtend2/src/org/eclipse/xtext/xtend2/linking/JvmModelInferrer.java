@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -32,6 +33,7 @@ import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
+import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
@@ -174,6 +176,14 @@ public class JvmModelInferrer {
 				target.getTypeParameters().add(cloneWithProxies(typeParameter));
 			associator.associate(target, source);
 			return target;
+		} else if (sourceMember instanceof DeclaredDependency) {
+			DeclaredDependency dep = (DeclaredDependency) sourceMember;
+			JvmField field = typesFactory.createJvmField();
+			field.setVisibility(JvmVisibility.PRIVATE);
+			field.setFullyQualifiedName(((XtendClass)dep.eContainer()).getCanonicalName()+"."+dep.getName());
+			field.setType(cloneWithProxies(dep.getType()));
+			associator.associate(field, dep);
+			return field;
 		}
 		throw new IllegalArgumentException("Cannot transform " + notNull(sourceMember) + " to a JvmMember");
 	}

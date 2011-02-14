@@ -107,6 +107,15 @@ public interface Xtend2Factory extends EFactory
 	RichStringElseIf createRichStringElseIf();
 
 	/**
+	 * Returns a new object of class '<em>Declared Dependency</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Declared Dependency</em>'.
+	 * @generated
+	 */
+	DeclaredDependency createDeclaredDependency();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

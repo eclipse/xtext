@@ -29,7 +29,8 @@ public class Xtend2QualifiedNameProvider extends IQualifiedNameProvider.Abstract
 	public QualifiedName getFullyQualifiedName(EObject obj) {
 		// TODO: find a better criterion what elements have names
 		if (obj instanceof JvmType || obj instanceof JvmMember || obj instanceof XtendClass || obj instanceof XtendMember) {
-			return qualifiedNameConverter.toQualifiedName(((JvmIdentifiableElement) obj).getCanonicalName());
+			final String canonicalName = ((JvmIdentifiableElement) obj).getCanonicalName();
+			return qualifiedNameConverter.toQualifiedName(canonicalName);
 		}
 		return null;
 	}
